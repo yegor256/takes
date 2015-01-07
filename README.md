@@ -1,9 +1,11 @@
-This is a pure object-oriented Java7 web development framework. Its key benefits, comparing to all others, include:
+# Takes
+
+Takes is a pure object-oriented and immutable Java7 web development framework. Its key benefits, comparing to all others, include:
 
  * all (!) interfaces and classes are immutable
  * not a single static property or a method
- * no reflection or class manipulations
- * XML+XSLT out-of-the-box
+ * not a single reflection or class manipulation
+ * XML+XSLT and JSON out-of-the-box
  * 100% RESTful
  
 ## Quick Start
@@ -20,9 +22,56 @@ public final class App {
 }
 ```
 
-Compile and run it. Should work :)
+Compile and run it. Should work :) This code starts a new HTTP server on port 80 and renders a plain-text page on all requests at the root URI.
 
 Let's make it a bit more sophisticated:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new TakesServer(
+      new TksRegex()
+        .with("/robots\\.txt", "")
+        .with("/", new TkIndex())
+    ).listen();
+  }
+}
+```
+
+The `TakesServer` is accepting new incoming sockets on port 80, parses them according to HTTP 1.1 specification and creates instances of class `Request`. Then, it gives requests to the instance of `TksRegex` (`tks` stands for "takes") and expects it to return an instance of `Take` back. As you probably understood already, the first regular expression that matches returns a take. `TkIndex` is our custom class, let's see how it looks:
+
+```java
+@Immutable
+public final class TkIndex implements Take {
+  @Override
+  public Response print() {
+    return new RsHtml("<html>Hello, world!</html>");
+  }
+}
+```
+
+It is immutable and must implement a single method `print()`, which is returning an instance of `Response`. So far so good, but this class doesn't have an access to an HTTP request. Here is how we solve this:
+
+```java
+new TakesServer(
+  new TksRegex().with(
+    "/file/(?<path>[^/]+)", 
+    new TksRegex.Source() {
+      @Override
+      public Take take(final RqRegex request) {
+        final File file = new File(request.matcher().group("path"));
+        return new TkHTML(
+          FileUtils.readFileToString(file, Charsets.UTF_8)
+        );
+      }
+    }
+  )
+).listen();
+```
+
+Instead of giving an instance of `Take` to the `TksRegex`, we're giving it an instance of `TksRegex.Source`, which is capable of building takes on demand, providing all necessary arguments to their constructors.
+
+Here is a more complex and verbose example:
 
 ```java
 public final class App {
@@ -37,9 +86,9 @@ public final class App {
         )
         .with(
           "/account", 
-          new Page.Source() {
+          new Take.Source() {
             @Override
-            public Page page(final Request request) {
+            public Take take(final Request request) {
               return new TkAccount(users, request);
             }
           }
@@ -48,7 +97,7 @@ public final class App {
           "/balance/(?<user>[a-z]+)", 
           new TksRegex.Source() {
             @Override
-            public Page page(final RqRegex request) {
+            public Take take(final RqRegex request) {
               return new TkBalance(request);
             }
           }
@@ -58,19 +107,7 @@ public final class App {
 }
 ```
 
-Here is a simple page:
-
-```java
-@Immutable
-public final class TkIndex implements Take {
-  @Override
-  public Response print() {
-    return new RsHtml("<html>Hello, world!</html>");
-  }
-}
-```
-
-Let's create a more complex page:
+Now let's create a more complex take:
 
 ```java
 @Immutable
@@ -95,7 +132,7 @@ public final class TkAccount implements Take {
 }
 ```
 
-Now let's see how that `User` class should look like:
+Let's see how that `User` class should look like:
 
 ```java
 @Immutable
@@ -165,6 +202,45 @@ public interface Headers {
   Collection<String> keys();
 }
 ```
+
+## Static Resources
+
+Very often you need to serve static resources to your web users, like CSS stylesheets, images, JavaScript files, etc. There are a few supplementary classes for that:
+
+```java
+new Server(
+  new TksRegex()
+    .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
+    .with("/data/.+", new TkFiles(new File("/usr/local/data"))
+).listen();
+```
+
+Class `TkClasspath` takes static part of the request URI and finds a resource with this name in classpath.
+
+`TkFiles` just looks by file name in the directory configured.
+
+`TkContentType` sets content type of all responses coming out of the decorated take.
+
+## Exception Handling
+
+By default, `TksRegex` lets all exceptions bubble up. If one of your takes crashes, a user will see a default error page. Here is how you can configure this behavior:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new TakesServer(
+      new TksFallback(
+        new TksRegex()
+          .with("/robots\\.txt", "")
+          .with("/", new TkIndex()),
+        new TkHTML("oops, something went wrong!")
+      )
+    ).listen();
+  }
+}
+```
+
+`TksFallback` decorates an instance of `Takes` and catches all exceptions any of its takes may throw. Once it's thrown, an instance of `TkHTML` will be returned.
 
 ## RsJSON
 
