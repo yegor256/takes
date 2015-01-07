@@ -174,7 +174,11 @@ Here is how we can deal with JSON:
 @Immutable
 public final class TkBalance extends Take.Fixed {
   public TkBalance(final RqRegex request) {
-    super(new RsJSON(request.matcher().group("user"))));
+    super(
+      new RsJSON(
+        new User(request.matcher().group("user")))
+      )
+    );
   }
 }
 ```
