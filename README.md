@@ -372,7 +372,7 @@ public final class XeFoo implements XeSource.Wrap {
 
 ## WebSockets
 
-Here is how a WebSockets work:
+Here is how WebSockets work:
 
 ```java
 public final class App {
