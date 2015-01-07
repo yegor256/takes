@@ -5,8 +5,9 @@ public final class App {
   public static void main(final String... args) {
     new Server(
       new PgsRegex()
-        .with("/help", "hello, world!")
+        .with("/robots.txt", "")
         .with("/", new PgIndex())
+        .with("/xsl/.*", new PgClasspath())
         .with(
           "/account", 
           new Page.Source() {
@@ -56,8 +57,9 @@ public final class PgAccount implements Page {
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
-          new RsXML(),
-          this.user
+          new XePlain("PI 'xsl-stylesheet', 'href=\"/xsl/account.xsl\"'"),
+          new XePlain("ADD 'page'"),
+          new XePrepend("XPATH '/page'", this.user)
         )
       ),
       this.user
@@ -70,7 +72,7 @@ Now let's see how that `User` class should look like:
 
 ```java
 @Immutable
-public final class User implements RsXembly.Source {
+public final class User implements XeSource {
   private final String name;
   private final int balance;
   @Override
@@ -116,7 +118,7 @@ This is the method to add to `User`:
 
 ```java
 @Immutable
-public final class User implements RsXembly.Source, RsJSON.Source {
+public final class User implements XeSource, RsJSON.Source {
   @Override
   public JsonObject toJSON() {
     return Json.createObjectBuilder()
@@ -149,3 +151,47 @@ public interface Response {
   InputStream body();
 }
 ```
+
+## RsXembly
+
+Here is how you generate an XML page using Xembly:
+
+```java
+Response response = new RsXembly(
+  new XePlain("ADD 'page'"),
+  new XePrepend("XPATH '/page'", this.user)
+)
+```
+
+This is a complete example, with all possible options:
+
+```java
+Response response = new RsXembly(
+  new XeRoot("page"),
+  new XeMillis(false),
+  new XeStylesheet("/xsl/account.xsl"),
+  new XeToRoot(this.user),
+  new XeSource() {
+    @Override
+    public Iterable<Directive> toXembly() {
+      return new Directives().add("status").set("alive");
+    }
+  },
+  new XeMillis(true),
+)
+```
+
+This is the output that will be produced:
+
+```xml
+<?xml version='1.0'?>
+<?xsl-stylesheet href='/xsl/account.xsl'?>
+<page millis='5664'>
+  <user>
+    <name>Jeff Lebowski</name>
+    <balance>123</balance>
+  </user>
+  <status>alive</status>
+</page>
+```
+
