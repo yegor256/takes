@@ -8,7 +8,21 @@ This is a pure object-oriented Java7 web development framework. Its key benefits
  
 ## Quick Start
 
-First, create an app:
+Here it is:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new Server(
+      new PgsRegex().with("/", "hello, world!")
+    ).listen();
+  }
+}
+```
+
+Compile and run it. Should work :)
+
+Let's make it a bit more sophisticated:
 
 ```java
 public final class App {
