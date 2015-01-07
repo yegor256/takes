@@ -372,6 +372,8 @@ public final class XeFoo implements XeSource.Wrap {
 
 ## WebSockets
 
+**this section is not really correct, thinking about it...**
+
 Here is how WebSockets work:
 
 ```java
