@@ -195,3 +195,37 @@ This is the output that will be produced:
 </page>
 ```
 
+To avoid duplication of all this scaffolding in every page, you can create your own class, which will be used in every page, for example:
+
+```java
+Response response = new RsXembly(
+  new XeFoo(this.user)
+)
+```
+
+This is how this `XeFoo` class would look like:
+
+```java
+@Immutable
+public final class XeFoo implements XeSource.Wrap {
+  public XeFoo(final String stylesheet, final XeSource... sources) {
+    super(
+      XeConcat(
+        new XeRoot("page"),
+        new XeMillis(false),
+        new XeStylesheet(stylesheet),
+        new XeToRoot(
+          new XeConcat(sources)
+        ),
+        new XeSource() {
+          @Override
+          public Iterable<Directive> toXembly() {
+            return new Directives().add("status").set("alive");
+          }
+        },
+        new XeMillis(true)
+      )
+    );
+  }
+}
+```
