@@ -131,6 +131,8 @@ public final class User implements XeSource, RsJSON.Source {
 }
 ```
 
+## Key Interfaces
+
 Here is how key interfaces look like. First, the `Request`:
 
 ```java
@@ -138,7 +140,7 @@ Here is how key interfaces look like. First, the `Request`:
 public interface Request {
   String method();
   String uri();
-  Iterable<String> headers();
+  Headers headers();
   InputStream body();
 }
 ```
@@ -150,8 +152,18 @@ And the `Response`:
 public interface Response {
   int status();
   String line();
-  Iterable<String> headers();
+  Headers headers();
   InputStream body();
+}
+```
+
+Also, the `Headers` is a multi-key map:
+
+```java
+@Immutable
+public interface Headers {
+  List<String> get(String key);
+  Collection<String> keys();
 }
 ```
 
