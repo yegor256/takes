@@ -2,12 +2,16 @@
 
 Takes is a pure object-oriented and immutable Java7 web development framework. Its key benefits, comparing to all others, include:
 
- * all (!) interfaces and classes are immutable
- * not a single static property or a method
- * not a single reflection or class manipulation
+ * not a single mutable class!
+ * not a single `static` keyword!
+ * not a single `instanceof` keyword!
+
+Besides that, these are more traditional features:
+
  * XML+XSLT and JSON out-of-the-box
  * 100% RESTful
  * natively supports WebSockets
+ * asynchronous, that's why [reactive](http://www.reactivemanifesto.org/)
  * Apache Velocity out-of-the-box
  
 ## Quick Start
@@ -196,7 +200,7 @@ public interface Request {
   String method();
   String uri();
   Headers headers();
-  InputStream body();
+  InputStream body(); // this is wrong, not asynchronous!
 }
 ```
 
@@ -208,7 +212,7 @@ public interface Response {
   int status();
   String line();
   Headers headers();
-  InputStream body();
+  InputStream body(); // this is wrong, not asynchronous!
 }
 ```
 
