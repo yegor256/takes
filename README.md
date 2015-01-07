@@ -14,7 +14,7 @@ Here it is:
 public final class App {
   public static void main(final String... args) {
     new Server(
-      new PgsRegex().with("/", "hello, world!")
+      new TksRegex().with("/", "hello, world!")
     ).listen();
   }
 }
@@ -28,28 +28,28 @@ Let's make it a bit more sophisticated:
 public final class App {
   public static void main(final String... args) {
     new Server(
-      new PgsRegex()
+      new TksRegex()
         .with("/robots.txt", "")
-        .with("/", new PgIndex())
+        .with("/", new TkIndex())
         .with(
           "/xsl/.*", 
-          new PgContentType(new PgClasspath(), "text/xsl")
+          new TkContentType(new TkClasspath(), "text/xsl")
         )
         .with(
           "/account", 
           new Page.Source() {
             @Override
             public Page page(final Request request) {
-              return new PgAccount(users, request);
+              return new TkAccount(users, request);
             }
           }
         )
         .with(
           "/balance/(?<user>[a-z]+)", 
-          new PgsRegex.Source() {
+          new TksRegex.Source() {
             @Override
             public Page page(final RqRegex request) {
-              return new PgBalance(request);
+              return new TkBalance(request);
             }
           }
         )
@@ -62,9 +62,9 @@ Here is a simple page:
 
 ```java
 @Immutable
-public final class PgIndex implements Page {
+public final class TkIndex implements Take {
   @Override
-  public Response draw() {
+  public Response print() {
     return new RsHtml("<html>Hello, world!</html>");
   }
 }
@@ -74,13 +74,13 @@ Let's create a more complex page:
 
 ```java
 @Immutable
-public final class PgAccount implements Page {
+public final class TkAccount implements Take {
   private final User user;
-  public PgAccount(final Users users, final Request request) {
+  public TkAccount(final Users users, final Request request) {
     this.user = users.find(new RqCookies(request).get("user"));
   }
   @Override
-  public Response draw() {
+  public Response print() {
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
@@ -172,8 +172,8 @@ Here is how we can deal with JSON:
 
 ```java
 @Immutable
-public final class PgBalance extends Page.Fixed {
-  public PgBalance(final RqRegex request) {
+public final class TkBalance extends Take.Fixed {
+  public TkBalance(final RqRegex request) {
     super(new RsJSON(request.matcher().group("user"))));
   }
 }
