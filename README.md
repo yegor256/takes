@@ -70,5 +70,25 @@ public final class User implements RsXembly.Source {
       .add("name").set(this.name).up()
       .add("balance").set(Integer.toString(this.balance));
   }
+  @Override
+  public String toString() {
+    return this.name;
+  }
 }
 ```
+
+Here is how `RsLogin` may look like:
+
+```java
+@Immutable
+public final class RsLogin implements Response.Wrap {
+  public RsLogin(final Response response, final User user) {
+    super(
+      new RsCookied(response).with(
+        "user", user.toString()
+      )
+    );
+  }
+}
+```
+
