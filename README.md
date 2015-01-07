@@ -7,7 +7,10 @@ public final class App {
       new PgsRegex()
         .with("/robots.txt", "")
         .with("/", new PgIndex())
-        .with("/xsl/.*", new PgClasspath())
+        .with(
+          "/xsl/.*", 
+          new PgContentType(new PgClasspath(), "text/xsl")
+        )
         .with(
           "/account", 
           new Page.Source() {
