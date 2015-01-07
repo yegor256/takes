@@ -275,7 +275,7 @@ public final class User implements XeSource, RsJSON.Source {
 
 ## RsXembly
 
-Here is how you generate an XML page using Xembly:
+Here is how you generate an XML page using [Xembly](http://www.xembly.org):
 
 ```java
 Response response = new RsXembly(
@@ -288,17 +288,17 @@ This is a complete example, with all possible options:
 
 ```java
 Response response = new RsXembly(
-  new XeRoot("page"),
-  new XeMillis(false),
-  new XeStylesheet("/xsl/account.xsl"),
-  new XeToRoot(this.user),
+  new XeStylesheet("/xsl/account.xsl"), // add processing instruction
+  new XeRoot("take"), // create a DOM document with "take" root element
+  new XeMillis(false), // add "millis" attribute to the root, with current time
+  new XeToRoot(this.user), // add this.user to the root element
   new XeSource() {
     @Override
     public Iterable<Directive> toXembly() {
       return new Directives().add("status").set("alive");
     }
   },
-  new XeMillis(true),
+  new XeMillis(true), // replace "millis" attribute with take building time
 )
 ```
 
@@ -307,13 +307,13 @@ This is the output that will be produced:
 ```xml
 <?xml version='1.0'?>
 <?xsl-stylesheet href='/xsl/account.xsl'?>
-<page millis='5664'>
+<take millis='5664'>
   <user>
     <name>Jeff Lebowski</name>
     <balance>123</balance>
   </user>
   <status>alive</status>
-</page>
+</take>
 ```
 
 To avoid duplication of all this scaffolding in every page, you can create your own class, which will be used in every page, for example:
