@@ -107,7 +107,9 @@ public final class App {
 }
 ```
 
-Now let's create a more complex take:
+## Rendering Engine(s)
+
+Now let's see how we can render something more complex than an plain text. First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may too complex, give it a try, you won't regret. Here is how we render a simple XML page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
 ```java
 @Immutable
@@ -132,7 +134,7 @@ public final class TkAccount implements Take {
 }
 ```
 
-Let's see how that `User` class should look like:
+This is how that `User` class may look like:
 
 ```java
 @Immutable
@@ -162,6 +164,21 @@ public final class RsLogin extends Response.Wrap {
       new RsCookied(response).with(
         "user", user.toString()
       )
+    );
+  }
+}
+```
+
+Let's say, you want to use [Velocity](http://velocity.apache.org/):
+
+```java
+@Immutable
+public final class TkHelloWorld implements Take {
+  @Override
+  public Response print() {
+    return new RsVelocity(
+      "<html>Hello, ${user.name}! Balance: ${user.balance}</html>",
+      new ArrayMap<String, Object>().with("user", new User())
     );
   }
 }
