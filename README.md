@@ -12,15 +12,15 @@ public final class App {
           new Page.Source() {
             @Override
             public Page page(final Request request) {
-              return new PgAccount(request);
+              return new PgAccount(users, request);
             }
           }
         )
         .with(
           "/balance/(?<user>[a-z]+)", 
-          new Page.Source() {
+          new PgsRegex.Source() {
             @Override
-            public Page page(final Request request) {
+            public Page page(final RqRegex request) {
               return new PgBalance(request);
             }
           }
@@ -106,15 +106,8 @@ Here is how we can deal with JSON:
 ```java
 @Immutable
 public final class PgBalance extends Page.Fixed {
-  public PgBalance(final Users users, final Request request) {
-    super(
-      new RsLogin(
-        new RsJSON(
-          this.user
-        )
-      ),
-      this.user
-    );
+  public PgBalance(final RqRegex request) {
+    super(new RsJSON(request.matcher().group("user"))));
   }
 }
 ```
