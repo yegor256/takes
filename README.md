@@ -1,3 +1,13 @@
+This is a pure object-oriented Java7 web development framework. Its key benefits, comparing to all others, include:
+
+ * all (!) interfaces and classes are immutable
+ * not a single static property or a method
+ * no reflection or class manipulations
+ * XML+XSLT out-of-the-box
+ * 100% RESTful
+ 
+## Quick Start
+
 First, create an app:
 
 ```java
@@ -106,31 +116,6 @@ public final class RsLogin extends Response.Wrap {
 }
 ```
 
-Here is how we can deal with JSON:
-
-```java
-@Immutable
-public final class PgBalance extends Page.Fixed {
-  public PgBalance(final RqRegex request) {
-    super(new RsJSON(request.matcher().group("user"))));
-  }
-}
-```
-
-This is the method to add to `User`:
-
-```java
-@Immutable
-public final class User implements XeSource, RsJSON.Source {
-  @Override
-  public JsonObject toJSON() {
-    return Json.createObjectBuilder()
-      .add("balance", this.balance)
-      .build();
-  }
-}
-```
-
 ## Key Interfaces
 
 Here is how key interfaces look like. First, the `Request`:
@@ -164,6 +149,33 @@ Also, the `Headers` is a multi-key map:
 public interface Headers {
   List<String> get(String key);
   Collection<String> keys();
+}
+```
+
+## RsJSON
+
+Here is how we can deal with JSON:
+
+```java
+@Immutable
+public final class PgBalance extends Page.Fixed {
+  public PgBalance(final RqRegex request) {
+    super(new RsJSON(request.matcher().group("user"))));
+  }
+}
+```
+
+This is the method to add to `User`:
+
+```java
+@Immutable
+public final class User implements XeSource, RsJSON.Source {
+  @Override
+  public JsonObject toJSON() {
+    return Json.createObjectBuilder()
+      .add("balance", this.balance)
+      .build();
+  }
 }
 ```
 
