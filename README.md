@@ -9,10 +9,19 @@ public final class App {
         .with("/", new PgIndex())
         .with(
           "/account", 
-          new Page.() {
+          new Page.Source() {
             @Override
             public Page page(final Request request) {
               return new PgAccount(request);
+            }
+          }
+        )
+        .with(
+          "/balance", 
+          new Page.Source() {
+            @Override
+            public Page page(final Request request) {
+              return new PgBalance(request);
             }
           }
         )
@@ -81,13 +90,45 @@ Here is how `RsLogin` may look like:
 
 ```java
 @Immutable
-public final class RsLogin implements Response.Wrap {
+public final class RsLogin extends Response.Wrap {
   public RsLogin(final Response response, final User user) {
     super(
       new RsCookied(response).with(
         "user", user.toString()
       )
     );
+  }
+}
+```
+
+Here is how we can deal with JSON:
+
+```java
+@Immutable
+public final class PgBalance extends Page.Fixed {
+  public PgBalance(final Users users, final Request request) {
+    super(
+      new RsLogin(
+        new RsJSON(
+          this.user
+        )
+      ),
+      this.user
+    );
+  }
+}
+```
+
+This is the method to add to `User`:
+
+```java
+@Immutable
+public final class User implements RsXembly.Source, RsJSON.Source {
+  @Override
+  public JsonObject toJSON() {
+    return Json.createObjectBuilder()
+      .add("balance", this.balance)
+      .build();
   }
 }
 ```
