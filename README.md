@@ -7,6 +7,8 @@ Takes is a pure object-oriented and immutable Java7 web development framework. I
  * not a single reflection or class manipulation
  * XML+XSLT and JSON out-of-the-box
  * 100% RESTful
+ * natively supports WebSockets
+ * Apache Velocity out-of-the-box
  
 ## Quick Start
 
@@ -107,7 +109,7 @@ public final class App {
 }
 ```
 
-## Rendering Engine(s)
+## Templates
 
 Now let's see how we can render something more complex than an plain text. First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may too complex, give it a try, you won't regret. Here is how we render a simple XML page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
@@ -364,6 +366,50 @@ public final class XeFoo implements XeSource.Wrap {
         new XeMillis(true)
       )
     );
+  }
+}
+```
+
+## WebSockets
+
+Here is how a WebSockets work:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new TakesServer(
+      new Takes.Single( // a simple alternative to TksRegex
+        new Take.Source() {
+          @Override
+          public Take take(final Request request) {
+            return new TkMyChat(request);
+          }
+        }
+      )
+    ).listen();
+  }
+}
+```
+
+WebSocket supporting take is not really different from any other one. The only difference is that it doesn't rush to close the input stream:
+
+```java
+@Immutable
+public final class TkMyChat implements Take {
+  private final Request request;
+  public TkMyChat(final Request req) {
+    this.request = req;
+  }
+  @Override
+  public Response print() {
+    return new Response() {
+      @Override
+      public InputStream body() {
+        // Return a stream that doesn't close immediately,
+        // but keeps showing some data until the "chat"
+        // is finished. Also, read the data from this.request.body()
+      }
+    };
   }
 }
 ```
