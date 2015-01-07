@@ -17,7 +17,7 @@ public final class App {
           }
         )
         .with(
-          "/balance", 
+          "/balance/(?<user>[a-z]+)", 
           new Page.Source() {
             @Override
             public Page page(final Request request) {
@@ -133,3 +133,26 @@ public final class User implements RsXembly.Source, RsJSON.Source {
 }
 ```
 
+Here is how key interfaces look like. First, the `Request`:
+
+```java
+@Immutable
+public interface Request {
+  String method();
+  String uri();
+  Iterable<String> headers();
+  InputStream body();
+}
+```
+
+And the `Response`:
+
+```java
+@Immutable
+public interface Response {
+  int status();
+  String line();
+  Iterable<String> headers();
+  InputStream body();
+}
+```
