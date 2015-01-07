@@ -15,7 +15,7 @@ Here it is:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new Server(
+    new TakesServer(
       new TksRegex().with("/", "hello, world!")
     ).listen();
   }
@@ -76,7 +76,7 @@ Here is a more complex and verbose example:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new Server(
+    new TakesServer(
       new TksRegex()
         .with("/robots.txt", "")
         .with("/", new TkIndex())
