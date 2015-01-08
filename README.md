@@ -6,13 +6,17 @@ Takes is a [pure object-oriented](http://www.yegor256.com/2014/11/20/seven-virtu
  * not a single `static` keyword!
  * not a single `instanceof` keyword!
 
-Besides that, these are more traditional features:
+Besides that, these are more traditional features, out of the box:
 
- * XML+XSLT and JSON out-of-the-box
- * 100% RESTful
- * natively supports WebSockets
+ * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
+ * [JSON](http://en.wikipedia.org/wiki/JSON)
+ * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
+ * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
+ * Templates, incl. [Apache Velocity](http://velocity.apache.org/)
+
+Still thinking about this:
+
  * asynchronous, that's why [reactive](http://www.reactivemanifesto.org/)
- * Apache Velocity out-of-the-box
  
 ## Quick Start
 
