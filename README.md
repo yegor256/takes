@@ -249,14 +249,14 @@ Class `TkClasspath` takes static part of the request URI and finds a resource wi
 Here is an example:
 
 ```java
-  new TksRegex()
-    .with(
-      "/user",
-      new TksMethods()
-        .with("GET", new TkGetUser())
-        .with("POST", new TkPostUser())
-        .with("DELETE", new TkDeleteUser())
-    )
+new TksRegex()
+  .with(
+    "/user",
+    new TksMethods()
+      .with("GET", new TkGetUser())
+      .with("POST", new TkPostUser())
+      .with("DELETE", new TkDeleteUser())
+  )
 ```
 
 ## Exception Handling
