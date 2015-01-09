@@ -14,10 +14,6 @@ Besides that, these are more traditional features, out of the box:
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
  * Templates, incl. [Apache Velocity](http://velocity.apache.org/)
 
-Still thinking about this:
-
- * asynchronous, that's why [reactive](http://www.reactivemanifesto.org/)
- 
 ## Quick Start
 
 Here it is:
@@ -204,7 +200,7 @@ public interface Request {
   String method();
   String uri();
   Headers headers();
-  InputStream body(); // this is wrong, not asynchronous!
+  InputStream body();
 }
 ```
 
@@ -216,7 +212,7 @@ public interface Response {
   int status();
   String line();
   Headers headers();
-  InputStream body(); // this is wrong, not asynchronous!
+  InputStream body();
 }
 ```
 
