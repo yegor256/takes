@@ -244,6 +244,21 @@ Class `TkClasspath` takes static part of the request URI and finds a resource wi
 
 `TkContentType` sets content type of all responses coming out of the decorated take.
 
+## Request Methods (POST, PUT, HEAD, etc.)
+
+Here is an example:
+
+```java
+  new TksRegex()
+    .with(
+      "/user",
+      new TksMethods()
+        .with("GET", new TkGetUser())
+        .with("POST", new TkPostUser())
+        .with("DELETE", new TkDeleteUser())
+    )
+```
+
 ## Exception Handling
 
 By default, `TksRegex` lets all exceptions bubble up. If one of your takes crashes, a user will see a default error page. Here is how you can configure this behavior:
