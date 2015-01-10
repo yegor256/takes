@@ -7,9 +7,11 @@ Takes is a [pure object-oriented](http://www.yegor256.com/2014/11/20/seven-virtu
  * not a single mutable class!
  * not a single `public` `static` method!
  * not a single `instanceof` keyword!
+ * no configuration files
 
 Besides that, these are more traditional features, out of the box:
 
+ * hit-refresh debugging
  * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
  * [JSON](http://en.wikipedia.org/wiki/JSON)
  * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
@@ -25,12 +27,18 @@ public final class App {
   public static void main(final String... args) {
     new TakesServer(
       new TksRegex().with("/", "hello, world!")
-    ).listen();
+    ).listen(args);
   }
 }
 ```
 
-Compile and run it. Should work :) This code starts a new HTTP server on port 80 and renders a plain-text page on all requests at the root URI.
+Compile and run it like this (`takes.jar` is the only dependency you need):
+
+```bash
+$ java -cp takes.jar App.class --port=1234
+```
+
+Should work :) This code starts a new HTTP server on port 1234 and renders a plain-text page on all requests at the root URI.
 
 Let's make it a bit more sophisticated:
 
@@ -41,7 +49,7 @@ public final class App {
       new TksRegex()
         .with("/robots\\.txt", "")
         .with("/", new TkIndex())
-    ).listen();
+    ).listen(args);
   }
 }
 ```
@@ -74,7 +82,7 @@ new TakesServer(
       }
     }
   )
-).listen();
+).listen(args);
 ```
 
 Instead of giving an instance of `Take` to the `TksRegex`, we're giving it an instance of `TksRegex.Source`, which is capable of building takes on demand, providing all necessary arguments to their constructors.
@@ -110,7 +118,7 @@ public final class App {
             }
           }
         )
-    ).listen();
+    ).listen(args);
   }
 }
 ```
@@ -237,7 +245,7 @@ new Server(
   new TksRegex()
     .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
     .with("/data/.+", new TkFiles(new File("/usr/local/data"))
-).listen();
+).listen(args);
 ```
 
 Class `TkClasspath` takes static part of the request URI and finds a resource with this name in classpath.
@@ -295,7 +303,7 @@ public final class App {
           .with("/", new TkIndex()),
         new TkHTML("oops, something went wrong!")
       )
-    ).listen();
+    ).listen(args);
   }
 }
 ```
@@ -340,7 +348,7 @@ public final class App {
       new TksFailFast(
         new TksRegex().with("/", new TkPostMessage())
       )
-    ).listen();
+    ).listen(args);
   }
 }
 ```
@@ -471,12 +479,25 @@ public final class App {
         "some-secret-word",
         "/facebook"
       )
-    ).listen();
+    ).listen(args);
   }
 }
 ```
 
 Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
+
+## Command Line Arguments
+
+There are a few command line arguments that should be passed to `TakesServer#listen()` method:
+
+```
+--port=1234     Tells the server to listen to TCP port 1234
+--lifetime=5s   The server will die in five seconds (useful for integration testing)
+```
+
+## Logging
+
+The framework sends all logs to SLF4J logging facility. If you want to see them, configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
 
 
 ## WebSockets
@@ -497,7 +518,7 @@ public final class App {
           }
         }
       )
-    ).listen();
+    ).listen(args);
   }
 }
 ```
