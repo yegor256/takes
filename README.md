@@ -486,6 +486,25 @@ public final class App {
 
 Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
 
+This is how you get currently logged in user:
+
+```java
+@Immutable
+public final class TkAccount implements Take {
+  private final RqAuth request;
+  public TkAccount(final Request req) {
+    this.request = new RqAuth(req);
+  }
+  @Override
+  public Response print() {
+    if (this.request.authenticated()) {
+      // returns "urn:facebook:1234567" for a user logged in via Facebook
+      this.request.identity();
+    }
+  }
+}
+```
+
 ## Command Line Arguments
 
 There are a few command line arguments that should be passed to `TakesServer#listen()` method:
