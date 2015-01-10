@@ -5,7 +5,7 @@
 Takes is a [pure object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html) and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html) Java7 web development framework. Its key benefits, comparing to all others, include:
 
  * not a single mutable class!
- * not a single `static` keyword!
+ * not a single `public` `static` method!
  * not a single `instanceof` keyword!
 
 Besides that, these are more traditional features, out of the box:
@@ -259,6 +259,26 @@ new TksRegex()
       .with("POST", new TkPostUser())
       .with("DELETE", new TkDeleteUser())
   )
+```
+
+## Form Processing
+
+Here is an example:
+
+```java
+@Immutable
+public final class TkSavePhoto implements Take {
+  private final RqForm request;
+  public TkSavePhoto(final Request req) {
+    this.request = new RqForm(req);
+  }
+  @Override
+  public Response print() {
+    final String name = this.request.param("name");
+    final File file = this.request.file("image");
+    return new Response.NO_CONTENT;
+  }
+}
 ```
 
 ## Exception Handling
