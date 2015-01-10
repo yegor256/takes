@@ -302,6 +302,49 @@ public final class App {
 
 `TksFallback` decorates an instance of `Takes` and catches all exceptions any of its takes may throw. Once it's thrown, an instance of `TkHTML` will be returned.
 
+## Redirects
+
+Sometimes it's very useful to return a redirect response (`30x` status code), either by a normal `return` or by throwing an exception. This example illustrates both methods:
+
+```java
+@Immutable
+public final class TkPostMessage implements Take {
+  private final Request request;
+  public TkPostMessage(final Request req) {
+    this.request = req;
+  }
+  @Override
+  public Response print() {
+    final String body = new RqPost(this.request).text();
+    if (body.isEmpty()) {
+      throw new TksFailFast.Incident(
+        new RsRedirect(HttpURLConnection.HTTP_SEE_OTHER)
+          .location("/")
+          .header("X-Foo-Flash", "message can't be empty")
+      );
+    }
+    // save the message to the database
+    return new RsRedirect(HttpURLConnection.HTTP_SEE_OTHER)
+      .location("/")
+      .header("X-Foo-Flash", "thanks, the message was posted");
+  }
+}
+```
+
+Then, you should decorate the entire `TksRegex` with this `TksFailFast`:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new TakesServer(
+      new TksFailFast(
+        new TksRegex().with("/", new TkPostMessage())
+      )
+    ).listen();
+  }
+}
+```
+
 ## RsJSON
 
 Here is how we can deal with JSON:
