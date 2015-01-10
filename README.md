@@ -471,7 +471,7 @@ public final class App {
   public static void main(final String... args) {
     final Auth auth = new AuFacebook();
     new TakesServer(
-      new TkAuth(
+      new TksAuth(
         new TksRegex()
           .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
           .with("/acc", new TkAuthOnly(new TkAccount()))
