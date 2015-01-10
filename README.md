@@ -254,6 +254,31 @@ Class `TkClasspath` takes static part of the request URI and finds a resource wi
 
 `TkContentType` sets content type of all responses coming out of the decorated take.
 
+## Hit Refresh Debugging
+
+It is a very convenient feature. Once you start the app you want to be able to modify its static resources (CSS, JS, XSL, etc), refresh the page in a browser and immediately see the result. You don't want to re-compile the entire project and restart it. Here is what you need to do to your sources in order to enable that feature:
+
+```java
+new Server(
+  new TksRegex()
+    .with(
+      "/css/.+", 
+      new TkContentType(
+        new TkHitRefresh(
+          "./target/classes/foo", // where to get fresh files 
+          "./src/main/resources/foo/scss/**", // what sources to watch
+          "mvn sass:compile", // what to run when sources are modified
+          new TkClasspath()
+        ), 
+        "text/css"
+      )
+    )
+).listen(args);
+```
+
+This `TkHitRefresh` take is a decorator of another take. Once it sees `X-Takes-Refresh` header in the request, it realizes that the server is running in "hit-refresh" mode and doesn't pass the request to the encapsulated take. Instead, it tries to understand whether any of the resources are older than compiled files. If they are older, it tries to run compilation tool to build them again.
+
+
 ## Request Methods (POST, PUT, HEAD, etc.)
 
 Here is an example:
@@ -469,7 +494,6 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 ```java
 public final class App {
   public static void main(final String... args) {
-    final Auth auth = new AuFacebook();
     new TakesServer(
       new TksAuth(
         new TksRegex()
@@ -512,6 +536,7 @@ There are a few command line arguments that should be passed to `TakesServer#lis
 ```
 --port=1234     Tells the server to listen to TCP port 1234
 --lifetime=5s   The server will die in five seconds (useful for integration testing)
+--refresh       Run the server in hit-refresh mode
 ```
 
 ## Logging
@@ -547,6 +572,7 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
 pom.xml
 LICENSE.txt
 ```
+
 
 
 ## WebSockets
