@@ -454,6 +454,31 @@ public final class XeFoo implements XeSource.Wrap {
 }
 ```
 
+## OAuth Login
+
+Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    final Auth auth = new AuFacebook();
+    new TakesServer(
+      new TkAuth(
+        new TksRegex()
+          .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
+          .with("/acc", new TkAuthOnly(new TkAccount()))
+          .with("/facebook", new TkFacebook("key", "secret")),
+        "some-secret-word",
+        "/facebook"
+      )
+    ).listen();
+  }
+}
+```
+
+Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
+
+
 ## WebSockets
 
 **this section is not really correct, thinking about it...**
