@@ -551,24 +551,25 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
 /src
   /main
     /java
-      /com
-        /foo
-          App.java
+      /foo
+        App.java
     /resources
-      /com
-        /foo
-          /xsl
-          /js
-          /scss
-          /coffeescript
-          /css
-          robot.txt    
+      /foo
+        /xsl
+        /js
+        /scss
+        /coffeescript
+        /css
+        robot.txt    
       log4j.properties
   /test
     /java
-      /com
-        /foo
-          AppTest.java
+      /foo
+        AppTest.java
+    /resources
+      /foo
+        /xml
+      log4j.properties
 pom.xml
 LICENSE.txt
 ```
