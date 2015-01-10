@@ -241,7 +241,7 @@ public interface Headers {
 Very often you need to serve static resources to your web users, like CSS stylesheets, images, JavaScript files, etc. There are a few supplementary classes for that:
 
 ```java
-new Server(
+new TakesServer(
   new TksRegex()
     .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
     .with("/data/.+", new TkFiles(new File("/usr/local/data"))
@@ -259,7 +259,7 @@ Class `TkClasspath` takes static part of the request URI and finds a resource wi
 It is a very convenient feature. Once you start the app you want to be able to modify its static resources (CSS, JS, XSL, etc), refresh the page in a browser and immediately see the result. You don't want to re-compile the entire project and restart it. Here is what you need to do to your sources in order to enable that feature:
 
 ```java
-new Server(
+new TakesServer(
   new TksRegex()
     .with(
       "/css/.+", 
