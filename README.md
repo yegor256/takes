@@ -518,6 +518,36 @@ There are a few command line arguments that should be passed to `TakesServer#lis
 
 The framework sends all logs to SLF4J logging facility. If you want to see them, configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
 
+## Directory Layout
+
+You are free to use any build tool, but we recommend Maven. This is how your project directory layout may/should look like:
+
+```
+/src
+  /main
+    /java
+      /com
+        /foo
+          App.java
+    /resources
+      /com
+        /foo
+          /xsl
+          /js
+          /scss
+          /coffeescript
+          /css
+          robot.txt    
+      log4j.properties
+  /test
+    /java
+      /com
+        /foo
+          AppTest.java
+pom.xml
+LICENSE.txt
+```
+
 
 ## WebSockets
 
