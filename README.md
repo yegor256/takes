@@ -33,10 +33,12 @@ This is what is not supported and won't be supported:
 Here it is:
 
 ```java
+import org.takes.TakesServer;
+import org.takes.TsRegex;
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksRegex().with("/", "hello, world!")
+      new TsRegex().with("/", "hello, world!")
     ).listen(args);
   }
 }
@@ -59,7 +61,7 @@ Let's make it a bit more sophisticated:
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksRegex()
+      new TsRegex()
         .with("/robots\\.txt", "")
         .with("/", new TkIndex())
     ).listen(args);
@@ -69,10 +71,11 @@ public final class App {
 
 The `TakesServer` is accepting new incoming sockets on port 80,
 parses them according to HTTP 1.1 specification and creates instances
-of class `Request`. Then, it gives requests to the instance of `TksRegex`
-(`tks` stands for "takes") and expects it to return an instance of `Take` back.
+of class `Request`. Then, it gives requests to the instance of `TsRegex`
+(`ts` stands for "takes") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
-returns a take. `TkIndex` is our custom class, let's see how it looks:
+returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
+let's see how it looks:
 
 ```java
 @Immutable
@@ -90,9 +93,9 @@ to an HTTP request. Here is how we solve this:
 
 ```java
 new TakesServer(
-  new TksRegex().with(
+  new TsRegex().with(
     "/file/(?<path>[^/]+)",
-    new TksRegex.Source() {
+    new TsRegex.Source() {
       @Override
       public Take take(final RqRegex request) {
         final File file = new File(request.matcher().group("path"));
@@ -105,8 +108,8 @@ new TakesServer(
 ).listen(args);
 ```
 
-Instead of giving an instance of `Take` to the `TksRegex`, we're giving it an
-instance of `TksRegex.Source`, which is capable of building takes on demand,
+Instead of giving an instance of `Take` to the `TsRegex`, we're giving it an
+instance of `TsRegex.Source`, which is capable of building takes on demand,
 providing all necessary arguments to their constructors.
 
 Here is a more complex and verbose example:
@@ -115,7 +118,7 @@ Here is a more complex and verbose example:
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksRegex()
+      new TsRegex()
         .with("/robots.txt", "")
         .with("/", new TkIndex())
         .with(
@@ -133,7 +136,7 @@ public final class App {
         )
         .with(
           "/balance/(?<user>[a-z]+)",
-          new TksRegex.Source() {
+          new TsRegex.Source() {
             @Override
             public Take take(final RqRegex request) {
               return new TkBalance(request);
@@ -269,7 +272,7 @@ classes for that:
 
 ```java
 new TakesServer(
-  new TksRegex()
+  new TsRegex()
     .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
     .with("/data/.+", new TkFiles(new File("/usr/local/data"))
 ).listen(args);
@@ -291,7 +294,7 @@ that feature:
 
 ```java
 new TakesServer(
-  new TksRegex()
+  new TsRegex()
     .with(
       "/css/.+",
       new TkContentType(
@@ -318,10 +321,10 @@ If they are older, it tries to run compilation tool to build them again.
 Here is an example:
 
 ```java
-new TksRegex()
+new TsRegex()
   .with(
     "/user",
-    new TksMethods()
+    new TsMethods()
       .with("GET", new TkGetUser())
       .with("POST", new TkPostUser())
       .with("DELETE", new TkDeleteUser())
@@ -350,7 +353,7 @@ public final class TkSavePhoto implements Take {
 
 ## Exception Handling
 
-By default, `TksRegex` lets all exceptions bubble up. If one of your takes
+By default, `TsRegex` lets all exceptions bubble up. If one of your takes
 crashes, a user will see a default error page. Here is how you can configure
 this behavior:
 
@@ -358,8 +361,8 @@ this behavior:
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksFallback(
-        new TksRegex()
+      new TsFallback(
+        new TsRegex()
           .with("/robots\\.txt", "")
           .with("/", new TkIndex()),
         new TkHTML("oops, something went wrong!")
@@ -369,7 +372,7 @@ public final class App {
 }
 ```
 
-`TksFallback decorates an instance of Takes and catches all exceptions any of
+`TsFallback decorates an instance of Takes and catches all exceptions any of
 `its takes may throw. Once it's thrown, an instance of TkHTML will be returned.
 
 ## Redirects
@@ -389,7 +392,7 @@ public final class TkPostMessage implements Take {
   public Response print() {
     final String body = new RqPost(this.request).text();
     if (body.isEmpty()) {
-      throw new TksFailFast.Incident(
+      throw new TsFailFast.Incident(
         new RsRedirect(HttpURLConnection.HTTP_SEE_OTHER)
           .location("/")
           .header("X-Foo-Flash", "message can't be empty")
@@ -403,14 +406,14 @@ public final class TkPostMessage implements Take {
 }
 ```
 
-Then, you should decorate the entire `TksRegex` with this `TksFailFast`:
+Then, you should decorate the entire `TsRegex` with this `TsFailFast`:
 
 ```java
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksFailFast(
-        new TksRegex().with("/", new TkPostMessage())
+      new TsFailFast(
+        new TsRegex().with("/", new TkPostMessage())
       )
     ).listen(args);
   }
@@ -535,8 +538,8 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 public final class App {
   public static void main(final String... args) {
     new TakesServer(
-      new TksAuth(
-        new TksRegex()
+      new TsAuth(
+        new TsRegex()
           .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
           .with("/acc", new TkAuthOnly(new TkAccount()))
           .with("/facebook", new TkFacebook("key", "secret")),
