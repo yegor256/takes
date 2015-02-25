@@ -22,8 +22,11 @@ Besides that, these are more traditional features, out of the box:
  * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
  * [JSON](http://en.wikipedia.org/wiki/JSON)
  * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
- * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
  * Templates, incl. [Apache Velocity](http://velocity.apache.org/)
+
+This is what is not supported and won't be supported:
+
+ * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 ## Quick Start
 
@@ -581,50 +584,3 @@ pom.xml
 LICENSE.txt
 ```
 
-
-
-## WebSockets
-
-**this section is not really correct, thinking about it...**
-
-Here is how WebSockets work:
-
-```java
-public final class App {
-  public static void main(final String... args) {
-    new TakesServer(
-      new Takes.Single( // a simple alternative to TksRegex
-        new Take.Source() {
-          @Override
-          public Take take(final Request request) {
-            return new TkMyChat(request);
-          }
-        }
-      )
-    ).listen(args);
-  }
-}
-```
-
-WebSocket supporting take is not really different from any other one. The only difference is that it doesn't rush to close the input stream:
-
-```java
-@Immutable
-public final class TkMyChat implements Take {
-  private final Request request;
-  public TkMyChat(final Request req) {
-    this.request = req;
-  }
-  @Override
-  public Response print() {
-    return new Response() {
-      @Override
-      public InputStream body() {
-        // Return a stream that doesn't close immediately,
-        // but keeps showing some data until the "chat"
-        // is finished. Also, read the data from this.request.body()
-      }
-    };
-  }
-}
-```
