@@ -48,7 +48,10 @@ Compile and run it like this (`takes.jar` is the only dependency you need):
 $ java -cp takes.jar App.class --port=1234
 ```
 
-Should work :) This code starts a new HTTP server on port 1234 and renders a plain-text page on all requests at the root URI.
+Should work :)
+
+This code starts a new HTTP server on port 1234 and renders a plain-text page on
+all requests at the root URI.
 
 Let's make it a bit more sophisticated:
 
@@ -64,7 +67,12 @@ public final class App {
 }
 ```
 
-The `TakesServer` is accepting new incoming sockets on port 80, parses them according to HTTP 1.1 specification and creates instances of class `Request`. Then, it gives requests to the instance of `TksRegex` (`tks` stands for "takes") and expects it to return an instance of `Take` back. As you probably understood already, the first regular expression that matches returns a take. `TkIndex` is our custom class, let's see how it looks:
+The `TakesServer` is accepting new incoming sockets on port 80,
+parses them according to HTTP 1.1 specification and creates instances
+of class `Request`. Then, it gives requests to the instance of `TksRegex`
+(`tks` stands for "takes") and expects it to return an instance of `Take` back.
+As you probably understood already, the first regular expression that matches
+returns a take. `TkIndex` is our custom class, let's see how it looks:
 
 ```java
 @Immutable
@@ -76,7 +84,9 @@ public final class TkIndex implements Take {
 }
 ```
 
-It is immutable and must implement a single method `print()`, which is returning an instance of `Response`. So far so good, but this class doesn't have an access to an HTTP request. Here is how we solve this:
+It is immutable and must implement a single method `print()`, which is returning
+an instance of `Response`. So far so good, but this class doesn't have an access
+to an HTTP request. Here is how we solve this:
 
 ```java
 new TakesServer(
@@ -95,7 +105,9 @@ new TakesServer(
 ).listen(args);
 ```
 
-Instead of giving an instance of `Take` to the `TksRegex`, we're giving it an instance of `TksRegex.Source`, which is capable of building takes on demand, providing all necessary arguments to their constructors.
+Instead of giving an instance of `Take` to the `TksRegex`, we're giving it an
+instance of `TksRegex.Source`, which is capable of building takes on demand,
+providing all necessary arguments to their constructors.
 
 Here is a more complex and verbose example:
 
@@ -135,7 +147,10 @@ public final class App {
 
 ## Templates
 
-Now let's see how we can render something more complex than an plain text. First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may too complex, give it a try, you won't regret. Here is how we render a simple XML page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
+Now let's see how we can render something more complex than an plain text.
+First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may
+too complex, give it a try, you won't regret. Here is how we render a simple XML
+page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
 ```java
 @Immutable
@@ -248,7 +263,9 @@ public interface Headers {
 
 ## Static Resources
 
-Very often you need to serve static resources to your web users, like CSS stylesheets, images, JavaScript files, etc. There are a few supplementary classes for that:
+Very often you need to serve static resources to your web users, like CSS
+stylesheets, images, JavaScript files, etc. There are a few supplementary
+classes for that:
 
 ```java
 new TakesServer(
@@ -266,7 +283,11 @@ Class `TkClasspath` takes static part of the request URI and finds a resource wi
 
 ## Hit Refresh Debugging
 
-It is a very convenient feature. Once you start the app you want to be able to modify its static resources (CSS, JS, XSL, etc), refresh the page in a browser and immediately see the result. You don't want to re-compile the entire project and restart it. Here is what you need to do to your sources in order to enable that feature:
+It is a very convenient feature. Once you start the app you want to be able to
+modify its static resources (CSS, JS, XSL, etc), refresh the page in a browser
+and immediately see the result. You don't want to re-compile the entire project
+and restart it. Here is what you need to do to your sources in order to enable
+that feature:
 
 ```java
 new TakesServer(
@@ -286,8 +307,11 @@ new TakesServer(
 ).listen(args);
 ```
 
-This `TkHitRefresh` take is a decorator of another take. Once it sees `X-Takes-Refresh` header in the request, it realizes that the server is running in "hit-refresh" mode and doesn't pass the request to the encapsulated take. Instead, it tries to understand whether any of the resources are older than compiled files. If they are older, it tries to run compilation tool to build them again.
-
+This `TkHitRefresh` take is a decorator of another take. Once it sees `X-Takes-
+Refresh` header in the request, it realizes that the server is running in "hit-
+refresh" mode and doesn't pass the request to the encapsulated take. Instead, it
+tries to understand whether any of the resources are older than compiled files.
+If they are older, it tries to run compilation tool to build them again.
 
 ## Request Methods (POST, PUT, HEAD, etc.)
 
@@ -326,7 +350,9 @@ public final class TkSavePhoto implements Take {
 
 ## Exception Handling
 
-By default, `TksRegex` lets all exceptions bubble up. If one of your takes crashes, a user will see a default error page. Here is how you can configure this behavior:
+By default, `TksRegex` lets all exceptions bubble up. If one of your takes
+crashes, a user will see a default error page. Here is how you can configure
+this behavior:
 
 ```java
 public final class App {
@@ -343,11 +369,14 @@ public final class App {
 }
 ```
 
-`TksFallback` decorates an instance of `Takes` and catches all exceptions any of its takes may throw. Once it's thrown, an instance of `TkHTML` will be returned.
+`TksFallback decorates an instance of Takes and catches all exceptions any of
+`its takes may throw. Once it's thrown, an instance of TkHTML will be returned.
 
 ## Redirects
 
-Sometimes it's very useful to return a redirect response (`30x` status code), either by a normal `return` or by throwing an exception. This example illustrates both methods:
+Sometimes it's very useful to return a redirect response (`30x` status code),
+either by a normal `return` or by throwing an exception. This example
+illustrates both methods:
 
 ```java
 @Immutable
@@ -462,7 +491,8 @@ This is the output that will be produced:
 </take>
 ```
 
-To avoid duplication of all this scaffolding in every page, you can create your own class, which will be used in every page, for example:
+To avoid duplication of all this scaffolding in every page, you can create your
+own class, which will be used in every page, for example:
 
 ```java
 Response response = new RsXembly(
