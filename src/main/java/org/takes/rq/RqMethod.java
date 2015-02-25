@@ -25,6 +25,7 @@ package org.takes.rq;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -92,7 +93,7 @@ public final class RqMethod implements Request {
         this.origin = req;
         final String line = req.head().get(0);
         final String[] parts = line.split(" ", 2);
-        this.mtd = parts[0];
+        this.mtd = parts[0].toUpperCase(Locale.ENGLISH);
     }
 
     /**

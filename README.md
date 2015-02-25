@@ -270,9 +270,9 @@ new TakesServer(
 ).listen(8080);
 ```
 
-This `TsHitRefresh` take is a decorator of another takes. Once it sees `X-Takes-
-Refresh` header in the request, it realizes that the server is running in "hit-
-refresh" mode and doesn't pass the request to the encapsulated take. Instead, it
+This `TsHitRefresh` takes is a decorator of another takes. Once it sees
+`X-Takes-Refresh` header in the request, it realizes that the server is running in
+"hit-refresh" mode and doesn't pass the request to the encapsulated takes. Instead, it
 tries to understand whether any of the resources are older than compiled files.
 If they are older, it tries to run compilation tool to build them again.
 
