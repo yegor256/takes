@@ -39,7 +39,7 @@ public final class App {
   public static void main(final String... args) {
     new TakesServer(
       new TsRegex().with("/", "hello, world!")
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```
@@ -47,12 +47,12 @@ public final class App {
 Compile and run it like this (`takes.jar` is the only dependency you need):
 
 ```bash
-$ java -cp takes.jar App.class --port=1234
+$ java -cp takes.jar App.class
 ```
 
 Should work :)
 
-This code starts a new HTTP server on port 1234 and renders a plain-text page on
+This code starts a new HTTP server on port 8080 and renders a plain-text page on
 all requests at the root URI.
 
 Let's make it a bit more sophisticated:
@@ -64,7 +64,7 @@ public final class App {
       new TsRegex()
         .with("/robots\\.txt", "")
         .with("/", new TkIndex())
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```
@@ -78,7 +78,6 @@ returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
 let's see how it looks:
 
 ```java
-@Immutable
 public final class TkIndex implements Take {
   @Override
   public Response print() {
@@ -95,22 +94,23 @@ to an HTTP request. Here is how we solve this:
 new TakesServer(
   new TsRegex().with(
     "/file/(?<path>[^/]+)",
-    new TsRegex.Source() {
+    new Takes() {
       @Override
-      public Take take(final RqRegex request) {
-        final File file = new File(request.matcher().group("path"));
+      public Take take(final Request request) {
+        final File file = new File(
+          RqRegex.class.cast(request).matcher().group("path")
+        );
         return new TkHTML(
           FileUtils.readFileToString(file, Charsets.UTF_8)
         );
       }
     }
   )
-).listen(args);
+).listen(8080);
 ```
 
-Instead of giving an instance of `Take` to the `TsRegex`, we're giving it an
-instance of `TsRegex.Source`, which is capable of building takes on demand,
-providing all necessary arguments to their constructors.
+We're casting incoming `Request` to `RqRegex` and retrieving an instance
+of `Matcher` from it.
 
 Here is a more complex and verbose example:
 
@@ -127,7 +127,7 @@ public final class App {
         )
         .with(
           "/account",
-          new Take.Source() {
+          new Takes() {
             @Override
             public Take take(final Request request) {
               return new TkAccount(users, request);
@@ -136,14 +136,14 @@ public final class App {
         )
         .with(
           "/balance/(?<user>[a-z]+)",
-          new TsRegex.Source() {
+          new Takes() {
             @Override
-            public Take take(final RqRegex request) {
-              return new TkBalance(request);
+            public Take take(final Request request) {
+              return new TkBalance(RqRegex.class.cast(request));
             }
           }
         )
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```
@@ -224,39 +224,6 @@ public final class TkHelloWorld implements Take {
 }
 ```
 
-## Key Interfaces
-
-Here is how key interfaces look like. First, the `Request`:
-
-```java
-public interface Request {
-  String method();
-  String uri();
-  Headers headers();
-  InputStream body();
-}
-```
-
-And the `Response`:
-
-```java
-public interface Response {
-  int status();
-  String line();
-  Headers headers();
-  InputStream body();
-}
-```
-
-Also, the `Headers` is a multi-key map:
-
-```java
-public interface Headers {
-  List<String> get(String key);
-  Collection<String> keys();
-}
-```
-
 ## Static Resources
 
 Very often you need to serve static resources to your web users, like CSS
@@ -268,7 +235,7 @@ new TakesServer(
   new TsRegex()
     .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
     .with("/data/.+", new TkFiles(new File("/usr/local/data"))
-).listen(args);
+).listen(8080);
 ```
 
 Class `TkClasspath` takes static part of the request URI and finds a resource with this name in classpath.
@@ -300,7 +267,7 @@ new TakesServer(
         "text/css"
       )
     )
-).listen(args);
+).listen(8080);
 ```
 
 This `TkHitRefresh` take is a decorator of another take. Once it sees `X-Takes-
@@ -359,7 +326,7 @@ public final class App {
           .with("/", new TkIndex()),
         new TkHTML("oops, something went wrong!")
       )
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```
@@ -406,7 +373,7 @@ public final class App {
       new TsFailFast(
         new TsRegex().with("/", new TkPostMessage())
       )
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```
@@ -534,7 +501,7 @@ public final class App {
         "some-secret-word",
         "/facebook"
       )
-    ).listen(args);
+    ).listen(8080);
   }
 }
 ```

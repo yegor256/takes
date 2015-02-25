@@ -23,17 +23,21 @@
  */
 package org.takes.ts;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqQuery;
+import org.takes.rq.RqRegex;
 import org.takes.tk.TkText;
 
 /**
@@ -71,8 +75,10 @@ public final class TsRegex implements Takes {
         final URI uri = new RqQuery(request).query();
         final String path = uri.getPath();
         Takes found = null;
+        Matcher matcher = null;
         for (final Map.Entry<Pattern, Takes> ent : this.map.entrySet()) {
-            if (ent.getKey().matcher(path).matches()) {
+            matcher = ent.getKey().matcher(path);
+            if (matcher.matches()) {
                 found = ent.getValue();
                 break;
             }
@@ -80,7 +86,7 @@ public final class TsRegex implements Takes {
         if (found == null) {
             throw new IllegalArgumentException("not found");
         }
-        return found.take(request);
+        return found.take(new TsRegex.Req(request, matcher));
     }
 
     /**
@@ -125,6 +131,41 @@ public final class TsRegex implements Takes {
         tks.putAll(this.map);
         tks.put(regex, takes);
         return new TsRegex(tks);
+    }
+
+    /**
+     * Request with regex.
+     */
+    private static final class Req implements RqRegex {
+        /**
+         * Original.
+         */
+        private final transient Request origin;
+        /**
+         * Matcher.
+         */
+        private final transient Matcher mtr;
+        /**
+         * Ctor.
+         * @param req Request
+         * @param matcher Matcher
+         */
+        private Req(final Request req, final Matcher matcher) {
+            this.origin = req;
+            this.mtr = matcher;
+        }
+        @Override
+        public Matcher matcher() {
+            return this.mtr;
+        }
+        @Override
+        public List<String> head() {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() {
+            return this.origin.body();
+        }
     }
 
 }
