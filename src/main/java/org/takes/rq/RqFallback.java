@@ -23,23 +23,22 @@
  */
 package org.takes.rq;
 
-import java.util.regex.Matcher;
 import org.takes.Request;
 
 /**
- * Request with a matcher of URI.
+ * Request with an error inside.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.ts.TsRegex
+ * @see org.takes.ts.TsFallback
  */
-public interface RqRegex extends Request {
+public interface RqFallback extends Request {
 
     /**
-     * Get matcher of query string.
-     * @return Matcher
+     * Get throwable that occurred.
+     * @return Throwable
      */
-    Matcher matcher();
+    Throwable throwable();
 
 }

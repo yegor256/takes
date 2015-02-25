@@ -141,6 +141,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>xml:/src/it/settings.xml</exclude>
+                                <exclude>findbugs:.*</exclude>
                             </excludes>
                         </configuration>
                     </plugin>

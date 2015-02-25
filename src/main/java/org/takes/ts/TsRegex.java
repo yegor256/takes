@@ -49,25 +49,26 @@ import org.takes.tk.TkText;
  * @since 0.1
  */
 @EqualsAndHashCode(of = "map")
+@SuppressWarnings("PMD.TooManyMethods")
 public final class TsRegex implements Takes {
 
     /**
      * Patterns and their respective takes.
      */
-    private final transient Map<Pattern, Takes> map;
+    private final transient Map<Pattern, TsRegex.Fast> map;
 
     /**
      * Ctor.
      */
     public TsRegex() {
-        this(Collections.<Pattern, Takes>emptyMap());
+        this(Collections.<Pattern, TsRegex.Fast>emptyMap());
     }
 
     /**
      * Ctor.
      * @param tks Map of takes
      */
-    public TsRegex(final Map<Pattern, Takes> tks) {
+    public TsRegex(final Map<Pattern, TsRegex.Fast> tks) {
         this.map = Collections.unmodifiableMap(tks);
     }
 
@@ -75,9 +76,9 @@ public final class TsRegex implements Takes {
     public Take take(final Request request) throws IOException {
         final URI uri = new RqQuery(request).query();
         final String path = uri.getPath();
-        Takes found = null;
+        TsRegex.Fast found = null;
         Matcher matcher = null;
-        for (final Map.Entry<Pattern, Takes> ent : this.map.entrySet()) {
+        for (final Map.Entry<Pattern, TsRegex.Fast> ent : this.map.entrySet()) {
             matcher = ent.getKey().matcher(path);
             if (matcher.matches()) {
                 found = ent.getValue();
@@ -89,7 +90,7 @@ public final class TsRegex implements Takes {
                 String.format("nothing found for %s", path)
             );
         }
-        return found.take(new TsRegex.Req(request, matcher));
+        return found.take(TsRegex.req(request, matcher));
     }
 
     /**
@@ -129,46 +130,65 @@ public final class TsRegex implements Takes {
      * @return New takes
      */
     public TsRegex with(final Pattern regex, final Takes takes) {
-        final ConcurrentMap<Pattern, Takes> tks =
-            new ConcurrentHashMap<Pattern, Takes>(this.map.size() + 1);
+        return this.with(
+            regex,
+            new TsRegex.Fast() {
+                @Override
+                public Take take(final RqRegex req) throws IOException {
+                    return takes.take(req);
+                }
+            }
+        );
+    }
+
+    /**
+     * With this new takes.
+     * @param regex Regular expression
+     * @param takes The takes
+     * @return New takes
+     */
+    public TsRegex with(final Pattern regex, final TsRegex.Fast takes) {
+        final ConcurrentMap<Pattern, TsRegex.Fast> tks =
+            new ConcurrentHashMap<Pattern, TsRegex.Fast>(this.map.size() + 1);
         tks.putAll(this.map);
         tks.put(regex, takes);
         return new TsRegex(tks);
     }
 
     /**
-     * Request with regex.
+     * Make a request from original one and matcher.
+     * @param req Request
+     * @param matcher The matcher
+     * @return Request
      */
-    private static final class Req implements RqRegex {
+    private static RqRegex req(final Request req, final Matcher matcher) {
+        return new RqRegex() {
+            @Override
+            public Matcher matcher() {
+                return matcher;
+            }
+            @Override
+            public List<String> head() {
+                return req.head();
+            }
+            @Override
+            public InputStream body() {
+                return req.body();
+            }
+        };
+    }
+
+    /**
+     * Fast track for the regex.
+     */
+    public interface Fast {
         /**
-         * Original.
-         */
-        private final transient Request origin;
-        /**
-         * Matcher.
-         */
-        private final transient Matcher mtr;
-        /**
-         * Ctor.
+         * Get a take.
          * @param req Request
-         * @param matcher Matcher
+         * @return Take
+         * @throws IOException If fails
          */
-        private Req(final Request req, final Matcher matcher) {
-            this.origin = req;
-            this.mtr = matcher;
-        }
-        @Override
-        public Matcher matcher() {
-            return this.mtr;
-        }
-        @Override
-        public List<String> head() {
-            return this.origin.head();
-        }
-        @Override
-        public InputStream body() {
-            return this.origin.body();
-        }
+        Take take(RqRegex req) throws IOException;
     }
 
 }

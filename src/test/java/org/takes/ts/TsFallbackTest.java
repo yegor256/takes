@@ -21,25 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.ts;
 
-import java.util.regex.Matcher;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqMethod;
+import org.takes.rq.RqPlain;
+import org.takes.rs.RsPrint;
+import org.takes.tk.TkText;
 
 /**
- * Request with a matcher of URI.
- *
+ * Test case for {@link TsFallback}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.ts.TsRegex
  */
-public interface RqRegex extends Request {
+public final class TsFallbackTest {
 
     /**
-     * Get matcher of query string.
-     * @return Matcher
+     * TsFallback can fall back.
+     * @throws IOException If some problem inside
      */
-    Matcher matcher();
+    @Test
+    public void fallsBack() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsFallback(
+                    new Takes() {
+                        @Override
+                        public Take take(final Request request) {
+                            throw new UnsupportedOperationException("#take()");
+                        }
+                    },
+                    new TkText("an exception, sorry")
+                ).take(new RqPlain(RqMethod.GET, "/", "")).print()
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 200 OK")
+        );
+    }
 
 }
