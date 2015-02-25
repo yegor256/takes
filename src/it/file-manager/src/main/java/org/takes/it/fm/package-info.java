@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+/**
  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Yegor Bugayenko
@@ -21,24 +20,13 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.jcabi</groupId>
-        <artifactId>parent</artifactId>
-        <version>0.32.1</version>
-    </parent>
-    <groupId>org.takes.test</groupId>
-    <artifactId>casperjs</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>@project.groupId@</groupId>
-            <artifactId>@project.artifactId@</artifactId>
-            <version>@project.version@</version>
-        </dependency>
-    </dependencies>
-</project>
+ */
+
+/**
+ * File manager, integration test.
+ *
+ * @author Yegor Bugayenko (yegor@teamed.io)
+ * @version $Id$
+ * @since 0.1
+ */
+package org.takes.it.fm;

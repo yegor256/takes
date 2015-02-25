@@ -21,67 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsText;
 
 /**
- * Text take.
+ * File manager, integration test.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "input")
-public final class TkText implements Take {
-
-    /**
-     * HTML.
-     */
-    private final transient InputStream input;
-
-    /**
-     * Ctor.
-     * @param body Text
-     */
-    public TkText(final String body) {
-        this(body.getBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param body Body with HTML
-     */
-    public TkText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param url URL with content
-     * @throws IOException If fails
-     */
-    public TkText(final URL url) throws IOException {
-        this(url.openStream());
-    }
-
-    /**
-     * Ctor.
-     * @param body Content
-     */
-    public TkText(final InputStream body) {
-        this.input = body;
-    }
-
-    @Override
-    public Response print() {
-        return new RsText(this.input);
-    }
-}
+package org.takes.it.fm;

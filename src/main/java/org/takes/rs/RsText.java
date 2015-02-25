@@ -23,6 +23,7 @@
  */
 package org.takes.rs;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -49,6 +50,22 @@ public final class RsText implements Response {
      * @param body Plain text body
      */
     public RsText(final String body) {
+        this(body.getBytes());
+    }
+
+    /**
+     * Ctor.
+     * @param body Plain text body
+     */
+    public RsText(final byte[] body) {
+        this(new ByteArrayInputStream(body));
+    }
+
+    /**
+     * Ctor.
+     * @param body Plain text body
+     */
+    public RsText(final InputStream body) {
         this(new RsEmpty(), body);
     }
 
@@ -58,6 +75,24 @@ public final class RsText implements Response {
      * @param body HTML body
      */
     public RsText(final Response res, final String body) {
+        this(res, body.getBytes());
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body HTML body
+     */
+    public RsText(final Response res, final byte[] body) {
+        this(res, new ByteArrayInputStream(body));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body HTML body
+     */
+    public RsText(final Response res, final InputStream body) {
         this.origin = new RsWithBody(
             new RsWithHeader(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),

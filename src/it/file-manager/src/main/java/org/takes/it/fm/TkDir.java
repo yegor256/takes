@@ -21,67 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.it.fm;
 
-import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rs.RsText;
 
 /**
- * Text take.
+ * Directory take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "input")
-public final class TkText implements Take {
+final class TkDir implements Take {
 
     /**
-     * HTML.
+     * Home.
      */
-    private final transient InputStream input;
+    private final transient File home;
 
     /**
-     * Ctor.
-     * @param body Text
+     * Path of directory to show.
      */
-    public TkText(final String body) {
-        this(body.getBytes());
-    }
+    private final transient String path;
 
     /**
      * Ctor.
-     * @param body Body with HTML
+     * @param dir Home
+     * @param file Path
      */
-    public TkText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param url URL with content
-     * @throws IOException If fails
-     */
-    public TkText(final URL url) throws IOException {
-        this(url.openStream());
-    }
-
-    /**
-     * Ctor.
-     * @param body Content
-     */
-    public TkText(final InputStream body) {
-        this.input = body;
+    TkDir(final File dir, final String file) {
+        this.home = dir;
+        this.path = file;
     }
 
     @Override
-    public Response print() {
-        return new RsText(this.input);
+    public Response print() throws IOException {
+        assert this.home != null;
+        assert this.path != null;
+        throw new UnsupportedOperationException("#print()");
     }
+
 }

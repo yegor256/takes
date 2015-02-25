@@ -147,6 +147,16 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
+    public TsRegex with(final String regex, final TsRegex.Fast takes) {
+        return this.with(Pattern.compile(regex), takes);
+    }
+
+    /**
+     * With this new takes.
+     * @param regex Regular expression
+     * @param takes The takes
+     * @return New takes
+     */
     public TsRegex with(final Pattern regex, final TsRegex.Fast takes) {
         final ConcurrentMap<Pattern, TsRegex.Fast> tks =
             new ConcurrentHashMap<Pattern, TsRegex.Fast>(this.map.size() + 1);

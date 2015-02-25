@@ -21,67 +21,66 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.it.fm;
 
-import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.takes.Request;
 import org.takes.Take;
-import org.takes.rs.RsText;
+import org.takes.Takes;
+import org.takes.TakesServer;
+import org.takes.rq.RqRegex;
+import org.takes.tk.TkHTML;
+import org.takes.ts.TsRegex;
 
 /**
- * Text take.
+ * App.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "input")
-public final class TkText implements Take {
+public final class App implements Takes {
 
     /**
-     * HTML.
+     * Home.
      */
-    private final transient InputStream input;
+    private final transient File home;
 
     /**
      * Ctor.
-     * @param body Text
+     * @param dir Home dir
      */
-    public TkText(final String body) {
-        this(body.getBytes());
+    public App(final File dir) {
+        this.home = dir;
     }
 
     /**
-     * Ctor.
-     * @param body Body with HTML
-     */
-    public TkText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param url URL with content
+     * Entry point.
+     * @param args Arguments
      * @throws IOException If fails
      */
-    public TkText(final URL url) throws IOException {
-        this(url.openStream());
-    }
-
-    /**
-     * Ctor.
-     * @param body Content
-     */
-    public TkText(final InputStream body) {
-        this.input = body;
+    public static void main(final String... args) throws IOException {
+        new TakesServer(
+            new App(new File(System.getProperty("user.dir")))
+        ).listen(Integer.parseInt(args[0]));
     }
 
     @Override
-    public Response print() {
-        return new RsText(this.input);
+    public Take take(final Request request) throws IOException {
+        return new TsRegex()
+            .with("/", new TkIndex())
+            .with("/about", new TkHTML(App.class.getResource("about.html")))
+            .with("/robots.txt", "")
+            .with(
+                "/f(.*)",
+                new TsRegex.Fast() {
+                    @Override
+                    public Take take(final RqRegex req) {
+                        return new TkDir(App.this.home, req.matcher().group(1));
+                    }
+                }
+            )
+            .take(request);
     }
 }

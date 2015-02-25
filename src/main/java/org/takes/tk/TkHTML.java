@@ -21,94 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.tk;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.util.List;
+import java.net.URL;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsHTML;
 
 /**
- * HTML response decorator.
+ * HTML take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsHTML implements Response {
+@EqualsAndHashCode(of = "input")
+public final class TkHTML implements Take {
 
     /**
-     * Original response.
+     * HTML.
      */
-    private final transient Response origin;
+    private final transient InputStream input;
 
     /**
      * Ctor.
-     * @param body HTML body
+     * @param body Text
      */
-    public RsHTML(final String body) {
+    public TkHTML(final String body) {
         this(body.getBytes());
     }
 
     /**
      * Ctor.
-     * @param body HTML body
+     * @param body Body with HTML
      */
-    public RsHTML(final byte[] body) {
+    public TkHTML(final byte[] body) {
         this(new ByteArrayInputStream(body));
     }
 
     /**
      * Ctor.
-     * @param body HTML body
+     * @param url URL with content
+     * @throws IOException If fails
      */
-    public RsHTML(final InputStream body) {
-        this(new RsEmpty(), body);
+    public TkHTML(final URL url) throws IOException {
+        this(url.openStream());
     }
 
     /**
      * Ctor.
-     * @param res Original response
-     * @param body HTML body
+     * @param body Content
      */
-    public RsHTML(final Response res, final String body) {
-        this(res, body.getBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param body HTML body
-     */
-    public RsHTML(final Response res, final byte[] body) {
-        this(res, new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param body HTML body
-     */
-    public RsHTML(final Response res, final InputStream body) {
-        this.origin = new RsWithBody(
-            new RsWithHeader(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "Content-Type", "text/html"
-            ),
-            body
-        );
+    public TkHTML(final InputStream body) {
+        this.input = body;
     }
 
     @Override
-    public List<String> head() {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() {
-        return this.origin.body();
+    public Response print() {
+        return new RsHTML(this.input);
     }
 }
