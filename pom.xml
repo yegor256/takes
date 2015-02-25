@@ -89,10 +89,6 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jcabi</groupId>
-            <artifactId>jcabi-log</artifactId>
-        </dependency>
-        <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
             <scope>provided</scope>
