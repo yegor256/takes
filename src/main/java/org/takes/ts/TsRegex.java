@@ -23,6 +23,7 @@
  */
 package org.takes.ts;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Collections;
@@ -71,7 +72,7 @@ public final class TsRegex implements Takes {
     }
 
     @Override
-    public Take take(final Request request) {
+    public Take take(final Request request) throws IOException {
         final URI uri = new RqQuery(request).query();
         final String path = uri.getPath();
         Takes found = null;
@@ -84,7 +85,9 @@ public final class TsRegex implements Takes {
             }
         }
         if (found == null) {
-            throw new IllegalArgumentException("not found");
+            throw new Takes.NotFoundException(
+                String.format("nothing found for %s", path)
+            );
         }
         return found.take(new TsRegex.Req(request, matcher));
     }

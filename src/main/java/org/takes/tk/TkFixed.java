@@ -21,57 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.tk;
 
-import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
+import org.takes.Take;
 
 /**
- * Takes.
+ * Take with fixed response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Takes {
+@EqualsAndHashCode(of = "response")
+public final class TkFixed implements Take {
 
     /**
-     * Dispatch this request.
-     * @param request The request to dispatch
-     * @return Take to process
-     * @throws IOException If fails
+     * Response.
      */
-    Take take(Request request) throws IOException;
+    private final transient Response response;
 
     /**
-     * Take can't be dispatched.
+     * Ctor.
+     * @param res Rsponse
      */
-    final class NotFoundException extends RuntimeException {
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = -505306086879848229L;
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final Throwable cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param msg Exception message
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String msg, final Throwable cause) {
-            super(msg, cause);
-        }
+    public TkFixed(final Response res) {
+        this.response = res;
     }
 
+    @Override
+    public Response print() {
+        return this.response;
+    }
 }

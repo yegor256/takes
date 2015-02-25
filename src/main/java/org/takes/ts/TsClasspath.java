@@ -21,56 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
 
 import java.io.IOException;
+import java.io.InputStream;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqQuery;
+import org.takes.rs.RsWithBody;
+import org.takes.tk.TkFixed;
 
 /**
- * Takes.
+ * Takes reading resources from classpath.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Takes {
+@EqualsAndHashCode(of = "prefix")
+public final class TsClasspath implements Takes {
 
     /**
-     * Dispatch this request.
-     * @param request The request to dispatch
-     * @return Take to process
-     * @throws IOException If fails
+     * Prefix.
      */
-    Take take(Request request) throws IOException;
+    private final transient String prefix;
 
     /**
-     * Take can't be dispatched.
+     * Ctor.
+     * @param pfx Prefix
      */
-    final class NotFoundException extends RuntimeException {
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = -505306086879848229L;
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String cause) {
-            super(cause);
+    public TsClasspath(final String pfx) {
+        this.prefix = pfx;
+    }
+
+    @Override
+    public Take take(final Request request) throws IOException {
+        final String name = String.format(
+            "%s%s", this.prefix,
+            new RqQuery(request).query().getPath()
+        );
+        final InputStream input = this.getClass().getResourceAsStream(name);
+        if (input == null) {
+            throw new Takes.NotFoundException(
+                String.format("%s not found in classpath", name)
+            );
         }
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final Throwable cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param msg Exception message
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String msg, final Throwable cause) {
-            super(msg, cause);
+        try {
+            return new TkFixed(
+                new RsWithBody(new RqQuery(request).query().getPath())
+            );
+        } finally {
+            input.close();
         }
     }
 

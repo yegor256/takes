@@ -21,57 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
 
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.tk.TkContentType;
 
 /**
- * Takes.
+ * Takes with added content type.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Takes {
+@EqualsAndHashCode(of = { "origin", "type" })
+public final class TsContentType implements Takes {
 
     /**
-     * Dispatch this request.
-     * @param request The request to dispatch
-     * @return Take to process
-     * @throws IOException If fails
+     * Original takes.
      */
-    Take take(Request request) throws IOException;
+    private final transient Takes origin;
 
     /**
-     * Take can't be dispatched.
+     * Type.
      */
-    final class NotFoundException extends RuntimeException {
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = -505306086879848229L;
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final Throwable cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param msg Exception message
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String msg, final Throwable cause) {
-            super(msg, cause);
-        }
+    private final transient String type;
+
+    /**
+     * Ctor.
+     * @param takes Original takes
+     * @param ctype Content type
+     */
+    public TsContentType(final Takes takes, final String ctype) {
+        this.origin = takes;
+        this.type = ctype;
+    }
+
+    @Override
+    public Take take(final Request request) throws IOException {
+        return new TkContentType(this.origin.take(request), this.type);
     }
 
 }

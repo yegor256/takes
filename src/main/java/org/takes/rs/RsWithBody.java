@@ -48,7 +48,15 @@ public final class RsWithBody implements Response {
     /**
      * Content.
      */
-    private final transient byte[] content;
+    private final transient InputStream content;
+
+    /**
+     * Ctor.
+     * @param body Body
+     */
+    public RsWithBody(final String body) {
+        this(new RsEmpty(), body);
+    }
 
     /**
      * Ctor.
@@ -56,12 +64,26 @@ public final class RsWithBody implements Response {
      * @param body Body
      */
     public RsWithBody(final Response res, final String body) {
+        this(res, RsWithBody.bytes(body));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body Body
+     */
+    public RsWithBody(final Response res, final byte[] body) {
+        this(res, new ByteArrayInputStream(body));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body Body
+     */
+    public RsWithBody(final Response res, final InputStream body) {
         this.origin = res;
-        try {
-            this.content = body.getBytes("UTF-8");
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
+        this.content = body;
     }
 
     @Override
@@ -71,6 +93,20 @@ public final class RsWithBody implements Response {
 
     @Override
     public InputStream body() {
-        return new ByteArrayInputStream(this.content);
+        return this.content;
     }
+
+    /**
+     * Convert string to byte array.
+     * @param text Text to convert
+     * @return Input stream
+     */
+    private static byte[] bytes(final String text) {
+        try {
+            return text.getBytes("UTF-8");
+        } catch (final UnsupportedEncodingException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
 }

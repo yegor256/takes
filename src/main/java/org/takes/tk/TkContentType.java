@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
@@ -59,7 +60,7 @@ public final class TkContentType implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response print() throws IOException {
         return new RsWithHeader(
             this.origin.print(),
             "Content-Type", this.type

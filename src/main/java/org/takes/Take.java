@@ -23,6 +23,8 @@
  */
 package org.takes;
 
+import java.io.IOException;
+
 /**
  * Take.
  *
@@ -35,7 +37,8 @@ public interface Take {
     /**
      * Print itself.
      * @return Response
+     * @throws IOException If fails
      */
-    Response print();
+    Response print() throws IOException;
 
 }
