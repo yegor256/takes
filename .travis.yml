@@ -1,0 +1,6 @@
+language: java
+cache:
+  directories:
+    - $HOME/.m2
+script:
+  - mvn clean install -Pqulice --errors --batch-mode

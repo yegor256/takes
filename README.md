@@ -71,7 +71,7 @@ It is immutable and must implement a single method `print()`, which is returning
 ```java
 new TakesServer(
   new TksRegex().with(
-    "/file/(?<path>[^/]+)", 
+    "/file/(?<path>[^/]+)",
     new TksRegex.Source() {
       @Override
       public Take take(final RqRegex request) {
@@ -97,11 +97,11 @@ public final class App {
         .with("/robots.txt", "")
         .with("/", new TkIndex())
         .with(
-          "/xsl/.*", 
+          "/xsl/.*",
           new TkContentType(new TkClasspath(), "text/xsl")
         )
         .with(
-          "/account", 
+          "/account",
           new Take.Source() {
             @Override
             public Take take(final Request request) {
@@ -110,7 +110,7 @@ public final class App {
           }
         )
         .with(
-          "/balance/(?<user>[a-z]+)", 
+          "/balance/(?<user>[a-z]+)",
           new TksRegex.Source() {
             @Override
             public Take take(final RqRegex request) {
@@ -262,14 +262,14 @@ It is a very convenient feature. Once you start the app you want to be able to m
 new TakesServer(
   new TksRegex()
     .with(
-      "/css/.+", 
+      "/css/.+",
       new TkContentType(
         new TkHitRefresh(
-          "./target/classes/foo", // where to get fresh files 
+          "./target/classes/foo", // where to get fresh files
           "./src/main/resources/foo/scss/**", // what sources to watch
           "mvn sass:compile", // what to run when sources are modified
           new TkClasspath()
-        ), 
+        ),
         "text/css"
       )
     )
@@ -411,7 +411,7 @@ public final class User implements XeSource, RsJSON.Source {
 
 ## RsXembly
 
-Here is how you generate an XML page using [Xembly](http://www.xembly.org):
+Here is how you generate an XML page using [Xembly](http://www.takes.org):
 
 ```java
 Response response = new RsXembly(
@@ -560,7 +560,7 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
         /scss
         /coffeescript
         /css
-        robot.txt    
+        robot.txt
       log4j.properties
   /test
     /java
