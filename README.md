@@ -156,7 +156,6 @@ too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
 ```java
-@Immutable
 public final class TkAccount implements Take {
   private final User user;
   public TkAccount(final Users users, final Request request) {
@@ -181,7 +180,6 @@ public final class TkAccount implements Take {
 This is how that `User` class may look like:
 
 ```java
-@Immutable
 public final class User implements XeSource {
   private final String name;
   private final int balance;
@@ -201,7 +199,6 @@ public final class User implements XeSource {
 Here is how `RsLogin` may look like:
 
 ```java
-@Immutable
 public final class RsLogin extends Response.Wrap {
   public RsLogin(final Response response, final User user) {
     super(
@@ -216,7 +213,6 @@ public final class RsLogin extends Response.Wrap {
 Let's say, you want to use [Velocity](http://velocity.apache.org/):
 
 ```java
-@Immutable
 public final class TkHelloWorld implements Take {
   @Override
   public Response print() {
@@ -233,7 +229,6 @@ public final class TkHelloWorld implements Take {
 Here is how key interfaces look like. First, the `Request`:
 
 ```java
-@Immutable
 public interface Request {
   String method();
   String uri();
@@ -245,7 +240,6 @@ public interface Request {
 And the `Response`:
 
 ```java
-@Immutable
 public interface Response {
   int status();
   String line();
@@ -257,7 +251,6 @@ public interface Response {
 Also, the `Headers` is a multi-key map:
 
 ```java
-@Immutable
 public interface Headers {
   List<String> get(String key);
   Collection<String> keys();
@@ -336,7 +329,6 @@ new TsRegex()
 Here is an example:
 
 ```java
-@Immutable
 public final class TkSavePhoto implements Take {
   private final RqForm request;
   public TkSavePhoto(final Request req) {
@@ -382,7 +374,6 @@ either by a normal `return` or by throwing an exception. This example
 illustrates both methods:
 
 ```java
-@Immutable
 public final class TkPostMessage implements Take {
   private final Request request;
   public TkPostMessage(final Request req) {
@@ -425,7 +416,6 @@ public final class App {
 Here is how we can deal with JSON:
 
 ```java
-@Immutable
 public final class TkBalance extends Take.Fixed {
   public TkBalance(final RqRegex request) {
     super(
@@ -440,7 +430,6 @@ public final class TkBalance extends Take.Fixed {
 This is the method to add to `User`:
 
 ```java
-@Immutable
 public final class User implements XeSource, RsJSON.Source {
   @Override
   public JsonObject toJSON() {
@@ -506,7 +495,6 @@ Response response = new RsXembly(
 This is how this `XeFoo` class would look like:
 
 ```java
-@Immutable
 public final class XeFoo implements XeSource.Wrap {
   public XeFoo(final String stylesheet, final XeSource... sources) {
     super(
@@ -556,7 +544,6 @@ Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitt
 This is how you get currently logged in user:
 
 ```java
-@Immutable
 public final class TkAccount implements Take {
   private final RqAuth request;
   public TkAccount(final Request req) {
