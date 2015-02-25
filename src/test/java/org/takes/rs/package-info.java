@@ -21,30 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
-
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 /**
- * Test case for {@link Take}.
+ * Responses, tests.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class TakeTest {
-
-    /**
-     * Take can work.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void justWorks() throws Exception {
-        MatcherAssert.assertThat(
-            true,
-            Matchers.equalTo(true)
-        );
-    }
-
-}
+package org.takes.rs;

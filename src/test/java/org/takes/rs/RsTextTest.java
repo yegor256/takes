@@ -21,36 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqPlain;
-import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TsRegex}.
+ * Test case for {@link RsTextTest}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class TsRegexTest {
+public final class RsTextTest {
 
     /**
-     * TsRegex can dispatch by regular expression.
+     * RsTextTest can build a plain text response.
      * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws Exception {
+    public void makesPlainTextResponse() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
-            new RsPrint(
-                new TsRegex().with("/[a-z]+", body).take(
-                    new RqPlain("GET", "/hey", "")
-                ).print()
-            ).print(),
+            new RsPrint(new RsText(body)).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",

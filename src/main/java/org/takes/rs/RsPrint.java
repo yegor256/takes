@@ -91,7 +91,7 @@ public final class RsPrint implements Response {
         final InputStream body = this.body();
         final Writer writer = new OutputStreamWriter(output, this.encoding);
         try {
-            final String eol = "\n\r";
+            final String eol = "\r\n";
             for (final String line : this.head()) {
                 writer.append(line);
                 writer.append(eol);
