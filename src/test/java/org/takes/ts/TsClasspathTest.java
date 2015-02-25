@@ -21,39 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.ts;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Takes;
+import org.takes.rq.RqPlain;
+import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link RsTextTest}.
+ * Test case for {@link TsClasspath}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RsTextTest {
+public final class TsClasspathTest {
 
     /**
-     * RsTextTest can build a plain text response.
+     * TsClasspath can dispatch by resource name.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void dispatchesByResourceName() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(new RsText(body)).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            new RsPrint(
+                new TsClasspath().take(
+                    new RqPlain(
+                        "GET", "/org/takes/ts/TsClasspathTest.class", ""
+                    )
+                ).print()
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 200 OK")
+        );
+    }
+
+    /**
+     * TsClasspath can throw when resource not found.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = Takes.NotFoundException.class)
+    public void throwsWhenResourceNotFound() throws IOException {
+        new TsClasspath().take(
+            new RqPlain("PUT", "/something-else", "")
         );
     }
 

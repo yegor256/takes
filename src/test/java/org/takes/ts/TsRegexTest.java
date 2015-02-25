@@ -24,6 +24,7 @@
 package org.takes.ts;
 
 import com.google.common.base.Joiner;
+import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,10 +41,10 @@ public final class TsRegexTest {
 
     /**
      * TsRegex can dispatch by regular expression.
-     * @throws Exception If some problem inside
+     * @throws IOException If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws Exception {
+    public void dispatchesByRegularExpression() throws IOException {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(

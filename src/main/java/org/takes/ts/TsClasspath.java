@@ -50,6 +50,25 @@ public final class TsClasspath implements Takes {
 
     /**
      * Ctor.
+     */
+    public TsClasspath() {
+        this("");
+    }
+
+    /**
+     * Ctor.
+     * @param base Base class
+     */
+    public TsClasspath(final Class<?> base) {
+        this(
+            String.format(
+                "/%s", base.getPackage().getName().replace(".", "/")
+            )
+        );
+    }
+
+    /**
+     * Ctor.
      * @param pfx Prefix
      */
     public TsClasspath(final String pfx) {

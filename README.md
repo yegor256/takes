@@ -123,7 +123,7 @@ public final class App {
         .with("/", new TkIndex())
         .with(
           "/xsl/.*",
-          new TkContentType(new TkClasspath(), "text/xsl")
+          new TsContentType(new TsClasspath(), "text/xsl")
         )
         .with(
           "/account",
@@ -233,16 +233,16 @@ classes for that:
 ```java
 new TakesServer(
   new TsRegex()
-    .with("/css/.+", new TkContentType(new TkClasspath(), "text/css"))
-    .with("/data/.+", new TkFiles(new File("/usr/local/data"))
+    .with("/css/.+", new TsContentType(new TsClasspath(), "text/css"))
+    .with("/data/.+", new TsFiles(new File("/usr/local/data"))
 ).listen(8080);
 ```
 
-Class `TkClasspath` takes static part of the request URI and finds a resource with this name in classpath.
+Class `TsClasspath` takes static part of the request URI and finds a resource with this name in classpath.
 
-`TkFiles` just looks by file name in the directory configured.
+`TsFiles` just looks by file name in the directory configured.
 
-`TkContentType` sets content type of all responses coming out of the decorated take.
+`TsContentType` sets content type of all responses coming out of the decorated takes.
 
 ## Hit Refresh Debugging
 
@@ -257,12 +257,12 @@ new TakesServer(
   new TsRegex()
     .with(
       "/css/.+",
-      new TkContentType(
-        new TkHitRefresh(
+      new TsContentType(
+        new TsHitRefresh(
           "./target/classes/foo", // where to get fresh files
           "./src/main/resources/foo/scss/**", // what sources to watch
           "mvn sass:compile", // what to run when sources are modified
-          new TkClasspath()
+          new TsClasspath()
         ),
         "text/css"
       )
@@ -270,7 +270,7 @@ new TakesServer(
 ).listen(8080);
 ```
 
-This `TkHitRefresh` take is a decorator of another take. Once it sees `X-Takes-
+This `TsHitRefresh` take is a decorator of another takes. Once it sees `X-Takes-
 Refresh` header in the request, it realizes that the server is running in "hit-
 refresh" mode and doesn't pass the request to the encapsulated take. Instead, it
 tries to understand whether any of the resources are older than compiled files.
