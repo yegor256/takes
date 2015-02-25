@@ -24,18 +24,19 @@
 package org.takes;
 
 /**
- * Take.
+ * Takes.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+public interface Takes {
 
     /**
-     * Print itself.
-     * @return Response
+     * Dispatch this request.
+     * @param request The request to dispatch
+     * @return Take to process
      */
-    Response print();
+    Take take(Request request);
 
 }

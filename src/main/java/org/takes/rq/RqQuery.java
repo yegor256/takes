@@ -21,21 +21,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rq;
+
+import java.io.InputStream;
+import java.net.URI;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
 
 /**
- * Take.
+ * Request decorator, for HTTP URI query parsing.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = { "origin", "uri" })
+public final class RqQuery implements Request {
 
     /**
-     * Print itself.
-     * @return Response
+     * Original request.
      */
-    Response print();
+    private final transient Request origin;
+
+    /**
+     * HTTP resource requested.
+     */
+    private final transient URI uri;
+
+    /**
+     * Ctor.
+     * @param req Original request
+     */
+    public RqQuery(final Request req) {
+        this.origin = req;
+        final String line = req.head().get(0);
+        final String[] parts = line.split(" ", 3);
+        this.uri = URI.create(parts[1]);
+    }
+
+    /**
+     * Get query.
+     * @return HTTP query
+     */
+    public URI query() {
+        return this.uri;
+    }
+
+    @Override
+    public List<String> head() {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() {
+        return this.origin.body();
+    }
 
 }

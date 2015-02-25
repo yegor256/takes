@@ -21,21 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rs;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Take.
+ * Empty response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode
+public final class RsEmpty implements Response {
 
-    /**
-     * Print itself.
-     * @return Response
-     */
-    Response print();
+    @Override
+    public List<String> head() {
+        return Collections.singletonList("HTTP/1.1 200 OK");
+    }
 
+    @Override
+    public InputStream body() {
+        return new ByteArrayInputStream(new byte[0]);
+    }
 }

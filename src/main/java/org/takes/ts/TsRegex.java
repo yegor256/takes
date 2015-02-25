@@ -1,0 +1,130 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Yegor Bugayenko
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package org.takes.ts;
+
+import java.net.URI;
+import java.util.Collections;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqQuery;
+import org.takes.tk.TkText;
+
+/**
+ * Regex-based takes.
+ *
+ * @author Yegor Bugayenko (yegor@teamed.io)
+ * @version $Id$
+ * @since 0.1
+ */
+@EqualsAndHashCode(of = "map")
+public final class TsRegex implements Takes {
+
+    /**
+     * Patterns and their respective takes.
+     */
+    private final transient Map<Pattern, Takes> map;
+
+    /**
+     * Ctor.
+     */
+    public TsRegex() {
+        this(Collections.<Pattern, Takes>emptyMap());
+    }
+
+    /**
+     * Ctor.
+     * @param tks Map of takes
+     */
+    public TsRegex(final Map<Pattern, Takes> tks) {
+        this.map = Collections.unmodifiableMap(tks);
+    }
+
+    @Override
+    public Take take(final Request request) {
+        final URI uri = new RqQuery(request).query();
+        final String path = uri.getPath();
+        Takes found = null;
+        for (final Map.Entry<Pattern, Takes> ent : this.map.entrySet()) {
+            if (ent.getKey().matcher(path).matches()) {
+                found = ent.getValue();
+                break;
+            }
+        }
+        if (found == null) {
+            throw new IllegalArgumentException("not found");
+        }
+        return found.take(request);
+    }
+
+    /**
+     * With this new take.
+     * @param regex Regular expression
+     * @param text Plain text content
+     * @return New takes
+     */
+    public TsRegex with(final String regex, final String text) {
+        return this.with(regex, new TkText(text));
+    }
+
+    /**
+     * With this new take.
+     * @param regex Regular expression
+     * @param take The take
+     * @return New takes
+     */
+    public TsRegex with(final String regex, final Take take) {
+        return this.with(Pattern.compile(regex), take);
+    }
+
+    /**
+     * With this new take.
+     * @param regex Regular expression
+     * @param take The take
+     * @return New takes
+     */
+    public TsRegex with(final Pattern regex, final Take take) {
+        return this.with(regex, new TsFixed(take));
+    }
+
+    /**
+     * With this new take.
+     * @param regex Regular expression
+     * @param takes The takes
+     * @return New takes
+     */
+    public TsRegex with(final Pattern regex, final Takes takes) {
+        final ConcurrentMap<Pattern, Takes> tks =
+            new ConcurrentHashMap<Pattern, Takes>(this.map.size() + 1);
+        tks.putAll(this.map);
+        tks.put(regex, takes);
+        return new TsRegex(tks);
+    }
+
+}

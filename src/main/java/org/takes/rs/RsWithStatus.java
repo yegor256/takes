@@ -21,21 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rs;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Take.
+ * Response decorator, with status code.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = { "origin", "status" })
+public final class RsWithStatus implements Response {
 
     /**
-     * Print itself.
-     * @return Response
+     * Original response.
      */
-    Response print();
+    private final transient Response origin;
 
+    /**
+     * Status code.
+     */
+    private final transient int status;
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param code Status code
+     */
+    public RsWithStatus(final Response res, final int code) {
+        this.origin = res;
+        this.status = code;
+    }
+
+    @Override
+    public List<String> head() {
+        final List<String> list = this.origin.head();
+        final List<String> head = new ArrayList<String>(list.size());
+        head.add(String.format("HTTP/1.1 %d OK", this.status));
+        head.addAll(list.subList(1, list.size()));
+        return head;
+    }
+
+    @Override
+    public InputStream body() {
+        return this.origin.body();
+    }
 }

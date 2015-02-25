@@ -23,19 +23,28 @@
  */
 package org.takes;
 
+import java.io.InputStream;
+import java.util.List;
+
 /**
- * Take.
+ * HTTP request.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+public interface Request {
 
     /**
-     * Print itself.
-     * @return Response
+     * All lines above the body.
+     * @return List of lines
      */
-    Response print();
+    List<String> head();
+
+    /**
+     * HTTP request body.
+     * @return Stream with body
+     */
+    InputStream body();
 
 }

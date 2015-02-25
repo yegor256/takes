@@ -21,21 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
+
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
 
 /**
- * Take.
+ * Takes with a fixed take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = "tke")
+public final class TsFixed implements Takes {
 
     /**
-     * Print itself.
-     * @return Response
+     * Take to return.
      */
-    Response print();
+    private final transient Take tke;
+
+    /**
+     * Ctor.
+     * @param take Take
+     */
+    public TsFixed(final Take take) {
+        this.tke = take;
+    }
+
+    @Override
+    public Take take(final Request request) {
+        return this.tke;
+    }
 
 }

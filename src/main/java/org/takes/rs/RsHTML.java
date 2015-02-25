@@ -21,21 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rs;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Take.
+ * HTML response decorator.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = "origin")
+public final class RsHTML implements Response {
 
     /**
-     * Print itself.
-     * @return Response
+     * Original response.
      */
-    Response print();
+    private final transient Response origin;
 
+    /**
+     * Ctor.
+     * @param body HTML body
+     */
+    public RsHTML(final String body) {
+        this(new RsEmpty(), body);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body HTML body
+     */
+    public RsHTML(final Response res, final String body) {
+        this.origin = new RsWithBody(
+            new RsWithHeader(
+                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                "Content-Type", "text/html"
+            ),
+            body
+        );
+    }
+
+    @Override
+    public List<String> head() {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() {
+        return this.origin.body();
+    }
 }

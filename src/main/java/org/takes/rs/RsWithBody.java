@@ -21,21 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rs;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Take.
+ * Response decorator, with body.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = { "origin", "content" })
+public final class RsWithBody implements Response {
 
     /**
-     * Print itself.
-     * @return Response
+     * Original response.
      */
-    Response print();
+    private final transient Response origin;
 
+    /**
+     * Content.
+     */
+    private final transient byte[] content;
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body Body
+     */
+    public RsWithBody(final Response res, final String body) {
+        this.origin = res;
+        try {
+            this.content = body.getBytes("UTF-8");
+        } catch (final UnsupportedEncodingException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    @Override
+    public List<String> head() {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() {
+        return new ByteArrayInputStream(this.content);
+    }
 }

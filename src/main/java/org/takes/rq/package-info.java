@@ -21,21 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
 
 /**
- * Take.
+ * Requests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
-
-    /**
-     * Print itself.
-     * @return Response
-     */
-    Response print();
-
-}
+package org.takes.rq;

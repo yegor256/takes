@@ -21,21 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
+
+import com.google.common.base.Joiner;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqPlain;
+import org.takes.rs.RsPrint;
 
 /**
- * Take.
- *
+ * Test case for {@link TsRegex}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+public final class TsRegexTest {
 
     /**
-     * Print itself.
-     * @return Response
+     * TsRegex can dispatch by regular expression.
+     * @throws Exception If some problem inside
      */
-    Response print();
+    @Test
+    public void dispatchesByRegularExpression() throws Exception {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsRegex().with("/[a-z]+", body).take(
+                    new RqPlain("GET", "/hey", "")
+                ).print()
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\n\r").join(
+                    "HTTP/1.1 200 OK",
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
+    }
 
 }

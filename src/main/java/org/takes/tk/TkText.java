@@ -21,21 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.tk;
+
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsText;
 
 /**
- * Take.
+ * Plain text take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Take {
+@EqualsAndHashCode(of = "text")
+public final class TkText implements Take {
 
     /**
-     * Print itself.
-     * @return Response
+     * Text.
      */
-    Response print();
+    private final transient String text;
 
+    /**
+     * Ctor.
+     * @param txt Text
+     */
+    public TkText(final String txt) {
+        this.text = txt;
+    }
+
+    @Override
+    public Response print() {
+        return new RsText(this.text);
+    }
 }
