@@ -93,12 +93,12 @@ public final class RsXSLT implements Response {
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() {
+    public InputStream body() throws IOException {
         try {
             final TransformerFactory factory = TransformerFactory.newInstance();
             factory.setURIResolver(this.resolver);

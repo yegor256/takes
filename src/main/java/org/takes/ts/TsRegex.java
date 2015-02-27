@@ -178,11 +178,11 @@ public final class TsRegex implements Takes {
                 return matcher;
             }
             @Override
-            public List<String> head() {
+            public List<String> head() throws IOException {
                 return req.head();
             }
             @Override
-            public InputStream body() {
+            public InputStream body() throws IOException {
                 return req.body();
             }
         };

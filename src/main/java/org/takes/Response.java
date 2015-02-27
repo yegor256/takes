@@ -23,6 +23,7 @@
  */
 package org.takes;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -38,13 +39,15 @@ public interface Response {
     /**
      * HTTP response head.
      * @return Lines in HTTP response head
+     * @throws IOException If something goes wrong
      */
-    List<String> head();
+    List<String> head() throws IOException;
 
     /**
      * HTTP response body.
      * @return Stream with body
+     * @throws IOException If something goes wrong
      */
-    InputStream body();
+    InputStream body() throws IOException;
 
 }

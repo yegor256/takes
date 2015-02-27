@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
@@ -50,36 +51,21 @@ public final class RqHeaders implements Request {
     private final transient Request origin;
 
     /**
-     * Map of all headers.
-     */
-    private final transient Map<String, List<String>> map;
-
-    /**
      * Ctor.
      * @param req Original request
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public RqHeaders(final Request req) {
         this.origin = req;
-        final List<String> head = req.head();
-        this.map = new HashMap<String, List<String>>(head.size());
-        for (final String line : head.subList(0, head.size())) {
-            final String[] parts = line.split(":", 2);
-            final String key = parts[0].toLowerCase(Locale.ENGLISH);
-            if (!this.map.containsKey(key)) {
-                this.map.put(key, new LinkedList<String>());
-            }
-            this.map.get(key).add(parts[1]);
-        }
     }
 
     /**
      * Get single header.
      * @param key Header name
      * @return List of values (can be empty)
+     * @throws IOException If fails
      */
-    public List<String> header(final String key) {
-        List<String> values = this.map.get(
+    public List<String> header(final String key) throws IOException {
+        List<String> values = this.map().get(
             key.toLowerCase(Locale.ENGLISH)
         );
         if (values == null) {
@@ -91,19 +77,41 @@ public final class RqHeaders implements Request {
     /**
      * Get all header names.
      * @return All names
+     * @throws IOException If fails
      */
-    public Collection<String> headers() {
-        return this.map.keySet();
+    public Collection<String> headers() throws IOException {
+        return this.map().keySet();
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() {
+    public InputStream body() throws IOException {
         return this.origin.body();
+    }
+
+    /**
+     * Parse them all in a map.
+     * @return Map of them
+     * @throws IOException If fails
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private Map<String, List<String>> map() throws IOException {
+        final List<String> head = this.origin.head();
+        final Map<String, List<String>> map =
+            new HashMap<String, List<String>>(head.size());
+        for (final String line : head.subList(0, head.size())) {
+            final String[] parts = line.split(":", 2);
+            final String key = parts[0].toLowerCase(Locale.ENGLISH);
+            if (!map.containsKey(key)) {
+                map.put(key, new LinkedList<String>());
+            }
+            map.get(key).add(parts[1]);
+        }
+        return map;
     }
 
 }

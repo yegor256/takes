@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
@@ -36,7 +37,7 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "mtd" })
+@EqualsAndHashCode(of = "origin")
 public final class RqMethod implements Request {
 
     /**
@@ -81,36 +82,31 @@ public final class RqMethod implements Request {
     private final transient Request origin;
 
     /**
-     * HTTP method.
-     */
-    private final transient String mtd;
-
-    /**
      * Ctor.
      * @param req Original request
      */
     public RqMethod(final Request req) {
         this.origin = req;
-        final String line = req.head().get(0);
-        final String[] parts = line.split(" ", 2);
-        this.mtd = parts[0].toUpperCase(Locale.ENGLISH);
     }
 
     /**
      * Get method.
      * @return HTTP method
+     * @throws IOException If fails
      */
-    public String method() {
-        return this.mtd;
+    public String method() throws IOException {
+        final String line = this.origin.head().get(0);
+        final String[] parts = line.split(" ", 2);
+        return parts[0].toUpperCase(Locale.ENGLISH);
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() {
+    public InputStream body() throws IOException {
         return this.origin.body();
     }
 

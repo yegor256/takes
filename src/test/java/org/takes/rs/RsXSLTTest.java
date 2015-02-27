@@ -44,7 +44,7 @@ import org.junit.Test;
 public final class RsXSLTTest {
 
     /**
-     * RsXSLTTest can convert XML to HTML.
+     * RsXSLT can convert XML to HTML.
      * @throws IOException If some problem inside
      */
     @Test
@@ -78,7 +78,7 @@ public final class RsXSLTTest {
     }
 
     /**
-     * RsXSLTTest can convert XML to plain text.
+     * RsXSLT can convert XML to plain text.
      * @throws IOException If some problem inside
      */
     @Test

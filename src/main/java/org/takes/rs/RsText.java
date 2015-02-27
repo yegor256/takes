@@ -24,6 +24,7 @@
 package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -103,12 +104,12 @@ public final class RsText implements Response {
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() {
+    public InputStream body() throws IOException {
         return this.origin.body();
     }
 }

@@ -21,83 +21,82 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rs;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.List;
+import javax.json.Json;
+import javax.json.JsonStructure;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.takes.Response;
 
 /**
- * Request decorator, for plain text operations.
+ * Response that converts Java object to JSON.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "encoding" })
-public final class RqText implements Request {
+@EqualsAndHashCode(of = "source")
+public final class RsJSON implements Response {
 
     /**
-     * Original request.
+     * JSON source.
      */
-    private final transient Request origin;
-
-    /**
-     * Default encoding.
-     */
-    private final transient String encoding;
+    private final transient RsJSON.Source source;
 
     /**
      * Ctor.
-     * @param req Original request
+     * @param json JSON object
      */
-    public RqText(final Request req) {
-        this(req, "UTF-8");
+    public RsJSON(final JsonStructure json) {
+        this(
+            new RsJSON.Source() {
+                @Override
+                public JsonStructure toJSON() {
+                    return json;
+                }
+            }
+        );
     }
 
     /**
      * Ctor.
-     * @param req Original request
-     * @param enc Default encoding
+     * @param src Source
      */
-    public RqText(final Request req, final String enc) {
-        this.origin = req;
-        this.encoding = enc;
+    public RsJSON(final RsJSON.Source src) {
+        this.source = src;
     }
 
     @Override
     public List<String> head() throws IOException {
-        return this.origin.head();
+        return new RsWithHeader(
+            new RsWithStatus(new RsEmpty(), HttpURLConnection.HTTP_OK),
+            "Content-Type", "application/json"
+        ).head();
     }
 
     @Override
     public InputStream body() throws IOException {
-        return this.origin.body();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Json.createWriter(baos).write(this.source.toJSON());
+        return new ByteArrayInputStream(baos.toByteArray());
     }
 
     /**
-     * Read body as string.
-     * @return Text body
-     * @throws IOException If fails
+     * Source with JSON.
      */
-    public String text() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final InputStream input = this.body();
-        try {
-            while (true) {
-                final int data = input.read();
-                if (data < 0) {
-                    break;
-                }
-                baos.write(data);
-            }
-            return new String(baos.toByteArray(), this.encoding);
-        } finally {
-            input.close();
-        }
+    public interface Source {
+        /**
+         * Get JSON value.
+         * @return JSON
+         * @throws IOException If fails
+         */
+        JsonStructure toJSON() throws IOException;
     }
 
 }

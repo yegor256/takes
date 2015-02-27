@@ -21,57 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rs;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import javax.json.Json;
+import javax.json.JsonStructure;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Request decorator, for HTTP URI query parsing.
- *
+ * Test case for {@link RsJSON}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqQuery implements Request {
+public final class RsJSONTest {
 
     /**
-     * Original request.
+     * RsJSON can build JSON response.
+     * @throws IOException If some problem inside
      */
-    private final transient Request origin;
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqQuery(final Request req) {
-        this.origin = req;
-    }
-
-    /**
-     * Get query.
-     * @return HTTP query
-     * @throws IOException If fails
-     */
-    public URI query() throws IOException {
-        final String line = this.origin.head().get(0);
-        final String[] parts = line.split(" ", 3);
-        return URI.create(parts[1]);
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+    @Test
+    public void buildsJsonResponse() throws IOException {
+        final String key = "name";
+        final JsonStructure json = Json.createObjectBuilder()
+            .add(key, "Jeffrey Lebowski")
+            .build();
+        MatcherAssert.assertThat(
+            Json.createReader(
+                new RsJSON(json).body()
+            ).readObject().getString(key),
+            Matchers.startsWith("Jeffrey")
+        );
     }
 
 }

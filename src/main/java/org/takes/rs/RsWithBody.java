@@ -24,6 +24,7 @@
 package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -87,7 +88,7 @@ public final class RsWithBody implements Response {
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         return this.origin.head();
     }
 

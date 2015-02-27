@@ -23,6 +23,7 @@
  */
 package org.takes.rs;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public final class RsWithStatus implements Response {
     }
 
     @Override
-    public List<String> head() {
+    public List<String> head() throws IOException {
         final List<String> list = this.origin.head();
         final List<String> head = new ArrayList<String>(list.size());
         head.add(String.format("HTTP/1.1 %d OK", this.status));
@@ -69,7 +70,7 @@ public final class RsWithStatus implements Response {
     }
 
     @Override
-    public InputStream body() {
+    public InputStream body() throws IOException {
         return this.origin.body();
     }
 }
