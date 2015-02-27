@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rs.RsText;
+import org.takes.rs.RsXSLT;
 
 /**
  * Directory take.
@@ -59,9 +61,7 @@ final class TkDir implements Take {
 
     @Override
     public Response print() throws IOException {
-        assert this.home != null;
-        assert this.path != null;
-        throw new UnsupportedOperationException("#print()");
+        return new RsXSLT(new RsText(""));
     }
 
 }
