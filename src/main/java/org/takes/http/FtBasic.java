@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Takes;
 
 /**
- * Server.
+ * Basic front.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$

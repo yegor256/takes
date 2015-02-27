@@ -28,9 +28,7 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ServerSocket;
-import java.util.concurrent.TimeUnit;
-import org.hamcrest.MatcherAssert;
+import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.ts.TsRegex;
@@ -50,49 +48,22 @@ public final class FtBasicTest {
      */
     @Test
     public void justWorks() throws Exception {
-        final Front server = new FtBasic(
+        final Front front = new FtBasic(
             new TsRegex().with("/", "hello, world!"), 1
         );
-        final int port = FtBasicTest.port();
-        final Thread thread = new Thread(
-            new Runnable() {
+        new FtRemote(front).exec(
+            new FtRemote.Script() {
                 @Override
-                public void run() {
-                    try {
-                        server.listen(port);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .through(VerboseWire.class)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.startsWith("hello"));
                 }
             }
         );
-        thread.start();
-        TimeUnit.SECONDS.sleep(1L);
-        MatcherAssert.assertThat(
-            new JdkRequest(String.format("http://localhost:%d", port))
-                .through(VerboseWire.class)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .body(),
-            Matchers.startsWith("hello")
-        );
-        thread.interrupt();
-    }
-
-    /**
-     * Reserve new TCP port.
-     * @return Reserved port.
-     * @throws IOException If fails
-     */
-    public static int port() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
-            socket.setReuseAddress(true);
-            return socket.getLocalPort();
-        } finally {
-            socket.close();
-        }
     }
 
 }
