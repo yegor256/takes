@@ -23,49 +23,38 @@
  */
 package org.takes.rs.xe;
 
-import com.jcabi.matchers.XhtmlMatchers;
-import java.io.IOException;
-import org.apache.commons.io.IOUtils;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
- * Test case for {@link RsXembly}.
+ * Xembly source to create an XSL stylesheet processing instruction.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RsXemblyTest {
+@EqualsAndHashCode(of = "name")
+public final class XeStylesheet implements RsXembly.Source {
 
     /**
-     * RsXembly can build XML response.
-     * @throws IOException If some problem inside
+     * Name of XSL stylesheet.
      */
-    @Test
-    public void buildsXmlResponse() throws IOException {
-        MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeStylesheet("/a.xsl"),
-                    new XeRoot("root"),
-                    new XeMillis(false),
-                    new RsXembly.Source() {
-                        @Override
-                        public Iterable<Directive> toXembly() {
-                            return new Directives().xpath("/root").add("hey");
-                        }
-                    },
-                    new XeMillis(true)
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/hey",
-                "/root/millis",
-                "/processing-instruction('xml-stylesheet')[contains(.,'/a')]"
-            )
-        );
+    private final transient String name;
+
+    /**
+     * Ctor.
+     * @param xsl XSL stylesheet
+     */
+    public XeStylesheet(final String xsl) {
+        this.name = xsl;
     }
 
+    @Override
+    public Iterable<Directive> toXembly() {
+        return new Directives().pi(
+            "xml-stylesheet",
+            String.format("href='%s' type='text/xsl'", this.name)
+        );
+    }
 }
