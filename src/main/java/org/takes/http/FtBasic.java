@@ -89,43 +89,40 @@ public final class FtBasic implements Front {
     }
 
     @Override
-    public void listen(final int port) throws IOException {
+    public void listen(final int port, final Exit exit) throws IOException {
         final ScheduledExecutorService service =
             Executors.newScheduledThreadPool(this.threads);
         final ServerSocket server = new ServerSocket(port);
         final Runnable proc = new Runnable() {
             @Override
             public void run() {
-                FtBasic.this.accept(server);
+                try {
+                    final Socket socket = server.accept();
+                    try {
+                        FtBasic.this.back.accept(socket);
+                    } finally {
+                        socket.close();
+                    }
+                } catch (final IOException ex) {
+                    assert ex != null;
+                }
             }
         };
         for (int idx = 0; idx < this.threads; ++idx) {
             service.scheduleWithFixedDelay(proc, 1L, 1L, TimeUnit.NANOSECONDS);
         }
         try {
-            TimeUnit.SECONDS.sleep(Long.MAX_VALUE);
-        } catch (final InterruptedException ex) {
-            Thread.currentThread().interrupt();
-            throw new IllegalStateException(ex);
-        } finally {
-            server.close();
-        }
-    }
-
-    /**
-     * Accept new connection.
-     * @param server Server socket
-     */
-    private void accept(final ServerSocket server) {
-        try {
-            final Socket socket = server.accept();
-            try {
-                this.back.accept(socket);
-            } finally {
-                socket.close();
+            while (!exit.ready()) {
+                try {
+                    TimeUnit.SECONDS.sleep(1L);
+                } catch (final InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    throw new IllegalStateException(ex);
+                }
             }
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+        } finally {
+            service.shutdown();
+            server.close();
         }
     }
 

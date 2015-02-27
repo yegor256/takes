@@ -25,10 +25,14 @@ package org.takes.http;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +41,8 @@ import org.takes.Response;
 import org.takes.Takes;
 import org.takes.rq.RqPlain;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
+import org.takes.rs.RsWithStatus;
 
 /**
  * Basic back-end.
@@ -78,15 +84,35 @@ public final class BkBasic implements Back {
             }
             head.add(line);
         }
-        final Response response = this.takes.take(
-            new RqPlain(head, input)
-        ).print();
         final OutputStream output = socket.getOutputStream();
         try {
-            new RsPrint(response).print(output);
+            new RsPrint(
+                this.takes.take(
+                    new RqPlain(head, input)
+                ).print()
+            ).print(output);
+        } catch (final Throwable ex) {
+            new RsPrint(BkBasic.failure(ex)).print(output);
         } finally {
             output.close();
+            input.close();
         }
+    }
+
+    /**
+     * Make a failure response.
+     * @param err Error
+     * @return Response
+     */
+    private static Response failure(final Throwable err) {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final PrintWriter writer = new PrintWriter(baos);
+        err.printStackTrace(writer);
+        writer.close();
+        return new RsWithStatus(
+            new RsText(new ByteArrayInputStream(baos.toByteArray())),
+            HttpURLConnection.HTTP_INTERNAL_ERROR
+        );
     }
 
 }

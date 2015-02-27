@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.ts.TsFailure;
 import org.takes.ts.TsRegex;
 
 /**
@@ -43,7 +44,7 @@ import org.takes.ts.TsRegex;
 public final class FtBasicTest {
 
     /**
-     * TakesServer can work.
+     * FtBasic can work.
      * @throws Exception If some problem inside
      */
     @Test
@@ -61,6 +62,30 @@ public final class FtBasicTest {
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK)
                         .assertBody(Matchers.startsWith("hello"));
+                }
+            }
+        );
+    }
+
+    /**
+     * FtBasic can work with a broken back.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void gracefullyHandlesBrokenBack() throws Exception {
+        final Front front = new FtBasic(
+            new BkBasic(new TsFailure("Jeffrey Lebowski")), 1
+        );
+        new FtRemote(front).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .through(VerboseWire.class)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
+                        .assertBody(Matchers.containsString("Lebowski"));
                 }
             }
         );

@@ -29,6 +29,7 @@ import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.http.FtBasic;
+import org.takes.http.FtDaemon;
 import org.takes.rq.RqRegex;
 import org.takes.tk.TkHTML;
 import org.takes.tk.TkRedirect;
@@ -62,8 +63,10 @@ public final class App implements Takes {
      * @throws IOException If fails
      */
     public static void main(final String... args) throws IOException {
-        new FtBasic(
-            new App(new File(System.getProperty("user.dir")))
+        new FtDaemon(
+            new FtBasic(
+                new App(new File(System.getProperty("user.dir")))
+            )
         ).listen(Integer.parseInt(args[0]));
     }
 

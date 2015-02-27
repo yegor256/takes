@@ -26,6 +26,7 @@ package org.takes.http;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URI;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -53,8 +54,8 @@ public final class FtRemote implements Front {
     }
 
     @Override
-    public void listen(final int port) throws IOException {
-        this.origin.listen(port);
+    public void listen(final int port, final Exit exit) throws IOException {
+        this.origin.listen(port, exit);
     }
 
     /**
@@ -64,12 +65,21 @@ public final class FtRemote implements Front {
      */
     public void exec(final FtRemote.Script script) throws IOException {
         final int port = FtRemote.port();
+        final AtomicBoolean exit = new AtomicBoolean();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        FtRemote.this.listen(port);
+                        FtRemote.this.listen(
+                            port,
+                            new Exit() {
+                                @Override
+                                public boolean ready() {
+                                    return exit.get();
+                                }
+                            }
+                        );
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }
@@ -78,7 +88,13 @@ public final class FtRemote implements Front {
         );
         thread.start();
         script.exec(URI.create(String.format("http://localhost:%d", port)));
-        thread.interrupt();
+        exit.set(true);
+        try {
+            thread.join();
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(ex);
+        }
     }
 
     /**

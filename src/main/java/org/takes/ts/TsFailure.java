@@ -21,25 +21,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.http;
+package org.takes.ts;
 
-import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
 
 /**
- * HTTP front.
+ * Takes that always fails.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Front {
+@EqualsAndHashCode(of = "error")
+public final class TsFailure implements Takes {
 
     /**
-     * Listen to this port.
-     * @param port Port number
-     * @param exit Exit
-     * @throws IOException If fails
+     * Exception to throw.
      */
-    void listen(int port, Exit exit) throws IOException;
+    private final transient RuntimeException error;
+
+    /**
+     * Ctor.
+     */
+    public TsFailure() {
+        this("intentional failure");
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     */
+    public TsFailure(final String err) {
+        this(new IllegalStateException(err));
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     */
+    public TsFailure(final RuntimeException err) {
+        this.error = err;
+    }
+
+    @Override
+    public Take take(final Request request) {
+        throw this.error;
+    }
 
 }

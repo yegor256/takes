@@ -23,23 +23,19 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
-
 /**
- * HTTP front.
+ * HTTP front exit.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Front {
+public interface Exit {
 
     /**
-     * Listen to this port.
-     * @param port Port number
-     * @param exit Exit
-     * @throws IOException If fails
+     * Ready to exit?
+     * @return TRUE if Front should stop
      */
-    void listen(int port, Exit exit) throws IOException;
+    boolean ready();
 
 }

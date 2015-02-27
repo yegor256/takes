@@ -24,22 +24,51 @@
 package org.takes.http;
 
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
 
 /**
- * HTTP front.
+ * Front running as a daemon, forever.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Front {
+@EqualsAndHashCode(of = "origin")
+public final class FtDaemon implements Front {
 
     /**
-     * Listen to this port.
-     * @param port Port number
-     * @param exit Exit
+     * Origin.
+     */
+    private final transient Front origin;
+
+    /**
+     * Ctor.
+     * @param front Front
+     */
+    public FtDaemon(final Front front) {
+        this.origin = front;
+    }
+
+    @Override
+    public void listen(final int port, final Exit exit) throws IOException {
+        this.origin.listen(port, exit);
+    }
+
+    /**
+     * Listen here, forever.
+     * @param port The port
      * @throws IOException If fails
      */
-    void listen(int port, Exit exit) throws IOException;
+    public void listen(final int port) throws IOException {
+        this.listen(
+            port,
+            new Exit() {
+                @Override
+                public boolean ready() {
+                    return false;
+                }
+            }
+        );
+    }
 
 }

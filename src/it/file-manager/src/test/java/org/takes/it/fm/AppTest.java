@@ -29,15 +29,14 @@ import com.jcabi.http.wire.VerboseWire;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ServerSocket;
-import java.util.concurrent.TimeUnit;
+import java.net.URI;
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.http.FtBasic;
+import org.takes.http.FtRemote;
 
 /**
  * Test case for {@link org.takes.http.FtBasic}.
@@ -63,47 +62,19 @@ public final class AppTest {
     public void justWorks() throws Exception {
         final File dir = this.temp.newFolder();
         FileUtils.write(new File(dir, "hello.txt"), "hello, world!");
-        final FtBasic server = new FtBasic(new App(dir), 1);
-        final int port = AppTest.port();
-        final Thread thread = new Thread(
-            new Runnable() {
+        new FtRemote(new FtBasic(new App(dir), 1)).exec(
+            new FtRemote.Script() {
                 @Override
-                public void run() {
-                    try {
-                        server.listen(port);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .through(VerboseWire.class)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.containsString("simple demo"));
                 }
             }
         );
-        thread.start();
-        TimeUnit.SECONDS.sleep(1L);
-        MatcherAssert.assertThat(
-            new JdkRequest(String.format("http://localhost:%d/f", port))
-                .through(VerboseWire.class)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .body(),
-            Matchers.containsString("simple demo")
-        );
-        thread.interrupt();
-    }
-
-    /**
-     * Reserve new TCP port.
-     * @return Reserved port.
-     * @throws IOException If fails
-     */
-    public static int port() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
-            socket.setReuseAddress(true);
-            return socket.getLocalPort();
-        } finally {
-            socket.close();
-        }
     }
 
 }
