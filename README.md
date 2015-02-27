@@ -94,11 +94,11 @@ to an HTTP request. Here is how we solve this:
 new TakesServer(
   new TsRegex().with(
     "/file/(?<path>[^/]+)",
-    new Takes() {
+    new TsRegex.Fast() {
       @Override
-      public Take take(final Request request) {
+      public Take take(final RqRegex request) {
         final File file = new File(
-          RqRegex.class.cast(request).matcher().group("path")
+          request.matcher().group("path")
         );
         return new TkHTML(
           FileUtils.readFileToString(file, Charsets.UTF_8)
@@ -109,8 +109,9 @@ new TakesServer(
 ).listen(8080);
 ```
 
-We're casting incoming `Request` to `RqRegex` and retrieving an instance
-of `Matcher` from it.
+We're using `TsRegex.Fast` instead of `Takes`, in order to deal with
+`RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
+of `Matcher` used by `TsRegex` for pattern matching.
 
 Here is a more complex and verbose example:
 
@@ -136,10 +137,10 @@ public final class App {
         )
         .with(
           "/balance/(?<user>[a-z]+)",
-          new Takes() {
+          new TsRegex.Fast() {
             @Override
-            public Take take(final Request request) {
-              return new TkBalance(RqRegex.class.cast(request));
+            public Take take(final RqRegex request) {
+              return new TkBalance(request.matcher().group("user"));
             }
           }
         )
