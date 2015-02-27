@@ -35,7 +35,7 @@ import org.xembly.Directives;
  * @since 0.1
  */
 @EqualsAndHashCode(of = "name")
-public final class XeRoot implements RsXembly.Source {
+public final class XeRoot implements XeSource {
 
     /**
      * Name of root element.

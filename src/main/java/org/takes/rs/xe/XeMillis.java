@@ -35,7 +35,7 @@ import org.xembly.Directives;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "name", "finish" })
-public final class XeMillis implements RsXembly.Source {
+public final class XeMillis implements XeSource {
 
     /**
      * Name of element.

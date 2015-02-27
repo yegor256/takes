@@ -35,7 +35,7 @@ import org.xembly.Directives;
  * @since 0.1
  */
 @EqualsAndHashCode(of = "name")
-public final class XeStylesheet implements RsXembly.Source {
+public final class XeStylesheet implements XeSource {
 
     /**
      * Name of XSL stylesheet.

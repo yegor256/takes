@@ -41,8 +41,6 @@ import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
 import org.w3c.dom.Node;
-import org.xembly.Directive;
-import org.xembly.Directives;
 import org.xembly.Xembler;
 
 /**
@@ -58,13 +56,13 @@ public final class RsXembly implements Response {
     /**
      * Xembly source.
      */
-    private final transient RsXembly.Source source;
+    private final transient XeSource source;
 
     /**
      * Ctor.
      * @param sources Sources
      */
-    public RsXembly(final RsXembly.Source... sources) {
+    public RsXembly(final XeSource... sources) {
         this(Arrays.asList(sources));
     }
 
@@ -72,26 +70,15 @@ public final class RsXembly implements Response {
      * Ctor.
      * @param sources Sources
      */
-    public RsXembly(final Iterable<RsXembly.Source> sources) {
-        this(
-            new RsXembly.Source() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    final Directives dirs = new Directives();
-                    for (final RsXembly.Source src : sources) {
-                        dirs.append(src.toXembly());
-                    }
-                    return dirs;
-                }
-            }
-        );
+    public RsXembly(final Iterable<XeSource> sources) {
+        this(new XeChain(sources));
     }
 
     /**
      * Ctor.
      * @param src Source
      */
-    public RsXembly(final RsXembly.Source src) {
+    public RsXembly(final XeSource src) {
         this.source = src;
     }
 
@@ -116,18 +103,6 @@ public final class RsXembly implements Response {
             throw new IllegalStateException(ex);
         }
         return new ByteArrayInputStream(baos.toByteArray());
-    }
-
-    /**
-     * Source with Xembly.
-     */
-    public interface Source {
-        /**
-         * Get Xembly directives.
-         * @return Directives
-         * @throws IOException If fails
-         */
-        Iterable<Directive> toXembly() throws IOException;
     }
 
 }

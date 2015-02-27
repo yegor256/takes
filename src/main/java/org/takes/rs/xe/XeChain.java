@@ -21,47 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.rs.xe;
 
-import java.io.File;
-import org.takes.Response;
-import org.takes.Take;
+import java.io.IOException;
+import java.util.Arrays;
+import lombok.EqualsAndHashCode;
+import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Directory take.
+ * Chain of sources.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+@EqualsAndHashCode(of = "items")
+public final class XeChain implements XeSource {
 
     /**
-     * Home.
+     * Items.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient Iterable<XeSource> items;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param src Sources
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    public XeChain(final XeSource... src) {
+        this(Arrays.asList(src));
+    }
+
+    /**
+     * Ctor.
+     * @param src Sources
+     */
+    public XeChain(final Iterable<XeSource> src) {
+        this.items = src;
     }
 
     @Override
-    public Response print() {
-        return new RsPage(
-            "/dir.xsl",
-            new Items(new File(this.home, this.path))
-        );
+    public Iterable<Directive> toXembly() throws IOException {
+        final Directives dirs = new Directives();
+        for (final XeSource src : this.items) {
+            dirs.push().append(src.toXembly()).pop();
+        }
+        return dirs;
     }
-
 }

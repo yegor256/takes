@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
@@ -36,13 +36,13 @@ import org.junit.Test;
 import org.takes.ts.TsRegex;
 
 /**
- * Test case for {@link TakesServer}.
+ * Test case for {@link FtBasic}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class TakesServerTest {
+public final class FtBasicTest {
 
     /**
      * TakesServer can work.
@@ -50,10 +50,10 @@ public final class TakesServerTest {
      */
     @Test
     public void justWorks() throws Exception {
-        final TakesServer server = new TakesServer(
+        final Front server = new FtBasic(
             new TsRegex().with("/", "hello, world!"), 1
         );
-        final int port = TakesServerTest.port();
+        final int port = FtBasicTest.port();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override

@@ -31,13 +31,16 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
-import org.takes.TakesServer;
+import org.junit.rules.TemporaryFolder;
+import org.takes.http.FtBasic;
 
 /**
- * Test case for {@link TakesServer}.
+ * Test case for {@link org.takes.http.FtBasic}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -46,14 +49,21 @@ import org.takes.TakesServer;
 public final class AppTest {
 
     /**
+     * Temp directory.
+     * @checkstyle VisibilityModifierCheck (5 lines)
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
+
+    /**
      * App can work.
      * @throws Exception If some problem inside
      */
     @Test
     public void justWorks() throws Exception {
-        final TakesServer server = new TakesServer(
-            new App(new File("/tmp")), 1
-        );
+        final File dir = this.temp.newFolder();
+        FileUtils.write(new File(dir, "hello.txt"), "hello, world!");
+        final FtBasic server = new FtBasic(new App(dir), 1);
         final int port = AppTest.port();
         final Thread thread = new Thread(
             new Runnable() {
@@ -70,7 +80,7 @@ public final class AppTest {
         thread.start();
         TimeUnit.SECONDS.sleep(1L);
         MatcherAssert.assertThat(
-            new JdkRequest(String.format("http://localhost:%d/about", port))
+            new JdkRequest(String.format("http://localhost:%d/f", port))
                 .through(VerboseWire.class)
                 .fetch()
                 .as(RestResponse.class)

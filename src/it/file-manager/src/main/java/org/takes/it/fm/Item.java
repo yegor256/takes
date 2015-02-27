@@ -24,44 +24,39 @@
 package org.takes.it.fm;
 
 import java.io.File;
-import org.takes.Response;
-import org.takes.Take;
+import java.io.IOException;
+import org.takes.rs.xe.XeSource;
+import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Directory take.
+ * Item to show (a file or a dir).
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+final class Item implements XeSource {
 
     /**
-     * Home.
+     * File.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient File file;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param path File path
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    Item(final File path) {
+        this.file = path;
     }
 
     @Override
-    public Response print() {
-        return new RsPage(
-            "/dir.xsl",
-            new Items(new File(this.home, this.path))
-        );
+    public Iterable<Directive> toXembly() throws IOException {
+        final String name = this.file.getName();
+        return new Directives().add("file")
+            .add("name").set(name).up()
+            .add("size").set(Long.toString(this.file.length()));
     }
 
 }

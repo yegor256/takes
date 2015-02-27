@@ -51,7 +51,7 @@ public final class RsXemblyTest {
                     new XeStylesheet("/a.xsl"),
                     new XeRoot("root"),
                     new XeMillis(false),
-                    new RsXembly.Source() {
+                    new XeSource() {
                         @Override
                         public Iterable<Directive> toXembly() {
                             return new Directives().xpath("/root").add("hey");

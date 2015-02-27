@@ -21,47 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
-
-import java.io.File;
-import org.takes.Response;
-import org.takes.Take;
 
 /**
- * Directory take.
+ * Xembly responses, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
-
-    /**
-     * Home.
-     */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
-
-    /**
-     * Ctor.
-     * @param dir Home
-     * @param file Path
-     */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
-    }
-
-    @Override
-    public Response print() {
-        return new RsPage(
-            "/dir.xsl",
-            new Items(new File(this.home, this.path))
-        );
-    }
-
-}
+package org.takes.rs.xe;

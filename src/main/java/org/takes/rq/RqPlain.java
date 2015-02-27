@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -49,7 +48,7 @@ public final class RqPlain implements Request {
     /**
      * Content.
      */
-    private final transient String content;
+    private final transient InputStream content;
 
     /**
      * Ctor.
@@ -72,6 +71,24 @@ public final class RqPlain implements Request {
      * @param body Body
      */
     public RqPlain(final List<String> head, final String body) {
+        this(head, body.getBytes());
+    }
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    public RqPlain(final List<String> head, final byte[] body) {
+        this(head, new ByteArrayInputStream(body));
+    }
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    public RqPlain(final List<String> head, final InputStream body) {
         this.hde = Collections.unmodifiableList(head);
         this.content = body;
     }
@@ -83,11 +100,7 @@ public final class RqPlain implements Request {
 
     @Override
     public InputStream body() {
-        try {
-            return new ByteArrayInputStream(this.content.getBytes("UTF-8"));
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
+        return this.content;
     }
 
 }

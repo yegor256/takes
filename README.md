@@ -33,7 +33,7 @@ This is what is not supported and won't be supported:
 Here it is:
 
 ```java
-import org.takes.TakesServer;
+import org.takes.http.TakesServer;
 import org.takes.TsRegex;
 public final class App {
   public static void main(final String... args) {

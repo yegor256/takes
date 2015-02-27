@@ -28,9 +28,10 @@ import java.io.IOException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.TakesServer;
+import org.takes.http.FtBasic;
 import org.takes.rq.RqRegex;
 import org.takes.tk.TkHTML;
+import org.takes.tk.TkRedirect;
 import org.takes.ts.TsRegex;
 
 /**
@@ -61,7 +62,7 @@ public final class App implements Takes {
      * @throws IOException If fails
      */
     public static void main(final String... args) throws IOException {
-        new TakesServer(
+        new FtBasic(
             new App(new File(System.getProperty("user.dir")))
         ).listen(Integer.parseInt(args[0]));
     }
@@ -69,7 +70,7 @@ public final class App implements Takes {
     @Override
     public Take take(final Request request) throws IOException {
         return new TsRegex()
-            .with("/", new TkIndex())
+            .with("/", new TkRedirect("/f"))
             .with("/about", new TkHTML(App.class.getResource("about.html")))
             .with("/robots.txt", "")
             .with(

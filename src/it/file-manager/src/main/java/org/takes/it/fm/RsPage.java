@@ -23,18 +23,16 @@
  */
 package org.takes.it.fm;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.Iterable;
-import java.lang.Override;
-import java.lang.UnsupportedOperationException;
+import java.io.InputStream;
+import java.util.List;
 import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsText;
 import org.takes.rs.RsXSLT;
 import org.takes.rs.xe.RsXembly;
-import org.xembly.Directive;
+import org.takes.rs.xe.XeMillis;
+import org.takes.rs.xe.XeRoot;
+import org.takes.rs.xe.XeSource;
+import org.takes.rs.xe.XeStylesheet;
 
 /**
  * Response with a page.
@@ -52,27 +50,27 @@ final class RsPage implements Response {
 
     /**
      * Ctor.
-     * @param sources Xembly sources
+     * @param source Xembly source
      */
-    RsPage(final RsXembly.Source... sources) {
-        this.origin = new RsXembly(
-            Iterables.concat(
-                Arrays.asList(
-                    new XeRoot("page"),
-                    new XeMillis(false),
-                ),
-                Arrays.asList(sources)
-                Arrays.asList(
-                    new XeMillis(true),
-                )
+    RsPage(final String xsl, final XeSource source) {
+        this.origin = new RsXSLT(
+            new RsXembly(
+                new XeStylesheet(xsl),
+                new XeRoot("page"),
+                new XeMillis(false),
+                source,
+                new XeMillis(true)
             )
-
         );
     }
 
     @Override
-    public Response print() throws IOException {
-        return this.origin.print();
+    public List<String> head() throws IOException {
+        return this.origin.head();
     }
 
+    @Override
+    public InputStream body() throws IOException {
+        return this.origin.body();
+    }
 }

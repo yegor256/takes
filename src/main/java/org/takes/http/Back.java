@@ -21,47 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.http;
 
-import java.io.File;
-import org.takes.Response;
-import org.takes.Take;
+import java.io.IOException;
+import java.net.Socket;
 
 /**
- * Directory take.
+ * HTTP back.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+public interface Back {
 
     /**
-     * Home.
+     * Accept and dispatch this socket.
+     * @param socket TCP socket with HTTP
+     * @throws IOException If fails
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
-
-    /**
-     * Ctor.
-     * @param dir Home
-     * @param file Path
-     */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
-    }
-
-    @Override
-    public Response print() {
-        return new RsPage(
-            "/dir.xsl",
-            new Items(new File(this.home, this.path))
-        );
-    }
+    void accept(Socket socket) throws IOException;
 
 }

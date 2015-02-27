@@ -23,21 +23,48 @@
  */
 package org.takes.it.fm;
 
+import java.io.File;
 import java.io.IOException;
-import org.takes.Response;
-import org.takes.Take;
+import java.util.Collection;
+import java.util.LinkedList;
+import org.takes.rs.xe.XeChain;
+import org.takes.rs.xe.XeSource;
+import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Index take.
+ * Items to show.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkIndex implements Take {
+final class Items implements XeSource {
+
+    /**
+     * Home.
+     */
+    private final transient File home;
+
+    /**
+     * Ctor.
+     * @param dir Home directory
+     */
+    Items(final File dir) {
+        this.home = dir;
+    }
 
     @Override
-    public Response print() throws IOException {
-        throw new UnsupportedOperationException("#print()");
+    public Iterable<Directive> toXembly() throws IOException {
+        final Collection<XeSource> items = new LinkedList<XeSource>();
+        final File[] files = this.home.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                items.add(new Item(file));
+            }
+        }
+        return new Directives().add("files").append(
+            new XeChain(items).toXembly()
+        );
     }
 }

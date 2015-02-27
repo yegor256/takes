@@ -21,47 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.tk;
 
-import java.io.File;
+import java.net.HttpURLConnection;
+import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rs.RsEmpty;
+import org.takes.rs.RsWithHeader;
+import org.takes.rs.RsWithStatus;
 
 /**
- * Directory take.
+ * Take that redirects.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+@EqualsAndHashCode(of = "response")
+public final class TkRedirect implements Take {
 
     /**
-     * Home.
+     * Response.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient Response response;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param location Location to redirect to
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    public TkRedirect(final String location) {
+        this(location, HttpURLConnection.HTTP_SEE_OTHER);
+    }
+
+    /**
+     * Ctor.
+     * @param location Location to redirect to
+     * @param code Redirection status code
+     */
+    public TkRedirect(final String location, final int code) {
+        this.response = new RsWithHeader(
+            new RsWithStatus(new RsEmpty(), code),
+            "Location", location
+        );
     }
 
     @Override
     public Response print() {
-        return new RsPage(
-            "/dir.xsl",
-            new Items(new File(this.home, this.path))
-        );
+        return this.response;
     }
-
 }
