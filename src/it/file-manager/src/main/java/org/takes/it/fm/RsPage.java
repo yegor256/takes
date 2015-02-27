@@ -37,48 +37,42 @@ import org.takes.rs.xe.RsXembly;
 import org.xembly.Directive;
 
 /**
- * Directory take.
+ * Response with a page.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+final class RsPage implements Response {
 
     /**
-     * Home.
+     * Response.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient Response origin;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param sources Xembly sources
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    RsPage(final RsXembly.Source... sources) {
+        this.origin = new RsXembly(
+            Iterables.concat(
+                Arrays.asList(
+                    new XeRoot("page"),
+                    new XeMillis(false),
+                ),
+                Arrays.asList(sources)
+                Arrays.asList(
+                    new XeMillis(true),
+                )
+            )
+
+        );
     }
 
     @Override
     public Response print() throws IOException {
-        return new RsXSLT(
-            new RsPage(
-                new RsXembly.Source() {
-                    @Override
-                    public Iterable<Directive> toXembly() throws IOException {
-                        final Directives dirs = new Directives();
-                        for (final String file : TkDir.this.home)
-                        return dirs;
-                    }
-                }
-            )
-        );
+        return this.origin.print();
     }
 
 }

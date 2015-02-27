@@ -95,9 +95,9 @@ public final class RsHTML implements Response {
      */
     public RsHTML(final Response res, final InputStream body) {
         this.origin = new RsWithBody(
-            new RsWithHeader(
+            new RsWithType(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "Content-Type", "text/html"
+                "text/html"
             ),
             body
         );

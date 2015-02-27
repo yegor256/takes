@@ -21,62 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.rs.xe;
 
-import java.io.File;
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import java.lang.Iterable;
-import java.lang.Override;
-import java.lang.UnsupportedOperationException;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsText;
-import org.takes.rs.RsXSLT;
-import org.takes.rs.xe.RsXembly;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Directory take.
- *
+ * Test case for {@link RsXembly}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+public final class RsXemblyTest {
 
     /**
-     * Home.
+     * RsXembly can build XML response.
+     * @throws IOException If some problem inside
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
-
-    /**
-     * Ctor.
-     * @param dir Home
-     * @param file Path
-     */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
-    }
-
-    @Override
-    public Response print() throws IOException {
-        return new RsXSLT(
-            new RsPage(
-                new RsXembly.Source() {
-                    @Override
-                    public Iterable<Directive> toXembly() throws IOException {
-                        final Directives dirs = new Directives();
-                        for (final String file : TkDir.this.home)
-                        return dirs;
-                    }
-                }
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeRoot("root"),
+                    new XeMillis(false),
+                    new RsXembly.Source() {
+                        @Override
+                        public Iterable<Directive> toXembly() {
+                            return new Directives().xpath("/root").add("hey");
+                        }
+                    },
+                    new XeMillis(true)
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root/hey",
+                "/root/millis"
             )
         );
     }

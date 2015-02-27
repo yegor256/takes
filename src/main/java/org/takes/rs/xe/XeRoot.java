@@ -21,64 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.rs.xe;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.Iterable;
-import java.lang.Override;
-import java.lang.UnsupportedOperationException;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsText;
-import org.takes.rs.RsXSLT;
-import org.takes.rs.xe.RsXembly;
+import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Directory take.
+ * Xembly source to create a root element.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+@EqualsAndHashCode(of = "name")
+public final class XeRoot implements RsXembly.Source {
 
     /**
-     * Home.
+     * Name of root element.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient String name;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param root Root name
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    public XeRoot(final String root) {
+        this.name = root;
     }
 
     @Override
-    public Response print() throws IOException {
-        return new RsXSLT(
-            new RsPage(
-                new RsXembly.Source() {
-                    @Override
-                    public Iterable<Directive> toXembly() throws IOException {
-                        final Directives dirs = new Directives();
-                        for (final String file : TkDir.this.home)
-                        return dirs;
-                    }
-                }
-            )
-        );
+    public Iterable<Directive> toXembly() {
+        return new Directives().add(this.name);
     }
-
 }

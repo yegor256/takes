@@ -21,64 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.rs;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.Iterable;
-import java.lang.Override;
-import java.lang.UnsupportedOperationException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.List;
+import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsText;
-import org.takes.rs.RsXSLT;
-import org.takes.rs.xe.RsXembly;
-import org.xembly.Directive;
 
 /**
- * Directory take.
+ * Response decorator, with content type.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+@EqualsAndHashCode(of = "origin")
+public final class RsWithType implements Response {
 
     /**
-     * Home.
+     * Original response.
      */
-    private final transient File home;
-
-    /**
-     * Path of directory to show.
-     */
-    private final transient String path;
+    private final transient Response origin;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param res Original response
+     * @param type Content type
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
-    }
-
-    @Override
-    public Response print() throws IOException {
-        return new RsXSLT(
-            new RsPage(
-                new RsXembly.Source() {
-                    @Override
-                    public Iterable<Directive> toXembly() throws IOException {
-                        final Directives dirs = new Directives();
-                        for (final String file : TkDir.this.home)
-                        return dirs;
-                    }
-                }
-            )
+    public RsWithType(final Response res, final String type) {
+        this.origin = new RsWithHeader(
+            new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+            "Content-Type", type
         );
     }
 
+    @Override
+    public List<String> head() throws IOException {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() throws IOException {
+        return this.origin.body();
+    }
 }

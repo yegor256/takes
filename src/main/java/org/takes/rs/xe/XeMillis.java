@@ -21,64 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.rs.xe;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.Iterable;
-import java.lang.Override;
-import java.lang.UnsupportedOperationException;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsText;
-import org.takes.rs.RsXSLT;
-import org.takes.rs.xe.RsXembly;
+import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
+import org.xembly.Directives;
 
 /**
- * Directory take.
+ * Xembly source to create "millis" element at the root.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+@EqualsAndHashCode(of = { "name", "finish" })
+public final class XeMillis implements RsXembly.Source {
 
     /**
-     * Home.
+     * Name of element.
      */
-    private final transient File home;
+    private final transient String name;
 
     /**
-     * Path of directory to show.
+     * Is it a finish?
      */
-    private final transient String path;
+    private final transient boolean finish;
 
     /**
      * Ctor.
-     * @param dir Home
-     * @param file Path
+     * @param fin Is it the finish?
      */
-    TkDir(final File dir, final String file) {
-        this.home = dir;
-        this.path = file;
+    public XeMillis(final boolean fin) {
+        this("millis", fin);
+    }
+
+    /**
+     * Ctor.
+     * @param elm Element name
+     * @param fin Is it the finish?
+     */
+    public XeMillis(final String elm, final boolean fin) {
+        this.name = elm;
+        this.finish = fin;
     }
 
     @Override
-    public Response print() throws IOException {
-        return new RsXSLT(
-            new RsPage(
-                new RsXembly.Source() {
-                    @Override
-                    public Iterable<Directive> toXembly() throws IOException {
-                        final Directives dirs = new Directives();
-                        for (final String file : TkDir.this.home)
-                        return dirs;
-                    }
-                }
-            )
-        );
+    public Iterable<Directive> toXembly() {
+        final Directives dirs = new Directives();
+        if (this.finish) {
+            dirs.xpath(String.format("/*/%s", this.name))
+                .strict(1)
+                .xset(
+                    String.format(
+                        "%d - number(text())",
+                        System.currentTimeMillis()
+                    )
+                );
+        } else {
+            dirs.xpath("/*")
+                .add(this.name)
+                .set(Long.toString(System.currentTimeMillis()));
+        }
+        return dirs;
     }
-
 }
