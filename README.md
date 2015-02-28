@@ -38,11 +38,9 @@ import org.takes.http.FtDaemon;
 import org.takes.TsRegex;
 public final class App {
   public static void main(final String... args) {
-    new FtDaemon(
-      new FtBasic(
-        new TsRegex().with("/", "hello, world!")
-      )
-    ).listen(8080);
+    new FtBasic(
+      new TsRegex().with("/", "hello, world!"), 8080
+    ).start(Exit.NEVER);
   }
 }
 ```
@@ -63,13 +61,12 @@ Let's make it a bit more sophisticated:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new FtDaemon(
-      new FtBasic(
-        new TsRegex()
-          .with("/robots\\.txt", "")
-          .with("/", new TkIndex())
-      )
-    ).listen(8080);
+    new FtBasic(
+      new TsRegex()
+        .with("/robots\\.txt", "")
+        .with("/", new TkIndex()),
+      8080
+    ).start(Exit.NEVER);
   }
 }
 ```
@@ -121,35 +118,33 @@ Here is a more complex and verbose example:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new FtDaemon(
-      new FtBasic(
-        new TsRegex()
-          .with("/robots.txt", "")
-          .with("/", new TkIndex())
-          .with(
-            "/xsl/.*",
-            new TsContentType(new TsClasspath(), "text/xsl")
-          )
-          .with(
-            "/account",
-            new Takes() {
-              @Override
-              public Take take(final Request request) {
-                return new TkAccount(users, request);
-              }
+    new FtBasic(
+      new TsRegex()
+        .with("/robots.txt", "")
+        .with("/", new TkIndex())
+        .with(
+          "/xsl/.*",
+          new TsContentType(new TsClasspath(), "text/xsl")
+        )
+        .with(
+          "/account",
+          new Takes() {
+            @Override
+            public Take take(final Request request) {
+              return new TkAccount(users, request);
             }
-          )
-          .with(
-            "/balance/(?<user>[a-z]+)",
-            new TsRegex.Fast() {
-              @Override
-              public Take take(final RqRegex request) {
-                return new TkBalance(request.matcher().group("user"));
-              }
+          }
+        )
+        .with(
+          "/balance/(?<user>[a-z]+)",
+          new TsRegex.Fast() {
+            @Override
+            public Take take(final RqRegex request) {
+              return new TkBalance(request.matcher().group("user"));
             }
-          )
-      )
-    ).listen(8080);
+          }
+        )
+    ).start(Exit.NEVER);
   }
 }
 ```
@@ -317,16 +312,15 @@ this behavior:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new FtDaemon(
-      new FtBasic(
-        new TsFallback(
-          new TsRegex()
-            .with("/robots\\.txt", "")
-            .with("/", new TkIndex()),
-          new TkHTML("oops, something went wrong!")
-        )
-      )
-    ).listen(8080);
+    new FtBasic(
+      new TsFallback(
+        new TsRegex()
+          .with("/robots\\.txt", "")
+          .with("/", new TkIndex()),
+        new TkHTML("oops, something went wrong!")
+      ),
+      8080
+    ).start(Exit.NEVER);
   }
 }
 ```
@@ -369,13 +363,12 @@ Then, you should decorate the entire `TsRegex` with this `TsFailFast`:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new FtDaemon(
-      new FtBasic(
-        new TsFailFast(
-          new TsRegex().with("/", new TkPostMessage())
-        )
-      )
-    ).listen(8080);
+    new FtBasic(
+      new TsFailFast(
+        new TsRegex().with("/", new TkPostMessage())
+      ),
+      8080
+    ).start(Exit.NEVER);
   }
 }
 ```
@@ -500,7 +493,6 @@ new TsAuth(
   "some-secret-word",
   "/facebook"
 )
-}
 ```
 
 Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
@@ -529,13 +521,33 @@ There is a convenient class `FtCLI` that parses command line arguments and
 starts the necessary `Front` accordingly.
 
 There are a few command line arguments that should be passed to
-`FtCLI#run(String...)` method:
+`FtCLI` constructor:
 
 ```
 --port=1234     Tells the server to listen to TCP port 1234
 --lifetime=5s   The server will die in five seconds (useful for integration testing)
 --refresh       Run the server in hit-refresh mode
 ```
+
+For example:
+
+```java
+public final class App {
+  public static void main(final String... args) {
+    new FtCLI(
+      new TsRegex().with("/", "hello, world!"), args
+    ).listen(Exit.NEVER);
+  }
+}
+```
+
+Then, run it like this:
+
+```
+$ java -jar takes.jar App.class --port=8080 --refresh
+```
+
+You should see "hello, world!" at `http://localhost:8080`.
 
 ## Logging
 
