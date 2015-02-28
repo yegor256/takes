@@ -24,46 +24,78 @@
 package org.takes.tk;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rs.RsWithHeader;
+import org.takes.rs.RsWithHeaders;
 
 /**
- * Plain text take.
+ * Take that headers.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "type" })
-public final class TkContentType implements Take {
+@EqualsAndHashCode(of = { "origin", "headers" })
+public final class TkWithHeaders implements Take {
 
     /**
-     * Original take.
+     * Original.
      */
     private final transient Take origin;
 
     /**
-     * Type.
+     * Headers.
      */
-    private final transient String type;
+    private final transient Collection<String> headers;
 
     /**
      * Ctor.
-     * @param take Original take
-     * @param ctype Content type
+     * @param take Original
      */
-    public TkContentType(final Take take, final String ctype) {
+    public TkWithHeaders(final Take take) {
+        this(take, Collections.<String>emptyList());
+    }
+
+    /**
+     * Ctor.
+     * @param take Original
+     * @param hdrs Headers
+     */
+    public TkWithHeaders(final Take take, final Collection<String> hdrs) {
         this.origin = take;
-        this.type = ctype;
+        this.headers = Collections.unmodifiableCollection(hdrs);
     }
 
     @Override
     public Response act() throws IOException {
-        return new RsWithHeader(
-            this.origin.act(),
-            "Content-Type", this.type
-        );
+        return new RsWithHeaders(this.origin.act(), this.headers);
     }
+
+    /**
+     * With this header.
+     * @param text Header text
+     * @return Take
+     */
+    public TkWithHeaders with(final String text) {
+        final Collection<String> list =
+            new ArrayList<String>(this.headers.size());
+        list.addAll(this.headers);
+        list.add(text);
+        return new TkWithHeaders(this.origin, list);
+    }
+
+    /**
+     * With this header.
+     * @param name The name
+     * @param value The value
+     * @return Take
+     */
+    public TkWithHeaders with(final String name, final String value) {
+        return this.with(String.format("%s: %s", name, value));
+    }
+
 }

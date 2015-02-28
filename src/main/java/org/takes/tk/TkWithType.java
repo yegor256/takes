@@ -21,29 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkContentType;
+import org.takes.rs.RsWithHeader;
 
 /**
- * Takes with added content type.
+ * Plain text take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "origin", "type" })
-public final class TsContentType implements Takes {
+public final class TkWithType implements Take {
 
     /**
-     * Original takes.
+     * Original take.
      */
-    private final transient Takes origin;
+    private final transient Take origin;
 
     /**
      * Type.
@@ -52,17 +51,19 @@ public final class TsContentType implements Takes {
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      * @param ctype Content type
      */
-    public TsContentType(final Takes takes, final String ctype) {
-        this.origin = takes;
+    public TkWithType(final Take take, final String ctype) {
+        this.origin = take;
         this.type = ctype;
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
-        return new TkContentType(this.origin.route(request), this.type);
+    public Response act() throws IOException {
+        return new RsWithHeader(
+            this.origin.act(),
+            "Content-Type", this.type
+        );
     }
-
 }
