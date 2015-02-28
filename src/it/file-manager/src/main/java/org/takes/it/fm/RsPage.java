@@ -29,11 +29,10 @@ import java.util.List;
 import org.takes.Response;
 import org.takes.rs.RsXSLT;
 import org.takes.rs.xe.RsXembly;
+import org.takes.rs.xe.XeAppend;
 import org.takes.rs.xe.XeMillis;
-import org.takes.rs.xe.XeRoot;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeStylesheet;
-import org.takes.rs.xe.XeToRoot;
 
 /**
  * Response with a page.
@@ -58,10 +57,12 @@ final class RsPage implements Response {
         this.origin = new RsXSLT(
             new RsXembly(
                 new XeStylesheet(xsl),
-                new XeRoot("page"),
-                new XeMillis(false),
-                new XeToRoot(source),
-                new XeMillis(true)
+                new XeAppend(
+                    "page",
+                    new XeMillis(false),
+                    source,
+                    new XeMillis(true)
+                )
             )
         );
     }

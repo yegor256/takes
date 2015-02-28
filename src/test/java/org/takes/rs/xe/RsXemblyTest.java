@@ -49,15 +49,17 @@ public final class RsXemblyTest {
             IOUtils.toString(
                 new RsXembly(
                     new XeStylesheet("/a.xsl"),
-                    new XeRoot("root"),
-                    new XeMillis(false),
-                    new XeSource() {
-                        @Override
-                        public Iterable<Directive> toXembly() {
-                            return new Directives().xpath("/root").add("hey");
-                        }
-                    },
-                    new XeMillis(true)
+                    new XeAppend(
+                        "root",
+                        new XeMillis(false),
+                        new XeSource() {
+                            @Override
+                            public Iterable<Directive> toXembly() {
+                                return new Directives().add("hey");
+                            }
+                        },
+                        new XeMillis(true)
+                    )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(

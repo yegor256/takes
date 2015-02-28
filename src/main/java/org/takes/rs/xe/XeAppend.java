@@ -23,35 +23,45 @@
  */
 package org.takes.rs.xe;
 
+import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
- * Xembly source to create a root element.
+ * Xembly source to append something to an existing element.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "name")
-public final class XeRoot implements XeSource {
+@EqualsAndHashCode(of = { "target", "source" })
+public final class XeAppend implements XeSource {
 
     /**
-     * Name of root element.
+     * Target.
      */
-    private final transient String name;
+    private final transient String target;
+
+    /**
+     * Source to add.
+     */
+    private final transient XeSource source;
 
     /**
      * Ctor.
-     * @param root Root name
+     * @param name Name of XML element
+     * @param src Source
      */
-    public XeRoot(final String root) {
-        this.name = root;
+    public XeAppend(final String name, final XeSource... src) {
+        this.target = name;
+        this.source = new XeChain(src);
     }
 
     @Override
-    public Iterable<Directive> toXembly() {
-        return new Directives().add(this.name);
+    public Iterable<Directive> toXembly() throws IOException {
+        return new Directives().add(this.target).append(
+            this.source.toXembly()
+        );
     }
 }

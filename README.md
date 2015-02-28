@@ -414,8 +414,8 @@ Here is how you generate an XML page using [Xembly](http://www.takes.org):
 
 ```java
 Response response = new RsXembly(
-  new XePlain("ADD 'page'"),
-  new XePrepend("XPATH '/page'", this.user)
+  new XeAppend("page"),
+  new XeDirectives("XPATH '/page'", this.user)
 )
 ```
 
@@ -424,16 +424,18 @@ This is a complete example, with all possible options:
 ```java
 Response response = new RsXembly(
   new XeStylesheet("/xsl/account.xsl"), // add processing instruction
-  new XeRoot("take"), // create a DOM document with "take" root element
-  new XeMillis(false), // add "millis" attribute to the root, with current time
-  new XeToRoot(this.user), // add this.user to the root element
-  new XeSource() {
-    @Override
-    public Iterable<Directive> toXembly() {
-      return new Directives().add("status").set("alive");
-    }
-  },
-  new XeMillis(true), // replace "millis" attribute with take building time
+  new XeAppend(
+    "page", // create a DOM document with "page" root element
+    new XeMillis(false), // add "millis" attribute to the root, with current time
+    new XeToRoot(this.user), // add this.user to the root element
+    new XeSource() {
+      @Override
+      public Iterable<Directive> toXembly() {
+        return new Directives().add("status").set("alive");
+      }
+    },
+    new XeMillis(true), // replace "millis" attribute with take building time
+  ),
 )
 ```
 
@@ -442,13 +444,14 @@ This is the output that will be produced:
 ```xml
 <?xml version='1.0'?>
 <?xsl-stylesheet href='/xsl/account.xsl'?>
-<take millis='5664'>
+<page>
+  <millis>5648</millis>
   <user>
     <name>Jeff Lebowski</name>
     <balance>123</balance>
   </user>
   <status>alive</status>
-</take>
+</page>
 ```
 
 To avoid duplication of all this scaffolding in every page, you can create your

@@ -69,7 +69,7 @@ public final class XeMillis implements XeSource {
     public Iterable<Directive> toXembly() {
         final Directives dirs = new Directives();
         if (this.finish) {
-            dirs.xpath(String.format("/*/%s", this.name))
+            dirs.xpath(this.name)
                 .strict(1)
                 .xset(
                     String.format(
@@ -78,8 +78,7 @@ public final class XeMillis implements XeSource {
                     )
                 );
         } else {
-            dirs.xpath("/*")
-                .add(this.name)
+            dirs.add(this.name)
                 .set(Long.toString(System.currentTimeMillis()));
         }
         return dirs;
