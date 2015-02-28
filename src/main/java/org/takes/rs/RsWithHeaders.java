@@ -25,6 +25,9 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -36,7 +39,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode(of = { "origin", "headers" })
 public final class RsWithHeaders implements Response {
 
     /**
@@ -45,11 +48,27 @@ public final class RsWithHeaders implements Response {
     private final transient Response origin;
 
     /**
+     * Extra headers.
+     */
+    private final transient Collection<String> headers;
+
+    /**
      * Ctor.
      * @param res Original response
+     * @param hdrs Headers
      */
-    public RsWithHeaders(final Response res) {
+    public RsWithHeaders(final Response res, final String... hdrs) {
+        this(res, Arrays.asList(hdrs));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param hdrs Headers
+     */
+    public RsWithHeaders(final Response res, final Collection<String> hdrs) {
         this.origin = res;
+        this.headers = hdrs;
     }
 
     /**
@@ -58,9 +77,11 @@ public final class RsWithHeaders implements Response {
      * @return Response
      */
     public RsWithHeaders with(final String text) {
-        return new RsWithHeaders(
-            new RsWithHeader(this.origin, text)
-        );
+        final Collection<String> list =
+            new ArrayList<String>(this.headers.size());
+        list.addAll(this.headers);
+        list.add(text);
+        return new RsWithHeaders(this.origin, list);
     }
 
     /**
@@ -70,9 +91,7 @@ public final class RsWithHeaders implements Response {
      * @return Response
      */
     public RsWithHeaders with(final String name, final String value) {
-        return new RsWithHeaders(
-            new RsWithHeader(this.origin, name, value)
-        );
+        return this.with(String.format("%s: %s", name, value));
     }
 
     @Override

@@ -56,6 +56,22 @@ public final class RsWithBody implements Response {
      * @param body Body
      */
     public RsWithBody(final String body) {
+        this(body.getBytes());
+    }
+
+    /**
+     * Ctor.
+     * @param body Body
+     */
+    public RsWithBody(final byte[] body) {
+        this(new ByteArrayInputStream(body));
+    }
+
+    /**
+     * Ctor.
+     * @param body Body
+     */
+    public RsWithBody(final InputStream body) {
         this(new RsEmpty(), body);
     }
 

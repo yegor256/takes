@@ -71,7 +71,7 @@ public final class App {
 }
 ```
 
-The `TakesServer` is accepting new incoming sockets on port 80,
+The `FtBasic` is accepting new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TsRegex`
 (`ts` stands for "takes") and expects it to return an instance of `Take` back.
