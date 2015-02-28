@@ -21,64 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.ts;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.tk.TkForward;
 
 /**
- * Response decorator, with status code.
+ * Redirect on exception.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "status" })
-public final class RsWithStatus implements Response {
+@EqualsAndHashCode(of = "origin")
+public final class TsForward implements Takes {
 
     /**
-     * Original response.
+     * Original takes.
      */
-    private final transient Response origin;
-
-    /**
-     * Status code.
-     */
-    private final transient int status;
+    private final transient Takes origin;
 
     /**
      * Ctor.
-     * @param code Status code
+     * @param takes Original
      */
-    public RsWithStatus(final int code) {
-        this(new RsEmpty(), code);
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param code Status code
-     */
-    public RsWithStatus(final Response res, final int code) {
-        this.origin = res;
-        this.status = code;
+    public TsForward(final Takes takes) {
+        this.origin = takes;
     }
 
     @Override
-    public List<String> head() throws IOException {
-        final List<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
-        head.add(String.format("HTTP/1.1 %d OK", this.status));
-        head.addAll(list.subList(1, list.size()));
-        return head;
+    public Take take(final Request request) throws IOException {
+        return new TkForward(this.origin.take(request));
     }
 
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

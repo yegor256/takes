@@ -344,27 +344,33 @@ public final class TkPostMessage implements Take {
   public Response print() {
     final String body = new RqPost(this.request).text();
     if (body.isEmpty()) {
-      throw new TsFailFast.Incident(
-        new RsRedirect(HttpURLConnection.HTTP_SEE_OTHER)
-          .location("/")
-          .header("X-Foo-Flash", "message can't be empty")
+      throw new RsWithHeader(
+        new RsForward(
+          HttpURLConnection.HTTP_SEE_OTHER, "/"
+        ),
+        "X-Foo-Flash",
+        "message can't be empty"
       );
     }
     // save the message to the database
-    return new RsRedirect(HttpURLConnection.HTTP_SEE_OTHER)
-      .location("/")
-      .header("X-Foo-Flash", "thanks, the message was posted");
+    return new RsWithHeader(
+      new RsForward(
+        HttpURLConnection.HTTP_SEE_OTHER,
+      ),
+      "X-Foo-Flash",
+      "thanks, the message was posted"
+    );
   }
 }
 ```
 
-Then, you should decorate the entire `TsRegex` with this `TsFailFast`:
+Then, you should decorate the entire `TsRegex` with this `TsForward`:
 
 ```java
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFailFast(
+      new TsForward(
         new TsRegex().with("/", new TkPostMessage())
       ),
       8080

@@ -25,20 +25,25 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.net.HttpURLConnection;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
- * Response decorator, with status code.
+ * Forwarding response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "status" })
-public final class RsWithStatus implements Response {
+@EqualsAndHashCode(callSuper = false, of = "origin")
+public final class RsForward extends RuntimeException implements Response {
+
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = 7676888610908953700L;
 
     /**
      * Original response.
@@ -46,35 +51,29 @@ public final class RsWithStatus implements Response {
     private final transient Response origin;
 
     /**
-     * Status code.
-     */
-    private final transient int status;
-
-    /**
      * Ctor.
-     * @param code Status code
+     * @param loc Location
      */
-    public RsWithStatus(final int code) {
-        this(new RsEmpty(), code);
+    public RsForward(final String loc) {
+        this(HttpURLConnection.HTTP_SEE_OTHER, loc);
     }
 
     /**
      * Ctor.
-     * @param res Original response
-     * @param code Status code
+     * @param code HTTP status code
+     * @param loc Location
      */
-    public RsWithStatus(final Response res, final int code) {
-        this.origin = res;
-        this.status = code;
+    public RsForward(final int code, final String loc) {
+        super();
+        this.origin = new RsWithHeader(
+            new RsWithStatus(code),
+            String.format("Location: %s", loc)
+        );
     }
 
     @Override
     public List<String> head() throws IOException {
-        final List<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
-        head.add(String.format("HTTP/1.1 %d OK", this.status));
-        head.addAll(list.subList(1, list.size()));
-        return head;
+        return this.origin.head();
     }
 
     @Override

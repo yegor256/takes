@@ -21,64 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.tk;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsForward;
 
 /**
- * Response decorator, with status code.
+ * Redirect on exception.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "status" })
-public final class RsWithStatus implements Response {
+@EqualsAndHashCode(of = "origin")
+public final class TkForward implements Take {
 
     /**
-     * Original response.
+     * Original takes.
      */
-    private final transient Response origin;
-
-    /**
-     * Status code.
-     */
-    private final transient int status;
+    private final transient Take origin;
 
     /**
      * Ctor.
-     * @param code Status code
+     * @param take Original
      */
-    public RsWithStatus(final int code) {
-        this(new RsEmpty(), code);
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param code Status code
-     */
-    public RsWithStatus(final Response res, final int code) {
-        this.origin = res;
-        this.status = code;
+    public TkForward(final Take take) {
+        this.origin = take;
     }
 
     @Override
-    public List<String> head() throws IOException {
-        final List<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
-        head.add(String.format("HTTP/1.1 %d OK", this.status));
-        head.addAll(list.subList(1, list.size()));
-        return head;
+    public Response print() throws IOException {
+        Response res;
+        try {
+            res = this.origin.print();
+        } catch (final RsForward ex) {
+            res = ex;
+        }
+        return res;
     }
 
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }
