@@ -73,7 +73,7 @@ public final class TsFallback implements Takes {
             new TsFallback.Fast() {
                 @Override
                 public Take take(final RqFallback request) throws IOException {
-                    return fbk.take(request);
+                    return fbk.route(request);
                 }
             }
         );
@@ -91,11 +91,11 @@ public final class TsFallback implements Takes {
 
     @Override
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public Take take(final Request request) throws IOException {
+    public Take route(final Request request) throws IOException {
         Take take;
         try {
             take = new TkFallback(
-                this.origin.take(request), this.fallback, request
+                this.origin.route(request), this.fallback, request
             );
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {

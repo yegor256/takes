@@ -76,7 +76,7 @@ public final class TsClasspath implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
+    public Take route(final Request request) throws IOException {
         final String name = String.format(
             "%s%s", this.prefix,
             new RqQuery(request).query().getPath()

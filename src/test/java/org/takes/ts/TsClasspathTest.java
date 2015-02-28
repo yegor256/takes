@@ -47,7 +47,7 @@ public final class TsClasspathTest {
     public void dispatchesByResourceName() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsClasspath().take(
+                new TsClasspath().route(
                     new RqPlain(
                         "GET", "/org/takes/ts/TsClasspathTest.class", ""
                     )
@@ -63,7 +63,7 @@ public final class TsClasspathTest {
      */
     @Test(expected = Takes.NotFoundException.class)
     public void throwsWhenResourceNotFound() throws IOException {
-        new TsClasspath().take(
+        new TsClasspath().route(
             new RqPlain("PUT", "/something-else", "")
         );
     }

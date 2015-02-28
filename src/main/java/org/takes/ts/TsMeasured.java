@@ -70,8 +70,8 @@ public final class TsMeasured implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
-        return new TkMeasured(this.origin.take(request), this.header);
+    public Take route(final Request request) throws IOException {
+        return new TkMeasured(this.origin.route(request), this.header);
     }
 
 }

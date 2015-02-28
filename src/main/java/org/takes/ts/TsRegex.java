@@ -73,7 +73,7 @@ public final class TsRegex implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
+    public Take route(final Request request) throws IOException {
         final URI uri = new RqQuery(request).query();
         final String path = uri.getPath();
         TsRegex.Fast found = null;
@@ -135,7 +135,7 @@ public final class TsRegex implements Takes {
             new TsRegex.Fast() {
                 @Override
                 public Take take(final RqRegex req) throws IOException {
-                    return takes.take(req);
+                    return takes.route(req);
                 }
             }
         );

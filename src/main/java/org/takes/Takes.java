@@ -40,7 +40,7 @@ public interface Takes {
      * @return Take to process
      * @throws IOException If fails
      */
-    Take take(Request request) throws IOException;
+    Take route(Request request) throws IOException;
 
     /**
      * Take can't be dispatched.

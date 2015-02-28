@@ -67,7 +67,7 @@ public final class TsFailure implements Takes {
     }
 
     @Override
-    public Take take(final Request request) {
+    public Take route(final Request request) {
         throw this.error;
     }
 

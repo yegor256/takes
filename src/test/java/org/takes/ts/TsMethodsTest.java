@@ -48,7 +48,7 @@ public final class TsMethodsTest {
     public void dispatchesByMethod() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsMethods().with(RqMethod.DELETE, new TkEmpty()).take(
+                new TsMethods().with(RqMethod.DELETE, new TkEmpty()).route(
                     new RqPlain(RqMethod.DELETE, "/", "")
                 ).print()
             ).print(),

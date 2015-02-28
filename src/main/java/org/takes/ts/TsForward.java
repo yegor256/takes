@@ -54,8 +54,8 @@ public final class TsForward implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
-        return new TkForward(this.origin.take(request));
+    public Take route(final Request request) throws IOException {
+        return new TkForward(this.origin.route(request));
     }
 
 }

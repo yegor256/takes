@@ -61,8 +61,8 @@ public final class TsContentType implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
-        return new TkContentType(this.origin.take(request), this.type);
+    public Take route(final Request request) throws IOException {
+        return new TkContentType(this.origin.route(request), this.type);
     }
 
 }

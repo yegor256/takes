@@ -65,7 +65,7 @@ public final class TsMethods implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
+    public Take route(final Request request) throws IOException {
         final String method = new RqMethod(request).method();
         Takes found = null;
         for (final Map.Entry<String, Takes> ent : this.map.entrySet()) {
@@ -79,7 +79,7 @@ public final class TsMethods implements Takes {
                 String.format("method %s not allowed", method)
             );
         }
-        return found.take(request);
+        return found.route(request);
     }
 
     /**

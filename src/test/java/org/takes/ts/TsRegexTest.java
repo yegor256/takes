@@ -48,7 +48,7 @@ public final class TsRegexTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsRegex().with("/[a-z]+", body).take(
+                new TsRegex().with("/[a-z]+", body).route(
                     new RqPlain("GET", "/hey", "")
                 ).print()
             ).print(),

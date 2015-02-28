@@ -54,12 +54,12 @@ public final class TsFallbackTest {
                 new TsFallback(
                     new Takes() {
                         @Override
-                        public Take take(final Request request) {
+                        public Take route(final Request request) {
                             throw new UnsupportedOperationException("#take()");
                         }
                     },
                     new TkText("an exception, sorry")
-                ).take(new RqPlain(RqMethod.GET, "/", "")).print()
+                ).route(new RqPlain(RqMethod.GET, "/", "")).print()
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );

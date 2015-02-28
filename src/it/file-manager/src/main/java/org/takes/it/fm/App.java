@@ -85,6 +85,6 @@ public final class App implements Takes {
                     }
                 }
             )
-            .take(request);
+            .route(request);
     }
 }

@@ -52,7 +52,7 @@ public final class TsFixed implements Takes {
     }
 
     @Override
-    public Take take(final Request request) {
+    public Take route(final Request request) {
         return this.tke;
     }
 
