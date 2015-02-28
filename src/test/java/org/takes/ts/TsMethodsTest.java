@@ -50,7 +50,7 @@ public final class TsMethodsTest {
             new RsPrint(
                 new TsMethods().with(RqMethod.DELETE, new TkEmpty()).route(
                     new RqPlain(RqMethod.DELETE, "/", "")
-                ).print()
+                ).act()
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );

@@ -39,6 +39,6 @@ public interface Take {
      * @return Response
      * @throws IOException If fails
      */
-    Response print() throws IOException;
+    Response act() throws IOException;
 
 }

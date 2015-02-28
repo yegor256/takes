@@ -73,13 +73,13 @@ public final class TkFallback implements Take {
 
     @Override
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public Response print() throws IOException {
+    public Response act() throws IOException {
         Response res;
         try {
-            res = this.origin.print();
+            res = this.origin.act();
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            res = this.fallback.take(this.req(ex)).print();
+            res = this.fallback.take(this.req(ex)).act();
         }
         return res;
     }

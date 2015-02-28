@@ -60,9 +60,9 @@ public final class TkContentType implements Take {
     }
 
     @Override
-    public Response print() throws IOException {
+    public Response act() throws IOException {
         return new RsWithHeader(
-            this.origin.print(),
+            this.origin.act(),
             "Content-Type", this.type
         );
     }

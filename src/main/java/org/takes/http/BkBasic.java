@@ -104,7 +104,7 @@ public final class BkBasic implements Back {
         throws IOException {
         try {
             new RsPrint(
-                this.takes.route(req).print()
+                this.takes.route(req).act()
             ).print(output);
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {

@@ -69,10 +69,10 @@ public final class TkMeasured implements Take {
     }
 
     @Override
-    public Response print() throws IOException {
+    public Response act() throws IOException {
         final long start = System.currentTimeMillis();
         return new RsWithHeader(
-            this.origin.print(),
+            this.origin.act(),
             this.header,
             Long.toString(System.currentTimeMillis() - start)
         );

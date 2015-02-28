@@ -81,7 +81,7 @@ public final class TkText implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response act() {
         return new RsText(this.input);
     }
 }

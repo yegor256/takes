@@ -51,7 +51,7 @@ public final class TsClasspathTest {
                     new RqPlain(
                         "GET", "/org/takes/ts/TsClasspathTest.class", ""
                     )
-                ).print()
+                ).act()
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );

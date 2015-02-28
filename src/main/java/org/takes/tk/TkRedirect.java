@@ -67,7 +67,7 @@ public final class TkRedirect implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response act() {
         return this.response;
     }
 }

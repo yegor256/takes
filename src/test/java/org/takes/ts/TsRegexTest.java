@@ -50,7 +50,7 @@ public final class TsRegexTest {
             new RsPrint(
                 new TsRegex().with("/[a-z]+", body).route(
                     new RqPlain("GET", "/hey", "")
-                ).print()
+                ).act()
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(

@@ -59,7 +59,7 @@ public final class TsFallbackTest {
                         }
                     },
                     new TkText("an exception, sorry")
-                ).route(new RqPlain(RqMethod.GET, "/", "")).print()
+                ).route(new RqPlain(RqMethod.GET, "/", "")).act()
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );

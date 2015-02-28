@@ -53,10 +53,10 @@ public final class TkForward implements Take {
     }
 
     @Override
-    public Response print() throws IOException {
+    public Response act() throws IOException {
         Response res;
         try {
-            res = this.origin.print();
+            res = this.origin.act();
         } catch (final RsForward ex) {
             res = ex;
         }

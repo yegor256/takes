@@ -51,7 +51,7 @@ public final class TkFixed implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response act() {
         return this.response;
     }
 }

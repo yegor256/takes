@@ -81,7 +81,7 @@ public final class TkHTML implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response act() {
         return new RsHTML(this.input);
     }
 }

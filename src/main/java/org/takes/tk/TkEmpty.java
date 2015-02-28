@@ -37,7 +37,7 @@ import org.takes.rs.RsEmpty;
 public final class TkEmpty implements Take {
 
     @Override
-    public Response print() {
+    public Response act() {
         return new RsEmpty();
     }
 }
