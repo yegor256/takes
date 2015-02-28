@@ -33,9 +33,9 @@ This is what is not supported and won't be supported:
 Here it is:
 
 ```java
+import org.takes.http.Exit;
 import org.takes.http.FtBasic;
-import org.takes.http.FtDaemon;
-import org.takes.TsRegex;
+import org.takes.ts.TsRegex;
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
@@ -525,7 +525,7 @@ There are a few command line arguments that should be passed to
 
 ```
 --port=1234     Tells the server to listen to TCP port 1234
---lifetime=5s   The server will die in five seconds (useful for integration testing)
+--lifetime=5000 The server will die in five seconds (useful for integration testing)
 --refresh       Run the server in hit-refresh mode
 ```
 
