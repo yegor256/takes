@@ -27,11 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -101,14 +102,12 @@ public final class RqHeaders implements Request {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private Map<String, List<String>> map() throws IOException {
         final List<String> head = this.origin.head();
-        final Map<String, List<String>> map =
-            new HashMap<String, List<String>>(head.size());
+        final ConcurrentMap<String, List<String>> map =
+            new ConcurrentHashMap<String, List<String>>(head.size());
         for (final String line : head.subList(0, head.size())) {
             final String[] parts = line.split(":", 2);
             final String key = parts[0].toLowerCase(Locale.ENGLISH);
-            if (!map.containsKey(key)) {
-                map.put(key, new LinkedList<String>());
-            }
+            map.putIfAbsent(key, new LinkedList<String>());
             map.get(key).add(parts[1]);
         }
         return map;

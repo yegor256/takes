@@ -67,19 +67,7 @@ public final class RsXSLT implements Response {
      * @param rsp Original response
      */
     public RsXSLT(final Response rsp) {
-        this(
-            rsp,
-            new URIResolver() {
-                @Override
-                public Source resolve(final String href, final String base) {
-                    return new StreamSource(
-                        new InputStreamReader(
-                            this.getClass().getResourceAsStream(href)
-                        )
-                    );
-                }
-            }
-        );
+        this(rsp, new RsXSLT.InClasspath());
     }
 
     /**
@@ -197,6 +185,23 @@ public final class RsXSLT implements Response {
             );
         }
         return tnfr;
+    }
+
+    /**
+     * Classpath URI resolver.
+     */
+    private static final class InClasspath implements URIResolver {
+        @Override
+        public Source resolve(final String href, final String base)
+            throws TransformerException {
+            final InputStream input = this.getClass().getResourceAsStream(href);
+            if (input == null) {
+                throw new TransformerException(
+                    String.format("XSL '%s' not found in classpath", href)
+                );
+            }
+            return new StreamSource(new InputStreamReader(input));
+        }
     }
 
 }

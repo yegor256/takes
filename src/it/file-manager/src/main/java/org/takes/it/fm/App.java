@@ -41,6 +41,7 @@ import org.takes.ts.TsRegex;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class App implements Takes {
 

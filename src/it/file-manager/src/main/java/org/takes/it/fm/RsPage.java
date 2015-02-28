@@ -33,6 +33,7 @@ import org.takes.rs.xe.XeMillis;
 import org.takes.rs.xe.XeRoot;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeStylesheet;
+import org.takes.rs.xe.XeToRoot;
 
 /**
  * Response with a page.
@@ -50,6 +51,7 @@ final class RsPage implements Response {
 
     /**
      * Ctor.
+     * @param xsl XSL stylesheet name
      * @param source Xembly source
      */
     RsPage(final String xsl, final XeSource source) {
@@ -58,7 +60,7 @@ final class RsPage implements Response {
                 new XeStylesheet(xsl),
                 new XeRoot("page"),
                 new XeMillis(false),
-                source,
+                new XeToRoot(source),
                 new XeMillis(true)
             )
         );

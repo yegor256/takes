@@ -1,4 +1,5 @@
-/**
+<?xml version="1.0"?>
+<!--
  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Yegor Bugayenko
@@ -20,52 +21,31 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */
-package org.takes.it.fm;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedList;
-import org.takes.rs.xe.XeChain;
-import org.takes.rs.xe.XeSource;
-import org.xembly.Directive;
-import org.xembly.Directives;
-
-/**
- * Items to show.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
- * @since 0.1
- */
-final class Items implements XeSource {
-
-    /**
-     * Home.
-     */
-    private final transient File home;
-
-    /**
-     * Ctor.
-     * @param dir Home directory
-     */
-    Items(final File dir) {
-        this.home = dir;
-    }
-
-    @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Iterable<Directive> toXembly() throws IOException {
-        final Collection<XeSource> items = new LinkedList<XeSource>();
-        final File[] files = this.home.listFiles();
-        if (files != null) {
-            for (final File file : files) {
-                items.add(new Item(file));
-            }
-        }
-        return new Directives().add("files").append(
-            new XeChain(items).toXembly()
-        );
-    }
-}
+ -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+    <xsl:output method="xml"/>
+    <xsl:strip-space elements="*" />
+    <xsl:template match="/page">
+        <html>
+            <head>
+                <title>directory</title>
+            </head>
+            <body>
+                <xsl:apply-templates select="files" />
+            </body>
+        </html>
+    </xsl:template>
+    <xsl:template match="files">
+        <ul>
+            <xsl:apply-templates select="file" />
+        </ul>
+    </xsl:template>
+    <xsl:template match="file">
+        <li>
+            <xsl:value-of select="name"/>
+            <xsl:text>: </xsl:text>
+            <xsl:value-of select="size"/>
+        </li>
+    </xsl:template>
+</xsl:stylesheet>

@@ -37,6 +37,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Takes;
 import org.takes.rq.RqPlain;
@@ -50,6 +51,7 @@ import org.takes.rs.RsWithStatus;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(of = "takes")
 public final class BkBasic implements Back {
@@ -86,16 +88,31 @@ public final class BkBasic implements Back {
         }
         final OutputStream output = socket.getOutputStream();
         try {
+            this.print(new RqPlain(head, input), output);
+        } finally {
+            output.close();
+            input.close();
+        }
+    }
+
+    /**
+     * Print response to output stream, safely.
+     * @param req Request
+     * @param output Output
+     * @throws IOException If fails
+     */
+    @SuppressWarnings("PMD.AvoidCatchingThrowable")
+    private void print(final Request req, final OutputStream output)
+        throws IOException {
+        try {
             new RsPrint(
-                this.takes.take(
-                    new RqPlain(head, input)
-                ).print()
+                this.takes.take(req).print()
             ).print(output);
+            // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
             new RsPrint(BkBasic.failure(ex)).print(output);
         } finally {
             output.close();
-            input.close();
         }
     }
 

@@ -25,13 +25,13 @@ package org.takes.it.fm;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import com.jcabi.http.response.XmlResponse;
 import com.jcabi.http.wire.VerboseWire;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -67,11 +67,13 @@ public final class AppTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
+                        .uri().path("/f").back()
                         .through(VerboseWire.class)
                         .fetch()
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.containsString("simple demo"));
+                        .as(XmlResponse.class)
+                        .assertXPath("//xhtml:li[.='hello.txt: 13']");
                 }
             }
         );

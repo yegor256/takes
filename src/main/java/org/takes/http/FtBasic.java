@@ -66,7 +66,7 @@ public final class FtBasic implements Front {
      * @param bck Back
      */
     public FtBasic(final Back bck) {
-        this(bck, 50);
+        this(bck, Runtime.getRuntime().availableProcessors() << 2);
     }
 
     /**
