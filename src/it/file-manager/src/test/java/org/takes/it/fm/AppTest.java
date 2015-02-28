@@ -35,7 +35,6 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.takes.http.FtBasic;
 import org.takes.http.FtRemote;
 
 /**
@@ -44,7 +43,6 @@ import org.takes.http.FtRemote;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class AppTest {
 
     /**
@@ -62,7 +60,7 @@ public final class AppTest {
     public void justWorks() throws Exception {
         final File dir = this.temp.newFolder();
         FileUtils.write(new File(dir, "hello.txt"), "hello, world!");
-        new FtRemote(new FtBasic(new App(dir), 1)).exec(
+        new FtRemote(new App(dir)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {

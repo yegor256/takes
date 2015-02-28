@@ -50,25 +50,8 @@ public final class FtDaemon implements Front {
     }
 
     @Override
-    public void listen(final int port, final Exit exit) throws IOException {
-        this.origin.listen(port, exit);
-    }
-
-    /**
-     * Listen here, forever.
-     * @param port The port
-     * @throws IOException If fails
-     */
-    public void listen(final int port) throws IOException {
-        this.listen(
-            port,
-            new Exit() {
-                @Override
-                public boolean ready() {
-                    return false;
-                }
-            }
-        );
+    public void start(final Exit exit) throws IOException {
+        this.origin.start(Exit.NEVER);
     }
 
 }

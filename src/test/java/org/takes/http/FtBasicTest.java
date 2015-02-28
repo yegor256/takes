@@ -40,7 +40,6 @@ import org.takes.ts.TsRegex;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class FtBasicTest {
 
     /**
@@ -49,10 +48,7 @@ public final class FtBasicTest {
      */
     @Test
     public void justWorks() throws Exception {
-        final Front front = new FtBasic(
-            new TsRegex().with("/", "hello, world!"), 1
-        );
-        new FtRemote(front).exec(
+        new FtRemote(new TsRegex().with("/", "hello, world!")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -73,10 +69,7 @@ public final class FtBasicTest {
      */
     @Test
     public void gracefullyHandlesBrokenBack() throws Exception {
-        final Front front = new FtBasic(
-            new BkBasic(new TsFailure("Jeffrey Lebowski")), 1
-        );
-        new FtRemote(front).exec(
+        new FtRemote(new TsFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {

@@ -21,70 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.it.fm;
+package org.takes.http;
 
-import java.io.File;
 import java.io.IOException;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.http.Exit;
-import org.takes.http.FtCLI;
-import org.takes.rq.RqRegex;
-import org.takes.tk.TkHTML;
-import org.takes.tk.TkRedirect;
-import org.takes.ts.TsRegex;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import lombok.EqualsAndHashCode;
 
 /**
- * App.
+ * Parallel back-end.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class App implements Takes {
+@EqualsAndHashCode(of = { "origin", "service" })
+public final class BkParallel implements Back {
 
     /**
-     * Home.
+     * Original back.
      */
-    private final transient File home;
+    private final transient Back origin;
+
+    /**
+     * Service.
+     */
+    private final transient ExecutorService service;
 
     /**
      * Ctor.
-     * @param dir Home dir
+     * @param back Original back
      */
-    public App(final File dir) {
-        this.home = dir;
+    public BkParallel(final Back back) {
+        this(back, Runtime.getRuntime().availableProcessors());
     }
 
     /**
-     * Entry point.
-     * @param args Arguments
-     * @throws IOException If fails
+     * Ctor.
+     * @param back Original back
+     * @param threads Threads total
      */
-    public static void main(final String... args) throws IOException {
-        new FtCLI(
-            new App(new File(System.getProperty("user.dir"))),
-            args
-        ).start(Exit.NEVER);
+    public BkParallel(final Back back, final int threads) {
+        this.origin = back;
+        this.service = Executors.newFixedThreadPool(threads);
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
-        return new TsRegex()
-            .with("/", new TkRedirect("/f"))
-            .with("/about", new TkHTML(App.class.getResource("about.html")))
-            .with("/robots.txt", "")
-            .with(
-                "/f(.*)",
-                new TsRegex.Fast() {
-                    @Override
-                    public Take take(final RqRegex req) {
-                        return new TkDir(App.this.home, req.matcher().group(1));
+    @SuppressWarnings("PMD.DoNotUseThreads")
+    public void accept(final Socket socket) {
+        this.service.execute(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        BkParallel.this.origin.accept(socket);
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
                     }
                 }
-            )
-            .take(request);
+            }
+        );
     }
+
 }

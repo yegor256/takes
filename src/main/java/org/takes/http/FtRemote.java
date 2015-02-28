@@ -28,6 +28,7 @@ import java.net.ServerSocket;
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
+import org.takes.Takes;
 
 /**
  * Front remote control.
@@ -35,27 +36,50 @@ import lombok.EqualsAndHashCode;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode(of = { "back", "port" })
 public final class FtRemote implements Front {
 
     /**
-     * Origin.
+     * Back.
      */
-    private final transient Front origin;
+    private final transient Back back;
+
+    /**
+     * Port.
+     */
+    private final transient int port;
 
     /**
      * Ctor.
-     * @param front Front
+     * @param tks Takes
+     * @throws IOException If fails
      */
-    public FtRemote(final Front front) {
-        this.origin = front;
+    public FtRemote(final Takes tks) throws IOException {
+        this(new BkParallel(new BkBasic(tks)));
+    }
+
+    /**
+     * Ctor.
+     * @param bck Back
+     * @throws IOException If fails
+     */
+    public FtRemote(final Back bck) throws IOException {
+        this.back = bck;
+        final ServerSocket socket = new ServerSocket(0);
+        try {
+            socket.setReuseAddress(true);
+            this.port = socket.getLocalPort();
+        } finally {
+            socket.close();
+        }
     }
 
     @Override
-    public void listen(final int port, final Exit exit) throws IOException {
-        this.origin.listen(port, exit);
+    public void start(final Exit exit) throws IOException {
+        new FtBasic(this.back, this.port).start(exit);
     }
 
     /**
@@ -64,15 +88,13 @@ public final class FtRemote implements Front {
      * @throws IOException If fails
      */
     public void exec(final FtRemote.Script script) throws IOException {
-        final int port = FtRemote.port();
         final AtomicBoolean exit = new AtomicBoolean();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        FtRemote.this.listen(
-                            port,
+                        FtRemote.this.start(
                             new Exit() {
                                 @Override
                                 public boolean ready() {
@@ -87,28 +109,17 @@ public final class FtRemote implements Front {
             }
         );
         thread.start();
-        script.exec(URI.create(String.format("http://localhost:%d", port)));
+        script.exec(
+            URI.create(
+                String.format("http://localhost:%d", this.port)
+            )
+        );
         exit.set(true);
         try {
             thread.join();
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * Reserve new TCP port.
-     * @return Reserved port.
-     * @throws IOException If fails
-     */
-    private static int port() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
-            socket.setReuseAddress(true);
-            return socket.getLocalPort();
-        } finally {
-            socket.close();
         }
     }
 

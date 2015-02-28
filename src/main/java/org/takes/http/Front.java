@@ -35,11 +35,10 @@ import java.io.IOException;
 public interface Front {
 
     /**
-     * Listen to this port.
-     * @param port Port number
-     * @param exit Exit
+     * Start and dispatch all incoming sockets.
+     * @param exit When to exit
      * @throws IOException If fails
      */
-    void listen(int port, Exit exit) throws IOException;
+    void start(Exit exit) throws IOException;
 
 }

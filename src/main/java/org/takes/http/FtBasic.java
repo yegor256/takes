@@ -25,9 +25,7 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.Takes;
@@ -39,8 +37,7 @@ import org.takes.Takes;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = { "back", "threads" })
+@EqualsAndHashCode(of = { "back", "port" })
 public final class FtBasic implements Front {
 
     /**
@@ -49,80 +46,52 @@ public final class FtBasic implements Front {
     private final transient Back back;
 
     /**
-     * Max threads.
+     * Port.
      */
-    private final transient int threads;
+    private final transient int port;
 
     /**
      * Ctor.
      * @param tks Takes
+     * @param prt Port
      */
-    public FtBasic(final Takes tks) {
-        this(new BkBasic(tks));
+    public FtBasic(final Takes tks, final int prt) {
+        this(new BkBasic(tks), prt);
     }
 
     /**
      * Ctor.
      * @param bck Back
+     * @param prt Port
      */
-    public FtBasic(final Back bck) {
-        this(bck, Runtime.getRuntime().availableProcessors() << 2);
-    }
-
-    /**
-     * Ctor.
-     * @param takes Takes
-     * @param max Max threads
-     */
-    public FtBasic(final Takes takes, final int max) {
-        this(new BkBasic(takes), max);
-    }
-
-    /**
-     * Ctor.
-     * @param bck Back
-     * @param max Max threads
-     */
-    public FtBasic(final Back bck, final int max) {
+    public FtBasic(final Back bck, final int prt) {
         this.back = bck;
-        this.threads = max;
+        this.port = prt;
     }
 
     @Override
-    public void listen(final int port, final Exit exit) throws IOException {
-        final ScheduledExecutorService service =
-            Executors.newScheduledThreadPool(this.threads);
-        final ServerSocket server = new ServerSocket(port);
-        final Runnable proc = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final Socket socket = server.accept();
-                    try {
-                        FtBasic.this.back.accept(socket);
-                    } finally {
-                        socket.close();
-                    }
-                } catch (final IOException ex) {
-                    assert ex != null;
-                }
-            }
-        };
-        for (int idx = 0; idx < this.threads; ++idx) {
-            service.scheduleWithFixedDelay(proc, 1L, 1L, TimeUnit.NANOSECONDS);
-        }
+    public void start(final Exit exit) throws IOException {
+        final ServerSocket server = new ServerSocket(this.port);
+        server.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {
             while (!exit.ready()) {
-                try {
-                    TimeUnit.SECONDS.sleep(1L);
-                } catch (final InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    throw new IllegalStateException(ex);
-                }
+                this.loop(server);
             }
         } finally {
-            service.shutdown();
             server.close();
+        }
+    }
+
+    /**
+     * Make a loop cycle.
+     * @param server Server socket
+     * @throws IOException If fails
+     */
+    private void loop(final ServerSocket server) throws IOException {
+        try {
+            this.back.accept(server.accept());
+        } catch (final SocketTimeoutException ex) {
+            assert ex != null;
         }
     }
 

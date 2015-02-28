@@ -33,12 +33,15 @@ This is what is not supported and won't be supported:
 Here it is:
 
 ```java
-import org.takes.http.TakesServer;
+import org.takes.http.FtBasic;
+import org.takes.http.FtDaemon;
 import org.takes.TsRegex;
 public final class App {
   public static void main(final String... args) {
-    new TakesServer(
-      new TsRegex().with("/", "hello, world!")
+    new FtDaemon(
+      new FtBasic(
+        new TsRegex().with("/", "hello, world!")
+      )
     ).listen(8080);
   }
 }
@@ -60,10 +63,12 @@ Let's make it a bit more sophisticated:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new TakesServer(
-      new TsRegex()
-        .with("/robots\\.txt", "")
-        .with("/", new TkIndex())
+    new FtDaemon(
+      new FtBasic(
+        new TsRegex()
+          .with("/robots\\.txt", "")
+          .with("/", new TkIndex())
+      )
     ).listen(8080);
   }
 }
@@ -91,22 +96,20 @@ an instance of `Response`. So far so good, but this class doesn't have an access
 to an HTTP request. Here is how we solve this:
 
 ```java
-new TakesServer(
-  new TsRegex().with(
-    "/file/(?<path>[^/]+)",
-    new TsRegex.Fast() {
-      @Override
-      public Take take(final RqRegex request) {
-        final File file = new File(
-          request.matcher().group("path")
-        );
-        return new TkHTML(
-          FileUtils.readFileToString(file, Charsets.UTF_8)
-        );
-      }
+new TsRegex().with(
+  "/file/(?<path>[^/]+)",
+  new TsRegex.Fast() {
+    @Override
+    public Take take(final RqRegex request) {
+      final File file = new File(
+        request.matcher().group("path")
+      );
+      return new TkHTML(
+        FileUtils.readFileToString(file, Charsets.UTF_8)
+      );
     }
-  )
-).listen(8080);
+  }
+)
 ```
 
 We're using `TsRegex.Fast` instead of `Takes`, in order to deal with
@@ -118,32 +121,34 @@ Here is a more complex and verbose example:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new TakesServer(
-      new TsRegex()
-        .with("/robots.txt", "")
-        .with("/", new TkIndex())
-        .with(
-          "/xsl/.*",
-          new TsContentType(new TsClasspath(), "text/xsl")
-        )
-        .with(
-          "/account",
-          new Takes() {
-            @Override
-            public Take take(final Request request) {
-              return new TkAccount(users, request);
+    new FtDaemon(
+      new FtBasic(
+        new TsRegex()
+          .with("/robots.txt", "")
+          .with("/", new TkIndex())
+          .with(
+            "/xsl/.*",
+            new TsContentType(new TsClasspath(), "text/xsl")
+          )
+          .with(
+            "/account",
+            new Takes() {
+              @Override
+              public Take take(final Request request) {
+                return new TkAccount(users, request);
+              }
             }
-          }
-        )
-        .with(
-          "/balance/(?<user>[a-z]+)",
-          new TsRegex.Fast() {
-            @Override
-            public Take take(final RqRegex request) {
-              return new TkBalance(request.matcher().group("user"));
+          )
+          .with(
+            "/balance/(?<user>[a-z]+)",
+            new TsRegex.Fast() {
+              @Override
+              public Take take(final RqRegex request) {
+                return new TkBalance(request.matcher().group("user"));
+              }
             }
-          }
-        )
+          )
+      )
     ).listen(8080);
   }
 }
@@ -190,10 +195,6 @@ public final class User implements XeSource {
       .add("name").set(this.name).up()
       .add("balance").set(Integer.toString(this.balance));
   }
-  @Override
-  public String toString() {
-    return this.name;
-  }
 }
 ```
 
@@ -232,11 +233,9 @@ stylesheets, images, JavaScript files, etc. There are a few supplementary
 classes for that:
 
 ```java
-new TakesServer(
-  new TsRegex()
-    .with("/css/.+", new TsContentType(new TsClasspath(), "text/css"))
-    .with("/data/.+", new TsFiles(new File("/usr/local/data"))
-).listen(8080);
+new TsRegex()
+  .with("/css/.+", new TsContentType(new TsClasspath(), "text/css"))
+  .with("/data/.+", new TsFiles(new File("/usr/local/data"))
 ```
 
 Class `TsClasspath` takes static part of the request URI and finds a resource with this name in classpath.
@@ -254,21 +253,19 @@ and restart it. Here is what you need to do to your sources in order to enable
 that feature:
 
 ```java
-new TakesServer(
-  new TsRegex()
-    .with(
-      "/css/.+",
-      new TsContentType(
-        new TsHitRefresh(
-          "./target/classes/foo", // where to get fresh files
-          "./src/main/resources/foo/scss/**", // what sources to watch
-          "mvn sass:compile", // what to run when sources are modified
-          new TsClasspath()
-        ),
-        "text/css"
-      )
+new TsRegex()
+  .with(
+    "/css/.+",
+    new TsContentType(
+      new TsHitRefresh(
+        "./target/classes/foo", // where to get fresh files
+        "./src/main/resources/foo/scss/**", // what sources to watch
+        "mvn sass:compile", // what to run when sources are modified
+        new TsClasspath()
+      ),
+      "text/css"
     )
-).listen(8080);
+  )
 ```
 
 This `TsHitRefresh` takes is a decorator of another takes. Once it sees
@@ -306,7 +303,7 @@ public final class TkSavePhoto implements Take {
   public Response print() {
     final String name = this.request.param("name");
     final File file = this.request.file("image");
-    return new Response.NO_CONTENT;
+    return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
 }
 ```
@@ -320,12 +317,14 @@ this behavior:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new TakesServer(
-      new TsFallback(
-        new TsRegex()
-          .with("/robots\\.txt", "")
-          .with("/", new TkIndex()),
-        new TkHTML("oops, something went wrong!")
+    new FtDaemon(
+      new FtBasic(
+        new TsFallback(
+          new TsRegex()
+            .with("/robots\\.txt", "")
+            .with("/", new TkIndex()),
+          new TkHTML("oops, something went wrong!")
+        )
       )
     ).listen(8080);
   }
@@ -370,9 +369,11 @@ Then, you should decorate the entire `TsRegex` with this `TsFailFast`:
 ```java
 public final class App {
   public static void main(final String... args) {
-    new TakesServer(
-      new TsFailFast(
-        new TsRegex().with("/", new TkPostMessage())
+    new FtDaemon(
+      new FtBasic(
+        new TsFailFast(
+          new TsRegex().with("/", new TkPostMessage())
+        )
       )
     ).listen(8080);
   }
@@ -466,7 +467,7 @@ This is how this `XeFoo` class would look like:
 public final class XeFoo implements XeSource.Wrap {
   public XeFoo(final String stylesheet, final XeSource... sources) {
     super(
-      XeConcat(
+      new XeChain(
         new XeRoot("page"),
         new XeMillis(false),
         new XeStylesheet(stylesheet),
@@ -491,19 +492,14 @@ public final class XeFoo implements XeSource.Wrap {
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
 
 ```java
-public final class App {
-  public static void main(final String... args) {
-    new TakesServer(
-      new TsAuth(
-        new TsRegex()
-          .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
-          .with("/acc", new TkAuthOnly(new TkAccount()))
-          .with("/facebook", new TkFacebook("key", "secret")),
-        "some-secret-word",
-        "/facebook"
-      )
-    ).listen(8080);
-  }
+new TsAuth(
+  new TsRegex()
+    .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
+    .with("/acc", new TkAuthOnly(new TkAccount()))
+    .with("/facebook", new TkFacebook("key", "secret")),
+  "some-secret-word",
+  "/facebook"
+)
 }
 ```
 
@@ -529,7 +525,11 @@ public final class TkAccount implements Take {
 
 ## Command Line Arguments
 
-There are a few command line arguments that should be passed to `TakesServer#listen()` method:
+There is a convenient class `FtCLI` that parses command line arguments and
+starts the necessary `Front` accordingly.
+
+There are a few command line arguments that should be passed to
+`FtCLI#run(String...)` method:
 
 ```
 --port=1234     Tells the server to listen to TCP port 1234
@@ -539,7 +539,8 @@ There are a few command line arguments that should be passed to `TakesServer#lis
 
 ## Logging
 
-The framework sends all logs to SLF4J logging facility. If you want to see them, configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
+The framework sends all logs to SLF4J logging facility. If you want to see them,
+configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
 
 ## Directory Layout
 

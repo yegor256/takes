@@ -86,11 +86,9 @@ public final class BkBasic implements Back {
             }
             head.add(line);
         }
-        final OutputStream output = socket.getOutputStream();
         try {
-            this.print(new RqPlain(head, input), output);
+            this.print(new RqPlain(head, input), socket.getOutputStream());
         } finally {
-            output.close();
             input.close();
         }
     }
