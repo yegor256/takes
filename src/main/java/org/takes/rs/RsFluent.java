@@ -46,6 +46,13 @@ public final class RsFluent implements Response {
 
     /**
      * Ctor.
+     */
+    public RsFluent() {
+        this(new RsEmpty());
+    }
+
+    /**
+     * Ctor.
      * @param res Original response
      */
     public RsFluent(final Response res) {
@@ -88,6 +95,15 @@ public final class RsFluent implements Response {
      */
     public RsFluent withHeader(final String key, final String value) {
         return new RsFluent(new RsWithHeader(this.origin, key, value));
+    }
+
+    /**
+     * With this content type.
+     * @param ctype Content type
+     * @return New fluent response
+     */
+    public RsFluent withContentType(final String ctype) {
+        return new RsFluent(new RsWithType(this.origin, ctype));
     }
 
     /**
