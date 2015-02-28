@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.jcabi.incubator</groupId>
             <artifactId>xembly</artifactId>
-            <version>0.20</version>
+            <version>0.20.1</version>
         </dependency>
         <dependency>
             <groupId>com.jcabi</groupId>

@@ -57,7 +57,7 @@ final class TkDir implements Take {
     }
 
     @Override
-    public Response print() {
+    public Response act() {
         return new RsPage(
             "/dir.xsl",
             new Items(new File(this.home, this.path))

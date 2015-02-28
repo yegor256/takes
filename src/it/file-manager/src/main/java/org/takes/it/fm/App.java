@@ -71,7 +71,7 @@ public final class App implements Takes {
     }
 
     @Override
-    public Take take(final Request request) throws IOException {
+    public Take route(final Request request) throws IOException {
         return new TsRegex()
             .with("/", new TkRedirect("/f"))
             .with("/about", new TkHTML(App.class.getResource("about.html")))

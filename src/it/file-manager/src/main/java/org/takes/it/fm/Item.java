@@ -24,7 +24,6 @@
 package org.takes.it.fm;
 
 import java.io.File;
-import java.io.IOException;
 import org.takes.rs.xe.XeSource;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -52,7 +51,7 @@ final class Item implements XeSource {
     }
 
     @Override
-    public Iterable<Directive> toXembly() throws IOException {
+    public Iterable<Directive> toXembly() {
         final String name = this.file.getName();
         return new Directives().add("file")
             .add("name").set(name).up()

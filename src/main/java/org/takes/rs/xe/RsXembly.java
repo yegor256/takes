@@ -94,7 +94,6 @@ public final class RsXembly implements Response {
     @Override
     public InputStream body() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        System.out.println(this.source.toXembly());
         final Node node = new Xembler(this.source.toXembly()).domQuietly();
         try {
             TransformerFactory.newInstance().newTransformer().transform(
