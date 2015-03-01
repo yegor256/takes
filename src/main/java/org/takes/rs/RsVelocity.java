@@ -96,7 +96,7 @@ public final class RsVelocity implements Response {
      * @param value Value
      * @return Response
      */
-    public RsVelocity with(final String key, final String value) {
+    public RsVelocity with(final String key, final Object value) {
         final ConcurrentMap<String, Object> map =
             new ConcurrentHashMap<String, Object>(this.params.size() + 1);
         map.putAll(this.params);
