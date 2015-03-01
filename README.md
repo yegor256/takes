@@ -207,18 +207,27 @@ public final class RsLogin extends Response.Wrap {
 }
 ```
 
+## Velocity Templates
+
 Let's say, you want to use [Velocity](http://velocity.apache.org/):
 
 ```java
 public final class TkHelloWorld implements Take {
   @Override
   public Response print() {
-    return new RsVelocity(
-      "<html>Hello, ${user.name}! Balance: ${user.balance}</html>",
-      new ArrayMap<String, Object>().with("user", new User())
-    );
+    return new RsVelocity("hi, ${user.name}! You've got ${user.balance}")
+      .with("user", new User());
   }
 }
+```
+
+You will need this extra dependency in classpath:
+
+```xml
+<dependency>
+  <groupId>org.apache.velocity</groupId>
+  <artifactId>velocity-engine-core</artifactId>
+</dependency>
 ```
 
 ## Static Resources
@@ -487,6 +496,15 @@ public final class XeFoo implements XeSource.Wrap {
     );
   }
 }
+```
+
+You will need this extra dependency in classpath:
+
+```xml
+<dependency>
+  <groupId>com.jcabi.incubator</groupId>
+  <artifactId>xembly</artifactId>
+</dependency>
 ```
 
 ## OAuth Login
