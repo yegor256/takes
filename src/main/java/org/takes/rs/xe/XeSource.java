@@ -24,6 +24,7 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
+import java.util.Collections;
 import org.xembly.Directive;
 
 /**
@@ -34,6 +35,16 @@ import org.xembly.Directive;
  * @since 0.1
  */
 public interface XeSource {
+
+    /**
+     * Empty.
+     */
+    XeSource EMPTY = new XeSource() {
+        @Override
+        public Iterable<Directive> toXembly() {
+            return Collections.emptyList();
+        }
+    };
 
     /**
      * Get Xembly directives.
