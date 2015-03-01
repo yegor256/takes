@@ -51,6 +51,15 @@ public final class XeAppend implements XeSource {
     /**
      * Ctor.
      * @param name Name of XML element
+     * @param value Value to set
+     */
+    public XeAppend(final String name, final String value) {
+        this(name, new XeDirectives(new Directives().set(value)));
+    }
+
+    /**
+     * Ctor.
+     * @param name Name of XML element
      * @param src Source
      */
     public XeAppend(final String name, final XeSource... src) {
