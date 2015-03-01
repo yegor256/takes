@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +71,15 @@ public final class RsVelocity implements Response {
      */
     public RsVelocity(final String tpl) {
         this(new ByteArrayInputStream(tpl.getBytes()));
+    }
+
+    /**
+     * Ctor.
+     * @param tpl Template
+     * @throws IOException If fails
+     */
+    public RsVelocity(final URL tpl) throws IOException {
+        this(tpl.openStream());
     }
 
     /**
