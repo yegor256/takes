@@ -293,6 +293,19 @@ new TsRegex()
   )
 ```
 
+## Request Parsing
+
+Here is how you can parse an instance of `Request`:
+
+```java
+RqQuery req = new RqQuery(request);
+URI uri = req.query();
+String value = req.param("key", "default");
+```
+
+For a more complex parsing try to use Apache Http Client or something
+similar.
+
 ## Form Processing
 
 Here is an example:

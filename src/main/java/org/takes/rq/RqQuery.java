@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -62,6 +63,26 @@ public final class RqQuery implements Request {
         final String line = this.origin.head().get(0);
         final String[] parts = line.split(" ", 3);
         return URI.create(parts[1]);
+    }
+
+    /**
+     * Get param by name.
+     * @param key Name of the param to get
+     * @param def Default
+     * @return HTTP query
+     * @throws IOException If fails
+     */
+    public String param(final String key, final String def) throws IOException {
+        final String[] pairs = this.query().toString().split("&");
+        String found = def;
+        for (final String pair : pairs) {
+            final String[] parts = pair.split("=");
+            if (parts[0].equals(key)) {
+                found = URLDecoder.decode(parts[1], "UTF-8");
+                break;
+            }
+        }
+        return found;
     }
 
     @Override
