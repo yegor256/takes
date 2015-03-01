@@ -56,6 +56,14 @@ public final class TsWithHeaders implements Takes {
     /**
      * Ctor.
      * @param takes Original takes
+     */
+    public TsWithHeaders(final Takes takes) {
+        this(takes, Collections.<String>emptyList());
+    }
+
+    /**
+     * Ctor.
+     * @param takes Original takes
      * @param hdrs Headers
      */
     public TsWithHeaders(final Takes takes, final Collection<String> hdrs) {
