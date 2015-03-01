@@ -102,7 +102,7 @@ public final class RsFluent implements Response {
      * @param ctype Content type
      * @return New fluent response
      */
-    public RsFluent withContentType(final String ctype) {
+    public RsFluent withType(final String ctype) {
         return new RsFluent(new RsWithType(this.origin, ctype));
     }
 
