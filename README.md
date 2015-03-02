@@ -82,13 +82,13 @@ let's see how it looks:
 ```java
 public final class TkIndex implements Take {
   @Override
-  public Response print() {
+  public Response act() {
     return new RsHtml("<html>Hello, world!</html>");
   }
 }
 ```
 
-It is immutable and must implement a single method `print()`, which is returning
+It is immutable and must implement a single method `act()`, which is returning
 an instance of `Response`. So far so good, but this class doesn't have an access
 to an HTTP request. Here is how we solve this:
 
@@ -97,7 +97,7 @@ new TsRegex().with(
   "/file/(?<path>[^/]+)",
   new TsRegex.Fast() {
     @Override
-    public Take take(final RqRegex request) {
+    public Take route(final RqRegex request) {
       final File file = new File(
         request.matcher().group("path")
       );
@@ -130,7 +130,7 @@ public final class App {
           "/account",
           new Takes() {
             @Override
-            public Take take(final Request request) {
+            public Take route(final Request request) {
               return new TkAccount(users, request);
             }
           }
@@ -139,7 +139,7 @@ public final class App {
           "/balance/(?<user>[a-z]+)",
           new TsRegex.Fast() {
             @Override
-            public Take take(final RqRegex request) {
+            public Take route(final RqRegex request) {
               return new TkBalance(request.matcher().group("user"));
             }
           }
@@ -163,7 +163,7 @@ public final class TkAccount implements Take {
     this.user = users.find(new RqCookies(request).get("user"));
   }
   @Override
-  public Response print() {
+  public Response act() {
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
@@ -199,8 +199,8 @@ Here is how `RsLogin` may look like:
 public final class RsLogin extends Response.Wrap {
   public RsLogin(final Response response, final User user) {
     super(
-      new RsCookied(response).with(
-        "user", user.toString()
+      new RsWithCookie(
+        response, "user", user.toString()
       )
     );
   }
@@ -214,7 +214,7 @@ Let's say, you want to use [Velocity](http://velocity.apache.org/):
 ```java
 public final class TkHelloWorld implements Take {
   @Override
-  public Response print() {
+  public Response act() {
     return new RsVelocity("hi, ${user.name}! You've got ${user.balance}")
       .with("user", new User());
   }
@@ -317,7 +317,7 @@ public final class TkSavePhoto implements Take {
     this.request = new RqForm(req);
   }
   @Override
-  public Response print() {
+  public Response act() {
     final String name = this.request.param("name");
     final File file = this.request.file("image");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
@@ -363,7 +363,7 @@ public final class TkPostMessage implements Take {
     this.request = req;
   }
   @Override
-  public Response print() {
+  public Response act() {
     final String body = new RqPost(this.request).text();
     if (body.isEmpty()) {
       throw new RsWithHeader(
@@ -406,7 +406,7 @@ public final class App {
 Here is how we can deal with JSON:
 
 ```java
-public final class TkBalance extends Take.Fixed {
+public final class TkBalance extends TkFixed {
   public TkBalance(final RqRegex request) {
     super(
       new RsJSON(
@@ -520,6 +520,40 @@ You will need this extra dependency in classpath:
 </dependency>
 ```
 
+## Cookies
+
+Here is how we drop a cookie to the user:
+
+```java
+public final class TkIndex implements Take {
+  @Override
+  public Response act() {
+    return new RsWithCookie("auth", "John Doe");
+  }
+}
+```
+
+An HTTP response will contain this header, which will place
+a `auth` cookie into the user's browser:
+
+```
+HTTP/1.1 200 OK
+Set-Cookie: auth="John Doe"
+```
+
+This is how you read cookies from a request:
+
+```java
+public final class TsIndex implements Takes {
+  @Override
+  public Take route(final Request req) {
+    // the list may be empty
+    final List<String> cookies = new RqCookies(req).get("my-cookie");
+  }
+}
+```
+
+
 ## OAuth Login
 
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
@@ -546,7 +580,7 @@ public final class TkAccount implements Take {
     this.request = new RqAuth(req);
   }
   @Override
-  public Response print() {
+  public Response act() {
     if (this.request.authenticated()) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
       this.request.identity();
