@@ -9,7 +9,9 @@
 
 **It is still an early DRAFT. If you have ideas or corrections, please submit them [here](https://github.com/yegor256/takes/issues).**
 
-Takes is a [pure object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html) and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html) Java7 web development framework. Its key benefits, comparing to all others, include:
+Takes is a [pure object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
+and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
+Java6 web development framework. Its key benefits, comparing to all others, include:
 
  * not a single mutable class!
  * not a single `public` `static` method!
@@ -561,7 +563,7 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 new TsAuth(
   new TsRegex()
     .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
-    .with("/acc", new TkSecure(new TkAccount()))
+    .with("/acc", new TsSecure(new TsAccount()))
     .with("/facebook", new TkFacebook("key", "secret")),
   new PsCookie("some-secret-word")
 )

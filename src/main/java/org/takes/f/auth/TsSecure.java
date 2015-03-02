@@ -24,74 +24,53 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
+import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHeaders;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.f.flash.RsFlash;
+import org.takes.f.forward.RsForward;
 
 /**
- * Request with auth information.
+ * Takes available for authenticated users.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
+@EqualsAndHashCode(of = { "origin", "loc" })
+public final class TsSecure implements Takes {
 
     /**
-     * Original request.
+     * Original takes.
      */
-    private final transient Request origin;
+    private final transient Takes origin;
 
     /**
-     * Header with authentication info.
+     * Location where to forward.
      */
-    private final transient String header;
-
-    /**
-     * Ctor.
-     * @param request Original
-     */
-    public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
-    }
+    private final transient String loc;
 
     /**
      * Ctor.
-     * @param request Original
-     * @param hdr Header to read
+     * @param takes Original
+     * @param location Where to forward
      */
-    public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
-        this.header = hdr;
+    public TsSecure(final Takes takes, final String location) {
+        this.origin = takes;
+        this.loc = location;
     }
 
-    /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
-     */
-    public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
-        final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            user = new BaseIdentity(headers.get(0));
+    @Override
+    public Take route(final Request request) throws IOException {
+        if (new RqAuth(request).identity().equals(Identity.ANONYMOUS)) {
+            throw new RsForward(
+                new RsFlash("access denied", Level.WARNING),
+                this.loc
+            );
         }
-        return user;
+        return this.origin.route(request);
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

@@ -60,11 +60,11 @@ public final class PsChain implements Pass {
     }
 
     @Override
-    public String authenticate(final Request request) throws IOException {
-        String user = Pass.ANONYMOUS;
+    public Identity authenticate(final Request request) throws IOException {
+        Identity user = Identity.ANONYMOUS;
         for (final Pass pass : this.passes) {
             user = pass.authenticate(request);
-            if (!user.equals(Pass.ANONYMOUS)) {
+            if (!user.equals(Identity.ANONYMOUS)) {
                 break;
             }
         }

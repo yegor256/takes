@@ -24,74 +24,81 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
+import java.net.URLDecoder;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqHeaders;
 
 /**
- * Request with auth information.
+ * Identity in Base64.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
+@EqualsAndHashCode(of = { "name", "props" })
+final class BaseIdentity implements Identity {
 
     /**
-     * Original request.
+     * URN.
      */
-    private final transient Request origin;
+    private final transient String name;
 
     /**
-     * Header with authentication info.
+     * Properties.
      */
-    private final transient String header;
+    private final transient Map<String, String> props;
 
     /**
      * Ctor.
-     * @param request Original
-     */
-    public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param request Original
-     * @param hdr Header to read
-     */
-    public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
-        this.header = hdr;
-    }
-
-    /**
-     * Authenticated user.
-     * @return User identity
+     * @param text Identity in text
      * @throws IOException If fails
      */
-    public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
-        final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            user = new BaseIdentity(headers.get(0));
+    BaseIdentity(final String text) throws IOException {
+        final String[] parts = text.split(";");
+        this.name = parts[0];
+        final Map<String, String> map = new HashMap<String, String>(0);
+        for (int idx = 1; idx < parts.length; ++idx) {
+            final String[] pair = parts[idx].split("=");
+            map.put(pair[0], URLDecoder.decode(pair[1], "UTF-8"));
         }
-        return user;
+        this.props = map;
+    }
+
+    /**
+     * Ctor.
+     * @param origin Original identity
+     */
+    BaseIdentity(final Identity origin) {
+        this(origin.urn(), origin.properties());
+    }
+
+    /**
+     * Ctor.
+     * @param urn URN
+     * @param map Properties
+     */
+    BaseIdentity(final String urn, final Map<String, String> map) {
+        this.name = urn;
+        this.props = Collections.unmodifiableMap(map);
+    }
+
+    /**
+     * Convert it to text.
+     * @return Text
+     */
+    public String toText() {
+        return "";
     }
 
     @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
+    public String urn() {
+        return this.name;
     }
 
     @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+    public Map<String, String> properties() {
+        return Collections.unmodifiableMap(this.props);
     }
 }

@@ -24,74 +24,60 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHeaders;
+import org.takes.rq.RqQuery;
 
 /**
- * Request with auth information.
+ * Passes by flag.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
+@EqualsAndHashCode(of = { "flag", "passes" })
+public final class PsByFlag implements Pass {
 
     /**
-     * Original request.
+     * The flag.
      */
-    private final transient Request origin;
+    private final transient String flag;
 
     /**
-     * Header with authentication info.
+     * Flags and passes.
      */
-    private final transient String header;
+    private final transient Map<String, Pass> passes;
 
     /**
      * Ctor.
-     * @param request Original
+     * @param map Map
      */
-    public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
+    public PsByFlag(final Map<String, Pass> map) {
+        this(PsByFlag.class.getSimpleName(), map);
     }
 
     /**
      * Ctor.
-     * @param request Original
-     * @param hdr Header to read
+     * @param flg Flag
+     * @param map Map
      */
-    public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
-        this.header = hdr;
+    public PsByFlag(final String flg, final Map<String, Pass> map) {
+        this.flag = flg;
+        this.passes = Collections.unmodifiableMap(map);
     }
 
-    /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
-     */
-    public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
-        final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
+    @Override
+    public Identity authenticate(final Request request) throws IOException {
+        final List<String> flg = new RqQuery(request).param(this.flag);
+        final Identity identity;
+        if (flg.isEmpty()) {
+            identity = Identity.ANONYMOUS;
         } else {
-            user = new BaseIdentity(headers.get(0));
+            identity = this.passes.get(flg.get(0)).authenticate(request);
         }
-        return user;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+        return identity;
     }
 }

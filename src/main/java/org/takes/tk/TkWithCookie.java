@@ -24,14 +24,9 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rs.RsWithHeaders;
 
 /**
  * Take that headers.
@@ -40,8 +35,8 @@ import org.takes.rs.RsWithHeaders;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "headers" })
-public final class TkWithHeaders implements Take {
+@EqualsAndHashCode(of = "origin")
+public final class TkWithCookie implements Take {
 
     /**
      * Original.
@@ -49,63 +44,21 @@ public final class TkWithHeaders implements Take {
     private final transient Take origin;
 
     /**
-     * Headers.
-     */
-    private final transient Collection<String> headers;
-
-    /**
      * Ctor.
      * @param take Original
+     * @param key Cookie name
+     * @param value Cookie value
      */
-    public TkWithHeaders(final Take take) {
-        this(take, Collections.<String>emptyList());
-    }
-
-    /**
-     * Ctor.
-     * @param take Original
-     * @param hdrs Headers
-     */
-    public TkWithHeaders(final Take take, final String... hdrs) {
-        this(take, Arrays.asList(hdrs));
-    }
-
-    /**
-     * Ctor.
-     * @param take Original
-     * @param hdrs Headers
-     */
-    public TkWithHeaders(final Take take, final Collection<String> hdrs) {
-        this.origin = take;
-        this.headers = Collections.unmodifiableCollection(hdrs);
+    public TkWithCookie(final Take take, final String key, final String value) {
+        this.origin = new TkWithHeaders(
+            take,
+            String.format("Set-Cookie: %s=%s", key, value)
+        );
     }
 
     @Override
     public Response act() throws IOException {
-        return new RsWithHeaders(this.origin.act(), this.headers);
-    }
-
-    /**
-     * With this header.
-     * @param text Header text
-     * @return Take
-     */
-    public TkWithHeaders with(final String text) {
-        final Collection<String> list =
-            new ArrayList<String>(this.headers.size());
-        list.addAll(this.headers);
-        list.add(text);
-        return new TkWithHeaders(this.origin, list);
-    }
-
-    /**
-     * With this header.
-     * @param name The name
-     * @param value The value
-     * @return Take
-     */
-    public TkWithHeaders with(final String name, final String value) {
-        return this.with(String.format("%s: %s", name, value));
+        return this.origin.act();
     }
 
 }

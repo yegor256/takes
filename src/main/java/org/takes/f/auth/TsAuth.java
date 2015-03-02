@@ -29,6 +29,7 @@ import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqWithHeader;
+import org.takes.tk.TkWithCookie;
 
 /**
  * Authenticating takes.
@@ -61,7 +62,7 @@ public final class TsAuth implements Takes {
      * @param pss Pass
      */
     public TsAuth(final Takes takes, final Pass pss) {
-        this(takes, pss, "X-Takes-Auth");
+        this(takes, pss, TsAuth.class.getSimpleName());
     }
 
     /**
@@ -78,13 +79,20 @@ public final class TsAuth implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        final String user = this.pass.authenticate(request);
+        final Identity identity = this.pass.authenticate(request);
         final Take take;
-        if (user.equals(Pass.ANONYMOUS)) {
+        if (identity.equals(Identity.ANONYMOUS)) {
             take = this.origin.route(request);
         } else {
-            take = this.origin.route(
-                new RqWithHeader(request, this.header, user)
+            take = new TkWithCookie(
+                this.origin.route(
+                    new RqWithHeader(
+                        request, this.header,
+                        new BaseIdentity(identity).toText()
+                    )
+                ),
+                PsCookie.class.getName(),
+                new BaseIdentity(identity).toText()
             );
         }
         return take;

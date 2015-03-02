@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -68,18 +69,16 @@ public final class RqQuery implements Request {
     /**
      * Get param by name.
      * @param key Name of the param to get
-     * @param def Default
-     * @return HTTP query
+     * @return All values found
      * @throws IOException If fails
      */
-    public String param(final String key, final String def) throws IOException {
+    public List<String> param(final String key) throws IOException {
         final String[] pairs = this.query().toString().split("&");
-        String found = def;
+        final List<String> found = new LinkedList<String>();
         for (final String pair : pairs) {
             final String[] parts = pair.split("=");
             if (parts[0].equals(key)) {
-                found = URLDecoder.decode(parts[1], "UTF-8");
-                break;
+                found.add(URLDecoder.decode(parts[1], "UTF-8"));
             }
         }
         return found;

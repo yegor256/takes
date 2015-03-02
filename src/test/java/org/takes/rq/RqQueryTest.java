@@ -74,8 +74,8 @@ public final class RqQueryTest {
                     ),
                     ""
                 )
-            ).param("d", ""),
-            Matchers.equalTo("9(x)")
+            ).param("d"),
+            Matchers.hasItem("9(x)")
         );
     }
 

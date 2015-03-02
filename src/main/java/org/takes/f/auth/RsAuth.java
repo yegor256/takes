@@ -27,62 +27,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqHeaders;
+import org.takes.Response;
+import org.takes.rs.RsWithCookie;
 
 /**
- * Request with auth information.
+ * Authenticating response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
+@EqualsAndHashCode(of = "origin")
+public final class RsAuth implements Response {
 
     /**
-     * Original request.
+     * Original response.
      */
-    private final transient Request origin;
-
-    /**
-     * Header with authentication info.
-     */
-    private final transient String header;
+    private final transient Response origin;
 
     /**
      * Ctor.
-     * @param request Original
+     * @param identity Identity just authenticated
      */
-    public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param request Original
-     * @param hdr Header to read
-     */
-    public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
-        this.header = hdr;
-    }
-
-    /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
-     */
-    public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
-        final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            user = new BaseIdentity(headers.get(0));
-        }
-        return user;
+    public RsAuth(final Identity identity) {
+        this.origin = new RsWithCookie(
+            PsCookie.class.getSimpleName(),
+            new BaseIdentity(identity).toText()
+        );
     }
 
     @Override

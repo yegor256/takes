@@ -98,6 +98,21 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-http</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-xml</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.7</version>
@@ -137,17 +152,7 @@
         </dependency>
         <dependency>
             <groupId>com.jcabi</groupId>
-            <artifactId>jcabi-http</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jcabi</groupId>
             <artifactId>jcabi-log</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jcabi</groupId>
-            <artifactId>jcabi-xml</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

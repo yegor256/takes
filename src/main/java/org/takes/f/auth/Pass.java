@@ -36,16 +36,11 @@ import org.takes.Request;
 public interface Pass {
 
     /**
-     * Anonymous user URN.
-     */
-    String ANONYMOUS = "urn:takes:anonymous";
-
-    /**
      * Authenticate the user by the request.
      * @param request The request
-     * @return URN of the user found or anonymous
+     * @return Identity of the user found
      * @throws IOException If fails
      */
-    String authenticate(Request request) throws IOException;
+    Identity authenticate(Request request) throws IOException;
 
 }

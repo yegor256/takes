@@ -21,24 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.f.auth;
+package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHeaders;
 
 /**
- * Request with auth information.
+ * Request decorator, for HTTP URI re-building.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
+@EqualsAndHashCode(of = "origin")
+public final class RqURI implements Request {
 
     /**
      * Original request.
@@ -46,43 +46,26 @@ public final class RqAuth implements Request {
     private final transient Request origin;
 
     /**
-     * Header with authentication info.
-     */
-    private final transient String header;
-
-    /**
      * Ctor.
-     * @param request Original
+     * @param req Original request
      */
-    public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
+    public RqURI(final Request req) {
+        this.origin = req;
     }
 
     /**
-     * Ctor.
-     * @param request Original
-     * @param hdr Header to read
-     */
-    public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
-        this.header = hdr;
-    }
-
-    /**
-     * Authenticated user.
-     * @return User identity
+     * Get full request URI.
+     * @return HTTP request URI
      * @throws IOException If fails
      */
-    public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
-        final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            user = new BaseIdentity(headers.get(0));
-        }
-        return user;
+    public URI uri() throws IOException {
+        return URI.create(
+            String.format(
+                "%s%s",
+                new RqHeaders(this.origin).header("Host").get(0),
+                new RqQuery(this.origin).query()
+            )
+        );
     }
 
     @Override
@@ -94,4 +77,5 @@ public final class RqAuth implements Request {
     public InputStream body() throws IOException {
         return this.origin.body();
     }
+
 }

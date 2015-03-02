@@ -23,60 +23,41 @@
  */
 package org.takes.f.auth;
 
-import java.io.IOException;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqCookies;
+import java.util.Map;
 
 /**
- * Pass via cookie information.
+ * Authenticated identity.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "secret", "cookie" })
-public final class PsCookie implements Pass {
+public interface Identity {
 
     /**
-     * Secret to encrypt.
+     * Anonymous.
      */
-    private final transient String secret;
-
-    /**
-     * Cookie to read.
-     */
-    private final transient String cookie;
-
-    /**
-     * Ctor.
-     * @param scrt Secret
-     */
-    public PsCookie(final String scrt) {
-        this(scrt, PsCookie.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param scrt Secret
-     * @param name Cookie name
-     */
-    public PsCookie(final String scrt, final String name) {
-        this.secret = scrt;
-        this.cookie = name;
-    }
-
-    @Override
-    public Identity authenticate(final Request request) throws IOException {
-        final List<String> cookies = new RqCookies(request).cookie(this.cookie);
-        final Identity user;
-        if (cookies.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            assert this.secret != null;
-            user = new BaseIdentity(cookies.get(0));
+    Identity ANONYMOUS = new Identity() {
+        @Override
+        public String urn() {
+            throw new UnsupportedOperationException("#urn()");
         }
-        return user;
-    }
+        @Override
+        public Map<String, String> properties() {
+            throw new UnsupportedOperationException("#properties()");
+        }
+    };
+
+    /**
+     * URN of it, in "urn:PASS:ID" format.
+     * @return URN of the user
+     */
+    String urn();
+
+    /**
+     * Properties of it, like name, photo, etc.
+     * @return Properties
+     */
+    Map<String, String> properties();
+
 }
