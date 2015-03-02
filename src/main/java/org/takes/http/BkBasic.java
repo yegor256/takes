@@ -34,6 +34,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -75,7 +76,7 @@ public final class BkBasic implements Back {
         final BufferedReader reader = new BufferedReader(
             new InputStreamReader(
                 new BufferedInputStream(input),
-                "UTF-8"
+                Charset.defaultCharset().name()
             )
         );
         final List<String> head = new LinkedList<String>();

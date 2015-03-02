@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -78,7 +79,11 @@ public final class RqQuery implements Request {
         for (final String pair : pairs) {
             final String[] parts = pair.split("=");
             if (parts[0].equals(key)) {
-                found.add(URLDecoder.decode(parts[1], "UTF-8"));
+                found.add(
+                    URLDecoder.decode(
+                        parts[1], Charset.defaultCharset().name()
+                    )
+                );
             }
         }
         return found;

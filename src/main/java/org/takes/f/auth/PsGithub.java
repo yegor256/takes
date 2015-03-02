@@ -31,9 +31,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URLEncoder;
-import java.util.HashMap;
+import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -90,11 +91,11 @@ public final class PsGithub implements Pass {
     private static Identity fetch(final String token) throws IOException {
         final String uri = String.format(
             "https://api.github.com/user?access_token=%s",
-            URLEncoder.encode(token, "UTF-8")
+            URLEncoder.encode(token, Charset.defaultCharset().name())
         );
         return PsGithub.parse(
             new JdkRequest(uri)
-                .header("Accept", "application/json")
+                .header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class).json().readObject()
@@ -112,10 +113,10 @@ public final class PsGithub implements Pass {
         final String uri = String.format(
             // @checkstyle LineLength (1 line)
             "https://github.com/login/oauth/access_token?client_id=%s&redirect_uri=%s&client_secret=%s&code=%s",
-            URLEncoder.encode(this.app, "UTF-8"),
-            URLEncoder.encode(home.toString(), "UTF-8"),
-            URLEncoder.encode(this.key, "UTF-8"),
-            URLEncoder.encode(code, "UTF-8")
+            URLEncoder.encode(this.app, Charset.defaultCharset().name()),
+            URLEncoder.encode(home.toString(), Charset.defaultCharset().name()),
+            URLEncoder.encode(this.key, Charset.defaultCharset().name()),
+            URLEncoder.encode(code, Charset.defaultCharset().name())
         );
         return new JdkRequest(uri)
             .method("POST")
@@ -132,7 +133,9 @@ public final class PsGithub implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final Map<String, String> props = new HashMap<String, String>(0);
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(json.size());
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
         props.put("login", json.getString("login", "?"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new BaseIdentity(

@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -55,7 +56,7 @@ public final class RqText implements Request {
      * @param req Original request
      */
     public RqText(final Request req) {
-        this(req, "UTF-8");
+        this(req, Charset.defaultCharset().name());
     }
 
     /**

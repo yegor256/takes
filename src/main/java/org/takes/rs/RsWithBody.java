@@ -26,7 +26,6 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -81,7 +80,7 @@ public final class RsWithBody implements Response {
      * @param body Body
      */
     public RsWithBody(final Response res, final String body) {
-        this(res, RsWithBody.bytes(body));
+        this(res, body.getBytes());
     }
 
     /**
@@ -111,19 +110,6 @@ public final class RsWithBody implements Response {
     @Override
     public InputStream body() {
         return this.content;
-    }
-
-    /**
-     * Convert string to byte array.
-     * @param text Text to convert
-     * @return Input stream
-     */
-    private static byte[] bytes(final String text) {
-        try {
-            return text.getBytes("UTF-8");
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
-        }
     }
 
 }

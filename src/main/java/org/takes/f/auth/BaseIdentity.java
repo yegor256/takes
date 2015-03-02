@@ -25,9 +25,11 @@ package org.takes.f.auth;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -58,10 +60,14 @@ final class BaseIdentity implements Identity {
     BaseIdentity(final String text) throws IOException {
         final String[] parts = text.split(";");
         this.name = parts[0];
-        final Map<String, String> map = new HashMap<String, String>(0);
+        final ConcurrentMap<String, String> map =
+            new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
             final String[] pair = parts[idx].split("=");
-            map.put(pair[0], URLDecoder.decode(pair[1], "UTF-8"));
+            map.put(
+                pair[0],
+                URLDecoder.decode(pair[1], Charset.defaultCharset().name())
+            );
         }
         this.props = map;
     }

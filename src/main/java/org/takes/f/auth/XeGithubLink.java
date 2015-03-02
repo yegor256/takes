@@ -25,6 +25,7 @@ package org.takes.f.auth;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqURI;
@@ -53,7 +54,8 @@ public final class XeGithubLink implements XeSource {
      * @param app Github application ID
      * @throws IOException If fails
      */
-    public XeGithubLink(final Request req, final String app) throws IOException {
+    public XeGithubLink(final Request req, final String app)
+        throws IOException {
         this(req, app, "takes:github", PsByFlag.class.getSimpleName());
     }
 
@@ -64,6 +66,7 @@ public final class XeGithubLink implements XeSource {
      * @param rel Related
      * @param flag Flag to add
      * @throws IOException If fails
+     * @checkstyle ParameterNumberCheck (4 lines)
      */
     public XeGithubLink(final Request req, final String app, final String rel,
         final String flag) throws IOException {
@@ -79,9 +82,14 @@ public final class XeGithubLink implements XeSource {
         this.link = new XeLink(
             rel,
             String.format(
+                // @checkstyle LineLength (1 line)
                 "https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s",
-                URLEncoder.encode(app, "UTF-8"),
-                URLEncoder.encode(uri.toString(), "UTF-8")
+                URLEncoder.encode(
+                    app, Charset.defaultCharset().name()
+                ),
+                URLEncoder.encode(
+                    uri.toString(), Charset.defaultCharset().name()
+                )
             )
         );
     }

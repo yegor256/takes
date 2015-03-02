@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -58,7 +59,7 @@ public final class RsPrint implements Response {
      * @param res Original response
      */
     public RsPrint(final Response res) {
-        this(res, "UTF-8");
+        this(res, Charset.defaultCharset().name());
     }
 
     /**
