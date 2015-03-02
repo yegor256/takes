@@ -71,6 +71,7 @@ public final class RsFlash implements Response {
      */
     public RsFlash(final String msg, final Level level, final String cookie) {
         this.origin = new RsWithCookie(cookie, msg);
+        assert level != null;
     }
 
     @Override

@@ -21,14 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.f.auth;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.f.auth.Pass;
 import org.takes.rq.RqWithHeader;
 
 /**
@@ -76,7 +75,7 @@ public final class TsAuth implements Takes {
             take = this.origin.route(request);
         } else {
             take = this.origin.route(
-                new RqWithHeader()
+                new RqWithHeader(request, this.header, user)
             );
         }
         return take;
