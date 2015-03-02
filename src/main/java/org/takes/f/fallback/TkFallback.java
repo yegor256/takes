@@ -49,7 +49,7 @@ public final class TkFallback implements Take {
     /**
      * Fallback takes.
      */
-    private final transient TsFallback.Fast fallback;
+    private final transient Fallback fallback;
 
     /**
      * Original request.
@@ -62,7 +62,7 @@ public final class TkFallback implements Take {
      * @param fbk Fallback
      * @param req Request
      */
-    public TkFallback(final Take org, final TsFallback.Fast fbk,
+    public TkFallback(final Take org, final Fallback fbk,
         final Request req) {
         this.origin = org;
         this.fallback = fbk;

@@ -33,7 +33,7 @@ import org.takes.Takes;
 import org.takes.ts.TsFixed;
 
 /**
- * Fallback.
+ * Fallback takes.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -50,7 +50,7 @@ public final class TsFallback implements Takes {
     /**
      * Fallback takes.
      */
-    private final transient TsFallback.Fast fallback;
+    private final transient Fallback fallback;
 
     /**
      * Ctor.
@@ -69,7 +69,7 @@ public final class TsFallback implements Takes {
     public TsFallback(final Takes org, final Takes fbk) {
         this(
             org,
-            new TsFallback.Fast() {
+            new Fallback() {
                 @Override
                 public Take take(final RqFallback request) throws IOException {
                     return fbk.route(request);
@@ -83,7 +83,7 @@ public final class TsFallback implements Takes {
      * @param org Original
      * @param fbk Fallback
      */
-    public TsFallback(final Takes org, final TsFallback.Fast fbk) {
+    public TsFallback(final Takes org, final Fallback fbk) {
         this.origin = org;
         this.fallback = fbk;
     }
@@ -124,19 +124,6 @@ public final class TsFallback implements Takes {
                 return req.body();
             }
         };
-    }
-
-    /**
-     * Fast track for the fallback.
-     */
-    public interface Fast {
-        /**
-         * Get a take.
-         * @param req Request
-         * @return Take
-         * @throws IOException If fails
-         */
-        Take take(RqFallback req) throws IOException;
     }
 
 }
