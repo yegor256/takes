@@ -21,49 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.f.forward;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.f.fallback.TsFallback;
-import org.takes.rq.RqMethod;
-import org.takes.rq.RqPlain;
-import org.takes.rs.RsPrint;
-import org.takes.tk.TkText;
 
 /**
- * Test case for {@link org.takes.f.fallback.TsFallback}.
+ * Redirect on exception.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class TsFallbackTest {
+@EqualsAndHashCode(of = "origin")
+public final class TsForward implements Takes {
 
     /**
-     * TsFallback can fall back.
-     * @throws IOException If some problem inside
+     * Original takes.
      */
-    @Test
-    public void fallsBack() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TsFallback(
-                    new Takes() {
-                        @Override
-                        public Take route(final Request request) {
-                            throw new UnsupportedOperationException("#take()");
-                        }
-                    },
-                    new TkText("an exception, sorry")
-                ).route(new RqPlain(RqMethod.GET, "/", "")).act()
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
-        );
+    private final transient Takes origin;
+
+    /**
+     * Ctor.
+     * @param takes Original
+     */
+    public TsForward(final Takes takes) {
+        this.origin = takes;
+    }
+
+    @Override
+    public Take route(final Request request) throws IOException {
+        return new TkForward(this.origin.route(request));
     }
 
 }

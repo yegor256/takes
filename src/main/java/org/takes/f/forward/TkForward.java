@@ -21,24 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.f.forward;
 
-import org.takes.Request;
+import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
+import org.takes.Take;
 
 /**
- * Request with an error inside.
+ * Redirect on exception.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.ts.TsFallback
  */
-public interface RqFallback extends Request {
+@EqualsAndHashCode(of = "origin")
+public final class TkForward implements Take {
 
     /**
-     * Get throwable that occurred.
-     * @return Throwable
+     * Original takes.
      */
-    Throwable throwable();
+    private final transient Take origin;
+
+    /**
+     * Ctor.
+     * @param take Original
+     */
+    public TkForward(final Take take) {
+        this.origin = take;
+    }
+
+    @Override
+    public Response act() throws IOException {
+        Response res;
+        try {
+            res = this.origin.act();
+        } catch (final RsForward ex) {
+            res = ex;
+        }
+        return res;
+    }
 
 }

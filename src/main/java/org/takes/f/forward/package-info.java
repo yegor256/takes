@@ -21,46 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
-
-import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsForward;
 
 /**
- * Redirect on exception.
+ * Forward.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class TkForward implements Take {
-
-    /**
-     * Original takes.
-     */
-    private final transient Take origin;
-
-    /**
-     * Ctor.
-     * @param take Original
-     */
-    public TkForward(final Take take) {
-        this.origin = take;
-    }
-
-    @Override
-    public Response act() throws IOException {
-        Response res;
-        try {
-            res = this.origin.act();
-        } catch (final RsForward ex) {
-            res = ex;
-        }
-        return res;
-    }
-
-}
+package org.takes.f.forward;

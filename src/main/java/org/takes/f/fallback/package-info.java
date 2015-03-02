@@ -21,63 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
 
 /**
- * Forwarding response.
+ * Fallback.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = false, of = "origin")
-public final class RsForward extends RuntimeException implements Response {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = 7676888610908953700L;
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
-
-    /**
-     * Ctor.
-     * @param loc Location
-     */
-    public RsForward(final String loc) {
-        this(HttpURLConnection.HTTP_SEE_OTHER, loc);
-    }
-
-    /**
-     * Ctor.
-     * @param code HTTP status code
-     * @param loc Location
-     */
-    public RsForward(final int code, final String loc) {
-        super();
-        this.origin = new RsWithHeader(
-            new RsWithStatus(code),
-            String.format("Location: %s", loc)
-        );
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
-}
+package org.takes.f.fallback;

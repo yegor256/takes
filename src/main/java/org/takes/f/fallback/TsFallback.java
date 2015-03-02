@@ -21,17 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.f.fallback;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqFallback;
-import org.takes.ts.TsFallback;
+import org.takes.Takes;
+import org.takes.ts.TsFixed;
 
 /**
  * Fallback.
@@ -40,13 +39,13 @@ import org.takes.ts.TsFallback;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "fallback", "request" })
-public final class TkFallback implements Take {
+@EqualsAndHashCode(of = { "origin", "fallback" })
+public final class TsFallback implements Takes {
 
     /**
-     * Original take.
+     * Original takes.
      */
-    private final transient Take origin;
+    private final transient Takes origin;
 
     /**
      * Fallback takes.
@@ -54,42 +53,63 @@ public final class TkFallback implements Take {
     private final transient TsFallback.Fast fallback;
 
     /**
-     * Original request.
+     * Ctor.
+     * @param org Original
+     * @param fbk Fallback
      */
-    private final transient Request request;
+    public TsFallback(final Takes org, final Take fbk) {
+        this(org, new TsFixed(fbk));
+    }
 
     /**
      * Ctor.
      * @param org Original
      * @param fbk Fallback
-     * @param req Request
      */
-    public TkFallback(final Take org, final TsFallback.Fast fbk,
-        final Request req) {
+    public TsFallback(final Takes org, final Takes fbk) {
+        this(
+            org,
+            new TsFallback.Fast() {
+                @Override
+                public Take take(final RqFallback request) throws IOException {
+                    return fbk.route(request);
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param org Original
+     * @param fbk Fallback
+     */
+    public TsFallback(final Takes org, final TsFallback.Fast fbk) {
         this.origin = org;
         this.fallback = fbk;
-        this.request = req;
     }
 
     @Override
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public Response act() throws IOException {
-        Response res;
+    public Take route(final Request request) throws IOException {
+        Take take;
         try {
-            res = this.origin.act();
+            take = new TkFallback(
+                this.origin.route(request), this.fallback, request
+            );
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            res = this.fallback.take(this.req(ex)).act();
+            take = this.fallback.take(TsFallback.req(request, ex));
         }
-        return res;
+        return take;
     }
 
     /**
      * Make a request from original one and throwable.
+     * @param req Request
      * @param err Error
      * @return Request
      */
-    private RqFallback req(final Throwable err) {
+    private static RqFallback req(final Request req, final Throwable err) {
         return new RqFallback() {
             @Override
             public Throwable throwable() {
@@ -97,12 +117,26 @@ public final class TkFallback implements Take {
             }
             @Override
             public List<String> head() throws IOException {
-                return TkFallback.this.request.head();
+                return req.head();
             }
             @Override
             public InputStream body() throws IOException {
-                return TkFallback.this.request.body();
+                return req.body();
             }
         };
     }
+
+    /**
+     * Fast track for the fallback.
+     */
+    public interface Fast {
+        /**
+         * Get a take.
+         * @param req Request
+         * @return Take
+         * @throws IOException If fails
+         */
+        Take take(RqFallback req) throws IOException;
+    }
+
 }
