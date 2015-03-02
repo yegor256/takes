@@ -24,70 +24,59 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqCookies;
 
 /**
- * Authenticating takes.
+ * Pass via cookie information.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
-public final class TsAuth implements Takes {
+@EqualsAndHashCode(of = { "secret", "cookie" })
+public final class PsCookie implements Pass {
 
     /**
-     * Original takes.
+     * Secret to encrypt.
      */
-    private final transient Takes origin;
+    private final transient String secret;
 
     /**
-     * Pass.
+     * Cookie to read.
      */
-    private final transient Pass pass;
-
-    /**
-     * Header to set in case of authentication.
-     */
-    private final transient String header;
+    private final transient String cookie;
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
+     * @param scrt Secret
      */
-    public TsAuth(final Takes takes, final Pass pss) {
-        this(takes, pss, "X-Takes-Auth");
+    public PsCookie(final String scrt) {
+        this(scrt, PsCookie.class.getName());
     }
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
-     * @param hdr Header to set
+     * @param scrt Secret
+     * @param name Cookie name
      */
-    public TsAuth(final Takes takes, final Pass pss, final String hdr) {
-        this.origin = takes;
-        this.pass = pss;
-        this.header = hdr;
+    public PsCookie(final String scrt, final String name) {
+        this.secret = scrt;
+        this.cookie = name;
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
-        final String user = this.pass.authenticate(request);
-        final Take take;
-        if (user.equals(Pass.ANONYMOUS)) {
-            take = this.origin.route(request);
+    public String authenticate(final Request request) throws IOException {
+        final List<String> cookies = new RqCookies(request).cookie(this.cookie);
+        final String user;
+        if (cookies.isEmpty()) {
+            user = Pass.ANONYMOUS;
         } else {
-            take = this.origin.route(
-                new RqWithHeader(request, this.header, user)
-            );
+            assert this.secret != null;
+            user = cookies.get(0);
         }
-        return take;
+        return user;
     }
-
 }

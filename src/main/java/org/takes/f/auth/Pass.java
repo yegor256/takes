@@ -23,6 +23,7 @@
  */
 package org.takes.f.auth;
 
+import java.io.IOException;
 import org.takes.Request;
 
 /**
@@ -43,7 +44,8 @@ public interface Pass {
      * Authenticate the user by the request.
      * @param request The request
      * @return URN of the user found or anonymous
+     * @throws IOException If fails
      */
-    String authenticate(Request request);
+    String authenticate(Request request) throws IOException;
 
 }

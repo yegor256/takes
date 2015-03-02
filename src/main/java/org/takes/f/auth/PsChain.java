@@ -24,70 +24,50 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqWithHeader;
 
 /**
- * Authenticating takes.
+ * Chain of passes.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
-public final class TsAuth implements Takes {
+@EqualsAndHashCode(of = "passes")
+public final class PsChain implements Pass {
 
     /**
-     * Original takes.
+     * Passes.
      */
-    private final transient Takes origin;
-
-    /**
-     * Pass.
-     */
-    private final transient Pass pass;
-
-    /**
-     * Header to set in case of authentication.
-     */
-    private final transient String header;
+    private final transient Iterable<Pass> passes;
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
+     * @param list Passes
      */
-    public TsAuth(final Takes takes, final Pass pss) {
-        this(takes, pss, "X-Takes-Auth");
+    public PsChain(final Pass... list) {
+        this.passes = Arrays.asList(list);
     }
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
-     * @param hdr Header to set
+     * @param list Passes
      */
-    public TsAuth(final Takes takes, final Pass pss, final String hdr) {
-        this.origin = takes;
-        this.pass = pss;
-        this.header = hdr;
+    public PsChain(final Iterable<Pass> list) {
+        this.passes = list;
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
-        final String user = this.pass.authenticate(request);
-        final Take take;
-        if (user.equals(Pass.ANONYMOUS)) {
-            take = this.origin.route(request);
-        } else {
-            take = this.origin.route(
-                new RqWithHeader(request, this.header, user)
-            );
+    public String authenticate(final Request request) throws IOException {
+        String user = Pass.ANONYMOUS;
+        for (final Pass pass : this.passes) {
+            user = pass.authenticate(request);
+            if (!user.equals(Pass.ANONYMOUS)) {
+                break;
+            }
         }
-        return take;
+        return user;
     }
-
 }

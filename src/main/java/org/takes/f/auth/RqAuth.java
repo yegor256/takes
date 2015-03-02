@@ -24,70 +24,74 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqHeaders;
 
 /**
- * Authenticating takes.
+ * Request with auth information.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
-public final class TsAuth implements Takes {
+@EqualsAndHashCode(of = { "origin", "header" })
+public final class RqAuth implements Request {
 
     /**
-     * Original takes.
+     * Original request.
      */
-    private final transient Takes origin;
+    private final transient Request origin;
 
     /**
-     * Pass.
-     */
-    private final transient Pass pass;
-
-    /**
-     * Header to set in case of authentication.
+     * Header with authentication info.
      */
     private final transient String header;
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
+     * @param request Original
      */
-    public TsAuth(final Takes takes, final Pass pss) {
-        this(takes, pss, "X-Takes-Auth");
+    public RqAuth(final Request request) {
+        this(request, "X-Takes-Auth");
     }
 
     /**
      * Ctor.
-     * @param takes Original
-     * @param pss Pass
-     * @param hdr Header to set
+     * @param request Original
+     * @param hdr Header to read
      */
-    public TsAuth(final Takes takes, final Pass pss, final String hdr) {
-        this.origin = takes;
-        this.pass = pss;
+    public RqAuth(final Request request, final String hdr) {
+        this.origin = request;
         this.header = hdr;
     }
 
-    @Override
-    public Take route(final Request request) throws IOException {
-        final String user = this.pass.authenticate(request);
-        final Take take;
-        if (user.equals(Pass.ANONYMOUS)) {
-            take = this.origin.route(request);
+    /**
+     * Authenticated user.
+     * @return User URN
+     * @throws IOException If fails
+     */
+    public String identity() throws IOException {
+        final List<String> headers =
+            new RqHeaders(this.origin).header(this.header);
+        final String user;
+        if (headers.isEmpty()) {
+            user = Pass.ANONYMOUS;
         } else {
-            take = this.origin.route(
-                new RqWithHeader(request, this.header, user)
-            );
+            user = headers.get(0);
         }
-        return take;
+        return user;
     }
 
+    @Override
+    public List<String> head() throws IOException {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() throws IOException {
+        return this.origin.body();
+    }
 }

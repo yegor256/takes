@@ -553,8 +553,7 @@ public final class TsIndex implements Takes {
 }
 ```
 
-
-## OAuth Login
+## Authentication
 
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
 
@@ -562,10 +561,9 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 new TsAuth(
   new TsRegex()
     .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
-    .with("/acc", new TkAuthOnly(new TkAccount()))
+    .with("/acc", new TkSecure(new TkAccount()))
     .with("/facebook", new TkFacebook("key", "secret")),
-  "some-secret-word",
-  "/facebook"
+  new PsCookie("some-secret-word")
 )
 ```
 
