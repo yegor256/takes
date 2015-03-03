@@ -129,6 +129,16 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
+    public TsRegex with(final String regex, final Takes takes) {
+        return this.with(Pattern.compile(regex), takes);
+    }
+
+    /**
+     * With this new take.
+     * @param regex Regular expression
+     * @param takes The takes
+     * @return New takes
+     */
     public TsRegex with(final Pattern regex, final Takes takes) {
         return this.with(
             regex,
