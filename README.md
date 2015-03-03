@@ -51,7 +51,7 @@ public final class App {
 Compile and run it like this (`takes.jar` is the only dependency you need):
 
 ```bash
-$ java -Dfile.encoding=utf8 -cp takes.jar App.class
+$ java -Dfile.encoding=UTF-8 -cp takes.jar App.class
 ```
 
 Should work :)
