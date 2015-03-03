@@ -48,7 +48,7 @@ public final class CcHex implements Codec {
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 2, 3, 4, 5, 6, 7,
         8, 9, 0, 0, 0, 0, 0, 0,
-        0, 10, 11, 12, 13, 14, 15, 0,
+        0, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0,
     };
 
     /**
@@ -77,7 +77,7 @@ public final class CcHex implements Codec {
         final byte[] raw = this.origin.encode(identity);
         final byte[] out = new byte[raw.length << 1];
         for (int idx = 0; idx < raw.length; ++idx) {
-            out[idx << 1] = CcHex.FWD[raw[idx] >> 4];
+            out[idx << 1] = CcHex.FWD[raw[idx] >> 4 & 0x0f];
             out[(idx << 1) + 1] = CcHex.FWD[raw[idx] & 0x0f];
         }
         return out;

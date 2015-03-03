@@ -80,7 +80,10 @@ public final class FtCLI implements Front {
         if (port == null) {
             throw new IllegalArgumentException("--port must be specified");
         }
-        final Front front = new FtBasic(this.takes, Integer.parseInt(port));
+        final Front front = new FtBasic(
+            new BkParallel(new BkSafe(new BkBasic(this.takes))),
+            Integer.parseInt(port)
+        );
         final Exit ext = FtCLI.exit(map, exit);
         if (map.get("daemon") == null) {
             front.start(ext);
