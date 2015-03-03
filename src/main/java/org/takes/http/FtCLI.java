@@ -24,6 +24,7 @@
 package org.takes.http;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -50,7 +51,7 @@ public final class FtCLI implements Front {
     /**
      * Command line args.
      */
-    private final transient String[] args;
+    private final transient Iterable<String> args;
 
     /**
      * Ctor.
@@ -58,20 +59,45 @@ public final class FtCLI implements Front {
      * @param ags Arguments
      */
     public FtCLI(final Takes tks, final String... ags) {
+        this(tks, Arrays.asList(ags));
+    }
+
+    /**
+     * Ctor.
+     * @param tks Takes
+     * @param ags Arguments
+     */
+    public FtCLI(final Takes tks, final Iterable<String> ags) {
         this.takes = tks;
         this.args = ags;
     }
 
     @Override
+    @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
         final Map<String, String> map = this.params();
         final String port = map.get("port");
         if (port == null) {
             throw new IllegalArgumentException("--port must be specified");
         }
-        new FtBasic(this.takes, Integer.parseInt(port)).start(
-            FtCLI.exit(map, exit)
-        );
+        final Front front = new FtBasic(this.takes, Integer.parseInt(port));
+        final Exit ext = FtCLI.exit(map, exit);
+        if (map.get("daemon") == null) {
+            front.start(ext);
+        } else {
+            new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            front.start(ext);
+                        } catch (final IOException ex) {
+                            throw new IllegalStateException(ex);
+                        }
+                    }
+                }
+            ).start();
+        }
     }
 
     /**
@@ -110,7 +136,7 @@ public final class FtCLI implements Front {
      */
     private Map<String, String> params() {
         final ConcurrentMap<String, String> map =
-            new ConcurrentHashMap<String, String>(this.args.length);
+            new ConcurrentHashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z-]+)=(.+)");
         for (final String arg : this.args) {
             final Matcher matcher = ptn.matcher(arg);
