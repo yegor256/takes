@@ -84,21 +84,41 @@ public final class RsPrint implements Response {
     }
 
     /**
+     * Print body into string.
+     * @return Entire body of HTTP response
+     * @throws IOException If fails
+     */
+    public String printBody() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printBody(baos);
+        return new String(baos.toByteArray(), this.encoding);
+    }
+
+    /**
      * Print it into output stream.
      * @param output Output to print into
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
-        final InputStream body = this.body();
+        final String eol = "\r\n";
         final Writer writer = new OutputStreamWriter(output, this.encoding);
-        try {
-            final String eol = "\r\n";
-            for (final String line : this.head()) {
-                writer.append(line);
-                writer.append(eol);
-            }
+        for (final String line : this.head()) {
+            writer.append(line);
             writer.append(eol);
-            writer.flush();
+        }
+        writer.append(eol);
+        writer.flush();
+        this.printBody(output);
+    }
+
+    /**
+     * Print it into output stream.
+     * @param output Output to print into
+     * @throws IOException If fails
+     */
+    public void printBody(final OutputStream output) throws IOException {
+        final InputStream body = this.body();
+        try {
             while (true) {
                 final int data = body.read();
                 if (data < 0) {
