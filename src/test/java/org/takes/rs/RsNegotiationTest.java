@@ -63,4 +63,20 @@ public final class RsNegotiationTest {
         );
     }
 
+    /**
+     * RsNegotiation can route without Accept header.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void negotiatesCotentWithoutAccept() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsNegotiation(new RqFake()).with(
+                    "image/png", new RsText("a png")
+                )
+            ).printBody(),
+            Matchers.endsWith("png")
+        );
+    }
+
 }

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -159,7 +160,12 @@ public final class RsNegotiation implements Response {
                 }
             }
         }
-        return types.values();
+        final Collection<String> accepted = new LinkedList<String>();
+        accepted.addAll(types.values());
+        if (accepted.isEmpty()) {
+            accepted.add("*/*");
+        }
+        return accepted;
     }
 
     /**

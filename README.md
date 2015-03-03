@@ -556,6 +556,23 @@ public final class TsIndex implements Takes {
 }
 ```
 
+## Content Negotiation
+
+Say, you want to return different content based on `Accept` header
+of the request (a.k.a. [content negotation](http://en.wikipedia.org/wiki/Content_negotiation)):
+
+```java
+public final class TkIndex implements Take {
+  @Override
+  public Response act() {
+    return new RsNegotiation(this.request)
+      .with("text/*", new RsText("it's a text"))
+      .with("application/json", new RsJSON("{\"a\":1}"))
+      .with("image/png", /* something else */);
+  }
+}
+```
+
 ## Authentication
 
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
