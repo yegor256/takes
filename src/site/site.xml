@@ -33,10 +33,10 @@
     </skin>
     <bannerLeft>
         <name>takes.org</name>
-        <src>http://www.takes.org/logo-256x256.png</src>
+        <src>https://github.com/yegor256/takes/raw/master/clapper.jpg</src>
         <href>http://www.takes.org/</href>
-        <width>64</width>
-        <height>64</height>
+        <width>96</width>
+        <height>96</height>
     </bannerLeft>
     <body>
         <head>
