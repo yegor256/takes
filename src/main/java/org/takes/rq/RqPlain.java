@@ -54,6 +54,15 @@ public final class RqPlain implements Request {
      * Ctor.
      * @param method HTTP method
      * @param query HTTP query
+     */
+    public RqPlain(final String method, final String query) {
+        this(method, query, "");
+    }
+
+    /**
+     * Ctor.
+     * @param method HTTP method
+     * @param query HTTP query
      * @param body HTTP body
      */
     public RqPlain(final String method, final String query, final String body) {
