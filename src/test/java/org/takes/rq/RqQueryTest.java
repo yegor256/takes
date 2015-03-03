@@ -79,4 +79,24 @@ public final class RqQueryTest {
         );
     }
 
+    /**
+     * RqQuery can extract first params.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void extractsFirstParam() throws IOException {
+        MatcherAssert.assertThat(
+            new RqQuery(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hello?since=343",
+                        "Host: f.example.com"
+                    ),
+                    ""
+                )
+            ).param("since"),
+            Matchers.hasItem("343")
+        );
+    }
+
 }

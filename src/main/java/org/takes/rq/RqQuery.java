@@ -74,16 +74,19 @@ public final class RqQuery implements Request {
      * @throws IOException If fails
      */
     public List<String> param(final String key) throws IOException {
-        final String[] pairs = this.query().toString().split("&");
+        final String[] sectors = this.query().toString().split("\\?", 2);
         final List<String> found = new LinkedList<String>();
-        for (final String pair : pairs) {
-            final String[] parts = pair.split("=");
-            if (parts[0].equals(key)) {
-                found.add(
-                    URLDecoder.decode(
-                        parts[1], Charset.defaultCharset().name()
-                    )
-                );
+        if (sectors.length > 1) {
+            final String[] pairs = sectors[1].split("&");
+            for (final String pair : pairs) {
+                final String[] parts = pair.split("=", 2);
+                if (parts[0].equals(key)) {
+                    found.add(
+                        URLDecoder.decode(
+                            parts[1], Charset.defaultCharset().name()
+                        )
+                    );
+                }
             }
         }
         return found;
