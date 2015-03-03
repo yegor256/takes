@@ -42,7 +42,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "status" })
+@EqualsAndHashCode(of = { "origin", "status", "reason" })
 public final class RsWithStatus implements Response {
 
     /**
@@ -62,6 +62,11 @@ public final class RsWithStatus implements Response {
     private final transient int status;
 
     /**
+     * Reason.
+     */
+    private final transient String reason;
+
+    /**
      * Ctor.
      * @param code Status code
      */
@@ -75,19 +80,36 @@ public final class RsWithStatus implements Response {
      * @param code Status code
      */
     public RsWithStatus(final Response res, final int code) {
+        this(res, code, RsWithStatus.best(code));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param code Status code
+     * @param rsn Reason
+     */
+    public RsWithStatus(final Response res, final int code, final String rsn) {
+        // @checkstyle MagicNumber (1 line)
+        if (code < 100 || code > 999) {
+            throw new IllegalArgumentException(
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "according to RFC 7230 HTTP status code must have three digits: %d",
+                    code
+                )
+            );
+        }
         this.origin = res;
         this.status = code;
+        this.reason = rsn;
     }
 
     @Override
     public List<String> head() throws IOException {
         final List<String> list = this.origin.head();
         final List<String> head = new ArrayList<String>(list.size());
-        String reason = RsWithStatus.REASONS.get(this.status);
-        if (reason == null) {
-            reason = "???";
-        }
-        head.add(String.format("HTTP/1.1 %d %s", this.status, reason));
+        head.add(String.format("HTTP/1.1 %d %s", this.status, this.reason));
         head.addAll(list.subList(1, list.size()));
         return head;
     }
@@ -95,6 +117,19 @@ public final class RsWithStatus implements Response {
     @Override
     public InputStream body() throws IOException {
         return this.origin.body();
+    }
+
+    /**
+     * Find the best reason for this status code.
+     * @param code The code
+     * @return Reason
+     */
+    private static String best(final int code) {
+        String reason = RsWithStatus.REASONS.get(code);
+        if (reason == null) {
+            reason = "Unknown";
+        }
+        return reason;
     }
 
     /**

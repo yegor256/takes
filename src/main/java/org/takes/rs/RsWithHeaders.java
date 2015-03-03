@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -68,7 +69,7 @@ public final class RsWithHeaders implements Response {
      */
     public RsWithHeaders(final Response res, final Collection<String> hdrs) {
         this.origin = res;
-        this.headers = hdrs;
+        this.headers = Collections.unmodifiableCollection(hdrs);
     }
 
     /**
