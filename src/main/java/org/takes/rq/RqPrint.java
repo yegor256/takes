@@ -73,19 +73,8 @@ public final class RqPrint implements Request {
      */
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final InputStream input = this.body();
-        try {
-            while (true) {
-                final int data = input.read();
-                if (data < 0) {
-                    break;
-                }
-                baos.write(data);
-            }
-            return new String(baos.toByteArray());
-        } finally {
-            input.close();
-        }
+        this.print(baos);
+        return new String(baos.toByteArray());
     }
 
     /**
