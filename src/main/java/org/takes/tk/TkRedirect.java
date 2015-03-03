@@ -48,6 +48,13 @@ public final class TkRedirect implements Take {
 
     /**
      * Ctor.
+     */
+    public TkRedirect() {
+        this("/");
+    }
+
+    /**
+     * Ctor.
      * @param location Location to redirect to
      */
     public TkRedirect(final String location) {

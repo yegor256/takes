@@ -56,6 +56,14 @@ public final class RsForward extends RuntimeException implements Response {
     /**
      * Ctor.
      * @param res Original response
+     */
+    public RsForward(final Response res) {
+        this(res, "/");
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
      * @param loc Location
      */
     public RsForward(final Response res, final String loc) {
