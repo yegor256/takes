@@ -87,13 +87,7 @@ public final class TsClasspath implements Takes {
                 String.format("%s not found in classpath", name)
             );
         }
-        try {
-            return new TkFixed(
-                new RsWithBody(new RqQuery(request).query().getPath())
-            );
-        } finally {
-            input.close();
-        }
+        return new TkFixed(new RsWithBody(input));
     }
 
 }

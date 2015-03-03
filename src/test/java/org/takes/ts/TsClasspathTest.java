@@ -49,7 +49,7 @@ public final class TsClasspathTest {
             new RsPrint(
                 new TsClasspath().route(
                     new RqFake(
-                        "GET", "/org/takes/ts/TsClasspathTest.class", ""
+                        "GET", "/org/takes/ts/TsClasspathTest.class?a", ""
                     )
                 ).act()
             ).print(),
