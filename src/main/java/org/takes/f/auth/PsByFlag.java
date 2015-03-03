@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.rq.RqQuery;
 
 /**
@@ -70,14 +71,21 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Identity authenticate(final Request request) throws IOException {
+    public Identity enter(final Request request) throws IOException {
         final List<String> flg = new RqQuery(request).param(this.flag);
         final Identity identity;
         if (flg.isEmpty()) {
             identity = Identity.ANONYMOUS;
         } else {
-            identity = this.passes.get(flg.get(0)).authenticate(request);
+            identity = this.passes.get(flg.get(0)).enter(request);
         }
         return identity;
     }
+
+    @Override
+    public Response exit(final Response response,
+        final Identity identity) {
+        return response;
+    }
+
 }

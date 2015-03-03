@@ -80,7 +80,7 @@ public final class RqAuth implements Request {
         if (headers.isEmpty()) {
             user = Identity.ANONYMOUS;
         } else {
-            user = new BaseIdentity(headers.get(0));
+            user = new CcPlain().decode(headers.get(0));
         }
         return user;
     }

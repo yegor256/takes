@@ -24,62 +24,30 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
-import java.util.Arrays;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Response;
 
 /**
- * Chain of passes.
+ * Codec.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "passes")
-public final class PsChain implements Pass {
+public interface Codec {
 
     /**
-     * Passes.
+     * Encode identity into text.
+     * @param identity The identity
+     * @return Text
+     * @throws IOException If fails
      */
-    private final transient Iterable<Pass> passes;
+    String encode(Identity identity) throws IOException;
 
     /**
-     * Ctor.
-     * @param list Passes
+     * Decode identity from text.
+     * @param text Text
+     * @return Identity
+     * @throws IOException If fails
      */
-    public PsChain(final Pass... list) {
-        this.passes = Arrays.asList(list);
-    }
-
-    /**
-     * Ctor.
-     * @param list Passes
-     */
-    public PsChain(final Iterable<Pass> list) {
-        this.passes = list;
-    }
-
-    @Override
-    public Identity enter(final Request request) throws IOException {
-        Identity user = Identity.ANONYMOUS;
-        for (final Pass pass : this.passes) {
-            user = pass.enter(request);
-            if (!user.equals(Identity.ANONYMOUS)) {
-                break;
-            }
-        }
-        return user;
-    }
-
-    @Override
-    public Response exit(final Response response,
-        final Identity identity) throws IOException {
-        Response res = response;
-        for (final Pass pass : this.passes) {
-            res = pass.exit(res, identity);
-        }
-        return res;
-    }
+    Identity decode(String text) throws IOException;
 
 }

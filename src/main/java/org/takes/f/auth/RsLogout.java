@@ -24,72 +24,41 @@
 package org.takes.f.auth;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
 import org.takes.Response;
-import org.takes.rq.RqCookies;
-import org.takes.rs.RsWithCookie;
 
 /**
- * Pass via cookie information.
+ * Logout response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "codec", "cookie" })
-public final class PsCookie implements Pass {
+@EqualsAndHashCode(of = "origin")
+public final class RsLogout implements Response {
 
     /**
-     * Codec.
+     * Original response.
      */
-    private final transient Codec codec;
-
-    /**
-     * Cookie to read.
-     */
-    private final transient String cookie;
+    private final transient Response origin;
 
     /**
      * Ctor.
-     * @param cdc Codec
+     * @param res Original response
      */
-    public PsCookie(final Codec cdc) {
-        this(cdc, PsCookie.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param cdc Codec
-     * @param name Cookie name
-     */
-    public PsCookie(final Codec cdc, final String name) {
-        this.codec = cdc;
-        this.cookie = name;
+    public RsLogout(final Response res) {
+        this.origin = res;
     }
 
     @Override
-    public Identity enter(final Request request) throws IOException {
-        final List<String> cookies = new RqCookies(request).cookie(this.cookie);
-        final Identity user;
-        if (cookies.isEmpty()) {
-            user = Identity.ANONYMOUS;
-        } else {
-            user = this.codec.decode(cookies.get(0));
-        }
-        return user;
+    public List<String> head() throws IOException {
+        return this.origin.head();
     }
 
     @Override
-    public Response exit(final Response res,
-        final Identity idt) throws IOException {
-        final String text;
-        if (idt.equals(Identity.ANONYMOUS)) {
-            text = "";
-        } else {
-            text = this.codec.encode(idt);
-        }
-        return new RsWithCookie(res, this.cookie, text);
+    public InputStream body() throws IOException {
+        return this.origin.body();
     }
 }

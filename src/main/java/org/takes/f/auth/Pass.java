@@ -25,9 +25,10 @@ package org.takes.f.auth;
 
 import java.io.IOException;
 import org.takes.Request;
+import org.takes.Response;
 
 /**
- * Pass to authenticate a user.
+ * Inlet to enter a user.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -41,6 +42,15 @@ public interface Pass {
      * @return Identity of the user found
      * @throws IOException If fails
      */
-    Identity authenticate(Request request) throws IOException;
+    Identity enter(Request request) throws IOException;
+
+    /**
+     * Wrap the response with the user.
+     * @param response Response
+     * @param identity Identity
+     * @return New response
+     * @throws IOException If fails
+     */
+    Response exit(Response response, Identity identity) throws IOException;
 
 }

@@ -28,17 +28,16 @@ import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.rs.RsWithCookie;
 
 /**
- * Authenticating response.
+ * Login response.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsAuth implements Response {
+@EqualsAndHashCode(of = { "origin", "idt" })
+public final class RsLogin implements Response {
 
     /**
      * Original response.
@@ -46,14 +45,26 @@ public final class RsAuth implements Response {
     private final transient Response origin;
 
     /**
-     * Ctor.
-     * @param identity Identity just authenticated
+     * Identity.
      */
-    public RsAuth(final Identity identity) {
-        this.origin = new RsWithCookie(
-            PsCookie.class.getSimpleName(),
-            new BaseIdentity(identity).toText()
-        );
+    private final transient Identity idt;
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param idnt Identity just authenticated
+     */
+    public RsLogin(final Response res, final Identity idnt) {
+        this.origin = res;
+        this.idt = idnt;
+    }
+
+    /**
+     * Identity just logged in.
+     * @return Identity
+     */
+    public Identity identity() {
+        return this.idt;
     }
 
     @Override

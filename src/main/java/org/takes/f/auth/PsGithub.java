@@ -33,11 +33,13 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.rq.RqQuery;
 import org.takes.rq.RqURI;
 
@@ -72,7 +74,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Identity authenticate(final Request request) throws IOException {
+    public Identity enter(final Request request) throws IOException {
         final List<String> code = new RqQuery(request).param("code");
         if (code.isEmpty()) {
             throw new IllegalArgumentException("code is not provided");
@@ -80,6 +82,12 @@ public final class PsGithub implements Pass {
         return PsGithub.fetch(
             this.token(new RqURI(request).uri(), code.get(0))
         );
+    }
+
+    @Override
+    public Response exit(final Response response,
+        final Identity identity) {
+        return response;
     }
 
     /**
@@ -133,15 +141,21 @@ public final class PsGithub implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(json.size());
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
-        props.put("login", json.getString("login", "?"));
-        props.put("avatar", json.getString("avatar_url", "#"));
-        return new BaseIdentity(
-            String.format("urn:github:%d", json.getInt("id")),
-            props
-        );
+        return new Identity() {
+            @Override
+            public String urn() {
+                return String.format("urn:github:%d", json.getInt("id"));
+            }
+            @Override
+            public Map<String, String> properties() {
+                final ConcurrentMap<String, String> props =
+                    new ConcurrentHashMap<String, String>(json.size());
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                props.put("login", json.getString("login", "?"));
+                props.put("avatar", json.getString("avatar_url", "#"));
+                return props;
+            }
+        };
     }
 
 }

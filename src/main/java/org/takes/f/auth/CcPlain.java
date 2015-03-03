@@ -25,41 +25,42 @@ package org.takes.f.auth;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 
 /**
- * Identity in Base64.
+ * Plain codec.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "name", "props" })
-final class BaseIdentity implements Identity {
+@EqualsAndHashCode
+public final class CcPlain implements Codec {
 
-    /**
-     * URN.
-     */
-    private final transient String name;
+    @Override
+    public String encode(final Identity identity) throws IOException {
+        final String encoding = Charset.defaultCharset().name();
+        final StringBuilder text = new StringBuilder(
+            URLEncoder.encode(identity.urn(), encoding)
+        );
+        for (final Map.Entry<String, String> ent
+            : identity.properties().entrySet()) {
+            text.append(';')
+                .append(ent.getKey())
+                .append('=')
+                .append(URLEncoder.encode(ent.getValue(), encoding));
+        }
+        return text.toString();
+    }
 
-    /**
-     * Properties.
-     */
-    private final transient Map<String, String> props;
-
-    /**
-     * Ctor.
-     * @param text Identity in text
-     * @throws IOException If fails
-     */
-    BaseIdentity(final String text) throws IOException {
+    @Override
+    public Identity decode(final String text) throws IOException {
         final String[] parts = text.split(";");
-        this.name = parts[0];
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
@@ -69,42 +70,19 @@ final class BaseIdentity implements Identity {
                 URLDecoder.decode(pair[1], Charset.defaultCharset().name())
             );
         }
-        this.props = map;
+        final String urn = URLDecoder.decode(
+            parts[0], Charset.defaultCharset().name()
+        );
+        return new Identity() {
+            @Override
+            public String urn() {
+                return urn;
+            }
+            @Override
+            public Map<String, String> properties() {
+                return map;
+            }
+        };
     }
 
-    /**
-     * Ctor.
-     * @param origin Original identity
-     */
-    BaseIdentity(final Identity origin) {
-        this(origin.urn(), origin.properties());
-    }
-
-    /**
-     * Ctor.
-     * @param urn URN
-     * @param map Properties
-     */
-    BaseIdentity(final String urn, final Map<String, String> map) {
-        this.name = urn;
-        this.props = Collections.unmodifiableMap(map);
-    }
-
-    /**
-     * Convert it to text.
-     * @return Text
-     */
-    public String toText() {
-        return "";
-    }
-
-    @Override
-    public String urn() {
-        return this.name;
-    }
-
-    @Override
-    public Map<String, String> properties() {
-        return Collections.unmodifiableMap(this.props);
-    }
 }

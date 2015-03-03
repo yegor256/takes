@@ -26,10 +26,10 @@ package org.takes.f.auth;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqWithHeader;
-import org.takes.tk.TkWithCookie;
 
 /**
  * Authenticating takes.
@@ -79,21 +79,25 @@ public final class TsAuth implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        final Identity identity = this.pass.authenticate(request);
+        final Identity identity = this.pass.enter(request);
         final Take take;
         if (identity.equals(Identity.ANONYMOUS)) {
             take = this.origin.route(request);
         } else {
-            take = new TkWithCookie(
-                this.origin.route(
-                    new RqWithHeader(
-                        request, this.header,
-                        new BaseIdentity(identity).toText()
-                    )
-                ),
-                PsCookie.class.getName(),
-                new BaseIdentity(identity).toText()
-            );
+            take = new Take() {
+                @Override
+                public Response act() throws IOException {
+                    return TsAuth.this.pass.exit(
+                        TsAuth.this.origin.route(
+                            new RqWithHeader(
+                                request, TsAuth.this.header,
+                                new CcPlain().encode(identity)
+                            )
+                        ).act(),
+                        identity
+                    );
+                }
+            };
         }
         return take;
     }
