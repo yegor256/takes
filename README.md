@@ -33,14 +33,14 @@ This is what is not supported and won't be supported:
 
 ## Quick Start
 
-Here it is:
+Create this `App.java` file:
 
 ```java
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
 import org.takes.ts.TsRegex;
 public final class App {
-  public static void main(final String... args) {
+  public static void main(final String... args) throws Exception {
     new FtBasic(
       new TsRegex().with("/", "hello, world!"), 8080
     ).start(Exit.NEVER);
@@ -48,10 +48,16 @@ public final class App {
 }
 ```
 
-Compile and run it like this (`takes.jar` is the only dependency you need):
+Then, download `takes.jar` and compile your Java code:
+
+```
+$ javac -cp takes.jar App.java
+```
+
+Now, run it like this:
 
 ```bash
-$ java -Dfile.encoding=UTF-8 -cp takes.jar App.class
+$ java -Dfile.encoding=UTF-8 -cp takes.jar App
 ```
 
 Should work :)
@@ -66,7 +72,7 @@ with `file.encoding` Java argument.
 
 Maven artifact is in Maven Central:
 
-```
+```xml
 <dependency>
   <groupId>com.jcabi.incubator</groupId>
   <artifactId>takes</artifactId>
