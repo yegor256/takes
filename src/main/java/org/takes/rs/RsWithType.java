@@ -53,7 +53,7 @@ public final class RsWithType implements Response {
     public RsWithType(final Response res, final String type) {
         this.origin = new RsWithHeader(
             new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-            "Content-Type", type
+            "Content-Type", type, true
         );
     }
 
