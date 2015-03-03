@@ -64,6 +64,15 @@ The entire framework relies on your default Java encoding, which is not
 necessarily UTF-8 by default. To be sure, always set it on the command line
 with `file.encoding` Java argument.
 
+Maven artifact is in Maven Central:
+
+```
+<dependency>
+  <groupId>com.jcabi.incubator</groupId>
+  <artifactId>takes</artifactId>
+</dependency>
+```
+
 Let's make it a bit more sophisticated:
 
 ```java
