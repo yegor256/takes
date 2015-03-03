@@ -8,8 +8,11 @@ env:
   MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF-8"
   JAVA_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF-8"
 
-install:
-  - sudo gem install pdd
+install: |
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+  export LANGUAGE=en_US.UTF-8
+  sudo gem install pdd
 
 architect:
   - yegor256
