@@ -58,21 +58,15 @@ public final class CcSalted implements Codec {
     }
 
     @Override
-    public String encode(final Identity identity) throws IOException {
-        return new String(
-            CcSalted.salt(
-                this.origin.encode(identity).getBytes()
-            )
-        );
+    public byte[] encode(final Identity identity) throws IOException {
+        return CcSalted.salt(this.origin.encode(identity));
     }
 
     @Override
-    public Identity decode(final String text) throws IOException {
+    public Identity decode(final byte[] text) throws IOException {
         Identity idt;
         try {
-            idt = this.origin.decode(
-                new String(CcSalted.unsalt(text.getBytes()))
-            );
+            idt = this.origin.decode(CcSalted.unsalt(text));
         } catch (final CcSalted.Fault ex) {
             idt = Identity.ANONYMOUS;
         }

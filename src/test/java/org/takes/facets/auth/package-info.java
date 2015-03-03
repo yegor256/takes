@@ -21,33 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
-
-import java.io.IOException;
 
 /**
- * Codec.
+ * Auth, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public interface Codec {
-
-    /**
-     * Encode identity into bytes.
-     * @param identity The identity
-     * @return Text
-     * @throws IOException If fails
-     */
-    byte[] encode(Identity identity) throws IOException;
-
-    /**
-     * Decode identity from text.
-     * @param text Text
-     * @return Identity
-     * @throws IOException If fails
-     */
-    Identity decode(byte[] text) throws IOException;
-
-}
+package org.takes.facets.auth;

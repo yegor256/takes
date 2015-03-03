@@ -43,7 +43,7 @@ import lombok.EqualsAndHashCode;
 public final class CcPlain implements Codec {
 
     @Override
-    public String encode(final Identity identity) throws IOException {
+    public byte[] encode(final Identity identity) throws IOException {
         final String encoding = Charset.defaultCharset().name();
         final StringBuilder text = new StringBuilder(
             URLEncoder.encode(identity.urn(), encoding)
@@ -55,12 +55,12 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return text.toString();
+        return text.toString().getBytes();
     }
 
     @Override
-    public Identity decode(final String text) throws IOException {
-        final String[] parts = text.split(";");
+    public Identity decode(final byte[] text) throws IOException {
+        final String[] parts = new String(text).split(";");
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {

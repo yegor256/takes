@@ -27,14 +27,37 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 
 /**
- * XOR codec.
+ * Hex codec.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "secret" })
-public final class CcXOR implements Codec {
+@EqualsAndHashCode(of = "origin")
+public final class CcHex implements Codec {
+
+    /**
+     * Backward mapping table.
+     */
+    private static final byte[] BACK = {
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        8, 9, 0, 0, 0, 0, 0, 0,
+        0, 10, 11, 12, 13, 14, 15, 0,
+    };
+
+    /**
+     * Forward mapping table.
+     */
+    private static final byte[] FWD = {
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+    };
 
     /**
      * Original codec.
@@ -42,60 +65,32 @@ public final class CcXOR implements Codec {
     private final transient Codec origin;
 
     /**
-     * Secret to use for encoding.
-     */
-    private final transient byte[] secret;
-
-    /**
      * Ctor.
      * @param codec Original codec
-     * @param key Secret key for encoding
      */
-    public CcXOR(final Codec codec, final String key) {
-        this(codec, key.getBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param codec Original codec
-     * @param key Secret key for encoding
-     */
-    public CcXOR(final Codec codec, final byte[] key) {
+    public CcHex(final Codec codec) {
         this.origin = codec;
-        this.secret = new byte[key.length];
-        System.arraycopy(key, 0, this.secret, 0, key.length);
     }
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return this.xor(this.origin.encode(identity));
+        final byte[] raw = this.origin.encode(identity);
+        final byte[] out = new byte[raw.length << 1];
+        for (int idx = 0; idx < raw.length; ++idx) {
+            out[idx << 1] = CcHex.FWD[raw[idx] >> 4];
+            out[(idx << 1) + 1] = CcHex.FWD[raw[idx] & 0x0f];
+        }
+        return out;
     }
 
     @Override
     public Identity decode(final byte[] text) throws IOException {
-        return this.origin.decode(this.xor(text));
-    }
-
-    /**
-     * XOR array of bytes.
-     * @param input The input to XOR
-     * @return Encrypted output
-     */
-    private byte[] xor(final byte[] input) {
-        final byte[] output = new byte[input.length];
-        if (this.secret.length == 0) {
-            System.arraycopy(input, 0, output, 0, input.length);
-        } else {
-            int spos = 0;
-            for (int pos = 0; pos < input.length; ++pos) {
-                output[pos] = (byte) (input[pos] ^ this.secret[spos]);
-                ++spos;
-                if (spos >= this.secret.length) {
-                    spos = 0;
-                }
-            }
+        final byte[] out = new byte[text.length >> 1];
+        for (int idx = 0; idx < out.length; ++idx) {
+            out[idx] = (byte) ((CcHex.BACK[text[idx << 1]] << 4)
+                + CcHex.BACK[text[(idx << 1) + 1]]);
         }
-        return output;
+        return this.origin.decode(out);
     }
 
 }

@@ -91,7 +91,7 @@ public final class TsAuth implements Takes {
                         TsAuth.this.origin.route(
                             new RqWithHeader(
                                 request, TsAuth.this.header,
-                                new CcPlain().encode(identity)
+                                new String(new CcPlain().encode(identity))
                             )
                         ).act(),
                         identity

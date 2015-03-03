@@ -76,7 +76,7 @@ public final class PsCookie implements Pass {
         if (cookies.isEmpty()) {
             user = Identity.ANONYMOUS;
         } else {
-            user = this.codec.decode(cookies.get(0));
+            user = this.codec.decode(cookies.get(0).getBytes());
         }
         return user;
     }
@@ -88,7 +88,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = this.codec.encode(idt);
+            text = new String(this.codec.encode(idt));
         }
         return new RsWithCookie(res, this.cookie, text);
     }
