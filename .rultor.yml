@@ -5,7 +5,7 @@ assets:
   s3cfg: "yegor256/home#assets/s3cfg"
 
 env:
-  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g"
+  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF-8"
 
 install:
   - sudo gem install pdd

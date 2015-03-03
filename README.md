@@ -4,8 +4,8 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 
 [![Build Status](https://travis-ci.org/yegor256/takes.svg?branch=master)](https://travis-ci.org/yegor256/takes)
-[![Build status](https://ci.appveyor.com/api/projects/status/e5sbjdlhbrpahr8b/branch/master?svg=true)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.takes/takes/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
+[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
+[![Maven Central](https://img.shields.io/maven-central/v/com.jcabi.incubator/takes.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi.incubator/takes)
 
 **It is still an early DRAFT. If you have ideas or corrections, please submit them [here](https://github.com/yegor256/takes/issues).**
 
