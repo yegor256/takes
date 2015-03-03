@@ -24,6 +24,7 @@ merge:
 
 deploy:
   script: |
+    echo ${JAVA_OPTS}
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml

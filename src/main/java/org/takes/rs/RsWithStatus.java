@@ -25,8 +25,13 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -39,6 +44,12 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(of = { "origin", "status" })
 public final class RsWithStatus implements Response {
+
+    /**
+     * Statuses and their reasons.
+     */
+    private static final Map<Integer, String> REASONS =
+        Collections.unmodifiableMap(RsWithStatus.make());
 
     /**
      * Original response.
@@ -72,7 +83,11 @@ public final class RsWithStatus implements Response {
     public List<String> head() throws IOException {
         final List<String> list = this.origin.head();
         final List<String> head = new ArrayList<String>(list.size());
-        head.add(String.format("HTTP/1.1 %d OK", this.status));
+        String reason = RsWithStatus.REASONS.get(this.status);
+        if (reason == null) {
+            reason = "???";
+        }
+        head.add(String.format("HTTP/1.1 %d %s", this.status, reason));
         head.addAll(list.subList(1, list.size()));
         return head;
     }
@@ -81,4 +96,31 @@ public final class RsWithStatus implements Response {
     public InputStream body() throws IOException {
         return this.origin.body();
     }
+
+    /**
+     * Make all reasons.
+     * @return Map of status codes and reasons
+     */
+    private static Map<Integer, String> make() {
+        final ConcurrentMap<Integer, String> map =
+            new ConcurrentHashMap<Integer, String>(0);
+        map.put(HttpURLConnection.HTTP_OK, "OK");
+        map.put(HttpURLConnection.HTTP_NO_CONTENT, "No Content");
+        map.put(HttpURLConnection.HTTP_CREATED, "Created");
+        map.put(HttpURLConnection.HTTP_ACCEPTED, "Accepted");
+        map.put(HttpURLConnection.HTTP_MOVED_PERM, "Moved Permanently");
+        map.put(HttpURLConnection.HTTP_MOVED_TEMP, "Moved Temporarily");
+        map.put(HttpURLConnection.HTTP_SEE_OTHER, "See Other");
+        map.put(HttpURLConnection.HTTP_NOT_MODIFIED, "Not Modified");
+        map.put(HttpURLConnection.HTTP_BAD_REQUEST, "Bad Request");
+        map.put(HttpURLConnection.HTTP_UNAUTHORIZED, "Unauthorized");
+        map.put(HttpURLConnection.HTTP_PAYMENT_REQUIRED, "Payment Required");
+        map.put(HttpURLConnection.HTTP_FORBIDDEN, "Forbidden");
+        map.put(HttpURLConnection.HTTP_NOT_FOUND, "Not Found");
+        map.put(HttpURLConnection.HTTP_BAD_METHOD, "Bad Method");
+        map.put(HttpURLConnection.HTTP_BAD_GATEWAY, "Bad Gateway");
+        map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, "Internal Error");
+        return map;
+    }
+
 }
