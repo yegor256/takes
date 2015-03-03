@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,56 +31,66 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.takes.Request;
 
 /**
- * Response decorator that can print an entire response in HTTP format.
+ * Request decorator, to print it all.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode(of = "origin")
-public final class RsPrint implements Response {
+public final class RqPrint implements Request {
 
     /**
-     * Original response.
+     * Original request.
      */
-    private final transient Response origin;
+    private final transient Request origin;
 
     /**
      * Ctor.
-     * @param res Original response
+     * @param req Original request
      */
-    public RsPrint(final Response res) {
-        this.origin = res;
+    public RqPrint(final Request req) {
+        this.origin = req;
+    }
+
+    @Override
+    public List<String> head() throws IOException {
+        return this.origin.head();
+    }
+
+    @Override
+    public InputStream body() throws IOException {
+        return this.origin.body();
     }
 
     /**
-     * Print it into string.
-     * @return Entire HTTP response
+     * Print it all.
+     * @return Text form of request
      * @throws IOException If fails
      */
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.print(baos);
-        return new String(baos.toByteArray());
+        final InputStream input = this.body();
+        try {
+            while (true) {
+                final int data = input.read();
+                if (data < 0) {
+                    break;
+                }
+                baos.write(data);
+            }
+            return new String(baos.toByteArray());
+        } finally {
+            input.close();
+        }
     }
 
     /**
-     * Print body into string.
-     * @return Entire body of HTTP response
-     * @throws IOException If fails
-     */
-    public String printBody() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.printBody(baos);
-        return new String(baos.toByteArray());
-    }
-
-    /**
-     * Print it into output stream.
-     * @param output Output to print into
+     * Print it all.
+     * @param output Output stream
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
@@ -96,32 +106,34 @@ public final class RsPrint implements Response {
     }
 
     /**
-     * Print it into output stream.
-     * @param output Output to print into
+     * Print body.
+     * @return Text form of request
+     * @throws IOException If fails
+     */
+    public String printBody() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printBody(baos);
+        return new String(baos.toByteArray());
+    }
+
+    /**
+     * Print body.
+     * @param output Output stream to print to
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final InputStream body = this.body();
+        final InputStream input = this.body();
         try {
             while (true) {
-                final int data = body.read();
+                final int data = input.read();
                 if (data < 0) {
                     break;
                 }
                 output.write(data);
             }
         } finally {
-            body.close();
+            input.close();
         }
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

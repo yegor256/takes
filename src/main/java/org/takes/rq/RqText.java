@@ -26,7 +26,6 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -38,7 +37,7 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "encoding" })
+@EqualsAndHashCode(of = "origin")
 public final class RqText implements Request {
 
     /**
@@ -47,26 +46,11 @@ public final class RqText implements Request {
     private final transient Request origin;
 
     /**
-     * Default encoding.
-     */
-    private final transient String encoding;
-
-    /**
      * Ctor.
      * @param req Original request
      */
     public RqText(final Request req) {
-        this(req, Charset.defaultCharset().name());
-    }
-
-    /**
-     * Ctor.
-     * @param req Original request
-     * @param enc Default encoding
-     */
-    public RqText(final Request req, final String enc) {
         this.origin = req;
-        this.encoding = enc;
     }
 
     @Override
@@ -95,7 +79,7 @@ public final class RqText implements Request {
                 }
                 baos.write(data);
             }
-            return new String(baos.toByteArray(), this.encoding);
+            return new String(baos.toByteArray());
         } finally {
             input.close();
         }
