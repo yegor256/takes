@@ -27,6 +27,7 @@ import com.google.common.base.Joiner;
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import javax.xml.transform.Source;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
@@ -49,6 +50,11 @@ public final class RsXSLTTest {
      */
     @Test
     public void convertsXmlToHtml() throws IOException {
+        MatcherAssert.assertThat(
+            "default charset during testing must be UTF-8",
+            Charset.defaultCharset().name(),
+            Matchers.equalTo("UTF-8")
+        );
         final String xml = Joiner.on(' ').join(
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
             "<page><data>ура</data></page>"
