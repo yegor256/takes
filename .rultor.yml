@@ -5,8 +5,8 @@ assets:
   s3cfg: "yegor256/home#assets/s3cfg"
 
 env:
-  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF8"
-  JAVA_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF8"
+  MAVEN_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF-8"
+  JAVA_OPTS: "-XX:MaxPermSize=256m -Xmx1g -Dfile.encoding=UTF-8"
 
 install:
   - sudo gem install pdd
@@ -24,7 +24,6 @@ merge:
 
 deploy:
   script: |
-    echo ${JAVA_OPTS}
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml

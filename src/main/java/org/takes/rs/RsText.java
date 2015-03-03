@@ -24,10 +24,8 @@
 package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -38,13 +36,8 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsText implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RsText extends RsWrap {
 
     /**
      * Ctor.
@@ -94,22 +87,15 @@ public final class RsText implements Response {
      * @param body HTML body
      */
     public RsText(final Response res, final InputStream body) {
-        this.origin = new RsWithBody(
-            new RsWithType(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "text/plain"
+        super(
+            new RsWithBody(
+                new RsWithType(
+                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                    "text/plain"
             ),
-            body
+                body
+        )
         );
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

@@ -96,7 +96,13 @@ public final class RsWithHeaders implements Response {
 
     @Override
     public List<String> head() throws IOException {
-        return this.origin.head();
+        final Collection<String> list = this.origin.head();
+        final List<String> head = new ArrayList<String>(list.size());
+        head.addAll(list);
+        for (final String header : this.headers) {
+            head.add(header.trim());
+        }
+        return head;
     }
 
     @Override

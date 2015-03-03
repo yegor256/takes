@@ -23,79 +23,42 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
- * HTML response decorator.
+ * Response decorator.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RsHTML extends RsWrap {
+@EqualsAndHashCode(of = "origin")
+public class RsWrap implements Response {
 
     /**
-     * Ctor.
-     * @param body HTML body
+     * Original response.
      */
-    public RsHTML(final String body) {
-        this(body.getBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param body HTML body
-     */
-    public RsHTML(final byte[] body) {
-        this(new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param body HTML body
-     */
-    public RsHTML(final InputStream body) {
-        this(new RsEmpty(), body);
-    }
+    private final transient Response origin;
 
     /**
      * Ctor.
      * @param res Original response
-     * @param body HTML body
      */
-    public RsHTML(final Response res, final String body) {
-        this(res, body.getBytes());
+    public RsWrap(final Response res) {
+        this.origin = res;
     }
 
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param body HTML body
-     */
-    public RsHTML(final Response res, final byte[] body) {
-        this(res, new ByteArrayInputStream(body));
+    @Override
+    public final List<String> head() throws IOException {
+        return this.origin.head();
     }
 
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param body HTML body
-     */
-    public RsHTML(final Response res, final InputStream body) {
-        super(
-            new RsWithBody(
-                new RsWithType(
-                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                    "text/html"
-            ),
-                body
-        )
-        );
+    @Override
+    public final InputStream body() throws IOException {
+        return this.origin.body();
     }
-
 }

@@ -51,13 +51,18 @@ public final class App {
 Compile and run it like this (`takes.jar` is the only dependency you need):
 
 ```bash
-$ java -cp takes.jar App.class
+$ java -Dfile.encoding=utf8 -cp takes.jar App.class
 ```
 
 Should work :)
 
 This code starts a new HTTP server on port 8080 and renders a plain-text page on
 all requests at the root URI.
+
+**Important**: Pay attention that UTF-8 encoding is set on the command line.
+The entire framework relies on your default Java encoding, which is not
+necessarily UTF-8 by default. To be sure, always set it on the command line
+with `file.encoding` Java argument.
 
 Let's make it a bit more sophisticated:
 
@@ -127,7 +132,7 @@ public final class App {
         .with("/", new TkIndex())
         .with(
           "/xsl/.*",
-          new TsContentType(new TsClasspath(), "text/xsl")
+          new TsWithType(new TsClasspath(), "text/xsl")
         )
         .with(
           "/account",
@@ -170,9 +175,8 @@ public final class TkAccount implements Take {
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
-          new XePlain("PI 'xsl-stylesheet', 'href=\"/xsl/account.xsl\"'"),
-          new XePlain("ADD 'page'"),
-          new XePrepend("XPATH '/page'", this.user)
+          new XeStylesheet("/xsl/account.xsl"),
+          new XeAppend("page", this.user)
         )
       ),
       this.user
@@ -199,7 +203,7 @@ public final class User implements XeSource {
 Here is how `RsLogin` may look like:
 
 ```java
-public final class RsLogin extends Response.Wrap {
+public final class RsLogin extends RsWrap {
   public RsLogin(final Response response, final User user) {
     super(
       new RsWithCookie(
@@ -230,6 +234,7 @@ You will need this extra dependency in classpath:
 <dependency>
   <groupId>org.apache.velocity</groupId>
   <artifactId>velocity-engine-core</artifactId>
+  <scope>runtime</scope>
 </dependency>
 ```
 
@@ -241,7 +246,7 @@ classes for that:
 
 ```java
 new TsRegex()
-  .with("/css/.+", new TsContentType(new TsClasspath(), "text/css"))
+  .with("/css/.+", new TsWithType(new TsClasspath(), "text/css"))
   .with("/data/.+", new TsFiles(new File("/usr/local/data"))
 ```
 
@@ -249,7 +254,7 @@ Class `TsClasspath` takes static part of the request URI and finds a resource wi
 
 `TsFiles` just looks by file name in the directory configured.
 
-`TsContentType` sets content type of all responses coming out of the decorated takes.
+`TsWithType` sets content type of all responses coming out of the decorated takes.
 
 ## Hit Refresh Debugging
 
@@ -263,7 +268,7 @@ that feature:
 new TsRegex()
   .with(
     "/css/.+",
-    new TsContentType(
+    new TsWithType(
       new TsHitRefresh(
         "./target/classes/foo", // where to get fresh files
         "./src/main/resources/foo/scss/**", // what sources to watch
@@ -452,7 +457,7 @@ Response response = new RsXembly(
   new XeAppend(
     "page", // create a DOM document with "page" root element
     new XeMillis(false), // add "millis" attribute to the root, with current time
-    new XeToRoot(this.user), // add this.user to the root element
+    this.user, // add this.user to the root element
     new XeSource() {
       @Override
       public Iterable<Directive> toXembly() {
@@ -498,9 +503,7 @@ public final class XeFoo implements XeSource.Wrap {
         new XeRoot("page"),
         new XeMillis(false),
         new XeStylesheet(stylesheet),
-        new XeToRoot(
-          new XeConcat(sources)
-        ),
+        new XeChain(sources),
         new XeSource() {
           @Override
           public Iterable<Directive> toXembly() {
@@ -551,7 +554,7 @@ public final class TsIndex implements Takes {
   @Override
   public Take route(final Request req) {
     // the list may be empty
-    final List<String> cookies = new RqCookies(req).get("my-cookie");
+    final List<String> cookies = new RqCookies(req).cookie("my-cookie");
   }
 }
 ```
@@ -619,6 +622,7 @@ There are a few command line arguments that should be passed to
 --port=1234     Tells the server to listen to TCP port 1234
 --lifetime=5000 The server will die in five seconds (useful for integration testing)
 --refresh       Run the server in hit-refresh mode
+--daemon        Runs the server in Java daemon thread (for integration testing)
 ```
 
 For example:
@@ -628,7 +632,7 @@ public final class App {
   public static void main(final String... args) {
     new FtCLI(
       new TsRegex().with("/", "hello, world!"), args
-    ).listen(Exit.NEVER);
+    ).start(Exit.NEVER);
   }
 }
 ```

@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -40,20 +39,15 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsPrint implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RsPrint extends RsWrap {
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsPrint(final Response res) {
-        this.origin = res;
+        super(res);
     }
 
     /**
@@ -115,13 +109,4 @@ public final class RsPrint implements Response {
         }
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

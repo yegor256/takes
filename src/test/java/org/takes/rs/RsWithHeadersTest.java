@@ -23,31 +23,43 @@
  */
 package org.takes.rs;
 
-import java.net.HttpURLConnection;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import com.google.common.base.Joiner;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Response decorator, with content type.
- *
+ * Test case for {@link RsWithHeaders}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RsWithType extends RsWrap {
+public final class RsWithHeadersTest {
 
     /**
-     * Ctor.
-     * @param res Original response
-     * @param type Content type
+     * RsWithHeaders can add headers.
+     * @throws IOException If some problem inside
      */
-    public RsWithType(final Response res, final String type) {
-        super(
-            new RsWithHeader(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "Content-Type", type, true
-        )
+    @Test
+    public void addsHeadersToResponse() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithHeaders(
+                    new RsEmpty(),
+                    "Host: www.example.com ",
+                    "Content-Type: text/xml "
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Host: www.example.com",
+                    "Content-Type: text/xml",
+                    "",
+                    ""
+                )
+            )
         );
     }
 

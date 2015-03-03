@@ -23,9 +23,7 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -36,13 +34,8 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsFluent implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RsFluent extends RsWrap {
 
     /**
      * Ctor.
@@ -56,17 +49,7 @@ public final class RsFluent implements Response {
      * @param res Original response
      */
     public RsFluent(final Response res) {
-        this.origin = res;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+        super(res);
     }
 
     /**
@@ -75,7 +58,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withStatus(final int code) {
-        return new RsFluent(new RsWithStatus(this.origin, code));
+        return new RsFluent(new RsWithStatus(this, code));
     }
 
     /**
@@ -84,7 +67,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withHeader(final String header) {
-        return new RsFluent(new RsWithHeader(this.origin, header));
+        return new RsFluent(new RsWithHeader(this, header));
     }
 
     /**
@@ -94,7 +77,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withHeader(final String key, final String value) {
-        return new RsFluent(new RsWithHeader(this.origin, key, value));
+        return new RsFluent(new RsWithHeader(this, key, value));
     }
 
     /**
@@ -103,7 +86,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withType(final String ctype) {
-        return new RsFluent(new RsWithType(this.origin, ctype));
+        return new RsFluent(new RsWithType(this, ctype));
     }
 
     /**
@@ -112,7 +95,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withBody(final String body) {
-        return new RsFluent(new RsWithBody(this.origin, body));
+        return new RsFluent(new RsWithBody(this, body));
     }
 
     /**
@@ -121,7 +104,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withBody(final byte[] body) {
-        return new RsFluent(new RsWithBody(this.origin, body));
+        return new RsFluent(new RsWithBody(this, body));
     }
 
     /**
@@ -130,7 +113,7 @@ public final class RsFluent implements Response {
      * @return New fluent response
      */
     public RsFluent withBody(final InputStream body) {
-        return new RsFluent(new RsWithBody(this.origin, body));
+        return new RsFluent(new RsWithBody(this, body));
     }
 
 }
