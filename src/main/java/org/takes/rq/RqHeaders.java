@@ -106,6 +106,11 @@ public final class RqHeaders implements Request {
             new ConcurrentHashMap<String, List<String>>(head.size());
         for (final String line : head.subList(0, head.size())) {
             final String[] parts = line.split(":", 2);
+            if (parts.length < 2) {
+                throw new IOException(
+                    String.format("invalid HTTP header: %s", line)
+                );
+            }
             final String key = parts[0].toLowerCase(Locale.ENGLISH);
             map.putIfAbsent(key, new LinkedList<String>());
             map.get(key).add(parts[1]);
