@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.IOException;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
@@ -51,6 +50,7 @@ public final class BkSafe implements Back {
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingThrowable")
     public void accept(final Socket socket) {
         try {
             this.origin.accept(socket);

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -38,7 +39,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
+@EqualsAndHashCode(of = { "origin", "header", "unique" })
 public final class RsWithHeader implements Response {
 
     /**
@@ -52,6 +53,11 @@ public final class RsWithHeader implements Response {
     private final transient String header;
 
     /**
+     * Unique.
+     */
+    private final transient boolean unique;
+
+    /**
      * Ctor.
      * @param res Original response
      * @param name Header name
@@ -59,7 +65,20 @@ public final class RsWithHeader implements Response {
      */
     public RsWithHeader(final Response res, final String name,
         final String value) {
-        this(res, String.format("%s: %s", name, value));
+        this(res, name, value, false);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param name Header name
+     * @param value Header value
+     * @param unq Unique
+     * @checkstyle ParameterNumberCheck (5 lines)
+     */
+    public RsWithHeader(final Response res, final String name,
+        final String value, final boolean unq) {
+        this(res, String.format("%s: %s", name, value), unq);
     }
 
     /**
@@ -68,15 +87,38 @@ public final class RsWithHeader implements Response {
      * @param hdr Header to add
      */
     public RsWithHeader(final Response res, final String hdr) {
+        this(res, hdr, false);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param hdr Header to add
+     * @param unq Unique
+     */
+    public RsWithHeader(final Response res, final String hdr,
+        final boolean unq) {
         this.origin = res;
         this.header = hdr;
+        this.unique = unq;
     }
 
     @Override
     public List<String> head() throws IOException {
         final Collection<String> list = this.origin.head();
         final List<String> head = new ArrayList<String>(list.size());
-        head.addAll(list);
+        if (this.unique) {
+            final String prefix = String.format(
+                "%s:", this.header.split(":", 2)[0].toLowerCase(Locale.ENGLISH)
+            );
+            for (final String hdr : list) {
+                if (!hdr.toLowerCase(Locale.ENGLISH).startsWith(prefix)) {
+                    head.add(hdr);
+                }
+            }
+        } else {
+            head.addAll(list);
+        }
         head.add(this.header);
         return head;
     }

@@ -201,6 +201,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>xml:/src/it/settings.xml</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/facets/auth/CcHex.java</exclude>
                                 <exclude>findbugs:.*</exclude>
                             </excludes>
                         </configuration>

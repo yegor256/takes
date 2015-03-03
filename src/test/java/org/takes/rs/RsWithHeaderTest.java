@@ -21,46 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.rs;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsWithType;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Plain text take.
- *
+ * Test case for {@link RsWithHeader}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "type" })
-public final class TkWithType implements Take {
+public final class RsWithHeaderTest {
 
     /**
-     * Original take.
+     * RsWithHeader can add headers.
+     * @throws IOException If some problem inside
      */
-    private final transient Take origin;
-
-    /**
-     * Type.
-     */
-    private final transient String type;
-
-    /**
-     * Ctor.
-     * @param take Original take
-     * @param ctype Content type
-     */
-    public TkWithType(final Take take, final String ctype) {
-        this.origin = take;
-        this.type = ctype;
+    @Test
+    public void addsHeadersToResponse() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithHeader(
+                    new RsWithHeader(new RsEmpty(), "host", "b.example.com"),
+                    "Host", "a.example.com", true
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Host: a.example.com",
+                    "",
+                    ""
+                )
+            )
+        );
     }
 
-    @Override
-    public Response act() throws IOException {
-        return new RsWithType(this.origin.act(), this.type);
-    }
 }
