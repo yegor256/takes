@@ -56,6 +56,14 @@ public final class RsFlash implements Response {
 
     /**
      * Ctor.
+     * @param err Error
+     */
+    public RsFlash(final Throwable err) {
+        this(err.getLocalizedMessage(), Level.SEVERE);
+    }
+
+    /**
+     * Ctor.
      * @param msg Message
      * @param level Level
      */
