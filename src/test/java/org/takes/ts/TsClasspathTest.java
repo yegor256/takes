@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Takes;
-import org.takes.rq.RqPlain;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -48,7 +48,7 @@ public final class TsClasspathTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TsClasspath().route(
-                    new RqPlain(
+                    new RqFake(
                         "GET", "/org/takes/ts/TsClasspathTest.class", ""
                     )
                 ).act()
@@ -64,7 +64,7 @@ public final class TsClasspathTest {
     @Test(expected = Takes.NotFoundException.class)
     public void throwsWhenResourceNotFound() throws IOException {
         new TsClasspath().route(
-            new RqPlain("PUT", "/something-else", "")
+            new RqFake("PUT", "/something-else", "")
         );
     }
 

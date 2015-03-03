@@ -27,8 +27,8 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
-import org.takes.rq.RqPlain;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkEmpty;
 
@@ -49,7 +49,7 @@ public final class TsMethodsTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TsMethods().with(RqMethod.DELETE, new TkEmpty()).route(
-                    new RqPlain(RqMethod.DELETE, "/", "")
+                    new RqFake(RqMethod.DELETE, "/", "")
                 ).act()
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")

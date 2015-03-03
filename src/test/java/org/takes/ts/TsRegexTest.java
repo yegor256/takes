@@ -28,7 +28,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqPlain;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -49,7 +49,7 @@ public final class TsRegexTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TsRegex().with("/[a-z]+", body).route(
-                    new RqPlain("GET", "/hey", "")
+                    new RqFake("GET", "/hey", "")
                 ).act()
             ).print(),
             Matchers.equalTo(

@@ -45,7 +45,7 @@ public final class RqQueryTest {
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
             new RqQuery(
-                new RqPlain(
+                new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
                         "Host: www.example.com",
@@ -66,7 +66,7 @@ public final class RqQueryTest {
     public void extractsParams() throws IOException {
         MatcherAssert.assertThat(
             new RqQuery(
-                new RqPlain(
+                new RqFake(
                     Arrays.asList(
                         "GET /hello?a=3&b=7&c&d=9%28x%29&ff",
                         "Host: a.example.com",

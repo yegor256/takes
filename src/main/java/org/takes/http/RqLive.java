@@ -21,49 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.http;
 
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
+import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.f.fallback.TsFallback;
-import org.takes.rq.RqMethod;
-import org.takes.rq.RqPlain;
-import org.takes.rs.RsPrint;
-import org.takes.tk.TkText;
 
 /**
- * Test case for {@link org.takes.f.fallback.TsFallback}.
+ * Live request.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class TsFallbackTest {
+@EqualsAndHashCode(of = { "hde", "content" })
+final class RqLive implements Request {
 
     /**
-     * TsFallback can fall back.
-     * @throws IOException If some problem inside
+     * Head.
      */
-    @Test
-    public void fallsBack() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TsFallback(
-                    new Takes() {
-                        @Override
-                        public Take route(final Request request) {
-                            throw new UnsupportedOperationException("#take()");
-                        }
-                    },
-                    new TkText("an exception, sorry")
-                ).route(new RqPlain(RqMethod.GET, "/", "")).act()
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
-        );
+    private final transient List<String> hde;
+
+    /**
+     * Content.
+     */
+    private final transient InputStream content;
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    RqLive(final List<String> head, final InputStream body) {
+        this.hde = Collections.unmodifiableList(head);
+        this.content = body;
+    }
+
+    @Override
+    public List<String> head() {
+        return Collections.unmodifiableList(this.hde);
+    }
+
+    @Override
+    public InputStream body() {
+        return this.content;
     }
 
 }

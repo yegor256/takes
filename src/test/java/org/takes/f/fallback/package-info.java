@@ -21,41 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
-
-import java.io.IOException;
-import java.util.Arrays;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 /**
- * Test case for {@link RqHeaders}.
+ * Fallback, tests.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RqHeadersTest {
-
-    /**
-     * RqHeaders can parse headers.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void parsesHttpHeaders() throws IOException {
-        MatcherAssert.assertThat(
-            new RqHeaders(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /h?a=3",
-                        "Host:  www.example.com",
-                        "Content-type: text/plain"
-                    ),
-                    ""
-                )
-            ).header("Host"),
-            Matchers.hasItem("www.example.com")
-        );
-    }
-
-}
+package org.takes.f.fallback;

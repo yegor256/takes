@@ -21,68 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.f.fallback;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.List;
-import lombok.EqualsAndHashCode;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
+import org.takes.rs.RsPrint;
+import org.takes.tk.TkText;
 
 /**
- * Request decorator, for HTTP URI re-building.
- *
+ * Test case for {@link org.takes.f.fallback.TsFallback}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqURI implements Request {
+public final class TsFallbackTest {
 
     /**
-     * Original request.
+     * TsFallback can fall back.
+     * @throws IOException If some problem inside
      */
-    private final transient Request origin;
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqURI(final Request req) {
-        this.origin = req;
-    }
-
-    /**
-     * Get full request URI.
-     * @return HTTP request URI
-     * @throws IOException If fails
-     */
-    public URI uri() throws IOException {
-        final List<String> host = new RqHeaders(this.origin).header("Host");
-        if (host.isEmpty()) {
-            throw new IOException("Host header is absent");
-        }
-        if (host.size() > 1) {
-            throw new IOException("too many Host headers");
-        }
-        return URI.create(
-            String.format(
-                "%s%s",
-                host.get(0),
-                new RqQuery(this.origin).query()
-            )
+    @Test
+    public void fallsBack() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsFallback(
+                    new Takes() {
+                        @Override
+                        public Take route(final Request request) {
+                            throw new UnsupportedOperationException("#take()");
+                        }
+                    },
+                    new TkText("an exception, sorry")
+                ).route(new RqFake(RqMethod.GET, "/", "")).act()
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 200 OK")
         );
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
     }
 
 }

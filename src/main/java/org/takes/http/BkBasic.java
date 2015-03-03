@@ -41,7 +41,6 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Takes;
-import org.takes.rq.RqPlain;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -88,7 +87,7 @@ public final class BkBasic implements Back {
             head.add(line);
         }
         try {
-            this.print(new RqPlain(head, input), socket.getOutputStream());
+            this.print(new RqLive(head, input), socket.getOutputStream());
         } finally {
             input.close();
         }

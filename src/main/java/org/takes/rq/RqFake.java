@@ -25,20 +25,21 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Plain request.
+ * Fake request (for unit tests).
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "hde", "content" })
-public final class RqPlain implements Request {
+public final class RqFake implements Request {
 
     /**
      * Head.
@@ -52,10 +53,25 @@ public final class RqPlain implements Request {
 
     /**
      * Ctor.
+     */
+    public RqFake() {
+        this("GET");
+    }
+
+    /**
+     * Ctor.
+     * @param method HTTP method
+     */
+    public RqFake(final String method) {
+        this(method, "/");
+    }
+
+    /**
+     * Ctor.
      * @param method HTTP method
      * @param query HTTP query
      */
-    public RqPlain(final String method, final String query) {
+    public RqFake(final String method, final String query) {
         this(method, query, "");
     }
 
@@ -65,10 +81,11 @@ public final class RqPlain implements Request {
      * @param query HTTP query
      * @param body HTTP body
      */
-    public RqPlain(final String method, final String query, final String body) {
+    public RqFake(final String method, final String query, final String body) {
         this(
-            Collections.singletonList(
-                String.format("%s %s", method, query)
+            Arrays.asList(
+                String.format("%s %s", method, query),
+                "Host: www.example.com"
             ),
             body
         );
@@ -79,7 +96,7 @@ public final class RqPlain implements Request {
      * @param head Head
      * @param body Body
      */
-    public RqPlain(final List<String> head, final String body) {
+    public RqFake(final List<String> head, final String body) {
         this(head, body.getBytes());
     }
 
@@ -88,7 +105,7 @@ public final class RqPlain implements Request {
      * @param head Head
      * @param body Body
      */
-    public RqPlain(final List<String> head, final byte[] body) {
+    public RqFake(final List<String> head, final byte[] body) {
         this(head, new ByteArrayInputStream(body));
     }
 
@@ -97,7 +114,7 @@ public final class RqPlain implements Request {
      * @param head Head
      * @param body Body
      */
-    public RqPlain(final List<String> head, final InputStream body) {
+    public RqFake(final List<String> head, final InputStream body) {
         this.hde = Collections.unmodifiableList(head);
         this.content = body;
     }
