@@ -85,7 +85,7 @@ public final class FtCLI implements Front {
         if (map.get("daemon") == null) {
             front.start(ext);
         } else {
-            new Thread(
+            final Thread thread = new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -96,7 +96,9 @@ public final class FtCLI implements Front {
                         }
                     }
                 }
-            ).start();
+            );
+            thread.setDaemon(true);
+            thread.start();
         }
     }
 
