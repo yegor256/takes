@@ -23,37 +23,43 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link RsText}.
+ * Test case for {@link RsNegotiation}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RsTextTest {
+public final class RsNegotiationTest {
 
     /**
-     * RsText can build a plain text response.
+     * RsNegotiation can route by the Accept header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void negotiatesCotent() throws IOException {
+        final Request req = new RqFake(
+            Arrays.asList(
+                "GET /hello.html",
+                "Accept: text/xml; q=0.3, text/plain; q=0.1",
+                "Accept: */*; q=0.05"
+            ),
+            ""
+        );
         MatcherAssert.assertThat(
-            new RsPrint(new RsText(body)).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            new RsPrint(
+                new RsNegotiation(req)
+                    .with("text/*", new RsText("it's a text"))
+                    .with("image/*", new RsText("it's an image"))
+            ).printBody(),
+            Matchers.endsWith("a text")
         );
     }
 

@@ -58,4 +58,26 @@ public final class RqHeadersTest {
         );
     }
 
+    /**
+     * RqHeaders can find all headers.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void findsAllHeaders() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHeaders(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /f?a=3&b-6",
+                        "Host: www.example.com",
+                        "Accept: text/xml",
+                        "Accept: text/html"
+                    ),
+                    ""
+                )
+            ).header("Accept"),
+            Matchers.hasSize(2)
+        );
+    }
+
 }
