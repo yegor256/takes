@@ -5,7 +5,7 @@
 
 [![Build Status](https://img.shields.io/travis/yegor256/takes.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![Maven Central](https://img.shields.io/maven-central/v/com.jcabi.incubator/takes.svg)](https://maven-badges.herokuapp.com/maven-central/com.jcabi.incubator/takes)
+[![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 
 **It is still an early DRAFT. If you have ideas or corrections, please submit them [here](https://github.com/yegor256/takes/issues).**
 
@@ -74,7 +74,7 @@ Maven artifact is in Maven Central:
 
 ```xml
 <dependency>
-  <groupId>com.jcabi.incubator</groupId>
+  <groupId>org.takes</groupId>
   <artifactId>takes</artifactId>
 </dependency>
 ```
