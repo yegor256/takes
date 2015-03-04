@@ -84,6 +84,7 @@
         </site>
     </distributionManagement>
     <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
         <saxon.version>9.1.0.8</saxon.version>
     </properties>
     <dependencies>
