@@ -187,7 +187,7 @@ new TsFork(
 )
 ```
 
-We're using `TsFork.Fast` instead of `Takes`, in order to deal with
+We're using `Target<RqRequest>` instead of `Takes`, in order to deal with
 `RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
 of `Matcher` used by `TsFork` for pattern matching.
 
