@@ -64,7 +64,7 @@ public final class TsFlash implements Takes {
      * @param takes Original takes
      */
     public TsFlash(final Takes takes) {
-        this(takes, RsFlash.class.getName(), "X-Takes-Flash");
+        this(takes, RsFlash.class.getSimpleName(), "X-Takes-Flash");
     }
 
     /**

@@ -60,7 +60,7 @@ public final class RsFlash extends RsWrap {
      * @param level Level
      */
     public RsFlash(final String msg, final Level level) {
-        this(msg, level, RsFlash.class.getName());
+        this(msg, level, RsFlash.class.getSimpleName());
     }
 
     /**
