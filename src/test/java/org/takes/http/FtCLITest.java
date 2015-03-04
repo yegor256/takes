@@ -63,6 +63,7 @@ public final class FtCLITest {
                         new FtCLI(
                             new TsRegex().with("/", "hello!"),
                             String.format("--port=%d", port),
+                            "--threads=1",
                             "--lifetime=3000"
                         ).start(exit);
                     } catch (final IOException ex) {

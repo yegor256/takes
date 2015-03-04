@@ -23,8 +23,8 @@
  */
 package org.takes.http;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -42,8 +42,8 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient Map<String, String> map =
-        new HashMap<String, String>(0);
+    private final transient ConcurrentMap<String, String> map =
+        new ConcurrentHashMap<String, String>(0);
 
     /**
      * Ctor.
@@ -87,14 +87,29 @@ final class Options {
      * @return Port number
      */
     public long lifetime() {
-        final String values = this.map.get("lifetime");
+        final String value = this.map.get("lifetime");
         final long msec;
-        if (values == null) {
+        if (value == null) {
             msec = Long.MAX_VALUE;
         } else {
-            msec = Long.parseLong(values);
+            msec = Long.parseLong(value);
         }
         return msec;
+    }
+
+    /**
+     * Get the threads.
+     * @return Threads
+     */
+    public int threads() {
+        final String value = this.map.get("threads");
+        final int threads;
+        if (value == null) {
+            threads = Runtime.getRuntime().availableProcessors() << 2;
+        } else {
+            threads = Integer.parseInt(value);
+        }
+        return threads;
     }
 
 }

@@ -72,7 +72,10 @@ public final class FtCLI implements Front {
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
         final Front front = new FtBasic(
-            new BkParallel(new BkSafe(new BkBasic(this.takes))),
+            new BkParallel(
+                new BkSafe(new BkBasic(this.takes)),
+                this.options.threads()
+            ),
             this.options.port()
         );
         final Exit ext = this.exit(exit);

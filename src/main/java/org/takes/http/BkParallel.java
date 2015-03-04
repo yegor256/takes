@@ -54,7 +54,7 @@ public final class BkParallel implements Back {
      * @param back Original back
      */
     public BkParallel(final Back back) {
-        this(back, Runtime.getRuntime().availableProcessors());
+        this(back, Runtime.getRuntime().availableProcessors() << 2);
     }
 
     /**
