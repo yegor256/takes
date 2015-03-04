@@ -24,65 +24,38 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import java.util.Arrays;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Request decorator, for HTTP URI re-building.
- *
+ * Test case for {@link RqURI}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqURI implements Request {
+public final class RqURITest {
 
     /**
-     * Original request.
+     * RqURI can parse a query.
+     * @throws IOException If some problem inside
      */
-    private final transient Request origin;
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqURI(final Request req) {
-        this.origin = req;
-    }
-
-    /**
-     * Get full request URI.
-     * @return HTTP request URI
-     * @throws IOException If fails
-     */
-    public URI uri() throws IOException {
-        final List<String> host = new RqHeaders(this.origin).header("Host");
-        if (host.isEmpty()) {
-            throw new IOException("Host header is absent");
-        }
-        if (host.size() > 1) {
-            throw new IOException("too many Host headers");
-        }
-        return URI.create(
-            String.format(
-                "http://%s%s",
-                host.get(0),
-                new RqQuery(this.origin).query()
-            )
+    @Test
+    public void parsesHttpQuery() throws IOException {
+        MatcherAssert.assertThat(
+            new RqURI(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3 HTTP/1.1",
+                        "Host: www.example.com",
+                        "Content-type: text/plain"
+                    ),
+                    ""
+                )
+            ).uri().toString(),
+            Matchers.equalTo("http://www.example.com/h?a=3")
         );
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
     }
 
 }
