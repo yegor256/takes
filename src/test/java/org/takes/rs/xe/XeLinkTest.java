@@ -23,61 +23,39 @@
  */
 package org.takes.rs.xe;
 
-import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import com.jcabi.matchers.XhtmlMatchers;
+import java.io.IOException;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Xembly source to create an Atom LINK element.
- *
+ * Test case for {@link XeLink}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.3
  */
-@EqualsAndHashCode(of = { "rel", "href", "type" })
-public final class XeLink implements XeSource {
+public final class XeLinkTest {
 
     /**
-     * Rel.
+     * XeLink can build XML response.
+     * @throws IOException If some problem inside
      */
-    private final transient String rel;
-
-    /**
-     * Href.
-     */
-    private final transient String href;
-
-    /**
-     * Type.
-     */
-    private final transient String type;
-
-    /**
-     * Ctor.
-     * @param related Related
-     * @param link HREF
-     */
-    public XeLink(final String related, final String link) {
-        this(related, link, "text/xml");
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeLink("hey", "#a")
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root/links/link[@rel='hey' and @href='#a']"
+            )
+        );
     }
 
-    /**
-     * Ctor.
-     * @param related Related
-     * @param link HREF
-     * @param ctype Content type
-     */
-    public XeLink(final String related, final String link, final String ctype) {
-        this.rel = related;
-        this.href = link;
-        this.type = ctype;
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() {
-        return new Directives().addIf("links").add("link")
-            .attr("rel", this.rel)
-            .attr("href", this.href)
-            .attr("type", this.type);
-    }
 }
