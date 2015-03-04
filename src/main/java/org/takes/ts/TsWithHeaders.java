@@ -25,6 +25,7 @@ package org.takes.ts;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
@@ -59,6 +60,16 @@ public final class TsWithHeaders implements Takes {
      */
     public TsWithHeaders(final Takes takes) {
         this(takes, Collections.<String>emptyList());
+    }
+
+    /**
+     * Ctor.
+     * @param takes Original takes
+     * @param hdrs Headers
+     * @since 0.2
+     */
+    public TsWithHeaders(final Takes takes, final String... hdrs) {
+        this(takes, Arrays.asList(hdrs));
     }
 
     /**
