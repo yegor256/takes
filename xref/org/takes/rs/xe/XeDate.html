@@ -73,7 +73,7 @@
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      @Override
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">final</strong> DateFormat fmt = <strong class="jxr_keyword">new</strong> SimpleDateFormat(
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>              <span class="jxr_string">"yyyy-MM-dd'T'HH:mmZ"</span>, Locale.ENGLISH
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>              <span class="jxr_string">"yyyy-MM-dd'T'HH:mm:ss'Z'"</span>, Locale.ENGLISH
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          );
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          fmt.setTimeZone(TimeZone.getTimeZone(<span class="jxr_string">"UTC"</span>));
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().attr(
