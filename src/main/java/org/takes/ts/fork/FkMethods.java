@@ -24,78 +24,66 @@
 package org.takes.ts.fork;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.rq.RqQuery;
+import org.takes.rq.RqMethod;
 import org.takes.tk.TkText;
 import org.takes.ts.TsFixed;
 
 /**
- * Fork by regular expression patter.
+ * Fork by method matching.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(of = { "pattern", "target" })
-public final class FkRegex implements Fork {
+@EqualsAndHashCode(of = { "methods", "target" })
+public final class FkMethods implements Fork {
 
     /**
-     * Pattern.
+     * Methods to match.
      */
-    private final transient Pattern pattern;
+    private final transient Collection<String> methods;
 
     /**
      * Target.
      */
-    private final transient Target<RqRegex> target;
+    private final transient Target<Request> target;
 
     /**
      * Ctor.
-     * @param ptn Pattern
+     * @param mtd Method
      * @param text Text
      */
-    public FkRegex(final String ptn, final String text) {
-        this(Pattern.compile(ptn), new TsFixed(new TkText(text)));
+    public FkMethods(final String mtd, final String text) {
+        this(mtd, new TsFixed(new TkText(text)));
     }
 
     /**
      * Ctor.
-     * @param ptn Pattern
+     * @param mtd Method
      * @param take Take
      */
-    public FkRegex(final String ptn, final Take take) {
-        this(ptn, new TsFixed(take));
+    public FkMethods(final String mtd, final Take take) {
+        this(mtd, new TsFixed(take));
     }
 
     /**
      * Ctor.
-     * @param ptn Pattern
+     * @param mtd Method
      * @param tks Takes
      */
-    public FkRegex(final String ptn, final Takes tks) {
-        this(Pattern.compile(ptn), tks);
-    }
-
-    /**
-     * Ctor.
-     * @param ptn Pattern
-     * @param tks Takes
-     */
-    public FkRegex(final Pattern ptn, final Takes tks) {
+    public FkMethods(final String mtd, final Takes tks) {
         this(
-            ptn,
-            new Target<RqRegex>() {
+            mtd,
+            new Target<Request>() {
                 @Override
-                public Take route(final RqRegex req) throws IOException {
+                public Take route(final Request req) throws IOException {
                     return tks.route(req);
                 }
             }
@@ -104,48 +92,29 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
-     * @param ptn Pattern
+     * @param mtd Method
      * @param tgt Takes
      */
-    public FkRegex(final String ptn, final Target<RqRegex> tgt) {
-        this(Pattern.compile(ptn), tgt);
+    public FkMethods(final String mtd, final Target<Request> tgt) {
+        this(Collections.singletonList(mtd), tgt);
     }
 
     /**
      * Ctor.
-     * @param ptn Pattern
+     * @param mtds Methods
      * @param tgt Takes
      */
-    public FkRegex(final Pattern ptn, final Target<RqRegex> tgt) {
-        this.pattern = ptn;
+    public FkMethods(final Collection<String> mtds, final Target<Request> tgt) {
+        this.methods = Collections.unmodifiableCollection(mtds);
         this.target = tgt;
     }
 
     @Override
     public Iterable<Take> route(final Request req) throws IOException {
-        final Matcher matcher = this.pattern.matcher(
-            new RqQuery(req).query().toString()
-        );
+        final String mtd = new RqMethod(req).method();
         final Collection<Take> list = new ArrayList<Take>(1);
-        if (matcher.matches()) {
-            list.add(
-                this.target.route(
-                    new RqRegex() {
-                        @Override
-                        public Matcher matcher() {
-                            return matcher;
-                        }
-                        @Override
-                        public List<String> head() throws IOException {
-                            return req.head();
-                        }
-                        @Override
-                        public InputStream body() throws IOException {
-                            return req.body();
-                        }
-                    }
-                )
-            );
+        if (this.methods.contains(mtd)) {
+            list.add(this.target.route(req));
         }
         return list;
     }
