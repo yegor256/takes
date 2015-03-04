@@ -56,6 +56,14 @@ public final class XeFlash implements XeSource {
     /**
      * Ctor.
      * @param request Request
+     */
+    public XeFlash(final Request request) {
+        this(request, "X-Takes-Flash");
+    }
+
+    /**
+     * Ctor.
+     * @param request Request
      * @param hdr Header name
      */
     public XeFlash(final Request request, final String hdr) {

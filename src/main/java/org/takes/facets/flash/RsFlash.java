@@ -23,13 +23,10 @@
  */
 package org.takes.facets.flash;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
 import org.takes.rs.RsWithCookie;
+import org.takes.rs.RsWrap;
 
 /**
  * Forwarding response.
@@ -38,13 +35,8 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = false, of = "origin")
-public final class RsFlash implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
+@EqualsAndHashCode(callSuper = false)
+public final class RsFlash extends RsWrap {
 
     /**
      * Ctor.
@@ -78,17 +70,8 @@ public final class RsFlash implements Response {
      * @param cookie Cookie name
      */
     public RsFlash(final String msg, final Level level, final String cookie) {
-        this.origin = new RsWithCookie(cookie, msg);
+        super(new RsWithCookie(cookie, msg));
         assert level != null;
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }
