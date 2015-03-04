@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>takes</title>
+    </head>
+    <style>
+    * {
+        font-family: monospace;
+        font-size: 16px;
+    }
+    .center {
+        text-align: center;
+        width: 20em;
+        height: 20em;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    </style>
+    <body>
+        <div class="center">
+            <p><img src="http://www.takes.org/logo.jpg" style="width:96px;height:96px;"/></p>
+            <p>
+                <b>Takes</b> is a pure object-oriented and immutable Java web framework.
+                Current version is ${project.version}.
+                Check us out at <a href="https://github.com/yegor256/takes">Github</a>.
+                Here is <a href="/apidocs-${project.version}/index.html">JavaDoc ${project.version}</a>.
+                See also <a href="/cobertura/index.html">test coverage</a>.
+            </p>
+        </div>
+    </body>
+</html>
+
