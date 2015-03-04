@@ -638,6 +638,7 @@ There are a few command line arguments that should be passed to
 --lifetime=5000 The server will die in five seconds (useful for integration testing)
 --refresh       Run the server in hit-refresh mode
 --daemon        Runs the server in Java daemon thread (for integration testing)
+--threads=30    Processes incoming HTTP requests in 30 parallel threads
 ```
 
 For example:
