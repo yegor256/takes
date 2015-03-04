@@ -31,15 +31,15 @@ import org.junit.Test;
 import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link XeHomeLink}.
+ * Test case for {@link XeLinkSelf}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-public final class XeHomeLinkTest {
+public final class XeLinkSelfTest {
 
     /**
-     * XeHomeLink can build XML response.
+     * XeHomeSelf can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
@@ -49,12 +49,12 @@ public final class XeHomeLinkTest {
                 new RsXembly(
                     new XeAppend(
                         "root",
-                        new XeHomeLink(new RqFake())
+                        new XeLinkSelf(new RqFake())
                     )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='home']"
+                "/root/links/link[@rel='self']"
             )
         );
     }

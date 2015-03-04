@@ -23,40 +23,39 @@
  */
 package org.takes.rs.xe;
 
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqHeaders;
-import org.xembly.Directive;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
+import org.takes.rq.RqFake;
 
 /**
- * Xembly source to create an HOME Atom LINK element.
- *
+ * Test case for {@link XeLinkHome}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeHomeLink extends XeWrap {
+public final class XeLinkHomeTest {
 
     /**
-     * Ctor.
-     * @param req Request
+     * XeHomeLink can build XML response.
+     * @throws IOException If some problem inside
      */
-    public XeHomeLink(final Request req) {
-        super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new XeLink(
-                        "home",
-                        String.format(
-                            "http://%s",
-                            new RqHeaders(req).header("Host").get(0)
-                        )
-                    ).toXembly();
-                }
-            }
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeLinkHome(new RqFake())
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root/links/link[@rel='home']"
+            )
         );
     }
 
