@@ -38,11 +38,11 @@ Create this `App.java` file:
 ```java
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
-import org.takes.ts.TsFork;
+import org.takes.ts.fork.TsFork;
 public final class App {
   public static void main(final String... args) throws Exception {
     new FtBasic(
-      new TsFork().with("/", "hello, world!"), 8080
+      new TsFork(new FkRegex("/", "hello, world!")), 8080
     ).start(Exit.NEVER);
   }
 }
@@ -137,9 +137,10 @@ Let's make it a bit more sophisticated:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFork()
-        .with("/robots\\.txt", "")
-        .with("/", new TkIndex()),
+      new TsFork(
+        new FkRegex("/robots\\.txt", ""),
+        new FkRegex("/", new TkIndex())
+      ),
       8080
     ).start(Exit.NEVER);
   }
@@ -168,19 +169,21 @@ an instance of `Response`. So far so good, but this class doesn't have an access
 to an HTTP request. Here is how we solve this:
 
 ```java
-new TsFork().with(
-  "/file/(?<path>[^/]+)",
-  new TsFork.Fast() {
-    @Override
-    public Take route(final RqRegex request) {
-      final File file = new File(
-        request.matcher().group("path")
-      );
-      return new TkHTML(
-        FileUtils.readFileToString(file, Charsets.UTF_8)
-      );
+new TsFork(
+  new FkRegex(
+    "/file/(?<path>[^/]+)",
+    new Target<RqRegex>() {
+      @Override
+      public Take route(final RqRegex request) {
+        final File file = new File(
+          request.matcher().group("path")
+        );
+        return new TkHTML(
+          FileUtils.readFileToString(file, Charsets.UTF_8)
+        );
+      }
     }
-  }
+  )
 )
 ```
 
@@ -194,14 +197,14 @@ Here is a more complex and verbose example:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFork()
-        .with("/robots.txt", "")
-        .with("/", new TkIndex())
-        .with(
+      new TsFork(
+        new FkRegex("/robots.txt", ""),
+        new FkRegex("/", new TkIndex()),
+        new FkRegex(
           "/xsl/.*",
           new TsWithType(new TsClasspath(), "text/xsl")
-        )
-        .with(
+        ),
+        new FkRegex(
           "/account",
           new Takes() {
             @Override
@@ -209,10 +212,10 @@ public final class App {
               return new TkAccount(users, request);
             }
           }
-        )
-        .with(
+        ),
+        new FkRegex(
           "/balance/(?<user>[a-z]+)",
-          new TsFork.Fast() {
+          new Target<RqRegex>() {
             @Override
             public Take route(final RqRegex request) {
               return new TkBalance(request.matcher().group("user"));
@@ -312,9 +315,10 @@ stylesheets, images, JavaScript files, etc. There are a few supplementary
 classes for that:
 
 ```java
-new TsFork()
-  .with("/css/.+", new TsWithType(new TsClasspath(), "text/css"))
-  .with("/data/.+", new TsFiles(new File("/usr/local/data"))
+new TsFork(
+  new FkRegex("/css/.+", new TsWithType(new TsClasspath(), "text/css")),
+  new FkRegex("/data/.+", new TsFiles(new File("/usr/local/data"))
+)
 ```
 
 Class `TsClasspath` takes static part of the request URI and finds a resource with this name in classpath.
@@ -332,8 +336,8 @@ and restart it. Here is what you need to do to your sources in order to enable
 that feature:
 
 ```java
-new TsFork()
-  .with(
+new TsFork(
+  new FkRegex(
     "/css/.+",
     new TsWithType(
       new TsHitRefresh(
@@ -358,14 +362,16 @@ If they are older, it tries to run compilation tool to build them again.
 Here is an example:
 
 ```java
-new TsFork()
-  .with(
+new TsFork(
+  new FkRegex(
     "/user",
-    new TsMethods()
-      .with("GET", new TkGetUser())
-      .with("POST", new TkPostUser())
-      .with("DELETE", new TkDeleteUser())
+    new TsFork(
+      new FkMethod("GET", new TkGetUser()),
+      new FkMethod("POST", new TkPostUser()),
+      new FkMethod("DELETE", new TkDeleteUser())
+    )
   )
+)
 ```
 
 ## Request Parsing
@@ -411,9 +417,10 @@ public final class App {
   public static void main(final String... args) {
     new FtBasic(
       new TsFallback(
-        new TsFork()
-          .with("/robots\\.txt", "")
-          .with("/", new TkIndex()),
+        new TsFork(
+          new FkRegex("/robots\\.txt", ""),
+          new FkRegex("/", new TkIndex())
+        )
         new TkHTML("oops, something went wrong!")
       ),
       8080
@@ -468,7 +475,7 @@ public final class App {
   public static void main(final String... args) {
     new FtBasic(
       new TsForward(
-        new TsFork().with("/", new TkPostMessage())
+        new TsFork(new FkRegex("/", new TkPostMessage())
       ),
       8080
     ).start(Exit.NEVER);
@@ -649,10 +656,11 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 
 ```java
 new TsAuth(
-  new TsFork()
-    .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
-    .with("/acc", new TsSecure(new TsAccount()))
-    .with("/facebook", new TkFacebook("key", "secret")),
+  new TsFork(
+    new FkRegex("/", new TkHTML("hello, check <a href='/acc'>account</a>")),
+    new FkRegex("/acc", new TsSecure(new TsAccount())),
+    new FkRegex("/facebook", new TkFacebook("key", "secret"))
+  ),
   new PsCookie("some-secret-word")
 )
 ```
@@ -699,7 +707,8 @@ For example:
 public final class App {
   public static void main(final String... args) {
     new FtCLI(
-      new TsFork().with("/", "hello, world!"), args
+      new TsFork(new FkRegex("/", "hello, world!")),
+      args
     ).start(Exit.NEVER);
   }
 }

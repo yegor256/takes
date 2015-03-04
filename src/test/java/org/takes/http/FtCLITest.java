@@ -32,13 +32,15 @@ import java.net.ServerSocket;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.ts.TsFork;
+import org.takes.ts.fork.FkRegex;
+import org.takes.ts.fork.TsFork;
 
 /**
  * Test case for {@link FtCLI}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtCLITest {
 
@@ -62,7 +64,7 @@ public final class FtCLITest {
                 public void run() {
                     try {
                         new FtCLI(
-                            new TsFork().with("/", "hello!"),
+                            new TsFork(new FkRegex("/", "hello!")),
                             String.format("--port=%d", port),
                             "--threads=1",
                             "--lifetime=3000"

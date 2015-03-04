@@ -30,10 +30,12 @@ import org.takes.Take;
 import org.takes.Takes;
 import org.takes.http.Exit;
 import org.takes.http.FtCLI;
-import org.takes.rq.RqRegex;
 import org.takes.tk.TkHTML;
 import org.takes.tk.TkRedirect;
-import org.takes.ts.TsFork;
+import org.takes.ts.fork.FkRegex;
+import org.takes.ts.fork.RqRegex;
+import org.takes.ts.fork.Target;
+import org.takes.ts.fork.TsFork;
 
 /**
  * App.
@@ -72,19 +74,22 @@ public final class App implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        return new TsFork()
-            .with("/", new TkRedirect("/f"))
-            .with("/about", new TkHTML(App.class.getResource("about.html")))
-            .with("/robots.txt", "")
-            .with(
+        return new TsFork(
+            new FkRegex("/", new TkRedirect("/f")),
+            new FkRegex(
+                "/about",
+                new TkHTML(App.class.getResource("about.html"))
+            ),
+            new FkRegex("/robots.txt", ""),
+            new FkRegex(
                 "/f(.*)",
-                new TsFork.Fast() {
+                new Target<RqRegex>() {
                     @Override
-                    public Take take(final RqRegex req) {
+                    public Take route(final RqRegex req) {
                         return new TkDir(App.this.home, req.matcher().group(1));
                     }
                 }
             )
-            .route(request);
+        ).route(request);
     }
 }

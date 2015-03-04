@@ -21,46 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.ts.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
 
 /**
- * Test case for {@link TsFork}.
+ * Fork takes.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.4
  */
-public final class TsForkTest {
+@EqualsAndHashCode(of = "forks")
+public final class TsFork implements Takes {
 
     /**
-     * TsFork can dispatch by regular expression.
-     * @throws IOException If some problem inside
+     * Patterns and their respective takes.
      */
-    @Test
-    public void dispatchesByRegularExpression() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TsFork().with("/[a-z]+", body).route(
-                    new RqFake("GET", "/hey", "")
-                ).act()
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
+    private final transient Collection<Fork> forks;
+
+    /**
+     * Ctor.
+     */
+    public TsFork() {
+        this(Collections.<Fork>emptyList());
+    }
+
+    /**
+     * Ctor.
+     * @param frks Forks
+     */
+    public TsFork(final Fork... frks) {
+        this(Arrays.asList(frks));
+    }
+
+    /**
+     * Ctor.
+     * @param frks Forks
+     */
+    public TsFork(final Collection<Fork> frks) {
+        this.forks = Collections.unmodifiableCollection(frks);
+    }
+
+    @Override
+    public Take route(final Request request) throws IOException {
+        for (final Fork fork : this.forks) {
+            final Iterator<Take> takes = fork.route(request).iterator();
+            if (takes.hasNext()) {
+                return takes.next();
+            }
+        }
+        throw new Takes.NotFoundException("nothing found");
     }
 
 }
