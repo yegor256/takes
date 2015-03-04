@@ -28,6 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqFake;
@@ -58,6 +59,31 @@ public final class TsForwardTest {
                 new TsForward(takes).route(new RqFake()).act()
             ).print(),
             Matchers.startsWith("HTTP/1.1 303 See Other")
+        );
+    }
+
+    /**
+     * TsForward can catch RsForward.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void catchesExceptionThrownByTake() throws IOException {
+        final Takes takes = new Takes() {
+            @Override
+            public Take route(final Request request) {
+                return new Take() {
+                    @Override
+                    public Response act() {
+                        throw new RsForward("/h");
+                    }
+                };
+            }
+        };
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsForward(takes).route(new RqFake()).act()
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 303")
         );
     }
 
