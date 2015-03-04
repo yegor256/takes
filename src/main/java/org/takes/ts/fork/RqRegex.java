@@ -32,7 +32,7 @@ import org.takes.Request;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.ts.fork.TsFork
+ * @see org.takes.ts.fork.FkRegex
  */
 public interface RqRegex extends Request {
 
