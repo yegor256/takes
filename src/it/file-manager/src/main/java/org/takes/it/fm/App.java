@@ -33,7 +33,7 @@ import org.takes.http.FtCLI;
 import org.takes.rq.RqRegex;
 import org.takes.tk.TkHTML;
 import org.takes.tk.TkRedirect;
-import org.takes.ts.TsRegex;
+import org.takes.ts.TsFork;
 
 /**
  * App.
@@ -72,13 +72,13 @@ public final class App implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        return new TsRegex()
+        return new TsFork()
             .with("/", new TkRedirect("/f"))
             .with("/about", new TkHTML(App.class.getResource("about.html")))
             .with("/robots.txt", "")
             .with(
                 "/f(.*)",
-                new TsRegex.Fast() {
+                new TsFork.Fast() {
                     @Override
                     public Take take(final RqRegex req) {
                         return new TkDir(App.this.home, req.matcher().group(1));

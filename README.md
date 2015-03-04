@@ -38,11 +38,11 @@ Create this `App.java` file:
 ```java
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
-import org.takes.ts.TsRegex;
+import org.takes.ts.TsFork;
 public final class App {
   public static void main(final String... args) throws Exception {
     new FtBasic(
-      new TsRegex().with("/", "hello, world!"), 8080
+      new TsFork().with("/", "hello, world!"), 8080
     ).start(Exit.NEVER);
   }
 }
@@ -137,7 +137,7 @@ Let's make it a bit more sophisticated:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsRegex()
+      new TsFork()
         .with("/robots\\.txt", "")
         .with("/", new TkIndex()),
       8080
@@ -148,7 +148,7 @@ public final class App {
 
 The `FtBasic` is accepting new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
-of class `Request`. Then, it gives requests to the instance of `TsRegex`
+of class `Request`. Then, it gives requests to the instance of `TsFork`
 (`ts` stands for "takes") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
 returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
@@ -168,9 +168,9 @@ an instance of `Response`. So far so good, but this class doesn't have an access
 to an HTTP request. Here is how we solve this:
 
 ```java
-new TsRegex().with(
+new TsFork().with(
   "/file/(?<path>[^/]+)",
-  new TsRegex.Fast() {
+  new TsFork.Fast() {
     @Override
     public Take route(final RqRegex request) {
       final File file = new File(
@@ -184,9 +184,9 @@ new TsRegex().with(
 )
 ```
 
-We're using `TsRegex.Fast` instead of `Takes`, in order to deal with
+We're using `TsFork.Fast` instead of `Takes`, in order to deal with
 `RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
-of `Matcher` used by `TsRegex` for pattern matching.
+of `Matcher` used by `TsFork` for pattern matching.
 
 Here is a more complex and verbose example:
 
@@ -194,7 +194,7 @@ Here is a more complex and verbose example:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsRegex()
+      new TsFork()
         .with("/robots.txt", "")
         .with("/", new TkIndex())
         .with(
@@ -212,7 +212,7 @@ public final class App {
         )
         .with(
           "/balance/(?<user>[a-z]+)",
-          new TsRegex.Fast() {
+          new TsFork.Fast() {
             @Override
             public Take route(final RqRegex request) {
               return new TkBalance(request.matcher().group("user"));
@@ -312,7 +312,7 @@ stylesheets, images, JavaScript files, etc. There are a few supplementary
 classes for that:
 
 ```java
-new TsRegex()
+new TsFork()
   .with("/css/.+", new TsWithType(new TsClasspath(), "text/css"))
   .with("/data/.+", new TsFiles(new File("/usr/local/data"))
 ```
@@ -332,7 +332,7 @@ and restart it. Here is what you need to do to your sources in order to enable
 that feature:
 
 ```java
-new TsRegex()
+new TsFork()
   .with(
     "/css/.+",
     new TsWithType(
@@ -358,7 +358,7 @@ If they are older, it tries to run compilation tool to build them again.
 Here is an example:
 
 ```java
-new TsRegex()
+new TsFork()
   .with(
     "/user",
     new TsMethods()
@@ -402,7 +402,7 @@ public final class TkSavePhoto implements Take {
 
 ## Exception Handling
 
-By default, `TsRegex` lets all exceptions bubble up. If one of your takes
+By default, `TsFork` lets all exceptions bubble up. If one of your takes
 crashes, a user will see a default error page. Here is how you can configure
 this behavior:
 
@@ -411,7 +411,7 @@ public final class App {
   public static void main(final String... args) {
     new FtBasic(
       new TsFallback(
-        new TsRegex()
+        new TsFork()
           .with("/robots\\.txt", "")
           .with("/", new TkIndex()),
         new TkHTML("oops, something went wrong!")
@@ -461,14 +461,14 @@ public final class TkPostMessage implements Take {
 }
 ```
 
-Then, you should decorate the entire `TsRegex` with this `TsForward`:
+Then, you should decorate the entire `TsFork` with this `TsForward`:
 
 ```java
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
       new TsForward(
-        new TsRegex().with("/", new TkPostMessage())
+        new TsFork().with("/", new TkPostMessage())
       ),
       8080
     ).start(Exit.NEVER);
@@ -649,7 +649,7 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 
 ```java
 new TsAuth(
-  new TsRegex()
+  new TsFork()
     .with("/", new TkHTML("hello, check <a href='/acc'>account</a>"))
     .with("/acc", new TsSecure(new TsAccount()))
     .with("/facebook", new TkFacebook("key", "secret")),
@@ -699,7 +699,7 @@ For example:
 public final class App {
   public static void main(final String... args) {
     new FtCLI(
-      new TsRegex().with("/", "hello, world!"), args
+      new TsFork().with("/", "hello, world!"), args
     ).start(Exit.NEVER);
   }
 }

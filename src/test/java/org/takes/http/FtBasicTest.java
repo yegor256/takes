@@ -32,7 +32,7 @@ import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.ts.TsFailure;
-import org.takes.ts.TsRegex;
+import org.takes.ts.TsFork;
 
 /**
  * Test case for {@link FtBasic}.
@@ -48,7 +48,7 @@ public final class FtBasicTest {
      */
     @Test
     public void justWorks() throws Exception {
-        new FtRemote(new TsRegex().with("/", "hello, world!")).exec(
+        new FtRemote(new TsFork().with("/", "hello, world!")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {

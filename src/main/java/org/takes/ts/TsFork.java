@@ -50,25 +50,25 @@ import org.takes.tk.TkText;
  */
 @EqualsAndHashCode(of = "map")
 @SuppressWarnings("PMD.TooManyMethods")
-public final class TsRegex implements Takes {
+public final class TsFork implements Takes {
 
     /**
      * Patterns and their respective takes.
      */
-    private final transient Map<Pattern, TsRegex.Fast> map;
+    private final transient Map<Pattern, TsFork.Fast> map;
 
     /**
      * Ctor.
      */
-    public TsRegex() {
-        this(Collections.<Pattern, TsRegex.Fast>emptyMap());
+    public TsFork() {
+        this(Collections.<Pattern, TsFork.Fast>emptyMap());
     }
 
     /**
      * Ctor.
      * @param tks Map of takes
      */
-    public TsRegex(final Map<Pattern, TsRegex.Fast> tks) {
+    public TsFork(final Map<Pattern, TsFork.Fast> tks) {
         this.map = Collections.unmodifiableMap(tks);
     }
 
@@ -76,9 +76,9 @@ public final class TsRegex implements Takes {
     public Take route(final Request request) throws IOException {
         final URI uri = new RqQuery(request).query();
         final String path = uri.getPath();
-        TsRegex.Fast found = null;
+        TsFork.Fast found = null;
         Matcher matcher = null;
-        for (final Map.Entry<Pattern, TsRegex.Fast> ent : this.map.entrySet()) {
+        for (final Map.Entry<Pattern, TsFork.Fast> ent : this.map.entrySet()) {
             matcher = ent.getKey().matcher(path);
             if (matcher.matches()) {
                 found = ent.getValue();
@@ -90,7 +90,7 @@ public final class TsRegex implements Takes {
                 String.format("nothing found for %s", path)
             );
         }
-        return found.take(TsRegex.req(request, matcher));
+        return found.take(TsFork.req(request, matcher));
     }
 
     /**
@@ -99,7 +99,7 @@ public final class TsRegex implements Takes {
      * @param text Plain text content
      * @return New takes
      */
-    public TsRegex with(final String regex, final String text) {
+    public TsFork with(final String regex, final String text) {
         return this.with(regex, new TkText(text));
     }
 
@@ -109,7 +109,7 @@ public final class TsRegex implements Takes {
      * @param take The take
      * @return New takes
      */
-    public TsRegex with(final String regex, final Take take) {
+    public TsFork with(final String regex, final Take take) {
         return this.with(Pattern.compile(regex), take);
     }
 
@@ -119,7 +119,7 @@ public final class TsRegex implements Takes {
      * @param take The take
      * @return New takes
      */
-    public TsRegex with(final Pattern regex, final Take take) {
+    public TsFork with(final Pattern regex, final Take take) {
         return this.with(regex, new TsFixed(take));
     }
 
@@ -129,7 +129,7 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
-    public TsRegex with(final String regex, final Takes takes) {
+    public TsFork with(final String regex, final Takes takes) {
         return this.with(Pattern.compile(regex), takes);
     }
 
@@ -139,10 +139,10 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
-    public TsRegex with(final Pattern regex, final Takes takes) {
+    public TsFork with(final Pattern regex, final Takes takes) {
         return this.with(
             regex,
-            new TsRegex.Fast() {
+            new TsFork.Fast() {
                 @Override
                 public Take take(final RqRegex req) throws IOException {
                     return takes.route(req);
@@ -157,7 +157,7 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
-    public TsRegex with(final String regex, final TsRegex.Fast takes) {
+    public TsFork with(final String regex, final TsFork.Fast takes) {
         return this.with(Pattern.compile(regex), takes);
     }
 
@@ -167,12 +167,12 @@ public final class TsRegex implements Takes {
      * @param takes The takes
      * @return New takes
      */
-    public TsRegex with(final Pattern regex, final TsRegex.Fast takes) {
-        final ConcurrentMap<Pattern, TsRegex.Fast> tks =
-            new ConcurrentHashMap<Pattern, TsRegex.Fast>(this.map.size() + 1);
+    public TsFork with(final Pattern regex, final TsFork.Fast takes) {
+        final ConcurrentMap<Pattern, TsFork.Fast> tks =
+            new ConcurrentHashMap<Pattern, TsFork.Fast>(this.map.size() + 1);
         tks.putAll(this.map);
         tks.put(regex, takes);
-        return new TsRegex(tks);
+        return new TsFork(tks);
     }
 
     /**

@@ -32,15 +32,15 @@ import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TsRegex}.
+ * Test case for {@link TsFork}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class TsRegexTest {
+public final class TsForkTest {
 
     /**
-     * TsRegex can dispatch by regular expression.
+     * TsFork can dispatch by regular expression.
      * @throws IOException If some problem inside
      */
     @Test
@@ -48,7 +48,7 @@ public final class TsRegexTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsRegex().with("/[a-z]+", body).route(
+                new TsFork().with("/[a-z]+", body).route(
                     new RqFake("GET", "/hey", "")
                 ).act()
             ).print(),
