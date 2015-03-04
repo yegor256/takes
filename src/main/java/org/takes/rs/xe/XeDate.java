@@ -65,7 +65,7 @@ public final class XeDate implements XeSource {
     @Override
     public Iterable<Directive> toXembly() {
         final DateFormat fmt = new SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mmZ", Locale.ENGLISH
+            "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
         );
         fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
         return new Directives().attr(
