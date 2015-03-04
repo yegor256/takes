@@ -21,60 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
 import org.takes.Response;
-import org.takes.facets.forward.RsForward;
+import org.takes.Take;
 
 /**
- * Forward the response.
+ * Wrap of take.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(of = { "origin", "loc" })
-public final class PsForward implements Pass {
+@EqualsAndHashCode(callSuper = false)
+public class TkWrap implements Take {
 
     /**
-     * Original pass.
+     * Original take.
      */
-    private final transient Pass origin;
-
-    /**
-     * Location to forward to.
-     */
-    private final transient String loc;
+    private final transient Take origin;
 
     /**
      * Ctor.
-     * @param pass Origin
+     * @param take Original take
      */
-    public PsForward(final Pass pass) {
-        this(pass, "/");
-    }
-
-    /**
-     * Ctor.
-     * @param pass Origin
-     * @param location Location to forward to
-     */
-    public PsForward(final Pass pass, final String location) {
-        this.origin = pass;
-        this.loc = location;
+    public TkWrap(final Take take) {
+        this.origin = take;
     }
 
     @Override
-    public Identity enter(final Request request) throws IOException {
-        return this.origin.enter(request);
-    }
-
-    @Override
-    public Response exit(final Response res,
-        final Identity idt) throws IOException {
-        return new RsForward(this.origin.exit(res, idt), this.loc);
+    public final Response act() throws IOException {
+        return this.origin.act();
     }
 }

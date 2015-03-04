@@ -23,9 +23,7 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
 import org.takes.Take;
 
 /**
@@ -35,13 +33,8 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class TkWithCookie implements Take {
-
-    /**
-     * Original.
-     */
-    private final transient Take origin;
+@EqualsAndHashCode(callSuper = true)
+public final class TkWithCookie extends TkWrap {
 
     /**
      * Ctor.
@@ -50,15 +43,12 @@ public final class TkWithCookie implements Take {
      * @param value Cookie value
      */
     public TkWithCookie(final Take take, final String key, final String value) {
-        this.origin = new TkWithHeaders(
-            take,
-            String.format("Set-Cookie: %s=%s", key, value)
+        super(
+            new TkWithHeaders(
+                take,
+                String.format("Set-Cookie: %s=%s", key, value)
+        )
         );
-    }
-
-    @Override
-    public Response act() throws IOException {
-        return this.origin.act();
     }
 
 }

@@ -39,13 +39,8 @@ import org.takes.rs.RsHTML;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "input")
-public final class TkHTML implements Take {
-
-    /**
-     * HTML.
-     */
-    private final transient InputStream input;
+@EqualsAndHashCode(callSuper = true)
+public final class TkHTML extends TkWrap {
 
     /**
      * Ctor.
@@ -77,11 +72,14 @@ public final class TkHTML implements Take {
      * @param body Content
      */
     public TkHTML(final InputStream body) {
-        this.input = body;
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsHTML(body);
+                }
+            }
+        );
     }
 
-    @Override
-    public Response act() {
-        return new RsHTML(this.input);
-    }
 }

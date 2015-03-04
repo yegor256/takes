@@ -37,18 +37,8 @@ import org.takes.rs.RsWithHeader;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class TkMeasured implements Take {
-
-    /**
-     * Original takes.
-     */
-    private final transient Take origin;
-
-    /**
-     * Header name.
-     */
-    private final transient String header;
+@EqualsAndHashCode(callSuper = true)
+public final class TkMeasured extends TkWrap {
 
     /**
      * Ctor.
@@ -61,20 +51,22 @@ public final class TkMeasured implements Take {
     /**
      * Ctor.
      * @param take Original take
-     * @param hdr Header to add
+     * @param header Header to add
      */
-    public TkMeasured(final Take take, final String hdr) {
-        this.origin = take;
-        this.header = hdr;
-    }
-
-    @Override
-    public Response act() throws IOException {
-        final long start = System.currentTimeMillis();
-        return new RsWithHeader(
-            this.origin.act(),
-            this.header,
-            Long.toString(System.currentTimeMillis() - start)
+    public TkMeasured(final Take take, final String header) {
+        super(
+            new Take() {
+                @Override
+                public Response act() throws IOException {
+                    final long start = System.currentTimeMillis();
+                    return new RsWithHeader(
+                        take.act(),
+                        header,
+                        Long.toString(System.currentTimeMillis() - start)
+                    );
+                }
+            }
         );
     }
+
 }

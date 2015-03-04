@@ -36,31 +36,23 @@ import org.takes.rs.RsWithType;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "type" })
-public final class TkWithType implements Take {
-
-    /**
-     * Original take.
-     */
-    private final transient Take origin;
-
-    /**
-     * Type.
-     */
-    private final transient String type;
+@EqualsAndHashCode(callSuper = true)
+public final class TkWithType extends TkWrap {
 
     /**
      * Ctor.
      * @param take Original take
-     * @param ctype Content type
+     * @param type Content type
      */
-    public TkWithType(final Take take, final String ctype) {
-        this.origin = take;
-        this.type = ctype;
+    public TkWithType(final Take take, final String type) {
+        super(
+            new Take() {
+                @Override
+                public Response act() throws IOException {
+                    return new RsWithType(take.act(), type);
+                }
+            }
+        );
     }
 
-    @Override
-    public Response act() throws IOException {
-        return new RsWithType(this.origin.act(), this.type);
-    }
 }

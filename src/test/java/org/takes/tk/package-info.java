@@ -21,58 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
-
-import java.net.HttpURLConnection;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsWithHeader;
-import org.takes.rs.RsWithStatus;
 
 /**
- * Take that redirects.
+ * Take, testss.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TkRedirect extends TkWrap {
-
-    /**
-     * Ctor.
-     */
-    public TkRedirect() {
-        this("/");
-    }
-
-    /**
-     * Ctor.
-     * @param location Location to redirect to
-     */
-    public TkRedirect(final String location) {
-        this(location, HttpURLConnection.HTTP_SEE_OTHER);
-    }
-
-    /**
-     * Ctor.
-     * @param location Location to redirect to
-     * @param code Redirection status code
-     */
-    public TkRedirect(final String location, final int code) {
-        super(
-            new Take() {
-                @Override
-                public Response act() {
-                    return new RsWithHeader(
-                        new RsWithStatus(new RsEmpty(), code),
-                        "Location", location
-                    );
-                }
-            }
-        );
-    }
-
-}
+package org.takes.tk;

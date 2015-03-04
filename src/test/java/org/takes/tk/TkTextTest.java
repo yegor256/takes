@@ -23,55 +23,38 @@
  */
 package org.takes.tk;
 
-import java.net.HttpURLConnection;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsWithHeader;
-import org.takes.rs.RsWithStatus;
+import com.google.common.base.Joiner;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rs.RsPrint;
 
 /**
- * Take that redirects.
- *
+ * Test case for {@link TkText}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.4
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TkRedirect extends TkWrap {
+public final class TkTextTest {
 
     /**
-     * Ctor.
+     * TkText can create a text.
+     * @throws IOException If some problem inside
      */
-    public TkRedirect() {
-        this("/");
-    }
-
-    /**
-     * Ctor.
-     * @param location Location to redirect to
-     */
-    public TkRedirect(final String location) {
-        this(location, HttpURLConnection.HTTP_SEE_OTHER);
-    }
-
-    /**
-     * Ctor.
-     * @param location Location to redirect to
-     * @param code Redirection status code
-     */
-    public TkRedirect(final String location, final int code) {
-        super(
-            new Take() {
-                @Override
-                public Response act() {
-                    return new RsWithHeader(
-                        new RsWithStatus(new RsEmpty(), code),
-                        "Location", location
-                    );
-                }
-            }
+    @Test
+    public void createsTextResponse() throws IOException {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkText(body).act()).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
         );
     }
 

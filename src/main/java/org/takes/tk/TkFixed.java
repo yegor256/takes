@@ -34,24 +34,22 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "response")
-public final class TkFixed implements Take {
-
-    /**
-     * Response.
-     */
-    private final transient Response response;
+@EqualsAndHashCode(callSuper = true)
+public final class TkFixed extends TkWrap {
 
     /**
      * Ctor.
      * @param res Rsponse
      */
     public TkFixed(final Response res) {
-        this.response = res;
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return res;
+                }
+            }
+        );
     }
 
-    @Override
-    public Response act() {
-        return this.response;
-    }
 }
