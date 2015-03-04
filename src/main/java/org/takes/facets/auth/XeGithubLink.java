@@ -30,8 +30,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqURI;
 import org.takes.rs.xe.XeLink;
-import org.takes.rs.xe.XeSource;
-import org.xembly.Directive;
+import org.takes.rs.xe.XeWrap;
 
 /**
  * Xembly source to create a LINK to Github OAuth page.
@@ -40,13 +39,8 @@ import org.xembly.Directive;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "link")
-public final class XeGithubLink implements XeSource {
-
-    /**
-     * Link to use.
-     */
-    private final transient XeSource link;
+@EqualsAndHashCode(callSuper = false)
+public final class XeGithubLink extends XeWrap {
 
     /**
      * Ctor.
@@ -70,6 +64,33 @@ public final class XeGithubLink implements XeSource {
      */
     public XeGithubLink(final Request req, final String app, final String rel,
         final String flag) throws IOException {
+        super(
+            new XeLink(
+                rel,
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s",
+                    URLEncoder.encode(
+                        app, Charset.defaultCharset().name()
+                ),
+                    URLEncoder.encode(
+                        XeGithubLink.uri(req, flag),
+                        Charset.defaultCharset().name()
+                )
+            )
+        )
+        );
+    }
+
+    /**
+     * Build URI.
+     * @param req Request
+     * @param flag Flag to use
+     * @return URI
+     * @throws IOException If fails
+     */
+    private static String uri(final Request req, final String flag)
+        throws IOException {
         final StringBuilder uri = new StringBuilder(
             new RqURI(req).uri().toString()
         );
@@ -78,24 +99,9 @@ public final class XeGithubLink implements XeSource {
         } else {
             uri.append('?');
         }
-        uri.append(flag).append('=').append(PsGithub.class.getSimpleName());
-        this.link = new XeLink(
-            rel,
-            String.format(
-                // @checkstyle LineLength (1 line)
-                "https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s",
-                URLEncoder.encode(
-                    app, Charset.defaultCharset().name()
-                ),
-                URLEncoder.encode(
-                    uri.toString(), Charset.defaultCharset().name()
-                )
-            )
-        );
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() throws IOException {
-        return this.link.toXembly();
+        return uri.append(flag)
+            .append('=')
+            .append(PsGithub.class.getSimpleName())
+            .toString();
     }
 }
