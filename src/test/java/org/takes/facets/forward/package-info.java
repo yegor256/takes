@@ -21,44 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.forward;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TsForward}.
+ * Forward, tests.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.2
  */
-public final class TsForwardTest {
-
-    /**
-     * TsForward can catch RsForward.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void catchesExceptionCorrectly() throws IOException {
-        final Takes takes = new Takes() {
-            @Override
-            public Take route(final Request request) {
-                throw new RsForward("/");
-            }
-        };
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TsForward(takes).route(new RqFake()).act()
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 303 See Other")
-        );
-    }
-
-}
+package org.takes.facets.forward;

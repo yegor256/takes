@@ -28,6 +28,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.tk.TkFixed;
 
 /**
  * Redirect on exception.
@@ -54,7 +55,13 @@ public final class TsForward implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        return new TkForward(this.origin.route(request));
+        Take take;
+        try {
+            take = new TkForward(this.origin.route(request));
+        } catch (final RsForward ex) {
+            take = new TkFixed(ex);
+        }
+        return take;
     }
 
 }
