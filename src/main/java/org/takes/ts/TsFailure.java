@@ -35,13 +35,8 @@ import org.takes.Takes;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "error")
-public final class TsFailure implements Takes {
-
-    /**
-     * Exception to throw.
-     */
-    private final transient RuntimeException error;
+@EqualsAndHashCode(callSuper = true)
+public final class TsFailure extends TsWrap {
 
     /**
      * Ctor.
@@ -63,12 +58,14 @@ public final class TsFailure implements Takes {
      * @param err Error to throw
      */
     public TsFailure(final RuntimeException err) {
-        this.error = err;
-    }
-
-    @Override
-    public Take route(final Request request) {
-        throw this.error;
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) {
+                    throw err;
+                }
+            }
+        );
     }
 
 }

@@ -37,18 +37,8 @@ import org.takes.tk.TkWithType;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "type" })
-public final class TsWithType implements Takes {
-
-    /**
-     * Original takes.
-     */
-    private final transient Takes origin;
-
-    /**
-     * Type.
-     */
-    private final transient String type;
+@EqualsAndHashCode(callSuper = true)
+public final class TsWithType extends TsWrap {
 
     /**
      * Ctor.
@@ -56,13 +46,14 @@ public final class TsWithType implements Takes {
      * @param ctype Content type
      */
     public TsWithType(final Takes takes, final String ctype) {
-        this.origin = takes;
-        this.type = ctype;
-    }
-
-    @Override
-    public Take route(final Request request) throws IOException {
-        return new TkWithType(this.origin.route(request), this.type);
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    return new TkWithType(takes.route(request), ctype);
+                }
+            }
+        );
     }
 
 }

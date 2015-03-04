@@ -38,18 +38,8 @@ import org.takes.tk.TkMeasured;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class TsMeasured implements Takes {
-
-    /**
-     * Original takes.
-     */
-    private final transient Takes origin;
-
-    /**
-     * Header name.
-     */
-    private final transient String header;
+@EqualsAndHashCode(callSuper = true)
+public final class TsMeasured extends TsWrap {
 
     /**
      * Ctor.
@@ -62,16 +52,17 @@ public final class TsMeasured implements Takes {
     /**
      * Ctor.
      * @param takes Original takes
-     * @param hdr Header to add
+     * @param header Header to add
      */
-    public TsMeasured(final Takes takes, final String hdr) {
-        this.origin = takes;
-        this.header = hdr;
-    }
-
-    @Override
-    public Take route(final Request request) throws IOException {
-        return new TkMeasured(this.origin.route(request), this.header);
+    public TsMeasured(final Takes takes, final String header) {
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    return new TkMeasured(takes.route(request), header);
+                }
+            }
+        );
     }
 
 }

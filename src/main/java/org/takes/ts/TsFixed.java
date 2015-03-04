@@ -37,13 +37,8 @@ import org.takes.tk.TkFixed;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "tke")
-public final class TsFixed implements Takes {
-
-    /**
-     * Take to return.
-     */
-    private final transient Take tke;
+@EqualsAndHashCode(callSuper = true)
+public final class TsFixed extends TsWrap {
 
     /**
      * Ctor.
@@ -59,12 +54,14 @@ public final class TsFixed implements Takes {
      * @param take Take
      */
     public TsFixed(final Take take) {
-        this.tke = take;
-    }
-
-    @Override
-    public Take route(final Request request) {
-        return this.tke;
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) {
+                    return take;
+                }
+            }
+        );
     }
 
 }
