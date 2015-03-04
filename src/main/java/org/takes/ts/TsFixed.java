@@ -25,8 +25,10 @@ package org.takes.ts;
 
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.tk.TkFixed;
 
 /**
  * Takes with a fixed take.
@@ -42,6 +44,15 @@ public final class TsFixed implements Takes {
      * Take to return.
      */
     private final transient Take tke;
+
+    /**
+     * Ctor.
+     * @param response Response to return always
+     * @since 0.4
+     */
+    public TsFixed(final Response response) {
+        this(new TkFixed(response));
+    }
 
     /**
      * Ctor.
