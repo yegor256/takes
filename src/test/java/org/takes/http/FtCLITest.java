@@ -29,6 +29,7 @@ import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.ts.TsRegex;
@@ -73,6 +74,7 @@ public final class FtCLITest {
             }
         );
         thread.start();
+        TimeUnit.SECONDS.sleep(1L);
         new JdkRequest(String.format("http://localhost:%d", port))
             .through(VerboseWire.class)
             .fetch()
