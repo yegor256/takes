@@ -35,13 +35,8 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.3
  */
-@EqualsAndHashCode
-public final class XeSLA implements XeSource {
-
-    /**
-     * Attribute name.
-     */
-    private final transient String attr;
+@EqualsAndHashCode(callSuper = true)
+public final class XeSLA extends XeWrap {
 
     /**
      * Ctor.
@@ -52,21 +47,24 @@ public final class XeSLA implements XeSource {
 
     /**
      * Ctor.
-     * @param name Attribute name
+     * @param attr Attribute name
      */
-    public XeSLA(final String name) {
-        this.attr = name;
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() {
-        return new Directives().attr(
-            this.attr,
-            String.format(
-                "%.3f",
-                ManagementFactory.getOperatingSystemMXBean()
-                    .getSystemLoadAverage()
-            )
+    public XeSLA(final String attr) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() {
+                    return new Directives().attr(
+                        attr,
+                        String.format(
+                            "%.3f",
+                            ManagementFactory.getOperatingSystemMXBean()
+                                .getSystemLoadAverage()
+                        )
+                    );
+                }
+            }
         );
     }
+
 }

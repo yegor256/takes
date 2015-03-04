@@ -23,6 +23,7 @@
  */
 package org.takes.rs.xe;
 
+import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -34,23 +35,8 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "rel", "href", "type" })
-public final class XeLink implements XeSource {
-
-    /**
-     * Rel.
-     */
-    private final transient String rel;
-
-    /**
-     * Href.
-     */
-    private final transient String href;
-
-    /**
-     * Type.
-     */
-    private final transient String type;
+@EqualsAndHashCode(callSuper = true)
+public final class XeLink extends XeWrap {
 
     /**
      * Ctor.
@@ -63,21 +49,22 @@ public final class XeLink implements XeSource {
 
     /**
      * Ctor.
-     * @param related Related
-     * @param link HREF
-     * @param ctype Content type
+     * @param rel Related
+     * @param href HREF
+     * @param type Content type
      */
-    public XeLink(final String related, final String link, final String ctype) {
-        this.rel = related;
-        this.href = link;
-        this.type = ctype;
+    public XeLink(final String rel, final String href, final String type) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() throws IOException {
+                    return new Directives().addIf("links").add("link")
+                        .attr("rel", rel)
+                        .attr("href", href)
+                        .attr("type", type);
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<Directive> toXembly() {
-        return new Directives().addIf("links").add("link")
-            .attr("rel", this.rel)
-            .attr("href", this.href)
-            .attr("type", this.type);
-    }
 }

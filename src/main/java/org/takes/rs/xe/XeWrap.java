@@ -24,46 +24,34 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
-import org.xembly.Directives;
 
 /**
- * Chain of sources.
+ * Wrap of Xembly source.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.4
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeChain extends XeWrap {
+@EqualsAndHashCode(of = "origin")
+public class XeWrap implements XeSource {
+
+    /**
+     * Source to add.
+     */
+    private final transient XeSource origin;
 
     /**
      * Ctor.
-     * @param src Sources
+     * @param src Original source
      */
-    public XeChain(final XeSource... src) {
-        this(Arrays.asList(src));
+    public XeWrap(final XeSource src) {
+        this.origin = src;
     }
 
-    /**
-     * Ctor.
-     * @param items Sources
-     */
-    public XeChain(final Iterable<XeSource> items) {
-        super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    final Directives dirs = new Directives();
-                    for (final XeSource src : items) {
-                        dirs.push().append(src.toXembly()).pop();
-                    }
-                    return dirs;
-                }
-            }
-        );
+    @Override
+    public final Iterable<Directive> toXembly() throws IOException {
+        return this.origin.toXembly();
     }
-
 }

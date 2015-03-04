@@ -35,42 +35,34 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "target", "source" })
-public final class XeAppend implements XeSource {
-
-    /**
-     * Target.
-     */
-    private final transient String target;
-
-    /**
-     * Source to add.
-     */
-    private final transient XeSource source;
+@EqualsAndHashCode(callSuper = true)
+public final class XeAppend extends XeWrap {
 
     /**
      * Ctor.
-     * @param name Name of XML element
+     * @param target Name of XML element
      * @param value Value to set
      */
-    public XeAppend(final String name, final String value) {
-        this(name, new XeDirectives(new Directives().set(value)));
+    public XeAppend(final String target, final String value) {
+        this(target, new XeDirectives(new Directives().set(value)));
     }
 
     /**
      * Ctor.
-     * @param name Name of XML element
+     * @param target Name of XML element
      * @param src Source
      */
-    public XeAppend(final String name, final XeSource... src) {
-        this.target = name;
-        this.source = new XeChain(src);
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() throws IOException {
-        return new Directives().add(this.target).append(
-            this.source.toXembly()
+    public XeAppend(final String target, final XeSource... src) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() throws IOException {
+                    return new Directives().add(target).append(
+                        new XeChain(src).toXembly()
+                    );
+                }
+            }
         );
     }
+
 }

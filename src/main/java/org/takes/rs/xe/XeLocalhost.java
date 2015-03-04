@@ -36,13 +36,8 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.3
  */
-@EqualsAndHashCode
-public final class XeLocalhost implements XeSource {
-
-    /**
-     * Attribute name.
-     */
-    private final transient String attr;
+@EqualsAndHashCode(callSuper = true)
+public final class XeLocalhost extends XeWrap {
 
     /**
      * Ctor.
@@ -53,20 +48,24 @@ public final class XeLocalhost implements XeSource {
 
     /**
      * Ctor.
-     * @param name Attribute name
+     * @param attr Attribute name
      */
-    public XeLocalhost(final String name) {
-        this.attr = name;
+    @SuppressWarnings("PMD.CallSuperInConstructor")
+    public XeLocalhost(final String attr) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() {
+                    String addr;
+                    try {
+                        addr = InetAddress.getLocalHost().getHostAddress();
+                    } catch (final UnknownHostException ex) {
+                        addr = ex.getClass().getCanonicalName();
+                    }
+                    return new Directives().attr(attr, addr);
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<Directive> toXembly() {
-        String addr;
-        try {
-            addr = InetAddress.getLocalHost().getHostAddress();
-        } catch (final UnknownHostException ex) {
-            addr = ex.getClass().getCanonicalName();
-        }
-        return new Directives().attr(this.attr, addr);
-    }
 }

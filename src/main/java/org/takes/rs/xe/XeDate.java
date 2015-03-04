@@ -39,13 +39,8 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.3
  */
-@EqualsAndHashCode
-public final class XeDate implements XeSource {
-
-    /**
-     * Attribute name.
-     */
-    private final transient String attr;
+@EqualsAndHashCode(callSuper = true)
+public final class XeDate extends XeWrap {
 
     /**
      * Ctor.
@@ -56,20 +51,23 @@ public final class XeDate implements XeSource {
 
     /**
      * Ctor.
-     * @param name Attribute name
+     * @param attr Attribute name
      */
-    public XeDate(final String name) {
-        this.attr = name;
+    public XeDate(final String attr) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() {
+                    final DateFormat fmt = new SimpleDateFormat(
+                        "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
+                    );
+                    fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    return new Directives().attr(
+                        attr, fmt.format(new Date())
+                    );
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<Directive> toXembly() {
-        final DateFormat fmt = new SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
-        );
-        fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return new Directives().attr(
-            this.attr, fmt.format(new Date())
-        );
-    }
 }

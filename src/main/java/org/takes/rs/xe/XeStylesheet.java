@@ -34,27 +34,25 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "name")
-public final class XeStylesheet implements XeSource {
-
-    /**
-     * Name of XSL stylesheet.
-     */
-    private final transient String name;
+@EqualsAndHashCode(callSuper = true)
+public final class XeStylesheet extends XeWrap {
 
     /**
      * Ctor.
      * @param xsl XSL stylesheet
      */
     public XeStylesheet(final String xsl) {
-        this.name = xsl;
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() {
-        return new Directives().pi(
-            "xml-stylesheet",
-            String.format("href='%s' type='text/xsl'", this.name)
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() {
+                    return new Directives().pi(
+                        "xml-stylesheet",
+                        String.format("href='%s' type='text/xsl'", xsl)
+                    );
+                }
+            }
         );
     }
+
 }
