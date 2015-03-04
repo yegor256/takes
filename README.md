@@ -48,7 +48,7 @@ public final class App {
 }
 ```
 
-Then, download `takes.jar` and compile your Java code:
+Then, download [`takes.jar`](http://search.maven.org/#artifactdetails|org.takes|takes) and compile your Java code:
 
 ```
 $ javac -cp takes.jar App.java
@@ -78,6 +78,58 @@ Maven artifact is in Maven Central:
   <artifactId>takes</artifactId>
 </dependency>
 ```
+
+If you're using Maven, this is how your `pom.xml` should look like:
+
+```xml
+<project>
+  <dependencies>
+    <dependency>
+      <groupId>org.takes</groupId>
+      <artifactId>takes</artifactId>
+      <version>0.3.1</version>
+    </dependency>
+  </dependencies>
+  <profiles>
+    <profile>
+      <id>hit-refresh</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.3</version>
+            <executions>
+              <execution>
+                <id>start-server</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <mainClass>foo.App</mainClass> <!-- your main class -->
+                  <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                  <arguments>
+                    <argument>--port=${port}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
+```
+
+With this configutation you can run it from command line:
+
+```
+$ mvn clean integration-test -Phit-refresh -Dport=8080
+```
+
+Maven will start the server and you can see it at `http://localhost:8080`.
 
 Let's make it a bit more sophisticated:
 
