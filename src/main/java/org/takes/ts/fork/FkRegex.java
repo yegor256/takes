@@ -124,7 +124,7 @@ public final class FkRegex implements Fork {
     @Override
     public Iterable<Take> route(final Request req) throws IOException {
         final Matcher matcher = this.pattern.matcher(
-            new RqQuery(req).query().toString()
+            new RqQuery(req).query().getPath()
         );
         final Collection<Take> list = new ArrayList<Take>(1);
         if (matcher.matches()) {
