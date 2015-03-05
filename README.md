@@ -350,6 +350,7 @@ new TsFork(
       "text/css"
     )
   )
+)
 ```
 
 This `TsHitRefresh` takes is a decorator of another takes. Once it sees
