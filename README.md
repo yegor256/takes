@@ -431,8 +431,8 @@ public final class App {
 }
 ```
 
-`TsFallback decorates an instance of Takes and catches all exceptions any of
-`its takes may throw. Once it's thrown, an instance of TkHTML will be returned.
+`TsFallback` decorates an instance of Takes and catches all exceptions any of
+its takes may throw. Once it's thrown, an instance of TkHTML will be returned.
 
 ## Redirects
 
