@@ -113,18 +113,20 @@
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, String&gt;(0);
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         <strong class="jxr_keyword">final</strong> List&lt;String&gt; values = <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHeaders.html">RqHeaders</a>(<strong class="jxr_keyword">this</strong>.origin).header(<span class="jxr_string">"Cookie"</span>);
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String value : values) {
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>             <strong class="jxr_keyword">final</strong> String[] parts = value.split(<span class="jxr_string">"="</span>, 2);
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>             <strong class="jxr_keyword">final</strong> String key = parts[0].toLowerCase(Locale.ENGLISH);
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>             <strong class="jxr_keyword">if</strong> (parts.length &gt; 1 &amp;&amp; !parts[1].isEmpty()) {
-<a class="jxr_linenumber" name="L111" href="#L111">111</a>                 map.put(key, parts[1]);
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>                 map.remove(key);
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>             }
-<a class="jxr_linenumber" name="L115" href="#L115">115</a>         }
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>         <strong class="jxr_keyword">return</strong> map;
-<a class="jxr_linenumber" name="L117" href="#L117">117</a>     }
-<a class="jxr_linenumber" name="L118" href="#L118">118</a> 
-<a class="jxr_linenumber" name="L119" href="#L119">119</a> }
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String pair : value.split(<span class="jxr_string">";"</span>)) {
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>                 <strong class="jxr_keyword">final</strong> String[] parts = pair.split(<span class="jxr_string">"="</span>, 2);
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>                 <strong class="jxr_keyword">final</strong> String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>                 <strong class="jxr_keyword">if</strong> (parts.length &gt; 1 &amp;&amp; !parts[1].isEmpty()) {
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>                     map.put(key, parts[1].trim());
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>                     map.remove(key);
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>                 }
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>             }
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>         }
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>         <strong class="jxr_keyword">return</strong> map;
+<a class="jxr_linenumber" name="L119" href="#L119">119</a>     }
+<a class="jxr_linenumber" name="L120" href="#L120">120</a> 
+<a class="jxr_linenumber" name="L121" href="#L121">121</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>

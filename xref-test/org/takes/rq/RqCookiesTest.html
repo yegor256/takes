@@ -87,7 +87,28 @@
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          );
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      }
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>  }
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>  <em class="jxr_javadoccomment">     * RqCookies can parse a request with multiple cookies.</em>
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>  <em class="jxr_javadoccomment">     * @throws IOException If some problem inside</em>
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      @Test
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> parsesHttpRequestWithMultipleCookies() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>              <strong class="jxr_keyword">new</strong> RqCookies(
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>                  <strong class="jxr_keyword">new</strong> RqFake(
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>                      Arrays.asList(
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>                          <span class="jxr_string">"GET /hz09"</span>,
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>                          <span class="jxr_string">"Host: as0.example.com"</span>,
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>                          <span class="jxr_string">"Cookie: f=1;   g=55;   xxx=9090"</span>
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>                      ),
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>                      <span class="jxr_string">""</span>
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>                  )
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>              ).cookie(<span class="jxr_string">"g"</span>),
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>              Matchers.hasItem(<span class="jxr_string">"55"</span>)
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>         );
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>     }
+<a class="jxr_linenumber" name="L102" href="#L102">102</a> 
+<a class="jxr_linenumber" name="L103" href="#L103">103</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
