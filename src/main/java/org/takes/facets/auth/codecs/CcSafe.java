@@ -21,33 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.facets.auth.Identity;
 
 /**
- * Codec.
+ * Safe codec, never throws decoding exception.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.5
  */
-public interface Codec {
+@EqualsAndHashCode(of = "origin")
+public final class CcSafe implements Codec {
 
     /**
-     * Encode identity into bytes.
-     * @param identity The identity
-     * @return Text
-     * @throws IOException If fails
+     * Original codec.
      */
-    byte[] encode(Identity identity) throws IOException;
+    private final transient Codec origin;
 
     /**
-     * Decode identity from text.
-     * @param text Text
-     * @return Identity
-     * @throws IOException If fails
+     * Ctor.
+     * @param codec Original codec
      */
-    Identity decode(byte[] text) throws IOException;
+    public CcSafe(final Codec codec) {
+        this.origin = codec;
+    }
+
+    @Override
+    public byte[] encode(final Identity identity) throws IOException {
+        return this.origin.encode(identity);
+    }
+
+    @Override
+    public Identity decode(final byte[] text) throws IOException {
+        Identity identity;
+        try {
+            identity = this.origin.decode(text);
+        } catch (final DecodingException ex) {
+            identity = Identity.ANONYMOUS;
+        }
+        return identity;
+    }
 
 }

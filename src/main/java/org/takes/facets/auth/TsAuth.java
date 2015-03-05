@@ -29,6 +29,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqWithHeader;
 
 /**

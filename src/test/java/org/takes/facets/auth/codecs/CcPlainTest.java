@@ -21,36 +21,71 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.codecs;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
+import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link CcSalted}.
+ * Test case for {@link CcPlain}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.5
+ * @since 0.4
  */
-public final class CcSaltedTest {
+public final class CcPlainTest {
 
     /**
-     * CcSalted can decode.
+     * CcPlain can encode.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void encodes() throws IOException {
+        final Identity identity = new Identity() {
+            @Override
+            public String urn() {
+                return "urn:test:3";
+            }
+            @Override
+            public Map<String, String> properties() {
+                return new ImmutableMap.Builder<String, String>()
+                    .put("name", "Jeff Lebowski")
+                    .build();
+            }
+        };
+        MatcherAssert.assertThat(
+            new String(new CcPlain().encode(identity)),
+            Matchers.equalTo("urn%3Atest%3A3;name=Jeff+Lebowski")
+        );
+    }
+
+    /**
+     * CcHex can decode.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void decodes() throws IOException {
+        MatcherAssert.assertThat(
+            new CcPlain().decode(
+                "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
+            ).urn(),
+            Matchers.equalTo("urn:test:9")
+        );
+    }
+
+    /**
+     * CcHex can decode.
      * @throws IOException If some problem inside
      */
     @Test
     public void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
-            new CcSafe(new CcSalted(new CcPlain())).decode(
+            new CcSafe(new CcPlain()).decode(
                 " % tjw".getBytes()
-            ),
-            Matchers.equalTo(Identity.ANONYMOUS)
-        );
-        MatcherAssert.assertThat(
-            new CcSafe(new CcSalted(new CcPlain())).decode(
-                "75726E253".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

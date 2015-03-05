@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.codecs;
 
 import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
 import lombok.EqualsAndHashCode;
+import org.takes.facets.auth.Identity;
 
 /**
  * Salted codec.

@@ -28,6 +28,7 @@ import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.facets.auth.codecs.Codec;
 import org.takes.rq.RqCookies;
 import org.takes.rs.RsWithCookie;
 

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqHeaders;
 
 /**

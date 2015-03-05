@@ -21,36 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
 
 /**
- * Decoding exception.
+ * Codecs, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.5
  */
-public final class DecodingException extends RuntimeException {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = 0x7529FA781EDA1479L;
-
-    /**
-     * Public ctor.
-     * @param cause The cause of it
-     */
-    DecodingException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Public ctor.
-     * @param cause The cause of it
-     */
-    DecodingException(final Throwable cause) {
-        super(cause);
-    }
-
-}
+package org.takes.facets.auth.codecs;

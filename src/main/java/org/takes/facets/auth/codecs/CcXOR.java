@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.facets.auth.Identity;
 
 /**
  * XOR codec.

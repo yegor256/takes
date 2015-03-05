@@ -210,7 +210,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>xml:/src/it/settings.xml</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/facets/auth/CcHex.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcHex.java</exclude>
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <exclude>findbugs:.*</exclude>
                             </excludes>
