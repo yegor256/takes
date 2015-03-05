@@ -735,22 +735,19 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
     /java
       /foo
         App.java
+    /scss
+    /coffeescript
     /resources
-      /foo
-        /xsl
-        /js
-        /scss
-        /coffeescript
-        /css
-        robot.txt
+      /xsl
+      /js
+      /css
+      robot.txt
       log4j.properties
   /test
     /java
       /foo
         AppTest.java
     /resources
-      /foo
-        /xml
       log4j.properties
 pom.xml
 LICENSE.txt
