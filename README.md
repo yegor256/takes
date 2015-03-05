@@ -450,34 +450,30 @@ public final class TkPostMessage implements Take {
   public Response act() {
     final String body = new RqPost(this.request).text();
     if (body.isEmpty()) {
-      throw new RsWithHeader(
-        new RsForward(
-          HttpURLConnection.HTTP_SEE_OTHER, "/"
-        ),
-        "X-Foo-Flash",
+      throw new RsFlash(
+        new RsForward(),
         "message can't be empty"
       );
     }
     // save the message to the database
-    return new RsWithHeader(
-      new RsForward(
-        HttpURLConnection.HTTP_SEE_OTHER,
-      ),
-      "X-Foo-Flash",
+    return new RsFlash(
+      new RsForward("/"),
       "thanks, the message was posted"
     );
   }
 }
 ```
 
-Then, you should decorate the entire `TsFork` with this `TsForward`:
+Then, you should decorate the entire `TsFork` with this `TsForward` and `TsFlash`:
 
 ```java
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsForward(
-        new TsFork(new FkRegex("/", new TkPostMessage())
+      new TsFlash(
+        new TsForward(
+          new TsFork(new FkRegex("/", new TkPostMessage())
+        )
       ),
       8080
     ).start(Exit.NEVER);
