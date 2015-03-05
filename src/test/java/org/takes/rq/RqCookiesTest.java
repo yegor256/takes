@@ -89,9 +89,9 @@ public final class RqCookiesTest {
             new RqCookies(
                 new RqFake(
                     Arrays.asList(
-                        "GET /hzzz",
-                        "Host: abc.example.com",
-                        "Cookie: f=1; g=55"
+                        "GET /hz09",
+                        "Host: as0.example.com",
+                        "Cookie: f=1;   g=55;   xxx=9090"
                     ),
                     ""
                 )

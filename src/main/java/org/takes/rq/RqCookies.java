@@ -105,12 +105,14 @@ public final class RqCookies implements Request {
             new ConcurrentHashMap<String, String>(0);
         final List<String> values = new RqHeaders(this.origin).header("Cookie");
         for (final String value : values) {
-            final String[] parts = value.split("=", 2);
-            final String key = parts[0].toLowerCase(Locale.ENGLISH);
-            if (parts.length > 1 && !parts[1].isEmpty()) {
-                map.put(key, parts[1]);
-            } else {
-                map.remove(key);
+            for (final String pair : value.split(";")) {
+                final String[] parts = pair.split("=", 2);
+                final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
+                if (parts.length > 1 && !parts[1].isEmpty()) {
+                    map.put(key, parts[1].trim());
+                } else {
+                    map.remove(key);
+                }
             }
         }
         return map;
