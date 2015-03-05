@@ -91,7 +91,9 @@ public final class RqCookiesTest {
                     Arrays.asList(
                         "GET /hz09",
                         "Host: as0.example.com",
-                        "Cookie: f=1;   g=55;   xxx=9090"
+                        "Cookie: ttt=ALPHA",
+                        "Cookie: f=1;   g=55;   xxx=9090",
+                        "Cookie: z=ALPHA"
                     ),
                     ""
                 )
