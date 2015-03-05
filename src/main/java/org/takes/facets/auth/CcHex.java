@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -40,15 +41,15 @@ public final class CcHex implements Codec {
      * Backward mapping table.
      */
     private static final byte[] BACK = {
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1,
         0, 1, 2, 3, 4, 5, 6, 7,
-        8, 9, 0, 0, 0, 0, 0, 0,
-        0, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0,
+        8, 9, -1, -1, -1, -1, -1, -1,
+        -1, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf,
     };
 
     /**
@@ -85,12 +86,42 @@ public final class CcHex implements Codec {
 
     @Override
     public Identity decode(final byte[] text) throws IOException {
+        if ((text.length & 0x01) == 1) {
+            throw new DecodingException(
+                String.format(
+                    "hex text must contain even number of chars: %s",
+                    Arrays.toString(text)
+                )
+            );
+        }
         final byte[] out = new byte[text.length >> 1];
         for (int idx = 0; idx < out.length; ++idx) {
-            out[idx] = (byte) ((CcHex.BACK[text[idx << 1]] << 4)
-                + CcHex.BACK[text[(idx << 1) + 1]]);
+            final int high = text[idx << 1];
+            final int low = text[(idx << 1) + 1];
+            out[idx] = (byte) ((CcHex.decode(high) << 4)
+                + CcHex.decode(low));
         }
         return this.origin.decode(out);
+    }
+
+    /**
+     * Convert hex to number.
+     * @param hex Hex number
+     * @return Decoded
+     */
+    private static int decode(final int hex) {
+        if (hex >= CcHex.BACK.length) {
+            throw new DecodingException(
+                String.format("invalid hex char: 0x%2x", hex)
+            );
+        }
+        final int dec = CcHex.BACK[hex];
+        if (dec < 0) {
+            throw new DecodingException(
+                String.format("invalid hex character: 0x%2x", hex)
+            );
+        }
+        return dec;
     }
 
 }

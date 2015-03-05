@@ -64,13 +64,7 @@ public final class CcSalted implements Codec {
 
     @Override
     public Identity decode(final byte[] text) throws IOException {
-        Identity idt;
-        try {
-            idt = this.origin.decode(CcSalted.unsalt(text));
-        } catch (final CcSalted.Fault ex) {
-            idt = Identity.ANONYMOUS;
-        }
-        return idt;
+        return this.origin.decode(CcSalted.unsalt(text));
     }
 
     /**
@@ -97,15 +91,14 @@ public final class CcSalted implements Codec {
      * Un-salt the string.
      * @param text Salted text
      * @return Original text
-     * @throws CcSalted.Fault If fails
      */
-    private static byte[] unsalt(final byte[] text) throws CcSalted.Fault {
+    private static byte[] unsalt(final byte[] text) {
         if (text.length == 0) {
-            throw new CcSalted.Fault("empty input");
+            throw new DecodingException("empty input");
         }
         final int size = text[0];
         if (text.length < size + 2) {
-            throw new CcSalted.Fault(
+            throw new DecodingException(
                 String.format(
                     "not enough bytes for salt, length is %d while %d required",
                     text.length, size + 2
@@ -117,7 +110,7 @@ public final class CcSalted implements Codec {
             sum += text[idx + 1];
         }
         if (text[text.length - 1] != sum) {
-            throw new CcSalted.Fault(
+            throw new DecodingException(
                 String.format(
                     "checksum %d failure, while %d expected",
                     text[text.length - 1], sum
@@ -127,23 +120,6 @@ public final class CcSalted implements Codec {
         final byte[] output = new byte[text.length - size - 2];
         System.arraycopy(text, size + 1, output, 0, output.length);
         return output;
-    }
-
-    /**
-     * Thrown when there is a fault with unsalting.
-     */
-    private static final class Fault extends Exception {
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = 0x7529FA781EDA1479L;
-        /**
-         * Public ctor.
-         * @param cause The cause of it
-         */
-        Fault(final String cause) {
-            super(cause);
-        }
     }
 
 }

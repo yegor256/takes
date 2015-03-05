@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -65,14 +66,13 @@ public final class CcPlain implements Codec {
             new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
             final String[] pair = parts[idx].split("=");
-            map.put(
-                pair[0],
-                URLDecoder.decode(pair[1], Charset.defaultCharset().name())
-            );
+            try {
+                map.put(pair[0], CcPlain.decode(pair[1]));
+            } catch (final IllegalArgumentException ex) {
+                throw new DecodingException(ex);
+            }
         }
-        final String urn = URLDecoder.decode(
-            parts[0], Charset.defaultCharset().name()
-        );
+        final String urn = CcPlain.decode(parts[0]);
         return new Identity() {
             @Override
             public String urn() {
@@ -83,6 +83,21 @@ public final class CcPlain implements Codec {
                 return map;
             }
         };
+    }
+
+    /**
+     * Decode from URL.
+     * @param text The text
+     * @return Decoded
+     * @throws UnsupportedEncodingException If fails
+     */
+    private static String decode(final String text)
+        throws UnsupportedEncodingException {
+        try {
+            return URLDecoder.decode(text, Charset.defaultCharset().name());
+        } catch (final IllegalArgumentException ex) {
+            throw new DecodingException(ex);
+        }
     }
 
 }

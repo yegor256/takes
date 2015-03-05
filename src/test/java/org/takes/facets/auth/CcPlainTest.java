@@ -23,23 +23,23 @@
  */
 package org.takes.facets.auth;
 
+import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link CcHex}.
+ * Test case for {@link CcPlain}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.4
  */
-public final class CcHexTest {
+public final class CcPlainTest {
 
     /**
-     * CcHex can encode.
+     * CcPlain can encode.
      * @throws IOException If some problem inside
      */
     @Test
@@ -51,36 +51,14 @@ public final class CcHexTest {
             }
             @Override
             public Map<String, String> properties() {
-                return Collections.emptyMap();
+                return new ImmutableMap.Builder<String, String>()
+                    .put("name", "Jeff Lebowski")
+                    .build();
             }
         };
         MatcherAssert.assertThat(
-            new String(new CcHex(new CcPlain()).encode(identity)),
-            Matchers.equalTo("75726E2533417465737425334133")
-        );
-    }
-
-    /**
-     * CcHex can encode and decode.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void encodesAndDecodes() throws IOException {
-        final String urn = "urn:test:8";
-        final Identity identity = new Identity() {
-            @Override
-            public String urn() {
-                return urn;
-            }
-            @Override
-            public Map<String, String> properties() {
-                return Collections.emptyMap();
-            }
-        };
-        final Codec codec = new CcHex(new CcPlain());
-        MatcherAssert.assertThat(
-            codec.decode(codec.encode(identity)).urn(),
-            Matchers.equalTo(urn)
+            new String(new CcPlain().encode(identity)),
+            Matchers.equalTo("urn%3Atest%3A3;name=Jeff+Lebowski")
         );
     }
 
@@ -91,10 +69,10 @@ public final class CcHexTest {
     @Test
     public void decodes() throws IOException {
         MatcherAssert.assertThat(
-            new CcHex(new CcPlain()).decode(
-                "75726E2533417465737425334141".getBytes()
+            new CcPlain().decode(
+                "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
             ).urn(),
-            Matchers.equalTo("urn:test:A")
+            Matchers.equalTo("urn:test:9")
         );
     }
 
@@ -105,14 +83,8 @@ public final class CcHexTest {
     @Test
     public void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
-            new CcSafe(new CcHex(new CcPlain())).decode(
+            new CcSafe(new CcPlain()).decode(
                 " % tjw".getBytes()
-            ),
-            Matchers.equalTo(Identity.ANONYMOUS)
-        );
-        MatcherAssert.assertThat(
-            new CcSafe(new CcHex(new CcPlain())).decode(
-                "75726E253".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
