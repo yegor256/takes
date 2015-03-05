@@ -32,23 +32,24 @@ import org.junit.Test;
 import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link CcPlain}.
+ * Test case for {@link CcCompact}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.5
  */
-public final class CcPlainTest {
+public final class CcCompactTest {
 
     /**
-     * CcPlain can encode.
+     * CcHex can encode and decode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodes() throws IOException {
+    public void encodesAndDecodes() throws IOException {
+        final String urn = "urn:test:3";
         final Identity identity = new Identity() {
             @Override
             public String urn() {
-                return "urn:test:3";
+                return urn;
             }
             @Override
             public Map<String, String> properties() {
@@ -57,37 +58,10 @@ public final class CcPlainTest {
                     .build();
             }
         };
+        final byte[] bytes = new CcCompact().encode(identity);
         MatcherAssert.assertThat(
-            new String(new CcPlain().encode(identity)),
-            Matchers.equalTo("urn%3Atest%3A3;name=Jeff+Lebowski")
-        );
-    }
-
-    /**
-     * CcPlain can decode.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void decodes() throws IOException {
-        MatcherAssert.assertThat(
-            new CcPlain().decode(
-                "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
-            ).urn(),
-            Matchers.equalTo("urn:test:9")
-        );
-    }
-
-    /**
-     * CcPlain can decode.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void decodesInvalidData() throws IOException {
-        MatcherAssert.assertThat(
-            new CcSafe(new CcPlain()).decode(
-                " % tjw".getBytes()
-            ),
-            Matchers.equalTo(Identity.ANONYMOUS)
+            new CcCompact().decode(bytes).urn(),
+            Matchers.equalTo(urn)
         );
     }
 
