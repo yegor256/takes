@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.social;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
@@ -29,42 +29,34 @@ import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
 import org.takes.rs.xe.RsXembly;
 import org.takes.rs.xe.XeAppend;
 
 /**
- * Test case for {@link org.takes.facets.auth.social.XeGithubLink}.
+ * Test case for {@link XeFacebookLink}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.5
  */
-public final class XeIdentityTest {
+public final class XeFacebookLinkTest {
 
     /**
-     * XeIdentity can create a correct link.
+     * XeFacebookLink can create a correct link.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesIdentityInXml() throws IOException {
+    public void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
                         "root",
-                        new XeIdentity(
-                            new RqWithHeader(
-                                new RqFake(),
-                                TsAuth.class.getSimpleName(),
-                                "urn:test:1;name=Jeff"
-                            )
-                        )
+                        new XeFacebookLink(new RqFake(), "abcdef")
                     )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/identity[urn='urn:test:1']",
-                "/root/identity[name='Jeff']"
+                "/root/links/link[@rel='takes:facebook']"
             )
         );
     }

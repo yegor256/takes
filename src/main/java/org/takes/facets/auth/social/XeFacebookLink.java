@@ -21,36 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.social;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.facets.auth.PsByFlag;
 import org.takes.rq.RqURI;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeWrap;
 
 /**
- * Xembly source to create a LINK to Github OAuth page.
+ * Xembly source to create a LINK to Facebook OAuth page.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.5
  */
 @EqualsAndHashCode(callSuper = false)
-public final class XeGithubLink extends XeWrap {
+public final class XeFacebookLink extends XeWrap {
 
     /**
      * Ctor.
      * @param req Request
-     * @param app Github application ID
+     * @param app Facebook application ID
      * @throws IOException If fails
      */
-    public XeGithubLink(final Request req, final String app)
+    public XeFacebookLink(final Request req, final String app)
         throws IOException {
-        this(req, app, "takes:github", PsByFlag.class.getSimpleName());
+        this(req, app, "takes:facebook", PsByFlag.class.getSimpleName());
     }
 
     /**
@@ -62,19 +63,19 @@ public final class XeGithubLink extends XeWrap {
      * @throws IOException If fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
-    public XeGithubLink(final Request req, final String app, final String rel,
+    public XeFacebookLink(final Request req, final String app, final String rel,
         final String flag) throws IOException {
         super(
             new XeLink(
                 rel,
                 String.format(
                     // @checkstyle LineLength (1 line)
-                    "https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s",
+                    "https://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s",
                     URLEncoder.encode(
                         app, Charset.defaultCharset().name()
                 ),
                     URLEncoder.encode(
-                        XeGithubLink.uri(req, flag),
+                        XeFacebookLink.uri(req, flag),
                         Charset.defaultCharset().name()
                 )
             )
@@ -101,7 +102,7 @@ public final class XeGithubLink extends XeWrap {
         }
         return uri.append(flag)
             .append('=')
-            .append(PsGithub.class.getSimpleName())
+            .append(PsFacebook.class.getSimpleName())
             .toString();
     }
 }

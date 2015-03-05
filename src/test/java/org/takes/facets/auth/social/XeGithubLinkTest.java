@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.social;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;

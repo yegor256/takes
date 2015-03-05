@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.exception.FacebookException;
-import com.restfb.types.User;
+import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -37,21 +36,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.facets.auth.Identity;
+import org.takes.facets.auth.Pass;
 import org.takes.rq.RqQuery;
 import org.takes.rq.RqURI;
 
 /**
- * Facebook OAuth landing/callback page.
+ * Github OAuth landing/callback page.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.5
+ * @since 0.1
  */
 @EqualsAndHashCode(of = { "app", "key" })
-public final class PsFacebook implements Pass {
+public final class PsGithub implements Pass {
 
     /**
      * App name.
@@ -65,12 +67,12 @@ public final class PsFacebook implements Pass {
 
     /**
      * Ctor.
-     * @param fapp Facebook app
-     * @param fkey Facebook key
+     * @param gapp Github app
+     * @param gkey Github key
      */
-    public PsFacebook(final String fapp, final String fkey) {
-        this.app = fapp;
-        this.key = fkey;
+    public PsGithub(final String gapp, final String gkey) {
+        this.app = gapp;
+        this.key = gkey;
     }
 
     @Override
@@ -79,29 +81,9 @@ public final class PsFacebook implements Pass {
         if (code.isEmpty()) {
             throw new IllegalArgumentException("code is not provided");
         }
-        final User user = PsFacebook.fetch(
+        return PsGithub.fetch(
             this.token(new RqURI(request).uri(), code.get(0))
         );
-        return new Identity() {
-            @Override
-            public String urn() {
-                return String.format("urn:facebook:%s", user.getId());
-            }
-            @Override
-            public Map<String, String> properties() {
-                final ConcurrentMap<String, String> props =
-                    new ConcurrentHashMap<String, String>(0);
-                props.put("name", user.getName());
-                props.put(
-                    "picture",
-                    String.format(
-                        "https://graph.facebook.com/%s/picture",
-                        user.getId()
-                    )
-                );
-                return props;
-            }
-        };
     }
 
     @Override
@@ -111,18 +93,23 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Get user name from Facebook, but the code provided.
-     * @param token Facebook access token
-     * @return The user found in FB
+     * Get user name from Github, with the token provided.
+     * @param token Github access token
+     * @return The user found in Github
+     * @throws IOException If fails
      */
-    private static User fetch(final String token) {
-        try {
-            return new DefaultFacebookClient(token).fetchObject(
-                "me", User.class
-            );
-        } catch (final FacebookException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+    private static Identity fetch(final String token) throws IOException {
+        final String uri = String.format(
+            "https://api.github.com/user?access_token=%s",
+            URLEncoder.encode(token, Charset.defaultCharset().name())
+        );
+        return PsGithub.parse(
+            new JdkRequest(uri)
+                .header("accept", "application/json")
+                .fetch().as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .as(JsonResponse.class).json().readObject()
+        );
     }
 
     /**
@@ -135,34 +122,42 @@ public final class PsFacebook implements Pass {
     private String token(final URI home, final String code) throws IOException {
         final String uri = String.format(
             // @checkstyle LineLength (1 line)
-            "https://graph.facebook.com/oauth/access_token?client_id=%s&redirect_uri=%sclient_secret=%s&code=%s",
+            "https://github.com/login/oauth/access_token?client_id=%s&redirect_uri=%s&client_secret=%s&code=%s",
             URLEncoder.encode(this.app, Charset.defaultCharset().name()),
             URLEncoder.encode(home.toString(), Charset.defaultCharset().name()),
             URLEncoder.encode(this.key, Charset.defaultCharset().name()),
             URLEncoder.encode(code, Charset.defaultCharset().name())
         );
-        final String response = new JdkRequest(uri)
+        return new JdkRequest(uri)
+            .method("POST")
+            .header("Accept", "application/xml")
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
-            .body();
-        final String[] sectors = response.split("&");
-        for (final String sector : sectors) {
-            final String[] pair = sector.split("=");
-            if (pair.length != 2) {
-                throw new IllegalArgumentException(
-                    String.format("Invalid response: '%s'", response)
-                );
+            .as(XmlResponse.class)
+            .xml().xpath("/OAuth/access_token/text()").get(0);
+    }
+
+    /**
+     * Make identity from JSON object.
+     * @param json JSON received from Github
+     * @return Identity found
+     */
+    private static Identity parse(final JsonObject json) {
+        return new Identity() {
+            @Override
+            public String urn() {
+                return String.format("urn:github:%d", json.getInt("id"));
             }
-            if ("access_token".equals(pair[0])) {
-                return pair[1];
+            @Override
+            public Map<String, String> properties() {
+                final ConcurrentMap<String, String> props =
+                    new ConcurrentHashMap<String, String>(json.size());
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                props.put("login", json.getString("login", "?"));
+                props.put("avatar", json.getString("avatar_url", "#"));
+                return props;
             }
-        }
-        throw new IllegalArgumentException(
-            String.format(
-                "Access token not found in response: '%s'",
-                response
-            )
-        );
+        };
     }
 
 }
