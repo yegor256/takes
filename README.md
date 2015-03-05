@@ -222,6 +222,7 @@ public final class App {
             }
           }
         )
+      )
     ).start(Exit.NEVER);
   }
 }
