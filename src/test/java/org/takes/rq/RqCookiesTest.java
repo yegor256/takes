@@ -79,4 +79,25 @@ public final class RqCookiesTest {
         );
     }
 
+    /**
+     * RqCookies can parse a request with multiple cookies.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void parsesHttpRequestWithMultipleCookies() throws IOException {
+        MatcherAssert.assertThat(
+            new RqCookies(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hzzz",
+                        "Host: abc.example.com",
+                        "Cookie: f=1; g=55"
+                    ),
+                    ""
+                )
+            ).cookie("g"),
+            Matchers.hasItem("55")
+        );
+    }
+
 }
