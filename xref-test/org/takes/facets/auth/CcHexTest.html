@@ -106,7 +106,27 @@
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>          );
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>      }
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> 
-<a class="jxr_linenumber" name="L101" href="#L101">101</a> }
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L102" href="#L102">102</a> <em class="jxr_javadoccomment">     * CcHex can decode.</em>
+<a class="jxr_linenumber" name="L103" href="#L103">103</a> <em class="jxr_javadoccomment">     * @throws IOException If some problem inside</em>
+<a class="jxr_linenumber" name="L104" href="#L104">104</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>     @Test
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> decodesInvalidData() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>         MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>             <strong class="jxr_keyword">new</strong> CcSafe(<strong class="jxr_keyword">new</strong> CcHex(<strong class="jxr_keyword">new</strong> CcPlain())).decode(
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>                 <span class="jxr_string">" % tjw"</span>.getBytes()
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>             ),
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>             Matchers.equalTo(Identity.ANONYMOUS)
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>         );
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>         MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>             <strong class="jxr_keyword">new</strong> CcSafe(<strong class="jxr_keyword">new</strong> CcHex(<strong class="jxr_keyword">new</strong> CcPlain())).decode(
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>                 <span class="jxr_string">"75726E253"</span>.getBytes()
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>             ),
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>             Matchers.equalTo(Identity.ANONYMOUS)
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>         );
+<a class="jxr_linenumber" name="L119" href="#L119">119</a>     }
+<a class="jxr_linenumber" name="L120" href="#L120">120</a> 
+<a class="jxr_linenumber" name="L121" href="#L121">121</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>

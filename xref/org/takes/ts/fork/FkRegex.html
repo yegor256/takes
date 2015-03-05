@@ -132,7 +132,7 @@
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>     @Override
 <a class="jxr_linenumber" name="L125" href="#L125">125</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;Take&gt; route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>         <strong class="jxr_keyword">final</strong> Matcher matcher = <strong class="jxr_keyword">this</strong>.pattern.matcher(
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqQuery.html">RqQuery</a>(req).query().toString()
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqQuery.html">RqQuery</a>(req).query().getPath()
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         );
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>         <strong class="jxr_keyword">final</strong> Collection&lt;Take&gt; list = <strong class="jxr_keyword">new</strong> ArrayList&lt;Take&gt;(1);
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>         <strong class="jxr_keyword">if</strong> (matcher.matches()) {
