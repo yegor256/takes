@@ -48,8 +48,8 @@ public final class TsForkTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsFork(new FkRegex("/[a-z]+", body)).route(
-                    new RqFake("GET", "/hey", "")
+                new TsFork(new FkRegex("/h[a-z]{2}", body)).route(
+                    new RqFake("GET", "/hey?yu", "")
                 ).act()
             ).print(),
             Matchers.equalTo(
