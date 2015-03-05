@@ -368,9 +368,9 @@ new TsFork(
   new FkRegex(
     "/user",
     new TsFork(
-      new FkMethod("GET", new TkGetUser()),
-      new FkMethod("POST", new TkPostUser()),
-      new FkMethod("DELETE", new TkDeleteUser())
+      new FkMethods("GET", new TkGetUser()),
+      new FkMethods("POST,PUT", new TkPostUser()),
+      new FkMethods("DELETE", new TkDeleteUser())
     )
   )
 )
