@@ -66,8 +66,28 @@ public final class FkParams implements Fork {
      * @param ptn Pattern
      * @param take Take
      */
+    public FkParams(final String param, final String ptn, final Take take) {
+        this(param, Pattern.compile(ptn), take);
+    }
+
+    /**
+     * Ctor.
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param take Take
+     */
     public FkParams(final String param, final Pattern ptn, final Take take) {
         this(param, ptn, new TsFixed(take));
+    }
+
+    /**
+     * Ctor.
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param takes Takes
+     */
+    public FkParams(final String param, final String ptn, final Takes takes) {
+        this(param, Pattern.compile(ptn), takes);
     }
 
     /**
@@ -86,6 +106,17 @@ public final class FkParams implements Fork {
                 }
             }
         );
+    }
+
+    /**
+     * Ctor.
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param tgt Takes
+     */
+    public FkParams(final String param, final String ptn,
+        final Target<Request> tgt) {
+        this(param, Pattern.compile(ptn), tgt);
     }
 
     /**
