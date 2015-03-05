@@ -98,4 +98,24 @@ public final class CcHexTest {
         );
     }
 
+    /**
+     * CcHex can decode.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void decodesInvalidData() throws IOException {
+        MatcherAssert.assertThat(
+            new CcHex(new CcPlain()).decode(
+                "75726E25A3".getBytes()
+            ),
+            Matchers.equalTo(Identity.ANONYMOUS)
+        );
+        MatcherAssert.assertThat(
+            new CcHex(new CcPlain()).decode(
+                "75726E253".getBytes()
+            ),
+            Matchers.equalTo(Identity.ANONYMOUS)
+        );
+    }
+
 }
