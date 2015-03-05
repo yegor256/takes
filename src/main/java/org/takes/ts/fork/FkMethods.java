@@ -25,6 +25,7 @@ package org.takes.ts.fork;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
@@ -96,7 +97,7 @@ public final class FkMethods implements Fork {
      * @param tgt Takes
      */
     public FkMethods(final String mtd, final Target<Request> tgt) {
-        this(Collections.singletonList(mtd), tgt);
+        this(Arrays.asList(mtd.split(",")), tgt);
     }
 
     /**
