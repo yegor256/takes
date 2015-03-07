@@ -33,7 +33,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
@@ -145,21 +144,14 @@ public final class PsGithub implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        return new Identity() {
-            @Override
-            public String urn() {
-                return String.format("urn:github:%d", json.getInt("id"));
-            }
-            @Override
-            public Map<String, String> properties() {
-                final ConcurrentMap<String, String> props =
-                    new ConcurrentHashMap<String, String>(json.size());
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
-                props.put("login", json.getString("login", "?"));
-                props.put("avatar", json.getString("avatar_url", "#"));
-                return props;
-            }
-        };
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(json.size());
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        props.put("login", json.getString("login", "?"));
+        props.put("avatar", json.getString("avatar_url", "#"));
+        return new Identity.Simple(
+            String.format("urn:github:%d", json.getInt("id")), props
+        );
     }
 
 }

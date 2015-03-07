@@ -34,7 +34,6 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
@@ -86,26 +85,20 @@ public final class PsFacebook implements Pass {
         final User user = PsFacebook.fetch(
             this.token(new RqURI(request).uri(), code.get(0))
         );
-        return new Identity() {
-            @Override
-            public String urn() {
-                return String.format("urn:facebook:%s", user.getId());
-            }
-            @Override
-            public Map<String, String> properties() {
-                final ConcurrentMap<String, String> props =
-                    new ConcurrentHashMap<String, String>(0);
-                props.put("name", user.getName());
-                props.put(
-                    "picture",
-                    String.format(
-                        "https://graph.facebook.com/%s/picture",
-                        user.getId()
-                    )
-                );
-                return props;
-            }
-        };
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(0);
+        props.put("name", user.getName());
+        props.put(
+            "picture",
+            String.format(
+                "https://graph.facebook.com/%s/picture",
+                user.getId()
+            )
+        );
+        return new Identity.Simple(
+            String.format("urn:facebook:%s", user.getId()),
+            props
+        );
     }
 
     @Override

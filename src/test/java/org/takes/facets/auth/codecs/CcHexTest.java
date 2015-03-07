@@ -24,8 +24,6 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -45,16 +43,7 @@ public final class CcHexTest {
      */
     @Test
     public void encodes() throws IOException {
-        final Identity identity = new Identity() {
-            @Override
-            public String urn() {
-                return "urn:test:3";
-            }
-            @Override
-            public Map<String, String> properties() {
-                return Collections.emptyMap();
-            }
-        };
+        final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
             new String(new CcHex(new CcPlain()).encode(identity)),
             Matchers.equalTo("75726E2533417465737425334133")
@@ -68,16 +57,7 @@ public final class CcHexTest {
     @Test
     public void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:8";
-        final Identity identity = new Identity() {
-            @Override
-            public String urn() {
-                return urn;
-            }
-            @Override
-            public Map<String, String> properties() {
-                return Collections.emptyMap();
-            }
-        };
+        final Identity identity = new Identity.Simple(urn);
         final Codec codec = new CcHex(new CcPlain());
         MatcherAssert.assertThat(
             codec.decode(codec.encode(identity)).urn(),

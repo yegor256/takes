@@ -77,16 +77,7 @@ public final class CcCompact implements Codec {
             while (stream.available() > 0) {
                 map.put(stream.readUTF(), stream.readUTF());
             }
-            return new Identity() {
-                @Override
-                public String urn() {
-                    return urn;
-                }
-                @Override
-                public Map<String, String> properties() {
-                    return map;
-                }
-            };
+            return new Identity.Simple(urn, map);
         } catch (final IOException ex) {
             throw new DecodingException(ex);
         } finally {

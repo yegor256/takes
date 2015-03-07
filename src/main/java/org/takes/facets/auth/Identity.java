@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -40,6 +41,10 @@ public interface Identity {
      * Anonymous.
      */
     Identity ANONYMOUS = new Identity() {
+        @Override
+        public String toString() {
+            return "anonymous";
+        }
         @Override
         public String urn() {
             throw new UnsupportedOperationException("#urn()");
@@ -61,5 +66,43 @@ public interface Identity {
      * @return Properties
      */
     Map<String, String> properties();
+
+    /**
+     * Simple identity.
+     */
+    final class Simple implements Identity {
+        /**
+         * URN.
+         */
+        private final transient String name;
+        /**
+         * Map of properties.
+         */
+        private final transient Map<String, String> props;
+        /**
+         * Ctor.
+         * @param urn URN of the identity
+         */
+        public Simple(final String urn) {
+            this(urn, Collections.<String, String>emptyMap());
+        }
+        /**
+         * Ctor.
+         * @param urn URN of the identity
+         * @param map Map of properties
+         */
+        public Simple(final String urn, final Map<String, String> map) {
+            this.name = urn;
+            this.props = Collections.unmodifiableMap(map);
+        }
+        @Override
+        public String urn() {
+            return this.name;
+        }
+        @Override
+        public Map<String, String> properties() {
+            return Collections.unmodifiableMap(this.props);
+        }
+    }
 
 }

@@ -75,17 +75,7 @@ public final class CcPlain implements Codec {
                 throw new DecodingException(ex);
             }
         }
-        final String urn = CcPlain.decode(parts[0]);
-        return new Identity() {
-            @Override
-            public String urn() {
-                return urn;
-            }
-            @Override
-            public Map<String, String> properties() {
-                return map;
-            }
-        };
+        return new Identity.Simple(CcPlain.decode(parts[0]), map);
     }
 
     /**

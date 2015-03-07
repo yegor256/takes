@@ -25,7 +25,6 @@ package org.takes.facets.auth.codecs;
 
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
-import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -46,18 +45,12 @@ public final class CcCompactTest {
     @Test
     public void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:3";
-        final Identity identity = new Identity() {
-            @Override
-            public String urn() {
-                return urn;
-            }
-            @Override
-            public Map<String, String> properties() {
-                return new ImmutableMap.Builder<String, String>()
-                    .put("name", "Jeff Lebowski")
-                    .build();
-            }
-        };
+        final Identity identity = new Identity.Simple(
+            urn,
+            new ImmutableMap.Builder<String, String>()
+                .put("name", "Jeff Lebowski")
+                .build()
+        );
         final byte[] bytes = new CcCompact().encode(identity);
         MatcherAssert.assertThat(
             new CcCompact().decode(bytes).urn(),
