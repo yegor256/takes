@@ -31,6 +31,8 @@ import org.takes.Take;
 /**
  * Wrap of take.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4

@@ -28,6 +28,8 @@ import java.io.IOException;
 /**
  * HTTP front.
  *
+ * <p>All implementations of this interface must be thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

@@ -30,9 +30,13 @@ import java.util.List;
 /**
  * HTTP request.
  *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @see org.takes.Response
+ * @see org.takes.Takes
  */
 public interface Request {
 

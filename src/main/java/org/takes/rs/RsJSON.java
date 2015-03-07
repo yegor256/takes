@@ -37,6 +37,8 @@ import org.takes.Response;
 /**
  * Response that converts Java object to JSON.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

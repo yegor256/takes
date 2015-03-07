@@ -33,6 +33,8 @@ import org.takes.tk.TkWithType;
 /**
  * Takes with added content type.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

@@ -34,6 +34,8 @@ import org.takes.tk.TkMeasured;
  * Takes that measures response printing time and adds HTTP header
  * "X-Takes-Millis" with the amount of milliseconds.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

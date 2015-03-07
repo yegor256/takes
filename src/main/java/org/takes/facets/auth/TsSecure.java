@@ -35,6 +35,8 @@ import org.takes.facets.forward.RsForward;
 /**
  * Takes available for authenticated users.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

@@ -30,6 +30,8 @@ import org.takes.facets.auth.Identity;
 /**
  * Safe codec, never throws decoding exception.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.5

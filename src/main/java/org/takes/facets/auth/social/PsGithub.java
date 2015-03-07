@@ -48,6 +48,8 @@ import org.takes.rq.RqURI;
 /**
  * Github OAuth landing/callback page.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

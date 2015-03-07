@@ -31,6 +31,8 @@ import org.xembly.Directives;
 /**
  * Xembly source to create SLA attribute with server load average.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.3

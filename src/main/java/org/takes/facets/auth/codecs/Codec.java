@@ -29,6 +29,8 @@ import org.takes.facets.auth.Identity;
 /**
  * Codec.
  *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

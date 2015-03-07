@@ -30,6 +30,8 @@ import org.takes.Response;
 /**
  * Inlet to enter a user.
  *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

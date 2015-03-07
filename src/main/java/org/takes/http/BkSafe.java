@@ -29,6 +29,8 @@ import lombok.EqualsAndHashCode;
 /**
  * Safe back-end.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

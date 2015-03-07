@@ -36,6 +36,8 @@ import org.takes.rs.RsWithHeaders;
 /**
  * Take that headers.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

@@ -35,6 +35,8 @@ import org.takes.Response;
 /**
  * Response decorator that can print an entire response in HTTP format.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

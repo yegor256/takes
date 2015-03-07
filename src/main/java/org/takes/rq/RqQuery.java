@@ -36,6 +36,8 @@ import org.takes.Request;
 /**
  * Request decorator, for HTTP URI query parsing.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

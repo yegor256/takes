@@ -34,6 +34,8 @@ import org.takes.Request;
 /**
  * Fake request (for unit tests).
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

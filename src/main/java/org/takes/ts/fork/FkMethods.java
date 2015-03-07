@@ -39,6 +39,8 @@ import org.takes.ts.TsFixed;
 /**
  * Fork by method matching.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4

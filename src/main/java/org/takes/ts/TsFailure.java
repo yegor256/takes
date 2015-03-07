@@ -31,6 +31,8 @@ import org.takes.Takes;
 /**
  * Takes that always fails.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

@@ -37,6 +37,8 @@ import org.takes.rs.RsWithCookie;
 /**
  * Takes that understands Flash cookie and converts it into a HTTP header.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

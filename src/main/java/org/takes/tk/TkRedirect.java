@@ -34,6 +34,8 @@ import org.takes.rs.RsWithStatus;
 /**
  * Take that redirects.
  *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
