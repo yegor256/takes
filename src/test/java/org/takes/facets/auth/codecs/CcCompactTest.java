@@ -39,7 +39,7 @@ import org.takes.facets.auth.Identity;
 public final class CcCompactTest {
 
     /**
-     * CcHex can encode and decode.
+     * CcCompact can encode and decode.
      * @throws IOException If some problem inside
      */
     @Test
@@ -55,6 +55,26 @@ public final class CcCompactTest {
         MatcherAssert.assertThat(
             new CcCompact().decode(bytes).urn(),
             Matchers.equalTo(urn)
+        );
+    }
+
+    /**
+     * CcHex can decode invalid data.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void decodesInvalidData() throws IOException {
+        MatcherAssert.assertThat(
+            new CcSafe(new CcCompact()).decode(
+                " % tjw".getBytes()
+            ),
+            Matchers.equalTo(Identity.ANONYMOUS)
+        );
+        MatcherAssert.assertThat(
+            new CcSafe(new CcCompact()).decode(
+                "75726E253".getBytes()
+            ),
+            Matchers.equalTo(Identity.ANONYMOUS)
         );
     }
 

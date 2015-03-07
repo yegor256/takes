@@ -63,8 +63,8 @@ public final class CcPlain implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] text) throws IOException {
-        final String[] parts = new String(text).split(";");
+    public Identity decode(final byte[] bytes) throws IOException {
+        final String[] parts = new String(bytes).split(";");
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {

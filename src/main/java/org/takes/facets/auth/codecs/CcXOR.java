@@ -75,8 +75,8 @@ public final class CcXOR implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] text) throws IOException {
-        return this.origin.decode(this.xor(text));
+    public Identity decode(final byte[] bytes) throws IOException {
+        return this.origin.decode(this.xor(bytes));
     }
 
     /**

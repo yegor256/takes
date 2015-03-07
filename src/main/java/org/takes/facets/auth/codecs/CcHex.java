@@ -88,19 +88,19 @@ public final class CcHex implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] text) throws IOException {
-        if ((text.length & 0x01) == 1) {
+    public Identity decode(final byte[] bytes) throws IOException {
+        if ((bytes.length & 0x01) == 1) {
             throw new DecodingException(
                 String.format(
                     "hex text must contain even number of chars: %s",
-                    Arrays.toString(text)
+                    Arrays.toString(bytes)
                 )
             );
         }
-        final byte[] out = new byte[text.length >> 1];
+        final byte[] out = new byte[bytes.length >> 1];
         for (int idx = 0; idx < out.length; ++idx) {
-            final int high = text[idx << 1];
-            final int low = text[(idx << 1) + 1];
+            final int high = bytes[idx << 1];
+            final int low = bytes[(idx << 1) + 1];
             out[idx] = (byte) ((CcHex.decode(high) << 4)
                 + CcHex.decode(low));
         }

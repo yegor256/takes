@@ -46,11 +46,19 @@ public interface Codec {
     byte[] encode(Identity identity) throws IOException;
 
     /**
-     * Decode identity from text.
-     * @param text Text
+     * Decode identity from text (or throw
+     * {@link org.takes.facets.auth.codecs.DecodingException}).
+     *
+     * <p>This method may throw
+     * {@link org.takes.facets.auth.codecs.DecodingException}, if it's not
+     * possible to decode the incoming byte array. This exception will mean
+     * that the user can't be authenticated and {@code Identity.ANONYMOUS}
+     * object will be identified.
+     *
+     * @param bytes Text
      * @return Identity
      * @throws IOException If fails
      */
-    Identity decode(byte[] text) throws IOException;
+    Identity decode(byte[] bytes) throws IOException;
 
 }

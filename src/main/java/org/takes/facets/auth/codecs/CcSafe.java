@@ -58,10 +58,10 @@ public final class CcSafe implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] text) throws IOException {
+    public Identity decode(final byte[] bytes) throws IOException {
         Identity identity;
         try {
-            identity = this.origin.decode(text);
+            identity = this.origin.decode(bytes);
         } catch (final DecodingException ex) {
             identity = Identity.ANONYMOUS;
         }

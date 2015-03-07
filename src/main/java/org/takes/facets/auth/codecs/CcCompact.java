@@ -66,11 +66,11 @@ public final class CcCompact implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] text) throws IOException {
+    public Identity decode(final byte[] bytes) throws IOException {
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(0);
         final DataInputStream stream = new DataInputStream(
-            new ByteArrayInputStream(text)
+            new ByteArrayInputStream(bytes)
         );
         try {
             final String urn = stream.readUTF();
