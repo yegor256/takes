@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -56,10 +58,29 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
+     * @param entries Map entries
+     * @since 0.5.1
+     */
+    public PsByFlag(final Map.Entry<String, Pass>... entries) {
+        this(PsByFlag.class.getSimpleName(), entries);
+    }
+
+    /**
+     * Ctor.
      * @param map Map
      */
     public PsByFlag(final Map<String, Pass> map) {
         this(PsByFlag.class.getSimpleName(), map);
+    }
+
+    /**
+     * Ctor.
+     * @param flg Flag
+     * @param ents Map entries
+     * @since 0.5.1
+     */
+    public PsByFlag(final String flg, final Map.Entry<String, Pass>... ents) {
+        this(flg, PsByFlag.asMap(ents));
     }
 
     /**
@@ -88,6 +109,21 @@ public final class PsByFlag implements Pass {
     public Response exit(final Response response,
         final Identity identity) {
         return response;
+    }
+
+    /**
+     * Convert entries to map.
+     * @param entries Entries
+     * @return Map
+     */
+    private static Map<String, Pass> asMap(
+        final Map.Entry<String, Pass>... entries) {
+        final ConcurrentMap<String, Pass> map =
+            new ConcurrentHashMap<String, Pass>(entries.length);
+        for (final Map.Entry<String, Pass> ent : entries) {
+            map.put(ent.getKey(), ent.getValue());
+        }
+        return map;
     }
 
 }
