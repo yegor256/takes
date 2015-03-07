@@ -59,8 +59,9 @@ public final class TkMeasured extends TkWrap {
                 @Override
                 public Response act() throws IOException {
                     final long start = System.currentTimeMillis();
+                    final Response res = take.act();
                     return new RsWithHeader(
-                        take.act(),
+                        res,
                         header,
                         Long.toString(System.currentTimeMillis() - start)
                     );
