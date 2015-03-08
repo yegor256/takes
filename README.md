@@ -16,8 +16,8 @@ Java6 web development framework. Its key benefits, comparing to all others, incl
  * not a single mutable class!
  * not a single `public` `static` method!
  * not a single `instanceof` keyword or type casting!
- * not a single `null`
- * no configuration files
+ * not a single `null`!
+ * no configuration files!
 
 Besides that, these are more traditional features, out of the box:
 
