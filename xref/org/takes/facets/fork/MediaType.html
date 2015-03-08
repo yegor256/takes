@@ -92,26 +92,33 @@
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      @Override
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> compareTo(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/fork/MediaType.html">MediaType</a> type) {
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.priority.compareTo(type.priority);
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>      }
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>  
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>  <em class="jxr_javadoccomment">     * Matches.</em>
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>  <em class="jxr_javadoccomment">     * @param type Another type</em>
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>  <em class="jxr_javadoccomment">     * @return TRUE if matches</em>
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>  <em class="jxr_javadoccomment">     * @checkstyle BooleanExpressionComplexityCheck (10 lines)</em>
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> matches(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/fork/MediaType.html">MediaType</a> type) {
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">final</strong> String star = <span class="jxr_string">"*"</span>;
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">return</strong> (<strong class="jxr_keyword">this</strong>.high.equals(star)
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>              || type.high.equals(star)
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>             || <strong class="jxr_keyword">this</strong>.high.equals(type.high))
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>             &amp;&amp; (<strong class="jxr_keyword">this</strong>.low.equals(star)
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>             || type.low.equals(star)
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>             || <strong class="jxr_keyword">this</strong>.low.equals(type.low));
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>     }
-<a class="jxr_linenumber" name="L105" href="#L105">105</a> 
-<a class="jxr_linenumber" name="L106" href="#L106">106</a> }
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">int</strong> cmp = <strong class="jxr_keyword">this</strong>.priority.compareTo(type.priority);
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">if</strong> (cmp == 0) {
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>              cmp = <strong class="jxr_keyword">this</strong>.high.compareTo(type.high);
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>              <strong class="jxr_keyword">if</strong> (cmp == 0) {
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>                  cmp = <strong class="jxr_keyword">this</strong>.low.compareTo(type.low);
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>              }
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          }
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>          <strong class="jxr_keyword">return</strong> cmp;
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>      }
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>  
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>  <em class="jxr_javadoccomment">     * Matches.</em>
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>  <em class="jxr_javadoccomment">     * @param type Another type</em>
+<a class="jxr_linenumber" name="L100" href="#L100">100</a> <em class="jxr_javadoccomment">     * @return TRUE if matches</em>
+<a class="jxr_linenumber" name="L101" href="#L101">101</a> <em class="jxr_javadoccomment">     * @checkstyle BooleanExpressionComplexityCheck (10 lines)</em>
+<a class="jxr_linenumber" name="L102" href="#L102">102</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> matches(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/fork/MediaType.html">MediaType</a> type) {
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">final</strong> String star = <span class="jxr_string">"*"</span>;
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>         <strong class="jxr_keyword">return</strong> (<strong class="jxr_keyword">this</strong>.high.equals(star)
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>             || type.high.equals(star)
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>             || <strong class="jxr_keyword">this</strong>.high.equals(type.high))
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>             &amp;&amp; (<strong class="jxr_keyword">this</strong>.low.equals(star)
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>             || type.low.equals(star)
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>             || <strong class="jxr_keyword">this</strong>.low.equals(type.low));
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>     }
+<a class="jxr_linenumber" name="L112" href="#L112">112</a> 
+<a class="jxr_linenumber" name="L113" href="#L113">113</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>

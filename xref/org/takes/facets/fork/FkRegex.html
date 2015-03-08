@@ -42,7 +42,7 @@
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.Take;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.takes.Takes;
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqQuery;
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.tk.TkText;
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.ts.TsFixed;
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
@@ -170,7 +170,7 @@
 <a class="jxr_linenumber" name="L162" href="#L162">162</a>     @Override
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;Take&gt; route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         <strong class="jxr_keyword">final</strong> Matcher matcher = <strong class="jxr_keyword">this</strong>.pattern.matcher(
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqQuery.html">RqQuery</a>(req).query().getPath()
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqHref.html">RqHref</a>(req).href().path()
 <a class="jxr_linenumber" name="L166" href="#L166">166</a>         );
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>         <strong class="jxr_keyword">final</strong> Collection&lt;Take&gt; list = <strong class="jxr_keyword">new</strong> ArrayList&lt;Take&gt;(1);
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>         <strong class="jxr_keyword">if</strong> (matcher.matches()) {

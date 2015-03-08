@@ -38,7 +38,7 @@
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.Take;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> org.takes.Takes;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqQuery;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.rs.RsWithBody;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.tk.TkFixed;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
@@ -90,7 +90,7 @@
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>      <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/Take.html">Take</a> route(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">final</strong> String name = String.format(
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              <span class="jxr_string">"%s%s"</span>, <strong class="jxr_keyword">this</strong>.prefix,
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqQuery.html">RqQuery</a>(request).query().getPath()
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHref.html">RqHref</a>(request).href().path()
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          );
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> InputStream input = <strong class="jxr_keyword">this</strong>.getClass().getResourceAsStream(name);
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">if</strong> (input == <strong class="jxr_keyword">null</strong>) {

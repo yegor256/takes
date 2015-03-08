@@ -39,7 +39,7 @@
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> org.takes.Take;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.takes.Takes;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqQuery;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.rs.RsWithBody;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.takes.tk.TkFixed;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  
@@ -80,7 +80,7 @@
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/Take.html">Take</a> route(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          <strong class="jxr_keyword">final</strong> File file = <strong class="jxr_keyword">new</strong> File(
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>              <strong class="jxr_keyword">this</strong>.dir,
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqQuery.html">RqQuery</a>(request).query().getPath()
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHref.html">RqHref</a>(request).href().path()
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          );
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          <strong class="jxr_keyword">if</strong> (!file.exists()) {
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/NotFoundException.html">NotFoundException</a>(

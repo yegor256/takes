@@ -84,9 +84,9 @@
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">final</strong> ServerSocket server = <strong class="jxr_keyword">new</strong> ServerSocket(<strong class="jxr_keyword">this</strong>.port);
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          server.setSoTimeout((<strong class="jxr_keyword">int</strong>) TimeUnit.SECONDS.toMillis(1L));
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>              <strong class="jxr_keyword">while</strong> (!exit.ready()) {
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>              <strong class="jxr_keyword">do</strong> {
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>                  <strong class="jxr_keyword">this</strong>.loop(server);
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>              }
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>              } <strong class="jxr_keyword">while</strong> (!exit.ready());
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          } <strong class="jxr_keyword">finally</strong> {
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>              server.close();
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          }

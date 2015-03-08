@@ -41,7 +41,7 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqQuery;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * Passes by flag.</em>
@@ -104,7 +104,7 @@
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>  
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>      @Override
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/auth/Identity.html">Identity</a> enter(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; flg = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqQuery.html">RqQuery</a>(request).param(<strong class="jxr_keyword">this</strong>.flag);
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; flg = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqHref.html">RqHref</a>(request).href().param(<strong class="jxr_keyword">this</strong>.flag);
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/auth/Identity.html">Identity</a> identity;
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">if</strong> (flg.isEmpty()) {
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             identity = Identity.ANONYMOUS;
