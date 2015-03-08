@@ -40,18 +40,8 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqWithHeader implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
-
-    /**
-     * Header to add.
-     */
-    private final transient String header;
+@EqualsAndHashCode(callSuper = true)
+public final class RqWithHeader extends RqWrap {
 
     /**
      * Ctor.
@@ -67,25 +57,26 @@ public final class RqWithHeader implements Request {
     /**
      * Ctor.
      * @param req Original request
-     * @param hdr Header to add
+     * @param header Header to add
      */
-    public RqWithHeader(final Request req, final String hdr) {
-        this.origin = req;
-        this.header = hdr;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        final Collection<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
-        head.addAll(list);
-        head.add(this.header);
-        return head;
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+    public RqWithHeader(final Request req, final String header) {
+        super(
+            new Request() {
+                @Override
+                public List<String> head() throws IOException {
+                    final Collection<String> list = req.head();
+                    final List<String> head =
+                        new ArrayList<String>(list.size());
+                    head.addAll(list);
+                    head.add(header);
+                    return head;
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return req.body();
+                }
+            }
+        );
     }
 
 }

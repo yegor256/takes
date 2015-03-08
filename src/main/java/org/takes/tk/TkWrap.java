@@ -37,7 +37,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(of = "origin")
 public class TkWrap implements Take {
 
     /**

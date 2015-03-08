@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -42,20 +41,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqQuery implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqQuery extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
     public RqQuery(final Request req) {
-        this.origin = req;
+        super(req);
     }
 
     /**
@@ -64,7 +58,7 @@ public final class RqQuery implements Request {
      * @throws IOException If fails
      */
     public URI query() throws IOException {
-        final String line = this.origin.head().get(0);
+        final String line = this.head().get(0);
         final String[] parts = line.split(" ", 3);
         return URI.create(parts[1]);
     }
@@ -92,16 +86,6 @@ public final class RqQuery implements Request {
             }
         }
         return found;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
     }
 
 }

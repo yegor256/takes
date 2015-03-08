@@ -26,7 +26,6 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -39,30 +38,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqText implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqText extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
     public RqText(final Request req) {
-        this.origin = req;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+        super(req);
     }
 
     /**

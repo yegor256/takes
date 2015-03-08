@@ -42,7 +42,7 @@ import org.takes.rs.xe.XeWrap;
  * @version $Id$
  * @since 0.5
  */
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public final class XeFacebookLink extends XeWrap {
 
     /**

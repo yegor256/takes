@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -42,30 +41,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqPrint implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqPrint extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
     public RqPrint(final Request req) {
-        this.origin = req;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
+        super(req);
     }
 
     /**

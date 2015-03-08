@@ -24,51 +24,44 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator, for HTTP URI re-building.
+ * Request wrap.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.6
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqURI extends RqWrap {
+@EqualsAndHashCode(of = "origin")
+public class RqWrap implements Request {
+
+    /**
+     * Original request.
+     */
+    private final transient Request origin;
 
     /**
      * Ctor.
      * @param req Original request
      */
-    public RqURI(final Request req) {
-        super(req);
+    public RqWrap(final Request req) {
+        this.origin = req;
     }
 
-    /**
-     * Get full request URI.
-     * @return HTTP request URI
-     * @throws IOException If fails
-     */
-    public URI uri() throws IOException {
-        final List<String> host = new RqHeaders(this).header("Host");
-        if (host.isEmpty()) {
-            throw new IOException("Host header is absent");
-        }
-        if (host.size() > 1) {
-            throw new IOException("too many Host headers");
-        }
-        return URI.create(
-            String.format(
-                "http://%s%s",
-                host.get(0),
-                new RqQuery(this).query()
-            )
-        );
+    @Override
+    public final List<String> head() throws IOException {
+        return this.origin.head();
+    }
+
+    @Override
+    public final InputStream body() throws IOException {
+        return this.origin.body();
     }
 
 }

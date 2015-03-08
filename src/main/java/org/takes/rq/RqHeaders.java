@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -45,20 +44,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqHeaders implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqHeaders extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
     public RqHeaders(final Request req) {
-        this.origin = req;
+        super(req);
     }
 
     /**
@@ -86,16 +80,6 @@ public final class RqHeaders implements Request {
         return this.map().keySet();
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
-
     /**
      * Parse them all in a map.
      * @return Map of them
@@ -103,7 +87,7 @@ public final class RqHeaders implements Request {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private Map<String, List<String>> map() throws IOException {
-        final List<String> head = this.origin.head();
+        final List<String> head = this.head();
         final ConcurrentMap<String, List<String>> map =
             new ConcurrentHashMap<String, List<String>>(head.size());
         for (final String line : head.subList(1, head.size())) {

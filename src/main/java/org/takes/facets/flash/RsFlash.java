@@ -37,7 +37,7 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {
 
     /**

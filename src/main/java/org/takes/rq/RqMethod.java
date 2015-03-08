@@ -24,8 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -39,8 +37,8 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqMethod implements Request {
+@EqualsAndHashCode(callSuper = true)
+public final class RqMethod extends RqWrap {
 
     /**
      * GET method.
@@ -79,16 +77,11 @@ public final class RqMethod implements Request {
     public static final String PATCH = "PATCH";
 
     /**
-     * Original request.
-     */
-    private final transient Request origin;
-
-    /**
      * Ctor.
      * @param req Original request
      */
     public RqMethod(final Request req) {
-        this.origin = req;
+        super(req);
     }
 
     /**
@@ -97,19 +90,9 @@ public final class RqMethod implements Request {
      * @throws IOException If fails
      */
     public String method() throws IOException {
-        final String line = this.origin.head().get(0);
+        final String line = this.head().get(0);
         final String[] parts = line.split(" ", 2);
         return parts[0].toUpperCase(Locale.ENGLISH);
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
     }
 
 }

@@ -42,7 +42,7 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = false, of = "origin")
+@EqualsAndHashCode(callSuper = true, of = "origin")
 public final class RsForward extends RuntimeException implements Response {
 
     /**

@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,20 +44,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RqCookies implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqCookies extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
     public RqCookies(final Request req) {
-        this.origin = req;
+        super(req);
     }
 
     /**
@@ -87,16 +81,6 @@ public final class RqCookies implements Request {
         return this.map().keySet();
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
-
     /**
      * Parse them all in a map.
      * @return Map of them
@@ -105,7 +89,7 @@ public final class RqCookies implements Request {
     private Map<String, String> map() throws IOException {
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(0);
-        final List<String> values = new RqHeaders(this.origin).header("Cookie");
+        final List<String> values = new RqHeaders(this).header("Cookie");
         for (final String value : values) {
             for (final String pair : value.split(";")) {
                 final String[] parts = pair.split("=", 2);

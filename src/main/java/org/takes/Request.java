@@ -30,6 +30,13 @@ import java.util.List;
 /**
  * HTTP request.
  *
+ * <p>An object implementing this interface can be "parsed" using one
+ * of the decorators available in {@link org.takes.rq} package. For example,
+ * in order to fetch a query parameter you can do:
+ *
+ * <pre> final List&lt;String&gt; params =
+ *   new RqQuery(request).param("name");</pre>
+ *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
