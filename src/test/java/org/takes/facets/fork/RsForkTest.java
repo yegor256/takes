@@ -72,7 +72,7 @@ public final class RsForkTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void negotiatesCotentWithoutAccept() throws IOException {
+    public void negotiatesContentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsFork(
@@ -81,6 +81,33 @@ public final class RsForkTest {
                 )
             ).printBody(),
             Matchers.endsWith("png")
+        );
+    }
+
+    /**
+     * RsFork can route by the Accept header.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void negotiatesContentWithComplexHeader() throws IOException {
+        final Request req = new RqFake(
+            Arrays.asList(
+                "GET /hell-1o.html",
+                "Accept: text/xml"
+            ),
+            ""
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsFork(
+                    req,
+                    new FkTypes(
+                        "application/xml,text/xml",
+                        new RsText("how are you?")
+                    )
+                )
+            ).printBody(),
+            Matchers.endsWith("you?")
         );
     }
 
