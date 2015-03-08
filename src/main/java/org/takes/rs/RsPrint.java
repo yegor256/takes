@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -43,6 +44,20 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsPrint extends RsWrap {
+
+    /**
+     * Pattern for first line.
+     */
+    private static final Pattern FIRST = Pattern.compile(
+        "HTTP/1\\.1 \\d{3} [a-zA-Z ]+"
+    );
+
+    /**
+     * Pattern for all other lines in the head.
+     */
+    private static final Pattern OTHERS = Pattern.compile(
+        "[a-zA-Z\\-]+:\\p{Print}+"
+    );
 
     /**
      * Ctor.
@@ -82,7 +97,28 @@ public final class RsPrint extends RsWrap {
     public void print(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer = new OutputStreamWriter(output);
+        boolean first = true;
         for (final String line : this.head()) {
+            if (first) {
+                if (!RsPrint.FIRST.matcher(line).matches()) {
+                    throw new IllegalArgumentException(
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                            line, RsPrint.FIRST
+                        )
+                    );
+                }
+                first = false;
+            } else if (!RsPrint.OTHERS.matcher(line).matches()) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        line, RsPrint.OTHERS
+                    )
+                );
+            }
             writer.append(line);
             writer.append(eol);
         }
