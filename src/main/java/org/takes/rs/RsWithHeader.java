@@ -61,6 +61,25 @@ public final class RsWithHeader implements Response {
 
     /**
      * Ctor.
+     * @param hdr Header
+     * @since 0.8
+     */
+    public RsWithHeader(final String hdr) {
+        this(new RsEmpty(), hdr);
+    }
+
+    /**
+     * Ctor.
+     * @param name Header name
+     * @param value Header value
+     * @since 0.8
+     */
+    public RsWithHeader(final String name, final String value) {
+        this(new RsEmpty(), name, value);
+    }
+
+    /**
+     * Ctor.
      * @param res Original response
      * @param name Header name
      * @param value Header value
