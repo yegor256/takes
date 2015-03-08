@@ -67,36 +67,4 @@ public interface Takes {
      */
     Take route(Request request) throws IOException;
 
-    /**
-     * Take can't be dispatched.
-     */
-    final class NotFoundException extends RuntimeException {
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = -505306086879848229L;
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final Throwable cause) {
-            super(cause);
-        }
-        /**
-         * Ctor.
-         * @param msg Exception message
-         * @param cause Cause of the problem
-         */
-        public NotFoundException(final String msg, final Throwable cause) {
-            super(msg, cause);
-        }
-    }
-
 }

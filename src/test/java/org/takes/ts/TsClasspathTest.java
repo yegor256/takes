@@ -27,7 +27,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Takes;
+import org.takes.NotFoundException;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -61,7 +61,7 @@ public final class TsClasspathTest {
      * TsClasspath can throw when resource not found.
      * @throws IOException If some problem inside
      */
-    @Test(expected = Takes.NotFoundException.class)
+    @Test(expected = NotFoundException.class)
     public void throwsWhenResourceNotFound() throws IOException {
         new TsClasspath().route(
             new RqFake("PUT", "/something-else", "")

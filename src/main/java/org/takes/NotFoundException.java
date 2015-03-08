@@ -21,77 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
-
-import java.io.IOException;
-import java.util.Locale;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+package org.takes;
 
 /**
- * Request decorator, for HTTP method parsing.
- *
- * <p>The class is immutable and thread-safe.
+ * Can't find how the resource requested.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @see org.takes.Take
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqMethod extends RqWrap {
+public final class NotFoundException extends RuntimeException {
 
     /**
-     * GET method.
+     * Serialization marker.
      */
-    public static final String GET = "GET";
-
-    /**
-     * POST method.
-     */
-    public static final String POST = "POST";
-
-    /**
-     * PUT method.
-     */
-    public static final String PUT = "PUT";
-
-    /**
-     * DELETE method.
-     */
-    public static final String DELETE = "DELETE";
-
-    /**
-     * HEAD method.
-     */
-    public static final String HEAD = "HEAD";
-
-    /**
-     * OPTIONS method.
-     */
-    public static final String OPTIONS = "OPTIONS";
-
-    /**
-     * PATCH method.
-     */
-    public static final String PATCH = "PATCH";
+    private static final long serialVersionUID = -505306086879848229L;
 
     /**
      * Ctor.
-     * @param req Original request
+     * @param cause Cause of the problem
      */
-    public RqMethod(final Request req) {
-        super(req);
+    public NotFoundException(final String cause) {
+        super(cause);
     }
 
     /**
-     * Get method.
-     * @return HTTP method
-     * @throws IOException If fails
+     * Ctor.
+     * @param cause Cause of the problem
      */
-    public String method() throws IOException {
-        final String line = this.head().get(0);
-        final String[] parts = line.split(" ", 2);
-        return parts[0].toUpperCase(Locale.ENGLISH);
+    public NotFoundException(final Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * Ctor.
+     * @param msg Exception message
+     * @param cause Cause of the problem
+     */
+    public NotFoundException(final String msg, final Throwable cause) {
+        super(msg, cause);
     }
 
 }

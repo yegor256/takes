@@ -31,9 +31,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.takes.NotFoundException;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Takes;
 
 /**
  * Response based on forks.
@@ -99,7 +99,7 @@ public final class RsFork implements Response {
                 return rsps.next();
             }
         }
-        throw new Takes.NotFoundException("nothing found");
+        throw new NotFoundException("nothing found");
     }
 
 }

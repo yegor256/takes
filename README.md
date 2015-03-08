@@ -171,7 +171,7 @@ More complex integration testing examples you can find in one
 of the open source projects that are using Takes, for example:
 [rultor.com](https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web).
 
-## Bigger Example
+## A Bigger Example
 
 Let's make it a bit more sophisticated:
 

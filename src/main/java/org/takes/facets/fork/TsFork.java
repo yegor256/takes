@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.takes.NotFoundException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
@@ -81,7 +82,7 @@ public final class TsFork implements Takes {
                 return takes.next();
             }
         }
-        throw new Takes.NotFoundException("nothing found");
+        throw new NotFoundException("nothing found");
     }
 
 }

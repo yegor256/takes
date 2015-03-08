@@ -26,6 +26,7 @@ package org.takes.ts;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
+import org.takes.NotFoundException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
@@ -85,7 +86,7 @@ public final class TsClasspath implements Takes {
         );
         final InputStream input = this.getClass().getResourceAsStream(name);
         if (input == null) {
-            throw new Takes.NotFoundException(
+            throw new NotFoundException(
                 String.format("%s not found in classpath", name)
             );
         }
