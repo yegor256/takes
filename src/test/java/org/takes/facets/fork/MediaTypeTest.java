@@ -52,7 +52,7 @@ public final class MediaTypeTest {
         );
         MatcherAssert.assertThat(
             new MediaType("application/json").matches(
-                new MediaType("text/json")
+                new MediaType("text")
             ),
             Matchers.is(false)
         );
