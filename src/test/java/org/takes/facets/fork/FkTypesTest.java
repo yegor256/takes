@@ -27,64 +27,43 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Response;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsEmpty;
 
 /**
- * Test case for {@link MediaTypes}.
+ * Test case for {@link FkTypes}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.6
+ * @since 0.9
  */
-public final class MediaTypesTest {
+public final class FkTypesTest {
 
     /**
-     * MediaTypes can match two lists.
+     * FkTypes can match by Accept header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesTwoTypes() throws IOException {
+    public void matchesByAcceptHeader() throws IOException {
         MatcherAssert.assertThat(
-            new MediaTypes("text/html;q=0.2,*/*").contains(
-                new MediaTypes("text/plain")
+            new FkTypes("application/json", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), "accept ", "image/*")
             ),
-            Matchers.is(true)
+            Matchers.<Response>iterableWithSize(0)
         );
         MatcherAssert.assertThat(
-            new MediaTypes("text/html;q=1.0,text/json").contains(
-                new MediaTypes("text/p")
+            new FkTypes("*/*", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), "Accept", "text/html")
             ),
-            Matchers.is(false)
+            Matchers.<Response>iterableWithSize(1)
         );
         MatcherAssert.assertThat(
-            new MediaTypes("text/*;q=1.0").contains(
-                new MediaTypes("application/pdf")
+            new FkTypes("text/xml", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), "accept", "*/*")
             ),
-            Matchers.is(false)
+            Matchers.<Response>iterableWithSize(1)
         );
-    }
-
-    /**
-     * MediaTypes can match by default.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByDefault() throws IOException {
-        MatcherAssert.assertThat(
-            new MediaTypes().contains(new MediaTypes("application/xml")),
-            Matchers.is(true)
-        );
-    }
-
-    /**
-     * MediaTypes can parse invalid types.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void parsesInvalidTypes() throws IOException {
-        new MediaTypes("hello, how are you?");
-        new MediaTypes("////");
-        new MediaTypes("/;/;q=0.9");
-        new MediaTypes(",,,a;,;a,a90.0;,.0.0,;9a0");
-        new MediaTypes("\n\n\t\r\u20ac00");
     }
 
 }
