@@ -58,4 +58,16 @@ public final class MediaTypeTest {
         );
     }
 
+    /**
+     * MediaType can parse invalid types.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void parsesInvalidTypes() throws IOException {
+        new MediaType("hello, how are you?");
+        new MediaType("////");
+        new MediaType("/;/;q=0.9");
+        new MediaType("\n\n\t\r\u20ac00");
+    }
+
 }
