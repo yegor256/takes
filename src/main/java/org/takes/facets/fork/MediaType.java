@@ -66,9 +66,13 @@ final class MediaType implements Comparable<MediaType> {
             this.priority = 1.0d;
         }
         final String[] sectors = parts[0].trim()
-            .toLowerCase(Locale.ENGLISH).split("/");
+            .toLowerCase(Locale.ENGLISH).split("/", 2);
         this.high = sectors[0];
-        this.low = sectors[1];
+        if (sectors.length > 1) {
+            this.low = sectors[1];
+        } else {
+            this.low = "";
+        }
     }
 
     /**
