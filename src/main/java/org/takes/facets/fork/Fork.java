@@ -52,14 +52,14 @@ public interface Fork<T> {
      * On Take.
      * @since 0.6
      */
-    interface InTake extends Fork<Take> {
+    interface AtTake extends Fork<Take> {
     }
 
     /**
      * On Response.
      * @since 0.6
      */
-    interface InResponse extends Fork<Response> {
+    interface AtResponse extends Fork<Response> {
     }
 
 }
