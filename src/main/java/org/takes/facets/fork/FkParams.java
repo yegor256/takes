@@ -45,7 +45,7 @@ import org.takes.ts.TsFixed;
  * @since 0.4
  */
 @EqualsAndHashCode(of = { "name", "pattern", "target" })
-public final class FkParams implements Fork {
+public final class FkParams implements Fork.InTake {
 
     /**
      * Param name.

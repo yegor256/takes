@@ -46,7 +46,7 @@ import org.takes.ts.TsFixed;
  * @since 0.4
  */
 @EqualsAndHashCode(of = { "methods", "target" })
-public final class FkMethods implements Fork {
+public final class FkMethods implements Fork.InTake {
 
     /**
      * Methods to match.

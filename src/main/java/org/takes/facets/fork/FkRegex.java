@@ -48,7 +48,7 @@ import org.takes.ts.TsFixed;
  * @since 0.4
  */
 @EqualsAndHashCode(of = { "pattern", "target" })
-public final class FkRegex implements Fork {
+public final class FkRegex implements Fork.InTake {
 
     /**
      * Pattern.

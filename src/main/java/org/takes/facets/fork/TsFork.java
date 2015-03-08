@@ -48,20 +48,20 @@ public final class TsFork implements Takes {
     /**
      * Patterns and their respective takes.
      */
-    private final transient Collection<Fork> forks;
+    private final transient Collection<Fork.InTake> forks;
 
     /**
      * Ctor.
      */
     public TsFork() {
-        this(Collections.<Fork>emptyList());
+        this(Collections.<Fork.InTake>emptyList());
     }
 
     /**
      * Ctor.
      * @param frks Forks
      */
-    public TsFork(final Fork... frks) {
+    public TsFork(final Fork.InTake... frks) {
         this(Arrays.asList(frks));
     }
 
@@ -69,13 +69,13 @@ public final class TsFork implements Takes {
      * Ctor.
      * @param frks Forks
      */
-    public TsFork(final Collection<Fork> frks) {
+    public TsFork(final Collection<Fork.InTake> frks) {
         this.forks = Collections.unmodifiableCollection(frks);
     }
 
     @Override
     public Take route(final Request request) throws IOException {
-        for (final Fork fork : this.forks) {
+        for (final Fork<Take> fork : this.forks) {
             final Iterator<Take> takes = fork.route(request).iterator();
             if (takes.hasNext()) {
                 return takes.next();

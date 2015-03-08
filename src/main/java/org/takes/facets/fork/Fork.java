@@ -25,6 +25,7 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 
 /**
@@ -35,8 +36,9 @@ import org.takes.Take;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
+ * @param <T> Type of result
  */
-public interface Fork {
+public interface Fork<T> {
 
     /**
      * Process this request or ignore it.
@@ -44,6 +46,20 @@ public interface Fork {
      * @return Non-empty list of takes if it was processed
      * @throws IOException If fails
      */
-    Iterable<Take> route(Request req) throws IOException;
+    Iterable<T> route(Request req) throws IOException;
+
+    /**
+     * On Take.
+     * @since 0.6
+     */
+    interface InTake extends Fork<Take> {
+    }
+
+    /**
+     * On Response.
+     * @since 0.6
+     */
+    interface InResponse extends Fork<Response> {
+    }
 
 }
