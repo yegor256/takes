@@ -25,6 +25,7 @@ package org.takes.facets.fork;
 
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Media type.
@@ -36,6 +37,7 @@ import lombok.EqualsAndHashCode;
  * @since 0.6
  * @see org.takes.facets.fork.FkTypes
  */
+@ToString
 @EqualsAndHashCode(of = { "high", "low" })
 final class MediaType implements Comparable<MediaType> {
 
@@ -70,27 +72,14 @@ final class MediaType implements Comparable<MediaType> {
         } else {
             this.priority = 1.0d;
         }
-        final String[] sectors = parts[0].trim()
+        final String[] sectors = parts[0]
             .toLowerCase(Locale.ENGLISH).split("/", 2);
         this.high = sectors[0];
         if (sectors.length > 1) {
-            this.low = sectors[1];
+            this.low = sectors[1].trim();
         } else {
             this.low = "";
         }
-    }
-
-    /**
-     * Ctor.
-     * @param prio Priority
-     * @param left Left part
-     * @param right Right part
-     */
-    MediaType(final double prio, final String left,
-        final String right) {
-        this.priority = prio;
-        this.high = left;
-        this.low = right;
     }
 
     @Override

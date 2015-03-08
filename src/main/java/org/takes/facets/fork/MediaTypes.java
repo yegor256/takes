@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Media types.
@@ -39,6 +40,7 @@ import lombok.EqualsAndHashCode;
  * @since 0.6
  * @see org.takes.facets.fork.FkTypes
  */
+@ToString
 @EqualsAndHashCode(of = "list")
 final class MediaTypes {
 
@@ -51,7 +53,7 @@ final class MediaTypes {
      * Ctor.
      */
     MediaTypes() {
-        this("*/*");
+        this("");
     }
 
     /**
@@ -70,7 +72,9 @@ final class MediaTypes {
     MediaTypes(final String text) {
         this.list = new TreeSet<MediaType>();
         for (final String name : text.toLowerCase(Locale.ENGLISH).split(",")) {
-            this.list.add(new MediaType(name));
+            if (!name.isEmpty()) {
+                this.list.add(new MediaType(name));
+            }
         }
     }
 
@@ -116,6 +120,14 @@ final class MediaTypes {
         set.addAll(this.list);
         set.addAll(types.list);
         return new MediaTypes(set);
+    }
+
+    /**
+     * Is it empty?
+     * @return TRUE if empty
+     */
+    public boolean isEmpty() {
+        return this.list.isEmpty();
     }
 
 }

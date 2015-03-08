@@ -87,6 +87,9 @@ public final class FkTypes implements Fork.AtResponse {
         for (final String hdr : headers) {
             list = list.merge(new MediaTypes(hdr));
         }
+        if (list.isEmpty()) {
+            list = new MediaTypes("*/*");
+        }
         return list;
     }
 

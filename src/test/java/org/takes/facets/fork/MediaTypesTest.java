@@ -43,6 +43,18 @@ public final class MediaTypesTest {
     @Test
     public void matchesTwoTypes() throws IOException {
         MatcherAssert.assertThat(
+            new MediaTypes("*/*").contains(
+                new MediaTypes("application/xml")
+            ),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new MediaTypes("application/pdf").contains(
+                new MediaTypes("application/*")
+            ),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
             new MediaTypes("text/html;q=0.2,*/*").contains(
                 new MediaTypes("text/plain")
             ),
@@ -56,21 +68,9 @@ public final class MediaTypesTest {
         );
         MatcherAssert.assertThat(
             new MediaTypes("text/*;q=1.0").contains(
-                new MediaTypes("application/pdf")
+                new MediaTypes("application/x-file")
             ),
             Matchers.is(false)
-        );
-    }
-
-    /**
-     * MediaTypes can match by default.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByDefault() throws IOException {
-        MatcherAssert.assertThat(
-            new MediaTypes().contains(new MediaTypes("application/xml")),
-            Matchers.is(true)
         );
     }
 

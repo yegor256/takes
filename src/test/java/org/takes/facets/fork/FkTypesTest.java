@@ -46,21 +46,22 @@ public final class FkTypesTest {
      */
     @Test
     public void matchesByAcceptHeader() throws IOException {
+        final String accept = "Accept";
+        MatcherAssert.assertThat(
+            new FkTypes("text/xml", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), accept, "*/* ")
+            ),
+            Matchers.<Response>iterableWithSize(1)
+        );
         MatcherAssert.assertThat(
             new FkTypes("application/json", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), "accept ", "image/*")
+                new RqWithHeader(new RqFake(), accept, "image/*")
             ),
             Matchers.<Response>iterableWithSize(0)
         );
         MatcherAssert.assertThat(
             new FkTypes("*/*", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), "Accept", "text/html")
-            ),
-            Matchers.<Response>iterableWithSize(1)
-        );
-        MatcherAssert.assertThat(
-            new FkTypes("text/xml", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), "accept", "*/*")
+                new RqWithHeader(new RqFake(), accept, "text/html")
             ),
             Matchers.<Response>iterableWithSize(1)
         );

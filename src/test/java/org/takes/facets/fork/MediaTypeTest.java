@@ -41,7 +41,15 @@ public final class MediaTypeTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void mathesTwoTypes() throws IOException {
+    public void matchesTwoTypes() throws IOException {
+        MatcherAssert.assertThat(
+            new MediaType("*/*").matches(new MediaType("application/pdf")),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new MediaType("application/xml").matches(new MediaType("*/* ")),
+            Matchers.is(true)
+        );
         MatcherAssert.assertThat(
             new MediaType("text/html").matches(new MediaType("text/*")),
             Matchers.is(true)
