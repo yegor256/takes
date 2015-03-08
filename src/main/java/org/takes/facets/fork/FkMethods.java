@@ -39,11 +39,20 @@ import org.takes.ts.TsFixed;
 /**
  * Fork by method matching.
  *
+ * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
+ * for example:
+ *
+ * <pre> Takes takes = new TsFork(
+ *   new FkMethods("GET", new TsLoad()),
+ *   new FkMethods("PUT", new TsSave())
+ * );</pre>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
+ * @see org.takes.facets.fork.TsFork
  */
 @EqualsAndHashCode(of = { "methods", "target" })
 public final class FkMethods implements Fork.AtTake {

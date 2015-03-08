@@ -37,11 +37,29 @@ import org.takes.Takes;
 /**
  * Fork takes.
  *
+ * <p>This is the implementation of {@link org.takes.Takes} that
+ * routes the requests to another takes, using a collection of forks
+ * to pick the right one. The best example is a routing by regular
+ * expression, for example:
+ *
+ * <pre> Takes takes = new TsFork(
+ *   new FkRegex("/home", new TsHome()),
+ *   new FkRegex("/account", new TsAccount())
+ * );</pre>
+ *
+ * <p>Here, {@link org.takes.facets.fork.TsFork} will try to call these
+ * "forks" one by one, asking whether they accept the request. The first
+ * one that reacts will get control. Each "fork" is an implementation
+ * of {@link org.takes.facets.fork.Fork.AtTake}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
+ * @see org.takes.facets.fork.FkMethods
+ * @see org.takes.facets.fork.FkRegex
+ * @see org.takes.facets.fork.FkParams
  */
 @EqualsAndHashCode(of = "forks")
 public final class TsFork implements Takes {

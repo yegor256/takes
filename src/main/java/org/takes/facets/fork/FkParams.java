@@ -36,13 +36,14 @@ import org.takes.rq.RqQuery;
 import org.takes.ts.TsFixed;
 
 /**
- * Fork by query param.
+ * Fork by query params and their values, matched by regular express.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
+ * @see org.takes.facets.fork.TsFork
  */
 @EqualsAndHashCode(of = { "name", "pattern", "target" })
 public final class FkParams implements Fork.AtTake {

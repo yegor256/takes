@@ -40,6 +40,7 @@ import org.takes.rq.RqHeaders;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.6
+ * @see org.takes.facets.fork.RsFork
  */
 @EqualsAndHashCode(of = { "types", "origin" })
 public final class FkTypes implements Fork.AtResponse {

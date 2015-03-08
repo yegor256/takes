@@ -39,13 +39,49 @@ import org.takes.tk.TkText;
 import org.takes.ts.TsFixed;
 
 /**
- * Fork by regular expression patter.
+ * Fork by regular expression pattern.
+ *
+ * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
+ * for example:
+ *
+ * <pre> Takes takes = new TsFork(
+ *   new FkRegex("/home", new TsHome()),
+ *   new FkRegex("/account", new TsAccount())
+ * );</pre>
+ *
+ * <p>Each instance of {@link org.takes.facets.fork.FkRegex} is being
+ * asked only once by {@link org.takes.facets.fork.TsFork} whether the
+ * request is good enough to be processed. If the request is suitable
+ * for this particular fork, it will return the relevant
+ * {@link org.takes.Take}.
+ *
+ * <p>Also, keep in mind that the second argument of the constructor may
+ * be of type {@link org.takes.facets.fork.Target} and accept an
+ * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
+ * convenient to reuse regular expression matcher, for example:
+ *
+ * <pre> Takes takes = new TsFork(
+ *   new FkRegex(
+ *     "/file(.*)",
+ *     new Target&lt;RqRegex&gt;() {
+ *       &#64;Override
+ *       public Take route(final RqRegex req) {
+ *         // Here we immediately getting access to the
+ *         // matcher that was used during parsing of
+ *         // the incoming request
+ *         final String file = req.matcher().group(1);
+ *       }
+ *     }
+ *   )
+ * );</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
+ * @see org.takes.facets.fork.TsFork
+ * @see org.takes.facets.fork.Target
  */
 @EqualsAndHashCode(of = { "pattern", "target" })
 public final class FkRegex implements Fork.AtTake {
