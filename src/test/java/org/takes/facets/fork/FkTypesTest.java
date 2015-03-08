@@ -67,4 +67,18 @@ public final class FkTypesTest {
         );
     }
 
+    /**
+     * FkTypes can match by Accept header.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesByCompositeType() throws IOException {
+        MatcherAssert.assertThat(
+            new FkTypes("text/xml,text/json", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), "Accept ", "text/json")
+            ),
+            Matchers.<Response>iterableWithSize(1)
+        );
+    }
+
 }
