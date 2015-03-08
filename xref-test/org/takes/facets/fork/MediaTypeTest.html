@@ -60,13 +60,25 @@
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          );
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>              <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"application/json"</span>).matches(
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"text/json"</span>)
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"text"</span>)
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>              ),
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>              Matchers.is(false)
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          );
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      }
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>  
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>  }
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     * MediaType can parse invalid types.</em>
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     * @throws IOException If some problem inside</em>
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>      @Test
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> parsesInvalidTypes() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"hello, how are you?"</span>);
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>          <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"////"</span>);
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"/;/;q=0.9"</span>);
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">new</strong> MediaType(<span class="jxr_string">"\n\n\t\r\u20ac00"</span>);
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>      }
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
