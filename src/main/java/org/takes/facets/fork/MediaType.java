@@ -84,7 +84,14 @@ final class MediaType implements Comparable<MediaType> {
 
     @Override
     public int compareTo(final MediaType type) {
-        return this.priority.compareTo(type.priority);
+        int cmp = this.priority.compareTo(type.priority);
+        if (cmp == 0) {
+            cmp = this.high.compareTo(type.high);
+            if (cmp == 0) {
+                cmp = this.low.compareTo(type.low);
+            }
+        }
+        return cmp;
     }
 
     /**
