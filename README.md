@@ -724,7 +724,7 @@ Then, you need to show a login link to the user, which he or she
 can click and get to the Facebook OAuth authentication page. Here is how
 you do this with XeResponse:
 
-```
+```java
 new RsXembly(
   new XeStylesheet("/xsl/index.xsl"),
   new XeAppend(
