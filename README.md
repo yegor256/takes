@@ -797,7 +797,7 @@ public final class App {
 Then, run it like this:
 
 ```
-$ java -jar takes.jar App.class --port=8080 --refresh
+$ java -cp takes.jar App.class --port=8080 --refresh
 ```
 
 You should see "hello, world!" at `http://localhost:8080`.
