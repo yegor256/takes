@@ -70,14 +70,7 @@ The entire framework relies on your default Java encoding, which is not
 necessarily UTF-8 by default. To be sure, always set it on the command line
 with `file.encoding` Java argument.
 
-Maven artifact is in Maven Central:
-
-```xml
-<dependency>
-  <groupId>org.takes</groupId>
-  <artifactId>takes</artifactId>
-</dependency>
-```
+## Build and Run With Maven
 
 If you're using Maven, this is how your `pom.xml` should look like:
 
@@ -87,7 +80,6 @@ If you're using Maven, this is how your `pom.xml` should look like:
     <dependency>
       <groupId>org.takes</groupId>
       <artifactId>takes</artifactId>
-      <version>0.3.1</version>
     </dependency>
   </dependencies>
   <profiles>
@@ -130,6 +122,56 @@ $ mvn clean integration-test -Phit-refresh -Dport=8080
 ```
 
 Maven will start the server and you can see it at `http://localhost:8080`.
+
+## Unit Testing
+
+This is how you can unit test the app, using JUnit 4.x and
+[Hamcrest](http://www.hamcrest.org):
+
+```java
+public final class AppTest {
+  @Test
+  public void returnsHttpRespone() throws Exception {
+    MatcherAssert.assertThat(
+      new RsPrint(
+        new App().route(new RqFake("GET", "/")).act()
+      ).printBody(),
+      Matchers.equalsTo("hello, world!")
+    );
+  }
+}
+```
+
+## Integration Testing
+
+Here is how you can test the entire server via HTTP, using JUnit and
+[jcabi-http](http://http.jcabi.com) for making HTTP requests:
+
+```java
+public final class AppITCase {
+  @Test
+  public void returnsTextPageOnHttpRequest() throws Exception {
+    new FtRemote(new App()).exec(
+      new FtRemote.Script() {
+        @Override
+        public void exec(final URI home) throws IOException {
+          new JdkRequest(home)
+            .fetch()
+            .as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .assertBody(Matchers.equalTo("hello, world!"));
+        }
+      }
+    );
+  }
+}
+```
+
+More complex integration testing examples you can find in one
+of the open source projects that are using Takes, for example:
+[rultor.com](https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web).
+
+## Bigger Example
 
 Let's make it a bit more sophisticated:
 
