@@ -24,37 +24,37 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.takes.Href;
 import org.takes.Request;
 
 /**
- * Request decorator, for HTTP URI re-building.
+ * Request decorator, for HTTP URI query parsing.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqURI extends RqWrap {
+public final class RqHref extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
-    public RqURI(final Request req) {
+    public RqHref(final Request req) {
         super(req);
     }
 
     /**
-     * Get full request URI.
-     * @return HTTP request URI
+     * Get HREF.
+     * @return HTTP href
      * @throws IOException If fails
      */
-    public URI uri() throws IOException {
+    public Href href() throws IOException {
         final List<String> host = new RqHeaders(this).header("Host");
         if (host.isEmpty()) {
             throw new IOException("Host header is absent");
@@ -62,11 +62,12 @@ public final class RqURI extends RqWrap {
         if (host.size() > 1) {
             throw new IOException("too many Host headers");
         }
-        return URI.create(
+        return new Href(
             String.format(
                 "http://%s%s",
                 host.get(0),
-                new RqQuery(this).query()
+                // @checkstyle MagicNumber (1 line)
+                this.head().get(0).split(" ", 3)[1]
             )
         );
     }

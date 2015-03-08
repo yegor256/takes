@@ -30,12 +30,12 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RqQuery}.
+ * Test case for {@link RqHref}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RqQueryTest {
+public final class RqHrefTest {
 
     /**
      * RqQuery can parse a query.
@@ -44,7 +44,7 @@ public final class RqQueryTest {
     @Test
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
-            new RqQuery(
+            new RqHref(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -53,8 +53,8 @@ public final class RqQueryTest {
                     ),
                     ""
                 )
-            ).query().toString(),
-            Matchers.equalTo("/h?a=3")
+            ).href().toString(),
+            Matchers.equalTo("http://www.example.com/h?a=3")
         );
     }
 
@@ -65,7 +65,7 @@ public final class RqQueryTest {
     @Test
     public void extractsParams() throws IOException {
         MatcherAssert.assertThat(
-            new RqQuery(
+            new RqHref(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?a=3&b=7&c&d=9%28x%29&ff",
@@ -74,7 +74,7 @@ public final class RqQueryTest {
                     ),
                     ""
                 )
-            ).param("d"),
+            ).href().param("d"),
             Matchers.hasItem("9(x)")
         );
     }
@@ -86,7 +86,7 @@ public final class RqQueryTest {
     @Test
     public void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
-            new RqQuery(
+            new RqHref(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?since=343",
@@ -94,7 +94,7 @@ public final class RqQueryTest {
                     ),
                     ""
                 )
-            ).param("since"),
+            ).href().param("since"),
             Matchers.hasItem("343")
         );
     }

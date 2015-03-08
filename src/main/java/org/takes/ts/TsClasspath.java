@@ -30,7 +30,7 @@ import org.takes.NotFoundException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.rq.RqQuery;
+import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
 import org.takes.tk.TkFixed;
 
@@ -82,7 +82,7 @@ public final class TsClasspath implements Takes {
     public Take route(final Request request) throws IOException {
         final String name = String.format(
             "%s%s", this.prefix,
-            new RqQuery(request).query().getPath()
+            new RqHref(request).href().path()
         );
         final InputStream input = this.getClass().getResourceAsStream(name);
         if (input == null) {

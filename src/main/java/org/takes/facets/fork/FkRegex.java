@@ -34,7 +34,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.rq.RqQuery;
+import org.takes.rq.RqHref;
 import org.takes.tk.TkText;
 import org.takes.ts.TsFixed;
 
@@ -162,7 +162,7 @@ public final class FkRegex implements Fork.AtTake {
     @Override
     public Iterable<Take> route(final Request req) throws IOException {
         final Matcher matcher = this.pattern.matcher(
-            new RqQuery(req).query().getPath()
+            new RqHref(req).href().path()
         );
         final Collection<Take> list = new ArrayList<Take>(1);
         if (matcher.matches()) {

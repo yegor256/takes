@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.rq.RqQuery;
+import org.takes.rq.RqHref;
 
 /**
  * Passes by flag.
@@ -96,7 +96,7 @@ public final class PsByFlag implements Pass {
 
     @Override
     public Identity enter(final Request request) throws IOException {
-        final List<String> flg = new RqQuery(request).param(this.flag);
+        final List<String> flg = new RqHref(request).href().param(this.flag);
         final Identity identity;
         if (flg.isEmpty()) {
             identity = Identity.ANONYMOUS;

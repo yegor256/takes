@@ -30,7 +30,6 @@ import com.restfb.exception.FacebookException;
 import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -40,8 +39,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
-import org.takes.rq.RqQuery;
-import org.takes.rq.RqURI;
+import org.takes.rq.RqHref;
 
 /**
  * Facebook OAuth landing/callback page.
@@ -78,12 +76,13 @@ public final class PsFacebook implements Pass {
 
     @Override
     public Identity enter(final Request request) throws IOException {
-        final List<String> code = new RqQuery(request).param("code");
+        final Href href = new RqHref(request).href();
+        final List<String> code = href.param("code");
         if (code.isEmpty()) {
             throw new IllegalArgumentException("code is not provided");
         }
         final User user = PsFacebook.fetch(
-            this.token(new RqURI(request).uri(), code.get(0))
+            this.token(href.toString(), code.get(0))
         );
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(0);
@@ -129,11 +128,12 @@ public final class PsFacebook implements Pass {
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final URI home, final String code) throws IOException {
+    private String token(final String home, final String code)
+        throws IOException {
         // @checkstyle LineLength (1 line)
         final String uri = new Href("https://graph.facebook.com/oauth/access_token")
             .with("client_id", this.app)
-            .with("redirect_uri", home.toString())
+            .with("redirect_uri", home)
             .with("client_secret", this.key)
             .with("code", code)
             .toString();

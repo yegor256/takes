@@ -46,7 +46,7 @@ public final class RsForkTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void negotiatesCotent() throws IOException {
+    public void negotiatesContent() throws IOException {
         final Request req = new RqFake(
             Arrays.asList(
                 "GET /hello.html",
@@ -59,7 +59,7 @@ public final class RsForkTest {
             new RsPrint(
                 new RsFork(
                     req,
-                    new FkTypes("text/*", new RsText("it's a text")),
+                    new FkTypes("text/plain", new RsText("it's a text")),
                     new FkTypes("image/*", new RsText("it's an image"))
                 )
             ).printBody(),

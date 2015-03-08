@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.rq.RqQuery;
+import org.takes.rq.RqHref;
 import org.takes.ts.TsFixed;
 
 /**
@@ -137,7 +137,7 @@ public final class FkParams implements Fork.AtTake {
 
     @Override
     public Iterable<Take> route(final Request req) throws IOException {
-        final List<String> params = new RqQuery(req).param(this.name);
+        final List<String> params = new RqHref(req).href().param(this.name);
         final Collection<Take> list = new ArrayList<Take>(1);
         if (!params.isEmpty()
             && this.pattern.matcher(params.get(0)).matches()) {

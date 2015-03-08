@@ -28,8 +28,9 @@ import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -46,14 +47,14 @@ import java.util.concurrent.ConcurrentMap;
 public final class Href {
 
     /**
-     * URI.
+     * URI (without the query part).
      */
-    private final transient String uri;
+    private final transient URI uri;
 
     /**
      * Params.
      */
-    private final transient ConcurrentMap<String, Collection<String>> params;
+    private final transient ConcurrentMap<String, List<String>> params;
 
     /**
      * Ctor.
@@ -61,20 +62,28 @@ public final class Href {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Href(final String txt) {
-        this.params = new ConcurrentHashMap<String, Collection<String>>(0);
+        this.params = new ConcurrentHashMap<String, List<String>>(0);
         final URI link = URI.create(txt);
         final String query = link.getQuery();
         if (query == null) {
-            this.uri = link.toString();
+            this.uri = link;
         } else {
             final String href = link.toString();
-            this.uri = href.substring(0, href.length() - query.length() - 1);
+            this.uri = URI.create(
+                href.substring(0, href.length() - query.length() - 1)
+            );
             final String[] pairs = query.split("&");
             for (final String pair : pairs) {
                 final String[] parts = pair.split("=", 2);
                 final String key = Href.decode(parts[0]);
+                final String value;
+                if (parts.length > 1) {
+                    value = Href.decode(parts[1]);
+                } else {
+                    value = "";
+                }
                 this.params.putIfAbsent(key, new LinkedList<String>());
-                this.params.get(key).add(Href.decode(parts[1]));
+                this.params.get(key).add(value);
             }
         }
     }
@@ -84,18 +93,18 @@ public final class Href {
      * @param link The link
      * @param map Map of params
      */
-    private Href(final String link,
-        final ConcurrentMap<String, Collection<String>> map) {
+    private Href(final URI link,
+        final ConcurrentMap<String, List<String>> map) {
         this.uri = link;
         this.params = map;
     }
 
     @Override
     public String toString() {
-        final StringBuilder text = new StringBuilder(this.uri);
+        final StringBuilder text = new StringBuilder(this.uri.toString());
         if (!this.params.isEmpty()) {
             boolean first = true;
-            for (final Map.Entry<String, Collection<String>> ent
+            for (final Map.Entry<String, List<String>> ent
                 : this.params.entrySet()) {
                 for (final String value : ent.getValue()) {
                     if (first) {
@@ -114,13 +123,39 @@ public final class Href {
     }
 
     /**
+     * Get path part of the HREF.
+     * @return Path
+     * @since 0.9
+     */
+    public String path() {
+        return this.uri.getPath();
+    }
+
+    /**
+     * Get query param.
+     * @param key Param name
+     * @return Values (could be empty)
+     * @since 0.9
+     */
+    public List<String> param(final String key) {
+        List<String> values = this.params.get(key);
+        if (values == null) {
+            values = Collections.emptyList();
+        }
+        return values;
+    }
+
+    /**
      * Add this path to the URI.
      * @param suffix The suffix
      * @return New HREF
      */
     public Href path(final String suffix) {
         return new Href(
-            new StringBuilder(this.uri).append(Href.encode(suffix)).toString(),
+            URI.create(
+                new StringBuilder(this.uri.toString())
+                    .append(Href.encode(suffix)).toString()
+            ),
             this.params
         );
     }
@@ -132,8 +167,8 @@ public final class Href {
      * @return New HREF
      */
     public Href with(final String key, final String value) {
-        final ConcurrentMap<String, Collection<String>> map =
-            new ConcurrentHashMap<String, Collection<String>>(
+        final ConcurrentMap<String, List<String>> map =
+            new ConcurrentHashMap<String, List<String>>(
                 this.params.size() + 1
             );
         map.putAll(this.params);
@@ -148,8 +183,8 @@ public final class Href {
      * @return New HREF
      */
     public Href without(final String key) {
-        final ConcurrentMap<String, Collection<String>> map =
-            new ConcurrentHashMap<String, Collection<String>>(
+        final ConcurrentMap<String, List<String>> map =
+            new ConcurrentHashMap<String, List<String>>(
                 this.params.size()
             );
         map.putAll(this.params);

@@ -26,7 +26,7 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqURI;
+import org.takes.rq.RqHref;
 import org.xembly.Directive;
 
 /**
@@ -52,7 +52,7 @@ public final class XeLinkSelf extends XeWrap {
                 public Iterable<Directive> toXembly() throws IOException {
                     return new XeLink(
                         "self",
-                        new RqURI(req).uri().toString()
+                        new RqHref(req).href().toString()
                     ).toXembly();
                 }
             }

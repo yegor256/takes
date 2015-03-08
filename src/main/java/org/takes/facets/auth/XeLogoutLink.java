@@ -25,9 +25,8 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Href;
 import org.takes.Request;
-import org.takes.rq.RqURI;
+import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeWrap;
 
@@ -65,7 +64,7 @@ public final class XeLogoutLink extends XeWrap {
         super(
             new XeLink(
                 rel,
-                new Href(new RqURI(req).uri().toString()).with(
+                new RqHref(req).href().with(
                     flag, PsLogout.class.getSimpleName()
                 ).toString()
         )

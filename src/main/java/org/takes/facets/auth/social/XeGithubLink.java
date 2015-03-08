@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Href;
 import org.takes.Request;
 import org.takes.facets.auth.PsByFlag;
-import org.takes.rq.RqURI;
+import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeWrap;
 
@@ -73,7 +73,7 @@ public final class XeGithubLink extends XeWrap {
                     .with("client_id", app)
                     .with(
                         "redirect_uri",
-                        new Href(new RqURI(req).uri().toString())
+                        new RqHref(req).href()
                             .with(flag, PsGithub.class.getSimpleName())
                             .toString()
                     )
