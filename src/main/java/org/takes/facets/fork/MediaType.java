@@ -61,7 +61,9 @@ final class MediaType implements Comparable<MediaType> {
     MediaType(final String text) {
         final String[] parts = text.split(";", 2);
         if (parts.length > 1) {
-            this.priority = Double.parseDouble(parts[1].trim().substring(2));
+            this.priority = Double.parseDouble(
+                parts[1].replaceAll("[^0-9\\.]", "")
+            );
         } else {
             this.priority = 1.0d;
         }
