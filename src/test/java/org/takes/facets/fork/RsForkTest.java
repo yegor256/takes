@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -30,17 +30,19 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
- * Test case for {@link RsNegotiation}.
+ * Test case for {@link RsFork}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.6
  */
-public final class RsNegotiationTest {
+public final class RsForkTest {
 
     /**
-     * RsNegotiation can route by the Accept header.
+     * RsFork can route by the Accept header.
      * @throws IOException If some problem inside
      */
     @Test
@@ -55,24 +57,27 @@ public final class RsNegotiationTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsNegotiation(req)
-                    .with("text/*", new RsText("it's a text"))
-                    .with("image/*", new RsText("it's an image"))
+                new RsFork(
+                    req,
+                    new FkTypes("text/*", new RsText("it's a text")),
+                    new FkTypes("image/*", new RsText("it's an image"))
+                )
             ).printBody(),
             Matchers.endsWith("a text")
         );
     }
 
     /**
-     * RsNegotiation can route without Accept header.
+     * RsFork can route without Accept header.
      * @throws IOException If some problem inside
      */
     @Test
     public void negotiatesCotentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsNegotiation(new RqFake()).with(
-                    "image/png", new RsText("a png")
+                new RsFork(
+                    new RqFake(),
+                    new FkTypes("image/png", new RsText("a png"))
                 )
             ).printBody(),
             Matchers.endsWith("png")

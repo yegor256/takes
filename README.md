@@ -682,10 +682,12 @@ of the request (a.k.a. [content negotation](http://en.wikipedia.org/wiki/Content
 public final class TkIndex implements Take {
   @Override
   public Response act() {
-    return new RsNegotiation(this.request)
-      .with("text/*", new RsText("it's a text"))
-      .with("application/json", new RsJSON("{\"a\":1}"))
-      .with("image/png", /* something else */);
+    return new RsFork(
+      this.request,
+      new FkTypes("text/*", new RsText("it's a text"))
+      new FkTypes("application/json", new RsJSON("{\"a\":1}"))
+      new FkTypes("image/png", /* something else */)
+    );
   }
 }
 ```
