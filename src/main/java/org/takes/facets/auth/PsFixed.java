@@ -21,77 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.auth;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
-import org.takes.Take;
-import org.takes.rs.RsText;
 
 /**
- * Text take.
+ * Fixed pass.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
-@EqualsAndHashCode(of = "input")
-public final class TkText implements Take {
+@EqualsAndHashCode(of = "user")
+public final class PsFixed implements Pass {
 
     /**
-     * HTML.
+     * User to return always.
      */
-    private final transient InputStream input;
+    private final transient Identity user;
 
     /**
-     * Ctor.
-     * @since 0.9
+     * Identity to return always.
+     * @param identity User user
      */
-    public TkText() {
-        this("");
-    }
-
-    /**
-     * Ctor.
-     * @param body Text
-     */
-    public TkText(final String body) {
-        this(body.getBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param body Body with HTML
-     */
-    public TkText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
-    }
-
-    /**
-     * Ctor.
-     * @param url URL with content
-     * @throws IOException If fails
-     */
-    public TkText(final URL url) throws IOException {
-        this(url.openStream());
-    }
-
-    /**
-     * Ctor.
-     * @param body Content
-     */
-    public TkText(final InputStream body) {
-        this.input = body;
+    public PsFixed(final Identity identity) {
+        this.user = identity;
     }
 
     @Override
-    public Response act() {
-        return new RsText(this.input);
+    public Collection<Identity> enter(final Request request) {
+        return Collections.singleton(this.user);
     }
+
+    @Override
+    public Response exit(final Response response,
+        final Identity identity) {
+        return response;
+    }
+
 }

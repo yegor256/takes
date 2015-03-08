@@ -24,58 +24,45 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Takes;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqHeaders;
+import org.takes.tk.TkText;
 
 /**
- * Login response.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link TsAuth}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
-@EqualsAndHashCode(of = { "origin", "idt" })
-public final class RsLogin implements Response {
+public final class TsAuthTest {
 
     /**
-     * Original response.
+     * TsAuth can login a user.
+     * @throws IOException If some problem inside
      */
-    private final transient Response origin;
-
-    /**
-     * Identity.
-     */
-    private final transient Identity idt;
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param idnt Identity just authenticated
-     */
-    public RsLogin(final Response res, final Identity idnt) {
-        this.origin = res;
-        this.idt = idnt;
+    @Test
+    public void logsUserIn() throws IOException {
+        final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
+        final Takes takes = Mockito.mock(Takes.class);
+        Mockito.doReturn(new TkText()).when(takes)
+            .route(Mockito.any(Request.class));
+        new TsAuth(takes, pass).route(new RqFake()).act();
+        final ArgumentCaptor<Request> captor =
+            ArgumentCaptor.forClass(Request.class);
+        Mockito.verify(takes).route(captor.capture());
+        MatcherAssert.assertThat(
+            new RqHeaders(captor.getValue()).header(
+                TsAuth.class.getSimpleName()
+            ),
+            Matchers.hasItem("urn%3Atest%3A1")
+        );
     }
 
-    /**
-     * Identity just logged in.
-     * @return Identity
-     */
-    public Identity identity() {
-        return this.idt;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

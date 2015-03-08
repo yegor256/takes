@@ -23,11 +23,10 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.rs.RsWithCookie;
+import org.takes.rs.RsWrap;
 
 /**
  * Logout response.
@@ -38,29 +37,23 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class RsLogout implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RsLogout extends RsWrap {
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsLogout(final Response res) {
-        this.origin = res;
+        this(res, PsCookie.class.getSimpleName());
+    }
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param cookie The cookie
+     */
+    public RsLogout(final Response res, final String cookie) {
+        super(new RsWithCookie(res, cookie, ""));
     }
 
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }
