@@ -28,6 +28,8 @@ import java.net.ServerSocket;
 import java.net.URI;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 import org.takes.Takes;
@@ -93,6 +95,7 @@ public final class FtRemote implements Front {
      */
     public void exec(final FtRemote.Script script) throws IOException {
         final AtomicBoolean exit = new AtomicBoolean();
+        final CountDownLatch latch = new CountDownLatch(1);
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
@@ -102,6 +105,7 @@ public final class FtRemote implements Front {
                             new Exit() {
                                 @Override
                                 public boolean ready() {
+                                    latch.countDown();
                                     return exit.get();
                                 }
                             }
@@ -113,6 +117,13 @@ public final class FtRemote implements Front {
             }
         );
         thread.start();
+        try {
+            // @checkstyle MagicNumber (1 line)
+            latch.await(10L, TimeUnit.SECONDS);
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(ex);
+        }
         script.exec(
             URI.create(
                 String.format("http://localhost:%d", this.port)
