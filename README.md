@@ -610,11 +610,11 @@ Response response = new RsXembly(
 This is how this `XeFoo` class would look like:
 
 ```java
-public final class XeFoo implements XeSource.Wrap {
+public final class XeFoo extends XeWrap {
   public XeFoo(final String stylesheet, final XeSource... sources) {
     super(
-      new XeChain(
-        new XeRoot("page"),
+      new XeAppend(
+        "page",
         new XeMillis(false),
         new XeStylesheet(stylesheet),
         new XeChain(sources),
@@ -700,11 +700,49 @@ Here is an example of login via [Facebook](https://developers.facebook.com/docs/
 new TsAuth(
   new TsFork(
     new FkRegex("/", new TkHTML("hello, check <a href='/acc'>account</a>")),
-    new FkRegex("/acc", new TsSecure(new TsAccount())),
-    new FkRegex("/facebook", new TkFacebook("key", "secret"))
+    new FkRegex("/acc", new TsSecure(new TsAccount()))
   ),
-  new PsCookie("some-secret-word")
+  new PsChain(
+    new PsCookie(
+      new CcSafe(new CcHex(new CcXOR(new CcCompact(), "secret-code")))
+    ),
+    new PsByFlag(
+      new PsByFlag.Pair(
+        PsFacebook.class.getSimpleName(),
+        new PsFacebook("facebook-app-id", "facebook-secret")
+      ),
+      new PsByFlag.Pair(
+        PsLogout.class.getSimpleName(),
+        new PsLogout()
+      )
+    )
+  )
 )
+```
+
+Then, you need to show a login link to the user, which he or she
+can click and get to the Facebook OAuth authentication page. Here is how
+you do this with XeResponse:
+
+```
+new RsXembly(
+  new XeStylesheet("/xsl/index.xsl"),
+  new XeAppend(
+    "page",
+    new XeFacebookLink(req, "facebook-app-id"),
+    // ... other xembly sources
+  )
+)
+```
+
+The link will be add to the XML page like this:
+
+```xml
+<page>
+  <links>
+    <link rel="takes:facebook" href="https://www.facebook.com/dialog/oauth..."/>
+  </links>
+</page>
 ```
 
 Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
@@ -713,15 +751,15 @@ This is how you get currently logged in user:
 
 ```java
 public final class TkAccount implements Take {
-  private final RqAuth request;
+  private final Identity identity;
   public TkAccount(final Request req) {
-    this.request = new RqAuth(req);
+    this.identity = new RqAuth(req).identity();
   }
   @Override
   public Response act() {
-    if (this.request.authenticated()) {
+    if (this.identity.equals(Identity.ANONYMOUS)) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
-      this.request.identity();
+      this.identity().urn();
     }
   }
 }
