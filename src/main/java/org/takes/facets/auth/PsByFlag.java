@@ -25,6 +25,8 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -95,15 +97,13 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Identity enter(final Request request) throws IOException {
-        final List<String> flg = new RqHref(request).href().param(this.flag);
-        final Identity identity;
-        if (flg.isEmpty()) {
-            identity = Identity.ANONYMOUS;
-        } else {
-            identity = this.passes.get(flg.get(0)).enter(request);
+    public Collection<Identity> enter(final Request req) throws IOException {
+        final List<String> flg = new RqHref(req).href().param(this.flag);
+        final Collection<Identity> users = new ArrayList<Identity>(1);
+        if (!flg.isEmpty()) {
+            users.addAll(this.passes.get(flg.get(0)).enter(req));
         }
-        return identity;
+        return users;
     }
 
     @Override

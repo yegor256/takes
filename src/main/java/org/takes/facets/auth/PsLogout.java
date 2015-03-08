@@ -23,6 +23,8 @@
  */
 package org.takes.facets.auth;
 
+import java.util.Collection;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -40,8 +42,8 @@ import org.takes.Response;
 public final class PsLogout implements Pass {
 
     @Override
-    public Identity enter(final Request request) {
-        return Identity.ANONYMOUS;
+    public Collection<Identity> enter(final Request request) {
+        return Collections.singleton(Identity.ANONYMOUS);
     }
 
     @Override

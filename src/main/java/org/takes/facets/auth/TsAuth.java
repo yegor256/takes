@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -82,27 +83,42 @@ public final class TsAuth implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        final Identity identity = this.pass.enter(request);
+        final Iterator<Identity> users = this.pass.enter(request).iterator();
         final Take take;
-        if (identity.equals(Identity.ANONYMOUS)) {
-            take = this.origin.route(request);
+        if (users.hasNext()) {
+            final Identity identity = users.next();
+            if (identity.equals(Identity.ANONYMOUS)) {
+                take = this.origin.route(request);
+            } else {
+                take = this.take(request, identity);
+            }
         } else {
-            take = new Take() {
-                @Override
-                public Response act() throws IOException {
-                    return TsAuth.this.pass.exit(
-                        TsAuth.this.origin.route(
-                            new RqWithHeader(
-                                request, TsAuth.this.header,
-                                new String(new CcPlain().encode(identity))
-                            )
-                        ).act(),
-                        identity
-                    );
-                }
-            };
+            take = this.origin.route(request);
         }
         return take;
+    }
+
+    /**
+     * Make take.
+     * @param req Request
+     * @param identity Identity
+     * @return Take
+     */
+    private Take take(final Request req, final Identity identity) {
+        return new Take() {
+            @Override
+            public Response act() throws IOException {
+                return TsAuth.this.pass.exit(
+                    TsAuth.this.origin.route(
+                        new RqWithHeader(
+                            req, TsAuth.this.header,
+                            new String(new CcPlain().encode(identity))
+                        )
+                    ).act(),
+                    identity
+                );
+            }
+        };
     }
 
 }

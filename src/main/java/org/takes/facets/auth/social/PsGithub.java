@@ -29,6 +29,8 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -75,13 +77,16 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Identity enter(final Request request) throws IOException {
+    public Collection<Identity> enter(final Request request)
+        throws IOException {
         final Href href = new RqHref(request).href();
         final List<String> code = href.param("code");
         if (code.isEmpty()) {
             throw new IllegalArgumentException("code is not provided");
         }
-        return PsGithub.fetch(this.token(href.toString(), code.get(0)));
+        return Collections.singleton(
+            PsGithub.fetch(this.token(href.toString(), code.get(0)))
+        );
     }
 
     @Override
