@@ -30,13 +30,12 @@ import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
+import org.takes.Href;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -52,6 +51,7 @@ import org.takes.rq.RqURI;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
@@ -100,10 +100,9 @@ public final class PsGithub implements Pass {
      * @throws IOException If fails
      */
     private static Identity fetch(final String token) throws IOException {
-        final String uri = String.format(
-            "https://api.github.com/user?access_token=%s",
-            URLEncoder.encode(token, Charset.defaultCharset().name())
-        );
+        final String uri = new Href("https://api.github.com/user")
+            .with("access_token", token)
+            .toString();
         return PsGithub.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -121,14 +120,13 @@ public final class PsGithub implements Pass {
      * @throws IOException If failed
      */
     private String token(final URI home, final String code) throws IOException {
-        final String uri = String.format(
-            // @checkstyle LineLength (1 line)
-            "https://github.com/login/oauth/access_token?client_id=%s&redirect_uri=%s&client_secret=%s&code=%s",
-            URLEncoder.encode(this.app, Charset.defaultCharset().name()),
-            URLEncoder.encode(home.toString(), Charset.defaultCharset().name()),
-            URLEncoder.encode(this.key, Charset.defaultCharset().name()),
-            URLEncoder.encode(code, Charset.defaultCharset().name())
-        );
+        // @checkstyle LineLength (1 line)
+        final String uri = new Href("https://github.com/login/oauth/access_token")
+            .with("client_id", this.app)
+            .with("redirect_uri", home.toString())
+            .with("client_secret", this.key)
+            .with("code", code)
+            .toString();
         return new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")

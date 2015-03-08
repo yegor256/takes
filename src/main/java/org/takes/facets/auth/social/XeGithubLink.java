@@ -24,9 +24,8 @@
 package org.takes.facets.auth.social;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
+import org.takes.Href;
 import org.takes.Request;
 import org.takes.facets.auth.PsByFlag;
 import org.takes.rq.RqURI;
@@ -70,41 +69,17 @@ public final class XeGithubLink extends XeWrap {
         super(
             new XeLink(
                 rel,
-                String.format(
-                    // @checkstyle LineLength (1 line)
-                    "https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s",
-                    URLEncoder.encode(
-                        app, Charset.defaultCharset().name()
-                ),
-                    URLEncoder.encode(
-                        XeGithubLink.uri(req, flag),
-                        Charset.defaultCharset().name()
-                )
-            )
+                new Href("https://github.com/login/oauth/authorize")
+                    .with("client_id", app)
+                    .with(
+                        "redirect_uri",
+                        new Href(new RqURI(req).uri().toString())
+                            .with(flag, PsGithub.class.getSimpleName())
+                            .toString()
+                    )
+                    .toString()
         )
         );
     }
 
-    /**
-     * Build URI.
-     * @param req Request
-     * @param flag Flag to use
-     * @return URI
-     * @throws IOException If fails
-     */
-    private static String uri(final Request req, final String flag)
-        throws IOException {
-        final StringBuilder uri = new StringBuilder(
-            new RqURI(req).uri().toString()
-        );
-        if (uri.toString().contains("?")) {
-            uri.append('&');
-        } else {
-            uri.append('?');
-        }
-        return uri.append(flag)
-            .append('=')
-            .append(PsGithub.class.getSimpleName())
-            .toString();
-    }
 }

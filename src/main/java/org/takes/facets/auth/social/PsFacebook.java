@@ -31,12 +31,11 @@ import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import org.takes.Href;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -52,6 +51,7 @@ import org.takes.rq.RqURI;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.5
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsFacebook implements Pass {
@@ -90,10 +90,10 @@ public final class PsFacebook implements Pass {
         props.put("name", user.getName());
         props.put(
             "picture",
-            String.format(
-                "https://graph.facebook.com/%s/picture",
-                user.getId()
-            )
+            new Href("https://graph.facebook.com/")
+                .path(user.getId())
+                .path("picture")
+                .toString()
         );
         return new Identity.Simple(
             String.format("urn:facebook:%s", user.getId()),
@@ -130,14 +130,13 @@ public final class PsFacebook implements Pass {
      * @throws IOException If failed
      */
     private String token(final URI home, final String code) throws IOException {
-        final String uri = String.format(
-            // @checkstyle LineLength (1 line)
-            "https://graph.facebook.com/oauth/access_token?client_id=%s&redirect_uri=%sclient_secret=%s&code=%s",
-            URLEncoder.encode(this.app, Charset.defaultCharset().name()),
-            URLEncoder.encode(home.toString(), Charset.defaultCharset().name()),
-            URLEncoder.encode(this.key, Charset.defaultCharset().name()),
-            URLEncoder.encode(code, Charset.defaultCharset().name())
-        );
+        // @checkstyle LineLength (1 line)
+        final String uri = new Href("https://graph.facebook.com/oauth/access_token")
+            .with("client_id", this.app)
+            .with("redirect_uri", home.toString())
+            .with("client_secret", this.key)
+            .with("code", code)
+            .toString();
         final String response = new JdkRequest(uri)
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
