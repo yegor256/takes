@@ -75,6 +75,26 @@ public final class MediaTypesTest {
     }
 
     /**
+     * MediaTypes can match two composite lists.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesTwoCompositeTypes() throws IOException {
+        MatcherAssert.assertThat(
+            new MediaTypes("text/xml,text/json").contains(
+                new MediaTypes("text/json")
+            ),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new MediaTypes("text/x-json").contains(
+                new MediaTypes("text/plain,text/x-json")
+            ),
+            Matchers.is(true)
+        );
+    }
+
+    /**
      * MediaTypes can parse invalid types.
      * @throws IOException If some problem inside
      */

@@ -67,6 +67,18 @@ public final class MediaTypeTest {
     }
 
     /**
+     * MediaType can match two types.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void comparesTwoTypes() throws IOException {
+        MatcherAssert.assertThat(
+            new MediaType("text/b").compareTo(new MediaType("text/a")),
+            Matchers.not(Matchers.equalTo(0))
+        );
+    }
+
+    /**
      * MediaType can parse invalid types.
      * @throws IOException If some problem inside
      */
