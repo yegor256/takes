@@ -63,8 +63,7 @@ public final class TkMeasured extends TkWrap {
                     final long start = System.currentTimeMillis();
                     final Response res = take.act();
                     return new RsWithHeader(
-                        res,
-                        header,
+                        res, header,
                         Long.toString(System.currentTimeMillis() - start)
                     );
                 }

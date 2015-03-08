@@ -27,9 +27,7 @@ import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rs.RsEmpty;
-import org.takes.rs.RsWithHeader;
-import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsRedirect;
 
 /**
  * Take that redirects.
@@ -68,10 +66,7 @@ public final class TkRedirect extends TkWrap {
             new Take() {
                 @Override
                 public Response act() {
-                    return new RsWithHeader(
-                        new RsWithStatus(new RsEmpty(), code),
-                        "Location", location
-                    );
+                    return new RsRedirect(location, code);
                 }
             }
         );

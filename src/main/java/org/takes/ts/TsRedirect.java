@@ -21,34 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.ts;
 
+import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.takes.Request;
 import org.takes.Take;
+import org.takes.Takes;
+import org.takes.tk.TkRedirect;
 
 /**
- * Take with fixed response.
+ * Takes that always redirects.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.6
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TkFixed extends TkWrap {
+public final class TsRedirect extends TsWrap {
 
     /**
      * Ctor.
-     * @param res Response
      */
-    public TkFixed(final Response res) {
+    public TsRedirect() {
+        this("/");
+    }
+
+    /**
+     * Ctor.
+     * @param location Location to redirect to
+     */
+    public TsRedirect(final String location) {
+        this(location, HttpURLConnection.HTTP_SEE_OTHER);
+    }
+
+    /**
+     * Ctor.
+     * @param location Location to redirect to
+     * @param code Redirection status code
+     */
+    public TsRedirect(final String location, final int code) {
         super(
-            new Take() {
+            new Takes() {
                 @Override
-                public Response act() {
-                    return res;
+                public Take route(final Request request) {
+                    return new TkRedirect(location, code);
                 }
             }
         );
