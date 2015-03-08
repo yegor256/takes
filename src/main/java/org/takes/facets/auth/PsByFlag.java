@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -58,11 +59,11 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
-     * @param entries Map entries
+     * @param pairs Map entries
      * @since 0.5.1
      */
-    public PsByFlag(final Map.Entry<String, Pass>... entries) {
-        this(PsByFlag.class.getSimpleName(), entries);
+    public PsByFlag(final PsByFlag.Pair... pairs) {
+        this(PsByFlag.class.getSimpleName(), pairs);
     }
 
     /**
@@ -76,11 +77,11 @@ public final class PsByFlag implements Pass {
     /**
      * Ctor.
      * @param flg Flag
-     * @param ents Map entries
+     * @param pairs Map entries
      * @since 0.5.1
      */
-    public PsByFlag(final String flg, final Map.Entry<String, Pass>... ents) {
-        this(flg, PsByFlag.asMap(ents));
+    public PsByFlag(final String flg, final PsByFlag.Pair... pairs) {
+        this(flg, PsByFlag.asMap(pairs));
     }
 
     /**
@@ -124,6 +125,25 @@ public final class PsByFlag implements Pass {
             map.put(ent.getKey(), ent.getValue());
         }
         return map;
+    }
+
+    /**
+     * Pair of values.
+     */
+    public static final class Pair
+        extends AbstractMap.SimpleEntry<String, Pass> {
+        /**
+         * Serialization marker.
+         */
+        private static final long serialVersionUID = 7362482770166663015L;
+        /**
+         * Ctor.
+         * @param key Key
+         * @param pass Pass
+         */
+        public Pair(final String key, final Pass pass) {
+            super(key, pass);
+        }
     }
 
 }
