@@ -76,9 +76,9 @@ public final class FtBasic implements Front {
         final ServerSocket server = new ServerSocket(this.port);
         server.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {
-            while (!exit.ready()) {
+            do {
                 this.loop(server);
-            }
+            } while (!exit.ready());
         } finally {
             server.close();
         }

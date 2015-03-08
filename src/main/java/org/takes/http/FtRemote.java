@@ -26,7 +26,7 @@ package org.takes.http;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URI;
-import java.util.Set;
+import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
@@ -49,7 +49,7 @@ public final class FtRemote implements Front {
     /**
      * Already assigned ports.
      */
-    private static final Set<Integer> PORTS =
+    private static final Collection<Integer> PORTS =
         new ConcurrentSkipListSet<Integer>();
 
     /**
@@ -135,9 +135,20 @@ public final class FtRemote implements Front {
      */
     private static int allocate() throws IOException {
         synchronized (FtRemote.PORTS) {
+            int attempts = 0;
             int port;
             do {
                 port = FtRemote.random();
+                ++attempts;
+                // @checkstyle MagicNumber (1 line)
+                if (attempts > 100) {
+                    throw new IllegalStateException(
+                        String.format(
+                            "failed to allocate TCP port after %d attempts",
+                            attempts
+                        )
+                    );
+                }
             } while (FtRemote.PORTS.contains(port));
             return port;
         }
