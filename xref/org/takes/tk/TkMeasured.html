@@ -71,16 +71,15 @@
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>                      <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">long</strong> start = System.currentTimeMillis();
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>                      <strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Response.html">Response</a> res = take.act();
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithHeader.html">RsWithHeader</a>(
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          res,
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>                          header,
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>                          Long.toString(System.currentTimeMillis() - start)
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>                      );
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>                  }
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>              }
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>          );
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>      }
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>  
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>  }
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          res, header,
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                          Long.toString(System.currentTimeMillis() - start)
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>                      );
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>                  }
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>              }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          );
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>      }
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
