@@ -21,27 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
+package org.takes.facets.fork;
 
-import java.util.regex.Matcher;
+import java.io.IOException;
 import org.takes.Request;
+import org.takes.Take;
 
 /**
- * Request with a matcher of URI.
+ * Target for a fork.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.ts.fork.FkRegex
+ * @since 0.4
  */
-public interface RqRegex extends Request {
+public interface Target<T extends Request> {
 
     /**
-     * Get matcher of query string.
-     * @return Matcher
+     * Route this request.
+     * @param req Request
+     * @return Take
+     * @throws IOException If fails
      */
-    Matcher matcher();
+    Take route(T req) throws IOException;
 
 }

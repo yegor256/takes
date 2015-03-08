@@ -31,9 +31,9 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.TsFork;
 import org.takes.ts.TsFailure;
-import org.takes.ts.fork.FkRegex;
-import org.takes.ts.fork.TsFork;
 
 /**
  * Test case for {@link FtBasic}.

@@ -21,36 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
+package org.takes.facets.fork;
 
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.Take;
-import org.takes.rq.RqFake;
-import org.takes.ts.TsEmpty;
+import java.util.regex.Matcher;
+import org.takes.Request;
 
 /**
- * Test case for {@link FkMethods}.
+ * Request with a matcher of URI.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.1
+ * @see org.takes.facets.fork.FkRegex
  */
-public final class FkMethodsTest {
+public interface RqRegex extends Request {
 
     /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
+     * Get matcher of query string.
+     * @return Matcher
      */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TsEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ),
-            Matchers.<Take>iterableWithSize(1)
-        );
-    }
+    Matcher matcher();
 
 }

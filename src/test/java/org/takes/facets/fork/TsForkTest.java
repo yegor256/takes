@@ -21,12 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes.facets.fork;
+
+import com.google.common.base.Joiner;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
 
 /**
- * Fork.
- *
+ * Test case for {@link TsFork}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-package org.takes.ts.fork;
+public final class TsForkTest {
+
+    /**
+     * TsFork can dispatch by regular expression.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void dispatchesByRegularExpression() throws IOException {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsFork(new FkRegex("/h[a-z]{2}", body)).route(
+                    new RqFake("GET", "/hey?yu", "")
+                ).act()
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+}

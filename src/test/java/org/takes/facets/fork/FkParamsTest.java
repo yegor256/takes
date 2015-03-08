@@ -21,29 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
+package org.takes.facets.fork;
 
 import java.io.IOException;
-import org.takes.Request;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 import org.takes.Take;
+import org.takes.rq.RqFake;
+import org.takes.ts.TsEmpty;
 
 /**
- * Fork.
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
- *
+ * Test case for {@link FkParams}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-public interface Fork {
+public final class FkParamsTest {
 
     /**
-     * Process this request or ignore it.
-     * @param req Request
-     * @return Non-empty list of takes if it was processed
-     * @throws IOException If fails
+     * FkParams can match by param regex.
+     * @throws IOException If some problem inside
      */
-    Iterable<Take> route(Request req) throws IOException;
+    @Test
+    public void matchesByRegularExpression() throws IOException {
+        MatcherAssert.assertThat(
+            new FkParams("a", "[0-9]+", new TsEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ),
+            Matchers.<Take>iterableWithSize(1)
+        );
+    }
 
 }

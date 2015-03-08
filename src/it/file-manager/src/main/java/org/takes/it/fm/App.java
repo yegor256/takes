@@ -28,14 +28,14 @@ import java.io.IOException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.RqRegex;
+import org.takes.facets.fork.Target;
+import org.takes.facets.fork.TsFork;
 import org.takes.http.Exit;
 import org.takes.http.FtCLI;
 import org.takes.tk.TkHTML;
 import org.takes.tk.TkRedirect;
-import org.takes.ts.fork.FkRegex;
-import org.takes.ts.fork.RqRegex;
-import org.takes.ts.fork.Target;
-import org.takes.ts.fork.TsFork;
 
 /**
  * App.

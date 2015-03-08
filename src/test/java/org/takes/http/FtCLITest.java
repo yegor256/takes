@@ -32,8 +32,8 @@ import java.net.ServerSocket;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.ts.fork.FkRegex;
-import org.takes.ts.fork.TsFork;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.TsFork;
 
 /**
  * Test case for {@link FtCLI}.

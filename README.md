@@ -38,7 +38,7 @@ Create this `App.java` file:
 ```java
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
-import org.takes.ts.fork.TsFork;
+import org.takes.facets.fork.TsFork;
 public final class App {
   public static void main(final String... args) throws Exception {
     new FtBasic(

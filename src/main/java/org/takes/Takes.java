@@ -36,7 +36,7 @@ import java.io.IOException;
  *
  * <p>There are a few classes that implement this interface and you
  * can create your own. But the best way is to start with
- * {@link org.takes.ts.fork.TsFork}, for example:
+ * {@link org.takes.facets.fork.TsFork}, for example:
  *
  * <pre> new FtBasic(
  *   new TsFork(new FkRegex("/", "hello, world!")), 8080
@@ -44,10 +44,11 @@ import java.io.IOException;
  * }</pre>
  *
  * <p>This code will start an HTTP server on port 8080 and will forward
- * all HTTP requests to the instance of class {@link org.takes.ts.fork.TsFork}.
+ * all HTTP requests to the instance of class
+ * {@link org.takes.facets.fork.TsFork}.
  * That object will try to find the best suitable "fork" amongst all
  * encapsulated objects. There is only one in the example above &mdash;
- * an instance of {@link org.takes.ts.fork.FkRegex}.
+ * an instance of {@link org.takes.facets.fork.FkRegex}.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

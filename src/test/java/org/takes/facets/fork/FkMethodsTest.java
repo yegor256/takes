@@ -21,45 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
+package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Take;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import org.takes.ts.TsEmpty;
 
 /**
- * Test case for {@link TsFork}.
+ * Test case for {@link FkMethods}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-public final class TsForkTest {
+public final class FkMethodsTest {
 
     /**
-     * TsFork can dispatch by regular expression.
+     * FkMethods can match by method.
      * @throws IOException If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws IOException {
-        final String body = "hello, world!";
+    public void matchesByRegularExpression() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
-                new TsFork(new FkRegex("/h[a-z]{2}", body)).route(
-                    new RqFake("GET", "/hey?yu", "")
-                ).act()
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            new FkMethods("PUT,GET", new TsEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ),
+            Matchers.<Take>iterableWithSize(1)
         );
     }
 

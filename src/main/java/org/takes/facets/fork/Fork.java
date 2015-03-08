@@ -21,12 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes.facets.fork;
+
+import java.io.IOException;
+import org.takes.Request;
+import org.takes.Take;
 
 /**
- * Fork, tests.
+ * Fork.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-package org.takes.ts.fork;
+public interface Fork {
+
+    /**
+     * Process this request or ignore it.
+     * @param req Request
+     * @return Non-empty list of takes if it was processed
+     * @throws IOException If fails
+     */
+    Iterable<Take> route(Request req) throws IOException;
+
+}

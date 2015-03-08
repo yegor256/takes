@@ -21,36 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.Take;
-import org.takes.rq.RqFake;
-import org.takes.ts.TsEmpty;
 
 /**
- * Test case for {@link FkParams}.
+ * Fork, tests.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
  */
-public final class FkParamsTest {
-
-    /**
-     * FkParams can match by param regex.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkParams("a", "[0-9]+", new TsEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ),
-            Matchers.<Take>iterableWithSize(1)
-        );
-    }
-
-}
+package org.takes.facets.fork;

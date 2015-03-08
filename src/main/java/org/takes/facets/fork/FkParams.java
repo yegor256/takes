@@ -21,23 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts.fork;
+package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.rq.RqMethod;
-import org.takes.tk.TkText;
+import org.takes.rq.RqQuery;
 import org.takes.ts.TsFixed;
 
 /**
- * Fork by method matching.
+ * Fork by query param.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -45,13 +44,18 @@ import org.takes.ts.TsFixed;
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(of = { "methods", "target" })
-public final class FkMethods implements Fork {
+@EqualsAndHashCode(of = { "name", "pattern", "target" })
+public final class FkParams implements Fork {
 
     /**
-     * Methods to match.
+     * Param name.
      */
-    private final transient Collection<String> methods;
+    private final transient String name;
+
+    /**
+     * Pattern for param value.
+     */
+    private final transient Pattern pattern;
 
     /**
      * Target.
@@ -60,34 +64,47 @@ public final class FkMethods implements Fork {
 
     /**
      * Ctor.
-     * @param mtd Method
-     * @param text Text
-     */
-    public FkMethods(final String mtd, final String text) {
-        this(mtd, new TsFixed(new TkText(text)));
-    }
-
-    /**
-     * Ctor.
-     * @param mtd Method
+     * @param param Name of param
+     * @param ptn Pattern
      * @param take Take
      */
-    public FkMethods(final String mtd, final Take take) {
-        this(mtd, new TsFixed(take));
+    public FkParams(final String param, final String ptn, final Take take) {
+        this(param, Pattern.compile(ptn), take);
     }
 
     /**
      * Ctor.
-     * @param mtd Method
-     * @param tks Takes
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param take Take
      */
-    public FkMethods(final String mtd, final Takes tks) {
+    public FkParams(final String param, final Pattern ptn, final Take take) {
+        this(param, ptn, new TsFixed(take));
+    }
+
+    /**
+     * Ctor.
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param takes Takes
+     */
+    public FkParams(final String param, final String ptn, final Takes takes) {
+        this(param, Pattern.compile(ptn), takes);
+    }
+
+    /**
+     * Ctor.
+     * @param param Name of param
+     * @param ptn Pattern
+     * @param takes Takes
+     */
+    public FkParams(final String param, final Pattern ptn, final Takes takes) {
         this(
-            mtd,
+            param, ptn,
             new Target<Request>() {
                 @Override
                 public Take route(final Request req) throws IOException {
-                    return tks.route(req);
+                    return takes.route(req);
                 }
             }
         );
@@ -95,28 +112,34 @@ public final class FkMethods implements Fork {
 
     /**
      * Ctor.
-     * @param mtd Method
+     * @param param Name of param
+     * @param ptn Pattern
      * @param tgt Takes
      */
-    public FkMethods(final String mtd, final Target<Request> tgt) {
-        this(Arrays.asList(mtd.split(",")), tgt);
+    public FkParams(final String param, final String ptn,
+        final Target<Request> tgt) {
+        this(param, Pattern.compile(ptn), tgt);
     }
 
     /**
      * Ctor.
-     * @param mtds Methods
+     * @param param Name of param
+     * @param ptn Pattern
      * @param tgt Takes
      */
-    public FkMethods(final Collection<String> mtds, final Target<Request> tgt) {
-        this.methods = Collections.unmodifiableCollection(mtds);
+    public FkParams(final String param, final Pattern ptn,
+        final Target<Request> tgt) {
+        this.name = param;
+        this.pattern = ptn;
         this.target = tgt;
     }
 
     @Override
     public Iterable<Take> route(final Request req) throws IOException {
-        final String mtd = new RqMethod(req).method();
+        final List<String> params = new RqQuery(req).param(this.name);
         final Collection<Take> list = new ArrayList<Take>(1);
-        if (this.methods.contains(mtd)) {
+        if (!params.isEmpty()
+            && this.pattern.matcher(params.get(0)).matches()) {
             list.add(this.target.route(req));
         }
         return list;
