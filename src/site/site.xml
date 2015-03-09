@@ -33,14 +33,14 @@
     </skin>
     <bannerLeft>
         <name>takes.org</name>
-        <src>clapper.jpg</src>
+        <src>logo.png</src>
         <href>http://www.takes.org/</href>
         <width>96</width>
         <height>96</height>
     </bannerLeft>
     <body>
         <head>
-            <link href="http://www.takes.org/clapper.jpg" rel="shortcut icon"/>
+            <link href="http://www.takes.org/logo.png" rel="shortcut icon"/>
         </head>
         <breadcrumbs>
             <item name="takes.com" href="http://www.takes.org"/>

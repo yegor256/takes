@@ -59,7 +59,7 @@ public final class XeLink extends XeWrap {
         super(
             new XeSource() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
+                public Iterable<Directive> toXembly() {
                     return new Directives().addIf("links").add("link")
                         .attr("rel", rel)
                         .attr("href", href)
