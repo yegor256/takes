@@ -55,21 +55,22 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">new</strong> RsPrint(
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>                  <strong class="jxr_keyword">new</strong> RsWithHeader(
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                      <strong class="jxr_keyword">new</strong> RsWithHeader(<strong class="jxr_keyword">new</strong> RsEmpty(), <span class="jxr_string">"host"</span>, <span class="jxr_string">"b.example.com"</span>),
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>                      <span class="jxr_string">"Host"</span>, <span class="jxr_string">"a.example.com"</span>, <strong class="jxr_keyword">true</strong>
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>                      <span class="jxr_string">"Host"</span>, <span class="jxr_string">"a.example.com"</span>
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>                  )
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>              ).print(),
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>              Matchers.equalTo(
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>                  Joiner.on(<span class="jxr_string">"\r\n"</span>).join(
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>                      <span class="jxr_string">"HTTP/1.1 200 OK"</span>,
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>                      <span class="jxr_string">"Host: a.example.com"</span>,
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>                      <span class="jxr_string">""</span>,
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>                      <span class="jxr_string">""</span>
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>                  )
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>              )
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>          );
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>      }
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>  
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>  }
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>                      <span class="jxr_string">"host: b.example.com"</span>,
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>                      <span class="jxr_string">"Host: a.example.com"</span>,
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>                      <span class="jxr_string">""</span>,
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>                      <span class="jxr_string">""</span>
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  )
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>              )
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          );
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>      }
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>  
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
