@@ -44,12 +44,39 @@ import org.takes.Response;
 /**
  * Response that converts XML into HTML using attached XSL stylesheet.
  *
+ * <p>The encapsulated response must produce an XML document with
+ * an attached XSL stylesheet, for example:
+ *
+ * <pre>&lt;?xml version="1.0"?&gt;
+ * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
+ * &lt;page/&gt;
+ * </pre>
+ *
+ * <p>{@link org.takes.rs.RsXSLT} will try to find that {@code /xsl/home.xsl}
+ * resource in classpath. If it's not found a runtime exception will thrown.
+ *
+ * <p>The best way to use this decorator is in combination with
+ * {@link org.takes.rs.xe.RsXembly}, for example:
+ *
+ * <pre> new RsXSLT(
+ *   new RsXembly(
+ *     new XsStylesheet("/xsl/home.xsl"),
+ *     new XsAppend(
+ *       "page",
+ *       new XsDate(),
+ *       new XsLocalhost(),
+ *       new XsSLA()
+ *     )
+ *   )
+ * )</pre>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @see org.takes.rs.xe.RsXembly
  */
 @EqualsAndHashCode(of = { "origin", "resolver" })
 public final class RsXSLT implements Response {

@@ -137,6 +137,7 @@ public final class RsWithStatus implements Response {
     /**
      * Make all reasons.
      * @return Map of status codes and reasons
+     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     private static Map<Integer, String> make() {
         final ConcurrentMap<Integer, String> map =
@@ -149,14 +150,24 @@ public final class RsWithStatus implements Response {
         map.put(HttpURLConnection.HTTP_MOVED_TEMP, "Moved Temporarily");
         map.put(HttpURLConnection.HTTP_SEE_OTHER, "See Other");
         map.put(HttpURLConnection.HTTP_NOT_MODIFIED, "Not Modified");
+        map.put(HttpURLConnection.HTTP_USE_PROXY, "Use Proxy");
         map.put(HttpURLConnection.HTTP_BAD_REQUEST, "Bad Request");
         map.put(HttpURLConnection.HTTP_UNAUTHORIZED, "Unauthorized");
         map.put(HttpURLConnection.HTTP_PAYMENT_REQUIRED, "Payment Required");
         map.put(HttpURLConnection.HTTP_FORBIDDEN, "Forbidden");
         map.put(HttpURLConnection.HTTP_NOT_FOUND, "Not Found");
         map.put(HttpURLConnection.HTTP_BAD_METHOD, "Bad Method");
-        map.put(HttpURLConnection.HTTP_BAD_GATEWAY, "Bad Gateway");
+        map.put(HttpURLConnection.HTTP_NOT_ACCEPTABLE, "Not Acceptable");
+        map.put(HttpURLConnection.HTTP_CLIENT_TIMEOUT, "Client Timeout");
+        map.put(HttpURLConnection.HTTP_GONE, "Gone");
+        map.put(HttpURLConnection.HTTP_LENGTH_REQUIRED, "Length Required");
+        map.put(HttpURLConnection.HTTP_PRECON_FAILED, "Precon Failed");
+        map.put(HttpURLConnection.HTTP_ENTITY_TOO_LARGE, "Entity Too Large");
+        map.put(HttpURLConnection.HTTP_REQ_TOO_LONG, "Request Too Long");
+        map.put(HttpURLConnection.HTTP_UNSUPPORTED_TYPE, "Unsupported Type");
         map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, "Internal Error");
+        map.put(HttpURLConnection.HTTP_BAD_GATEWAY, "Bad Gateway");
+        map.put(HttpURLConnection.HTTP_NOT_IMPLEMENTED, "Not Implemented");
         return map;
     }
 
