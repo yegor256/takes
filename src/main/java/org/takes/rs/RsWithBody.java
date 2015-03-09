@@ -39,18 +39,8 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "content" })
-public final class RsWithBody implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
-
-    /**
-     * Content.
-     */
-    private final transient InputStream content;
+@EqualsAndHashCode(callSuper = true)
+public final class RsWithBody extends RsWrap {
 
     /**
      * Ctor.
@@ -100,18 +90,18 @@ public final class RsWithBody implements Response {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        this.origin = res;
-        this.content = body;
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() {
-        return this.content;
+        super(
+            new Response() {
+                @Override
+                public List<String> head() throws IOException {
+                    return res.head();
+                }
+                @Override
+                public InputStream body() {
+                    return body;
+                }
+            }
+        );
     }
 
 }
