@@ -25,7 +25,6 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
@@ -78,7 +77,6 @@ public final class FtCLITest {
         thread.start();
         TimeUnit.SECONDS.sleep(1L);
         new JdkRequest(String.format("http://localhost:%d", port))
-            .through(VerboseWire.class)
             .fetch()
             .as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)

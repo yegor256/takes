@@ -65,8 +65,18 @@ public final class BkParallel implements Back {
      * @param threads Threads total
      */
     public BkParallel(final Back back, final int threads) {
+        this(back, Executors.newFixedThreadPool(threads));
+    }
+
+    /**
+     * Ctor.
+     * @param back Original back
+     * @param svc Executor service
+     * @since 0.9
+     */
+    public BkParallel(final Back back, final ExecutorService svc) {
         this.origin = back;
-        this.service = Executors.newFixedThreadPool(threads);
+        this.service = svc;
     }
 
     @Override

@@ -26,14 +26,13 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.NotFoundException;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.rs.RsWrap;
 
 /**
  * Response based on forks.
@@ -44,18 +43,8 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.6
  */
-@EqualsAndHashCode(of = { "forks", "request" })
-public final class RsFork implements Response {
-
-    /**
-     * Forks.
-     */
-    private final transient Collection<Fork.AtResponse> forks;
-
-    /**
-     * Request.
-     */
-    private final transient Request request;
+@EqualsAndHashCode(callSuper = true)
+public final class RsFork extends RsWrap {
 
     /**
      * Ctor.
@@ -71,30 +60,32 @@ public final class RsFork implements Response {
      * @param req Request
      * @param list List of forks
      */
-    public RsFork(final Request req,
-        final Collection<Fork.AtResponse> list) {
-        this.request = req;
-        this.forks = Collections.unmodifiableCollection(list);
-    }
-
-    @Override
-    public List<String> head() throws IOException {
-        return this.pick().head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.pick().body();
+    public RsFork(final Request req, final Iterable<Fork.AtResponse> list) {
+        super(
+            new Response() {
+                @Override
+                public List<String> head() throws IOException {
+                    return RsFork.pick(req, list).head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RsFork.pick(req, list).body();
+                }
+            }
+        );
     }
 
     /**
      * Pick the right one.
+     * @param req Request
+     * @param forks List of forks
      * @return Response
      * @throws IOException If fails
      */
-    private Response pick() throws IOException {
-        for (final Fork<Response> fork : this.forks) {
-            final Iterator<Response> rsps = fork.route(this.request).iterator();
+    private static Response pick(final Request req,
+        final Iterable<Fork.AtResponse> forks) throws IOException {
+        for (final Fork<Response> fork : forks) {
+            final Iterator<Response> rsps = fork.route(req).iterator();
             if (rsps.hasNext()) {
                 return rsps.next();
             }
