@@ -25,7 +25,6 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -54,7 +53,6 @@ public final class FtBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
-                        .through(VerboseWire.class)
                         .fetch()
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK)
@@ -75,7 +73,6 @@ public final class FtBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
-                        .through(VerboseWire.class)
                         .fetch()
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)

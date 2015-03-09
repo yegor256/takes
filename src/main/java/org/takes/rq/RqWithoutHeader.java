@@ -21,35 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import java.net.HttpURLConnection;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import org.takes.Request;
 
 /**
- * Response decorator, with content type.
+ * Request without a header (even if it was absent).
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.8
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RsWithType extends RsWrap {
+public final class RqWithoutHeader extends RqWrap {
 
     /**
      * Ctor.
-     * @param res Original response
-     * @param type Content type
+     * @param req Original request
+     * @param name Header name
      */
-    public RsWithType(final Response res, final String type) {
+    public RqWithoutHeader(final Request req, final String name) {
         super(
-            new RsWithHeader(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "Content-Type", type
-        )
+            new Request() {
+                @Override
+                public List<String> head() throws IOException {
+                    final List<String> head = new LinkedList<String>();
+                    final String prefix = String.format(
+                        "%s:", name.toLowerCase(Locale.ENGLISH)
+                    );
+                    for (final String header : req.head()) {
+                        if (!header.toLowerCase(Locale.ENGLISH)
+                            .startsWith(prefix)) {
+                            head.add(header);
+                        }
+                    }
+                    return head;
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return req.body();
+                }
+            }
         );
     }
 

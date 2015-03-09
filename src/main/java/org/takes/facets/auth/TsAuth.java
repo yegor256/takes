@@ -32,6 +32,7 @@ import org.takes.Take;
 import org.takes.Takes;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithoutHeader;
 
 /**
  * Authenticating takes.
@@ -86,12 +87,7 @@ public final class TsAuth implements Takes {
         final Iterator<Identity> users = this.pass.enter(request).iterator();
         final Take take;
         if (users.hasNext()) {
-            final Identity identity = users.next();
-            if (identity.equals(Identity.ANONYMOUS)) {
-                take = this.origin.route(request);
-            } else {
-                take = this.take(request, identity);
-            }
+            take = this.take(request, users.next());
         } else {
             take = this.origin.route(request);
         }
@@ -108,13 +104,16 @@ public final class TsAuth implements Takes {
         return new Take() {
             @Override
             public Response act() throws IOException {
+                Request wrap = new RqWithoutHeader(req, TsAuth.this.header);
+                if (!identity.equals(Identity.ANONYMOUS)) {
+                    wrap = new RqWithHeader(
+                        wrap,
+                        TsAuth.this.header,
+                        new String(new CcPlain().encode(identity))
+                    );
+                }
                 return TsAuth.this.pass.exit(
-                    TsAuth.this.origin.route(
-                        new RqWithHeader(
-                            req, TsAuth.this.header,
-                            new String(new CcPlain().encode(identity))
-                        )
-                    ).act(),
+                    TsAuth.this.origin.route(wrap).act(),
                     identity
                 );
             }

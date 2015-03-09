@@ -41,6 +41,7 @@ import org.takes.tk.TkText;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TsAuthTest {
 

@@ -30,31 +30,29 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsWithHeader}.
+ * Test case for {@link RsWithoutHeader}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
-public final class RsWithHeaderTest {
+public final class RsWithoutHeaderTest {
 
     /**
-     * RsWithHeader can add headers.
+     * RsWithoutHeader can remove a header.
      * @throws IOException If some problem inside
      */
     @Test
     public void addsHeadersToResponse() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithHeader(
+                new RsWithoutHeader(
                     new RsWithHeader(new RsEmpty(), "host", "b.example.com"),
-                    "Host", "a.example.com"
+                    "Host"
                 )
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "host: b.example.com",
-                    "Host: a.example.com",
                     "",
                     ""
                 )

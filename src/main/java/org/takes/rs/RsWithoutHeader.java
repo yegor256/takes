@@ -25,84 +25,44 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
- * Response decorator, with an additional header.
- *
- * <p>Remember, if a header is already present in the response, this
- * decorator will add another one, with the same name. It doesn't check
- * for duplicates. If you want to avoid duplicate headers, use this
- * decorator in combination with {@link org.takes.rs.RsWithoutHeader},
- * for example:
- *
- * <pre> new RsWithHeader(
- *   new RsWithoutHeader(res, "Host"),
- *   "Host", "www.example.com"
- * )</pre>
- *
- * <p>In this example, {@link org.takes.rs.RsWithoutHeader} will remove the
- * {@code Host} header first and {@link org.takes.rs.RsWithHeader} will
- * add a new one.
+ * Response decorator, without a header.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RsWithHeader extends RsWrap {
-
-    /**
-     * Ctor.
-     * @param hdr Header
-     * @since 0.8
-     */
-    public RsWithHeader(final String hdr) {
-        this(new RsEmpty(), hdr);
-    }
-
-    /**
-     * Ctor.
-     * @param name Header name
-     * @param value Header value
-     * @since 0.8
-     */
-    public RsWithHeader(final String name, final String value) {
-        this(new RsEmpty(), name, value);
-    }
+public final class RsWithoutHeader extends RsWrap {
 
     /**
      * Ctor.
      * @param res Original response
      * @param name Header name
-     * @param value Header value
      */
-    public RsWithHeader(final Response res, final String name,
-        final String value) {
-        this(res, String.format("%s: %s", name, value));
-    }
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param header Header to add
-     */
-    public RsWithHeader(final Response res, final String header) {
+    public RsWithoutHeader(final Response res, final String name) {
         super(
             new Response() {
                 @Override
                 public List<String> head() throws IOException {
-                    final Collection<String> list = res.head();
-                    final List<String> head =
-                        new ArrayList<String>(list.size());
-                    head.addAll(list);
-                    head.add(header);
+                    final List<String> head = new LinkedList<String>();
+                    final String prefix = String.format(
+                        "%s:", name.toLowerCase(Locale.ENGLISH)
+                    );
+                    for (final String hdr : res.head()) {
+                        if (!hdr.toLowerCase(Locale.ENGLISH)
+                            .startsWith(prefix)) {
+                            head.add(hdr);
+                        }
+                    }
                     return head;
                 }
                 @Override
