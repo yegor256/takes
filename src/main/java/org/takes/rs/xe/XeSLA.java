@@ -31,6 +31,23 @@ import org.xembly.Directives;
 /**
  * Xembly source to create SLA attribute with server load average.
  *
+ * <p>Add this Xembly source to your page like this:
+ *
+ * <pre> new RsXembly(
+ *   new XsStylesheet("/xsl/home.xsl"),
+ *   new XsAppend(
+ *     "page",
+ *     new XsSLA()
+ *   )
+ * )</pre>
+ *
+ * <p>And expect this attribute in the XML:
+ *
+ * <pre>&lt;?xml version="1.0"?&gt;
+ * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
+ * &lt;page sla="1.908"/&gt;
+ * </pre>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
