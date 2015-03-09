@@ -21,50 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs.xe;
+package org.takes.facets.auth.social;
 
-import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import com.jcabi.matchers.XhtmlMatchers;
+import java.io.IOException;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rs.xe.RsXembly;
+import org.takes.rs.xe.XeAppend;
 
 /**
- * Xembly source to create an Atom LINK element.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link XeGoogleLink}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.9
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeLink extends XeWrap {
+public final class XeGoogleLinkTest {
 
     /**
-     * Ctor.
-     * @param related Related
-     * @param link HREF
+     * XeGoogleLink can create a correct link.
+     * @throws IOException If some problem inside
      */
-    public XeLink(final String related, final String link) {
-        this(related, link, "text/xml");
-    }
-
-    /**
-     * Ctor.
-     * @param rel Related
-     * @param href HREF
-     * @param type Content type
-     */
-    public XeLink(final String rel, final String href, final String type) {
-        super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives().addIf("links").add("link")
-                        .attr("rel", rel)
-                        .attr("href", href)
-                        .attr("type", type);
-                }
-            }
+    @Test
+    public void generatesCorrectLink() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeGoogleLink(new RqFake(), "abcdef")
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root/links/link[@rel='takes:google']"
+            )
         );
     }
 
