@@ -31,10 +31,13 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Takes;
+import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsPrint;
 import org.takes.tk.TkText;
+import org.takes.ts.TsFixed;
 
 /**
  * Test case for {@link TsAuth}.
@@ -68,6 +71,33 @@ public final class TsAuthTest {
     }
 
     /**
+     * TsAuth can login a user via cookie.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void logsInUserViaCookie() throws IOException {
+        final Pass pass = new PsChain(
+            new PsCookie(new CcPlain()),
+            new PsLogout()
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsAuth(new TsFixed(new TkText()), pass).route(
+                    new RqWithHeader(
+                        new RqFake(),
+                        String.format(
+                            "Cookie:  %s=%s",
+                            PsCookie.class.getSimpleName(),
+                            "urn%3Atest%3A0"
+                        )
+                    )
+                ).act()
+            ).print(),
+            Matchers.containsString("Set-Cookie: PsCookie=urn%3Atest%3A0")
+        );
+    }
+
+    /**
      * TsAuth can logout a user.
      * @throws IOException If some problem inside
      */
@@ -92,6 +122,33 @@ public final class TsAuthTest {
                 TsAuth.class.getSimpleName()
             ),
             Matchers.emptyIterable()
+        );
+    }
+
+    /**
+     * TsAuth can logout a user when a login cookie is present.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void logsUserOutWithCookiePresent() throws IOException {
+        final Pass pass = new PsChain(
+            new PsLogout(),
+            new PsCookie(new CcPlain())
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TsAuth(new TsFixed(new TkText()), pass).route(
+                    new RqWithHeader(
+                        new RqFake(),
+                        String.format(
+                            "Cookie: %s=%s",
+                            PsCookie.class.getSimpleName(),
+                            "urn%3Atest%3A5"
+                        )
+                    )
+                ).act()
+            ).print(),
+            Matchers.containsString("Set-Cookie: PsCookie=")
         );
     }
 
