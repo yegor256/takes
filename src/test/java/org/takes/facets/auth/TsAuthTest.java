@@ -33,6 +33,7 @@ import org.takes.Request;
 import org.takes.Takes;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqWithHeader;
 import org.takes.tk.TkText;
 
 /**
@@ -62,6 +63,34 @@ public final class TsAuthTest {
                 TsAuth.class.getSimpleName()
             ),
             Matchers.hasItem("urn%3Atest%3A1")
+        );
+    }
+
+    /**
+     * TsAuth can logout a user.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void logsUserOut() throws IOException {
+        final Pass pass = new PsLogout();
+        final Takes takes = Mockito.mock(Takes.class);
+        Mockito.doReturn(new TkText()).when(takes)
+            .route(Mockito.any(Request.class));
+        new TsAuth(takes, pass).route(
+            new RqWithHeader(
+                new RqFake(),
+                TsAuth.class.getSimpleName(),
+                "urn%3Atest%3A2"
+            )
+        ).act();
+        final ArgumentCaptor<Request> captor =
+            ArgumentCaptor.forClass(Request.class);
+        Mockito.verify(takes).route(captor.capture());
+        MatcherAssert.assertThat(
+            new RqHeaders(captor.getValue()).header(
+                TsAuth.class.getSimpleName()
+            ),
+            Matchers.emptyIterable()
         );
     }
 
