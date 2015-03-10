@@ -145,30 +145,41 @@
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>     <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> <em class="jxr_javadoccomment">     * Make all reasons.</em>
 <a class="jxr_linenumber" name="L139" href="#L139">139</a> <em class="jxr_javadoccomment">     * @return Map of status codes and reasons</em>
-<a class="jxr_linenumber" name="L140" href="#L140">140</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> Map&lt;Integer, String&gt; make() {
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>         <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;Integer, String&gt; map =
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>             <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;Integer, String&gt;(0);
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>         map.put(HttpURLConnection.HTTP_OK, <span class="jxr_string">"OK"</span>);
-<a class="jxr_linenumber" name="L145" href="#L145">145</a>         map.put(HttpURLConnection.HTTP_NO_CONTENT, <span class="jxr_string">"No Content"</span>);
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>         map.put(HttpURLConnection.HTTP_CREATED, <span class="jxr_string">"Created"</span>);
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>         map.put(HttpURLConnection.HTTP_ACCEPTED, <span class="jxr_string">"Accepted"</span>);
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>         map.put(HttpURLConnection.HTTP_MOVED_PERM, <span class="jxr_string">"Moved Permanently"</span>);
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>         map.put(HttpURLConnection.HTTP_MOVED_TEMP, <span class="jxr_string">"Moved Temporarily"</span>);
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>         map.put(HttpURLConnection.HTTP_SEE_OTHER, <span class="jxr_string">"See Other"</span>);
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>         map.put(HttpURLConnection.HTTP_NOT_MODIFIED, <span class="jxr_string">"Not Modified"</span>);
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>         map.put(HttpURLConnection.HTTP_BAD_REQUEST, <span class="jxr_string">"Bad Request"</span>);
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>         map.put(HttpURLConnection.HTTP_UNAUTHORIZED, <span class="jxr_string">"Unauthorized"</span>);
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         map.put(HttpURLConnection.HTTP_PAYMENT_REQUIRED, <span class="jxr_string">"Payment Required"</span>);
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>         map.put(HttpURLConnection.HTTP_FORBIDDEN, <span class="jxr_string">"Forbidden"</span>);
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>         map.put(HttpURLConnection.HTTP_NOT_FOUND, <span class="jxr_string">"Not Found"</span>);
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>         map.put(HttpURLConnection.HTTP_BAD_METHOD, <span class="jxr_string">"Bad Method"</span>);
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>         map.put(HttpURLConnection.HTTP_BAD_GATEWAY, <span class="jxr_string">"Bad Gateway"</span>);
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>         map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, <span class="jxr_string">"Internal Error"</span>);
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>         <strong class="jxr_keyword">return</strong> map;
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>     }
-<a class="jxr_linenumber" name="L162" href="#L162">162</a> 
-<a class="jxr_linenumber" name="L163" href="#L163">163</a> }
+<a class="jxr_linenumber" name="L140" href="#L140">140</a> <em class="jxr_javadoccomment">     * @checkstyle ExecutableStatementCountCheck (100 lines)</em>
+<a class="jxr_linenumber" name="L141" href="#L141">141</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> Map&lt;Integer, String&gt; make() {
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>         <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;Integer, String&gt; map =
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>             <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;Integer, String&gt;(0);
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>         map.put(HttpURLConnection.HTTP_OK, <span class="jxr_string">"OK"</span>);
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>         map.put(HttpURLConnection.HTTP_NO_CONTENT, <span class="jxr_string">"No Content"</span>);
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>         map.put(HttpURLConnection.HTTP_CREATED, <span class="jxr_string">"Created"</span>);
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>         map.put(HttpURLConnection.HTTP_ACCEPTED, <span class="jxr_string">"Accepted"</span>);
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>         map.put(HttpURLConnection.HTTP_MOVED_PERM, <span class="jxr_string">"Moved Permanently"</span>);
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>         map.put(HttpURLConnection.HTTP_MOVED_TEMP, <span class="jxr_string">"Moved Temporarily"</span>);
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>         map.put(HttpURLConnection.HTTP_SEE_OTHER, <span class="jxr_string">"See Other"</span>);
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>         map.put(HttpURLConnection.HTTP_NOT_MODIFIED, <span class="jxr_string">"Not Modified"</span>);
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>         map.put(HttpURLConnection.HTTP_USE_PROXY, <span class="jxr_string">"Use Proxy"</span>);
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         map.put(HttpURLConnection.HTTP_BAD_REQUEST, <span class="jxr_string">"Bad Request"</span>);
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         map.put(HttpURLConnection.HTTP_UNAUTHORIZED, <span class="jxr_string">"Unauthorized"</span>);
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>         map.put(HttpURLConnection.HTTP_PAYMENT_REQUIRED, <span class="jxr_string">"Payment Required"</span>);
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>         map.put(HttpURLConnection.HTTP_FORBIDDEN, <span class="jxr_string">"Forbidden"</span>);
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>         map.put(HttpURLConnection.HTTP_NOT_FOUND, <span class="jxr_string">"Not Found"</span>);
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>         map.put(HttpURLConnection.HTTP_BAD_METHOD, <span class="jxr_string">"Bad Method"</span>);
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>         map.put(HttpURLConnection.HTTP_NOT_ACCEPTABLE, <span class="jxr_string">"Not Acceptable"</span>);
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>         map.put(HttpURLConnection.HTTP_CLIENT_TIMEOUT, <span class="jxr_string">"Client Timeout"</span>);
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>         map.put(HttpURLConnection.HTTP_GONE, <span class="jxr_string">"Gone"</span>);
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>         map.put(HttpURLConnection.HTTP_LENGTH_REQUIRED, <span class="jxr_string">"Length Required"</span>);
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>         map.put(HttpURLConnection.HTTP_PRECON_FAILED, <span class="jxr_string">"Precon Failed"</span>);
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>         map.put(HttpURLConnection.HTTP_ENTITY_TOO_LARGE, <span class="jxr_string">"Entity Too Large"</span>);
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>         map.put(HttpURLConnection.HTTP_REQ_TOO_LONG, <span class="jxr_string">"Request Too Long"</span>);
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>         map.put(HttpURLConnection.HTTP_UNSUPPORTED_TYPE, <span class="jxr_string">"Unsupported Type"</span>);
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>         map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, <span class="jxr_string">"Internal Error"</span>);
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>         map.put(HttpURLConnection.HTTP_BAD_GATEWAY, <span class="jxr_string">"Bad Gateway"</span>);
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>         map.put(HttpURLConnection.HTTP_NOT_IMPLEMENTED, <span class="jxr_string">"Not Implemented"</span>);
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>         <strong class="jxr_keyword">return</strong> map;
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>     }
+<a class="jxr_linenumber" name="L173" href="#L173">173</a> 
+<a class="jxr_linenumber" name="L174" href="#L174">174</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
