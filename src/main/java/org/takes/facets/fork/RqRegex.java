@@ -23,8 +23,13 @@
  */
 package org.takes.facets.fork;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.takes.Request;
+import org.takes.rq.RqFake;
 
 /**
  * Request with a matcher of URI.
@@ -43,5 +48,63 @@ public interface RqRegex extends Request {
      * @return Matcher
      */
     Matcher matcher();
+
+    /**
+     * Fake implementation, for unit tests mostly.
+     *
+     * <p>Use this class in unit tests, when you need to create a fake
+     * version of a request with a matcher inside. For example:
+     *
+     * <pre> new TsIndex().route(
+     *   new RqRegex.Take("/(.*)", "/hello")
+     * );</pre>
+     *
+     * @since 0.9
+     */
+    final class Fake implements RqRegex {
+        /**
+         * Original request.
+         */
+        private final transient Request request;
+        /**
+         * Matcher.
+         */
+        private final transient Matcher mtr;
+        /**
+         * Ctor.
+         * @param ptn Pattern
+         * @param query Query
+         */
+        public Fake(final String ptn, final String query) {
+            this(new RqFake(), ptn, query);
+        }
+        /**
+         * Ctor.
+         * @param req Request
+         * @param ptn Pattern
+         * @param query Query
+         */
+        public Fake(final Request req, final String ptn, final String query) {
+            this.request = req;
+            this.mtr = Pattern.compile(ptn).matcher(query);
+            if (!this.mtr.matches()) {
+                throw new IllegalArgumentException(
+                    String.format("%s doesn't match %s", query, ptn)
+                );
+            }
+        }
+        @Override
+        public Matcher matcher() {
+            return this.mtr;
+        }
+        @Override
+        public List<String> head() throws IOException {
+            return this.request.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.request.body();
+        }
+    }
 
 }
