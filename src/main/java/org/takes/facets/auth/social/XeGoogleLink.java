@@ -58,7 +58,7 @@ public final class XeGoogleLink extends XeWrap {
     /**
      * Ctor.
      * @param req Request
-     * @param app Github application ID
+     * @param app Google application ID
      * @param rel Related
      * @param flag Flag to add
      * @throws IOException If fails

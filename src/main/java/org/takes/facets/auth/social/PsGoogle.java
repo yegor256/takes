@@ -65,8 +65,8 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
-     * @param gapp Github app
-     * @param gkey Github key
+     * @param gapp Google app
+     * @param gkey Google key
      */
     public PsGoogle(final String gapp, final String gkey) {
         this.app = gapp;
@@ -93,9 +93,9 @@ public final class PsGoogle implements Pass {
     }
 
     /**
-     * Get user name from Github, with the token provided.
-     * @param token Github access token
-     * @return The user found in Github
+     * Get user name from Google, with the token provided.
+     * @param token Google access token
+     * @return The user found in Google
      * @throws IOException If fails
      */
     private static Identity fetch(final String token) throws IOException {
@@ -112,9 +112,9 @@ public final class PsGoogle implements Pass {
     }
 
     /**
-     * Retrieve Github access token.
+     * Retrieve Google access token.
      * @param home Home of this page
-     * @param code Github "authorization code"
+     * @param code Google "authorization code"
      * @return The token
      * @throws IOException If failed
      */
@@ -139,7 +139,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Make identity from JSON object.
-     * @param json JSON received from Github
+     * @param json JSON received from Google
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
