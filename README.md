@@ -424,8 +424,8 @@ Here is how you can parse an instance of `Request`:
 
 ```java
 Href href = new RqHref(request).href();
-URI uri = req.uri();
-List<String> values = req.param("key");
+URI uri = href.uri();
+List<String> values = href.param("key");
 ```
 
 For a more complex parsing try to use Apache Http Client or something
