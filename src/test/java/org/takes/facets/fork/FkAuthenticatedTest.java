@@ -28,26 +28,42 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Take;
+import org.takes.facets.auth.Identity;
+import org.takes.facets.auth.TsAuth;
+import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
+import org.takes.rq.RqWithHeader;
+import org.takes.ts.TsEmpty;
 
 /**
- * Test case for {@link FkAnonymous}.
+ * Test case for {@link FkAuthenticated}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
  */
-public final class FkAnonymousTest {
+public final class FkAuthenticatedTest {
 
     /**
-     * FkAnonymous can match by user status.
+     * FkAuthenticated can match by user status.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesIfAnonymousUser() throws IOException {
+    public void matchesIfAuthenticatedUser() throws IOException {
         MatcherAssert.assertThat(
-            new FkAnonymous(new TkEmpty()).route(
+            new FkAuthenticated(new TsEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
+            ),
+            Matchers.<Take>iterableWithSize(0)
+        );
+        MatcherAssert.assertThat(
+            new FkAuthenticated(new TsEmpty()).route(
+                new RqWithHeader(
+                    new RqFake("PUT", "/hello"),
+                    TsAuth.class.getSimpleName(),
+                    new String(
+                        new CcPlain().encode(new Identity.Simple("urn:test:1"))
+                    )
+                )
             ),
             Matchers.<Take>iterableWithSize(1)
         );

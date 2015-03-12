@@ -35,7 +35,7 @@ import org.takes.facets.auth.RqAuth;
 import org.takes.ts.TsFixed;
 
 /**
- * Fork if no user is logged in now.
+ * Fork if user is logged in now.
  *
  * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
  * for example:
@@ -59,7 +59,7 @@ import org.takes.ts.TsFixed;
  * @see org.takes.facets.fork.Target
  */
 @EqualsAndHashCode(of = "target")
-public final class FkAnonymous implements Fork.AtTake {
+public final class FkAuthenticated implements Fork.AtTake {
 
     /**
      * Target.
@@ -70,7 +70,7 @@ public final class FkAnonymous implements Fork.AtTake {
      * Ctor.
      * @param take Take
      */
-    public FkAnonymous(final Take take) {
+    public FkAuthenticated(final Take take) {
         this(new TsFixed(take));
     }
 
@@ -78,7 +78,7 @@ public final class FkAnonymous implements Fork.AtTake {
      * Ctor.
      * @param takes Takes
      */
-    public FkAnonymous(final Takes takes) {
+    public FkAuthenticated(final Takes takes) {
         this(
             new Target<Request>() {
                 @Override
@@ -93,7 +93,7 @@ public final class FkAnonymous implements Fork.AtTake {
      * Ctor.
      * @param tgt Target
      */
-    public FkAnonymous(final Target<Request> tgt) {
+    public FkAuthenticated(final Target<Request> tgt) {
         this.target = tgt;
     }
 
@@ -101,7 +101,7 @@ public final class FkAnonymous implements Fork.AtTake {
     public Iterable<Take> route(final Request req) throws IOException {
         final Collection<Take> takes = new ArrayList<Take>(1);
         final Identity identity = new RqAuth(req).identity();
-        if (identity.equals(Identity.ANONYMOUS)) {
+        if (!identity.equals(Identity.ANONYMOUS)) {
             takes.add(this.target.route(req));
         }
         return takes;
