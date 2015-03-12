@@ -423,8 +423,8 @@ new TsFork(
 Here is how you can parse an instance of `Request`:
 
 ```java
-RqQuery req = new RqQuery(request);
-URI uri = req.query();
+Href href = new RqHref(request).href();
+URI uri = req.uri();
 List<String> values = req.param("key");
 ```
 
@@ -444,7 +444,6 @@ public final class TkSavePhoto implements Take {
   @Override
   public Response act() {
     final String name = this.request.param("name");
-    final File file = this.request.file("image");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
 }
