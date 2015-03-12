@@ -43,7 +43,8 @@ import org.takes.Request;
  * Request decorator that decodes FORM data from
  * {@code application/x-www-form-urlencoded} format (RFC 1738).
  *
- * <p>For {@code multipart/form-data} format use {@link RqMultipart}</p>
+ * <p>For {@code multipart/form-data} format use
+ * {@link org.takes.rq.RqMultipart}.
  *
  * <p>The class is immutable and thread-safe.
  *
