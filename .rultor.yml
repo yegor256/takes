@@ -38,3 +38,5 @@ release:
     git commit -am "${tag}"
     mvn clean deploy -Ptakes -Psonatype --errors --settings ../settings.xml
     mvn clean site-deploy -Ptakes -Psite --errors --settings ../settings.xml
+  commanders:
+  - yegor256
