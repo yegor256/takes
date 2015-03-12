@@ -489,7 +489,7 @@ public final class TkPostMessage implements Take {
   }
   @Override
   public Response act() {
-    final String body = new RqPost(this.request).text();
+    final String body = new RqPring(this.request).printBody();
     if (body.isEmpty()) {
       throw new RsFlash(
         new RsForward(),
