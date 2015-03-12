@@ -29,7 +29,7 @@ import org.takes.Request;
 import org.takes.Response;
 
 /**
- * Inlet to enter a user.
+ * Pass to enter a user and let him exit.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
