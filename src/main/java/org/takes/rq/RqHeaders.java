@@ -88,18 +88,18 @@ public final class RqHeaders extends RqWrap {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private Map<String, List<String>> map() throws IOException {
         final List<String> head = this.head();
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(head.size());
         if (head.size() < 1) {
             throw new IOException(
                 "a valid request must contain at least one line in the head"
             );
         }
+        final ConcurrentMap<String, List<String>> map =
+            new ConcurrentHashMap<String, List<String>>(head.size());
         for (final String line : head.subList(1, head.size())) {
             final String[] parts = line.split(":", 2);
             if (parts.length < 2) {
                 throw new IOException(
-                    String.format("invalid HTTP header: %s", line)
+                    String.format("invalid HTTP header: \"%s\"", line)
                 );
             }
             final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);

@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -97,17 +98,19 @@ public final class RqPrint extends RqWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
+        final List<String> hdr = new RqHeaders(this).header("Content-Length");
+        int more = Integer.MAX_VALUE;
+        if (!hdr.isEmpty()) {
+            more = Integer.parseInt(hdr.get(0));
+        }
         final InputStream input = this.body();
-        try {
-            while (true) {
-                final int data = input.read();
-                if (data < 0) {
-                    break;
-                }
-                output.write(data);
+        while (more > 0) {
+            final int data = input.read();
+            if (data < 0) {
+                break;
             }
-        } finally {
-            input.close();
+            output.write(data);
+            --more;
         }
     }
 

@@ -23,12 +23,9 @@
  */
 package org.takes.rq;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -62,20 +59,27 @@ public final class RqLive implements Request {
      * @param input Input stream
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public RqLive(final InputStream input) throws IOException {
-        final BufferedReader reader = new BufferedReader(
-            new InputStreamReader(
-                new BufferedInputStream(input),
-                Charset.defaultCharset().name()
-            )
-        );
         this.hde = new LinkedList<String>();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
-            final String line = reader.readLine();
-            if (line == null || line.isEmpty()) {
+            final int data = input.read();
+            if (data < 0) {
                 break;
             }
-            this.hde.add(line);
+            if (data == '\r') {
+                if (input.read() != '\n') {
+                    throw new IOException("");
+                }
+                if (baos.size() == 0) {
+                    break;
+                }
+                this.hde.add(new String(baos.toByteArray()));
+                baos.reset();
+            } else {
+                baos.write(data);
+            }
         }
         this.content = input;
     }

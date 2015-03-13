@@ -26,7 +26,6 @@ package org.takes.rq;
 import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
-import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -74,8 +73,6 @@ public final class RqMultipartTest {
             ).header("Content-disposition"),
             Matchers.hasItem("form-data; name=\"address\"")
         );
-        System.out.println(
-            IOUtils.toString(multi.part("address").get(0).body()));
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqHeaders(

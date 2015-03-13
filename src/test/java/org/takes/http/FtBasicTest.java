@@ -28,10 +28,16 @@ import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TsFork;
+import org.takes.rq.RqPrint;
+import org.takes.tk.TkText;
 import org.takes.ts.TsFailure;
 
 /**
@@ -39,6 +45,7 @@ import org.takes.ts.TsFailure;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtBasicTest {
 
@@ -77,6 +84,37 @@ public final class FtBasicTest {
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
                         .assertBody(Matchers.containsString("Lebowski"));
+                }
+            }
+        );
+    }
+
+    /**
+     * FtBasic can properly parse incoming HTTP request.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void parsesIncomingHttpRequest() throws Exception {
+        final Takes takes = new Takes() {
+            @Override
+            public Take route(final Request request) throws IOException {
+                MatcherAssert.assertThat(
+                    new RqPrint(request).printBody(),
+                    Matchers.containsString("Jeff")
+                );
+                return new TkText("works!");
+            }
+        };
+        new FtRemote(takes).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .method("POST")
+                        .body().set("Jeff, how are you?").back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK);
                 }
             }
         );

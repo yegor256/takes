@@ -155,8 +155,6 @@ public final class RqMultipart extends RqWrap {
         baos.write(this.head().get(0).getBytes());
         baos.write("\r\n".getBytes());
         baos.write(Arrays.copyOfRange(body, start, stop));
-        System.out.println("[" + new String(baos.toByteArray()) + "]");
-        System.out.println("R:"+new RqPrint(new RqLive(new ByteArrayInputStream(baos.toByteArray()))).printBody());
         return new RqLive(new ByteArrayInputStream(baos.toByteArray()));
     }
 
@@ -166,6 +164,7 @@ public final class RqMultipart extends RqWrap {
      * @return Map of them
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static ConcurrentMap<String, List<Request>> asMap(
         final Collection<Request> reqs) throws IOException {
         final ConcurrentMap<String, List<Request>> map =
@@ -201,7 +200,7 @@ public final class RqMultipart extends RqWrap {
         final int start) throws IOException {
         for (int idx = start; idx < outer.length - inner.length; ++idx) {
             boolean found = true;
-            for(int sub = 0; sub < inner.length; ++sub) {
+            for (int sub = 0; sub < inner.length; ++sub) {
                 if (outer[idx + sub] != inner[sub]) {
                     found = false;
                     break;

@@ -28,6 +28,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
 
 /**
  * Test case for {@link RqLive}.
@@ -43,14 +44,17 @@ public final class RqLiveTest {
      */
     @Test
     public void buildsHttpRequest() throws IOException {
+        final Request req = new RqLive(
+            new ByteArrayInputStream(
+                "GET / HTTP/1.1\r\nHost:e\r\n\r\nhello".getBytes()
+            )
+        );
         MatcherAssert.assertThat(
-            new RqPrint(
-                new RqLive(
-                    new ByteArrayInputStream(
-                        "GET / HTTP/1.1\r\n\r\nhello".getBytes()
-                    )
-                )
-            ).printBody(),
+            new RqHeaders(req).header("host"),
+            Matchers.hasItem("e")
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
             Matchers.equalTo("hello")
         );
     }
