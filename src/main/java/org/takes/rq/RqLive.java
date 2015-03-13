@@ -21,10 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.http;
+package org.takes.rq;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -39,7 +45,7 @@ import org.takes.Request;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "hde", "content" })
-final class RqLive implements Request {
+public final class RqLive implements Request {
 
     /**
      * Head.
@@ -53,12 +59,25 @@ final class RqLive implements Request {
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param input Input stream
+     * @throws IOException If fails
      */
-    RqLive(final List<String> head, final InputStream body) {
-        this.hde = Collections.unmodifiableList(head);
-        this.content = body;
+    public RqLive(final InputStream input) throws IOException {
+        final BufferedReader reader = new BufferedReader(
+            new InputStreamReader(
+                new BufferedInputStream(input),
+                Charset.defaultCharset().name()
+            )
+        );
+        this.hde = new LinkedList<String>();
+        while (true) {
+            final String line = reader.readLine();
+            if (line == null || line.isEmpty()) {
+                break;
+            }
+            this.hde.add(line);
+        }
+        this.content = input;
     }
 
     @Override

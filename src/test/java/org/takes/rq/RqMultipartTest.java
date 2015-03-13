@@ -26,9 +26,9 @@ package org.takes.rq;
 import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
+import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 
@@ -38,20 +38,15 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
 public final class RqMultipartTest {
 
     /**
      * RqMultipart can parse body.
      * @throws IOException If some problem inside
-     * @todo #27:DEV/30 RqMultipart is not parsing anything yet,
-     *  but it has to. Let's implement the class and enable this
-     *  test back. Also, pay attention to the encoding. It is possible
-     *  to see Base64 as a value of "Content-Transfer-Encoding" header
-     *  and in this case we have to decode the content of the part.
      */
     @Test
-    @Ignore
     public void parsesHttpBody() throws IOException {
         final Request req = new RqFake(
             Arrays.asList(
@@ -65,7 +60,7 @@ public final class RqMultipartTest {
                 "",
                 "440 N Wolfe Rd, Sunnyvale, CA 94085",
                 "--AaB03x",
-                "Content-Disposition: form-data; name=\"data.bin\"",
+                "Content-Disposition: form-data; name=\"data\"; file=\"a.bin\"",
                 "Content-Transfer-Encoding: utf-8",
                 "",
                 "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
@@ -79,10 +74,12 @@ public final class RqMultipartTest {
             ).header("Content-disposition"),
             Matchers.hasItem("form-data; name=\"address\"")
         );
+        System.out.println(
+            IOUtils.toString(multi.part("address").get(0).body()));
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqHeaders(
-                    multi.part("data.bin").get(0)
+                    multi.part("data").get(0)
                 )
             ).printBody(),
             Matchers.endsWith("the end")

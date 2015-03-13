@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -51,8 +50,9 @@ import org.takes.Request;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
+ * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, of = "map")
 public final class RqForm extends RqWrap {
 
     /**
@@ -69,18 +69,7 @@ public final class RqForm extends RqWrap {
     public RqForm(final Request req) throws IOException {
         super(req);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final InputStream input = this.body();
-        try {
-            while (true) {
-                final int data = input.read();
-                if (data < 0) {
-                    break;
-                }
-                baos.write(data);
-            }
-        } finally {
-            input.close();
-        }
+        new RqPrint(req).printBody(baos);
         final String body = new String(baos.toByteArray());
         this.map = new ConcurrentHashMap<String, List<String>>(0);
         for (final String pair : body.split("&")) {

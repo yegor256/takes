@@ -90,6 +90,11 @@ public final class RqHeaders extends RqWrap {
         final List<String> head = this.head();
         final ConcurrentMap<String, List<String>> map =
             new ConcurrentHashMap<String, List<String>>(head.size());
+        if (head.size() < 1) {
+            throw new IOException(
+                "a valid request must contain at least one line in the head"
+            );
+        }
         for (final String line : head.subList(1, head.size())) {
             final String[] parts = line.split(":", 2);
             if (parts.length < 2) {

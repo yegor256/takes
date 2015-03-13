@@ -23,24 +23,19 @@
  */
 package org.takes.http;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.nio.charset.Charset;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Takes;
+import org.takes.rq.RqLive;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -74,22 +69,8 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
-        final BufferedReader reader = new BufferedReader(
-            new InputStreamReader(
-                new BufferedInputStream(input),
-                Charset.defaultCharset().name()
-            )
-        );
-        final List<String> head = new LinkedList<String>();
-        while (true) {
-            final String line = reader.readLine();
-            if (line == null || line.isEmpty()) {
-                break;
-            }
-            head.add(line);
-        }
         try {
-            this.print(new RqLive(head, input), socket.getOutputStream());
+            this.print(new RqLive(input), socket.getOutputStream());
         } finally {
             input.close();
         }
