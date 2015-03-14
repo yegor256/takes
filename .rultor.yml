@@ -23,6 +23,12 @@ merge:
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
   commanders:
+  - carlosmiranda
+  - darkled
+  - ggajos
+  - krzyk
+  - longtimeago
+  - pinaf
   - yegor256
 deploy:
   script: |
