@@ -176,7 +176,7 @@ public final class RqMultipart extends RqWrap {
             if (!matcher.matches()) {
                 throw new IOException(
                     String.format(
-                        "name not found in Content-Disposition header: %s",
+                        "\"name\" not found in Content-Disposition header: %s",
                         header
                     )
                 );
