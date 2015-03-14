@@ -85,6 +85,15 @@ final class Options {
     }
 
     /**
+     * Are we in hit-refresh mode?
+     * @return TRUE if this mode is ON
+     * @since 0.9
+     */
+    public boolean hitRefresh() {
+        return this.map.containsKey("hit-refresh");
+    }
+
+    /**
      * Get the lifetime in milliseconds.
      * @return Port number
      */

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Takes;
+import org.takes.ts.TsWithHeaders;
 
 /**
  * Front with a command line interface.
@@ -73,9 +74,13 @@ public final class FtCLI implements Front {
     @Override
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
+        Takes tks = this.takes;
+        if (this.options.hitRefresh()) {
+            tks = new TsWithHeaders(tks, "X-Takes-HitRefresh: yes");
+        }
         final Front front = new FtBasic(
             new BkParallel(
-                new BkSafe(new BkBasic(this.takes)),
+                new BkSafe(new BkBasic(tks)),
                 this.options.threads()
             ),
             this.options.port()
