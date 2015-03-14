@@ -24,7 +24,9 @@
 package org.takes.facets.fork;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -185,6 +187,7 @@ public final class FkHitRefresh implements Fork.AtTake {
         this.target = tgt;
         this.last = File.createTempFile("takes", ".txt");
         this.last.deleteOnExit();
+        this.touch();
     }
 
     @Override
@@ -195,6 +198,7 @@ public final class FkHitRefresh implements Fork.AtTake {
         if (!header.isEmpty()) {
             if (this.expired()) {
                 this.exec.run();
+                this.touch();
             }
             takes.add(this.target.route(req));
         }
@@ -218,6 +222,19 @@ public final class FkHitRefresh implements Fork.AtTake {
             }
         }
         return expired;
+    }
+
+    /**
+     * Touch the file.
+     * @throws IOException If fails
+     */
+    private void touch() throws IOException {
+        final OutputStream out = new FileOutputStream(this.last);
+        try {
+            out.write('+');
+        } finally {
+            out.close();
+        }
     }
 
 }
