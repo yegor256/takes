@@ -26,8 +26,10 @@ package org.takes.http;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Take;
 import org.takes.Takes;
-import org.takes.ts.TsWithHeaders;
+import org.takes.rq.RqWithHeader;
 
 /**
  * Front with a command line interface.
@@ -74,9 +76,20 @@ public final class FtCLI implements Front {
     @Override
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
-        Takes tks = this.takes;
+        final Takes tks;
         if (this.options.hitRefresh()) {
-            tks = new TsWithHeaders(tks, "X-Takes-HitRefresh: yes");
+            tks = new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    return FtCLI.this.takes.route(
+                        new RqWithHeader(
+                            request, "X-Takes-HitRefresh: yes"
+                        )
+                    );
+                }
+            };
+        } else {
+            tks = this.takes;
         }
         final Front front = new FtBasic(
             new BkParallel(
