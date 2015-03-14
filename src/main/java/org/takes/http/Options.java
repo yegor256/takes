@@ -23,6 +23,7 @@
  */
 package org.takes.http;
 
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
@@ -50,9 +51,18 @@ final class Options {
     /**
      * Ctor.
      * @param args Arguments
+     * @since 0.9
+     */
+    Options(final String... args) {
+        this(Arrays.asList(args));
+    }
+
+    /**
+     * Ctor.
+     * @param args Arguments
      */
     Options(final Iterable<String> args) {
-        final Pattern ptn = Pattern.compile("--([a-z-]+)=(.+)");
+        final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);
             if (!matcher.matches()) {
@@ -60,7 +70,12 @@ final class Options {
                     String.format("can't parse this argument: '%s'", arg)
                 );
             }
-            this.map.put(matcher.group(1), matcher.group(2));
+            final String value = matcher.group(2);
+            if (value == null) {
+                this.map.put(matcher.group(1), "");
+            } else {
+                this.map.put(matcher.group(1), value.substring(1));
+            }
         }
     }
 
