@@ -96,23 +96,28 @@
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      @SuppressWarnings(<span class="jxr_string">"PMD.AvoidInstantiatingObjectsInLoops"</span>)
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, List&lt;String&gt;&gt; map() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; head = <strong class="jxr_keyword">this</strong>.head();
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;String, List&lt;String&gt;&gt; map =
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>              <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, List&lt;String&gt;&gt;(head.size());
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String line : head.subList(1, head.size())) {
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>              <strong class="jxr_keyword">final</strong> String[] parts = line.split(<span class="jxr_string">":"</span>, 2);
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>              <strong class="jxr_keyword">if</strong> (parts.length &lt; 2) {
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException(
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>                      String.format(<span class="jxr_string">"invalid HTTP header: %s"</span>, line)
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>                  );
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>              }
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">final</strong> String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>             map.putIfAbsent(key, <strong class="jxr_keyword">new</strong> LinkedList&lt;String&gt;());
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>             map.get(key).add(parts[1].trim());
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         }
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">return</strong> map;
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>     }
-<a class="jxr_linenumber" name="L106" href="#L106">106</a> 
-<a class="jxr_linenumber" name="L107" href="#L107">107</a> }
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">if</strong> (head.size() &lt; 1) {
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException(
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>                  <span class="jxr_string">"a valid request must contain at least one line in the head"</span>
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>              );
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>          }
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>          <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;String, List&lt;String&gt;&gt; map =
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>              <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, List&lt;String&gt;&gt;(head.size());
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String line : head.subList(1, head.size())) {
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>              <strong class="jxr_keyword">final</strong> String[] parts = line.split(<span class="jxr_string">":"</span>, 2);
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">if</strong> (parts.length &lt; 2) {
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException(
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>                     String.format(<span class="jxr_string">"invalid HTTP header: \&quot;%s\&quot;"</span>, line)
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>                 );
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>             }
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">final</strong> String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>             map.putIfAbsent(key, <strong class="jxr_keyword">new</strong> LinkedList&lt;String&gt;());
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>             map.get(key).add(parts[1].trim());
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>         }
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">return</strong> map;
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>     }
+<a class="jxr_linenumber" name="L111" href="#L111">111</a> 
+<a class="jxr_linenumber" name="L112" href="#L112">112</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
