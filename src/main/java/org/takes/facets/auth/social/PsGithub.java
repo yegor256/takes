@@ -29,8 +29,8 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -77,7 +77,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request request)
+    public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
         final List<String> code = href.param("code");
@@ -86,7 +86,7 @@ public final class PsGithub implements Pass {
         }
         return Collections.singleton(
             PsGithub.fetch(this.token(href.toString(), code.get(0)))
-        );
+        ).iterator();
     }
 
     @Override

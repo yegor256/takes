@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -160,7 +161,7 @@ public final class FkRegex implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
+    public Iterator<Take> route(final Request req) throws IOException {
         final Matcher matcher = this.pattern.matcher(
             new RqHref(req).href().path()
         );
@@ -185,7 +186,7 @@ public final class FkRegex implements Fork.AtTake {
                 )
             );
         }
-        return list;
+        return list.iterator();
     }
 
 }

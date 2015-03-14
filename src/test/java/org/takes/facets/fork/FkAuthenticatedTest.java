@@ -27,7 +27,6 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.TsAuth;
 import org.takes.facets.auth.codecs.CcPlain;
@@ -52,8 +51,8 @@ public final class FkAuthenticatedTest {
         MatcherAssert.assertThat(
             new FkAuthenticated(new TsEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ),
-            Matchers.<Take>iterableWithSize(0)
+            ).hasNext(),
+            Matchers.is(false)
         );
         MatcherAssert.assertThat(
             new FkAuthenticated(new TsEmpty()).route(
@@ -64,8 +63,8 @@ public final class FkAuthenticatedTest {
                         new CcPlain().encode(new Identity.Simple("urn:test:1"))
                     )
                 )
-            ),
-            Matchers.<Take>iterableWithSize(1)
+            ).hasNext(),
+            Matchers.is(true)
         );
     }
 

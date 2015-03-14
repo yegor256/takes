@@ -27,7 +27,6 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
@@ -50,20 +49,20 @@ public final class FkTypesTest {
         MatcherAssert.assertThat(
             new FkTypes("text/xml", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "*/* ")
-            ),
-            Matchers.<Response>iterableWithSize(1)
+            ).hasNext(),
+            Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkTypes("application/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "image/*")
-            ),
-            Matchers.<Response>iterableWithSize(0)
+            ).hasNext(),
+            Matchers.is(false)
         );
         MatcherAssert.assertThat(
             new FkTypes("*/*", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "text/html")
-            ),
-            Matchers.<Response>iterableWithSize(1)
+            ).hasNext(),
+            Matchers.is(true)
         );
     }
 
@@ -76,8 +75,8 @@ public final class FkTypesTest {
         MatcherAssert.assertThat(
             new FkTypes("text/xml,text/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), "Accept ", "text/json")
-            ),
-            Matchers.<Response>iterableWithSize(1)
+            ).hasNext(),
+            Matchers.is(true)
         );
     }
 

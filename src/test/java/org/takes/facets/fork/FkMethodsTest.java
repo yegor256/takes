@@ -27,7 +27,6 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.ts.TsEmpty;
 
@@ -48,8 +47,8 @@ public final class FkMethodsTest {
         MatcherAssert.assertThat(
             new FkMethods("PUT,GET", new TsEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ),
-            Matchers.<Take>iterableWithSize(1)
+            ).hasNext(),
+            Matchers.is(true)
         );
     }
 

@@ -28,8 +28,8 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
@@ -74,7 +74,7 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request request)
+    public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
         final List<String> code = href.param("code");
@@ -83,7 +83,7 @@ public final class PsGoogle implements Pass {
         }
         return Collections.singleton(
             PsGoogle.fetch(this.token(href.toString(), code.get(0)))
-        );
+        ).iterator();
     }
 
     @Override

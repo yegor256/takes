@@ -26,6 +26,7 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -66,12 +67,12 @@ public final class FkTypes implements Fork.AtResponse {
     }
 
     @Override
-    public Iterable<Response> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final Collection<Response> list = new ArrayList<Response>(1);
         if (FkTypes.accepted(req).contains(this.types)) {
             list.add(this.origin);
         }
-        return list;
+        return list.iterator();
     }
 
     /**

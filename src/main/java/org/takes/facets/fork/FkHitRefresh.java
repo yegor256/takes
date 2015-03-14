@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -191,7 +192,7 @@ public final class FkHitRefresh implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
+    public Iterator<Take> route(final Request req) throws IOException {
         final List<String> header =
             new RqHeaders(req).header("X-Takes-HitRefresh");
         final Collection<Take> takes = new ArrayList<Take>(1);
@@ -202,7 +203,7 @@ public final class FkHitRefresh implements Fork.AtTake {
             }
             takes.add(this.target.route(req));
         }
-        return takes;
+        return takes.iterator();
     }
 
     /**

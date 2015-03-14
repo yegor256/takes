@@ -30,8 +30,8 @@ import com.restfb.exception.FacebookException;
 import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -77,7 +77,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request request)
+    public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
         final List<String> code = href.param("code");
@@ -102,7 +102,7 @@ public final class PsFacebook implements Pass {
                 String.format("urn:facebook:%s", user.getId()),
                 props
             )
-        );
+        ).iterator();
     }
 
     @Override

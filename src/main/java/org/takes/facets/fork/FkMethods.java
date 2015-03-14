@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
@@ -122,13 +123,13 @@ public final class FkMethods implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
+    public Iterator<Take> route(final Request req) throws IOException {
         final String mtd = new RqMethod(req).method();
         final Collection<Take> list = new ArrayList<Take>(1);
         if (this.methods.contains(mtd)) {
             list.add(this.target.route(req));
         }
-        return list;
+        return list.iterator();
     }
 
 }

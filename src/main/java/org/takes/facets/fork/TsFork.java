@@ -95,7 +95,7 @@ public final class TsFork implements Takes {
     @Override
     public Take route(final Request request) throws IOException {
         for (final Fork<Take> fork : this.forks) {
-            final Iterator<Take> takes = fork.route(request).iterator();
+            final Iterator<Take> takes = fork.route(request);
             if (takes.hasNext()) {
                 return takes.next();
             }

@@ -25,6 +25,7 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
@@ -81,8 +82,8 @@ public final class FkFixed implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
-        return Collections.singleton(this.target.route(req));
+    public Iterator<Take> route(final Request req) throws IOException {
+        return Collections.singleton(this.target.route(req)).iterator();
     }
 
 }

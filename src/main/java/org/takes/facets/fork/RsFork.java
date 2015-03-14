@@ -85,7 +85,7 @@ public final class RsFork extends RsWrap {
     private static Response pick(final Request req,
         final Iterable<Fork.AtResponse> forks) throws IOException {
         for (final Fork<Response> fork : forks) {
-            final Iterator<Response> rsps = fork.route(req).iterator();
+            final Iterator<Response> rsps = fork.route(req);
             if (rsps.hasNext()) {
                 return rsps.next();
             }

@@ -70,8 +70,8 @@ public final class FkHitRefreshTest {
         TimeUnit.SECONDS.sleep(2L);
         FileUtils.touch(new File(dir, "hey.txt"));
         MatcherAssert.assertThat(
-            fork.route(req),
-            Matchers.<Take>iterableWithSize(1)
+            fork.route(req).hasNext(),
+            Matchers.is(true)
         );
         MatcherAssert.assertThat(done.get(), Matchers.is(true));
     }
@@ -84,8 +84,10 @@ public final class FkHitRefreshTest {
     public void ignoresWhenNoHeader() throws Exception {
         final File dir = Files.createTempDir();
         MatcherAssert.assertThat(
-            new FkHitRefresh(dir, "", new TsEmpty()).route(new RqFake()),
-            Matchers.emptyIterable()
+            new FkHitRefresh(
+                dir, "", new TsEmpty()
+            ).route(new RqFake()).hasNext(),
+            Matchers.is(false)
         );
     }
 

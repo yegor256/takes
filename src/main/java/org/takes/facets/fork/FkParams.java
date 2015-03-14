@@ -26,6 +26,7 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -136,14 +137,14 @@ public final class FkParams implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
+    public Iterator<Take> route(final Request req) throws IOException {
         final List<String> params = new RqHref(req).href().param(this.name);
         final Collection<Take> list = new ArrayList<Take>(1);
         if (!params.isEmpty()
             && this.pattern.matcher(params.get(0)).matches()) {
             list.add(this.target.route(req));
         }
-        return list;
+        return list.iterator();
     }
 
 }

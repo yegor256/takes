@@ -84,7 +84,7 @@ public final class TsAuth implements Takes {
 
     @Override
     public Take route(final Request request) throws IOException {
-        final Iterator<Identity> users = this.pass.enter(request).iterator();
+        final Iterator<Identity> users = this.pass.enter(request);
         final Take take;
         if (users.hasNext()) {
             take = this.take(request, users.next());

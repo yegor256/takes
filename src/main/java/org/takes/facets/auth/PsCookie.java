@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -75,13 +76,13 @@ public final class PsCookie implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request req) throws IOException {
+    public Iterator<Identity> enter(final Request req) throws IOException {
         final List<String> cookies = new RqCookies(req).cookie(this.cookie);
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (!cookies.isEmpty()) {
             users.add(this.codec.decode(cookies.get(0).getBytes()));
         }
-        return users;
+        return users.iterator();
     }
 
     @Override

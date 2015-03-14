@@ -26,6 +26,7 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
@@ -98,13 +99,13 @@ public final class FkAnonymous implements Fork.AtTake {
     }
 
     @Override
-    public Iterable<Take> route(final Request req) throws IOException {
+    public Iterator<Take> route(final Request req) throws IOException {
         final Collection<Take> takes = new ArrayList<Take>(1);
         final Identity identity = new RqAuth(req).identity();
         if (identity.equals(Identity.ANONYMOUS)) {
             takes.add(this.target.route(req));
         }
-        return takes;
+        return takes.iterator();
     }
 
 }

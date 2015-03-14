@@ -28,6 +28,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -97,13 +98,13 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request req) throws IOException {
+    public Iterator<Identity> enter(final Request req) throws IOException {
         final List<String> flg = new RqHref(req).href().param(this.flag);
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (!flg.isEmpty()) {
-            users.addAll(this.passes.get(flg.get(0)).enter(req));
+            users.add(this.passes.get(flg.get(0)).enter(req).next());
         }
-        return users;
+        return users.iterator();
     }
 
     @Override

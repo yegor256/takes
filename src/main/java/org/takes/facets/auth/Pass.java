@@ -24,7 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Iterator;
 import org.takes.Request;
 import org.takes.Response;
 
@@ -45,7 +45,7 @@ public interface Pass {
      * @return Identity of the user found
      * @throws IOException If fails
      */
-    Collection<Identity> enter(Request request) throws IOException;
+    Iterator<Identity> enter(Request request) throws IOException;
 
     /**
      * Wrap the response with the user.

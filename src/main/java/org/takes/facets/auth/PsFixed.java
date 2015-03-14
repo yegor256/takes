@@ -23,8 +23,8 @@
  */
 package org.takes.facets.auth;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -55,8 +55,8 @@ public final class PsFixed implements Pass {
     }
 
     @Override
-    public Collection<Identity> enter(final Request request) {
-        return Collections.singleton(this.user);
+    public Iterator<Identity> enter(final Request request) {
+        return Collections.singleton(this.user).iterator();
     }
 
     @Override
