@@ -32,10 +32,11 @@ import java.util.List;
  *
  * <p>An object implementing this interface can be "parsed" using one
  * of the decorators available in {@link org.takes.rq} package. For example,
- * in order to fetch a query parameter you can do:
+ * in order to fetch a query parameter you can use
+ * {@link org.takes.rq.RqHref}:
  *
  * <pre> final List&lt;String&gt; params =
- *   new RqQuery(request).param("name");</pre>
+ *   new RqHref(request).href().param("name");</pre>
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -44,6 +45,8 @@ import java.util.List;
  * @since 0.1
  * @see org.takes.Response
  * @see org.takes.Takes
+ * @see org.takes.facets.fork.RqRegex
+ * @see org.takes.rq.RqHref
  */
 public interface Request {
 

@@ -28,6 +28,23 @@ import java.io.IOException;
 /**
  * Take.
  *
+ * <p>Take is a momentary snapshot of in-server reality, visible to the
+ * end user via printable {@link org.takes.Response}. Each take is immutable.
+ * Each take is instantiated and returned by method {@code route()} or
+ * {@link org.takes.Takes}. For example, this is a simple web server
+ * that returns "hello, world!" plain text web page:
+ *
+ * <pre> new FtBasic(
+ *   new TsFixed(
+ *     new Take() {
+ *       &#64;Override
+ *       public Response act() {
+ *         return new RsText("hello, world!");
+ *       }
+ *     }
+ *   ), 8080
+ * ).start(Exit.NEVER);</pre>
+ *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

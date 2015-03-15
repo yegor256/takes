@@ -30,12 +30,28 @@ import java.util.List;
 /**
  * HTTP response.
  *
+ * <p>{@link org.takes.Response} interface is an abstraction of a HTTP
+ * response, that consists of a few headers and a body. To construct
+ * a response, use one of the composable decorators from
+ * {@link org.takes.rs} package. For example, this code will create
+ * a response with HTML inside:
+ *
+ * <pre> final Response response = new RsWithHeader(
+ *   new RsWithBody(
+ *     new RsWithStatus(200),
+ *     "hello, world!"
+ *   ),
+ *   "Content-Type", "text/html"
+ * );</pre>
+ *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  * @see org.takes.Take
+ * @see org.takes.rs.RsWithBody
+ * @see org.takes.rs.RsWithHeader
  */
 public interface Response {
 
