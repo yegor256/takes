@@ -56,7 +56,7 @@ $ javac -cp takes.jar App.java
 Now, run it like this:
 
 ```bash
-$ java -Dfile.encoding=UTF-8 -cp takes.jar App
+$ java -Dfile.encoding=UTF-8 -cp takes.jar:. App
 ```
 
 Should work :)
