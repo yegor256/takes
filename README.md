@@ -11,14 +11,15 @@
 
 Takes is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-Java6 web development framework. Its key benefits, comparing to all others, include:
+Java6 web development framework. Its key benefits, comparing to all others, include these
+four fundamental principles:
 
- * not a single mutable class!
- * not a single `public` `static` method!
- * not a single `instanceof` keyword or type casting!
- * not a single `null`!
- * no configuration files!
+ 1. not a single `null`
+ 2. not a single `public` `static` method
+ 3. not a single mutable class
+ 4. not a single `instanceof` keyword, type casting, or reflection
 
+Of course, there are no configuration files.
 Besides that, these are more traditional features, out of the box:
 
  * hit-refresh debugging
