@@ -7,8 +7,6 @@
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 
-**It is still an early DRAFT. If you have ideas or corrections, please submit them [here](https://github.com/yegor256/takes/issues).**
-
 Takes is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
 Java6 web development framework. Its key benefits, comparing to all others, include these
