@@ -7,14 +7,14 @@
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 
-Takes is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
+**Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
 Java6 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
 
- 1. not a single `null`
- 2. not a single `public` `static` method
- 3. not a single mutable class
+ 1. not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
+ 2. not a single `public` `static` method ([why they are bad?](http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
+ 3. not a single mutable class ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
  4. not a single `instanceof` keyword, type casting, or reflection
 
 Of course, there are no configuration files.
