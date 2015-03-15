@@ -132,7 +132,7 @@ This is how you can unit test the app, using JUnit 4.x and
 ```java
 public final class AppTest {
   @Test
-  public void returnsHttpRespone() throws Exception {
+  public void returnsHttpResponse() throws Exception {
     MatcherAssert.assertThat(
       new RsPrint(
         new App().route(new RqFake("GET", "/")).act()
