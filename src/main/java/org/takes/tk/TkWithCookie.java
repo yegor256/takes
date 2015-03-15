@@ -29,6 +29,9 @@ import org.takes.Take;
 /**
  * Take that headers.
  *
+ * <p>This take wraps all responses of another take, adding
+ * cookies to them, through {@link org.takes.rs.RsWithCookie}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

@@ -30,6 +30,9 @@ import org.takes.rs.RsEmpty;
 /**
  * Empty take.
  *
+ * <p>This "takes" always returns an instance of
+ * {@link org.takes.rs.RsEmpty}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

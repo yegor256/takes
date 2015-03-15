@@ -32,6 +32,8 @@ import org.takes.tk.TkEmpty;
 /**
  * Empty.
  *
+ * <p>This "takes" always returns an instance of {@link org.takes.tk.TkEmpty}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

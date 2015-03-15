@@ -37,6 +37,20 @@ import org.takes.tk.TkFixed;
 /**
  * Takes reading resources from classpath.
  *
+ * <p>This "takes" is trying to find the requested resource in
+ * classpath and return it as an HTTP response with binary body, for example:
+ *
+ * <pre> new TsClasspath("/my");</pre>
+ *
+ * <p>This object will take query part of the arrived HTTP
+ * {@link org.takes.Request} and concatenate it with the {@code "/my"} prefix.
+ * For example, a request comes it and its query equals to
+ * {@code "/css/style.css?eot"}. {@link org.takes.ts.TsClasspath}
+ * will try to find a resource {@code "/my/css/style.css"} in classpath.
+ *
+ * <p>If such a resource is not found, {@link org.takes.NotFoundException}
+ * will be thrown.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

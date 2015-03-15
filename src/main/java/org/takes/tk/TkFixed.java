@@ -30,6 +30,9 @@ import org.takes.Take;
 /**
  * Take with fixed response.
  *
+ * <p>This class always returns the same response, provided via
+ * constructor and encapsulated.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

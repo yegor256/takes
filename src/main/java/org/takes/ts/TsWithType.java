@@ -33,6 +33,9 @@ import org.takes.tk.TkWithType;
 /**
  * Takes with added content type.
  *
+ * <p>This takes wraps all responses of another takes, adding
+ * content type to them, through {@link org.takes.tk.TkWithType}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

@@ -35,6 +35,9 @@ import org.takes.rs.RsText;
 /**
  * Text take.
  *
+ * <p>This take returns an HTML response by wrapping the provided
+ * content into {@link org.takes.rs.RsText}.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
