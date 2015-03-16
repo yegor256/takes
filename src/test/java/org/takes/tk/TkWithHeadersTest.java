@@ -32,9 +32,9 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link org.takes.tk.TkWithHeaders}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.9.1
  */
 public final class TkWithHeadersTest {
 
@@ -43,15 +43,15 @@ public final class TkWithHeadersTest {
      * @throws java.io.IOException If some problem inside
      */
     @Test
-    public void testAddHeadersToTake() throws IOException {
+    public void addHeaders() throws IOException {
+        final String host = "Host: www.example.com";
+        final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkWithHeaders(
-                    new TkWithHeaders(
-                        new TkEmpty()
-                    ),
-                    "Host: www.example.com ",
-                    "Content-Type: text/xml "
+                    new TkEmpty(),
+                    host,
+                    type
                 )
                     .with("host", "a.example.com")
                     .act()
@@ -60,8 +60,8 @@ public final class TkWithHeadersTest {
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "Host: www.example.com",
-                    "Content-Type: text/xml",
+                    host,
+                    type,
                     "host: a.example.com",
                     "",
                     ""
