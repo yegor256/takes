@@ -103,7 +103,7 @@
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      @Override
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/Take.html">Take</a> route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Fork&lt;Take&gt; fork : <strong class="jxr_keyword">this</strong>.forks) {
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>              <strong class="jxr_keyword">final</strong> Iterator&lt;Take&gt; takes = fork.route(request).iterator();
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>              <strong class="jxr_keyword">final</strong> Iterator&lt;Take&gt; takes = fork.route(request);
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>              <strong class="jxr_keyword">if</strong> (takes.hasNext()) {
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>                 <strong class="jxr_keyword">return</strong> takes.next();
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>             }

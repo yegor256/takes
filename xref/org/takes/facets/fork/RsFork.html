@@ -93,7 +93,7 @@
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../org/takes/Response.html">Response</a> pick(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req,
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">final</strong> Iterable&lt;Fork.AtResponse&gt; forks) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Fork&lt;Response&gt; fork : forks) {
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <strong class="jxr_keyword">final</strong> Iterator&lt;Response&gt; rsps = fork.route(req).iterator();
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <strong class="jxr_keyword">final</strong> Iterator&lt;Response&gt; rsps = fork.route(req);
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>              <strong class="jxr_keyword">if</strong> (rsps.hasNext()) {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>                  <strong class="jxr_keyword">return</strong> rsps.next();
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>              }

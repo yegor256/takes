@@ -78,8 +78,8 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          TimeUnit.SECONDS.sleep(2L);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          FileUtils.touch(<strong class="jxr_keyword">new</strong> File(dir, <span class="jxr_string">"hey.txt"</span>));
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>              fork.route(req),
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>              Matchers.&lt;Take&gt;iterableWithSize(1)
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>              fork.route(req).hasNext(),
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>              Matchers.is(<strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          );
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          MatcherAssert.assertThat(done.get(), Matchers.is(<strong class="jxr_keyword">true</strong>));
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
@@ -92,12 +92,14 @@
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> ignoresWhenNoHeader() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          <strong class="jxr_keyword">final</strong> File dir = Files.createTempDir();
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">new</strong> FkHitRefresh(dir, <span class="jxr_string">""</span>, <strong class="jxr_keyword">new</strong> TsEmpty()).route(<strong class="jxr_keyword">new</strong> RqFake()),
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              Matchers.emptyIterable()
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          );
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>      }
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>  
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>  }
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">new</strong> FkHitRefresh(
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>                  dir, <span class="jxr_string">""</span>, <strong class="jxr_keyword">new</strong> TsEmpty()
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>              ).route(<strong class="jxr_keyword">new</strong> RqFake()).hasNext(),
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>              Matchers.is(false)
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>          );
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>      }
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>  
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>

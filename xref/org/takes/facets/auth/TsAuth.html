@@ -92,7 +92,7 @@
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      @Override
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/Take.html">Take</a> route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;Identity&gt; users = <strong class="jxr_keyword">this</strong>.pass.enter(request).iterator();
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;Identity&gt; users = <strong class="jxr_keyword">this</strong>.pass.enter(request);
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Take.html">Take</a> take;
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">if</strong> (users.hasNext()) {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>              take = <strong class="jxr_keyword">this</strong>.take(request, users.next());

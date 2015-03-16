@@ -37,8 +37,8 @@
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> com.jcabi.http.response.XmlResponse;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.net.HttpURLConnection;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Collection;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.List;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
@@ -85,7 +85,7 @@
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>      @Override
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">public</strong> Collection&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Request.html">Request</a> request)
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">public</strong> Iterator&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Request.html">Request</a> request)
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Href.html">Href</a> href = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/rq/RqHref.html">RqHref</a>(request).href();
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; code = href.param(<span class="jxr_string">"code"</span>);
@@ -94,7 +94,7 @@
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          }
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">return</strong> Collections.singleton(
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>              PsGithub.fetch(<strong class="jxr_keyword">this</strong>.token(href.toString(), code.get(0)))
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          );
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>          ).iterator();
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>      }
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>  
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      @Override
