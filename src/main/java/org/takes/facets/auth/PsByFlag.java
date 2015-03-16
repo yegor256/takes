@@ -102,7 +102,10 @@ public final class PsByFlag implements Pass {
         final List<String> flg = new RqHref(req).href().param(this.flag);
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (!flg.isEmpty()) {
-            users.add(this.passes.get(flg.get(0)).enter(req).next());
+            final Pass pass = this.passes.get(flg.get(0));
+            if (pass != null) {
+                users.add(pass.enter(req).next());
+            }
         }
         return users.iterator();
     }
