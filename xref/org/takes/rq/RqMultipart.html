@@ -69,14 +69,14 @@
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  <em class="jxr_javadoccomment">     * Pattern to get boundary from header.</em>
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern BOUNDARY = Pattern.compile(
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>          <span class="jxr_string">".*boundary=([^;]+).*"</span>
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>          <span class="jxr_string">".*[^a-z]boundary=([^;]+).*"</span>
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      );
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * Pattern to get name from header.</em>
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern NAME = Pattern.compile(
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <span class="jxr_string">".*name=\&quot;([^\&quot;]+)\&quot;.*"</span>
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <span class="jxr_string">".*[^a-z]name=\&quot;([^\&quot;]+)\&quot;.*"</span>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      );
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>      <em class="jxr_javadoccomment">/**</em>
@@ -144,8 +144,8 @@
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>             iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;Request&gt;(
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>                 Collections.&lt;Request&gt;emptyList(),
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>                 String.format(
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                     <span class="jxr_string">"there are no parts by name \&quot;%s\&quot; among %d others"</span>,
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>                     name, <strong class="jxr_keyword">this</strong>.map.size()
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>                     <span class="jxr_string">"there are no parts by name \&quot;%s\&quot; among %d others: %s"</span>,
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>                     name, <strong class="jxr_keyword">this</strong>.map.size(), <strong class="jxr_keyword">this</strong>.map.keySet()
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>                 )
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>             );
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>         } <strong class="jxr_keyword">else</strong> {

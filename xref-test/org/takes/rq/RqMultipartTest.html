@@ -67,31 +67,32 @@
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>                  <span class="jxr_string">""</span>,
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>                  <span class="jxr_string">"440 N Wolfe Rd, Sunnyvale, CA 94085"</span>,
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <span class="jxr_string">"--AaB03x"</span>,
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  <span class="jxr_string">"Content-Disposition: form-data; name=\&quot;data\&quot;; file=\&quot;a.bin\&quot;"</span>,
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  <span class="jxr_string">"Content-Transfer-Encoding: utf-8"</span>,
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  <span class="jxr_string">""</span>,
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  <span class="jxr_string">"\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end"</span>,
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  <span class="jxr_string">"--AaB03x--"</span>
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>              )
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>          );
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>          <strong class="jxr_keyword">final</strong> RqMultipart multi = <strong class="jxr_keyword">new</strong> RqMultipart(req);
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>              <strong class="jxr_keyword">new</strong> RqHeaders(
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  multi.part(<span class="jxr_string">"address"</span>).iterator().next()
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>              ).header(<span class="jxr_string">"Content-disposition"</span>),
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>              Matchers.hasItem(<span class="jxr_string">"form-data; name=\&quot;address\&quot;"</span>)
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          );
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>              <strong class="jxr_keyword">new</strong> RqPrint(
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>                  <strong class="jxr_keyword">new</strong> RqHeaders(
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>                      multi.part(<span class="jxr_string">"data"</span>).iterator().next()
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>                  )
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>              ).printBody(),
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>              Matchers.endsWith(<span class="jxr_string">"the end"</span>)
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          );
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>  
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>  }
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  <span class="jxr_string">"Content-Disposition: form-data; name=\&quot;data\&quot;; filename=\&quot;a.bin\&quot;"</span>,
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  <span class="jxr_string">"Content-Transfer-Encoding: utf-8"</span>,
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  <span class="jxr_string">""</span>,
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  <span class="jxr_string">"\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end"</span>,
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                  <span class="jxr_string">"--AaB03x--"</span>
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>              )
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          );
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">final</strong> RqMultipart multi = <strong class="jxr_keyword">new</strong> RqMultipart(req);
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">new</strong> RqHeaders(
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>                  multi.part(<span class="jxr_string">"address"</span>).iterator().next()
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>              ).header(<span class="jxr_string">"Content-disposition"</span>),
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              Matchers.hasItem(<span class="jxr_string">"form-data; name=\&quot;address\&quot;"</span>)
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          );
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>          MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>              <strong class="jxr_keyword">new</strong> RqPrint(
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>                  <strong class="jxr_keyword">new</strong> RqHeaders(
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>                      multi.part(<span class="jxr_string">"data"</span>).iterator().next()
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>                  )
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>              ).printBody(),
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>              Matchers.endsWith(<span class="jxr_string">"the end"</span>)
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          );
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>      }
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>  
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
