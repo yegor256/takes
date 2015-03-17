@@ -38,20 +38,15 @@ import org.takes.rs.RsPrint;
 public final class TkMeasuredTest {
 
     /**
-     * Measured constant.
-     */
-    private static final String TEST = "test";
-
-    /**
      * TkMeasured can create a response with HTTP header "X-Takes-Millis".
      * @throws IOException If some problem inside
      */
     @Test
-    public void createMeasuredResponse() throws IOException {
+    public void createsMeasuredResponse() throws IOException {
         final String tkMeasuredHeader = "X-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkMeasured(new TkText(TEST)).act()
+                new TkMeasured(new TkText("default header response")).act()
             ).print(),
             Matchers.containsString(tkMeasuredHeader)
         );
@@ -62,12 +57,12 @@ public final class TkMeasuredTest {
      * @throws IOException If some problem occurs
      */
     @Test
-    public void createMeasuredResponseWithCustomHeader() throws IOException {
+    public void createsMeasuredResponseWithCustomHeader() throws IOException {
         final String customHeader = "X-Custom-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkMeasured(
-                    new TkText(TEST),
+                    new TkText("custom header response"),
                     customHeader
                 ).act()
             ).print(),
