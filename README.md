@@ -427,7 +427,7 @@ Here is how you can parse an instance of `Request`:
 ```java
 Href href = new RqHref(request).href();
 URI uri = href.uri();
-List<String> values = href.param("key");
+Iterable<String> values = href.param("key");
 ```
 
 For a more complex parsing try to use Apache Http Client or something
@@ -669,7 +669,7 @@ public final class TsIndex implements Takes {
   @Override
   public Take route(final Request req) {
     // the list may be empty
-    final List<String> cookies = new RqCookies(req).cookie("my-cookie");
+    final Iterable<String> cookies = new RqCookies(req).cookie("my-cookie");
   }
 }
 ```

@@ -34,7 +34,7 @@ import java.io.InputStream;
  * in order to fetch a query parameter you can use
  * {@link org.takes.rq.RqHref}:
  *
- * <pre> final List&lt;String&gt; params =
+ * <pre> final Iterable&lt;String&gt; params =
  *   new RqHref(request).href().param("name");</pre>
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
