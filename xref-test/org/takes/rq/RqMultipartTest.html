@@ -77,14 +77,14 @@
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          <strong class="jxr_keyword">final</strong> RqMultipart multi = <strong class="jxr_keyword">new</strong> RqMultipart(req);
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>              <strong class="jxr_keyword">new</strong> RqHeaders(
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  multi.part(<span class="jxr_string">"address"</span>).get(0)
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  multi.part(<span class="jxr_string">"address"</span>).iterator().next()
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              ).header(<span class="jxr_string">"Content-disposition"</span>),
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>              Matchers.hasItem(<span class="jxr_string">"form-data; name=\&quot;address\&quot;"</span>)
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          );
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              <strong class="jxr_keyword">new</strong> RqPrint(
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>                  <strong class="jxr_keyword">new</strong> RqHeaders(
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>                      multi.part(<span class="jxr_string">"data"</span>).get(0)
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>                      multi.part(<span class="jxr_string">"data"</span>).iterator().next()
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>                  )
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>              ).printBody(),
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              Matchers.endsWith(<span class="jxr_string">"the end"</span>)

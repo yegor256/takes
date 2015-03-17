@@ -36,15 +36,15 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.io.UnsupportedEncodingException;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.net.URLDecoder;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.nio.charset.Charset;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.util.Collection;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.LinkedList;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.List;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.Locale;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.LinkedList;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.List;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.Locale;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.VerboseIterable;
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment"> * Request decorator that decodes FORM data from</em>
@@ -102,41 +102,55 @@
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  <em class="jxr_javadoccomment">     * Get single parameter.</em>
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>  <em class="jxr_javadoccomment">     * @param key Parameter name</em>
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>  <em class="jxr_javadoccomment">     * @return List of values (can be empty)</em>
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>  <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>      <strong class="jxr_keyword">public</strong> List&lt;String&gt; param(<strong class="jxr_keyword">final</strong> String key) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>         List&lt;String&gt; values = <strong class="jxr_keyword">this</strong>.map.get(key.toLowerCase(Locale.ENGLISH));
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>             values = Collections.emptyList();
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         }
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">return</strong> Collections.unmodifiableList(values);
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>     }
-<a class="jxr_linenumber" name="L106" href="#L106">106</a> 
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L108" href="#L108">108</a> <em class="jxr_javadoccomment">     * Get all parameter names.</em>
-<a class="jxr_linenumber" name="L109" href="#L109">109</a> <em class="jxr_javadoccomment">     * @return All names</em>
-<a class="jxr_linenumber" name="L110" href="#L110">110</a> <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
-<a class="jxr_linenumber" name="L111" href="#L111">111</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>     <strong class="jxr_keyword">public</strong> Collection&lt;String&gt; names() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.map.keySet();
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>     }
-<a class="jxr_linenumber" name="L115" href="#L115">115</a> 
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L117" href="#L117">117</a> <em class="jxr_javadoccomment">     * Decode from URL.</em>
-<a class="jxr_linenumber" name="L118" href="#L118">118</a> <em class="jxr_javadoccomment">     * @param txt Text</em>
-<a class="jxr_linenumber" name="L119" href="#L119">119</a> <em class="jxr_javadoccomment">     * @return Decoded</em>
-<a class="jxr_linenumber" name="L120" href="#L120">120</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> String txt) {
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L123" href="#L123">123</a>             <strong class="jxr_keyword">return</strong> URLDecoder.decode(
-<a class="jxr_linenumber" name="L124" href="#L124">124</a>                 txt, Charset.defaultCharset().name()
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>             );
-<a class="jxr_linenumber" name="L126" href="#L126">126</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnsupportedEncodingException ex) {
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ex);
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>         }
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>     }
-<a class="jxr_linenumber" name="L130" href="#L130">130</a> 
-<a class="jxr_linenumber" name="L131" href="#L131">131</a> }
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>      <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> String key) {
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; values =
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">this</strong>.map.get(key.toLowerCase(Locale.ENGLISH));
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; iter;
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>             iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>                 Collections.&lt;String&gt;emptyList(),
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>                 String.format(
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>                     <span class="jxr_string">"there are no form params by name \&quot;%s\&quot; among %d others"</span>,
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>                     key, <strong class="jxr_keyword">this</strong>.map.size()
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>                 )
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>             );
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>         } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>             iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>                 values,
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>                 String.format(
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>                     <span class="jxr_string">"there are only %d params by name \&quot;%s\&quot;"</span>,
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>                     values.size(), key
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>                 )
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>             );
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>         }
+<a class="jxr_linenumber" name="L119" href="#L119">119</a>         <strong class="jxr_keyword">return</strong> iter;
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>     }
+<a class="jxr_linenumber" name="L121" href="#L121">121</a> 
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L123" href="#L123">123</a> <em class="jxr_javadoccomment">     * Get all parameter names.</em>
+<a class="jxr_linenumber" name="L124" href="#L124">124</a> <em class="jxr_javadoccomment">     * @return All names</em>
+<a class="jxr_linenumber" name="L125" href="#L125">125</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; names() {
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.map.keySet();
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>     }
+<a class="jxr_linenumber" name="L129" href="#L129">129</a> 
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L131" href="#L131">131</a> <em class="jxr_javadoccomment">     * Decode from URL.</em>
+<a class="jxr_linenumber" name="L132" href="#L132">132</a> <em class="jxr_javadoccomment">     * @param txt Text</em>
+<a class="jxr_linenumber" name="L133" href="#L133">133</a> <em class="jxr_javadoccomment">     * @return Decoded</em>
+<a class="jxr_linenumber" name="L134" href="#L134">134</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> String txt) {
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>             <strong class="jxr_keyword">return</strong> URLDecoder.decode(
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>                 txt, Charset.defaultCharset().name()
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>             );
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnsupportedEncodingException ex) {
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ex);
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>         }
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>     }
+<a class="jxr_linenumber" name="L144" href="#L144">144</a> 
+<a class="jxr_linenumber" name="L145" href="#L145">145</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
