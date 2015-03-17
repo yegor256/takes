@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.VerboseIterable;
 
 /**
  * Request decorator, for HTTP headers parsing.
@@ -62,13 +63,29 @@ public final class RqHeaders extends RqWrap {
      * @throws IOException If fails
      */
     public Iterable<String> header(final String key) throws IOException {
-        List<String> values = this.map().get(
+        final Map<String, List<String>> map = this.map();
+        final List<String> values = map.get(
             key.toLowerCase(Locale.ENGLISH)
         );
+        final Iterable<String> iter;
         if (values == null) {
-            values = Collections.emptyList();
+            iter = new VerboseIterable<String>(
+                Collections.<String>emptyList(),
+                String.format(
+                    "there are no headers by name \"%s\" among %d others",
+                    key, map.size()
+                )
+            );
+        } else {
+            iter = new VerboseIterable<String>(
+                values,
+                String.format(
+                    "there are only %d headers by name \"%s\"",
+                    values.size(), key
+                )
+            );
         }
-        return Collections.unmodifiableList(values);
+        return iter;
     }
 
     /**

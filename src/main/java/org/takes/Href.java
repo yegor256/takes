@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import org.takes.misc.VerboseIterable;
 
 /**
  * HTTP URI/HREF.
@@ -138,11 +139,26 @@ public final class Href {
      * @since 0.9
      */
     public Iterable<String> param(final String key) {
-        List<String> values = this.params.get(key);
+        final List<String> values = this.params.get(key);
+        final Iterable<String> iter;
         if (values == null) {
-            values = Collections.emptyList();
+            iter = new VerboseIterable<String>(
+                Collections.<String>emptyList(),
+                String.format(
+                    "there are no URI params by name \"%s\" among %d others",
+                    key, this.params.size()
+                )
+            );
+        } else {
+            iter = new VerboseIterable<String>(
+                values,
+                String.format(
+                    "there are only %d URI params by name \"%s\"",
+                    values.size(), key
+                )
+            );
         }
-        return values;
+        return iter;
     }
 
     /**

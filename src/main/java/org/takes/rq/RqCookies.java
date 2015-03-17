@@ -24,15 +24,14 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.VerboseIterable;
 
 /**
  * Request decorator, for HTTP headers parsing.
@@ -61,14 +60,27 @@ public final class RqCookies extends RqWrap {
      * @throws IOException If fails
      */
     public Iterable<String> cookie(final String key) throws IOException {
-        final String value = this.map().get(
-            key.toLowerCase(Locale.ENGLISH)
-        );
-        final List<String> values = new ArrayList<String>(1);
-        if (value != null) {
-            values.add(value);
+        final Map<String, String> map = this.map();
+        final String value = map.get(key.toLowerCase(Locale.ENGLISH));
+        final Iterable<String> iter;
+        if (value == null) {
+            iter = new VerboseIterable<String>(
+                Collections.<String>emptyList(),
+                String.format(
+                    "there are no Cookies by name \"%s\" among %d others",
+                    key, map.size()
+                )
+            );
+        } else {
+            iter = new VerboseIterable<String>(
+                Collections.singleton(value),
+                String.format(
+                    "there is always only one Cookie by name \"%s\"",
+                    key
+                )
+            );
         }
-        return Collections.unmodifiableList(values);
+        return iter;
     }
 
     /**

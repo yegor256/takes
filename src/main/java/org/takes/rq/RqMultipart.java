@@ -38,6 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.VerboseIterable;
 
 /**
  * Request decorator that decodes FORM data from
@@ -51,6 +52,7 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.9
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqMultipart extends RqWrap {
@@ -127,11 +129,27 @@ public final class RqMultipart extends RqWrap {
      * @return List of parts (can be empty)
      */
     public Iterable<Request> part(final String name) {
-        List<Request> values = this.map.get(name.toLowerCase(Locale.ENGLISH));
+        final List<Request> values = this.map
+            .get(name.toLowerCase(Locale.ENGLISH));
+        final Iterable<Request> iter;
         if (values == null) {
-            values = Collections.emptyList();
+            iter = new VerboseIterable<Request>(
+                Collections.<Request>emptyList(),
+                String.format(
+                    "there are no parts by name \"%s\" among %d others",
+                    name, this.map.size()
+                )
+            );
+        } else {
+            iter = new VerboseIterable<Request>(
+                values,
+                String.format(
+                    "there are just %d parts by name \"%s\"",
+                    values.size(), name
+                )
+            );
         }
-        return Collections.unmodifiableList(values);
+        return iter;
     }
 
     /**

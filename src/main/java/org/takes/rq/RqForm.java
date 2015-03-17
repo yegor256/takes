@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.VerboseIterable;
 
 /**
  * Request decorator that decodes FORM data from
@@ -95,11 +96,27 @@ public final class RqForm extends RqWrap {
      * @return List of values (can be empty)
      */
     public Iterable<String> param(final String key) {
-        List<String> values = this.map.get(key.toLowerCase(Locale.ENGLISH));
+        final List<String> values =
+            this.map.get(key.toLowerCase(Locale.ENGLISH));
+        final Iterable<String> iter;
         if (values == null) {
-            values = Collections.emptyList();
+            iter = new VerboseIterable<String>(
+                Collections.<String>emptyList(),
+                String.format(
+                    "there are no form params by name \"%s\" among %d others",
+                    key, this.map.size()
+                )
+            );
+        } else {
+            iter = new VerboseIterable<String>(
+                values,
+                String.format(
+                    "there are only %d params by name \"%s\"",
+                    values.size(), key
+                )
+            );
         }
-        return Collections.unmodifiableList(values);
+        return iter;
     }
 
     /**
