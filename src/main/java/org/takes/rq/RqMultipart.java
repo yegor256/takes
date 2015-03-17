@@ -61,14 +61,14 @@ public final class RqMultipart extends RqWrap {
      * Pattern to get boundary from header.
      */
     private static final Pattern BOUNDARY = Pattern.compile(
-        ".*boundary=([^;]+).*"
+        ".*[^a-z]boundary=([^;]+).*"
     );
 
     /**
      * Pattern to get name from header.
      */
     private static final Pattern NAME = Pattern.compile(
-        ".*name=\"([^\"]+)\".*"
+        ".*[^a-z]name=\"([^\"]+)\".*"
     );
 
     /**
