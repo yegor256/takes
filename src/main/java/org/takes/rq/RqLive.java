@@ -85,7 +85,7 @@ public final class RqLive implements Request {
     }
 
     @Override
-    public List<String> head() {
+    public Iterable<String> head() {
         return Collections.unmodifiableList(this.hde);
     }
 

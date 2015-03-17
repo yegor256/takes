@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,9 +93,8 @@ public final class RqForm extends RqWrap {
      * Get single parameter.
      * @param key Parameter name
      * @return List of values (can be empty)
-     * @throws IOException If fails
      */
-    public List<String> param(final String key) throws IOException {
+    public Iterable<String> param(final String key) {
         List<String> values = this.map.get(key.toLowerCase(Locale.ENGLISH));
         if (values == null) {
             values = Collections.emptyList();
@@ -107,9 +105,8 @@ public final class RqForm extends RqWrap {
     /**
      * Get all parameter names.
      * @return All names
-     * @throws IOException If fails
      */
-    public Collection<String> names() throws IOException {
+    public Iterable<String> names() {
         return this.map.keySet();
     }
 

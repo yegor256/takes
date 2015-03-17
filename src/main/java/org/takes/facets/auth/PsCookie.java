@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -77,10 +76,11 @@ public final class PsCookie implements Pass {
 
     @Override
     public Iterator<Identity> enter(final Request req) throws IOException {
-        final List<String> cookies = new RqCookies(req).cookie(this.cookie);
+        final Iterator<String> cookies = new RqCookies(req)
+            .cookie(this.cookie).iterator();
         final Collection<Identity> users = new ArrayList<Identity>(1);
-        if (!cookies.isEmpty()) {
-            users.add(this.codec.decode(cookies.get(0).getBytes()));
+        if (cookies.hasNext()) {
+            users.add(this.codec.decode(cookies.next().getBytes()));
         }
         return users.iterator();
     }

@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.NotFoundException;
 import org.takes.Request;
@@ -64,7 +63,7 @@ public final class RsFork extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
+                public Iterable<String> head() throws IOException {
                     return RsFork.pick(req, list).head();
                 }
                 @Override

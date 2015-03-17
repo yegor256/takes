@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -55,7 +54,7 @@ public class RqWrap implements Request {
     }
 
     @Override
-    public final List<String> head() throws IOException {
+    public final Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

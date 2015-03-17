@@ -137,7 +137,7 @@ public final class Href {
      * @return Values (could be empty)
      * @since 0.9
      */
-    public List<String> param(final String key) {
+    public Iterable<String> param(final String key) {
         List<String> values = this.params.get(key);
         if (values == null) {
             values = Collections.emptyList();

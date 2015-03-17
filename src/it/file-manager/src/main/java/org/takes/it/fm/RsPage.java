@@ -25,7 +25,6 @@ package org.takes.it.fm;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import org.takes.Response;
 import org.takes.rs.RsXSLT;
 import org.takes.rs.xe.RsXembly;
@@ -68,7 +67,7 @@ final class RsPage implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

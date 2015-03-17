@@ -24,7 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Href;
 import org.takes.Request;
@@ -55,19 +55,17 @@ public final class RqHref extends RqWrap {
      * @throws IOException If fails
      */
     public Href href() throws IOException {
-        final List<String> host = new RqHeaders(this).header("Host");
-        if (host.isEmpty()) {
+        final Iterator<String> host = new RqHeaders(this)
+            .header("Host").iterator();
+        if (!host.hasNext()) {
             throw new IOException("Host header is absent");
-        }
-        if (host.size() > 1) {
-            throw new IOException("too many Host headers");
         }
         return new Href(
             String.format(
                 "http://%s%s",
-                host.get(0),
+                host.next(),
                 // @checkstyle MagicNumber (1 line)
-                this.head().get(0).split(" ", 3)[1]
+                this.head().iterator().next().split(" ", 3)[1]
             )
         );
     }

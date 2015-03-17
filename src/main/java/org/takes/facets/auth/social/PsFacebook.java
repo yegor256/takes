@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
@@ -80,12 +79,12 @@ public final class PsFacebook implements Pass {
     public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
-        final List<String> code = href.param("code");
-        if (code.isEmpty()) {
+        final Iterator<String> code = href.param("code").iterator();
+        if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
         final User user = PsFacebook.fetch(
-            this.token(href.toString(), code.get(0))
+            this.token(href.toString(), code.next())
         );
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(0);

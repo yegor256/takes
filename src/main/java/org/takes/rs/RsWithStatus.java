@@ -26,9 +26,9 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -108,11 +108,17 @@ public final class RsWithStatus implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
-        final List<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
+    public Iterable<String> head() throws IOException {
+        final Collection<String> head = new LinkedList<String>();
         head.add(String.format("HTTP/1.1 %d %s", this.status, this.reason));
-        head.addAll(list.subList(1, list.size()));
+        boolean first = true;
+        for (final String hdr : this.origin.head()) {
+            if (first) {
+                first = false;
+            } else {
+                head.add(hdr);
+            }
+        }
         return head;
     }
 

@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.List;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -110,7 +109,7 @@ public final class RsXSLT implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

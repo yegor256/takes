@@ -24,8 +24,8 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +61,7 @@ public final class RqHeaders extends RqWrap {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public List<String> header(final String key) throws IOException {
+    public Iterable<String> header(final String key) throws IOException {
         List<String> values = this.map().get(
             key.toLowerCase(Locale.ENGLISH)
         );
@@ -76,7 +76,7 @@ public final class RqHeaders extends RqWrap {
      * @return All names
      * @throws IOException If fails
      */
-    public Collection<String> names() throws IOException {
+    public Iterable<String> names() throws IOException {
         return this.map().keySet();
     }
 
@@ -87,15 +87,17 @@ public final class RqHeaders extends RqWrap {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private Map<String, List<String>> map() throws IOException {
-        final List<String> head = this.head();
-        if (head.size() < 1) {
+        final Iterator<String> head = this.head().iterator();
+        if (!head.hasNext()) {
             throw new IOException(
                 "a valid request must contain at least one line in the head"
             );
         }
+        head.next();
         final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(head.size());
-        for (final String line : head.subList(1, head.size())) {
+            new ConcurrentHashMap<String, List<String>>(0);
+        while (head.hasNext()) {
+            final String line = head.next();
             final String[] parts = line.split(":", 2);
             if (parts.length < 2) {
                 throw new IOException(

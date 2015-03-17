@@ -25,8 +25,7 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -64,10 +63,10 @@ public final class RqWithHeader extends RqWrap {
             new Request() {
                 @Override
                 public List<String> head() throws IOException {
-                    final Collection<String> list = req.head();
-                    final List<String> head =
-                        new ArrayList<String>(list.size());
-                    head.addAll(list);
+                    final List<String> head = new LinkedList<String>();
+                    for (final String hdr : req.head()) {
+                        head.add(hdr);
+                    }
                     head.add(header);
                     return head;
                 }

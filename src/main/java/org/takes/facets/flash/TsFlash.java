@@ -24,7 +24,7 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -84,18 +84,16 @@ public final class TsFlash implements Takes {
     @Override
     public Take route(final Request request) throws IOException {
         final RqCookies cookies = new RqCookies(request);
-        final List<String> values = cookies.cookie(this.cookie);
+        final Iterator<String> values = cookies.cookie(this.cookie).iterator();
         final Take take;
-        if (values.isEmpty()) {
-            take = this.origin.route(request);
-        } else {
+        if (values.hasNext()) {
             take = new Take() {
                 @Override
                 public Response act() throws IOException {
                     return new RsWithCookie(
                         TsFlash.this.origin.route(
                             new RqWithHeader(
-                                request, TsFlash.this.header, values.get(0)
+                                request, TsFlash.this.header, values.next()
                             )
                         ).act(),
                         TsFlash.this.cookie,
@@ -103,6 +101,8 @@ public final class TsFlash implements Takes {
                     );
                 }
             };
+        } else {
+            take = this.origin.route(request);
         }
         return take;
     }

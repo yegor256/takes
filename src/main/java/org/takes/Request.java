@@ -25,7 +25,6 @@ package org.takes;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * HTTP request.
@@ -55,7 +54,7 @@ public interface Request {
      * @return List of lines
      * @throws IOException If something goes wrong
      */
-    List<String> head() throws IOException;
+    Iterable<String> head() throws IOException;
 
     /**
      * HTTP request body.

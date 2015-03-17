@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -138,10 +137,11 @@ public final class FkParams implements Fork.AtTake {
 
     @Override
     public Iterator<Take> route(final Request req) throws IOException {
-        final List<String> params = new RqHref(req).href().param(this.name);
+        final Iterator<String> params = new RqHref(req).href()
+            .param(this.name).iterator();
         final Collection<Take> list = new ArrayList<Take>(1);
-        if (!params.isEmpty()
-            && this.pattern.matcher(params.get(0)).matches()) {
+        if (params.hasNext()
+            && this.pattern.matcher(params.next()).matches()) {
             list.add(this.target.route(req));
         }
         return list.iterator();

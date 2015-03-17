@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
@@ -80,12 +79,12 @@ public final class PsGithub implements Pass {
     public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
-        final List<String> code = href.param("code");
-        if (code.isEmpty()) {
+        final Iterator<String> code = href.param("code").iterator();
+        if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
         return Collections.singleton(
-            PsGithub.fetch(this.token(href.toString(), code.get(0)))
+            PsGithub.fetch(this.token(href.toString(), code.next()))
         ).iterator();
     }
 

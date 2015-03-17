@@ -25,7 +25,6 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.takes.Request;
@@ -98,7 +97,7 @@ public interface RqRegex extends Request {
             return this.mtr;
         }
         @Override
-        public List<String> head() throws IOException {
+        public Iterable<String> head() throws IOException {
             return this.request.head();
         }
         @Override

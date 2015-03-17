@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.json.Json;
 import javax.json.JsonStructure;
 import lombok.EqualsAndHashCode;
@@ -75,7 +74,7 @@ public final class RsJSON implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return new RsWithType(
             new RsWithStatus(new RsEmpty(), HttpURLConnection.HTTP_OK),
             "application/json"

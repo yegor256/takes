@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -84,7 +83,7 @@ public final class FkTypes implements Fork.AtResponse {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static MediaTypes accepted(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
-        final List<String> headers = new RqHeaders(req).header("Accept");
+        final Iterable<String> headers = new RqHeaders(req).header("Accept");
         for (final String hdr : headers) {
             list = list.merge(new MediaTypes(hdr));
         }

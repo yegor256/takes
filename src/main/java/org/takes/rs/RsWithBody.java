@@ -26,7 +26,6 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -93,7 +92,7 @@ public final class RsWithBody extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
+                public Iterable<String> head() throws IOException {
                     return res.head();
                 }
                 @Override

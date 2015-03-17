@@ -25,7 +25,7 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
@@ -77,19 +77,19 @@ public final class RqAuth implements Request {
      * @throws IOException If fails
      */
     public Identity identity() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.origin).header(this.header);
+        final Iterator<String> headers =
+            new RqHeaders(this.origin).header(this.header).iterator();
         final Identity user;
-        if (headers.isEmpty()) {
-            user = Identity.ANONYMOUS;
+        if (headers.hasNext()) {
+            user = new CcPlain().decode(headers.next().getBytes());
         } else {
-            user = new CcPlain().decode(headers.get(0).getBytes());
+            user = Identity.ANONYMOUS;
         }
         return user;
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

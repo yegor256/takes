@@ -29,7 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.List;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -98,10 +98,11 @@ public final class RqPrint extends RqWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final List<String> hdr = new RqHeaders(this).header("Content-Length");
+        final Iterator<String> hdr = new RqHeaders(this)
+            .header("Content-Length").iterator();
         int more = Integer.MAX_VALUE;
-        if (!hdr.isEmpty()) {
-            more = Integer.parseInt(hdr.get(0));
+        if (hdr.hasNext()) {
+            more = Integer.parseInt(hdr.next());
         }
         final InputStream input = this.body();
         while (more > 0) {

@@ -26,7 +26,6 @@ package org.takes.facets.forward;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
@@ -111,7 +110,7 @@ public final class RsForward extends RuntimeException implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

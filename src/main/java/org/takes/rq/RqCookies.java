@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +60,7 @@ public final class RqCookies extends RqWrap {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public List<String> cookie(final String key) throws IOException {
+    public Iterable<String> cookie(final String key) throws IOException {
         final String value = this.map().get(
             key.toLowerCase(Locale.ENGLISH)
         );
@@ -77,7 +76,7 @@ public final class RqCookies extends RqWrap {
      * @return All names
      * @throws IOException If fails
      */
-    public Collection<String> names() throws IOException {
+    public Iterable<String> names() throws IOException {
         return this.map().keySet();
     }
 
@@ -89,7 +88,7 @@ public final class RqCookies extends RqWrap {
     private Map<String, String> map() throws IOException {
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(0);
-        final List<String> values = new RqHeaders(this).header("Cookie");
+        final Iterable<String> values = new RqHeaders(this).header("Cookie");
         for (final String value : values) {
             for (final String pair : value.split(";")) {
                 final String[] parts = pair.split("=", 2);

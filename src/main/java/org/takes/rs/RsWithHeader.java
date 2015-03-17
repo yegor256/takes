@@ -25,8 +25,7 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -98,10 +97,10 @@ public final class RsWithHeader extends RsWrap {
             new Response() {
                 @Override
                 public List<String> head() throws IOException {
-                    final Collection<String> list = res.head();
-                    final List<String> head =
-                        new ArrayList<String>(list.size());
-                    head.addAll(list);
+                    final List<String> head = new LinkedList<String>();
+                    for (final String hdr : res.head()) {
+                        head.add(hdr);
+                    }
                     head.add(header);
                     return head;
                 }

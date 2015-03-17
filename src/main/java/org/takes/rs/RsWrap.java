@@ -25,7 +25,6 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -55,7 +54,7 @@ public class RsWrap implements Response {
     }
 
     @Override
-    public final List<String> head() throws IOException {
+    public final Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 

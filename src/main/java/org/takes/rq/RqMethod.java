@@ -89,7 +89,7 @@ public final class RqMethod extends RqWrap {
      * @throws IOException If fails
      */
     public String method() throws IOException {
-        final String line = this.head().get(0);
+        final String line = this.head().iterator().next();
         final String[] parts = line.split(" ", 2);
         return parts[0].toUpperCase(Locale.ENGLISH);
     }

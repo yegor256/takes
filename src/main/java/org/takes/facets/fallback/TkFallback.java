@@ -25,7 +25,6 @@ package org.takes.facets.fallback;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -96,7 +95,7 @@ public final class TkFallback implements Take {
                 return err;
             }
             @Override
-            public List<String> head() throws IOException {
+            public Iterable<String> head() throws IOException {
                 return TkFallback.this.request.head();
             }
             @Override

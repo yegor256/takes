@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -98,10 +98,11 @@ public final class RsWithHeaders implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
-        final Collection<String> list = this.origin.head();
-        final List<String> head = new ArrayList<String>(list.size());
-        head.addAll(list);
+    public Iterable<String> head() throws IOException {
+        final Collection<String> head = new LinkedList<String>();
+        for (final String hdr : this.origin.head()) {
+            head.add(hdr);
+        }
         for (final String header : this.headers) {
             head.add(header.trim());
         }

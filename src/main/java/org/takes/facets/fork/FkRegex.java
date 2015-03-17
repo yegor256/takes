@@ -28,7 +28,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -175,7 +174,7 @@ public final class FkRegex implements Fork.AtTake {
                             return matcher;
                         }
                         @Override
-                        public List<String> head() throws IOException {
+                        public Iterable<String> head() throws IOException {
                             return req.head();
                         }
                         @Override

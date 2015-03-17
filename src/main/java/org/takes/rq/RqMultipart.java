@@ -81,7 +81,8 @@ public final class RqMultipart extends RqWrap {
      */
     public RqMultipart(final Request req) throws IOException {
         super(req);
-        final String header = new RqHeaders(req).header("Content-Type").get(0);
+        final String header = new RqHeaders(req).header("Content-Type")
+            .iterator().next();
         if (!header.toLowerCase(Locale.ENGLISH)
             .startsWith("multipart/form-data")) {
             throw new IOException(
@@ -125,7 +126,7 @@ public final class RqMultipart extends RqWrap {
      * @param name Name of the part to get
      * @return List of parts (can be empty)
      */
-    public List<Request> part(final String name) {
+    public Iterable<Request> part(final String name) {
         List<Request> values = this.map.get(name.toLowerCase(Locale.ENGLISH));
         if (values == null) {
             values = Collections.emptyList();
@@ -137,7 +138,7 @@ public final class RqMultipart extends RqWrap {
      * Get all part names.
      * @return All names
      */
-    public Collection<String> names() {
+    public Iterable<String> names() {
         return this.map.keySet();
     }
 
@@ -152,7 +153,7 @@ public final class RqMultipart extends RqWrap {
     private Request make(final byte[] body, final int start,
         final int stop) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos.write(this.head().get(0).getBytes());
+        baos.write(this.head().iterator().next().getBytes());
         baos.write("\r\n".getBytes());
         baos.write(Arrays.copyOfRange(body, start, stop));
         return new RqLive(new ByteArrayInputStream(baos.toByteArray()));
@@ -171,7 +172,7 @@ public final class RqMultipart extends RqWrap {
             new ConcurrentHashMap<String, List<Request>>(reqs.size());
         for (final Request req : reqs) {
             final String header = new RqHeaders(req)
-                .header("Content-Disposition").get(0);
+                .header("Content-Disposition").iterator().next();
             final Matcher matcher = RqMultipart.NAME.matcher(header);
             if (!matcher.matches()) {
                 throw new IOException(

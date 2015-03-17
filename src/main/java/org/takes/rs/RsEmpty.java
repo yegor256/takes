@@ -26,7 +26,6 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -43,7 +42,7 @@ import org.takes.Response;
 public final class RsEmpty implements Response {
 
     @Override
-    public List<String> head() {
+    public Iterable<String> head() {
         return Collections.singletonList("HTTP/1.1 200 OK");
     }
 

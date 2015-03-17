@@ -54,7 +54,7 @@ public final class XeLinkHome extends XeWrap {
                         "home",
                         String.format(
                             "http://%s",
-                            new RqHeaders(req).header("Host").get(0)
+                            new RqHeaders(req).header("Host").iterator().next()
                         )
                     ).toXembly();
                 }

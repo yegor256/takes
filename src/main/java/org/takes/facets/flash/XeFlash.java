@@ -24,7 +24,7 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Iterator;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -75,11 +75,11 @@ public final class XeFlash implements XeSource {
 
     @Override
     public Iterable<Directive> toXembly() throws IOException {
-        final List<String> headers =
-            new RqHeaders(this.req).header(this.header);
+        final Iterator<String> headers =
+            new RqHeaders(this.req).header(this.header).iterator();
         final Directives dirs = new Directives();
-        if (!headers.isEmpty()) {
-            final String value = headers.get(0);
+        if (headers.hasNext()) {
+            final String value = headers.next();
             dirs.add("flash")
                 .add("message").set(value).up()
                 .add("level").set(Level.INFO.toString());

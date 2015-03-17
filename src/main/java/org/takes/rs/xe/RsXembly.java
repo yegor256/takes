@@ -30,7 +30,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
-import java.util.List;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -86,7 +85,7 @@ public final class RsXembly implements Response {
     }
 
     @Override
-    public List<String> head() throws IOException {
+    public Iterable<String> head() throws IOException {
         return new RsWithType(
             new RsWithStatus(new RsEmpty(), HttpURLConnection.HTTP_OK),
             "text/xml"

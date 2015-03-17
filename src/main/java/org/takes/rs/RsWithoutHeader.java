@@ -25,8 +25,8 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -52,8 +52,8 @@ public final class RsWithoutHeader extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
+                public Iterable<String> head() throws IOException {
+                    final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
                         "%s:", name.toLowerCase(Locale.ENGLISH)
                     );

@@ -193,10 +193,10 @@ public final class FkHitRefresh implements Fork.AtTake {
 
     @Override
     public Iterator<Take> route(final Request req) throws IOException {
-        final List<String> header =
-            new RqHeaders(req).header("X-Takes-HitRefresh");
+        final Iterator<String> header =
+            new RqHeaders(req).header("X-Takes-HitRefresh").iterator();
         final Collection<Take> takes = new ArrayList<Take>(1);
-        if (!header.isEmpty()) {
+        if (header.hasNext()) {
             if (this.expired()) {
                 this.exec.run();
                 this.touch();

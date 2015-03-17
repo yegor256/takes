@@ -33,7 +33,6 @@ import java.io.Writer;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -117,7 +116,7 @@ public final class RsVelocity implements Response {
     }
 
     @Override
-    public List<String> head() {
+    public Iterable<String> head() {
         return new RsEmpty().head();
     }
 
