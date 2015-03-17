@@ -39,10 +39,6 @@ import org.takes.rs.RsPrint;
  */
 public final class TkRedirectTest {
     /**
-     * Constant variable for url testing.
-     */
-    private static final String URL = "/about";
-    /**
      * Constant variable for HTTP header testing.
      */
     private static final String LOCATION = "Location: ";
@@ -56,15 +52,16 @@ public final class TkRedirectTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void createRedirectResponseWithURL() throws IOException {
+    public void createsRedirectResponseWithURL() throws IOException {
+        final String url = "/about";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkRedirect(URL).act()
+                new TkRedirect(url).act()
             ).print(),
             Matchers.equalTo(
                 Joiner.on(NEWLINE).join(
                     "HTTP/1.1 303 See Other",
-                    LOCATION + URL,
+                    LOCATION + url,
                     "",
                     ""
                 )
@@ -77,16 +74,17 @@ public final class TkRedirectTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void createRedirectResponseWithURLAndStatus() throws IOException {
+    public void createsRedirectResponseWithURLAndStatus() throws IOException {
         final int status = HttpURLConnection.HTTP_MOVED_TEMP;
+        final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkRedirect(URL, status).act()
+                new TkRedirect(url, status).act()
             ).print(),
             Matchers.equalTo(
                 Joiner.on(NEWLINE).join(
                     "HTTP/1.1 302 Moved Temporarily",
-                    LOCATION + URL,
+                    LOCATION + url,
                     "",
                     ""
                 )
