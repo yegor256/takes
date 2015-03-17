@@ -59,7 +59,8 @@ public final class RqMultipartTest {
                 "",
                 "440 N Wolfe Rd, Sunnyvale, CA 94085",
                 "--AaB03x",
-                "Content-Disposition: form-data; name=\"data\"; file=\"a.bin\"",
+                // @checkstyle LineLength (1 line)
+                "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
                 "Content-Transfer-Encoding: utf-8",
                 "",
                 "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",

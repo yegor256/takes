@@ -136,8 +136,8 @@ public final class RqMultipart extends RqWrap {
             iter = new VerboseIterable<Request>(
                 Collections.<Request>emptyList(),
                 String.format(
-                    "there are no parts by name \"%s\" among %d others",
-                    name, this.map.size()
+                    "there are no parts by name \"%s\" among %d others: %s",
+                    name, this.map.size(), this.map.keySet()
                 )
             );
         } else {
