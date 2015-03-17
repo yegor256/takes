@@ -52,11 +52,8 @@ public final class TkWithHeadersTest {
                     new TkEmpty(),
                     host,
                     type
-                )
-                    .with("host", "a.example.com")
-                    .act()
-            )
-                .print(),
+                ).with("host", "a.example.com").act()
+            ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
