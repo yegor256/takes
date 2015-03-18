@@ -33,7 +33,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkMeasured}.
  * @author Dmitry Molotchko (dima.molotchko@gmail.com)
  * @version $Id$
- * @since 0.9.1
+ * @since 0.10
  */
 public final class TkMeasuredTest {
 
@@ -43,12 +43,12 @@ public final class TkMeasuredTest {
      */
     @Test
     public void createsMeasuredResponse() throws IOException {
-        final String tkMeasuredHeader = "X-Takes-Millis";
+        final String header = "X-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkMeasured(new TkText("default header response")).act()
             ).print(),
-            Matchers.containsString(tkMeasuredHeader)
+            Matchers.containsString(header)
         );
     }
 
@@ -58,15 +58,15 @@ public final class TkMeasuredTest {
      */
     @Test
     public void createsMeasuredResponseWithCustomHeader() throws IOException {
-        final String customHeader = "X-Custom-Takes-Millis";
+        final String header = "X-Custom-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkMeasured(
                     new TkText("custom header response"),
-                    customHeader
+                    header
                 ).act()
             ).print(),
-            Matchers.containsString(customHeader)
+            Matchers.containsString(header)
         );
     }
 }
