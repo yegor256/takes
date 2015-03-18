@@ -41,7 +41,7 @@ public final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
      */
-    private static final String LOCATION = "Location: ";
+    private static final String LOCATION = "Location: %1$s";
     /**
      * New line constant.
      */
@@ -59,9 +59,9 @@ public final class TkRedirectTest {
                 new TkRedirect(url).act()
             ).print(),
             Matchers.equalTo(
-                Joiner.on(NEWLINE).join(
+                Joiner.on(TkRedirectTest.NEWLINE).join(
                     "HTTP/1.1 303 See Other",
-                    LOCATION + url,
+                    String.format(TkRedirectTest.LOCATION, url),
                     "",
                     ""
                 )
@@ -82,9 +82,9 @@ public final class TkRedirectTest {
                 new TkRedirect(url, status).act()
             ).print(),
             Matchers.equalTo(
-                Joiner.on(NEWLINE).join(
+                Joiner.on(TkRedirectTest.NEWLINE).join(
                     "HTTP/1.1 302 Moved Temporarily",
-                    LOCATION + url,
+                    String.format(TkRedirectTest.LOCATION, url),
                     "",
                     ""
                 )
