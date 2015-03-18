@@ -37,11 +37,11 @@ import org.junit.Test;
 public final class RqMethodTest {
 
     /**
-     * RqMethod can get a method.
+     * RqMethod can return its method.
      * @throws IOException If some problem inside
      */
     @Test
-    public void getMethod() throws IOException {
+    public void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
             new RqMethod(new RqFake(RqMethod.POST)).method(),
             Matchers.equalTo(RqMethod.POST)
