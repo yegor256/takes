@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
 /**
@@ -71,15 +72,15 @@ public final class RqHeaders extends RqWrap {
         if (values == null) {
             iter = new VerboseIterable<String>(
                 Collections.<String>emptyList(),
-                String.format(
-                    "there are no headers by name \"%s\" among %d others",
-                    key, map.size()
+                new Sprintf(
+                    "there are no headers by name \"%s\" among %d others: %s",
+                    key, map.size(), map.keySet()
                 )
             );
         } else {
             iter = new VerboseIterable<String>(
                 values,
-                String.format(
+                new Sprintf(
                     "there are only %d headers by name \"%s\"",
                     values.size(), key
                 )

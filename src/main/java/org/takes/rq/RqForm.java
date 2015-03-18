@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
 /**
@@ -102,15 +103,15 @@ public final class RqForm extends RqWrap {
         if (values == null) {
             iter = new VerboseIterable<String>(
                 Collections.<String>emptyList(),
-                String.format(
-                    "there are no form params by name \"%s\" among %d others",
-                    key, this.map.size()
+                new Sprintf(
+                    "there are no params by name \"%s\" among %d others: %s",
+                    key, this.map.size(), this.map.keySet()
                 )
             );
         } else {
             iter = new VerboseIterable<String>(
                 values,
-                String.format(
+                new Sprintf(
                     "there are only %d params by name \"%s\"",
                     values.size(), key
                 )

@@ -38,6 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
 /**
@@ -135,7 +136,7 @@ public final class RqMultipart extends RqWrap {
         if (values == null) {
             iter = new VerboseIterable<Request>(
                 Collections.<Request>emptyList(),
-                String.format(
+                new Sprintf(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
                 )
@@ -143,7 +144,7 @@ public final class RqMultipart extends RqWrap {
         } else {
             iter = new VerboseIterable<Request>(
                 values,
-                String.format(
+                new Sprintf(
                     "there are just %d parts by name \"%s\"",
                     values.size(), name
                 )

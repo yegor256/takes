@@ -42,14 +42,14 @@ public final class VerboseIterable<T> implements Iterable<T> {
     /**
      * Error message when running out of items.
      */
-    private final transient String error;
+    private final transient CharSequence error;
 
     /**
      * Ctor.
      * @param iter Original iterator
      * @param msg Error message
      */
-    public VerboseIterable(final Iterable<T> iter, final String msg) {
+    public VerboseIterable(final Iterable<T> iter, final CharSequence msg) {
         this.origin = iter;
         this.error = msg;
     }

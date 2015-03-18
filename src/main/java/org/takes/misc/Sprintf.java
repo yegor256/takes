@@ -23,53 +23,70 @@
  */
 package org.takes.misc;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Formatter;
 
 /**
- * Verbose iterator.
+ * Sprintf in a class.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
  */
-public final class VerboseIterator<T> implements Iterator<T> {
+public final class Sprintf implements CharSequence {
 
     /**
-     * Original iterator.
+     * Pattern.
      */
-    private final transient Iterator<T> origin;
+    private final transient String pattern;
 
     /**
-     * Error message when running out of items.
+     * Arguments.
      */
-    private final transient CharSequence error;
+    private final transient Collection<Object> args;
 
     /**
      * Ctor.
-     * @param iter Original iterator
-     * @param msg Error message
+     * @param ptn Pattern
+     * @param arguments Arguments
      */
-    public VerboseIterator(final Iterator<T> iter, final CharSequence msg) {
-        this.origin = iter;
-        this.error = msg;
+    public Sprintf(final String ptn, final Object... arguments) {
+        this(ptn, Arrays.asList(arguments));
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param arguments Arguments
+     */
+    public Sprintf(final String ptn, final Collection<Object> arguments) {
+        this.pattern = ptn;
+        this.args = Collections.unmodifiableCollection(arguments);
     }
 
     @Override
-    public boolean hasNext() {
-        return this.origin.hasNext();
+    public String toString() {
+        final StringBuilder out = new StringBuilder(0);
+        new Formatter(out).format(
+            this.pattern, this.args.toArray(new Object[this.args.size()])
+        );
+        return out.toString();
     }
 
     @Override
-    public T next() {
-        if (!this.origin.hasNext()) {
-            throw new NoSuchElementException(this.error.toString());
-        }
-        return this.origin.next();
+    public int length() {
+        return this.toString().length();
     }
 
     @Override
-    public void remove() {
-        throw new UnsupportedOperationException("#remove()");
+    public char charAt(final int index) {
+        return this.toString().charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(final int start, final int end) {
+        return this.toString().subSequence(start, end);
     }
 }
