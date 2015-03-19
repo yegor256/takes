@@ -23,10 +23,8 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import javax.json.Json;
 import javax.json.JsonStructure;
@@ -42,19 +40,15 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "source")
-public final class RsJSON implements Response {
-
-    /**
-     * JSON source.
-     */
-    private final transient RsJSON.Source source;
+@EqualsAndHashCode(callSuper = true)
+public final class RsJSON extends RsWrap {
 
     /**
      * Ctor.
      * @param json JSON object
+     * @throws IOException If fails
      */
-    public RsJSON(final JsonStructure json) {
+    public RsJSON(final JsonStructure json) throws IOException {
         this(
             new RsJSON.Source() {
                 @Override
@@ -68,24 +62,35 @@ public final class RsJSON implements Response {
     /**
      * Ctor.
      * @param src Source
+     * @throws IOException If fails
      */
-    public RsJSON(final RsJSON.Source src) {
-        this.source = src;
+    public RsJSON(final RsJSON.Source src) throws IOException {
+        this(new RsWithBody(RsJSON.print(src)));
     }
 
-    @Override
-    public Iterable<String> head() throws IOException {
-        return new RsWithType(
-            new RsWithStatus(new RsEmpty(), HttpURLConnection.HTTP_OK),
-            "application/json"
-        ).head();
+    /**
+     * Ctor.
+     * @param res Resource
+     */
+    public RsJSON(final Response res) {
+        super(
+            new RsWithType(
+                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                "application/json"
+        )
+        );
     }
 
-    @Override
-    public InputStream body() throws IOException {
+    /**
+     * Print JSON.
+     * @param src Source
+     * @return JSON
+     * @throws IOException If fails
+     */
+    private static byte[] print(final RsJSON.Source src) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Json.createWriter(baos).write(this.source.toJSON());
-        return new ByteArrayInputStream(baos.toByteArray());
+        Json.createWriter(baos).write(src.toJSON());
+        return baos.toByteArray();
     }
 
     /**
