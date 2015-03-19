@@ -44,29 +44,14 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "status", "reason" })
-public final class RsWithStatus implements Response {
+@EqualsAndHashCode(callSuper = true)
+public final class RsWithStatus extends RsWrap {
 
     /**
      * Statuses and their reasons.
      */
     private static final Map<Integer, String> REASONS =
         Collections.unmodifiableMap(RsWithStatus.make());
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
-
-    /**
-     * Status code.
-     */
-    private final transient int status;
-
-    /**
-     * Reason.
-     */
-    private final transient String reason;
 
     /**
      * Ctor.
@@ -92,27 +77,44 @@ public final class RsWithStatus implements Response {
      * @param rsn Reason
      */
     public RsWithStatus(final Response res, final int code, final String rsn) {
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return RsWithStatus.head(res, code, rsn);
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return res.body();
+                }
+            }
+        );
+    }
+
+    /**
+     * Make head.
+     * @param origin Original response
+     * @param status Status
+     * @param reason Reason
+     * @return Head
+     * @throws IOException If fails
+     */
+    private static Iterable<String> head(final Response origin,
+        final int status, final String reason) throws IOException {
         // @checkstyle MagicNumber (1 line)
-        if (code < 100 || code > 999) {
+        if (status < 100 || status > 999) {
             throw new IllegalArgumentException(
                 String.format(
                     // @checkstyle LineLength (1 line)
                     "according to RFC 7230 HTTP status code must have three digits: %d",
-                    code
+                    status
                 )
             );
         }
-        this.origin = res;
-        this.status = code;
-        this.reason = rsn;
-    }
-
-    @Override
-    public Iterable<String> head() throws IOException {
         final Collection<String> head = new LinkedList<String>();
-        head.add(String.format("HTTP/1.1 %d %s", this.status, this.reason));
+        head.add(String.format("HTTP/1.1 %d %s", status, reason));
         boolean first = true;
-        for (final String hdr : this.origin.head()) {
+        for (final String hdr : origin.head()) {
             if (first) {
                 first = false;
             } else {
@@ -120,11 +122,6 @@ public final class RsWithStatus implements Response {
             }
         }
         return head;
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
     }
 
     /**
