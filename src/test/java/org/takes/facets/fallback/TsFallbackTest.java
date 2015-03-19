@@ -23,16 +23,24 @@
  */
 package org.takes.facets.fallback;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.facets.fork.TsFork;
+import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
+import org.takes.tk.TkHTML;
 import org.takes.tk.TkText;
 
 /**
@@ -40,6 +48,7 @@ import org.takes.tk.TkText;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TsFallbackTest {
 
@@ -63,6 +72,32 @@ public final class TsFallbackTest {
             ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );
+    }
+
+    /**
+     * TsFallback can fall back many times.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    @Ignore
+    public void fallsBackManyTimes() throws IOException {
+        final Takes takes = new TsFallback(
+            new TsFork(),
+            new TkHTML("oops, nothing here")
+        );
+        final FtRemote.Script script = new FtRemote.Script() {
+            @Override
+            public void exec(final URI home) throws IOException {
+                new JdkRequest(home)
+                    .uri().path("/absent-resource").back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("oops"));
+            }
+        };
+        new FtRemote(takes).exec(script);
+        new FtRemote(takes).exec(script);
     }
 
 }
