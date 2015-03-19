@@ -30,7 +30,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Take;
@@ -77,9 +76,9 @@ public final class TsFallbackTest {
     /**
      * TsFallback can fall back many times.
      * @throws IOException If some problem inside
+     * @since 0.10
      */
     @Test
-    @Ignore
     public void fallsBackManyTimes() throws IOException {
         final Takes takes = new TsFallback(
             new TsFork(),

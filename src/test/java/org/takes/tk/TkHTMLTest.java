@@ -32,26 +32,26 @@ import org.takes.Take;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TkText}.
+ * Test case for {@link TkHTML}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
-public final class TkTextTest {
+public final class TkHTMLTest {
 
     /**
-     * TkText can create a text.
+     * TkHTML can create a text.
      * @throws IOException If some problem inside
      */
     @Test
     public void createsTextResponse() throws IOException {
-        final String body = "hello, world!";
+        final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
-            new RsPrint(new TkText(body).act()).print(),
+            new RsPrint(new TkHTML(body).act()).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "Content-Type: text/plain",
+                    "Content-Type: text/html",
                     "",
                     body
                 )
@@ -60,13 +60,13 @@ public final class TkTextTest {
     }
 
     /**
-     * TkText can print multiple times.
+     * TkHTML can print multiple times.
      * @throws IOException If some problem inside
      */
     @Test
     public void printsResourceMultipleTimes() throws IOException {
-        final String body = "hello, dude!";
-        final Take take = new TkText(body);
+        final String body = "<html>hello, dude!</html>";
+        final Take take = new TkHTML(body);
         MatcherAssert.assertThat(
             new RsPrint(take.act()).print(),
             Matchers.containsString(body)
