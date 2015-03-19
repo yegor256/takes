@@ -77,18 +77,8 @@ import org.takes.Response;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see org.takes.rs.xe.RsXembly
  */
-@EqualsAndHashCode(of = { "origin", "resolver" })
-public final class RsXSLT implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
-
-    /**
-     * URI resolver.
-     */
-    private final transient URIResolver resolver;
+@EqualsAndHashCode(callSuper = true)
+public final class RsXSLT extends RsWrap {
 
     /**
      * Ctor.
@@ -101,24 +91,35 @@ public final class RsXSLT implements Response {
     /**
      * Ctor.
      * @param rsp Original response
-     * @param rslv URI resolver
+     * @param resolver URI resolver
      */
-    public RsXSLT(final Response rsp, final URIResolver rslv) {
-        this.origin = rsp;
-        this.resolver = rslv;
+    public RsXSLT(final Response rsp, final URIResolver resolver) {
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return rsp.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RsXSLT.transform(rsp.body(), resolver);
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
+    /**
+     * Build body.
+     * @param origin Original body
+     * @param resolver Resolver
+     * @return Body
+     */
+    private static InputStream transform(final InputStream origin,
+        final URIResolver resolver) {
         try {
             final TransformerFactory factory = TransformerFactory.newInstance();
-            factory.setURIResolver(this.resolver);
-            return RsXSLT.transform(factory, this.origin.body());
+            factory.setURIResolver(resolver);
+            return RsXSLT.transform(factory, origin);
         } catch (final TransformerException ex) {
             throw new IllegalStateException(ex);
         }
