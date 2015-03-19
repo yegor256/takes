@@ -23,9 +23,9 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -43,10 +43,18 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     * @since 0.10
+     */
+    public RsText() {
+        this("");
+    }
+
+    /**
+     * Ctor.
      * @param body Plain text body
      */
     public RsText(final String body) {
-        this(body.getBytes());
+        this(new RsEmpty(), body);
     }
 
     /**
@@ -54,7 +62,7 @@ public final class RsText extends RsWrap {
      * @param body Plain text body
      */
     public RsText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
+        this(new RsEmpty(), body);
     }
 
     /**
@@ -67,11 +75,20 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     * @param url URL with body
+     * @since 0.10
+     */
+    public RsText(final URL url) {
+        this(new RsEmpty(), url);
+    }
+
+    /**
+     * Ctor.
      * @param res Original response
      * @param body HTML body
      */
     public RsText(final Response res, final String body) {
-        this(res, body.getBytes());
+        this(new RsWithBody(res, body));
     }
 
     /**
@@ -80,7 +97,7 @@ public final class RsText extends RsWrap {
      * @param body HTML body
      */
     public RsText(final Response res, final byte[] body) {
-        this(res, new ByteArrayInputStream(body));
+        this(new RsWithBody(res, body));
     }
 
     /**
@@ -89,13 +106,28 @@ public final class RsText extends RsWrap {
      * @param body HTML body
      */
     public RsText(final Response res, final InputStream body) {
+        this(new RsWithBody(res, body));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param url URL with body
+     */
+    public RsText(final Response res, final URL url) {
+        this(new RsWithBody(res, url));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @since 0.10
+     */
+    public RsText(final Response res) {
         super(
-            new RsWithBody(
-                new RsWithType(
-                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                    "text/plain"
-            ),
-                body
+            new RsWithType(
+                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                "text/plain"
         )
         );
     }

@@ -23,8 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
@@ -52,7 +50,14 @@ public final class TkHTML extends TkWrap {
      * @param body Text
      */
     public TkHTML(final String body) {
-        this(body.getBytes());
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsHTML(body);
+                }
+            }
+        );
     }
 
     /**
@@ -60,16 +65,29 @@ public final class TkHTML extends TkWrap {
      * @param body Body with HTML
      */
     public TkHTML(final byte[] body) {
-        this(new ByteArrayInputStream(body));
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsHTML(body);
+                }
+            }
+        );
     }
 
     /**
      * Ctor.
      * @param url URL with content
-     * @throws IOException If fails
      */
-    public TkHTML(final URL url) throws IOException {
-        this(url.openStream());
+    public TkHTML(final URL url) {
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsHTML(url);
+                }
+            }
+        );
     }
 
     /**

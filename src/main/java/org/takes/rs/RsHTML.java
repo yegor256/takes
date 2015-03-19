@@ -23,9 +23,9 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -43,10 +43,18 @@ public final class RsHTML extends RsWrap {
 
     /**
      * Ctor.
+     * @since 0.10
+     */
+    public RsHTML() {
+        this("<html/>");
+    }
+
+    /**
+     * Ctor.
      * @param body HTML body
      */
     public RsHTML(final String body) {
-        this(body.getBytes());
+        this(new RsEmpty(), body);
     }
 
     /**
@@ -54,7 +62,16 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final byte[] body) {
-        this(new ByteArrayInputStream(body));
+        this(new RsEmpty(), body);
+    }
+
+    /**
+     * Ctor.
+     * @param url URL with body
+     * @since 0.10
+     */
+    public RsHTML(final URL url) {
+        this(new RsEmpty(), url);
     }
 
     /**
@@ -71,7 +88,7 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final Response res, final String body) {
-        this(res, body.getBytes());
+        this(new RsWithBody(res, body));
     }
 
     /**
@@ -80,7 +97,7 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final Response res, final byte[] body) {
-        this(res, new ByteArrayInputStream(body));
+        this(new RsWithBody(res, body));
     }
 
     /**
@@ -89,13 +106,28 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final Response res, final InputStream body) {
+        this(new RsWithBody(res, body));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param url URL with body
+     */
+    public RsHTML(final Response res, final URL url) {
+        this(new RsWithBody(res, url));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @since 0.10
+     */
+    public RsHTML(final Response res) {
         super(
-            new RsWithBody(
-                new RsWithType(
-                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                    "text/html"
-            ),
-                body
+            new RsWithType(
+                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                "text/html"
         )
         );
     }

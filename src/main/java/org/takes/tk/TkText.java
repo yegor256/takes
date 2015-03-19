@@ -23,8 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
@@ -44,13 +42,8 @@ import org.takes.rs.RsText;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "input")
-public final class TkText implements Take {
-
-    /**
-     * HTML.
-     */
-    private final transient InputStream input;
+@EqualsAndHashCode(callSuper = true)
+public final class TkText extends TkWrap {
 
     /**
      * Ctor.
@@ -65,7 +58,14 @@ public final class TkText implements Take {
      * @param body Text
      */
     public TkText(final String body) {
-        this(body.getBytes());
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsText(body);
+                }
+            }
+        );
     }
 
     /**
@@ -73,16 +73,29 @@ public final class TkText implements Take {
      * @param body Body with HTML
      */
     public TkText(final byte[] body) {
-        this(new ByteArrayInputStream(body));
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsText(body);
+                }
+            }
+        );
     }
 
     /**
      * Ctor.
      * @param url URL with content
-     * @throws IOException If fails
      */
-    public TkText(final URL url) throws IOException {
-        this(url.openStream());
+    public TkText(final URL url) {
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsText(url);
+                }
+            }
+        );
     }
 
     /**
@@ -90,11 +103,14 @@ public final class TkText implements Take {
      * @param body Content
      */
     public TkText(final InputStream body) {
-        this.input = body;
+        super(
+            new Take() {
+                @Override
+                public Response act() {
+                    return new RsText(body);
+                }
+            }
+        );
     }
 
-    @Override
-    public Response act() {
-        return new RsText(this.input);
-    }
 }

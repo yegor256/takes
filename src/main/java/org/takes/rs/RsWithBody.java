@@ -26,6 +26,7 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -46,7 +47,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final String body) {
-        this(body.getBytes());
+        this(new RsEmpty(), body);
     }
 
     /**
@@ -54,7 +55,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final byte[] body) {
-        this(new ByteArrayInputStream(body));
+        this(new RsEmpty(), body);
     }
 
     /**
@@ -63,6 +64,14 @@ public final class RsWithBody extends RsWrap {
      */
     public RsWithBody(final InputStream body) {
         this(new RsEmpty(), body);
+    }
+
+    /**
+     * Ctor.
+     * @param url URL with body
+     */
+    public RsWithBody(final URL url) {
+        this(new RsEmpty(), url);
     }
 
     /**
@@ -77,10 +86,41 @@ public final class RsWithBody extends RsWrap {
     /**
      * Ctor.
      * @param res Original response
+     * @param url URL with body
+     */
+    public RsWithBody(final Response res, final URL url) {
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return res.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return url.openStream();
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
      * @param body Body
      */
     public RsWithBody(final Response res, final byte[] body) {
-        this(res, new ByteArrayInputStream(body));
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return res.head();
+                }
+                @Override
+                public InputStream body() {
+                    return new ByteArrayInputStream(body);
+                }
+            }
+        );
     }
 
     /**
