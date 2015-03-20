@@ -43,11 +43,11 @@
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.Href;
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Pass;
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Pass;
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Href;
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">/**</em>
@@ -86,7 +86,7 @@
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      @Override
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>      <strong class="jxr_keyword">public</strong> Iterator&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Request.html">Request</a> request)
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Href.html">Href</a> href = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/rq/RqHref.html">RqHref</a>(request).href();
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a> href = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/rq/RqHref.html">RqHref</a>(request).href();
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; code = href.param(<span class="jxr_string">"code"</span>).iterator();
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">if</strong> (!code.hasNext()) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"code is not provided"</span>);
@@ -99,7 +99,7 @@
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          props.put(<span class="jxr_string">"name"</span>, user.getName());
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          props.put(
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>              <span class="jxr_string">"picture"</span>,
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/"</span>)
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/"</span>)
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>                  .path(user.getId())
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>                  .path(<span class="jxr_string">"picture"</span>)
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>                  .toString()
@@ -143,7 +143,7 @@
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>     <strong class="jxr_keyword">private</strong> String token(<strong class="jxr_keyword">final</strong> String home, <strong class="jxr_keyword">final</strong> String code)
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>         <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/oauth/access_token"</span>)
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/oauth/access_token"</span>)
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>             .with(<span class="jxr_string">"client_id"</span>, <strong class="jxr_keyword">this</strong>.app)
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>             .with(<span class="jxr_string">"redirect_uri"</span>, home)
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>             .with(<span class="jxr_string">"client_secret"</span>, <strong class="jxr_keyword">this</strong>.key)
