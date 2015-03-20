@@ -44,6 +44,7 @@ import java.util.concurrent.ConcurrentMap;
  * @version $Id$
  * @since 0.7
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class Href implements CharSequence {
 
     /**
