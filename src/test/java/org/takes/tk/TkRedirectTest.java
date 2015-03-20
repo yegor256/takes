@@ -35,7 +35,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkRedirect}.
  * @author Dmitry Molotchko (dima.molotchko@gmail.com)
  * @version $Id$
- * @since 0.9.1
+ * @since 0.10
  */
 public final class TkRedirectTest {
     /**
@@ -75,11 +75,10 @@ public final class TkRedirectTest {
      */
     @Test
     public void createsRedirectResponseWithURLAndStatus() throws IOException {
-        final int status = HttpURLConnection.HTTP_MOVED_TEMP;
         final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkRedirect(url, status).act()
+                new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act()
             ).print(),
             Matchers.equalTo(
                 Joiner.on(TkRedirectTest.NEWLINE).join(
