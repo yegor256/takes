@@ -25,7 +25,7 @@ package org.takes.facets.auth.social;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Href;
+import org.takes.misc.Href;
 import org.takes.Request;
 import org.takes.facets.auth.PsByFlag;
 import org.takes.rq.RqHref;

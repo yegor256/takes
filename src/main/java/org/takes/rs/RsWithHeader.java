@@ -62,7 +62,7 @@ public final class RsWithHeader extends RsWrap {
      * @param hdr Header
      * @since 0.8
      */
-    public RsWithHeader(final String hdr) {
+    public RsWithHeader(final CharSequence hdr) {
         this(new RsEmpty(), hdr);
     }
 
@@ -72,7 +72,7 @@ public final class RsWithHeader extends RsWrap {
      * @param value Header value
      * @since 0.8
      */
-    public RsWithHeader(final String name, final String value) {
+    public RsWithHeader(final CharSequence name, final CharSequence value) {
         this(new RsEmpty(), name, value);
     }
 
@@ -82,8 +82,8 @@ public final class RsWithHeader extends RsWrap {
      * @param name Header name
      * @param value Header value
      */
-    public RsWithHeader(final Response res, final String name,
-        final String value) {
+    public RsWithHeader(final Response res, final CharSequence name,
+        final CharSequence value) {
         this(res, String.format("%s: %s", name, value));
     }
 
@@ -92,7 +92,7 @@ public final class RsWithHeader extends RsWrap {
      * @param res Original response
      * @param header Header to add
      */
-    public RsWithHeader(final Response res, final String header) {
+    public RsWithHeader(final Response res, final CharSequence header) {
         super(
             new Response() {
                 @Override
@@ -101,7 +101,7 @@ public final class RsWithHeader extends RsWrap {
                     for (final String hdr : res.head()) {
                         head.add(hdr);
                     }
-                    head.add(header);
+                    head.add(header.toString());
                     return head;
                 }
                 @Override

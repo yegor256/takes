@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.misc;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import org.takes.misc.VerboseIterable;
 
 /**
  * HTTP URI/HREF.
@@ -45,7 +44,7 @@ import org.takes.misc.VerboseIterable;
  * @version $Id$
  * @since 0.7
  */
-public final class Href {
+public final class Href implements CharSequence {
 
     /**
      * URI (without the query part).
@@ -98,6 +97,21 @@ public final class Href {
         final ConcurrentMap<String, List<String>> map) {
         this.uri = link;
         this.params = map;
+    }
+
+    @Override
+    public int length() {
+        return this.toString().length();
+    }
+
+    @Override
+    public char charAt(final int index) {
+        return this.toString().charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(final int start, final int end) {
+        return this.toString().subSequence(start, end);
     }
 
     @Override

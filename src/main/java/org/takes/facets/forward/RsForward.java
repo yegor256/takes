@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Sprintf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
@@ -74,7 +75,7 @@ public final class RsForward extends RuntimeException implements Response {
      * @param res Original response
      * @param loc Location
      */
-    public RsForward(final Response res, final String loc) {
+    public RsForward(final Response res, final CharSequence loc) {
         this(res, HttpURLConnection.HTTP_SEE_OTHER, loc);
     }
 
@@ -82,7 +83,7 @@ public final class RsForward extends RuntimeException implements Response {
      * Ctor.
      * @param loc Location
      */
-    public RsForward(final String loc) {
+    public RsForward(final CharSequence loc) {
         this(HttpURLConnection.HTTP_SEE_OTHER, loc);
     }
 
@@ -91,7 +92,7 @@ public final class RsForward extends RuntimeException implements Response {
      * @param code HTTP status code
      * @param loc Location
      */
-    public RsForward(final int code, final String loc) {
+    public RsForward(final int code, final CharSequence loc) {
         this(new RsEmpty(), code, loc);
     }
 
@@ -101,11 +102,12 @@ public final class RsForward extends RuntimeException implements Response {
      * @param code HTTP status code
      * @param loc Location
      */
-    public RsForward(final Response res, final int code, final String loc) {
+    public RsForward(final Response res, final int code,
+        final CharSequence loc) {
         super();
         this.origin = new RsWithHeader(
             new RsWithStatus(res, code),
-            String.format("Location: %s", loc)
+            new Sprintf("Location: %s", loc)
         );
     }
 

@@ -38,6 +38,7 @@ import org.takes.tk.TkFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @see org.takes.facets.forward.TkForward
  */
 @EqualsAndHashCode(of = "origin")
 public final class TsForward implements Takes {

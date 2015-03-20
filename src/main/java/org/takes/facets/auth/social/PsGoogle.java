@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
-import org.takes.Href;
+import org.takes.misc.Href;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;

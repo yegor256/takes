@@ -36,6 +36,7 @@ import org.takes.Take;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @see org.takes.facets.forward.TsForward
  */
 @EqualsAndHashCode(of = "origin")
 public final class TkForward implements Take {

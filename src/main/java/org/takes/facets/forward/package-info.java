@@ -25,6 +25,65 @@
 /**
  * Forward.
  *
+ * <p>Classes in this package help you to automate forwarding operations,
+ * through 30x HTTP responses. For example, when a web form is submitted
+ * through POST request, it is a good practice to return a 303 response
+ * which will instruct the browser to change the web page immediately. This
+ * technique is used mostly in order to prevent duplicate form submissions
+ * by hitting "Refresh" button in the browser. This is how you implement it
+ * in your "take":
+ *
+ * <pre> public class TkSaveFile implements Take {
+ *   private final Request request;
+ *   public TkSaveFile(final Request req) {
+ *     this.request = req;
+ *   }
+ *   &#64;Override
+ *   public Response act() {
+ *     final InputStream content =
+ *       new RqMultipart(this.request).part("file").body();
+ *     // save content to whenever you want
+ *     return new RsForward(new RqHref(this.request).href());
+ *   }
+ * }</pre>
+ *
+ * <p>When the file is saved, this "take" will return an instance of
+ * {@link org.takes.facets.forward.RsForward}, which will contain the URI
+ * to be placed into {@code Location} header. The browser will use
+ * this URI as a destination point of the next page to render.
+ *
+ * <p>Sometimes it is convenient to throw an exception instead of returning
+ * a response, especially in input checking situations, for example:
+ *
+ * <pre> public class TkLoadFile implements Take {
+ *   private final Request request;
+ *   public TkSaveFile(final Request req) {
+ *     this.request = req;
+ *   }
+ *   &#64;Override
+ *   public Response act() {
+ *     final Iterable&lt;String&gt; param =
+ *       new RqHref(this.request).href().param("name");
+ *     if (!param.iterator().hasNext()) {
+ *       throw RsForward(
+ *         new RsFlash("query param NAME is mandatory"),
+ *         HttpURLConnection.HTTP_SEE_OTHER,
+ *         "/files"
+ *       );
+ *     }
+ *     // continue normal operations
+ *   }
+ * }</pre>
+ *
+ * <p>This example will work only if you wrap your entire "takes" into
+ * {@link org.takes.facets.forward.TsForward} decorator:
+ *
+ * <pre>Takes takes = new TsForward(takes);</pre>
+ *
+ * <p>This {@link org.takes.facets.forward.TsForward} decorator will catch
+ * all exceptions of type {@link org.takes.facets.forward.RsForward} and
+ * convert them to responses.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1

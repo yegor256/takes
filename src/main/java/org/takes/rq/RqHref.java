@@ -26,7 +26,7 @@ package org.takes.rq;
 import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.Href;
+import org.takes.misc.Href;
 import org.takes.Request;
 
 /**
