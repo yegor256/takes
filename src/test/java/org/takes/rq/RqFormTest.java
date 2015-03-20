@@ -43,17 +43,22 @@ public final class RqFormTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
+        final RqForm req = new RqForm(
+            new RqFake(
+                Arrays.asList(
+                    "GET /h?a=3",
+                    "Host: www.example.com"
+                ),
+                "alpha=a+b+c&beta=%20Yes%20"
+            )
+        );
         MatcherAssert.assertThat(
-            new RqForm(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /h?a=3",
-                        "Host: www.example.com"
-                    ),
-                    "alpha=a+b+c&beta=%20Yes%20"
-                )
-            ).param("beta"),
+            req.param("beta"),
             Matchers.hasItem(" Yes ")
+        );
+        MatcherAssert.assertThat(
+            req.names(),
+            Matchers.hasItem("alpha")
         );
     }
 
