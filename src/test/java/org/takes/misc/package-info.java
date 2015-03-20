@@ -21,53 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
-
-import java.io.IOException;
-import java.util.Iterator;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.misc.Href;
 
 /**
- * Request decorator, for HTTP URI query parsing.
- *
- * <p>The class is immutable and thread-safe.
+ * Miscellaneous classes, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
+ * @since 0.10
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqHref extends RqWrap {
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqHref(final Request req) {
-        super(req);
-    }
-
-    /**
-     * Get HREF.
-     * @return HTTP href
-     * @throws IOException If fails
-     */
-    public Href href() throws IOException {
-        final Iterator<String> host = new RqHeaders(this)
-            .header("Host").iterator();
-        if (!host.hasNext()) {
-            throw new IOException("Host header is absent");
-        }
-        return new Href(
-            String.format(
-                "http://%s%s",
-                host.next(),
-                // @checkstyle MagicNumber (1 line)
-                this.head().iterator().next().split(" ", 3)[1]
-            )
-        );
-    }
-
-}
+package org.takes.misc;
