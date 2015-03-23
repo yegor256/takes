@@ -30,6 +30,9 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
+This blog post may help you too:
+[Java Web App Architecture In Takes Framework](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html)
+
 ## Quick Start
 
 Create this `App.java` file:
