@@ -57,6 +57,15 @@ public final class TsSecure implements Takes {
     /**
      * Ctor.
      * @param takes Original
+     * @since 0.10
+     */
+    public TsSecure(final Takes takes) {
+        this(takes, "/");
+    }
+
+    /**
+     * Ctor.
+     * @param takes Original
      * @param location Where to forward
      */
     public TsSecure(final Takes takes, final String location) {
