@@ -47,13 +47,12 @@ public final class TkFallbackTest {
     @Test
     public void fallsBack() throws IOException {
         final String err = "message";
-        final String format = "something went wrong: %s";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFallback(
                     new Take() {
                         @Override
-                        public Response act() {
+                        public Response act()  {
                             throw new UnsupportedOperationException(err);
                         }
                     },
@@ -61,15 +60,13 @@ public final class TkFallbackTest {
                         @Override
                         public Take take(final RqFallback req) {
                             return new TkText(
-                                String.format(
-                                    format, req.throwable().getMessage()
-                                )
+                                req.throwable().getMessage()
                             );
                         }
                     }, new RqFake("GET")
                 ).act()
             ).printBody(),
-            Matchers.equalTo(String.format(format, err))
+            Matchers.equalTo(err)
         );
     }
 }
