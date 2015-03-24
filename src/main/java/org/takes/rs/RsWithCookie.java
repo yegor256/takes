@@ -29,6 +29,19 @@ import org.takes.Response;
 /**
  * Response decorator, with an additional cookie.
  *
+ * <p>Use this decorator in order to return a response with a "Set-Cookie"
+ * header inside, for example:
+ *
+ * <pre> return new RsWithCookie(
+ *   new RsText("hello, world!"),
+ *   "u", "Jeff",
+ *   "Path=/", "Expires=Wed, 13 Jan 2021 22:23:01 GMT"
+ * );</pre>
+ *
+ * <p>This response will contain this header:
+ *
+ * <pre> Set-Cookie: u=Jeff;Path=/;Expires=Wed, 13 Jan 2021 22:23:01 GMT</pre>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
@@ -42,9 +55,11 @@ public final class RsWithCookie extends RsWrap {
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
+     * @param attrs Optional attributes, for example "Path=/"
      */
-    public RsWithCookie(final String name, final String value) {
-        this(new RsEmpty(), name, value);
+    public RsWithCookie(final String name, final String value,
+        final String... attrs) {
+        this(new RsEmpty(), name, value, attrs);
     }
 
     /**
@@ -52,16 +67,34 @@ public final class RsWithCookie extends RsWrap {
      * @param res Original response
      * @param name Cookie name
      * @param value Value of it
+     * @param attrs Optional attributes, for example "Path=/"
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
     public RsWithCookie(final Response res, final String name,
-        final String value) {
+        final String value, final String... attrs) {
         super(
             new RsWithHeader(
-                res,
-                "Set-Cookie",
-                String.format("%s=%s", name, value)
+                res, "Set-Cookie", RsWithCookie.make(name, value, attrs)
         )
         );
+    }
+
+    /**
+     * Build cookie string.
+     * @param name Cookie name
+     * @param value Value of it
+     * @param attrs Optional attributes, for example "Path=/"
+     * @return Text
+     */
+    private static String make(final String name,
+        final String value, final String... attrs) {
+        final StringBuilder text = new StringBuilder(
+            String.format("%s=%s", name, value)
+        );
+        for (final String attr : attrs) {
+            text.append(';').append(attr);
+        }
+        return text.toString();
     }
 
 }
