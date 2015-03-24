@@ -52,9 +52,8 @@ public final class TkFallbackTest {
                 new TkFallback(
                     new Take() {
                         @Override
-                        @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
-                        public Response act()  {
-                            throw new RuntimeException(err);
+                        public Response act()  throws IOException {
+                            throw new IOException(err);
                         }
                     },
                     new Fallback() {
