@@ -126,9 +126,9 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Retrieve Github access token.
+     * Retrieve Facebook access token.
      * @param home Home of this page
-     * @param code Github "authorization code"
+     * @param code Facebook "authorization code"
      * @return The token
      * @throws IOException If failed
      */
