@@ -23,6 +23,8 @@
  */
 package org.takes.facets.flash;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.rs.RsWithCookie;
@@ -72,7 +74,18 @@ public final class RsFlash extends RsWrap {
      * @param cookie Cookie name
      */
     public RsFlash(final String msg, final Level level, final String cookie) {
-        super(new RsWithCookie(cookie, msg));
+        super(
+            new RsWithCookie(
+                cookie, msg,
+                "Path=/",
+                String.format(
+                    "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
+                    new Date(
+                        System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+                    )
+            )
+        )
+        );
         assert level != null;
     }
 
