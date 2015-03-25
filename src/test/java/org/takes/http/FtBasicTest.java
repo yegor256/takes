@@ -25,6 +25,7 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -129,7 +130,7 @@ public final class FtBasicTest {
         final Takes takes = new Takes() {
             @Override
             public Take route(final Request request) throws IOException {
-                return new TkText(new RqPrint(request).printBody());
+                return new TkText(new RqPrint(request).print());
             }
         };
         new FtRemote(takes).exec(
@@ -137,7 +138,7 @@ public final class FtBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
-                        .fetch()
+                        .fetch(new ByteArrayInputStream("ddgg".getBytes()))
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK);
                 }

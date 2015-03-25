@@ -129,10 +129,7 @@ public final class RqPrint extends RqWrap {
             endless = true;
         }
         final InputStream input = this.body();
-        while (more > 0) {
-            if (endless && input.available() == 0) {
-                break;
-            }
+        while (more > 0 && !(endless && input.available() <= 0)) {
             final int data = input.read();
             if (data < 0) {
                 break;
