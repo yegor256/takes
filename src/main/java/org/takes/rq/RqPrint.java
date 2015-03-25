@@ -70,6 +70,27 @@ public final class RqPrint extends RqWrap {
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
+        this.printHead(output);
+        this.printBody(output);
+    }
+
+    /**
+     * Print it all.
+     * @return Text form of request
+     * @throws IOException If fails
+     */
+    public String printHead() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printHead(baos);
+        return new String(baos.toByteArray());
+    }
+
+    /**
+     * Print it all.
+     * @param output Output stream
+     * @throws IOException If fails
+     */
+    public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer = new OutputStreamWriter(output);
         for (final String line : this.head()) {
@@ -78,7 +99,6 @@ public final class RqPrint extends RqWrap {
         }
         writer.append(eol);
         writer.flush();
-        this.printBody(output);
     }
 
     /**
@@ -100,12 +120,19 @@ public final class RqPrint extends RqWrap {
     public void printBody(final OutputStream output) throws IOException {
         final Iterator<String> hdr = new RqHeaders(this)
             .header("Content-Length").iterator();
+        final boolean endless;
         int more = Integer.MAX_VALUE;
         if (hdr.hasNext()) {
+            endless = false;
             more = Integer.parseInt(hdr.next());
+        } else {
+            endless = true;
         }
         final InputStream input = this.body();
         while (more > 0) {
+            if (endless && input.available() == 0) {
+                break;
+            }
             final int data = input.read();
             if (data < 0) {
                 break;

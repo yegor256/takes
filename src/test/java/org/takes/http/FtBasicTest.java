@@ -120,4 +120,29 @@ public final class FtBasicTest {
         );
     }
 
+    /**
+     * FtBasic can work with a stuck back.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void gracefullyHandlesStuckBack() throws Exception {
+        final Takes takes = new Takes() {
+            @Override
+            public Take route(final Request request) throws IOException {
+                return new TkText(new RqPrint(request).printBody());
+            }
+        };
+        new FtRemote(takes).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK);
+                }
+            }
+        );
+    }
+
 }

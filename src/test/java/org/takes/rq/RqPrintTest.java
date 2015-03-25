@@ -49,7 +49,8 @@ public final class RqPrintTest {
                     Arrays.asList(
                         "GET /h?a=3",
                         "Host: www.example.com",
-                        "Content-type: text/plain"
+                        "Content-type: text/plain",
+                        "Content-Length: 0"
                     ),
                     ""
                 )

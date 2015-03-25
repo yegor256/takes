@@ -51,7 +51,8 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /h?a=3 HTTP/1.1",
                 "Host: www.example.com",
-                "Content-Type: multipart/form-data; boundary=AaB03x"
+                "Content-Type: multipart/form-data; boundary=AaB03x",
+                "Content-Length: 10000"
             ),
             Joiner.on("\r\n").join(
                 "--AaB03x",

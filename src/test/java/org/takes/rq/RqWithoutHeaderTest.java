@@ -48,7 +48,7 @@ public final class RqWithoutHeaderTest {
                     new RqWithHeader(new RqFake(), "host: example.com"),
                     "Host"
                 )
-            ).print(),
+            ).printHead(),
             Matchers.not(Matchers.containsString("Host: "))
         );
     }

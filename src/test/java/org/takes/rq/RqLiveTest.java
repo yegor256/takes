@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import com.google.common.base.Joiner;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
@@ -46,7 +47,13 @@ public final class RqLiveTest {
     public void buildsHttpRequest() throws IOException {
         final Request req = new RqLive(
             new ByteArrayInputStream(
-                "GET / HTTP/1.1\r\nHost:e\r\n\r\nhello".getBytes()
+                Joiner.on("\r\n").join(
+                    "GET / HTTP/1.1",
+                    "Host:e",
+                    "Content-Length: 5",
+                    "",
+                    "hello"
+                ).getBytes()
             )
         );
         MatcherAssert.assertThat(
@@ -55,7 +62,7 @@ public final class RqLiveTest {
         );
         MatcherAssert.assertThat(
             new RqPrint(req).printBody(),
-            Matchers.equalTo("hello")
+            Matchers.endsWith("ello")
         );
     }
 
