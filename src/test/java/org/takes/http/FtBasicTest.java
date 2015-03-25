@@ -37,6 +37,7 @@ import org.takes.Take;
 import org.takes.Takes;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TsFork;
+import org.takes.rq.RqGreedy;
 import org.takes.rq.RqPrint;
 import org.takes.tk.TkText;
 import org.takes.ts.TsFailure;
@@ -111,7 +112,7 @@ public final class FtBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
-                        .method("POST")
+                        .method("PUT")
                         .body().set("Jeff, how are you?").back()
                         .fetch()
                         .as(RestResponse.class)
@@ -130,11 +131,12 @@ public final class FtBasicTest {
         final Takes takes = new Takes() {
             @Override
             public Take route(final Request request) throws IOException {
+                final Request req = new RqGreedy(request);
                 return new TkText(
                     String.format(
                         "first: %s, second: %s",
-                        new RqPrint(request).printBody(),
-                        new RqPrint(request).printBody()
+                        new RqPrint(req).printBody(),
+                        new RqPrint(req).printBody()
                     )
                 );
             }

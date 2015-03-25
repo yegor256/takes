@@ -45,7 +45,11 @@ import org.takes.misc.VerboseIterable;
  * Request decorator that decodes FORM data from
  * {@code multipart/form-data} format (RFC 2045).
  *
- * <p>For {@code } format use {@link org.takes.rq.RqForm}.
+ * <p>For {@code application/x-www-form-urlencoded}
+ * format use {@link org.takes.rq.RqForm}.
+ *
+ * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
+ * decorator before passing request to this class.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -54,6 +58,7 @@ import org.takes.misc.VerboseIterable;
  * @since 0.9
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @see org.takes.rq.RqGreedy
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqMultipart extends RqWrap {

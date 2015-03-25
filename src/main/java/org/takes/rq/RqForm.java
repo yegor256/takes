@@ -46,12 +46,16 @@ import org.takes.misc.VerboseIterable;
  * <p>For {@code multipart/form-data} format use
  * {@link org.takes.rq.RqMultipart}.
  *
+ * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
+ * decorator before passing request to this class.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+ * @see org.takes.rq.RqGreedy
  */
 @EqualsAndHashCode(callSuper = true, of = "map")
 public final class RqForm extends RqWrap {
