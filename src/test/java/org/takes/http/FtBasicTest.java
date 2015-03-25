@@ -130,7 +130,13 @@ public final class FtBasicTest {
         final Takes takes = new Takes() {
             @Override
             public Take route(final Request request) throws IOException {
-                return new TkText(new RqPrint(request).print());
+                return new TkText(
+                    String.format(
+                        "first: %s, second: %s",
+                        new RqPrint(request).printBody(),
+                        new RqPrint(request).printBody()
+                    )
+                );
             }
         };
         new FtRemote(takes).exec(
@@ -138,9 +144,12 @@ public final class FtBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
+                        .method("POST")
+                        .header("Content-Length", "4")
                         .fetch(new ByteArrayInputStream("ddgg".getBytes()))
                         .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK);
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.containsString("second: dd"));
                 }
             }
         );
