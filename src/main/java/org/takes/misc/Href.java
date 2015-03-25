@@ -46,6 +46,10 @@ import java.util.concurrent.ConcurrentMap;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class Href implements CharSequence {
+    /**
+     * URI path divider.
+     */
+    private static final String SLASH = "/";
 
     /**
      * URI (without the query part).
@@ -185,6 +189,7 @@ public final class Href implements CharSequence {
         return new Href(
             URI.create(
                 new StringBuilder(this.uri.toString())
+                    .append(SLASH)
                     .append(Href.encode(suffix)).toString()
             ),
             this.params
