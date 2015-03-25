@@ -137,20 +137,17 @@
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>             endless = <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>         }
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>         <strong class="jxr_keyword">final</strong> InputStream input = <strong class="jxr_keyword">this</strong>.body();
-<a class="jxr_linenumber" name="L132" href="#L132">132</a>         <strong class="jxr_keyword">while</strong> (more &gt; 0) {
-<a class="jxr_linenumber" name="L133" href="#L133">133</a>             <strong class="jxr_keyword">if</strong> (endless &amp;&amp; input.available() == 0) {
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>             }
-<a class="jxr_linenumber" name="L136" href="#L136">136</a>             <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> data = input.read();
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>             <strong class="jxr_keyword">if</strong> (data &lt; 0) {
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>             }
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>             output.write(data);
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>             --more;
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>         }
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>     }
-<a class="jxr_linenumber" name="L144" href="#L144">144</a> 
-<a class="jxr_linenumber" name="L145" href="#L145">145</a> }
+<a class="jxr_linenumber" name="L132" href="#L132">132</a>         <strong class="jxr_keyword">while</strong> (more &gt; 0 &amp;&amp; !(endless &amp;&amp; input.available() &lt;= 0)) {
+<a class="jxr_linenumber" name="L133" href="#L133">133</a>             <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> data = input.read();
+<a class="jxr_linenumber" name="L134" href="#L134">134</a>             <strong class="jxr_keyword">if</strong> (data &lt; 0) {
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>             }
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>             output.write(data);
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>             --more;
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>         }
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>     }
+<a class="jxr_linenumber" name="L141" href="#L141">141</a> 
+<a class="jxr_linenumber" name="L142" href="#L142">142</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
