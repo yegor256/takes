@@ -23,7 +23,9 @@
  */
 package org.takes.facets.flash;
 
+import java.nio.charset.Charset;
 import java.util.logging.Level;
+import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
@@ -32,7 +34,6 @@ import org.takes.rs.RsWrap;
  * Forwarding response.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -72,8 +73,17 @@ public final class RsFlash extends RsWrap {
      * @param cookie Cookie name
      */
     public RsFlash(final String msg, final Level level, final String cookie) {
-        super(new RsWithCookie(cookie, msg));
-        assert level != null;
+        super(
+            new RsWithCookie(
+                cookie,
+                DatatypeConverter.printBase64Binary(
+                    new StringBuilder(level.getName())
+                        .append('/')
+                        .append(msg).toString()
+                        .getBytes(Charset.defaultCharset())
+            )
+        )
+        );
     }
 
 }
