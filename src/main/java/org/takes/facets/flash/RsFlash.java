@@ -23,12 +23,9 @@
  */
 package org.takes.facets.flash;
 
-<<<<<<< HEAD
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-=======
-import java.nio.charset.Charset;
->>>>>>> origin/47
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
@@ -39,7 +36,6 @@ import org.takes.rs.RsWrap;
  * Forwarding response.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -81,8 +77,14 @@ public final class RsFlash extends RsWrap {
     public RsFlash(final String msg, final Level level, final String cookie) {
         super(
             new RsWithCookie(
-<<<<<<< HEAD
-                cookie, msg,
+                cookie,
+                DatatypeConverter.printBase64Binary(
+                    new StringBuilder(level.getName())
+                        .append('/')
+                        .append(msg)
+                        .toString()
+                        .getBytes(Charset.defaultCharset())
+            ),
                 "Path=/",
                 String.format(
                     "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
@@ -92,18 +94,5 @@ public final class RsFlash extends RsWrap {
             )
         )
         );
-        assert level != null;
-=======
-                cookie,
-                DatatypeConverter.printBase64Binary(
-                    new StringBuilder(level.getName())
-                        .append('/')
-                        .append(msg).toString()
-                        .getBytes(Charset.defaultCharset())
-            )
-        )
-        );
->>>>>>> origin/47
     }
-
 }
