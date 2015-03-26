@@ -23,9 +23,14 @@
  */
 package org.takes.facets.flash;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+=======
+import java.nio.charset.Charset;
+>>>>>>> origin/47
 import java.util.logging.Level;
+import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
@@ -76,6 +81,7 @@ public final class RsFlash extends RsWrap {
     public RsFlash(final String msg, final Level level, final String cookie) {
         super(
             new RsWithCookie(
+<<<<<<< HEAD
                 cookie, msg,
                 "Path=/",
                 String.format(
@@ -87,6 +93,17 @@ public final class RsFlash extends RsWrap {
         )
         );
         assert level != null;
+=======
+                cookie,
+                DatatypeConverter.printBase64Binary(
+                    new StringBuilder(level.getName())
+                        .append('/')
+                        .append(msg).toString()
+                        .getBytes(Charset.defaultCharset())
+            )
+        )
+        );
+>>>>>>> origin/47
     }
 
 }

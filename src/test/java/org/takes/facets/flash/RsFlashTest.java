@@ -23,7 +23,15 @@
  */
 package org.takes.facets.flash;
 
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+import com.google.common.base.Joiner;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import javax.xml.bind.DatatypeConverter;
+>>>>>>> origin/47
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -31,6 +39,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsFlash}.
+<<<<<<< HEAD
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9.6
@@ -51,4 +60,42 @@ public final class RsFlashTest {
         );
     }
 
+=======
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * @version $Id$
+ * @since 0.9.10
+ */
+public final class RsFlashTest {
+    /**
+     * RsFlash can make cookie with message.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void makeCookie() throws IOException {
+        final String msg = "message";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsFlash(msg, Level.INFO, RsFlashTest.class.getSimpleName())
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    new StringBuilder("Set-Cookie: ")
+                        .append(RsFlashTest.class.getSimpleName())
+                        .append('=')
+                        .append(
+                            DatatypeConverter.printBase64Binary(
+                                new StringBuilder(Level.INFO.getName())
+                                    .append('/')
+                                    .append(msg).toString()
+                                    .getBytes(Charset.defaultCharset())
+                            )
+                        ),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+>>>>>>> origin/47
 }
