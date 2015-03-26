@@ -23,11 +23,14 @@
  */
 package org.takes.facets.auth;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -117,11 +120,16 @@ public final class PsCookie implements Pass {
         return new RsWithCookie(
             res, this.cookie, text,
             "Path=/",
-            String.format(
-                "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
-                new Date(
-                    System.currentTimeMillis()
-                        + TimeUnit.DAYS.toMillis(this.age)
+            Joiner.on("").join(
+                "Expires=",
+                new SimpleDateFormat(
+                    "EEE, d MMM yyyy HH:mm:ss Z",
+                    Locale.ENGLISH
+                ).format(
+                    new Date(
+                        System.currentTimeMillis()
+                            + TimeUnit.DAYS.toMillis(this.age)
+                    )
                 )
             )
         );
