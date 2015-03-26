@@ -181,14 +181,12 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href path(final String suffix) {
-        final String slash = "/";
-        final StringBuilder sbr = new StringBuilder(this.uri.toString());
-        if (!this.uri.toString().endsWith(slash)) {
-            sbr.append(slash);
-        }
-        sbr.append(Href.encode(suffix));
         return new Href(
-            URI.create(sbr.toString()),
+            URI.create(
+                new StringBuilder(this.uri.toString().replaceAll("/$", ""))
+                    .append('/')
+                    .append(Href.encode(suffix)).toString()
+            ),
             this.params
         );
     }
