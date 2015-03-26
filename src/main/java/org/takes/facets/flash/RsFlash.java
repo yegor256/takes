@@ -23,7 +23,7 @@
  */
 package org.takes.facets.flash;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -83,7 +83,7 @@ public final class RsFlash extends RsWrap {
                         .append('/')
                         .append(msg)
                         .toString()
-                        .getBytes(Charset.defaultCharset())
+                        .getBytes(StandardCharsets.UTF_8)
             ),
                 "Path=/",
                 String.format(
