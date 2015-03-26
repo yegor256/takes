@@ -76,5 +76,9 @@ public final class HrefTest {
             new Href("http://example.com").path("c").path("d").toString(),
             Matchers.equalTo("http://example.com/c/d")
         );
+        MatcherAssert.assertThat(
+            new Href("http://example.com/").path("e").path("f").toString(),
+            Matchers.equalTo("http://example.com/e/f")
+        );
     }
 }
