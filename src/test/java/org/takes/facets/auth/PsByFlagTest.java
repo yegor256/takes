@@ -24,93 +24,110 @@
 package org.takes.facets.auth;
 
 import com.google.common.collect.ImmutableMap;
-import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
 
+import java.io.IOException;
+
 /**
  * Test case for {@link PsByFlag}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
  */
 public final class PsByFlagTest {
+    @Mock
+    Identity identity;
+
     /**
      * PsByFlag can skip if nothing found.
+     *
      * @throws IOException If some problem inside
      */
     @Test
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
-            new PsByFlag(
-                new PsByFlag.Pair(
-                    "test", new PsFake(true)
-                )
-            ).enter(
-                new RqFake("GET", "/?PsByFlag=x")
-            ).hasNext(),
-            Matchers.is(false)
+                new PsByFlag(
+                        new PsByFlag.Pair(
+                                "some-key", new PsFake(true)
+                        )
+                ).enter(new RqFake("GET", "/?PsByFlag=x")).hasNext(),
+                Matchers.is(false)
         );
     }
 
     /**
      * PsByFlag finds flag and authenticates user.
+     *
      * @throws IOException If some problem inside
      */
     @Test
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
-            new PsByFlag(
-                new PsByFlag.Pair(
-                    "some-key", new PsFake(true)
-                )
-            ).enter(
-                new RqFake("POST", "/?PsByFlag=some-key")
-            ).next().urn(),
-            Matchers.is("urn:test:1")
+                new PsByFlag(
+                        new PsByFlag.Pair(
+                                "x", new PsFake(true)
+                        )
+                ).enter(new RqFake("GET", "/?PsByFlag=x")).next().urn(),
+                Matchers.is("urn:test:1")
         );
     }
 
     /**
      * PsByFlag wraps response with authenticated user.
+     *
      * @throws IOException If some problem inside
      */
     @Test
     public void exitTest() throws IOException {
-        final Response response = new RsWithStatus(
-            new RsWithType(
-                new RsWithBody("<html>This is test response</html>"),
-                    "text/html"
-            ),
-            200
+        Response response = new RsWithStatus(
+                new RsWithType(
+                        new RsWithBody("<html>This is test response</html>"),
+                        "text/html"
+                ),
+                200
         );
+
         MatcherAssert.assertThat(
-            new PsByFlag(
-                ImmutableMap.of(
-                    "key", (Pass) new PsFake(true)
-                )
-            ).exit(response, Mockito.mock(Identity.class)),
-            Matchers.is(response)
-        );
+                new PsByFlag(
+                        new PsByFlag.Pair(
+                                "some-key", new PsFake(true)
+                        )
+                ).exit(response, identity),
+                Matchers.is(response));
     }
 
     /**
-     * Checks PsByFlag equals method.
+     * Checks PsByFlag equality.
+     *
      * @throws Exception If some problem inside
      */
     @Test
     public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(PsByFlag.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+        MatcherAssert.assertThat(
+                new PsByFlag(new PsByFlag.Pair("some-key", new PsFake(true))).equals(
+                        new PsByFlag(new PsByFlag.Pair("some-key", new PsFake(true)))),
+                Matchers.is(true));
+    }
+
+    /**
+     * Checks PsByFlag inequality.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void equalsAndHashCodeNotEqualTest() throws Exception {
+        MatcherAssert.assertThat(
+                new PsByFlag(ImmutableMap.of("some-key", ((Pass) new PsFake(true)))).equals(
+                        new PsByFlag(new PsByFlag.Pair("some-other-key", new PsFake(true)))),
+                Matchers.is(false));
     }
 }
