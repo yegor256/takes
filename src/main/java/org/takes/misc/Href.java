@@ -39,7 +39,6 @@ import java.util.concurrent.ConcurrentMap;
  * HTTP URI/HREF.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.7
@@ -184,10 +183,7 @@ public final class Href implements CharSequence {
     public Href path(final String suffix) {
         final String slash = "/";
         final StringBuilder sbr = new StringBuilder(this.uri.toString());
-        if (
-            !this.uri.toString().endsWith(slash)
-                && !suffix.startsWith(slash)
-            ) {
+        if (!this.uri.toString().endsWith(slash)) {
             sbr.append(slash);
         }
         sbr.append(Href.encode(suffix));
