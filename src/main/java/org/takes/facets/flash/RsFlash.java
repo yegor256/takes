@@ -92,8 +92,8 @@ public final class RsFlash extends RsWrap {
                                 + TimeUnit.HOURS.toMillis(1L)
                         )
                     )
-                )
             )
+        )
         );
         assert level != null;
     }
