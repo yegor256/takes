@@ -126,7 +126,7 @@ public final class PsByFlagTest {
                 new PsByFlag.Pair(
                     KEY, new PsFake(true)
                 )
-            ).exit(response, this.identity),
+            ).exit(response, identity),
             Matchers.is(response)
         );
     }
