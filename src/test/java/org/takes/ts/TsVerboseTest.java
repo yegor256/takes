@@ -21,53 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
+
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.NotFoundException;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqFake;
 
 /**
- * Can't find how the resource requested.
- *
+ * Test case for {@link TsVerbose}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.10
  */
-public final class NotFoundException extends RuntimeException {
+public final class TsVerboseTest {
 
     /**
-     * Serialization marker.
+     * TsVerbose can extend not-found exception.
+     * @throws IOException If some problem inside
      */
-    private static final long serialVersionUID = -505306086879848229L;
-
-    /**
-     * Ctor.
-     */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    @Test
+    public void extendsNotFoundException() throws IOException {
+        final Takes takes = new Takes() {
+            @Override
+            public Take route(final Request request) {
+                throw new NotFoundException("can't find");
+            }
+        };
+        try {
+            new TsVerbose(takes).route(new RqFake());
+        } catch (final NotFoundException ex) {
+            MatcherAssert.assertThat(
+                ex.getLocalizedMessage(),
+                Matchers.equalTo("GET http://www.example.com/")
+            );
+        }
     }
 
 }
