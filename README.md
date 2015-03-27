@@ -854,6 +854,14 @@ sending us your pull request please run full Maven build:
 $ mvn clean install -Pqulice
 ```
 
+If your default encoding is not UTF-8, some of unit tests will break. This
+is an intentional behavior. To fix that, set this environment variable
+in console (in Windows, for example):
+
+```
+SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+```
+
 To avoid build errors use maven 3.2+.
 
 ## Got questions?
