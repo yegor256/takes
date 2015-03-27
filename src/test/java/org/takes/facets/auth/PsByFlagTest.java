@@ -24,8 +24,10 @@
 package org.takes.facets.auth;
 
 import com.google.common.collect.ImmutableMap;
+import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.takes.Response;
@@ -33,8 +35,6 @@ import org.takes.rq.RqFake;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
-
-import java.io.IOException;
 
 /**
  * Test case for {@link PsByFlag}.
@@ -44,8 +44,38 @@ import java.io.IOException;
  * @since 0.10
  */
 public final class PsByFlagTest {
+    /**
+     * Testable PsByFlag object.
+     */
+    private static PsByFlag psbyflag;
+    /**
+     * Key.
+     */
+    private static final String KEY = "some-key";
+    /**
+     * HTTP request method.
+     */
+    private static final String METHOD = "GET";
+
+    /**
+     * Mocked Identity object used to test exit method.
+     */
     @Mock
-    Identity identity;
+    private static Identity identity;
+
+    /**
+     * Test set up.
+     *
+     * @throws Exception If some problem inside
+     */
+    @Before
+    public void setUp() throws Exception {
+        psbyflag = new PsByFlag(
+            new PsByFlag.Pair(
+                KEY, new PsFake(true)
+            )
+        );
+    }
 
     /**
      * PsByFlag can skip if nothing found.
@@ -55,12 +85,10 @@ public final class PsByFlagTest {
     @Test
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
-                new PsByFlag(
-                        new PsByFlag.Pair(
-                                "some-key", new PsFake(true)
-                        )
-                ).enter(new RqFake("GET", "/?PsByFlag=x")).hasNext(),
-                Matchers.is(false)
+            psbyflag.enter(
+                new RqFake(METHOD, "/?PsByFlag=x")
+            ).hasNext(),
+            Matchers.is(false)
         );
     }
 
@@ -72,12 +100,10 @@ public final class PsByFlagTest {
     @Test
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
-                new PsByFlag(
-                        new PsByFlag.Pair(
-                                "x", new PsFake(true)
-                        )
-                ).enter(new RqFake("GET", "/?PsByFlag=x")).next().urn(),
-                Matchers.is("urn:test:1")
+            psbyflag.enter(
+                new RqFake(METHOD, "/?PsByFlag=some-key")
+            ).next().urn(),
+            Matchers.is("urn:test:1")
         );
     }
 
@@ -88,21 +114,21 @@ public final class PsByFlagTest {
      */
     @Test
     public void exitTest() throws IOException {
-        Response response = new RsWithStatus(
-                new RsWithType(
-                        new RsWithBody("<html>This is test response</html>"),
-                        "text/html"
-                ),
-                200
+        final Response response = new RsWithStatus(
+            new RsWithType(
+                new RsWithBody("<html>This is test response</html>"),
+                    "text/html"
+            ),
+            200
         );
-
         MatcherAssert.assertThat(
-                new PsByFlag(
-                        new PsByFlag.Pair(
-                                "some-key", new PsFake(true)
-                        )
-                ).exit(response, identity),
-                Matchers.is(response));
+            new PsByFlag(
+                new PsByFlag.Pair(
+                    KEY, new PsFake(true)
+                )
+            ).exit(response, this.identity),
+            Matchers.is(response)
+        );
     }
 
     /**
@@ -113,9 +139,15 @@ public final class PsByFlagTest {
     @Test
     public void equalsAndHashCodeEqualTest() throws Exception {
         MatcherAssert.assertThat(
-                new PsByFlag(new PsByFlag.Pair("some-key", new PsFake(true))).equals(
-                        new PsByFlag(new PsByFlag.Pair("some-key", new PsFake(true)))),
-                Matchers.is(true));
+            psbyflag.equals(
+                new PsByFlag(
+                    new PsByFlag.Pair(
+                        KEY, new PsFake(true)
+                    )
+                )
+            ),
+            Matchers.is(true)
+        );
     }
 
     /**
@@ -126,8 +158,14 @@ public final class PsByFlagTest {
     @Test
     public void equalsAndHashCodeNotEqualTest() throws Exception {
         MatcherAssert.assertThat(
-                new PsByFlag(ImmutableMap.of("some-key", ((Pass) new PsFake(true)))).equals(
-                        new PsByFlag(new PsByFlag.Pair("some-other-key", new PsFake(true)))),
-                Matchers.is(false));
+            psbyflag.equals(
+                new PsByFlag(
+                    ImmutableMap.of(
+                        "some-other-key", (Pass) new PsFake(true)
+                    )
+                )
+            ),
+            Matchers.is(false)
+        );
     }
 }
