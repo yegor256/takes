@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -120,8 +119,9 @@ public final class PsCookie implements Pass {
         return new RsWithCookie(
             res, this.cookie, text,
             "Path=/",
-            Joiner.on("").join(
-                "Expires=",
+            new StringBuilder().append(
+                "Expires="
+            ).append(
                 new SimpleDateFormat(
                     "EEE, d MMM yyyy HH:mm:ss Z",
                     Locale.ENGLISH
@@ -131,7 +131,7 @@ public final class PsCookie implements Pass {
                             + TimeUnit.DAYS.toMillis(this.age)
                     )
                 )
-            )
+                ).toString()
         );
     }
 }

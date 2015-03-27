@@ -23,7 +23,6 @@
  */
 package org.takes.facets.flash;
 
-import com.google.common.base.Joiner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -81,8 +80,9 @@ public final class RsFlash extends RsWrap {
             new RsWithCookie(
                 cookie, msg,
                 "Path=/",
-                Joiner.on("").join(
-                    "Expires=",
+                new StringBuilder().append(
+                    "Expires="
+                ).append(
                     new SimpleDateFormat(
                         "EEE, d MMM yyyy HH:mm:ss Z",
                         Locale.ENGLISH
@@ -92,7 +92,7 @@ public final class RsFlash extends RsWrap {
                                 + TimeUnit.HOURS.toMillis(1L)
                         )
                     )
-            )
+                    ).toString()
         )
         );
         assert level != null;
