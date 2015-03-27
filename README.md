@@ -71,7 +71,10 @@ all requests at the root URI.
 **Important**: Pay attention that UTF-8 encoding is set on the command line.
 The entire framework relies on your default Java encoding, which is not
 necessarily UTF-8 by default. To be sure, always set it on the command line
-with `file.encoding` Java argument.
+with `file.encoding` Java argument. We decided not to hard-code "UTF-8" in
+our code mostly because this would be against the entire idea of Java localization,
+according to which a user always should have a choice of encoding and language
+selection. We're using `Charset.defaultCharset()` everywhere in the code.
 
 ## Build and Run With Maven
 
