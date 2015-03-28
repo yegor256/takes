@@ -31,7 +31,6 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqCookies;
-import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsWithCookie;
 
 /**
@@ -43,7 +42,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "cookie", "header" })
+@EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TsFlash implements Takes {
 
     /**
@@ -57,28 +56,21 @@ public final class TsFlash implements Takes {
     private final transient String cookie;
 
     /**
-     * Header name.
-     */
-    private final transient String header;
-
-    /**
      * Ctor.
      * @param takes Original takes
      */
     public TsFlash(final Takes takes) {
-        this(takes, RsFlash.class.getSimpleName(), "X-Takes-Flash");
+        this(takes, RsFlash.class.getSimpleName());
     }
 
     /**
      * Ctor.
      * @param takes Original takes
      * @param name Cookie name
-     * @param hdr Header name
      */
-    public TsFlash(final Takes takes, final String name, final String hdr) {
+    public TsFlash(final Takes takes, final String name) {
         this.origin = takes;
         this.cookie = name;
-        this.header = hdr;
     }
 
     @Override
@@ -91,11 +83,7 @@ public final class TsFlash implements Takes {
                 @Override
                 public Response act() throws IOException {
                     return new RsWithCookie(
-                        TsFlash.this.origin.route(
-                            new RqWithHeader(
-                                request, TsFlash.this.header, values.next()
-                            )
-                        ).act(),
+                        TsFlash.this.origin.route(request).act(),
                         TsFlash.this.cookie,
                         ""
                     );
