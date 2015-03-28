@@ -681,6 +681,19 @@ public final class TsIndex implements Takes {
 }
 ```
 
+## GZIP Compression
+
+If you want to compress all your responses with GZIP, wrap your takes in
+`TsGzip`:
+
+```java
+new TsGzip(takes)
+```
+
+Now, each request that contains `Accept-Encoding` request header with `gzip`
+compression method inside will receive a GZIP-compressed response. Also,
+you can compress an individual response, using `RsGzip` decorator.
+
 ## Content Negotiation
 
 Say, you want to return different content based on `Accept` header
