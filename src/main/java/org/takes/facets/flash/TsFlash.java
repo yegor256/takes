@@ -36,6 +36,23 @@ import org.takes.rs.RsWithCookie;
 /**
  * Takes that understands Flash cookie and converts it into a HTTP header.
  *
+ * <p>This decorator helps your "takes" to automate flash messages and
+ * destroy cookies on their way back,
+ * from the browser to the server. This is what a browser will send back:
+ *
+ * <pre> GET / HTTP/1.1
+ * Host: www.example.com
+ * Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
+ *
+ * <p>This decorator adds "Set-Cookie" with an empty
+ * value to the response. That's all it's doing. All you need to do
+ * is to decorate your existing "takes", for example:
+ *
+ * <pre> new FtBasic(
+ *   new TsFlash(TsFork(new FkRegex("/", "hello, world!"))), 8080
+ *  ).start(Exit.NEVER);
+ * }</pre>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
