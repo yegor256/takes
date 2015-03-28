@@ -57,7 +57,7 @@ public final class PsLoggedTest {
         final Appender appender = Mockito.mock(Appender.class);
         Mockito.when(appender.getName()).thenReturn("MOCK");
         Logger.getRootLogger().addAppender(appender);
-        Pass pass = new PsLogged(
+        final Pass pass = new PsLogged(
             new Pass() {
                 @Override
                 public Iterator<Identity> enter(

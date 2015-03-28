@@ -54,6 +54,7 @@ public final class BkLoggedTest {
         new BkLogged(
             new Back() {
                 @Override
+                @SuppressWarnings("PMD.UncommentedEmptyMethod")
                 public void accept(final Socket socket) throws IOException {
                 }
             }, LogWrap.Level.WARN

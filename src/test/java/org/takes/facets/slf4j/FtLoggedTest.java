@@ -54,6 +54,7 @@ public final class FtLoggedTest {
         new FtLogged(
             new Front() {
                 @Override
+                @SuppressWarnings("PMD.UncommentedEmptyMethod")
                 public void start(final Exit exit) throws IOException {
                 }
             },

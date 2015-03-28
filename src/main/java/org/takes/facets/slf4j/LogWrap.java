@@ -35,11 +35,33 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @since 0.11
  */
+@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.LoggerIsNotStaticFinal" })
 public class LogWrap {
     /**
      * Log levels.
      */
-    public static enum Level { TRACE, DEBUG, INFO, WARN, SEVERE };
+    public enum Level {
+        /**
+         * Trace level.
+         */
+        TRACE,
+        /**
+         * Debug level.
+         */
+        DEBUG,
+        /**
+         * Info level.
+         */
+        INFO,
+        /**
+         * Warn level.
+         */
+        WARN,
+        /**
+         * Severe level.
+         */
+        SEVERE
+    };
 
     /**
      * Log level.
@@ -49,7 +71,8 @@ public class LogWrap {
     /**
      * Logger.
      */
-    private Logger logger;
+    private final transient Logger logger;
+
     /**
      * Ctor.
      * @param clazz Logger class
@@ -68,7 +91,8 @@ public class LogWrap {
     // @checkstyle JavadocLocationCheck (1 line)
     // @checkstyle CyclomaticComplexityCheck (1 line)
     public final void log(final String format, final Object... param) {
-        if (this.level == LogWrap.Level.TRACE && this.logger.isTraceEnabled()) {
+        if (this.level == LogWrap.Level.TRACE
+            && this.logger.isTraceEnabled()) {
             this.logger.trace(String.format(format, param));
         } else if (
             this.level == LogWrap.Level.DEBUG
