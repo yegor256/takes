@@ -25,8 +25,11 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.facets.fork.FkEncoding;
+import org.takes.facets.fork.RsFork;
 import org.takes.rs.RsGzip;
 
 /**
@@ -44,13 +47,19 @@ public final class TkGzip extends TkWrap {
     /**
      * Ctor.
      * @param take Original take
+     * @param request Request
      */
-    public TkGzip(final Take take) {
+    public TkGzip(final Take take, final Request request) {
         super(
             new Take() {
                 @Override
                 public Response act() throws IOException {
-                    return new RsGzip(take.act());
+                    final Response response = take.act();
+                    return new RsFork(
+                        request,
+                        new FkEncoding("gzip", new RsGzip(response)),
+                        new FkEncoding("", response)
+                    );
                 }
             }
         );

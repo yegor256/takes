@@ -51,7 +51,7 @@ public final class TsGzip extends TsWrap {
             new Takes() {
                 @Override
                 public Take route(final Request request) throws IOException {
-                    return new TkGzip(takes.route(request));
+                    return new TkGzip(takes.route(request), request);
                 }
             }
         );
