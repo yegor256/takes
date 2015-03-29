@@ -21,49 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.facets.fork;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
+import org.takes.rs.RsEmpty;
 
 /**
- * Test case for {@link XeFlash}.
+ * Test case for {@link FkEncoding}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
-public final class XeFlashTest {
+public final class FkEncodingTest {
 
     /**
-     * XeFlash can create a flash data.
+     * FkEncoding can match by Accept-Encoding header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
+    public void matchesByAcceptEncodingHeader() throws IOException {
+        final String header = "Accept-Encoding";
         MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
-                            )
-                        )
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
-                "/root/flash[level='INFO']"
-            )
+            new FkEncoding("gzip", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "gzip,deflate")
+            ).hasNext(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkEncoding("", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
+            ).hasNext(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkEncoding("deflate", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "gzip,exi")
+            ).hasNext(),
+            Matchers.is(false)
         );
     }
 

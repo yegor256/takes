@@ -40,6 +40,13 @@ public final class NotFoundException extends RuntimeException {
 
     /**
      * Ctor.
+     */
+    public NotFoundException() {
+        super();
+    }
+
+    /**
+     * Ctor.
      * @param cause Cause of the problem
      */
     public NotFoundException(final String cause) {

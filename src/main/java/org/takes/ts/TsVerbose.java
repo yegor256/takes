@@ -21,69 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.ts;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import org.takes.NotFoundException;
 import org.takes.Request;
-import org.takes.rq.RqCookies;
-import org.takes.rs.xe.XeSource;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqHref;
+import org.takes.rq.RqMethod;
 
 /**
- * Xembly source to show flash message in XML.
+ * Takes that makes all not-found exceptions location aware.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.10
  */
-@EqualsAndHashCode(of = { "req", "cookie" })
-public final class XeFlash implements XeSource {
-
-    /**
-     * Request.
-     */
-    private final transient Request req;
-
-    /**
-     * Cookie name.
-     */
-    private final transient String cookie;
+@EqualsAndHashCode(callSuper = true)
+public final class TsVerbose extends TsWrap {
 
     /**
      * Ctor.
-     * @param request Request
+     * @param takes Original takes
      */
-    public XeFlash(final Request request) {
-        this(request, RsFlash.class.getSimpleName());
+    public TsVerbose(final Takes takes) {
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    try {
+                        return takes.route(request);
+                    } catch (final NotFoundException ex) {
+                        throw new NotFoundException(
+                            String.format(
+                                "%s %s",
+                                new RqMethod(request).method(),
+                                new RqHref(request).href()
+                            ),
+                            ex
+                        );
+                    }
+                }
+            }
+        );
     }
 
-    /**
-     * Ctor.
-     * @param request Request
-     * @param name Cookie name
-     */
-    public XeFlash(final Request request, final String name) {
-        this.req = request;
-        this.cookie = name;
-    }
-
-    @Override
-    public Iterable<Directive> toXembly() throws IOException {
-        final Iterator<String> cookies =
-            new RqCookies(this.req).cookie(this.cookie).iterator();
-        final Directives dirs = new Directives();
-        if (cookies.hasNext()) {
-            final String value = cookies.next();
-            dirs.add("flash")
-                .add("message").set(value).up()
-                .add("level").set(Level.INFO.toString());
-        }
-        return dirs;
-    }
 }
