@@ -25,6 +25,10 @@ package org.takes.facets.flash;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -42,29 +46,41 @@ import org.takes.rs.xe.XeAppend;
 public final class XeFlashTest {
 
     /**
-     * XeFlash can create a flash data.
+     * XeFlash can accept RsFlash cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
-        MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
-                            )
-                        )
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
-                "/root/flash[level='INFO']"
-            )
+    public void acceptsRsFlashCookie() throws IOException {
+        final String msg = "how are you";
+        final Pattern pattern = Pattern.compile(
+            "^Set-Cookie: RsFlash=(.*?);Path.*"
         );
+        final Iterator<String> itr = new RsFlash(msg, Level.FINE)
+            .head().iterator();
+        if (itr.hasNext()) {
+            final Matcher matcher = pattern.matcher(itr.next());
+            if (matcher.find()) {
+                MatcherAssert.assertThat(
+                    IOUtils.toString(
+                        new RsXembly(
+                            new XeAppend(
+                                "root",
+                                new XeFlash(
+                                    new RqWithHeader(
+                                        new RqFake(),
+                                        "Cookie",
+                                        "RsFlash=".concat(matcher.group(1))
+                                    )
+                                )
+                            )
+                        ).body()
+                    ),
+                    XhtmlMatchers.hasXPaths(
+                        "/root/flash[message='how are you']",
+                        "/root/flash[level='FINE']"
+                    )
+                );
+            }
+        }
     }
-
 }

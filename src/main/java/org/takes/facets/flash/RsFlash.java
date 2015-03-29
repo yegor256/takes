@@ -23,8 +23,9 @@
  */
 package org.takes.facets.flash;
 
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
@@ -121,14 +122,15 @@ public final class RsFlash extends RsWrap {
             new RsWithCookie(
                 cookie,
                 DatatypeConverter.printBase64Binary(
-                    new StringBuilder(level.getName())
+                    new StringBuilder(msg)
                         .append('/')
-                        .append(msg)
+                        .append(level.getName())
                         .toString()
-                        .getBytes(StandardCharsets.UTF_8)
+                        .getBytes(Charset.defaultCharset())
             ),
                 "Path=/",
                 String.format(
+                    Locale.ENGLISH,
                     "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                     new Date(
                         System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)

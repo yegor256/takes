@@ -24,7 +24,7 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import org.hamcrest.MatcherAssert;
@@ -59,7 +59,7 @@ public final class RsFlashTest {
                                 .append('/')
                                 .append(msg)
                                 .toString()
-                                .getBytes(StandardCharsets.UTF_8)
+                                .getBytes(Charset.defaultCharset())
                     )
                 ).toString()
             )
