@@ -25,6 +25,8 @@ package org.takes.facets.auth;
 
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -123,8 +125,8 @@ public final class PsByFlagTest {
         );
         MatcherAssert.assertThat(
             new PsByFlag(
-                new PsByFlag.Pair(
-                    KEY, new PsFake(true)
+                ImmutableMap.of(
+                    KEY, (Pass) new PsFake(true)
                 )
             ).exit(response, identity),
             Matchers.is(response)
@@ -132,40 +134,14 @@ public final class PsByFlagTest {
     }
 
     /**
-     * Checks PsByFlag equality.
+     * Checks PsByFlag equals method.
      *
      * @throws Exception If some problem inside
      */
     @Test
     public void equalsAndHashCodeEqualTest() throws Exception {
-        MatcherAssert.assertThat(
-            psbyflag.equals(
-                new PsByFlag(
-                    new PsByFlag.Pair(
-                        KEY, new PsFake(true)
-                    )
-                )
-            ),
-            Matchers.is(true)
-        );
-    }
-
-    /**
-     * Checks PsByFlag inequality.
-     *
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void equalsAndHashCodeNotEqualTest() throws Exception {
-        MatcherAssert.assertThat(
-            psbyflag.equals(
-                new PsByFlag(
-                    ImmutableMap.of(
-                        "some-other-key", (Pass) new PsFake(true)
-                    )
-                )
-            ),
-            Matchers.is(false)
-        );
+        EqualsVerifier.forClass(PsByFlag.class)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 }
