@@ -25,6 +25,7 @@ merge:
       do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
       if [ "${status}" -eq "success" ]; then break; fi
       if [ "${status}" -eq "failed" ]; then echo "see https://ci.appveyor.com/project/${head}/build/${version}"; exit 1; fi
+      echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
     mvn clean install -Ptakes -Pqulice --errors --settings ../settings.xml
@@ -47,6 +48,7 @@ deploy:
       do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
       if [ "${status}" -eq "success" ]; then break; fi
       if [ "${status}" -eq "failed" ]; then echo "see https://ci.appveyor.com/project/${head}/build/${version}"; exit 1; fi
+      echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
