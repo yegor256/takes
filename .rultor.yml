@@ -21,9 +21,7 @@ architect:
 merge:
 merge:
   script: |
-    version=$(curl -K curl-appveyor.cfg \
-      --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" \
-      https://ci.appveyor.com/api/builds | jq -r '.version')
+    version=$(curl -K curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true; do
       status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
       if [ "${status}" -eq "success" ]; then
@@ -50,9 +48,7 @@ merge:
   - yegor256
 deploy:
   script: |
-    version=$(curl -K curl-appveyor.cfg \
-      --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" \
-      https://ci.appveyor.com/api/builds | jq -r '.version')
+    version=$(curl -K curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true; do
       status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
       if [ "${status}" -eq "success" ]; then
