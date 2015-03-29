@@ -4,7 +4,7 @@ assets:
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
 decrypt:
-  curl-appveyor.cfg: "repo/curl-appveyor.cfg.asc"
+  curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
   JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
@@ -18,7 +18,6 @@ install: |
 architect:
 - yegor256
 - davvd
-merge:
 merge:
   script: |
     version=$(curl -K curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
