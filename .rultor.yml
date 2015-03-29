@@ -48,17 +48,10 @@ merge:
 deploy:
   script: |
     version=$(curl -K curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
-    while true; do
-      status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
-      if [ "${status}" -eq "success" ]
-      then
-        break
-      fi
-      if [ "${status}" -eq "failed" ]
-      then
-        echo "build failed in AppVeyor, see https://ci.appveyor.com/project/${head}/build/${version}"
-        exit -1
-      fi
+    while true
+      do status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
+      if [ "${status}" -eq "success" ]; then break; fi
+      if [ "${status}" -eq "failed" ]; then echo "see https://ci.appveyor.com/project/${head}/build/${version}"; exit 1; fi
       sleep 5s
     done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
