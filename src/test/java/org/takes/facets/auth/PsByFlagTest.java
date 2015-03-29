@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsWithBody;
@@ -46,17 +46,6 @@ import org.takes.rs.RsWithType;
  * @since 0.10
  */
 public final class PsByFlagTest {
-    /**
-     * HTTP request method.
-     */
-    private static final String METHOD = "GET";
-
-    /**
-     * Mocked Identity object used to test exit method.
-     */
-    @Mock
-    private static Identity identity;
-
     /**
      * Testable PsByFlag object.
      */
@@ -85,7 +74,7 @@ public final class PsByFlagTest {
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
             this.psbyflag.enter(
-                new RqFake(METHOD, "/?PsByFlag=x")
+                new RqFake("GET", "/?PsByFlag=x")
             ).hasNext(),
             Matchers.is(false)
         );
@@ -100,7 +89,7 @@ public final class PsByFlagTest {
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
             this.psbyflag.enter(
-                new RqFake(METHOD, "/?PsByFlag=some-key")
+                new RqFake("POST", "/?PsByFlag=some-key")
             ).next().urn(),
             Matchers.is("urn:test:1")
         );
@@ -125,7 +114,7 @@ public final class PsByFlagTest {
                 ImmutableMap.of(
                     "key", (Pass) new PsFake(true)
                 )
-            ).exit(response, identity),
+            ).exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );
     }
