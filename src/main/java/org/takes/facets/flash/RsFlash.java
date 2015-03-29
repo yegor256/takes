@@ -127,7 +127,7 @@ public final class RsFlash extends RsWrap {
                         .append(level.getName())
                         .toString()
                         .getBytes(Charset.defaultCharset())
-            ),
+                ),
                 "Path=/",
                 String.format(
                     Locale.ENGLISH,
@@ -135,8 +135,8 @@ public final class RsFlash extends RsWrap {
                     new Date(
                         System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
                     )
+                )
             )
-        )
         );
     }
 }
