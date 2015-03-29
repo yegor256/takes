@@ -24,7 +24,8 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Take;
@@ -33,13 +34,14 @@ import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.facets.forward.RsForward;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsEmpty;
 import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TsSecure}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.9.12
+ * @since 0.11
  */
 public final class TsSecureTest {
 
@@ -64,14 +66,13 @@ public final class TsSecureTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void passOnRegistered() throws IOException {
-        try {
+    public void passesOnRegisteredUser() throws IOException {
+        MatcherAssert.assertThat(
             new TsSecure(
                 new Takes() {
                     @Override
-                    public Take route(
-                        final Request request
-                    ) throws IOException {
+                    public Take route(final Request request)
+                        throws IOException {
                         return new TkEmpty();
                     }
                 }
@@ -83,10 +84,8 @@ public final class TsSecureTest {
                         new CcPlain().encode(new Identity.Simple("urn:test:1"))
                     )
                 )
-            ).act();
-        } catch (final RsForward rsf) {
-            Assert.fail(rsf.getMessage());
-        }
+            ).act(),
+            Matchers.instanceOf(RsEmpty.class)
+        );
     }
-
 }
