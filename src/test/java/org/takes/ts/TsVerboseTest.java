@@ -21,50 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.ts;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.NotFoundException;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
 
 /**
- * Test case for {@link XeFlash}.
+ * Test case for {@link TsVerbose}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
-public final class XeFlashTest {
+public final class TsVerboseTest {
 
     /**
-     * XeFlash can create a flash data.
+     * TsVerbose can extend not-found exception.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
-        MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
-                            )
-                        )
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
-                "/root/flash[level='INFO']"
-            )
-        );
+    public void extendsNotFoundException() throws IOException {
+        final Takes takes = new Takes() {
+            @Override
+            public Take route(final Request request) {
+                throw new NotFoundException("can't find");
+            }
+        };
+        try {
+            new TsVerbose(takes).route(new RqFake());
+        } catch (final NotFoundException ex) {
+            MatcherAssert.assertThat(
+                ex.getLocalizedMessage(),
+                Matchers.equalTo("GET http://www.example.com/")
+            );
+        }
     }
 
 }

@@ -21,50 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.facets.auth;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
 
 /**
- * Test case for {@link XeFlash}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RqAuth}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.9.12
  */
-public final class XeFlashTest {
+public class RqAuthTest {
 
     /**
-     * XeFlash can create a flash data.
+     * RqAuth can return identity.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
+    public final void returnsIdentity() throws IOException {
+        final Identity.Simple identity = new Identity.Simple("urn:test:1");
         MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
-                            )
-                        )
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
-                "/root/flash[level='INFO']"
-            )
+            new RqAuth(
+                new RqWithHeader(
+                    new RqFake(),
+                    TsAuth.class.getSimpleName(),
+                    new String(new CcPlain().encode(identity))
+                )
+            ).identity().urn(),
+            Matchers.equalTo(identity.urn())
         );
     }
-
 }

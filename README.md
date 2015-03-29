@@ -3,9 +3,10 @@
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 
-[![Build Status](https://img.shields.io/travis/yegor256/takes.svg)](https://travis-ci.org/yegor256/takes)
-[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
+[![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
+[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
@@ -70,7 +71,10 @@ all requests at the root URI.
 **Important**: Pay attention that UTF-8 encoding is set on the command line.
 The entire framework relies on your default Java encoding, which is not
 necessarily UTF-8 by default. To be sure, always set it on the command line
-with `file.encoding` Java argument.
+with `file.encoding` Java argument. We decided not to hard-code "UTF-8" in
+our code mostly because this would be against the entire idea of Java localization,
+according to which a user always should have a choice of encoding and language
+selection. We're using `Charset.defaultCharset()` everywhere in the code.
 
 ## Build and Run With Maven
 
@@ -677,6 +681,19 @@ public final class TsIndex implements Takes {
 }
 ```
 
+## GZIP Compression
+
+If you want to compress all your responses with GZIP, wrap your takes in
+`TsGzip`:
+
+```java
+new TsGzip(takes)
+```
+
+Now, each request that contains `Accept-Encoding` request header with `gzip`
+compression method inside will receive a GZIP-compressed response. Also,
+you can compress an individual response, using `RsGzip` decorator.
+
 ## Content Negotiation
 
 Say, you want to return different content based on `Accept` header
@@ -838,4 +855,30 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
 pom.xml
 LICENSE.txt
 ```
+
+## How to contribute
+
+Fork repository, make changes, send us a pull request. We will review
+your changes and apply them to the `master` branch shortly, provided
+they don't violate our quality standards. To avoid frustration, before
+sending us your pull request please run full Maven build:
+
+```
+$ mvn clean install -Pqulice
+```
+
+If your default encoding is not UTF-8, some of unit tests will break. This
+is an intentional behavior. To fix that, set this environment variable
+in console (in Windows, for example):
+
+```
+SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+```
+
+To avoid build errors use maven 3.2+.
+
+## Got questions?
+
+If you have questions or general suggestions, don't hesitate to submit
+a new [Github issue](https://github.com/yegor256/takes/issues/new).
 

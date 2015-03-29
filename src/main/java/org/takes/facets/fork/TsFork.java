@@ -100,7 +100,7 @@ public final class TsFork implements Takes {
                 return takes.next();
             }
         }
-        throw new NotFoundException("nothing found");
+        throw new NotFoundException();
     }
 
 }

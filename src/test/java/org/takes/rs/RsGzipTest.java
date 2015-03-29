@@ -21,49 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.rs;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
+import org.takes.Response;
 
 /**
- * Test case for {@link XeFlash}.
+ * Test case for {@link RsGzip}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
-public final class XeFlashTest {
+public final class RsGzipTest {
 
     /**
-     * XeFlash can create a flash data.
+     * RsGzip can build a compressed response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
+    public void makesCompressedResponse() throws IOException {
+        final Response response = new RsGzip(new RsText("hello, world!"));
         MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
-                            )
-                        )
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
-                "/root/flash[level='INFO']"
-            )
+            new RsPrint(response).printHead(),
+            Matchers.containsString("Content-Encoding: gzip")
+        );
+        MatcherAssert.assertThat(
+            IOUtils.toString(new GZIPInputStream(response.body())),
+            Matchers.startsWith("hello")
         );
     }
 
