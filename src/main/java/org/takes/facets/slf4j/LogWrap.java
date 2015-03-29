@@ -87,9 +87,8 @@ public class LogWrap {
      * Log message.
      * @param format Format string
      * @param param Parameters
+     * @checkstyle CyclomaticComplexityCheck (2 line)
      */
-    // @checkstyle JavadocLocationCheck (1 line)
-    // @checkstyle CyclomaticComplexityCheck (1 line)
     public final void log(final String format, final Object... param) {
         if (this.level == LogWrap.Level.TRACE
             && this.logger.isTraceEnabled()) {
