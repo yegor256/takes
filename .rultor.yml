@@ -3,6 +3,8 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
+decrypt:
+  curl-appveyor.cfg: "repo/curl-appveyor.cfg.asc"
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
   JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
@@ -17,7 +19,22 @@ architect:
 - yegor256
 - davvd
 merge:
+merge:
   script: |
+    version=$(curl -K curl-appveyor.cfg \
+      --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" \
+      https://ci.appveyor.com/api/builds | jq -r '.version')
+    while true; do
+      status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
+      if [ "${status}" -eq "success" ]; then
+        break
+      fi
+      if [ "${status}" -eq "failed" ]; then
+        echo "build failed in AppVeyor, see https://ci.appveyor.com/project/${head}/build/${version}"
+        exit
+      fi
+      sleep 5s
+    done
     mvn clean install -Ptakes -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
@@ -33,6 +50,20 @@ merge:
   - yegor256
 deploy:
   script: |
+    version=$(curl -K curl-appveyor.cfg \
+      --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" \
+      https://ci.appveyor.com/api/builds | jq -r '.version')
+    while true; do
+      status=$(curl -K curl-appveyor.cfg https://ci.appveyor.com/api/projects/${head}/build/${version} | jq -r '.build.status')
+      if [ "${status}" -eq "success" ]; then
+        break
+      fi
+      if [ "${status}" -eq "failed" ]; then
+        echo "build failed in AppVeyor, see https://ci.appveyor.com/project/${head}/build/${version}"
+        exit
+      fi
+      sleep 5s
+    done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml
