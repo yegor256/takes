@@ -25,6 +25,9 @@ package org.takes.facets.flash;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -71,7 +74,17 @@ public final class TsFlashTest {
             IOUtils.toString(
                 takes.route(
                     new RqWithHeader(
-                        new RqFake(), "Cookie: RsFlash=Hello!"
+                        new RqFake(),
+                        new StringBuilder("Cookie: RsFlash=")
+                            .append(
+                                DatatypeConverter.printBase64Binary(
+                                    new StringBuilder("Hello!")
+                                        .append('/')
+                                        .append(Level.INFO.getName())
+                                        .toString()
+                                        .getBytes(Charset.defaultCharset())
+                            )
+                        ).toString()
                     )
                 ).act().body()
             ),

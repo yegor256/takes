@@ -55,9 +55,9 @@ public final class RsFlashTest {
                 new StringBuilder("Set-Cookie: RsFlash=")
                     .append(
                         DatatypeConverter.printBase64Binary(
-                            new StringBuilder(Level.INFO.getName())
+                            new StringBuilder(msg)
                                 .append('/')
-                                .append(msg)
+                                .append(Level.INFO.getName())
                                 .toString()
                                 .getBytes(Charset.defaultCharset())
                     )
