@@ -35,8 +35,12 @@ import org.slf4j.LoggerFactory;
  * @version $Id$
  * @since 0.11
  */
-@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.LoggerIsNotStaticFinal" })
+@SuppressWarnings("PMD.LoggerIsNotStaticFinal")
 public class LogWrap {
+    /**
+     * Default log level.
+     */
+    public static final LogWrap.Level DEFAULT_LEVEL = LogWrap.Level.DEBUG;
     /**
      * Log levels.
      */
@@ -58,9 +62,9 @@ public class LogWrap {
          */
         WARN,
         /**
-         * Severe level.
+         * Error level.
          */
-        SEVERE
+        ERROR
     };
 
     /**
@@ -76,6 +80,14 @@ public class LogWrap {
     /**
      * Ctor.
      * @param clazz Logger class
+     */
+    public LogWrap(final Class<?> clazz) {
+        this(clazz, LogWrap.Level.DEBUG);
+    }
+
+    /**
+     * Ctor.
+     * @param clazz Logger class
      * @param lvl Log level
      */
     public LogWrap(final Class<?> clazz, final LogWrap.Level lvl) {
@@ -87,28 +99,26 @@ public class LogWrap {
      * Log message.
      * @param format Format string
      * @param param Parameters
-     * @checkstyle CyclomaticComplexityCheck (2 line)
      */
     public final void log(final String format, final Object... param) {
-        if (this.level == LogWrap.Level.TRACE
-            && this.logger.isTraceEnabled()) {
-            this.logger.trace(String.format(format, param));
-        } else if (
-            this.level == LogWrap.Level.DEBUG
-                && this.logger.isDebugEnabled()) {
-            this.logger.debug(String.format(format, param));
-        } else if (
-            this.level == LogWrap.Level.INFO
-                && this.logger.isInfoEnabled()) {
-            this.logger.trace(String.format(format, param));
-        } else if (
-            this.level == LogWrap.Level.WARN
-                && this.logger.isWarnEnabled()) {
-            this.logger.warn(String.format(format, param));
-        } else if (
-            this.level == LogWrap.Level.SEVERE
-                && this.logger.isErrorEnabled()) {
-            this.logger.error(String.format(format, param));
+        switch (this.level) {
+            case TRACE :
+                this.logger.trace(format, param);
+                break;
+            case DEBUG:
+                this.logger.debug(format, param);
+                break;
+            case INFO:
+                this.logger.info(format, param);
+                break;
+            case WARN:
+                this.logger.warn(format, param);
+                break;
+            case ERROR:
+                this.logger.error(format, param);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown log level");
         }
     }
 }

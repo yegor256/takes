@@ -47,6 +47,10 @@ public final class TsLoggedTest {
     /**
      * TsLogged can log message.
      * @throws IOException If some problem inside
+     * @todo #90 we should change mocked Log4j appender to
+     *  custom Log4jAppeneder that implemented as JUnit Rule.
+     *  See details in CR comment here
+     *  https://github.com/yegor256/takes/pull/89#discussion_r27354036
      */
     @Test
     public void logsMessage() throws IOException {
@@ -74,7 +78,7 @@ public final class TsLoggedTest {
                         public boolean matches(final Object argument) {
                             return ((LoggingEvent) argument)
                                 .getRenderedMessage()
-                                .matches("^.*FakeTakes.*$");
+                                .contains("[FakeTakes]");
                         }
                     }
                 )

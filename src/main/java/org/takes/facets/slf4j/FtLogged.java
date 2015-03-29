@@ -48,7 +48,7 @@ public final class FtLogged extends LogWrap implements Front {
      * @param front Original
      */
     public FtLogged(final Front front) {
-        this(front, LogWrap.Level.TRACE);
+        this(front, LogWrap.DEFAULT_LEVEL);
     }
 
     /**
@@ -64,7 +64,7 @@ public final class FtLogged extends LogWrap implements Front {
     @Override
     public void start(final Exit exit) throws IOException {
         this.log(
-            "[%s] #start(%s)",
+            "[{}] #start([{}])",
             this.origin,
             exit
         );

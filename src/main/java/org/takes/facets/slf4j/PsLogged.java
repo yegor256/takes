@@ -53,7 +53,7 @@ public final class PsLogged extends LogWrap implements Pass {
      * @param pass Original
      */
     public PsLogged(final Pass pass) {
-        this(pass, LogWrap.Level.TRACE);
+        this(pass, LogWrap.DEFAULT_LEVEL);
     }
 
     /**
@@ -80,7 +80,7 @@ public final class PsLogged extends LogWrap implements Pass {
         }
         sbr.append(']');
         this.log(
-            "[%s] #enter(%s) return [%s] in [%d] ms",
+            "[{}] #enter({}) return [{}] in [{}] ms",
             this.origin,
             request,
             sbr.toString(),
@@ -95,7 +95,7 @@ public final class PsLogged extends LogWrap implements Pass {
         final long started = System.currentTimeMillis();
         final Response resp = this.origin.exit(response, identity);
         this.log(
-            "[%s] #exit(%s,%s) return [%s] in [%d] ms",
+            "[{}] #exit([{}],[{}]) return [{}] in [{}] ms",
             this.origin,
             response,
             identity,

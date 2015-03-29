@@ -48,7 +48,7 @@ public final class BkLogged extends LogWrap implements Back {
      * @param back Original
      */
     public BkLogged(final Back back) {
-        this(back, LogWrap.Level.TRACE);
+        this(back, LogWrap.DEFAULT_LEVEL);
     }
 
     /**
@@ -66,7 +66,7 @@ public final class BkLogged extends LogWrap implements Back {
         final long started = System.currentTimeMillis();
         this.origin.accept(socket);
         this.log(
-            "[%s] #accept(%s) in [%d] ms",
+            "[{}] #accept([{}]) in [{}] ms",
             this.origin,
             socket,
             System.currentTimeMillis() - started

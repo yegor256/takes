@@ -48,7 +48,7 @@ public final class TkLogged extends LogWrap implements Take {
      * @param take Original
      */
     public TkLogged(final Take take) {
-        this(take, LogWrap.Level.TRACE);
+        this(take, LogWrap.DEFAULT_LEVEL);
     }
 
     /**
@@ -66,7 +66,7 @@ public final class TkLogged extends LogWrap implements Take {
         final long started = System.currentTimeMillis();
         final Response resp = this.origin.act();
         this.log(
-            "[%s] #act() return [%s] in [%d] ms",
+            "[{}] #act() return [{}] in [{}] ms",
             this.origin,
             resp,
             System.currentTimeMillis() - started

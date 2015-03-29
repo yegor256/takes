@@ -50,7 +50,7 @@ public final class TsLogged extends LogWrap implements Takes {
      * @param takes Original
      */
     public TsLogged(final Takes takes) {
-        this(takes, LogWrap.Level.TRACE);
+        this(takes, LogWrap.DEFAULT_LEVEL);
     }
 
     /**
@@ -68,7 +68,7 @@ public final class TsLogged extends LogWrap implements Takes {
         final long started = System.currentTimeMillis();
         final Take resp = this.origin.route(request);
         this.log(
-            "[%s] #route(%s) return [%s] in [%d] ms",
+            "[{}] #route([{}]) return [{}] in [{}] ms",
             this.origin,
             request,
             resp,
