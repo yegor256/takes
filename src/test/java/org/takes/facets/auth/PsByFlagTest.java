@@ -49,7 +49,7 @@ public final class PsByFlagTest {
     /**
      * Testable PsByFlag object.
      */
-    private transient PsByFlag psbyflag;
+    private transient Pass pass;
 
     /**
      * Test set up.
@@ -58,7 +58,7 @@ public final class PsByFlagTest {
      */
     @Before
     public void setUp() throws Exception {
-        this.psbyflag = new PsByFlag(
+        this.pass = new PsByFlag(
             new PsByFlag.Pair(
                 "some-key", new PsFake(true)
             )
@@ -73,7 +73,7 @@ public final class PsByFlagTest {
     @Test
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
-            this.psbyflag.enter(
+            this.pass.enter(
                 new RqFake("GET", "/?PsByFlag=x")
             ).hasNext(),
             Matchers.is(false)
@@ -88,7 +88,7 @@ public final class PsByFlagTest {
     @Test
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
-            this.psbyflag.enter(
+            this.pass.enter(
                 new RqFake("POST", "/?PsByFlag=some-key")
             ).next().urn(),
             Matchers.is("urn:test:1")
