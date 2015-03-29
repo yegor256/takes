@@ -47,14 +47,6 @@ import org.takes.rs.RsWithType;
  */
 public final class PsByFlagTest {
     /**
-     * Testable PsByFlag object.
-     */
-    private static PsByFlag psbyflag;
-    /**
-     * Key.
-     */
-    private static final String KEY = "some-key";
-    /**
      * HTTP request method.
      */
     private static final String METHOD = "GET";
@@ -66,15 +58,20 @@ public final class PsByFlagTest {
     private static Identity identity;
 
     /**
+     * Testable PsByFlag object.
+     */
+    private transient PsByFlag psbyflag;
+
+    /**
      * Test set up.
      *
      * @throws Exception If some problem inside
      */
     @Before
     public void setUp() throws Exception {
-        psbyflag = new PsByFlag(
+        this.psbyflag = new PsByFlag(
             new PsByFlag.Pair(
-                KEY, new PsFake(true)
+                "some-key", new PsFake(true)
             )
         );
     }
@@ -87,7 +84,7 @@ public final class PsByFlagTest {
     @Test
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
-            psbyflag.enter(
+            this.psbyflag.enter(
                 new RqFake(METHOD, "/?PsByFlag=x")
             ).hasNext(),
             Matchers.is(false)
@@ -102,7 +99,7 @@ public final class PsByFlagTest {
     @Test
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
-            psbyflag.enter(
+            this.psbyflag.enter(
                 new RqFake(METHOD, "/?PsByFlag=some-key")
             ).next().urn(),
             Matchers.is("urn:test:1")
@@ -126,7 +123,7 @@ public final class PsByFlagTest {
         MatcherAssert.assertThat(
             new PsByFlag(
                 ImmutableMap.of(
-                    KEY, (Pass) new PsFake(true)
+                    "key", (Pass) new PsFake(true)
                 )
             ).exit(response, identity),
             Matchers.is(response)
