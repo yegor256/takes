@@ -133,8 +133,8 @@ public final class RsFlash extends RsWrap {
                     URLEncoder.encode(
                         level.getName(),
                         Charset.defaultCharset().name()
-                    )
-                ),
+                )
+            ),
                 "Path=/",
                 String.format(
                     Locale.ENGLISH,
@@ -142,8 +142,8 @@ public final class RsFlash extends RsWrap {
                     new Date(
                         System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
                     )
-                )
             )
+        )
         );
     }
 }
