@@ -23,8 +23,13 @@
  */
 package org.takes.rs;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPInputStream;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -54,6 +59,29 @@ public final class RsGzipTest {
             IOUtils.toString(new GZIPInputStream(response.body())),
             Matchers.startsWith("hello")
         );
+    }
+
+    /**
+     * RsGzip can build a compressed PNG image.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void makesCompressedPngImage() throws IOException {
+        final RenderedImage image = new BufferedImage(
+            1, 1, BufferedImage.TYPE_INT_ARGB
+        );
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        final ByteArrayOutputStream gzip = new ByteArrayOutputStream();
+        new RsPrint(
+            new RsGzip(
+                new RsWithBody(baos.toByteArray())
+            )
+        ).printBody(gzip);
+        final BufferedImage reverse = ImageIO.read(
+            new GZIPInputStream(new ByteArrayInputStream(gzip.toByteArray()))
+        );
+        MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(1));
     }
 
 }
