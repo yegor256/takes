@@ -65,10 +65,10 @@ public final class CcBase64Test {
     public void decodes() throws IOException {
         MatcherAssert.assertThat(
             new CcBase64(new CcPlain()).decode(
-                "dXJuJTNBdGVzdCUzQSVGMiVFNSVGMSVGMg=="
+                "dXJuJTNBdGVzdCUzQXRlc3Q="
                 .getBytes()
             ).urn(),
-            Matchers.equalTo("urn:test:тест")
+            Matchers.equalTo("urn:test:test")
         );
     }
 
