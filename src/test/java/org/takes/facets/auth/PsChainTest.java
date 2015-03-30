@@ -23,12 +23,12 @@
  */
 package org.takes.facets.auth;
 
+import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
-import java.io.IOException;
 
 /**
  * Test case for {@link PsChain}.
@@ -38,32 +38,32 @@ import java.io.IOException;
 public final class PsChainTest {
 
     /**
-     * Check that PsChain returns proper identity
-     * @throws IOException
+     * Check that PsChain returns proper identity.
+     * @throws IOException if some problems inside
      */
     @Test
     public void chainExecutionTest() throws IOException {
         MatcherAssert.assertThat(
-                new PsChain(
-                        new PsLogout(),
-                        new PsFake(true)
-                ).enter(new RqFake()).next(),
-                Matchers.is(Identity.ANONYMOUS)
+            new PsChain(
+                    new PsLogout(),
+                    new PsFake(true)
+            ).enter(new RqFake()).next(),
+            Matchers.is(Identity.ANONYMOUS)
         );
     }
 
     /**
-     * Check that exit method of PsChain returns proper response
-     * @throws IOException
+     * Check that exit method of PsChain returns proper response.
+     * @throws IOException if some problems inside
      */
     @Test
     public void exitChainTest() throws IOException {
         MatcherAssert.assertThat(
-                new PsChain(
-                        new PsFake(true)
-                ).exit(new RsEmpty(), Identity.ANONYMOUS)
-                        .head().iterator().next(),
-                Matchers.containsString("HTTP/1.1 200 O")
+            new PsChain(
+                new PsFake(true)
+            ).exit(new RsEmpty(), Identity.ANONYMOUS)
+                .head().iterator().next(),
+            Matchers.containsString("HTTP/1.1 200 O")
         );
     }
 }
