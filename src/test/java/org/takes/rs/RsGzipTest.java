@@ -41,6 +41,7 @@ import org.takes.Response;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class RsGzipTest {
 
@@ -50,14 +51,15 @@ public final class RsGzipTest {
      */
     @Test
     public void makesCompressedResponse() throws IOException {
-        final Response response = new RsGzip(new RsText("hello, world!"));
+        final String text = "some unicode text: \u20ac\n\t";
+        final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
             new RsPrint(response).printHead(),
             Matchers.containsString("Content-Encoding: gzip")
         );
         MatcherAssert.assertThat(
             IOUtils.toString(new GZIPInputStream(response.body())),
-            Matchers.startsWith("hello")
+            Matchers.equalTo(text)
         );
     }
 
