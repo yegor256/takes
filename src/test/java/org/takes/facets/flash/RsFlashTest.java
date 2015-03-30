@@ -24,9 +24,9 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
-import javax.xml.bind.DatatypeConverter;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -34,6 +34,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsFlash}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9.6
@@ -42,7 +43,9 @@ public final class RsFlashTest {
 
     /**
      * RsFlash can add cookies.
+     *
      * @throws IOException If some problem inside
+     * @checkstyle IndentationCheck (24 lines)
      */
     @Test
     public void addsCookieToResponse() throws IOException {
@@ -54,14 +57,16 @@ public final class RsFlashTest {
             Matchers.containsString(
                 new StringBuilder("Set-Cookie: RsFlash=")
                     .append(
-                        DatatypeConverter.printBase64Binary(
-                            new StringBuilder(msg)
-                                .append('/')
-                                .append(Level.INFO.getName())
-                                .toString()
-                                .getBytes(Charset.defaultCharset())
-                    )
-                ).toString()
+                        URLEncoder.encode(
+                            msg,
+                            Charset.defaultCharset().name()
+                        )
+                    ).append('/').append(
+                        URLEncoder.encode(
+                            Level.INFO.getName(),
+                            Charset.defaultCharset().name()
+                        )
+                    ).toString()
             )
         );
     }

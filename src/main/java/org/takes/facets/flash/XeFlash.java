@@ -24,11 +24,11 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqCookies;
@@ -40,6 +40,7 @@ import org.xembly.Directives;
  * Xembly source to show flash message in XML.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -65,6 +66,7 @@ public final class XeFlash implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param request Request
      */
     public XeFlash(final Request request) {
@@ -73,6 +75,7 @@ public final class XeFlash implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param request Request
      * @param name Cookie name
      */
@@ -87,16 +90,21 @@ public final class XeFlash implements XeSource {
             new RqCookies(this.req).cookie(this.cookie).iterator();
         final Directives dirs = new Directives();
         if (cookies.hasNext()) {
-            final Matcher matcher = RS_FLASH_MSG.matcher(
-                new String(
-                    DatatypeConverter.parseBase64Binary(cookies.next()),
-                    Charset.defaultCharset()
-                )
-            );
+            final Matcher matcher = RS_FLASH_MSG.matcher(cookies.next());
             if (matcher.find()) {
                 dirs.add("flash")
-                    .add("message").set(matcher.group(1)).up()
-                    .add("level").set(matcher.group(2));
+                    .add("message").set(
+                        URLDecoder.decode(
+                            matcher.group(1),
+                            Charset.defaultCharset().name()
+                        )
+                    ).up()
+                    .add("level").set(
+                        URLDecoder.decode(
+                            matcher.group(2),
+                            Charset.defaultCharset().name()
+                        )
+                    );
             }
         }
         return dirs;

@@ -111,5 +111,4 @@ public final class TsFlash implements Takes {
         }
         return take;
     }
-
 }
