@@ -90,11 +90,34 @@ public final class RsPrint extends RsWrap {
     }
 
     /**
+     * Print head into string.
+     * @return Entire head of HTTP response
+     * @throws IOException If fails
+     * @since 0.10
+     */
+    public String printHead() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printHead(baos);
+        return new String(baos.toByteArray());
+    }
+
+    /**
      * Print it into output stream.
      * @param output Output to print into
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
+        this.printHead(output);
+        this.printBody(output);
+    }
+
+    /**
+     * Print it into output stream.
+     * @param output Output to print into
+     * @throws IOException If fails
+     * @since 0.10
+     */
+    public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer = new OutputStreamWriter(output);
         boolean first = true;
@@ -124,7 +147,6 @@ public final class RsPrint extends RsWrap {
         }
         writer.append(eol);
         writer.flush();
-        this.printBody(output);
     }
 
     /**

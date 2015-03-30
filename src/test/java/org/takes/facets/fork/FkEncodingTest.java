@@ -21,56 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.facets.fork;
+
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsEmpty;
 
 /**
- * Can't find how the resource requested.
- *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
- * if and when a "take" can't be found.
- *
+ * Test case for {@link FkEncoding}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.10
  */
-public final class NotFoundException extends RuntimeException {
+public final class FkEncodingTest {
 
     /**
-     * Serialization marker.
+     * FkEncoding can match by Accept-Encoding header.
+     * @throws IOException If some problem inside
      */
-    private static final long serialVersionUID = -505306086879848229L;
-
-    /**
-     * Ctor.
-     */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    @Test
+    public void matchesByAcceptEncodingHeader() throws IOException {
+        final String header = "Accept-Encoding";
+        MatcherAssert.assertThat(
+            new FkEncoding("gzip", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "gzip,deflate")
+            ).hasNext(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkEncoding("", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
+            ).hasNext(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkEncoding("deflate", new RsEmpty()).route(
+                new RqWithHeader(new RqFake(), header, "gzip,exi")
+            ).hasNext(),
+            Matchers.is(false)
+        );
     }
 
 }

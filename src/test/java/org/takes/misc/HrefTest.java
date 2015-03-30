@@ -66,4 +66,19 @@ public final class HrefTest {
         );
     }
 
+    /**
+     * Href can add path.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addsPath() throws IOException {
+        MatcherAssert.assertThat(
+            new Href("http://example.com").path("c").path("d").toString(),
+            Matchers.equalTo("http://example.com/c/d")
+        );
+        MatcherAssert.assertThat(
+            new Href("http://example.com/").path("e").path("f").toString(),
+            Matchers.equalTo("http://example.com/e/f")
+        );
+    }
 }

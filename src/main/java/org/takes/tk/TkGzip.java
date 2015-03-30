@@ -21,56 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.tk;
+
+import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.facets.fork.FkEncoding;
+import org.takes.facets.fork.RsFork;
+import org.takes.rs.RsGzip;
 
 /**
- * Can't find how the resource requested.
+ * Take that compresses responses with GZIP.
  *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
- * if and when a "take" can't be found.
+ * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.10
  */
-public final class NotFoundException extends RuntimeException {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = -505306086879848229L;
+@EqualsAndHashCode(callSuper = true)
+public final class TkGzip extends TkWrap {
 
     /**
      * Ctor.
+     * @param take Original take
+     * @param request Request
      */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    public TkGzip(final Take take, final Request request) {
+        super(
+            new Take() {
+                @Override
+                public Response act() throws IOException {
+                    final Response response = take.act();
+                    return new RsFork(
+                        request,
+                        new FkEncoding("gzip", new RsGzip(response)),
+                        new FkEncoding("", response)
+                    );
+                }
+            }
+        );
     }
 
 }

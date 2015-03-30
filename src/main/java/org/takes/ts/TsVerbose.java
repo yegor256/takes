@@ -21,56 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.ts;
+
+import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import org.takes.NotFoundException;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.Takes;
+import org.takes.rq.RqHref;
+import org.takes.rq.RqMethod;
 
 /**
- * Can't find how the resource requested.
+ * Takes that makes all not-found exceptions location aware.
  *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
- * if and when a "take" can't be found.
+ * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.10
  */
-public final class NotFoundException extends RuntimeException {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = -505306086879848229L;
+@EqualsAndHashCode(callSuper = true)
+public final class TsVerbose extends TsWrap {
 
     /**
      * Ctor.
+     * @param takes Original takes
      */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    public TsVerbose(final Takes takes) {
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    try {
+                        return takes.route(request);
+                    } catch (final NotFoundException ex) {
+                        throw new NotFoundException(
+                            String.format(
+                                "%s %s",
+                                new RqMethod(request).method(),
+                                new RqHref(request).href()
+                            ),
+                            ex
+                        );
+                    }
+                }
+            }
+        );
     }
 
 }
