@@ -36,10 +36,10 @@ import org.takes.rs.RsWrap;
 
 /**
  * Forwarding response.
- * <p/>
+ *
  * <p>This class helps you to automate flash message mechanism, by
  * adding flash messages to your responses, for example:
- * <p/>
+ *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
  *   public Response act() {
@@ -50,13 +50,13 @@ import org.takes.rs.RsWrap;
  *     );
  *   }
  * }</pre>
- * <p/>
+ *
  * <p>This decorator will add the
  * required "Set-Cookie" header to the response. This is all it is doing.
  * The response is added to the cookie in URL-encoded format, together
  * with the logging level. Flash messages could be of different severity,
  * we're using Java logging levels for that, for example:
- * <p/>
+ *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
  *   public Response act() {
@@ -69,18 +69,17 @@ import org.takes.rs.RsWrap;
  *     }
  *   }
  * }</pre>
- * <p/>
+ *
  * <p>This is how the HTTP response will look like (simplified):
- * <p/>
+ *
  * <pre> HTTP/1.1 303 See Other
  * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
- * <p/>
+ *
  * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
  * default name using a constructor of {@link org.takes.facets.flash.RsFlash},
  * but it's not recommended. It's better to use the default name.
  * <p/>
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -90,7 +89,6 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param msg Message to show
      * @throws IOException If fails
      */
@@ -100,7 +98,6 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param err Error
      * @throws IOException If fails
      */
@@ -110,7 +107,6 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param msg Message
      * @param level Level
      * @throws IOException If fails
@@ -121,29 +117,24 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
      * @throws IOException If fails
-     * @checkstyle IndentationCheck (28 lines)
      */
     public RsFlash(final String msg, final Level level, final String cookie)
         throws IOException {
         super(
             new RsWithCookie(
                 cookie,
-                new StringBuilder(
-                        URLEncoder.encode(
-                            msg,
-                            Charset.defaultCharset().name()
-                        )
-                ).append('/').append(
+                String.format(
+                    "%s/%s",
+                    URLEncoder.encode(msg, Charset.defaultCharset().name()),
                     URLEncoder.encode(
                         level.getName(),
                         Charset.defaultCharset().name()
                     )
-                ).toString(),
+                ),
                 "Path=/",
                 String.format(
                     Locale.ENGLISH,

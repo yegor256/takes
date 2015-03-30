@@ -39,16 +39,15 @@ import org.takes.tk.TkEmpty;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @todo The test must be rewritten because
  */
 public final class TsFlashTest {
 
     /**
-     * TsFlash can create a flash data.
+     * TsFlash can remove a flash cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesCookieIntoFlash() throws IOException {
+    public void removesFlashCookie() throws IOException {
         final Takes takes = new TsFlash(
             new Takes() {
                 @Override

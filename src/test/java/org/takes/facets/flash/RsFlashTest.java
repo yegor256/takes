@@ -34,7 +34,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsFlash}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9.6
@@ -43,9 +42,7 @@ public final class RsFlashTest {
 
     /**
      * RsFlash can add cookies.
-     *
      * @throws IOException If some problem inside
-     * @checkstyle IndentationCheck (24 lines)
      */
     @Test
     public void addsCookieToResponse() throws IOException {
@@ -55,18 +52,17 @@ public final class RsFlashTest {
                 new RsFlash(msg)
             ).print(),
             Matchers.containsString(
-                new StringBuilder("Set-Cookie: RsFlash=")
-                    .append(
-                        URLEncoder.encode(
-                            msg,
-                            Charset.defaultCharset().name()
-                        )
-                    ).append('/').append(
-                        URLEncoder.encode(
-                            Level.INFO.getName(),
-                            Charset.defaultCharset().name()
-                        )
-                    ).toString()
+                String.format(
+                    "Set-Cookie: RsFlash=%s/%s",
+                    URLEncoder.encode(
+                        msg,
+                        Charset.defaultCharset().name()
+                    ),
+                    URLEncoder.encode(
+                        Level.INFO.getName(),
+                        Charset.defaultCharset().name()
+                    )
+                )
             )
         );
     }

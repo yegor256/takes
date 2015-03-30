@@ -41,7 +41,6 @@ import org.takes.rs.xe.XeAppend;
 
 /**
  * Test case for {@link XeFlash}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
@@ -50,7 +49,6 @@ public final class XeFlashTest {
 
     /**
      * XeFlash can accept RsFlash cookie.
-     *
      * @throws IOException If some problem inside
      */
     @Test
