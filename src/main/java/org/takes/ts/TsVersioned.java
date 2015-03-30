@@ -70,7 +70,7 @@ public final class TsVersioned extends TsWrap {
         final ResourceBundle res =
             ResourceBundle.getBundle("org.takes.version");
         return String.format(
-            "%s %s built on %s",
+            "%s %s %s",
             res.getString("version"),
             res.getString("revision"),
             res.getString("date")
