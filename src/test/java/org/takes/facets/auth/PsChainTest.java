@@ -38,22 +38,22 @@ import org.takes.rs.RsEmpty;
 public final class PsChainTest {
 
     /**
-     * Check that PsChain returns proper identity.
+     * PsChain returns proper identity.
      * @throws IOException if some problems inside
      */
     @Test
     public void chainExecutionTest() throws IOException {
         MatcherAssert.assertThat(
             new PsChain(
-                    new PsLogout(),
-                    new PsFake(true)
+                new PsLogout(),
+                new PsFake(true)
             ).enter(new RqFake()).next(),
             Matchers.is(Identity.ANONYMOUS)
         );
     }
 
     /**
-     * Check that exit method of PsChain returns proper response.
+     * PsChain returns proper response.
      * @throws IOException if some problems inside
      */
     @Test
