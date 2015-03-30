@@ -21,56 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rs;
+
+import java.io.IOException;
+import java.util.zip.GZIPInputStream;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.Response;
 
 /**
- * Can't find how the resource requested.
- *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
- * if and when a "take" can't be found.
- *
+ * Test case for {@link RsGzip}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.10
  */
-public final class NotFoundException extends RuntimeException {
+public final class RsGzipTest {
 
     /**
-     * Serialization marker.
+     * RsGzip can build a compressed response.
+     * @throws IOException If some problem inside
      */
-    private static final long serialVersionUID = -505306086879848229L;
-
-    /**
-     * Ctor.
-     */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    @Test
+    public void makesCompressedResponse() throws IOException {
+        final Response response = new RsGzip(new RsText("hello, world!"));
+        MatcherAssert.assertThat(
+            new RsPrint(response).printHead(),
+            Matchers.containsString("Content-Encoding: gzip")
+        );
+        MatcherAssert.assertThat(
+            IOUtils.toString(new GZIPInputStream(response.body())),
+            Matchers.startsWith("hello")
+        );
     }
 
 }

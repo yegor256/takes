@@ -3,6 +3,8 @@ assets:
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
+decrypt:
+  curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
   JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
@@ -18,11 +20,20 @@ architect:
 - davvd
 merge:
   script: |
+    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
+    while true
+      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
+      if [ "${status}" == "success" ]; then break; fi
+      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
+      echo "waiting for AppVeyor build ${version}: ${status}"
+      sleep 5s
+    done
     mvn clean install -Ptakes -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
   commanders:
+  - alevohin
   - carlosmiranda
   - darkled
   - ggajos
@@ -32,6 +43,14 @@ merge:
   - yegor256
 deploy:
   script: |
+    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
+    while true
+      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
+      if [ "${status}" == "success" ]; then break; fi
+      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
+      echo "waiting for AppVeyor build ${version}: ${status}"
+      sleep 5s
+    done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml

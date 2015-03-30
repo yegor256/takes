@@ -31,11 +31,27 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqCookies;
-import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsWithCookie;
 
 /**
  * Takes that understands Flash cookie and converts it into a HTTP header.
+ *
+ * <p>This decorator helps your "takes" to automate flash messages and
+ * destroy cookies on their way back,
+ * from the browser to the server. This is what a browser will send back:
+ *
+ * <pre> GET / HTTP/1.1
+ * Host: www.example.com
+ * Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
+ *
+ * <p>This decorator adds "Set-Cookie" with an empty
+ * value to the response. That's all it's doing. All you need to do
+ * is to decorate your existing "takes", for example:
+ *
+ * <pre> new FtBasic(
+ *   new TsFlash(TsFork(new FkRegex("/", "hello, world!"))), 8080
+ *  ).start(Exit.NEVER);
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -43,7 +59,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "cookie", "header" })
+@EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TsFlash implements Takes {
 
     /**
@@ -57,28 +73,21 @@ public final class TsFlash implements Takes {
     private final transient String cookie;
 
     /**
-     * Header name.
-     */
-    private final transient String header;
-
-    /**
      * Ctor.
      * @param takes Original takes
      */
     public TsFlash(final Takes takes) {
-        this(takes, RsFlash.class.getSimpleName(), "X-Takes-Flash");
+        this(takes, RsFlash.class.getSimpleName());
     }
 
     /**
      * Ctor.
      * @param takes Original takes
      * @param name Cookie name
-     * @param hdr Header name
      */
-    public TsFlash(final Takes takes, final String name, final String hdr) {
+    public TsFlash(final Takes takes, final String name) {
         this.origin = takes;
         this.cookie = name;
-        this.header = hdr;
     }
 
     @Override
@@ -91,11 +100,7 @@ public final class TsFlash implements Takes {
                 @Override
                 public Response act() throws IOException {
                     return new RsWithCookie(
-                        TsFlash.this.origin.route(
-                            new RqWithHeader(
-                                request, TsFlash.this.header, values.next()
-                            )
-                        ).act(),
+                        TsFlash.this.origin.route(request).act(),
                         TsFlash.this.cookie,
                         ""
                     );

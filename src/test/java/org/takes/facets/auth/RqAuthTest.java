@@ -21,56 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.facets.auth;
+
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.facets.auth.codecs.CcPlain;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
 
 /**
- * Can't find how the resource requested.
- *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
- * if and when a "take" can't be found.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RqAuth}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.9.12
  */
-public final class NotFoundException extends RuntimeException {
+public class RqAuthTest {
 
     /**
-     * Serialization marker.
+     * RqAuth can return identity.
+     * @throws IOException If some problem inside
      */
-    private static final long serialVersionUID = -505306086879848229L;
-
-    /**
-     * Ctor.
-     */
-    public NotFoundException() {
-        super();
+    @Test
+    public final void returnsIdentity() throws IOException {
+        final Identity.Simple identity = new Identity.Simple("urn:test:1");
+        MatcherAssert.assertThat(
+            new RqAuth(
+                new RqWithHeader(
+                    new RqFake(),
+                    TsAuth.class.getSimpleName(),
+                    new String(new CcPlain().encode(identity))
+                )
+            ).identity().urn(),
+            Matchers.equalTo(identity.urn())
+        );
     }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
-    }
-
 }
