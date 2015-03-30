@@ -119,19 +119,15 @@ public final class PsCookie implements Pass {
         return new RsWithCookie(
             res, this.cookie, text,
             "Path=/",
-            new StringBuilder().append(
-                "Expires="
-            ).append(
-                new SimpleDateFormat(
-                    "EEE, d MMM yyyy HH:mm:ss Z",
-                    Locale.ENGLISH
-                ).format(
-                    new Date(
-                        System.currentTimeMillis()
-                            + TimeUnit.DAYS.toMillis(this.age)
-                    )
+            new SimpleDateFormat(
+                "'Expires='EEE, d MMM yyyy HH:mm:ss Z",
+                Locale.ENGLISH
+            ).format(
+                new Date(
+                    System.currentTimeMillis()
+                        + TimeUnit.DAYS.toMillis(this.age)
                 )
-                ).toString()
+            )
         );
     }
 }

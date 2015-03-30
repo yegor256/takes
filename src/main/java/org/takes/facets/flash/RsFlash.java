@@ -122,19 +122,15 @@ public final class RsFlash extends RsWrap {
             new RsWithCookie(
                 cookie, msg,
                 "Path=/",
-                new StringBuilder().append(
-                    "Expires="
-                ).append(
-                    new SimpleDateFormat(
-                        "EEE, d MMM yyyy HH:mm:ss Z",
+                new SimpleDateFormat(
+                    "'Expires='EEE, d MMM yyyy HH:mm:ss Z",
                         Locale.ENGLISH
-                    ).format(
-                        new Date(
-                            System.currentTimeMillis()
-                                + TimeUnit.HOURS.toMillis(1L)
-                        )
-                    )
-                    ).toString()
+            ).format(
+                    new Date(
+                        System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
+                )
+                )
         )
         );
         assert level != null;
