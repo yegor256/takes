@@ -81,7 +81,7 @@ public final class TsSecureTest {
                     new RqFake(),
                     TsAuth.class.getSimpleName(),
                     new String(
-                        new CcPlain().encode(new Identity.Simple("urn:test:1"))
+                        new CcPlain().encode(new Identity.Simple("urn:test:2"))
                     )
                 )
             ).act(),
