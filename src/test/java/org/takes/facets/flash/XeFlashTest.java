@@ -47,7 +47,6 @@ public final class XeFlashTest {
      */
     @Test
     public void generatesFlashData() throws IOException {
-        final String header = "x";
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -55,9 +54,8 @@ public final class XeFlashTest {
                         "root",
                         new XeFlash(
                             new RqWithHeader(
-                                new RqFake(), header, "how are you"
-                            ),
-                            header
+                                new RqFake(), "Cookie", "RsFlash=how are you"
+                            )
                         )
                     )
                 ).body()
