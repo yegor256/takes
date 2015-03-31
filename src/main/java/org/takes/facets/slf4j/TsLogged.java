@@ -25,10 +25,10 @@
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
+import org.takes.tk.TkEmpty;
 
 /**
  * Logs Takes.route() calls.
@@ -36,45 +36,14 @@ import org.takes.Takes;
  * <p>The class is immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.11
+ * @todo #102 I expect Tslogged can log basic parameters of methods called,
+ *  but it not implemented.
+ * @since 0.11.2
  */
-@EqualsAndHashCode(of = "origin", callSuper = false)
-public final class TsLogged extends LogWrap implements Takes {
-    /**
-     * Original takes.
-     */
-    private final transient Takes origin;
-
-    /**
-     * Ctor.
-     * @param takes Original
-     */
-    public TsLogged(final Takes takes) {
-        this(takes, LogWrap.DEFAULT_LEVEL);
-    }
-
-    /**
-     * Ctor.
-     * @param takes Original
-     * @param lvl Log level
-     */
-    public TsLogged(final Takes takes, final LogWrap.Level lvl) {
-        super(takes.getClass(), lvl);
-        this.origin = takes;
-    }
-
+public final class TsLogged implements Takes {
     @Override
     public Take route(final Request request) throws IOException {
-        final long started = System.currentTimeMillis();
-        final Take resp = this.origin.route(request);
-        this.log(
-            "[{}] #route([{}]) return [{}] in [{}] ms",
-            this.origin,
-            request,
-            resp,
-            System.currentTimeMillis() - started
-        );
-        return resp;
+        return new TkEmpty();
     }
 }
 

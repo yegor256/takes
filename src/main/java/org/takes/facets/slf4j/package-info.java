@@ -33,7 +33,8 @@
  * <pre> new TsLogged(
  * new TsFork(
  * // my config...
- * )
+ * ),
+ * new Slf4j(TsFork.class)
  * );
  * </pre>
  *

@@ -35,37 +35,43 @@ import org.takes.Take;
  * <p>The class is immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @since 0.11.2
  */
-@EqualsAndHashCode(of = "origin", callSuper = false)
-public final class TkLogged extends LogWrap implements Take {
+@EqualsAndHashCode(of = { "origin", "target" })
+public final class TkLogged implements Take {
     /**
      * Original take.
      */
     private final transient Take origin;
 
     /**
-     * Ctor.
-     * @param take Original
+     * Log target.
      */
-    public TkLogged(final Take take) {
-        this(take, LogWrap.DEFAULT_LEVEL);
-    }
+    private final transient Target target;
 
     /**
      * Ctor.
      * @param take Original
-     * @param lvl Log level
+     * @param trget Log target
      */
-    public TkLogged(final Take take, final LogWrap.Level lvl) {
-        super(take.getClass(), lvl);
+    public TkLogged(final Take take, final Target trget) {
+        this.target = trget;
         this.origin = take;
     }
 
+    /**
+     * Print itself.
+     * @return Response
+     * @throws IOException If fails
+     * @todo #101 I expect implementations of Response and Take
+     *  interfaces will be able convert itself to a loggable string but
+     *  they don't have this feature
+     */
     @Override
     public Response act() throws IOException {
         final long started = System.currentTimeMillis();
         final Response resp = this.origin.act();
-        this.log(
+        this.target.log(
             "[{}] #act() return [{}] in [{}] ms",
             this.origin,
             resp,

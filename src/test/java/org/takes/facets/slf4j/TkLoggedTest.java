@@ -25,48 +25,41 @@
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggingEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.mockito.ArgumentMatcher;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
+import org.slf4j.helpers.MessageFormatter;
 import org.takes.tk.TkText;
 
 /**
  * Test case for {@link TkLogged}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.11
+ * @since 0.11.2
  */
 public final class TkLoggedTest {
     /**
      * TkLogged can log message.
      * @throws IOException If some problem inside
-     * @todo #90 we should change mocked Log4j appender to
-     *  custom Log4jAppeneder that implemented as JUnit Rule.
-     *  See details in CR comment here
-     *  https://github.com/yegor256/takes/pull/89#discussion_r27354036
      */
     @Test
     public void logsMessage() throws IOException {
-        final Appender appender = Mockito.mock(Appender.class);
-        Mockito.when(appender.getName()).thenReturn("MOCK");
-        Logger.getRootLogger().addAppender(appender);
-        new TkLogged(new TkText("test"), LogWrap.Level.WARN).act();
-        Mockito.verify(appender)
-            .doAppend(
-                Matchers.argThat(
-                    new ArgumentMatcher<LoggingEvent>() {
-                        @Override
-                        public boolean matches(final Object argument) {
-                            return ((LoggingEvent) argument)
-                                .getRenderedMessage()
-                                .contains("act()");
-                        }
-                    }
-                )
-            );
+        final Collection<String> logs = new ArrayList<String>(1);
+        new TkLogged(
+            new TkText("test"),
+            new Target() {
+                @Override
+                public void log(final String format, final Object... param) {
+                    logs.add(
+                        MessageFormatter.arrayFormat(format, param).getMessage()
+                    );
+                }
+            }).act();
+        MatcherAssert.assertThat(
+            logs,
+            Matchers.everyItem(Matchers.containsString("act()"))
+        );
     }
 }

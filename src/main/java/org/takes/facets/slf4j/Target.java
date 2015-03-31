@@ -24,50 +24,19 @@
 
 package org.takes.facets.slf4j;
 
-import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.http.Exit;
-import org.takes.http.Front;
-
 /**
- * Logs Front.start() calls.
+ * Log target.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @since 0.11
  */
-@EqualsAndHashCode(of = "origin", callSuper = false)
-public final class FtLogged extends LogWrap implements Front {
+public interface Target {
     /**
-     * Original front.
+     * SLF4J parameterized logging.
+     * @param format Format string
+     * @param param Params
      */
-    private final transient Front origin;
-
-    /**
-     * Ctor.
-     * @param front Original
-     */
-    public FtLogged(final Front front) {
-        this(front, LogWrap.DEFAULT_LEVEL);
-    }
-
-    /**
-     * Ctor.
-     * @param front Original
-     * @param lvl Log level
-     */
-    public FtLogged(final Front front, final LogWrap.Level lvl) {
-        super(front.getClass(), lvl);
-        this.origin = front;
-    }
-
-    @Override
-    public void start(final Exit exit) throws IOException {
-        this.log(
-            "[{}] #start([{}])",
-            this.origin,
-            exit
-        );
-        this.origin.start(exit);
-    }
+    void log(final String format, final Object... param);
 }
