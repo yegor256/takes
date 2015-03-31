@@ -24,7 +24,6 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -119,10 +118,9 @@ public final class PsCookie implements Pass {
         return new RsWithCookie(
             res, this.cookie, text,
             "Path=/",
-            new SimpleDateFormat(
-                "'Expires='EEE, d MMM yyyy HH:mm:ss Z",
-                Locale.ENGLISH
-            ).format(
+            String.format(
+                Locale.ENGLISH,
+                "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                 new Date(
                     System.currentTimeMillis()
                         + TimeUnit.DAYS.toMillis(this.age)
