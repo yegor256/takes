@@ -67,7 +67,7 @@
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment">     * @param header Header to add</em>
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>      <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/ts/TsVersioned.html">TsVersioned</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Takes.html">Takes</a> takes, <strong class="jxr_keyword">final</strong> String header) {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">super</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../org/takes/ts/TsWithHeaders.html">TsWithHeaders</a>(takes).with(header, TsVersioned.VERSION));
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">super</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../org/takes/ts/TsWithHeader.html">TsWithHeader</a>(takes, header, TsVersioned.VERSION));
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      }
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      <em class="jxr_javadoccomment">/**</em>
@@ -78,7 +78,7 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">final</strong> ResourceBundle res =
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>              ResourceBundle.getBundle(<span class="jxr_string">"org.takes.version"</span>);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">return</strong> String.format(
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>              <span class="jxr_string">"%s %s built on %s"</span>,
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>              <span class="jxr_string">"%s %s %s"</span>,
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>              res.getString(<span class="jxr_string">"version"</span>),
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              res.getString(<span class="jxr_string">"revision"</span>),
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>              res.getString(<span class="jxr_string">"date"</span>)

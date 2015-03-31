@@ -53,15 +53,16 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> buildsTextResponse() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>              IOUtils.toString(
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>                  <strong class="jxr_keyword">new</strong> RsVelocity(<span class="jxr_string">"hello, ${name}!"</span>)
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>                      .with(<span class="jxr_string">"name"</span>, <span class="jxr_string">"Jeffrey"</span>)
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>                      .body()
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>              ),
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>              Matchers.equalTo(<span class="jxr_string">"hello, Jeffrey!"</span>)
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>          );
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      }
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>  
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>  }
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>                  <strong class="jxr_keyword">new</strong> RsVelocity(
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>                      <span class="jxr_string">"hello, ${name}!"</span>,
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>                      <strong class="jxr_keyword">new</strong> RsVelocity.Pair(<span class="jxr_string">"name"</span>, <span class="jxr_string">"Jeffrey"</span>)
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>                  ).body()
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>              ),
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>              Matchers.equalTo(<span class="jxr_string">"hello, Jeffrey!"</span>)
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          );
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      }
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
