@@ -45,9 +45,10 @@ public final class RsVelocityTest {
     public void buildsTextResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
-                new RsVelocity("hello, ${name}!")
-                    .with("name", "Jeffrey")
-                    .body()
+                new RsVelocity(
+                    "hello, ${name}!",
+                    new RsVelocity.Pair("name", "Jeffrey")
+                ).body()
             ),
             Matchers.equalTo("hello, Jeffrey!")
         );

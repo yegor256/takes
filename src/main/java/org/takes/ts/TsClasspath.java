@@ -57,13 +57,8 @@ import org.takes.tk.TkFixed;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "prefix")
-public final class TsClasspath implements Takes {
-
-    /**
-     * Prefix.
-     */
-    private final transient String prefix;
+@EqualsAndHashCode(callSuper = true)
+public final class TsClasspath extends TsWrap {
 
     /**
      * Ctor.
@@ -86,25 +81,27 @@ public final class TsClasspath implements Takes {
 
     /**
      * Ctor.
-     * @param pfx Prefix
+     * @param prefix Prefix
      */
-    public TsClasspath(final String pfx) {
-        this.prefix = pfx;
-    }
-
-    @Override
-    public Take route(final Request request) throws IOException {
-        final String name = String.format(
-            "%s%s", this.prefix,
-            new RqHref(request).href().path()
+    public TsClasspath(final String prefix) {
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    final String name = String.format(
+                        "%s%s", prefix, new RqHref(request).href().path()
+                    );
+                    final InputStream input = this.getClass()
+                        .getResourceAsStream(name);
+                    if (input == null) {
+                        throw new NotFoundException(
+                            String.format("%s not found in classpath", name)
+                        );
+                    }
+                    return new TkFixed(new RsWithBody(input));
+                }
+            }
         );
-        final InputStream input = this.getClass().getResourceAsStream(name);
-        if (input == null) {
-            throw new NotFoundException(
-                String.format("%s not found in classpath", name)
-            );
-        }
-        return new TkFixed(new RsWithBody(input));
     }
 
 }

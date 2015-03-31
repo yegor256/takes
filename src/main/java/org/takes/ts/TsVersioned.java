@@ -59,7 +59,7 @@ public final class TsVersioned extends TsWrap {
      * @param header Header to add
      */
     public TsVersioned(final Takes takes, final String header) {
-        super(new TsWithHeaders(takes).with(header, TsVersioned.VERSION));
+        super(new TsWithHeader(takes, header, TsVersioned.VERSION));
     }
 
     /**
@@ -70,7 +70,7 @@ public final class TsVersioned extends TsWrap {
         final ResourceBundle res =
             ResourceBundle.getBundle("org.takes.version");
         return String.format(
-            "%s %s built on %s",
+            "%s %s %s",
             res.getString("version"),
             res.getString("revision"),
             res.getString("date")
