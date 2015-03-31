@@ -41,7 +41,6 @@ import org.takes.facets.auth.Identity;
  * @since 0.11
  */
 public final class CcBase64Test {
-
     /**
      * CcBase64 can encode.
      *
@@ -55,7 +54,6 @@ public final class CcBase64Test {
             Matchers.equalTo("dXJuJTNBdGVzdCUzQTM=")
         );
     }
-
     /**
      * CcBase64 can decode.
      *
@@ -71,7 +69,6 @@ public final class CcBase64Test {
             Matchers.equalTo("urn:test:test")
         );
     }
-
     /**
      * CcBase64 can encode and decode.
      *
@@ -84,7 +81,7 @@ public final class CcBase64Test {
             ImmutableMap.of("userName", "user");
         final Identity identity = new Identity.Simple(urn, properties);
         final Codec codec = new CcBase64(new CcPlain());
-        final Identity expected = new CcBase64(new CcPlain()).decode(
+        final Identity expected = codec.decode(
             codec.encode(identity)
         );
         MatcherAssert.assertThat(
@@ -96,9 +93,8 @@ public final class CcBase64Test {
             Matchers.equalTo(properties)
         );
     }
-
     /**
-     * CcBase64 can decode invalid data.
+     * CcBase64 can decode non Base64 alphabet symbols.
      *
      * @throws IOException If some problem inside
      */
@@ -111,7 +107,6 @@ public final class CcBase64Test {
             Matchers.equalTo("")
         );
     }
-
     /**
      * Checks CcBase64 equals method.
      *
