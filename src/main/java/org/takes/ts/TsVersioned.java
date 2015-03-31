@@ -59,7 +59,7 @@ public final class TsVersioned extends TsWrap {
      * @param header Header to add
      */
     public TsVersioned(final Takes takes, final String header) {
-        super(new TsWithHeaders(takes).with(header, TsVersioned.VERSION));
+        super(new TsWithHeader(takes, header, TsVersioned.VERSION));
     }
 
     /**

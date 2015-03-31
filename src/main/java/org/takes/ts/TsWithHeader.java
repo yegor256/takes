@@ -24,47 +24,46 @@
 package org.takes.ts;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.tk.TkWithHeaders;
+import org.takes.tk.TkWithHeader;
 
 /**
- * Takes with added headers.
+ * Takes with an added header.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.11
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsWithHeaders extends TsWrap {
+public final class TsWithHeader extends TsWrap {
 
     /**
      * Ctor.
      * @param takes Original takes
-     * @param headers Headers
-     * @since 0.2
+     * @param key Header name
+     * @param value Value
      */
-    public TsWithHeaders(final Takes takes, final String... headers) {
-        this(takes, Arrays.asList(headers));
+    public TsWithHeader(final Takes takes,
+        final String key, final String value) {
+        this(takes, String.format("%s: %s", key, value));
     }
 
     /**
      * Ctor.
      * @param takes Original takes
-     * @param headers Headers
+     * @param header Header
      */
-    public TsWithHeaders(final Takes takes, final Collection<String> headers) {
+    public TsWithHeader(final Takes takes, final String header) {
         super(
             new Takes() {
                 @Override
                 public Take route(final Request request) throws IOException {
-                    return new TkWithHeaders(takes.route(request), headers);
+                    return new TkWithHeader(takes.route(request), header);
                 }
             }
         );
