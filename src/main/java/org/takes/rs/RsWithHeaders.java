@@ -25,11 +25,9 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -42,75 +40,43 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "headers" })
-public final class RsWithHeaders implements Response {
-
-    /**
-     * Original response.
-     */
-    private final transient Response origin;
-
-    /**
-     * Extra headers.
-     */
-    private final transient Collection<String> headers;
+@EqualsAndHashCode(callSuper = true)
+public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
      * @param res Original response
-     * @param hdrs Headers
+     * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final String... hdrs) {
-        this(res, Arrays.asList(hdrs));
+    public RsWithHeaders(final Response res, final String... headers) {
+        this(res, Arrays.asList(headers));
     }
 
     /**
      * Ctor.
      * @param res Original response
-     * @param hdrs Headers
+     * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final Collection<String> hdrs) {
-        this.origin = res;
-        this.headers = Collections.unmodifiableCollection(hdrs);
+    public RsWithHeaders(final Response res, final Iterable<String> headers) {
+        super(
+            new Response() {
+                @Override
+                public List<String> head() throws IOException {
+                    final List<String> head = new LinkedList<String>();
+                    for (final String hdr : res.head()) {
+                        head.add(hdr);
+                    }
+                    for (final String header : headers) {
+                        head.add(header.trim());
+                    }
+                    return head;
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return res.body();
+                }
+            }
+        );
     }
 
-    /**
-     * With this header.
-     * @param text Header text
-     * @return Response
-     */
-    public RsWithHeaders with(final String text) {
-        final Collection<String> list =
-            new ArrayList<String>(this.headers.size());
-        list.addAll(this.headers);
-        list.add(text);
-        return new RsWithHeaders(this.origin, list);
-    }
-
-    /**
-     * With this header.
-     * @param name The name
-     * @param value The value
-     * @return Response
-     */
-    public RsWithHeaders with(final String name, final String value) {
-        return this.with(String.format("%s: %s", name, value));
-    }
-
-    @Override
-    public Iterable<String> head() throws IOException {
-        final Collection<String> head = new LinkedList<String>();
-        for (final String hdr : this.origin.head()) {
-            head.add(hdr);
-        }
-        for (final String header : this.headers) {
-            head.add(header.trim());
-        }
-        return head;
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }
