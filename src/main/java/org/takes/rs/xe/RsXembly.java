@@ -39,6 +39,7 @@ import org.takes.Response;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
+import org.takes.rs.RsWrap;
 import org.w3c.dom.Node;
 import org.xembly.Xembler;
 
@@ -52,13 +53,8 @@ import org.xembly.Xembler;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = "source")
-public final class RsXembly implements Response {
-
-    /**
-     * Xembly source.
-     */
-    private final transient XeSource source;
+@EqualsAndHashCode(callSuper = true)
+public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
@@ -81,21 +77,36 @@ public final class RsXembly implements Response {
      * @param src Source
      */
     public RsXembly(final XeSource src) {
-        this.source = src;
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return new RsWithType(
+                        new RsWithStatus(
+                            new RsEmpty(),
+                            HttpURLConnection.HTTP_OK
+                        ),
+                        "text/xml"
+                    ).head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RsXembly.render(src);
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<String> head() throws IOException {
-        return new RsWithType(
-            new RsWithStatus(new RsEmpty(), HttpURLConnection.HTTP_OK),
-            "text/xml"
-        ).head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Node node = new Xembler(this.source.toXembly()).domQuietly();
+    /**
+     * Render source as XML.
+     * @param src Source
+     * @return XML
+     * @throws IOException If fails
+     */
+    private static InputStream render(final XeSource src) throws IOException {
+        final ByteArrayOutputStream baos =
+            new ByteArrayOutputStream();
+        final Node node = new Xembler(src.toXembly()).domQuietly();
         try {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
