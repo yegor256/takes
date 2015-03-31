@@ -40,6 +40,7 @@ import org.xembly.Directives;
  * Xembly source to show flash message in XML.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -96,12 +97,7 @@ public final class XeFlash implements XeSource {
                             Charset.defaultCharset().name()
                         )
                     ).up()
-                    .add("level").set(
-                        URLDecoder.decode(
-                            matcher.group(2),
-                            Charset.defaultCharset().name()
-                        )
-                    );
+                    .add("level").set(matcher.group(2));
             }
         }
         return dirs;

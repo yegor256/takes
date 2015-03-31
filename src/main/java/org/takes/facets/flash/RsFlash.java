@@ -78,8 +78,9 @@ import org.takes.rs.RsWrap;
  * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
  * default name using a constructor of {@link org.takes.facets.flash.RsFlash},
  * but it's not recommended. It's better to use the default name.
- * <p/>
+ *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -130,10 +131,7 @@ public final class RsFlash extends RsWrap {
                 String.format(
                     "%s/%s",
                     URLEncoder.encode(msg, Charset.defaultCharset().name()),
-                    URLEncoder.encode(
-                        level.getName(),
-                        Charset.defaultCharset().name()
-                )
+                    level.getName()
             ),
                 "Path=/",
                 String.format(

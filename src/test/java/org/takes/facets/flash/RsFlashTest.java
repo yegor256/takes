@@ -58,10 +58,7 @@ public final class RsFlashTest {
                         msg,
                         Charset.defaultCharset().name()
                     ),
-                    URLEncoder.encode(
-                        Level.INFO.getName(),
-                        Charset.defaultCharset().name()
-                    )
+                    Level.INFO.getName()
                 )
             )
         );
