@@ -341,8 +341,10 @@ Let's say, you want to use [Velocity](http://velocity.apache.org/):
 public final class TkHelloWorld implements Take {
   @Override
   public Response act() {
-    return new RsVelocity("hi, ${user.name}! You've got ${user.balance}")
-      .with("user", new User());
+    return new RsVelocity(
+      "hi, ${user.name}! You've got ${user.balance}",
+      new RsVelocity.Pair("user", new User())
+    );
   }
 }
 ```

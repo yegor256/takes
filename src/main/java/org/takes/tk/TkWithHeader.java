@@ -21,50 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkWithHeaders;
+import org.takes.rs.RsWithHeader;
 
 /**
- * Takes with added headers.
+ * Take with an extra header.
+ *
+ * <p>This take wraps all responses of another take, adding
+ * an extra header to them, through {@link org.takes.rs.RsWithHeader}.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.11
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsWithHeaders extends TsWrap {
+public final class TkWithHeader extends TkWrap {
 
     /**
      * Ctor.
-     * @param takes Original takes
-     * @param headers Headers
-     * @since 0.2
+     * @param take Original
+     * @param key Header
+     * @param value Value
      */
-    public TsWithHeaders(final Takes takes, final String... headers) {
-        this(takes, Arrays.asList(headers));
+    public TkWithHeader(final Take take, final String key, final String value) {
+        this(take, String.format("%s: %s", key, value));
     }
 
     /**
      * Ctor.
-     * @param takes Original takes
-     * @param headers Headers
+     * @param take Original
+     * @param header Header
      */
-    public TsWithHeaders(final Takes takes, final Collection<String> headers) {
+    public TkWithHeader(final Take take, final String header) {
         super(
-            new Takes() {
+            new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
-                    return new TkWithHeaders(takes.route(request), headers);
+                public Response act() throws IOException {
+                    return new RsWithHeader(take.act(), header);
                 }
             }
         );

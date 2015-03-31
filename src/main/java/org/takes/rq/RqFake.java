@@ -40,18 +40,8 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "hde", "content" })
-public final class RqFake implements Request {
-
-    /**
-     * Head.
-     */
-    private final transient List<String> hde;
-
-    /**
-     * Content.
-     */
-    private final transient InputStream content;
+@EqualsAndHashCode(callSuper = true)
+public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
@@ -108,7 +98,18 @@ public final class RqFake implements Request {
      * @param body Body
      */
     public RqFake(final List<String> head, final byte[] body) {
-        this(head, new ByteArrayInputStream(body));
+        super(
+            new Request() {
+                @Override
+                public Iterable<String> head() {
+                    return Collections.unmodifiableList(head);
+                }
+                @Override
+                public InputStream body() {
+                    return new ByteArrayInputStream(body);
+                }
+            }
+        );
     }
 
     /**
@@ -117,18 +118,18 @@ public final class RqFake implements Request {
      * @param body Body
      */
     public RqFake(final List<String> head, final InputStream body) {
-        this.hde = Collections.unmodifiableList(head);
-        this.content = body;
-    }
-
-    @Override
-    public List<String> head() {
-        return Collections.unmodifiableList(this.hde);
-    }
-
-    @Override
-    public InputStream body() {
-        return this.content;
+        super(
+            new Request() {
+                @Override
+                public Iterable<String> head() {
+                    return Collections.unmodifiableList(head);
+                }
+                @Override
+                public InputStream body() {
+                    return body;
+                }
+            }
+        );
     }
 
 }

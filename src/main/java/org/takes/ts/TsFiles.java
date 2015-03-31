@@ -58,13 +58,8 @@ import org.takes.tk.TkFixed;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "dir")
-public final class TsFiles implements Takes {
-
-    /**
-     * Directory.
-     */
-    private final transient File dir;
+@EqualsAndHashCode(callSuper = true)
+public final class TsFiles extends TsWrap {
 
     /**
      * Ctor.
@@ -79,21 +74,26 @@ public final class TsFiles implements Takes {
      * @param base Base directory
      */
     public TsFiles(final File base) {
-        this.dir = base;
-    }
-
-    @Override
-    public Take route(final Request request) throws IOException {
-        final File file = new File(
-            this.dir,
-            new RqHref(request).href().path()
+        super(
+            new Takes() {
+                @Override
+                public Take route(final Request request) throws IOException {
+                    final File file = new File(
+                        base, new RqHref(request).href().path()
+                    );
+                    if (!file.exists()) {
+                        throw new NotFoundException(
+                            String.format(
+                                "%s not found", file.getAbsolutePath()
+                            )
+                        );
+                    }
+                    return new TkFixed(
+                        new RsWithBody(new FileInputStream(file))
+                    );
+                }
+            }
         );
-        if (!file.exists()) {
-            throw new NotFoundException(
-                String.format("%s not found", file.getAbsolutePath())
-            );
-        }
-        return new TkFixed(new RsWithBody(new FileInputStream(file)));
     }
 
 }

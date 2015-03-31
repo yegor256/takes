@@ -21,53 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkWithHeaders;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsEmpty;
 
 /**
- * Takes with added headers.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link PsChain}.
+ * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
- * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TsWithHeaders extends TsWrap {
+public final class PsChainTest {
 
     /**
-     * Ctor.
-     * @param takes Original takes
-     * @param headers Headers
-     * @since 0.2
+     * PsChain returns proper identity.
+     * @throws IOException if some problems inside
      */
-    public TsWithHeaders(final Takes takes, final String... headers) {
-        this(takes, Arrays.asList(headers));
-    }
-
-    /**
-     * Ctor.
-     * @param takes Original takes
-     * @param headers Headers
-     */
-    public TsWithHeaders(final Takes takes, final Collection<String> headers) {
-        super(
-            new Takes() {
-                @Override
-                public Take route(final Request request) throws IOException {
-                    return new TkWithHeaders(takes.route(request), headers);
-                }
-            }
+    @Test
+    public void chainExecutionTest() throws IOException {
+        MatcherAssert.assertThat(
+            new PsChain(
+                new PsLogout(),
+                new PsFake(true)
+            ).enter(new RqFake()).next(),
+            Matchers.is(Identity.ANONYMOUS)
         );
     }
 
+    /**
+     * PsChain returns proper response.
+     * @throws IOException if some problems inside
+     */
+    @Test
+    public void exitChainTest() throws IOException {
+        MatcherAssert.assertThat(
+            new PsChain(
+                new PsFake(true)
+            ).exit(new RsEmpty(), Identity.ANONYMOUS)
+                .head().iterator().next(),
+            Matchers.containsString("HTTP/1.1 200 O")
+        );
+    }
 }
