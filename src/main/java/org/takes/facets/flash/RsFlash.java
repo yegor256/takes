@@ -24,6 +24,7 @@
 package org.takes.facets.flash;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
@@ -121,9 +122,11 @@ public final class RsFlash extends RsWrap {
                 cookie, msg,
                 "Path=/",
                 String.format(
+                    Locale.ENGLISH,
                     "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                     new Date(
-                        System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+                        System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
                     )
             )
         )
