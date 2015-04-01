@@ -29,7 +29,6 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Response;
@@ -40,40 +39,23 @@ import org.takes.rs.RsWithType;
 
 /**
  * Test case for {@link PsByFlag}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
  */
 public final class PsByFlagTest {
     /**
-     * Testable PsByFlag object.
-     */
-    private transient Pass pass;
-
-    /**
-     * Test set up.
-     *
-     * @throws Exception If some problem inside
-     */
-    @Before
-    public void setUp() throws Exception {
-        this.pass = new PsByFlag(
-            new PsByFlag.Pair(
-                "some-key", new PsFake(true)
-            )
-        );
-    }
-
-    /**
      * PsByFlag can skip if nothing found.
-     *
      * @throws IOException If some problem inside
      */
     @Test
     public void skipsIfNothingFound() throws IOException {
         MatcherAssert.assertThat(
-            this.pass.enter(
+            new PsByFlag(
+                new PsByFlag.Pair(
+                    "test", new PsFake(true)
+                )
+            ).enter(
                 new RqFake("GET", "/?PsByFlag=x")
             ).hasNext(),
             Matchers.is(false)
@@ -82,13 +64,16 @@ public final class PsByFlagTest {
 
     /**
      * PsByFlag finds flag and authenticates user.
-     *
      * @throws IOException If some problem inside
      */
     @Test
     public void flagIsFoundUserAuthenticated() throws IOException {
         MatcherAssert.assertThat(
-            this.pass.enter(
+            new PsByFlag(
+                new PsByFlag.Pair(
+                    "some-key", new PsFake(true)
+                )
+            ).enter(
                 new RqFake("POST", "/?PsByFlag=some-key")
             ).next().urn(),
             Matchers.is("urn:test:1")
@@ -97,7 +82,6 @@ public final class PsByFlagTest {
 
     /**
      * PsByFlag wraps response with authenticated user.
-     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -121,7 +105,6 @@ public final class PsByFlagTest {
 
     /**
      * Checks PsByFlag equals method.
-     *
      * @throws Exception If some problem inside
      */
     @Test
