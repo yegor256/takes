@@ -36,8 +36,11 @@ import org.takes.tk.TkEmpty;
  * <p>The class is immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @todo #102 I expect Tslogged can log basic parameters of methods called,
- *  but it not implemented.
+ * @todo #28:30min/DEV This class not implemented yet, but has to be.
+ *  Please implement it like TkLogged and don't forget about unit tests.
+ *  In addition, need to be implement classes BkLogged, FtLogged, PsLogged
+ *  which will make loggable interfaces Back, Front, Pass. They should all be
+ *  implemented also like TkLogged.
  * @since 0.11.2
  */
 public final class TsLogged implements Takes {
