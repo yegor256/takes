@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -118,6 +119,7 @@ public final class PsCookie implements Pass {
             res, this.cookie, text,
             "Path=/",
             String.format(
+                Locale.ENGLISH,
                 "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                 new Date(
                     System.currentTimeMillis()
