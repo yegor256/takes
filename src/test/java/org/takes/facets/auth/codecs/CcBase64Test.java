@@ -35,7 +35,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcBase64}.
- *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 0.11
@@ -43,20 +42,21 @@ import org.takes.facets.auth.Identity;
 public final class CcBase64Test {
     /**
      * CcBase64 can encode.
-     *
      * @throws IOException If some problem inside
      */
     @Test
     public void encodes() throws IOException {
-        final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
-            new String(new CcBase64(new CcPlain()).encode(identity)),
+            new String(
+                new CcBase64(new CcPlain()).encode(
+                    new Identity.Simple("urn:test:3")
+                )
+            ),
             Matchers.equalTo("dXJuJTNBdGVzdCUzQTM=")
         );
     }
     /**
      * CcBase64 can decode.
-     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -71,7 +71,6 @@ public final class CcBase64Test {
     }
     /**
      * CcBase64 can encode and decode.
-     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -79,10 +78,9 @@ public final class CcBase64Test {
         final String urn = "urn:test:Hello World!";
         final Map<String, String> properties =
             ImmutableMap.of("userName", "user");
-        final Identity identity = new Identity.Simple(urn, properties);
         final Codec codec = new CcBase64(new CcPlain());
         final Identity expected = codec.decode(
-            codec.encode(identity)
+            codec.encode(new Identity.Simple(urn, properties))
         );
         MatcherAssert.assertThat(
             expected.urn(),
@@ -95,7 +93,6 @@ public final class CcBase64Test {
     }
     /**
      * CcBase64 can decode non Base64 alphabet symbols.
-     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -109,7 +106,6 @@ public final class CcBase64Test {
     }
     /**
      * Checks CcBase64 equals method.
-     *
      * @throws Exception If some problem inside
      */
     @Test
