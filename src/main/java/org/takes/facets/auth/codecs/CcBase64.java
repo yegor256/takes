@@ -45,7 +45,6 @@ public final class CcBase64 implements Codec {
     private final transient Codec origin;
     /**
      * Ctor.
-     *
      * @param codec Original codec
      */
     public CcBase64(final Codec codec) {
@@ -54,13 +53,11 @@ public final class CcBase64 implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        final byte[] raw = this.origin.encode(identity);
-        return Base64.encodeBase64(raw);
+        return Base64.encodeBase64(this.origin.encode(identity));
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final byte[] raw = Base64.decodeBase64(bytes);
-        return this.origin.decode(raw);
+        return this.origin.decode(Base64.decodeBase64(bytes));
     }
 }
