@@ -46,10 +46,7 @@ public final class TkLoggedTest {
     public void logsMessage() throws IOException {
         final Target target = Mockito.mock(Target.class);
         new TkLogged(new TkText("test"), target).act();
-        Mockito.verify(
-            target,
-            Mockito.times(1)
-        ).log(
+        Mockito.verify(target, Mockito.times(1)).log(
                 Mockito.eq("[{}] #act() return [{}] in [{}] ms"),
                 Mockito.isA(Take.class),
                 Mockito.isA(Response.class),
