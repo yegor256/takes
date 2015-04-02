@@ -25,8 +25,14 @@ package org.takes.facets.flash;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -42,11 +48,23 @@ import org.takes.rs.xe.XeAppend;
 public final class XeFlashTest {
 
     /**
-     * XeFlash can create a flash data.
+     * XeFlash can accept RsFlash cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesFlashData() throws IOException {
+    public void acceptsRsFlashCookie() throws IOException {
+        final Pattern pattern = Pattern.compile(
+            "^Set-Cookie: RsFlash=(.*?);Path.*"
+        );
+        final Iterator<String> itr = new RsFlash("hello").head().iterator();
+        final List<String> cookies = new ArrayList<String>(0);
+        while (itr.hasNext()) {
+            final Matcher matcher = pattern.matcher(itr.next());
+            if (matcher.find()) {
+                cookies.add(matcher.group(1));
+            }
+        }
+        MatcherAssert.assertThat(cookies, Matchers.hasSize(1));
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -54,17 +72,18 @@ public final class XeFlashTest {
                         "root",
                         new XeFlash(
                             new RqWithHeader(
-                                new RqFake(), "Cookie", "RsFlash=how are you"
+                                new RqFake(),
+                                "Cookie",
+                                "RsFlash=".concat(cookies.get(0))
                             )
                         )
                     )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/flash[message='how are you']",
+                "/root/flash[message='hello']",
                 "/root/flash[level='INFO']"
             )
         );
     }
-
 }

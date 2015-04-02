@@ -23,63 +23,47 @@
  */
 package org.takes.facets.flash;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
-import org.takes.tk.TkFixed;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TsFlash}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TsFlashTest {
 
     /**
-     * TsFlash can create a flash data.
+     * TsFlash can remove a flash cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesCookieIntoFlash() throws IOException {
+    public void removesFlashCookie() throws IOException {
         final Takes takes = new TsFlash(
             new Takes() {
                 @Override
                 public Take route(final Request request) {
-                    return new TkFixed(
-                        new RsXembly(
-                            new XeAppend(
-                                "root",
-                                new XeFlash(request)
-                            )
-                        )
-                    );
+                    return new TkEmpty();
                 }
             }
         );
         MatcherAssert.assertThat(
-            IOUtils.toString(
-                takes.route(
-                    new RqWithHeader(
-                        new RqFake(), "Cookie: RsFlash=Hello!"
-                    )
-                ).act().body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/flash[message='Hello!']",
-                "/root/flash[level='INFO']"
-            )
+            takes.route(
+                new RqWithHeader(
+                    new RqFake(),
+                    "Cookie: RsFlash=Hello!"
+                )
+            ).act().head(),
+            Matchers.hasItem("Set-Cookie: RsFlash=")
         );
     }
-
 }
