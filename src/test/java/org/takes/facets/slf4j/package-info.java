@@ -23,7 +23,7 @@
  */
 
 /**
- * SLF4J wrappers , tests.
+ * SLF4J wrappers, tests.
  *
  * @author Dmitry Zaytsev (dmitry.zaystev@gmail.com)
  * @version $Id$
