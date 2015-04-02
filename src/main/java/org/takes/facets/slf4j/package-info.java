@@ -31,11 +31,10 @@
  * in your "take":
  *
  * <pre> new TsLogged(
- *           new TsFork(
- *              // my config...
- *           )
- *       );
- * </pre>
+ *   new TsFork(
+ *    // my config...
+ *   )
+ * );
  *
  * @author Dmitry Zaytsev (dmitry.zaystev@gmail.com)
  * @version $Id$

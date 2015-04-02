@@ -60,7 +60,7 @@ final class Slf4j implements Target {
      * @param clazz Logger class
      */
     Slf4j(final Class<?> clazz) {
-        this(clazz, Slf4j.DEFAULT_LEVEL);
+        this(clazz.getName());
     }
 
     /**
