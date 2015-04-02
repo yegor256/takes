@@ -51,6 +51,6 @@ public final class TkLoggedTest {
                 Mockito.isA(Take.class),
                 Mockito.isA(Response.class),
                 Mockito.anyLong()
-            );
+        );
     }
 }

@@ -34,7 +34,7 @@
  *   new TsFork(
  *    // my config...
  *   )
- * );
+ * );</pre>
  *
  * @author Dmitry Zaytsev (dmitry.zaystev@gmail.com)
  * @version $Id$

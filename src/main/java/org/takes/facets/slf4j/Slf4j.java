@@ -41,11 +41,6 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("PMD.LoggerIsNotStaticFinal")
 final class Slf4j implements Target {
     /**
-     * Default log level.
-     */
-    public static final Level DEFAULT_LEVEL = Level.FINE;
-
-    /**
      * Log level.
      */
     private final transient Level level;
@@ -68,7 +63,7 @@ final class Slf4j implements Target {
      * @param name Logger name
      */
     Slf4j(final String name) {
-        this(name, Slf4j.DEFAULT_LEVEL);
+        this(name, Level.FINE);
     }
 
     /**
