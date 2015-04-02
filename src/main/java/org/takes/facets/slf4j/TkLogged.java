@@ -54,9 +54,17 @@ public final class TkLogged implements Take {
      * @param take Original
      * @param trget Log target
      */
-    public TkLogged(final Take take, final Target trget) {
+    TkLogged(final Take take, final Target trget) {
         this.target = trget;
         this.origin = take;
+    }
+
+    /**
+     * Ctor.
+     * @param take Original
+     */
+    public TkLogged(final Take take) {
+        this(take, new Slf4j(TkLogged.class));
     }
 
     /**

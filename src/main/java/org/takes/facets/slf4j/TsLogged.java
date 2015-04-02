@@ -28,7 +28,6 @@ import java.io.IOException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
-import org.takes.tk.TkEmpty;
 
 /**
  * Logs Takes.route() calls.
@@ -46,7 +45,7 @@ import org.takes.tk.TkEmpty;
 public final class TsLogged implements Takes {
     @Override
     public Take route(final Request request) throws IOException {
-        return new TkEmpty();
+        throw new UnsupportedOperationException("not implemented yet");
     }
 }
 

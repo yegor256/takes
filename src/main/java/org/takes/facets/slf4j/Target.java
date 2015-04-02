@@ -32,7 +32,7 @@ package org.takes.facets.slf4j;
  * @version $Id$
  * @since 0.11
  */
-public interface Target {
+interface Target {
     /**
      * SLF4J parameterized logging.
      * @param format Format string

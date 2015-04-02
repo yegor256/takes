@@ -24,6 +24,7 @@
 
 package org.takes.facets.slf4j;
 
+import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,42 +39,16 @@ import org.slf4j.LoggerFactory;
  */
 @EqualsAndHashCode(of = "logger")
 @SuppressWarnings("PMD.LoggerIsNotStaticFinal")
-public final class Slf4j implements Target {
+final class Slf4j implements Target {
     /**
      * Default log level.
      */
-    public static final Slf4j.Level DEFAULT_LEVEL = Slf4j.Level.DEBUG;
-
-    /**
-     * Log levels.
-     */
-    public enum Level {
-        /**
-         * Trace level.
-         */
-        TRACE,
-        /**
-         * Debug level.
-         */
-        DEBUG,
-        /**
-         * Info level.
-         */
-        INFO,
-        /**
-         * Warn level.
-         */
-        WARN,
-        /**
-         * Error level.
-         */
-        ERROR
-    };
+    public static final Level DEFAULT_LEVEL = Level.FINE;
 
     /**
      * Log level.
      */
-    private final transient Slf4j.Level level;
+    private final transient Level level;
 
     /**
      * Logger.
@@ -84,7 +59,7 @@ public final class Slf4j implements Target {
      * Ctor.
      * @param clazz Logger class
      */
-    public Slf4j(final Class<?> clazz) {
+    Slf4j(final Class<?> clazz) {
         this(clazz, Slf4j.DEFAULT_LEVEL);
     }
 
@@ -92,7 +67,7 @@ public final class Slf4j implements Target {
      * Ctor.
      * @param name Logger name
      */
-    public Slf4j(final String name) {
+    Slf4j(final String name) {
         this(name, Slf4j.DEFAULT_LEVEL);
     }
 
@@ -101,7 +76,7 @@ public final class Slf4j implements Target {
      * @param clazz Logger class
      * @param lvl Log level
      */
-    public Slf4j(final Class<?> clazz, final Slf4j.Level lvl) {
+    Slf4j(final Class<?> clazz, final Level lvl) {
         this(clazz.getName(), lvl);
     }
 
@@ -110,7 +85,7 @@ public final class Slf4j implements Target {
      * @param name Logger name
      * @param lvl Log level
      */
-    public Slf4j(final String name, final Slf4j.Level lvl) {
+    Slf4j(final String name, final Level lvl) {
         this.level = lvl;
         this.logger = LoggerFactory.getLogger(name);
     }
@@ -122,24 +97,18 @@ public final class Slf4j implements Target {
      */
     @Override
     public void log(final String format, final Object... param) {
-        switch (this.level) {
-            case TRACE:
-                this.logger.trace(format, param);
-                break;
-            case DEBUG:
-                this.logger.debug(format, param);
-                break;
-            case INFO:
-                this.logger.info(format, param);
-                break;
-            case WARN:
-                this.logger.warn(format, param);
-                break;
-            case ERROR:
-                this.logger.error(format, param);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown log level");
+        if (Level.FINEST.equals(this.level)) {
+            this.logger.trace(format, param);
+        } else if (Level.FINE.equals(this.level)) {
+            this.logger.debug(format, param);
+        } else if (Level.INFO.equals(this.level)) {
+            this.logger.info(format, param);
+        } else if (Level.WARNING.equals(this.level)) {
+            this.logger.warn(format, param);
+        } else if (Level.SEVERE.equals(this.level)) {
+            this.logger.error(format, param);
+        } else {
+            throw new IllegalArgumentException("Unknown log level");
         }
     }
 }

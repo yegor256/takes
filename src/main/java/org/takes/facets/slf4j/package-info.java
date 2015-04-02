@@ -31,11 +31,10 @@
  * in your "take":
  *
  * <pre> new TsLogged(
- * new TsFork(
- * // my config...
- * ),
- * new Slf4j(TsFork.class)
- * );
+ *           new TsFork(
+ *              // my config...
+ *           )
+ *       );
  * </pre>
  *
  * @author Dmitry Zaytsev (dmitry.zaystev@gmail.com)

@@ -25,12 +25,10 @@
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.slf4j.helpers.MessageFormatter;
+import org.mockito.Mockito;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.tk.TkText;
 
 /**
@@ -46,20 +44,16 @@ public final class TkLoggedTest {
      */
     @Test
     public void logsMessage() throws IOException {
-        final Collection<String> logs = new ArrayList<String>(1);
-        new TkLogged(
-            new TkText("test"),
-            new Target() {
-                @Override
-                public void log(final String format, final Object... param) {
-                    logs.add(
-                        MessageFormatter.arrayFormat(format, param).getMessage()
-                    );
-                }
-            }).act();
-        MatcherAssert.assertThat(
-            logs,
-            Matchers.everyItem(Matchers.containsString("act()"))
-        );
+        final Target target = Mockito.mock(Target.class);
+        new TkLogged(new TkText("test"), target).act();
+        Mockito.verify(
+            target,
+            Mockito.times(1)
+        ).log(
+                Mockito.eq("[{}] #act() return [{}] in [{}] ms"),
+                Mockito.isA(Take.class),
+                Mockito.isA(Response.class),
+                Mockito.anyLong()
+            );
     }
 }
