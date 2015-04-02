@@ -178,8 +178,9 @@ public final class PsFacebook implements Pass {
      * @return The Facebook client implementation
      */
     private DefaultFacebookClient facebookClient(final String token) {
+        final DefaultFacebookClient client;
         if (this.testing != null) {
-            return new DefaultFacebookClient(
+            client = new DefaultFacebookClient(
                 token,
                 new WebRequestor() {
                     public Response executeGet(final String url)
@@ -201,8 +202,10 @@ public final class PsFacebook implements Pass {
                 },
                 new DefaultJsonMapper()
             );
+        } else {
+            client = new DefaultFacebookClient(token);
         }
-        return new DefaultFacebookClient(token);
+        return client;
     }
 
     /**
@@ -247,17 +250,19 @@ public final class PsFacebook implements Pass {
     private com.jcabi.http.Request request(
         final String home,
         final String code) {
+        final com.jcabi.http.Request request;
         if (this.testing != null) {
-            return this.testing.getKey();
+            request = this.testing.getKey();
+        } else {
+            request = new JdkRequest(
+                new Href("https://graph.facebook.com/oauth/access_token")
+                    .with("client_id", this.app)
+                    .with("redirect_uri", home)
+                    .with("client_secret", this.key)
+                    .with("code", code).toString()
+            );
         }
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://graph.facebook.com/oauth/access_token")
-            .with("client_id", this.app)
-            .with("redirect_uri", home)
-            .with("client_secret", this.key)
-            .with("code", code)
-            .toString();
-        return new JdkRequest(uri);
+        return request;
     }
 
 }
