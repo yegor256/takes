@@ -48,7 +48,7 @@ public final class PsFacebookTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnIdentityIterator() throws IOException {
+    public void returnsIdentityIterator() throws IOException {
         MatcherAssert.assertThat(
             new PsFacebook(
                 new FakeRequest(
