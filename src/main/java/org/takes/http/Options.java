@@ -138,4 +138,19 @@ final class Options {
         return threads;
     }
 
+    /**
+     * Get the max latency in milliseconds.
+     * @return Port number
+     */
+    public int maxLatency() {
+        final String value = this.map.get("max-latency");
+        final int msec;
+        if (value == null) {
+            msec = Integer.MAX_VALUE;
+        } else {
+            msec = Integer.parseInt(value);
+        }
+        return msec;
+    }
+
 }
