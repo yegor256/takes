@@ -287,6 +287,6 @@ public final class RqMultipartTest {
                 )
         );
         final RqMultipart multi = new RqMultipart(req);
-        assertEquals(multi.names(), new HashSet(Arrays.asList("address", "data")));
+        assertEquals(multi.names(), new HashSet<String>(Arrays.asList("address", "data")));
     }
 }
