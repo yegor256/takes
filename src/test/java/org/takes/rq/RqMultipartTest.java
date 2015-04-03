@@ -27,14 +27,11 @@ import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 import org.takes.Request;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 /**
  * Test case for {@link RqMultipart}.
@@ -47,35 +44,37 @@ import static org.junit.Assert.assertFalse;
 public final class RqMultipartTest {
 
     /**
-     * Two RqMultipart objects are equal when inited with equal Request objects
+     * Carriage return constant.
+     */
+    private static final String CR = "\r\n";
+    /**
+     * Two RqMultipart objects are equal when inited with equal Request objects.
      * @throws IOException if some problem inside
      */
     @Test
-    public void equals() throws IOException {
-        final Request req1 = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; name=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "--AaB03x",
-                        // @checkstyle LineLength (1 line)
-                        "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
-                        "Content-Transfer-Encoding: utf-8",
-                        "",
-                        "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                        "--AaB03x--"
-                )
+    public void equalsReturnsTrue() throws IOException {
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /h?a=3 HTTP/1.1",
+                "Host: asw.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB01x",
+                "Content-Length: 100008"
+            ),
+            Joiner.on(CR).join(
+                "--AaB01x",
+                "Content-Disposition: form-data; name=\"addres\"",
+                "",
+                "449 N Wolfe Rd, Sunnyvale, CA 94085",
+                "--AaB01x",
+                // @checkstyle LineLength (1 line)
+                "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
+                "Content-Transfer-Encoding: uyf-8",
+                "",
+                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end ",
+                "--AaB01x--"
+            )
         );
-        RqMultipart rqm1 = new RqMultipart(req1);
-        RqMultipart rqm2 = new RqMultipart(req1);
-        assertEquals(rqm1, rqm2);
+        Assert.assertEquals(new RqMultipart(req), new RqMultipart(req));
     }
 
     /**
@@ -83,49 +82,50 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
-    public void throwsIOExceptionOnNoClosingBounaryFound() throws IOException {
+    public void throwsExceptionOnNoClosingBounaryFound() throws IOException {
         final Request req = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; fake=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "Content-Transfer-Encoding: utf-8"
-                )
+            Arrays.asList(
+                "POST /h?a=4 HTTP/1.1",
+                "Host: rtw.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB01x",
+                "Content-Length: 100007"
+            ),
+            Joiner.on(CR).join(
+                "--AaB01x",
+                "Content-Disposition: form-data; fake=\"address\"",
+                "",
+                "447 N Wolfe Rd, Sunnyvale, CA 94085",
+                "Content-Transfer-Encoding: uwf-8"
+            )
         );
         new RqMultipart(req);
     }
 
     /**
-     * RqMultipart throws IOException on missing name at Content-Disposition header.
+     * RqMultipart throws IOException on missing name
+     * at Content-Disposition header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
-    public void throwsIOExceptionOnNameNotFound() throws IOException {
+    public void throwsExceptionOnNameNotFound() throws IOException {
         final Request req = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; fake=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "--AaB03x",
-                        "Content-Transfer-Encoding: utf-8",
-                        "",
-                        "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                        "--AaB03x--"
-                )
+            Arrays.asList(
+                "POST /h?a=5 HTTP/1.1",
+                "Host: wwy.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB00x",
+                "Content-Length: 100006"
+            ),
+            Joiner.on(CR).join(
+                "--AaB00x",
+                "Content-Disposition: form-data; fake=\"address\"",
+                "",
+                "340 N Wolfe Rd, Sunnyvale, CA 94085",
+                "--AaB00x",
+                "Content-Transfer-Encoding: rtf-8",
+                "",
+                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe  end",
+                "--AaB00x--"
+            )
         );
         new RqMultipart(req);
     }
@@ -135,14 +135,16 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
-    public void throwsIOExceptionOnNoBoundaryContentTypeHeader() throws IOException {
+    public void throwsExceptionOnNoBoundary() throws IOException {
         final Request req = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundaryAaB03x",
-                        "Content-Length: 10000"
-                ), "");
+            Arrays.asList(
+                "POST /h?s=3 HTTP/1.1",
+                "Host: wwo.example.com",
+                "Content-Type: multipart/form-data; boundaryAaB03x",
+                "Content-Length: 100005"
+            ),
+            ""
+        );
         new RqMultipart(req);
     }
 
@@ -151,14 +153,16 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
-    public void throwsIOExceptionOnInvalidContentTypeHeader() throws IOException {
+    public void throwsExceptionOnInvalidContentTypeHeader() throws IOException {
         final Request req = new RqFake(
             Arrays.asList(
-                "POST /h?a=3 HTTP/1.1",
+                "POST /h?r=3 HTTP/1.1",
                 "Host: www.example.com",
                 "Content-Type: multipart; boundary=AaB03x",
-                "Content-Length: 10000"
-            ), "");
+                "Content-Length: 100004"
+            ),
+                ""
+        );
         new RqMultipart(req);
     }
 
@@ -170,23 +174,23 @@ public final class RqMultipartTest {
     public void parsesHttpBody() throws IOException {
         final Request req = new RqFake(
             Arrays.asList(
-                "POST /h?a=3 HTTP/1.1",
-                "Host: www.example.com",
-                "Content-Type: multipart/form-data; boundary=AaB03x",
-                "Content-Length: 10000"
+                "POST /h?g=3 HTTP/1.1",
+                "Host: wwy.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB07x",
+                "Content-Length: 100003"
             ),
-            Joiner.on("\r\n").join(
-                "--AaB03x",
+            Joiner.on(CR).join(
+                "--AaB07x",
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
-                "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                "--AaB03x",
+                "40 N Wolfe Rd, Sunnyvale, CA 94085",
+                "--AaB07x",
                 // @checkstyle LineLength (1 line)
                 "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
-                "Content-Transfer-Encoding: utf-8",
+                "Content-Transfer-Encoding: utr-8",
                 "",
-                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                "--AaB03x--"
+                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n the end",
+                "--AaB07x--"
             )
         );
         final RqMultipart multi = new RqMultipart(req);
@@ -207,34 +211,35 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart can parse body creating empty collection on invalid part request.
+     * RqMultipart can parse body creating empty collection
+     * on invalid part request.
      * @throws IOException If some problem inside
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
         final Request req = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; name=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "--AaB03x",
-                        // @checkstyle LineLength (1 line)
-                        "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
-                        "Content-Transfer-Encoding: utf-8",
-                        "",
-                        "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                        "--AaB03x--"
-                )
+            Arrays.asList(
+                "POST /h?j=3 HTTP/1.1",
+                "Host: wwn.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB08x",
+                "Content-Length: 100002"
+            ),
+            Joiner.on(CR).join(
+                "--AaB08x",
+                "Content-Disposition: form-data; name=\"address\"",
+                "",
+                "443 N Wolfe Rd, Sunnyvale, CA 94085",
+                "--AaB08x",
+                // @checkstyle LineLength (1 line)
+                "Content-Disposition: form-data; name=\"data\"; filename=\"a.zip\"",
+                "Content-Transfer-Encoding: utf-8",
+                "",
+                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n  the end",
+                "--AaB08x--"
+            )
         );
         final RqMultipart multi = new RqMultipart(req);
-        assertFalse(multi.part("fake").iterator().hasNext());
+        Assert.assertFalse(multi.part("fake").iterator().hasNext());
     }
 
     /**
@@ -244,27 +249,30 @@ public final class RqMultipartTest {
     @Test
     public void returnsCorrectNamesSet() throws IOException {
         final Request req = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; name=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "--AaB03x",
-                        // @checkstyle LineLength (1 line)
-                        "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
-                        "Content-Transfer-Encoding: utf-8",
-                        "",
-                        "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                        "--AaB03x--"
-                )
+            Arrays.asList(
+                "POST /h?u=3 HTTP/1.1",
+                "Host: vww.example.com",
+                "Content-Type: multipart/form-data; boundary=AaB02x",
+                "Content-Length: 100001"
+            ),
+            Joiner.on(CR).join(
+                "--AaB02x",
+                "Content-Disposition: form-data; name=\"address\"",
+                "",
+                "441 N Wolfe Rd, Sunnyvale, CA 94085",
+                "--AaB02x",
+                // @checkstyle LineLength (1 line)
+                "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
+                "Content-Transfer-Encoding: urf-8",
+                "",
+                "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n the  end",
+                "--AaB02x--"
+            )
         );
         final RqMultipart multi = new RqMultipart(req);
-        assertEquals(multi.names(), new HashSet<String>(Arrays.asList("address", "data")));
+        Assert.assertEquals(
+                multi.names(),
+                new HashSet<String>(Arrays.asList("address", "data"))
+        );
     }
 }
