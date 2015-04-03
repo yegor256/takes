@@ -74,29 +74,7 @@ public final class RqMultipartTest {
                 )
         );
         RqMultipart rqm1 = new RqMultipart(req1);
-
-        final Request req2 = new RqFake(
-                Arrays.asList(
-                        "POST /h?a=3 HTTP/1.1",
-                        "Host: www.example.com",
-                        "Content-Type: multipart/form-data; boundary=AaB03x",
-                        "Content-Length: 10000"
-                ),
-                Joiner.on("\r\n").join(
-                        "--AaB03x",
-                        "Content-Disposition: form-data; name=\"address\"",
-                        "",
-                        "440 N Wolfe Rd, Sunnyvale, CA 94085",
-                        "--AaB03x",
-                        // @checkstyle LineLength (1 line)
-                        "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\"",
-                        "Content-Transfer-Encoding: utf-8",
-                        "",
-                        "\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\nthe end",
-                        "--AaB03x--"
-                )
-        );
-        RqMultipart rqm2 = new RqMultipart(req2);
+        RqMultipart rqm2 = new RqMultipart(req1);
         assertEquals(rqm1, rqm2);
     }
 
