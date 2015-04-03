@@ -71,7 +71,7 @@ public final class TkLogged implements Take {
      * Print itself.
      * @return Response
      * @throws IOException If fails
-     * @todo #101 I expect implementations of Response and Take
+     * @todo #101:30min/DEV I expect implementations of Response and Take
      *  interfaces will be able convert itself to a loggable string but
      *  they don't have this feature.
      *  See details here https://github.com/yegor256/takes/issues/101
