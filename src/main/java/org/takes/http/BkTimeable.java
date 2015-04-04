@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
  */
-@EqualsAndHashCode(of = {"origin", "latency", "start"})
+@EqualsAndHashCode(of = { "origin", "latency", "start" })
 public final class BkTimeable implements Back {
 
     /**
@@ -54,24 +54,28 @@ public final class BkTimeable implements Back {
     /**
      * Ctor.
      * @param back Original back
-     * @param latency Latency delay
+     * @param lat Latency delay
      */
-    public BkTimeable(Back back, long latency) {
+    public BkTimeable(final Back back, final long lat) {
         this.origin = back;
-        this.latency = latency;
+        this.latency = lat;
         this.start = System.currentTimeMillis();
     }
 
     @Override
-    public void accept(Socket socket) throws IOException {
-        if (!latencyExceeded()) {
+    public void accept(final Socket socket) throws IOException {
+        if (!this.latencyExceeded()) {
             this.origin.accept(socket);
         } else {
             Thread.currentThread().interrupt();
         }
     }
 
+    /**
+     * Check is latency exceeded.
+     * @return True if exceeded
+     */
     private boolean latencyExceeded() {
-        return System.currentTimeMillis() - start > latency;
+        return System.currentTimeMillis() - this.start > this.latency;
     }
 }
