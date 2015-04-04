@@ -32,7 +32,7 @@ import org.junit.Test;
  * Test case for {@link PsLinkedin}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.11.2
+ * @since 0.11.3
  */
 public final class PsLinkedinTest {
 
@@ -40,11 +40,6 @@ public final class PsLinkedinTest {
      * PsLinkedin can login.
      * @throws IOException If some problem inside
      * @todo #12:30min/DEV This class not implemented yet, but has to be.
-     *  We could register test account and create unit test using it.
-     *  Or we can make stubbed Linkedin OAuth service using e.g. WireMock
-     *  see http://wiremock.org  or any other framework. In this case,
-     *  we should use method PsLinkedin.with() which allows to use custom
-     *  hostname for Linkedin API.
      */
     @Ignore
     @Test

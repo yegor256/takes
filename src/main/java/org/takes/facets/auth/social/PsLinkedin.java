@@ -48,24 +48,10 @@ import org.takes.rq.RqHref;
  * <p>The class is immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @since 0.11.3
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
-    /**
-     * OAUTH base url param name.
-     */
-    public static final String OAUTH = "OAUTH";
-
-    /**
-     * Linkedin API base url param name.
-     */
-    public static final String API = "API";
-
-    /**
-     * Default params.
-     */
-    private static final ConcurrentMap<String, String> DEF_PARAMS;
-
     /**
      * OAuth authorization code parameter.
      */
@@ -82,34 +68,11 @@ public final class PsLinkedin implements Pass {
     private final transient String key;
 
     /**
-     * Params.
-     */
-    private final transient ConcurrentMap<String, String> params;
-
-    static {
-        DEF_PARAMS = new ConcurrentHashMap<String, String>(2);
-        PsLinkedin.DEF_PARAMS.put(PsLinkedin.OAUTH, "https://www.linkedin.com");
-        PsLinkedin.DEF_PARAMS.put(PsLinkedin.API, "https://api.linkedin.com");
-    }
-
-    /**
      * Ctor.
      * @param lapp Linkedin app
      * @param lkey Linkedin key
      */
     public PsLinkedin(final String lapp, final String lkey) {
-        this(lapp, lkey, PsLinkedin.DEF_PARAMS);
-    }
-
-    /**
-     * Ctor.
-     * @param lapp Linkedin app
-     * @param lkey Linkedin key
-     * @param map Params
-     */
-    private PsLinkedin(final String lapp, final String lkey,
-        final ConcurrentMap<String, String> map) {
-        this.params = map;
         this.app = lapp;
         this.key = lkey;
     }
@@ -134,33 +97,16 @@ public final class PsLinkedin implements Pass {
     }
 
     /**
-     * Add this extra param.
-     * @param pkey Key of the param
-     * @param value The value
-     * @return New PsLinkedin
-     */
-    @SuppressWarnings("PMD.DefaultPackage")
-    PsLinkedin with(final String pkey, final String value) {
-        final ConcurrentMap<String, String> map =
-            new ConcurrentHashMap<String, String>(
-                this.params.size()
-            );
-        map.putAll(this.params);
-        map.put(pkey, value);
-        return new PsLinkedin(this.app, this.key, map);
-    }
-
-    /**
      * Get user name from Linkedin, with the token provided.
      * @param token PsLinkedin access token
      * @return The user found in PsLinkedin
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(
-            this.params.get(PsLinkedin.API)
-                .concat("/v1/people/~:(id,first-name,last-name,picture-url)")
-        ).with("format", "json").with("oauth2_access_token", token).toString();
+        // @checkstyle LineLength (1 line)
+        final String uri = new Href("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)")
+            .with("format", "json")
+            .with("oauth2_access_token", token).toString();
         return PsLinkedin.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -180,8 +126,7 @@ public final class PsLinkedin implements Pass {
     private String token(final String home, final String code)
         throws IOException {
         final String uri = new Href(
-            this.params.get(PsLinkedin.OAUTH)
-                .concat("/uas/oauth2/accessToken")
+            "https://www.linkedin.com/uas/oauth2/accessToken"
         ).with("grant_type", "authorization_code")
             .with("client_id", this.app)
             .with("redirect_uri", home)
