@@ -137,7 +137,7 @@ public final class PsLinkedin implements Pass {
      * Add this extra param.
      * @param pkey Key of the param
      * @param value The value
-     * @return New HREF
+     * @return New PsLinkedin
      */
     @SuppressWarnings("PMD.DefaultPackage")
     PsLinkedin with(final String pkey, final String value) {
