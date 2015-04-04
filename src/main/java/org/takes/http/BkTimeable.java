@@ -28,12 +28,13 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
 /**
- * Back decorator with socket lifetime.
+ * Back decorator with lifetime.
+ * <p>The class is immutable and thread-safe.
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
  */
-@EqualsAndHashCode(of = {"origin", "latency"})
-public final class BkTimeable implements Back{
+@EqualsAndHashCode(of = {"origin", "latency", "start"})
+public final class BkTimeable implements Back {
 
     /**
      * Origin back.
@@ -43,20 +44,34 @@ public final class BkTimeable implements Back{
     /**
      * Socket life time.
      */
-    private final transient int latency;
+    private final transient long latency;
 
     /**
-     *
-     * @param latency Socket latency time
+     * Start time of instance creation.
+     */
+    private final transient long start;
+
+    /**
+     * Ctor.
+     * @param latency  latency time
      * @param back Original back
      */
-    public BkTimeable(int latency, Back back) {
-        this.latency = latency;
+    public BkTimeable(Back back, long latency) {
         this.origin = back;
+        this.latency = latency;
+        this.start = System.currentTimeMillis();
     }
 
     @Override
     public void accept(Socket socket) throws IOException {
-        this.origin.accept(socket);
+        if (!latencyExceeded()) {
+            this.origin.accept(socket);
+        } else {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private boolean latencyExceeded() {
+        return System.currentTimeMillis() - start > latency;
     }
 }

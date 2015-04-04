@@ -140,15 +140,15 @@ final class Options {
 
     /**
      * Get the max latency in milliseconds.
-     * @return Port number
+     * @return Latency
      */
-    public int maxLatency() {
+    public long maxLatency() {
         final String value = this.map.get("max-latency");
-        final int msec;
+        final long msec;
         if (value == null) {
-            msec = Integer.MAX_VALUE;
+            msec = Long.MAX_VALUE;
         } else {
-            msec = Integer.parseInt(value);
+            msec = Long.parseLong(value);
         }
         return msec;
     }
