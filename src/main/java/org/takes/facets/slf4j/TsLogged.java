@@ -25,6 +25,7 @@
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
+import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.Takes;
@@ -35,17 +36,61 @@ import org.takes.Takes;
  * <p>The class is immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @todo #28:30min/DEV This class not implemented yet, but has to be.
- *  Please implement it like TkLogged and don't forget about unit tests.
- *  In addition, need to be implement classes BkLogged, FtLogged, PsLogged
- *  which will make loggable interfaces Back, Front, Pass. They should all be
- *  implemented also like TkLogged.
  * @since 0.11.2
  */
+@EqualsAndHashCode(of = { "origin", "target" })
 public final class TsLogged implements Takes {
+    /**
+     * Original takes.
+     */
+    private final transient Takes origin;
+
+    /**
+     * Log target.
+     */
+    private final transient Target target;
+
+    /**
+     * Ctor.
+     * @param takes Original
+     * @param trget Log target
+     */
+    TsLogged(final Takes takes, final Target trget) {
+        this.target = trget;
+        this.origin = takes;
+    }
+
+    /**
+     * Ctor.
+     * @param takes Original
+     */
+    public TsLogged(final Takes takes) {
+        this(takes, new Slf4j(TkLogged.class));
+    }
+
+    /**
+     * Print itself.
+     * @param request Request
+     * @return Take
+     * @throws IOException If fails
+     * @todo #121:30min/DEV I expect implementations of Request interface
+     *  will be able convert itself to a loggable string but
+     *  it don't has this feature.
+     *  See details here https://github.com/yegor256/takes/issues/101
+     *  We will use toConsole() in this way
+     *  this.target.log("...", this.origin.toConsole(), request.toConsole, ...)
+     */
     @Override
     public Take route(final Request request) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+        final long started = System.currentTimeMillis();
+        final Take take = this.origin.route(request);
+        this.target.log(
+            "[{}] #route([{}]) return [{}] in [{}] ms",
+            this.origin,
+            request,
+            take,
+            System.currentTimeMillis() - started
+        );
+        return take;
     }
 }
-
