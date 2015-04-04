@@ -42,7 +42,7 @@ public final class BkTimeable implements Back {
     private final transient Back origin;
 
     /**
-     * Socket life time.
+     * Latency in milliseconds.
      */
     private final transient long latency;
 
@@ -53,8 +53,8 @@ public final class BkTimeable implements Back {
 
     /**
      * Ctor.
-     * @param latency  latency time
      * @param back Original back
+     * @param latency Latency delay
      */
     public BkTimeable(Back back, long latency) {
         this.origin = back;
