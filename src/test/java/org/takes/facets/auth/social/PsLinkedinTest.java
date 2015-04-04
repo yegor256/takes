@@ -40,6 +40,12 @@ public final class PsLinkedinTest {
      * PsLinkedin can login.
      * @throws IOException If some problem inside
      * @todo #12:30min/DEV This class not implemented yet, but has to be.
+     *  Please implement it. Mocked OAuth server is one of the possible
+     *  solutions. In this case, we could use some library like WireMock
+     *  (see http://www.wiremock.org), which allows make stub for web
+     *  service. We'll need to make some changes in PsLinkedin,
+     *  that allow to change API url, and use local stubbed http
+     *  server during unit test.
      */
     @Ignore
     @Test
