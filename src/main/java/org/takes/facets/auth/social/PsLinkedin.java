@@ -52,14 +52,19 @@ import org.takes.rq.RqHref;
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
     /**
-     * Linkedin default OAUTH base url.
+     * OAUTH base url param name.
      */
-    private static final String LINKEDIN_OAUTH = "https://www.linkedin.com";
+    public static final String OAUTH = "OAUTH";
 
     /**
-     * Linkedin API base url.
+     * Linkedin API base url param name.
      */
-    private static final String LINKEDIN_API = "https://api.linkedin.com";
+    public static final String API = "API";
+
+    /**
+     * Default params.
+     */
+    private static final ConcurrentMap<String, String> DEF_PARAMS;
 
     /**
      * OAuth authorization code parameter.
@@ -77,14 +82,15 @@ public final class PsLinkedin implements Pass {
     private final transient String key;
 
     /**
-        * Linkedin OAUTH base url.
-    */
-    private final transient String oauth;
-
-    /**
-     * Linkedin OAUTH base url.
+     * Params.
      */
-    private final transient String api;
+    private final transient ConcurrentMap<String, String> params;
+
+    static {
+        DEF_PARAMS = new ConcurrentHashMap<String, String>(2);
+        PsLinkedin.DEF_PARAMS.put(PsLinkedin.OAUTH, "https://www.linkedin.com");
+        PsLinkedin.DEF_PARAMS.put(PsLinkedin.API, "https://api.linkedin.com");
+    }
 
     /**
      * Ctor.
@@ -92,21 +98,18 @@ public final class PsLinkedin implements Pass {
      * @param lkey Linkedin key
      */
     public PsLinkedin(final String lapp, final String lkey) {
-        this(LINKEDIN_OAUTH, LINKEDIN_API, lapp, lkey);
+        this(lapp, lkey, PsLinkedin.DEF_PARAMS);
     }
 
     /**
      * Ctor.
-     * @param loauth Linkedin oauth url
-     * @param lapi Linkedin api url
      * @param lapp Linkedin app
      * @param lkey Linkedin key
-     * @checkstyle ParameterNumberCheck (3 line)
-     * @checkstyle LineLength (2 line)
+     * @param map Params
      */
-    PsLinkedin(final String loauth, final String lapi, final String lapp, final String lkey) {
-        this.oauth = loauth;
-        this.api = lapi;
+    private PsLinkedin(final String lapp, final String lkey,
+        final ConcurrentMap<String, String> map) {
+        this.params = map;
         this.app = lapp;
         this.key = lkey;
     }
@@ -131,17 +134,33 @@ public final class PsLinkedin implements Pass {
     }
 
     /**
+     * Add this extra param.
+     * @param pkey Key of the param
+     * @param value The value
+     * @return New HREF
+     */
+    @SuppressWarnings("PMD.DefaultPackage")
+    PsLinkedin with(final String pkey, final String value) {
+        final ConcurrentMap<String, String> map =
+            new ConcurrentHashMap<String, String>(
+                this.params.size()
+            );
+        map.putAll(this.params);
+        map.put(pkey, value);
+        return new PsLinkedin(this.app, this.key, map);
+    }
+
+    /**
      * Get user name from Linkedin, with the token provided.
      * @param token PsLinkedin access token
      * @return The user found in PsLinkedin
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href(this.api.concat("/v1/people/~:(id,first-name,last-name,picture-url)"))
-            .with("format", "json")
-            .with("oauth2_access_token", token)
-            .toString();
+        final String uri = new Href(
+            this.params.get(PsLinkedin.API)
+                .concat("/v1/people/~:(id,first-name,last-name,picture-url)")
+        ).with("format", "json").with("oauth2_access_token", token).toString();
         return PsLinkedin.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -160,9 +179,10 @@ public final class PsLinkedin implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href(this.oauth.concat("/uas/oauth2/accessToken"))
-            .with("grant_type", "authorization_code")
+        final String uri = new Href(
+            this.params.get(PsLinkedin.OAUTH)
+                .concat("/uas/oauth2/accessToken")
+        ).with("grant_type", "authorization_code")
             .with("client_id", this.app)
             .with("redirect_uri", home)
             .with("client_secret", this.key)
@@ -183,10 +203,13 @@ public final class PsLinkedin implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
+        final String fname = "first_name";
+        final String lname = "last_name";
+        final String unknown = "?";
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
-        props.put("first_name", json.getString("fname", "?"));
-        props.put("last_name", json.getString("lname", ""));
+        props.put(fname, json.getString(fname, unknown));
+        props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
             String.format("urn:linkedin:%d", json.getInt("id")), props
         );

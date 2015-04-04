@@ -43,7 +43,7 @@ public final class PsLinkedinTest {
      *  We could register test account and create unit test using it.
      *  Or we can make stubbed Linkedin OAuth service using e.g. WireMock
      *  see http://wiremock.org  or any other framework. In this case,
-     *  we should use ctor PsLinkedin which allows to use custom
+     *  we should use method PsLinkedin.with() which allows to use custom
      *  hostname for Linkedin API.
      */
     @Ignore
