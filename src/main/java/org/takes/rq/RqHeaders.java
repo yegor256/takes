@@ -63,10 +63,10 @@ public final class RqHeaders extends RqWrap {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public Iterable<String> header(final String key) throws IOException {
+    public Iterable<String> header(final CharSequence key) throws IOException {
         final Map<String, List<String>> map = this.map();
         final List<String> values = map.get(
-            key.toLowerCase(Locale.ENGLISH)
+            key.toString().toLowerCase(Locale.ENGLISH)
         );
         final Iterable<String> iter;
         if (values == null) {
