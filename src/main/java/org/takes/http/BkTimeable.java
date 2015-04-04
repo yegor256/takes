@@ -64,10 +64,10 @@ public final class BkTimeable implements Back {
 
     @Override
     public void accept(final Socket socket) throws IOException {
-        if (!this.latencyExceeded()) {
-            this.origin.accept(socket);
-        } else {
+        if (this.latencyExceeded()) {
             Thread.currentThread().interrupt();
+        } else {
+            this.origin.accept(socket);
         }
     }
 
