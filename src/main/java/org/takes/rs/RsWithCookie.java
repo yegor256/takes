@@ -88,6 +88,9 @@ public final class RsWithCookie extends RsWrap {
      */
     private static String make(final String name,
         final String value, final String... attrs) {
+		if (name.matches("[^\\p{Print}]") || value.matches("[^\\p{Print}]")) {
+    		throw new RuntimeException("Cookie name/value cannot contain unprintable characters");
+    	}
         final StringBuilder text = new StringBuilder(
             String.format("%s=%s", name, value)
         );
