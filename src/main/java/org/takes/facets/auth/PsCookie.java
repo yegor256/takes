@@ -125,7 +125,8 @@ public final class PsCookie implements Pass {
                     System.currentTimeMillis()
                         + TimeUnit.DAYS.toMillis(this.age)
                 )
-            )
+            ),
+            "HttpOnly"
         );
     }
 }
