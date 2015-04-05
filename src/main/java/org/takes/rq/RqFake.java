@@ -74,7 +74,7 @@ public final class RqFake extends RqWrap {
      * @param body HTTP body
      */
     public RqFake(final CharSequence method, final CharSequence query,
-                  final CharSequence body) {
+        final CharSequence body) {
         this(
             Arrays.asList(
                 String.format("%s %s", method, query),
