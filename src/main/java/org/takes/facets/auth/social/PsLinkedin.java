@@ -53,11 +53,6 @@ import org.takes.rq.RqHref;
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
     /**
-     * OAuth authorization code parameter.
-     */
-    private static final String CODE = "code";
-
-    /**
      * App name.
      */
     private final transient String app;
@@ -81,7 +76,8 @@ public final class PsLinkedin implements Pass {
     public Iterator<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref(request).href();
-        final Iterator<String> code = href.param(PsLinkedin.CODE).iterator();
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
@@ -131,7 +127,7 @@ public final class PsLinkedin implements Pass {
             .with("client_id", this.app)
             .with("redirect_uri", home)
             .with("client_secret", this.key)
-            .with(PsLinkedin.CODE, code)
+            .with("code", code)
             .toString();
         return new JdkRequest(uri)
             .method("POST")
