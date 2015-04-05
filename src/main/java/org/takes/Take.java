@@ -33,6 +33,17 @@ import java.io.IOException;
  * For example, this is a simple web server
  * that returns "hello, world!" plain text web page:
  *
+ * <pre> new FtBasic(
+ *   new Take() {
+ *     &#64;Override
+ *     public Response act(final Request req) {
+ *       return new RsText("hello, world!");
+ *     }
+ *   },
+ *   8080
+ *  ).start(Exit.NEVER);
+ * }</pre>
+ *
  * <p>There are a few classes that implement this interface and you
  * can create your own. But the best way is to start with
  * {@link org.takes.facets.fork.TkFork}, for example:

@@ -687,7 +687,7 @@ public final class TkIndex implements Take {
   @Override
   public Response act(final Request req) {
     return new RsFork(
-      this.request,
+      req,
       new FkTypes("text/*", new RsText("it's a text"))
       new FkTypes("application/json", new RsJSON("{\"a\":1}"))
       new FkTypes("image/png", /* something else */)

@@ -34,16 +34,12 @@
  * in your "take":
  *
  * <pre> public class TkSaveFile implements Take {
- *   private final Request request;
- *   public TkSaveFile(final Request req) {
- *     this.request = req;
- *   }
  *   &#64;Override
  *   public Response act(final Request req) {
  *     final InputStream content =
- *       new RqMultipart(this.request).part("file").body();
+ *       new RqMultipart(req).part("file").body();
  *     // save content to whenever you want
- *     return new RsForward(new RqHref(this.request).href());
+ *     return new RsForward(new RqHref(req).href());
  *   }
  * }</pre>
  *
@@ -56,14 +52,10 @@
  * a response, especially in input checking situations, for example:
  *
  * <pre> public class TkLoadFile implements Take {
- *   private final Request request;
- *   public TkSaveFile(final Request req) {
- *     this.request = req;
- *   }
  *   &#64;Override
  *   public Response act(final Request req) {
  *     final Iterable&lt;String&gt; param =
- *       new RqHref(this.request).href().param("name");
+ *       new RqHref(req).href().param("name");
  *     if (!param.iterator().hasNext()) {
  *       throw RsForward(
  *         new RsFlash("query param NAME is mandatory"),

@@ -111,12 +111,11 @@
  * (it's a pseudo-code, don't build HTML like this!):
  *
  * <pre>public final class TkDiscussion implements Take {
- *   private final Request req;
  *   &#64;Override
  *   public Response act(final Request req) {
  *     String html = "this is our discussion thread...";
  *     final Iterator&lt;String&gt; cookies =
- *       new RqCookies(this.req).cookie("RsFlash").iterator();
+ *       new RqCookies(req).cookie("RsFlash").iterator();
  *       if (cookies.hasNext()) {
  *         html = cookies.next() + html;
  *       }
@@ -136,7 +135,7 @@
  *     return new RsXembly(
  *       new XeAppend(
  *         "page",
- *         new XeFlash(this.req),
+ *         new XeFlash(req),
  *         // your other Xembly sources
  *       )
  *     );
