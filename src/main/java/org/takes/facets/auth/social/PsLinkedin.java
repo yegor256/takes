@@ -52,7 +52,6 @@ import org.takes.rq.RqHref;
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
-
     /**
      * App name.
      */
