@@ -62,7 +62,7 @@ public final class RqCookies extends RqWrap {
      */
     public Iterable<String> cookie(final CharSequence key) throws IOException {
         final Map<String, String> map = this.map();
-        final String keyAsString=key.toString().toLowerCase(Locale.ENGLISH);
+        final String keyAsString = key.toString().toLowerCase(Locale.ENGLISH);
         final String value = map.get(keyAsString);
         final Iterable<String> iter;
         if (value == null) {
