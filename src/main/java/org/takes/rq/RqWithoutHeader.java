@@ -48,14 +48,14 @@ public final class RqWithoutHeader extends RqWrap {
      * @param req Original request
      * @param name Header name
      */
-    public RqWithoutHeader(final Request req, final String name) {
+    public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
             new Request() {
                 @Override
                 public Iterable<String> head() throws IOException {
                     final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
-                        "%s:", name.toLowerCase(Locale.ENGLISH)
+                        "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     for (final String header : req.head()) {
                         if (!header.toLowerCase(Locale.ENGLISH)
