@@ -28,6 +28,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -52,7 +53,7 @@ public final class TkWithHeadersTest {
                     new TkEmpty(),
                     host,
                     type
-                ).act()
+                ).act(new RqFake())
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(

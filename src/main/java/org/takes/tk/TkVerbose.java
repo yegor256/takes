@@ -21,59 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
-import java.util.ResourceBundle;
+import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Takes;
+import org.takes.NotFoundException;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.rq.RqHref;
+import org.takes.rq.RqMethod;
+import org.takes.tk.TkWrap;
 
 /**
- * Takes that adds an HTTP header to each response with a version
- * of Takes framework.
+ * Take that makes all not-found exceptions location aware.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsVersioned extends TsWrap {
-
-    /**
-     * Version of the library.
-     */
-    private static final String VERSION = TsVersioned.make();
+public final class TkVerbose extends TkWrap {
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      */
-    public TsVersioned(final Takes takes) {
-        this(takes, "X-Takes-Version");
-    }
-
-    /**
-     * Ctor.
-     * @param takes Original takes
-     * @param header Header to add
-     */
-    public TsVersioned(final Takes takes, final String header) {
-        super(new TsWithHeader(takes, header, TsVersioned.VERSION));
-    }
-
-    /**
-     * Make a version.
-     * @return Version
-     */
-    private static String make() {
-        final ResourceBundle res =
-            ResourceBundle.getBundle("org.takes.version");
-        return String.format(
-            "%s %s %s",
-            res.getString("version"),
-            res.getString("revision"),
-            res.getString("date")
+    public TkVerbose(final Take take) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request request) throws IOException {
+                    try {
+                        return take.act(request);
+                    } catch (final NotFoundException ex) {
+                        throw new NotFoundException(
+                            String.format(
+                                "%s %s",
+                                new RqMethod(request).method(),
+                                new RqHref(request).href()
+                            ),
+                            ex
+                        );
+                    }
+                }
+            }
         );
     }
 

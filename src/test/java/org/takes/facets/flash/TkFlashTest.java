@@ -21,40 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.facets.flash;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqGreedy;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.tk.TkEmpty;
 
 /**
- * Takes with a greedy request.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link TkFlash}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.10
+ * @since 0.4
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TsGreedy extends TsWrap {
+public final class TkFlashTest {
 
     /**
-     * Ctor.
-     * @param takes Original takes
+     * TkFlash can remove a flash cookie.
+     * @throws IOException If some problem inside
      */
-    public TsGreedy(final Takes takes) {
-        super(
-            new Takes() {
-                @Override
-                public Take route(final Request request) throws IOException {
-                    return takes.route(new RqGreedy(request));
-                }
-            }
+    @Test
+    public void removesFlashCookie() throws IOException {
+        final Take take = new TkFlash(new TkEmpty());
+        MatcherAssert.assertThat(
+            take.act(
+                new RqWithHeader(
+                    new RqFake(),
+                    "Cookie: RsFlash=Hello!"
+                )
+            ).head(),
+            Matchers.hasItem("Set-Cookie: RsFlash=")
         );
     }
-
 }

@@ -21,49 +21,72 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkMeasured;
+import org.takes.rs.RsWithHeader;
 
 /**
- * Takes that measures response printing time and adds HTTP header
- * "X-Takes-Millis" with the amount of milliseconds.
+ * Take that adds an HTTP header to each response with a version
+ * of Take framework.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.4
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsMeasured extends TsWrap {
+public final class TkVersioned extends TkWrap {
+
+    /**
+     * Version of the library.
+     */
+    private static final String VERSION = TkVersioned.make();
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      */
-    public TsMeasured(final Takes takes) {
-        this(takes, "X-Takes-Millis");
+    public TkVersioned(final Take take) {
+        this(take, "X-Take-Version");
     }
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      * @param header Header to add
      */
-    public TsMeasured(final Takes takes, final String header) {
+    public TkVersioned(final Take take, final String header) {
         super(
-            new Takes() {
+            new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
-                    return new TkMeasured(takes.route(request), header);
+                public Response act(final Request req) throws IOException {
+                    return new RsWithHeader(
+                        take.act(req), header, TkVersioned.VERSION
+                    );
                 }
             }
+        );
+    }
+
+    /**
+     * Make a version.
+     * @return Version
+     */
+    private static String make() {
+        final ResourceBundle res =
+            ResourceBundle.getBundle("org.takes.version");
+        return String.format(
+            "%s %s %s",
+            res.getString("version"),
+            res.getString("revision"),
+            res.getString("date")
         );
     }
 

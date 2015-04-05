@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,24 +29,23 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.NotFoundException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
-import org.takes.tk.TkFixed;
 
 /**
- * Takes reading resources from directory.
+ * Take reading resources from directory.
  *
- * <p>This "takes" is trying to find the requested resource in
+ * <p>This "take" is trying to find the requested resource in
  * file system and return it as an HTTP response with binary body, for example:
  *
- * <pre> new TsFiles("/tmp");</pre>
+ * <pre> new TkFiles("/tmp");</pre>
  *
  * <p>This object will take query part of the arrived HTTP
  * {@link org.takes.Request} and concatenate it with the {@code "/tmp"} prefix.
  * For example, a request comes it and its query equals to
- * {@code "/css/style.css?eot"}. {@link org.takes.ts.TsFiles}
+ * {@code "/css/style.css?eot"}. {@link TkFiles}
  * will try to find a resource {@code "/tmp/css/style.css"} on disc.
  *
  * <p>If such a resource is not found, {@link org.takes.NotFoundException}
@@ -59,13 +58,13 @@ import org.takes.tk.TkFixed;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsFiles extends TsWrap {
+public final class TkFiles extends TkWrap {
 
     /**
      * Ctor.
      * @param base Base directory
      */
-    public TsFiles(final String base) {
+    public TkFiles(final String base) {
         this(new File(base));
     }
 
@@ -73,11 +72,11 @@ public final class TsFiles extends TsWrap {
      * Ctor.
      * @param base Base directory
      */
-    public TsFiles(final File base) {
+    public TkFiles(final File base) {
         super(
-            new Takes() {
+            new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
+                public Response act(final Request request) throws IOException {
                     final File file = new File(
                         base, new RqHref(request).href().path()
                     );
@@ -88,9 +87,7 @@ public final class TsFiles extends TsWrap {
                             )
                         );
                     }
-                    return new TkFixed(
-                        new RsWithBody(new FileInputStream(file))
-                    );
+                    return new RsWithBody(new FileInputStream(file));
                 }
             }
         );

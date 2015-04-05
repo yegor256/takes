@@ -30,58 +30,52 @@ import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TsForward}.
+ * Test case for {@link TkForward}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.2
  */
-public final class TsForwardTest {
+public final class TkForwardTest {
 
     /**
-     * TsForward can catch RsForward.
+     * TkForward can catch RsForward.
      * @throws IOException If some problem inside
      */
     @Test
     public void catchesExceptionCorrectly() throws IOException {
-        final Takes takes = new Takes() {
+        final Take take = new Take() {
             @Override
-            public Take route(final Request request) {
+            public Response act(final Request request) {
                 throw new RsForward("/");
             }
         };
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsForward(takes).route(new RqFake()).act()
+                new TkForward(take).act(new RqFake())
             ).print(),
             Matchers.startsWith("HTTP/1.1 303 See Other")
         );
     }
 
     /**
-     * TsForward can catch RsForward.
+     * TkForward can catch RsForward.
      * @throws IOException If some problem inside
      */
     @Test
     public void catchesExceptionThrownByTake() throws IOException {
-        final Takes takes = new Takes() {
+        final Take take = new Take() {
             @Override
-            public Take route(final Request request) {
-                return new Take() {
-                    @Override
-                    public Response act() {
-                        throw new RsForward("/h");
-                    }
-                };
+            public Response act(final Request request) {
+                throw new RsForward("/h");
             }
         };
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsForward(takes).route(new RqFake()).act()
+                new TkForward(take).act(new RqFake())
             ).print(),
             Matchers.startsWith("HTTP/1.1 303")
         );

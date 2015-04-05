@@ -32,16 +32,16 @@
         <version>0.32.1</version>
     </parent>
     <groupId>org.takes</groupId>
-    <artifactId>takes</artifactId>
+    <artifactId>take</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>takes</name>
+    <name>take</name>
     <description>Immutable Java Web Framework</description>
-    <url>https://github.com/yegor256/takes</url>
+    <url>https://github.com/yegor256/take</url>
     <inceptionYear>2015</inceptionYear>
     <organization>
-        <name>Takes</name>
-        <url>https://github.com/yegor256/takes</url>
+        <name>Take</name>
+        <url>https://github.com/yegor256/take</url>
     </organization>
     <licenses>
         <license>
@@ -66,21 +66,21 @@
     </developers>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/yegor256/takes/issues</url>
+        <url>https://github.com/yegor256/take/issues</url>
     </issueManagement>
     <scm>
-        <connection>scm:git:git@github.com:yegor256/takes.git</connection>
-        <developerConnection>scm:git:git@github.com:yegor256/takes.git</developerConnection>
-        <url>https://github.com/yegor256/takes</url>
+        <connection>scm:git:git@github.com:yegor256/take.git</connection>
+        <developerConnection>scm:git:git@github.com:yegor256/take.git</developerConnection>
+        <url>https://github.com/yegor256/take</url>
     </scm>
     <ciManagement>
         <system>rultor</system>
-        <url>http://www.rultor.com/s/takes</url>
+        <url>http://www.rultor.com/s/take</url>
     </ciManagement>
     <distributionManagement>
         <site>
             <id>github-pages</id>
-            <url>https://github.com/yegor256/takes</url>
+            <url>https://github.com/yegor256/take</url>
         </site>
     </distributionManagement>
     <properties>
@@ -242,7 +242,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>xml:/src/it/settings.xml</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcHex.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/take/facets/auth/codecs/CcHex.java</exclude>
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <exclude>findbugs:.*</exclude>
                             </excludes>

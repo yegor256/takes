@@ -29,24 +29,23 @@ import java.util.Collection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork if user is logged in now.
  *
- * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
+ * <p>Use this class in combination with {@link TkFork},
  * for example:
  *
- * <pre> Takes takes = new TsFork(
+ * <pre> Take take = new TkFork(
  *   new FkRegex(
  *     "/",
- *     new TsFork(
- *       new FkAnonymous(new TsHome()),
- *       new FkAuthenticated(new TsAccount())
+ *     new TkFork(
+ *       new FkAnonymous(new TkHome()),
+ *       new FkAuthenticated(new TkAccount())
  *     )
  *   )
  * );</pre>
@@ -56,11 +55,11 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  * @see org.takes.facets.fork.Target
  */
 @EqualsAndHashCode(of = "target")
-public final class FkAuthenticated implements Fork.AtTake {
+public final class FkAuthenticated implements Fork {
 
     /**
      * Target.
@@ -72,19 +71,11 @@ public final class FkAuthenticated implements Fork.AtTake {
      * @param take Take
      */
     public FkAuthenticated(final Take take) {
-        this(new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param takes Takes
-     */
-    public FkAuthenticated(final Takes takes) {
         this(
             new Target<Request>() {
                 @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
+                public Response act(final Request req) throws IOException {
+                    return take.act(req);
                 }
             }
         );
@@ -99,13 +90,13 @@ public final class FkAuthenticated implements Fork.AtTake {
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
-        final Collection<Take> takes = new ArrayList<Take>(1);
+    public Iterator<Response> route(final Request req) throws IOException {
+        final Collection<Response> response = new ArrayList<Response>(1);
         final Identity identity = new RqAuth(req).identity();
         if (!identity.equals(Identity.ANONYMOUS)) {
-            takes.add(this.target.route(req));
+            response.add(this.target.act(req));
         }
-        return takes.iterator();
+        return response.iterator();
     }
 
 }

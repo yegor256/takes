@@ -23,20 +23,20 @@
  */
 
 /**
- * Takes, Java web development framework.
+ * Take, Java web development framework.
  *
- * <p>Takes is a pure object-oriented and immutable web development framework
- * for Java 6+ projects. The design of Takes is based on four fundamental
+ * <p>Take is a pure object-oriented and immutable web development framework
+ * for Java 6+ projects. The design of Take is based on four fundamental
  * principles: 1) no NULLs, 2) no mutable classes, 3) no public static
  * method, and 4) no type casting. Due to these principles, the design
  * is loosely coupled, highly cohesive and easy to test. To start
  * working with the framework, check out our introduction page in Github:
- * <a href="https://github.com/yegor256/takes">README</a>.
+ * <a href="https://github.com/yegor256/take">README</a>.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  * @see <a href="http://www.takes.org">project site www.takes.org</a>
- * @see <a href="https://github.com/yegor256/takes">Github project</a>
+ * @see <a href="https://github.com/yegor256/take">Github project</a>
  */
 package org.takes;

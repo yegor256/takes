@@ -1,5 +1,5 @@
 assets:
-  settings.xml: yegor256/home#assets/takes/settings.xml
+  settings.xml: yegor256/home#assets/take/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
@@ -20,15 +20,15 @@ architect:
 - davvd
 merge:
   script: |
-    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
+    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'take', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true
-      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
+      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/take/build/${version} | jq -r '.build.status')
       if [ "${status}" == "success" ]; then break; fi
-      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
+      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/take/build/${version}"; exit 1; fi
       echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
-    mvn clean install -Ptakes -Pqulice --errors --settings ../settings.xml
+    mvn clean install -Ptake -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
@@ -43,25 +43,25 @@ merge:
   - yegor256
 deploy:
   script: |
-    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
+    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'take', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true
-      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
+      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/take/build/${version} | jq -r '.build.status')
       if [ "${status}" == "success" ]; then break; fi
-      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
+      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/take/build/${version}"; exit 1; fi
       echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
-    pdd --source=$(pwd) --verbose --file=takes.xml
-    s3cmd --no-progress put takes.xml --config=../s3cfg s3://pdd.teamed.io/takes.xml
+    pdd --source=$(pwd) --verbose --file=take.xml
+    s3cmd --no-progress put take.xml --config=../s3cfg s3://pdd.teamed.io/take.xml
   commanders:
   - yegor256
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Ptakes -Psonatype --errors --settings ../settings.xml
-    mvn clean site-deploy -Ptakes -Psite --errors --settings ../settings.xml
+    mvn clean deploy -Ptake -Psonatype --errors --settings ../settings.xml
+    mvn clean site-deploy -Ptake -Psite --errors --settings ../settings.xml
   commanders:
   - yegor256

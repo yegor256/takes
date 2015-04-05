@@ -26,6 +26,7 @@ package org.takes.tk;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsHTML;
@@ -53,7 +54,7 @@ public final class TkHTML extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() {
+                public Response act(final Request req) {
                     return new RsHTML(body);
                 }
             }
@@ -68,7 +69,7 @@ public final class TkHTML extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() {
+                public Response act(final Request req) {
                     return new RsHTML(body);
                 }
             }
@@ -83,7 +84,7 @@ public final class TkHTML extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() {
+                public Response act(final Request req) {
                     return new RsHTML(url);
                 }
             }
@@ -98,7 +99,7 @@ public final class TkHTML extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() {
+                public Response act(final Request req) {
                     return new RsHTML(body);
                 }
             }

@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
-import org.takes.ts.TsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkRegex}.
@@ -45,7 +45,7 @@ public final class FkRegexTest {
     @Test
     public void matchesByRegularExpression() throws IOException {
         MatcherAssert.assertThat(
-            new FkRegex("/h[a-z]{2}", new TsEmpty()).route(
+            new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).hasNext(),
             Matchers.is(true)

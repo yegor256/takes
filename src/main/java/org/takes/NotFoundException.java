@@ -26,7 +26,7 @@ package org.takes;
 /**
  * Can't find how the resource requested.
  *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
+ * <p>The exception is throws by {@link Take#route(org.takes.Request)}
  * if and when a "take" can't be found.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)

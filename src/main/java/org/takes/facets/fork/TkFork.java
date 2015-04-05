@@ -31,26 +31,26 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.NotFoundException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 
 /**
- * Fork takes.
+ * Fork take.
  *
- * <p>This is the implementation of {@link org.takes.Takes} that
- * routes the requests to another takes, using a collection of forks
+ * <p>This is the implementation of {@link org.takes.Take} that
+ * routes the requests to another take, using a collection of forks
  * to pick the right one. The best example is a routing by regular
  * expression, for example:
  *
- * <pre> Takes takes = new TsFork(
- *   new FkRegex("/home", new TsHome()),
- *   new FkRegex("/account", new TsAccount())
+ * <pre> Take take = new TkFork(
+ *   new FkRegex("/home", new TkHome()),
+ *   new FkRegex("/account", new TkAccount())
  * );</pre>
  *
- * <p>Here, {@link org.takes.facets.fork.TsFork} will try to call these
+ * <p>Here, {@link TkFork} will try to call these
  * "forks" one by one, asking whether they accept the request. The first
  * one that reacts will get control. Each "fork" is an implementation
- * of {@link org.takes.facets.fork.Fork.AtTake}.
+ * of {@link org.takes.facets.fork.Fork}.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -62,25 +62,25 @@ import org.takes.Takes;
  * @see org.takes.facets.fork.FkParams
  */
 @EqualsAndHashCode(of = "forks")
-public final class TsFork implements Takes {
+public final class TkFork implements Take {
 
     /**
-     * Patterns and their respective takes.
+     * Patterns and their respective take.
      */
-    private final transient Collection<Fork.AtTake> forks;
+    private final transient Collection<Fork> forks;
 
     /**
      * Ctor.
      */
-    public TsFork() {
-        this(Collections.<Fork.AtTake>emptyList());
+    public TkFork() {
+        this(Collections.<Fork>emptyList());
     }
 
     /**
      * Ctor.
      * @param frks Forks
      */
-    public TsFork(final Fork.AtTake... frks) {
+    public TkFork(final Fork... frks) {
         this(Arrays.asList(frks));
     }
 
@@ -88,16 +88,16 @@ public final class TsFork implements Takes {
      * Ctor.
      * @param frks Forks
      */
-    public TsFork(final Collection<Fork.AtTake> frks) {
+    public TkFork(final Collection<Fork> frks) {
         this.forks = Collections.unmodifiableCollection(frks);
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
-        for (final Fork<Take> fork : this.forks) {
-            final Iterator<Take> takes = fork.route(request);
-            if (takes.hasNext()) {
-                return takes.next();
+    public Response act(final Request request) throws IOException {
+        for (final Fork fork : this.forks) {
+            final Iterator<Response> response = fork.route(request);
+            if (response.hasNext()) {
+                return response.next();
             }
         }
         throw new NotFoundException();

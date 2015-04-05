@@ -42,7 +42,7 @@ import org.takes.rq.RqHeaders;
  * to deliver GZIP-compressed response when "Accept-Encoding" request
  * header contains "gzip". Here is how:
  *
- * <pre> new TsFork(
+ * <pre> new TkFork(
  *   new FkEncoding("gzip", new RsGzip(response)),
  *   new FkEncoding("", response)
  * )</pre>
@@ -58,7 +58,7 @@ import org.takes.rq.RqHeaders;
  * @see org.takes.facets.fork.RsFork
  */
 @EqualsAndHashCode(of = { "encoding", "origin" })
-public final class FkEncoding implements Fork.AtResponse {
+public final class FkEncoding implements Fork {
 
     /**
      * Encoding we can deliver (or empty string).

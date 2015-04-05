@@ -30,8 +30,8 @@
  * This is how you implement it
  * in your "take":
  *
- * <pre> new TsLogged(
- *   new TsFork(
+ * <pre> new TkLogged(
+ *   new TkFork(
  *    // my config...
  *   )
  * );</pre>

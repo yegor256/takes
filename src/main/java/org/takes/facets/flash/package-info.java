@@ -52,7 +52,7 @@
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     // save the post to the database
  *     return new RsFlash(
  *       new RsForward(),
@@ -69,7 +69,7 @@
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     if (failed) {
  *       throw new RsFlash(
  *         new RsForward(),
@@ -96,13 +96,13 @@
  * Host: www.example.com
  * Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
- * <p>There is a class {@link org.takes.facets.flash.TsFlash}, that
- * decorates your existing "takes" and adds "Set-Cookie" with an empty
+ * <p>There is a class {@link org.takes.facets.flash.TkFlash}, that
+ * decorates your existing "take" and adds "Set-Cookie" with an empty
  * value to the response. That's all it's doing. All you need to do
- * is to decorate your existing "takes", for example:
+ * is to decorate your existing "take", for example:
  *
  * <pre> new FtBasic(
- *   new TsFlash(TsFork(new FkRegex("/", "hello, world!"))), 8080
+ *   new TkFlash(TkFork(new FkRegex("/", "hello, world!"))), 8080
  *  ).start(Exit.NEVER);
  * }</pre>
  *
@@ -113,7 +113,7 @@
  * <pre>public final class TkDiscussion implements Take {
  *   private final Request req;
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     String html = "this is our discussion thread...";
  *     final Iterator&lt;String&gt; cookies =
  *       new RqCookies(this.req).cookie("RsFlash").iterator();
@@ -132,7 +132,7 @@
  * <pre>public final class TkDiscussion implements Take {
  *   private final Request req;
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     return new RsXembly(
  *       new XeAppend(
  *         "page",

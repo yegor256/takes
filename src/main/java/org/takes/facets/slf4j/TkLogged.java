@@ -26,6 +26,7 @@ package org.takes.facets.slf4j;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 
@@ -39,6 +40,7 @@ import org.takes.Take;
  */
 @EqualsAndHashCode(of = { "origin", "target" })
 public final class TkLogged implements Take {
+
     /**
      * Original take.
      */
@@ -74,14 +76,14 @@ public final class TkLogged implements Take {
      * @todo #101:30min/DEV I expect implementations of Response and Take
      *  interfaces will be able convert itself to a loggable string but
      *  they don't have this feature.
-     *  See details here https://github.com/yegor256/takes/issues/101
+     *  See details here https://github.com/yegor256/take/issues/101
      *  We will use toConsole() in this way
      *  this.target.log("...", this.origin.toConsole(), resp.toConsole, ...)
      */
     @Override
-    public Response act() throws IOException {
+    public Response act(final Request req) throws IOException {
         final long started = System.currentTimeMillis();
-        final Response resp = this.origin.act();
+        final Response resp = this.origin.act(req);
         this.target.log(
             "[{}] #act() return [{}] in [{}] ms",
             this.origin,

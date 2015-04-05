@@ -21,51 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkWithHeader;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
 
 /**
- * Takes with an added header.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link TkVersioned}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.11
+ * @since 0.4
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TsWithHeader extends TsWrap {
+public final class TkVersionedTest {
 
     /**
-     * Ctor.
-     * @param takes Original takes
-     * @param key Header name
-     * @param value Value
+     * TkVersioned can add a header with version name.
+     * @throws IOException If some problem inside
      */
-    public TsWithHeader(final Takes takes,
-        final String key, final String value) {
-        this(takes, String.format("%s: %s", key, value));
-    }
-
-    /**
-     * Ctor.
-     * @param takes Original takes
-     * @param header Header
-     */
-    public TsWithHeader(final Takes takes, final String header) {
-        super(
-            new Takes() {
-                @Override
-                public Take route(final Request request) throws IOException {
-                    return new TkWithHeader(takes.route(request), header);
-                }
-            }
+    @Test
+    public void attachesHeader() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkVersioned(new TkEmpty()).act(
+                    new RqFake()
+                )
+            ).print(),
+            Matchers.containsString("X-Take-Version")
         );
     }
 

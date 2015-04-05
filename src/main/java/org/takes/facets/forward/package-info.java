@@ -39,7 +39,7 @@
  *     this.request = req;
  *   }
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     final InputStream content =
  *       new RqMultipart(this.request).part("file").body();
  *     // save content to whenever you want
@@ -61,7 +61,7 @@
  *     this.request = req;
  *   }
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     final Iterable&lt;String&gt; param =
  *       new RqHref(this.request).href().param("name");
  *     if (!param.iterator().hasNext()) {
@@ -75,12 +75,12 @@
  *   }
  * }</pre>
  *
- * <p>This example will work only if you wrap your entire "takes" into
- * {@link org.takes.facets.forward.TsForward} decorator:
+ * <p>This example will work only if you wrap your entire "take" into
+ * {@link org.takes.facets.forward.TkForward} decorator:
  *
- * <pre>Takes takes = new TsForward(takes);</pre>
+ * <pre>Take take = new TkForward(take);</pre>
  *
- * <p>This {@link org.takes.facets.forward.TsForward} decorator will catch
+ * <p>This {@link org.takes.facets.forward.TkForward} decorator will catch
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
  * convert them to responses.
  *

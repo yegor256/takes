@@ -21,12 +21,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes.tk;
+
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
- * Takes.
+ * Take that always fails.
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-package org.takes.ts;
+@EqualsAndHashCode(callSuper = true)
+public final class TkFailure extends TkWrap {
+
+    /**
+     * Ctor.
+     */
+    public TkFailure() {
+        this("intentional failure");
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     */
+    public TkFailure(final String err) {
+        this(new IllegalStateException(err));
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     */
+    public TkFailure(final RuntimeException err) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request request) {
+                    throw err;
+                }
+            }
+        );
+    }
+
+}

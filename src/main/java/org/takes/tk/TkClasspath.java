@@ -21,31 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.NotFoundException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
-import org.takes.tk.TkFixed;
 
 /**
- * Takes reading resources from classpath.
+ * Take reading resources from classpath.
  *
- * <p>This "takes" is trying to find the requested resource in
+ * <p>This "take" is trying to find the requested resource in
  * classpath and return it as an HTTP response with binary body, for example:
  *
- * <pre> new TsClasspath("/my");</pre>
+ * <pre> new TkClasspath("/my");</pre>
  *
  * <p>This object will take query part of the arrived HTTP
  * {@link org.takes.Request} and concatenate it with the {@code "/my"} prefix.
  * For example, a request comes it and its query equals to
- * {@code "/css/style.css?eot"}. {@link org.takes.ts.TsClasspath}
+ * {@code "/css/style.css?eot"}. {@link TkClasspath}
  * will try to find a resource {@code "/my/css/style.css"} in classpath.
  *
  * <p>If such a resource is not found, {@link org.takes.NotFoundException}
@@ -58,12 +57,12 @@ import org.takes.tk.TkFixed;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TsClasspath extends TsWrap {
+public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
      */
-    public TsClasspath() {
+    public TkClasspath() {
         this("");
     }
 
@@ -71,7 +70,7 @@ public final class TsClasspath extends TsWrap {
      * Ctor.
      * @param base Base class
      */
-    public TsClasspath(final Class<?> base) {
+    public TkClasspath(final Class<?> base) {
         this(
             String.format(
                 "/%s", base.getPackage().getName().replace(".", "/")
@@ -83,11 +82,11 @@ public final class TsClasspath extends TsWrap {
      * Ctor.
      * @param prefix Prefix
      */
-    public TsClasspath(final String prefix) {
+    public TkClasspath(final String prefix) {
         super(
-            new Takes() {
+            new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
+                public Response act(final Request request) throws IOException {
                     final String name = String.format(
                         "%s%s", prefix, new RqHref(request).href().path()
                     );
@@ -98,7 +97,7 @@ public final class TsClasspath extends TsWrap {
                             String.format("%s not found in classpath", name)
                         );
                     }
-                    return new TkFixed(new RsWithBody(input));
+                    return new RsWithBody(input);
                 }
             }
         );

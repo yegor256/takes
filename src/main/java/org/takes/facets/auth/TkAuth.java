@@ -29,13 +29,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithoutHeader;
 
 /**
- * Authenticating takes.
+ * Authenticating take.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -44,12 +43,12 @@ import org.takes.rq.RqWithoutHeader;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "origin", "pass", "header" })
-public final class TsAuth implements Takes {
+public final class TkAuth implements Take {
 
     /**
-     * Original takes.
+     * Original take.
      */
-    private final transient Takes origin;
+    private final transient Take origin;
 
     /**
      * Pass.
@@ -63,35 +62,35 @@ public final class TsAuth implements Takes {
 
     /**
      * Ctor.
-     * @param takes Original
+     * @param take Original
      * @param pss Pass
      */
-    public TsAuth(final Takes takes, final Pass pss) {
-        this(takes, pss, TsAuth.class.getSimpleName());
+    public TkAuth(final Take take, final Pass pss) {
+        this(take, pss, TkAuth.class.getSimpleName());
     }
 
     /**
      * Ctor.
-     * @param takes Original
+     * @param take Original
      * @param pss Pass
      * @param hdr Header to set
      */
-    public TsAuth(final Takes takes, final Pass pss, final String hdr) {
-        this.origin = takes;
+    public TkAuth(final Take take, final Pass pss, final String hdr) {
+        this.origin = take;
         this.pass = pss;
         this.header = hdr;
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
+    public Response act(final Request request) throws IOException {
         final Iterator<Identity> users = this.pass.enter(request);
-        final Take take;
+        final Response response;
         if (users.hasNext()) {
-            take = this.take(request, users.next());
+            response = this.act(request, users.next());
         } else {
-            take = this.origin.route(request);
+            response = this.origin.act(request);
         }
-        return take;
+        return response;
     }
 
     /**
@@ -99,25 +98,19 @@ public final class TsAuth implements Takes {
      * @param req Request
      * @param identity Identity
      * @return Take
+     * @throws IOException If fails
      */
-    private Take take(final Request req, final Identity identity) {
-        return new Take() {
-            @Override
-            public Response act() throws IOException {
-                Request wrap = new RqWithoutHeader(req, TsAuth.this.header);
-                if (!identity.equals(Identity.ANONYMOUS)) {
-                    wrap = new RqWithHeader(
-                        wrap,
-                        TsAuth.this.header,
-                        new String(new CcPlain().encode(identity))
-                    );
-                }
-                return TsAuth.this.pass.exit(
-                    TsAuth.this.origin.route(wrap).act(),
-                    identity
-                );
-            }
-        };
+    private Response act(final Request req, final Identity identity)
+        throws IOException {
+        Request wrap = new RqWithoutHeader(req, this.header);
+        if (!identity.equals(Identity.ANONYMOUS)) {
+            wrap = new RqWithHeader(
+                wrap,
+                this.header,
+                new String(new CcPlain().encode(identity))
+            );
+        }
+        return this.pass.exit(this.origin.act(wrap), identity);
     }
 
 }

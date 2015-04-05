@@ -42,7 +42,7 @@ import org.takes.rs.RsWrap;
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     // save the post to the database
  *     return new RsFlash(
  *       new RsForward(),
@@ -59,7 +59,7 @@ import org.takes.rs.RsWrap;
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     if (failed) {
  *       throw new RsFlash(
  *         new RsForward(),

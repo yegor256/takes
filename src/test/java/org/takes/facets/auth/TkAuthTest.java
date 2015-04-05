@@ -30,48 +30,48 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.takes.Request;
-import org.takes.Takes;
+import org.takes.Take;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 import org.takes.tk.TkText;
-import org.takes.ts.TsFixed;
 
 /**
- * Test case for {@link TsAuth}.
+ * Test case for {@link TkAuth}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TsAuthTest {
+public final class TkAuthTest {
 
     /**
-     * TsAuth can login a user.
+     * TkAuth can login a user.
      * @throws IOException If some problem inside
      */
     @Test
     public void logsUserIn() throws IOException {
         final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
-        final Takes takes = Mockito.mock(Takes.class);
-        Mockito.doReturn(new TkText()).when(takes)
-            .route(Mockito.any(Request.class));
-        new TsAuth(takes, pass).route(new RqFake()).act();
+        final Take take = Mockito.mock(Take.class);
+        Mockito.doReturn(new RsText()).when(take)
+            .act(Mockito.any(Request.class));
+        new TkAuth(take, pass).act(new RqFake());
         final ArgumentCaptor<Request> captor =
             ArgumentCaptor.forClass(Request.class);
-        Mockito.verify(takes).route(captor.capture());
+        Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
             new RqHeaders(captor.getValue()).header(
-                TsAuth.class.getSimpleName()
+                TkAuth.class.getSimpleName()
             ),
             Matchers.hasItem("urn%3Atest%3A1")
         );
     }
 
     /**
-     * TsAuth can login a user via cookie.
+     * TkAuth can login a user via cookie.
      * @throws IOException If some problem inside
      */
     @Test
@@ -82,7 +82,7 @@ public final class TsAuthTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsAuth(new TsFixed(new TkText()), pass).route(
+                new TkAuth(new TkText(), pass).act(
                     new RqWithHeader(
                         new RqFake(),
                         String.format(
@@ -91,42 +91,42 @@ public final class TsAuthTest {
                             "urn%3Atest%3A0"
                         )
                     )
-                ).act()
+                )
             ).print(),
             Matchers.containsString("Set-Cookie: PsCookie=urn%3Atest%3A0")
         );
     }
 
     /**
-     * TsAuth can logout a user.
+     * TkAuth can logout a user.
      * @throws IOException If some problem inside
      */
     @Test
     public void logsUserOut() throws IOException {
         final Pass pass = new PsLogout();
-        final Takes takes = Mockito.mock(Takes.class);
-        Mockito.doReturn(new TkText()).when(takes)
-            .route(Mockito.any(Request.class));
-        new TsAuth(takes, pass).route(
+        final Take take = Mockito.mock(Take.class);
+        Mockito.doReturn(new RsText()).when(take)
+            .act(Mockito.any(Request.class));
+        new TkAuth(take, pass).act(
             new RqWithHeader(
                 new RqFake(),
-                TsAuth.class.getSimpleName(),
+                TkAuth.class.getSimpleName(),
                 "urn%3Atest%3A2"
             )
-        ).act();
+        );
         final ArgumentCaptor<Request> captor =
             ArgumentCaptor.forClass(Request.class);
-        Mockito.verify(takes).route(captor.capture());
+        Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
             new RqHeaders(captor.getValue()).header(
-                TsAuth.class.getSimpleName()
+                TkAuth.class.getSimpleName()
             ),
             Matchers.emptyIterable()
         );
     }
 
     /**
-     * TsAuth can logout a user when a login cookie is present.
+     * TkAuth can logout a user when a login cookie is present.
      * @throws IOException If some problem inside
      */
     @Test
@@ -137,7 +137,7 @@ public final class TsAuthTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new TsAuth(new TsFixed(new TkText()), pass).route(
+                new TkAuth(new TkText(), pass).act(
                     new RqWithHeader(
                         new RqFake(),
                         String.format(
@@ -146,7 +146,7 @@ public final class TsAuthTest {
                             "urn%3Atest%3A5"
                         )
                     )
-                ).act()
+                )
             ).print(),
             Matchers.containsString("Set-Cookie: PsCookie=")
         );

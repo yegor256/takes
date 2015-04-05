@@ -53,8 +53,8 @@ public final class TkGzip extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() throws IOException {
-                    final Response response = take.act();
+                public Response act(final Request req) throws IOException {
+                    final Response response = take.act(req);
                     return new RsFork(
                         request,
                         new FkEncoding("gzip", new RsGzip(response)),

@@ -1,14 +1,14 @@
 <img src="http://www.takes.org/clapper.jpg" width="96px" height="96px"/>
 
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
-[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
+[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/take)](http://www.rultor.com/p/yegor256/take)
 
-[![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
-[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
+[![Build Status](https://img.shields.io/travis/yegor256/take/master.svg)](https://travis-ci.org/yegor256/take)
+[![Build status](https://img.shields.io/appveyor/ci/yegor256/take/master.svg)](https://ci.appveyor.com/project/yegor256/take/branch/master)
+[![Maven Central](https://img.shields.io/maven-central/v/org.takes/take.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/take)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/take/blob/master/LICENSE.txt)
 
-**Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
+**Take** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
 Java6 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
@@ -32,7 +32,7 @@ This is what is not supported and won't be supported:
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 This blog post may help you too:
-[Java Web App Architecture In Takes Framework](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html)
+[Java Web App Architecture In Take Framework](http://www.yegor256.com/2015/03/22/take-java-web-framework.html)
 
 ## Quick Start
 
@@ -41,26 +41,26 @@ Create this `App.java` file:
 ```java
 import org.takes.http.Exit;
 import org.takes.http.FtBasic;
-import org.takes.facets.fork.TsFork;
+import org.takes.facets.fork.TkFork;
 public final class App {
   public static void main(final String... args) throws Exception {
     new FtBasic(
-      new TsFork(new FkRegex("/", "hello, world!")), 8080
+      new TkFork(new FkRegex("/", "hello, world!")), 8080
     ).start(Exit.NEVER);
   }
 }
 ```
 
-Then, download [`takes.jar`](http://repo1.maven.org/maven2/org/takes/takes/) and compile your Java code:
+Then, download [`take.jar`](http://repo1.maven.org/maven2/org/take/take/) and compile your Java code:
 
 ```
-$ javac -cp takes.jar App.java
+$ javac -cp take.jar App.java
 ```
 
 Now, run it like this:
 
 ```bash
-$ java -Dfile.encoding=UTF-8 -cp takes.jar:. App
+$ java -Dfile.encoding=UTF-8 -cp take.jar:. App
 ```
 
 Should work :)
@@ -85,7 +85,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
   <dependencies>
     <dependency>
       <groupId>org.takes</groupId>
-      <artifactId>takes</artifactId>
+      <artifactId>take</artifactId>
     </dependency>
   </dependencies>
   <profiles>
@@ -174,7 +174,7 @@ public final class AppITCase {
 ```
 
 More complex integration testing examples you can find in one
-of the open source projects that are using Takes, for example:
+of the open source projects that are using Take, for example:
 [rultor.com](https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web).
 
 ## A Bigger Example
@@ -185,7 +185,7 @@ Let's make it a bit more sophisticated:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFork(
+      new TkFork(
         new FkRegex("/robots\\.txt", ""),
         new FkRegex("/", new TkIndex())
       ),
@@ -197,8 +197,8 @@ public final class App {
 
 The `FtBasic` is accepting new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
-of class `Request`. Then, it gives requests to the instance of `TsFork`
-(`ts` stands for "takes") and expects it to return an instance of `Take` back.
+of class `Request`. Then, it gives requests to the instance of `TkFork`
+(`ts` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
 returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
 let's see how it looks:
@@ -206,7 +206,7 @@ let's see how it looks:
 ```java
 public final class TkIndex implements Take {
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     return new RsHtml("<html>Hello, world!</html>");
   }
 }
@@ -217,12 +217,12 @@ an instance of `Response`. So far so good, but this class doesn't have an access
 to an HTTP request. Here is how we solve this:
 
 ```java
-new TsFork(
+new TkFork(
   new FkRegex(
     "/file/(?<path>[^/]+)",
     new Target<RqRegex>() {
       @Override
-      public Take route(final RqRegex request) {
+      public Response act(final RqRegex request) {
         final File file = new File(
           request.matcher().group("path")
         );
@@ -235,9 +235,9 @@ new TsFork(
 )
 ```
 
-We're using `Target<RqRequest>` instead of `Takes`, in order to deal with
+We're using `Target<RqRequest>` instead of `Take`, in order to deal with
 `RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
-of `Matcher` used by `TsFork` for pattern matching.
+of `Matcher` used by `TkFork` for pattern matching.
 
 Here is a more complex and verbose example:
 
@@ -245,18 +245,18 @@ Here is a more complex and verbose example:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFork(
+      new TkFork(
         new FkRegex("/robots.txt", ""),
         new FkRegex("/", new TkIndex()),
         new FkRegex(
           "/xsl/.*",
-          new TsWithType(new TsClasspath(), "text/xsl")
+          new TkWithType(new TkClasspath(), "text/xsl")
         ),
         new FkRegex(
           "/account",
-          new Takes() {
+          new Take() {
             @Override
-            public Take route(final Request request) {
+            public Response act(final Request request) {
               return new TkAccount(users, request);
             }
           }
@@ -265,7 +265,7 @@ public final class App {
           "/balance/(?<user>[a-z]+)",
           new Target<RqRegex>() {
             @Override
-            public Take route(final RqRegex request) {
+            public Response act(final RqRegex request) {
               return new TkBalance(request.matcher().group("user"));
             }
           }
@@ -290,7 +290,7 @@ public final class TkAccount implements Take {
     this.user = users.find(new RqCookies(request).get("user"));
   }
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
@@ -340,7 +340,7 @@ Let's say, you want to use [Velocity](http://velocity.apache.org/):
 ```java
 public final class TkHelloWorld implements Take {
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     return new RsVelocity(
       "hi, ${user.name}! You've got ${user.balance}",
       new RsVelocity.Pair("user", new User())
@@ -366,17 +366,17 @@ stylesheets, images, JavaScript files, etc. There are a few supplementary
 classes for that:
 
 ```java
-new TsFork(
-  new FkRegex("/css/.+", new TsWithType(new TsClasspath(), "text/css")),
-  new FkRegex("/data/.+", new TsFiles(new File("/usr/local/data"))
+new TkFork(
+  new FkRegex("/css/.+", new TkWithType(new TkClasspath(), "text/css")),
+  new FkRegex("/data/.+", new TkFiles(new File("/usr/local/data"))
 )
 ```
 
-Class `TsClasspath` takes static part of the request URI and finds a resource with this name in classpath.
+Class `TkClasspath` take static part of the request URI and finds a resource with this name in classpath.
 
-`TsFiles` just looks by file name in the directory configured.
+`TkFiles` just looks by file name in the directory configured.
 
-`TsWithType` sets content type of all responses coming out of the decorated takes.
+`TkWithType` sets content type of all responses coming out of the decorated take.
 
 ## Hit Refresh Debugging
 
@@ -387,17 +387,17 @@ and restart it. Here is what you need to do to your sources in order to enable
 that feature:
 
 ```java
-new TsFork(
+new TkFork(
   new FkRegex(
     "/css/.+",
-    new TsWithType(
-      new TsFork(
+    new TkWithType(
+      new TkFork(
         new FkHitRefresh(
           "./src/main/resources/foo/scss/**", // what sources to watch
           "mvn sass:compile", // what to run when sources are modified
-          new TsFiles("./target/css")
+          new TkFiles("./target/css")
         )
-        new FkFixed(new TsClasspath())
+        new FkFixed(new TkClasspath())
       ),
       "text/css"
     )
@@ -405,9 +405,9 @@ new TsFork(
 )
 ```
 
-This `FkHitRefresh` fork is a decorator of takes. Once it sees
-`X-Takes-Refresh` header in the request, it realizes that the server is running in
-"hit-refresh" mode and passes the request to the encapsulated takes. Before it
+This `FkHitRefresh` fork is a decorator of take. Once it sees
+`X-Take-Refresh` header in the request, it realizes that the server is running in
+"hit-refresh" mode and passes the request to the encapsulated take. Before it
 passes the request it tries to understand whether any of the resources
 are older than compiled files. If they are older, it tries
 to run compilation tool to build them again.
@@ -417,10 +417,10 @@ to run compilation tool to build them again.
 Here is an example:
 
 ```java
-new TsFork(
+new TkFork(
   new FkRegex(
     "/user",
-    new TsFork(
+    new TkFork(
       new FkMethods("GET", new TkGetUser()),
       new FkMethods("POST,PUT", new TkPostUser()),
       new FkMethods("DELETE", new TkDeleteUser())
@@ -453,7 +453,7 @@ public final class TkSavePhoto implements Take {
     this.request = new RqForm(req);
   }
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     final String name = this.request.param("name");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
@@ -462,7 +462,7 @@ public final class TkSavePhoto implements Take {
 
 ## Exception Handling
 
-By default, `TsFork` lets all exceptions bubble up. If one of your takes
+By default, `TkFork` lets all exceptions bubble up. If one of your take
 crashes, a user will see a default error page. Here is how you can configure
 this behavior:
 
@@ -470,8 +470,8 @@ this behavior:
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFallback(
-        new TsFork(
+      new TkFallback(
+        new TkFork(
           new FkRegex("/robots\\.txt", ""),
           new FkRegex("/", new TkIndex())
         )
@@ -483,8 +483,8 @@ public final class App {
 }
 ```
 
-`TsFallback` decorates an instance of Takes and catches all exceptions any of
-its takes may throw. Once it's thrown, an instance of TkHTML will be returned.
+`TkFallback` decorates an instance of Take and catches all exceptions any of
+its take may throw. Once it's thrown, an instance of TkHTML will be returned.
 
 ## Redirects
 
@@ -499,7 +499,7 @@ public final class TkPostMessage implements Take {
     this.request = req;
   }
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     final String body = new RqPring(this.request).printBody();
     if (body.isEmpty()) {
       throw new RsFlash(
@@ -516,15 +516,15 @@ public final class TkPostMessage implements Take {
 }
 ```
 
-Then, you should decorate the entire `TsFork` with this `TsForward` and `TsFlash`:
+Then, you should decorate the entire `TkFork` with this `TkForward` and `TkFlash`:
 
 ```java
 public final class App {
   public static void main(final String... args) {
     new FtBasic(
-      new TsFlash(
-        new TsForward(
-          new TsFork(new FkRegex("/", new TkPostMessage())
+      new TkFlash(
+        new TkForward(
+          new TkFork(new FkRegex("/", new TkPostMessage())
         )
       ),
       8080
@@ -657,7 +657,7 @@ Here is how we drop a cookie to the user:
 ```java
 public final class TkIndex implements Take {
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     return new RsWithCookie("auth", "John Doe");
   }
 }
@@ -674,9 +674,9 @@ Set-Cookie: auth="John Doe"
 This is how you read cookies from a request:
 
 ```java
-public final class TsIndex implements Takes {
+public final class TkIndex implements Take {
   @Override
-  public Take route(final Request req) {
+  public Response act(final Request req) {
     // the list may be empty
     final Iterable<String> cookies = new RqCookies(req).cookie("my-cookie");
   }
@@ -685,11 +685,11 @@ public final class TsIndex implements Takes {
 
 ## GZIP Compression
 
-If you want to compress all your responses with GZIP, wrap your takes in
-`TsGzip`:
+If you want to compress all your responses with GZIP, wrap your take in
+`TkGzip`:
 
 ```java
-new TsGzip(takes)
+new TkGzip(take)
 ```
 
 Now, each request that contains `Accept-Encoding` request header with `gzip`
@@ -704,7 +704,7 @@ of the request (a.k.a. [content negotation](http://en.wikipedia.org/wiki/Content
 ```java
 public final class TkIndex implements Take {
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     return new RsFork(
       this.request,
       new FkTypes("text/*", new RsText("it's a text"))
@@ -720,10 +720,10 @@ public final class TkIndex implements Take {
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
 
 ```java
-new TsAuth(
-  new TsFork(
+new TkAuth(
+  new TkFork(
     new FkRegex("/", new TkHTML("hello, check <a href='/acc'>account</a>")),
-    new FkRegex("/acc", new TsSecure(new TsAccount()))
+    new FkRegex("/acc", new TkSecure(new TkAccount()))
   ),
   new PsChain(
     new PsCookie(
@@ -763,7 +763,7 @@ The link will be add to the XML page like this:
 ```xml
 <page>
   <links>
-    <link rel="takes:facebook" href="https://www.facebook.com/dialog/oauth..."/>
+    <link rel="take:facebook" href="https://www.facebook.com/dialog/oauth..."/>
   </links>
 </page>
 ```
@@ -779,7 +779,7 @@ public final class TkAccount implements Take {
     this.identity = new RqAuth(req).identity();
   }
   @Override
-  public Response act() {
+  public Response act(final Request req) {
     if (this.identity.equals(Identity.ANONYMOUS)) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
       this.identity().urn();
@@ -810,7 +810,7 @@ For example:
 public final class App {
   public static void main(final String... args) {
     new FtCLI(
-      new TsFork(new FkRegex("/", "hello, world!")),
+      new TkFork(new FkRegex("/", "hello, world!")),
       args
     ).start(Exit.NEVER);
   }
@@ -820,7 +820,7 @@ public final class App {
 Then, run it like this:
 
 ```
-$ java -cp takes.jar App.class --port=8080 --refresh
+$ java -cp take.jar App.class --port=8080 --refresh
 ```
 
 You should see "hello, world!" at `http://localhost:8080`.
@@ -882,5 +882,5 @@ To avoid build errors use maven 3.2+.
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
-a new [Github issue](https://github.com/yegor256/takes/issues/new).
+a new [Github issue](https://github.com/yegor256/take/issues/new).
 

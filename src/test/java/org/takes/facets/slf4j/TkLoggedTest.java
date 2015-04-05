@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqFake;
 import org.takes.tk.TkText;
 
 /**
@@ -45,7 +46,7 @@ public final class TkLoggedTest {
     @Test
     public void logsMessage() throws IOException {
         final Target target = Mockito.mock(Target.class);
-        new TkLogged(new TkText("test"), target).act();
+        new TkLogged(new TkText("test"), target).act(new RqFake());
         Mockito.verify(target, Mockito.times(1)).log(
                 Mockito.eq("[{}] #act() return [{}] in [{}] ms"),
                 Mockito.isA(Take.class),

@@ -21,31 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package org.takes.facets.slf4j;
+package org.takes.tk;
 
 import java.io.IOException;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.NotFoundException;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
 
 /**
- * Logs Takes.route() calls.
- *
- * <p>The class is immutable and thread-safe.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * Test case for {@link TkClasspath}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @todo #28:30min/DEV This class not implemented yet, but has to be.
- *  Please implement it like TkLogged and don't forget about unit tests.
- *  In addition, need to be implement classes BkLogged, FtLogged, PsLogged
- *  which will make loggable interfaces Back, Front, Pass. They should all be
- *  implemented also like TkLogged.
- * @since 0.11.2
+ * @since 0.1
  */
-public final class TsLogged implements Takes {
-    @Override
-    public Take route(final Request request) throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
-    }
-}
+public final class TkClasspathTest {
 
+    /**
+     * TkClasspath can dispatch by resource name.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void dispatchesByResourceName() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkClasspath().act(
+                    new RqFake(
+                        "GET", "/org/takes/Take.class?a", ""
+                    )
+                )
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 200 OK")
+        );
+    }
+
+    /**
+     * TkClasspath can throw when resource not found.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = NotFoundException.class)
+    public void throwsWhenResourceNotFound() throws IOException {
+        new TkClasspath().act(
+            new RqFake("PUT", "/something-else", "")
+        );
+    }
+
+}

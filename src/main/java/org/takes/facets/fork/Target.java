@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import org.takes.Request;
-import org.takes.Take;
+import org.takes.Response;
 
 /**
  * Target for a fork.
@@ -44,6 +44,6 @@ public interface Target<T extends Request> {
      * @return Take
      * @throws IOException If fails
      */
-    Take route(T req) throws IOException;
+    Response act(T req) throws IOException;
 
 }

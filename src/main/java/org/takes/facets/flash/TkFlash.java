@@ -29,14 +29,13 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqCookies;
 import org.takes.rs.RsWithCookie;
 
 /**
- * Takes that understands Flash cookie and converts it into a HTTP header.
+ * Take that understands Flash cookie and converts it into a HTTP header.
  *
- * <p>This decorator helps your "takes" to automate flash messages and
+ * <p>This decorator helps your "take" to automate flash messages and
  * destroy cookies on their way back,
  * from the browser to the server. This is what a browser will send back:
  *
@@ -46,10 +45,10 @@ import org.takes.rs.RsWithCookie;
  *
  * <p>This decorator adds "Set-Cookie" with an empty
  * value to the response. That's all it's doing. All you need to do
- * is to decorate your existing "takes", for example:
+ * is to decorate your existing "take", for example:
  *
  * <pre> new FtBasic(
- *   new TsFlash(TsFork(new FkRegex("/", "hello, world!"))), 8080
+ *   new TkFlash(TkFork(new FkRegex("/", "hello, world!"))), 8080
  *  ).start(Exit.NEVER);
  * }</pre>
  *
@@ -60,12 +59,12 @@ import org.takes.rs.RsWithCookie;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "origin", "cookie" })
-public final class TsFlash implements Takes {
+public final class TkFlash implements Take {
 
     /**
-     * Original takes.
+     * Original take.
      */
-    private final transient Takes origin;
+    private final transient Take origin;
 
     /**
      * Cookie name.
@@ -74,41 +73,36 @@ public final class TsFlash implements Takes {
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      */
-    public TsFlash(final Takes takes) {
-        this(takes, RsFlash.class.getSimpleName());
+    public TkFlash(final Take take) {
+        this(take, RsFlash.class.getSimpleName());
     }
 
     /**
      * Ctor.
-     * @param takes Original takes
+     * @param take Original take
      * @param name Cookie name
      */
-    public TsFlash(final Takes takes, final String name) {
-        this.origin = takes;
+    public TkFlash(final Take take, final String name) {
+        this.origin = take;
         this.cookie = name;
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
+    public Response act(final Request request) throws IOException {
         final RqCookies cookies = new RqCookies(request);
         final Iterator<String> values = cookies.cookie(this.cookie).iterator();
-        final Take take;
+        final Response response;
         if (values.hasNext()) {
-            take = new Take() {
-                @Override
-                public Response act() throws IOException {
-                    return new RsWithCookie(
-                        TsFlash.this.origin.route(request).act(),
-                        TsFlash.this.cookie,
-                        ""
-                    );
-                }
-            };
+            response = new RsWithCookie(
+                this.origin.act(request),
+                this.cookie,
+                ""
+            );
         } else {
-            take = this.origin.route(request);
+            response = this.origin.act(request);
         }
-        return take;
+        return response;
     }
 }

@@ -30,10 +30,9 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHref;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork by query params and their values, matched by regular express.
@@ -43,10 +42,10 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  */
 @EqualsAndHashCode(of = { "name", "pattern", "target" })
-public final class FkParams implements Fork.AtTake {
+public final class FkParams implements Fork {
 
     /**
      * Param name.
@@ -80,32 +79,12 @@ public final class FkParams implements Fork.AtTake {
      * @param take Take
      */
     public FkParams(final String param, final Pattern ptn, final Take take) {
-        this(param, ptn, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param takes Takes
-     */
-    public FkParams(final String param, final String ptn, final Takes takes) {
-        this(param, Pattern.compile(ptn), takes);
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param takes Takes
-     */
-    public FkParams(final String param, final Pattern ptn, final Takes takes) {
         this(
             param, ptn,
             new Target<Request>() {
                 @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
+                public Response act(final Request req) throws IOException {
+                    return take.act(req);
                 }
             }
         );
@@ -115,7 +94,7 @@ public final class FkParams implements Fork.AtTake {
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param tgt Takes
+     * @param tgt Take
      */
     public FkParams(final String param, final String ptn,
         final Target<Request> tgt) {
@@ -126,7 +105,7 @@ public final class FkParams implements Fork.AtTake {
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param tgt Takes
+     * @param tgt Take
      */
     public FkParams(final String param, final Pattern ptn,
         final Target<Request> tgt) {
@@ -136,13 +115,13 @@ public final class FkParams implements Fork.AtTake {
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final Iterator<String> params = new RqHref(req).href()
             .param(this.name).iterator();
-        final Collection<Take> list = new ArrayList<Take>(1);
+        final Collection<Response> list = new ArrayList<Response>(1);
         if (params.hasNext()
             && this.pattern.matcher(params.next()).matches()) {
-            list.add(this.target.route(req));
+            list.add(this.target.act(req));
         }
         return list.iterator();
     }

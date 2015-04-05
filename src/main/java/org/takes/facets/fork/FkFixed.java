@@ -28,9 +28,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork fixed.
@@ -40,10 +39,10 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  */
 @EqualsAndHashCode(of = "target")
-public final class FkFixed implements Fork.AtTake {
+public final class FkFixed implements Fork {
 
     /**
      * Target.
@@ -55,19 +54,11 @@ public final class FkFixed implements Fork.AtTake {
      * @param take Take
      */
     public FkFixed(final Take take) {
-        this(new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param takes Take
-     */
-    public FkFixed(final Takes takes) {
         this(
             new Target<Request>() {
                 @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
+                public Response act(final Request req) throws IOException {
+                    return take.act(req);
                 }
             }
         );
@@ -75,15 +66,15 @@ public final class FkFixed implements Fork.AtTake {
 
     /**
      * Ctor.
-     * @param tgt Takes
+     * @param tgt Take
      */
     public FkFixed(final Target<Request> tgt) {
         this.target = tgt;
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
-        return Collections.singleton(this.target.route(req)).iterator();
+    public Iterator<Response> route(final Request req) throws IOException {
+        return Collections.singleton(this.target.act(req)).iterator();
     }
 
 }

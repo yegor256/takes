@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -56,7 +57,7 @@ public final class TkRedirectTest {
         final String url = "/about";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkRedirect(url).act()
+                new TkRedirect(url).act(new RqFake())
             ).print(),
             Matchers.equalTo(
                 Joiner.on(TkRedirectTest.NEWLINE).join(
@@ -78,7 +79,9 @@ public final class TkRedirectTest {
         final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act()
+                new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act(
+                    new RqFake()
+                )
             ).print(),
             Matchers.equalTo(
                 Joiner.on(TkRedirectTest.NEWLINE).join(

@@ -21,50 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.forward;
+package org.takes.facets.fork;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkFixed;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
 
 /**
- * Redirect on exception.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link TkFork}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.facets.forward.TkForward
+ * @since 0.4
  */
-@EqualsAndHashCode(of = "origin")
-public final class TsForward implements Takes {
+public final class TkForkTest {
 
     /**
-     * Original takes.
+     * TkFork can dispatch by regular expression.
+     * @throws IOException If some problem inside
      */
-    private final transient Takes origin;
-
-    /**
-     * Ctor.
-     * @param takes Original
-     */
-    public TsForward(final Takes takes) {
-        this.origin = takes;
-    }
-
-    @Override
-    public Take route(final Request request) throws IOException {
-        Take take;
-        try {
-            take = new TkForward(this.origin.route(request));
-        } catch (final RsForward ex) {
-            take = new TkFixed(ex);
-        }
-        return take;
+    @Test
+    public void dispatchesByRegularExpression() throws IOException {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkFork(new FkRegex("/h[a-z]{2}", body)).act(
+                    new RqFake("GET", "/hey?yu", "")
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
     }
 
 }

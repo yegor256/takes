@@ -21,31 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.facets.auth;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
-import org.takes.tk.TkEmpty;
+import org.takes.facets.flash.RsFlash;
+import org.takes.facets.forward.RsForward;
 
 /**
- * Empty.
- *
- * <p>This "takes" always returns an instance of {@link org.takes.tk.TkEmpty}.
+ * Take available for authenticated users.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.1
  */
-@EqualsAndHashCode
-public class TsEmpty implements Takes {
+@EqualsAndHashCode(of = { "origin", "loc" })
+public final class TkSecure implements Take {
+
+    /**
+     * Original take.
+     */
+    private final transient Take origin;
+
+    /**
+     * Location where to forward.
+     */
+    private final transient String loc;
+
+    /**
+     * Ctor.
+     * @param take Original
+     * @since 0.10
+     */
+    public TkSecure(final Take take) {
+        this(take, "/");
+    }
+
+    /**
+     * Ctor.
+     * @param take Original
+     * @param location Where to forward
+     */
+    public TkSecure(final Take take, final String location) {
+        this.origin = take;
+        this.loc = location;
+    }
 
     @Override
-    public final Take route(final Request request) {
-        return new TkEmpty();
+    public Response act(final Request request) throws IOException {
+        if (new RqAuth(request).identity().equals(Identity.ANONYMOUS)) {
+            throw new RsForward(
+                new RsFlash("access denied", Level.WARNING),
+                this.loc
+            );
+        }
+        return this.origin.act(request);
     }
 
 }

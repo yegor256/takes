@@ -50,7 +50,7 @@ public class RqAuthTest {
             new RqAuth(
                 new RqWithHeader(
                     new RqFake(),
-                    TsAuth.class.getSimpleName(),
+                    TkAuth.class.getSimpleName(),
                     new String(new CcPlain().encode(identity))
                 )
             ).identity().urn(),

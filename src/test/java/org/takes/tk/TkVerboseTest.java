@@ -21,49 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.tk;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.NotFoundException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link TsFlash}.
+ * Test case for {@link TkVerbose}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.10
  */
-public final class TsFlashTest {
+public final class TkVerboseTest {
 
     /**
-     * TsFlash can remove a flash cookie.
+     * TkVerbose can extend not-found exception.
      * @throws IOException If some problem inside
      */
     @Test
-    public void removesFlashCookie() throws IOException {
-        final Takes takes = new TsFlash(
-            new Takes() {
-                @Override
-                public Take route(final Request request) {
-                    return new TkEmpty();
-                }
+    public void extendsNotFoundException() throws IOException {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request request) {
+                throw new NotFoundException("can't find");
             }
-        );
-        MatcherAssert.assertThat(
-            takes.route(
-                new RqWithHeader(
-                    new RqFake(),
-                    "Cookie: RsFlash=Hello!"
-                )
-            ).act().head(),
-            Matchers.hasItem("Set-Cookie: RsFlash=")
-        );
+        };
+        try {
+            new TkVerbose(take).act(new RqFake());
+        } catch (final NotFoundException ex) {
+            MatcherAssert.assertThat(
+                ex.getLocalizedMessage(),
+                Matchers.equalTo("GET http://www.example.com/")
+            );
+        }
     }
+
 }

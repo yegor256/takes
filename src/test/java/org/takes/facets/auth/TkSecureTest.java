@@ -28,63 +28,61 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.facets.forward.RsForward;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link TsSecure}.
+ * Test case for {@link TkSecure}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.11
  */
-public final class TsSecureTest {
+public final class TkSecureTest {
 
     /**
-     * TsSecure can fail on anonymous access.
+     * TkSecure can fail on anonymous access.
      * @throws IOException If some problem inside
      */
     @Test(expected = RsForward.class)
     public void failsOnAnonymous() throws IOException {
-        new TsSecure(
-            new Takes() {
+        new TkSecure(
+            new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
-                    return new TkEmpty();
+                public Response act(final Request request) {
+                    return new RsEmpty();
                 }
             }
-        ).route(new RqFake()).act();
+        ).act(new RqFake());
     }
 
     /**
-     * TsSecure can pass on registered user.
+     * TkSecure can pass on registered user.
      * @throws IOException If some problem inside
      */
     @Test
     public void passesOnRegisteredUser() throws IOException {
         MatcherAssert.assertThat(
-            new TsSecure(
-                new Takes() {
+            new TkSecure(
+                new Take() {
                     @Override
-                    public Take route(final Request request)
-                        throws IOException {
-                        return new TkEmpty();
+                    public Response act(final Request request) {
+                        return new RsEmpty();
                     }
                 }
-            ).route(
+            ).act(
                 new RqWithHeader(
                     new RqFake(),
-                    TsAuth.class.getSimpleName(),
+                    TkAuth.class.getSimpleName(),
                     new String(
                         new CcPlain().encode(new Identity.Simple("urn:test:2"))
                     )
                 )
-            ).act(),
+            ),
             Matchers.instanceOf(RsEmpty.class)
         );
     }

@@ -21,52 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.ts;
+package org.takes.tk;
 
+import com.google.common.io.Files;
+import java.io.File;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
+import org.apache.commons.io.FileUtils;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 import org.takes.NotFoundException;
-import org.takes.Request;
-import org.takes.Take;
-import org.takes.Takes;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
+import org.takes.rq.RqFake;
+import org.takes.rs.RsPrint;
 
 /**
- * Takes that makes all not-found exceptions location aware.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link TkFiles}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.10
+ * @since 0.8
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TsVerbose extends TsWrap {
+public final class TkFilesTest {
 
     /**
-     * Ctor.
-     * @param takes Original takes
+     * TkFiles can dispatch by file name.
+     * @throws IOException If some problem inside
      */
-    public TsVerbose(final Takes takes) {
-        super(
-            new Takes() {
-                @Override
-                public Take route(final Request request) throws IOException {
-                    try {
-                        return takes.route(request);
-                    } catch (final NotFoundException ex) {
-                        throw new NotFoundException(
-                            String.format(
-                                "%s %s",
-                                new RqMethod(request).method(),
-                                new RqHref(request).href()
-                            ),
-                            ex
-                        );
-                    }
-                }
-            }
+    @Test
+    public void dispatchesByFileName() throws IOException {
+        final File dir = Files.createTempDir();
+        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkFiles(dir).act(
+                    new RqFake(
+                        "GET", "/a.txt?hash=a1b2c3", ""
+                    )
+                )
+            ).print(),
+            Matchers.startsWith("HTTP/1.1 200 OK")
+        );
+    }
+
+    /**
+     * TkFiles can throw when file not found.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = NotFoundException.class)
+    public void throwsWhenResourceNotFound() throws IOException {
+        new TkFiles("/absent-dir-for-sure").act(
+            new RqFake("PUT", "/something-else.txt", "")
         );
     }
 
