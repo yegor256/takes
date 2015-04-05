@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ import org.takes.ts.TsEmpty;
  * Test case for {@link TsLogged}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.11.2
+ * @since 0.11.3
  */
 public final class TsLoggedTest {
     /**

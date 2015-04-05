@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.takes.facets.slf4j;
 
 import java.io.IOException;
@@ -39,7 +38,7 @@ import org.takes.http.Back;
  *  In addition, need to be implement classes FtLogged, PsLogged
  *  which will make loggable interfaces Front, Pass. They should all be
  *  implemented also like TkLogged.
- * @since 0.11.2
+ * @since 0.11.3
  */
 public final class BkLogged implements Back {
     @Override
