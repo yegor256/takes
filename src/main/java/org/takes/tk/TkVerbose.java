@@ -31,7 +31,6 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
-import org.takes.tk.TkWrap;
 
 /**
  * Take that makes all not-found exceptions location aware.

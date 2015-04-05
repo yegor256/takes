@@ -56,37 +56,22 @@ import org.takes.facets.auth.RqAuth;
  * @version $Id$
  * @since 0.9
  * @see TkFork
- * @see org.takes.facets.fork.Target
+ * @see TkRegex
  */
-@EqualsAndHashCode(of = "target")
+@EqualsAndHashCode(of = "take")
 public final class FkAnonymous implements Fork {
 
     /**
-     * Target.
+     * Take.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * Ctor.
-     * @param take Take
+     * @param tke Target
      */
-    public FkAnonymous(final Take take) {
-        this(
-            new Target<Request>() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return take.act(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param tgt Target
-     */
-    public FkAnonymous(final Target<Request> tgt) {
-        this.target = tgt;
+    public FkAnonymous(final Take tke) {
+        this.take = tke;
     }
 
     @Override
@@ -94,7 +79,7 @@ public final class FkAnonymous implements Fork {
         final Collection<Response> response = new ArrayList<Response>(1);
         final Identity identity = new RqAuth(req).identity();
         if (identity.equals(Identity.ANONYMOUS)) {
-            response.add(this.target.act(req));
+            response.add(this.take.act(req));
         }
         return response.iterator();
     }

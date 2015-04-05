@@ -69,17 +69,12 @@ public final class TkLogged implements Take {
         this(take, new Slf4j(TkLogged.class));
     }
 
-    /**
-     * Print itself.
-     * @return Response
-     * @throws IOException If fails
-     * @todo #101:30min/DEV I expect implementations of Response and Take
-     *  interfaces will be able convert itself to a loggable string but
-     *  they don't have this feature.
-     *  See details here https://github.com/yegor256/take/issues/101
-     *  We will use toConsole() in this way
-     *  this.target.log("...", this.origin.toConsole(), resp.toConsole, ...)
-     */
+    // @todo #101:30min/DEV I expect implementations of Response and Take
+    //  interfaces will be able convert itself to a loggable string but
+    //  they don't have this feature.
+    //  See details here https://github.com/yegor256/take/issues/101
+    //  We will use toConsole() in this way
+    //  this.target.log("...", this.origin.toConsole(), resp.toConsole, ...)
     @Override
     public Response act(final Request req) throws IOException {
         final long started = System.currentTimeMillis();

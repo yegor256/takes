@@ -25,7 +25,8 @@ package org.takes.it.fm;
 
 import java.io.File;
 import org.takes.Response;
-import org.takes.Take;
+import org.takes.facets.fork.RqRegex;
+import org.takes.facets.fork.TkRegex;
 
 /**
  * Directory take.
@@ -34,7 +35,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-final class TkDir implements Take {
+final class TkDir implements TkRegex {
 
     /**
      * Home.
@@ -42,25 +43,18 @@ final class TkDir implements Take {
     private final transient File home;
 
     /**
-     * Path of directory to show.
-     */
-    private final transient String path;
-
-    /**
      * Ctor.
      * @param dir Home
-     * @param file Path
      */
-    TkDir(final File dir, final String file) {
+    TkDir(final File dir) {
         this.home = dir;
-        this.path = file;
     }
 
     @Override
-    public Response act(final Request req) {
+    public Response act(final RqRegex req) {
         return new RsPage(
             "/dir.xsl",
-            new Items(new File(this.home, this.path))
+            new Items(new File(this.home, req.matcher().group(1)))
         );
     }
 

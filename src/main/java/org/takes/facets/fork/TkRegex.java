@@ -24,11 +24,10 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import org.takes.Request;
 import org.takes.Response;
 
 /**
- * Target for a fork.
+ * Target for a {@link org.takes.facets.fork.FkRegex} fork.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -36,7 +35,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.4
  */
-public interface Target<T extends Request> {
+public interface TkRegex {
 
     /**
      * Route this request.
@@ -44,6 +43,6 @@ public interface Target<T extends Request> {
      * @return Take
      * @throws IOException If fails
      */
-    Response act(T req) throws IOException;
+    Response act(RqRegex req) throws IOException;
 
 }

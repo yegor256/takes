@@ -27,7 +27,6 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.tk.TkWrap;
 
 /**
  * Take that always fails.

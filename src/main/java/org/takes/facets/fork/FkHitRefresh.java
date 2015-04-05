@@ -49,7 +49,7 @@ import org.takes.rq.RqHeaders;
  * @see TkFork
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = { "dir", "exec", "last", "target" })
+@EqualsAndHashCode(of = { "dir", "exec", "last", "take" })
 public final class FkHitRefresh implements Fork {
 
     /**
@@ -65,7 +65,7 @@ public final class FkHitRefresh implements Fork {
     /**
      * Target.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * File touched on every exec run.
@@ -76,63 +76,23 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param take Take
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final String cmd, final Take take)
-        throws IOException {
-        this(
-            file, cmd,
-            new Target<Request>() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return take.act(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param take Take
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final Runnable cmd, final Take take)
-        throws IOException {
-        this(
-            file, cmd,
-            new Target<Request>() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return take.act(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final String cmd,
-        final Target<Request> tgt) throws IOException {
-        this(file, Arrays.asList(cmd.split(" ")), tgt);
+        final Take tke) throws IOException {
+        this(file, Arrays.asList(cmd.split(" ")), tke);
     }
 
     /**
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-        final Target<Request> tgt) throws IOException {
+        final Take tke) throws IOException {
         this(
             file,
             new Runnable() {
@@ -145,7 +105,7 @@ public final class FkHitRefresh implements Fork {
                     }
                 }
             },
-            tgt
+            tke
         );
     }
 
@@ -153,14 +113,14 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final Runnable cmd,
-        final Target<Request> tgt) throws IOException {
+        final Take tke) throws IOException {
         this.dir = file;
         this.exec = cmd;
-        this.target = tgt;
+        this.take = tke;
         this.last = File.createTempFile("take", ".txt");
         this.last.deleteOnExit();
         this.touch();
@@ -176,7 +136,7 @@ public final class FkHitRefresh implements Fork {
                 this.exec.run();
                 this.touch();
             }
-            response.add(this.target.act(req));
+            response.add(this.take.act(req));
         }
         return response.iterator();
     }

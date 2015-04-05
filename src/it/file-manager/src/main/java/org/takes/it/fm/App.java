@@ -26,10 +26,9 @@ package org.takes.it.fm;
 import java.io.File;
 import java.io.IOException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
-import org.takes.facets.fork.RqRegex;
-import org.takes.facets.fork.Target;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.Exit;
 import org.takes.http.FtCLI;
@@ -80,17 +79,7 @@ public final class App implements Take {
                 new TkHTML(App.class.getResource("about.html"))
             ),
             new FkRegex("/robots.txt", ""),
-            new FkRegex(
-                "/f(.*)",
-                new Target<RqRegex>() {
-                    @Override
-                    public Response act(final RqRegex req) {
-                        return new TkDir(
-                            App.this.home, req.matcher().group(1)
-                        ).act(req);
-                    }
-                }
-            )
-        ).route(request);
+            new FkRegex("/f(.*)", new TkDir(App.this.home))
+        ).act(request);
     }
 }

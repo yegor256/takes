@@ -44,7 +44,7 @@ import org.takes.rq.RqHref;
  * @since 0.4
  * @see TkFork
  */
-@EqualsAndHashCode(of = { "name", "pattern", "target" })
+@EqualsAndHashCode(of = { "name", "pattern", "take" })
 public final class FkParams implements Fork {
 
     /**
@@ -58,60 +58,30 @@ public final class FkParams implements Fork {
     private final transient Pattern pattern;
 
     /**
-     * Target.
+     * Take.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param take Take
+     * @param tke Take
      */
-    public FkParams(final String param, final String ptn, final Take take) {
-        this(param, Pattern.compile(ptn), take);
+    public FkParams(final String param, final String ptn, final Take tke) {
+        this(param, Pattern.compile(ptn), tke);
     }
 
     /**
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param take Take
+     * @param tke Take
      */
-    public FkParams(final String param, final Pattern ptn, final Take take) {
-        this(
-            param, ptn,
-            new Target<Request>() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return take.act(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param tgt Take
-     */
-    public FkParams(final String param, final String ptn,
-        final Target<Request> tgt) {
-        this(param, Pattern.compile(ptn), tgt);
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param tgt Take
-     */
-    public FkParams(final String param, final Pattern ptn,
-        final Target<Request> tgt) {
+    public FkParams(final String param, final Pattern ptn, final Take tke) {
         this.name = param;
         this.pattern = ptn;
-        this.target = tgt;
+        this.take = tke;
     }
 
     @Override
@@ -121,7 +91,7 @@ public final class FkParams implements Fork {
         final Collection<Response> list = new ArrayList<Response>(1);
         if (params.hasNext()
             && this.pattern.matcher(params.next()).matches()) {
-            list.add(this.target.act(req));
+            list.add(this.take.act(req));
         }
         return list.iterator();
     }

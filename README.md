@@ -140,7 +140,7 @@ public final class AppTest {
   public void returnsHttpResponse() throws Exception {
     MatcherAssert.assertThat(
       new RsPrint(
-        new App().route(new RqFake("GET", "/")).act()
+        new App().act(new RqFake("GET", "/"))
       ).printBody(),
       Matchers.equalsTo("hello, world!")
     );
@@ -220,13 +220,13 @@ to an HTTP request. Here is how we solve this:
 new TkFork(
   new FkRegex(
     "/file/(?<path>[^/]+)",
-    new Target<RqRegex>() {
+    new TkRegex() {
       @Override
       public Response act(final RqRegex request) {
         final File file = new File(
           request.matcher().group("path")
         );
-        return new TkHTML(
+        return new RsHTML(
           FileUtils.readFileToString(file, Charsets.UTF_8)
         );
       }
@@ -235,9 +235,9 @@ new TkFork(
 )
 ```
 
-We're using `Target<RqRequest>` instead of `Take`, in order to deal with
+We're using `TkRegex` instead of `Take`, in order to deal with
 `RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
-of `Matcher` used by `TkFork` for pattern matching.
+of `Matcher` used by `FkRegex` for pattern matching.
 
 Here is a more complex and verbose example:
 
@@ -252,24 +252,8 @@ public final class App {
           "/xsl/.*",
           new TkWithType(new TkClasspath(), "text/xsl")
         ),
-        new FkRegex(
-          "/account",
-          new Take() {
-            @Override
-            public Response act(final Request request) {
-              return new TkAccount(users, request);
-            }
-          }
-        ),
-        new FkRegex(
-          "/balance/(?<user>[a-z]+)",
-          new Target<RqRegex>() {
-            @Override
-            public Response act(final RqRegex request) {
-              return new TkBalance(request.matcher().group("user"));
-            }
-          }
-        )
+        new FkRegex("/account", new TkAccount(users)),
+        new FkRegex("/balance/(?<user>[a-z]+)", new TkBalance())
       )
     ).start(Exit.NEVER);
   }
@@ -285,20 +269,21 @@ page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
 ```java
 public final class TkAccount implements Take {
-  private final User user;
-  public TkAccount(final Users users, final Request request) {
-    this.user = users.find(new RqCookies(request).get("user"));
+  private final Users users;
+  public TkAccount(final Users users) {
+    this.users = users;
   }
   @Override
   public Response act(final Request req) {
+    final User user = this.users.find(new RqCookies(req).get("user"));
     return new RsLogin(
       new RsXSLT(
         new RsXembly(
           new XeStylesheet("/xsl/account.xsl"),
-          new XeAppend("page", this.user)
+          new XeAppend("page", user)
         )
       ),
-      this.user
+      user
     );
   }
 }
@@ -448,13 +433,9 @@ Here is an example:
 
 ```java
 public final class TkSavePhoto implements Take {
-  private final RqForm request;
-  public TkSavePhoto(final Request req) {
-    this.request = new RqForm(req);
-  }
   @Override
   public Response act(final Request req) {
-    final String name = this.request.param("name");
+    final String name = new RqForm(req).param("name");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
 }
@@ -474,8 +455,13 @@ public final class App {
         new TkFork(
           new FkRegex("/robots\\.txt", ""),
           new FkRegex("/", new TkIndex())
-        )
-        new TkHTML("oops, something went wrong!")
+        ),
+        new Fallback() {
+          @Override
+          public Response act(final RqFallback req) throws IOException {
+            return new RsHTML("oops, something went wrong!");
+          }
+        }
       ),
       8080
     ).start(Exit.NEVER);
@@ -494,13 +480,9 @@ illustrates both methods:
 
 ```java
 public final class TkPostMessage implements Take {
-  private final Request request;
-  public TkPostMessage(final Request req) {
-    this.request = req;
-  }
   @Override
   public Response act(final Request req) {
-    final String body = new RqPring(this.request).printBody();
+    final String body = new RqPring(req).printBody();
     if (body.isEmpty()) {
       throw new RsFlash(
         new RsForward(),
@@ -539,11 +521,10 @@ Here is how we can deal with JSON:
 
 ```java
 public final class TkBalance extends TkFixed {
-  public TkBalance(final RqRegex request) {
-    super(
-      new RsJSON(
-        new User(request.matcher().group("user")))
-      )
+  @Override
+  public Response act(final RqRegex request) {
+    return new RsJSON(
+      new User(request.matcher().group("user")))
     );
   }
 }
@@ -581,7 +562,7 @@ Response response = new RsXembly(
   new XeAppend(
     "page", // create a DOM document with "page" root element
     new XeMillis(false), // add "millis" attribute to the root, with current time
-    this.user, // add this.user to the root element
+    user, // add user to the root element
     new XeSource() {
       @Override
       public Iterable<Directive> toXembly() {
@@ -613,7 +594,7 @@ own class, which will be used in every page, for example:
 
 ```java
 Response response = new RsXembly(
-  new XeFoo(this.user)
+  new XeFoo(user)
 )
 ```
 
@@ -768,18 +749,15 @@ The link will be add to the XML page like this:
 </page>
 ```
 
-Similar mechanism can be used for `TkGithub`, `TkGoogle`, `TkLinkedin`, `TkTwitter`, etc.
+Similar mechanism can be used for `PsGithub`, `PsGoogle`, `PsLinkedin`, `PsTwitter`, etc.
 
 This is how you get currently logged in user:
 
 ```java
 public final class TkAccount implements Take {
-  private final Identity identity;
-  public TkAccount(final Request req) {
-    this.identity = new RqAuth(req).identity();
-  }
   @Override
   public Response act(final Request req) {
+    final Identity identity = new RqAuth(req).identity();
     if (this.identity.equals(Identity.ANONYMOUS)) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
       this.identity().urn();

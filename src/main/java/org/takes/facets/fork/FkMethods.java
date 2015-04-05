@@ -53,7 +53,7 @@ import org.takes.rq.RqMethod;
  * @since 0.4
  * @see TkFork
  */
-@EqualsAndHashCode(of = { "methods", "target" })
+@EqualsAndHashCode(of = { "methods", "take" })
 public final class FkMethods implements Fork {
 
     /**
@@ -64,42 +64,25 @@ public final class FkMethods implements Fork {
     /**
      * Target.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * Ctor.
      * @param mtd Method
-     * @param take Take
+     * @param tke Take
      */
-    public FkMethods(final String mtd, final Take take) {
-        this(
-            mtd,
-            new Target<Request>() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return take.act(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param mtd Method
-     * @param tgt Take
-     */
-    public FkMethods(final String mtd, final Target<Request> tgt) {
-        this(Arrays.asList(mtd.split(",")), tgt);
+    public FkMethods(final String mtd, final Take tke) {
+        this(Arrays.asList(mtd.split(",")), tke);
     }
 
     /**
      * Ctor.
      * @param mtds Methods
-     * @param tgt Take
+     * @param tke Take
      */
-    public FkMethods(final Collection<String> mtds, final Target<Request> tgt) {
+    public FkMethods(final Collection<String> mtds, final Take tke) {
         this.methods = Collections.unmodifiableCollection(mtds);
-        this.target = tgt;
+        this.take = tke;
     }
 
     @Override
@@ -107,7 +90,7 @@ public final class FkMethods implements Fork {
         final String mtd = new RqMethod(req).method();
         final Collection<Response> list = new ArrayList<Response>(1);
         if (this.methods.contains(mtd)) {
-            list.add(this.target.act(req));
+            list.add(this.take.act(req));
         }
         return list.iterator();
     }

@@ -29,7 +29,6 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqGreedy;
-import org.takes.tk.TkWrap;
 
 /**
  * Take with a greedy request.

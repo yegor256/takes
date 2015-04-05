@@ -55,7 +55,7 @@ import org.takes.tk.TkText;
  * {@link org.takes.Take}.
  *
  * <p>Also, keep in mind that the second argument of the constructor may
- * be of type {@link org.takes.facets.fork.Target} and accept an
+ * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
  * convenient to reuse regular expression matcher, for example:
  *
@@ -80,7 +80,7 @@ import org.takes.tk.TkText;
  * @version $Id$
  * @since 0.4
  * @see TkFork
- * @see org.takes.facets.fork.Target
+ * @see TkRegex
  */
 @EqualsAndHashCode(of = { "pattern", "target" })
 public final class FkRegex implements Fork {
@@ -93,7 +93,7 @@ public final class FkRegex implements Fork {
     /**
      * Target.
      */
-    private final transient Target<RqRegex> target;
+    private final transient TkRegex target;
 
     /**
      * Ctor.
@@ -121,7 +121,7 @@ public final class FkRegex implements Fork {
     public FkRegex(final Pattern ptn, final Take tks) {
         this(
             ptn,
-            new Target<RqRegex>() {
+            new TkRegex() {
                 @Override
                 public Response act(final RqRegex req) throws IOException {
                     return tks.act(req);
@@ -135,7 +135,7 @@ public final class FkRegex implements Fork {
      * @param ptn Pattern
      * @param tgt Take
      */
-    public FkRegex(final String ptn, final Target<RqRegex> tgt) {
+    public FkRegex(final String ptn, final TkRegex tgt) {
         this(Pattern.compile(ptn), tgt);
     }
 
@@ -144,7 +144,7 @@ public final class FkRegex implements Fork {
      * @param ptn Pattern
      * @param tgt Take
      */
-    public FkRegex(final Pattern ptn, final Target<RqRegex> tgt) {
+    public FkRegex(final Pattern ptn, final TkRegex tgt) {
         this.pattern = ptn;
         this.target = tgt;
     }
