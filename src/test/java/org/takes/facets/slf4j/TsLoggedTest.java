@@ -32,7 +32,7 @@ import org.takes.Takes;
 import org.takes.rq.RqFake;
 import org.takes.ts.TsEmpty;
 
-/**
+/**xxx
  * Test case for {@link TsLogged}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
