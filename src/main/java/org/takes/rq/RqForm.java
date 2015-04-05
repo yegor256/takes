@@ -139,7 +139,6 @@ public final class RqForm extends RqWrap {
      */
     private static String decode(final CharSequence txt) {
         try {
-
             return URLDecoder.decode(
                     txt.toString(), Charset.defaultCharset().name()
             );
