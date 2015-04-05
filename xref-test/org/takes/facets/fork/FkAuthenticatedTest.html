@@ -36,11 +36,11 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> org.hamcrest.Matchers;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.TsAuth;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.TkAuth;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.codecs.CcPlain;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqFake;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqWithHeader;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.ts.TsEmpty;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.takes.tk.TkEmpty;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * Test case for {@link FkAuthenticated}.</em>
@@ -57,16 +57,16 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      @Test
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> matchesIfAuthenticatedUser() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>              <strong class="jxr_keyword">new</strong> FkAuthenticated(<strong class="jxr_keyword">new</strong> TsEmpty()).route(
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>              <strong class="jxr_keyword">new</strong> FkAuthenticated(<strong class="jxr_keyword">new</strong> TkEmpty()).route(
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>                  <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"GET"</span>, <span class="jxr_string">"/hel?a=1"</span>)
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>              ).hasNext(),
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>              Matchers.is(false)
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          );
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>              <strong class="jxr_keyword">new</strong> FkAuthenticated(<strong class="jxr_keyword">new</strong> TsEmpty()).route(
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>              <strong class="jxr_keyword">new</strong> FkAuthenticated(<strong class="jxr_keyword">new</strong> TkEmpty()).route(
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>                  <strong class="jxr_keyword">new</strong> RqWithHeader(
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>                      <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"PUT"</span>, <span class="jxr_string">"/hello"</span>),
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                      TsAuth.<strong class="jxr_keyword">class</strong>.getSimpleName(),
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>                      TkAuth.<strong class="jxr_keyword">class</strong>.getSimpleName(),
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>                      <strong class="jxr_keyword">new</strong> String(
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>                          <strong class="jxr_keyword">new</strong> CcPlain().encode(<strong class="jxr_keyword">new</strong> Identity.Simple(<span class="jxr_string">"urn:test:1"</span>))
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>                      )
@@ -79,6 +79,6 @@
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Takes</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
 </body>
 </html>
