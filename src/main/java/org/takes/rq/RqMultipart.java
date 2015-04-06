@@ -23,10 +23,13 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -83,6 +86,13 @@ public final class RqMultipart extends RqWrap {
     private final transient ConcurrentMap<String, List<Request>> map;
 
     /**
+     * State enums for parser.
+     * @author mda
+     *
+     */
+    private enum State { UNDEF, PBOUNDARY, BOUNDARY, BLOCK };
+
+    /**
      * Ctor.
      * @param req Original request
      * @throws IOException If fails
@@ -110,23 +120,7 @@ public final class RqMultipart extends RqWrap {
                 )
             );
         }
-        final Collection<Request> requests = new LinkedList<Request>();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(req).printBody(baos);
-        final byte[] boundary = matcher.group(1).getBytes();
-        final byte[] body = baos.toByteArray();
-        int pos = 0;
-        while (pos < body.length) {
-            int start = pos + boundary.length + 2;
-            if (body[start] == '-') {
-                break;
-            }
-            start += 2;
-            final int stop = RqMultipart.indexOf(body, boundary, start) - 2;
-            requests.add(this.make(body, start, stop - 2));
-            pos = stop;
-        }
-        this.map = RqMultipart.asMap(requests);
+        this.map = RqMultipart.asMap(this.requests(matcher, this.body()));
     }
 
     /**
@@ -167,23 +161,6 @@ public final class RqMultipart extends RqWrap {
     }
 
     /**
-     * Make a request.
-     * @param body Body
-     * @param start Start position
-     * @param stop Stop position
-     * @return Request
-     * @throws IOException If fails
-     */
-    private Request make(final byte[] body, final int start,
-        final int stop) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos.write(this.head().iterator().next().getBytes());
-        baos.write("\r\n".getBytes());
-        baos.write(Arrays.copyOfRange(body, start, stop));
-        return new RqLive(new ByteArrayInputStream(baos.toByteArray()));
-    }
-
-    /**
      * Convert a list of requests to a map.
      * @param reqs Requests
      * @return Map of them
@@ -214,28 +191,63 @@ public final class RqMultipart extends RqWrap {
     }
 
     /**
-     * Find position of array inside another array.
-     * @param outer Big array
-     * @param inner Small array
-     * @param start Where to start searching
-     * @return Position
+     * Write header.
+     * @param fos Output stream
      * @throws IOException If fails
      */
-    private static int indexOf(final byte[] outer, final byte[] inner,
-        final int start) throws IOException {
-        for (int idx = start; idx < outer.length - inner.length; ++idx) {
-            boolean found = true;
-            for (int sub = 0; sub < inner.length; ++sub) {
-                if (outer[idx + sub] != inner[sub]) {
-                    found = false;
+    private void writeHeader(final OutputStream fos) throws IOException {
+        fos.write(this.head().iterator().next().getBytes("UTF-8"));
+        fos.write("\r\n".getBytes());
+    }
+
+    /**
+     * Multi-part request parsing.
+     * @param matcher Boundary matcher
+     * @param body Request
+     * @return Request collection
+     * @throws IOException If fails
+     * @checkstyle ExecutableStatementCountCheck (40 lines)
+     */
+    private Collection<Request> requests(final Matcher matcher,
+            final InputStream body) throws IOException {
+        final Collection<Request> requests = new LinkedList<Request>();
+        final byte[] boundary = new StringBuilder()
+            .append("\r\n--")
+            .append(matcher.group(1)).toString().getBytes();
+        int pos = 2;
+        File file = null;
+        OutputStream fos = null;
+        while (body.available() > 0) {
+            int data = body.read();
+            if (data < 0) {
+                throw new IOException("Unexpected end of request stream.");
+            }
+            if (pos < boundary.length  &&  data == boundary[pos]) {
+                ++pos;
+                continue;
+            }
+            if (pos == boundary.length) {
+                pos = 0;
+                body.read();
+                data = body.read();
+                if (fos != null) {
+                    fos.flush();
+                    fos.close();
+                    requests.add(new RqLive(new FileInputStream(file)));
+                }
+                if (data < 0) {
                     break;
                 }
+                file = File.createTempFile("takes", "req");
+                fos = new BufferedOutputStream(new FileOutputStream(file));
+                this.writeHeader(fos);
+            } else if (pos > 0) {
+                fos.write(boundary, 0, pos);
+                pos = 0;
             }
-            if (found) {
-                return idx;
-            }
+            fos.write(data);
         }
-        throw new IOException("closing boundary not found");
+        return requests;
     }
 
 }
