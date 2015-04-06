@@ -51,13 +51,9 @@ public final class PsCookieTest {
                     new CcPlain(), "foo", 1L
                 ).exit(new RsEmpty(), new Identity.Simple("urn:test:99"))
             ).print(),
-            Matchers.allOf(
-                Matchers.containsString(
-                    "Set-Cookie: foo=urn%3Atest%3A99;Path=/;"
-                ),
-                Matchers.containsString(";HttpOnly")
+            Matchers.containsString(
+                "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
             )
         );
     }
-
 }

@@ -118,6 +118,7 @@ public final class PsCookie implements Pass {
         return new RsWithCookie(
             res, this.cookie, text,
             "Path=/",
+            "HttpOnly",
             String.format(
                 Locale.ENGLISH,
                 "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
@@ -125,8 +126,7 @@ public final class PsCookie implements Pass {
                     System.currentTimeMillis()
                         + TimeUnit.DAYS.toMillis(this.age)
                 )
-            ),
-            "HttpOnly"
+            )
         );
     }
 }
