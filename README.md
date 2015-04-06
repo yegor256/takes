@@ -51,16 +51,16 @@ public final class App {
 }
 ```
 
-Then, download [`take.jar`](http://repo1.maven.org/maven2/org/take/take/) and compile your Java code:
+Then, download [`takes.jar`](http://repo1.maven.org/maven2/org/takes/takes/) and compile your Java code:
 
 ```
-$ javac -cp take.jar App.java
+$ javac -cp takes.jar App.java
 ```
 
 Now, run it like this:
 
 ```bash
-$ java -Dfile.encoding=UTF-8 -cp take.jar:. App
+$ java -Dfile.encoding=UTF-8 -cp takes.jar:. App
 ```
 
 Should work :)
@@ -85,7 +85,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
   <dependencies>
     <dependency>
       <groupId>org.takes</groupId>
-      <artifactId>take</artifactId>
+      <artifactId>takes</artifactId>
     </dependency>
   </dependencies>
   <profiles>
