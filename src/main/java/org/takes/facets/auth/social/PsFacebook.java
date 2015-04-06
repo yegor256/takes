@@ -58,6 +58,12 @@ import org.takes.rq.RqHref;
  * @since 0.5
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo #41 There is ClassDataAbstractionCouplingCheck error
+ * There are 9 classes in list [AbstractMap.SimpleEntry, ConcurrentHashMap,
+ * DefaultFacebookClient, DefaultJsonMapper, Href, Identity.Simple, JdkRequest,
+ * RqHref, WebRequestor] but first two of those is java runtime classes. Maybe
+ * possible to add those two classes into ignore list? Or maybe try
+ * to decouple this class?
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsFacebook implements Pass {
