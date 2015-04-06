@@ -23,7 +23,7 @@
  */
 
 /**
- * Takes Framework, tests.
+ * Take Framework, tests.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$

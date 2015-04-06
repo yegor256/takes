@@ -24,7 +24,7 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import org.takes.Take;
+import org.takes.Response;
 
 /**
  * Fast track for the fallback.
@@ -34,7 +34,7 @@ import org.takes.Take;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.facets.fallback.TsFallback
+ * @see org.takes.facets.fallback.TkFallback
  */
 public interface Fallback {
 
@@ -44,6 +44,6 @@ public interface Fallback {
      * @return Take
      * @throws java.io.IOException If fails
      */
-    Take take(RqFallback req) throws IOException;
+    Response act(RqFallback req) throws IOException;
 
 }

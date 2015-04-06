@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsWithHeader;
@@ -63,8 +64,8 @@ public final class TkWithHeader extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() throws IOException {
-                    return new RsWithHeader(take.act(), header);
+                public Response act(final Request req) throws IOException {
+                    return new RsWithHeader(take.act(req), header);
                 }
             }
         );

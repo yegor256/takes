@@ -50,7 +50,7 @@ import org.takes.Response;
  *
  * <pre>public final class TkHelp implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     return new RsHTML(
  *       new RsVelocity(
  *         this.getClass().getResource("help.html.vm"),

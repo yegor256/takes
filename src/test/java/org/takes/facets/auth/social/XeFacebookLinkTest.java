@@ -56,7 +56,7 @@ public final class XeFacebookLinkTest {
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='takes:facebook']"
+                "/root/links/link[@rel='take:facebook']"
             )
         );
     }

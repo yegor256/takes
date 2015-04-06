@@ -56,7 +56,7 @@ public final class XeGithubLinkTest {
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='takes:github']"
+                "/root/links/link[@rel='take:github']"
             )
         );
     }

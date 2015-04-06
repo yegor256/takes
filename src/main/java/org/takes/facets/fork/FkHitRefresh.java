@@ -34,10 +34,9 @@ import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHeaders;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork by hit-refresh header.
@@ -47,11 +46,11 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = { "dir", "exec", "last", "target" })
-public final class FkHitRefresh implements Fork.AtTake {
+@EqualsAndHashCode(of = { "dir", "exec", "last", "take" })
+public final class FkHitRefresh implements Fork {
 
     /**
      * Directory to watch.
@@ -66,7 +65,7 @@ public final class FkHitRefresh implements Fork.AtTake {
     /**
      * Target.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * File touched on every exec run.
@@ -77,87 +76,23 @@ public final class FkHitRefresh implements Fork.AtTake {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param take Take
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final String cmd, final Take take)
-        throws IOException {
-        this(file, cmd, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param take Take
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final Runnable cmd, final Take take)
-        throws IOException {
-        this(file, cmd, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param takes Takes
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final String cmd, final Takes takes)
-        throws IOException {
-        this(
-            file, cmd,
-            new Target<Request>() {
-                @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param takes Takes
-     * @throws IOException If fails
-     */
-    public FkHitRefresh(final File file, final Runnable cmd, final Takes takes)
-        throws IOException {
-        this(
-            file, cmd,
-            new Target<Request>() {
-                @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final String cmd,
-        final Target<Request> tgt) throws IOException {
-        this(file, Arrays.asList(cmd.split(" ")), tgt);
+        final Take tke) throws IOException {
+        this(file, Arrays.asList(cmd.split(" ")), tke);
     }
 
     /**
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-        final Target<Request> tgt) throws IOException {
+        final Take tke) throws IOException {
         this(
             file,
             new Runnable() {
@@ -170,7 +105,7 @@ public final class FkHitRefresh implements Fork.AtTake {
                     }
                 }
             },
-            tgt
+            tke
         );
     }
 
@@ -178,32 +113,32 @@ public final class FkHitRefresh implements Fork.AtTake {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tgt Target
+     * @param tke Target
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final Runnable cmd,
-        final Target<Request> tgt) throws IOException {
+        final Take tke) throws IOException {
         this.dir = file;
         this.exec = cmd;
-        this.target = tgt;
-        this.last = File.createTempFile("takes", ".txt");
+        this.take = tke;
+        this.last = File.createTempFile("take", ".txt");
         this.last.deleteOnExit();
         this.touch();
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final Iterator<String> header =
-            new RqHeaders(req).header("X-Takes-HitRefresh").iterator();
-        final Collection<Take> takes = new ArrayList<Take>(1);
+            new RqHeaders(req).header("X-Take-HitRefresh").iterator();
+        final Collection<Response> response = new ArrayList<Response>(1);
         if (header.hasNext()) {
             if (this.expired()) {
                 this.exec.run();
                 this.touch();
             }
-            takes.add(this.target.route(req));
+            response.add(this.take.act(req));
         }
-        return takes.iterator();
+        return response.iterator();
     }
 
     /**

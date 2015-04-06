@@ -26,12 +26,10 @@ package org.takes.it.fm;
 import java.io.File;
 import java.io.IOException;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.facets.fork.FkRegex;
-import org.takes.facets.fork.RqRegex;
-import org.takes.facets.fork.Target;
-import org.takes.facets.fork.TsFork;
+import org.takes.facets.fork.TkFork;
 import org.takes.http.Exit;
 import org.takes.http.FtCLI;
 import org.takes.tk.TkHTML;
@@ -45,7 +43,7 @@ import org.takes.tk.TkRedirect;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class App implements Takes {
+public final class App implements Take {
 
     /**
      * Home.
@@ -73,23 +71,15 @@ public final class App implements Takes {
     }
 
     @Override
-    public Take route(final Request request) throws IOException {
-        return new TsFork(
+    public Response act(final Request request) throws IOException {
+        return new TkFork(
             new FkRegex("/", new TkRedirect("/f")),
             new FkRegex(
                 "/about",
                 new TkHTML(App.class.getResource("about.html"))
             ),
             new FkRegex("/robots.txt", ""),
-            new FkRegex(
-                "/f(.*)",
-                new Target<RqRegex>() {
-                    @Override
-                    public Take route(final RqRegex req) {
-                        return new TkDir(App.this.home, req.matcher().group(1));
-                    }
-                }
-            )
-        ).route(request);
+            new FkRegex("/f(.*)", new TkDir(App.this.home))
+        ).act(request);
     }
 }

@@ -24,8 +24,11 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.Iterator;
-import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqCookies;
@@ -44,6 +47,12 @@ import org.xembly.Directives;
  */
 @EqualsAndHashCode(of = { "req", "cookie" })
 public final class XeFlash implements XeSource {
+    /**
+     * Compiled RsFlash message regexp pattern.
+     */
+    private static final Pattern RS_FLASH_MSG = Pattern.compile(
+        "^(.*?)/(.*?)$"
+    );
 
     /**
      * Request.
@@ -79,10 +88,17 @@ public final class XeFlash implements XeSource {
             new RqCookies(this.req).cookie(this.cookie).iterator();
         final Directives dirs = new Directives();
         if (cookies.hasNext()) {
-            final String value = cookies.next();
-            dirs.add("flash")
-                .add("message").set(value).up()
-                .add("level").set(Level.INFO.toString());
+            final Matcher matcher = RS_FLASH_MSG.matcher(cookies.next());
+            if (matcher.find()) {
+                dirs.add("flash")
+                    .add("message").set(
+                        URLDecoder.decode(
+                            matcher.group(1),
+                            Charset.defaultCharset().name()
+                        )
+                    ).up()
+                    .add("level").set(matcher.group(2));
+            }
         }
         return dirs;
     }

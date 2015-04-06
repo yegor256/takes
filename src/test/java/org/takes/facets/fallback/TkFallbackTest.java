@@ -28,10 +28,10 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Response;
-import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
-import org.takes.tk.TkText;
+import org.takes.rs.RsText;
+import org.takes.tk.TkFailure;
 
 /**
  * Test case for {@link TkFallback}.
@@ -50,21 +50,16 @@ public final class TkFallbackTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFallback(
-                    new Take() {
-                        @Override
-                        public Response act()  throws IOException {
-                            throw new IOException(err);
-                        }
-                    },
+                    new TkFailure(err),
                     new Fallback() {
                         @Override
-                        public Take take(final RqFallback req) {
-                            return new TkText(
+                        public Response act(final RqFallback req) {
+                            return new RsText(
                                 req.throwable().getMessage()
                             );
                         }
-                    }, new RqFake("GET")
-                ).act()
+                    }
+                ).act(new RqFake("GET"))
             ).printBody(),
             Matchers.equalTo(err)
         );

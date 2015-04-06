@@ -54,7 +54,7 @@ public final class RqFake extends RqWrap {
      * Ctor.
      * @param method HTTP method
      */
-    public RqFake(final String method) {
+    public RqFake(final CharSequence method) {
         this(method, "/");
     }
 
@@ -63,7 +63,7 @@ public final class RqFake extends RqWrap {
      * @param method HTTP method
      * @param query HTTP query
      */
-    public RqFake(final String method, final String query) {
+    public RqFake(final CharSequence method, final CharSequence query) {
         this(method, query, "");
     }
 
@@ -73,7 +73,8 @@ public final class RqFake extends RqWrap {
      * @param query HTTP query
      * @param body HTTP body
      */
-    public RqFake(final String method, final String query, final String body) {
+    public RqFake(final CharSequence method, final CharSequence query,
+        final CharSequence body) {
         this(
             Arrays.asList(
                 String.format("%s %s", method, query),
@@ -88,8 +89,8 @@ public final class RqFake extends RqWrap {
      * @param head Head
      * @param body Body
      */
-    public RqFake(final List<String> head, final String body) {
-        this(head, body.getBytes());
+    public RqFake(final List<String> head, final CharSequence body) {
+        this(head, body.toString().getBytes());
     }
 
     /**

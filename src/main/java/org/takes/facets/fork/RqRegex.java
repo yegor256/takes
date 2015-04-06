@@ -54,7 +54,7 @@ public interface RqRegex extends Request {
      * <p>Use this class in unit tests, when you need to create a fake
      * version of a request with a matcher inside. For example:
      *
-     * <pre> new TsIndex().route(
+     * <pre> new TkIndex().route(
      *   new RqRegex.Take("/(.*)", "/hello")
      * );</pre>
      *

@@ -56,7 +56,7 @@ public final class XeLogoutLinkTest {
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='takes:logout']"
+                "/root/links/link[@rel='take:logout']"
             )
         );
     }

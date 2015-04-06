@@ -27,6 +27,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -38,15 +39,17 @@ import org.takes.rs.RsPrint;
 public final class TkMeasuredTest {
 
     /**
-     * TkMeasured can create a response with HTTP header "X-Takes-Millis".
+     * TkMeasured can create a response with HTTP header "X-Take-Millis".
      * @throws IOException If some problem inside
      */
     @Test
     public void createsMeasuredResponse() throws IOException {
-        final String header = "X-Takes-Millis";
+        final String header = "X-Take-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkMeasured(new TkText("default header response")).act()
+                new TkMeasured(new TkText("default header response")).act(
+                    new RqFake()
+                )
             ).print(),
             Matchers.containsString(header)
         );
@@ -58,13 +61,13 @@ public final class TkMeasuredTest {
      */
     @Test
     public void createsMeasuredResponseWithCustomHeader() throws IOException {
-        final String header = "X-Custom-Takes-Millis";
+        final String header = "X-Custom-Take-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkMeasured(
                     new TkText("custom header response"),
                     header
-                ).act()
+                ).act(new RqFake())
             ).print(),
             Matchers.containsString(header)
         );
