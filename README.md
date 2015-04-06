@@ -1,12 +1,12 @@
 <img src="http://www.takes.org/clapper.jpg" width="96px" height="96px"/>
 
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
-[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/take)](http://www.rultor.com/p/yegor256/take)
+[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 
-[![Build Status](https://img.shields.io/travis/yegor256/take/master.svg)](https://travis-ci.org/yegor256/take)
-[![Build status](https://img.shields.io/appveyor/ci/yegor256/take/master.svg)](https://ci.appveyor.com/project/yegor256/take/branch/master)
-[![Maven Central](https://img.shields.io/maven-central/v/org.takes/take.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/take)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/take/blob/master/LICENSE.txt)
+[![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
+[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
+[![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
 **Take** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
@@ -32,7 +32,7 @@ This is what is not supported and won't be supported:
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 This blog post may help you too:
-[Java Web App Architecture In Take Framework](http://www.yegor256.com/2015/03/22/take-java-web-framework.html)
+[Java Web App Architecture In Take Framework](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html)
 
 ## Quick Start
 
