@@ -208,7 +208,7 @@ public final class RqMultipart extends RqWrap {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (40 lines)
      * @todo #115 Need to refactoring this function to avoid
-     * ExecutableStatementCountCheck.
+     *  ExecutableStatementCountCheck.
      */
     private Collection<Request> requests(final Matcher matcher,
             final InputStream body) throws IOException {
