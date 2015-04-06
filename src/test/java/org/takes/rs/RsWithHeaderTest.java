@@ -64,14 +64,13 @@ public final class RsWithHeaderTest {
 
     /**
      * RsWithHeader can't add invalid headers.
-     * @throws IllegalArgumentException if used invalid header
      * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
     public void notAddsInvalidHeadersToResponse() throws IOException {
         new RsWithHeader(
-            new RsWithHeader(new RsEmpty(), "host85", "b.example.com"),
-            "Host MY", "a.example.com"
+            new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
+            "Host MY", "d.example.com"
         );
     }
 }

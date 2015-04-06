@@ -57,12 +57,6 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithHeader extends RsWrap {
-    /**
-     * Pattern for all other lines in the head.
-     */
-    private static final Pattern HEADER = Pattern.compile(
-        "[a-zA-Z\\-]+:\\p{Print}+"
-    );
 
     /**
      * Ctor.
@@ -101,31 +95,61 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence header) {
         super(
-            new Response() {
-                @Override
-                public List<String> head() throws IOException {
-                    if (!RsWithHeader.HEADER.matcher(header).matches()) {
-                        throw new IllegalArgumentException(
-                            String.format(
-                                // @checkstyle LineLength (1 line)
-                                "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                                header, RsWithHeader.HEADER
-                            )
-                        );
-                    }
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : res.head()) {
-                        head.add(hdr);
-                    }
-                    head.add(header.toString());
-                    return head;
-                }
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+            new RsWithHeader.ResponseImpl(res, header)
         );
+    }
+
+    private static final class ResponseImpl implements Response {
+        /**
+         * Pattern for all other lines in the head.
+         */
+        private static final Pattern HEADER = Pattern.compile(
+            "[a-zA-Z\\-]+:\\p{Print}+"
+        );
+
+        /**
+         * Original response.
+         */
+        private final transient Response response;
+
+        /**
+         * Header to add.
+         */
+        private final transient CharSequence value;
+
+        /**
+         * Ctor.
+         * @param res Original response
+         * @param header Header to add
+         */
+        ResponseImpl(final Response res, final CharSequence header) {
+            if (!HEADER.matcher(header).matches()) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        header, HEADER
+                    )
+                );
+            }
+            this.response = res;
+            this.value = header;
+        }
+
+        @Override
+        public List<String> head() throws IOException {
+            final List<String> head = new LinkedList<String>();
+            for (final String hdr : this.response.head()) {
+                head.add(hdr);
+            }
+            head.add(this.value.toString());
+            return head;
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.response.body();
+        }
     }
 
 }
