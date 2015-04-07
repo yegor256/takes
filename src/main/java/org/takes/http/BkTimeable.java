@@ -57,11 +57,24 @@ public final class BkTimeable implements Back {
     }
 
     @Override
+    @SuppressWarnings("PMD.DoNotUseThreads")
     public void accept(final Socket socket) throws IOException {
-        final long start = System.currentTimeMillis();
-        while (System.currentTimeMillis() - start > this.latency) {
-            this.origin.accept(socket);
-        }
-        Thread.currentThread().interrupt();
+        this.origin.accept(socket);
+        final Thread callerThread = Thread.currentThread();
+        final Thread monitor = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(BkTimeable.this.latency);
+                        callerThread.interrupt();
+                    } catch (final InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        );
+        monitor.start();
     }
 }
