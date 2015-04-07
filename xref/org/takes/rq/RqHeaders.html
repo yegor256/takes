@@ -71,10 +71,10 @@
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">     * @return List of values (can be empty)</em>
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; header(<strong class="jxr_keyword">final</strong> String key) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; header(<strong class="jxr_keyword">final</strong> CharSequence key) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">final</strong> Map&lt;String, List&lt;String&gt;&gt; map = <strong class="jxr_keyword">this</strong>.map();
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>          <strong class="jxr_keyword">final</strong> List&lt;String&gt; values = map.get(
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>              key.toLowerCase(Locale.ENGLISH)
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>              key.toString().toLowerCase(Locale.ENGLISH)
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          );
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; iter;
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {

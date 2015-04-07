@@ -108,9 +108,9 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> <em class="jxr_javadoccomment">     * @param key Parameter name</em>
 <a class="jxr_linenumber" name="L101" href="#L101">101</a> <em class="jxr_javadoccomment">     * @return List of values (can be empty)</em>
 <a class="jxr_linenumber" name="L102" href="#L102">102</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> String key) {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> CharSequence key) {
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">final</strong> List&lt;String&gt; values =
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">this</strong>.map.get(key.toLowerCase(Locale.ENGLISH));
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">this</strong>.map.get(key.toString().toLowerCase(Locale.ENGLISH));
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; iter;
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>             iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
@@ -145,10 +145,10 @@
 <a class="jxr_linenumber" name="L137" href="#L137">137</a> <em class="jxr_javadoccomment">     * @param txt Text</em>
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> <em class="jxr_javadoccomment">     * @return Decoded</em>
 <a class="jxr_linenumber" name="L139" href="#L139">139</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> String txt) {
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> CharSequence txt) {
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>             <strong class="jxr_keyword">return</strong> URLDecoder.decode(
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>                 txt, Charset.defaultCharset().name()
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>                 txt.toString(), Charset.defaultCharset().name()
 <a class="jxr_linenumber" name="L144" href="#L144">144</a>             );
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnsupportedEncodingException ex) {
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ex);

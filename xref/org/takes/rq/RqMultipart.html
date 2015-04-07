@@ -142,9 +142,9 @@
 <a class="jxr_linenumber" name="L134" href="#L134">134</a> <em class="jxr_javadoccomment">     * @param name Name of the part to get</em>
 <a class="jxr_linenumber" name="L135" href="#L135">135</a> <em class="jxr_javadoccomment">     * @return List of parts (can be empty)</em>
 <a class="jxr_linenumber" name="L136" href="#L136">136</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;Request&gt; part(<strong class="jxr_keyword">final</strong> String name) {
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>     <strong class="jxr_keyword">public</strong> Iterable&lt;Request&gt; part(<strong class="jxr_keyword">final</strong> CharSequence name) {
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">final</strong> List&lt;Request&gt; values = <strong class="jxr_keyword">this</strong>.map
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>             .get(name.toLowerCase(Locale.ENGLISH));
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>             .get(name.toString().toLowerCase(Locale.ENGLISH));
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>         <strong class="jxr_keyword">final</strong> Iterable&lt;Request&gt; iter;
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>         <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>             iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;Request&gt;(
