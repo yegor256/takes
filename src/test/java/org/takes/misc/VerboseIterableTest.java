@@ -48,7 +48,7 @@ public final class VerboseIterableTest {
 
     @Rule
     // @checkstyle VisibilityModifierCheck (1 line)
-    public ExpectedException expected = ExpectedException.none();
+    public transient ExpectedException expected = ExpectedException.none();
 
     /**
      * VerboseIterable can return iterator.
