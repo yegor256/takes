@@ -59,6 +59,7 @@ public final class Href implements CharSequence {
     /**
      * Ctor.
      * @param txt Text of the link
+     * Href use undecoded query for URL creation
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Href(final String txt) {

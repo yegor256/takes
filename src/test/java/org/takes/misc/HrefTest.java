@@ -84,10 +84,10 @@ public final class HrefTest {
 
     /**
      * Href can accept encoded query part.
-     * @throws IOException If some problem inside
+     * @throws IOException If some problem inside.
      */
     @Test
-    public void acceptsEncoded() throws IOException {
+    public void acceptsEncodedQuery() throws IOException {
         final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
         MatcherAssert.assertThat(
             new Href(url).toString(),
