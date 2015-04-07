@@ -33,7 +33,7 @@
     </parent>
     <groupId>org.takes</groupId>
     <artifactId>takes</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.12.2</version>
     <packaging>jar</packaging>
     <name>take</name>
     <description>Immutable Java Web Framework</description>
