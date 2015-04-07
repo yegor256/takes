@@ -86,13 +86,6 @@ public final class RqMultipart extends RqWrap {
     private final transient ConcurrentMap<String, List<Request>> map;
 
     /**
-     * State enums for parser.
-     * @author mda
-     *
-     */
-    private enum State { UNDEF, PBOUNDARY, BOUNDARY, BLOCK };
-
-    /**
      * Ctor.
      * @param req Original request
      * @throws IOException If fails
@@ -120,7 +113,16 @@ public final class RqMultipart extends RqWrap {
                 )
             );
         }
-        this.map = RqMultipart.asMap(this.requests(matcher, this.body()));
+        final Collection<Request> requests = new LinkedList<Request>();
+        final Parser parser = new Parser(
+            this.body(),
+            matcher.group(1),
+            this.head().iterator().next().getBytes("UTF-8")
+        );
+        while (parser.hasNext()) {
+            requests.add(parser.next());
+        }
+        this.map = RqMultipart.asMap(requests);
     }
 
     /**
@@ -191,65 +193,167 @@ public final class RqMultipart extends RqWrap {
     }
 
     /**
-     * Write header.
-     * @param fos Output stream
-     * @throws IOException If fails
+     * Multipart parser class that parses input request into temporary files.
+     * One part per one file.
+     * @author Dmitry Molotchko (dima.molotchko@gmail.com)
+     *
      */
-    private void writeHeader(final OutputStream fos) throws IOException {
-        fos.write(this.head().iterator().next().getBytes("UTF-8"));
-        fos.write("\r\n".getBytes());
-    }
-
-    /**
-     * Multi-part request parsing.
-     * @param matcher Boundary matcher
-     * @param body Request
-     * @return Request collection
-     * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (40 lines)
-     * @todo #115 Need to refactoring this function to avoid
-     *  ExecutableStatementCountCheck.
-     */
-    private Collection<Request> requests(final Matcher matcher,
-            final InputStream body) throws IOException {
-        final Collection<Request> requests = new LinkedList<Request>();
-        final byte[] boundary = new StringBuilder()
-            .append("\r\n--")
-            .append(matcher.group(1)).toString().getBytes();
-        int pos = 2;
-        File file = null;
-        OutputStream fos = null;
-        while (body.available() > 0) {
-            int data = body.read();
-            if (data < 0) {
-                throw new IOException("Unexpected end of request stream.");
+    private static class Parser {
+        /**
+         * Exception message.
+         */
+        private static final String EXCEPTION =
+            "Unexpected end of stream in part reading (no last boundary).";
+        /**
+         * States enum.
+         */
+        private enum State {
+            /**
+             * Begin state.
+             */
+            BEGIN,
+            /**
+             * Block state.
+             */
+            BLOCK,
+            /**
+             * End state.
+             */
+            END,
+        }
+        /**
+         * State.
+         */
+        private transient State state;
+        /**
+         * Input stream for parsing.
+         */
+        private final transient InputStream input;
+        /**
+         * Part boundary.
+         */
+        private final transient byte[] boundary;
+        /**
+         * Original request header.
+         */
+        private final transient byte[] header;
+        /**
+         * Ctor.
+         * @param intp Input stream
+         * @param bndary Part boundary
+         * @param hdr Original request header
+         */
+        public Parser(final InputStream intp, final String bndary,
+                final byte[] hdr) {
+            this.input = intp;
+            this.state = State.BEGIN;
+            this.boundary = new StringBuilder()
+                .append("\r\n--")
+                .append(bndary).toString().getBytes();
+            this.header = new byte[hdr.length];
+            for (int ind = 0;  ind < hdr.length;  ++ind) {
+                this.header[ind] = hdr[ind];
             }
-            if (pos < boundary.length  &&  data == boundary[pos]) {
-                ++pos;
-                continue;
+        }
+        /**
+         * Has next part?
+         * @return True or false
+         */
+        public boolean hasNext() {
+            return this.state != State.END;
+        }
+        /**
+         * Parses stream into request.
+         * @return Parsed part in Request form or NULL if end of parts.
+         * @throws IOException If fails
+         * @checkstyle NPathComplexityCheck (500 lines)
+         * @checkstyle CyclomaticComplexityCheck (500 lines)
+         * @checkstyle ExecutableStatementCount (500 lines)
+         * @checkstyle NestedIfDepthCheck (500 lines)
+         * @todo #115 Refactor this function to avoid checkstyle errors
+         */
+        public Request next() throws IOException {
+            if (this.state == State.BEGIN) {
+                for (int ind = 2;  ind < this.boundary.length;  ++ind) {
+                    final int data = this.input.read();
+                    if (data < 0) {
+                        // @checkstyle LineLengthCheck (1 line)
+                        throw new IOException("Unexpected end of stream in first boundary reading.");
+                    }
+                    if (this.boundary[ind] != (byte) data) {
+                        // @checkstyle LineLengthCheck (1 line)
+                        throw new IOException("Stream is not started with boundary.");
+                    }
+                }
+                this.read('\r');
+                this.read('\n');
+                this.state = State.BLOCK;
             }
-            if (pos == boundary.length) {
-                pos = 0;
-                body.read();
-                data = body.read();
-                if (fos != null) {
+            if (this.state == State.BLOCK) {
+                final File file = File.createTempFile("takes", "req");
+                final OutputStream fos = new BufferedOutputStream(
+                    new FileOutputStream(file)
+                );
+                fos.write(this.header);
+                fos.write("\r\n".getBytes());
+                try {
+                    int pos = 0;
+                    while (true) {
+                        final int data = this.input.read();
+                        if (data < 0) {
+                            // @checkstyle LineLengthCheck (1 line)
+                            throw new IOException(EXCEPTION);
+                        }
+                        if (pos < this.boundary.length
+                            && data == this.boundary[pos]) {
+                            ++pos;
+                            if (pos == this.boundary.length) {
+                                final int first = this.input.read();
+                                final int second = this.input.read();
+                                if (first < 0 || second < 0) {
+                                    // @checkstyle LineLengthCheck (1 line)
+                                    throw new IOException(EXCEPTION);
+                                }
+                                if ((byte) first == '\r'
+                                    && (byte) second == '\n') {
+                                    break;
+                                } else if ((byte) first == '-'
+                                    && (byte) second == '-') {
+                                    this.state = State.END;
+                                    break;
+                                }
+                                // @checkstyle LineLengthCheck (1 line)
+                                throw new IOException("Not valid end boundary in stream.");
+                            }
+                            continue;
+                        }
+                        if (pos > 0) {
+                            fos.write(this.boundary, 0, pos);
+                            pos = 0;
+                        }
+                        fos.write(data);
+                    }
+                } finally {
                     fos.flush();
                     fos.close();
-                    requests.add(new RqLive(new FileInputStream(file)));
                 }
-                if (data < 0) {
-                    break;
-                }
-                file = File.createTempFile("takes", "req");
-                fos = new BufferedOutputStream(new FileOutputStream(file));
-                this.writeHeader(fos);
-            } else if (pos > 0) {
-                fos.write(boundary, 0, pos);
-                pos = 0;
+                return new RqLive(new FileInputStream(file));
             }
-            fos.write(data);
+            return null;
         }
-        return requests;
+        /**
+         * Read character from input stream.
+         * @param character Expected character
+         * @return Readed character
+         * @throws IOException If end of stream or expected character
+         *  is not equals readed character
+         */
+        private int read(final char character) throws IOException {
+            final int chr = this.input.read();
+            if (chr < 0 || (byte) chr != character) {
+                throw new IOException("Unexpected end of stream.");
+            }
+            return chr;
+        }
     }
-
 }
