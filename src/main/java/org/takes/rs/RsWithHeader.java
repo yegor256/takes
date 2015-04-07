@@ -95,11 +95,16 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence header) {
         super(
-            new RsWithHeader.ResponseImpl(res, header)
+            new DecoratedResponse(res, header)
         );
     }
 
-    private static final class ResponseImpl implements Response {
+    /**
+     * Response with an additional header
+     *
+     * <p>The class is immutable and thread-safe.
+     */
+    private static final class DecoratedResponse implements Response {
         /**
          * Pattern for all other lines in the head.
          */
@@ -115,25 +120,25 @@ public final class RsWithHeader extends RsWrap {
         /**
          * Header to add.
          */
-        private final transient CharSequence value;
+        private final transient CharSequence header;
 
         /**
          * Ctor.
          * @param res Original response
-         * @param header Header to add
+         * @param extension Header to add
          */
-        ResponseImpl(final Response res, final CharSequence header) {
-            if (!HEADER.matcher(header).matches()) {
+        DecoratedResponse(final Response res, final CharSequence extension) {
+            if (!HEADER.matcher(extension).matches()) {
                 throw new IllegalArgumentException(
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        header, HEADER
+                        extension, HEADER
                     )
                 );
             }
             this.response = res;
-            this.value = header;
+            this.header = extension;
         }
 
         @Override
@@ -142,7 +147,7 @@ public final class RsWithHeader extends RsWrap {
             for (final String hdr : this.response.head()) {
                 head.add(hdr);
             }
-            head.add(this.value.toString());
+            head.add(this.header.toString());
             return head;
         }
 
