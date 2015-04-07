@@ -198,7 +198,7 @@ public final class App {
 The `FtBasic` is accepting new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
-(`ts` stands for "take") and expects it to return an instance of `Take` back.
+(`tk` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
 returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
 let's see how it looks:
@@ -207,7 +207,7 @@ let's see how it looks:
 public final class TkIndex implements Take {
   @Override
   public Response act(final Request req) {
-    return new RsHtml("<html>Hello, world!</html>");
+    return new RsHTML("<html>Hello, world!</html>");
   }
 }
 ```
@@ -222,7 +222,7 @@ new TkFork(
     "/file/(?<path>[^/]+)",
     new TkRegex() {
       @Override
-      public Response act(final RqRegex request) {
+      public Response act(final RqRegex request) throws IOException {
         final File file = new File(
           request.matcher().group("path")
         );
