@@ -104,7 +104,7 @@ public final class PsByFlagTest {
     }
 
     /**
-     * Checks PsByFlag equals method
+     * Checks PsByFlag equals method.
      * @throws Exception If some problem inside
      */
     @Test
