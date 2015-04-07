@@ -72,7 +72,7 @@ public final class TkLogged implements Take {
     // @todo #101:30min/DEV I expect implementations of Response and Take
     //  interfaces will be able convert itself to a loggable string but
     //  they don't have this feature.
-    //  See details here https://github.com/yegor256/take/issues/101
+    //  See details here https://github.com/yegor256/takes/issues/101
     //  We will use toConsole() in this way
     //  this.target.log("...", this.origin.toConsole(), resp.toConsole, ...)
     @Override
