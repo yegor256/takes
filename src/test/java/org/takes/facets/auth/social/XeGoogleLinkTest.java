@@ -56,7 +56,7 @@ public final class XeGoogleLinkTest {
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='take:google']"
+                "/root/links/link[@rel='takes:google']"
             )
         );
     }

@@ -52,7 +52,7 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final String app)
         throws IOException {
-        this(req, app, "take:google", PsByFlag.class.getSimpleName());
+        this(req, app, "takes:google", PsByFlag.class.getSimpleName());
     }
 
     /**
