@@ -24,10 +24,10 @@
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
-import com.jcabi.immutable.Array;
 import com.restfb.WebRequestor;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
@@ -54,7 +54,7 @@ public final class PsFacebookTest {
                 new FakeRequest(
                     HttpURLConnection.HTTP_OK,
                     "",
-                    new Array<Map.Entry<String, String>>(),
+                    new ArrayList<Map.Entry<String, String>>(0),
                     "access_token=fake".getBytes("utf-8")
                 ),
                 new WebRequestor.Response(

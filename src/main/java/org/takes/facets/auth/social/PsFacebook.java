@@ -39,7 +39,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -99,9 +98,7 @@ public final class PsFacebook implements Pass {
      * @param response Response for testing
      */
     public PsFacebook(
-        @NotNull(message = "Request can't be NULL")
         final com.jcabi.http.Request request,
-        @NotNull(message = "Response can't be NULL")
         final WebRequestor.Response response) {
         this(
             "fapp",
