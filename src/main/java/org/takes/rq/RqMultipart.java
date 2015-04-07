@@ -134,9 +134,9 @@ public final class RqMultipart extends RqWrap {
      * @param name Name of the part to get
      * @return List of parts (can be empty)
      */
-    public Iterable<Request> part(final String name) {
+    public Iterable<Request> part(final CharSequence name) {
         final List<Request> values = this.map
-            .get(name.toLowerCase(Locale.ENGLISH));
+            .get(name.toString().toLowerCase(Locale.ENGLISH));
         final Iterable<Request> iter;
         if (values == null) {
             iter = new VerboseIterable<Request>(

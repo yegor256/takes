@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsEmpty;
@@ -30,7 +31,7 @@ import org.takes.rs.RsEmpty;
 /**
  * Empty take.
  *
- * <p>This "takes" always returns an instance of
+ * <p>This "take" always returns an instance of
  * {@link org.takes.rs.RsEmpty}.
  *
  * <p>The class is immutable and thread-safe.
@@ -42,7 +43,7 @@ import org.takes.rs.RsEmpty;
 public final class TkEmpty implements Take {
 
     @Override
-    public Response act() {
+    public Response act(final Request req) {
         return new RsEmpty();
     }
 }

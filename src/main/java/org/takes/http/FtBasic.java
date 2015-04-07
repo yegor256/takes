@@ -28,7 +28,7 @@ import java.net.ServerSocket;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.takes.Takes;
+import org.takes.Take;
 
 /**
  * Basic front.
@@ -54,10 +54,10 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
-     * @param tks Takes
+     * @param tks Take
      * @param prt Port
      */
-    public FtBasic(final Takes tks, final int prt) {
+    public FtBasic(final Take tks, final int prt) {
         this(new BkBasic(tks), prt);
     }
 

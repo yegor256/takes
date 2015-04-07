@@ -79,7 +79,7 @@ public final class RsGzip extends RsWrap {
         try {
             while (true) {
                 final int data = input.read();
-                if (data < 1) {
+                if (data < 0) {
                     break;
                 }
                 gzip.write(data);

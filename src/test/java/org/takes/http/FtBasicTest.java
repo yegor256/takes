@@ -33,14 +33,14 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.facets.fork.FkRegex;
-import org.takes.facets.fork.TsFork;
+import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqPrint;
-import org.takes.tk.TkText;
-import org.takes.ts.TsFailure;
+import org.takes.rs.RsText;
+import org.takes.tk.TkFailure;
 
 /**
  * Test case for {@link FtBasic}.
@@ -57,7 +57,7 @@ public final class FtBasicTest {
      */
     @Test
     public void justWorks() throws Exception {
-        new FtRemote(new TsFork(new FkRegex("/", "hello, world!"))).exec(
+        new FtRemote(new TkFork(new FkRegex("/", "hello, world!"))).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -77,7 +77,7 @@ public final class FtBasicTest {
      */
     @Test
     public void gracefullyHandlesBrokenBack() throws Exception {
-        new FtRemote(new TsFailure("Jeffrey Lebowski")).exec(
+        new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -97,17 +97,17 @@ public final class FtBasicTest {
      */
     @Test
     public void parsesIncomingHttpRequest() throws Exception {
-        final Takes takes = new Takes() {
+        final Take take = new Take() {
             @Override
-            public Take route(final Request request) throws IOException {
+            public Response act(final Request request) throws IOException {
                 MatcherAssert.assertThat(
                     new RqPrint(request).printBody(),
                     Matchers.containsString("Jeff")
                 );
-                return new TkText("works!");
+                return new RsText("works!");
             }
         };
-        new FtRemote(takes).exec(
+        new FtRemote(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -128,11 +128,11 @@ public final class FtBasicTest {
      */
     @Test
     public void gracefullyHandlesStuckBack() throws Exception {
-        final Takes takes = new Takes() {
+        final Take take = new Take() {
             @Override
-            public Take route(final Request request) throws IOException {
+            public Response act(final Request request) throws IOException {
                 final Request req = new RqGreedy(request);
-                return new TkText(
+                return new RsText(
                     String.format(
                         "first: %s, second: %s",
                         new RqPrint(req).printBody(),
@@ -141,7 +141,7 @@ public final class FtBasicTest {
                 );
             }
         };
-        new FtRemote(takes).exec(
+        new FtRemote(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {

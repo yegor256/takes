@@ -32,7 +32,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
-import org.takes.Takes;
+import org.takes.Take;
 
 /**
  * Front remote control.
@@ -66,10 +66,10 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     * @param tks Takes
+     * @param tks Take
      * @throws IOException If fails
      */
-    public FtRemote(final Takes tks) throws IOException {
+    public FtRemote(final Take tks) throws IOException {
         this(new BkParallel(new BkBasic(tks)));
     }
 

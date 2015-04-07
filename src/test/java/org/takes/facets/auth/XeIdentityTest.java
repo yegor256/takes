@@ -55,7 +55,7 @@ public final class XeIdentityTest {
                         new XeIdentity(
                             new RqWithHeader(
                                 new RqFake(),
-                                TsAuth.class.getSimpleName(),
+                                TkAuth.class.getSimpleName(),
                                 "urn:test:1;name=Jeff"
                             )
                         )

@@ -48,8 +48,8 @@ public final class RqWithHeader extends RqWrap {
      * @param name Header name
      * @param value Header value
      */
-    public RqWithHeader(final Request req, final String name,
-        final String value) {
+    public RqWithHeader(final Request req, final CharSequence name,
+        final CharSequence value) {
         this(req, String.format("%s: %s", name, value));
     }
 
@@ -58,7 +58,7 @@ public final class RqWithHeader extends RqWrap {
      * @param req Original request
      * @param header Header to add
      */
-    public RqWithHeader(final Request req, final String header) {
+    public RqWithHeader(final Request req, final CharSequence header) {
         super(
             new Request() {
                 @Override
@@ -67,7 +67,7 @@ public final class RqWithHeader extends RqWrap {
                     for (final String hdr : req.head()) {
                         head.add(hdr);
                     }
-                    head.add(header);
+                    head.add(header.toString());
                     return head;
                 }
                 @Override

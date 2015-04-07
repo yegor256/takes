@@ -24,6 +24,7 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -55,6 +56,16 @@ public final class XeAppend extends XeWrap {
      * @param src Source
      */
     public XeAppend(final String target, final XeSource... src) {
+        this(target, Arrays.asList(src));
+    }
+
+    /**
+     * Ctor.
+     * @param target Name of XML element
+     * @param src Source
+     * @since 0.13
+     */
+    public XeAppend(final String target, final Iterable<XeSource> src) {
         super(
             new XeSource() {
                 @Override
