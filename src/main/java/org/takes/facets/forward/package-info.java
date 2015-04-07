@@ -34,16 +34,12 @@
  * in your "take":
  *
  * <pre> public class TkSaveFile implements Take {
- *   private final Request request;
- *   public TkSaveFile(final Request req) {
- *     this.request = req;
- *   }
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     final InputStream content =
- *       new RqMultipart(this.request).part("file").body();
+ *       new RqMultipart(req).part("file").body();
  *     // save content to whenever you want
- *     return new RsForward(new RqHref(this.request).href());
+ *     return new RsForward(new RqHref(req).href());
  *   }
  * }</pre>
  *
@@ -56,14 +52,10 @@
  * a response, especially in input checking situations, for example:
  *
  * <pre> public class TkLoadFile implements Take {
- *   private final Request request;
- *   public TkSaveFile(final Request req) {
- *     this.request = req;
- *   }
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     final Iterable&lt;String&gt; param =
- *       new RqHref(this.request).href().param("name");
+ *       new RqHref(req).href().param("name");
  *     if (!param.iterator().hasNext()) {
  *       throw RsForward(
  *         new RsFlash("query param NAME is mandatory"),
@@ -75,12 +67,12 @@
  *   }
  * }</pre>
  *
- * <p>This example will work only if you wrap your entire "takes" into
- * {@link org.takes.facets.forward.TsForward} decorator:
+ * <p>This example will work only if you wrap your entire "take" into
+ * {@link org.takes.facets.forward.TkForward} decorator:
  *
- * <pre>Takes takes = new TsForward(takes);</pre>
+ * <pre>Take take = new TkForward(take);</pre>
  *
- * <p>This {@link org.takes.facets.forward.TsForward} decorator will catch
+ * <p>This {@link org.takes.facets.forward.TkForward} decorator will catch
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
  * convert them to responses.
  *

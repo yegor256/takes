@@ -32,40 +32,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHref;
 import org.takes.tk.TkText;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork by regular expression pattern.
  *
- * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
+ * <p>Use this class in combination with {@link TkFork},
  * for example:
  *
- * <pre> Takes takes = new TsFork(
- *   new FkRegex("/home", new TsHome()),
- *   new FkRegex("/account", new TsAccount())
+ * <pre> Take take = new TkFork(
+ *   new FkRegex("/home", new TkHome()),
+ *   new FkRegex("/account", new TkAccount())
  * );</pre>
  *
  * <p>Each instance of {@link org.takes.facets.fork.FkRegex} is being
- * asked only once by {@link org.takes.facets.fork.TsFork} whether the
+ * asked only once by {@link TkFork} whether the
  * request is good enough to be processed. If the request is suitable
  * for this particular fork, it will return the relevant
  * {@link org.takes.Take}.
  *
  * <p>Also, keep in mind that the second argument of the constructor may
- * be of type {@link org.takes.facets.fork.Target} and accept an
+ * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
  * convenient to reuse regular expression matcher, for example:
  *
- * <pre> Takes takes = new TsFork(
+ * <pre> Take take = new TkFork(
  *   new FkRegex(
  *     "/file(.*)",
  *     new Target&lt;RqRegex&gt;() {
  *       &#64;Override
- *       public Take route(final RqRegex req) {
+ *       public Response act(final RqRegex req) {
  *         // Here we immediately getting access to the
  *         // matcher that was used during parsing of
  *         // the incoming request
@@ -80,11 +79,11 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @see org.takes.facets.fork.TsFork
- * @see org.takes.facets.fork.Target
+ * @see TkFork
+ * @see TkRegex
  */
 @EqualsAndHashCode(of = { "pattern", "target" })
-public final class FkRegex implements Fork.AtTake {
+public final class FkRegex implements Fork {
 
     /**
      * Pattern.
@@ -94,7 +93,7 @@ public final class FkRegex implements Fork.AtTake {
     /**
      * Target.
      */
-    private final transient Target<RqRegex> target;
+    private final transient TkRegex target;
 
     /**
      * Ctor.
@@ -102,39 +101,30 @@ public final class FkRegex implements Fork.AtTake {
      * @param text Text
      */
     public FkRegex(final String ptn, final String text) {
-        this(Pattern.compile(ptn), new TsFixed(new TkText(text)));
+        this(Pattern.compile(ptn), new TkText(text));
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param take Take
+     * @param tks Take
      */
-    public FkRegex(final String ptn, final Take take) {
-        this(ptn, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param ptn Pattern
-     * @param tks Takes
-     */
-    public FkRegex(final String ptn, final Takes tks) {
+    public FkRegex(final String ptn, final Take tks) {
         this(Pattern.compile(ptn), tks);
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tks Takes
+     * @param tks Take
      */
-    public FkRegex(final Pattern ptn, final Takes tks) {
+    public FkRegex(final Pattern ptn, final Take tks) {
         this(
             ptn,
-            new Target<RqRegex>() {
+            new TkRegex() {
                 @Override
-                public Take route(final RqRegex req) throws IOException {
-                    return tks.route(req);
+                public Response act(final RqRegex req) throws IOException {
+                    return tks.act(req);
                 }
             }
         );
@@ -143,31 +133,31 @@ public final class FkRegex implements Fork.AtTake {
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tgt Takes
+     * @param tgt Take
      */
-    public FkRegex(final String ptn, final Target<RqRegex> tgt) {
+    public FkRegex(final String ptn, final TkRegex tgt) {
         this(Pattern.compile(ptn), tgt);
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tgt Takes
+     * @param tgt Take
      */
-    public FkRegex(final Pattern ptn, final Target<RqRegex> tgt) {
+    public FkRegex(final Pattern ptn, final TkRegex tgt) {
         this.pattern = ptn;
         this.target = tgt;
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final Matcher matcher = this.pattern.matcher(
             new RqHref(req).href().path()
         );
-        final Collection<Take> list = new ArrayList<Take>(1);
+        final Collection<Response> list = new ArrayList<Response>(1);
         if (matcher.matches()) {
             list.add(
-                this.target.route(
+                this.target.act(
                     new RqRegex() {
                         @Override
                         public Matcher matcher() {

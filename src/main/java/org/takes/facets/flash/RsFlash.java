@@ -23,7 +23,11 @@
  */
 package org.takes.facets.flash;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
@@ -38,7 +42,7 @@ import org.takes.rs.RsWrap;
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     // save the post to the database
  *     return new RsFlash(
  *       new RsForward(),
@@ -55,7 +59,7 @@ import org.takes.rs.RsWrap;
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act() {
+ *   public Response act(final Request req) {
  *     if (failed) {
  *       throw new RsFlash(
  *         new RsForward(),
@@ -87,16 +91,18 @@ public final class RsFlash extends RsWrap {
     /**
      * Ctor.
      * @param msg Message to show
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg) {
+    public RsFlash(final String msg) throws IOException {
         this(msg, Level.INFO);
     }
 
     /**
      * Ctor.
      * @param err Error
+     * @throws IOException If fails
      */
-    public RsFlash(final Throwable err) {
+    public RsFlash(final Throwable err) throws IOException {
         this(err.getLocalizedMessage(), Level.SEVERE);
     }
 
@@ -104,8 +110,9 @@ public final class RsFlash extends RsWrap {
      * Ctor.
      * @param msg Message
      * @param level Level
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg, final Level level) {
+    public RsFlash(final String msg, final Level level) throws IOException {
         this(msg, level, RsFlash.class.getSimpleName());
     }
 
@@ -114,21 +121,28 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg, final Level level, final String cookie) {
+    public RsFlash(final String msg, final Level level, final String cookie)
+        throws IOException {
         super(
             new RsWithCookie(
-                cookie, msg,
+                cookie,
+                String.format(
+                    "%s/%s",
+                    URLEncoder.encode(msg, Charset.defaultCharset().name()),
+                    level.getName()
+            ),
                 "Path=/",
                 String.format(
+                    Locale.ENGLISH,
                     "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                     new Date(
-                        System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+                        System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
                     )
             )
         )
         );
-        assert level != null;
     }
-
 }

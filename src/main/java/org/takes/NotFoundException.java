@@ -23,10 +23,12 @@
  */
 package org.takes;
 
+import java.io.IOException;
+
 /**
  * Can't find how the resource requested.
  *
- * <p>The exception is throws by {@link Takes#route(org.takes.Request)}
+ * <p>The exception is throws by {@link Take#act(org.takes.Request)}
  * if and when a "take" can't be found.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
@@ -34,7 +36,7 @@ package org.takes;
  * @since 0.1
  * @see org.takes.Take
  */
-public final class NotFoundException extends RuntimeException {
+public final class NotFoundException extends IOException {
 
     /**
      * Serialization marker.

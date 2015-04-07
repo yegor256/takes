@@ -29,6 +29,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Take;
+import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
@@ -47,7 +48,7 @@ public final class TkHTMLTest {
     public void createsTextResponse() throws IOException {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
-            new RsPrint(new TkHTML(body).act()).print(),
+            new RsPrint(new TkHTML(body).act(new RqFake())).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
@@ -68,11 +69,11 @@ public final class TkHTMLTest {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHTML(body);
         MatcherAssert.assertThat(
-            new RsPrint(take.act()).print(),
+            new RsPrint(take.act(new RqFake())).print(),
             Matchers.containsString(body)
         );
         MatcherAssert.assertThat(
-            new RsPrint(take.act()).print(),
+            new RsPrint(take.act(new RqFake())).print(),
             Matchers.containsString(body)
         );
     }

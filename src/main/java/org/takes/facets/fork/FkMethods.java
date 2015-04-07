@@ -31,21 +31,19 @@ import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqMethod;
-import org.takes.tk.TkText;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork by method matching.
  *
- * <p>Use this class in combination with {@link org.takes.facets.fork.TsFork},
+ * <p>Use this class in combination with {@link TkFork},
  * for example:
  *
- * <pre> Takes takes = new TsFork(
- *   new FkMethods("GET", new TsLoad()),
- *   new FkMethods("PUT", new TsSave())
+ * <pre> Take take = new TkFork(
+ *   new FkMethods("GET", new TkLoad()),
+ *   new FkMethods("PUT", new TkSave())
  * );</pre>
  *
  * <p>The class is immutable and thread-safe.
@@ -53,10 +51,10 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  */
-@EqualsAndHashCode(of = { "methods", "target" })
-public final class FkMethods implements Fork.AtTake {
+@EqualsAndHashCode(of = { "methods", "take" })
+public final class FkMethods implements Fork {
 
     /**
      * Methods to match.
@@ -66,68 +64,33 @@ public final class FkMethods implements Fork.AtTake {
     /**
      * Target.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * Ctor.
      * @param mtd Method
-     * @param text Text
+     * @param tke Take
      */
-    public FkMethods(final String mtd, final String text) {
-        this(mtd, new TsFixed(new TkText(text)));
-    }
-
-    /**
-     * Ctor.
-     * @param mtd Method
-     * @param take Take
-     */
-    public FkMethods(final String mtd, final Take take) {
-        this(mtd, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param mtd Method
-     * @param tks Takes
-     */
-    public FkMethods(final String mtd, final Takes tks) {
-        this(
-            mtd,
-            new Target<Request>() {
-                @Override
-                public Take route(final Request req) throws IOException {
-                    return tks.route(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param mtd Method
-     * @param tgt Takes
-     */
-    public FkMethods(final String mtd, final Target<Request> tgt) {
-        this(Arrays.asList(mtd.split(",")), tgt);
+    public FkMethods(final String mtd, final Take tke) {
+        this(Arrays.asList(mtd.split(",")), tke);
     }
 
     /**
      * Ctor.
      * @param mtds Methods
-     * @param tgt Takes
+     * @param tke Take
      */
-    public FkMethods(final Collection<String> mtds, final Target<Request> tgt) {
+    public FkMethods(final Collection<String> mtds, final Take tke) {
         this.methods = Collections.unmodifiableCollection(mtds);
-        this.target = tgt;
+        this.take = tke;
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final String mtd = new RqMethod(req).method();
-        final Collection<Take> list = new ArrayList<Take>(1);
+        final Collection<Response> list = new ArrayList<Response>(1);
         if (this.methods.contains(mtd)) {
-            list.add(this.target.route(req));
+            list.add(this.take.act(req));
         }
         return list.iterator();
     }

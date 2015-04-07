@@ -60,9 +60,10 @@ public final class RqCookies extends RqWrap {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public Iterable<String> cookie(final String key) throws IOException {
+    public Iterable<String> cookie(final CharSequence key) throws IOException {
         final Map<String, String> map = this.map();
-        final String value = map.get(key.toLowerCase(Locale.ENGLISH));
+        final String name = key.toString().toLowerCase(Locale.ENGLISH);
+        final String value = map.get(name);
         final Iterable<String> iter;
         if (value == null) {
             iter = new VerboseIterable<String>(

@@ -43,9 +43,10 @@ import java.io.InputStream;
  * @version $Id$
  * @since 0.1
  * @see org.takes.Response
- * @see org.takes.Takes
+ * @see org.takes.Take
  * @see org.takes.facets.fork.RqRegex
  * @see org.takes.rq.RqHref
+ * @link <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">Composable Decorators vs. Imperative Utility Methods</a>
  */
 public interface Request {
 

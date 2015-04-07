@@ -50,7 +50,7 @@ public final class RsFork extends RsWrap {
      * @param req Request
      * @param list List of forks
      */
-    public RsFork(final Request req, final Fork.AtResponse... list) {
+    public RsFork(final Request req, final Fork... list) {
         this(req, Arrays.asList(list));
     }
 
@@ -59,7 +59,7 @@ public final class RsFork extends RsWrap {
      * @param req Request
      * @param list List of forks
      */
-    public RsFork(final Request req, final Iterable<Fork.AtResponse> list) {
+    public RsFork(final Request req, final Iterable<Fork> list) {
         super(
             new Response() {
                 @Override
@@ -82,8 +82,8 @@ public final class RsFork extends RsWrap {
      * @throws IOException If fails
      */
     private static Response pick(final Request req,
-        final Iterable<Fork.AtResponse> forks) throws IOException {
-        for (final Fork<Response> fork : forks) {
+        final Iterable<Fork> forks) throws IOException {
+        for (final Fork fork : forks) {
             final Iterator<Response> rsps = fork.route(req);
             if (rsps.hasNext()) {
                 return rsps.next();
