@@ -23,58 +23,39 @@
  */
 package org.takes.rs.xe;
 
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import java.util.Arrays;
-import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Xembly source to append something to an existing element.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link XeAppend}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.13
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeAppend extends XeWrap {
+public final class XeAppendTest {
 
     /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param value Value to set
+     * XeAppend can build XML response.
+     * @throws IOException If some problem inside
      */
-    public XeAppend(final String target, final String value) {
-        this(target, new XeDirectives(new Directives().set(value)));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     */
-    public XeAppend(final String target, final XeSource... src) {
-        this(target, Arrays.asList(src));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     * @since 0.13
-     */
-    public XeAppend(final String target, final Iterable<XeSource> src) {
-        super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target).append(
-                        new XeChain(src).toXembly()
-                    );
-                }
-            }
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "test",
+                        new XeDate(),
+                        new XeLocalhost()
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/test[@date and @ip]"
+            )
         );
     }
 
