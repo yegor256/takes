@@ -32,10 +32,9 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
-import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.ts.TsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkHitRefresh}.
@@ -53,11 +52,11 @@ public final class FkHitRefreshTest {
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
-            new RqFake(), "X-Takes-HitRefresh: yes"
+            new RqFake(), "X-Take-HitRefresh: yes"
         );
         final File dir = Files.createTempDir();
         final AtomicBoolean done = new AtomicBoolean(false);
-        final Fork<Take> fork = new FkHitRefresh(
+        final Fork fork = new FkHitRefresh(
             dir,
             new Runnable() {
                 @Override
@@ -65,7 +64,7 @@ public final class FkHitRefreshTest {
                     done.set(true);
                 }
             },
-            new TsEmpty()
+            new TkEmpty()
         );
         TimeUnit.SECONDS.sleep(2L);
         FileUtils.touch(new File(dir, "hey.txt"));
@@ -85,7 +84,7 @@ public final class FkHitRefreshTest {
         final File dir = Files.createTempDir();
         MatcherAssert.assertThat(
             new FkHitRefresh(
-                dir, "", new TsEmpty()
+                dir, "", new TkEmpty()
             ).route(new RqFake()).hasNext(),
             Matchers.is(false)
         );

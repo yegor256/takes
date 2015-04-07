@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqWithHeader;
 
 /**
@@ -41,13 +41,13 @@ import org.takes.rq.RqWithHeader;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "takes", "options" })
+@EqualsAndHashCode(of = { "take", "options" })
 public final class FtCLI implements Front {
 
     /**
-     * Takes.
+     * Take.
      */
-    private final transient Takes takes;
+    private final transient Take take;
 
     /**
      * Command line args.
@@ -56,40 +56,40 @@ public final class FtCLI implements Front {
 
     /**
      * Ctor.
-     * @param tks Takes
+     * @param tks Take
      * @param args Arguments
      */
-    public FtCLI(final Takes tks, final String... args) {
+    public FtCLI(final Take tks, final String... args) {
         this(tks, Arrays.asList(args));
     }
 
     /**
      * Ctor.
-     * @param tks Takes
+     * @param tks Take
      * @param args Arguments
      */
-    public FtCLI(final Takes tks, final Iterable<String> args) {
-        this.takes = tks;
+    public FtCLI(final Take tks, final Iterable<String> args) {
+        this.take = tks;
         this.options = new Options(args);
     }
 
     @Override
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
-        final Takes tks;
+        final Take tks;
         if (this.options.hitRefresh()) {
-            tks = new Takes() {
+            tks = new Take() {
                 @Override
-                public Take route(final Request request) throws IOException {
-                    return FtCLI.this.takes.route(
+                public Response act(final Request request) throws IOException {
+                    return FtCLI.this.take.act(
                         new RqWithHeader(
-                            request, "X-Takes-HitRefresh: yes"
+                            request, "X-Take-HitRefresh: yes"
                         )
                     );
                 }
             };
         } else {
-            tks = this.takes;
+            tks = this.take;
         }
         final Front front = new FtBasic(
             new BkParallel(

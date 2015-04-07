@@ -28,11 +28,11 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
-import org.takes.facets.auth.TsAuth;
+import org.takes.facets.auth.TkAuth;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.ts.TsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAuthenticated}.
@@ -49,16 +49,16 @@ public final class FkAuthenticatedTest {
     @Test
     public void matchesIfAuthenticatedUser() throws IOException {
         MatcherAssert.assertThat(
-            new FkAuthenticated(new TsEmpty()).route(
+            new FkAuthenticated(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).hasNext(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
-            new FkAuthenticated(new TsEmpty()).route(
+            new FkAuthenticated(new TkEmpty()).route(
                 new RqWithHeader(
                     new RqFake("PUT", "/hello"),
-                    TsAuth.class.getSimpleName(),
+                    TkAuth.class.getSimpleName(),
                     new String(
                         new CcPlain().encode(new Identity.Simple("urn:test:1"))
                     )

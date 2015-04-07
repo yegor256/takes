@@ -25,7 +25,7 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.3.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd"
-    name="takes">
+    name="take">
     <skin>
         <groupId>com.jcabi</groupId>
         <artifactId>jcabi-maven-skin</artifactId>
@@ -43,13 +43,13 @@
             <link href="http://www.takes.org/logo.png" rel="shortcut icon"/>
         </head>
         <breadcrumbs>
-            <item name="takes.com" href="http://www.takes.org"/>
+            <item name="take.com" href="http://www.takes.org"/>
         </breadcrumbs>
         <menu name="Overview">
             <item name="Introduction" href="./index.html"/>
             <item name="JavaDoc ${project.version}" href="./apidocs-${project.version}/index.html"/>
             <item name="Test Coverage" href="./cobertura/index.html"/>
-            <item name="Release History" href="https://github.com/yegor256/takes/releases"/>
+            <item name="Release History" href="https://github.com/yegor256/take/releases"/>
         </menu>
         <menu ref="reports"/>
     </body>

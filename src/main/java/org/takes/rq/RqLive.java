@@ -26,9 +26,8 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -41,27 +40,27 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "hde", "content" })
-public final class RqLive implements Request {
-
-    /**
-     * Head.
-     */
-    private final transient List<String> hde;
-
-    /**
-     * Content.
-     */
-    private final transient InputStream content;
+@EqualsAndHashCode(callSuper = true)
+public final class RqLive extends RqWrap {
 
     /**
      * Ctor.
      * @param input Input stream
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public RqLive(final InputStream input) throws IOException {
-        this.hde = new LinkedList<String>();
+        super(RqLive.parse(input));
+    }
+
+    /**
+     * Parse input stream.
+     * @param input Input stream
+     * @return Request
+     * @throws IOException If fails
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private static Request parse(final InputStream input) throws IOException {
+        final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
             final int data = input.read();
@@ -75,23 +74,22 @@ public final class RqLive implements Request {
                 if (baos.size() == 0) {
                     break;
                 }
-                this.hde.add(new String(baos.toByteArray()));
+                head.add(new String(baos.toByteArray()));
                 baos.reset();
             } else {
                 baos.write(data);
             }
         }
-        this.content = input;
-    }
-
-    @Override
-    public Iterable<String> head() {
-        return Collections.unmodifiableList(this.hde);
-    }
-
-    @Override
-    public InputStream body() {
-        return this.content;
+        return new Request() {
+            @Override
+            public Iterable<String> head() {
+                return head;
+            }
+            @Override
+            public InputStream body() {
+                return input;
+            }
+        };
     }
 
 }

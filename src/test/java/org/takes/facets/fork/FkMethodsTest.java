@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
-import org.takes.ts.TsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkMethods}.
@@ -45,7 +45,7 @@ public final class FkMethodsTest {
     @Test
     public void matchesByRegularExpression() throws IOException {
         MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TsEmpty()).route(
+            new FkMethods("PUT,GET", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).hasNext(),
             Matchers.is(true)

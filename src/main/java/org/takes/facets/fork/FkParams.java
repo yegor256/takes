@@ -30,10 +30,9 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
-import org.takes.Takes;
 import org.takes.rq.RqHref;
-import org.takes.ts.TsFixed;
 
 /**
  * Fork by query params and their values, matched by regular express.
@@ -43,10 +42,10 @@ import org.takes.ts.TsFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @see org.takes.facets.fork.TsFork
+ * @see TkFork
  */
-@EqualsAndHashCode(of = { "name", "pattern", "target" })
-public final class FkParams implements Fork.AtTake {
+@EqualsAndHashCode(of = { "name", "pattern", "take" })
+public final class FkParams implements Fork {
 
     /**
      * Param name.
@@ -59,90 +58,40 @@ public final class FkParams implements Fork.AtTake {
     private final transient Pattern pattern;
 
     /**
-     * Target.
+     * Take.
      */
-    private final transient Target<Request> target;
+    private final transient Take take;
 
     /**
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param take Take
+     * @param tke Take
      */
-    public FkParams(final String param, final String ptn, final Take take) {
-        this(param, Pattern.compile(ptn), take);
+    public FkParams(final String param, final String ptn, final Take tke) {
+        this(param, Pattern.compile(ptn), tke);
     }
 
     /**
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param take Take
+     * @param tke Take
      */
-    public FkParams(final String param, final Pattern ptn, final Take take) {
-        this(param, ptn, new TsFixed(take));
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param takes Takes
-     */
-    public FkParams(final String param, final String ptn, final Takes takes) {
-        this(param, Pattern.compile(ptn), takes);
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param takes Takes
-     */
-    public FkParams(final String param, final Pattern ptn, final Takes takes) {
-        this(
-            param, ptn,
-            new Target<Request>() {
-                @Override
-                public Take route(final Request req) throws IOException {
-                    return takes.route(req);
-                }
-            }
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param tgt Takes
-     */
-    public FkParams(final String param, final String ptn,
-        final Target<Request> tgt) {
-        this(param, Pattern.compile(ptn), tgt);
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param tgt Takes
-     */
-    public FkParams(final String param, final Pattern ptn,
-        final Target<Request> tgt) {
+    public FkParams(final String param, final Pattern ptn, final Take tke) {
         this.name = param;
         this.pattern = ptn;
-        this.target = tgt;
+        this.take = tke;
     }
 
     @Override
-    public Iterator<Take> route(final Request req) throws IOException {
+    public Iterator<Response> route(final Request req) throws IOException {
         final Iterator<String> params = new RqHref(req).href()
             .param(this.name).iterator();
-        final Collection<Take> list = new ArrayList<Take>(1);
+        final Collection<Response> list = new ArrayList<Response>(1);
         if (params.hasNext()
             && this.pattern.matcher(params.next()).matches()) {
-            list.add(this.target.route(req));
+            list.add(this.take.act(req));
         }
         return list.iterator();
     }

@@ -24,6 +24,7 @@
 package org.takes.tk;
 
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 
@@ -50,7 +51,7 @@ public final class TkFixed extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() {
+                public Response act(final Request req) {
                     return res;
                 }
             }

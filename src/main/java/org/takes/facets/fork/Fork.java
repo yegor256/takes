@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Take;
 
 /**
  * Fork.
@@ -37,30 +36,15 @@ import org.takes.Take;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
- * @param <T> Type of result
  */
-public interface Fork<T> {
+public interface Fork {
 
     /**
      * Process this request or ignore it.
      * @param req Request
-     * @return Non-empty list of takes if it was processed
+     * @return Non-empty list of take if it was processed
      * @throws IOException If fails
      */
-    Iterator<T> route(Request req) throws IOException;
-
-    /**
-     * On Take.
-     * @since 0.6
-     */
-    interface AtTake extends Fork<Take> {
-    }
-
-    /**
-     * On Response.
-     * @since 0.6
-     */
-    interface AtResponse extends Fork<Response> {
-    }
+    Iterator<Response> route(Request req) throws IOException;
 
 }

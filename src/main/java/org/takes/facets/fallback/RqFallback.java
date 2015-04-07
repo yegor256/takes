@@ -33,7 +33,7 @@ import org.takes.Request;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.facets.fallback.TsFallback
+ * @see org.takes.facets.fallback.TkFallback
  */
 public interface RqFallback extends Request {
 

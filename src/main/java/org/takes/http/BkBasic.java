@@ -34,7 +34,7 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Takes;
+import org.takes.Take;
 import org.takes.rq.RqLive;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -50,20 +50,20 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = "takes")
+@EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
 
     /**
-     * Takes.
+     * Take.
      */
-    private final transient Takes takes;
+    private final transient Take take;
 
     /**
      * Ctor.
-     * @param tks Takes
+     * @param tks Take
      */
-    public BkBasic(final Takes tks) {
-        this.takes = tks;
+    public BkBasic(final Take tks) {
+        this.take = tks;
     }
 
     @Override
@@ -86,9 +86,7 @@ public final class BkBasic implements Back {
     private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
-            new RsPrint(
-                this.takes.route(req).act()
-            ).print(output);
+            new RsPrint(this.take.act(req)).print(output);
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
             new RsPrint(BkBasic.failure(ex)).print(output);

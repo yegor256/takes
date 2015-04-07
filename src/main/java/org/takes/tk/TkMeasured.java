@@ -25,13 +25,14 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsWithHeader;
 
 /**
  * Take that measures response printing time and adds HTTP header
- * "X-Takes-Millis" with the amount of milliseconds.
+ * "X-Take-Millis" with the amount of milliseconds.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -47,7 +48,7 @@ public final class TkMeasured extends TkWrap {
      * @param take Original take
      */
     public TkMeasured(final Take take) {
-        this(take, "X-Takes-Millis");
+        this(take, "X-Take-Millis");
     }
 
     /**
@@ -59,9 +60,9 @@ public final class TkMeasured extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act() throws IOException {
+                public Response act(final Request req) throws IOException {
                     final long start = System.currentTimeMillis();
-                    final Response res = take.act();
+                    final Response res = take.act(req);
                     return new RsWithHeader(
                         res, header,
                         Long.toString(System.currentTimeMillis() - start)

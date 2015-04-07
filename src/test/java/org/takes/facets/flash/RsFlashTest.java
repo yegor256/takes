@@ -24,6 +24,9 @@
 package org.takes.facets.flash;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.util.logging.Level;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -43,12 +46,21 @@ public final class RsFlashTest {
      */
     @Test
     public void addsCookieToResponse() throws IOException {
+        final String msg = "hey, how are you?";
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsFlash("hey, how are you?")
+                new RsFlash(msg)
             ).print(),
-            Matchers.containsString("Set-Cookie: RsFlash=hey, how are you?")
+            Matchers.containsString(
+                String.format(
+                    "Set-Cookie: RsFlash=%s/%s",
+                    URLEncoder.encode(
+                        msg,
+                        Charset.defaultCharset().name()
+                    ),
+                    Level.INFO.getName()
+                )
+            )
         );
     }
-
 }
