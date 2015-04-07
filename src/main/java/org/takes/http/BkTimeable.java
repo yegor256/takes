@@ -28,12 +28,12 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
 /**
- * Back decorator with lifetime.
+ * Back decorator with maximum lifetime.
  * <p>The class is immutable and thread-safe.
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
  */
-@EqualsAndHashCode(of = { "origin", "latency", "start" })
+@EqualsAndHashCode(of = { "origin", "latency" })
 public final class BkTimeable implements Back {
 
     /**
@@ -42,40 +42,39 @@ public final class BkTimeable implements Back {
     private final transient Back origin;
 
     /**
-     * Latency in milliseconds.
+     * Maximum latency in milliseconds.
      */
     private final transient long latency;
 
     /**
-     * Start time of instance creation.
-     */
-    private final transient long start;
-
-    /**
      * Ctor.
      * @param back Original back
-     * @param lat Latency delay
+     * @param ltc Maximum latency
      */
-    public BkTimeable(final Back back, final long lat) {
+    public BkTimeable(final Back back, final long ltc) {
         this.origin = back;
-        this.latency = lat;
-        this.start = System.currentTimeMillis();
+        this.latency = ltc;
     }
 
     @Override
+    @SuppressWarnings("PMD.DoNotUseThreads")
     public void accept(final Socket socket) throws IOException {
-        if (this.latencyExceeded()) {
-            Thread.currentThread().interrupt();
-        } else {
-            this.origin.accept(socket);
-        }
-    }
-
-    /**
-     * Check is latency exceeded.
-     * @return True if exceeded
-     */
-    private boolean latencyExceeded() {
-        return System.currentTimeMillis() - this.start > this.latency;
+        this.origin.accept(socket);
+        final Thread callerThread = Thread.currentThread();
+        final Thread monitor = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(BkTimeable.this.latency);
+                        callerThread.interrupt();
+                    } catch (final InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        );
+        monitor.start();
     }
 }
