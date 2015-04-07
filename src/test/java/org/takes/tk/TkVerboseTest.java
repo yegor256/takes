@@ -49,7 +49,7 @@ public final class TkVerboseTest {
     public void extendsNotFoundException() throws IOException {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) {
+            public Response act(final Request request) throws IOException {
                 throw new NotFoundException("can't find");
             }
         };
