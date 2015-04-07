@@ -1,53 +1,89 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Yegor Bugayenko
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package org.takes.misc;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 /**
- * Test case for {@link VerboseIterator}
- * @author Zarko Celebic
+ * Test case for {@link VerboseIterator}.
+ * @author Zarko Celebic (zarko.celebic@gmail.com)
+ * @version $Id$
  */
-public final class VerboseIteratorTest{
+public final class VerboseIteratorTest {
+
+    // @checkstyle JavadocVariableCheck (6 lines)
+    private static String one = "1";
+    private static String two = "2";
+    private static String three = "3";
+    private static String errormessage = "Error message";
 
     @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
+    // @checkstyle VisibilityModifierCheck (1 line)
+    public ExpectedException expected = ExpectedException.none();
 
+    /**
+     * VerboseIterator can check if there is next element.
+     * @throws Exception If some problem inside
+     */
     @Test
-    public void testHasNext() throws Exception {
-        List<String> testList = Arrays.asList("1", "2", "3", "4", "5");
-        VerboseIterator<String> vi = new VerboseIterator<String>(testList.iterator(), "Error message");
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(true));
-        vi.next();
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(true));
-        vi.next();
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(true));
-        vi.next();
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(true));
-        vi.next();
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(true));
-        vi.next();
-        MatcherAssert.assertThat(vi.hasNext(), Matchers.equalTo(false));
-
+    public void checkIfThereIsNextElement() throws Exception {
+        final List<String> testList = Arrays.asList(one, two, three);
+        final VerboseIterator<String> viter = new VerboseIterator<String>(
+                testList.iterator(), errormessage
+        );
+        MatcherAssert.assertThat(viter.hasNext(), Matchers.equalTo(true));
+        viter.next();
+        MatcherAssert.assertThat(viter.hasNext(), Matchers.equalTo(true));
+        viter.next();
+        MatcherAssert.assertThat(viter.hasNext(), Matchers.equalTo(true));
+        viter.next();
+        MatcherAssert.assertThat(viter.hasNext(), Matchers.equalTo(false));
     }
 
+    /**
+     * VerboseIterable can return next element.
+     * @throws Exception If some problem inside
+     */
     @Test
-    public void testNext() throws Exception {
-        List<String> testList = Arrays.asList("1", "2", "3", "4", "5");
-        VerboseIterator<String> vi = new VerboseIterator<String>(testList.iterator(), "Error message");
-        MatcherAssert.assertThat(vi.next(), Matchers.equalTo("1"));
-        MatcherAssert.assertThat(vi.next(), Matchers.equalTo("2"));
-        MatcherAssert.assertThat(vi.next(), Matchers.equalTo("3"));
-        MatcherAssert.assertThat(vi.next(), Matchers.equalTo("4"));
-        MatcherAssert.assertThat(vi.next(), Matchers.equalTo("5"));
-        expectedEx.expect(NoSuchElementException.class);
-        expectedEx.expectMessage("Error message");
-        vi.next();
+    public void returnNextElement() throws Exception {
+        final List<String> testList = Arrays.asList(one, two, three);
+        final VerboseIterator<String> viter = new VerboseIterator<String>(
+                testList.iterator(), errormessage
+        );
+        MatcherAssert.assertThat(viter.next(), Matchers.equalTo(one));
+        MatcherAssert.assertThat(viter.next(), Matchers.equalTo(two));
+        MatcherAssert.assertThat(viter.next(), Matchers.equalTo(three));
+        this.expected.expect(NoSuchElementException.class);
+        this.expected.expectMessage(errormessage);
+        viter.next();
     }
 }
+
