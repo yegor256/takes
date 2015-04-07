@@ -49,19 +49,18 @@ public final class RqMultipartTest {
      */
     private static final String CR = "\r\n";
     /**
-     * RqMultipart can return true on equals call.
+     * RqMultipart can satisfy equals contract.
      * @throws IOException if some problem inside
      */
     @Test
-    public void returnsTrueOnEqualsCall() throws IOException {
+    public void satisfiesEqualsContract() throws IOException {
         final Request req = create(
             Joiner.on(CR).join(
                 "Content-Disposition: form-data; name=\"addres\"",
                 "",
                 "449 N Wolfe Rd, Sunnyvale, CA 94085"
             ),
-                // @checkstyle LineLength (1 line)
-                "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
+            "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
         );
         MatcherAssert.assertThat(
                 new RqMultipart(req),
@@ -189,10 +188,9 @@ public final class RqMultipartTest {
             Joiner.on(CR).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
-                "443 N Wolfe Rd, Sunnyvale, CA 94085",
-                // @checkstyle LineLength (1 line)
-                "Content-Disposition: form-data; name=\"data\"; filename=\"a.zip\""
-            )
+                "443 N Wolfe Rd, Sunnyvale, CA 94085"
+            ),
+            "Content-Disposition: form-data; name=\"data\"; filename=\"a.zip\""
         );
         final RqMultipart multi = new RqMultipart(req);
         MatcherAssert.assertThat(
