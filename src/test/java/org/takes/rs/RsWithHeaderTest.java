@@ -27,6 +27,7 @@ import com.google.common.base.Joiner;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -68,9 +69,12 @@ public final class RsWithHeaderTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void notAddsInvalidHeadersToResponse() throws IOException {
-        new RsWithHeader(
+        final Iterable<String> head = new RsWithHeader(
             new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
             "Host MY", "d.example.com"
-        );
+        ).head();
+        for (final String header: head) {
+            Assert.assertNotNull(header, "header contains null elements");
+        }
     }
 }

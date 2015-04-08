@@ -106,9 +106,8 @@ public final class RsWithHeader extends RsWrap {
                 public List<String> head()throws IOException {
                     return RsWithHeader.extend(res.head(), header.toString());
                 }
-
                 @Override
-                public InputStream body ()throws IOException {
+                public InputStream body()throws IOException {
                     return res.body();
                 }
             }
@@ -116,12 +115,14 @@ public final class RsWithHeader extends RsWrap {
     }
 
     /**
-     * Add to head additional header
-     * @param head original head
-     * @return header value witch will be added to head
+     * Add to head additional header.
+     * @param head Original head
+     * @param header Value witch will be added to head
+     * @return Head with additional header
      * @throws IOException If fails
      */
-    private static List<String> extend(final Iterable<String> head, final String header) throws IOException {
+    private static List<String> extend(final Iterable<String> head,
+        final String header) throws IOException {
         if (!HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
                 String.format(
