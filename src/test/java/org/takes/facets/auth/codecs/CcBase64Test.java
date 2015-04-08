@@ -92,17 +92,41 @@ public final class CcBase64Test {
         );
     }
     /**
-     * CcBase64 can decode non Base64 alphabet symbols.
+     * CcBase64 can encode empty byte array.
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
+    public void encodesEmptyByteArray() throws IOException {
         MatcherAssert.assertThat(
-            new CcSafe(new CcBase64(new CcPlain())).decode(
-                " ^^^".getBytes()
-            ).urn(),
+            new String(
+                new CcBase64(new CcPlain()).encode(
+                    new Identity.Simple("")
+                )
+            ),
             Matchers.equalTo("")
         );
+    }
+    /**
+     * CcBase64 can decode non Base64 alphabet symbols.
+     * @throws IOException If some problem inside
+     */
+    @Test (expected = DecodingException.class)
+    public void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
+        try {
+            new CcStrict(new CcBase64(new CcPlain())).decode(
+                " ^^^".getBytes()
+            );
+        } catch (final DecodingException ex) {
+            MatcherAssert.assertThat(
+                ex.getMessage(),
+                Matchers.equalTo(
+                    "Illegal character in Base64 encoded data. [32, 94, 94, 94]"
+                )
+            );
+            throw new DecodingException(
+                "Illegal character in Base64 encoded data. %s"
+            );
+        }
     }
     /**
      * Checks CcBase64 equals method.
