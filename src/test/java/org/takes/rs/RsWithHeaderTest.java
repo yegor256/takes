@@ -68,7 +68,7 @@ public final class RsWithHeaderTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void notAddsInvalidHeadersToResponse() throws IOException {
-        final Iterable<String> head = new RsWithHeader(
+        new RsWithHeader(
             new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
             "Host MY", "d.example.com"
         ).head();
