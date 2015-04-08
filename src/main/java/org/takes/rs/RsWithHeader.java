@@ -57,6 +57,12 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithHeader extends RsWrap {
+    /**
+     * Pattern for all other lines in the head.
+     */
+    private static final Pattern HEADER = Pattern.compile(
+        "[a-zA-Z\\-]+:\\p{Print}+"
+    );
 
     /**
      * Ctor.
@@ -95,66 +101,42 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence header) {
         super(
-            new DecoratedResponse(res, header)
-        );
+            new Response() {
+                @Override
+                public List<String> head()throws IOException {
+                    return RsWithHeader.extend(res.head(), header.toString());
+                }
+
+                @Override
+                public InputStream body ()throws IOException {
+                    return res.body();
+                }
+            }
+          );
     }
 
     /**
-     * Response with an additional header
-     *
-     * <p>The class is immutable and thread-safe.
+     * Add to head additional header
+     * @param head original head
+     * @return header value witch will be added to head
+     * @throws IOException If fails
      */
-    private static final class DecoratedResponse implements Response {
-        /**
-         * Pattern for all other lines in the head.
-         */
-        private static final Pattern HEADER = Pattern.compile(
-            "[a-zA-Z\\-]+:\\p{Print}+"
-        );
-
-        /**
-         * Original response.
-         */
-        private final transient Response response;
-
-        /**
-         * Header to add.
-         */
-        private final transient CharSequence header;
-
-        /**
-         * Ctor.
-         * @param res Original response
-         * @param extension Header to add
-         */
-        DecoratedResponse(final Response res, final CharSequence extension) {
-            if (!HEADER.matcher(extension).matches()) {
-                throw new IllegalArgumentException(
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        extension, HEADER
-                    )
-                );
-            }
-            this.response = res;
-            this.header = extension;
+    private static List<String> extend(final Iterable<String> head, final String header) throws IOException {
+        if (!HEADER.matcher(header).matches()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                    header, HEADER
+                )
+            );
         }
-
-        @Override
-        public List<String> head() throws IOException {
-            final List<String> head = new LinkedList<String>();
-            for (final String hdr : this.response.head()) {
-                head.add(hdr);
-            }
-            head.add(this.header.toString());
-            return head;
+        final List<String> headers = new LinkedList<String>();
+        for (final String hdr : head) {
+            headers.add(hdr);
         }
-
-        @Override
-        public InputStream body() throws IOException {
-            return this.response.body();
-        }
+        headers.add(header);
+        return headers;
     }
 
 }
