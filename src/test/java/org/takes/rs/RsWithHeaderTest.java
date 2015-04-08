@@ -73,8 +73,5 @@ public final class RsWithHeaderTest {
             new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
             "Host MY", "d.example.com"
         ).head();
-        for (final String header: head) {
-            Assert.assertNotNull(header, "header contains null elements");
-        }
-    }
+     }
 }
