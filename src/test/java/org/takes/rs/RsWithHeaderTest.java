@@ -27,7 +27,6 @@ import com.google.common.base.Joiner;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -73,5 +72,5 @@ public final class RsWithHeaderTest {
             new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
             "Host MY", "d.example.com"
         ).head();
-     }
+    }
 }
