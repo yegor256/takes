@@ -67,8 +67,7 @@ public final class CcStrict implements Codec {
         if (identity.urn().isEmpty()) {
             throw new DecodingException("urn is empty");
         }
-        // @checkstyle LineLength (1 line)
-        if (!identity.urn().matches("^(?i)^urn(?-i):[a-z]{1,31}(:([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)+(\\?\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?(&\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?)*)?\\*?$")) {
+        if (!identity.urn().matches("urn:[a-z]+:.+")) {
             throw new DecodingException("urn isn't valid");
         }
         return identity;
