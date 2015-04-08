@@ -25,6 +25,9 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -35,6 +38,11 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(of = { "origin", "latency" })
 public final class BkTimeable implements Back {
+
+    /**
+     * Timed monitor.
+     */
+    private final transient ScheduledExecutorService executor;
 
     /**
      * Origin back.
@@ -54,6 +62,7 @@ public final class BkTimeable implements Back {
     public BkTimeable(final Back back, final long ltc) {
         this.origin = back;
         this.latency = ltc;
+        this.executor = Executors.newSingleThreadScheduledExecutor();
     }
 
     @Override
@@ -61,20 +70,13 @@ public final class BkTimeable implements Back {
     public void accept(final Socket socket) throws IOException {
         this.origin.accept(socket);
         final Thread callerThread = Thread.currentThread();
-        final Thread monitor = new Thread(
+        this.executor.schedule(
             new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        Thread.sleep(BkTimeable.this.latency);
-                        callerThread.interrupt();
-                    } catch (final InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                        throw new IllegalStateException(ex);
-                    }
+                    callerThread.interrupt();
                 }
-            }
+            }, this.latency, TimeUnit.MILLISECONDS
         );
-        monitor.start();
     }
 }
