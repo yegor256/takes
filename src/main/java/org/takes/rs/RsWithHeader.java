@@ -103,11 +103,11 @@ public final class RsWithHeader extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head()throws IOException {
+                public List<String> head() throws IOException {
                     return RsWithHeader.extend(res.head(), header.toString());
                 }
                 @Override
-                public InputStream body()throws IOException {
+                public InputStream body() throws IOException {
                     return res.body();
                 }
             }
