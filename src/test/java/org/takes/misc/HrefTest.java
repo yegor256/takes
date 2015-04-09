@@ -81,4 +81,17 @@ public final class HrefTest {
             Matchers.equalTo("http://example.com/e/f")
         );
     }
+
+    /**
+     * Href can accept encoded query part.
+     * @throws IOException If some problem inside.
+     */
+    @Test
+    public void acceptsEncodedQuery() throws IOException {
+        final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
+        MatcherAssert.assertThat(
+            new Href(url).toString(),
+            Matchers.equalTo(url)
+        );
+    }
 }
