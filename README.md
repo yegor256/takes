@@ -456,12 +456,18 @@ public final class App {
           new FkRegex("/robots\\.txt", ""),
           new FkRegex("/", new TkIndex())
         ),
-        new Fallback() {
-          @Override
-          public Response act(final RqFallback req) throws IOException {
-            return new RsHTML("oops, something went wrong!");
+        new FbChain(
+          new FbStatus(404, new RsText("sorry, page is absent")),
+          new FbStatus(405, new RsText("this method is not allowed here")),
+          new Fallback() {
+            @Override
+            public Iterator<Response> route(final RqFallback req) {
+              return Collections.<Response>singleton(
+                new RsHTML("oops, something went terribly wrong!")
+              ).iterator();
+            }
           }
-        }
+        )
       ),
       8080
     ).start(Exit.NEVER);
@@ -470,7 +476,8 @@ public final class App {
 ```
 
 `TkFallback` decorates an instance of Take and catches all exceptions any of
-its take may throw. Once it's thrown, an instance of TkHTML will be returned.
+its take may throw. Once it's thrown, an instance of `FbChain` will
+find the most suitable fallback and will fetch a response from there.
 
 ## Redirects
 
