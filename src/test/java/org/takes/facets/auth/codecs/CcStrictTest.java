@@ -70,9 +70,9 @@ public final class CcStrictTest {
         MatcherAssert.assertThat(
             new String(
                 new CcStrict(new CcPlain()).encode(
-                    new Identity.Simple("urn:test:1:1")
+                    new Identity.Simple("urn:test-domain-org:valid:1")
                 )
-            ), Matchers.equalTo("urn%3Atest%3A1%3A1")
+            ), Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
         );
     }
 }
