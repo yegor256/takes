@@ -24,23 +24,20 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-
 import lombok.EqualsAndHashCode;
-
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.facets.fork.RsFork;
 import org.takes.tk.TkWrap;
 
 /**
- * Take that compresses responses with GZIP.
+ * Take that acts on request with specified "Accept" HTTP headers only.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.10
+ * @since 0.32.1
  */
 @EqualsAndHashCode(callSuper = true)
 public final class TkProduces extends TkWrap {
@@ -48,18 +45,16 @@ public final class TkProduces extends TkWrap {
     /**
      * Ctor.
      * @param take Original take
-     * @param request Request
      * @param types Accept types
      */
-    public TkProduces(final Take take, final Request request, final String types) {
+    public TkProduces(final Take take, final String types) {
         super(
             new Take() {
                 @Override
-                public Response act() throws IOException {
-                    final Response response = take.act();
+                public Response act(final Request req) throws IOException {
                     return new RsFork(
-                        request,
-                        new FkTypes(types, response)
+                        req,
+                        new FkTypes(types, take.act(req))
                     );
                 }
             }
