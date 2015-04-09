@@ -72,7 +72,7 @@
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/misc/Href.html">Href</a>(<strong class="jxr_keyword">final</strong> String txt) {
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          <strong class="jxr_keyword">this</strong>.params = <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, List&lt;String&gt;&gt;(0);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>          <strong class="jxr_keyword">final</strong> URI link = URI.create(txt);
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">final</strong> String query = link.getQuery();
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">final</strong> String query = link.getRawQuery();
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>          <strong class="jxr_keyword">if</strong> (query == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>              <strong class="jxr_keyword">this</strong>.uri = link;
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          } <strong class="jxr_keyword">else</strong> {
