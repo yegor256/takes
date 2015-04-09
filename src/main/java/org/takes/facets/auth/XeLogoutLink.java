@@ -64,7 +64,7 @@ public final class XeLogoutLink extends XeWrap {
         super(
             new XeLink(
                 rel,
-                new RqHref(req).href().with(
+                new RqHref.Base(req).href().with(
                     flag, PsLogout.class.getSimpleName()
                 ).toString()
         )

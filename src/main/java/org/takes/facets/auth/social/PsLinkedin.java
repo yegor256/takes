@@ -75,7 +75,7 @@ public final class PsLinkedin implements Pass {
     @Override
     public Iterator<Identity> enter(final Request request)
         throws IOException {
-        final Href href = new RqHref(request).href();
+        final Href href = new RqHref.Base(request).href();
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {

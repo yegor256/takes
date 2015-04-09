@@ -86,7 +86,7 @@ public final class FkParams implements Fork {
 
     @Override
     public Iterator<Response> route(final Request req) throws IOException {
-        final Iterator<String> params = new RqHref(req).href()
+        final Iterator<String> params = new RqHref.Base(req).href()
             .param(this.name).iterator();
         final Collection<Response> list = new ArrayList<Response>(1);
         if (params.hasNext()
