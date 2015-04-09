@@ -75,7 +75,7 @@ public final class BkTimeableTest {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        final long errorBound = 10;
+        final long errorBound = 40;
         MatcherAssert.assertThat(
             "Thread run over allowed time limit.",
             realTime.get() <= allowedTime + errorBound
