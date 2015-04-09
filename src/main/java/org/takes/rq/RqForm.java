@@ -100,9 +100,9 @@ public final class RqForm extends RqWrap {
      * @param key Parameter name
      * @return List of values (can be empty)
      */
-    public Iterable<String> param(final String key) {
+    public Iterable<String> param(final CharSequence key) {
         final List<String> values =
-            this.map.get(key.toLowerCase(Locale.ENGLISH));
+            this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
         final Iterable<String> iter;
         if (values == null) {
             iter = new VerboseIterable<String>(
@@ -137,10 +137,10 @@ public final class RqForm extends RqWrap {
      * @param txt Text
      * @return Decoded
      */
-    private static String decode(final String txt) {
+    private static String decode(final CharSequence txt) {
         try {
             return URLDecoder.decode(
-                txt, Charset.defaultCharset().name()
+                txt.toString(), Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(ex);

@@ -58,7 +58,7 @@ public final class RqAuth implements Request {
      * @param request Original
      */
     public RqAuth(final Request request) {
-        this(request, TsAuth.class.getSimpleName());
+        this(request, TkAuth.class.getSimpleName());
     }
 
     /**

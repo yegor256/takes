@@ -35,12 +35,12 @@
     <artifactId>takes</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>takes</name>
+    <name>take</name>
     <description>Immutable Java Web Framework</description>
     <url>https://github.com/yegor256/takes</url>
     <inceptionYear>2015</inceptionYear>
     <organization>
-        <name>Takes</name>
+        <name>Take</name>
         <url>https://github.com/yegor256/takes</url>
     </organization>
     <licenses>
@@ -138,11 +138,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>

@@ -23,7 +23,11 @@
  */
 package org.takes.facets.flash;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
@@ -32,6 +36,48 @@ import org.takes.rs.RsWrap;
 
 /**
  * Forwarding response.
+ *
+ * <p>This class helps you to automate flash message mechanism, by
+ * adding flash messages to your responses, for example:
+ *
+ * <pre>public final class TkDiscussion implements Take {
+ *   &#64;Override
+ *   public Response act(final Request req) {
+ *     // save the post to the database
+ *     return new RsFlash(
+ *       new RsForward(),
+ *       "thanks for the post"
+ *     );
+ *   }
+ * }</pre>
+ *
+ * <p>This decorator will add the
+ * required "Set-Cookie" header to the response. This is all it is doing.
+ * The response is added to the cookie in URL-encoded format, together
+ * with the logging level. Flash messages could be of different severity,
+ * we're using Java logging levels for that, for example:
+ *
+ * <pre>public final class TkDiscussion implements Take {
+ *   &#64;Override
+ *   public Response act(final Request req) {
+ *     if (failed) {
+ *       throw new RsFlash(
+ *         new RsForward(),
+ *         "can't save your post, sorry",
+ *         java.util.logging.Level.SEVERE
+ *       );
+ *     }
+ *   }
+ * }</pre>
+ *
+ * <p>This is how the HTTP response will look like (simplified):
+ *
+ * <pre> HTTP/1.1 303 See Other
+ * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
+ *
+ * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
+ * default name using a constructor of {@link org.takes.facets.flash.RsFlash},
+ * but it's not recommended. It's better to use the default name.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -45,16 +91,18 @@ public final class RsFlash extends RsWrap {
     /**
      * Ctor.
      * @param msg Message to show
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg) {
+    public RsFlash(final String msg) throws IOException {
         this(msg, Level.INFO);
     }
 
     /**
      * Ctor.
      * @param err Error
+     * @throws IOException If fails
      */
-    public RsFlash(final Throwable err) {
+    public RsFlash(final Throwable err) throws IOException {
         this(err.getLocalizedMessage(), Level.SEVERE);
     }
 
@@ -62,8 +110,9 @@ public final class RsFlash extends RsWrap {
      * Ctor.
      * @param msg Message
      * @param level Level
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg, final Level level) {
+    public RsFlash(final String msg, final Level level) throws IOException {
         this(msg, level, RsFlash.class.getSimpleName());
     }
 
@@ -72,21 +121,28 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
+     * @throws IOException If fails
      */
-    public RsFlash(final String msg, final Level level, final String cookie) {
+    public RsFlash(final String msg, final Level level, final String cookie)
+        throws IOException {
         super(
             new RsWithCookie(
-                cookie, msg,
+                cookie,
+                String.format(
+                    "%s/%s",
+                    URLEncoder.encode(msg, Charset.defaultCharset().name()),
+                    level.getName()
+            ),
                 "Path=/",
                 String.format(
+                    Locale.ENGLISH,
                     "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
                     new Date(
-                        System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+                        System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
                     )
             )
         )
         );
-        assert level != null;
     }
-
 }

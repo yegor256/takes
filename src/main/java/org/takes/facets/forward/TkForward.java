@@ -25,6 +25,7 @@ package org.takes.facets.forward;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 
@@ -36,13 +37,13 @@ import org.takes.Take;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @see org.takes.facets.forward.TsForward
+ * @see org.takes.facets.forward.TkForward
  */
 @EqualsAndHashCode(of = "origin")
 public final class TkForward implements Take {
 
     /**
-     * Original takes.
+     * Original take.
      */
     private final transient Take origin;
 
@@ -55,10 +56,10 @@ public final class TkForward implements Take {
     }
 
     @Override
-    public Response act() throws IOException {
+    public Response act(final Request req) throws IOException {
         Response res;
         try {
-            res = this.origin.act();
+            res = this.origin.act(req);
         } catch (final RsForward ex) {
             res = ex;
         }

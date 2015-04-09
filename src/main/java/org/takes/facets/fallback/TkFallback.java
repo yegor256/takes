@@ -39,7 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "fallback", "request" })
+@EqualsAndHashCode(of = { "origin", "fallback" })
 public final class TkFallback implements Take {
 
     /**
@@ -48,37 +48,29 @@ public final class TkFallback implements Take {
     private final transient Take origin;
 
     /**
-     * Fallback takes.
+     * Fallback take.
      */
     private final transient Fallback fallback;
-
-    /**
-     * Original request.
-     */
-    private final transient Request request;
 
     /**
      * Ctor.
      * @param org Original
      * @param fbk Fallback
-     * @param req Request
      */
-    public TkFallback(final Take org, final Fallback fbk,
-        final Request req) {
+    public TkFallback(final Take org, final Fallback fbk) {
         this.origin = org;
         this.fallback = fbk;
-        this.request = req;
     }
 
     @Override
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public Response act() throws IOException {
+    public Response act(final Request req) throws IOException {
         Response res;
         try {
-            res = this.origin.act();
+            res = this.origin.act(req);
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            res = this.fallback.take(this.req(ex)).act();
+            res = this.fallback.act(TkFallback.req(ex, req));
         }
         return res;
     }
@@ -86,9 +78,10 @@ public final class TkFallback implements Take {
     /**
      * Make a request from original one and throwable.
      * @param err Error
+     * @param req Request
      * @return Request
      */
-    private RqFallback req(final Throwable err) {
+    private static RqFallback req(final Throwable err, final Request req) {
         return new RqFallback() {
             @Override
             public Throwable throwable() {
@@ -96,11 +89,11 @@ public final class TkFallback implements Take {
             }
             @Override
             public Iterable<String> head() throws IOException {
-                return TkFallback.this.request.head();
+                return req.head();
             }
             @Override
             public InputStream body() throws IOException {
-                return TkFallback.this.request.body();
+                return req.body();
             }
         };
     }

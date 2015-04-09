@@ -43,7 +43,7 @@ import org.takes.rq.RqHeaders;
  * @see org.takes.facets.fork.RsFork
  */
 @EqualsAndHashCode(of = { "types", "origin" })
-public final class FkTypes implements Fork.AtResponse {
+public final class FkTypes implements Fork {
 
     /**
      * Types we can deliver.
