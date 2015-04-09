@@ -24,11 +24,13 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
  * Fallback.
@@ -39,62 +41,50 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "fallback" })
-public final class TkFallback implements Take {
-
-    /**
-     * Original take.
-     */
-    private final transient Take origin;
-
-    /**
-     * Fallback take.
-     */
-    private final transient Fallback fallback;
+@EqualsAndHashCode(callSuper = true)
+public final class TkFallback extends TkWrap {
 
     /**
      * Ctor.
-     * @param org Original
+     * @param take Original take
      * @param fbk Fallback
      */
-    public TkFallback(final Take org, final Fallback fbk) {
-        this.origin = org;
-        this.fallback = fbk;
+    public TkFallback(final Take take, final Fallback fbk) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request req) throws IOException {
+                    return TkFallback.route(take, fbk, req);
+                }
+            }
+        );
     }
 
-    @Override
+    /**
+     * Route this request.
+     * @param take The take
+     * @param fbk Fallback
+     * @param req Request
+     * @return Response
+     * @throws IOException If fails
+     */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public Response act(final Request req) throws IOException {
+    private static Response route(final Take take, final Fallback fbk,
+        final Request req) throws IOException {
         Response res;
         try {
-            res = this.origin.act(req);
+            res = take.act(req);
+        } catch (final HttpException ex) {
+            res = fbk.route(new RqFallback.Fake(req, ex.code(), ex)).next();
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            res = this.fallback.act(TkFallback.req(ex, req));
+            res = fbk.route(
+                new RqFallback.Fake(
+                    req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                )
+            ).next();
         }
         return res;
     }
 
-    /**
-     * Make a request from original one and throwable.
-     * @param err Error
-     * @param req Request
-     * @return Request
-     */
-    private static RqFallback req(final Throwable err, final Request req) {
-        return new RqFallback() {
-            @Override
-            public Throwable throwable() {
-                return err;
-            }
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-            @Override
-            public InputStream body() throws IOException {
-                return req.body();
-            }
-        };
-    }
 }

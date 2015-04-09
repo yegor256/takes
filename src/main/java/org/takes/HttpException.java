@@ -21,56 +21,76 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TkFiles}.
+ * HTTP-aware exception.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
-public final class TkFilesTest {
+public final class HttpException extends IOException {
 
     /**
-     * TkFiles can dispatch by file name.
-     * @throws IOException If some problem inside
+     * Serialization marker.
      */
-    @Test
-    public void dispatchesByFileName() throws IOException {
-        final File dir = Files.createTempDir();
-        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TkFiles(dir).act(
-                    new RqFake(
-                        "GET", "/a.txt?hash=a1b2c3", ""
-                    )
-                )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
-        );
+    private static final long serialVersionUID = -505306086879848229L;
+
+    /**
+     * Status code.
+     */
+    private final transient int status;
+
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     */
+    public HttpException(final int code) {
+        super();
+        this.status = code;
     }
 
     /**
-     * TkFiles can throw when file not found.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param code HTTP status code
+     * @param cause Cause of the problem
      */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
-        new TkFiles("/absent-dir-for-sure").act(
-            new RqFake("PUT", "/something-else.txt", "")
-        );
+    public HttpException(final int code, final String cause) {
+        super(cause);
+        this.status = code;
+    }
+
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     * @param cause Cause of the problem
+     */
+    public HttpException(final int code, final Throwable cause) {
+        super(cause);
+        this.status = code;
+    }
+
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     * @param msg Exception message
+     * @param cause Cause of the problem
+     */
+    public HttpException(final int code, final String msg,
+        final Throwable cause) {
+        super(msg, cause);
+        this.status = code;
+    }
+
+    /**
+     * HTTP status code.
+     * @return Code
+     */
+    public int code() {
+        return this.status;
     }
 
 }

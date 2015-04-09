@@ -21,76 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.facets.fallback;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
-import org.takes.Request;
 import org.takes.Response;
-import org.takes.rs.RsWrap;
 
 /**
- * Response based on forks.
+ * Empty fallback.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.6
+ * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RsFork extends RsWrap {
+public final class FbEmpty extends FbWrap {
 
     /**
      * Ctor.
-     * @param req Request
-     * @param list List of forks
      */
-    public RsFork(final Request req, final Fork... list) {
-        this(req, Arrays.asList(list));
-    }
-
-    /**
-     * Ctor.
-     * @param req Request
-     * @param list List of forks
-     */
-    public RsFork(final Request req, final Iterable<Fork> list) {
+    public FbEmpty() {
         super(
-            new Response() {
+            new Fallback() {
                 @Override
-                public Iterable<String> head() throws IOException {
-                    return RsFork.pick(req, list).head();
-                }
-                @Override
-                public InputStream body() throws IOException {
-                    return RsFork.pick(req, list).body();
+                public Iterator<Response> route(final RqFallback req) {
+                    return Collections.<Response>emptyList().iterator();
                 }
             }
         );
-    }
-
-    /**
-     * Pick the right one.
-     * @param req Request
-     * @param forks List of forks
-     * @return Response
-     * @throws IOException If fails
-     */
-    private static Response pick(final Request req,
-        final Iterable<Fork> forks) throws IOException {
-        for (final Fork fork : forks) {
-            final Iterator<Response> rsps = fork.route(req);
-            if (rsps.hasNext()) {
-                return rsps.next();
-            }
-        }
-        throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
 
 }

@@ -21,56 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.fallback;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
- * Test case for {@link TkFiles}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link FbChain}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
-public final class TkFilesTest {
+public final class FbChainTest {
 
     /**
-     * TkFiles can dispatch by file name.
+     * FbChain can chain fallbacks.
      * @throws IOException If some problem inside
      */
     @Test
-    public void dispatchesByFileName() throws IOException {
-        final File dir = Files.createTempDir();
-        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
+    public void chainsFallbacks() throws IOException {
+        final RqFallback req = new RqFallback.Fake(
+            HttpURLConnection.HTTP_NOT_FOUND
+        );
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkFiles(dir).act(
-                    new RqFake(
-                        "GET", "/a.txt?hash=a1b2c3", ""
-                    )
-                )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
+                new FbChain(
+                    new FbEmpty(),
+                    new FbFixed(new RsText("first rs")),
+                    new FbFixed(new RsText("second rs"))
+                ).route(req).next()
+            ).printBody(),
+            Matchers.startsWith("first")
         );
     }
-
-    /**
-     * TkFiles can throw when file not found.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
-        new TkFiles("/absent-dir-for-sure").act(
-            new RqFake("PUT", "/something-else.txt", "")
-        );
-    }
-
 }

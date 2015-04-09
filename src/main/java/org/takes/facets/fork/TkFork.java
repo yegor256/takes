@@ -24,12 +24,13 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -100,7 +101,7 @@ public final class TkFork implements Take {
                 return response.next();
             }
         }
-        throw new NotFoundException();
+        throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
 
 }

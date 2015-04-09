@@ -21,55 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.fallback;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Test case for {@link TkFiles}.
+ * Fallback chain.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
-public final class TkFilesTest {
+@EqualsAndHashCode(callSuper = true)
+public final class FbChain extends FbWrap {
 
     /**
-     * TkFiles can dispatch by file name.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param fallbacks Fallbacks to chain
      */
-    @Test
-    public void dispatchesByFileName() throws IOException {
-        final File dir = Files.createTempDir();
-        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TkFiles(dir).act(
-                    new RqFake(
-                        "GET", "/a.txt?hash=a1b2c3", ""
-                    )
-                )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
-        );
+    public FbChain(final Fallback... fallbacks) {
+        this(Arrays.asList(fallbacks));
     }
 
     /**
-     * TkFiles can throw when file not found.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param fallbacks Fallbacks
      */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
-        new TkFiles("/absent-dir-for-sure").act(
-            new RqFake("PUT", "/something-else.txt", "")
+    public FbChain(final Iterable<Fallback> fallbacks) {
+        super(
+            new Fallback() {
+                @Override
+                public Iterator<Response> route(final RqFallback req)
+                    throws IOException {
+                    final Collection<Response> rsp = new ArrayList<Response>(1);
+                    for (final Fallback fbk : fallbacks) {
+                        final Iterator<Response> iter = fbk.route(req);
+                        if (iter.hasNext()) {
+                            rsp.add(iter.next());
+                            break;
+                        }
+                    }
+                    return rsp.iterator();
+                }
+            }
         );
     }
 

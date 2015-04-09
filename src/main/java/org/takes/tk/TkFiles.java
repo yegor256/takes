@@ -26,8 +26,9 @@ package org.takes.tk;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -48,7 +49,7 @@ import org.takes.rs.RsWithBody;
  * {@code "/css/style.css?eot"}. {@link TkFiles}
  * will try to find a resource {@code "/tmp/css/style.css"} on disc.
  *
- * <p>If such a resource is not found, {@link org.takes.NotFoundException}
+ * <p>If such a resource is not found, {@link org.takes.HttpException}
  * will be thrown.
  *
  * <p>The class is immutable and thread-safe.
@@ -81,7 +82,8 @@ public final class TkFiles extends TkWrap {
                         base, new RqHref(request).href().path()
                     );
                     if (!file.exists()) {
-                        throw new NotFoundException(
+                        throw new HttpException(
+                            HttpURLConnection.HTTP_NOT_FOUND,
                             String.format(
                                 "%s not found", file.getAbsolutePath()
                             )
