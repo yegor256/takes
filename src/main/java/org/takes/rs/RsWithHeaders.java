@@ -48,7 +48,7 @@ public final class RsWithHeaders extends RsWrap {
      * @param res Original response
      * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final String... headers) {
+    public RsWithHeaders(final Response res, final CharSequence... headers) {
         this(res, Arrays.asList(headers));
     }
 
@@ -57,7 +57,8 @@ public final class RsWithHeaders extends RsWrap {
      * @param res Original response
      * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final Iterable<String> headers) {
+    public RsWithHeaders(final Response res,
+        final Iterable<? extends CharSequence> headers) {
         super(
             new Response() {
                 @Override
@@ -66,8 +67,8 @@ public final class RsWithHeaders extends RsWrap {
                     for (final String hdr : res.head()) {
                         head.add(hdr);
                     }
-                    for (final String header : headers) {
-                        head.add(header.trim());
+                    for (final CharSequence header : headers) {
+                        head.add(header.toString().trim());
                     }
                     return head;
                 }
