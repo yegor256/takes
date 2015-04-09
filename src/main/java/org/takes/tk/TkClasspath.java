@@ -25,8 +25,9 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -47,7 +48,7 @@ import org.takes.rs.RsWithBody;
  * {@code "/css/style.css?eot"}. {@link TkClasspath}
  * will try to find a resource {@code "/my/css/style.css"} in classpath.
  *
- * <p>If such a resource is not found, {@link org.takes.NotFoundException}
+ * <p>If such a resource is not found, {@link org.takes.HttpException}
  * will be thrown.
  *
  * <p>The class is immutable and thread-safe.
@@ -88,12 +89,13 @@ public final class TkClasspath extends TkWrap {
                 @Override
                 public Response act(final Request request) throws IOException {
                     final String name = String.format(
-                        "%s%s", prefix, new RqHref(request).href().path()
+                        "%s%s", prefix, new RqHref.Base(request).href().path()
                     );
                     final InputStream input = this.getClass()
                         .getResourceAsStream(name);
                     if (input == null) {
-                        throw new NotFoundException(
+                        throw new HttpException(
+                            HttpURLConnection.HTTP_NOT_FOUND,
                             String.format("%s not found in classpath", name)
                         );
                     }

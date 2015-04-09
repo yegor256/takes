@@ -25,10 +25,11 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.rs.RsWrap;
@@ -89,7 +90,7 @@ public final class RsFork extends RsWrap {
                 return rsps.next();
             }
         }
-        throw new NotFoundException("nothing found");
+        throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
 
 }

@@ -73,7 +73,7 @@ public final class XeGithubLink extends XeWrap {
                     .with("client_id", app)
                     .with(
                         "redirect_uri",
-                        new RqHref(req).href()
+                        new RqHref.Base(req).href()
                             .with(flag, PsGithub.class.getSimpleName())
                             .toString()
                     )

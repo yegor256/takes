@@ -24,6 +24,8 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Iterator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -53,10 +55,10 @@ public final class TkFallbackTest {
                     new TkFailure(err),
                     new Fallback() {
                         @Override
-                        public Response act(final RqFallback req) {
-                            return new RsText(
-                                req.throwable().getMessage()
-                            );
+                        public Iterator<Response> route(final RqFallback req) {
+                            return Collections.<Response>singleton(
+                                new RsText(req.throwable().getMessage())
+                            ).iterator();
                         }
                     }
                 ).act(new RqFake("GET"))

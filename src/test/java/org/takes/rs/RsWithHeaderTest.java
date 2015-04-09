@@ -62,4 +62,15 @@ public final class RsWithHeaderTest {
         );
     }
 
+    /**
+     * RsWithHeader can't add invalid headers.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void notAddsInvalidHeadersToResponse() throws IOException {
+        new RsWithHeader(
+            new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
+            "Host MY", "d.example.com"
+        ).head();
+    }
 }
