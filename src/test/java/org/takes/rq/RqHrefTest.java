@@ -44,7 +44,7 @@ public final class RqHrefTest {
     @Test
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref(
+            new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -65,7 +65,7 @@ public final class RqHrefTest {
     @Test
     public void extractsParams() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref(
+            new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?a=3&b=7&c&d=9%28x%29&ff",
@@ -86,7 +86,7 @@ public final class RqHrefTest {
     @Test
     public void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref(
+            new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?since=343",
@@ -98,5 +98,4 @@ public final class RqHrefTest {
             Matchers.hasItem("343")
         );
     }
-
 }

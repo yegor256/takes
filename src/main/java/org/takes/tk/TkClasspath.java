@@ -89,7 +89,7 @@ public final class TkClasspath extends TkWrap {
                 @Override
                 public Response act(final Request request) throws IOException {
                     final String name = String.format(
-                        "%s%s", prefix, new RqHref(request).href().path()
+                        "%s%s", prefix, new RqHref.Base(request).href().path()
                     );
                     final InputStream input = this.getClass()
                         .getResourceAsStream(name);

@@ -61,7 +61,7 @@ public final class TkVerbose extends TkWrap {
                             String.format(
                                 "%s %s",
                                 new RqMethod(request).method(),
-                                new RqHref(request).href()
+                                new RqHref.Base(request).href()
                             ),
                             ex
                         );

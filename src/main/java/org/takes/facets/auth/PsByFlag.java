@@ -98,7 +98,7 @@ public final class PsByFlag implements Pass {
 
     @Override
     public Iterator<Identity> enter(final Request req) throws IOException {
-        final Iterator<String> flg = new RqHref(req).href()
+        final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (flg.hasNext()) {

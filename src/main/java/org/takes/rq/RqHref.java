@@ -24,50 +24,78 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.misc.Href;
 
 /**
- * Request decorator, for HTTP URI query parsing.
+ * HTTP URI query parsing.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqHref extends RqWrap {
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqHref(final Request req) {
-        super(req);
-    }
-
+public interface RqHref extends Request {
     /**
      * Get HREF.
      * @return HTTP href
      * @throws IOException If fails
      */
-    public Href href() throws IOException {
-        final Iterator<String> host = new RqHeaders(this)
-            .header("Host").iterator();
-        if (!host.hasNext()) {
-            throw new IOException("Host header is absent");
-        }
-        return new Href(
-            String.format(
-                "http://%s%s",
-                host.next(),
-                // @checkstyle MagicNumber (1 line)
-                this.head().iterator().next().split(" ", 3)[1]
-            )
-        );
-    }
+    Href href() throws IOException;
 
+    /**
+     * Request decorator, for HTTP URI query parsing.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @version $Id$
+     * @since 0.13.1
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Base implements RqHref {
+        /**
+         * Original request.
+         */
+        private final transient Request origin;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Base(final Request req) {
+            this.origin = req;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+
+        @Override
+        public Href href() throws IOException {
+            final Iterator<String> host = new RqHeaders(this)
+                .header("Host").iterator();
+            if (!host.hasNext()) {
+                throw new IOException("Host header is absent");
+            }
+            return new Href(
+                String.format(
+                    "http://%s%s",
+                    host.next(),
+                    // @checkstyle MagicNumber (1 line)
+                    this.head().iterator().next().split(" ", 3)[1]
+                )
+            );
+        }
+    }
 }
+
