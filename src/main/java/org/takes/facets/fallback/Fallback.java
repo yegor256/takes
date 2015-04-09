@@ -24,10 +24,11 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.util.Iterator;
 import org.takes.Response;
 
 /**
- * Fast track for the fallback.
+ * Fallback to dispatch an exceptional situation.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -39,11 +40,11 @@ import org.takes.Response;
 public interface Fallback {
 
     /**
-     * Get a take.
+     * Dispatch this request and either swallow it or ignore.
      * @param req Request
-     * @return Take
-     * @throws java.io.IOException If fails
+     * @return An iterator of responses or an empty iterator
+     * @throws IOException If fails
      */
-    Response act(RqFallback req) throws IOException;
+    Iterator<Response> route(RqFallback req) throws IOException;
 
 }

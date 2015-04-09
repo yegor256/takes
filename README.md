@@ -8,7 +8,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
-**Take** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
+**Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
 Java6 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
@@ -198,7 +198,7 @@ public final class App {
 The `FtBasic` is accepting new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
-(`ts` stands for "take") and expects it to return an instance of `Take` back.
+(`tk` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
 returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
 let's see how it looks:
@@ -207,7 +207,7 @@ let's see how it looks:
 public final class TkIndex implements Take {
   @Override
   public Response act(final Request req) {
-    return new RsHtml("<html>Hello, world!</html>");
+    return new RsHTML("<html>Hello, world!</html>");
   }
 }
 ```
@@ -222,7 +222,7 @@ new TkFork(
     "/file/(?<path>[^/]+)",
     new TkRegex() {
       @Override
-      public Response act(final RqRegex request) {
+      public Response act(final RqRegex request) throws IOException {
         final File file = new File(
           request.matcher().group("path")
         );
@@ -456,12 +456,18 @@ public final class App {
           new FkRegex("/robots\\.txt", ""),
           new FkRegex("/", new TkIndex())
         ),
-        new Fallback() {
-          @Override
-          public Response act(final RqFallback req) throws IOException {
-            return new RsHTML("oops, something went wrong!");
+        new FbChain(
+          new FbStatus(404, new RsText("sorry, page is absent")),
+          new FbStatus(405, new RsText("this method is not allowed here")),
+          new Fallback() {
+            @Override
+            public Iterator<Response> route(final RqFallback req) {
+              return Collections.<Response>singleton(
+                new RsHTML("oops, something went terribly wrong!")
+              ).iterator();
+            }
           }
-        }
+        )
       ),
       8080
     ).start(Exit.NEVER);
@@ -470,7 +476,8 @@ public final class App {
 ```
 
 `TkFallback` decorates an instance of Take and catches all exceptions any of
-its take may throw. Once it's thrown, an instance of TkHTML will be returned.
+its take may throw. Once it's thrown, an instance of `FbChain` will
+find the most suitable fallback and will fetch a response from there.
 
 ## Redirects
 
@@ -860,5 +867,5 @@ To avoid build errors use maven 3.2+.
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
-a new [Github issue](https://github.com/yegor256/take/issues/new).
+a new [Github issue](https://github.com/yegor256/takes/issues/new).
 

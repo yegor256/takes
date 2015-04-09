@@ -152,7 +152,7 @@ public final class FkRegex implements Fork {
     @Override
     public Iterator<Response> route(final Request req) throws IOException {
         final Matcher matcher = this.pattern.matcher(
-            new RqHref(req).href().path()
+            new RqHref.Base(req).href().path()
         );
         final Collection<Response> list = new ArrayList<Response>(1);
         if (matcher.matches()) {

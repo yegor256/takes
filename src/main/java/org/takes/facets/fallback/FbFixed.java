@@ -21,58 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.facets.fallback;
 
-import java.io.IOException;
+import java.util.Collections;
+import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Can't find how the resource requested.
+ * Fallback with a fixed response.
  *
- * <p>The exception is throws by {@link Take#act(org.takes.Request)}
- * if and when a "take" can't be found.
+ * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Take
+ * @since 0.13
  */
-public final class NotFoundException extends IOException {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = -505306086879848229L;
+@EqualsAndHashCode(callSuper = true)
+public final class FbFixed extends FbWrap {
 
     /**
      * Ctor.
+     * @param response Response to return
      */
-    public NotFoundException() {
-        super();
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Ctor.
-     * @param msg Exception message
-     * @param cause Cause of the problem
-     */
-    public NotFoundException(final String msg, final Throwable cause) {
-        super(msg, cause);
+    public FbFixed(final Response response) {
+        super(
+            new Fallback() {
+                @Override
+                public Iterator<Response> route(final RqFallback req) {
+                    return Collections.singleton(response).iterator();
+                }
+            }
+        );
     }
 
 }

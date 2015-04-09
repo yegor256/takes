@@ -21,53 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.fallback;
 
-import java.io.IOException;
+import java.util.Collections;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqHref;
-import org.takes.rs.xe.XeLink;
-import org.takes.rs.xe.XeWrap;
+import org.takes.Response;
 
 /**
- * Xembly source to create a LINK to logout.
+ * Empty fallback.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
-public final class XeLogoutLink extends XeWrap {
+public final class FbEmpty extends FbWrap {
 
     /**
      * Ctor.
-     * @param req Request
-     * @throws IOException If fails
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
-        this(req, "takes:logout", PsByFlag.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param req Request
-     * @param rel Related
-     * @param flag Flag to add
-     * @throws IOException If fails
-     */
-    public XeLogoutLink(final Request req, final String rel,
-        final String flag) throws IOException {
+    public FbEmpty() {
         super(
-            new XeLink(
-                rel,
-                new RqHref.Base(req).href().with(
-                    flag, PsLogout.class.getSimpleName()
-                ).toString()
-        )
+            new Fallback() {
+                @Override
+                public Iterator<Response> route(final RqFallback req) {
+                    return Collections.<Response>emptyList().iterator();
+                }
+            }
         );
     }
 

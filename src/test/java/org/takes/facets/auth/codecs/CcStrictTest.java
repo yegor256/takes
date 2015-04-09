@@ -67,5 +67,12 @@ public final class CcStrictTest {
                 )
             ), Matchers.equalTo("urn%3Atest%3A1")
         );
+        MatcherAssert.assertThat(
+            new String(
+                new CcStrict(new CcPlain()).encode(
+                    new Identity.Simple("urn:test-domain-org:valid:1")
+                )
+            ), Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
+        );
     }
 }
