@@ -64,7 +64,7 @@ public final class Href implements CharSequence {
     public Href(final String txt) {
         this.params = new ConcurrentHashMap<String, List<String>>(0);
         final URI link = URI.create(txt);
-        final String query = link.getQuery();
+        final String query = link.getRawQuery();
         if (query == null) {
             this.uri = link;
         } else {
