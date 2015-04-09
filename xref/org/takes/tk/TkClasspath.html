@@ -97,7 +97,7 @@
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>                  @Override
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>                  <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/Response.html">Response</a> act(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>                      <strong class="jxr_keyword">final</strong> String name = String.format(
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>                          <span class="jxr_string">"%s%s"</span>, prefix, <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHref.html">RqHref</a>(request).href().path()
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>                          <span class="jxr_string">"%s%s"</span>, prefix, <strong class="jxr_keyword">new</strong> RqHref.Base(request).href().path()
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>                      );
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>                      <strong class="jxr_keyword">final</strong> InputStream input = <strong class="jxr_keyword">this</strong>.getClass()
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>                          .getResourceAsStream(name);

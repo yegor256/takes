@@ -87,7 +87,7 @@
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>                  @Override
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>                  <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/Response.html">Response</a> act(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> request) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>                      <strong class="jxr_keyword">final</strong> File file = <strong class="jxr_keyword">new</strong> File(
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>                          base, <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHref.html">RqHref</a>(request).href().path()
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>                          base, <strong class="jxr_keyword">new</strong> RqHref.Base(request).href().path()
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>                      );
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>                      <strong class="jxr_keyword">if</strong> (!file.exists()) {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>                          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/HttpException.html">HttpException</a>(
