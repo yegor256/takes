@@ -69,19 +69,19 @@ public final class CcBase64 implements Codec {
      * They are formed by taking a block of 3 octets to form a 24-bit string,
      * which is converted into 4 BASE64 characters.
      */
-    private static final int BITS_PER_ENCODED_BYTE = 6;
+    private static final int ENCOD_BYTE_LEN = 6;
     /**
      * Number of octets in block.
      */
-    private static final int BYTES_PER_UNENCODED_BLOCK = 3;
+    private static final int UNENCOD_BLOCK_LEN = 3;
     /**
      * BASE64 characters in block.
      */
-    private static final int BYTES_PER_ENCODED_BLOCK = 4;
+    private static final int ENCOD_BLOCK_LEN = 4;
     /**
      * Buffer resize factor.
      */
-    private static final int DEFAULT_BUFFER_RESIZE_FACTOR = 2;
+    private static final int RESIZE_FACTOR = 2;
     /**
      * Mask used to extract 6 bits
      */
@@ -103,6 +103,10 @@ public final class CcBase64 implements Codec {
      */
     private final transient Codec origin;
     /**
+     * Input byte array position.
+     */
+    private transient int inputPos;
+    /**
      * Ctor.
      * @param codec Original codec
      */
@@ -112,35 +116,35 @@ public final class CcBase64 implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        byte[] raw = this.origin.encode(identity);
+        final byte[] raw = this.origin.encode(identity);
         final int rawLength = raw.length;
+        byte[] result;
         if (rawLength == 0){
-            return raw;
-        }
-        final int noPadOutLength = (rawLength * BYTES_PER_ENCODED_BLOCK
-            + DEFAULT_BUFFER_RESIZE_FACTOR) / BYTES_PER_UNENCODED_BLOCK;
-        final int resultLength = ((rawLength + DEFAULT_BUFFER_RESIZE_FACTOR)
-            / BYTES_PER_UNENCODED_BLOCK) * BYTES_PER_ENCODED_BLOCK;
-        byte[] result = new byte[resultLength];
-        int inputPos = 0;
-        int outputPos = 0;
-        while (inputPos < rawLength) {
-            final int firstOctet = raw[inputPos++] & MASK_8BITS;
-            final int secondOctet = inputPos < rawLength ?
-                raw[inputPos++] & MASK_8BITS : 0;
-            final int thirdOctet = inputPos < rawLength ?
-                raw[inputPos++] & MASK_8BITS : 0;
-            result[outputPos++] = ENCODE_TABLE[firstOctet >>> 2];
-            result[outputPos++] = ENCODE_TABLE[((firstOctet
-                & BYTES_PER_UNENCODED_BLOCK) << 4)
-                | (secondOctet >>> BYTES_PER_ENCODED_BLOCK)];
-            result[outputPos] = outputPos < noPadOutLength ?
-                ENCODE_TABLE[((secondOctet & BIT_SHIFT) << 2) |
-                (thirdOctet >>> BITS_PER_ENCODED_BYTE)] : PADDING_CHAR;
-            outputPos++;
-            result[outputPos] = outputPos < noPadOutLength ?
-                ENCODE_TABLE[thirdOctet & MASK_6BITS] : PADDING_CHAR;
-            outputPos++;
+            result = raw;
+        } else {
+            final int noPadOutLength = (rawLength * ENCOD_BLOCK_LEN
+                + RESIZE_FACTOR) / UNENCOD_BLOCK_LEN;
+            final int resultLength = ((rawLength + RESIZE_FACTOR)
+                / UNENCOD_BLOCK_LEN) * ENCOD_BLOCK_LEN;
+            result = new byte[resultLength];
+            inputPos = 0;
+            int outputPos = 0;
+            while (inputPos < rawLength) {
+                final int firstOctet = this.calcEncOctet(1, raw);
+                final int secondOctet = this.calcEncOctet(2, raw);
+                final int thirdOctet = this.calcEncOctet(3, raw);
+                result[outputPos++] = ENCODE_TABLE[firstOctet >>> 2];
+                result[outputPos++] = ENCODE_TABLE[((firstOctet
+                    & UNENCOD_BLOCK_LEN) << 4)
+                    | (secondOctet >>> ENCOD_BLOCK_LEN)];
+                result[outputPos] = outputPos < noPadOutLength
+                    ? ENCODE_TABLE[((secondOctet & BIT_SHIFT) << 2)
+                    | (thirdOctet >>> ENCOD_BYTE_LEN)] : PADDING_CHAR;
+                outputPos++;
+                result[outputPos] = outputPos < noPadOutLength
+                    ? ENCODE_TABLE[thirdOctet & MASK_6BITS] : PADDING_CHAR;
+                outputPos++;
+            }
         }
         return result;
     }
@@ -148,44 +152,101 @@ public final class CcBase64 implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         int inputLength = bytes.length;
-        if (inputLength % 4 != 0)
+        if (inputLength % 4 != 0) {
             throw new DecodingException(
                 String.format(
                     "Length of Base64 encoded input must be multiple of 4: %s",
                     Arrays.toString(bytes)
                 )
             );
-        while (inputLength > 0 && bytes[inputLength - 1] == PADDING_CHAR)
+        }
+        while (inputLength > 0 && bytes[inputLength - 1] == PADDING_CHAR) {
             inputLength--;
-        int resultLength = (inputLength * BYTES_PER_UNENCODED_BLOCK)
-            / BYTES_PER_ENCODED_BLOCK;
+        }
+        final int resultLength = (inputLength * UNENCOD_BLOCK_LEN)
+            / ENCOD_BLOCK_LEN;
         byte[] out = new byte[resultLength];
-        int inputPos = 0;
+        inputPos = 0;
         int outputPos = 0;
         while (inputPos < inputLength) {
-            final int firstBlock = DECODE_TABLE[bytes[inputPos++]];
-            final int secondBlock = DECODE_TABLE[bytes[inputPos++]];
-            final int thirdBlock = DECODE_TABLE[inputPos < inputLength ?
-                bytes[inputPos++] : 'A'];
-            final int forthBlock = DECODE_TABLE[inputPos < inputLength ?
-                bytes[inputPos++] : 'A'];
-            if (firstBlock < 0 || secondBlock < 0 || thirdBlock < 0
-                || forthBlock < 0)
-                throw new DecodingException(
-                    String.format(
-                        "Illegal character in Base64 encoded data. %s",
-                        Arrays.toString(bytes)
-                    )
-                );
-            int firstOctet = (firstBlock << 2) | (secondBlock >>> 4);
-            int secondOctet = ((secondBlock & 0xf) << 4) | (thirdBlock >>> 2);
-            int thirdOctet = ((thirdBlock & 3) << 6) | forthBlock;
-            out[outputPos++] = (byte) firstOctet;
-            if (outputPos < resultLength)
-                out[outputPos++] = (byte) secondOctet;
-            if (outputPos < resultLength)
-                out[outputPos++] = (byte) thirdOctet;
+            final int firstBlock =
+                this.calcDecBlock(1, bytes, inputLength);
+            final int secondBlock =
+                this.calcDecBlock(2, bytes, inputLength);
+            final int thirdBlock =
+                this.calcDecBlock(3, bytes, inputLength);
+            final int forthBlock =
+                this.calcDecBlock(4, bytes, inputLength);
+            out[outputPos++] = (byte) ((firstBlock << 2) | (secondBlock >>> 4));
+            if (outputPos < resultLength) {
+                out[outputPos++] = (byte) (((secondBlock & 0xf) << 4)
+                    | (thirdBlock >>> 2));
+            }
+            if (outputPos < resultLength) {
+                out[outputPos++] =
+                    (byte) (((thirdBlock & 3) << 6) | forthBlock);
+            }
         }
         return this.origin.decode(out);
+    }
+    /**
+     * Extract each of 3 octets from encoding input byte array
+     * and returns its value..
+     * @param octetNumber Octet sequence number
+     * @param inputArray Encoding byte array
+     * @return Integer octet value
+     */
+    private int calcEncOctet(final int octetNumber, final byte[] inputArray) {
+        int result;
+        switch (octetNumber) {
+            case 1 :
+                result = inputArray[inputPos++] & MASK_8BITS;
+                break;
+            case 2 :
+            case 3 :
+                result = inputPos < inputArray.length
+                    ? inputArray[inputPos++] & MASK_8BITS : 0;
+                break;
+            default:
+                throw new IllegalStateException("Impossible octet: "
+                    .concat(Integer.toString(octetNumber)));
+        }
+        return result;
+    }
+
+    /**
+     * Extracts each of 4 blocks from decoding input byte array
+     * and returns its value.
+     * @param blockNumber Block sequence number
+     * @param inputArray Decoding byte array
+     * @param inputLength Decoding byte array length
+     * @return Integer block value
+     */
+    private int calcDecBlock(final int blockNumber, final byte[] inputArray,
+                             final int inputLength) {
+        int result;
+        switch (blockNumber) {
+            case 1 :
+            case 2:
+                result = DECODE_TABLE[inputArray[inputPos++]];
+                break;
+            case 3 :
+            case 4 :
+                result = DECODE_TABLE[inputPos < inputLength
+                    ? inputArray[inputPos++] : 'A'];
+                break;
+            default:
+                throw new IllegalStateException("Impossible block"
+                    .concat(Integer.toString(blockNumber)));
+        }
+        if (result < 0) {
+            throw new DecodingException(
+                String.format(
+                    "Illegal character in Base64 encoded data. %s",
+                    Arrays.toString(inputArray)
+                )
+            );
+        }
+        return result;
     }
 }
