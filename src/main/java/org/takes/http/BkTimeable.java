@@ -68,7 +68,6 @@ public final class BkTimeable implements Back {
     @Override
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void accept(final Socket socket) throws IOException {
-        this.origin.accept(socket);
         final Thread callerThread = Thread.currentThread();
         this.executor.schedule(
             new Runnable() {
@@ -78,5 +77,6 @@ public final class BkTimeable implements Back {
                 }
             }, this.latency, TimeUnit.MILLISECONDS
         );
+        this.origin.accept(socket);
     }
 }
