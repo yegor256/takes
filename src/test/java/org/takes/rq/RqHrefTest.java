@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RqHref}.
+ * Test case for {@link RqHref.Base}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -38,7 +38,7 @@ import org.junit.Test;
 public final class RqHrefTest {
 
     /**
-     * RqQuery can parse a query.
+     * RqHref.Base can parse a query.
      * @throws IOException If some problem inside
      */
     @Test
@@ -59,7 +59,7 @@ public final class RqHrefTest {
     }
 
     /**
-     * RqQuery can extract params.
+     * RqHref.Base can extract params.
      * @throws IOException If some problem inside
      */
     @Test
@@ -80,7 +80,7 @@ public final class RqHrefTest {
     }
 
     /**
-     * RqQuery can extract first params.
+     * RqHref.Base can extract first params.
      * @throws IOException If some problem inside
      */
     @Test
