@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -55,30 +54,15 @@ public interface RqHref extends Request {
      * @version $Id$
      * @since 0.13.1
      */
-    @EqualsAndHashCode(of = "origin")
-    final class Base implements RqHref {
-        /**
-         * Original request.
-         */
-        private final transient Request origin;
-
+    @EqualsAndHashCode(callSuper = true)
+    final class Base extends RqWrap implements RqHref {
         /**
          * Ctor.
          * @param req Original request
          */
         public Base(final Request req) {
-            this.origin = req;
-        }
-
-        @Override
-        public Iterable<String> head() throws IOException {
-            return this.origin.head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return this.origin.body();
-        }
+            super(req);
+        };
 
         @Override
         public Href href() throws IOException {
