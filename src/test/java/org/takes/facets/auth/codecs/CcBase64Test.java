@@ -64,7 +64,7 @@ public final class CcBase64Test {
         MatcherAssert.assertThat(
             new CcBase64(new CcPlain()).decode(
                 "dXJuJTNBdGVzdCUzQXRlc3Q="
-                .getBytes()
+                    .getBytes()
             ).urn(),
             Matchers.equalTo("urn:test:test")
         );
@@ -110,7 +110,7 @@ public final class CcBase64Test {
      * CcBase64 can decode non Base64 alphabet symbols.
      * @throws IOException If some problem inside
      */
-    @Test (expected = DecodingException.class)
+    @Test
     public void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
         try {
             new CcStrict(new CcBase64(new CcPlain())).decode(
@@ -122,9 +122,6 @@ public final class CcBase64Test {
                 Matchers.equalTo(
                     "Illegal character in Base64 encoded data. [32, 94, 94, 94]"
                 )
-            );
-            throw new DecodingException(
-                "Illegal character in Base64 encoded data. %s"
             );
         }
     }
