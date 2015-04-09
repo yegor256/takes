@@ -95,9 +95,7 @@ public final class PsByFlagTest {
         );
         MatcherAssert.assertThat(
             new PsByFlag(
-                ImmutableMap.of(
-                    "key", (Pass) new PsFake(true)
-                )
+                ImmutableMap.<String, Pass>of("key", new PsFake(true))
             ).exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );
