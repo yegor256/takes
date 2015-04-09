@@ -73,7 +73,7 @@ public final class TkProducesTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void produceCorrectContentTypeResponse() throws IOException {
+    public void producesCorrectContentTypeResponse() throws IOException {
         final TkProduces produces = new TkProduces(
             new TkFixed(new RsJSON(new RsEmpty())),
             "text/json"
