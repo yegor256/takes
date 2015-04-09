@@ -44,7 +44,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -65,7 +65,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpQueryWithEmptyCookie() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hzzz",
@@ -86,7 +86,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpRequestWithMultipleCookies() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hz09",

@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
@@ -35,86 +36,119 @@ import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
 /**
- * Request decorator, for HTTP headers parsing.
+ * HTTP cookies parsing.
  *
+ * <p>All implementations of this interface must be immutable and thread-safe.
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqCookies extends RqWrap {
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqCookies(final Request req) {
-        super(req);
-    }
-
+public interface RqCookies extends Request {
     /**
      * Get single cookie.
-     * @param key Cookie name
+     * @param name Cookie name
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public Iterable<String> cookie(final CharSequence key) throws IOException {
-        final Map<String, String> map = this.map();
-        final String name = key.toString().toLowerCase(Locale.ENGLISH);
-        final String value = map.get(name);
-        final Iterable<String> iter;
-        if (value == null) {
-            iter = new VerboseIterable<String>(
-                Collections.<String>emptyList(),
-                new Sprintf(
-                    "there are no Cookies by name \"%s\" among %d others: %s",
-                    key, map.size(), map.keySet()
-                )
-            );
-        } else {
-            iter = new VerboseIterable<String>(
-                Collections.singleton(value),
-                new Sprintf(
-                    "there is always only one Cookie by name \"%s\"",
-                    key
-                )
-            );
-        }
-        return iter;
-    }
+    Iterable<String> cookie(CharSequence name) throws IOException;
 
     /**
      * Get all cookie names.
      * @return All names
      * @throws IOException If fails
      */
-    public Iterable<String> names() throws IOException {
-        return this.map().keySet();
-    }
+    Iterable<String> names() throws IOException;
 
     /**
-     * Parse them all in a map.
-     * @return Map of them
-     * @throws IOException If fails
+     * Request decorator, for HTTP cookies parsing.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @version $Id$
+     * @since 0.13.1
      */
-    private Map<String, String> map() throws IOException {
-        final ConcurrentMap<String, String> map =
-            new ConcurrentHashMap<String, String>(0);
-        final Iterable<String> values = new RqHeaders(this).header("Cookie");
-        for (final String value : values) {
-            for (final String pair : value.split(";")) {
-                final String[] parts = pair.split("=", 2);
-                final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
-                if (parts.length > 1 && !parts[1].isEmpty()) {
-                    map.put(key, parts[1].trim());
-                } else {
-                    map.remove(key);
+    @EqualsAndHashCode(of = "origin")
+    final class Base implements RqCookies {
+        /**
+         * Original request.
+         */
+        private final transient Request origin;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Base(final Request req) {
+            this.origin = req;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+
+        @Override
+        public Iterable<String> cookie(final CharSequence key)
+            throws IOException {
+            final Map<String, String> map = this.map();
+            final String name = key.toString().toLowerCase(Locale.ENGLISH);
+            final String value = map.get(name);
+            final Iterable<String> iter;
+            if (value == null) {
+                iter = new VerboseIterable<String>(
+                    Collections.<String>emptyList(),
+                    new Sprintf(
+                        // @checkstyle LineLengthCheck (1 line)
+                        "there are no Cookies by name \"%s\" among %d others: %s",
+                        key, map.size(), map.keySet()
+                    )
+                );
+            } else {
+                iter = new VerboseIterable<String>(
+                    Collections.singleton(value),
+                    new Sprintf(
+                        "there is always only one Cookie by name \"%s\"",
+                        key
+                    )
+                );
+            }
+            return iter;
+        }
+
+        @Override
+        public Iterable<String> names() throws IOException {
+            return this.map().keySet();
+        }
+
+        /**
+         * Parse them all in a map.
+         * @return Map of them
+         * @throws IOException If fails
+         */
+        private Map<String, String> map() throws IOException {
+            final ConcurrentMap<String, String> map =
+                new ConcurrentHashMap<String, String>(0);
+            final Iterable<String> values =
+                new RqHeaders(this).header("Cookie");
+            for (final String value : values) {
+                for (final String pair : value.split(";")) {
+                    final String[] parts = pair.split("=", 2);
+                    final String key =
+                        parts[0].trim().toLowerCase(Locale.ENGLISH);
+                    if (parts.length > 1 && !parts[1].isEmpty()) {
+                        map.put(key, parts[1].trim());
+                    } else {
+                        map.remove(key);
+                    }
                 }
             }
+            return map;
         }
-        return map;
     }
-
 }

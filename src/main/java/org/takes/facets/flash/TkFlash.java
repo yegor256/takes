@@ -91,7 +91,7 @@ public final class TkFlash implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        final RqCookies cookies = new RqCookies(request);
+        final RqCookies cookies = new RqCookies.Base(request);
         final Iterator<String> values = cookies.cookie(this.cookie).iterator();
         final Response response;
         if (values.hasNext()) {
