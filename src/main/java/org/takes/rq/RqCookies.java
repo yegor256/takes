@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
@@ -39,7 +38,6 @@ import org.takes.misc.VerboseIterable;
  * HTTP cookies parsing.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -68,29 +66,14 @@ public interface RqCookies extends Request {
      * @version $Id$
      * @since 0.13.1
      */
-    @EqualsAndHashCode(of = "origin")
-    final class Base implements RqCookies {
-        /**
-         * Original request.
-         */
-        private final transient Request origin;
-
+    @EqualsAndHashCode(callSuper = true)
+    final class Base extends RqWrap implements RqCookies {
         /**
          * Ctor.
          * @param req Original request
          */
         public Base(final Request req) {
-            this.origin = req;
-        }
-
-        @Override
-        public Iterable<String> head() throws IOException {
-            return this.origin.head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return this.origin.body();
+            super(req);
         }
 
         @Override
