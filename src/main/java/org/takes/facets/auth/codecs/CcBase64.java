@@ -35,7 +35,7 @@ import org.takes.facets.auth.Identity;
  *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.11
+ * @since 0.13
  */
 @EqualsAndHashCode
 public final class CcBase64 implements Codec {
