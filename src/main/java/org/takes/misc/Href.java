@@ -128,9 +128,10 @@ public final class Href implements CharSequence {
                     } else {
                         text.append('&');
                     }
-                    text.append(Href.encode(ent.getKey()))
-                        .append('=')
-                        .append(Href.encode(value));
+                    text.append(Href.encode(ent.getKey()));
+                    if (!value.isEmpty()) {
+                        text.append('=').append(Href.encode(value));
+                    }
                 }
             }
         }
