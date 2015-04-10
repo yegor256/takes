@@ -87,7 +87,7 @@ public final class FkMethods implements Fork {
 
     @Override
     public Iterator<Response> route(final Request req) throws IOException {
-        final String mtd = new RqMethod(req).method();
+        final String mtd = new RqMethod.Base(req).method();
         final Collection<Response> list = new ArrayList<Response>(1);
         if (this.methods.contains(mtd)) {
             list.add(this.take.act(req));

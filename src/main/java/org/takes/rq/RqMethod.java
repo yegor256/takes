@@ -24,74 +24,98 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator, for HTTP method parsing.
+ * HTTP method parsing.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqMethod extends RqWrap {
+public interface RqMethod extends Request {
 
     /**
      * GET method.
      */
-    public static final String GET = "GET";
+    String GET = "GET";
 
     /**
      * POST method.
      */
-    public static final String POST = "POST";
+    String POST = "POST";
 
     /**
      * PUT method.
      */
-    public static final String PUT = "PUT";
+    String PUT = "PUT";
 
     /**
      * DELETE method.
      */
-    public static final String DELETE = "DELETE";
+    String DELETE = "DELETE";
 
     /**
      * HEAD method.
      */
-    public static final String HEAD = "HEAD";
+    String HEAD = "HEAD";
 
     /**
      * OPTIONS method.
      */
-    public static final String OPTIONS = "OPTIONS";
+    String OPTIONS = "OPTIONS";
 
     /**
      * PATCH method.
      */
-    public static final String PATCH = "PATCH";
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqMethod(final Request req) {
-        super(req);
-    }
+    String PATCH = "PATCH";
 
     /**
      * Get method.
+     *
      * @return HTTP method
      * @throws IOException If fails
      */
-    public String method() throws IOException {
-        final String line = this.head().iterator().next();
-        final String[] parts = line.split(" ", 2);
-        return parts[0].toUpperCase(Locale.ENGLISH);
+    String method() throws IOException;
+
+    @EqualsAndHashCode(of = "origin")
+    final class Base implements RqMethod {
+
+        /**
+         * Original request.
+         */
+        private final transient Request origin;
+
+        /**
+         * Ctor.
+         *
+         * @param req Original request
+         */
+        public Base(final Request req) {
+            this.origin = req;
+        }
+
+        @Override
+        public String method() throws IOException {
+            final String line = this.head().iterator().next();
+            final String[] parts = line.split(" ", 2);
+            return parts[0].toUpperCase(Locale.ENGLISH);
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
     }
 
 }
