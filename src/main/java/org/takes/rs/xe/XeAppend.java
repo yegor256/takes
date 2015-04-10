@@ -46,7 +46,7 @@ public final class XeAppend extends XeWrap {
      * @param target Name of XML element
      * @param value Value to set
      */
-    public XeAppend(final String target, final String value) {
+    public XeAppend(final CharSequence target, final String value) {
         this(target, new XeDirectives(new Directives().set(value)));
     }
 
@@ -55,7 +55,7 @@ public final class XeAppend extends XeWrap {
      * @param target Name of XML element
      * @param src Source
      */
-    public XeAppend(final String target, final XeSource... src) {
+    public XeAppend(final CharSequence target, final XeSource... src) {
         this(target, Arrays.asList(src));
     }
 
@@ -65,12 +65,12 @@ public final class XeAppend extends XeWrap {
      * @param src Source
      * @since 0.13
      */
-    public XeAppend(final String target, final Iterable<XeSource> src) {
+    public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target).append(
+                    return new Directives().add(target.toString()).append(
                         new XeChain(src).toXembly()
                     );
                 }

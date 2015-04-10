@@ -43,7 +43,7 @@ public final class XeStylesheet extends XeWrap {
      * Ctor.
      * @param xsl XSL stylesheet
      */
-    public XeStylesheet(final String xsl) {
+    public XeStylesheet(final CharSequence xsl) {
         super(
             new XeSource() {
                 @Override

@@ -72,7 +72,7 @@ public final class XeDate extends XeWrap {
      * Ctor.
      * @param attr Attribute name
      */
-    public XeDate(final String attr) {
+    public XeDate(final CharSequence attr) {
         super(
             new XeSource() {
                 @Override
@@ -82,7 +82,7 @@ public final class XeDate extends XeWrap {
                     );
                     fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
                     return new Directives().attr(
-                        attr, fmt.format(new Date())
+                        attr.toString(), fmt.format(new Date())
                     );
                 }
             }

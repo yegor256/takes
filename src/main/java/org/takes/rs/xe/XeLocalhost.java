@@ -70,7 +70,7 @@ public final class XeLocalhost extends XeWrap {
      * @param attr Attribute name
      */
     @SuppressWarnings("PMD.CallSuperInConstructor")
-    public XeLocalhost(final String attr) {
+    public XeLocalhost(final CharSequence attr) {
         super(
             new XeSource() {
                 @Override
@@ -81,7 +81,7 @@ public final class XeLocalhost extends XeWrap {
                     } catch (final UnknownHostException ex) {
                         addr = ex.getClass().getCanonicalName();
                     }
-                    return new Directives().attr(attr, addr);
+                    return new Directives().attr(attr.toString(), addr);
                 }
             }
         );
