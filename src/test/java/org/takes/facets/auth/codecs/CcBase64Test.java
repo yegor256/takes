@@ -37,7 +37,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcBase64}.
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.11
+ * @since 0.13
  */
 public final class CcBase64Test {
     /**
