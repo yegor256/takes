@@ -58,6 +58,13 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     */
+    public Href() {
+        this("/");
+    }
+
+    /**
+     * Ctor.
      * @param txt Text of the link
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")

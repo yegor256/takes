@@ -57,7 +57,7 @@ public final class HrefTest {
     @Test
     public void buildsUriFromEmpty() {
         MatcherAssert.assertThat(
-            new Href("/").path("boom-4").with("f1", "").toString(),
+            new Href().path("boom-4").with("f1", "").toString(),
             Matchers.equalTo("/boom-4?f1")
         );
     }
