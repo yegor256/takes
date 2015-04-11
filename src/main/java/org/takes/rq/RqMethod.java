@@ -24,7 +24,6 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -83,13 +82,8 @@ public interface RqMethod extends Request {
      */
     String method() throws IOException;
 
-    @EqualsAndHashCode(of = "origin")
-    final class Base implements RqMethod {
-
-        /**
-         * Original request.
-         */
-        private final transient Request origin;
+    @EqualsAndHashCode(callSuper = true)
+    final class Base extends RqWrap implements RqMethod {
 
         /**
          * Ctor.
@@ -97,7 +91,7 @@ public interface RqMethod extends Request {
          * @param req Original request
          */
         public Base(final Request req) {
-            this.origin = req;
+            super(req);
         }
 
         @Override
@@ -107,15 +101,6 @@ public interface RqMethod extends Request {
             return parts[0].toUpperCase(Locale.ENGLISH);
         }
 
-        @Override
-        public Iterable<String> head() throws IOException {
-            return this.origin.head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return this.origin.body();
-        }
     }
 
 }
