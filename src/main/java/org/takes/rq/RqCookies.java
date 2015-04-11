@@ -40,7 +40,7 @@ import org.takes.misc.VerboseIterable;
  * <p>All implementations of this interface must be immutable and thread-safe.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.14
  */
 public interface RqCookies extends Request {
     /**
@@ -49,7 +49,7 @@ public interface RqCookies extends Request {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    Iterable<String> cookie(CharSequence name) throws IOException;
+    Iterable<String> cookie(final CharSequence name) throws IOException;
 
     /**
      * Get all cookie names.
@@ -64,7 +64,7 @@ public interface RqCookies extends Request {
      * <p>The class is immutable and thread-safe.
      * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
      * @version $Id$
-     * @since 0.13.1
+     * @since 0.14
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqCookies {
@@ -80,8 +80,9 @@ public interface RqCookies extends Request {
         public Iterable<String> cookie(final CharSequence key)
             throws IOException {
             final Map<String, String> map = this.map();
-            final String name = key.toString().toLowerCase(Locale.ENGLISH);
-            final String value = map.get(name);
+            final String value = map.get(
+                key.toString().toLowerCase(Locale.ENGLISH)
+            );
             final Iterable<String> iter;
             if (value == null) {
                 iter = new VerboseIterable<String>(
