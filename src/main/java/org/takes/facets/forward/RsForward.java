@@ -104,7 +104,7 @@ public final class RsForward extends RuntimeException implements Response {
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super();
+        super(res.toString());
         this.origin = new RsWithHeader(
             new RsWithStatus(res, code),
             new Sprintf("Location: %s", loc)
