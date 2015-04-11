@@ -24,40 +24,41 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Take;
 
 /**
- * Fork fixed.
+ * Wrap for the fork.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
- * @see TkFork
+ * @since 0.13
+ * @see org.takes.facets.fork.RsFork
  */
-@EqualsAndHashCode(callSuper = true)
-public final class FkFixed extends FkWrap {
+@EqualsAndHashCode(of = "origin")
+public class FkWrap implements Fork {
+
+    /**
+     * Original fork.
+     */
+    private final transient Fork origin;
 
     /**
      * Ctor.
-     * @param take Take
+     * @param fork Original fork
      */
-    public FkFixed(final Take take) {
-        super(
-            new Fork() {
-                @Override
-                public Iterator<Response> route(final Request req)
-                    throws IOException {
-                    return Collections.singleton(take.act(req)).iterator();
-                }
-            }
-        );
+    public FkWrap(final Fork fork) {
+        this.origin = fork;
+    }
+
+    @Override
+    public final Iterator<Response> route(final Request req)
+        throws IOException {
+        return this.origin.route(req);
     }
 
 }
