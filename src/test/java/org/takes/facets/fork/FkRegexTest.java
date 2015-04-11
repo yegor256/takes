@@ -50,6 +50,26 @@ public final class FkRegexTest {
             ).hasNext(),
             Matchers.is(true)
         );
+        MatcherAssert.assertThat(
+            new FkRegex("/", new TkEmpty()).route(
+                new RqFake("PUT", "/?test")
+            ).hasNext(),
+            Matchers.is(true)
+        );
+    }
+
+    /**
+     * FkRegex can remove trailing slash from URI.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void removesTrailingSlash() throws IOException {
+        MatcherAssert.assertThat(
+            new FkRegex("/h/tail", new TkEmpty()).route(
+                new RqFake("POST", "/h/tail/")
+            ).hasNext(),
+            Matchers.is(true)
+        );
     }
 
 }
