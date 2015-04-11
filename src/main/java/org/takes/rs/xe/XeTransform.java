@@ -23,6 +23,7 @@
  */
 package org.takes.rs.xe;
 
+import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 
@@ -95,7 +96,11 @@ public final class XeTransform<T> implements Iterable<XeSource> {
             }
             @Override
             public XeSource next() {
-                return XeTransform.this.func.transform(origin.next());
+                try {
+                    return XeTransform.this.func.transform(origin.next());
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
+                }
             }
             @Override
             public void remove() {
@@ -112,7 +117,8 @@ public final class XeTransform<T> implements Iterable<XeSource> {
          * Transform an object.
          * @param obj Object
          * @return Xembly source
+         * @throws IOException If fails
          */
-        XeSource transform(T obj);
+        XeSource transform(T obj) throws IOException;
     }
 }
