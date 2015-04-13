@@ -42,16 +42,16 @@ import org.takes.tk.TkFixed;
  * Test case for {@link TkProduces}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.31.1
+ * @since 0.14
  */
 public final class TkProducesTest {
 
     /**
-     * TkProduces can throw exception on unsupported Accept header.
+     * TkProduces can fail on unsupported Accept header.
      * @throws IOException If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void throwsExceptionOnUnsupportedAcceptHeader() throws IOException {
+    public void failsOnUnsupportedAcceptHeader() throws IOException {
         final TkProduces produces = new TkProduces(
             new TkEmpty(),
             "text/json,application/json"

@@ -37,7 +37,7 @@ import org.takes.tk.TkWrap;
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.32.1
+ * @since 0.14
  */
 @EqualsAndHashCode(callSuper = true)
 public final class TkProduces extends TkWrap {
