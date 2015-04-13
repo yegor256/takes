@@ -151,9 +151,11 @@ public final class FkRegex implements Fork {
 
     @Override
     public Iterator<Response> route(final Request req) throws IOException {
-        final Matcher matcher = this.pattern.matcher(
-            new RqHref(req).href().path()
-        );
+        String path = new RqHref.Base(req).href().path();
+        if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
+            path = path.substring(0, path.length() - 1);
+        }
+        final Matcher matcher = this.pattern.matcher(path);
         final Collection<Response> list = new ArrayList<Response>(1);
         if (matcher.matches()) {
             list.add(

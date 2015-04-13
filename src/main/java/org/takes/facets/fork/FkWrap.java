@@ -21,54 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.fork;
 
 import java.io.IOException;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHref;
-import org.takes.rs.xe.XeLink;
-import org.takes.rs.xe.XeWrap;
+import org.takes.Response;
 
 /**
- * Xembly source to create a LINK to logout.
+ * Wrap for the fork.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
+ * @see org.takes.facets.fork.RsFork
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeLogoutLink extends XeWrap {
+@EqualsAndHashCode(of = "origin")
+public class FkWrap implements Fork {
+
+    /**
+     * Original fork.
+     */
+    private final transient Fork origin;
 
     /**
      * Ctor.
-     * @param req Request
-     * @throws IOException If fails
+     * @param fork Original fork
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
-        this(req, "takes:logout", PsByFlag.class.getSimpleName());
+    public FkWrap(final Fork fork) {
+        this.origin = fork;
     }
 
-    /**
-     * Ctor.
-     * @param req Request
-     * @param rel Related
-     * @param flag Flag to add
-     * @throws IOException If fails
-     */
-    public XeLogoutLink(final Request req, final String rel,
-        final String flag) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new RqHref.Base(req).href().with(
-                    flag, PsLogout.class.getSimpleName()
-                ).toString()
-        )
-        );
+    @Override
+    public final Iterator<Response> route(final Request req)
+        throws IOException {
+        return this.origin.route(req);
     }
 
 }

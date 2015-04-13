@@ -41,25 +41,23 @@ import org.takes.Take;
  * @since 0.9
  * @see TkFork
  */
-@EqualsAndHashCode(of = "take")
-public final class FkFixed implements Fork {
-
-    /**
-     * Target.
-     */
-    private final transient Take take;
+@EqualsAndHashCode(callSuper = true)
+public final class FkFixed extends FkWrap {
 
     /**
      * Ctor.
-     * @param tke Take
+     * @param take Take
      */
-    public FkFixed(final Take tke) {
-        this.take = tke;
-    }
-
-    @Override
-    public Iterator<Response> route(final Request req) throws IOException {
-        return Collections.singleton(this.take.act(req)).iterator();
+    public FkFixed(final Take take) {
+        super(
+            new Fork() {
+                @Override
+                public Iterator<Response> route(final Request req)
+                    throws IOException {
+                    return Collections.singleton(take.act(req)).iterator();
+                }
+            }
+        );
     }
 
 }

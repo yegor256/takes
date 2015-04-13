@@ -24,12 +24,12 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqWrap;
 
 /**
  * Request with auth information.
@@ -40,13 +40,8 @@ import org.takes.rq.RqHeaders;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "header" })
-public final class RqAuth implements Request {
-
-    /**
-     * Original request.
-     */
-    private final transient Request origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqAuth extends RqWrap {
 
     /**
      * Header with authentication info.
@@ -67,7 +62,7 @@ public final class RqAuth implements Request {
      * @param hdr Header to read
      */
     public RqAuth(final Request request, final String hdr) {
-        this.origin = request;
+        super(request);
         this.header = hdr;
     }
 
@@ -78,7 +73,7 @@ public final class RqAuth implements Request {
      */
     public Identity identity() throws IOException {
         final Iterator<String> headers =
-            new RqHeaders(this.origin).header(this.header).iterator();
+            new RqHeaders(this).header(this.header).iterator();
         final Identity user;
         if (headers.hasNext()) {
             user = new CcPlain().decode(headers.next().getBytes());
@@ -88,13 +83,4 @@ public final class RqAuth implements Request {
         return user;
     }
 
-    @Override
-    public Iterable<String> head() throws IOException {
-        return this.origin.head();
-    }
-
-    @Override
-    public InputStream body() throws IOException {
-        return this.origin.body();
-    }
 }

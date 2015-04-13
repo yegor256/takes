@@ -21,53 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.rs.xe;
 
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.rq.RqHref;
-import org.takes.rs.xe.XeLink;
-import org.takes.rs.xe.XeWrap;
+import org.apache.commons.io.IOUtils;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Xembly source to create a LINK to logout.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link XeWhen}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
-@EqualsAndHashCode(callSuper = true)
-public final class XeLogoutLink extends XeWrap {
+public final class XeWhenTest {
 
     /**
-     * Ctor.
-     * @param req Request
-     * @throws IOException If fails
+     * XeWhen can build XML response.
+     * @throws IOException If some problem inside
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
-        this(req, "takes:logout", PsByFlag.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param req Request
-     * @param rel Related
-     * @param flag Flag to add
-     * @throws IOException If fails
-     */
-    public XeLogoutLink(final Request req, final String rel,
-        final String flag) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new RqHref.Base(req).href().with(
-                    flag, PsLogout.class.getSimpleName()
-                ).toString()
-        )
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "test",
+                        new XeWhen(true, new XeDate())
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/test[@date]"
+            )
         );
     }
 

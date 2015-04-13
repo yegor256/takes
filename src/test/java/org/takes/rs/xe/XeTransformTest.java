@@ -21,54 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.rs.xe;
 
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Locale;
+import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
+import org.xembly.Directives;
 
 /**
- * Test case for {@link FkRegex}.
+ * Test case for {@link XeTransform}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.13
  */
-public final class FkRegexTest {
+public final class XeTransformTest {
 
     /**
-     * FkRegex can match by regular expression.
+     * XeTransform can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
-            new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
-            Matchers.is(true)
-        );
-        MatcherAssert.assertThat(
-            new FkRegex("/", new TkEmpty()).route(
-                new RqFake("PUT", "/?test")
-            ).hasNext(),
-            Matchers.is(true)
-        );
-    }
-
-    /**
-     * FkRegex can remove trailing slash from URI.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void removesTrailingSlash() throws IOException {
-        MatcherAssert.assertThat(
-            new FkRegex("/h/tail", new TkEmpty()).route(
-                new RqFake("POST", "/h/tail/")
-            ).hasNext(),
-            Matchers.is(true)
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeTransform<String>(
+                            Arrays.asList("Jeff", "Walter"),
+                            new XeTransform.Func<String>() {
+                                @Override
+                                public XeSource transform(final String obj) {
+                                    return new XeDirectives(
+                                        new Directives().add("bowler").set(
+                                            obj.toUpperCase(Locale.ENGLISH)
+                                        )
+                                    );
+                                }
+                            }
+                        )
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root[count(bowler)=2]",
+                "/root/bowler[.='JEFF']"
+            )
         );
     }
 

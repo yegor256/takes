@@ -23,67 +23,42 @@
  */
 package org.takes.rs.xe;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.io.IOException;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directive;
-import org.xembly.Directives;
 
 /**
- * Xembly source to create SLA attribute with current date/time in ISO 8601.
- *
- * <p>Add this Xembly source to your page like this:
- *
- * <pre> new RsXembly(
- *   new XsStylesheet("/xsl/home.xsl"),
- *   new XsAppend(
- *     "page",
- *     new XsDate()
- *   )
- * )</pre>
- *
- * <p>And expect this attribute in the XML:
- *
- * <pre>&lt;?xml version="1.0"?&gt;
- * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
- * &lt;page date="2015-03-09T00:49:17Z"/&gt;
- * </pre>
+ * Xembly source that could be empty of could return an encapsulated
+ * other Xembly source.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.3
+ * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
-public final class XeDate extends XeWrap {
+public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
      */
-    public XeDate() {
-        this("date");
-    }
-
-    /**
-     * Ctor.
-     * @param attr Attribute name
-     */
-    public XeDate(final CharSequence attr) {
+    @SuppressWarnings("PMD.CallSuperInConstructor")
+    public XeWhen(final boolean condition, final XeSource source) {
         super(
             new XeSource() {
                 @Override
-                public Iterable<Directive> toXembly() {
-                    final DateFormat fmt = new SimpleDateFormat(
-                        "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
-                    );
-                    fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return new Directives().attr(
-                        attr.toString(), fmt.format(new Date())
-                    );
+                public Iterable<Directive> toXembly() throws IOException {
+                    final Iterable<Directive> dirs;
+                    if (condition) {
+                        dirs = source.toXembly();
+                    } else {
+                        dirs = Collections.emptyList();
+                    }
+                    return dirs;
                 }
             }
         );

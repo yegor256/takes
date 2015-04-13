@@ -79,7 +79,7 @@ public final class TkFiles extends TkWrap {
                 @Override
                 public Response act(final Request request) throws IOException {
                     final File file = new File(
-                        base, new RqHref(request).href().path()
+                        base, new RqHref.Base(request).href().path()
                     );
                     if (!file.exists()) {
                         throw new HttpException(
