@@ -60,5 +60,23 @@ public final class RsWithCookieTest {
             )
         );
     }
+	
+	/**
+     * RsWithCookie can fail on invalid ctor arguments.
+     * @throws IOException if invalid (non-printable) characters are provided to the name attribute of ctor.
+     */
+    @Test(expected = RuntimeException.class)
+    public void failsOnInvalidCookieName() throws IOException {
+        new RsWithCookie("\u0013","value","Path=/");
+    }
+
+    /**
+     * RsWithCookie can fail on invalid ctor arguments.
+     * @throws IOException if invalid (non-printable) characters are provided to the value attribute of ctor.
+     */
+    @Test(expected = RuntimeException.class)
+    public void failsOnInvalidCookieValue() throws IOException {
+        new RsWithCookie("name","\u0013","Path=/");
+    }
 
 }
