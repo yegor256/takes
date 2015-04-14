@@ -97,7 +97,7 @@ public final class PsCookie implements Pass {
 
     @Override
     public Iterator<Identity> enter(final Request req) throws IOException {
-        final Iterator<String> cookies = new RqCookies(req)
+        final Iterator<String> cookies = new RqCookies.Base(req)
             .cookie(this.cookie).iterator();
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (cookies.hasNext()) {
