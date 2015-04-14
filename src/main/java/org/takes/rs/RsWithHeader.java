@@ -61,7 +61,7 @@ public final class RsWithHeader extends RsWrap {
      * Pattern for all other lines in the head.
      */
     private static final Pattern HEADER = Pattern.compile(
-        "[a-zA-Z\\-]+:\\p{Print}+"
+        "[a-zA-Z0-9\\-]+:\\p{Print}+"
     );
 
     /**

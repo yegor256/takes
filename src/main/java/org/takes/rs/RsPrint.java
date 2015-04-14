@@ -56,7 +56,7 @@ public final class RsPrint extends RsWrap {
      * Pattern for all other lines in the head.
      */
     private static final Pattern OTHERS = Pattern.compile(
-        "[a-zA-Z\\-]+:\\p{Print}+"
+        "[a-zA-Z0-9\\-]+:\\p{Print}+"
     );
 
     /**
