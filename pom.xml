@@ -211,12 +211,6 @@
             <version>1.7.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>nl.jqno.equalsverifier</groupId>
-            <artifactId>equalsverifier</artifactId>
-            <version>1.7.2</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -261,7 +255,6 @@
                             <excludes>
                                 <exclude>xml:/src/it/settings.xml</exclude>
                                 <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcHex.java</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcBase64.java</exclude>
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <exclude>findbugs:.*</exclude>
                             </excludes>
