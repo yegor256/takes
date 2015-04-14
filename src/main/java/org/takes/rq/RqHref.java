@@ -24,8 +24,11 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Href;
 
@@ -62,8 +65,7 @@ public interface RqHref extends Request {
          */
         public Base(final Request req) {
             super(req);
-        };
-
+        }
         @Override
         public Href href() throws IOException {
             final Iterator<String> host = new RqHeaders(this)
@@ -79,6 +81,79 @@ public interface RqHref extends Request {
                     this.head().iterator().next().split(" ", 3)[1]
                 )
             );
+        }
+    }
+
+    /**
+     * Smart decorator, with extra features.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @since 0.14
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Smart implements RqHref {
+        /**
+         * Original.
+         */
+        private final transient RqHref origin;
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Smart(final RqHref req) {
+            this.origin = req;
+        }
+        @Override
+        public Href href() throws IOException {
+            return this.origin.href();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+        /**
+         * Get param or throw HTTP exception.
+         * @param name Name of query param
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String get(final String name) throws IOException {
+            final Iterator<String> params = this.origin.href()
+                .param(name).iterator();
+            if (!params.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "query param \"%s\" is mandatory", name
+                    )
+                );
+            }
+            return params.next();
+        }
+        /**
+         * Get param or default.
+         * @param name Name of query param
+         * @param def Default, if not found
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String get(final String name, final String def)
+            throws IOException {
+            final String value;
+            final Iterator<String> params = this.origin.href()
+                .param(name).iterator();
+            if (params.hasNext()) {
+                value = params.next();
+            } else {
+                value = def;
+            }
+            return value;
         }
     }
 }
