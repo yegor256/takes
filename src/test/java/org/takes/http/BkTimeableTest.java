@@ -35,18 +35,19 @@ import org.junit.Test;
  * Test case for {@link BkTimeable}.
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
- * @since 0.12
+ * @since 0.14
  */
 public final class BkTimeableTest {
 
     /**
-     * BkTimeable can stop caller thread after timeout.
+     * BKtimeable can interrupt caller thread after timeout.
      */
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void interruptThreadAfterTimeout() {
         final AtomicLong real = new AtomicLong();
         final long allowed = 1040;
+        final long sleep = 50;
         final CountDownLatch latch = new CountDownLatch(1);
         final Back timeBack = new BkTimeable(
             new Back() {
@@ -55,6 +56,12 @@ public final class BkTimeableTest {
                     final long start = System.currentTimeMillis();
                     while (!Thread.currentThread().isInterrupted()) {
                         real.set(System.currentTimeMillis() - start);
+                        try {
+                            Thread.sleep(sleep);
+                        } catch (final InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                            throw new IllegalStateException(ex);
+                        }
                     }
                 }
             }, 1000

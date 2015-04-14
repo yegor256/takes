@@ -35,6 +35,7 @@ import lombok.EqualsAndHashCode;
  * <p>The class is immutable and thread-safe.
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
+ * @since 0.14
  */
 @EqualsAndHashCode(of = { "origin", "latency" })
 public final class BkTimeable implements Back {
