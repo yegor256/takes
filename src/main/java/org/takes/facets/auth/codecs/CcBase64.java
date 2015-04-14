@@ -52,9 +52,9 @@ public final class CcBase64 implements Codec {
 
     /**
      * This is @todo #19 to implement own simple Base64 encode algorithm
-     * without using 3d-party Base64 encode libraries. Tests for this
-     * method have been already created, do not forget to remove Ignore
-     * annotation on it.
+     *  without using 3d-party Base64 encode libraries. Tests for this
+     *  method have been already created, do not forget to remove Ignore
+     *  annotation on it.
      *
      * @param identity The identity
      * @return Text
@@ -67,9 +67,9 @@ public final class CcBase64 implements Codec {
 
     /**
      * This is @todo #19 to implement own simple Base64 decode algorithm
-     * without using 3d-party Base64 decode libraries. Tests for this
-     * method have been already created, do not forget to remove Ignore
-     * annotation on it.
+     *  without using 3d-party Base64 decode libraries. Tests for this
+     *  method have been already created, do not forget to remove Ignore
+     *  annotation on it.
      *
      * @param bytes Text
      * @return Identity
