@@ -21,56 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.fallback;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import org.takes.Response;
 
 /**
- * Test case for {@link TkFiles}.
+ * Fallback wrap.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.8
+ * @since 0.13
  */
-public final class TkFilesTest {
+@EqualsAndHashCode(of = "origin")
+public class FbWrap implements Fallback {
 
     /**
-     * TkFiles can dispatch by file name.
-     * @throws IOException If some problem inside
+     * Original fallback.
      */
-    @Test
-    public void dispatchesByFileName() throws IOException {
-        final File dir = Files.createTempDir();
-        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TkFiles(dir).act(
-                    new RqFake(
-                        "GET", "/a.txt?hash=a1b2c3", ""
-                    )
-                )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
-        );
-    }
+    private final transient Fallback origin;
 
     /**
-     * TkFiles can throw when file not found.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param fbk Fallback
      */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
-        new TkFiles("/absent-dir-for-sure").act(
-            new RqFake("PUT", "/something-else.txt", "")
-        );
+    public FbWrap(final Fallback fbk) {
+        this.origin = fbk;
     }
 
+    @Override
+    public final Iterator<Response> route(final RqFallback req)
+        throws IOException {
+        return this.origin.route(req);
+    }
 }

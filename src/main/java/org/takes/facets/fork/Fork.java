@@ -42,7 +42,7 @@ public interface Fork {
     /**
      * Process this request or ignore it.
      * @param req Request
-     * @return Non-empty list of take if it was processed
+     * @return Non-empty list of responses if it was processed
      * @throws IOException If fails
      */
     Iterator<Response> route(Request req) throws IOException;

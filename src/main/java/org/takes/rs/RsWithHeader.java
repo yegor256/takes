@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -56,6 +57,12 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithHeader extends RsWrap {
+    /**
+     * Pattern for all other lines in the head.
+     */
+    private static final Pattern HEADER = Pattern.compile(
+        "[a-zA-Z\\-]+:\\p{Print}+"
+    );
 
     /**
      * Ctor.
@@ -97,19 +104,40 @@ public final class RsWithHeader extends RsWrap {
             new Response() {
                 @Override
                 public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : res.head()) {
-                        head.add(hdr);
-                    }
-                    head.add(header.toString());
-                    return head;
+                    return RsWithHeader.extend(res.head(), header.toString());
                 }
                 @Override
                 public InputStream body() throws IOException {
                     return res.body();
                 }
             }
-        );
+          );
+    }
+
+    /**
+     * Add to head additional header.
+     * @param head Original head
+     * @param header Value witch will be added to head
+     * @return Head with additional header
+     * @throws IOException If fails
+     */
+    private static List<String> extend(final Iterable<String> head,
+        final String header) throws IOException {
+        if (!HEADER.matcher(header).matches()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                    header, HEADER
+                )
+            );
+        }
+        final List<String> headers = new LinkedList<String>();
+        for (final String hdr : head) {
+            headers.add(hdr);
+        }
+        headers.add(header);
+        return headers;
     }
 
 }

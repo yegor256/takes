@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -55,12 +55,13 @@ public final class TkVerbose extends TkWrap {
                 public Response act(final Request request) throws IOException {
                     try {
                         return take.act(request);
-                    } catch (final NotFoundException ex) {
-                        throw new NotFoundException(
+                    } catch (final HttpException ex) {
+                        throw new HttpException(
+                            ex.code(),
                             String.format(
                                 "%s %s",
                                 new RqMethod(request).method(),
-                                new RqHref(request).href()
+                                new RqHref.Base(request).href()
                             ),
                             ex
                         );

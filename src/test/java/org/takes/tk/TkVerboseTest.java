@@ -24,10 +24,11 @@
 package org.takes.tk;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.NotFoundException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -50,12 +51,12 @@ public final class TkVerboseTest {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {
-                throw new NotFoundException("can't find");
+                throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
             }
         };
         try {
             new TkVerbose(take).act(new RqFake());
-        } catch (final NotFoundException ex) {
+        } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getLocalizedMessage(),
                 Matchers.equalTo("GET http://www.example.com/")

@@ -49,7 +49,7 @@
             <item name="Introduction" href="./index.html"/>
             <item name="JavaDoc ${project.version}" href="./apidocs-${project.version}/index.html"/>
             <item name="Test Coverage" href="./cobertura/index.html"/>
-            <item name="Release History" href="https://github.com/yegor256/take/releases"/>
+            <item name="Release History" href="https://github.com/yegor256/takes/releases"/>
         </menu>
         <menu ref="reports"/>
     </body>
