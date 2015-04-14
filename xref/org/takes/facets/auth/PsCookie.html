@@ -105,7 +105,7 @@
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>  
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>      @Override
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>      <strong class="jxr_keyword">public</strong> Iterator&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>         <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; cookies = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqCookies.html">RqCookies</a>(req)
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>         <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; cookies = <strong class="jxr_keyword">new</strong> RqCookies.Base(req)
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>             .cookie(<strong class="jxr_keyword">this</strong>.cookie).iterator();
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">final</strong> Collection&lt;Identity&gt; users = <strong class="jxr_keyword">new</strong> ArrayList&lt;Identity&gt;(1);
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">if</strong> (cookies.hasNext()) {

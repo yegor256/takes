@@ -112,7 +112,7 @@
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/forward/RsForward.html">RsForward</a>(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Response.html">Response</a> res, <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> code,
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         <strong class="jxr_keyword">final</strong> CharSequence loc) {
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">super</strong>();
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">super</strong>(res.toString());
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>         <strong class="jxr_keyword">this</strong>.origin = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/RsWithHeader.html">RsWithHeader</a>(
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/RsWithStatus.html">RsWithStatus</a>(res, code),
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/misc/Sprintf.html">Sprintf</a>(<span class="jxr_string">"Location: %s"</span>, loc)

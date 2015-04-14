@@ -159,34 +159,36 @@
 <a class="jxr_linenumber" name="L151" href="#L151">151</a> 
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>     @Override
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>     <strong class="jxr_keyword">public</strong> Iterator&lt;Response&gt; route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">final</strong> Matcher matcher = <strong class="jxr_keyword">this</strong>.pattern.matcher(
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>             <strong class="jxr_keyword">new</strong> RqHref.Base(req).href().path()
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>         );
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>         <strong class="jxr_keyword">final</strong> Collection&lt;Response&gt; list = <strong class="jxr_keyword">new</strong> ArrayList&lt;Response&gt;(1);
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>         <strong class="jxr_keyword">if</strong> (matcher.matches()) {
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>             list.add(
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>                 <strong class="jxr_keyword">this</strong>.target.act(
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/RqRegex.html">RqRegex</a>() {
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>                         @Override
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>                         <strong class="jxr_keyword">public</strong> Matcher matcher() {
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>                             <strong class="jxr_keyword">return</strong> matcher;
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>                         }
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>                         @Override
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>                         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>                             <strong class="jxr_keyword">return</strong> req.head();
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>                         }
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>                         @Override
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>                         <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L172" href="#L172">172</a>                             <strong class="jxr_keyword">return</strong> req.body();
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>                         }
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>                     }
-<a class="jxr_linenumber" name="L175" href="#L175">175</a>                 )
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>             );
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>         }
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>         <strong class="jxr_keyword">return</strong> list.iterator();
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>     }
-<a class="jxr_linenumber" name="L180" href="#L180">180</a> 
-<a class="jxr_linenumber" name="L181" href="#L181">181</a> }
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         String path = <strong class="jxr_keyword">new</strong> RqHref.Base(req).href().path();
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">if</strong> (path.length() &gt; 1 &amp;&amp; path.charAt(path.length() - 1) == '/') {
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>             path = path.substring(0, path.length() - 1);
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>         }
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>         <strong class="jxr_keyword">final</strong> Matcher matcher = <strong class="jxr_keyword">this</strong>.pattern.matcher(path);
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>         <strong class="jxr_keyword">final</strong> Collection&lt;Response&gt; list = <strong class="jxr_keyword">new</strong> ArrayList&lt;Response&gt;(1);
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>         <strong class="jxr_keyword">if</strong> (matcher.matches()) {
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>             list.add(
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>                 <strong class="jxr_keyword">this</strong>.target.act(
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/RqRegex.html">RqRegex</a>() {
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>                         @Override
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>                         <strong class="jxr_keyword">public</strong> Matcher matcher() {
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>                             <strong class="jxr_keyword">return</strong> matcher;
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>                         }
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>                         @Override
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>                         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>                             <strong class="jxr_keyword">return</strong> req.head();
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>                         }
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>                         @Override
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>                         <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>                             <strong class="jxr_keyword">return</strong> req.body();
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>                         }
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>                     }
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>                 )
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>             );
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>         }
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>         <strong class="jxr_keyword">return</strong> list.iterator();
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>     }
+<a class="jxr_linenumber" name="L182" href="#L182">182</a> 
+<a class="jxr_linenumber" name="L183" href="#L183">183</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

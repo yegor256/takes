@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment">     * @param related Related</em>
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">     * @param link HREF</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLink.html">XeLink</a>(<strong class="jxr_keyword">final</strong> String related, <strong class="jxr_keyword">final</strong> String link) {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLink.html">XeLink</a>(<strong class="jxr_keyword">final</strong> CharSequence related, <strong class="jxr_keyword">final</strong> CharSequence link) {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          <strong class="jxr_keyword">this</strong>(related, link, <span class="jxr_string">"text/xml"</span>);
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      }
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
@@ -62,21 +62,22 @@
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     * @param href HREF</em>
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * @param type Content type</em>
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLink.html">XeLink</a>(<strong class="jxr_keyword">final</strong> String rel, <strong class="jxr_keyword">final</strong> String href, <strong class="jxr_keyword">final</strong> String type) {
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">super</strong>(
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  @Override
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().addIf(<span class="jxr_string">"links"</span>).add(<span class="jxr_string">"link"</span>)
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                          .attr(<span class="jxr_string">"rel"</span>, rel)
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                          .attr(<span class="jxr_string">"href"</span>, href)
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                          .attr(<span class="jxr_string">"type"</span>, type);
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  }
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>              }
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>          );
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>      }
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>  
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>  }
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLink.html">XeLink</a>(<strong class="jxr_keyword">final</strong> CharSequence rel, <strong class="jxr_keyword">final</strong> CharSequence href,
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">final</strong> CharSequence type) {
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">super</strong>(
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  @Override
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().addIf(<span class="jxr_string">"links"</span>).add(<span class="jxr_string">"link"</span>)
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                          .attr(<span class="jxr_string">"rel"</span>, rel.toString())
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                          .attr(<span class="jxr_string">"href"</span>, href.toString())
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          .attr(<span class="jxr_string">"type"</span>, type.toString());
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                  }
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>              }
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          );
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>  
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

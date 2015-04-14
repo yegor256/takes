@@ -80,7 +80,7 @@
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     * @param attr Attribute name</em>
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeDate.html">XeDate</a>(<strong class="jxr_keyword">final</strong> String attr) {
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeDate.html">XeDate</a>(<strong class="jxr_keyword">final</strong> CharSequence attr) {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">super</strong>(
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>                  @Override
@@ -90,7 +90,7 @@
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>                      );
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>                      fmt.setTimeZone(TimeZone.getTimeZone(<span class="jxr_string">"UTC"</span>));
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().attr(
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>                          attr, fmt.format(<strong class="jxr_keyword">new</strong> Date())
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>                          attr.toString(), fmt.format(<strong class="jxr_keyword">new</strong> Date())
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>                      );
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>                  }
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>              }

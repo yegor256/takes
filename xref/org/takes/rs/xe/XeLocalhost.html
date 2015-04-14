@@ -78,7 +78,7 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">     * @param attr Attribute name</em>
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      @SuppressWarnings(<span class="jxr_string">"PMD.CallSuperInConstructor"</span>)
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLocalhost.html">XeLocalhost</a>(<strong class="jxr_keyword">final</strong> String attr) {
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeLocalhost.html">XeLocalhost</a>(<strong class="jxr_keyword">final</strong> CharSequence attr) {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">super</strong>(
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>                  @Override
@@ -89,7 +89,7 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>                      } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnknownHostException ex) {
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>                          addr = ex.getClass().getCanonicalName();
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>                      }
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().attr(attr, addr);
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().attr(attr.toString(), addr);
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>                  }
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>              }
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          );

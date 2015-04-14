@@ -76,13 +76,13 @@
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">     * @param attr Attribute name</em>
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeSLA.html">XeSLA</a>(<strong class="jxr_keyword">final</strong> String attr) {
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeSLA.html">XeSLA</a>(<strong class="jxr_keyword">final</strong> CharSequence attr) {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">super</strong>(
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>                  @Override
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().attr(
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>                          attr,
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>                          attr.toString(),
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>                          String.format(
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>                              <span class="jxr_string">"%.3f"</span>,
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>                              ManagementFactory.getOperatingSystemMXBean()

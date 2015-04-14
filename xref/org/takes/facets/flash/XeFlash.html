@@ -93,7 +93,7 @@
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      @Override
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; cookies =
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqCookies.html">RqCookies</a>(<strong class="jxr_keyword">this</strong>.req).cookie(<strong class="jxr_keyword">this</strong>.cookie).iterator();
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <strong class="jxr_keyword">new</strong> RqCookies.Base(<strong class="jxr_keyword">this</strong>.req).cookie(<strong class="jxr_keyword">this</strong>.cookie).iterator();
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">final</strong> Directives dirs = <strong class="jxr_keyword">new</strong> Directives();
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">if</strong> (cookies.hasNext()) {
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>              <strong class="jxr_keyword">final</strong> Matcher matcher = RS_FLASH_MSG.matcher(cookies.next());
