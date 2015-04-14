@@ -25,6 +25,8 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -43,18 +45,19 @@ public final class BkTimeableTest {
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void interruptThreadAfterTimeout() {
-        final long allowedTime = 1000;
-        final AtomicLong realTime = new AtomicLong();
+        final AtomicLong real = new AtomicLong();
+        final long allowed = 1040;
+        final CountDownLatch latch = new CountDownLatch(1);
         final Back timeBack = new BkTimeable(
             new Back() {
                 @Override
                 public void accept(final Socket socket) throws IOException {
                     final long start = System.currentTimeMillis();
                     while (!Thread.currentThread().isInterrupted()) {
-                        realTime.set(System.currentTimeMillis() - start);
+                        real.set(System.currentTimeMillis() - start);
                     }
                 }
-            }, allowedTime
+            }, 1000
         );
         final Thread caller = new Thread(
             new Runnable() {
@@ -70,15 +73,14 @@ public final class BkTimeableTest {
         );
         caller.start();
         try {
-            caller.join();
+            latch.await(allowed, TimeUnit.MILLISECONDS);
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        final long errorBound = 40;
         MatcherAssert.assertThat(
             "Thread run over allowed time limit.",
-            realTime.get() <= allowedTime + errorBound
+            real.get() <= allowed
         );
     }
 }
