@@ -124,6 +124,9 @@ public final class Href implements CharSequence {
     @Override
     public String toString() {
         final StringBuilder text = new StringBuilder(this.uri.toString());
+        if (this.uri.getPath().isEmpty()) {
+            text.append('/');
+        }
         if (!this.params.isEmpty()) {
             boolean first = true;
             for (final Map.Entry<String, List<String>> ent

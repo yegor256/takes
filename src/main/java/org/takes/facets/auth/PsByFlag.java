@@ -149,7 +149,7 @@ public final class PsByFlag implements Pass {
          * @param pass Pass
          */
         public Pair(final String key, final Pass pass) {
-            this(Pattern.compile(key), pass);
+            this(Pattern.compile(Pattern.quote(key)), pass);
         }
         /**
          * Ctor.
