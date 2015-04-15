@@ -50,7 +50,7 @@ public final class CcBase64 implements Codec {
         this.origin = codec;
     }
 
-    //@todo:30min #19 to implement own simple Base64 encode algorithm
+    //@todo #19:30min to implement own simple Base64 encode algorithm
     // without using 3d-party Base64 encode libraries. Tests for this
     // method have been already created, do not forget to remove Ignore
     // annotation on it.
