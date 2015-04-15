@@ -58,6 +58,18 @@ import org.takes.Response;
 public final class RsWithCookie extends RsWrap {
 
     /**
+     * Cookie value validation regexp.
+     * @checkstyle LineLengthCheck (2 lines)
+     */
+    private static final Pattern CVALUE_PTRN = Pattern.compile("[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*|\"[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*\"");
+
+    /**
+     * Cookie name validation regexp.
+     * @checkstyle LineLengthCheck (2 lines)
+     */
+    private static final Pattern CNAME_PTRN = Pattern.compile("[\\x20-\\x7E&&[^()<>@,;:\\\"/\\[\\]?={} ]]+");
+
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -115,8 +127,7 @@ public final class RsWithCookie extends RsWrap {
      * @return Cookie value
      */
     private static String checkValue(final String value) {
-        // @checkstyle LineLengthCheck (1 line)
-        if (!Pattern.matches("[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*|\"[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*\"", value)) {
+        if (!CVALUE_PTRN.matcher(value).matches()) {
             throw new IllegalArgumentException(
                 String.format(
                     "Cookie value %s contains invalid characters",
@@ -133,8 +144,7 @@ public final class RsWithCookie extends RsWrap {
      * @return Cookie name
      */
     private static String checkName(final String name) {
-        // @checkstyle LineLengthCheck (1 line)
-        if (!Pattern.matches("[\\x20-\\x7E&&[^()<>@,;:\\\"/\\[\\]?={} ]]+", name)) {
+        if (!CNAME_PTRN.matcher(name).matches()) {
             throw new IllegalArgumentException(
                 String.format(
                     "Cookie name %s contains invalid characters",

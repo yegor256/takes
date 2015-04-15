@@ -62,7 +62,7 @@ public final class RsWithCookieTest {
     }
 
     /**
-     * RsWithCookie can rejects invalid cookie name.
+     * RsWithCookie can reject invalid cookie name.
      * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
@@ -71,7 +71,7 @@ public final class RsWithCookieTest {
     }
 
     /**
-     * RsWithCookie can rejects invalid cookie value.
+     * RsWithCookie can reject invalid cookie value.
      * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
