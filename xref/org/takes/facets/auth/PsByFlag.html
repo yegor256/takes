@@ -157,7 +157,7 @@
 <a class="jxr_linenumber" name="L149" href="#L149">149</a> <em class="jxr_javadoccomment">         * @param pass Pass</em>
 <a class="jxr_linenumber" name="L150" href="#L150">150</a> <em class="jxr_javadoccomment">         */</em>
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>         <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/auth/PsByFlag.html">Pair</a>(<strong class="jxr_keyword">final</strong> String key, <strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/auth/Pass.html">Pass</a> pass) {
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>             <strong class="jxr_keyword">this</strong>(Pattern.compile(key), pass);
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>             <strong class="jxr_keyword">this</strong>(Pattern.compile(Pattern.quote(key)), pass);
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         }
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>         <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L155" href="#L155">155</a> <em class="jxr_javadoccomment">         * Ctor.</em>
