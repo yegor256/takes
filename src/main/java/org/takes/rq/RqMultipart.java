@@ -155,11 +155,6 @@ public interface RqMultipart extends Request {
             this.map = RqMultipart.Base.asMap(requests);
         }
 
-        /**
-         * Get single part.
-         * @param name Name of the part to get
-         * @return List of parts (can be empty)
-         */
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
@@ -184,11 +179,7 @@ public interface RqMultipart extends Request {
             }
             return iter;
         }
-
-        /**
-         * Get all part names.
-         * @return All names
-         */
+        
         @Override
         public Iterable<String> names() {
             return this.map.keySet();
