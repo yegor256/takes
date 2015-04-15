@@ -139,7 +139,7 @@ public final class RqHrefTest {
                     )
                 )
             ).param("absent", "def-5"),
-            Matchers.startsWith("def-5")
+            Matchers.startsWith("def-")
         );
     }
 }

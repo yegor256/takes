@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.regex.Pattern;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
@@ -94,7 +95,9 @@ public final class PsByFlagTest {
         );
         MatcherAssert.assertThat(
             new PsByFlag(
-                ImmutableMap.<String, Pass>of("key", new PsFake(true))
+                ImmutableMap.<Pattern, Pass>of(
+                    Pattern.compile("key"), new PsFake(true)
+                )
             ).exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );

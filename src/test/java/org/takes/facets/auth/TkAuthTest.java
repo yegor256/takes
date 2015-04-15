@@ -97,7 +97,6 @@ public final class TkAuthTest {
                 Matchers.startsWith("HTTP/1.1 200 "),
                 Matchers.containsString("Set-Cookie: PsCookie=urn%3Atest%3A0")
             )
-
         );
     }
 

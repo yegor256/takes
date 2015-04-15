@@ -69,7 +69,7 @@ public interface RqHref extends Request {
         @Override
         public Href href() throws IOException {
             final Iterator<String> host = new RqHeaders(this)
-                .header("Host").iterator();
+                .header("host").iterator();
             if (!host.hasNext()) {
                 throw new IOException("Host header is absent");
             }

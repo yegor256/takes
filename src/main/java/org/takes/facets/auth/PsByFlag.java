@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -57,7 +58,7 @@ public final class PsByFlag implements Pass {
     /**
      * Flags and passes.
      */
-    private final transient Map<String, Pass> passes;
+    private final transient Map<Pattern, Pass> passes;
 
     /**
      * Ctor.
@@ -72,7 +73,7 @@ public final class PsByFlag implements Pass {
      * Ctor.
      * @param map Map
      */
-    public PsByFlag(final Map<String, Pass> map) {
+    public PsByFlag(final Map<Pattern, Pass> map) {
         this(PsByFlag.class.getSimpleName(), map);
     }
 
@@ -91,7 +92,7 @@ public final class PsByFlag implements Pass {
      * @param flg Flag
      * @param map Map
      */
-    public PsByFlag(final String flg, final Map<String, Pass> map) {
+    public PsByFlag(final String flg, final Map<Pattern, Pass> map) {
         this.flag = flg;
         this.passes = Collections.unmodifiableMap(map);
     }
@@ -102,9 +103,11 @@ public final class PsByFlag implements Pass {
             .param(this.flag).iterator();
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (flg.hasNext()) {
-            final Pass pass = this.passes.get(flg.next());
-            if (pass != null) {
-                users.add(pass.enter(req).next());
+            final String value = flg.next();
+            for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
+                if (ent.getKey().matcher(value).matches()) {
+                    users.add(ent.getValue().enter(req).next());
+                }
             }
         }
         return users.iterator();
@@ -121,11 +124,11 @@ public final class PsByFlag implements Pass {
      * @param entries Entries
      * @return Map
      */
-    private static Map<String, Pass> asMap(
-        final Map.Entry<String, Pass>... entries) {
-        final ConcurrentMap<String, Pass> map =
-            new ConcurrentHashMap<String, Pass>(entries.length);
-        for (final Map.Entry<String, Pass> ent : entries) {
+    private static Map<Pattern, Pass> asMap(
+        final Map.Entry<Pattern, Pass>... entries) {
+        final ConcurrentMap<Pattern, Pass> map =
+            new ConcurrentHashMap<Pattern, Pass>(entries.length);
+        for (final Map.Entry<Pattern, Pass> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }
         return map;
@@ -135,7 +138,7 @@ public final class PsByFlag implements Pass {
      * Pair of values.
      */
     public static final class Pair
-        extends AbstractMap.SimpleEntry<String, Pass> {
+        extends AbstractMap.SimpleEntry<Pattern, Pass> {
         /**
          * Serialization marker.
          */
@@ -146,6 +149,14 @@ public final class PsByFlag implements Pass {
          * @param pass Pass
          */
         public Pair(final String key, final Pass pass) {
+            this(Pattern.compile(key), pass);
+        }
+        /**
+         * Ctor.
+         * @param key Key
+         * @param pass Pass
+         */
+        public Pair(final Pattern key, final Pass pass) {
             super(key, pass);
         }
     }
