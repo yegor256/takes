@@ -59,8 +59,7 @@ public final class BkTimeableTest {
                         try {
                             Thread.sleep(sleep);
                         } catch (final InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                            throw new IllegalStateException(ex);
+                            ex.fillInStackTrace();
                         }
                     }
                 }
