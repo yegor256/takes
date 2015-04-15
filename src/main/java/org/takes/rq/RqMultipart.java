@@ -23,10 +23,13 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -111,20 +114,13 @@ public final class RqMultipart extends RqWrap {
             );
         }
         final Collection<Request> requests = new LinkedList<Request>();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(req).printBody(baos);
-        final byte[] boundary = matcher.group(1).getBytes();
-        final byte[] body = baos.toByteArray();
-        int pos = 0;
-        while (pos < body.length) {
-            int start = pos + boundary.length + 2;
-            if (body[start] == '-') {
-                break;
-            }
-            start += 2;
-            final int stop = RqMultipart.indexOf(body, boundary, start) - 2;
-            requests.add(this.make(body, start, stop - 2));
-            pos = stop;
+        final Parser parser = new Parser(
+            this.body(),
+            matcher.group(1),
+            this.head().iterator().next().getBytes("UTF-8")
+        );
+        while (parser.hasNext()) {
+            requests.add(parser.next());
         }
         this.map = RqMultipart.asMap(requests);
     }
@@ -167,23 +163,6 @@ public final class RqMultipart extends RqWrap {
     }
 
     /**
-     * Make a request.
-     * @param body Body
-     * @param start Start position
-     * @param stop Stop position
-     * @return Request
-     * @throws IOException If fails
-     */
-    private Request make(final byte[] body, final int start,
-        final int stop) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        baos.write(this.head().iterator().next().getBytes());
-        baos.write("\r\n".getBytes());
-        baos.write(Arrays.copyOfRange(body, start, stop));
-        return new RqLive(new ByteArrayInputStream(baos.toByteArray()));
-    }
-
-    /**
      * Convert a list of requests to a map.
      * @param reqs Requests
      * @return Map of them
@@ -214,28 +193,167 @@ public final class RqMultipart extends RqWrap {
     }
 
     /**
-     * Find position of array inside another array.
-     * @param outer Big array
-     * @param inner Small array
-     * @param start Where to start searching
-     * @return Position
-     * @throws IOException If fails
+     * Multipart parser class that parses input request into temporary files.
+     * One part per one file.
+     * @author Dmitry Molotchko (dima.molotchko@gmail.com)
+     *
      */
-    private static int indexOf(final byte[] outer, final byte[] inner,
-        final int start) throws IOException {
-        for (int idx = start; idx < outer.length - inner.length; ++idx) {
-            boolean found = true;
-            for (int sub = 0; sub < inner.length; ++sub) {
-                if (outer[idx + sub] != inner[sub]) {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
-                return idx;
+    private static class Parser {
+        /**
+         * Exception message.
+         */
+        private static final String EXCEPTION =
+            "Unexpected end of stream in part reading (no last boundary).";
+        /**
+         * States enum.
+         */
+        private enum State {
+            /**
+             * Begin state.
+             */
+            BEGIN,
+            /**
+             * Block state.
+             */
+            BLOCK,
+            /**
+             * End state.
+             */
+            END,
+        }
+        /**
+         * State.
+         */
+        private transient State state;
+        /**
+         * Input stream for parsing.
+         */
+        private final transient InputStream input;
+        /**
+         * Part boundary.
+         */
+        private final transient byte[] boundary;
+        /**
+         * Original request header.
+         */
+        private final transient byte[] header;
+        /**
+         * Ctor.
+         * @param intp Input stream
+         * @param bndary Part boundary
+         * @param hdr Original request header
+         */
+        public Parser(final InputStream intp, final String bndary,
+                final byte[] hdr) {
+            this.input = intp;
+            this.state = State.BEGIN;
+            this.boundary = new StringBuilder()
+                .append("\r\n--")
+                .append(bndary).toString().getBytes();
+            this.header = new byte[hdr.length];
+            for (int ind = 0;  ind < hdr.length;  ++ind) {
+                this.header[ind] = hdr[ind];
             }
         }
-        throw new IOException("closing boundary not found");
+        /**
+         * Has next part?
+         * @return True or false
+         */
+        public boolean hasNext() {
+            return this.state != State.END;
+        }
+        /**
+         * Parses stream into request.
+         * @return Parsed part in Request form or NULL if end of parts.
+         * @throws IOException If fails
+         * @checkstyle NPathComplexityCheck (500 lines)
+         * @checkstyle CyclomaticComplexityCheck (500 lines)
+         * @checkstyle ExecutableStatementCount (500 lines)
+         * @checkstyle NestedIfDepthCheck (500 lines)
+         * @todo #115 Refactor this function to avoid checkstyle errors
+         */
+        public Request next() throws IOException {
+            if (this.state == State.BEGIN) {
+                for (int ind = 2;  ind < this.boundary.length;  ++ind) {
+                    final int data = this.input.read();
+                    if (data < 0) {
+                        // @checkstyle LineLengthCheck (1 line)
+                        throw new IOException("Unexpected end of stream in first boundary reading.");
+                    }
+                    if (this.boundary[ind] != (byte) data) {
+                        // @checkstyle LineLengthCheck (1 line)
+                        throw new IOException("Stream is not started with boundary.");
+                    }
+                }
+                this.read('\r');
+                this.read('\n');
+                this.state = State.BLOCK;
+            }
+            if (this.state == State.BLOCK) {
+                final File file = File.createTempFile("takes", "req");
+                final OutputStream fos = new BufferedOutputStream(
+                    new FileOutputStream(file)
+                );
+                fos.write(this.header);
+                fos.write("\r\n".getBytes());
+                try {
+                    int pos = 0;
+                    while (true) {
+                        final int data = this.input.read();
+                        if (data < 0) {
+                            // @checkstyle LineLengthCheck (1 line)
+                            throw new IOException(EXCEPTION);
+                        }
+                        if (pos < this.boundary.length
+                            && data == this.boundary[pos]) {
+                            ++pos;
+                            if (pos == this.boundary.length) {
+                                final int first = this.input.read();
+                                final int second = this.input.read();
+                                if (first < 0 || second < 0) {
+                                    // @checkstyle LineLengthCheck (1 line)
+                                    throw new IOException(EXCEPTION);
+                                }
+                                if ((byte) first == '\r'
+                                    && (byte) second == '\n') {
+                                    break;
+                                } else if ((byte) first == '-'
+                                    && (byte) second == '-') {
+                                    this.state = State.END;
+                                    break;
+                                }
+                                // @checkstyle LineLengthCheck (1 line)
+                                throw new IOException("Not valid end boundary in stream.");
+                            }
+                            continue;
+                        }
+                        if (pos > 0) {
+                            fos.write(this.boundary, 0, pos);
+                            pos = 0;
+                        }
+                        fos.write(data);
+                    }
+                } finally {
+                    fos.flush();
+                    fos.close();
+                }
+                return new RqLive(new FileInputStream(file));
+            }
+            return null;
+        }
+        /**
+         * Read character from input stream.
+         * @param character Expected character
+         * @return Readed character
+         * @throws IOException If end of stream or expected character
+         *  is not equals readed character
+         */
+        private int read(final char character) throws IOException {
+            final int chr = this.input.read();
+            if (chr < 0 || (byte) chr != character) {
+                throw new IOException("Unexpected end of stream.");
+            }
+            return chr;
+        }
     }
-
 }
