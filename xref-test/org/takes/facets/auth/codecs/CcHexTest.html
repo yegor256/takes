@@ -54,7 +54,7 @@
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">final</strong> Identity identity = <strong class="jxr_keyword">new</strong> Identity.Simple(<span class="jxr_string">"urn:test:3"</span>);
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">new</strong> String(<strong class="jxr_keyword">new</strong> CcHex(<strong class="jxr_keyword">new</strong> CcPlain()).encode(identity)),
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>              Matchers.equalTo(<span class="jxr_string">"75726E2533417465737425334133"</span>)
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>              Matchers.equalTo(<span class="jxr_string">"75726E25-33417465-73742533-4133"</span>)
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          );
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
@@ -81,7 +81,7 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> decodes() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">new</strong> CcHex(<strong class="jxr_keyword">new</strong> CcPlain()).decode(
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>                  <span class="jxr_string">"75726E2533417465737425334141"</span>.getBytes()
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>                  <span class="jxr_string">"75726E25-33417465-73742533-4141"</span>.getBytes()
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              ).urn(),
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>              Matchers.equalTo(<span class="jxr_string">"urn:test:A"</span>)
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          );
@@ -101,7 +101,7 @@
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          );
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>              <strong class="jxr_keyword">new</strong> CcSafe(<strong class="jxr_keyword">new</strong> CcHex(<strong class="jxr_keyword">new</strong> CcPlain())).decode(
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <span class="jxr_string">"75726E253"</span>.getBytes()
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <span class="jxr_string">"75-72-6E-253"</span>.getBytes()
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>              ),
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>              Matchers.equalTo(Identity.ANONYMOUS)
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>          );
