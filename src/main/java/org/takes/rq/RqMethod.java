@@ -40,6 +40,41 @@ import org.takes.Request;
 public interface RqMethod extends Request {
 
     /**
+     * GET method.
+     */
+    String GET = "GET";
+
+    /**
+     * POST method.
+     */
+    String POST = "POST";
+
+    /**
+     * PUT method.
+     */
+    String PUT = "PUT";
+
+    /**
+     * DELETE method.
+     */
+    String DELETE = "DELETE";
+
+    /**
+     * HEAD method.
+     */
+    String HEAD = "HEAD";
+
+    /**
+     * OPTIONS method.
+     */
+    String OPTIONS = "OPTIONS";
+
+    /**
+     * PATCH method.
+     */
+    String PATCH = "PATCH";
+
+    /**
      * Get method.
      * @return HTTP method
      * @throws IOException If fails
@@ -57,41 +92,6 @@ public interface RqMethod extends Request {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqMethod {
-
-        /**
-         * GET method.
-         */
-        public static final String GET = "GET";
-
-        /**
-         * POST method.
-         */
-        public static final String POST = "POST";
-
-        /**
-         * PUT method.
-         */
-        public static final String PUT = "PUT";
-
-        /**
-         * DELETE method.
-         */
-        public static final String DELETE = "DELETE";
-
-        /**
-         * HEAD method.
-         */
-        public static final String HEAD = "HEAD";
-
-        /**
-         * OPTIONS method.
-         */
-        public static final String OPTIONS = "OPTIONS";
-
-        /**
-         * PATCH method.
-         */
-        public static final String PATCH = "PATCH";
 
         /**
          * Ctor.
