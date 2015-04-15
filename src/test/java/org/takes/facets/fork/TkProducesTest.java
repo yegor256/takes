@@ -31,6 +31,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsJSON;
@@ -52,7 +53,7 @@ public final class TkProducesTest {
      */
     @Test(expected = HttpException.class)
     public void failsOnUnsupportedAcceptHeader() throws IOException {
-        final TkProduces produces = new TkProduces(
+        final Take produces = new TkProduces(
             new TkEmpty(),
             "text/json,application/json"
         );
@@ -74,7 +75,7 @@ public final class TkProducesTest {
      */
     @Test
     public void producesCorrectContentTypeResponse() throws IOException {
-        final TkProduces produces = new TkProduces(
+        final Take produces = new TkProduces(
             new TkFixed(new RsJSON(new RsEmpty())),
             "text/json"
         );
