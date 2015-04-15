@@ -77,6 +77,7 @@ public final class XeGoogleLink extends XeWrap {
                             .with(flag, PsGoogle.class.getSimpleName())
                             .toString()
                     )
+                    .with("response_type", "code")
                     .with("state", flag)
                     .with(
                         "scope",
