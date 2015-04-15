@@ -50,7 +50,7 @@ public final class XeFacebookLink extends XeWrap {
      * @param app Facebook application ID
      * @throws IOException If fails
      */
-    public XeFacebookLink(final Request req, final String app)
+    public XeFacebookLink(final Request req, final CharSequence app)
         throws IOException {
         this(req, app, "takes:facebook", PsByFlag.class.getSimpleName());
     }
@@ -64,8 +64,8 @@ public final class XeFacebookLink extends XeWrap {
      * @throws IOException If fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
-    public XeFacebookLink(final Request req, final String app, final String rel,
-        final String flag) throws IOException {
+    public XeFacebookLink(final Request req, final CharSequence app,
+        final CharSequence rel, final CharSequence flag) throws IOException {
         super(
             new XeLink(
                 rel,
@@ -75,9 +75,7 @@ public final class XeFacebookLink extends XeWrap {
                         "redirect_uri",
                         new RqHref.Base(req).href()
                             .with(flag, PsFacebook.class.getSimpleName())
-                            .toString()
                     )
-                    .toString()
         )
         );
     }

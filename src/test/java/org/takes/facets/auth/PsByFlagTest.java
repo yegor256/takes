@@ -25,6 +25,7 @@ package org.takes.facets.auth;
 
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
@@ -73,9 +74,7 @@ public final class PsByFlagTest {
                 new PsByFlag.Pair(
                     "some-key", new PsFake(true)
                 )
-            ).enter(
-                new RqFake("POST", "/?PsByFlag=some-key")
-            ).next().urn(),
+            ).enter(new RqFake("POST", "/?PsByFlag=some-key")).next().urn(),
             Matchers.is("urn:test:1")
         );
     }
@@ -91,7 +90,7 @@ public final class PsByFlagTest {
                 new RsWithBody("<html>This is test response</html>"),
                     "text/html"
             ),
-            200
+            HttpURLConnection.HTTP_OK
         );
         MatcherAssert.assertThat(
             new PsByFlag(

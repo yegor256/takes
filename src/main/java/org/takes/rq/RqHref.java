@@ -118,12 +118,26 @@ public interface RqHref extends Request {
             return this.origin.body();
         }
         /**
+         * Get self.
+         * @return Self page, full URL
+         * @throws IOException If fails
+         * @since 0.14
+         */
+        public Href home() throws IOException {
+            return new Href(
+                String.format(
+                    "http://%s/",
+                    new RqHeaders(this).header("Host").iterator().next()
+                )
+            );
+        }
+        /**
          * Get param or throw HTTP exception.
          * @param name Name of query param
          * @return Value of it
          * @throws IOException If fails
          */
-        public String get(final String name) throws IOException {
+        public String param(final String name) throws IOException {
             final Iterator<String> params = this.origin.href()
                 .param(name).iterator();
             if (!params.hasNext()) {
@@ -143,7 +157,7 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String get(final String name, final String def)
+        public String param(final String name, final String def)
             throws IOException {
             final String value;
             final Iterator<String> params = this.origin.href()
