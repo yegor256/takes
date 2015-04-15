@@ -127,7 +127,7 @@ public final class RsWithCookie extends RsWrap {
      * @return Cookie value
      */
     private static String checkValue(final String value) {
-        if (!CVALUE_PTRN.matcher(value).matches()) {
+        if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
             throw new IllegalArgumentException(
                 String.format(
                     "Cookie value %s contains invalid characters",
@@ -144,7 +144,7 @@ public final class RsWithCookie extends RsWrap {
      * @return Cookie name
      */
     private static String checkName(final String name) {
-        if (!CNAME_PTRN.matcher(name).matches()) {
+        if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
             throw new IllegalArgumentException(
                 String.format(
                     "Cookie name %s contains invalid characters",
