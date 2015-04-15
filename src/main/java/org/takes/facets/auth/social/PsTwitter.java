@@ -30,13 +30,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.codec.binary.Base64;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -172,7 +172,7 @@ public final class PsTwitter implements Pass {
         try {
             final String authkey = URLEncoder.encode(consumerkey, ENCODING)
                     + ":" + URLEncoder.encode(consumersecret, ENCODING);
-            final byte[] encodedBytes = Base64.getEncoder().encode(
+            final byte[] encodedBytes = Base64.encodeBase64(
                     authkey.getBytes()
             );
             return new String(encodedBytes);
