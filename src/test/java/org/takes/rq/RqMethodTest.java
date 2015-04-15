@@ -43,8 +43,8 @@ public final class RqMethodTest {
     @Test
     public void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
-            new RqMethod(new RqFake(RqMethod.POST)).method(),
-            Matchers.equalTo(RqMethod.POST)
+            new RqMethod.Base(new RqFake(RqMethod.Base.POST)).method(),
+            Matchers.equalTo(RqMethod.Base.POST)
         );
     }
 }
