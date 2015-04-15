@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsEmpty;
@@ -43,7 +44,7 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true, of = "origin")
-public final class RsForward extends RuntimeException implements Response {
+public final class RsForward extends HttpException implements Response {
 
     /**
      * Serialization marker.
@@ -104,7 +105,7 @@ public final class RsForward extends RuntimeException implements Response {
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super(res.toString());
+        super(code, res.toString());
         this.origin = new RsWithHeader(
             new RsWithStatus(res, code),
             new Sprintf("Location: %s", loc)
