@@ -26,6 +26,7 @@ package org.takes.facets.auth.social;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
+import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
@@ -78,10 +79,12 @@ public final class PsGoogle implements Pass {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
-            throw new IllegalArgumentException("code is not provided");
+            throw new IllegalArgumentException(
+                "code is not provided by Google, probably some mistake"
+            );
         }
         return Collections.singleton(
-            PsGoogle.fetch(this.token(href.toString(), code.next()))
+            PsGoogle.fetch(this.token(href, code.next()))
         ).iterator();
     }
 
@@ -117,7 +120,7 @@ public final class PsGoogle implements Pass {
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final String home, final String code)
+    private String token(final Href home, final String code)
         throws IOException {
         return new JdkRequest("https://accounts.google.com/o/oauth2/token")
             .body()
@@ -127,6 +130,7 @@ public final class PsGoogle implements Pass {
             .formParam("grant_type", "authorization_code")
             .formParam("code", code)
             .back()
+            .through(VerboseWire.class)
             .header("Content-Type", "application/x-www-form-urlencoded")
             .method(com.jcabi.http.Request.POST)
             .fetch().as(RestResponse.class)
