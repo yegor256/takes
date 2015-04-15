@@ -38,17 +38,28 @@ import org.takes.facets.auth.Identity;
  */
 public final class CcXORTest {
 
-     /**
+    /**
      * CcXor can encode and decode.
      * @throws IOException If some problem inside
      */
     @Test
     public void encodesAndDecodes() throws IOException {
         final String urn = "urn:domain:9";
-        final Identity identity = new Identity.Simple(urn);
-        final Codec codec = new CcXOR(new CcPlain(), "secret");
+        final Codec codec = new CcXOR(
+            new Codec() {
+                @Override
+                public byte[] encode(final Identity identity) {
+                    return identity.urn().getBytes();
+                }
+                @Override
+                public Identity decode(final byte[] bytes) {
+                    return new Identity.Simple(new String(bytes));
+                }
+            },
+            "secret"
+        );
         MatcherAssert.assertThat(
-            codec.decode(codec.encode(identity)).urn(),
+            codec.decode(codec.encode(new Identity.Simple(urn))).urn(),
             Matchers.equalTo(urn)
         );
     }
