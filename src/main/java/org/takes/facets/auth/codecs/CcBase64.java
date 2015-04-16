@@ -56,7 +56,8 @@ public final class CcBase64 implements Codec {
     // annotation on it.
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return this.origin.encode(identity);
+        assert this.origin != null;
+        throw new UnsupportedOperationException("#encode()");
     }
 
     //@todo #19:30min to implement own simple Base64 decode algorithm
@@ -65,7 +66,8 @@ public final class CcBase64 implements Codec {
     // annotation on it.
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        return this.origin.decode(bytes);
+        assert this.origin != null;
+        throw new UnsupportedOperationException("#decode()");
     }
 
 }
