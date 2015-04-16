@@ -70,7 +70,6 @@ public final class ConcatTest {
         alist.add(aone);
         alist.add(atwo);
         final List<String> blist = new ArrayList<String>(0);
-
         MatcherAssert.assertThat(
                 (Iterable<String>) new Concat<String>(alist, blist),
                 Matchers.hasItems(aone, atwo)
@@ -79,7 +78,6 @@ public final class ConcatTest {
                 (Iterable<String>) new Concat<String>(alist, blist),
                 Matchers.not(Matchers.hasItems(""))
         );
-        // ensure concat empty lists will be empty
         MatcherAssert.assertThat(
                 (Iterable<String>) new Concat<String>(blist, blist),
                 Matchers.emptyIterable()
@@ -102,15 +100,15 @@ public final class ConcatTest {
         blist.add(bone);
         blist.add(btwo);
         Iterable<String> result = new Concat<String>(
-                alist,
-                blist,
-                new Concat.Condition<String>() {
-                    @Override
-                    public boolean add(final String element) {
-                        return element.endsWith("1");
-                    }
+            alist,
+            blist,
+            new Concat.Condition<String>() {
+                @Override
+                public boolean add(final String element) {
+                    return element.endsWith("1");
                 }
-                );
+            }
+        );
         MatcherAssert.assertThat(result, Matchers.hasItems(aone, bone));
         MatcherAssert.assertThat(
             result,
