@@ -38,6 +38,11 @@ import org.junit.Test;
 public final class RsWithCookieTest {
 
     /**
+     * Sample non printable char to be used for tests.
+     */
+    private static final String NONPRINTABLE_CHAR = "\u0013";
+
+    /**
      * RsWithCookie can add cookies.
      * @throws IOException If some problem inside
      */
@@ -59,6 +64,22 @@ public final class RsWithCookieTest {
                 )
             )
         );
+    }
+
+    /**
+     * RsWithCookie can fail on invalid ctor arguments.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void failsOnInvalidCookieName() {
+        new RsWithCookie(NONPRINTABLE_CHAR, "value", " attr ");
+    }
+
+    /**
+     * RsWithCookie can fail on invalid ctor arguments.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void failsOnInvalidCookieValue() {
+        new RsWithCookie("name", NONPRINTABLE_CHAR , " attr2 ");
     }
 
 }

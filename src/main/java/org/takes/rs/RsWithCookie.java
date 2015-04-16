@@ -52,6 +52,10 @@ import org.takes.Response;
 public final class RsWithCookie extends RsWrap {
 
     /**
+     * Matcher expression for non printable chars.
+     */
+    private static final String INVALID_CHARS = "[^\\p{Print}]";
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -86,10 +90,16 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
      */
-    private static String make(final String name,
-        final String value, final String... attrs) {
+    private static String make(final String name, final String value,
+            final String... attrs) {
+        if (name.matches(INVALID_CHARS)
+                || value.matches(INVALID_CHARS)) {
+            throw new IllegalArgumentException(
+                    "Cookie name/value cannot contain unprintable characters"
+            );
+        }
         final StringBuilder text = new StringBuilder(
-            String.format("%s=%s", name, value)
+                String.format("%s=%s", name , value)
         );
         for (final String attr : attrs) {
             text.append(';').append(attr);
