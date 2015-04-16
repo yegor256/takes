@@ -58,23 +58,25 @@ public final class BkTimeable implements Back {
     /**
      * Ctor.
      * @param back Original back
-     * @param ltc Maximum latency
+     * @param msec Maximum latency
      */
-    public BkTimeable(final Back back, final long ltc) {
+    public BkTimeable(final Back back, final long msec) {
         this.origin = back;
-        this.latency = ltc;
-        this.executor = Executors.newSingleThreadScheduledExecutor();
+        this.latency = msec;
+        this.executor = Executors.newScheduledThreadPool(
+            Runtime.getRuntime().availableProcessors() << 2
+        );
     }
 
     @Override
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void accept(final Socket socket) throws IOException {
-        final Thread callerThread = Thread.currentThread();
+        final Thread thread = Thread.currentThread();
         this.executor.schedule(
             new Runnable() {
                 @Override
                 public void run() {
-                    callerThread.interrupt();
+                    thread.interrupt();
                 }
             }, this.latency, TimeUnit.MILLISECONDS
         );

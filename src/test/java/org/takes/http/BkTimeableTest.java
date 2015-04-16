@@ -49,7 +49,7 @@ public final class BkTimeableTest {
         final long allowed = 1040;
         final long sleep = 50;
         final CountDownLatch latch = new CountDownLatch(1);
-        final Back timeBack = new BkTimeable(
+        final Back back = new BkTimeable(
             new Back() {
                 @Override
                 public void accept(final Socket socket) throws IOException {
@@ -57,9 +57,9 @@ public final class BkTimeableTest {
                     while (!Thread.currentThread().isInterrupted()) {
                         real.set(System.currentTimeMillis() - start);
                         try {
-                            Thread.sleep(sleep);
+                            TimeUnit.MILLISECONDS.sleep(sleep);
                         } catch (final InterruptedException ex) {
-                            ex.fillInStackTrace();
+                            Thread.currentThread().interrupt();
                         }
                     }
                 }
@@ -70,7 +70,7 @@ public final class BkTimeableTest {
                 @Override
                 public void run() {
                     try {
-                        timeBack.accept(new Socket());
+                        back.accept(new Socket());
                     } catch (final IOException ex) {
                         throw new IllegalArgumentException(ex);
                     }
@@ -79,14 +79,15 @@ public final class BkTimeableTest {
         );
         caller.start();
         try {
-            latch.await(allowed, TimeUnit.MILLISECONDS);
+            final boolean elapsed =
+                    latch.await(allowed, TimeUnit.MILLISECONDS);
+            MatcherAssert.assertThat(
+                    "Thread run over allowed time limit.",
+                    !elapsed
+            );
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        MatcherAssert.assertThat(
-            "Thread run over allowed time limit.",
-            real.get() <= allowed
-        );
     }
 }
