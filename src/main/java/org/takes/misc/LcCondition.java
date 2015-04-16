@@ -29,9 +29,9 @@ import org.takes.misc.Concat.Condition;
 /**
  * Concat lower case string condition.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Jason Wong (yegor@teamed.io)
  * @version $Id$
- * @since 0.32.1
+ * @since 0.13.8
  */
 public final class LcCondition implements Condition<String> {
 

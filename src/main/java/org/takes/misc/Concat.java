@@ -30,9 +30,9 @@ import java.util.List;
 /**
  * Concat iterable.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.32.1
+ * @since 0.13.8
  */
 public final class Concat<T> implements Iterable<T> {
 

@@ -30,9 +30,9 @@ import java.util.List;
 /**
  * Transform elements in an iterable into others.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.32.1
+ * @since 0.13.8
  */
 public class IterableTransform<T> implements Iterable<T> {
 
