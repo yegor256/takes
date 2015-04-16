@@ -32,28 +32,30 @@ import org.junit.Test;
 
 /**
  * Test case for {@link IterableTransform}.
+ * 
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
  */
 public class IterableTransformTest {
-	
-	@Test
-	public void iterableTransform() {
-		List<String> a = new ArrayList<String>();
-		a.add("a1");
-		a.add("b1");
-		a.add("c1");
-		
-		MatcherAssert.assertThat(new IterableTransform<String>(a, new IterableTransform.TransformAction<String>() {
 
-			@Override
-			public String transform(String element) {
-				return element.concat("t");
-			}
-			
-		}), Matchers.hasItems("a1t", "b1t", "c1t"));
-		
-	}
+    @Test
+    public void iterableTransform() {
+        List<String> a = new ArrayList<String>();
+        a.add("a1");
+        a.add("b1");
+        a.add("c1");
+
+        MatcherAssert.assertThat(new IterableTransform<String>(a,
+                new IterableTransform.TransformAction<String>() {
+
+                    @Override
+                    public String transform(String element) {
+                        return element.concat("t");
+                    }
+
+                }), Matchers.hasItems("a1t", "b1t", "c1t"));
+
+    }
 
 }

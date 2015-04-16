@@ -68,17 +68,17 @@ public final class RsWithHeaders extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     
                     return new Concat<String>(
-                    		res.head(),
-                    		new IterableTransform<String>(headers, 
-                    				new IterableTransform.TransformAction<String>() {
-
-										@Override
-										public String transform(String element) {
-											return element.trim();
-										}
-                    			
-                    				}
-                    			));
+                            res.head(),
+                            new IterableTransform<String>(
+                                    headers,
+                                    new IterableTransform.TransformAction<String>() {
+    
+                                        @Override
+                                        public String transform(final String element) {
+                                            return element.trim();
+                                        }
+    
+                                    }));
                 }
                 @Override
                 public InputStream body() throws IOException {

@@ -60,18 +60,16 @@ public final class RqWithoutHeader extends RqWrap {
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     
-                    return new Concat<String>(
-                    		req.head(),
-                    		Collections.EMPTY_LIST,
-                    		new Concat.Condition<String>() {
+                return new Concat<String>(req.head(), Collections.EMPTY_LIST,
+                        new Concat.Condition<String>() {
 
-								@Override
-								public boolean add(String element) {
-									return !element.toLowerCase(Locale.ENGLISH)
-				                            .startsWith(prefix);
-								}
-                    			
-                    		});
+                            @Override
+                            public boolean add(final String element) {
+                                return !element.toLowerCase(Locale.ENGLISH)
+                                        .startsWith(prefix);
+                            }
+
+                        });
                     
                 }
                 @Override

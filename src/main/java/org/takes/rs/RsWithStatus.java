@@ -114,25 +114,24 @@ public final class RsWithStatus extends RsWrap {
             );
         }
         
-        return new Concat<String>(
-        		Collections.singleton(String.format("HTTP/1.1 %d %s", status, reason)),
-        		new Concat<String>(origin.head(),
-        				Collections.EMPTY_LIST,
-        				new Concat.Condition<String>() {
-        					
-        					private boolean first = true;
+        return new Concat<String>(Collections.singleton(String.format(
+                "HTTP/1.1 %d %s", status, reason)), new Concat<String>(
+                origin.head(), Collections.EMPTY_LIST,
+                new Concat.Condition<String>() {
 
-							@Override
-							public boolean add(String element) {
-								if (first) {
-									first = false;
-									return false;
-								} else {
-									return true;
-								}
-							}
-        			
-        		}));
+                    private boolean first = true;
+
+                    @Override
+                    public boolean add(final String element) {
+                        if (first) {
+                            first = false;
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+
+                }));
     }
 
     /**
