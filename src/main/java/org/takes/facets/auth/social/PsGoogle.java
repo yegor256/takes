@@ -26,7 +26,6 @@ package org.takes.facets.auth.social;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
-import com.jcabi.http.wire.VerboseWire;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
@@ -136,7 +135,6 @@ public final class PsGoogle implements Pass {
             .formParam("grant_type", "authorization_code")
             .formParam("code", code)
             .back()
-            .through(VerboseWire.class)
             .header("Content-Type", "application/x-www-form-urlencoded")
             .method(com.jcabi.http.Request.POST)
             .fetch().as(RestResponse.class)
