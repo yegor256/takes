@@ -67,11 +67,6 @@ public final class CcAES implements Codec {
     private final transient Codec origin;
 
     /**
-     * Secret to use for encoding.
-     */
-    private final transient byte[] secret;
-
-    /**
      * Initialization Vector.
      */
     private final transient byte[] ivbytes;
@@ -79,7 +74,7 @@ public final class CcAES implements Codec {
     /**
      * The AES secret key object.
      */
-    private final SecretKey passcode;
+    private final transient SecretKey secret;
 
     /**
      * Ctor.
@@ -93,12 +88,12 @@ public final class CcAES implements Codec {
             );
         }
         this.origin = codec;
-        this.secret = new byte[key.length];
-        System.arraycopy(key, 0, this.secret, 0, key.length);
+        final byte[] passcode = new byte[key.length];
+        System.arraycopy(key, 0, passcode, 0, key.length);
         final SecureRandom random = new SecureRandom();
         this.ivbytes = new byte[BLOCK];
         random.nextBytes(this.ivbytes);
-        this.passcode = new SecretKeySpec(this.secret, "AES");
+        this.secret = new SecretKeySpec(passcode, "AES");
     }
 
     @Override
@@ -123,7 +118,7 @@ public final class CcAES implements Codec {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
             final AlgorithmParameterSpec spec =
                     new IvParameterSpec(this.ivbytes);
-            cipher.init(Cipher.ENCRYPT_MODE, this.passcode, spec);
+            cipher.init(Cipher.ENCRYPT_MODE, this.secret, spec);
             return cipher.doFinal(bytes);
         } catch (final InvalidKeyException ike) {
             throw new IOException(ike);
@@ -152,7 +147,7 @@ public final class CcAES implements Codec {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
             final AlgorithmParameterSpec spec =
                     new IvParameterSpec(this.ivbytes);
-            cipher.init(Cipher.DECRYPT_MODE, this.passcode, spec);
+            cipher.init(Cipher.DECRYPT_MODE, this.secret, spec);
             return cipher.doFinal(bytes);
         } catch (final InvalidKeyException ike) {
             throw new IOException(ike);
