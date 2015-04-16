@@ -41,20 +41,10 @@ public final class Concat<T> implements Iterable<T> {
      */
     private final transient List<T> storage = new LinkedList<T>();
 
-    public interface Condition<T> {
-        /**
-         * Determine if an element should be added.
-         * 
-         * @param element The element in the iterables to examine.
-         * @return True to add the element, false to skip.
-         */
-        boolean add(T element);
-    }
-
     /**
      * To produce an iterable collection combining a and b, with order of the
      * elements in a first.
-     * 
+     *
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
      */
@@ -69,25 +59,24 @@ public final class Concat<T> implements Iterable<T> {
      * 
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
-     * @param cond
-     *            To determine which element in the iterables to add in the
-     *            final iterable.
+     * @param cond To determine which element to add in the final iterable
      */
-    public Concat(final Iterable<T> aitb, final Iterable<T> bitb, final Condition<T> cond) {
+    public Concat(final Iterable<T> aitb, final Iterable<T> bitb,
+            final Condition<T> cond) {
         this.concat(aitb, cond);
         this.concat(bitb, cond);
     }
 
     /**
      * Adding an iterable into storage with condition.
-     * 
+     *
      * @param itb Iterable to add
      * @param cond Condition to determine the element should be added
      */
     private void concat(final Iterable<T> itb, final Condition<T> cond) {
-        Iterator<T> itr = itb.iterator();
+        final Iterator<T> itr = itb.iterator();
         while (itr.hasNext()) {
-            T element = itr.next();
+            final T element = itr.next();
             if (cond.add(element)) {
                 this.storage.add(element);
             }
@@ -96,19 +85,29 @@ public final class Concat<T> implements Iterable<T> {
 
     /**
      * Adding an iterable into storage.
-     * 
+     *
      * @param itb Iterable to add
      */
     private void concat(final Iterable<T> itb) {
-        Iterator<T> itr = itb.iterator();
+        final Iterator<T> itr = itb.iterator();
         while (itr.hasNext()) {
             this.storage.add(itr.next());
         }
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public final Iterator<T> iterator() {
         return this.storage.iterator();
+    }
+    
+    public interface Condition<T> {
+        /**
+         * Determine if an element should be added.
+         *
+         * @param element The element in the iterables to examine.
+         * @return True to add the element, false to skip.
+         */
+        boolean add(T element);
     }
 
 }

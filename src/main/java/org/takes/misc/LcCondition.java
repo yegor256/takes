@@ -23,42 +23,35 @@
  */
 package org.takes.misc;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.util.Locale;
+import org.takes.misc.Concat.Condition;
 
 /**
- * Test case for {@link IterableTransform}.
+ * Concat lower case string condition.
  * 
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
  */
-public final class IterableTransformTest {
+public final class LcCondition implements Condition<String> {
 
     /**
-     * Iterable transform test
+     * Prefix.
      */
-    @Test
-    public void iterableTransform() {
-        List<String> alist = new ArrayList<String>();
-        alist.add("a1");
-        alist.add("b1");
-        alist.add("c1");
-
-        MatcherAssert.assertThat(
-                new IterableTransform<String>(alist,
-                        new IterableTransform.Action<String>() {
-                            @Override
-                            public String transform(final String element) {
-                                return element.concat("t");
-                            }
-                        }
-                ), 
-                Matchers.hasItems("a1t", "b1t", "c1t")
-        );
+    private String prefix;
+    
+    /**
+     * Ctor.
+     * @param prefix The prefix to check
+     */
+    public LcCondition(final String prefix) {
+        this.prefix = prefix;
+    }
+    
+    @Override
+    public boolean add(final String element) {
+        return !element.toLowerCase(Locale.ENGLISH)
+                .startsWith(this.prefix);
     }
 
 }

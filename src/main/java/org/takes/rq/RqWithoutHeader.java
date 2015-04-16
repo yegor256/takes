@@ -27,11 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Locale;
-
 import lombok.EqualsAndHashCode;
-
 import org.takes.Request;
 import org.takes.misc.Concat;
+import org.takes.misc.LcCondition;
 
 /**
  * Request without a header (even if it was absent).
@@ -59,18 +58,11 @@ public final class RqWithoutHeader extends RqWrap {
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
-                    
-                return new Concat<String>(req.head(), Collections.EMPTY_LIST,
-                        new Concat.Condition<String>() {
-
-                            @Override
-                            public boolean add(final String element) {
-                                return !element.toLowerCase(Locale.ENGLISH)
-                                        .startsWith(prefix);
-                            }
-
-                        });
-                    
+                    return new Concat<String>(
+                            req.head(), 
+                            Collections.EMPTY_LIST,
+                            new LcCondition(prefix)
+                           );
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -79,5 +71,4 @@ public final class RqWithoutHeader extends RqWrap {
             }
         );
     }
-
 }

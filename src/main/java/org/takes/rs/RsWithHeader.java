@@ -26,12 +26,8 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Pattern;
-
 import lombok.EqualsAndHashCode;
-
 import org.takes.Response;
 import org.takes.misc.Concat;
 

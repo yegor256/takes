@@ -41,33 +41,33 @@ public class IterableTransform<T> implements Iterable<T> {
      */
     private final transient List<T> storage = new LinkedList<T>();
 
-    public static interface TransformAction<T> {
-        /**
-         * The transform action of the element.
-         * 
-         * @param element Element of the iterable
-         * @return Transformed element
-         */
-        T transform(T element);
-    }
-
     /**
      * Transform elements in the supplied iterable by the action supplied.
-     * 
+     *
      * @param list Iterable to be transformed 
      * @param action The actual transformation implementation
      */
     public IterableTransform(final Iterable<T> list,
-            final IterableTransform.TransformAction<T> action) {
-        Iterator<T> itr = list.iterator();
+            final IterableTransform.Action<T> action) {
+        final Iterator<T> itr = list.iterator();
         while (itr.hasNext()) {
             this.storage.add(action.transform(itr.next()));
         }
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public final Iterator<T> iterator() {
         return this.storage.iterator();
+    }
+    
+    public interface Action<T> {
+        /**
+         * The transform action of the element.
+         *
+         * @param element Element of the iterable
+         * @return Transformed element
+         */
+        T transform(T element);
     }
 
 }

@@ -25,11 +25,8 @@ package org.takes.misc;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hamcrest.MatcherAssert;
-
-import static org.hamcrest.Matchers.*;
-
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -39,20 +36,28 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.32.1
  */
-public class ConcatTest {
+public final class ConcatTest {
 
+    /**
+     * Basic concat unit test
+     */
     @Test
     public void concat() {
-        List<String> a = new ArrayList<String>();
-        a.add("a1");
-        a.add("a2");
-        List<String> b = new ArrayList<String>();
-        b.add("b1");
-        b.add("b2");
-        MatcherAssert.assertThat((Iterable<String>) new Concat<String>(a, b),
-                hasItems("a1", "a2", "b1", "b2"));
+        List<String> alist = new ArrayList<String>();
+        alist.add("a1");
+        alist.add("a2");
+        List<String> blist = new ArrayList<String>();
+        blist.add("b1");
+        blist.add("b2");
+        MatcherAssert.assertThat(
+                (Iterable<String>) new Concat<String>(alist, blist),
+                Matchers.hasItems("a1", "a2", "b1", "b2")
+        );
     }
 
+    /**
+     * Concat test with empty inputs
+     */
     @Test
     public void concatWithEmpty() {
         List<String> a = new ArrayList<String>();
@@ -60,36 +65,46 @@ public class ConcatTest {
         a.add("a2");
         List<String> b = new ArrayList<String>();
 
-        MatcherAssert.assertThat((Iterable<String>) new Concat<String>(a, b),
-                hasItems("a1", "a2"));
-        MatcherAssert.assertThat((Iterable<String>) new Concat<String>(a, b),
-                not(hasItems("")));
+        MatcherAssert.assertThat(
+                (Iterable<String>) new Concat<String>(a, b),
+                Matchers.hasItems("a1", "a2")
+        );
+        MatcherAssert.assertThat(
+                (Iterable<String>) new Concat<String>(a, b),
+                Matchers.not(Matchers.hasItems(""))
+        );
         // ensure concat empty lists will be empty
-        MatcherAssert.assertThat((Iterable<String>) new Concat<String>(b, b),
-                emptyIterable());
+        MatcherAssert.assertThat(
+                (Iterable<String>) new Concat<String>(b, b),
+                Matchers.emptyIterable()
+        );
     }
 
+    /**
+     * Concat test with condition
+     */
     @Test
     public void concatWithCondition() {
-        List<String> a = new ArrayList<String>();
-        a.add("a1");
-        a.add("a2");
-        List<String> b = new ArrayList<String>();
-        b.add("b1");
-        b.add("b2");
+        List<String> alist = new ArrayList<String>();
+        alist.add("a1");
+        alist.add("a2");
+        List<String> blist = new ArrayList<String>();
+        blist.add("b1");
+        blist.add("b2");
 
-        Iterable<String> result = new Concat<String>(a, b,
+        Iterable<String> result = new Concat<String>(
+                alist, 
+                blist,
                 new Concat.Condition<String>() {
-
                     @Override
-                    public boolean add(String element) {
+                    public boolean add(final String element) {
                         return element.endsWith("1");
                     }
+                }
+                );
 
-                });
-
-        MatcherAssert.assertThat(result, hasItems("a1", "b1"));
-        MatcherAssert.assertThat(result, not(hasItems("a2", "b2")));
+        MatcherAssert.assertThat(result, Matchers.hasItems("a1", "b1"));
+        MatcherAssert.assertThat(result, Matchers.not(Matchers.hasItems("a2", "b2")));
     }
 
 }

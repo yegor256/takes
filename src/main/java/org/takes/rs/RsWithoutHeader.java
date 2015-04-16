@@ -27,11 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Locale;
-
 import lombok.EqualsAndHashCode;
-
 import org.takes.Response;
 import org.takes.misc.Concat;
+import org.takes.misc.LcCondition;
 
 /**
  * Response decorator, without a header.
@@ -59,17 +58,11 @@ public final class RsWithoutHeader extends RsWrap {
                     final String prefix = String.format(
                         "%s:", name.toLowerCase(Locale.ENGLISH)
                     );
-                    
-                    return new Concat<String>(res.head(), Collections.EMPTY_LIST,
-                            new Concat.Condition<String>() {
-    
-                                @Override
-                                public boolean add(final String element) {
-                                    return !element.toLowerCase(Locale.ENGLISH)
-                                            .startsWith(prefix);
-                                }
-    
-                            });
+                    return new Concat<String>(
+                            res.head(), 
+                            Collections.EMPTY_LIST,
+                            new LcCondition(prefix)
+                           );
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -78,5 +71,4 @@ public final class RsWithoutHeader extends RsWrap {
             }
         );
     }
-
 }
