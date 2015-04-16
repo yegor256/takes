@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -150,9 +152,13 @@ public final class PsGoogle implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(json.size());
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        props.put("picture", json.getString("picture", "#"));
+        props.put("name", json.getString("name", "unknown"));
         return new Identity.Simple(
-            String.format("urn:google:%s", json.getString("id")),
-            Collections.<String, String>emptyMap()
+            String.format("urn:google:%s", json.getString("id")), props
         );
     }
 
