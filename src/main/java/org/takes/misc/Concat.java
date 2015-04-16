@@ -66,9 +66,9 @@ public final class Concat<T> implements Iterable<T> {
         this.concat(aitb, cond);
         this.concat(bitb, cond);
     }
-    
+
     @Override
-    public final Iterator<T> iterator() {
+    public Iterator<T> iterator() {
         return this.storage.iterator();
     }
 
@@ -99,7 +99,7 @@ public final class Concat<T> implements Iterable<T> {
             this.storage.add(itr.next());
         }
     }
-    
+
     public interface Condition<T> {
         /**
          * Determine if an element should be added.

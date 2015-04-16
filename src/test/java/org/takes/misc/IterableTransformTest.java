@@ -43,7 +43,7 @@ public final class IterableTransformTest {
      */
     @Test
     public void iterableTransform() {
-        final List<String> alist = new ArrayList<String>();
+        final List<String> alist = new ArrayList<String>(3);
         alist.add("a1");
         alist.add("b1");
         alist.add("c1");

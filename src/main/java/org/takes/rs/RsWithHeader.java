@@ -131,7 +131,7 @@ public final class RsWithHeader extends RsWrap {
                     header, HEADER
                 )
             );
-        }        
+        }
         return new Concat<String>(head, Collections.singleton(header));
     }
 
