@@ -21,54 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
+import org.takes.facets.auth.Identity;
 
 /**
- * Take that makes all not-found exceptions location aware.
+ * Base64 codec.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.10
+ * @since 0.13
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TkVerbose extends TkWrap {
-
+@EqualsAndHashCode
+public final class CcBase64 implements Codec {
+    /**
+     * Original codec.
+     */
+    private final transient Codec origin;
     /**
      * Ctor.
-     * @param take Original take
+     * @param codec Original codec
      */
-    public TkVerbose(final Take take) {
-        super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws IOException {
-                    try {
-                        return take.act(request);
-                    } catch (final HttpException ex) {
-                        throw new HttpException(
-                            ex.code(),
-                            String.format(
-                                "%s %s",
-                                new RqMethod.Base(request).method(),
-                                new RqHref.Base(request).href()
-                            ),
-                            ex
-                        );
-                    }
-                }
-            }
-        );
+    public CcBase64(final Codec codec) {
+        this.origin = codec;
+    }
+
+    //@todo #19:30min to implement own simple Base64 encode algorithm
+    // without using 3d-party Base64 encode libraries. Tests for this
+    // method have been already created, do not forget to remove Ignore
+    // annotation on it.
+    @Override
+    public byte[] encode(final Identity identity) throws IOException {
+        return this.origin.encode(identity);
+    }
+
+    //@todo #19:30min to implement own simple Base64 decode algorithm
+    // without using 3d-party Base64 decode libraries. Tests for this
+    // method have been already created, do not forget to remove Ignore
+    // annotation on it.
+    @Override
+    public Identity decode(final byte[] bytes) throws IOException {
+        return this.origin.decode(bytes);
     }
 
 }
