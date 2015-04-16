@@ -59,10 +59,10 @@ public final class RsWithoutHeader extends RsWrap {
                         "%s:", name.toLowerCase(Locale.ENGLISH)
                     );
                     return new Concat<String>(
-                            res.head(), 
-                            Collections.EMPTY_LIST,
-                            new LcCondition(prefix)
-                           );
+                        res.head(),
+                        Collections.EMPTY_LIST,
+                        new LcCondition(prefix)
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {

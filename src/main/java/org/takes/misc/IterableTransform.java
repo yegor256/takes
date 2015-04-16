@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Transform elements in an iterable into others.
- * 
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
@@ -44,7 +44,7 @@ public class IterableTransform<T> implements Iterable<T> {
     /**
      * Transform elements in the supplied iterable by the action supplied.
      *
-     * @param list Iterable to be transformed 
+     * @param list Iterable to be transformed
      * @param action The actual transformation implementation
      */
     public IterableTransform(final Iterable<T> list,
@@ -59,7 +59,7 @@ public class IterableTransform<T> implements Iterable<T> {
     public final Iterator<T> iterator() {
         return this.storage.iterator();
     }
-    
+
     public interface Action<T> {
         /**
          * The transform action of the element.

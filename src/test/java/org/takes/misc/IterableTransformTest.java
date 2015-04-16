@@ -31,7 +31,7 @@ import org.junit.Test;
 
 /**
  * Test case for {@link IterableTransform}.
- * 
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
@@ -39,25 +39,25 @@ import org.junit.Test;
 public final class IterableTransformTest {
 
     /**
-     * Iterable transform test
+     * Iterable transform test.
      */
     @Test
     public void iterableTransform() {
-        List<String> alist = new ArrayList<String>();
+        final List<String> alist = new ArrayList<String>();
         alist.add("a1");
         alist.add("b1");
         alist.add("c1");
-
         MatcherAssert.assertThat(
-                new IterableTransform<String>(alist,
-                        new IterableTransform.Action<String>() {
-                            @Override
-                            public String transform(final String element) {
-                                return element.concat("t");
-                            }
-                        }
-                ), 
-                Matchers.hasItems("a1t", "b1t", "c1t")
+            new IterableTransform<String>(
+                alist,
+                new IterableTransform.Action<String>() {
+                    @Override
+                    public String transform(final String element) {
+                        return element.concat("t");
+                    }
+                }
+            ),
+            Matchers.hasItems("a1t", "b1t", "c1t")
         );
     }
 

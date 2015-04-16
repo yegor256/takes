@@ -26,7 +26,9 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.IterableTransform;
@@ -63,17 +65,12 @@ public final class RsWithHeaders extends RsWrap {
                 @Override
                 public Iterable<String> head() throws IOException {   
                     return new Concat<String>(
-                            res.head(),
-                            new IterableTransform<String>(
-                                    headers,
-                                    new IterableTransform.Action<String>() {
-                                        @Override
-                                        public String transform(final String element) {
-                                            return element.trim();
-                                        }
-                                    }
-                            )
-                           );
+                        res.head(),
+                        new IterableTransform<String>(
+                                headers,
+                                new Action()
+                        )
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -83,4 +80,12 @@ public final class RsWithHeaders extends RsWrap {
         );
     }
 
+    private static final class Action implements IterableTransform.Action<String> {
+
+        @Override
+        public String transform(final String element) {
+            return element.trim();
+        }
+        
+    }
 }

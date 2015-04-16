@@ -64,9 +64,9 @@ public final class RqWithHeader extends RqWrap {
                 @Override
                 public Iterable<String> head() throws IOException {
                     return new Concat<String>(
-                            req.head(),
-                            Collections.singleton(header.toString())
-                           );
+                        req.head(),
+                        Collections.singleton(header.toString())
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {

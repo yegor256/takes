@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Concat iterable.
- * 
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
@@ -56,7 +56,7 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * To produce an iterable collection, determined by condition, combining a
      * and b, with order of the elements in a first.
-     * 
+     *
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
      * @param cond To determine which element to add in the final iterable
@@ -65,6 +65,11 @@ public final class Concat<T> implements Iterable<T> {
             final Condition<T> cond) {
         this.concat(aitb, cond);
         this.concat(bitb, cond);
+    }
+    
+    @Override
+    public final Iterator<T> iterator() {
+        return this.storage.iterator();
     }
 
     /**
@@ -93,11 +98,6 @@ public final class Concat<T> implements Iterable<T> {
         while (itr.hasNext()) {
             this.storage.add(itr.next());
         }
-    }
-
-    @Override
-    public final Iterator<T> iterator() {
-        return this.storage.iterator();
     }
     
     public interface Condition<T> {

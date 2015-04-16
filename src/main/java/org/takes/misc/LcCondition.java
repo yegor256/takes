@@ -28,7 +28,7 @@ import org.takes.misc.Concat.Condition;
 
 /**
  * Concat lower case string condition.
- * 
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
@@ -39,15 +39,15 @@ public final class LcCondition implements Condition<String> {
      * Prefix.
      */
     private String prefix;
-    
+
     /**
      * Ctor.
-     * @param prefix The prefix to check
+     * @param str The prefix to check
      */
-    public LcCondition(final String prefix) {
-        this.prefix = prefix;
+    public LcCondition(final String str) {
+        this.prefix = str;
     }
-    
+
     @Override
     public boolean add(final String element) {
         return !element.toLowerCase(Locale.ENGLISH)

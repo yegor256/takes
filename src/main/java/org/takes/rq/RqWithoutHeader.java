@@ -59,10 +59,10 @@ public final class RqWithoutHeader extends RqWrap {
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     return new Concat<String>(
-                            req.head(), 
-                            Collections.EMPTY_LIST,
-                            new LcCondition(prefix)
-                           );
+                        req.head(),
+                        Collections.EMPTY_LIST,
+                        new LcCondition(prefix)
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
