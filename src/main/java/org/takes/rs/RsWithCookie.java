@@ -57,8 +57,8 @@ public final class RsWithCookie extends RsWrap {
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      */
-    public RsWithCookie(final String name, final String value,
-        final String... attrs) {
+    public RsWithCookie(final CharSequence name, final CharSequence value,
+        final CharSequence... attrs) {
         this(new RsEmpty(), name, value, attrs);
     }
 
@@ -70,8 +70,8 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @checkstyle ParameterNumberCheck (5 lines)
      */
-    public RsWithCookie(final Response res, final String name,
-        final String value, final String... attrs) {
+    public RsWithCookie(final Response res, final CharSequence name,
+        final CharSequence value, final CharSequence... attrs) {
         super(
             new RsWithHeader(
                 res, "Set-Cookie", RsWithCookie.make(name, value, attrs)
@@ -86,12 +86,12 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
      */
-    private static String make(final String name,
-        final String value, final String... attrs) {
+    private static String make(final CharSequence name,
+        final CharSequence value, final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder(
             String.format("%s=%s", name, value)
         );
-        for (final String attr : attrs) {
+        for (final CharSequence attr : attrs) {
             text.append(';').append(attr);
         }
         return text.toString();
