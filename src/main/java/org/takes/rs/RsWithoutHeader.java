@@ -54,6 +54,7 @@ public final class RsWithoutHeader extends RsWrap {
         super(
             new Response() {
                 @Override
+                @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
                         "%s:", name.toLowerCase(Locale.ENGLISH)

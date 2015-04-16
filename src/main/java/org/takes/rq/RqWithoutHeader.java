@@ -54,6 +54,7 @@ public final class RqWithoutHeader extends RqWrap {
         super(
             new Request() {
                 @Override
+                @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)

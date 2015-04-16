@@ -100,6 +100,7 @@ public final class RsWithStatus extends RsWrap {
      * @return Head
      * @throws IOException If fails
      */
+    @SuppressWarnings("unchecked")
     private static Iterable<String> head(final Response origin,
         final int status, final String reason) throws IOException {
         // @checkstyle MagicNumber (1 line)
