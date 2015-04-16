@@ -50,7 +50,7 @@ import org.takes.rq.RqHref;
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode(of = { "app", "key", "redir" })
 public final class PsGoogle implements Pass {
 
     /**
@@ -64,13 +64,21 @@ public final class PsGoogle implements Pass {
     private final transient String key;
 
     /**
+     * Redirect URI.
+     */
+    private final transient String redir;
+
+    /**
      * Ctor.
      * @param gapp Google app
      * @param gkey Google key
+     * @param uri Redirect URI (exactly as registered in Google console)
      */
-    public PsGoogle(final String gapp, final String gkey) {
+    public PsGoogle(final String gapp, final String gkey,
+        final String uri) {
         this.app = gapp;
         this.key = gkey;
+        this.redir = uri;
     }
 
     @Override
@@ -84,7 +92,7 @@ public final class PsGoogle implements Pass {
             );
         }
         return Collections.singleton(
-            PsGoogle.fetch(this.token(href, code.next()))
+            PsGoogle.fetch(this.token(code.next()))
         ).iterator();
     }
 
@@ -115,17 +123,15 @@ public final class PsGoogle implements Pass {
 
     /**
      * Retrieve Google access token.
-     * @param home Home of this page
      * @param code Google "authorization code"
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final Href home, final String code)
-        throws IOException {
+    private String token(final String code) throws IOException {
         return new JdkRequest("https://accounts.google.com/o/oauth2/token")
             .body()
             .formParam("client_id", this.app)
-            .formParam("redirect_uri", home)
+            .formParam("redirect_uri", this.redir)
             .formParam("client_secret", this.key)
             .formParam("grant_type", "authorization_code")
             .formParam("code", code)
