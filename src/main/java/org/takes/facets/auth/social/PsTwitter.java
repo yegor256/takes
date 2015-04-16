@@ -27,16 +27,14 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
+import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.codec.binary.Base64;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -55,11 +53,6 @@ import org.takes.misc.Href;
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsTwitter implements Pass {
-
-    /**
-     * UTF-8 encoding.
-     */
-    private static final String ENCODING = "UTF-8";
 
     /**
      * App name.
@@ -134,9 +127,13 @@ public final class PsTwitter implements Pass {
             )
                 .header(
                         "Authorization",
-                        "Basic ".concat(
-                                PsTwitter.prepareAuthKey(
-                                this.app, this.key
+                        String.format(
+                                "Basic %s", DatatypeConverter
+                                .printBase64Binary(
+                                        String.format(
+                                                "%s:%s",
+                                        this.app, this.key
+                        ).getBytes()
                     )
                 )
             )
@@ -159,25 +156,5 @@ public final class PsTwitter implements Pass {
         return new Identity.Simple(
             String.format("urn:twitter:%d", json.getInt("id")), props
         );
-    }
-
-    /**
-     * Encode consumerKey and consumerSecret and prepare authorization key.
-     * @param consumerkey Twitter consumerKey
-     * @param consumersecret Twitter consumerSecret
-     * @return String authorization key
-     */
-    private static String prepareAuthKey(final String consumerkey,
-            final String consumersecret) {
-        try {
-            final String authkey = URLEncoder.encode(consumerkey, ENCODING)
-                    + ":" + URLEncoder.encode(consumersecret, ENCODING);
-            final byte[] encodedBytes = Base64.encodeBase64(
-                    authkey.getBytes()
-            );
-            return new String(encodedBytes);
-        } catch (final UnsupportedEncodingException  ex) {
-            throw new EncodingException(ex);
-        }
     }
 }
