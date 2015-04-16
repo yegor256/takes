@@ -44,13 +44,13 @@ public final class ConcatTest {
     @Test
     public void concat() {
         final List<String> alist = new ArrayList<String>(2);
-        String aone = "a1";
-        String atwo = "a2";
+        final String aone = "a1";
+        final String atwo = "a2";
         alist.add(aone);
         alist.add(atwo);
         final List<String> blist = new ArrayList<String>(2);
-        String bone = "b1";
-        String btwo = "b2";
+        final String bone = "b1";
+        final String btwo = "b2";
         blist.add(bone);
         blist.add(btwo);
         MatcherAssert.assertThat(
@@ -65,8 +65,8 @@ public final class ConcatTest {
     @Test
     public void concatWithEmpty() {
         final List<String> alist = new ArrayList<String>(2);
-        String aone = "an1";
-        String atwo = "an2";
+        final String aone = "an1";
+        final String atwo = "an2";
         alist.add(aone);
         alist.add(atwo);
         final List<String> blist = new ArrayList<String>(0);
@@ -92,13 +92,13 @@ public final class ConcatTest {
     @Test
     public void concatWithCondition() {
         final List<String> alist = new ArrayList<String>(2);
-        String aone = "at1";
-        String atwo = "at2";
+        final String aone = "at1";
+        final String atwo = "at2";
         alist.add(aone);
         alist.add(atwo);
         final List<String> blist = new ArrayList<String>(2);
-        String bone = "bt1";
-        String btwo = "bt2";
+        final String bone = "bt1";
+        final String btwo = "bt2";
         blist.add(bone);
         blist.add(btwo);
         Iterable<String> result = new Concat<String>(
