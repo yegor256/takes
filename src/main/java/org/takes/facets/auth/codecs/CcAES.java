@@ -121,7 +121,7 @@ public final class CcAES implements Codec {
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
-            final AlgorithmParameterSpec spec = 
+            final AlgorithmParameterSpec spec =
                     new IvParameterSpec(this.ivbytes);
             cipher.init(Cipher.ENCRYPT_MODE, this.passcode, spec);
             return cipher.doFinal(bytes);
@@ -150,7 +150,7 @@ public final class CcAES implements Codec {
     private byte[] decrypt(final byte[] bytes) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
-            final AlgorithmParameterSpec spec = 
+            final AlgorithmParameterSpec spec =
                     new IvParameterSpec(this.ivbytes);
             cipher.init(Cipher.DECRYPT_MODE, this.passcode, spec);
             return cipher.doFinal(bytes);
