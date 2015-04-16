@@ -44,18 +44,18 @@ public final class ConcatTest {
     @Test
     public void concat() {
         final List<String> alist = new ArrayList<String>(2);
-        String astr1 = "a1";
-        String astr2 = "a2";
-        alist.add(astr1);
-        alist.add(astr2);
+        String aone = "a1";
+        String atwo = "a2";
+        alist.add(aone);
+        alist.add(atwo);
         final List<String> blist = new ArrayList<String>(2);
-        String bstr1 = "b1";
-        String bstr2 = "b2";
-        blist.add(bstr1);
-        blist.add(bstr2);
+        String bone = "b1";
+        String btwo = "b2";
+        blist.add(bone);
+        blist.add(btwo);
         MatcherAssert.assertThat(
                 (Iterable<String>) new Concat<String>(alist, blist),
-                Matchers.hasItems(astr1, astr2, bstr1, bstr2)
+                Matchers.hasItems(aone, atwo, bone, btwo)
         );
     }
 
@@ -65,15 +65,15 @@ public final class ConcatTest {
     @Test
     public void concatWithEmpty() {
         final List<String> alist = new ArrayList<String>(2);
-        String astr1 = "an1";
-        String astr2 = "an2";
-        alist.add(astr1);
-        alist.add(astr2);
+        String aone = "an1";
+        String atwo = "an2";
+        alist.add(aone);
+        alist.add(atwo);
         final List<String> blist = new ArrayList<String>(0);
 
         MatcherAssert.assertThat(
                 (Iterable<String>) new Concat<String>(alist, blist),
-                Matchers.hasItems(astr1, astr2)
+                Matchers.hasItems(aone, atwo)
         );
         MatcherAssert.assertThat(
                 (Iterable<String>) new Concat<String>(alist, blist),
@@ -92,18 +92,17 @@ public final class ConcatTest {
     @Test
     public void concatWithCondition() {
         final List<String> alist = new ArrayList<String>(2);
-        String astr1 = "at1";
-        String astr2 = "at2";
-        alist.add(astr1);
-        alist.add(astr2);
+        String aone = "at1";
+        String atwo = "at2";
+        alist.add(aone);
+        alist.add(atwo);
         final List<String> blist = new ArrayList<String>(2);
-        String bstr1 = "bt1";
-        String bstr2 = "bt2";
-        blist.add(bstr1);
-        blist.add(bstr2);
-
+        String bone = "bt1";
+        String btwo = "bt2";
+        blist.add(bone);
+        blist.add(btwo);
         Iterable<String> result = new Concat<String>(
-                alist, 
+                alist,
                 blist,
                 new Concat.Condition<String>() {
                     @Override
@@ -112,11 +111,10 @@ public final class ConcatTest {
                     }
                 }
                 );
-
-        MatcherAssert.assertThat(result, Matchers.hasItems(astr1, bstr1));
+        MatcherAssert.assertThat(result, Matchers.hasItems(aone, bone));
         MatcherAssert.assertThat(
-                result,
-                Matchers.not(Matchers.hasItems(astr2, bstr2))
+            result,
+            Matchers.not(Matchers.hasItems(atwo, btwo))
         );
     }
 

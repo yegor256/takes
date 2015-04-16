@@ -61,7 +61,7 @@ public final class RsWithHeaders extends RsWrap {
         super(
             new Response() {
                 @Override
-                public Iterable<String> head() throws IOException {   
+                public Iterable<String> head() throws IOException {
                     return new Concat<String>(
                         res.head(),
                         new IterableTransform<String>(
