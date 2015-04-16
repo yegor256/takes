@@ -44,7 +44,7 @@ import org.takes.misc.VerboseIterable;
  * {@code application/x-www-form-urlencoded} format (RFC 1738).
  *
  * <p>For {@code multipart/form-data} format use
- * {@link org.takes.rq.RqMultipart}.
+ * {@link org.takes.rq.RqMultipart.Base}.
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
  * decorator before passing request to this class.
