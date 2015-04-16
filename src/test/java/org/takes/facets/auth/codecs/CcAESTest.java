@@ -39,7 +39,7 @@ import org.takes.facets.auth.Identity;
 public final class CcAESTest {
 
     /**
-     * Default key size
+     * Default key size.
      */
     private static final transient int SIZE = 128;
 
@@ -60,8 +60,8 @@ public final class CcAESTest {
                     return new Identity.Simple(new String(bytes));
                 }
                 @Override
-                public byte[] encode(final Identity identity) 
-                        throws IOException {
+                public byte[] encode(final Identity identity)
+                    throws IOException {
                     return identity.urn().getBytes();
                 }
             },
