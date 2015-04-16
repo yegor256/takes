@@ -72,6 +72,11 @@ public interface RqForm extends Request {
      */
     Iterable<String> names();
 
+    /**
+     * Base implementation of @link RqForm.
+     * @author Aleksey Popov (alopen@yandex.ru)
+     * @version $Id$
+     */
     @EqualsAndHashCode(callSuper = true, of = "map")
     final class Base extends RqWrap implements RqForm {
         /**
