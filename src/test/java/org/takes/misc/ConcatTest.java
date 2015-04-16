@@ -99,7 +99,7 @@ public final class ConcatTest {
         final String btwo = "bt2";
         blist.add(bone);
         blist.add(btwo);
-        Iterable<String> result = new Concat<String>(
+        final Iterable<String> result = new Concat<String>(
             alist,
             blist,
             new Concat.Condition<String>() {

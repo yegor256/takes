@@ -38,7 +38,7 @@ public final class LcCondition implements Condition<String> {
     /**
      * Prefix.
      */
-    private String prefix;
+    private final transient String prefix;
 
     /**
      * Ctor.
