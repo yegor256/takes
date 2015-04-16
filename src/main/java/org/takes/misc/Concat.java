@@ -36,7 +36,7 @@ import java.util.List;
  */
 public final class Concat<T> implements Iterable<T> {
 
-	private final List<T> storage = new LinkedList<T>();
+	private final transient List<T> storage = new LinkedList<T>();
 	
 	public static interface Condition<T> {
 		/**

@@ -23,40 +23,37 @@
  */
 package org.takes.misc;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
 /**
- * Transform elements in an iterable into others.
- *
+ * Test case for {@link IterableTransform}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.32.1
  */
-public class IterableTransform<T> implements Iterable<T> {
+public class IterableTransformTest {
+	
+	@Test
+	public void iterableTransform() {
+		List<String> a = new ArrayList<String>();
+		a.add("a1");
+		a.add("b1");
+		a.add("c1");
+		
+		MatcherAssert.assertThat(new IterableTransform<String>(a, new IterableTransform.TransformAction<String>() {
 
-	private final transient List<T> storage = new LinkedList<T>();
-	
-	public static interface TransformAction<T> {
-		T transform(T element);
-	}
-	
-	/**
-	 * Transform elements in the supplied iterable by the action supplied.
-	 * @param list
-	 * @param action
-	 */
-	public IterableTransform(Iterable<T> list, IterableTransform.TransformAction<T> action) {
-		Iterator<T> i = list.iterator();
-		while(i.hasNext()) {
-			this.storage.add(action.transform(i.next()));
-		}
-	}
-	
-	@Override
-	public Iterator<T> iterator() {
-		return this.storage.iterator();
+			@Override
+			public String transform(String element) {
+				return element.concat("t");
+			}
+			
+		}), Matchers.hasItems("a1t", "b1t", "c1t"));
+		
 	}
 
 }
