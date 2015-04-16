@@ -37,16 +37,21 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  */
 public final class CcAESTest {
-    
+
+    /**
+     * Default key size
+     */
+    private static final transient int SIZE = 128;
+
     /**
      * Testing AES encryption and decryption.
      * @throws Exception any unexpected exception to throw
      */
     @Test
     public void encryptAndDecrypt() throws Exception {
-        final KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(128);
-        final byte[] key = keyGen.generateKey().getEncoded();
+        final KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(SIZE);
+        final byte[] key = generator.generateKey().getEncoded();
         final String plain = "This is a test!!@@**";
         final Codec codec = new CcAES(
             new Codec() {
@@ -55,7 +60,8 @@ public final class CcAESTest {
                     return new Identity.Simple(new String(bytes));
                 }
                 @Override
-                public byte[] encode(final Identity identity) throws IOException {
+                public byte[] encode(final Identity identity) 
+                        throws IOException {
                     return identity.urn().getBytes();
                 }
             },

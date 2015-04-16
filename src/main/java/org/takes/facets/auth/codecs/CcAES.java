@@ -24,13 +24,22 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.facets.auth.Identity;
 
 /**
@@ -44,17 +53,17 @@ import org.takes.facets.auth.Identity;
  */
 @EqualsAndHashCode(of = { "origin", "secret", "ivbytes" })
 public final class CcAES implements Codec {
-    
+
     /**
      * The algorithm used.
      */
     private static final transient String ALGORITHM = "AES/CBC/PKCS5PADDING";
 
     /**
-     * Default block size (128 bits) in bytes
+     * Default block size (128 bits) in bytes.
      */
-    private static final transient int BLOCK = 16; 
-    
+    private static final transient int BLOCK = 16;
+
     /**
      * Original codec.
      */
@@ -69,20 +78,22 @@ public final class CcAES implements Codec {
      * Initialization Vector.
      */
     private final transient byte[] ivbytes;
-    
+
     /**
-     * The AES secret key object
+     * The AES secret key object.
      */
     private final SecretKey passcode;
-    
+
     /**
      * Ctor.
      * @param codec Original codec
      * @param key The encryption key
      */
-    public CcAES(Codec codec, byte[] key) {
+    public CcAES(final Codec codec, final byte[] key) {
         if (key.length != BLOCK) {
-            throw new IllegalArgumentException("Key length must be in 128-bit.");
+            throw new IllegalArgumentException(
+                    "Key length must be in 128-bit."
+            );
         }
         this.origin = codec;
         this.secret = new byte[key.length];
@@ -90,16 +101,16 @@ public final class CcAES implements Codec {
         final SecureRandom random = new SecureRandom();
         this.ivbytes = new byte[BLOCK];
         random.nextBytes(this.ivbytes);
-        this.passcode = new SecretKeySpec(this.secret, "AES");  
+        this.passcode = new SecretKeySpec(this.secret, "AES");
     }
 
     @Override
-    public byte[] encode(Identity identity) throws IOException {
+    public byte[] encode(final Identity identity) throws IOException {
         return this.encrypt(this.origin.encode(identity));
     }
 
     @Override
-    public Identity decode(byte[] bytes) throws IOException {
+    public Identity decode(final byte[] bytes) throws IOException {
         return this.origin.decode(this.decrypt(bytes));
     }
     
@@ -108,15 +119,26 @@ public final class CcAES implements Codec {
      *
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
+     * @throws IOException for all unexpected exceptions
      */
-    private byte[] encrypt(byte[] bytes) throws IOException {
+    private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
             final AlgorithmParameterSpec spec = new IvParameterSpec(this.ivbytes);
             cipher.init(Cipher.ENCRYPT_MODE, this.passcode, spec);
             return cipher.doFinal(bytes);
-        } catch (Exception e) {
-            throw new IOException(e);
+        } catch (InvalidKeyException ike) {
+            throw new IOException(ike);
+        } catch (NoSuchAlgorithmException nse) {
+            throw new IOException(nse);
+        } catch (NoSuchPaddingException nspe) {
+            throw new IOException(nspe);
+        } catch (InvalidAlgorithmParameterException iape) {
+            throw new IOException(iape);
+        } catch (IllegalBlockSizeException ibse) {
+            throw new IOException(ibse);
+        } catch (BadPaddingException bpe) {
+            throw new IOException(bpe);
         }
     }
 
@@ -125,15 +147,26 @@ public final class CcAES implements Codec {
      *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
+     * @throws IOException for all unexpected exceptions
      */
-    private byte[] decrypt(byte[] bytes) throws IOException {
+    private byte[] decrypt(final byte[] bytes) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
             final AlgorithmParameterSpec spec = new IvParameterSpec(this.ivbytes);
             cipher.init(Cipher.DECRYPT_MODE, this.passcode, spec);
             return cipher.doFinal(bytes);
-        } catch (Exception e) {
-            throw new IOException(e);
+        } catch (InvalidKeyException ike) {
+            throw new IOException(ike);
+        } catch (NoSuchAlgorithmException nse) {
+            throw new IOException(nse);
+        } catch (NoSuchPaddingException nspe) {
+            throw new IOException(nspe);
+        } catch (InvalidAlgorithmParameterException iape) {
+            throw new IOException(iape);
+        } catch (IllegalBlockSizeException ibse) {
+            throw new IOException(ibse);
+        } catch (BadPaddingException bpe) {
+            throw new IOException(bpe);
         }
     }
 
