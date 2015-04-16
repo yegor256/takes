@@ -58,7 +58,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     }
 
     /**
-     * Fail description
+     * Fail description.
      * @param description Fail result description.
      */
     @Override
