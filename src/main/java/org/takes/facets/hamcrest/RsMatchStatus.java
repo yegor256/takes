@@ -1,7 +1,7 @@
 package org.takes.facets.hamcrest;
 
-import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
 
 import java.io.IOException;
@@ -17,37 +17,27 @@ import java.io.IOException;
  * @version $Id$
  * @since 1.0
  */
-public final class RsMatchStatus extends BaseMatcher<Response> {
+public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
-    private Integer actual;
+    private final Integer expected;
 
-    public RsMatchStatus(Integer actual) {
-        this.actual = actual;
+    public RsMatchStatus(final Integer input) {
+        super();
+        this.expected = input;
     }
 
     @Override
     public void describeTo(final Description description) {
-        description.appendText("Response Status same as: ").appendValue(actual);
+        description.appendText("Response Status same as: ").appendValue(this.expected);
     }
 
     @Override
-    public void describeMismatch(final Object item, final Description description) {
-        description.appendText("was ").appendValue(item);
-    }
-
-    @Override
-    public boolean matches(final Object item) {
-
-        if (!(item instanceof Response)) {
-            return false;
-        }
-
+    protected boolean matchesSafely(final Response item) {
         try {
-            final String head = ((Response) item).head().iterator().next();
-            return head.contains(String.valueOf(actual));
-        } catch (IOException e) {
-            return false;
+            final String head = item.head().iterator().next();
+            return head.contains(String.valueOf(this.expected));
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
         }
-
     }
 }
