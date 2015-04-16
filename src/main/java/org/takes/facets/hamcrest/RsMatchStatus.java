@@ -46,7 +46,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
      * Expected input value.
      * Expected test input for matcher.
      */
-    private final Integer expected;
+    private final transient Integer expected;
 
     /**
      * Expected input.
