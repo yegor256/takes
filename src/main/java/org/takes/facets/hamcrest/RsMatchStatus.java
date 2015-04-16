@@ -1,15 +1,32 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Yegor Bugayenko
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
-
-/**
- * The MIT License (MIT)
- *
- * Copyright (c) 2015 Yegor Bugayenko
- */
 
 /**
  *
@@ -25,11 +42,13 @@ import org.takes.Response;
  */
 public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
+    /**
+     * Expected test input for matcher
+     */
     private final Integer expected;
 
     /**
-     *
-     * @param input is expected result code
+     * @param input Is expected result code
      */
     public RsMatchStatus(final Integer input) {
         super();
@@ -37,8 +56,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     }
 
     /**
-     *
-     * @param description fail result description
+     * @param description Fail result description
      */
     @Override
     public void describeTo(final Description description) {
@@ -48,9 +66,8 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     }
 
     /**
-     *
-     * @param item is tested element
-     * @return true when expected type matched
+     * @param item Is tested element
+     * @return True when expected type matched
      */
     @Override
     public boolean matchesSafely(final Response item) {
