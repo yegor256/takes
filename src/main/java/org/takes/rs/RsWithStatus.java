@@ -26,14 +26,15 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.Response;
+import org.takes.misc.Concat;
 
 /**
  * Response decorator, with status code.
@@ -111,17 +112,26 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        final Collection<String> head = new LinkedList<String>();
-        head.add(String.format("HTTP/1.1 %d %s", status, reason));
-        boolean first = true;
-        for (final String hdr : origin.head()) {
-            if (first) {
-                first = false;
-            } else {
-                head.add(hdr);
-            }
-        }
-        return head;
+        
+        return new Concat<String>(
+        		Collections.singleton(String.format("HTTP/1.1 %d %s", status, reason)),
+        		new Concat<String>(origin.head(),
+        				Collections.EMPTY_LIST,
+        				new Concat.Condition<String>() {
+        					
+        					private boolean first = true;
+
+							@Override
+							public boolean add(String element) {
+								if (first) {
+									first = false;
+									return false;
+								} else {
+									return true;
+								}
+							}
+        			
+        		}));
     }
 
     /**

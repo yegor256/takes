@@ -25,11 +25,13 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.Locale;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.Response;
+import org.takes.misc.Concat;
 
 /**
  * Response decorator, without a header.
@@ -53,17 +55,23 @@ public final class RsWithoutHeader extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
                         "%s:", name.toLowerCase(Locale.ENGLISH)
                     );
-                    for (final String hdr : res.head()) {
-                        if (!hdr.toLowerCase(Locale.ENGLISH)
-                            .startsWith(prefix)) {
-                            head.add(hdr);
-                        }
-                    }
-                    return head;
+                    
+                    return new Concat<String>(
+                    		res.head(),
+                    		Collections.EMPTY_LIST,
+                    		new Concat.Condition<String>() {
+
+								@Override
+								public boolean add(String element) {
+									return !element.toLowerCase(Locale.ENGLISH)
+				                            .startsWith(prefix);
+								}
+                    			
+                    		});
+                    
                 }
                 @Override
                 public InputStream body() throws IOException {

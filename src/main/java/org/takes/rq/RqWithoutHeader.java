@@ -25,11 +25,13 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.Locale;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.Request;
+import org.takes.misc.Concat;
 
 /**
  * Request without a header (even if it was absent).
@@ -53,17 +55,23 @@ public final class RqWithoutHeader extends RqWrap {
             new Request() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
-                    for (final String header : req.head()) {
-                        if (!header.toLowerCase(Locale.ENGLISH)
-                            .startsWith(prefix)) {
-                            head.add(header);
-                        }
-                    }
-                    return head;
+                    
+                    return new Concat<String>(
+                    		req.head(),
+                    		Collections.EMPTY_LIST,
+                    		new Concat.Condition<String>() {
+
+								@Override
+								public boolean add(String element) {
+									return !element.toLowerCase(Locale.ENGLISH)
+				                            .startsWith(prefix);
+								}
+                    			
+                    		});
+                    
                 }
                 @Override
                 public InputStream body() throws IOException {
