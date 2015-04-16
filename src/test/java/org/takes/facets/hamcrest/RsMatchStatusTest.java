@@ -42,7 +42,8 @@ import org.takes.tk.TkHTML;
 public final class RsMatchStatusTest {
 
     /**
-     * Should test response status code equal to expected code
+     * Happy path tester.
+     * Should test response status code equal to expected code.
      * @throws IOException If some problem inside
      */
     @Test
@@ -58,15 +59,19 @@ public final class RsMatchStatusTest {
     }
 
     /**
+     * Fail path tester.
      * Should test expected code not equal case
      * @throws IOException If some problem inside
      */
     @Test
     public void responseCodeIsNotEqualToExpected() throws IOException {
         MatcherAssert.assertThat(
-                new TkHTML("<html><body/></html>").act(new RqFake()),
-                Matchers.not(Matchers.is(
-                        new RsMatchStatus(HttpURLConnection.HTTP_NOT_FOUND)))
+            new TkHTML("<html><body/></html>").act(new RqFake()),
+            Matchers.not(
+                Matchers.is(
+                    new RsMatchStatus(HttpURLConnection.HTTP_NOT_FOUND)
+                )
+            )
         );
     }
 

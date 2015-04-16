@@ -43,12 +43,14 @@ import org.takes.Response;
 public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Expected test input for matcher
+     * Expected input value.
+     * Expected test input for matcher.
      */
     private final Integer expected;
 
     /**
-     * @param input Is expected result code
+     * Expected input.
+     * @param input Is expected result code.
      */
     public RsMatchStatus(final Integer input) {
         super();
@@ -56,7 +58,8 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     }
 
     /**
-     * @param description Fail result description
+     * Fail description
+     * @param description Fail result description.
      */
     @Override
     public void describeTo(final Description description) {
@@ -66,8 +69,9 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     }
 
     /**
+     * Type safe matcher.
      * @param item Is tested element
-     * @return True when expected type matched
+     * @return True when expected type matched.
      */
     @Override
     public boolean matchesSafely(final Response item) {
