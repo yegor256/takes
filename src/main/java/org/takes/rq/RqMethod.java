@@ -29,69 +29,83 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator, for HTTP method parsing.
+ * HTTP method parsing.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.13.7
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqMethod extends RqWrap {
+public interface RqMethod extends Request {
 
     /**
      * GET method.
      */
-    public static final String GET = "GET";
+    String GET = "GET";
 
     /**
      * POST method.
      */
-    public static final String POST = "POST";
+    String POST = "POST";
 
     /**
      * PUT method.
      */
-    public static final String PUT = "PUT";
+    String PUT = "PUT";
 
     /**
      * DELETE method.
      */
-    public static final String DELETE = "DELETE";
+    String DELETE = "DELETE";
 
     /**
      * HEAD method.
      */
-    public static final String HEAD = "HEAD";
+    String HEAD = "HEAD";
 
     /**
      * OPTIONS method.
      */
-    public static final String OPTIONS = "OPTIONS";
+    String OPTIONS = "OPTIONS";
 
     /**
      * PATCH method.
      */
-    public static final String PATCH = "PATCH";
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqMethod(final Request req) {
-        super(req);
-    }
+    String PATCH = "PATCH";
 
     /**
      * Get method.
      * @return HTTP method
      * @throws IOException If fails
      */
-    public String method() throws IOException {
-        final String line = this.head().iterator().next();
-        final String[] parts = line.split(" ", 2);
-        return parts[0].toUpperCase(Locale.ENGLISH);
-    }
+    String method() throws IOException;
 
+    /**
+     * Request decorator, for HTTP method parsing.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @version $Id$
+     * @since 0.13.7
+     */
+    @EqualsAndHashCode(callSuper = true)
+    final class Base extends RqWrap implements RqMethod {
+
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Base(final Request req) {
+            super(req);
+        }
+
+        @Override
+        public String method() throws IOException {
+            final String line = this.head().iterator().next();
+            final String[] parts = line.split(" ", 2);
+            return parts[0].toUpperCase(Locale.ENGLISH);
+        }
+    }
 }

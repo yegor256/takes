@@ -43,7 +43,7 @@ public final class RqFormTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
-        final RqForm req = new RqForm(
+        final RqForm req = new RqForm.Base(
             new RqFake(
                 Arrays.asList(
                     "GET /h?a=3",

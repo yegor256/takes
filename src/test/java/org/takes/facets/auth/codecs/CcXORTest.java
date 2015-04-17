@@ -21,54 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.facets.auth.Identity;
 
 /**
- * Take that makes all not-found exceptions location aware.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link CcXOR}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.10
+ * @since 0.13.7
  */
-@EqualsAndHashCode(callSuper = true)
-public final class TkVerbose extends TkWrap {
+public final class CcXORTest {
 
     /**
-     * Ctor.
-     * @param take Original take
+     * CcXor can encode and decode.
+     * @throws IOException If some problem inside
      */
-    public TkVerbose(final Take take) {
-        super(
-            new Take() {
+    @Test
+    public void encodesAndDecodes() throws IOException {
+        final String urn = "urn:domain:9";
+        final Codec codec = new CcXOR(
+            new Codec() {
                 @Override
-                public Response act(final Request request) throws IOException {
-                    try {
-                        return take.act(request);
-                    } catch (final HttpException ex) {
-                        throw new HttpException(
-                            ex.code(),
-                            String.format(
-                                "%s %s",
-                                new RqMethod.Base(request).method(),
-                                new RqHref.Base(request).href()
-                            ),
-                            ex
-                        );
-                    }
+                public byte[] encode(final Identity identity) {
+                    return identity.urn().getBytes();
                 }
-            }
+                @Override
+                public Identity decode(final byte[] bytes) {
+                    return new Identity.Simple(new String(bytes));
+                }
+            },
+            "secret"
+        );
+        MatcherAssert.assertThat(
+            codec.decode(codec.encode(new Identity.Simple(urn))).urn(),
+            Matchers.equalTo(urn)
         );
     }
-
 }

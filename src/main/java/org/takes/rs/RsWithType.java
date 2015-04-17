@@ -44,7 +44,7 @@ public final class RsWithType extends RsWrap {
      * @param res Original response
      * @param type Content type
      */
-    public RsWithType(final Response res, final String type) {
+    public RsWithType(final Response res, final CharSequence type) {
         super(
             new RsWithHeader(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),
