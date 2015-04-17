@@ -129,7 +129,7 @@ public final class RsWithCookie extends RsWrap {
      * @param value Cookie value
      * @return Cookie value
      */
-    private static String checkValue(final String value) {
+    private static CharSequence checkValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
             throw new IllegalArgumentException(
                 String.format(
@@ -146,7 +146,7 @@ public final class RsWithCookie extends RsWrap {
      * @param name Cookie name;
      * @return Cookie name
      */
-    private static String checkName(final String name) {
+    private static CharSequence checkName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
             throw new IllegalArgumentException(
                 String.format(
