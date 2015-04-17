@@ -89,7 +89,7 @@ public final class RqMultipart extends RqWrap {
      */
     public RqMultipart(final Request req) throws IOException {
         super(req);
-        final String header = new RqHeaders(req).header("Content-Type")
+        final String header = new RqHeaders.Base(req).header("Content-Type")
             .iterator().next();
         if (!header.toLowerCase(Locale.ENGLISH)
             .startsWith("multipart/form-data")) {
@@ -195,7 +195,7 @@ public final class RqMultipart extends RqWrap {
         final ConcurrentMap<String, List<Request>> map =
             new ConcurrentHashMap<String, List<Request>>(reqs.size());
         for (final Request req : reqs) {
-            final String header = new RqHeaders(req)
+            final String header = new RqHeaders.Base(req)
                 .header("Content-Disposition").iterator().next();
             final Matcher matcher = RqMultipart.NAME.matcher(header);
             if (!matcher.matches()) {

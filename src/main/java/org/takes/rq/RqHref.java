@@ -68,7 +68,7 @@ public interface RqHref extends Request {
         }
         @Override
         public Href href() throws IOException {
-            final Iterator<String> host = new RqHeaders(this)
+            final Iterator<String> host = new RqHeaders.Base(this)
                 .header("host").iterator();
             if (!host.hasNext()) {
                 throw new IOException("Host header is absent");
@@ -127,7 +127,7 @@ public interface RqHref extends Request {
             return new Href(
                 String.format(
                     "http://%s/",
-                    new RqHeaders(this).header("Host").iterator().next()
+                    new RqHeaders.Base(this).header("Host").iterator().next()
                 )
             );
         }

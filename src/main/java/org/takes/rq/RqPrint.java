@@ -118,7 +118,7 @@ public final class RqPrint extends RqWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final Iterator<String> hdr = new RqHeaders(this)
+        final Iterator<String> hdr = new RqHeaders.Base(this)
             .header("Content-Length").iterator();
         final boolean endless;
         int more = Integer.MAX_VALUE;
