@@ -57,94 +57,106 @@ import org.takes.misc.VerboseIterable;
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  */
-@EqualsAndHashCode(callSuper = true, of = "map")
-public final class RqForm extends RqWrap {
-
-    /**
-     * Map of params and values.
-     */
-    private final transient ConcurrentMap<String, List<String>> map;
-
-    /**
-     * Ctor.
-     * @param req Original request
-     * @throws IOException If fails
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public RqForm(final Request req) throws IOException {
-        super(req);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(req).printBody(baos);
-        final String body = new String(baos.toByteArray());
-        this.map = new ConcurrentHashMap<String, List<String>>(0);
-        for (final String pair : body.split("&")) {
-            if (pair.isEmpty()) {
-                continue;
-            }
-            final String[] parts = pair.split("=", 2);
-            if (parts.length < 2) {
-                throw new IOException(
-                    String.format("invalid form body pair: %s", pair)
-                );
-            }
-            final String key = RqForm.decode(
-                parts[0].trim().toLowerCase(Locale.ENGLISH)
-            );
-            this.map.putIfAbsent(key, new LinkedList<String>());
-            this.map.get(key).add(RqForm.decode(parts[1].trim()));
-        }
-    }
+public interface RqForm extends Request {
 
     /**
      * Get single parameter.
-     * @param key Parameter name
+     * @param name Parameter name
      * @return List of values (can be empty)
      */
-    public Iterable<String> param(final CharSequence key) {
-        final List<String> values =
-            this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
-        final Iterable<String> iter;
-        if (values == null) {
-            iter = new VerboseIterable<String>(
-                Collections.<String>emptyList(),
-                new Sprintf(
-                    "there are no params by name \"%s\" among %d others: %s",
-                    key, this.map.size(), this.map.keySet()
-                )
-            );
-        } else {
-            iter = new VerboseIterable<String>(
-                values,
-                new Sprintf(
-                    "there are only %d params by name \"%s\"",
-                    values.size(), key
-                )
-            );
-        }
-        return iter;
-    }
+    Iterable<String> param(CharSequence name);
 
     /**
      * Get all parameter names.
      * @return All names
      */
-    public Iterable<String> names() {
-        return this.map.keySet();
-    }
+    Iterable<String> names();
 
     /**
-     * Decode from URL.
-     * @param txt Text
-     * @return Decoded
+     * Base implementation of @link RqForm.
+     * @author Aleksey Popov (alopen@yandex.ru)
+     * @version $Id$
      */
-    private static String decode(final CharSequence txt) {
-        try {
-            return URLDecoder.decode(
-                txt.toString(), Charset.defaultCharset().name()
-            );
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+    @EqualsAndHashCode(callSuper = true, of = "map")
+    final class Base extends RqWrap implements RqForm {
+        /**
+         * Map of params and values.
+         */
+        private final transient ConcurrentMap<String, List<String>> map;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        public Base(final Request req) throws IOException {
+            super(req);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            new RqPrint(req).printBody(baos);
+            final String body = new String(baos.toByteArray());
+            this.map = new ConcurrentHashMap<String, List<String>>(0);
+            for (final String pair : body.split("&")) {
+                if (pair.isEmpty()) {
+                    continue;
+                }
+                final String[] parts = pair.split("=", 2);
+                if (parts.length < 2) {
+                    throw new IOException(
+                            String.format("invalid form body pair: %s", pair)
+                    );
+                }
+                final String key = RqForm.Base.decode(
+                        parts[0].trim().toLowerCase(Locale.ENGLISH)
+                );
+                this.map.putIfAbsent(key, new LinkedList<String>());
+                this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+            }
+        }
+
+        @Override
+        public Iterable<String> param(final CharSequence key) {
+            final List<String> values =
+                    this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Iterable<String> iter;
+            if (values == null) {
+                iter = new VerboseIterable<String>(
+                    Collections.<String>emptyList(),
+                    new Sprintf(
+                        "there're no params by name \"%s\" among %d others: %s",
+                        key, this.map.size(), this.map.keySet()
+                    )
+                );
+            } else {
+                iter = new VerboseIterable<String>(
+                    values,
+                    new Sprintf(
+                        "there are only %d params by name \"%s\"",
+                        values.size(), key
+                    )
+                );
+            }
+            return iter;
+        }
+
+        @Override
+        public Iterable<String> names() {
+            return this.map.keySet();
+        }
+
+        /**
+         * Decode from URL.
+         * @param txt Text
+         * @return Decoded
+         */
+        private static String decode(final CharSequence txt) {
+            try {
+                return URLDecoder.decode(
+                        txt.toString(), Charset.defaultCharset().name()
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
         }
     }
-
 }
