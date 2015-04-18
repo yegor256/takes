@@ -48,9 +48,9 @@ public final class IterableTransformTest {
         alist.add("b1");
         alist.add("c1");
         MatcherAssert.assertThat(
-            new Transformer<String>(
+            new Transformer<String, String>(
                 alist,
-                new Transformer.Action<String>() {
+                new Transformer.Action<String, String>() {
                     @Override
                     public String transform(final String element) {
                         return element.concat("t");

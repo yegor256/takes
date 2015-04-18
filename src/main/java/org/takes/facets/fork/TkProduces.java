@@ -21,51 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.fork;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
+import org.takes.tk.TkWrap;
 
 /**
- * Take that makes all not-found exceptions location aware.
+ * Take that acts on request with specified "Accept" HTTP headers only.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.10
+ * @since 0.14
  */
 @EqualsAndHashCode(callSuper = true)
-public final class TkVerbose extends TkWrap {
+public final class TkProduces extends TkWrap {
 
     /**
      * Ctor.
      * @param take Original take
+     * @param types Accept types
      */
-    public TkVerbose(final Take take) {
+    public TkProduces(final Take take, final String types) {
         super(
             new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
-                    try {
-                        return take.act(request);
-                    } catch (final HttpException ex) {
-                        throw new HttpException(
-                            ex.code(),
-                            String.format(
-                                "%s %s",
-                                new RqMethod.Base(request).method(),
-                                new RqHref.Base(request).href()
-                            ),
-                            ex
-                        );
-                    }
+                public Response act(final Request req) throws IOException {
+                    return new RsFork(
+                        req,
+                        new FkTypes(types, take.act(req))
+                    );
                 }
             }
         );

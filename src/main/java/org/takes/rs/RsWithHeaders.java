@@ -26,10 +26,13 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+
 import lombok.EqualsAndHashCode;
+
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.Transformer;
+import org.takes.misc.Transformer.Trim;
 
 /**
  * Response decorator, with an additional headers.
@@ -48,7 +51,7 @@ public final class RsWithHeaders extends RsWrap {
      * @param res Original response
      * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final String... headers) {
+    public RsWithHeaders(final Response res, final CharSequence... headers) {
         this(res, Arrays.asList(headers));
     }
 
@@ -57,17 +60,22 @@ public final class RsWithHeaders extends RsWrap {
      * @param res Original response
      * @param headers Headers
      */
-    public RsWithHeaders(final Response res, final Iterable<String> headers) {
+    public RsWithHeaders(final Response res,
+        final Iterable<? extends CharSequence> headers) {
         super(
             new Response() {
                 @Override
+                @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     return new Concat<String>(
                         res.head(),
-                        new Transformer<String>(
-                                headers,
-                                new Transformer.Trim()
-                        )
+                        new Transformer<String, String>(
+                            new Transformer<CharSequence, String>(
+                                (Iterable<CharSequence>)headers,
+                                new Transformer.ToString()
+                            )
+                            , new Transformer.Trim()
+                        ) 
                     );
                 }
                 @Override

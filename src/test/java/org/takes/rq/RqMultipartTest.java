@@ -35,7 +35,7 @@ import org.junit.Test;
 import org.takes.Request;
 
 /**
- * Test case for {@link RqMultipart}.
+ * Test case for {@link RqMultipart.Base}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
@@ -49,7 +49,7 @@ public final class RqMultipartTest {
      */
     private static final String CR = "\r\n";
     /**
-     * RqMultipart can satisfy equals contract.
+     * RqMultipart.Base can satisfy equals contract.
      * @throws IOException if some problem inside
      */
     @Test
@@ -63,13 +63,13 @@ public final class RqMultipartTest {
             "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
         );
         MatcherAssert.assertThat(
-                new RqMultipart(req),
-                Matchers.equalTo(new RqMultipart(req))
+                new RqMultipart.Base(req),
+                Matchers.equalTo(new RqMultipart.Base(req))
         );
     }
 
     /**
-     * RqMultipart can throw exception on no closing boundary found.
+     * RqMultipart.Base can throw exception on no closing boundary found.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
@@ -89,11 +89,11 @@ public final class RqMultipartTest {
                 "Content-Transfer-Encoding: uwf-8"
             )
         );
-        new RqMultipart(req);
+        new RqMultipart.Base(req);
     }
 
     /**
-     * RqMultipart can throw exception on no name
+     * RqMultipart.Base can throw exception on no name
      * at Content-Disposition header.
      * @throws IOException if some problem inside
      */
@@ -107,11 +107,12 @@ public final class RqMultipartTest {
                 "340 N Wolfe Rd, Sunnyvale, CA 94085"
             )
         );
-        new RqMultipart(req);
+        new RqMultipart.Base(req);
     }
 
     /**
-     * RqMultipart can throw exception on no boundary at Content-Type header.
+     * RqMultipart.Base can throw exception on no boundary
+     * at Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
@@ -126,11 +127,11 @@ public final class RqMultipartTest {
             ),
             ""
         );
-        new RqMultipart(req);
+        new RqMultipart.Base(req);
     }
 
     /**
-     * RqMultipart can throw exception on invalid Content-Type header.
+     * RqMultipart.Base can throw exception on invalid Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
@@ -144,11 +145,11 @@ public final class RqMultipartTest {
             ),
             ""
         );
-        new RqMultipart(req);
+        new RqMultipart.Base(req);
     }
 
     /**
-     * RqMultipart can parse http body.
+     * RqMultipart.Base can parse http body.
      * @throws IOException If some problem inside
      */
     @Test
@@ -161,7 +162,7 @@ public final class RqMultipartTest {
             ),
             "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
         );
-        final RqMultipart multi = new RqMultipart(req);
+        final RqMultipart.Base multi = new RqMultipart.Base(req);
         MatcherAssert.assertThat(
             new RqHeaders(
                 multi.part("address").iterator().next()
@@ -179,7 +180,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart can return empty iterator on invalid part request.
+     * RqMultipart.Base can return empty iterator on invalid part request.
      * @throws IOException If some problem inside
      */
     @Test
@@ -192,7 +193,7 @@ public final class RqMultipartTest {
             ),
             "Content-Disposition: form-data; name=\"data\"; filename=\"a.zip\""
         );
-        final RqMultipart multi = new RqMultipart(req);
+        final RqMultipart.Base multi = new RqMultipart.Base(req);
         MatcherAssert.assertThat(
                 multi.part("fake").iterator().hasNext(),
                 Matchers.is(false)
@@ -200,7 +201,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart can return correct name set.
+     * RqMultipart.Base can return correct name set.
      * @throws IOException If some problem inside
      */
     @Test
@@ -213,7 +214,7 @@ public final class RqMultipartTest {
             ),
             "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
         );
-        final RqMultipart multi = new RqMultipart(req);
+        final RqMultipart.Base multi = new RqMultipart.Base(req);
         MatcherAssert.assertThat(
             multi.names(),
             Matchers.<Iterable<String>>equalTo(

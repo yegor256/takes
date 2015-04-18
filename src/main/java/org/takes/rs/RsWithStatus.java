@@ -76,7 +76,8 @@ public final class RsWithStatus extends RsWrap {
      * @param code Status code
      * @param rsn Reason
      */
-    public RsWithStatus(final Response res, final int code, final String rsn) {
+    public RsWithStatus(final Response res, final int code,
+        final CharSequence rsn) {
         super(
             new Response() {
                 @Override
@@ -101,7 +102,7 @@ public final class RsWithStatus extends RsWrap {
      */
     @SuppressWarnings("unchecked")
     private static Iterable<String> head(final Response origin,
-        final int status, final String reason) throws IOException {
+        final int status, final CharSequence reason) throws IOException {
         // @checkstyle MagicNumber (1 line)
         if (status < 100 || status > 999) {
             throw new IllegalArgumentException(

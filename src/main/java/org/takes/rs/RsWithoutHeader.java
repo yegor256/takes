@@ -49,14 +49,14 @@ public final class RsWithoutHeader extends RsWrap {
      * @param res Original response
      * @param name Header name
      */
-    public RsWithoutHeader(final Response res, final String name) {
+    public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
             new Response() {
                 @Override
                 @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
-                        "%s:", name.toLowerCase(Locale.ENGLISH)
+                        "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     return new Concat<String>(
                         res.head(),

@@ -28,18 +28,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Transform elements in an iterable into others.
+ * Transform elements in an iterable (in type T) into others (in type K).
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
  */
-public class Transformer<T> implements Iterable<T> {
+public class Transformer<T, K> implements Iterable<K> {
 
     /**
      * Internal storage.
      */
-    private final transient List<T> storage = new LinkedList<T>();
+    private final transient List<K> storage = new LinkedList<K>();
 
     /**
      * Transform elements in the supplied iterable by the action supplied.
@@ -48,7 +48,7 @@ public class Transformer<T> implements Iterable<T> {
      * @param action The actual transformation implementation
      */
     public Transformer(final Iterable<T> list,
-            final Transformer.Action<T> action) {
+            final Transformer.Action<T, K> action) {
         final Iterator<T> itr = list.iterator();
         while (itr.hasNext()) {
             this.storage.add(action.transform(itr.next()));
@@ -56,18 +56,18 @@ public class Transformer<T> implements Iterable<T> {
     }
 
     @Override
-    public final Iterator<T> iterator() {
+    public final Iterator<K> iterator() {
         return this.storage.iterator();
     }
 
-    public interface Action<T> {
+    public interface Action<T, K> {
         /**
-         * The transform action of the element.
+         * The transform action of the element of type T to K.
          *
          * @param element Element of the iterable
          * @return Transformed element
          */
-        T transform(T element);
+        K transform(T element);
     }
 
     /**
@@ -79,12 +79,29 @@ public class Transformer<T> implements Iterable<T> {
      *
      */
     public static final class Trim implements
-            Transformer.Action<String> {
+        Transformer.Action<String, String> {
         
         @Override
         public String transform(final String element) {
             return element.trim();
         }
+    }
+    
+    /**
+     * Convert CharSequence into String
+     * 
+     * @author Jason Wong (super132j@yahoo.com)
+     * @version $Id$
+     * @since 0.13.8
+     *
+     */
+    public static final class ToString implements
+        Transformer.Action<CharSequence, String> {
 
-}
+        @Override
+        public String transform(CharSequence element) {
+            return element.toString();
+        }
+        
+    }
 }

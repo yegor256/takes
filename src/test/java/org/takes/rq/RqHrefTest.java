@@ -138,7 +138,7 @@ public final class RqHrefTest {
                         ""
                     )
                 )
-            ).param("absent", "def-5"),
+            ).single("absent", "def-5"),
             Matchers.startsWith("def-")
         );
     }
