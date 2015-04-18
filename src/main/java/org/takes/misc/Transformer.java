@@ -71,37 +71,35 @@ public class Transformer<T, K> implements Iterable<K> {
     }
 
     /**
-     * Trimming action used with {@link Transformer}
+     * Trimming action used with {@link Transformer}.
      *
      * @author Jason Wong (super132j@yahoo.com)
      * @version $Id$
      * @since 0.13.8
-     *
      */
     public static final class Trim implements
         Transformer.Action<String, String> {
-        
+
         @Override
         public String transform(final String element) {
             return element.trim();
         }
     }
-    
+
     /**
-     * Convert CharSequence into String
+     * Convert CharSequence into String.
      * 
      * @author Jason Wong (super132j@yahoo.com)
      * @version $Id$
      * @since 0.13.8
-     *
      */
     public static final class ToString implements
         Transformer.Action<CharSequence, String> {
 
         @Override
-        public String transform(CharSequence element) {
+        public String transform(final CharSequence element) {
             return element.toString();
         }
-        
+
     }
 }

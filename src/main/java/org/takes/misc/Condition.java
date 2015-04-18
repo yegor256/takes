@@ -33,7 +33,7 @@ import java.util.Locale;
  * @since 0.13.8
  */
 public interface Condition<T> {
-    
+
     /**
      * Determine if an element should be added.
      *
@@ -41,12 +41,12 @@ public interface Condition<T> {
      * @return True to add the element, false to skip.
      */
     boolean add(T element);
-    
+
     /**
-     * Concat lower case string condition. This condition changes all 
+     * Concat lower case string condition. This condition changes all
      * characters to lower case and determine if the iterable should be
      * concatenated by determine if the element contain the 'prefix'
-     * supplied. 
+     * supplied.
      *
      * @author Jason Wong (super132j@yahoo.com)
      * @version $Id$
@@ -54,7 +54,7 @@ public interface Condition<T> {
      *
      */
     static final class LowerCase implements Condition<String> {
-        
+
         /**
          * Prefix.
          */

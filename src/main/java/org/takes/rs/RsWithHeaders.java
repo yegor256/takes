@@ -26,13 +26,10 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-
 import lombok.EqualsAndHashCode;
-
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.Transformer;
-import org.takes.misc.Transformer.Trim;
 
 /**
  * Response decorator, with an additional headers.
@@ -71,11 +68,11 @@ public final class RsWithHeaders extends RsWrap {
                         res.head(),
                         new Transformer<String, String>(
                             new Transformer<CharSequence, String>(
-                                (Iterable<CharSequence>)headers,
+                                (Iterable<CharSequence>) headers,
                                 new Transformer.ToString()
                             )
                             , new Transformer.Trim()
-                        ) 
+                        )
                     );
                 }
                 @Override
