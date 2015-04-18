@@ -137,7 +137,7 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final CharSequence name) throws IOException {
+        public String single(final CharSequence name) throws IOException {
             final Iterator<String> params = this.origin.href()
                 .param(name).iterator();
             if (!params.hasNext()) {
@@ -157,7 +157,7 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final CharSequence name, final CharSequence def)
+        public String single(final CharSequence name, final CharSequence def)
             throws IOException {
             final String value;
             final Iterator<String> params = this.origin.href()
