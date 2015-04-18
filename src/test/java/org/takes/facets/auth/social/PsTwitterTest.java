@@ -39,7 +39,12 @@ public final class PsTwitterTest {
     /**
      * Twitter authorization process.
      * @throws IOException If error occurs in the process
-     * @todo Test to be implemented using oath mocks.
+     * @todo #12:30min/DEV Test to be implemented for PsTwitter
+     * using a oauth mock library (eg:wiremock). Need to modify
+     * PsTwitter to accept url from configurations, so that url
+     * can be changed for test and real env accordingly.
+     * Response to be stubbed for both token and verify_credentials
+     * calls and assertions to be performed for the values returned.
      */
     @Ignore
     @Test
