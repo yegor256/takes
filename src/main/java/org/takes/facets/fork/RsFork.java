@@ -27,11 +27,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.takes.rs.RsWrap;
 
 /**
@@ -85,9 +85,9 @@ public final class RsFork extends RsWrap {
     private static Response pick(final Request req,
         final Iterable<Fork> forks) throws IOException {
         for (final Fork fork : forks) {
-            final Iterator<Response> rsps = fork.route(req);
-            if (rsps.hasNext()) {
-                return rsps.next();
+            final Opt<Response> rsps = fork.route(req);
+            if (rsps.has()) {
+                return rsps.get();
             }
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);

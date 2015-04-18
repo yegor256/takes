@@ -1,0 +1,103 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Yegor Bugayenko
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package org.takes.misc;
+
+import lombok.EqualsAndHashCode;
+
+/**
+ * Replacement a nullable T reference with a non-null value.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * @version $Id$
+ * @since 0.13.8
+ */
+public interface Opt<T> {
+    /**
+     * Returns the contained instance.
+     * @return Instance
+     */
+    T get();
+
+    /**
+     * Returns true if contains instance.
+     * @return True if present
+     */
+    boolean has();
+
+    /**
+     * Holder decorator.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @version $Id$
+     * @since 0.14
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Holder<T> implements Opt<T> {
+        /**
+         * Origin.
+         */
+        private final transient T origin;
+
+        /**
+         * Ctor.
+         * @param orgn Origin
+         */
+        public Holder(final T orgn) {
+            this.origin = orgn;
+        }
+
+        @Override
+        public T get() {
+            return this.origin;
+        }
+
+        @Override
+        public boolean has() {
+            return true;
+        }
+    }
+
+    /**
+     * Empty instance.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @version $Id$
+     * @since 0.14
+     */
+    final class Empty<T> implements Opt<T> {
+        @Override
+        public T get() {
+            throw new UnsupportedOperationException("#get()");
+        }
+
+        @Override
+        public boolean has() {
+            return false;
+        }
+    }
+}

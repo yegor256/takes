@@ -24,14 +24,13 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
@@ -85,15 +84,17 @@ public final class FkParams implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> params = new RqHref.Base(req).href()
             .param(this.name).iterator();
-        final Collection<Response> list = new ArrayList<Response>(1);
+        final Opt<Response> resp;
         if (params.hasNext()
             && this.pattern.matcher(params.next()).matches()) {
-            list.add(this.take.act(req));
+            resp = new Opt.Holder<Response>(this.take.act(req));
+        } else {
+            resp = new Opt.Empty<Response>();
         }
-        return list.iterator();
+        return resp;
     }
 
 }
