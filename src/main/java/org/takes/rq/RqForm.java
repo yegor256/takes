@@ -88,7 +88,6 @@ public interface RqForm extends Request {
          * Map of params and values.
          */
         private final transient ConcurrentMap<String, List<String>> map;
-
         /**
          * Ctor.
          * @param req Original request
@@ -118,7 +117,6 @@ public interface RqForm extends Request {
                 this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
             }
         }
-
         @Override
         public Iterable<String> param(final CharSequence key) {
             final List<String> values =
@@ -143,12 +141,10 @@ public interface RqForm extends Request {
             }
             return iter;
         }
-
         @Override
         public Iterable<String> names() {
             return this.map.keySet();
         }
-
         /**
          * Decode from URL.
          * @param txt Text
