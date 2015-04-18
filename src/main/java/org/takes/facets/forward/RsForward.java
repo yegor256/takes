@@ -74,10 +74,29 @@ public final class RsForward extends HttpException implements Response {
     /**
      * Ctor.
      * @param res Original response
+     * @since 0.14
+     */
+    public RsForward(final RsForward res) {
+        this(res.origin);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
      * @param loc Location
      */
     public RsForward(final Response res, final CharSequence loc) {
         this(res, HttpURLConnection.HTTP_SEE_OTHER, loc);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param loc Location
+     * @since 0.14
+     */
+    public RsForward(final RsForward res, final CharSequence loc) {
+        this(res.origin, loc);
     }
 
     /**
@@ -95,6 +114,18 @@ public final class RsForward extends HttpException implements Response {
      */
     public RsForward(final int code, final CharSequence loc) {
         this(new RsEmpty(), code, loc);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original
+     * @param code HTTP status code
+     * @param loc Location
+     * @since 0.14
+     */
+    public RsForward(final RsForward res, final int code,
+        final CharSequence loc) {
+        this(res.origin, code, loc);
     }
 
     /**
