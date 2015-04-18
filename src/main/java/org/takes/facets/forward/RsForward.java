@@ -33,6 +33,7 @@ import org.takes.misc.Sprintf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsWithoutHeader;
 
 /**
  * Forwarding response.
@@ -138,7 +139,10 @@ public final class RsForward extends HttpException implements Response {
         final CharSequence loc) {
         super(code, res.toString());
         this.origin = new RsWithHeader(
-            new RsWithStatus(res, code),
+            new RsWithoutHeader(
+                new RsWithStatus(res, code),
+                "Location"
+            ),
             new Sprintf("Location: %s", loc)
         );
     }
