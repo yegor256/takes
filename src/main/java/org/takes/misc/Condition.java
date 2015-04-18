@@ -53,7 +53,7 @@ public interface Condition<T> {
      * @since 0.13.8
      *
      */
-    static class LowerCase implements Condition<String> {
+    class LowerCase implements Condition<String> {
 
         /**
          * Prefix.
