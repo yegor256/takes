@@ -102,7 +102,7 @@ public final class ConcatTest {
         final Iterable<String> result = new Concat<String>(
             alist,
             blist,
-            new Concat.Condition<String>() {
+            new Condition<String>() {
                 @Override
                 public boolean add(final String element) {
                     return element.endsWith("1");

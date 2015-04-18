@@ -30,7 +30,7 @@ import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
-import org.takes.misc.LcCondition;
+import org.takes.misc.Condition;
 
 /**
  * Response decorator, without a header.
@@ -61,7 +61,7 @@ public final class RsWithoutHeader extends RsWrap {
                     return new Concat<String>(
                         res.head(),
                         Collections.EMPTY_LIST,
-                        new LcCondition(prefix)
+                        new Condition.LowerCase(prefix)
                     );
                 }
                 @Override

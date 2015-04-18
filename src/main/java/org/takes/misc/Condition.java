@@ -24,34 +24,55 @@
 package org.takes.misc;
 
 import java.util.Locale;
-import org.takes.misc.Concat.Condition;
 
 /**
- * Concat lower case string condition.
+ * Condition to determine how {@link Concat} behave when joining two iterables.
  *
- * @author Jason Wong (yegor@teamed.io)
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
  */
-public final class LcCondition implements Condition<String> {
-
+public interface Condition<T> {
+    
     /**
-     * Prefix.
+     * Determine if an element should be added.
+     *
+     * @param element The element in the iterables to examine.
+     * @return True to add the element, false to skip.
      */
-    private final transient String prefix;
-
+    boolean add(T element);
+    
     /**
-     * Ctor.
-     * @param str The prefix to check
+     * Concat lower case string condition. This condition changes all 
+     * characters to lower case and determine if the iterable should be
+     * concatenated by determine if the element contain the 'prefix'
+     * supplied. 
+     *
+     * @author Jason Wong (super132j@yahoo.com)
+     * @version $Id$
+     * @since 0.13.8
+     *
      */
-    public LcCondition(final String str) {
-        this.prefix = str;
-    }
+    static final class LowerCase implements Condition<String> {
+        
+        /**
+         * Prefix.
+         */
+        private final transient String prefix;
 
-    @Override
-    public boolean add(final String element) {
-        return !element.toLowerCase(Locale.ENGLISH)
-                .startsWith(this.prefix);
+        /**
+         * Ctor.
+         * @param str The prefix to check
+         */
+        public LowerCase(final String str) {
+            this.prefix = str;
+        }
+
+        @Override
+        public boolean add(final String element) {
+            return !element.toLowerCase(Locale.ENGLISH)
+                    .startsWith(this.prefix);
+        }
     }
 
 }

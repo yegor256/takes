@@ -29,7 +29,7 @@ import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
-import org.takes.misc.IterableTransform;
+import org.takes.misc.Transformer;
 
 /**
  * Response decorator, with an additional headers.
@@ -64,9 +64,9 @@ public final class RsWithHeaders extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return new Concat<String>(
                         res.head(),
-                        new IterableTransform<String>(
+                        new Transformer<String>(
                                 headers,
-                                new Action()
+                                new Transformer.Trim()
                         )
                     );
                 }
@@ -78,13 +78,4 @@ public final class RsWithHeaders extends RsWrap {
         );
     }
 
-    private static final class Action implements
-            IterableTransform.Action<String> {
-
-        @Override
-        public String transform(final String element) {
-            return element.trim();
-        }
-
-    }
 }

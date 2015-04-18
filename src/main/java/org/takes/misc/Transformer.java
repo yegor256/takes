@@ -34,7 +34,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.13.8
  */
-public class IterableTransform<T> implements Iterable<T> {
+public class Transformer<T> implements Iterable<T> {
 
     /**
      * Internal storage.
@@ -47,8 +47,8 @@ public class IterableTransform<T> implements Iterable<T> {
      * @param list Iterable to be transformed
      * @param action The actual transformation implementation
      */
-    public IterableTransform(final Iterable<T> list,
-            final IterableTransform.Action<T> action) {
+    public Transformer(final Iterable<T> list,
+            final Transformer.Action<T> action) {
         final Iterator<T> itr = list.iterator();
         while (itr.hasNext()) {
             this.storage.add(action.transform(itr.next()));
@@ -70,4 +70,21 @@ public class IterableTransform<T> implements Iterable<T> {
         T transform(T element);
     }
 
+    /**
+     * Trimming action used with {@link Transformer}
+     *
+     * @author Jason Wong (super132j@yahoo.com)
+     * @version $Id$
+     * @since 0.13.8
+     *
+     */
+    public static final class Trim implements
+            Transformer.Action<String> {
+        
+        @Override
+        public String transform(final String element) {
+            return element.trim();
+        }
+
+}
 }

@@ -30,7 +30,7 @@ import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.misc.Concat;
-import org.takes.misc.LcCondition;
+import org.takes.misc.Condition;
 
 /**
  * Request without a header (even if it was absent).
@@ -61,7 +61,7 @@ public final class RqWithoutHeader extends RqWrap {
                     return new Concat<String>(
                         req.head(),
                         Collections.EMPTY_LIST,
-                        new LcCondition(prefix)
+                        new Condition.LowerCase(prefix)
                     );
                 }
                 @Override

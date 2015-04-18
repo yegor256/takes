@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link IterableTransform}.
+ * Test case for {@link Transformer}.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
@@ -48,9 +48,9 @@ public final class IterableTransformTest {
         alist.add("b1");
         alist.add("c1");
         MatcherAssert.assertThat(
-            new IterableTransform<String>(
+            new Transformer<String>(
                 alist,
-                new IterableTransform.Action<String>() {
+                new Transformer.Action<String>() {
                     @Override
                     public String transform(final String element) {
                         return element.concat("t");

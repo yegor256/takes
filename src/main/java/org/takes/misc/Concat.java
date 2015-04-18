@@ -100,14 +100,4 @@ public final class Concat<T> implements Iterable<T> {
         }
     }
 
-    public interface Condition<T> {
-        /**
-         * Determine if an element should be added.
-         *
-         * @param element The element in the iterables to examine.
-         * @return True to add the element, false to skip.
-         */
-        boolean add(T element);
-    }
-
 }

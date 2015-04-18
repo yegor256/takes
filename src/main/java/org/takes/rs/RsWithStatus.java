@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
+import org.takes.misc.Condition;
 
 /**
  * Response decorator, with status code.
@@ -118,7 +119,7 @@ public final class RsWithStatus extends RsWrap {
             new Concat<String>(
                     origin.head(),
                     Collections.EMPTY_LIST,
-                    new Concat.Condition<String>() {
+                    new Condition<String>() {
                         /**
                          * Boolean to determine first.
                          */
