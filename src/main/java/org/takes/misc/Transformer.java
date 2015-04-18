@@ -88,7 +88,7 @@ public class Transformer<T, K> implements Iterable<K> {
 
     /**
      * Convert CharSequence into String.
-     * 
+     *
      * @author Jason Wong (super132j@yahoo.com)
      * @version $Id$
      * @since 0.13.8
