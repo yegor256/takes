@@ -43,7 +43,6 @@ public class Transformer<T, K> implements Iterable<K> {
 
     /**
      * Transform elements in the supplied iterable by the action supplied.
-     *
      * @param list Iterable to be transformed
      * @param action The actual transformation implementation
      */

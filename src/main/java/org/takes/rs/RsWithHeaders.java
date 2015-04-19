@@ -71,8 +71,8 @@ public final class RsWithHeaders extends RsWrap {
                             new Transformer<CharSequence, String>(
                                 (Iterable<CharSequence>) headers,
                                 new TransformAction.ToString()
-                            )
-                            , new TransformAction.Trim()
+                            ),
+                            new TransformAction.Trim()
                         )
                     );
                 }

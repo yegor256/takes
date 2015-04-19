@@ -33,7 +33,6 @@ package org.takes.misc;
 public interface TransformAction<T, K> {
     /**
      * The transform action of the element of type T to K.
-     *
      * @param element Element of the iterable
      * @return Transformed element
      */
@@ -42,8 +41,7 @@ public interface TransformAction<T, K> {
     /**
      * Trimming action used with {@link Transformer}.
      */
-    class Trim implements
-        TransformAction<String, String> {
+    class Trim implements TransformAction<String, String> {
 
         @Override
         public String transform(final String element) {
@@ -54,8 +52,7 @@ public interface TransformAction<T, K> {
     /**
      * Convert CharSequence into String.
      */
-    class ToString implements
-        TransformAction<CharSequence, String> {
+    class ToString implements TransformAction<CharSequence, String> {
 
         @Override
         public String transform(final CharSequence element) {

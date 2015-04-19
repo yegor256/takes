@@ -44,7 +44,6 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * To produce an iterable collection combining a and b, with order of the
      * elements in a first.
-     *
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
      */
@@ -56,7 +55,6 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * To produce an iterable collection, determined by condition, combining a
      * and b, with order of the elements in a first.
-     *
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
      * @param cond To determine which element to add in the final iterable
@@ -74,7 +72,6 @@ public final class Concat<T> implements Iterable<T> {
 
     /**
      * Adding an iterable into storage with condition.
-     *
      * @param itb Iterable to add
      * @param cond Condition to determine the element should be added
      */
@@ -90,7 +87,6 @@ public final class Concat<T> implements Iterable<T> {
 
     /**
      * Adding an iterable into storage.
-     *
      * @param itb Iterable to add
      */
     private void concat(final Iterable<T> itb) {
