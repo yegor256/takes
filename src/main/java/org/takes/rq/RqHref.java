@@ -68,15 +68,10 @@ public interface RqHref extends Request {
         }
         @Override
         public Href href() throws IOException {
-            final Iterator<String> host = new RqHeaders(this)
-                .header("host").iterator();
-            if (!host.hasNext()) {
-                throw new IOException("Host header is absent");
-            }
             return new Href(
                 String.format(
                     "http://%s%s",
-                    host.next(),
+                    new RqHeaders(this).header("host").iterator().next(),
                     // @checkstyle MagicNumber (1 line)
                     this.head().iterator().next().split(" ", 3)[1]
                 )
