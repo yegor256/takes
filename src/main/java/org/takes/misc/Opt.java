@@ -32,7 +32,7 @@ import lombok.EqualsAndHashCode;
  * <p>All implementations of this interface must be immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.13.8
+ * @since 0.14
  */
 public interface Opt<T> {
     /**
@@ -48,7 +48,7 @@ public interface Opt<T> {
     boolean has();
 
     /**
-     * Holder decorator.
+     * Holder for a single element only.
      *
      * <p>The class is immutable and thread-safe.
      * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
