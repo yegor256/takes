@@ -29,6 +29,7 @@ import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
+import org.takes.misc.TransformAction;
 import org.takes.misc.Transformer;
 
 /**
@@ -69,9 +70,9 @@ public final class RsWithHeaders extends RsWrap {
                         new Transformer<String, String>(
                             new Transformer<CharSequence, String>(
                                 (Iterable<CharSequence>) headers,
-                                new Transformer.ToString()
+                                new TransformAction.ToString()
                             )
-                            , new Transformer.Trim()
+                            , new TransformAction.Trim()
                         )
                     );
                 }

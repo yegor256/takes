@@ -23,51 +23,44 @@
  */
 package org.takes.misc;
 
-import java.util.Locale;
-
 /**
- * Condition to determine how {@link Concat} behave when joining two iterables.
+ * Action for {@link Transformer} to perform actual transformation.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
  */
-public interface Condition<T> {
-
+public interface TransformAction<T, K> {
     /**
-     * Determine if an element should be added.
+     * The transform action of the element of type T to K.
      *
-     * @param element The element in the iterables to examine.
-     * @return True to add the element, false to skip.
+     * @param element Element of the iterable
+     * @return Transformed element
      */
-    boolean add(T element);
+    K transform(T element);
 
     /**
-     * Concat lower case string condition. This condition changes all
-     * characters to lower case and determine if the iterable should be
-     * concatenated by determine if the element contain the 'prefix'
-     * supplied.
+     * Trimming action used with {@link Transformer}.
      */
-    class LowerCase implements Condition<String> {
-
-        /**
-         * Prefix.
-         */
-        private final transient String prefix;
-
-        /**
-         * Ctor.
-         * @param str The prefix to check
-         */
-        public LowerCase(final String str) {
-            this.prefix = str;
-        }
+    class Trim implements
+        TransformAction<String, String> {
 
         @Override
-        public boolean add(final String element) {
-            return !element.toLowerCase(Locale.ENGLISH)
-                    .startsWith(this.prefix);
+        public String transform(final String element) {
+            return element.trim();
         }
     }
 
+    /**
+     * Convert CharSequence into String.
+     */
+    class ToString implements
+        TransformAction<CharSequence, String> {
+
+        @Override
+        public String transform(final CharSequence element) {
+            return element.toString();
+        }
+
+    }
 }

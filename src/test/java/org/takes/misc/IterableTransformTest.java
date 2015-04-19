@@ -50,7 +50,7 @@ public final class IterableTransformTest {
         MatcherAssert.assertThat(
             new Transformer<String, String>(
                 alist,
-                new Transformer.Action<String, String>() {
+                new TransformAction<String, String>() {
                     @Override
                     public String transform(final String element) {
                         return element.concat("t");

@@ -48,7 +48,7 @@ public class Transformer<T, K> implements Iterable<K> {
      * @param action The actual transformation implementation
      */
     public Transformer(final Iterable<T> list,
-            final Transformer.Action<T, K> action) {
+            final TransformAction<T, K> action) {
         final Iterator<T> itr = list.iterator();
         while (itr.hasNext()) {
             this.storage.add(action.transform(itr.next()));
@@ -60,46 +60,4 @@ public class Transformer<T, K> implements Iterable<K> {
         return this.storage.iterator();
     }
 
-    public interface Action<T, K> {
-        /**
-         * The transform action of the element of type T to K.
-         *
-         * @param element Element of the iterable
-         * @return Transformed element
-         */
-        K transform(T element);
-    }
-
-    /**
-     * Trimming action used with {@link Transformer}.
-     *
-     * @author Jason Wong (super132j@yahoo.com)
-     * @version $Id$
-     * @since 0.13.8
-     */
-    public static final class Trim implements
-        Transformer.Action<String, String> {
-
-        @Override
-        public String transform(final String element) {
-            return element.trim();
-        }
-    }
-
-    /**
-     * Convert CharSequence into String.
-     *
-     * @author Jason Wong (super132j@yahoo.com)
-     * @version $Id$
-     * @since 0.13.8
-     */
-    public static final class ToString implements
-        Transformer.Action<CharSequence, String> {
-
-        @Override
-        public String transform(final CharSequence element) {
-            return element.toString();
-        }
-
-    }
 }
