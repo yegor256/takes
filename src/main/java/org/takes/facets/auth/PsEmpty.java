@@ -21,35 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.facets.auth;
 
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
+import java.util.Collections;
+import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Response;
 
 /**
- * Test case for {@link FkMethods}.
+ * Pass that doesn't do anything.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.14
  */
-public final class FkMethodsTest {
+@EqualsAndHashCode
+public final class PsEmpty implements Pass {
 
-    /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
-        );
+    @Override
+    public Iterator<Identity> enter(final Request request) {
+        return Collections.<Identity>emptyList().iterator();
     }
 
+    @Override
+    public Response exit(final Response response, final Identity identity) {
+        return response;
+    }
 }

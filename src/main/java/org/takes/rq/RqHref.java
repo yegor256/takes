@@ -68,18 +68,13 @@ public interface RqHref extends Request {
         }
         @Override
         public Href href() throws IOException {
-            final Iterator<String> host = new RqHeaders.Base(this)
-                .header("host").iterator();
-            if (!host.hasNext()) {
-                throw new IOException("Host header is absent");
-            }
             return new Href(
-                String.format(
-                    "http://%s%s",
-                    host.next(),
-                    // @checkstyle MagicNumber (1 line)
-                    this.head().iterator().next().split(" ", 3)[1]
-                )
+                    String.format(
+                            "http://%s%s",
+                            new RqHeaders.Base(this).header("host").iterator().next(),
+                            // @checkstyle MagicNumber (1 line)
+                            this.head().iterator().next().split(" ", 3)[1]
+                    )
             );
         }
     }
@@ -125,10 +120,10 @@ public interface RqHref extends Request {
          */
         public Href home() throws IOException {
             return new Href(
-                String.format(
-                    "http://%s/",
-                    new RqHeaders.Base(this).header("Host").iterator().next()
-                )
+                    String.format(
+                            "http://%s/",
+                            new RqHeaders.Base(this).header("Host").iterator().next()
+                    )
             );
         }
         /**
@@ -137,15 +132,15 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final String name) throws IOException {
+        public String single(final CharSequence name) throws IOException {
             final Iterator<String> params = this.origin.href()
-                .param(name).iterator();
+                    .param(name).iterator();
             if (!params.hasNext()) {
                 throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "query param \"%s\" is mandatory", name
-                    )
+                        HttpURLConnection.HTTP_BAD_REQUEST,
+                        String.format(
+                                "query param \"%s\" is mandatory", name
+                        )
                 );
             }
             return params.next();
@@ -157,15 +152,15 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final String name, final String def)
-            throws IOException {
+        public String single(final CharSequence name, final CharSequence def)
+                throws IOException {
             final String value;
             final Iterator<String> params = this.origin.href()
-                .param(name).iterator();
+                    .param(name).iterator();
             if (params.hasNext()) {
                 value = params.next();
             } else {
-                value = def;
+                value = def.toString();
             }
             return value;
         }

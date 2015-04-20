@@ -51,7 +51,7 @@ public final class FkAuthenticatedTest {
         MatcherAssert.assertThat(
             new FkAuthenticated(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
+            ).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
@@ -63,7 +63,7 @@ public final class FkAuthenticatedTest {
                         new CcPlain().encode(new Identity.Simple("urn:test:1"))
                     )
                 )
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }

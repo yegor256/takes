@@ -24,31 +24,40 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
- * Test case for {@link FkMethods}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Take that acts on request with specified "Accept" HTTP headers only.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
+ * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.14
  */
-public final class FkMethodsTest {
+@EqualsAndHashCode(callSuper = true)
+public final class TkProduces extends TkWrap {
 
     /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param take Original take
+     * @param types Accept types
      */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
+    public TkProduces(final Take take, final String types) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request req) throws IOException {
+                    return new RsFork(
+                        req,
+                        new FkTypes(types, take.act(req))
+                    );
+                }
+            }
         );
     }
 

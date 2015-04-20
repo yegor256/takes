@@ -123,10 +123,7 @@ public final class Href implements CharSequence {
 
     @Override
     public String toString() {
-        final StringBuilder text = new StringBuilder(this.uri.toString());
-        if (this.uri.getPath().isEmpty()) {
-            text.append('/');
-        }
+        final StringBuilder text = new StringBuilder(this.bare());
         if (!this.params.isEmpty()) {
             boolean first = true;
             for (final Map.Entry<String, List<String>> ent
@@ -155,6 +152,19 @@ public final class Href implements CharSequence {
      */
     public String path() {
         return this.uri.getPath();
+    }
+
+    /**
+     * Get URI without params.
+     * @return Bare URI
+     * @since 0.14
+     */
+    public String bare() {
+        final StringBuilder text = new StringBuilder(this.uri.toString());
+        if (this.uri.getPath().isEmpty()) {
+            text.append('/');
+        }
+        return text.toString();
     }
 
     /**

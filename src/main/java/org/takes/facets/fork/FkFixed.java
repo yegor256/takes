@@ -24,12 +24,11 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 
 /**
  * Fork fixed.
@@ -52,9 +51,9 @@ public final class FkFixed extends FkWrap {
         super(
             new Fork() {
                 @Override
-                public Iterator<Response> route(final Request req)
+                public Opt<Response> route(final Request req)
                     throws IOException {
-                    return Collections.singleton(take.act(req)).iterator();
+                    return new Opt.Single<Response>(take.act(req));
                 }
             }
         );
