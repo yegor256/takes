@@ -34,7 +34,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.13.8
  */
-public class Select<T> implements Iterable<T> {
+public final class Select<T> implements Iterable<T> {
 
     /**
      * Internal storage to hold the elements from iterables.
@@ -44,8 +44,7 @@ public class Select<T> implements Iterable<T> {
     /**
      * To produce an iterable collection, determined by condition, combining a
      * and b, with order of the elements in a first.
-     * @param aitb First iterable to concat
-     * @param bitb Second iterable to conat
+     * @param itb iterable to select
      * @param cond To determine which element to add in the final iterable
      */
     public Select(final Iterable<T> itb, final Condition<T> cond) {
