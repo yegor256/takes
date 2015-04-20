@@ -113,7 +113,7 @@ public final class Select<T> implements Iterable<T> {
             } else if (this.condition.fits(this.current.get(HEAD))) {
                 result = true;
             } else {
-                result = lookForNext();
+                result = this.lookForNext();
             }
             return result;
         }
@@ -140,8 +140,8 @@ public final class Select<T> implements Iterable<T> {
         }
 
         /**
-         * 
-         * @return
+         * Look for the first next element which matches condition.
+         * @return True if the element found, false otherwise
          */
         private boolean lookForNext() {
             this.current.remove(HEAD);
