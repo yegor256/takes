@@ -122,16 +122,14 @@ public final class PsTwitter implements Pass {
         return new JdkRequest(uri)
             .method("POST")
             .header(
-                    "Content-Type",
-                    "application/x-www-form-urlencoded;charset=UTF-8"
-                    )
+                  "Content-Type",
+                  "application/x-www-form-urlencoded;charset=UTF-8"
+            )
             .header(
-                    "Authorization",
-                    String.format(
-                            "Basic %s",
-                            DatatypeConverter.printBase64Binary(
-                            String.format("%s:%s", this.app, this.key)
-                            .getBytes()
+                  "Authorization",
+                  String.format(
+                           "Basic %s", DatatypeConverter.printBase64Binary(
+                           String.format("%s:%s", this.app, this.key).getBytes()
                     )
                 )
             )
