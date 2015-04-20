@@ -26,10 +26,14 @@ package org.takes.facets.auth.social;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.restfb.DefaultFacebookClient;
+import com.restfb.DefaultJsonMapper;
+import com.restfb.DefaultWebRequestor;
+import com.restfb.WebRequestor;
 import com.restfb.exception.FacebookException;
 import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,10 +55,19 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.5
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsFacebook implements Pass {
 
+    /**
+     * Request for fetching app token.
+     */
+    private final transient com.jcabi.http.Request request;
+    /**
+     * Facebook login request handler. .
+     */
+    private final transient WebRequestor requestor;
     /**
      * App name.
      */
@@ -71,19 +84,44 @@ public final class PsFacebook implements Pass {
      * @param fkey Facebook key
      */
     public PsFacebook(final String fapp, final String fkey) {
+        this(
+            new JdkRequest(
+                new Href("https://graph.facebook.com/oauth/access_token")
+                    .with("client_id", fapp)
+                    .with("client_secret", fkey)
+                    .toString()
+            ),
+            new DefaultWebRequestor(),
+            fapp,
+            fkey
+        );
+    }
+
+    /**
+     * Ctor with proper requestor for testing purposes.
+     * @param frequest HTTP request for getting key
+     * @param frequestor Facebook response
+     * @param fapp Facebook app
+     * @param fkey Facebook key
+     * @checkstyle ParameterNumberCheck (3 lines)
+     */
+    public PsFacebook(final com.jcabi.http.Request frequest,
+        final WebRequestor frequestor, final String fapp, final String fkey) {
+        this.request = frequest;
+        this.requestor = frequestor;
         this.app = fapp;
         this.key = fkey;
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request)
+    public Iterator<Identity> enter(final Request trequest)
         throws IOException {
-        final Href href = new RqHref.Base(request).href();
+        final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
-        final User user = PsFacebook.fetch(
+        final User user = this.fetch(
             this.token(href.toString(), code.next())
         );
         final ConcurrentMap<String, String> props =
@@ -115,9 +153,13 @@ public final class PsFacebook implements Pass {
      * @param token Facebook access token
      * @return The user found in FB
      */
-    private static User fetch(final String token) {
+    private User fetch(final String token) {
         try {
-            return new DefaultFacebookClient(token).fetchObject(
+            return new DefaultFacebookClient(
+                token,
+                this.requestor,
+                new DefaultJsonMapper()
+            ).fetchObject(
                 "me", User.class
             );
         } catch (final FacebookException ex) {
@@ -141,10 +183,9 @@ public final class PsFacebook implements Pass {
             .with("client_secret", this.key)
             .with("code", code)
             .toString();
-        final String response = new JdkRequest(uri)
-            .fetch().as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .body();
+        this.request.uri().set(URI.create(uri));
+        final String response = this.request.fetch().as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK).body();
         final String[] sectors = response.split("&");
         for (final String sector : sectors) {
             final String[] pair = sector.split("=");
