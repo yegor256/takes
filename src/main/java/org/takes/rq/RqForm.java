@@ -107,11 +107,11 @@ public interface RqForm extends Request {
                 final String[] parts = pair.split("=", 2);
                 if (parts.length < 2) {
                     throw new IOException(
-                            String.format("invalid form body pair: %s", pair)
+                        String.format("invalid form body pair: %s", pair)
                     );
                 }
                 final String key = RqForm.Base.decode(
-                        parts[0].trim().toLowerCase(Locale.ENGLISH)
+                    parts[0].trim().toLowerCase(Locale.ENGLISH)
                 );
                 this.map.putIfAbsent(key, new LinkedList<String>());
                 this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
@@ -126,7 +126,7 @@ public interface RqForm extends Request {
                 iter = new VerboseIterable<String>(
                     Collections.<String>emptyList(),
                     new Sprintf(
-                        "there're no params by name \"%s\" among %d others: %s",
+                        "there are no params \"%s\" among %d others: %s",
                         key, this.map.size(), this.map.keySet()
                     )
                 );
@@ -153,7 +153,7 @@ public interface RqForm extends Request {
         private static String decode(final CharSequence txt) {
             try {
                 return URLDecoder.decode(
-                        txt.toString(), Charset.defaultCharset().name()
+                    txt.toString(), Charset.defaultCharset().name()
                 );
             } catch (final UnsupportedEncodingException ex) {
                 throw new IllegalStateException(ex);
