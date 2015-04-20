@@ -57,7 +57,7 @@ public final class RqWithoutHeader extends RqWrap {
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     return new Select<String>(
-                        req.head(), 
+                        req.head(),
                         new Condition.LowerCase(prefix)
                     );
                 }

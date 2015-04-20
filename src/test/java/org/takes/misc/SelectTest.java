@@ -36,7 +36,7 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.13.8
  */
-public class SelectTest {
+public final class SelectTest {
 
     /**
      * Select test with condition.
@@ -52,7 +52,7 @@ public class SelectTest {
             alist,
             new Condition<String>() {
                 @Override
-                public boolean add(final String element) {
+                public boolean fits(final String element) {
                     return element.endsWith("1");
                 }
             }

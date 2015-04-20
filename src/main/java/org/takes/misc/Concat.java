@@ -24,8 +24,7 @@
 package org.takes.misc;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Concat iterable.
@@ -37,9 +36,14 @@ import java.util.List;
 public final class Concat<T> implements Iterable<T> {
 
     /**
-     * Internal storage to hold the elements from iterables.
+     * Internal reference to hold the first elements from constructor.
      */
-    private final transient List<T> storage = new LinkedList<T>();
+    private final transient Iterable<T> left;
+
+    /**
+     * Internal reference to hold the second elements from constructor.
+     */
+    private final transient Iterable<T> right;
 
     /**
      * To produce an iterable collection combining a and b, with order of the
@@ -48,24 +52,66 @@ public final class Concat<T> implements Iterable<T> {
      * @param bitb Second iterable to conat
      */
     public Concat(final Iterable<T> aitb, final Iterable<T> bitb) {
-        this.concat(aitb);
-        this.concat(bitb);
+        this.left = aitb;
+        this.right = bitb;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return this.storage.iterator();
+        return new ConcatIterator<T>(
+            this.left.iterator(),
+            this.right.iterator()
+        );
     }
 
     /**
-     * Adding an iterable into storage.
-     * @param itb Iterable to add
+     * The concat iterator to traverse the input iterables as if they are 
+     * from one list.
      */
-    private void concat(final Iterable<T> itb) {
-        final Iterator<T> itr = itb.iterator();
-        while (itr.hasNext()) {
-            this.storage.add(itr.next());
+    private static class ConcatIterator<E> implements Iterator<E> {
+
+        /**
+         * Internal reference for holding the first iterator form constructor.
+         */
+        private final transient Iterator<E> left;
+
+        /**
+         * Internal reference for holding the second iterator form constructor.
+         */
+        private final transient Iterator<E> right;
+
+        /**
+         * Ctor. ConcatIterator traverses the element 
+         * @param aitr
+         * @param bitr
+         */
+        public ConcatIterator(final Iterator<E> aitr, final Iterator<E> bitr) {
+            this.left = aitr;
+            this.right = bitr;
+        }
+
+        @Override
+        public boolean hasNext() {
+            final boolean left = this.left.hasNext();
+            final boolean right = this.right.hasNext();
+            if (left) {
+                return true;
+            } else if (right) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public E next() {
+            if (this.left.hasNext()) {
+                return this.left.next();
+            } else if (this.right.hasNext()) {
+                return this.right.next();
+            } else {
+                throw new NoSuchElementException();
+            }
         }
     }
-
 }

@@ -23,9 +23,10 @@
  */
 package org.takes.misc;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Select elements into a new iterable with given condition.
@@ -39,34 +40,105 @@ public final class Select<T> implements Iterable<T> {
     /**
      * Internal storage to hold the elements from iterables.
      */
-    private final transient List<T> storage = new LinkedList<T>();
+    private final transient Iterable<T> list;
+
+    /**
+     * The condition to filter the element in the iterator
+     */
+    private final transient Condition<T> condition;
 
     /**
      * To produce an iterable collection, determined by condition, combining a
      * and b, with order of the elements in a first.
-     * @param itb iterable to select
+     * @param itb Iterable to select
      * @param cond To determine which element to add in the final iterable
      */
     public Select(final Iterable<T> itb, final Condition<T> cond) {
-        this.select(itb, cond);
+        this.list = itb;
+        this.condition = cond;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return this.storage.iterator();
+        return new SelectIterator<T>(
+            this.list.iterator(),
+            this.condition
+        );
     }
 
     /**
-     * Adding an iterable into storage with condition.
-     * @param itb Iterable to add
-     * @param cond Condition to determine the element should be added
+     * The select iterator to traverse the input iterables and return the
+     * elements from the list with given condition.
      */
-    private void select(final Iterable<T> itb, final Condition<T> cond) {
-        final Iterator<T> itr = itb.iterator();
-        while (itr.hasNext()) {
-            final T element = itr.next();
-            if (cond.add(element)) {
-                this.storage.add(element);
+    private static class SelectIterator<E> implements Iterator<E> {
+
+        /**
+         * The iterator to reflect the traverse state.
+         */
+        private final transient Iterator<E> iterator;
+
+        /**
+         * The condition to filter the elements in the iterator.
+         */
+        private final transient Condition<E> condition;
+
+        /**
+         * The list storing the current object of the iterator.
+         */
+        private final transient List<E> current = new ArrayList<E>(1);
+
+        /**
+         * The index pointing to the current element list. 
+         */
+        private static final transient int HEAD = 0;
+
+        /**
+         * Ctor. ConcatIterator traverses the element.
+         * @param itr Iterator of the original iterable
+         * @param cond Condition to filter out elements
+         */
+        public SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
+            this.condition = cond;
+            this.iterator = itr;
+            if (this.iterator.hasNext()) {
+                this.current.add(this.iterator.next());
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (!this.current.isEmpty()) {
+                if (this.condition.fits(this.current.get(HEAD))) {
+                    return true;
+                } else {
+                    this.current.remove(HEAD);
+                    while (this.iterator.hasNext()) {
+                        final E element = this.iterator.next();
+                        if (this.condition.fits(element)) {
+                            this.current.add(element);
+                            break;
+                        }
+                    }
+                    return !this.current.isEmpty();
+                }
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public E next() {
+            if (this.hasNext()) {
+                final E result = this.current.get(HEAD);
+                this.current.remove(0);
+                if (this.iterator.hasNext()) {
+                    this.current.add(this.iterator.next());
+                }
+                return result;
+            } else {
+                throw new NoSuchElementException(
+                    "No more element with fits the select condition."
+                );
             }
         }
     }

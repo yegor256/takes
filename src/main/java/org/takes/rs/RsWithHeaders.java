@@ -29,8 +29,8 @@ import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
-import org.takes.misc.TransformAction;
 import org.takes.misc.Transform;
+import org.takes.misc.TransformAction;
 
 /**
  * Response decorator, with an additional headers.

@@ -28,8 +28,8 @@ import java.io.InputStream;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.misc.Select;
 import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Response decorator, without a header.

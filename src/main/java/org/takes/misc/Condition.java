@@ -39,7 +39,7 @@ public interface Condition<T> {
      * @param element The element in the iterables to examine.
      * @return True to add the element, false to skip.
      */
-    boolean add(T element);
+    boolean fits(T element);
 
     /**
      * Concat lower case string condition. This condition changes all
@@ -63,7 +63,7 @@ public interface Condition<T> {
         }
 
         @Override
-        public boolean add(final String element) {
+        public boolean fits(final String element) {
             return !element.toLowerCase(Locale.ENGLISH)
                     .startsWith(this.prefix);
         }

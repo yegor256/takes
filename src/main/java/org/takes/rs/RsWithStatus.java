@@ -125,7 +125,7 @@ public final class RsWithStatus extends RsWrap {
                      */
                     private boolean first = true;
                     @Override
-                    public boolean add(final String element) {
+                    public boolean fits(final String element) {
                         final boolean ret = this.first;
                         if (this.first) {
                             this.first = false;

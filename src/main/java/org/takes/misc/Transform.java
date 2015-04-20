@@ -24,8 +24,7 @@
 package org.takes.misc;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Transform elements in an iterable (in type T) into others (in type K).
@@ -39,24 +38,70 @@ public class Transform<T, K> implements Iterable<K> {
     /**
      * Internal storage.
      */
-    private final transient List<K> storage = new LinkedList<K>();
+    private final transient Iterable<T> list;
+
+    /**
+     * The action to transform the elements in the iterator.
+     */
+    private final transient TransformAction<T, K> action;
 
     /**
      * Transform elements in the supplied iterable by the action supplied.
      * @param list Iterable to be transformed
      * @param action The actual transformation implementation
      */
-    public Transform(final Iterable<T> list,
-            final TransformAction<T, K> action) {
-        final Iterator<T> itr = list.iterator();
-        while (itr.hasNext()) {
-            this.storage.add(action.transform(itr.next()));
-        }
+    public Transform(final Iterable<T> itb,
+            final TransformAction<T, K> act) {
+        this.list = itb;
+        this.action = act;
     }
 
     @Override
     public final Iterator<K> iterator() {
-        return this.storage.iterator();
+        return new TransformIterator<T, K>(this.list.iterator(), this.action);
     }
 
+    /**
+     * The iterator to iterator through the original type B and return the
+     * transformed element in type A
+     */
+    private static class TransformIterator<B, A> implements Iterator<A> {
+
+        /**
+         * The iterator to reflect the traverse state.
+         */
+        private final transient Iterator<B> iterator;
+
+        /**
+         * The action to transform the elements in the iterator.
+         */
+        private final transient TransformAction<B, A> action;
+
+        /**
+         * Ctor. ConcatIterator traverses the element.
+         * @param itr Iterator of the original iterable
+         * @param act Action to transform elements
+         */
+        public TransformIterator(final Iterator<B> itr,
+                final TransformAction<B, A> act) {
+            this.action = act;
+            this.iterator = itr;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.iterator.hasNext();
+        }
+
+        @Override
+        public A next() {
+            if (this.hasNext()) {
+                return this.action.transform(this.iterator.next());
+            } else {
+                throw new NoSuchElementException(
+                    "No more element with fits the select condition."
+                );
+            }
+        }
+    }
 }
