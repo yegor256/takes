@@ -147,10 +147,10 @@ public final class RsWithBody extends RsWrap {
     }
 
     /**
-     * Forms a list with header attributes from response.
+     * Appends content length to header from response.
      * @param res Response
      * @param contentlength Response body content length
-     * @return List of header attributes
+     * @return Iterable String of header attributes
      * @throws IOException if something goes wrong.
      */
     private static Iterable<String> append(
