@@ -52,37 +52,9 @@ public final class Concat<T> implements Iterable<T> {
         this.concat(bitb);
     }
 
-    /**
-     * To produce an iterable collection, determined by condition, combining a
-     * and b, with order of the elements in a first.
-     * @param aitb First iterable to concat
-     * @param bitb Second iterable to conat
-     * @param cond To determine which element to add in the final iterable
-     */
-    public Concat(final Iterable<T> aitb, final Iterable<T> bitb,
-            final Condition<T> cond) {
-        this.concat(aitb, cond);
-        this.concat(bitb, cond);
-    }
-
     @Override
     public Iterator<T> iterator() {
         return this.storage.iterator();
-    }
-
-    /**
-     * Adding an iterable into storage with condition.
-     * @param itb Iterable to add
-     * @param cond Condition to determine the element should be added
-     */
-    private void concat(final Iterable<T> itb, final Condition<T> cond) {
-        final Iterator<T> itr = itb.iterator();
-        while (itr.hasNext()) {
-            final T element = itr.next();
-            if (cond.add(element)) {
-                this.storage.add(element);
-            }
-        }
     }
 
     /**

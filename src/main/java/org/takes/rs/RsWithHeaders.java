@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.TransformAction;
-import org.takes.misc.Transformer;
+import org.takes.misc.Transform;
 
 /**
  * Response decorator, with an additional headers.
@@ -67,8 +67,8 @@ public final class RsWithHeaders extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return new Concat<String>(
                         res.head(),
-                        new Transformer<String, String>(
-                            new Transformer<CharSequence, String>(
+                        new Transform<String, String>(
+                            new Transform<CharSequence, String>(
                                 (Iterable<CharSequence>) headers,
                                 new TransformAction.ToString()
                             ),

@@ -34,7 +34,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.13.8
  */
-public class Transformer<T, K> implements Iterable<K> {
+public class Transform<T, K> implements Iterable<K> {
 
     /**
      * Internal storage.
@@ -46,7 +46,7 @@ public class Transformer<T, K> implements Iterable<K> {
      * @param list Iterable to be transformed
      * @param action The actual transformation implementation
      */
-    public Transformer(final Iterable<T> list,
+    public Transform(final Iterable<T> list,
             final TransformAction<T, K> action) {
         final Iterator<T> itr = list.iterator();
         while (itr.hasNext()) {

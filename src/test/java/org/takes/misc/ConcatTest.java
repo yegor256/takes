@@ -84,36 +84,4 @@ public final class ConcatTest {
         );
     }
 
-    /**
-     * Concat test with condition.
-     */
-    @Test
-    public void concatWithCondition() {
-        final List<String> alist = new ArrayList<String>(2);
-        final String aone = "at1";
-        final String atwo = "at2";
-        alist.add(aone);
-        alist.add(atwo);
-        final List<String> blist = new ArrayList<String>(2);
-        final String bone = "bt1";
-        final String btwo = "bt2";
-        blist.add(bone);
-        blist.add(btwo);
-        final Iterable<String> result = new Concat<String>(
-            alist,
-            blist,
-            new Condition<String>() {
-                @Override
-                public boolean add(final String element) {
-                    return element.endsWith("1");
-                }
-            }
-        );
-        MatcherAssert.assertThat(result, Matchers.hasItems(aone, bone));
-        MatcherAssert.assertThat(
-            result,
-            Matchers.not(Matchers.hasItems(atwo, btwo))
-        );
-    }
-
 }

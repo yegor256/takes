@@ -23,41 +23,53 @@
  */
 package org.takes.misc;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * Action for {@link Transform} to perform actual transformation.
+ * Select elements into a new iterable with given condition.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
  */
-public interface TransformAction<T, K> {
-    /**
-     * The transform action of the element of type T to K.
-     * @param element Element of the iterable
-     * @return Transformed element
-     */
-    K transform(T element);
+public class Select<T> implements Iterable<T> {
 
     /**
-     * Trimming action used with {@link Transform}.
+     * Internal storage to hold the elements from iterables.
      */
-    class Trim implements TransformAction<String, String> {
+    private final transient List<T> storage = new LinkedList<T>();
 
-        @Override
-        public String transform(final String element) {
-            return element.trim();
-        }
+    /**
+     * To produce an iterable collection, determined by condition, combining a
+     * and b, with order of the elements in a first.
+     * @param aitb First iterable to concat
+     * @param bitb Second iterable to conat
+     * @param cond To determine which element to add in the final iterable
+     */
+    public Select(final Iterable<T> itb, final Condition<T> cond) {
+        this.select(itb, cond);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return this.storage.iterator();
     }
 
     /**
-     * Convert CharSequence into String.
+     * Adding an iterable into storage with condition.
+     * @param itb Iterable to add
+     * @param cond Condition to determine the element should be added
      */
-    class ToString implements TransformAction<CharSequence, String> {
-
-        @Override
-        public String transform(final CharSequence element) {
-            return element.toString();
+    private void select(final Iterable<T> itb, final Condition<T> cond) {
+        final Iterator<T> itr = itb.iterator();
+        while (itr.hasNext()) {
+            final T element = itr.next();
+            if (cond.add(element)) {
+                this.storage.add(element);
+            }
         }
-
     }
+
 }

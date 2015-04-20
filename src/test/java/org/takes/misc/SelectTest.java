@@ -21,51 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.misc;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Locale;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.misc.Condition;
-import org.takes.misc.Select;
+import java.util.ArrayList;
+import java.util.List;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Request without a header (even if it was absent).
+ * Test case for {@link Concat}.
  *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.8
+ * @since 0.13.8
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqWithoutHeader extends RqWrap {
+public class SelectTest {
 
     /**
-     * Ctor.
-     * @param req Original request
-     * @param name Header name
+     * Select test with condition.
      */
-    public RqWithoutHeader(final Request req, final CharSequence name) {
-        super(
-            new Request() {
+    @Test
+    public void select() {
+        final List<String> alist = new ArrayList<String>(2);
+        final String aone = "at1";
+        final String atwo = "at2";
+        alist.add(aone);
+        alist.add(atwo);
+        final Iterable<String> result = new Select<String>(
+            alist,
+            new Condition<String>() {
                 @Override
-                public Iterable<String> head() throws IOException {
-                    final String prefix = String.format(
-                        "%s:", name.toString().toLowerCase(Locale.ENGLISH)
-                    );
-                    return new Select<String>(
-                        req.head(), 
-                        new Condition.LowerCase(prefix)
-                    );
-                }
-                @Override
-                public InputStream body() throws IOException {
-                    return req.body();
+                public boolean add(final String element) {
+                    return element.endsWith("1");
                 }
             }
         );
+        MatcherAssert.assertThat(result, Matchers.hasItems(aone));
+        MatcherAssert.assertThat(
+            result,
+            Matchers.not(Matchers.hasItems(atwo))
+        );
     }
+
 }

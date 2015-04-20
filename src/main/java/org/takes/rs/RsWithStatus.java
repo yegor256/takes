@@ -34,6 +34,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Response decorator, with status code.
@@ -116,23 +117,22 @@ public final class RsWithStatus extends RsWrap {
             Collections.singleton(
                     String.format("HTTP/1.1 %d %s", status, reason)
             ),
-            new Concat<String>(
-                    origin.head(),
-                    Collections.<String>emptyList(),
-                    new Condition<String>() {
-                        /**
-                         * Boolean to determine first.
-                         */
-                        private boolean first = true;
-                        @Override
-                        public boolean add(final String element) {
-                            final boolean ret = this.first;
-                            if (this.first) {
-                                this.first = false;
-                            }
-                            return !ret;
+            new Select<String>(
+                origin.head(),
+                new Condition<String>() {
+                    /**
+                     * Boolean to determine first.
+                     */
+                    private boolean first = true;
+                    @Override
+                    public boolean add(final String element) {
+                        final boolean ret = this.first;
+                        if (this.first) {
+                            this.first = false;
                         }
+                        return !ret;
                     }
+                }
             )
         );
     }

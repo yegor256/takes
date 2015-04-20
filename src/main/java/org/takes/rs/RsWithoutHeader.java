@@ -25,11 +25,10 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.misc.Concat;
+import org.takes.misc.Select;
 import org.takes.misc.Condition;
 
 /**
@@ -57,9 +56,8 @@ public final class RsWithoutHeader extends RsWrap {
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
-                    return new Concat<String>(
+                    return new Select<String>(
                         res.head(),
-                        Collections.<String>emptyList(),
                         new Condition.LowerCase(prefix)
                     );
                 }
