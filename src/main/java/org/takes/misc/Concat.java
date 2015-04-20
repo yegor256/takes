@@ -113,5 +113,10 @@ public final class Concat<T> implements Iterable<T> {
                 throw new NoSuchElementException();
             }
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }

@@ -103,5 +103,10 @@ public class Transform<T, K> implements Iterable<K> {
                 );
             }
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }

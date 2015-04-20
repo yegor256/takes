@@ -141,6 +141,11 @@ public final class Select<T> implements Iterable<T> {
                 );
             }
         }
+        
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
 }
