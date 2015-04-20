@@ -70,10 +70,10 @@ public interface RqHref extends Request {
         public Href href() throws IOException {
             return new Href(
                 String.format(
-                        "http://%s%s",
-                        new RqHeaders.Base(this).header("host").iterator().next(),
-                        // @checkstyle MagicNumber (1 line)
-                        this.head().iterator().next().split(" ", 3)[1]
+                    "http://%s%s",
+                    new RqHeaders.Base(this).header("host").iterator().next(),
+                    // @checkstyle MagicNumber (1 line)
+                    this.head().iterator().next().split(" ", 3)[1]
                 )
             );
         }
@@ -121,8 +121,8 @@ public interface RqHref extends Request {
         public Href home() throws IOException {
             return new Href(
                 String.format(
-                        "http://%s/",
-                        new RqHeaders.Base(this).header("Host").iterator().next()
+                    "http://%s/",
+                    new RqHeaders.Base(this).header("Host").iterator().next()
                 )
             );
         }
@@ -134,7 +134,7 @@ public interface RqHref extends Request {
          */
         public String single(final CharSequence name) throws IOException {
             final Iterator<String> params = this.origin.href()
-                    .param(name).iterator();
+                .param(name).iterator();
             if (!params.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
