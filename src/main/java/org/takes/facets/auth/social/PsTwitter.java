@@ -89,9 +89,9 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Get user name from Github, with the token provided.
-     * @param token Github access token
-     * @return The user found in Github
+     * Get user name from Twitter, with the token provided.
+     * @param token Twitter access token
+     * @return The user found in Twitter
      * @throws IOException If fails
      */
     private static Identity fetch(final String token) throws IOException {
@@ -110,7 +110,7 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Retrieve Github access token.
+     * Retrieve Twitter access token.
      * @return The token
      * @throws IOException If failed
      */
@@ -121,19 +121,17 @@ public final class PsTwitter implements Pass {
             .toString();
         return new JdkRequest(uri)
             .method("POST")
-                .header(
-                        "Content-Type",
-                        "application/x-www-form-urlencoded;charset=UTF-8"
-            )
-                .header(
-                        "Authorization",
-                        String.format(
-                                "Basic %s", DatatypeConverter
-                                .printBase64Binary(
-                                        String.format(
-                                                "%s:%s",
-                                        this.app, this.key
-                        ).getBytes()
+            .header(
+                    "Content-Type",
+                    "application/x-www-form-urlencoded;charset=UTF-8"
+                    )
+            .header(
+                    "Authorization",
+                    String.format(
+                            "Basic %s",
+                            DatatypeConverter.printBase64Binary(
+                            String.format("%s:%s", this.app, this.key)
+                            .getBytes()
                     )
                 )
             )
@@ -145,7 +143,7 @@ public final class PsTwitter implements Pass {
 
     /**
      * Make identity from JSON object.
-     * @param json JSON received from Github
+     * @param json JSON received from Twitter
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
