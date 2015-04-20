@@ -44,7 +44,7 @@ public final class RqHeadersTest {
     @Test
     public void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
-            new RqHeaders(
+            new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -65,7 +65,7 @@ public final class RqHeadersTest {
     @Test
     public void findsAllHeaders() throws IOException {
         MatcherAssert.assertThat(
-            new RqHeaders(
+            new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /f?a=3&b-6",

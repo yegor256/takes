@@ -164,14 +164,14 @@ public final class RqMultipartTest {
         );
         final RqMultipart.Base multi = new RqMultipart.Base(req);
         MatcherAssert.assertThat(
-            new RqHeaders(
+            new RqHeaders.Base(
                 multi.part("address").iterator().next()
             ).header("Content-disposition"),
             Matchers.hasItem("form-data; name=\"address\"")
         );
         MatcherAssert.assertThat(
             new RqPrint(
-                new RqHeaders(
+                new RqHeaders.Base(
                     multi.part("data").iterator().next()
                 )
             ).printBody(),

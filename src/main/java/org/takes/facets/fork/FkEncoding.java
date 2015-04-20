@@ -82,15 +82,15 @@ public final class FkEncoding implements Fork {
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> headers =
-            new RqHeaders(req).header("Accept-Encoding").iterator();
+                new RqHeaders.Base(req).header("Accept-Encoding").iterator();
         final Opt<Response> resp;
         if (this.encoding.isEmpty()) {
             resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
-                headers.next().trim()
-                    .toLowerCase(Locale.ENGLISH)
-                    .split("\\s*,\\s*")
+                    headers.next().trim()
+                            .toLowerCase(Locale.ENGLISH)
+                            .split("\\s*,\\s*")
             );
             if (items.contains(this.encoding)) {
                 resp = new Opt.Single<Response>(this.origin);

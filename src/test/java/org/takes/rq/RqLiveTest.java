@@ -57,7 +57,7 @@ public final class RqLiveTest {
             )
         );
         MatcherAssert.assertThat(
-            new RqHeaders(req).header("host"),
+            new RqHeaders.Base(req).header("host"),
             Matchers.hasItem("e")
         );
         MatcherAssert.assertThat(
