@@ -257,4 +257,5 @@ public interface RqMultipart extends Request {
             }
             throw new IOException("closing boundary not found");
         }
-    }}
+    }
+}
