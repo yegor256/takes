@@ -29,22 +29,19 @@ import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
 
 /**
- *
  * Response Status Matcher.
  *
  * <p>This "matcher" tests given response status code
- *
  * <p>The class is immutable and thread-safe.
  *
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.13
  */
 public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Expected input value.
-     * Expected test input for matcher.
+     * Expected response status code for matcher.
      */
     private final transient Integer expected;
 
@@ -63,8 +60,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
      */
     @Override
     public void describeTo(final Description description) {
-        description
-                .appendText("Response Status same as: ")
+        description.appendText("Response Status same as: ")
                 .appendValue(this.expected);
     }
 

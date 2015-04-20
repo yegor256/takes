@@ -27,6 +27,6 @@
  *
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.13
  */
 package org.takes.facets.hamcrest;

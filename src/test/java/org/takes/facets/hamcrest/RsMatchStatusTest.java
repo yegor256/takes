@@ -33,11 +33,10 @@ import org.takes.tk.TkEmpty;
 import org.takes.tk.TkHTML;
 
 /**
- *
  * Test case for {@link RsMatchStatus}.
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.13
  */
 public final class RsMatchStatusTest {
 
