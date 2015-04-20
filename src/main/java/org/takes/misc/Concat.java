@@ -99,13 +99,15 @@ public final class Concat<T> implements Iterable<T> {
 
         @Override
         public E next() {
+            final E object;
             if (this.left.hasNext()) {
-                return this.left.next();
+                object = this.left.next();
             } else if (this.right.hasNext()) {
-                return this.right.next();
+                object = this.right.next();
             } else {
                 throw new NoSuchElementException();
             }
+            return object;
         }
 
         @Override

@@ -107,22 +107,13 @@ public final class Select<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
+            final boolean result;
             if (this.current.isEmpty()) {
                 return false;
-            }
-            final boolean result;
-            if (this.condition.fits(this.current.get(HEAD))) {
+            } else if (this.condition.fits(this.current.get(HEAD))) {
                 result = true;
             } else {
-                this.current.remove(HEAD);
-                while (this.iterator.hasNext()) {
-                    final E element = this.iterator.next();
-                    if (this.condition.fits(element)) {
-                        this.current.add(element);
-                        break;
-                    }
-                }
-                result = !this.current.isEmpty();
+                result = lookForNext();
             }
             return result;
         }
@@ -146,6 +137,22 @@ public final class Select<T> implements Iterable<T> {
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
+        }
+
+        /**
+         * 
+         * @return
+         */
+        private boolean lookForNext() {
+            this.current.remove(HEAD);
+            while (this.iterator.hasNext()) {
+                final E element = this.iterator.next();
+                if (this.condition.fits(element)) {
+                    this.current.add(element);
+                    break;
+                }
+            }
+            return !this.current.isEmpty();
         }
     }
 
