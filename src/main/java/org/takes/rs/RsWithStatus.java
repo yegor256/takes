@@ -100,7 +100,6 @@ public final class RsWithStatus extends RsWrap {
      * @return Head
      * @throws IOException If fails
      */
-    @SuppressWarnings("unchecked")
     private static Iterable<String> head(final Response origin,
         final int status, final CharSequence reason) throws IOException {
         // @checkstyle MagicNumber (1 line)
@@ -119,7 +118,7 @@ public final class RsWithStatus extends RsWrap {
             ),
             new Concat<String>(
                     origin.head(),
-                    Collections.EMPTY_LIST,
+                    Collections.<String>emptyList(),
                     new Condition<String>() {
                         /**
                          * Boolean to determine first.

@@ -53,14 +53,13 @@ public final class RqWithoutHeader extends RqWrap {
         super(
             new Request() {
                 @Override
-                @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     return new Concat<String>(
                         req.head(),
-                        Collections.EMPTY_LIST,
+                        Collections.<String>emptyList(),
                         new Condition.LowerCase(prefix)
                     );
                 }

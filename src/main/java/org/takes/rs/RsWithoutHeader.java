@@ -53,14 +53,13 @@ public final class RsWithoutHeader extends RsWrap {
         super(
             new Response() {
                 @Override
-                @SuppressWarnings("unchecked")
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
                     return new Concat<String>(
                         res.head(),
-                        Collections.EMPTY_LIST,
+                        Collections.<String>emptyList(),
                         new Condition.LowerCase(prefix)
                     );
                 }
