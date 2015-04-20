@@ -47,7 +47,7 @@ public final class FkAnonymousTest {
         MatcherAssert.assertThat(
             new FkAnonymous(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }
