@@ -131,12 +131,12 @@
 <a class="jxr_linenumber" name="L123" href="#L123">123</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> List&lt;String&gt; extend(<strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; head,
 <a class="jxr_linenumber" name="L125" href="#L125">125</a>         <strong class="jxr_keyword">final</strong> String header) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L126" href="#L126">126</a>         <strong class="jxr_keyword">if</strong> (!HEADER.matcher(header).matches()) {
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>         <strong class="jxr_keyword">if</strong> (!RsWithHeader.HEADER.matcher(header).matches()) {
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>                 String.format(
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>                     <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>                     <span class="jxr_string">"header line of HTTP response \&quot;%s\&quot; doesn't match \&quot;%s\&quot; regular expression, but it should, according to RFC 7230"</span>,
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>                     header, HEADER
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>                     header, RsWithHeader.HEADER
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>                 )
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>             );
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>         }
