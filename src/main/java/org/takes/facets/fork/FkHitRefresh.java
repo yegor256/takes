@@ -79,7 +79,7 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final String cmd,
-                        final Take tke) throws IOException {
+        final Take tke) throws IOException {
         this(file, Arrays.asList(cmd.split(" ")), tke);
     }
 
@@ -91,20 +91,20 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-                        final Take tke) throws IOException {
+        final Take tke) throws IOException {
         this(
-                file,
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new ProcessBuilder().command(cmd).start();
-                        } catch (final IOException ex) {
-                            throw new IllegalStateException(ex);
-                        }
+            file,
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new ProcessBuilder().command(cmd).start();
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
                     }
-                },
-                tke
+                }
+            },
+            tke
         );
     }
 
@@ -116,7 +116,7 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final Runnable cmd,
-                        final Take tke) throws IOException {
+        final Take tke) throws IOException {
         this.dir = file;
         this.exec = cmd;
         this.take = tke;

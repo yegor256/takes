@@ -89,14 +89,14 @@ public interface RqMultipart extends Request {
          * Pattern to get boundary from header.
          */
         private static final Pattern BOUNDARY = Pattern.compile(
-                ".*[^a-z]boundary=([^;]+).*"
+            ".*[^a-z]boundary=([^;]+).*"
         );
 
         /**
          * Pattern to get name from header.
          */
         private static final Pattern NAME = Pattern.compile(
-                ".*[^a-z]name=\"([^\"]+)\".*"
+            ".*[^a-z]name=\"([^\"]+)\".*"
         );
 
         /**
@@ -112,24 +112,24 @@ public interface RqMultipart extends Request {
         public Base(final Request req) throws IOException {
             super(req);
             final String header = new RqHeaders.Base(req).header("Content-Type")
-                    .iterator().next();
+                .iterator().next();
             if (!header.toLowerCase(Locale.ENGLISH)
-                    .startsWith("multipart/form-data")) {
+                .startsWith("multipart/form-data")) {
                 throw new IOException(
-                        String.format(
-                                // @checkstyle LineLength (1 line)
-                                "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: %s",
-                                header
-                        )
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: %s",
+                        header
+                    )
                 );
             }
             final Matcher matcher = Base.BOUNDARY.matcher(header);
             if (!matcher.matches()) {
                 throw new IOException(
-                        String.format(
-                                "boundary is not specified in Content-Type header: %s",
-                                header
-                        )
+                    String.format(
+                        "boundary is not specified in Content-Type header: %s",
+                        header
+                    )
                 );
             }
             final Collection<Request> requests = new LinkedList<Request>();
@@ -145,9 +145,9 @@ public interface RqMultipart extends Request {
                 }
                 start += 2;
                 final int stop = RqMultipart.Base.indexOf(
-                        body,
-                        boundary,
-                        start
+                    body,
+                    boundary,
+                    start
                 ) - 2;
                 requests.add(this.make(body, start, stop - 2));
                 pos = stop;
@@ -158,23 +158,23 @@ public interface RqMultipart extends Request {
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
-                    .get(name.toString().toLowerCase(Locale.ENGLISH));
+                .get(name.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<Request> iter;
             if (values == null) {
                 iter = new VerboseIterable<Request>(
-                        Collections.<Request>emptyList(),
-                        new Sprintf(
-                                "there are no parts by name \"%s\" among %d others: %s",
-                                name, this.map.size(), this.map.keySet()
-                        )
+                    Collections.<Request>emptyList(),
+                    new Sprintf(
+                        "there are no parts by name \"%s\" among %d others: %s",
+                        name, this.map.size(), this.map.keySet()
+                    )
                 );
             } else {
                 iter = new VerboseIterable<Request>(
-                        values,
-                        new Sprintf(
-                                "there are just %d parts by name \"%s\"",
-                                values.size(), name
-                        )
+                    values,
+                    new Sprintf(
+                        "there are just %d parts by name \"%s\"",
+                        values.size(), name
+                    )
                 );
             }
             return iter;
@@ -194,7 +194,7 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          */
         private Request make(final byte[] body, final int start,
-                             final int stop) throws IOException {
+            final int stop) throws IOException {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             baos.write(this.head().iterator().next().getBytes());
             baos.write("\r\n".getBytes());
@@ -210,20 +210,20 @@ public interface RqMultipart extends Request {
          */
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         private static ConcurrentMap<String, List<Request>> asMap(
-                final Collection<Request> reqs) throws IOException {
+            final Collection<Request> reqs) throws IOException {
             final ConcurrentMap<String, List<Request>> map =
-                    new ConcurrentHashMap<String, List<Request>>(reqs.size());
+                new ConcurrentHashMap<String, List<Request>>(reqs.size());
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Base(req)
-                        .header("Content-Disposition").iterator().next();
+                    .header("Content-Disposition").iterator().next();
                 final Matcher matcher = Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new IOException(
-                            String.format(
-                                    // @checkstyle LineLength (1 line)
-                                    "\"name\" not found in Content-Disposition header: %s",
-                                    header
-                            )
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "\"name\" not found in Content-Disposition header: %s",
+                            header
+                        )
                     );
                 }
                 final String name = matcher.group(1);
@@ -242,7 +242,7 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          */
         private static int indexOf(final byte[] outer, final byte[] inner,
-                                   final int start) throws IOException {
+            final int start) throws IOException {
             for (int idx = start; idx < outer.length - inner.length; ++idx) {
                 boolean found = true;
                 for (int sub = 0; sub < inner.length; ++sub) {
