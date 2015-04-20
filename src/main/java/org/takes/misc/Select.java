@@ -109,7 +109,7 @@ public final class Select<T> implements Iterable<T> {
         public boolean hasNext() {
             final boolean result;
             if (this.current.isEmpty()) {
-                return false;
+                result = false;
             } else if (this.condition.fits(this.current.get(HEAD))) {
                 result = true;
             } else {
