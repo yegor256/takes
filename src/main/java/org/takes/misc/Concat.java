@@ -65,7 +65,7 @@ public final class Concat<T> implements Iterable<T> {
     }
 
     /**
-     * The concat iterator to traverse the input iterables as if they are 
+     * The concat iterator to traverse the input iterables as if they are
      * from one list.
      */
     private static class ConcatIterator<E> implements Iterator<E> {
@@ -81,9 +81,9 @@ public final class Concat<T> implements Iterable<T> {
         private final transient Iterator<E> right;
 
         /**
-         * Ctor. ConcatIterator traverses the element 
-         * @param aitr
-         * @param bitr
+         * Ctor. ConcatIterator traverses the element.
+         * @param aitr The first iterable to traverse
+         * @param bitr The second iterable to traverse
          */
         public ConcatIterator(final Iterator<E> aitr, final Iterator<E> bitr) {
             this.left = aitr;
@@ -92,15 +92,9 @@ public final class Concat<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            final boolean left = this.left.hasNext();
-            final boolean right = this.right.hasNext();
-            if (left) {
-                return true;
-            } else if (right) {
-                return true;
-            } else {
-                return false;
-            }
+            final boolean first = this.left.hasNext();
+            final boolean second = this.right.hasNext();
+            return first || second;
         }
 
         @Override

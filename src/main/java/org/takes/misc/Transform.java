@@ -47,8 +47,8 @@ public class Transform<T, K> implements Iterable<K> {
 
     /**
      * Transform elements in the supplied iterable by the action supplied.
-     * @param list Iterable to be transformed
-     * @param action The actual transformation implementation
+     * @param itb Iterable to be transformed
+     * @param act The actual transformation implementation
      */
     public Transform(final Iterable<T> itb,
             final TransformAction<T, K> act) {
@@ -63,7 +63,7 @@ public class Transform<T, K> implements Iterable<K> {
 
     /**
      * The iterator to iterator through the original type B and return the
-     * transformed element in type A
+     * transformed element in type A.
      */
     private static class TransformIterator<B, A> implements Iterator<A> {
 
