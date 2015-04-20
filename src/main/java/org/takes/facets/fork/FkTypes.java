@@ -67,7 +67,7 @@ public final class FkTypes implements Fork {
     public Opt<Response> route(final Request req) throws IOException {
         final Opt<Response> resp;
         if (FkTypes.accepted(req).contains(this.types)) {
-            resp = new Opt.Holder<Response>(this.origin);
+            resp = new Opt.Single<Response>(this.origin);
         } else {
             resp = new Opt.Empty<Response>();
         }

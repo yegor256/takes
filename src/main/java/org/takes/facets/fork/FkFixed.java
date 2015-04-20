@@ -53,7 +53,7 @@ public final class FkFixed extends FkWrap {
                 @Override
                 public Opt<Response> route(final Request req)
                     throws IOException {
-                    return new Opt.Holder<Response>(take.act(req));
+                    return new Opt.Single<Response>(take.act(req));
                 }
             }
         );

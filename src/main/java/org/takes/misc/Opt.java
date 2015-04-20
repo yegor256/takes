@@ -56,7 +56,7 @@ public interface Opt<T> {
      * @since 0.14
      */
     @EqualsAndHashCode(of = "origin")
-    final class Holder<T> implements Opt<T> {
+    final class Single<T> implements Opt<T> {
         /**
          * Origin.
          */
@@ -66,7 +66,7 @@ public interface Opt<T> {
          * Ctor.
          * @param orgn Origin
          */
-        public Holder(final T orgn) {
+        public Single(final T orgn) {
             this.origin = orgn;
         }
 
@@ -92,7 +92,9 @@ public interface Opt<T> {
     final class Empty<T> implements Opt<T> {
         @Override
         public T get() {
-            throw new UnsupportedOperationException("#get()");
+            throw new UnsupportedOperationException(
+                "there is nothing here, use has() first, to check"
+            );
         }
 
         @Override

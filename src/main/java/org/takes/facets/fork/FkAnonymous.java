@@ -77,7 +77,7 @@ public final class FkAnonymous implements Fork {
         final Identity identity = new RqAuth(req).identity();
         final Opt<Response> resp;
         if (identity.equals(Identity.ANONYMOUS)) {
-            resp = new Opt.Holder<Response>(this.take.act(req));
+            resp = new Opt.Single<Response>(this.take.act(req));
         } else {
             resp = new Opt.Empty<Response>();
         }

@@ -79,7 +79,7 @@ public final class FkAuthenticated implements Fork {
         if (identity.equals(Identity.ANONYMOUS)) {
             resp = new Opt.Empty<Response>();
         } else {
-            resp = new Opt.Holder<Response>(this.take.act(req));
+            resp = new Opt.Single<Response>(this.take.act(req));
         }
         return resp;
     }

@@ -156,7 +156,7 @@ public final class FkRegex implements Fork {
         final Matcher matcher = this.pattern.matcher(path);
         final Opt<Response> resp;
         if (matcher.matches()) {
-            resp = new Opt.Holder<Response>(
+            resp = new Opt.Single<Response>(
                 this.target.act(
                     new RqRegex() {
                         @Override

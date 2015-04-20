@@ -85,7 +85,7 @@ public final class FkEncoding implements Fork {
             new RqHeaders(req).header("Accept-Encoding").iterator();
         final Opt<Response> resp;
         if (this.encoding.isEmpty()) {
-            resp = new Opt.Holder<Response>(this.origin);
+            resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
                 headers.next().trim()
@@ -93,7 +93,7 @@ public final class FkEncoding implements Fork {
                     .split("\\s*,\\s*")
             );
             if (items.contains(this.encoding)) {
-                resp = new Opt.Holder<Response>(this.origin);
+                resp = new Opt.Single<Response>(this.origin);
             } else {
                 resp = new Opt.Empty<Response>();
             }
