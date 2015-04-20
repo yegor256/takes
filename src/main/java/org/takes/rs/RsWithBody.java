@@ -27,8 +27,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -44,11 +44,6 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithBody extends RsWrap {
-
-    /**
-     * String for content lenght key:value.
-     */
-    private static final String CONT_LGTH = "Content-Length:%s";
 
     /**
      * Ctor.
@@ -101,16 +96,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final List<String> headerAttr = getHeadAttributes(
-                            res.head()
-                    );
-                    headerAttr.add(
-                            String.format(
-                                    CONT_LGTH,
-                                    url.openStream().available()
-                        )
-                    );
-                    return headerAttr;
+                    return append(res, url.openStream().available());
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -130,15 +116,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final List<String> headerAttr = getHeadAttributes(
-                            res.head()
-                    );
-                    headerAttr.add(
-                            String.format(
-                                    CONT_LGTH, body.length
-                        )
-                    );
-                    return headerAttr;
+                    return append(res, body.length);
                 }
                 @Override
                 public InputStream body() {
@@ -158,15 +136,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final List<String> headerAttr = getHeadAttributes(
-                            res.head()
-                    );
-                    headerAttr.add(
-                            String.format(
-                                    CONT_LGTH, body.available()
-                        )
-                    );
-                    return headerAttr;
+                    return append(res, body.available());
                 }
                 @Override
                 public InputStream body() {
@@ -178,16 +148,23 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Forms a list with header attributes from response.
-     * @param head Response head
+     * @param res Response
+     * @param contentlength Response body content length
      * @return List of header attributes
+     * @throws IOException if something goes wrong.
      */
-    private static List<String> getHeadAttributes(final Iterable<String> head) {
-        final Iterator<String> itr = head.iterator();
-        // @checkstyle ConditionalRegexpMultilineCheck (1 line)
-        final List<String> headerAttrs = new ArrayList<String>();
+    private static Iterable<String> append(
+            final Response res, final int contentlength) throws IOException {
+        final Iterator<String> itr = res.head().iterator();
+        final List<String> headerAttrs = new LinkedList<String>();
         while (itr.hasNext()) {
             headerAttrs.add(itr.next());
         }
+        headerAttrs.add(
+                String.format(
+                        "Content-Length:%s", contentlength
+            )
+        );
         return headerAttrs;
     }
 
