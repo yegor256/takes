@@ -145,7 +145,7 @@ public interface RqMultipart extends Request {
             final byte[] boundary = String.format(
                 "\r\n--%s", matcher.group(1)
             ).getBytes();
-            final InputStream body = req.body();
+            final InputStream body = new RqLengthAware(req).body();
             RqMultipart.Base.skip(body, boundary.length - 2);
             while (body.available() > 0) {
                 if (body.read() == '-') {
