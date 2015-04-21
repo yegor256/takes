@@ -36,13 +36,13 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.13.8
  */
-public final class IterableTransformTest {
+public final class TransformTest {
 
     /**
-     * Iterable transform test.
+     * Transform can transform list.
      */
     @Test
-    public void iterableTransform() {
+    public void transformList() {
         final List<String> alist = new ArrayList<String>(3);
         alist.add("a1");
         alist.add("b1");

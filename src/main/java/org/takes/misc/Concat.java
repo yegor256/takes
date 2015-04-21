@@ -92,9 +92,7 @@ public final class Concat<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            final boolean first = this.left.hasNext();
-            final boolean second = this.right.hasNext();
-            return first || second;
+            return this.left.hasNext() || this.right.hasNext();
         }
 
         @Override
@@ -112,7 +110,9 @@ public final class Concat<T> implements Iterable<T> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException(
+                "This iterable is immutable and cannot remove anything"
+            );
         }
     }
 }

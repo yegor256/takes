@@ -23,8 +23,6 @@
  */
 package org.takes.misc;
 
-import java.util.Locale;
-
 /**
  * Condition to determine how {@link Concat} behave when joining two iterables.
  *
@@ -40,33 +38,4 @@ public interface Condition<T> {
      * @return True to add the element, false to skip.
      */
     boolean fits(T element);
-
-    /**
-     * Concat lower case string condition. This condition changes all
-     * characters to lower case and determine if the iterable should be
-     * concatenated by determine if the element contain the 'prefix'
-     * supplied.
-     */
-    class LowerCase implements Condition<String> {
-
-        /**
-         * Prefix.
-         */
-        private final transient String prefix;
-
-        /**
-         * Ctor.
-         * @param str The prefix to check
-         */
-        public LowerCase(final String str) {
-            this.prefix = str;
-        }
-
-        @Override
-        public boolean fits(final String element) {
-            return !element.toLowerCase(Locale.ENGLISH)
-                    .startsWith(this.prefix);
-        }
-    }
-
 }

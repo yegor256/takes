@@ -100,38 +100,29 @@ public final class Select<T> implements Iterable<T> {
         public SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
             this.condition = cond;
             this.iterator = itr;
-            if (this.iterator.hasNext()) {
-                this.current.add(this.iterator.next());
-            }
         }
 
         @Override
         public boolean hasNext() {
-            final boolean result;
             if (this.current.isEmpty()) {
-                return false;
-            } else if (this.condition.fits(this.current.get(HEAD))) {
-                result = true;
-            } else {
-                result = this.lookForNext();
+                this.lookForNext();
             }
-            return result;
+            return !this.current.isEmpty();
         }
 
         @Override
         public E next() {
-            if (this.hasNext()) {
-                final E result = this.current.get(HEAD);
-                this.current.remove(0);
-                if (this.iterator.hasNext()) {
-                    this.current.add(this.iterator.next());
-                }
-                return result;
-            } else {
-                throw new NoSuchElementException(
-                    "No more element with fits the select condition."
-                );
+            if (this.current.isEmpty()) {
+                this.lookForNext();
             }
+            if (!this.current.isEmpty()) {
+                final E result = this.current.get(HEAD);
+                this.current.remove(HEAD);
+                return result;
+            }
+            throw new NoSuchElementException(
+                "No more element with fits the select condition."
+            );
         }
 
         @Override
@@ -144,7 +135,9 @@ public final class Select<T> implements Iterable<T> {
          * @return True if the element found, false otherwise
          */
         private boolean lookForNext() {
-            this.current.remove(HEAD);
+            if (!this.current.isEmpty()) {
+                this.current.remove(HEAD);
+            }
             while (this.iterator.hasNext()) {
                 final E element = this.iterator.next();
                 if (this.condition.fits(element)) {

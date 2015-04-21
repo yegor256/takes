@@ -39,7 +39,7 @@ import org.junit.Test;
 public final class ConcatTest {
 
     /**
-     * Basic concat unit test.
+     * Concat can concat.
      */
     @Test
     public void concat() {
@@ -60,10 +60,10 @@ public final class ConcatTest {
     }
 
     /**
-     * Concat test with empty inputs.
+     * Concat can concat with empty list.
      */
     @Test
-    public void concatWithEmpty() {
+    public void concatWithEmptyList() {
         final List<String> alist = new ArrayList<String>(2);
         final String aone = "an1";
         final String atwo = "an2";

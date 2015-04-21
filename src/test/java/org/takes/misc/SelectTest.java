@@ -39,15 +39,17 @@ import org.junit.Test;
 public final class SelectTest {
 
     /**
-     * Select test with condition.
+     * Select can select with condition.
      */
     @Test
-    public void select() {
-        final List<String> alist = new ArrayList<String>(2);
+    public void selectWithCondition() {
+        final List<String> alist = new ArrayList<String>(3);
         final String aone = "at1";
         final String atwo = "at2";
+        final String athree = "at31";
         alist.add(aone);
         alist.add(atwo);
+        alist.add(athree);
         final Iterable<String> result = new Select<String>(
             alist,
             new Condition<String>() {

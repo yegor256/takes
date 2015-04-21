@@ -24,7 +24,6 @@
 package org.takes.misc;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * Transform elements in an iterable (in type T) into others (in type K).
@@ -95,18 +94,14 @@ public class Transform<T, K> implements Iterable<K> {
 
         @Override
         public A next() {
-            if (this.hasNext()) {
-                return this.action.transform(this.iterator.next());
-            } else {
-                throw new NoSuchElementException(
-                    "No more element with fits the select condition."
-                );
-            }
+            return this.action.transform(this.iterator.next());
         }
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException(
+                "This iterable is immutable and cannot remove anything"
+            );
         }
     }
 }
