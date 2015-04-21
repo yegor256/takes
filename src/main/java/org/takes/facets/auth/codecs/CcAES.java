@@ -45,7 +45,7 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  */
 @Immutable
-@EqualsAndHashCode(of = { "origin", "secret", "ivbytes" })
+@EqualsAndHashCode(of = { "origin", "secret", "enc", "dec" })
 public final class CcAES implements Codec {
 
     /**
@@ -69,11 +69,6 @@ public final class CcAES implements Codec {
     private final transient Codec origin;
 
     /**
-     * Initialization Vector.
-     */
-    private final transient byte[] ivbytes;
-
-    /**
      * The AES secret key object.
      */
     private final transient SecretKey secret;
@@ -95,10 +90,10 @@ public final class CcAES implements Codec {
         final byte[] passcode = new byte[key.length];
         System.arraycopy(key, 0, passcode, 0, key.length);
         final SecureRandom random = new SecureRandom();
-        this.ivbytes = new byte[block];
-        random.nextBytes(this.ivbytes);
+        final byte[] ivbytes = new byte[block];
+        random.nextBytes(ivbytes);
         final AlgorithmParameterSpec spec =
-                new IvParameterSpec(this.ivbytes);
+                new IvParameterSpec(ivbytes);
         this.secret = new SecretKeySpec(passcode, "AES");
         this.enc = this.create(Cipher.ENCRYPT_MODE, spec);
         this.dec = this.create(Cipher.DECRYPT_MODE, spec);
