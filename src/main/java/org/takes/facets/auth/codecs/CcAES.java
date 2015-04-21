@@ -49,11 +49,6 @@ import org.takes.facets.auth.Identity;
 public final class CcAES implements Codec {
 
     /**
-     * The algorithm used.
-     */
-    private static final transient String ALGORITHM = "AES/CBC/PKCS5PADDING";
-
-    /**
      * The cipher for encryption.
      */
     private final transient Cipher enc;
@@ -149,7 +144,7 @@ public final class CcAES implements Codec {
     private Cipher create(final int mode, final AlgorithmParameterSpec spec)
         throws IOException {
         try {
-            final Cipher cipher = Cipher.getInstance(ALGORITHM);
+            final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(mode, this.secret, spec);
             return cipher;
         } catch (final GeneralSecurityException gse) {
