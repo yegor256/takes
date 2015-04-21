@@ -77,7 +77,7 @@
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          TimeUnit.SECONDS.sleep(2L);
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          FileUtils.touch(<strong class="jxr_keyword">new</strong> File(dir, <span class="jxr_string">"hey.txt"</span>));
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>              fork.route(req).hasNext(),
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>              fork.route(req).has(),
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              Matchers.is(<strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          );
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          MatcherAssert.assertThat(done.get(), Matchers.is(<strong class="jxr_keyword">true</strong>));
@@ -93,7 +93,7 @@
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>              <strong class="jxr_keyword">new</strong> FkHitRefresh(
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>                  dir, <span class="jxr_string">""</span>, <strong class="jxr_keyword">new</strong> TkEmpty()
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              ).route(<strong class="jxr_keyword">new</strong> RqFake()).hasNext(),
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>              ).route(<strong class="jxr_keyword">new</strong> RqFake()).has(),
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>              Matchers.is(false)
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          );
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      }

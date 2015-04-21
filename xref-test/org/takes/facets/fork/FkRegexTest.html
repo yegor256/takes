@@ -55,13 +55,13 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">new</strong> FkRegex(<span class="jxr_string">"/h[a-z]{2}"</span>, <strong class="jxr_keyword">new</strong> TkEmpty()).route(
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                  <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"GET"</span>, <span class="jxr_string">"/hel?a=1"</span>)
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>              ).hasNext(),
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>              ).has(),
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>              Matchers.is(<strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          );
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>              <strong class="jxr_keyword">new</strong> FkRegex(<span class="jxr_string">"/"</span>, <strong class="jxr_keyword">new</strong> TkEmpty()).route(
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>                  <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"PUT"</span>, <span class="jxr_string">"/?test"</span>)
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>              ).hasNext(),
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>              ).has(),
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>              Matchers.is(<strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          );
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      }
@@ -75,7 +75,7 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              <strong class="jxr_keyword">new</strong> FkRegex(<span class="jxr_string">"/h/tail"</span>, <strong class="jxr_keyword">new</strong> TkEmpty()).route(
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                  <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"POST"</span>, <span class="jxr_string">"/h/tail/"</span>)
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>              ).hasNext(),
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>              ).has(),
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>              Matchers.is(<strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          );
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      }
