@@ -24,7 +24,6 @@
 package org.takes.misc;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * Concat iterable.
@@ -100,10 +99,8 @@ public final class Concat<T> implements Iterable<T> {
             final E object;
             if (this.left.hasNext()) {
                 object = this.left.next();
-            } else if (this.right.hasNext()) {
-                object = this.right.next();
             } else {
-                throw new NoSuchElementException();
+                object = this.right.next();
             }
             return object;
         }

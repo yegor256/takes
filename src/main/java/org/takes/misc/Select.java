@@ -127,7 +127,9 @@ public final class Select<T> implements Iterable<T> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException(
+                "This iterable is immutable and cannot remove anything"
+            );
         }
 
         /**
