@@ -82,8 +82,7 @@ public final class CcAES implements Codec {
      * Ctor.
      * @param codec Original codec
      * @param key The encryption key
-     * @exception IOException exception throw when there are errors on
-     *  creating internal components
+     * @exception IOException errors on creating internal components
      */
     public CcAES(final Codec codec, final byte[] key) throws IOException {
         final int block = 16;
@@ -147,8 +146,7 @@ public final class CcAES implements Codec {
 
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
-     * @param mode The cipher mode, either Cipher.ENRYPT_MODE or
-     *  Cipher.DECRYPT_MODE
+     * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
      * @param spec The algorithm parameter spec for cipher creation
      * @return The cipher
      * @throws IOException For any unexpected exceptions
