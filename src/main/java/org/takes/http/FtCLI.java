@@ -35,6 +35,7 @@ import org.takes.rq.RqWithHeader;
  * Front with a command line interface.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
