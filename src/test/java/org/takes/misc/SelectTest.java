@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link Concat}.
+ * Test case for {@link Select}.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
