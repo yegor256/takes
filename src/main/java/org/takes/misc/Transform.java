@@ -32,7 +32,7 @@ import java.util.Iterator;
  * @version $Id$
  * @since 0.13.8
  */
-public final class Transform<T, K> implements Iterable<K> {
+public class Transform<T, K> implements Iterable<K> {
 
     /**
      * Internal storage.
