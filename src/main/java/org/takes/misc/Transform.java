@@ -82,7 +82,7 @@ public class Transform<T, K> implements Iterable<K> {
          * @param act Action to transform elements
          */
         public TransformIterator(final Iterator<B> itr,
-                final TransformAction<B, A> act) {
+            final TransformAction<B, A> act) {
             this.action = act;
             this.iterator = itr;
         }
