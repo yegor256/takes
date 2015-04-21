@@ -76,8 +76,8 @@ public final class BkTimeableTest {
             MatcherAssert.assertThat(
                 time.get(),
                 Matchers.is(
-                    Matchers.both(Matchers.greaterThan(150L))
-                        .and(Matchers.lessThan(250L))
+                    Matchers.both(Matchers.greaterThan(100L))
+                        .and(Matchers.lessThan(500L))
                 )
             );
         } catch (final InterruptedException exc) {
