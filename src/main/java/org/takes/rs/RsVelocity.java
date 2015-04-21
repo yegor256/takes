@@ -76,9 +76,9 @@ public final class RsVelocity extends RsWrap {
      * @param params List of params
      * @since 0.11
      */
-    public RsVelocity(final String template,
+    public RsVelocity(final CharSequence template,
         final RsVelocity.Pair... params) {
-        this(new ByteArrayInputStream(template.getBytes()), params);
+        this(new ByteArrayInputStream(template.toString().getBytes()), params);
     }
 
     /**
@@ -108,7 +108,8 @@ public final class RsVelocity extends RsWrap {
      * @param tpl Template
      * @param params Map of params
      */
-    public RsVelocity(final InputStream tpl, final Map<String, Object> params) {
+    public RsVelocity(final InputStream tpl, final Map<CharSequence,
+        Object> params) {
         super(
             new Response() {
                 @Override
@@ -131,7 +132,7 @@ public final class RsVelocity extends RsWrap {
      * @throws IOException If fails
      */
     private static InputStream render(final InputStream page,
-        final Map<String, Object> params) throws IOException {
+        final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer = new OutputStreamWriter(baos);
         final VelocityEngine engine = new VelocityEngine();
@@ -154,11 +155,11 @@ public final class RsVelocity extends RsWrap {
      * @param entries Entries
      * @return Map
      */
-    private static Map<String, Object> asMap(
-        final Map.Entry<String, Object>... entries) {
-        final ConcurrentMap<String, Object> map =
-            new ConcurrentHashMap<String, Object>(entries.length);
-        for (final Map.Entry<String, Object> ent : entries) {
+    private static Map<CharSequence, Object> asMap(
+        final Map.Entry<CharSequence, Object>... entries) {
+        final ConcurrentMap<CharSequence, Object> map =
+            new ConcurrentHashMap<CharSequence, Object>(entries.length);
+        for (final Map.Entry<CharSequence, Object> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }
         return map;
@@ -168,7 +169,7 @@ public final class RsVelocity extends RsWrap {
      * Pair of values.
      */
     public static final class Pair
-        extends AbstractMap.SimpleEntry<String, Object> {
+        extends AbstractMap.SimpleEntry<CharSequence, Object> {
         /**
          * Serialization marker.
          */
@@ -178,7 +179,7 @@ public final class RsVelocity extends RsWrap {
          * @param key Key
          * @param obj Pass
          */
-        public Pair(final String key, final Object obj) {
+        public Pair(final CharSequence key, final Object obj) {
             super(key, obj);
         }
     }

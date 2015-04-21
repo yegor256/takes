@@ -28,12 +28,12 @@ import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 
 /**
  * Fork take.
@@ -96,9 +96,9 @@ public final class TkFork implements Take {
     @Override
     public Response act(final Request request) throws IOException {
         for (final Fork fork : this.forks) {
-            final Iterator<Response> response = fork.route(request);
-            if (response.hasNext()) {
-                return response.next();
+            final Opt<Response> response = fork.route(request);
+            if (response.has()) {
+                return response.get();
             }
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);

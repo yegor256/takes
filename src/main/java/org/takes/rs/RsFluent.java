@@ -68,7 +68,7 @@ public final class RsFluent extends RsWrap {
      * @param header The header
      * @return New fluent response
      */
-    public RsFluent withHeader(final String header) {
+    public RsFluent withHeader(final CharSequence header) {
         return new RsFluent(new RsWithHeader(this, header));
     }
 
@@ -78,7 +78,8 @@ public final class RsFluent extends RsWrap {
      * @param value Value
      * @return New fluent response
      */
-    public RsFluent withHeader(final String key, final String value) {
+    public RsFluent withHeader(final CharSequence key,
+        final CharSequence value) {
         return new RsFluent(new RsWithHeader(this, key, value));
     }
 
@@ -87,7 +88,7 @@ public final class RsFluent extends RsWrap {
      * @param ctype Content type
      * @return New fluent response
      */
-    public RsFluent withType(final String ctype) {
+    public RsFluent withType(final CharSequence ctype) {
         return new RsFluent(new RsWithType(this, ctype));
     }
 
@@ -96,7 +97,7 @@ public final class RsFluent extends RsWrap {
      * @param body Body
      * @return New fluent response
      */
-    public RsFluent withBody(final String body) {
+    public RsFluent withBody(final CharSequence body) {
         return new RsFluent(new RsWithBody(this, body));
     }
 

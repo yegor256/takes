@@ -123,12 +123,12 @@ public final class RsWithHeader extends RsWrap {
      */
     private static List<String> extend(final Iterable<String> head,
         final String header) throws IOException {
-        if (!HEADER.matcher(header).matches()) {
+        if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
                 String.format(
                     // @checkstyle LineLength (1 line)
                     "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                    header, HEADER
+                    header, RsWithHeader.HEADER
                 )
             );
         }

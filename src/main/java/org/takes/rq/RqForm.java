@@ -25,16 +25,20 @@ package org.takes.rq;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
@@ -44,7 +48,7 @@ import org.takes.misc.VerboseIterable;
  * {@code application/x-www-form-urlencoded} format (RFC 1738).
  *
  * <p>For {@code multipart/form-data} format use
- * {@link org.takes.rq.RqMultipart}.
+ * {@link org.takes.rq.RqMultipart.Base}.
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
  * decorator before passing request to this class.
@@ -57,94 +61,177 @@ import org.takes.misc.VerboseIterable;
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  */
-@EqualsAndHashCode(callSuper = true, of = "map")
-public final class RqForm extends RqWrap {
-
-    /**
-     * Map of params and values.
-     */
-    private final transient ConcurrentMap<String, List<String>> map;
-
-    /**
-     * Ctor.
-     * @param req Original request
-     * @throws IOException If fails
-     */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public RqForm(final Request req) throws IOException {
-        super(req);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(req).printBody(baos);
-        final String body = new String(baos.toByteArray());
-        this.map = new ConcurrentHashMap<String, List<String>>(0);
-        for (final String pair : body.split("&")) {
-            if (pair.isEmpty()) {
-                continue;
-            }
-            final String[] parts = pair.split("=", 2);
-            if (parts.length < 2) {
-                throw new IOException(
-                    String.format("invalid form body pair: %s", pair)
-                );
-            }
-            final String key = RqForm.decode(
-                parts[0].trim().toLowerCase(Locale.ENGLISH)
-            );
-            this.map.putIfAbsent(key, new LinkedList<String>());
-            this.map.get(key).add(RqForm.decode(parts[1].trim()));
-        }
-    }
+@SuppressWarnings("PMD.TooManyMethods")
+public interface RqForm extends Request {
 
     /**
      * Get single parameter.
-     * @param key Parameter name
+     * @param name Parameter name
      * @return List of values (can be empty)
      */
-    public Iterable<String> param(final CharSequence key) {
-        final List<String> values =
-            this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
-        final Iterable<String> iter;
-        if (values == null) {
-            iter = new VerboseIterable<String>(
-                Collections.<String>emptyList(),
-                new Sprintf(
-                    "there are no params by name \"%s\" among %d others: %s",
-                    key, this.map.size(), this.map.keySet()
-                )
-            );
-        } else {
-            iter = new VerboseIterable<String>(
-                values,
-                new Sprintf(
-                    "there are only %d params by name \"%s\"",
-                    values.size(), key
-                )
-            );
-        }
-        return iter;
-    }
+    Iterable<String> param(CharSequence name);
 
     /**
      * Get all parameter names.
      * @return All names
      */
-    public Iterable<String> names() {
-        return this.map.keySet();
-    }
+    Iterable<String> names();
 
     /**
-     * Decode from URL.
-     * @param txt Text
-     * @return Decoded
+     * Base implementation of @link RqForm.
+     * @author Aleksey Popov (alopen@yandex.ru)
+     * @version $Id$
      */
-    private static String decode(final CharSequence txt) {
-        try {
-            return URLDecoder.decode(
-                txt.toString(), Charset.defaultCharset().name()
-            );
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+    @EqualsAndHashCode(callSuper = true, of = "map")
+    final class Base extends RqWrap implements RqForm {
+        /**
+         * Map of params and values.
+         */
+        private final transient ConcurrentMap<String, List<String>> map;
+        /**
+         * Ctor.
+         * @param req Original request
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        public Base(final Request req) throws IOException {
+            super(req);
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            new RqPrint(req).printBody(baos);
+            final String body = new String(baos.toByteArray());
+            this.map = new ConcurrentHashMap<String, List<String>>(0);
+            for (final String pair : body.split("&")) {
+                if (pair.isEmpty()) {
+                    continue;
+                }
+                final String[] parts = pair.split("=", 2);
+                if (parts.length < 2) {
+                    throw new IOException(
+                        String.format("invalid form body pair: %s", pair)
+                    );
+                }
+                final String key = RqForm.Base.decode(
+                    parts[0].trim().toLowerCase(Locale.ENGLISH)
+                );
+                this.map.putIfAbsent(key, new LinkedList<String>());
+                this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+            }
+        }
+        @Override
+        public Iterable<String> param(final CharSequence key) {
+            final List<String> values =
+                    this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Iterable<String> iter;
+            if (values == null) {
+                iter = new VerboseIterable<String>(
+                    Collections.<String>emptyList(),
+                    new Sprintf(
+                        "there are no params \"%s\" among %d others: %s",
+                        key, this.map.size(), this.map.keySet()
+                    )
+                );
+            } else {
+                iter = new VerboseIterable<String>(
+                    values,
+                    new Sprintf(
+                        "there are only %d params by name \"%s\"",
+                        values.size(), key
+                    )
+                );
+            }
+            return iter;
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.map.keySet();
+        }
+        /**
+         * Decode from URL.
+         * @param txt Text
+         * @return Decoded
+         */
+        private static String decode(final CharSequence txt) {
+            try {
+                return URLDecoder.decode(
+                    txt.toString(), Charset.defaultCharset().name()
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
         }
     }
-
+    /**
+     * Smart decorator, with extra features.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @since 0.14
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Smart implements RqForm {
+        /**
+         * Original.
+         */
+        private final transient RqForm origin;
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Smart(final RqForm req) {
+            this.origin = req;
+        }
+        @Override
+        public Iterable<String> param(final CharSequence name) {
+            return this.origin.param(name);
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.origin.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+        /**
+         * Get single param or throw HTTP exception.
+         * @param name Name of query param
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String single(final CharSequence name) throws IOException {
+            final Iterator<String> params = this.origin
+                .param(name).iterator();
+            if (!params.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "form param \"%s\" is mandatory", name
+                    )
+                );
+            }
+            return params.next();
+        }
+        /**
+         * Get single param or default.
+         * @param name Name of query param
+         * @param def Default, if not found
+         * @return Value of it
+         */
+        public String single(final CharSequence name, final String def) {
+            final String value;
+            final Iterator<String> params = this.origin
+                .param(name).iterator();
+            if (params.hasNext()) {
+                value = params.next();
+            } else {
+                value = def;
+            }
+            return value;
+        }
+    }
 }

@@ -47,13 +47,13 @@ public final class FkRegexTest {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkRegex("/", new TkEmpty()).route(
                 new RqFake("PUT", "/?test")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }
@@ -67,7 +67,7 @@ public final class FkRegexTest {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
                 new RqFake("POST", "/h/tail/")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }
