@@ -165,7 +165,7 @@
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> printBody(<strong class="jxr_keyword">final</strong> OutputStream output) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>         <strong class="jxr_keyword">final</strong> InputStream body = <strong class="jxr_keyword">this</strong>.body();
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <strong class="jxr_keyword">while</strong> (<strong class="jxr_keyword">true</strong>) {
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <strong class="jxr_keyword">while</strong> (body.available() &gt; 0) {
 <a class="jxr_linenumber" name="L161" href="#L161">161</a>                 <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> data = body.read();
 <a class="jxr_linenumber" name="L162" href="#L162">162</a>                 <strong class="jxr_keyword">if</strong> (data &lt; 0) {
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>                     <strong class="jxr_keyword">break</strong>;
