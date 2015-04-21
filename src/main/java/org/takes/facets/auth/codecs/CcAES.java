@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth.codecs;
 
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
@@ -33,7 +34,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
-import com.jcabi.aspects.Immutable;
 
 /**
  * AES codec which supports 128 bits key.
@@ -83,7 +83,7 @@ public final class CcAES implements Codec {
      * @param codec Original codec
      * @param key The encryption key
      * @exception IOException exception throw when there are errors on
-     * creating internal components
+     *     creating internal components
      */
     public CcAES(final Codec codec, final byte[] key) throws IOException {
         final int block = 16;
@@ -147,13 +147,14 @@ public final class CcAES implements Codec {
 
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
-     * @param mode The cipher mode, either Cipher.ENRYPT_MODE or 
-     * Cipher.DECRYPT_MODE
+     * @param mode The cipher mode, either Cipher.ENRYPT_MODE or
+     *     Cipher.DECRYPT_MODE
      * @param spec The algorithm parameter spec for cipher creation
      * @return The cipher
      * @throws IOException For any unexpected exceptions
      */
-    private Cipher create(final int mode, final AlgorithmParameterSpec spec) throws IOException {
+    private Cipher create(final int mode, final AlgorithmParameterSpec spec)
+        throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(mode, this.secret, spec);
