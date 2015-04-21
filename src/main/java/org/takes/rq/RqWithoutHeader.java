@@ -58,13 +58,7 @@ public final class RqWithoutHeader extends RqWrap {
                     );
                     return new Select<String>(
                         req.head(),
-                        new Condition<String>() {
-                            @Override
-                            public boolean fits(final String element) {
-                                return !element.toLowerCase(Locale.ENGLISH)
-                                    .startsWith(prefix);
-                            }
-                        }
+                        new Condition.LowerStartsWith(prefix)
                     );
                 }
                 @Override
