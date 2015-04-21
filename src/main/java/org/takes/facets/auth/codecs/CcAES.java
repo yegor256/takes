@@ -59,7 +59,7 @@ public final class CcAES implements Codec {
     private final transient Cipher enc;
 
     /**
-     * The cipher for decryption. 
+     * The cipher for decryption.
      */
     private final transient Cipher dec;
 
@@ -82,7 +82,7 @@ public final class CcAES implements Codec {
      * Ctor.
      * @param codec Original codec
      * @param key The encryption key
-     * @exception IOException exception throw when there are errors on 
+     * @exception IOException exception throw when there are errors on
      * creating internal components
      */
     public CcAES(final Codec codec, final byte[] key) throws IOException {
@@ -98,9 +98,11 @@ public final class CcAES implements Codec {
         final SecureRandom random = new SecureRandom();
         this.ivbytes = new byte[block];
         random.nextBytes(this.ivbytes);
+        final AlgorithmParameterSpec spec =
+                new IvParameterSpec(this.ivbytes);
         this.secret = new SecretKeySpec(passcode, "AES");
-        this.enc = this.create(Cipher.ENCRYPT_MODE);
-        this.dec = this.create(Cipher.DECRYPT_MODE);
+        this.enc = this.create(Cipher.ENCRYPT_MODE, spec);
+        this.dec = this.create(Cipher.DECRYPT_MODE, spec);
     }
 
     @Override
@@ -145,18 +147,18 @@ public final class CcAES implements Codec {
 
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
-     * @param mode The cipher mode, either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
+     * @param mode The cipher mode, either Cipher.ENRYPT_MODE or 
+     * Cipher.DECRYPT_MODE
+     * @param spec The algorithm parameter spec for cipher creation
      * @return The cipher
      * @throws IOException For any unexpected exceptions
      */
-    private Cipher create(final int mode) throws IOException {
+    private Cipher create(final int mode, final AlgorithmParameterSpec spec) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
-            final AlgorithmParameterSpec spec =
-                    new IvParameterSpec(this.ivbytes);
             cipher.init(mode, this.secret, spec);
             return cipher;
-        } catch (GeneralSecurityException gse) {
+        } catch (final GeneralSecurityException gse) {
             throw new IOException(gse);
         }
     }

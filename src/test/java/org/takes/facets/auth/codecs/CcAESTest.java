@@ -44,8 +44,9 @@ public final class CcAESTest {
      */
     @Test
     public void encodesAndDecodes() throws Exception {
+        final int length = 128;
         final KeyGenerator generator = KeyGenerator.getInstance("AES");
-        generator.init(128);
+        generator.init(length);
         final byte[] key = generator.generateKey().getEncoded();
         final String plain = "This is a test!!@@**";
         final Codec codec = new CcAES(
