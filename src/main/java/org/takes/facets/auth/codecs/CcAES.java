@@ -78,7 +78,7 @@ public final class CcAES implements Codec {
         final int block = 16;
         if (key.length != block) {
             throw new IllegalArgumentException(
-                    "Key length must be in 128-bit."
+                "Key length must be in 128-bit."
             );
         }
         this.origin = codec;
