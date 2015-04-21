@@ -105,7 +105,7 @@ public final class PsFacebook implements Pass {
      * @param fkey Facebook key
      * @checkstyle ParameterNumberCheck (3 lines)
      */
-    public PsFacebook(final com.jcabi.http.Request frequest,
+    PsFacebook(final com.jcabi.http.Request frequest,
         final WebRequestor frequestor, final String fapp, final String fkey) {
         this.request = frequest;
         this.requestor = frequestor;
