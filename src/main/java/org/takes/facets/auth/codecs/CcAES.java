@@ -98,11 +98,9 @@ public final class CcAES implements Codec {
         final SecureRandom random = new SecureRandom();
         this.ivbytes = new byte[block];
         random.nextBytes(this.ivbytes);
-        final AlgorithmParameterSpec spec =
-                new IvParameterSpec(this.ivbytes);
         this.secret = new SecretKeySpec(passcode, "AES");
-        this.enc = this.create(Cipher.ENCRYPT_MODE, spec);
-        this.dec = this.create(Cipher.DECRYPT_MODE, spec);
+        this.enc = this.create(Cipher.ENCRYPT_MODE);
+        this.dec = this.create(Cipher.DECRYPT_MODE);
     }
 
     @Override
@@ -151,9 +149,11 @@ public final class CcAES implements Codec {
      * @return The cipher
      * @throws IOException For any unexpected exceptions
      */
-    private Cipher create(final int mode, final AlgorithmParameterSpec spec) throws IOException {
+    private Cipher create(final int mode) throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance(ALGORITHM);
+            final AlgorithmParameterSpec spec =
+                    new IvParameterSpec(this.ivbytes);
             cipher.init(mode, this.secret, spec);
             return cipher;
         } catch (GeneralSecurityException gse) {
