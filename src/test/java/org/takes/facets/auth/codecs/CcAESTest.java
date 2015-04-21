@@ -39,18 +39,13 @@ import org.takes.facets.auth.Identity;
 public final class CcAESTest {
 
     /**
-     * Default key size.
-     */
-    private static final transient int SIZE = 128;
-
-    /**
-     * Testing AES encryption and decryption.
+     * CcAES can encode and decode.
      * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void encryptAndDecrypt() throws Exception {
+    public void encodesAndDecodes() throws Exception {
         final KeyGenerator generator = KeyGenerator.getInstance("AES");
-        generator.init(SIZE);
+        generator.init(128);
         final byte[] key = generator.generateKey().getEncoded();
         final String plain = "This is a test!!@@**";
         final Codec codec = new CcAES(
