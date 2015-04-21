@@ -126,7 +126,7 @@ public interface RqMultipart extends Request {
                 throw new IOException(
                     String.format(
                         // @checkstyle LineLength (1 line)
-                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: %s",
+                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
                         header
                     )
                 );
@@ -135,7 +135,8 @@ public interface RqMultipart extends Request {
             if (!matcher.matches()) {
                 throw new IOException(
                     String.format(
-                        "boundary is not specified in Content-Type header: %s",
+                        // @checkstyle LineLength (1 line)
+                        "boundary is not specified in Content-Type header: \"%s\"",
                         header
                     )
                 );
