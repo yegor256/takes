@@ -149,21 +149,19 @@ public final class RsWithBody extends RsWrap {
     /**
      * Appends content length to header from response.
      * @param res Response
-     * @param contentlength Response body content length
+     * @param length Response body content length
      * @return Iterable String of header attributes
      * @throws IOException if something goes wrong.
      */
     private static Iterable<String> append(
-            final Response res, final int contentlength) throws IOException {
+        final Response res, final int length) throws IOException {
         final Iterator<String> itr = res.head().iterator();
         final List<String> headerAttrs = new LinkedList<String>();
         while (itr.hasNext()) {
             headerAttrs.add(itr.next());
         }
         headerAttrs.add(
-                String.format(
-                        "Content-Length:%s", contentlength
-            )
+            String.format("Content-Length:%s", length)
         );
         return headerAttrs;
     }
