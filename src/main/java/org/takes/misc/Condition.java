@@ -65,7 +65,7 @@ public interface Condition<T> {
         @Override
         public boolean fits(final String element) {
             return !element.toLowerCase(Locale.ENGLISH)
-                    .startsWith(this.prefix);
+                .startsWith(this.prefix);
         }
     }
 

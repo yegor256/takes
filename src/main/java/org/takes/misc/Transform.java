@@ -50,7 +50,7 @@ public class Transform<T, K> implements Iterable<K> {
      * @param act The actual transformation implementation
      */
     public Transform(final Iterable<T> itb,
-            final TransformAction<T, K> act) {
+        final TransformAction<T, K> act) {
         this.list = itb;
         this.action = act;
     }
