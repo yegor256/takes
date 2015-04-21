@@ -24,7 +24,11 @@
 package org.takes.rq;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,6 +37,10 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.http.FtRemote;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link RqMultipart.Base}.
@@ -40,8 +48,10 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class RqMultipartTest {
 
     /**
@@ -235,6 +245,55 @@ public final class RqMultipartTest {
             Matchers.<Iterable<String>>equalTo(
                 new HashSet<String>(Arrays.asList("address", "data"))
             )
+        );
+    }
+
+    /**
+     * RqMultipart.Base can work in integration mode.
+     * @throws IOException if some problem inside
+     */
+    @Test
+    public void consumesHttpRequest() throws IOException {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(
+                    new RqPrint(
+                        new RqMultipart.Smart(
+                            new RqMultipart.Base(req)
+                        ).single("f-1")
+                    ).printBody()
+                );
+            }
+        };
+        new FtRemote(take).exec(
+            // @checkstyle AnonInnerLengthCheck (50 lines)
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .method("POST")
+                        .header(
+                            "Content-Type",
+                            "multipart/form-data; boundary=AaB0zz"
+                        )
+                        .body()
+                        .set(
+                            Joiner.on(RqMultipartTest.CRLF).join(
+                                "--AaB0zz",
+                                "Content-Disposition: form-data; name=\"f-1\"",
+                                "",
+                                "my picture",
+                                "--AaB0zz--"
+                            )
+                        )
+                        .back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.containsString("pic"));
+                }
+            }
         );
     }
 

@@ -31,8 +31,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -41,6 +43,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
@@ -54,6 +57,7 @@ import org.takes.misc.VerboseIterable;
  * @version $Id$
  * @since 0.9
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public interface RqMultipart extends Request {
 
     /**
@@ -278,4 +282,58 @@ public interface RqMultipart extends Request {
             return map;
         }
     }
+
+    /**
+     * Smart decorator.
+     * @since 0.15
+     */
+    final class Smart implements RqMultipart {
+        /**
+         * Original request.
+         */
+        private final transient RqMultipart origin;
+        /**
+         * Ctor.
+         * @param req Original
+         */
+        public Smart(final RqMultipart req) {
+            this.origin = req;
+        }
+        /**
+         * Get single part.
+         * @param name Name of the part to get
+         * @return Part
+         * @throws HttpException If fails
+         */
+        public Request single(final CharSequence name) throws HttpException {
+            final Iterator<Request> parts = this.origin
+                .part(name).iterator();
+            if (!parts.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "form param \"%s\" is mandatory", name
+                    )
+                );
+            }
+            return parts.next();
+        }
+        @Override
+        public Iterable<Request> part(final CharSequence name) {
+            return this.origin.part(name);
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.origin.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+    }
+
 }
