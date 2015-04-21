@@ -25,13 +25,18 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import com.restfb.BinaryAttachment;
 import com.restfb.DefaultFacebookClient;
+import com.restfb.DefaultJsonMapper;
+import com.restfb.WebRequestor;
 import com.restfb.exception.FacebookException;
 import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
@@ -51,6 +56,13 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.5
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo #41 There is ClassDataAbstractionCouplingCheck error
+ * There are 9 classes in list [AbstractMap.SimpleEntry, ConcurrentHashMap,
+ * DefaultFacebookClient, DefaultJsonMapper, Href, Identity.Simple, JdkRequest,
+ * RqHref, WebRequestor] but first two of those is java runtime classes. Maybe
+ * possible to add those two classes into ignore list? Or maybe try
+ * to decouple this class?
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsFacebook implements Pass {
@@ -66,13 +78,51 @@ public final class PsFacebook implements Pass {
     private final transient String key;
 
     /**
+     * Request and Response for testing.
+     */
+    private final transient Map.Entry<com.jcabi.http.Request,
+        WebRequestor.Response> testing;
+
+    /**
      * Ctor.
      * @param fapp Facebook app
      * @param fkey Facebook key
      */
     public PsFacebook(final String fapp, final String fkey) {
+        this(fapp, fkey, null);
+    }
+
+    /**
+     * Ctor for testing.
+     * @param request Request for testing
+     * @param response Response for testing
+     */
+    public PsFacebook(
+        final com.jcabi.http.Request request,
+        final WebRequestor.Response response) {
+        this(
+            "fapp",
+            "fkey",
+            new AbstractMap.SimpleEntry<com.jcabi.http.Request,
+                WebRequestor.Response>(request, response
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param fapp Facebook app
+     * @param fkey Facebook key
+     * @param test Request and response for testing
+     */
+    private PsFacebook(
+            final String fapp,
+            final String fkey,
+            final Map.Entry<com.jcabi.http.Request,
+            WebRequestor.Response> test) {
         this.app = fapp;
         this.key = fkey;
+        this.testing = test;
     }
 
     @Override
@@ -83,7 +133,7 @@ public final class PsFacebook implements Pass {
         if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
-        final User user = PsFacebook.fetch(
+        final User user = this.fetch(
             this.token(href.toString(), code.next())
         );
         final ConcurrentMap<String, String> props =
@@ -115,14 +165,50 @@ public final class PsFacebook implements Pass {
      * @param token Facebook access token
      * @return The user found in FB
      */
-    private static User fetch(final String token) {
+    private User fetch(final String token) {
         try {
-            return new DefaultFacebookClient(token).fetchObject(
+            return this.facebookClient(token).fetchObject(
                 "me", User.class
             );
         } catch (final FacebookException ex) {
             throw new IllegalArgumentException(ex);
         }
+    }
+
+    /**
+     * Get Facebook client.
+     * @param token Facebook access token
+     * @return The Facebook client implementation
+     */
+    private DefaultFacebookClient facebookClient(final String token) {
+        final DefaultFacebookClient client;
+        if (this.testing == null) {
+            client = new DefaultFacebookClient(token);
+        } else {
+            client = new DefaultFacebookClient(
+                token,
+                new WebRequestor() {
+                    public Response executeGet(final String url)
+                        throws IOException {
+                        return PsFacebook.this.testing.getValue();
+                    }
+                    public Response executePost(
+                        final String url,
+                        final String parameters) throws IOException {
+                        return executeGet(url);
+                    }
+                    public Response executePost(
+                        final String url,
+                        final String parameters,
+                        final BinaryAttachment... attachments)
+                        throws IOException {
+                        return executeGet(url);
+                    }
+                },
+                new DefaultJsonMapper()
+            );
+        }
+        return client;
     }
 
     /**
@@ -134,14 +220,7 @@ public final class PsFacebook implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://graph.facebook.com/oauth/access_token")
-            .with("client_id", this.app)
-            .with("redirect_uri", home)
-            .with("client_secret", this.key)
-            .with("code", code)
-            .toString();
-        final String response = new JdkRequest(uri)
+        final String response = this.request(home, code)
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .body();
@@ -163,6 +242,30 @@ public final class PsFacebook implements Pass {
                 response
             )
         );
+    }
+
+    /**
+     * Get request.
+     * @param home Home of this page
+     * @param code Facebook "authorization code"
+     * @return The request
+     */
+    private com.jcabi.http.Request request(
+        final String home,
+        final String code) {
+        final com.jcabi.http.Request request;
+        if (this.testing == null) {
+            request = new JdkRequest(
+                new Href("https://graph.facebook.com/oauth/access_token")
+                    .with("client_id", this.app)
+                    .with("redirect_uri", home)
+                    .with("client_secret", this.key)
+                    .with("code", code).toString()
+            );
+        } else {
+            request = this.testing.getKey();
+        }
+        return request;
     }
 
 }
