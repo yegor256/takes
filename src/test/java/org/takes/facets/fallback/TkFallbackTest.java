@@ -43,6 +43,7 @@ import org.takes.tk.TkFailure;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.9.6
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkFallbackTest {
 
