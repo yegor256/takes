@@ -70,18 +70,18 @@ public interface Condition<T> {
     }
 
     /**
-     * Negating condition of any condition
+     * Negating condition of any condition.
      */
     class Not<T> implements Condition<T> {
 
         /**
          * Prefix.
          */
-        private final transient Condition <T> condition;
+        private final transient Condition<T> condition;
 
         /**
          * Ctor.
-         * @param str The prefix to check
+         * @param cond The condition to negate
          */
         public Not(final Condition<T> cond) {
             this.condition = cond;
