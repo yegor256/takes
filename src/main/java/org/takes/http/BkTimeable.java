@@ -101,18 +101,18 @@ public final class BkTimeable implements Back {
      */
     @SuppressWarnings("PMD.DoNotUseThreads")
     private void start() {
-        final long time = this.latency;
-        final Set<BkTimeable.ThreadInfo> storage = this.threads;
         this.service.scheduleAtFixedRate(
             new Runnable() {
                 @Override
                 public void run() {
-                    for (final BkTimeable.ThreadInfo info : storage) {
-                        if (System.currentTimeMillis() - info.start > time) {
+                    for (final BkTimeable.ThreadInfo info
+                        : BkTimeable.this.threads) {
+                        if (System.currentTimeMillis() - info.start
+                            > BkTimeable.this.latency) {
                             if (info.thread.isAlive()) {
                                 info.thread.interrupt();
                             }
-                            storage.remove(info);
+                            BkTimeable.this.threads.remove(info);
                         }
                     }
                 }
