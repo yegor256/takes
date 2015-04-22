@@ -49,20 +49,15 @@ public final class CcPlain implements Codec {
     @Override
     public byte[] encode(final Identity identity) throws IOException {
         final String encoding = Charset.defaultCharset().name();
-        final StringBuilder text;
-        if (identity == Identity.ANONYMOUS) {
-            text = new StringBuilder(0);
-        } else {
-            text = new StringBuilder(
-                URLEncoder.encode(identity.urn(), encoding)
-            );
-            for (final Map.Entry<String, String> ent
-                : identity.properties().entrySet()) {
-                text.append(';')
-                    .append(ent.getKey())
-                    .append('=')
-                    .append(URLEncoder.encode(ent.getValue(), encoding));
-            }
+        final StringBuilder text = new StringBuilder(
+            URLEncoder.encode(identity.urn(), encoding)
+        );
+        for (final Map.Entry<String, String> ent
+            : identity.properties().entrySet()) {
+            text.append(';')
+                .append(ent.getKey())
+                .append('=')
+                .append(URLEncoder.encode(ent.getValue(), encoding));
         }
         return text.toString().getBytes();
     }

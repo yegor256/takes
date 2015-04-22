@@ -24,9 +24,11 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -55,14 +57,18 @@ public final class CcStrictTest {
     }
 
     /**
-     * Ccstrict can encode anonymous identity without errors.
+     * Ccstrict can decode anonymous identity without exception.
      * @throws Exception If some problem inside
      */
     @Test
-    public void canEncodeAnonymousIdentity() throws Exception {
+    public void canDecodeAnonymousIdentity() throws Exception {
+        final Codec codec = Mockito.mock(Codec.class);
+        Mockito.when(codec.decode(Mockito.<byte[]>any())).thenReturn(
+            Identity.ANONYMOUS
+        );
         MatcherAssert.assertThat(
-            new CcStrict(new CcPlain()).encode(Identity.ANONYMOUS),
-            Matchers.equalTo(new byte[0])
+            new CcStrict(codec).decode(new byte[0]),
+            CoreMatchers.equalTo(Identity.ANONYMOUS)
         );
     }
 
