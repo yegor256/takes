@@ -78,7 +78,7 @@ public final class CcAES implements Codec {
         final int block = 16;
         if (key.length != block) {
             throw new IllegalArgumentException(
-                "Key length must be in 128-bit."
+                "Key must be in 128 bits length."
             );
         }
         this.origin = codec;
@@ -88,7 +88,7 @@ public final class CcAES implements Codec {
         final byte[] ivbytes = new byte[block];
         random.nextBytes(ivbytes);
         final AlgorithmParameterSpec spec =
-                new IvParameterSpec(ivbytes);
+            new IvParameterSpec(ivbytes);
         this.secret = new SecretKeySpec(passcode, "AES");
         this.enc = this.create(Cipher.ENCRYPT_MODE, spec);
         this.dec = this.create(Cipher.DECRYPT_MODE, spec);
