@@ -58,12 +58,19 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     */
+    public Href() {
+        this("/");
+    }
+
+    /**
+     * Ctor.
      * @param txt Text of the link
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Href(final String txt) {
+    public Href(final CharSequence txt) {
         this.params = new ConcurrentHashMap<String, List<String>>(0);
-        final URI link = URI.create(txt);
+        final URI link = URI.create(txt.toString());
         final String query = link.getRawQuery();
         if (query == null) {
             this.uri = link;
@@ -116,7 +123,7 @@ public final class Href implements CharSequence {
 
     @Override
     public String toString() {
-        final StringBuilder text = new StringBuilder(this.uri.toString());
+        final StringBuilder text = new StringBuilder(this.bare());
         if (!this.params.isEmpty()) {
             boolean first = true;
             for (final Map.Entry<String, List<String>> ent
@@ -128,9 +135,10 @@ public final class Href implements CharSequence {
                     } else {
                         text.append('&');
                     }
-                    text.append(Href.encode(ent.getKey()))
-                        .append('=')
-                        .append(Href.encode(value));
+                    text.append(Href.encode(ent.getKey()));
+                    if (!value.isEmpty()) {
+                        text.append('=').append(Href.encode(value));
+                    }
                 }
             }
         }
@@ -147,13 +155,26 @@ public final class Href implements CharSequence {
     }
 
     /**
+     * Get URI without params.
+     * @return Bare URI
+     * @since 0.14
+     */
+    public String bare() {
+        final StringBuilder text = new StringBuilder(this.uri.toString());
+        if (this.uri.getPath().isEmpty()) {
+            text.append('/');
+        }
+        return text.toString();
+    }
+
+    /**
      * Get query param.
      * @param key Param name
      * @return Values (could be empty)
      * @since 0.9
      */
-    public Iterable<String> param(final String key) {
-        final List<String> values = this.params.get(key);
+    public Iterable<String> param(final Object key) {
+        final List<String> values = this.params.get(key.toString());
         final Iterable<String> iter;
         if (values == null) {
             iter = new VerboseIterable<String>(
@@ -180,12 +201,12 @@ public final class Href implements CharSequence {
      * @param suffix The suffix
      * @return New HREF
      */
-    public Href path(final String suffix) {
+    public Href path(final Object suffix) {
         return new Href(
             URI.create(
                 new StringBuilder(this.uri.toString().replaceAll("/$", ""))
                     .append('/')
-                    .append(Href.encode(suffix)).toString()
+                    .append(Href.encode(suffix.toString())).toString()
             ),
             this.params
         );
@@ -197,14 +218,14 @@ public final class Href implements CharSequence {
      * @param value The value
      * @return New HREF
      */
-    public Href with(final String key, final String value) {
+    public Href with(final Object key, final Object value) {
         final ConcurrentMap<String, List<String>> map =
             new ConcurrentHashMap<String, List<String>>(
                 this.params.size() + 1
             );
         map.putAll(this.params);
-        map.putIfAbsent(key, new LinkedList<String>());
-        map.get(key).add(value);
+        map.putIfAbsent(key.toString(), new LinkedList<String>());
+        map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map);
     }
 
@@ -213,13 +234,13 @@ public final class Href implements CharSequence {
      * @param key Key of the param
      * @return New HREF
      */
-    public Href without(final String key) {
+    public Href without(final Object key) {
         final ConcurrentMap<String, List<String>> map =
             new ConcurrentHashMap<String, List<String>>(
                 this.params.size()
             );
         map.putAll(this.params);
-        map.remove(key);
+        map.remove(key.toString());
         return new Href(this.uri, map);
     }
 

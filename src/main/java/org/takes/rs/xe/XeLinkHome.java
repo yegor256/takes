@@ -26,7 +26,7 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHeaders;
+import org.takes.rq.RqHref;
 import org.xembly.Directive;
 
 /**
@@ -52,10 +52,7 @@ public final class XeLinkHome extends XeWrap {
                 public Iterable<Directive> toXembly() throws IOException {
                     return new XeLink(
                         "home",
-                        String.format(
-                            "http://%s",
-                            new RqHeaders(req).header("Host").iterator().next()
-                        )
+                        new RqHref.Smart(new RqHref.Base(req)).home()
                     ).toXembly();
                 }
             }

@@ -49,7 +49,7 @@ public final class RsRedirect extends RsWrap {
      * Ctor.
      * @param location Where to redirect
      */
-    public RsRedirect(final String location) {
+    public RsRedirect(final CharSequence location) {
         this(location, HttpURLConnection.HTTP_SEE_OTHER);
     }
 
@@ -58,7 +58,7 @@ public final class RsRedirect extends RsWrap {
      * @param location Location
      * @param code HTTP redirect status code
      */
-    public RsRedirect(final String location, final int code) {
+    public RsRedirect(final CharSequence location, final int code) {
         super(
             new RsWithHeader(
                 new RsWithStatus(new RsEmpty(), code),

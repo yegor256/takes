@@ -31,6 +31,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.tk.TkFixed;
 
 /**
  * Fallback on status code that equals to the provided value.
@@ -43,6 +44,16 @@ import org.takes.Take;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
+
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     * @param response Response
+     * @since 0.14
+     */
+    public FbStatus(final int code, final Response response) {
+        this(code, new TkFixed(response));
+    }
 
     /**
      * Ctor.

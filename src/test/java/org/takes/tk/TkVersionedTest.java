@@ -50,7 +50,7 @@ public final class TkVersionedTest {
                     new RqFake()
                 )
             ).print(),
-            Matchers.containsString("X-Take-Version")
+            Matchers.containsString("X-Takes-Version")
         );
     }
 

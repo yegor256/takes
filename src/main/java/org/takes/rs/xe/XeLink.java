@@ -44,7 +44,7 @@ public final class XeLink extends XeWrap {
      * @param related Related
      * @param link HREF
      */
-    public XeLink(final String related, final String link) {
+    public XeLink(final CharSequence related, final CharSequence link) {
         this(related, link, "text/xml");
     }
 
@@ -54,15 +54,16 @@ public final class XeLink extends XeWrap {
      * @param href HREF
      * @param type Content type
      */
-    public XeLink(final String rel, final String href, final String type) {
+    public XeLink(final CharSequence rel, final CharSequence href,
+        final CharSequence type) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() {
                     return new Directives().addIf("links").add("link")
-                        .attr("rel", rel)
-                        .attr("href", href)
-                        .attr("type", type);
+                        .attr("rel", rel.toString())
+                        .attr("href", href.toString())
+                        .attr("type", type.toString());
                 }
             }
         );

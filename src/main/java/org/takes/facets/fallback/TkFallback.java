@@ -24,6 +24,7 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -40,8 +41,10 @@ import org.takes.tk.TkWrap;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle IllegalCatchCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.AvoidCatchingThrowable")
 public final class TkFallback extends TkWrap {
 
     /**
@@ -68,23 +71,79 @@ public final class TkFallback extends TkWrap {
      * @return Response
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidCatchingThrowable")
     private static Response route(final Take take, final Fallback fbk,
         final Request req) throws IOException {
         Response res;
         try {
-            res = take.act(req);
+            res = TkFallback.wrap(
+                take.act(req), fbk, req
+            );
         } catch (final HttpException ex) {
-            res = fbk.route(new RqFallback.Fake(req, ex.code(), ex)).next();
-        // @checkstyle IllegalCatchCheck (1 line)
+            res = TkFallback.wrap(
+                fbk.route(new RqFallback.Fake(req, ex.code(), ex)).next(),
+                fbk, req
+            );
         } catch (final Throwable ex) {
-            res = fbk.route(
-                new RqFallback.Fake(
-                    req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
-                )
-            ).next();
+            res = TkFallback.wrap(
+                fbk.route(
+                    new RqFallback.Fake(
+                        req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                    )
+                ).next(),
+                fbk, req
+            );
         }
         return res;
+    }
+
+    /**
+     * Wrap response.
+     * @param res Response to wrap
+     * @param fbk Fallback
+     * @param req Request
+     * @return Response
+     */
+    private static Response wrap(final Response res, final Fallback fbk,
+        final Request req) {
+        // @checkstyle AnonInnerLengthCheck (50 lines)
+        return new Response() {
+            @Override
+            public Iterable<String> head() throws IOException {
+                Iterable<String> head;
+                try {
+                    head = res.head();
+                } catch (final HttpException ex) {
+                    head = fbk.route(
+                        new RqFallback.Fake(req, ex.code(), ex)
+                    ).next().head();
+                } catch (final Throwable ex) {
+                    head = fbk.route(
+                        new RqFallback.Fake(
+                            req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                        )
+                    ).next().head();
+                }
+                return head;
+            }
+            @Override
+            public InputStream body() throws IOException {
+                InputStream body;
+                try {
+                    body = res.body();
+                } catch (final HttpException ex) {
+                    body = fbk.route(
+                        new RqFallback.Fake(req, ex.code(), ex)
+                    ).next().body();
+                } catch (final Throwable ex) {
+                    body = fbk.route(
+                        new RqFallback.Fake(
+                            req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                        )
+                    ).next().body();
+                }
+                return body;
+            }
+        };
     }
 
 }

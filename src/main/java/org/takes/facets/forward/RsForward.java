@@ -27,11 +27,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsWithoutHeader;
 
 /**
  * Forwarding response.
@@ -43,7 +45,7 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true, of = "origin")
-public final class RsForward extends RuntimeException implements Response {
+public final class RsForward extends HttpException implements Response {
 
     /**
      * Serialization marker.
@@ -73,10 +75,29 @@ public final class RsForward extends RuntimeException implements Response {
     /**
      * Ctor.
      * @param res Original response
+     * @since 0.14
+     */
+    public RsForward(final RsForward res) {
+        this(res.origin);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
      * @param loc Location
      */
     public RsForward(final Response res, final CharSequence loc) {
         this(res, HttpURLConnection.HTTP_SEE_OTHER, loc);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param loc Location
+     * @since 0.14
+     */
+    public RsForward(final RsForward res, final CharSequence loc) {
+        this(res.origin, loc);
     }
 
     /**
@@ -101,12 +122,27 @@ public final class RsForward extends RuntimeException implements Response {
      * @param res Original
      * @param code HTTP status code
      * @param loc Location
+     * @since 0.14
+     */
+    public RsForward(final RsForward res, final int code,
+        final CharSequence loc) {
+        this(res.origin, code, loc);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original
+     * @param code HTTP status code
+     * @param loc Location
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super();
+        super(code, res.toString());
         this.origin = new RsWithHeader(
-            new RsWithStatus(res, code),
+            new RsWithoutHeader(
+                new RsWithStatus(res, code),
+                "Location"
+            ),
             new Sprintf("Location: %s", loc)
         );
     }

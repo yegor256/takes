@@ -32,7 +32,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.13
  */
-public final class HttpException extends IOException {
+public class HttpException extends IOException {
 
     /**
      * Serialization marker.
@@ -89,7 +89,7 @@ public final class HttpException extends IOException {
      * HTTP status code.
      * @return Code
      */
-    public int code() {
+    public final int code() {
         return this.status;
     }
 

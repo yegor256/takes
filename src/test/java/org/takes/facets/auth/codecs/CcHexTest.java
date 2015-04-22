@@ -46,7 +46,7 @@ public final class CcHexTest {
         final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
             new String(new CcHex(new CcPlain()).encode(identity)),
-            Matchers.equalTo("75726E2533417465737425334133")
+            Matchers.equalTo("75726E25-33417465-73742533-4133")
         );
     }
 
@@ -73,7 +73,7 @@ public final class CcHexTest {
     public void decodes() throws IOException {
         MatcherAssert.assertThat(
             new CcHex(new CcPlain()).decode(
-                "75726E2533417465737425334141".getBytes()
+                "75726E25-33417465-73742533-4141".getBytes()
             ).urn(),
             Matchers.equalTo("urn:test:A")
         );
@@ -93,7 +93,7 @@ public final class CcHexTest {
         );
         MatcherAssert.assertThat(
             new CcSafe(new CcHex(new CcPlain())).decode(
-                "75726E253".getBytes()
+                "75-72-6E-253".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

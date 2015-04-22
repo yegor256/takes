@@ -24,15 +24,13 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
+import org.takes.misc.Opt;
 
 /**
  * Fork if user is logged in now.
@@ -75,13 +73,14 @@ public final class FkAuthenticated implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
-        final Collection<Response> response = new ArrayList<Response>(1);
+    public Opt<Response> route(final Request req) throws IOException {
         final Identity identity = new RqAuth(req).identity();
-        if (!identity.equals(Identity.ANONYMOUS)) {
-            response.add(this.take.act(req));
+        final Opt<Response> resp;
+        if (identity.equals(Identity.ANONYMOUS)) {
+            resp = new Opt.Empty<Response>();
+        } else {
+            resp = new Opt.Single<Response>(this.take.act(req));
         }
-        return response.iterator();
+        return resp;
     }
-
 }

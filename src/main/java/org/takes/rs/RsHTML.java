@@ -53,7 +53,7 @@ public final class RsHTML extends RsWrap {
      * Ctor.
      * @param body HTML body
      */
-    public RsHTML(final String body) {
+    public RsHTML(final CharSequence body) {
         this(new RsEmpty(), body);
     }
 
@@ -87,7 +87,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @param body HTML body
      */
-    public RsHTML(final Response res, final String body) {
+    public RsHTML(final Response res, final CharSequence body) {
         this(new RsWithBody(res, body));
     }
 
