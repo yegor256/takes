@@ -115,7 +115,7 @@ public final class RsWithStatus extends RsWrap {
         }
         return new Concat<String>(
             Collections.singleton(
-                    String.format("HTTP/1.1 %d %s", status, reason)
+                String.format("HTTP/1.1 %d %s", status, reason)
             ),
             new Select<String>(
                 origin.head(),
