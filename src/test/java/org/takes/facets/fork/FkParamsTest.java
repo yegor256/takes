@@ -47,7 +47,7 @@ public final class FkParamsTest {
         MatcherAssert.assertThat(
             new FkParams("a", "[0-9]+", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }

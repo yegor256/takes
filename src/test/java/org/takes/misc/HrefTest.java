@@ -23,7 +23,6 @@
  */
 package org.takes.misc;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,40 +37,48 @@ public final class HrefTest {
 
     /**
      * Href can build an URI.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void buildsUri() throws IOException {
+    public void buildsUri() {
         MatcherAssert.assertThat(
             new Href("http://example.com?a=8&b=9")
                 .with("a", "hello")
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
                 .without("b")
                 .with("b", "test")
                 .toString(),
-            Matchers.equalTo("http://example.com?a=8&a=hello&b=test")
+            Matchers.equalTo("http://example.com/?a=8&a=hello&b=test")
+        );
+    }
+
+    /**
+     * Href can build an URI from empty start.
+     */
+    @Test
+    public void buildsUriFromEmpty() {
+        MatcherAssert.assertThat(
+            new Href().path("boom-4").with("f1", "").toString(),
+            Matchers.equalTo("/boom-4?f1")
         );
     }
 
     /**
      * Href can build an URI without params.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void buildsUriWithoutParams() throws IOException {
+    public void buildsUriWithoutParams() {
         final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
             new Href(uri).toString(),
-            Matchers.equalTo(uri)
+            Matchers.equalTo("http://a.example.com/")
         );
     }
 
     /**
      * Href can add path.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void addsPath() throws IOException {
+    public void addsPath() {
         MatcherAssert.assertThat(
             new Href("http://example.com").path("c").path("d").toString(),
             Matchers.equalTo("http://example.com/c/d")
@@ -84,10 +91,9 @@ public final class HrefTest {
 
     /**
      * Href can accept encoded query part.
-     * @throws IOException If some problem inside.
      */
     @Test
-    public void acceptsEncodedQuery() throws IOException {
+    public void acceptsEncodedQuery() {
         final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
         MatcherAssert.assertThat(
             new Href(url).toString(),

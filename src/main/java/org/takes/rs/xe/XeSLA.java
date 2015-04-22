@@ -68,13 +68,13 @@ public final class XeSLA extends XeWrap {
      * Ctor.
      * @param attr Attribute name
      */
-    public XeSLA(final String attr) {
+    public XeSLA(final CharSequence attr) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() {
                     return new Directives().attr(
-                        attr,
+                        attr.toString(),
                         String.format(
                             "%.3f",
                             ManagementFactory.getOperatingSystemMXBean()

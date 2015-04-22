@@ -49,7 +49,7 @@ public final class TkForwardTest {
     public void catchesExceptionCorrectly() throws IOException {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) {
+            public Response act(final Request request) throws RsForward {
                 throw new RsForward("/");
             }
         };
@@ -69,7 +69,7 @@ public final class TkForwardTest {
     public void catchesExceptionThrownByTake() throws IOException {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) {
+            public Response act(final Request request) throws RsForward {
                 throw new RsForward("/h");
             }
         };

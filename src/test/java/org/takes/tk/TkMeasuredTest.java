@@ -44,7 +44,7 @@ public final class TkMeasuredTest {
      */
     @Test
     public void createsMeasuredResponse() throws IOException {
-        final String header = "X-Take-Millis";
+        final String header = "X-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkMeasured(new TkText("default header response")).act(

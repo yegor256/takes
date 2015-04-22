@@ -24,8 +24,11 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Href;
 
@@ -62,23 +65,104 @@ public interface RqHref extends Request {
          */
         public Base(final Request req) {
             super(req);
-        };
-
+        }
         @Override
         public Href href() throws IOException {
-            final Iterator<String> host = new RqHeaders(this)
-                .header("Host").iterator();
-            if (!host.hasNext()) {
-                throw new IOException("Host header is absent");
-            }
             return new Href(
                 String.format(
                     "http://%s%s",
-                    host.next(),
+                    new RqHeaders(this).header("host").iterator().next(),
                     // @checkstyle MagicNumber (1 line)
                     this.head().iterator().next().split(" ", 3)[1]
                 )
             );
+        }
+    }
+
+    /**
+     * Smart decorator, with extra features.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @since 0.14
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Smart implements RqHref {
+        /**
+         * Original.
+         */
+        private final transient RqHref origin;
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Smart(final RqHref req) {
+            this.origin = req;
+        }
+        @Override
+        public Href href() throws IOException {
+            return this.origin.href();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+        /**
+         * Get self.
+         * @return Self page, full URL
+         * @throws IOException If fails
+         * @since 0.14
+         */
+        public Href home() throws IOException {
+            return new Href(
+                String.format(
+                    "http://%s/",
+                    new RqHeaders(this).header("Host").iterator().next()
+                )
+            );
+        }
+        /**
+         * Get param or throw HTTP exception.
+         * @param name Name of query param
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String single(final CharSequence name) throws IOException {
+            final Iterator<String> params = this.origin.href()
+                .param(name).iterator();
+            if (!params.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "query param \"%s\" is mandatory", name
+                    )
+                );
+            }
+            return params.next();
+        }
+        /**
+         * Get param or default.
+         * @param name Name of query param
+         * @param def Default, if not found
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String single(final CharSequence name, final CharSequence def)
+            throws IOException {
+            final String value;
+            final Iterator<String> params = this.origin.href()
+                .param(name).iterator();
+            if (params.hasNext()) {
+                value = params.next();
+            } else {
+                value = def.toString();
+            }
+            return value;
         }
     }
 }

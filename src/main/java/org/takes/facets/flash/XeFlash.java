@@ -85,7 +85,7 @@ public final class XeFlash implements XeSource {
     @Override
     public Iterable<Directive> toXembly() throws IOException {
         final Iterator<String> cookies =
-            new RqCookies(this.req).cookie(this.cookie).iterator();
+            new RqCookies.Base(this.req).cookie(this.cookie).iterator();
         final Directives dirs = new Directives();
         if (cookies.hasNext()) {
             final Matcher matcher = RS_FLASH_MSG.matcher(cookies.next());

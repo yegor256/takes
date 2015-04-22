@@ -42,7 +42,7 @@ public final class XeMillis implements XeSource {
     /**
      * Name of element.
      */
-    private final transient String name;
+    private final transient CharSequence name;
 
     /**
      * Is it a finish?
@@ -62,7 +62,7 @@ public final class XeMillis implements XeSource {
      * @param elm Element name
      * @param fin Is it the finish?
      */
-    public XeMillis(final String elm, final boolean fin) {
+    public XeMillis(final CharSequence elm, final boolean fin) {
         this.name = elm;
         this.finish = fin;
     }
@@ -71,7 +71,7 @@ public final class XeMillis implements XeSource {
     public Iterable<Directive> toXembly() {
         final Directives dirs = new Directives();
         if (this.finish) {
-            dirs.xpath(this.name)
+            dirs.xpath(this.name.toString())
                 .strict(1)
                 .xset(
                     String.format(
@@ -80,7 +80,7 @@ public final class XeMillis implements XeSource {
                     )
                 );
         } else {
-            dirs.add(this.name)
+            dirs.add(this.name.toString())
                 .set(Long.toString(System.currentTimeMillis()));
         }
         return dirs;

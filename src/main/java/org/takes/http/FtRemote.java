@@ -24,10 +24,7 @@
 package org.takes.http;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.URI;
-import java.util.Collection;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -47,12 +44,6 @@ import org.takes.Take;
 @SuppressWarnings("PMD.DoNotUseThreads")
 @EqualsAndHashCode(of = { "back", "port" })
 public final class FtRemote implements Front {
-
-    /**
-     * Already assigned ports.
-     */
-    private static final Collection<Integer> PORTS =
-        new ConcurrentSkipListSet<Integer>();
 
     /**
      * Back.
@@ -80,7 +71,7 @@ public final class FtRemote implements Front {
      */
     public FtRemote(final Back bck) throws IOException {
         this.back = bck;
-        this.port = FtRemote.allocate();
+        this.port = new Ports().allocate();
     }
 
     @Override
@@ -136,48 +127,7 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        FtRemote.PORTS.remove(this.port);
-    }
-
-    /**
-     * Allocate a new random TCP port.
-     * @return TCP port
-     * @throws IOException If fails
-     */
-    private static int allocate() throws IOException {
-        synchronized (FtRemote.PORTS) {
-            int attempts = 0;
-            int port;
-            do {
-                port = FtRemote.random();
-                ++attempts;
-                // @checkstyle MagicNumber (1 line)
-                if (attempts > 100) {
-                    throw new IllegalStateException(
-                        String.format(
-                            "failed to allocate TCP port after %d attempts",
-                            attempts
-                        )
-                    );
-                }
-            } while (FtRemote.PORTS.contains(port));
-            return port;
-        }
-    }
-
-    /**
-     * Allocate a new random TCP port.
-     * @return TCP port
-     * @throws IOException If fails
-     */
-    private static int random() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
-            socket.setReuseAddress(true);
-            return socket.getLocalPort();
-        } finally {
-            socket.close();
-        }
+        new Ports().release(this.port);
     }
 
     /**

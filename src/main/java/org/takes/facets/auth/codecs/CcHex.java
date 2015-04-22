@@ -23,8 +23,8 @@
  */
 package org.takes.facets.auth.codecs;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -39,6 +39,11 @@ import org.takes.facets.auth.Identity;
  */
 @EqualsAndHashCode(of = "origin")
 public final class CcHex implements Codec {
+
+    /**
+     * Length of chunk.
+     */
+    private static final int CHUNK = 4;
 
     /**
      * Backward mapping table.
@@ -79,32 +84,35 @@ public final class CcHex implements Codec {
     @Override
     public byte[] encode(final Identity identity) throws IOException {
         final byte[] raw = this.origin.encode(identity);
-        final byte[] out = new byte[raw.length << 1];
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (int idx = 0; idx < raw.length; ++idx) {
-            out[idx << 1] = CcHex.FWD[raw[idx] >> 4 & 0x0f];
-            out[(idx << 1) + 1] = CcHex.FWD[raw[idx] & 0x0f];
+            if (idx > 0 && idx % CcHex.CHUNK == 0) {
+                out.write('-');
+            }
+            out.write(CcHex.FWD[raw[idx] >> 4 & 0x0f]);
+            out.write(CcHex.FWD[raw[idx] & 0x0f]);
         }
-        return out;
+        return out.toByteArray();
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        if ((bytes.length & 0x01) == 1) {
-            throw new DecodingException(
-                String.format(
-                    "hex text must contain even number of chars: %s",
-                    Arrays.toString(bytes)
-                )
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int idx = 0;
+        while (idx < bytes.length) {
+            if (bytes[idx] == '-') {
+                ++idx;
+                continue;
+            }
+            if (idx > bytes.length - 2) {
+                throw new DecodingException("not enough data");
+            }
+            out.write(
+                (CcHex.decode(bytes[idx]) << 4) + CcHex.decode(bytes[idx + 1])
             );
+            idx += 2;
         }
-        final byte[] out = new byte[bytes.length >> 1];
-        for (int idx = 0; idx < out.length; ++idx) {
-            final int high = bytes[idx << 1];
-            final int low = bytes[(idx << 1) + 1];
-            out[idx] = (byte) ((CcHex.decode(high) << 4)
-                + CcHex.decode(low));
-        }
-        return this.origin.decode(out);
+        return this.origin.decode(out.toByteArray());
     }
 
     /**

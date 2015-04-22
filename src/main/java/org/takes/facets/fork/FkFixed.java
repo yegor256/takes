@@ -24,12 +24,11 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 
 /**
  * Fork fixed.
@@ -41,25 +40,23 @@ import org.takes.Take;
  * @since 0.9
  * @see TkFork
  */
-@EqualsAndHashCode(of = "take")
-public final class FkFixed implements Fork {
-
-    /**
-     * Target.
-     */
-    private final transient Take take;
+@EqualsAndHashCode(callSuper = true)
+public final class FkFixed extends FkWrap {
 
     /**
      * Ctor.
-     * @param tke Take
+     * @param take Take
      */
-    public FkFixed(final Take tke) {
-        this.take = tke;
-    }
-
-    @Override
-    public Iterator<Response> route(final Request req) throws IOException {
-        return Collections.singleton(this.take.act(req)).iterator();
+    public FkFixed(final Take take) {
+        super(
+            new Fork() {
+                @Override
+                public Opt<Response> route(final Request req)
+                    throws IOException {
+                    return new Opt.Single<Response>(take.act(req));
+                }
+            }
+        );
     }
 
 }

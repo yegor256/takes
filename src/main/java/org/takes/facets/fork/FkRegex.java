@@ -25,15 +25,13 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 import org.takes.tk.TkText;
 
@@ -150,13 +148,15 @@ public final class FkRegex implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
-        final Matcher matcher = this.pattern.matcher(
-            new RqHref.Base(req).href().path()
-        );
-        final Collection<Response> list = new ArrayList<Response>(1);
+    public Opt<Response> route(final Request req) throws IOException {
+        String path = new RqHref.Base(req).href().path();
+        if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
+            path = path.substring(0, path.length() - 1);
+        }
+        final Matcher matcher = this.pattern.matcher(path);
+        final Opt<Response> resp;
         if (matcher.matches()) {
-            list.add(
+            resp = new Opt.Single<Response>(
                 this.target.act(
                     new RqRegex() {
                         @Override
@@ -174,8 +174,10 @@ public final class FkRegex implements Fork {
                     }
                 )
             );
+        } else {
+            resp = new Opt.Empty<Response>();
         }
-        return list.iterator();
+        return resp;
     }
 
 }
