@@ -26,7 +26,7 @@ package org.takes.misc;
 import java.util.Locale;
 
 /**
- * Condition to determine how {@link Concat} behave when joining two iterables.
+ * Condition to determine how {@link Select} behave when filtering an iterable.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
