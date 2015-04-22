@@ -83,7 +83,7 @@ public final class RqLengthAware extends RqWrap {
      * @throws IOException If fails
      */
     private static long length(final Request req) throws IOException {
-        final Iterator<String> hdr = new RqHeaders(req)
+        final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Content-Length").iterator();
         final long length;
         if (hdr.hasNext()) {
