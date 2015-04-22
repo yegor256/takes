@@ -144,8 +144,8 @@ public final class PsLinkedin implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final String fname = "first_name";
-        final String lname = "last_name";
+        final String fname = "firstName";
+        final String lname = "lastName";
         final String unknown = "?";
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
