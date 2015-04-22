@@ -23,10 +23,10 @@
  */
 package org.takes.misc;
 
+import com.google.common.collect.AbstractIterator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Select elements into a new iterable with given condition.
@@ -70,12 +70,7 @@ public final class Select<T> implements Iterable<T> {
      * The select iterator to traverse the input iterables and return the
      * elements from the list with given condition.
      */
-    private static class SelectIterator<E> implements Iterator<E> {
-
-        /**
-         * The index pointing to the current element list.
-         */
-        private static final transient int HEAD = 0;
+    private static class SelectIterator<E> extends AbstractIterator<E> {
 
         /**
          * The iterator to reflect the traverse state.
@@ -88,11 +83,6 @@ public final class Select<T> implements Iterable<T> {
         private final transient Condition<E> condition;
 
         /**
-         * The list storing the current object of the iterator.
-         */
-        private final transient List<E> current = new ArrayList<E>(1);
-
-        /**
          * Ctor. ConcatIterator traverses the element.
          * @param itr Iterator of the original iterable
          * @param cond Condition to filter out elements
@@ -101,53 +91,21 @@ public final class Select<T> implements Iterable<T> {
             this.condition = cond;
             this.iterator = itr;
         }
-
+        
         @Override
-        public boolean hasNext() {
-            if (this.current.isEmpty()) {
-                this.lookForNext();
-            }
-            return !this.current.isEmpty();
-        }
-
-        @Override
-        public E next() {
-            if (this.current.isEmpty()) {
-                this.lookForNext();
-            }
-            if (!this.current.isEmpty()) {
-                final E result = this.current.get(HEAD);
-                this.current.remove(HEAD);
-                return result;
-            }
-            throw new NoSuchElementException(
-                "No more element with fits the select condition."
-            );
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException(
-                "This iterable is immutable and cannot remove anything"
-            );
-        }
-
-        /**
-         * Look for the first next element which matches condition.
-         * @return True if the element found, false otherwise
-         */
-        private boolean lookForNext() {
-            if (!this.current.isEmpty()) {
-                this.current.remove(HEAD);
-            }
+        protected E computeNext() {
+            final List<E> element = new ArrayList<E>(1);
             while (this.iterator.hasNext()) {
-                final E element = this.iterator.next();
-                if (this.condition.fits(element)) {
-                    this.current.add(element);
+                final E object = this.iterator.next();
+                if (this.condition.fits(object)) {
+                    element.add(object);
                     break;
                 }
             }
-            return !this.current.isEmpty();
+            if (element.isEmpty()) {
+                element.add(this.endOfData());
+            }
+            return element.get(0);
         }
     }
 
