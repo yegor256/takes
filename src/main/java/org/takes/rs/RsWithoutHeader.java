@@ -59,7 +59,9 @@ public final class RsWithoutHeader extends RsWrap {
                     return new Select<String>(
                         res.head(),
                         new Condition.Not<String>(
-                            new Condition.LowerStartsWith(prefix)
+                            new Condition.LowerCase(
+                                new Condition.StartsWith(prefix)
+                            )
                         )
                     );
                 }

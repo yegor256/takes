@@ -59,7 +59,9 @@ public final class RqWithoutHeader extends RqWrap {
                     return new Select<String>(
                         req.head(),
                         new Condition.Not<String>(
-                            new Condition.LowerStartsWith(prefix)
+                            new Condition.LowerCase(
+                                new Condition.StartsWith(prefix)
+                            )
                         )
                     );
                 }

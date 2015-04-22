@@ -42,12 +42,11 @@ public interface Condition<T> {
     boolean fits(T element);
 
     /**
-     * Concat lower case string condition. This condition changes all
-     * characters to lower case and determine if the iterable should be
-     * concatenated by determine if the element contain the 'prefix'
+     * Starts with string condition. This condition determines if the iterable
+     * should be concatenated by determine if the element contain the 'prefix'
      * supplied.
      */
-    class LowerStartsWith implements Condition<String> {
+    class StartsWith implements Condition<String> {
 
         /**
          * Prefix.
@@ -58,14 +57,13 @@ public interface Condition<T> {
          * Ctor.
          * @param str The prefix to check
          */
-        public LowerStartsWith(final String str) {
+        public StartsWith(final String str) {
             this.prefix = str;
         }
 
         @Override
         public boolean fits(final String element) {
-            return element.toLowerCase(Locale.ENGLISH)
-                .startsWith(this.prefix);
+            return element.startsWith(this.prefix);
         }
     }
 
@@ -75,7 +73,7 @@ public interface Condition<T> {
     class Not<T> implements Condition<T> {
 
         /**
-         * Prefix.
+         * Condition.
          */
         private final transient Condition<T> condition;
 
@@ -90,6 +88,31 @@ public interface Condition<T> {
         @Override
         public boolean fits(final T element) {
             return !this.condition.fits(element);
+        }
+    }
+
+    /**
+     * Translate the string element into lower case for condition checking.
+     * It does not alter the element in an iterable.
+     */
+    class LowerCase implements Condition<String> {
+        
+        /**
+         * Condition.
+         */
+        private final transient Condition<String> condition;
+        
+        /**
+         * Ctor.
+         * @param cond The condition for checking
+         */
+        public LowerCase(final Condition<String> cond) {
+            this.condition = cond;
+        }
+
+        @Override
+        public boolean fits(final String element) {
+            return this.condition.fits(element.toLowerCase(Locale.ENGLISH));
         }
     }
 
