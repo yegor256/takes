@@ -26,8 +26,7 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -62,15 +61,15 @@ public final class RsWithHeaders extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : res.head()) {
-                        head.add(hdr);
-                    }
+                public Iterable<String> head() throws IOException {
+                    final AtomicReference<Response> response =
+                            new AtomicReference<Response>(res);
                     for (final CharSequence header : headers) {
-                        head.add(header.toString().trim());
+                        response.set(
+                            wrapHeader(response.get(), header.toString().trim())
+                        );
                     }
-                    return head;
+                    return response.get().head();
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -80,4 +79,14 @@ public final class RsWithHeaders extends RsWrap {
         );
     }
 
+    /**
+     * Wrap response and header into RsWithHeader.
+     * @param res Response
+     * @param header Header
+     * @return RsWithHeader
+     */
+    private static RsWithHeader wrapHeader(final Response res,
+                                           final String header) {
+        return new RsWithHeader(res, header);
+    }
 }
