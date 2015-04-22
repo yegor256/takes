@@ -82,14 +82,14 @@ public final class RqLengthAware extends RqWrap {
      * @return Length in bytes or Long.MAX_VALUE if unknown
      * @throws IOException If fails
      */
-    private static int length(final Request req) throws IOException {
+    private static long length(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders(req)
             .header("Content-Length").iterator();
-        final int length;
+        final long length;
         if (hdr.hasNext()) {
-            length = Integer.parseInt(hdr.next());
+            length = Long.parseLong(hdr.next());
         } else {
-            length = Integer.MAX_VALUE;
+            length = Long.MAX_VALUE;
         }
         return length;
     }
@@ -105,20 +105,23 @@ public final class RqLengthAware extends RqWrap {
         /**
          * More bytes to read.
          */
-        private transient int more;
+        private transient long more;
         /**
          * Ctor.
          * @param stream Original stream
          * @param length Max length
          */
-        CapInputStream(final InputStream stream, final int length) {
+        CapInputStream(final InputStream stream, final long length) {
             super();
             this.origin = stream;
             this.more = length;
         }
         @Override
         public int available() throws IOException {
-            return Math.min(this.origin.available(), this.more);
+            return (int) Math.min(
+                (long) Integer.MAX_VALUE,
+                Math.min((long) this.origin.available(), this.more)
+            );
         }
         @Override
         public int read() throws IOException {
