@@ -24,6 +24,7 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
+import org.apache.commons.lang.StringUtils;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
@@ -41,9 +42,13 @@ import org.takes.Response;
 public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
     /**
+     * Response head separator value.
+     */
+    private static final String HEAD_SEPARATOR = " ";
+    /**
      * Expected response status code for matcher.
      */
-    private final transient Integer expected;
+    private final transient String expected;
 
     /**
      * Expected input.
@@ -51,7 +56,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
      */
     public RsMatchStatus(final Integer input) {
         super();
-        this.expected = input;
+        this.expected = String.valueOf(input);
     }
 
     /**
@@ -61,7 +66,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     @Override
     public void describeTo(final Description description) {
         description.appendText("Response Status same as: ")
-                .appendValue(this.expected);
+            .appendValue(this.expected);
     }
 
     /**
@@ -73,7 +78,8 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     public boolean matchesSafely(final Response item) {
         try {
             final String head = item.head().iterator().next();
-            return head.contains(String.valueOf(this.expected));
+            final String[] headParts = StringUtils.split(head, HEAD_SEPARATOR);
+            return this.expected.equals(headParts[1]);
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }

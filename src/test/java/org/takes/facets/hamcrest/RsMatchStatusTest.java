@@ -48,12 +48,12 @@ public final class RsMatchStatusTest {
     @Test
     public void responseCodeIsEqualToExpected() throws IOException {
         MatcherAssert.assertThat(
-                new TkHTML("<html></html>").act(new RqFake()),
-                Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
+            new TkHTML("<html></html>").act(new RqFake()),
+            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
         );
         MatcherAssert.assertThat(
-                new TkEmpty().act(new RqFake()),
-                Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
+            new TkEmpty().act(new RqFake()),
+            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
         );
     }
 
