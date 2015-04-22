@@ -88,6 +88,7 @@ public final class Select<T> implements Iterable<T> {
          * @param cond Condition to filter out elements
          */
         public SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
+            super();
             this.condition = cond;
             this.iterator = itr;
         }
