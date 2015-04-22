@@ -55,6 +55,18 @@ public final class CcStrictTest {
     }
 
     /**
+     * Ccstrict can encode anonymous identity without errors.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void canEncodeAnonymousIdentity() throws Exception {
+        MatcherAssert.assertThat(
+            new CcStrict(new CcPlain()).encode(Identity.ANONYMOUS),
+            Matchers.equalTo(new byte[0])
+        );
+    }
+
+    /**
      * CcStrict can pass valid Identities.
      * @throws IOException If some problem inside
      */
