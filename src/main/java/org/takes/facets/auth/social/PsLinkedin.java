@@ -152,7 +152,7 @@ public final class PsLinkedin implements Pass {
         props.put(fname, json.getString(fname, unknown));
         props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
-            String.format("urn:linkedin:%d", json.getInt("id")), props
+            String.format("urn:linkedin:%s", json.getString("id")), props
         );
     }
 }
