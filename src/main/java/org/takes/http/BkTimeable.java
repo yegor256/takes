@@ -93,14 +93,16 @@ public final class BkTimeable implements Back {
                 public void run() {
                     for (final BkTimeable.ThreadInfo info : storage) {
                         if (System.currentTimeMillis() - info.start > time) {
-                            info.thread.interrupt();
+                            if (info.thread.isAlive()) {
+                                info.thread.interrupt();
+                            }
                             storage.remove(info);
                         }
                     }
                 }
             },
             0,
-            1,
+            100,
             TimeUnit.MILLISECONDS
         );
     }
