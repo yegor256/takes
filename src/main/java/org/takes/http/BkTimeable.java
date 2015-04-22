@@ -25,6 +25,7 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -35,16 +36,13 @@ import lombok.EqualsAndHashCode;
  * Back decorator with maximum lifetime.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
  */
 @EqualsAndHashCode(of = {"origin", "latency" })
 public final class BkTimeable implements Back {
-    /**
-     * Threads check interval.
-     */
-    private static final long CHECK_INTERVAL = 100;
 
     /**
      * Original back.
@@ -59,7 +57,7 @@ public final class BkTimeable implements Back {
     /**
      * Threads storage.
      */
-    private final transient CopyOnWriteArraySet<BkTimeable.ThreadInfo> threads;
+    private final transient Set<BkTimeable.ThreadInfo> threads;
 
     /**
      * Monitoring executor.
@@ -72,26 +70,39 @@ public final class BkTimeable implements Back {
      * @param msec Execution latency
      */
     public BkTimeable(final Back back, final long msec) {
+        this(back, msec, Executors.newSingleThreadScheduledExecutor());
+        this.start();
+    }
+
+    /**
+     * Ctor.
+     * @param back Original back
+     * @param msec Execution latency
+     * @param svc Executor service
+     */
+    public BkTimeable(final Back back, final long msec,
+        final ScheduledExecutorService svc) {
         this.origin = back;
         this.latency = msec;
         this.threads = new CopyOnWriteArraySet<BkTimeable.ThreadInfo>();
-        this.service = Executors.newSingleThreadScheduledExecutor();
+        this.service = svc;
         this.start();
     }
 
     @Override
     public void accept(final Socket socket) throws IOException {
-        this.threads.add(new BkTimeable.ThreadInfo(Thread.currentThread()));
+        this.threads.add(new BkTimeable.ThreadInfo());
         this.origin.accept(socket);
     }
 
     /**
      * Start monitoring.
+     * @checkstyle MagicNumberCheck (25 lines)
      */
     @SuppressWarnings("PMD.DoNotUseThreads")
     private void start() {
         final long time = this.latency;
-        final CopyOnWriteArraySet<BkTimeable.ThreadInfo> storage = this.threads;
+        final Set<BkTimeable.ThreadInfo> storage = this.threads;
         this.service.scheduleAtFixedRate(
             new Runnable() {
                 @Override
@@ -107,7 +118,7 @@ public final class BkTimeable implements Back {
                 }
             },
             0,
-            BkTimeable.CHECK_INTERVAL,
+            100,
             TimeUnit.MILLISECONDS
         );
     }
@@ -128,10 +139,9 @@ public final class BkTimeable implements Back {
 
         /**
          * Ctor.
-         * @param cthread Threat reference
          */
-        ThreadInfo(final Thread cthread) {
-            this.thread = cthread;
+        ThreadInfo() {
+            this.thread = Thread.currentThread();
             this.start = System.currentTimeMillis();
         }
     }
