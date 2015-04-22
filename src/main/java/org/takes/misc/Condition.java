@@ -96,12 +96,12 @@ public interface Condition<T> {
      * It does not alter the element in an iterable.
      */
     class LowerCase implements Condition<String> {
-        
+
         /**
          * Condition.
          */
         private final transient Condition<String> condition;
-        
+
         /**
          * Ctor.
          * @param cond The condition for checking
