@@ -24,7 +24,6 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import org.apache.commons.lang.StringUtils;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
@@ -78,7 +77,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     public boolean matchesSafely(final Response item) {
         try {
             final String head = item.head().iterator().next();
-            final String[] headParts = StringUtils.split(head, HEAD_SEPARATOR);
+            final String[] headParts = head.split(HEAD_SEPARATOR);
             return this.expected.equals(headParts[1]);
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
