@@ -91,7 +91,7 @@ public final class Select<T> implements Iterable<T> {
             this.condition = cond;
             this.iterator = itr;
         }
-        
+
         @Override
         protected E computeNext() {
             final List<E> element = new ArrayList<E>(1);
