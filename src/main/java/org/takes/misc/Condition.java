@@ -64,8 +64,32 @@ public interface Condition<T> {
 
         @Override
         public boolean fits(final String element) {
-            return !element.toLowerCase(Locale.ENGLISH)
+            return element.toLowerCase(Locale.ENGLISH)
                 .startsWith(this.prefix);
+        }
+    }
+
+    /**
+     * Negating condition of any condition
+     */
+    class Not<T> implements Condition<T> {
+
+        /**
+         * Prefix.
+         */
+        private final transient Condition <T> condition;
+
+        /**
+         * Ctor.
+         * @param str The prefix to check
+         */
+        public Not(final Condition<T> cond) {
+            this.condition = cond;
+        }
+
+        @Override
+        public boolean fits(final T element) {
+            return !this.condition.fits(element);
         }
     }
 

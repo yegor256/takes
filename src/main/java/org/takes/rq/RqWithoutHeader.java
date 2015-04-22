@@ -58,7 +58,9 @@ public final class RqWithoutHeader extends RqWrap {
                     );
                     return new Select<String>(
                         req.head(),
-                        new Condition.LowerStartsWith(prefix)
+                        new Condition.Not<String>(
+                            new Condition.LowerStartsWith(prefix)
+                        )
                     );
                 }
                 @Override
