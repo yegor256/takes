@@ -23,12 +23,18 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -37,6 +43,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
@@ -50,13 +57,15 @@ import org.takes.misc.VerboseIterable;
  * @version $Id$
  * @since 0.9
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public interface RqMultipart extends Request {
+
     /**
      * Get single part.
      * @param name Name of the part to get
      * @return List of parts (can be empty)
      */
-    Iterable<Request> part(final CharSequence name);
+    Iterable<Request> part(CharSequence name);
 
     /**
      * Get all part names.
@@ -88,22 +97,21 @@ public interface RqMultipart extends Request {
         /**
          * Pattern to get boundary from header.
          */
+        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern BOUNDARY = Pattern.compile(
             ".*[^a-z]boundary=([^;]+).*"
         );
-
         /**
          * Pattern to get name from header.
          */
+        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern NAME = Pattern.compile(
             ".*[^a-z]name=\"([^\"]+)\".*"
         );
-
         /**
          * Map of params and values.
          */
         private final transient ConcurrentMap<String, List<Request>> map;
-
         /**
          * Ctor.
          * @param req Original request
@@ -118,43 +126,36 @@ public interface RqMultipart extends Request {
                 throw new IOException(
                     String.format(
                         // @checkstyle LineLength (1 line)
-                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: %s",
+                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
                         header
                     )
                 );
             }
-            final Matcher matcher = Base.BOUNDARY.matcher(header);
+            final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
             if (!matcher.matches()) {
                 throw new IOException(
                     String.format(
-                        "boundary is not specified in Content-Type header: %s",
+                        // @checkstyle LineLength (1 line)
+                        "boundary is not specified in Content-Type header: \"%s\"",
                         header
                     )
                 );
             }
             final Collection<Request> requests = new LinkedList<Request>();
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            new RqPrint(req).printBody(baos);
-            final byte[] boundary = matcher.group(1).getBytes();
-            final byte[] body = baos.toByteArray();
-            int pos = 0;
-            while (pos < body.length) {
-                int start = pos + boundary.length + 2;
-                if (body[start] == '-') {
+            final byte[] boundary = String.format(
+                "\r\n--%s", matcher.group(1)
+            ).getBytes();
+            final InputStream body = new RqLengthAware(req).body();
+            RqMultipart.Base.skip(body, boundary.length - 2);
+            while (body.available() > 0) {
+                if (body.read() == '-') {
                     break;
                 }
-                start += 2;
-                final int stop = RqMultipart.Base.indexOf(
-                    body,
-                    boundary,
-                    start
-                ) - 2;
-                requests.add(this.make(body, start, stop - 2));
-                pos = stop;
+                RqMultipart.Base.skip(body, 1);
+                requests.add(this.make(body, boundary));
             }
             this.map = RqMultipart.Base.asMap(requests);
         }
-
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
@@ -179,29 +180,78 @@ public interface RqMultipart extends Request {
             }
             return iter;
         }
-
         @Override
         public Iterable<String> names() {
             return this.map.keySet();
         }
-
+        /**
+         * Skip a few bytes in a stream.
+         * @param stream The stream
+         * @param skip How many bytes to skip
+         * @throws IOException If fails
+         */
+        private static void skip(final InputStream stream, final int skip)
+            throws IOException {
+            for (int idx = 0; idx < skip; ++idx) {
+                stream.read();
+            }
+        }
         /**
          * Make a request.
          * @param body Body
-         * @param start Start position
-         * @param stop Stop position
+         * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
          */
-        private Request make(final byte[] body, final int start,
-            final int stop) throws IOException {
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            baos.write(this.head().iterator().next().getBytes());
-            baos.write("\r\n".getBytes());
-            baos.write(Arrays.copyOfRange(body, start, stop));
-            return new RqLive(new ByteArrayInputStream(baos.toByteArray()));
+        private Request make(final InputStream body,
+            final byte[] boundary) throws IOException {
+            final File file = File.createTempFile(
+                RqMultipart.class.getName(), ".tmp"
+            );
+            file.deleteOnExit();
+            final OutputStream out = new BufferedOutputStream(
+                new FileOutputStream(file)
+            );
+            try {
+                out.write(this.head().iterator().next().getBytes());
+                out.write("\r\n".getBytes());
+                RqMultipart.Base.copy(body, out, boundary);
+            } finally {
+                out.close();
+            }
+            return new RqLive(new FileInputStream(file));
         }
-
+        /**
+         * Copy until boundary reached.
+         * @param body Input stream
+         * @param output Output to write to
+         * @param boundary Boundary
+         * @throws IOException If fails
+         */
+        private static void copy(final InputStream body,
+            final OutputStream output, final byte[] boundary)
+            throws IOException {
+            int match = 0;
+            final ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            while (body.available() > 0) {
+                final int data = body.read();
+                if (data < 0) {
+                    break;
+                }
+                if (data == boundary[match]) {
+                    ++match;
+                    buf.write(data);
+                    if (match == boundary.length) {
+                        break;
+                    }
+                } else {
+                    match = 0;
+                    output.write(buf.toByteArray());
+                    buf.reset();
+                    output.write(data);
+                }
+            }
+        }
         /**
          * Convert a list of requests to a map.
          * @param reqs Requests
@@ -216,7 +266,7 @@ public interface RqMultipart extends Request {
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Base(req)
                     .header("Content-Disposition").iterator().next();
-                final Matcher matcher = Base.NAME.matcher(header);
+                final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new IOException(
                         String.format(
@@ -232,30 +282,59 @@ public interface RqMultipart extends Request {
             }
             return map;
         }
+    }
 
+    /**
+     * Smart decorator.
+     * @since 0.15
+     */
+    final class Smart implements RqMultipart {
         /**
-         * Find position of array inside another array.
-         * @param outer Big array
-         * @param inner Small array
-         * @param start Where to start searching
-         * @return Position
-         * @throws IOException If fails
+         * Original request.
          */
-        private static int indexOf(final byte[] outer, final byte[] inner,
-            final int start) throws IOException {
-            for (int idx = start; idx < outer.length - inner.length; ++idx) {
-                boolean found = true;
-                for (int sub = 0; sub < inner.length; ++sub) {
-                    if (outer[idx + sub] != inner[sub]) {
-                        found = false;
-                        break;
-                    }
-                }
-                if (found) {
-                    return idx;
-                }
+        private final transient RqMultipart origin;
+        /**
+         * Ctor.
+         * @param req Original
+         */
+        public Smart(final RqMultipart req) {
+            this.origin = req;
+        }
+        /**
+         * Get single part.
+         * @param name Name of the part to get
+         * @return Part
+         * @throws HttpException If fails
+         */
+        public Request single(final CharSequence name) throws HttpException {
+            final Iterator<Request> parts = this.origin
+                .part(name).iterator();
+            if (!parts.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "form param \"%s\" is mandatory", name
+                    )
+                );
             }
-            throw new IOException("closing boundary not found");
+            return parts.next();
+        }
+        @Override
+        public Iterable<Request> part(final CharSequence name) {
+            return this.origin.part(name);
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.origin.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
         }
     }
+
 }
