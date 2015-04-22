@@ -42,6 +42,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of = {"origin", "latency" })
 public final class BkTimeable implements Back {
     /**
+     * Threads check interval.
+     */
+    private static final long CHECK_INTERVAL = 100;
+
+    /**
      * Original back.
      */
     private final transient Back origin;
@@ -102,7 +107,7 @@ public final class BkTimeable implements Back {
                 }
             },
             0,
-            100,
+            BkTimeable.CHECK_INTERVAL,
             TimeUnit.MILLISECONDS
         );
     }
