@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -31,6 +32,7 @@ import org.junit.Test;
 
 /**
  * Test case for {@link RqLengthAware}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
@@ -81,4 +83,89 @@ public final class RqLengthAwareTest {
         );
     }
 
+    /**
+     * RqLengthAware can read byte.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void readsByte() throws IOException {
+        final String data = "{test}";
+        final InputStream stream = new RqLengthAware(
+            new RqFake(
+                Arrays.asList(
+                    "GET /test1",
+                    "Host: b.example.com",
+                    "Content-type: text/json"
+                ),
+                data
+            )
+        ).body();
+        MatcherAssert.assertThat(
+            stream.read(),
+            Matchers.equalTo((int) data.getBytes()[0])
+        );
+        MatcherAssert.assertThat(
+            stream.available(),
+            Matchers.equalTo(data.length() - 1)
+        );
+    }
+
+    /**
+     * RqLengthAware can read byte array.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void readsByteArray() throws IOException {
+        final String data = "array";
+        final InputStream stream = new RqLengthAware(
+            new RqFake(
+                Arrays.asList(
+                    "GET /test2",
+                    "Host: c.example.com",
+                    "Content-type: text/csv"
+                ),
+                data
+            )
+        ).body();
+        final byte[] buf = new byte[data.length()];
+        MatcherAssert.assertThat(
+            stream.read(buf),
+            Matchers.equalTo(data.length())
+        );
+        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
+        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+    }
+
+    /**
+     * RqLengthAware can read partial array.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void readsPartialArray() throws IOException {
+        final String data = "hello world";
+        final int len = 3;
+        final InputStream stream = new RqLengthAware(
+            new RqFake(
+                Arrays.asList(
+                    "GET /test3",
+                    "Host: d.example.com",
+                    "Content-type: text/plain; charset=us-ascii"
+                ),
+                data
+            )
+        ).body();
+        final byte[] buf = new byte[len];
+        MatcherAssert.assertThat(
+            stream.read(buf, 0, len),
+            Matchers.equalTo(len)
+        );
+        MatcherAssert.assertThat(
+            buf,
+            Matchers.equalTo(data.substring(0, len).getBytes())
+        );
+        MatcherAssert.assertThat(
+            stream.available(),
+            Matchers.equalTo(data.length() - len)
+        );
+    }
 }
