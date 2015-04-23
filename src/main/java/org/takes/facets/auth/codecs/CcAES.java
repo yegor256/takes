@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth.codecs;
 
-import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
@@ -44,7 +43,6 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.13.8
  */
-@Immutable
 @EqualsAndHashCode(of = { "origin", "secret", "enc", "dec" })
 public final class CcAES implements Codec {
 
