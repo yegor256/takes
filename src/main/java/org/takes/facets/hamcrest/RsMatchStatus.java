@@ -41,10 +41,6 @@ import org.takes.Response;
 public final class RsMatchStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Response head separator value.
-     */
-    private static final String HEAD_SEPARATOR = " ";
-    /**
      * Expected response status code for matcher.
      */
     private final transient String expected;
@@ -77,8 +73,8 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
     public boolean matchesSafely(final Response item) {
         try {
             final String head = item.head().iterator().next();
-            final String[] headParts = head.split(HEAD_SEPARATOR);
-            return this.expected.equals(headParts[1]);
+            final String[] parts = head.split(" ");
+            return this.expected.equals(parts[1]);
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }
