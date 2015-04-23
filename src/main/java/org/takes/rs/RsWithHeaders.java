@@ -86,7 +86,7 @@ public final class RsWithHeaders extends RsWrap {
      * @return RsWithHeader
      */
     private static RsWithHeader wrapHeader(final Response res,
-                                           final String header) {
+            final String header) {
         return new RsWithHeader(res, header);
     }
 }
