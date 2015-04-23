@@ -70,8 +70,12 @@ public final class BkTimeable implements Back {
      * @param msec Execution latency
      */
     public BkTimeable(final Back back, final long msec) {
-        this(back, msec, Executors.newSingleThreadScheduledExecutor());
-        this.start();
+        this(
+            back,
+            msec,
+            Executors.newSingleThreadScheduledExecutor(),
+            new CopyOnWriteArraySet<BkTimeable.ThreadInfo>()
+        );
     }
 
     /**
@@ -79,12 +83,15 @@ public final class BkTimeable implements Back {
      * @param back Original back
      * @param msec Execution latency
      * @param svc Executor service
+     * @param map Threads storage
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public BkTimeable(final Back back, final long msec,
-        final ScheduledExecutorService svc) {
+    BkTimeable(final Back back, final long msec,
+        final ScheduledExecutorService svc,
+        final Set<BkTimeable.ThreadInfo> map) {
         this.origin = back;
         this.latency = msec;
-        this.threads = new CopyOnWriteArraySet<BkTimeable.ThreadInfo>();
+        this.threads = map;
         this.service = svc;
         this.start();
     }
@@ -109,7 +116,7 @@ public final class BkTimeable implements Back {
                         : BkTimeable.this.threads) {
                         if (System.currentTimeMillis() - info.start
                             > BkTimeable.this.latency) {
-                            if (info.thread.isAlive()) {
+                            if (info.thread.isAlive() || info.alive) {
                                 info.thread.interrupt();
                             }
                             BkTimeable.this.threads.remove(info);
@@ -138,11 +145,27 @@ public final class BkTimeable implements Back {
         private final transient long start;
 
         /**
+         * Always alive therad.
+         */
+        private final transient boolean alive;
+
+        /**
          * Ctor.
          */
         ThreadInfo() {
-            this.thread = Thread.currentThread();
-            this.start = System.currentTimeMillis();
+            this(Thread.currentThread(), System.currentTimeMillis(), false);
+        }
+
+        /**
+         * Ctor.
+         * @param thrd Monitoring thread
+         * @param time Start time
+         * @param always If true threads is always alive spite of isAlive()
+         */
+        ThreadInfo(final Thread thrd, final long time, final boolean always) {
+            this.thread = thrd;
+            this.start = time;
+            this.alive = always;
         }
     }
 }

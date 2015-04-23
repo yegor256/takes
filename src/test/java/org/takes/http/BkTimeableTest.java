@@ -25,12 +25,16 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.CountDownLatch;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link BkTimeable}.
@@ -40,49 +44,63 @@ import org.junit.Test;
  */
 public final class BkTimeableTest {
     /**
-     * BkTimeable can stop caller thread.
+     * BkTimeable can store caller thread.
+     * @throws java.io.IOException If some problem inside
+     */
+    @Test
+    public void storesCallerThread() throws IOException {
+        final ScheduledExecutorService executor = Mockito.mock(
+            ScheduledExecutorService.class
+        );
+        final Set<BkTimeable.ThreadInfo> threads =
+            new HashSet<BkTimeable.ThreadInfo>(1);
+        final Back back = new BkTimeable(
+            new Back() {
+                @Override
+                public void accept(final Socket socket) throws IOException {
+                    socket.close();
+                }
+            },
+            1L,
+            executor,
+            threads
+        );
+        back.accept(new Socket());
+        MatcherAssert.assertThat(threads, Matchers.hasSize(1));
+    }
+
+    /**
+     * BkTimeable can stop running thread.
      * @throws java.io.IOException If some problem inside
      * @checkstyle MagicNumberCheck (500 lines)
      */
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
-    public void stopsCallerThread() throws IOException {
-        final CountDownLatch latch = new CountDownLatch(1);
-        final AtomicLong time = new AtomicLong(0);
-        final Back back = new BkTimeable(
-            new Back() {
-                @Override
-                public void accept(final Socket socket) throws IOException {
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            final long start = System.currentTimeMillis();
-                            try {
-                                TimeUnit.MILLISECONDS.sleep(1000);
-                                time.set(System.currentTimeMillis() - start);
-                            } catch (final InterruptedException ipe) {
-                                time.set(System.currentTimeMillis() - start);
-                            }
-                            latch.countDown();
-                        }
-                    } .run();
-                }
-            },
-            200
+    public void stopsRunningThread() throws IOException {
+        final ScheduledExecutorService executor = Mockito.mock(
+            ScheduledExecutorService.class
         );
-        back.accept(new Socket());
-        try {
-            latch.await(2000, TimeUnit.MILLISECONDS);
-            MatcherAssert.assertThat(
-                time.get(),
-                Matchers.is(
-                    Matchers.both(Matchers.greaterThan(100L))
-                        .and(Matchers.lessThan(500L))
-                )
-            );
-        } catch (final InterruptedException exc) {
-            Thread.currentThread().interrupt();
-            throw new IllegalStateException(exc);
-        }
+        final Set<BkTimeable.ThreadInfo> threads =
+            new HashSet<BkTimeable.ThreadInfo>(1);
+        final Thread thread = Mockito.mock(Thread.class);
+        new BkTimeable(
+            new BkBasic(new TkEmpty()),
+            1L,
+            executor,
+            threads
+        );
+        final ArgumentCaptor<Runnable> arg = ArgumentCaptor.forClass(
+            Runnable.class
+        );
+        Mockito.verify(executor).scheduleAtFixedRate(
+            arg.capture(),
+            Mockito.anyLong(),
+            Mockito.anyLong(),
+            Mockito.any(TimeUnit.class)
+        );
+        threads.add(new BkTimeable.ThreadInfo(thread, 1L, true));
+        arg.getValue().run();
+        Mockito.verify(thread).interrupt();
+        MatcherAssert.assertThat(threads, Matchers.hasSize(0));
     }
 }
