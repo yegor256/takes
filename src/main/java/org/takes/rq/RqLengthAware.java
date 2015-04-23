@@ -128,6 +128,21 @@ public final class RqLengthAware extends RqWrap {
             --this.more;
             return this.origin.read();
         }
+
+        @Override
+        public int read(final byte[] buf) throws IOException {
+            final int readed = this.origin.read(buf);
+            this.more -= readed;
+            return readed;
+        }
+
+        @Override
+        public int read(final byte[] buf, final int off,
+            final int len) throws IOException {
+            final int readed  = this.origin.read(buf, off, len);
+            this.more -= readed;
+            return readed;
+        }
     }
 
 }
