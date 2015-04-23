@@ -21,91 +21,85 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
 
-import java.io.IOException;
-import java.util.Locale;
+package org.takes.misc;
+
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
 
 /**
- * HTTP method parsing.
+ * Replacement a nullable T reference with a non-null value.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.13.7
+ * @since 0.14
  */
-public interface RqMethod extends Request {
-
+public interface Opt<T> {
     /**
-     * GET method.
+     * Returns the contained instance.
+     * @return Instance
      */
-    String GET = "GET";
+    T get();
 
     /**
-     * POST method.
+     * Returns true if contains instance.
+     * @return True if present
      */
-    String POST = "POST";
+    boolean has();
 
     /**
-     * PUT method.
-     */
-    String PUT = "PUT";
-
-    /**
-     * DELETE method.
-     */
-    String DELETE = "DELETE";
-
-    /**
-     * HEAD method.
-     */
-    String HEAD = "HEAD";
-
-    /**
-     * OPTIONS method.
-     */
-    String OPTIONS = "OPTIONS";
-
-    /**
-     * PATCH method.
-     */
-    String PATCH = "PATCH";
-
-    /**
-     * Get method.
-     * @return HTTP method
-     * @throws IOException If fails
-     */
-    String method() throws IOException;
-
-    /**
-     * Request decorator, for HTTP method parsing.
+     * Holder for a single element only.
      *
      * <p>The class is immutable and thread-safe.
-     *
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
      * @version $Id$
-     * @since 0.13.7
+     * @since 0.14
      */
-    @EqualsAndHashCode(callSuper = true)
-    final class Base extends RqWrap implements RqMethod {
+    @EqualsAndHashCode(of = "origin")
+    final class Single<T> implements Opt<T> {
+        /**
+         * Origin.
+         */
+        private final transient T origin;
 
         /**
          * Ctor.
-         * @param req Original request
+         * @param orgn Origin
          */
-        public Base(final Request req) {
-            super(req);
+        public Single(final T orgn) {
+            this.origin = orgn;
         }
 
         @Override
-        public String method() throws IOException {
-            final String line = this.head().iterator().next();
-            final String[] parts = line.split(" ", 2);
-            return parts[0].toUpperCase(Locale.ENGLISH);
+        public T get() {
+            return this.origin;
+        }
+
+        @Override
+        public boolean has() {
+            return true;
+        }
+    }
+
+    /**
+     * Empty instance.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @version $Id$
+     * @since 0.14
+     */
+    final class Empty<T> implements Opt<T> {
+        @Override
+        public T get() {
+            throw new UnsupportedOperationException(
+                "there is nothing here, use has() first, to check"
+            );
+        }
+
+        @Override
+        public boolean has() {
+            return false;
         }
     }
 }

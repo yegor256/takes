@@ -53,7 +53,7 @@ public final class RsText extends RsWrap {
      * Ctor.
      * @param body Plain text body
      */
-    public RsText(final String body) {
+    public RsText(final CharSequence body) {
         this(new RsEmpty(), body);
     }
 
@@ -87,7 +87,7 @@ public final class RsText extends RsWrap {
      * @param res Original response
      * @param body HTML body
      */
-    public RsText(final Response res, final String body) {
+    public RsText(final Response res, final CharSequence body) {
         this(new RsWithBody(res, body));
     }
 

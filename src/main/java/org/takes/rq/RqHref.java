@@ -68,15 +68,10 @@ public interface RqHref extends Request {
         }
         @Override
         public Href href() throws IOException {
-            final Iterator<String> host = new RqHeaders(this)
-                .header("host").iterator();
-            if (!host.hasNext()) {
-                throw new IOException("Host header is absent");
-            }
             return new Href(
                 String.format(
                     "http://%s%s",
-                    host.next(),
+                    new RqHeaders(this).header("host").iterator().next(),
                     // @checkstyle MagicNumber (1 line)
                     this.head().iterator().next().split(" ", 3)[1]
                 )
@@ -137,7 +132,7 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final String name) throws IOException {
+        public String single(final CharSequence name) throws IOException {
             final Iterator<String> params = this.origin.href()
                 .param(name).iterator();
             if (!params.hasNext()) {
@@ -157,7 +152,7 @@ public interface RqHref extends Request {
          * @return Value of it
          * @throws IOException If fails
          */
-        public String param(final String name, final String def)
+        public String single(final CharSequence name, final CharSequence def)
             throws IOException {
             final String value;
             final Iterator<String> params = this.origin.href()
@@ -165,7 +160,7 @@ public interface RqHref extends Request {
             if (params.hasNext()) {
                 value = params.next();
             } else {
-                value = def;
+                value = def.toString();
             }
             return value;
         }

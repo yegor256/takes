@@ -49,19 +49,19 @@ public final class FkTypesTest {
         MatcherAssert.assertThat(
             new FkTypes("text/xml", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "*/* ")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkTypes("application/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "image/*")
-            ).hasNext(),
+            ).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
             new FkTypes("*/*", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "text/html")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }
@@ -75,7 +75,7 @@ public final class FkTypesTest {
         MatcherAssert.assertThat(
             new FkTypes("text/xml,text/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), "Accept ", "text/json")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }

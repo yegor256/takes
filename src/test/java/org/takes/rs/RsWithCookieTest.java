@@ -61,4 +61,21 @@ public final class RsWithCookieTest {
         );
     }
 
+    /**
+     * RsWithCookie can reject invalid cookie name.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void rejectsInvalidName() throws IOException {
+        new RsWithCookie(new RsEmpty(), "f oo", "works");
+    }
+
+    /**
+     * RsWithCookie can reject invalid cookie value.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void rejectsInvalidValue() throws IOException {
+        new RsWithCookie(new RsEmpty(), "bar", "wo\"rks");
+    }
 }

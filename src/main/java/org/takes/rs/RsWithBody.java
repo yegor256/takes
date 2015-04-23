@@ -46,7 +46,7 @@ public final class RsWithBody extends RsWrap {
      * Ctor.
      * @param body Body
      */
-    public RsWithBody(final String body) {
+    public RsWithBody(final CharSequence body) {
         this(new RsEmpty(), body);
     }
 
@@ -79,8 +79,8 @@ public final class RsWithBody extends RsWrap {
      * @param res Original response
      * @param body Body
      */
-    public RsWithBody(final Response res, final String body) {
-        this(res, body.getBytes());
+    public RsWithBody(final Response res, final CharSequence body) {
+        this(res, body.toString().getBytes());
     }
 
     /**

@@ -21,34 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.rq;
 
 import java.io.IOException;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link FkMethods}.
+ * Test case for {@link RqLengthAware}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.1
  */
-public final class FkMethodsTest {
+public final class RqLengthAwareTest {
 
     /**
-     * FkMethods can match by method.
+     * RqLengthAware can add length to body.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void addsLengthToBody() throws IOException {
         MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
+            new RqLengthAware(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3",
+                        "Host: www.example.com",
+                        "Content-type: text/plain",
+                        "Content-Length: 2"
+                    ),
+                    "hi"
+                )
+            ).body().available(),
+            Matchers.equalTo(2)
+        );
+    }
+
+    /**
+     * RqLengthAware can add BIG length to body.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addsBigLengthToBody() throws IOException {
+        MatcherAssert.assertThat(
+            new RqLengthAware(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hi-there",
+                        "Host: a.example.com",
+                        "Content-type: text/xml",
+                        "Content-Length: 9223372036854775000"
+                    ),
+                    "HI"
+                )
+            ).body().available(),
+            Matchers.equalTo(2)
         );
     }
 

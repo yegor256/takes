@@ -157,7 +157,7 @@ public final class RsPrint extends RsWrap {
     public void printBody(final OutputStream output) throws IOException {
         final InputStream body = this.body();
         try {
-            while (true) {
+            while (body.available() > 0) {
                 final int data = body.read();
                 if (data < 0) {
                     break;

@@ -23,11 +23,17 @@
  */
 package org.takes.rs;
 
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
  * Response decorator, with an additional cookie.
+ *
+ * The decorator validates cookie name according
+ * @see <a href="http://tools.ietf.org/html/rfc2616#section-2.2">RFC 2616</a>
+ * and cookie value according
+ * @see <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>
  *
  * <p>Use this decorator in order to return a response with a "Set-Cookie"
  * header inside, for example:
@@ -52,13 +58,28 @@ import org.takes.Response;
 public final class RsWithCookie extends RsWrap {
 
     /**
+     * Cookie value validation regexp.
+     * @checkstyle LineLengthCheck (3 lines)
+     */
+    private static final Pattern CVALUE_PTRN = Pattern.compile(
+        "[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*|\"[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*\""
+    );
+
+    /**
+     * Cookie name validation regexp.
+     */
+    private static final Pattern CNAME_PTRN = Pattern.compile(
+        "[\\x20-\\x7E&&[^()<>@,;:\\\"/\\[\\]?={} ]]+"
+    );
+
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      */
-    public RsWithCookie(final String name, final String value,
-        final String... attrs) {
+    public RsWithCookie(final CharSequence name, final CharSequence value,
+        final CharSequence... attrs) {
         this(new RsEmpty(), name, value, attrs);
     }
 
@@ -70,11 +91,17 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @checkstyle ParameterNumberCheck (5 lines)
      */
-    public RsWithCookie(final Response res, final String name,
-        final String value, final String... attrs) {
+    public RsWithCookie(final Response res, final CharSequence name,
+        final CharSequence value, final CharSequence... attrs) {
         super(
             new RsWithHeader(
-                res, "Set-Cookie", RsWithCookie.make(name, value, attrs)
+                res,
+                "Set-Cookie",
+                RsWithCookie.make(
+                    RsWithCookie.checkName(name),
+                    RsWithCookie.checkValue(value),
+                    attrs
+            )
         )
         );
     }
@@ -86,15 +113,48 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
      */
-    private static String make(final String name,
-        final String value, final String... attrs) {
+    private static String make(final CharSequence name,
+        final CharSequence value, final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder(
             String.format("%s=%s", name, value)
         );
-        for (final String attr : attrs) {
+        for (final CharSequence attr : attrs) {
             text.append(';').append(attr);
         }
         return text.toString();
     }
 
+    /**
+     * Checks value according RFC 6265 section 4.1.1.
+     * @param value Cookie value
+     * @return Cookie value
+     */
+    private static CharSequence checkValue(final CharSequence value) {
+        if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Cookie value %s contains invalid characters",
+                    value
+                )
+            );
+        }
+        return value;
+    }
+
+    /**
+     * Checks name according RFC 2616, section 2.2.
+     * @param name Cookie name;
+     * @return Cookie name
+     */
+    private static CharSequence checkName(final CharSequence name) {
+        if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Cookie name %s contains invalid characters",
+                    name
+                )
+            );
+        }
+        return name;
+    }
 }
