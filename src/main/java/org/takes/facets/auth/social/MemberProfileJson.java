@@ -35,7 +35,7 @@ import org.takes.misc.Href;
  *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.15
+ * @since 0.14.4
  */
 public interface MemberProfileJson {
 

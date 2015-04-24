@@ -39,7 +39,7 @@ import org.takes.misc.Href;
  * <p>The class is immutable and thread-safe.
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.11.3
+ * @since 0.14.4
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class LinkedinProfileJson implements MemberProfileJson {

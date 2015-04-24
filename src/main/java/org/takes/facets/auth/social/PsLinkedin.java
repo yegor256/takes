@@ -65,12 +65,13 @@ public final class PsLinkedin implements Pass {
     @Override
     public Iterator<Identity> enter(final Request request)
         throws IOException {
-        // @checkstyle LineLength (6 line)
         return Collections.singleton(
             PsLinkedin.parse(this.luserjson
-                    .fetch(new Href("https://www.linkedin.com/uas/oauth2/accessToken")
+                    .fetch(
+                        new Href("https://www.linkedin.com/uas/oauth2/accessToken")
                             .with("grant_type", "authorization_code")
                             .toString(),
+                        // @checkstyle LineLength (1 line)
                         "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)",
                         new RqHref.Base(request).href()
                 )
