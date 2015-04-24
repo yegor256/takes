@@ -89,13 +89,12 @@ public final class RqLengthAwareTest {
      */
     @Test
     public void readsByte() throws IOException {
-        final String data = "{test}";
+        final String data = "test";
         final InputStream stream = new RqLengthAware(
             new RqFake(
                 Arrays.asList(
                     "GET /test1",
-                    "Host: b.example.com",
-                    "Content-type: text/json"
+                    "Host: b.example.com"
                 ),
                 data
             )
@@ -148,8 +147,7 @@ public final class RqLengthAwareTest {
             new RqFake(
                 Arrays.asList(
                     "GET /test3",
-                    "Host: d.example.com",
-                    "Content-type: text/plain; charset=us-ascii"
+                    "Host: d.example.com"
                 ),
                 data
             )
