@@ -104,7 +104,6 @@ public final class BkTimeable implements Back {
 
     /**
      * Start monitoring.
-     * @checkstyle MagicNumberCheck (25 lines)
      */
     @SuppressWarnings("PMD.DoNotUseThreads")
     private void start() {
@@ -125,6 +124,7 @@ public final class BkTimeable implements Back {
                 }
             },
             0,
+            // @checkstyle MagicNumberCheck (1 line)
             100,
             TimeUnit.MILLISECONDS
         );

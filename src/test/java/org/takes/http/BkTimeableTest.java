@@ -72,7 +72,6 @@ public final class BkTimeableTest {
     /**
      * BkTimeable can stop running thread.
      * @throws java.io.IOException If some problem inside
-     * @checkstyle MagicNumberCheck (500 lines)
      */
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
