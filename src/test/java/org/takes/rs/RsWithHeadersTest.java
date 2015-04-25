@@ -40,6 +40,7 @@ public final class RsWithHeadersTest {
     /**
      * RsWithHeaders can add headers.
      * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (20 lines)
      */
     @Test
     public void addsHeadersToResponse() throws IOException {
@@ -47,8 +48,8 @@ public final class RsWithHeadersTest {
             new RsPrint(
                 new RsWithHeaders(
                     new RsEmpty(),
-                    "Host: www.example.com ",
-                    "Content-Type: text/xml "
+                    "Host: www.example.com",
+                    "Content-Type: text/xml"
                 )
             ).print(),
             Matchers.equalTo(

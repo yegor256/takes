@@ -23,11 +23,7 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -59,25 +55,22 @@ public final class RsWithHeaders extends RsWrap {
      */
     public RsWithHeaders(final Response res,
         final Iterable<? extends CharSequence> headers) {
-        super(
-            new Response() {
-                @Override
-                public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : res.head()) {
-                        head.add(hdr);
-                    }
-                    for (final CharSequence header : headers) {
-                        head.add(header.toString().trim());
-                    }
-                    return head;
-                }
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
-        );
+        super(RsWithHeaders.build(res, headers));
     }
 
+    /**
+     * Build a response.
+     * @param res Original response
+     * @param headers Headers
+     * @return Response with headers
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private static Response build(final Response res,
+        final Iterable<? extends CharSequence> headers) {
+        Response resp = res;
+        for (final CharSequence hdr: headers) {
+            resp = new RsWithHeader(resp, hdr);
+        }
+        return resp;
+    }
 }
