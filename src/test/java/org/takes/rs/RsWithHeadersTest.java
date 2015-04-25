@@ -40,23 +40,24 @@ public final class RsWithHeadersTest {
     /**
      * RsWithHeaders can add headers.
      * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (20 lines)
      */
     @Test
     public void addsHeadersToResponse() throws IOException {
+        final String host = "Host: www.example.com";
+        final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithHeaders(
                     new RsEmpty(),
-                    "Host: www.example.com",
-                    "Content-Type: text/xml"
+                    host,
+                    type
                 )
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "Host: www.example.com",
-                    "Content-Type: text/xml",
+                    host,
+                    type,
                     "",
                     ""
                 )
