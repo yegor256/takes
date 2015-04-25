@@ -47,7 +47,7 @@ public final class HrefTest {
                 .without("b")
                 .with("b", "test")
                 .toString(),
-            Matchers.equalTo("http://example.com?a=8&a=hello&b=test")
+            Matchers.equalTo("http://example.com/?a=8&a=hello&b=test")
         );
     }
 
@@ -70,7 +70,7 @@ public final class HrefTest {
         final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
             new Href(uri).toString(),
-            Matchers.equalTo(uri)
+            Matchers.equalTo("http://a.example.com/")
         );
     }
 

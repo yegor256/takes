@@ -50,7 +50,7 @@ public final class XeGithubLink extends XeWrap {
      * @param app Github application ID
      * @throws IOException If fails
      */
-    public XeGithubLink(final Request req, final String app)
+    public XeGithubLink(final Request req, final CharSequence app)
         throws IOException {
         this(req, app, "takes:github", PsByFlag.class.getSimpleName());
     }
@@ -64,8 +64,8 @@ public final class XeGithubLink extends XeWrap {
      * @throws IOException If fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
-    public XeGithubLink(final Request req, final String app, final String rel,
-        final String flag) throws IOException {
+    public XeGithubLink(final Request req, final CharSequence app,
+        final CharSequence rel, final CharSequence flag) throws IOException {
         super(
             new XeLink(
                 rel,
@@ -75,9 +75,7 @@ public final class XeGithubLink extends XeWrap {
                         "redirect_uri",
                         new RqHref.Base(req).href()
                             .with(flag, PsGithub.class.getSimpleName())
-                            .toString()
                     )
-                    .toString()
         )
         );
     }

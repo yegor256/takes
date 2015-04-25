@@ -56,7 +56,7 @@ public final class RsPrint extends RsWrap {
      * Pattern for all other lines in the head.
      */
     private static final Pattern OTHERS = Pattern.compile(
-        "[a-zA-Z\\-]+:\\p{Print}+"
+        "[a-zA-Z0-9\\-]+:\\p{Print}+"
     );
 
     /**
@@ -157,7 +157,7 @@ public final class RsPrint extends RsWrap {
     public void printBody(final OutputStream output) throws IOException {
         final InputStream body = this.body();
         try {
-            while (true) {
+            while (body.available() > 0) {
                 final int data = body.read();
                 if (data < 0) {
                     break;

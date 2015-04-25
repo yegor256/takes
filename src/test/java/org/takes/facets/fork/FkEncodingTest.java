@@ -49,19 +49,19 @@ public final class FkEncodingTest {
         MatcherAssert.assertThat(
             new FkEncoding("gzip", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,deflate")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkEncoding("", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkEncoding("deflate", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,exi")
-            ).hasNext(),
+            ).has(),
             Matchers.is(false)
         );
     }

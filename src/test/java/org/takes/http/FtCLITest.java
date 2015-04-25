@@ -27,7 +27,6 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ServerSocket;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,7 +55,7 @@ public final class FtCLITest {
                 return false;
             }
         };
-        final int port = FtCLITest.port();
+        final int port = new Ports().allocate();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
@@ -87,21 +86,7 @@ public final class FtCLITest {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-    }
-
-    /**
-     * Reserve port.
-     * @return Port
-     * @throws IOException If fails
-     */
-    private static int port() throws IOException {
-        final ServerSocket socket = new ServerSocket(0);
-        try {
-            socket.setReuseAddress(true);
-            return socket.getLocalPort();
-        } finally {
-            socket.close();
-        }
+        new Ports().release(port);
     }
 
 }

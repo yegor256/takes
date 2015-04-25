@@ -23,10 +23,13 @@
  */
 package org.takes.facets.fallback;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.Take;
+import org.takes.tk.TkFixed;
 
 /**
  * Fallback with a fixed response.
@@ -45,11 +48,21 @@ public final class FbFixed extends FbWrap {
      * @param response Response to return
      */
     public FbFixed(final Response response) {
+        this(new TkFixed(response));
+    }
+
+    /**
+     * Ctor.
+     * @param take Take to use
+     * @since 0.14
+     */
+    public FbFixed(final Take take) {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req) {
-                    return Collections.singleton(response).iterator();
+                public Iterator<Response> route(final RqFallback req)
+                    throws IOException {
+                    return Collections.singleton(take.act(req)).iterator();
                 }
             }
         );

@@ -48,7 +48,7 @@ public final class TkMeasured extends TkWrap {
      * @param take Original take
      */
     public TkMeasured(final Take take) {
-        this(take, "X-Take-Millis");
+        this(take, "X-Takes-Millis");
     }
 
     /**

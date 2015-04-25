@@ -38,8 +38,8 @@ import org.takes.rq.RqWithHeader;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 0.1
  */
 @EqualsAndHashCode(of = { "take", "options" })
 public final class FtCLI implements Front {
@@ -92,9 +92,12 @@ public final class FtCLI implements Front {
             tks = this.take;
         }
         final Front front = new FtBasic(
-            new BkParallel(
-                new BkSafe(new BkBasic(tks)),
-                this.options.threads()
+            new BkTimeable(
+                new BkParallel(
+                    new BkSafe(new BkBasic(tks)),
+                    this.options.threads()
+                ),
+                this.options.maxLatency()
             ),
             this.options.port()
         );

@@ -98,4 +98,48 @@ public final class RqHrefTest {
             Matchers.hasItem("343")
         );
     }
+
+    /**
+     * RqHref.Smart can extract home URI.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void extractsHome() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Smart(
+                new RqHref.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /bye?extra=343",
+                            "Host: ddd.example.com"
+                        ),
+                        ""
+                    )
+                )
+            ).home(),
+            Matchers.hasToString("http://ddd.example.com/")
+        );
+    }
+
+    /**
+     * RqHref.Smart can extract param with default value.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void extractsParamByDefault() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Smart(
+                new RqHref.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /foo?present=343",
+                            "Host: w.example.com"
+                        ),
+                        ""
+                    )
+                )
+            ).single("absent", "def-5"),
+            Matchers.startsWith("def-")
+        );
+    }
 }

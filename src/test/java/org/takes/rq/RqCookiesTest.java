@@ -30,7 +30,8 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RqCookies}.
+ * Test case for {@link RqCookies.Base}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.4
@@ -44,7 +45,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -65,7 +66,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpQueryWithEmptyCookie() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hzzz",
@@ -86,7 +87,7 @@ public final class RqCookiesTest {
     @Test
     public void parsesHttpRequestWithMultipleCookies() throws IOException {
         MatcherAssert.assertThat(
-            new RqCookies(
+            new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
                         "GET /hz09",

@@ -69,6 +69,10 @@ import org.takes.Response;
  *   )
  * )</pre>
  *
+ * <p><strong>Note:</strong> It is highly recommended to use
+ * Saxon as a default XSL transformer. All others, including Apache
+ * Xalan, won't work correctly in most cases.</p>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
@@ -113,34 +117,17 @@ public final class RsXSLT extends RsWrap {
      * @param origin Original body
      * @param resolver Resolver
      * @return Body
+     * @throws IOException If fails
      */
     private static InputStream transform(final InputStream origin,
-        final URIResolver resolver) {
+        final URIResolver resolver) throws IOException {
         try {
             final TransformerFactory factory = TransformerFactory.newInstance();
             factory.setURIResolver(resolver);
             return RsXSLT.transform(factory, origin);
         } catch (final TransformerException ex) {
-            throw new IllegalStateException(ex);
+            throw new IOException(ex);
         }
-    }
-
-    /**
-     * Consume input stream.
-     * @param input Input stream
-     * @return Bytes found
-     * @throws IOException If fails
-     */
-    private static byte[] consume(final InputStream input) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        while (true) {
-            final int data = input.read();
-            if (data < 0) {
-                break;
-            }
-            baos.write(data);
-        }
-        return baos.toByteArray();
     }
 
     /**
@@ -171,6 +158,24 @@ public final class RsXSLT extends RsWrap {
             new StreamResult(new OutputStreamWriter(baos))
         );
         return new ByteArrayInputStream(baos.toByteArray());
+    }
+
+    /**
+     * Consume input stream.
+     * @param input Input stream
+     * @return Bytes found
+     * @throws IOException If fails
+     */
+    private static byte[] consume(final InputStream input) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        while (true) {
+            final int data = input.read();
+            if (data < 0) {
+                break;
+            }
+            baos.write(data);
+        }
+        return baos.toByteArray();
     }
 
     /**

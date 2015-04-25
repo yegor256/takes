@@ -54,7 +54,7 @@ public final class TkVersioned extends TkWrap {
      * @param take Original take
      */
     public TkVersioned(final Take take) {
-        this(take, "X-Take-Version");
+        this(take, "X-Takes-Version");
     }
 
     /**

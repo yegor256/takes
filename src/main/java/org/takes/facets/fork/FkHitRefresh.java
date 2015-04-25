@@ -27,15 +27,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
 /**
@@ -127,18 +126,20 @@ public final class FkHitRefresh implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> header =
             new RqHeaders(req).header("X-Take-HitRefresh").iterator();
-        final Collection<Response> response = new ArrayList<Response>(1);
+        final Opt<Response> resp;
         if (header.hasNext()) {
             if (this.expired()) {
                 this.exec.run();
                 this.touch();
             }
-            response.add(this.take.act(req));
+            resp = new Opt.Single<Response>(this.take.act(req));
+        } else {
+            resp = new Opt.Empty<Response>();
         }
-        return response.iterator();
+        return resp;
     }
 
     /**
