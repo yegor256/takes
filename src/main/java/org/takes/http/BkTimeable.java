@@ -123,9 +123,9 @@ public final class BkTimeable implements Back {
                     }
                 }
             },
-            0,
+            0L,
             // @checkstyle MagicNumberCheck (1 line)
-            100,
+            100L,
             TimeUnit.MILLISECONDS
         );
     }
