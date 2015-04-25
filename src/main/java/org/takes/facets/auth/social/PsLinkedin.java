@@ -47,33 +47,33 @@ import org.takes.rq.RqHref;
  * @since 0.11.3
  * @checkstyle LineLength (500 lines)
  */
-@EqualsAndHashCode(of = { "luserjson" })
+@EqualsAndHashCode(of = { "json" })
 public final class PsLinkedin implements Pass {
     /**
      * Social network member profile in json format.
      */
-    private final transient MemberProfileJson luserjson;
+    private final transient MemberProfileJson json;
 
     /**
      * Ctor.
-     * @param userjson Member profile json
+     * @param jsn Member profile json
      */
-    public PsLinkedin(final MemberProfileJson userjson) {
-        this.luserjson = userjson;
+    public PsLinkedin(final MemberProfileJson jsn) {
+        this.json = jsn;
     }
 
     @Override
     public Iterator<Identity> enter(final Request request)
         throws IOException {
         return Collections.singleton(
-            PsLinkedin.parse(this.luserjson
-                    .fetch(
-                        new Href("https://www.linkedin.com/uas/oauth2/accessToken")
-                            .with("grant_type", "authorization_code")
-                            .toString(),
-                        // @checkstyle LineLength (1 line)
-                        "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)",
-                        new RqHref.Base(request).href()
+            PsLinkedin.parse(
+                this.json.fetch(
+                    new Href("https://www.linkedin.com/uas/oauth2/accessToken")
+                        .with("grant_type", "authorization_code")
+                        .toString(),
+                    // @checkstyle LineLength (1 line)
+                    "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)",
+                    new RqHref.Base(request).href()
                 )
             )
         ).iterator();

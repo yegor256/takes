@@ -61,31 +61,15 @@ public final class PsLinkedinTest {
      */
     @Test
     public void entersSuccessfully() throws IOException {
-        final MemberProfileJson memberprofilejson =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            memberprofilejson.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            "linkedinTestUser.json"
-                        ).getPath()
-                    )
-                ).readObject()
-            );
         MatcherAssert.assertThat(
-            new PsLinkedin(memberprofilejson)
+            new PsLinkedin(this.mockProfileJson("linkedinTestUser.json"))
                 .enter(REQUEST).next().urn(),
             Matchers.is("urn:linkedin:1")
         );
     }
 
     /**
-     * Login fails if authorization code is not provided with the REQUEST.
+     * PsLinkedin fails to login without code provided with the REQUEST.
      * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
@@ -103,92 +87,46 @@ public final class PsLinkedinTest {
     }
 
     /**
-     * Can parse invalid user first name field in json.
+     * PsLinkedin can parse invalid user first name field in json.
      * @throws IOException If some problem inside
      */
     @Test
     public void parsesInvalidFirstNameField() throws IOException {
-        final MemberProfileJson memberprofilejson =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            memberprofilejson.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            "linkedinTestUserInvalidFirstName.json"
-                        ).getPath()
-                    )
-                ).readObject()
-            );
         MatcherAssert.assertThat(
-            new PsLinkedin(memberprofilejson)
-                .enter(REQUEST).next()
-                .properties().get("first_name"),
+            new PsLinkedin(
+                this.mockProfileJson("linkedinTestUserInvalidFirstName.json")
+            ).enter(REQUEST).next().properties().get("first_name"),
             // @checkstyle MultipleStringLiteralsCheck (1 line)
             Matchers.is("?")
         );
     }
 
     /**
-     * Can parse invalid user last name field in json.
+     * PsLinkedin can parse invalid user last name field in json.
      * @throws IOException If some problem inside
      */
     @Test
     public void parsesInvalidLastNameField() throws IOException {
-        final MemberProfileJson memberprofilejson =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            memberprofilejson.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            "linkedinTestUserInvalidLastName.json"
-                        ).getPath()
-                    )
-                ).readObject()
-            );
         MatcherAssert.assertThat(
-            new PsLinkedin(memberprofilejson)
-                .enter(REQUEST).next()
-                .properties().get("last_name"),
+            new PsLinkedin(
+                this.mockProfileJson("linkedinTestUserInvalidLastName.json")
+            ).enter(REQUEST).next()
+            .properties().get("last_name"),
             // @checkstyle MultipleStringLiteralsCheck (1 line)
             Matchers.is("?")
         );
     }
 
     /**
-     * Can parse invalid user ID field in json.
+     * PsLinkedin can parse invalid user ID field in json.
      * @throws IOException If some problem inside
      */
     @Test(expected = ClassCastException.class)
     public void parsesInvalidIdField() throws IOException {
-        final MemberProfileJson memberprofilejson =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            memberprofilejson.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            "linkedinTestUserInvalidId.json"
-                        ).getPath()
-                    )
-                ).readObject()
-            );
         try {
-            new PsLinkedin(memberprofilejson)
-                .enter(REQUEST);
+            new PsLinkedin(
+                this.mockProfileJson("linkedinTestUserInvalidId.json")
+            ).enter(REQUEST);
         } catch (final ClassCastException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
@@ -199,27 +137,11 @@ public final class PsLinkedinTest {
     }
 
     /**
-     * Can exit.
+     * PsLinkedin can exit.
      * @throws IOException If some problem inside
      */
     @Test
     public void exitsSuccessfully() throws IOException {
-        final MemberProfileJson memberprofilejson =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            memberprofilejson.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            "linkedinTestUser.json"
-                        ).getPath()
-                    )
-                ).readObject()
-            );
         final Response response = new RsWithStatus(
             new RsWithType(
                 new RsWithBody("<html>This is test response</html>"),
@@ -228,15 +150,14 @@ public final class PsLinkedinTest {
             HttpURLConnection.HTTP_OK
         );
         MatcherAssert.assertThat(
-            new PsLinkedin(
-                memberprofilejson
-            ).exit(response, Mockito.mock(Identity.class)),
+            new PsLinkedin(this.mockProfileJson("linkedinTestUser.json"))
+                .exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );
     }
 
     /**
-     * Checks PsLinkedin equals method.
+     * PsLinkedin equals method.
      * @throws Exception If some problem inside
      */
     @Test
@@ -244,5 +165,32 @@ public final class PsLinkedinTest {
         EqualsVerifier.forClass(PsLinkedin.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
+    }
+
+    /**
+     * Creates mocked LinkedIn profile json from the test data.
+     * @param testfilename Json file with test data
+     * @return MemberProfileJson parsed
+     * @throws IOException If some problem inside
+     */
+    private MemberProfileJson mockProfileJson(final String testfilename)
+        throws IOException {
+        final MemberProfileJson json =
+            Mockito.mock(MemberProfileJson.class);
+        Mockito.when(
+            json.fetch(
+                Mockito.anyString(), Mockito.anyString(),
+                Mockito.any(Href.class)
+            )
+        ).thenReturn(
+                Json.createReader(
+                    new FileInputStream(
+                        PsLinkedinTest.class.getResource(
+                            testfilename
+                        ).getPath()
+                    )
+                ).readObject()
+            );
+        return json;
     }
 }
