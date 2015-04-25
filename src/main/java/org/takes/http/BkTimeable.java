@@ -29,6 +29,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
@@ -42,6 +43,7 @@ import lombok.EqualsAndHashCode;
  * @since 0.14.2
  */
 @EqualsAndHashCode(of = {"origin", "latency" })
+@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeable implements Back {
 
     /**
@@ -73,7 +75,17 @@ public final class BkTimeable implements Back {
         this(
             back,
             msec,
-            Executors.newSingleThreadScheduledExecutor(),
+            Executors.newSingleThreadScheduledExecutor(
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(final Runnable runnable) {
+                        final Thread thread = new Thread(runnable);
+                        thread.setDaemon(true);
+                        thread.setName(BkTimeable.class.getSimpleName());
+                        return thread;
+                    }
+                }
+            ),
             new CopyOnWriteArraySet<BkTimeable.ThreadInfo>()
         );
     }
@@ -105,7 +117,6 @@ public final class BkTimeable implements Back {
     /**
      * Start monitoring.
      */
-    @SuppressWarnings("PMD.DoNotUseThreads")
     private void start() {
         this.service.scheduleAtFixedRate(
             new Runnable() {
@@ -133,7 +144,6 @@ public final class BkTimeable implements Back {
     /**
      * Thread info.
      */
-    @SuppressWarnings("PMD.DoNotUseThreads")
     public static final class ThreadInfo {
         /**
          * Thread reference.
@@ -143,19 +153,16 @@ public final class BkTimeable implements Back {
          * Start time.
          */
         private final transient long start;
-
         /**
          * Always alive therad.
          */
         private final transient boolean alive;
-
         /**
          * Ctor.
          */
         ThreadInfo() {
             this(Thread.currentThread(), System.currentTimeMillis(), false);
         }
-
         /**
          * Ctor.
          * @param thrd Monitoring thread

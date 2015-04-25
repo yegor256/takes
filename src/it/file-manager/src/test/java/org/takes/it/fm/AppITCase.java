@@ -30,7 +30,6 @@ import com.jcabi.http.wire.VerboseWire;
 import java.net.HttpURLConnection;
 import org.junit.Assume;
 import org.junit.Test;
-import org.hamcrest.Matchers;
 
 /**
  * Test case for {@link App}.
