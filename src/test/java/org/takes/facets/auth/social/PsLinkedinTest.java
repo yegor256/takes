@@ -169,11 +169,11 @@ public final class PsLinkedinTest {
 
     /**
      * Creates mocked LinkedIn profile json from the test data.
-     * @param testfilename Json file with test data
+     * @param filename Json file with test data
      * @return MemberProfileJson parsed
      * @throws IOException If some problem inside
      */
-    private MemberProfileJson mockProfileJson(final String testfilename)
+    private MemberProfileJson mockProfileJson(final String filename)
         throws IOException {
         final MemberProfileJson json =
             Mockito.mock(MemberProfileJson.class);
@@ -186,7 +186,7 @@ public final class PsLinkedinTest {
                 Json.createReader(
                     new FileInputStream(
                         PsLinkedinTest.class.getResource(
-                            testfilename
+                            filename
                         ).getPath()
                     )
                 ).readObject()
