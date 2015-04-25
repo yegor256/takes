@@ -50,6 +50,7 @@ public final class RsWithoutHeader extends RsWrap {
      */
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
+             // @checkstyle AnonInnerLengthCheck (50 lines)
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
@@ -58,11 +59,13 @@ public final class RsWithoutHeader extends RsWrap {
                     );
                     return new Select<String>(
                         res.head(),
-                        new Condition.Not<String>(
-                            new Condition.LowerCase(
-                                new Condition.StartsWith(prefix)
-                            )
-                        )
+                        new Condition<String>() {
+                            @Override
+                            public boolean fits(final String header) {
+                                return !header.toLowerCase(Locale.ENGLISH)
+                                    .startsWith(prefix);
+                            }
+                        }
                     );
                 }
                 @Override
