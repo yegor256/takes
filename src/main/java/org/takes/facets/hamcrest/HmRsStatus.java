@@ -38,7 +38,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.13
  */
-public final class HmStatus extends TypeSafeMatcher<Response> {
+public final class HmRsStatus extends TypeSafeMatcher<Response> {
 
     /**
      * Expected response status code for matcher.
@@ -49,7 +49,7 @@ public final class HmStatus extends TypeSafeMatcher<Response> {
      * Expected input.
      * @param input Is expected result code.
      */
-    public HmStatus(final int input) {
+    public HmRsStatus(final int input) {
         super();
         this.expected = input;
     }
