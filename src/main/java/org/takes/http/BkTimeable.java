@@ -44,7 +44,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(of = {"origin", "latency" })
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class BkTimeable implements Back {
+public final class BkTimeable implements Back, Runnable {
 
     /**
      * Original back.
@@ -114,30 +114,25 @@ public final class BkTimeable implements Back {
         this.origin.accept(socket);
     }
 
+    @Override
+    public void run() {
+        for (final BkTimeable.ThreadInfo info : this.threads) {
+            if (System.currentTimeMillis() - info.start > this.latency) {
+                if (info.thread.isAlive() || info.alive) {
+                    info.thread.interrupt();
+                }
+                this.threads.remove(info);
+            }
+        }
+    }
+
     /**
      * Start monitoring.
      */
     private void start() {
         this.service.scheduleAtFixedRate(
-            new Runnable() {
-                @Override
-                public void run() {
-                    for (final BkTimeable.ThreadInfo info
-                        : BkTimeable.this.threads) {
-                        if (System.currentTimeMillis() - info.start
-                            > BkTimeable.this.latency) {
-                            if (info.thread.isAlive() || info.alive) {
-                                info.thread.interrupt();
-                            }
-                            BkTimeable.this.threads.remove(info);
-                        }
-                    }
-                }
-            },
-            0L,
             // @checkstyle MagicNumberCheck (1 line)
-            100L,
-            TimeUnit.MILLISECONDS
+            this, 0L, 100L, TimeUnit.MILLISECONDS
         );
     }
 
