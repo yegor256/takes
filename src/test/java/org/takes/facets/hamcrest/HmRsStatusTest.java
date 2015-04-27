@@ -49,11 +49,11 @@ public final class HmRsStatusTest {
     public void responseCodeIsEqualToExpected() throws IOException {
         MatcherAssert.assertThat(
             new TkHTML("<html></html>").act(new RqFake()),
-            Matchers.is(new HmRsStatus(HttpURLConnection.HTTP_OK))
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
         );
         MatcherAssert.assertThat(
             new TkEmpty().act(new RqFake()),
-            Matchers.is(new HmRsStatus(HttpURLConnection.HTTP_OK))
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
         );
     }
 
@@ -67,8 +67,8 @@ public final class HmRsStatusTest {
         MatcherAssert.assertThat(
             new TkHTML("<html><body/></html>").act(new RqFake()),
             Matchers.not(
-                Matchers.is(
-                    new HmRsStatus(HttpURLConnection.HTTP_NOT_FOUND)
+                new HmRsStatus(
+                    Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
                 )
             )
         );
