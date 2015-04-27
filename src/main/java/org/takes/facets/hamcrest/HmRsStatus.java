@@ -32,7 +32,7 @@ import org.takes.Response;
 /**
  * Response Status Matcher.
  *
- * <p>This "matcher" tests given response status code
+ * <p>This "matcher" tests given response status code.
  * <p>The class is immutable and thread-safe.
  *
  * @author Erim Erturk (erimerturk@gmail.com)
