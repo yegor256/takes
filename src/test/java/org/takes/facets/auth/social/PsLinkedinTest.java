@@ -24,32 +24,82 @@
 
 package org.takes.facets.auth.social;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import java.io.IOException;
-import org.junit.Ignore;
+import java.util.Iterator;
+import org.apache.commons.lang.RandomStringUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.takes.facets.auth.Identity;
+import org.takes.misc.Href;
+import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link PsLinkedin}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.11.3
+ * @checkstyle MagicNumberCheck (500 lines)
  */
 public final class PsLinkedinTest {
 
     /**
+     * Wire stub server.
+     * @checkstyle VisibilityModifierCheck (3 lines)
+     */
+    @Rule
+    public final WireMockRule wire = new WireMockRule(8089);
+
+    /**
      * PsLinkedin can login.
      * @throws IOException If some problem inside
-     * @todo #12:30min/DEV This class not implemented yet, but has to be.
-     *  Please implement it. Mocked OAuth server is one of the possible
-     *  solutions. In this case, we could use some library like WireMock
-     *  (see http://www.wiremock.org), which allows make stub for web
-     *  service. We'll need to make some changes in PsLinkedin,
-     *  that allow to change API url, and use local stubbed http
-     *  server during unit test.
      */
-    @Ignore
     @Test
     public void logins() throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+        final String code = RandomStringUtils.randomAlphanumeric(10);
+        final String lapp = RandomStringUtils.randomAlphanumeric(10);
+        final String lkey = RandomStringUtils.randomAlphanumeric(10);
+        final String identifier = RandomStringUtils.randomAlphanumeric(10);
+        WireMock.stubFor(
+            WireMock.post(WireMock.urlMatching("/linkedin/token.*"))
+                .withHeader("Accept", WireMock.equalTo("application/xml"))
+                .willReturn(
+                    WireMock.aResponse()
+                        .withStatus(200)
+                        .withBody(
+                            String.format(
+                                "{\"access_token\":\"%s\"}",
+                                RandomStringUtils.randomAlphanumeric(10)
+                            )
+                        )
+                )
+        );
+        WireMock.stubFor(
+            WireMock.get(WireMock.urlMatching("/linkedin/api.*"))
+                .willReturn(
+                    WireMock.aResponse()
+                        .withStatus(200)
+                        .withBody(String.format("{\"id\":\"%s\"}", identifier))
+                )
+        );
+        final Iterator<Identity> identity =
+            new PsLinkedin(
+                new Href("http://localhost:8089/linkedin/token"),
+                new Href("http://localhost:8089/linkedin/api"),
+                lapp,
+                lkey
+            ).enter(
+                new RqFake(
+                    "GET",
+                    String.format("?code=%s", code)
+                )
+            );
+        MatcherAssert.assertThat(
+            identity.next().urn(),
+            CoreMatchers.equalTo(String.format("urn:linkedin:%s", identifier))
+        );
     }
 }
