@@ -33,12 +33,12 @@ import org.takes.tk.TkEmpty;
 import org.takes.tk.TkHTML;
 
 /**
- * Test case for {@link RsMatchStatus}.
+ * Test case for {@link HmStatus}.
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
  * @since 0.13
  */
-public final class RsMatchStatusTest {
+public final class HmStatusTest {
 
     /**
      * Happy path tester.
@@ -49,11 +49,11 @@ public final class RsMatchStatusTest {
     public void responseCodeIsEqualToExpected() throws IOException {
         MatcherAssert.assertThat(
             new TkHTML("<html></html>").act(new RqFake()),
-            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
+            Matchers.is(new HmStatus(HttpURLConnection.HTTP_OK))
         );
         MatcherAssert.assertThat(
             new TkEmpty().act(new RqFake()),
-            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
+            Matchers.is(new HmStatus(HttpURLConnection.HTTP_OK))
         );
     }
 
@@ -68,7 +68,7 @@ public final class RsMatchStatusTest {
             new TkHTML("<html><body/></html>").act(new RqFake()),
             Matchers.not(
                 Matchers.is(
-                    new RsMatchStatus(HttpURLConnection.HTTP_NOT_FOUND)
+                    new HmStatus(HttpURLConnection.HTTP_NOT_FOUND)
                 )
             )
         );

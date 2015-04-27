@@ -38,20 +38,20 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.13
  */
-public final class RsMatchStatus extends TypeSafeMatcher<Response> {
+public final class HmStatus extends TypeSafeMatcher<Response> {
 
     /**
      * Expected response status code for matcher.
      */
-    private final transient String expected;
+    private final transient int expected;
 
     /**
      * Expected input.
      * @param input Is expected result code.
      */
-    public RsMatchStatus(final Integer input) {
+    public HmStatus(final int input) {
         super();
-        this.expected = String.valueOf(input);
+        this.expected = input;
     }
 
     /**
@@ -74,7 +74,7 @@ public final class RsMatchStatus extends TypeSafeMatcher<Response> {
         try {
             final String head = item.head().iterator().next();
             final String[] parts = head.split(" ");
-            return this.expected.equals(parts[1]);
+            return this.expected == Integer.parseInt(parts[1]);
         } catch (final IOException exception) {
             throw new IllegalStateException(exception);
         }
