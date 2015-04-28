@@ -24,7 +24,6 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -32,6 +31,7 @@ import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
 /**
@@ -51,11 +51,10 @@ import org.takes.rq.RqHeaders;
  * in any case.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.10
  * @see org.takes.facets.fork.RsFork
+ * @since 0.10
  */
 @EqualsAndHashCode(of = { "encoding", "origin" })
 public final class FkEncoding implements Fork {
@@ -81,12 +80,12 @@ public final class FkEncoding implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> headers =
             new RqHeaders(req).header("Accept-Encoding").iterator();
-        final Collection<Response> list = new ArrayList<Response>(1);
+        final Opt<Response> resp;
         if (this.encoding.isEmpty()) {
-            list.add(this.origin);
+            resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
                 headers.next().trim()
@@ -94,10 +93,14 @@ public final class FkEncoding implements Fork {
                     .split("\\s*,\\s*")
             );
             if (items.contains(this.encoding)) {
-                list.add(this.origin);
+                resp = new Opt.Single<Response>(this.origin);
+            } else {
+                resp = new Opt.Empty<Response>();
             }
+        } else {
+            resp = new Opt.Empty<Response>();
         }
-        return list.iterator();
+        return resp;
     }
 
 }

@@ -138,4 +138,18 @@ final class Options {
         return threads;
     }
 
+    /**
+     * Get the max latency in milliseconds.
+     * @return Latency
+     */
+    public long maxLatency() {
+        final String value = this.map.get("max-latency");
+        final long msec;
+        if (value == null) {
+            msec = Long.MAX_VALUE;
+        } else {
+            msec = Long.parseLong(value);
+        }
+        return msec;
+    }
 }

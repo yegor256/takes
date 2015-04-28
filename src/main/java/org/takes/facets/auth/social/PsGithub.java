@@ -147,7 +147,7 @@ public final class PsGithub implements Pass {
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
         // @checkstyle MultipleStringLiteralsCheck (1 line)
-        props.put("login", json.getString("login", "?"));
+        props.put("login", json.getString("login", "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new Identity.Simple(
             String.format("urn:github:%d", json.getInt("id")), props

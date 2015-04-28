@@ -47,7 +47,7 @@ public final class FkMethodsTest {
         MatcherAssert.assertThat(
             new FkMethods("PUT,GET", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
-            ).hasNext(),
+            ).has(),
             Matchers.is(true)
         );
     }

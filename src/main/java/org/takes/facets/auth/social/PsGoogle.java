@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -49,7 +51,7 @@ import org.takes.rq.RqHref;
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode(of = { "app", "key", "redir" })
 public final class PsGoogle implements Pass {
 
     /**
@@ -63,13 +65,21 @@ public final class PsGoogle implements Pass {
     private final transient String key;
 
     /**
+     * Redirect URI.
+     */
+    private final transient String redir;
+
+    /**
      * Ctor.
      * @param gapp Google app
      * @param gkey Google key
+     * @param uri Redirect URI (exactly as registered in Google console)
      */
-    public PsGoogle(final String gapp, final String gkey) {
+    public PsGoogle(final String gapp, final String gkey,
+        final String uri) {
         this.app = gapp;
         this.key = gkey;
+        this.redir = uri;
     }
 
     @Override
@@ -78,10 +88,12 @@ public final class PsGoogle implements Pass {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
-            throw new IllegalArgumentException("code is not provided");
+            throw new IllegalArgumentException(
+                "code is not provided by Google, probably some mistake"
+            );
         }
         return Collections.singleton(
-            PsGoogle.fetch(this.token(href.toString(), code.next()))
+            PsGoogle.fetch(this.token(code.next()))
         ).iterator();
     }
 
@@ -112,17 +124,15 @@ public final class PsGoogle implements Pass {
 
     /**
      * Retrieve Google access token.
-     * @param home Home of this page
      * @param code Google "authorization code"
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final String home, final String code)
-        throws IOException {
+    private String token(final String code) throws IOException {
         return new JdkRequest("https://accounts.google.com/o/oauth2/token")
             .body()
             .formParam("client_id", this.app)
-            .formParam("redirect_uri", home)
+            .formParam("redirect_uri", this.redir)
             .formParam("client_secret", this.key)
             .formParam("grant_type", "authorization_code")
             .formParam("code", code)
@@ -142,9 +152,13 @@ public final class PsGoogle implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(json.size());
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        props.put("picture", json.getString("picture", "#"));
+        props.put("name", json.getString("name", "unknown"));
         return new Identity.Simple(
-            String.format("urn:google:%s", json.getString("id")),
-            Collections.<String, String>emptyMap()
+            String.format("urn:google:%s", json.getString("id")), props
         );
     }
 
