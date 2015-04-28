@@ -47,6 +47,6 @@ public interface MemberProfileJson {
      * @return Profile json data found in social network
      * @throws IOException If fails
      */
-    JsonObject fetch(final String tokenurl, final String socialurl,
-                            final Href home) throws IOException;
+    JsonObject fetch(String tokenurl, String socialurl,
+        final Href home) throws IOException;
 }

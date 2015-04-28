@@ -75,7 +75,7 @@ public final class PsLinkedinTest {
     @Test(expected = IllegalArgumentException.class)
     public void loginFailsNoCode() throws IOException {
         try {
-            new PsLinkedin(new LinkedinProfileJson("LinkedIn", "key"))
+            new PsLinkedin(new LinkedinProfile("LinkedIn", "key"))
               .enter(new RqFake("POST", "/?someCode=codeIsNotProvided"));
         } catch (final IllegalArgumentException ex) {
             MatcherAssert.assertThat(

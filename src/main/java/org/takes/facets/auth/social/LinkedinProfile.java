@@ -42,7 +42,7 @@ import org.takes.misc.Href;
  * @since 0.14.4
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class LinkedinProfileJson implements MemberProfileJson {
+final class LinkedinProfile implements MemberProfileJson {
     /**
      * App name.
      */
@@ -58,23 +58,23 @@ public final class LinkedinProfileJson implements MemberProfileJson {
      * @param sapp Social network app
      * @param skey Social network key
      */
-    public LinkedinProfileJson(final String sapp, final String skey) {
+    public LinkedinProfile(final String sapp, final String skey) {
         this.app = sapp;
         this.key = skey;
     }
 
     @Override
-    public JsonObject fetch(final String tokenurl, final String socialurl,
-                            final Href home) throws IOException {
+    public JsonObject fetch(final String token, final String social,
+        final Href home) throws IOException {
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         final Iterator<String> code = home.param("code").iterator();
         if (!code.hasNext()) {
             throw new IllegalArgumentException("code is not provided");
         }
-        return new JdkRequest(new Href(socialurl).with("format", "json")
+        return new JdkRequest(new Href(social).with("format", "json")
             .with(
                 "oauth2_access_token",
-                this.token(tokenurl, home.toString(), code.next())
+                this.token(token, home.toString(), code.next())
             ).toString()
         ).header("accept", "application/json")
             .fetch().as(RestResponse.class)
@@ -84,16 +84,15 @@ public final class LinkedinProfileJson implements MemberProfileJson {
 
     /**
      * Retrieves social network access token.
-     * @param tokenurl The token URL
+     * @param url The token URL
      * @param home Home of this page
      * @param code Social network "authorization code"
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final String tokenurl, final String home,
-                         final String code)
-        throws IOException {
-        final String uri = new Href(tokenurl)
+    private String token(final String url, final String home,
+        final String code) throws IOException {
+        final String uri = new Href(url)
             .with("client_id", this.app)
             .with("redirect_uri", home)
             .with("client_secret", this.key)
