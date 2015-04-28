@@ -172,6 +172,7 @@
                                     <arguments>
                                         <argument>--port=${takes.port}</argument>
                                         <argument>--daemon=yes</argument>
+                                        <argument>--lifetime=3000</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
