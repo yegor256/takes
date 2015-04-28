@@ -27,9 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -155,15 +152,9 @@ public final class RsWithBody extends RsWrap {
      */
     private static Iterable<String> append(
         final Response res, final int length) throws IOException {
-        final Iterator<String> itr = res.head().iterator();
-        final List<String> headerAttrs = new LinkedList<String>();
-        while (itr.hasNext()) {
-            headerAttrs.add(itr.next());
-        }
-        headerAttrs.add(
-            String.format("Content-Length:%s", length)
-        );
-        return headerAttrs;
+        return new RsWithHeader(
+            res, String.format("Content-Length:%s", length)
+        ).head();
     }
 
 }
