@@ -175,6 +175,9 @@ public final class PsLinkedinTest {
      */
     private MemberProfileJson mockProfileJson(final String filename)
         throws IOException {
+        final FileInputStream fis = new FileInputStream(
+            PsLinkedinTest.class.getResource(filename).getPath()
+        );
         final MemberProfileJson json =
             Mockito.mock(MemberProfileJson.class);
         Mockito.when(
@@ -182,15 +185,7 @@ public final class PsLinkedinTest {
                 Mockito.anyString(), Mockito.anyString(),
                 Mockito.any(Href.class)
             )
-        ).thenReturn(
-                Json.createReader(
-                    new FileInputStream(
-                        PsLinkedinTest.class.getResource(
-                            filename
-                        ).getPath()
-                    )
-                ).readObject()
-            );
+        ).thenReturn(Json.createReader(fis).readObject());
         return json;
     }
 }
