@@ -119,7 +119,7 @@ public interface RqCookies extends Request {
             final ConcurrentMap<String, String> map =
                 new ConcurrentHashMap<String, String>(0);
             final Iterable<String> values =
-                new RqHeaders(this).header("Cookie");
+                new RqHeaders.Base(this).header("Cookie");
             for (final String value : values) {
                 for (final String pair : value.split(";")) {
                     final String[] parts = pair.split("=", 2);
