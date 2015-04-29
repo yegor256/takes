@@ -21,49 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
 
-import com.google.common.base.Joiner;
-import java.io.ByteArrayInputStream;
+package org.takes.facets.auth.social;
+
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.takes.Request;
 
 /**
- * Test case for {@link RqLive}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link PsTwitter}.
+ * @author Prasath Premkumar (popprem@gmail.com)
  * @version $Id$
- * @since 0.9
+ * @since 1.0
  */
-public final class RqLiveTest {
+public final class PsTwitterTest {
 
     /**
-     * RqLive can build a request.
-     * @throws IOException If some problem inside
+     * Twitter authorization process.
+     * @throws IOException If error occurs in the process
+     * @todo #11:30min/DEV Test to be implemented for PsTwitter
+     *  using a oauth mock library (eg:wiremock). Need to modify
+     *  PsTwitter to accept url from configurations, so that url
+     *  can be changed for test and real env accordingly.
+     *  Response to be stubbed for both token and verify_credentials
+     *  calls and assertions to be performed for the values returned.
      */
+    @Ignore
     @Test
-    public void buildsHttpRequest() throws IOException {
-        final Request req = new RqLive(
-            new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
-                    "GET / HTTP/1.1",
-                    "Host:e",
-                    "Content-Length: 5",
-                    "",
-                    "hello"
-                ).getBytes()
-            )
-        );
-        MatcherAssert.assertThat(
-            new RqHeaders.Base(req).header("host"),
-            Matchers.hasItem("e")
-        );
-        MatcherAssert.assertThat(
-            new RqPrint(req).printBody(),
-            Matchers.endsWith("ello")
-        );
+    public void authorizes() throws IOException {
+        throw new UnsupportedOperationException("not implemented yet");
     }
-
 }

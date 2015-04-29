@@ -71,7 +71,7 @@ public interface RqHref extends Request {
             return new Href(
                 String.format(
                     "http://%s%s",
-                    new RqHeaders(this).header("host").iterator().next(),
+                    new RqHeaders.Base(this).header("host").iterator().next(),
                     // @checkstyle MagicNumber (1 line)
                     this.head().iterator().next().split(" ", 3)[1]
                 )
@@ -122,7 +122,7 @@ public interface RqHref extends Request {
             return new Href(
                 String.format(
                     "http://%s/",
-                    new RqHeaders(this).header("Host").iterator().next()
+                    new RqHeaders.Base(this).header("Host").iterator().next()
                 )
             );
         }

@@ -101,14 +101,13 @@ public final class FtCLI implements Front {
             ),
             this.options.port()
         );
-        final Exit ext = this.exit(exit);
         if (this.options.isDaemon()) {
             final Thread thread = new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            front.start(ext);
+                            front.start(FtCLI.this.exit(exit));
                         } catch (final IOException ex) {
                             throw new IllegalStateException(ex);
                         }
@@ -118,7 +117,7 @@ public final class FtCLI implements Front {
             thread.setDaemon(true);
             thread.start();
         } else {
-            front.start(ext);
+            front.start(this.exit(exit));
         }
     }
 
