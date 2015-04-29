@@ -70,13 +70,10 @@ public final class TkConsumesTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(response).print(),
-            Matchers.equalTo(
+            Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    "Content-Type: application/json",
-                    "",
-                    ""
+                    "Content-Type: application/json"
                 )
             )
         );

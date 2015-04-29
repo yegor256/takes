@@ -43,42 +43,88 @@ import org.takes.rs.RsEmpty;
 public final class FkContentTypeTest {
 
     /**
-     * FkContentType can match by Content-Type header.
+     * Content-Type header.
+     */
+    private static final String CONTENT_TYPE = "Content-Type";
+
+    /**
+     * FkContentType can match by Content-Type header with any of types.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesByContentTypeHeader() throws IOException {
-        final String contenttype = "Content-Type";
+    public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("text/xml", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), contenttype, "*/* ")
+                new RqWithHeader(new RqFake(), CONTENT_TYPE, "*/* ")
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    /**
+     * FkContentType can match by Content-Type header with different types.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesDifferentTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
                 "application/json charset=utf-8", new RsEmpty()
             ).route(
-                new RqWithHeader(new RqFake(), contenttype, "image/*")
+                new RqWithHeader(new RqFake(), CONTENT_TYPE, "images/*")
             ).has(),
             Matchers.is(false)
         );
+    }
+
+    /**
+     * FkContentType can match by Content-Type header with identical types.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
                 "text/html charset=iso-8859-1", new RsEmpty()
             ).route(
                 new RqWithHeader(
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    new RqFake(), contenttype, "text/html charset=iso-8859-1"
+                    new RqFake(), CONTENT_TYPE, "text/html charset=iso-8859-1"
                 )
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    /**
+     * FkContentType can match by Content-Type header with empty type.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("*/*", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), contenttype, "")
+                new RqWithHeader(new RqFake(), CONTENT_TYPE, "")
             ).has(),
             Matchers.is(true)
+        );
+    }
+
+    /**
+     * FkContentType can match by Content-Type header with different encodings.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesDifferentEncodingsTypes() throws IOException {
+        MatcherAssert.assertThat(
+            new FkContentType(
+                "text/html charset=iso-8859-1", new RsEmpty()
+            ).route(
+                new RqWithHeader(
+                    new RqFake(), CONTENT_TYPE, "text/html charset=utf8"
+                )
+            ).has(),
+            Matchers.is(false)
         );
     }
 
