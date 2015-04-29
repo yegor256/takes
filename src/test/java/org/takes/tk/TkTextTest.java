@@ -52,6 +52,7 @@ public final class TkTextTest {
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
                     "",
                     body
