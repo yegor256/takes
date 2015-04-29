@@ -41,7 +41,6 @@ import org.takes.tk.TkHTML;
 public final class HmRsStatusTest {
 
     /**
-     * Happy path tester.
      * HmRsStatus can test status HTTP_OK.
      * @throws IOException If some problem inside
      */
@@ -58,8 +57,7 @@ public final class HmRsStatusTest {
     }
 
     /**
-     * Fail path tester.
-     * HmRsStatus can test status HTTP_NOT_FOUND
+     * HmRsStatus can test status HTTP_NOT_FOUND.
      * @throws IOException If some problem inside
      */
     @Test
