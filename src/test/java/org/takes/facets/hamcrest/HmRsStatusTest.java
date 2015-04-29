@@ -42,11 +42,11 @@ public final class HmRsStatusTest {
 
     /**
      * Happy path tester.
-     * Should test response status code equal to expected code.
+     * HmRsStatus can test status HTTP_OK.
      * @throws IOException If some problem inside
      */
     @Test
-    public void responseCodeIsEqualToExpected() throws IOException {
+    public void testsStatusOK() throws IOException {
         MatcherAssert.assertThat(
             new TkHTML("<html></html>").act(new RqFake()),
             new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
@@ -59,11 +59,11 @@ public final class HmRsStatusTest {
 
     /**
      * Fail path tester.
-     * Should test expected code not equal case
+     * HmRsStatus can test status HTTP_NOT_FOUND
      * @throws IOException If some problem inside
      */
     @Test
-    public void responseCodeIsNotEqualToExpected() throws IOException {
+    public void testsStatusNotFound() throws IOException {
         MatcherAssert.assertThat(
             new TkHTML("<html><body/></html>").act(new RqFake()),
             Matchers.not(

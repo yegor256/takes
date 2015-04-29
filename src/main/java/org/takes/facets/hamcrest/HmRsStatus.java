@@ -44,15 +44,15 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
     /**
      * Expected response status code matcher.
      */
-    private final transient Matcher<? extends Integer> expected;
+    private final transient Matcher<? extends Integer> matcher;
 
     /**
      * Expected matcher.
-     * @param matcher Is expected result code matcher.
+     * @param mtchr Is expected result code matcher.
      */
-    public HmRsStatus(final Matcher<? extends Integer> matcher) {
+    public HmRsStatus(final Matcher<? extends Integer> mtchr) {
         super();
-        this.expected = matcher;
+        this.matcher = mtchr;
     }
 
     /**
@@ -61,7 +61,7 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
      */
     @Override
     public void describeTo(final Description description) {
-        this.expected.describeTo(description);
+        this.matcher.describeTo(description);
     }
 
     /**
@@ -74,9 +74,9 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
         try {
             final String head = item.head().iterator().next();
             final String[] parts = head.split(" ");
-            return this.expected.matches(Integer.parseInt(parts[1]));
-        } catch (final IOException exception) {
-            throw new IllegalStateException(exception);
+            return this.matcher.matches(Integer.parseInt(parts[1]));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
         }
     }
 
