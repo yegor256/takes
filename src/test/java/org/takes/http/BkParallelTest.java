@@ -30,6 +30,8 @@ package org.takes.http;
  * @version $Id$
  * @since 0.15.2
  * @todo #220:30min/DEV This unit test not implemented but has to be.
+ *  You should mock Executor service and verify execute() calls.
+ *  But feel free to try another way.
  */
 public class BkParallelTest {
 }

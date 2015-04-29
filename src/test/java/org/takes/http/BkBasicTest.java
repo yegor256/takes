@@ -44,7 +44,7 @@ import org.takes.tk.TkText;
 public final class BkBasicTest {
     /**
      * BkBasic can handle socket data.
-     * @throws java.io.IOException If some problem inside
+     * @throws IOException If some problem inside
      */
     @Test
     public void handlesSocket() throws IOException {
