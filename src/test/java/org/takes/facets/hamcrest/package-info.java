@@ -21,35 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link FkMethods}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Matcher, tests.
+ *
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.13
  */
-public final class FkMethodsTest {
-
-    /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
-        );
-    }
-
-}
+package org.takes.facets.hamcrest;

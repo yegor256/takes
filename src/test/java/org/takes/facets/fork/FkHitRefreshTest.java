@@ -69,7 +69,7 @@ public final class FkHitRefreshTest {
         TimeUnit.SECONDS.sleep(2L);
         FileUtils.touch(new File(dir, "hey.txt"));
         MatcherAssert.assertThat(
-            fork.route(req).hasNext(),
+            fork.route(req).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(done.get(), Matchers.is(true));
@@ -85,7 +85,7 @@ public final class FkHitRefreshTest {
         MatcherAssert.assertThat(
             new FkHitRefresh(
                 dir, "", new TkEmpty()
-            ).route(new RqFake()).hasNext(),
+            ).route(new RqFake()).has(),
             Matchers.is(false)
         );
     }

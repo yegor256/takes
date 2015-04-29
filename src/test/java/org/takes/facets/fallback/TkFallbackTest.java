@@ -24,12 +24,15 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.Iterator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -40,8 +43,10 @@ import org.takes.tk.TkFailure;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.9.6
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkFallbackTest {
+
     /**
      * TkFallback can fall back.
      * @throws IOException If some problem inside
@@ -61,9 +66,43 @@ public final class TkFallbackTest {
                             ).iterator();
                         }
                     }
-                ).act(new RqFake("GET"))
+                ).act(new RqFake())
             ).printBody(),
             Matchers.equalTo(err)
         );
     }
+
+    /**
+     * TkFallback can fall back.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void fallsBackInsideResponse() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkFallback(
+                    new Take() {
+                        @Override
+                        public Response act(final Request req) {
+                            return new Response() {
+                                @Override
+                                public Iterable<String> head() {
+                                    throw new UnsupportedOperationException("");
+                                }
+                                @Override
+                                public InputStream body() {
+                                    throw new IllegalArgumentException(
+                                        "here we fail"
+                                    );
+                                }
+                            };
+                        }
+                    },
+                    new FbFixed(new RsText("caught here!"))
+                ).act(new RqFake())
+            ).printBody(),
+            Matchers.startsWith("caught")
+        );
+    }
+
 }

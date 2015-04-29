@@ -21,66 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
-import org.takes.Take;
-import org.takes.facets.auth.Identity;
-import org.takes.facets.auth.RqAuth;
-import org.takes.misc.Opt;
 
 /**
- * Fork if user is logged in now.
+ * Response Status Matcher.
  *
- * <p>Use this class in combination with {@link TkFork},
- * for example:
- *
- * <pre> Take take = new TkFork(
- *   new FkRegex(
- *     "/",
- *     new TkFork(
- *       new FkAnonymous(new TkHome()),
- *       new FkAuthenticated(new TkAccount())
- *     )
- *   )
- * );</pre>
- *
+ * <p>This "matcher" tests given response status code
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.9
- * @see TkFork
- * @see TkRegex
+ * @since 0.13
  */
-@EqualsAndHashCode(of = "take")
-public final class FkAuthenticated implements Fork {
+public final class HmRsStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Take.
+     * Expected response status code for matcher.
      */
-    private final transient Take take;
+    private final transient int expected;
 
     /**
-     * Ctor.
-     * @param tke Target
+     * Expected input.
+     * @param input Is expected result code.
      */
-    public FkAuthenticated(final Take tke) {
-        this.take = tke;
+    public HmRsStatus(final int input) {
+        super();
+        this.expected = input;
     }
 
+    /**
+     * Fail description.
+     * @param description Fail result description.
+     */
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
-        final Identity identity = new RqAuth(req).identity();
-        final Opt<Response> resp;
-        if (identity.equals(Identity.ANONYMOUS)) {
-            resp = new Opt.Empty<Response>();
-        } else {
-            resp = new Opt.Single<Response>(this.take.act(req));
-        }
-        return resp;
+    public void describeTo(final Description description) {
+        description.appendText("Response Status same as: ")
+            .appendValue(this.expected);
     }
+
+    /**
+     * Type safe matcher.
+     * @param item Is tested element
+     * @return True when expected type matched.
+     */
+    @Override
+    public boolean matchesSafely(final Response item) {
+        try {
+            final String head = item.head().iterator().next();
+            final String[] parts = head.split(" ");
+            return this.expected == Integer.parseInt(parts[1]);
+        } catch (final IOException exception) {
+            throw new IllegalStateException(exception);
+        }
+    }
+
 }

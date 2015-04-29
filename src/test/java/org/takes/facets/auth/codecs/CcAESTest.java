@@ -21,35 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import javax.crypto.KeyGenerator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
+import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link FkMethods}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link CcAES}.
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.13.8
  */
-public final class FkMethodsTest {
+public final class CcAESTest {
 
     /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
+     * CcAES can encode and decode.
+     * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void encodesAndDecodes() throws Exception {
+        final int length = 128;
+        final KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(length);
+        final byte[] key = generator.generateKey().getEncoded();
+        final String plain = "This is a test!!@@**";
+        final Codec codec = new CcAES(
+            new Codec() {
+                @Override
+                public Identity decode(final byte[] bytes) throws IOException {
+                    return new Identity.Simple(new String(bytes));
+                }
+                @Override
+                public byte[] encode(final Identity identity)
+                    throws IOException {
+                    return identity.urn().getBytes();
+                }
+            },
+            key
+        );
         MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
+            codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
+            Matchers.equalTo(plain)
         );
     }
-
 }

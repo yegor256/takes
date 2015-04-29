@@ -24,6 +24,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -35,6 +36,15 @@ import org.takes.facets.auth.Identity;
  * @since 0.11.2
  */
 public final class CcStrict implements Codec {
+
+    /**
+     * URN matching pattern.
+     */
+    private static final Pattern PTN = Pattern.compile(
+        // @checkstyle LineLength (1 line)
+        "^(?i)^urn(?-i):[a-zA-Z0-9]([\\-a-zA-Z0-9]{1,31})(:([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)+(\\?\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?(&\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?)*)?\\*?$"
+    );
+
     /**
      * Original codec.
      */
@@ -64,12 +74,16 @@ public final class CcStrict implements Codec {
      * @return Identity
      */
     private static Identity applyRules(final Identity identity) {
-        if (identity.urn().isEmpty()) {
-            throw new DecodingException("urn is empty");
-        }
-        // @checkstyle LineLength (1 line)
-        if (!identity.urn().matches("^(?i)^urn(?-i):[a-zA-Z0-9]([\\-a-zA-Z0-9]{1,31})(:([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)+(\\?\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?(&\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?)*)?\\*?$")) {
-            throw new DecodingException("urn isn't valid");
+        if (!identity.equals(Identity.ANONYMOUS)) {
+            final String urn = identity.urn();
+            if (urn.isEmpty()) {
+                throw new DecodingException("urn is empty");
+            }
+            if (!CcStrict.PTN.matcher(urn).matches()) {
+                throw new DecodingException(
+                    String.format("urn isn't valid: \"%s\"", urn)
+                );
+            }
         }
         return identity;
     }

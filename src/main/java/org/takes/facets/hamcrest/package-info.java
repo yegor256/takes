@@ -21,35 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link FkMethods}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Matchers.
+ *
+ * <p>This package contains Hamcrest matchers for all key interfaces
+ * in the framework. Use them as in this example:
+ *
+ * <pre> public class FooTest {
+ *   &#64;Test
+ *   public void returnsOK() {
+ *     final Response response = new TkIndex().act(new RqFake());
+ *     MatcherAssert.assertThat(
+ *       response,
+ *       new HmStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+ *     );
+ *   }
+ * }</pre>
+ *
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.13
  */
-public final class FkMethodsTest {
-
-    /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
-        );
-    }
-
-}
+package org.takes.facets.hamcrest;

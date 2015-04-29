@@ -24,15 +24,14 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rq.RqMethod;
 
 /**
@@ -86,13 +85,15 @@ public final class FkMethods implements Fork {
     }
 
     @Override
-    public Iterator<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws IOException {
         final String mtd = new RqMethod.Base(req).method();
-        final Collection<Response> list = new ArrayList<Response>(1);
+        final Opt<Response> resp;
         if (this.methods.contains(mtd)) {
-            list.add(this.take.act(req));
+            resp = new Opt.Single<Response>(this.take.act(req));
+        } else {
+            resp = new Opt.Empty<Response>();
         }
-        return list.iterator();
+        return resp;
     }
 
 }

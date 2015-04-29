@@ -21,34 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.facets.hamcrest;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
+import org.takes.tk.TkHTML;
 
 /**
- * Test case for {@link FkMethods}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link HmRsStatus}.
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.4
+ * @since 0.13
  */
-public final class FkMethodsTest {
+public final class HmRsStatusTest {
 
     /**
-     * FkMethods can match by method.
+     * Happy path tester.
+     * Should test response status code equal to expected code.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void responseCodeIsEqualToExpected() throws IOException {
         MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
+            new TkHTML("<html></html>").act(new RqFake()),
+            Matchers.is(new HmRsStatus(HttpURLConnection.HTTP_OK))
+        );
+        MatcherAssert.assertThat(
+            new TkEmpty().act(new RqFake()),
+            Matchers.is(new HmRsStatus(HttpURLConnection.HTTP_OK))
+        );
+    }
+
+    /**
+     * Fail path tester.
+     * Should test expected code not equal case
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void responseCodeIsNotEqualToExpected() throws IOException {
+        MatcherAssert.assertThat(
+            new TkHTML("<html><body/></html>").act(new RqFake()),
+            Matchers.not(
+                Matchers.is(
+                    new HmRsStatus(HttpURLConnection.HTTP_NOT_FOUND)
+                )
+            )
         );
     }
 

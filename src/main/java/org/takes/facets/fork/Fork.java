@@ -24,9 +24,9 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Iterator;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Fork.
@@ -45,6 +45,6 @@ public interface Fork {
      * @return Non-empty list of responses if it was processed
      * @throws IOException If fails
      */
-    Iterator<Response> route(Request req) throws IOException;
+    Opt<Response> route(Request req) throws IOException;
 
 }

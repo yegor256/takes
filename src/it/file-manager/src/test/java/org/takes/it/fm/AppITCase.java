@@ -21,35 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.it.fm;
 
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import com.jcabi.http.response.XmlResponse;
+import com.jcabi.http.wire.VerboseWire;
+import java.net.HttpURLConnection;
+import org.junit.Assume;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link FkMethods}.
+ * Test case for {@link App}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.16
  */
-public final class FkMethodsTest {
+public final class AppITCase {
 
     /**
-     * FkMethods can match by method.
-     * @throws IOException If some problem inside
+     * Port with Takes server.
+     */
+    private static final String PORT = System.getProperty("takes.port");
+
+    /**
+     * App can work.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
-        MatcherAssert.assertThat(
-            new FkMethods("PUT,GET", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
-            ).has(),
-            Matchers.is(true)
-        );
+    public void justWorks() throws Exception {
+        Assume.assumeNotNull(AppITCase.PORT);
+        new JdkRequest(String.format("http://localhost:%s/", AppITCase.PORT))
+            .through(VerboseWire.class)
+            .fetch()
+            .as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .as(XmlResponse.class)
+            .assertXPath("//xhtml:html");
     }
 
 }
