@@ -153,7 +153,7 @@ public final class RsWithBody extends RsWrap {
     private static Iterable<String> append(
         final Response res, final int length) throws IOException {
         return new RsWithHeader(
-            res, String.format("Content-Length:%s", length)
+            res, "Content-Length", Integer.toString(length)
         ).head();
     }
 
