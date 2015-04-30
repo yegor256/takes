@@ -73,9 +73,6 @@ public final class BkTimeable implements Back {
                 public void run() {
                     while (true) {
                         BkTimeable.this.check();
-                        if (BkTimeable.this.isStop()) {
-                            break;
-                        }
                         try {
                             TimeUnit.SECONDS.sleep(1L);
                         } catch (final InterruptedException ex) {
@@ -108,13 +105,5 @@ public final class BkTimeable implements Back {
                 this.threads.remove(entry.getKey());
             }
         }
-    }
-
-    /**
-     * Check the monitor thread needs to stop.
-     * @return True if the monitor thread should stop
-     */
-    private boolean isStop() {
-        return Thread.currentThread().getThreadGroup().activeCount() == 1;
     }
 }
