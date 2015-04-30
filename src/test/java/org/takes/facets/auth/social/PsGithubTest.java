@@ -52,8 +52,8 @@ import org.xembly.Directives;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
  * @todo #42:30min/DEV when task #229 will be completed please add new check
- *  for the form parameter "code" after line 75. This parameter should
- *  be equals the variable with name "code", see line 65.
+ *  for the form parameter "code" after line 77. This parameter should
+ *  be equals the variable with name "code", see line 66.
  */
 public final class PsGithubTest {
     /**
