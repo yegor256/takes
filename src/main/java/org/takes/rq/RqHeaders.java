@@ -38,95 +38,118 @@ import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
 /**
- * Request decorator, for HTTP headers parsing.
- *
- * <p>The class is immutable and thread-safe.
+ * HTTP headers parsing
+ * <p/>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqHeaders extends RqWrap {
-
-    /**
-     * Ctor.
-     * @param req Original request
-     */
-    public RqHeaders(final Request req) {
-        super(req);
-    }
+public interface RqHeaders extends Request {
 
     /**
      * Get single header.
+     *
      * @param key Header name
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    public Iterable<String> header(final CharSequence key) throws IOException {
-        final Map<String, List<String>> map = this.map();
-        final List<String> values = map.get(
-            key.toString().toLowerCase(Locale.ENGLISH)
-        );
-        final Iterable<String> iter;
-        if (values == null) {
-            iter = new VerboseIterable<String>(
-                Collections.<String>emptyList(),
-                new Sprintf(
-                    "there are no headers by name \"%s\" among %d others: %s",
-                    key, map.size(), map.keySet()
-                )
-            );
-        } else {
-            iter = new VerboseIterable<String>(
-                values,
-                new Sprintf(
-                    "there are only %d headers by name \"%s\"",
-                    values.size(), key
-                )
-            );
-        }
-        return iter;
-    }
+    Iterable<String> header(CharSequence key) throws IOException;
 
     /**
      * Get all header names.
+     *
      * @return All names
      * @throws IOException If fails
      */
-    public Iterable<String> names() throws IOException {
-        return this.map().keySet();
-    }
+    Iterable<String> names() throws IOException;
 
     /**
-     * Parse them all in a map.
-     * @return Map of them
-     * @throws IOException If fails
+     * Request decorator, for HTTP headers parsing.
+     * <p/>
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Yury Lauresh (lavresh@gmail.com)
+     * @version $Id$
+     * @since 0.13.8
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private Map<String, List<String>> map() throws IOException {
-        final Iterator<String> head = this.head().iterator();
-        if (!head.hasNext()) {
-            throw new IOException(
-                "a valid request must contain at least one line in the head"
-            );
+    @EqualsAndHashCode(callSuper = true)
+    final class Base extends RqWrap implements RqHeaders {
+        /**
+         * Ctor.
+         *
+         * @param req Original request
+         */
+        public Base(final Request req) {
+            super(req);
         }
-        head.next();
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(0);
-        while (head.hasNext()) {
-            final String line = head.next();
-            final String[] parts = line.split(":", 2);
-            if (parts.length < 2) {
-                throw new IOException(
-                    String.format("invalid HTTP header: \"%s\"", line)
+
+        @Override
+        public Iterable<String> header(final CharSequence key)
+            throws IOException {
+            final Map<String, List<String>> map = this.map();
+            final List<String> values = map.get(
+                key.toString().toLowerCase(Locale.ENGLISH)
+            );
+            final Iterable<String> iter;
+            if (values == null) {
+                iter = new VerboseIterable<String>(
+                    Collections.<String>emptyList(),
+                    new Sprintf(
+                        // @checkstyle LineLengthCheck (1 line)
+                        "there are no headers by name \"%s\" among %d others: %s",
+                        key, map.size(), map.keySet()
+                    )
+                );
+            } else {
+                iter = new VerboseIterable<String>(
+                    values,
+                    new Sprintf(
+                        "there are only %d headers by name \"%s\"",
+                        values.size(), key
+                    )
                 );
             }
-            final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
-            map.putIfAbsent(key, new LinkedList<String>());
-            map.get(key).add(parts[1].trim());
+            return iter;
         }
-        return map;
+
+        @Override
+        public Iterable<String> names() throws IOException {
+            return this.map().keySet();
+        }
+
+        /**
+         * Parse them all in a map.
+         *
+         * @return Map of them
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        private Map<String, List<String>> map() throws IOException {
+            final Iterator<String> head = this.head().iterator();
+            if (!head.hasNext()) {
+                throw new IOException(
+                    "a valid request must contain at least one line in the head"
+                );
+            }
+            head.next();
+            final ConcurrentMap<String, List<String>> map =
+                new ConcurrentHashMap<String, List<String>>(0);
+            while (head.hasNext()) {
+                final String line = head.next();
+                final String[] parts = line.split(":", 2);
+                if (parts.length < 2) {
+                    throw new IOException(
+                        String.format("invalid HTTP header: \"%s\"", line)
+                    );
+                }
+                final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
+                map.putIfAbsent(key, new LinkedList<String>());
+                map.get(key).add(parts[1].trim());
+            }
+            return map;
+        }
     }
 
 }

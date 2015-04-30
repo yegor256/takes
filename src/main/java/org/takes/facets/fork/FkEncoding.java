@@ -82,7 +82,7 @@ public final class FkEncoding implements Fork {
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> headers =
-            new RqHeaders(req).header("Accept-Encoding").iterator();
+            new RqHeaders.Base(req).header("Accept-Encoding").iterator();
         final Opt<Response> resp;
         if (this.encoding.isEmpty()) {
             resp = new Opt.Single<Response>(this.origin);
