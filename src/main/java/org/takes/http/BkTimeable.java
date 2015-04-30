@@ -67,16 +67,13 @@ public final class BkTimeable implements Back {
         this.origin = back;
         this.latency = msec;
         this.threads = new ConcurrentHashMap<Thread, Long>(1);
-        new Thread(
+        final Thread monitor = new Thread(
             new Runnable() {
                 @Override
                 public void run() {
                     while (true) {
                         BkTimeable.this.check();
                         try {
-                            if (BkTimeable.this.isStop()) {
-                                break;
-                            }
                             TimeUnit.SECONDS.sleep(1L);
                         } catch (final InterruptedException ex) {
                             Thread.currentThread().interrupt();
@@ -85,7 +82,9 @@ public final class BkTimeable implements Back {
                     }
                 }
             }
-        ).start();
+        );
+        monitor.setDaemon(true);
+        monitor.start();
     }
 
     @Override
@@ -106,13 +105,5 @@ public final class BkTimeable implements Back {
                 this.threads.remove(entry.getKey());
             }
         }
-    }
-
-    /**
-     * Check the monitor thread needs to stop.
-     * @return True if the monitor thread should stop
-     */
-    private boolean isStop() {
-        return Thread.currentThread().getThreadGroup().activeCount() == 1;
     }
 }
