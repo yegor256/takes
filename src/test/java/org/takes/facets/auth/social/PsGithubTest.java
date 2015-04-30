@@ -50,13 +50,15 @@ import org.xembly.Directives;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @since 0.14.3
+ * @since 0.15.2
+ * @todo #42:30min/DEV when task #229 will be completed please add new check
+ *  for the form parameter "code" after line 75. This parameter should
+ *  be equals the variable with name "code", see line 65.
  */
 public final class PsGithubTest {
     /**
      * PsGithub can login.
      * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (500 lines)
      */
     @Test
     public void canLogin() throws IOException {
