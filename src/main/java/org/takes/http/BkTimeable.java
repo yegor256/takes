@@ -56,7 +56,8 @@ public final class BkTimeable implements Back {
     /**
      * Threads storage.
      */
-    private final transient Map<Thread, Long> threads;
+    private final transient Map<Thread, Long> threads =
+        new ConcurrentHashMap<Thread, Long>(1);
 
     /**
      * Ctor.
@@ -66,7 +67,6 @@ public final class BkTimeable implements Back {
     BkTimeable(final Back back, final long msec) {
         this.origin = back;
         this.latency = msec;
-        this.threads = new ConcurrentHashMap<Thread, Long>(1);
         final Thread monitor = new Thread(
             new Runnable() {
                 @Override
@@ -99,10 +99,11 @@ public final class BkTimeable implements Back {
     private void check() {
         for (final Map.Entry<Thread, Long> entry : this.threads.entrySet()) {
             if (System.currentTimeMillis() - entry.getValue() > this.latency) {
-                if (entry.getKey().isAlive()) {
-                    entry.getKey().interrupt();
+                final Thread thread = entry.getKey();
+                if (thread.isAlive()) {
+                    thread.interrupt();
                 }
-                this.threads.remove(entry.getKey());
+                this.threads.remove(thread);
             }
         }
     }
