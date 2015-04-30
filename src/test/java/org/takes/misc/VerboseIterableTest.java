@@ -8,6 +8,7 @@ import org.hamcrest.collection.IsIterableWithSize;
 import org.junit.Test;
 
 /**
+ * Tests for {@link VerboseIterable}.
  * 
  * @author marcus.sanchez (sanchez.marcus@gmail.com)
  * @version $Id$
@@ -15,18 +16,23 @@ import org.junit.Test;
  */
 public class VerboseIterableTest {
 
-	private static final String NO_NEXT_VALUE_ERROR = "Empty Error Message";
+    /**
+     * VerboseIterable can return correct size collection.
+     */
+    @Test
+    public void returnsCorrectSize() {
+        final List<String> VALID_LIST = Arrays.asList(
+                "Accept: text/plain",
+                "Accept-Charset: utf-8",
+                "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+                "Cache-Control: no-cache",
+                "From: user@example.com");
+        final String NO_NEXT_VALUE_ERROR = "Empty Error Message";
+        MatcherAssert
+                .assertThat(new VerboseIterable<String>(
+                        VALID_LIST,
+                        NO_NEXT_VALUE_ERROR), IsIterableWithSize
+                        .<String> iterableWithSize(VALID_LIST.size()));
 
-	private final List<String> VALID_LIST = Arrays.asList("Accept: text/plain",
-			"Accept-Charset: utf-8",
-			"Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-			"Cache-Control: no-cache", "From: user@example.com");
-
-	@Test
-	public void getNewIterableWithCorrectSize() {
-		MatcherAssert.assertThat(new VerboseIterable<String>(VALID_LIST,
-				NO_NEXT_VALUE_ERROR), IsIterableWithSize
-				.<String> iterableWithSize(VALID_LIST.size()));
-
-	}
+    }
 }
