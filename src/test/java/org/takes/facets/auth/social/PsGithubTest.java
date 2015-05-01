@@ -25,7 +25,6 @@ package org.takes.facets.auth.social;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Iterator;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -112,13 +111,14 @@ public final class PsGithubTest {
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
-                    final Iterator<Identity> itr = new PsGithub(
+                    final Identity identity = new PsGithub(
                         "app",
                         "key",
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", String.format("?code=%s", code)));
-                    final Identity identity = itr.next();
+                    ).enter(
+                        new RqFake("GET", String.format("?code=%s", code))
+                    ).next();
                     MatcherAssert.assertThat(
                         identity.urn(),
                         Matchers.equalTo(String.format("urn:github:%d", userid))
