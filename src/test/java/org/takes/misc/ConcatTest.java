@@ -54,8 +54,8 @@ public final class ConcatTest {
         blist.add(bone);
         blist.add(btwo);
         MatcherAssert.assertThat(
-                (Iterable<String>) new Concat<String>(alist, blist),
-                Matchers.hasItems(aone, atwo, bone, btwo)
+            new Concat<String>(alist, blist),
+            Matchers.hasItems(aone, atwo, bone, btwo)
         );
     }
 
@@ -71,16 +71,16 @@ public final class ConcatTest {
         alist.add(atwo);
         final List<String> blist = new ArrayList<String>(0);
         MatcherAssert.assertThat(
-                (Iterable<String>) new Concat<String>(alist, blist),
-                Matchers.hasItems(aone, atwo)
+            new Concat<String>(alist, blist),
+            Matchers.hasItems(aone, atwo)
         );
         MatcherAssert.assertThat(
-                (Iterable<String>) new Concat<String>(alist, blist),
-                Matchers.not(Matchers.hasItems(""))
+            new Concat<String>(alist, blist),
+            Matchers.not(Matchers.hasItems(""))
         );
         MatcherAssert.assertThat(
-                (Iterable<String>) new Concat<String>(blist, blist),
-                Matchers.emptyIterable()
+            new Concat<String>(blist, blist),
+            Matchers.emptyIterable()
         );
     }
 
