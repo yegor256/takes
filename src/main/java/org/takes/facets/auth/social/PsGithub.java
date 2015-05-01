@@ -51,6 +51,8 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.1
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @todo #229: PsGithubTest should check that POST request arguments are
+ *  passed as parameters at request body, not at head.
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
