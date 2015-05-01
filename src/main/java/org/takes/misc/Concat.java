@@ -66,6 +66,8 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * The concat iterator to traverse the input iterables as if they are
      * from one list.
+     *
+     * <p>This class is NOT thread-safe.
      */
     private static class ConcatIterator<E> implements Iterator<E> {
 
