@@ -90,9 +90,8 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param(
-                                acattr
-                            ).iterator().next(),
+                            new RqHref.Base(req).href().param(acattr)
+                                .iterator().next(),
                             Matchers.containsString(token)
                         );
                         return new RsJSON(
