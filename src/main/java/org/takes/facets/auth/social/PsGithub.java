@@ -51,8 +51,9 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.1
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #229: PsGithubTest should check that POST request arguments are
- *  passed as parameters at request body, not at head.
+ * @todo #229:30min There is currently no unit test in PsGithubTest that
+ *  checks that the request parameters are passed to the request body,
+ *  instead of the URI. Let's add this test.
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
