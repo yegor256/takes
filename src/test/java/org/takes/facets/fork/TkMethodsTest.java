@@ -24,7 +24,6 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -38,16 +37,16 @@ import org.takes.rq.RqFake;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @since 1.0
- * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
-public class TkMethodsTest {
+public final class TkMethodsTest {
     /**
-     * Tests if TkMethods acts on method that is passes to it.
+     * TkMethods can call act on method that is passes to it.
      * @throws Exception if any error occurs
      */
     @Test
-    public final void canCallActOnProperMethods() throws Exception {
-        final String method = RandomStringUtils.random(10);
+    public void callsActOnProperMethods() throws Exception {
+        final String method = "WHATEVER";
         final Take take = Mockito.mock(Take.class);
         final RqFake propreq = new RqFake(method);
         new TkMethods(take, method).act(propreq);
@@ -55,29 +54,24 @@ public class TkMethodsTest {
             take,
             Mockito.times(1)
         ).act(
-                Matchers.argThat(
-                    CoreMatchers.equalTo(propreq)
-                )
-            );
+            Matchers.argThat(
+                CoreMatchers.equalTo(propreq)
+            )
+        );
     }
 
     /**
-     * Tests if TkMethods throws HttpExcection when acting on unproper method.
+     * TkMethods can throw HttpExcection when acting on unproper method.
      * @throws IOException if any I/O error occurs.
      */
     @Test(expected = HttpException.class)
-    public final void throwsExceptionOnActinOnUnproperMethod() throws
+    public void throwsExceptionOnActinOnUnproperMethod() throws
         IOException {
-        final String proper = RandomStringUtils.random(10);
-        String unproper;
-        do {
-            unproper = RandomStringUtils.random(10);
-        } while (unproper.equals(proper));
         new TkMethods(
             Mockito.mock(Take.class),
-            proper
+            "PROPER"
         ).act(
-            new RqFake(unproper)
+            new RqFake("UNPROPER")
         );
     }
 }
