@@ -25,11 +25,11 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Request without a header (even if it was absent).
@@ -50,20 +50,23 @@ public final class RqWithoutHeader extends RqWrap {
      */
     public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
+            // @checkstyle AnonInnerLengthCheck (50 lines)
             new Request() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
-                    for (final String header : req.head()) {
-                        if (!header.toLowerCase(Locale.ENGLISH)
-                            .startsWith(prefix)) {
-                            head.add(header);
+                    return new Select<String>(
+                        req.head(),
+                        new Condition<String>() {
+                            @Override
+                            public boolean fits(final String header) {
+                                return !header.toLowerCase(Locale.ENGLISH)
+                                    .startsWith(prefix);
+                            }
                         }
-                    }
-                    return head;
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
