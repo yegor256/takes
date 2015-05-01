@@ -19,21 +19,19 @@ public class VerboseIterableTest {
      */
     @Test
     public void returnsCorrectSize() {
-        final List<String> VALID = Arrays.asList(
+        final List<String> valid = Arrays.asList(
             "Accept: text/plain",
             "Accept-Charset: utf-8",
             "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
             "Cache-Control: no-cache",
             "From: user@example.com"
-            );
-        MatcherAssert
-            .assertThat(
-                    new VerboseIterable<String>(
-                            VALID,
-                            "Empty Error Message"
-                        ),
-                        IsIterableWithSize.<String>iterableWithSize(VALID.size())
-                );
-
+        );
+        MatcherAssert.assertThat(
+            new VerboseIterable<String>(
+                valid,
+                "Empty Error Message"
+            ),
+            IsIterableWithSize.<String>iterableWithSize(valid.size())
+        );
     }
 }

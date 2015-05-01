@@ -25,16 +25,17 @@ public class VerboseIteratorTest {
     public void returnsNextValue() {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
-                    Arrays.asList(
-                            "Accept: text/plain",
-                            "Accept-Charset: utf-8",
-                            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-                            "Cache-Control: no-cache",
-                            "From: user@example.com"
-                            ),
-                "Empty Error Message").iterator().next(),
-                equalTo("Accept: text/plain")
-            );
+                Arrays.asList(
+                    "Accept: text/plain",
+                    "Accept-Charset: utf-8",
+                    "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+                    "Cache-Control: no-cache",
+                    "From: user@example.com"
+                ),
+                "Empty Error Message"
+            ).iterator().next(),
+            equalTo("Accept: text/plain")
+        );
     }
 
     /**
@@ -43,17 +44,17 @@ public class VerboseIteratorTest {
     @Test
     public void informsHasNextValue() {
         MatcherAssert.assertThat(
-                new VerboseIterable<String>(
-                        Arrays.asList(
-                                "Accept: text/plain",
-                                "Accept-Charset: utf-8",
-                                "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-                                "From: user@example.com"
-                        ),
-                        "Empty Error Message"
-                    )
-                    .iterator().hasNext(), equalTo(true)
-       );
+            new VerboseIterable<String>(
+                Arrays.asList(
+                    "Accept: text/plain",
+                    "Accept-Charset: utf-8",
+                    "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+                    "From: user@example.com"
+                ),
+                "Empty Error Message"
+            )
+                .iterator().hasNext(), equalTo(true)
+        );
     }
 
     /**
@@ -62,9 +63,9 @@ public class VerboseIteratorTest {
     @Test(expected = RuntimeException.class)
     public void nextValueThrowsExceptionOnEmptyList() {
         new VerboseIterable<String>(
-                Arrays.<String>asList(), 
-                "Empty Error Message"
-            )
+            Arrays.<String>asList(),
+            "Empty Error Message"
+        )
             .iterator().next();
     }
 
@@ -74,12 +75,12 @@ public class VerboseIteratorTest {
     @Test
     public void returnFalseInHasNextValueOnEmptyList() {
         MatcherAssert.assertThat(
-                new VerboseIterable<String>(
-                        Arrays.<String>asList(),
-                        "Empty Error Message"
-                        )
-                        .iterator().hasNext(),
-                equalTo(false)
+            new VerboseIterable<String>(
+                Arrays.<String>asList(),
+                "Empty Error Message"
+            )
+                .iterator().hasNext(),
+            equalTo(false)
         );
     }
 
@@ -90,21 +91,20 @@ public class VerboseIteratorTest {
      */
     @Test(expected = UnsupportedOperationException.class)
     public void removeValue() {
-        final List<String> VALID = Arrays.asList(
-                "Accept: text/plain",
-                "Accept-Charset: utf-8",
-                "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-                "Cache-Control: no-cache",
-                "From: user@example.com"
-            );
+        final List<String> valid = Arrays.asList(
+            "Accept: text/plain",
+            "Accept-Charset: utf-8",
+            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+            "Cache-Control: no-cache",
+            "From: user@example.com"
+        );
         VerboseIterable<String> verboseIterable = new VerboseIterable<String>(
-                VALID, "Empty Error Message"
-            );
+            valid, "Empty Error Message"
+        );
         verboseIterable.iterator().remove();
         MatcherAssert.assertThat(
-                verboseIterable,
-                IsIterableWithSize.<String> iterableWithSize(VALID.size() - 1)
+            verboseIterable,
+            IsIterableWithSize.<String>iterableWithSize(valid.size() - 1)
         );
     }
-
 }
