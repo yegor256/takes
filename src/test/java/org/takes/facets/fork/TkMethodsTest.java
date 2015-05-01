@@ -37,7 +37,6 @@ import org.takes.rq.RqFake;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @since 1.0
- * @checkstyle IndentationCheck (500 lines)
  */
 public final class TkMethodsTest {
     /**
@@ -50,6 +49,7 @@ public final class TkMethodsTest {
         final Take take = Mockito.mock(Take.class);
         final RqFake propreq = new RqFake(method);
         new TkMethods(take, method).act(propreq);
+        // @checkstyle IndentationCheck (8 lines)
         Mockito.verify(
             take,
             Mockito.times(1)
