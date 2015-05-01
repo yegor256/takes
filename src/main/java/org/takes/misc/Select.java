@@ -69,7 +69,7 @@ public final class Select<T> implements Iterable<T> {
     /**
      * The select iterator to traverse the input iterables and return the
      * elements from the list with given condition.
-     * 
+     *
      * <p>This class is NOT thread-safe.
      */
     private static class SelectIterator<E> implements Iterator<E> {
