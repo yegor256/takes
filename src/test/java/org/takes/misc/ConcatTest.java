@@ -34,15 +34,15 @@ import org.junit.Test;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13.8
+ * @since 0.15.2
  */
 public final class ConcatTest {
 
     /**
-     * Concat can concat.
+     * Concat can concatenate.
      */
     @Test
-    public void concat() {
+    public void concatenates() {
         final List<String> alist = new ArrayList<String>(2);
         final String aone = "a1";
         final String atwo = "a2";
@@ -60,10 +60,10 @@ public final class ConcatTest {
     }
 
     /**
-     * Concat can concat with empty list.
+     * Concat can concatenate with empty list.
      */
     @Test
-    public void concatWithEmptyList() {
+    public void concatenatesWithEmptyList() {
         final List<String> alist = new ArrayList<String>(2);
         final String aone = "an1";
         final String atwo = "an2";
