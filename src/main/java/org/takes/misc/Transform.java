@@ -63,6 +63,8 @@ public class Transform<T, K> implements Iterable<K> {
     /**
      * The iterator to iterator through the original type B and return the
      * transformed element in type A.
+     *
+     * <p>This class is NOT thread-safe.
      */
     private static class TransformIterator<B, A> implements Iterator<A> {
 
