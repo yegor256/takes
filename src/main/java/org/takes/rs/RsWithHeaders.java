@@ -52,12 +52,12 @@ public final class RsWithHeaders extends RsWrap {
         this(res, Arrays.asList(headers));
     }
 
-    //@todo #160:DEV To implement the concatenation and
-    // transformation with conjunction of Concat class
-    // and Transform class to get rid of the use of List.add()
-    // in the anonymous Response class head() nethod.
     /**
      * Ctor.
+     * @todo #160:DEV To implement the concatenation and
+     *  transformation with conjunction of Concat class
+     *  and Transform class to get rid of the use of List.add()
+     *  in the anonymous Response class head() method.
      * @param res Original response
      * @param headers Headers
      */
