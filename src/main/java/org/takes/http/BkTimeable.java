@@ -25,11 +25,8 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
@@ -42,9 +39,9 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.14.2
  */
-@EqualsAndHashCode(of = {"origin", "latency" })
+@EqualsAndHashCode(of = { "origin", "latency" })
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class BkTimeable implements Back, Runnable {
+public final class BkTimeable implements Back {
 
     /**
      * Original back.
@@ -59,115 +56,55 @@ public final class BkTimeable implements Back, Runnable {
     /**
      * Threads storage.
      */
-    private final transient Set<BkTimeable.ThreadInfo> threads;
-
-    /**
-     * Monitoring executor.
-     */
-    private final transient ScheduledExecutorService service;
+    private final transient Map<Thread, Long> threads =
+        new ConcurrentHashMap<Thread, Long>(1);
 
     /**
      * Ctor.
      * @param back Original back
      * @param msec Execution latency
      */
-    public BkTimeable(final Back back, final long msec) {
-        this(
-            back,
-            msec,
-            Executors.newSingleThreadScheduledExecutor(
-                new ThreadFactory() {
-                    @Override
-                    public Thread newThread(final Runnable runnable) {
-                        final Thread thread = new Thread(runnable);
-                        thread.setDaemon(true);
-                        thread.setName(BkTimeable.class.getSimpleName());
-                        return thread;
-                    }
-                }
-            ),
-            new CopyOnWriteArraySet<BkTimeable.ThreadInfo>()
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param back Original back
-     * @param msec Execution latency
-     * @param svc Executor service
-     * @param map Threads storage
-     * @checkstyle ParameterNumberCheck (10 lines)
-     */
-    BkTimeable(final Back back, final long msec,
-        final ScheduledExecutorService svc,
-        final Set<BkTimeable.ThreadInfo> map) {
+    BkTimeable(final Back back, final long msec) {
         this.origin = back;
         this.latency = msec;
-        this.threads = map;
-        this.service = svc;
-        this.start();
+        final Thread monitor = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        BkTimeable.this.check();
+                        try {
+                            TimeUnit.SECONDS.sleep(1L);
+                        } catch (final InterruptedException ex) {
+                            Thread.currentThread().interrupt();
+                            throw new IllegalStateException(ex);
+                        }
+                    }
+                }
+            }
+        );
+        monitor.setDaemon(true);
+        monitor.start();
     }
 
     @Override
     public void accept(final Socket socket) throws IOException {
-        this.threads.add(new BkTimeable.ThreadInfo());
+        this.threads.put(Thread.currentThread(), System.currentTimeMillis());
         this.origin.accept(socket);
     }
 
-    @Override
-    public void run() {
-        for (final BkTimeable.ThreadInfo info : this.threads) {
-            if (System.currentTimeMillis() - info.start > this.latency) {
-                if (info.thread.isAlive() || info.alive) {
-                    info.thread.interrupt();
+    /**
+     * Checking threads storage and interrupt long running threads.
+     */
+    private void check() {
+        for (final Map.Entry<Thread, Long> entry : this.threads.entrySet()) {
+            if (System.currentTimeMillis() - entry.getValue() > this.latency) {
+                final Thread thread = entry.getKey();
+                if (thread.isAlive()) {
+                    thread.interrupt();
                 }
-                this.threads.remove(info);
+                this.threads.remove(thread);
             }
-        }
-    }
-
-    /**
-     * Start monitoring.
-     */
-    private void start() {
-        this.service.scheduleAtFixedRate(
-            // @checkstyle MagicNumberCheck (1 line)
-            this, 0L, 100L, TimeUnit.MILLISECONDS
-        );
-    }
-
-    /**
-     * Thread info.
-     */
-    public static final class ThreadInfo {
-        /**
-         * Thread reference.
-         */
-        private final transient Thread thread;
-        /**
-         * Start time.
-         */
-        private final transient long start;
-        /**
-         * Always alive therad.
-         */
-        private final transient boolean alive;
-        /**
-         * Ctor.
-         */
-        ThreadInfo() {
-            this(Thread.currentThread(), System.currentTimeMillis(), false);
-        }
-        /**
-         * Ctor.
-         * @param thrd Monitoring thread
-         * @param time Start time
-         * @param always If true threads is always alive spite of isAlive()
-         */
-        ThreadInfo(final Thread thrd, final long time, final boolean always) {
-            this.thread = thrd;
-            this.start = time;
-            this.alive = always;
         }
     }
 }

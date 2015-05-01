@@ -23,83 +23,81 @@
  */
 package org.takes.http;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
-import java.net.Socket;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ScheduledExecutorService;
+import java.net.HttpURLConnection;
 import java.util.concurrent.TimeUnit;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-import org.takes.tk.TkEmpty;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link BkTimeable}.
+ *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
  */
+@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeableTest {
     /**
-     * BkTimeable can store caller thread.
-     * @throws java.io.IOException If some problem inside
+     * BkTimeable can stop long running Back.
+     * @throws java.lang.Exception If some problem inside
      */
     @Test
-    public void storesCallerThread() throws IOException {
-        final ScheduledExecutorService executor = Mockito.mock(
-            ScheduledExecutorService.class
-        );
-        final Set<BkTimeable.ThreadInfo> threads =
-            new HashSet<BkTimeable.ThreadInfo>(1);
-        final Back back = new BkTimeable(
-            new Back() {
-                @Override
-                public void accept(final Socket socket) throws IOException {
-                    socket.close();
+    public void stopsLongRunningBack() throws Exception {
+        final int port = new Ports().allocate();
+        final String response = "interrupted";
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req)
+                throws IOException {
+                try {
+                    // @checkstyle MagicNumberCheck (1 line)
+                    TimeUnit.SECONDS.sleep(10L);
+                    return new RsText("finish");
+                } catch (final InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    return new RsText(response);
                 }
-            },
-            1L,
-            executor,
-            threads
+            }
+        };
+        final Thread thread = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtCLI(
+                            take,
+                            String.format("--port=%d", port),
+                            "--threads=1",
+                            "--lifetime=3000",
+                            "--max-latency=100"
+                        ).start(Exit.NEVER);
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
         );
-        back.accept(new Socket());
-        MatcherAssert.assertThat(threads, Matchers.hasSize(1));
-    }
-
-    /**
-     * BkTimeable can stop running thread.
-     * @throws java.io.IOException If some problem inside
-     */
-    @Test
-    @SuppressWarnings("PMD.DoNotUseThreads")
-    public void stopsRunningThread() throws IOException {
-        final ScheduledExecutorService executor = Mockito.mock(
-            ScheduledExecutorService.class
-        );
-        final Set<BkTimeable.ThreadInfo> threads =
-            new HashSet<BkTimeable.ThreadInfo>(1);
-        final Thread thread = Mockito.mock(Thread.class);
-        new BkTimeable(
-            new BkBasic(new TkEmpty()),
-            1L,
-            executor,
-            threads
-        );
-        final ArgumentCaptor<Runnable> arg = ArgumentCaptor.forClass(
-            Runnable.class
-        );
-        Mockito.verify(executor).scheduleAtFixedRate(
-            arg.capture(),
-            Mockito.anyLong(),
-            Mockito.anyLong(),
-            Mockito.any(TimeUnit.class)
-        );
-        threads.add(new BkTimeable.ThreadInfo(thread, 1L, true));
-        arg.getValue().run();
-        Mockito.verify(thread).interrupt();
-        MatcherAssert.assertThat(threads, Matchers.hasSize(0));
+        thread.start();
+        // @checkstyle MagicNumberCheck (1 line)
+        TimeUnit.MILLISECONDS.sleep(1500L);
+        new JdkRequest(String.format("http://localhost:%d", port))
+            .fetch()
+            .as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .assertBody(Matchers.startsWith(response));
+        try {
+            thread.join();
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(ex);
+        }
+        new Ports().release(port);
     }
 }
