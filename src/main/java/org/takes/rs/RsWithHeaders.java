@@ -52,6 +52,10 @@ public final class RsWithHeaders extends RsWrap {
         this(res, Arrays.asList(headers));
     }
 
+    //@todo #160:DEV To implement the concatenation and
+    // transformation with conjunction of Concat class
+    // and Transform class to get rid of the use of List.add()
+    // in the anonymous Response class head() nethod.
     /**
      * Ctor.
      * @param res Original response
@@ -63,9 +67,6 @@ public final class RsWithHeaders extends RsWrap {
             new Response() {
                 @Override
                 public List<String> head() throws IOException {
-                    //@todo #160:DEV To implement the concatenation and
-                    // transformation with conjunction of Concat class 
-                    // and Transform class to get rid of the use of List.add()
                     final List<String> head = new LinkedList<String>();
                     for (final String hdr : res.head()) {
                         head.add(hdr);
