@@ -92,6 +92,9 @@ public final class RsWithStatus extends RsWrap {
         );
     }
 
+    //@todo #160:DEV To implement concatenation and selection with the
+    // conjunction Concat and Select class to get rid of List.add()
+    // between line 118 to line 127
     /**
      * Make head.
      * @param origin Original response
@@ -112,8 +115,6 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        //@todo #160:DEV To implement concatenation and selection with the
-        // conjunction Concat and Select class to get rid of List.add()
         final Collection<String> head = new LinkedList<String>();
         head.add(String.format("HTTP/1.1 %d %s", status, reason));
         boolean first = true;
