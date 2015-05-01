@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
@@ -67,9 +66,14 @@ public final class PsGithub implements Pass {
     private final transient String key;
 
     /**
-     * Urls replacements.
+     * GitHub OAuth url.
      */
-    private final transient Map<String, String> substs;
+    private final transient String github;
+
+    /**
+     * GitHub API url.
+     */
+    private final transient String api;
 
     /**
      * Ctor.
@@ -77,20 +81,23 @@ public final class PsGithub implements Pass {
      * @param gkey Github key
      */
     public PsGithub(final String gapp, final String gkey) {
-      this(gapp, gkey, Collections.<String, String>emptyMap());
+      this(gapp, gkey, "https://github.com", "https://api.github.com");
     }
 
     /**
      * Ctor.
      * @param gapp Github app
      * @param gkey Github key
-     * @param urls Urls replacements
+     * @param gurl Github OAuth server
+     * @param aurl Github API server
+     * @checkstyle ParameterNumberCheck (2 lines)
      */
     PsGithub(final String gapp, final String gkey,
-        final Map<String, String> urls) {
+        final String gurl, final String aurl) {
         this.app = gapp;
         this.key = gkey;
-        this.substs = new ConcurrentHashMap<String, String>(urls);
+        this.github = gurl;
+        this.api = aurl;
     }
 
     @Override
@@ -119,12 +126,8 @@ public final class PsGithub implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(
-            String.format(
-                "%s/user",
-                this.getUrl("https://api.github.com")
-            )
-        ).with("access_token", token).toString();
+        final String uri = new Href(String.format("%s/user", this.api))
+            .with("access_token", token).toString();
         return PsGithub.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -144,12 +147,8 @@ public final class PsGithub implements Pass {
     private String token(final String home, final String code)
         throws IOException {
         final String uri = new Href(
-            String.format(
-                "%s/login/oauth/access_token",
-                this.getUrl("https://github.com")
-            )
-        ).with("client_id", this.app)
-            .with("redirect_uri", home)
+            String.format("%s/login/oauth/access_token", this.github)
+        ).with("client_id", this.app).with("redirect_uri", home)
             .with("client_secret", this.key)
             .with("code", code)
             .toString();
@@ -176,20 +175,5 @@ public final class PsGithub implements Pass {
         return new Identity.Simple(
             String.format("urn:github:%d", json.getInt("id")), props
         );
-    }
-
-    /**
-     * Take url from substitution map if exists.
-     * @param url Url
-     * @return Overridden url
-     */
-    private String getUrl(final String url) {
-        final String ret;
-        if (this.substs.containsKey(url)) {
-            ret = this.substs.get(url);
-        } else {
-            ret = url;
-        }
-        return ret;
     }
 }

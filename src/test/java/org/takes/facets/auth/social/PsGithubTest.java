@@ -26,7 +26,6 @@ package org.takes.facets.auth.social;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -113,14 +112,11 @@ public final class PsGithubTest {
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
-                    final ConcurrentHashMap<String, String> map =
-                        new ConcurrentHashMap<String, String>(2);
-                    map.put("https://github.com", home.toString());
-                    map.put("https://api.github.com", home.toString());
                     final Iterator<Identity> itr = new PsGithub(
                         "app",
                         "key",
-                        map
+                        home.toString(),
+                        home.toString()
                     ).enter(new RqFake("GET", String.format("?code=%s", code)));
                     final Identity identity = itr.next();
                     MatcherAssert.assertThat(
