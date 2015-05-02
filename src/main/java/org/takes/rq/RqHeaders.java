@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -33,6 +34,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
@@ -129,7 +131,8 @@ public interface RqHeaders extends Request {
         private Map<String, List<String>> map() throws IOException {
             final Iterator<String> head = this.head().iterator();
             if (!head.hasNext()) {
-                throw new IOException(
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
                     "a valid request must contain at least one line in the head"
                 );
             }
@@ -140,7 +143,8 @@ public interface RqHeaders extends Request {
                 final String line = head.next();
                 final String[] parts = line.split(":", 2);
                 if (parts.length < 2) {
-                    throw new IOException(
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format("invalid HTTP header: \"%s\"", line)
                     );
                 }
