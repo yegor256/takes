@@ -41,6 +41,7 @@ import org.takes.Request;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public final class RqLive extends RqWrap {
 
     /**
@@ -69,16 +70,32 @@ public final class RqLive extends RqWrap {
             }
             if (data == '\r') {
                 if (input.read() != '\n') {
-                    throw new IOException("");
+                    throw new IOException(
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "there is no LF after CR in header, line #%d: \"%s\"",
+                            head.size() + 1, new String(baos.toByteArray())
+                        )
+                    );
                 }
                 if (baos.size() == 0) {
                     break;
                 }
                 head.add(new String(baos.toByteArray()));
                 baos.reset();
-            } else {
-                baos.write(data);
+                continue;
             }
+            // @checkstyle MagicNumber (1 line)
+            if (data > 0x7f || data < 0x20) {
+                throw new IOException(
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "illegal character in HTTP header, line #%d: 0x%2X",
+                        head.size() + 1, data
+                    )
+                );
+            }
+            baos.write(data);
         }
         return new Request() {
             @Override
