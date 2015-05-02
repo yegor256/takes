@@ -48,15 +48,14 @@ public final class TkMethodsTest {
         final Take take = Mockito.mock(Take.class);
         final RqFake req = new RqFake(method);
         new TkMethods(take, method).act(req);
-        // @checkstyle IndentationCheck (8 lines)
         Mockito.verify(
             take,
             Mockito.times(1)
         ).act(
-            Matchers.argThat(
-                CoreMatchers.equalTo(req)
-            )
-        );
+                Matchers.argThat(
+                    CoreMatchers.equalTo(req)
+                )
+            );
     }
 
     /**
