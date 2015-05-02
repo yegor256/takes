@@ -33,7 +33,6 @@ import org.takes.tk.TkWrap;
  *
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 1.0
  */
 public class TkMethods extends TkWrap {
     /**

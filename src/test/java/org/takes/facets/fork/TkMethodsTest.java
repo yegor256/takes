@@ -36,7 +36,6 @@ import org.takes.rq.RqFake;
  * Test case for {@link TkMethods}.
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 1.0
  */
 public final class TkMethodsTest {
     /**
@@ -47,15 +46,15 @@ public final class TkMethodsTest {
     public void callsActOnProperMethods() throws Exception {
         final String method = "WHATEVER";
         final Take take = Mockito.mock(Take.class);
-        final RqFake propreq = new RqFake(method);
-        new TkMethods(take, method).act(propreq);
+        final RqFake req = new RqFake(method);
+        new TkMethods(take, method).act(req);
         // @checkstyle IndentationCheck (8 lines)
         Mockito.verify(
             take,
             Mockito.times(1)
         ).act(
             Matchers.argThat(
-                CoreMatchers.equalTo(propreq)
+                CoreMatchers.equalTo(req)
             )
         );
     }
@@ -67,10 +66,7 @@ public final class TkMethodsTest {
     @Test(expected = HttpException.class)
     public void throwsExceptionOnActinOnUnproperMethod() throws
         IOException {
-        new TkMethods(
-            Mockito.mock(Take.class),
-            "PROPER"
-        ).act(
+        new TkMethods(Mockito.mock(Take.class), "PROPER").act(
             new RqFake("UNPROPER")
         );
     }
