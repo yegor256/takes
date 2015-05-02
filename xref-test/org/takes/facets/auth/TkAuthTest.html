@@ -71,7 +71,7 @@
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>              ArgumentCaptor.forClass(Request.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          Mockito.verify(take).act(captor.capture());
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">new</strong> RqHeaders(captor.getValue()).header(
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">new</strong> RqHeaders.Base(captor.getValue()).header(
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>                  TkAuth.<strong class="jxr_keyword">class</strong>.getSimpleName()
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              ),
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>              Matchers.hasItem(<span class="jxr_string">"urn%3Atest%3A1"</span>)
@@ -129,7 +129,7 @@
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>             ArgumentCaptor.forClass(Request.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>         Mockito.verify(take).act(captor.capture());
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>         MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L124" href="#L124">124</a>             <strong class="jxr_keyword">new</strong> RqHeaders(captor.getValue()).header(
+<a class="jxr_linenumber" name="L124" href="#L124">124</a>             <strong class="jxr_keyword">new</strong> RqHeaders.Base(captor.getValue()).header(
 <a class="jxr_linenumber" name="L125" href="#L125">125</a>                 TkAuth.<strong class="jxr_keyword">class</strong>.getSimpleName()
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>             ),
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>             Matchers.emptyIterable()

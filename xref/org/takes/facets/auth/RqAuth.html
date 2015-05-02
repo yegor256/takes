@@ -81,7 +81,7 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/auth/Identity.html">Identity</a> identity() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; headers =
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqHeaders.html">RqHeaders</a>(<strong class="jxr_keyword">this</strong>).header(<strong class="jxr_keyword">this</strong>.header).iterator();
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>              <strong class="jxr_keyword">new</strong> RqHeaders.Base(<strong class="jxr_keyword">this</strong>).header(<strong class="jxr_keyword">this</strong>.header).iterator();
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          <strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/auth/Identity.html">Identity</a> user;
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">if</strong> (headers.hasNext()) {
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>              user = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/auth/codecs/CcPlain.html">CcPlain</a>().decode(headers.next().getBytes());

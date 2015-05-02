@@ -57,7 +57,7 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     * @return List of values (can be empty)</em>
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      Iterable&lt;String&gt; cookie(<strong class="jxr_keyword">final</strong> CharSequence name) <strong class="jxr_keyword">throws</strong> IOException;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      Iterable&lt;String&gt; cookie(CharSequence name) <strong class="jxr_keyword">throws</strong> IOException;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * Get all cookie names.</em>
@@ -75,12 +75,12 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     * @since 0.14</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>      @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>)
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqMethod.html">Base</a> <strong class="jxr_keyword">extends</strong> <a href="../../../org/takes/rq/RqWrap.html">RqWrap</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqCookies.html">RqCookies</a> {
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqCookies.html">Base</a> <strong class="jxr_keyword">extends</strong> <a href="../../../org/takes/rq/RqWrap.html">RqWrap</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqCookies.html">RqCookies</a> {
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">         * Ctor.</em>
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">         * @param req Original request</em>
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqMethod.html">Base</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> req) {
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqCookies.html">Base</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> req) {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>              <strong class="jxr_keyword">super</strong>(req);
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          }
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  
@@ -127,7 +127,7 @@
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>             <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;String, String&gt; map =
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>                 <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, String&gt;(0);
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; values =
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>                 <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqHeaders.html">RqHeaders</a>(<strong class="jxr_keyword">this</strong>).header(<span class="jxr_string">"Cookie"</span>);
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>                 <strong class="jxr_keyword">new</strong> RqHeaders.Base(<strong class="jxr_keyword">this</strong>).header(<span class="jxr_string">"Cookie"</span>);
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>             <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String value : values) {
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>                 <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String pair : value.split(<span class="jxr_string">";"</span>)) {
 <a class="jxr_linenumber" name="L125" href="#L125">125</a>                     <strong class="jxr_keyword">final</strong> String[] parts = pair.split(<span class="jxr_string">"="</span>, 2);

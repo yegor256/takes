@@ -91,17 +91,18 @@
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>      @SuppressWarnings(<span class="jxr_string">"PMD.AvoidInstantiatingObjectsInLoops"</span>)
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a> accepted(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a> list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>();
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; headers = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rq/RqHeaders.html">RqHeaders</a>(req).header(<span class="jxr_string">"Accept"</span>);
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String hdr : headers) {
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              list = list.merge(<strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(hdr));
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          }
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">if</strong> (list.isEmpty()) {
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>              list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(<span class="jxr_string">"*/*"</span>);
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>          }
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <strong class="jxr_keyword">return</strong> list;
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>      }
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>  
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>  }
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; headers = <strong class="jxr_keyword">new</strong> RqHeaders.Base(req)
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>                  .header(<span class="jxr_string">"Accept"</span>);
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String hdr : headers) {
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>              list = list.merge(<strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(hdr));
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          }
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">if</strong> (list.isEmpty()) {
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>              list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(<span class="jxr_string">"*/*"</span>);
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          }
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>          <strong class="jxr_keyword">return</strong> list;
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>      }
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>  
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

@@ -91,7 +91,7 @@
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>  <em class="jxr_javadoccomment">     * @version $Id$</em>
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>, of = <span class="jxr_string">"map"</span>)
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqMethod.html">Base</a> <strong class="jxr_keyword">extends</strong> <a href="../../../org/takes/rq/RqWrap.html">RqWrap</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> {
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqCookies.html">Base</a> <strong class="jxr_keyword">extends</strong> <a href="../../../org/takes/rq/RqWrap.html">RqWrap</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  <em class="jxr_javadoccomment">         * Map of params and values.</em>
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>  <em class="jxr_javadoccomment">         */</em>
@@ -102,7 +102,7 @@
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  <em class="jxr_javadoccomment">         * @throws IOException If fails</em>
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>  <em class="jxr_javadoccomment">         */</em>
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>          @SuppressWarnings(<span class="jxr_string">"PMD.AvoidInstantiatingObjectsInLoops"</span>)
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqMethod.html">Base</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqCookies.html">Base</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>              <strong class="jxr_keyword">super</strong>(req);
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>              <strong class="jxr_keyword">final</strong> ByteArrayOutputStream baos = <strong class="jxr_keyword">new</strong> ByteArrayOutputStream();
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rq/RqPrint.html">RqPrint</a>(req).printBody(baos);
@@ -114,106 +114,106 @@
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>                 }
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>                 <strong class="jxr_keyword">final</strong> String[] parts = pair.split(<span class="jxr_string">"="</span>, 2);
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>                 <strong class="jxr_keyword">if</strong> (parts.length &lt; 2) {
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IOException(
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>                         String.format(<span class="jxr_string">"invalid form body pair: %s"</span>, pair)
-<a class="jxr_linenumber" name="L111" href="#L111">111</a>                     );
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>                 }
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>                 <strong class="jxr_keyword">final</strong> String key = RqForm.Base.decode(
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>                     parts[0].trim().toLowerCase(Locale.ENGLISH)
-<a class="jxr_linenumber" name="L115" href="#L115">115</a>                 );
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>                 <strong class="jxr_keyword">this</strong>.map.putIfAbsent(key, <strong class="jxr_keyword">new</strong> LinkedList&lt;String&gt;());
-<a class="jxr_linenumber" name="L117" href="#L117">117</a>                 <strong class="jxr_keyword">this</strong>.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
-<a class="jxr_linenumber" name="L118" href="#L118">118</a>             }
-<a class="jxr_linenumber" name="L119" href="#L119">119</a>         }
-<a class="jxr_linenumber" name="L120" href="#L120">120</a>         @Override
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> CharSequence key) {
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>             <strong class="jxr_keyword">final</strong> List&lt;String&gt; values =
-<a class="jxr_linenumber" name="L123" href="#L123">123</a>                     <strong class="jxr_keyword">this</strong>.map.get(key.toString().toLowerCase(Locale.ENGLISH));
-<a class="jxr_linenumber" name="L124" href="#L124">124</a>             <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; iter;
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>             <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L126" href="#L126">126</a>                 iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>                     Collections.&lt;String&gt;emptyList(),
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/misc/Sprintf.html">Sprintf</a>(
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>                         <span class="jxr_string">"there are no params \&quot;%s\&quot; among %d others: %s"</span>,
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>                         key, <strong class="jxr_keyword">this</strong>.map.size(), <strong class="jxr_keyword">this</strong>.map.keySet()
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>                     )
-<a class="jxr_linenumber" name="L132" href="#L132">132</a>                 );
-<a class="jxr_linenumber" name="L133" href="#L133">133</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>                 iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>                     values,
-<a class="jxr_linenumber" name="L136" href="#L136">136</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/misc/Sprintf.html">Sprintf</a>(
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>                         <span class="jxr_string">"there are only %d params by name \&quot;%s\&quot;"</span>,
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>                         values.size(), key
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                     )
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>                 );
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>             }
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>             <strong class="jxr_keyword">return</strong> iter;
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>         }
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>         @Override
-<a class="jxr_linenumber" name="L145" href="#L145">145</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; names() {
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.map.keySet();
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>         }
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>         <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L149" href="#L149">149</a> <em class="jxr_javadoccomment">         * Decode from URL.</em>
-<a class="jxr_linenumber" name="L150" href="#L150">150</a> <em class="jxr_javadoccomment">         * @param txt Text</em>
-<a class="jxr_linenumber" name="L151" href="#L151">151</a> <em class="jxr_javadoccomment">         * @return Decoded</em>
-<a class="jxr_linenumber" name="L152" href="#L152">152</a> <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> CharSequence txt) {
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>             <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>                 <strong class="jxr_keyword">return</strong> URLDecoder.decode(
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>                     txt.toString(), Charset.defaultCharset().name()
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>                 );
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>             } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnsupportedEncodingException ex) {
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ex);
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>             }
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>         }
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>     }
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L164" href="#L164">164</a> <em class="jxr_javadoccomment">     * Smart decorator, with extra features.</em>
-<a class="jxr_linenumber" name="L165" href="#L165">165</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L166" href="#L166">166</a> <em class="jxr_javadoccomment">     * &lt;p&gt;The class is immutable and thread-safe.</em>
-<a class="jxr_linenumber" name="L167" href="#L167">167</a> <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L168" href="#L168">168</a> <em class="jxr_javadoccomment">     * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L169" href="#L169">169</a> <em class="jxr_javadoccomment">     * @since 0.14</em>
-<a class="jxr_linenumber" name="L170" href="#L170">170</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>     @EqualsAndHashCode(of = <span class="jxr_string">"origin"</span>)
-<a class="jxr_linenumber" name="L172" href="#L172">172</a>     <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqHref.html">Smart</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> {
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>         <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L174" href="#L174">174</a> <em class="jxr_javadoccomment">         * Original.</em>
-<a class="jxr_linenumber" name="L175" href="#L175">175</a> <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">transient</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> origin;
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>         <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L178" href="#L178">178</a> <em class="jxr_javadoccomment">         * Ctor.</em>
-<a class="jxr_linenumber" name="L179" href="#L179">179</a> <em class="jxr_javadoccomment">         * @param req Original request</em>
-<a class="jxr_linenumber" name="L180" href="#L180">180</a> <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>         <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqHref.html">Smart</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> req) {
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>             <strong class="jxr_keyword">this</strong>.origin = req;
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>         }
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>         @Override
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> CharSequence name) {
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.param(name);
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>         }
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>         @Override
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; names() {
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.names();
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>         }
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>         @Override
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L194" href="#L194">194</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.head();
-<a class="jxr_linenumber" name="L195" href="#L195">195</a>         }
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>         @Override
-<a class="jxr_linenumber" name="L197" href="#L197">197</a>         <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L198" href="#L198">198</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.body();
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>         }
-<a class="jxr_linenumber" name="L200" href="#L200">200</a>         <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L201" href="#L201">201</a> <em class="jxr_javadoccomment">         * Get single param or throw HTTP exception.</em>
-<a class="jxr_linenumber" name="L202" href="#L202">202</a> <em class="jxr_javadoccomment">         * @param name Name of query param</em>
-<a class="jxr_linenumber" name="L203" href="#L203">203</a> <em class="jxr_javadoccomment">         * @return Value of it</em>
-<a class="jxr_linenumber" name="L204" href="#L204">204</a> <em class="jxr_javadoccomment">         * @throws IOException If fails</em>
-<a class="jxr_linenumber" name="L205" href="#L205">205</a> <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L206" href="#L206">206</a>         <strong class="jxr_keyword">public</strong> String single(<strong class="jxr_keyword">final</strong> CharSequence name) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>             <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; params = <strong class="jxr_keyword">this</strong>.origin
-<a class="jxr_linenumber" name="L208" href="#L208">208</a>                 .param(name).iterator();
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/HttpException.html">HttpException</a>(
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>                         HttpURLConnection.HTTP_BAD_REQUEST,
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>                         String.format(<span class="jxr_string">"invalid form body pair: %s"</span>, pair)
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>                     );
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>                 }
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>                 <strong class="jxr_keyword">final</strong> String key = RqForm.Base.decode(
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>                     parts[0].trim().toLowerCase(Locale.ENGLISH)
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>                 );
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>                 <strong class="jxr_keyword">this</strong>.map.putIfAbsent(key, <strong class="jxr_keyword">new</strong> LinkedList&lt;String&gt;());
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>                 <strong class="jxr_keyword">this</strong>.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+<a class="jxr_linenumber" name="L119" href="#L119">119</a>             }
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>         }
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>         @Override
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> CharSequence key) {
+<a class="jxr_linenumber" name="L123" href="#L123">123</a>             <strong class="jxr_keyword">final</strong> List&lt;String&gt; values =
+<a class="jxr_linenumber" name="L124" href="#L124">124</a>                     <strong class="jxr_keyword">this</strong>.map.get(key.toString().toLowerCase(Locale.ENGLISH));
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>             <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; iter;
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>             <strong class="jxr_keyword">if</strong> (values == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>                 iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>                     Collections.&lt;String&gt;emptyList(),
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/misc/Sprintf.html">Sprintf</a>(
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>                         <span class="jxr_string">"there are no params \&quot;%s\&quot; among %d others: %s"</span>,
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>                         key, <strong class="jxr_keyword">this</strong>.map.size(), <strong class="jxr_keyword">this</strong>.map.keySet()
+<a class="jxr_linenumber" name="L132" href="#L132">132</a>                     )
+<a class="jxr_linenumber" name="L133" href="#L133">133</a>                 );
+<a class="jxr_linenumber" name="L134" href="#L134">134</a>             } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>                 iter = <strong class="jxr_keyword">new</strong> VerboseIterable&lt;String&gt;(
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>                     values,
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/misc/Sprintf.html">Sprintf</a>(
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>                         <span class="jxr_string">"there are only %d params by name \&quot;%s\&quot;"</span>,
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>                         values.size(), key
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>                     )
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>                 );
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>             }
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>             <strong class="jxr_keyword">return</strong> iter;
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>         }
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>         @Override
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; names() {
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.map.keySet();
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>         }
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>         <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L150" href="#L150">150</a> <em class="jxr_javadoccomment">         * Decode from URL.</em>
+<a class="jxr_linenumber" name="L151" href="#L151">151</a> <em class="jxr_javadoccomment">         * @param txt Text</em>
+<a class="jxr_linenumber" name="L152" href="#L152">152</a> <em class="jxr_javadoccomment">         * @return Decoded</em>
+<a class="jxr_linenumber" name="L153" href="#L153">153</a> <em class="jxr_javadoccomment">         */</em>
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> String decode(<strong class="jxr_keyword">final</strong> CharSequence txt) {
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>             <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>                 <strong class="jxr_keyword">return</strong> URLDecoder.decode(
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>                     txt.toString(), Charset.defaultCharset().name()
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>                 );
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>             } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> UnsupportedEncodingException ex) {
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ex);
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>             }
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>         }
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>     }
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L165" href="#L165">165</a> <em class="jxr_javadoccomment">     * Smart decorator, with extra features.</em>
+<a class="jxr_linenumber" name="L166" href="#L166">166</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L167" href="#L167">167</a> <em class="jxr_javadoccomment">     * &lt;p&gt;The class is immutable and thread-safe.</em>
+<a class="jxr_linenumber" name="L168" href="#L168">168</a> <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L169" href="#L169">169</a> <em class="jxr_javadoccomment">     * @author Yegor Bugayenko (yegor@teamed.io)</em>
+<a class="jxr_linenumber" name="L170" href="#L170">170</a> <em class="jxr_javadoccomment">     * @since 0.14</em>
+<a class="jxr_linenumber" name="L171" href="#L171">171</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>     @EqualsAndHashCode(of = <span class="jxr_string">"origin"</span>)
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>     <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/takes/rq/RqHref.html">Smart</a> <strong class="jxr_keyword">implements</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> {
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>         <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L175" href="#L175">175</a> <em class="jxr_javadoccomment">         * Original.</em>
+<a class="jxr_linenumber" name="L176" href="#L176">176</a> <em class="jxr_javadoccomment">         */</em>
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">transient</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> origin;
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>         <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L179" href="#L179">179</a> <em class="jxr_javadoccomment">         * Ctor.</em>
+<a class="jxr_linenumber" name="L180" href="#L180">180</a> <em class="jxr_javadoccomment">         * @param req Original request</em>
+<a class="jxr_linenumber" name="L181" href="#L181">181</a> <em class="jxr_javadoccomment">         */</em>
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>         <strong class="jxr_keyword">public</strong> <a href="../../../org/takes/rq/RqHref.html">Smart</a>(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/rq/RqForm.html">RqForm</a> req) {
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>             <strong class="jxr_keyword">this</strong>.origin = req;
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>         }
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>         @Override
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; param(<strong class="jxr_keyword">final</strong> CharSequence name) {
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.param(name);
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>         }
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>         @Override
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; names() {
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.names();
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>         }
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>         @Override
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>         <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L195" href="#L195">195</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.head();
+<a class="jxr_linenumber" name="L196" href="#L196">196</a>         }
+<a class="jxr_linenumber" name="L197" href="#L197">197</a>         @Override
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>         <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L199" href="#L199">199</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.origin.body();
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>         }
+<a class="jxr_linenumber" name="L201" href="#L201">201</a>         <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L202" href="#L202">202</a> <em class="jxr_javadoccomment">         * Get single param or throw HTTP exception.</em>
+<a class="jxr_linenumber" name="L203" href="#L203">203</a> <em class="jxr_javadoccomment">         * @param name Name of query param</em>
+<a class="jxr_linenumber" name="L204" href="#L204">204</a> <em class="jxr_javadoccomment">         * @return Value of it</em>
+<a class="jxr_linenumber" name="L205" href="#L205">205</a> <em class="jxr_javadoccomment">         * @throws IOException If fails</em>
+<a class="jxr_linenumber" name="L206" href="#L206">206</a> <em class="jxr_javadoccomment">         */</em>
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>         <strong class="jxr_keyword">public</strong> String single(<strong class="jxr_keyword">final</strong> CharSequence name) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>             <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; params = <strong class="jxr_keyword">this</strong>.param(name).iterator();
 <a class="jxr_linenumber" name="L209" href="#L209">209</a>             <strong class="jxr_keyword">if</strong> (!params.hasNext()) {
 <a class="jxr_linenumber" name="L210" href="#L210">210</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/HttpException.html">HttpException</a>(
 <a class="jxr_linenumber" name="L211" href="#L211">211</a>                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -232,17 +232,16 @@
 <a class="jxr_linenumber" name="L224" href="#L224">224</a> <em class="jxr_javadoccomment">         */</em>
 <a class="jxr_linenumber" name="L225" href="#L225">225</a>         <strong class="jxr_keyword">public</strong> String single(<strong class="jxr_keyword">final</strong> CharSequence name, <strong class="jxr_keyword">final</strong> String def) {
 <a class="jxr_linenumber" name="L226" href="#L226">226</a>             <strong class="jxr_keyword">final</strong> String value;
-<a class="jxr_linenumber" name="L227" href="#L227">227</a>             <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; params = <strong class="jxr_keyword">this</strong>.origin
-<a class="jxr_linenumber" name="L228" href="#L228">228</a>                 .param(name).iterator();
-<a class="jxr_linenumber" name="L229" href="#L229">229</a>             <strong class="jxr_keyword">if</strong> (params.hasNext()) {
-<a class="jxr_linenumber" name="L230" href="#L230">230</a>                 value = params.next();
-<a class="jxr_linenumber" name="L231" href="#L231">231</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L232" href="#L232">232</a>                 value = def;
-<a class="jxr_linenumber" name="L233" href="#L233">233</a>             }
-<a class="jxr_linenumber" name="L234" href="#L234">234</a>             <strong class="jxr_keyword">return</strong> value;
-<a class="jxr_linenumber" name="L235" href="#L235">235</a>         }
-<a class="jxr_linenumber" name="L236" href="#L236">236</a>     }
-<a class="jxr_linenumber" name="L237" href="#L237">237</a> }
+<a class="jxr_linenumber" name="L227" href="#L227">227</a>             <strong class="jxr_keyword">final</strong> Iterator&lt;String&gt; params = <strong class="jxr_keyword">this</strong>.param(name).iterator();
+<a class="jxr_linenumber" name="L228" href="#L228">228</a>             <strong class="jxr_keyword">if</strong> (params.hasNext()) {
+<a class="jxr_linenumber" name="L229" href="#L229">229</a>                 value = params.next();
+<a class="jxr_linenumber" name="L230" href="#L230">230</a>             } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L231" href="#L231">231</a>                 value = def;
+<a class="jxr_linenumber" name="L232" href="#L232">232</a>             }
+<a class="jxr_linenumber" name="L233" href="#L233">233</a>             <strong class="jxr_keyword">return</strong> value;
+<a class="jxr_linenumber" name="L234" href="#L234">234</a>         }
+<a class="jxr_linenumber" name="L235" href="#L235">235</a>     }
+<a class="jxr_linenumber" name="L236" href="#L236">236</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

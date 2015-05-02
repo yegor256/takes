@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>      @Test
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> parsesHttpHeaders() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">new</strong> RqHeaders(
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">new</strong> RqHeaders.Base(
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>                  <strong class="jxr_keyword">new</strong> RqFake(
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                      Arrays.asList(
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>                          <span class="jxr_string">"GET /h?a=3"</span>,
@@ -73,7 +73,7 @@
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      @Test
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> findsAllHeaders() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          MatcherAssert.assertThat(
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>              <strong class="jxr_keyword">new</strong> RqHeaders(
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>              <strong class="jxr_keyword">new</strong> RqHeaders.Base(
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                  <strong class="jxr_keyword">new</strong> RqFake(
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>                      Arrays.asList(
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>                          <span class="jxr_string">"GET /f?a=3&amp;b-6"</span>,
