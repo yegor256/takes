@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
@@ -56,7 +57,7 @@ public final class BkTimeable implements Back {
     /**
      * Threads storage.
      */
-    private final transient Map<Thread, Long> threads =
+    private final transient ConcurrentMap<Thread, Long> threads =
         new ConcurrentHashMap<Thread, Long>(1);
 
     /**
