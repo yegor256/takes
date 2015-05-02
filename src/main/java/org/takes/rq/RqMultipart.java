@@ -223,7 +223,9 @@ public interface RqMultipart extends Request {
             } finally {
                 out.close();
             }
-            return new RqLive(new FileInputStream(file));
+            return new RqLive(
+                new CapInputStream(new FileInputStream(file), file.length())
+            );
         }
         /**
          * Copy until boundary reached.
