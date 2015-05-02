@@ -132,7 +132,7 @@ public final class RqLengthAware extends RqWrap {
         @Override
         public int read(final byte[] buf) throws IOException {
             final int readed = this.origin.read(buf);
-            this.more -= readed;
+            this.more -= (long) readed;
             return readed;
         }
 
@@ -140,7 +140,7 @@ public final class RqLengthAware extends RqWrap {
         public int read(final byte[] buf, final int off,
             final int len) throws IOException {
             final int readed  = this.origin.read(buf, off, len);
-            this.more -= readed;
+            this.more -= (long) readed;
             return readed;
         }
     }
