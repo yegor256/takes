@@ -45,7 +45,7 @@ public class Transform<T, K> implements Iterable<K> {
     private final transient TransformAction<T, K> action;
 
     /**
-     * Transform elements in the supplied iterable by the action supplied.
+     * Ctor.
      * @param itb Iterable to be transformed
      * @param act The actual transformation implementation
      */
