@@ -23,8 +23,8 @@
  */
 package org.takes.misc;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Joiner;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,30 +39,28 @@ import org.junit.Test;
 public final class SelectTest {
 
     /**
+     * Empty string used in test cases.
+     */
+    private static final String EMPTY = " ";
+
+    /**
      * Select can select with condition.
      */
     @Test
     public void selectsWithCondition() {
-        final List<String> alist = new ArrayList<String>(3);
-        final String aone = "at1";
-        final String atwo = "at2";
-        final String athree = "at31";
-        alist.add(aone);
-        alist.add(atwo);
-        alist.add(athree);
-        final Iterable<String> result = new Select<String>(
-            alist,
-            new Condition<String>() {
-                @Override
-                public boolean fits(final String element) {
-                    return element.endsWith("1");
-                }
-            }
-        );
-        MatcherAssert.assertThat(result, Matchers.hasItems(aone));
         MatcherAssert.assertThat(
-            result,
-            Matchers.not(Matchers.hasItems(atwo))
+            Joiner.on(EMPTY).join(
+                new Select<String>(
+                    Arrays.asList("one", "two", "three1", "four1"),
+                    new Condition<String>() {
+                        @Override
+                        public boolean fits(final String element) {
+                            return element.endsWith("1");
+                        }
+                    }
+                )
+            ),
+            Matchers.equalTo("three1 four1")
         );
     }
 
@@ -71,28 +69,21 @@ public final class SelectTest {
      */
     @Test
     public void selectsWithNotCondition() {
-        final List<String> alist = new ArrayList<String>(3);
-        final String afour = "at4";
-        final String afive = "at5";
-        final String asix = "at61";
-        alist.add(afour);
-        alist.add(afive);
-        alist.add(asix);
-        final Iterable<String> result = new Select<String>(
-            alist,
-            new Condition.Not<String>(
-                new Condition<String>() {
-                    @Override
-                    public boolean fits(final String element) {
-                        return element.endsWith("61");
-                    }
-                }
-            )
-        );
-        MatcherAssert.assertThat(result, Matchers.hasItems(afour, afive));
         MatcherAssert.assertThat(
-            result,
-            Matchers.not(Matchers.hasItems(asix))
+            Joiner.on(EMPTY).join(
+                new Select<String>(
+                    Arrays.asList("at4", "at5", "at61"),
+                    new Condition.Not<String>(
+                        new Condition<String>() {
+                            @Override
+                            public boolean fits(final String element) {
+                                return element.endsWith("61");
+                            }
+                        }
+                    )
+                )
+            ),
+            Matchers.equalTo("at4 at5")
         );
     }
 }
