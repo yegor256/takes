@@ -26,10 +26,11 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Concat;
+import org.takes.misc.Transform;
+import org.takes.misc.TransformAction;
 
 /**
  * Response decorator, with an additional headers.
@@ -62,15 +63,18 @@ public final class RsWithHeaders extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : res.head()) {
-                        head.add(hdr);
-                    }
-                    for (final CharSequence header : headers) {
-                        head.add(header.toString().trim());
-                    }
-                    return head;
+                @SuppressWarnings("unchecked")
+                public Iterable<String> head() throws IOException {
+                    return new Concat<String>(
+                        res.head(),
+                        new Transform<String, String>(
+                            new Transform<CharSequence, String>(
+                                (Iterable<CharSequence>) headers,
+                                new TransformAction.ToString()
+                            ),
+                            new TransformAction.Trim()
+                        )
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
