@@ -123,15 +123,17 @@ public final class PsLinkedin implements Pass {
         throws IOException {
         final String uri = new Href(
             "https://www.linkedin.com/uas/oauth2/accessToken"
-        ).with("grant_type", "authorization_code")
-            .with("client_id", this.app)
-            .with("redirect_uri", home)
-            .with("client_secret", this.key)
-            .with("code", code)
-            .toString();
+        ).toString();
         return new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
+            .body()
+            .formParam("grant_type", "authorization_code")
+            .formParam("client_id", this.app)
+            .formParam("redirect_uri", home)
+            .formParam("client_secret", this.key)
+            .formParam("code", code)
+            .back()
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(JsonResponse.class)
