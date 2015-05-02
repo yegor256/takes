@@ -42,7 +42,7 @@ public final class SelectTest {
      * Select can select with condition.
      */
     @Test
-    public void selectWithCondition() {
+    public void selectsWithCondition() {
         final List<String> alist = new ArrayList<String>(3);
         final String aone = "at1";
         final String atwo = "at2";
@@ -66,4 +66,33 @@ public final class SelectTest {
         );
     }
 
+    /**
+     * Select can select with not condition.
+     */
+    @Test
+    public void selectsWithNotCondition() {
+        final List<String> alist = new ArrayList<String>(3);
+        final String afour = "at4";
+        final String afive = "at5";
+        final String asix = "at61";
+        alist.add(afour);
+        alist.add(afive);
+        alist.add(asix);
+        final Iterable<String> result = new Select<String>(
+            alist,
+            new Condition.Not<String>(
+                new Condition<String>() {
+                    @Override
+                    public boolean fits(final String element) {
+                        return element.endsWith("61");
+                    }
+                }
+            )
+        );
+        MatcherAssert.assertThat(result, Matchers.hasItems(afour, afive));
+        MatcherAssert.assertThat(
+            result,
+            Matchers.not(Matchers.hasItems(asix))
+        );
+    }
 }
