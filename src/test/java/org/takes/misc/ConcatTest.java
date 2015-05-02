@@ -23,8 +23,9 @@
  */
 package org.takes.misc;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Joiner;
+import java.util.Arrays;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,23 +40,23 @@ import org.junit.Test;
 public final class ConcatTest {
 
     /**
+     * Empty string used in test cases.
+     */
+    private static final String EMPTY = " ";
+
+    /**
      * Concat can concatenate.
      */
     @Test
     public void concatenates() {
-        final List<String> alist = new ArrayList<String>(2);
-        final String aone = "a1";
-        final String atwo = "a2";
-        alist.add(aone);
-        alist.add(atwo);
-        final List<String> blist = new ArrayList<String>(2);
-        final String bone = "b1";
-        final String btwo = "b2";
-        blist.add(bone);
-        blist.add(btwo);
         MatcherAssert.assertThat(
-            new Concat<String>(alist, blist),
-            Matchers.hasItems(aone, atwo, bone, btwo)
+            Joiner.on(EMPTY).join(
+                new Concat<String>(
+                    Arrays.asList("one", "two"),
+                    Arrays.asList("three", "four")
+                )
+            ),
+            Matchers.equalTo("one two three four")
         );
     }
 
@@ -64,23 +65,14 @@ public final class ConcatTest {
      */
     @Test
     public void concatenatesWithEmptyList() {
-        final List<String> alist = new ArrayList<String>(2);
-        final String aone = "an1";
-        final String atwo = "an2";
-        alist.add(aone);
-        alist.add(atwo);
-        final List<String> blist = new ArrayList<String>(0);
         MatcherAssert.assertThat(
-            new Concat<String>(alist, blist),
-            Matchers.hasItems(aone, atwo)
-        );
-        MatcherAssert.assertThat(
-            new Concat<String>(alist, blist),
-            Matchers.not(Matchers.hasItems(""))
-        );
-        MatcherAssert.assertThat(
-            new Concat<String>(blist, blist),
-            Matchers.emptyIterable()
+            Joiner.on(EMPTY).join(
+                new Concat<String>(
+                    Arrays.asList("five", "six"),
+                    Collections.<String>emptyList()
+                )
+            ),
+            Matchers.equalTo("five six")
         );
     }
 
