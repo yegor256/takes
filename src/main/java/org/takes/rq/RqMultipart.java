@@ -119,8 +119,9 @@ public interface RqMultipart extends Request {
          */
         public Base(final Request req) throws IOException {
             super(req);
-            final String header = new RqHeaders.Base(req).header("Content-Type")
-                .iterator().next();
+            final String header = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
                 throw new HttpException(
@@ -267,8 +268,9 @@ public interface RqMultipart extends Request {
             final ConcurrentMap<String, List<Request>> map =
                 new ConcurrentHashMap<String, List<Request>>(reqs.size());
             for (final Request req : reqs) {
-                final String header = new RqHeaders.Base(req)
-                    .header("Content-Disposition").iterator().next();
+                final String header = new RqHeaders.Smart(
+                    new RqHeaders.Base(req)
+                ).single("Content-Disposition");
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new HttpException(
@@ -311,8 +313,7 @@ public interface RqMultipart extends Request {
          * @throws HttpException If fails
          */
         public Request single(final CharSequence name) throws HttpException {
-            final Iterator<Request> parts = this.origin
-                .part(name).iterator();
+            final Iterator<Request> parts = this.part(name).iterator();
             if (!parts.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
