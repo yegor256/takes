@@ -26,9 +26,11 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 
 /**
@@ -70,7 +72,8 @@ public final class RqLive extends RqWrap {
             }
             if (data == '\r') {
                 if (input.read() != '\n') {
-                    throw new IOException(
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format(
                             // @checkstyle LineLength (1 line)
                             "there is no LF after CR in header, line #%d: \"%s\"",
@@ -87,7 +90,8 @@ public final class RqLive extends RqWrap {
             }
             // @checkstyle MagicNumber (1 line)
             if (data > 0x7f || data < 0x20) {
-                throw new IOException(
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "illegal character in HTTP header, line #%d: 0x%2X",

@@ -123,7 +123,8 @@ public interface RqMultipart extends Request {
                 .iterator().next();
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
-                throw new IOException(
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
@@ -133,7 +134,8 @@ public interface RqMultipart extends Request {
             }
             final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
             if (!matcher.matches()) {
-                throw new IOException(
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "boundary is not specified in Content-Type header: \"%s\"",
@@ -268,7 +270,8 @@ public interface RqMultipart extends Request {
                     .header("Content-Disposition").iterator().next();
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
-                    throw new IOException(
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format(
                             // @checkstyle LineLength (1 line)
                             "\"name\" not found in Content-Disposition header: %s",

@@ -106,7 +106,8 @@ public interface RqForm extends Request {
                 }
                 final String[] parts = pair.split("=", 2);
                 if (parts.length < 2) {
-                    throw new IOException(
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format("invalid form body pair: %s", pair)
                     );
                 }
