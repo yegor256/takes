@@ -25,10 +25,10 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.Concat;
 
 /**
  * Request with extra header.
@@ -62,13 +62,11 @@ public final class RqWithHeader extends RqWrap {
         super(
             new Request() {
                 @Override
-                public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
-                    for (final String hdr : req.head()) {
-                        head.add(hdr);
-                    }
-                    head.add(header.toString());
-                    return head;
+                public Iterable<String> head() throws IOException {
+                    return new Concat<String>(
+                        req.head(),
+                        Collections.singleton(header.toString())
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
