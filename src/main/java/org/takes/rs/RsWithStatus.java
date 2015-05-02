@@ -92,11 +92,11 @@ public final class RsWithStatus extends RsWrap {
         );
     }
 
-    //@todo #160:DEV To implement concatenation and selection with the
-    // conjunction Concat and Select class to get rid of List.add()
-    // between line 118 to line 127
     /**
      * Make head.
+     * @todo #160:DEV To implement concatenation and selection with the
+     *  conjunction Concat and Select class to get rid of List.add()
+     *  between line 118 to line 127
      * @param origin Original response
      * @param status Status
      * @param reason Reason
