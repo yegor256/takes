@@ -26,7 +26,8 @@ package org.takes.misc;
 import java.util.Iterator;
 
 /**
- * Concat iterable.
+ * Concatenating iterables. It produces an iterable collection combining A and
+ * B, with order of the elements in A first.
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
@@ -45,8 +46,7 @@ public final class Concat<T> implements Iterable<T> {
     private final transient Iterable<T> right;
 
     /**
-     * To produce an iterable collection combining a and b, with order of the
-     * elements in a first.
+     * Ctor.
      * @param aitb First iterable to concat
      * @param bitb Second iterable to conat
      */
