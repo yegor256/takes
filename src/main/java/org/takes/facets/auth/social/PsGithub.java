@@ -66,38 +66,13 @@ public final class PsGithub implements Pass {
     private final transient String key;
 
     /**
-     * GitHub OAuth url.
-     */
-    private final transient String github;
-
-    /**
-     * GitHub API url.
-     */
-    private final transient String api;
-
-    /**
      * Ctor.
      * @param gapp Github app
      * @param gkey Github key
      */
     public PsGithub(final String gapp, final String gkey) {
-      this(gapp, gkey, "https://github.com", "https://api.github.com");
-    }
-
-    /**
-     * Ctor.
-     * @param gapp Github app
-     * @param gkey Github key
-     * @param gurl Github OAuth server
-     * @param aurl Github API server
-     * @checkstyle ParameterNumberCheck (2 lines)
-     */
-    PsGithub(final String gapp, final String gkey,
-        final String gurl, final String aurl) {
         this.app = gapp;
         this.key = gkey;
-        this.github = gurl;
-        this.api = aurl;
     }
 
     @Override
@@ -109,7 +84,7 @@ public final class PsGithub implements Pass {
             throw new IllegalArgumentException("code is not provided");
         }
         return Collections.singleton(
-            this.fetch(this.token(href.toString(), code.next()))
+            PsGithub.fetch(this.token(href.toString(), code.next()))
         ).iterator();
     }
 
@@ -125,9 +100,10 @@ public final class PsGithub implements Pass {
      * @return The user found in Github
      * @throws IOException If fails
      */
-    private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(String.format("%s/user", this.api))
-            .with("access_token", token).toString();
+    private static Identity fetch(final String token) throws IOException {
+        final String uri = new Href("https://api.github.com/user")
+            .with("access_token", token)
+            .toString();
         return PsGithub.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -146,9 +122,10 @@ public final class PsGithub implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        final String uri = new Href(
-            String.format("%s/login/oauth/access_token", this.github)
-        ).with("client_id", this.app).with("redirect_uri", home)
+        // @checkstyle LineLength (1 line)
+        final String uri = new Href("https://github.com/login/oauth/access_token")
+            .with("client_id", this.app)
+            .with("redirect_uri", home)
             .with("client_secret", this.key)
             .with("code", code)
             .toString();
@@ -176,4 +153,5 @@ public final class PsGithub implements Pass {
             String.format("urn:github:%d", json.getInt("id")), props
         );
     }
+
 }

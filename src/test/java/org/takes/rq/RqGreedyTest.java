@@ -32,63 +32,38 @@ import org.junit.Test;
 import org.takes.Request;
 
 /**
- * Test case for {@link RqLive}.
+ * Test case for {@link RqGreedy}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
+ * @since 0.16
  */
-public final class RqLiveTest {
+public final class RqGreedyTest {
 
     /**
-     * RqLive can build a request.
+     * RqGreedy can make request greedy.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsHttpRequest() throws IOException {
-        final Request req = new RqLive(
-            new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
-                    "GET / HTTP/1.1",
-                    "Host:e",
-                    "Content-Length: 5",
-                    "",
-                    "hello"
-                ).getBytes()
+    public void makesRequestGreedy() throws IOException {
+        final Request req = new RqGreedy(
+            new RqLive(
+                new ByteArrayInputStream(
+                    Joiner.on("\r\n").join(
+                        "GET /test HTTP/1.1",
+                        "Host: localhost",
+                        "",
+                        "... the body ..."
+                    ).getBytes()
+                )
             )
-        );
-        MatcherAssert.assertThat(
-            new RqHeaders.Base(req).header("host"),
-            Matchers.hasItem("e")
         );
         MatcherAssert.assertThat(
             new RqPrint(req).printBody(),
-            Matchers.endsWith("ello")
+            Matchers.containsString("the body")
         );
-    }
-
-    /**
-     * RqLive can fail when request is broken.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void failsOnBrokenHttpRequest() throws IOException {
-        new RqLive(
-            new ByteArrayInputStream(
-                "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
-            )
-        );
-    }
-
-    /**
-     * RqLive can fail when request is broken.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void failsOnInvalidCrLfInRequest() throws IOException {
-        new RqLive(
-            new ByteArrayInputStream(
-                "GET /test HTTP/1.1\rHost: localhost".getBytes()
-            )
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body ...")
         );
     }
 
