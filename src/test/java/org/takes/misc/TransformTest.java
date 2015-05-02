@@ -23,8 +23,8 @@
  */
 package org.takes.misc;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.Joiner;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -43,21 +43,19 @@ public final class TransformTest {
      */
     @Test
     public void transformsList() {
-        final List<String> alist = new ArrayList<String>(3);
-        alist.add("a1");
-        alist.add("b1");
-        alist.add("c1");
         MatcherAssert.assertThat(
-            new Transform<String, String>(
-                alist,
-                new TransformAction<String, String>() {
-                    @Override
-                    public String transform(final String element) {
-                        return element.concat("t");
+            Joiner.on(" ").join(
+                new Transform<String, String>(
+                    Arrays.asList("one", "two", "three"),
+                    new TransformAction<String, String>() {
+                        @Override
+                        public String transform(final String element) {
+                            return element.concat("t");
+                        }
                     }
-                }
+                )
             ),
-            Matchers.hasItems("a1t", "b1t", "c1t")
+            Matchers.equalTo("onet twot threet")
         );
     }
 
