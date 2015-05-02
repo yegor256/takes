@@ -37,6 +37,8 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqForm;
+import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsJSON;
 import org.takes.rs.xe.RsXembly;
@@ -49,36 +51,32 @@ import org.xembly.Directives;
  * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
- * @todo #42:30min/DEV when task #229 will be completed please add new check
- *  for the form parameter "code" after line 77. This parameter should
- *  be equals the variable with name "code", see line 66.
  */
 public final class PsGithubTest {
     /**
      * PsGithub can login.
      * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (100 lines)s
      */
     @Test
     public void canLogin() throws IOException {
-        final String token = "GitHubToken";
-        final String code = "GitHubCode";
-        final int userid = 1;
-        final String login = "octocat";
-        final String avatar = "https://github.com/images/error/octocat.gif";
-        final String lgattr = "login";
-        final String acattr = "access_token";
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
+                        final Request greq = new RqGreedy(req);
+                        PsGithubTest.assertParam(greq, "code", "code");
+                        PsGithubTest.assertParam(greq, "client_id", "app");
+                        PsGithubTest.assertParam(greq, "client_secret", "key");
                         return new RsXembly(
                             new XeDirectives(
                                 new Directives().add("OAuth")
                                     .add("token_type").set("bearer").up()
                                     .add("scope").set("repo,gist").up()
-                                    .add(acattr).set(token).toString()
+                                    .add("access_token").set("GitHubToken")
+                                    .toString()
                             )
                         );
                     }
@@ -90,15 +88,18 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param(acattr)
+                            new RqHref.Base(req).href().param("access_token")
                                 .iterator().next(),
-                            Matchers.containsString(token)
+                            Matchers.containsString("GitHubToken")
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
-                                .add(lgattr, login)
-                                .add("id", userid)
-                                .add("avatar_url", avatar)
+                                .add("login", "octocat")
+                                .add("id", 1)
+                                .add(
+                                    "avatar_url",
+                                    "https://github.com/img/octocat.gif"
+                                )
                                 .build()
                         );
                     }
@@ -115,23 +116,36 @@ public final class PsGithubTest {
                         "key",
                         home.toString(),
                         home.toString()
-                    ).enter(
-                        new RqFake("GET", String.format("?code=%s", code))
-                    ).next();
+                    ).enter(new RqFake("GET", "?code=code")).next();
                     MatcherAssert.assertThat(
                         identity.urn(),
-                        Matchers.equalTo(String.format("urn:github:%d", userid))
+                        Matchers.equalTo("urn:github:1")
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get(lgattr),
-                        Matchers.equalTo(login)
+                        identity.properties().get("login"),
+                        Matchers.equalTo("octocat")
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get("avatar"),
-                        Matchers.equalTo(avatar)
+                        Matchers.equalTo("https://github.com/img/octocat.gif")
                     );
                 }
             }
+        );
+    }
+
+    /**
+     * Checks the parameter value for the expected value.
+     * @param req Request
+     * @param param Parameter name
+     * @param value Parameter value
+     * @throws IOException  If some problem inside
+     */
+    private static void assertParam(final Request req,
+        final CharSequence param, final String value)  throws IOException {
+        MatcherAssert.assertThat(
+            new RqForm.Smart(new RqForm.Base(req)).single(param),
+            Matchers.equalTo(value)
         );
     }
 }
