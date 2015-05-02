@@ -150,7 +150,8 @@ public interface RqMultipart extends Request {
             final InputStream body = new RqLengthAware(req).body();
             RqMultipart.Base.skip(body, boundary.length - 2);
             while (body.available() > 0) {
-                if (body.read() == '-') {
+                final int data = body.read();
+                if (data < 0 || data == '-') {
                     break;
                 }
                 RqMultipart.Base.skip(body, 1);

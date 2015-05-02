@@ -86,7 +86,6 @@ public interface RqHeaders extends Request {
         public Base(final Request req) {
             super(req);
         }
-
         @Override
         public Iterable<String> header(final CharSequence key)
             throws IOException {

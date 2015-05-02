@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -127,6 +128,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
+    @Ignore
     public void gracefullyHandlesStuckBack() throws Exception {
         final Take take = new Take() {
             @Override
