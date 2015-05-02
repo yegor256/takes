@@ -94,8 +94,8 @@ public final class RqLive extends RqWrap {
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
-                        "illegal character in HTTP header, line #%d: 0x%2X",
-                        head.size() + 1, data
+                        "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
+                        data, head.size() + 1, new String(baos.toByteArray())
                     )
                 );
             }
