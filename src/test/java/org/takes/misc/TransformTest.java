@@ -34,7 +34,7 @@ import org.junit.Test;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13.8
+ * @since 0.15.2
  */
 public final class TransformTest {
 
@@ -42,7 +42,7 @@ public final class TransformTest {
      * Transform can transform list.
      */
     @Test
-    public void transformList() {
+    public void transformsList() {
         final List<String> alist = new ArrayList<String>(3);
         alist.add("a1");
         alist.add("b1");

@@ -30,7 +30,7 @@ import java.util.Iterator;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13.8
+ * @since 0.15.2
  */
 public class Transform<T, K> implements Iterable<K> {
 
