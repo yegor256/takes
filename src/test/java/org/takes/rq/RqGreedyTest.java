@@ -21,39 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.misc;
+package org.takes.rq;
 
-import java.util.Arrays;
-import java.util.List;
+import com.google.common.base.Joiner;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.collection.IsIterableWithSize;
+import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+
 /**
- * Tests for {@link VerboseIterable}.
- * @author marcus.sanchez (sanchezmarcus@gmail.com)
+ * Test case for {@link RqGreedy}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.15.1
+ * @since 0.16
  */
-public class VerboseIterableTest {
+public final class RqGreedyTest {
 
     /**
-     * VerboseIterable can return correct size collection.
+     * RqGreedy can make request greedy.
+     * @throws IOException If some problem inside
      */
     @Test
-    public final void returnsCorrectSize() {
-        final List<String> valid = Arrays.asList(
-            "Accept: text/plain",
-            "Accept-Charset: utf-8",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-            "Cache-Control: no-cache",
-            "From: user@example.com"
+    public void makesRequestGreedy() throws IOException {
+        final Request req = new RqGreedy(
+            new RqLive(
+                new ByteArrayInputStream(
+                    Joiner.on("\r\n").join(
+                        "GET /test HTTP/1.1",
+                        "Host: localhost",
+                        "",
+                        "... the body ..."
+                    ).getBytes()
+                )
+            )
         );
         MatcherAssert.assertThat(
-            new VerboseIterable<String>(
-                valid,
-                "Empty Error Message"
-            ),
-            IsIterableWithSize.<String>iterableWithSize(valid.size())
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body")
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body ...")
         );
     }
+
 }

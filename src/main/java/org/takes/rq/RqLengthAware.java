@@ -67,7 +67,7 @@ public final class RqLengthAware extends RqWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return new RqLengthAware.CapInputStream(
+                    return new CapInputStream(
                         req.body(),
                         RqLengthAware.length(this)
                     );
@@ -92,57 +92,6 @@ public final class RqLengthAware extends RqWrap {
             length = Long.MAX_VALUE;
         }
         return length;
-    }
-
-    /**
-     * Input stream with a cap.
-     */
-    private static final class CapInputStream extends InputStream {
-        /**
-         * Original stream.
-         */
-        private final transient InputStream origin;
-        /**
-         * More bytes to read.
-         */
-        private transient long more;
-        /**
-         * Ctor.
-         * @param stream Original stream
-         * @param length Max length
-         */
-        CapInputStream(final InputStream stream, final long length) {
-            super();
-            this.origin = stream;
-            this.more = length;
-        }
-        @Override
-        public int available() throws IOException {
-            return (int) Math.min(
-                (long) Integer.MAX_VALUE,
-                Math.min((long) this.origin.available(), this.more)
-            );
-        }
-        @Override
-        public int read() throws IOException {
-            --this.more;
-            return this.origin.read();
-        }
-
-        @Override
-        public int read(final byte[] buf) throws IOException {
-            final int readed = this.origin.read(buf);
-            this.more -= readed;
-            return readed;
-        }
-
-        @Override
-        public int read(final byte[] buf, final int off,
-            final int len) throws IOException {
-            final int readed  = this.origin.read(buf, off, len);
-            this.more -= readed;
-            return readed;
-        }
     }
 
 }

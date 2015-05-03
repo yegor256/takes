@@ -26,9 +26,11 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 
 /**
@@ -41,6 +43,7 @@ import org.takes.Request;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public final class RqLive extends RqWrap {
 
     /**
@@ -69,16 +72,34 @@ public final class RqLive extends RqWrap {
             }
             if (data == '\r') {
                 if (input.read() != '\n') {
-                    throw new IOException("");
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "there is no LF after CR in header, line #%d: \"%s\"",
+                            head.size() + 1, new String(baos.toByteArray())
+                        )
+                    );
                 }
                 if (baos.size() == 0) {
                     break;
                 }
                 head.add(new String(baos.toByteArray()));
                 baos.reset();
-            } else {
-                baos.write(data);
+                continue;
             }
+            // @checkstyle MagicNumber (1 line)
+            if (data > 0x7f || data < 0x20) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
+                        data, head.size() + 1, new String(baos.toByteArray())
+                    )
+                );
+            }
+            baos.write(data);
         }
         return new Request() {
             @Override
