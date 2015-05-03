@@ -102,8 +102,8 @@
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>                      HttpURLConnection.HTTP_BAD_REQUEST,
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>                      String.format(
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>                          <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>                          <span class="jxr_string">"illegal character in HTTP header, line #%d: 0x%2X"</span>,
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>                          head.size() + 1, data
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>                          <span class="jxr_string">"illegal character 0x%02X in HTTP header line #%d: \&quot;%s\&quot;"</span>,
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>                          data, head.size() + 1, <strong class="jxr_keyword">new</strong> String(baos.toByteArray())
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>                      )
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>                 );
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>             }

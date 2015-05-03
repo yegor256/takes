@@ -70,7 +70,7 @@
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> available() <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">return</strong> (<strong class="jxr_keyword">int</strong>) Math.min(
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>              (<strong class="jxr_keyword">long</strong>) Integer.MAX_VALUE,
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>              Math.min((<strong class="jxr_keyword">long</strong>) <strong class="jxr_keyword">this</strong>.origin.available(), <strong class="jxr_keyword">this</strong>.more)
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>              Math.max((<strong class="jxr_keyword">long</strong>) <strong class="jxr_keyword">this</strong>.origin.available(), <strong class="jxr_keyword">this</strong>.more)
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>          );
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>      }
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  
