@@ -67,31 +67,26 @@ public final class RqLengthAware extends RqWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return new CapInputStream(
-                        req.body(),
-                        RqLengthAware.length(this)
-                    );
+                    return RqLengthAware.cap(req);
                 }
             }
         );
     }
 
     /**
-     * Get length in bytes.
+     * Cap the steam.
      * @param req Request
-     * @return Length in bytes or Long.MAX_VALUE if unknown
+     * @return Stream with a cap
      * @throws IOException If fails
      */
-    private static long length(final Request req) throws IOException {
+    private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Content-Length").iterator();
-        final long length;
+        InputStream body = req.body();
         if (hdr.hasNext()) {
-            length = Long.parseLong(hdr.next());
-        } else {
-            length = Long.MAX_VALUE;
+            body = new CapInputStream(body, Long.parseLong(hdr.next()));
         }
-        return length;
+        return body;
     }
 
 }
