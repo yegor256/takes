@@ -67,10 +67,10 @@ public class VerboseIteratorTest {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Arrays.asList(
-                    "Accept: text/plain",
-                    "Accept-Charset: utf-8",
-                    "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-                    "From: user@example.com"
+                    "User-Agent: LII-Cello/1.0 libwww/2.5",
+                    "accept-extension = \";\"",
+                    "Accept: text/*;",
+                    "Accept-Encoding: gzip;q=1.0"
                 ),
                 "Empty Error Message"
             ).iterator().hasNext(), Matchers.equalTo(true)
@@ -108,11 +108,11 @@ public class VerboseIteratorTest {
     @Test(expected = UnsupportedOperationException.class)
     public final void removeValue() {
         final List<String> valid = Arrays.asList(
-            "Accept: text/plain",
-            "Accept-Charset: utf-8",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-            "Cache-Control: no-cache",
-            "From: user@example.com"
+            "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
+            "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
+            "Max-Forwards: 10",
+            "Origin: http://www.example-social-network.com",
+            "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"
         );
         VerboseIterable<String> verbose = new VerboseIterable<String>(
             valid, "Empty Error Message"

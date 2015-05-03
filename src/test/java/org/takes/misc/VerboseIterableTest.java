@@ -28,6 +28,7 @@ import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsIterableWithSize;
 import org.junit.Test;
+
 /**
  * Tests for {@link VerboseIterable}.
  * @author Marcus Sanchez (sanchez.marcus@gmail.com)
