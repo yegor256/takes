@@ -114,7 +114,7 @@ public class VerboseIteratorTest {
             "Origin: http://www.example-social-network.com",
             "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"
         );
-        VerboseIterable<String> verbose = new VerboseIterable<String>(
+        final VerboseIterable<String> verbose = new VerboseIterable<String>(
             valid, "Empty Error Message"
         );
         verbose.iterator().remove();
