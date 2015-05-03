@@ -23,15 +23,32 @@
  */
 package org.takes.http;
 
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import org.junit.Test;
+import org.mockito.Mockito;
+
 /**
  * Test case for {@link BkParallel}.
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.15.2
- * @todo #220:30min/DEV This unit test not implemented but has to be.
- *  E.g. you could pass your own a ExecutorService implementation to the ctor
- *  and verify execute() calls.  But feel free to try another way.
  */
-public class BkParallelTest {
+public final class BkParallelTest {
+    /**
+     * BkParallel can call execute() when called accept().
+     */
+    @Test
+    public void callsExecuteOnAccept() {
+        final ExecutorService executor = Mockito.mock(ExecutorService.class);
+        final BkParallel parallel = new BkParallel(
+            Mockito.mock(Back.class),
+            executor
+        );
+        parallel.accept(Mockito.mock(Socket.class));
+        Mockito.verify(executor, Mockito.times(1)).execute(
+            Mockito.<Runnable>any()
+        );
+    }
 }
