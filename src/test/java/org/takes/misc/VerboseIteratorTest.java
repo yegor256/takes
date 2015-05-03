@@ -44,10 +44,11 @@ public class VerboseIteratorTest {
      */
     @Test
     public final void returnsNextValue() {
+        final String accept = "Accept: text/plain";
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Arrays.asList(
-                    "Accept: text/plain",
+                    accept,
                     "Accept-Charset: utf-8",
                     "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
                     "Cache-Control: no-cache",
@@ -55,7 +56,7 @@ public class VerboseIteratorTest {
                 ),
                 "Empty Error Message"
             ).iterator().next(),
-            Matchers.equalTo("Accept: text/plain")
+            Matchers.equalTo(accept)
         );
     }
 
@@ -72,7 +73,7 @@ public class VerboseIteratorTest {
                     "Accept: text/*;",
                     "Accept-Encoding: gzip;q=1.0"
                 ),
-                "Empty Error Message"
+                "this error should not be thrown"
             ).iterator().hasNext(), Matchers.equalTo(true)
         );
     }
@@ -84,7 +85,7 @@ public class VerboseIteratorTest {
     public final void nextValueThrowsExceptionOnEmptyList() {
         new VerboseIterable<String>(
             Collections.<String>emptyList(),
-            "Empty Error Message"
+            "Expected Error Message"
         ).iterator().next();
     }
 
@@ -96,7 +97,7 @@ public class VerboseIteratorTest {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Collections.<String>emptyList(),
-                "Empty Error Message"
+                "Non used Error Message"
             ).iterator().hasNext(),
             Matchers.equalTo(false)
         );
@@ -115,7 +116,7 @@ public class VerboseIteratorTest {
             "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/2010010"
         );
         final VerboseIterable<String> verbose = new VerboseIterable<String>(
-            valid, "Empty Error Message"
+            valid, "Thrown Error Message"
         );
         verbose.iterator().remove();
         MatcherAssert.assertThat(
