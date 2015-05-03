@@ -132,7 +132,7 @@ Maven will start the server and you can see it at `http://localhost:8080`.
 ## Unit Testing
 
 This is how you can unit test the app, using JUnit 4.x and
-[Hamcrest](http://www.hamcrest.org):
+[Hamcrest](http://hamcrest.org):
 
 ```java
 public final class AppTest {

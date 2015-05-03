@@ -51,6 +51,9 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.1
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @todo #229:30min There is currently no unit test in PsGithubTest that
+ *  checks that the request parameters are passed to the request body,
+ *  instead of the URI. Let's add this test.
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
@@ -124,14 +127,16 @@ public final class PsGithub implements Pass {
         throws IOException {
         // @checkstyle LineLength (1 line)
         final String uri = new Href("https://github.com/login/oauth/access_token")
-            .with("client_id", this.app)
-            .with("redirect_uri", home)
-            .with("client_secret", this.key)
-            .with("code", code)
             .toString();
         return new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
+            .body()
+            .formParam("client_id", this.app)
+            .formParam("redirect_uri", home)
+            .formParam("client_secret", this.key)
+            .formParam("code", code)
+            .back()
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(XmlResponse.class)

@@ -106,7 +106,8 @@ public interface RqForm extends Request {
                 }
                 final String[] parts = pair.split("=", 2);
                 if (parts.length < 2) {
-                    throw new IOException(
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format("invalid form body pair: %s", pair)
                     );
                 }
@@ -204,8 +205,7 @@ public interface RqForm extends Request {
          * @throws IOException If fails
          */
         public String single(final CharSequence name) throws IOException {
-            final Iterator<String> params = this.origin
-                .param(name).iterator();
+            final Iterator<String> params = this.param(name).iterator();
             if (!params.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -224,8 +224,7 @@ public interface RqForm extends Request {
          */
         public String single(final CharSequence name, final String def) {
             final String value;
-            final Iterator<String> params = this.origin
-                .param(name).iterator();
+            final Iterator<String> params = this.param(name).iterator();
             if (params.hasNext()) {
                 value = params.next();
             } else {
