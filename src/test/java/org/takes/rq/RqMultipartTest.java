@@ -259,7 +259,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectPartLength() throws IOException {
-        final int length = 500000000;
+        final int length = 5000;
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
