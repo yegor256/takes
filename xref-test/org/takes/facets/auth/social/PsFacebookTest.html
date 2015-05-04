@@ -33,16 +33,16 @@
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> com.jcabi.http.request.FakeRequest;
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> com.restfb.DefaultWebRequestor;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.net.HttpURLConnection;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Map;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.apache.commons.lang.RandomStringUtils;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.hamcrest.CoreMatchers;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.hamcrest.MatcherAssert;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.net.HttpURLConnection;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.util.Map;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> org.apache.commons.lang.RandomStringUtils;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> org.hamcrest.CoreMatchers;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> org.hamcrest.MatcherAssert;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Pass;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqFake;
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment">/**</em>
@@ -52,27 +52,27 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment"> * @checkstyle MagicNumberCheck (500 lines)</em>
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/takes/facets/auth/social/PsFacebookTest.html">PsFacebookTest</a> {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     * Tests if PsFacebook can call DefaultFacebookClient APIs.</em>
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     * @throws Exception if any error occurs</em>
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      @Test
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> canLogin() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">final</strong> String identifier = RandomStringUtils.randomAlphanumeric(10);
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">final</strong> PsFacebook facebook = <strong class="jxr_keyword">new</strong> PsFacebook(
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>              <strong class="jxr_keyword">new</strong> FakeRequest(
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>                  200,
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>                  <span class="jxr_string">"HTTP OK"</span>,
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>                  Collections.&lt;Map.Entry&lt;String, String&gt;&gt;emptyList(),
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>                  String.format(
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>                      <span class="jxr_string">"access_token=%s"</span>,
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                      RandomStringUtils.randomAlphanumeric(10)
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  ).getBytes(<span class="jxr_string">"utf-8"</span>)
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>              ),
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>              <strong class="jxr_keyword">new</strong> DefaultWebRequestor() {
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  @Override
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  <strong class="jxr_keyword">public</strong> Response executeGet(<strong class="jxr_keyword">final</strong> String url)
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>                      <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     * Tests if PsFacebook can call DefaultFacebookClient APIs.</em>
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment">     * @throws Exception if any error occurs</em>
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      @Test
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> canLogin() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">final</strong> String identifier = RandomStringUtils.randomAlphanumeric(10);
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">final</strong> Pass pass = <strong class="jxr_keyword">new</strong> PsFacebook(
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>              <strong class="jxr_keyword">new</strong> FakeRequest(
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>                  200,
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>                  <span class="jxr_string">"HTTP OK"</span>,
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>                  Collections.&lt;Map.Entry&lt;String, String&gt;&gt;emptyList(),
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  String.format(
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>                      <span class="jxr_string">"access_token=%s"</span>,
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>                      RandomStringUtils.randomAlphanumeric(10)
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  ).getBytes(<span class="jxr_string">"utf-8"</span>)
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>              ),
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>              <strong class="jxr_keyword">new</strong> DefaultWebRequestor() {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  @Override
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                  <strong class="jxr_keyword">public</strong> Response executeGet(<strong class="jxr_keyword">final</strong> String url) {
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Response(
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                          HttpURLConnection.HTTP_OK,
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>                          String.format(
@@ -86,7 +86,7 @@
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>              RandomStringUtils.random(10),
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>              RandomStringUtils.random(10)
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          );
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;Identity&gt; identity = facebook.enter(
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">final</strong> Iterator&lt;Identity&gt; identity = pass.enter(
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              <strong class="jxr_keyword">new</strong> RqFake(
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>                  <span class="jxr_string">"GET"</span>,
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>                  String.format(

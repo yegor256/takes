@@ -184,37 +184,43 @@
 <a class="jxr_linenumber" name="L176" href="#L176">176</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>     <strong class="jxr_keyword">private</strong> String token(<strong class="jxr_keyword">final</strong> String home, <strong class="jxr_keyword">final</strong> String code)
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>         <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>         <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/oauth/access_token"</span>)
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>             .with(<span class="jxr_string">"client_id"</span>, <strong class="jxr_keyword">this</strong>.app)
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>             .with(<span class="jxr_string">"redirect_uri"</span>, home)
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>             .with(<span class="jxr_string">"client_secret"</span>, <strong class="jxr_keyword">this</strong>.key)
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>             .with(<span class="jxr_string">"code"</span>, code)
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>             .toString();
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>         <strong class="jxr_keyword">this</strong>.request.uri().set(URI.create(uri));
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>         <strong class="jxr_keyword">final</strong> String response = <strong class="jxr_keyword">this</strong>.request.fetch().as(RestResponse.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>             .assertStatus(HttpURLConnection.HTTP_OK).body();
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">final</strong> String[] sectors = response.split(<span class="jxr_string">"&amp;"</span>);
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String sector : sectors) {
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>             <strong class="jxr_keyword">final</strong> String[] pair = sector.split(<span class="jxr_string">"="</span>);
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>             <strong class="jxr_keyword">if</strong> (pair.length != 2) {
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L194" href="#L194">194</a>                     String.format(<span class="jxr_string">"Invalid response: '%s'"</span>, response)
-<a class="jxr_linenumber" name="L195" href="#L195">195</a>                 );
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>             }
-<a class="jxr_linenumber" name="L197" href="#L197">197</a>             <strong class="jxr_keyword">if</strong> (<span class="jxr_string">"access_token"</span>.equals(pair[0])) {
-<a class="jxr_linenumber" name="L198" href="#L198">198</a>                 <strong class="jxr_keyword">return</strong> pair[1];
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>             }
-<a class="jxr_linenumber" name="L200" href="#L200">200</a>         }
-<a class="jxr_linenumber" name="L201" href="#L201">201</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L202" href="#L202">202</a>             String.format(
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>                 <span class="jxr_string">"Access token not found in response: '%s'"</span>,
-<a class="jxr_linenumber" name="L204" href="#L204">204</a>                 response
-<a class="jxr_linenumber" name="L205" href="#L205">205</a>             )
-<a class="jxr_linenumber" name="L206" href="#L206">206</a>         );
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>     }
-<a class="jxr_linenumber" name="L208" href="#L208">208</a> 
-<a class="jxr_linenumber" name="L209" href="#L209">209</a> }
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>         <strong class="jxr_keyword">final</strong> String response = <strong class="jxr_keyword">this</strong>.request
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>             .uri()
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>             .set(
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>                 URI.create(
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a>(<span class="jxr_string">"https://graph.facebook.com/oauth/access_token"</span>)
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>                         .with(<span class="jxr_string">"client_id"</span>, <strong class="jxr_keyword">this</strong>.app)
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>                         .with(<span class="jxr_string">"redirect_uri"</span>, home)
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>                         .with(<span class="jxr_string">"client_secret"</span>, <strong class="jxr_keyword">this</strong>.key)
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>                         .with(<span class="jxr_string">"code"</span>, code)
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>                         .toString()
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>                 )
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>             )
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>             .back()
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>             .fetch()
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>             .as(RestResponse.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>             .assertStatus(HttpURLConnection.HTTP_OK).body();
+<a class="jxr_linenumber" name="L195" href="#L195">195</a>         <strong class="jxr_keyword">final</strong> String[] sectors = response.split(<span class="jxr_string">"&amp;"</span>);
+<a class="jxr_linenumber" name="L196" href="#L196">196</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String sector : sectors) {
+<a class="jxr_linenumber" name="L197" href="#L197">197</a>             <strong class="jxr_keyword">final</strong> String[] pair = sector.split(<span class="jxr_string">"="</span>);
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>             <strong class="jxr_keyword">if</strong> (pair.length != 2) {
+<a class="jxr_linenumber" name="L199" href="#L199">199</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>                     String.format(<span class="jxr_string">"Invalid response: '%s'"</span>, response)
+<a class="jxr_linenumber" name="L201" href="#L201">201</a>                 );
+<a class="jxr_linenumber" name="L202" href="#L202">202</a>             }
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>             <strong class="jxr_keyword">if</strong> (<span class="jxr_string">"access_token"</span>.equals(pair[0])) {
+<a class="jxr_linenumber" name="L204" href="#L204">204</a>                 <strong class="jxr_keyword">return</strong> pair[1];
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>             }
+<a class="jxr_linenumber" name="L206" href="#L206">206</a>         }
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>             String.format(
+<a class="jxr_linenumber" name="L209" href="#L209">209</a>                 <span class="jxr_string">"Access token not found in response: '%s'"</span>,
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>                 response
+<a class="jxr_linenumber" name="L211" href="#L211">211</a>             )
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>         );
+<a class="jxr_linenumber" name="L213" href="#L213">213</a>     }
+<a class="jxr_linenumber" name="L214" href="#L214">214</a> 
+<a class="jxr_linenumber" name="L215" href="#L215">215</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
