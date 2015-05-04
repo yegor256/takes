@@ -98,13 +98,7 @@ public final class RsWithStatus extends RsWrap {
      *  conjunction Concat and Select class to get rid of List.add()
      *  between line 118 to line 127. That is, replacing the block using
      *  something like this:
-     *  return new Concat(
-     *      head,
-     *      new Select(
-     *          origin.head(),
-     *          new Condition{//filter out first element}
-     *      )
-     *  )
+     *  return new Concat(head,new Select(origin.head(),new FilterFirstCond()))
      * @param origin Original response
      * @param status Status
      * @param reason Reason
