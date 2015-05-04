@@ -119,8 +119,9 @@ public interface RqMultipart extends Request {
          */
         public Base(final Request req) throws IOException {
             super(req);
-            final String header = new RqHeaders.Base(req).header("Content-Type")
-                .iterator().next();
+            final String header = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
                 throw new HttpException(
@@ -150,7 +151,8 @@ public interface RqMultipart extends Request {
             final InputStream body = new RqLengthAware(req).body();
             RqMultipart.Base.skip(body, boundary.length - 2);
             while (body.available() > 0) {
-                if (body.read() == '-') {
+                final int data = body.read();
+                if (data < 0 || data == '-') {
                     break;
                 }
                 RqMultipart.Base.skip(body, 1);
@@ -194,8 +196,11 @@ public interface RqMultipart extends Request {
          */
         private static void skip(final InputStream stream, final int skip)
             throws IOException {
-            for (int idx = 0; idx < skip; ++idx) {
-                stream.read();
+            if (stream.read(new byte[skip]) != skip) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format("failed to skip %d bytes", skip)
+                );
             }
         }
         /**
@@ -221,7 +226,12 @@ public interface RqMultipart extends Request {
             } finally {
                 out.close();
             }
-            return new RqLive(new FileInputStream(file));
+            return new RqLive(
+                new CapInputStream(
+                    new FileInputStream(file),
+                    file.length()
+                )
+            );
         }
         /**
          * Copy until boundary reached.
@@ -266,8 +276,9 @@ public interface RqMultipart extends Request {
             final ConcurrentMap<String, List<Request>> map =
                 new ConcurrentHashMap<String, List<Request>>(reqs.size());
             for (final Request req : reqs) {
-                final String header = new RqHeaders.Base(req)
-                    .header("Content-Disposition").iterator().next();
+                final String header = new RqHeaders.Smart(
+                    new RqHeaders.Base(req)
+                ).single("Content-Disposition");
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new HttpException(
@@ -310,8 +321,7 @@ public interface RqMultipart extends Request {
          * @throws HttpException If fails
          */
         public Request single(final CharSequence name) throws HttpException {
-            final Iterator<Request> parts = this.origin
-                .part(name).iterator();
+            final Iterator<Request> parts = this.part(name).iterator();
             if (!parts.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,

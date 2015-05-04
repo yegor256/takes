@@ -25,7 +25,6 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -35,6 +34,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
+import org.takes.facets.auth.Pass;
 import org.takes.rq.RqFake;
 
 /**
@@ -44,6 +44,7 @@ import org.takes.rq.RqFake;
  * @checkstyle MagicNumberCheck (500 lines)
  */
 public class PsFacebookTest {
+
     /**
      * Tests if PsFacebook can call DefaultFacebookClient APIs.
      * @throws Exception if any error occurs
@@ -51,7 +52,7 @@ public class PsFacebookTest {
     @Test
     public final void canLogin() throws Exception {
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
-        final PsFacebook facebook = new PsFacebook(
+        final Pass pass = new PsFacebook(
             new FakeRequest(
                 200,
                 "HTTP OK",
@@ -63,8 +64,7 @@ public class PsFacebookTest {
             ),
             new DefaultWebRequestor() {
                 @Override
-                public Response executeGet(final String url)
-                    throws IOException {
+                public Response executeGet(final String url) {
                     return new Response(
                         HttpURLConnection.HTTP_OK,
                         String.format(
@@ -78,7 +78,7 @@ public class PsFacebookTest {
             RandomStringUtils.random(10),
             RandomStringUtils.random(10)
         );
-        final Iterator<Identity> identity = facebook.enter(
+        final Iterator<Identity> identity = pass.enter(
             new RqFake(
                 "GET",
                 String.format(
