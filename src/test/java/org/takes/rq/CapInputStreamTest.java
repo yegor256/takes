@@ -23,67 +23,35 @@
  */
 package org.takes.rq;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Input stream with a cap.
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * Test case for {@link CapInputStream}.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.16
  */
-final class CapInputStream extends InputStream {
+public final class CapInputStreamTest {
 
     /**
-     * Original stream.
+     * CapInputStream can put a cap on a stream.
+     * @throws IOException If some problem inside
      */
-    private final transient InputStream origin;
-
-    /**
-     * More bytes to read.
-     */
-    private transient long more;
-
-    /**
-     * Ctor.
-     * @param stream Original stream
-     * @param length Max length
-     */
-    CapInputStream(final InputStream stream, final long length) {
-        super();
-        this.origin = stream;
-        this.more = length;
-    }
-
-    @Override
-    public int available() throws IOException {
-        return (int) Math.min(
-            (long) Integer.MAX_VALUE,
-            Math.max((long) this.origin.available(), this.more)
+    @Test
+    public void putsCapOnStream() throws IOException {
+        final long length = 50L;
+        MatcherAssert.assertThat(
+            (long) new CapInputStream(
+                new ByteArrayInputStream("test".getBytes()),
+                length
+            ).available(),
+            Matchers.equalTo(length)
         );
     }
 
-    @Override
-    public int read() throws IOException {
-        --this.more;
-        return this.origin.read();
-    }
-
-    @Override
-    public int read(final byte[] buf) throws IOException {
-        final int readed = this.origin.read(buf);
-        this.more -= (long) readed;
-        return readed;
-    }
-
-    @Override
-    public int read(final byte[] buf, final int off,
-        final int len) throws IOException {
-        final int readed  = this.origin.read(buf, off, len);
-        this.more -= (long) readed;
-        return readed;
-    }
 }
