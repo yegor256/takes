@@ -37,6 +37,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqLive;
+import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -50,6 +51,7 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
@@ -72,7 +74,10 @@ public final class BkBasic implements Back {
         final InputStream input = socket.getInputStream();
         try {
             this.print(
-                new RqLive(input),
+                BkBasic.addSocketHeaders(
+                    new RqLive(input),
+                    socket
+                ),
                 new BufferedOutputStream(socket.getOutputStream())
             );
         } finally {
@@ -112,6 +117,25 @@ public final class BkBasic implements Back {
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
             HttpURLConnection.HTTP_INTERNAL_ERROR
+        );
+    }
+
+    /**
+     * Adds custom headers with information about socket.
+     * @param req Request
+     * @param socket Socket
+     * @return Request with custom headers
+     */
+    private static Request addSocketHeaders(final Request req,
+        final Socket socket) {
+        return new RqWithHeader(
+            req, "X-Takes-LocalAddress", socket.getLocalAddress().toString()
+        ).withAdditionalHeader(
+            "X-Takes-LocalPort", Integer.toString(socket.getLocalPort())
+        ).withAdditionalHeader(
+            "X-Takes-RemoteAddress", socket.getInetAddress().toString()
+        ).withAdditionalHeader(
+            "X-Takes-RemotePort", Integer.toString(socket.getPort())
         );
     }
 

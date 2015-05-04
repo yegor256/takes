@@ -53,4 +53,24 @@ public final class RqWithHeaderTest {
         );
     }
 
+    /**
+     * RqWithHeader can add multiply additional headers.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addsMultiplyHeaders() throws IOException {
+        MatcherAssert.assertThat(
+            new RqPrint(
+                new RqWithHeader(new RqFake(), "Header", "Value")
+                    .withAdditionalHeader("TestHeader", "TestValue")
+                    .withAdditionalHeader("SomeHeader", "SomeValue")
+            ).print(),
+            Matchers.allOf(
+                Matchers.containsString("Header: Value"),
+                Matchers.containsString("TestHeader: TestValue"),
+                Matchers.containsString("SomeHeader: SomeValue")
+            )
+        );
+    }
+
 }

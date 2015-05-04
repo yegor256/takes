@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import com.restfb.util.StringUtils;
 import java.io.IOException;
 import java.net.InetAddress;
 import lombok.EqualsAndHashCode;
@@ -55,7 +54,7 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public InetAddress getLocalAddress() throws IOException {
-        return InetAddress.getByName(this.parseHeader("X-Takes-LocalAddress"));
+        return InetAddress.getByName(this.headerValue("X-Takes-LocalAddress"));
     }
 
     /**
@@ -64,7 +63,7 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public InetAddress getRemoteAddress() throws IOException {
-        return InetAddress.getByName(this.parseHeader("X-Takes-RemoteAddress"));
+        return InetAddress.getByName(this.headerValue("X-Takes-RemoteAddress"));
     }
 
     /**
@@ -91,7 +90,7 @@ public final class RqSocket extends RqWrap {
      * @return String value of the provided header
      * @throws IOException If fails
      */
-    private String parseHeader(final CharSequence header) throws IOException {
+    private String headerValue(final CharSequence header) throws IOException {
         String result = "";
         for (final String line : this.head()) {
             final String[] parts = line.split(": ", 2);
@@ -109,11 +108,6 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     private int getPort(final CharSequence header) throws IOException {
-        final String value = this.parseHeader(header);
-        int port = 0;
-        if (!StringUtils.isBlank(value)) {
-            port = Integer.parseInt(value);
-        }
-        return port;
+        return Integer.parseInt(this.headerValue(header));
     }
 }

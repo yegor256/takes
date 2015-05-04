@@ -129,28 +129,22 @@ public final class RqSocketTest {
      * RqSocket can return not found remote port.
      * @throws IOException If some problem inside
      */
-    @Test
+    @Test(expected = NumberFormatException.class)
     public void returnNotFoundRemotePort() throws IOException {
-        MatcherAssert.assertThat(
-            new RqSocket(
-                new RqFake("OPTIONS", "X-Takes-NotFoundPort: 22")
-            ).getRemotePort(),
-            Matchers.is(0)
-        );
+        new RqSocket(
+            new RqFake("OPTIONS", "X-Takes-NotFoundPort: 22")
+        ).getRemotePort();
     }
 
     /**
      * RqSocket can return not found local port.
      * @throws IOException If some problem inside
      */
-    @Test
+    @Test(expected = NumberFormatException.class)
     public void returnNotFoundLocalPort() throws IOException {
-        MatcherAssert.assertThat(
-            new RqSocket(
-                new RqFake("TEST", "X-Takes-NotFoundPort: 80")
-            ).getLocalPort(),
-            Matchers.is(0)
-        );
+        new RqSocket(
+            new RqFake("TEST", "X-Takes-NotFoundPort: 80")
+        ).getLocalPort();
     }
 
     /**

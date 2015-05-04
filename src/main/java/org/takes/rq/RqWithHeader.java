@@ -78,4 +78,15 @@ public final class RqWithHeader extends RqWrap {
         );
     }
 
+    /**
+     * Add additional multiply headers.
+     * @param name Header name
+     * @param value Header value
+     * @return Request with extra header
+     */
+    public RqWithHeader withAdditionalHeader(final CharSequence name,
+        final CharSequence value) {
+        return new RqWithHeader(this, name, value);
+    }
+
 }
