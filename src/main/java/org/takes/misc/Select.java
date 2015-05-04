@@ -114,7 +114,7 @@ public final class Select<T> implements Iterable<T> {
 
         @Override
         public E next() {
-            if (this.buffer.isEmpty()) {
+            if (!this.hasNext()) {
                 throw new NoSuchElementException(
                     "No more element with fits the select condition."
                 );
