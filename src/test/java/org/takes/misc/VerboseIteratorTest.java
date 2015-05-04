@@ -118,9 +118,5 @@ public class VerboseIteratorTest {
             valid, "Thrown Error Message"
         );
         verbose.iterator().remove();
-        MatcherAssert.assertThat(
-            verbose,
-            Matchers.<String>iterableWithSize(Matchers.equalTo(valid.size()-1))
-        );
     }
 }
