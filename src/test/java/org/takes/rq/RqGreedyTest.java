@@ -21,40 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
 import com.google.common.base.Joiner;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
 
 /**
- * Test case for {@link RsText}.
+ * Test case for {@link RqGreedy}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.16
  */
-public final class RsTextTest {
+public final class RqGreedyTest {
 
     /**
-     * RsText can build a plain text response.
+     * RqGreedy can make request greedy.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
+    public void makesRequestGreedy() throws IOException {
+        final Request req = new RqGreedy(
+            new RqLive(
+                new ByteArrayInputStream(
+                    Joiner.on("\r\n").join(
+                        "GET /test HTTP/1.1",
+                        "Host: localhost",
+                        "",
+                        "... the body ..."
+                    ).getBytes()
                 )
             )
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body")
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body ...")
         );
     }
 

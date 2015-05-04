@@ -49,7 +49,7 @@ public interface RqCookies extends Request {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    Iterable<String> cookie(final CharSequence name) throws IOException;
+    Iterable<String> cookie(CharSequence name) throws IOException;
 
     /**
      * Get all cookie names.

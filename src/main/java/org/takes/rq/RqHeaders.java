@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -86,7 +87,6 @@ public interface RqHeaders extends Request {
         public Base(final Request req) {
             super(req);
         }
-
         @Override
         public Iterable<String> header(final CharSequence key)
             throws IOException {
@@ -115,12 +115,10 @@ public interface RqHeaders extends Request {
             }
             return iter;
         }
-
         @Override
         public Iterable<String> names() throws IOException {
             return this.map().keySet();
         }
-
         /**
          * Parse them all in a map.
          *
@@ -156,4 +154,61 @@ public interface RqHeaders extends Request {
         }
     }
 
+    /**
+     * Smart decorator, with extra features.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @since 0.16
+     */
+    @EqualsAndHashCode(of = "origin")
+    final class Smart implements RqHeaders {
+        /**
+         * Original.
+         */
+        private final transient RqHeaders origin;
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Smart(final RqHeaders req) {
+            this.origin = req;
+        }
+        @Override
+        public Iterable<String> header(final CharSequence name)
+            throws IOException {
+            return this.origin.header(name);
+        }
+        @Override
+        public Iterable<String> names() throws IOException {
+            return this.origin.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.origin.body();
+        }
+        /**
+         * Get single header or throw HTTP exception.
+         * @param name Name of header
+         * @return Value of it
+         * @throws IOException If fails
+         */
+        public String single(final CharSequence name) throws IOException {
+            final Iterator<String> params = this.header(name).iterator();
+            if (!params.hasNext()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "header \"%s\" is mandatory", name
+                    )
+                );
+            }
+            return params.next();
+        }
+    }
 }
