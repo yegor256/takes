@@ -120,7 +120,9 @@ public class VerboseIteratorTest {
         verbose.iterator().remove();
         MatcherAssert.assertThat(
             verbose,
-            Matchers.<String>iterableWithSize(Matchers.equalTo(valid.size()-1))
+            Matchers.<String>iterableWithSize(
+                Matchers.equalTo(valid.size() - 1)
+            )
         );
     }
 }
