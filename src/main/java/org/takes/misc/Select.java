@@ -105,7 +105,8 @@ public final class Select<T> implements Iterable<T> {
                 while (this.iterator.hasNext()) {
                     final E object = this.iterator.next();
                     if (this.condition.fits(object)) {
-                        buffer.add(object);
+                        this.buffer.add(object);
+                        break;
                     }
                 }
             }
