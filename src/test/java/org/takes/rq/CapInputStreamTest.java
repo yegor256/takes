@@ -21,40 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import com.google.common.base.Joiner;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
+ * Test case for {@link CapInputStream}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.16
  */
-public final class RsTextTest {
+public final class CapInputStreamTest {
 
     /**
-     * RsText can build a plain text response.
+     * CapInputStream can put a cap on a stream.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void putsCapOnStream() throws IOException {
+        final long length = 50L;
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            (long) new CapInputStream(
+                new ByteArrayInputStream("test".getBytes()),
+                length
+            ).available(),
+            Matchers.equalTo(length)
         );
     }
 
