@@ -44,12 +44,14 @@ public final class RqFormTest {
     @Test
     public void parsesHttpBody() throws IOException {
         final RqForm req = new RqForm.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=3",
-                    "Host: www.example.com"
-                ),
-                "alpha=a+b+c&beta=%20Yes%20"
+            new RqBuffered(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3",
+                        "Host: www.example.com"
+                    ),
+                    "alpha=a+b+c&beta=%20Yes%20"
+                )
             )
         );
         MatcherAssert.assertThat(
