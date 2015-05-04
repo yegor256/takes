@@ -96,7 +96,15 @@ public final class RsWithStatus extends RsWrap {
      * Make head.
      * @todo #160:DEV To implement concatenation and selection with the
      *  conjunction Concat and Select class to get rid of List.add()
-     *  between line 118 to line 127
+     *  between line 118 to line 127. That is, replacing the block using
+     *  something like this:
+     *  return new Concat(
+     *      head,
+     *      new Select(
+     *          origin.head(),
+     *          new Condition{//filter out first element}
+     *      )
+     *  )
      * @param origin Original response
      * @param status Status
      * @param reason Reason

@@ -39,17 +39,12 @@ import org.junit.Test;
 public final class SelectTest {
 
     /**
-     * Empty string used in test cases.
-     */
-    private static final String EMPTY = " ";
-
-    /**
      * Select can select with condition.
      */
     @Test
     public void selectsWithCondition() {
         MatcherAssert.assertThat(
-            Joiner.on(EMPTY).join(
+            Joiner.on(" ").join(
                 new Select<String>(
                     Arrays.asList("one", "two", "three1", "four1"),
                     new Condition<String>() {
@@ -70,7 +65,7 @@ public final class SelectTest {
     @Test
     public void selectsWithNotCondition() {
         MatcherAssert.assertThat(
-            Joiner.on(EMPTY).join(
+            Joiner.on("+").join(
                 new Select<String>(
                     Arrays.asList("at4", "at5", "at61"),
                     new Condition.Not<String>(
@@ -83,7 +78,7 @@ public final class SelectTest {
                     )
                 )
             ),
-            Matchers.equalTo("at4 at5")
+            Matchers.equalTo("at4+at5")
         );
     }
 }
