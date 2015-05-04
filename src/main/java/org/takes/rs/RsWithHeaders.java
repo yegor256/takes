@@ -57,7 +57,9 @@ public final class RsWithHeaders extends RsWrap {
      * @todo #160:DEV To implement the concatenation and
      *  transformation with conjunction of Concat class
      *  and Transform class to get rid of the use of List.add()
-     *  in the anonymous Response class head() method.
+     *  in the anonymous Response class head() method. That is,
+     *  we are going to do something like this:
+     *  return new Concat(res.head(), new Transform(headers, new Trim()))
      * @param res Original response
      * @param headers Headers
      */
