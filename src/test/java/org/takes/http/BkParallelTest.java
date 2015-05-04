@@ -40,6 +40,7 @@ public final class BkParallelTest {
      * BkParallel can call execute() when called accept().
      */
     @Test
+    @SuppressWarnings("PMD.DoNotUseThreads")
     public void callsExecuteOnAccept() {
         final ExecutorService executor = Mockito.mock(ExecutorService.class);
         final BkParallel parallel = new BkParallel(
@@ -47,7 +48,7 @@ public final class BkParallelTest {
             executor
         );
         parallel.accept(Mockito.mock(Socket.class));
-        Mockito.verify(executor, Mockito.times(1)).execute(
+        Mockito.verify(executor).execute(
             Mockito.<Runnable>any()
         );
     }
