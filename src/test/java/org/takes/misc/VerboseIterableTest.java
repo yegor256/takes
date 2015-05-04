@@ -26,7 +26,7 @@ package org.takes.misc;
 import java.util.Arrays;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.collection.IsIterableWithSize;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -54,7 +54,7 @@ public class VerboseIterableTest {
                 valid,
                 "Empty Error Message"
             ),
-            IsIterableWithSize.<String>iterableWithSize(valid.size())
+            Matchers.<String>iterableWithSize(Matchers.equalTo(valid.size()))
         );
     }
 }

@@ -28,7 +28,6 @@ import java.util.Collections;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.hamcrest.collection.IsIterableWithSize;
 import org.junit.Test;
 
 /**
@@ -115,13 +114,13 @@ public class VerboseIteratorTest {
             "Origin: http://www.example-social-network.com",
             "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/2010010"
         );
-        final VerboseIterable<String> verbose = new VerboseIterable<String>(
+        final Iterable<String> verbose = new VerboseIterable<String>(
             valid, "Thrown Error Message"
         );
         verbose.iterator().remove();
         MatcherAssert.assertThat(
             verbose,
-            IsIterableWithSize.<String>iterableWithSize(valid.size() - 1)
+            Matchers.<String>iterableWithSize(Matchers.equalTo(valid.size()-1))
         );
     }
 }
