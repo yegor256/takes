@@ -40,17 +40,12 @@ import org.junit.Test;
 public final class ConcatTest {
 
     /**
-     * Empty string used in test cases.
-     */
-    private static final String EMPTY = " ";
-
-    /**
      * Concat can concatenate.
      */
     @Test
     public void concatenates() {
         MatcherAssert.assertThat(
-            Joiner.on(EMPTY).join(
+            Joiner.on(" ").join(
                 new Concat<String>(
                     Arrays.asList("one", "two"),
                     Arrays.asList("three", "four")
@@ -66,13 +61,13 @@ public final class ConcatTest {
     @Test
     public void concatenatesWithEmptyList() {
         MatcherAssert.assertThat(
-            Joiner.on(EMPTY).join(
+            Joiner.on("+").join(
                 new Concat<String>(
                     Arrays.asList("five", "six"),
                     Collections.<String>emptyList()
                 )
             ),
-            Matchers.equalTo("five six")
+            Matchers.equalTo("five+six")
         );
     }
 
