@@ -34,6 +34,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -112,8 +113,15 @@ public final class BkBasic implements Back {
         writer.close();
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
-            HttpURLConnection.HTTP_INTERNAL_ERROR
+            responseCode(err)
         );
+    }
+
+    private static int responseCode(Throwable err) {
+        if (err instanceof HttpException) {
+            return ((HttpException) err).code();
+        }
+        return HttpURLConnection.HTTP_INTERNAL_ERROR;
     }
 
 }
