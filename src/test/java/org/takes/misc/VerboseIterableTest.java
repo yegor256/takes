@@ -54,7 +54,7 @@ public class VerboseIterableTest {
                 valid,
                 "Empty Error Message"
             ),
-            Matchers.<String>iterableWithSize(Matchers.equalTo(valid.size()))
+            Matchers.<String>iterableWithSize(valid.size())
         );
     }
 }
