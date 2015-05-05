@@ -72,7 +72,7 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public int getLocalPort() throws IOException {
-        return this.getPort("X-Takes-LocalPort");
+        return Integer.parseInt(this.headerValue("X-Takes-LocalPort"));
     }
 
     /**
@@ -81,7 +81,7 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public int getRemotePort() throws IOException {
-        return this.getPort("X-Takes-RemotePort");
+        return Integer.parseInt(this.headerValue("X-Takes-RemotePort"));
     }
 
     /**
@@ -99,15 +99,5 @@ public final class RqSocket extends RqWrap {
             }
         }
         return result;
-    }
-
-    /**
-     * Parses port value from the provided header.
-     * @param header Header to parse
-     * @return Integer value of the port
-     * @throws IOException If fails
-     */
-    private int getPort(final CharSequence header) throws IOException {
-        return Integer.parseInt(this.headerValue(header));
     }
 }
