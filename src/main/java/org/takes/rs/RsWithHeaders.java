@@ -62,7 +62,7 @@ public final class RsWithHeaders extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
+                public Iterable<String> head() throws IOException {
                     return RsWithHeaders.extend(res, headers);
                 }
                 @Override
@@ -81,16 +81,12 @@ public final class RsWithHeaders extends RsWrap {
      * @throws IOException If fails
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static List<String> extend(final Response res,
+    private static Iterable<String> extend(final Response res,
         final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;
         for (final CharSequence hdr: headers) {
             resp = new RsWithHeader(resp, hdr);
         }
-        final List<String> ret = new ArrayList<String>(1);
-        for (final String hdr: resp.head()) {
-            ret.add(hdr);
-        }
-        return ret;
+        return resp.head();
     }
 }
