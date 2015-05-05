@@ -21,66 +21,69 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.rq;
 
 import java.io.IOException;
-import java.util.Iterator;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.rq.RqHeaders;
-import org.takes.rq.RqWrap;
+import java.io.InputStream;
 
 /**
- * Request with auth information.
+ * Input stream with a cap.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.16
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqAuth extends RqWrap {
+final class CapInputStream extends InputStream {
 
     /**
-     * Header with authentication info.
+     * Original stream.
      */
-    private final transient String header;
+    private final transient InputStream origin;
 
     /**
-     * Ctor.
-     * @param request Original
+     * More bytes to read.
      */
-    public RqAuth(final Request request) {
-        this(request, TkAuth.class.getSimpleName());
-    }
+    private transient long more;
 
     /**
      * Ctor.
-     * @param request Original
-     * @param hdr Header to read
+     * @param stream Original stream
+     * @param length Max length
      */
-    public RqAuth(final Request request, final String hdr) {
-        super(request);
-        this.header = hdr;
+    CapInputStream(final InputStream stream, final long length) {
+        super();
+        this.origin = stream;
+        this.more = length;
     }
 
-    /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
-     */
-    public Identity identity() throws IOException {
-        final Iterator<String> headers =
-            new RqHeaders.Base(this).header(this.header).iterator();
-        final Identity user;
-        if (headers.hasNext()) {
-            user = new CcPlain().decode(headers.next().getBytes());
-        } else {
-            user = Identity.ANONYMOUS;
-        }
-        return user;
+    @Override
+    public int available() throws IOException {
+        return (int) Math.min(
+            (long) Integer.MAX_VALUE,
+            Math.max((long) this.origin.available(), this.more)
+        );
     }
 
+    @Override
+    public int read() throws IOException {
+        --this.more;
+        return this.origin.read();
+    }
+
+    @Override
+    public int read(final byte[] buf) throws IOException {
+        final int readed = this.origin.read(buf);
+        this.more -= (long) readed;
+        return readed;
+    }
+
+    @Override
+    public int read(final byte[] buf, final int off,
+        final int len) throws IOException {
+        final int readed  = this.origin.read(buf, off, len);
+        this.more -= (long) readed;
+        return readed;
+    }
 }

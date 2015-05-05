@@ -33,6 +33,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
+import org.takes.tk.TkFixed;
 import org.takes.tk.TkText;
 
 /**
@@ -100,6 +101,26 @@ public final class FkRegex implements Fork {
      */
     public FkRegex(final String ptn, final String text) {
         this(Pattern.compile(ptn), new TkText(text));
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param rsp Response
+     * @since 0.16
+     */
+    public FkRegex(final String ptn, final Response rsp) {
+        this(ptn, new TkFixed(rsp));
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param rsp Response
+     * @since 0.16
+     */
+    public FkRegex(final Pattern ptn, final Response rsp) {
+        this(ptn, new TkFixed(rsp));
     }
 
     /**

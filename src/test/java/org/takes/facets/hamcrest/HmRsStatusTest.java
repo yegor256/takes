@@ -24,60 +24,52 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
-import org.takes.Response;
+import java.net.HttpURLConnection;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.tk.TkEmpty;
+import org.takes.tk.TkHTML;
 
 /**
- * Response Status Matcher.
- *
- * <p>This "matcher" tests given response status code
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link HmRsStatus}.
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
  * @since 0.13
  */
-public final class RsMatchStatus extends TypeSafeMatcher<Response> {
+public final class HmRsStatusTest {
 
     /**
-     * Expected response status code for matcher.
+     * HmRsStatus can test status HTTP_OK.
+     * @throws IOException If some problem inside
      */
-    private final transient String expected;
-
-    /**
-     * Expected input.
-     * @param input Is expected result code.
-     */
-    public RsMatchStatus(final Integer input) {
-        super();
-        this.expected = String.valueOf(input);
+    @Test
+    public void testsStatusOK() throws IOException {
+        MatcherAssert.assertThat(
+            new TkHTML("<html></html>").act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+        );
+        MatcherAssert.assertThat(
+            new TkEmpty().act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+        );
     }
 
     /**
-     * Fail description.
-     * @param description Fail result description.
+     * HmRsStatus can test status HTTP_NOT_FOUND.
+     * @throws IOException If some problem inside
      */
-    @Override
-    public void describeTo(final Description description) {
-        description.appendText("Response Status same as: ")
-            .appendValue(this.expected);
-    }
-
-    /**
-     * Type safe matcher.
-     * @param item Is tested element
-     * @return True when expected type matched.
-     */
-    @Override
-    public boolean matchesSafely(final Response item) {
-        try {
-            final String head = item.head().iterator().next();
-            final String[] parts = head.split(" ");
-            return this.expected.equals(parts[1]);
-        } catch (final IOException exception) {
-            throw new IllegalStateException(exception);
-        }
+    @Test
+    public void testsStatusNotFound() throws IOException {
+        MatcherAssert.assertThat(
+            new TkHTML("<html><body/></html>").act(new RqFake()),
+            Matchers.not(
+                new HmRsStatus(
+                    Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
+                )
+            )
+        );
     }
 
 }

@@ -21,66 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import java.util.Iterator;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.rq.RqHeaders;
-import org.takes.rq.RqWrap;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+import org.takes.Response;
 
 /**
- * Request with auth information.
+ * Response Status Matcher.
  *
+ * <p>This "matcher" tests given response status code.
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.13
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqAuth extends RqWrap {
+public final class HmRsStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Header with authentication info.
+     * Expected response status code matcher.
      */
-    private final transient String header;
+    private final transient Matcher<? extends Integer> matcher;
 
     /**
-     * Ctor.
-     * @param request Original
+     * Expected matcher.
+     * @param mtchr Is expected result code matcher.
      */
-    public RqAuth(final Request request) {
-        this(request, TkAuth.class.getSimpleName());
+    public HmRsStatus(final Matcher<? extends Integer> mtchr) {
+        super();
+        this.matcher = mtchr;
     }
 
     /**
-     * Ctor.
-     * @param request Original
-     * @param hdr Header to read
+     * Fail description.
+     * @param description Fail result description.
      */
-    public RqAuth(final Request request, final String hdr) {
-        super(request);
-        this.header = hdr;
+    @Override
+    public void describeTo(final Description description) {
+        this.matcher.describeTo(description);
     }
 
     /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
+     * Type safe matcher.
+     * @param item Is tested element
+     * @return True when expected type matched.
      */
-    public Identity identity() throws IOException {
-        final Iterator<String> headers =
-            new RqHeaders.Base(this).header(this.header).iterator();
-        final Identity user;
-        if (headers.hasNext()) {
-            user = new CcPlain().decode(headers.next().getBytes());
-        } else {
-            user = Identity.ANONYMOUS;
+    @Override
+    public boolean matchesSafely(final Response item) {
+        try {
+            final String head = item.head().iterator().next();
+            final String[] parts = head.split(" ");
+            return this.matcher.matches(Integer.parseInt(parts[1]));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
         }
-        return user;
     }
 
 }

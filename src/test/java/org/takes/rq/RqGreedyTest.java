@@ -21,56 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.rq;
 
+import com.google.common.base.Joiner;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
-import org.takes.tk.TkHTML;
+import org.takes.Request;
 
 /**
- * Test case for {@link RsMatchStatus}.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * Test case for {@link RqGreedy}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.13
+ * @since 0.16
  */
-public final class RsMatchStatusTest {
+public final class RqGreedyTest {
 
     /**
-     * Happy path tester.
-     * Should test response status code equal to expected code.
+     * RqGreedy can make request greedy.
      * @throws IOException If some problem inside
      */
     @Test
-    public void responseCodeIsEqualToExpected() throws IOException {
-        MatcherAssert.assertThat(
-            new TkHTML("<html></html>").act(new RqFake()),
-            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
-        );
-        MatcherAssert.assertThat(
-            new TkEmpty().act(new RqFake()),
-            Matchers.is(new RsMatchStatus(HttpURLConnection.HTTP_OK))
-        );
-    }
-
-    /**
-     * Fail path tester.
-     * Should test expected code not equal case
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void responseCodeIsNotEqualToExpected() throws IOException {
-        MatcherAssert.assertThat(
-            new TkHTML("<html><body/></html>").act(new RqFake()),
-            Matchers.not(
-                Matchers.is(
-                    new RsMatchStatus(HttpURLConnection.HTTP_NOT_FOUND)
+    public void makesRequestGreedy() throws IOException {
+        final Request req = new RqGreedy(
+            new RqLive(
+                new ByteArrayInputStream(
+                    Joiner.on("\r\n").join(
+                        "GET /test HTTP/1.1",
+                        "Host: localhost",
+                        "",
+                        "... the body ..."
+                    ).getBytes()
                 )
             )
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body")
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body ...")
         );
     }
 
