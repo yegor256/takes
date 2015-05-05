@@ -24,6 +24,10 @@
 
 package org.takes.facets.auth.social;
 
+import com.jcabi.http.Request;
+import com.jcabi.http.request.FakeRequest;
+import com.jcabi.http.response.JsonResponse;
+import com.jcabi.http.response.RestResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -36,7 +40,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
@@ -48,6 +51,7 @@ import org.takes.rs.RsWithType;
  * @version $Id$
  * @since 0.11.3
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsLinkedinTest {
     /**
@@ -62,8 +66,9 @@ public final class PsLinkedinTest {
     @Test
     public void entersSuccessfully() throws IOException {
         MatcherAssert.assertThat(
-            new PsLinkedin(this.mockProfileJson("linkedinTestUser.json"))
-                .enter(REQUEST).next().urn(),
+            new PsLinkedin(
+                this.mockRequest("linkedinTestUser.json"), "testApp", "testKey"
+            ).enter(REQUEST).next().urn(),
             Matchers.is("urn:linkedin:1")
         );
     }
@@ -75,8 +80,8 @@ public final class PsLinkedinTest {
     @Test(expected = IllegalArgumentException.class)
     public void loginFailsNoCode() throws IOException {
         try {
-            new PsLinkedin(new LinkedinProfile("LinkedIn", "key"))
-              .enter(new RqFake("POST", "/?someCode=codeIsNotProvided"));
+            new PsLinkedin("LinkedIn", "someKey")
+                .enter(new RqFake("POST", "/?someCode=codeIsNotProvided"));
         } catch (final IllegalArgumentException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
@@ -94,7 +99,9 @@ public final class PsLinkedinTest {
     public void parsesInvalidFirstNameField() throws IOException {
         MatcherAssert.assertThat(
             new PsLinkedin(
-                this.mockProfileJson("linkedinTestUserInvalidFirstName.json")
+                this.mockRequest(
+                    "linkedinTestUserInvalidFirstName.json"
+                ), "app", "key"
             ).enter(REQUEST).next().properties().get("first_name"),
             // @checkstyle MultipleStringLiteralsCheck (1 line)
             Matchers.is("?")
@@ -109,7 +116,9 @@ public final class PsLinkedinTest {
     public void parsesInvalidLastNameField() throws IOException {
         MatcherAssert.assertThat(
             new PsLinkedin(
-                this.mockProfileJson("linkedinTestUserInvalidLastName.json")
+                this.mockRequest(
+                    "linkedinTestUserInvalidLastName.json"
+                ), "tapp", "tkey"
             ).enter(REQUEST).next()
             .properties().get("last_name"),
             // @checkstyle MultipleStringLiteralsCheck (1 line)
@@ -125,7 +134,9 @@ public final class PsLinkedinTest {
     public void parsesInvalidIdField() throws IOException {
         try {
             new PsLinkedin(
-                this.mockProfileJson("linkedinTestUserInvalidId.json")
+                this.mockRequest(
+                    "linkedinTestUserInvalidId.json"
+                ), "appTest", "keyTest"
             ).enter(REQUEST);
         } catch (final ClassCastException ex) {
             MatcherAssert.assertThat(
@@ -150,7 +161,7 @@ public final class PsLinkedinTest {
             HttpURLConnection.HTTP_OK
         );
         MatcherAssert.assertThat(
-            new PsLinkedin(this.mockProfileJson("linkedinTestUser.json"))
+            new PsLinkedin("someApp", "someTestKey")
                 .exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );
@@ -168,24 +179,47 @@ public final class PsLinkedinTest {
     }
 
     /**
-     * Creates mocked LinkedIn profile json from the test data.
+     * Creates mocked JdkRequest factory.
      * @param filename Json file with test data
-     * @return MemberProfileJson parsed
+     * @return JdkRequestFactory mocked
      * @throws IOException If some problem inside
      */
-    private MemberProfileJson mockProfileJson(final String filename)
+    private JdkRequestFactory mockRequest(final String filename)
+        throws IOException {
+        final JdkRequestFactory factory =
+            Mockito.mock(JdkRequestFactory.class);
+        final Request fakerequest = Mockito.mock(Request.class);
+        Mockito.when(factory.newInstance(Mockito.anyString()))
+            .thenReturn(fakerequest);
+        Mockito.when(fakerequest.method("POST")).thenReturn(fakerequest);
+        Mockito.when(
+            fakerequest.header(
+                Mockito.anyString(), Mockito.anyString()
+            )
+        ).thenReturn(fakerequest);
+        Mockito.when(fakerequest.fetch())
+            .thenReturn(
+                new RestResponse(this.mockResponse("accessTokenResponse.json"))
+            ).thenReturn(new RestResponse(this.mockResponse(filename)));
+        return factory;
+    }
+
+    /**
+     * Creates json response from the test data file.
+     * @param filename Json file with test data
+     * @return JsonResponse
+     * @throws IOException If file is not found
+     */
+    private JsonResponse mockResponse(final String filename)
         throws IOException {
         final FileInputStream fis = new FileInputStream(
             PsLinkedinTest.class.getResource(filename).getPath()
         );
-        final MemberProfileJson json =
-            Mockito.mock(MemberProfileJson.class);
-        Mockito.when(
-            json.fetch(
-                Mockito.anyString(), Mockito.anyString(),
-                Mockito.any(Href.class)
-            )
-        ).thenReturn(Json.createReader(fis).readObject());
-        return json;
+        final JsonResponse response = new JsonResponse(
+            new FakeRequest().withBody(
+                Json.createReader(fis).readObject().toString()
+            ).fetch()
+        );
+        return response;
     }
 }

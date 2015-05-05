@@ -24,7 +24,10 @@
 
 package org.takes.facets.auth.social;
 
+import com.jcabi.http.response.JsonResponse;
+import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,49 +48,115 @@ import org.takes.rq.RqHref;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.11.3
- * @checkstyle LineLength (500 lines)
  */
-@EqualsAndHashCode(of = { "json" })
+@EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
     /**
-     * Social network member profile in json format.
+     * Request factory.
      */
-    private final transient MemberProfileJson json;
+    private final transient JdkRequestFactory factory;
+
+    /**
+     * App name.
+     */
+    private final transient String app;
+
+    /**
+     * Key.
+     */
+    private final transient String key;
 
     /**
      * Ctor.
-     * @param jsn Member profile json
+     * @param lapp Linkedin app
+     * @param lkey Linkedin key
      */
-    public PsLinkedin(final MemberProfileJson jsn) {
-        this.json = jsn;
+    public PsLinkedin(final String lapp, final String lkey) {
+        this(new JdkRequestFactory(), lapp, lkey);
+    }
+
+    /**
+     * Ctor with factory for testing purposes.
+     * @param lfactory Request factory
+     * @param lapp Linkedin app
+     * @param lkey Linkedin key
+     */
+    PsLinkedin(final JdkRequestFactory lfactory, final String lapp,
+        final String lkey) {
+        this.factory = lfactory;
+        this.app = lapp;
+        this.key = lkey;
     }
 
     @Override
     public Iterator<Identity> enter(final Request request)
         throws IOException {
+        final Href href = new RqHref.Base(request).href();
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        final Iterator<String> code = href.param("code").iterator();
+        if (!code.hasNext()) {
+            throw new IllegalArgumentException("code is not provided");
+        }
         return Collections.singleton(
-            PsLinkedin.parse(
-                this.json.fetch(
-                    new Href("https://www.linkedin.com/uas/oauth2/accessToken")
-                        .with("grant_type", "authorization_code")
-                        .toString(),
-                    // @checkstyle LineLength (1 line)
-                    "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)",
-                    new RqHref.Base(request).href()
-                )
-            )
+            this.fetch(this.token(href.toString(), code.next()))
         ).iterator();
     }
 
     @Override
     public Response exit(final Response response,
-        final Identity identity) {
+                         final Identity identity) {
         return response;
     }
 
     /**
+     * Get user name from Linkedin, with the token provided.
+     * @param token PsLinkedin access token
+     * @return The user found in PsLinkedin
+     * @throws IOException If fails
+     */
+    private Identity fetch(final String token) throws IOException {
+        // @checkstyle LineLength (1 line)
+        final String uri = new Href("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)")
+            .with("format", "json")
+            .with("oauth2_access_token", token).toString();
+        return PsLinkedin.parse(
+            this.factory.newInstance(uri)
+                .header("accept", "application/json")
+                .fetch().as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .as(JsonResponse.class).json().readObject()
+        );
+    }
+
+    /**
+     * Retrieve PsLinkedin access token.
+     * @param home Home of this page
+     * @param code PsLinkedin "authorization code"
+     * @return The token
+     * @throws IOException If failed
+     */
+    private String token(final String home, final String code)
+        throws IOException {
+        final String uri = new Href(
+            "https://www.linkedin.com/uas/oauth2/accessToken"
+        ).with("grant_type", "authorization_code")
+            .with("client_id", this.app)
+            .with("redirect_uri", home)
+            .with("client_secret", this.key)
+            .with("code", code)
+            .toString();
+        return this.factory.newInstance(uri)
+            .method("POST")
+            .header("Accept", "application/xml")
+            .fetch().as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .as(JsonResponse.class)
+            .json().readObject().getString("access_token");
+    }
+
+    /**
      * Make identity from JSON object.
-     * @param json JSON received from LinkedIn
+     * @param json JSON received from Github
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {

@@ -24,29 +24,26 @@
 
 package org.takes.facets.auth.social;
 
-import java.io.IOException;
-import javax.json.JsonObject;
-import org.takes.misc.Href;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Social network member profile in json format
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
- *
+ * Test case for {@link JdkRequestFactory}.
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.14.4
+ * @since 1.0
  */
-public interface MemberProfileJson {
-
+public final class JdkRequestFactoryTest {
     /**
-     * Gets json object from social network.
-     * @param tokenurl Access token URL
-     * @param socialurl Social network API url to request profile fields
-     * @param home Home of this page
-     * @return Profile json data found in social network
-     * @throws IOException If fails
+     * JdkRequestFactory can create JdkRequest.
+     * @throws Exception If some problem inside
      */
-    JsonObject fetch(String tokenurl, String socialurl,
-        final Href home) throws IOException;
+    @Test
+    public void createsJdkRequest() throws Exception {
+        MatcherAssert.assertThat(
+            new JdkRequestFactory().newInstance("test"),
+            Matchers.notNullValue()
+        );
+    }
 }
