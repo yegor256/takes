@@ -48,14 +48,11 @@ public final class TkMethodsTest {
         final Take take = Mockito.mock(Take.class);
         final RqFake req = new RqFake(method);
         new TkMethods(take, method).act(req);
-        Mockito.verify(
-            take,
-            Mockito.times(1)
-        ).act(
-                Matchers.argThat(
-                    CoreMatchers.equalTo(req)
-                )
-            );
+        Mockito.verify(take).act(
+            Matchers.argThat(
+                CoreMatchers.equalTo(req)
+            )
+        );
     }
 
     /**
