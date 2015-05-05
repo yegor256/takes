@@ -79,7 +79,7 @@ public final class RqWithHeader extends RqWrap {
     }
 
     /**
-     * Add additional multiply headers.
+     * Add additional header.
      * @param name Header name
      * @param value Header value
      * @return Request with extra header

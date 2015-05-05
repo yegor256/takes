@@ -54,11 +54,11 @@ public final class RqWithHeaderTest {
     }
 
     /**
-     * RqWithHeader can add multiply additional headers.
+     * RqWithHeader can add multiple additional headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsMultiplyHeaders() throws IOException {
+    public void addsMultipleHeaders() throws IOException {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithHeader(new RqFake(), "Header", "Value")
