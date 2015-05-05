@@ -23,7 +23,11 @@
  */
 package org.takes.rs;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -55,22 +59,38 @@ public final class RsWithHeaders extends RsWrap {
      */
     public RsWithHeaders(final Response res,
         final Iterable<? extends CharSequence> headers) {
-        super(RsWithHeaders.build(res, headers));
+        super(
+            new Response() {
+                @Override
+                public List<String> head() throws IOException {
+                    return RsWithHeaders.extend(res, headers);
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return res.body();
+                }
+            }
+        );
     }
 
     /**
-     * Build a response.
+     * Add to head additional headers.
      * @param res Original response
-     * @param headers Headers
-     * @return Response with headers
+     * @param headers Values witch will be added to head
+     * @return Head with additional headers
+     * @throws IOException If fails
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static Response build(final Response res,
-        final Iterable<? extends CharSequence> headers) {
+    private static List<String> extend(final Response res,
+        final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;
         for (final CharSequence hdr: headers) {
             resp = new RsWithHeader(resp, hdr);
         }
-        return resp;
+        final List<String> ret = new ArrayList<String>(1);
+        for (final String hdr: resp.head()) {
+            ret.add(hdr);
+        }
+        return ret;
     }
 }
