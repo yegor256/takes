@@ -37,7 +37,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqLive;
-import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -128,15 +128,15 @@ public final class BkBasic implements Back {
      */
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
-        return new RqWithHeader(
-            req, "X-Takes-LocalAddress", socket.getLocalAddress().toString()
-        ).withAdditionalHeader(
-            "X-Takes-LocalPort", Integer.toString(socket.getLocalPort())
-        ).withAdditionalHeader(
-            "X-Takes-RemoteAddress", socket.getInetAddress().toString()
-        ).withAdditionalHeader(
-            "X-Takes-RemotePort", Integer.toString(socket.getPort())
+        return new RqWithHeaders(
+            req, new StringBuilder().append("X-Takes-LocalAddress: ")
+            .append(socket.getLocalAddress().toString())
+            .append("X-Takes-LocalPort")
+            .append(Integer.toString(socket.getLocalPort()))
+            .append("X-Takes-RemoteAddress")
+            .append(socket.getInetAddress().toString())
+            .append("X-Takes-RemotePort")
+            .append(Integer.toString(socket.getPort()))
         );
     }
-
 }

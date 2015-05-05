@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -31,37 +32,45 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RqWithHeader}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RqWithHeaders}.
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.9
+ * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class RqWithHeaderTest {
-
+public final class RqWithHeadersTest {
     /**
-     * RqWithHeader can add a header.
+     * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsHttpHeaders() throws IOException {
+    public void addsHeadersToRequest() throws IOException {
         MatcherAssert.assertThat(
             new RqPrint(
-                new RqWithHeader(
+                new RqWithHeaders(
                     new RqFake(),
-                    "Host", "www.example.com"
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
                 )
             ).print(),
-            Matchers.containsString("Host: www.example.com")
+            Matchers.startsWith(
+                Joiner.on("\r\n").join(
+                    "GET /",
+                    "Host: www.example.com",
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
+                )
+            )
         );
     }
 
     /**
-     * Checks RqWithHeader equals method.
+     * Checks RqWithHeaders equals method.
      * @throws Exception If some problem inside
      */
     @Test
     public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeader.class)
+        EqualsVerifier.forClass(RqWithHeaders.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
             .verify();

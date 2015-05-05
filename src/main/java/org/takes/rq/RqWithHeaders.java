@@ -25,6 +25,7 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -35,30 +36,29 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqWithHeader extends RqWrap {
+public final class RqWithHeaders extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
-     * @param name Header name
-     * @param value Header value
+     * @param headers Headers to add
      */
-    public RqWithHeader(final Request req, final CharSequence name,
-        final CharSequence value) {
-        this(req, String.format("%s: %s", name, value));
+    public RqWithHeaders(final Request req, final CharSequence... headers) {
+        this(req, Arrays.asList(headers));
     }
 
     /**
      * Ctor.
      * @param req Original request
-     * @param header Header to add
+     * @param headers Headers to add
      */
-    public RqWithHeader(final Request req, final CharSequence header) {
+    public RqWithHeaders(final Request req,
+        final Iterable<? extends CharSequence> headers) {
         super(
             new Request() {
                 @Override
@@ -67,7 +67,9 @@ public final class RqWithHeader extends RqWrap {
                     for (final String hdr : req.head()) {
                         head.add(hdr);
                     }
-                    head.add(header.toString());
+                    for (final CharSequence header : headers) {
+                        head.add(header.toString().trim());
+                    }
                     return head;
                 }
                 @Override

@@ -54,7 +54,10 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public InetAddress getLocalAddress() throws IOException {
-        return InetAddress.getByName(this.headerValue("X-Takes-LocalAddress"));
+        return InetAddress.getByName(
+            new RqHeaders.Base(this).header("X-Takes-LocalAddress")
+                .iterator().next()
+        );
     }
 
     /**
@@ -63,7 +66,10 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public InetAddress getRemoteAddress() throws IOException {
-        return InetAddress.getByName(this.headerValue("X-Takes-RemoteAddress"));
+        return InetAddress.getByName(
+            new RqHeaders.Base(this).header("X-Takes-RemoteAddress")
+                .iterator().next()
+        );
     }
 
     /**
@@ -72,7 +78,10 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public int getLocalPort() throws IOException {
-        return Integer.parseInt(this.headerValue("X-Takes-LocalPort"));
+        return Integer.parseInt(
+            new RqHeaders.Base(this).header("X-Takes-LocalPort")
+                .iterator().next()
+        );
     }
 
     /**
@@ -81,23 +90,9 @@ public final class RqSocket extends RqWrap {
      * @throws IOException If fails
      */
     public int getRemotePort() throws IOException {
-        return Integer.parseInt(this.headerValue("X-Takes-RemotePort"));
-    }
-
-    /**
-     * Parses value of the provided header from head.
-     * @param header Header to parse
-     * @return String value of the provided header
-     * @throws IOException If fails
-     */
-    private String headerValue(final CharSequence header) throws IOException {
-        String result = "";
-        for (final String line : this.head()) {
-            final String[] parts = line.split(": ", 2);
-            if (parts[0].contains(header)) {
-                result = parts[1];
-            }
-        }
-        return result;
+        return Integer.parseInt(
+            new RqHeaders.Base(this).header("X-Takes-RemotePort")
+                .iterator().next()
+        );
     }
 }

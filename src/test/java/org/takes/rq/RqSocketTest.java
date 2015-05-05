@@ -25,6 +25,7 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.NoSuchElementException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
@@ -50,7 +51,9 @@ public final class RqSocketTest {
     public void returnLocalAddress() throws IOException {
         MatcherAssert.assertThat(
             new RqSocket(
-                new RqFake("GET", "X-Takes-LocalAddress: 192.168.134.1")
+                new RqWithHeader(
+                    new RqFake(), "X-Takes-LocalAddress: 192.168.134.1"
+                )
             ).getLocalAddress(),
             Matchers.is(InetAddress.getByName("192.168.134.1"))
         );
@@ -63,8 +66,9 @@ public final class RqSocketTest {
     @Test
     public void returnLocalPort() throws IOException {
         MatcherAssert.assertThat(
-            new RqSocket(new RqFake("PATCH", "X-Takes-LocalPort: 55555"))
-                .getLocalPort(),
+            new RqSocket(
+                new RqWithHeader(new RqFake(), "X-Takes-LocalPort: 55555")
+            ).getLocalPort(),
             Matchers.is(55555)
         );
     }
@@ -77,7 +81,9 @@ public final class RqSocketTest {
     public void returnRemoteAddress() throws IOException {
         MatcherAssert.assertThat(
             new RqSocket(
-                new RqFake("POST", "X-Takes-RemoteAddress: 10.233.189.20")
+                new RqWithHeader(
+                    new RqFake(), "X-Takes-RemoteAddress: 10.233.189.20"
+                )
             ).getRemoteAddress(),
             Matchers.is(InetAddress.getByName("10.233.189.20"))
         );
@@ -91,7 +97,7 @@ public final class RqSocketTest {
     public void returnRemotePort() throws IOException {
         MatcherAssert.assertThat(
             new RqSocket(
-                new RqFake("PUT", "X-Takes-RemotePort: 80")
+                new RqWithHeader(new RqFake(), "X-Takes-RemotePort: 80")
             ).getRemotePort(),
             Matchers.is(80)
         );
@@ -101,11 +107,13 @@ public final class RqSocketTest {
      * RqSocket can return not found remote address.
      * @throws IOException If some problem inside
      */
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void returnNotFoundRemoteAddress() throws IOException {
         MatcherAssert.assertThat(
             new RqSocket(
-                new RqFake("DELETE", "X-Takes-NotFoundInetAddress: x.x.x.x")
+                new RqWithHeader(
+                    new RqFake(), "X-Takes-NotFoundInetAddress: x.x.x.x"
+                )
             ).getRemoteAddress(),
             Matchers.is(InetAddress.getByName("127.0.0.1"))
         );
@@ -115,11 +123,13 @@ public final class RqSocketTest {
      * RqSocket can return not found local address.
      * @throws IOException If some problem inside
      */
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void returnNotFoundLocalAddress() throws IOException {
         MatcherAssert.assertThat(
             new RqSocket(
-                new RqFake("HEAD", "X-Takes-NotFoundInetAddress: 10.233.189.20")
+                new RqWithHeader(
+                    new RqFake(), "X-Takes-NotFoundInetAddress: 10.233.189.20"
+                )
             ).getLocalAddress(),
             Matchers.is(InetAddress.getByName("127.0.0.1"))
         );
@@ -129,10 +139,10 @@ public final class RqSocketTest {
      * RqSocket can return not found remote port.
      * @throws IOException If some problem inside
      */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NoSuchElementException.class)
     public void returnNotFoundRemotePort() throws IOException {
         new RqSocket(
-            new RqFake("OPTIONS", "X-Takes-NotFoundPort: 22")
+            new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 22")
         ).getRemotePort();
     }
 
@@ -140,10 +150,10 @@ public final class RqSocketTest {
      * RqSocket can return not found local port.
      * @throws IOException If some problem inside
      */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = NoSuchElementException.class)
     public void returnNotFoundLocalPort() throws IOException {
         new RqSocket(
-            new RqFake("TEST", "X-Takes-NotFoundPort: 80")
+            new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 80")
         ).getLocalPort();
     }
 
