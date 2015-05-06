@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"addres\"",
                 "",
@@ -85,22 +86,23 @@ public final class RqMultipartTest {
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoClosingBoundaryFound() throws IOException {
-        final Request req = new RqFake(
-            Arrays.asList(
-                "POST /h?a=4 HTTP/1.1",
-                "Host: rtw.example.com",
-                "Content-Type: multipart/form-data; boundary=AaB01x",
-                "Content-Length: 100007"
-            ),
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "--AaB01x",
-                "Content-Disposition: form-data; fake=\"address\"",
-                "",
-                "447 N Wolfe Rd, Sunnyvale, CA 94085",
-                "Content-Transfer-Encoding: uwf-8"
+        new RqMultipart.Base(
+            new RqFake(
+                Arrays.asList(
+                    "POST /h?a=4 HTTP/1.1",
+                    "Host: rtw.example.com",
+                    "Content-Type: multipart/form-data; boundary=AaB01x",
+                    "Content-Length: 100007"
+                ),
+                Joiner.on(RqMultipartTest.CRLF).join(
+                    "--AaB01x",
+                    "Content-Disposition: form-data; fake=\"address\"",
+                    "",
+                    "447 N Wolfe Rd, Sunnyvale, CA 94085",
+                    "Content-Transfer-Encoding: uwf-8"
+                )
             )
         );
-        new RqMultipart.Base(req);
     }
 
     /**
@@ -111,14 +113,15 @@ public final class RqMultipartTest {
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoNameAtContentDispositionHeader()
         throws IOException {
-        final Request req = RqMultipartTest.create(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; fake=\"address\"",
-                "",
-                "340 N Wolfe Rd, Sunnyvale, CA 94085"
+        new RqMultipart.Base(
+            RqMultipartTest.request(
+                Joiner.on(RqMultipartTest.CRLF).join(
+                    "Content-Disposition: form-data; fake=\"address\"",
+                    "",
+                    "340 N Wolfe Rd, Sunnyvale, CA 94085"
+                )
             )
         );
-        new RqMultipart.Base(req);
     }
 
     /**
@@ -129,16 +132,17 @@ public final class RqMultipartTest {
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
         throws IOException {
-        final Request req = new RqFake(
-            Arrays.asList(
-                "POST /h?s=3 HTTP/1.1",
-                "Host: wwo.example.com",
-                "Content-Type: multipart/form-data; boundaryAaB03x",
-                "Content-Length: 100005"
-            ),
-            ""
+        new RqMultipart.Base(
+            new RqFake(
+                Arrays.asList(
+                    "POST /h?s=3 HTTP/1.1",
+                    "Host: wwo.example.com",
+                    "Content-Type: multipart/form-data; boundaryAaB03x",
+                    "Content-Length: 100005"
+                ),
+                ""
+            )
         );
-        new RqMultipart.Base(req);
     }
 
     /**
@@ -147,16 +151,17 @@ public final class RqMultipartTest {
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnInvalidContentTypeHeader() throws IOException {
-        final Request req = new RqFake(
-            Arrays.asList(
-                "POST /h?r=3 HTTP/1.1",
-                "Host: www.example.com",
-                "Content-Type: multipart; boundary=AaB03x",
-                "Content-Length: 100004"
-            ),
-            ""
+        new RqMultipart.Base(
+            new RqFake(
+                Arrays.asList(
+                    "POST /h?r=3 HTTP/1.1",
+                    "Host: www.example.com",
+                    "Content-Type: multipart; boundary=AaB03x",
+                    "Content-Length: 100004"
+                ),
+                ""
+            )
         );
-        new RqMultipart.Base(req);
     }
 
     /**
@@ -165,7 +170,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -210,7 +215,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -231,7 +236,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectNamesSet() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -245,6 +250,35 @@ public final class RqMultipartTest {
             Matchers.<Iterable<String>>equalTo(
                 new HashSet<String>(Arrays.asList("address", "data"))
             )
+        );
+    }
+
+    /**
+     * RqMultipart.Base can return correct part length.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void returnsCorrectPartLength() throws IOException {
+        final int length = 5000;
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: www.example.com",
+                "Content-Type: multipart/form-data; boundary=zzz"
+            ),
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--zzz",
+                "Content-Disposition: form-data; name=\"x-1\"",
+                "",
+                StringUtils.repeat("X", length),
+                "--zzz--"
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqMultipart.Smart(
+                new RqMultipart.Base(req)
+            ).single("x-1").body().available(),
+            Matchers.equalTo(length)
         );
     }
 
@@ -302,7 +336,7 @@ public final class RqMultipartTest {
      * @param dispositions Content dispositions
      * @return Request
      */
-    private static Request create(final String... dispositions) {
+    private static Request request(final String... dispositions) {
         final String boundary = "AaB02x";
         final Collection<String> parts = new LinkedList<String>();
         for (final String disposition : dispositions) {
