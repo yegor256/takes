@@ -129,14 +129,19 @@ public final class BkBasic implements Back {
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(
-            req, new StringBuilder().append("X-Takes-LocalAddress: ")
-            .append(socket.getLocalAddress().toString())
-            .append("X-Takes-LocalPort")
-            .append(Integer.toString(socket.getLocalPort()))
-            .append("X-Takes-RemoteAddress")
-            .append(socket.getInetAddress().toString())
-            .append("X-Takes-RemotePort")
-            .append(Integer.toString(socket.getPort()))
+            req,
+            String.format(
+                "X-Takes-LocalAddress: %s", socket.getLocalAddress().toString()
+            ),
+            String.format(
+                "X-Takes-LocalPort: %d", socket.getLocalPort()
+            ),
+            String.format(
+                "X-Takes-RemoteAddress: %s", socket.getInetAddress().toString()
+            ),
+            String.format(
+                "X-Takes-RemotePort: %d", socket.getPort()
+            )
         );
     }
 }
