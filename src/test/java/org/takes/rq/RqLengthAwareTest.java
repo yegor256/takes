@@ -79,7 +79,7 @@ public final class RqLengthAwareTest {
                     "HI"
                 )
             ).body().available(),
-            Matchers.equalTo(2)
+            Matchers.equalTo(Integer.MAX_VALUE)
         );
     }
 

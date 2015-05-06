@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -73,7 +72,7 @@ public final class BkBasic implements Back {
         final InputStream input = socket.getInputStream();
         try {
             this.print(
-                new RqLive(new BufferedInputStream(input)),
+                new RqLive(input),
                 new BufferedOutputStream(socket.getOutputStream())
             );
         } finally {

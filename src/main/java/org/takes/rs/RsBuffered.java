@@ -21,72 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rs;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.takes.Response;
 
 /**
- * Request decorator that limits its body, according to
- * the Content-Length header in its head.
- *
- * <p>This decorator may help when you're planning to read
- * the body of the request using its read() and available() methods,
- * but you're not sure that available() is always saying the truth. In
- * most cases, the browser will not close the request and will always
- * return positive number in available() method. Thus, you won't be
- * able to reach the end of the stream ever. The browser wants you
- * to respect the "Content-Length" header and read as many bytes
- * as it requests. To solve that, just wrap your request into this
- * decorator.
+ * Response with buffered body.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.15
- * @see org.takes.rq.RqMultipart
- * @see org.takes.rq.RqPrint
+ * @since 0.16
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqLengthAware extends RqWrap {
+public final class RsBuffered extends RsWrap {
 
     /**
      * Ctor.
-     * @param req Original request
+     * @param res Original response
      */
-    public RqLengthAware(final Request req) {
+    public RsBuffered(final Response res) {
         super(
-            new Request() {
+            new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    return req.head();
+                    return res.head();
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RqLengthAware.cap(req);
+                    return new BufferedInputStream(res.body());
                 }
             }
         );
-    }
-
-    /**
-     * Cap the steam.
-     * @param req Request
-     * @return Stream with a cap
-     * @throws IOException If fails
-     */
-    private static InputStream cap(final Request req) throws IOException {
-        final Iterator<String> hdr = new RqHeaders.Base(req)
-            .header("Content-Length").iterator();
-        InputStream body = req.body();
-        if (hdr.hasNext()) {
-            body = new CapInputStream(body, Long.parseLong(hdr.next()));
-        }
-        return body;
     }
 
 }

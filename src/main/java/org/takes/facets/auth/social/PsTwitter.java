@@ -26,7 +26,6 @@ package org.takes.facets.auth.social;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
-import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Collections;
@@ -34,29 +33,26 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
+import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
-import org.takes.rq.RqHref;
 
 /**
- * Github OAuth landing/callback page.
+ * Twitter OAuth landing/callback page.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Prasath Premkumar (popprem@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #229:30min There is currently no unit test in PsGithubTest that
- *  checks that the request parameters are passed to the request body,
- *  instead of the URI. Let's add this test.
  */
 @EqualsAndHashCode(of = { "app", "key" })
-public final class PsGithub implements Pass {
+public final class PsTwitter implements Pass {
 
     /**
      * App name.
@@ -70,10 +66,10 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
-     * @param gapp Github app
-     * @param gkey Github key
+     * @param gapp Twitter app
+     * @param gkey Twitter key
      */
-    public PsGithub(final String gapp, final String gkey) {
+    public PsTwitter(final String gapp, final String gkey) {
         this.app = gapp;
         this.key = gkey;
     }
@@ -81,13 +77,8 @@ public final class PsGithub implements Pass {
     @Override
     public Iterator<Identity> enter(final Request request)
         throws IOException {
-        final Href href = new RqHref.Base(request).href();
-        final Iterator<String> code = href.param("code").iterator();
-        if (!code.hasNext()) {
-            throw new IllegalArgumentException("code is not provided");
-        }
         return Collections.singleton(
-            PsGithub.fetch(this.token(href.toString(), code.next()))
+            PsTwitter.fetch(this.token())
         ).iterator();
     }
 
@@ -98,16 +89,18 @@ public final class PsGithub implements Pass {
     }
 
     /**
-     * Get user name from Github, with the token provided.
-     * @param token Github access token
-     * @return The user found in Github
+     * Get user name from Twitter, with the token provided.
+     * @param token Twitter access token
+     * @return The user found in Twitter
      * @throws IOException If fails
      */
     private static Identity fetch(final String token) throws IOException {
-        final String uri = new Href("https://api.github.com/user")
+        final String uri = new Href(
+                "https://api.twitter.com/1.1/account/verify_credentials.json"
+        )
             .with("access_token", token)
             .toString();
-        return PsGithub.parse(
+        return PsTwitter.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
                 .fetch().as(RestResponse.class)
@@ -117,46 +110,47 @@ public final class PsGithub implements Pass {
     }
 
     /**
-     * Retrieve Github access token.
-     * @param home Home of this page
-     * @param code Github "authorization code"
+     * Retrieve Twitter access token.
      * @return The token
      * @throws IOException If failed
      */
-    private String token(final String home, final String code)
+    private String token()
         throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://github.com/login/oauth/access_token")
+        final String uri = new Href("https://api.twitter.com/oauth2/token")
+            .with("grant_type", "client_credentials")
             .toString();
         return new JdkRequest(uri)
             .method("POST")
-            .header("Accept", "application/xml")
-            .body()
-            .formParam("client_id", this.app)
-            .formParam("redirect_uri", home)
-            .formParam("client_secret", this.key)
-            .formParam("code", code)
-            .back()
+            .header(
+                "Content-Type",
+                "application/x-www-form-urlencoded;charset=UTF-8"
+            )
+            .header(
+                "Authorization",
+                String.format(
+                    "Basic %s", DatatypeConverter.printBase64Binary(
+                        String.format("%s:%s", this.app, this.key).getBytes()
+                    )
+                )
+            )
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
-            .as(XmlResponse.class)
-            .xml().xpath("/OAuth/access_token/text()").get(0);
+            .as(JsonResponse.class)
+            .json().readObject().getString("access_token");
     }
 
     /**
      * Make identity from JSON object.
-     * @param json JSON received from Github
+     * @param json JSON received from Twitter
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
-        props.put("login", json.getString("login", "unknown"));
-        props.put("avatar", json.getString("avatar_url", "#"));
+        props.put("name", json.getString("name"));
+        props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(
-            String.format("urn:github:%d", json.getInt("id")), props
+            String.format("urn:twitter:%d", json.getInt("id")), props
         );
     }
-
 }
