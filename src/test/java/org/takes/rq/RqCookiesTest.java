@@ -46,13 +46,15 @@ public final class RqCookiesTest {
     public void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
             new RqCookies.Base(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /h?a=3",
-                        "Host: www.example.com",
-                        "Cookie: a=45"
-                    ),
-                    ""
+                new RqBuffered(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /h?a=3",
+                            "Host: www.example.com",
+                            "Cookie: a=45"
+                        ),
+                        ""
+                    )
                 )
             ).cookie("a"),
             Matchers.hasItem("45")

@@ -21,41 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
-
-import com.google.common.base.Joiner;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+package org.takes.http;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link BkParallel}.
+ *
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.15.2
+ * @todo #220:30min/DEV This unit test not implemented but has to be.
+ *  E.g. you could pass your own a ExecutorService implementation to the ctor
+ *  and verify execute() calls.  But feel free to try another way.
  */
-public final class RsTextTest {
-
-    /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
-    }
-
+public class BkParallelTest {
 }

@@ -21,41 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
 
-import com.google.common.base.Joiner;
+package org.takes.facets.auth.social;
+
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link PsTwitter}.
+ * @author Prasath Premkumar (popprem@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 1.0
  */
-public final class RsTextTest {
+public final class PsTwitterTest {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * Twitter authorization process.
+     * @throws IOException If error occurs in the process
+     * @todo #11:30min/DEV Test to be implemented for PsTwitter
+     *  using a oauth mock library (eg:wiremock). Need to modify
+     *  PsTwitter to accept url from configurations, so that url
+     *  can be changed for test and real env accordingly.
+     *  Response to be stubbed for both token and verify_credentials
+     *  calls and assertions to be performed for the values returned.
      */
+    @Ignore
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
+    public void authorizes() throws IOException {
+        throw new UnsupportedOperationException("not implemented yet");
     }
-
 }

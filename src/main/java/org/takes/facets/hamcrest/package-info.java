@@ -21,41 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
-
-import com.google.common.base.Joiner;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Matchers.
+ *
+ * <p>This package contains Hamcrest matchers for all key interfaces
+ * in the framework. Use them as in this example:
+ *
+ * <pre> public class FooTest {
+ *   &#64;Test
+ *   public void returnsOK() {
+ *     final Response response = new TkIndex().act(new RqFake());
+ *     MatcherAssert.assertThat(
+ *       response,
+ *       new HmStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+ *     );
+ *   }
+ * }</pre>
+ *
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.13
  */
-public final class RsTextTest {
-
-    /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
-    }
-
-}
+package org.takes.facets.hamcrest;

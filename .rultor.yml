@@ -34,6 +34,7 @@ merge:
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
   commanders:
+  - caarlos0
   - carlosmiranda
   - darkled
   - ggajos

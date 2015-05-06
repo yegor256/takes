@@ -21,41 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.it.fm;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import com.jcabi.http.response.XmlResponse;
+import com.jcabi.http.wire.VerboseWire;
+import java.net.HttpURLConnection;
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
+ * Test case for {@link App}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.16
  */
-public final class RsTextTest {
+public final class AppITCase {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * Port with Takes server.
+     */
+    private static final String PORT = System.getProperty("takes.port");
+
+    /**
+     * App can work.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
+    public void justWorks() throws Exception {
+        Assume.assumeNotNull(AppITCase.PORT);
+        new JdkRequest(String.format("http://localhost:%s/", AppITCase.PORT))
+            .through(VerboseWire.class)
+            .fetch()
+            .as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .as(XmlResponse.class)
+            .assertXPath("//xhtml:html");
     }
 
 }

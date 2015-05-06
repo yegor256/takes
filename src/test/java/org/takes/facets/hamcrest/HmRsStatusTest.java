@@ -21,38 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.hamcrest;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.tk.TkEmpty;
+import org.takes.tk.TkHTML;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link HmRsStatus}.
+ * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.13
  */
-public final class RsTextTest {
+public final class HmRsStatusTest {
 
     /**
-     * RsText can build a plain text response.
+     * HmRsStatus can test status HTTP_OK.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void testsStatusOK() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
+            new TkHTML("<html></html>").act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+        );
+        MatcherAssert.assertThat(
+            new TkEmpty().act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+        );
+    }
+
+    /**
+     * HmRsStatus can test status HTTP_NOT_FOUND.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void testsStatusNotFound() throws IOException {
+        MatcherAssert.assertThat(
+            new TkHTML("<html><body/></html>").act(new RqFake()),
+            Matchers.not(
+                new HmRsStatus(
+                    Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
                 )
             )
         );

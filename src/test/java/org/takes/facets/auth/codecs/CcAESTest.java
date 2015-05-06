@@ -21,41 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.auth.codecs;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
+import javax.crypto.KeyGenerator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link CcAES}.
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.13.8
  */
-public final class RsTextTest {
+public final class CcAESTest {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * CcAES can encode and decode.
+     * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void encodesAndDecodes() throws Exception {
+        final int length = 128;
+        final KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(length);
+        final byte[] key = generator.generateKey().getEncoded();
+        final String plain = "This is a test!!@@**";
+        final Codec codec = new CcAES(
+            new Codec() {
+                @Override
+                public Identity decode(final byte[] bytes) throws IOException {
+                    return new Identity.Simple(new String(bytes));
+                }
+                @Override
+                public byte[] encode(final Identity identity)
+                    throws IOException {
+                    return identity.urn().getBytes();
+                }
+            },
+            key
+        );
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
+            Matchers.equalTo(plain)
         );
     }
-
 }
