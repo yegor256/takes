@@ -23,15 +23,16 @@
  */
 package org.takes.rq;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -116,6 +117,7 @@ public interface RqMultipart extends Request {
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
+         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         public Base(final Request req) throws IOException {
             super(req);
@@ -144,19 +146,33 @@ public interface RqMultipart extends Request {
                     )
                 );
             }
-            final Collection<Request> requests = new LinkedList<Request>();
+            final InputStream stream = new RqLengthAware(req).body();
+            final ReadableByteChannel body = Channels.newChannel(stream);
+            // @checkstyle MagicNumberCheck (1 line)
+            int size = 8192;
+            if (stream.available() < size) {
+                size = stream.available();
+            }
+            final ByteBuffer buffer = ByteBuffer.allocate(size);
+            if (body.read(buffer) < 0) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    "failed to read the request body"
+                );
+            }
+            buffer.flip();
             final byte[] boundary = String.format(
                 "\r\n--%s", matcher.group(1)
             ).getBytes();
-            final InputStream body = new RqLengthAware(req).body();
-            RqMultipart.Base.skip(body, boundary.length - 2);
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0 || data == '-') {
+            buffer.position(boundary.length - 2);
+            final Collection<Request> requests = new LinkedList<Request>();
+            while (buffer.hasRemaining()) {
+                final byte data = buffer.get();
+                if (data == '-') {
                     break;
                 }
-                RqMultipart.Base.skip(body, 1);
-                requests.add(this.make(body, boundary));
+                buffer.position(buffer.position() + 1);
+                requests.add(this.make(buffer, body, boundary));
             }
             this.map = RqMultipart.Base.asMap(requests);
         }
@@ -189,42 +205,32 @@ public interface RqMultipart extends Request {
             return this.map.keySet();
         }
         /**
-         * Skip a few bytes in a stream.
-         * @param stream The stream
-         * @param skip How many bytes to skip
-         * @throws IOException If fails
-         */
-        private static void skip(final InputStream stream, final int skip)
-            throws IOException {
-            if (stream.read(new byte[skip]) != skip) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format("failed to skip %d bytes", skip)
-                );
-            }
-        }
-        /**
          * Make a request.
-         * @param body Body
+         * @param buffer Data buffer
+         * @param source Input channel
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
          */
-        private Request make(final InputStream body,
+        private Request make(final ByteBuffer buffer,
+            final ReadableByteChannel source,
             final byte[] boundary) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
             file.deleteOnExit();
-            final OutputStream out = new BufferedOutputStream(
-                new FileOutputStream(file)
-            );
+            final FileChannel channel = new RandomAccessFile(
+                file,
+                "rw"
+            ).getChannel();
             try {
-                out.write(this.head().iterator().next().getBytes());
-                out.write("\r\n".getBytes());
-                RqMultipart.Base.copy(body, out, boundary);
+                channel.write(
+                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
+                );
+                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                RqMultipart.Base.copy(buffer, source, channel, boundary);
             } finally {
-                out.close();
+                channel.close();
             }
             return new RqLive(
                 new CapInputStream(
@@ -235,33 +241,44 @@ public interface RqMultipart extends Request {
         }
         /**
          * Copy until boundary reached.
-         * @param body Input stream
-         * @param output Output to write to
+         * @param buffer Data buffer
+         * @param source Input channel
+         * @param target Output file channel
          * @param boundary Boundary
          * @throws IOException If fails
+         * @checkstyle ParameterNumberCheck (2 lines)
          */
-        private static void copy(final InputStream body,
-            final OutputStream output, final byte[] boundary)
+        private static void copy(final ByteBuffer buffer,
+            final ReadableByteChannel source,
+            final FileChannel target, final byte[] boundary)
             throws IOException {
             int match = 0;
-            final ByteArrayOutputStream buf = new ByteArrayOutputStream();
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0) {
-                    break;
-                }
-                if (data == boundary[match]) {
-                    ++match;
-                    buf.write(data);
-                    if (match == boundary.length) {
+            boolean cont = true;
+            while (cont) {
+                if (!buffer.hasRemaining()) {
+                    buffer.clear();
+                    if (source.read(buffer) == -1) {
                         break;
                     }
-                } else {
-                    match = 0;
-                    output.write(buf.toByteArray());
-                    buf.reset();
-                    output.write(data);
+                    buffer.flip();
                 }
+                final ByteBuffer btarget = buffer.slice();
+                final int offset = buffer.position();
+                btarget.limit(0);
+                while (buffer.hasRemaining()) {
+                    final byte data = buffer.get();
+                    if (data == boundary[match]) {
+                        ++match;
+                        if (match == boundary.length) {
+                            cont = false;
+                            break;
+                        }
+                    } else {
+                        match = 0;
+                        btarget.limit(buffer.position() - offset);
+                    }
+                }
+                target.write(btarget);
             }
         }
         /**
