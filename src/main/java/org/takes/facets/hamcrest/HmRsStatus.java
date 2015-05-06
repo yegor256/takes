@@ -25,13 +25,14 @@ package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
 
 /**
  * Response Status Matcher.
  *
- * <p>This "matcher" tests given response status code
+ * <p>This "matcher" tests given response status code.
  * <p>The class is immutable and thread-safe.
  *
  * @author Erim Erturk (erimerturk@gmail.com)
@@ -41,17 +42,17 @@ import org.takes.Response;
 public final class HmRsStatus extends TypeSafeMatcher<Response> {
 
     /**
-     * Expected response status code for matcher.
+     * Expected response status code matcher.
      */
-    private final transient int expected;
+    private final transient Matcher<? extends Integer> matcher;
 
     /**
-     * Expected input.
-     * @param input Is expected result code.
+     * Expected matcher.
+     * @param mtchr Is expected result code matcher.
      */
-    public HmRsStatus(final int input) {
+    public HmRsStatus(final Matcher<? extends Integer> mtchr) {
         super();
-        this.expected = input;
+        this.matcher = mtchr;
     }
 
     /**
@@ -60,8 +61,7 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
      */
     @Override
     public void describeTo(final Description description) {
-        description.appendText("Response Status same as: ")
-            .appendValue(this.expected);
+        this.matcher.describeTo(description);
     }
 
     /**
@@ -74,9 +74,9 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
         try {
             final String head = item.head().iterator().next();
             final String[] parts = head.split(" ");
-            return this.expected == Integer.parseInt(parts[1]);
-        } catch (final IOException exception) {
-            throw new IllegalStateException(exception);
+            return this.matcher.matches(Integer.parseInt(parts[1]));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
         }
     }
 

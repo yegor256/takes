@@ -63,7 +63,7 @@ public final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
-            new RqHeaders(captor.getValue()).header(
+            new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),
             Matchers.hasItem("urn%3Atest%3A1")
@@ -121,7 +121,7 @@ public final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
-            new RqHeaders(captor.getValue()).header(
+            new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),
             Matchers.emptyIterable()

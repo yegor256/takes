@@ -57,12 +57,38 @@ public final class RqLiveTest {
             )
         );
         MatcherAssert.assertThat(
-            new RqHeaders(req).header("host"),
+            new RqHeaders.Base(req).header("host"),
             Matchers.hasItem("e")
         );
         MatcherAssert.assertThat(
             new RqPrint(req).printBody(),
             Matchers.endsWith("ello")
+        );
+    }
+
+    /**
+     * RqLive can fail when request is broken.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnBrokenHttpRequest() throws IOException {
+        new RqLive(
+            new ByteArrayInputStream(
+                "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
+            )
+        );
+    }
+
+    /**
+     * RqLive can fail when request is broken.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnInvalidCrLfInRequest() throws IOException {
+        new RqLive(
+            new ByteArrayInputStream(
+                "GET /test HTTP/1.1\rHost: localhost".getBytes()
+            )
         );
     }
 

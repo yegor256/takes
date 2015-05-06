@@ -83,7 +83,8 @@ public final class FkTypes implements Fork {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static MediaTypes accepted(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
-        final Iterable<String> headers = new RqHeaders(req).header("Accept");
+        final Iterable<String> headers = new RqHeaders.Base(req)
+                .header("Accept");
         for (final String hdr : headers) {
             list = list.merge(new MediaTypes(hdr));
         }
