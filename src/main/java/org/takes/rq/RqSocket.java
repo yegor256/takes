@@ -55,8 +55,8 @@ public final class RqSocket extends RqWrap {
      */
     public InetAddress getLocalAddress() throws IOException {
         return InetAddress.getByName(
-            new RqHeaders.Base(this).header("X-Takes-LocalAddress")
-                .iterator().next()
+            new RqHeaders.Smart(new RqHeaders.Base(this))
+                .single("X-Takes-LocalAddress")
         );
     }
 
@@ -67,8 +67,8 @@ public final class RqSocket extends RqWrap {
      */
     public InetAddress getRemoteAddress() throws IOException {
         return InetAddress.getByName(
-            new RqHeaders.Base(this).header("X-Takes-RemoteAddress")
-                .iterator().next()
+            new RqHeaders.Smart(new RqHeaders.Base(this))
+                .single("X-Takes-RemoteAddress")
         );
     }
 
@@ -79,8 +79,8 @@ public final class RqSocket extends RqWrap {
      */
     public int getLocalPort() throws IOException {
         return Integer.parseInt(
-            new RqHeaders.Base(this).header("X-Takes-LocalPort")
-                .iterator().next()
+            new RqHeaders.Smart(new RqHeaders.Base(this))
+                .single("X-Takes-LocalPort")
         );
     }
 
@@ -91,8 +91,8 @@ public final class RqSocket extends RqWrap {
      */
     public int getRemotePort() throws IOException {
         return Integer.parseInt(
-            new RqHeaders.Base(this).header("X-Takes-RemotePort")
-                .iterator().next()
+            new RqHeaders.Smart(new RqHeaders.Base(this))
+                .single("X-Takes-RemotePort")
         );
     }
 }

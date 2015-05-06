@@ -130,18 +130,10 @@ public final class BkBasic implements Back {
         final Socket socket) {
         return new RqWithHeaders(
             req,
-            String.format(
-                "X-Takes-LocalAddress: %s", socket.getLocalAddress().toString()
-            ),
-            String.format(
-                "X-Takes-LocalPort: %d", socket.getLocalPort()
-            ),
-            String.format(
-                "X-Takes-RemoteAddress: %s", socket.getInetAddress().toString()
-            ),
-            String.format(
-                "X-Takes-RemotePort: %d", socket.getPort()
-            )
+            String.format("X-Takes-LocalAddress: %s", socket.getLocalAddress()),
+            String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
+            String.format("X-Takes-RemoteAddress: %s", socket.getInetAddress()),
+            String.format("X-Takes-RemotePort: %d", socket.getPort())
         );
     }
 }
