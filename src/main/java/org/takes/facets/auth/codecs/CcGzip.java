@@ -39,7 +39,7 @@ import org.takes.facets.auth.Identity;
  *
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
- * @since 0.15.1
+ * @since 0.16
  */
 @EqualsAndHashCode(of = "origin")
 public final class CcGzip implements Codec {
@@ -59,25 +59,10 @@ public final class CcGzip implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return this.compress(this.origin.encode(identity));
-    }
-
-    @Override
-    public Identity decode(final byte[] bytes) throws IOException {
-        return this.origin.decode(this.uncompress(bytes));
-    }
-
-    /**
-     * Compress array of bytes.
-     * @param input The input to compress
-     * @return Compressed output
-     * @throws IOException If fails
-     */
-    private byte[] compress(final byte[] input) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final GZIPOutputStream gzip = new GZIPOutputStream(out);
         try {
-            gzip.write(input);
+            gzip.write(this.origin.encode(identity));
         } finally {
             gzip.close();
             out.close();
@@ -85,16 +70,11 @@ public final class CcGzip implements Codec {
         return out.toByteArray();
     }
 
-    /**
-     * Uncompress array of bytes.
-     * @param input The input to uncompress
-     * @return Uncompressed output
-     * @throws IOException If fails
-     */
-    private byte[] uncompress(final byte[] input) throws IOException {
+    @Override
+    public Identity decode(final byte[] bytes) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         final InputStream gzip = new GZIPInputStream(
-            new ByteArrayInputStream(input)
+            new ByteArrayInputStream(bytes)
         );
         try {
             while (true) {
@@ -108,6 +88,6 @@ public final class CcGzip implements Codec {
             gzip.close();
             out.close();
         }
-        return out.toByteArray();
+        return this.origin.decode(out.toByteArray());
     }
 }
