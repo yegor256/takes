@@ -21,41 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import org.takes.HttpException;
+import org.takes.Take;
+import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link TkMethods}.
+ * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.1
  */
-public final class RsTextTest {
-
+public final class TkMethodsTest {
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * TkMethods can call act on method that is passes to it.
+     * @throws Exception if any error occurs
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
+    public void callsActOnProperMethods() throws Exception {
+        final String method = "WHATEVER";
+        final Take take = Mockito.mock(Take.class);
+        final RqFake req = new RqFake(method);
+        new TkMethods(take, method).act(req);
+        Mockito.verify(take).act(
+            Matchers.argThat(
+                CoreMatchers.equalTo(req)
             )
         );
     }
 
+    /**
+     * TkMethods can throw HttpExcection when acting on unproper method.
+     * @throws IOException if any I/O error occurs.
+     */
+    @Test(expected = HttpException.class)
+    public void throwsExceptionOnActinOnUnproperMethod() throws
+        IOException {
+        new TkMethods(Mockito.mock(Take.class), "PROPER").act(
+            new RqFake("UNPROPER")
+        );
+    }
 }

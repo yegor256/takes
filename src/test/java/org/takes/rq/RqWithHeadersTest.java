@@ -21,60 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.http;
+package org.takes.rq;
 
 import com.google.common.base.Joiner;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.takes.tk.TkText;
 
 /**
- * Test case for {@link BkBasic}.
- *
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * Test case for {@link RqWithHeaders}.
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.15.2
+ * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class BkBasicTest {
+public final class RqWithHeadersTest {
     /**
-     * BkBasic can handle socket data.
+     * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void handlesSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
+    public void addsHeadersToRequest() throws IOException {
+        MatcherAssert.assertThat(
+            new RqPrint(
+                new RqWithHeaders(
+                    new RqFake(),
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
+                )
+            ).print(),
+            Matchers.startsWith(
                 Joiner.on("\r\n").join(
-                    "GET / HTTP/1.1",
-                    "Host:localhost",
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
+                    "GET /",
+                    "Host: www.example.com",
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
+                )
             )
         );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        new BkBasic(new TkText("Hello world!")).accept(socket);
-        MatcherAssert.assertThat(
-            baos.toString(),
-            Matchers.containsString("Hello world")
-        );
+    }
+
+    /**
+     * Checks RqWithHeaders equals method.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void equalsAndHashCodeEqualTest() throws Exception {
+        EqualsVerifier.forClass(RqWithHeaders.class)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
     }
 }
