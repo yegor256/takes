@@ -40,11 +40,11 @@ import org.takes.facets.auth.Identity;
 public final class CcGzipTest {
 
     /**
-     * CcGzip can encode and decode.
-     * @throws IOException If some problem inside
+     * CcGzip can compress and decompress.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void canCompressAndDecompress() throws IOException {
+    public void compressesAndDecompresses() throws Exception {
         final Codec gzip = new CcGzip(
             new Codec() {
                 @Override
