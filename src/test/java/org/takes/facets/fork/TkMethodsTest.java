@@ -21,49 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.facets.fork;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import org.takes.HttpException;
+import org.takes.Take;
+import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link RqWithHeader}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link TkMethods}.
+ * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.9
  */
-public final class RqWithHeaderTest {
-
+public final class TkMethodsTest {
     /**
-     * RqWithHeader can add a header.
-     * @throws IOException If some problem inside
+     * TkMethods can call act on method that is passes to it.
+     * @throws Exception if any error occurs
      */
     @Test
-    public void addsHttpHeaders() throws IOException {
-        MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithHeader(
-                    new RqFake(),
-                    "Host", "www.example.com"
-                )
-            ).print(),
-            Matchers.containsString("Host: www.example.com")
+    public void callsActOnProperMethods() throws Exception {
+        final String method = "WHATEVER";
+        final Take take = Mockito.mock(Take.class);
+        final RqFake req = new RqFake(method);
+        new TkMethods(take, method).act(req);
+        Mockito.verify(take).act(
+            Matchers.argThat(
+                CoreMatchers.equalTo(req)
+            )
         );
     }
 
     /**
-     * Checks RqWithHeader equals method.
-     * @throws Exception If some problem inside
+     * TkMethods can throw HttpExcection when acting on unproper method.
+     * @throws IOException if any I/O error occurs.
      */
-    @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeader.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
+    @Test(expected = HttpException.class)
+    public void throwsExceptionOnActinOnUnproperMethod() throws
+        IOException {
+        new TkMethods(Mockito.mock(Take.class), "PROPER").act(
+            new RqFake("UNPROPER")
+        );
     }
 }

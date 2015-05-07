@@ -21,49 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.facets.fork;
 
-import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.util.Arrays;
+import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
- * Test case for {@link RqWithHeader}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Take that acts on request with specified methods only.
+ * <p>The class is immutable and thread-safe.
+ *
+ * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.9
  */
-public final class RqWithHeaderTest {
-
+public class TkMethods extends TkWrap {
     /**
-     * RqWithHeader can add a header.
-     * @throws IOException If some problem inside
+     * Ctor.
+     *
+     * @param take Original take
+     * @param methods Methods the take should act
      */
-    @Test
-    public void addsHttpHeaders() throws IOException {
-        MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithHeader(
-                    new RqFake(),
-                    "Host", "www.example.com"
-                )
-            ).print(),
-            Matchers.containsString("Host: www.example.com")
+    public TkMethods(final Take take, final String ...methods) {
+        super(
+            new TkFork(new FkMethods(Arrays.asList(methods), take))
         );
-    }
-
-    /**
-     * Checks RqWithHeader equals method.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeader.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
     }
 }
