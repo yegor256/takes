@@ -54,7 +54,7 @@ public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
-     * @todo #160:DEV To implement the concatenation and
+     * @todo #160:30min/DEV To implement the concatenation and
      *  transformation with conjunction of Concat class
      *  and Transform class to get rid of the use of List.add()
      *  in the anonymous Response class head() method. That is,
