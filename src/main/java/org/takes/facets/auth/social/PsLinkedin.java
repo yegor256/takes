@@ -24,7 +24,6 @@
 
 package org.takes.facets.auth.social;
 
-import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
@@ -53,6 +52,11 @@ import org.takes.rq.RqHref;
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
     /**
+     * Request factory.
+     */
+    private final transient JdkRequestFactory factory;
+
+    /**
      * App name.
      */
     private final transient String app;
@@ -68,6 +72,18 @@ public final class PsLinkedin implements Pass {
      * @param lkey Linkedin key
      */
     public PsLinkedin(final String lapp, final String lkey) {
+        this(new JdkRequestFactory(), lapp, lkey);
+    }
+
+    /**
+     * Ctor with factory for testing purposes.
+     * @param lfactory Request factory
+     * @param lapp Linkedin app
+     * @param lkey Linkedin key
+     */
+    PsLinkedin(final JdkRequestFactory lfactory, final String lapp,
+        final String lkey) {
+        this.factory = lfactory;
         this.app = lapp;
         this.key = lkey;
     }
@@ -88,7 +104,7 @@ public final class PsLinkedin implements Pass {
 
     @Override
     public Response exit(final Response response,
-        final Identity identity) {
+                         final Identity identity) {
         return response;
     }
 
@@ -104,7 +120,7 @@ public final class PsLinkedin implements Pass {
             .with("format", "json")
             .with("oauth2_access_token", token).toString();
         return PsLinkedin.parse(
-            new JdkRequest(uri)
+            this.factory.newInstance(uri)
                 .header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
@@ -129,7 +145,7 @@ public final class PsLinkedin implements Pass {
             .with("client_secret", this.key)
             .with("code", code)
             .toString();
-        return new JdkRequest(uri)
+        return this.factory.newInstance(uri)
             .method("POST")
             .header("Accept", "application/xml")
             .fetch().as(RestResponse.class)
