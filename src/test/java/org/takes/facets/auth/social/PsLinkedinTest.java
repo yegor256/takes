@@ -24,34 +24,33 @@
 
 package org.takes.facets.auth.social;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import java.io.IOException;
-import java.util.Iterator;
+import java.net.URI;
+import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Rule;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.facets.auth.Identity;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.TkFork;
+import org.takes.http.FtRemote;
 import org.takes.misc.Href;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsJSON;
 
 /**
  * Test case for {@link PsLinkedin}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.11.3
+ * @since 0.16
  * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsLinkedinTest {
-
-    /**
-     * Wire stub server.
-     * @checkstyle VisibilityModifierCheck (3 lines)
-     */
-    @Rule
-    public final WireMockRule wire = new WireMockRule(8089);
 
     /**
      * PsLinkedin can login.
@@ -63,43 +62,62 @@ public final class PsLinkedinTest {
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
-        WireMock.stubFor(
-            WireMock.post(WireMock.urlMatching("/linkedin/token.*"))
-                .withHeader("Accept", WireMock.equalTo("application/xml"))
-                .willReturn(
-                    WireMock.aResponse()
-                        .withStatus(200)
-                        .withBody(
+        final Take take = new TkFork(
+            new FkRegex(
+                "/uas/oauth2/accessToken",
+                new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsJSON(
+                            Json.createObjectBuilder()
+                                .add(
+                                    "access_token",
+                                    RandomStringUtils.randomAlphanumeric(10)
+                                ).build()
+                        );
+                    }
+                }
+            ),
+            new FkRegex(
+                "/v1/people",
+                new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsJSON(
+                            Json.createObjectBuilder()
+                                .add("id", identifier)
+                                .build()
+                        );
+                    }
+                }
+            )
+        );
+        new FtRemote(take).exec(
+            // @checkstyle AnonInnerLengthCheck (100 lines)
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    final Identity identity = new PsLinkedin(
+                        new Href(
                             String.format(
-                                "{\"access_token\":\"%s\"}",
-                                RandomStringUtils.randomAlphanumeric(10)
+                                "%s/uas/oauth2/accessToken",
+                                home
                             )
+                        ),
+                        new Href(String.format("%s/v1/people/", home)),
+                        lapp,
+                        lkey
+                    ).enter(
+                        new RqFake("GET", String.format("?code=%s", code))
+                    ).next();
+                    MatcherAssert.assertThat(
+                        identity.urn(),
+                        CoreMatchers.equalTo(
+                            String.format("urn:linkedin:%s", identifier)
                         )
-                )
-        );
-        WireMock.stubFor(
-            WireMock.get(WireMock.urlMatching("/linkedin/api.*"))
-                .willReturn(
-                    WireMock.aResponse()
-                        .withStatus(200)
-                        .withBody(String.format("{\"id\":\"%s\"}", identifier))
-                )
-        );
-        final Iterator<Identity> identity =
-            new PsLinkedin(
-                new Href("http://localhost:8089/linkedin/token"),
-                new Href("http://localhost:8089/linkedin/api"),
-                lapp,
-                lkey
-            ).enter(
-                new RqFake(
-                    "GET",
-                    String.format("?code=%s", code)
-                )
-            );
-        MatcherAssert.assertThat(
-            identity.next().urn(),
-            CoreMatchers.equalTo(String.format("urn:linkedin:%s", identifier))
+                    );
+                }
+            }
         );
     }
 }
