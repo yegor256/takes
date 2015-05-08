@@ -21,40 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import com.google.common.base.Joiner;
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.io.InputStream;
+import lombok.EqualsAndHashCode;
+import org.takes.Request;
 
 /**
- * Test case for {@link RsText}.
+ * Request with a buffered body.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.16
  */
-public final class RsTextTest {
+@EqualsAndHashCode(callSuper = true)
+public final class RqBuffered extends RqWrap {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * Ctor.
+     * @param req Original request
      */
-    @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+    public RqBuffered(final Request req) {
+        super(
+            new Request() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return req.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return new BufferedInputStream(req.body());
+                }
+            }
         );
     }
 

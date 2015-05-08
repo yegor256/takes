@@ -21,41 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.util.Arrays;
+import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Take that acts on request with specified methods only.
+ * <p>The class is immutable and thread-safe.
+ *
+ * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.1
  */
-public final class RsTextTest {
-
+public class TkMethods extends TkWrap {
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * Ctor.
+     *
+     * @param take Original take
+     * @param methods Methods the take should act
      */
-    @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+    public TkMethods(final Take take, final String ...methods) {
+        super(
+            new TkFork(new FkMethods(Arrays.asList(methods), take))
         );
     }
-
 }

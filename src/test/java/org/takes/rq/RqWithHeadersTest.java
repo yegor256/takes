@@ -21,41 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RqWithHeaders}.
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 1.0
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class RsTextTest {
-
+public final class RqWithHeadersTest {
     /**
-     * RsText can build a plain text response.
+     * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void addsHeadersToRequest() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
+            new RqPrint(
+                new RqWithHeaders(
+                    new RqFake(),
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
+                )
+            ).print(),
+            Matchers.startsWith(
                 Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
+                    "GET /",
+                    "Host: www.example.com",
+                    "TestHeader: someValue",
+                    "SomeHeader: testValue"
                 )
             )
         );
     }
 
+    /**
+     * Checks RqWithHeaders equals method.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void equalsAndHashCodeEqualTest() throws Exception {
+        EqualsVerifier.forClass(RqWithHeaders.class)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
+    }
 }

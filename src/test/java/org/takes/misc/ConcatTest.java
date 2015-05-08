@@ -21,40 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.misc;
 
 import com.google.common.base.Joiner;
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link Concat}.
+ *
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.15.2
  */
-public final class RsTextTest {
+public final class ConcatTest {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * Concat can concatenate.
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void concatenates() {
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
+            Joiner.on(" ").join(
+                new Concat<String>(
+                    Arrays.asList("one", "two"),
+                    Arrays.asList("three", "four")
                 )
-            )
+            ),
+            Matchers.equalTo("one two three four")
+        );
+    }
+
+    /**
+     * Concat can concatenate with empty list.
+     */
+    @Test
+    public void concatenatesWithEmptyList() {
+        MatcherAssert.assertThat(
+            Joiner.on("+").join(
+                new Concat<String>(
+                    Arrays.asList("five", "six"),
+                    Collections.<String>emptyList()
+                )
+            ),
+            Matchers.equalTo("five+six")
         );
     }
 

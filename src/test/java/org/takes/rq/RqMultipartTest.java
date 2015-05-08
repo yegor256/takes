@@ -36,6 +36,7 @@ import java.util.LinkedList;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -259,7 +260,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectPartLength() throws IOException {
-        final int length = 500000000;
+        final int length = 5000;
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
@@ -287,6 +288,8 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test
+    // see https://github.com/yegor256/takes/issues/253
+    @Ignore
     public void consumesHttpRequest() throws IOException {
         final Take take = new Take() {
             @Override

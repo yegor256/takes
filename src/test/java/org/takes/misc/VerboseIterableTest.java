@@ -21,41 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.misc;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Tests for {@link VerboseIterable}.
+ * @author Marcus Sanchez (sanchez.marcus@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.15.1
  */
-public final class RsTextTest {
+public class VerboseIterableTest {
 
     /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
+     * VerboseIterable can return correct size collection.
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public final void returnsCorrectSize() {
+        final List<String> valid = Arrays.asList(
+            "Accept: text/plain",
+            "Accept-Charset: utf-8",
+            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+            "Cache-Control: no-cache",
+            "From: user@example.com"
+        );
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            new VerboseIterable<String>(
+                valid,
+                "Empty Error Message"
+            ),
+            Matchers.<String>iterableWithSize(valid.size())
         );
     }
-
 }

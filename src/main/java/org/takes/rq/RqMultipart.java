@@ -227,7 +227,10 @@ public interface RqMultipart extends Request {
                 out.close();
             }
             return new RqLive(
-                new CapInputStream(new FileInputStream(file), file.length())
+                new CapInputStream(
+                    new FileInputStream(file),
+                    file.length()
+                )
             );
         }
         /**
