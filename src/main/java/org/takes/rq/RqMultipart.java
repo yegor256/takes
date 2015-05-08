@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -59,6 +61,11 @@ import org.takes.misc.VerboseIterable;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqMultipart extends Request {
+
+    /**
+     * Carriage return constant.
+     */
+    String CRLF = "\r\n";
 
     /**
      * Get single part.
@@ -221,7 +228,7 @@ public interface RqMultipart extends Request {
             );
             try {
                 out.write(this.head().iterator().next().getBytes());
-                out.write("\r\n".getBytes());
+                out.write(RqMultipart.CRLF.getBytes());
                 RqMultipart.Base.copy(body, out, boundary);
             } finally {
                 out.close();
@@ -347,6 +354,123 @@ public interface RqMultipart extends Request {
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
+        }
+    }
+
+    /**
+     * Fake decorator.
+     * @since 0.16
+     */
+    final class Fake implements RqMultipart {
+
+        /**
+         * Fake multipart request.
+         */
+        private final RqMultipart fake;
+
+        /**
+         * Fake ctor.
+         * @param req Fake request header holder
+         * @param dispositions Fake request body parts
+         * @throws IOException If fails
+         */
+        public Fake(final Request req, final String... dispositions)
+            throws IOException {
+            this.fake = new RqMultipart.Base(
+                new RqFake(
+                    RqMultipart.Fake.convert(req.head()),
+                    this.fakeBody(dispositions)
+                )
+            );
+        }
+        /**
+         * Fake ctor.
+         * @param dispositions Fake request body parts
+         * @throws IOException If fails
+         */
+        public Fake(final String... dispositions) throws IOException {
+            this(
+                new Request() {
+                    @Override
+                    public Iterable<String> head() throws IOException {
+                        return Arrays.asList(
+                            "POST /h?u=3 HTTP/1.1",
+                            "Host: www.example.com",
+                            // @checkstyle LineLengthCheck (1 line)
+                            "Content-Type: multipart/form-data; boundary=AaB02x",
+                            "Content-Length: 100001"
+                        );
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        return new ByteArrayInputStream(new byte[]{});
+                    }
+                },
+                dispositions
+            );
+        }
+        @Override
+        public Iterable<Request> part(final CharSequence name) {
+            return this.fake.part(name);
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.fake.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.fake.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.fake.body();
+        }
+        /**
+         * Fake body creator.
+         * @param dispositions Fake request body parts
+         * @return InputStream of given dispositions
+         */
+        private InputStream fakeBody(final String... dispositions) {
+            final String boundary = "AaB02x";
+            final Collection<String> parts = new LinkedList<String>();
+            for (final String disposition : dispositions) {
+                parts.add(String.format("--%s", boundary));
+                parts.add(disposition);
+            }
+            parts.add("Content-Transfer-Encoding: utf-8");
+            parts.add("");
+            parts.add("the start\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n the end");
+            parts.add(String.format("--%s--", boundary));
+            return new ByteArrayInputStream(
+                    RqMultipart.Fake.join(parts.iterator()).getBytes()
+            );
+        }
+        /**
+         * Iterable<T> to List<T> converter.
+         * @param source Source Iterable
+         * @return List of given source
+         */
+        private static List<String> convert(final Iterable<String> source) {
+            final List<String> destination = new LinkedList<String>();
+            for (final String each : source) {
+                destination.add(each);
+            }
+            return destination;
+        }
+        /**
+         * CRLF joiner.
+         * @param iter Source iterator to join by CRLF
+         * @return String of iterator joined with CRLF
+         */
+        private static String join(final Iterator<String> iter) {
+            final StringBuilder builder = new StringBuilder();
+            while (iter.hasNext()) {
+                builder.append(iter.next());
+                if (iter.hasNext()) {
+                    builder.append(RqMultipart.CRLF);
+                }
+            }
+            return builder.toString();
         }
     }
 
