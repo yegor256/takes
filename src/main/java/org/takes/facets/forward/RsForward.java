@@ -45,7 +45,7 @@ import org.takes.rs.RsWithoutHeader;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true, of = "origin")
-public final class RsForward extends HttpException implements Response {
+public class RsForward extends HttpException implements Response {
 
     /**
      * Serialization marker.
@@ -163,12 +163,12 @@ public final class RsForward extends HttpException implements Response {
     }
 
     @Override
-    public Iterable<String> head() throws IOException {
+    public final Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() throws IOException {
+    public final InputStream body() throws IOException {
         return this.origin.body();
     }
 }
