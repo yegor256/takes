@@ -54,8 +54,8 @@
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">     * @param target Name of XML element</em>
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment">     * @param value Value to set</em>
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeAppend.html">XeAppend</a>(<strong class="jxr_keyword">final</strong> CharSequence target, <strong class="jxr_keyword">final</strong> String value) {
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>          <strong class="jxr_keyword">this</strong>(target, <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeDirectives.html">XeDirectives</a>(<strong class="jxr_keyword">new</strong> Directives().set(value)));
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeAppend.html">XeAppend</a>(<strong class="jxr_keyword">final</strong> CharSequence target, <strong class="jxr_keyword">final</strong> CharSequence value) {
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>          <strong class="jxr_keyword">this</strong>(target, <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeDirectives.html">XeDirectives</a>(<strong class="jxr_keyword">new</strong> Directives().set(value.toString())));
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>      <em class="jxr_javadoccomment">/**</em>

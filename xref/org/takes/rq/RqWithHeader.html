@@ -33,10 +33,10 @@
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.io.InputStream;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.LinkedList;
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.util.List;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Concat;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * Request with extra header.</em>
@@ -70,23 +70,20 @@
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">super</strong>(
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/Request.html">Request</a>() {
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>                  @Override
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  <strong class="jxr_keyword">public</strong> List&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                      <strong class="jxr_keyword">final</strong> List&lt;String&gt; head = <strong class="jxr_keyword">new</strong> LinkedList&lt;String&gt;();
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>                      <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String hdr : req.head()) {
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>                          head.add(hdr);
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>                      }
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>                      head.add(header.toString());
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>                      <strong class="jxr_keyword">return</strong> head;
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  }
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>                  @Override
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>                  <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>                      <strong class="jxr_keyword">return</strong> req.body();
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>                  }
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>              }
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>          );
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>      }
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>  
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  }
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Concat&lt;String&gt;(
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                          req.head(),
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>                          Collections.singleton(header.toString())
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>                      );
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>                  }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>                  @Override
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>                      <strong class="jxr_keyword">return</strong> req.body();
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>                  }
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          );
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
