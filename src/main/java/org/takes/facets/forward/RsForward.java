@@ -53,6 +53,11 @@ public final class RsForward extends HttpException implements Response {
     private static final long serialVersionUID = 7676888610908953700L;
 
     /**
+     * Home page, by default.
+     */
+    private static final String HOME = "/";
+
+    /**
      * Original response.
      */
     private final transient Response origin;
@@ -69,7 +74,7 @@ public final class RsForward extends HttpException implements Response {
      * @param res Original response
      */
     public RsForward(final Response res) {
-        this(res, "/");
+        this(res, RsForward.HOME);
     }
 
     /**
@@ -115,6 +120,16 @@ public final class RsForward extends HttpException implements Response {
      */
     public RsForward(final int code, final CharSequence loc) {
         this(new RsEmpty(), code, loc);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original
+     * @param code HTTP status code
+     * @since 0.17
+     */
+    public RsForward(final Response res, final int code) {
+        this(res, code, RsForward.HOME);
     }
 
     /**
