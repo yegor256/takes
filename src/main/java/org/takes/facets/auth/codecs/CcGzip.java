@@ -65,7 +65,6 @@ public final class CcGzip implements Codec {
             gzip.write(this.origin.encode(identity));
         } finally {
             gzip.close();
-            out.close();
         }
         return out.toByteArray();
     }
@@ -86,7 +85,6 @@ public final class CcGzip implements Codec {
             }
         } finally {
             gzip.close();
-            out.close();
         }
         return this.origin.decode(out.toByteArray());
     }

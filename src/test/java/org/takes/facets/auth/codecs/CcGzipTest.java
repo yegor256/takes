@@ -24,6 +24,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -61,7 +62,7 @@ public final class CcGzipTest {
                         }
                         @Override
                         public Map<String, String> properties() {
-                            return null;
+                            return new HashMap<String, String>();
                         }
                     };
                 }
@@ -76,7 +77,7 @@ public final class CcGzipTest {
                 }
                 @Override
                 public Map<String, String> properties() {
-                    return null;
+                    return new HashMap<String, String>();
                 }
             }
         );
