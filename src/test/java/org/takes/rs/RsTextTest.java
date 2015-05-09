@@ -45,10 +45,11 @@ public final class RsTextTest {
     public void makesPlainTextResponse() throws IOException {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
-            new RsPrint(new RsText(body)).print(),
+            new RsPrint(new RsBuffered(new RsText(body))).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
                     "",
                     body

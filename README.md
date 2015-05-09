@@ -132,7 +132,7 @@ Maven will start the server and you can see it at `http://localhost:8080`.
 ## Unit Testing
 
 This is how you can unit test the app, using JUnit 4.x and
-[Hamcrest](http://www.hamcrest.org):
+[Hamcrest](http://hamcrest.org):
 
 ```java
 public final class AppTest {
@@ -782,11 +782,13 @@ There are a few command line arguments that should be passed to
 `FtCLI` constructor:
 
 ```
---port=1234     Tells the server to listen to TCP port 1234
---lifetime=5000 The server will die in five seconds (useful for integration testing)
---refresh       Run the server in hit-refresh mode
---daemon        Runs the server in Java daemon thread (for integration testing)
---threads=30    Processes incoming HTTP requests in 30 parallel threads
+--port=1234         Tells the server to listen to TCP port 1234
+--lifetime=5000     The server will die in five seconds (useful for integration testing)
+--refresh           Run the server in hit-refresh mode
+--daemon            Runs the server in Java daemon thread (for integration testing)
+--threads=30        Processes incoming HTTP requests in 30 parallel threads
+--max-latency=5000  Maximum latency in milliseconds per each request
+                    (longer requests will be interrupted)
 ```
 
 For example:

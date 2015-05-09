@@ -128,7 +128,7 @@ public final class FkHitRefresh implements Fork {
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> header =
-            new RqHeaders(req).header("X-Take-HitRefresh").iterator();
+            new RqHeaders.Base(req).header("X-Take-HitRefresh").iterator();
         final Opt<Response> resp;
         if (header.hasNext()) {
             if (this.expired()) {

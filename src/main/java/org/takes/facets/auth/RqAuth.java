@@ -73,7 +73,7 @@ public final class RqAuth extends RqWrap {
      */
     public Identity identity() throws IOException {
         final Iterator<String> headers =
-            new RqHeaders(this).header(this.header).iterator();
+            new RqHeaders.Base(this).header(this.header).iterator();
         final Identity user;
         if (headers.hasNext()) {
             user = new CcPlain().decode(headers.next().getBytes());

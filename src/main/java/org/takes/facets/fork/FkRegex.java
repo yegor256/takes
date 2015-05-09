@@ -33,6 +33,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
+import org.takes.tk.TkFixed;
 import org.takes.tk.TkText;
 
 /**
@@ -99,30 +100,56 @@ public final class FkRegex implements Fork {
      * @param text Text
      */
     public FkRegex(final String ptn, final String text) {
-        this(Pattern.compile(ptn), new TkText(text));
+        this(
+            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
+            new TkText(text)
+        );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tks Take
+     * @param rsp Response
+     * @since 0.16
      */
-    public FkRegex(final String ptn, final Take tks) {
-        this(Pattern.compile(ptn), tks);
+    public FkRegex(final String ptn, final Response rsp) {
+        this(ptn, new TkFixed(rsp));
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tks Take
+     * @param rsp Response
+     * @since 0.16
      */
-    public FkRegex(final Pattern ptn, final Take tks) {
+    public FkRegex(final Pattern ptn, final Response rsp) {
+        this(ptn, new TkFixed(rsp));
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param tke Take
+     */
+    public FkRegex(final String ptn, final Take tke) {
+        this(
+            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
+            tke
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param tke Take
+     */
+    public FkRegex(final Pattern ptn, final Take tke) {
         this(
             ptn,
             new TkRegex() {
                 @Override
                 public Response act(final RqRegex req) throws IOException {
-                    return tks.act(req);
+                    return tke.act(req);
                 }
             }
         );
@@ -131,20 +158,23 @@ public final class FkRegex implements Fork {
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tgt Take
+     * @param tke Take
      */
-    public FkRegex(final String ptn, final TkRegex tgt) {
-        this(Pattern.compile(ptn), tgt);
+    public FkRegex(final String ptn, final TkRegex tke) {
+        this(
+            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
+            tke
+        );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tgt Take
+     * @param tke Take
      */
-    public FkRegex(final Pattern ptn, final TkRegex tgt) {
+    public FkRegex(final Pattern ptn, final TkRegex tke) {
         this.pattern = ptn;
-        this.target = tgt;
+        this.target = tke;
     }
 
     @Override

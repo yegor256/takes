@@ -67,67 +67,26 @@ public final class RqLengthAware extends RqWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return new RqLengthAware.CapInputStream(
-                        req.body(),
-                        RqLengthAware.length(this)
-                    );
+                    return RqLengthAware.cap(req);
                 }
             }
         );
     }
 
     /**
-     * Get length in bytes.
+     * Cap the steam.
      * @param req Request
-     * @return Length in bytes or Long.MAX_VALUE if unknown
+     * @return Stream with a cap
      * @throws IOException If fails
      */
-    private static long length(final Request req) throws IOException {
-        final Iterator<String> hdr = new RqHeaders(req)
+    private static InputStream cap(final Request req) throws IOException {
+        final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Content-Length").iterator();
-        final long length;
+        InputStream body = req.body();
         if (hdr.hasNext()) {
-            length = Long.parseLong(hdr.next());
-        } else {
-            length = Long.MAX_VALUE;
+            body = new CapInputStream(body, Long.parseLong(hdr.next()));
         }
-        return length;
-    }
-
-    /**
-     * Input stream with a cap.
-     */
-    private static final class CapInputStream extends InputStream {
-        /**
-         * Original stream.
-         */
-        private final transient InputStream origin;
-        /**
-         * More bytes to read.
-         */
-        private transient long more;
-        /**
-         * Ctor.
-         * @param stream Original stream
-         * @param length Max length
-         */
-        CapInputStream(final InputStream stream, final long length) {
-            super();
-            this.origin = stream;
-            this.more = length;
-        }
-        @Override
-        public int available() throws IOException {
-            return (int) Math.min(
-                (long) Integer.MAX_VALUE,
-                Math.min((long) this.origin.available(), this.more)
-            );
-        }
-        @Override
-        public int read() throws IOException {
-            --this.more;
-            return this.origin.read();
-        }
+        return body;
     }
 
 }
