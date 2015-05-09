@@ -41,6 +41,7 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
+import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
@@ -52,6 +53,7 @@ import org.takes.tk.TkFailure;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class FtBasicTest {
 
     /**
@@ -181,11 +183,14 @@ public final class FtBasicTest {
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
+                    final String body = "here is your data";
                     new JdkRequest(home)
-                        .body().set("here is your data").back()
+                        .method(RqMethod.POST)
+                        .body().set(body).back()
                         .fetch()
                         .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK);
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(body));
                 }
             }
         );
