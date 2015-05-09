@@ -30,6 +30,7 @@ import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -49,6 +50,7 @@ import org.takes.rs.RsJSON;
  * @since 0.16
  * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class PsLinkedinTest {
 
@@ -86,6 +88,8 @@ public final class PsLinkedinTest {
                         return new RsJSON(
                             Json.createObjectBuilder()
                                 .add("id", identifier)
+                                .add("firstName", "Frodo")
+                                .add("lastName", "Baggins")
                                 .build()
                         );
                     }
@@ -114,6 +118,13 @@ public final class PsLinkedinTest {
                         identity.urn(),
                         CoreMatchers.equalTo(
                             String.format("urn:linkedin:%s", identifier)
+                        )
+                    );
+                    MatcherAssert.assertThat(
+                        identity.properties(),
+                        Matchers.allOf(
+                            Matchers.hasEntry("firstName", "Frodo"),
+                            Matchers.hasEntry("lastName", "Baggins")
                         )
                     );
                 }
