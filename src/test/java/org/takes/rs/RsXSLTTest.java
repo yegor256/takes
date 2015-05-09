@@ -130,13 +130,35 @@ public final class RsXSLTTest {
      */
     @Test
     public void resolvesInClasspath() throws IOException {
-        final String xml = Joiner.on(' ').join(
-            "<?xml-stylesheet href='/org/takes/rs/simple.xsl?0' type='text/xsl'?>",
-            "<p><name>Bobby</name></p>"
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(
+                        Joiner.on(' ').join(
+                            "<?xml-stylesheet",
+                            " href='/org/takes/rs/simple.xsl?0'",
+                            " type='text/xsl'?>",
+                            "<p><name>Bobby</name></p>"
+                        )
+                    )
+                )
+            ).print(),
+            Matchers.endsWith("Hello, Bobby!")
         );
         MatcherAssert.assertThat(
-            new RsPrint(new RsXSLT(new RsText(xml))).print(),
-            Matchers.endsWith("Hello, Bobby!")
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(
+                        Joiner.on(' ').join(
+                            "<?xml-stylesheet ",
+                            " href='/org/takes/rs/simple.xsl'",
+                            " type='text/xsl' ?>",
+                            "<p><name>Dan</name></p>"
+                        )
+                    )
+                )
+            ).print(),
+            Matchers.endsWith("Hello, Dan!")
         );
     }
 
