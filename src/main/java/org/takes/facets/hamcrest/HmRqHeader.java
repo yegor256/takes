@@ -25,7 +25,7 @@ package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map.Entry;
+import java.util.Map;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -47,13 +47,15 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     /**
      * Expected request header matcher.
      */
-    private final transient Matcher<? extends Entry<String, String>> matcher;
+    private final transient Matcher<? extends Map<? extends CharSequence,
+                                        ? extends CharSequence>> matcher;
 
     /**
      * Expected matcher.
      * @param mtchr Is expected header matcher.
      */
-    public HmRqHeader(final Matcher<? extends Entry<String, String>> mtchr) {
+    public HmRqHeader(final Matcher<? extends Map<? extends CharSequence,
+                                        ? extends CharSequence>> mtchr) {
         super();
         this.matcher = mtchr;
     }
@@ -75,20 +77,38 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     @Override
     public boolean matchesSafely(final Request item) {
         try {
+            boolean result = false;
             final RqHeaders headers = new RqHeaders.Base(item);
             for (final String name: headers.names()) {
-                for (final String value: headers.header(name)) {
-                    if (this.matcher.matches(
-                            Collections.singletonMap(name, value)
-                    )) {
-                        return true;
-                    }
+                if (this.matchHeader(name, headers.header(name))) {
+                    result = true;
+                    break;
                 }
             }
-            return false;
+            return result;
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Runs matcher against each found pair.
+     * @param name Is header name
+     * @param values Available header values
+     * @return True when expected type matched.
+     */
+    private boolean matchHeader(final String name,
+            final Iterable<String> values) {
+        boolean result = false;
+        for (final String value: values) {
+            if (this.matcher.matches(
+                    Collections.singletonMap(name, value)
+            )) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
 }
