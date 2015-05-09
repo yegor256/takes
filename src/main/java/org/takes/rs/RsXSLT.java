@@ -231,7 +231,10 @@ public final class RsXSLT extends RsWrap {
             final InputStream input = this.getClass().getResourceAsStream(href);
             if (input == null) {
                 throw new TransformerException(
-                    String.format("XSL '%s' not found in classpath", href)
+                    String.format(
+                        "\"%s\" not found in classpath, base=\"%s\"",
+                        href, base
+                    )
                 );
             }
             return new StreamSource(new InputStreamReader(input));
