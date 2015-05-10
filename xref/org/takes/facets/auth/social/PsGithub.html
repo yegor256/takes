@@ -155,7 +155,7 @@
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>     <strong class="jxr_keyword">private</strong> String token(<strong class="jxr_keyword">final</strong> String home, <strong class="jxr_keyword">final</strong> String code)
 <a class="jxr_linenumber" name="L148" href="#L148">148</a>         <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a>(<strong class="jxr_keyword">this</strong>.github)
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>             .path(<span class="jxr_string">"login/oauth/access_token"</span>)
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>             .path(<span class="jxr_string">"login"</span>).path(<span class="jxr_string">"oauth"</span>).path(<span class="jxr_string">"access_token"</span>)
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>             .toString();
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> JdkRequest(uri)
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>             .method(<span class="jxr_string">"POST"</span>)
