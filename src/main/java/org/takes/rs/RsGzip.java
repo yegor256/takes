@@ -27,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.zip.GZIPOutputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -40,33 +42,59 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.10
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RsGzip extends RsWrap {
+@EqualsAndHashCode(of = "origin")
+public final class RsGzip implements Response {
+
+    /**
+     * Original response.
+     */
+    private final transient Response origin;
+
+    /**
+     * Compressed and cached response.
+     */
+    private final transient List<Response> zipped =
+        new CopyOnWriteArrayList<Response>();
 
     /**
      * Ctor.
      * @param res Original response
-     * @throws IOException If fails
      */
-    public RsGzip(final Response res) throws IOException {
-        super(RsGzip.make(res));
+    public RsGzip(final Response res) {
+        this.origin = res;
+    }
+
+    @Override
+    public Iterable<String> head() throws IOException {
+        return this.make().head();
+    }
+
+    @Override
+    public InputStream body() throws IOException {
+        return this.make().body();
     }
 
     /**
      * Make a response.
-     * @param res Original response
      * @return Response just made
      * @throws IOException If fails
      */
-    private static Response make(final Response res) throws IOException {
-        return new RsWithHeader(
-            new RsWithBody(
-                res,
-                RsGzip.gzip(res.body())
-            ),
-            "Content-Encoding",
-            "gzip"
-        );
+    private Response make() throws IOException {
+        synchronized (this.zipped) {
+            if (this.zipped.isEmpty()) {
+                this.zipped.add(
+                    new RsWithHeader(
+                        new RsWithBody(
+                            this.origin,
+                            RsGzip.gzip(this.origin.body())
+                        ),
+                        "Content-Encoding",
+                        "gzip"
+                    )
+                );
+            }
+        }
+        return this.zipped.get(0);
     }
 
     /**
