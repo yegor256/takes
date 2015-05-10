@@ -24,8 +24,10 @@
 
 package org.takes.facets.auth.social;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -41,6 +43,7 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.misc.Href;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqHref;
 import org.takes.rs.RsJSON;
 
 /**
@@ -67,9 +70,36 @@ public final class PsLinkedinTest {
         final Take take = new TkFork(
             new FkRegex(
                 "/uas/oauth2/accessToken",
+                // @checkstyle AnonInnerLengthCheck (100 lines)
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
+                        final BufferedInputStream buffer =
+                            new BufferedInputStream(req.body());
+                        final byte[] bytes = new byte[1024];
+                        buffer.read(bytes);
+                        MatcherAssert.assertThat(
+                            new String(bytes),
+                            Matchers.stringContainsInOrder(
+                                Arrays.asList(
+                                    "grant_type=authorization_code",
+                                    new StringBuffer("client_id=")
+                                        .append(lapp)
+                                        .toString(),
+                                    "redirect_uri=",
+                                    new StringBuffer("client_secret=")
+                                        .append(lkey)
+                                        .toString(),
+                                    new StringBuffer("code=")
+                                        .append(code)
+                                        .toString()
+                                )
+                            )
+                        );
+                        MatcherAssert.assertThat(
+                            new RqHref.Base(req).href().toString(),
+                            Matchers.endsWith("/uas/oauth2/accessToken")
+                        );
                         return new RsJSON(
                             Json.createObjectBuilder()
                                 .add(
