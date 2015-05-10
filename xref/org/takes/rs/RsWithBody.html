@@ -162,11 +162,13 @@
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> length) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">final</strong> String header = <span class="jxr_string">"Content-Length"</span>;
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithHeader.html">RsWithHeader</a>(
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithoutHeader.html">RsWithoutHeader</a>(res, header), header, Integer.toString(length)
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>         ).head();
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>     }
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> 
-<a class="jxr_linenumber" name="L161" href="#L161">161</a> }
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithoutHeader.html">RsWithoutHeader</a>(res, header),
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>             header,
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>             Integer.toString(length)
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>         ).head();
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>     }
+<a class="jxr_linenumber" name="L162" href="#L162">162</a> 
+<a class="jxr_linenumber" name="L163" href="#L163">163</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
