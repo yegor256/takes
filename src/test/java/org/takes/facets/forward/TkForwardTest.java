@@ -24,6 +24,7 @@
 package org.takes.facets.forward;
 
 import java.io.IOException;
+import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -62,15 +63,24 @@ public final class TkForwardTest {
     }
 
     /**
-     * TkForward can catch RsForward.
+     * TkForward can catch RsForward throws by Response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void catchesExceptionThrownByTake() throws IOException {
+    public void catchesExceptionThrownByResponse() throws IOException {
         final Take take = new Take() {
             @Override
-            public Response act(final Request request) throws RsForward {
-                throw new RsForward("/h");
+            public Response act(final Request request) {
+                return new Response() {
+                    @Override
+                    public Iterable<String> head() throws IOException {
+                        throw new RsForward("/a");
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        throw new RsForward("/b");
+                    }
+                };
             }
         };
         MatcherAssert.assertThat(
