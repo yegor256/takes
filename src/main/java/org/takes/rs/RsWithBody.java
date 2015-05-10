@@ -154,7 +154,9 @@ public final class RsWithBody extends RsWrap {
         final int length) throws IOException {
         final String header = "Content-Length";
         return new RsWithHeader(
-            new RsWithoutHeader(res, header), header, Integer.toString(length)
+            new RsWithoutHeader(res, header),
+            header,
+            Integer.toString(length)
         ).head();
     }
 
