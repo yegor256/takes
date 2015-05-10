@@ -21,47 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.facets.forward;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rq.RqFake;
+import org.takes.facets.flash.RsFlash;
 
 /**
- * Test case for {@link TkVerbose}.
+ * Test case for {@link RsForward}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.10
+ * @since 0.17
  */
-public final class TkVerboseTest {
+public final class RsForwardTest {
 
     /**
-     * TkVerbose can extend not-found exception.
+     * RsForward can build a proper stacktrace.
      * @throws IOException If some problem inside
      */
     @Test
-    public void extendsNotFoundException() throws IOException {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
-            }
-        };
-        try {
-            new TkVerbose(take).act(new RqFake());
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getLocalizedMessage(),
-                Matchers.endsWith("GET http://www.example.com/")
-            );
-        }
+    public void buildsStackTrace() throws IOException {
+        MatcherAssert.assertThat(
+            ExceptionUtils.getFullStackTrace(
+                new RsForward(new RsFlash(new IOException("the failure")))
+            ),
+            Matchers.containsString("failure")
+        );
     }
-
 }

@@ -91,6 +91,11 @@ import org.takes.rs.RsWrap;
 public final class RsFlash extends RsWrap {
 
     /**
+     * To string.
+     */
+    private final transient String text;
+
+    /**
      * Ctor.
      * @param msg Message to show
      * @throws UnsupportedEncodingException If fails
@@ -143,6 +148,13 @@ public final class RsFlash extends RsWrap {
     public RsFlash(final String msg, final Level level, final String cookie)
         throws UnsupportedEncodingException {
         super(RsFlash.make(msg, level, cookie));
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        this.text = String.format("%s/%s", level, msg);
+    }
+
+    @Override
+    public String toString() {
+        return this.text;
     }
 
     /**

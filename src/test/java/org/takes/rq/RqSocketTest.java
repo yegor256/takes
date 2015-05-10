@@ -118,7 +118,9 @@ public final class RqSocketTest {
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.is("header \"X-Takes-RemoteAddress\" is mandatory")
+                Matchers.containsString(
+                    "header \"X-Takes-RemoteAddress\" is mandatory"
+                )
             );
             throw ex;
         }
@@ -139,7 +141,9 @@ public final class RqSocketTest {
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.is("header \"X-Takes-LocalAddress\" is mandatory")
+                Matchers.containsString(
+                    "header \"X-Takes-LocalAddress\" is mandatory"
+                )
             );
             throw ex;
         }
@@ -158,7 +162,9 @@ public final class RqSocketTest {
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.is("header \"X-Takes-RemotePort\" is mandatory")
+                Matchers.containsString(
+                    "header \"X-Takes-RemotePort\" is mandatory"
+                )
             );
             throw ex;
         }
@@ -177,7 +183,9 @@ public final class RqSocketTest {
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.is("header \"X-Takes-LocalPort\" is mandatory")
+                Matchers.containsString(
+                    "header \"X-Takes-LocalPort\" is mandatory"
+                )
             );
             throw ex;
         }
