@@ -101,7 +101,7 @@
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>              <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/Response.html">Response</a>() {
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>                  @Override
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>                      <strong class="jxr_keyword">return</strong> append(res, url.openStream().available());
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>                      <strong class="jxr_keyword">return</strong> RsWithBody.append(res, url.openStream().available());
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>                  }
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>                  @Override
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>                  <strong class="jxr_keyword">public</strong> InputStream body() <strong class="jxr_keyword">throws</strong> IOException {
@@ -121,7 +121,7 @@
 <a class="jxr_linenumber" name="L113" href="#L113">113</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/Response.html">Response</a>() {
 <a class="jxr_linenumber" name="L114" href="#L114">114</a>                 @Override
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>                 <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>                     <strong class="jxr_keyword">return</strong> append(res, body.length);
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>                     <strong class="jxr_keyword">return</strong> RsWithBody.append(res, body.length);
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>                 }
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>                 @Override
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>                 <strong class="jxr_keyword">public</strong> InputStream body() {
@@ -141,7 +141,7 @@
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/Response.html">Response</a>() {
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>                 @Override
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>                 <strong class="jxr_keyword">public</strong> Iterable&lt;String&gt; head() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L136" href="#L136">136</a>                     <strong class="jxr_keyword">return</strong> append(res, body.available());
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>                     <strong class="jxr_keyword">return</strong> RsWithBody.append(res, body.available());
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>                 }
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>                 @Override
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>                 <strong class="jxr_keyword">public</strong> InputStream body() {
@@ -158,14 +158,15 @@
 <a class="jxr_linenumber" name="L150" href="#L150">150</a> <em class="jxr_javadoccomment">     * @return Iterable String of header attributes</em>
 <a class="jxr_linenumber" name="L151" href="#L151">151</a> <em class="jxr_javadoccomment">     * @throws IOException if something goes wrong.</em>
 <a class="jxr_linenumber" name="L152" href="#L152">152</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> Iterable&lt;String&gt; append(
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Response.html">Response</a> res, <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> length) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithHeader.html">RsWithHeader</a>(
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>             res, <span class="jxr_string">"Content-Length"</span>, Integer.toString(length)
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>         ).head();
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>     }
-<a class="jxr_linenumber" name="L159" href="#L159">159</a> 
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> }
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> Iterable&lt;String&gt; append(<strong class="jxr_keyword">final</strong> <a href="../../../org/takes/Response.html">Response</a> res,
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> length) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">final</strong> String header = <span class="jxr_string">"Content-Length"</span>;
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithHeader.html">RsWithHeader</a>(
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">new</strong> <a href="../../../org/takes/rs/RsWithoutHeader.html">RsWithoutHeader</a>(res, header), header, Integer.toString(length)
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>         ).head();
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>     }
+<a class="jxr_linenumber" name="L160" href="#L160">160</a> 
+<a class="jxr_linenumber" name="L161" href="#L161">161</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
