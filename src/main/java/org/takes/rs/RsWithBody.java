@@ -152,8 +152,9 @@ public final class RsWithBody extends RsWrap {
      */
     private static Iterable<String> append(final Response res,
         final int length) throws IOException {
+        final String header = "Content-Length";
         return new RsWithHeader(
-            res, "Content-Length", Integer.toString(length)
+            new RsWithoutHeader(res, header), header, Integer.toString(length)
         ).head();
     }
 

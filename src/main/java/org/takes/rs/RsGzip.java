@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,22 +46,26 @@ public final class RsGzip extends RsWrap {
     /**
      * Ctor.
      * @param res Original response
+     * @throws IOException If fails
      */
-    public RsGzip(final Response res) {
-        super(
-            new RsWithHeader(
-                new Response() {
-                    @Override
-                    public Iterable<String> head() throws IOException {
-                        return res.head();
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return RsGzip.gzip(res.body());
-                    }
-                },
-                "Content-Encoding: gzip"
-        )
+    public RsGzip(final Response res) throws IOException {
+        super(RsGzip.make(res));
+    }
+
+    /**
+     * Make a response.
+     * @param res Original response
+     * @return Response just made
+     * @throws IOException If fails
+     */
+    private static Response make(final Response res) throws IOException {
+        return new RsWithHeader(
+            new RsWithBody(
+                res,
+                RsGzip.gzip(res.body())
+            ),
+            "Content-Encoding",
+            "gzip"
         );
     }
 
@@ -72,7 +75,7 @@ public final class RsGzip extends RsWrap {
      * @return New input stream
      * @throws IOException If fails
      */
-    private static InputStream gzip(final InputStream input)
+    private static byte[] gzip(final InputStream input)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final OutputStream gzip = new GZIPOutputStream(baos);
@@ -88,7 +91,7 @@ public final class RsGzip extends RsWrap {
             gzip.close();
             input.close();
         }
-        return new ByteArrayInputStream(baos.toByteArray());
+        return baos.toByteArray();
     }
 
 }
