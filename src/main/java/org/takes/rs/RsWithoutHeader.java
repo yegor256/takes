@@ -25,11 +25,11 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Response decorator, without a header.
@@ -50,20 +50,23 @@ public final class RsWithoutHeader extends RsWrap {
      */
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
+             // @checkstyle AnonInnerLengthCheck (50 lines)
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final Collection<String> head = new LinkedList<String>();
                     final String prefix = String.format(
                         "%s:", name.toString().toLowerCase(Locale.ENGLISH)
                     );
-                    for (final String hdr : res.head()) {
-                        if (!hdr.toLowerCase(Locale.ENGLISH)
-                            .startsWith(prefix)) {
-                            head.add(hdr);
+                    return new Select<String>(
+                        res.head(),
+                        new Condition<String>() {
+                            @Override
+                            public boolean fits(final String header) {
+                                return !header.toLowerCase(Locale.ENGLISH)
+                                    .startsWith(prefix);
+                            }
                         }
-                    }
-                    return head;
+                    );
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -72,5 +75,4 @@ public final class RsWithoutHeader extends RsWrap {
             }
         );
     }
-
 }

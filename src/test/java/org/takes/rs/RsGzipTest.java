@@ -86,4 +86,25 @@ public final class RsGzipTest {
         MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(1));
     }
 
+    /**
+     * RsGzip can report correct content length.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void reportsCorrectContentLength() throws IOException {
+        final String text = "some text to encode";
+        final Response response = new RsGzip(new RsText(text));
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        new RsPrint(response).printBody(baos);
+        MatcherAssert.assertThat(
+            new RsPrint(response).printHead(),
+            Matchers.containsString(
+                String.format(
+                    "Content-Length: %d",
+                    baos.toByteArray().length
+                )
+            )
+        );
+    }
+
 }

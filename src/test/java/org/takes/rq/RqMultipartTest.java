@@ -36,6 +36,7 @@ import java.util.LinkedList;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -66,7 +67,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"addres\"",
                 "",
@@ -114,7 +115,7 @@ public final class RqMultipartTest {
     public void throwsExceptionOnNoNameAtContentDispositionHeader()
         throws IOException {
         new RqMultipart.Base(
-            RqMultipartTest.create(
+            RqMultipartTest.request(
                 Joiner.on(RqMultipartTest.CRLF).join(
                     "Content-Disposition: form-data; fake=\"address\"",
                     "",
@@ -170,7 +171,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -215,7 +216,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -236,7 +237,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectNamesSet() throws IOException {
-        final Request req = RqMultipartTest.create(
+        final Request req = RqMultipartTest.request(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"address\"",
                 "",
@@ -259,7 +260,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectPartLength() throws IOException {
-        final int bytes = 10000;
+        final int length = 5000;
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
@@ -270,7 +271,7 @@ public final class RqMultipartTest {
                 "--zzz",
                 "Content-Disposition: form-data; name=\"x-1\"",
                 "",
-                StringUtils.repeat("X", bytes),
+                StringUtils.repeat("X", length),
                 "--zzz--"
             )
         );
@@ -278,7 +279,7 @@ public final class RqMultipartTest {
             new RqMultipart.Smart(
                 new RqMultipart.Base(req)
             ).single("x-1").body().available(),
-            Matchers.equalTo(bytes)
+            Matchers.equalTo(length)
         );
     }
 
@@ -287,6 +288,8 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test
+    // see https://github.com/yegor256/takes/issues/253
+    @Ignore
     public void consumesHttpRequest() throws IOException {
         final Take take = new Take() {
             @Override
@@ -336,7 +339,7 @@ public final class RqMultipartTest {
      * @param dispositions Content dispositions
      * @return Request
      */
-    private static Request create(final String... dispositions) {
+    private static Request request(final String... dispositions) {
         final String boundary = "AaB02x";
         final Collection<String> parts = new LinkedList<String>();
         for (final String disposition : dispositions) {

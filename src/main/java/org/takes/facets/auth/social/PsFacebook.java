@@ -64,10 +64,12 @@ public final class PsFacebook implements Pass {
      * Request for fetching app token.
      */
     private final transient com.jcabi.http.Request request;
+
     /**
-     * Facebook login request handler. .
+     * Facebook login request handler.
      */
     private final transient WebRequestor requestor;
+
     /**
      * App name.
      */
@@ -176,15 +178,21 @@ public final class PsFacebook implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://graph.facebook.com/oauth/access_token")
-            .with("client_id", this.app)
-            .with("redirect_uri", home)
-            .with("client_secret", this.key)
-            .with("code", code)
-            .toString();
-        this.request.uri().set(URI.create(uri));
-        final String response = this.request.fetch().as(RestResponse.class)
+        final String response = this.request
+            .uri()
+            .set(
+                URI.create(
+                    new Href("https://graph.facebook.com/oauth/access_token")
+                        .with("client_id", this.app)
+                        .with("redirect_uri", home)
+                        .with("client_secret", this.key)
+                        .with("code", code)
+                        .toString()
+                )
+            )
+            .back()
+            .fetch()
+            .as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK).body();
         final String[] sectors = response.split("&");
         for (final String sector : sectors) {

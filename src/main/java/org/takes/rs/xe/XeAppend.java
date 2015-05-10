@@ -46,8 +46,8 @@ public final class XeAppend extends XeWrap {
      * @param target Name of XML element
      * @param value Value to set
      */
-    public XeAppend(final CharSequence target, final String value) {
-        this(target, new XeDirectives(new Directives().set(value)));
+    public XeAppend(final CharSequence target, final CharSequence value) {
+        this(target, new XeDirectives(new Directives().set(value.toString())));
     }
 
     /**

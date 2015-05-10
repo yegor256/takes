@@ -196,8 +196,11 @@ public interface RqMultipart extends Request {
          */
         private static void skip(final InputStream stream, final int skip)
             throws IOException {
-            for (int idx = 0; idx < skip; ++idx) {
-                stream.read();
+            if (stream.read(new byte[skip]) != skip) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format("failed to skip %d bytes", skip)
+                );
             }
         }
         /**
@@ -224,7 +227,10 @@ public interface RqMultipart extends Request {
                 out.close();
             }
             return new RqLive(
-                new CapInputStream(new FileInputStream(file), file.length())
+                new CapInputStream(
+                    new FileInputStream(file),
+                    file.length()
+                )
             );
         }
         /**

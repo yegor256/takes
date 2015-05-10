@@ -52,6 +52,7 @@ import org.takes.rq.RqHref;
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsLinkedin implements Pass {
+
     /**
      * App name.
      */
@@ -63,11 +64,42 @@ public final class PsLinkedin implements Pass {
     private final transient String key;
 
     /**
+     * Linkedin token href.
+     */
+    private final transient Href tkhref;
+
+    /**
+     * Linkedin api href.
+     */
+    private final transient Href apihref;
+
+    /**
      * Ctor.
      * @param lapp Linkedin app
      * @param lkey Linkedin key
      */
     public PsLinkedin(final String lapp, final String lkey) {
+        this(
+            new Href("https://www.linkedin.com/uas/oauth2/accessToken"),
+            // @checkstyle LineLength (1 line)
+            new Href("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)"),
+            lapp,
+            lkey
+        );
+    }
+
+    /**
+     * Ctor with custom hrefs for test purposes.
+     * @param thref Linkedin token href
+     * @param ahref Linkedin api href
+     * @param lapp Linkedin app name
+     * @param lkey Linkedin key
+     * @checkstyle ParameterNumberCheck (3 lines)
+     */
+    public PsLinkedin(final Href thref, final Href ahref,
+            final String lapp, final String lkey) {
+        this.tkhref = thref;
+        this.apihref = ahref;
         this.app = lapp;
         this.key = lkey;
     }
@@ -100,9 +132,10 @@ public final class PsLinkedin implements Pass {
      */
     private Identity fetch(final String token) throws IOException {
         // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)")
+        final String uri = this.apihref
+            .with("oauth2_access_token", token)
             .with("format", "json")
-            .with("oauth2_access_token", token).toString();
+            .toString();
         return PsLinkedin.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -121,9 +154,7 @@ public final class PsLinkedin implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        final String uri = new Href(
-            "https://www.linkedin.com/uas/oauth2/accessToken"
-        ).toString();
+        final String uri = this.tkhref.toString();
         return new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
@@ -146,15 +177,15 @@ public final class PsLinkedin implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final String fname = "first_name";
-        final String lname = "last_name";
+        final String fname = "firstName";
+        final String lname = "lastName";
         final String unknown = "?";
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
         props.put(fname, json.getString(fname, unknown));
         props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
-            String.format("urn:linkedin:%d", json.getInt("id")), props
+            String.format("urn:linkedin:%s", json.getString("id")), props
         );
     }
 }

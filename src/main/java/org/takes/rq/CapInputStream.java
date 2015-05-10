@@ -62,28 +62,37 @@ final class CapInputStream extends InputStream {
     public int available() throws IOException {
         return (int) Math.min(
             (long) Integer.MAX_VALUE,
-            Math.min((long) this.origin.available(), this.more)
+            Math.max((long) this.origin.available(), this.more)
         );
     }
 
     @Override
     public int read() throws IOException {
-        --this.more;
-        return this.origin.read();
+        final int data;
+        if (this.more <= 0L) {
+            data = -1;
+        } else {
+            data = this.origin.read();
+            --this.more;
+        }
+        return data;
     }
 
     @Override
     public int read(final byte[] buf) throws IOException {
-        final int readed = this.origin.read(buf);
-        this.more -= (long) readed;
-        return readed;
+        return this.read(buf, 0, buf.length);
     }
 
     @Override
     public int read(final byte[] buf, final int off,
         final int len) throws IOException {
-        final int readed  = this.origin.read(buf, off, len);
-        this.more -= (long) readed;
+        final int readed;
+        if (this.more <= 0L) {
+            readed = -1;
+        } else {
+            readed = this.origin.read(buf, off, Math.min(len, (int) this.more));
+            this.more -= (long) readed;
+        }
         return readed;
     }
 }

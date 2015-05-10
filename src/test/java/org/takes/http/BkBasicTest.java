@@ -27,6 +27,7 @@ import com.google.common.base.Joiner;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -60,6 +61,14 @@ public final class BkBasicTest {
                 ).getBytes()
             )
         );
+        Mockito.when(socket.getLocalAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getLocalPort()).thenReturn(0);
+        Mockito.when(socket.getInetAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getPort()).thenReturn(0);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);

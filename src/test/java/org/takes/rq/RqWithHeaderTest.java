@@ -24,6 +24,8 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -53,4 +55,15 @@ public final class RqWithHeaderTest {
         );
     }
 
+    /**
+     * Checks RqWithHeader equals method.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void equalsAndHashCodeEqualTest() throws Exception {
+        EqualsVerifier.forClass(RqWithHeader.class)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
+    }
 }

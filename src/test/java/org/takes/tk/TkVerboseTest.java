@@ -59,7 +59,7 @@ public final class TkVerboseTest {
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
                 ex.getLocalizedMessage(),
-                Matchers.equalTo("GET http://www.example.com/")
+                Matchers.endsWith("GET http://www.example.com/")
             );
         }
     }

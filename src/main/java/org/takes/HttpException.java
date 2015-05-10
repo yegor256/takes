@@ -49,7 +49,7 @@ public class HttpException extends IOException {
      * @param code HTTP status code
      */
     public HttpException(final int code) {
-        super();
+        super(Integer.toString(code));
         this.status = code;
     }
 
@@ -59,7 +59,8 @@ public class HttpException extends IOException {
      * @param cause Cause of the problem
      */
     public HttpException(final int code, final String cause) {
-        super(cause);
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        super(String.format("[%03d] %s", code, cause));
         this.status = code;
     }
 
@@ -81,7 +82,7 @@ public class HttpException extends IOException {
      */
     public HttpException(final int code, final String msg,
         final Throwable cause) {
-        super(msg, cause);
+        super(String.format("[%03d] %s", code, msg), cause);
         this.status = code;
     }
 
