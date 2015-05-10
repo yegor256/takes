@@ -147,7 +147,7 @@ public final class PsGithub implements Pass {
     private String token(final String home, final String code)
         throws IOException {
         final String uri = new Href(this.github)
-            .path("login/oauth/access_token")
+            .path("login").path("oauth").path("access_token")
             .toString();
         return new JdkRequest(uri)
             .method("POST")

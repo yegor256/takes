@@ -64,10 +64,12 @@ public final class PsFacebook implements Pass {
      * Request for fetching app token.
      */
     private final transient com.jcabi.http.Request request;
+
     /**
-     * Facebook login request handler. .
+     * Facebook login request handler.
      */
     private final transient WebRequestor requestor;
+
     /**
      * App name.
      */
