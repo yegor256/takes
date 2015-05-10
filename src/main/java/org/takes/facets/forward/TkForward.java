@@ -24,6 +24,7 @@
 package org.takes.facets.forward;
 
 import java.io.IOException;
+import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -63,7 +64,44 @@ public final class TkForward implements Take {
         } catch (final RsForward ex) {
             res = ex;
         }
-        return res;
+        return new TkForward.Safe(res);
+    }
+
+    /**
+     * Safe response.
+     */
+    private static final class Safe implements Response {
+        /**
+         * Original response.
+         */
+        private final transient Response origin;
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        private Safe(final Response res) {
+            this.origin = res;
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            Iterable<String> head;
+            try {
+                head = this.origin.head();
+            } catch (final RsForward ex) {
+                head = ex.head();
+            }
+            return head;
+        }
+        @Override
+        public InputStream body() throws IOException {
+            InputStream body;
+            try {
+                body = this.origin.body();
+            } catch (final RsForward ex) {
+                body = ex.body();
+            }
+            return body;
+        }
     }
 
 }
