@@ -24,7 +24,6 @@
 
 package org.takes.facets.auth.social;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
@@ -44,6 +43,7 @@ import org.takes.http.FtRemote;
 import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
+import org.takes.rq.RqPrint;
 import org.takes.rs.RsJSON;
 
 /**
@@ -74,12 +74,8 @@ public final class PsLinkedinTest {
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
-                        final BufferedInputStream buffer =
-                            new BufferedInputStream(req.body());
-                        final byte[] bytes = new byte[1024];
-                        buffer.read(bytes);
                         MatcherAssert.assertThat(
-                            new String(bytes),
+                            new RqPrint(req).printBody(),
                             Matchers.stringContainsInOrder(
                                 Arrays.asList(
                                     "grant_type=authorization_code",
