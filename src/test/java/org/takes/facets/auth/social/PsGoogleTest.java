@@ -53,12 +53,13 @@ import org.takes.rs.RsJSON;
  */
 public final class PsGoogleTest {
     /**
-     * PsGoogle can login.
+     * PsGoogle login.
      * @throws IOException If some problem inside
      * @checkstyle MultipleStringLiteralsCheck (100 lines)
+     * @throws IOException  If some problem inside
      */
     @Test
-    public void canLogin() throws IOException {
+    public void logsIn() throws IOException {
         final Take take = new TkFork(
             new FkRegex(
                 "/o/oauth2/token",
@@ -151,7 +152,7 @@ public final class PsGoogleTest {
      * @throws IOException  If some problem inside
      */
     private static void assertParam(final Request req,
-        final CharSequence param, final String value)  throws IOException {
+        final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
             new RqForm.Smart(new RqForm.Base(req)).single(param),
             Matchers.equalTo(value)
