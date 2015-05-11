@@ -24,6 +24,8 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,17 +33,12 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
-
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.takes.Response;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.rq.RqFake;
 import org.takes.tk.TkText;
 
 /**
@@ -50,6 +47,7 @@ import org.takes.tk.TkText;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.15.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class BkBasicTest {
     /**
@@ -92,11 +90,13 @@ public final class BkBasicTest {
      * @throws IOException if any I/O error occurs.
      */
     @Test
-    public void returns404OnInvalidUrl() throws IOException {
-        new FtRemote(new TkFork(
-            new FkRegex("/path/a", new TkText("a")),
-            new FkRegex("/path/b", new TkText("b"))
-        )).exec(
+    public void returnsProperResponseCodeOnInvalidUrl() throws IOException {
+        new FtRemote(
+            new TkFork(
+                new FkRegex("/path/a", new TkText("a")),
+                new FkRegex("/path/b", new TkText("b"))
+            )
+        ).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {

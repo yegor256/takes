@@ -117,15 +117,21 @@ public final class BkBasic implements Back {
         writer.close();
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
-            responseCode(err)
+            BkBasic.responseCode(err)
         );
     }
 
-    private static int responseCode(Throwable err) {
+    /**
+     * Returns HTTP response code for specified exception.
+     * @param err Exception
+     * @return Numeric HTTP code.
+     */
+    private static int responseCode(final Throwable err) {
+        int result = HttpURLConnection.HTTP_INTERNAL_ERROR;
         if (err instanceof HttpException) {
-            return ((HttpException) err).code();
+            result =  ((HttpException) err).code();
         }
-        return HttpURLConnection.HTTP_INTERNAL_ERROR;
+        return result;
     }
 
     /**
