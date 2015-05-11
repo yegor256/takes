@@ -26,14 +26,16 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Concat;
+import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Response decorator, with status code.
@@ -46,7 +48,12 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithStatus extends RsWrap {
-
+    /**
+     * Pattern for first header line.
+     */
+    private static final Pattern FIRST = Pattern.compile(
+        "HTTP/1\\.1 \\d{3} [a-zA-Z ]+"
+    );
     /**
      * Statuses and their reasons.
      */
@@ -94,11 +101,6 @@ public final class RsWithStatus extends RsWrap {
 
     /**
      * Make head.
-     * @todo #160:30min/DEV To implement concatenation and selection with the
-     *  conjunction Concat and Select class to get rid of List.add()
-     *  between line 118 to line 127. That is, replacing the block using
-     *  something like this:
-     *  return new Concat(head,new Select(origin.head(),new FilterFirstCond()))
      * @param origin Original response
      * @param status Status
      * @param reason Reason
@@ -117,17 +119,20 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        final Collection<String> head = new LinkedList<String>();
-        head.add(String.format("HTTP/1.1 %d %s", status, reason));
-        boolean first = true;
-        for (final String hdr : origin.head()) {
-            if (first) {
-                first = false;
-            } else {
-                head.add(hdr);
-            }
-        }
-        return head;
+        return new Concat<String>(
+            Collections.singletonList(
+                String.format("HTTP/1.1 %d %s", status, reason)
+            ),
+            new Select<String>(
+                origin.head(),
+                new Condition<String>() {
+                    @Override
+                    public boolean fits(final String element) {
+                        return !RsWithStatus.FIRST.matcher(element).matches();
+                    }
+                }
+            )
+        );
     }
 
     /**
