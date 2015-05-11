@@ -79,16 +79,13 @@ public final class PsLinkedinTest {
                             Matchers.stringContainsInOrder(
                                 Arrays.asList(
                                     "grant_type=authorization_code",
-                                    new StringBuffer("client_id=")
-                                        .append(lapp)
-                                        .toString(),
+                                    String.format("client_id=%s", lapp),
                                     "redirect_uri=",
-                                    new StringBuffer("client_secret=")
-                                        .append(lkey)
-                                        .toString(),
-                                    new StringBuffer("code=")
-                                        .append(code)
-                                        .toString()
+                                    String.format(
+                                        "client_secret=%s",
+                                        lkey
+                                    ),
+                                    String.format("code=%s", code)
                                 )
                             )
                         );
