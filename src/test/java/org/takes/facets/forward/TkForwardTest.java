@@ -32,6 +32,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
 /**
@@ -73,8 +74,8 @@ public final class TkForwardTest {
             public Response act(final Request request) {
                 return new Response() {
                     @Override
-                    public Iterable<String> head() throws IOException {
-                        throw new RsForward("/a");
+                    public Iterable<String> head() {
+                        return new RsEmpty().head();
                     }
                     @Override
                     public InputStream body() throws IOException {

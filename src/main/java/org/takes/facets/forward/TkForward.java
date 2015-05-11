@@ -25,10 +25,13 @@ package org.takes.facets.forward;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rs.RsSimple;
 
 /**
  * Redirect on exception.
@@ -76,6 +79,11 @@ public final class TkForward implements Take {
          */
         private final transient Response origin;
         /**
+         * Saved response.
+         */
+        private final transient List<Response> saved =
+            new CopyOnWriteArrayList<Response>();
+        /**
          * Ctor.
          * @param res Original response
          */
@@ -84,23 +92,33 @@ public final class TkForward implements Take {
         }
         @Override
         public Iterable<String> head() throws IOException {
-            Iterable<String> head;
-            try {
-                head = this.origin.head();
-            } catch (final RsForward ex) {
-                head = ex.head();
-            }
-            return head;
+            return this.load().head();
         }
         @Override
         public InputStream body() throws IOException {
-            InputStream body;
-            try {
-                body = this.origin.body();
-            } catch (final RsForward ex) {
-                body = ex.body();
+            return this.load().body();
+        }
+        /**
+         * Load it.
+         * @return Response
+         * @throws IOException If fails
+         */
+        private Response load() throws IOException {
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    Iterable<String> head;
+                    InputStream body;
+                    try {
+                        head = this.origin.head();
+                        body = this.origin.body();
+                    } catch (final RsForward ex) {
+                        head = ex.head();
+                        body = ex.body();
+                    }
+                    this.saved.add(new RsSimple(head, body));
+                }
             }
-            return body;
+            return this.saved.get(0);
         }
     }
 
