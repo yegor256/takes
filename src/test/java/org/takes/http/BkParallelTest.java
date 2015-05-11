@@ -45,27 +45,24 @@ import org.takes.tk.TkEmpty;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
  */
-@SuppressWarnings(
-    {
-        "PMD.DoNotUseThreads",
-        "PMD.CyclomaticComplexity",
-        "PMD.AvoidInstantiatingObjectsInLoops"
-    }
-)
+@SuppressWarnings({
+    "PMD.DoNotUseThreads",
+    "PMD.CyclomaticComplexity",
+    "PMD.AvoidInstantiatingObjectsInLoops"
+})
 public final class BkParallelTest {
     /**
      * BkParallel runs requests in parallel, hence even
      * when handling of a request blocks, other requests
      * should be handled.
-     * @throws java.lang.Exception If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
     public void requestsAreParallel() throws Exception {
         final int port = new Ports().allocate();
         final String uri = String.format("http://localhost:%d", port);
-        // @checkstyle MagicNumberCheck (2 lines)
+        // @checkstyle MagicNumberCheck (1 line)
         final int count = 3;
-        final long timeout = TimeUnit.SECONDS.toMillis(10L);
         final CountDownLatch started = new CountDownLatch(count);
         final CountDownLatch completed = new CountDownLatch(count);
         final Take take = new Take() {
@@ -82,7 +79,7 @@ public final class BkParallelTest {
                 return new TkEmpty().act(req);
             }
         };
-        final Thread server = new Thread(
+        new Thread(
             new Runnable() {
                 @Override
                 public void run() {
@@ -103,8 +100,7 @@ public final class BkParallelTest {
                     }
                 }
             }
-        );
-        server.start();
+        ).start();
         for (int idx = 0; idx < count; ++idx) {
             new Thread(
                 new Runnable() {
@@ -122,7 +118,8 @@ public final class BkParallelTest {
                 }
             ).start();
         }
-        completed.await(timeout, TimeUnit.MILLISECONDS);
+        // @checkstyle MagicNumberCheck (1 line)
+        completed.await(1L, TimeUnit.MINUTES);
         MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
         new Ports().release(port);
