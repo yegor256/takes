@@ -70,6 +70,16 @@ public final class PsGoogle implements Pass {
     private final transient String redir;
 
     /**
+     * Google OAuth url.
+     */
+    private final transient String gauth;
+
+    /**
+     * Google API url.
+     */
+    private final transient String gapi;
+
+    /**
      * Ctor.
      * @param gapp Google app
      * @param gkey Google key
@@ -77,9 +87,31 @@ public final class PsGoogle implements Pass {
      */
     public PsGoogle(final String gapp, final String gkey,
         final String uri) {
+        this(
+            gapp,
+            gkey,
+            uri,
+            "https://accounts.google.com",
+            "https://www.googleapis.com"
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param gapp Google app
+     * @param gkey Google key
+     * @param uri Redirect URI (exactly as registered in Google console)
+     * @param gurl Google OAuth url
+     * @param aurl Google API url
+     * @checkstyle ParameterNumberCheck (2 lines)
+     */
+    PsGoogle(final String gapp, final String gkey,
+        final String uri, final String gurl, final String aurl) {
         this.app = gapp;
         this.key = gkey;
         this.redir = uri;
+        this.gauth = gurl;
+        this.gapi = aurl;
     }
 
     @Override
@@ -93,7 +125,7 @@ public final class PsGoogle implements Pass {
             );
         }
         return Collections.singleton(
-            PsGoogle.fetch(this.token(code.next()))
+            this.fetch(this.token(code.next()))
         ).iterator();
     }
 
@@ -109,9 +141,9 @@ public final class PsGoogle implements Pass {
      * @return The user found in Google
      * @throws IOException If fails
      */
-    private static Identity fetch(final String token) throws IOException {
+    private Identity fetch(final String token) throws IOException {
         // @checkstyle LineLength (1 line)
-        final String uri = new Href("https://www.googleapis.com/oauth2/v1/userinfo")
+        final String uri = new Href(this.gapi).path("oauth2/v1/userinfo")
             .with("alt", "json")
             .with("access_token", token)
             .toString();
@@ -129,8 +161,9 @@ public final class PsGoogle implements Pass {
      * @throws IOException If failed
      */
     private String token(final String code) throws IOException {
-        return new JdkRequest("https://accounts.google.com/o/oauth2/token")
-            .body()
+        return new JdkRequest(
+            new Href(this.gauth).path("o/oauth2/token").toString()
+        ).body()
             .formParam("client_id", this.app)
             .formParam("redirect_uri", this.redir)
             .formParam("client_secret", this.key)
