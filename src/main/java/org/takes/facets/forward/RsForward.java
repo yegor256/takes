@@ -152,7 +152,7 @@ public class RsForward extends HttpException implements Response {
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super(code, res.toString());
+        super(code, String.format("[%3d] %s %s", code, loc, res.toString()));
         this.origin = new RsWithHeader(
             new RsWithoutHeader(
                 new RsWithStatus(res, code),
