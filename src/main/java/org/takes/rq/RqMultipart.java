@@ -442,7 +442,7 @@ public interface RqMultipart extends Request {
             parts.add("the start\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n the end");
             parts.add(String.format("--%s--", boundary));
             return new ByteArrayInputStream(
-                    RqMultipart.Fake.join(parts.iterator()).getBytes()
+                RqMultipart.Fake.join(parts.iterator()).getBytes()
             );
         }
         /**
