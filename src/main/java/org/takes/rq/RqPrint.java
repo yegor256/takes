@@ -121,11 +121,11 @@ public final class RqPrint extends RqWrap {
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         while (true) {
-            final int actual = input.read(buf);
-            if (actual < 0) {
+            final int bytes = input.read(buf);
+            if (bytes < 0) {
                 break;
             }
-            output.write(buf, 0, actual);
+            output.write(buf, 0, bytes);
         }
     }
 

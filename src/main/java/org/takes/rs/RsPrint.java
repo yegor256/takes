@@ -160,11 +160,11 @@ public final class RsPrint extends RsWrap {
             //@checkstyle MagicNumberCheck (1 line)
             final byte[] buf = new byte[4096];
             while (true) {
-                final int actual = body.read(buf);
-                if (actual < 0) {
+                final int bytes = body.read(buf);
+                if (bytes < 0) {
                     break;
                 }
-                output.write(buf, 0, actual);
+                output.write(buf, 0, bytes);
             }
         } finally {
             body.close();
