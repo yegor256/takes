@@ -42,6 +42,7 @@ import org.takes.misc.Href;
  * @since 0.9
  */
 public interface RqHref extends Request {
+
     /**
      * Get HREF.
      * @return HTTP href

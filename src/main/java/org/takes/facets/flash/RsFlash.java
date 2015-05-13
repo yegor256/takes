@@ -23,7 +23,7 @@
  */
 package org.takes.facets.flash;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -31,6 +31,8 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import org.takes.Response;
+import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
 
@@ -89,30 +91,50 @@ import org.takes.rs.RsWrap;
 public final class RsFlash extends RsWrap {
 
     /**
+     * To string.
+     */
+    private final transient String text;
+
+    /**
      * Ctor.
      * @param msg Message to show
-     * @throws IOException If fails
+     * @throws UnsupportedEncodingException If fails
      */
-    public RsFlash(final String msg) throws IOException {
+    public RsFlash(final String msg)
+        throws UnsupportedEncodingException {
         this(msg, Level.INFO);
     }
 
     /**
      * Ctor.
      * @param err Error
-     * @throws IOException If fails
+     * @throws UnsupportedEncodingException If fails
      */
-    public RsFlash(final Throwable err) throws IOException {
-        this(err.getLocalizedMessage(), Level.SEVERE);
+    public RsFlash(final Throwable err)
+        throws UnsupportedEncodingException {
+        this(err, Level.SEVERE);
+    }
+
+    /**
+     * Ctor.
+     * @param err Error
+     * @param level Level
+     * @throws UnsupportedEncodingException If fails
+     * @since 0.17
+     */
+    public RsFlash(final Throwable err, final Level level)
+        throws UnsupportedEncodingException {
+        this(err.getLocalizedMessage(), level);
     }
 
     /**
      * Ctor.
      * @param msg Message
      * @param level Level
-     * @throws IOException If fails
+     * @throws UnsupportedEncodingException If fails
      */
-    public RsFlash(final String msg, final Level level) throws IOException {
+    public RsFlash(final String msg, final Level level)
+        throws UnsupportedEncodingException {
         this(msg, level, RsFlash.class.getSimpleName());
     }
 
@@ -121,28 +143,47 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
-     * @throws IOException If fails
+     * @throws UnsupportedEncodingException If fails
      */
     public RsFlash(final String msg, final Level level, final String cookie)
-        throws IOException {
-        super(
-            new RsWithCookie(
-                cookie,
-                String.format(
-                    "%s/%s",
-                    URLEncoder.encode(msg, Charset.defaultCharset().name()),
-                    level.getName()
+        throws UnsupportedEncodingException {
+        super(RsFlash.make(msg, level, cookie));
+        // @checkstyle MultipleStringLiteralsCheck (1 line)
+        this.text = String.format("%s/%s", level, msg);
+    }
+
+    @Override
+    public String toString() {
+        return this.text;
+    }
+
+    /**
+     * Make a response.
+     * @param msg Message
+     * @param level Level
+     * @param cookie Cookie name
+     * @return Response
+     * @throws UnsupportedEncodingException If fails
+     */
+    private static Response make(final String msg, final Level level,
+        final String cookie) throws UnsupportedEncodingException {
+        return new RsWithCookie(
+            cookie,
+            new Sprintf(
+                "%s/%s",
+                URLEncoder.encode(msg, Charset.defaultCharset().name()),
+                level.getName()
             ),
-                "Path=/",
-                String.format(
-                    Locale.ENGLISH,
-                    "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
-                    new Date(
-                        System.currentTimeMillis()
-                            + TimeUnit.HOURS.toMillis(1L)
-                    )
+            "Path=/",
+            String.format(
+                Locale.ENGLISH,
+                "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
+                new Date(
+                    System.currentTimeMillis()
+                        + TimeUnit.HOURS.toMillis(1L)
+                )
             )
-        )
         );
     }
+
 }

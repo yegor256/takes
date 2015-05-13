@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -39,6 +40,8 @@ import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqGreedy;
+import org.takes.rq.RqLengthAware;
+import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
@@ -50,6 +53,7 @@ import org.takes.tk.TkFailure;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class FtBasicTest {
 
     /**
@@ -154,6 +158,39 @@ public final class FtBasicTest {
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK)
                         .assertBody(Matchers.containsString("second: dd"));
+                }
+            }
+        );
+    }
+
+    /**
+     * FtBasic can consume incoming data stream.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void consumesIncomingDataStream() throws Exception {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(
+                    IOUtils.toString(
+                        new RqLengthAware(req).body()
+                    )
+                );
+            }
+        };
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    final String body = "here is your data";
+                    new JdkRequest(home)
+                        .method(RqMethod.POST)
+                        .body().set(body).back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(body));
                 }
             }
         );

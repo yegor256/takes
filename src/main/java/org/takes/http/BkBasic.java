@@ -33,10 +33,12 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqLive;
+import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -50,6 +52,7 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle IndentationCheck (500 lines)
  */
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
@@ -72,7 +75,10 @@ public final class BkBasic implements Back {
         final InputStream input = socket.getInputStream();
         try {
             this.print(
-                new RqLive(input),
+                BkBasic.addSocketHeaders(
+                    new RqLive(input),
+                    socket
+                ),
                 new BufferedOutputStream(socket.getOutputStream())
             );
         } finally {
@@ -91,9 +97,16 @@ public final class BkBasic implements Back {
         throws IOException {
         try {
             new RsPrint(this.take.act(req)).print(output);
-            // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final HttpException ex) {
+            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
+            // @checkstyle IllegalCatchCheck (7 lines)
         } catch (final Throwable ex) {
-            new RsPrint(BkBasic.failure(ex)).print(output);
+            new RsPrint(
+                BkBasic.failure(
+                    ex,
+                    HttpURLConnection.HTTP_INTERNAL_ERROR
+                )
+            ).print(output);
         } finally {
             output.close();
         }
@@ -102,17 +115,34 @@ public final class BkBasic implements Back {
     /**
      * Make a failure response.
      * @param err Error
+     * @param code HTTP error code
      * @return Response
      */
-    private static Response failure(final Throwable err) {
+    private static Response failure(final Throwable err, final int code) {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final PrintWriter writer = new PrintWriter(baos);
         err.printStackTrace(writer);
         writer.close();
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
-            HttpURLConnection.HTTP_INTERNAL_ERROR
+            code
         );
     }
 
+    /**
+     * Adds custom headers with information about socket.
+     * @param req Request
+     * @param socket Socket
+     * @return Request with custom headers
+     */
+    private static Request addSocketHeaders(final Request req,
+        final Socket socket) {
+        return new RqWithHeaders(
+            req,
+            String.format("X-Takes-LocalAddress: %s", socket.getLocalAddress()),
+            String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
+            String.format("X-Takes-RemoteAddress: %s", socket.getInetAddress()),
+            String.format("X-Takes-RemotePort: %d", socket.getPort())
+        );
+    }
 }

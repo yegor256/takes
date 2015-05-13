@@ -25,11 +25,11 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Concat;
 
 /**
  * Response decorator, with an additional header.
@@ -103,7 +103,7 @@ public final class RsWithHeader extends RsWrap {
         super(
             new Response() {
                 @Override
-                public List<String> head() throws IOException {
+                public Iterable<String> head() throws IOException {
                     return RsWithHeader.extend(res.head(), header.toString());
                 }
                 @Override
@@ -121,7 +121,7 @@ public final class RsWithHeader extends RsWrap {
      * @return Head with additional header
      * @throws IOException If fails
      */
-    private static List<String> extend(final Iterable<String> head,
+    private static Iterable<String> extend(final Iterable<String> head,
         final String header) throws IOException {
         if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
@@ -132,12 +132,7 @@ public final class RsWithHeader extends RsWrap {
                 )
             );
         }
-        final List<String> headers = new LinkedList<String>();
-        for (final String hdr : head) {
-            headers.add(hdr);
-        }
-        headers.add(header);
-        return headers;
+        return new Concat<String>(head, Collections.singleton(header));
     }
 
 }

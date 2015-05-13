@@ -24,14 +24,21 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.TkFork;
 import org.takes.tk.TkText;
 
 /**
@@ -40,6 +47,7 @@ import org.takes.tk.TkText;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.15.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class BkBasicTest {
     /**
@@ -60,12 +68,44 @@ public final class BkBasicTest {
                 ).getBytes()
             )
         );
+        Mockito.when(socket.getLocalAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getLocalPort()).thenReturn(0);
+        Mockito.when(socket.getInetAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getPort()).thenReturn(0);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
             Matchers.containsString("Hello world")
+        );
+    }
+
+    /**
+     * BkBasic can return HTTP status 404 when accessing invalid URL.
+     * @throws IOException if any I/O error occurs.
+     */
+    @Test
+    public void returnsProperResponseCodeOnInvalidUrl() throws IOException {
+        new FtRemote(
+            new TkFork(
+                new FkRegex("/path/a", new TkText("a")),
+                new FkRegex("/path/b", new TkText("b"))
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(String.format("%s/path/c", home))
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
+                }
+            }
         );
     }
 }

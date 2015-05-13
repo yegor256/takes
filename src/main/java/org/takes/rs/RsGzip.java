@@ -23,11 +23,12 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.zip.GZIPOutputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -41,29 +42,59 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.10
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RsGzip extends RsWrap {
+@EqualsAndHashCode(of = "origin")
+public final class RsGzip implements Response {
+
+    /**
+     * Original response.
+     */
+    private final transient Response origin;
+
+    /**
+     * Compressed and cached response.
+     */
+    private final transient List<Response> zipped =
+        new CopyOnWriteArrayList<Response>();
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsGzip(final Response res) {
-        super(
-            new RsWithHeader(
-                new Response() {
-                    @Override
-                    public Iterable<String> head() throws IOException {
-                        return res.head();
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return RsGzip.gzip(res.body());
-                    }
-                },
-                "Content-Encoding: gzip"
-        )
-        );
+        this.origin = res;
+    }
+
+    @Override
+    public Iterable<String> head() throws IOException {
+        return this.make().head();
+    }
+
+    @Override
+    public InputStream body() throws IOException {
+        return this.make().body();
+    }
+
+    /**
+     * Make a response.
+     * @return Response just made
+     * @throws IOException If fails
+     */
+    private Response make() throws IOException {
+        synchronized (this.zipped) {
+            if (this.zipped.isEmpty()) {
+                this.zipped.add(
+                    new RsWithHeader(
+                        new RsWithBody(
+                            this.origin,
+                            RsGzip.gzip(this.origin.body())
+                        ),
+                        "Content-Encoding",
+                        "gzip"
+                    )
+                );
+            }
+        }
+        return this.zipped.get(0);
     }
 
     /**
@@ -72,23 +103,25 @@ public final class RsGzip extends RsWrap {
      * @return New input stream
      * @throws IOException If fails
      */
-    private static InputStream gzip(final InputStream input)
+    private static byte[] gzip(final InputStream input)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        // @checkstyle MagicNumberCheck (1 line)
+        final byte[] buf = new byte[4096];
         final OutputStream gzip = new GZIPOutputStream(baos);
         try {
             while (true) {
-                final int data = input.read();
-                if (data < 0) {
+                final int len = input.read(buf);
+                if (len < 0) {
                     break;
                 }
-                gzip.write(data);
+                gzip.write(buf, 0, len);
             }
         } finally {
             gzip.close();
             input.close();
         }
-        return new ByteArrayInputStream(baos.toByteArray());
+        return baos.toByteArray();
     }
 
 }
