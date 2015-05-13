@@ -340,7 +340,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void handlesRequestInTime() throws IOException {
-        final int length = 100000000;
+        final int length = 50000000;
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
             Arrays.asList(
@@ -365,7 +365,7 @@ public final class RqMultipartTest {
         MatcherAssert.assertThat(
             System.currentTimeMillis() - start,
             //@checkstyle MagicNumberCheck (1 line)
-            Matchers.lessThan(3000L)
+            Matchers.lessThan(2000L)
         );
     }
 
