@@ -133,7 +133,32 @@ public interface RqMultipart extends Request {
                     )
                 );
             }
-            this.map = this.process(req, header);
+            final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
+            if (!matcher.matches()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "boundary is not specified in Content-Type header: \"%s\"",
+                        header
+                    )
+                );
+            }
+            final Collection<Request> requests = new LinkedList<Request>();
+            final byte[] boundary = String.format(
+                "\r\n--%s", matcher.group(1)
+            ).getBytes();
+            final InputStream body = new RqLengthAware(req).body();
+            RqMultipart.Base.skip(body, boundary.length - 2);
+            while (body.available() > 0) {
+                final int data = body.read();
+                if (data < 0 || data == '-') {
+                    break;
+                }
+                RqMultipart.Base.skip(body, 1);
+                requests.add(this.make(body, boundary));
+            }
+            this.map = RqMultipart.Base.asMap(requests);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -162,43 +187,6 @@ public interface RqMultipart extends Request {
         @Override
         public Iterable<String> names() {
             return this.map.keySet();
-        }
-
-        /**
-         * Process original request.
-         * @param req Original Request
-         * @param header Request header
-         * @return A map of the Requests
-         * @throws IOException If fails
-         */
-        private ConcurrentMap<String, List<Request>> process(final Request req,
-            final String header) throws IOException {
-            final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
-            if (!matcher.matches()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "boundary is not specified in Content-Type header: \"%s\"",
-                        header
-                    )
-                );
-            }
-            final Collection<Request> requests = new LinkedList<Request>();
-            final byte[] boundary = String.format(
-                "\r\n--%s", matcher.group(1)
-            ).getBytes();
-            final InputStream body = new RqLengthAware(req).body();
-            RqMultipart.Base.skip(body, boundary.length - 2);
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0 || data == '-') {
-                    break;
-                }
-                RqMultipart.Base.skip(body, 1);
-                requests.add(this.make(body, boundary));
-            }
-            return RqMultipart.Base.asMap(requests);
         }
         /**
          * Skip a few bytes in a stream.
