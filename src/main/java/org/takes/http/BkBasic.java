@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -96,9 +97,16 @@ public final class BkBasic implements Back {
         throws IOException {
         try {
             new RsPrint(this.take.act(req)).print(output);
-            // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final HttpException ex) {
+            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
+            // @checkstyle IllegalCatchCheck (7 lines)
         } catch (final Throwable ex) {
-            new RsPrint(BkBasic.failure(ex)).print(output);
+            new RsPrint(
+                BkBasic.failure(
+                    ex,
+                    HttpURLConnection.HTTP_INTERNAL_ERROR
+                )
+            ).print(output);
         } finally {
             output.close();
         }
@@ -107,16 +115,17 @@ public final class BkBasic implements Back {
     /**
      * Make a failure response.
      * @param err Error
+     * @param code HTTP error code
      * @return Response
      */
-    private static Response failure(final Throwable err) {
+    private static Response failure(final Throwable err, final int code) {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final PrintWriter writer = new PrintWriter(baos);
         err.printStackTrace(writer);
         writer.close();
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
-            HttpURLConnection.HTTP_INTERNAL_ERROR
+            code
         );
     }
 
