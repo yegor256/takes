@@ -335,6 +335,41 @@ public final class RqMultipartTest {
     }
 
     /**
+     * RqMultipart.Base can handle a big request in an acceptable time.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void handlesRequestInTime() throws IOException {
+        final int length = 100000000;
+        final long start = System.currentTimeMillis();
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: example.com",
+                "Content-Type: multipart/form-data; boundary=zzz"
+            ),
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--zzz",
+                "Content-Disposition: form-data; name=\"x-1\"",
+                "",
+                StringUtils.repeat("X", length),
+                "--zzz--"
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqMultipart.Smart(
+                new RqMultipart.Base(req)
+            ).single("x-1").body().available(),
+            Matchers.equalTo(length)
+        );
+        MatcherAssert.assertThat(
+            System.currentTimeMillis() - start,
+            //@checkstyle MagicNumberCheck (1 line)
+            Matchers.lessThan(3000L)
+        );
+    }
+
+    /**
      * Creates fake Request based on passed dispositions.
      * @param dispositions Content dispositions
      * @return Request

@@ -149,11 +149,9 @@ public interface RqMultipart extends Request {
             final InputStream stream = new RqLengthAware(req).body();
             final ReadableByteChannel body = Channels.newChannel(stream);
             // @checkstyle MagicNumberCheck (1 line)
-            int size = 8192;
-            if (stream.available() < size) {
-                size = stream.available();
-            }
-            final ByteBuffer buffer = ByteBuffer.allocate(size);
+            final ByteBuffer buffer = ByteBuffer.allocate(
+                Math.min(8192, stream.available())
+            );
             if (body.read(buffer) < 0) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
