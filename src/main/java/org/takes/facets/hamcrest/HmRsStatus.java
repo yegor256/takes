@@ -24,6 +24,7 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -44,13 +45,22 @@ public final class HmRsStatus extends TypeSafeMatcher<Response> {
     /**
      * Expected response status code matcher.
      */
-    private final transient Matcher<? extends Integer> matcher;
+    private final transient Matcher<? extends Number> matcher;
+
+    /**
+     * Expected matcher.
+     * @param val Value
+     * @since 0.17
+     */
+    public HmRsStatus(final int val) {
+        this(CoreMatchers.equalTo(val));
+    }
 
     /**
      * Expected matcher.
      * @param mtchr Is expected result code matcher.
      */
-    public HmRsStatus(final Matcher<? extends Integer> mtchr) {
+    public HmRsStatus(final Matcher<? extends Number> mtchr) {
         super();
         this.matcher = mtchr;
     }

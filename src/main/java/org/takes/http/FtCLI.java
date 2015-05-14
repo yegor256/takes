@@ -83,7 +83,7 @@ public final class FtCLI implements Front {
                 public Response act(final Request request) throws IOException {
                     return FtCLI.this.take.act(
                         new RqWithHeader(
-                            request, "X-Take-HitRefresh: yes"
+                            request, "X-Takes-HitRefresh: yes"
                         )
                     );
                 }
