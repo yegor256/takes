@@ -96,10 +96,8 @@ public final class PsTwitter implements Pass {
      */
     private static Identity fetch(final String token) throws IOException {
         final String uri = new Href(
-                "https://api.twitter.com/1.1/account/verify_credentials.json"
-        )
-            .with("access_token", token)
-            .toString();
+            "https://api.twitter.com/1.1/account/verify_credentials.json"
+        ).with("access_token", token).toString();
         return PsTwitter.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
