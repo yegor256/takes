@@ -23,41 +23,43 @@
  */
 package org.takes.rs;
 
-import java.net.HttpURLConnection;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
+import com.google.common.base.Joiner;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Response decorator, with content type.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RsWithType}.
+ * @author Yohann Ferreira (yohann.ferreira@orange.fr)
  * @version $Id$
- * @since 0.1
+ * @since 0.16.9
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RsWithType extends RsWrap {
+public final class RsWithTypeTest {
 
     /**
-     * Type header.
+     * RsWithType can replace an existing type.
+     * @throws IOException If a problem occurs.
      */
-    private static final String HEADER = "Content-Type";
-
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param type Content type
-     */
-    public RsWithType(final Response res, final CharSequence type) {
-        super(
-            new RsWithHeader(
-                new RsWithoutHeader(
-                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                    HEADER
-            ),
-                HEADER, type
-        )
+    @Test
+    public void replaceTypeToResponse() throws IOException {
+        final String type = "text/plain";
+        final String header = "Content-Type: ";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(
+                    new RsWithType(new RsEmpty(), "text/xml"),
+                    type
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    header + type,
+                    "",
+                    ""
+                )
+            )
         );
     }
 }
