@@ -50,7 +50,7 @@ public final class XeFlash implements XeSource {
     /**
      * Compiled RsFlash message regexp pattern.
      */
-    private static final Pattern RS_FLASH_MSG = Pattern.compile(
+    private static final Pattern PTN = Pattern.compile(
         "^(.*?)/(.*?)$"
     );
 
@@ -88,7 +88,7 @@ public final class XeFlash implements XeSource {
             new RqCookies.Base(this.req).cookie(this.cookie).iterator();
         final Directives dirs = new Directives();
         if (cookies.hasNext()) {
-            final Matcher matcher = RS_FLASH_MSG.matcher(cookies.next());
+            final Matcher matcher = XeFlash.PTN.matcher(cookies.next());
             if (matcher.find()) {
                 dirs.add("flash")
                     .add("message").set(
