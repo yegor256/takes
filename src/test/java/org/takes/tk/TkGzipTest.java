@@ -21,74 +21,68 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.forward;
+package org.takes.tk;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TkForward}.
+ * Test case for {@link TkGzip}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.2
+ * @since 0.17
  */
-public final class TkForwardTest {
+public final class TkGzipTest {
 
     /**
-     * TkForward can catch RsForward.
+     * TkGzip can compress on demand only.
      * @throws IOException If some problem inside
      */
     @Test
-    public void catchesExceptionCorrectly() throws IOException {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws RsForward {
-                throw new RsForward("/");
-            }
-        };
+    @Ignore
+    public void compressesOnDemandOnly() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkForward(take).act(new RqFake())
+                new TkGzip(new TkClasspath()).act(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /org/takes/tk/TkGzip.class HTTP/1.1",
+                            "Host: www.example.com",
+                            "Accept-Encoding: gzip"
+                        ),
+                        ""
+                    )
+                )
             ).print(),
-            Matchers.startsWith("HTTP/1.1 303 See Other")
+            Matchers.startsWith("HTTP/1.1 200 OK")
         );
     }
 
     /**
-     * TkForward can catch RsForward throws by Response.
+     * TkGzip can return uncompressed content.
      * @throws IOException If some problem inside
      */
     @Test
-    public void catchesExceptionThrownByResponse() throws IOException {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) {
-                return new Response() {
-                    @Override
-                    public Iterable<String> head() {
-                        return new RsEmpty().head();
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        throw new RsForward("/b");
-                    }
-                };
-            }
-        };
+    public void doesntCompressIfNotRequired() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkForward(take).act(new RqFake())
+                new TkGzip(new TkClasspath()).act(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /org/takes/tk/TkGzip.class HTTP/1.0",
+                            "Host: abc.example.com"
+                        ),
+                        ""
+                    )
+                )
             ).print(),
-            Matchers.startsWith("HTTP/1.1 303")
+            Matchers.startsWith("HTTP/1.1 200")
         );
     }
 

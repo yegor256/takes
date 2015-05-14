@@ -45,12 +45,17 @@ import org.takes.rs.RsWithoutHeader;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true, of = "origin")
-public final class RsForward extends HttpException implements Response {
+public class RsForward extends HttpException implements Response {
 
     /**
      * Serialization marker.
      */
     private static final long serialVersionUID = 7676888610908953700L;
+
+    /**
+     * Home page, by default.
+     */
+    private static final String HOME = "/";
 
     /**
      * Original response.
@@ -69,7 +74,7 @@ public final class RsForward extends HttpException implements Response {
      * @param res Original response
      */
     public RsForward(final Response res) {
-        this(res, "/");
+        this(res, RsForward.HOME);
     }
 
     /**
@@ -121,6 +126,16 @@ public final class RsForward extends HttpException implements Response {
      * Ctor.
      * @param res Original
      * @param code HTTP status code
+     * @since 0.17
+     */
+    public RsForward(final Response res, final int code) {
+        this(res, code, RsForward.HOME);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original
+     * @param code HTTP status code
      * @param loc Location
      * @since 0.14
      */
@@ -137,7 +152,7 @@ public final class RsForward extends HttpException implements Response {
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super(code, res.toString());
+        super(code, String.format("[%3d] %s %s", code, loc, res.toString()));
         this.origin = new RsWithHeader(
             new RsWithoutHeader(
                 new RsWithStatus(res, code),
@@ -148,12 +163,12 @@ public final class RsForward extends HttpException implements Response {
     }
 
     @Override
-    public Iterable<String> head() throws IOException {
+    public final Iterable<String> head() throws IOException {
         return this.origin.head();
     }
 
     @Override
-    public InputStream body() throws IOException {
+    public final InputStream body() throws IOException {
         return this.origin.body();
     }
 }

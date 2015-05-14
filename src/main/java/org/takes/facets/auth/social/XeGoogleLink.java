@@ -29,6 +29,7 @@ import org.takes.Request;
 import org.takes.misc.Href;
 import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
+import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
 
 /**
@@ -79,19 +80,33 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence redir) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new Href("https://accounts.google.com/o/oauth2/auth")
-                    .with("client_id", app)
-                    .with("redirect_uri", redir)
-                    .with("response_type", "code")
-                    .with("state", new RqHref.Base(req).href())
-                    .with(
-                        "scope",
-                        "https://www.googleapis.com/auth/userinfo.profile"
-                    )
-        )
+        super(XeGoogleLink.make(req, app, rel, redir));
+    }
+
+    /**
+     * Ctor.
+     * @param req Request
+     * @param app Google application ID
+     * @param rel Related
+     * @param redir Redirect URI
+     * @return Source
+     * @throws IOException If fails
+     * @since 0.14
+     * @checkstyle ParameterNumberCheck (4 lines)
+     */
+    private static XeSource make(final Request req, final CharSequence app,
+        final CharSequence rel, final CharSequence redir) throws IOException {
+        return new XeLink(
+            rel,
+            new Href("https://accounts.google.com/o/oauth2/auth")
+                .with("client_id", app)
+                .with("redirect_uri", redir)
+                .with("response_type", "code")
+                .with("state", new RqHref.Base(req).href())
+                .with(
+                    "scope",
+                    "https://www.googleapis.com/auth/userinfo.profile"
+                )
         );
     }
 

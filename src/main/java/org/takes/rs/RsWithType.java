@@ -40,6 +40,11 @@ import org.takes.Response;
 public final class RsWithType extends RsWrap {
 
     /**
+     * Type header.
+     */
+    private static final String HEADER = "Content-Type";
+
+    /**
      * Ctor.
      * @param res Original response
      * @param type Content type
@@ -47,10 +52,11 @@ public final class RsWithType extends RsWrap {
     public RsWithType(final Response res, final CharSequence type) {
         super(
             new RsWithHeader(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "Content-Type", type
+                new RsWithoutHeader(
+                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                    HEADER
+            ), HEADER, type
         )
         );
     }
-
 }

@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -106,7 +107,10 @@ public final class PsGithub implements Pass {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
-            throw new IllegalArgumentException("code is not provided");
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                "code is not provided by Github"
+            );
         }
         return Collections.singleton(
             this.fetch(this.token(href.toString(), code.next()))
@@ -147,7 +151,7 @@ public final class PsGithub implements Pass {
     private String token(final String home, final String code)
         throws IOException {
         final String uri = new Href(this.github)
-            .path("login/oauth/access_token")
+            .path("login").path("oauth").path("access_token")
             .toString();
         return new JdkRequest(uri)
             .method("POST")

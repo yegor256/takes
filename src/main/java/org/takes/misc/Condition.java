@@ -21,46 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.rq.RqFake;
+package org.takes.misc;
 
 /**
- * Test case for {@link TkVerbose}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Condition to determine how {@link Select} behave when filtering an iterable.
+ *
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.10
+ * @since 0.13.8
  */
-public final class TkVerboseTest {
+public interface Condition<T> {
 
     /**
-     * TkVerbose can extend not-found exception.
-     * @throws IOException If some problem inside
+     * Determine if an element should be added.
+     * @param element The element in the iterables to examine.
+     * @return True to add the element, false to skip.
      */
-    @Test
-    public void extendsNotFoundException() throws IOException {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
-            }
-        };
-        try {
-            new TkVerbose(take).act(new RqFake());
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getLocalizedMessage(),
-                Matchers.endsWith("GET http://www.example.com/")
-            );
+    boolean fits(T element);
+
+    /**
+     * Negating condition of any condition.
+     */
+    class Not<T> implements Condition<T> {
+
+        /**
+         * Condition.
+         */
+        private final transient Condition<T> condition;
+
+        /**
+         * Ctor.
+         * @param cond The condition to negate
+         */
+        public Not(final Condition<T> cond) {
+            this.condition = cond;
+        }
+
+        @Override
+        public boolean fits(final T element) {
+            return !this.condition.fits(element);
         }
     }
 

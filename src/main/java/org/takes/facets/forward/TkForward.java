@@ -24,10 +24,14 @@
 package org.takes.facets.forward;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rs.RsSimple;
 
 /**
  * Redirect on exception.
@@ -63,7 +67,59 @@ public final class TkForward implements Take {
         } catch (final RsForward ex) {
             res = ex;
         }
-        return res;
+        return new TkForward.Safe(res);
+    }
+
+    /**
+     * Safe response.
+     */
+    private static final class Safe implements Response {
+        /**
+         * Original response.
+         */
+        private final transient Response origin;
+        /**
+         * Saved response.
+         */
+        private final transient List<Response> saved =
+            new CopyOnWriteArrayList<Response>();
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        private Safe(final Response res) {
+            this.origin = res;
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.load().head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.load().body();
+        }
+        /**
+         * Load it.
+         * @return Response
+         * @throws IOException If fails
+         */
+        private Response load() throws IOException {
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    Iterable<String> head;
+                    InputStream body;
+                    try {
+                        head = this.origin.head();
+                        body = this.origin.body();
+                    } catch (final RsForward ex) {
+                        head = ex.head();
+                        body = ex.body();
+                    }
+                    this.saved.add(new RsSimple(head, body));
+                }
+            }
+            return this.saved.get(0);
+        }
     }
 
 }

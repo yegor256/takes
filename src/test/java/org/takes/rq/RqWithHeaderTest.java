@@ -48,10 +48,10 @@ public final class RqWithHeaderTest {
             new RqPrint(
                 new RqWithHeader(
                     new RqFake(),
-                    "Host", "www.example.com"
+                    "X-Custom-Header", "Custom-Value"
                 )
             ).print(),
-            Matchers.containsString("Host: www.example.com")
+            Matchers.containsString("X-Custom-Header: Custom-Value")
         );
     }
 

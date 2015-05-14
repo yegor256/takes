@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -65,7 +67,12 @@ public final class BkParallel implements Back {
      * @param threads Threads total
      */
     public BkParallel(final Back back, final int threads) {
-        this(back, Executors.newFixedThreadPool(threads));
+        this(
+            back,
+            Executors.newFixedThreadPool(
+                threads, new BkParallel.Threads()
+            )
+        );
     }
 
     /**
@@ -94,6 +101,29 @@ public final class BkParallel implements Back {
                 }
             }
         );
+    }
+
+    /**
+     * Thread factory.
+     */
+    private static final class Threads implements ThreadFactory {
+        /**
+         * Total threads created so far.
+         */
+        private final transient AtomicInteger total = new AtomicInteger();
+        @Override
+        @SuppressWarnings("PMD.DoNotUseThreads")
+        public Thread newThread(final Runnable runnable) {
+            final Thread thread = new Thread(runnable);
+            thread.setName(
+                String.format(
+                    "%s-%d",
+                    BkParallel.class.getSimpleName(),
+                    this.total.getAndAdd(1)
+                )
+            );
+            return thread;
+        }
     }
 
 }

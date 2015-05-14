@@ -21,57 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs.xe;
+package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.tk.TkWrap;
 
 /**
- * Xembly source to append something to an existing element.
+ * Take that acts on request with specified "Content-Type" HTTP headers only.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
-public final class XeAppend extends XeWrap {
-
+public final class TkConsumes extends TkWrap {
     /**
      * Ctor.
-     * @param target Name of XML element
-     * @param value Value to set
+     * @param take Original take
+     * @param type Content-Type
      */
-    public XeAppend(final CharSequence target, final CharSequence value) {
-        this(target, new XeDirectives(new Directives().set(value.toString())));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     */
-    public XeAppend(final CharSequence target, final XeSource... src) {
-        this(target, Arrays.asList(src));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     * @since 0.13
-     */
-    public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
+    public TkConsumes(final Take take, final String type) {
         super(
-            new XeSource() {
+            new Take() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target.toString()).append(
-                        new XeChain(src).toXembly()
+                public Response act(final Request req) throws IOException {
+                    return new RsFork(
+                        req,
+                        new FkContentType(type, take.act(req))
                     );
                 }
             }

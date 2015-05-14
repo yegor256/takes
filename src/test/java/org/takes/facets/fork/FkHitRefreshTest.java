@@ -52,7 +52,7 @@ public final class FkHitRefreshTest {
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
-            new RqFake(), "X-Take-HitRefresh: yes"
+            new RqFake(), "X-Takes-HitRefresh: yes"
         );
         final File dir = Files.createTempDir();
         final AtomicBoolean done = new AtomicBoolean(false);

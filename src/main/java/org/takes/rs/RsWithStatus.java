@@ -26,14 +26,16 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Concat;
+import org.takes.misc.Condition;
+import org.takes.misc.Select;
 
 /**
  * Response decorator, with status code.
@@ -46,7 +48,6 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithStatus extends RsWrap {
-
     /**
      * Statuses and their reasons.
      */
@@ -112,17 +113,21 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        final Collection<String> head = new LinkedList<String>();
-        head.add(String.format("HTTP/1.1 %d %s", status, reason));
-        boolean first = true;
-        for (final String hdr : origin.head()) {
-            if (first) {
-                first = false;
-            } else {
-                head.add(hdr);
-            }
-        }
-        return head;
+        return new Concat<String>(
+            Collections.singletonList(
+                String.format("HTTP/1.1 %d %s", status, reason)
+            ),
+            new Select<String>(
+                origin.head(),
+                new Condition<String>() {
+                    private final AtomicBoolean fit = new AtomicBoolean(false);
+                    @Override
+                    public boolean fits(final String element) {
+                        return this.fit.getAndSet(true);
+                    }
+                }
+            )
+        );
     }
 
     /**

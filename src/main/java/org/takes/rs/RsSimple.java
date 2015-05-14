@@ -21,58 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs.xe;
+package org.takes.rs;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStream;
 import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
-import org.xembly.Directives;
+import org.takes.Response;
 
 /**
- * Xembly source to append something to an existing element.
+ * Simple response.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
+ * @since 0.17
  */
 @EqualsAndHashCode(callSuper = true)
-public final class XeAppend extends XeWrap {
+public class RsSimple extends RsWrap {
 
     /**
      * Ctor.
-     * @param target Name of XML element
-     * @param value Value to set
+     * @param head Head
+     * @param body Body
      */
-    public XeAppend(final CharSequence target, final CharSequence value) {
-        this(target, new XeDirectives(new Directives().set(value.toString())));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     */
-    public XeAppend(final CharSequence target, final XeSource... src) {
-        this(target, Arrays.asList(src));
-    }
-
-    /**
-     * Ctor.
-     * @param target Name of XML element
-     * @param src Source
-     * @since 0.13
-     */
-    public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
+    public RsSimple(final Iterable<String> head, final InputStream body) {
         super(
-            new XeSource() {
+            new Response() {
                 @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target.toString()).append(
-                        new XeChain(src).toXembly()
-                    );
+                public Iterable<String> head() {
+                    return head;
+                }
+                @Override
+                public InputStream body() {
+                    return body;
                 }
             }
         );

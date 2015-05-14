@@ -93,7 +93,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    return append(res, url.openStream().available());
+                    return RsWithBody.append(res, url.openStream().available());
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -113,7 +113,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    return append(res, body.length);
+                    return RsWithBody.append(res, body.length);
                 }
                 @Override
                 public InputStream body() {
@@ -133,7 +133,7 @@ public final class RsWithBody extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    return append(res, body.available());
+                    return RsWithBody.append(res, body.available());
                 }
                 @Override
                 public InputStream body() {
@@ -150,10 +150,13 @@ public final class RsWithBody extends RsWrap {
      * @return Iterable String of header attributes
      * @throws IOException if something goes wrong.
      */
-    private static Iterable<String> append(
-        final Response res, final int length) throws IOException {
+    private static Iterable<String> append(final Response res,
+        final int length) throws IOException {
+        final String header = "Content-Length";
         return new RsWithHeader(
-            res, "Content-Length", Integer.toString(length)
+            new RsWithoutHeader(res, header),
+            header,
+            Integer.toString(length)
         ).head();
     }
 

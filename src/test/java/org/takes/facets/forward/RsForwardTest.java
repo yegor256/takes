@@ -21,55 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.facets.forward;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
-import org.takes.tk.TkHTML;
+import org.takes.facets.flash.RsFlash;
 
 /**
- * Test case for {@link HmRsStatus}.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * Test case for {@link RsForward}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.13
+ * @since 0.17
  */
-public final class HmRsStatusTest {
+public final class RsForwardTest {
 
     /**
-     * HmRsStatus can test status HTTP_OK.
+     * RsForward can build a proper stacktrace.
      * @throws IOException If some problem inside
      */
     @Test
-    public void testsStatusOK() throws IOException {
+    public void buildsStackTrace() throws IOException {
         MatcherAssert.assertThat(
-            new TkHTML("<html></html>").act(new RqFake()),
-            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
-        );
-        MatcherAssert.assertThat(
-            new TkEmpty().act(new RqFake()),
-            new HmRsStatus(HttpURLConnection.HTTP_OK)
+            ExceptionUtils.getFullStackTrace(
+                new RsForward(new RsFlash(new IOException("the failure")))
+            ),
+            Matchers.containsString("failure")
         );
     }
-
-    /**
-     * HmRsStatus can test status HTTP_NOT_FOUND.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void testsStatusNotFound() throws IOException {
-        MatcherAssert.assertThat(
-            new TkHTML("<html><body/></html>").act(new RqFake()),
-            Matchers.not(
-                new HmRsStatus(
-                    Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
-                )
-            )
-        );
-    }
-
 }

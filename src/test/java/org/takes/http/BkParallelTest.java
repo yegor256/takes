@@ -23,15 +23,105 @@
  */
 package org.takes.http;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.tk.TkEmpty;
+
 /**
  * Test case for {@link BkParallel}.
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
- * @todo #220:30min/DEV This unit test not implemented but has to be.
- *  E.g. you could pass your own a ExecutorService implementation to the ctor
- *  and verify execute() calls.  But feel free to try another way.
  */
-public class BkParallelTest {
+@SuppressWarnings({
+    "PMD.DoNotUseThreads",
+    "PMD.CyclomaticComplexity",
+    "PMD.AvoidInstantiatingObjectsInLoops"
+})
+public final class BkParallelTest {
+    /**
+     * BkParallel runs requests in parallel, hence even
+     * when handling of a request blocks, other requests
+     * should be handled.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void requestsAreParallel() throws Exception {
+        final int port = new Ports().allocate();
+        final String uri = String.format("http://localhost:%d", port);
+        // @checkstyle MagicNumberCheck (1 line)
+        final int count = 3;
+        final CountDownLatch started = new CountDownLatch(count);
+        final CountDownLatch completed = new CountDownLatch(count);
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req)
+                throws IOException {
+                started.countDown();
+                try {
+                    started.await();
+                } catch (final InterruptedException ex) {
+                    throw new IllegalStateException(ex);
+                }
+                completed.countDown();
+                return new TkEmpty().act(req);
+            }
+        };
+        new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtBasic(
+                            new BkParallel(new BkBasic(take)),
+                            port
+                        ).start(
+                            new Exit() {
+                                @Override
+                                public boolean ready() {
+                                    return completed.getCount() == 0;
+                                }
+                            }
+                        );
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        ).start();
+        for (int idx = 0; idx < count; ++idx) {
+            new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new JdkRequest(uri)
+                                .fetch()
+                                .as(RestResponse.class)
+                                .assertStatus(HttpURLConnection.HTTP_OK);
+                        } catch (final IOException ex) {
+                            throw new IllegalStateException(ex);
+                        }
+                    }
+                }
+            ).start();
+        }
+        // @checkstyle MagicNumberCheck (1 line)
+        completed.await(1L, TimeUnit.MINUTES);
+        MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
+        MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+        new Ports().release(port);
+    }
 }

@@ -26,6 +26,10 @@ package org.takes.rq;
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -327,6 +331,54 @@ public final class RqMultipartTest {
                 }
             }
         );
+    }
+
+    /**
+     * RqMultipart.Base can handle a big request in an acceptable time.
+     * @throws IOException If some problem inside
+     * @checkstyle MagicNumberCheck (2 lines)
+     */
+    @Test(timeout = 10000)
+    public void handlesRequestInTime() throws IOException {
+        final int length = 100000000;
+        final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
+        final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
+        bwr.write(
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--zzz",
+                "Content-Disposition: form-data; name=\"test\"",
+                "",
+                ""
+            )
+        );
+        for (int ind = 0; ind < length; ++ind) {
+            bwr.write("X");
+        }
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.write("--zzz--");
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.close();
+        final long start = System.currentTimeMillis();
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: example.com",
+                "Content-Type: multipart/form-data; boundary=zzz"
+            ),
+            new FileInputStream(temp)
+        );
+        MatcherAssert.assertThat(
+            new RqMultipart.Smart(
+                new RqMultipart.Base(req)
+            ).single("test").body().available(),
+            Matchers.equalTo(length)
+        );
+        MatcherAssert.assertThat(
+            System.currentTimeMillis() - start,
+            //@checkstyle MagicNumberCheck (1 line)
+            Matchers.lessThan(3000L)
+        );
+        temp.delete();
     }
 
     /**

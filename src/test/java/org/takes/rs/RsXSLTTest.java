@@ -34,6 +34,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -45,16 +46,23 @@ import org.junit.Test;
 public final class RsXSLTTest {
 
     /**
-     * RsXSLT can convert XML to HTML.
-     * @throws IOException If some problem inside
+     * Validate encoding.
      */
-    @Test
-    public void convertsXmlToHtml() throws IOException {
+    @BeforeClass
+    public static void before() {
         MatcherAssert.assertThat(
             "default charset during testing must be UTF-8",
             Charset.defaultCharset().name(),
             Matchers.equalTo("UTF-8")
         );
+    }
+
+    /**
+     * RsXSLT can convert XML to HTML.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void convertsXmlToHtml() throws IOException {
         final String xml = Joiner.on(' ').join(
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
             "<page><data>ура</data></page>"
@@ -113,6 +121,44 @@ public final class RsXSLTTest {
                 )
             ).print(),
             Matchers.endsWith("Hey, Jeffrey!")
+        );
+    }
+
+    /**
+     * RsXSLT can resolve in classpath.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void resolvesInClasspath() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(
+                        Joiner.on(' ').join(
+                            "<?xml-stylesheet",
+                            " href='/org/takes/rs/simple.xsl?0'",
+                            " type='text/xsl'?>",
+                            "<p><name>Bobby</name></p>"
+                        )
+                    )
+                )
+            ).print(),
+            Matchers.endsWith("Hello, Bobby!")
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(
+                        Joiner.on(' ').join(
+                            "<?xml-stylesheet ",
+                            " href='/org/takes/rs/simple.xsl'",
+                            " type='text/xsl' ?>",
+                            "<p><name>Dan</name></p>"
+                        )
+                    )
+                )
+            ).print(),
+            Matchers.endsWith("Hello, Dan!")
         );
     }
 

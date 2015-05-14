@@ -39,6 +39,7 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -64,10 +65,12 @@ public final class PsFacebook implements Pass {
      * Request for fetching app token.
      */
     private final transient com.jcabi.http.Request request;
+
     /**
-     * Facebook login request handler. .
+     * Facebook login request handler.
      */
     private final transient WebRequestor requestor;
+
     /**
      * App name.
      */
@@ -119,7 +122,10 @@ public final class PsFacebook implements Pass {
         final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
-            throw new IllegalArgumentException("code is not provided");
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                "code is not provided by Facebook"
+            );
         }
         final User user = this.fetch(
             this.token(href.toString(), code.next())

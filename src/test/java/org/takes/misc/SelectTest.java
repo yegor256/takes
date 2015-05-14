@@ -21,55 +21,64 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.misc;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
+import com.google.common.base.Joiner;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.tk.TkEmpty;
-import org.takes.tk.TkHTML;
 
 /**
- * Test case for {@link HmRsStatus}.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * Test case for {@link Select}.
+ *
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13
+ * @since 0.13.8
  */
-public final class HmRsStatusTest {
+public final class SelectTest {
 
     /**
-     * HmRsStatus can test status HTTP_OK.
-     * @throws IOException If some problem inside
+     * Select can select with condition.
      */
     @Test
-    public void testsStatusOK() throws IOException {
+    public void selectsWithCondition() {
         MatcherAssert.assertThat(
-            new TkHTML("<html></html>").act(new RqFake()),
-            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
-        );
-        MatcherAssert.assertThat(
-            new TkEmpty().act(new RqFake()),
-            new HmRsStatus(HttpURLConnection.HTTP_OK)
-        );
-    }
-
-    /**
-     * HmRsStatus can test status HTTP_NOT_FOUND.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void testsStatusNotFound() throws IOException {
-        MatcherAssert.assertThat(
-            new TkHTML("<html><body/></html>").act(new RqFake()),
-            Matchers.not(
-                new HmRsStatus(
-                    Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
+            Joiner.on(" ").join(
+                new Select<String>(
+                    Arrays.asList("one", "two", "three1", "four1"),
+                    new Condition<String>() {
+                        @Override
+                        public boolean fits(final String element) {
+                            return element.endsWith("1");
+                        }
+                    }
                 )
-            )
+            ),
+            Matchers.equalTo("three1 four1")
         );
     }
 
+    /**
+     * Select can select with not condition.
+     */
+    @Test
+    public void selectsWithNotCondition() {
+        MatcherAssert.assertThat(
+            Joiner.on("+").join(
+                new Select<String>(
+                    Arrays.asList("at4", "at5", "at61"),
+                    new Condition.Not<String>(
+                        new Condition<String>() {
+                            @Override
+                            public boolean fits(final String element) {
+                                return element.endsWith("61");
+                            }
+                        }
+                    )
+                )
+            ),
+            Matchers.equalTo("at4+at5")
+        );
+    }
 }

@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.URI;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -168,16 +169,17 @@ public final class RsXSLT extends RsWrap {
      */
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        //@checkstyle MagicNumberCheck (1 line)
+        final byte[] buf = new byte[4096];
         while (true) {
-            final int data = input.read();
-            if (data < 0) {
+            final int bytes = input.read(buf);
+            if (bytes < 0) {
                 break;
             }
-            baos.write(data);
+            baos.write(buf, 0, bytes);
         }
         return baos.toByteArray();
     }
-
     /**
      * Retrieve a stylesheet from this XML (throws an exception if
      * no stylesheet is attached).
@@ -228,10 +230,15 @@ public final class RsXSLT extends RsWrap {
         @Override
         public Source resolve(final String href, final String base)
             throws TransformerException {
-            final InputStream input = this.getClass().getResourceAsStream(href);
+            final InputStream input = this.getClass().getResourceAsStream(
+                URI.create(href).getPath()
+            );
             if (input == null) {
                 throw new TransformerException(
-                    String.format("XSL '%s' not found in classpath", href)
+                    String.format(
+                        "\"%s\" not found in classpath, base=\"%s\"",
+                        href, base
+                    )
                 );
             }
             return new StreamSource(new InputStreamReader(input));
