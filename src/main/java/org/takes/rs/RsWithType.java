@@ -55,8 +55,7 @@ public final class RsWithType extends RsWrap {
                 new RsWithoutHeader(
                     new RsWithStatus(res, HttpURLConnection.HTTP_OK),
                     HEADER
-            ),
-                HEADER, type
+            ), HEADER, type
         )
         );
     }

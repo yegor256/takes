@@ -44,7 +44,6 @@ public final class RsWithTypeTest {
     @Test
     public void replaceTypeToResponse() throws IOException {
         final String type = "text/plain";
-        final String header = "Content-Type: ";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
@@ -55,7 +54,7 @@ public final class RsWithTypeTest {
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    header + type,
+                    String.format("Content-Type: %s", type),
                     "",
                     ""
                 )
