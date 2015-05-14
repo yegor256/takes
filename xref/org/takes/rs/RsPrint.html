@@ -165,19 +165,21 @@
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> printBody(<strong class="jxr_keyword">final</strong> OutputStream output) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>         <strong class="jxr_keyword">final</strong> InputStream body = <strong class="jxr_keyword">this</strong>.body();
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <strong class="jxr_keyword">while</strong> (body.available() &gt; 0) {
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>                 <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> data = body.read();
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>                 <strong class="jxr_keyword">if</strong> (data &lt; 0) {
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>                     <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>                 }
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>                 output.write(data);
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>             }
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>         } <strong class="jxr_keyword">finally</strong> {
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>             body.close();
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>         }
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>     }
-<a class="jxr_linenumber" name="L171" href="#L171">171</a> 
-<a class="jxr_linenumber" name="L172" href="#L172">172</a> }
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <em class="jxr_comment">//@checkstyle MagicNumberCheck (1 line)</em>
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>             <strong class="jxr_keyword">final</strong> byte[] buf = <strong class="jxr_keyword">new</strong> byte[4096];
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>             <strong class="jxr_keyword">while</strong> (<strong class="jxr_keyword">true</strong>) {
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>                 <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> bytes = body.read(buf);
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>                 <strong class="jxr_keyword">if</strong> (bytes &lt; 0) {
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>                     <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>                 }
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>                 output.write(buf, 0, bytes);
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>             }
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>         } <strong class="jxr_keyword">finally</strong> {
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>             body.close();
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>         }
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>     }
+<a class="jxr_linenumber" name="L173" href="#L173">173</a> 
+<a class="jxr_linenumber" name="L174" href="#L174">174</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

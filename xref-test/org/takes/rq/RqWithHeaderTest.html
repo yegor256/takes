@@ -56,10 +56,10 @@
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">new</strong> RqPrint(
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                  <strong class="jxr_keyword">new</strong> RqWithHeader(
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>                      <strong class="jxr_keyword">new</strong> RqFake(),
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>                      <span class="jxr_string">"Host"</span>, <span class="jxr_string">"www.example.com"</span>
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>                      <span class="jxr_string">"X-Custom-Header"</span>, <span class="jxr_string">"Custom-Value"</span>
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>                  )
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>              ).print(),
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>              Matchers.containsString(<span class="jxr_string">"Host: www.example.com"</span>)
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>              Matchers.containsString(<span class="jxr_string">"X-Custom-Header: Custom-Value"</span>)
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>          );
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      }
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
