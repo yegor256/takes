@@ -390,22 +390,15 @@ public interface RqMultipart extends Request {
          */
         public Fake(final String... dispositions) throws IOException {
             this(
-                new Request() {
-                    @Override
-                    public Iterable<String> head() throws IOException {
-                        return Arrays.asList(
-                            "POST /h?u=3 HTTP/1.1",
-                            "Host: www.example.com",
-                            // @checkstyle LineLengthCheck (1 line)
-                            "Content-Type: multipart/form-data; boundary=AaB02x",
-                            "Content-Length: 100001"
-                        );
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return new ByteArrayInputStream(new byte[]{});
-                    }
-                },
+                new RqWithHeaders(
+                    new RqFake(),
+                    Arrays.asList(
+                        "Host: www.example.com",
+                        // @checkstyle LineLengthCheck (1 line)
+                        "Content-Type: multipart/form-data; boundary=AaB02x",
+                        "Content-Length: 100001"
+                    )
+                ),
                 dispositions
             );
         }
@@ -446,7 +439,7 @@ public interface RqMultipart extends Request {
             );
         }
         /**
-         * Iterable<T> to List<T> converter.
+         * Iterable<String> to List<String> converter.
          * @param source Source Iterable
          * @return List of given source
          */
