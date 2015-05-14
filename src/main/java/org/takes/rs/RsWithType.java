@@ -47,10 +47,12 @@ public final class RsWithType extends RsWrap {
     public RsWithType(final Response res, final CharSequence type) {
         super(
             new RsWithHeader(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                new RsWithoutHeader(
+                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                    "Content-Type"
+                ),
                 "Content-Type", type
-        )
+            )
         );
     }
-
 }
