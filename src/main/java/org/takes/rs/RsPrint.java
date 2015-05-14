@@ -157,12 +157,14 @@ public final class RsPrint extends RsWrap {
     public void printBody(final OutputStream output) throws IOException {
         final InputStream body = this.body();
         try {
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0) {
+            //@checkstyle MagicNumberCheck (1 line)
+            final byte[] buf = new byte[4096];
+            while (true) {
+                final int bytes = body.read(buf);
+                if (bytes < 0) {
                     break;
                 }
-                output.write(data);
+                output.write(buf, 0, bytes);
             }
         } finally {
             body.close();

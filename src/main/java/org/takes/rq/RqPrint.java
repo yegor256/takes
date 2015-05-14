@@ -118,12 +118,14 @@ public final class RqPrint extends RqWrap {
      */
     public void printBody(final OutputStream output) throws IOException {
         final InputStream input = new RqLengthAware(this).body();
-        while (input.available() > 0) {
-            final int data = input.read();
-            if (data < 0) {
+        //@checkstyle MagicNumberCheck (1 line)
+        final byte[] buf = new byte[4096];
+        while (true) {
+            final int bytes = input.read(buf);
+            if (bytes < 0) {
                 break;
             }
-            output.write(data);
+            output.write(buf, 0, bytes);
         }
     }
 
