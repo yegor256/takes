@@ -30,6 +30,7 @@ import org.takes.facets.auth.PsByFlag;
 import org.takes.misc.Href;
 import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
+import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
 
 /**
@@ -66,17 +67,30 @@ public final class XeFacebookLink extends XeWrap {
      */
     public XeFacebookLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence flag) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new Href("https://www.facebook.com/dialog/oauth")
-                    .with("client_id", app)
-                    .with(
-                        "redirect_uri",
-                        new RqHref.Base(req).href()
-                            .with(flag, PsFacebook.class.getSimpleName())
-                    )
-        )
+        super(XeFacebookLink.make(req, app, rel, flag));
+    }
+
+    /**
+     * Ctor.
+     * @param req Request
+     * @param app Github application ID
+     * @param rel Related
+     * @param flag Flag to add
+     * @return Source
+     * @throws IOException If fails
+     * @checkstyle ParameterNumberCheck (4 lines)
+     */
+    private static XeSource make(final Request req, final CharSequence app,
+        final CharSequence rel, final CharSequence flag) throws IOException {
+        return new XeLink(
+            rel,
+            new Href("https://www.facebook.com/dialog/oauth")
+                .with("client_id", app)
+                .with(
+                    "redirect_uri",
+                    new RqHref.Base(req).href()
+                        .with(flag, PsFacebook.class.getSimpleName())
+                )
         );
     }
 

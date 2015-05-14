@@ -34,6 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -120,7 +121,8 @@ public final class PsGoogle implements Pass {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
         if (!code.hasNext()) {
-            throw new IllegalArgumentException(
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
                 "code is not provided by Google, probably some mistake"
             );
         }
