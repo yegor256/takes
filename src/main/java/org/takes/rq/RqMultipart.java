@@ -23,15 +23,17 @@
  */
 package org.takes.rq;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -113,52 +115,28 @@ public interface RqMultipart extends Request {
          */
         private final transient ConcurrentMap<String, List<Request>> map;
         /**
+         * Internal buffer.
+         */
+        private final transient ByteBuffer buffer;
+        /**
+         * Origin request body.
+         */
+        private final transient ReadableByteChannel body;
+        /**
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
+         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         public Base(final Request req) throws IOException {
             super(req);
-            final String header = new RqHeaders.Smart(
-                new RqHeaders.Base(req)
-            ).single("Content-Type");
-            if (!header.toLowerCase(Locale.ENGLISH)
-                .startsWith("multipart/form-data")) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
-                        header
-                    )
-                );
-            }
-            final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
-            if (!matcher.matches()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "boundary is not specified in Content-Type header: \"%s\"",
-                        header
-                    )
-                );
-            }
-            final Collection<Request> requests = new LinkedList<Request>();
-            final byte[] boundary = String.format(
-                "\r\n--%s", matcher.group(1)
-            ).getBytes();
-            final InputStream body = new RqLengthAware(req).body();
-            RqMultipart.Base.skip(body, boundary.length - 2);
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0 || data == '-') {
-                    break;
-                }
-                RqMultipart.Base.skip(body, 1);
-                requests.add(this.make(body, boundary));
-            }
-            this.map = RqMultipart.Base.asMap(requests);
+            final InputStream stream = new RqLengthAware(req).body();
+            this.body = Channels.newChannel(stream);
+            this.buffer = ByteBuffer.allocate(
+                // @checkstyle MagicNumberCheck (1 line)
+                Math.min(8192, stream.available())
+            );
+            this.map = this.buildRequests(req);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -189,42 +167,85 @@ public interface RqMultipart extends Request {
             return this.map.keySet();
         }
         /**
-         * Skip a few bytes in a stream.
-         * @param stream The stream
-         * @param skip How many bytes to skip
+         * Build a request for each part of the origin request.
+         * @param req Origin request
+         * @return The requests map that use the part name as a map key
          * @throws IOException If fails
          */
-        private static void skip(final InputStream stream, final int skip)
-            throws IOException {
-            if (stream.read(new byte[skip]) != skip) {
+        private ConcurrentMap<String, List<Request>> buildRequests(
+            final Request req) throws IOException {
+            final String header = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("Content-Type");
+            if (!header.toLowerCase(Locale.ENGLISH)
+                .startsWith("multipart/form-data")) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format("failed to skip %d bytes", skip)
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
+                        header
+                    )
                 );
             }
+            final Matcher matcher = RqMultipart.Base.BOUNDARY.matcher(header);
+            if (!matcher.matches()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        // @checkstyle LineLength (1 line)
+                        "boundary is not specified in Content-Type header: \"%s\"",
+                        header
+                    )
+                );
+            }
+            if (this.body.read(this.buffer) < 0) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    "failed to read the request body"
+                );
+            }
+            final byte[] boundary = String.format(
+                "\r\n--%s", matcher.group(1)
+            ).getBytes();
+            this.buffer.flip();
+            this.buffer.position(boundary.length - 2);
+            final Collection<Request> requests = new LinkedList<Request>();
+            while (this.buffer.hasRemaining()) {
+                final byte data = this.buffer.get();
+                if (data == '-') {
+                    break;
+                }
+                this.buffer.position(this.buffer.position() + 1);
+                requests.add(this.make(boundary));
+            }
+            return RqMultipart.Base.asMap(requests);
         }
         /**
          * Make a request.
-         * @param body Body
+         *  Scans the origin request until the boundary reached. Caches
+         *  the  content into a temporary file and returns it as a new request.
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
          */
-        private Request make(final InputStream body,
-            final byte[] boundary) throws IOException {
+        private Request make(final byte[] boundary) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
             file.deleteOnExit();
-            final OutputStream out = new BufferedOutputStream(
-                new FileOutputStream(file)
-            );
+            final FileChannel channel = new RandomAccessFile(
+                file,
+                "rw"
+            ).getChannel();
             try {
-                out.write(this.head().iterator().next().getBytes());
-                out.write("\r\n".getBytes());
-                RqMultipart.Base.copy(body, out, boundary);
+                channel.write(
+                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
+                );
+                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                this.copy(channel, boundary);
             } finally {
-                out.close();
+                channel.close();
             }
             return new RqLive(
                 new CapInputStream(
@@ -233,35 +254,42 @@ public interface RqMultipart extends Request {
                 )
             );
         }
+
         /**
          * Copy until boundary reached.
-         * @param body Input stream
-         * @param output Output to write to
+         * @param target Output file channel
          * @param boundary Boundary
          * @throws IOException If fails
          */
-        private static void copy(final InputStream body,
-            final OutputStream output, final byte[] boundary)
-            throws IOException {
+        private void copy(final WritableByteChannel target,
+            final byte[] boundary) throws IOException {
             int match = 0;
-            final ByteArrayOutputStream buf = new ByteArrayOutputStream();
-            while (body.available() > 0) {
-                final int data = body.read();
-                if (data < 0) {
-                    break;
-                }
-                if (data == boundary[match]) {
-                    ++match;
-                    buf.write(data);
-                    if (match == boundary.length) {
+            boolean cont = true;
+            while (cont) {
+                if (!this.buffer.hasRemaining()) {
+                    this.buffer.clear();
+                    if (this.body.read(this.buffer) == -1) {
                         break;
                     }
-                } else {
-                    match = 0;
-                    output.write(buf.toByteArray());
-                    buf.reset();
-                    output.write(data);
+                    this.buffer.flip();
                 }
+                final ByteBuffer btarget = this.buffer.slice();
+                final int offset = this.buffer.position();
+                btarget.limit(0);
+                while (this.buffer.hasRemaining()) {
+                    final byte data = this.buffer.get();
+                    if (data == boundary[match]) {
+                        ++match;
+                        if (match == boundary.length) {
+                            cont = false;
+                            break;
+                        }
+                    } else {
+                        match = 0;
+                        btarget.limit(this.buffer.position() - offset);
+                    }
+                }
+                target.write(btarget);
             }
         }
         /**
