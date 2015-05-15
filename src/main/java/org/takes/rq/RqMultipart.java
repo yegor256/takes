@@ -35,7 +35,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -68,6 +67,10 @@ public interface RqMultipart extends Request {
      * Carriage return constant.
      */
     String CRLF = "\r\n";
+    /**
+     * Content type constant.
+     */
+    String CONTENT_TYPE = "Content-Type";
 
     /**
      * Get single part.
@@ -183,7 +186,7 @@ public interface RqMultipart extends Request {
             final Request req) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
-            ).single("Content-Type");
+            ).single(RqMultipart.CONTENT_TYPE);
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
                 throw new HttpException(
@@ -405,16 +408,12 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final String... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
-                new RqFake(
-                    RqMultipart.Fake.convert(
-                        new RqWithHeaders(
-                            req,
-                            Arrays.asList(
-                                // @checkstyle LineLengthCheck (1 line)
-                                "Content-Type: multipart/form-data; boundary=AaB02x"
-                            )
-                        ).head()
-                    ),
+                new RqSimple(
+                    new RqWithHeader(
+                        req,
+                        // @checkstyle LineLengthCheck (1 line)
+                        RqMultipart.CONTENT_TYPE, "multipart/form-data; boundary=AaB02x"
+                    ).head(),
                     RqMultipart.Fake.fakeBody(dispositions)
                 )
             );
@@ -460,18 +459,6 @@ public interface RqMultipart extends Request {
             return new ByteArrayInputStream(
                 RqMultipart.Fake.join(parts.iterator()).getBytes()
             );
-        }
-        /**
-         * Iterable<String> to List<String> converter.
-         * @param source Source Iterable
-         * @return List of given source
-         */
-        private static List<String> convert(final Iterable<String> source) {
-            final List<String> destination = new LinkedList<String>();
-            for (final String each : source) {
-                destination.add(each);
-            }
-            return destination;
         }
         /**
          * CRLF joiner.
