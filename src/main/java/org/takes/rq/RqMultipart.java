@@ -406,8 +406,16 @@ public interface RqMultipart extends Request {
             throws IOException {
             this.fake = new RqMultipart.Base(
                 new RqFake(
-                    RqMultipart.Fake.convert(req.head()),
-                    this.fakeBody(dispositions)
+                    RqMultipart.Fake.convert(
+                        new RqWithHeaders(
+                            req,
+                            Arrays.asList(
+                                // @checkstyle LineLengthCheck (1 line)
+                                "Content-Type: multipart/form-data; boundary=AaB02x"
+                            )
+                        ).head()
+                    ),
+                    RqMultipart.Fake.fakeBody(dispositions)
                 )
             );
         }
@@ -417,18 +425,7 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          */
         public Fake(final String... dispositions) throws IOException {
-            this(
-                new RqWithHeaders(
-                    new RqFake(),
-                    Arrays.asList(
-                        "Host: www.example.com",
-                        // @checkstyle LineLengthCheck (1 line)
-                        "Content-Type: multipart/form-data; boundary=AaB02x",
-                        "Content-Length: 100001"
-                    )
-                ),
-                dispositions
-            );
+            this(new RqFake(), dispositions);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -451,7 +448,7 @@ public interface RqMultipart extends Request {
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          */
-        private InputStream fakeBody(final String... dispositions) {
+        private static InputStream fakeBody(final String... dispositions) {
             final String boundary = "AaB02x";
             final Collection<String> parts = new LinkedList<String>();
             for (final String disposition : dispositions) {
@@ -459,8 +456,6 @@ public interface RqMultipart extends Request {
                 parts.add(disposition);
             }
             parts.add("Content-Transfer-Encoding: utf-8");
-            parts.add("");
-            parts.add("the start\r\t\n\u20ac\n\n\n\t\r\t\n\n\n\r\n the end");
             parts.add(String.format("--%s--", boundary));
             return new ByteArrayInputStream(
                 RqMultipart.Fake.join(parts.iterator()).getBytes()

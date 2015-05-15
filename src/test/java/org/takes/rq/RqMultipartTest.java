@@ -198,17 +198,6 @@ public final class RqMultipartTest {
                 Matchers.endsWith("CA 94085")
             )
         );
-        MatcherAssert.assertThat(
-            new RqPrint(
-                new RqHeaders.Base(
-                    multi.part("data").iterator().next()
-                )
-            ).printBody(),
-            Matchers.allOf(
-                Matchers.startsWith("the start"),
-                Matchers.endsWith("the end")
-            )
-        );
     }
 
     /**
