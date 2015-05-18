@@ -31,6 +31,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Condition;
 import org.takes.tk.TkFixed;
 
 /**
@@ -80,9 +81,9 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Fallback fallback) {
         this(
-            new FbStatus.Check() {
+            new Condition<Integer>() {
                 @Override
-                public boolean fits(final int status) {
+                public boolean fits(final Integer status) {
                     return code == status;
                 }
             },
@@ -95,7 +96,7 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    public FbStatus(final FbStatus.Check check, final Fallback fallback) {
+    public FbStatus(final Condition<Integer> check, final Fallback fallback) {
         super(
             new Fallback() {
                 @Override
@@ -113,17 +114,4 @@ public final class FbStatus extends FbWrap {
             }
         );
     }
-
-    /**
-     * This status is acceptable?
-     */
-    public interface Check {
-        /**
-         * This HTTP status is suitable here?
-         * @param code HTTP status code
-         * @return TRUE if it fits
-         */
-        boolean fits(int code);
-    }
-
 }
