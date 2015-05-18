@@ -45,7 +45,6 @@ public final class TkGzipTest {
      * @throws IOException If some problem inside
      */
     @Test
-    @Ignore
     public void compressesOnDemandOnly() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
