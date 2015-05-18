@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -42,11 +41,11 @@ import org.takes.tk.TkFixed;
 public final class FbStatusTest {
 
     /**
-     * FbStatus should react on status equal to passed in constructor.
-     * @throws IOException If some problem inside
+     * FbStatus can react to correct status.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void reactsExactStatus() throws IOException {
+    public void reactsToCorrectStatus() throws Exception {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(status);
         MatcherAssert.assertThat(
@@ -61,12 +60,12 @@ public final class FbStatusTest {
     }
 
      /**
-     * FbStatus should react on status which fits to condition passed in
-     * constructor.
-     * @throws IOException If some problem inside
+     * FbStatus can react to Condition.
+     *
+     * @throws Exception If some problem inside
      */
     @Test
-    public void reactsFittingStatus() throws IOException {
+    public void reactsToCondition() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_MOVED_PERM
         );
@@ -88,11 +87,11 @@ public final class FbStatusTest {
     }
 
     /**
-     * FbStatus should react on status equal to passed in constructor.
-     * @throws IOException If some problem inside
+     * FbStatus can ignore different status.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresOtherStatus() throws IOException {
+    public void ignoresDifferentStatus() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND
         );
