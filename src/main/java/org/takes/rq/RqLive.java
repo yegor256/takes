@@ -27,8 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -63,7 +63,7 @@ public final class RqLive extends RqWrap {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
-        final Collection<String> head = new LinkedList<String>();
+        final List<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         while (true) {
             final int data = input.read();
@@ -84,12 +84,13 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                head.add(new String(baos.toByteArray()));
+                final String header = new String(baos.toByteArray());
+                checkAndAddHeader(head, header);
                 baos.reset();
                 continue;
             }
             // @checkstyle MagicNumber (1 line)
-            if (data > 0x7f || data < 0x20) {
+            if ((data > 0x7f || data < 0x20) && data != '\t') {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
@@ -111,6 +112,31 @@ public final class RqLive extends RqWrap {
                 return input;
             }
         };
+    }
+
+    /**
+     * Check line and add header o replace last one.
+     * @param head All previous headers
+     * @param header Current header
+     * @throws HttpException if multiline do not start with space
+     */
+    private static void checkAndAddHeader(final List<String> head,
+            final String header) throws HttpException {
+        if (head.isEmpty() || header.contains(":")) {
+            head.add(header);
+        } else if (header.charAt(0) == ' ' || header.charAt(0) == '\t') {
+            final String prev = head.remove(head.size() - 1);
+            head.add(prev + header);
+        } else {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "there is no ':' character in header, line #%d: \"%s\"",
+                    head.size() + 1, header
+                )
+            );
+        }
     }
 
 }
