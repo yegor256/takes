@@ -39,6 +39,7 @@ import org.takes.tk.TkFixed;
  * @since 0.16.10
  */
 public final class FbStatusTest {
+
     /**
      * FbStatus can react to correct status.
      * @throws Exception If some problem inside
@@ -57,9 +58,9 @@ public final class FbStatusTest {
             Matchers.startsWith("not found")
         );
     }
+
      /**
      * FbStatus can react to Condition.
-     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -83,6 +84,7 @@ public final class FbStatusTest {
             Matchers.startsWith("response")
         );
     }
+
     /**
      * FbStatus can ignore different status.
      * @throws Exception If some problem inside
