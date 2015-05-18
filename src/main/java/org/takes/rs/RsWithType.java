@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -53,7 +52,7 @@ public final class RsWithType extends RsWrap {
         super(
             new RsWithHeader(
                 new RsWithoutHeader(
-                    new RsWithStatus(res, HttpURLConnection.HTTP_OK),
+                    res,
                     HEADER
             ), HEADER, type
         )

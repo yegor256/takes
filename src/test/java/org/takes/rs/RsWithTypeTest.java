@@ -38,6 +38,11 @@ import org.junit.Test;
 public final class RsWithTypeTest {
 
     /**
+     * Carriage return constant.
+     */
+    private static final String CRLF = "\r\n";
+
+    /**
      * RsWithType can replace an existing type.
      * @throws IOException If a problem occurs.
      */
@@ -52,11 +57,41 @@ public final class RsWithTypeTest {
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Type: %s", type),
+                Joiner.on(CRLF).join(
+                        "HTTP/1.1 200 OK",
+                        String.format("Content-Type: %s", type),
+                        "",
+                        ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType can not replace response code.
+     * @throws java.io.IOException If a problem occurs.
+     */
+    @Test
+    public void notReplacesResponseCode() throws IOException {
+        final int code = 500;
+        final String body = "Error!";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(
+                    new RsWithBody(
+                        new RsWithStatus(code),
+                        body
+                    ),
+                    "text/html"
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    "HTTP/1.1 500 Internal Error",
+                    "Content-Length: 6",
+                    "Content-Type: text/html",
                     "",
-                    ""
+                    body
                 )
             )
         );
