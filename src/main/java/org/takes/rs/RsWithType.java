@@ -50,12 +50,7 @@ public final class RsWithType extends RsWrap {
      */
     public RsWithType(final Response res, final CharSequence type) {
         super(
-            new RsWithHeader(
-                new RsWithoutHeader(
-                    res,
-                    HEADER
-            ), HEADER, type
-        )
+            new RsWithHeader(new RsWithoutHeader(res, HEADER), HEADER, type)
         );
     }
 }

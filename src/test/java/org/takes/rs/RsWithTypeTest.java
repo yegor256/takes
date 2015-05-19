@@ -24,7 +24,7 @@
 package org.takes.rs;
 
 import com.google.common.base.Joiner;
-import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -44,10 +44,10 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType can replace an existing type.
-     * @throws IOException If a problem occurs.
+     * @throws java.lang.Exception If a problem occurs.
      */
     @Test
-    public void replaceTypeToResponse() throws IOException {
+    public void replaceTypeToResponse() throws Exception {
         final String type = "text/plain";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -58,28 +58,29 @@ public final class RsWithTypeTest {
             ).print(),
             Matchers.equalTo(
                 Joiner.on(CRLF).join(
-                        "HTTP/1.1 200 OK",
-                        String.format("Content-Type: %s", type),
-                        "",
-                        ""
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Type: %s", type),
+                    "",
+                    ""
                 )
             )
         );
     }
 
     /**
-     * RsWithType can not replace response code.
-     * @throws java.io.IOException If a problem occurs.
+     * RsWithType does not replace response code.
+     * @throws java.lang.Exception If a problem occurs.
      */
     @Test
-    public void notReplacesResponseCode() throws IOException {
-        final int code = 500;
+    public void doesNotReplaceResponseCode() throws Exception {
         final String body = "Error!";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
                     new RsWithBody(
-                        new RsWithStatus(code),
+                        new RsWithStatus(
+                            HttpURLConnection.HTTP_INTERNAL_ERROR
+                        ),
                         body
                     ),
                     "text/html"
