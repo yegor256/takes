@@ -30,6 +30,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Fallback chain.
@@ -59,17 +60,17 @@ public final class FbChain extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    final Collection<Response> rsp = new ArrayList<Response>(1);
+                    Opt<Response> rsp = new Opt.Empty<Response>();
                     for (final Fallback fbk : fallbacks) {
-                        final Iterator<Response> iter = fbk.route(req);
-                        if (iter.hasNext()) {
-                            rsp.add(iter.next());
+                        final Opt<Response> iter = fbk.route(req);
+                        if (iter.has()) {
+                            rsp = new Opt.Single<Response>(iter.get());
                             break;
                         }
                     }
-                    return rsp.iterator();
+                    return rsp;
                 }
             }
         );
