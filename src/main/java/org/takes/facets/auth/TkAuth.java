@@ -82,9 +82,6 @@ public final class TkAuth implements Take {
         this.header = hdr;
     }
 
-    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
-    // to violate this rule or to violate the NestedIfDepthCheck rule to check
-    // if the return value is not empty.
     @Override
     public Response act(final Request request) throws IOException {
         final Opt<Iterator<Identity>> optUsers = this.pass.enter(request);

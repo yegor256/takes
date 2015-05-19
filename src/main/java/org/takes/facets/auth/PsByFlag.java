@@ -98,9 +98,6 @@ public final class PsByFlag implements Pass {
         this.passes = Collections.unmodifiableMap(map);
     }
 
-    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
-    // to violate this rule or to violate the NestedIfDepthCheck rule to check
-    // if the return value is not empty.
     @Override
     public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()

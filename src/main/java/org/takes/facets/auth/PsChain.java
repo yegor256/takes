@@ -66,9 +66,6 @@ public final class PsChain implements Pass {
         this.passes = list;
     }
 
-    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
-    // to violate this rule or to violate the NestedIfDepthCheck rule to check
-    // if the return value is not empty.
     @Override
     public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
         final Collection<Identity> users = new ArrayList<Identity>(1);
