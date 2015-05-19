@@ -84,8 +84,7 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                final String header = new String(baos.toByteArray());
-                checkAndAddHeader(head, header);
+                checkAndAddHeader(head, new String(baos.toByteArray()));
                 baos.reset();
                 continue;
             }
@@ -120,13 +119,16 @@ public final class RqLive extends RqWrap {
      * @param header Current header
      * @throws HttpException if multiline do not start with space
      */
-    private static void checkAndAddHeader(final List<String> head,
-            final String header) throws HttpException {
+    private static void checkAndAddHeader(
+        final List<String> head,
+        final String header
+    ) throws HttpException {
         if (head.isEmpty() || header.contains(":")) {
             head.add(header);
         } else if (header.charAt(0) == ' ' || header.charAt(0) == '\t') {
-            final String prev = head.remove(head.size() - 1);
-            head.add(prev + header);
+            head.add(
+                String.format("%s%s", head.remove(head.size() - 1), header)
+            );
         } else {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
