@@ -120,8 +120,7 @@ public final class RqLive extends RqWrap {
      * @throws HttpException if multiline do not start with space
      */
     private static void checkAndAddHeader(
-        final List<String> head,
-        final String header
+        final List<String> head, final String header
     ) throws HttpException {
         if (head.isEmpty() || header.contains(":")) {
             head.add(header);
