@@ -28,6 +28,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Fixed pass.
@@ -55,8 +56,10 @@ public final class PsFixed implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request) {
-        return Collections.singleton(this.user).iterator();
+    public Opt<Iterator<Identity>> enter(final Request request) {
+        return new Opt.Single<Iterator<Identity>>(
+            Collections.singleton(this.user).iterator()
+        );
     }
 
     @Override

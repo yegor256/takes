@@ -31,6 +31,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Chain of passes.
@@ -65,17 +66,21 @@ public final class PsChain implements Pass {
         this.passes = list;
     }
 
+    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
+    // to violate this rule or to violate the NestedIfDepthCheck rule to check
+    // if the return value is not empty.
     @Override
-    public Iterator<Identity> enter(final Request req) throws IOException {
+    public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
         final Collection<Identity> users = new ArrayList<Identity>(1);
         for (final Pass pass : this.passes) {
-            final Iterator<Identity> identities = pass.enter(req);
-            if (identities.hasNext()) {
+            final Opt<Iterator<Identity>> optIdentities = pass.enter(req);
+            final Iterator<Identity> identities = optIdentities.get();
+            if (optIdentities.has() && identities.hasNext()) {
                 users.add(identities.next());
                 break;
             }
         }
-        return users.iterator();
+        return new Opt.Single<Iterator<Identity>>(users.iterator());
     }
 
     @Override

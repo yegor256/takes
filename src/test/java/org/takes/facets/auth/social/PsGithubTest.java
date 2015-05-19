@@ -116,7 +116,7 @@ public final class PsGithubTest {
                         "key",
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).next();
+                    ).enter(new RqFake("GET", "?code=code")).get().next();
                     MatcherAssert.assertThat(
                         identity.urn(),
                         Matchers.equalTo("urn:github:1")

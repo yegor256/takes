@@ -28,6 +28,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Logout.
@@ -42,8 +43,10 @@ import org.takes.Response;
 public final class PsLogout implements Pass {
 
     @Override
-    public Iterator<Identity> enter(final Request request) {
-        return Collections.singleton(Identity.ANONYMOUS).iterator();
+    public Opt<Iterator<Identity>> enter(final Request request) {
+        return new Opt.Single<Iterator<Identity>>(
+            Collections.singleton(Identity.ANONYMOUS).iterator()
+        );
     }
 
     @Override

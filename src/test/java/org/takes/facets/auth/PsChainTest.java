@@ -47,7 +47,7 @@ public final class PsChainTest {
             new PsChain(
                 new PsLogout(),
                 new PsFake(true)
-            ).enter(new RqFake()).next(),
+            ).enter(new RqFake()).get().next(),
             Matchers.is(Identity.ANONYMOUS)
         );
     }

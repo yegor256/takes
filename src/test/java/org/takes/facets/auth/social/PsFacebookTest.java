@@ -35,6 +35,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
+import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 
 /**
@@ -78,7 +79,7 @@ public class PsFacebookTest {
             RandomStringUtils.random(10),
             RandomStringUtils.random(10)
         );
-        final Iterator<Identity> identity = pass.enter(
+        final Opt<Iterator<Identity>> identity = pass.enter(
             new RqFake(
                 "GET",
                 String.format(
@@ -88,7 +89,7 @@ public class PsFacebookTest {
             )
         );
         MatcherAssert.assertThat(
-            identity.next().urn(),
+            identity.get().next().urn(),
             CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );
     }

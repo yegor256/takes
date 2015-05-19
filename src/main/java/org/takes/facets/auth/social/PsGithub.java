@@ -41,6 +41,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
@@ -102,7 +103,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request)
+    public Opt<Iterator<Identity>> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -112,9 +113,11 @@ public final class PsGithub implements Pass {
                 "code is not provided by Github"
             );
         }
-        return Collections.singleton(
-            this.fetch(this.token(href.toString(), code.next()))
-        ).iterator();
+        return new Opt.Single<Iterator<Identity>>(
+            Collections.singleton(
+                this.fetch(this.token(href.toString(), code.next()))
+            ).iterator()
+        );
     }
 
     @Override

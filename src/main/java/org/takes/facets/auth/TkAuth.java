@@ -30,6 +30,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.codecs.CcPlain;
+import org.takes.misc.Opt;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithoutHeader;
 
@@ -81,11 +82,15 @@ public final class TkAuth implements Take {
         this.header = hdr;
     }
 
+    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
+    // to violate this rule or to violate the NestedIfDepthCheck rule to check
+    // if the return value is not empty.
     @Override
     public Response act(final Request request) throws IOException {
-        final Iterator<Identity> users = this.pass.enter(request);
+        final Opt<Iterator<Identity>> optUsers = this.pass.enter(request);
         final Response response;
-        if (users.hasNext()) {
+        final Iterator<Identity> users = optUsers.get();
+        if (optUsers.has() && users.hasNext()) {
             response = this.act(request, users.next());
         } else {
             response = this.origin.act(request);

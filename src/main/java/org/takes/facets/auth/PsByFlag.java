@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
@@ -97,8 +98,11 @@ public final class PsByFlag implements Pass {
         this.passes = Collections.unmodifiableMap(map);
     }
 
+    // @checkstyle InnerAssignmentCheck - Disabled because it was necessary or
+    // to violate this rule or to violate the NestedIfDepthCheck rule to check
+    // if the return value is not empty.
     @Override
-    public Iterator<Identity> enter(final Request req) throws IOException {
+    public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
         final Collection<Identity> users = new ArrayList<Identity>(1);
@@ -106,11 +110,13 @@ public final class PsByFlag implements Pass {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
                 if (ent.getKey().matcher(value).matches()) {
-                    users.add(ent.getValue().enter(req).next());
+                    final Opt<Iterator<Identity>> tmpIdentity = ent.getValue()
+                        .enter(req);
+                    users.add(tmpIdentity.get().next());
                 }
             }
         }
-        return users.iterator();
+        return new Opt.Single<Iterator<Identity>>(users.iterator());
     }
 
     @Override

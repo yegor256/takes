@@ -45,6 +45,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
@@ -117,7 +118,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request trequest)
+    public Opt<Iterator<Identity>> enter(final Request trequest)
         throws IOException {
         final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -140,12 +141,14 @@ public final class PsFacebook implements Pass {
                 .path("picture")
                 .toString()
         );
-        return Collections.<Identity>singleton(
-            new Identity.Simple(
-                String.format("urn:facebook:%s", user.getId()),
-                props
-            )
-        ).iterator();
+        return new Opt.Single<Iterator<Identity>>(
+            Collections.<Identity>singleton(
+                new Identity.Simple(
+                    String.format("urn:facebook:%s", user.getId()),
+                    props
+                )
+            ).iterator()
+        );
     }
 
     @Override

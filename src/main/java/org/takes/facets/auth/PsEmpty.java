@@ -23,11 +23,11 @@
  */
 package org.takes.facets.auth;
 
-import java.util.Collections;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Pass that doesn't do anything.
@@ -42,8 +42,8 @@ import org.takes.Response;
 public final class PsEmpty implements Pass {
 
     @Override
-    public Iterator<Identity> enter(final Request request) {
-        return Collections.<Identity>emptyList().iterator();
+    public Opt<Iterator<Identity>> enter(final Request request) {
+        return new Opt.Empty<Iterator<Identity>>();
     }
 
     @Override

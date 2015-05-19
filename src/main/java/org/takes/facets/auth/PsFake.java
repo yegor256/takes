@@ -29,6 +29,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Fake pass.
@@ -56,12 +57,12 @@ public final class PsFake implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request) {
+    public Opt<Iterator<Identity>> enter(final Request request) {
         final Collection<Identity> users = new ArrayList<Identity>(1);
         if (this.condition) {
             users.add(new Identity.Simple("urn:test:1"));
         }
-        return users.iterator();
+        return new Opt.Single<Iterator<Identity>>(users.iterator());
     }
 
     @Override
