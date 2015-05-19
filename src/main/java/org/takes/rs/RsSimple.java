@@ -23,6 +23,7 @@
  */
 package org.takes.rs;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -38,6 +39,15 @@ import org.takes.Response;
  */
 @EqualsAndHashCode(callSuper = true)
 public class RsSimple extends RsWrap {
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    public RsSimple(final Iterable<String> head, final String body) {
+        this(head, new ByteArrayInputStream(body.getBytes()));
+    }
 
     /**
      * Ctor.
