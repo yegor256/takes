@@ -405,6 +405,17 @@ public interface RqMultipart extends Request {
          * @param dispositions Fake request body parts
          * @throws IOException If fails
          * @todo #252:30min/DEV We should expect instances of Request as dispositions
+         *  Dispositions should be multipart request body holder.
+         *  Ctor. will be called like this.
+         *  {@code
+         *  new RqMultipart.Fake(
+         *  new RqFake("POST", "/upload-a-file"),
+         *  new RqWithHeader(
+         *  new RqFake("", "", "440 Wolfe Rd, CA 94085"),
+         *  "Content-Disposition", "form-data; name=\"address\""
+         *  )
+         *  );
+         *  }
          */
         @SuppressWarnings("PMD.UnusedFormalParameter")
         public Fake(final Request req, final Request... dispositions)
