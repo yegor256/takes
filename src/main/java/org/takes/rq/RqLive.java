@@ -32,6 +32,7 @@ import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.Condition;
 
 /**
  * Live request.
@@ -63,15 +64,17 @@ public final class RqLive extends RqWrap {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
+        final StartingMLCond condition = new StartingMLCond();
         final List<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final PeekInputStream wrapper = new PeekInputStream(input);
         while (true) {
-            final int data = input.read();
+            final int data = wrapper.read();
             if (data < 0) {
                 break;
             }
             if (data == '\r') {
-                if (input.read() != '\n') {
+                if (wrapper.read() != '\n') {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format(
@@ -84,8 +87,10 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                checkAndAddHeader(head, new String(baos.toByteArray()));
-                baos.reset();
+                if (condition.fits(wrapper.peek())) {
+                    head.add(new String(baos.toByteArray()));
+                    baos.reset();
+                }
                 continue;
             }
             // @checkstyle MagicNumber (1 line)
@@ -114,30 +119,13 @@ public final class RqLive extends RqWrap {
     }
 
     /**
-     * Check line and add header o replace last one.
-     * @param head All previous headers
-     * @param header Current header
-     * @throws HttpException if multiline do not start with space
+     * Starting Multi-line condition.
      */
-    private static void checkAndAddHeader(
-        final List<String> head, final String header
-    ) throws HttpException {
-        if (head.isEmpty() || header.contains(":")) {
-            head.add(header);
-        } else if (header.charAt(0) == ' ' || header.charAt(0) == '\t') {
-            head.add(
-                String.format("%s%s", head.remove(head.size() - 1), header)
-            );
-        } else {
-            throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    // @checkstyle LineLength (1 line)
-                    "there is no ':' character in header, line #%d: \"%s\"",
-                    head.size() + 1, header
-                )
-            );
+    static class StartingMLCond implements Condition<Integer> {
+
+        @Override
+        public boolean fits(final Integer element) {
+            return element != ' ' && element != '\t';
         }
     }
-
 }

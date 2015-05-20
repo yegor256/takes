@@ -90,21 +90,25 @@ public final class RqLiveTest {
     }
 
     /**
-     * RqLive can fail when multi-line header second line start without a SP.
+     * RqLive can support multi-line headers with colon in second line.
+     * Yegor counterexample.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnMultilineWithoutStartingSP() throws IOException {
-        new RqLive(
+    @Test
+    public void supportMultiLineHeadersWithColon() throws IOException {
+        final Request req = new RqLive(
             new ByteArrayInputStream(
                 this.joiner().join(
-                    "GET /failedml HTTP/1.1",
-                    "X-Foo: this is a another test",
-                    "header for you",
-                    "",
-                    "hello failed multipart"
+                    "GET /multilinecolon HTTP/1.1",
+                    "Foo: first line",
+                    " second: line",
+                    ""
                 ).getBytes()
             )
+        );
+        MatcherAssert.assertThat(
+            new RqHeaders.Base(req).header("Foo"),
+            Matchers.hasItem("first line second: line")
         );
     }
 
