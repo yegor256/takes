@@ -404,6 +404,18 @@ public interface RqMultipart extends Request {
          * @param req Fake request header holder
          * @param dispositions Fake request body parts
          * @throws IOException If fails
+         * @todo #252:30min/DEV We should expect instances of Request as dispositions
+         */
+        @SuppressWarnings("PMD.UnusedFormalParameter")
+        public Fake(final Request req, final Request... dispositions)
+            throws IOException {
+            this.fake = new RqMultipart.Base(new RqFake());
+        }
+        /**
+         * Fake ctor.
+         * @param req Fake request header holder
+         * @param dispositions Fake request body parts
+         * @throws IOException If fails
          */
         public Fake(final Request req, final String... dispositions)
             throws IOException {
