@@ -42,13 +42,11 @@ public interface Condition<T> {
     /**
      * Negating condition of any condition.
      */
-    class Not<T> implements Condition<T> {
-
+    final class Not<T> implements Condition<T> {
         /**
          * Condition.
          */
         private final transient Condition<T> condition;
-
         /**
          * Ctor.
          * @param cond The condition to negate
@@ -56,7 +54,6 @@ public interface Condition<T> {
         public Not(final Condition<T> cond) {
             this.condition = cond;
         }
-
         @Override
         public boolean fits(final T element) {
             return !this.condition.fits(element);

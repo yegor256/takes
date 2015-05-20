@@ -41,8 +41,7 @@ public interface TransformAction<T, K> {
     /**
      * Trimming action used with {@link Transform}.
      */
-    class Trim implements TransformAction<String, String> {
-
+    final class Trim implements TransformAction<String, String> {
         @Override
         public String transform(final String element) {
             return element.trim();
@@ -52,12 +51,10 @@ public interface TransformAction<T, K> {
     /**
      * Convert CharSequence into String.
      */
-    class ToString implements TransformAction<CharSequence, String> {
-
+    final class ToString implements TransformAction<CharSequence, String> {
         @Override
         public String transform(final CharSequence element) {
             return element.toString();
         }
-
     }
 }
