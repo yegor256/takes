@@ -33,6 +33,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Condition;
+import org.takes.misc.Opt;
 
 /**
  * Live request.
@@ -67,14 +68,14 @@ public final class RqLive extends RqWrap {
         final StartingMLCond condition = new StartingMLCond();
         final List<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final PeekInputStream wrapper = new PeekInputStream(input);
+        Opt<Integer> data = new Opt.Empty<Integer>();
         while (true) {
-            final int data = wrapper.read();
-            if (data < 0) {
+            data = data(input, data);
+            if (data.get() < 0) {
                 break;
             }
-            if (data == '\r') {
-                if (wrapper.read() != '\n') {
+            if (data.get() == '\r') {
+                if (input.read() != '\n') {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format(
@@ -87,24 +88,29 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                if (condition.fits(wrapper.peek())) {
+                data = new Opt.Single<Integer>(input.read());
+                if (condition.fits(data.get())) {
                     head.add(new String(baos.toByteArray()));
                     baos.reset();
                 }
                 continue;
             }
             // @checkstyle MagicNumber (1 line)
-            if ((data > 0x7f || data < 0x20) && data != '\t') {
+            if ((data.get() > 0x7f || data.get() < 0x20)
+                && data.get() != '\t') {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
-                        data, head.size() + 1, new String(baos.toByteArray())
+                        data.get(),
+                        head.size() + 1,
+                        new String(baos.toByteArray())
                     )
                 );
             }
-            baos.write(data);
+            baos.write(data.get());
+            data = new Opt.Empty<Integer>();
         }
         return new Request() {
             @Override
@@ -119,9 +125,24 @@ public final class RqLive extends RqWrap {
     }
 
     /**
-     * Starting Multi-line condition.
+     * Obtains new byte if hasn't.
+     * @param input Stream
+     * @param data Empty or current data
+     * @return Next or current data
+     * @throws IOException if input.read() fails
      */
-    static class StartingMLCond implements Condition<Integer> {
+    private static Opt<Integer> data(final InputStream input,
+            final Opt<Integer> data) throws IOException {
+        final Opt<Integer> ret;
+        if (data.has()) {
+            ret = data;
+        } else {
+            ret = new Opt.Single<Integer>(input.read());
+        }
+        return ret;
+    }
+
+    private static class StartingMLCond implements Condition<Integer> {
 
         @Override
         public boolean fits(final Integer element) {
