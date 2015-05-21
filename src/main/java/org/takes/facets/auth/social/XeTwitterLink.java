@@ -51,7 +51,7 @@ public final class XeTwitterLink extends XeWrap {
 
     /**
      * Generate link.
-     * @param rel Related
+     * @param rel Link relation type
      * @param token Twitter token
      * @return Source
      */

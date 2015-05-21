@@ -42,7 +42,7 @@ import org.takes.rs.xe.XeAppend;
 public final class XeTwitterLinkTest {
 
     /**
-     * XeTwitterLink can create a correct link.
+     * XeTwitterLink can generate a correct link.
      * @throws IOException If some problem inside
      */
     @Test
@@ -61,12 +61,13 @@ public final class XeTwitterLinkTest {
             )
         );
     }
+
     /**
-     * Checks XeTwitterLink equals method.
+     * XeTwitterLink can compare objects.
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
+    public void compareObjectsTest() throws Exception {
         EqualsVerifier.forClass(XeTwitterLink.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
