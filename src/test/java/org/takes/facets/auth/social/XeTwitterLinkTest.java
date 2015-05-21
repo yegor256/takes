@@ -67,7 +67,7 @@ public final class XeTwitterLinkTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void compareObjectsTest() throws Exception {
+    public void comparesObjects() throws Exception {
         EqualsVerifier.forClass(XeTwitterLink.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
