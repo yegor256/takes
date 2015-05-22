@@ -23,6 +23,7 @@
  */
 package org.takes.facets.fallback;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -34,7 +35,8 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FbStatus}.
- * @author Ivan Inozemtsev (dmitry.zaytsev@gmail.com)
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.16.10
  */
@@ -100,6 +102,34 @@ public final class FbStatusTest {
                 new TkFixed(new RsText("unauthorized"))
             ).route(req).hasNext(),
             Matchers.equalTo(false)
+        );
+    }
+
+    /**
+     * FbStatus can send correct default response with text/plain
+     * body consisting of a status code, status message and message
+     * from an exception.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void sendsCorrectDefaultResponse() throws Exception {
+        final int code = HttpURLConnection.HTTP_NOT_FOUND;
+        final RqFallback req = new RqFallback.Fake(
+            code,
+            new IOException("Exception message")
+        );
+        final RsPrint response = new RsPrint(
+            new FbStatus(code).route(req).next()
+        );
+        MatcherAssert.assertThat(
+            response.printBody(),
+            Matchers.equalTo("404 Not Found: Exception message")
+        );
+        MatcherAssert.assertThat(
+            response.printHead(),
+            Matchers.both(
+                Matchers.containsString("Content-Type: text/plain")
+            ).and(Matchers.containsString("404 Not Found"))
         );
     }
 }

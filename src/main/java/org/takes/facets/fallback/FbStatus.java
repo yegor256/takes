@@ -32,6 +32,9 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Condition;
+import org.takes.rs.RsWithBody;
+import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsWithType;
 import org.takes.tk.TkFixed;
 
 /**
@@ -45,7 +48,46 @@ import org.takes.tk.TkFixed;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
-
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     * @since 0.16.10
+     */
+    public FbStatus(final int code) {
+        this(new Condition<Integer>() {
+            @Override
+            public boolean fits(final Integer status) {
+                return code == status.intValue();
+            }
+        });
+    }
+    /**
+     * Ctor.
+     * @param check HTTP status code predicate
+     * @since 0.16.10
+     */
+    public FbStatus(final Condition<Integer> check) {
+        this(check, new Fallback() {
+            @Override
+            public Iterator<Response> route(final RqFallback req)
+                throws IOException {
+                final Response res = new RsWithStatus(req.code());
+                return Collections.<Response>singleton(
+                    new RsWithType(
+                        new RsWithBody(
+                            res,
+                            String.format(
+                                "%s: %s",
+                                res.head().iterator().next().split("\\s", 2)[1],
+                                req.throwable().getLocalizedMessage()
+                            )
+                        ),
+                        "text/plain"
+                    )
+                ).iterator();
+            }
+        });
+    }
     /**
      * Ctor.
      * @param code HTTP status code
