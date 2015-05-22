@@ -24,10 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -67,17 +64,18 @@ public final class PsChain implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
-        final Collection<Identity> users = new ArrayList<Identity>(1);
+    public Opt<Identity> enter(final Request req) throws IOException {
+        Opt<Identity> retValue = null;
         for (final Pass pass : this.passes) {
-            final Opt<Iterator<Identity>> optIdentities = pass.enter(req);
-            final Iterator<Identity> identities = optIdentities.get();
-            if (optIdentities.has() && identities.hasNext()) {
-                users.add(identities.next());
+            retValue = pass.enter(req);
+            if (retValue.has()) {
                 break;
             }
         }
-        return new Opt.Single<Iterator<Identity>>(users.iterator());
+        if (retValue == null) {
+            retValue = new Opt.Empty<Identity>();
+        }
+        return retValue;
     }
 
     @Override

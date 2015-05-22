@@ -24,8 +24,6 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
@@ -97,14 +95,19 @@ public final class PsCookie implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
+    public Opt<Identity> enter(final Request req) throws IOException {
         final Iterator<String> cookies = new RqCookies.Base(req)
             .cookie(this.cookie).iterator();
-        final Collection<Identity> users = new ArrayList<Identity>(1);
+        Opt<Identity> retValue = null;
         if (cookies.hasNext()) {
-            users.add(this.codec.decode(cookies.next().getBytes()));
+            retValue = new Opt.Single<Identity>(
+                this.codec.decode(cookies.next().getBytes())
+            );
         }
-        return new Opt.Single<Iterator<Identity>>(users.iterator());
+        if (retValue == null) {
+            retValue = new Opt.Empty<Identity>();
+        }
+        return retValue;
     }
 
     @Override

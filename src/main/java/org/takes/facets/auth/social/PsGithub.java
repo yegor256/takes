@@ -29,7 +29,6 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -103,7 +102,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request request)
+    public Opt<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -113,10 +112,8 @@ public final class PsGithub implements Pass {
                 "code is not provided by Github"
             );
         }
-        return new Opt.Single<Iterator<Identity>>(
-            Collections.singleton(
-                this.fetch(this.token(href.toString(), code.next()))
-            ).iterator()
+        return new Opt.Single<Identity>(
+            this.fetch(this.token(href.toString(), code.next()))
         );
     }
 

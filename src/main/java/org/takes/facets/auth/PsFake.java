@@ -23,9 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -57,12 +54,16 @@ public final class PsFake implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request request) {
-        final Collection<Identity> users = new ArrayList<Identity>(1);
+    public Opt<Identity> enter(final Request request) {
+        final Opt<Identity> retValue;
         if (this.condition) {
-            users.add(new Identity.Simple("urn:test:1"));
+            retValue = new Opt.Single<Identity>(
+                new Identity.Simple("urn:test:1")
+            );
+        } else {
+            retValue = new Opt.Empty<Identity>();
         }
-        return new Opt.Single<Iterator<Identity>>(users.iterator());
+        return retValue;
     }
 
     @Override

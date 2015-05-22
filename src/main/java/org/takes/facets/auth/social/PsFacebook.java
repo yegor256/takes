@@ -34,7 +34,6 @@ import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -118,7 +117,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request trequest)
+    public Opt<Identity> enter(final Request trequest)
         throws IOException {
         final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -141,13 +140,11 @@ public final class PsFacebook implements Pass {
                 .path("picture")
                 .toString()
         );
-        return new Opt.Single<Iterator<Identity>>(
-            Collections.<Identity>singleton(
-                new Identity.Simple(
-                    String.format("urn:facebook:%s", user.getId()),
-                    props
-                )
-            ).iterator()
+        return new Opt.Single<Identity>(
+            new Identity.Simple(
+                String.format("urn:facebook:%s", user.getId()),
+                props
+            )
         );
     }
 

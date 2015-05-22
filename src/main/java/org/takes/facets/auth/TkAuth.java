@@ -24,7 +24,6 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -84,11 +83,10 @@ public final class TkAuth implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        final Opt<Iterator<Identity>> optUsers = this.pass.enter(request);
+        final Opt<Identity> optUsers = this.pass.enter(request);
         final Response response;
-        final Iterator<Identity> users = optUsers.get();
-        if (optUsers.has() && users.hasNext()) {
-            response = this.act(request, users.next());
+        if (optUsers.has()) {
+            response = this.act(request, optUsers.get());
         } else {
             response = this.origin.act(request);
         }

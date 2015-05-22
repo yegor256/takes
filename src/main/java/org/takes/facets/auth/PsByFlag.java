@@ -25,8 +25,6 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -99,21 +97,22 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request req) throws IOException {
+    public Opt<Identity> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
-        final Collection<Identity> users = new ArrayList<Identity>(1);
+        Opt<Identity> retValue = null;
         if (flg.hasNext()) {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
                 if (ent.getKey().matcher(value).matches()) {
-                    final Opt<Iterator<Identity>> tmpIdentity = ent.getValue()
-                        .enter(req);
-                    users.add(tmpIdentity.get().next());
+                    retValue = ent.getValue().enter(req);
                 }
             }
         }
-        return new Opt.Single<Iterator<Identity>>(users.iterator());
+        if (retValue == null) {
+            retValue = new Opt.Empty<Identity>();
+        }
+        return retValue;
     }
 
     @Override

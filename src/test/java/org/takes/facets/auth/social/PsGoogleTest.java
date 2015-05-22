@@ -125,7 +125,7 @@ public final class PsGoogleTest {
                         "http://localhost/account",
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get().next();
+                    ).enter(new RqFake("GET", "?code=code")).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
                         Matchers.equalTo("urn:google:1")

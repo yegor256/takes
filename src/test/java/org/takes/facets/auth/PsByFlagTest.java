@@ -59,7 +59,7 @@ public final class PsByFlagTest {
                 )
             ).enter(
                 new RqFake("GET", "/?PsByFlag=x")
-            ).get().hasNext(),
+            ).has(),
             Matchers.is(false)
         );
     }
@@ -75,7 +75,7 @@ public final class PsByFlagTest {
                 new PsByFlag.Pair(
                     "some-key", new PsFake(true)
                 )
-            ).enter(new RqFake("POST", "/?PsByFlag=some-key")).get().next()
+            ).enter(new RqFake("POST", "/?PsByFlag=some-key")).get()
                 .urn(),
             Matchers.is("urn:test:1")
         );

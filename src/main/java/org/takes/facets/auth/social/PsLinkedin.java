@@ -29,7 +29,6 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -107,7 +106,7 @@ public final class PsLinkedin implements Pass {
     }
 
     @Override
-    public Opt<Iterator<Identity>> enter(final Request request)
+    public Opt<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         // @checkstyle MultipleStringLiteralsCheck (1 line)
@@ -118,10 +117,8 @@ public final class PsLinkedin implements Pass {
                 "code is not provided by LinkedIn"
             );
         }
-        return new Opt.Single<Iterator<Identity>>(
-            Collections.singleton(
-                this.fetch(this.token(href.toString(), code.next()))
-            ).iterator()
+        return new Opt.Single<Identity>(
+            this.fetch(this.token(href.toString(), code.next()))
         );
     }
 
