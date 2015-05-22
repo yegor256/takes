@@ -27,11 +27,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.Opt;
 
 /**
  * Live request.
@@ -41,6 +42,7 @@ import org.takes.Request;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle CyclomaticComplexityCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.CyclomaticComplexity")
@@ -63,14 +65,15 @@ public final class RqLive extends RqWrap {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
-        final Collection<String> head = new LinkedList<String>();
+        final List<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Opt<Integer> data = new Opt.Empty<Integer>();
         while (true) {
-            final int data = input.read();
-            if (data < 0) {
+            data = data(input, data);
+            if (data.get() < 0) {
                 break;
             }
-            if (data == '\r') {
+            if (data.get() == '\r') {
                 if (input.read() != '\n') {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
@@ -84,22 +87,29 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                head.add(new String(baos.toByteArray()));
-                baos.reset();
+                data = new Opt.Single<Integer>(input.read());
+                if (data.get() != ' ' && data.get() != '\t') {
+                    head.add(new String(baos.toByteArray()));
+                    baos.reset();
+                }
                 continue;
             }
             // @checkstyle MagicNumber (1 line)
-            if (data > 0x7f || data < 0x20) {
+            if ((data.get() > 0x7f || data.get() < 0x20)
+                && data.get() != '\t') {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle LineLength (1 line)
                         "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
-                        data, head.size() + 1, new String(baos.toByteArray())
+                        data.get(),
+                        head.size() + 1,
+                        new String(baos.toByteArray())
                     )
                 );
             }
-            baos.write(data);
+            baos.write(data.get());
+            data = new Opt.Empty<Integer>();
         }
         return new Request() {
             @Override
@@ -113,4 +123,21 @@ public final class RqLive extends RqWrap {
         };
     }
 
+    /**
+     * Obtains new byte if hasn't.
+     * @param input Stream
+     * @param data Empty or current data
+     * @return Next or current data
+     * @throws IOException if input.read() fails
+     */
+    private static Opt<Integer> data(final InputStream input,
+            final Opt<Integer> data) throws IOException {
+        final Opt<Integer> ret;
+        if (data.has()) {
+            ret = data;
+        } else {
+            ret = new Opt.Single<Integer>(input.read());
+        }
+        return ret;
+    }
 }

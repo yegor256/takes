@@ -47,7 +47,7 @@ public final class RqLiveTest {
     public void buildsHttpRequest() throws IOException {
         final Request req = new RqLive(
             new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
+                this.joiner().join(
                     "GET / HTTP/1.1",
                     "Host:e",
                     "Content-Length: 5",
@@ -63,6 +63,52 @@ public final class RqLiveTest {
         MatcherAssert.assertThat(
             new RqPrint(req).printBody(),
             Matchers.endsWith("ello")
+        );
+    }
+
+    /**
+     * RqLive can support multi-line headers.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void supportMultiLineHeaders() throws IOException {
+        final Request req = new RqLive(
+            new ByteArrayInputStream(
+                this.joiner().join(
+                    "GET /multiline HTTP/1.1",
+                    "X-Foo: this is a test",
+                    " header for you",
+                    "",
+                    "hello multi part"
+                ).getBytes()
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqHeaders.Base(req).header("X-Foo"),
+            Matchers.hasItem("this is a test header for you")
+        );
+    }
+
+    /**
+     * RqLive can support multi-line headers with colon in second line.
+     * Yegor counterexample.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void supportMultiLineHeadersWithColon() throws IOException {
+        final Request req = new RqLive(
+            new ByteArrayInputStream(
+                this.joiner().join(
+                    "GET /multilinecolon HTTP/1.1",
+                    "Foo: first line",
+                    " second: line",
+                    ""
+                ).getBytes()
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqHeaders.Base(req).header("Foo"),
+            Matchers.hasItem("first line second: line")
         );
     }
 
@@ -90,6 +136,14 @@ public final class RqLiveTest {
                 "GET /test HTTP/1.1\rHost: localhost".getBytes()
             )
         );
+    }
+
+    /**
+     * Create a joiner for a header.
+     * @return Joiner
+     */
+    private Joiner joiner() {
+        return Joiner.on("\r\n");
     }
 
 }
