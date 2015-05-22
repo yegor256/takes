@@ -23,10 +23,11 @@
  */
 package org.takes.rs;
 
-import com.jcabi.aspects.Cacheable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -54,6 +55,12 @@ public final class RsPrettyXML implements Response {
     private final transient Response origin;
 
     /**
+     * Response with properly transformed body.
+     */
+    private final transient List<Response> transformed =
+        new CopyOnWriteArrayList<Response>();
+
+    /**
      * Ctor.
      * @param res Original response
      */
@@ -76,12 +83,18 @@ public final class RsPrettyXML implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
-    @Cacheable
     private Response make() throws IOException {
-        return new RsWithBody(
-            this.origin,
-            RsPrettyXML.transform(this.origin.body())
-        );
+        synchronized (this.transformed) {
+            if (this.transformed.isEmpty()) {
+                this.transformed.add(
+                    new RsWithBody(
+                        this.origin,
+                        RsPrettyXML.transform(this.origin.body())
+                    )
+                );
+            }
+        }
+        return this.transformed.get(0);
     }
 
     /**
