@@ -92,11 +92,11 @@ public final class RsPrettyXMLTest {
     }
 
     /**
-     * RsPrettyXML can compare objects.
+     * RsPrettyXML can conform to equals and hash code contract.
      * @throws Exception If some problem inside
      */
     @Test
-    public void comparesObjects() throws Exception {
+    public void conformsToEqualsAndHashCode() throws Exception {
         EqualsVerifier.forClass(RsPrettyXML.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
