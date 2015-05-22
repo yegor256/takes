@@ -83,10 +83,10 @@ public final class TkAuth implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        final Opt<Identity> optUsers = this.pass.enter(request);
+        final Opt<Identity> user = this.pass.enter(request);
         final Response response;
-        if (optUsers.has()) {
-            response = this.act(request, optUsers.get());
+        if (user.has()) {
+            response = this.act(request, user.get());
         } else {
             response = this.origin.act(request);
         }

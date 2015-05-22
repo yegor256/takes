@@ -55,15 +55,15 @@ public final class PsFake implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) {
-        final Opt<Identity> retValue;
+        final Opt<Identity> user;
         if (this.condition) {
-            retValue = new Opt.Single<Identity>(
+            user = new Opt.Single<Identity>(
                 new Identity.Simple("urn:test:1")
             );
         } else {
-            retValue = new Opt.Empty<Identity>();
+            user = new Opt.Empty<Identity>();
         }
-        return retValue;
+        return user;
     }
 
     @Override

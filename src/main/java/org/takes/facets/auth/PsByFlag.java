@@ -100,19 +100,19 @@ public final class PsByFlag implements Pass {
     public Opt<Identity> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
-        Opt<Identity> retValue = null;
+        Opt<Identity> user = null;
         if (flg.hasNext()) {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
                 if (ent.getKey().matcher(value).matches()) {
-                    retValue = ent.getValue().enter(req);
+                    user = ent.getValue().enter(req);
                 }
             }
         }
-        if (retValue == null) {
-            retValue = new Opt.Empty<Identity>();
+        if (user == null) {
+            user = new Opt.Empty<Identity>();
         }
-        return retValue;
+        return user;
     }
 
     @Override

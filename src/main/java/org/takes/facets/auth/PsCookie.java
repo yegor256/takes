@@ -98,16 +98,16 @@ public final class PsCookie implements Pass {
     public Opt<Identity> enter(final Request req) throws IOException {
         final Iterator<String> cookies = new RqCookies.Base(req)
             .cookie(this.cookie).iterator();
-        Opt<Identity> retValue = null;
+        Opt<Identity> user = null;
         if (cookies.hasNext()) {
-            retValue = new Opt.Single<Identity>(
+            user = new Opt.Single<Identity>(
                 this.codec.decode(cookies.next().getBytes())
             );
         }
-        if (retValue == null) {
-            retValue = new Opt.Empty<Identity>();
+        if (user == null) {
+            user = new Opt.Empty<Identity>();
         }
-        return retValue;
+        return user;
     }
 
     @Override
