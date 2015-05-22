@@ -64,15 +64,6 @@ import org.takes.misc.VerboseIterable;
 public interface RqMultipart extends Request {
 
     /**
-     * Carriage return constant.
-     */
-    String CRLF = "\r\n";
-    /**
-     * Content type constant.
-     */
-    String CONTENT_TYPE = "Content-Type";
-
-    /**
      * Get single part.
      * @param name Name of the part to get
      * @return List of parts (can be empty)
@@ -186,7 +177,8 @@ public interface RqMultipart extends Request {
             final Request req) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
-            ).single(RqMultipart.CONTENT_TYPE);
+            // @checkstyle MultipleStringLiteralsCheck (1 line)
+            ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
                 throw new HttpException(
@@ -252,7 +244,8 @@ public interface RqMultipart extends Request {
                 channel.write(
                     ByteBuffer.wrap(this.head().iterator().next().getBytes())
                 );
-                channel.write(ByteBuffer.wrap(RqMultipart.CRLF.getBytes()));
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
                 this.copy(channel, boundary);
             } finally {
                 channel.close();
@@ -395,6 +388,10 @@ public interface RqMultipart extends Request {
     final class Fake implements RqMultipart {
 
         /**
+         * Fake boundary constant.
+         */
+        private static final String BOUNDARY = "AaB02x";
+        /**
          * Fake multipart request.
          */
         private final RqMultipart fake;
@@ -404,29 +401,27 @@ public interface RqMultipart extends Request {
          * @param req Fake request header holder
          * @param dispositions Fake request body parts
          * @throws IOException If fails
-         * @todo #252:30min/DEV We should expect instances of Request as dispositions
-         *  Dispositions should be multipart request body holder.
-         *  Ctor. will be called like this.
+         *  @todo #252:30min/DEV New ctor should be created and expect
+         *  instances of Request as dispositions. Dispositions should be
+         *  multipart request body holder. New ctor should call
+         *  {@code RqMultipart.Base}. {@code Fake.fakebody} method should be
+         *  refactored and Fake(final Request req, final String... dispositions)
+         *  ctor should call new constructor using dispositions like
          *  {@code
-         *  new RqMultipart.Fake(
-         *  new RqFake("POST", "/upload-a-file"),
+         *  this(
+         *  req,
          *  new RqWithHeader(
-         *  new RqFake("", "", "440 Wolfe Rd, CA 94085"),
-         *  "Content-Disposition", "form-data; name=\"address\""
+         *  req,
+         *  // @checkstyle LineLength (1 line)
+         *  new RqLive(req.head().iterator().next() + "\r\n" + "Content-Disposition", "form-data; name=\"address\"")
+         *  ),
+         *  new RqWithHeader(
+         *  req,
+         *  // @checkstyle LineLength (1 line)
+         *  new RqLive(req.head().iterator().next() + "\r\n" + "Content-Disposition", "form-data; name=\"file\"")
          *  )
          *  );
          *  }
-         */
-        @SuppressWarnings("PMD.UnusedFormalParameter")
-        public Fake(final Request req, final Request... dispositions)
-            throws IOException {
-            this.fake = new RqMultipart.Base(new RqFake());
-        }
-        /**
-         * Fake ctor.
-         * @param req Fake request header holder
-         * @param dispositions Fake request body parts
-         * @throws IOException If fails
          */
         public Fake(final Request req, final String... dispositions)
             throws IOException {
@@ -434,8 +429,8 @@ public interface RqMultipart extends Request {
                 new RqSimple(
                     new RqWithHeader(
                         req,
-                        // @checkstyle LineLengthCheck (1 line)
-                        RqMultipart.CONTENT_TYPE, "multipart/form-data; boundary=AaB02x"
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        "Content-Type", "multipart/form-data; boundary=AaB02x"
                     ).head(),
                     RqMultipart.Fake.fakeBody(dispositions)
                 )
@@ -470,33 +465,20 @@ public interface RqMultipart extends Request {
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          */
+        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
         private static InputStream fakeBody(final String... dispositions) {
-            final String boundary = "AaB02x";
-            final Collection<String> parts = new LinkedList<String>();
-            for (final String disposition : dispositions) {
-                parts.add(String.format("--%s", boundary));
-                parts.add(disposition);
-            }
-            parts.add("Content-Transfer-Encoding: utf-8");
-            parts.add(String.format("--%s--", boundary));
-            return new ByteArrayInputStream(
-                RqMultipart.Fake.join(parts.iterator()).getBytes()
-            );
-        }
-        /**
-         * CRLF joiner.
-         * @param iter Source iterator to join by CRLF
-         * @return String of iterator joined with CRLF
-         */
-        private static String join(final Iterator<String> iter) {
             final StringBuilder builder = new StringBuilder();
-            while (iter.hasNext()) {
-                builder.append(iter.next());
-                if (iter.hasNext()) {
-                    builder.append(RqMultipart.CRLF);
-                }
+            for (final String disposition : dispositions) {
+                builder.append(String.format("--%s%s", BOUNDARY, "\r\n"))
+                    .append(disposition)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    .append("\r\n");
             }
-            return builder.toString();
+            builder.append("Content-Transfer-Encoding: utf-8\r\n")
+                .append(String.format("--%s--", BOUNDARY));
+            return new ByteArrayInputStream(
+                builder.toString().getBytes()
+            );
         }
     }
 
