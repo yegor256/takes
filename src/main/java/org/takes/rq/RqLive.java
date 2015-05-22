@@ -32,7 +32,6 @@ import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.Condition;
 import org.takes.misc.Opt;
 
 /**
@@ -43,6 +42,7 @@ import org.takes.misc.Opt;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle CyclomaticComplexityCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.CyclomaticComplexity")
@@ -65,7 +65,6 @@ public final class RqLive extends RqWrap {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
-        final StartingMLCond condition = new StartingMLCond();
         final List<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<Integer>();
@@ -89,7 +88,7 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 data = new Opt.Single<Integer>(input.read());
-                if (condition.fits(data.get())) {
+                if (data.get() != ' ' && data.get() != '\t') {
                     head.add(new String(baos.toByteArray()));
                     baos.reset();
                 }
@@ -140,13 +139,5 @@ public final class RqLive extends RqWrap {
             ret = new Opt.Single<Integer>(input.read());
         }
         return ret;
-    }
-
-    private static class StartingMLCond implements Condition<Integer> {
-
-        @Override
-        public boolean fits(final Integer element) {
-            return element != ' ' && element != '\t';
-        }
     }
 }
