@@ -140,6 +140,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-aspects</artifactId>
+            <version>0.21</version>
+        </dependency>
+        <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.json</artifactId>
             <scope>test</scope>
