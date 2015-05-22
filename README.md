@@ -420,7 +420,7 @@ new TkFork(
 Here is how you can parse an instance of `Request`:
 
 ```java
-Href href = new RqHref(request).href();
+Href href = new RqHref.Base(request).href();
 URI uri = href.uri();
 Iterable<String> values = href.param("key");
 ```
