@@ -28,6 +28,7 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +56,12 @@ import org.takes.misc.Href;
 public final class PsTwitter implements Pass {
 
     /**
+     * URL for verifying user credentials.
+     */
+    private static final String VERIFY_URL =
+        "https://api.twitter.com/1.1/account/verify_credentials.json";
+
+    /**
      * App name.
      */
     private final transient String app;
@@ -65,26 +72,60 @@ public final class PsTwitter implements Pass {
     private final transient String key;
 
     /**
-     * Ctor.
-     * @param gapp Twitter app
-     * @param gkey Twitter key
+     * Request for fetching app token.
      */
-    public PsTwitter(final String gapp, final String gkey) {
-        this.app = gapp;
-        this.key = gkey;
+    private final transient com.jcabi.http.Request trequest;
+
+    /**
+     * Request for verifying user credentials.
+     */
+    private final transient com.jcabi.http.Request vcrequest;
+
+    /**
+     * Ctor.
+     * @param tapp Twitter app
+     * @param tkey Twitter key
+     */
+    public PsTwitter(final String tapp, final String tkey) {
+        this(
+            new JdkRequest(
+                new Href("https://api.twitter.com/oauth2/token")
+                    .with("grant_type", "client_credentials")
+                    .toString()
+            ),
+            new JdkRequest(VERIFY_URL),
+            tapp,
+            tkey
+        );
+    }
+
+    /**
+     * Ctor with proper requestor for testing purposes.
+     * @param ttrequest HTTP request for getting token
+     * @param tvcrequest HTTP request for verifying credentials
+     * @param tapp Facebook app
+     * @param tkey Facebook key
+     * @checkstyle ParameterNumberCheck (3 lines)
+     */
+    PsTwitter(final com.jcabi.http.Request ttrequest,
+        final com.jcabi.http.Request tvcrequest,
+        final String tapp,
+        final String tkey) {
+        this.trequest = ttrequest;
+        this.vcrequest = tvcrequest;
+        this.app = tapp;
+        this.key = tkey;
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request)
-        throws IOException {
+    public Iterator<Identity> enter(final Request request) throws IOException {
         return Collections.singleton(
-            PsTwitter.fetch(this.token())
+            this.fetch(this.token())
         ).iterator();
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -94,16 +135,27 @@ public final class PsTwitter implements Pass {
      * @return The user found in Twitter
      * @throws IOException If fails
      */
-    private static Identity fetch(final String token) throws IOException {
-        final String uri = new Href(
-            "https://api.twitter.com/1.1/account/verify_credentials.json"
-        ).with("access_token", token).toString();
-        return PsTwitter.parse(
-            new JdkRequest(uri)
-                .header("accept", "application/json")
-                .fetch().as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .as(JsonResponse.class).json().readObject()
+    private Identity fetch(final String token) throws IOException {
+        final JsonObject response = this.vcrequest
+            .uri()
+            .set(
+                URI.create(
+                    new Href(VERIFY_URL)
+                        .with("access_token", token)
+                        .toString()
+                )
+            )
+            .back()
+            .header("accept", "application/json")
+            .fetch().as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .as(JsonResponse.class).json().readObject();
+        final ConcurrentMap<String, String> props =
+            new ConcurrentHashMap<String, String>(response.size());
+        props.put("name", response.getString("name"));
+        props.put("picture", response.getString("profile_image_url"));
+        return new Identity.Simple(
+            String.format("urn:twitter:%d", response.getInt("id")), props
         );
     }
 
@@ -112,12 +164,8 @@ public final class PsTwitter implements Pass {
      * @return The token
      * @throws IOException If failed
      */
-    private String token()
-        throws IOException {
-        final String uri = new Href("https://api.twitter.com/oauth2/token")
-            .with("grant_type", "client_credentials")
-            .toString();
-        return new JdkRequest(uri)
+    private String token() throws IOException {
+        return this.trequest
             .method("POST")
             .header(
                 "Content-Type",
@@ -135,20 +183,5 @@ public final class PsTwitter implements Pass {
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(JsonResponse.class)
             .json().readObject().getString("access_token");
-    }
-
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Twitter
-     * @return Identity found
-     */
-    private static Identity parse(final JsonObject json) {
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(json.size());
-        props.put("name", json.getString("name"));
-        props.put("picture", json.getString("profile_image_url"));
-        return new Identity.Simple(
-            String.format("urn:twitter:%d", json.getInt("id")), props
-        );
     }
 }
