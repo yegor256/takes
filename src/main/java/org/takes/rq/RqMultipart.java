@@ -429,9 +429,10 @@ public interface RqMultipart extends Request {
                 new RqSimple(
                     new RqWithHeader(
                         req,
-                        // @checkstyle LineLength (2 line)
                         // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        "Content-Type", String.format("multipart/form-data; boundary=%s", BOUNDARY)
+                        "Content-Type",
+                        // @checkstyle LineLength (1 line)
+                        String.format("multipart/form-data; boundary=%s", BOUNDARY)
                     ).head(),
                     RqMultipart.Fake.fakeBody(dispositions)
                 )
