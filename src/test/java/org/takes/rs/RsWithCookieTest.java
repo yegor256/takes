@@ -38,12 +38,37 @@ import org.junit.Test;
 public final class RsWithCookieTest {
 
     /**
-     * RsWithCookie can add cookies (even with several decorations).
+     * RsWithCookie can add cookies.
      * @throws IOException If some problem inside
      * @checkstyle MultipleStringLiteralsCheck (17 lines)
      */
     @Test
     public void addsCookieToResponse() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithCookie(
+                    new RsEmpty(),
+                    "foo", "works?", "Path=/"
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    "Set-Cookie: foo=works?;Path=/",
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithCookie can add several cookies (with several decorations).
+     * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (17 lines)
+     */
+    @Test
+    public void addsMultipleCookies() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(

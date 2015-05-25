@@ -112,7 +112,7 @@ public final class RsWithCookie extends RsWrap {
                 new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
                 RsWithCookie.SET_COOKIE,
                 RsWithCookie.make(
-                    RsWithCookie.getPreviousValue(res),
+                    RsWithCookie.previousValue(res),
                     RsWithCookie.checkName(name),
                     RsWithCookie.checkValue(value),
                     attrs
@@ -135,9 +135,7 @@ public final class RsWithCookie extends RsWrap {
         if (!previous.isEmpty()) {
             text.append(String.format("%s,", previous));
         }
-        text.append(
-            String.format("%s=%s", name, value)
-        );
+        text.append(String.format("%s=%s", name, value));
         for (final CharSequence attr : attrs) {
             text.append(';').append(attr);
         }
@@ -150,7 +148,7 @@ public final class RsWithCookie extends RsWrap {
      * @return Current cookie value or empty string.
      */
     @SuppressWarnings("PMD.OnlyOneReturn")
-    private static String getPreviousValue(final Response res) {
+    private static String previousValue(final Response res) {
         final StringBuilder cookie = new StringBuilder();
         final StringBuilder value = new StringBuilder();
         try {
