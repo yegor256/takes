@@ -23,6 +23,8 @@
  */
 package org.takes.rs;
 
+import java.io.IOException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -73,6 +75,18 @@ public final class RsWithCookie extends RsWrap {
     );
 
     /**
+     * Cookie header name.
+     */
+    private static final CharSequence SET_COOKIE = "Set-Cookie";
+
+    /**
+     * Pattern to get the current cookie value from header.
+     */
+    private static final Pattern COOKIE_PTRN = Pattern.compile(
+        String.format("%s: ([^\\s].*)", RsWithCookie.SET_COOKIE)
+    );
+
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -95,33 +109,66 @@ public final class RsWithCookie extends RsWrap {
         final CharSequence value, final CharSequence... attrs) {
         super(
             new RsWithHeader(
-                res,
-                "Set-Cookie",
+                new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
+                RsWithCookie.SET_COOKIE,
                 RsWithCookie.make(
+                    RsWithCookie.getPreviousValue(res),
                     RsWithCookie.checkName(name),
                     RsWithCookie.checkValue(value),
                     attrs
-            )
-        )
+            ))
         );
     }
 
     /**
      * Build cookie string.
+     * @param previous Previous Cookie value.
      * @param name Cookie name
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
-    private static String make(final CharSequence name,
+    private static String make(final String previous, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
-        final StringBuilder text = new StringBuilder(
+        final StringBuilder text = new StringBuilder();
+        if (!previous.isEmpty()) {
+            text.append(String.format("%s,", previous));
+        }
+        text.append(
             String.format("%s=%s", name, value)
         );
         for (final CharSequence attr : attrs) {
             text.append(';').append(attr);
         }
         return text.toString();
+    }
+
+    /**
+     * Retrieve potential previous cookie string.
+     * @param res Current Response
+     * @return Current cookie value or empty string.
+     */
+    @SuppressWarnings("PMD.OnlyOneReturn")
+    private static String getPreviousValue(final Response res) {
+        final StringBuilder cookie = new StringBuilder();
+        final StringBuilder value = new StringBuilder();
+        try {
+            for (final String header : res.head()) {
+                if (header.contains(RsWithCookie.SET_COOKIE)) {
+                    cookie.append(header);
+                    break;
+                }
+            }
+        } catch (final IOException exception) {
+            return value.toString();
+        }
+        final Matcher matcher = RsWithCookie.COOKIE_PTRN
+            .matcher(cookie.toString());
+        if (matcher.find()) {
+            value.append(matcher.group(1));
+        }
+        return value.toString();
     }
 
     /**
