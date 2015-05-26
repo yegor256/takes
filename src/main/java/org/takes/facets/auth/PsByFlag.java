@@ -106,6 +106,7 @@ public final class PsByFlag implements Pass {
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
                 if (ent.getKey().matcher(value).matches()) {
                     user = ent.getValue().enter(req);
+                    break;
                 }
             }
         }
