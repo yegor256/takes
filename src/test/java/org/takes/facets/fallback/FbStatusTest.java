@@ -119,7 +119,7 @@ public final class FbStatusTest {
             new IOException("Exception message")
         );
         final RsPrint response = new RsPrint(
-            new FbStatus(code).route(req).next()
+            new FbStatus(code).route(req).get()
         );
         MatcherAssert.assertThat(
             response.printBody(),
