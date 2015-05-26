@@ -61,7 +61,7 @@ public final class TkFallbackTest {
                         @Override
                         public Opt<Response> route(final RqFallback req) {
                             return new Opt.Single<Response>(
-                                    new RsText(req.throwable().getMessage())
+                                new RsText(req.throwable().getMessage())
                             );
                         }
                     }
