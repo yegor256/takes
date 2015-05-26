@@ -28,8 +28,6 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
@@ -40,6 +38,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
+import org.takes.misc.Opt;
 
 /**
  * Twitter OAuth landing/callback page.
@@ -75,11 +74,9 @@ public final class PsTwitter implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request)
+    public Opt<Identity> enter(final Request request)
         throws IOException {
-        return Collections.singleton(
-            PsTwitter.fetch(this.token())
-        ).iterator();
+        return new Opt.Single<Identity>(PsTwitter.fetch(this.token()));
     }
 
     @Override
