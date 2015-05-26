@@ -426,18 +426,24 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final String... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
-                new RqSimple(
-                    new RqWithHeader(
-                        req,
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        "Content-Type",
-                        String.format(
-                            "multipart/form-data; boundary=%s",
-                            BOUNDARY
-                        )
-                    ).head(),
-                    RqMultipart.Fake.fakeBody(dispositions)
-                )
+                new Request() {
+                    @Override
+                    public Iterable<String> head() throws IOException {
+                        return new RqWithHeader(
+                            req,
+                            // @checkstyle MultipleStringLiteralsCheck (1 line)
+                            "Content-Type",
+                            String.format(
+                                "multipart/form-data; boundary=%s",
+                                BOUNDARY
+                            )
+                        ).head();
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        return RqMultipart.Fake.fakeBody(dispositions);
+                    }
+                }
             );
         }
         /**

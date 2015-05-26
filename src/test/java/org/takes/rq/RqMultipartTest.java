@@ -34,10 +34,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -72,30 +69,13 @@ public final class RqMultipartTest {
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
-        final List<String> dispositions = Arrays.asList(
+        final Request req = new RqMultipart.Fake(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "Content-Disposition: form-data; name=\"addres\"",
                 "",
                 "449 N Wolfe Rd, Sunnyvale, CA 94085"
             ),
             "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
-        );
-        final String boundary = "AaB02x";
-        final Collection<String> parts = new LinkedList<String>();
-        for (final String disposition : dispositions) {
-            parts.add(String.format("--%s", boundary));
-            parts.add(disposition);
-        }
-        parts.add("Content-Transfer-Encoding: utf-8");
-        parts.add(String.format("--%s--", boundary));
-        final Request req = new RqFake(
-            Arrays.asList(
-                "POST /h?u=3 HTTP/1.1",
-                "Host: www.example.com",
-                "Content-Type: multipart/form-data; boundary=AaB02x",
-                "Content-Length: 100001"
-            ),
-            Joiner.on(RqMultipartTest.CRLF).join(parts)
         );
         MatcherAssert.assertThat(
             new RqMultipart.Base(req),
