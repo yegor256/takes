@@ -398,9 +398,9 @@ public interface RqMultipart extends Request {
 
         /**
          * Fake ctor.
-         * @param req Fake request header holder
-         * @param dispositions Fake request body parts
-         * @throws IOException If fails
+         *  @param req Fake request header holder
+         *  @param dispositions Fake request body parts
+         *  @throws IOException If fails
          *  @todo #252:30min/DEV New ctor should be created and expect
          *  instances of Request as dispositions. Dispositions should be
          *  multipart request body holder. New ctor should call
