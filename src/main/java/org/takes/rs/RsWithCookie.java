@@ -24,6 +24,7 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -94,7 +95,12 @@ public final class RsWithCookie extends RsWrap {
      */
     public RsWithCookie(final CharSequence name, final CharSequence value,
         final CharSequence... attrs) {
-        this(new RsEmpty(), name, value, attrs);
+        this(
+            new RsEmpty(),
+            RsWithCookie.checkName(name),
+            RsWithCookie.checkValue(value),
+            attrs
+        );
     }
 
     /**
@@ -108,16 +114,50 @@ public final class RsWithCookie extends RsWrap {
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         super(
-            new RsWithHeader(
-                new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
-                RsWithCookie.SET_COOKIE,
-                RsWithCookie.make(
-                    RsWithCookie.previousValue(res),
-                    RsWithCookie.checkName(name),
-                    RsWithCookie.checkValue(value),
-                    attrs
-            ))
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return RsWithCookie.extend(
+                        res,
+                        name,
+                        value,
+                        attrs
+                    );
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return res.body();
+                }
+            }
         );
+        RsWithCookie.checkName(name);
+        RsWithCookie.checkValue(value);
+    }
+
+    /**
+     * Add an additional cookie to the original response header.
+     * @param res Original response
+     * @param name Cookie name
+     * @param value Value of it
+     * @param attrs Optional attributes, for example "Path=/"
+     * @return Head with modified cookie header
+     * @throws IOException If it fails
+     * @checkstyle ParameterNumberCheck (8 lines)
+     */
+    private static Iterable<String> extend(final Response res,
+        final CharSequence name, final CharSequence value,
+        final CharSequence... attrs) throws IOException {
+        final String cookie = RsWithCookie.make(
+            RsWithCookie.previousValue(res),
+            name, value, attrs
+        );
+        Response resp = res;
+        resp = new RsWithHeader(
+            new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
+            RsWithCookie.SET_COOKIE,
+            cookie
+        );
+        return resp.head();
     }
 
     /**
@@ -127,10 +167,12 @@ public final class RsWithCookie extends RsWrap {
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
+     * @throws IOException If it fails
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static String make(final String previous, final CharSequence name,
-        final CharSequence value, final CharSequence... attrs) {
+        final CharSequence value,
+        final CharSequence... attrs) throws IOException {
         final StringBuilder text = new StringBuilder();
         if (!previous.isEmpty()) {
             text.append(String.format("%s,", previous));
@@ -146,20 +188,16 @@ public final class RsWithCookie extends RsWrap {
      * Retrieve potential previous cookie string.
      * @param res Current Response
      * @return Current cookie value or empty string.
+     * @throws IOException If it fails.
      */
-    @SuppressWarnings("PMD.OnlyOneReturn")
-    private static String previousValue(final Response res) {
+    private static String previousValue(final Response res) throws IOException {
         final StringBuilder cookie = new StringBuilder();
         final StringBuilder value = new StringBuilder();
-        try {
-            for (final String header : res.head()) {
-                if (header.contains(RsWithCookie.SET_COOKIE)) {
-                    cookie.append(header);
-                    break;
-                }
+        for (final String header : res.head()) {
+            if (header.contains(RsWithCookie.SET_COOKIE)) {
+                cookie.append(header);
+                break;
             }
-        } catch (final IOException exception) {
-            return value.toString();
         }
         final Matcher matcher = RsWithCookie.COOKIE_PTRN
             .matcher(cookie.toString());
