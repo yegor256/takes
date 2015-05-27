@@ -54,7 +54,7 @@ public final class FbChainTest {
                     new FbEmpty(),
                     new FbFixed(new RsText("first rs")),
                     new FbFixed(new RsText("second rs"))
-                ).route(req).next()
+                ).route(req).get()
             ).printBody(),
             Matchers.startsWith("first")
         );

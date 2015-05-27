@@ -25,14 +25,13 @@ package org.takes.facets.fallback;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.Iterator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -60,10 +59,10 @@ public final class TkFallbackTest {
                     new TkFailure(err),
                     new Fallback() {
                         @Override
-                        public Iterator<Response> route(final RqFallback req) {
-                            return Collections.<Response>singleton(
-                                new RsText(req.throwable().getMessage())
-                            ).iterator();
+                        public Opt<Response> route(final RqFallback req) {
+                            return new Opt.Single<Response>(
+                                    new RsText(req.throwable().getMessage())
+                            );
                         }
                     }
                 ).act(new RqFake())

@@ -24,10 +24,7 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -64,9 +61,9 @@ public final class FbChain extends FbWrap {
                     throws IOException {
                     Opt<Response> rsp = new Opt.Empty<Response>();
                     for (final Fallback fbk : fallbacks) {
-                        final Opt<Response> iter = fbk.route(req);
-                        if (iter.has()) {
-                            rsp = new Opt.Single<Response>(iter.get());
+                        final Opt<Response> opt = fbk.route(req);
+                        if (opt.has()) {
+                            rsp = new Opt.Single<Response>(opt.get());
                             break;
                         }
                     }

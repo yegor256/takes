@@ -24,14 +24,11 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Condition;
+import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -45,6 +42,7 @@ import org.takes.tk.TkFixed;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.13
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
@@ -69,10 +67,10 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final Condition<Integer> check) {
         this(check, new Fallback() {
             @Override
-            public Iterator<Response> route(final RqFallback req)
+            public Opt<Response> route(final RqFallback req)
                 throws IOException {
                 final Response res = new RsWithStatus(req.code());
-                return Collections.<Response>singleton(
+                return new Opt.Single<Response>(
                     new RsWithType(
                         new RsWithBody(
                             res,
@@ -84,7 +82,7 @@ public final class FbStatus extends FbWrap {
                         ),
                         "text/plain"
                     )
-                ).iterator();
+                );
             }
         });
     }
@@ -108,9 +106,9 @@ public final class FbStatus extends FbWrap {
             code,
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    return Collections.singleton(take.act(req)).iterator();
+                    return new Opt.Single<Response>(take.act(req));
                 }
             }
         );
@@ -138,20 +136,18 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
+    @SuppressWarnings("PMD.CallSuperInConstructor")
     public FbStatus(final Condition<Integer> check, final Fallback fallback) {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    final Collection<Response> rsp = new ArrayList<Response>(1);
+                    Opt<Response> rsp = new Opt.Empty<Response>();
                     if (check.fits(req.code())) {
-                        final Iterator<Response> iter = fallback.route(req);
-                        if (iter.hasNext()) {
-                            rsp.add(iter.next());
-                        }
+                        rsp = fallback.route(req);
                     }
-                    return rsp.iterator();
+                    return rsp;
                 }
             }
         );

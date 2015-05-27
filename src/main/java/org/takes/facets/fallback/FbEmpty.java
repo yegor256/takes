@@ -23,10 +23,9 @@
  */
 package org.takes.facets.fallback;
 
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Empty fallback.
@@ -47,8 +46,8 @@ public final class FbEmpty extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req) {
-                    return Collections.<Response>emptyList().iterator();
+                public Opt<Response> route(final RqFallback req) {
+                    return new Opt.Empty<Response>();
                 }
             }
         );
