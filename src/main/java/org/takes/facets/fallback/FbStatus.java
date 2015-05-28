@@ -43,7 +43,6 @@ import org.takes.tk.TkFixed;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.13
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
