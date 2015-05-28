@@ -95,12 +95,7 @@ public final class RsWithCookie extends RsWrap {
      */
     public RsWithCookie(final CharSequence name, final CharSequence value,
         final CharSequence... attrs) {
-        this(
-            new RsEmpty(),
-            RsWithCookie.checkName(name),
-            RsWithCookie.checkValue(value),
-            attrs
-        );
+        this(new RsEmpty(), name, value, attrs);
     }
 
     /**
@@ -111,18 +106,23 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @checkstyle ParameterNumberCheck (5 lines)
      */
+    @SuppressWarnings("PMD.CallSuperInConstructor")
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         super(
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    return RsWithCookie.extend(
-                        res,
-                        name,
-                        value,
-                        attrs
+                    Response resp = res;
+                    resp = new RsWithHeader(
+                        new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
+                        RsWithCookie.SET_COOKIE,
+                        RsWithCookie.make(
+                            RsWithCookie.previousValue(res),
+                            name, value, attrs
+                        )
                     );
+                    return resp.head();
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -132,32 +132,6 @@ public final class RsWithCookie extends RsWrap {
         );
         RsWithCookie.checkName(name);
         RsWithCookie.checkValue(value);
-    }
-
-    /**
-     * Add an additional cookie to the original response header.
-     * @param res Original response
-     * @param name Cookie name
-     * @param value Value of it
-     * @param attrs Optional attributes, for example "Path=/"
-     * @return Head with modified cookie header
-     * @throws IOException If it fails
-     * @checkstyle ParameterNumberCheck (8 lines)
-     */
-    private static Iterable<String> extend(final Response res,
-        final CharSequence name, final CharSequence value,
-        final CharSequence... attrs) throws IOException {
-        final String cookie = RsWithCookie.make(
-            RsWithCookie.previousValue(res),
-            name, value, attrs
-        );
-        Response resp = res;
-        resp = new RsWithHeader(
-            new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
-            RsWithCookie.SET_COOKIE,
-            cookie
-        );
-        return resp.head();
     }
 
     /**
