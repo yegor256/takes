@@ -80,12 +80,16 @@ public final class BkParallelTest {
             }
         };
         new Thread(
+            // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {
                 @Override
                 public void run() {
                     try {
                         new FtBasic(
-                            new BkParallel(new BkBasic(take)),
+                            new BkParallel(
+                                new BkBasic(take),
+                                BkParallelTest.size(count)
+                            ),
                             port
                         ).start(
                             new Exit() {
@@ -123,5 +127,14 @@ public final class BkParallelTest {
         MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
         new Ports().release(port);
+    }
+
+    /**
+     * Calculate size of thread-poll.
+     * @param min Minimum value for size
+     * @return Poll size
+     */
+    private static int size(final int min) {
+        return Math.min(min, Runtime.getRuntime().availableProcessors() + 1);
     }
 }
