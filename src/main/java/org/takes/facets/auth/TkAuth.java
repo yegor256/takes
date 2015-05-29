@@ -28,9 +28,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.misc.Opt;
-import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithoutHeader;
 
 /**
@@ -104,11 +102,7 @@ public final class TkAuth implements Take {
         throws IOException {
         Request wrap = new RqWithoutHeader(req, this.header);
         if (!identity.equals(Identity.ANONYMOUS)) {
-            wrap = new RqWithHeader(
-                wrap,
-                this.header,
-                new String(new CcPlain().encode(identity))
-            );
+            wrap = new RqWithAuth(identity, this.header, wrap);
         }
         return this.pass.exit(this.origin.act(wrap), identity);
     }
