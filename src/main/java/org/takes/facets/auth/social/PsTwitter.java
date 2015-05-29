@@ -47,7 +47,7 @@ import org.takes.misc.Opt;
  *
  * @author Prasath Premkumar (popprem@gmail.com)
  * @version $Id$
- * @since
+ * @since 0.16
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key" })
