@@ -383,6 +383,7 @@ public final class RqMultipartTest {
         );
         temp.delete();
     }
+
     /**
      * RqMultipart.Base doesn't distort the content.
      * @throws IOException If some problem inside
@@ -431,5 +432,33 @@ public final class RqMultipartTest {
             );
         }
         temp.delete();
+    }
+
+    /**
+     * Test the TempInputStream class for correct deletion of the temp file,
+     * as used in multipart requests.
+     * @throws IOException if some problem occurs.
+     */
+    @Test
+    public void testTempFileDeletion() throws IOException {
+        final File file = File.createTempFile("tempfile", ".tmp");
+        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        out.write("takes is fun!\n");
+        out.write("Temp file deletion test.\n");
+        out.close();
+        final InputStream body = new TempInputStream(
+            new FileInputStream(file), file
+        );
+        MatcherAssert.assertThat(
+            "File exists.",
+            file.exists(),
+            Matchers.equalTo(true)
+        );
+        body.close();
+        MatcherAssert.assertThat(
+            "File doesn't exist anymore.",
+            file.exists(),
+            Matchers.equalTo(false)
+        );
     }
 }
