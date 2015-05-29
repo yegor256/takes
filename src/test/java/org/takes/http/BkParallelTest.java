@@ -62,7 +62,10 @@ public final class BkParallelTest {
         final int port = new Ports().allocate();
         final String uri = String.format("http://localhost:%d", port);
         // @checkstyle MagicNumberCheck (1 line)
-        final int count = 3;
+        final int count = Math.min(
+            Runtime.getRuntime().availableProcessors(),
+            3
+        );
         final CountDownLatch started = new CountDownLatch(count);
         final CountDownLatch completed = new CountDownLatch(count);
         final Take take = new Take() {
@@ -88,7 +91,7 @@ public final class BkParallelTest {
                         new FtBasic(
                             new BkParallel(
                                 new BkBasic(take),
-                                BkParallelTest.size(count)
+                                count
                             ),
                             port
                         ).start(
@@ -127,14 +130,5 @@ public final class BkParallelTest {
         MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
         new Ports().release(port);
-    }
-
-    /**
-     * Calculate size of thread-poll.
-     * @param min Minimum value for size
-     * @return Poll size
-     */
-    private static int size(final int min) {
-        return Math.min(min, Runtime.getRuntime().availableProcessors() + 1);
     }
 }
