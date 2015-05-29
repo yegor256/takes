@@ -64,7 +64,7 @@ public final class FbChain extends FbWrap {
                     for (final Fallback fbk : fallbacks) {
                         final Opt<Response> opt = fbk.route(req);
                         if (opt.has()) {
-                            rsp = new Opt.Single<Response>(opt.get());
+                            rsp = opt;
                             break;
                         }
                     }
