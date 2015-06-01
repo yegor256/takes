@@ -62,10 +62,7 @@ public final class BkParallelTest {
         final int port = new Ports().allocate();
         final String uri = String.format("http://localhost:%d", port);
         // @checkstyle MagicNumberCheck (1 line)
-        final int count = Math.min(
-            Runtime.getRuntime().availableProcessors(),
-            3
-        );
+        final int count = 3;
         final CountDownLatch started = new CountDownLatch(count);
         final CountDownLatch completed = new CountDownLatch(count);
         final Take take = new Take() {
