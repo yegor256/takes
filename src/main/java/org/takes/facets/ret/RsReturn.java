@@ -60,6 +60,7 @@ public final class RsReturn extends RsWrap {
      */
     public RsReturn(final Response res, final String loc, final String cookie)
         throws UnsupportedEncodingException {
+        // @checkstyle IndentationCheck (16 lines)
         super(
             new RsWithCookie(
                 res,
@@ -73,8 +74,8 @@ public final class RsReturn extends RsWrap {
                         System.currentTimeMillis()
                             + TimeUnit.HOURS.toMillis(1L)
                     )
+                )
             )
-        )
         );
     }
 }

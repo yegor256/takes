@@ -45,7 +45,7 @@ import org.takes.rs.RsWithCookie;
  * @since 0.20
  */
 @EqualsAndHashCode(of = { "origin", "cookie" })
-final class TkReturn implements Take {
+public final class TkReturn implements Take {
 
     /**
      * Original take.
