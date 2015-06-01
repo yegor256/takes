@@ -40,6 +40,7 @@ public final class RsWithCookieTest {
     /**
      * RsWithCookie can add cookies.
      * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (17 lines)
      */
     @Test
     public void addsCookieToResponse() throws IOException {
@@ -54,6 +55,35 @@ public final class RsWithCookieTest {
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
                     "Set-Cookie: foo=works?;Path=/",
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithCookie can add several cookies (with several decorations).
+     * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (17 lines)
+     */
+    @Test
+    public void addsMultipleCookies() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithCookie(
+                    new RsWithCookie(
+                        new RsEmpty(),
+                        "foo", "works?", "Path=/"
+                    ),
+                    "bar", "worksToo?", "Path=/2nd/path/"
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on("\r\n").join(
+                    "HTTP/1.1 200 OK",
+                    // @checkstyle LineLengthCheck (1 line)
+                    "Set-Cookie: foo=works?;Path=/,bar=worksToo?;Path=/2nd/path/",
                     "",
                     ""
                 )

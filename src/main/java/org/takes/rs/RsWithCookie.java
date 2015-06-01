@@ -23,6 +23,9 @@
  */
 package org.takes.rs;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -73,6 +76,18 @@ public final class RsWithCookie extends RsWrap {
     );
 
     /**
+     * Cookie header name.
+     */
+    private static final CharSequence SET_COOKIE = "Set-Cookie";
+
+    /**
+     * Pattern to get the current cookie value from header.
+     */
+    private static final Pattern COOKIE_PTRN = Pattern.compile(
+        String.format("%s: ([^\\s].*)", RsWithCookie.SET_COOKIE)
+    );
+
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -91,37 +106,79 @@ public final class RsWithCookie extends RsWrap {
      * @param attrs Optional attributes, for example "Path=/"
      * @checkstyle ParameterNumberCheck (5 lines)
      */
+    @SuppressWarnings("PMD.CallSuperInConstructor")
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         super(
-            new RsWithHeader(
-                res,
-                "Set-Cookie",
-                RsWithCookie.make(
-                    RsWithCookie.checkName(name),
-                    RsWithCookie.checkValue(value),
-                    attrs
-            )
-        )
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    Response resp = res;
+                    resp = new RsWithHeader(
+                        new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
+                        RsWithCookie.SET_COOKIE,
+                        RsWithCookie.make(
+                            RsWithCookie.previousValue(res),
+                            name, value, attrs
+                        )
+                    );
+                    return resp.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return res.body();
+                }
+            }
         );
+        RsWithCookie.checkName(name);
+        RsWithCookie.checkValue(value);
     }
 
     /**
      * Build cookie string.
+     * @param previous Previous Cookie value.
      * @param name Cookie name
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
+     * @throws IOException If it fails
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
-    private static String make(final CharSequence name,
-        final CharSequence value, final CharSequence... attrs) {
-        final StringBuilder text = new StringBuilder(
-            String.format("%s=%s", name, value)
-        );
+    private static String make(final String previous, final CharSequence name,
+        final CharSequence value,
+        final CharSequence... attrs) throws IOException {
+        final StringBuilder text = new StringBuilder();
+        if (!previous.isEmpty()) {
+            text.append(String.format("%s,", previous));
+        }
+        text.append(String.format("%s=%s", name, value));
         for (final CharSequence attr : attrs) {
             text.append(';').append(attr);
         }
         return text.toString();
+    }
+
+    /**
+     * Retrieve potential previous cookie string.
+     * @param res Current Response
+     * @return Current cookie value or empty string.
+     * @throws IOException If it fails.
+     */
+    private static String previousValue(final Response res) throws IOException {
+        final StringBuilder cookie = new StringBuilder();
+        final StringBuilder value = new StringBuilder();
+        for (final String header : res.head()) {
+            if (header.contains(RsWithCookie.SET_COOKIE)) {
+                cookie.append(header);
+                break;
+            }
+        }
+        final Matcher matcher = RsWithCookie.COOKIE_PTRN
+            .matcher(cookie.toString());
+        if (matcher.find()) {
+            value.append(matcher.group(1));
+        }
+        return value.toString();
     }
 
     /**
