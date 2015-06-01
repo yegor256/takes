@@ -1,0 +1,132 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Yegor Bugayenko
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package org.takes.tk;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Take;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeaders;
+import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
+
+/**
+ * Test case for {@link TkCORS}.
+ * @author Endrigo Antonini (teamed@endrigo.com.br)
+ * @version $Id$
+ * @since 0.20
+ */
+public class TkCORSTest {
+
+    /**
+     * Execute TkCORS don't sending any origin on the request.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public final void withoutDomain() throws IOException {
+        final Take take = Mockito.mock(Take.class);
+        Mockito.doReturn(new RsText()).when(take)
+            .act(Mockito.any(Request.class));
+        final Take cors = new TkCORS(take);
+        final RsPrint response = new RsPrint(cors.act(new RqFake()));
+        final String head = response.printHead();
+        this.httpStatusOk(head);
+    }
+
+    /**
+     * Execute TkCORS sending a origin that is on the allowed domains to
+     * perform the action.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public final void withCorrectDomain() throws IOException {
+        final Take take = Mockito.mock(Take.class);
+        Mockito.doReturn(new RsText()).when(take)
+        .act(Mockito.any(Request.class));
+        final Take cors = new TkCORS(
+            take,
+            "http://teamed.io",
+            "http://example.com"
+        );
+        final Set<String> headers = new HashSet<String>();
+        headers.add("Origin: http://teamed.io");
+        final Request req = new RqWithHeaders(new RqFake(), headers);
+        final RsPrint response = new RsPrint(cors.act(req));
+        final String head = response.printHead();
+        this.httpStatusOk(head);
+    }
+
+    /**
+     * Execute TkCORS sending a origin that is on the allowed domains to
+     * perform the action. TODO
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public final void withWrongDomain() throws IOException {
+        final Take take = Mockito.mock(Take.class);
+        Mockito.doReturn(new RsText()).when(take)
+        .act(Mockito.any(Request.class));
+        final Take cors = new TkCORS(
+            take,
+            "http://www.teamed.io",
+            "http://sample.com"
+        );
+        final Set<String> headers = new HashSet<String>();
+        headers.add("Origin: http://wrong.teamed.io");
+        final Request req = new RqWithHeaders(new RqFake(), headers);
+        final RsPrint response = new RsPrint(cors.act(req));
+        final String head = response.printHead();
+        MatcherAssert.assertThat(
+            "It was expected a 403 HTTP status.",
+            head,
+            Matchers.containsString("HTTP/1.1 403")
+        );
+        MatcherAssert.assertThat(
+            "Wrong value on Access Control Allow Credentias param.",
+            head,
+            Matchers.containsString("Access-Control-Allow-Credentials: false")
+        );
+    }
+
+    /**
+     * Checks if the given head contains text that identify it with HTTP 200
+     * status.
+     * @param head HTTP response head.
+     */
+    @Ignore
+    private void httpStatusOk(final String head) {
+        MatcherAssert.assertThat(
+            "Invalid HTTP status.",
+            head,
+            Matchers.containsString("HTTP/1.1 200 OK")
+        );
+    }
+}
