@@ -23,10 +23,9 @@
  */
 package org.takes.facets.auth;
 
-import java.util.Base64;
-import java.util.Base64.Encoder;
 import java.util.HashSet;
 import java.util.Set;
+import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -105,8 +104,9 @@ public class PsBasicTest {
     private String generateHead(final String user) {
         final String pass = "password";
         final String auth = String.format("%s:%s", user, pass);
-        final Encoder encoder = Base64.getEncoder();
-        final String encoded = new String(encoder.encode(auth.getBytes()));
+        final String encoded = DatatypeConverter.printBase64Binary(
+            auth.getBytes()
+        );
         return String.format(AUTH_BASIC, encoded);
     }
 
