@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -125,10 +124,7 @@ public final class RsText extends RsWrap {
      */
     public RsText(final Response res) {
         super(
-            new RsWithType(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "text/plain"
-        )
+            new RsWithType(res, "text/plain")
         );
     }
 

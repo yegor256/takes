@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -58,4 +59,22 @@ public final class RsTextTest {
         );
     }
 
+    /**
+     * RsText can build a response with a status.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void makesTextResponseWithStatus() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsText(
+                    new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
+                    "something not found"
+                )
+            ).printHead(),
+            Matchers.containsString(
+                Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
+            )
+        );
+    }
 }
