@@ -84,7 +84,7 @@ public final class TkCORS implements Take {
     @Override
     public Response act(final Request req) throws IOException {
         boolean hasorigin = false;
-        Response response;
+        final Response response;
         String domain = "";
         for (final String head : req.head()) {
             if (head.startsWith(ORIGIN_PREFIX)) {
@@ -96,7 +96,6 @@ public final class TkCORS implements Take {
         if (hasorigin && (
             this.allowed.isEmpty()
             || this.allowed.contains(domain))) {
-            response = this.origin.act(req);
             final Set<String> headers = new HashSet<String>();
             headers.add("Access-Control-Allow-Credentials: true");
             // @checkstyle LineLengthCheck (1 line)
@@ -104,13 +103,17 @@ public final class TkCORS implements Take {
             headers.add(
                 String.format("Access-Control-Allow-Origin: %s", domain)
             );
-            response = new RsWithHeaders(response, headers);
+            response = new RsWithHeaders(this.origin.act(req), headers);
         } else if (hasorigin) {
             final Set<String> headers = Collections.singleton(
                 "Access-Control-Allow-Credentials: false"
             );
-            response = new RsWithStatus(HttpURLConnection.HTTP_FORBIDDEN);
-            response = new RsWithHeaders(response, headers);
+            response = new RsWithHeaders(
+                new RsWithStatus(
+                    HttpURLConnection.HTTP_FORBIDDEN
+                ),
+                headers
+            );
         } else {
             response = this.origin.act(req);
         }

@@ -28,7 +28,6 @@ import java.util.Set;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.rq.RqFake;
@@ -50,9 +49,7 @@ public final class TkCORSTest {
      */
     @Test
     public void withoutOrigin() throws Exception {
-        final Take take = Mockito.mock(Take.class);
-        Mockito.doReturn(new RsText()).when(take)
-            .act(Mockito.any(Request.class));
+        final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(take);
         final RsPrint response = new RsPrint(cors.act(new RqFake()));
         final String head = response.printHead();
@@ -65,9 +62,7 @@ public final class TkCORSTest {
      */
     @Test
     public void withCorrectDomainOnOrigin() throws Exception {
-        final Take take = Mockito.mock(Take.class);
-        Mockito.doReturn(new RsText()).when(take)
-            .act(Mockito.any(Request.class));
+        final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(
             take,
             "http://teamed.io",
@@ -87,9 +82,7 @@ public final class TkCORSTest {
      */
     @Test
     public void withWrongDomainOnOrigin() throws Exception {
-        final Take take = Mockito.mock(Take.class);
-        Mockito.doReturn(new RsText()).when(take)
-        .act(Mockito.any(Request.class));
+        final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(
             take,
             "http://www.teamed.io",
