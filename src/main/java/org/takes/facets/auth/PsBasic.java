@@ -24,10 +24,9 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Base64.Decoder;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -74,8 +73,9 @@ public final class PsBasic implements Pass {
         for (final String head : request.head()) {
             if (head.startsWith(AUTH_HEAD)) {
                 authorization = head.split(AUTH_HEAD)[1].trim();
-                final Decoder decoder = Base64.getDecoder();
-                authorization = new String(decoder.decode(authorization));
+                authorization = new String(
+                    DatatypeConverter.parseBase64Binary(authorization)
+                );
                 user = authorization.split(":")[0];
                 pass = authorization.substring(user.length() + 1);
                 found = true;
@@ -119,5 +119,4 @@ public final class PsBasic implements Pass {
          */
         boolean check(String user, String pwd);
     }
-
 }
