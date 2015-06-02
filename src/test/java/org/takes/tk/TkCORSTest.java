@@ -23,12 +23,10 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -44,14 +42,14 @@ import org.takes.rs.RsText;
  * @version $Id$
  * @since 0.20
  */
-public class TkCORSTest {
+public final class TkCORSTest {
 
     /**
-     * Execute TkCORS don't sending any origin on the request.
-     * @throws IOException If some problem inside
+     * TkCORS can handle a connection without origin in the request.
+     * @throws Exception If some problem inside
      */
     @Test
-    public final void withoutDomain() throws IOException {
+    public void withoutOrigin() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
             .act(Mockito.any(Request.class));
@@ -62,15 +60,14 @@ public class TkCORSTest {
     }
 
     /**
-     * Execute TkCORS sending a origin that is on the allowed domains to
-     * perform the action.
-     * @throws IOException If some problem inside
+     * TkCORS can handle connections with correct domain on origin.
+     * @throws Exception If some problem inside
      */
     @Test
-    public final void withCorrectDomain() throws IOException {
+    public void withCorrectDomainOnOrigin() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
-        .act(Mockito.any(Request.class));
+            .act(Mockito.any(Request.class));
         final Take cors = new TkCORS(
             take,
             "http://teamed.io",
@@ -85,12 +82,11 @@ public class TkCORSTest {
     }
 
     /**
-     * Execute TkCORS sending a origin that is on the allowed domains to
-     * perform the action. TODO
-     * @throws IOException If some problem inside
+     * TkCors can't handle connections with wrong domain on origin.
+     * @throws Exception If some problem inside
      */
     @Test
-    public final void withWrongDomain() throws IOException {
+    public void withWrongDomainOnOrigin() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
         .act(Mockito.any(Request.class));
@@ -121,7 +117,6 @@ public class TkCORSTest {
      * status.
      * @param head HTTP response head.
      */
-    @Ignore
     private void httpStatusOk(final String head) {
         MatcherAssert.assertThat(
             "Invalid HTTP status.",

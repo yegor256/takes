@@ -25,6 +25,8 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
@@ -48,8 +50,8 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.20
  */
-@EqualsAndHashCode(of = { "origin" , "alloweddomains" })
-public class TkCORS implements Take {
+@EqualsAndHashCode(of = { "origin" , "allowed" })
+public final class TkCORS implements Take {
 
     /**
      * Prefix of HTTP head Origin.
@@ -64,7 +66,7 @@ public class TkCORS implements Take {
     /**
      * List of allowed domains.
      */
-    private final transient Set<String> alloweddomains;
+    private final transient Set<String> allowed;
 
     /**
      * Ctor.
@@ -73,16 +75,14 @@ public class TkCORS implements Take {
      */
     public TkCORS(final Take take, final String... domains) {
         this.origin = take;
-        this.alloweddomains = new HashSet<String>();
+        this.allowed = new HashSet<String>();
         if (domains != null) {
-            for (final String domain : domains) {
-                this.alloweddomains.add(domain);
-            }
+            this.allowed.addAll(Arrays.asList(domains));
         }
     }
 
     @Override
-    public final Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws IOException {
         boolean hasorigin = false;
         Response response;
         String domain = "";
@@ -94,8 +94,8 @@ public class TkCORS implements Take {
             }
         }
         if (hasorigin && (
-            this.alloweddomains.size() == 0
-            || this.alloweddomains.contains(domain))) {
+            this.allowed.isEmpty()
+            || this.allowed.contains(domain))) {
             response = this.origin.act(req);
             final Set<String> headers = new HashSet<String>();
             headers.add("Access-Control-Allow-Credentials: true");
@@ -106,8 +106,9 @@ public class TkCORS implements Take {
             );
             response = new RsWithHeaders(response, headers);
         } else if (hasorigin) {
-            final Set<String> headers = new HashSet<String>();
-            headers.add("Access-Control-Allow-Credentials: false");
+            final Set<String> headers = Collections.singleton(
+                "Access-Control-Allow-Credentials: false"
+            );
             response = new RsWithStatus(HttpURLConnection.HTTP_FORBIDDEN);
             response = new RsWithHeaders(response, headers);
         } else {
