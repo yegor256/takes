@@ -309,6 +309,7 @@ public interface RqMultipart extends Request {
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 ).single("Content-Disposition");
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
@@ -392,6 +393,10 @@ public interface RqMultipart extends Request {
          */
         private static final String BOUNDARY = "AaB02x";
         /**
+         * Carriage return constant.
+         */
+        private static final String CRLF = "\r\n";
+        /**
          * Fake multipart request.
          */
         private final RqMultipart fake;
@@ -401,29 +406,8 @@ public interface RqMultipart extends Request {
          * @param req Fake request header holder
          * @param dispositions Fake request body parts
          * @throws IOException If fails
-         * @todo #252:30min/DEV New ctor should be created and expect
-         *  instances of Request as dispositions. Dispositions should be
-         *  multipart request body holder. New ctor should call
-         *  {@code RqMultipart.Base}. {@code Fake.fakebody} method should be
-         *  refactored and Fake(final Request req, final String... dispositions)
-         *  ctor should call new constructor using dispositions like
-         *  {@code
-         *  this(
-         *  req,
-         *  new RqWithHeader(
-         *  req,
-         *  // @checkstyle LineLength (1 line)
-         *  new RqLive(req.head().iterator().next() + "\r\n" + "Content-Disposition", "form-data; name=\"address\"")
-         *  ),
-         *  new RqWithHeader(
-         *  req,
-         *  // @checkstyle LineLength (1 line)
-         *  new RqLive(req.head().iterator().next() + "\r\n" + "Content-Disposition", "form-data; name=\"file\"")
-         *  )
-         *  );
-         *  }
          */
-        public Fake(final Request req, final String... dispositions)
+        public Fake(final Request req, final Request... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
                 new Request() {
@@ -446,14 +430,6 @@ public interface RqMultipart extends Request {
                 }
             );
         }
-        /**
-         * Fake ctor.
-         * @param dispositions Fake request body parts
-         * @throws IOException If fails
-         */
-        public Fake(final String... dispositions) throws IOException {
-            this(new RqFake(), dispositions);
-        }
         @Override
         public Iterable<Request> part(final CharSequence name) {
             return this.fake.part(name);
@@ -474,15 +450,26 @@ public interface RqMultipart extends Request {
          * Fake body creator.
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
+         * @throws IOException If fails
          */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static InputStream fakeBody(final String... dispositions) {
+        private static InputStream fakeBody(final Request... dispositions)
+            throws IOException {
             final StringBuilder builder = new StringBuilder();
-            for (final String disposition : dispositions) {
-                builder.append(String.format("--%s%s", BOUNDARY, "\r\n"))
-                    .append(disposition)
+            for (final Request each : dispositions) {
+                builder.append(String.format("--%s%s", BOUNDARY, CRLF))
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    .append("\r\n");
+                    .append("Content-Disposition: ")
+                    .append(
+                        new RqHeaders.Smart(
+                            new RqHeaders.Base(each)
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        ).single("Content-Disposition")
+                    ).append(CRLF);
+                final String body = new RqPrint(each).printBody();
+                if (!(CRLF.equals(body) || "".equals(body))) {
+                    builder.append(String.format("\r\n%s\r\n", body));
+                }
             }
             builder.append("Content-Transfer-Encoding: utf-8\r\n")
                 .append(String.format("--%s--", BOUNDARY));

@@ -62,6 +62,10 @@ public final class RqMultipartTest {
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
+    /**
+     * Content disposition.
+     */
+    private static final String DISPOSITION = "Content-Disposition";
 
     /**
      * RqMultipart.Base can satisfy equals contract.
@@ -70,12 +74,16 @@ public final class RqMultipartTest {
     @Test
     public void satisfiesEqualsContract() throws IOException {
         final Request req = new RqMultipart.Fake(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; name=\"addres\"",
-                "",
-                "449 N Wolfe Rd, Sunnyvale, CA 94085"
+            new RqFake(),
+            new RqWithHeader(
+                new RqFake("", "", "449 N Wolfe Rd, Sunnyvale, CA 94085"),
+                DISPOSITION, "form-data; name=\"t-1\""
             ),
-            "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
+            new RqWithHeader(
+                new RqFake("", "", ""),
+                DISPOSITION,
+                "form-data; name=\"data\"; filename=\"a.bin\""
+            )
         );
         MatcherAssert.assertThat(
             new RqMultipart.Base(req),
@@ -99,7 +107,7 @@ public final class RqMultipartTest {
                 ),
                 Joiner.on(RqMultipartTest.CRLF).join(
                     "--AaB01x",
-                    "Content-Disposition: form-data; fake=\"address\"",
+                    "Content-Disposition: form-data; fake=\"t2\"",
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "Content-Transfer-Encoding: uwf-8"
@@ -117,10 +125,9 @@ public final class RqMultipartTest {
     public void throwsExceptionOnNoNameAtContentDispositionHeader()
         throws IOException {
         new RqMultipart.Fake(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; fake=\"address\"",
-                "",
-                "340 N Wolfe Rd, Sunnyvale, CA 94085"
+            new RqWithHeader(
+                new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
+                DISPOSITION, "form-data; fake=\"t-3\""
             )
         );
     }
@@ -172,23 +179,27 @@ public final class RqMultipartTest {
     @Test
     public void parsesHttpBody() throws IOException {
         final RqMultipart multi = new RqMultipart.Fake(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; name=\"address\"",
-                "",
-                "40 N Wolfe Rd, Sunnyvale, CA 94085"
+            new RqFake(),
+            new RqWithHeader(
+                new RqFake("", "", "40 N Wolfe Rd, Sunnyvale, CA 94085"),
+                DISPOSITION, "form-data; name=\"t4\""
             ),
-            "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
+            new RqWithHeader(
+                new RqFake("", "", ""),
+                DISPOSITION,
+                "form-data; name=\"data\"; filename=\"a.bin\""
+            )
         );
         MatcherAssert.assertThat(
             new RqHeaders.Base(
-                multi.part("address").iterator().next()
-            ).header("Content-disposition"),
-            Matchers.hasItem("form-data; name=\"address\"")
+                multi.part("t4").iterator().next()
+            ).header(DISPOSITION),
+            Matchers.hasItem("form-data; name=\"t4\"")
         );
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqHeaders.Base(
-                    multi.part("address").iterator().next()
+                    multi.part("t4").iterator().next()
                 )
             ).printBody(),
             Matchers.allOf(
@@ -205,12 +216,16 @@ public final class RqMultipartTest {
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
         final RqMultipart multi = new RqMultipart.Fake(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; name=\"address\"",
-                "",
-                "443 N Wolfe Rd, Sunnyvale, CA 94085"
+            new RqFake(),
+            new RqWithHeader(
+                new RqFake("", "", "443 N Wolfe Rd, Sunnyvale, CA 94085"),
+                DISPOSITION, "form-data; name=\"t5\""
             ),
-            "Content-Disposition: form-data; name=\"data\"; filename=\"a.zip\""
+            new RqWithHeader(
+                new RqFake("", "", ""),
+                DISPOSITION,
+                "form-data; name=\"data\"; filename=\"a.zip\""
+            )
         );
         MatcherAssert.assertThat(
             multi.part("fake").iterator().hasNext(),
@@ -225,12 +240,16 @@ public final class RqMultipartTest {
     @Test
     public void returnsCorrectNamesSet() throws IOException {
         final RqMultipart multi = new RqMultipart.Fake(
-            Joiner.on(RqMultipartTest.CRLF).join(
-                "Content-Disposition: form-data; name=\"address\"",
-                "",
-                "441 N Wolfe Rd, Sunnyvale, CA 94085"
+            new RqFake(),
+            new RqWithHeader(
+                new RqFake("", "", "441 N Wolfe Rd, Sunnyvale, CA 94085"),
+                DISPOSITION, "form-data; name=\"address\""
             ),
-            "Content-Disposition: form-data; name=\"data\"; filename=\"a.bin\""
+            new RqWithHeader(
+                new RqFake("", "", ""),
+                DISPOSITION,
+                "form-data; name=\"data\"; filename=\"a.bin\""
+            )
         );
         MatcherAssert.assertThat(
             multi.names(),
