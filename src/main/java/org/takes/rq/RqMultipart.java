@@ -457,7 +457,8 @@ public interface RqMultipart extends Request {
             throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
-                builder.append(String.format("--%s%s", BOUNDARY, CRLF))
+                builder.append(String.format("--%s", BOUNDARY))
+                    .append(CRLF)
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
                     .append("Content-Disposition: ")
                     .append(
@@ -468,10 +469,10 @@ public interface RqMultipart extends Request {
                     ).append(CRLF);
                 final String body = new RqPrint(each).printBody();
                 if (!(CRLF.equals(body) || "".equals(body))) {
-                    builder.append(String.format("\r\n%s\r\n", body));
+                    builder.append(CRLF).append(body).append(CRLF);
                 }
             }
-            builder.append("Content-Transfer-Encoding: utf-8\r\n")
+            builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
                 .append(String.format("--%s--", BOUNDARY));
             return new ByteArrayInputStream(
                 builder.toString().getBytes()
