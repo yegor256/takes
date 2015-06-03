@@ -65,29 +65,23 @@ public final class PsBasic implements Pass {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Opt<Identity> enter(final Request request) throws IOException {
-        String authorization = "";
-        String user = "";
-        String pass = "";
-        boolean found = false;
+        BasicAuth auth = new BasicAuth("", "");
         Opt<Identity> identity = new Opt.Empty<Identity>();
         for (final String head : request.head()) {
             if (head.startsWith(AUTH_HEAD)) {
-                authorization = head.split(AUTH_HEAD)[1].trim();
-                authorization = new String(
-                    DatatypeConverter.parseBase64Binary(authorization)
-                );
-                user = authorization.split(":")[0];
-                pass = authorization.substring(user.length() + 1);
-                found = true;
+                auth = this.readAuthContentOnHead(head);
                 break;
             }
         }
-        if (found && this.entry.check(user, pass)) {
+        if (!auth.isEmpty() && this.entry.check(
+            auth.getUser(),
+            auth.getPass()
+        )) {
             final ConcurrentMap<String, String> props =
                 new ConcurrentHashMap<String, String>(0);
             identity = new Opt.Single<Identity>(
                 new Identity.Simple(
-                    String.format("urn:basic:%s", user),
+                    String.format("urn:basic:%s", auth.getUser()),
                     props
                 )
             );
@@ -99,6 +93,24 @@ public final class PsBasic implements Pass {
     public Response exit(final Response response, final Identity identity)
         throws IOException {
         return response;
+    }
+
+    /**
+     * Read authentication content that is received on the head.
+     * @param head Head
+     * @return BasicAuth instance.
+     */
+    private BasicAuth readAuthContentOnHead(final String head) {
+        final String authorization = new String(
+            DatatypeConverter.parseBase64Binary(
+                head.split(AUTH_HEAD)[1].trim()
+            )
+        );
+        final String user = authorization.split(":")[0];
+        return new BasicAuth(
+            user,
+            authorization.substring(user.length() + 1)
+        );
     }
 
     /**
@@ -118,5 +130,60 @@ public final class PsBasic implements Pass {
          * @return If valid it return <code>true</code>.
          */
         boolean check(String user, String pwd);
+    }
+
+    /**
+     * Used to transfer authentication information.
+     *
+     * @author Endrigo Antonini (teamed@endrigo.com.br)
+     * @version $Id$
+     * @since 0.20
+     */
+    private final class BasicAuth {
+
+        /**
+         * User.
+         */
+        private final String user;
+
+        /**
+         * Password.
+         */
+        private final String pass;
+
+        /**
+         * Ctor.
+         * @param username User
+         * @param password Password
+         */
+        public BasicAuth(final String username, final String password) {
+            super();
+            this.user = username;
+            this.pass = password;
+        }
+
+        /**
+         * Return user.
+         * @return User.
+         */
+        public String getUser() {
+            return this.user;
+        }
+
+        /**
+         * Return Password.
+         * @return Password.
+         */
+        public String getPass() {
+            return this.pass;
+        }
+
+        /**
+         * Check if the object is empty.
+         * @return Return <code>true</code> if user and password is empty.
+         */
+        public boolean isEmpty() {
+            return this.getUser().isEmpty() && this.getPass().isEmpty();
+        }
     }
 }
