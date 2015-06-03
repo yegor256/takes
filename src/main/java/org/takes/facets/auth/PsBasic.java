@@ -65,7 +65,7 @@ public final class PsBasic implements Pass {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Opt<Identity> enter(final Request request) throws IOException {
-        BasicAuth auth = new BasicAuth("", "");
+        Opt<BasicAuth> auth = new Opt.Empty<PsBasic.BasicAuth>();
         Opt<Identity> identity = new Opt.Empty<Identity>();
         for (final String head : request.head()) {
             if (head.startsWith(AUTH_HEAD)) {
@@ -73,15 +73,15 @@ public final class PsBasic implements Pass {
                 break;
             }
         }
-        if (!auth.isEmpty() && this.entry.check(
-            auth.getUser(),
-            auth.getPass()
+        if (auth.has() && this.entry.check(
+            auth.get().getUser(),
+            auth.get().getPass()
         )) {
             final ConcurrentMap<String, String> props =
                 new ConcurrentHashMap<String, String>(0);
             identity = new Opt.Single<Identity>(
                 new Identity.Simple(
-                    String.format("urn:basic:%s", auth.getUser()),
+                    String.format("urn:basic:%s", auth.get().getUser()),
                     props
                 )
             );
@@ -100,16 +100,18 @@ public final class PsBasic implements Pass {
      * @param head Head
      * @return BasicAuth instance.
      */
-    private BasicAuth readAuthContentOnHead(final String head) {
+    private Opt<BasicAuth> readAuthContentOnHead(final String head) {
         final String authorization = new String(
             DatatypeConverter.parseBase64Binary(
                 head.split(AUTH_HEAD)[1].trim()
             )
         );
         final String user = authorization.split(":")[0];
-        return new BasicAuth(
-            user,
-            authorization.substring(user.length() + 1)
+        return new Opt.Single<PsBasic.BasicAuth>(
+            new BasicAuth(
+                user,
+                authorization.substring(user.length() + 1)
+            )
         );
     }
 
@@ -176,14 +178,6 @@ public final class PsBasic implements Pass {
          */
         public String getPass() {
             return this.pass;
-        }
-
-        /**
-         * Check if the object is empty.
-         * @return Return <code>true</code> if user and password is empty.
-         */
-        public boolean isEmpty() {
-            return this.getUser().isEmpty() && this.getPass().isEmpty();
         }
     }
 }
