@@ -29,6 +29,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
@@ -44,16 +45,20 @@ import org.takes.rs.RsText;
 public final class TkCORSTest {
 
     /**
-     * TkCORS can handle a connection without origin in the request.
+     * TkCORS can handle connections without origin in the request.
      * @throws Exception If some problem inside
      */
     @Test
-    public void withoutOrigin() throws Exception {
+    public void handleConnectionsWithoutOriginInTheRequest() throws Exception {
         final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(take);
         final RsPrint response = new RsPrint(cors.act(new RqFake()));
         final String head = response.printHead();
-        this.httpStatusOk(head);
+        MatcherAssert.assertThat(
+            "Invalid HTTP status for a request without origin.",
+            head,
+            Matchers.containsString(Response.HTTP_STATUS_200)
+        );
     }
 
     /**
@@ -61,7 +66,7 @@ public final class TkCORSTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void withCorrectDomainOnOrigin() throws Exception {
+    public void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
         final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(
             take,
@@ -73,7 +78,11 @@ public final class TkCORSTest {
         final Request req = new RqWithHeaders(new RqFake(), headers);
         final RsPrint response = new RsPrint(cors.act(req));
         final String head = response.printHead();
-        this.httpStatusOk(head);
+        MatcherAssert.assertThat(
+            "Invalid HTTP status for a request with correct domain.",
+            head,
+            Matchers.containsString(Response.HTTP_STATUS_200)
+        );
     }
 
     /**
@@ -81,7 +90,8 @@ public final class TkCORSTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void withWrongDomainOnOrigin() throws Exception {
+    public void cantHandleConnectionsWithWrongDomainOnOrigin()
+        throws Exception {
         final Take take = new TkFake(new RsText());
         final Take cors = new TkCORS(
             take,
@@ -102,19 +112,6 @@ public final class TkCORSTest {
             "Wrong value on Access Control Allow Credentias param.",
             head,
             Matchers.containsString("Access-Control-Allow-Credentials: false")
-        );
-    }
-
-    /**
-     * Checks if the given head contains text that identify it with HTTP 200
-     * status.
-     * @param head HTTP response head.
-     */
-    private void httpStatusOk(final String head) {
-        MatcherAssert.assertThat(
-            "Invalid HTTP status.",
-            head,
-            Matchers.containsString("HTTP/1.1 200 OK")
         );
     }
 }

@@ -98,8 +98,10 @@ public final class TkCORS implements Take {
             || this.allowed.contains(domain))) {
             final Set<String> headers = new HashSet<String>();
             headers.add("Access-Control-Allow-Credentials: true");
-            // @checkstyle LineLengthCheck (1 line)
-            headers.add("Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD");
+            headers.add(
+                // @checkstyle LineLengthCheck (1 line)
+                "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD"
+            );
             headers.add(
                 String.format("Access-Control-Allow-Origin: %s", domain)
             );
