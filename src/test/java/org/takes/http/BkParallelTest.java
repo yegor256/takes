@@ -80,12 +80,16 @@ public final class BkParallelTest {
             }
         };
         new Thread(
+            // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {
                 @Override
                 public void run() {
                     try {
                         new FtBasic(
-                            new BkParallel(new BkBasic(take)),
+                            new BkParallel(
+                                new BkBasic(take),
+                                count
+                            ),
                             port
                         ).start(
                             new Exit() {

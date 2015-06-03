@@ -21,41 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
-
-import java.util.Collections;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
 
 /**
- * Request with extra header.
+ * Returns.
  *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.20
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqWithHeader extends RqWrap {
-
-    /**
-     * Ctor.
-     * @param req Original request
-     * @param name Header name
-     * @param value Header value
-     */
-    public RqWithHeader(final Request req, final CharSequence name,
-        final CharSequence value) {
-        this(req, String.format("%s: %s", name, value));
-    }
-
-    /**
-     * Ctor.
-     * @param req Original request
-     * @param header Header to add
-     */
-    public RqWithHeader(final Request req, final CharSequence header) {
-        super(new RqWithHeaders(req, Collections.singleton(header)));
-    }
-}
+package org.takes.facets.ret;

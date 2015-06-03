@@ -21,59 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.ret;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rs.RsEmpty;
+import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RsReturn}.
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.20
  */
-public final class RsTextTest {
+public final class RsReturnTest {
 
     /**
-     * RsText can build a plain text response.
+     * RsReturn can add cookies.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
-        MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
-    }
-
-    /**
-     * RsText can build a response with a status.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void makesTextResponseWithStatus() throws IOException {
+    public void addsCookieToResponse() throws IOException {
+        final String destination = "/return/to";
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsText(
-                    new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
-                    "something not found"
-                )
-            ).printHead(),
+                new RsReturn(new RsEmpty(), destination)
+            ).print(),
             Matchers.containsString(
-                Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
+                String.format(
+                    "Set-Cookie: RsReturn=%s;Path=/",
+                    URLEncoder.encode(
+                        destination,
+                        Charset.defaultCharset().name()
+                    )
+                )
             )
         );
     }
