@@ -38,7 +38,6 @@ import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -293,8 +292,6 @@ public final class RqMultipartTest {
      * @throws IOException if some problem inside
      */
     @Test
-    // see https://github.com/yegor256/takes/issues/253
-    @Ignore
     public void consumesHttpRequest() throws IOException {
         final Take take = new Take() {
             @Override
