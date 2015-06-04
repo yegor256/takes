@@ -74,14 +74,14 @@ public final class PsBasic implements Pass {
             }
         }
         if (auth.has() && this.entry.check(
-            auth.get().getUser(),
-            auth.get().getPass()
-        )) {
+            auth.get().username(),
+            auth.get().password()
+        ).has()) {
             final ConcurrentMap<String, String> props =
                 new ConcurrentHashMap<String, String>(0);
             identity = new Opt.Single<Identity>(
                 new Identity.Simple(
-                    String.format("urn:basic:%s", auth.get().getUser()),
+                    String.format("urn:basic:%s", auth.get().username()),
                     props
                 )
             );
@@ -129,9 +129,68 @@ public final class PsBasic implements Pass {
          * Check if is a valid user.
          * @param user User
          * @param pwd Password
-         * @return If valid it return <code>true</code>.
+         * @return Identity.
          */
-        boolean check(String user, String pwd);
+        Opt<Identity> check(String user, String pwd);
+    }
+
+    /**
+     * Entry with fixed credentials.
+     *
+     * @author Endrigo Antonini (teamed@endrigo.com.br)
+     * @version $Id$
+     * @since 0.20
+     *
+     */
+    public static final class Fixed implements PsBasic.Entry {
+
+        /**
+         * Username.
+         */
+        private final transient String username;
+
+        /**
+         * Password.
+         */
+        private final transient String password;
+
+        /**
+         * Ctor.
+         * @param user Username.
+         * @param pwd Password.
+         */
+        public Fixed(final String user, final String pwd) {
+            this.username = user;
+            this.password = pwd;
+        }
+
+        @Override
+        public Opt<Identity> check(final String user, final String pwd) {
+            final Opt<Identity> identity;
+            if (this.username.equals(user) && this.password.equals(pwd)) {
+                identity = new Opt.Single<Identity>(
+                        new Identity.Simple(user)
+                );
+            } else {
+                identity = new Opt.Empty<Identity>();
+            }
+            return identity;
+        }
+    }
+
+    /**
+     * Empty check.
+     *
+     * @author Endrigo Antonini (teamed@endrigo.com.br)
+     * @version $Id$
+     * @since 0.20
+     */
+    public static final class Empty implements PsBasic.Entry {
+
+        @Override
+        public Opt<Identity> check(final String user, final String pwd) {
+            return new Opt.Empty<Identity>();
+        }
     }
 
     /**
@@ -146,12 +205,12 @@ public final class PsBasic implements Pass {
         /**
          * User.
          */
-        private final String user;
+        private final transient String user;
 
         /**
          * Password.
          */
-        private final String pass;
+        private final transient String pass;
 
         /**
          * Ctor.
@@ -168,7 +227,7 @@ public final class PsBasic implements Pass {
          * Return user.
          * @return User.
          */
-        public String getUser() {
+        public String username() {
             return this.user;
         }
 
@@ -176,7 +235,7 @@ public final class PsBasic implements Pass {
          * Return Password.
          * @return Password.
          */
-        public String getPass() {
+        public String password() {
             return this.pass;
         }
     }

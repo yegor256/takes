@@ -67,12 +67,7 @@ public final class PsBasicTest {
             this.generateAuthenticateHead(user, pass)
         );
         final Opt<Identity> identity = new PsBasic(
-            new PsBasic.Entry() {
-                @Override
-                public boolean check(final String username, final String pwd) {
-                    return user.equals(username) && pass.equals(pwd);
-                }
-            }
+            new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
@@ -99,12 +94,7 @@ public final class PsBasicTest {
             this.generateAuthenticateHead("username", "wrong")
         );
         final Opt<Identity> identity = new PsBasic(
-            new PsBasic.Entry() {
-                @Override
-                public boolean check(final String user, final String pwd) {
-                    return false;
-                }
-            }
+            new PsBasic.Empty()
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(false));
     }
@@ -134,12 +124,7 @@ public final class PsBasicTest {
             "X-Powered-By:Java/1.7"
         );
         final Opt<Identity> identity = new PsBasic(
-            new PsBasic.Entry() {
-                @Override
-                public boolean check(final String username, final String pwd) {
-                    return user.equals(username) && pass.equals(pwd);
-                }
-            }
+            new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
@@ -169,12 +154,7 @@ public final class PsBasicTest {
             "XYZX-Powered-By:Java/1.7"
         );
         final Opt<Identity> identity = new PsBasic(
-            new PsBasic.Entry() {
-                @Override
-                public boolean check(final String username, final String pwd) {
-                    return user.equals(username) && pass.equals(pwd);
-                }
-            }
+            new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(false));
     }
