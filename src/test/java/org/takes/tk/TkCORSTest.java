@@ -24,8 +24,6 @@
 package org.takes.tk;
 
 import java.net.HttpURLConnection;
-import java.util.Arrays;
-import java.util.HashSet;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -85,29 +83,26 @@ public final class TkCORSTest {
     @Test
     public void cantHandleConnectionsWithWrongDomainOnOrigin()
         throws Exception {
-        final String head = new RsPrint(
-            new TkCORS(
-                new TkFixed(new RsText()),
-                "http://www.teamed.io",
-                "http://sample.com"
-            ).act(
-                new RqWithHeaders(
-                    new RqFake(),
-                    new HashSet<String>(
-                        Arrays.asList("Origin: http://wrong.teamed.io")
+        MatcherAssert.assertThat(
+            "Wrong value on header.",
+            new RsPrint(
+                new TkCORS(
+                    new TkFixed(new RsText()),
+                    "http://www.teamed.io",
+                    "http://sample.com"
+                ).act(
+                    new RqWithHeaders(
+                        new RqFake(),
+                        "Origin: http://wrong.teamed.io"
                     )
                 )
+            ).printHead(),
+            Matchers.allOf(
+                Matchers.containsString("HTTP/1.1 403"),
+                Matchers.containsString(
+                    "Access-Control-Allow-Credentials: false"
+                )
             )
-        ).printHead();
-        MatcherAssert.assertThat(
-            "It was expected a 403 HTTP status.",
-            head,
-            Matchers.containsString("HTTP/1.1 403")
-        );
-        MatcherAssert.assertThat(
-            "Wrong value on Access Control Allow Credentias param.",
-            head,
-            Matchers.containsString("Access-Control-Allow-Credentials: false")
         );
     }
 }

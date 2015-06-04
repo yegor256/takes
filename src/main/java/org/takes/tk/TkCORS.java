@@ -33,6 +33,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
+import org.takes.rq.RqHeaders;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
 
@@ -52,11 +53,6 @@ import org.takes.rs.RsWithStatus;
  */
 @EqualsAndHashCode(of = { "origin" , "allowed" })
 public final class TkCORS implements Take {
-
-    /**
-     * Prefix of HTTP head Origin.
-     */
-    private static final String ORIGIN_PREFIX = "Origin:";
 
     /**
      * Original take.
@@ -79,17 +75,15 @@ public final class TkCORS implements Take {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Response act(final Request req) throws IOException {
-        Opt<String> domain = new Opt.Empty<String>();
+        Opt<String> domain;
         final Response response;
-        for (final String head : req.head()) {
-            if (head.startsWith(ORIGIN_PREFIX)) {
-                domain = new Opt.Single<String>(
-                    head.split(ORIGIN_PREFIX)[1].trim()
-                );
-                break;
-            }
+        try {
+            domain = new Opt.Single<String>(
+                new RqHeaders.Smart(new RqHeaders.Base(req)).single("origin")
+            );
+        } catch (final IOException exp) {
+            domain = new Opt.Empty<String>();
         }
         if (domain.has() && (
             this.allowed.isEmpty()
