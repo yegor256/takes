@@ -71,11 +71,7 @@ public final class TkCORSTest {
             ).act(
                 new RqWithHeaders(
                     new RqFake(),
-                    new HashSet<String>(
-                        Arrays.asList(
-                            "Origin: http://teamed.io"
-                        )
-                    )
+                    "Origin: http://teamed.io"
                 )
             ),
             new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))

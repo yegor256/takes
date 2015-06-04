@@ -26,7 +26,6 @@ package org.takes.tk;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
@@ -97,18 +96,12 @@ public final class TkCORS implements Take {
             || this.allowed.contains(domain.get()))) {
             response = new RsWithHeaders(
                 this.origin.act(req),
-                new HashSet<String>(
-                    Arrays.asList(
-                        new String[] {
-                            "Access-Control-Allow-Credentials: true",
-                            // @checkstyle LineLengthCheck (1 line)
-                            "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
-                            String.format(
-                                "Access-Control-Allow-Origin: %s",
-                                domain.get()
-                            ),
-                        }
-                    )
+                "Access-Control-Allow-Credentials: true",
+                // @checkstyle LineLengthCheck (1 line)
+                "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
+                String.format(
+                    "Access-Control-Allow-Origin: %s",
+                    domain.get()
                 )
             );
         } else if (domain.has()) {
@@ -116,9 +109,7 @@ public final class TkCORS implements Take {
                 new RsWithStatus(
                     HttpURLConnection.HTTP_FORBIDDEN
                 ),
-                Collections.singleton(
-                    "Access-Control-Allow-Credentials: false"
-                )
+                "Access-Control-Allow-Credentials: false"
             );
         } else {
             response = this.origin.act(req);
