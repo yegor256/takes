@@ -33,6 +33,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
 
@@ -75,46 +76,49 @@ public final class TkCORS implements Take {
      */
     public TkCORS(final Take take, final String... domains) {
         this.origin = take;
-        this.allowed = new HashSet<String>();
-        if (domains != null) {
-            this.allowed.addAll(Arrays.asList(domains));
-        }
+        this.allowed = new HashSet<String>(Arrays.asList(domains));
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Response act(final Request req) throws IOException {
-        boolean hasorigin = false;
+        Opt<String> domain = new Opt.Empty<String>();
         final Response response;
-        String domain = "";
         for (final String head : req.head()) {
             if (head.startsWith(ORIGIN_PREFIX)) {
-                hasorigin = true;
-                domain = head.split(ORIGIN_PREFIX)[1].trim();
+                domain = new Opt.Single<String>(
+                    head.split(ORIGIN_PREFIX)[1].trim()
+                );
                 break;
             }
         }
-        if (hasorigin && (
+        if (domain.has() && (
             this.allowed.isEmpty()
-            || this.allowed.contains(domain))) {
-            final Set<String> headers = new HashSet<String>();
-            headers.add("Access-Control-Allow-Credentials: true");
-            headers.add(
-                // @checkstyle LineLengthCheck (1 line)
-                "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD"
+            || this.allowed.contains(domain.get()))) {
+            response = new RsWithHeaders(
+                this.origin.act(req),
+                new HashSet<String>(
+                    Arrays.asList(
+                        new String[] {
+                            "Access-Control-Allow-Credentials: true",
+                            // @checkstyle LineLengthCheck (1 line)
+                            "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
+                            String.format(
+                                "Access-Control-Allow-Origin: %s",
+                                domain.get()
+                            ),
+                        }
+                    )
+                )
             );
-            headers.add(
-                String.format("Access-Control-Allow-Origin: %s", domain)
-            );
-            response = new RsWithHeaders(this.origin.act(req), headers);
-        } else if (hasorigin) {
-            final Set<String> headers = Collections.singleton(
-                "Access-Control-Allow-Credentials: false"
-            );
+        } else if (domain.has()) {
             response = new RsWithHeaders(
                 new RsWithStatus(
                     HttpURLConnection.HTTP_FORBIDDEN
                 ),
-                headers
+                Collections.singleton(
+                    "Access-Control-Allow-Credentials: false"
+                )
             );
         } else {
             response = this.origin.act(req);

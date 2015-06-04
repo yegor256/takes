@@ -23,14 +23,13 @@
  */
 package org.takes.tk;
 
+import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
+import org.takes.facets.hamcrest.HmRsStatus;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
@@ -50,14 +49,10 @@ public final class TkCORSTest {
      */
     @Test
     public void handleConnectionsWithoutOriginInTheRequest() throws Exception {
-        final Take take = new TkFake(new RsText());
-        final Take cors = new TkCORS(take);
-        final RsPrint response = new RsPrint(cors.act(new RqFake()));
-        final String head = response.printHead();
         MatcherAssert.assertThat(
             "Invalid HTTP status for a request without origin.",
-            head,
-            Matchers.containsString(Response.HTTP_STATUS_200)
+            new TkCORS(new TkFixed(new RsText())).act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
         );
     }
 
@@ -67,21 +62,23 @@ public final class TkCORSTest {
      */
     @Test
     public void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
-        final Take take = new TkFake(new RsText());
-        final Take cors = new TkCORS(
-            take,
-            "http://teamed.io",
-            "http://example.com"
-        );
-        final Set<String> headers = new HashSet<String>();
-        headers.add("Origin: http://teamed.io");
-        final Request req = new RqWithHeaders(new RqFake(), headers);
-        final RsPrint response = new RsPrint(cors.act(req));
-        final String head = response.printHead();
         MatcherAssert.assertThat(
             "Invalid HTTP status for a request with correct domain.",
-            head,
-            Matchers.containsString(Response.HTTP_STATUS_200)
+            new TkCORS(
+                new TkFixed(new RsText()),
+                "http://teamed.io",
+                "http://example.com"
+            ).act(
+                new RqWithHeaders(
+                    new RqFake(),
+                    new HashSet<String>(
+                        Arrays.asList(
+                            "Origin: http://teamed.io"
+                        )
+                    )
+                )
+            ),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
         );
     }
 
@@ -92,17 +89,20 @@ public final class TkCORSTest {
     @Test
     public void cantHandleConnectionsWithWrongDomainOnOrigin()
         throws Exception {
-        final Take take = new TkFake(new RsText());
-        final Take cors = new TkCORS(
-            take,
-            "http://www.teamed.io",
-            "http://sample.com"
-        );
-        final Set<String> headers = new HashSet<String>();
-        headers.add("Origin: http://wrong.teamed.io");
-        final Request req = new RqWithHeaders(new RqFake(), headers);
-        final RsPrint response = new RsPrint(cors.act(req));
-        final String head = response.printHead();
+        final String head = new RsPrint(
+            new TkCORS(
+                new TkFixed(new RsText()),
+                "http://www.teamed.io",
+                "http://sample.com"
+            ).act(
+                new RqWithHeaders(
+                    new RqFake(),
+                    new HashSet<String>(
+                        Arrays.asList("Origin: http://wrong.teamed.io")
+                    )
+                )
+            )
+        ).printHead();
         MatcherAssert.assertThat(
             "It was expected a 403 HTTP status.",
             head,

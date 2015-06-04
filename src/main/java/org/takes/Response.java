@@ -56,12 +56,6 @@ import java.io.InputStream;
 public interface Response {
 
     /**
-     * Http status 200.
-     * <p><code>HTTP/1.1 200 OK</code></p>
-     */
-    String HTTP_STATUS_200 = "HTTP/1.1 200 OK";
-
-    /**
      * HTTP response head.
      * @return Lines in HTTP response head
      * @throws IOException If something goes wrong
