@@ -24,13 +24,12 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
+import org.takes.rq.RqHeaders;
 
 /**
  * Pass that checks the user according RFC-2617.
@@ -47,7 +46,7 @@ public final class PsBasic implements Pass {
     /**
      * Authorization response HTTP head.
      */
-    private static final String AUTH_HEAD = "Authorization: Basic";
+    private static final String AUTH_HEAD = "Basic";
 
     /**
      * Entry to validate user information.
@@ -63,28 +62,29 @@ public final class PsBasic implements Pass {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Opt<Identity> enter(final Request request) throws IOException {
-        Opt<BasicAuth> auth = new Opt.Empty<PsBasic.BasicAuth>();
         Opt<Identity> identity = new Opt.Empty<Identity>();
-        for (final String head : request.head()) {
-            if (head.startsWith(AUTH_HEAD)) {
-                auth = this.readAuthContentOnHead(head);
-                break;
-            }
-        }
-        if (auth.has() && this.entry.check(
-            auth.get().username(),
-            auth.get().password()
-        ).has()) {
-            final ConcurrentMap<String, String> props =
-                new ConcurrentHashMap<String, String>(0);
-            identity = new Opt.Single<Identity>(
-                new Identity.Simple(
-                    String.format("urn:basic:%s", auth.get().username()),
-                    props
+        try {
+            final String decoded = new String(
+                DatatypeConverter.parseBase64Binary(
+                    new RqHeaders.Smart(
+                        new RqHeaders.Base(request)
+                    ).single("authorization").split(AUTH_HEAD)[1]
                 )
-            );
+            ).trim();
+            final String user = decoded.split(":")[0];
+            if (this.entry.check(
+                user,
+                decoded.substring(user.length() + 1)
+            ).has()) {
+                identity = new Opt.Single<Identity>(
+                    new Identity.Simple(
+                        String.format("urn:basic:%s", user)
+                    )
+                );
+            }
+        } catch (final IOException ex) {
+            identity = new Opt.Empty<Identity>();
         }
         return identity;
     }
@@ -93,26 +93,6 @@ public final class PsBasic implements Pass {
     public Response exit(final Response response, final Identity identity)
         throws IOException {
         return response;
-    }
-
-    /**
-     * Read authentication content that is received on the head.
-     * @param head Head
-     * @return BasicAuth instance.
-     */
-    private Opt<BasicAuth> readAuthContentOnHead(final String head) {
-        final String authorization = new String(
-            DatatypeConverter.parseBase64Binary(
-                head.split(AUTH_HEAD)[1].trim()
-            )
-        );
-        final String user = authorization.split(":")[0];
-        return new Opt.Single<PsBasic.BasicAuth>(
-            new BasicAuth(
-                user,
-                authorization.substring(user.length() + 1)
-            )
-        );
     }
 
     /**
@@ -190,53 +170,6 @@ public final class PsBasic implements Pass {
         @Override
         public Opt<Identity> check(final String user, final String pwd) {
             return new Opt.Empty<Identity>();
-        }
-    }
-
-    /**
-     * Used to transfer authentication information.
-     *
-     * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
-     * @since 0.20
-     */
-    private final class BasicAuth {
-
-        /**
-         * User.
-         */
-        private final transient String user;
-
-        /**
-         * Password.
-         */
-        private final transient String pass;
-
-        /**
-         * Ctor.
-         * @param username User
-         * @param password Password
-         */
-        public BasicAuth(final String username, final String password) {
-            super();
-            this.user = username;
-            this.pass = password;
-        }
-
-        /**
-         * Return user.
-         * @return User.
-         */
-        public String username() {
-            return this.user;
-        }
-
-        /**
-         * Return Password.
-         * @return Password.
-         */
-        public String password() {
-            return this.pass;
         }
     }
 }
