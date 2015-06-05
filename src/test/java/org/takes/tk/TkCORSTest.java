@@ -48,9 +48,13 @@ public final class TkCORSTest {
     @Test
     public void handleConnectionsWithoutOriginInTheRequest() throws Exception {
         MatcherAssert.assertThat(
-            "Invalid HTTP status for a request without origin.",
-            new TkCORS(new TkFixed(new RsText())).act(new RqFake()),
-            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+            "It was expected to receive a 403 error.",
+            new TkCORS(
+                new TkFixed(new RsText()),
+                "http://www.netbout.io",
+                "http://www.example.com"
+            ).act(new RqFake()),
+            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_FORBIDDEN))
         );
     }
 

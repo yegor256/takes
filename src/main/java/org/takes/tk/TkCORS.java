@@ -32,7 +32,6 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
@@ -76,18 +75,16 @@ public final class TkCORS implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        Opt<String> domain;
+        String domain;
         final Response response;
         try {
-            domain = new Opt.Single<String>(
-                new RqHeaders.Smart(new RqHeaders.Base(req)).single("origin")
-            );
+            domain = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("origin");
         } catch (final IOException exp) {
-            domain = new Opt.Empty<String>();
+            domain = "";
         }
-        if (domain.has() && (
-            this.allowed.isEmpty()
-            || this.allowed.contains(domain.get()))) {
+        if (this.allowed.contains(domain)) {
             response = new RsWithHeaders(
                 this.origin.act(req),
                 "Access-Control-Allow-Credentials: true",
@@ -95,18 +92,16 @@ public final class TkCORS implements Take {
                 "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
                 String.format(
                     "Access-Control-Allow-Origin: %s",
-                    domain.get()
+                    domain
                 )
             );
-        } else if (domain.has()) {
+        } else {
             response = new RsWithHeaders(
                 new RsWithStatus(
                     HttpURLConnection.HTTP_FORBIDDEN
                 ),
                 "Access-Control-Allow-Credentials: false"
             );
-        } else {
-            response = this.origin.act(req);
         }
         return response;
     }
