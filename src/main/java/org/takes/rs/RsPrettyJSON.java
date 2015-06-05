@@ -117,12 +117,15 @@ public final class RsPrettyJSON implements Response {
         final JsonWriter writer = factory.createWriter(result);
         try {
             final JsonObject obj = reader.readObject();
-            writer.writeObject(obj);
+            try {
+                writer.writeObject(obj);
+            } finally {
+                writer.close();
+            }
         } catch (final JsonException ex) {
             throw new IOException(ex);
         } finally {
             reader.close();
-            writer.close();
         }
         return result.toByteArray();
     }
