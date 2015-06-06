@@ -34,7 +34,7 @@ import java.io.InputStream;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.16
+ * @since 0.21
  */
 final class TempInputStream extends InputStream {
 
