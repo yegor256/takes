@@ -149,6 +149,16 @@ public final class AppTest {
 }
 ```
 
+You can create a fake request with form parameters like this:
+
+```java
+new RqForm.Fake(
+  new RqFake(),
+  "foo", "value-1",
+  "bar", "value-2"
+)
+```
+
 ## Integration Testing
 
 Here is how you can test the entire server via HTTP, using JUnit and

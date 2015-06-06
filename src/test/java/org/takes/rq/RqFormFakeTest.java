@@ -39,6 +39,7 @@ public class RqFormFakeTest {
      * @checkstyle MultipleStringLiteralsCheck (20 lines)
      */
     @Test
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public final void createsFakeWithParams() {
         final RqForm req = new RqForm.Fake(
             new RqFake(),
