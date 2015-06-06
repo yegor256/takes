@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -165,7 +166,6 @@ public interface RqForm extends Request {
      * Smart decorator, with extra features.
      *
      * <p>The class is immutable and thread-safe.
-     *
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
@@ -231,6 +231,55 @@ public interface RqForm extends Request {
                 value = def;
             }
             return value;
+        }
+    }
+
+    /**
+     * Fake RqForm accepting parameters in the constructor.
+     * @author Matteo Barbieri (barbieri.matteo@gmail.com)
+     */
+    @EqualsAndHashCode(callSuper = true, of = "map")
+    final class Fake extends RqWrap implements RqForm {
+
+        /**
+         * Map of params and values.
+         */
+        private final transient ConcurrentMap<String, List<String>> map;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         * @param params Parameters list
+         */
+        public Fake(final Request req, final String... params) {
+            super(req);
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException(
+                    "Wrong number of parameters"
+                );
+            }
+            this.map = new ConcurrentHashMap<String, List<String>>(0);
+            for (int idx = 0; idx < params.length; idx += 2) {
+                final String key = params[idx];
+                final String value = params[idx + 1];
+                if (this.map.containsKey(key)) {
+                    this.map.get(key).add(value);
+                } else {
+                    final List<String> values = new ArrayList<String>(1);
+                    values.add(value);
+                    this.map.put(key, values);
+                }
+            }
+        }
+
+        @Override
+        public Iterable<String> param(final CharSequence name) {
+            return this.map.get(name);
+        }
+
+        @Override
+        public Iterable<String> names() {
+            return this.map.keySet();
         }
     }
 }
