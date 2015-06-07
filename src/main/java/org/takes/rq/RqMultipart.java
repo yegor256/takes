@@ -237,8 +237,7 @@ public interface RqMultipart extends Request {
             );
             file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
-                file,
-                "rw"
+                file, "rw"
             ).getChannel();
             try {
                 channel.write(
@@ -257,7 +256,6 @@ public interface RqMultipart extends Request {
                 )
             );
         }
-
         /**
          * Copy until boundary reached.
          * @param target Output file channel
@@ -387,7 +385,6 @@ public interface RqMultipart extends Request {
      * @since 0.16
      */
     final class Fake implements RqMultipart {
-
         /**
          * Fake boundary constant.
          */
@@ -400,7 +397,6 @@ public interface RqMultipart extends Request {
          * Fake multipart request.
          */
         private final RqMultipart fake;
-
         /**
          * Fake ctor.
          * @param req Fake request header holder
@@ -419,7 +415,7 @@ public interface RqMultipart extends Request {
                             "Content-Type",
                             String.format(
                                 "multipart/form-data; boundary=%s",
-                                BOUNDARY
+                                RqMultipart.Fake.BOUNDARY
                             )
                         ).head();
                     }
