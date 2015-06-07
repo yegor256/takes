@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -165,7 +166,7 @@ public interface RqForm extends Request {
     /**
      * Smart decorator, with extra features.
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
@@ -265,9 +266,12 @@ public interface RqForm extends Request {
                 if (this.map.containsKey(key)) {
                     this.map.get(key).add(value);
                 } else {
-                    final List<String> values = new ArrayList<String>(1);
-                    values.add(value);
-                    this.map.put(key, values);
+                    this.map.put(
+                        key,
+                        new ArrayList<String>(
+                            Arrays.asList(value)
+                        )
+                    );
                 }
             }
         }
