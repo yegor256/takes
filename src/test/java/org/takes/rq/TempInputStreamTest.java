@@ -35,15 +35,14 @@ import org.junit.Test;
 
 /**
  * Test case for {@link TempInputStream}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yohann Ferreira (yohann.ferreira@orange.fr)
  * @version $Id$
  * @since 0.21
  */
 public final class TempInputStreamTest {
 
     /**
-     * TempInputStream can delete the temporary cache file
-     * when it calls close().
+     * TempInputStream can delete the temporary cache file when closed.
      * @throws IOException if some problem occurs.
      */
     @Test
