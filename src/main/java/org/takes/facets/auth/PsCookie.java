@@ -45,7 +45,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "codec", "cookie" })
+@EqualsAndHashCode(of = { "codec", "cookie", "age" })
 public final class PsCookie implements Pass {
 
     /**

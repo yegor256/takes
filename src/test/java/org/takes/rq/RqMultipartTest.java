@@ -76,11 +76,11 @@ public final class RqMultipartTest {
             new RqFake(),
             new RqWithHeader(
                 new RqFake("", "", "449 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; name=\"t-1\""
+                RqMultipartTest.DISPOSITION, "form-data; name=\"t-1\""
             ),
             new RqWithHeader(
                 new RqFake("", "", ""),
-                DISPOSITION,
+                RqMultipartTest.DISPOSITION,
                 "form-data; name=\"data\"; filename=\"a.bin\""
             )
         );
@@ -126,7 +126,7 @@ public final class RqMultipartTest {
         new RqMultipart.Fake(
             new RqWithHeader(
                 new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; fake=\"t-3\""
+                RqMultipartTest.DISPOSITION, "form-data; fake=\"t-3\""
             )
         );
     }
@@ -343,7 +343,6 @@ public final class RqMultipartTest {
      */
     @Test(timeout = 10000)
     public void handlesRequestInTime() throws IOException {
-        final int length = 100000000;
         final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
         bwr.write(
@@ -354,8 +353,9 @@ public final class RqMultipartTest {
                 ""
             )
         );
-        for (int ind = 0; ind < length; ++ind) {
-            bwr.write("X");
+        final int length = 100000000;
+        for (int idx = 0; idx < length; ++idx) {
+            bwr.write('X');
         }
         bwr.write(RqMultipartTest.CRLF);
         bwr.write("--zzz--");
