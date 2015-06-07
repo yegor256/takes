@@ -355,7 +355,7 @@ public final class RqMultipartTest {
         );
         final int length = 100000000;
         for (int idx = 0; idx < length; ++idx) {
-            bwr.write('X');
+            bwr.write(idx % 0xff);
         }
         bwr.write(RqMultipartTest.CRLF);
         bwr.write("--zzz--");
