@@ -28,7 +28,6 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -40,6 +39,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
@@ -116,7 +116,7 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Iterator<Identity> enter(final Request request)
+    public Opt<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -126,9 +126,7 @@ public final class PsGoogle implements Pass {
                 "code is not provided by Google, probably some mistake"
             );
         }
-        return Collections.singleton(
-            this.fetch(this.token(code.next()))
-        ).iterator();
+        return new Opt.Single<Identity>(this.fetch(this.token(code.next())));
     }
 
     @Override

@@ -80,7 +80,7 @@ public final class TkFallback extends TkWrap {
             );
         } catch (final HttpException ex) {
             res = TkFallback.wrap(
-                fbk.route(new RqFallback.Fake(req, ex.code(), ex)).next(),
+                fbk.route(new RqFallback.Fake(req, ex.code(), ex)).get(),
                 fbk, req
             );
         } catch (final Throwable ex) {
@@ -89,7 +89,7 @@ public final class TkFallback extends TkWrap {
                     new RqFallback.Fake(
                         req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
                     )
-                ).next(),
+                ).get(),
                 fbk, req
             );
         }
@@ -115,13 +115,13 @@ public final class TkFallback extends TkWrap {
                 } catch (final HttpException ex) {
                     head = fbk.route(
                         new RqFallback.Fake(req, ex.code(), ex)
-                    ).next().head();
+                    ).get().head();
                 } catch (final Throwable ex) {
                     head = fbk.route(
                         new RqFallback.Fake(
                             req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
                         )
-                    ).next().head();
+                    ).get().head();
                 }
                 return head;
             }
@@ -133,13 +133,13 @@ public final class TkFallback extends TkWrap {
                 } catch (final HttpException ex) {
                     body = fbk.route(
                         new RqFallback.Fake(req, ex.code(), ex)
-                    ).next().body();
+                    ).get().body();
                 } catch (final Throwable ex) {
                     body = fbk.route(
                         new RqFallback.Fake(
                             req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
                         )
-                    ).next().body();
+                    ).get().body();
                 }
                 return body;
             }

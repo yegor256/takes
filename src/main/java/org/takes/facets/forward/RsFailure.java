@@ -21,35 +21,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
+package org.takes.facets.forward;
 
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.facets.flash.RsFlash;
 
 /**
- * Empty fallback.
+ * Failure (combination of {@link org.takes.facets.forward.RsForward}
+ * and {@link org.takes.facets.flash.RsFlash}).
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.13
+ * @since 0.18
  */
 @EqualsAndHashCode(callSuper = true)
-public final class FbEmpty extends FbWrap {
+public class RsFailure extends RsForward {
+
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = 396488574468386488L;
 
     /**
      * Ctor.
+     * @param cause Cause
+     * @throws UnsupportedEncodingException If fails
      */
-    public FbEmpty() {
+    public RsFailure(final Throwable cause)
+        throws UnsupportedEncodingException {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<Response>();
-                }
-            }
+            new RsFlash(cause),
+            HttpURLConnection.HTTP_MOVED_PERM
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param cause Cause
+     * @throws UnsupportedEncodingException If fails
+     */
+    public RsFailure(final String cause)
+        throws UnsupportedEncodingException {
+        super(
+            new RsFlash(cause),
+            HttpURLConnection.HTTP_MOVED_PERM
         );
     }
 

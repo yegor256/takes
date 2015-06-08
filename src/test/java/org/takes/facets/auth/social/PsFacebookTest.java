@@ -27,14 +27,15 @@ import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
 import java.net.HttpURLConnection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
+import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 
 /**
@@ -78,7 +79,7 @@ public class PsFacebookTest {
             RandomStringUtils.random(10),
             RandomStringUtils.random(10)
         );
-        final Iterator<Identity> identity = pass.enter(
+        final Opt<Identity> identity = pass.enter(
             new RqFake(
                 "GET",
                 String.format(
@@ -87,8 +88,9 @@ public class PsFacebookTest {
                 )
             )
         );
+        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
-            identity.next().urn(),
+            identity.get().urn(),
             CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );
     }

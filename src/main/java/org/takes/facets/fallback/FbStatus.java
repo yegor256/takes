@@ -24,14 +24,14 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Condition;
+import org.takes.misc.Opt;
+import org.takes.rs.RsWithBody;
+import org.takes.rs.RsWithStatus;
+import org.takes.rs.RsWithType;
 import org.takes.tk.TkFixed;
 
 /**
@@ -40,12 +40,52 @@ import org.takes.tk.TkFixed;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
-
+    /**
+     * Ctor.
+     * @param code HTTP status code
+     * @since 0.16.10
+     */
+    public FbStatus(final int code) {
+        this(new Condition<Integer>() {
+            @Override
+            public boolean fits(final Integer status) {
+                return code == status.intValue();
+            }
+        });
+    }
+    /**
+     * Ctor.
+     * @param check HTTP status code predicate
+     * @since 0.16.10
+     */
+    public FbStatus(final Condition<Integer> check) {
+        this(check, new Fallback() {
+            @Override
+            public Opt<Response> route(final RqFallback req)
+                throws IOException {
+                final Response res = new RsWithStatus(req.code());
+                return new Opt.Single<Response>(
+                    new RsWithType(
+                        new RsWithBody(
+                            res,
+                            String.format(
+                                "%s: %s",
+                                res.head().iterator().next().split("\\s", 2)[1],
+                                req.throwable().getLocalizedMessage()
+                            )
+                        ),
+                        "text/plain"
+                    )
+                );
+            }
+        });
+    }
     /**
      * Ctor.
      * @param code HTTP status code
@@ -66,9 +106,9 @@ public final class FbStatus extends FbWrap {
             code,
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    return Collections.singleton(take.act(req)).iterator();
+                    return new Opt.Single<Response>(take.act(req));
                 }
             }
         );
@@ -96,20 +136,18 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
+    @SuppressWarnings("PMD.CallSuperInConstructor")
     public FbStatus(final Condition<Integer> check, final Fallback fallback) {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    final Collection<Response> rsp = new ArrayList<Response>(1);
+                    Opt<Response> rsp = new Opt.Empty<Response>();
                     if (check.fits(req.code())) {
-                        final Iterator<Response> iter = fallback.route(req);
-                        if (iter.hasNext()) {
-                            rsp.add(iter.next());
-                        }
+                        rsp = fallback.route(req);
                     }
-                    return rsp.iterator();
+                    return rsp;
                 }
             }
         );

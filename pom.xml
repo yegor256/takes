@@ -88,6 +88,12 @@
         <saxon.version>9.1.0.8</saxon.version>
     </properties>
     <dependencies>
+        <!--
+        Pay attention that we are NOT allowed to use ANY third-party
+        dependencies here, unless they are in PROVIDED, TEST of RUNTIME
+        scope. The project must be self-sufficient and work in a single
+        JAR dependency.
+        -->
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>

@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -176,6 +177,7 @@ public interface RqMultipart extends Request {
             final Request req) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
+            // @checkstyle MultipleStringLiteralsCheck (1 line)
             ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
@@ -235,13 +237,13 @@ public interface RqMultipart extends Request {
             );
             file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
-                file,
-                "rw"
+                file, "rw"
             ).getChannel();
             try {
                 channel.write(
                     ByteBuffer.wrap(this.head().iterator().next().getBytes())
                 );
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(ByteBuffer.wrap("\r\n".getBytes()));
                 this.copy(channel, boundary);
             } finally {
@@ -254,12 +256,12 @@ public interface RqMultipart extends Request {
                 )
             );
         }
-
         /**
          * Copy until boundary reached.
          * @param target Output file channel
          * @param boundary Boundary
          * @throws IOException If fails
+         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
             final byte[] boundary) throws IOException {
@@ -268,6 +270,10 @@ public interface RqMultipart extends Request {
             while (cont) {
                 if (!this.buffer.hasRemaining()) {
                     this.buffer.clear();
+                    for (int idx = 0; idx < match; ++idx) {
+                        this.buffer.put(boundary[idx]);
+                    }
+                    match = 0;
                     if (this.body.read(this.buffer) == -1) {
                         break;
                     }
@@ -306,6 +312,7 @@ public interface RqMultipart extends Request {
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 ).single("Content-Disposition");
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
@@ -375,6 +382,102 @@ public interface RqMultipart extends Request {
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
+        }
+    }
+
+    /**
+     * Fake decorator.
+     * @since 0.16
+     */
+    final class Fake implements RqMultipart {
+        /**
+         * Fake boundary constant.
+         */
+        private static final String BOUNDARY = "AaB02x";
+        /**
+         * Carriage return constant.
+         */
+        private static final String CRLF = "\r\n";
+        /**
+         * Fake multipart request.
+         */
+        private final RqMultipart fake;
+        /**
+         * Fake ctor.
+         * @param req Fake request header holder
+         * @param dispositions Fake request body parts
+         * @throws IOException If fails
+         */
+        public Fake(final Request req, final Request... dispositions)
+            throws IOException {
+            this.fake = new RqMultipart.Base(
+                new Request() {
+                    @Override
+                    public Iterable<String> head() throws IOException {
+                        return new RqWithHeader(
+                            req,
+                            // @checkstyle MultipleStringLiteralsCheck (1 line)
+                            "Content-Type",
+                            String.format(
+                                "multipart/form-data; boundary=%s",
+                                RqMultipart.Fake.BOUNDARY
+                            )
+                        ).head();
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        return RqMultipart.Fake.fakeBody(dispositions);
+                    }
+                }
+            );
+        }
+        @Override
+        public Iterable<Request> part(final CharSequence name) {
+            return this.fake.part(name);
+        }
+        @Override
+        public Iterable<String> names() {
+            return this.fake.names();
+        }
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.fake.head();
+        }
+        @Override
+        public InputStream body() throws IOException {
+            return this.fake.body();
+        }
+        /**
+         * Fake body creator.
+         * @param dispositions Fake request body parts
+         * @return InputStream of given dispositions
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
+        private static InputStream fakeBody(final Request... dispositions)
+            throws IOException {
+            final StringBuilder builder = new StringBuilder();
+            for (final Request each : dispositions) {
+                builder.append(String.format("--%s", BOUNDARY))
+                    .append(CRLF)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    .append("Content-Disposition: ")
+                    .append(
+                        new RqHeaders.Smart(
+                            new RqHeaders.Base(each)
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        ).single("Content-Disposition")
+                    ).append(CRLF);
+                final String body = new RqPrint(each).printBody();
+                if (!(CRLF.equals(body) || "".equals(body))) {
+                    builder.append(CRLF).append(body).append(CRLF);
+                }
+            }
+            builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
+                .append(String.format("--%s--", BOUNDARY));
+            return new ByteArrayInputStream(
+                builder.toString().getBytes()
+            );
         }
     }
 

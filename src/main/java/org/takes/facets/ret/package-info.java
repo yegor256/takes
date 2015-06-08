@@ -21,36 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
-
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.misc.Opt;
 
 /**
- * Empty fallback.
+ * Returns.
  *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.13
+ * @since 0.20
  */
-@EqualsAndHashCode(callSuper = true)
-public final class FbEmpty extends FbWrap {
-
-    /**
-     * Ctor.
-     */
-    public FbEmpty() {
-        super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<Response>();
-                }
-            }
-        );
-    }
-
-}
+package org.takes.facets.ret;

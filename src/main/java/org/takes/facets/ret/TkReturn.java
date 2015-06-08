@@ -21,27 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.facets.ret;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
-import org.takes.rq.RqWithoutHeader;
+import org.takes.rq.RqCookies;
+import org.takes.rs.RsRedirect;
+import org.takes.rs.RsWithCookie;
 
 /**
- * Authenticating take.
+ * Take that understands Return cookie. If Return cookie
+ * is set, sends redirect response to stored location.
+ * Otherwise delegates to original Take.
  *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.20
  */
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
-public final class TkAuth implements Take {
+@EqualsAndHashCode(of = { "origin", "cookie" })
+public final class TkReturn implements Take {
 
     /**
      * Original take.
@@ -49,62 +53,47 @@ public final class TkAuth implements Take {
     private final transient Take origin;
 
     /**
-     * Pass.
+     * Cookie name.
      */
-    private final transient Pass pass;
-
-    /**
-     * Header to set in case of authentication.
-     */
-    private final transient String header;
+    private final transient String cookie;
 
     /**
      * Ctor.
-     * @param take Original
-     * @param pss Pass
+     * @param take Original take
      */
-    public TkAuth(final Take take, final Pass pss) {
-        this(take, pss, TkAuth.class.getSimpleName());
+    public TkReturn(final Take take) {
+        this(take, RsReturn.class.getSimpleName());
     }
 
     /**
      * Ctor.
-     * @param take Original
-     * @param pss Pass
-     * @param hdr Header to set
+     * @param take Original take
+     * @param name Cookie name
      */
-    public TkAuth(final Take take, final Pass pss, final String hdr) {
+    public TkReturn(final Take take, final String name) {
         this.origin = take;
-        this.pass = pss;
-        this.header = hdr;
+        this.cookie = name;
     }
 
     @Override
     public Response act(final Request request) throws IOException {
-        final Opt<Identity> user = this.pass.enter(request);
+        final RqCookies cookies = new RqCookies.Base(request);
+        final Iterator<String> values = cookies.cookie(this.cookie).iterator();
         final Response response;
-        if (user.has()) {
-            response = this.act(request, user.get());
+        if (values.hasNext()) {
+            response = new RsWithCookie(
+                new RsRedirect(
+                    URLDecoder.decode(
+                        values.next(),
+                        Charset.defaultCharset().name()
+                    )
+                ),
+                this.cookie,
+                ""
+            );
         } else {
             response = this.origin.act(request);
         }
         return response;
     }
-
-    /**
-     * Make take.
-     * @param req Request
-     * @param identity Identity
-     * @return Take
-     * @throws IOException If fails
-     */
-    private Response act(final Request req, final Identity identity)
-        throws IOException {
-        Request wrap = new RqWithoutHeader(req, this.header);
-        if (!identity.equals(Identity.ANONYMOUS)) {
-            wrap = new RqWithAuth(identity, this.header, wrap);
-        }
-        return this.pass.exit(this.origin.act(wrap), identity);
-    }
-
 }

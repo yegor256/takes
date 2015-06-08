@@ -84,7 +84,7 @@ public final class PsTwitterTest {
         );
         final Identity identity = pass.enter(
             new RqFake("GET", "")
-        ).next();
+        ).get();
         MatcherAssert.assertThat(
             identity.urn(),
             CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))

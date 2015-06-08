@@ -21,36 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
+package org.takes.facets.ret;
 
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.misc.Opt;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rs.RsEmpty;
+import org.takes.rs.RsPrint;
 
 /**
- * Empty fallback.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link RsReturn}.
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.13
+ * @since 0.20
  */
-@EqualsAndHashCode(callSuper = true)
-public final class FbEmpty extends FbWrap {
+public final class RsReturnTest {
 
     /**
-     * Ctor.
+     * RsReturn can add cookies.
+     * @throws IOException If some problem inside
      */
-    public FbEmpty() {
-        super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<Response>();
-                }
-            }
+    @Test
+    public void addsCookieToResponse() throws IOException {
+        final String destination = "/return/to";
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsReturn(new RsEmpty(), destination)
+            ).print(),
+            Matchers.containsString(
+                String.format(
+                    "Set-Cookie: RsReturn=%s;Path=/",
+                    URLEncoder.encode(
+                        destination,
+                        Charset.defaultCharset().name()
+                    )
+                )
+            )
         );
     }
-
 }

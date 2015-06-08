@@ -49,8 +49,19 @@ public final class RsWithType extends RsWrap {
      * @param type Content type
      */
     public RsWithType(final Response res, final CharSequence type) {
-        super(
-            new RsWithHeader(new RsWithoutHeader(res, HEADER), HEADER, type)
+        super(RsWithType.make(res, type));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param type Content type
+     * @return Response
+     */
+    private static Response make(final Response res, final CharSequence type) {
+        return new RsWithHeader(
+            new RsWithoutHeader(res, RsWithType.HEADER),
+            RsWithType.HEADER, type
         );
     }
 }

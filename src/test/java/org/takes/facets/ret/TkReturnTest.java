@@ -21,59 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.ret;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Take;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link RsText}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link TkReturn}.
+ * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.20
  */
-public final class RsTextTest {
+public final class TkReturnTest {
 
     /**
-     * RsText can build a plain text response.
+     * TkReturn can redirect to return location
+     * and remove a return cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void redirectsAndRemovesCookie() throws IOException {
+        final Take take = new TkReturn(new TkEmpty());
+        final String destination = "/return/to";
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
+            take.act(
+                new RqWithHeader(
+                    new RqFake(),
+                    String.format(
+                        "Cookie: RsReturn=%s",
+                        URLEncoder.encode(
+                            destination,
+                            Charset.defaultCharset().name()
+                        )
+                    )
                 )
-            )
-        );
-    }
-
-    /**
-     * RsText can build a response with a status.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void makesTextResponseWithStatus() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new RsText(
-                    new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
-                    "something not found"
-                )
-            ).printHead(),
-            Matchers.containsString(
-                Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
+            ).head(),
+            Matchers.contains(
+                "HTTP/1.1 303 See Other",
+                String.format("Location: %s", destination),
+                "Set-Cookie: RsReturn="
             )
         );
     }

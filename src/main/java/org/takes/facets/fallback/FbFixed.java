@@ -24,11 +24,10 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.tk.TkFixed;
 
 /**
@@ -60,9 +59,9 @@ public final class FbFixed extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Iterator<Response> route(final RqFallback req)
+                public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    return Collections.singleton(take.act(req)).iterator();
+                    return new Opt.Single<Response>(take.act(req));
                 }
             }
         );

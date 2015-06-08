@@ -136,7 +136,7 @@ public final class PsLinkedinTest {
                         lkey
                     ).enter(
                         new RqFake("GET", String.format("?code=%s", code))
-                    ).next();
+                    ).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
                         CoreMatchers.equalTo(
