@@ -56,6 +56,11 @@ public class Transform<T, K> implements Iterable<K> {
     }
 
     @Override
+    public final String toString() {
+        return String.format("%s [via %s]", this.list, this.action);
+    }
+
+    @Override
     public final Iterator<K> iterator() {
         return new TransformIterator<T, K>(this.list.iterator(), this.action);
     }

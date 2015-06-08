@@ -59,6 +59,11 @@ public final class Select<T> implements Iterable<T> {
     }
 
     @Override
+    public String toString() {
+        return String.format("%s [if %s]", this.list, this.condition);
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return new SelectIterator<T>(
             this.list.iterator(),

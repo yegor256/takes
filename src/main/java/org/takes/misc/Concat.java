@@ -56,6 +56,11 @@ public final class Concat<T> implements Iterable<T> {
     }
 
     @Override
+    public String toString() {
+        return String.format("%s, %s", this.left, this.right);
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return new Concat.ConcatIterator<T>(
             this.left.iterator(),

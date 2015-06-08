@@ -48,6 +48,7 @@ import org.takes.misc.Select;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithStatus extends RsWrap {
+
     /**
      * Statuses and their reasons.
      */

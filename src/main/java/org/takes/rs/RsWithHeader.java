@@ -57,6 +57,7 @@ import org.takes.misc.Concat;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithHeader extends RsWrap {
+
     /**
      * Pattern for all other lines in the head.
      */
@@ -111,7 +112,7 @@ public final class RsWithHeader extends RsWrap {
                     return res.body();
                 }
             }
-          );
+        );
     }
 
     /**
@@ -119,10 +120,9 @@ public final class RsWithHeader extends RsWrap {
      * @param head Original head
      * @param header Value witch will be added to head
      * @return Head with additional header
-     * @throws IOException If fails
      */
     private static Iterable<String> extend(final Iterable<String> head,
-        final String header) throws IOException {
+        final String header) {
         if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
                 String.format(
