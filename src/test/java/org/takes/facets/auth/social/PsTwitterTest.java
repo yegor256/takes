@@ -49,14 +49,14 @@ import org.takes.rq.RqFake;
 public final class PsTwitterTest {
 
     /**
-     * Twitter authorization process.
+     * PsTwitter can login.
      * @throws IOException If error occurs in the process
      */
     @Test
-    public void canLogin() throws IOException {
+    public void logsIn() throws IOException {
         final int tid = RandomUtils.nextInt(1000);
-        final String name = this.randomAlphanumeric();
-        final String picture = this.randomAlphanumeric();
+        final String name = RandomStringUtils.randomAlphanumeric(10);
+        final String picture = RandomStringUtils.randomAlphanumeric(10);
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
@@ -64,7 +64,7 @@ public final class PsTwitterTest {
                 Collections.<Map.Entry<String, String>>emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
-                    this.randomAlphanumeric()
+                    RandomStringUtils.randomAlphanumeric(10)
                 ).getBytes()
             ),
             new FakeRequest(
@@ -79,8 +79,8 @@ public final class PsTwitterTest {
                     .toString()
                     .getBytes()
             ),
-            this.randomAlphanumeric(),
-            this.randomAlphanumeric()
+            RandomStringUtils.randomAlphanumeric(10),
+            RandomStringUtils.randomAlphanumeric(10)
         );
         final Identity identity = pass.enter(
             new RqFake("GET", "")
@@ -97,13 +97,5 @@ public final class PsTwitterTest {
             identity.properties().get("picture"),
             CoreMatchers.equalTo(picture)
         );
-    }
-
-    /**
-     * Return a random alphanumeric string.
-     * @return Random alphanumeric string
-     */
-    private String randomAlphanumeric() {
-        return RandomStringUtils.randomAlphanumeric(10);
     }
 }
