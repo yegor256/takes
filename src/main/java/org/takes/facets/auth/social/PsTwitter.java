@@ -71,36 +71,36 @@ public final class PsTwitter implements Pass {
     private final transient String key;
 
     /**
-     * Request for fetching app token.
+     * Request for fetching app trequest.
      */
     private final transient com.jcabi.http.Request trequest;
 
     /**
      * Request for verifying user credentials.
      */
-    private final transient com.jcabi.http.Request vcrequest;
+    private final transient com.jcabi.http.Request user;
 
     /**
      * Ctor.
-     * @param tapp Twitter app
-     * @param tkey Twitter key
+     * @param name Twitter app
+     * @param keys Twitter key
      */
-    public PsTwitter(final String tapp, final String tkey) {
+    public PsTwitter(final String name, final String keys) {
         this(
             new JdkRequest(
-                new Href("https://api.twitter.com/oauth2/token")
+                new Href("https://api.twitter.com/oauth2/trequest")
                     .with("grant_type", "client_credentials")
                     .toString()
             ),
-            new JdkRequest(VERIFY_URL),
-            tapp,
-            tkey
+            new JdkRequest(PsTwitter.VERIFY_URL),
+            name,
+            keys
         );
     }
 
     /**
      * Ctor with proper requestor for testing purposes.
-     * @param ttrequest HTTP request for getting token
+     * @param ttrequest HTTP request for getting trequest
      * @param tvcrequest HTTP request for verifying credentials
      * @param tapp Facebook app
      * @param tkey Facebook key
@@ -111,7 +111,7 @@ public final class PsTwitter implements Pass {
         final String tapp,
         final String tkey) {
         this.trequest = ttrequest;
-        this.vcrequest = tvcrequest;
+        this.user = tvcrequest;
         this.app = tapp;
         this.key = tkey;
     }
@@ -128,38 +128,51 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Get user name from Twitter, with the token provided.
-     * @param token Twitter access token
+     * Get user name from Twitter, with the trequest provided.
+     * @param token Twitter access trequest
      * @return The user found in Twitter
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final JsonObject response = this.vcrequest
-            .uri()
-            .set(
-                URI.create(
-                    new Href(VERIFY_URL)
-                        .with("access_token", token)
-                        .toString()
+        return parse(
+            this.user
+                .uri()
+                .set(
+                    URI.create(
+                        new Href(PsTwitter.VERIFY_URL)
+                            .with("access_token", token)
+                            .toString()
+                    )
                 )
-            )
-            .back()
-            .header("accept", "application/json")
-            .fetch().as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .as(JsonResponse.class).json().readObject();
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(response.size());
-        props.put("name", response.getString("name"));
-        props.put("picture", response.getString("profile_image_url"));
-        return new Identity.Simple(
-            String.format("urn:twitter:%d", response.getInt("id")), props
+                .back()
+                .header("accept", "application/json")
+                .fetch().as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .as(JsonResponse.class)
+                .json()
+                .readObject()
         );
     }
 
     /**
-     * Retrieve Twitter access token.
-     * @return The token
+     * Make identity from JSON object.
+     * @param json JSON received from Twitter
+     * @return Identity found
+    */
+    private static Identity parse(final JsonObject json) {
+        final ConcurrentMap<String, String> props =
+                new ConcurrentHashMap<String, String>(json.size());
+        props.put("name", json.getString("name"));
+        props.put("picture", json.getString("profile_image_url"));
+        return new Identity.Simple(
+            String.format("urn:twitter:%d", json.getInt("id")),
+            props
+        );
+    }
+
+    /**
+     * Retrieve Twitter access trequest.
+     * @return The trequest
      * @throws IOException If failed
      */
     private String token() throws IOException {
@@ -182,4 +195,5 @@ public final class PsTwitter implements Pass {
             .as(JsonResponse.class)
             .json().readObject().getString("access_token");
     }
+
 }
