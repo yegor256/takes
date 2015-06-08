@@ -39,7 +39,6 @@ import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -341,11 +340,11 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base can handle a big request in an acceptable time.
      * @throws IOException If some problem inside
-     * @checkstyle MagicNumberCheck (3 lines)
+     * @checkstyle MagicNumberCheck (2 lines)
      */
-    @Ignore
     @Test(timeout = 10000)
     public void handlesRequestInTime() throws IOException {
+        final int length = 100000000;
         final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
         bwr.write(
@@ -356,10 +355,8 @@ public final class RqMultipartTest {
                 ""
             )
         );
-        final int length = 100000000;
-        for (int idx = 0; idx < length; ++idx) {
-            // @checkstyle MagicNumberCheck (1 line)
-            bwr.write(idx % 0xff);
+        for (int ind = 0; ind < length; ++ind) {
+            bwr.write("X");
         }
         bwr.write(RqMultipartTest.CRLF);
         bwr.write("--zzz--");
