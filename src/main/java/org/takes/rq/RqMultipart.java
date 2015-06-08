@@ -261,6 +261,7 @@ public interface RqMultipart extends Request {
          * @param target Output file channel
          * @param boundary Boundary
          * @throws IOException If fails
+         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
             final byte[] boundary) throws IOException {
@@ -269,6 +270,10 @@ public interface RqMultipart extends Request {
             while (cont) {
                 if (!this.buffer.hasRemaining()) {
                     this.buffer.clear();
+                    for (int idx = 0; idx < match; ++idx) {
+                        this.buffer.put(boundary[idx]);
+                    }
+                    match = 0;
                     if (this.body.read(this.buffer) == -1) {
                         break;
                     }

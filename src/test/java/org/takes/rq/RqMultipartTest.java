@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Arrays;
@@ -386,5 +387,55 @@ public final class RqMultipartTest {
         );
         temp.delete();
     }
-
+    /**
+     * RqMultipart.Base doesn't distort the content.
+     * @throws IOException If some problem inside
+     * @checkstyle MagicNumberCheck (3 lines)
+     */
+    @Test(timeout = 10000)
+    public void notDistortContent() throws IOException {
+        final int length = 1000000;
+        final File temp = File.createTempFile("notDistortContent", ".tmp");
+        final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
+        final byte byt = 0x7f;
+        bwr.write(
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--zzz1",
+                "Content-Disposition: form-data; name=\"test1\"",
+                "",
+                ""
+            )
+        );
+        for (int idx = 0; idx < length; ++idx) {
+            // @checkstyle MagicNumberCheck (1 line)
+            bwr.write(idx % byt);
+        }
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.write("--zzz1--");
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.close();
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: exampl.com",
+                "Content-Type: multipart/form-data; boundary=zzz1"
+            ),
+            new FileInputStream(temp)
+        );
+        final InputStream stream = new RqMultipart.Smart(
+            new RqMultipart.Base(req)
+        ).single("test1").body();
+        MatcherAssert.assertThat(
+            stream.available(),
+            Matchers.equalTo(length)
+        );
+        for (int idx = 0; idx < length; ++idx) {
+            MatcherAssert.assertThat(
+                String.format("byte %d not matched", idx),
+                stream.read(),
+                Matchers.equalTo(idx % byt)
+            );
+        }
+        temp.delete();
+    }
 }
