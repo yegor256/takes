@@ -32,15 +32,18 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
+import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
 
 /**
@@ -58,6 +61,16 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
+     * Keep alive header key.
+     */
+    private static final String CONNECTION = "Connection";
+
+    /**
+     * Keep alive header value.
+     */
+    private static final String KEEP_ALIVE = "Keep-Alive";
+
+    /**
      * Take.
      */
     private final transient Take take;
@@ -73,16 +86,28 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
+        final RqLive req = new RqLive(input);
+        boolean keep = false;
+        final Iterator<String> values = new RqHeaders.Base(req)
+            .header(CONNECTION).iterator();
+        if (values.hasNext()) {
+            do {
+                keep = KEEP_ALIVE.equals(values.next());
+            } while (!keep && values.hasNext());
+        }
         try {
             this.print(
                 BkBasic.addSocketHeaders(
-                    new RqLive(input),
+                    req,
                     socket
                 ),
-                new BufferedOutputStream(socket.getOutputStream())
+                new BufferedOutputStream(socket.getOutputStream()),
+                keep
             );
         } finally {
-            input.close();
+            if (!keep) {
+                input.close();
+            }
         }
     }
 
@@ -90,13 +115,24 @@ public final class BkBasic implements Back {
      * Print response to output stream, safely.
      * @param req Request
      * @param output Output
+     * @param keep Keep connection open
      * @throws IOException If fails
      */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    private void print(final Request req, final OutputStream output)
+    private void print(
+        final Request req, final OutputStream output, final boolean keep
+    )
         throws IOException {
         try {
-            new RsPrint(this.take.act(req)).print(output);
+            final Response res;
+            if (keep) {
+                res = new RsWithHeader(
+                    this.take.act(req), CONNECTION, KEEP_ALIVE
+                );
+            } else {
+                res = this.take.act(req);
+            }
+            new RsPrint(res).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             // @checkstyle IllegalCatchCheck (7 lines)

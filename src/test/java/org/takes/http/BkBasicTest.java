@@ -50,6 +50,13 @@ import org.takes.tk.TkText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class BkBasicTest {
+
+    /**
+     * Keep alive header value.
+     */
+    private static final String KEEP_ALIVE =
+        "Connection: Keep-Alive";
+
     /**
      * BkBasic can handle socket data.
      * @throws IOException If some problem inside
@@ -59,7 +66,7 @@ public final class BkBasicTest {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
             new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
+                this.joiner().join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
                     "Content-Length: 2",
@@ -86,6 +93,64 @@ public final class BkBasicTest {
     }
 
     /**
+     * BkBasic supports HTTP persistent connections.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void persistentConnection() throws IOException {
+        final Socket socket = Mockito.mock(Socket.class);
+        final ByteArrayInputStream input = Mockito.spy(
+            new ByteArrayInputStream(
+                this.joiner().join(
+                    "GET /keep HTTP/1.1",
+                    "Host:localhost2",
+                    "Content-Length: 5",
+                    KEEP_ALIVE,
+                    "",
+                    "hello"
+                ).getBytes()
+            )
+        );
+        Mockito.when(socket.getInputStream()).thenReturn(input);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        new BkBasic(new TkText("Hello!")).accept(socket);
+        Mockito.verify(input, Mockito.never()).close();
+        MatcherAssert.assertThat(
+            baos.toString(),
+            Matchers.containsString(KEEP_ALIVE)
+        );
+    }
+
+    /**
+     * BkBasic not supports HTTP persistent connections.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void notPersistentConnection() throws IOException {
+        final Socket socket = Mockito.mock(Socket.class);
+        final ByteArrayInputStream input = Mockito.spy(
+            new ByteArrayInputStream(
+                this.joiner().join(
+                    "GET /close HTTP/1.1",
+                    "Host:localhost3",
+                    "Content-Length: 6",
+                    "",
+                    "hi all"
+                ).getBytes()
+            )
+        );
+        Mockito.when(socket.getInputStream()).thenReturn(input);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        new BkBasic(new TkText("Hello")).accept(socket);
+        Mockito.verify(input, Mockito.times(1)).close();
+        MatcherAssert.assertThat(
+            baos.toString(),
+            Matchers.not(Matchers.containsString(KEEP_ALIVE))
+        );
+    }
+    /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
      * @throws IOException if any I/O error occurs.
      */
@@ -108,4 +173,13 @@ public final class BkBasicTest {
             }
         );
     }
+
+    /**
+     * Create a joiner for a header.
+     * @return Joiner
+     */
+    private Joiner joiner() {
+        return Joiner.on("\r\n");
+    }
+
 }
