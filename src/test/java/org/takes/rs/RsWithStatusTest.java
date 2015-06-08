@@ -79,11 +79,11 @@ public final class RsWithStatusTest {
         );
         MatcherAssert.assertThat(
             response.head(),
-            Matchers.<String>iterableWithSize(3)
+            Matchers.<String>iterableWithSize(1)
         );
         MatcherAssert.assertThat(
             response.head(),
-            Matchers.<String>iterableWithSize(3)
+            Matchers.<String>iterableWithSize(1)
         );
     }
 }

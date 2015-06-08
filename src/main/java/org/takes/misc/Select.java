@@ -77,33 +77,28 @@ public final class Select<T> implements Iterable<T> {
      *
      * <p>This class is NOT thread-safe.
      */
-    private static class SelectIterator<E> implements Iterator<E> {
-
+    private static final class SelectIterator<E> implements Iterator<E> {
         /**
          * The iterator to reflect the traverse state.
          */
         private final transient Iterator<E> iterator;
-
         /**
          * The condition to filter the elements in the iterator.
          */
         private final transient Condition<E> condition;
-
         /**
          * The buffer storing the objects of the iterator.
          */
         private final transient Queue<E> buffer = new LinkedList<E>();
-
         /**
          * Ctor. ConcatIterator traverses the element.
          * @param itr Iterator of the original iterable
          * @param cond Condition to filter out elements
          */
-        public SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
+        SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
             this.condition = cond;
             this.iterator = itr;
         }
-
         @Override
         public boolean hasNext() {
             if (this.buffer.isEmpty()) {
@@ -117,7 +112,6 @@ public final class Select<T> implements Iterable<T> {
             }
             return !this.buffer.isEmpty();
         }
-
         @Override
         public E next() {
             if (!this.hasNext()) {
@@ -127,7 +121,6 @@ public final class Select<T> implements Iterable<T> {
             }
             return this.buffer.poll();
         }
-
         @Override
         public void remove() {
             throw new UnsupportedOperationException(
