@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import com.jcabi.aspects.Cacheable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,53 +83,35 @@ public interface RqForm extends Request {
      * @author Aleksey Popov (alopen@yandex.ru)
      * @version $Id$
      */
-    @EqualsAndHashCode(callSuper = true, of = "map")
+    @EqualsAndHashCode(callSuper = true, of = "req")
     final class Base extends RqWrap implements RqForm {
+
         /**
-         * Map of params and values.
+         * Request.
          */
-        private final transient ConcurrentMap<String, List<String>> map;
+        private final transient Request req;
+
         /**
          * Ctor.
-         * @param req Original request
+         * @param request Original request
          * @throws IOException If fails
          */
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-        public Base(final Request req) throws IOException {
-            super(req);
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            new RqPrint(req).printBody(baos);
-            final String body = new String(baos.toByteArray());
-            this.map = new ConcurrentHashMap<String, List<String>>(0);
-            for (final String pair : body.split("&")) {
-                if (pair.isEmpty()) {
-                    continue;
-                }
-                final String[] parts = pair.split("=", 2);
-                if (parts.length < 2) {
-                    throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format("invalid form body pair: %s", pair)
-                    );
-                }
-                final String key = RqForm.Base.decode(
-                    parts[0].trim().toLowerCase(Locale.ENGLISH)
-                );
-                this.map.putIfAbsent(key, new LinkedList<String>());
-                this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
-            }
+        public Base(final Request request) throws IOException {
+            super(request);
+            this.req = request;
         }
         @Override
         public Iterable<String> param(final CharSequence key) {
             final List<String> values =
-                    this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
+                this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<String> iter;
             if (values == null) {
                 iter = new VerboseIterable<String>(
                     Collections.<String>emptyList(),
                     new Sprintf(
                         "there are no params \"%s\" among %d others: %s",
-                        key, this.map.size(), this.map.keySet()
+                        key, this.map().size(), this.map().keySet()
                     )
                 );
             } else {
@@ -144,7 +127,7 @@ public interface RqForm extends Request {
         }
         @Override
         public Iterable<String> names() {
-            return this.map.keySet();
+            return this.map().keySet();
         }
         /**
          * Decode from URL.
@@ -158,6 +141,40 @@ public interface RqForm extends Request {
                 );
             } catch (final UnsupportedEncodingException ex) {
                 throw new IllegalStateException(ex);
+            }
+        }
+        /**
+         * Create map of request parameter.
+         * @return Parameters map or empty map in case of error.
+         */
+        @Cacheable(forever = true)
+        private ConcurrentMap<String, List<String>> map()  {
+            try {
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                new RqPrint(this.req).printBody(baos);
+                final String body = new String(baos.toByteArray());
+                final ConcurrentMap<String, List<String>> map =
+                    new ConcurrentHashMap<String, List<String>>(0);
+                for (final String pair : body.split("&")) {
+                    if (pair.isEmpty()) {
+                        continue;
+                    }
+                    final String[] parts = pair.split("=", 2);
+                    if (parts.length < 2) {
+                        throw new HttpException(
+                            HttpURLConnection.HTTP_BAD_REQUEST,
+                            String.format("invalid form body pair: %s", pair)
+                        );
+                    }
+                    final String key = RqForm.Base.decode(
+                        parts[0].trim().toLowerCase(Locale.ENGLISH)
+                    );
+                    map.putIfAbsent(key, new LinkedList<String>());
+                    map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+                }
+                return map;
+            } catch (final IOException ex) {
+                return new ConcurrentHashMap<String, List<String>>(0);
             }
         }
     }
