@@ -340,9 +340,8 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base can handle a big request in an acceptable time.
      * @throws IOException If some problem inside
-     * @checkstyle MagicNumberCheck (2 lines)
      */
-    @Test(timeout = 10000)
+    @Test
     public void handlesRequestInTime() throws IOException {
         final int length = 100000000;
         final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
@@ -387,14 +386,12 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base doesn't distort the content.
      * @throws IOException If some problem inside
-     * @checkstyle MagicNumberCheck (3 lines)
      */
-    @Test(timeout = 10000)
+    @Test
     public void notDistortContent() throws IOException {
         final int length = 1000000;
         final File temp = File.createTempFile("notDistortContent", ".tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
-        final byte byt = 0x7f;
         bwr.write(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz1",
@@ -403,8 +400,8 @@ public final class RqMultipartTest {
                 ""
             )
         );
+        final int byt = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
-            // @checkstyle MagicNumberCheck (1 line)
             bwr.write(idx % byt);
         }
         bwr.write(RqMultipartTest.CRLF);
