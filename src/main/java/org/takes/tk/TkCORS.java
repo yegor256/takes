@@ -78,12 +78,13 @@ public final class TkCORS implements Take {
         String domain;
         final Response response;
         try {
-            // @checkstyle MethodBodyCommentsCheck (6 lines)
+            // @checkstyle MethodBodyCommentsCheck (7 lines)
             // @todo #258:30min RqHeaders.Smart should have a `single(string,
-            // string)` method. That method should be similar to the method
-            // found in `RqHref.Smart`). The first parameter is the key that you
-            // are looking for and the second one is the default value if it was
-            // not found. Don't forget to remove the checkstyle comment.
+            //  string)` method. That method should be similar to the method
+            //  found in `RqHref.Smart`). The first parameter is the key that
+            //  you are looking for and the second one is the default value if
+            //  it was not found. Don't forget to remove the checkstyle
+            //  comment.
             domain = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
             ).single("origin");
