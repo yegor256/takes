@@ -32,7 +32,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link org.takes.rs.RsPrettyJSON}.
+ * Test case for {@link RsPrettyJSON}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
  * @since 1.0
@@ -41,10 +41,10 @@ public final class RsPrettyJSONTest {
 
     /**
      * RsPrettyJSON can format response with JSON body.
-     * @throws java.io.IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void formatsJsonBody() throws IOException {
+    public void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrettyJSON(
@@ -58,20 +58,20 @@ public final class RsPrettyJSONTest {
     }
 
     /**
-     * RsPrettyJSON can format response with non JSON body.
-     * @throws java.io.IOException If some problem inside
+     * RsPrettyJSON can reject a non-JSON body.
+     * @throws Exception If some problem inside
      */
     @Test(expected = IOException.class)
-    public void formatsNonJsonBody() throws IOException {
+    public void rejectsNonJsonBody() throws Exception {
         new RsPrint(new RsPrettyJSON(new RsWithBody("foo"))).printBody();
     }
 
     /**
      * RsPrettyJSON can report correct content length.
-     * @throws java.io.IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void reportsCorrectContentLength() throws IOException {
+    public void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RsPrint(
             new RsWithBody(

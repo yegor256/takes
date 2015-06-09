@@ -35,7 +35,6 @@ import javax.json.JsonException;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonWriter;
-import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -84,7 +83,7 @@ public final class RsPrettyJSON implements Response {
     /**
      * Make a response.
      * @return Response just made
-     * @throws java.io.IOException If fails
+     * @throws IOException If fails
      */
     private Response make() throws IOException {
         synchronized (this.transformed) {
@@ -104,29 +103,28 @@ public final class RsPrettyJSON implements Response {
      * Format body with proper indents.
      * @param body Response body
      * @return New properly formatted body
-     * @throws java.io.IOException If fails
+     * @throws IOException If fails
      */
     private static byte[] transform(final InputStream body) throws IOException {
-        final ByteArrayOutputStream result = new ByteArrayOutputStream();
-        final JsonReader reader = Json.createReader(body);
-        final Map<String, ?> props = Collections.singletonMap(
+        final ByteArrayOutputStream res = new ByteArrayOutputStream();
+        final JsonReader rdr = Json.createReader(body);
+        final Map<String, ?> prp = Collections.singletonMap(
             JsonGenerator.PRETTY_PRINTING,
             true
         );
-        final JsonWriterFactory factory = Json.createWriterFactory(props);
-        final JsonWriter writer = factory.createWriter(result);
+        final JsonWriter wrt = Json.createWriterFactory(prp).createWriter(res);
         try {
-            final JsonObject obj = reader.readObject();
+            final JsonObject obj = rdr.readObject();
             try {
-                writer.writeObject(obj);
+                wrt.writeObject(obj);
             } finally {
-                writer.close();
+                wrt.close();
             }
         } catch (final JsonException ex) {
             throw new IOException(ex);
         } finally {
-            reader.close();
+            rdr.close();
         }
-        return result.toByteArray();
+        return res.toByteArray();
     }
 }
