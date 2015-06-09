@@ -32,7 +32,7 @@ import java.io.InputStream;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yohann Ferreira (yohann.ferreira@orange.fr)
  * @version $Id$
  * @since 0.21
  */
