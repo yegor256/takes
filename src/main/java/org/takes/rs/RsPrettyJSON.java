@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.json.Json;
 import javax.json.JsonException;
@@ -108,13 +107,14 @@ public final class RsPrettyJSON implements Response {
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
         final JsonReader rdr = Json.createReader(body);
-        final Map<String, ?> prp = Collections.singletonMap(
-            JsonGenerator.PRETTY_PRINTING,
-            true
-        );
-        final JsonWriter wrt = Json.createWriterFactory(prp).createWriter(res);
         try {
             final JsonObject obj = rdr.readObject();
+            final JsonWriter wrt = Json.createWriterFactory(
+                Collections.singletonMap(
+                    JsonGenerator.PRETTY_PRINTING,
+                    true
+                )
+            ).createWriter(res);
             try {
                 wrt.writeObject(obj);
             } finally {
