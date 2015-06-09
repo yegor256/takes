@@ -41,6 +41,7 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link PsTwitter}.
  * @author Prasath Premkumar (popprem@gmail.com)
+ * @author Adam Siemion (adam.siemion@lemonsoftware.pl)
  * @version $Id$
  * @since 1.0
  * @checkstyle MagicNumberCheck (500 lines)

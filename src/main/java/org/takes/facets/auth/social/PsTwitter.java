@@ -71,9 +71,9 @@ public final class PsTwitter implements Pass {
     private final transient String key;
 
     /**
-     * Request for fetching app trequest.
+     * Request for fetching app token.
      */
-    private final transient com.jcabi.http.Request trequest;
+    private final transient com.jcabi.http.Request tkn;
 
     /**
      * Request for verifying user credentials.
@@ -88,38 +88,36 @@ public final class PsTwitter implements Pass {
     public PsTwitter(final String name, final String keys) {
         this(
             new JdkRequest(
-                new Href("https://api.twitter.com/oauth2/trequest")
+                new Href("https://api.twitter.com/oauth2/token")
                     .with("grant_type", "client_credentials")
                     .toString()
             ),
-            new JdkRequest(PsTwitter.VERIFY_URL),
-            name,
-            keys
+            new JdkRequest(PsTwitter.VERIFY_URL), name, keys
         );
     }
 
     /**
      * Ctor with proper requestor for testing purposes.
-     * @param ttrequest HTTP request for getting trequest
-     * @param tvcrequest HTTP request for verifying credentials
-     * @param tapp Facebook app
-     * @param tkey Facebook key
+     * @param token HTTP request for getting token
+     * @param creds HTTP request for verifying credentials
+     * @param name Facebook app
+     * @param keys Facebook key
      * @checkstyle ParameterNumberCheck (3 lines)
      */
-    PsTwitter(final com.jcabi.http.Request ttrequest,
-        final com.jcabi.http.Request tvcrequest,
-        final String tapp,
-        final String tkey) {
-        this.trequest = ttrequest;
-        this.user = tvcrequest;
-        this.app = tapp;
-        this.key = tkey;
+    PsTwitter(final com.jcabi.http.Request token,
+        final com.jcabi.http.Request creds,
+        final String name,
+        final String keys) {
+        this.tkn = token;
+        this.user = creds;
+        this.app = name;
+        this.key = keys;
     }
 
     @Override
     public Opt<Identity> enter(final Request request)
         throws IOException {
-        return new Opt.Single<Identity>(this.fetch(this.token()));
+        return new Opt.Single<Identity>(this.fetchToken(this.token()));
     }
 
     @Override
@@ -128,12 +126,12 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Get user name from Twitter, with the trequest provided.
-     * @param token Twitter access trequest
+     * Get user name from Twitter, with the token provided.
+     * @param token Twitter access token
      * @return The user found in Twitter
      * @throws IOException If fails
      */
-    private Identity fetch(final String token) throws IOException {
+    private Identity fetchToken(final String token) throws IOException {
         return parse(
             this.user
                 .uri()
@@ -171,12 +169,12 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Retrieve Twitter access trequest.
-     * @return The trequest
+     * Retrieve Twitter access token.
+     * @return The Twitter access token
      * @throws IOException If failed
      */
     private String token() throws IOException {
-        return this.trequest
+        return this.tkn
             .method("POST")
             .header(
                 "Content-Type",
@@ -195,5 +193,4 @@ public final class PsTwitter implements Pass {
             .as(JsonResponse.class)
             .json().readObject().getString("access_token");
     }
-
 }
