@@ -42,7 +42,6 @@ merge:
   - krzyk
   - longtimeago
   - pinaf
-  - yegor256
 deploy:
   script: |
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
