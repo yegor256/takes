@@ -24,12 +24,17 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.facets.flash.RsFlash;
+import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
+import org.takes.rs.RsWithHeaders;
 
 /**
  * Pass that checks the user according RFC-2617.
@@ -39,8 +44,9 @@ import org.takes.rq.RqHeaders;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (250 lines)
  */
-@EqualsAndHashCode(of = { "entry" })
+@EqualsAndHashCode(of = { "entry", "realm" })
 public final class PsBasic implements Pass {
 
     /**
@@ -54,10 +60,17 @@ public final class PsBasic implements Pass {
     private final transient PsBasic.Entry entry;
 
     /**
+     * Realm.
+     */
+    private final transient String realm;
+
+    /**
      * Ctor.
+     * @param rlm Realm
      * @param basic Entry
      */
-    public PsBasic(final PsBasic.Entry basic) {
+    public PsBasic(final String rlm, final PsBasic.Entry basic) {
+        this.realm = rlm;
         this.entry = basic;
     }
 
@@ -73,7 +86,7 @@ public final class PsBasic implements Pass {
                 )
             ).trim();
             final String user = decoded.split(":")[0];
-            if (this.entry.check(
+            if (this.entry.enter(
                 user,
                 decoded.substring(user.length() + 1)
             ).has()) {
@@ -85,6 +98,19 @@ public final class PsBasic implements Pass {
             }
         } catch (final IOException ex) {
             identity = new Opt.Empty<Identity>();
+        }
+        if (!identity.has()) {
+            throw new RsForward(
+                new RsWithHeaders(
+                    new RsFlash("access denied", Level.WARNING),
+                    String.format(
+                        "WWW-Authenticate: Basic ream=\"%s\"",
+                        this.realm
+                    )
+                ),
+                HttpURLConnection.HTTP_UNAUTHORIZED,
+                "/login/start"
+            );
         }
         return identity;
     }
@@ -111,7 +137,7 @@ public final class PsBasic implements Pass {
          * @param pwd Password
          * @return Identity.
          */
-        Opt<Identity> check(String user, String pwd);
+        Opt<Identity> enter(String user, String pwd);
     }
 
     /**
@@ -145,11 +171,11 @@ public final class PsBasic implements Pass {
         }
 
         @Override
-        public Opt<Identity> check(final String user, final String pwd) {
+        public Opt<Identity> enter(final String user, final String pwd) {
             final Opt<Identity> identity;
             if (this.username.equals(user) && this.password.equals(pwd)) {
                 identity = new Opt.Single<Identity>(
-                        new Identity.Simple(user)
+                    new Identity.Simple(user)
                 );
             } else {
                 identity = new Opt.Empty<Identity>();
@@ -168,7 +194,7 @@ public final class PsBasic implements Pass {
     public static final class Empty implements PsBasic.Entry {
 
         @Override
-        public Opt<Identity> check(final String user, final String pwd) {
+        public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<Identity>();
         }
     }

@@ -29,10 +29,12 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeaders;
+import org.takes.rs.RsPrint;
 
 /**
  * Test of {@link PsBasic}.
@@ -67,6 +69,7 @@ public final class PsBasicTest {
             this.generateAuthenticateHead(user, pass)
         );
         final Opt<Identity> identity = new PsBasic(
+            "RealmA",
             new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
@@ -81,7 +84,9 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
+//    @Test(expected = RsForward.class)
     public void handleConnectionWithInvalidCredential() throws Exception {
+        RsForward forward = new RsForward();
         final RqWithHeaders req = new RqWithHeaders(
             new RqFake(
                 RqMethod.GET,
@@ -93,10 +98,23 @@ public final class PsBasicTest {
             ),
             this.generateAuthenticateHead("username", "wrong")
         );
-        final Opt<Identity> identity = new PsBasic(
-            new PsBasic.Empty()
-        ).enter(req);
-        MatcherAssert.assertThat(identity.has(), Matchers.is(false));
+        try {
+            new PsBasic(
+                "RealmB",
+                new PsBasic.Empty()
+            ).enter(req);
+        } catch (final RsForward ex) {
+            forward = ex;
+        }
+        MatcherAssert.assertThat(
+            new RsPrint(forward).printHead(),
+            Matchers.allOf(
+                Matchers.containsString("HTTP/1.1 401 Unauthorized"),
+                Matchers.containsString(
+                    "WWW-Authenticate: Basic ream=\"RealmB\""
+                )
+            )
+        );
     }
 
     /**
@@ -124,6 +142,7 @@ public final class PsBasicTest {
             "X-Powered-By:Java/1.7"
         );
         final Opt<Identity> identity = new PsBasic(
+            "RealmC",
             new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
@@ -137,7 +156,7 @@ public final class PsBasicTest {
      * PsBasic can handle multiple headers with invalid content.
      * @throws Exception If some problem inside
      */
-    @Test
+    @Test(expected = RsForward.class)
     public void handleMultipleHeadersWithInvalidContent() throws Exception {
         final String user = "user";
         final String pass = "password";
@@ -154,6 +173,7 @@ public final class PsBasicTest {
             "XYZX-Powered-By:Java/1.7"
         );
         final Opt<Identity> identity = new PsBasic(
+            "RealmD",
             new PsBasic.Fixed(user, pass)
         ).enter(req);
         MatcherAssert.assertThat(identity.has(), Matchers.is(false));
