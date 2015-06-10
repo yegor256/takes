@@ -73,7 +73,7 @@ public final class PsTwitter implements Pass {
     /**
      * Request for fetching app token.
      */
-    private final transient com.jcabi.http.Request tkn;
+    private final transient com.jcabi.http.Request token;
 
     /**
      * Request for verifying user credentials.
@@ -98,17 +98,17 @@ public final class PsTwitter implements Pass {
 
     /**
      * Ctor with proper requestor for testing purposes.
-     * @param token HTTP request for getting token
+     * @param tkn HTTP request for getting token
      * @param creds HTTP request for verifying credentials
      * @param name Facebook app
      * @param keys Facebook key
      * @checkstyle ParameterNumberCheck (3 lines)
      */
-    PsTwitter(final com.jcabi.http.Request token,
+    PsTwitter(final com.jcabi.http.Request tkn,
         final com.jcabi.http.Request creds,
         final String name,
         final String keys) {
-        this.tkn = token;
+        this.token = tkn;
         this.user = creds;
         this.app = name;
         this.key = keys;
@@ -117,7 +117,7 @@ public final class PsTwitter implements Pass {
     @Override
     public Opt<Identity> enter(final Request request)
         throws IOException {
-        return new Opt.Single<Identity>(this.fetchToken(this.token()));
+        return new Opt.Single<Identity>(this.identity(this.fetch()));
     }
 
     @Override
@@ -127,18 +127,18 @@ public final class PsTwitter implements Pass {
 
     /**
      * Get user name from Twitter, with the token provided.
-     * @param token Twitter access token
+     * @param tkn Twitter access token
      * @return The user found in Twitter
      * @throws IOException If fails
      */
-    private Identity fetchToken(final String token) throws IOException {
+    private Identity identity(final String tkn) throws IOException {
         return parse(
             this.user
                 .uri()
                 .set(
                     URI.create(
                         new Href(PsTwitter.VERIFY_URL)
-                            .with("access_token", token)
+                            .with("access_token", tkn)
                             .toString()
                     )
                 )
@@ -173,8 +173,8 @@ public final class PsTwitter implements Pass {
      * @return The Twitter access token
      * @throws IOException If failed
      */
-    private String token() throws IOException {
-        return this.tkn
+    private String fetch() throws IOException {
+        return this.token
             .method("POST")
             .header(
                 "Content-Type",
