@@ -30,8 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -263,16 +261,8 @@ public interface RqForm extends Request {
             for (int idx = 0; idx < params.length; idx += 2) {
                 final String key = params[idx];
                 final String value = params[idx + 1];
-                if (this.map.containsKey(key)) {
-                    this.map.get(key).add(value);
-                } else {
-                    this.map.put(
-                        key,
-                        new ArrayList<String>(
-                            Arrays.asList(value)
-                        )
-                    );
-                }
+                this.map.putIfAbsent(key, new LinkedList<String>());
+                this.map.get(key).add(value);
             }
         }
 
