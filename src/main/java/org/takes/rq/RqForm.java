@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import com.jcabi.aspects.Cacheable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -69,14 +69,16 @@ public interface RqForm extends Request {
      * Get single parameter.
      * @param name Parameter name
      * @return List of values (can be empty)
+     * @throws IOException if something fails reading parameters
      */
-    Iterable<String> param(CharSequence name);
+    Iterable<String> param(CharSequence name) throws IOException;
 
     /**
      * Get all parameter names.
      * @return All names
+     * @throws IOException if something fails reading parameters
      */
-    Iterable<String> names();
+    Iterable<String> names() throws IOException;
 
     /**
      * Base implementation of @link RqForm.
@@ -92,6 +94,13 @@ public interface RqForm extends Request {
         private final transient Request req;
 
         /**
+         * Saved map.
+         * @checkstyle LineLengthCheck (3 lines)
+         */
+        private final transient List<ConcurrentMap<String, List<String>>> saved =
+            new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
+
+        /**
          * Ctor.
          * @param request Original request
          * @throws IOException If fails
@@ -102,7 +111,9 @@ public interface RqForm extends Request {
             this.req = request;
         }
         @Override
-        public Iterable<String> param(final CharSequence key) {
+        public Iterable<String> param(
+            final CharSequence key
+        ) throws IOException {
             final List<String> values =
                 this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<String> iter;
@@ -126,7 +137,7 @@ public interface RqForm extends Request {
             return iter;
         }
         @Override
-        public Iterable<String> names() {
+        public Iterable<String> names() throws IOException {
             return this.map().keySet();
         }
         /**
@@ -146,35 +157,39 @@ public interface RqForm extends Request {
         /**
          * Create map of request parameter.
          * @return Parameters map or empty map in case of error.
+         * @throws IOException If something fails reading or parsing body
          */
-        @Cacheable(forever = true)
-        private ConcurrentMap<String, List<String>> map()  {
-            try {
-                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                new RqPrint(this.req).printBody(baos);
-                final String body = new String(baos.toByteArray());
-                final ConcurrentMap<String, List<String>> map =
-                    new ConcurrentHashMap<String, List<String>>(0);
-                for (final String pair : body.split("&")) {
-                    if (pair.isEmpty()) {
-                        continue;
-                    }
-                    final String[] parts = pair.split("=", 2);
-                    if (parts.length < 2) {
-                        throw new HttpException(
-                            HttpURLConnection.HTTP_BAD_REQUEST,
-                            String.format("invalid form body pair: %s", pair)
+        private ConcurrentMap<String, List<String>> map() throws IOException  {
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    final ByteArrayOutputStream
+                        baos = new ByteArrayOutputStream();
+                    new RqPrint(this.req).printBody(baos);
+                    final String body = new String(baos.toByteArray());
+                    final ConcurrentMap<String, List<String>> map =
+                        new ConcurrentHashMap<String, List<String>>(0);
+                    for (final String pair : body.split("&")) {
+                        if (pair.isEmpty()) {
+                            continue;
+                        }
+                        final String[] parts = pair.split("=", 2);
+                        if (parts.length < 2) {
+                            throw new HttpException(
+                                HttpURLConnection.HTTP_BAD_REQUEST,
+                                String.format(
+                                    "invalid form body pair: %s", pair
+                                )
+                            );
+                        }
+                        final String key = RqForm.Base.decode(
+                            parts[0].trim().toLowerCase(Locale.ENGLISH)
                         );
+                        map.putIfAbsent(key, new LinkedList<String>());
+                        map.get(key).add(RqForm.Base.decode(parts[1].trim()));
                     }
-                    final String key = RqForm.Base.decode(
-                        parts[0].trim().toLowerCase(Locale.ENGLISH)
-                    );
-                    map.putIfAbsent(key, new LinkedList<String>());
-                    map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+                    this.saved.add(map);
                 }
-                return map;
-            } catch (final IOException ex) {
-                return new ConcurrentHashMap<String, List<String>>(0);
+                return this.saved.get(0);
             }
         }
     }
@@ -200,11 +215,13 @@ public interface RqForm extends Request {
             this.origin = req;
         }
         @Override
-        public Iterable<String> param(final CharSequence name) {
+        public Iterable<String> param(
+            final CharSequence name
+        ) throws IOException {
             return this.origin.param(name);
         }
         @Override
-        public Iterable<String> names() {
+        public Iterable<String> names() throws IOException {
             return this.origin.names();
         }
         @Override
@@ -238,8 +255,11 @@ public interface RqForm extends Request {
          * @param name Name of query param
          * @param def Default, if not found
          * @return Value of it
+         * @throws IOException if something fails reading parameters
          */
-        public String single(final CharSequence name, final String def) {
+        public String single(
+                final CharSequence name, final String def
+        ) throws IOException {
             final String value;
             final Iterator<String> params = this.param(name).iterator();
             if (params.hasNext()) {
