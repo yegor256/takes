@@ -76,29 +76,18 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
-        Opt<Identity> identity = new Opt.Empty<Identity>();
-        try {
-            final String decoded = new String(
-                DatatypeConverter.parseBase64Binary(
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(request)
-                    ).single("authorization").split(AUTH_HEAD)[1]
-                )
-            ).trim();
-            final String user = decoded.split(":")[0];
-            if (this.entry.enter(
-                user,
-                decoded.substring(user.length() + 1)
-            ).has()) {
-                identity = new Opt.Single<Identity>(
-                    new Identity.Simple(
-                        String.format("urn:basic:%s", user)
-                    )
-                );
-            }
-        } catch (final IOException ex) {
-            identity = new Opt.Empty<Identity>();
-        }
+        final String decoded = new String(
+            DatatypeConverter.parseBase64Binary(
+                new RqHeaders.Smart(
+                    new RqHeaders.Base(request)
+                ).single("authorization").split(AUTH_HEAD)[1]
+            )
+        ).trim();
+        final String user = decoded.split(":")[0];
+        final Opt<Identity> identity = this.entry.enter(
+            user,
+            decoded.substring(user.length() + 1)
+        );
         if (!identity.has()) {
             throw new RsForward(
                 new RsWithHeaders(
@@ -175,7 +164,9 @@ public final class PsBasic implements Pass {
             final Opt<Identity> identity;
             if (this.username.equals(user) && this.password.equals(pwd)) {
                 identity = new Opt.Single<Identity>(
-                    new Identity.Simple(user)
+                    new Identity.Simple(
+                        String.format("urn:basic:%s", user)
+                    )
                 );
             } else {
                 identity = new Opt.Empty<Identity>();

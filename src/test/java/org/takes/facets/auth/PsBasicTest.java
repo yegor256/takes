@@ -29,6 +29,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.HttpException;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
@@ -84,7 +85,6 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-//    @Test(expected = RsForward.class)
     public void handleConnectionWithInvalidCredential() throws Exception {
         RsForward forward = new RsForward();
         final RqWithHeaders req = new RqWithHeaders(
@@ -156,7 +156,7 @@ public final class PsBasicTest {
      * PsBasic can handle multiple headers with invalid content.
      * @throws Exception If some problem inside
      */
-    @Test(expected = RsForward.class)
+    @Test(expected = HttpException.class)
     public void handleMultipleHeadersWithInvalidContent() throws Exception {
         final String user = "user";
         final String pass = "password";
