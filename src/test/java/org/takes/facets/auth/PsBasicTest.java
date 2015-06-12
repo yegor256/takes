@@ -57,22 +57,22 @@ public final class PsBasicTest {
     @Test
     public void handleConnectionWithValidCredential() throws Exception {
         final String user = "john";
-        final String pass = "pass";
-        final RqWithHeaders req = new RqWithHeaders(
-            new RqFake(
-                RqMethod.GET,
-                String.format(
-                    "?valid_code=%s",
-                    // @checkstyle MagicNumberCheck (1 line)
-                    RandomStringUtils.randomAlphanumeric(10)
-                )
-            ),
-            this.generateAuthenticateHead(user, pass)
-        );
         final Opt<Identity> identity = new PsBasic(
             "RealmA",
-            new PsBasic.Fixed(user, pass)
-        ).enter(req);
+            new PsBasic.Fake(true)
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        "?valid_code=%s",
+                        // @checkstyle MagicNumberCheck (1 line)
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                this.generateAuthenticateHead(user, "pass")
+            )
+        );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
@@ -87,22 +87,23 @@ public final class PsBasicTest {
     @Test
     public void handleConnectionWithInvalidCredential() throws Exception {
         RsForward forward = new RsForward();
-        final RqWithHeaders req = new RqWithHeaders(
-            new RqFake(
-                RqMethod.GET,
-                String.format(
-                    "?invalid_code=%s",
-                    // @checkstyle MagicNumberCheck (1 line)
-                    RandomStringUtils.randomAlphanumeric(10)
-                )
-            ),
-            this.generateAuthenticateHead("username", "wrong")
-        );
         try {
             new PsBasic(
                 "RealmB",
                 new PsBasic.Empty()
-            ).enter(req);
+            ).enter(
+                new RqWithHeaders(
+                    new RqFake(
+                        RqMethod.GET,
+                        String.format(
+                            "?invalid_code=%s",
+                            // @checkstyle MagicNumberCheck (1 line)
+                            RandomStringUtils.randomAlphanumeric(10)
+                        )
+                    ),
+                    this.generateAuthenticateHead("username", "wrong")
+                )
+            );
         } catch (final RsForward ex) {
             forward = ex;
         }
@@ -124,27 +125,27 @@ public final class PsBasicTest {
     @Test
     public void handleMultipleHeadersWithValidCredential() throws Exception {
         final String user = "bill";
-        final String pass = "changeit";
-        final RqWithHeaders req = new RqWithHeaders(
-            new RqFake(
-                RqMethod.GET,
-                String.format(
-                    "?multiple_code=%s",
-                    // @checkstyle MagicNumberCheck (1 line)
-                    RandomStringUtils.randomAlphanumeric(10)
-                )
-            ),
-            this.generateAuthenticateHead(user, pass),
-            "Referer: http://teamed.io/",
-            "Connection:keep-alive",
-            "Content-Encoding:gzip",
-            "X-Check-Cacheable:YES",
-            "X-Powered-By:Java/1.7"
-        );
         final Opt<Identity> identity = new PsBasic(
             "RealmC",
-            new PsBasic.Fixed(user, pass)
-        ).enter(req);
+            new PsBasic.Fake(true)
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        "?multiple_code=%s",
+                        // @checkstyle MagicNumberCheck (1 line)
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                this.generateAuthenticateHead(user, "changeit"),
+                "Referer: http://teamed.io/",
+                "Connection:keep-alive",
+                "Content-Encoding:gzip",
+                "X-Check-Cacheable:YES",
+                "X-Powered-By:Java/1.7"
+            )
+        );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
@@ -158,25 +159,29 @@ public final class PsBasicTest {
      */
     @Test(expected = HttpException.class)
     public void handleMultipleHeadersWithInvalidContent() throws Exception {
-        final String user = "user";
-        final String pass = "password";
-        final RqWithHeaders req = new RqWithHeaders(
-            new RqFake(
-                "XPTO",
-                "/wrong-url"
-            ),
-            String.format("XYZ%s", this.generateAuthenticateHead(user, pass)),
-            "XYZReferer: http://teamed.io/",
-            "XYZConnection:keep-alive",
-            "XYZContent-Encoding:gzip",
-            "XYZX-Check-Cacheable:YES",
-            "XYZX-Powered-By:Java/1.7"
+        MatcherAssert.assertThat(
+            new PsBasic(
+                "RealmD",
+                new PsBasic.Fake(true)
+            ).enter(
+                new RqWithHeaders(
+                    new RqFake(
+                        "XPTO",
+                        "/wrong-url"
+                    ),
+                    String.format(
+                        "XYZ%s",
+                        this.generateAuthenticateHead("user", "password")
+                    ),
+                    "XYZReferer: http://teamed.io/",
+                    "XYZConnection:keep-alive",
+                    "XYZContent-Encoding:gzip",
+                    "XYZX-Check-Cacheable:YES",
+                    "XYZX-Powered-By:Java/1.7"
+                )
+            ).has()
+            , Matchers.is(false)
         );
-        final Opt<Identity> identity = new PsBasic(
-            "RealmD",
-            new PsBasic.Fixed(user, pass)
-        ).enter(req);
-        MatcherAssert.assertThat(identity.has(), Matchers.is(false));
     }
 
     /**

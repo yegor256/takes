@@ -131,48 +131,43 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Entry with fixed credentials.
+     * Fake implementation of {@link PsBasic.Entry}.
+     *
+     * <p>The class is immutable and thread-safe.
      *
      * @author Endrigo Antonini (teamed@endrigo.com.br)
      * @version $Id$
      * @since 0.20
      *
      */
-    public static final class Fixed implements PsBasic.Entry {
+    public static final class Fake implements PsBasic.Entry {
 
         /**
-         * Username.
+         * Should we authenticate a user?
          */
-        private final transient String username;
-
-        /**
-         * Password.
-         */
-        private final transient String password;
+        private final transient boolean condition;
 
         /**
          * Ctor.
-         * @param user Username.
-         * @param pwd Password.
+         * @param cond Condition
          */
-        public Fixed(final String user, final String pwd) {
-            this.username = user;
-            this.password = pwd;
+        public Fake(final boolean cond) {
+            this.condition = cond;
         }
 
         @Override
-        public Opt<Identity> enter(final String user, final String pwd) {
-            final Opt<Identity> identity;
-            if (this.username.equals(user) && this.password.equals(pwd)) {
-                identity = new Opt.Single<Identity>(
+        public Opt<Identity> enter(final String usr, final String pwd) {
+            final Opt<Identity> user;
+            if (this.condition) {
+                user = new Opt.Single<Identity>(
                     new Identity.Simple(
-                        String.format("urn:basic:%s", user)
+                        String.format("urn:basic:%s", usr)
                     )
                 );
             } else {
-                identity = new Opt.Empty<Identity>();
+                user = new Opt.Empty<Identity>();
             }
-            return identity;
+            return user;
         }
     }
 
