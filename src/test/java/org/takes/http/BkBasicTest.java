@@ -52,6 +52,10 @@ import org.takes.tk.TkText;
 public final class BkBasicTest {
 
     /**
+     * New line.
+     */
+    private static final String CRLF = "\r\n";
+    /**
      * Keep alive header value.
      */
     private static final String KEEP_ALIVE =
@@ -66,7 +70,7 @@ public final class BkBasicTest {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
             new ByteArrayInputStream(
-                this.joiner().join(
+                Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
                     "Content-Length: 2",
@@ -93,19 +97,19 @@ public final class BkBasicTest {
     }
 
     /**
-     * BkBasic supports HTTP persistent connections.
+     * BkBasic can handle HTTP persistent connections.
      * @throws IOException If some problem inside
      */
     @Test
-    public void persistentConnection() throws IOException {
+    public void handlesPersistentConnection() throws IOException {
         final Socket socket = Mockito.mock(Socket.class);
         final ByteArrayInputStream input = Mockito.spy(
             new ByteArrayInputStream(
-                this.joiner().join(
+                Joiner.on(BkBasicTest.CRLF).join(
                     "GET /keep HTTP/1.1",
                     "Host:localhost2",
                     "Content-Length: 5",
-                    KEEP_ALIVE,
+                    "Connection: Keep-Alive2,Keep-Alive",
                     "",
                     "hello"
                 ).getBytes()
@@ -118,20 +122,20 @@ public final class BkBasicTest {
         Mockito.verify(input, Mockito.never()).close();
         MatcherAssert.assertThat(
             baos.toString(),
-            Matchers.containsString(KEEP_ALIVE)
+            Matchers.containsString(BkBasicTest.KEEP_ALIVE)
         );
     }
 
     /**
-     * BkBasic not supports HTTP persistent connections.
+     * BkBasic can handle ephemeral (non-persistent) HTTP connections.
      * @throws IOException If some problem inside
      */
     @Test
-    public void notPersistentConnection() throws IOException {
+    public void handlesEphemeralConnection() throws IOException {
         final Socket socket = Mockito.mock(Socket.class);
         final ByteArrayInputStream input = Mockito.spy(
             new ByteArrayInputStream(
-                this.joiner().join(
+                Joiner.on(BkBasicTest.CRLF).join(
                     "GET /close HTTP/1.1",
                     "Host:localhost3",
                     "Content-Length: 6",
@@ -147,7 +151,7 @@ public final class BkBasicTest {
         Mockito.verify(input, Mockito.times(1)).close();
         MatcherAssert.assertThat(
             baos.toString(),
-            Matchers.not(Matchers.containsString(KEEP_ALIVE))
+            Matchers.not(Matchers.containsString(BkBasicTest.KEEP_ALIVE))
         );
     }
     /**
@@ -173,13 +177,4 @@ public final class BkBasicTest {
             }
         );
     }
-
-    /**
-     * Create a joiner for a header.
-     * @return Joiner
-     */
-    private Joiner joiner() {
-        return Joiner.on("\r\n");
-    }
-
 }

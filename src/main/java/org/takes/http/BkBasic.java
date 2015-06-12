@@ -89,10 +89,10 @@ public final class BkBasic implements Back {
         final RqLive req = new RqLive(input);
         boolean keep = false;
         final Iterator<String> values = new RqHeaders.Base(req)
-            .header(CONNECTION).iterator();
+            .header(BkBasic.CONNECTION).iterator();
         if (values.hasNext()) {
             do {
-                keep = KEEP_ALIVE.equals(values.next());
+                keep = values.next().contains(BkBasic.KEEP_ALIVE);
             } while (!keep && values.hasNext());
         }
         try {
@@ -127,7 +127,7 @@ public final class BkBasic implements Back {
             final Response res;
             if (keep) {
                 res = new RsWithHeader(
-                    this.take.act(req), CONNECTION, KEEP_ALIVE
+                    this.take.act(req), BkBasic.CONNECTION, BkBasic.KEEP_ALIVE
                 );
             } else {
                 res = this.take.act(req);
