@@ -34,6 +34,7 @@ import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeaders;
 
 /**
@@ -98,7 +99,7 @@ public final class PsBasic implements Pass {
                     )
                 ),
                 HttpURLConnection.HTTP_UNAUTHORIZED,
-                "/login/start"
+                new RqHref.Base(request).href()
             );
         }
         return identity;
