@@ -105,7 +105,6 @@ public interface RqForm extends Request {
          * @param request Original request
          * @throws IOException If fails
          */
-        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         public Base(final Request request) throws IOException {
             super(request);
             this.req = request;
@@ -167,7 +166,7 @@ public interface RqForm extends Request {
                     new RqPrint(this.req).printBody(baos);
                     final String body = new String(baos.toByteArray());
                     final ConcurrentMap<String, List<String>> map =
-                        new ConcurrentHashMap<String, List<String>>(0);
+                        new ConcurrentHashMap<String, List<String>>(1);
                     for (final String pair : body.split("&")) {
                         if (pair.isEmpty()) {
                             continue;
@@ -215,9 +214,8 @@ public interface RqForm extends Request {
             this.origin = req;
         }
         @Override
-        public Iterable<String> param(
-            final CharSequence name
-        ) throws IOException {
+        public Iterable<String> param(final CharSequence name)
+            throws IOException {
             return this.origin.param(name);
         }
         @Override
@@ -257,9 +255,8 @@ public interface RqForm extends Request {
          * @return Value of it
          * @throws IOException if something fails reading parameters
          */
-        public String single(
-                final CharSequence name, final String def
-        ) throws IOException {
+        public String single(final CharSequence name, final String def)
+            throws IOException {
             final String value;
             final Iterator<String> params = this.param(name).iterator();
             if (params.hasNext()) {
