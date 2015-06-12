@@ -35,7 +35,7 @@ import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
-import org.takes.rs.RsWithHeaders;
+import org.takes.rs.RsWithHeader;
 
 /**
  * Pass that checks the user according RFC-2617.
@@ -91,7 +91,7 @@ public final class PsBasic implements Pass {
         );
         if (!identity.has()) {
             throw new RsForward(
-                new RsWithHeaders(
+                new RsWithHeader(
                     new RsFlash("access denied", Level.WARNING),
                     String.format(
                         "WWW-Authenticate: Basic ream=\"%s\"",
