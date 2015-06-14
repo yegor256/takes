@@ -36,28 +36,24 @@ public class RqFormFakeTest {
 
     /**
      * RqForm.Fake can create fake forms with parameters list.
-     * @checkstyle MultipleStringLiteralsCheck (20 lines)
      */
     @Test
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public final void createsFakeWithParams() {
+        final String key = "key";
+        final String value = "value";
+        final String another = "another";
         final RqForm req = new RqForm.Fake(
             new RqFake(),
-            "foo", "value-1",
-            "bar", "value-2",
-            "bar", "value-3"
+            key, value,
+            key, another
         );
         MatcherAssert.assertThat(
-            req.param("foo"),
-            Matchers.hasItem("value-1")
-        );
-        MatcherAssert.assertThat(
-            req.param("bar"),
-            Matchers.hasItems("value-2", "value-3")
+            req.param(key),
+            Matchers.hasItems(value, another)
         );
         MatcherAssert.assertThat(
             req.names(),
-            Matchers.hasItems("foo", "bar")
+            Matchers.hasItems(key)
         );
     }
 
