@@ -75,15 +75,10 @@ public final class TkCORS implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        String domain;
         final Response response;
-        try {
-            domain = new RqHeaders.Smart(
-                new RqHeaders.Base(req)
-            ).single("origin");
-        } catch (final IOException exp) {
-            domain = "";
-        }
+        final String domain = new RqHeaders.Smart(
+            new RqHeaders.Base(req)
+        ).single("origin", "");
         if (this.allowed.contains(domain)) {
             response = new RsWithHeaders(
                 this.origin.act(req),
