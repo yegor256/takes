@@ -81,7 +81,7 @@ public final class RqHeadersTest {
     }
 
     /**
-     * RqHeaders.Smart can find single header.
+     * RqHeaders.Smart can return a single header.
      * @throws IOException If some problem inside
      */
     @Test
@@ -102,7 +102,7 @@ public final class RqHeadersTest {
         );
     }
     /**
-     * RqHeaders.Smart can find default header.
+     * RqHeaders.Smart can return a default header.
      * @throws IOException If some problem inside
      */
     @Test
