@@ -48,6 +48,8 @@ import org.takes.misc.VerboseIterable;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @todo #342:30min/DEV Extract RqHeaders.Smart into its own file and then
+ *  remove PMD.TooManyMethods suppression
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqHeaders extends Request {
@@ -212,10 +214,11 @@ public interface RqHeaders extends Request {
             return params.next();
         }
         /**
-         * Get param or default.
-         * @param name Name of query param
-         * @param def Default, if not found
-         * @return Value of it
+         * If header is present, returns the first header value.
+         * If not, returns a default value.
+         * @param name Name of header key
+         * @param def Default value
+         * @return Header Value or default value
          * @throws IOException If fails
          */
         public String single(final CharSequence name, final CharSequence def)

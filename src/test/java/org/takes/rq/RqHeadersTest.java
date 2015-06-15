@@ -81,11 +81,11 @@ public final class RqHeadersTest {
     }
 
     /**
-     * RqHeaders can find single header.
+     * RqHeaders.Smart can find single header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void findsSingleHeader() throws IOException {
+    public void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
             new RqHeaders.Smart(
                 new RqHeaders.Base(
@@ -97,18 +97,17 @@ public final class RqHeadersTest {
                         ""
                     )
                 )
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
             ).single("host", "www.takes.net"),
             Matchers.equalTo("www.takes.com")
         );
     }
     /**
-     * RqHeaders can find default header.
+     * RqHeaders.Smart can find default header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void findsDefaultHeader() throws IOException {
-        final String host = "www.takes.org";
+    public void returnsDefaultHeader() throws IOException {
+        final String type = "text/plain";
         MatcherAssert.assertThat(
             new RqHeaders.Smart(
                 new RqHeaders.Base(
@@ -120,9 +119,8 @@ public final class RqHeadersTest {
                         ""
                     )
                 )
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
-            ).single("host", host),
-            Matchers.equalTo(host)
+            ).single("Content-type", type),
+            Matchers.equalTo(type)
         );
     }
 
