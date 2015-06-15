@@ -33,12 +33,18 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.tk.TkEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -55,11 +61,6 @@ public final class BkBasicTest {
      * New line.
      */
     private static final String CRLF = "\r\n";
-    /**
-     * Keep alive header value.
-     */
-    private static final String KEEP_ALIVE =
-        "Connection: Keep-Alive";
 
     /**
      * BkBasic can handle socket data.
@@ -98,62 +99,62 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can handle HTTP persistent connections.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void handlesPersistentConnection() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        final ByteArrayInputStream input = Mockito.spy(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET /keep HTTP/1.1",
-                    "Host:localhost2",
-                    "Content-Length: 5",
-                    "Connection: Keep-Alive2,Keep-Alive",
-                    "",
-                    "hello"
-                ).getBytes()
-            )
-        );
-        Mockito.when(socket.getInputStream()).thenReturn(input);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        new BkBasic(new TkText("Hello!")).accept(socket);
-        Mockito.verify(input, Mockito.never()).close();
-        MatcherAssert.assertThat(
-            baos.toString(),
-            Matchers.containsString(BkBasicTest.KEEP_ALIVE)
-        );
+    @SuppressWarnings("PMD.DoNotUseThreads")
+    public void handlesPersistentConnection() throws Exception {
+        final int port = new Ports().allocate();
+        final String uri = String.format("http://localhost:%d", port);
+        // @checkstyle MagicNumberCheck (1 line)
+        final int count = 1;
+        final CountDownLatch completed = new CountDownLatch(count);
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req)
+                throws IOException {
+                return new TkEmpty().act(req);
+            }
+        };
+        new Thread(
+            // @checkstyle AnonInnerLengthCheck (23 lines)
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtBasic(
+                            new BkBasic(take),
+                            port
+                        ).start(
+                            new Exit() {
+                                @Override
+                                public boolean ready() {
+                                    return completed.getCount() == 0;
+                                }
+                            }
+                        );
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        ).start();
+        try {
+            new JdkRequest(uri)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertHeader("Connection", Matchers.hasItems("Keep-Alive"));
+            completed.countDown();
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+        // @checkstyle MagicNumberCheck (1 line)
+        completed.await(1L, TimeUnit.MINUTES);
+        MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+        new Ports().release(port);
     }
 
-    /**
-     * BkBasic can handle ephemeral (non-persistent) HTTP connections.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void handlesEphemeralConnection() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        final ByteArrayInputStream input = Mockito.spy(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET /close HTTP/1.1",
-                    "Host:localhost3",
-                    "Content-Length: 6",
-                    "",
-                    "hi all"
-                ).getBytes()
-            )
-        );
-        Mockito.when(socket.getInputStream()).thenReturn(input);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        new BkBasic(new TkText("Hello")).accept(socket);
-        Mockito.verify(input, Mockito.times(1)).close();
-        MatcherAssert.assertThat(
-            baos.toString(),
-            Matchers.not(Matchers.containsString(BkBasicTest.KEEP_ALIVE))
-        );
-    }
     /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
      * @throws IOException if any I/O error occurs.

@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.util.Iterator;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -92,7 +93,9 @@ public final class BkBasic implements Back {
             .header(BkBasic.CONNECTION).iterator();
         if (values.hasNext()) {
             do {
-                keep = values.next().contains(BkBasic.KEEP_ALIVE);
+                keep = values.next().toLowerCase(Locale.ENGLISH).contains(
+                    BkBasic.KEEP_ALIVE.toLowerCase(Locale.ENGLISH)
+                );
             } while (!keep && values.hasNext());
         }
         try {
