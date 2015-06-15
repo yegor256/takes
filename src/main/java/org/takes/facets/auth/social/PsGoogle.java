@@ -162,7 +162,8 @@ public final class PsGoogle implements Pass {
      */
     private String token(final String code) throws IOException {
         return new JdkRequest(
-            new Href(this.gauth).path("o/oauth2/token").toString()
+            new Href(this.gauth)
+                .path("o").path("oauth2").path("token").toString()
         ).body()
             .formParam("client_id", this.app)
             .formParam("redirect_uri", this.redir)
