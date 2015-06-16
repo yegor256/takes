@@ -48,8 +48,6 @@ import org.takes.misc.VerboseIterable;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @todo #342:30min/DEV Extract RqHeaders.Smart into its own file and then
- *  remove PMD.TooManyMethods suppression
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqHeaders extends Request {
