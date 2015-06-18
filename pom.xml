@@ -85,7 +85,7 @@
     </distributionManagement>
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <saxon.version>9.1.0.8</saxon.version>
+        <saxon.version>9.6.0-6</saxon.version>
     </properties>
     <dependencies>
         <!--
@@ -182,16 +182,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.saxon</groupId>
-            <artifactId>saxon</artifactId>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
             <version>${saxon.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.saxon</groupId>
-            <artifactId>saxon</artifactId>
-            <version>${saxon.version}</version>
-            <classifier>dom</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>

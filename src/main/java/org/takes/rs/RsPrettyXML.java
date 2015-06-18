@@ -28,20 +28,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentType;
+import org.xml.sax.InputSource;
 
 /**
  * Response with properly indented XML body.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 1.0
@@ -104,7 +108,7 @@ public final class RsPrettyXML implements Response {
      * @throws IOException If fails
      */
     private static byte[] transform(final InputStream body) throws IOException {
-        final StreamSource source = new StreamSource(body);
+        final SAXSource source = new SAXSource(new InputSource(body));
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
             final Transformer transformer = TransformerFactory.newInstance()
@@ -114,10 +118,53 @@ public final class RsPrettyXML implements Response {
                 OutputKeys.OMIT_XML_DECLARATION, "yes"
             );
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            if (isHtml5(source.getInputSource().getByteStream())) {
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                transformer.setOutputProperty(OutputKeys.METHOD, "html");
+                transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
+            }
             transformer.transform(source, new StreamResult(result));
         } catch (final TransformerException ex) {
             throw new IOException(ex);
         }
         return result.toByteArray();
+    }
+
+    /**
+     * Checks if the input is an html5 document.
+     * @param body The body to be checked.
+     * @return True if the input is an html5 document.
+     * @checkstyle MethodNameCheck (2 lines)
+     */
+    @SuppressWarnings({"PMD.AvoidCatchingGenericException",
+        "PMD.OnlyOneReturn"})
+    private static boolean isHtml5(final InputStream body) {
+        final Document document;
+        try {
+            body.mark(Integer.MAX_VALUE);
+            document = parseBody(body);
+            body.reset();
+            // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final Exception ex) {
+            return false;
+        }
+        final DocumentType doctype = document.getDoctype();
+        return doctype != null
+            && "html".equalsIgnoreCase(doctype.getName())
+            && doctype.getSystemId() == null
+            && doctype.getPublicId() == null;
+    }
+
+    /**
+     * Parses the input stream and returns the Document built.
+     * @param body The body to be parsed.
+     * @return The document built.
+     * @throws Exception if something goes wrong.
+     */
+    private static Document parseBody(final InputStream body) throws Exception {
+        final DocumentBuilderFactory factory =
+            DocumentBuilderFactory.newInstance();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        return builder.parse(body);
     }
 }

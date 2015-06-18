@@ -51,7 +51,25 @@ public final class RsPrettyXMLTest {
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>")
+            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
+        );
+    }
+
+    /**
+     * RsPrettyXML retails the Doctype declaration when specified.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void retainsDoctypeDeclaration() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsPrettyXML(
+                    new RsWithBody(
+                        "<!DOCTYPE html><html><head></head><body></body></html>"
+                    )
+                )
+            ).printBody(),
+            Matchers.containsString("<!DOCTYPE HTML>")
         );
     }
 
@@ -73,7 +91,7 @@ public final class RsPrettyXMLTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RsPrint(
             new RsWithBody(
-                "<test>\n   <a>test</a>\n</test>"
+                "<test>\n   <a>test</a>\n</test>\n"
             )
         ).printBody(baos);
         MatcherAssert.assertThat(
