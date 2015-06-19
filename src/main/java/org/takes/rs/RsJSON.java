@@ -93,10 +93,10 @@ public final class RsJSON extends RsWrap {
         final JsonWriter writer = Json.createWriter(baos);
         try {
             writer.write(src.toJSON());
-            return baos.toByteArray();
         } finally {
             writer.close();
         }
+        return baos.toByteArray();
     }
 
     /**
