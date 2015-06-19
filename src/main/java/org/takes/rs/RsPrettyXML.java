@@ -134,10 +134,10 @@ public final class RsPrettyXML implements Response {
      * Checks if the input is an html5 document.
      * @param body The body to be checked.
      * @return True if the input is an html5 document.
-     * @checkstyle MethodNameCheck (2 lines)
+     * @checkstyle MethodNameCheck (4 lines)
      */
-    @SuppressWarnings({"PMD.AvoidCatchingGenericException",
-        "PMD.OnlyOneReturn"})
+    @SuppressWarnings({ "PMD.AvoidCatchingGenericException",
+        "PMD.OnlyOneReturn" })
     private static boolean isHtml5(final InputStream body) {
         final Document document;
         try {
