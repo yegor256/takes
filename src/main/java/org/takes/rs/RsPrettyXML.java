@@ -39,7 +39,6 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentType;
 import org.xml.sax.InputSource;
 
 /**
@@ -134,37 +133,28 @@ public final class RsPrettyXML implements Response {
      * Checks if the input is an html5 document.
      * @param body The body to be checked.
      * @return True if the input is an html5 document.
-     * @checkstyle MethodNameCheck (4 lines)
+     * @checkstyle MethodNameCheck (3 lines)
      */
-    @SuppressWarnings({ "PMD.AvoidCatchingGenericException",
-        "PMD.OnlyOneReturn" })
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static boolean isHtml5(final InputStream body) {
-        final Document document;
+        Document document = null;
+        boolean valid = true;
         try {
             body.mark(Integer.MAX_VALUE);
-            document = parseBody(body);
+            final DocumentBuilderFactory factory =
+                DocumentBuilderFactory.newInstance();
+            final DocumentBuilder builder = factory.newDocumentBuilder();
+            document = builder.parse(body);
             body.reset();
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Exception ex) {
-            return false;
+            valid = false;
         }
-        final DocumentType doctype = document.getDoctype();
-        return doctype != null
-            && "html".equalsIgnoreCase(doctype.getName())
-            && doctype.getSystemId() == null
-            && doctype.getPublicId() == null;
-    }
-
-    /**
-     * Parses the input stream and returns the Document built.
-     * @param body The body to be parsed.
-     * @return The document built.
-     * @throws Exception if something goes wrong.
-     */
-    private static Document parseBody(final InputStream body) throws Exception {
-        final DocumentBuilderFactory factory =
-            DocumentBuilderFactory.newInstance();
-        final DocumentBuilder builder = factory.newDocumentBuilder();
-        return builder.parse(body);
+        // @checkstyle BooleanExpressionComplexityCheck (5 lines)
+        return valid
+            && document.getDoctype() != null
+            && "html".equalsIgnoreCase(document.getDoctype().getName())
+            && document.getDoctype().getSystemId() == null
+            && document.getDoctype().getPublicId() == null;
     }
 }
