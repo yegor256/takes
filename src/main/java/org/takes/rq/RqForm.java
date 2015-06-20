@@ -65,6 +65,15 @@ import org.takes.misc.VerboseIterable;
 public interface RqForm extends Request {
 
     /**
+     * The parameter separator.
+     */
+    String PARAM_SEPARATOR = "&";
+    /**
+     * The separator between key and value.
+     */
+    String KV_SEPARATOR = "=";
+
+    /**
      * Get single parameter.
      * @param name Parameter name
      * @return List of values (can be empty)
@@ -100,11 +109,12 @@ public interface RqForm extends Request {
             new RqPrint(req).printBody(baos);
             final String body = new String(baos.toByteArray());
             this.map = new ConcurrentHashMap<String, List<String>>(0);
-            for (final String pair : body.split("&")) {
+            for (final String pair : body.split(RqForm.PARAM_SEPARATOR)) {
                 if (pair.isEmpty()) {
                     continue;
                 }
-                final String[] parts = pair.split("=", 2);
+                final String[] parts = pair
+                    .split(RqForm.KV_SEPARATOR, 2);
                 if (parts.length < 2) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
@@ -237,43 +247,58 @@ public interface RqForm extends Request {
      * Fake RqForm accepting parameters in the constructor.
      * @author Matteo Barbieri (barbieri.matteo@gmail.com)
      */
-    @EqualsAndHashCode(callSuper = true, of = "map")
-    final class Fake extends RqWrap implements RqForm {
+    final class Fake implements RqForm {
 
         /**
-         * Map of params and values.
+         * Fake form request.
          */
-        private final transient ConcurrentMap<String, List<String>> map;
+        private final RqForm fake;
 
         /**
          * Ctor.
          * @param req Original request
          * @param params Parameters list
+         * @throws IOException if something goes wrong.
          */
-        public Fake(final Request req, final String... params) {
-            super(req);
+        public Fake(final Request req, final String... params)
+            throws IOException {
             if (params.length % 2 != 0) {
                 throw new IllegalArgumentException(
                     "Wrong number of parameters"
                 );
             }
-            this.map = new ConcurrentHashMap<String, List<String>>(0);
+            final StringBuilder builder = new StringBuilder();
             for (int idx = 0; idx < params.length; idx += 2) {
                 final String key = params[idx];
                 final String value = params[idx + 1];
-                this.map.putIfAbsent(key, new LinkedList<String>());
-                this.map.get(key).add(value);
+                builder.append(key);
+                builder.append(RqForm.KV_SEPARATOR);
+                builder.append(value);
+                builder.append(RqForm.PARAM_SEPARATOR);
             }
+            this.fake = new RqForm.Base(
+                new RqWithBody(req, builder.toString())
+            );
         }
 
         @Override
         public Iterable<String> param(final CharSequence name) {
-            return this.map.get(name);
+            return this.fake.param(name);
         }
 
         @Override
         public Iterable<String> names() {
-            return this.map.keySet();
+            return this.fake.names();
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.fake.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.fake.body();
         }
     }
 }
