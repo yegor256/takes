@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -54,12 +55,11 @@ import org.takes.misc.VerboseIterable;
  * decorator before passing request to this class.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @since 0.9
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqForm extends Request {
@@ -77,6 +77,7 @@ public interface RqForm extends Request {
      * Get single parameter.
      * @param name Parameter name
      * @return List of values (can be empty)
+     * @throws IOException if something fails reading parameters
      */
     Iterable<String> param(CharSequence name) throws IOException;
 
@@ -116,6 +117,7 @@ public interface RqForm extends Request {
             super(request);
             this.req = request;
         }
+
         @Override
         public Iterable<String> param(
             final CharSequence key
@@ -142,10 +144,12 @@ public interface RqForm extends Request {
             }
             return iter;
         }
+
         @Override
         public Iterable<String> names() throws IOException {
             return this.map().keySet();
         }
+
         /**
          * Decode from URL.
          * @param txt Text
@@ -160,12 +164,13 @@ public interface RqForm extends Request {
                 throw new IllegalStateException(ex);
             }
         }
+
         /**
          * Create map of request parameter.
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
-        private ConcurrentMap<String, List<String>> map() throws IOException  {
+        private ConcurrentMap<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
                     final ByteArrayOutputStream
@@ -174,11 +179,13 @@ public interface RqForm extends Request {
                     final String body = new String(baos.toByteArray());
                     final ConcurrentMap<String, List<String>> map =
                         new ConcurrentHashMap<String, List<String>>(1);
-                    for (final String pair : body.split("&")) {
+                    for (final String pair
+                        : body.split(RqForm.PARAM_SEPARATOR)) {
                         if (pair.isEmpty()) {
                             continue;
                         }
-                        final String[] parts = pair.split("=", 2);
+                        final String[] parts =
+                            pair.split(RqForm.KV_SEPARATOR, 2);
                         if (parts.length < 2) {
                             throw new HttpException(
                                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -199,11 +206,11 @@ public interface RqForm extends Request {
             }
         }
     }
+
     /**
      * Smart decorator, with extra features.
      *
      * <p>The class is immutable and thread-safe.
-     *
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
@@ -213,6 +220,7 @@ public interface RqForm extends Request {
          * Original.
          */
         private final transient RqForm origin;
+
         /**
          * Ctor.
          * @param req Original request
@@ -220,23 +228,28 @@ public interface RqForm extends Request {
         public Smart(final RqForm req) {
             this.origin = req;
         }
+
         @Override
         public Iterable<String> param(final CharSequence name)
             throws IOException {
             return this.origin.param(name);
         }
+
         @Override
         public Iterable<String> names() throws IOException {
             return this.origin.names();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.origin.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
         }
+
         /**
          * Get single param or throw HTTP exception.
          * @param name Name of query param
@@ -255,6 +268,7 @@ public interface RqForm extends Request {
             }
             return params.next();
         }
+
         /**
          * Get single param or default.
          * @param name Name of query param
@@ -314,12 +328,13 @@ public interface RqForm extends Request {
         }
 
         @Override
-        public Iterable<String> param(final CharSequence name) {
+        public Iterable<String> param(final CharSequence name)
+            throws IOException {
             return this.fake.param(name);
         }
 
         @Override
-        public Iterable<String> names() {
+        public Iterable<String> names() throws IOException {
             return this.fake.names();
         }
 
