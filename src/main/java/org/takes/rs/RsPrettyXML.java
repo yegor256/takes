@@ -23,13 +23,14 @@
  */
 package org.takes.rs;
 
+import com.jcabi.aspects.LogExceptions;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -40,6 +41,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * Response with properly indented XML body.
@@ -133,22 +135,24 @@ public final class RsPrettyXML implements Response {
      * Checks if the input is an html5 document.
      * @param body The body to be checked.
      * @return True if the input is an html5 document.
-     * @checkstyle MethodNameCheck (3 lines)
+     * @checkstyle MethodNameCheck (4 lines)
+     * @throws IOException If there are problems reading the input.
      */
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    private static boolean isHtml5(final InputStream body) {
+    @LogExceptions
+    private static boolean isHtml5(final InputStream body) throws IOException {
         Document document = null;
         boolean valid = true;
         try {
             body.mark(Integer.MAX_VALUE);
-            final DocumentBuilderFactory factory =
-                DocumentBuilderFactory.newInstance();
-            final DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(body);
+            document = DocumentBuilderFactory
+                .newInstance()
+                .newDocumentBuilder()
+                .parse(body);
             body.reset();
-            // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final Exception ex) {
+        } catch (final SAXException ex) {
             valid = false;
+        } catch (final ParserConfigurationException ex) {
+            throw new IOException(ex);
         }
         // @checkstyle BooleanExpressionComplexityCheck (5 lines)
         return valid
