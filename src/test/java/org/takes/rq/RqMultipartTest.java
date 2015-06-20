@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Arrays;
@@ -76,11 +77,11 @@ public final class RqMultipartTest {
             new RqFake(),
             new RqWithHeader(
                 new RqFake("", "", "449 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; name=\"t-1\""
+                RqMultipartTest.DISPOSITION, "form-data; name=\"t-1\""
             ),
             new RqWithHeader(
                 new RqFake("", "", ""),
-                DISPOSITION,
+                RqMultipartTest.DISPOSITION,
                 "form-data; name=\"data\"; filename=\"a.bin\""
             )
         );
@@ -126,7 +127,7 @@ public final class RqMultipartTest {
         new RqMultipart.Fake(
             new RqWithHeader(
                 new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; fake=\"t-3\""
+                RqMultipartTest.DISPOSITION, "form-data; fake=\"t-3\""
             )
         );
     }
@@ -339,9 +340,8 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base can handle a big request in an acceptable time.
      * @throws IOException If some problem inside
-     * @checkstyle MagicNumberCheck (2 lines)
      */
-    @Test(timeout = 10000)
+    @Test
     public void handlesRequestInTime() throws IOException {
         final int length = 100000000;
         final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
@@ -383,5 +383,53 @@ public final class RqMultipartTest {
         );
         temp.delete();
     }
-
+    /**
+     * RqMultipart.Base doesn't distort the content.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void notDistortContent() throws IOException {
+        final int length = 1000000;
+        final File temp = File.createTempFile("notDistortContent", ".tmp");
+        final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
+        bwr.write(
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--zzz1",
+                "Content-Disposition: form-data; name=\"test1\"",
+                "",
+                ""
+            )
+        );
+        final int byt = 0x7f;
+        for (int idx = 0; idx < length; ++idx) {
+            bwr.write(idx % byt);
+        }
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.write("--zzz1--");
+        bwr.write(RqMultipartTest.CRLF);
+        bwr.close();
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: exampl.com",
+                "Content-Type: multipart/form-data; boundary=zzz1"
+            ),
+            new FileInputStream(temp)
+        );
+        final InputStream stream = new RqMultipart.Smart(
+            new RqMultipart.Base(req)
+        ).single("test1").body();
+        MatcherAssert.assertThat(
+            stream.available(),
+            Matchers.equalTo(length)
+        );
+        for (int idx = 0; idx < length; ++idx) {
+            MatcherAssert.assertThat(
+                String.format("byte %d not matched", idx),
+                stream.read(),
+                Matchers.equalTo(idx % byt)
+            );
+        }
+        temp.delete();
+    }
 }

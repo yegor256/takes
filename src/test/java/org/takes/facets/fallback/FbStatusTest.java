@@ -55,7 +55,7 @@ public final class FbStatusTest {
                 new FbStatus(
                     status,
                     new TkFixed(new RsText("not found response"))
-                ).route(req).next()
+                ).route(req).get()
             ).printBody(),
             Matchers.startsWith("not found")
         );
@@ -81,7 +81,7 @@ public final class FbStatusTest {
                         };
                     },
                     new FbFixed(new RsText("response text"))
-                ).route(req).next()
+                ).route(req).get()
             ).printBody(),
             Matchers.startsWith("response")
         );
@@ -100,7 +100,7 @@ public final class FbStatusTest {
             new FbStatus(
                 HttpURLConnection.HTTP_UNAUTHORIZED,
                 new TkFixed(new RsText("unauthorized"))
-            ).route(req).hasNext(),
+            ).route(req).has(),
             Matchers.equalTo(false)
         );
     }
@@ -119,7 +119,7 @@ public final class FbStatusTest {
             new IOException("Exception message")
         );
         final RsPrint response = new RsPrint(
-            new FbStatus(code).route(req).next()
+            new FbStatus(code).route(req).get()
         );
         MatcherAssert.assertThat(
             response.printBody(),

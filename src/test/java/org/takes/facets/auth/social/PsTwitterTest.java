@@ -24,31 +24,79 @@
 
 package org.takes.facets.auth.social;
 
+import com.jcabi.http.request.FakeRequest;
 import java.io.IOException;
-import org.junit.Ignore;
+import java.util.Collections;
+import java.util.Map;
+import javax.json.Json;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.math.RandomUtils;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.takes.facets.auth.Identity;
+import org.takes.facets.auth.Pass;
+import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link PsTwitter}.
  * @author Prasath Premkumar (popprem@gmail.com)
+ * @author Adam Siemion (adam.siemion@lemonsoftware.pl)
  * @version $Id$
  * @since 1.0
+ * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class PsTwitterTest {
 
     /**
-     * Twitter authorization process.
+     * PsTwitter can login.
      * @throws IOException If error occurs in the process
-     * @todo #11:30min/DEV Test to be implemented for PsTwitter
-     *  using a oauth mock library (eg:wiremock). Need to modify
-     *  PsTwitter to accept url from configurations, so that url
-     *  can be changed for test and real env accordingly.
-     *  Response to be stubbed for both token and verify_credentials
-     *  calls and assertions to be performed for the values returned.
      */
-    @Ignore
     @Test
-    public void authorizes() throws IOException {
-        throw new UnsupportedOperationException("not implemented yet");
+    public void logsIn() throws IOException {
+        final int tid = RandomUtils.nextInt(1000);
+        final String name = RandomStringUtils.randomAlphanumeric(10);
+        final String picture = RandomStringUtils.randomAlphanumeric(10);
+        final Pass pass = new PsTwitter(
+            new FakeRequest(
+                200,
+                "HTTP OK",
+                Collections.<Map.Entry<String, String>>emptyList(),
+                String.format(
+                    "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
+                    RandomStringUtils.randomAlphanumeric(10)
+                ).getBytes()
+            ),
+            new FakeRequest(
+                200,
+                "HTTP OK",
+                Collections.<Map.Entry<String, String>>emptyList(),
+                Json.createObjectBuilder()
+                    .add("id", tid)
+                    .add("name", name)
+                    .add("profile_image_url", picture)
+                    .build()
+                    .toString()
+                    .getBytes()
+            ),
+            RandomStringUtils.randomAlphanumeric(10),
+            RandomStringUtils.randomAlphanumeric(10)
+        );
+        final Identity identity = pass.enter(
+            new RqFake("GET", "")
+        ).get();
+        MatcherAssert.assertThat(
+            identity.urn(),
+            CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
+        );
+        MatcherAssert.assertThat(
+            identity.properties().get("name"),
+            CoreMatchers.equalTo(name)
+        );
+        MatcherAssert.assertThat(
+            identity.properties().get("picture"),
+            CoreMatchers.equalTo(picture)
+        );
     }
 }

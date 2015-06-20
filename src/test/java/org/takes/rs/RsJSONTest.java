@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import java.io.IOException;
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonStructure;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -53,6 +54,27 @@ public final class RsJSONTest {
                 new RsJSON(json).body()
             ).readObject().getString(key),
             Matchers.startsWith("Jeffrey")
+        );
+    }
+
+    /**
+     * RsJSON can build a big JSON response.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsBigJsonResponse() throws IOException {
+        final int size = 100000;
+        final JsonArrayBuilder builder = Json.createArrayBuilder();
+        for (int idx = 0; idx < size; ++idx) {
+            builder.add(
+                Json.createObjectBuilder().add("number", "212 555-1234")
+            );
+        }
+        MatcherAssert.assertThat(
+            Json.createReader(
+                new RsJSON(builder.build()).body()
+            ).readArray().size(),
+            Matchers.equalTo(size)
         );
     }
 

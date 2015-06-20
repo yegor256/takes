@@ -80,4 +80,48 @@ public final class RqHeadersTest {
         );
     }
 
+    /**
+     * RqHeaders.Smart can return a single header.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void returnsSingleHeader() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHeaders.Smart(
+                new RqHeaders.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /g",
+                            "Host: www.takes.com"
+                        ),
+                        ""
+                    )
+                )
+            ).single("host", "www.takes.net"),
+            Matchers.equalTo("www.takes.com")
+        );
+    }
+    /**
+     * RqHeaders.Smart can return a default header.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void returnsDefaultHeader() throws IOException {
+        final String type = "text/plain";
+        MatcherAssert.assertThat(
+            new RqHeaders.Smart(
+                new RqHeaders.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /f",
+                            "Accept: text/json"
+                        ),
+                        ""
+                    )
+                )
+            ).single("Content-type", type),
+            Matchers.equalTo(type)
+        );
+    }
+
 }

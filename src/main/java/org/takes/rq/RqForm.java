@@ -78,67 +78,57 @@ public interface RqForm extends Request {
      * @param name Parameter name
      * @return List of values (can be empty)
      */
-    Iterable<String> param(CharSequence name);
+    Iterable<String> param(CharSequence name) throws IOException;
 
     /**
      * Get all parameter names.
      * @return All names
+     * @throws IOException if something fails reading parameters
      */
-    Iterable<String> names();
+    Iterable<String> names() throws IOException;
 
     /**
      * Base implementation of @link RqForm.
      * @author Aleksey Popov (alopen@yandex.ru)
      * @version $Id$
      */
-    @EqualsAndHashCode(callSuper = true, of = "map")
+    @EqualsAndHashCode(callSuper = true, of = "req")
     final class Base extends RqWrap implements RqForm {
+
         /**
-         * Map of params and values.
+         * Request.
          */
-        private final transient ConcurrentMap<String, List<String>> map;
+        private final transient Request req;
+
+        /**
+         * Saved map.
+         * @checkstyle LineLengthCheck (3 lines)
+         */
+        private final transient List<ConcurrentMap<String, List<String>>> saved =
+            new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
+
         /**
          * Ctor.
-         * @param req Original request
+         * @param request Original request
          * @throws IOException If fails
          */
-        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-        public Base(final Request req) throws IOException {
-            super(req);
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            new RqPrint(req).printBody(baos);
-            final String body = new String(baos.toByteArray());
-            this.map = new ConcurrentHashMap<String, List<String>>(0);
-            for (final String pair : body.split(RqForm.PARAM_SEPARATOR)) {
-                if (pair.isEmpty()) {
-                    continue;
-                }
-                final String[] parts = pair
-                    .split(RqForm.KV_SEPARATOR, 2);
-                if (parts.length < 2) {
-                    throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format("invalid form body pair: %s", pair)
-                    );
-                }
-                final String key = RqForm.Base.decode(
-                    parts[0].trim().toLowerCase(Locale.ENGLISH)
-                );
-                this.map.putIfAbsent(key, new LinkedList<String>());
-                this.map.get(key).add(RqForm.Base.decode(parts[1].trim()));
-            }
+        public Base(final Request request) throws IOException {
+            super(request);
+            this.req = request;
         }
         @Override
-        public Iterable<String> param(final CharSequence key) {
+        public Iterable<String> param(
+            final CharSequence key
+        ) throws IOException {
             final List<String> values =
-                    this.map.get(key.toString().toLowerCase(Locale.ENGLISH));
+                this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<String> iter;
             if (values == null) {
                 iter = new VerboseIterable<String>(
                     Collections.<String>emptyList(),
                     new Sprintf(
                         "there are no params \"%s\" among %d others: %s",
-                        key, this.map.size(), this.map.keySet()
+                        key, this.map().size(), this.map().keySet()
                     )
                 );
             } else {
@@ -153,8 +143,8 @@ public interface RqForm extends Request {
             return iter;
         }
         @Override
-        public Iterable<String> names() {
-            return this.map.keySet();
+        public Iterable<String> names() throws IOException {
+            return this.map().keySet();
         }
         /**
          * Decode from URL.
@@ -170,11 +160,50 @@ public interface RqForm extends Request {
                 throw new IllegalStateException(ex);
             }
         }
+        /**
+         * Create map of request parameter.
+         * @return Parameters map or empty map in case of error.
+         * @throws IOException If something fails reading or parsing body
+         */
+        private ConcurrentMap<String, List<String>> map() throws IOException  {
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    final ByteArrayOutputStream
+                        baos = new ByteArrayOutputStream();
+                    new RqPrint(this.req).printBody(baos);
+                    final String body = new String(baos.toByteArray());
+                    final ConcurrentMap<String, List<String>> map =
+                        new ConcurrentHashMap<String, List<String>>(1);
+                    for (final String pair : body.split("&")) {
+                        if (pair.isEmpty()) {
+                            continue;
+                        }
+                        final String[] parts = pair.split("=", 2);
+                        if (parts.length < 2) {
+                            throw new HttpException(
+                                HttpURLConnection.HTTP_BAD_REQUEST,
+                                String.format(
+                                    "invalid form body pair: %s", pair
+                                )
+                            );
+                        }
+                        final String key = RqForm.Base.decode(
+                            parts[0].trim().toLowerCase(Locale.ENGLISH)
+                        );
+                        map.putIfAbsent(key, new LinkedList<String>());
+                        map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+                    }
+                    this.saved.add(map);
+                }
+                return this.saved.get(0);
+            }
+        }
     }
     /**
      * Smart decorator, with extra features.
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
+     *
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
@@ -192,11 +221,12 @@ public interface RqForm extends Request {
             this.origin = req;
         }
         @Override
-        public Iterable<String> param(final CharSequence name) {
+        public Iterable<String> param(final CharSequence name)
+            throws IOException {
             return this.origin.param(name);
         }
         @Override
-        public Iterable<String> names() {
+        public Iterable<String> names() throws IOException {
             return this.origin.names();
         }
         @Override
@@ -230,8 +260,10 @@ public interface RqForm extends Request {
          * @param name Name of query param
          * @param def Default, if not found
          * @return Value of it
+         * @throws IOException if something fails reading parameters
          */
-        public String single(final CharSequence name, final String def) {
+        public String single(final CharSequence name, final String def)
+            throws IOException {
             final String value;
             final Iterator<String> params = this.param(name).iterator();
             if (params.hasNext()) {

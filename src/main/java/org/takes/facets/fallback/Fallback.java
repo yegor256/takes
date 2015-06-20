@@ -24,8 +24,8 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
-import java.util.Iterator;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Fallback to dispatch an exceptional situation.
@@ -45,6 +45,6 @@ public interface Fallback {
      * @return An iterator of responses or an empty iterator
      * @throws IOException If fails
      */
-    Iterator<Response> route(RqFallback req) throws IOException;
+    Opt<Response> route(RqFallback req) throws IOException;
 
 }

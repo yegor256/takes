@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Response;
 
 /**
  * Test case for {@link RsWithStatus}.
@@ -60,6 +61,29 @@ public final class RsWithStatusTest {
                     ""
                 )
             )
+        );
+    }
+
+    /**
+     * RsWithStatus can add status multiple times.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addsStatusMultipleTimes() throws IOException {
+        final Response response = new RsWithStatus(
+            new RsWithStatus(
+                new RsEmpty(),
+                HttpURLConnection.HTTP_NOT_FOUND
+            ),
+            HttpURLConnection.HTTP_SEE_OTHER
+        );
+        MatcherAssert.assertThat(
+            response.head(),
+            Matchers.<String>iterableWithSize(1)
+        );
+        MatcherAssert.assertThat(
+            response.head(),
+            Matchers.<String>iterableWithSize(1)
         );
     }
 }

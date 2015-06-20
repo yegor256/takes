@@ -30,7 +30,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.misc.Concat;
@@ -48,6 +47,7 @@ import org.takes.misc.Select;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithStatus extends RsWrap {
+
     /**
      * Statuses and their reasons.
      */
@@ -120,10 +120,9 @@ public final class RsWithStatus extends RsWrap {
             new Select<String>(
                 origin.head(),
                 new Condition<String>() {
-                    private final AtomicBoolean fit = new AtomicBoolean(false);
                     @Override
-                    public boolean fits(final String element) {
-                        return this.fit.getAndSet(true);
+                    public boolean fits(final String item) {
+                        return !item.startsWith("HTTP/");
                     }
                 }
             )

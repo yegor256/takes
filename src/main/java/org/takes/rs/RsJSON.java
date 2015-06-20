@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import javax.json.Json;
 import javax.json.JsonStructure;
+import javax.json.JsonWriter;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
@@ -89,7 +90,12 @@ public final class RsJSON extends RsWrap {
      */
     private static byte[] print(final RsJSON.Source src) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Json.createWriter(baos).write(src.toJSON());
+        final JsonWriter writer = Json.createWriter(baos);
+        try {
+            writer.write(src.toJSON());
+        } finally {
+            writer.close();
+        }
         return baos.toByteArray();
     }
 

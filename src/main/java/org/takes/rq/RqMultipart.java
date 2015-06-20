@@ -237,8 +237,7 @@ public interface RqMultipart extends Request {
             );
             file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
-                file,
-                "rw"
+                file, "rw"
             ).getChannel();
             try {
                 channel.write(
@@ -257,12 +256,12 @@ public interface RqMultipart extends Request {
                 )
             );
         }
-
         /**
          * Copy until boundary reached.
          * @param target Output file channel
          * @param boundary Boundary
          * @throws IOException If fails
+         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
             final byte[] boundary) throws IOException {
@@ -271,6 +270,10 @@ public interface RqMultipart extends Request {
             while (cont) {
                 if (!this.buffer.hasRemaining()) {
                     this.buffer.clear();
+                    for (int idx = 0; idx < match; ++idx) {
+                        this.buffer.put(boundary[idx]);
+                    }
+                    match = 0;
                     if (this.body.read(this.buffer) == -1) {
                         break;
                     }
@@ -387,7 +390,6 @@ public interface RqMultipart extends Request {
      * @since 0.16
      */
     final class Fake implements RqMultipart {
-
         /**
          * Fake boundary constant.
          */
@@ -400,7 +402,6 @@ public interface RqMultipart extends Request {
          * Fake multipart request.
          */
         private final RqMultipart fake;
-
         /**
          * Fake ctor.
          * @param req Fake request header holder
@@ -419,7 +420,7 @@ public interface RqMultipart extends Request {
                             "Content-Type",
                             String.format(
                                 "multipart/form-data; boundary=%s",
-                                BOUNDARY
+                                RqMultipart.Fake.BOUNDARY
                             )
                         ).head();
                     }
