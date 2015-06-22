@@ -39,6 +39,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -50,6 +51,7 @@ import org.xml.sax.SAXException;
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyXML implements Response {
@@ -135,19 +137,21 @@ public final class RsPrettyXML implements Response {
      * Checks if the input is an html5 document.
      * @param body The body to be checked.
      * @return True if the input is an html5 document.
-     * @checkstyle MethodNameCheck (4 lines)
      * @throws IOException If there are problems reading the input.
+     * @checkstyle MethodNameCheck (4 lines)
      */
     @LogExceptions
     private static boolean isHtml5(final InputStream body) throws IOException {
-        Document document = null;
+        Opt<Document> document = new Opt.Empty<Document>();
         boolean valid = true;
         try {
             body.mark(Integer.MAX_VALUE);
-            document = DocumentBuilderFactory
-                .newInstance()
-                .newDocumentBuilder()
-                .parse(body);
+            document = new Opt.Single<Document>(
+                DocumentBuilderFactory
+                    .newInstance()
+                    .newDocumentBuilder()
+                    .parse(body)
+            );
             body.reset();
         } catch (final SAXException ex) {
             valid = false;
@@ -156,9 +160,9 @@ public final class RsPrettyXML implements Response {
         }
         // @checkstyle BooleanExpressionComplexityCheck (5 lines)
         return valid
-            && document.getDoctype() != null
-            && "html".equalsIgnoreCase(document.getDoctype().getName())
-            && document.getDoctype().getSystemId() == null
-            && document.getDoctype().getPublicId() == null;
+            && document.get().getDoctype() != null
+            && "html".equalsIgnoreCase(document.get().getDoctype().getName())
+            && document.get().getDoctype().getSystemId() == null
+            && document.get().getDoctype().getPublicId() == null;
     }
 }
