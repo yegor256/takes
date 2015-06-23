@@ -26,6 +26,7 @@ package org.takes.http;
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,8 +34,10 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -139,16 +142,22 @@ public final class BkBasicTest {
                 }
             }
         ).start();
-        try {
-            new JdkRequest(uri)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertHeader("Connection", Matchers.hasItems("Keep-Alive"));
-            completed.countDown();
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
+        final HttpURLConnection conn = HttpURLConnection.class.cast(
+            new URL(uri).openConnection()
+        );
+        conn.setRequestMethod("GET");
+        conn.setUseCaches(false);
+        conn.setInstanceFollowRedirects(false);
+        conn.addRequestProperty("Host","localhost");
+        MatcherAssert.assertThat(
+            conn.getHeaderFields(),
+            Matchers.hasKey("Connection")
+        );
+        MatcherAssert.assertThat(
+            conn.getHeaderFields().get("Connection"),
+            Matchers.hasItem("Keep-Alive")
+        );
+        completed.countDown();
         // @checkstyle MagicNumberCheck (1 line)
         completed.await(1L, TimeUnit.MINUTES);
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
