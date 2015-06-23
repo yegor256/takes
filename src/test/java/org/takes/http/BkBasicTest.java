@@ -26,7 +26,6 @@ package org.takes.http;
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,7 +36,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -116,6 +114,7 @@ public final class BkBasicTest {
             @Override
             public Response act(final Request req)
                 throws IOException {
+                System.out.println("ACA");
                 return new TkEmpty().act(req);
             }
         };
@@ -148,11 +147,7 @@ public final class BkBasicTest {
         conn.setRequestMethod("GET");
         conn.setUseCaches(false);
         conn.setInstanceFollowRedirects(false);
-        conn.addRequestProperty("Host","localhost");
-        MatcherAssert.assertThat(
-            conn.getHeaderFields(),
-            Matchers.hasKey("Connection")
-        );
+        conn.addRequestProperty("Host", "localhost");
         MatcherAssert.assertThat(
             conn.getHeaderFields().get("Connection"),
             Matchers.hasItem("Keep-Alive")
