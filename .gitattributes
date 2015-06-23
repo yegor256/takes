@@ -1,20 +1,7 @@
-# Check out all text files in UNIX format.
-* text eol=lf
+# Check out all text files in UNIX format, with LF as end of line
+# Don't change this file. If you have any ideas about it, please
+# submit a separate issue about it and we'll discuss.
 
-# Explicitly declare text files we want to always be normalized and converted 
-# to native line endings on checkout.
-*.txt text
-*.java text
-*.groovy text
-*.xml text
-*.md text
-*.pom text
-*.properties text
-*.tex text
-*.vm text
-*.xsl text
-*.yml text
-
-# Denote all files that are truly binary and should not be modified.
-*.png binary
-*.jpg binary
+* text=auto eol=lf
+*.java ident
+*.xml ident

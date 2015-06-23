@@ -64,4 +64,26 @@ public final class RqFormTest {
         );
     }
 
+    /**
+     * Returns always same instances (Cache).
+     * @throws IOException if fails
+     */
+    @Test
+    public void sameInstance() throws IOException {
+        final RqForm req = new RqForm.Base(
+            new RqBuffered(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /path?a=3",
+                        "Host: www.example2.com"
+                    ),
+                    "alpha=a+b+c&beta=%20No%20"
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            req.names() == req.names(),
+            Matchers.is(Boolean.TRUE)
+        );
+    }
 }

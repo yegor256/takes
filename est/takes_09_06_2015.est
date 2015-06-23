@@ -1,0 +1,17 @@
+date: 09-06-2015
+author: Igor Khvostenkov
+method: champions.pert
+scope:
+  1: Design of the interfaces
+  2: Routing/Dispatching
+  3: Persistent entities
+  4: Performance testing
+champions:
+  1:
+    worst-case: 60
+    best-case: 25
+    most-likely: 35
+  2:
+    worst-case: 40
+    best-case: 15
+    most-likely: 25

@@ -49,6 +49,7 @@ import org.takes.misc.VerboseIterable;
  * @version $Id$
  * @since 0.1
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public interface RqHeaders extends Request {
 
     /**
@@ -210,5 +211,25 @@ public interface RqHeaders extends Request {
             }
             return params.next();
         }
+        /**
+         * If header is present, returns the first header value.
+         * If not, returns a default value.
+         * @param name Name of header key
+         * @param def Default value
+         * @return Header Value or default value
+         * @throws IOException If fails
+         */
+        public String single(final CharSequence name, final CharSequence def)
+            throws IOException {
+            final String value;
+            final Iterator<String> params = this.header(name).iterator();
+            if (params.hasNext()) {
+                value = params.next();
+            } else {
+                value = def.toString();
+            }
+            return value;
+        }
+
     }
 }
