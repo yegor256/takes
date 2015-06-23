@@ -114,7 +114,6 @@ public final class BkBasicTest {
             @Override
             public Response act(final Request req)
                 throws IOException {
-                System.out.println("ACA");
                 return new TkEmpty().act(req);
             }
         };
