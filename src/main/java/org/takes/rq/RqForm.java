@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Iterator;
@@ -315,8 +316,8 @@ public interface RqForm extends Request {
             }
             final StringBuilder builder = new StringBuilder();
             for (int idx = 0; idx < params.length; idx += 2) {
-                final String key = params[idx];
-                final String value = params[idx + 1];
+                final String key = RqForm.Fake.encode(params[idx]);
+                final String value = RqForm.Fake.encode(params[idx + 1]);
                 builder.append(key)
                     .append(RqForm.KV_SEPARATOR)
                     .append(value)
@@ -346,6 +347,21 @@ public interface RqForm extends Request {
         @Override
         public InputStream body() throws IOException {
             return this.fake.body();
+        }
+
+        /**
+         * Encode text.
+         * @param txt Text
+         * @return Encoded text
+         */
+        private static String encode(final CharSequence txt) {
+            try {
+                return URLEncoder.encode(
+                    txt.toString(), Charset.defaultCharset().name()
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
         }
     }
 }

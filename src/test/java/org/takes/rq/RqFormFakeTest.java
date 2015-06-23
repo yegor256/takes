@@ -44,7 +44,7 @@ public class RqFormFakeTest {
         final String key = "key";
         final String akey = "anotherkey";
         final String value = "value";
-        final String avalue = "anothervalue";
+        final String avalue = "a&b";
         final String aavalue = "againanothervalue";
         final RqForm req = new RqForm.Fake(
             new RqFake(),
