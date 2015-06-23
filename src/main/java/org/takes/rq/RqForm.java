@@ -317,10 +317,10 @@ public interface RqForm extends Request {
             for (int idx = 0; idx < params.length; idx += 2) {
                 final String key = params[idx];
                 final String value = params[idx + 1];
-                builder.append(key);
-                builder.append(RqForm.KV_SEPARATOR);
-                builder.append(value);
-                builder.append(RqForm.PARAM_SEPARATOR);
+                builder.append(key)
+                    .append(RqForm.KV_SEPARATOR)
+                    .append(value)
+                    .append(RqForm.PARAM_SEPARATOR);
             }
             this.fake = new RqForm.Base(
                 new RqWithBody(req, builder.toString())
