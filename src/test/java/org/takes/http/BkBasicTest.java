@@ -106,7 +106,7 @@ public final class BkBasicTest {
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void handlesPersistentConnection() throws Exception {
         final int port = new Ports().allocate();
-        final String uri = String.format("http://localhost:%d", port);
+        final String uri = String.format("http://localhost:%d/init", port);
         // @checkstyle MagicNumberCheck (1 line)
         final int count = 1;
         final CountDownLatch completed = new CountDownLatch(count);
@@ -124,7 +124,7 @@ public final class BkBasicTest {
                 public void run() {
                     try {
                         new FtBasic(
-                            new BkBasic(take),
+                            new BkBasic(new TkFork(new FkRegex("/init", take))),
                             port
                         ).start(
                             new Exit() {
