@@ -57,6 +57,7 @@ import org.takes.tk.TkText;
  * @version $Id$
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 public final class BkBasicTest {
 
@@ -122,7 +123,7 @@ public final class BkBasicTest {
             }
         };
         final BkFake fake = new BkFake(new BkBasic(take, true));
-        new Thread(
+        final Thread thread = new Thread(
             // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {
                 @Override
@@ -144,7 +145,8 @@ public final class BkBasicTest {
                     }
                 }
             }
-        ).start();
+        );
+        thread.start();
         for (int idx = 0; idx < 2; ++idx) {
             final HttpURLConnection conn = HttpURLConnection.class.cast(
                 new URL(uri).openConnection()
@@ -158,6 +160,7 @@ public final class BkBasicTest {
         completed.countDown();
         // @checkstyle MagicNumberCheck (1 line)
         completed.await(1L, TimeUnit.MINUTES);
+        thread.join();
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
         MatcherAssert.assertThat(fake.sockets().size(), Matchers.equalTo(1));
         new Ports().release(port);
