@@ -34,6 +34,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
@@ -103,10 +105,12 @@ public final class BkBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    @SuppressWarnings("PMD.DoNotUseThreads")
+    @SuppressWarnings({
+        "PMD.DoNotUseThreads", "PMD.AvoidInstantiatingObjectsInLoops"
+    })
     public void handlesPersistentConnection() throws Exception {
         final int port = new Ports().allocate();
-        final String uri = String.format("http://localhost:%d/init", port);
+        final String uri = String.format("http://localhost:%d/pepe", port);
         // @checkstyle MagicNumberCheck (1 line)
         final int count = 1;
         final CountDownLatch completed = new CountDownLatch(count);
@@ -117,6 +121,7 @@ public final class BkBasicTest {
                 return new TkEmpty().act(req);
             }
         };
+        final BkFake fake = new BkFake(new BkBasic(take, true));
         new Thread(
             // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {
@@ -124,7 +129,7 @@ public final class BkBasicTest {
                 public void run() {
                     try {
                         new FtBasic(
-                            new BkBasic(new TkFork(new FkRegex("/init", take))),
+                            fake,
                             port
                         ).start(
                             new Exit() {
@@ -140,21 +145,21 @@ public final class BkBasicTest {
                 }
             }
         ).start();
-        final HttpURLConnection conn = HttpURLConnection.class.cast(
-            new URL(uri).openConnection()
-        );
-        conn.setRequestMethod("GET");
-        conn.setUseCaches(false);
-        conn.setInstanceFollowRedirects(false);
-        conn.addRequestProperty("Host", "localhost");
-        MatcherAssert.assertThat(
-            conn.getHeaderFields().get("Connection"),
-            Matchers.hasItem("Keep-Alive")
-        );
+        for (int idx = 0; idx < 2; ++idx) {
+            final HttpURLConnection conn = HttpURLConnection.class.cast(
+                new URL(uri).openConnection()
+            );
+            conn.setRequestMethod("HEAD");
+            conn.setUseCaches(false);
+            conn.setInstanceFollowRedirects(false);
+            conn.addRequestProperty("Host", "localhost");
+            conn.getHeaderFields();
+        }
         completed.countDown();
         // @checkstyle MagicNumberCheck (1 line)
         completed.await(1L, TimeUnit.MINUTES);
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+        MatcherAssert.assertThat(fake.sockets().size(), Matchers.equalTo(1));
         new Ports().release(port);
     }
 
@@ -180,5 +185,44 @@ public final class BkBasicTest {
                 }
             }
         );
+    }
+
+    /**
+     * Back with used socket collection.
+     */
+    private static class BkFake implements Back {
+
+        /**
+         * Back.
+         */
+        private final transient Back back;
+
+        /**
+         * List of used sockets.
+         */
+        private final transient List<Socket> used = new ArrayList<Socket>(1);
+
+        /**
+         * Ctor.
+         * @param bck Back.
+         */
+        public BkFake(final Back bck) {
+            super();
+            this.back = bck;
+        }
+
+        @Override
+        public void accept(final Socket socket) throws IOException {
+            this.used.add(socket);
+            this.back.accept(socket);
+        }
+
+        /**
+         * Returns used sockets.
+         * @return Used sockets
+         */
+        public List<Socket> sockets() {
+            return this.used;
+        }
     }
 }

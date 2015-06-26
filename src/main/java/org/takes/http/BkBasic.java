@@ -34,6 +34,7 @@ import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -62,6 +63,11 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
+     * Timeout for persistent connection.
+     */
+    private static final long PRST_TIMEOUT = 5L;
+
+    /**
      * Keep alive header key.
      */
     private static final String CONNECTION = "Connection";
@@ -77,28 +83,46 @@ public final class BkBasic implements Back {
     private final transient Take take;
 
     /**
+     * If connection is persistent or not.
+     */
+    private final transient boolean persistent;
+
+    /**
      * Ctor.
      * @param tks Take
      */
     public BkBasic(final Take tks) {
+        this(tks, false);
+    }
+
+    /**
+     * Ctor.
+     * @param tks Take
+     * @param prst For persistent connection
+     */
+    public BkBasic(final Take tks, final boolean prst) {
         this.take = tks;
+        this.persistent = prst;
     }
 
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
-        final RqLive req = new RqLive(input);
         boolean keep = false;
-        final Iterator<String> values = new RqHeaders.Base(req)
-            .header(BkBasic.CONNECTION).iterator();
-        if (values.hasNext()) {
-            do {
-                keep = values.next().toLowerCase(Locale.ENGLISH).contains(
-                    BkBasic.KEEP_ALIVE.toLowerCase(Locale.ENGLISH)
-                );
-            } while (!keep && values.hasNext());
-        }
         try {
+            final RqLive req = new RqLive(input);
+            if (this.persistent) {
+                final Iterator<String> values = new RqHeaders.Base(req)
+                    .header(BkBasic.CONNECTION).iterator();
+                if (values.hasNext()) {
+                    do {
+                        keep = values.next().toLowerCase(Locale.ENGLISH)
+                            .contains(
+                                BkBasic.KEEP_ALIVE.toLowerCase(Locale.ENGLISH)
+                            );
+                    } while (!keep && values.hasNext());
+                }
+            }
             this.print(
                 BkBasic.addSocketHeaders(
                     req,
@@ -108,7 +132,14 @@ public final class BkBasic implements Back {
                 keep
             );
         } finally {
-            if (!keep) {
+            if (keep) {
+                if (this.persistent) {
+                    socket.setSoTimeout(
+                        (int) TimeUnit.SECONDS.toMillis(PRST_TIMEOUT)
+                    );
+                    this.accept(socket);
+                }
+            } else {
                 input.close();
             }
         }
@@ -147,7 +178,9 @@ public final class BkBasic implements Back {
                 )
             ).print(output);
         } finally {
-            output.close();
+            if (!keep) {
+                output.close();
+            }
         }
     }
 
