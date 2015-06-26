@@ -33,7 +33,6 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -111,7 +110,7 @@ public final class BkBasicTest {
     })
     public void handlesPersistentConnection() throws Exception {
         final int port = new Ports().allocate();
-        final String uri = String.format("http://localhost:%d/pepe", port);
+        final String uri = String.format("http://localhost:%d", port);
         // @checkstyle MagicNumberCheck (1 line)
         final int count = 1;
         final CountDownLatch completed = new CountDownLatch(count);
@@ -148,14 +147,11 @@ public final class BkBasicTest {
         );
         thread.start();
         for (int idx = 0; idx < 2; ++idx) {
-            final HttpURLConnection conn = HttpURLConnection.class.cast(
-                new URL(uri).openConnection()
-            );
-            conn.setRequestMethod("HEAD");
-            conn.setUseCaches(false);
-            conn.setInstanceFollowRedirects(false);
-            conn.addRequestProperty("Host", "localhost");
-            conn.getHeaderFields();
+            new JdkRequest(uri)
+                .method("HEAD")
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK);
         }
         completed.countDown();
         // @checkstyle MagicNumberCheck (1 line)
