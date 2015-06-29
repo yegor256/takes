@@ -47,15 +47,33 @@ public class RsFailure extends RsForward {
     private static final long serialVersionUID = 396488574468386488L;
 
     /**
+     * Home page, by default.
+     */
+    private static final String HOME = "/";
+
+    /**
      * Ctor.
      * @param cause Cause
      * @throws UnsupportedEncodingException If fails
      */
     public RsFailure(final Throwable cause)
         throws UnsupportedEncodingException {
+        this(cause, RsFailure.HOME);
+    }
+
+    /**
+     * Ctor.
+     * @param cause Cause
+     * @param loc Location to redirect to
+     * @throws UnsupportedEncodingException If fails
+     * @since 0.21
+     */
+    public RsFailure(final Throwable cause, final CharSequence loc)
+        throws UnsupportedEncodingException {
         super(
             new RsFlash(cause),
-            HttpURLConnection.HTTP_MOVED_PERM
+            HttpURLConnection.HTTP_MOVED_PERM,
+            loc
         );
     }
 
@@ -66,9 +84,22 @@ public class RsFailure extends RsForward {
      */
     public RsFailure(final String cause)
         throws UnsupportedEncodingException {
+        this(cause, RsFailure.HOME);
+    }
+
+    /**
+     * Ctor.
+     * @param cause Cause
+     * @param loc Location to redirect to
+     * @throws UnsupportedEncodingException If fails
+     * @since 0.21
+     */
+    public RsFailure(final String cause, final CharSequence loc)
+        throws UnsupportedEncodingException {
         super(
             new RsFlash(cause),
-            HttpURLConnection.HTTP_MOVED_PERM
+            HttpURLConnection.HTTP_MOVED_PERM,
+            loc
         );
     }
 
