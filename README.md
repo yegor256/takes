@@ -32,8 +32,7 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-This blog post may help you too:
-[Java Web App Architecture In Take Framework](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html)
+These [blog posts](http://www.yegor256.com/tag/takes.org.html) may help you too.
 
 ## Quick Start
 
