@@ -638,6 +638,9 @@ You will need this extra dependency in classpath:
 </dependency>
 ```
 
+More about this mechanism in this blog post:
+[XML Data and XSL Views in Takes Framework](http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-framework.html).
+
 ## Cookies
 
 Here is how we drop a cookie to the user:
@@ -772,6 +775,9 @@ public final class TkAccount implements Take {
   }
 }
 ```
+
+More about it in this blog post:
+[How Cookie-Based Authentication Works in the Takes Framework](http://www.yegor256.com/2015/05/18/cookie-based-authentication.html)
 
 ## Command Line Arguments
 
