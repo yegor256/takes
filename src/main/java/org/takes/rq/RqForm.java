@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Iterator;
@@ -55,15 +56,23 @@ import org.takes.misc.VerboseIterable;
  * decorator before passing request to this class.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @since 0.9
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqForm extends Request {
+
+    /**
+     * The parameter separator.
+     */
+    String PARAM_SEPARATOR = "&";
+    /**
+     * The separator between key and value.
+     */
+    String KV_SEPARATOR = "=";
 
     /**
      * Get single parameter.
@@ -109,6 +118,7 @@ public interface RqForm extends Request {
             super(request);
             this.req = request;
         }
+
         @Override
         public Iterable<String> param(
             final CharSequence key
@@ -135,10 +145,12 @@ public interface RqForm extends Request {
             }
             return iter;
         }
+
         @Override
         public Iterable<String> names() throws IOException {
             return this.map().keySet();
         }
+
         /**
          * Decode from URL.
          * @param txt Text
@@ -153,12 +165,13 @@ public interface RqForm extends Request {
                 throw new IllegalStateException(ex);
             }
         }
+
         /**
          * Create map of request parameter.
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
-        private ConcurrentMap<String, List<String>> map() throws IOException  {
+        private ConcurrentMap<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
                     final ByteArrayOutputStream
@@ -167,11 +180,13 @@ public interface RqForm extends Request {
                     final String body = new String(baos.toByteArray());
                     final ConcurrentMap<String, List<String>> map =
                         new ConcurrentHashMap<String, List<String>>(1);
-                    for (final String pair : body.split("&")) {
+                    for (final String pair
+                        : body.split(RqForm.PARAM_SEPARATOR)) {
                         if (pair.isEmpty()) {
                             continue;
                         }
-                        final String[] parts = pair.split("=", 2);
+                        final String[] parts =
+                            pair.split(RqForm.KV_SEPARATOR, 2);
                         if (parts.length < 2) {
                             throw new HttpException(
                                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -192,11 +207,11 @@ public interface RqForm extends Request {
             }
         }
     }
+
     /**
      * Smart decorator, with extra features.
      *
      * <p>The class is immutable and thread-safe.
-     *
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
@@ -206,6 +221,7 @@ public interface RqForm extends Request {
          * Original.
          */
         private final transient RqForm origin;
+
         /**
          * Ctor.
          * @param req Original request
@@ -213,23 +229,28 @@ public interface RqForm extends Request {
         public Smart(final RqForm req) {
             this.origin = req;
         }
+
         @Override
         public Iterable<String> param(final CharSequence name)
             throws IOException {
             return this.origin.param(name);
         }
+
         @Override
         public Iterable<String> names() throws IOException {
             return this.origin.names();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.origin.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
         }
+
         /**
          * Get single param or throw HTTP exception.
          * @param name Name of query param
@@ -248,6 +269,7 @@ public interface RqForm extends Request {
             }
             return params.next();
         }
+
         /**
          * Get single param or default.
          * @param name Name of query param
@@ -265,6 +287,81 @@ public interface RqForm extends Request {
                 value = def;
             }
             return value;
+        }
+    }
+
+    /**
+     * Fake RqForm accepting parameters in the constructor.
+     * @author Matteo Barbieri (barbieri.matteo@gmail.com)
+     */
+    final class Fake implements RqForm {
+
+        /**
+         * Fake form request.
+         */
+        private final RqForm fake;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         * @param params Parameters list
+         * @throws IOException if something goes wrong.
+         */
+        public Fake(final Request req, final String... params)
+            throws IOException {
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException(
+                    "Wrong number of parameters"
+                );
+            }
+            final StringBuilder builder = new StringBuilder();
+            for (int idx = 0; idx < params.length; idx += 2) {
+                final String key = RqForm.Fake.encode(params[idx]);
+                final String value = RqForm.Fake.encode(params[idx + 1]);
+                builder.append(key)
+                    .append(RqForm.KV_SEPARATOR)
+                    .append(value)
+                    .append(RqForm.PARAM_SEPARATOR);
+            }
+            this.fake = new RqForm.Base(
+                new RqWithBody(req, builder.toString())
+            );
+        }
+
+        @Override
+        public Iterable<String> param(final CharSequence name)
+            throws IOException {
+            return this.fake.param(name);
+        }
+
+        @Override
+        public Iterable<String> names() throws IOException {
+            return this.fake.names();
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.fake.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.fake.body();
+        }
+
+        /**
+         * Encode text.
+         * @param txt Text
+         * @return Encoded text
+         */
+        private static String encode(final CharSequence txt) {
+            try {
+                return URLEncoder.encode(
+                    txt.toString(), Charset.defaultCharset().name()
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
         }
     }
 }
