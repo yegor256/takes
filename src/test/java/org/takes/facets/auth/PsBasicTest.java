@@ -23,6 +23,8 @@
  */
 package org.takes.facets.auth;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -76,7 +78,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
         );
     }
 
@@ -149,7 +151,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
         );
     }
 
@@ -189,7 +191,7 @@ public final class PsBasicTest {
      * @param user User
      * @return URN
      */
-    private String generateIdentityUrn(final String user) {
+    private static String generateIdentityUrn(final String user) {
         return String.format("urn:basic:%s", user);
     }
     /**
@@ -208,5 +210,64 @@ public final class PsBasicTest {
             auth.getBytes()
         );
         return String.format(AUTH_BASIC, encoded);
+    }
+
+    /**
+     * Test of {@link PsBasic.Default}.
+     * @author lcozzani (lautaromail@gmail.com)
+     * @version $Id$
+     * @since 0.22
+     */
+    public static final class Default {
+
+        /**
+         * Test {@link org.takes.facets.auth.PsBasic.Default#enter}.
+         * With user and pass ok.
+         */
+        @Test
+        public void testSuccess() {
+            final String user = "Admin";
+            final String pass = "123";
+            final ConcurrentMap<String, String> usrs =
+                new ConcurrentHashMap<String, String>(1);
+            usrs.put(user, pass);
+            final Opt<Identity> identity = new PsBasic.Default(usrs)
+                .enter(user, pass);
+            MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+            MatcherAssert.assertThat(
+                identity.get().urn(),
+                CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
+            );
+        }
+
+        /**
+         * Test {@link org.takes.facets.auth.PsBasic.Default#enter}.
+         * With user ok and pass wrong.
+         */
+        @Test
+        public void testFailPass() {
+            final String user = "Adm";
+            final ConcurrentMap<String, String> usrs =
+                new ConcurrentHashMap<String, String>(1);
+            usrs.put(user, "124");
+            final Opt<Identity> identity = new PsBasic.Default(usrs)
+                .enter(user, "125");
+            MatcherAssert.assertThat(identity.has(), Matchers.is(false));
+        }
+
+        /**
+         * Test {@link org.takes.facets.auth.PsBasic.Default#enter}.
+         * With user wrong and pass ok.
+         */
+        @Test
+        public void testFailUser() {
+            final String pwd = "126";
+            final ConcurrentMap<String, String> usrs =
+                new ConcurrentHashMap<String, String>(1);
+            usrs.put("Adminis", pwd);
+            final Opt<Identity> identity = new PsBasic.Default(usrs)
+                .enter("Administrator", pwd);
+            MatcherAssert.assertThat(identity.has(), Matchers.is(false));
+        }
     }
 }

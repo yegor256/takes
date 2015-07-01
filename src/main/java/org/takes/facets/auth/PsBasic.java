@@ -25,6 +25,7 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.Map;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
@@ -112,6 +113,15 @@ public final class PsBasic implements Pass {
     }
 
     /**
+     * Generate the identity urn.
+     * @param user User
+     * @return URN
+     */
+    private static String generateIdentityUrn(final String user) {
+        return String.format("urn:basic:%s", user);
+    }
+
+    /**
      * Entry interface that is used to check if the received information is
      * valid.
      *
@@ -161,7 +171,7 @@ public final class PsBasic implements Pass {
             if (this.condition) {
                 user = new Opt.Single<Identity>(
                     new Identity.Simple(
-                        String.format("urn:basic:%s", usr)
+                        PsBasic.generateIdentityUrn(usr)
                     )
                 );
             } else {
@@ -183,6 +193,41 @@ public final class PsBasic implements Pass {
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<Identity>();
+        }
+    }
+
+    /**
+     * Default implementation. Using list of user and pass.
+     * @author lcozzani (lautaromail@gmail.com)
+     * @version $Id$
+     * @since 0.22
+     */
+    public static final class Default implements PsBasic.Entry {
+
+        /**
+         * Map of users and its passwords.
+         */
+        private final transient Map<String, String> users;
+
+        /**
+         * Ctor.
+         * @param usrs Map of user and pass
+         */
+        public Default(final Map<String, String> usrs) {
+            super();
+            this.users = usrs;
+        }
+
+        @Override
+        public Opt<Identity> enter(final String user, final String pwd) {
+            Opt<Identity> valid = new Opt.Empty<Identity>();
+            if (this.users.containsKey(user)
+                && this.users.get(user).equals(pwd)) {
+                valid = new Opt.Single<Identity>(
+                    new Identity.Simple(PsBasic.generateIdentityUrn(user))
+                );
+            }
+            return valid;
         }
     }
 }
