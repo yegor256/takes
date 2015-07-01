@@ -86,4 +86,49 @@ public final class RqFormTest {
             Matchers.is(Boolean.TRUE)
         );
     }
+
+    /**
+     * RqForm.Fake can create fake forms with parameters list.
+     * @throws IOException If something goes wrong.
+     */
+    @Test
+    public void createsFormRequestWithParams() throws IOException {
+        final String key = "key";
+        final String akey = "anotherkey";
+        final String value = "value";
+        final String avalue = "a&b";
+        final String aavalue = "againanothervalue";
+        final RqForm req = new RqForm.Fake(
+            new RqFake(),
+            key, value,
+            key, avalue,
+            akey, aavalue
+        );
+        MatcherAssert.assertThat(
+            req.param(key),
+            Matchers.hasItems(value, avalue)
+        );
+        MatcherAssert.assertThat(
+            req.param(akey),
+            Matchers.hasItems(aavalue)
+        );
+        MatcherAssert.assertThat(
+            req.names(),
+            Matchers.hasItems(key, akey)
+        );
+    }
+
+    /**
+     * RqForm.Fake throws an IllegalArgumentException when invoked with
+     * wrong number of parameters.
+     * @throws IOException If something goes wrong.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void throwsExceptionWhenNotCorrectlyCreated()
+        throws IOException {
+        new RqForm.Fake(
+            new RqFake(),
+            "param"
+        );
+    }
 }

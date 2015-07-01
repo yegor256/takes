@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Iterator;
@@ -54,7 +55,7 @@ import org.takes.misc.VerboseIterable;
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
  * decorator before passing request to this class.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -158,7 +159,7 @@ public interface RqForm extends Request {
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
-        private ConcurrentMap<String, List<String>> map() throws IOException  {
+        private ConcurrentMap<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
                     final ByteArrayOutputStream
@@ -167,10 +168,12 @@ public interface RqForm extends Request {
                     final String body = new String(baos.toByteArray());
                     final ConcurrentMap<String, List<String>> map =
                         new ConcurrentHashMap<String, List<String>>(1);
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
                     for (final String pair : body.split("&")) {
                         if (pair.isEmpty()) {
                             continue;
                         }
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
                         final String[] parts = pair.split("=", 2);
                         if (parts.length < 2) {
                             throw new HttpException(
@@ -267,4 +270,82 @@ public interface RqForm extends Request {
             return value;
         }
     }
+    /**
+     * Fake RqForm accepts parameters in the constructor.
+     * @author Erim Erturk (erimerturk@gmail.com)
+     * @since 0.22
+     */
+    final class Fake implements RqForm {
+
+        /**
+         * Fake form request.
+         */
+        private final RqForm fake;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         * @param params Parameters
+         * @throws IOException if something goes wrong.
+         */
+        public Fake(final Request req, final String... params)
+            throws IOException {
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException(
+                    "Wrong number of parameters"
+                );
+            }
+            final StringBuilder builder = new StringBuilder();
+            for (int idx = 0; idx < params.length; idx += 2) {
+                final String key = RqForm.Fake.encode(params[idx]);
+                final String value = RqForm.Fake.encode(params[idx + 1]);
+                builder.append(key)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    .append('=')
+                    .append(value)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    .append('&');
+            }
+            this.fake = new RqForm.Base(
+                new RqWithBody(req, builder.toString())
+            );
+        }
+
+        @Override
+        public Iterable<String> param(final CharSequence name)
+            throws IOException {
+            return this.fake.param(name);
+        }
+
+        @Override
+        public Iterable<String> names() throws IOException {
+            return this.fake.names();
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.fake.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.fake.body();
+        }
+
+        /**
+         * Encode text.
+         * @param txt Text
+         * @return Encoded text
+         */
+        private static String encode(final CharSequence txt) {
+            try {
+                return URLEncoder.encode(
+                    txt.toString(), Charset.defaultCharset().name()
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
+        }
+    }
 }
+
