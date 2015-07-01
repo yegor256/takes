@@ -32,6 +32,7 @@ import org.takes.misc.Opt;
  * Success if all Pass is successfull.
  * @author Lautaro Cozzani (lautarobock@gmail.com)
  * @version $Id$
+ * @since 0.22
  */
 public class PsAll implements Pass {
 
@@ -43,7 +44,7 @@ public class PsAll implements Pass {
     /**
      * Idx of identity to return.
      */
-    private final transient int use;
+    private final transient int index;
 
     /**
      * Ctor.
@@ -53,7 +54,7 @@ public class PsAll implements Pass {
     public PsAll(final Iterable<Pass> pass, final int identity) {
         super();
         this.all = pass;
-        this.use = identity;
+        this.index = identity;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class PsAll implements Pass {
             if (!enter.has()) {
                 break;
             }
-            if (idx == this.use) {
+            if (idx == this.index) {
                 result = enter;
             }
             ++idx;

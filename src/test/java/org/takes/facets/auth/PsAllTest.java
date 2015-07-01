@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
@@ -36,15 +35,16 @@ import org.takes.rq.RqFake;
  * Test of {@link PsAll}.
  * @author Lautaro Cozzani (lautarobock@gmail.com)
  * @version $Id$
+ * @since 0.22
  */
 public final class PsAllTest {
 
     /**
      * Fail if there is not pass.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testEmpty() throws IOException {
+    public void testEmpty() throws Exception {
         MatcherAssert.assertThat(
             new PsAll(new ArrayList<Pass>(0), 0).enter(new RqFake()).has(),
             Matchers.is(false)
@@ -53,10 +53,10 @@ public final class PsAllTest {
 
     /**
      * Success with only one successfull pass.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testOneSuccessfull() throws IOException {
+    public void testOneSuccessfull() throws Exception {
         final List<Pass> list = new ArrayList<Pass>(1);
         list.add(new PsFake(true));
         final Opt<Identity> identity = new PsAll(list, 0).enter(new RqFake());
@@ -68,10 +68,10 @@ public final class PsAllTest {
 
     /**
      * Fail with only one failure test.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testOneFail() throws IOException {
+    public void testOneFail() throws Exception {
         final List<Pass> list = new ArrayList<Pass>(1);
         list.add(new PsFake(false));
         final Opt<Identity> identity = new PsAll(list, 0).enter(new RqFake());
@@ -83,10 +83,10 @@ public final class PsAllTest {
 
     /**
      * Gets idx identity if all pass success.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testSuccessfullIdx() throws IOException {
+    public void testSuccessfullIdx() throws Exception {
         final List<Pass> list = new ArrayList<Pass>(2);
         list.add(new PsFake(true));
         list.add(new PsFake(true));
@@ -99,10 +99,10 @@ public final class PsAllTest {
 
     /**
      * Fail if one of Pass fails.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testFail() throws IOException {
+    public void testFail() throws Exception {
         final List<Pass> list = new ArrayList<Pass>(2);
         list.add(new PsFake(true));
         list.add(new PsFake(false));
@@ -115,10 +115,10 @@ public final class PsAllTest {
 
     /**
      * Fail if idx of identity is over pass count.
-     * @throws IOException if exception
+     * @throws Exception if exception
      */
     @Test
-    public void testFailOverflow() throws IOException {
+    public void testFailOverflow() throws Exception {
         final List<Pass> list = new ArrayList<Pass>(2);
         list.add(new PsFake(true));
         list.add(new PsFake(true));
