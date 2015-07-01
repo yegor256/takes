@@ -77,7 +77,15 @@ public class PsAll implements Pass {
     @Override
     public final Response exit(final Response response, final Identity identity)
         throws IOException {
-        return response;
+        int idx = 0;
+        Response ret = response;
+        for (final Pass pass : this.all) {
+            if (idx == this.index) {
+                ret = pass.exit(response, identity);
+            }
+            ++idx;
+        }
+        return ret;
     }
 
 }
