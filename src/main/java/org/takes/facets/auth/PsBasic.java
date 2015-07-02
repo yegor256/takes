@@ -52,6 +52,12 @@ import org.takes.rs.RsWithHeader;
 public final class PsBasic implements Pass {
 
     /**
+     * URN format.
+     * @checkstyle ConstantUsageCheck (2 lines)
+     */
+    private static final String URN_FORMAT = "urn:basic:%s";
+
+    /**
      * Authorization response HTTP head.
      */
     private static final String AUTH_HEAD = "Basic";
@@ -113,15 +119,6 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Generate the identity urn.
-     * @param user User
-     * @return URN
-     */
-    private static String generateIdentityUrn(final String user) {
-        return String.format("urn:basic:%s", user);
-    }
-
-    /**
      * Entry interface that is used to check if the received information is
      * valid.
      *
@@ -171,7 +168,7 @@ public final class PsBasic implements Pass {
             if (this.condition) {
                 user = new Opt.Single<Identity>(
                     new Identity.Simple(
-                        PsBasic.generateIdentityUrn(usr)
+                        String.format(PsBasic.URN_FORMAT, usr)
                     )
                 );
             } else {
@@ -220,12 +217,14 @@ public final class PsBasic implements Pass {
 
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
-            Opt<Identity> valid = new Opt.Empty<Identity>();
+            final Opt<Identity> valid;
             if (this.users.containsKey(user)
                 && this.users.get(user).equals(pwd)) {
                 valid = new Opt.Single<Identity>(
-                    new Identity.Simple(PsBasic.generateIdentityUrn(user))
+                    new Identity.Simple(String.format(PsBasic.URN_FORMAT, user))
                 );
+            } else {
+                valid = new Opt.Empty<Identity>();
             }
             return valid;
         }
