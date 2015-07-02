@@ -121,7 +121,7 @@ public final class BkBasicTest {
                 return new TkEmpty().act(req);
             }
         };
-        final BkFake fake = new BkFake(new BkBasic(take, true));
+        final BkFake fake = new BkFake(new BkBasic(take));
         final Thread thread = new Thread(
             // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {

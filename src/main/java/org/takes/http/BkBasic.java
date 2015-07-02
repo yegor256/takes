@@ -32,20 +32,15 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
-import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
 
 /**
@@ -63,85 +58,31 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
-     * Timeout for persistent connection.
-     */
-    private static final long PRST_TIMEOUT = 5L;
-
-    /**
-     * Keep alive header key.
-     */
-    private static final String CONNECTION = "Connection";
-
-    /**
-     * Keep alive header value.
-     */
-    private static final String KEEP_ALIVE = "Keep-Alive";
-
-    /**
      * Take.
      */
     private final transient Take take;
-
-    /**
-     * If connection is persistent or not.
-     */
-    private final transient boolean persistent;
 
     /**
      * Ctor.
      * @param tks Take
      */
     public BkBasic(final Take tks) {
-        this(tks, false);
-    }
-
-    /**
-     * Ctor.
-     * @param tks Take
-     * @param prst For persistent connection
-     */
-    public BkBasic(final Take tks, final boolean prst) {
         this.take = tks;
-        this.persistent = prst;
     }
 
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
-        boolean keep = false;
         try {
-            final RqLive req = new RqLive(input);
-            if (this.persistent) {
-                final Iterator<String> values = new RqHeaders.Base(req)
-                    .header(BkBasic.CONNECTION).iterator();
-                if (values.hasNext()) {
-                    do {
-                        keep = values.next().toLowerCase(Locale.ENGLISH)
-                            .contains(
-                                BkBasic.KEEP_ALIVE.toLowerCase(Locale.ENGLISH)
-                            );
-                    } while (!keep && values.hasNext());
-                }
-            }
             this.print(
                 BkBasic.addSocketHeaders(
-                    req,
+                    new RqLive(input),
                     socket
                 ),
-                new BufferedOutputStream(socket.getOutputStream()),
-                keep
+                new BufferedOutputStream(socket.getOutputStream())
             );
         } finally {
-            if (keep) {
-                if (this.persistent) {
-                    socket.setSoTimeout(
-                        (int) TimeUnit.SECONDS.toMillis(PRST_TIMEOUT)
-                    );
-                    this.accept(socket);
-                }
-            } else {
-                input.close();
-            }
+            input.close();
         }
     }
 
@@ -149,24 +90,13 @@ public final class BkBasic implements Back {
      * Print response to output stream, safely.
      * @param req Request
      * @param output Output
-     * @param keep Keep connection open
      * @throws IOException If fails
      */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    private void print(
-        final Request req, final OutputStream output, final boolean keep
-    )
+    private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
-            final Response res;
-            if (keep) {
-                res = new RsWithHeader(
-                    this.take.act(req), BkBasic.CONNECTION, BkBasic.KEEP_ALIVE
-                );
-            } else {
-                res = this.take.act(req);
-            }
-            new RsPrint(res).print(output);
+            new RsPrint(this.take.act(req)).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             // @checkstyle IllegalCatchCheck (7 lines)
@@ -178,9 +108,7 @@ public final class BkBasic implements Back {
                 )
             ).print(output);
         } finally {
-            if (!keep) {
-                output.close();
-            }
+            output.close();
         }
     }
 
