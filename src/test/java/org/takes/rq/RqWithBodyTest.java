@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class RqWithBodyTest {
 
     /**
      * RqWithBody returns body.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void returnsBody() throws IOException {
+    public void returnsBody() throws Exception {
         final String body = "body";
         MatcherAssert.assertThat(
             new RqPrint(new RqWithBody(new RqFake(), body)).printBody(),

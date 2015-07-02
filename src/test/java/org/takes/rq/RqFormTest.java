@@ -89,10 +89,10 @@ public final class RqFormTest {
 
     /**
      * RqForm.Fake can create fake forms with parameters list.
-     * @throws IOException If something goes wrong.
+     * @throws Exception If something goes wrong.
      */
     @Test
-    public void createsFormRequestWithParams() throws IOException {
+    public void createsFormRequestWithParams() throws Exception {
         final String key = "key";
         final String akey = "anotherkey";
         final String value = "value";
@@ -121,11 +121,11 @@ public final class RqFormTest {
     /**
      * RqForm.Fake throws an IllegalArgumentException when invoked with
      * wrong number of parameters.
-     * @throws IOException If something goes wrong.
+     * @throws Exception If something goes wrong.
      */
     @Test(expected = IllegalArgumentException.class)
     public void throwsExceptionWhenNotCorrectlyCreated()
-        throws IOException {
+        throws Exception {
         new RqForm.Fake(
             new RqFake(),
             "param"
