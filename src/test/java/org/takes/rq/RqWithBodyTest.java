@@ -23,38 +23,30 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Request with body.
- *
- * <p>The class is immutable and thread-safe.
+ * Test case for {@link RqWithBody}.
  * @author Erim Erturk (erimerturk@gmail.com)
  * @version $Id$
  * @since 0.22
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqWithBody extends RqWrap {
+public final class RqWithBodyTest {
 
     /**
-     * Ctor.
-     * @param req The request.
-     * @param bdy The body.
+     * RqWithBody returns body.
+     * @throws IOException If some problem inside
      */
-    public RqWithBody(final Request req, final CharSequence bdy) {
-        super(new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-            @Override
-            public InputStream body() throws IOException {
-                return new ByteArrayInputStream(bdy.toString().getBytes());
-            }
-        });
+    @Test
+    public void returnsBody() throws IOException {
+        final String body = "body";
+        MatcherAssert.assertThat(
+            new RqPrint(new RqWithBody(new RqFake(), body)).printBody(),
+            Matchers.equalTo(body)
+        );
     }
+
 }

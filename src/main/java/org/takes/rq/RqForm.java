@@ -55,7 +55,7 @@ import org.takes.misc.VerboseIterable;
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
  * decorator before passing request to this class.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -173,7 +173,7 @@ public interface RqForm extends Request {
                         if (pair.isEmpty()) {
                             continue;
                         }
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        // @checkstyle MultipleStringLiteralsCheck (5 lines)
                         final String[] parts = pair.split("=", 2);
                         if (parts.length < 2) {
                             throw new HttpException(
@@ -300,10 +300,9 @@ public interface RqForm extends Request {
                 final String key = RqForm.Fake.encode(params[idx]);
                 final String value = RqForm.Fake.encode(params[idx + 1]);
                 builder.append(key)
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    // @checkstyle MultipleStringLiteralsCheck (3 lines)
                     .append('=')
                     .append(value)
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
                     .append('&');
             }
             this.fake = new RqForm.Base(
