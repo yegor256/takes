@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.List;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -39,7 +40,7 @@ public class PsAll implements Pass {
     /**
      * All Pass.
      */
-    private final transient Iterable<Pass> all;
+    private final transient List<Pass> all;
 
     /**
      * Idx of identity to return.
@@ -51,7 +52,7 @@ public class PsAll implements Pass {
      * @param pass All pass to be checked.
      * @param identity Identity idx to return.
      */
-    public PsAll(final Iterable<Pass> pass, final int identity) {
+    public PsAll(final List<Pass> pass, final int identity) {
         super();
         this.all = pass;
         this.index = identity;
@@ -59,17 +60,17 @@ public class PsAll implements Pass {
 
     @Override
     public final Opt<Identity> enter(final Request request) throws IOException {
-        int idx = 0;
-        Opt<Identity> result = new Opt.Empty<Identity>();
         for (final Pass pass : this.all) {
             final Opt<Identity> enter = pass.enter(request);
             if (!enter.has()) {
                 break;
             }
-            if (idx == this.index) {
-                result = enter;
-            }
-            ++idx;
+        }
+        final Opt<Identity> result;
+        if (this.index < this.all.size()) {
+            result = this.all.get(this.index).enter(request);
+        } else {
+            result = new Opt.Empty<Identity>();
         }
         return result;
     }
@@ -77,15 +78,13 @@ public class PsAll implements Pass {
     @Override
     public final Response exit(final Response response, final Identity identity)
         throws IOException {
-        int idx = 0;
-        Response ret = response;
-        for (final Pass pass : this.all) {
-            if (idx == this.index) {
-                ret = pass.exit(response, identity);
-            }
-            ++idx;
+        try {
+            return this.all.get(this.index).exit(response, identity);
+        } catch (final IndexOutOfBoundsException exc) {
+            throw new IOException(
+                "Index of identity is greater than Pass collection size", exc
+            );
         }
-        return ret;
     }
 
 }
