@@ -23,6 +23,8 @@
  */
 package org.takes.http;
 
+import org.junit.Ignore;
+
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
@@ -108,6 +110,7 @@ public final class BkBasicTest {
     @SuppressWarnings({
         "PMD.DoNotUseThreads", "PMD.AvoidInstantiatingObjectsInLoops"
     })
+    @Ignore
     public void handlesPersistentConnection() throws Exception {
         final int port = new Ports().allocate();
         final String uri = String.format("http://localhost:%d", port);
