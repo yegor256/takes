@@ -23,8 +23,6 @@
  */
 package org.takes.http;
 
-import org.junit.Ignore;
-
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
@@ -41,6 +39,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Request;
