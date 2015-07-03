@@ -23,8 +23,8 @@
  */
 package org.takes.facets.auth;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -32,6 +32,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
+import org.takes.facets.auth.PsBasic.User;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
@@ -196,15 +197,16 @@ public final class PsBasicTest {
     public void returnsCorrectUrn() {
         final String user = "Admin";
         final String pass = "123";
-        final ConcurrentMap<String, String> usrs =
-            new ConcurrentHashMap<String, String>(1);
-        usrs.put(user, pass);
+        final String urn = "urn:basic:admin";
+        final List<User> usrs =
+            new ArrayList<User>(1);
+        usrs.add(new User(user, pass, urn));
         final Opt<Identity> identity = new PsBasic.Default(usrs)
             .enter(user, pass);
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
+            CoreMatchers.equalTo(urn)
         );
     }
 
@@ -214,12 +216,8 @@ public final class PsBasicTest {
      */
     @Test
     public void returnsFalseIfUserDoesNotExist() {
-        final String user = "Adm";
-        final ConcurrentMap<String, String> usrs =
-            new ConcurrentHashMap<String, String>(1);
-        usrs.put(user, "124");
-        final Opt<Identity> identity = new PsBasic.Default(usrs)
-            .enter(user, "125");
+        final Opt<Identity> identity =
+            new PsBasic.Default("Adm,123,urn:basic:adm").enter("Adm", "125");
         MatcherAssert.assertThat(identity.has(), Matchers.is(false));
     }
 
@@ -230,9 +228,9 @@ public final class PsBasicTest {
     @Test
     public void returnsFalseForWrongPassword() {
         final String pwd = "126";
-        final ConcurrentMap<String, String> usrs =
-            new ConcurrentHashMap<String, String>(1);
-        usrs.put("Adminis", pwd);
+        final List<User> usrs =
+                new ArrayList<User>(1);
+        usrs.add(new User("Adminis", pwd, "urn:basic;admins"));
         final Opt<Identity> identity = new PsBasic.Default(usrs)
             .enter("Administrator", pwd);
         MatcherAssert.assertThat(identity.has(), Matchers.is(false));

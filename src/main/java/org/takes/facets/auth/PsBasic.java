@@ -25,7 +25,10 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
@@ -49,13 +52,8 @@ import org.takes.rs.RsWithHeader;
  * @checkstyle ClassDataAbstractionCouplingCheck (250 lines)
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
+@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
-
-    /**
-     * URN format.
-     * @checkstyle ConstantUsageCheck (2 lines)
-     */
-    private static final String URN_FORMAT = "urn:basic:%s";
 
     /**
      * Authorization response HTTP head.
@@ -168,7 +166,7 @@ public final class PsBasic implements Pass {
             if (this.condition) {
                 user = new Opt.Single<Identity>(
                     new Identity.Simple(
-                        String.format(PsBasic.URN_FORMAT, usr)
+                        String.format("urn:basic:%s", usr)
                     )
                 );
             } else {
@@ -202,31 +200,149 @@ public final class PsBasic implements Pass {
     public static final class Default implements PsBasic.Entry {
 
         /**
-         * Map of users and its passwords.
+         * List of users and its passwords.
          */
-        private final transient Map<String, String> users;
+        private final transient ConcurrentMap<String, PsBasic.User> users;
+
+        /**
+         * Ctor with list of "user,pass,urn".
+         * @param list List of users.
+         */
+        public Default(final String ... list) {
+            this(buildList(list));
+        }
 
         /**
          * Ctor.
          * @param usrs Map of user and pass
          */
-        public Default(final Map<String, String> usrs) {
-            super();
-            this.users = usrs;
+        public Default(final List<PsBasic.User> usrs) {
+            this.users = Default.buildMap(usrs);
         }
 
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             final Opt<Identity> valid;
             if (this.users.containsKey(user)
-                && this.users.get(user).equals(pwd)) {
+                && this.users.get(user).pass().equals(pwd)) {
                 valid = new Opt.Single<Identity>(
-                    new Identity.Simple(String.format(PsBasic.URN_FORMAT, user))
+                    new Identity.Simple(this.users.get(user).urn())
                 );
             } else {
                 valid = new Opt.Empty<Identity>();
             }
             return valid;
+        }
+
+        /**
+         * Build list of users.
+         * @param list List of users format "user,pass,urn"
+         * @return List {@link List} of users
+         */
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        private static List<PsBasic.User> buildList(final String[] list) {
+            final List<PsBasic.User> users =
+                new ArrayList<PsBasic.User>(list.length);
+            for (final String user : list) {
+                final PsBasic.User usr = new PsBasic.User(user);
+                users.add(usr);
+            }
+            return users;
+        }
+
+        /**
+         * Build Map of users.
+         * @param usrs List {@link List} of users.
+         * @return Map {@link Map} of users.
+         */
+        private static ConcurrentMap<String, PsBasic.User> buildMap(
+            final List<User> usrs
+        ) {
+            final ConcurrentMap<String, PsBasic.User> users =
+                new ConcurrentHashMap<String, PsBasic.User>(usrs.size());
+            for (final PsBasic.User user : usrs) {
+                users.put(user.user(), user);
+            }
+            return users;
+        }
+    }
+
+    /**
+     * User for {@link PsBasic}.
+     */
+    public static final class User {
+
+        /**
+         * User.
+         */
+        private final transient String usr;
+
+        /**
+         * Password.
+         */
+        private final transient String psw;
+
+        /**
+         * URN.
+         */
+        private final transient String usrurn;
+
+        /**
+         * Ctor.
+         * @param user User.
+         * @param pass Pass.
+         * @param urn Urn.
+         */
+        public User(final String user, final String pass, final String urn) {
+            this.usr = user;
+            this.psw = pass;
+            this.usrurn = urn;
+        }
+
+        /**
+         * Create usr with string.
+         * @param str String with format "user,password,urn".
+         */
+        public User(final String str) {
+            this(
+                PsBasic.User.parse(str, 0),
+                PsBasic.User.parse(str, 1),
+                PsBasic.User.parse(str, 2)
+            );
+        }
+
+        /**
+         * User.
+         * @return Returns the user.
+         */
+        public String user() {
+            return this.usr;
+        }
+
+        /**
+         * Pass.
+         * @return Returns the pass.
+         */
+        public String pass() {
+            return this.psw;
+        }
+
+        /**
+         * Urn.
+         * @return Returns the urn.
+         */
+        public String urn() {
+            return this.usrurn;
+        }
+
+        /**
+         * Parse user and return idx value.
+         * @param str String with "user,pass,urn".
+         * @param idx Index to return.
+         * @return String of index.s
+         */
+        private static String parse(final String str, final int idx) {
+            return str.split(",")[idx];
         }
     }
 }
