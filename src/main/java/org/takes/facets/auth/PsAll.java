@@ -53,21 +53,21 @@ public class PsAll implements Pass {
      * @param identity Identity idx to return.
      */
     public PsAll(final List<Pass> pass, final int identity) {
-        super();
         this.all = pass;
         this.index = identity;
     }
 
     @Override
     public final Opt<Identity> enter(final Request request) throws IOException {
+        boolean success = true;
         for (final Pass pass : this.all) {
             final Opt<Identity> enter = pass.enter(request);
             if (!enter.has()) {
-                break;
+                success = false;
             }
         }
         final Opt<Identity> result;
-        if (this.index < this.all.size()) {
+        if (success && this.index < this.all.size()) {
             result = this.all.get(this.index).enter(request);
         } else {
             result = new Opt.Empty<Identity>();
@@ -78,11 +78,11 @@ public class PsAll implements Pass {
     @Override
     public final Response exit(final Response response, final Identity identity)
         throws IOException {
-        try {
+        if (this.index < this.all.size()) {
             return this.all.get(this.index).exit(response, identity);
-        } catch (final IndexOutOfBoundsException exc) {
+        } else {
             throw new IOException(
-                "Index of identity is greater than Pass collection size", exc
+                "Index of identity is greater than Pass collection size"
             );
         }
     }
