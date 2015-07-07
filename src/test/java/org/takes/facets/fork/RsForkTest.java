@@ -122,7 +122,7 @@ public final class RsForkTest {
                 new RsFork(
                     new RqFake("POST", "/test?1", "alpha=1"),
                     new FkMethods("GET", new RsText("it's a GET")),
-                    new FkMethods("POST", new RsText("it's a POST"))
+                    new FkMethods("POST,PUT", new RsText("it's a POST"))
                 )
             ).printBody(),
             Matchers.endsWith("a POST")
