@@ -111,4 +111,22 @@ public final class RsForkTest {
         );
     }
 
+    /**
+     * RsFork can dispatch by request method.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void dispatchesByRequestMethod() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsFork(
+                    new RqFake("POST", "/test?1", "alpha=1"),
+                    new FkMethods("GET", new RsText("it's a GET")),
+                    new FkMethods("POST", new RsText("it's a POST"))
+                )
+            ).printBody(),
+            Matchers.endsWith("a POST")
+        );
+    }
+
 }
