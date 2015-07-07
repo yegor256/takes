@@ -33,6 +33,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqMethod;
+import org.takes.tk.TkFixed;
 
 /**
  * Fork by method matching.
@@ -64,6 +65,16 @@ public final class FkMethods implements Fork {
      * Target.
      */
     private final transient Take take;
+
+    /**
+     * Ctor.
+     * @param mtd Method
+     * @param rsp Response
+     * @since 0.22
+     */
+    public FkMethods(final String mtd, final Response rsp) {
+        this(mtd, new TkFixed(rsp));
+    }
 
     /**
      * Ctor.
