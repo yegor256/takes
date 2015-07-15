@@ -27,6 +27,7 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.ServerSocket;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
@@ -59,8 +60,10 @@ public final class BkParallelTest {
      */
     @Test
     public void requestsAreParallel() throws Exception {
-        final int port = new Ports().allocate();
-        final String uri = String.format("http://localhost:%d", port);
+        final ServerSocket socket = new ServerSocket(0);
+        final String uri = String.format(
+            "http://localhost:%d", socket.getLocalPort()
+        );
         // @checkstyle MagicNumberCheck (1 line)
         final int count = 3;
         final CountDownLatch started = new CountDownLatch(count);
@@ -78,6 +81,12 @@ public final class BkParallelTest {
                 return new TkEmpty().act(req);
             }
         };
+        final Exit exit = new Exit() {
+            @Override
+            public boolean ready() {
+                return completed.getCount() == 0;
+            }
+        };
         new Thread(
             // @checkstyle AnonInnerLengthCheck (23 lines)
             new Runnable() {
@@ -89,15 +98,8 @@ public final class BkParallelTest {
                                 new BkBasic(take),
                                 count
                             ),
-                            port
-                        ).start(
-                            new Exit() {
-                                @Override
-                                public boolean ready() {
-                                    return completed.getCount() == 0;
-                                }
-                            }
-                        );
+                            socket
+                        ).start(exit);
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }
@@ -121,10 +123,8 @@ public final class BkParallelTest {
                 }
             ).start();
         }
-        // @checkstyle MagicNumberCheck (1 line)
         completed.await(1L, TimeUnit.MINUTES);
         MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
         MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
-        new Ports().release(port);
     }
 }

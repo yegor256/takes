@@ -23,6 +23,15 @@
  */
 package org.takes.http;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.net.ServerSocket;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -88,15 +97,47 @@ final class Options {
     }
 
     /**
-     * Get the port to listen to.
-     * @return Port number
+     * Get the socket to listen to.
+     * @return Socket
+     * @throws IOException If fails
      */
-    public int port() {
+    public ServerSocket socket() throws IOException {
         final String port = this.map.get("port");
         if (port == null) {
             throw new IllegalArgumentException("--port must be specified");
         }
-        return Integer.parseInt(port);
+        final ServerSocket socket;
+        if (port.matches("\\d+")) {
+            socket = new ServerSocket(Integer.parseInt(port));
+        } else {
+            final File file = new File(port);
+            if (file.exists()) {
+                final Reader reader = new InputStreamReader(
+                    new FileInputStream(file)
+                );
+                try {
+                    // @checkstyle MagicNumber (1 line)
+                    final char[] chars = new char[8];
+                    reader.read(chars);
+                    socket = new ServerSocket(
+                        Integer.parseInt(new String(chars))
+                    );
+                } finally {
+                    reader.close();
+                }
+            } else {
+                socket = new ServerSocket(0);
+                final Writer writer = new OutputStreamWriter(
+                    new FileOutputStream(file)
+                );
+                try {
+                    writer.append(Integer.toString(socket.getLocalPort()));
+                } finally {
+                    writer.close();
+                }
+            }
+        }
+        return socket;
     }
 
     /**

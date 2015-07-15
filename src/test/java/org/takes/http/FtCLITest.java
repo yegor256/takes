@@ -25,11 +25,15 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 
@@ -41,6 +45,13 @@ import org.takes.facets.fork.TkFork;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtCLITest {
+
+    /**
+     * Temp directory.
+     * @checkstyle VisibilityModifierCheck (5 lines)
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * FtCLI can work with command line args.
@@ -55,7 +66,8 @@ public final class FtCLITest {
                 return false;
             }
         };
-        final int port = new Ports().allocate();
+        final File file = this.temp.newFile();
+        file.delete();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
@@ -63,7 +75,7 @@ public final class FtCLITest {
                     try {
                         new FtCLI(
                             new TkFork(new FkRegex("/", "hello!")),
-                            String.format("--port=%d", port),
+                            String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
                             "--lifetime=3000"
                         ).start(exit);
@@ -75,6 +87,7 @@ public final class FtCLITest {
         );
         thread.start();
         TimeUnit.SECONDS.sleep(1L);
+        final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()
             .as(RestResponse.class)
@@ -86,7 +99,6 @@ public final class FtCLITest {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        new Ports().release(port);
     }
 
 }

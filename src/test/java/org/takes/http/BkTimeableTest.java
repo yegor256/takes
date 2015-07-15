@@ -25,11 +25,15 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -44,28 +48,38 @@ import org.takes.rs.RsText;
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeableTest {
+
+    /**
+     * Temp directory.
+     * @checkstyle VisibilityModifierCheck (5 lines)
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
+
     /**
      * BkTimeable can stop long running Back.
      * @throws java.lang.Exception If some problem inside
      */
     @Test
     public void stopsLongRunningBack() throws Exception {
-        final int port = new Ports().allocate();
         final String response = "interrupted";
         final Take take = new Take() {
             @Override
-            public Response act(final Request req)
-                throws IOException {
+            public Response act(final Request req) {
+                Response rsp;
                 try {
                     // @checkstyle MagicNumberCheck (1 line)
                     TimeUnit.SECONDS.sleep(10L);
-                    return new RsText("finish");
+                    rsp = new RsText("finish");
                 } catch (final InterruptedException ex) {
                     Thread.currentThread().interrupt();
-                    return new RsText(response);
+                    rsp = new RsText(response);
                 }
+                return rsp;
             }
         };
+        final File file = this.temp.newFile();
+        file.delete();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
@@ -73,7 +87,7 @@ public final class BkTimeableTest {
                     try {
                         new FtCLI(
                             take,
-                            String.format("--port=%d", port),
+                            String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
                             "--lifetime=3000",
                             "--max-latency=100"
@@ -87,6 +101,7 @@ public final class BkTimeableTest {
         thread.start();
         // @checkstyle MagicNumberCheck (1 line)
         TimeUnit.MILLISECONDS.sleep(1500L);
+        final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()
             .as(RestResponse.class)
@@ -98,6 +113,5 @@ public final class BkTimeableTest {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        new Ports().release(port);
     }
 }

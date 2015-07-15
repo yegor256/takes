@@ -99,7 +99,7 @@ public final class FtCLI implements Front {
                 ),
                 this.options.threads()
             ),
-            this.options.port()
+            this.options.socket()
         );
         if (this.options.isDaemon()) {
             final Thread thread = new Thread(
