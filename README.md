@@ -829,6 +829,11 @@ $ java -cp take.jar App.class --port=8080 --refresh
 
 You should see "hello, world!" at `http://localhost:8080`.
 
+Parameter `--port` also accepts file name, instead of a number. If the file
+exists, `FtCLI` will try to read its content and use it as
+port number. If the file is absent, `FtCLI` will allocate a new random
+port number, use it to start a server, and save it to the file.
+
 ## Logging
 
 The framework sends all logs to SLF4J logging facility. If you want to see them,
