@@ -113,16 +113,14 @@ public final class RsWithCookie extends RsWrap {
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    Response resp = res;
-                    resp = new RsWithHeader(
+                    return new RsWithHeader(
                         new RsWithoutHeader(res, RsWithCookie.SET_COOKIE),
                         RsWithCookie.SET_COOKIE,
                         RsWithCookie.make(
                             RsWithCookie.previousValue(res),
                             name, value, attrs
                         )
-                    );
-                    return resp.head();
+                    ).head();
                 }
                 @Override
                 public InputStream body() throws IOException {
@@ -141,12 +139,10 @@ public final class RsWithCookie extends RsWrap {
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
-     * @throws IOException If it fails
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static String make(final String previous, final CharSequence name,
-        final CharSequence value,
-        final CharSequence... attrs) throws IOException {
+        final CharSequence value, final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder();
         if (!previous.isEmpty()) {
             text.append(String.format("%s,", previous));
