@@ -71,9 +71,18 @@ public final class FtRemote implements Front {
      * @throws IOException If fails
      */
     public FtRemote(final Back bck) throws IOException {
+        this(bck, FtRemote.random());
+    }
+
+    /**
+     * Ctor.
+     * @param bck Back
+     * @param skt Server socket to use
+     * @since 0.22
+     */
+    public FtRemote(final Back bck, final ServerSocket skt) {
         this.back = bck;
-        this.socket = new ServerSocket(0);
-        this.socket.setReuseAddress(true);
+        this.socket = skt;
     }
 
     @Override
@@ -119,7 +128,10 @@ public final class FtRemote implements Front {
         }
         script.exec(
             URI.create(
-                String.format("http://localhost:%d", this.socket.getLocalPort())
+                String.format(
+                    "http://localhost:%d",
+                    this.socket.getLocalPort()
+                )
             )
         );
         exit.set(true);
@@ -129,6 +141,17 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Make a random socket.
+     * @return Socket
+     * @throws IOException If fails
+     */
+    private static ServerSocket random() throws IOException {
+        final ServerSocket skt = new ServerSocket(0);
+        skt.setReuseAddress(true);
+        return skt;
     }
 
     /**
