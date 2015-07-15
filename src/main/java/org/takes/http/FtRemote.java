@@ -24,6 +24,7 @@
 package org.takes.http;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -42,7 +43,7 @@ import org.takes.Take;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = { "back", "port" })
+@EqualsAndHashCode(of = { "back", "socket" })
 public final class FtRemote implements Front {
 
     /**
@@ -51,9 +52,9 @@ public final class FtRemote implements Front {
     private final transient Back back;
 
     /**
-     * Port.
+     * Server socket.
      */
-    private final transient int port;
+    private final transient ServerSocket socket;
 
     /**
      * Ctor.
@@ -71,12 +72,13 @@ public final class FtRemote implements Front {
      */
     public FtRemote(final Back bck) throws IOException {
         this.back = bck;
-        this.port = new Ports().allocate();
+        this.socket = new ServerSocket(0);
+        this.socket.setReuseAddress(true);
     }
 
     @Override
     public void start(final Exit exit) throws IOException {
-        new FtBasic(this.back, this.port).start(exit);
+        new FtBasic(this.back, this.socket).start(exit);
     }
 
     /**
@@ -117,7 +119,7 @@ public final class FtRemote implements Front {
         }
         script.exec(
             URI.create(
-                String.format("http://localhost:%d", this.port)
+                String.format("http://localhost:%d", this.socket.getLocalPort())
             )
         );
         exit.set(true);
@@ -127,7 +129,6 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-        new Ports().release(this.port);
     }
 
     /**

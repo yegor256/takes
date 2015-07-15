@@ -67,8 +67,7 @@ public final class BkParallelTest {
         final CountDownLatch completed = new CountDownLatch(count);
         final Take take = new Take() {
             @Override
-            public Response act(final Request req)
-                throws IOException {
+            public Response act(final Request req) {
                 started.countDown();
                 try {
                     started.await();

@@ -39,7 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "back", "port" })
+@EqualsAndHashCode(of = { "back", "socket" })
 public final class FtBasic implements Front {
 
     /**
@@ -48,39 +48,50 @@ public final class FtBasic implements Front {
     private final transient Back back;
 
     /**
-     * Port.
+     * Server socket.
      */
-    private final transient int port;
+    private final transient ServerSocket socket;
 
     /**
      * Ctor.
      * @param tks Take
      * @param prt Port
+     * @throws IOException If fails
      */
-    public FtBasic(final Take tks, final int prt) {
+    public FtBasic(final Take tks, final int prt) throws IOException {
         this(new BkBasic(tks), prt);
     }
 
     /**
      * Ctor.
      * @param bck Back
-     * @param prt Port
+     * @param port Port
+     * @throws IOException If fails
      */
-    public FtBasic(final Back bck, final int prt) {
+    public FtBasic(final Back bck, final int port) throws IOException {
+        this(bck, new ServerSocket(port));
+    }
+
+    /**
+     * Ctor.
+     * @param bck Back
+     * @param skt Server socket
+     * @since 0.22
+     */
+    public FtBasic(final Back bck, final ServerSocket skt) {
         this.back = bck;
-        this.port = prt;
+        this.socket = skt;
     }
 
     @Override
     public void start(final Exit exit) throws IOException {
-        final ServerSocket server = new ServerSocket(this.port);
-        server.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
+        this.socket.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {
             do {
-                this.loop(server);
+                this.loop(this.socket);
             } while (!exit.ready());
         } finally {
-            server.close();
+            this.socket.close();
         }
     }
 
