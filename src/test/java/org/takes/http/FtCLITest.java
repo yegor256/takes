@@ -28,7 +28,7 @@ import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CountDownLatch;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -60,9 +60,11 @@ public final class FtCLITest {
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void understandsCommandLineArgs() throws Exception {
+        final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {
             @Override
             public boolean ready() {
+                ready.countDown();
                 return false;
             }
         };
@@ -86,7 +88,7 @@ public final class FtCLITest {
             }
         );
         thread.start();
-        TimeUnit.SECONDS.sleep(1L);
+        ready.await();
         final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()
