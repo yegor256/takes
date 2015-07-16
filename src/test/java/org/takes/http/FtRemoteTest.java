@@ -41,6 +41,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqForm;
 import org.takes.rs.RsText;
+import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FtRemote}.
@@ -50,6 +51,26 @@ import org.takes.rs.RsText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtRemoteTest {
+
+    /**
+     * FtRemote can work.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void simplyWorks() throws Exception {
+        new FtRemote(new TkFixed(new RsText("simple answer"))).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.startsWith("simple"));
+                }
+            }
+        );
+    }
 
     /**
      * FtRemote can work in parallel threads.
