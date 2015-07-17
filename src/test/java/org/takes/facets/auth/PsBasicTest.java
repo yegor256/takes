@@ -23,6 +23,8 @@
  */
 package org.takes.facets.auth;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -30,6 +32,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
+import org.takes.facets.auth.PsBasic.User;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
@@ -42,6 +45,7 @@ import org.takes.rs.RsPrint;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (300 lines)
  */
 public final class PsBasicTest {
 
@@ -76,7 +80,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
         );
     }
 
@@ -149,7 +153,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.generateIdentityUrn(user))
         );
     }
 
@@ -185,11 +189,59 @@ public final class PsBasicTest {
     }
 
     /**
+     * Test {@link org.takes.facets.auth.PsBasic.Default#enter} retunrs
+     * a valid user.
+     * With user and pass ok.
+     */
+    @Test
+    public void returnsCorrectUrn() {
+        final String user = "Admin";
+        final String pass = "123";
+        final String urn = "urn:basic:admin";
+        final List<User> usrs =
+            new ArrayList<User>(1);
+        usrs.add(new User(user, pass, urn));
+        final Opt<Identity> identity = new PsBasic.Default(usrs)
+            .enter(user, pass);
+        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            identity.get().urn(),
+            CoreMatchers.equalTo(urn)
+        );
+    }
+
+    /**
+     * Test {@link org.takes.facets.auth.PsBasic.Default#enter}.
+     * With user ok and pass wrong returns empty identity.
+     */
+    @Test
+    public void returnsFalseIfUserDoesNotExist() {
+        final Opt<Identity> identity =
+            new PsBasic.Default("Adm,123,urn:basic:adm").enter("Adm", "125");
+        MatcherAssert.assertThat(identity.has(), Matchers.is(false));
+    }
+
+    /**
+     * Test {@link org.takes.facets.auth.PsBasic.Default#enter}.
+     * With user wrong and pass ok returns empty indentity.
+     */
+    @Test
+    public void returnsFalseForWrongPassword() {
+        final String pwd = "126";
+        final List<User> usrs =
+                new ArrayList<User>(1);
+        usrs.add(new User("Adminis", pwd, "urn:basic;admins"));
+        final Opt<Identity> identity = new PsBasic.Default(usrs)
+            .enter("Administrator", pwd);
+        MatcherAssert.assertThat(identity.has(), Matchers.is(false));
+    }
+
+    /**
      * Generate the identity urn.
      * @param user User
      * @return URN
      */
-    private String generateIdentityUrn(final String user) {
+    private static String generateIdentityUrn(final String user) {
         return String.format("urn:basic:%s", user);
     }
     /**
