@@ -25,6 +25,9 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
@@ -45,7 +48,6 @@ import org.takes.rs.RsWithHeader;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
- * @checkstyle ClassDataAbstractionCouplingCheck (250 lines)
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
 public final class PsBasic implements Pass {
@@ -183,6 +185,46 @@ public final class PsBasic implements Pass {
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<Identity>();
+        }
+    }
+
+    /**
+     * Default entry.
+     *
+     * @author Georgy Vlasov (wlasowegor@gmail.com)
+     * @version $Id$
+     * @since 0.22
+     */
+    public static final class Default implements PsBasic.Entry {
+
+        /**
+         * Map from usernames to users.
+         */
+        private final transient Map<String, User> usernames;
+
+        /**
+         * Public ctor.
+         * @param existing Existing users
+         */
+        public Default(final Collection<? extends User> existing) {
+            this.usernames = new HashMap<String, User>(existing.size());
+            for (final User user : existing) {
+                this.usernames.put(user.login(), user);
+            }
+        }
+
+        @Override
+        public Opt<Identity> enter(final String user, final String pwd) {
+            final Opt<Identity> identity;
+            final User valid = this.usernames.get(user);
+            if (valid == null) {
+                identity = new Opt.Empty<Identity>();
+            } else if (valid.password().equals(pwd)) {
+                identity = new Opt.Single<Identity>(valid.identity());
+            } else {
+                identity = new Opt.Empty<Identity>();
+            }
+            return identity;
         }
     }
 }
