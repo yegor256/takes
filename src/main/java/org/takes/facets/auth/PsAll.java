@@ -51,7 +51,7 @@ public class PsAll implements Pass {
      * Ctor.
      * @param passes All Passes to be checked.
      * @param identity Index of a Pass whose Identity to return on successful
-     * {@link PsAll#enter(Request)}
+     *  {@link PsAll#enter(Request)}
      */
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = passes;
@@ -81,23 +81,6 @@ public class PsAll implements Pass {
         return result;
     }
 
-    /**
-     * Checks if you can enter every Pass with a request.
-     * @param request Request that is used to enter Passes.
-     * @return true if every request can be entered, false otherwise
-     * @throws IOException If any of enter attempts fail
-     */
-    private boolean allMatch(Request request) throws IOException {
-        boolean success = true;
-        for (final Pass pass : this.all) {
-            if (!pass.enter(request).has()) {
-                success = false;
-                break;
-            }
-        }
-        return success;
-    }
-
     @Override
     public final Response exit(final Response response, final Identity identity)
         throws IOException {
@@ -107,5 +90,22 @@ public class PsAll implements Pass {
             );
         }
         return this.all.get(this.index).exit(response, identity);
+    }
+
+    /**
+     * Checks if you can enter every Pass with a request.
+     * @param request Request that is used to enter Passes.
+     * @return True if every request can be entered, false otherwise
+     * @throws IOException If any of enter attempts fail
+     */
+    private boolean allMatch(final Request request) throws IOException {
+        boolean success = true;
+        for (final Pass pass : this.all) {
+            if (!pass.enter(request).has()) {
+                success = false;
+                break;
+            }
+        }
+        return success;
     }
 }

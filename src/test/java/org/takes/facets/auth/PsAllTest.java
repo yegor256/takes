@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import com.jcabi.aspects.Tv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -116,7 +117,7 @@ public final class PsAllTest {
                     new PsFake(true),
                     new PsFake(true)
                 ),
-                3
+                Tv.THREE
             ).enter(new RqFake()).has(),
             Matchers.is(true)
         );
