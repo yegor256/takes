@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.takes.Request;
 import org.takes.Response;
@@ -54,7 +55,7 @@ public class PsAll implements Pass {
      *  {@link PsAll#enter(Request)}
      */
     public PsAll(final List<? extends Pass> passes, final int identity) {
-        this.all = passes;
+        this.all = new ArrayList<Pass>(passes);
         this.index = identity;
         if (this.index < 0) {
             throw new IllegalArgumentException("Index must be >= 0");
