@@ -104,22 +104,25 @@ public final class PsAllTest {
     }
 
     /**
-     * PsAll with multiple passes that all can be entered succeeds.
+     * PsAll with multiple passes that all can be entered returns the
+     * identity specified by an index.
      * @throws Exception If fails
      */
     @Test
     public void testSuccessfullIdx() throws Exception {
+        final PsFake resulting = new PsFake(true);
+        final RqFake request = new RqFake();
         MatcherAssert.assertThat(
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
                     new PsFake(true),
-                    new PsFake(true),
+                    resulting,
                     new PsFake(true)
                 ),
                 Tv.THREE
-            ).enter(new RqFake()).has(),
-            Matchers.is(true)
+            ).enter(request).get(),
+            Matchers.equalTo(resulting.enter(request).get())
         );
     }
 
