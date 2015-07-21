@@ -119,12 +119,12 @@ public final class PsAllTest {
                 Arrays.asList(
                     new PsFake(true),
                     new PsFake(true),
-                    resulting,
-                    new PsFake(true)
+                    new PsFake(true),
+                    resulting
                 ),
                 Tv.THREE
-            ).enter(request).get(),
-            Matchers.equalTo(resulting.enter(request).get())
+            ).enter(request).get().urn(),
+            Matchers.equalTo(resulting.enter(request).get().urn())
         );
     }
 
