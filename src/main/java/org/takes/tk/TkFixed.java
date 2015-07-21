@@ -27,6 +27,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rs.RsText;
 
 /**
  * Take with fixed response.
@@ -42,6 +43,15 @@ import org.takes.Take;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class TkFixed extends TkWrap {
+
+    /**
+     * Ctor.
+     * @param text Response text
+     * @since 0.23
+     */
+    public TkFixed(final String text) {
+        this(new RsText(text));
+    }
 
     /**
      * Ctor.

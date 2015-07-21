@@ -121,7 +121,11 @@ public final class FtRemote implements Front {
         thread.start();
         try {
             // @checkstyle MagicNumber (1 line)
-            latch.await(10L, TimeUnit.SECONDS);
+            if (!latch.await(10L, TimeUnit.SECONDS)) {
+                throw new IllegalArgumentException(
+                    "failed to start the app"
+                );
+            }
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
