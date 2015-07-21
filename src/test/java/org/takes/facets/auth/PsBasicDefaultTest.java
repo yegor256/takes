@@ -75,11 +75,11 @@ public final class PsBasicDefaultTest {
         );
     }
     /**
-     * {@link org.takes.facets.auth.PsBasic.Default} accepts correct
-     * login/password pair.
+     * PsBasic.Default can accept a correct login/password pair.
+     * @throws Exception If fails
      */
     @Test
-    public void defaultPassCanAcceptCorrectLoginPasswordPair() {
+    public void acceptsCorrectLoginPasswordPair() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(this.users)
                 .enter(
@@ -93,11 +93,11 @@ public final class PsBasicDefaultTest {
     }
 
     /**
-     * {@link org.takes.facets.auth.PsBasic.Default} rejects incorrect
-     * passowrd even with an existing login.
+     * PsBasic.Default can reject incorrect password.
+     * @throws Exception If fails
      */
     @Test
-    public void defaultPassCanRejectIncorrectPassword() {
+    public void rejectsIncorrectPassword() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(this.users)
                 .enter(PsBasicDefaultTest.BOB_LOGIN, "wrongpassword")
@@ -107,11 +107,11 @@ public final class PsBasicDefaultTest {
     }
 
     /**
-     * {@link org.takes.facets.auth.PsBasic.Default} rejects non-existing
-     * login.
+     * PsBasic.Default can reject a non-existing login.
+     * @throws Exception If fails
      */
     @Test
-    public void defaultPassCanRejectIncorrectLogin() {
+    public void rejectsIncorrectLogin() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(this.users)
                 .enter("mike", "anything")
