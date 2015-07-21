@@ -30,7 +30,9 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Response;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsEmpty;
 
 /**
  * Test of {@link PsAll}.
@@ -143,6 +145,26 @@ public final class PsAllTest {
                 1
             ).enter(new RqFake()).has(),
             Matchers.is(false)
+        );
+    }
+
+    /**
+     * Exits.
+     * @throws Exception If fails
+     */
+    @Test
+    public void exits() throws Exception {
+        final Response response = new RsEmpty();
+        final PsFake exiting = new PsFake(true);
+        MatcherAssert.assertThat(
+            new PsAll(
+                Arrays.asList(
+                    new PsFake(true),
+                    exiting
+                ),
+                1
+            ).exit(response, exiting.enter(new RqFake()).get()),
+            Matchers.equalTo(response)
         );
     }
 }
