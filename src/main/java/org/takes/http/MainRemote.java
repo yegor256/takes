@@ -88,6 +88,28 @@ public final class MainRemote {
             }
         );
         thread.start();
+        try {
+            script.exec(
+                URI.create(
+                    String.format(
+                        "http://localhost:%d",
+                        MainRemote.port(file)
+                    )
+                )
+            );
+        } finally {
+            file.delete();
+            thread.interrupt();
+        }
+    }
+
+    /**
+     * Read port number from file.
+     * @param file The file
+     * @return Port number
+     * @throws Exception If fails
+     */
+    private static int port(final File file) throws Exception {
         while (!file.exists()) {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
@@ -96,24 +118,16 @@ public final class MainRemote {
         try {
             // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
-            input.read(buf);
+            while (true) {
+                if (input.read(buf) > 0) {
+                    break;
+                }
+            }
             port = Integer.parseInt(new String(buf).trim());
         } finally {
             input.close();
         }
-        try {
-            script.exec(
-                URI.create(
-                    String.format(
-                        "http://localhost:%d",
-                        port
-                    )
-                )
-            );
-        } finally {
-            file.delete();
-            thread.interrupt();
-        }
+        return port;
     }
 
     /**
