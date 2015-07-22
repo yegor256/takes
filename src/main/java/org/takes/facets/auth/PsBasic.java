@@ -217,12 +217,10 @@ public final class PsBasic implements Pass {
         public Opt<Identity> enter(final String user, final String pwd) {
             final Opt<Identity> identity;
             final User valid = this.usernames.get(user);
-            if (valid == null) {
+            if (valid == null || !valid.password().equals(pwd)) {
                 identity = new Opt.Empty<Identity>();
-            } else if (valid.password().equals(pwd)) {
-                identity = new Opt.Single<Identity>(valid.identity());
             } else {
-                identity = new Opt.Empty<Identity>();
+                identity = new Opt.Single<Identity>(valid.identity());
             }
             return identity;
         }
