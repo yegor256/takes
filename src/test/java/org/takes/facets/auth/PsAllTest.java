@@ -112,7 +112,9 @@ public final class PsAllTest {
      */
     @Test
     public void testSuccessfullIdx() throws Exception {
-        final PsFake resulting = new PsFake(true);
+        final Pass resulting = new PsFixed(
+            new Identity.Simple("urn:foo:test")
+        );
         final RqFake request = new RqFake();
         MatcherAssert.assertThat(
             new PsAll(
