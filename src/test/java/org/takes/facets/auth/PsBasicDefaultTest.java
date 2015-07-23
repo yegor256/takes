@@ -23,11 +23,8 @@
  */
 package org.takes.facets.auth;
 
-import java.util.Arrays;
-import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -54,26 +51,11 @@ public final class PsBasicDefaultTest {
     /**
      * Existing users.
      */
-    private transient List<User.Default> users;
+    private final transient String[] users = new String[] {
+        "bob qwerty urn:foo:robert",
+        "alice 123 urn:foo:alice",
+    };
 
-    /**
-     * Sets up a list of users used in each test.
-     */
-    @Before
-    public void setUpUsersList() {
-        this.users = Arrays.asList(
-            new User.Default(
-                PsBasicDefaultTest.BOB_LOGIN,
-                PsBasicDefaultTest.BOB_PASSWORD,
-                new Identity.Simple(URN)
-            ),
-            new User.Default(
-                "alice",
-                "123",
-                new Identity.Simple("urn:foo:alice")
-            )
-        );
-    }
     /**
      * PsBasic.Default can accept a correct login/password pair.
      * @throws Exception If fails

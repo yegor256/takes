@@ -25,12 +25,12 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.lang.StringUtils;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -198,31 +198,74 @@ public final class PsBasic implements Pass {
     public static final class Default implements PsBasic.Entry {
 
         /**
-         * Map from usernames to users.
+         * How keys in
+         * {@link org.takes.facets.auth.PsBasic.Default#usernames} are
+         * formatted.
          */
-        private final transient Map<String, User> usernames;
+        public static final String KEY_FORMAT = "%s %s";
+
+        /**
+         * Map from login/password pairs to URNs.
+         */
+        private final transient Map<String, String> usernames;
 
         /**
          * Public ctor.
-         * @param existing Existing users
+         * @param users Strings with user's login, password and URN with
+         *  space characters as separators. For example,
+         *  {@code "mike password urn:jcabi-users:michael"}.
          */
-        public Default(final Collection<? extends User> existing) {
-            this.usernames = new HashMap<String, User>(existing.size());
-            for (final User user : existing) {
-                this.usernames.put(user.login(), user);
+        public Default(final String... users) {
+            this.usernames = new HashMap<String, String>(users.length);
+            for (final String user : users) {
+                PsBasic.Default.validateUser(user);
+                this.usernames.put(
+                    String.format(
+                        PsBasic.Default.KEY_FORMAT,
+                        user.substring(0, user.indexOf(' ')),
+                        user.substring(
+                            user.indexOf(' ') + 1,
+                            user.lastIndexOf(' ')
+                        )
+                    ),
+                    user.substring(user.lastIndexOf(' ') + 1)
+                );
             }
         }
 
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
+            final String urn = this.usernames.get(
+                String.format(Default.KEY_FORMAT, user, pwd)
+            );
             final Opt<Identity> identity;
-            final User valid = this.usernames.get(user);
-            if (valid == null || !valid.password().equals(pwd)) {
+            if (urn == null) {
                 identity = new Opt.Empty<Identity>();
             } else {
-                identity = new Opt.Single<Identity>(valid.identity());
+                identity = new Opt.Single<Identity>(new Identity.Simple(urn));
             }
             return identity;
         }
+
+        /**
+         * Checks if a user string is correctly formatted.
+         * @param user String with user login, password and urn separated
+         *  with spaces.
+         */
+        private static void validateUser(final String user) {
+            final boolean incorrectAmount =
+                StringUtils.countMatches(user, " ") != 2;
+            final boolean nearby =
+                user.indexOf(' ') + 1 == user.lastIndexOf(' ');
+            if (incorrectAmount || nearby) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "One of users was incorrectly formatted: %s",
+                        user
+                    )
+                );
+            }
+        }
+
     }
 }
