@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang.StringUtils;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -253,8 +252,7 @@ public final class PsBasic implements Pass {
          *  with spaces.
          */
         private static void validateUser(final String user) {
-            final boolean incorrectAmount =
-                StringUtils.countMatches(user, " ") != 2;
+            final boolean incorrectAmount = Default.countSpaces(user) != 2;
             final boolean nearby =
                 user.indexOf(' ') + 1 == user.lastIndexOf(' ');
             if (incorrectAmount || nearby) {
@@ -265,6 +263,21 @@ public final class PsBasic implements Pass {
                     )
                 );
             }
+        }
+
+        /**
+         * Counts spaces in a string.
+         * @param string Any string.
+         * @return Amount of spaces in string.
+         */
+        private static int countSpaces(final String string) {
+            int spaces = 0;
+            for (char character : string.toCharArray()) {
+                if (character == ' ') {
+                    spaces += 1;
+                }
+            }
+            return spaces;
         }
 
     }
