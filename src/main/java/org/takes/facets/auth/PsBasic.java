@@ -272,7 +272,7 @@ public final class PsBasic implements Pass {
          */
         private static int countSpaces(final String string) {
             int spaces = 0;
-            for (char character : string.toCharArray()) {
+            for (final char character : string.toCharArray()) {
                 if (character == ' ') {
                     spaces += 1;
                 }
