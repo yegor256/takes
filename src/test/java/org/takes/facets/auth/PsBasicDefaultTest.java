@@ -34,27 +34,6 @@ import org.junit.Test;
  * @since 0.22
  */
 public final class PsBasicDefaultTest {
-    /**
-     * URN of one of users.
-     */
-    private static final String URN = "urn:foo:robert";
-    /**
-     * Login of one of users.
-     */
-    private static final String BOB_LOGIN = "bob";
-
-    /**
-     * Password of one of users.
-     */
-    private static final String BOB_PASSWORD = "qwerty";
-
-    /**
-     * Existing users.
-     */
-    private final transient String[] users = new String[] {
-        "bob qwerty urn:foo:robert",
-        "alice 123 urn:foo:alice",
-    };
 
     /**
      * PsBasic.Default can accept a correct login/password pair.
@@ -63,14 +42,19 @@ public final class PsBasicDefaultTest {
     @Test
     public void acceptsCorrectLoginPasswordPair() throws Exception {
         MatcherAssert.assertThat(
-            new PsBasic.Default(this.users)
+            new PsBasic.Default(
+                new String[]{
+                    "bob qwerty: urn:foo:robert",
+                    "alice пароль urn:foo:alice",
+                }
+            )
                 .enter(
-                    PsBasicDefaultTest.BOB_LOGIN,
-                    PsBasicDefaultTest.BOB_PASSWORD
+                    "bob",
+                    "qwerty"
             )
                 .get()
                 .urn(),
-            Matchers.equalTo(URN)
+            Matchers.equalTo("urn:foo:robert")
         );
     }
 
@@ -81,8 +65,13 @@ public final class PsBasicDefaultTest {
     @Test
     public void rejectsIncorrectPassword() throws Exception {
         MatcherAssert.assertThat(
-            new PsBasic.Default(this.users)
-                .enter(PsBasicDefaultTest.BOB_LOGIN, "wrongpassword")
+            new PsBasic.Default(
+                new String[]{
+                    "charlie qwerty urn:foo:charlie",
+                    "doreen 123 urn:foo:doreen",
+                }
+            )
+                .enter("charlie", "wrongpassword")
                 .has(),
             Matchers.is(false)
         );
@@ -95,7 +84,12 @@ public final class PsBasicDefaultTest {
     @Test
     public void rejectsIncorrectLogin() throws Exception {
         MatcherAssert.assertThat(
-            new PsBasic.Default(this.users)
+            new PsBasic.Default(
+                new String[]{
+                    "eddie qwerty urn:foo:eddie",
+                    "fiona 123 urn:foo:fiona",
+                }
+            )
                 .enter("mike", "anything")
                 .has(),
             Matchers.is(false)
