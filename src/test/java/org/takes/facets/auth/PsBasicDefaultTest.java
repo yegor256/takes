@@ -50,7 +50,7 @@ public final class PsBasicDefaultTest {
             )
                 .enter(
                     "bob",
-                    "qwerty"
+                    "qwerty:"
             )
                 .get()
                 .urn(),
