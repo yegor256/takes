@@ -116,7 +116,7 @@ public final class PsBasicDefaultTest {
     }
 
     /**
-     * PsBasic.Default can url-decode an urn from its paraterer.
+     * PsBasic.Default can url-decode an urn from its parameter.
      * @throws Exception If fails
      */
     @Test
@@ -134,7 +134,7 @@ public final class PsBasicDefaultTest {
                 .enter(
                     "login",
                     "password"
-            )
+                )
                 .get()
                 .urn(),
             Matchers.is(urn)
