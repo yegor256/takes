@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import java.net.URLEncoder;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -111,6 +112,32 @@ public final class PsBasicDefaultTest {
             )
                 .has(),
             Matchers.is(true)
+        );
+    }
+
+    /**
+     * PsBasic.Default can url-decode an urn from its paraterer.
+     * @throws Exception If fails
+     */
+    @Test
+    public void supportsUrlencodedUrns() throws Exception {
+        final String urn = "urn:a100%25:one-two+";
+        MatcherAssert.assertThat(
+            new PsBasic.Default(
+                new String[]{
+                    String.format(
+                        "login password %s",
+                        URLEncoder.encode(urn, "UTF-8")
+                    ),
+                }
+            )
+                .enter(
+                    "login",
+                    "password"
+            )
+                .get()
+                .urn(),
+            Matchers.is(urn)
         );
     }
 

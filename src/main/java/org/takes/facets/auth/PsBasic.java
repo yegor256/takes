@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -236,6 +237,32 @@ public final class PsBasic implements Pass {
 
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
+            final Opt<String> urn = this.urn(user, pwd);
+            final Opt<Identity> identity;
+            if (urn.has()) {
+                try {
+                    identity = new Opt.Single<Identity>(
+                        new Identity.Simple(
+                            URLDecoder.decode(urn.get(), Default.ENCODING)
+                        )
+                    );
+                } catch (final UnsupportedEncodingException ex) {
+                    throw new IllegalStateException(ex);
+                }
+            } else {
+                identity = new Opt.Empty<Identity>();
+            }
+            return identity;
+        }
+
+        /**
+         * Returns an URN corresponding to a login-password pair.
+         * @param user Login.
+         * @param pwd Password.
+         * @return Opt with URN or empty if there is no such login-password
+         *  pair.
+         */
+        private Opt<String> urn(final String user, final String pwd) {
             final String urn;
             try {
                 urn = this.usernames.get(
@@ -243,24 +270,24 @@ public final class PsBasic implements Pass {
                         Default.KEY_FORMAT,
                         URLEncoder.encode(
                             user,
-                            PsBasic.Default.ENCODING
+                            Default.ENCODING
                         ),
                         URLEncoder.encode(
                             pwd,
-                            PsBasic.Default.ENCODING
+                            Default.ENCODING
                         )
                     )
                 );
             } catch (final UnsupportedEncodingException ex) {
                 throw new IllegalStateException(ex);
             }
-            final Opt<Identity> identity;
+            final Opt<String> opt;
             if (urn == null) {
-                identity = new Opt.Empty<Identity>();
+                opt = new Opt.Empty<String>();
             } else {
-                identity = new Opt.Single<Identity>(new Identity.Simple(urn));
+                opt = new Opt.Single<String>(urn);
             }
-            return identity;
+            return opt;
         }
 
         /**
