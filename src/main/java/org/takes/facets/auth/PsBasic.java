@@ -24,7 +24,9 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -204,6 +206,11 @@ public final class PsBasic implements Pass {
         public static final String KEY_FORMAT = "%s %s";
 
         /**
+         * Encoding for URLEncode#encode.
+         */
+        public static final String ENCODING = "UTF-8";
+
+        /**
          * Map from login/password pairs to URNs.
          */
         private final transient Map<String, String> usernames;
@@ -211,32 +218,42 @@ public final class PsBasic implements Pass {
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with
-         *  space characters as separators. For example,
-         *  {@code "mike password urn:jcabi-users:michael"}.
+         *  space characters as separators. Each of login, password and urn
+         *  are URL-encoded substrings. For example,
+         *  {@code "mike my%20password urn:jcabi-users:michael"}.
          */
         public Default(final String... users) {
             this.usernames = new HashMap<String, String>(users.length);
             for (final String user : users) {
-                PsBasic.Default.validateUser(user);
+                final String unified = user.replace("%20", "+");
+                PsBasic.Default.validateUser(unified);
                 this.usernames.put(
-                    String.format(
-                        PsBasic.Default.KEY_FORMAT,
-                        user.substring(0, user.indexOf(' ')),
-                        user.substring(
-                            user.indexOf(' ') + 1,
-                            user.lastIndexOf(' ')
-                        )
-                    ),
-                    user.substring(user.lastIndexOf(' ') + 1)
+                    PsBasic.Default.key(unified),
+                    unified.substring(unified.lastIndexOf(' ') + 1)
                 );
             }
         }
 
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
-            final String urn = this.usernames.get(
-                String.format(Default.KEY_FORMAT, user, pwd)
-            );
+            final String urn;
+            try {
+                urn = this.usernames.get(
+                    String.format(
+                        Default.KEY_FORMAT,
+                        URLEncoder.encode(
+                            user,
+                            PsBasic.Default.ENCODING
+                        ),
+                        URLEncoder.encode(
+                            pwd,
+                            PsBasic.Default.ENCODING
+                        )
+                    )
+                );
+            } catch (final UnsupportedEncodingException ex) {
+                throw new IllegalStateException(ex);
+            }
             final Opt<Identity> identity;
             if (urn == null) {
                 identity = new Opt.Empty<Identity>();
@@ -247,19 +264,38 @@ public final class PsBasic implements Pass {
         }
 
         /**
-         * Checks if a user string is correctly formatted.
-         * @param user String with user login, password and urn separated
-         *  with spaces.
+         * Creates a key for
+         *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
+         * @param unified User string made of 3 urlencoded substrings
+         *  separated with non-urlencoded space characters.
+         * @return Login and password parts with <pre>%20</pre> replaced with
+         *  <pre>+</pre>.
          */
-        private static void validateUser(final String user) {
-            final boolean incorrectAmount = Default.countSpaces(user) != 2;
+        private static String key(final String unified) {
+            return String.format(
+                PsBasic.Default.KEY_FORMAT,
+                unified.substring(0, unified.indexOf(' ')),
+                unified.substring(
+                    unified.indexOf(' ') + 1,
+                    unified.lastIndexOf(' ')
+                )
+            );
+        }
+
+        /**
+         * Checks if a unified user string is correctly formatted.
+         * @param unified String with urlencoded user login, password and urn
+         *  separated with spaces.
+         */
+        private static void validateUser(final String unified) {
+            final boolean incorrectAmount = Default.countSpaces(unified) != 2;
             final boolean nearby =
-                user.indexOf(' ') + 1 == user.lastIndexOf(' ');
+                unified.indexOf(' ') + 1 == unified.lastIndexOf(' ');
             if (incorrectAmount || nearby) {
                 throw new IllegalArgumentException(
                     String.format(
                         "One of users was incorrectly formatted: %s",
-                        user
+                        unified
                     )
                 );
             }
@@ -279,6 +315,5 @@ public final class PsBasic implements Pass {
             }
             return spaces;
         }
-
     }
 }

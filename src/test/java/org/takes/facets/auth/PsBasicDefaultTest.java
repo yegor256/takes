@@ -44,17 +44,73 @@ public final class PsBasicDefaultTest {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
-                    "bob qwerty: urn:foo:robert",
+                    "bob qwe%20r%20ty%3A%2B urn:foo:robert",
                     "alice пароль urn:foo:alice",
                 }
             )
                 .enter(
                     "bob",
-                    "qwerty:"
+                    "qwe r ty:+"
             )
                 .get()
                 .urn(),
             Matchers.equalTo("urn:foo:robert")
+        );
+    }
+
+    /**
+     * PsBasic.Default can handle both <pre>%20</pre> and <pre>+</pre>
+     * variants of encoding spaces in constructor parameters.
+     * @throws Exception If fails
+     */
+    @Test
+    public void supportsBothKindsOfSpace() throws Exception {
+        MatcherAssert.assertThat(
+            new PsBasic.Default(
+                new String[]{
+                    "yvonne hey%20you urn:foo:z",
+                }
+            )
+                .enter(
+                    "yvonne",
+                    "hey you"
+            )
+                .has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new PsBasic.Default(
+                new String[]{
+                    "zak hey+me urn:foo:z",
+                }
+            )
+                .enter(
+                    "zak",
+                    "hey me"
+            )
+                .has(),
+            Matchers.is(true)
+        );
+    }
+
+    /**
+     * PsBasic.Default can be entered by a user with a space in his name.
+     * @throws Exception If fails
+     */
+    @Test
+    public void supportsUsersWithSpacesInTheirNames() throws Exception {
+        MatcherAssert.assertThat(
+            new PsBasic.Default(
+                new String[]{
+                    "abraham+lincoln qwer urn:foo:z",
+                }
+            )
+                .enter(
+                    "abraham lincoln",
+                    "qwer"
+            )
+                .has(),
+            Matchers.is(true)
         );
     }
 
