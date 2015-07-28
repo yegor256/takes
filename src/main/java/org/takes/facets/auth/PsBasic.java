@@ -204,12 +204,12 @@ public final class PsBasic implements Pass {
          * {@link org.takes.facets.auth.PsBasic.Default#usernames} are
          * formatted.
          */
-        public static final String KEY_FORMAT = "%s %s";
+        private static final String KEY_FORMAT = "%s %s";
 
         /**
          * Encoding for URLEncode#encode.
          */
-        public static final String ENCODING = "UTF-8";
+        private static final String ENCODING = "UTF-8";
 
         /**
          * Map from login/password pairs to URNs.
