@@ -134,7 +134,7 @@ public final class PsBasicDefaultTest {
                 .enter(
                     "login",
                     "password"
-                )
+            )
                 .get()
                 .urn(),
             Matchers.is(urn)
