@@ -226,7 +226,7 @@ public interface RqMultipart extends Request {
         /**
          * Make a request.
          *  Scans the origin request until the boundary reached. Caches
-         *  the  content into a temporary file and returns it as a new request.
+         *  the content into a temporary file and returns it as a new request.
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
@@ -235,7 +235,6 @@ public interface RqMultipart extends Request {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
                 file, "rw"
             ).getChannel();
@@ -250,9 +249,12 @@ public interface RqMultipart extends Request {
                 channel.close();
             }
             return new RqLive(
-                new CapInputStream(
-                    new FileInputStream(file),
-                    file.length()
+                new TempInputStream(
+                    new CapInputStream(
+                        new FileInputStream(file),
+                        file.length()
+                    ),
+                    file
                 )
             );
         }

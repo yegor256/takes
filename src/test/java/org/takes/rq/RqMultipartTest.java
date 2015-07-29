@@ -383,6 +383,7 @@ public final class RqMultipartTest {
         );
         temp.delete();
     }
+
     /**
      * RqMultipart.Base doesn't distort the content.
      * @throws IOException If some problem inside
