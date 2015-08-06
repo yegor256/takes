@@ -32,15 +32,19 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.util.Iterator;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
+import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
 
 /**
@@ -58,6 +62,16 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
+     * Keep alive header.
+     */
+    private static final String CONNECTION = "Connection";
+
+    /**
+     * Keep alive header value.
+     */
+    private static final String KEEP_ALIVE = "Keep-Alive";
+
+    /**
      * Take.
      */
     private final transient Take take;
@@ -73,30 +87,60 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
+        final RqLive req = new RqLive(input);
+        final boolean keepAlive = this.isConnectionKeepAlive(req);
         try {
             this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
+                    BkBasic.addSocketHeaders(req, socket),
+                    new BufferedOutputStream(socket.getOutputStream()),
+                    keepAlive
             );
         } finally {
-            input.close();
+            if (!keepAlive) {
+                input.close();
+            }
         }
+    }
+
+    /**
+     * Whether to http connection is persistent or not.
+     * @param req RqLive
+     * @return Boolean
+     * @throws IOException if fails
+     */
+    private boolean isConnectionKeepAlive(final RqLive req) throws IOException {
+        boolean keep = false;
+        final RqHeaders.Base rqHeaders = new RqHeaders.Base(req);
+        if (rqHeaders.head().iterator().hasNext()) {
+            final Iterator<String> values = rqHeaders.header(BkBasic.CONNECTION)
+                    .iterator();
+            if (values.hasNext()) {
+                do {
+                    keep = BkBasic.KEEP_ALIVE.toLowerCase(
+                            Locale.ENGLISH
+                            ).equals(
+                            values.next().toLowerCase(Locale.ENGLISH)
+                    );
+                } while (!keep && values.hasNext());
+            }
+        }
+        return keep;
     }
 
     /**
      * Print response to output stream, safely.
      * @param req Request
-     * @param output Output
-     * @throws IOException If fails
+     * @param output OutputStream
+     * @param keep Boolean
+     * @throws IOException if fails
      */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    private void print(final Request req, final OutputStream output)
-        throws IOException {
+    private void print(final Request req, final OutputStream output,
+                       final boolean keep)
+            throws IOException {
         try {
-            new RsPrint(this.take.act(req)).print(output);
+            final Response res = this.retrieveResponse(req, keep);
+            new RsPrint(res).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             // @checkstyle IllegalCatchCheck (7 lines)
@@ -110,6 +154,29 @@ public final class BkBasic implements Back {
         } finally {
             output.close();
         }
+    }
+
+    /**
+     * Create Response by Request.
+     *
+     * @param req Request
+     * @param keep Keep alive
+     * @return Response
+     * @throws IOException if fails
+     */
+    private Response retrieveResponse(final Request req, final boolean keep)
+            throws IOException {
+        final Response res;
+        if (keep) {
+            res = new RsWithHeader(
+                    this.take.act(req),
+                    BkBasic.CONNECTION,
+                    BkBasic.KEEP_ALIVE
+            );
+        } else {
+            res = this.take.act(req);
+        }
+        return res;
     }
 
     /**

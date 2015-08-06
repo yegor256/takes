@@ -33,12 +33,19 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URL;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.tk.TkEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -50,6 +57,12 @@ import org.takes.tk.TkText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class BkBasicTest {
+
+    /**
+     * New line.
+     */
+    private static final String CRLF = "\r\n";
+
     /**
      * BkBasic can handle socket data.
      * @throws IOException If some problem inside
@@ -59,7 +72,7 @@ public final class BkBasicTest {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
             new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
+                Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
                     "Content-Length: 2",
@@ -86,6 +99,68 @@ public final class BkBasicTest {
     }
 
     /**
+     * BkBasic can handle HTTP persistent connections.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    @SuppressWarnings("PMD.DoNotUseThreads")
+    public void handlesPersistentConnection() throws Exception {
+        final int port = 8080;
+        final String uri = String.format("http://localhost:%d", port);
+        // @checkstyle MagicNumberCheck (1 line)
+        final int count = 1;
+        final CountDownLatch completed = new CountDownLatch(count);
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new TkEmpty().act(req);
+            }
+        };
+        new Thread(
+            // @checkstyle AnonInnerLengthCheck (23 lines)
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtBasic(
+                            new BkBasic(take),
+                                port
+                        ).start(
+                                new Exit() {
+                                    @Override
+                                    public boolean ready() {
+                                        return completed.getCount() == 0;
+                                    }
+                                }
+                        );
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        ).start();
+        final HttpURLConnection conn = HttpURLConnection.class.cast(
+                new URL(uri).openConnection()
+        );
+        conn.setRequestMethod("GET");
+        conn.setUseCaches(false);
+        conn.setInstanceFollowRedirects(false);
+        conn.addRequestProperty("Host", "localhost");
+        final String connection = "Connection";
+        MatcherAssert.assertThat(
+                conn.getHeaderFields(),
+                Matchers.hasKey(connection)
+        );
+        MatcherAssert.assertThat(
+                conn.getHeaderFields().get(connection),
+                Matchers.hasItem("Keep-Alive")
+        );
+        completed.countDown();
+        completed.await(1L, TimeUnit.MILLISECONDS);
+        MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+    }
+
+    /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
      * @throws IOException if any I/O error occurs.
      */
@@ -101,9 +176,9 @@ public final class BkBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(String.format("%s/path/c", home))
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
+                            .fetch()
+                            .as(RestResponse.class)
+                            .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
                 }
             }
         );
