@@ -142,18 +142,21 @@ public final class BkBasicTest {
         final HttpURLConnection conn = HttpURLConnection.class.cast(
                 new URL(uri).openConnection()
         );
+        final String connection = "Connection";
+        final String keepAlive = "Keep-Alive";
+
         conn.setRequestMethod("GET");
         conn.setUseCaches(false);
         conn.setInstanceFollowRedirects(false);
         conn.addRequestProperty("Host", "localhost");
-        final String connection = "Connection";
+        conn.addRequestProperty(connection, keepAlive);
         MatcherAssert.assertThat(
                 conn.getHeaderFields(),
                 Matchers.hasKey(connection)
         );
         MatcherAssert.assertThat(
                 conn.getHeaderFields().get(connection),
-                Matchers.hasItem("Keep-Alive")
+                Matchers.hasItem(keepAlive)
         );
         completed.countDown();
         completed.await(1L, TimeUnit.MILLISECONDS);
