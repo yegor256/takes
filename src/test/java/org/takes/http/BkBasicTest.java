@@ -144,7 +144,6 @@ public final class BkBasicTest {
         );
         final String connection = "Connection";
         final String keepAlive = "Keep-Alive";
-
         conn.setRequestMethod("GET");
         conn.setUseCaches(false);
         conn.setInstanceFollowRedirects(false);
