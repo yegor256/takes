@@ -34,8 +34,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -101,65 +99,69 @@ public final class BkBasicTest {
     /**
      * BkBasic can handle HTTP persistent connections.
      * @throws Exception If some problem inside
+     * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     @Test
     @SuppressWarnings("PMD.DoNotUseThreads")
     public void handlesPersistentConnection() throws Exception {
         final int port = 8080;
         final String uri = String.format("http://localhost:%d", port);
-        // @checkstyle MagicNumberCheck (1 line)
-        final int count = 1;
-        final CountDownLatch completed = new CountDownLatch(count);
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
                 return new TkEmpty().act(req);
             }
         };
-        new Thread(
-            // @checkstyle AnonInnerLengthCheck (23 lines)
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new FtBasic(
-                            new BkBasic(take),
-                                port
-                        ).start(
-                                new Exit() {
-                                    @Override
-                                    public boolean ready() {
-                                        return completed.getCount() == 0;
-                                    }
-                                }
-                        );
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
+        final Thread app = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new FtBasic(
+                                    new BkBasic(take),
+                                    port
+                            ).start(
+                                    Exit.NEVER
+                            );
+                        } catch (final IOException ex) {
+                            throw new IllegalStateException(ex);
+                        }
                     }
                 }
-            }
-        ).start();
-        final HttpURLConnection conn = HttpURLConnection.class.cast(
+        );
+        app.start();
+        final HttpURLConnection firstConnection = HttpURLConnection.class.cast(
                 new URL(uri).openConnection()
         );
+        final String req = "GET";
+        final String host = "Host";
+        final String localhost = "localhost";
         final String connection = "Connection";
         final String keepAlive = "Keep-Alive";
-        conn.setRequestMethod("GET");
-        conn.setUseCaches(false);
-        conn.setInstanceFollowRedirects(false);
-        conn.addRequestProperty("Host", "localhost");
-        conn.addRequestProperty(connection, keepAlive);
-        MatcherAssert.assertThat(
-                conn.getHeaderFields(),
-                Matchers.hasKey(connection)
+        firstConnection.setRequestMethod(req);
+        firstConnection.setUseCaches(false);
+        firstConnection.setInstanceFollowRedirects(false);
+        firstConnection.addRequestProperty(host, localhost);
+        firstConnection.addRequestProperty(connection, keepAlive);
+        final HttpURLConnection secondConnection = HttpURLConnection.class.cast(
+                new URL(uri).openConnection()
         );
+        secondConnection.setRequestMethod(req);
+        secondConnection.setUseCaches(false);
+        secondConnection.setInstanceFollowRedirects(false);
+        secondConnection.addRequestProperty(host, localhost);
+        secondConnection.addRequestProperty(connection, "close");
         MatcherAssert.assertThat(
-                conn.getHeaderFields().get(connection),
+                firstConnection.getHeaderFields().get(connection),
                 Matchers.hasItem(keepAlive)
         );
-        completed.countDown();
-        completed.await(1L, TimeUnit.MILLISECONDS);
-        MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+        MatcherAssert.assertThat(
+                secondConnection.getHeaderFields().get(connection),
+                Matchers.not(
+                        Matchers.hasItem(keepAlive)
+            )
+        );
+        app.interrupt();
     }
 
     /**

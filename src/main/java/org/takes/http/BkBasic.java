@@ -139,8 +139,9 @@ public final class BkBasic implements Back {
                        final boolean keep)
             throws IOException {
         try {
-            final Response res = this.retrieveResponse(req, keep);
-            new RsPrint(res).print(output);
+            new RsPrint(
+                    this.retrieveResponse(req, keep)
+            ).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             // @checkstyle IllegalCatchCheck (7 lines)
