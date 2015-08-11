@@ -84,6 +84,10 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+    // @todo #306 30min/DEV : the server should use same socket for new coming
+    // requests if the connection is persistent.
+    // And the server should create new socket for new coming requests if the
+    // connection is not persistent
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
@@ -96,9 +100,7 @@ public final class BkBasic implements Back {
                     keepAlive
             );
         } finally {
-            if (!keepAlive) {
-                input.close();
-            }
+            input.close();
         }
     }
 
