@@ -130,18 +130,18 @@ public final class BkBasicTest {
                 }
         );
         app.start();
-        final HttpURLConnection firstConnection = HttpURLConnection.class.cast(
+        final HttpURLConnection persistentConnection = HttpURLConnection.class.cast(
                 new URL(uri).openConnection()
         );
         final String connection = "Connection";
         final String keepAlive = "Keep-Alive";
-        firstConnection.setRequestMethod("GET");
-        firstConnection.setUseCaches(false);
-        firstConnection.setInstanceFollowRedirects(false);
-        firstConnection.addRequestProperty("Host", "localhost");
-        firstConnection.addRequestProperty(connection, keepAlive);
+        persistentConnection.setRequestMethod("GET");
+        persistentConnection.setUseCaches(false);
+        persistentConnection.setInstanceFollowRedirects(false);
+        persistentConnection.addRequestProperty("Host", "localhost");
+        persistentConnection.addRequestProperty(connection, keepAlive);
         MatcherAssert.assertThat(
-                firstConnection.getHeaderFields().get(connection),
+                persistentConnection.getHeaderFields().get(connection),
                 Matchers.hasItem(keepAlive)
         );
         app.interrupt();
