@@ -84,7 +84,7 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
-    // @todo #306 30min/DEV : the server should use same socket for new coming
+    // @todo #306 15min/DEV : the server should use same socket for new coming
     // requests if the connection is persistent.
     // And the server should create new socket for new coming requests if the
     // connection is not persistent
