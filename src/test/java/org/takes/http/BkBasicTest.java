@@ -62,6 +62,11 @@ public final class BkBasicTest {
     private static final String CRLF = "\r\n";
 
     /**
+     * Wait 2 sec for web app.
+     */
+    private static final int WAIT_APP = 2000;
+
+    /**
      * BkBasic can handle socket data.
      * @throws IOException If some problem inside
      */
@@ -130,18 +135,20 @@ public final class BkBasicTest {
                 }
         );
         app.start();
-        final HttpURLConnection persistentConnection = HttpURLConnection.class.cast(
+        Thread.sleep(BkBasicTest.WAIT_APP);
+        final HttpURLConnection persistConnection = HttpURLConnection
+                .class.cast(
                 new URL(uri).openConnection()
         );
         final String connection = "Connection";
         final String keepAlive = "Keep-Alive";
-        persistentConnection.setRequestMethod("GET");
-        persistentConnection.setUseCaches(false);
-        persistentConnection.setInstanceFollowRedirects(false);
-        persistentConnection.addRequestProperty("Host", "localhost");
-        persistentConnection.addRequestProperty(connection, keepAlive);
+        persistConnection.setRequestMethod("GET");
+        persistConnection.setUseCaches(false);
+        persistConnection.setInstanceFollowRedirects(false);
+        persistConnection.addRequestProperty("Host", "localhost");
+        persistConnection.addRequestProperty(connection, keepAlive);
         MatcherAssert.assertThat(
-                persistentConnection.getHeaderFields().get(connection),
+                persistConnection.getHeaderFields().get(connection),
                 Matchers.hasItem(keepAlive)
         );
         app.interrupt();
