@@ -136,19 +136,19 @@ public final class BkBasicTest {
         );
         app.start();
         Thread.sleep(BkBasicTest.WAIT_APP);
-        final HttpURLConnection persistConnection = HttpURLConnection
+        final HttpURLConnection httpURLConnection = HttpURLConnection
                 .class.cast(
                 new URL(uri).openConnection()
         );
         final String connection = "Connection";
         final String keepAlive = "Keep-Alive";
-        persistConnection.setRequestMethod("GET");
-        persistConnection.setUseCaches(false);
-        persistConnection.setInstanceFollowRedirects(false);
-        persistConnection.addRequestProperty("Host", "localhost");
-        persistConnection.addRequestProperty(connection, keepAlive);
+        httpURLConnection.setRequestMethod("GET");
+        httpURLConnection.setUseCaches(false);
+        httpURLConnection.setInstanceFollowRedirects(false);
+        httpURLConnection.addRequestProperty("Host", "localhost");
+        httpURLConnection.addRequestProperty(connection, keepAlive);
         MatcherAssert.assertThat(
-                persistConnection.getHeaderFields().get(connection),
+                httpURLConnection.getHeaderFields().get(connection),
                 Matchers.hasItem(keepAlive)
         );
         app.interrupt();
