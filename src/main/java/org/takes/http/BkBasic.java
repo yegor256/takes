@@ -100,9 +100,9 @@ public final class BkBasic implements Back {
         final boolean keepAlive = this.isConnectionKeepAlive(req);
         try {
             this.print(
-                    BkBasic.addSocketHeaders(req, socket),
-                    new BufferedOutputStream(socket.getOutputStream()),
-                    keepAlive
+                BkBasic.addSocketHeaders(req, socket),
+                new BufferedOutputStream(socket.getOutputStream()),
+                keepAlive
             );
         } finally {
             input.close();
@@ -120,13 +120,13 @@ public final class BkBasic implements Back {
         final RqHeaders.Base rqHeaders = new RqHeaders.Base(req);
         if (rqHeaders.head().iterator().hasNext()) {
             final Iterator<String> values = rqHeaders.header(BkBasic.CONNECTION)
-                    .iterator();
+                .iterator();
             if (values.hasNext()) {
                 do {
                     keep = BkBasic.KEEP_ALIVE.toLowerCase(
-                            Locale.ENGLISH
-                            ).equals(
-                            values.next().toLowerCase(Locale.ENGLISH)
+                        Locale.ENGLISH
+                        ).equals(
+                        values.next().toLowerCase(Locale.ENGLISH)
                     );
                 } while (!keep && values.hasNext());
             }
@@ -143,11 +143,10 @@ public final class BkBasic implements Back {
      */
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
     private void print(final Request req, final OutputStream output,
-                       final boolean keep)
-            throws IOException {
+        final boolean keep) throws IOException {
         try {
             new RsPrint(
-                    this.retrieveResponse(req, keep)
+                this.retrieveResponse(req, keep)
             ).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
@@ -173,13 +172,13 @@ public final class BkBasic implements Back {
      * @throws IOException if fails
      */
     private Response retrieveResponse(final Request req, final boolean keep)
-            throws IOException {
+        throws IOException {
         final Response res;
         if (keep) {
             res = new RsWithHeader(
-                    this.take.act(req),
-                    BkBasic.CONNECTION,
-                    BkBasic.KEEP_ALIVE
+                this.take.act(req),
+                BkBasic.CONNECTION,
+                BkBasic.KEEP_ALIVE
             );
         } else {
             res = this.take.act(req);

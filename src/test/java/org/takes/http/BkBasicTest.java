@@ -118,21 +118,21 @@ public final class BkBasicTest {
             }
         };
         final Thread app = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new FtBasic(
-                                    new BkBasic(take),
-                                    port
-                            ).start(
-                                    Exit.NEVER
-                            );
-                        } catch (final IOException ex) {
-                            throw new IllegalStateException(ex);
-                        }
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtBasic(
+                            new BkBasic(take),
+                            port
+                        ).start(
+                            Exit.NEVER
+                        );
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
                     }
                 }
+            }
         );
         app.start();
         Thread.sleep(BkBasicTest.WAIT_APP);
@@ -148,8 +148,8 @@ public final class BkBasicTest {
         httpURLConnection.addRequestProperty("Host", "localhost");
         httpURLConnection.addRequestProperty(connection, keepAlive);
         MatcherAssert.assertThat(
-                httpURLConnection.getHeaderFields().get(connection),
-                Matchers.hasItem(keepAlive)
+            httpURLConnection.getHeaderFields().get(connection),
+            Matchers.hasItem(keepAlive)
         );
         app.interrupt();
     }
@@ -170,9 +170,9 @@ public final class BkBasicTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(String.format("%s/path/c", home))
-                            .fetch()
-                            .as(RestResponse.class)
-                            .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
                 }
             }
         );
