@@ -97,7 +97,7 @@ public final class BkBasic implements Back {
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
         final RqLive req = new RqLive(input);
-        final boolean keepAlive = this.isConnectionKeepAlive(req);
+        final boolean keepAlive = this.persistent(req);
         try {
             this.print(
                 BkBasic.addSocketHeaders(req, socket),
@@ -115,7 +115,7 @@ public final class BkBasic implements Back {
      * @return Boolean
      * @throws IOException if fails
      */
-    private boolean isConnectionKeepAlive(final RqLive req) throws IOException {
+    private boolean persistent(final RqLive req) throws IOException {
         boolean keep = false;
         final RqHeaders.Base rqHeaders = new RqHeaders.Base(req);
         if (rqHeaders.head().iterator().hasNext()) {
@@ -146,7 +146,7 @@ public final class BkBasic implements Back {
         final boolean keep) throws IOException {
         try {
             new RsPrint(
-                this.retrieveResponse(req, keep)
+                this.response(req, keep)
             ).print(output);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
@@ -171,7 +171,7 @@ public final class BkBasic implements Back {
      * @return Response
      * @throws IOException if fails
      */
-    private Response retrieveResponse(final Request req, final boolean keep)
+    private Response response(final Request req, final boolean keep)
         throws IOException {
         final Response res;
         if (keep) {
