@@ -33,12 +33,17 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URL;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.tk.TkEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -50,6 +55,17 @@ import org.takes.tk.TkText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class BkBasicTest {
+
+    /**
+     * New line.
+     */
+    private static final String CRLF = "\r\n";
+
+    /**
+     * Wait 2 sec for web app.
+     */
+    private static final int WAIT_APP = 2000;
+
     /**
      * BkBasic can handle socket data.
      * @throws IOException If some problem inside
@@ -59,7 +75,7 @@ public final class BkBasicTest {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
             new ByteArrayInputStream(
-                Joiner.on("\r\n").join(
+                Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
                     "Content-Length: 2",
@@ -83,6 +99,59 @@ public final class BkBasicTest {
             baos.toString(),
             Matchers.containsString("Hello world")
         );
+    }
+
+    /**
+     * BkBasic can handle HTTP persistent connections.
+     * @throws Exception If some problem inside
+     * @checkstyle ExecutableStatementCountCheck (2 lines)
+     */
+    @Test
+    @SuppressWarnings("PMD.DoNotUseThreads")
+    public void handlesPersistentConnection() throws Exception {
+        final int port = 8080;
+        final String uri = String.format("http://localhost:%d", port);
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new TkEmpty().act(req);
+            }
+        };
+        final Thread app = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new FtBasic(
+                            new BkBasic(take),
+                            port
+                        ).start(
+                            Exit.NEVER
+                        );
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
+        );
+        app.start();
+        Thread.sleep(BkBasicTest.WAIT_APP);
+        final HttpURLConnection httpURLConnection = HttpURLConnection
+                .class.cast(
+                new URL(uri).openConnection()
+        );
+        final String connection = "Connection";
+        final String keepAlive = "Keep-Alive";
+        httpURLConnection.setRequestMethod("GET");
+        httpURLConnection.setUseCaches(false);
+        httpURLConnection.setInstanceFollowRedirects(false);
+        httpURLConnection.addRequestProperty("Host", "localhost");
+        httpURLConnection.addRequestProperty(connection, keepAlive);
+        MatcherAssert.assertThat(
+            httpURLConnection.getHeaderFields().get(connection),
+            Matchers.hasItem(keepAlive)
+        );
+        app.interrupt();
     }
 
     /**
