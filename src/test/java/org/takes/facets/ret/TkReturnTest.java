@@ -56,7 +56,7 @@ public final class TkReturnTest {
                 new RqWithHeader(
                     new RqFake(),
                     String.format(
-                        "Cookie: RsReturn=%s",
+                        "Cookie: RsReturn=%s;",
                         URLEncoder.encode(
                             destination,
                             Charset.defaultCharset().name()
@@ -67,7 +67,7 @@ public final class TkReturnTest {
             Matchers.contains(
                 "HTTP/1.1 303 See Other",
                 String.format("Location: %s", destination),
-                "Set-Cookie: RsReturn="
+                "Set-Cookie: RsReturn=;"
             )
         );
     }

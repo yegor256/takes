@@ -54,7 +54,7 @@ public final class TkFlashTest {
                     "Cookie: RsFlash=Hello!"
                 )
             ).head(),
-            Matchers.hasItem("Set-Cookie: RsFlash=")
+            Matchers.hasItem("Set-Cookie: RsFlash=;")
         );
     }
 }

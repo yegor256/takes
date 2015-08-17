@@ -54,7 +54,7 @@ public final class RsWithCookieTest {
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "Set-Cookie: foo=works?;Path=/",
+                    "Set-Cookie: foo=works?;Path=/;",
                     "",
                     ""
                 )
@@ -83,7 +83,7 @@ public final class RsWithCookieTest {
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
                     // @checkstyle LineLengthCheck (1 line)
-                    "Set-Cookie: foo=works?;Path=/,bar=worksToo?;Path=/2nd/path/",
+                    "Set-Cookie: foo=works?;Path=/;,bar=worksToo?;Path=/2nd/path/;",
                     "",
                     ""
                 )
@@ -93,19 +93,17 @@ public final class RsWithCookieTest {
 
     /**
      * RsWithCookie can reject invalid cookie name.
-     * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
-    public void rejectsInvalidName() throws IOException {
+    public void rejectsInvalidName() {
         new RsWithCookie(new RsEmpty(), "f oo", "works");
     }
 
     /**
      * RsWithCookie can reject invalid cookie value.
-     * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
-    public void rejectsInvalidValue() throws IOException {
+    public void rejectsInvalidValue() {
         new RsWithCookie(new RsEmpty(), "bar", "wo\"rks");
     }
 }

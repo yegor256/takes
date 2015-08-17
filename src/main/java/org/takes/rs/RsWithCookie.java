@@ -147,9 +147,9 @@ public final class RsWithCookie extends RsWrap {
         if (!previous.isEmpty()) {
             text.append(String.format("%s,", previous));
         }
-        text.append(String.format("%s=%s", name, value));
+        text.append(String.format("%s=%s;", name, value));
         for (final CharSequence attr : attrs) {
-            text.append(';').append(attr);
+            text.append(attr).append(';');
         }
         return text.toString();
     }
