@@ -55,6 +55,17 @@ public final class FtBasic implements Front {
     /**
      * Ctor.
      * @param tks Take
+     * @throws IOException If fails
+     * @since 0.24
+     */
+    public FtBasic(final Take tks) throws IOException {
+        // @checkstyle MagicNumber (1 line)
+        this(new BkBasic(tks), 80);
+    }
+
+    /**
+     * Ctor.
+     * @param tks Take
      * @param prt Port
      * @throws IOException If fails
      */
