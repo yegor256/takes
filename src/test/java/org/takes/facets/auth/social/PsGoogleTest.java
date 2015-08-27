@@ -40,6 +40,7 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHref;
+import org.takes.rq.RqPrint;
 import org.takes.rs.RsJSON;
 
 /**
@@ -66,6 +67,10 @@ public final class PsGoogleTest {
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
+                        MatcherAssert.assertThat(
+                            new RqPrint(req).printHead(),
+                            Matchers.containsString("POST /o/oauth2/token")
+                        );
                         final Request greq = new RqGreedy(req);
                         PsGoogleTest.assertParam(greq, "client_id", "app");
                         PsGoogleTest.assertParam(
