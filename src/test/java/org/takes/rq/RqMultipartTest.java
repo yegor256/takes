@@ -40,10 +40,12 @@ import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
+import org.takes.misc.PerformanceTests;
 import org.takes.rs.RsText;
 
 /**
@@ -342,6 +344,7 @@ public final class RqMultipartTest {
      * @throws IOException If some problem inside
      */
     @Test
+    @Category(PerformanceTests.class)
     public void handlesRequestInTime() throws IOException {
         final int length = 100000000;
         final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
