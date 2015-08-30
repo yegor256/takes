@@ -230,6 +230,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>-Djava.awt.headless=true</argLine>
+                    <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
