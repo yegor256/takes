@@ -27,7 +27,7 @@ package org.takes.misc;
  * Marker interface for performance tests.
  * @author Mesut Ozen (mesutozen36@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.24
  */
 public interface PerformanceTests {
 
