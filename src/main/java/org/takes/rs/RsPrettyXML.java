@@ -23,28 +23,35 @@
  */
 package org.takes.rs;
 
+import com.jcabi.aspects.LogExceptions;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.misc.Opt;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * Response with properly indented XML body.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyXML implements Response {
@@ -104,7 +111,7 @@ public final class RsPrettyXML implements Response {
      * @throws IOException If fails
      */
     private static byte[] transform(final InputStream body) throws IOException {
-        final StreamSource source = new StreamSource(body);
+        final SAXSource source = new SAXSource(new InputSource(body));
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
         try {
             final Transformer transformer = TransformerFactory.newInstance()
@@ -114,10 +121,48 @@ public final class RsPrettyXML implements Response {
                 OutputKeys.OMIT_XML_DECLARATION, "yes"
             );
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            if (isHtml5(source.getInputSource().getByteStream())) {
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                transformer.setOutputProperty(OutputKeys.METHOD, "html");
+                transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
+            }
             transformer.transform(source, new StreamResult(result));
         } catch (final TransformerException ex) {
             throw new IOException(ex);
         }
         return result.toByteArray();
+    }
+
+    /**
+     * Checks if the input is an html5 document.
+     * @param body The body to be checked.
+     * @return True if the input is an html5 document.
+     * @throws IOException If there are problems reading the input.
+     * @checkstyle MethodNameCheck (4 lines)
+     */
+    @LogExceptions
+    private static boolean isHtml5(final InputStream body) throws IOException {
+        Opt<Document> document = new Opt.Empty<Document>();
+        boolean valid = true;
+        try {
+            body.mark(Integer.MAX_VALUE);
+            document = new Opt.Single<Document>(
+                DocumentBuilderFactory
+                    .newInstance()
+                    .newDocumentBuilder()
+                    .parse(body)
+            );
+            body.reset();
+        } catch (final SAXException ex) {
+            valid = false;
+        } catch (final ParserConfigurationException ex) {
+            throw new IOException(ex);
+        }
+        // @checkstyle BooleanExpressionComplexityCheck (5 lines)
+        return valid
+            && document.get().getDoctype() != null
+            && "html".equalsIgnoreCase(document.get().getDoctype().getName())
+            && document.get().getDoctype().getSystemId() == null
+            && document.get().getDoctype().getPublicId() == null;
     }
 }
