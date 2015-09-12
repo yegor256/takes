@@ -51,7 +51,60 @@ public final class RsPrettyXMLTest {
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>")
+            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
+        );
+    }
+
+    /**
+     * RsPrettyXML can format HTML5 markup with proper DOCTYPE.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    // @checkstyle MethodNameCheck (1 line)
+    public void formatsHtml5DoctypeBody() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsPrettyXML(
+                    new RsWithBody(
+                        "<!DOCTYPE html><html><head></head><body></body></html>"
+                    )
+                )
+            ).printBody(),
+            Matchers.containsString("<!DOCTYPE HTML>")
+        );
+    }
+
+    /**
+     * RsPrettyXML can format HTML4 markup with DOCTYPE with public
+     * and system id.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    // @checkstyle MultipleStringLiteralsCheck (25 line)
+    // @checkstyle StringLiteralsConcatenationCheck (25 line)
+    // @checkstyle MethodNameCheck (1 line)
+    public void formatsHtml4DoctypeBody() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsPrettyXML(
+                    new RsWithBody("<!DOCTYPE HTML "
+                        + "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" "
+                        + "\"http://www.w3.org/TR/html4/loose.dtd\">"
+                        + "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
+                        + "lang=\"en\"><head><a>foo</a></head>"
+                        + "<body>this is body</body></html>"
+                    )
+                )
+            ).printBody(),
+            Matchers.is("<!DOCTYPE html\n  "
+                    + "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" "
+                    + "\"http://www.w3.org/TR/html4/loose.dtd\">\n"
+                    + "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
+                    + "lang=\"en\">\n   <head>\n      "
+                    + "<meta http-equiv=\"Content-Type\" content=\"text/html; "
+                    + "charset=UTF-8\" /><a>foo</a></head>\n   "
+                    + "<body>this is body</body>\n</html>"
+            )
         );
     }
 
@@ -73,7 +126,7 @@ public final class RsPrettyXMLTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RsPrint(
             new RsWithBody(
-                "<test>\n   <a>test</a>\n</test>"
+                "<test>\n   <a>test</a>\n</test>\n"
             )
         ).printBody(baos);
         MatcherAssert.assertThat(
