@@ -23,6 +23,7 @@
  */
 package org.takes.rs;
 
+import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -80,30 +81,37 @@ public final class RsPrettyXMLTest {
      * @throws IOException If some problem inside
      */
     @Test
-    // @checkstyle MultipleStringLiteralsCheck (25 line)
-    // @checkstyle StringLiteralsConcatenationCheck (25 line)
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml4DoctypeBody() throws IOException {
+        final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
+        final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
+            .concat("lang=\"en\">");
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrettyXML(
-                    new RsWithBody("<!DOCTYPE HTML "
-                        + "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" "
-                        + "\"http://www.w3.org/TR/html4/loose.dtd\">"
-                        + "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
-                        + "lang=\"en\"><head><a>foo</a></head>"
-                        + "<body>this is body</body></html>"
+                    new RsWithBody(
+                        Joiner.on("").appendTo(
+                            new StringBuilder("<!DOCTYPE HTML "),
+                            pid,
+                            "\"http://www.w3.org/TR/html4/loose.dtd\">",
+                            xhtml,
+                            "<head><a>foo</a></head>",
+                            "<body>this is body</body></html>"
+                        )
                     )
                 )
             ).printBody(),
-            Matchers.is("<!DOCTYPE html\n  "
-                    + "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" "
-                    + "\"http://www.w3.org/TR/html4/loose.dtd\">\n"
-                    + "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
-                    + "lang=\"en\">\n   <head>\n      "
-                    + "<meta http-equiv=\"Content-Type\" content=\"text/html; "
-                    + "charset=UTF-8\" /><a>foo</a></head>\n   "
-                    + "<body>this is body</body>\n</html>"
+            Matchers.is(
+                Joiner.on("").appendTo(
+                    new StringBuilder("<!DOCTYPE html\n  "),
+                    pid,
+                    "\"http://www.w3.org/TR/html4/loose.dtd\">\n",
+                    xhtml,
+                    "\n   <head>\n      ",
+                    "<meta http-equiv=\"Content-Type\" content=\"text/html; ",
+                    "charset=UTF-8\" /><a>foo</a></head>\n   ",
+                    "<body>this is body</body>\n</html>"
+                ).toString()
             )
         );
     }
