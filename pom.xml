@@ -247,38 +247,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>cobertura</goal>
-                        </goals>
-                        <configuration>
-                            <format>xml</format>
-                            <maxmem>256m</maxmem>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <repoToken>${coveralls.token}</repoToken>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -315,5 +283,47 @@
                 </plugins>
             </build>
         </profile>
+        <provile>
+            <id>coveralls</id>
+            <activation>
+                <file><exists>pom.xml</exists></file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>cobertura</goal>
+                                </goals>
+                                <configuration>
+                                    <format>xml</format>
+                                    <maxmem>256m</maxmem>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <repoToken>${coveralls.token}</repoToken>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </provile>
     </profiles>
 </project>
