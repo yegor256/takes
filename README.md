@@ -890,6 +890,11 @@ SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 To avoid build errors use maven 3.2+.
 
+Pay attention that our `pom.xml` inherits a lot of configuration
+from [jcabi-parent](http://parent.jcabi.com).
+[This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
+explains why it's done this way.
+
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
