@@ -107,7 +107,7 @@
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-http</artifactId>
-            <version>1.12</version>
+            <version>1.10.3</version> <!-- this version works with JDK 6 -->
             <optional>true</optional>
         </dependency>
         <dependency>
