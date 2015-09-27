@@ -27,8 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -63,13 +63,20 @@ public final class RqLive extends RqWrap {
      * @return Request
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidInstantiatingObjectsInLoops",
+                "PMD.StdCyclomaticComplexity",
+                "PMD.ModifiedCyclomaticComplexity"
+            }
+        )
     private static Request parse(final InputStream input) throws IOException {
-        final List<String> head = new LinkedList<String>();
+        final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<Integer>();
         while (true) {
-            data = data(input, data);
+            data = RqLive.data(input, data);
             if (data.get() < 0) {
                 break;
             }

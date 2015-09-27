@@ -24,11 +24,10 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.takes.HttpException;
+import org.takes.Request;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 
@@ -46,13 +45,9 @@ public final class TkMethodsTest {
     public void callsActOnProperMethods() throws Exception {
         final String method = "WHATEVER";
         final Take take = Mockito.mock(Take.class);
-        final RqFake req = new RqFake(method);
+        final Request req = new RqFake(method);
         new TkMethods(take, method).act(req);
-        Mockito.verify(take).act(
-            Matchers.argThat(
-                CoreMatchers.equalTo(req)
-            )
-        );
+        Mockito.verify(take).act(req);
     }
 
     /**

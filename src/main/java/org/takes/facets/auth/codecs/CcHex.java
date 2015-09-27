@@ -89,6 +89,7 @@ public final class CcHex implements Codec {
             if (idx > 0 && idx % CcHex.CHUNK == 0) {
                 out.write('-');
             }
+            // @checkstyle MagicNumberCheck (2 lines)
             out.write(CcHex.FWD[raw[idx] >> 4 & 0x0f]);
             out.write(CcHex.FWD[raw[idx] & 0x0f]);
         }
@@ -108,6 +109,7 @@ public final class CcHex implements Codec {
                 throw new DecodingException("not enough data");
             }
             out.write(
+                // @checkstyle MagicNumberCheck (1 line)
                 (CcHex.decode(bytes[idx]) << 4) + CcHex.decode(bytes[idx + 1])
             );
             idx += 2;

@@ -46,11 +46,16 @@ import org.takes.tk.TkEmpty;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
  */
-@SuppressWarnings({
-    "PMD.DoNotUseThreads",
-    "PMD.CyclomaticComplexity",
-    "PMD.AvoidInstantiatingObjectsInLoops"
-})
+@SuppressWarnings
+    (
+        {
+            "PMD.DoNotUseThreads",
+            "PMD.CyclomaticComplexity",
+            "PMD.AvoidInstantiatingObjectsInLoops",
+            "PMD.StdCyclomaticComplexity",
+            "PMD.ModifiedCyclomaticComplexity"
+        }
+    )
 public final class BkParallelTest {
     /**
      * BkParallel runs requests in parallel, hence even
