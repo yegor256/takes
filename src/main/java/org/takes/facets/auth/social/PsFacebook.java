@@ -28,6 +28,7 @@ import com.jcabi.http.response.RestResponse;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.DefaultJsonMapper;
 import com.restfb.DefaultWebRequestor;
+import com.restfb.Version;
 import com.restfb.WebRequestor;
 import com.restfb.exception.FacebookException;
 import com.restfb.types.User;
@@ -164,7 +165,8 @@ public final class PsFacebook implements Pass {
             return new DefaultFacebookClient(
                 token,
                 this.requestor,
-                new DefaultJsonMapper()
+                new DefaultJsonMapper(),
+                Version.LATEST
             ).fetchObject(
                 "me", User.class
             );
