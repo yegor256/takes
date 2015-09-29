@@ -25,6 +25,7 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -39,6 +40,7 @@ import org.takes.tk.TkWrap;
  * @version $Id$
  * @since 0.14
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkProduces extends TkWrap {
 

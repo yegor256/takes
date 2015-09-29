@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,6 +42,7 @@ import org.takes.facets.forward.RsForward;
  * @version $Id$
  * @since 0.1
  */
+@ToString(of = { "origin", "loc" })
 @EqualsAndHashCode(of = { "origin", "loc" })
 public final class TkSecure implements Take {
 

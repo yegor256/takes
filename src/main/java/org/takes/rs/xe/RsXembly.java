@@ -35,6 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
@@ -53,6 +54,7 @@ import org.xembly.Xembler;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsXembly extends RsWrap {
 

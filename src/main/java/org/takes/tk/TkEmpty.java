@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -40,6 +41,7 @@ import org.takes.rs.RsEmpty;
  * @version $Id$
  * @since 0.1
  */
+@ToString
 public final class TkEmpty implements Take {
 
     @Override

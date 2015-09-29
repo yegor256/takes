@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
@@ -67,6 +68,7 @@ import org.takes.Response;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsVelocity extends RsWrap {
 

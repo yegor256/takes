@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Condition;
 import org.takes.misc.Select;
@@ -40,6 +41,7 @@ import org.takes.misc.Select;
  * @version $Id$
  * @since 0.9
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithoutHeader extends RsWrap {
 

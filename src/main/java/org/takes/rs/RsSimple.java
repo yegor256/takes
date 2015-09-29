@@ -26,6 +26,7 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -37,6 +38,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.17
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class RsSimple extends RsWrap {
 

@@ -26,6 +26,7 @@ package org.takes.facets.flash;
 import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -58,6 +59,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
+@ToString(of = { "origin", "cookie" })
 @EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TkFlash implements Take {
 

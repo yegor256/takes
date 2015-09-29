@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -41,6 +42,7 @@ import org.takes.rq.RqMethod;
  * @version $Id$
  * @since 0.10
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkVerbose extends TkWrap {
 

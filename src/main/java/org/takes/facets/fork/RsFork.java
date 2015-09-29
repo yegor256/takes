@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -43,6 +44,7 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.6
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsFork extends RsWrap {
 

@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Concat;
 import org.takes.misc.Condition;
@@ -45,6 +46,7 @@ import org.takes.misc.Select;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithStatus extends RsWrap {
 

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.zip.GZIPOutputStream;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -42,6 +43,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.10
  */
+@ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsGzip implements Response {
 

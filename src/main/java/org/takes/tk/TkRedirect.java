@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -39,6 +40,7 @@ import org.takes.rs.RsRedirect;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkRedirect extends TkWrap {
 

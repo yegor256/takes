@@ -29,6 +29,7 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
@@ -40,6 +41,7 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.20
  */
+@ToString(callSuper = true)
 public final class RsReturn extends RsWrap {
     /**
      * Ctor.
