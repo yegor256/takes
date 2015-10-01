@@ -23,7 +23,6 @@
  */
 package org.takes.facets.hamcrest;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -34,16 +33,16 @@ import org.takes.rs.RsWithHeader;
  * Test case for {@link HmRsHeader}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.16.2
+ * @since 0.23.3
  */
 public final class HmRsHeaderTest {
 
     /**
      * HmRsHeader can test header available.
-     * @throws java.io.IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderAvailable() throws IOException {
+    public void testsHeaderAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RsWithHeader(
                 new RsWithBody("<html>Hello</html>"),
@@ -55,10 +54,10 @@ public final class HmRsHeaderTest {
 
     /**
      * HmRsHeader can test header not available.
-     * @throws java.io.IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderNotAvailable() throws IOException {
+    public void testsHeaderNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RsWithBody("<html></html>"),
             new HmRsHeader(

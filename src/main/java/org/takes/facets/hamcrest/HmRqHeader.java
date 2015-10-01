@@ -36,11 +36,20 @@ import org.takes.rq.RqHeaders;
  * Response Header Matcher.
  *
  * <p>This "matcher" tests given response header.
+ * <p>The header name(s) should be provided in lowercase.
  * <p>The class is immutable and thread-safe.
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
- * @since 0.16.2
+ * @since 0.23.3
+ * @todo #260:30min Implement additional constructors.
+ * According to #260 there should be also available such constructors:
+ * public HmRsHeader(final Matcher<? extends Map.Entry<String,String>> mtchr);
+ * public HmRsHeader(final String header,
+ *     final Matcher<? extends Iterable<String>> mtchr);
+ * public HmRsHeader(final String header,
+ *     final Matcher<? extends String> mtchr);
+ * public HmRsHeader(final String header, final String value);
  */
 public final class HmRqHeader extends TypeSafeMatcher<Request> {
 
@@ -48,14 +57,14 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
      * Expected request header matcher.
      */
     private final transient Matcher<? extends Map<? extends CharSequence,
-                                        ? extends CharSequence>> matcher;
+            ? extends CharSequence>> matcher;
 
     /**
      * Expected matcher.
      * @param mtchr Is expected header matcher.
      */
     public HmRqHeader(final Matcher<? extends Map<? extends CharSequence,
-                                        ? extends CharSequence>> mtchr) {
+            ? extends CharSequence>> mtchr) {
         super();
         this.matcher = mtchr;
     }
