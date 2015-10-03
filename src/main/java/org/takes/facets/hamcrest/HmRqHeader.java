@@ -57,14 +57,14 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
      * Expected request header matcher.
      */
     private final transient Matcher<? extends Map<? extends CharSequence,
-            ? extends CharSequence>> matcher;
+        ? extends CharSequence>> matcher;
 
     /**
      * Expected matcher.
      * @param mtchr Is expected header matcher.
      */
     public HmRqHeader(final Matcher<? extends Map<? extends CharSequence,
-            ? extends CharSequence>> mtchr) {
+        ? extends CharSequence>> mtchr) {
         super();
         this.matcher = mtchr;
     }
@@ -107,11 +107,11 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
      * @return True when expected type matched.
      */
     private boolean matchHeader(final String name,
-            final Iterable<String> values) {
+        final Iterable<String> values) {
         boolean result = false;
         for (final String value: values) {
             if (this.matcher.matches(
-                    Collections.singletonMap(name, value)
+                Collections.singletonMap(name, value)
             )) {
                 result = true;
                 break;

@@ -58,14 +58,14 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
      * Expected request header matcher.
      */
     private final transient Matcher<? extends Map<? extends CharSequence,
-            ? extends CharSequence>> matcher;
+        ? extends CharSequence>> matcher;
 
     /**
      * Expected matcher.
      * @param mtchr Is expected header matcher.
      */
     public HmRsHeader(final Matcher<? extends Map<? extends CharSequence,
-            ? extends CharSequence>> mtchr) {
+        ? extends CharSequence>> mtchr) {
         super();
         this.matcher = mtchr;
     }

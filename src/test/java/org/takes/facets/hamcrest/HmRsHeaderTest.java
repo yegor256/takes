@@ -46,7 +46,7 @@ public final class HmRsHeaderTest {
         MatcherAssert.assertThat(
             new RsWithHeader(
                 new RsWithBody("<html>Hello</html>"),
-                    "content-encoding: gzip"
+                "content-encoding: gzip"
             ),
             new HmRsHeader(Matchers.hasEntry("content-encoding", "gzip"))
         );
