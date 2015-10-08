@@ -23,9 +23,8 @@
  */
 package org.takes.rq;
 
-import java.util.Arrays;
-import java.util.List;
-import org.junit.Assert;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 
 /**
@@ -37,12 +36,13 @@ import org.junit.Test;
 public final class RqFakeTest {
 
     /**
-     * Two RqFakes are equal if they contain the same head and body.
+     * Can conform to the Object.equals() contract.
      */
     @Test
-    public void equalsTrue() {
-        final List<String> head = Arrays.asList("test head");
-        final String body = "test body";
-        Assert.assertEquals(new RqFake(head, body), new RqFake(head, body));
+    public void conformsToEquality() {
+        EqualsVerifier.forClass(RqFake.class)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
     }
 }
