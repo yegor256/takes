@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
@@ -99,7 +98,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final byte[] body) {
-        super(new RqFakeRequest(head, body));
+        super(new RqBytes(head, body));
     }
 
     /**
@@ -120,41 +119,5 @@ public final class RqFake extends RqWrap {
                 }
             }
         );
-    }
-
-    /**
-     * The request which is used when the body is a byte array.
-     */
-    @EqualsAndHashCode
-    static final class RqFakeRequest implements Request {
-        /**
-         * Head.
-         */
-        private final transient List<String> hed;
-
-        /**
-         * Body.
-         */
-        private final transient byte[] bdy;
-
-        /**
-         * Ctor.
-         * @param head Head
-         * @param body Body
-         */
-        public RqFakeRequest(final List<String> head, final byte[] body) {
-            this.hed = head;
-            this.bdy = Arrays.copyOf(body, body.length);
-        }
-
-        @Override
-        public Iterable<String> head() {
-            return Collections.unmodifiableList(this.hed);
-        }
-
-        @Override
-        public InputStream body() {
-            return new ByteArrayInputStream(this.bdy);
-        }
     }
 }
