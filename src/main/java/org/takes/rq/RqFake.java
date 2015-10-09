@@ -23,7 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
@@ -99,18 +98,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final byte[] body) {
-        super(
-            new Request() {
-                @Override
-                public Iterable<String> head() {
-                    return Collections.unmodifiableList(head);
-                }
-                @Override
-                public InputStream body() {
-                    return new ByteArrayInputStream(body);
-                }
-            }
-        );
+        super(new RqBytes(head, body));
     }
 
     /**
@@ -132,5 +120,4 @@ public final class RqFake extends RqWrap {
             }
         );
     }
-
 }
