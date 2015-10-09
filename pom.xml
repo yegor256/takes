@@ -283,11 +283,14 @@
         </profile>
         <profile>
             <id>coveralls</id>
-            <activation>
-                <file><exists>pom.xml</exists></file>
-            </activation>
             <build>
                 <plugins>
+                    <plugin>
+                        <artifactId>maven-invoker-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>cobertura-maven-plugin</artifactId>
