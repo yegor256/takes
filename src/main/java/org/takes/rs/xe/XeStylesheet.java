@@ -35,8 +35,8 @@ import org.xembly.Directives;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @link <a href="http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html">XML+XSLT in a Browser</a>
- * @link <a href="http://www.yegor256.com/2014/09/09/restful-web-sites.html">RESTful API and a Web Site in the Same URL</a>
+ * @see <a href="http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html">XML+XSLT in a Browser</a>
+ * @see <a href="http://www.yegor256.com/2014/09/09/restful-web-sites.html">RESTful API and a Web Site in the Same URL</a>
  */
 @EqualsAndHashCode(callSuper = true)
 public final class XeStylesheet extends XeWrap {

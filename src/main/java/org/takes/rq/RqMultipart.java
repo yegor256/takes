@@ -91,7 +91,7 @@ public interface RqMultipart extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @version $Id$
      * @since 0.9
-     * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see org.takes.rq.RqGreedy
      */

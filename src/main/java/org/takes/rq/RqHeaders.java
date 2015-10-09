@@ -42,8 +42,9 @@ import org.takes.misc.VerboseIterable;
 
 /**
  * HTTP headers parsing
- * <p/>
- * <p>All implementations of this interface must be immutable and thread-safe.
+ *
+ * <p>All implementations of this interface must be immutable and
+ * thread-safe.</p>
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -71,7 +72,7 @@ public interface RqHeaders extends Request {
 
     /**
      * Request decorator, for HTTP headers parsing.
-     * <p/>
+     *
      * <p>The class is immutable and thread-safe.
      *
      * @author Yury Lauresh (lavresh@gmail.com)

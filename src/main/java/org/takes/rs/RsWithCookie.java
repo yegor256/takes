@@ -34,9 +34,9 @@ import org.takes.Response;
  * Response decorator, with an additional cookie.
  *
  * The decorator validates cookie name according
- * @see <a href="http://tools.ietf.org/html/rfc2616#section-2.2">RFC 2616</a>
+ * to <a href="http://tools.ietf.org/html/rfc2616#section-2.2">RFC 2616</a>
  * and cookie value according
- * @see <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>
+ * to <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>
  *
  * <p>Use this decorator in order to return a response with a "Set-Cookie"
  * header inside, for example:
