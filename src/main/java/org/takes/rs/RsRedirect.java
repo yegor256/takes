@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * Redirect.
@@ -35,6 +36,7 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.6
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsRedirect extends RsWrap {
 

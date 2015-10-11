@@ -26,6 +26,7 @@ package org.takes.tk;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -43,6 +44,7 @@ import org.takes.rs.RsHTML;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkHTML extends TkWrap {
 

@@ -39,6 +39,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.w3c.dom.DocumentType;
 import org.xml.sax.InputSource;
@@ -53,6 +54,7 @@ import org.xml.sax.XMLReader;
  * @version $Id$
  * @since 1.0
  */
+@ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyXML implements Response {
 

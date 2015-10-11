@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -43,6 +44,7 @@ import org.takes.tk.TkWrap;
  * @since 0.1
  * @checkstyle IllegalCatchCheck (500 lines)
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.AvoidCatchingThrowable")
 public final class TkFallback extends TkWrap {

@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,6 +42,7 @@ import org.takes.rs.RsGzip;
  * @version $Id$
  * @since 0.10
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkGzip extends TkWrap {
 

@@ -39,6 +39,7 @@ import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -82,6 +83,7 @@ import org.takes.Response;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see org.takes.rs.xe.RsXembly
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsXSLT extends RsWrap {
 

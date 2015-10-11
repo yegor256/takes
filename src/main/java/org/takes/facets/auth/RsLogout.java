@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
@@ -37,6 +38,7 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsLogout extends RsWrap {
 

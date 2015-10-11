@@ -27,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -38,6 +39,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
+@ToString
 @EqualsAndHashCode
 public final class RsEmpty implements Response {
 

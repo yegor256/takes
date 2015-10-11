@@ -36,6 +36,7 @@ import javax.json.JsonReader;
 import javax.json.JsonWriter;
 import javax.json.stream.JsonGenerator;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -47,6 +48,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 1.0
  */
+@ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyJSON implements Response {
 

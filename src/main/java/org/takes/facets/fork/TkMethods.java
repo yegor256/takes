@@ -24,6 +24,7 @@
 package org.takes.facets.fork;
 
 import java.util.Arrays;
+import lombok.ToString;
 import org.takes.Take;
 import org.takes.tk.TkWrap;
 
@@ -34,6 +35,7 @@ import org.takes.tk.TkWrap;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  */
+@ToString(callSuper = true)
 public class TkMethods extends TkWrap {
     /**
      * Ctor.

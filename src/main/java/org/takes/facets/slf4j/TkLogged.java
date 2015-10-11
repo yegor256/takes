@@ -26,6 +26,7 @@ package org.takes.facets.slf4j;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -38,6 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.11.2
  */
+@ToString(of = { "origin", "target" })
 @EqualsAndHashCode(of = { "origin", "target" })
 public final class TkLogged implements Take {
 

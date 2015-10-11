@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -62,6 +63,7 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
  */
+@ToString(of = "forks")
 @EqualsAndHashCode(of = "forks")
 public final class TkFork implements Take {
 

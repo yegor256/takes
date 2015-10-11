@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Concat;
 
@@ -55,6 +56,7 @@ import org.takes.misc.Concat;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithHeader extends RsWrap {
 

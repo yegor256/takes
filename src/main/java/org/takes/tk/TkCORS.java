@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -50,6 +51,7 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.20
  */
+@ToString(of = {"origin" , "allowed" })
 @EqualsAndHashCode(of = { "origin" , "allowed" })
 public final class TkCORS implements Take {
 

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -43,6 +44,7 @@ import org.takes.rs.RsSimple;
  * @since 0.1
  * @see org.takes.facets.forward.TkForward
  */
+@ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class TkForward implements Take {
 
@@ -73,6 +75,7 @@ public final class TkForward implements Take {
     /**
      * Safe response.
      */
+    @ToString(of = { "origin", "saved" })
     private static final class Safe implements Response {
         /**
          * Original response.

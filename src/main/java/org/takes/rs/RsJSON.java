@@ -30,6 +30,7 @@ import javax.json.Json;
 import javax.json.JsonStructure;
 import javax.json.JsonWriter;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -41,6 +42,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsJSON extends RsWrap {
 

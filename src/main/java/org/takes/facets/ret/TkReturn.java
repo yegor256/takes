@@ -28,6 +28,7 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -44,6 +45,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.20
  */
+@ToString(of = { "origin", "cookie" })
 @EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TkReturn implements Take {
 

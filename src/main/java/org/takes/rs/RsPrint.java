@@ -31,6 +31,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Response;
 
 /**
@@ -42,6 +43,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsPrint extends RsWrap {
 

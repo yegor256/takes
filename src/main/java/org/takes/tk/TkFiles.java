@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -58,6 +59,7 @@ import org.takes.rs.RsWithBody;
  * @version $Id$
  * @since 0.1
  */
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkFiles extends TkWrap {
 

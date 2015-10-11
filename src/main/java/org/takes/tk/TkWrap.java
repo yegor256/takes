@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -38,6 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.4
  */
+@ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public class TkWrap implements Take {
 
