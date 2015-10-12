@@ -97,12 +97,15 @@ public final class PsGoogleTest {
             ),
             new FkRegex(
                 "/oauth2/v1/userinfo",
+                // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
                                 new RqPrint(req).printHead(),
-                                Matchers.containsString("GET /oauth2/v1/userinfo")
+                                Matchers.containsString(
+                                    "GET /oauth2/v1/userinfo"
+                                )
                         );
                         MatcherAssert.assertThat(
                             new RqHref.Base(req).href().param("access_token")
