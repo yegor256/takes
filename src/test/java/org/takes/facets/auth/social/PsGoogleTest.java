@@ -101,6 +101,10 @@ public final class PsGoogleTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
+                                new RqPrint(req).printHead(),
+                                Matchers.containsString("GET /oauth2/v1/userinfo")
+                        );
+                        MatcherAssert.assertThat(
                             new RqHref.Base(req).href().param("access_token")
                                 .iterator().next(),
                             Matchers.containsString("GoogleToken")
