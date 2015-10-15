@@ -143,7 +143,8 @@ public final class PsGoogle implements Pass {
      */
     private Identity fetch(final String token) throws IOException {
         // @checkstyle LineLength (1 line)
-        final String uri = new Href(this.gapi).path("oauth2/v1/userinfo")
+        final String uri = new Href(this.gapi).path("oauth2").path("v1")
+            .path("userinfo")
             .with("alt", "json")
             .with("access_token", token)
             .toString();
