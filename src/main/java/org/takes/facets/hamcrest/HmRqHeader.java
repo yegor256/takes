@@ -46,9 +46,9 @@ import org.takes.rq.RqHeaders;
  *  According to #260 there should be also available such constructors:
  *  public HmRsHeader(final Matcher<? extends Map.Entry<String,String>> mtchr);
  *  public HmRsHeader(final String header,
- *      final Matcher<? extends Iterable<String>> mtchr);
+ *  final Matcher<? extends Iterable<String>> mtchr);
  *  public HmRsHeader(final String header,
- *      final Matcher<? extends String> mtchr);
+ *  final Matcher<? extends String> mtchr);
  *  public HmRsHeader(final String header, final String value);
  */
 public final class HmRqHeader extends TypeSafeMatcher<Request> {
