@@ -42,7 +42,7 @@ import java.io.InputStream;
  *   ),
  *   "Content-Type", "text/html"
  * );</pre>
- * 
+ *
  * <p>The implementations of this interface may require that {@link #head()}
  * method has to be invoked before reading from the {@code InputStream},
  * but they must NOT require that the {@link InputStream} has to be read from
