@@ -45,8 +45,9 @@ import java.io.InputStream;
  *
  * <p>The implementations of this interface may require that
  * {@link Response#head()} method has to be invoked before reading from the
- * {@code InputStream}, but they must NOT require that the {@link InputStream}
- * has to be read from before the {@link Response#head()} method invocation.
+ * {@code InputStream} obtained from the {@link Response#body()} method,
+ * but they must NOT require that the {@link InputStream} has to be read
+ * from before the {@link Response#head()} method invocation.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

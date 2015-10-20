@@ -33,6 +33,11 @@ import org.takes.Response;
 /**
  * Response decorator, with body.
  *
+ * <p>This implementation of the {@link Response} interface requires that
+ * the {@link Response#head()} method has to be invoked before reading
+ * from the {@code InputStream} obtained from the {@link Response#body()}
+ * method.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
