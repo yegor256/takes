@@ -25,7 +25,6 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
-import org.apache.commons.lang.NotImplementedException;
 
 /**
  * Reusable back-end.
@@ -51,6 +50,6 @@ public final class BkReuse implements Back {
 
     @Override
     public void accept(final Socket socket) throws IOException {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 }
