@@ -43,7 +43,7 @@ import org.takes.tk.TkText;
  * @author Piotr Pradzynski (prondzyn@gmail.com)
  * @version $Id$
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #306 Implement missing BkReuse.accept method to support
+ * @todo #306:30min Implement missing BkReuse.accept method to support
  *  HTTP persistent connections and to pass below three tests. BkReuse.accept
  *  should handles more than one HTTP requests in one connection and return
  *  correct HTTP status when Content-Length is not specified.
