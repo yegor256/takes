@@ -80,4 +80,32 @@ public final class FkTypesTest {
         );
     }
 
+    /**
+     * FkTypes can ignore if no Accept header present.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void ignoresWithoutHeader() throws IOException {
+        MatcherAssert.assertThat(
+            new FkTypes("text/plain", new RsEmpty()).route(
+                new RqFake()
+            ).has(),
+            Matchers.is(false)
+        );
+    }
+
+    /**
+     * FkTypes can match if no Accept header present.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void matchesWithoutHeader() throws IOException {
+        MatcherAssert.assertThat(
+            new FkTypes("text/plain,*/*", new RsEmpty()).route(
+                new RqFake()
+            ).has(),
+            Matchers.is(true)
+        );
+    }
+
 }

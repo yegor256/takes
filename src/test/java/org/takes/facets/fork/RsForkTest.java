@@ -77,7 +77,7 @@ public final class RsForkTest {
             new RsPrint(
                 new RsFork(
                     new RqFake(),
-                    new FkTypes("image/png", new RsText("a png"))
+                    new FkTypes("image/png,*/*", new RsText("a png"))
                 )
             ).printBody(),
             Matchers.endsWith("png")

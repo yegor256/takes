@@ -38,7 +38,7 @@ import org.takes.rq.RqHeaders;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.6
- * @see org.takes.facets.fork.RsFork
+ * @see RsFork
  */
 @EqualsAndHashCode(of = { "types", "origin" })
 public final class FkTypes implements Fork {
@@ -78,7 +78,7 @@ public final class FkTypes implements Fork {
      * Get all types accepted by the client.
      * @param req Request
      * @return Media types
-     * @throws java.io.IOException If fails
+     * @throws IOException If fails
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static MediaTypes accepted(final Request req) throws IOException {
@@ -87,9 +87,6 @@ public final class FkTypes implements Fork {
                 .header("Accept");
         for (final String hdr : headers) {
             list = list.merge(new MediaTypes(hdr));
-        }
-        if (list.isEmpty()) {
-            list = new MediaTypes("*/*");
         }
         return list;
     }
