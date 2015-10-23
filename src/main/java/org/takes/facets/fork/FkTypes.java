@@ -84,9 +84,12 @@ public final class FkTypes implements Fork {
     private static MediaTypes accepted(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
         final Iterable<String> headers = new RqHeaders.Base(req)
-                .header("Accept");
+            .header("Accept");
         for (final String hdr : headers) {
             list = list.merge(new MediaTypes(hdr));
+        }
+        if (list.isEmpty()) {
+            list = new MediaTypes("text/html");
         }
         return list;
     }
