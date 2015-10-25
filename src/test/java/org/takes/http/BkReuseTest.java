@@ -47,7 +47,8 @@ import org.takes.tk.TkText;
  *  HTTP persistent connections and to pass below three tests. BkReuse.accept
  *  should handles more than one HTTP requests in one connection and return
  *  correct HTTP status when Content-Length is not specified.
- *
+ * @todo #306:30min Replace mockito statements with fake sockets objects as
+ *  described in http://www.yegor256.com/2014/09/23/built-in-fake-objects.html
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BkReuseTest {
