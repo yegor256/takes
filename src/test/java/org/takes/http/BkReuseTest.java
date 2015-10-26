@@ -48,7 +48,9 @@ import org.takes.tk.TkText;
  *  should handles more than one HTTP requests in one connection and return
  *  correct HTTP status when Content-Length is not specified.
  * @todo #306:30min Replace mockito statements with fake sockets objects as
- *  described in http://www.yegor256.com/2014/09/23/built-in-fake-objects.html
+ *  described in http://www.yegor256.com/2014/09/23/built-in-fake-objects.html.
+ *  Fake objects should improve tests readability and maintainability in the
+ *  future.
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BkReuseTest {
