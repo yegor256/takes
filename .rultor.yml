@@ -57,8 +57,6 @@ deploy:
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml
     s3cmd --no-progress put takes.xml --config=../s3cfg s3://pdd.teamed.io/takes.xml
-  commanders:
-  - yegor256
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
