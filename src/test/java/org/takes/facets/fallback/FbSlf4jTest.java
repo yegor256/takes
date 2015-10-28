@@ -21,22 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes.facets.fallback;
 
-package org.takes.facets.slf4j;
+import java.net.HttpURLConnection;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Log target.
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * Test case for {@link FbSlf4j}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
- * @since 0.11
+ * @since 0.25
  */
-interface Target {
+public final class FbSlf4jTest {
+
     /**
-     * SLF4J parameterized logging.
-     * @param format Format string
-     * @param param Params
+     * FbSlf4j can log a problem.
+     * @throws Exception If some problem inside
      */
-    void log(String format, Object... param);
+    @Test
+    public void logsProblem() throws Exception {
+        final RqFallback req = new RqFallback.Fake(
+            HttpURLConnection.HTTP_NOT_FOUND
+        );
+        MatcherAssert.assertThat(
+            new FbSlf4j().route(req).has(),
+            Matchers.is(false)
+        );
+    }
+
 }

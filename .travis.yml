@@ -12,4 +12,4 @@ env:
 jdk:
   - oraclejdk8
   - oraclejdk7
-  - openjdk6
+  #- openjdk6 - jcabi-http doesn't work with JDK 6
