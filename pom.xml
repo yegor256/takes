@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jcabi</groupId>
         <artifactId>parent</artifactId>
-        <version>0.37</version>
+        <version>0.37.1</version>
     </parent>
     <groupId>org.takes</groupId>
     <artifactId>takes</artifactId>
@@ -85,7 +85,6 @@
     </distributionManagement>
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <saxon.version>9.6.0-7</saxon.version>
     </properties>
     <dependencies>
         <!--
@@ -107,7 +106,7 @@
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-http</artifactId>
-            <version>1.13</version>
+            <version>1.14</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -130,14 +129,14 @@
         <dependency>
             <groupId>com.jcabi.incubator</groupId>
             <artifactId>xembly</artifactId>
-            <version>0.21.1</version>
+            <version>0.21.2</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.restfb</groupId>
             <artifactId>restfb</artifactId>
-            <version>1.15.0</version>
+            <version>1.16.0</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -184,7 +183,7 @@
         <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>${saxon.version}</version>
+            <version>9.6.0-7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
