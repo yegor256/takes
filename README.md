@@ -871,6 +871,24 @@ pom.xml
 LICENSE.txt
 ```
 
+## Optional dependencies
+
+If you're using Maven and include Takes as a dependency in your own project,
+you can choose which of the optional dependencies to include in your project.
+The list of all of the optional dependencies can be seen in the Takes project `pom.xml`.
+
+For example, to use the Facebook API shown above, simply add a dependency to
+the `restfb` API in your project:
+
+```
+<dependency>
+  <groupId>com.restfb</groupId>
+  <artifactId>restfb</artifactId>
+  <version>1.15.0</version>
+  <scope>runtime</scope>
+</dependency>
+```
+
 ## How to contribute
 
 Fork repository, make changes, send us a pull request. We will review
