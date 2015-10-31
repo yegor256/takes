@@ -32,6 +32,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsText;
 import org.takes.tk.TkProxy.RqTransformer;
 import org.takes.tk.TkProxy.RsTransformer;
 
@@ -50,8 +51,8 @@ public final class TkProxyTest {
     @Test
     public void proxiesRequest() throws IOException {
         final Take take = Mockito.mock(Take.class);
-        final Request transformed = Mockito.mock(Request.class);
-        final Response response = Mockito.mock(Response.class);
+        final Request transformed = new RqFake("transformed request");
+        final Response response = new RsText("response");
         Mockito.when(take.act(transformed)).thenReturn(response);
         final TkProxy tkProxy = new TkProxy(
             take,
@@ -76,8 +77,8 @@ public final class TkProxyTest {
     @Test
     public void proxiesResponse() throws IOException {
         final Take take = Mockito.mock(Take.class);
-        final Request request = Mockito.mock(Request.class);
-        final Response transformed = Mockito.mock(Response.class);
+        final Request request = new RqFake("request");
+        final Response transformed = new RsText("transformed response");
         final TkProxy tkProxy = new TkProxy(
             take,
             new RsTransformer() {

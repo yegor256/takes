@@ -50,7 +50,7 @@ import org.takes.Take;
  * @since 0.25
  */
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "origin", "rqtransformer", "rstransformer" })
 public final class TkProxy implements Take {
 
     /**
@@ -111,9 +111,11 @@ public final class TkProxy implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        final Request transformed = this.rqtransformer.transform(req);
-        final Response response = this.origin.act(transformed);
-        return this.rstransformer.transform(response);
+        return this.rstransformer.transform(
+            this.origin.act(
+                this.rqtransformer.transform(req)
+            )
+        );
     }
 
     /**
