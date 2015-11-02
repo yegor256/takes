@@ -36,8 +36,9 @@ import java.net.SocketImpl;
  *
  * @author Piotr Pradzynski (prondzyn@gmail.com)
  * @version $Id$
+ * @since 0.26
  */
-class MkSocketImpl extends SocketImpl {
+final class MkSocketImpl extends SocketImpl {
 
     /**
      * Input stream.
@@ -71,67 +72,67 @@ class MkSocketImpl extends SocketImpl {
     }
 
     @Override
-    protected void create(final boolean stream) throws IOException {
+    public void create(final boolean stream) throws IOException {
         //body skipped
     }
 
     @Override
-    protected void connect(final String host,
+    public void connect(final String host,
         final int port) throws IOException {
         //body skipped
     }
 
     @Override
-    protected void connect(final InetAddress address,
+    public void connect(final InetAddress address,
         final int port) throws IOException {
         //body skipped
     }
 
     @Override
-    protected void connect(final SocketAddress address,
+    public void connect(final SocketAddress address,
         final int timeout) throws IOException {
         //body skipped
     }
 
     @Override
-    protected void bind(final InetAddress host, final int port)
+    public void bind(final InetAddress host, final int port)
         throws IOException {
         //body skipped
     }
 
     @Override
-    protected void listen(final int backlog) throws IOException {
+    public void listen(final int backlog) throws IOException {
         //body skipped
     }
 
     @Override
-    protected void accept(final SocketImpl socket)
+    public void accept(final SocketImpl socket)
         throws IOException {
         //body skipped
     }
 
     @Override
-    protected InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() throws IOException {
         return this.input;
     }
 
     @Override
-    protected OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() throws IOException {
         return this.output;
     }
 
     @Override
-    protected int available() throws IOException {
+    public int available() throws IOException {
         return 0;
     }
 
     @Override
-    protected void close() throws IOException {
+    public void close() throws IOException {
         //body skipped
     }
 
     @Override
-    protected void sendUrgentData(final int data)
+    public void sendUrgentData(final int data)
         throws IOException {
         //body skipped
     }

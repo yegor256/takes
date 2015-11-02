@@ -25,7 +25,8 @@
 /**
  * Mock/fake classes.
  *
- * @author Piotr Pradzynski (pradzyn@gmail.com)
+ * @author Piotr Pradzynski (prondzyn@gmail.com)
  * @version $Id$
+ * @since 0.26
  */
 package org.takes.mock;

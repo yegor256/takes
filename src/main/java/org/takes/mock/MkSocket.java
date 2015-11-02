@@ -33,8 +33,9 @@ import java.net.Socket;
  *
  * @author Piotr Pradzynski (prondzyn@gmail.com)
  * @version $Id$
+ * @since 0.26
  */
-public class MkSocket extends Socket {
+public final class MkSocket extends Socket {
 
     /**
      * Ctor.
