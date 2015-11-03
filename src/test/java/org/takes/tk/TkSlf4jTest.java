@@ -22,22 +22,26 @@
  * SOFTWARE.
  */
 
+package org.takes.tk;
+
+import java.io.IOException;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+
 /**
- * Slf4j.
- *
- * <p>Classes in this package is a collection of wrappers for basic interfaces,
- * which will log basic parameters of methods called.
- * This is how you implement it
- * in your "take":
- *
- * <pre> new TkLogged(
- *   new TkFork(
- *    // my config...
- *   )
- * );</pre>
- *
- * @author Dmitry Zaytsev (dmitry.zaystev@gmail.com)
+ * Test case for {@link TkSlf4j}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.11
+ * @since 0.11.2
  */
-package org.takes.facets.slf4j;
+public final class TkSlf4jTest {
+    /**
+     * TkSlf4j can log message.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void logsMessage() throws IOException {
+        new TkSlf4j(new TkText("test")).act(new RqFake());
+    }
+}

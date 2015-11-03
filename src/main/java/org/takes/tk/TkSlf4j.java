@@ -22,26 +22,31 @@
  * SOFTWARE.
  */
 
-package org.takes.facets.slf4j;
+package org.takes.tk;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqHref;
 
 /**
  * Logs Take.act() calls.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.11.2
  */
 @ToString(of = { "origin", "target" })
 @EqualsAndHashCode(of = { "origin", "target" })
-public final class TkLogged implements Take {
+public final class TkSlf4j implements Take {
 
     /**
      * Original take.
@@ -51,42 +56,66 @@ public final class TkLogged implements Take {
     /**
      * Log target.
      */
-    private final transient Target target;
+    private final transient String target;
 
     /**
      * Ctor.
      * @param take Original
-     * @param trget Log target
      */
-    TkLogged(final Take take, final Target trget) {
-        this.target = trget;
+    public TkSlf4j(final Take take) {
+        this(take, TkSlf4j.class);
+    }
+
+    /**
+     * Ctor.
+     * @param take Original
+     * @param tgt Log target
+     */
+    public TkSlf4j(final Take take, final Class<?> tgt) {
+        this(take, tgt.getCanonicalName());
+    }
+
+    /**
+     * Ctor.
+     * @param take Original
+     * @param tgt Log target
+     */
+    public TkSlf4j(final Take take, final String tgt) {
+        this.target = tgt;
         this.origin = take;
     }
 
-    /**
-     * Ctor.
-     * @param take Original
-     */
-    public TkLogged(final Take take) {
-        this(take, new Slf4j(TkLogged.class));
-    }
-
-    // @todo #101:30min/DEV I expect implementations of Response and Take
-    //  interfaces will be able convert itself to a loggable string but
-    //  they don't have this feature.
-    //  See details here https://github.com/yegor256/takes/issues/101
-    //  We will use toConsole() in this way
-    //  this.target.log("...", this.origin.toConsole(), resp.toConsole, ...)
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws IOException {
-        final long started = System.currentTimeMillis();
-        final Response resp = this.origin.act(req);
-        this.target.log(
-            "[{}] #act() return [{}] in [{}] ms",
-            this.origin,
-            resp,
-            System.currentTimeMillis() - started
-        );
-        return resp;
+        final long start = System.currentTimeMillis();
+        final Logger logger = LoggerFactory.getLogger(this.target);
+        try {
+            final Response rsp = this.origin.act(req);
+            logger.info(
+                "%s return {} in {} ms",
+                new RqHref.Base(req).href(),
+                rsp.head().iterator().next(),
+                System.currentTimeMillis() - start
+            );
+            return rsp;
+        } catch (final IOException ex) {
+            logger.info(
+                "%s throws {} in {} ms",
+                new RqHref.Base(req).href(),
+                ex.getLocalizedMessage(),
+                System.currentTimeMillis() - start
+            );
+            throw ex;
+            // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final RuntimeException ex) {
+            logger.info(
+                "%s throws runtime {} in {} ms",
+                new RqHref.Base(req).href(),
+                ex.getLocalizedMessage(),
+                System.currentTimeMillis() - start
+            );
+            throw ex;
+        }
     }
 }
