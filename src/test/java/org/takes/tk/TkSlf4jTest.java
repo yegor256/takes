@@ -36,6 +36,7 @@ import org.takes.rq.RqFake;
  * @since 0.11.2
  */
 public final class TkSlf4jTest {
+
     /**
      * TkSlf4j can log message.
      * @throws IOException If some problem inside
@@ -44,4 +45,14 @@ public final class TkSlf4jTest {
     public void logsMessage() throws IOException {
         new TkSlf4j(new TkText("test")).act(new RqFake());
     }
+
+    /**
+     * TkSlf4j can log exception.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void logsException() throws IOException {
+        new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
+    }
+
 }

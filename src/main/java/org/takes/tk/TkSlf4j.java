@@ -33,6 +33,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
+import org.takes.rq.RqMethod;
 
 /**
  * Logs Take.act() calls.
@@ -93,7 +94,8 @@ public final class TkSlf4j implements Take {
         try {
             final Response rsp = this.origin.act(req);
             logger.info(
-                "{} return {} in {} ms",
+                "[{} {}] returned \"{}\" in {} ms",
+                new RqMethod.Base(req).method(),
                 new RqHref.Base(req).href(),
                 rsp.head().iterator().next(),
                 System.currentTimeMillis() - start
@@ -101,8 +103,10 @@ public final class TkSlf4j implements Take {
             return rsp;
         } catch (final IOException ex) {
             logger.info(
-                "{} throws {} in {} ms",
+                "[{} {}] thrown {}(\"{}\") in {} ms",
+                new RqMethod.Base(req).method(),
                 new RqHref.Base(req).href(),
+                ex.getClass().getCanonicalName(),
                 ex.getLocalizedMessage(),
                 System.currentTimeMillis() - start
             );
@@ -110,8 +114,10 @@ public final class TkSlf4j implements Take {
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
             logger.info(
-                "{} throws runtime {} in {} ms",
+                "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                new RqMethod.Base(req).method(),
                 new RqHref.Base(req).href(),
+                ex.getClass().getCanonicalName(),
                 ex.getLocalizedMessage(),
                 System.currentTimeMillis() - start
             );

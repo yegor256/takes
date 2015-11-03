@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -66,6 +67,22 @@ public final class TkFailure extends TkWrap {
             new Take() {
                 @Override
                 public Response act(final Request request) {
+                    throw err;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     * @since 0.27
+     */
+    public TkFailure(final IOException err) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request request) throws IOException {
                     throw err;
                 }
             }
