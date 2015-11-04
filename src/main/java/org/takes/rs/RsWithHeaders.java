@@ -45,6 +45,14 @@ public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
+     * @param headers Headers
+     */
+    public RsWithHeaders(final Iterable<? extends CharSequence> headers) {
+        this(new RsEmpty(), headers);
+    }
+
+    /**
+     * Ctor.
      * @param res Original response
      * @param headers Headers
      */

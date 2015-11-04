@@ -23,124 +23,135 @@
  */
 package org.takes.tk;
 
+import com.google.common.net.HostAndPort;
+import com.jcabi.http.request.ApacheRequest;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqHref;
+import org.takes.rq.RqLengthAware;
+import org.takes.rq.RqMethod;
+import org.takes.rs.RsWithBody;
+import org.takes.rs.RsWithHeaders;
+import org.takes.rs.RsWithStatus;
 
 /**
- * Proxy take.
- *
- * <p>This take may transform the request before passing it
- * to the original take and/or transform the response received
- * from the original take.
- *
- * <p>If the request transformer is not provided, the original
- * request is passed to the original take.
- *
- * <p>If the response transformer is not provided, the response
- * received from the original take is returned.
+ * Take that proxies requests to another destination.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.25
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo #377 We need the integration test for this class.
+ *  The test should verify the different HTTP methods (GET, POST, etc),
+ *  as well as the different combinations of request/response headers.
  */
-@ToString
-@EqualsAndHashCode(of = { "origin", "rqtransformer", "rstransformer" })
-public final class TkProxy implements Take {
+public class TkProxy implements Take {
 
     /**
-     * Original take.
+     * Target host to which requests are forwarded.
      */
-    private final transient Take origin;
-
-    /**
-     * Request transformer.
-     */
-    private final transient RqTransformer rqtransformer;
-
-    /**
-     * Response transformer.
-     */
-    private final transient RsTransformer rstransformer;
+    private final transient HostAndPort host;
 
     /**
      * Ctor.
-     * @param take Original take
-     * @param rqtransformr Request transformer
-     * @param rstransformr Response transformer
+     * @param target Target to which requests are forwarded
      */
-    public TkProxy(final Take take, final RqTransformer rqtransformr,
-            final RsTransformer rstransformr) {
-        this.origin = take;
-        this.rqtransformer = rqtransformr;
-        this.rstransformer = rstransformr;
-    }
-
-    /**
-     * Ctor.
-     * @param take Original take
-     * @param rqtransformr Request transformer
-     */
-    public TkProxy(final Take take, final RqTransformer rqtransformr) {
-        this(take, rqtransformr, new RsTransformer() {
-            @Override
-            public Response transform(final Response response) {
-                return response;
-            }
-        });
-    }
-
-    /**
-     * Ctor.
-     * @param take Original take
-     * @param rstransformr Response transformer
-     */
-    public TkProxy(final Take take, final RsTransformer rstransformr) {
-        this(take, new RqTransformer() {
-            @Override
-            public Request transform(final Request request) {
-                return request;
-            }
-        }, rstransformr);
+    public TkProxy(final HostAndPort target) {
+        this.host = target;
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
-        return this.rstransformer.transform(
-            this.origin.act(
-                this.rqtransformer.transform(req)
+    public final Response act(final Request req) throws IOException {
+        final RqHref.Base base = new RqHref.Base(req);
+        final String home = new RqHref.Smart(base).home().bare();
+        final String dest = StringUtils.replace(
+            base.href().toString(),
+            home,
+            String.format("http://%s/", this.host.toString())
+        );
+        final String method = new RqMethod.Base(req).method();
+        com.jcabi.http.Request proxied = new ApacheRequest(dest)
+            .method(method);
+        final RqHeaders.Base headers = new RqHeaders.Base(req);
+        for (final String name : headers.names()) {
+            if ("content-length".equals(name.toLowerCase(Locale.ENGLISH))) {
+                continue;
+            }
+            if (isHost(name)) {
+                proxied = proxied.header(name, this.host.toString());
+                continue;
+            }
+            for (final String value : headers.header(name)) {
+                proxied = proxied.header(name, value);
+            }
+        }
+        if (Arrays.asList("POST", "PUT").contains(method)) {
+            proxied = proxied.body()
+                .set(IOUtils.toByteArray(new RqLengthAware(req).body()))
+                .back();
+        }
+        return this.response(home, dest, proxied.fetch());
+    }
+
+    /**
+     * Creates the response received from the target host.
+     *
+     * @param home Home host
+     * @param dest Destination URL
+     * @param rsp Response received from the target host
+     * @return Response
+     */
+    private Response response(final String home, final String dest,
+            final com.jcabi.http.Response rsp) {
+        final Collection<String> hdrs = new LinkedList<String>();
+        hdrs.add(
+            String.format(
+                "X-Takes-TkProxy: from %s to %s",
+                home, dest
             )
+        );
+        for (final Map.Entry<String, List<String>> entry
+            : rsp.headers().entrySet()) {
+            for (final String value : entry.getValue()) {
+                final String val;
+                if (isHost(entry.getKey())) {
+                    val = this.host.toString();
+                } else {
+                    val = value;
+                }
+                hdrs.add(String.format("%s: %s", entry.getKey(), val));
+            }
+        }
+        return new RsWithStatus(
+            new RsWithBody(
+                new RsWithHeaders(hdrs),
+                rsp.binary()
+            ),
+            rsp.status(),
+            rsp.reason()
         );
     }
 
     /**
-     * Request transformer.
+     * Checks whether the provided argument is a "Host" header name.
+     * @param header Header name
+     * @return Returns {@code true} if {@code header} parameter is a "Host"
+     *  header name, {@code false} otherwise
      */
-    public interface RqTransformer {
-
-        /**
-         * Transforms the original request.
-         * @param request Original request
-         * @return The transformed request
-         */
-        Request transform(Request request);
-    }
-
-    /**
-     * Response transformer.
-     */
-    public interface RsTransformer {
-
-        /**
-         * Transforms the original response.
-         * @param response Original response
-         * @return Transformed response
-         */
-        Response transform(Response response);
+    private static boolean isHost(final String header) {
+        return "host".equals(header.toLowerCase(Locale.ENGLISH));
     }
 }
