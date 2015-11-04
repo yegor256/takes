@@ -44,7 +44,7 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * Test case for {@link RsFork}.</em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @version $Id: feb8c497a2cf0bd1fec5122e16dc28e7aa67d41c $</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> * @since 0.6</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/facets/fork/RsForkTest.html">RsForkTest</a> {
@@ -85,7 +85,7 @@
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              <strong class="jxr_keyword">new</strong> RsPrint(
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>                  <strong class="jxr_keyword">new</strong> RsFork(
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>                      <strong class="jxr_keyword">new</strong> RqFake(),
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>                      <strong class="jxr_keyword">new</strong> FkTypes(<span class="jxr_string">"image/png"</span>, <strong class="jxr_keyword">new</strong> RsText(<span class="jxr_string">"a png"</span>))
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>                      <strong class="jxr_keyword">new</strong> FkTypes(<span class="jxr_string">"image/png,*/*"</span>, <strong class="jxr_keyword">new</strong> RsText(<span class="jxr_string">"a png"</span>))
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>                  )
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              ).printBody(),
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>              Matchers.endsWith(<span class="jxr_string">"png"</span>)
@@ -119,7 +119,25 @@
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         );
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>     }
 <a class="jxr_linenumber" name="L113" href="#L113">113</a> 
-<a class="jxr_linenumber" name="L114" href="#L114">114</a> }
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L115" href="#L115">115</a> <em class="jxr_javadoccomment">     * RsFork can dispatch by request method.</em>
+<a class="jxr_linenumber" name="L116" href="#L116">116</a> <em class="jxr_javadoccomment">     * @throws IOException If some problem inside</em>
+<a class="jxr_linenumber" name="L117" href="#L117">117</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>     @Test
+<a class="jxr_linenumber" name="L119" href="#L119">119</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> dispatchesByRequestMethod() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>         MatcherAssert.assertThat(
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">new</strong> RsPrint(
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>                 <strong class="jxr_keyword">new</strong> RsFork(
+<a class="jxr_linenumber" name="L123" href="#L123">123</a>                     <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"POST"</span>, <span class="jxr_string">"/test?1"</span>, <span class="jxr_string">"alpha=1"</span>),
+<a class="jxr_linenumber" name="L124" href="#L124">124</a>                     <strong class="jxr_keyword">new</strong> FkMethods(<span class="jxr_string">"GET"</span>, <strong class="jxr_keyword">new</strong> RsText(<span class="jxr_string">"it's a GET"</span>)),
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>                     <strong class="jxr_keyword">new</strong> FkMethods(<span class="jxr_string">"POST,PUT"</span>, <strong class="jxr_keyword">new</strong> RsText(<span class="jxr_string">"it's a POST"</span>))
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>                 )
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>             ).printBody(),
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>             Matchers.endsWith(<span class="jxr_string">"a POST"</span>)
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>         );
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>     }
+<a class="jxr_linenumber" name="L131" href="#L131">131</a> 
+<a class="jxr_linenumber" name="L132" href="#L132">132</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

@@ -37,18 +37,18 @@
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> com.jcabi.http.response.RestResponse;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.net.HttpURLConnection;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Collections;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> javax.json.JsonObject;
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.HttpException;
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Pass;
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Href;
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentMap;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> javax.json.JsonObject;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> org.takes.HttpException;
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> org.takes.Request;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Identity;
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">import</strong> org.takes.facets.auth.Pass;
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Href;
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Opt;
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <strong class="jxr_keyword">import</strong> org.takes.rq.RqHref;
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">/**</em>
@@ -56,7 +56,7 @@
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;The class is immutable and thread-safe.</em>
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment"> * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)</em>
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment"> * @version $Id: 47d2c55dfacaf999d12d9f670b5f27817e6b28a6 $</em>
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  <em class="jxr_javadoccomment"> * @since 0.11.3</em>
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  @EqualsAndHashCode(of = { <span class="jxr_string">"app"</span>, <span class="jxr_string">"key"</span> })
@@ -114,7 +114,7 @@
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>     }
 <a class="jxr_linenumber" name="L107" href="#L107">107</a> 
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>     @Override
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>     <strong class="jxr_keyword">public</strong> Iterator&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Request.html">Request</a> request)
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>     <strong class="jxr_keyword">public</strong> Opt&lt;Identity&gt; enter(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Request.html">Request</a> request)
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>         <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/misc/Href.html">Href</a> href = <strong class="jxr_keyword">new</strong> RqHref.Base(request).href();
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>         <em class="jxr_comment">// @checkstyle MultipleStringLiteralsCheck (1 line)</em>
@@ -125,87 +125,82 @@
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>                 <span class="jxr_string">"code is not provided by LinkedIn"</span>
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>             );
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>         }
-<a class="jxr_linenumber" name="L120" href="#L120">120</a>         <strong class="jxr_keyword">return</strong> Collections.singleton(
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">this</strong>.fetch(
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>                 <strong class="jxr_keyword">this</strong>.token(
-<a class="jxr_linenumber" name="L123" href="#L123">123</a>                     href.toString(),
-<a class="jxr_linenumber" name="L124" href="#L124">124</a>                     code.next()
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>                 )
-<a class="jxr_linenumber" name="L126" href="#L126">126</a>             )
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>         ).iterator();
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>     }
-<a class="jxr_linenumber" name="L129" href="#L129">129</a> 
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>     @Override
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../org/takes/Response.html">Response</a> exit(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Response.html">Response</a> response,
-<a class="jxr_linenumber" name="L132" href="#L132">132</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> identity) {
-<a class="jxr_linenumber" name="L133" href="#L133">133</a>         <strong class="jxr_keyword">return</strong> response;
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>     }
-<a class="jxr_linenumber" name="L135" href="#L135">135</a> 
-<a class="jxr_linenumber" name="L136" href="#L136">136</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L137" href="#L137">137</a> <em class="jxr_javadoccomment">     * Get user name from Linkedin, with the token provided.</em>
-<a class="jxr_linenumber" name="L138" href="#L138">138</a> <em class="jxr_javadoccomment">     * @param token PsLinkedin access token</em>
-<a class="jxr_linenumber" name="L139" href="#L139">139</a> <em class="jxr_javadoccomment">     * @return The user found in PsLinkedin</em>
-<a class="jxr_linenumber" name="L140" href="#L140">140</a> <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
-<a class="jxr_linenumber" name="L141" href="#L141">141</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> fetch(<strong class="jxr_keyword">final</strong> String token) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>         <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">this</strong>.apihref
-<a class="jxr_linenumber" name="L145" href="#L145">145</a>             .with(<span class="jxr_string">"oauth2_access_token"</span>, token)
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>             .with(<span class="jxr_string">"format"</span>, <span class="jxr_string">"json"</span>)
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>             .toString();
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>         <strong class="jxr_keyword">return</strong> PsLinkedin.parse(
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>             <strong class="jxr_keyword">new</strong> JdkRequest(uri)
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>                 .header(<span class="jxr_string">"accept"</span>, <span class="jxr_string">"application/json"</span>)
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>                 .fetch().as(RestResponse.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>                 .assertStatus(HttpURLConnection.HTTP_OK)
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>                 .as(JsonResponse.<strong class="jxr_keyword">class</strong>).json().readObject()
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         );
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>     }
-<a class="jxr_linenumber" name="L156" href="#L156">156</a> 
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L158" href="#L158">158</a> <em class="jxr_javadoccomment">     * Retrieve PsLinkedin access token.</em>
-<a class="jxr_linenumber" name="L159" href="#L159">159</a> <em class="jxr_javadoccomment">     * @param home Home of this page</em>
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> <em class="jxr_javadoccomment">     * @param code PsLinkedin "authorization code"</em>
-<a class="jxr_linenumber" name="L161" href="#L161">161</a> <em class="jxr_javadoccomment">     * @return The token</em>
-<a class="jxr_linenumber" name="L162" href="#L162">162</a> <em class="jxr_javadoccomment">     * @throws IOException If failed</em>
-<a class="jxr_linenumber" name="L163" href="#L163">163</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>     <strong class="jxr_keyword">private</strong> String token(<strong class="jxr_keyword">final</strong> String home, <strong class="jxr_keyword">final</strong> String code)
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>         <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">this</strong>.tkhref.toString();
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> JdkRequest(uri)
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>             .method(<span class="jxr_string">"POST"</span>)
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>             .header(<span class="jxr_string">"Accept"</span>, <span class="jxr_string">"application/xml"</span>)
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>             .body()
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>             .formParam(<span class="jxr_string">"grant_type"</span>, <span class="jxr_string">"authorization_code"</span>)
-<a class="jxr_linenumber" name="L172" href="#L172">172</a>             .formParam(<span class="jxr_string">"client_id"</span>, <strong class="jxr_keyword">this</strong>.app)
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>             .formParam(<span class="jxr_string">"redirect_uri"</span>, home)
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>             .formParam(<span class="jxr_string">"client_secret"</span>, <strong class="jxr_keyword">this</strong>.key)
-<a class="jxr_linenumber" name="L175" href="#L175">175</a>             .formParam(<span class="jxr_string">"code"</span>, code)
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>             .back()
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>             .fetch().as(RestResponse.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>             .assertStatus(HttpURLConnection.HTTP_OK)
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>             .as(JsonResponse.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>             .json().readObject().getString(<span class="jxr_string">"access_token"</span>);
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>     }
-<a class="jxr_linenumber" name="L182" href="#L182">182</a> 
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L184" href="#L184">184</a> <em class="jxr_javadoccomment">     * Make identity from JSON object.</em>
-<a class="jxr_linenumber" name="L185" href="#L185">185</a> <em class="jxr_javadoccomment">     * @param json JSON received from Github</em>
-<a class="jxr_linenumber" name="L186" href="#L186">186</a> <em class="jxr_javadoccomment">     * @return Identity found</em>
-<a class="jxr_linenumber" name="L187" href="#L187">187</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> parse(<strong class="jxr_keyword">final</strong> JsonObject json) {
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">final</strong> String fname = <span class="jxr_string">"firstName"</span>;
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>         <strong class="jxr_keyword">final</strong> String lname = <span class="jxr_string">"lastName"</span>;
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">final</strong> String unknown = <span class="jxr_string">"?"</span>;
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>         <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;String, String&gt; props =
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>             <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, String&gt;(json.size());
-<a class="jxr_linenumber" name="L194" href="#L194">194</a>         props.put(fname, json.getString(fname, unknown));
-<a class="jxr_linenumber" name="L195" href="#L195">195</a>         props.put(lname, json.getString(lname, unknown));
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Identity.Simple(
-<a class="jxr_linenumber" name="L197" href="#L197">197</a>             String.format(<span class="jxr_string">"urn:linkedin:%s"</span>, json.getString(<span class="jxr_string">"id"</span>)), props
-<a class="jxr_linenumber" name="L198" href="#L198">198</a>         );
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>     }
-<a class="jxr_linenumber" name="L200" href="#L200">200</a> }
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Opt.Single&lt;Identity&gt;(
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">this</strong>.fetch(<strong class="jxr_keyword">this</strong>.token(href.toString(), code.next()))
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>         );
+<a class="jxr_linenumber" name="L123" href="#L123">123</a>     }
+<a class="jxr_linenumber" name="L124" href="#L124">124</a> 
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>     @Override
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../org/takes/Response.html">Response</a> exit(<strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/Response.html">Response</a> response,
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">final</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> identity) {
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">return</strong> response;
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>     }
+<a class="jxr_linenumber" name="L130" href="#L130">130</a> 
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L132" href="#L132">132</a> <em class="jxr_javadoccomment">     * Get user name from Linkedin, with the token provided.</em>
+<a class="jxr_linenumber" name="L133" href="#L133">133</a> <em class="jxr_javadoccomment">     * @param token PsLinkedin access token</em>
+<a class="jxr_linenumber" name="L134" href="#L134">134</a> <em class="jxr_javadoccomment">     * @return The user found in PsLinkedin</em>
+<a class="jxr_linenumber" name="L135" href="#L135">135</a> <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
+<a class="jxr_linenumber" name="L136" href="#L136">136</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> fetch(<strong class="jxr_keyword">final</strong> String token) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <em class="jxr_comment">// @checkstyle LineLength (1 line)</em>
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">this</strong>.apihref
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>             .with(<span class="jxr_string">"oauth2_access_token"</span>, token)
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>             .with(<span class="jxr_string">"format"</span>, <span class="jxr_string">"json"</span>)
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>             .toString();
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>         <strong class="jxr_keyword">return</strong> PsLinkedin.parse(
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>             <strong class="jxr_keyword">new</strong> JdkRequest(uri)
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>                 .header(<span class="jxr_string">"accept"</span>, <span class="jxr_string">"application/json"</span>)
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>                 .fetch().as(RestResponse.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>                 .assertStatus(HttpURLConnection.HTTP_OK)
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>                 .as(JsonResponse.<strong class="jxr_keyword">class</strong>).json().readObject()
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>         );
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>     }
+<a class="jxr_linenumber" name="L151" href="#L151">151</a> 
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L153" href="#L153">153</a> <em class="jxr_javadoccomment">     * Retrieve PsLinkedin access token.</em>
+<a class="jxr_linenumber" name="L154" href="#L154">154</a> <em class="jxr_javadoccomment">     * @param home Home of this page</em>
+<a class="jxr_linenumber" name="L155" href="#L155">155</a> <em class="jxr_javadoccomment">     * @param code PsLinkedin "authorization code"</em>
+<a class="jxr_linenumber" name="L156" href="#L156">156</a> <em class="jxr_javadoccomment">     * @return The token</em>
+<a class="jxr_linenumber" name="L157" href="#L157">157</a> <em class="jxr_javadoccomment">     * @throws IOException If failed</em>
+<a class="jxr_linenumber" name="L158" href="#L158">158</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>     <strong class="jxr_keyword">private</strong> String token(<strong class="jxr_keyword">final</strong> String home, <strong class="jxr_keyword">final</strong> String code)
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>         <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>         <strong class="jxr_keyword">final</strong> String uri = <strong class="jxr_keyword">this</strong>.tkhref.toString();
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> JdkRequest(uri)
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>             .method(<span class="jxr_string">"POST"</span>)
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>             .header(<span class="jxr_string">"Accept"</span>, <span class="jxr_string">"application/xml"</span>)
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>             .body()
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>             .formParam(<span class="jxr_string">"grant_type"</span>, <span class="jxr_string">"authorization_code"</span>)
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>             .formParam(<span class="jxr_string">"client_id"</span>, <strong class="jxr_keyword">this</strong>.app)
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>             .formParam(<span class="jxr_string">"redirect_uri"</span>, home)
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>             .formParam(<span class="jxr_string">"client_secret"</span>, <strong class="jxr_keyword">this</strong>.key)
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>             .formParam(<span class="jxr_string">"code"</span>, code)
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>             .back()
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>             .fetch().as(RestResponse.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>             .assertStatus(HttpURLConnection.HTTP_OK)
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>             .as(JsonResponse.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>             .json().readObject().getString(<span class="jxr_string">"access_token"</span>);
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>     }
+<a class="jxr_linenumber" name="L177" href="#L177">177</a> 
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L179" href="#L179">179</a> <em class="jxr_javadoccomment">     * Make identity from JSON object.</em>
+<a class="jxr_linenumber" name="L180" href="#L180">180</a> <em class="jxr_javadoccomment">     * @param json JSON received from Github</em>
+<a class="jxr_linenumber" name="L181" href="#L181">181</a> <em class="jxr_javadoccomment">     * @return Identity found</em>
+<a class="jxr_linenumber" name="L182" href="#L182">182</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../org/takes/facets/auth/Identity.html">Identity</a> parse(<strong class="jxr_keyword">final</strong> JsonObject json) {
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>         <strong class="jxr_keyword">final</strong> String fname = <span class="jxr_string">"firstName"</span>;
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>         <strong class="jxr_keyword">final</strong> String lname = <span class="jxr_string">"lastName"</span>;
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>         <strong class="jxr_keyword">final</strong> String unknown = <span class="jxr_string">"?"</span>;
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>         <strong class="jxr_keyword">final</strong> ConcurrentMap&lt;String, String&gt; props =
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>             <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;String, String&gt;(json.size());
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>         props.put(fname, json.getString(fname, unknown));
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>         props.put(lname, json.getString(lname, unknown));
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Identity.Simple(
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>             String.format(<span class="jxr_string">"urn:linkedin:%s"</span>, json.getString(<span class="jxr_string">"id"</span>)), props
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>         );
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>     }
+<a class="jxr_linenumber" name="L195" href="#L195">195</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

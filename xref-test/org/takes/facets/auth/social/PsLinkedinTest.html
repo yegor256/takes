@@ -57,7 +57,7 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment"> * Test case for {@link PsLinkedin}.</em>
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment"> * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)</em>
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  <em class="jxr_javadoccomment"> * @version $Id: e5d8193812b2bde1f93bd17d06b659bbd5a1403a $</em>
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment"> * @since 0.16</em>
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment"> * @checkstyle MagicNumberCheck (500 lines)</em>
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment"> * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)</em>
@@ -144,7 +144,7 @@
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>                         lkey
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>                     ).enter(
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>                         <strong class="jxr_keyword">new</strong> RqFake(<span class="jxr_string">"GET"</span>, String.format(<span class="jxr_string">"?code=%s"</span>, code))
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                     ).next();
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>                     ).get();
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>                     MatcherAssert.assertThat(
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>                         identity.urn(),
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>                         CoreMatchers.equalTo(

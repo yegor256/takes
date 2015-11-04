@@ -44,9 +44,9 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;The class is immutable and thread-safe.</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @version $Id: 97f137faf0836816c3eca3c6812f623940aae7b2 $</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> * @since 0.6</em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment"> * @see org.takes.facets.fork.RsFork</em>
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment"> * @see RsFork</em>
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  @EqualsAndHashCode(of = { <span class="jxr_string">"types"</span>, <span class="jxr_string">"origin"</span> })
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/facets/fork/FkTypes.html">FkTypes</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../org/takes/facets/fork/Fork.html">Fork</a> {
@@ -86,18 +86,18 @@
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  <em class="jxr_javadoccomment">     * Get all types accepted by the client.</em>
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>  <em class="jxr_javadoccomment">     * @param req Request</em>
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     * @return Media types</em>
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     * @throws java.io.IOException If fails</em>
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     * @throws IOException If fails</em>
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>      @SuppressWarnings(<span class="jxr_string">"PMD.AvoidInstantiatingObjectsInLoops"</span>)
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a> accepted(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/Request.html">Request</a> req) <strong class="jxr_keyword">throws</strong> IOException {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a> list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>();
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">final</strong> Iterable&lt;String&gt; headers = <strong class="jxr_keyword">new</strong> RqHeaders.Base(req)
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>                  .header(<span class="jxr_string">"Accept"</span>);
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>              .header(<span class="jxr_string">"Accept"</span>);
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> String hdr : headers) {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>              list = list.merge(<strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(hdr));
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          }
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">if</strong> (list.isEmpty()) {
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>              list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(<span class="jxr_string">"*/*"</span>);
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>              list = <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fork/MediaTypes.html">MediaTypes</a>(<span class="jxr_string">"text/html"</span>);
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          }
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>          <strong class="jxr_keyword">return</strong> list;
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      }

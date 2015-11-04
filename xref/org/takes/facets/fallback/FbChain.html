@@ -32,58 +32,57 @@
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">package</strong> org.takes.facets.fallback;
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.util.ArrayList;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.Arrays;
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.util.Collection;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.util.Iterator;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> * Fallback chain.</em>
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.util.Arrays;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> lombok.EqualsAndHashCode;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> org.takes.Response;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.takes.misc.Opt;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment"> * Fallback chain.</em>
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> *</em>
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;The class is immutable and thread-safe.</em>
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;The class is immutable and thread-safe.</em>
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment"> * @since 0.13</em>
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>  @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>)
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../org/takes/facets/fallback/FbWrap.html">FbWrap</a> {
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>  
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     * @param fallbacks Fallbacks to chain</em>
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a>(<strong class="jxr_keyword">final</strong> Fallback... fallbacks) {
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>          <strong class="jxr_keyword">this</strong>(Arrays.asList(fallbacks));
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      }
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>  
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     * @param fallbacks Fallbacks</em>
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a>(<strong class="jxr_keyword">final</strong> Iterable&lt;Fallback&gt; fallbacks) {
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">super</strong>(
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fallback/Fallback.html">Fallback</a>() {
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  @Override
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  <strong class="jxr_keyword">public</strong> Iterator&lt;Response&gt; route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/fallback/RqFallback.html">RqFallback</a> req)
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                      <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                      <strong class="jxr_keyword">final</strong> Collection&lt;Response&gt; rsp = <strong class="jxr_keyword">new</strong> ArrayList&lt;Response&gt;(1);
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                      <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Fallback fbk : fallbacks) {
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          <strong class="jxr_keyword">final</strong> Iterator&lt;Response&gt; iter = fbk.route(req);
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>                          <strong class="jxr_keyword">if</strong> (iter.hasNext()) {
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>                              rsp.add(iter.next());
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>                              <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>                          }
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>                      }
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>                      <strong class="jxr_keyword">return</strong> rsp.iterator();
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>                  }
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>              }
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          );
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>      }
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>  
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>  }
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * @version $Id: 5b91cbca03bc332da3b97bd38dc09bd83b6d82e7 $</em>
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @since 0.13</em>
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>)
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../org/takes/facets/fallback/FbWrap.html">FbWrap</a> {
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">     * @param fallbacks Fallbacks to chain</em>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a>(<strong class="jxr_keyword">final</strong> Fallback... fallbacks) {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>          <strong class="jxr_keyword">this</strong>(Arrays.asList(fallbacks));
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      }
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     * @param fallbacks Fallbacks</em>
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>      @SuppressWarnings(<span class="jxr_string">"PMD.CallSuperInConstructor"</span>)
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/facets/fallback/FbChain.html">FbChain</a>(<strong class="jxr_keyword">final</strong> Iterable&lt;Fallback&gt; fallbacks) {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">super</strong>(
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/facets/fallback/Fallback.html">Fallback</a>() {
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  @Override
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <strong class="jxr_keyword">public</strong> Opt&lt;Response&gt; route(<strong class="jxr_keyword">final</strong> <a href="../../../../org/takes/facets/fallback/RqFallback.html">RqFallback</a> req)
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>                      <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                      Opt&lt;Response&gt; rsp = <strong class="jxr_keyword">new</strong> Opt.Empty&lt;Response&gt;();
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                      <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">final</strong> Fallback fbk : fallbacks) {
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                          <strong class="jxr_keyword">final</strong> Opt&lt;Response&gt; opt = fbk.route(req);
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          <strong class="jxr_keyword">if</strong> (opt.has()) {
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                              rsp = opt;
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>                              <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>                          }
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>                      }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>                      <strong class="jxr_keyword">return</strong> rsp;
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  }
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>              }
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>          );
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>  
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>

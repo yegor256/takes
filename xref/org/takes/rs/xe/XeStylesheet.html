@@ -41,31 +41,44 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;The class is immutable and thread-safe.</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> * @author Yegor Bugayenko (yegor@teamed.io)</em>
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * @version $Id$</em>
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * @version $Id: c7c7f8a3821759c1808323e2f2937d9db4a67ff3 $</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * @since 0.1</em>
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>)
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/rs/xe/XeStylesheet.html">XeStylesheet</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../org/takes/rs/xe/XeWrap.html">XeWrap</a> {
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment">     * @param xsl XSL stylesheet</em>
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeStylesheet.html">XeStylesheet</a>(<strong class="jxr_keyword">final</strong> CharSequence xsl) {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <strong class="jxr_keyword">super</strong>(
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>                  @Override
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().pi(
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>                          <span class="jxr_string">"xml-stylesheet"</span>,
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>                          String.format(<span class="jxr_string">"href='%s' type='text/xsl'"</span>, xsl)
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>                      );
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  }
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>              }
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>          );
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      }
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>  
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>  }
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="<a href="http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html" target="alexandria_uri">http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html</a>"&gt;XML+XSLT in a Browser&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="<a href="http://www.yegor256.com/2014/09/09/restful-web-sites.html" target="alexandria_uri">http://www.yegor256.com/2014/09/09/restful-web-sites.html</a>"&gt;RESTful API and a Web Site in the Same URL&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  @EqualsAndHashCode(callSuper = <strong class="jxr_keyword">true</strong>)
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/takes/rs/xe/XeStylesheet.html">XeStylesheet</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../org/takes/rs/xe/XeWrap.html">XeWrap</a> {
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment">     * Ctor.</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment">     * &lt;p&gt;The only argument here is a location of XSL stylesheet,</em>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     * in resources and, at the same time, in HTTP. For example, you</em>
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <em class="jxr_javadoccomment">     * can put "/xsl/main.xsl" there. In the XML output this will generate</em>
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <em class="jxr_javadoccomment">     * an "xml-stylesheet" annotation, which will point the browser</em>
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>  <em class="jxr_javadoccomment">     * to "<a href="http://yoursite/xsl/main.xsl" target="alexandria_uri">http://yoursite/xsl/main.xsl</a>". Obviously, this page must</em>
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  <em class="jxr_javadoccomment">     * be available. On the other hand, if you're using RsXSLT, this</em>
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment">     * file must be available in resources as "/xsl/main.xsl".</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * &lt;p&gt;It is recommended to put XSL files under "src/main/resources/xsl".</em>
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * @param xsl XSL stylesheet</em>
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/takes/rs/xe/XeStylesheet.html">XeStylesheet</a>(<strong class="jxr_keyword">final</strong> CharSequence xsl) {
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>          <strong class="jxr_keyword">super</strong>(
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>              <strong class="jxr_keyword">new</strong> <a href="../../../../org/takes/rs/xe/XeSource.html">XeSource</a>() {
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>                  @Override
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  <strong class="jxr_keyword">public</strong> Iterable&lt;Directive&gt; toXembly() {
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> Directives().pi(
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                          <span class="jxr_string">"xml-stylesheet"</span>,
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                          String.format(<span class="jxr_string">"href='%s' type='text/xsl'"</span>, xsl)
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                      );
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>                  }
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>              }
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          );
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>      }
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2015 <a href="https://github.com/yegor256/takes">Take</a>. All rights reserved.</div>
