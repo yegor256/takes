@@ -29,6 +29,7 @@ import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import javax.net.ssl.SSLServerSocketFactory;
 import lombok.EqualsAndHashCode;
 import org.takes.Take;
 
@@ -43,18 +44,23 @@ import org.takes.Take;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
-@EqualsAndHashCode(of = { "back", "socket" })
+@EqualsAndHashCode(of = { "origin", "socket" })
 public final class FtRemote implements Front {
 
     /**
-     * Back.
+     * Original front.
      */
-    private final transient Back back;
+    private final transient Front origin;
 
     /**
      * Server socket.
      */
     private final transient ServerSocket socket;
+
+    /**
+     * Indicates whether the front is secure (HTTPS).
+     */
+    private final transient boolean secured;
 
     /**
      * Ctor.
@@ -81,13 +87,26 @@ public final class FtRemote implements Front {
      * @since 0.22
      */
     public FtRemote(final Back bck, final ServerSocket skt) {
-        this.back = bck;
+        this(new FtBasic(bck, skt), skt, false);
+    }
+
+    /**
+     * Ctor.
+     * @param front Original front
+     * @param skt ServerSocket used
+     * @param sec Value of {@code true} if the front is secure,
+     *  {@code false} otherwise
+     */
+    private FtRemote(final Front front, final ServerSocket skt,
+        final boolean sec) {
+        this.origin = front;
         this.socket = skt;
+        this.secured = sec;
     }
 
     @Override
     public void start(final Exit exit) throws IOException {
-        new FtBasic(this.back, this.socket).start(exit);
+        this.origin.start(exit);
     }
 
     /**
@@ -130,11 +149,17 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
+        final String protocol;
+        if (this.secured) {
+            protocol = "https";
+        } else {
+            protocol = "http";
+        }
         script.exec(
             URI.create(
                 String.format(
-                    "http://localhost:%d",
-                    this.socket.getLocalPort()
+                    "%s://localhost:%d",
+                    protocol, this.socket.getLocalPort()
                 )
             )
         );
@@ -145,6 +170,23 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Creates an instance of secure Front.
+     *
+     * @param take Take
+     * @return Secure Front
+     * @throws IOException If some problem inside
+     */
+    public static FtRemote secure(final Take take) throws IOException {
+        final ServerSocket skt = SSLServerSocketFactory.getDefault()
+            .createServerSocket(0);
+        return new FtRemote(
+            new FtSecure(new BkBasic(take), skt),
+            skt,
+            true
+        );
     }
 
     /**
@@ -169,5 +211,4 @@ public final class FtRemote implements Front {
          */
         void exec(URI home) throws IOException;
     }
-
 }

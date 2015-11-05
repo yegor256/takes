@@ -56,7 +56,7 @@ public final class FtSecure implements Front {
      */
     public FtSecure(final Take tks) throws IOException {
         // @checkstyle MagicNumber (1 line)
-        this(new BkBasic(tks), 443);
+        this(tks, 443);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class FtSecure implements Front {
      * @param bck Back
      * @param skt Server socket
      */
-    public FtSecure(final Back bck, final ServerSocket skt) {
+    FtSecure(final Back bck, final ServerSocket skt) {
         this.front = new FtBasic(bck, skt);
     }
 
