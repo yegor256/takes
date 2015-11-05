@@ -29,7 +29,6 @@ import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import javax.net.ssl.SSLServerSocketFactory;
 import lombok.EqualsAndHashCode;
 import org.takes.Take;
 
@@ -97,7 +96,7 @@ public final class FtRemote implements Front {
      * @param sec Value of {@code true} if the front is secure,
      *  {@code false} otherwise
      */
-    private FtRemote(final Front front, final ServerSocket skt,
+    FtRemote(final Front front, final ServerSocket skt,
         final boolean sec) {
         this.origin = front;
         this.socket = skt;
@@ -170,23 +169,6 @@ public final class FtRemote implements Front {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
-    }
-
-    /**
-     * Creates an instance of secure Front.
-     *
-     * @param take Take
-     * @return Secure Front
-     * @throws IOException If some problem inside
-     */
-    public static FtRemote secure(final Take take) throws IOException {
-        final ServerSocket skt = SSLServerSocketFactory.getDefault()
-            .createServerSocket(0);
-        return new FtRemote(
-            new FtSecure(new BkBasic(take), skt),
-            skt,
-            true
-        );
     }
 
     /**

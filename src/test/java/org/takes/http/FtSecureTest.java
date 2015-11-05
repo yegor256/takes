@@ -27,7 +27,9 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.ServerSocket;
 import java.net.URI;
+import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -74,7 +76,7 @@ public final class FtSecureTest {
      */
     @Test
     public void justWorks() throws Exception {
-        FtRemote.secure(new TkFork(new FkRegex("/", "hello, world!"))).exec(
+        secure(new TkFork(new FkRegex("/", "hello, world!"))).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -94,7 +96,7 @@ public final class FtSecureTest {
      */
     @Test
     public void gracefullyHandlesBrokenBack() throws Exception {
-        FtRemote.secure(new TkFailure("Jeffrey Lebowski")).exec(
+        secure(new TkFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -124,7 +126,7 @@ public final class FtSecureTest {
                 return new RsText("works!");
             }
         };
-        FtRemote.secure(take).exec(
+        secure(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -155,7 +157,7 @@ public final class FtSecureTest {
                 );
             }
         };
-        FtRemote.secure(take).exec(
+        secure(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -169,6 +171,23 @@ public final class FtSecureTest {
                         .assertBody(Matchers.equalTo(body));
                 }
             }
+        );
+    }
+
+    /**
+     * Creates an instance of secure Front.
+     *
+     * @param take Take
+     * @return Secure Front
+     * @throws IOException If some problem inside
+     */
+    public static FtRemote secure(final Take take) throws IOException {
+        final ServerSocket skt = SSLServerSocketFactory.getDefault()
+            .createServerSocket(0);
+        return new FtRemote(
+            new FtSecure(new BkBasic(take), skt),
+            skt,
+            true
         );
     }
 }
