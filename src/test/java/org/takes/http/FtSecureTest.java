@@ -180,7 +180,7 @@ public final class FtSecureTest {
      * @return Secure Front
      * @throws IOException If some problem inside
      */
-    public static FtRemote secure(final Take take) throws IOException {
+    private static FtRemote secure(final Take take) throws IOException {
         final ServerSocket skt = SSLServerSocketFactory.getDefault()
             .createServerSocket(0);
         return new FtRemote(
