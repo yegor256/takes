@@ -38,13 +38,12 @@ import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.facets.fork.FkRegex;
-import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
+import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FtSecure}.
@@ -76,7 +75,7 @@ public final class FtSecureTest {
      */
     @Test
     public void justWorks() throws Exception {
-        secure(new TkFork(new FkRegex("/", "hello, world!"))).exec(
+        FtSecureTest.secure(new TkFixed("hello, world")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -91,12 +90,12 @@ public final class FtSecureTest {
     }
 
     /**
-     * FtSecure can work with a broken back.
+     * FtSecure can gracefully work with a broken back.
      * @throws Exception If some problem inside
      */
     @Test
     public void gracefullyHandlesBrokenBack() throws Exception {
-        secure(new TkFailure("Jeffrey Lebowski")).exec(
+        FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -126,7 +125,7 @@ public final class FtSecureTest {
                 return new RsText("works!");
             }
         };
-        secure(take).exec(
+        FtSecureTest.secure(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -157,7 +156,7 @@ public final class FtSecureTest {
                 );
             }
         };
-        secure(take).exec(
+        FtSecureTest.secure(take).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
