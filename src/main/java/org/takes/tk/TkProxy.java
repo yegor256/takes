@@ -23,8 +23,8 @@
  */
 package org.takes.tk;
 
-import com.google.common.net.HostAndPort;
 import com.jcabi.http.request.ApacheRequest;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,8 +32,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,6 +39,7 @@ import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
+import org.takes.rq.RqPrint;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
@@ -63,13 +62,20 @@ public class TkProxy implements Take {
     /**
      * Target host to which requests are forwarded.
      */
-    private final transient HostAndPort host;
+    private final transient String host;
 
     /**
      * Ctor.
+     *
+     * <p>The {@code target} parameter takes the destination URL
+     *  to which requests are proxied. Some valid examples:
+     *  <li>example.com
+     *  <li>www.example.com
+     *  <li>example.com:8080
+     *  <li>example.com/x/y
      * @param target Target to which requests are forwarded
      */
-    public TkProxy(final HostAndPort target) {
+    public TkProxy(final String target) {
         this.host = target;
     }
 
@@ -77,11 +83,24 @@ public class TkProxy implements Take {
     public final Response act(final Request req) throws IOException {
         final RqHref.Base base = new RqHref.Base(req);
         final String home = new RqHref.Smart(base).home().bare();
-        final String dest = StringUtils.replace(
-            base.href().toString(),
-            home,
-            String.format("http://%s/", this.host.toString())
+        final String dest = String.format(
+            "http://%s/%s",
+            this.host,
+            base.href().toString().substring(home.length())
         );
+        return this.response(home, dest, this.request(req, dest).fetch());
+    }
+
+    /**
+     * Creates the request to be forwarded to the target host.
+     *
+     * @param req Original request
+     * @param dest Destination URL
+     * @return Request to be forwarded
+     * @throws IOException If some problem inside
+     */
+    private com.jcabi.http.Request request(final Request req,
+        final String dest) throws IOException {
         final String method = new RqMethod.Base(req).method();
         com.jcabi.http.Request proxied = new ApacheRequest(dest)
             .method(method);
@@ -91,7 +110,7 @@ public class TkProxy implements Take {
                 continue;
             }
             if (isHost(name)) {
-                proxied = proxied.header(name, this.host.toString());
+                proxied = proxied.header(name, this.host);
                 continue;
             }
             for (final String value : headers.header(name)) {
@@ -99,11 +118,11 @@ public class TkProxy implements Take {
             }
         }
         if (Arrays.asList("POST", "PUT").contains(method)) {
-            proxied = proxied.body()
-                .set(IOUtils.toByteArray(new RqLengthAware(req).body()))
-                .back();
+            final ByteArrayOutputStream output = new ByteArrayOutputStream();
+            new RqPrint(new RqLengthAware(req)).printBody(output);
+            proxied = proxied.body().set(output.toByteArray()).back();
         }
-        return this.response(home, dest, proxied.fetch());
+        return proxied;
     }
 
     /**
@@ -128,7 +147,7 @@ public class TkProxy implements Take {
             for (final String value : entry.getValue()) {
                 final String val;
                 if (isHost(entry.getKey())) {
-                    val = this.host.toString();
+                    val = this.host;
                 } else {
                     val = value;
                 }
