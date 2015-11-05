@@ -136,18 +136,33 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithBody.append(res, body.available());
-                }
-                @Override
-                public InputStream body() {
-                    return body;
-                }
+        super(RsWithBody.make(res, body));
+    }
+
+    /**
+     * Makes a response asking InputStream available bytes without delay, since
+     * further this InputStream may happen to be closed already.
+     * @param res Original response
+     * @param body Body
+     * @return Response just made
+     */
+    private static Response make(final Response res, final InputStream body) {
+        final int length;
+        try {
+            length = body.available();
+        } catch (final IOException ioe) {
+            throw new IllegalStateException(ioe);
+        }
+        return new Response() {
+            @Override
+            public Iterable<String> head() throws IOException {
+                return RsWithBody.append(res, length);
             }
-        );
+            @Override
+            public InputStream body() {
+                return body;
+            }
+        };
     }
 
     /**
