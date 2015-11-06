@@ -24,16 +24,16 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.mock.MkAnswer;
+import com.jcabi.http.mock.MkContainer;
+import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.matchers.RegexMatchers;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.net.Socket;
+import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.takes.mock.MkSocket;
-import org.takes.tk.TkGreedy;
 import org.takes.tk.TkText;
 
 /**
@@ -58,8 +58,8 @@ public final class BkReuseTest {
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello world!";
-        final Socket socket = new MkSocket(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
@@ -71,11 +71,13 @@ public final class BkReuseTest {
                     "Content-Length: 4",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
-            ),
-            new ByteArrayOutputStream()
-        );
-        new BkReuse(new BkBasic(new TkGreedy(new TkText(text)))).accept(socket);
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
+        new BkReuse(new BkBasic(new TkText(text))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
             RegexMatchers.containsPattern(text + ".*?" + text)
@@ -90,18 +92,20 @@ public final class BkReuseTest {
     @Ignore
     @Test
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
-        final Socket socket = new MkSocket(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
-            ),
-            new ByteArrayOutputStream()
-        );
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
         new BkReuse(new BkBasic(new TkText("411 Test"))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
@@ -116,19 +120,21 @@ public final class BkReuseTest {
     @Test
     public void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
-        final Socket socket = new MkSocket(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
                     "Connection: Close",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
-            ),
-            new ByteArrayOutputStream()
-        );
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
         new BkReuse(new BkBasic(new TkText(text))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
             Matchers.containsString(text)
