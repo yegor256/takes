@@ -23,7 +23,7 @@
  */
 package org.takes.tk;
 
-import com.jcabi.http.request.ApacheRequest;
+import com.jcabi.http.request.JdkRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -53,11 +53,8 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #377 We need the integration test for this class.
- *  The test should verify the different HTTP methods (GET, POST, etc),
- *  as well as the different combinations of request/response headers.
  */
-public class TkProxy implements Take {
+public final class TkProxy implements Take {
 
     /**
      * Target host to which requests are forwarded.
@@ -80,7 +77,7 @@ public class TkProxy implements Take {
     }
 
     @Override
-    public final Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws IOException {
         final RqHref.Base base = new RqHref.Base(req);
         final String home = new RqHref.Smart(base).home().bare();
         final String dest = String.format(
@@ -102,7 +99,7 @@ public class TkProxy implements Take {
     private com.jcabi.http.Request request(final Request req,
         final String dest) throws IOException {
         final String method = new RqMethod.Base(req).method();
-        com.jcabi.http.Request proxied = new ApacheRequest(dest)
+        com.jcabi.http.Request proxied = new JdkRequest(dest)
             .method(method);
         final RqHeaders.Base headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {
