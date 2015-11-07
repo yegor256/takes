@@ -24,17 +24,16 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.mock.MkAnswer;
+import com.jcabi.http.mock.MkContainer;
+import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.matchers.RegexMatchers;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
+import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.takes.tk.TkGreedy;
 import org.takes.tk.TkText;
 
 /**
@@ -47,10 +46,6 @@ import org.takes.tk.TkText;
  *  HTTP persistent connections and to pass below three tests. BkReuse.accept
  *  should handles more than one HTTP requests in one connection and return
  *  correct HTTP status when Content-Length is not specified.
- * @todo #306:30min Replace mockito statements with fake sockets objects as
- *  described in http://www.yegor256.com/2014/09/23/built-in-fake-objects.html.
- *  Fake objects should improve tests readability and maintainability in the
- *  future.
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BkReuseTest {
@@ -63,9 +58,8 @@ public final class BkReuseTest {
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello world!";
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
@@ -77,22 +71,15 @@ public final class BkReuseTest {
                     "Content-Length: 4",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
+                )
             )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        new BkReuse(new BkBasic(new TkGreedy(new TkText(text)))).accept(socket);
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
+        new BkReuse(new BkBasic(new TkText(text))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
-            baos.toString(),
+            socket.getOutputStream().toString(),
             RegexMatchers.containsPattern(text + ".*?" + text)
         );
     }
@@ -105,30 +92,22 @@ public final class BkReuseTest {
     @Ignore
     @Test
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
+                )
             )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
         new BkReuse(new BkBasic(new TkText("411 Test"))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
-            baos.toString(),
+            socket.getOutputStream().toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
     }
@@ -141,31 +120,23 @@ public final class BkReuseTest {
     @Test
     public void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
                 Joiner.on("\r\n").join(
                     "POST / HTTP/1.1",
                     "Host: localhost",
                     "Connection: Close",
                     "",
                     "hi"
-                ).getBytes("UTF-8")
+                )
             )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
         new BkReuse(new BkBasic(new TkText(text))).accept(socket);
+        container.stop();
         MatcherAssert.assertThat(
-            baos.toString(),
+            socket.getOutputStream().toString(),
             Matchers.containsString(text)
         );
     }
