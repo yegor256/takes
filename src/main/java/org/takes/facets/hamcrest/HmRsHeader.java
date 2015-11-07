@@ -24,14 +24,17 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
+import org.takes.misc.EntryImpl;
 
 /**
  * Response Header Matcher.
@@ -43,78 +46,180 @@ import org.takes.Response;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
  * @since 0.23.3
- * @todo #260:30min Implement additional constructors.
- *  According to #260 there should be also available such constructors
- *  public HmRsHeader(final Matcher<? extends Map.Entry<String,String>> mtchr);
- *  public HmRsHeader(final String header,
- *  final Matcher<? extends Iterable<String>> mtchr);
- *  public HmRsHeader(final String header,
- *  final Matcher<? extends String> mtchr);
- *  public HmRsHeader(final String header, final String value);
  */
 public final class HmRsHeader extends TypeSafeMatcher<Response> {
 
     /**
-     * Expected request header matcher.
+     * Expected response header matcher.
      */
-    private final transient Matcher<? extends Map<? extends CharSequence,
-        ? extends CharSequence>> matcher;
+    private final transient HeaderMatcher matcher;
 
     /**
-     * Expected matcher.
-     * @param mtchr Is expected header matcher.
+     * Ctor.
+     * @param mtchr Matcher
      */
-    public HmRsHeader(final Matcher<? extends Map<? extends CharSequence,
-        ? extends CharSequence>> mtchr) {
+    public HmRsHeader(
+        final Matcher<? extends Map.Entry<String, String>> mtchr) {
         super();
-        this.matcher = mtchr;
+        this.matcher = new EntryHeaderMatcher(mtchr);
     }
 
     /**
-     * Fail description.
-     * @param description Fail result description.
+     * Ctor.
+     * @param header Header name
+     * @param mtchr Matcher
      */
+    public HmRsHeader(final String header,
+        final Matcher<? extends Iterable<String>> mtchr) {
+        super();
+        this.matcher = new IterableHeaderMatcher(header, mtchr);
+    }
+
+    /**
+     * Ctor.
+     * @param header Header name
+     * @param value Header value
+     */
+    public HmRsHeader(final String header, final String value) {
+        this(new EntryMatcher<String, String>(header, value));
+    }
+
     @Override
     public void describeTo(final Description description) {
         this.matcher.describeTo(description);
     }
 
-    /**
-     * Type safe matcher.
-     * @param item Is tested element
-     * @return True when expected type matched.
-     */
     @Override
     public boolean matchesSafely(final Response item) {
         try {
             final Iterator<String> headers = item.head().iterator();
-            headers.next();
-            boolean result = false;
-            while (headers.hasNext()) {
-                if (this.matchHeader(headers.next())) {
-                    result = true;
-                    break;
-                }
+            if (headers.hasNext()) {
+                headers.next();
             }
-            return result;
+            return this.matcher.matches(headers);
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
     }
 
     /**
-     * Runs matcher against each header.
-     * @param header Is header name and value
-     * @return True when expected type matched.
+     * Splits the given header to [name, value] array.
+     * @param header Header
+     * @return Array in which the first element is header name,
+     *  the second is header value
      */
-    private boolean matchHeader(final String header) {
-        final String[] parts = header.split(":", 2);
-        return this.matcher.matches(
-            Collections.singletonMap(
-                parts[0].trim().toLowerCase(Locale.ENGLISH),
-                parts[1].trim()
-            )
-        );
+    private static String[] split(final String header) {
+        return header.split(":", 2);
     }
 
+    /**
+     * Header matcher.
+     */
+    private interface HeaderMatcher {
+
+        /**
+         * Performs the matching.
+         *
+         * @param headers Headers to check
+         * @return True if positive match
+         */
+        boolean matches(final Iterator<String> headers);
+
+        /**
+         * Generates a description of the matcher.
+         *
+         * @param description The description to be built or appended to
+         */
+        void describeTo(final Description description);
+    }
+
+    /**
+     * Header matcher for {@code Matcher<? extends Map.Entry<String, String>>}.
+     */
+    private static class EntryHeaderMatcher implements HeaderMatcher {
+
+        /**
+         * Matcher.
+         */
+        private final transient
+            Matcher<? extends Map.Entry<String, String>> matcher;
+
+        /**
+         * Ctor.
+         * @param mtchr Matcher
+         */
+        public EntryHeaderMatcher(
+            final Matcher<? extends Entry<String, String>> mtchr) {
+            this.matcher = mtchr;
+        }
+
+        @Override
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        public boolean matches(final Iterator<String> headers) {
+            boolean result = false;
+            while (headers.hasNext()) {
+                final String[] parts = HmRsHeader.split(headers.next());
+                final Map.Entry<String, String> entry =
+                    new EntryImpl<String, String>(
+                        parts[0].trim().toLowerCase(Locale.ENGLISH),
+                        parts[1].trim()
+                    );
+                if (this.matcher.matches(entry)) {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
+        @Override
+        public void describeTo(final Description description) {
+            this.matcher.describeTo(description);
+        }
+    }
+
+    /**
+     * Header matcher for {@code Matcher<? extends Iterable<String>>}.
+     */
+    private static class IterableHeaderMatcher implements HeaderMatcher {
+
+        /**
+         * Header.
+         */
+        private final transient String header;
+
+        /**
+         * Matcher.
+         */
+        private final transient Matcher<? extends Iterable<String>> matcher;
+
+        /**
+         * Ctor.
+         * @param hdr Header
+         * @param mtchr Matcher
+         */
+        public IterableHeaderMatcher(final String hdr,
+            final Matcher<? extends Iterable<String>> mtchr) {
+            this.header = hdr;
+            this.matcher = mtchr;
+        }
+
+        @Override
+        public boolean matches(final Iterator<String> headers) {
+            final Collection<String> hdrs = new LinkedList<String>();
+            while (headers.hasNext()) {
+                final String[] parts = HmRsHeader.split(headers.next());
+                final String lower = parts[0].trim()
+                    .toLowerCase(Locale.ENGLISH);
+                if (lower.equals(this.header)) {
+                    hdrs.add(parts[1].trim());
+                }
+            }
+            return this.matcher.matches(hdrs);
+        }
+
+        @Override
+        public void describeTo(final Description description) {
+            this.matcher.describeTo(description);
+        }
+    }
 }

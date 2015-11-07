@@ -26,8 +26,10 @@ package org.takes.facets.hamcrest;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithHeader;
+import org.takes.rs.RsWithHeaders;
 
 /**
  * Test case for {@link HmRsHeader}.
@@ -48,7 +50,11 @@ public final class HmRsHeaderTest {
                 new RsWithBody("<html>Hello</html>"),
                 "content-encoding: gzip"
             ),
-            new HmRsHeader(Matchers.hasEntry("content-encoding", "gzip"))
+            new HmRsHeader(
+                new EntryMatcher<String, String>(
+                    "content-encoding", "gzip"
+                )
+            )
         );
     }
 
@@ -62,12 +68,63 @@ public final class HmRsHeaderTest {
             new RsWithBody("<html></html>"),
             new HmRsHeader(
                 Matchers.not(
-                    Matchers.hasEntry(
+                    new EntryMatcher<String, String>(
                         "cache-control",
                         "no-cache, no-store"
                     )
                 )
             )
+        );
+    }
+
+    /**
+     * HmRsHeader can test header name and value available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeaderNameAndValueAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RsWithHeader("header1: value1"),
+            new HmRsHeader("header1", "value1")
+        );
+    }
+
+    /**
+     * HmRsHeader can test header name and value not available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeaderNameAndValueNotAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RsWithHeader("header2: value2"),
+            Matchers.not(new HmRsHeader("header2", "value21"))
+        );
+    }
+
+    /**
+     * HmRsHeader can test headers available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeadersAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RsWithHeaders(
+                new RsEmpty(),
+                "header3: value31", "header3: value32"
+            ),
+            new HmRsHeader("header3", Matchers.<String>iterableWithSize(2))
+        );
+    }
+
+    /**
+     * HmRsHeader can test headers not available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeadersNotAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RsWithHeaders(new RsEmpty(), "header4: value4"),
+            new HmRsHeader("header41", Matchers.<String>iterableWithSize(0))
         );
     }
 }
