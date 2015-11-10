@@ -40,9 +40,9 @@ import org.junit.Test;
 public final class AppITCase {
 
     /**
-     * Port with Takes server.
+     * Home with Takes server.
      */
-    private static final String PORT = System.getProperty("takes.port");
+    private static final String HOME = System.getProperty("takes.home");
 
     /**
      * App can work.
@@ -50,8 +50,8 @@ public final class AppITCase {
      */
     @Test
     public void justWorks() throws Exception {
-        Assume.assumeNotNull(AppITCase.PORT);
-        new JdkRequest(String.format("http://localhost:%s/", AppITCase.PORT))
+        Assume.assumeNotNull(AppITCase.HOME);
+        new JdkRequest(String.format("%s/f", HOME))
             .through(VerboseWire.class)
             .fetch()
             .as(RestResponse.class)
@@ -59,5 +59,4 @@ public final class AppITCase {
             .as(XmlResponse.class)
             .assertXPath("//xhtml:html");
     }
-
 }
