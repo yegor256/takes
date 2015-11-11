@@ -26,7 +26,6 @@ package org.takes.tk;
 import com.jcabi.http.request.JdkRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -114,7 +113,8 @@ public final class TkProxy implements Take {
                 proxied = proxied.header(name, value);
             }
         }
-        if (Arrays.asList("POST", "PUT").contains(method)) {
+        if (headers.header("Content-Length").iterator().hasNext()
+            || headers.header("Transfer-Encoding").iterator().hasNext()) {
             final ByteArrayOutputStream output = new ByteArrayOutputStream();
             new RqPrint(new RqLengthAware(req)).printBody(output);
             proxied = proxied.body().set(output.toByteArray()).back();
@@ -131,7 +131,7 @@ public final class TkProxy implements Take {
      * @return Response
      */
     private Response response(final String home, final String dest,
-            final com.jcabi.http.Response rsp) {
+        final com.jcabi.http.Response rsp) {
         final Collection<String> hdrs = new LinkedList<String>();
         hdrs.add(
             String.format(
