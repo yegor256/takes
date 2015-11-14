@@ -24,12 +24,16 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.takes.Request;
+import org.takes.misc.EntryImpl;
 import org.takes.rq.RqHeaders;
 
 /**
@@ -42,31 +46,42 @@ import org.takes.rq.RqHeaders;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
  * @since 0.23.3
- * @todo #260:30min Implement additional constructors.
- *  According to #260 there should be also available such constructors:
- *  public HmRsHeader(final Matcher<? extends Map.Entry<String,String>> mtchr);
- *  public HmRsHeader(final String header,
- *  final Matcher<? extends Iterable<String>> mtchr);
- *  public HmRsHeader(final String header,
- *  final Matcher<? extends String> mtchr);
- *  public HmRsHeader(final String header, final String value);
  */
 public final class HmRqHeader extends TypeSafeMatcher<Request> {
 
     /**
      * Expected request header matcher.
      */
-    private final transient Matcher<? extends Map<? extends CharSequence,
-        ? extends CharSequence>> matcher;
+    private final transient HeaderMatcher matcher;
 
     /**
-     * Expected matcher.
-     * @param mtchr Is expected header matcher.
+     * Ctor.
+     * @param mtchr Matcher
      */
-    public HmRqHeader(final Matcher<? extends Map<? extends CharSequence,
-        ? extends CharSequence>> mtchr) {
+    public HmRqHeader(
+        final Matcher<? extends Map.Entry<String, String>> mtchr) {
         super();
-        this.matcher = mtchr;
+        this.matcher = new EntryHeaderMatcher(mtchr);
+    }
+
+    /**
+     * Ctor.
+     * @param header Header name
+     * @param mtchr Matcher
+     */
+    public HmRqHeader(final String header,
+        final Matcher<? extends Iterable<String>> mtchr) {
+        super();
+        this.matcher = new IterableHeaderMatcher(header, mtchr);
+    }
+
+    /**
+     * Ctor.
+     * @param header Header name
+     * @param value Header value
+     */
+    public HmRqHeader(final String header, final String value) {
+        this(new EntryMatcher<String, String>(header, value));
     }
 
     /**
@@ -86,38 +101,124 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     @Override
     public boolean matchesSafely(final Request item) {
         try {
-            boolean result = false;
-            final RqHeaders headers = new RqHeaders.Base(item);
-            for (final String name: headers.names()) {
-                if (this.matchHeader(name, headers.header(name))) {
-                    result = true;
-                    break;
-                }
-            }
-            return result;
+            return this.matcher.matches(new RqHeaders.Base(item));
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
     }
 
     /**
-     * Runs matcher against each found pair.
-     * @param name Is header name
-     * @param values Available header values
-     * @return True when expected type matched.
+     * Header matcher.
      */
-    private boolean matchHeader(final String name,
-        final Iterable<String> values) {
-        boolean result = false;
-        for (final String value: values) {
-            if (this.matcher.matches(
-                Collections.singletonMap(name, value)
-            )) {
-                result = true;
-                break;
-            }
-        }
-        return result;
+    private interface HeaderMatcher {
+
+        /**
+         * Performs the matching.
+         *
+         * @param headers Headers to check
+         * @return True if positive match
+         * @throws IOException If fails
+         */
+        boolean matches(final RqHeaders headers) throws IOException;
+
+        /**
+         * Generates a description of the matcher.
+         *
+         * @param description The description to be built or appended to
+         */
+        void describeTo(final Description description);
     }
 
+    /**
+     * Header matcher for {@code Matcher<? extends Map.Entry<String, String>>}.
+     */
+    private static class EntryHeaderMatcher implements HeaderMatcher {
+
+        /**
+         * Matcher.
+         */
+        private final transient
+            Matcher<? extends Map.Entry<String, String>> matcher;
+
+        /**
+         * Ctor.
+         * @param mtchr Matcher
+         */
+        public EntryHeaderMatcher(
+            final Matcher<? extends Entry<String, String>> mtchr) {
+            this.matcher = mtchr;
+        }
+
+        @Override
+        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+        public boolean matches(final RqHeaders headers) throws IOException {
+            boolean result = false;
+            outer:
+            for (final String name : headers.names()) {
+                for (final String value: headers.header(name)) {
+                    final Map.Entry<String, String> entry =
+                        new EntryImpl<String, String>(
+                            name.trim().toLowerCase(Locale.ENGLISH),
+                            value.trim()
+                        );
+                    if (this.matcher.matches(entry)) {
+                        result = true;
+                        break outer;
+                    }
+                }
+            }
+            return result;
+        }
+
+        @Override
+        public void describeTo(final Description description) {
+            this.matcher.describeTo(description);
+        }
+    }
+
+    /**
+     * Header matcher for {@code Matcher<? extends Iterable<String>>}.
+     */
+    private static class IterableHeaderMatcher implements HeaderMatcher {
+
+        /**
+         * Header.
+         */
+        private final transient String header;
+
+        /**
+         * Matcher.
+         */
+        private final transient Matcher<? extends Iterable<String>> matcher;
+
+        /**
+         * Ctor.
+         * @param hdr Header
+         * @param mtchr Matcher
+         */
+        public IterableHeaderMatcher(final String hdr,
+            final Matcher<? extends Iterable<String>> mtchr) {
+            this.header = hdr;
+            this.matcher = mtchr;
+        }
+
+        @Override
+        public boolean matches(final RqHeaders headers) throws IOException {
+            final Collection<String> hdrs = new LinkedList<String>();
+            for (final String name : headers.names()) {
+                final String lower = name.trim().toLowerCase(Locale.ENGLISH);
+                if (lower.equals(this.header)) {
+                    for (final String value : headers.header(name)) {
+                        hdrs.add(value);
+                    }
+                }
+            }
+            return this.matcher.matches(hdrs);
+        }
+
+        @Override
+        public void describeTo(final Description description) {
+            this.matcher.describeTo(description);
+        }
+    }
 }

@@ -28,6 +28,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link org.takes.facets.hamcrest.HmRqHeader}.
@@ -53,7 +55,11 @@ public final class HmRqHeaderTest {
                 ),
                 ""
             ),
-            new HmRqHeader(Matchers.hasEntry("accept", "text/xml"))
+            new HmRqHeader(
+                new EntryMatcher<String, String>(
+                    "accept", "text/xml"
+                )
+            )
         );
     }
 
@@ -74,9 +80,60 @@ public final class HmRqHeaderTest {
             ),
             new HmRqHeader(
                 Matchers.not(
-                    Matchers.hasEntry("host", "fake.org")
+                    new EntryMatcher<String, String>("host", "fake.org")
                 )
             )
+        );
+    }
+
+    /**
+     * HmRqHeader can test header name and value available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeaderNameAndValueAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RqWithHeader(new RqFake(), "header1: value1"),
+            new HmRqHeader("header1", "value1")
+        );
+    }
+
+    /**
+     * HmRqHeader can test header name and value not available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeaderNameAndValueNotAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RqWithHeader(new RqFake(), "header2: value2"),
+            Matchers.not(new HmRqHeader("header2", "value21"))
+        );
+    }
+
+    /**
+     * HmRqHeader can test headers available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeadersAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RqWithHeaders(
+                new RqFake(),
+                "header3: value31", "header3: value32"
+            ),
+            new HmRqHeader("header3", Matchers.<String>iterableWithSize(2))
+        );
+    }
+
+    /**
+     * HmRqHeader can test headers not available.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void testsHeadersNotAvailable() throws Exception {
+        MatcherAssert.assertThat(
+            new RqWithHeaders(new RqFake(), "header4: value4"),
+            new HmRqHeader("header41", Matchers.<String>iterableWithSize(0))
         );
     }
 }

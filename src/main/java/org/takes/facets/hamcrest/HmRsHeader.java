@@ -166,6 +166,7 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
                     );
                 if (this.matcher.matches(entry)) {
                     result = true;
+                    break;
                 }
             }
             return result;
