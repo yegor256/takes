@@ -40,7 +40,7 @@ import org.takes.rq.RqWithHeaders;
 public final class HmRqHeaderTest {
 
     /**
-     * HmRqHeader can test header available.
+     * HmRqHeader can test whether a header is available.
      * @throws Exception If some problem inside
      */
     @Test
@@ -64,11 +64,11 @@ public final class HmRqHeaderTest {
     }
 
     /**
-     * HmRqHeader can test header not available.
+     * HmRqHeader can test whether a header value is not available.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderNotAvailable() throws Exception {
+    public void testsHeaderValueNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqFake(
                 Arrays.asList(
@@ -87,7 +87,7 @@ public final class HmRqHeaderTest {
     }
 
     /**
-     * HmRqHeader can test header name and value available.
+     * HmRqHeader can test whether header name and value are available.
      * @throws Exception If some problem inside
      */
     @Test
@@ -99,11 +99,12 @@ public final class HmRqHeaderTest {
     }
 
     /**
-     * HmRqHeader can test header name and value not available.
+     * HmRqHeader can test whether header name is available
+     * and value is not available.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderNameAndValueNotAvailable() throws Exception {
+    public void testsValueNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeader(new RqFake(), "header2: value2"),
             Matchers.not(new HmRqHeader("header2", "value21"))
@@ -111,11 +112,11 @@ public final class HmRqHeaderTest {
     }
 
     /**
-     * HmRqHeader can test headers available.
+     * HmRqHeader can test whether multiple headers are available.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeadersAvailable() throws Exception {
+    public void testsMultipleHeadersAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeaders(
                 new RqFake(),
@@ -126,11 +127,11 @@ public final class HmRqHeaderTest {
     }
 
     /**
-     * HmRqHeader can test headers not available.
+     * HmRqHeader can test whether a header is not available.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeadersNotAvailable() throws Exception {
+    public void testsHeaderNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeaders(new RqFake(), "header4: value4"),
             new HmRqHeader("header41", Matchers.<String>iterableWithSize(0))

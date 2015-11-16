@@ -153,7 +153,6 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         public boolean matches(final RqHeaders headers) throws IOException {
             boolean result = false;
-            outer:
             for (final String name : headers.names()) {
                 for (final String value: headers.header(name)) {
                     final Map.Entry<String, String> entry =
@@ -163,8 +162,11 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
                         );
                     if (this.matcher.matches(entry)) {
                         result = true;
-                        break outer;
+                        break;
                     }
+                }
+                if (result) {
+                    break;
                 }
             }
             return result;
