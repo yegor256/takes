@@ -72,9 +72,7 @@ public final class RqLive extends RqWrap {
             }
         )
     private static Request parse(final InputStream input) throws IOException {
-        if(input.available() == 0){
-            throw new IOException("empty request");
-        }
+        boolean eof = true;
         final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<Integer>();
@@ -83,6 +81,7 @@ public final class RqLive extends RqWrap {
             if (data.get() < 0) {
                 break;
             }
+            eof = false;
             if (data.get() == '\r') {
                 if (input.read() != '\n') {
                     throw new HttpException(
@@ -120,6 +119,9 @@ public final class RqLive extends RqWrap {
             }
             baos.write(data.get());
             data = new Opt.Empty<Integer>();
+        }
+        if(eof){
+            throw new IOException("empty request");
         }
         return new Request() {
             @Override
