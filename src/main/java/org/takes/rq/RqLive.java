@@ -72,6 +72,9 @@ public final class RqLive extends RqWrap {
             }
         )
     private static Request parse(final InputStream input) throws IOException {
+        if(input.available() == 0){
+            throw new IOException("empty request");
+        }
         final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<Integer>();
