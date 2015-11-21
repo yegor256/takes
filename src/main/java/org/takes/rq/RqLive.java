@@ -62,6 +62,7 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @return Request
      * @throws IOException If fails
+     * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     @SuppressWarnings
         (
@@ -120,7 +121,7 @@ public final class RqLive extends RqWrap {
             baos.write(data.get());
             data = new Opt.Empty<Integer>();
         }
-        if(eof){
+        if (eof) {
             throw new IOException("empty request");
         }
         return new Request() {
