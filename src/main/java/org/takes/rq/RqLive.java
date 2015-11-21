@@ -62,7 +62,6 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @return Request
      * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     @SuppressWarnings
         (
@@ -98,26 +97,10 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 data = new Opt.Single<Integer>(input.read());
-                if (data.get() != ' ' && data.get() != '\t') {
-                    head.add(new String(baos.toByteArray()));
-                    baos.reset();
-                }
+                addHeader(data, baos, head);
                 continue;
             }
-            // @checkstyle MagicNumber (1 line)
-            if ((data.get() > 0x7f || data.get() < 0x20)
-                && data.get() != '\t') {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
-                        data.get(),
-                        head.size() + 1,
-                        new String(baos.toByteArray())
-                    )
-                );
-            }
+            legalCharacterCheck(data, baos, head.size() + 1);
             baos.write(data.get());
             data = new Opt.Empty<Integer>();
         }
@@ -134,6 +117,46 @@ public final class RqLive extends RqWrap {
                 return input;
             }
         };
+    }
+
+    /**
+     * Adds current read header.
+     * @param data Current read character
+     * @param baos Current read header
+     * @param head Headers collection
+     */
+    private static void addHeader(final Opt<Integer> data,
+            final ByteArrayOutputStream baos, final Collection<String> head) {
+        if (data.get() != ' ' && data.get() != '\t') {
+            head.add(new String(baos.toByteArray()));
+            baos.reset();
+        }
+    }
+
+    /**
+     * Checks if the read character is a legal character.
+     * @param data Character read
+     * @param baos Byte stream containing read header
+     * @param position Header line number
+     * @throws HttpException if character is illegal
+     */
+    private static void legalCharacterCheck(final Opt<Integer> data,
+            final ByteArrayOutputStream baos, final Integer position)
+            throws HttpException {
+        // @checkstyle MagicNumber (1 line)
+        if ((data.get() > 0x7f || data.get() < 0x20)
+            && data.get() != '\t') {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
+                    data.get(),
+                    position,
+                    new String(baos.toByteArray())
+                )
+            );
+        }
     }
 
     /**
