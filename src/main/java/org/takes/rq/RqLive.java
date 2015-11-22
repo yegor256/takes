@@ -97,11 +97,13 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 data = new Opt.Single<Integer>(input.read());
-                addHeader(data, baos, head);
+                final Opt<String> header = newHeader(data, baos);
+                if (header.has()) {
+                    head.add(header.get());
+                }
                 continue;
             }
-            legalCharacterCheck(data, baos, head.size() + 1);
-            baos.write(data.get());
+            baos.write(legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
         }
         if (eof) {
@@ -120,27 +122,30 @@ public final class RqLive extends RqWrap {
     }
 
     /**
-     * Adds current read header.
+     * Builds current read header.
      * @param data Current read character
      * @param baos Current read header
-     * @param head Headers collection
+     * @return Read header
      */
-    private static void addHeader(final Opt<Integer> data,
-            final ByteArrayOutputStream baos, final Collection<String> head) {
+    private static Opt<String> newHeader(final Opt<Integer> data,
+            final ByteArrayOutputStream baos) {
+        Opt<String> header = new Opt.Empty<String>();
         if (data.get() != ' ' && data.get() != '\t') {
-            head.add(new String(baos.toByteArray()));
+            header = new Opt.Single<String>(new String(baos.toByteArray()));
             baos.reset();
         }
+        return header;
     }
 
     /**
-     * Checks if the read character is a legal character.
+     * Returns a legal character based n the read character.
      * @param data Character read
      * @param baos Byte stream containing read header
      * @param position Header line number
+     * @return A legal character
      * @throws HttpException if character is illegal
      */
-    private static void legalCharacterCheck(final Opt<Integer> data,
+    private static Integer legalCharacter(final Opt<Integer> data,
             final ByteArrayOutputStream baos, final Integer position)
             throws HttpException {
         // @checkstyle MagicNumber (1 line)
@@ -157,6 +162,7 @@ public final class RqLive extends RqWrap {
                 )
             );
         }
+        return data.get();
     }
 
     /**
