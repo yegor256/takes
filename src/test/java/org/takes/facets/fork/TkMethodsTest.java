@@ -30,6 +30,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
 
 /**
  * Test case for {@link TkMethods}.
@@ -43,10 +44,9 @@ public final class TkMethodsTest {
      */
     @Test
     public void callsActOnProperMethods() throws Exception {
-        final String method = "WHATEVER";
         final Take take = Mockito.mock(Take.class);
-        final Request req = new RqFake(method);
-        new TkMethods(take, method).act(req);
+        final Request req = new RqFake(RqMethod.GET);
+        new TkMethods(take, RqMethod.GET).act(req);
         Mockito.verify(take).act(req);
     }
 
@@ -57,8 +57,8 @@ public final class TkMethodsTest {
     @Test(expected = HttpException.class)
     public void throwsExceptionOnActinOnUnproperMethod() throws
         IOException {
-        new TkMethods(Mockito.mock(Take.class), "PROPER").act(
-            new RqFake("UNPROPER")
+        new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
+            new RqFake(RqMethod.GET)
         );
     }
 }

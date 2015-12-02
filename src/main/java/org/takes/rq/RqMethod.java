@@ -25,6 +25,8 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -94,6 +96,13 @@ public interface RqMethod extends Request {
     final class Base extends RqWrap implements RqMethod {
 
         /**
+         * HTTP method line pattern.
+         */
+        private static final Pattern PATTERN = Pattern.compile(
+            "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) [^ ]+( [^ ]+){0,1}"
+        );
+
+        /**
          * Ctor.
          * @param req Original request
          */
@@ -104,8 +113,31 @@ public interface RqMethod extends Request {
         @Override
         public String method() throws IOException {
             final String line = this.head().iterator().next();
+            final Matcher matcher = PATTERN.matcher(line);
+            if (!matcher.matches()) {
+                throw new InvalidHTTPMethodLineException(line);
+            }
             final String[] parts = line.split(" ", 2);
             return parts[0].toUpperCase(Locale.ENGLISH);
+        }
+    }
+
+    /**
+     * Throwable when an invalid method line is specified in the request.
+     */
+    final class InvalidHTTPMethodLineException extends IOException {
+
+        /**
+         * Serialization marker.
+         */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * Ctor.
+         * @param method The invalid HTTP method line.
+         */
+        public InvalidHTTPMethodLineException(final String method) {
+            super(String.format("Invalid HTTP method line: %s", method));
         }
     }
 }
