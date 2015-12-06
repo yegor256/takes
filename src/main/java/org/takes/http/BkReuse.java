@@ -38,6 +38,7 @@ public final class BkReuse extends BkWrap {
      * Constructor of BkReuse.
      * @param back Origin back-end.
      */
+    @SuppressWarnings("PMD.UnusedFormalParameter")
     public BkReuse(final Back back) {
         super(new Back() {
             @Override

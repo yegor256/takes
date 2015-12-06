@@ -45,11 +45,6 @@ import lombok.EqualsAndHashCode;
 public final class BkParallel extends BkWrap {
 
     /**
-     * Service.
-     */
-    private final transient ExecutorService service;
-
-    /**
      * Ctor.
      *
      * @param back Original back
@@ -98,7 +93,6 @@ public final class BkParallel extends BkWrap {
                         });
             }
         });
-        this.service = svc;
     }
 
     /**

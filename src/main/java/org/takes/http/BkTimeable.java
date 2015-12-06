@@ -48,7 +48,7 @@ public final class BkTimeable extends BkWrap {
         /**
          * Original back.
          */
-        private final Back back;
+        private final transient Back back;
         /**
          * Maximum latency in milliseconds.
          */
@@ -63,7 +63,7 @@ public final class BkTimeable extends BkWrap {
          * @param bck Original back
          * @param msec Execution latency
          */
-        private BkThreads(final long msec, final Back bck) {
+        public BkThreads(final long msec, final Back bck) {
             this.back = bck;
             this.latency = msec;
             final Thread monitor = new Thread(
