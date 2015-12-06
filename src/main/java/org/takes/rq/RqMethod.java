@@ -106,7 +106,7 @@ public interface RqMethod extends Request {
     final class Base extends RqWrap implements RqMethod {
 
         /**
-         * HTTP token separatos which are not already excluded by PATTERN.
+         * HTTP token separators which are not already excluded by PATTERN.
          */
         private static final Pattern SEPARATORS = Pattern.compile(
             "[()<>@,;:\\\"/\\[\\]?={}]"
