@@ -77,6 +77,16 @@ public interface RqMethod extends Request {
     String PATCH = "PATCH";
 
     /**
+     * TRACE method.
+     */
+    String TRACE = "TRACE";
+
+    /**
+     * CONNECT method.
+     */
+    String CONNECT = "CONNECT";
+
+    /**
      * Get method.
      * @return HTTP method
      * @throws IOException If fails
@@ -96,10 +106,18 @@ public interface RqMethod extends Request {
     final class Base extends RqWrap implements RqMethod {
 
         /**
+         * HTTP token separatos which are not already excluded by PATTERN.
+         */
+        private static final Pattern SEPARATORS = Pattern.compile(
+            "[()<>@,;:\\\"/\\[\\]?={}]"
+        );
+
+        /**
          * HTTP method line pattern.
+         * [!-~] is for method or extension-method token (octets 33 - 126).
          */
         private static final Pattern PATTERN = Pattern.compile(
-            "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) [^ ]+( [^ ]+){0,1}"
+            "([!-~]+) [^ ]+( [^ ]+){0,1}"
         );
 
         /**
@@ -117,8 +135,11 @@ public interface RqMethod extends Request {
             if (!matcher.matches()) {
                 throw new InvalidHTTPMethodLineException(line);
             }
-            final String[] parts = line.split(" ", 2);
-            return parts[0].toUpperCase(Locale.ENGLISH);
+            final String method = matcher.group(1);
+            if (SEPARATORS.matcher(method).find()) {
+                throw new InvalidHTTPMethodLineException(line);
+            }
+            return method.toUpperCase(Locale.ENGLISH);
         }
     }
 

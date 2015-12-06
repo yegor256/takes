@@ -51,16 +51,17 @@ public final class RqMethodTest {
     }
 
     /**
-     * RqMethod supports all HTTP methods.
+     * RqMethod supports all standard HTTP methods.
      * @throws IOException If some problem inside
      */
     @Test
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public void supportsAllMethods() throws IOException {
+    public void supportsAllStandardMethods() throws IOException {
         for (final String method
             : Arrays.asList(
                 RqMethod.DELETE, RqMethod.GET, RqMethod.HEAD, RqMethod.OPTIONS,
-                RqMethod.PATCH, RqMethod.POST, RqMethod.PUT
+                RqMethod.PATCH, RqMethod.POST, RqMethod.PUT, RqMethod.TRACE,
+                RqMethod.CONNECT
             )
         ) {
             MatcherAssert.assertThat(
@@ -71,12 +72,16 @@ public final class RqMethodTest {
     }
 
     /**
-     * RqMethod can fail when HTTP method name is not valid.
+     * RqMethod supports extension methods.
      * @throws IOException If some problem inside
      */
-    @Test(expected = InvalidHTTPMethodLineException.class)
-    public void failsOnInvalidName() throws IOException {
-        new RqMethod.Base(new RqFake("get")).method();
+    @Test
+    public void supportsExtensionMethods() throws IOException {
+        final String method = "CUSTOM";
+        MatcherAssert.assertThat(
+            new RqMethod.Base(new RqFake(method)).method(),
+            Matchers.equalTo(method)
+        );
     }
 
     /**
@@ -98,5 +103,27 @@ public final class RqMethodTest {
         new RqMethod.Base(
             new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
         ).method();
+    }
+
+    /**
+     * RqMethod can fail when HTTP method line has any extra spaces
+     * between the elements.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = InvalidHTTPMethodLineException.class)
+    public void failsOnExtraSpaces() throws IOException {
+        new RqMethod.Base(
+            new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
+        ).method();
+    }
+
+    /**
+     * RqMethod can fail when HTTP extension method name contains separator
+     * characters.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = InvalidHTTPMethodLineException.class)
+    public void failsOnSeparatorsInExtensionMethod() throws IOException {
+        new RqMethod.Base(new RqFake("CUSTO{M)")).method();
     }
 }
