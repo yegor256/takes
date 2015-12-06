@@ -112,7 +112,7 @@
         <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
-            <version>1.9.59</version>
+            <version>1.9.64</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -210,7 +210,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.13</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -330,7 +330,7 @@
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>4.0.0</version>
+                        <version>4.1.0</version>
                         <executions>
                             <execution>
                                 <phase>site</phase>
