@@ -32,24 +32,19 @@ import java.net.Socket;
  * @author Piotr Pradzynski (prondzyn@gmail.com)
  * @version $Id$
  */
-public final class BkReuse implements Back {
-
-    /**
-     * Origin back-end.
-     */
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final transient Back origin;
+public final class BkReuse extends BkWrap {
 
     /**
      * Constructor of BkReuse.
      * @param back Origin back-end.
      */
     public BkReuse(final Back back) {
-        this.origin = back;
+        super(new Back() {
+            @Override
+            public void accept(final Socket socket) throws IOException {
+                throw new UnsupportedOperationException();
+            }
+        });
     }
 
-    @Override
-    public void accept(final Socket socket) throws IOException {
-        throw new UnsupportedOperationException();
-    }
 }

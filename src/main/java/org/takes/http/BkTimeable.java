@@ -40,25 +40,77 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.14.2
  */
-@EqualsAndHashCode(of = { "origin", "latency" })
+@EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class BkTimeable implements Back {
+public final class BkTimeable extends BkWrap {
 
-    /**
-     * Original back.
-     */
-    private final transient Back origin;
+    private static final class BkThreads implements Back {
+        /**
+         * Original back.
+         */
+        private final Back back;
+        /**
+         * Maximum latency in milliseconds.
+         */
+        private final transient long latency;
+        /**
+         * Threads storage.
+         */
+        private final transient ConcurrentMap<Thread, Long> threads =
+            new ConcurrentHashMap<Thread, Long>(1);
+        /**
+         * Ctor.
+         * @param bck Original back
+         * @param msec Execution latency
+         */
+        private BkThreads(final long msec, final Back bck) {
+            this.back = bck;
+            this.latency = msec;
+            final Thread monitor = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            BkThreads.this.check();
+                            try {
+                                TimeUnit.SECONDS.sleep(1L);
+                            } catch (final InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                                throw new IllegalStateException(ex);
+                            }
+                        }
+                    }
+                }
+            );
+            monitor.setDaemon(true);
+            monitor.start();
+        }
 
-    /**
-     * Maximum latency in milliseconds.
-     */
-    private final transient long latency;
-
-    /**
-     * Threads storage.
-     */
-    private final transient ConcurrentMap<Thread, Long> threads =
-        new ConcurrentHashMap<Thread, Long>(1);
+        @Override
+        public void accept(final Socket socket) throws IOException {
+            this.threads.put(
+                    Thread.currentThread(),
+                    System.currentTimeMillis()
+            );
+            this.back.accept(socket);
+        }
+        /**
+         * Checking threads storage and interrupt long running threads.
+         */
+        private void check() {
+            for (final Map.Entry<Thread, Long> entry
+                : this.threads.entrySet()) {
+                final long currentTime = System.currentTimeMillis();
+                if (currentTime - entry.getValue() > this.latency) {
+                    final Thread thread = entry.getKey();
+                    if (thread.isAlive()) {
+                        thread.interrupt();
+                    }
+                    this.threads.remove(thread);
+                }
+            }
+        }
+    }
 
     /**
      * Ctor.
@@ -66,46 +118,7 @@ public final class BkTimeable implements Back {
      * @param msec Execution latency
      */
     BkTimeable(final Back back, final long msec) {
-        this.origin = back;
-        this.latency = msec;
-        final Thread monitor = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        BkTimeable.this.check();
-                        try {
-                            TimeUnit.SECONDS.sleep(1L);
-                        } catch (final InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                            throw new IllegalStateException(ex);
-                        }
-                    }
-                }
-            }
-        );
-        monitor.setDaemon(true);
-        monitor.start();
+        super(new BkThreads(msec, back));
     }
 
-    @Override
-    public void accept(final Socket socket) throws IOException {
-        this.threads.put(Thread.currentThread(), System.currentTimeMillis());
-        this.origin.accept(socket);
-    }
-
-    /**
-     * Checking threads storage and interrupt long running threads.
-     */
-    private void check() {
-        for (final Map.Entry<Thread, Long> entry : this.threads.entrySet()) {
-            if (System.currentTimeMillis() - entry.getValue() > this.latency) {
-                final Thread thread = entry.getKey();
-                if (thread.isAlive()) {
-                    thread.interrupt();
-                }
-                this.threads.remove(thread);
-            }
-        }
-    }
 }

@@ -34,19 +34,15 @@ import lombok.EqualsAndHashCode;
 /**
  * Parallel back-end.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>
+ * The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "service" })
-public final class BkParallel implements Back {
-
-    /**
-     * Original back.
-     */
-    private final transient Back origin;
+@EqualsAndHashCode(callSuper = true)
+public final class BkParallel extends BkWrap {
 
     /**
      * Service.
@@ -55,6 +51,7 @@ public final class BkParallel implements Back {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      */
     public BkParallel(final Back back) {
@@ -63,44 +60,45 @@ public final class BkParallel implements Back {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param threads Threads total
      */
     public BkParallel(final Back back, final int threads) {
-        this(
-            back,
-            Executors.newFixedThreadPool(
-                threads, new BkParallel.Threads()
-            )
+        this(back,
+                Executors.newFixedThreadPool(
+                        threads,
+                        new BkParallel.Threads()
+                )
         );
     }
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param svc Executor service
      * @since 0.9
      */
     public BkParallel(final Back back, final ExecutorService svc) {
-        this.origin = back;
-        this.service = svc;
-    }
-
-    @Override
-    @SuppressWarnings("PMD.DoNotUseThreads")
-    public void accept(final Socket socket) {
-        this.service.execute(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        BkParallel.this.origin.accept(socket);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
-                }
+        super(new Back() {
+            @Override
+            @SuppressWarnings("PMD.DoNotUseThreads")
+            public void accept(final Socket socket) {
+                svc.execute(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    back.accept(socket);
+                                } catch (final IOException ex) {
+                                    throw new IllegalStateException(ex);
+                                }
+                            }
+                        });
             }
-        );
+        });
+        this.service = svc;
     }
 
     /**
@@ -111,16 +109,16 @@ public final class BkParallel implements Back {
          * Total threads created so far.
          */
         private final transient AtomicInteger total = new AtomicInteger();
+
         @Override
         @SuppressWarnings("PMD.DoNotUseThreads")
         public Thread newThread(final Runnable runnable) {
             final Thread thread = new Thread(runnable);
             thread.setName(
-                String.format(
-                    "%s-%d",
-                    BkParallel.class.getSimpleName(),
-                    this.total.getAndAdd(1)
-                )
+                    String.format(
+                            "%s-%d",
+                    BkParallel.class.getSimpleName(), this.total.getAndAdd(1)
+                    )
             );
             return thread;
         }

@@ -35,31 +35,26 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
-public final class BkSafe implements Back {
-
-    /**
-     * Original back.
-     */
-    private final transient Back origin;
+@EqualsAndHashCode(callSuper = true)
+public final class BkSafe extends BkWrap {
 
     /**
      * Ctor.
      * @param back Original back
      */
     public BkSafe(final Back back) {
-        this.origin = back;
-    }
-
-    @Override
-    @SuppressWarnings("PMD.AvoidCatchingThrowable")
-    public void accept(final Socket socket) {
-        try {
-            this.origin.accept(socket);
-            // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final Throwable ex) {
-            assert ex != null;
-        }
+        super(new Back() {
+            @Override
+            @SuppressWarnings("PMD.AvoidCatchingThrowable")
+            public void accept(final Socket socket) {
+                try {
+                    back.accept(socket);
+                    // @checkstyle IllegalCatchCheck (1 line)
+                } catch (final Throwable ex) {
+                    assert ex != null;
+                }
+            }
+        });
     }
 
 }
