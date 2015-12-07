@@ -28,7 +28,6 @@ import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqMethod.InvalidHTTPMethodLineException;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
@@ -88,7 +87,7 @@ public final class RqMethodTest {
      * RqMethod can fail when request URI is missing.
      * @throws IOException If some problem inside
      */
-    @Test(expected = InvalidHTTPMethodLineException.class)
+    @Test(expected = IOException.class)
     public void failsOnMissingURI() throws IOException {
         new RqMethod.Base(new RqSimple(Arrays.asList("GET"), null)).method();
     }
@@ -98,7 +97,7 @@ public final class RqMethodTest {
      * elements.
      * @throws IOException If some problem inside
      */
-    @Test(expected = InvalidHTTPMethodLineException.class)
+    @Test(expected = IOException.class)
     public void failsOnExtraLineElement() throws IOException {
         new RqMethod.Base(
             new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
@@ -110,7 +109,7 @@ public final class RqMethodTest {
      * between the elements.
      * @throws IOException If some problem inside
      */
-    @Test(expected = InvalidHTTPMethodLineException.class)
+    @Test(expected = IOException.class)
     public void failsOnExtraSpaces() throws IOException {
         new RqMethod.Base(
             new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
@@ -122,7 +121,7 @@ public final class RqMethodTest {
      * characters.
      * @throws IOException If some problem inside
      */
-    @Test(expected = InvalidHTTPMethodLineException.class)
+    @Test(expected = IOException.class)
     public void failsOnSeparatorsInExtensionMethod() throws IOException {
         new RqMethod.Base(new RqFake("CUSTO{M)")).method();
     }

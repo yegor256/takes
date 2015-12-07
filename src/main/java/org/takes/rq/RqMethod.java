@@ -133,32 +133,24 @@ public interface RqMethod extends Request {
             final String line = this.head().iterator().next();
             final Matcher matcher = PATTERN.matcher(line);
             if (!matcher.matches()) {
-                throw new InvalidHTTPMethodLineException(line);
+                throw invalidHttpMethodLine(line);
             }
             final String method = matcher.group(1);
             if (SEPARATORS.matcher(method).find()) {
-                throw new InvalidHTTPMethodLineException(line);
+                throw invalidHttpMethodLine(line);
             }
             return method.toUpperCase(Locale.ENGLISH);
         }
-    }
-
-    /**
-     * Throwable when an invalid method line is specified in the request.
-     */
-    final class InvalidHTTPMethodLineException extends IOException {
 
         /**
-         * Serialization marker.
+         * Creates IOException for invalid HTTP method line.
+         * @param line Invalid HTTP method line
+         * @return IOException
          */
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Ctor.
-         * @param method The invalid HTTP method line.
-         */
-        public InvalidHTTPMethodLineException(final String method) {
-            super(String.format("Invalid HTTP method line: %s", method));
+        private static IOException invalidHttpMethodLine(final String line) {
+            return new IOException(
+                String.format("Invalid HTTP method line: %s", line)
+            );
         }
     }
 }
