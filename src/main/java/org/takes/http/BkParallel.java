@@ -60,11 +60,12 @@ public final class BkParallel extends BkWrap {
      * @param threads Threads total
      */
     public BkParallel(final Back back, final int threads) {
-        this(back,
-                Executors.newFixedThreadPool(
-                        threads,
-                        new BkParallel.Threads()
-                )
+        this(
+            back,
+            Executors.newFixedThreadPool(
+                threads,
+                new BkParallel.Threads()
+            )
         );
     }
 
@@ -76,11 +77,12 @@ public final class BkParallel extends BkWrap {
      * @since 0.9
      */
     public BkParallel(final Back back, final ExecutorService svc) {
-        super(new Back() {
-            @Override
-            @SuppressWarnings("PMD.DoNotUseThreads")
-            public void accept(final Socket socket) {
-                svc.execute(
+        super(
+            new Back() {
+                @Override
+                @SuppressWarnings("PMD.DoNotUseThreads")
+                public void accept(final Socket socket) {
+                    svc.execute(
                         new Runnable() {
                             @Override
                             public void run() {
@@ -90,9 +92,11 @@ public final class BkParallel extends BkWrap {
                                     throw new IllegalStateException(ex);
                                 }
                             }
-                        });
+                        }
+                    );
+                }
             }
-        });
+        );
     }
 
     /**
@@ -109,10 +113,11 @@ public final class BkParallel extends BkWrap {
         public Thread newThread(final Runnable runnable) {
             final Thread thread = new Thread(runnable);
             thread.setName(
-                    String.format(
-                            "%s-%d",
-                    BkParallel.class.getSimpleName(), this.total.getAndAdd(1)
-                    )
+                String.format(
+                    "%s-%d",
+                    BkParallel.class.getSimpleName(),
+                    this.total.getAndAdd(1)
+                )
             );
             return thread;
         }
