@@ -129,18 +129,15 @@ public final class FtCLI implements Front {
     private Exit exit(final Exit exit) {
         final long start = System.currentTimeMillis();
         final long max = this.options.lifetime();
-        final Exit custom = new Exit() {
-            @Override
-            public boolean ready() {
-                return System.currentTimeMillis() - start > max;
+        return new Exit.Or(
+            exit,
+            new Exit() {
+                @Override
+                public boolean ready() {
+                    return System.currentTimeMillis() - start > max;
+                }
             }
-        };
-        return new Exit() {
-            @Override
-            public boolean ready() {
-                return exit.ready() || custom.ready();
-            }
-        };
+        );
     }
 
 }
