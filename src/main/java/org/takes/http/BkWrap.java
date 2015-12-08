@@ -23,38 +23,33 @@
  */
 package org.takes.http;
 
+import java.io.IOException;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
 /**
- * Safe back-end.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Back Wrap.
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- * @since 0.1
+ *
  */
-@EqualsAndHashCode(callSuper = true)
-public final class BkSafe extends BkWrap {
-
+@EqualsAndHashCode(of = "origin")
+public class BkWrap implements Back {
+    /**
+     * Original back.
+     */
+    private final transient Back origin;
     /**
      * Ctor.
      * @param back Original back
      */
-    public BkSafe(final Back back) {
-        super(new Back() {
-            @Override
-            @SuppressWarnings("PMD.AvoidCatchingThrowable")
-            public void accept(final Socket socket) {
-                try {
-                    back.accept(socket);
-                    // @checkstyle IllegalCatchCheck (1 line)
-                } catch (final Throwable ex) {
-                    assert ex != null;
-                }
-            }
-        });
+    public BkWrap(final Back back) {
+        this.origin = back;
+    }
+
+    @Override
+    public final void accept(final Socket socket) throws IOException {
+        this.origin.accept(socket);
     }
 
 }

@@ -34,27 +34,19 @@ import lombok.EqualsAndHashCode;
 /**
  * Parallel back-end.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>
+ * The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "service" })
-public final class BkParallel implements Back {
-
-    /**
-     * Original back.
-     */
-    private final transient Back origin;
-
-    /**
-     * Service.
-     */
-    private final transient ExecutorService service;
+@EqualsAndHashCode(callSuper = true)
+public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      */
     public BkParallel(final Back back) {
@@ -63,6 +55,7 @@ public final class BkParallel implements Back {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param threads Threads total
      */
@@ -70,34 +63,37 @@ public final class BkParallel implements Back {
         this(
             back,
             Executors.newFixedThreadPool(
-                threads, new BkParallel.Threads()
+                threads,
+                new BkParallel.Threads()
             )
         );
     }
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param svc Executor service
      * @since 0.9
      */
     public BkParallel(final Back back, final ExecutorService svc) {
-        this.origin = back;
-        this.service = svc;
-    }
-
-    @Override
-    @SuppressWarnings("PMD.DoNotUseThreads")
-    public void accept(final Socket socket) {
-        this.service.execute(
-            new Runnable() {
+        super(
+            new Back() {
                 @Override
-                public void run() {
-                    try {
-                        BkParallel.this.origin.accept(socket);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+                @SuppressWarnings("PMD.DoNotUseThreads")
+                public void accept(final Socket socket) {
+                    svc.execute(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    back.accept(socket);
+                                } catch (final IOException ex) {
+                                    throw new IllegalStateException(ex);
+                                }
+                            }
+                        }
+                    );
                 }
             }
         );
@@ -111,6 +107,7 @@ public final class BkParallel implements Back {
          * Total threads created so far.
          */
         private final transient AtomicInteger total = new AtomicInteger();
+
         @Override
         @SuppressWarnings("PMD.DoNotUseThreads")
         public Thread newThread(final Runnable runnable) {
