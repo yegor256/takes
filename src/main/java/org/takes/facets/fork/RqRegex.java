@@ -74,7 +74,7 @@ public interface RqRegex extends Request {
          * @param ptn Pattern
          * @param query Query
          */
-        public Fake(final String ptn, final String query) {
+        public Fake(final String ptn, final CharSequence query) {
             this(new RqFake(), ptn, query);
         }
         /**
@@ -83,12 +83,21 @@ public interface RqRegex extends Request {
          * @param ptn Pattern
          * @param query Query
          */
-        public Fake(final Request req, final String ptn, final String query) {
+        public Fake(final Request req, final String ptn,
+            final CharSequence query) {
+            this(req, Pattern.compile(ptn).matcher(query));
+        }
+        /**
+         * Ctor.
+         * @param req Request
+         * @param matcher Matcher
+         */
+        public Fake(final Request req, final Matcher matcher) {
             this.request = req;
-            this.mtr = Pattern.compile(ptn).matcher(query);
+            this.mtr = matcher;
             if (!this.mtr.matches()) {
                 throw new IllegalArgumentException(
-                    String.format("%s doesn't match %s", query, ptn)
+                    String.format("%s doesn't match %s", req, matcher.pattern())
                 );
             }
         }

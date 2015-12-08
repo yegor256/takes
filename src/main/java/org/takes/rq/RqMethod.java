@@ -25,6 +25,8 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -75,6 +77,16 @@ public interface RqMethod extends Request {
     String PATCH = "PATCH";
 
     /**
+     * TRACE method.
+     */
+    String TRACE = "TRACE";
+
+    /**
+     * CONNECT method.
+     */
+    String CONNECT = "CONNECT";
+
+    /**
      * Get method.
      * @return HTTP method
      * @throws IOException If fails
@@ -94,6 +106,21 @@ public interface RqMethod extends Request {
     final class Base extends RqWrap implements RqMethod {
 
         /**
+         * HTTP token separators which are not already excluded by PATTERN.
+         */
+        private static final Pattern SEPARATORS = Pattern.compile(
+            "[()<>@,;:\\\"/\\[\\]?={}]"
+        );
+
+        /**
+         * HTTP method line pattern.
+         * [!-~] is for method or extension-method token (octets 33 - 126).
+         */
+        private static final Pattern PATTERN = Pattern.compile(
+            "([!-~]+) [^ ]+( [^ ]+){0,1}"
+        );
+
+        /**
          * Ctor.
          * @param req Original request
          */
@@ -104,8 +131,19 @@ public interface RqMethod extends Request {
         @Override
         public String method() throws IOException {
             final String line = this.head().iterator().next();
-            final String[] parts = line.split(" ", 2);
-            return parts[0].toUpperCase(Locale.ENGLISH);
+            final Matcher matcher = PATTERN.matcher(line);
+            if (!matcher.matches()) {
+                throw new IOException(
+                    String.format("Invalid HTTP method line: %s", line)
+                );
+            }
+            final String method = matcher.group(1);
+            if (SEPARATORS.matcher(method).find()) {
+                throw new IOException(
+                    String.format("Invalid HTTP method: %s", method)
+                );
+            }
+            return method.toUpperCase(Locale.ENGLISH);
         }
     }
 }
