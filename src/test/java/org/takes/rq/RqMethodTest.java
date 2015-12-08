@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -46,5 +47,82 @@ public final class RqMethodTest {
             new RqMethod.Base(new RqFake(RqMethod.POST)).method(),
             Matchers.equalTo(RqMethod.POST)
         );
+    }
+
+    /**
+     * RqMethod supports all standard HTTP methods.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    public void supportsAllStandardMethods() throws IOException {
+        for (final String method
+            : Arrays.asList(
+                RqMethod.DELETE, RqMethod.GET, RqMethod.HEAD, RqMethod.OPTIONS,
+                RqMethod.PATCH, RqMethod.POST, RqMethod.PUT, RqMethod.TRACE,
+                RqMethod.CONNECT
+            )
+        ) {
+            MatcherAssert.assertThat(
+                new RqMethod.Base(new RqFake(method)).method(),
+                Matchers.equalTo(method)
+            );
+        }
+    }
+
+    /**
+     * RqMethod supports extension methods.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void supportsExtensionMethods() throws IOException {
+        final String method = "CUSTOM";
+        MatcherAssert.assertThat(
+            new RqMethod.Base(new RqFake(method)).method(),
+            Matchers.equalTo(method)
+        );
+    }
+
+    /**
+     * RqMethod can fail when request URI is missing.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnMissingURI() throws IOException {
+        new RqMethod.Base(new RqSimple(Arrays.asList("GET"), null)).method();
+    }
+
+    /**
+     * RqMethod can fail when HTTP method line has any extra undefined
+     * elements.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnExtraLineElement() throws IOException {
+        new RqMethod.Base(
+            new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
+        ).method();
+    }
+
+    /**
+     * RqMethod can fail when HTTP method line has any extra spaces
+     * between the elements.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnExtraSpaces() throws IOException {
+        new RqMethod.Base(
+            new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
+        ).method();
+    }
+
+    /**
+     * RqMethod can fail when HTTP extension method name contains separator
+     * characters.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void failsOnSeparatorsInExtensionMethod() throws IOException {
+        new RqMethod.Base(new RqFake("CUSTO{M)")).method();
     }
 }
