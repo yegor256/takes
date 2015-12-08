@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
@@ -53,11 +54,26 @@ public final class MainRemote {
     private final transient Class<?> app;
 
     /**
+     * Additional arguments to be passed to the main class.
+     */
+    private final transient String[] addargs;
+
+    /**
      * Ctor.
      * @param type Class with main method
      */
     public MainRemote(final Class<?> type) {
+        this(type, new String[0]);
+    }
+
+    /**
+     * Ctor.
+     * @param type Class with main method
+     * @param args Additional arguments to be passed to the main method
+     */
+    public MainRemote(final Class<?> type, final String... args) {
         this.app = type;
+        this.addargs = Arrays.copyOf(args, args.length);
     }
 
     /**
@@ -71,8 +87,11 @@ public final class MainRemote {
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
         );
-        final String[] args = new String[1];
+        final String[] args = new String[1 + this.addargs.length];
         args[0] = String.format("--port=%s", file.getAbsoluteFile());
+        for (int idx = 0; idx < this.addargs.length; ++idx) {
+            args[idx + 1] = this.addargs[idx];
+        }
         final Thread thread = new Thread(
             new Runnable() {
                 @Override

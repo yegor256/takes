@@ -62,6 +62,27 @@ public final class MainRemoteTest {
     }
 
     /**
+     * MainRemote passes additional arguments.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void passesArgumentsToApp() throws Exception {
+        final String[] addArgs = {"works well!"};
+        new MainRemote(MainRemoteTest.DemoAppArgs.class, addArgs).exec(
+            new MainRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.startsWith("works well"));
+                }
+            }
+        );
+    }
+
+    /**
      * Demo app.
      */
     public static final class DemoApp {
@@ -78,6 +99,26 @@ public final class MainRemoteTest {
          */
         public static void main(final String... args) throws IOException {
             new FtCLI(new TkFixed("works fine!"), args).start(Exit.NEVER);
+        }
+    }
+
+    /**
+     * Demo app.
+     */
+    public static final class DemoAppArgs {
+        /**
+         * Ctor.
+         */
+        private DemoAppArgs() {
+            // it's a utility class
+        }
+        /**
+         * Main entry point.
+         * @param args Command line args
+         * @throws IOException If fails
+         */
+        public static void main(final String... args) throws IOException {
+            new FtCLI(new TkFixed(args[1]), args[0]).start(Exit.NEVER);
         }
     }
 
