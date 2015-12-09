@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 1 active puzzles (27 total), updated on 2015-12-09T11:46:31Z:
+There are 1 active puzzles (27 total), updated on 2015-12-09T12:31:06Z:
 
 unknown ?
 &nbsp;[101](https://github.com/yegor256/takes/issues/101) ?
