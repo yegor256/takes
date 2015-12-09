@@ -67,8 +67,8 @@ public final class MainRemoteTest {
      */
     @Test
     public void passesArgumentsToApp() throws Exception {
-        final String[] addArgs = {"works well!"};
-        new MainRemote(MainRemoteTest.DemoAppArgs.class, addArgs).exec(
+        final String[] args = {"works well!"};
+        new MainRemote(MainRemoteTest.DemoAppArgs.class, args).exec(
             new MainRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
