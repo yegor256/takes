@@ -69,11 +69,11 @@ public final class MainRemote {
     /**
      * Ctor.
      * @param type Class with main method
-     * @param args Additional arguments to be passed to the main method
+     * @param passed Additional arguments to be passed to the main method
      */
-    public MainRemote(final Class<?> type, final String... args) {
+    public MainRemote(final Class<?> type, final String... passed) {
         this.app = type;
-        this.args = Arrays.copyOf(args, args.length);
+        this.args = Arrays.copyOf(passed, passed.length);
     }
 
     /**
@@ -87,17 +87,17 @@ public final class MainRemote {
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
         );
-        final String[] args = new String[1 + this.args.length];
-        args[0] = String.format("--port=%s", file.getAbsoluteFile());
+        final String[] passed = new String[1 + this.args.length];
+        passed[0] = String.format("--port=%s", file.getAbsoluteFile());
         for (int idx = 0; idx < this.args.length; ++idx) {
-            args[idx + 1] = this.args[idx];
+            passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        method.invoke(null, (Object) args);
+                        method.invoke(null, (Object) passed);
                     } catch (final InvocationTargetException ex) {
                         throw new IllegalStateException(ex);
                     } catch (final IllegalAccessException ex) {
