@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 2 active puzzles (29 total), updated on 2015-12-09T15:03:45Z:
+There are 2 active puzzles (29 total), updated on 2015-12-09T16:07:57Z:
 
 
 unknown [`?`](../blob/master/?)<br/>
@@ -30,5 +30,5 @@ unknown [`?`](../blob/master/?)<br/>
 &nbsp;[306](https://github.com/yegor256/takes/issues/306) [`?`](../blob/master/?)<br/>
 &nbsp;&nbsp;**306-0f8af5fd** [`BkReuseTest.java:46-49`](../blob/master/src/test/java/org/takes/http/BkReuseTest.java#L46-L49)<br/>
 &nbsp;&nbsp;306-07904f4e [`BkReuseTest.java:50-53`](../blob/master/src/test/java/org/takes/http/BkReuseTest.java#L50-L53)<br/>
-[377](https://github.com/yegor256/takes/issues/377) [`?`](../blob/master/?)<br/>
-&nbsp;**377-e6ce369a** [`TkProxyTest.java:40-42`](../blob/master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
+&nbsp;[377](https://github.com/yegor256/takes/issues/377) [`?`](../blob/master/?)<br/>
+&nbsp;&nbsp;**377-e6ce369a** [`TkProxyTest.java:40-42`](../blob/master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
