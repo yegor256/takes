@@ -56,7 +56,7 @@ public final class MainRemote {
     /**
      * Additional arguments to be passed to the main class.
      */
-    private final transient String[] addargs;
+    private final transient String[] args;
 
     /**
      * Ctor.
@@ -73,7 +73,7 @@ public final class MainRemote {
      */
     public MainRemote(final Class<?> type, final String... args) {
         this.app = type;
-        this.addargs = Arrays.copyOf(args, args.length);
+        this.args = Arrays.copyOf(args, args.length);
     }
 
     /**
@@ -87,10 +87,10 @@ public final class MainRemote {
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
         );
-        final String[] args = new String[1 + this.addargs.length];
+        final String[] args = new String[1 + this.args.length];
         args[0] = String.format("--port=%s", file.getAbsoluteFile());
-        for (int idx = 0; idx < this.addargs.length; ++idx) {
-            args[idx + 1] = this.addargs[idx];
+        for (int idx = 0; idx < this.args.length; ++idx) {
+            args[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
             new Runnable() {
