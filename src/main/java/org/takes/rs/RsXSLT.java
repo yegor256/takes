@@ -173,12 +173,16 @@ public final class RsXSLT extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        while (true) {
-            final int bytes = input.read(buf);
-            if (bytes < 0) {
-                break;
+        try {
+            while (true) {
+                final int bytes = input.read(buf);
+                if (bytes < 0) {
+                    break;
+                }
+                baos.write(buf, 0, bytes);
             }
-            baos.write(buf, 0, bytes);
+        } finally {
+            input.close();
         }
         return baos.toByteArray();
     }
