@@ -23,11 +23,14 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.misc.MockInputStream;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * Test case for {@link RsVelocity}.
@@ -38,7 +41,7 @@ import org.junit.Test;
 public final class RsVelocityTest {
 
     /**
-     * RsVelocity can build text response.
+     * {@link RsVelocity} can build text response.
      * @throws IOException If some problem inside
      */
     @Test
@@ -54,4 +57,22 @@ public final class RsVelocityTest {
         );
     }
 
+    /**
+     * {@link RsVelocity} should close template's InputStream after serving response.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void closesTemplateInputStream() throws IOException {
+        final MockInputStream templateStream = new MockInputStream("hello, world!");
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsVelocity(
+                    templateStream,
+                    Collections.<CharSequence, Object>emptyMap()
+                ).body()
+            ),
+            Matchers.equalTo("hello, world!")
+        );
+        MatcherAssert.assertThat(templateStream.isClosed(), Matchers.is(true));
+    }
 }
