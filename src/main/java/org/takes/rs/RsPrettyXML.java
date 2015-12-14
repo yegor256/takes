@@ -165,19 +165,19 @@ public final class RsPrettyXML implements Response {
                     && "html".equalsIgnoreCase(doctype.getName())) {
                     transformer.setOutputProperty(OutputKeys.METHOD, "html");
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
-                } else {
-                	if (null != doctype.getSystemId()) {
-	                    transformer.setOutputProperty(
-	                        OutputKeys.DOCTYPE_SYSTEM,
-	                        doctype.getSystemId()
-	                    );
-                	}
-                	if (null != doctype.getPublicId()) {
-	                    transformer.setOutputProperty(
-	                        OutputKeys.DOCTYPE_PUBLIC,
-	                        doctype.getPublicId()
-	                    );
-                	}
+                    return;
+                }
+                if (null != doctype.getSystemId()) {
+                    transformer.setOutputProperty(
+                        OutputKeys.DOCTYPE_SYSTEM,
+                        doctype.getSystemId()
+                    );
+                }
+                if (null != doctype.getPublicId()) {
+                    transformer.setOutputProperty(
+                        OutputKeys.DOCTYPE_PUBLIC,
+                        doctype.getPublicId()
+                    );
                 }
             }
         } finally {

@@ -74,29 +74,35 @@ public final class RsPrettyXMLTest {
             Matchers.containsString("<!DOCTYPE HTML>")
         );
     }
-	
+
     /**
-     * RsPrettyXML can format HTML5 markup with DOCTYPE for legacy browser support.
+     * RsPrettyXML can format HTML5 markup with DOCTYPE for
+     * legacy browser support.
      * @throws IOException If some problem inside
      */
     @Test
+    // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-    			new RsPrettyXML(
-		    	    new RsWithBody(       
-		    	        "<!DOCTYPE html SYSTEM \"about:legacy-compat\"><html><head></head><body></body></html>"
-		    	    )
+                new RsPrettyXML(
+                    new RsWithBody(
+                        Joiner.on("").appendTo(
+                            new StringBuilder("<!DOCTYPE html "),
+                            "SYSTEM \"about:legacy-compat\">",
+                            "<html><head></head><body></body></html>"
+                        ).toString()
+                    )
                 )
             ).printBody(),
             Matchers.is(
                     Joiner.on("").appendTo(
-                        new StringBuilder(
-                        "<!DOCTYPE html\n"),
+                        new StringBuilder("<!DOCTYPE html\n"),
                         "  SYSTEM \"about:legacy-compat\">\n",
                         "<html>\n",
                         "   <head>\n",
-                        "      <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n",
+                        "      <meta http-equiv=\"Content-Type\"",
+                        " content=\"text/html; charset=UTF-8\">\n",
                         "   </head>\n",
                         "   <body></body>\n",
                         "</html>"
