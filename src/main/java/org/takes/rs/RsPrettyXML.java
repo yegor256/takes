@@ -166,14 +166,18 @@ public final class RsPrettyXML implements Response {
                     transformer.setOutputProperty(OutputKeys.METHOD, "html");
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
                 } else {
-                    transformer.setOutputProperty(
-                        OutputKeys.DOCTYPE_SYSTEM,
-                        doctype.getSystemId()
-                    );
-                    transformer.setOutputProperty(
-                        OutputKeys.DOCTYPE_PUBLIC,
-                        doctype.getPublicId()
-                    );
+                	if (null != doctype.getSystemId()) {
+	                    transformer.setOutputProperty(
+	                        OutputKeys.DOCTYPE_SYSTEM,
+	                        doctype.getSystemId()
+	                    );
+                	}
+                	if (null != doctype.getPublicId()) {
+	                    transformer.setOutputProperty(
+	                        OutputKeys.DOCTYPE_PUBLIC,
+	                        doctype.getPublicId()
+	                    );
+                	}
                 }
             }
         } finally {
