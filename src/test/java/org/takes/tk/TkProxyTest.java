@@ -25,11 +25,13 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.URI;
+import com.jcabi.http.Request;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 
 /**
@@ -37,7 +39,7 @@ import org.takes.rs.RsPrint;
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.25
- * @todo #377:30min/DEV We need more tests for TkProxy.
+ *
  *  The tests should verify the different HTTP methods (GET, POST, etc),
  *  as well as the different combinations of request/response headers.
  */
@@ -54,18 +56,144 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(
-                                String.format(
-                                    "%s:%d",
-                                    home.getHost(), home.getPort()
-                                )
-                            ).act(new RqFake())
-                        ).print(),
+                            justAct(home),
                         Matchers.containsString("hello")
                     );
                 }
             }
         );
+    }
+
+    /**
+     * Verifies TkProxy against HTTP methods (GET, POST, OPTIONS, PUT, DELETE)
+     *
+     * @author Aygul Schworer (aygul.schworer@gmail.com)
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void actsOnHttpMethods() throws Exception {
+        for (final String validHttMethod : new String[]{
+                Request.GET, Request.POST, Request.OPTIONS, Request.PUT, Request.DELETE}) {
+            acts(validHttMethod);
+        }
+    }
+
+    /**
+     * Verifies TkProxy against HEAD HTTP method (no response body)
+     *
+     * @author Aygul Schworer (aygul.schworer@gmail.com)
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void actsOnHEAD() throws Exception {
+        new FtRemote(new TkFixed("hello, world!")).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                                responseStr(home, "HEAD"),
+                                Matchers.startsWith("HTTP/1.1 200 OK")
+                        );
+                    }
+                }
+        );
+    }
+
+    /**
+     * Verifies TkProxy against invalid HTTP methods (verifies IO Exception is thrown)
+     *
+     * @author Aygul Schworer (aygul.schworer@gmail.com)
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void actsOnInvalidHttpMethods() throws Exception {
+        acts("INVALIDHTTPMETHOD");
+    }
+
+    /**
+     * Verifies TkProxy against request headers (that the original request has been proxied)
+     * (4 random headers)
+     *
+     * @author Aygul Schworer (aygul.schworer@gmail.com)
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void actsOnReqHeaders() throws Exception {
+        acts("GET",
+                "TestHeader: someValue",
+                "SomeHeader: testValue",
+                "Content-Length: 130",
+                "Transfer-Encoding: blah");
+    }
+
+    /**
+     * Verifies TkProxy against response headers (that the original response has been proxied)
+     *
+     * @author Aygul Schworer (aygul.schworer@gmail.com)
+     *
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void actsOnResHeaders() throws Exception {
+        new FtRemote(new TkFixed("hello, world!")).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                                justAct(home),
+                                Matchers.allOf(
+                                        Matchers.containsString("hello"),
+                                        Matchers.containsString("X-Takes-TkProxy: from "
+                                        )
+                                )
+                        );
+                    }
+                }
+        );
+    }
+
+    private void acts(final String method, final String... rqHeaders) throws Exception {
+        new FtRemote(new TkFixed("hello, world!")).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                                responseStr(home, method, rqHeaders),
+                                Matchers.allOf(
+                                        Matchers.containsString("hello"),
+                                        Matchers.containsString("X-Takes-TkProxy: from ")
+                                )
+                        );
+                    }
+                }
+        );
+    }
+
+    private String justAct(final URI home) throws IOException {
+        return new RsPrint(
+                new TkProxy(
+                        String.format(
+                                "%s:%d",
+                                home.getHost(), home.getPort()
+                        )
+                ).act(new RqFake())
+        ).print();
+    }
+
+    private String responseStr(final URI home, final String method, final String... rqHeaders) throws IOException {
+        return new RsPrint(
+                new TkProxy(
+                        String.format(
+                                "%s:%d",
+                                home.getHost(), home.getPort()
+                        )
+                ).act(new RqWithHeaders(
+                        new RqFake(method, "/"),
+                        rqHeaders))
+        ).print();
     }
 }
