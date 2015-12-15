@@ -36,6 +36,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.takes.misc.MockInputStream;
 
 /**
  * Test case for {@link RsXSLT}.
@@ -121,6 +122,45 @@ public final class RsXSLTTest {
                 )
             ).print(),
             Matchers.endsWith("Hey, Jeffrey!")
+        );
+    }
+
+    /**
+     * RsXSLT closes decorated Response body's InputStream when XML conversion
+     * is done.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void closesDecoratedResponseInputStream() throws IOException {
+        final String xml = Joiner.on(' ').join(
+            "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
+            "<subject>World</subject>"
+        );
+        final String xsl = Joiner.on(' ').join(
+            "<stylesheet xmlns='http://www.w3.org/1999/XSL/Transform'  ",
+            " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0'  >",
+            "<output method='text'/><template match='/'> ",
+            "Hello, <value-of select='/subject'/>!</template></stylesheet>"
+        );
+        final MockInputStream inputStream = new MockInputStream(xml);
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(inputStream),
+                    new URIResolver() {
+                        @Override
+                        public Source resolve(final String href,
+                                              final String base) {
+                            return new StreamSource(new StringReader(xsl));
+                        }
+                    }
+                )
+            ).print(),
+            Matchers.endsWith("Hello, World!")
+        );
+        MatcherAssert.assertThat(
+            inputStream.isClosed(),
+            Matchers.is(true)
         );
     }
 
