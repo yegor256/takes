@@ -80,6 +80,10 @@ public interface RqHref extends Request {
             super(req);
         }
 
+        // @todo #445 RqMethod already validates Request-Line and
+        // extracts HTTP Method from it. We should extract all important
+        // information from Request-Line (HTTP method, URI and HTTP version)
+        // in one place to enforce DRY principle.
         @Override
         public Href href() throws IOException {
             if (!this.head().iterator().hasNext()) {
