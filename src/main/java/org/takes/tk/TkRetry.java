@@ -56,15 +56,15 @@ public final class TkRetry implements Take {
     /**
      * Constructor.
      *
-     * @param retryCount Number of tries
-     * @param retryDelay Between tries
-     * @param originalTake Original take
+     * @param retry Number of tries
+     * @param retrydelay Between tries
+     * @param originaltake Original take
      */
-    public TkRetry(final Integer retryCount, final Integer
-            retryDelay, final Take originalTake) {
-        this.count = retryCount;
-        this.delay = retryDelay;
-        this.take = originalTake;
+    public TkRetry(final Integer retry, final Integer
+            retrydelay, final Take originaltake) {
+        this.count = retry;
+        this.delay = retrydelay;
+        this.take = originaltake;
     }
 
     /**

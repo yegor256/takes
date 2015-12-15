@@ -54,7 +54,7 @@ public final class TkRetryTest {
         final String test = "test";
         MatcherAssert.assertThat(
                 new RsPrint(
-                        new TkRetry(2, 35, new TkText(test))
+                        new TkRetry(2, 2, new TkText(test))
                                 .act(new RqFake())
                 ).print(),
                 Matchers.containsString(test)
