@@ -40,7 +40,7 @@ import org.takes.rs.RsPrint;
 /**
  * Test for TkRetry.
  *
- * @version $Id
+ * @version $Id 7601ff45d71fde024bac703043555d83c08269e7 $
  *
  * @author Aygul Schworer
  * @date 15-Dec-15
@@ -54,11 +54,11 @@ public final class TkRetryTest {
      */
     @Test
     public void justWorks() throws Exception {
-        String test = "test";
+        final String test = "test";
         MatcherAssert.assertThat(
                 new RsPrint(
-                        new TkRetry(2, 1000, new TkText(test)).
-                                act(new RqFake())
+                        new TkRetry(2, 1000, new TkText(test))
+                                .act(new RqFake())
                 ).print(),
                 Matchers.containsString(test)
         );

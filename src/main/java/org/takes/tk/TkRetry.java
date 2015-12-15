@@ -28,14 +28,13 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 
-
 /**
- * Decorator TkRetry, which will not fail immediately on IOException, but will retry a few times.
+ * Decorator TkRetry, which will not fail immediately on IOException, but
+ * will retry a few times.
  *
  * @author Aygul Schworer (agul.schworer@gmail.com)
- * @date 11-Dec-15
  *
- * @version $Id
+ * @version $Id bf59e06884972e4871ee49509f9434fd38388d53 $
  *
  */
 public final class TkRetry implements Take {
@@ -54,11 +53,18 @@ public final class TkRetry implements Take {
      */
     private final Take take;
 
-    public TkRetry(final Integer retryCountMax, final Integer retryBetweenDelays,
-                   final Take originalTake) {
-        this.count = retryCountMax;
-        this.delay = retryBetweenDelays;
-        this.take = originalTake;
+    /**
+     * Constructor.
+     *
+     * @param count number of tries
+     * @param delay between tries
+     * @param take original take
+     */
+    public TkRetry(final Integer count, final Integer
+            delay, final Take take) {
+        this.count = count;
+        this.delay = delay;
+        this.take = take;
     }
 
     /**
@@ -67,7 +73,6 @@ public final class TkRetry implements Take {
      * @param req Request to process
      * @return
      * @throws IOException
-     * @author Aygul Zaynullina
      */
     @Override
     public final Response act(final Request req) throws IOException {
@@ -76,10 +81,10 @@ public final class TkRetry implements Take {
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
-            } catch (IOException ex) {
+            } catch (final IOException ex) {
                 attempts = attempts + 1;
                 exeption = ex;
-                sleep();
+                this.sleep();
             }
         }
         throw exeption;
@@ -87,12 +92,11 @@ public final class TkRetry implements Take {
 
     /**
      * Sleep.
-     *
      */
     private void sleep() {
         try {
             Thread.sleep(this.delay);
-        } catch (InterruptedException ex) {
+        } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
