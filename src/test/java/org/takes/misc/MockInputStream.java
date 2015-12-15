@@ -25,30 +25,41 @@ package org.takes.misc;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Converts supplied string to an input stream encoded as bytes in default encoding.
+ * Converts supplied string to an input stream encoded as bytes in default
+ * encoding.
  *
  * @author I. Sokolov (happy.neko@gmail.com)
+ * @version $Id$
  */
-public class MockInputStream extends ByteArrayInputStream {
-    private volatile boolean closed;
+public final class MockInputStream extends ByteArrayInputStream {
+    /**
+     * Closed stream flag.
+     */
+    private final AtomicBoolean closed = new AtomicBoolean(false);
 
+    /**
+     * Instantiates MockInputStream based on supplied string. String is
+     * converted to bytes stream using default charset encoding.
+     * @param input Source String
+     */
     public MockInputStream(final String input) {
         super(input.getBytes());
-        closed = false;
     }
 
     @Override
     public void close() throws IOException {
         super.close();
-        closed = true;
+        this.closed.set(true);
     }
 
     /**
-     * @return true if stream was closed, otherwise false
+     * Checks whether stream was closed.
+     * @return True if stream was closed, otherwise false
      */
     public boolean isClosed() {
-        return closed;
+        return this.closed.get();
     }
 }
