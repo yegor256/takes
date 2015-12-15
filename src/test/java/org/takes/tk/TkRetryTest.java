@@ -35,10 +35,10 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
 
-
 /**
  * Test for TkRetry.
  *
+ * @author Aygul Schworer (aygul.schworer@gmail.com)
  * @version $Id 7601ff45d71fde024bac703043555d83c08269e7 $
  *
  */
@@ -54,7 +54,7 @@ public final class TkRetryTest {
         final String test = "test";
         MatcherAssert.assertThat(
                 new RsPrint(
-                        new TkRetry(2, 50, new TkText(test))
+                        new TkRetry(2, 35, new TkText(test))
                                 .act(new RqFake())
                 ).print(),
                 Matchers.containsString(test)

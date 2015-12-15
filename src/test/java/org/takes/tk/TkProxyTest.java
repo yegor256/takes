@@ -28,11 +28,11 @@ import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import com.jcabi.http.Request;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
+import com.jcabi.http.Request;
 
 /**
  * Test case for {@link TkProxy}.
@@ -45,14 +45,24 @@ import org.takes.rs.RsPrint;
  */
 public final class TkProxyTest {
 
-    /* Test string. */
+    /**
+     * Test string
+     */
     public static final String HELLO_WORLD = "hello, world!";
 
-    /* Format string. */
+    /**
+     * Format string.
+     */
     public static final String FORMAT = "%s:%d";
 
-    /* Dash constant. */
+    /**
+     *  Dash constant.
+     */
     public static final String DASH = "/";
+
+    /**
+     * Response string.
+     */
     public static final String X_TAKES_TK_PROXY_FROM = "X-Takes-TkProxy: from ";
 
     /**
@@ -62,22 +72,22 @@ public final class TkProxyTest {
     @Test
     public void justWorks() throws Exception {
         new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(
-                                    String.format(
-                                            FORMAT,
-                                            home.getHost(), home.getPort()
-                                    )
-                            ).act(new RqFake())
-                        ).print(),
-                        Matchers.containsString(HELLO_WORLD)
-                    );
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                                new RsPrint(
+                                        new TkProxy(
+                                                String.format(
+                                                        FORMAT,
+                                                        home.getHost(), home.getPort()
+                                                )
+                                        ).act(new RqFake())
+                                ).print(),
+                                Matchers.containsString(HELLO_WORLD)
+                        );
+                    }
                 }
-            }
         );
     }
 
@@ -88,8 +98,10 @@ public final class TkProxyTest {
      */
     @Test
     public void actsOnHttpMethods() throws Exception {
-        for (final String validHttMethod : new String[]{Request.GET,
-                Request.POST, Request.OPTIONS, Request.PUT, Request.DELETE,})
+        for (
+                final String validHttMethod : new String[]{Request.GET,
+                Request.POST, Request.OPTIONS, Request.PUT, Request.DELETE,}
+                )
         {
             this.acts(validHttMethod);
         }
@@ -111,7 +123,8 @@ public final class TkProxyTest {
                                         new TkProxy(
                                                 String.format(
                                                         FORMAT,
-                                                        home.getHost(), home.getPort()
+                                                        home.getHost(),
+                                                        home.getPort()
                                                 )
                                         ).act(new RqWithHeaders(
                                                 new RqFake("HEAD", DASH)))
@@ -139,17 +152,17 @@ public final class TkProxyTest {
      * (that the original request has been proxied).
      * (4 random headers)
      *
-     * @author Aygul Schworer (aygul.schworer@gmail.com)
-     *
      * @throws Exception If some problem inside
      */
     @Test
     public void actsOnReqHeaders() throws Exception {
-        this.acts("GET",
+        this.acts(
+                "GET",
                 "TestHeader: someValue",
                 "SomeHeader: testValue",
                 "Content-Length: 130",
-                "Transfer-Encoding: blah");
+                "Transfer-Encoding: blah"
+        );
     }
 
     /**
@@ -160,7 +173,11 @@ public final class TkProxyTest {
      */
     @Test
     public void actsOnResHeaders() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+        new FtRemote(
+                new TkFixed(
+                        HELLO_WORLD
+                )
+        ).exec(
                 new FtRemote.Script() {
                     @Override
                     public void exec(final URI home) throws IOException {
@@ -202,14 +219,20 @@ public final class TkProxyTest {
                                         new TkProxy(
                                                 String.format(FORMAT,
                                                 home.getHost(), home.getPort())
-                                        ).act(new RqWithHeaders(
+                                        ).act(
+                                                new RqWithHeaders(
                                                 new RqFake(method, DASH),
-                                                headers))
+                                                headers
+                                                )
+                                        )
                                 ).print(),
                                 Matchers.allOf(
-                                        Matchers.containsString(HELLO_WORLD),
-                                        Matchers.containsString
-                                                (X_TAKES_TK_PROXY_FROM)
+                                        Matchers.containsString(
+                                                HELLO_WORLD
+                                        ),
+                                        Matchers.containsString(
+                                                X_TAKES_TK_PROXY_FROM
+                                        )
                                 )
                         );
                     }
