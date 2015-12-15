@@ -28,11 +28,11 @@ import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import com.jcabi.http.Request;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
-import com.jcabi.http.Request;
 
 /**
  * Test case for {@link TkProxy}.
@@ -45,15 +45,15 @@ import com.jcabi.http.Request;
  */
 public final class TkProxyTest {
 
-    /*
-    Test string.
-     */
+    /* Test string. */
     public static final String HELLO_WORLD = "hello, world!";
-    /*
-    Format string.
-     */
+
+    /* Format string. */
     public static final String FORMAT = "%s:%d";
+
+    /* Dash constant. */
     public static final String DASH = "/";
+    public static final String X_TAKES_TK_PROXY_FROM = "X-Takes-TkProxy: from ";
 
     /**
      * TkProxy can work.
@@ -88,9 +88,9 @@ public final class TkProxyTest {
      */
     @Test
     public void actsOnHttpMethods() throws Exception {
-        for (final String validHttMethod : new String[]{Request.GET, Request.POST,
-                Request.OPTIONS, Request.PUT, Request.DELETE,
-        }) {
+        for (final String validHttMethod : new String[]{Request.GET,
+                Request.POST, Request.OPTIONS, Request.PUT, Request.DELETE,})
+        {
             this.acts(validHttMethod);
         }
     }
@@ -176,7 +176,7 @@ public final class TkProxyTest {
                                 Matchers.allOf(
                                         Matchers.containsString(HELLO_WORLD),
                                         Matchers.containsString
-                                                ("X-Takes-TkProxy: from ")
+                                                (X_TAKES_TK_PROXY_FROM)
                                 )
                         );
                     }
@@ -201,8 +201,7 @@ public final class TkProxyTest {
                                 new RsPrint(
                                         new TkProxy(
                                                 String.format(FORMAT,
-                                                        home.getHost(), home.getPort()
-                                                )
+                                                home.getHost(), home.getPort())
                                         ).act(new RqWithHeaders(
                                                 new RqFake(method, DASH),
                                                 headers))
@@ -210,7 +209,7 @@ public final class TkProxyTest {
                                 Matchers.allOf(
                                         Matchers.containsString(HELLO_WORLD),
                                         Matchers.containsString
-                                                ("X-Takes-TkProxy: from ")
+                                                (X_TAKES_TK_PROXY_FROM)
                                 )
                         );
                     }

@@ -56,15 +56,15 @@ public final class TkRetry implements Take {
     /**
      * Constructor.
      *
-     * @param count number of tries
-     * @param delay between tries
-     * @param take original take
+     * @param retryCount Number of tries
+     * @param retryDelay Between tries
+     * @param originalTake Original take
      */
-    public TkRetry(final Integer count, final Integer
-            delay, final Take take) {
-        this.count = count;
-        this.delay = delay;
-        this.take = take;
+    public TkRetry(final Integer retryCount, final Integer
+            retryDelay, final Take originalTake) {
+        this.count = retryCount;
+        this.delay = retryDelay;
+        this.take = originalTake;
     }
 
     /**
@@ -75,7 +75,7 @@ public final class TkRetry implements Take {
      * @throws IOException
      */
     @Override
-    public final Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws IOException {
         int attempts = 0;
         IOException exeption = new IOException();
         while (attempts < this.count) {

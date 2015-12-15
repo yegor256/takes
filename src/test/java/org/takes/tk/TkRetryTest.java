@@ -36,28 +36,25 @@ import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
 
 
-
 /**
  * Test for TkRetry.
  *
  * @version $Id 7601ff45d71fde024bac703043555d83c08269e7 $
  *
- * @author Aygul Schworer
- * @date 15-Dec-15
  */
 public final class TkRetryTest {
 
     /**
      * TkRetry works.
      *
-     * @throws Exception
+     * @throws Exception if something is wrong
      */
     @Test
     public void justWorks() throws Exception {
         final String test = "test";
         MatcherAssert.assertThat(
                 new RsPrint(
-                        new TkRetry(2, 1000, new TkText(test))
+                        new TkRetry(2, 50, new TkText(test))
                                 .act(new RqFake())
                 ).print(),
                 Matchers.containsString(test)
@@ -67,7 +64,7 @@ public final class TkRetryTest {
     /**
      * TkRetry retries when failed with IOException.
      *
-     * @throws Exception
+     * @throws Exception if something is wrong
      */
     @Test(expected = IOException.class)
     public void retries() throws Exception {
@@ -83,10 +80,11 @@ public final class TkRetryTest {
         } catch (final IOException exception) {
             final long stopTime = System.currentTimeMillis();
             final long elapsedTime = stopTime - startTime;
-            MatcherAssert.assertThat(minTimeToFail,
-                    Matchers.lessThanOrEqualTo(elapsedTime));
+            MatcherAssert.assertThat(
+                    minTimeToFail,
+                    Matchers.lessThanOrEqualTo(elapsedTime)
+            );
             throw exception;
         }
     }
-
 }
