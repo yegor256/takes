@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import com.jcabi.http.Request;
 import java.io.IOException;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
@@ -32,7 +33,6 @@ import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
-import com.jcabi.http.Request;
 
 /**
  * Test case for {@link TkProxy}.
@@ -106,7 +106,7 @@ public final class TkProxyTest {
                 Request.OPTIONS,
                 Request.PUT,
                 Request.DELETE,
-        }) {
+            }) {
             this.acts(validHttMethod);
         }
     }
@@ -230,7 +230,7 @@ public final class TkProxyTest {
                                                 new RqWithHeaders(
                                                 new RqFake(
                                                         method, DASH
-                                                ),headers
+                                                ), headers
                                                 )
                                         )
                                 ).print(), Matchers.containsString(HELLO_WORLD)
