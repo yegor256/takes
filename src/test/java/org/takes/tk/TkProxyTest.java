@@ -63,7 +63,12 @@ public final class TkProxyTest {
     /**
      * Response string.
      */
-    public static final String X_TAKES_TK_PROXY_FROM = "X-Takes-TkProxy: from ";
+    public static final String HEADER = "X-Takes-TkProxy:";
+
+    /**
+     * OK response.
+     */
+    public static final String OK = "HTTP/1.1 200 OK";
 
     /**
      * TkProxy can work.
@@ -100,46 +105,15 @@ public final class TkProxyTest {
     @Test
     public void actsOnHttpMethods() throws Exception {
         for (
-            final String validHttMethod : new String[]{
+            final String httpMethod : new String[]{
                 Request.GET,
                 Request.POST,
                 Request.OPTIONS,
                 Request.PUT,
                 Request.DELETE,
             }) {
-            this.acts(validHttMethod);
+            this.acts(httpMethod);
         }
-    }
-
-    /**
-     * Verifies TkProxy against HEAD HTTP method (no response body).
-     *
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void actsOnHEAD() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(
-                                String.format(
-                                    FORMAT, home.getHost(), home.getPort()
-                                )
-                            ).act(
-                                    new RqWithHeaders(
-                                            new RqFake(
-                                                        "HEAD", DASH
-                                            )
-                                    )
-                            )
-                        ).print(), Matchers.startsWith("HTTP/1.1 200 OK")
-                    );
-                }
-            }
-        );
     }
 
     /**
@@ -198,7 +172,7 @@ public final class TkProxyTest {
                             Matchers.allOf(
                                         Matchers.containsString(HELLO_WORLD),
                                         Matchers.containsString(
-                                                X_TAKES_TK_PROXY_FROM
+                                                HEADER
                                         )
                                 )
                         );
@@ -233,7 +207,7 @@ public final class TkProxyTest {
                                                 ), headers
                                                 )
                                         )
-                                ).print(), Matchers.containsString(HELLO_WORLD)
+                                ).print(), Matchers.startsWith(OK)
                         );
                     }
                 }
