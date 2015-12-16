@@ -36,7 +36,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.takes.misc.MockInputStream;
+import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsXSLT}.
@@ -142,7 +142,8 @@ public final class RsXSLTTest {
             "<output method='text'/><template match='/'> ",
             "Hello, <value-of select='/subject'/>!</template></stylesheet>"
         );
-        final MockInputStream inputStream = new MockInputStream(xml);
+        final StateAwareInputStream inputStream =
+            new StateAwareInputStream(IOUtils.toInputStream(xml));
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXSLT(

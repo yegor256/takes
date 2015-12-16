@@ -23,35 +23,46 @@
  */
 package org.takes.misc;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Converts supplied string to an input stream encoded as bytes in default
- * encoding.
+ * InputStream decorator that knows if it was closed or not.
  *
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
  */
-public final class MockInputStream extends ByteArrayInputStream {
+public final class StateAwareInputStream extends InputStream {
+
     /**
-     * Closed stream flag.
+     * Original InputStream.
+     */
+    private final transient InputStream origin;
+
+    /**
+     * Stream was closed flag.
      */
     private final AtomicBoolean closed = new AtomicBoolean(false);
 
     /**
-     * Instantiates MockInputStream based on supplied string. String is
-     * converted to bytes stream using default charset encoding.
-     * @param input Source String
+     * Constructor.
+     *
+     * @param stream InputStream to decorate
      */
-    public MockInputStream(final String input) {
-        super(input.getBytes());
+    public StateAwareInputStream(final InputStream stream) {
+        super();
+        this.origin = stream;
+    }
+
+    @Override
+    public int read() throws IOException {
+        return this.origin.read();
     }
 
     @Override
     public void close() throws IOException {
-        super.close();
+        this.origin.close();
         this.closed.set(true);
     }
 
