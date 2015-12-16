@@ -29,7 +29,7 @@ import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.misc.MockInputStream;
+import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsVelocity}.
@@ -63,7 +63,8 @@ public final class RsVelocityTest {
     @Test
     public void closesTemplateInputStream() throws IOException {
         final String template = "hello, world!";
-        final MockInputStream templateStream = new MockInputStream(template);
+        final StateAwareInputStream templateStream =
+            new StateAwareInputStream(IOUtils.toInputStream(template));
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
