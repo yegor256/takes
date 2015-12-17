@@ -142,12 +142,12 @@ public final class RsXSLTTest {
             "<output method='text'/><template match='/'> ",
             "Hello, <value-of select='/subject'/>!</template></stylesheet>"
         );
-        final StateAwareInputStream inputStream =
+        final StateAwareInputStream stream =
             new StateAwareInputStream(IOUtils.toInputStream(xml));
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXSLT(
-                    new RsText(inputStream),
+                    new RsText(stream),
                     new URIResolver() {
                         @Override
                         public Source resolve(final String href,
@@ -160,7 +160,7 @@ public final class RsXSLTTest {
             Matchers.endsWith("Hello, World!")
         );
         MatcherAssert.assertThat(
-            inputStream.isClosed(),
+            stream.isClosed(),
             Matchers.is(true)
         );
     }
