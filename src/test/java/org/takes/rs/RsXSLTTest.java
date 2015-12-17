@@ -151,7 +151,7 @@ public final class RsXSLTTest {
                     new URIResolver() {
                         @Override
                         public Source resolve(final String href,
-                                              final String base) {
+                            final String base) {
                             return new StreamSource(new StringReader(xsl));
                         }
                     }
