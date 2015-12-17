@@ -128,10 +128,10 @@ public final class RsXSLTTest {
     /**
      * RsXSLT closes decorated Response body's InputStream when XML conversion
      * is done.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void closesDecoratedResponseInputStream() throws IOException {
+    public void closesDecoratedResponseInputStream() throws Exception {
         final String xml = Joiner.on(' ').join(
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
             "<subject>World</subject>"
