@@ -92,16 +92,16 @@ public interface RqHref extends Request {
                     "HTTP Request should have Request-Line"
                 );
             }
-            final String requestLine = this.head().iterator().next();
-            final Matcher uriMatcher =
-                REQUEST_PATTERN.matcher(requestLine);
-            if (!uriMatcher.matches()) {
+            final String line = this.head().iterator().next();
+            final Matcher matcher =
+                REQUEST_PATTERN.matcher(line);
+            if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format("Illegal Request-Line: %s", requestLine)
+                    String.format("Illegal Request-Line: %s", line)
                 );
             }
-            final String uri = uriMatcher.group(2);
+            final String uri = matcher.group(2);
             return new Href(
                 String.format(
                     "http://%s%s",
