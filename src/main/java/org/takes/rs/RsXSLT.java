@@ -236,8 +236,14 @@ public final class RsXSLT extends RsWrap {
         @Override
         public Source resolve(final String href, final String base)
             throws TransformerException {
+            final URI uri;
+            if (base == null) {
+                uri = URI.create(href);
+            } else {
+                uri = URI.create(base).resolve(href);
+            }
             final InputStream input = this.getClass().getResourceAsStream(
-                URI.create(href).getPath()
+                uri.getPath()
             );
             if (input == null) {
                 throw new TransformerException(

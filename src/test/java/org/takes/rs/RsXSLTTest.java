@@ -201,6 +201,21 @@ public final class RsXSLTTest {
             ).print(),
             Matchers.endsWith("Hello, Dan!")
         );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsXSLT(
+                    new RsText(
+                        Joiner.on(' ').join(
+                            "<?xml-stylesheet  ",
+                            " href='/org/takes/rs/includes.xsl'",
+                            "  type='text/xsl' ?>",
+                            "<p><name>Miranda</name></p>"
+                        )
+                    )
+                )
+            ).print(),
+            Matchers.endsWith("Hello, Miranda!")
+        );
     }
 
 }
