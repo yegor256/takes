@@ -140,14 +140,14 @@
         <dependency>
             <groupId>com.jcabi.incubator</groupId>
             <artifactId>xembly</artifactId>
-            <version>0.21.2</version>
+            <version>0.21.4</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.restfb</groupId>
             <artifactId>restfb</artifactId>
-            <version>1.16.0</version>
+            <version>1.17.0</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -194,7 +194,7 @@
         <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>9.6.0-7</version>
+            <version>9.7.0-1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
