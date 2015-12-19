@@ -1,4 +1,4 @@
-<img src="http://www.takes.org/clapper.jpg" width="96px" height="96px"/>
+<img src="http://www.takes.org/logo.svg" width="96px" height="96px"/>
 
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)

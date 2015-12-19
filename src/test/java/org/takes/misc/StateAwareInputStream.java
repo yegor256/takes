@@ -61,9 +61,45 @@ public final class StateAwareInputStream extends InputStream {
     }
 
     @Override
+    public int read(final byte[] buf) throws IOException {
+        return this.origin.read(buf);
+    }
+
+    @Override
+    public int read(final byte[] buf, final int off, final int len) throws
+        IOException {
+        return this.origin.read(buf, off, len);
+    }
+
+    @Override
+    public long skip(final long num) throws IOException {
+        return this.origin.skip(num);
+    }
+
+    @Override
+    public int available() throws IOException {
+        return this.origin.available();
+    }
+
+    @Override
     public void close() throws IOException {
         this.origin.close();
         this.closed.set(true);
+    }
+
+    @Override
+    public void mark(final int readlimit) {
+        this.origin.mark(readlimit);
+    }
+
+    @Override
+    public void reset() throws IOException {
+        this.origin.reset();
+    }
+
+    @Override
+    public boolean markSupported() {
+        return this.origin.markSupported();
     }
 
     /**
