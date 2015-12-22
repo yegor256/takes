@@ -70,10 +70,9 @@ public final class FbLog4j extends FbWrap {
         final PrintWriter writer = new PrintWriter(baos);
         error.printStackTrace(writer);
         writer.close();
-        Logger logger = Logger.getLogger(
-                FbLog4j.class
-        );
-        logger.error(
+        Logger.getLogger(
+            FbLog4j.class
+        ).error(
             String.format(
                 "%s %s failed with %s: %s",
                 new RqMethod.Base(req).method(),
