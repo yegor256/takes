@@ -35,7 +35,6 @@ import org.takes.rq.RqMethod;
 
 /**
  * Fallback that logs all problems through Log4J.
- *
  * @author Igor Piddubnyi (igor.piddubnyi@gmail.com)
  * @version $Id$
  * @since 0.25
@@ -70,16 +69,14 @@ public final class FbLog4j extends FbWrap {
         final PrintWriter writer = new PrintWriter(baos);
         error.printStackTrace(writer);
         writer.close();
-        Logger.getLogger(
-            FbLog4j.class
-        ).error(
-                String.format(
-                    "%s %s failed with %s: %s",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    req.code(),
-                    baos.toString("UTF-8")
-                )
-            );
+        Logger.getLogger(FbLog4j.class).error(
+            String.format(
+                "%s %s failed with %s: %s",
+                new RqMethod.Base(req).method(),
+                new RqHref.Base(req).href(),
+                req.code(),
+                baos.toString("UTF-8")
+            )
+        );
     }
 }

@@ -50,7 +50,7 @@ public final class FbLog4jTest {
     public void logsProblem() throws Exception {
         final ByteArrayOutputStream baos = this.setUpLoggerStream();
         final RqFallback req = new RqFallback.Fake(
-                HttpURLConnection.HTTP_NOT_FOUND
+            HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
             new FbLog4j().route(
@@ -86,7 +86,7 @@ public final class FbLog4jTest {
         );
         writerAppender.activateOptions();
         Logger.getRootLogger().addAppender(
-                writerAppender
+            writerAppender
         );
         return baos;
     }
