@@ -25,9 +25,11 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.w3c.dom.Document;
 import org.xembly.Directive;
 import org.xembly.Directives;
 
@@ -67,6 +69,32 @@ public final class RsXemblyTest {
                 "/root/millis",
                 "/processing-instruction('xml-stylesheet')[contains(.,'/a')]"
             )
+        );
+    }
+
+    /**
+     * RsXembly can modify XML response.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void modifiesXmlResponse() throws Exception {
+        final Document dom = DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .newDocument();
+        final String root = "world";
+        dom.appendChild(dom.createElement(root));
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    dom,
+                    new XeDirectives(
+                        new Directives()
+                            .xpath("/world")
+                            .add("hi")
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPath("/world/hi")
         );
     }
 
