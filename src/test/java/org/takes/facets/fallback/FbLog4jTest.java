@@ -53,20 +53,13 @@ public final class FbLog4jTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
-            new FbLog4j().route(
-                req
-            ).has(),
+            new FbLog4j().route(req).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
-            new String(
-                baos.toByteArray()
-            ),
+            new String(baos.toByteArray()),
             Matchers.stringContainsInOrder(
-                Arrays.asList(
-                    "ERROR",
-                    "failed with"
-                )
+                Arrays.asList("ERROR", "failed with")
             )
         );
     }
@@ -77,17 +70,13 @@ public final class FbLog4jTest {
      */
     private ByteArrayOutputStream setUpLoggerStream() {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final WriterAppender writerAppender = new WriterAppender(
+        final WriterAppender appender = new WriterAppender(
             new SimpleLayout(),
             baos
         );
-        writerAppender.setThreshold(
-            Level.ERROR
-        );
-        writerAppender.activateOptions();
-        Logger.getRootLogger().addAppender(
-            writerAppender
-        );
+        appender.setThreshold(Level.ERROR);
+        appender.activateOptions();
+        Logger.getRootLogger().addAppender(appender);
         return baos;
     }
 }
