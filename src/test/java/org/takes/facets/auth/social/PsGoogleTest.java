@@ -96,7 +96,7 @@ public final class PsGoogleTest {
                 }
             ),
             new FkRegex(
-                "/oauth2/v1/userinfo",
+                "/plus/v1/people/me",
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
@@ -104,7 +104,7 @@ public final class PsGoogleTest {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
-                                "GET /oauth2/v1/userinfo"
+                                "GET /plus/v1/people/me"
                             )
                         );
                         MatcherAssert.assertThat(
@@ -114,11 +114,15 @@ public final class PsGoogleTest {
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
-                                .add("name", "octocat")
+                                .add("displayName", "octocat")
                                 .add("id", "1")
                                 .add(
-                                    "picture",
-                                    "https://google.com/img/octocat.gif"
+                                    "image",
+                                    Json.createObjectBuilder()
+                                        .add(
+                                            "url",
+                                            "https://google.com/img/avatar.gif"
+                                        )
                                 )
                                 .build()
                         );
@@ -148,7 +152,7 @@ public final class PsGoogleTest {
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get("picture"),
-                        Matchers.equalTo("https://google.com/img/octocat.gif")
+                        Matchers.equalTo("https://google.com/img/avatar.gif")
                     );
                 }
             }
