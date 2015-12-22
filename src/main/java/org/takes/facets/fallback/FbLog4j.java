@@ -73,13 +73,13 @@ public final class FbLog4j extends FbWrap {
         Logger.getLogger(
             FbLog4j.class
         ).error(
-            String.format(
-                "%s %s failed with %s: %s",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                req.code(),
-                baos.toString("UTF-8")
-            )
-        );
+                String.format(
+                    "%s %s failed with %s: %s",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    req.code(),
+                    baos.toString("UTF-8")
+                )
+            );
     }
 }
