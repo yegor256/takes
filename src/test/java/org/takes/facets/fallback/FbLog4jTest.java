@@ -23,7 +23,10 @@
  */
 package org.takes.facets.fallback;
 
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.util.Arrays;
+import org.apache.log4j.*;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -42,12 +45,46 @@ public final class FbLog4jTest {
      */
     @Test
     public void logsProblem() throws Exception {
+        ByteArrayOutputStream baos = setUpLoggerStream();
         final RqFallback req = new RqFallback.Fake(
                 HttpURLConnection.HTTP_NOT_FOUND
         );
+        FbLog4j fbLog4j = new FbLog4j();
         MatcherAssert.assertThat(
-                new FbLog4j().route(req).has(),
-                Matchers.is(false)
+            fbLog4j.route(
+                req
+            ).has(),
+            Matchers.is(false)
         );
+        MatcherAssert.assertThat(
+            new String(
+                baos.toByteArray()
+            ),
+            Matchers.stringContainsInOrder(
+                Arrays.asList(
+                    "ERROR",
+                    "failed with"
+                )
+            )
+        );
+    }
+
+    /**
+     * Helper method to set up stream
+     */
+    private ByteArrayOutputStream setUpLoggerStream() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        WriterAppender writerAppender = new WriterAppender(
+            new SimpleLayout(),
+            baos
+        );
+        writerAppender.setThreshold(
+            Level.ERROR
+        );
+        writerAppender.activateOptions();
+        Logger.getRootLogger().addAppender(
+                writerAppender
+        );
+        return baos;
     }
 }
