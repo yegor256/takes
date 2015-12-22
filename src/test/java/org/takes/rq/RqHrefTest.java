@@ -25,9 +25,11 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.HttpException;
 
 /**
  * Test case for {@link RqHref.Base}.
@@ -56,6 +58,36 @@ public final class RqHrefTest {
             ).href().toString(),
             Matchers.equalTo("http://www.example.com/h?a=3")
         );
+    }
+
+    /**
+     * RqHref.Base should throw {@link HttpException} when parsing
+     * Request without Request-Line.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = HttpException.class)
+    public void failsOnAbsentRequestLine() throws IOException {
+        new RqHref.Base(
+            new RqSimple(Collections.<String>emptyList(), null)
+        ).href();
+    }
+
+    /**
+     * RqHref.Base should throw {@link HttpException} when parsing
+     * Request with illegal Request-Line.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = HttpException.class)
+    public void failsOnIllegalRequestLine() throws IOException {
+        new RqHref.Base(
+            new RqFake(
+                Arrays.asList(
+                    "GIVE/contacts",
+                    "Host: 2.example.com"
+                ),
+                ""
+            )
+        ).href();
     }
 
     /**
