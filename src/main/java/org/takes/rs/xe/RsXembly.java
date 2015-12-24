@@ -32,8 +32,11 @@ import java.net.HttpURLConnection;
 import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
@@ -138,9 +141,10 @@ public final class RsXembly extends RsWrap {
      */
     private static InputStream render(final Node dom,
         final XeSource src) throws IOException {
+        final Node copy = cloneNode(dom);
         final ByteArrayOutputStream baos =
             new ByteArrayOutputStream();
-        final Node node = new Xembler(src.toXembly()).applyQuietly(dom);
+        final Node node = new Xembler(src.toXembly()).applyQuietly(copy);
         try {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
@@ -163,6 +167,26 @@ public final class RsXembly extends RsWrap {
                 .newDocument();
         } catch (final ParserConfigurationException ex) {
             throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * Create Node clone.
+     * @param dom Node to clone
+     * @return Cloned Node
+     */
+    private static Node cloneNode(final Node dom) {
+        try {
+            final Transformer transformer =
+                TransformerFactory.newInstance().newTransformer();
+            final DOMSource source = new DOMSource(dom);
+            final DOMResult result = new DOMResult();
+            transformer.transform(source, result);
+            return result.getNode();
+        } catch (final TransformerConfigurationException ex) {
+            throw new IllegalStateException(ex);
+        } catch (final TransformerException ex) {
+            throw new IllegalArgumentException(ex);
         }
     }
 }

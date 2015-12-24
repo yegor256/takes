@@ -28,6 +28,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xembly.Directive;
@@ -83,6 +84,7 @@ public final class RsXemblyTest {
             .newDocument();
         final String root = "world";
         dom.appendChild(dom.createElement(root));
+        final String query = "/world/hi";
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -94,8 +96,13 @@ public final class RsXemblyTest {
                     )
                 ).body()
             ),
-            XhtmlMatchers.hasXPath("/world/hi")
+            XhtmlMatchers.hasXPath(query)
+        );
+        MatcherAssert.assertThat(
+            dom,
+            Matchers.not(
+                XhtmlMatchers.hasXPath(query)
+            )
         );
     }
-
 }
