@@ -43,7 +43,16 @@ public final class RqWithBodyTest {
     public void returnsBody() throws Exception {
         final String body = "body";
         MatcherAssert.assertThat(
-            new RqPrint(new RqWithBody(new RqFake(), body)).printBody(),
+            new RqPrint(
+                new RqWithBody(
+                    new RqWithHeader(
+                        new RqFake(),
+                        "Content-Length",
+                        String.valueOf(body.getBytes().length)
+                    ),
+                    body
+                )
+            ).printBody(),
             Matchers.equalTo(body)
         );
     }

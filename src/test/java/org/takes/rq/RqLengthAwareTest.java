@@ -94,7 +94,8 @@ public final class RqLengthAwareTest {
             new RqFake(
                 Arrays.asList(
                     "GET /test1",
-                    "Host: b.example.com"
+                    "Host: b.example.com",
+                    contentLengthHeader(data.getBytes().length)
                 ),
                 data
             )
@@ -121,7 +122,8 @@ public final class RqLengthAwareTest {
                 Arrays.asList(
                     "GET /test2",
                     "Host: c.example.com",
-                    "Content-type: text/csv"
+                    "Content-type: text/csv",
+                    contentLengthHeader(data.getBytes().length)
                 ),
                 data
             )
@@ -147,7 +149,8 @@ public final class RqLengthAwareTest {
             new RqFake(
                 Arrays.asList(
                     "GET /test3",
-                    "Host: d.example.com"
+                    "Host: d.example.com",
+                    contentLengthHeader(data.getBytes().length)
                 ),
                 data
             )
@@ -165,5 +168,14 @@ public final class RqLengthAwareTest {
             stream.available(),
             Matchers.equalTo(data.length() - len)
         );
+    }
+
+    /**
+     * Format Content-Length header.
+     * @param length Body length
+     * @return Content-Length header
+     */
+    private static String contentLengthHeader(final long length) {
+        return String.format("Content-Length: %d", length);
     }
 }

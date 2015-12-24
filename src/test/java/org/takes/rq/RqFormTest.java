@@ -43,14 +43,19 @@ public final class RqFormTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
+        final String body = "alpha=a+b+c&beta=%20Yes%20";
         final RqForm req = new RqForm.Base(
             new RqBuffered(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
-                        "Host: www.example.com"
+                        "Host: www.example.com",
+                        String.format(
+                            "Content-Length: %d",
+                            body.getBytes().length
+                        )
                     ),
-                    "alpha=a+b+c&beta=%20Yes%20"
+                    body
                 )
             )
         );
