@@ -104,8 +104,8 @@ public final class TkRetryTest {
         final int delay = 1000;
         final Take take = Mockito.mock(Take.class);
         Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
-                new IOException()).thenReturn(new RsText()
-        );
+                new IOException()
+        ).thenReturn(new RsText());
         final long minTime = delay;
         final long startTime = System.currentTimeMillis();
         new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET));
