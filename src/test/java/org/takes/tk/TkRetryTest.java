@@ -34,18 +34,19 @@ import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
- * Test for TkRetry.
+ * TkRetry can retry till success or retry count is reached.
  *
  * @author Aygul Schworer (aygul.schworer@gmail.com)
- * @version $Id$
- *
+ * @version $Id 7601ff45d71fde024bac703043555d83c08269e7 $
+ * @since 0.28.3
  */
 public final class TkRetryTest {
 
     /**
-     * TkRetry works.
+     * TkRetry can work when no no IOException.
      *
      * @throws Exception if something is wrong
      */
@@ -62,29 +63,47 @@ public final class TkRetryTest {
     }
 
     /**
-     * TkRetry retries when failed with IOException.
+     * TkRetry can retry when initial take fails with IOException, till retry count is reached.
      *
      * @throws Exception if something is wrong
      */
     @Test(expected = IOException.class)
-    public void retries() throws Exception {
+    public void retriesOnExceptionTillCount() throws Exception {
         final int count = 3;
         final int delay = 1000;
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
-        Mockito.when(take.act(req)).thenThrow(new IOException());
+        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(new IOException());
         final long minTimeToFail = count * delay;
         final long startTime = System.currentTimeMillis();
         try {
             new TkRetry(count, delay, take).act(req);
         } catch (final IOException exception) {
-            final long stopTime = System.currentTimeMillis();
-            final long elapsedTime = stopTime - startTime;
             MatcherAssert.assertThat(
                     minTimeToFail,
-                    Matchers.lessThanOrEqualTo(elapsedTime)
+                    Matchers.lessThanOrEqualTo(System.currentTimeMillis() - startTime)
             );
             throw exception;
         }
+    }
+
+    /**
+     * TkRetry can retry when initial take fails with IOException, till get successful result.
+     *
+     * @throws Exception if something is wrong
+     */
+    @Test
+    public void retriesOnExceptionTillSuccess() throws Exception {
+        final int count = 3;
+        final int delay = 1000;
+        final Take take = Mockito.mock(Take.class);
+        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(new IOException()).thenReturn(new RsText());
+        final long minTime = delay;
+        final long startTime = System.currentTimeMillis();
+        new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET));
+        MatcherAssert.assertThat(
+            minTime,
+            Matchers.lessThanOrEqualTo(System.currentTimeMillis() - startTime)
+        );
     }
 }

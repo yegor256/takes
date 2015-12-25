@@ -33,9 +33,8 @@ import org.takes.Take;
  * will retry a few times.
  *
  * @author Aygul Schworer (agul.schworer@gmail.com)
- *
- * @version $Id$
- *
+ * @version $Id bf59e06884972e4871ee49509f9434fd38388d53 $
+ * @since 0.28.3
  */
 public final class TkRetry implements Take {
 
