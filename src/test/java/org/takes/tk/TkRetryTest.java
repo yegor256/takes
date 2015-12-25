@@ -75,7 +75,8 @@ public final class TkRetryTest {
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
         Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
-                new IOException());
+                new IOException()
+        );
         final long minTimeToFail = count * delay;
         final long startTime = System.currentTimeMillis();
         try {
@@ -84,7 +85,8 @@ public final class TkRetryTest {
             MatcherAssert.assertThat(
                 minTimeToFail,
                 Matchers.lessThanOrEqualTo(
-                        System.currentTimeMillis() - startTime)
+                        System.currentTimeMillis() - startTime
+                )
             );
             throw exception;
         }
@@ -102,7 +104,8 @@ public final class TkRetryTest {
         final int delay = 1000;
         final Take take = Mockito.mock(Take.class);
         Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
-                new IOException()).thenReturn(new RsText());
+                new IOException()).thenReturn(new RsText()
+        );
         final long minTime = delay;
         final long startTime = System.currentTimeMillis();
         new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET));
