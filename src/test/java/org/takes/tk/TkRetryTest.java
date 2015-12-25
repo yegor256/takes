@@ -63,7 +63,8 @@ public final class TkRetryTest {
     }
 
     /**
-     * TkRetry can retry when initial take fails with IOException, till retry count is reached.
+     * TkRetry can retry when initial take fails with IOException,
+     * till retry count is reached.
      *
      * @throws Exception if something is wrong
      */
@@ -73,22 +74,25 @@ public final class TkRetryTest {
         final int delay = 1000;
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
-        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(new IOException());
+        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
+                new IOException());
         final long minTimeToFail = count * delay;
         final long startTime = System.currentTimeMillis();
         try {
             new TkRetry(count, delay, take).act(req);
         } catch (final IOException exception) {
             MatcherAssert.assertThat(
-                    minTimeToFail,
-                    Matchers.lessThanOrEqualTo(System.currentTimeMillis() - startTime)
+                minTimeToFail,
+                Matchers.lessThanOrEqualTo(
+                        System.currentTimeMillis() - startTime)
             );
             throw exception;
         }
     }
 
     /**
-     * TkRetry can retry when initial take fails with IOException, till get successful result.
+     * TkRetry can retry when initial take fails with IOException,
+     * till get successful result.
      *
      * @throws Exception if something is wrong
      */
@@ -97,7 +101,8 @@ public final class TkRetryTest {
         final int count = 3;
         final int delay = 1000;
         final Take take = Mockito.mock(Take.class);
-        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(new IOException()).thenReturn(new RsText());
+        Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
+                new IOException()).thenReturn(new RsText());
         final long minTime = delay;
         final long startTime = System.currentTimeMillis();
         new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET));
