@@ -46,12 +46,12 @@ import org.takes.rs.RsText;
 public final class TkRetryTest {
 
     /**
-     * TkRetry can work when no no IOException.
+     * TkRetry can work when no IOException.
      *
      * @throws Exception if something is wrong
      */
     @Test
-    public void justWorks() throws Exception {
+    public void worksWithNoException() throws Exception {
         final String test = "test";
         MatcherAssert.assertThat(
                 new RsPrint(
@@ -77,13 +77,12 @@ public final class TkRetryTest {
         Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
                 new IOException()
         );
-        final long minTimeToFail = count * delay;
         final long startTime = System.currentTimeMillis();
         try {
             new TkRetry(count, delay, take).act(req);
         } catch (final IOException exception) {
             MatcherAssert.assertThat(
-                minTimeToFail,
+                new Long(count * delay),
                 Matchers.lessThanOrEqualTo(
                         System.currentTimeMillis() - startTime
                 )
@@ -106,11 +105,10 @@ public final class TkRetryTest {
         Mockito.when(take.act(Mockito.any(Request.class))).thenThrow(
                 new IOException()
         ).thenReturn(new RsText());
-        final long minTime = delay;
         final long startTime = System.currentTimeMillis();
         new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET));
         MatcherAssert.assertThat(
-            minTime,
+            new Long(delay),
             Matchers.lessThanOrEqualTo(System.currentTimeMillis() - startTime)
         );
     }
