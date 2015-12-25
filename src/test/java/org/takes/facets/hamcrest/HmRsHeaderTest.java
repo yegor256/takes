@@ -27,7 +27,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rs.RsEmpty;
-import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithHeaders;
 
@@ -40,52 +39,14 @@ import org.takes.rs.RsWithHeaders;
 public final class HmRsHeaderTest {
 
     /**
-     * HmRsHeader can test header available.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void testsHeaderAvailable() throws Exception {
-        MatcherAssert.assertThat(
-            new RsWithHeader(
-                new RsWithBody("<html>Hello</html>"),
-                "content-encoding: gzip"
-            ),
-            new HmRsHeader(
-                new EntryMatcher<String, String>(
-                    "content-encoding", "gzip"
-                )
-            )
-        );
-    }
-
-    /**
-     * HmRsHeader can test header not available.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void testsHeaderNotAvailable() throws Exception {
-        MatcherAssert.assertThat(
-            new RsWithBody("<html></html>"),
-            new HmRsHeader(
-                Matchers.not(
-                    new EntryMatcher<String, String>(
-                        "cache-control",
-                        "no-cache, no-store"
-                    )
-                )
-            )
-        );
-    }
-
-    /**
      * HmRsHeader can test header name and value available.
      * @throws Exception If some problem inside
      */
     @Test
     public void testsHeaderNameAndValueAvailable() throws Exception {
         MatcherAssert.assertThat(
-            new RsWithHeader("header1: value1"),
-            new HmRsHeader("header1", "value1")
+            new RsWithHeader("heAdEr1: value1"),
+            new HmRsHeader("HEAder1", "value1")
         );
     }
 
@@ -110,9 +71,9 @@ public final class HmRsHeaderTest {
         MatcherAssert.assertThat(
             new RsWithHeaders(
                 new RsEmpty(),
-                "header3: value31", "header3: value32"
+                "header3: value31", "HEADER3: value32"
             ),
-            new HmRsHeader("header3", Matchers.<String>iterableWithSize(2))
+            new HmRsHeader("Header3", Matchers.<String>iterableWithSize(2))
         );
     }
 
