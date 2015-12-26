@@ -25,6 +25,7 @@ package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.takes.Response;
 
@@ -47,12 +48,20 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
     private static final String FEATURE_NAME = "HTTP status code";
 
     /**
-     * Expected matcher.
-     * @param val Value
+     * Create matcher using HTTP code.
+     * @param val HTTP code value
      * @since 0.17
      */
     public HmRsStatus(final int val) {
-        super(Matchers.equalTo(val), FEATURE_NAME, FEATURE_NAME);
+        this(Matchers.equalTo(val));
+    }
+
+    /**
+     * Create matcher using HTTP code matcher.
+     * @param matcher HTTP code matcher
+     */
+    public HmRsStatus(final Matcher<Integer> matcher) {
+        super(matcher, FEATURE_NAME, FEATURE_NAME);
     }
 
     @Override
