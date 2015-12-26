@@ -27,8 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -64,15 +62,6 @@ public interface RqHref extends Request {
     final class Base extends RqWrap implements RqHref {
 
         /**
-         * HTTP Request-Line pattern.
-         * @see <a href="http://www
-         * .w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
-         */
-        private static final Pattern REQUEST_PATTERN = Pattern.compile(
-            "([!-~]+) ([^ ]+)( [^ ]+)?"
-        );
-
-        /**
          * Ctor.
          * @param req Original request
          */
@@ -80,28 +69,10 @@ public interface RqHref extends Request {
             super(req);
         }
 
-        // @todo #445:30min/DEV RqMethod already validates Request-Line and
-        //  extracts HTTP Method from it. We should extract all important
-        //  information from Request-Line (HTTP method, URI and HTTP version)
-        //  in one place to enforce DRY principle.
         @Override
         public Href href() throws IOException {
-            if (!this.head().iterator().hasNext()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    "HTTP Request should have Request-Line"
-                );
-            }
-            final String line = this.head().iterator().next();
-            final Matcher matcher =
-                REQUEST_PATTERN.matcher(line);
-            if (!matcher.matches()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format("Illegal Request-Line: %s", line)
-                );
-            }
-            final String uri = matcher.group(2);
+            final String uri = new RqRequestLine.Base(this)
+                    .requestLineHeaderToken(RqRequestLine.URI);
             return new Href(
                 String.format(
                     "http://%s%s",
