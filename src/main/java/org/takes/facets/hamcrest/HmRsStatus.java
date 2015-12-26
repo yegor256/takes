@@ -44,7 +44,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
     /**
      * Description message.
      */
-    private static final String DESCRIPTION_MESSAGE = "HTTP status code";
+    private static final String FEATURE_NAME = "HTTP status code";
 
     /**
      * Expected matcher.
@@ -52,7 +52,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
      * @since 0.17
      */
     public HmRsStatus(final int val) {
-        super(Matchers.equalTo(val), DESCRIPTION_MESSAGE, DESCRIPTION_MESSAGE);
+        super(Matchers.equalTo(val), FEATURE_NAME, FEATURE_NAME);
     }
 
     @Override
