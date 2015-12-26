@@ -37,6 +37,7 @@ import org.takes.HttpException;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class RqRequestLineTest {
 
     /**

@@ -88,7 +88,7 @@ public interface RqRequestLine extends Request {
          * @see <a href="http://www
          * .w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
-        static final Pattern REQUEST_LINE_PATTERN = Pattern.compile(
+        private static final Pattern PATTERN = Pattern.compile(
                 "([!-~]+) ([^ ]+)( [^ ]+)?"
                 );
 
@@ -133,7 +133,7 @@ public interface RqRequestLine extends Request {
                         );
             }
             final String line = this.head().iterator().next();
-            final Matcher matcher = REQUEST_LINE_PATTERN.matcher(line);
+            final Matcher matcher = PATTERN.matcher(line);
             if (!matcher.matches()) {
                 throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
@@ -146,15 +146,14 @@ public interface RqRequestLine extends Request {
             if (index != null) {
                 final String token = matcher.group(index);
                 final String result;
-                if (token != null) {
-                    result = token.trim();
-                } else {
+                if (token == null) {
                     result = token;
+                } else {
+                    result = token.trim();
                 }
                 return result;
-            } else {
-                return line;
             }
+            return line;
         }
     }
 }
