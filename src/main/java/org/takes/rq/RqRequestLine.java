@@ -40,7 +40,6 @@ import org.takes.Request;
  * @version $Id$
  * @since 1.0
  */
-@EqualsAndHashCode(callSuper = true)
 public interface RqRequestLine extends Request {
 
     /**
