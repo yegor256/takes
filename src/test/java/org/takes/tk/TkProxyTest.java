@@ -118,8 +118,11 @@ public final class TkProxyTest {
                             String.format(
                                 FORMAT, home.getHost(), home.getPort()
                             )
-                        ).act(new RqWithHeaders(
-                            new RqFake("GET", DASH), headers))
+                        ).act(
+                            new RqWithHeaders(
+                                new RqFake("GET", DASH), headers
+                            )
+                        )
                         ).print(),
                         Matchers.startsWith(OK)
                     );
@@ -135,8 +138,11 @@ public final class TkProxyTest {
                             String.format(
                                 FORMAT, home.getHost(), home.getPort()
                             )
-                        ).act(new RqWithHeaders(
-                            new RqFake("POST", DASH), headers))
+                        ).act(
+                            new RqWithHeaders(
+                                new RqFake("POST", DASH), headers
+                            )
+                        )
                         ).print(),
                         Matchers.startsWith(OK)
                     );
@@ -152,8 +158,11 @@ public final class TkProxyTest {
                             String.format(
                                 FORMAT, home.getHost(), home.getPort()
                             )
-                        ).act(new RqWithHeaders(
-                            new RqFake("OPTIONS", DASH), headers))
+                        ).act(
+                            new RqWithHeaders(
+                                new RqFake("OPTIONS", DASH), headers
+                            )
+                        )
                         ).print(),
                         Matchers.startsWith(OK)
                     );
@@ -169,8 +178,11 @@ public final class TkProxyTest {
                             String.format(
                                 FORMAT, home.getHost(), home.getPort()
                             )
-                        ).act(new RqWithHeaders(
-                            new RqFake("PUT", DASH), headers))
+                        ).act(
+                            new RqWithHeaders(
+                                new RqFake("PUT", DASH), headers
+                            )
+                        )
                         ).print(),
                         Matchers.startsWith(OK)
                     );
@@ -183,11 +195,14 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(new TkProxy(
-                            String.format(
-                                FORMAT, home.getHost(), home.getPort()
+                                String.format(
+                                    FORMAT, home.getHost(), home.getPort()
+                                )
+                            ).act(
+                                new RqWithHeaders(
+                                    new RqFake("DELETE", DASH), headers
+                                )
                             )
-                        ).act(new RqWithHeaders(
-                            new RqFake("DELETE", DASH), headers))
                         ).print(),
                         Matchers.startsWith(OK)
                     );
@@ -208,8 +223,11 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     new RsPrint(new TkProxy(
                         String.format(FORMAT, home.getHost(), home.getPort())
-                        ).act(new RqWithHeaders(
-                            new RqFake("INVALIDHTTPMETHOD", DASH)))
+                        ).act(
+                            new RqWithHeaders(
+                                new RqFake("INVALIDHTTPMETHOD", DASH)
+                            )
+                        )
                     ).print();
                 }
             }
