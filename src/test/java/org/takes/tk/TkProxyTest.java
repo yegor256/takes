@@ -107,7 +107,7 @@ public final class TkProxyTest {
             "TestHeader: someValue",
             "SomeHeader: testValue",
             "Content-Length: 130",
-            "Transfer-Encoding: blah"
+            "Transfer-Encoding: blah",
         };
         new FtRemote(new TkFixed(HELLO_WORLD)).exec(
             new FtRemote.Script() {
