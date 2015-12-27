@@ -69,33 +69,6 @@ public final class TkProxyTest {
     private static final String OK = "HTTP/1.1 200 OK";
 
     /**
-     * TkProxy can work.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void justWorks() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                                new RsPrint(
-                                        new TkProxy(
-                                                String.format(
-                                                        FORMAT,
-                                                        home.getHost(),
-                                                        home.getPort()
-                                                )
-                                        ).act(new RqFake())
-                                ).print(),
-                                Matchers.containsString(HELLO_WORLD)
-                        );
-                    }
-                }
-        );
-    }
-
-    /**
      * TkProxy can work with different HTTP methods
      * (GET, POST, OPTIONS, PUT, DELETE).
      * Plus 4 random headers checked.
@@ -114,16 +87,18 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
-                            String.format(
-                                FORMAT, home.getHost(), home.getPort()
-                            )
-                        ).act(
-                            new RqWithHeaders(
-                                new RqFake("GET", DASH), headers
-                            )
-                        )
-                        ).print(),
+                        TkProxyTest.this.actResponse(home, "GET", headers),
+                                    Matchers.startsWith(OK)
+                    );
+                }
+            }
+        );
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "POST", headers),
                         Matchers.startsWith(OK)
                     );
                 }
@@ -134,16 +109,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
-                            String.format(
-                                FORMAT, home.getHost(), home.getPort()
-                            )
-                        ).act(
-                            new RqWithHeaders(
-                                new RqFake("POST", DASH), headers
-                            )
-                        )
-                        ).print(),
+                        TkProxyTest.this.actResponse(home, "OPTIONS", headers),
                         Matchers.startsWith(OK)
                     );
                 }
@@ -154,16 +120,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
-                            String.format(
-                                FORMAT, home.getHost(), home.getPort()
-                            )
-                        ).act(
-                            new RqWithHeaders(
-                                new RqFake("OPTIONS", DASH), headers
-                            )
-                        )
-                        ).print(),
+                        TkProxyTest.this.actResponse(home, "PUT", headers),
                         Matchers.startsWith(OK)
                     );
                 }
@@ -174,36 +131,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
-                            String.format(
-                                FORMAT, home.getHost(), home.getPort()
-                            )
-                        ).act(
-                            new RqWithHeaders(
-                                new RqFake("PUT", DASH), headers
-                            )
-                        )
-                        ).print(),
-                        Matchers.startsWith(OK)
-                    );
-                }
-            }
-        );
-        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
-                                String.format(
-                                    FORMAT, home.getHost(), home.getPort()
-                                )
-                            ).act(
-                                new RqWithHeaders(
-                                    new RqFake("DELETE", DASH), headers
-                                )
-                            )
-                        ).print(),
+                        TkProxyTest.this.actResponse(home, "DELETE", headers),
                         Matchers.startsWith(OK)
                     );
                 }
@@ -218,19 +146,14 @@ public final class TkProxyTest {
     @Test(expected = IOException.class)
     public void actsOnInvalidHttpMethods() throws Exception {
         new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new RsPrint(new TkProxy(
-                        String.format(FORMAT, home.getHost(), home.getPort())
-                        ).act(
-                            new RqWithHeaders(
-                                new RqFake("INVALIDHTTPMETHOD", DASH)
-                            )
-                        )
-                    ).print();
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        TkProxyTest.this.actResponse(
+                            home, "INVALIDHTTPMETHOD"
+                        );
+                    }
                 }
-            }
         );
     }
 
@@ -266,5 +189,32 @@ public final class TkProxyTest {
                     }
                 }
         );
+    }
+
+    /**
+     * Performs proxy.act() and gets String of the response.
+     * @param home Initial URL
+     * @param method HTTP method to run
+     * @param headers HTTP headers to use
+     * @return String of the response received
+     * @throws IOException if something goes wrong
+     */
+    private String actResponse(
+            final URI home, final String method, final String... headers
+    )
+            throws IOException {
+        return new RsPrint(new TkProxy(
+                        String.format(
+                                FORMAT, home.getHost(),
+                                home.getPort()
+                        )
+                ).act(
+                        new RqWithHeaders(
+                        new RqFake(
+                                method, DASH
+                        ), headers
+                        )
+                )
+        ).print();
     }
 }
