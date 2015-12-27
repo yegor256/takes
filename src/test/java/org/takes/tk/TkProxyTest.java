@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import com.jcabi.http.Request;
 import java.io.IOException;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
@@ -104,63 +103,67 @@ public final class TkProxyTest {
      */
     @Test
     public void actsOnHttpMethodsWithRequestHeaders() throws Exception {
-            new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-                    new FtRemote.Script() {
-                        @Override
-                        public void exec(final URI home) throws IOException {
-                            MatcherAssert.assertThat(
-                                    TkProxyTest.this.actResponse(
-                                            home, "GET",
-                                            "TestHeader: someValue",
-                                            "SomeHeader: testValue",
-                                            "Content-Length: 130",
-                                            "Transfer-Encoding: blah"
-                                    ),
+        final String[] headers = {
+            "TestHeader: someValue",
+            "SomeHeader: testValue",
+            "Content-Length: 130",
+            "Transfer-Encoding: blah"
+        };
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "GET", headers),
                                     Matchers.startsWith(OK)
-                            );
-                            MatcherAssert.assertThat(
-                                    TkProxyTest.this.actResponse(
-                                            home, "POST",
-                                            "TestHeader: someValue",
-                                            "SomeHeader: testValue",
-                                            "Content-Length: 130",
-                                            "Transfer-Encoding: blah"
-                                    ),
-                                    Matchers.startsWith(OK)
-                            );
-                            MatcherAssert.assertThat(
-                                    TkProxyTest.this.actResponse(
-                                            home, "OPTIONS",
-                                            "TestHeader: someValue",
-                                            "SomeHeader: testValue",
-                                            "Content-Length: 130",
-                                            "Transfer-Encoding: blah"
-                                    ),
-                                    Matchers.startsWith(OK)
-                            );
-                            MatcherAssert.assertThat(
-                                    TkProxyTest.this.actResponse(
-                                            home, "PUT",
-                                            "TestHeader: someValue",
-                                            "SomeHeader: testValue",
-                                            "Content-Length: 130",
-                                            "Transfer-Encoding: blah"
-                                    ),
-                                    Matchers.startsWith(OK)
-                            );
-                            MatcherAssert.assertThat(
-                                    TkProxyTest.this.actResponse(
-                                            home, "DELETE",
-                                            "TestHeader: someValue",
-                                            "SomeHeader: testValue",
-                                            "Content-Length: 130",
-                                            "Transfer-Encoding: blah"
-                                    ),
-                                    Matchers.startsWith(OK)
-                            );
-                        }
-                    }
-            );
+                    );
+                }
+            }
+        );
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "POST", headers),
+                        Matchers.startsWith(OK)
+                    );
+                }
+            }
+        );
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "OPTIONS", headers),
+                        Matchers.startsWith(OK)
+                    );
+                }
+            }
+        );
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "PUT", headers),
+                        Matchers.startsWith(OK)
+                    );
+                }
+            }
+        );
+        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        TkProxyTest.this.actResponse(home, "DELETE", headers),
+                        Matchers.startsWith(OK)
+                    );
+                }
+            }
+        );
     }
 
     /**
