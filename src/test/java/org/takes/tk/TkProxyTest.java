@@ -210,7 +210,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Head HTTP method
+     * TkProxy can work with Head HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
