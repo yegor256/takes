@@ -72,6 +72,7 @@ public final class TkProxyTest {
      * TkProxy can work with different HTTP methods
      * (GET, POST, OPTIONS, PUT, DELETE).
      * Plus 4 random headers checked.
+     * TkProxy can throw IOException on invalid HTTP methods.
      * @throws Exception If some problem inside
      */
     @Test
@@ -137,23 +138,18 @@ public final class TkProxyTest {
                 }
             }
         );
-    }
-
-    /**
-     * TkProxy can throw IOException on invalid HTTP methods.
-     * @throws Exception If some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void actsOnInvalidHttpMethods() throws Exception {
         new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        TkProxyTest.this.actResponse(
-                            home, "INVALIDHTTPMETHOD"
-                        );
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    try {
+                        TkProxyTest.this.actResponse(home, "INVALID", headers);
+                        MatcherAssert.assertThat("IOException expected", false);
+                    } catch (IOException exception){
+                        //OK
                     }
                 }
+            }
         );
     }
 
