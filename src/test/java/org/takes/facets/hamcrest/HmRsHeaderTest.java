@@ -51,9 +51,7 @@ public final class HmRsHeaderTest {
                 "content-encoding: gzip"
             ),
             new HmRsHeader(
-                new EntryMatcher<String, String>(
                     "content-encoding", "gzip"
-                )
             )
         );
     }
@@ -67,12 +65,8 @@ public final class HmRsHeaderTest {
         MatcherAssert.assertThat(
             new RsWithBody("<html></html>"),
             new HmRsHeader(
-                Matchers.not(
-                    new EntryMatcher<String, String>(
-                        "cache-control",
-                        "no-cache, no-store"
-                    )
-                )
+                Matchers.not(Matchers.equalTo("cache-control")),
+                Matchers.not(Matchers.hasItems("no-cache", "no-store"))
             )
         );
     }
