@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 2 active puzzles (29 total):
+There are 3 active puzzles (31 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -25,10 +25,12 @@ There are 2 active puzzles (29 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>258</del>](https://github.com/yegor256/takes/issues/258) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>258-12a59dfa</del> [`TkCORS.java:82-87`](../master/src/main/java/org/takes/tk/TkCORS.java#L82-L87)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#260](https://github.com/yegor256/takes/issues/260):[<del>260</del>](https://github.com/yegor256/takes/issues/260) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#413](https://github.com/yegor256/takes/issues/413):[<del>260-de67913e</del>](https://github.com/yegor256/takes/issues/413) [`HmRqHeader.java:45-52`](../master/src/main/java/org/takes/facets/hamcrest/HmRqHeader.java#L45-L52)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>260-de67913e</del> [`HmRqHeader.java:45-52`](../master/src/main/java/org/takes/facets/hamcrest/HmRqHeader.java#L45-L52)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>260-1c71c6a2</del> [`HmRsHeader.java:46-53`](../master/src/main/java/org/takes/facets/hamcrest/HmRsHeader.java#L46-L53)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>306</del>](https://github.com/yegor256/takes/issues/306) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#418](https://github.com/yegor256/takes/issues/418):[**306-0f8af5fd**](https://github.com/yegor256/takes/issues/418) [`BkReuseTest.java:46-49`](../master/src/test/java/org/takes/http/BkReuseTest.java#L46-L49)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>306-07904f4e</del> [`BkReuseTest.java:50-53`](../master/src/test/java/org/takes/http/BkReuseTest.java#L50-L53)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#377](https://github.com/yegor256/takes/issues/377):[<del>377</del>](https://github.com/yegor256/takes/issues/377) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#458](https://github.com/yegor256/takes/issues/458):[**377-e6ce369a**](https://github.com/yegor256/takes/issues/458) [`TkProxyTest.java:40-42`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#445](https://github.com/yegor256/takes/issues/445):[<del>445</del>](https://github.com/yegor256/takes/issues/445) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#473](https://github.com/yegor256/takes/issues/473):[**445-5323c196**](https://github.com/yegor256/takes/issues/473) [`RqHref.java:83-86`](../master/src/main/java/org/takes/rq/RqHref.java#L83-L86)<br/>

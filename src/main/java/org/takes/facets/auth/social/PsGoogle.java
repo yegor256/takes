@@ -143,9 +143,9 @@ public final class PsGoogle implements Pass {
      */
     private Identity fetch(final String token) throws IOException {
         // @checkstyle LineLength (1 line)
-        final String uri = new Href(this.gapi).path("oauth2").path("v1")
-            .path("userinfo")
-            .with("alt", "json")
+        final String uri = new Href(this.gapi).path("plus").path("v1")
+            .path("people")
+            .path("me")
             .with("access_token", token)
             .toString();
         return PsGoogle.parse(
@@ -189,9 +189,13 @@ public final class PsGoogle implements Pass {
     private static Identity parse(final JsonObject json) {
         final ConcurrentMap<String, String> props =
             new ConcurrentHashMap<String, String>(json.size());
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
-        props.put("picture", json.getString("picture", "#"));
-        props.put("name", json.getString("name", "unknown"));
+        final JsonObject image = json.getJsonObject("image");
+        if (image == null) {
+            props.put("picture", "#");
+        } else {
+            props.put("picture", image.getString("url", "#"));
+        }
+        props.put("name", json.getString("displayName", "unknown"));
         return new Identity.Simple(
             String.format("urn:google:%s", json.getString("id")), props
         );
