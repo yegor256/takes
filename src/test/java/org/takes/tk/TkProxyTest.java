@@ -116,7 +116,7 @@ public final class TkProxyTest {
                         @Override
                         public void exec(final URI home) throws IOException {
                             MatcherAssert.assertThat(
-                                    actResponse(home, httpMethod),
+                                    TkProxyTest.this.actResponse(home, httpMethod),
                                     Matchers.startsWith(OK)
                             );
                         }
