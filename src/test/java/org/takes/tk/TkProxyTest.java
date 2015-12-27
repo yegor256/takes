@@ -97,7 +97,8 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with different HTTP methods (GET, POST, OPTIONS, PUT, DELETE).
+     * TkProxy can work with different HTTP methods
+     * (GET, POST, OPTIONS, PUT, DELETE).
      * @throws Exception If some problem inside
      */
     @Test
@@ -135,7 +136,9 @@ public final class TkProxyTest {
                     @Override
                     public void exec(final URI home) throws IOException {
                         MatcherAssert.assertThat(
-                                actResponse(home, "INVALIDHTTPMETHOD"),
+                                TkProxyTest.this.actResponse(
+                                        home, "INVALIDHTTPMETHOD"
+                                ),
                                 Matchers.startsWith(OK)
                         );
                     }
@@ -155,11 +158,13 @@ public final class TkProxyTest {
                     @Override
                     public void exec(final URI home) throws IOException {
                         MatcherAssert.assertThat(
-                                actResponse(home, "GET",
+                                TkProxyTest.this.actResponse(
+                                        home, "GET",
                                         "TestHeader: someValue",
                                         "SomeHeader: testValue",
                                         "Content-Length: 130",
-                                        "Transfer-Encoding: blah"),
+                                        "Transfer-Encoding: blah"
+                                ),
                                 Matchers.startsWith(OK)
                         );
                     }
@@ -202,14 +207,16 @@ public final class TkProxyTest {
     }
 
     /**
-     * Performs proxy.act() and gets String of response.
-     * @param home initial URL
+     * Performs proxy.act() and gets String of the response.
+     * @param home Initial URL
      * @param method HTTP method to run
      * @param headers HTTP headers to use
      * @return String of the response received
-     * @throws IOException
+     * @throws IOException if something goes wrong
      */
-    private String actResponse(URI home, String method, String... headers)
+    private String actResponse(
+            final URI home, final String method, final String... headers
+    )
             throws IOException {
         return new RsPrint(new TkProxy(
                         String.format(
