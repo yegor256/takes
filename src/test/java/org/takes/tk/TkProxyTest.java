@@ -99,32 +99,68 @@ public final class TkProxyTest {
     /**
      * TkProxy can work with different HTTP methods
      * (GET, POST, OPTIONS, PUT, DELETE).
+     * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpMethods() throws Exception {
-        for (
-            final String httpMethod : new String[]{
-                Request.GET,
-                Request.POST,
-                Request.OPTIONS,
-                Request.PUT,
-                Request.DELETE,
-            }) {
+    public void actsOnHttpMethodsWithRequestHeaders() throws Exception {
             new FtRemote(new TkFixed(HELLO_WORLD)).exec(
                     new FtRemote.Script() {
                         @Override
                         public void exec(final URI home) throws IOException {
                             MatcherAssert.assertThat(
                                     TkProxyTest.this.actResponse(
-                                            home, httpMethod
+                                            home, "GET",
+                                            "TestHeader: someValue",
+                                            "SomeHeader: testValue",
+                                            "Content-Length: 130",
+                                            "Transfer-Encoding: blah"
+                                    ),
+                                    Matchers.startsWith(OK)
+                            );
+                            MatcherAssert.assertThat(
+                                    TkProxyTest.this.actResponse(
+                                            home, "POST",
+                                            "TestHeader: someValue",
+                                            "SomeHeader: testValue",
+                                            "Content-Length: 130",
+                                            "Transfer-Encoding: blah"
+                                    ),
+                                    Matchers.startsWith(OK)
+                            );
+                            MatcherAssert.assertThat(
+                                    TkProxyTest.this.actResponse(
+                                            home, "OPTIONS",
+                                            "TestHeader: someValue",
+                                            "SomeHeader: testValue",
+                                            "Content-Length: 130",
+                                            "Transfer-Encoding: blah"
+                                    ),
+                                    Matchers.startsWith(OK)
+                            );
+                            MatcherAssert.assertThat(
+                                    TkProxyTest.this.actResponse(
+                                            home, "PUT",
+                                            "TestHeader: someValue",
+                                            "SomeHeader: testValue",
+                                            "Content-Length: 130",
+                                            "Transfer-Encoding: blah"
+                                    ),
+                                    Matchers.startsWith(OK)
+                            );
+                            MatcherAssert.assertThat(
+                                    TkProxyTest.this.actResponse(
+                                            home, "DELETE",
+                                            "TestHeader: someValue",
+                                            "SomeHeader: testValue",
+                                            "Content-Length: 130",
+                                            "Transfer-Encoding: blah"
                                     ),
                                     Matchers.startsWith(OK)
                             );
                         }
                     }
             );
-        }
     }
 
     /**
@@ -137,37 +173,8 @@ public final class TkProxyTest {
                 new FtRemote.Script() {
                     @Override
                     public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                                TkProxyTest.this.actResponse(
-                                        home, "INVALIDHTTPMETHOD"
-                                ),
-                                Matchers.startsWith(OK)
-                        );
-                    }
-                }
-        );
-    }
-
-    /**
-     * TkProxy can proxy original request headers.
-     * (4 random headers checked)
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void actsOnRequestHeaders() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD)).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                                TkProxyTest.this.actResponse(
-                                        home, "GET",
-                                        "TestHeader: someValue",
-                                        "SomeHeader: testValue",
-                                        "Content-Length: 130",
-                                        "Transfer-Encoding: blah"
-                                ),
-                                Matchers.startsWith(OK)
+                        TkProxyTest.this.actResponse(
+                            home, "INVALIDHTTPMETHOD"
                         );
                     }
                 }
