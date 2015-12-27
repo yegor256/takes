@@ -70,7 +70,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Get HTTP method
+     * TkProxy can work with Get HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
@@ -98,7 +98,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Post HTTP method
+     * TkProxy can work with Post HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
@@ -126,7 +126,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Put HTTP method
+     * TkProxy can work with Put HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
@@ -154,7 +154,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Delete HTTP method
+     * TkProxy can work with Delete HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
@@ -182,7 +182,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with Options HTTP method
+     * TkProxy can work with Options HTTP method.
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
@@ -238,7 +238,7 @@ public final class TkProxyTest {
     }
     /**
      * TkProxy can throw IOException on invalid HTTP methods.
-     * @throws Exception If some problem inside
+     * @throws Exception If some problem inside.
      */
     @Test(expected = IOException.class)
     public void actsOnInvalidHttpMethods() throws Exception {
@@ -256,7 +256,7 @@ public final class TkProxyTest {
 
     /**
      * TkProxy can proxy original response headers.
-     * @throws Exception If some problem inside
+     * @throws Exception If some problem inside.
      */
     @Test
     public void actsOnResponseHeaders() throws Exception {
