@@ -145,8 +145,8 @@ public final class TkProxyTest {
                     try {
                         TkProxyTest.this.actResponse(home, "INVALID", headers);
                         MatcherAssert.assertThat("IOException expected", false);
-                    } catch (IOException exception){
-                        //OK
+                    } catch (final IOException exception) {
+                        MatcherAssert.assertThat("IOException expected", true);
                     }
                 }
             }
