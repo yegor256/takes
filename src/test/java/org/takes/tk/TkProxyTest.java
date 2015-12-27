@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.URI;
+import javax.ws.rs.HttpMethod;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -35,7 +36,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkProxy}.
- * The test verify the different HTTP methods (GET, POST, etc),
+ * The test verify the different HTTP methods (Get, Post, etc),
  * as well as the different combinations of request/response headers.
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
@@ -58,7 +59,7 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(
-                                TkProxyTest.this.formatProxyHost(home)
+                                proxy(home)
                             ).act(new RqFake())
                         ).print(),
                         Matchers.containsString(testText)
@@ -69,13 +70,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with GET HTTP method
+     * TkProxy can work with Get HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpGETWithRequestHeaders() throws Exception {
-        final String testText = "GETTest";
+    public void actsOnHttpGetWithRequestHeaders() throws Exception {
+        final String testText = "GetTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -83,7 +84,7 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.GET,
+                            HttpMethod.GET,
                             "TestHeader: getTest",
                             "SomeHeader: getTestValue",
                             "Content-Length: 130",
@@ -97,13 +98,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with POST HTTP method
+     * TkProxy can work with Post HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpPOSTWithRequestHeaders() throws Exception {
-        final String testText = "POSTTest";
+    public void actsOnHttpPostWithRequestHeaders() throws Exception {
+        final String testText = "PostTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -111,7 +112,7 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.POST,
+                            HttpMethod.POST,
                             "TestHeader: PostTest",
                             "SomeHeader: PostTestValue",
                             "Content-Length: 131",
@@ -125,13 +126,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with PUT HTTP method
+     * TkProxy can work with Put HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpPUTWithRequestHeaders() throws Exception {
-        final String testText = "PUTTest";
+    public void actsOnHttpPutWithRequestHeaders() throws Exception {
+        final String testText = "PutTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -139,11 +140,11 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.PUT,
-                            "TestHeader: PUTTest",
-                            "SomeHeader: PUTTestValue",
+                            HttpMethod.PUT,
+                            "TestHeader: PutTest",
+                            "SomeHeader: PutTestValue",
                             "Content-Length: 132",
-                            "Transfer-Encoding: PUT"
+                            "Transfer-Encoding: Put"
                         ),
                         Matchers.containsString(testText)
                     );
@@ -153,13 +154,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with DELETE HTTP method
+     * TkProxy can work with Delete HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpDELETEWithRequestHeaders() throws Exception {
-        final String testText = "DELETETest";
+    public void actsOnHttpDeleteWithRequestHeaders() throws Exception {
+        final String testText = "DeleteTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -167,11 +168,11 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.DELETE,
-                            "TestHeader: DELETETest",
-                            "SomeHeader: DELETETestValue",
+                            HttpMethod.DELETE,
+                            "TestHeader: DeleteTest",
+                            "SomeHeader: DeleteTestValue",
                             "Content-Length: 133",
-                            "Transfer-Encoding: DELETE"
+                            "Transfer-Encoding: Delete"
                         ),
                         Matchers.containsString(testText)
                     );
@@ -181,13 +182,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with OPTIONS HTTP method
+     * TkProxy can work with Options HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpOPTIONSWithRequestHeaders() throws Exception {
-        final String testText = "OPTIONSTest";
+    public void actsOnHttpOptionsWithRequestHeaders() throws Exception {
+        final String testText = "OptionsTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -195,11 +196,11 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.OPTIONS,
-                            "TestHeader: OPTIONSTest",
-                            "SomeHeader: OPTIONSTestValue",
+                            HttpMethod.OPTIONS,
+                            "TestHeader: OptionsTest",
+                            "SomeHeader: OptionsTestValue",
                             "Content-Length: 134",
-                            "Transfer-Encoding: OPTIONS"
+                            "Transfer-Encoding: Options"
                         ),
                         Matchers.containsString(testText)
                     );
@@ -209,13 +210,13 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can work with HEAD HTTP method
+     * TkProxy can work with Head HTTP method
      * Plus 4 random headers checked.
      * @throws Exception If some problem inside
      */
     @Test
-    public void actsOnHttpHEADWithRequestHeaders() throws Exception {
-        final String testText = "HEADTest";
+    public void actsOnHttpHeadWithRequestHeaders() throws Exception {
+        final String testText = "HeadTest";
         new FtRemote(new TkFixed(testText)).exec(
             new FtRemote.Script() {
                 @Override
@@ -223,11 +224,11 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         TkProxyTest.this.actResponse(
                             home,
-                            javax.ws.rs.HttpMethod.HEAD,
-                            "TestHeader: HEADTest",
-                            "SomeHeader: HEADTestValue",
+                            HttpMethod.HEAD,
+                            "TestHeader: HeadTest",
+                            "SomeHeader: HeadTestValue",
                             "Content-Length: 135",
-                            "Transfer-Encoding: HEAD"
+                            "Transfer-Encoding: Head"
                         ),
                         Matchers.containsString("OK")
                     );
@@ -269,7 +270,7 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(
-                                TkProxyTest.this.formatProxyHost(home)
+                                proxy(home)
                             ).act(new RqFake())
                         ).print(),
                             Matchers.allOf(
@@ -297,7 +298,7 @@ public final class TkProxyTest {
     )
             throws IOException {
         return new RsPrint(new TkProxy(
-            TkProxyTest.this.formatProxyHost(home)
+            proxy(home)
                 ).act(
                         new RqWithHeaders(
                         new RqFake(
@@ -314,7 +315,7 @@ public final class TkProxyTest {
      * @param home Initial host
      * @return Proxy redefined host string
      */
-    private String formatProxyHost(final URI home) {
+    private static String proxy(final URI home) {
         return String.format(
             "%s:%d", home.getHost(), home.getPort()
         );
