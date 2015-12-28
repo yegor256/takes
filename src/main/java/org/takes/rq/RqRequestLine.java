@@ -38,24 +38,39 @@ import org.takes.Request;
  *
  * @author Vladimir Maksimenko (xupypr@xupypr.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.29.1
  */
 public interface RqRequestLine extends Request {
 
-    /**
-     * METHOD token.
-     */
-    int METHOD = 1;
+    public static enum Token {
+        /**
+         * METHOD token.
+         */
+        METHOD(1),
 
-    /**
-     * URI token.
-     */
-    int URI = 2;
+        /**
+         * URI token.
+         */
+        URI(2),
 
-    /**
-     * HTTPVERSION token.
-     */
-    int HTTPVERSION = 3;
+        /**
+         * HTTPVERSION token.
+         */
+        HTTPVERSION(3);
+
+        /**
+         * Value.
+         */
+        private final int value;
+
+        /**
+         * Ctor.
+         * @param val Value
+         */
+        private Token(final int val) {
+            this.value = val;
+        }
+    }
 
     /**
      * Get Request-Line header.
@@ -65,12 +80,12 @@ public interface RqRequestLine extends Request {
     String requestLineHeader() throws IOException;
 
     /**
-     * Get Request-Line header token by index number.
-     * @param index Token index number
-     * @return HTTP Request-Line header token specified by index number
+     * Get Request-Line header token.
+     * @param token Token
+     * @return HTTP Request-Line header token
      * @throws IOException If fails
      */
-    String requestLineHeaderToken(int index) throws IOException;
+    String requestLineHeaderToken(Token token) throws IOException;
 
     /**
      * Request decorator for Request-Line header validation
@@ -89,8 +104,8 @@ public interface RqRequestLine extends Request {
          * .w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
         private static final Pattern PATTERN = Pattern.compile(
-                "([!-~]+) ([^ ]+)( [^ ]+)?"
-                );
+            "([!-~]+) ([^ ]+)( [^ ]+)?"
+        );
 
         /**
          * Ctor.
@@ -102,58 +117,66 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String requestLineHeader() throws IOException {
-            return this.extractFromRequestLineHeader(null);
+            final String requestLine = this.getRequestLineHeader();
+            this.validateRequestLine(requestLine);
+            return requestLine;
         }
 
         @Override
-        public String requestLineHeaderToken(final int index)
+        public String requestLineHeaderToken(final Token token)
                 throws IOException {
-            // @checkstyle MagicNumberCheck (1 lines)
-            if (index < 1 || index > 3) {
+            final String requestLine = this.getRequestLineHeader();
+            final Matcher matcher = this.validateRequestLine(requestLine);
+            final String result = matcher.group(token.value);
+            if (result == null) {
                 throw new IllegalArgumentException(
-                        String.format("Illegel indexNumber %d", index)
-                        );
+                    String.format(
+                        "There is no token %s in Request-Line header: %s",
+                        token.toString(),
+                        requestLine
+                    )
+                );
             }
-            return this.extractFromRequestLineHeader(index);
+            return result.trim();
         }
 
         /**
-         * Extract Request-Line or Request-Line token from Request.
+         * Get Request-Line header.
          *
-         * @param index Token index number
-         * @return Request-Line if index is null, token as string otherwise
+         * @return Valid Request-Line header
          * @throws IOException If fails
          */
-        private String extractFromRequestLineHeader(final Integer index)
-                throws IOException {
+        private String getRequestLineHeader() throws IOException {
             if (!this.head().iterator().hasNext()) {
                 throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        "HTTP Request should have Request-Line"
-                        );
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    "HTTP Request should have Request-Line"
+                );
             }
-            final String line = this.head().iterator().next();
-            final Matcher matcher = PATTERN.matcher(line);
+            final String requestLine = this.head().iterator().next();
+            return requestLine;
+        }
+
+        /**
+         * Validate Request-Line according to PATTERN.
+         *
+         * @param requestline Request-Line header
+         * @return Matcher that can be used to extract tokens
+         * @throws HttpException If fails
+         */
+        private Matcher validateRequestLine(final String requestline)
+            throws HttpException {
+            final Matcher matcher = PATTERN.matcher(requestline);
             if (!matcher.matches()) {
                 throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format(
-                                "Invalid HTTP Request-Line header: %s",
-                                line
-                                )
-                        );
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        "Invalid HTTP Request-Line header: %s",
+                        requestline
+                    )
+                );
             }
-            if (index != null) {
-                final String token = matcher.group(index);
-                final String result;
-                if (token == null) {
-                    result = token;
-                } else {
-                    result = token.trim();
-                }
-                return result;
-            }
-            return line;
+            return matcher;
         }
     }
 }

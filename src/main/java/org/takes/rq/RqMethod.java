@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.rq.RqRequestLine.Token;
 
 /**
  * HTTP method parsing.
@@ -122,7 +123,7 @@ public interface RqMethod extends Request {
         @Override
         public String method() throws IOException {
             final String method = new RqRequestLine.Base(this)
-                    .requestLineHeaderToken(RqRequestLine.METHOD);
+                .requestLineHeaderToken(Token.METHOD);
             if (SEPARATORS.matcher(method).find()) {
                 throw new IOException(
                     String.format("Invalid HTTP method: %s", method)

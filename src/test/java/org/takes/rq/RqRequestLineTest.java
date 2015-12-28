@@ -30,12 +30,13 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
+import org.takes.rq.RqRequestLine.Token;
 
 /**
  * Test case for {@link RqRequestLine.Base}.
  * @author Vladimir Maksimenko (xupypr@xupypr.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.29.1
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class RqRequestLineTest {
@@ -49,8 +50,8 @@ public final class RqRequestLineTest {
     @Test(expected = HttpException.class)
     public void failsOnAbsentRequestLine() throws IOException {
         new RqRequestLine.Base(
-                new RqSimple(Collections.<String>emptyList(), null)
-                ).requestLineHeader();
+            new RqSimple(Collections.<String>emptyList(), null)
+        ).requestLineHeader();
     }
 
     /**
@@ -62,14 +63,14 @@ public final class RqRequestLineTest {
     @Test(expected = HttpException.class)
     public void failsOnIllegalRequestLine() throws IOException {
         new RqRequestLine.Base(
-                new RqFake(
-                        Arrays.asList(
-                                "GIVE/contacts2",
-                                "Host: 1.example.com"
-                                ),
-                                ""
-                        )
-                ).requestLineHeader();
+            new RqFake(
+                Arrays.asList(
+                    "GIVE/contacts2",
+                    "Host: 1.example.com"
+                ),
+                ""
+            )
+        ).requestLineHeader();
     }
 
     /**
@@ -81,17 +82,17 @@ public final class RqRequestLineTest {
     public void extractsParams() throws IOException {
         final String requestline = "GET /hello?a=6&b=7&c&d=9%28x%29&ff";
         MatcherAssert.assertThat(
-                new RqRequestLine.Base(
-                        new RqFake(
-                                Arrays.asList(
-                                        requestline,
-                                        "Host: a.example.com",
-                                        "Content-type: text/xml"
-                                        ),
-                                        ""
-                                )
-                        ).requestLineHeader(),
-                        Matchers.equalToIgnoringCase(requestline)
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        requestline,
+                        "Host: a.example.com",
+                        "Content-type: text/xml"
+                    ),
+                    ""
+                )
+            ).requestLineHeader(),
+            Matchers.equalToIgnoringCase(requestline)
         );
     }
 
@@ -104,8 +105,8 @@ public final class RqRequestLineTest {
     @Test(expected = HttpException.class)
     public void failsOnAbsentRequestLineToken() throws IOException {
         new RqRequestLine.Base(
-                new RqSimple(Collections.<String>emptyList(), null)
-                ).requestLineHeaderToken(1);
+            new RqSimple(Collections.<String>emptyList(), null)
+        ).requestLineHeaderToken(Token.METHOD);
     }
 
     /**
@@ -117,53 +118,14 @@ public final class RqRequestLineTest {
     @Test(expected = HttpException.class)
     public void failsOnIllegalRequestLineToken() throws IOException {
         new RqRequestLine.Base(
-                new RqFake(
-                        Arrays.asList(
-                                "GIVE/contacts",
-                                "Host: 3.example.com"
-                                ),
-                                ""
-                        )
-                ).requestLineHeaderToken(1);
-    }
-
-    /**
-     * RqRequestLine.Base should throw {@link IllegalArgumentException} when
-     * we call requestLineHeaderToken with index number less then 1.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void failsOnIllegalRequestLineTokenIndexLessOne()
-            throws IOException {
-        new RqRequestLine.Base(
-                new RqFake(
-                        Arrays.asList(
-                                "GET /hello?a=4&b=7&c&d=9%28x%29&ff",
-                                "Host: 4.example.com"
-                                ),
-                                ""
-                        )
-                ).requestLineHeaderToken(0);
-    }
-
-    /**
-     * RqRequestLine.Base should throw {@link IllegalArgumentException} when
-     * we call requestLineHeaderToken with index number greater then 3.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void failsOnIllegalRequestLineTokenIndexGreaterThree()
-            throws IOException {
-        new RqRequestLine.Base(
-                new RqFake(
-                        Arrays.asList(
-                                "GET /hello?a=5&b=7&c&d=9%28x%29&ff",
-                                "Host: 5.example.com"
-                                ),
-                                ""
-                        )
-                // @checkstyle MagicNumberCheck (1 lines)
-                ).requestLineHeaderToken(4);
+            new RqFake(
+                Arrays.asList(
+                    "GIVE/contacts",
+                    "Host: 3.example.com"
+                ),
+                ""
+            )
+        ).requestLineHeaderToken(Token.METHOD);
     }
 
     /**
@@ -175,16 +137,16 @@ public final class RqRequestLineTest {
     @Test
     public void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
-                new RqRequestLine.Base(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /hello?since=3431",
-                                        "Host: f1.example.com"
-                                        ),
-                                        ""
-                                )
-                        ).requestLineHeaderToken(RqRequestLine.METHOD),
-                        Matchers.equalToIgnoringCase("GET")
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hello?since=3431",
+                        "Host: f1.example.com"
+                    ),
+                    ""
+                )
+            ).requestLineHeaderToken(Token.METHOD),
+            Matchers.equalToIgnoringCase("GET")
         );
     }
 
@@ -197,16 +159,16 @@ public final class RqRequestLineTest {
     @Test
     public void extractsSecondParam() throws IOException {
         MatcherAssert.assertThat(
-                new RqRequestLine.Base(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /hello?since=3432",
-                                        "Host: f2.example.com"
-                                        ),
-                                        ""
-                                )
-                        ).requestLineHeaderToken(RqRequestLine.URI),
-                        Matchers.equalToIgnoringCase("/hello?since=3432")
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hello?since=3432",
+                        "Host: f2.example.com"
+                    ),
+                    ""
+                )
+            ).requestLineHeaderToken(Token.URI),
+            Matchers.equalToIgnoringCase("/hello?since=3432")
         );
     }
 
@@ -219,39 +181,38 @@ public final class RqRequestLineTest {
     @Test
     public void extractsThirdParam() throws IOException {
         MatcherAssert.assertThat(
-                new RqRequestLine.Base(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /hello?since=343 HTTP/1.1",
-                                        "Host: f3.example.com"
-                                        ),
-                                        ""
-                                )
-                        ).requestLineHeaderToken(RqRequestLine.HTTPVERSION),
-                        Matchers.equalToIgnoringCase("HTTP/1.1")
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hello?since=343 HTTP/1.1",
+                        "Host: f3.example.com"
+                    ),
+                    ""
+                )
+            ).requestLineHeaderToken(Token.HTTPVERSION),
+            Matchers.equalToIgnoringCase("HTTP/1.1")
         );
     }
 
     /**
-     * RqRequestLine.Base can extract third token (HTTP VERSION)
-     * when we call requestLineHeaderToken
-     * even for Request-Line without HTTP VERSION
-     * with valid Request-Line.
+     * RqRequestLine.Base should throw {@link IllegalArgumentException}
+     * when we call requestLineHeaderToken(Token.HTTPVERSION)
+     * even for valid Request-Line without HTTP VERSION.
      * @throws IOException If some problem inside
      */
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void extractsEmptyThirdParam() throws IOException {
         MatcherAssert.assertThat(
-                new RqRequestLine.Base(
-                        new RqFake(
-                                Arrays.asList(
-                                        "GET /hello?since=3433",
-                                        "Host: f4.example.com"
-                                        ),
-                                        ""
-                                )
-                        ).requestLineHeaderToken(RqRequestLine.HTTPVERSION),
-                        Matchers.equalTo(null)
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /hello?since=3433",
+                        "Host: f4.example.com"
+                    ),
+                    ""
+                )
+            ).requestLineHeaderToken(Token.HTTPVERSION),
+            Matchers.equalTo(null)
         );
     }
 }
