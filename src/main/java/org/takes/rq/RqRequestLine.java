@@ -124,7 +124,7 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String requestLineHeaderToken(final Token token)
-                throws IOException {
+            throws IOException {
             final String requestLine = this.getRequestLineHeader();
             final Matcher matcher = this.validateRequestLine(requestLine);
             final String result = matcher.group(token.value);
