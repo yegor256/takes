@@ -153,8 +153,7 @@ public interface RqRequestLine extends Request {
                     "HTTP Request should have Request-Line"
                 );
             }
-            final String requestLine = this.head().iterator().next();
-            return requestLine;
+            return this.head().iterator().next();
         }
 
         /**
