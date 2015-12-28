@@ -37,7 +37,7 @@ import org.takes.Take;
  *
  * @author Dan Baleanu (dan.baleanu@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.30
  */
 @ToString(of = {"origin"})
 @EqualsAndHashCode(of = {"origin"})

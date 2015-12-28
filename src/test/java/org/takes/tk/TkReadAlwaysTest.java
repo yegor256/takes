@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
@@ -41,7 +40,7 @@ import org.takes.rs.RsText;
  * Test case for {@link TkReadAlways}.
  * @author Dan Baleanu (dan.baleanu@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.30
  */
 public final class TkReadAlwaysTest {
 
@@ -51,10 +50,11 @@ public final class TkReadAlwaysTest {
      */
     @Test
     public void requestBodyIsIgnored() throws Exception {
+        final String expected = "response ok";
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
-                return new RsText("response ok");
+                return new RsText(expected);
             }
         };
         new FtRemote(new TkReadAlways(take)).exec(
@@ -71,11 +71,7 @@ public final class TkReadAlwaysTest {
                         .fetch()
                         .as(RestResponse.class)
                         .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(
-                            Matchers.equalTo(
-                                Joiner.on(" ").join("response", "ok")
-                            )
-                    );
+                        .assertBody(Matchers.equalTo(expected));
                 }
             }
         );
