@@ -86,9 +86,7 @@ public final class TkRetryTest {
             final long spent = System.nanoTime() - start;
             MatcherAssert.assertThat(
                 new Long(count * delay) * Tv.MILLION,
-                Matchers.lessThanOrEqualTo(
-                    spent
-                )
+                Matchers.lessThanOrEqualTo(spent)
             );
             throw exception;
         }
