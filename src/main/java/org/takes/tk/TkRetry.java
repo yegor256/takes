@@ -24,6 +24,7 @@
 package org.takes.tk;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,11 +42,12 @@ public final class TkRetry implements Take {
     /**
      * Maximum number of retry attempts.
      */
-    private final transient Integer count;
+    private final transient int count;
+
     /**
      * Amount of time between retries, in milliseconds.
      */
-    private final transient Integer delay;
+    private final transient int delay;
 
     /**
      * Original Take.
@@ -56,37 +58,30 @@ public final class TkRetry implements Take {
      * Constructor.
      *
      * @param retry Number of retry attempts
-     * @param retrydelay Time between retries
-     * @param originaltake Original take
+     * @param wait Time between retries
+     * @param original Original take
      */
-    public TkRetry(final Integer retry, final Integer
-            retrydelay, final Take originaltake) {
+    public TkRetry(final int retry, final int
+            wait, final Take original) {
         this.count = retry;
-        this.delay = retrydelay;
-        this.take = originaltake;
+        this.delay = wait;
+        this.take = original;
     }
 
-    /**
-     * Added retrying logic.
-     *
-     * @param req Request to process
-     * @return
-     * @throws IOException
-     */
     @Override
     public Response act(final Request req) throws IOException {
         int attempts = 0;
-        IOException exeption = new IOException();
+        IOException exception = new IOException();
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
             } catch (final IOException ex) {
-                attempts = attempts + 1;
-                exeption = ex;
+                ++attempts;
+                exception = ex;
                 this.sleep();
             }
         }
-        throw exeption;
+        throw exception;
     }
 
     /**
@@ -94,7 +89,7 @@ public final class TkRetry implements Take {
      */
     private void sleep() {
         try {
-            Thread.sleep(this.delay);
+            TimeUnit.MILLISECONDS.sleep(this.delay);
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
