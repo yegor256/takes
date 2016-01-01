@@ -25,6 +25,7 @@ package org.takes.facets.hamcrest;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.StringDescription;
 import org.junit.Test;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithBody;
@@ -34,10 +35,16 @@ import org.takes.rs.RsWithHeaders;
 /**
  * Test case for {@link HmRsHeader}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.23.3
  */
 public final class HmRsHeaderTest {
+
+    /**
+     * Content type string.
+     */
+    private static final String CONTENT_TYPE = "content-type";
 
     /**
      * HmRsHeader can test header available.
@@ -119,6 +126,29 @@ public final class HmRsHeaderTest {
         MatcherAssert.assertThat(
             new RsWithHeaders(new RsEmpty(), "header4: value4"),
             new HmRsHeader("header41", Matchers.<String>iterableWithSize(0))
+        );
+    }
+
+    /**
+     * Checks is mismatch message is readable.
+     */
+    @Test
+    public void testMismatchMessage() {
+        final String expected = new StringBuilder()
+                .append("header was: equalToIgnoringCase")
+                .append("(\"content-type\") -> values: <[image/png]>")
+                .toString();
+        final HmRsHeader matcher = new HmRsHeader(
+                Matchers.equalToIgnoringCase(CONTENT_TYPE),
+                Matchers.hasItems("text/html")
+        );
+        final StringDescription description = new StringDescription();
+        final RsWithHeader req = new RsWithHeader(CONTENT_TYPE, "image/png");
+        matcher.matchesSafely(req);
+        matcher.describeMismatchSafely(req, description);
+        MatcherAssert.assertThat(
+                description.toString(),
+                Matchers.equalTo(expected)
         );
     }
 }

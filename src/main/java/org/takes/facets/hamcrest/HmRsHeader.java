@@ -56,17 +56,17 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
     /**
      * Header matcher.
      */
-    private final transient Matcher<String> headerm;
+    private final transient Matcher<String> header;
 
     /**
      * Value matcher.
      */
-    private final transient Matcher<Iterable<String>> valuem;
+    private final transient Matcher<Iterable<String>> value;
 
     /**
      * Mismatched header values.
      */
-    private transient Collection<String> failedvals;
+    private transient Collection<String> failed;
 
     /**
      * Ctor.
@@ -74,40 +74,40 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
      * @param vlm Value matcher
      */
     public HmRsHeader(final Matcher<String> hdrm,
-                      final Matcher<Iterable<String>> vlm) {
+        final Matcher<Iterable<String>> vlm) {
         super();
-        this.headerm = hdrm;
-        this.valuem = vlm;
+        this.header = hdrm;
+        this.value = vlm;
     }
 
     /**
      * Ctor.
-     * @param header Header name
+     * @param hdr Header name
      * @param vlm Value matcher
      */
-    public HmRsHeader(final String header,
-                      final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(header), vlm);
+    public HmRsHeader(final String hdr,
+        final Matcher<Iterable<String>> vlm) {
+        this(Matchers.equalToIgnoringCase(hdr), vlm);
     }
 
     /**
      * Ctor.
-     * @param header Header name
-     * @param value Header value
+     * @param hdr Header name
+     * @param val Header value
      */
-    public HmRsHeader(final String header, final String value) {
+    public HmRsHeader(final String hdr, final String val) {
         this(
-                Matchers.equalToIgnoringCase(header),
-                Matchers.hasItems(value)
+            Matchers.equalToIgnoringCase(hdr),
+            Matchers.hasItems(val)
         );
     }
 
     @Override
     public void describeTo(final Description description) {
         description.appendText("header: ")
-                .appendDescriptionOf(this.headerm)
-                .appendText(VALUES_STR)
-                .appendDescriptionOf(this.valuem);
+            .appendDescriptionOf(this.header)
+            .appendText(HmRsHeader.VALUES_STR)
+            .appendDescriptionOf(this.value);
     }
 
     @Override
@@ -120,13 +120,13 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
             final List<String> values = new ArrayList<String>(0);
             while (headers.hasNext()) {
                 final String[] parts = HmRsHeader.split(headers.next());
-                if (this.headerm.matches(parts[0].trim())) {
+                if (this.header.matches(parts[0].trim())) {
                     values.add(parts[1].trim());
                 }
             }
-            final boolean result = this.valuem.matches(values);
+            final boolean result = this.value.matches(values);
             if (!result) {
-                this.failedvals = values;
+                this.failed = values;
             }
             return result;
         } catch (final IOException ex) {
@@ -138,9 +138,9 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
     public void describeMismatchSafely(final Response item,
                                        final Description description) {
         description.appendText("header was: ")
-                .appendDescriptionOf(this.headerm)
-                .appendText(VALUES_STR)
-                .appendValue(this.failedvals);
+            .appendDescriptionOf(this.header)
+            .appendText(HmRsHeader.VALUES_STR)
+            .appendValue(this.failed);
     }
 
     /**
