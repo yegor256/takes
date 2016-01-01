@@ -58,7 +58,7 @@ public final class HmRsHeaderTest {
                 "content-encoding: gzip"
             ),
             new HmRsHeader(
-                    "content-encoding", "gzip"
+                "content-encoding", "gzip"
             )
         );
     }
@@ -135,20 +135,21 @@ public final class HmRsHeaderTest {
     @Test
     public void testMismatchMessage() {
         final String expected = new StringBuilder()
-                .append("header was: equalToIgnoringCase")
-                .append("(\"content-type\") -> values: <[image/png]>")
-                .toString();
+            .append("header was: equalToIgnoringCase")
+            .append("(\"content-type\") -> values: <[image/png]>")
+            .toString();
         final HmRsHeader matcher = new HmRsHeader(
-                Matchers.equalToIgnoringCase(CONTENT_TYPE),
-                Matchers.hasItems("text/html")
+            Matchers.equalToIgnoringCase(HmRsHeaderTest.CONTENT_TYPE),
+            Matchers.hasItems("text/html")
         );
         final StringDescription description = new StringDescription();
-        final RsWithHeader req = new RsWithHeader(CONTENT_TYPE, "image/png");
+        final RsWithHeader req =
+                new RsWithHeader(HmRsHeaderTest.CONTENT_TYPE, "image/png");
         matcher.matchesSafely(req);
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(
-                description.toString(),
-                Matchers.equalTo(expected)
+            description.toString(),
+            Matchers.equalTo(expected)
         );
     }
 }
