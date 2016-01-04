@@ -50,7 +50,7 @@ public final class RqRequestLineTest {
     public void failsOnAbsentRequestLine() throws IOException {
         new RqRequestLine.Base(
             new RqSimple(Collections.<String>emptyList(), null)
-        ).requestLineHeader();
+        ).header();
     }
 
     /**
@@ -69,7 +69,7 @@ public final class RqRequestLineTest {
                 ),
                 ""
             )
-        ).requestLineHeader();
+        ).header();
     }
 
     /**
@@ -90,7 +90,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestLineHeader(),
+            ).header(),
             Matchers.equalToIgnoringCase(requestline)
         );
     }
@@ -166,7 +166,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestUri(),
+            ).uri(),
             Matchers.equalToIgnoringCase("/hello?since=3432")
         );
     }
@@ -188,7 +188,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).httpVersion(),
+            ).version(),
             Matchers.equalToIgnoringCase("HTTP/1.1")
         );
     }
@@ -210,7 +210,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).httpVersion(),
+            ).version(),
             Matchers.equalTo(null)
         );
     }

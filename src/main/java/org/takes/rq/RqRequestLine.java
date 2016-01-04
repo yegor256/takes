@@ -47,7 +47,7 @@ public interface RqRequestLine extends Request {
      * @return HTTP Request-Line header
      * @throws IOException If fails
      */
-    String requestLineHeader() throws IOException;
+    String header() throws IOException;
 
     /**
      * Get Request-Line method token.
@@ -61,14 +61,14 @@ public interface RqRequestLine extends Request {
      * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
-    String requestUri() throws IOException;
+    String uri() throws IOException;
 
     /**
      * Get Request-Line HTTP-Version token.
      * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
-    String httpVersion() throws IOException;
+    String version() throws IOException;
 
     /**
      * Request decorator for Request-Line header validation
@@ -83,8 +83,7 @@ public interface RqRequestLine extends Request {
         /**
          * HTTP Request-line pattern.
          * [!-~] is for method or extension-method token (octets 33 - 126).
-         * @see <a href="http://www
-         * .w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
+         * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
         private static final Pattern PATTERN = Pattern.compile(
             "([!-~]+) ([^ ]+)( [^ ]+)?"
@@ -129,25 +128,25 @@ public interface RqRequestLine extends Request {
         }
 
         @Override
-        public String requestLineHeader() throws IOException {
-            final String requestLine = this.getRequestLineHeader();
-            this.validateRequestLine(requestLine);
-            return requestLine;
+        public String header() throws IOException {
+            final String line = this.line();
+            this.matcher(line);
+            return line;
         }
 
         @Override
         public String method() throws IOException {
-            return this.requestLineHeaderToken(Token.METHOD);
+            return this.token(Token.METHOD);
         }
 
         @Override
-        public String requestUri() throws IOException {
-            return this.requestLineHeaderToken(Token.URI);
+        public String uri() throws IOException {
+            return this.token(Token.URI);
         }
 
         @Override
-        public String httpVersion() throws IOException {
-            return this.requestLineHeaderToken(Token.HTTPVERSION);
+        public String version() throws IOException {
+            return this.token(Token.HTTPVERSION);
         }
 
         /**
@@ -156,17 +155,15 @@ public interface RqRequestLine extends Request {
          * @return HTTP Request-Line header token
          * @throws IOException If fails
          */
-        private String requestLineHeaderToken(final Token token)
+        private String token(final Token token)
             throws IOException {
-            final String requestLine = this.getRequestLineHeader();
-            final Matcher matcher = this.validateRequestLine(requestLine);
-            final String result = matcher.group(token.value);
+            final String result = this.matcher(this.line())
+                .group(token.value);
             if (result == null) {
                 throw new IllegalArgumentException(
                     String.format(
-                        "There is no token %s in Request-Line header: %s",
-                        token.toString(),
-                        requestLine
+                        "There is no token %s in Request-Line header",
+                        token.toString()
                     )
                 );
             }
@@ -179,7 +176,7 @@ public interface RqRequestLine extends Request {
          * @return Valid Request-Line header
          * @throws IOException If fails
          */
-        private String getRequestLineHeader() throws IOException {
+        private String line() throws IOException {
             if (!this.head().iterator().hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -192,19 +189,19 @@ public interface RqRequestLine extends Request {
         /**
          * Validate Request-Line according to PATTERN.
          *
-         * @param requestline Request-Line header
+         * @param line Request-Line header
          * @return Matcher that can be used to extract tokens
          * @throws HttpException If fails
          */
-        private Matcher validateRequestLine(final String requestline)
+        private Matcher matcher(final String line)
             throws HttpException {
-            final Matcher matcher = PATTERN.matcher(requestline);
+            final Matcher matcher = PATTERN.matcher(line);
             if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         "Invalid HTTP Request-Line header: %s",
-                        requestline
+                        line
                     )
                 );
             }
