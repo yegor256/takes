@@ -42,36 +42,6 @@ import org.takes.Request;
  */
 public interface RqRequestLine extends Request {
 
-    public static enum Token {
-        /**
-         * METHOD token.
-         */
-        METHOD(1),
-
-        /**
-         * URI token.
-         */
-        URI(2),
-
-        /**
-         * HTTPVERSION token.
-         */
-        HTTPVERSION(3);
-
-        /**
-         * Value.
-         */
-        private final int value;
-
-        /**
-         * Ctor.
-         * @param val Value
-         */
-        private Token(final int val) {
-            this.value = val;
-        }
-    }
-
     /**
      * Get Request-Line header.
      * @return HTTP Request-Line header
@@ -80,12 +50,25 @@ public interface RqRequestLine extends Request {
     String requestLineHeader() throws IOException;
 
     /**
-     * Get Request-Line header token.
-     * @param token Token
-     * @return HTTP Request-Line header token
+     * Get Request-Line method token.
+     * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
-    String requestLineHeaderToken(Token token) throws IOException;
+    String method() throws IOException;
+
+    /**
+     * Get Request-Line Request-URI token.
+     * @return HTTP Request-Line method token
+     * @throws IOException If fails
+     */
+    String requestUri() throws IOException;
+
+    /**
+     * Get Request-Line HTTP-Version token.
+     * @return HTTP Request-Line method token
+     * @throws IOException If fails
+     */
+    String httpVersion() throws IOException;
 
     /**
      * Request decorator for Request-Line header validation
@@ -107,6 +90,36 @@ public interface RqRequestLine extends Request {
             "([!-~]+) ([^ ]+)( [^ ]+)?"
         );
 
+        private static enum Token {
+            /**
+             * METHOD token.
+             */
+            METHOD(1),
+
+            /**
+             * URI token.
+             */
+            URI(2),
+
+            /**
+             * HTTPVERSION token.
+             */
+            HTTPVERSION(3);
+
+            /**
+             * Value.
+             */
+            private final int value;
+
+            /**
+             * Ctor.
+             * @param val Value
+             */
+            private Token(final int val) {
+                this.value = val;
+            }
+        }
+
         /**
          * Ctor.
          * @param req Original request
@@ -123,7 +136,27 @@ public interface RqRequestLine extends Request {
         }
 
         @Override
-        public String requestLineHeaderToken(final Token token)
+        public String method() throws IOException {
+            return this.requestLineHeaderToken(Token.METHOD);
+        }
+
+        @Override
+        public String requestUri() throws IOException {
+            return this.requestLineHeaderToken(Token.URI);
+        }
+
+        @Override
+        public String httpVersion() throws IOException {
+            return this.requestLineHeaderToken(Token.HTTPVERSION);
+        }
+
+        /**
+         * Get Request-Line header token.
+         * @param token Token
+         * @return HTTP Request-Line header token
+         * @throws IOException If fails
+         */
+        private String requestLineHeaderToken(final Token token)
             throws IOException {
             final String requestLine = this.getRequestLineHeader();
             final Matcher matcher = this.validateRequestLine(requestLine);

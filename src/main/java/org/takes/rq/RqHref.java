@@ -31,7 +31,6 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Href;
-import org.takes.rq.RqRequestLine.Token;
 
 /**
  * HTTP URI query parsing.
@@ -73,7 +72,7 @@ public interface RqHref extends Request {
         @Override
         public Href href() throws IOException {
             final String uri = new RqRequestLine.Base(this)
-                .requestLineHeaderToken(Token.URI);
+                .requestUri();
             return new Href(
                 String.format(
                     "http://%s%s",

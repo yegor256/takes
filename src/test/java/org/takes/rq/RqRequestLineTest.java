@@ -30,7 +30,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
-import org.takes.rq.RqRequestLine.Token;
 
 /**
  * Test case for {@link RqRequestLine.Base}.
@@ -106,7 +105,7 @@ public final class RqRequestLineTest {
     public void failsOnAbsentRequestLineToken() throws IOException {
         new RqRequestLine.Base(
             new RqSimple(Collections.<String>emptyList(), null)
-        ).requestLineHeaderToken(Token.METHOD);
+        ).method();
     }
 
     /**
@@ -125,7 +124,7 @@ public final class RqRequestLineTest {
                 ),
                 ""
             )
-        ).requestLineHeaderToken(Token.METHOD);
+        ).method();
     }
 
     /**
@@ -145,7 +144,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestLineHeaderToken(Token.METHOD),
+            ).method(),
             Matchers.equalToIgnoringCase("GET")
         );
     }
@@ -167,7 +166,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestLineHeaderToken(Token.URI),
+            ).requestUri(),
             Matchers.equalToIgnoringCase("/hello?since=3432")
         );
     }
@@ -189,7 +188,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestLineHeaderToken(Token.HTTPVERSION),
+            ).httpVersion(),
             Matchers.equalToIgnoringCase("HTTP/1.1")
         );
     }
@@ -211,7 +210,7 @@ public final class RqRequestLineTest {
                     ),
                     ""
                 )
-            ).requestLineHeaderToken(Token.HTTPVERSION),
+            ).httpVersion(),
             Matchers.equalTo(null)
         );
     }
