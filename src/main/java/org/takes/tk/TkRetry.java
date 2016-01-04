@@ -71,7 +71,7 @@ public final class TkRetry implements Take {
     @Override
     public Response act(final Request req) throws IOException {
         int attempts = 0;
-        IOException exception = null;
+        IOException exception = new IOException();
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
