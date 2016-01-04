@@ -77,7 +77,13 @@ public final class TkRetry implements Take {
                 return this.take.act(req);
             } catch (final IOException ex) {
                 ++attempts;
-                exception = ex;
+                exception = new IOException(
+                    String.format(
+                        "Error while processing request %s",
+                        req
+                    ),
+                    ex
+                );
                 this.sleep();
             }
         }
@@ -92,7 +98,10 @@ public final class TkRetry implements Take {
             TimeUnit.MILLISECONDS.sleep(this.delay);
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Unexpected interruption while retrying to process request",
+                ex
+            );
         }
     }
 
