@@ -40,6 +40,7 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.29.1
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public interface RqRequestLine extends Request {
 
     /**
