@@ -130,9 +130,7 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String header() throws IOException {
-            final String line = this.line();
-            this.matcher(line);
-            return line;
+            return this.validated(this.line());
         }
 
         @Override
@@ -158,17 +156,10 @@ public interface RqRequestLine extends Request {
          */
         private String token(final Token token)
             throws IOException {
-            final String result = this.matcher(this.line())
-                .group(token.value);
-            if (result == null) {
-                throw new IllegalArgumentException(
-                    String.format(
-                        "There is no token %s in Request-Line header",
-                        token.toString()
-                    )
-                );
-            }
-            return result.trim();
+            return this.trimmed(
+                this.matcher(this.line()).group(token.value),
+                token
+            );
         }
 
         /**
@@ -188,7 +179,8 @@ public interface RqRequestLine extends Request {
         }
 
         /**
-         * Validate Request-Line according to PATTERN.
+         * Validate Request-Line according to PATTERN
+         * and return matcher.
          *
          * @param line Request-Line header
          * @return Matcher that can be used to extract tokens
@@ -201,12 +193,54 @@ public interface RqRequestLine extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
                         "Invalid HTTP Request-Line header: %s",
                         line
                     )
                 );
             }
             return matcher;
+        }
+
+        /**
+         * Validate Request-Line according to PATTERN.
+         *
+         * @param line Request-Line header
+         * @return Validated Request-Line header
+         * @throws HttpException If fails
+         */
+        private String validated(final String line) throws HttpException {
+            if (!PATTERN.matcher(line).matches()) {
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,
+                    String.format(
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        "Invalid HTTP Request-Line header: %s",
+                        line
+                    )
+                );
+            }
+            return line;
+        }
+
+        /**
+         * Check that token value is not null and
+         * return trimmed value.
+         *
+         * @param value Token value
+         * @param token Token
+         * @return Trimmed token value
+         */
+        private String trimmed(final String value, final Token token) {
+            if (value == null) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "There is no token %s in Request-Line header",
+                        token.toString()
+                    )
+                );
+            }
+            return value.trim();
         }
     }
 }
