@@ -45,16 +45,21 @@ public final class RqGreedyTest {
      */
     @Test
     public void makesRequestGreedy() throws IOException {
+        final String body = Joiner.on("\r\n").join(
+            "GET /test HTTP/1.1",
+            "Host: localhost",
+            "",
+            "... the body ..."
+        );
         final Request req = new RqGreedy(
-            new RqLive(
-                new ByteArrayInputStream(
-                    Joiner.on("\r\n").join(
-                        "GET /test HTTP/1.1",
-                        "Host: localhost",
-                        "",
-                        "... the body ..."
-                    ).getBytes()
-                )
+            new RqWithHeader(
+                new RqLive(
+                    new ByteArrayInputStream(
+                        body.getBytes()
+                    )
+                ),
+                "Content-Length",
+                String.valueOf(body.getBytes().length)
             )
         );
         MatcherAssert.assertThat(
