@@ -71,23 +71,23 @@ public final class TkRetry implements Take {
     @Override
     public Response act(final Request req) throws IOException {
         int attempts = 0;
-        IOException exception = new IOException();
+        IOException exception = null;
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
             } catch (final IOException ex) {
                 ++attempts;
-                exception = new IOException(
-                    String.format(
-                        "Error while processing request %s",
-                        req
-                    ),
-                    ex
-                );
+                exception = ex;
                 this.sleep();
             }
         }
-        throw exception;
+        throw new IOException(
+            String.format(
+                "Error while processing request %s",
+                req
+            ),
+            exception
+        );
     }
 
     /**
