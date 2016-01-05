@@ -23,7 +23,9 @@
  */
 package org.takes.tk;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import org.takes.Request;
 import org.takes.Response;
@@ -70,24 +72,34 @@ public final class TkRetry implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
+        if (this.count <= 0) {
+            throw new IllegalArgumentException(
+                "can't make less than one attempt"
+            );
+        }
         int attempts = 0;
-        IOException exception = new IOException();
+        final ArrayList<IOException> failures =
+            new ArrayList<IOException>(this.count);
+        final ArrayList<String> messages =
+                new ArrayList<String>(this.count);
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
             } catch (final IOException ex) {
                 ++attempts;
-                exception = new IOException(
-                    String.format(
-                        "Error while processing request %s",
-                        req
-                    ),
-                    ex
-                );
+                failures.add(ex);
+                messages.add(ex.getMessage());
                 this.sleep();
             }
         }
-        throw exception;
+        throw new IOException(
+            String.format(
+                "failed after %d attempts: %s",
+                failures.size(),
+                Joiner.on(", ").join(messages)
+            ),
+            failures.get(failures.size() - 1)
+        );
     }
 
     /**
