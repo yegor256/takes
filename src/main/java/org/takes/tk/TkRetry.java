@@ -80,15 +80,12 @@ public final class TkRetry implements Take {
         int attempts = 0;
         final ArrayList<IOException> failures =
             new ArrayList<IOException>(this.count);
-        final ArrayList<String> messages =
-                new ArrayList<String>(this.count);
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
             } catch (final IOException ex) {
                 ++attempts;
                 failures.add(ex);
-                messages.add(ex.getMessage());
                 this.sleep();
             }
         }
@@ -96,7 +93,7 @@ public final class TkRetry implements Take {
             String.format(
                 "failed after %d attempts: %s",
                 failures.size(),
-                Joiner.on(", ").join(messages)
+                Joiner.on(", ").join(failures)
             ),
             failures.get(failures.size() - 1)
         );
