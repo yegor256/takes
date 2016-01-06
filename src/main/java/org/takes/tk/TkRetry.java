@@ -23,13 +23,17 @@
  */
 package org.takes.tk;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
+import org.takes.misc.Transform;
+import org.takes.misc.TransformAction;
 
 /**
  * Decorator TkRetry, which will not fail immediately on IOException, but
@@ -78,7 +82,7 @@ public final class TkRetry implements Take {
             );
         }
         int attempts = 0;
-        final ArrayList<IOException> failures =
+        final List<IOException> failures =
             new ArrayList<IOException>(this.count);
         while (attempts < this.count) {
             try {
@@ -93,10 +97,40 @@ public final class TkRetry implements Take {
             String.format(
                 "failed after %d attempts: %s",
                 failures.size(),
-                Joiner.on(", ").join(failures)
+                TkRetry.strings(failures)
             ),
             failures.get(failures.size() - 1)
         );
+    }
+
+    /**
+     * Transforms a list of exceptions and returns a list of messages.
+     * @param failures Input : a list of exceptions.
+     * @return A list of exceptions messages.
+     */
+    private static List<String> strings(final List<IOException> failures) {
+        final List<String> result = new ArrayList<String>(failures.size());
+        final Iterable<String> transform = new Transform<IOException, String>(
+                failures,
+                new TransformAction<IOException, String>() {
+                    @Override
+                    public String transform(final IOException element) {
+                        final Opt<String> message = new Opt.Single<String>(
+                            element.getMessage()
+                        );
+                        String result = "";
+                        if (message.has()) {
+                            result = message.get();
+                        }
+                        return result;
+                    }
+                }
+        );
+        final Iterator<String> messages = transform.iterator();
+        while (messages.hasNext()) {
+            result.add(messages.next());
+        }
+        return result;
     }
 
     /**
