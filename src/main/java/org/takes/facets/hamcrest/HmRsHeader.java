@@ -25,6 +25,7 @@ package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import org.hamcrest.Description;
@@ -37,24 +38,36 @@ import org.takes.Response;
  * Response Header Matcher.
  *
  * <p>This "matcher" tests given response header.
+ * <p>The header name(s) should be provided in lowercase.
  * <p>The class is immutable and thread-safe.
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.23.3
  */
 public final class HmRsHeader extends TypeSafeMatcher<Response> {
 
     /**
+     * Values string used in description of mismatches.
+     */
+    private static final String VALUES_STR = " -> values: ";
+
+    /**
      * Header matcher.
      */
-    private final transient Matcher<String> headerm;
+    private final transient Matcher<String> header;
 
     /**
      * Value matcher.
      */
-    private final transient Matcher<Iterable<String>> valuem;
+    private final transient Matcher<Iterable<String>> value;
+
+    /**
+     * Mismatched header values.
+     */
+    private transient Collection<String> failed;
 
     /**
      * Ctor.
@@ -64,38 +77,38 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
     public HmRsHeader(final Matcher<String> hdrm,
         final Matcher<Iterable<String>> vlm) {
         super();
-        this.headerm = hdrm;
-        this.valuem = vlm;
+        this.header = hdrm;
+        this.value = vlm;
     }
 
     /**
      * Ctor.
-     * @param header Header name
+     * @param hdr Header name
      * @param vlm Value matcher
      */
-    public HmRsHeader(final String header,
+    public HmRsHeader(final String hdr,
         final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(header), vlm);
+        this(Matchers.equalToIgnoringCase(hdr), vlm);
     }
 
     /**
      * Ctor.
-     * @param header Header name
-     * @param value Header value
+     * @param hdr Header name
+     * @param val Header value
      */
-    public HmRsHeader(final String header, final String value) {
+    public HmRsHeader(final String hdr, final String val) {
         this(
-            Matchers.equalToIgnoringCase(header),
-            Matchers.hasItems(value)
+            Matchers.equalToIgnoringCase(hdr),
+            Matchers.hasItems(val)
         );
     }
 
     @Override
     public void describeTo(final Description description) {
-        description.appendText("headers: ")
-            .appendDescriptionOf(this.headerm)
-            .appendText(" -> values: ")
-            .appendDescriptionOf(this.valuem);
+        description.appendText("header: ")
+            .appendDescriptionOf(this.header)
+            .appendText(HmRsHeader.VALUES_STR)
+            .appendDescriptionOf(this.value);
     }
 
     @Override
@@ -108,14 +121,27 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
             final List<String> values = new ArrayList<String>(0);
             while (headers.hasNext()) {
                 final String[] parts = HmRsHeader.split(headers.next());
-                if (this.headerm.matches(parts[0].trim())) {
+                if (this.header.matches(parts[0].trim())) {
                     values.add(parts[1].trim());
                 }
             }
-            return this.valuem.matches(values);
+            final boolean result = this.value.matches(values);
+            if (!result) {
+                this.failed = values;
+            }
+            return result;
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
+    }
+
+    @Override
+    public void describeMismatchSafely(final Response item,
+                                       final Description description) {
+        description.appendText("header was: ")
+            .appendDescriptionOf(this.header)
+            .appendText(HmRsHeader.VALUES_STR)
+            .appendValue(this.failed);
     }
 
     /**

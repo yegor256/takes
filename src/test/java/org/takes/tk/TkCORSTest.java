@@ -54,7 +54,7 @@ public final class TkCORSTest {
                 "http://www.netbout.io",
                 "http://www.example.com"
             ).act(new RqFake()),
-            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_FORBIDDEN))
+            new HmRsStatus(HttpURLConnection.HTTP_FORBIDDEN)
         );
     }
 
@@ -76,7 +76,7 @@ public final class TkCORSTest {
                     "Origin: http://teamed.io"
                 )
             ),
-            new HmRsStatus(Matchers.equalTo(HttpURLConnection.HTTP_OK))
+            new HmRsStatus(HttpURLConnection.HTTP_OK)
         );
     }
 
