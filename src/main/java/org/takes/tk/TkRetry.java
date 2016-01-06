@@ -111,20 +111,20 @@ public final class TkRetry implements Take {
     private static List<String> strings(final List<IOException> failures) {
         final List<String> result = new ArrayList<String>(failures.size());
         final Iterable<String> transform = new Transform<IOException, String>(
-                failures,
-                new TransformAction<IOException, String>() {
-                    @Override
-                    public String transform(final IOException element) {
-                        final Opt<String> message = new Opt.Single<String>(
-                            element.getMessage()
-                        );
-                        String result = "";
-                        if (message.has()) {
-                            result = message.get();
-                        }
-                        return result;
+            failures,
+            new TransformAction<IOException, String>() {
+                @Override
+                public String transform(final IOException element) {
+                    final Opt<String> message = new Opt.Single<String>(
+                        element.getMessage()
+                    );
+                    String result = "";
+                    if (message.has()) {
+                        result = message.get();
                     }
+                    return result;
                 }
+            }
         );
         final Iterator<String> messages = transform.iterator();
         while (messages.hasNext()) {
