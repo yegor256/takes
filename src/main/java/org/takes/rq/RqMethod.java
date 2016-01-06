@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -113,14 +112,6 @@ public interface RqMethod extends Request {
         );
 
         /**
-         * HTTP method line pattern.
-         * [!-~] is for method or extension-method token (octets 33 - 126).
-         */
-        private static final Pattern PATTERN = Pattern.compile(
-            "([!-~]+) [^ ]+( [^ ]+){0,1}"
-        );
-
-        /**
          * Ctor.
          * @param req Original request
          */
@@ -130,14 +121,8 @@ public interface RqMethod extends Request {
 
         @Override
         public String method() throws IOException {
-            final String line = this.head().iterator().next();
-            final Matcher matcher = PATTERN.matcher(line);
-            if (!matcher.matches()) {
-                throw new IOException(
-                    String.format("Invalid HTTP method line: %s", line)
-                );
-            }
-            final String method = matcher.group(1);
+            final String method = new RqRequestLine.Base(this)
+                .method();
             if (SEPARATORS.matcher(method).find()) {
                 throw new IOException(
                     String.format("Invalid HTTP method: %s", method)

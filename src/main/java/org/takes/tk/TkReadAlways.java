@@ -21,40 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.tk;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.io.IOException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 
 /**
- * Test case for {@link RqWithBody}.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * A Take decorator which reads and ignores the request body.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
+ * @author Dan Baleanu (dan.baleanu@gmail.com)
  * @version $Id$
- * @since 0.22
+ * @since 0.30
  */
-public final class RqWithBodyTest {
+@ToString(of = {"origin"})
+@EqualsAndHashCode(of = {"origin"})
+public final class TkReadAlways implements Take {
 
     /**
-     * RqWithBody returns body.
-     * @throws Exception If some problem inside
+     * Original take.
      */
-    @Test
-    public void returnsBody() throws Exception {
-        final String body = "body";
-        MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithBody(
-                    new RqWithHeader(
-                        new RqFake(),
-                        "Content-Length",
-                        String.valueOf(body.getBytes().length)
-                    ),
-                    body
-                )
-            ).printBody(),
-            Matchers.equalTo(body)
-        );
+    private final transient Take origin;
+
+    /**
+     * Ctor.
+     * @param take Original take
+     */
+    public TkReadAlways(final Take take) {
+        this.origin = take;
+    }
+
+    @Override
+    public Response act(final Request req) throws IOException {
+        final Response res = this.origin.act(req);
+        for (int count = req.body().available(); count > 0;
+                count = req.body().available()) {
+            req.body().skip(count);
+        }
+        return res;
     }
 
 }

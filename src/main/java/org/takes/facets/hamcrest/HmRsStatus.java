@@ -24,10 +24,9 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Description;
+import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.Matchers;
 import org.takes.Response;
 
 /**
@@ -37,57 +36,42 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Erim Erturk (erimerturk@gmail.com)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.13
  */
-public final class HmRsStatus extends TypeSafeMatcher<Response> {
+public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
 
     /**
-     * Expected response status code matcher.
+     * Description message.
      */
-    private final transient Matcher<? extends Number> matcher;
+    private static final String FEATURE_NAME = "HTTP status code";
 
     /**
-     * Expected matcher.
-     * @param val Value
+     * Create matcher using HTTP code.
+     * @param val HTTP code value
      * @since 0.17
      */
     public HmRsStatus(final int val) {
-        this(CoreMatchers.equalTo(val));
+        this(Matchers.equalTo(val));
     }
 
     /**
-     * Expected matcher.
-     * @param mtchr Is expected result code matcher.
+     * Create matcher using HTTP code matcher.
+     * @param matcher HTTP code matcher
      */
-    public HmRsStatus(final Matcher<? extends Number> mtchr) {
-        super();
-        this.matcher = mtchr;
+    public HmRsStatus(final Matcher<Integer> matcher) {
+        super(matcher, FEATURE_NAME, FEATURE_NAME);
     }
 
-    /**
-     * Fail description.
-     * @param description Fail result description.
-     */
     @Override
-    public void describeTo(final Description description) {
-        this.matcher.describeTo(description);
-    }
-
-    /**
-     * Type safe matcher.
-     * @param item Is tested element
-     * @return True when expected type matched.
-     */
-    @Override
-    public boolean matchesSafely(final Response item) {
+    public Integer featureValueOf(final Response response) {
         try {
-            final String head = item.head().iterator().next();
+            final String head = response.head().iterator().next();
             final String[] parts = head.split(" ");
-            return this.matcher.matches(Integer.parseInt(parts[1]));
+            return Integer.parseInt(parts[1]);
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
     }
-
 }

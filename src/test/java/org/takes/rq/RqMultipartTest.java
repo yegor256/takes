@@ -75,16 +75,22 @@ public final class RqMultipartTest {
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
+        final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
         final Request req = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeader(
-                new RqFake("", "", "449 N Wolfe Rd, Sunnyvale, CA 94085"),
-                RqMultipartTest.DISPOSITION, "form-data; name=\"t-1\""
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                contentLengthHeader(body.getBytes().length),
+                contentDispositionHeader(
+                    "form-data; name=\"t-1\""
+                )
             ),
-            new RqWithHeader(
+            new RqWithHeaders(
                 new RqFake("", "", ""),
-                RqMultipartTest.DISPOSITION,
-                "form-data; name=\"data\"; filename=\"a.bin\""
+                contentLengthHeader(0),
+                contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"a.bin\""
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -180,16 +186,22 @@ public final class RqMultipartTest {
      */
     @Test
     public void parsesHttpBody() throws IOException {
+        final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeader(
-                new RqFake("", "", "40 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; name=\"t4\""
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                contentLengthHeader(body.getBytes().length),
+                contentDispositionHeader(
+                    "form-data; name=\"t4\""
+                )
             ),
-            new RqWithHeader(
+            new RqWithHeaders(
                 new RqFake("", "", ""),
-                DISPOSITION,
-                "form-data; name=\"data\"; filename=\"a.bin\""
+                contentLengthHeader(0),
+                contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"a.bin\""
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -217,16 +229,22 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
+        final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeader(
-                new RqFake("", "", "443 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; name=\"t5\""
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                contentLengthHeader(body.getBytes().length),
+                contentDispositionHeader(
+                    "form-data; name=\"t5\""
+                )
             ),
-            new RqWithHeader(
+            new RqWithHeaders(
                 new RqFake("", "", ""),
-                DISPOSITION,
-                "form-data; name=\"data\"; filename=\"a.zip\""
+                contentLengthHeader(0),
+                contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"a.zip\""
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -241,16 +259,22 @@ public final class RqMultipartTest {
      */
     @Test
     public void returnsCorrectNamesSet() throws IOException {
+        final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeader(
-                new RqFake("", "", "441 N Wolfe Rd, Sunnyvale, CA 94085"),
-                DISPOSITION, "form-data; name=\"address\""
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                contentLengthHeader(body.getBytes().length),
+                contentDispositionHeader(
+                    "form-data; name=\"address\""
+                )
             ),
-            new RqWithHeader(
+            new RqWithHeaders(
                 new RqFake("", "", ""),
-                DISPOSITION,
-                "form-data; name=\"data\"; filename=\"a.bin\""
+                contentLengthHeader(0),
+                contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"a.bin\""
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -268,19 +292,22 @@ public final class RqMultipartTest {
     @Test
     public void returnsCorrectPartLength() throws IOException {
         final int length = 5000;
-        final Request req = new RqFake(
-            Arrays.asList(
-                "POST /post?u=3 HTTP/1.1",
-                "Host: www.example.com",
-                "Content-Type: multipart/form-data; boundary=zzz"
-            ),
+        final String body =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz",
                 "Content-Disposition: form-data; name=\"x-1\"",
                 "",
                 StringUtils.repeat("X", length),
                 "--zzz--"
-            )
+            );
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?u=3 HTTP/1.1",
+                "Host: www.example.com",
+                contentLengthHeader(body.getBytes().length),
+                "Content-Type: multipart/form-data; boundary=zzz"
+            ),
+            body
         );
         MatcherAssert.assertThat(
             new RqMultipart.Smart(
@@ -308,6 +335,12 @@ public final class RqMultipartTest {
                 );
             }
         };
+        final String body =
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "--AaB0zz",
+                "Content-Disposition: form-data; name=\"f-1\"", "",
+                "my picture", "--AaB0zz--"
+            );
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new FtRemote.Script() {
@@ -319,16 +352,12 @@ public final class RqMultipartTest {
                             "Content-Type",
                             "multipart/form-data; boundary=AaB0zz"
                         )
-                        .body()
-                        .set(
-                            Joiner.on(RqMultipartTest.CRLF).join(
-                                "--AaB0zz",
-                                "Content-Disposition: form-data; name=\"f-1\"",
-                                "",
-                                "my picture",
-                                "--AaB0zz--"
-                            )
+                        .header(
+                            "Content-Length",
+                            String.valueOf(body.getBytes().length)
                         )
+                        .body()
+                        .set(body)
                         .back()
                         .fetch()
                         .as(RestResponse.class)
@@ -395,26 +424,33 @@ public final class RqMultipartTest {
         final int length = 1000000;
         final File temp = File.createTempFile("notDistortContent", ".tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
-        bwr.write(
+        final String head =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz1",
                 "Content-Disposition: form-data; name=\"test1\"",
                 "",
                 ""
-            )
-        );
+            );
+        bwr.write(head);
         final int byt = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
             bwr.write(idx % byt);
         }
-        bwr.write(RqMultipartTest.CRLF);
-        bwr.write("--zzz1--");
-        bwr.write(RqMultipartTest.CRLF);
+        final String foot =
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "",
+                "--zzz1--",
+                ""
+            );
+        bwr.write(foot);
         bwr.close();
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: exampl.com",
+                contentLengthHeader(
+                    head.getBytes().length + length + foot.getBytes().length
+                ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
             new FileInputStream(temp)
@@ -434,5 +470,23 @@ public final class RqMultipartTest {
             );
         }
         temp.delete();
+    }
+
+    /**
+     * Format Content-Disposition header.
+     * @param dsp Disposition
+     * @return Content-Disposition header
+     */
+    private static String contentDispositionHeader(final String dsp) {
+        return String.format("Content-Disposition: %s", dsp);
+    }
+
+    /**
+     * Format Content-Length header.
+     * @param length Body length
+     * @return Content-Length header
+     */
+    private static String contentLengthHeader(final long length) {
+        return String.format("Content-Length: %d", length);
     }
 }

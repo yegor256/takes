@@ -237,7 +237,7 @@ public final class RsXSLT extends RsWrap {
         public Source resolve(final String href, final String base)
             throws TransformerException {
             final URI uri;
-            if (base == null) {
+            if (base == null || base.isEmpty()) {
                 uri = URI.create(href);
             } else {
                 uri = URI.create(base).resolve(href);
