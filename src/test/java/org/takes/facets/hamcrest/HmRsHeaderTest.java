@@ -28,6 +28,7 @@ import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
 import org.takes.rs.RsEmpty;
+import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithHeaders;
 
