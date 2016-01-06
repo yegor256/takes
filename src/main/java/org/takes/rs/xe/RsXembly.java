@@ -166,7 +166,11 @@ public final class RsXembly extends RsWrap {
                 .newDocumentBuilder()
                 .newDocument();
         } catch (final ParserConfigurationException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                // @checkstyle LineLength (1 line)
+                "Could not instantiate DocumentBuilderFactory and build empty Document",
+                ex
+            );
         }
     }
 
@@ -176,17 +180,29 @@ public final class RsXembly extends RsWrap {
      * @return Cloned Node
      */
     private static Node cloneNode(final Node dom) {
+        final Transformer transformer;
         try {
-            final Transformer transformer =
-                TransformerFactory.newInstance().newTransformer();
-            final DOMSource source = new DOMSource(dom);
+            transformer = TransformerFactory.newInstance().newTransformer();
+        } catch (final TransformerConfigurationException ex) {
+            throw new IllegalStateException(
+                "Could not create new Transformer to clone Node",
+                ex
+            );
+        }
+        final DOMSource source = new DOMSource(dom);
+        try {
             final DOMResult result = new DOMResult();
             transformer.transform(source, result);
             return result.getNode();
-        } catch (final TransformerConfigurationException ex) {
-            throw new IllegalStateException(ex);
         } catch (final TransformerException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                String.format(
+                    "Could not clone Node %s with Transformer %s",
+                    source,
+                    transformer
+                ),
+                ex
+            );
         }
     }
 }
