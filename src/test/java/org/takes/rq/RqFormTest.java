@@ -38,6 +38,11 @@ import org.junit.Test;
 public final class RqFormTest {
 
     /**
+     * Content-Length header template.
+     */
+    private static final String HEADER = "Content-Length: %d";
+
+    /**
      * RqForm can parse body.
      * @throws IOException If some problem inside
      */
@@ -51,7 +56,7 @@ public final class RqFormTest {
                         "GET /h?a=3",
                         "Host: www.example.com",
                         String.format(
-                            "Content-Length: %d",
+                            HEADER,
                             body.getBytes().length
                         )
                     ),
@@ -103,12 +108,16 @@ public final class RqFormTest {
         final String value = "value";
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
+        final String body = "key=value&key=a%26b&anotherkey=againanothervalue";
         final RqForm req = new RqForm.Fake(
             new RqFake(
                 Arrays.asList(
                     "GET /form",
                     "Host: www.example5.com",
-                    "Content-Length: 49"
+                    String.format(
+                        HEADER,
+                        body.length()
+                    )
                 ),
                 ""
             ),
