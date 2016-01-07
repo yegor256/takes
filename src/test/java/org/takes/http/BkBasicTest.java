@@ -24,8 +24,12 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.jcabi.http.mock.MkAnswer;
+import com.jcabi.http.mock.MkContainer;
+import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import com.jcabi.matchers.RegexMatchers;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,6 +39,7 @@ import java.net.Socket;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.facets.fork.FkRegex;
@@ -48,6 +53,7 @@ import org.takes.tk.TkText;
  * @version $Id$
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class BkBasicTest {
     /**
@@ -106,6 +112,97 @@ public final class BkBasicTest {
                         .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
                 }
             }
+        );
+    }
+    /**
+     * BkBasic can handle two requests in one connection.
+     * @throws Exception If some problem inside
+     */
+    @Ignore
+    @Test
+    public void handlesTwoRequestInOneConnection() throws Exception {
+        final String text = "Hello world!";
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
+                Joiner.on("\r\n").join(
+                    "POST / HTTP/1.1",
+                    "Host: localhost",
+                    "Content-Length: 4",
+                    "",
+                    "hi",
+                    "POST / HTTP/1.1",
+                    "Host: localhost",
+                    "Content-Length: 4",
+                    "",
+                    "hi"
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
+        new BkBasic(new TkText(text)).accept(socket);
+        new BkBasic(new TkText(text)).accept(socket);
+        container.stop();
+        MatcherAssert.assertThat(
+            socket.getOutputStream().toString(),
+            RegexMatchers.containsPattern(text + ".*?" + text)
+        );
+    }
+
+    /**
+     * BkBasic can return HTTP status 411 when a persistent connection request
+     * has no Content-Length.
+     * @throws Exception If some problem inside
+     */
+    @Ignore
+    @Test
+    public void returnsProperResponseCodeOnNoContentLength() throws Exception {
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
+                Joiner.on("\r\n").join(
+                    "POST / HTTP/1.1",
+                    "Host: localhost",
+                    "",
+                    "hi"
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
+        new BkBasic(new TkText("411 Test")).accept(socket);
+        container.stop();
+        MatcherAssert.assertThat(
+            socket.getOutputStream().toString(),
+            Matchers.containsString("HTTP/1.1 411 Length Required")
+        );
+    }
+
+    /**
+     * BkBasic can accept no content-length on closed connection.
+     * @throws Exception If some problem inside
+     */
+    @Ignore
+    @Test
+    public void acceptsNoContentLengthOnClosedConnection() throws Exception {
+        final String text = "Close Test";
+        final MkContainer container = new MkGrizzlyContainer().next(
+            new MkAnswer.Simple(
+                Joiner.on("\r\n").join(
+                    "POST / HTTP/1.1",
+                    "Host: localhost",
+                    "Connection: Close",
+                    "",
+                    "hi"
+                )
+            )
+        ).start();
+        final URI uri = container.home();
+        final Socket socket = new Socket(uri.getHost(), uri.getPort());
+        new BkBasic(new TkText(text)).accept(socket);
+        container.stop();
+        MatcherAssert.assertThat(
+            socket.getOutputStream().toString(),
+            Matchers.containsString(text)
         );
     }
 }
