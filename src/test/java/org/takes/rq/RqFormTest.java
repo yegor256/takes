@@ -104,7 +104,14 @@ public final class RqFormTest {
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
         final RqForm req = new RqForm.Fake(
-            new RqFake(),
+            new RqFake(
+                Arrays.asList(
+                    "GET /form",
+                    "Host: www.example5.com",
+                    "Content-Length: 49"
+                ),
+                ""
+            ),
             key, value,
             key, avalue,
             akey, aavalue
