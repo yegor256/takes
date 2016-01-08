@@ -34,6 +34,7 @@ import org.junit.Test;
  * @author Yohann Ferreira (yohann.ferreira@orange.fr)
  * @version $Id$
  * @since 0.16.9
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class RsWithTypeTest {
 
@@ -43,23 +44,48 @@ public final class RsWithTypeTest {
     private static final String CRLF = "\r\n";
 
     /**
+     * Content type text/html.
+     */
+    private static final String TYPE_HTML = "text/html";
+
+    /**
+     * Content type text/xml.
+     */
+    private static final String TYPE_XML = "text/xml";
+
+    /**
+     * Content type text/plain.
+     */
+    private static final String TYPE_TEXT = "text/plain";
+
+    /**
+     * HTTP Status OK.
+     */
+    private static final String HTTP_OK = "HTTP/1.1 200 OK";
+
+    /**
+     * Content-Type format.
+     */
+    private static final String CONTENT_TYPE = "Content-Type: %s";
+
+    /**
      * RsWithType can replace an existing type.
      * @throws java.lang.Exception If a problem occurs.
      */
     @Test
     public void replaceTypeToResponse() throws Exception {
-        final String type = "text/plain";
+        final String type = TYPE_TEXT;
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
-                    new RsWithType(new RsEmpty(), "text/xml"),
+                    new RsWithType(new RsEmpty(), TYPE_XML),
                     type
                 )
             ).print(),
             Matchers.equalTo(
                 Joiner.on(CRLF).join(
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Type: %s", type),
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, type),
                     "",
                     ""
                 )
@@ -83,7 +109,7 @@ public final class RsWithTypeTest {
                         ),
                         body
                     ),
-                    "text/html"
+                    TYPE_HTML
                 )
             ).print(),
             Matchers.equalTo(
@@ -93,6 +119,106 @@ public final class RsWithTypeTest {
                     "Content-Type: text/html",
                     "",
                     body
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType.HTML can replace an existing type with text/html.
+     * @throws java.lang.Exception If a problem occurs.
+     */
+    @Test
+    public void replacesTypeWithHtml() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.HTML(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_XML
+                    )
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, TYPE_HTML),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType.JSON can replace an existing type with application/json.
+     * @throws java.lang.Exception If a problem occurs.
+     */
+    @Test
+    public void replacesTypeWithJson() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.JSON(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_XML
+                    )
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, "application/json"),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType.XML can replace an existing type with text/xml.
+     * @throws java.lang.Exception If a problem occurs.
+     */
+    @Test
+    public void replacesTypeWithXml() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.XML(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_HTML
+                    )
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, TYPE_XML),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType.Text can replace an existing type with text/plain.
+     * @throws java.lang.Exception If a problem occurs.
+     */
+    @Test
+    public void replacesTypeWithText() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.Text(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_HTML
+                    )
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, TYPE_TEXT),
+                    "",
+                    ""
                 )
             )
         );

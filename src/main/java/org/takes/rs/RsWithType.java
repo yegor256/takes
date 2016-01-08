@@ -66,4 +66,88 @@ public final class RsWithType extends RsWrap {
             RsWithType.HEADER, type
         );
     }
+
+    /**
+     * Response decorator, with content type text/html.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
+     * @version $Id$
+     * @since 0.30
+     */
+    public static final class HTML extends RsWrap {
+
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        public HTML(final Response res) {
+            super(RsWithType.make(res, "text/html"));
+        }
+
+    }
+
+    /**
+     * Response decorator, with content type application/json.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
+     * @version $Id$
+     * @since 0.30
+     */
+    public static final class JSON extends RsWrap {
+
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        public JSON(final Response res) {
+            super(RsWithType.make(res, "application/json"));
+        }
+
+    }
+
+    /**
+     * Response decorator, with content type text/xml.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
+     * @version $Id$
+     * @since 0.30
+     */
+    public static final class XML extends RsWrap {
+
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        public XML(final Response res) {
+            super(RsWithType.make(res, "text/xml"));
+        }
+
+    }
+
+    /**
+     * Response decorator, with content type text/plain.
+     *
+     * <p>The class is immutable and thread-safe.
+     *
+     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
+     * @version $Id$
+     * @since 0.30
+     */
+    public static final class Text extends RsWrap {
+
+        /**
+         * Ctor.
+         * @param res Original response
+         */
+        public Text(final Response res) {
+            super(RsWithType.make(res, "text/plain"));
+        }
+
+    }
 }
