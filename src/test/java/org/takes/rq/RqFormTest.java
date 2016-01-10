@@ -23,6 +23,8 @@
  */
 package org.takes.rq;
 
+import com.google.common.escape.Escaper;
+import com.google.common.net.UrlEscapers;
 import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
@@ -108,7 +110,7 @@ public final class RqFormTest {
         final String value = "value";
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
-        final String body = "key=value&key=a%26b&anotherkey=againanothervalue";
+        final Escaper escaper = UrlEscapers.urlFormParameterEscaper();
         final RqForm req = new RqForm.Fake(
             new RqFake(
                 Arrays.asList(
@@ -116,7 +118,12 @@ public final class RqFormTest {
                     "Host: www.example5.com",
                     String.format(
                         HEADER,
-                        body.length()
+                        escaper.escape(key).length() + 1
+                            + escaper.escape(value).length() + 1
+                            + escaper.escape(key).length() + 1
+                            + escaper.escape(avalue).length() + 1
+                            + escaper.escape(akey).length() + 1
+                            + escaper.escape(aavalue).length()
                     )
                 ),
                 ""
