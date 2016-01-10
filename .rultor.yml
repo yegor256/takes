@@ -15,6 +15,7 @@ install: |
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
   sudo gem install --no-rdoc --no-ri pdd
+  sudo gem install --no-rdoc --no-ri est
 architect:
 - yegor256
 - davvd
