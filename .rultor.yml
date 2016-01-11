@@ -15,6 +15,7 @@ install: |
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
   sudo gem install --no-rdoc --no-ri pdd
+  sudo gem install --no-rdoc --no-ri est
 architect:
 - yegor256
 - davvd
@@ -57,6 +58,8 @@ deploy:
     mvn clean
     pdd --source=$(pwd) --verbose --file=takes.xml
     s3cmd --no-progress put takes.xml --config=../s3cfg s3://pdd.teamed.io/takes.xml
+    est --dir=./est --verbose --file=takes.xml --format=xml
+    s3cmd --no-progress put takes.xml --config=../s3cfg s3://est.teamed.io/takes.xml
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
