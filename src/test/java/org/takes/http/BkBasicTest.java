@@ -54,7 +54,9 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #306:30min BkBasic.accept should handle more
+ * @todo #306:30min At the moment we don't support HTTP
+ *  persistent connections. Would be great to implement
+ *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
  */
 public final class BkBasicTest {
