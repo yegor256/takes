@@ -32,13 +32,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.Sprintf;
-import org.takes.misc.VerboseIterable;
 
 /**
  * HTTP headers parsing
@@ -60,7 +59,7 @@ public interface RqHeaders extends Request {
      * @return List of values (can be empty)
      * @throws IOException If fails
      */
-    Iterable<String> header(CharSequence key) throws IOException;
+    List<String> header(CharSequence key) throws IOException;
 
     /**
      * Get all header names.
@@ -68,7 +67,7 @@ public interface RqHeaders extends Request {
      * @return All names
      * @throws IOException If fails
      */
-    Iterable<String> names() throws IOException;
+    Set<String> names() throws IOException;
 
     /**
      * Request decorator, for HTTP headers parsing.
@@ -89,36 +88,30 @@ public interface RqHeaders extends Request {
         public Base(final Request req) {
             super(req);
         }
+
+        // @checkstyle LineLength (6 lines)
+        // @todo #490:30min We need to implement a VerboseList and its tests
+        //  like VerboseIterable. It should provide means to throw an exception
+        //  with a given error message when it otherwise throws an
+        //  IndexOutOfBoundsException. With this we must wrap the returned
+        //  list otherwise the diagnostic messages are lost:
+        //  https://github.com/yegor256/takes/pull/503/files#diff-a01b0291ad72ac6fd8e264f47f844b3bL101
         @Override
-        public Iterable<String> header(final CharSequence key)
+        public List<String> header(final CharSequence key)
             throws IOException {
-            final Map<String, List<String>> map = this.map();
-            final List<String> values = map.get(
+            final List<String> values = this.map().get(
                 key.toString().toLowerCase(Locale.ENGLISH)
             );
-            final Iterable<String> iter;
+            final List<String> list;
             if (values == null) {
-                iter = new VerboseIterable<String>(
-                    Collections.<String>emptyList(),
-                    new Sprintf(
-                        // @checkstyle LineLengthCheck (1 line)
-                        "there are no headers by name \"%s\" among %d others: %s",
-                        key, map.size(), map.keySet()
-                    )
-                );
+                list = Collections.emptyList();
             } else {
-                iter = new VerboseIterable<String>(
-                    values,
-                    new Sprintf(
-                        "there are only %d headers by name \"%s\"",
-                        values.size(), key
-                    )
-                );
+                list = values;
             }
-            return iter;
+            return list;
         }
         @Override
-        public Iterable<String> names() throws IOException {
+        public Set<String> names() throws IOException {
             return this.map().keySet();
         }
         /**
@@ -178,12 +171,12 @@ public interface RqHeaders extends Request {
             this.origin = req;
         }
         @Override
-        public Iterable<String> header(final CharSequence name)
+        public List<String> header(final CharSequence name)
             throws IOException {
             return this.origin.header(name);
         }
         @Override
-        public Iterable<String> names() throws IOException {
+        public Set<String> names() throws IOException {
             return this.origin.names();
         }
         @Override
