@@ -34,5 +34,5 @@ There are 3 active puzzles (33 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#458](https://github.com/yegor256/takes/issues/458):[**377-e6ce369a**](https://github.com/yegor256/takes/issues/458) [`TkProxyTest.java:40-42`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#445](https://github.com/yegor256/takes/issues/445):[<del>445</del>](https://github.com/yegor256/takes/issues/445) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#473](https://github.com/yegor256/takes/issues/473):[<del>445-5323c196</del>](https://github.com/yegor256/takes/issues/473) [`RqHref.java:83-86`](../master/src/main/java/org/takes/rq/RqHref.java#L83-L86)<br/>
-[#490](https://github.com/yegor256/takes/issues/490):[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[**490-c74fee69**]() [`RqHeaders.java:93-98`](../master/src/main/java/org/takes/rq/RqHeaders.java#L93-L98)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#490](https://github.com/yegor256/takes/issues/490):[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#508](https://github.com/yegor256/takes/issues/508):[**490-c74fee69**](https://github.com/yegor256/takes/issues/508) [`RqHeaders.java:93-98`](../master/src/main/java/org/takes/rq/RqHeaders.java#L93-L98)<br/>
