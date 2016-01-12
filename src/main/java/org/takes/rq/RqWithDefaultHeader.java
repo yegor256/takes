@@ -30,6 +30,7 @@ import org.takes.Request;
  * Request with default header.
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
+ * @since 0.31
  */
 public final class RqWithDefaultHeader extends RqWrap {
 

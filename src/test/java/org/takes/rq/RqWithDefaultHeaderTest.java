@@ -23,9 +23,8 @@
  */
 package org.takes.rq;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -34,6 +33,8 @@ import org.junit.Test;
  * Test case for {@link RqWithDefaultHeader}.
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
+ * @since 0.31
+ * @checkstyle MultipleStringLiteralsCheck (31 lines)
  */
 public final class RqWithDefaultHeaderTest {
     /**
@@ -46,11 +47,13 @@ public final class RqWithDefaultHeaderTest {
     private static final String DEF_HEADER_VAL = "X-Default-Value";
 
     /**
-     * RqWithDefaultHeader provides default header.
+     * RqWithDefaultHeader can provide default header value.
      * @throws IOException If some problem inside
      */
     @Test
-    public void defaultHeader() throws IOException {
+    public void providesDefaultHeader() throws IOException {
+        final String expected =
+            String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL);
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
@@ -59,19 +62,24 @@ public final class RqWithDefaultHeaderTest {
                         DEF_HEADER_VAL
                 )
             ).print(),
-            Matchers.containsString(
-                String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL)
+            Matchers.startsWith(
+                Joiner.on("\r\n").join(
+                    "GET /",
+                    "Host: www.example.com",
+                    expected
+                )
             )
         );
     }
 
     /**
-     * RqWithDefaultHeader doesn't override header value
-     * if it's already exists.
+     * RqWithDefaultHeader can override default value.
      * @throws IOException If some problem inside
      */
     @Test
-    public void notDefaultHeader() throws IOException {
+    public void allowsOverrideDefaultHeader() throws IOException {
+        final String expected =
+            String.format("%s: Non-Default-Value", DEF_HEADER);
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
@@ -84,21 +92,13 @@ public final class RqWithDefaultHeaderTest {
                         DEF_HEADER_VAL
                 )
             ).print(),
-            Matchers.containsString(
-                String.format("%s: Non-Default-Value", DEF_HEADER)
+            Matchers.startsWith(
+                Joiner.on("\r\n").join(
+                    "GET /",
+                    "Host: www.example.com",
+                    expected
+                )
             )
         );
-    }
-
-    /**
-     * Checks RqWithHeader equals method.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeader.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
     }
 }
