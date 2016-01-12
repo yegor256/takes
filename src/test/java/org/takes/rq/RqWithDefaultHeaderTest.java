@@ -52,8 +52,6 @@ public final class RqWithDefaultHeaderTest {
      */
     @Test
     public void providesDefaultHeader() throws IOException {
-        final String expected =
-            String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL);
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
@@ -66,7 +64,7 @@ public final class RqWithDefaultHeaderTest {
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    expected
+                    String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL)
                 )
             )
         );
@@ -78,8 +76,6 @@ public final class RqWithDefaultHeaderTest {
      */
     @Test
     public void allowsOverrideDefaultHeader() throws IOException {
-        final String expected =
-            String.format("%s: Non-Default-Value", DEF_HEADER);
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
@@ -96,7 +92,7 @@ public final class RqWithDefaultHeaderTest {
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    expected
+                    String.format("%s: Non-Default-Value", DEF_HEADER)
                 )
             )
         );
