@@ -39,11 +39,11 @@ public final class RqWithDefaultHeaderTest {
     /**
      * Default header name.
      */
-    private static final String DEFAULT_HEADER = "X-Default-Header";
+    private static final String DEF_HEADER = "X-Default-Header";
     /**
      * Default header value.
      */
-    private static final String DEFAULT_HEADER_VALUE = "X-Default-Value";
+    private static final String DEF_HEADER_VAL = "X-Default-Value";
 
     /**
      * RqWithDefaultHeader provides default header.
@@ -55,12 +55,12 @@ public final class RqWithDefaultHeaderTest {
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqFake(),
-                    DEFAULT_HEADER,
-                    DEFAULT_HEADER_VALUE
+                        DEF_HEADER,
+                        DEF_HEADER_VAL
                 )
             ).print(),
             Matchers.containsString(
-                String.format("%s: %s", DEFAULT_HEADER, DEFAULT_HEADER_VALUE)
+                String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL)
             )
         );
     }
@@ -77,15 +77,15 @@ public final class RqWithDefaultHeaderTest {
                 new RqWithDefaultHeader(
                     new RqWithHeader(
                         new RqFake(),
-                        DEFAULT_HEADER,
+                            DEF_HEADER,
                         "Non-Default-Value"
                     ),
-                    DEFAULT_HEADER,
-                    DEFAULT_HEADER_VALUE
+                        DEF_HEADER,
+                        DEF_HEADER_VAL
                 )
             ).print(),
             Matchers.containsString(
-                String.format("%s: Non-Default-Value", DEFAULT_HEADER)
+                String.format("%s: Non-Default-Value", DEF_HEADER)
             )
         );
     }
