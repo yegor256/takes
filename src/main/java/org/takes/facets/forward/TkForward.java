@@ -84,14 +84,14 @@ public final class TkForward implements Take {
         /**
          * Saved response.
          */
-        private final transient List<Response> saved =
-            new CopyOnWriteArrayList<Response>();
+        private final transient List<Response> saved;
         /**
          * Ctor.
          * @param res Original response
          */
         private Safe(final Response res) {
             this.origin = res;
+            this.saved = new CopyOnWriteArrayList<Response>();
         }
         @Override
         public Iterable<String> head() throws IOException {

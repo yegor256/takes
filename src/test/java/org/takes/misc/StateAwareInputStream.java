@@ -43,7 +43,7 @@ public final class StateAwareInputStream extends InputStream {
     /**
      * Stream was closed flag.
      */
-    private final AtomicBoolean closed = new AtomicBoolean(false);
+    private final AtomicBoolean closed;
 
     /**
      * Constructor.
@@ -52,6 +52,7 @@ public final class StateAwareInputStream extends InputStream {
      */
     public StateAwareInputStream(final InputStream stream) {
         super();
+        this.closed = new AtomicBoolean(false);
         this.origin = stream;
     }
 
