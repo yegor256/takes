@@ -32,6 +32,7 @@ import java.util.NoSuchElementException;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
+ * @param <T> Type of item
  */
 public final class VerboseIterator<T> implements Iterator<T> {
 

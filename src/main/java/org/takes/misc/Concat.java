@@ -32,6 +32,7 @@ import java.util.Iterator;
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.15.2
+ * @param <T> Type of items
  */
 public final class Concat<T> implements Iterable<T> {
 
@@ -73,6 +74,8 @@ public final class Concat<T> implements Iterable<T> {
      * from one list.
      *
      * <p>This class is NOT thread-safe.
+     *
+     * @param <E> Type of items
      */
     private static final class ConcatIterator<E> implements Iterator<E> {
         /**

@@ -29,6 +29,7 @@ package org.takes.misc;
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
+ * @param <T> Type of items
  */
 public interface Condition<T> {
 
@@ -41,6 +42,7 @@ public interface Condition<T> {
 
     /**
      * Negating condition of any condition.
+     * @param <T> Type of items
      */
     final class Not<T> implements Condition<T> {
         /**

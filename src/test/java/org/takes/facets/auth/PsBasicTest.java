@@ -179,8 +179,8 @@ public final class PsBasicTest {
                     "XYZX-Check-Cacheable:YES",
                     "XYZX-Powered-By:Java/1.7"
                 )
-            ).has()
-            , Matchers.is(false)
+            ).has(),
+            Matchers.is(false)
         );
     }
 

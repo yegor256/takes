@@ -42,6 +42,7 @@ merge:
   - ggajos
   - krzyk
   - longtimeago
+  - mkordas
   - pinaf
 deploy:
   script: |

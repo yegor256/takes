@@ -90,32 +90,31 @@ public interface RqRequestLine extends Request {
             "([!-~]+) ([^ ]+)( [^ ]+)?"
         );
 
-        private static enum Token {
+        /**
+         * Token inside regex.
+         */
+        private enum Token {
             /**
              * METHOD token.
              */
             METHOD(1),
-
             /**
              * URI token.
              */
             URI(2),
-
             /**
              * HTTPVERSION token.
              */
             HTTPVERSION(3);
-
             /**
              * Value.
              */
             private final int value;
-
             /**
              * Ctor.
              * @param val Value
              */
-            private Token(final int val) {
+            Token(final int val) {
                 this.value = val;
             }
         }
