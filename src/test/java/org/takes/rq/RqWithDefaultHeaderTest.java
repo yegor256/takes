@@ -34,17 +34,9 @@ import org.junit.Test;
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.31
- * @checkstyle MultipleStringLiteralsCheck (31 lines)
+ * @checkstyle MultipleStringLiteralsCheck (50 lines)
  */
 public final class RqWithDefaultHeaderTest {
-    /**
-     * Default header name.
-     */
-    private static final String DEF_HEADER = "X-Default-Header";
-    /**
-     * Default header value.
-     */
-    private static final String DEF_HEADER_VAL = "X-Default-Value";
 
     /**
      * RqWithDefaultHeader can provide default header value.
@@ -56,15 +48,15 @@ public final class RqWithDefaultHeaderTest {
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqFake(),
-                        DEF_HEADER,
-                        DEF_HEADER_VAL
+                        "X-Default-Header",
+                        "X-Default-Value"
                 )
             ).print(),
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    String.format("%s: %s", DEF_HEADER, DEF_HEADER_VAL)
+                    "X-Default-Header: X-Default-Value"
                 )
             )
         );
@@ -81,18 +73,18 @@ public final class RqWithDefaultHeaderTest {
                 new RqWithDefaultHeader(
                     new RqWithHeader(
                         new RqFake(),
-                            DEF_HEADER,
+                        "X-Default-Header",
                         "Non-Default-Value"
                     ),
-                        DEF_HEADER,
-                        DEF_HEADER_VAL
+                    "X-Default-Header",
+                    "X-Default-Value"
                 )
             ).print(),
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    String.format("%s: Non-Default-Value", DEF_HEADER)
+                    "X-Default-Header: Non-Default-Value"
                 )
             )
         );

@@ -44,7 +44,7 @@ public final class RqWithDefaultHeader extends RqWrap {
     public RqWithDefaultHeader(final Request req,
         final String hdr,
         final String val) throws IOException {
-        super(RqWithDefaultHeader.buildRequest(req, hdr, val));
+        super(RqWithDefaultHeader.build(req, hdr, val));
     }
 
     /**
@@ -55,7 +55,7 @@ public final class RqWithDefaultHeader extends RqWrap {
      * @return The new request.
      * @throws IOException in case of request errors
      */
-    private static Request buildRequest(final Request req,
+    private static Request build(final Request req,
         final String hdr, final String val) throws IOException {
         final Request request;
         if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
