@@ -138,7 +138,7 @@ public interface RqMultipart extends Request {
                 );
                 this.map = this.buildRequests(req);
             } finally {
-                if (this.body==null) {
+                if (this.body == null) {
                     stream.close();
                 } else {
                     this.body.close();
