@@ -280,7 +280,7 @@ public final class RqMultipartTest {
         MatcherAssert.assertThat(
             multi.names(),
             Matchers.<Iterable<String>>equalTo(
-                new HashSet<String>(Arrays.asList("address", "data"))
+                    new HashSet<String>(Arrays.asList("address", "data"))
             )
         );
     }
@@ -342,29 +342,29 @@ public final class RqMultipartTest {
                 "my picture", "--AaB0zz--"
             );
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (50 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .header(
-                            "Content-Type",
-                            "multipart/form-data; boundary=AaB0zz"
-                        )
-                        .header(
-                            "Content-Length",
-                            String.valueOf(body.getBytes().length)
-                        )
-                        .body()
-                        .set(body)
-                        .back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.containsString("pic"));
+                // @checkstyle AnonInnerLengthCheck (50 lines)
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        new JdkRequest(home)
+                                .method("POST")
+                                .header(
+                                        "Content-Type",
+                                        "multipart/form-data; boundary=AaB0zz"
+                                )
+                                .header(
+                                        "Content-Length",
+                                        String.valueOf(body.getBytes().length)
+                                )
+                                .body()
+                                .set(body)
+                                .back()
+                                .fetch()
+                                .as(RestResponse.class)
+                                .assertStatus(HttpURLConnection.HTTP_OK)
+                                .assertBody(Matchers.containsString("pic"));
+                    }
                 }
-            }
         );
     }
 
@@ -470,6 +470,43 @@ public final class RqMultipartTest {
             );
         }
         temp.delete();
+    }
+
+    /**
+     * RqMultipart.Base can produce parts with Content-Length.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void producesPartsWithContentLength() throws IOException {
+        final RqMultipart.Base multipart = new RqMultipart.Base(
+            new RqFake(
+                Arrays.asList(
+                    "POST /h?a=4 HTTP/1.1",
+                    "Host: rtw.example.com",
+                    "Content-Type: multipart/form-data; boundary=AaB01x",
+                    "Content-Length: 100007"
+                ),
+                Joiner.on("\r\n").join(
+                    "--AaB01x",
+                    "Content-Disposition: form-data; name=\"t2\"",
+                    "",
+                    "447 N Wolfe Rd, Sunnyvale, CA 94085",
+                    "--AaB01x"
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            Integer.parseInt(
+                new RqHeaders.Base(
+                    multipart.part("t2")
+                    .iterator()
+                    .next()
+                ).header("Content-Length")
+                .get(0)
+            ),
+            // @checkstyle MagicNumberCheck (1 lines)
+            Matchers.equalTo(102)
+        );
     }
 
     /**
