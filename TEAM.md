@@ -5,9 +5,9 @@ The following members are in the project team:
 Role | Members
 ---|---
 PM | @davvd
-CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @krzyk, @longtimeago
-DEV | @adko-pl, @cyberone, @rfqu, @exper0, @aschworer, @danff, @erimerturk, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @xupyprmv, @yamstranger, @bertram25, @lauresh
-IMP | @adko-pl, @cyberone, @rfqu, @exper0, @aschworer, @danff, @erimerturk, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @xupyprmv, @yamstranger, @bertram25, @lauresh
+CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @krzyk, @mkordas, @longtimeago
+DEV | @adko-pl, @cyberone, @rfqu, @exper0, @aschworer, @danff, @erimerturk, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @rajithd, @xupyprmv, @yamstranger, @bertram25, @lauresh
+IMP | @adko-pl, @cyberone, @rfqu, @exper0, @aschworer, @danff, @erimerturk, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @rajithd, @xupyprmv, @yamstranger, @bertram25, @lauresh
 ARC | 
 DES | @yegor256
 PO | @yegor256

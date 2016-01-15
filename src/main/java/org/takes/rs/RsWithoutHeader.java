@@ -52,7 +52,7 @@ public final class RsWithoutHeader extends RsWrap {
      */
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
-             // @checkstyle AnonInnerLengthCheck (50 lines)
+            // @checkstyle AnonInnerLengthCheck (50 lines)
             new Response() {
                 @Override
                 public Iterable<String> head() throws IOException {

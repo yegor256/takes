@@ -55,14 +55,14 @@ public final class RsGzip implements Response {
     /**
      * Compressed and cached response.
      */
-    private final transient List<Response> zipped =
-        new CopyOnWriteArrayList<Response>();
+    private final transient List<Response> zipped;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsGzip(final Response res) {
+        this.zipped = new CopyOnWriteArrayList<Response>();
         this.origin = res;
     }
 

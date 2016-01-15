@@ -60,14 +60,14 @@ public final class RsPrettyJSON implements Response {
     /**
      * Response with properly transformed body.
      */
-    private final transient List<Response> transformed =
-        new CopyOnWriteArrayList<Response>();
+    private final transient List<Response> transformed;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyJSON(final Response res) {
+        this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
     }
 

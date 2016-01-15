@@ -32,6 +32,8 @@ import java.util.Map;
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.27
+ * @param <K> Key type
+ * @param <V> Value type
  */
 public final class EntryImpl<K, V> implements Map.Entry<K, V> {
 

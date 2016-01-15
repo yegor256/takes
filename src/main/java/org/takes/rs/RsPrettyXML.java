@@ -72,14 +72,14 @@ public final class RsPrettyXML implements Response {
     /**
      * Response with properly transformed body.
      */
-    private final transient List<Response> transformed =
-        new CopyOnWriteArrayList<Response>();
+    private final transient List<Response> transformed;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyXML(final Response res) {
+        this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
     }
 
