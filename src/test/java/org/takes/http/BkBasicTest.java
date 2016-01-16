@@ -30,8 +30,6 @@ import com.jcabi.matchers.RegexMatchers;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -142,20 +140,25 @@ public final class BkBasicTest {
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final Socket socket = Mockito.mock(Socket.class);
-        final String requests = Joiner.on(BkBasicTest.CRLF).join(
-            BkBasicTest.POST,
-            BkBasicTest.HOST,
-            "Content-Length: 11",
-            "",
-            "Hello First",
-            BkBasicTest.POST,
-            BkBasicTest.HOST,
-            "Content-Length: 12",
-            "",
-            "Hello Second"
+        Mockito.when(socket.getInputStream()).thenReturn(
+            new ByteArrayInputStream(
+                Joiner.on(BkBasicTest.CRLF).join(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Content-Length: 11",
+                    "",
+                    "Hello First",
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Content-Length: 12",
+                    "",
+                    "Hello Second"
+                ).getBytes()
+            )
         );
-        final InputStream input = new ByteArrayInputStream(requests.getBytes());
-        final OutputStream output = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(
+            new ByteArrayOutputStream()
+        );
         Mockito.when(socket.getLocalAddress()).thenReturn(
             InetAddress.getLocalHost()
         );
@@ -164,8 +167,6 @@ public final class BkBasicTest {
         );
         Mockito.when(socket.getLocalPort()).thenReturn(0);
         Mockito.when(socket.getPort()).thenReturn(0);
-        Mockito.when(socket.getInputStream()).thenReturn(input);
-        Mockito.when(socket.getOutputStream()).thenReturn(output);
         new BkBasic(new TkText(text)).accept(socket);
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
@@ -182,14 +183,19 @@ public final class BkBasicTest {
     @Test
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final Socket socket = Mockito.mock(Socket.class);
-        final String requests = Joiner.on(BkBasicTest.CRLF).join(
-            BkBasicTest.POST,
-            BkBasicTest.HOST,
-            "",
-            "Hello World!"
+        Mockito.when(socket.getInputStream()).thenReturn(
+            new ByteArrayInputStream(
+                Joiner.on(BkBasicTest.CRLF).join(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "",
+                    "Hello World!"
+                ).getBytes()
+            )
         );
-        final InputStream input = new ByteArrayInputStream(requests.getBytes());
-        final OutputStream output = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(
+            new ByteArrayOutputStream()
+        );
         Mockito.when(socket.getLocalAddress()).thenReturn(
             InetAddress.getLocalHost()
         );
@@ -198,8 +204,6 @@ public final class BkBasicTest {
         );
         Mockito.when(socket.getLocalPort()).thenReturn(0);
         Mockito.when(socket.getPort()).thenReturn(0);
-        Mockito.when(socket.getInputStream()).thenReturn(input);
-        Mockito.when(socket.getOutputStream()).thenReturn(output);
         new BkBasic(new TkText("411 Test")).accept(socket);
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
@@ -216,15 +220,20 @@ public final class BkBasicTest {
     public void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final Socket socket = Mockito.mock(Socket.class);
-        final String requests = Joiner.on(BkBasicTest.CRLF).join(
-            BkBasicTest.POST,
-            BkBasicTest.HOST,
-            "Connection: Close",
-            "",
-            "Hello World!"
+        Mockito.when(socket.getInputStream()).thenReturn(
+            new ByteArrayInputStream(
+                Joiner.on(BkBasicTest.CRLF).join(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Connection: Close",
+                    "",
+                    "Hello World!"
+                ).getBytes()
+            )
         );
-        final InputStream input = new ByteArrayInputStream(requests.getBytes());
-        final OutputStream output = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(
+            new ByteArrayOutputStream()
+        );
         Mockito.when(socket.getLocalAddress()).thenReturn(
             InetAddress.getLocalHost()
         );
@@ -233,8 +242,6 @@ public final class BkBasicTest {
         );
         Mockito.when(socket.getLocalPort()).thenReturn(0);
         Mockito.when(socket.getPort()).thenReturn(0);
-        Mockito.when(socket.getInputStream()).thenReturn(input);
-        Mockito.when(socket.getOutputStream()).thenReturn(output);
         new BkBasic(new TkText(text)).accept(socket);
         MatcherAssert.assertThat(
             socket.getOutputStream().toString(),
