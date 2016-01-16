@@ -44,6 +44,7 @@ import org.junit.experimental.categories.Category;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.facets.hamcrest.HmRqHeader;
 import org.takes.http.FtRemote;
 import org.takes.misc.PerformanceTests;
 import org.takes.rs.RsText;
@@ -280,7 +281,7 @@ public final class RqMultipartTest {
         MatcherAssert.assertThat(
             multi.names(),
             Matchers.<Iterable<String>>equalTo(
-                    new HashSet<String>(Arrays.asList("address", "data"))
+                new HashSet<String>(Arrays.asList("address", "data"))
             )
         );
     }
@@ -347,22 +348,22 @@ public final class RqMultipartTest {
                     @Override
                     public void exec(final URI home) throws IOException {
                         new JdkRequest(home)
-                                .method("POST")
-                                .header(
-                                        "Content-Type",
-                                        "multipart/form-data; boundary=AaB0zz"
-                                )
-                                .header(
-                                        "Content-Length",
-                                        String.valueOf(body.getBytes().length)
-                                )
-                                .body()
-                                .set(body)
-                                .back()
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK)
-                                .assertBody(Matchers.containsString("pic"));
+                            .method("POST")
+                            .header(
+                                    "Content-Type",
+                                    "multipart/form-data; boundary=AaB0zz"
+                            )
+                            .header(
+                                    "Content-Length",
+                                    String.valueOf(body.getBytes().length)
+                            )
+                            .body()
+                            .set(body)
+                            .back()
+                            .fetch()
+                            .as(RestResponse.class)
+                            .assertStatus(HttpURLConnection.HTTP_OK)
+                            .assertBody(Matchers.containsString("pic"));
                     }
                 }
         );
@@ -496,16 +497,13 @@ public final class RqMultipartTest {
             )
         );
         MatcherAssert.assertThat(
-            Integer.parseInt(
-                new RqHeaders.Base(
-                    multipart.part("t2")
-                    .iterator()
-                    .next()
-                ).header("Content-Length")
-                .get(0)
-            ),
-            // @checkstyle MagicNumberCheck (1 lines)
-            Matchers.equalTo(102)
+            multipart.part("t2")
+                .iterator()
+                .next(),
+            new HmRqHeader(
+                "content-length",
+                "102"
+            )
         );
     }
 
