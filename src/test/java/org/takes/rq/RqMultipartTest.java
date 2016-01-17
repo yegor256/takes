@@ -343,29 +343,29 @@ public final class RqMultipartTest {
                 "my picture", "--AaB0zz--"
             );
         new FtRemote(take).exec(
-                // @checkstyle AnonInnerLengthCheck (50 lines)
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        new JdkRequest(home)
-                            .method("POST")
-                            .header(
-                                "Content-Type",
-                                "multipart/form-data; boundary=AaB0zz"
-                            )
-                            .header(
-                                "Content-Length",
-                                String.valueOf(body.getBytes().length)
-                            )
-                            .body()
-                            .set(body)
-                            .back()
-                            .fetch()
-                            .as(RestResponse.class)
-                            .assertStatus(HttpURLConnection.HTTP_OK)
-                            .assertBody(Matchers.containsString("pic"));
-                    }
+            // @checkstyle AnonInnerLengthCheck (50 lines)
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .method("POST")
+                        .header(
+                            "Content-Type",
+                            "multipart/form-data; boundary=AaB0zz"
+                        )
+                        .header(
+                            "Content-Length",
+                            String.valueOf(body.getBytes().length)
+                        )
+                        .body()
+                        .set(body)
+                        .back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.containsString("pic"));
                 }
+            }
         );
     }
 
