@@ -350,12 +350,12 @@ public final class RqMultipartTest {
                         new JdkRequest(home)
                             .method("POST")
                             .header(
-                                    "Content-Type",
-                                    "multipart/form-data; boundary=AaB0zz"
+                                "Content-Type",
+                                "multipart/form-data; boundary=AaB0zz"
                             )
                             .header(
-                                    "Content-Length",
-                                    String.valueOf(body.getBytes().length)
+                                "Content-Length",
+                                String.valueOf(body.getBytes().length)
                             )
                             .body()
                             .set(body)
