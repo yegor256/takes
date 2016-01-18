@@ -36,7 +36,7 @@ import java.util.ListIterator;
  * @version $Id$
  * @param <T> Type of item
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.PreserveStackTrace"})
 public final class VerboseList<T> implements List<T> {
 
     /**
