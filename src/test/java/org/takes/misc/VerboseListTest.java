@@ -116,9 +116,8 @@ public class VerboseListTest {
      */
     @Test
     public final void returnsVerboseIterator() throws Exception {
-        final Iterator<Object> iterator = this.list.iterator();
         MatcherAssert.assertThat(
-            iterator,
+            this.list.iterator(),
             Matchers.instanceOf(VerboseIterator.class)
         );
     }
