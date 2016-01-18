@@ -25,7 +25,6 @@
 package org.takes.misc;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
