@@ -284,10 +284,10 @@ public class VerboseListTest {
      */
     @Test
     public final void delegatesSubList() throws Exception {
-        final int fridx = 3;
+        final int from = 3;
         final int toidx = 5;
-        this.list.subList(fridx, toidx);
-        Mockito.verify(this.origin).subList(fridx, toidx);
+        this.list.subList(from, toidx);
+        Mockito.verify(this.origin).subList(from, toidx);
     }
 
     /**
@@ -388,12 +388,12 @@ public class VerboseListTest {
     @Test
     public final void wrapsIndexOutOfBoundsExceptionFromSubList()
         throws Exception {
-        final int frmidx = 2;
+        final int from = 2;
         final int toidx = 5;
         final Exception cause = new IndexOutOfBoundsException();
-        Mockito.doThrow(cause).when(this.origin).subList(frmidx, toidx);
+        Mockito.doThrow(cause).when(this.origin).subList(from, toidx);
         this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
-        this.list.subList(frmidx, toidx);
+        this.list.subList(from, toidx);
     }
 }
