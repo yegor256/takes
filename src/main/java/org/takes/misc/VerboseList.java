@@ -115,7 +115,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.addAll(index, coll);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -139,7 +139,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.get(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -148,7 +148,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.set(index, element);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -157,7 +157,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             this.origin.add(index, element);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -166,7 +166,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.remove(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -190,7 +190,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.listIterator(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 
@@ -199,7 +199,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.subList(fridx, toidx);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IllegalArgumentException(this.message, ex);
+            throw new IndexOutOfBoundsException(this.message);
         }
     }
 }
