@@ -161,7 +161,8 @@ public final class BkBasicTest {
         );
         final Collection<String> head = Lists.newArrayList(request.head());
         MatcherAssert.assertThat(head, Matchers.not(Matchers.<String>empty()));
-        final Collection<String> found = Collections2.filter(head,
+        final Collection<String> found = Collections2.filter(
+            head,
             new Predicate<String>() {
                 @Override
                 public boolean apply(final String header) {
@@ -278,7 +279,7 @@ public final class BkBasicTest {
     /**
      * Creates Socket mock for reuse.
      *
-     * @return prepared Socket mock
+     * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
     private static Socket createMockSocket() throws IOException {
