@@ -129,9 +129,8 @@ public interface RqMultipart extends Request {
          */
         public Base(final Request req) throws IOException {
             super(req);
-            try (
-                final InputStream stream = new RqLengthAware(req).body();
-            ) {
+            final InputStream stream = new RqLengthAware(req).body();
+            try {
                 this.body = Channels.newChannel(stream);
                 try {
                     this.buffer = ByteBuffer.allocate(
@@ -142,6 +141,8 @@ public interface RqMultipart extends Request {
                 } finally {
                     this.body.close();
                 }
+            } finally {
+                stream.close();
             }
         }
         @Override
