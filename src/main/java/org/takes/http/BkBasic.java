@@ -23,15 +23,6 @@
  */
 package org.takes.http;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -42,6 +33,10 @@ import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.Socket;
 
 /**
  * Basic back-end.
@@ -139,9 +134,9 @@ public final class BkBasic implements Back {
         final Socket socket) {
         return new RqWithHeaders(
             req,
-            String.format("X-Takes-LocalAddress: %s", socket.getLocalAddress()),
+            String.format("X-Takes-LocalAddress: %s", socket.getLocalAddress().getHostAddress()),
             String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
-            String.format("X-Takes-RemoteAddress: %s", socket.getInetAddress()),
+            String.format("X-Takes-RemoteAddress: %s", socket.getInetAddress().getHostAddress()),
             String.format("X-Takes-RemotePort: %d", socket.getPort())
         );
     }

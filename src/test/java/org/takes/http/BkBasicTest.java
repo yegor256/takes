@@ -24,12 +24,29 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.jcabi.http.mock.MkAnswer;
 import com.jcabi.http.mock.MkContainer;
 import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.facets.fork.FkRegex;
+import org.takes.facets.fork.TkFork;
+import org.takes.rq.RqWithHeaders;
+import org.takes.rs.RsEmpty;
+import org.takes.tk.TkText;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,14 +54,8 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.takes.facets.fork.FkRegex;
-import org.takes.facets.fork.TkFork;
-import org.takes.tk.TkText;
+import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Test case for {@link BkBasic}.
@@ -81,26 +92,8 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET / HTTP/1.1",
-                    "Host:localhost",
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
-            )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
+        Socket socket = createMockSocket();
+
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
@@ -133,6 +126,44 @@ public final class BkBasicTest {
             }
         );
     }
+
+
+    /**
+     * BkBasic produces headers with addresses without slashes.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void addressesInHeadersAddedWithoutSlashes() throws Exception {
+        final Socket socket = createMockSocket();
+        final AtomicReference<Request> catched = new AtomicReference<Request>();
+
+        new BkBasic(new Take() {
+            @Override
+            public Response act(Request req) {
+                catched.set(req);
+                return new RsEmpty();
+            }
+        }).accept(socket);
+
+        Request request = catched.get();
+        MatcherAssert.assertThat(request, Matchers.is(Matchers.notNullValue()));
+        MatcherAssert.assertThat(request, Matchers.is(Matchers.instanceOf(RqWithHeaders.class)));
+        RqWithHeaders requestWithHeaders = (RqWithHeaders) request;
+        Collection<String> headStrings = Lists.newArrayList(requestWithHeaders.head());
+        MatcherAssert.assertThat(headStrings, Matchers.not(Matchers.<String>empty()));
+
+        Collection<String> found = Collections2.filter(headStrings, new Predicate<String>() {
+            @Override
+            public boolean apply(String header) {
+                return header.contains("X-Takes") && header.contains("Address");
+            }
+        });
+
+        for (String takesAddressHeader : found) {
+            MatcherAssert.assertThat(takesAddressHeader, Matchers.not(Matchers.containsString("/")));
+        }
+    }
+
     /**
      * BkBasic can handle two requests in one connection.
      * @throws Exception If some problem inside
@@ -223,5 +254,31 @@ public final class BkBasicTest {
             socket.getOutputStream().toString(),
             Matchers.containsString(text)
         );
+    }
+
+    private Socket createMockSocket() throws IOException {
+        final Socket socket = Mockito.mock(Socket.class);
+        Mockito.when(socket.getInputStream()).thenReturn(
+                new ByteArrayInputStream(
+                        Joiner.on(BkBasicTest.CRLF).join(
+                                "GET / HTTP/1.1",
+                                "Host:localhost",
+                                "Content-Length: 2",
+                                "",
+                                "hi"
+                        ).getBytes()
+                )
+        );
+        Mockito.when(socket.getLocalAddress()).thenReturn(
+                InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getLocalPort()).thenReturn(0);
+        Mockito.when(socket.getInetAddress()).thenReturn(
+                InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getPort()).thenReturn(0);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        return socket;
     }
 }
