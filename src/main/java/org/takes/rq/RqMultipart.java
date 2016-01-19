@@ -129,18 +129,17 @@ public interface RqMultipart extends Request {
          */
         public Base(final Request req) throws IOException {
             super(req);
-            final InputStream stream = new RqLengthAware(req).body();
-            try {
+            try (
+                final InputStream stream = new RqLengthAware(req).body();
+            ) {
                 this.body = Channels.newChannel(stream);
-                this.buffer = ByteBuffer.allocate(
-                    // @checkstyle MagicNumberCheck (1 line)
-                    Math.min(8192, stream.available())
-                );
-                this.map = this.buildRequests(req);
-            } finally {
-                if (this.body == null) {
-                    stream.close();
-                } else {
+                try {
+                    this.buffer = ByteBuffer.allocate(
+                        // @checkstyle MagicNumberCheck (1 line)
+                        Math.min(8192, stream.available())
+                    );
+                    this.map = this.buildRequests(req);
+                } finally {
                     this.body.close();
                 }
             }
