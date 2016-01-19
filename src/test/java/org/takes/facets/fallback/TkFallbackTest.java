@@ -105,7 +105,7 @@ public final class TkFallbackTest {
     }
 
     /**
-     * TkFallback can fall back.
+     * TkFallback can throw an IOException when no fallback is available.
      * @throws IOException If some problem happens
      */
     @Test
@@ -114,7 +114,7 @@ public final class TkFallbackTest {
             new TkFallback(
                 new TkFailure(),
                 new FbChain()
-              ).act(new RqFake());
+            ).act(new RqFake());
             MatcherAssert.assertThat("Must throw exception", false);
         } catch (final IOException exception) {
             MatcherAssert.assertThat(
