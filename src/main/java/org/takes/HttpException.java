@@ -32,6 +32,7 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.13
  */
+@SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
 public class HttpException extends IOException {
 
     /**

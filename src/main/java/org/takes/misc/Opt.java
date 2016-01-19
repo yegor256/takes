@@ -33,6 +33,7 @@ import lombok.EqualsAndHashCode;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14
+ * @param <T> Type of item
  */
 public interface Opt<T> {
     /**
@@ -54,6 +55,7 @@ public interface Opt<T> {
      * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
      * @version $Id$
      * @since 0.14
+     * @param <T> Type of item
      */
     @EqualsAndHashCode(of = "origin")
     final class Single<T> implements Opt<T> {
@@ -85,6 +87,7 @@ public interface Opt<T> {
      * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
      * @version $Id$
      * @since 0.14
+     * @param <T> Type of item
      */
     final class Empty<T> implements Opt<T> {
         @Override

@@ -43,7 +43,7 @@ public final class HrefTest {
         MatcherAssert.assertThat(
             new Href("http://example.com?a=8&b=9")
                 .with("a", "hello")
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 .without("b")
                 .with("b", "test")
                 .toString(),

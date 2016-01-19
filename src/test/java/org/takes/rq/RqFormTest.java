@@ -23,6 +23,8 @@
  */
 package org.takes.rq;
 
+import com.google.common.escape.Escaper;
+import com.google.common.net.UrlEscapers;
 import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
@@ -38,6 +40,11 @@ import org.junit.Test;
 public final class RqFormTest {
 
     /**
+     * Content-Length header template.
+     */
+    private static final String HEADER = "Content-Length: %d";
+
+    /**
      * RqForm can parse body.
      * @throws IOException If some problem inside
      */
@@ -51,7 +58,7 @@ public final class RqFormTest {
                         "GET /h?a=3",
                         "Host: www.example.com",
                         String.format(
-                            "Content-Length: %d",
+                            HEADER,
                             body.getBytes().length
                         )
                     ),
@@ -103,8 +110,24 @@ public final class RqFormTest {
         final String value = "value";
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
+        final Escaper escaper = UrlEscapers.urlFormParameterEscaper();
         final RqForm req = new RqForm.Fake(
-            new RqFake(),
+            new RqFake(
+                Arrays.asList(
+                    "GET /form",
+                    "Host: www.example5.com",
+                    String.format(
+                        HEADER,
+                        escaper.escape(key).length() + 1
+                            + escaper.escape(value).length() + 1
+                            + escaper.escape(key).length() + 1
+                            + escaper.escape(avalue).length() + 1
+                            + escaper.escape(akey).length() + 1
+                            + escaper.escape(aavalue).length()
+                    )
+                ),
+                ""
+            ),
             key, value,
             key, avalue,
             akey, aavalue

@@ -28,7 +28,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -47,12 +46,22 @@ import org.takes.rq.RqHeaders;
  * @version $Id$
  * @since 0.23.3
  */
+@SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
 public final class HmRqHeader extends TypeSafeMatcher<Request> {
 
     /**
      * Expected request header matcher.
      */
-    private final transient HeaderMatcher matcher;
+    private final transient HmRqHeader.HeaderMatcher matcher;
+
+    /**
+     * Ctor.
+     * @param header Header name
+     * @param value Header value
+     */
+    public HmRqHeader(final String header, final String value) {
+        this(new EntryMatcher<String, String>(header, value));
+    }
 
     /**
      * Ctor.
@@ -61,7 +70,7 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     public HmRqHeader(
         final Matcher<? extends Map.Entry<String, String>> mtchr) {
         super();
-        this.matcher = new EntryHeaderMatcher(mtchr);
+        this.matcher = new HmRqHeader.EntryHeaderMatcher(mtchr);
     }
 
     /**
@@ -72,16 +81,7 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     public HmRqHeader(final String header,
         final Matcher<? extends Iterable<String>> mtchr) {
         super();
-        this.matcher = new IterableHeaderMatcher(header, mtchr);
-    }
-
-    /**
-     * Ctor.
-     * @param header Header name
-     * @param value Header value
-     */
-    public HmRqHeader(final String header, final String value) {
-        this(new EntryMatcher<String, String>(header, value));
+        this.matcher = new HmRqHeader.IterableHeaderMatcher(header, mtchr);
     }
 
     /**
@@ -111,7 +111,6 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
      * Header matcher.
      */
     private interface HeaderMatcher {
-
         /**
          * Performs the matching.
          *
@@ -119,36 +118,33 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
          * @return True if positive match
          * @throws IOException If fails
          */
-        boolean matches(final RqHeaders headers) throws IOException;
-
+        boolean matches(RqHeaders headers) throws IOException;
         /**
          * Generates a description of the matcher.
          *
          * @param description The description to be built or appended to
          */
-        void describeTo(final Description description);
+        void describeTo(Description description);
     }
 
     /**
      * Header matcher for {@code Matcher<? extends Map.Entry<String, String>>}.
      */
-    private static class EntryHeaderMatcher implements HeaderMatcher {
-
+    private static class EntryHeaderMatcher
+        implements HmRqHeader.HeaderMatcher {
         /**
          * Matcher.
          */
         private final transient
             Matcher<? extends Map.Entry<String, String>> matcher;
-
         /**
          * Ctor.
          * @param mtchr Matcher
          */
-        public EntryHeaderMatcher(
-            final Matcher<? extends Entry<String, String>> mtchr) {
+        EntryHeaderMatcher(
+            final Matcher<? extends Map.Entry<String, String>> mtchr) {
             this.matcher = mtchr;
         }
-
         @Override
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         public boolean matches(final RqHeaders headers) throws IOException {
@@ -171,7 +167,6 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
             }
             return result;
         }
-
         @Override
         public void describeTo(final Description description) {
             this.matcher.describeTo(description);
@@ -181,29 +176,26 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
     /**
      * Header matcher for {@code Matcher<? extends Iterable<String>>}.
      */
-    private static class IterableHeaderMatcher implements HeaderMatcher {
-
+    private static class IterableHeaderMatcher
+        implements HmRqHeader.HeaderMatcher {
         /**
          * Header.
          */
         private final transient String header;
-
         /**
          * Matcher.
          */
         private final transient Matcher<? extends Iterable<String>> matcher;
-
         /**
          * Ctor.
          * @param hdr Header
          * @param mtchr Matcher
          */
-        public IterableHeaderMatcher(final String hdr,
+        IterableHeaderMatcher(final String hdr,
             final Matcher<? extends Iterable<String>> mtchr) {
             this.header = hdr;
             this.matcher = mtchr;
         }
-
         @Override
         public boolean matches(final RqHeaders headers) throws IOException {
             final Collection<String> hdrs = new LinkedList<String>();
@@ -217,7 +209,6 @@ public final class HmRqHeader extends TypeSafeMatcher<Request> {
             }
             return this.matcher.matches(hdrs);
         }
-
         @Override
         public void describeTo(final Description description) {
             this.matcher.describeTo(description);

@@ -37,6 +37,8 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.27
+ * @param <K> Key
+ * @param <V> Value
  */
 public final class EntryMatcher<K, V> extends TypeSafeMatcher<Map.Entry<K, V>> {
 

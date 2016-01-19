@@ -85,8 +85,8 @@ public final class HmRsHeaderTest {
     @Test
     public void testsHeaderNameAndValueAvailable() throws Exception {
         MatcherAssert.assertThat(
-            new RsWithHeader("header1: value1"),
-            new HmRsHeader("header1", "value1")
+            new RsWithHeader("heAdEr1: value1"),
+            new HmRsHeader("HEAder1", "value1")
         );
     }
 
@@ -111,9 +111,9 @@ public final class HmRsHeaderTest {
         MatcherAssert.assertThat(
             new RsWithHeaders(
                 new RsEmpty(),
-                "header3: value31", "header3: value32"
+                "header3: value31", "HEADER3: value32"
             ),
-            new HmRsHeader("header3", Matchers.<String>iterableWithSize(2))
+            new HmRsHeader("Header3", Matchers.<String>iterableWithSize(2))
         );
     }
 

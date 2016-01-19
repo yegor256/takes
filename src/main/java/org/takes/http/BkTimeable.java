@@ -44,6 +44,9 @@ import lombok.EqualsAndHashCode;
 @SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeable extends BkWrap {
 
+    /**
+     * Back threads.
+     */
     private static final class BkThreads implements Back {
         /**
          * Original back.
@@ -56,14 +59,14 @@ public final class BkTimeable extends BkWrap {
         /**
          * Threads storage.
          */
-        private final transient ConcurrentMap<Thread, Long> threads =
-            new ConcurrentHashMap<Thread, Long>(1);
+        private final transient ConcurrentMap<Thread, Long> threads;
         /**
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
          */
-        public BkThreads(final long msec, final Back bck) {
+        BkThreads(final long msec, final Back bck) {
+            this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;
             this.latency = msec;
             final Thread monitor = new Thread(

@@ -31,6 +31,7 @@ import java.util.Iterator;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
+ * @param <T> Type of item
  */
 public final class VerboseIterable<T> implements Iterable<T> {
 

@@ -31,6 +31,8 @@ import java.util.Iterator;
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.15.2
+ * @param <T> Type of item
+ * @param <K> Type of key
  */
 public class Transform<T, K> implements Iterable<K> {
 
@@ -70,6 +72,9 @@ public class Transform<T, K> implements Iterable<K> {
      * transformed element in type A.
      *
      * <p>This class is NOT thread-safe.
+     *
+     * @param <B> Type of key
+     * @param <A> Type of value
      */
     private static class TransformIterator<B, A> implements Iterator<A> {
 
@@ -88,7 +93,7 @@ public class Transform<T, K> implements Iterable<K> {
          * @param itr Iterator of the original iterable
          * @param act Action to transform elements
          */
-        public TransformIterator(final Iterator<B> itr,
+        TransformIterator(final Iterator<B> itr,
             final TransformAction<B, A> act) {
             this.action = act;
             this.iterator = itr;

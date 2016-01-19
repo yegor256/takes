@@ -54,8 +54,7 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient ConcurrentMap<String, String> map =
-        new ConcurrentHashMap<String, String>(0);
+    private final transient ConcurrentMap<String, String> map;
 
     /**
      * Ctor.
@@ -71,6 +70,7 @@ final class Options {
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
+        this.map = new ConcurrentHashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);

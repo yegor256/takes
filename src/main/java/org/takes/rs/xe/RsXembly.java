@@ -30,8 +30,13 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
@@ -41,6 +46,7 @@ import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
 import org.takes.rs.RsWrap;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xembly.Xembler;
 
@@ -68,6 +74,15 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     * @param dom DOM node to build upon
+     * @param sources Sources
+     */
+    public RsXembly(final Node dom, final XeSource... sources) {
+        this(dom, Arrays.asList(sources));
+    }
+
+    /**
+     * Ctor.
      * @param sources Sources
      */
     public RsXembly(final Iterable<XeSource> sources) {
@@ -76,9 +91,27 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     * @param dom DOM node to build upon
+     * @param sources Sources
+     */
+    public RsXembly(final Node dom, final Iterable<XeSource> sources) {
+        this(dom, new XeChain(sources));
+    }
+
+    /**
+     * Ctor.
      * @param src Source
      */
     public RsXembly(final XeSource src) {
+        this(emptyDocument(), src);
+    }
+
+    /**
+     * Ctor.
+     * @param dom DOM node to build upon
+     * @param src Source
+     */
+    public RsXembly(final Node dom, final XeSource src) {
         super(
             new Response() {
                 @Override
@@ -93,7 +126,7 @@ public final class RsXembly extends RsWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RsXembly.render(src);
+                    return RsXembly.render(dom, src);
                 }
             }
         );
@@ -101,14 +134,17 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Render source as XML.
+     * @param dom DOM node to build upon
      * @param src Source
      * @return XML
      * @throws IOException If fails
      */
-    private static InputStream render(final XeSource src) throws IOException {
+    private static InputStream render(final Node dom,
+        final XeSource src) throws IOException {
+        final Node copy = cloneNode(dom);
         final ByteArrayOutputStream baos =
             new ByteArrayOutputStream();
-        final Node node = new Xembler(src.toXembly()).domQuietly();
+        final Node node = new Xembler(src.toXembly()).applyQuietly(copy);
         try {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
@@ -120,4 +156,53 @@ public final class RsXembly extends RsWrap {
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
+    /**
+     * Create empty DOM Document.
+     * @return Document
+     */
+    private static Document emptyDocument() {
+        try {
+            return DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder()
+                .newDocument();
+        } catch (final ParserConfigurationException ex) {
+            throw new IllegalStateException(
+                // @checkstyle LineLength (1 line)
+                "Could not instantiate DocumentBuilderFactory and build empty Document",
+                ex
+            );
+        }
+    }
+
+    /**
+     * Create Node clone.
+     * @param dom Node to clone
+     * @return Cloned Node
+     */
+    private static Node cloneNode(final Node dom) {
+        final Transformer transformer;
+        try {
+            transformer = TransformerFactory.newInstance().newTransformer();
+        } catch (final TransformerConfigurationException ex) {
+            throw new IllegalStateException(
+                "Could not create new Transformer to clone Node",
+                ex
+            );
+        }
+        final DOMSource source = new DOMSource(dom);
+        try {
+            final DOMResult result = new DOMResult();
+            transformer.transform(source, result);
+            return result.getNode();
+        } catch (final TransformerException ex) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Could not clone Node %s with Transformer %s",
+                    source,
+                    transformer
+                ),
+                ex
+            );
+        }
+    }
 }

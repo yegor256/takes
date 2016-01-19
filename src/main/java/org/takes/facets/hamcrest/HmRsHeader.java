@@ -38,6 +38,7 @@ import org.takes.Response;
  * Response Header Matcher.
  *
  * <p>This "matcher" tests given response header.
+ * <p>The header name(s) should be provided in lowercase.
  * <p>The class is immutable and thread-safe.
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
