@@ -300,7 +300,7 @@ public class VerboseListTest {
         final List<Object> collection = Collections.emptyList();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).addAll(index, collection);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.addAll(index, collection);
@@ -315,7 +315,7 @@ public class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).get(index);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.get(index);
@@ -331,7 +331,7 @@ public class VerboseListTest {
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).set(index, obj);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.set(index, obj);
@@ -347,7 +347,7 @@ public class VerboseListTest {
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).add(index, obj);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.add(index, obj);
@@ -363,7 +363,7 @@ public class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).remove(index);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.remove(index);
@@ -380,7 +380,7 @@ public class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).listIterator(index);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.listIterator(index);
@@ -397,7 +397,7 @@ public class VerboseListTest {
         final int toidx = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).subList(from, toidx);
-        this.thrown.expect(VerboseIndexOutOfBoundsException.class);
+        this.thrown.expect(IndexOutOfBoundsException.class);
         this.thrown.expectMessage(MSG);
         this.thrown.expectCause(Matchers.is(cause));
         this.list.subList(from, toidx);
