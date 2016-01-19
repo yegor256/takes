@@ -38,7 +38,7 @@ import org.junit.Ignore;
  * @version $Id$
  * @since 0.1
  * @todo #438:45min Implement reading chunked message body
- * capping the body to the chunks size in {@link RqChunk} class.
+ *  capping the body to the chunks size in {@link RqChunk} class.
  */
 public final class RqChunkTest {
 
