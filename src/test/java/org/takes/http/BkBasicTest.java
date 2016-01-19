@@ -135,17 +135,29 @@ public final class BkBasicTest {
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<Request>();
-        new BkBasic(new Take() {
-            @Override
-            public Response act(final Request req) {
-                ref.set(req);
-                return new RsEmpty();
+        new BkBasic(
+            new Take() {
+                @Override
+                public Response act(final Request req) {
+                    ref.set(req);
+                    return new RsEmpty();
+                }
             }
-        }).accept(socket);
+        ).accept(socket);
         final Request request = ref.get();
-        MatcherAssert.assertThat(request, Matchers.is(Matchers.notNullValue()));
-        MatcherAssert.assertThat(request, Matchers.is(
-                Matchers.instanceOf(RqWithHeaders.class))
+        MatcherAssert.assertThat(
+            request,
+            Matchers.is(
+                Matchers.notNullValue()
+            )
+        );
+        MatcherAssert.assertThat(
+            request,
+            Matchers.is(
+                Matchers.instanceOf(
+                    RqWithHeaders.class
+                )
+            )
         );
         final Collection<String> head = Lists.newArrayList(request.head());
         MatcherAssert.assertThat(head, Matchers.not(Matchers.<String>empty()));
@@ -159,8 +171,11 @@ public final class BkBasicTest {
             }
         );
         for (final String header : found) {
-            MatcherAssert.assertThat(header, Matchers.not(
-                    Matchers.containsString("/"))
+            MatcherAssert.assertThat(
+                header,
+                Matchers.not(
+                    Matchers.containsString("/")
+                )
             );
         }
     }
@@ -263,6 +278,7 @@ public final class BkBasicTest {
     /**
      * Creates Socket mock for reuse.
      *
+     * @return prepared Socket mock
      * @throws IOException If some problem inside
      */
     private static Socket createMockSocket() throws IOException {
