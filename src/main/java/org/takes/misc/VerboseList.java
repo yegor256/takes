@@ -36,7 +36,7 @@ import java.util.ListIterator;
  * @version $Id$
  * @param <T> Type of item
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.PreserveStackTrace"})
+@SuppressWarnings("PMD.TooManyMethods")
 public final class VerboseList<T> implements List<T> {
 
     /**
@@ -115,7 +115,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.addAll(index, coll);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -139,7 +139,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.get(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -148,7 +148,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.set(index, element);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -157,7 +157,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             this.origin.add(index, element);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -166,7 +166,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.remove(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -190,7 +190,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.listIterator(index);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 
@@ -199,7 +199,7 @@ public final class VerboseList<T> implements List<T> {
         try {
             return this.origin.subList(fridx, toidx);
         } catch (final IndexOutOfBoundsException ex) {
-            throw new IndexOutOfBoundsException(this.message);
+            throw new VerboseIndexOutOfBoundsException(this.message, ex);
         }
     }
 }
