@@ -73,16 +73,16 @@ public final class RqWithDefaultHeaderTest {
      */
     @Test
     public void allowsOverrideDefaultHeader() throws IOException {
+        final String header = "X-Default-Header2";
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqWithHeader(
                         new RqFake(),
-                        // @checkstyle MultipleStringLiteralsCheck (1 lines)
-                        "X-Default-Header2",
+                        header,
                         "Non-Default-Value2"
                     ),
-                    "X-Default-Header2",
+                    header,
                     "X-Default-Value"
                 )
             ).print(),
