@@ -418,19 +418,21 @@ public interface RqMultipart extends Request {
                 new Request() {
                     @Override
                     public Iterable<String> head() throws IOException {
-                        return new RqWithHeader(
+                        return new RqWithHeaders(
                             req,
-                            // @checkstyle MultipleStringLiteralsCheck (1 line)
-                            "Content-Type",
                             String.format(
-                                "multipart/form-data; boundary=%s",
+                                "Content-Type:multipart/form-data; boundary=%s",
                                 RqMultipart.Fake.BOUNDARY
+                            ),
+                            String.format(
+                                "Content-Length:%s",
+                                RqMultipart.Fake.fakeBody(dispositions).length()
                             )
                         ).head();
                     }
                     @Override
                     public InputStream body() throws IOException {
-                        return RqMultipart.Fake.fakeBody(dispositions);
+                        return RqMultipart.Fake.fakeStream(dispositions);
                     }
                 }
             );
@@ -452,14 +454,28 @@ public interface RqMultipart extends Request {
             return this.fake.body();
         }
         /**
-         * Fake body creator.
+         * Fake body stream creator.
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          * @throws IOException If fails
          */
-        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static InputStream fakeBody(final Request... dispositions)
+        private static InputStream fakeStream(final Request... dispositions)
             throws IOException {
+            final StringBuilder builder = fakeBody(dispositions);
+            return new ByteArrayInputStream(
+                builder.toString().getBytes()
+            );
+        }
+
+        /**
+         * Fake body creator.
+         * @param dispositions Fake request body parts
+         * @return StringBuilder of given dispositions
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
+        private static StringBuilder fakeBody(final Request... dispositions)
+                throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
                 builder.append(String.format("--%s", BOUNDARY))
@@ -479,9 +495,7 @@ public interface RqMultipart extends Request {
             }
             builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
                 .append(String.format("--%s--", BOUNDARY));
-            return new ByteArrayInputStream(
-                builder.toString().getBytes()
-            );
+            return builder;
         }
     }
 
