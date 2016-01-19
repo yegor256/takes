@@ -149,7 +149,6 @@ public final class BkBasicTest {
                 Matchers.notNullValue()
             )
         );
-
         final Iterator<String> headers = request.head().iterator();
         final Collection<String> valid = new LinkedList<String>();
         while (headers.hasNext()) {
