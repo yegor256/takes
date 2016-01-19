@@ -34,9 +34,13 @@ import org.junit.Test;
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.31
- * @checkstyle MultipleStringLiteralsCheck (50 lines)
  */
 public final class RqWithDefaultHeaderTest {
+
+    /**
+     * Carriage return constant.
+     */
+    private static final String CRLF = "\r\n";
 
     /**
      * RqWithDefaultHeader can provide default header value.
@@ -48,15 +52,16 @@ public final class RqWithDefaultHeaderTest {
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqFake(),
-                        "X-Default-Header",
-                        "X-Default-Value"
+                    "X-Default-Header1",
+                    "X-Default-Value1"
                 )
             ).print(),
             Matchers.startsWith(
-                Joiner.on("\r\n").join(
+                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
+                    // @checkstyle MultipleStringLiteralsCheck (2 lines)
                     "GET /",
                     "Host: www.example.com",
-                    "X-Default-Header: X-Default-Value"
+                    "X-Default-Header1: X-Default-Value"
                 )
             )
         );
@@ -73,18 +78,19 @@ public final class RqWithDefaultHeaderTest {
                 new RqWithDefaultHeader(
                     new RqWithHeader(
                         new RqFake(),
-                        "X-Default-Header",
-                        "Non-Default-Value"
+                        // @checkstyle MultipleStringLiteralsCheck (1 lines)
+                        "X-Default-Header2",
+                        "Non-Default-Value2"
                     ),
-                    "X-Default-Header",
+                    "X-Default-Header2",
                     "X-Default-Value"
                 )
             ).print(),
             Matchers.startsWith(
-                Joiner.on("\r\n").join(
+                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
                     "GET /",
                     "Host: www.example.com",
-                    "X-Default-Header: Non-Default-Value"
+                    "X-Default-Header2: Non-Default-Value"
                 )
             )
         );
