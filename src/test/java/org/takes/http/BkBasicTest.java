@@ -24,9 +24,6 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import com.jcabi.http.mock.MkAnswer;
 import com.jcabi.http.mock.MkContainer;
 import com.jcabi.http.mock.MkGrizzlyContainer;
@@ -41,6 +38,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -52,7 +51,6 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
@@ -151,27 +149,17 @@ public final class BkBasicTest {
                 Matchers.notNullValue()
             )
         );
-        MatcherAssert.assertThat(
-            request,
-            Matchers.is(
-                Matchers.instanceOf(
-                    RqWithHeaders.class
-                )
-            )
-        );
-        final Collection<String> head = Lists.newArrayList(request.head());
-        MatcherAssert.assertThat(head, Matchers.not(Matchers.<String>empty()));
-        final Collection<String> found = Collections2.filter(
-            head,
-            new Predicate<String>() {
-                @Override
-                public boolean apply(final String header) {
-                    return header.contains("X-Takes")
-                        && header.contains("Address");
-                }
+
+        final Iterator<String> headers = request.head().iterator();
+        final Collection<String> valid = new LinkedList<String>();
+        while (headers.hasNext()) {
+            final String header = headers.next();
+            if (header.contains("X-Takes") && header.contains("Address")) {
+                valid.add(header);
             }
-        );
-        for (final String header : found) {
+        }
+        MatcherAssert.assertThat(valid, Matchers.not(Matchers.<String>empty()));
+        for (final String header : valid) {
             MatcherAssert.assertThat(
                 header,
                 Matchers.not(
