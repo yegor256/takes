@@ -33,6 +33,15 @@ import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.URI;
+import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -47,28 +56,18 @@ import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.URI;
-import java.util.Collection;
-import java.util.concurrent.atomic.AtomicReference;
-
 /**
  * Test case for {@link BkBasic}.
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @todo #306:30min At the moment we don't support HTTP
- *  persistent connections. Would be great to implement
- *  this feature. BkBasic.accept should handle more
- *  than one HTTP request in one connection.
+ * persistent connections. Would be great to implement
+ * this feature. BkBasic.accept should handle more
+ * than one HTTP request in one connection.
+ * @since 0.15.2
  */
 public final class BkBasicTest {
     /**
@@ -88,12 +87,12 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can handle socket data.
+     *
      * @throws IOException If some problem inside
      */
     @Test
     public void handlesSocket() throws IOException {
-        Socket socket = createMockSocket();
-
+        final Socket socket = createMockSocket();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
@@ -105,6 +104,7 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
+     *
      * @throws IOException if any I/O error occurs.
      */
     @Test
@@ -126,46 +126,48 @@ public final class BkBasicTest {
             }
         );
     }
-
-
     /**
      * BkBasic produces headers with addresses without slashes.
-     * @throws Exception If some problem inside
+     *
+     * @throws IOException If some problem inside
      */
     @Test
-    public void addressesInHeadersAddedWithoutSlashes() throws Exception {
-        final Socket socket = createMockSocket();
-        final AtomicReference<Request> catched = new AtomicReference<Request>();
-
+    public void addressesInHeadersAddedWithoutSlashes() throws IOException {
+        final Socket socket = BkBasicTest.createMockSocket();
+        final AtomicReference<Request> ref = new AtomicReference<Request>();
         new BkBasic(new Take() {
             @Override
-            public Response act(Request req) {
-                catched.set(req);
+            public Response act(final Request req) {
+                ref.set(req);
                 return new RsEmpty();
             }
         }).accept(socket);
-
-        Request request = catched.get();
+        final Request request = ref.get();
         MatcherAssert.assertThat(request, Matchers.is(Matchers.notNullValue()));
-        MatcherAssert.assertThat(request, Matchers.is(Matchers.instanceOf(RqWithHeaders.class)));
-        RqWithHeaders requestWithHeaders = (RqWithHeaders) request;
-        Collection<String> headStrings = Lists.newArrayList(requestWithHeaders.head());
-        MatcherAssert.assertThat(headStrings, Matchers.not(Matchers.<String>empty()));
-
-        Collection<String> found = Collections2.filter(headStrings, new Predicate<String>() {
-            @Override
-            public boolean apply(String header) {
-                return header.contains("X-Takes") && header.contains("Address");
+        MatcherAssert.assertThat(request, Matchers.is(
+                Matchers.instanceOf(RqWithHeaders.class))
+        );
+        final Collection<String> head = Lists.newArrayList(request.head());
+        MatcherAssert.assertThat(head, Matchers.not(Matchers.<String>empty()));
+        final Collection<String> found = Collections2.filter(head,
+            new Predicate<String>() {
+                @Override
+                public boolean apply(final String header) {
+                    return header.contains("X-Takes")
+                        && header.contains("Address");
+                }
             }
-        });
-
-        for (String takesAddressHeader : found) {
-            MatcherAssert.assertThat(takesAddressHeader, Matchers.not(Matchers.containsString("/")));
+        );
+        for (final String header : found) {
+            MatcherAssert.assertThat(header, Matchers.not(
+                    Matchers.containsString("/"))
+            );
         }
     }
 
     /**
      * BkBasic can handle two requests in one connection.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -202,6 +204,7 @@ public final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -229,6 +232,7 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can accept no content-length on closed connection.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -256,25 +260,30 @@ public final class BkBasicTest {
         );
     }
 
-    private Socket createMockSocket() throws IOException {
+    /**
+     * Creates Socket mock for reuse.
+     *
+     * @throws IOException If some problem inside
+     */
+    private static Socket createMockSocket() throws IOException {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
-                new ByteArrayInputStream(
-                        Joiner.on(BkBasicTest.CRLF).join(
-                                "GET / HTTP/1.1",
-                                "Host:localhost",
-                                "Content-Length: 2",
-                                "",
-                                "hi"
-                        ).getBytes()
-                )
+            new ByteArrayInputStream(
+                Joiner.on(BkBasicTest.CRLF).join(
+                    "GET / HTTP/1.1",
+                    "Host:localhost",
+                    "Content-Length: 2",
+                    "",
+                    "hi"
+                ).getBytes()
+            )
         );
         Mockito.when(socket.getLocalAddress()).thenReturn(
-                InetAddress.getLocalHost()
+            InetAddress.getLocalHost()
         );
         Mockito.when(socket.getLocalPort()).thenReturn(0);
         Mockito.when(socket.getInetAddress()).thenReturn(
-                InetAddress.getLocalHost()
+            InetAddress.getLocalHost()
         );
         Mockito.when(socket.getPort()).thenReturn(0);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
