@@ -25,6 +25,7 @@ package org.takes.rq;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -48,19 +49,18 @@ public final class RqWithDefaultHeaderTest {
      */
     @Test
     public void providesDefaultHeader() throws IOException {
+        final String req = "GET /";
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
-                    new RqFake(),
+                    new RqFake(Collections.singletonList(req), "body"),
                     "X-Default-Header1",
                     "X-Default-Value1"
                 )
             ).print(),
             Matchers.startsWith(
                 Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
-                    // @checkstyle MultipleStringLiteralsCheck (2 lines)
-                    "GET /",
-                    "Host: www.example.com",
+                    req,
                     "X-Default-Header1: X-Default-Value"
                 )
             )
@@ -73,12 +73,13 @@ public final class RqWithDefaultHeaderTest {
      */
     @Test
     public void allowsOverrideDefaultHeader() throws IOException {
+        final String req = "POST /";
         final String header = "X-Default-Header2";
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqWithHeader(
-                        new RqFake(),
+                        new RqFake(Collections.singletonList(req), "body2"),
                         header,
                         "Non-Default-Value2"
                     ),
@@ -88,8 +89,7 @@ public final class RqWithDefaultHeaderTest {
             ).print(),
             Matchers.startsWith(
                 Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
-                    "GET /",
-                    "Host: www.example.com",
+                    req,
                     "X-Default-Header2: Non-Default-Value"
                 )
             )
