@@ -24,17 +24,16 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
-import com.jcabi.http.mock.MkAnswer;
-import com.jcabi.http.mock.MkContainer;
-import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
 import org.hamcrest.MatcherAssert;
@@ -59,6 +58,7 @@ import org.takes.tk.TkText;
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
  */
+@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkBasicTest {
     /**
      * Carriage return constant.
@@ -133,6 +133,7 @@ public final class BkBasicTest {
             }
         );
     }
+
     /**
      * BkBasic can handle two requests in one connection.
      * @throws Exception If some problem inside
@@ -140,30 +141,58 @@ public final class BkBasicTest {
     @Ignore
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
-        final String text = "Hello world!";
-        final MkContainer container = new MkGrizzlyContainer().next(
-            new MkAnswer.Simple(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    POST,
-                    HOST,
-                    "Content-Length: 4",
-                    "",
-                    "hi",
-                    "POST / HTTP/1.1",
-                    "Host: localhost",
-                    "Content-Length: 4",
-                    "",
-                    "hi"
-                )
-            )
-        ).start();
-        final URI uri = container.home();
-        final Socket socket = new Socket(uri.getHost(), uri.getPort());
-        new BkBasic(new TkText(text)).accept(socket);
-        new BkBasic(new TkText(text)).accept(socket);
-        container.stop();
+        final String text = "Hello Twice!";
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        final ServerSocket server = new ServerSocket(0);
+        try {
+            new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new BkBasic(new TkText(text)).accept(
+                                server.accept()
+                            );
+                        } catch (final IOException exception) {
+                            throw new IllegalStateException(exception);
+                        }
+                    }
+                }
+            ).start();
+            final Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+            );
+            try {
+                socket.getOutputStream().write(
+                    Joiner.on(BkBasicTest.CRLF).join(
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "Content-Length: 11",
+                        "",
+                        "Hello First",
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "Content-Length: 12",
+                        "",
+                        "Hello Second"
+                    ).getBytes()
+                );
+                final InputStream input = socket.getInputStream();
+                // @checkstyle MagicNumber (1 line)
+                final byte[] buffer = new byte[4096];
+                for (int count = input.read(buffer); count != -1;
+                    count = input.read(buffer)) {
+                    output.write(buffer, 0, count);
+                }
+            } finally {
+                socket.close();
+            }
+        } finally {
+            server.close();
+        }
         MatcherAssert.assertThat(
-            socket.getOutputStream().toString(),
+            output.toString(),
             RegexMatchers.containsPattern(text + ".*?" + text)
         );
     }
@@ -176,22 +205,51 @@ public final class BkBasicTest {
     @Ignore
     @Test
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
-        final MkContainer container = new MkGrizzlyContainer().next(
-            new MkAnswer.Simple(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    POST,
-                    HOST,
-                    "",
-                    "hi"
-                )
-            )
-        ).start();
-        final URI uri = container.home();
-        final Socket socket = new Socket(uri.getHost(), uri.getPort());
-        new BkBasic(new TkText("411 Test")).accept(socket);
-        container.stop();
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        final ServerSocket server = new ServerSocket(0);
+        try {
+            new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new BkBasic(new TkText("411 Test")).accept(
+                                server.accept()
+                            );
+                        } catch (final IOException exception) {
+                            throw new IllegalStateException(exception);
+                        }
+                    }
+                }
+            ).start();
+            final Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+            );
+            try {
+                socket.getOutputStream().write(
+                    Joiner.on(BkBasicTest.CRLF).join(
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "",
+                        "Hello World!"
+                    ).getBytes()
+                );
+                final InputStream input = socket.getInputStream();
+                // @checkstyle MagicNumber (1 line)
+                final byte[] buffer = new byte[4096];
+                for (int count = input.read(buffer); count != -1;
+                    count = input.read(buffer)) {
+                    output.write(buffer, 0, count);
+                }
+            } finally {
+                socket.close();
+            }
+        } finally {
+            server.close();
+        }
         MatcherAssert.assertThat(
-            socket.getOutputStream().toString(),
+            output.toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
     }
@@ -204,23 +262,52 @@ public final class BkBasicTest {
     @Test
     public void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
-        final MkContainer container = new MkGrizzlyContainer().next(
-            new MkAnswer.Simple(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    POST,
-                    HOST,
-                    "Connection: Close",
-                    "",
-                    "hi"
-                )
-            )
-        ).start();
-        final URI uri = container.home();
-        final Socket socket = new Socket(uri.getHost(), uri.getPort());
-        new BkBasic(new TkText(text)).accept(socket);
-        container.stop();
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        final ServerSocket server = new ServerSocket(0);
+        try {
+            new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new BkBasic(new TkText(text)).accept(
+                                server.accept()
+                            );
+                        } catch (final IOException exception) {
+                            throw new IllegalStateException(exception);
+                        }
+                    }
+                }
+            ).start();
+            final Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+            );
+            try {
+                socket.getOutputStream().write(
+                    Joiner.on(BkBasicTest.CRLF).join(
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "Connection: Close",
+                        "",
+                        "Hello World!"
+                    ).getBytes()
+                );
+                final InputStream input = socket.getInputStream();
+                // @checkstyle MagicNumber (1 line)
+                final byte[] buffer = new byte[4096];
+                for (int count = input.read(buffer); count != -1;
+                    count = input.read(buffer)) {
+                    output.write(buffer, 0, count);
+                }
+            } finally {
+                socket.close();
+            }
+        } finally {
+            server.close();
+        }
         MatcherAssert.assertThat(
-            socket.getOutputStream().toString(),
+            output.toString(),
             Matchers.containsString(text)
         );
     }

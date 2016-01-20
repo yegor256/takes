@@ -255,11 +255,15 @@ public interface RqMultipart extends Request {
             } finally {
                 channel.close();
             }
-            return new RqLive(
-                new CapInputStream(
-                    new FileInputStream(file),
-                    file.length()
-                )
+            return new RqWithHeader(
+                new RqLive(
+                    new CapInputStream(
+                        new FileInputStream(file),
+                        file.length()
+                    )
+                ),
+                "Content-Length",
+                String.valueOf(file.length())
             );
         }
         /**
