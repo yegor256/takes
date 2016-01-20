@@ -33,15 +33,6 @@ import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.URI;
-import java.util.Collection;
-import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -52,22 +43,32 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.rq.RqSocket;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.URI;
+import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Test case for {@link BkBasic}.
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @todo #306:30min At the moment we don't support HTTP
- * persistent connections. Would be great to implement
- * this feature. BkBasic.accept should handle more
- * than one HTTP request in one connection.
- * @since 0.15.2
+ *  persistent connections. Would be great to implement
+ *  this feature. BkBasic.accept should handle more
+ *  than one HTTP request in one connection.
  */
 @SuppressWarnings("PMD.ExcessiveImports")
 public final class BkBasicTest {
@@ -180,6 +181,8 @@ public final class BkBasicTest {
                 )
             );
         }
+        MatcherAssert.assertThat(new RqSocket(request).getLocalAddress(), Matchers.notNullValue());
+        MatcherAssert.assertThat(new RqSocket(request).getRemoteAddress(), Matchers.notNullValue());
     }
 
     /**
