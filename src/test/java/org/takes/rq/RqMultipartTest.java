@@ -484,7 +484,7 @@ public final class RqMultipartTest {
     @Test
     public void closesBodyChannelAfterRead() throws IOException,
         IllegalArgumentException, IllegalAccessException {
-        final String body = "2449 N Wolfe Rd, Sunnyvale, CA 94085";
+        final String body = "25449 N Wolfe Rd, Sunnyvale, CA 94085";
         final Request req = new RqMultipart.Fake(
             new RqFake(),
             new RqWithHeaders(
