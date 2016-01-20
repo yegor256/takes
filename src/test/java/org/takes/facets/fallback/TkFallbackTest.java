@@ -106,10 +106,9 @@ public final class TkFallbackTest {
 
     /**
      * TkFallback can throw an IOException when no fallback is available.
-     * @throws IOException If some problem happens
      */
     @Test
-    public void fallsBackWithProperMessage() throws IOException {
+    public void fallsBackWithProperMessage() {
         try {
             new TkFallback(
                 new TkFailure(),
@@ -119,7 +118,7 @@ public final class TkFallbackTest {
         } catch (final IOException exception) {
             MatcherAssert.assertThat(
                 exception.getMessage(),
-                Matchers.startsWith("There is no fallback available.")
+                Matchers.containsString("fallback ")
             );
         }
     }

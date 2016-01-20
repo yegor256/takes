@@ -76,8 +76,6 @@ public final class TkFallback extends TkWrap {
      */
     private static Response route(final Take take, final Fallback fbk,
         final Request req) throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String error = "There is no fallback available. The original problem is this: %s";
         Response res;
         try {
             res = TkFallback.wrap(
@@ -89,7 +87,11 @@ public final class TkFallback extends TkWrap {
             );
             if (!fbres.has()) {
                 throw new IOException(
-                    String.format(error, ex.getMessage()), ex
+                    String.format(
+                        "There is no fallback available in %s",
+                        fbk.getClass().getCanonicalName()
+                    ),
+                    ex
                 );
             }
             res = TkFallback.wrap(fbres.get(), fbk, req);
@@ -101,7 +103,12 @@ public final class TkFallback extends TkWrap {
             );
             if (!fbres.has()) {
                 throw new IOException(
-                    String.format(error, ex.getMessage()), ex
+                    String.format(
+                        "There is no fallback available for %s in %s",
+                        ex.getClass().getCanonicalName(),
+                        fbk.getClass().getCanonicalName()
+                    ),
+                    ex
                 );
             }
             res = TkFallback.wrap(
