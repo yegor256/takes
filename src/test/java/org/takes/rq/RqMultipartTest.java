@@ -513,7 +513,7 @@ public final class RqMultipartTest {
                 );
                 MatcherAssert.assertThat(
                     "boby is not open",
-                    ((Channel) field.get(result)).isOpen()
+                    !((Channel) field.get(result)).isOpen()
                 );
                 bodyChecked = true;
             }
