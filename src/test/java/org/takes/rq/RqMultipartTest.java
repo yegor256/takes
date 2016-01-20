@@ -32,8 +32,10 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.channels.Channel;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
@@ -470,6 +472,52 @@ public final class RqMultipartTest {
             );
         }
         temp.delete();
+    }
+
+    /**
+     * RqMultipart.Base closes inner body Channel after read.
+     * @throws IOException if some problem inside
+     * @throws IllegalAccessException if some problem inside
+     * @throws IllegalArgumentException if some problem inside
+     */
+    @Test
+    public void closesBodyChannelAfterRead() throws IOException,
+        IllegalArgumentException, IllegalAccessException {
+        final String body = "2449 N Wolfe Rd, Sunnyvale, CA 94085";
+        final Request req = new RqMultipart.Fake(
+            new RqFake(),
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                contentLengthHeader(body.getBytes().length),
+                contentDispositionHeader(
+                    "form-data; name=\"t-1\""
+                )
+            ),
+            new RqWithHeaders(
+                new RqFake("", "", ""),
+                contentLengthHeader(0),
+                contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"e.bin\""
+                )
+            )
+        );
+        final RqMultipart.Base result = new RqMultipart.Base(req);
+        boolean bodyChecked = false;
+        for (final Field field :RqMultipart.Base.class.getDeclaredFields()) {
+            if (field.getName().equals("body")) {
+                field.setAccessible(true);
+                MatcherAssert.assertThat(
+                    "boby is instance of Channel",
+                    field.get(result) instanceof Channel
+                );
+                MatcherAssert.assertThat(
+                    "boby is not open",
+                    ((Channel) field.get(result)).isOpen()
+                );
+                bodyChecked = true;
+            }
+        }
+        MatcherAssert.assertThat("body was checked", bodyChecked);
     }
 
     /**
