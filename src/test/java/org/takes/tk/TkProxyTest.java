@@ -61,7 +61,7 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(new RqFake())
+                            new TkProxy(home).act(new RqFake("PUT"))
                         ).print(),
                         Matchers.containsString("hello")
                     );
