@@ -98,10 +98,10 @@ public final class TkProxy implements Take {
      * to which requests are proxied. Some valid examples:</p>
      *
      * <ul>
-     *  <li>example.com</li>
-     *  <li>www.example.com</li>
-     *  <li>example.com:8080</li>
-     *  <li>example.com/x/y</li>
+     *  <li>{@code http://example.com}</li>
+     *  <li>{@code http://www.example.com}</li>
+     *  <li>{@code https://example.com:8080}</li>
+     *  <li>{@code https://example.com/x/y}</li>
      * </ul>
      *
      * @param tgt Target to which requests are forwarded
