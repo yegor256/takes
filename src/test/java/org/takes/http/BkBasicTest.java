@@ -69,11 +69,12 @@ import org.takes.tk.TkText;
  *  than one HTTP request in one connection.
  * @since 0.15.2
  */
-@SuppressWarnings({
-    "PMD.ExcessiveImports",
-    "PMD.DoNotUseThreads",
-    "PMD.TooManyMethods"}
-)
+@SuppressWarnings(
+    {
+        "PMD.ExcessiveImports",
+        "PMD.DoNotUseThreads",
+        "PMD.TooManyMethods"
+    })
 public final class BkBasicTest {
     /**
      * Carriage return constant.
