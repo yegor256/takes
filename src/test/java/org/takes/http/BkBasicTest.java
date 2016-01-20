@@ -33,6 +33,15 @@ import com.jcabi.http.mock.MkGrizzlyContainer;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.URI;
+import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -47,15 +56,6 @@ import org.takes.rq.RqSocket;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.URI;
-import java.util.Collection;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Test case for {@link BkBasic}.
