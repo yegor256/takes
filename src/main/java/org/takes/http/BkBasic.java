@@ -50,9 +50,9 @@ import org.takes.rs.RsWithStatus;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
+ * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
- * @since 0.1
  */
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
@@ -64,7 +64,6 @@ public final class BkBasic implements Back {
 
     /**
      * Ctor.
-     *
      * @param tks Take
      */
     public BkBasic(final Take tks) {
@@ -89,7 +88,6 @@ public final class BkBasic implements Back {
 
     /**
      * Print response to output stream, safely.
-     *
      * @param req Request
      * @param output Output
      * @throws IOException If fails
@@ -116,7 +114,6 @@ public final class BkBasic implements Back {
 
     /**
      * Make a failure response.
-     *
      * @param err Error
      * @param code HTTP error code
      * @return Response
@@ -134,7 +131,6 @@ public final class BkBasic implements Back {
 
     /**
      * Adds custom headers with information about socket.
-     *
      * @param req Request
      * @param socket Socket
      * @return Request with custom headers
