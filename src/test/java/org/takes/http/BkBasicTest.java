@@ -66,6 +66,8 @@ import org.takes.tk.TkText;
  * @todo #516:30min It will be nice to refactor tests with Socket usage and
  *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
+ *  Reusable header names will help in many situations. For example - in new
+ *  integration tests.
  */
 @SuppressWarnings(
     {
