@@ -104,4 +104,22 @@ public final class TkFallbackTest {
         );
     }
 
+    /**
+     * TkFallback can throw an IOException when no fallback is available.
+     */
+    @Test
+    public void fallsBackWithProperMessage() {
+        try {
+            new TkFallback(
+                new TkFailure(),
+                new FbChain()
+            ).act(new RqFake());
+            MatcherAssert.assertThat("Must throw exception", false);
+        } catch (final IOException exception) {
+            MatcherAssert.assertThat(
+                exception.getMessage(),
+                Matchers.containsString("fallback ")
+            );
+        }
+    }
 }

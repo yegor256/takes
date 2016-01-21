@@ -33,7 +33,7 @@
     </skin>
     <bannerLeft>
         <name>takes.org</name>
-        <src>logo.png</src>
+        <src>logo.svg</src>
         <href>http://www.takes.org/</href>
         <width>96</width>
         <height>96</height>

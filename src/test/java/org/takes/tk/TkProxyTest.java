@@ -28,15 +28,21 @@ import java.net.URI;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqHref;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkProxy}.
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.25
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @todo #377:30min/DEV We need more tests for TkProxy.
  *  The tests should verify the different HTTP methods (GET, POST, etc),
  *  as well as the different combinations of request/response headers.
@@ -55,12 +61,7 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(
-                                String.format(
-                                    "%s:%d",
-                                    home.getHost(), home.getPort()
-                                )
-                            ).act(new RqFake())
+                            new TkProxy(home).act(new RqFake("PUT"))
                         ).print(),
                         Matchers.containsString("hello")
                     );
@@ -68,4 +69,37 @@ public final class TkProxyTest {
             }
         );
     }
+
+    /**
+     * TkProxy can work.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void correctlyMapsPathString() throws Exception {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(new RqHref.Base(req).href().toString());
+            }
+        };
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake("GET", "/a/b/c"))
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                "http://%s:%d/a/b/c",
+                                home.getHost(), home.getPort()
+                            )
+                        )
+                    );
+                }
+            }
+        );
+    }
+
 }
