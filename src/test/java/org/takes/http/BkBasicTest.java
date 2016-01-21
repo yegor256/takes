@@ -60,13 +60,15 @@ import org.takes.tk.TkText;
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
+ * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @todo #306:30min At the moment we don't support HTTP
  *  persistent connections. Would be great to implement
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
- * @since 0.15.2
+ * @todo #516:30min It will be nice to refactor tests with Socket usage and
+ *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  */
 @SuppressWarnings(
     {
