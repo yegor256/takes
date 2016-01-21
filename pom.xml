@@ -307,7 +307,6 @@
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                                <exclude>findbugs:.*</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
