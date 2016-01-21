@@ -415,17 +415,19 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final Request... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
+                //@checkstyle AnonInnerLength (1 line)
                 new Request() {
                     @Override
                     public Iterable<String> head() throws IOException {
                         return new RqWithHeaders(
                             req,
                             String.format(
-                                "Content-Type:multipart/form-data; boundary=%s",
+                                //@checkstyle LineLength (1 line)
+                                "Content-Type: multipart/form-data; boundary=%s",
                                 RqMultipart.Fake.BOUNDARY
                             ),
                             String.format(
-                                "Content-Length:%s",
+                                "Content-Length: %s",
                                 RqMultipart.Fake.fakeBody(dispositions).length()
                             )
                         ).head();

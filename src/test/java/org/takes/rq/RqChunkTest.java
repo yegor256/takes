@@ -75,7 +75,8 @@ public final class RqChunkTest {
                 Joiner.on(CRLF).join(
                     length,
                     data,
-                    END_OF_CHUNK
+                    END_OF_CHUNK,
+                    ""
                 )
             )
         ).body();
@@ -113,7 +114,8 @@ public final class RqChunkTest {
                     second,
                     Integer.toHexString(third.length()),
                     third,
-                    END_OF_CHUNK
+                    END_OF_CHUNK,
+                    ""
                 )
             )
         ).body();
@@ -145,7 +147,8 @@ public final class RqChunkTest {
                 Joiner.on(CRLF).join(
                     length + ignored,
                     data,
-                    END_OF_CHUNK
+                    END_OF_CHUNK,
+                    ""
                 )
             )
         ).body();
