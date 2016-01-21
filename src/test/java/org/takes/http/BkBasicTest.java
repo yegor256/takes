@@ -24,9 +24,6 @@
 package org.takes.http;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
@@ -39,7 +36,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
-import java.util.Collection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -50,8 +46,8 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
-import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
@@ -69,6 +65,7 @@ import org.takes.tk.TkText;
  *  than one HTTP request in one connection.
  * @todo #516:30min It will be nice to refactor tests with Socket usage and
  *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
+ * @todo #516:15min Move header names from BkBasic to public constants.
  */
 @SuppressWarnings(
     {
@@ -153,40 +150,27 @@ public final class BkBasicTest {
             }
         ).accept(socket);
         final Request request = holder[0];
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            new RqHeaders.Base(request)
+        );
         MatcherAssert.assertThat(
-            request,
-            Matchers.is(
-                Matchers.notNullValue()
+            smart.single(
+                "X-Takes-LocalAddress",
+                ""
+            ),
+            Matchers.not(
+                Matchers.containsString("/")
             )
         );
         MatcherAssert.assertThat(
-            request,
-            Matchers.is(
-                Matchers.instanceOf(
-                    RqWithHeaders.class
-                )
+            smart.single(
+                "X-Takes-RemoteAddress",
+                ""
+            ),
+            Matchers.not(
+                Matchers.containsString("/")
             )
         );
-        final Collection<String> head = Lists.newArrayList(request.head());
-        MatcherAssert.assertThat(head, Matchers.not(Matchers.<String>empty()));
-        final Collection<String> found = Collections2.filter(
-            head,
-            new Predicate<String>() {
-                @Override
-                public boolean apply(final String header) {
-                    return header.contains("X-Takes")
-                        && header.contains("Address");
-                }
-            }
-        );
-        for (final String header : found) {
-            MatcherAssert.assertThat(
-                header,
-                Matchers.not(
-                    Matchers.containsString("/")
-                )
-            );
-        }
         MatcherAssert.assertThat(
             new RqSocket(request).getLocalAddress(),
             Matchers.notNullValue()
