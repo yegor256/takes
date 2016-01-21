@@ -36,6 +36,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -141,17 +142,17 @@ public final class BkBasicTest {
     @Test
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
         final Socket socket = BkBasicTest.createMockSocket();
-        final Request[] holder = new Request[1];
+        final AtomicReference<Request> ref = new AtomicReference<Request>();
         new BkBasic(
             new Take() {
                 @Override
                 public Response act(final Request req) {
-                    holder[0] = req;
+                    ref.set(req);
                     return new RsEmpty();
                 }
             }
         ).accept(socket);
-        final Request request = holder[0];
+        final Request request = ref.get();
         final RqHeaders.Smart smart = new RqHeaders.Smart(
             new RqHeaders.Base(request)
         );
