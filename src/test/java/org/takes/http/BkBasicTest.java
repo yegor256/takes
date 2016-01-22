@@ -99,7 +99,15 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
+        final Socket socket = createMockSocket(
+            Joiner.on(BkBasicTest.CRLF).join(
+                "GET /1 HTTP/1.1",
+                "Host: localhost",
+                "Content-Length: 1",
+                "",
+                "hi1"
+            )
+        );
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
@@ -141,7 +149,15 @@ public final class BkBasicTest {
      */
     @Test
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
-        final Socket socket = BkBasicTest.createMockSocket();
+        final Socket socket = BkBasicTest.createMockSocket(
+            Joiner.on(BkBasicTest.CRLF).join(
+                "GET / HTTP/1.1",
+                "Host:localhost",
+                "Content-Length: 2",
+                "",
+                "hi"
+            )
+        );
         final AtomicReference<Request> ref = new AtomicReference<Request>();
         new BkBasic(
             new Take() {
@@ -367,22 +383,15 @@ public final class BkBasicTest {
 
     /**
      * Creates Socket mock for reuse.
-     *
+     * @param req Request string
      * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
-    private static Socket createMockSocket() throws IOException {
+    private static Socket createMockSocket(final String req)
+        throws IOException {
         final Socket socket = Mockito.mock(Socket.class);
         Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET / HTTP/1.1",
-                    "Host:localhost",
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
-            )
+                new ByteArrayInputStream(req.getBytes())
         );
         Mockito.when(socket.getLocalAddress()).thenReturn(
             InetAddress.getLocalHost()
