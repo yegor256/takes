@@ -23,23 +23,20 @@
  */
 package org.takes.rq;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Input stream with a cap.
+ * Input stream using a temporary cache file.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.16
- * @todo #254:30min CapInputStream should delegate all standard InputStream
- *  calls to it's origin. It's very important in context of closing stream -
- *  right code should close the stream but default InputStream implementation
- *  just throws IOException
+ * @since 0.31
  */
-final class CapInputStream extends InputStream {
+final class TempInputStream extends InputStream {
 
     /**
      * Original stream.
@@ -47,56 +44,57 @@ final class CapInputStream extends InputStream {
     private final transient InputStream origin;
 
     /**
-     * More bytes to read.
+     * Temporary file used as a cache.
      */
-    private transient long more;
+    private final transient File file;
 
     /**
      * Ctor.
      * @param stream Original stream
-     * @param length Max length
+     * @param temp Temporary file used as a cache.
      */
-    CapInputStream(final InputStream stream, final long length) {
+    TempInputStream(final InputStream stream, final File temp) {
         super();
         this.origin = stream;
-        this.more = length;
+        this.file = temp;
     }
 
+    /**
+     * Closes the Input stream, deleting the now useless temporary file.
+     * @throws IOException if some problem occurs.
+     */
     @Override
-    public int available() throws IOException {
-        return (int) Math.min(
-            (long) Integer.MAX_VALUE,
-            Math.max((long) this.origin.available(), this.more)
-        );
+    public void close() throws IOException {
+        super.close();
+        this.origin.close();
+        if (!this.file.delete()) {
+            throw new IOException("unable to delete file");
+        }
     }
 
     @Override
     public int read() throws IOException {
-        final int data;
-        if (this.more <= 0L) {
-            data = -1;
-        } else {
-            data = this.origin.read();
-            --this.more;
-        }
-        return data;
+        return this.origin.read();
     }
 
     @Override
     public int read(final byte[] buf) throws IOException {
-        return this.read(buf, 0, buf.length);
+        return this.origin.read(buf);
     }
 
     @Override
     public int read(final byte[] buf, final int off,
         final int len) throws IOException {
-        final int readed;
-        if (this.more <= 0L) {
-            readed = -1;
-        } else {
-            readed = this.origin.read(buf, off, Math.min(len, (int) this.more));
-            this.more -= (long) readed;
-        }
-        return readed;
+        return this.origin.read(buf, off, len);
+    }
+
+    @Override
+    public long skip(final long num) throws IOException {
+        return this.origin.skip(num);
+    }
+
+    @Override
+    public int available() throws IOException {
+        return this.origin.available();
     }
 }

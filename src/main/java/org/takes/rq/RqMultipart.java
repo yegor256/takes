@@ -230,40 +230,40 @@ public interface RqMultipart extends Request {
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
+         * @todo #254:30min in order to delete temporary files InputStream
+         *  instance on Request.body should be closed. In context of multipart
+         *  requests that means that body of all parts should be closed once
+         *  they are not needed anymore.
          */
         private Request make(final byte[] boundary) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
+            final FileChannel channel = new RandomAccessFile(
+                file, "rw"
+            ).getChannel();
             try {
-                final FileChannel channel = new RandomAccessFile(
-                    file, "rw"
-                ).getChannel();
-                try {
-                    channel.write(
-                        ByteBuffer.wrap(
-                            this.head().iterator().next().getBytes()
-                        )
-                    );
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    channel.write(ByteBuffer.wrap("\r\n".getBytes()));
-                    this.copy(channel, boundary);
-                } finally {
-                    channel.close();
-                }
-                final InputStream input = new FileInputStream(file);
-                try {
-                    return new RqWithHeader(
-                        new RqLive(new FileInputStream(file)),
-                        "Content-Length",
-                        String.valueOf(file.length())
-                    );
-                } finally {
-                    input.close();
-                }
+                channel.write(
+                    ByteBuffer.wrap(
+                        this.head().iterator().next().getBytes()
+                    )
+                );
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                this.copy(channel, boundary);
             } finally {
-                file.delete();
+                channel.close();
             }
+            return new RqWithHeader(
+                new RqLive(
+                    new TempInputStream(
+                        new FileInputStream(file),
+                        file
+                    )
+                ),
+                "Content-Length",
+                String.valueOf(file.length())
+            );
         }
         /**
          * Copy until boundary reached.
