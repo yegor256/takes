@@ -235,30 +235,35 @@ public interface RqMultipart extends Request {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            file.deleteOnExit();
-            final FileChannel channel = new RandomAccessFile(
-                file, "rw"
-            ).getChannel();
             try {
-                channel.write(
-                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
-                );
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
-                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
-                this.copy(channel, boundary);
+                final FileChannel channel = new RandomAccessFile(
+                    file, "rw"
+                ).getChannel();
+                try {
+                    channel.write(
+                        ByteBuffer.wrap(
+                            this.head().iterator().next().getBytes()
+                        )
+                    );
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                    this.copy(channel, boundary);
+                } finally {
+                    channel.close();
+                }
+                final InputStream input = new FileInputStream(file);
+                try {
+                    return new RqWithHeader(
+                        new RqLive(new FileInputStream(file)),
+                        "Content-Length",
+                        String.valueOf(file.length())
+                    );
+                } finally {
+                    input.close();
+                }
             } finally {
-                channel.close();
+                file.delete();
             }
-            return new RqWithHeader(
-                new RqLive(
-                    new CapInputStream(
-                        new FileInputStream(file),
-                        file.length()
-                    )
-                ),
-                "Content-Length",
-                String.valueOf(file.length())
-            );
         }
         /**
          * Copy until boundary reached.
