@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2015-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -233,7 +233,7 @@ public final class BkBasicTest {
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
-                     count = input.read(buffer)) {
+                    count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
             } finally {
@@ -291,7 +291,7 @@ public final class BkBasicTest {
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
-                     count = input.read(buffer)) {
+                    count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
             } finally {
@@ -350,7 +350,7 @@ public final class BkBasicTest {
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
-                     count = input.read(buffer)) {
+                    count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
             } finally {
