@@ -34,6 +34,7 @@ merge:
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
+    ./years.sh
   commanders:
   - caarlos0
   - carlosmiranda
