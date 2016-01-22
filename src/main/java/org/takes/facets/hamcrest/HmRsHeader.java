@@ -137,7 +137,7 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
 
     @Override
     public void describeMismatchSafely(final Response item,
-                                       final Description description) {
+        final Description description) {
         description.appendText("header was: ")
             .appendDescriptionOf(this.header)
             .appendText(HmRsHeader.VALUES_STR)

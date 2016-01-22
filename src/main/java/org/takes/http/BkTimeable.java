@@ -92,8 +92,8 @@ public final class BkTimeable extends BkWrap {
         @Override
         public void accept(final Socket socket) throws IOException {
             this.threads.put(
-                    Thread.currentThread(),
-                    System.currentTimeMillis()
+                Thread.currentThread(),
+                System.currentTimeMillis()
             );
             this.back.accept(socket);
         }
@@ -103,8 +103,8 @@ public final class BkTimeable extends BkWrap {
         private void check() {
             for (final Map.Entry<Thread, Long> entry
                 : this.threads.entrySet()) {
-                final long currentTime = System.currentTimeMillis();
-                if (currentTime - entry.getValue() > this.latency) {
+                final long time = System.currentTimeMillis();
+                if (time - entry.getValue() > this.latency) {
                     final Thread thread = entry.getKey();
                     if (thread.isAlive()) {
                         thread.interrupt();

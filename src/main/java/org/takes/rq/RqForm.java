@@ -60,7 +60,8 @@ import org.takes.misc.VerboseIterable;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+ * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+ *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  */
 @SuppressWarnings("PMD.TooManyMethods")

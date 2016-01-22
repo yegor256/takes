@@ -144,7 +144,7 @@ public final class HmRsHeaderTest {
         );
         final StringDescription description = new StringDescription();
         final RsWithHeader req =
-                new RsWithHeader(HmRsHeaderTest.CONTENT_TYPE, "image/png");
+            new RsWithHeader(HmRsHeaderTest.CONTENT_TYPE, "image/png");
         matcher.matchesSafely(req);
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(
