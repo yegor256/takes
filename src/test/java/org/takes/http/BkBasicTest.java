@@ -66,9 +66,6 @@ import org.takes.tk.TkText;
  *  than one HTTP request in one connection.
  * @todo #516:30min It will be nice to refactor tests with Socket usage and
  *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
- * @todo #516:15min Move header names from BkBasic to public constants.
- *  Reusable header names will help in many situations. For example - in new
- *  integration tests.
  */
 @SuppressWarnings(
     {
@@ -99,7 +96,7 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
+        final Socket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
@@ -158,7 +155,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                "X-Takes-LocalAddress",
+                BkBasic.HEADER_TAKES_LOCAL_ADDRESS,
                 ""
             ),
             Matchers.not(
@@ -167,7 +164,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                "X-Takes-RemoteAddress",
+                BkBasic.HEADER_TAKES_REMOTE_ADDRESS,
                 ""
             ),
             Matchers.not(
