@@ -31,34 +31,23 @@ import org.takes.Request;
 
 /**
  * Request decorator that limits its body, according to
- * the Content-Length header in its head.
- *
- * <p>This decorator may help when you're planning to read
- * the body of the request using its read() and available() methods,
- * but you're not sure that available() is always saying the truth. In
- * most cases, the browser will not close the request and will always
- * return positive number in available() method. Thus, you won't be
- * able to reach the end of the stream ever. The browser wants you
- * to respect the "Content-Length" header and read as many bytes
- * as it requests. To solve that, just wrap your request into this
- * decorator.
+ * the chunk sizes when it is a chunked Transfer-Encoding.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
  * @since 0.15
- * @see org.takes.rq.RqMultipart
  * @see org.takes.rq.RqPrint
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqLengthAware extends RqWrap {
+public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
      * @param req Original request
      */
-    public RqLengthAware(final Request req) {
+    public RqChunk(final Request req) {
         super(
             new Request() {
                 @Override
@@ -67,7 +56,7 @@ public final class RqLengthAware extends RqWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RqLengthAware.cap(req);
+                    return RqChunk.cap(req);
                 }
             }
         );
@@ -81,14 +70,11 @@ public final class RqLengthAware extends RqWrap {
      */
     private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
-            .header("Content-Length").iterator();
-        InputStream body = req.body();
-        long length = 0;
-        if (hdr.hasNext()) {
-            length = Long.parseLong(hdr.next());
+            .header("Transfer-Encoding").iterator();
+        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
+            throw new UnsupportedOperationException();
         }
-        body = new CapInputStream(body, length);
-        return body;
+        return req.body();
     }
 
 }

@@ -399,7 +399,11 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: example.com",
-                "Content-Type: multipart/form-data; boundary=zzz"
+                "Content-Type: multipart/form-data; boundary=zzz",
+                String.format(
+                    "Content-Length:%s",
+                    temp.length()
+                )
             ),
             new FileInputStream(temp)
         );
