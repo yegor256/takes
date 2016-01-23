@@ -244,9 +244,7 @@ public interface RqMultipart extends Request {
             ).getChannel();
             try {
                 channel.write(
-                    ByteBuffer.wrap(
-                        this.head().iterator().next().getBytes()
-                    )
+                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(ByteBuffer.wrap("\r\n".getBytes()));

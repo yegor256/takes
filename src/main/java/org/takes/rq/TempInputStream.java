@@ -28,9 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Input stream using a temporary cache file.
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * Input stream wrapper that removed associated File instance on close.
  *
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
@@ -44,14 +42,14 @@ final class TempInputStream extends InputStream {
     private final transient InputStream origin;
 
     /**
-     * Temporary file used as a cache.
+     * Associated File instance.
      */
     private final transient File file;
 
     /**
      * Ctor.
      * @param stream Original stream
-     * @param temp Temporary file used as a cache.
+     * @param temp File instance
      */
     TempInputStream(final InputStream stream, final File temp) {
         super();
@@ -60,7 +58,7 @@ final class TempInputStream extends InputStream {
     }
 
     /**
-     * Closes the Input stream, deleting the now useless temporary file.
+     * Closes the Input stream, deleting associated file.
      * @throws IOException if some problem occurs.
      */
     @Override
