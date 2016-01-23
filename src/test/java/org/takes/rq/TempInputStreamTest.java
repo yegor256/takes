@@ -49,12 +49,23 @@ public final class TempInputStreamTest {
     public void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");
         final BufferedWriter out = new BufferedWriter(new FileWriter(file));
-        out.write("Temp file deletion test");
-        out.close();
+        try {
+            out.write("Temp file deletion test");
+        } finally {
+            out.close();
+        }
         final InputStream body = new TempInputStream(
             new FileInputStream(file), file
         );
-        body.close();
+        try {
+            MatcherAssert.assertThat(
+                "File is not created!",
+                file.exists(),
+                Matchers.is(true)
+            );
+        } finally {
+            body.close();
+        }
         MatcherAssert.assertThat(
             "File exists after stream closure",
             file.exists(),

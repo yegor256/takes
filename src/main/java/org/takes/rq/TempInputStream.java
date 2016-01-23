@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Input stream wrapper that removed associated File instance on close.
+ * Input stream wrapper that removes associated File instance on close.
  *
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
