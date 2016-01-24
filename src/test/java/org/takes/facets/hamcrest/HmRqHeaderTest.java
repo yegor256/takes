@@ -165,7 +165,8 @@ public final class HmRqHeaderTest {
             Matchers.equalTo(new StringBuilder()
                 .append("header was: equalToIgnoringCase")
                 .append("(\"content-type\") -> values: <[image/png]>")
-                .toString())
+                .toString()
+            )
         );
     }
 }
