@@ -159,30 +159,29 @@ public final class BkBasic implements Back {
      * @param req Request
      * @param socket Socket
      * @return Request with custom headers
+     * @checkstyle MultipleStringLiteralsCheck (25 lines)
      */
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
-        final String ptss = "%s: %s";
-        final String ptsd = "%s: %d";
         return new RqWithHeaders(
             req,
             String.format(
-                ptss,
+                "%s: %s",
                 BkBasic.HEADER_TAKES_LOCAL_ADDRESS,
                 socket.getLocalAddress().getHostAddress()
             ),
             String.format(
-                ptsd,
+                "%s: %d",
                 BkBasic.HEADER_TAKES_LOCAL_PORT,
                 socket.getLocalPort()
             ),
             String.format(
-                ptss,
+                "%s: %s",
                 BkBasic.HEADER_TAKES_REMOTE_ADDRESS,
                 socket.getInetAddress().getHostAddress()
             ),
             String.format(
-                ptsd,
+                "%s: %d",
                 BkBasic.HEADER_TAKES_REMOTE_PORT,
                 socket.getPort()
             )
