@@ -28,9 +28,9 @@ import org.hamcrest.Matcher;
 import org.takes.Request;
 
 /**
- * Response Header Matcher.
+ * Request Header Matcher.
  *
- * <p>This "matcher" tests given response headers.
+ * <p>This "matcher" tests given request headers.
  * <p>The class is immutable and thread-safe.
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
