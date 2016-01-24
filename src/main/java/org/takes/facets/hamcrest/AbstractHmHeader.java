@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -117,7 +116,7 @@ public abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
             if (headers.hasNext()) {
                 headers.next();
             }
-            final List<String> values = new ArrayList<String>(0);
+            final Collection<String> values = new ArrayList<String>(0);
             while (headers.hasNext()) {
                 final String[] parts = AbstractHmHeader.split(headers.next());
                 if (this.header.matches(parts[0].trim())) {
