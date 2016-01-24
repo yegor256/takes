@@ -152,10 +152,6 @@ public final class HmRqHeaderTest {
      */
     @Test
     public void testMismatchMessage() {
-        final String expected = new StringBuilder()
-            .append("header was: equalToIgnoringCase")
-            .append("(\"content-type\") -> values: <[image/png]>")
-            .toString();
         final HmRqHeader matcher = new HmRqHeader(
             "content-type", "text/plain"
         );
@@ -166,7 +162,10 @@ public final class HmRqHeaderTest {
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(
             description.toString(),
-            Matchers.equalTo(expected)
+            Matchers.equalTo(new StringBuilder()
+                .append("header was: equalToIgnoringCase")
+                .append("(\"content-type\") -> values: <[image/png]>")
+                .toString())
         );
     }
 }
