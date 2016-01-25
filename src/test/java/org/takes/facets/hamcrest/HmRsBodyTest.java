@@ -63,7 +63,7 @@ public final class HmRsBodyTest {
     public void testStringCharset() throws Exception {
         final String body = HTML_HELLO;
         final Charset charset = Charset.defaultCharset();
-        final String type = makeType(charset.name());
+        final String type = this.makeType(charset.name());
         MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charset)
@@ -77,7 +77,7 @@ public final class HmRsBodyTest {
     @Test
     public void testStringCharsetName() throws Exception {
         final String body = HTML_HELLO;
-        final String type = makeType(Charset.defaultCharset().name());
+        final String type = this.makeType(Charset.defaultCharset().name());
         MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, Charset.defaultCharset().name())
@@ -97,10 +97,15 @@ public final class HmRsBodyTest {
         );
     }
 
-	private String makeType(final String charsetName) {
-		StringBuilder sb=new StringBuilder("text/html;charset=");
-		sb.append(charsetName);
-		return  sb.toString();
-	}
+    /**
+     * makes Content-Type header string.
+     * @param charsetName
+     * @return header string
+     */
+    private String makeType(final String charsetName) {
+        final StringBuilder sbd = new StringBuilder("text/html;charset=");
+        sbd.append(charsetName);
+        return sbd.toString();
+    }
 
 }
