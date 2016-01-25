@@ -120,54 +120,55 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
                 }
             }
 
-            InputStream body=null;
+            InputStream body = response.body();
             try {
-                body = response.body();
                 if (value!=null) {
                     if (value.length == 0) {
-                        return (body.read()==-1);
+                        return (body.read() == -1);
                     }
                     byte[] buf = new byte[Math.min(value.length, 4096)];
-                    for (int total=0; ; ) {
+                    for (int total = 0; ; ) {
                         int rd=body.read(buf);
                         if (rd == -1) {
                             return total == value.length;
                         }
-                        for (int k=0; k<rd; k++) {
-                            if (buf[k]!=value[total+k]) {
+                        for (int k=0; k < rd; k++) {
+                            if (buf[k] != value[total+k]) {
                                 return false;
                             }
                         }
-                        total+=rd;
+                        total += rd;
                     }
                 } else if (stringValue!=null) {
                     InputStreamReader reader;
-                    if (charset!=null) {
+                    if (charset != null) {
                         reader=new InputStreamReader(body, charset);
                     } else {
                         reader=new InputStreamReader(body);
                     }
                     if (stringValue.length() == 0) {
-                        return (reader.read()==-1);
+                        return (reader.read() == -1);
                     }
                     char[] buf = new char[Math.min(stringValue.length(), 2048)];
-                    for (int total=0; ; ) {
+                    for (int total = 0; ; ) {
                         int rd=reader.read(buf);
                         if (rd == -1) {
                             return total == stringValue.length();
                         }
-                        for (int k=0; k<rd; k++) {
-                            if (buf[k]!=stringValue.charAt(total+k)) {
+                        for (int k=0; k < rd; k++) {
+                            if (buf[k] != stringValue.charAt(total + k)) {
                                 return false;
                             }
                         }
-                        total+=rd;
+                        total += rd;
                     }
                 } else {
-                    throw new IllegalStateException("both stribg and byte array are null");
+                    throw new IllegalStateException(
+                    		"both stribg and byte array are null"
+                    	);
                 }
             } finally {
-                if (body!=null) {
+                if (body != null) {
                     body.close();
                 }
             }

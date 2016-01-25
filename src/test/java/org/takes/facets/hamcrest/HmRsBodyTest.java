@@ -24,71 +24,70 @@
 package org.takes.facets.hamcrest;
 
 import java.nio.charset.Charset;
-
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.rs.RsWithBody;
-import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithType;
 
 /**
  * Test case for {@link HmRsBody}.
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Alexei Kaigorodov (alexei.kaigorodov@gmail.com)
  * @version $Id: bc5f637cdf2ae290ae2fe4dc3e7755c55ad4b166 $
  * @since 0.23.3
  */
 public final class HmRsBodyTest {
 
     /**
-     * HmRsBody(String)
+     * Test ctor HmRsBody(String).
      * @throws Exception If some problem inside
      */
     @Test
     public void testString() throws Exception {
-        String body = "<html>Hello</html>";
-		MatcherAssert.assertThat(
+    	final String body = "<html>Hello</html>";
+        MatcherAssert.assertThat(
             new RsWithBody(body),
             new HmRsBody(body)
         );
     }
 
     /**
-     * HmRsBody(String, Charset)
+     * Test ctor HmRsBody(String, Charset).
      * @throws Exception If some problem inside
      */
     @Test
     public void testStringCharset() throws Exception {
-        String body = "<html>Hello</html>";
-    	Charset charset=Charset.defaultCharset();
-        MatcherAssert.assertThat(
-            new RsWithType(new RsWithBody(body), "text/html;charset="+charset.name()),
+    	final String body = "<html>Hello</html>";
+    	final Charset charset = Charset.defaultCharset();
+        String type = "text/html;charset=" + charset.name();
+		MatcherAssert.assertThat(
+            new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charset)
         );
     }
 
     /**
-     * HmRsBody(String, Charset)
+     * Test ctor HmRsBody(String, Charset).
      * @throws Exception If some problem inside
      */
     @Test
     public void testStringCharsetName() throws Exception {
-        String body = "<html>Hello</html>";
-    	String charsetName=Charset.defaultCharset().name();
-        MatcherAssert.assertThat(
-            new RsWithType(new RsWithBody(body), "text/html;charset="+charsetName),
+        final String body = "<html>Hello</html>";
+        final String charsetName = Charset.defaultCharset().name();
+        String type = "text/html;charset=" + charsetName;
+		MatcherAssert.assertThat(
+            new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charsetName)
         );
     }
 
     /**
-     * HmRsBody(byte[])
+     * Test ctor HmRsBody(byte[]).
      * @throws Exception If some problem inside
      */
     @Test
     public void testByteArray() throws Exception {
-        byte[] body = "<html>Hello</html>".getBytes();
-		MatcherAssert.assertThat(
+        final byte[] body = "<html>Hello</html>".getBytes();
+        MatcherAssert.assertThat(
             new RsWithBody(body),
             new HmRsBody(body)
         );
