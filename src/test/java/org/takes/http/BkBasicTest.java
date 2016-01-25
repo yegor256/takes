@@ -36,13 +36,20 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqSocket;
+import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -57,8 +64,18 @@ import org.takes.tk.TkText;
  *  persistent connections. Would be great to implement
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
+ * @todo #516:30min It will be nice to refactor tests with Socket usage and
+ *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
+ * @todo #516:15min Move header names from BkBasic to public constants.
+ *  Reusable header names will help in many situations. For example - in new
+ *  integration tests.
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
+@SuppressWarnings(
+    {
+        "PMD.ExcessiveImports",
+        "PMD.DoNotUseThreads",
+        "PMD.TooManyMethods"
+    })
 public final class BkBasicTest {
     /**
      * Carriage return constant.
@@ -77,30 +94,12 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can handle socket data.
+     *
      * @throws IOException If some problem inside
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET / HTTP/1.1",
-                    "Host:localhost",
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
-            )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
+        final Socket socket = createMockSocket();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Mockito.when(socket.getOutputStream()).thenReturn(baos);
         new BkBasic(new TkText("Hello world!")).accept(socket);
@@ -112,6 +111,7 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
+     *
      * @throws IOException if any I/O error occurs.
      */
     @Test
@@ -135,7 +135,58 @@ public final class BkBasicTest {
     }
 
     /**
+     * BkBasic produces headers with addresses without slashes.
+     *
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addressesInHeadersAddedWithoutSlashes() throws IOException {
+        final Socket socket = BkBasicTest.createMockSocket();
+        final AtomicReference<Request> ref = new AtomicReference<Request>();
+        new BkBasic(
+            new Take() {
+                @Override
+                public Response act(final Request req) {
+                    ref.set(req);
+                    return new RsEmpty();
+                }
+            }
+        ).accept(socket);
+        final Request request = ref.get();
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            new RqHeaders.Base(request)
+        );
+        MatcherAssert.assertThat(
+            smart.single(
+                "X-Takes-LocalAddress",
+                ""
+            ),
+            Matchers.not(
+                Matchers.containsString("/")
+            )
+        );
+        MatcherAssert.assertThat(
+            smart.single(
+                "X-Takes-RemoteAddress",
+                ""
+            ),
+            Matchers.not(
+                Matchers.containsString("/")
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqSocket(request).getLocalAddress(),
+            Matchers.notNullValue()
+        );
+        MatcherAssert.assertThat(
+            new RqSocket(request).getRemoteAddress(),
+            Matchers.notNullValue()
+        );
+    }
+
+    /**
      * BkBasic can handle two requests in one connection.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -200,6 +251,7 @@ public final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -256,6 +308,7 @@ public final class BkBasicTest {
 
     /**
      * BkBasic can accept no content-length on closed connection.
+     *
      * @throws Exception If some problem inside
      */
     @Ignore
@@ -310,5 +363,37 @@ public final class BkBasicTest {
             output.toString(),
             Matchers.containsString(text)
         );
+    }
+
+    /**
+     * Creates Socket mock for reuse.
+     *
+     * @return Prepared Socket mock
+     * @throws IOException If some problem inside
+     */
+    private static Socket createMockSocket() throws IOException {
+        final Socket socket = Mockito.mock(Socket.class);
+        Mockito.when(socket.getInputStream()).thenReturn(
+            new ByteArrayInputStream(
+                Joiner.on(BkBasicTest.CRLF).join(
+                    "GET / HTTP/1.1",
+                    "Host:localhost",
+                    "Content-Length: 2",
+                    "",
+                    "hi"
+                ).getBytes()
+            )
+        );
+        Mockito.when(socket.getLocalAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getLocalPort()).thenReturn(0);
+        Mockito.when(socket.getInetAddress()).thenReturn(
+            InetAddress.getLocalHost()
+        );
+        Mockito.when(socket.getPort()).thenReturn(0);
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        return socket;
     }
 }
