@@ -45,7 +45,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  */
-public abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
+abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
 
     /**
      * Values string used in description of mismatches.
