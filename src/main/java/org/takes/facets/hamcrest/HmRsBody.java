@@ -108,7 +108,9 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 				}
 			}
 
-			try (final InputStream body = response.body()) {
+			InputStream body=null;
+			try {
+				body = response.body();
 				if (value!=null) {
 					if (value.length == 0) {
 						return (body.read()==-1);
@@ -150,7 +152,12 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 					    total+=rd;
 					}
 				} else {
-					throw new IllegalStateException("both stribg and byte array are null");				}
+					throw new IllegalStateException("both stribg and byte array are null");
+				}
+			} finally {
+				if (body!=null) {
+				    body.close();
+				}
 		    }
 		} catch (final IOException ex) {
             throw new IllegalStateException(ex);
