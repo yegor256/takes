@@ -37,9 +37,12 @@ import org.takes.rs.RsWithType;
  */
 public final class HmRsBodyTest {
 
+    /**
+     * Valid response body.
+     */
     private static final String HTML_HELLO = "<html>Hello</html>";
 
-	/**
+    /**
      * Test ctor HmRsBody(String).
      * @throws Exception If some problem inside
      */
@@ -60,7 +63,7 @@ public final class HmRsBodyTest {
     public void testStringCharset() throws Exception {
         final String body = HTML_HELLO;
         final Charset charset = Charset.defaultCharset();
-        final String type = "text/html;charset=" + charset.name();
+        final String type = makeType(charset.name());
         MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charset)
@@ -74,11 +77,10 @@ public final class HmRsBodyTest {
     @Test
     public void testStringCharsetName() throws Exception {
         final String body = HTML_HELLO;
-        final String charsetName = Charset.defaultCharset().name();
-        final String type = "text/html;charset=" + charsetName;
+        final String type = makeType(Charset.defaultCharset().name());
         MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
-            new HmRsBody(body, charsetName)
+            new HmRsBody(body, Charset.defaultCharset().name())
         );
     }
 
@@ -94,5 +96,11 @@ public final class HmRsBodyTest {
             new HmRsBody(body)
         );
     }
+
+	private String makeType(final String charsetName) {
+		StringBuilder sb=new StringBuilder("text/html;charset=");
+		sb.append(charsetName);
+		return  sb.toString();
+	}
 
 }

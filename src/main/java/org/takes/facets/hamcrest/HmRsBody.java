@@ -45,7 +45,9 @@ import org.takes.Response;
  */
 public final class HmRsBody extends TypeSafeMatcher<Response> {
 
-    /**
+    private static final int BUF_LEN = 2048;
+
+	/**
      * Pattern to extract charset name.
      */
     private static final Pattern PATT = Pattern
@@ -59,7 +61,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
     /**
      * Body value as String.
      */
-    private String stringValue;
+    private String stringvalue;
 
     /**
      * encoding of the body byte array.
@@ -78,7 +80,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
         if (str == null) {
             throw new IllegalArgumentException("str may not be null");
         }
-        this.stringValue = str;
+        this.stringvalue = str;
         if (this.charset != null) {
             value = str.getBytes(charset);
             this.charset = charset;
@@ -94,78 +96,28 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 
     @Override
     public void describeTo(final Description description) {
-        if (this.stringValue == null) {
-        	this.stringValue = new String(value, charset);
+        if (this.stringvalue == null) {
+        	this.stringvalue = new String(value, charset);
         }
         description.appendText("body: ")
-                        .appendText(stringValue);
+                        .appendText(stringvalue);
     }
 
     @Override
     public boolean matchesSafely(final Response response) {
         try {
-            Iterable<String> head = response.head();
-            if (this.charset == null) {
-                // try to extract charset from header
-                Iterator<String> it = head.iterator();
-                while (it.hasNext()) {
-                    java.util.regex.Matcher strMatcher = PATT
-                                    .matcher(it.next());
-                    if (strMatcher.find()) {
-                        try {
-                        	this.charset = Charset.forName(strMatcher.group());
-                        } catch (IllegalCharsetNameException e) {
-                        }
-                        break;
-                    }
-                }
-            }
+            extractCharsetName(response);
 
             InputStream body = response.body();
             try {
                 if (this.value != null) {
-                    if (this.value.length == 0) {
-                        return (body.read() == -1);
-                    }
-                    byte[] buf = new byte[Math.min(value.length, 4096)];
-                    for (int total = 0;;) {
-                        int rd = body.read(buf);
-                        if (rd == -1) {
-                            return total == value.length;
-                        }
-                        for (int k = 0; k < rd; k++) {
-                            if (buf[k] != value[total + k]) {
-                                return false;
-                            }
-                        }
-                        total += rd;
-                    }
-                } else if (this.stringValue != null) {
-                    InputStreamReader reader;
-                    if (charset != null) {
-                        reader = new InputStreamReader(body, charset);
-                    } else {
-                        reader = new InputStreamReader(body);
-                    }
-                    if (this.stringValue.length() == 0) {
-                        return (reader.read() == -1);
-                    }
-                    char[] buf = new char[Math.min(this.stringValue.length(), 2048)];
-                    for (int total = 0;;) {
-                        int rd = reader.read(buf);
-                        if (rd == -1) {
-                            return total == this.stringValue.length();
-                        }
-                        for (int k = 0; k < rd; k++) {
-                            if (buf[k] != this.stringValue.charAt(total + k)) {
-                                return false;
-                            }
-                        }
-                        total += rd;
-                    }
+                    return compareByteArrays(body);
+                } else if (this.stringvalue != null) {
+                    return compareStrings(body);
                 } else {
                     throw new IllegalStateException(
-                                    "both stribg and byte array are null");
+                                    "both string and byte arrays are null"
+                    				);
                 }
             } finally {
                 if (body != null) {
@@ -176,6 +128,78 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
             throw new IllegalStateException(ex);
         }
     }
+
+	private boolean compareStrings(InputStream body) throws IOException {
+		InputStreamReader reader;
+		if (this.charset != null) {
+		    reader = new InputStreamReader(body, this.charset);
+		} else {
+		    reader = new InputStreamReader(body);
+		}
+		if (this.stringvalue.length() == 0) {
+		    return reader.read() == -1;
+		}
+		int bufLen = Math.min(this.stringvalue.length(), BUF_LEN);
+		char[] buf = new char[bufLen];
+		for (int total = 0;;) {
+		    final int rrb = reader.read(buf);
+		    if (rrb == -1) {
+		        return total == this.stringvalue.length();
+		    }
+		    for (int kkk = 0; kkk < rrb; kkk=kkk+1) {
+		        int index = total + kkk;
+				if (buf[kkk] != this.stringvalue.charAt(index)) {
+		            return false;
+		        }
+		    }
+		    total += rrb;
+		}
+	}
+
+	private boolean compareByteArrays(InputStream body) throws IOException {
+		if (this.value.length == 0) {
+		    return (body.read() == -1);
+		}
+		int bufLen = Math.min(this.value.length, BUF_LEN);
+		byte[] buf = new byte[bufLen];
+		for (int total = 0;;) {
+		    int rd = body.read(buf);
+		    if (rd == -1) {
+		        return total == this.value.length;
+		    }
+		    for (int k = 0; k < rd; k++) {
+		        if (buf[k] != this.value[total + k]) {
+		            return false;
+		        }
+		    }
+		    total += rd;
+		}
+	}
+
+    /**
+     * Try to extract charset from header.
+     * @param response
+     * @throws IOException
+     */
+	private void extractCharsetName(final Response response)
+	                throws IOException {
+		if (this.charset != null) {
+			return;
+		}
+		Iterable<String> head = response.head();
+		Iterator<String> it = head.iterator();
+		while (it.hasNext()) {
+			java.util.regex.Matcher strMatcher = PATT
+			                .matcher(it.next());
+			if (strMatcher.find()) {
+				try {
+					this.charset = Charset.forName(strMatcher.group());
+				} catch (IllegalCharsetNameException e) {
+				}
+				break;
+			}
+		}
+	}
 
     @Override
     public void describeMismatchSafely(final Response response,
