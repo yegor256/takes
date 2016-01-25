@@ -44,6 +44,7 @@ import org.junit.experimental.categories.Category;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.facets.hamcrest.HmRqHeader;
 import org.takes.http.FtRemote;
 import org.takes.misc.PerformanceTests;
 import org.takes.rs.RsText;
@@ -398,7 +399,11 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: example.com",
-                "Content-Type: multipart/form-data; boundary=zzz"
+                "Content-Type: multipart/form-data; boundary=zzz",
+                String.format(
+                    "Content-Length:%s",
+                    temp.length()
+                )
             ),
             new FileInputStream(temp)
         );
@@ -470,6 +475,40 @@ public final class RqMultipartTest {
             );
         }
         temp.delete();
+    }
+
+    /**
+     * RqMultipart.Base can produce parts with Content-Length.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void producesPartsWithContentLength() throws IOException {
+        final RqMultipart.Base multipart = new RqMultipart.Base(
+            new RqFake(
+                Arrays.asList(
+                    "POST /h?a=4 HTTP/1.1",
+                    "Host: rtw.example.com",
+                    "Content-Type: multipart/form-data; boundary=AaB01x",
+                    "Content-Length: 100007"
+                ),
+                Joiner.on("\r\n").join(
+                    "--AaB01x",
+                    "Content-Disposition: form-data; name=\"t2\"",
+                    "",
+                    "447 N Wolfe Rd, Sunnyvale, CA 94085",
+                    "--AaB01x"
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            multipart.part("t2")
+                .iterator()
+                .next(),
+            new HmRqHeader(
+                "content-length",
+                "102"
+            )
+        );
     }
 
     /**
