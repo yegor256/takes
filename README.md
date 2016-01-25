@@ -279,7 +279,7 @@ public final class App {
 ## Templates
 
 Now let's see how we can render something more complex than an plain text.
-First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may
+First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it be may
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
