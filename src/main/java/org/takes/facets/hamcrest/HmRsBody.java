@@ -48,71 +48,72 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
     /**
      * Pattern to extract charset name.
      */
-    private static final Pattern PATT =
-        Pattern.compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
+    private static final Pattern PATT = Pattern
+                    .compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
 
     /**
      * Body value as byte array.
      */
     private byte[] value;
-    
+
     /**
      * Body value as String.
      */
     private String stringValue;
-    
+
     /**
      * encoding of the body byte array.
      */
     private Charset charset;
-    
+
     public HmRsBody(String str, String charsetName) {
         this(str, Charset.forName(charsetName));
     }
 
     public HmRsBody(String str) {
-        this (str, (Charset)null);
-   }
+        this(str, (Charset) null);
+    }
 
     public HmRsBody(String str, Charset charset) {
-        if (str==null) {
+        if (str == null) {
             throw new IllegalArgumentException("str may not be null");
         }
-        this.stringValue=str;
-        if (charset!=null) {
-            value=str.getBytes(charset);
-            this.charset=charset;
+        this.stringValue = str;
+        if (this.charset != null) {
+            value = str.getBytes(charset);
+            this.charset = charset;
         }
     }
 
     public HmRsBody(byte[] val) {
-        if (val==null) {
+        if (val == null) {
             throw new IllegalArgumentException("byte array may not be null");
         }
-        value=val;
+        this.value = val;
     }
 
     @Override
     public void describeTo(final Description description) {
-        if (stringValue==null) {
-            stringValue=new String(value, charset);
+        if (this.stringValue == null) {
+        	this.stringValue = new String(value, charset);
         }
         description.appendText("body: ")
-            .appendText(stringValue);
+                        .appendText(stringValue);
     }
 
     @Override
     public boolean matchesSafely(final Response response) {
         try {
             Iterable<String> head = response.head();
-            if (charset==null) {
+            if (this.charset == null) {
                 // try to extract charset from header
                 Iterator<String> it = head.iterator();
                 while (it.hasNext()) {
-                    java.util.regex.Matcher strMatcher = PATT.matcher(it.next());
+                    java.util.regex.Matcher strMatcher = PATT
+                                    .matcher(it.next());
                     if (strMatcher.find()) {
                         try {
-                            charset=Charset.forName(strMatcher.group());
+                        	this.charset = Charset.forName(strMatcher.group());
                         } catch (IllegalCharsetNameException e) {
                         }
                         break;
@@ -122,41 +123,41 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 
             InputStream body = response.body();
             try {
-                if (value!=null) {
-                    if (value.length == 0) {
+                if (this.value != null) {
+                    if (this.value.length == 0) {
                         return (body.read() == -1);
                     }
                     byte[] buf = new byte[Math.min(value.length, 4096)];
-                    for (int total = 0; ; ) {
-                        int rd=body.read(buf);
+                    for (int total = 0;;) {
+                        int rd = body.read(buf);
                         if (rd == -1) {
                             return total == value.length;
                         }
-                        for (int k=0; k < rd; k++) {
-                            if (buf[k] != value[total+k]) {
+                        for (int k = 0; k < rd; k++) {
+                            if (buf[k] != value[total + k]) {
                                 return false;
                             }
                         }
                         total += rd;
                     }
-                } else if (stringValue!=null) {
+                } else if (this.stringValue != null) {
                     InputStreamReader reader;
                     if (charset != null) {
-                        reader=new InputStreamReader(body, charset);
+                        reader = new InputStreamReader(body, charset);
                     } else {
-                        reader=new InputStreamReader(body);
+                        reader = new InputStreamReader(body);
                     }
-                    if (stringValue.length() == 0) {
+                    if (this.stringValue.length() == 0) {
                         return (reader.read() == -1);
                     }
-                    char[] buf = new char[Math.min(stringValue.length(), 2048)];
-                    for (int total = 0; ; ) {
-                        int rd=reader.read(buf);
+                    char[] buf = new char[Math.min(this.stringValue.length(), 2048)];
+                    for (int total = 0;;) {
+                        int rd = reader.read(buf);
                         if (rd == -1) {
-                            return total == stringValue.length();
+                            return total == this.stringValue.length();
                         }
-                        for (int k=0; k < rd; k++) {
-                            if (buf[k] != stringValue.charAt(total + k)) {
+                        for (int k = 0; k < rd; k++) {
+                            if (buf[k] != this.stringValue.charAt(total + k)) {
                                 return false;
                             }
                         }
@@ -164,8 +165,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
                     }
                 } else {
                     throw new IllegalStateException(
-                    		"both stribg and byte array are null"
-                    	);
+                                    "both stribg and byte array are null");
                 }
             } finally {
                 if (body != null) {
@@ -179,9 +179,8 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 
     @Override
     public void describeMismatchSafely(final Response response,
-                                       final Description description) {
+                    final Description description) {
         description.appendText("header was: ")
-            .appendDescriptionOf(this);
+                        .appendDescriptionOf(this);
     }
 }
-

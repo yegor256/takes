@@ -37,13 +37,15 @@ import org.takes.rs.RsWithType;
  */
 public final class HmRsBodyTest {
 
-    /**
+    private static final String HTML_HELLO = "<html>Hello</html>";
+
+	/**
      * Test ctor HmRsBody(String).
      * @throws Exception If some problem inside
      */
     @Test
     public void testString() throws Exception {
-    	final String body = "<html>Hello</html>";
+        final String body = HTML_HELLO;
         MatcherAssert.assertThat(
             new RsWithBody(body),
             new HmRsBody(body)
@@ -56,10 +58,10 @@ public final class HmRsBodyTest {
      */
     @Test
     public void testStringCharset() throws Exception {
-    	final String body = "<html>Hello</html>";
-    	final Charset charset = Charset.defaultCharset();
-        String type = "text/html;charset=" + charset.name();
-		MatcherAssert.assertThat(
+        final String body = HTML_HELLO;
+        final Charset charset = Charset.defaultCharset();
+        final String type = "text/html;charset=" + charset.name();
+        MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charset)
         );
@@ -71,10 +73,10 @@ public final class HmRsBodyTest {
      */
     @Test
     public void testStringCharsetName() throws Exception {
-        final String body = "<html>Hello</html>";
+        final String body = HTML_HELLO;
         final String charsetName = Charset.defaultCharset().name();
-        String type = "text/html;charset=" + charsetName;
-		MatcherAssert.assertThat(
+        final String type = "text/html;charset=" + charsetName;
+        MatcherAssert.assertThat(
             new RsWithType(new RsWithBody(body), type),
             new HmRsBody(body, charsetName)
         );
@@ -86,7 +88,7 @@ public final class HmRsBodyTest {
      */
     @Test
     public void testByteArray() throws Exception {
-        final byte[] body = "<html>Hello</html>".getBytes();
+        final byte[] body = HTML_HELLO.getBytes();
         MatcherAssert.assertThat(
             new RsWithBody(body),
             new HmRsBody(body)
