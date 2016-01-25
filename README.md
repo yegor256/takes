@@ -216,7 +216,7 @@ parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
 (`tk` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
-returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
+returns a take. `TkIndex` is our custom class,
 let's see how it looks:
 
 ```java
