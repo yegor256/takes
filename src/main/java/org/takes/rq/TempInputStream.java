@@ -26,6 +26,8 @@ package org.takes.rq;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Input stream wrapper that removes associated File instance on close.
@@ -63,11 +65,8 @@ final class TempInputStream extends InputStream {
      */
     @Override
     public void close() throws IOException {
-        super.close();
         this.origin.close();
-        if (!this.file.delete()) {
-            throw new IOException("unable to delete file");
-        }
+        Files.delete(Paths.get(this.file.getAbsolutePath()));
     }
 
     @Override
