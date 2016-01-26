@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -60,7 +61,7 @@ public final class RqPrint extends RqWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -81,7 +82,7 @@ public final class RqPrint extends RqWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -91,7 +92,10 @@ public final class RqPrint extends RqWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer = new OutputStreamWriter(output);
+        final Writer writer = new OutputStreamWriter(
+            output,
+            StandardCharsets.UTF_8
+        );
         for (final String line : this.head()) {
             writer.append(line);
             writer.append(eol);
@@ -108,7 +112,7 @@ public final class RqPrint extends RqWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**

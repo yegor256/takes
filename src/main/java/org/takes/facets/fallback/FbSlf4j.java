@@ -26,6 +26,7 @@ package org.takes.facets.fallback;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +84,7 @@ public final class FbSlf4j extends FbWrap {
             new RqMethod.Base(req).method(),
             new RqHref.Base(req).href(),
             req.code(),
-            baos.toString("UTF-8")
+            baos.toString(StandardCharsets.UTF_8.name())
         );
     }
 

@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
@@ -43,6 +44,9 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo #517:45min Move header names from BkBasic to public constants.
+ *  Reusable header names will help in many situations. For example - in new
+ *  integration tests.
  */
 @SuppressWarnings("PMD.DoNotUseThreads")
 @EqualsAndHashCode(of = "app")
@@ -142,7 +146,10 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new String(buf).trim());
+            port = Integer.parseInt(new String(
+                buf,
+                StandardCharsets.UTF_8
+            ).trim());
         } finally {
             input.close();
         }

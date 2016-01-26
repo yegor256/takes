@@ -31,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -161,7 +162,9 @@ public interface RqForm extends Request {
                     final ByteArrayOutputStream
                         baos = new ByteArrayOutputStream();
                     new RqPrint(this.req).printBody(baos);
-                    final String body = new String(baos.toByteArray());
+                    final String body = new String(
+                        baos.toByteArray(),
+                        StandardCharsets.UTF_8);
                     final ConcurrentMap<String, List<String>> map =
                         new ConcurrentHashMap<String, List<String>>(1);
                     // @checkstyle MultipleStringLiteralsCheck (1 line)

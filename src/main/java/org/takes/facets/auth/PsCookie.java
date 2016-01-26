@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
@@ -45,7 +46,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "codec", "cookie", "age" })
+@EqualsAndHashCode(of = {"codec", "cookie", "age"})
 public final class PsCookie implements Pass {
 
     /**
@@ -101,7 +102,9 @@ public final class PsCookie implements Pass {
         Opt<Identity> user = new Opt.Empty<Identity>();
         if (cookies.hasNext()) {
             user = new Opt.Single<Identity>(
-                this.codec.decode(cookies.next().getBytes())
+                this.codec.decode(
+                    cookies.next().getBytes(StandardCharsets.UTF_8)
+                )
             );
         }
         return user;
@@ -114,7 +117,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new String(this.codec.encode(idt));
+            text = new String(this.codec.encode(idt), StandardCharsets.UTF_8);
         }
         return new RsWithCookie(
             res, this.cookie, text,

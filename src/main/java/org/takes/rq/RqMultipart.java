@@ -35,6 +35,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -121,6 +122,7 @@ public interface RqMultipart extends Request {
          * Origin request body.
          */
         private final transient ReadableByteChannel body;
+
         /**
          * Ctor.
          * @param req Original request
@@ -145,6 +147,7 @@ public interface RqMultipart extends Request {
                 stream.close();
             }
         }
+
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
@@ -169,10 +172,12 @@ public interface RqMultipart extends Request {
             }
             return iter;
         }
+
         @Override
         public Iterable<String> names() {
             return this.map.keySet();
         }
+
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
@@ -183,7 +188,7 @@ public interface RqMultipart extends Request {
             final Request req) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
             ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
@@ -214,8 +219,8 @@ public interface RqMultipart extends Request {
                 );
             }
             final byte[] boundary = String.format(
-                "\r\n--%s", matcher.group(1)
-            ).getBytes();
+                "%n--%s", matcher.group(1)
+            ).getBytes(StandardCharsets.UTF_8);
             this.buffer.flip();
             this.buffer.position(boundary.length - 2);
             final Collection<Request> requests = new LinkedList<Request>();
@@ -229,6 +234,7 @@ public interface RqMultipart extends Request {
             }
             return RqMultipart.Base.asMap(requests);
         }
+
         /**
          * Make a request.
          *  Scans the origin request until the boundary reached. Caches
@@ -247,10 +253,17 @@ public interface RqMultipart extends Request {
             ).getChannel();
             try {
                 channel.write(
-                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
+                    ByteBuffer.wrap(
+                        this.head()
+                            .iterator()
+                            .next()
+                            .getBytes(StandardCharsets.UTF_8)
+                    )
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
-                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                channel.write(
+                    ByteBuffer.wrap("\r\n".getBytes(StandardCharsets.UTF_8))
+                );
                 this.copy(channel, boundary);
             } finally {
                 channel.close();
@@ -266,6 +279,7 @@ public interface RqMultipart extends Request {
                 String.valueOf(file.length())
             );
         }
+
         /**
          * Copy until boundary reached.
          * @param target Output file channel
@@ -308,6 +322,7 @@ public interface RqMultipart extends Request {
                 target.write(btarget);
             }
         }
+
         /**
          * Convert a list of requests to a map.
          * @param reqs Requests
@@ -322,7 +337,7 @@ public interface RqMultipart extends Request {
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                    // @checkstyle MultipleStringLiteralsCheck (1 line)
                 ).single("Content-Disposition");
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
@@ -352,6 +367,7 @@ public interface RqMultipart extends Request {
          * Original request.
          */
         private final transient RqMultipart origin;
+
         /**
          * Ctor.
          * @param req Original
@@ -359,6 +375,7 @@ public interface RqMultipart extends Request {
         public Smart(final RqMultipart req) {
             this.origin = req;
         }
+
         /**
          * Get single part.
          * @param name Name of the part to get
@@ -377,18 +394,22 @@ public interface RqMultipart extends Request {
             }
             return parts.next();
         }
+
         @Override
         public Iterable<Request> part(final CharSequence name) {
             return this.origin.part(name);
         }
+
         @Override
         public Iterable<String> names() {
             return this.origin.names();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.origin.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
@@ -412,6 +433,7 @@ public interface RqMultipart extends Request {
          * Fake multipart request.
          */
         private final RqMultipart fake;
+
         /**
          * Fake ctor.
          * @param req Fake request header holder
@@ -438,6 +460,7 @@ public interface RqMultipart extends Request {
                             )
                         ).head();
                     }
+
                     @Override
                     public InputStream body() throws IOException {
                         return RqMultipart.Fake.fakeStream(dispositions);
@@ -445,22 +468,27 @@ public interface RqMultipart extends Request {
                 }
             );
         }
+
         @Override
         public Iterable<Request> part(final CharSequence name) {
             return this.fake.part(name);
         }
+
         @Override
         public Iterable<String> names() {
             return this.fake.names();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.fake.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.fake.body();
         }
+
         /**
          * Fake body stream creator.
          * @param dispositions Fake request body parts
@@ -471,7 +499,7 @@ public interface RqMultipart extends Request {
             throws IOException {
             final StringBuilder builder = fakeBody(dispositions);
             return new ByteArrayInputStream(
-                builder.toString().getBytes()
+                builder.toString().getBytes(StandardCharsets.UTF_8)
             );
         }
 
@@ -483,7 +511,7 @@ public interface RqMultipart extends Request {
          */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
         private static StringBuilder fakeBody(final Request... dispositions)
-                throws IOException {
+            throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
                 builder.append(String.format("--%s", BOUNDARY))
@@ -493,7 +521,7 @@ public interface RqMultipart extends Request {
                     .append(
                         new RqHeaders.Smart(
                             new RqHeaders.Base(each)
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                            // @checkstyle MultipleStringLiteralsCheck (1 line)
                         ).single("Content-Disposition")
                     ).append(CRLF);
                 final String body = new RqPrint(each).printBody();

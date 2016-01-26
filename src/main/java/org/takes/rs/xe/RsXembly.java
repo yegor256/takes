@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -148,7 +149,10 @@ public final class RsXembly extends RsWrap {
         try {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
-                new StreamResult(new OutputStreamWriter(baos))
+                new StreamResult(new OutputStreamWriter(
+                    baos,
+                    StandardCharsets.UTF_8)
+                )
             );
         } catch (final TransformerException ex) {
             throw new IllegalStateException(ex);

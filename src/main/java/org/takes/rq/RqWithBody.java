@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -51,9 +52,12 @@ public final class RqWithBody extends RqWrap {
             public Iterable<String> head() throws IOException {
                 return req.head();
             }
+
             @Override
             public InputStream body() throws IOException {
-                return new ByteArrayInputStream(bdy.toString().getBytes());
+                return new ByteArrayInputStream(
+                    bdy.toString().getBytes(StandardCharsets.UTF_8)
+                );
             }
         });
     }

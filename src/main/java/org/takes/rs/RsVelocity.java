@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -80,7 +81,12 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final CharSequence template,
         final RsVelocity.Pair... params) {
-        this(new ByteArrayInputStream(template.toString().getBytes()), params);
+        this(
+            new ByteArrayInputStream(
+                template.toString().getBytes(StandardCharsets.UTF_8)
+            ),
+            params
+        );
     }
 
     /**
@@ -118,6 +124,7 @@ public final class RsVelocity extends RsWrap {
                 public Iterable<String> head() {
                     return new RsEmpty().head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RsVelocity.render(tpl, params);
@@ -136,7 +143,10 @@ public final class RsVelocity extends RsWrap {
     private static InputStream render(final InputStream page,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new OutputStreamWriter(baos);
+        final Writer writer = new OutputStreamWriter(
+            baos,
+            StandardCharsets.UTF_8
+        );
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
@@ -146,7 +156,10 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new InputStreamReader(page)
+            new InputStreamReader(
+                page,
+                StandardCharsets.UTF_8
+            )
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());
@@ -176,6 +189,7 @@ public final class RsVelocity extends RsWrap {
          * Serialization marker.
          */
         private static final long serialVersionUID = 7362489770169963015L;
+
         /**
          * Ctor.
          * @param key Key

@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
@@ -48,7 +49,10 @@ public class RsSimple extends RsWrap {
      * @param body Body
      */
     public RsSimple(final Iterable<String> head, final String body) {
-        this(head, new ByteArrayInputStream(body.getBytes()));
+        this(
+            head,
+            new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8))
+        );
     }
 
     /**
@@ -63,6 +67,7 @@ public class RsSimple extends RsWrap {
                 public Iterable<String> head() {
                     return head;
                 }
+
                 @Override
                 public InputStream body() {
                     return body;
