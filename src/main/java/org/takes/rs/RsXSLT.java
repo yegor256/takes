@@ -93,7 +93,10 @@ public final class RsXSLT extends RsWrap {
      * @param rsp Original response
      */
     public RsXSLT(final Response rsp) {
-        this(rsp, new RsXSLT.InClasspath());
+        this(
+            rsp,
+            new RsXSLT.InClasspath()
+        );
     }
 
     /**
@@ -111,7 +114,10 @@ public final class RsXSLT extends RsWrap {
 
                 @Override
                 public InputStream body() throws IOException {
-                    return RsXSLT.transform(rsp.body(), resolver);
+                    return RsXSLT.transform(
+                        rsp.body(),
+                        resolver
+                    );
                 }
             }
         );
@@ -124,12 +130,17 @@ public final class RsXSLT extends RsWrap {
      * @return Body
      * @throws IOException If fails
      */
-    private static InputStream transform(final InputStream origin,
-        final URIResolver resolver) throws IOException {
+    private static InputStream transform(
+        final InputStream origin,
+        final URIResolver resolver
+    ) throws IOException {
         try {
             final TransformerFactory factory = TransformerFactory.newInstance();
             factory.setURIResolver(resolver);
-            return RsXSLT.transform(factory, origin);
+            return RsXSLT.transform(
+                factory,
+                origin
+            );
         } catch (final TransformerException ex) {
             throw new IOException(ex);
         }
@@ -142,8 +153,10 @@ public final class RsXSLT extends RsWrap {
      * @return Resulting HTML page.
      * @throws TransformerException If fails
      */
-    private static InputStream transform(final TransformerFactory factory,
-        final InputStream xml) throws TransformerException {
+    private static InputStream transform(
+        final TransformerFactory factory,
+        final InputStream xml
+    ) throws TransformerException {
         final byte[] input;
         try {
             input = RsXSLT.consume(xml);
@@ -152,17 +165,23 @@ public final class RsXSLT extends RsWrap {
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXSLT.stylesheet(
-            factory, new StreamSource(
-                new InputStreamReader(new ByteArrayInputStream(input),
+            factory,
+            new StreamSource(
+                new InputStreamReader(
+                    new ByteArrayInputStream(input),
                     StandardCharsets.UTF_8
                 )
             )
         );
-        RsXSLT.transformer(factory, xsl).transform(
+        RsXSLT.transformer(
+            factory,
+            xsl
+        ).transform(
             new StreamSource(
                 new InputStreamReader(
                     new ByteArrayInputStream(input),
-                    StandardCharsets.UTF_8)
+                    StandardCharsets.UTF_8
+                )
             ),
             new StreamResult(new OutputStreamWriter(
                 baos,
@@ -188,7 +207,11 @@ public final class RsXSLT extends RsWrap {
                 if (bytes < 0) {
                     break;
                 }
-                baos.write(buf, 0, bytes);
+                baos.write(
+                    buf,
+                    0,
+                    bytes
+                );
             }
         } finally {
             input.close();
@@ -204,10 +227,15 @@ public final class RsXSLT extends RsWrap {
      * @return Stylesheet found
      * @throws TransformerConfigurationException If fails
      */
-    private static Source stylesheet(final TransformerFactory factory,
-        final Source xml) throws TransformerConfigurationException {
+    private static Source stylesheet(
+        final TransformerFactory factory,
+        final Source xml
+    ) throws TransformerConfigurationException {
         final Source stylesheet = factory.getAssociatedStylesheet(
-            xml, null, null, null
+            xml,
+            null,
+            null,
+            null
         );
         if (stylesheet == null) {
             throw new IllegalArgumentException(
@@ -224,8 +252,10 @@ public final class RsXSLT extends RsWrap {
      * @return Transformer
      * @throws TransformerConfigurationException If fails
      */
-    private static Transformer transformer(final TransformerFactory factory,
-        final Source stylesheet) throws TransformerConfigurationException {
+    private static Transformer transformer(
+        final TransformerFactory factory,
+        final Source stylesheet
+    ) throws TransformerConfigurationException {
         final Transformer tnfr = factory.newTransformer(stylesheet);
         if (tnfr == null) {
             throw new TransformerConfigurationException(
@@ -259,7 +289,8 @@ public final class RsXSLT extends RsWrap {
                 throw new TransformerException(
                     String.format(
                         "\"%s\" not found in classpath, base=\"%s\"",
-                        href, base
+                        href,
+                        base
                     )
                 );
             }

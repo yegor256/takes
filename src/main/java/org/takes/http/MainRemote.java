@@ -147,9 +147,10 @@ public final class MainRemote {
                 }
             }
             port = Integer.parseInt(new String(
-                buf,
-                StandardCharsets.UTF_8
-            ).trim());
+                    buf,
+                    StandardCharsets.UTF_8
+                ).trim()
+            );
         } finally {
             input.close();
         }

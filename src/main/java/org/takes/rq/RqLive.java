@@ -132,14 +132,17 @@ public final class RqLive extends RqWrap {
      * @param baos Current read header
      * @return Read header
      */
-    private static Opt<String> newHeader(final Opt<Integer> data,
-        final ByteArrayOutputStream baos) {
+    private static Opt<String> newHeader(
+        final Opt<Integer> data,
+        final ByteArrayOutputStream baos
+    ) {
         Opt<String> header = new Opt.Empty<String>();
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Opt.Single<String>(new String
                 (
                     baos.toByteArray(),
-                    StandardCharsets.UTF_8)
+                    StandardCharsets.UTF_8
+                )
             );
             baos.reset();
         }
@@ -154,8 +157,10 @@ public final class RqLive extends RqWrap {
      * @return A legal character
      * @throws HttpException if character is illegal
      */
-    private static Integer legalCharacter(final Opt<Integer> data,
-        final ByteArrayOutputStream baos, final Integer position)
+    private static Integer legalCharacter(
+        final Opt<Integer> data,
+        final ByteArrayOutputStream baos, final Integer position
+    )
         throws HttpException {
         // @checkstyle MagicNumber (1 line)
         if ((data.get() > 0x7f || data.get() < 0x20)
@@ -181,8 +186,10 @@ public final class RqLive extends RqWrap {
      * @return Next or current data
      * @throws IOException if input.read() fails
      */
-    private static Opt<Integer> data(final InputStream input,
-        final Opt<Integer> data) throws IOException {
+    private static Opt<Integer> data(
+        final InputStream input,
+        final Opt<Integer> data
+    ) throws IOException {
         final Opt<Integer> ret;
         if (data.has()) {
             ret = data;

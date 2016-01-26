@@ -185,7 +185,8 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          */
         private ConcurrentMap<String, List<Request>> buildRequests(
-            final Request req) throws IOException {
+            final Request req
+        ) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
@@ -262,7 +263,7 @@ public interface RqMultipart extends Request {
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
-                    ByteBuffer.wrap("\r\n".getBytes(StandardCharsets.UTF_8))
+                    ByteBuffer.wrap(Fake.CRLF.getBytes(StandardCharsets.UTF_8))
                 );
                 this.copy(channel, boundary);
             } finally {
@@ -287,8 +288,10 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
-        private void copy(final WritableByteChannel target,
-            final byte[] boundary) throws IOException {
+        private void copy(
+            final WritableByteChannel target,
+            final byte[] boundary
+        ) throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
@@ -331,7 +334,8 @@ public interface RqMultipart extends Request {
          */
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         private static ConcurrentMap<String, List<Request>> asMap(
-            final Collection<Request> reqs) throws IOException {
+            final Collection<Request> reqs
+        ) throws IOException {
             final ConcurrentMap<String, List<Request>> map =
                 new ConcurrentHashMap<String, List<Request>>(reqs.size());
             for (final Request req : reqs) {

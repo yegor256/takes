@@ -52,7 +52,7 @@ import org.takes.rs.RsWithHeader;
  * @version $Id$
  * @since 0.20
  */
-@EqualsAndHashCode(of = { "entry", "realm" })
+@EqualsAndHashCode(of = {"entry", "realm"})
 public final class PsBasic implements Pass {
 
     /**
@@ -88,7 +88,7 @@ public final class PsBasic implements Pass {
                     new RqHeaders.Base(request)
                 ).single("authorization").split(AUTH_HEAD)[1]
             )
-        , StandardCharsets.UTF_8).trim();
+            , StandardCharsets.UTF_8).trim();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
             user,
