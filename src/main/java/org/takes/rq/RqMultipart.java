@@ -484,7 +484,7 @@ public interface RqMultipart extends Request {
          */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
         private static StringBuilder fakeBody(final Request... dispositions)
-                throws IOException {
+            throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
                 builder.append(String.format("--%s", BOUNDARY))

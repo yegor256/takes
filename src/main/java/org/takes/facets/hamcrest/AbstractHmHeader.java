@@ -112,7 +112,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
     @Override
     public final boolean matchesSafely(final T item) {
         try {
-            final Iterator<String> headers = headers(item).iterator();
+            final Iterator<String> headers = this.headers(item).iterator();
             if (headers.hasNext()) {
                 headers.next();
             }
@@ -147,6 +147,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
      * @param item To extract headers from
      * @return Header lines
      * @throws IOException If something goes wrong
+     * @checkstyle NonStaticMethodCheck (2 lines)
      */
     protected abstract Iterable<String> headers(final T item)
         throws IOException;

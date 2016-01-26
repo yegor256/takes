@@ -210,9 +210,9 @@ public final class VerboseList<T> implements List<T> {
      */
     private IndexOutOfBoundsException wrapException(
         final IndexOutOfBoundsException cause) {
-        final IndexOutOfBoundsException ex =
+        final IndexOutOfBoundsException exc =
             new IndexOutOfBoundsException(this.message);
-        ex.initCause(cause);
-        return ex;
+        exc.initCause(cause);
+        return exc;
     }
 }
