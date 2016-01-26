@@ -38,6 +38,7 @@ import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.VerboseList;
 
 /**
  * HTTP headers parsing
@@ -89,13 +90,6 @@ public interface RqHeaders extends Request {
             super(req);
         }
 
-        // @checkstyle LineLength (6 lines)
-        // @todo #490:30min We need to implement a VerboseList and its tests
-        //  like VerboseIterable. It should provide means to throw an exception
-        //  with a given error message when it otherwise throws an
-        //  IndexOutOfBoundsException. With this we must wrap the returned
-        //  list otherwise the diagnostic messages are lost:
-        //  https://github.com/yegor256/takes/pull/503/files#diff-a01b0291ad72ac6fd8e264f47f844b3bL101
         @Override
         public List<String> header(final CharSequence key)
             throws IOException {
@@ -104,9 +98,26 @@ public interface RqHeaders extends Request {
             );
             final List<String> list;
             if (values == null) {
-                list = Collections.emptyList();
+                list = new VerboseList<String>(
+                    Collections.<String>emptyList(),
+                    String.format(
+                        // @checkstyle LineLengthCheck (1 line)
+                        "there are no headers by name \"%s\" among %d others: %s",
+                        key,
+                        this.map().size(),
+                        this.map().keySet()
+                    )
+                );
             } else {
-                list = values;
+                list = new VerboseList<String>(
+                    values,
+                    String.format(
+                        // @checkstyle LineLengthCheck (1 line)
+                        "there are only %d headers by name \"%s\"",
+                        values.size(),
+                        key
+                    )
+                );
             }
             return list;
         }

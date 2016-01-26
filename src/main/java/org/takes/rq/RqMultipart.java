@@ -100,14 +100,12 @@ public interface RqMultipart extends Request {
         /**
          * Pattern to get boundary from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern BOUNDARY = Pattern.compile(
             ".*[^a-z]boundary=([^;]+).*"
         );
         /**
          * Pattern to get name from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern NAME = Pattern.compile(
             ".*[^a-z]name=\"([^\"]+)\".*"
         );
@@ -132,12 +130,20 @@ public interface RqMultipart extends Request {
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();
-            this.body = Channels.newChannel(stream);
-            this.buffer = ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, stream.available())
-            );
-            this.map = this.buildRequests(req);
+            try {
+                this.body = Channels.newChannel(stream);
+                try {
+                    this.buffer = ByteBuffer.allocate(
+                        // @checkstyle MagicNumberCheck (1 line)
+                        Math.min(8192, stream.available())
+                    );
+                    this.map = this.buildRequests(req);
+                } finally {
+                    this.body.close();
+                }
+            } finally {
+                stream.close();
+            }
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -415,22 +421,26 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final Request... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
+                //@checkstyle AnonInnerLength (1 line)
                 new Request() {
                     @Override
                     public Iterable<String> head() throws IOException {
-                        return new RqWithHeader(
+                        return new RqWithHeaders(
                             req,
-                            // @checkstyle MultipleStringLiteralsCheck (1 line)
-                            "Content-Type",
                             String.format(
-                                "multipart/form-data; boundary=%s",
+                                //@checkstyle LineLength (1 line)
+                                "Content-Type: multipart/form-data; boundary=%s",
                                 RqMultipart.Fake.BOUNDARY
+                            ),
+                            String.format(
+                                "Content-Length: %s",
+                                RqMultipart.Fake.fakeBody(dispositions).length()
                             )
                         ).head();
                     }
                     @Override
                     public InputStream body() throws IOException {
-                        return RqMultipart.Fake.fakeBody(dispositions);
+                        return RqMultipart.Fake.fakeStream(dispositions);
                     }
                 }
             );
@@ -452,14 +462,28 @@ public interface RqMultipart extends Request {
             return this.fake.body();
         }
         /**
-         * Fake body creator.
+         * Fake body stream creator.
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          * @throws IOException If fails
          */
-        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static InputStream fakeBody(final Request... dispositions)
+        private static InputStream fakeStream(final Request... dispositions)
             throws IOException {
+            final StringBuilder builder = fakeBody(dispositions);
+            return new ByteArrayInputStream(
+                builder.toString().getBytes()
+            );
+        }
+
+        /**
+         * Fake body creator.
+         * @param dispositions Fake request body parts
+         * @return StringBuilder of given dispositions
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
+        private static StringBuilder fakeBody(final Request... dispositions)
+                throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
                 builder.append(String.format("--%s", BOUNDARY))
@@ -479,9 +503,7 @@ public interface RqMultipart extends Request {
             }
             builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
                 .append(String.format("--%s--", BOUNDARY));
-            return new ByteArrayInputStream(
-                builder.toString().getBytes()
-            );
+            return builder;
         }
     }
 

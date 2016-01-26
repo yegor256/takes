@@ -21,57 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.rq;
 
 import java.io.IOException;
-import org.hamcrest.Matcher;
-import org.takes.Response;
+import org.takes.Request;
 
 /**
- * Response Header Matcher.
- *
- * <p>This "matcher" tests given response headers.
- * <p>The class is immutable and thread-safe.
- *
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author I. Sokolov (happy.neko@gmail.com)
+ * Request with default header.
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.23.3
+ * @since 0.31
  */
-public final class HmRsHeader extends AbstractHmHeader<Response> {
+public final class RqWithDefaultHeader extends RqWrap {
 
     /**
      * Ctor.
-     * @param hdrm Header matcher
-     * @param vlm Value matcher
-     */
-    public HmRsHeader(final Matcher<String> hdrm,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdrm, vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    public HmRsHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdr, vlm);
-    }
-
-    /**
-     * Ctor.
+     * @param req Original request
      * @param hdr Header name
      * @param val Header value
+     * @throws IOException in case of request errors
      */
-    public HmRsHeader(final String hdr, final String val) {
-        super(hdr, val);
+    public RqWithDefaultHeader(final Request req,
+        final String hdr,
+        final String val) throws IOException {
+        super(RqWithDefaultHeader.build(req, hdr, val));
     }
 
-    @Override
-    public Iterable<String> headers(final Response item) throws IOException {
-        return item.head();
+    /**
+     * Builds the request with the default header if it is not already present.
+     * @param req Original request.
+     * @param hdr Header name.
+     * @param val Header value.
+     * @return The new request.
+     * @throws IOException in case of request errors
+     */
+    private static Request build(final Request req,
+        final String hdr, final String val) throws IOException {
+        final Request request;
+        if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
+            request = req;
+        } else {
+            request = new RqWithHeader(req, hdr, val);
+        }
+        return request;
     }
+
 }
