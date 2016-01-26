@@ -32,7 +32,7 @@ import org.takes.rs.RsWithType;
 /**
  * Test case for {@link HmRsBody}.
  * @author Alexei Kaigorodov (alexei.kaigorodov@gmail.com)
- * @version $Id: bc5f637cdf2ae290ae2fe4dc3e7755c55ad4b166 $
+ * @version $Id$
  * @since 0.23.3
  */
 public final class HmRsBodyTest {
@@ -98,13 +98,13 @@ public final class HmRsBodyTest {
     }
 
     /**
-     * makes Content-Type header string.
-     * @param charsetName
-     * @return header string
+     * Makes Content-Type header string.
+     * @param charsetname Charset name
+     * @return Header string
      */
-    private String makeType(final String charsetName) {
+    private String makeType(final String charsetname) {
         final StringBuilder sbd = new StringBuilder("text/html;charset=");
-        sbd.append(charsetName);
+        sbd.append(charsetname);
         return sbd.toString();
     }
 

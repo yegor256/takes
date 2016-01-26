@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import org.hamcrest.Description;
@@ -40,76 +41,81 @@ import org.takes.Response;
  * <p>This "matcher" tests given response body.
  * <p>The class is immutable and thread-safe.
  *
- * @version
+ * @version $Id$
  * @author Alexei Kaigorodov (alexei.kaigorodov@gmail.com)
  */
 public final class HmRsBody extends TypeSafeMatcher<Response> {
 
+    /**
+     * Just a constant.
+     */
     private static final int BUF_LEN = 2048;
 
     /**
      * Pattern to extract charset name.
      */
     private static final Pattern PATT = Pattern
-                    .compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
+            .compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
 
     /**
      * Body value as byte array.
      */
-    private byte[] value;
+    private transient byte[] value;
 
     /**
      * Body value as String.
      */
-    private String stringvalue;
+    private transient String stringvalue;
 
     /**
-     * encoding of the body byte array.
+     * Encoding of the body byte array.
      */
-    private Charset charset;
+    private transient Charset charset;
 
     /**
-     * Makes HmRsBody from String
-     * @param str
+     * Makes HmRsBody from String.
+     * @param str String body
      */
-    public HmRsBody(String str) {
+    public HmRsBody(final String str) {
         this(str, (Charset) null);
     }
 
     /**
-     * Makes HmRsBody from String
-     * @param str
-     * @param charsetName
+     * Makes HmRsBody from String.
+     * @param str String to compare
+     * @param charsetname Charset name
      */
-    public HmRsBody(String str, String charsetName) {
-        this(str, Charset.forName(charsetName));
+    public HmRsBody(final String str, final String charsetname) {
+        this(str, Charset.forName(charsetname));
     }
 
     /**
-     * Makes HmRsBody from String
-     * @param str
-     * @param charset
+     * Makes HmRsBody from String.
+     * @param str String to compare
+     * @param charsetp Charset
      */
-    public HmRsBody(String str, Charset charset) {
+    public HmRsBody(final String str, final Charset charsetp) {
+        super();
         if (str == null) {
             throw new IllegalArgumentException("str may not be null");
         }
         this.stringvalue = str;
         if (this.charset != null) {
-            value = str.getBytes(charset);
-            this.charset = charset;
+            this.value = str.getBytes(charsetp);
+            this.charset = charsetp;
         }
     }
 
     /**
      * Makes HmRsBody from byte array.
-     * @param val
+     * @param val Source array
      */
     public HmRsBody(final byte[] val) {
+        super();
         if (val == null) {
             throw new IllegalArgumentException("byte array may not be null");
         }
-        this.value = val;
+        this.value = Arrays.copyOf(val, val.length);
     }
 
     @Override
@@ -117,25 +123,32 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
         if (this.stringvalue == null) {
             this.stringvalue = new String(this.value, this.charset);
         }
-        description.appendText("body: ")
-                        .appendText(stringvalue);
+        description.appendText("body: ").appendText(this.stringvalue);
+    }
+
+    @Override
+    public void describeMismatchSafely(final Response response,
+            final Description description) {
+        description.appendText("header was: ").appendDescriptionOf(this);
     }
 
     @Override
     public boolean matchesSafely(final Response response) {
+        final boolean res;
         try {
-            extractCharsetName(response);
-
-            InputStream body = response.body();
+            this.extractCharsetName(response);
+            final InputStream body = response.body();
             try {
                 if (this.value != null) {
-                    return this.compareByteArrays(body);
-                } else if (this.stringvalue != null) {
-                    return this.compareStrings(body);
+                    res = this.compareByteArrays(body);
                 } else {
-                    throw new IllegalStateException(
-                                    "both string and byte arrays are null"
-                                    );
+                    if (this.stringvalue != null) {
+                        res = this.compareStrings(body);
+                    } else {
+                        throw new IllegalStateException(
+                                "both string and byte arrays are null"
+                             );
+                    }
                 }
             } finally {
                 if (body != null) {
@@ -145,84 +158,101 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
+        return res;
     }
 
-    private boolean compareStrings(InputStream body) throws IOException {
+    /**
+     * Compares {@stringvalue} with given byte stream
+     * taking into account charset.
+     * @param body Byte stream
+     * @return True if {@stringvalue} equals {@body}
+     * @throws IOException When reading from {@body} fails
+     */
+    private boolean compareStrings(final InputStream body) throws IOException {
         InputStreamReader reader;
         if (this.charset != null) {
             reader = new InputStreamReader(body, this.charset);
         } else {
             reader = new InputStreamReader(body);
         }
+        final boolean res;
         if (this.stringvalue.length() == 0) {
-            return reader.read() == -1;
-        }
-        final int buflen = Math.min(this.stringvalue.length(), BUF_LEN);
-        char[] buf = new char[buflen];
-        for (int total = 0; ; ) {
-            final int rrb = reader.read(buf);
-            if (rrb == -1) {
-                return total == this.stringvalue.length();
-            }
-            for (int kkk = 0; kkk < rrb; kkk = kkk+1) {
-                int index = total + kkk;
-                if (buf[kkk] != this.stringvalue.charAt(index)) {
-                    return false;
+            res = reader.read() == -1;
+        } else {
+            final int buflen = Math.min(this.stringvalue.length(), BUF_LEN);
+            final char[] buf = new char[buflen];
+            mainloop: for (int total = 0;;) {
+                final int rrb = reader.read(buf);
+                if (rrb == -1) {
+                    res = total == this.stringvalue.length();
+                    break mainloop;
                 }
+                for (int kkk = 0; kkk < rrb; kkk = kkk + 1) {
+                    final int index = total + kkk;
+                    if (buf[kkk] != this.stringvalue.charAt(index)) {
+                        res = false;
+                        break mainloop;
+                    }
+                }
+                total += rrb;
             }
-            total += rrb;
         }
+        return res;
     }
 
-    private boolean compareByteArrays(InputStream body) throws IOException {
+    /**
+     * Compares {@value} with byte stream.
+     * @param body Byte stream
+     * @return True if @value equals @body
+     * @throws IOException when IO fails
+     */
+    private boolean compareByteArrays(final InputStream body)
+            throws IOException {
+        final boolean res;
         if (this.value.length == 0) {
-            return (body.read() == -1);
-        }
-        int bufLen = Math.min(this.value.length, BUF_LEN);
-        byte[] buf = new byte[bufLen];
-        for (int total = 0;;) {
-            int rd = body.read(buf);
-            if (rd == -1) {
-                return total == this.value.length;
-            }
-            for (int k = 0; k < rd; k++) {
-                if (buf[k] != this.value[total + k]) {
-                    return false;
+            res = body.read() == -1;
+        } else {
+            final int buflen = Math.min(this.value.length, BUF_LEN);
+            final byte[] buf = new byte[buflen];
+            mainloop: for (int total = 0;;) {
+                final int brd = body.read(buf);
+                if (brd == -1) {
+                    res = total == this.value.length;
+                    break;
                 }
+                for (int kkk = 0; kkk < brd; kkk = kkk + 1) {
+                    if (buf[kkk] != this.value[total + kkk]) {
+                        res = false;
+                        break mainloop;
+                    }
+                }
+                total += brd;
             }
-            total += rd;
         }
+        return res;
     }
 
     /**
      * Try to extract charset from header.
-     * @param response
-     * @throws IOException
+     * @param response Response
+     * @throws IOException when IO fails
      */
     private void extractCharsetName(final Response response)
-                    throws IOException {
+            throws IOException {
         if (this.charset != null) {
             return;
         }
-        Iterable<String> head = response.head();
-        Iterator<String> it = head.iterator();
-        while (it.hasNext()) {
-            java.util.regex.Matcher strMatcher = PATT
-                            .matcher(it.next());
+        final Iterable<String> head = response.head();
+        final Iterator<String> hit = head.iterator();
+        while (hit.hasNext()) {
+            final java.util.regex.Matcher strMatcher = PATT.matcher(hit.next());
             if (strMatcher.find()) {
                 try {
                     this.charset = Charset.forName(strMatcher.group());
-                } catch (IllegalCharsetNameException e) {
+                } catch (final IllegalCharsetNameException exp) {
                 }
                 break;
             }
         }
-    }
-
-    @Override
-    public void describeMismatchSafely(final Response response,
-                    final Description description) {
-        description.appendText("header was: ")
-                        .appendDescriptionOf(this);
     }
 }
