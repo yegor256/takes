@@ -117,7 +117,7 @@ public final class RqPrint extends RqWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final InputStream input = new RqLengthAware(this).body();
+        final InputStream input = new RqChunk(new RqLengthAware(this)).body();
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         while (true) {

@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 3 active puzzles (34 total):
+There are 6 active puzzles (39 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -37,3 +37,8 @@ There are 3 active puzzles (34 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[#490](https://github.com/yegor256/takes/issues/490):[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#508](https://github.com/yegor256/takes/issues/508):[**490-c74fee69**](https://github.com/yegor256/takes/issues/508) [`RqHeaders.java:93-98`](../master/src/main/java/org/takes/rq/RqHeaders.java#L93-L98)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#519](https://github.com/yegor256/takes/issues/519):[**306-b987400a**](https://github.com/yegor256/takes/issues/519) [`BkBasicTest.java:57-60`](../master/src/test/java/org/takes/http/BkBasicTest.java#L57-L60)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#516](https://github.com/yegor256/takes/issues/516):[<del>516</del>](https://github.com/yegor256/takes/issues/516) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#533](https://github.com/yegor256/takes/issues/533):[**516-c8aa6c8f**](https://github.com/yegor256/takes/issues/533) [`BkBasicTest.java:67-68`](../master/src/test/java/org/takes/http/BkBasicTest.java#L67-L68)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#534](https://github.com/yegor256/takes/issues/534):[**516-ffc97ad1**](https://github.com/yegor256/takes/issues/534) [`BkBasicTest.java:69-71`](../master/src/test/java/org/takes/http/BkBasicTest.java#L69-L71)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#438](https://github.com/yegor256/takes/issues/438):[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[**438-dcc4d707**](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
