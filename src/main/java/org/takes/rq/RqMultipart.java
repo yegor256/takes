@@ -100,14 +100,12 @@ public interface RqMultipart extends Request {
         /**
          * Pattern to get boundary from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern BOUNDARY = Pattern.compile(
             ".*[^a-z]boundary=([^;]+).*"
         );
         /**
          * Pattern to get name from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern NAME = Pattern.compile(
             ".*[^a-z]name=\"([^\"]+)\".*"
         );
@@ -132,12 +130,20 @@ public interface RqMultipart extends Request {
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();
-            this.body = Channels.newChannel(stream);
-            this.buffer = ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, stream.available())
-            );
-            this.map = this.buildRequests(req);
+            try {
+                this.body = Channels.newChannel(stream);
+                try {
+                    this.buffer = ByteBuffer.allocate(
+                        // @checkstyle MagicNumberCheck (1 line)
+                        Math.min(8192, stream.available())
+                    );
+                    this.map = this.buildRequests(req);
+                } finally {
+                    this.body.close();
+                }
+            } finally {
+                stream.close();
+            }
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
