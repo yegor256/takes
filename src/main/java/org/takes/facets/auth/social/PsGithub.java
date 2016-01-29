@@ -153,7 +153,7 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path("login").path("oauth").path("access_token")
             .toString();
-        final XmlResponse xmlRes = new JdkRequest(uri)
+        final XmlResponse xmlres = new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
             .body()
@@ -167,9 +167,11 @@ public final class PsGithub implements Pass {
             .as(XmlResponse.class);
         String tokenString = null;
         try {
-            tokenString = xmlRes.xml().xpath("/OAuth/access_token/text()").get(0);
-        } catch (Exception exce) {
-            throw new HttpException(HttpURLConnection.HTTP_BAD_REQUEST,"Invalid XML",exce);
+            tokenString = xmlres.xml()
+                .xpath("/OAuth/access_token/text()").get(0);
+        } catch (final IndexOutOfBoundsException exce) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,"Invalid XML",exce);
         }
         return tokenString;
     }
@@ -186,7 +188,7 @@ public final class PsGithub implements Pass {
         props.put("login", json.getString("login", "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new Identity.Simple(
-            String.format("urn:github:%d", json.getInt("id")), props
+            String.format("urn:github:%d", json.getInt("id")),props
         );
     }
 }
