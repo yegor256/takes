@@ -315,10 +315,10 @@ public final class PsBasic implements Pass {
          *  separated with spaces.
          */
         private static void validateUser(final String unified) {
-            final boolean incorrectAmount = Default.countSpaces(unified) != 2;
+            final boolean amount = Default.countSpaces(unified) != 2;
             final boolean nearby =
                 unified.indexOf(' ') + 1 == unified.lastIndexOf(' ');
-            if (incorrectAmount || nearby) {
+            if (amount || nearby) {
                 throw new IllegalArgumentException(
                     String.format(
                         "One of users was incorrectly formatted: %s",

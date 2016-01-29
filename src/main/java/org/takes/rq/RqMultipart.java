@@ -91,7 +91,8 @@ public interface RqMultipart extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @version $Id$
      * @since 0.9
-     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+     *     Forms in HTML</a>
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see org.takes.rq.RqGreedy
      */
@@ -483,7 +484,7 @@ public interface RqMultipart extends Request {
          */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
         private static StringBuilder fakeBody(final Request... dispositions)
-                throws IOException {
+            throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
                 builder.append(String.format("--%s", BOUNDARY))

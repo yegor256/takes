@@ -56,6 +56,7 @@ import org.takes.rs.RsText;
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
 @SuppressWarnings("PMD.TooManyMethods")
