@@ -40,7 +40,7 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link TkProxy}.
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
- * @version $Id:$
+ * @version $Id$
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @todo #377:30min/DEV We need more tests for TkProxy.
