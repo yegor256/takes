@@ -34,69 +34,34 @@ import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkProxy}.
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
- * @author sebing
- * @version $Id$
+ * @version $Id: 637652be941419dc3e768bcaf50f6edb84b796de $
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
-  */
+ * @todo #377:30min/DEV We need more tests for TkProxy.
+ *  The tests should verify the different HTTP methods (GET, POST, etc),
+ *  as well as the different combinations of request/response headers.
+ */
 public final class TkProxyTest {
 
     /**
-     * TkProxy Testcase for testing the creation of the object with method POST.
-     * @throws Exception If some problem inside.
+     * TkProxy can work.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksPost()throws Exception {
-        this.justWorks(RqMethod.POST);
-    }
-
-    /**
-     *TkProxy Testcase for testing the creation of the object with method GET.
-     * @throws Exception If some problem inside.
-     */
-    @Test
-    public void justWorksGet()throws Exception {
-        this.justWorks(RqMethod.GET);
-    }
-
-    /**
-     * TkProxy Testcase for testing the act method with  GET.
-     * @throws Exception If some problem inside.
-     */
-    @Test
-    public void correctlyMapsPathStringGet() throws Exception {
-        this.correctlyMapsPathString(RqMethod.GET);
-    }
-
-    /**
-     *TkProxy Testcase for testing the act method with POST.
-     * @throws Exception If some problem inside.
-     */
-    @Test
-    public void correctlyMapsPathStringPost() throws Exception {
-        this.correctlyMapsPathString(RqMethod.POST);
-    }
-
-    /**
-     * A private method to do test with multiple httpMethods.
-     * @param httpmethod HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside.
-     */
-    private void justWorks(final String httpmethod) throws Exception {
+    public void justWorks() throws Exception {
         new FtRemote(new TkFixed("hello, world!")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(new RqFake(httpmethod))
+                            new TkProxy(home).act(new RqFake("PUT"))
                         ).print(),
                         Matchers.containsString("hello")
                     );
@@ -106,13 +71,11 @@ public final class TkProxyTest {
     }
 
     /**
-     * A private method to call the TkProxy. act with httpMethod.
-     *
-     * @param httpmethod HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside.
+     * TkProxy can work.
+     * @throws Exception If some problem inside
      */
-    private void correctlyMapsPathString(final String httpmethod)
-        throws Exception {
+    @Test
+    public void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
@@ -125,9 +88,7 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(
-                                new RqFake(httpmethod, "/a/b/c")
-                            )
+                            new TkProxy(home).act(new RqFake("GET", "/a/b/c"))
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
