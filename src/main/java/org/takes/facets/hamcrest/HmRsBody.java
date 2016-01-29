@@ -55,7 +55,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
      * Pattern to extract charset name.
      */
     private static final Pattern PATT = Pattern
-            .compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
+        .compile("^\\s*charset\\s*=\\s*(\\w*)\\s*$");
 
     /**
      * Body value as byte array.
@@ -128,7 +128,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
 
     @Override
     public void describeMismatchSafely(final Response response,
-            final Description description) {
+        final Description description) {
         description.appendText("header was: ").appendDescriptionOf(this);
     }
 
@@ -142,7 +142,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
                 if (this.value == null) {
                     if (this.stringvalue == null) {
                         throw new IllegalStateException(
-                                "both string and byte arrays are null"
+                            "both string and byte arrays are null"
                              );
                     }
                     res = this.compareStrings(body);
@@ -206,7 +206,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
      * @throws IOException when IO fails
      */
     private boolean compareByteArrays(final InputStream body)
-            throws IOException {
+        throws IOException {
         final boolean res;
         if (this.value.length == 0) {
             res = body.read() == -1;
@@ -237,17 +237,17 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
      * @throws IOException when IO fails
      */
     private void extractCharsetName(final Response response)
-            throws IOException {
+        throws IOException {
         if (this.charset != null) {
             return;
         }
         final Iterable<String> head = response.head();
         final Iterator<String> hit = head.iterator();
         while (hit.hasNext()) {
-            final java.util.regex.Matcher strMatcher = PATT.matcher(hit.next());
-            if (strMatcher.find()) {
+            final java.util.regex.Matcher strmatcher = PATT.matcher(hit.next());
+            if (strmatcher.find()) {
                 try {
-                    this.charset = Charset.forName(strMatcher.group());
+                    this.charset = Charset.forName(strmatcher.group());
                 } catch (final IllegalCharsetNameException exp) {
                 }
                 break;
