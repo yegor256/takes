@@ -143,7 +143,7 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
                     if (this.stringvalue == null) {
                         throw new IllegalStateException(
                             "both string and byte arrays are null"
-                             );
+                        );
                     }
                     res = this.compareStrings(body);
                 } else {
