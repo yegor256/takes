@@ -25,7 +25,6 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.URI;
-
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -50,21 +49,21 @@ import org.takes.rs.RsText;
 public final class TkProxyTest {
 
     /**
-     * TkProxy testcase for testing the creation of the object with method POST
+     * TkProxy testcase for testing the creation of the object with method POST.
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksPost()throws Exception{
-        justWorks(RqMethod.POST);
+    public void justWorksPost()throws Exception {
+        this.justWorks(RqMethod.POST);
     }
 
     /**
-     *TkProxy testcase for testing the creation of the object with method GET
+     *TkProxy testcase for testing the creation of the object with method GET.
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksGet()throws Exception{
-        justWorks(RqMethod.GET);
+    public void justWorksGet()throws Exception {
+        this.justWorks(RqMethod.GET);
     }
 
     /**
@@ -89,21 +88,21 @@ public final class TkProxyTest {
     }
 
     /**
-     * kProxy testcase for testing the act method with  GET
+     * kProxy testcase for testing the act method with  GET.
      * @throws Exception If some problem inside
      */
     @Test
     public void correctlyMapsPathStringGet() throws Exception {
-        correctlyMapsPathString(RqMethod.GET);
+        this.correctlyMapsPathString(RqMethod.GET);
     }
 
     /**
-     *TkProxy testcase for testing the act method with POST
+     *TkProxy testcase for testing the act method with POST.
      * @throws Exception If some problem inside
      */
     @Test
     public void correctlyMapsPathStringPost() throws Exception {
-        correctlyMapsPathString(RqMethod.POST);
+        this.correctlyMapsPathString(RqMethod.POST);
     }
 
     /**
@@ -112,7 +111,8 @@ public final class TkProxyTest {
      * @param httpMethod HTTP methods (GET, POST, etc),
      * @throws Exception If some problem inside
      */
-    private void correctlyMapsPathString(final String httpMethod) throws Exception {
+    private void correctlyMapsPathString(final String httpMethod)
+        throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
@@ -125,7 +125,8 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(new RqFake(httpMethod, "/a/b/c"))
+                            new TkProxy(home).act(
+                                new RqFake(httpMethod, "/a/b/c"))
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
