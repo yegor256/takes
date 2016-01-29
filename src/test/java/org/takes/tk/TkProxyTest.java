@@ -86,17 +86,17 @@ public final class TkProxyTest {
 
     /**
      * A private method to do test with multiple httpMethods.
-     * @param httpMethod HTTP methods (GET, POST, etc),
+     * @param httpmethod HTTP methods (GET, POST, etc),
      * @throws Exception If some problem inside.
      */
-    private void justWorks(final String httpMethod) throws Exception {
+    private void justWorks(final String httpmethod) throws Exception {
         new FtRemote(new TkFixed("hello, world!")).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(new RqFake(httpMethod))
+                            new TkProxy(home).act(new RqFake(httpmethod))
                         ).print(),
                         Matchers.containsString("hello")
                     );
@@ -108,10 +108,10 @@ public final class TkProxyTest {
     /**
      * A private method to call the TkProxy. act with httpMethod.
      *
-     * @param httpMethod HTTP methods (GET, POST, etc),
+     * @param httpmethod HTTP methods (GET, POST, etc),
      * @throws Exception If some problem inside.
      */
-    private void correctlyMapsPathString(final String httpMethod)
+    private void correctlyMapsPathString(final String httpmethod)
         throws Exception {
         final Take take = new Take() {
             @Override
@@ -126,7 +126,7 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(httpMethod, "/a/b/c")
+                                new RqFake(httpmethod, "/a/b/c")
                             )
                         ).printBody(),
                         Matchers.equalTo(
