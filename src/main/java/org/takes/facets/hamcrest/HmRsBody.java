@@ -43,6 +43,7 @@ import org.takes.Response;
  *
  * @version $Id$
  * @author Alexei Kaigorodov (alexei.kaigorodov@gmail.com)
+ * @since 0.32
  */
 public final class HmRsBody extends TypeSafeMatcher<Response> {
 
