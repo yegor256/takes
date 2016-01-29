@@ -49,8 +49,8 @@ import org.takes.rs.RsText;
 public final class TkProxyTest {
 
     /**
-     * TkProxy testcase for testing the creation of the object with method POST.
-     * @throws Exception If some problem inside
+     * TkProxy Testcase for testing the creation of the object with method POST.
+     * @throws Exception If some problem inside.
      */
     @Test
     public void justWorksPost()throws Exception {
@@ -58,8 +58,8 @@ public final class TkProxyTest {
     }
 
     /**
-     *TkProxy testcase for testing the creation of the object with method GET.
-     * @throws Exception If some problem inside
+     *TkProxy Testcase for testing the creation of the object with method GET.
+     * @throws Exception If some problem inside.
      */
     @Test
     public void justWorksGet()throws Exception {
@@ -67,9 +67,27 @@ public final class TkProxyTest {
     }
 
     /**
+     * kProxy Testcase for testing the act method with  GET.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void correctlyMapsPathStringGet() throws Exception {
+        this.correctlyMapsPathString(RqMethod.GET);
+    }
+
+    /**
+     *TkProxy Testcase for testing the act method with POST.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void correctlyMapsPathStringPost() throws Exception {
+        this.correctlyMapsPathString(RqMethod.POST);
+    }
+
+    /**
      * A private method to do test with multiple httpMethods.
      * @param httpMethod HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside
+     * @throws Exception If some problem inside.
      */
     private void justWorks(final String httpMethod) throws Exception {
         new FtRemote(new TkFixed("hello, world!")).exec(
@@ -87,29 +105,12 @@ public final class TkProxyTest {
         );
     }
 
-    /**
-     * kProxy testcase for testing the act method with  GET.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void correctlyMapsPathStringGet() throws Exception {
-        this.correctlyMapsPathString(RqMethod.GET);
-    }
-
-    /**
-     *TkProxy testcase for testing the act method with POST.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void correctlyMapsPathStringPost() throws Exception {
-        this.correctlyMapsPathString(RqMethod.POST);
-    }
 
     /**
      * A private method to call the TkProxy. act with httpMethod.
      *
      * @param httpMethod HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside
+     * @throws Exception If some problem inside.
      */
     private void correctlyMapsPathString(final String httpMethod)
         throws Exception {
@@ -126,7 +127,8 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(httpMethod, "/a/b/c"))
+                                new RqFake(httpMethod, "/a/b/c")
+                            )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
