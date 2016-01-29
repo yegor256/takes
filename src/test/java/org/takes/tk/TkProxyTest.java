@@ -67,7 +67,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can correctly maps path string GET.
+     * TkProxy can correctly maps path string on GET.
      * @throws Exception If some problem inside.
      */
     @Test
