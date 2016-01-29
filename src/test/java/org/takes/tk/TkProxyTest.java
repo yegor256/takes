@@ -67,7 +67,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * kProxy Testcase for testing the act method with  GET.
+     * TkProxy Testcase for testing the act method with  GET.
      * @throws Exception If some problem inside.
      */
     @Test
@@ -104,7 +104,6 @@ public final class TkProxyTest {
             }
         );
     }
-
 
     /**
      * A private method to call the TkProxy. act with httpMethod.
