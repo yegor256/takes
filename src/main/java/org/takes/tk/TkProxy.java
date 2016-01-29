@@ -26,6 +26,7 @@ package org.takes.tk;
 import com.jcabi.http.request.JdkRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,35 +57,69 @@ import org.takes.rs.RsWithStatus;
 public final class TkProxy implements Take {
 
     /**
-     * Target host to which requests are forwarded.
+     * Target.
      */
-    private final transient String host;
+    private final transient URI target;
+
+    /**
+     * Label, to add to the HTTP header.
+     */
+    private final transient String label;
+
+    /**
+     * Ctor.
+     * @param tgt Target to which requests are forwarded
+     */
+    public TkProxy(final URI tgt) {
+        this(tgt, TkProxy.class.getName());
+    }
+
+    /**
+     * Ctor.
+     * @param tgt Target to which requests are forwarded
+     */
+    public TkProxy(final String tgt) {
+        this(URI.create(tgt), TkProxy.class.getName());
+    }
+
+    /**
+     * Ctor.
+     * @param tgt Target to which requests are forwarded
+     * @param mark Marker (text label) to add to the HTTP header
+     */
+    public TkProxy(final String tgt, final String mark) {
+        this(URI.create(tgt), mark);
+    }
 
     /**
      * Ctor.
      *
      * <p>The {@code target} parameter takes the destination URL
-     *  to which requests are proxied. Some valid examples:
-     *  <li>example.com
-     *  <li>www.example.com
-     *  <li>example.com:8080
-     *  <li>example.com/x/y
-     * @param target Target to which requests are forwarded
+     * to which requests are proxied. Some valid examples:</p>
+     *
+     * <ul>
+     *  <li>{@code http://example.com}</li>
+     *  <li>{@code http://www.example.com}</li>
+     *  <li>{@code https://example.com:8080}</li>
+     *  <li>{@code https://example.com/x/y}</li>
+     * </ul>
+     *
+     * @param tgt Target to which requests are forwarded
+     * @param mark Marker (text label) to add to the HTTP header
      */
-    public TkProxy(final String target) {
-        this.host = target;
+    public TkProxy(final URI tgt, final String mark) {
+        this.target = tgt;
+        this.label = mark;
     }
 
     @Override
     public Response act(final Request req) throws IOException {
-        final RqHref.Base base = new RqHref.Base(req);
-        final String home = new RqHref.Smart(base).home().bare();
-        final String dest = String.format(
-            "http://%s/%s",
-            this.host,
-            base.href().toString().substring(home.length())
+        final String input = new RqHref.Base(req).href().path();
+        final URI output = this.target.resolve(URI.create(input));
+        return this.response(
+            input, output,
+            this.request(req, output).fetch()
         );
-        return this.response(home, dest, this.request(req, dest).fetch());
     }
 
     /**
@@ -96,17 +131,16 @@ public final class TkProxy implements Take {
      * @throws IOException If some problem inside
      */
     private com.jcabi.http.Request request(final Request req,
-        final String dest) throws IOException {
+        final URI dest) throws IOException {
         final String method = new RqMethod.Base(req).method();
-        com.jcabi.http.Request proxied = new JdkRequest(dest)
-            .method(method);
-        final RqHeaders.Base headers = new RqHeaders.Base(req);
+        com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
+        final RqHeaders headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {
             if ("content-length".equals(name.toLowerCase(Locale.ENGLISH))) {
                 continue;
             }
-            if (isHost(name)) {
-                proxied = proxied.header(name, this.host);
+            if (TkProxy.isHost(name)) {
+                proxied = proxied.header(name, this.target);
                 continue;
             }
             for (final String value : headers.header(name)) {
@@ -130,21 +164,21 @@ public final class TkProxy implements Take {
      * @param rsp Response received from the target host
      * @return Response
      */
-    private Response response(final String home, final String dest,
+    private Response response(final String home, final URI dest,
         final com.jcabi.http.Response rsp) {
         final Collection<String> hdrs = new LinkedList<String>();
         hdrs.add(
             String.format(
-                "X-Takes-TkProxy: from %s to %s",
-                home, dest
+                "X-Takes-TkProxy: from %s to %s by %s",
+                home, dest, this.label
             )
         );
         for (final Map.Entry<String, List<String>> entry
             : rsp.headers().entrySet()) {
             for (final String value : entry.getValue()) {
                 final String val;
-                if (isHost(entry.getKey())) {
-                    val = this.host;
+                if (TkProxy.isHost(entry.getKey())) {
+                    val = this.target.toString();
                 } else {
                     val = value;
                 }

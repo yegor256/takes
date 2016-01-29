@@ -4,7 +4,19 @@ cache:
   directories:
     - $HOME/.m2
 script:
+  - set -e
   - mvn clean install -Pqulice --errors --batch-mode
+  - mvn clean
+  - pdd --source=$(pwd) --file=/dev/null
+  - est --dir=est --file=/dev/null
+addons:
+  apt:
+    packages:
+    - libmagic1
+    - libmagic-dev
+install:
+  - gem install pdd
+  - gem install est
 env:
   global:
     - MAVEN_OPTS="-Xmx256m -Dfile.encoding=UTF-8"

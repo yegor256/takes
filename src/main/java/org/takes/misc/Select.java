@@ -34,6 +34,7 @@ import java.util.Queue;
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
+ * @param <T> Type of item
  */
 public final class Select<T> implements Iterable<T> {
 
@@ -76,6 +77,8 @@ public final class Select<T> implements Iterable<T> {
      * elements from the list with given condition.
      *
      * <p>This class is NOT thread-safe.
+     *
+     * @param <E> Type of item
      */
     private static final class SelectIterator<E> implements Iterator<E> {
         /**
@@ -89,13 +92,14 @@ public final class Select<T> implements Iterable<T> {
         /**
          * The buffer storing the objects of the iterator.
          */
-        private final transient Queue<E> buffer = new LinkedList<E>();
+        private final transient Queue<E> buffer;
         /**
          * Ctor. ConcatIterator traverses the element.
          * @param itr Iterator of the original iterable
          * @param cond Condition to filter out elements
          */
         SelectIterator(final Iterator<E> itr, final Condition<E> cond) {
+            this.buffer = new LinkedList<E>();
             this.condition = cond;
             this.iterator = itr;
         }

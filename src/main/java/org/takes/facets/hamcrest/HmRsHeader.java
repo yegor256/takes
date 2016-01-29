@@ -24,21 +24,13 @@
 package org.takes.facets.hamcrest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.hamcrest.TypeSafeMatcher;
 import org.takes.Response;
 
 /**
  * Response Header Matcher.
  *
- * <p>This "matcher" tests given response header.
- * <p>The header name(s) should be provided in lowercase.
+ * <p>This "matcher" tests given response headers.
  * <p>The class is immutable and thread-safe.
  *
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
@@ -47,27 +39,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.23.3
  */
-public final class HmRsHeader extends TypeSafeMatcher<Response> {
-
-    /**
-     * Values string used in description of mismatches.
-     */
-    private static final String VALUES_STR = " -> values: ";
-
-    /**
-     * Header matcher.
-     */
-    private final transient Matcher<String> header;
-
-    /**
-     * Value matcher.
-     */
-    private final transient Matcher<Iterable<String>> value;
-
-    /**
-     * Mismatched header values.
-     */
-    private transient Collection<String> failed;
+public final class HmRsHeader extends AbstractHmHeader<Response> {
 
     /**
      * Ctor.
@@ -76,9 +48,7 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
      */
     public HmRsHeader(final Matcher<String> hdrm,
         final Matcher<Iterable<String>> vlm) {
-        super();
-        this.header = hdrm;
-        this.value = vlm;
+        super(hdrm, vlm);
     }
 
     /**
@@ -88,7 +58,7 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
      */
     public HmRsHeader(final String hdr,
         final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(hdr), vlm);
+        super(hdr, vlm);
     }
 
     /**
@@ -97,60 +67,11 @@ public final class HmRsHeader extends TypeSafeMatcher<Response> {
      * @param val Header value
      */
     public HmRsHeader(final String hdr, final String val) {
-        this(
-            Matchers.equalToIgnoringCase(hdr),
-            Matchers.hasItems(val)
-        );
+        super(hdr, val);
     }
 
     @Override
-    public void describeTo(final Description description) {
-        description.appendText("header: ")
-            .appendDescriptionOf(this.header)
-            .appendText(HmRsHeader.VALUES_STR)
-            .appendDescriptionOf(this.value);
-    }
-
-    @Override
-    public boolean matchesSafely(final Response item) {
-        try {
-            final Iterator<String> headers = item.head().iterator();
-            if (headers.hasNext()) {
-                headers.next();
-            }
-            final List<String> values = new ArrayList<String>(0);
-            while (headers.hasNext()) {
-                final String[] parts = HmRsHeader.split(headers.next());
-                if (this.header.matches(parts[0].trim())) {
-                    values.add(parts[1].trim());
-                }
-            }
-            final boolean result = this.value.matches(values);
-            if (!result) {
-                this.failed = values;
-            }
-            return result;
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    @Override
-    public void describeMismatchSafely(final Response item,
-                                       final Description description) {
-        description.appendText("header was: ")
-            .appendDescriptionOf(this.header)
-            .appendText(HmRsHeader.VALUES_STR)
-            .appendValue(this.failed);
-    }
-
-    /**
-     * Splits the given header to [name, value] array.
-     * @param header Header
-     * @return Array in which the first element is header name,
-     *  the second is header value
-     */
-    private static String[] split(final String header) {
-        return header.split(":", 2);
+    public Iterable<String> headers(final Response item) throws IOException {
+        return item.head();
     }
 }

@@ -21,60 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
-import org.takes.misc.Condition;
-import org.takes.misc.Select;
+import org.takes.Request;
 
 /**
- * Response decorator, without a header.
+ * Request decorator that limits its body, according to
+ * the chunk sizes when it is a chunked Transfer-Encoding.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- * @since 0.9
+ * @since 0.15
+ * @see org.takes.rq.RqPrint
  */
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsWithoutHeader extends RsWrap {
+public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
-     * @param res Original response
-     * @param name Header name
+     * @param req Original request
      */
-    public RsWithoutHeader(final Response res, final CharSequence name) {
+    public RqChunk(final Request req) {
         super(
-            // @checkstyle AnonInnerLengthCheck (50 lines)
-            new Response() {
+            new Request() {
                 @Override
                 public Iterable<String> head() throws IOException {
-                    final String prefix = String.format(
-                        "%s:", name.toString().toLowerCase(Locale.ENGLISH)
-                    );
-                    return new Select<String>(
-                        res.head(),
-                        new Condition<String>() {
-                            @Override
-                            public boolean fits(final String header) {
-                                return !header.toLowerCase(Locale.ENGLISH)
-                                    .startsWith(prefix);
-                            }
-                        }
-                    );
+                    return req.head();
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return res.body();
+                    return RqChunk.cap(req);
                 }
             }
         );
     }
+
+    /**
+     * Cap the steam.
+     * @param req Request
+     * @return Stream with a cap
+     * @throws IOException If fails
+     */
+    private static InputStream cap(final Request req) throws IOException {
+        final Iterator<String> hdr = new RqHeaders.Base(req)
+            .header("Transfer-Encoding").iterator();
+        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
+            throw new UnsupportedOperationException();
+        }
+        return req.body();
+    }
+
 }

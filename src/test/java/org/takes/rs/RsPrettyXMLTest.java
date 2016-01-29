@@ -96,18 +96,18 @@ public final class RsPrettyXMLTest {
                 )
             ).printBody(),
             Matchers.is(
-                    Joiner.on("").appendTo(
-                        new StringBuilder("<!DOCTYPE html\n"),
-                        "  SYSTEM \"about:legacy-compat\">\n",
-                        "<html>\n",
-                        "   <head>\n",
-                        "      <meta http-equiv=\"Content-Type\"",
-                        " content=\"text/html; charset=UTF-8\">\n",
-                        "   </head>\n",
-                        "   <body></body>\n",
-                        "</html>"
-                    ).toString()
-                )
+                Joiner.on("").appendTo(
+                    new StringBuilder("<!DOCTYPE html\n"),
+                    "  SYSTEM \"about:legacy-compat\">\n",
+                    "<html>\n",
+                    "   <head>\n",
+                    "      <meta http-equiv=\"Content-Type\"",
+                    " content=\"text/html; charset=UTF-8\">\n",
+                    "   </head>\n",
+                    "   <body></body>\n",
+                    "</html>"
+                ).toString()
+            )
         );
     }
 

@@ -21,31 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.http;
+package org.takes.rq;
 
 import java.io.IOException;
-import java.net.Socket;
+import org.takes.Request;
 
 /**
- * Reusable back-end.
- *
- * @author Piotr Pradzynski (prondzyn@gmail.com)
+ * Request with default header.
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
+ * @since 0.31
  */
-public final class BkReuse extends BkWrap {
+public final class RqWithDefaultHeader extends RqWrap {
 
     /**
-     * Constructor of BkReuse.
-     * @param back Origin back-end.
+     * Ctor.
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @throws IOException in case of request errors
      */
-    @SuppressWarnings("PMD.UnusedFormalParameter")
-    public BkReuse(final Back back) {
-        super(new Back() {
-            @Override
-            public void accept(final Socket socket) throws IOException {
-                throw new UnsupportedOperationException();
-            }
-        });
+    public RqWithDefaultHeader(final Request req,
+        final String hdr,
+        final String val) throws IOException {
+        super(RqWithDefaultHeader.build(req, hdr, val));
+    }
+
+    /**
+     * Builds the request with the default header if it is not already present.
+     * @param req Original request.
+     * @param hdr Header name.
+     * @param val Header value.
+     * @return The new request.
+     * @throws IOException in case of request errors
+     */
+    private static Request build(final Request req,
+        final String hdr, final String val) throws IOException {
+        final Request request;
+        if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
+            request = req;
+        } else {
+            request = new RqWithHeader(req, hdr, val);
+        }
+        return request;
     }
 
 }

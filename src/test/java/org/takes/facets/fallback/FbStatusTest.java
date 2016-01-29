@@ -61,7 +61,7 @@ public final class FbStatusTest {
         );
     }
 
-     /**
+    /**
      * FbStatus can react to Condition.
      * @throws Exception If some problem inside
      */

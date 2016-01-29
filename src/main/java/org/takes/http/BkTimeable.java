@@ -44,6 +44,9 @@ import lombok.EqualsAndHashCode;
 @SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeable extends BkWrap {
 
+    /**
+     * Back threads.
+     */
     private static final class BkThreads implements Back {
         /**
          * Original back.
@@ -56,14 +59,14 @@ public final class BkTimeable extends BkWrap {
         /**
          * Threads storage.
          */
-        private final transient ConcurrentMap<Thread, Long> threads =
-            new ConcurrentHashMap<Thread, Long>(1);
+        private final transient ConcurrentMap<Thread, Long> threads;
         /**
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
          */
-        public BkThreads(final long msec, final Back bck) {
+        BkThreads(final long msec, final Back bck) {
+            this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;
             this.latency = msec;
             final Thread monitor = new Thread(
@@ -89,8 +92,8 @@ public final class BkTimeable extends BkWrap {
         @Override
         public void accept(final Socket socket) throws IOException {
             this.threads.put(
-                    Thread.currentThread(),
-                    System.currentTimeMillis()
+                Thread.currentThread(),
+                System.currentTimeMillis()
             );
             this.back.accept(socket);
         }
@@ -100,8 +103,8 @@ public final class BkTimeable extends BkWrap {
         private void check() {
             for (final Map.Entry<Thread, Long> entry
                 : this.threads.entrySet()) {
-                final long currentTime = System.currentTimeMillis();
-                if (currentTime - entry.getValue() > this.latency) {
+                final long time = System.currentTimeMillis();
+                if (time - entry.getValue() > this.latency) {
                     final Thread thread = entry.getKey();
                     if (thread.isAlive()) {
                         thread.interrupt();

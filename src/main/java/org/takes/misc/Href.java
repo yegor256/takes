@@ -43,7 +43,13 @@ import java.util.concurrent.ConcurrentMap;
  * @version $Id$
  * @since 0.7
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings
+    (
+        {
+            "PMD.TooManyMethods",
+            "PMD.OnlyOneConstructorShouldDoInitialization"
+        }
+    )
 public final class Href implements CharSequence {
 
     /**

@@ -62,6 +62,7 @@ import lombok.EqualsAndHashCode;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @param <T> Type of item
  */
 @EqualsAndHashCode(of = { "objects", "func" })
 public final class XeTransform<T> implements Iterable<XeSource> {
@@ -111,6 +112,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
 
     /**
      * Function to map them.
+     * @param <T> Type of item
      */
     public interface Func<T> {
         /**

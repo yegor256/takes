@@ -52,7 +52,7 @@ public final class PsChain implements Pass {
      * @param list Passes
      */
     public PsChain(final Pass... list) {
-        this.passes = Arrays.asList(list);
+        this(Arrays.asList(list));
     }
 
     /**

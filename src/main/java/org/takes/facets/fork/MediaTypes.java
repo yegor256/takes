@@ -58,24 +58,18 @@ final class MediaTypes {
 
     /**
      * Ctor.
-     * @param types Set of types
+     * @param text Text to parse
      */
-    MediaTypes(final SortedSet<MediaType> types) {
-        this.list = Collections.unmodifiableSortedSet(types);
+    MediaTypes(final String text) {
+        this(MediaTypes.parse(text));
     }
 
     /**
      * Ctor.
-     * @param text Text to parse
+     * @param types Set of types
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    MediaTypes(final String text) {
-        this.list = new TreeSet<MediaType>();
-        for (final String name : text.toLowerCase(Locale.ENGLISH).split(",")) {
-            if (!name.isEmpty()) {
-                this.list.add(new MediaType(name));
-            }
-        }
+    MediaTypes(final SortedSet<MediaType> types) {
+        this.list = Collections.unmodifiableSortedSet(types);
     }
 
     /**
@@ -128,6 +122,22 @@ final class MediaTypes {
      */
     public boolean isEmpty() {
         return this.list.isEmpty();
+    }
+
+    /**
+     * Ctor.
+     * @param text Text to parse
+     * @return List of media types
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private static SortedSet<MediaType> parse(final String text) {
+        final SortedSet<MediaType> list = new TreeSet<MediaType>();
+        for (final String name : text.toLowerCase(Locale.ENGLISH).split(",")) {
+            if (!name.isEmpty()) {
+                list.add(new MediaType(name));
+            }
+        }
+        return list;
     }
 
 }

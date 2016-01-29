@@ -83,9 +83,11 @@ public final class RqLengthAware extends RqWrap {
         final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Content-Length").iterator();
         InputStream body = req.body();
+        long length = 0;
         if (hdr.hasNext()) {
-            body = new CapInputStream(body, Long.parseLong(hdr.next()));
+            length = Long.parseLong(hdr.next());
         }
+        body = new CapInputStream(body, length);
         return body;
     }
 

@@ -32,6 +32,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Opt;
 import org.takes.tk.TkWrap;
 
 /**
@@ -81,17 +82,37 @@ public final class TkFallback extends TkWrap {
                 take.act(req), fbk, req
             );
         } catch (final HttpException ex) {
-            res = TkFallback.wrap(
-                fbk.route(new RqFallback.Fake(req, ex.code(), ex)).get(),
-                fbk, req
+            final Opt<Response> fbres = fbk.route(
+                new RqFallback.Fake(req, ex.code(), ex)
             );
+            if (!fbres.has()) {
+                throw new IOException(
+                    String.format(
+                        "There is no fallback available in %s",
+                        fbk.getClass().getCanonicalName()
+                    ),
+                    ex
+                );
+            }
+            res = TkFallback.wrap(fbres.get(), fbk, req);
         } catch (final Throwable ex) {
+            final Opt<Response> fbres = fbk.route(
+                new RqFallback.Fake(
+                    req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                )
+            );
+            if (!fbres.has()) {
+                throw new IOException(
+                    String.format(
+                        "There is no fallback available for %s in %s",
+                        ex.getClass().getCanonicalName(),
+                        fbk.getClass().getCanonicalName()
+                    ),
+                    ex
+                );
+            }
             res = TkFallback.wrap(
-                fbk.route(
-                    new RqFallback.Fake(
-                        req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
-                    )
-                ).get(),
+                fbres.get(),
                 fbk, req
             );
         }

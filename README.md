@@ -1,11 +1,12 @@
-<img src="http://www.takes.org/logo.svg" width="96px" height="96px"/>
+<img src="http://www.takes.org/logo.png" width="96px" height="96px"/>
 
 [![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
+[![We recommend IntelliJ IDEA](http://img.teamed.io/intellij-idea-recommend.svg)](https://www.jetbrains.com/idea/)
 
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![JavaDoc](https://img.shields.io/badge/javadoc-html-blue.svg)](http://www.javadoc.io/doc/org.takes/takes)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.takes/takes/badge.svg?color=blue&prefix=v)](http://www.javadoc.io/doc/org.takes/takes)
 [![Coverage Status](https://coveralls.io/repos/yegor256/takes/badge.svg?branch=master&service=github)](https://coveralls.io/github/yegor256/takes?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
@@ -215,7 +216,7 @@ parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
 (`tk` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
-returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
+returns a take. `TkIndex` is our custom class,
 let's see how it looks:
 
 ```java
@@ -278,7 +279,7 @@ public final class App {
 ## Templates
 
 Now let's see how we can render something more complex than an plain text.
-First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may
+First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be 
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 

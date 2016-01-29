@@ -60,7 +60,8 @@ import org.takes.misc.VerboseIterable;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+ * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+ *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -88,26 +89,22 @@ public interface RqForm extends Request {
      */
     @EqualsAndHashCode(callSuper = true, of = "req")
     final class Base extends RqWrap implements RqForm {
-
         /**
          * Request.
          */
         private final transient Request req;
-
         /**
          * Saved map.
-         * @checkstyle LineLengthCheck (3 lines)
          */
-        private final transient List<ConcurrentMap<String, List<String>>> saved =
-            new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
-
+        private final transient List<ConcurrentMap<String, List<String>>> saved;
         /**
          * Ctor.
          * @param request Original request
-         * @throws IOException If fails
          */
-        public Base(final Request request) throws IOException {
+        public Base(final Request request) {
             super(request);
+            this.saved =
+                new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
             this.req = request;
         }
         @Override

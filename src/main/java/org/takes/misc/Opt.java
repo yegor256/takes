@@ -33,6 +33,7 @@ import lombok.EqualsAndHashCode;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14
+ * @param <T> Type of item
  */
 public interface Opt<T> {
     /**
@@ -51,9 +52,10 @@ public interface Opt<T> {
      * Holder for a single element only.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
      * @since 0.14
+     * @param <T> Type of item
      */
     @EqualsAndHashCode(of = "origin")
     final class Single<T> implements Opt<T> {
@@ -82,9 +84,10 @@ public interface Opt<T> {
      * Empty instance.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
      * @since 0.14
+     * @param <T> Type of item
      */
     final class Empty<T> implements Opt<T> {
         @Override

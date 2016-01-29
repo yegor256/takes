@@ -84,38 +84,38 @@ public interface RqRequestLine extends Request {
         /**
          * HTTP Request-line pattern.
          * [!-~] is for method or extension-method token (octets 33 - 126).
+         * @checkstyle LineLengthCheck (1 lines)
          * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
         private static final Pattern PATTERN = Pattern.compile(
             "([!-~]+) ([^ ]+)( [^ ]+)?"
         );
 
-        private static enum Token {
+        /**
+         * Token inside regex.
+         */
+        private enum Token {
             /**
              * METHOD token.
              */
             METHOD(1),
-
             /**
              * URI token.
              */
             URI(2),
-
             /**
              * HTTPVERSION token.
              */
             HTTPVERSION(3);
-
             /**
              * Value.
              */
             private final int value;
-
             /**
              * Ctor.
              * @param val Value
              */
-            private Token(final int val) {
+            Token(final int val) {
                 this.value = val;
             }
         }
@@ -130,7 +130,7 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String header() throws IOException {
-            return this.validated(this.line());
+            return RqRequestLine.Base.validated(this.line());
         }
 
         @Override
@@ -156,8 +156,8 @@ public interface RqRequestLine extends Request {
          */
         private String token(final Token token)
             throws IOException {
-            return this.trimmed(
-                this.matcher(this.line()).group(token.value),
+            return RqRequestLine.Base.trimmed(
+                RqRequestLine.Base.matcher(this.line()).group(token.value),
                 token
             );
         }
@@ -186,7 +186,7 @@ public interface RqRequestLine extends Request {
          * @return Matcher that can be used to extract tokens
          * @throws HttpException If fails
          */
-        private Matcher matcher(final String line)
+        private static Matcher matcher(final String line)
             throws HttpException {
             final Matcher matcher = PATTERN.matcher(line);
             if (!matcher.matches()) {
@@ -209,7 +209,8 @@ public interface RqRequestLine extends Request {
          * @return Validated Request-Line header
          * @throws HttpException If fails
          */
-        private String validated(final String line) throws HttpException {
+        private static String validated(final String line)
+            throws HttpException {
             if (!PATTERN.matcher(line).matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -231,7 +232,7 @@ public interface RqRequestLine extends Request {
          * @param token Token
          * @return Trimmed token value
          */
-        private String trimmed(final String value, final Token token) {
+        private static String trimmed(final String value, final Token token) {
             if (value == null) {
                 throw new IllegalArgumentException(
                     String.format(
