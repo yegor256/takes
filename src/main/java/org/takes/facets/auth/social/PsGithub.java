@@ -165,7 +165,7 @@ public final class PsGithub implements Pass {
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(XmlResponse.class);
-        final String tokenString = null;
+        String tokenString = null;
         try {
             tokenString = xmlRes.xml().xpath("/OAuth/access_token/text()").get(0);
         } catch (Exception exce) {
