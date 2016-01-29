@@ -153,7 +153,7 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path("login").path("oauth").path("access_token")
             .toString();
-        return new JdkRequest(uri)
+        final XmlResponse xmlRes = new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
             .body()
@@ -164,8 +164,14 @@ public final class PsGithub implements Pass {
             .back()
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
-            .as(XmlResponse.class)
-            .xml().xpath("/OAuth/access_token/text()").get(0);
+            .as(XmlResponse.class);
+        final String tokenString = null;
+        try {
+            tokenString = xmlRes.xml().xpath("/OAuth/access_token/text()").get(0);
+        } catch (Exception exce) {
+            throw new HttpException(HttpURLConnection.HTTP_BAD_REQUEST,"Invalid XML",exce);
+        }
+        return tokenString;
     }
 
     /**
