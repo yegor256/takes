@@ -49,38 +49,38 @@ import org.takes.rs.RsText;
 public final class TkProxyTest {
 
     /**
-     * TkProxy Testcase for testing the creation of the object with method POST.
+     * TkProxy can just works on POST.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void justWorksPost()throws Exception {
+    public void justWorksOnPost()throws Exception {
         this.justWorks(RqMethod.POST);
     }
 
     /**
-     *TkProxy Testcase for testing the creation of the object with method GET.
+     *TkProxy can just works on GET.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void justWorksGet()throws Exception {
+    public void justWorksOnGet()throws Exception {
         this.justWorks(RqMethod.GET);
     }
 
     /**
-     * TkProxy Testcase for testing the act method with  GET.
+     * TkProxy can correctly maps path string GET.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void correctlyMapsPathStringGet() throws Exception {
+    public void correctlyMapsPathStringOnGet() throws Exception {
         this.correctlyMapsPathString(RqMethod.GET);
     }
 
     /**
-     *TkProxy Testcase for testing the act method with POST.
+     *TkProxy can correctly maps path string on POST.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void correctlyMapsPathStringPost() throws Exception {
+    public void correctlyMapsPathStringOnPost() throws Exception {
         this.correctlyMapsPathString(RqMethod.POST);
     }
 
