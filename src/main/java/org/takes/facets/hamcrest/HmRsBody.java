@@ -139,16 +139,15 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
             this.extractCharsetName(response);
             final InputStream body = response.body();
             try {
-                if (this.value != null) {
-                    res = this.compareByteArrays(body);
-                } else {
-                    if (this.stringvalue != null) {
-                        res = this.compareStrings(body);
-                    } else {
+                if (this.value == null) {
+                    if (this.stringvalue == null) {
                         throw new IllegalStateException(
                                 "both string and byte arrays are null"
                              );
                     }
+                    res = this.compareStrings(body);
+                } else {
+                    res = this.compareByteArrays(body);
                 }
             } finally {
                 if (body != null) {
@@ -169,11 +168,11 @@ public final class HmRsBody extends TypeSafeMatcher<Response> {
      * @throws IOException When reading from {@body} fails
      */
     private boolean compareStrings(final InputStream body) throws IOException {
-        InputStreamReader reader;
-        if (this.charset != null) {
-            reader = new InputStreamReader(body, this.charset);
-        } else {
+        final InputStreamReader reader;
+        if (this.charset == null) {
             reader = new InputStreamReader(body);
+        } else {
+            reader = new InputStreamReader(body, this.charset);
         }
         final boolean res;
         if (this.stringvalue.length() == 0) {
