@@ -56,6 +56,11 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
+    private static final String GIT_HUB_TOKEN = "GitHubToken";
+    private static final String ACCESS_TOKEN = "access_token";
+    /**
+     * A Junit Exception test variable.
+     */
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -64,7 +69,7 @@ public final class PsGithubTest {
      * @throws IOException If some problem inside.
      */
     @Test
-    public void throwHttpException() throws IOException{
+    public void throwHttpException() throws IOException {
         this.thrown.expect(HttpException.class);
         this.thrown.expectMessage("Invalid XML");
         this.performLogin(getDirectiveWithoutAccessToken());
@@ -78,7 +83,7 @@ public final class PsGithubTest {
     public void canLogin() throws IOException {
         this.performLogin(
             getDirectiveWithoutAccessToken()
-                .add("access_token").set("GitHubToken")
+                .add(ACCESS_TOKEN).set(GIT_HUB_TOKEN)
         );
     }
 
@@ -113,9 +118,9 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param("access_token")
+                            new RqHref.Base(req).href().param(ACCESS_TOKEN)
                                 .iterator().next(),
-                            Matchers.containsString("GitHubToken")
+                            Matchers.containsString(GIT_HUB_TOKEN)
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
