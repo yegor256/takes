@@ -56,7 +56,14 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
+    /**
+     * A constant for GitHubToken.
+     */
     private static final String GIT_HUB_TOKEN = "GitHubToken";
+
+    /**
+     * A constant for access_token.
+     */
     private static final String ACCESS_TOKEN = "access_token";
     /**
      * A Junit Exception test variable.
@@ -105,9 +112,7 @@ public final class PsGithubTest {
                         PsGithubTest.assertParam(greq, "client_id", "app");
                         PsGithubTest.assertParam(greq, "client_secret", "key");
                         return new RsXembly(
-                            new XeDirectives(
-                                 directive.toString()
-                            )
+                            new XeDirectives(directive.toString())
                         );
                     }
                 }
@@ -165,16 +170,15 @@ public final class PsGithubTest {
     }
 
     /**
-     * A private method to create the basic directive
+     * A private method to create the basic directive.
      * without the access token.
-     * @return
+     * @return a basic directive.
      */
     private static Directives getDirectiveWithoutAccessToken() {
         return new Directives().add("OAuth")
             .add("token_type").set("bearer").up()
             .add("scope").set("repo,gist").up();
     }
-
 
     /**
      * Checks the parameter value for the expected value.
