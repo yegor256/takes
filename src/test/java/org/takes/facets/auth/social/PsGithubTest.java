@@ -172,7 +172,7 @@ public final class PsGithubTest {
     /**
      * A private method to create the basic directive.
      * without the access token.
-     * @return a basic directive.
+     * @return A basic directive.
      */
     private static Directives getDirectiveWithoutAccessToken() {
         return new Directives().add("OAuth")
