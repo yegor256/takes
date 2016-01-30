@@ -153,7 +153,7 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path("login").path("oauth").path("access_token")
             .toString();
-        try{
+        try {
             return new JdkRequest(uri)
                 .method("POST")
                 .header("Accept", "application/xml")
@@ -169,7 +169,7 @@ public final class PsGithub implements Pass {
                 .xml().xpath("/OAuth/access_token/text()").get(0);
         } catch (final IndexOutOfBoundsException exception) {
             throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST,"Invalid XML", exception
+                HttpURLConnection.HTTP_BAD_REQUEST, "Invalid XML", exception
             );
         }
     }

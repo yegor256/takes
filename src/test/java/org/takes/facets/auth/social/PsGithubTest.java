@@ -28,7 +28,10 @@ import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -53,13 +56,45 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    /**
+     * PsGithub can throw HttpExeption.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void throwHttpException() throws IOException{
+        thrown.expect(HttpException.class);
+        thrown.expectMessage("Invalid XML");
+        performLogin(
+            new Directives().add("OAuth")
+                .add("token_type").set("bearer").up()
+                .add("scope").set("repo,gist").up()
+                .set("GitHubToken")
+        );
+    }
     /**
      * PsGithub can login.
      * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)s
      */
     @Test
     public void canLogin() throws IOException {
+        performLogin(
+            new Directives().add("OAuth")
+                .add("token_type").set("bearer").up()
+                .add("scope").set("repo,gist").up()
+                .add("access_token").set("GitHubToken")
+        );
+    }
+
+    /**
+     * A private method to perform the basic login.
+     * @param directive The directive object
+     * @throws IOException If some problem inside
+     * @checkstyle MultipleStringLiteralsCheck (100 lines)s
+     */
+    private void performLogin(final Directives directive) throws IOException {
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
@@ -72,11 +107,7 @@ public final class PsGithubTest {
                         PsGithubTest.assertParam(greq, "client_secret", "key");
                         return new RsXembly(
                             new XeDirectives(
-                                new Directives().add("OAuth")
-                                    .add("token_type").set("bearer").up()
-                                    .add("scope").set("repo,gist").up()
-                                    .add("access_token").set("GitHubToken")
-                                    .toString()
+                                 directive.toString()
                             )
                         );
                     }
