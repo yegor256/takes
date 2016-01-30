@@ -179,7 +179,6 @@ public final class PsGithubTest {
     /**
      * An inner class for the Take implementation testing.
      */
-
     private static class PsGithubTestTake implements Take {
         @Override
         public Response act(final Request req) throws IOException {
