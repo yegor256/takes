@@ -123,7 +123,8 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param(PsGithubTest.ACCESS_TOKEN)
+                            new RqHref.Base(req).href()
+                                .param(PsGithubTest.ACCESS_TOKEN)
                                 .iterator().next(),
                             Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
                         );
