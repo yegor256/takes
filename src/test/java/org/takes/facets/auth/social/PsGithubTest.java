@@ -77,7 +77,8 @@ public final class PsGithubTest {
     @Test
     public void canLogin() throws IOException {
         this.performLogin(
-            getDirectiveWithoutAccessToken().add("access_token")
+            getDirectiveWithoutAccessToken()
+                .add("access_token").set("GitHubToken")
         );
     }
 
@@ -166,8 +167,7 @@ public final class PsGithubTest {
     private static Directives getDirectiveWithoutAccessToken() {
         return new Directives().add("OAuth")
             .add("token_type").set("bearer").up()
-            .add("scope").set("repo,gist").up()
-            .set("GitHubToken");
+            .add("scope").set("repo,gist").up();
     }
 
 
