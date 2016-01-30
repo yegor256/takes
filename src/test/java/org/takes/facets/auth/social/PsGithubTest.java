@@ -69,7 +69,7 @@ public final class PsGithubTest {
      * A Junit Exception test variable.
      */
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public transient ExpectedException thrown = ExpectedException.none();
 
     /**
      * PsGithub can throw HttpExeption.
@@ -79,7 +79,7 @@ public final class PsGithubTest {
     public void throwHttpException() throws IOException {
         this.thrown.expect(HttpException.class);
         this.thrown.expectMessage("Invalid XML");
-        this.performLogin(getDirectiveWithoutAccessToken());
+        this.performLogin(PsGithubTest.getDirectiveWithoutAccessToken());
     }
 
     /**
@@ -89,8 +89,8 @@ public final class PsGithubTest {
     @Test
     public void canLogin() throws IOException {
         this.performLogin(
-            getDirectiveWithoutAccessToken()
-                .add(ACCESS_TOKEN).set(GIT_HUB_TOKEN)
+            PsGithubTest.getDirectiveWithoutAccessToken()
+                .add(ACCESS_TOKEN).set(PsGithubTest.GIT_HUB_TOKEN)
         );
     }
 
@@ -123,9 +123,9 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param(ACCESS_TOKEN)
+                            new RqHref.Base(req).href().param(PsGithubTest.ACCESS_TOKEN)
                                 .iterator().next(),
-                            Matchers.containsString(GIT_HUB_TOKEN)
+                            Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
