@@ -119,27 +119,7 @@ public final class PsGithubTest {
             ),
             new FkRegex(
                 "/user",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href()
-                                .param(PsGithubTest.ACCESS_TOKEN)
-                                .iterator().next(),
-                            Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
-                        );
-                        return new RsJSON(
-                            Json.createObjectBuilder()
-                                .add("login", "octocat")
-                                .add("id", 1)
-                                .add(
-                                    "avatar_url",
-                                    "https://github.com/img/octocat.gif"
-                                )
-                                .build()
-                        );
-                    }
-                }
+                new PsGithubTestTake()
             )
         );
         new FtRemote(take).exec(
@@ -194,5 +174,27 @@ public final class PsGithubTest {
             new RqForm.Smart(new RqForm.Base(req)).single(param),
             Matchers.equalTo(value)
         );
+    }
+
+    private static class PsGithubTestTake implements Take {
+        @Override
+        public Response act(final Request req) throws IOException {
+            MatcherAssert.assertThat(
+                new RqHref.Base(req).href()
+                    .param(PsGithubTest.ACCESS_TOKEN)
+                    .iterator().next(),
+                Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
+            );
+            return new RsJSON(
+                Json.createObjectBuilder()
+                    .add("login", "octocat")
+                    .add("id", 1)
+                    .add(
+                        "avatar_url",
+                        "https://github.com/img/octocat.gif"
+                    )
+                    .build()
+            );
+        }
     }
 }
