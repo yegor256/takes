@@ -41,7 +41,7 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link TkProxy}.
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
- * @author sebing
+ * @author Sebing
  * @version $Id$
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
