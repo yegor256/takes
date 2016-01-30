@@ -61,37 +61,30 @@ public final class PsGithubTest {
 
     /**
      * PsGithub can throw HttpExeption.
-     * @throws IOException If some problem inside
+     * @throws IOException If some problem inside.
      */
     @Test
     public void throwHttpException() throws IOException{
-        thrown.expect(HttpException.class);
-        thrown.expectMessage("Invalid XML");
-        performLogin(
-            new Directives().add("OAuth")
-                .add("token_type").set("bearer").up()
-                .add("scope").set("repo,gist").up()
-                .set("GitHubToken")
-        );
+        this.thrown.expect(HttpException.class);
+        this.thrown.expectMessage("Invalid XML");
+        this.performLogin(getDirectiveWithoutAccessToken());
     }
+
     /**
      * PsGithub can login.
-     * @throws IOException If some problem inside
+     * @throws IOException If some problem inside.
      */
     @Test
     public void canLogin() throws IOException {
-        performLogin(
-            new Directives().add("OAuth")
-                .add("token_type").set("bearer").up()
-                .add("scope").set("repo,gist").up()
-                .add("access_token").set("GitHubToken")
+        this.performLogin(
+            getDirectiveWithoutAccessToken().add("access_token")
         );
     }
 
     /**
      * A private method to perform the basic login.
-     * @param directive The directive object
-     * @throws IOException If some problem inside
+     * @param directive The directive object.
+     * @throws IOException If some problem inside.
      * @checkstyle MultipleStringLiteralsCheck (100 lines)s
      */
     private void performLogin(final Directives directive) throws IOException {
@@ -164,6 +157,19 @@ public final class PsGithubTest {
             }
         );
     }
+
+    /**
+     * A private method to create the basic directive
+     * without the access token.
+     * @return
+     */
+    private static Directives getDirectiveWithoutAccessToken() {
+        return new Directives().add("OAuth")
+            .add("token_type").set("bearer").up()
+            .add("scope").set("repo,gist").up()
+            .set("GitHubToken");
+    }
+
 
     /**
      * Checks the parameter value for the expected value.
