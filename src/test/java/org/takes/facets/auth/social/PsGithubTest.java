@@ -90,7 +90,8 @@ public final class PsGithubTest {
     public void canLogin() throws IOException {
         this.performLogin(
             PsGithubTest.getDirectiveWithoutAccessToken()
-                .add(ACCESS_TOKEN).set(PsGithubTest.GIT_HUB_TOKEN)
+                .add(PsGithubTest.ACCESS_TOKEN)
+                .set(PsGithubTest.GIT_HUB_TOKEN)
         );
     }
 
