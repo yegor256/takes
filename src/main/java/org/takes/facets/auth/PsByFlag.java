@@ -124,6 +124,7 @@ public final class PsByFlag implements Pass {
      * @param entries Entries
      * @return Map
      */
+    @SafeVarargs
     private static Map<Pattern, Pass> asMap(
         final Map.Entry<Pattern, Pass>... entries) {
         final ConcurrentMap<Pattern, Pass> map =

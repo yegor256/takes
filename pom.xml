@@ -308,7 +308,6 @@
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                                <exclude>findbugs:.*</exclude>
                                 <!--
                                 @todo #530:30min Below excludes were created during migration
                                  from qulice 0.13 to qulice 0.15.4. New qulice finds new
@@ -357,6 +356,14 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/StateAwareInputStream.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
                             </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
                         </configuration>
                     </plugin>
                 </plugins>

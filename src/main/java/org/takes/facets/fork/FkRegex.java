@@ -188,20 +188,7 @@ public final class FkRegex implements Fork {
         if (matcher.matches()) {
             resp = new Opt.Single<Response>(
                 this.target.act(
-                    new RqRegex() {
-                        @Override
-                        public Matcher matcher() {
-                            return matcher;
-                        }
-                        @Override
-                        public Iterable<String> head() throws IOException {
-                            return req.head();
-                        }
-                        @Override
-                        public InputStream body() throws IOException {
-                            return req.body();
-                        }
-                    }
+                    new FkRegexRqRegex(matcher, req)
                 )
             );
         } else {
@@ -210,4 +197,28 @@ public final class FkRegex implements Fork {
         return resp;
     }
 
+    private static class FkRegexRqRegex implements RqRegex {
+        private final Matcher matcher;
+        private final Request req;
+
+        public FkRegexRqRegex(final Matcher matcher, final Request req) {
+            this.matcher = matcher;
+            this.req = req;
+        }
+
+        @Override
+        public Matcher matcher() {
+            return matcher;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return req.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return req.body();
+        }
+    }
 }

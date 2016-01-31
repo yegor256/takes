@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -77,7 +78,7 @@ public final class RsPrint extends RsWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -88,7 +89,7 @@ public final class RsPrint extends RsWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class RsPrint extends RsWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray());
+        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
     }
 
     /**
@@ -121,7 +122,7 @@ public final class RsPrint extends RsWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer = new OutputStreamWriter(output);
+        final Writer writer = new OutputStreamWriter(output,StandardCharsets.UTF_8);
         int pos = 0;
         for (final String line : this.head()) {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {

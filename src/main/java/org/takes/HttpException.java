@@ -43,7 +43,7 @@ public class HttpException extends IOException {
     /**
      * Status code.
      */
-    private final transient int status;
+    private final int status;
 
     /**
      * Ctor.

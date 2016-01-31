@@ -28,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -86,7 +87,7 @@ public final class PsBasic implements Pass {
                 new RqHeaders.Smart(
                     new RqHeaders.Base(request)
                 ).single("authorization").split(AUTH_HEAD)[1]
-            )
+            ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
