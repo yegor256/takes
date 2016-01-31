@@ -357,7 +357,7 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
 
                                 <!--
-                                @todo #517 4hours. pending tasks in fixing findbugs.
+                                @todo #517:4hours. pending tasks in fixing findbugs.
                                 major bugs find in these classes are [
                                     Synchronization performed on java.util.concurrent.CopyOnWriteArrayList
                                     refactored into a named _static_ inner class
