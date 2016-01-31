@@ -29,10 +29,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
+import org.takes.HttpException;
 
 /**
  * Front remote control.
@@ -93,18 +96,7 @@ public final class MainRemote {
             passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        method.invoke(null, (Object) passed);
-                    } catch (final InvocationTargetException ex) {
-                        throw new IllegalStateException(ex);
-                    } catch (final IllegalAccessException ex) {
-                        throw new IllegalStateException(ex);
-                    }
-                }
-            }
+            new MainRemoteRunnable(method, passed)
         );
         thread.start();
         try {
@@ -117,7 +109,11 @@ public final class MainRemote {
                 )
             );
         } finally {
-            file.delete();
+            if(!file.delete()){
+                throw new HttpException(
+                    HttpURLConnection.HTTP_BAD_REQUEST,"Can not delete file"
+                );
+            }
             thread.interrupt();
         }
     }
@@ -142,7 +138,9 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new String(buf).trim());
+            port = Integer.parseInt(new String(
+                buf, StandardCharsets.UTF_8).trim()
+            );
         } finally {
             input.close();
         }
@@ -161,4 +159,24 @@ public final class MainRemote {
         void exec(URI home) throws IOException;
     }
 
+    private static class MainRemoteRunnable implements Runnable {
+        private final Method method;
+        private final String[] passed;
+
+        public MainRemoteRunnable(final Method method, final String[] passed) {
+            this.method = method;
+            this.passed = passed;
+        }
+
+        @Override
+        public void run() {
+            try {
+                method.invoke(null, (Object) passed);
+            } catch (final InvocationTargetException ex) {
+                throw new IllegalStateException(ex);
+            } catch (final IllegalAccessException ex) {
+                throw new IllegalStateException(ex);
+            }
+        }
+    }
 }
