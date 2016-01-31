@@ -159,12 +159,12 @@ public final class PsGithubTest {
                         Matchers.equalTo("urn:github:1")
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get(LOGIN),
-                        Matchers.equalTo(OCTOCAT)
+                        identity.properties().get(PsGithubTest.LOGIN),
+                        Matchers.equalTo(PsGithubTest.OCTOCAT)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get("avatar"),
-                        Matchers.equalTo(OCTOCAT_GIF_URL)
+                        Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
                     );
                 }
             }
@@ -210,11 +210,11 @@ public final class PsGithubTest {
             );
             return new RsJSON(
                 Json.createObjectBuilder()
-                    .add(LOGIN, OCTOCAT)
+                    .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
                     .add("id", 1)
                     .add(
                         "avatar_url",
-                        OCTOCAT_GIF_URL
+                        PsGithubTest.OCTOCAT_GIF_URL
                     )
                     .build()
             );
