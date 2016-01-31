@@ -358,10 +358,7 @@
 
                                 <!--
                                 @todo #517:30min Continue fixing FindBugs violations started in #517.
-                                 Major bugs found in these classes are
-                                 Synchronization performed on java.util.concurrent.CopyOnWriteArrayList
-                                 refactored into a named _static_ inner class
-                                 transient but isn't set by deserialization
+                                 and remove all excludes of findbugs below.
                                 -->
                                 <exclude>findbugs:org.takes.HttpException</exclude>
                                 <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>

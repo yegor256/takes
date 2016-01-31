@@ -494,17 +494,20 @@ public interface RqMultipart extends Request {
 
         /**
          * This class is  for the specific implementation
-         * for the RqMultipart. see the overridden methods for details.
+         * for the RqMultipart, (see the overridden methods for details).
          *
          * @todo #517:30min re-design the class.
          *  Why the super class is encapsulated inside the class?
-         *  Find an implementation without doing aggregation
-         *  and extending the same class
+         *  Find an implementation which won't be using
+         *  both composition and inheritance of the same class.
+         *  Either get the header values from the super class,
+         *  or if the purpose is to have a one-to-many header to body relation,
+         *  create the class without extending Request.
          */
         private static class RqMultipartRequest implements Request {
 
             /**
-             * Request object holds value for the header.
+             * Request object. Holds value for the header.
              */
             private final Request req;
 
@@ -530,7 +533,6 @@ public interface RqMultipart extends Request {
                 return new RqWithHeaders(
                     this.req,
                     String.format(
-                        //@checkstyle LineLength (1 line)
                         "Content-Type: multipart/form-data; boundary=%s",
                         Fake.BOUNDARY
                     ),
