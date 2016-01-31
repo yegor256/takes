@@ -41,7 +41,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: bd4f727abda5aba1ed48605b16d873108bf44914 $
+ * @version $Id$
  * @since 0.1
  */
 @ToString(callSuper = true)

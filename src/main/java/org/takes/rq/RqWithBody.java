@@ -35,7 +35,7 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id: 64986f75e2afac34cbdbd983e0bb43af32a7a932 $
+ * @version $Id$
  * @since 0.22
  */
 @EqualsAndHashCode(callSuper = true)

@@ -41,7 +41,7 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 23c614d2296ce93378179f5630b0e6cc8573d75b $
+ * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode

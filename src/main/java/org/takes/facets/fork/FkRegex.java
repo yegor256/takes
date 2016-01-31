@@ -76,7 +76,7 @@ import org.takes.tk.TkText;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: f2810e906b1f0c42db9c9f328b2545dad77a18b5 $
+ * @version $Id$
  * @since 0.4
  * @see TkFork
  * @see TkRegex

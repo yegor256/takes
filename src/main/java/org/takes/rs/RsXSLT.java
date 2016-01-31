@@ -79,7 +79,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 831f0088eaa5fb99817ad72d96e247f00c4e3c77 $
+ * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see org.takes.rs.xe.RsXembly

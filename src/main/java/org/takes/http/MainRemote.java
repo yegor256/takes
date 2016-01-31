@@ -43,7 +43,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 9fb2c6145a92a6852d8386812e05dc14eac3daae $
+ * @version $Id$
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
