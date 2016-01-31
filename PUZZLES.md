@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 5 active puzzles (39 total):
+There are 6 active puzzles (41 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -42,3 +42,5 @@ There are 5 active puzzles (39 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#534](https://github.com/yegor256/takes/issues/534):[**516-ffc97ad1**](https://github.com/yegor256/takes/issues/534) [`BkBasicTest.java:69-71`](../master/src/test/java/org/takes/http/BkBasicTest.java#L69-L71)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#438](https://github.com/yegor256/takes/issues/438):[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[**438-dcc4d707**](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
+[#530](https://github.com/yegor256/takes/issues/530):[<del>530</del>](https://github.com/yegor256/takes/issues/530) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[**530-0ac0fcef**]() [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
