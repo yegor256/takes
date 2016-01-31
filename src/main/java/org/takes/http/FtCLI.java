@@ -37,7 +37,7 @@ import org.takes.rq.RqWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: ac8667ede0d9fe7dedfcf763f71cb00a8254d9f7 $
+ * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */

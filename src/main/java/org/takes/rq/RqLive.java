@@ -41,7 +41,7 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 5a72dbe7dab049cdc95fbfaed481c0edccc7536e $
+ * @version $Id$
  * @since 0.1
  * @checkstyle CyclomaticComplexityCheck (500 lines)
  */

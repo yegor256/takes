@@ -65,7 +65,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 3e8f083eee5a0b5dd55ba29bdf51d15052bf3f9a $
+ * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

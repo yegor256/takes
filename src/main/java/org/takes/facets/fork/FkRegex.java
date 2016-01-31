@@ -201,7 +201,15 @@ public final class FkRegex implements Fork {
      * A private inner class for RqRegex implementation.
      */
     private static class FkRegexRqRegex implements RqRegex {
+
+        /**
+         * Macher.
+         */
         private final Matcher matcher;
+
+        /**
+         * Request.
+         */
         private final Request req;
 
         /**
@@ -209,7 +217,7 @@ public final class FkRegex implements Fork {
          * @param matcher The matcher object.
          * @param req The Request object.
          */
-        public FkRegexRqRegex(final Matcher matcher, final Request req) {
+        FkRegexRqRegex(final Matcher matcher, final Request req) {
             this.matcher = matcher;
             this.req = req;
         }
@@ -220,27 +228,27 @@ public final class FkRegex implements Fork {
          */
         @Override
         public Matcher matcher() {
-            return matcher;
+            return this.matcher;
         }
 
         /**
-         *
+         * Retrieving the head value.
          * @return The request head.
          * @throws IOException if something goes wrong.
          */
         @Override
         public Iterable<String> head() throws IOException {
-            return req.head();
+            return this.req.head();
         }
 
         /**
-         *
+         * Retrieving the body value.
          * @return The body of request.
          * @throws IOException If something goes wrong.
          */
         @Override
         public InputStream body() throws IOException {
-            return req.body();
+            return this.req.body();
         }
     }
 }

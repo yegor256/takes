@@ -58,7 +58,7 @@ import org.takes.misc.VerboseIterable;
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
+ * @version $Id$
  * @since 0.9
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -90,7 +90,7 @@ public interface RqMultipart extends Request {
      * <p>The class is immutable and thread-safe.
      *
      * @author Yegor Bugayenko (yegor@teamed.io)
-     * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
+     * @version $Id$
      * @since 0.9
      * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
      *     Forms in HTML</a>

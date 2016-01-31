@@ -48,7 +48,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 27bab18e3251f714da54d31f464288973f6a101f $
+ * @version $Id$
  * @since 0.2
  */
 @EqualsAndHashCode(of = "map")

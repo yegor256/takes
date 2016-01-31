@@ -39,7 +39,7 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: c67c6af2968194cb8b29b7906fa0b407b10299ba $
+ * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)

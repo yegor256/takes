@@ -43,7 +43,7 @@ import org.takes.rs.RsWithCookie;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 7872fcda977643bf707f6fae9c633a6f1457ecad $
+ * @version $Id$
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "codec", "cookie", "age" })
