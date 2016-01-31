@@ -121,7 +121,6 @@ public final class PsGithubTest {
     private void performLogin(final Directives directive) throws IOException {
         final String app = "app";
         final String key = "key";
-
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
@@ -131,7 +130,6 @@ public final class PsGithubTest {
                         final Request greq = new RqGreedy(req);
                         final String code = "code";
                         PsGithubTest.assertParam(greq, code, code);
-
                         PsGithubTest.assertParam(greq, "client_id", app);
                         PsGithubTest.assertParam(greq, "client_secret", key);
                         return new RsXembly(
