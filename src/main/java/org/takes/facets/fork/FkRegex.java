@@ -203,7 +203,7 @@ public final class FkRegex implements Fork {
     private static class FkRegexRqRegex implements RqRegex {
 
         /**
-         * match variable.
+         * Match variable.
          */
         private final Matcher match;
 
