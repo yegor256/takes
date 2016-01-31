@@ -48,8 +48,19 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 27bab18e3251f714da54d31f464288973f6a101f $
  * @since 0.2
+ *
+ * @todo  #517 This class need refactoring
+ * Reason one: Class Data Abstraction Coupling is 8 (max allowed is 7)
+ * classes [
+ *      ConcurrentHashMap, File, FileInputStream, FileOutputStream,
+ *      HttpException, InputStreamReader, OutputStreamWriter,
+ *      ServerSocket
+ * ]. (ClassDataAbstractionCouplingCheck)
+ *
+ * Reason 2:
+ *      Nested if-else depth is 2 (max allowed is 1). (NestedIfDepthCheck)
  */
 @EqualsAndHashCode(of = "map")
 final class Options {
@@ -121,7 +132,7 @@ final class Options {
                 try {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
-                    if( reader.read(chars) < 0 ) {
+                    if (reader.read(chars) < 0) {
                         throw new HttpException(
                             HttpURLConnection.HTTP_BAD_REQUEST,
                             "The end of the stream has been reached"

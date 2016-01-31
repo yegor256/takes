@@ -43,7 +43,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 9fb2c6145a92a6852d8386812e05dc14eac3daae $
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -164,7 +164,15 @@ public final class MainRemote {
      * An Inner class for implementing the the Threading.
      */
     private static class MainRemoteRunnable implements Runnable {
+
+        /**
+         * Method variable.
+         */
         private final Method method;
+
+        /**
+         * Passed values.
+         */
         private final String[] passed;
 
         /**
@@ -172,7 +180,7 @@ public final class MainRemote {
          * @param method The method object.
          * @param passed The strings passing to the method.
          */
-        public MainRemoteRunnable(final Method method, final String[] passed) {
+        MainRemoteRunnable(final Method method, final String[] passed) {
             this.method = method;
             this.passed = passed;
         }

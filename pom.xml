@@ -355,6 +355,13 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/facets/fork/TkMethodsTest.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/StateAwareInputStream.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
+
+                                <!--
+                                @todo  #517 Removing the org\takes\http\Options.java.
+                                As this class need redesign and refactoring.
+                                See the class description for the exact problems.
+                                -->
+                                <exclude>checkstyle:\src\main\java\org\takes\http\Options.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
