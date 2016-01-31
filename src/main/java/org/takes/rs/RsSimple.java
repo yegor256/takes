@@ -36,7 +36,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 7edc325c5e1df3fc88a2c44e42a7e393fe3451e2 $
  * @since 0.17
  */
 @ToString(callSuper = true)
@@ -49,8 +49,8 @@ public class RsSimple extends RsWrap {
      * @param body Body
      */
     public RsSimple(final Iterable<String> head, final String body) {
-        this(head, new ByteArrayInputStream(
-            body.getBytes(StandardCharsets.UTF_8))
+        this(head,
+            new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8))
         );
     }
 

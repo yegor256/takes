@@ -76,7 +76,7 @@ import org.takes.tk.TkText;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: f2810e906b1f0c42db9c9f328b2545dad77a18b5 $
  * @since 0.4
  * @see TkFork
  * @see TkRegex
@@ -197,25 +197,47 @@ public final class FkRegex implements Fork {
         return resp;
     }
 
+    /**
+     * A private inner class for RqRegex implementation.
+     */
     private static class FkRegexRqRegex implements RqRegex {
         private final Matcher matcher;
         private final Request req;
 
+        /**
+         * Constructor for the class.
+         * @param matcher The matcher object.
+         * @param req The Request object.
+         */
         public FkRegexRqRegex(final Matcher matcher, final Request req) {
             this.matcher = matcher;
             this.req = req;
         }
 
+        /**
+         * Retrieving the matcher.
+         * @return The matcher instance.
+         */
         @Override
         public Matcher matcher() {
             return matcher;
         }
 
+        /**
+         *
+         * @return The request head.
+         * @throws IOException if something goes wrong.
+         */
         @Override
         public Iterable<String> head() throws IOException {
             return req.head();
         }
 
+        /**
+         *
+         * @return The body of request.
+         * @throws IOException If something goes wrong.
+         */
         @Override
         public InputStream body() throws IOException {
             return req.body();

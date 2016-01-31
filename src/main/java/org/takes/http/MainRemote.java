@@ -43,7 +43,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 9fb2c6145a92a6852d8386812e05dc14eac3daae $
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -109,9 +109,9 @@ public final class MainRemote {
                 )
             );
         } finally {
-            if(!file.delete()){
+            if (!file.delete()) {
                 throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,"Can not delete file"
+                    HttpURLConnection.HTTP_BAD_REQUEST, "Can not delete file"
                 );
             }
             thread.interrupt();
@@ -138,8 +138,8 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new String(
-                buf, StandardCharsets.UTF_8).trim()
+            port = Integer.parseInt(
+                new String(buf, StandardCharsets.UTF_8).trim()
             );
         } finally {
             input.close();
@@ -151,6 +151,7 @@ public final class MainRemote {
      * Script to execute.
      */
     public interface Script {
+
         /**
          * Execute it against this URI.
          * @param home URI of the running front
@@ -159,19 +160,30 @@ public final class MainRemote {
         void exec(URI home) throws IOException;
     }
 
+    /**
+     * An Inner class for implementing the the Threading.
+     */
     private static class MainRemoteRunnable implements Runnable {
         private final Method method;
         private final String[] passed;
 
+        /**
+         * A constructor for the class.
+         * @param method The method object.
+         * @param passed The strings passing to the method.
+         */
         public MainRemoteRunnable(final Method method, final String[] passed) {
             this.method = method;
             this.passed = passed;
         }
 
+        /**
+         * The threding implementation.
+         */
         @Override
         public void run() {
             try {
-                method.invoke(null, (Object) passed);
+                this.method.invoke(null, (Object)  this.passed);
             } catch (final InvocationTargetException ex) {
                 throw new IllegalStateException(ex);
             } catch (final IllegalAccessException ex) {

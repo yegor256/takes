@@ -41,7 +41,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: bd4f727abda5aba1ed48605b16d873108bf44914 $
  * @since 0.1
  */
 @ToString(callSuper = true)
@@ -89,7 +89,7 @@ public final class RsPrint extends RsWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -101,7 +101,7 @@ public final class RsPrint extends RsWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -122,7 +122,8 @@ public final class RsPrint extends RsWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer = new OutputStreamWriter(output,StandardCharsets.UTF_8);
+        final Writer writer =
+            new OutputStreamWriter(output, StandardCharsets.UTF_8);
         int pos = 0;
         for (final String line : this.head()) {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
