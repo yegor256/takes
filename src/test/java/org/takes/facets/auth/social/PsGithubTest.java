@@ -56,15 +56,33 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
+    
     /**
      * GitHubToken.
      */
     private static final String GIT_HUB_TOKEN = "GitHubToken";
 
     /**
-     * XPath element access_token.
+     * XPath access_token string.
      */
     private static final String ACCESS_TOKEN = "access_token";
+
+    /**
+     * XPath login string.
+     */
+    private static final String LOGIN = "login";
+
+    /**
+     * Octocat URL string.
+     */
+    private static final String OCTOCAT_GIF_URL =
+        "https://github.com/img/octocat.gif";
+
+    /**
+     * XPath octocat string.
+     */
+    private static final String OCTOCAT = "octocat";
+
     /**
      * A Junit Exception test variable.
      */
@@ -79,7 +97,7 @@ public final class PsGithubTest {
     public void failOnNoAccessToken() throws IOException {
         this.thrown.expect(HttpException.class);
         this.thrown.expectMessage("No access token");
-        this.performLogin(PsGithubTest.getDirectiveWithoutAccessToken());
+        this.performLogin(PsGithubTest.directiveWithoutAccessToken());
     }
 
     /**
@@ -89,7 +107,7 @@ public final class PsGithubTest {
     @Test
     public void canLogin() throws IOException {
         this.performLogin(
-            PsGithubTest.getDirectiveWithoutAccessToken()
+            PsGithubTest.directiveWithoutAccessToken()
                 .add(PsGithubTest.ACCESS_TOKEN)
                 .set(PsGithubTest.GIT_HUB_TOKEN)
         );
@@ -101,6 +119,9 @@ public final class PsGithubTest {
      * @throws IOException If some problem inside.
      */
     private void performLogin(final Directives directive) throws IOException {
+        final String app = "app";
+        final String key = "key";
+
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
@@ -108,9 +129,11 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         final Request greq = new RqGreedy(req);
-                        PsGithubTest.assertParam(greq, "code", "code");
-                        PsGithubTest.assertParam(greq, "client_id", "app");
-                        PsGithubTest.assertParam(greq, "client_secret", "key");
+                        final String code = "code";
+                        PsGithubTest.assertParam(greq, code, code);
+
+                        PsGithubTest.assertParam(greq, "client_id", app);
+                        PsGithubTest.assertParam(greq, "client_secret", key);
                         return new RsXembly(
                             new XeDirectives(directive.toString())
                         );
@@ -128,8 +151,8 @@ public final class PsGithubTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     final Identity identity = new PsGithub(
-                        "app",
-                        "key",
+                        app,
+                        key,
                         home.toString(),
                         home.toString()
                     ).enter(new RqFake("GET", "?code=code")).get();
@@ -138,12 +161,12 @@ public final class PsGithubTest {
                         Matchers.equalTo("urn:github:1")
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("login"),
-                        Matchers.equalTo("octocat")
+                        identity.properties().get(LOGIN),
+                        Matchers.equalTo(OCTOCAT)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get("avatar"),
-                        Matchers.equalTo("https://github.com/img/octocat.gif")
+                        Matchers.equalTo(OCTOCAT_GIF_URL)
                     );
                 }
             }
@@ -154,7 +177,7 @@ public final class PsGithubTest {
      * Creates the basic directives, without access token.
      * @return A basic directive.
      */
-    private static Directives getDirectiveWithoutAccessToken() {
+    private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
             .add("token_type").set("bearer").up()
             .add("scope").set("repo,gist").up();
@@ -189,11 +212,11 @@ public final class PsGithubTest {
             );
             return new RsJSON(
                 Json.createObjectBuilder()
-                    .add("login", "octocat")
+                    .add(LOGIN, OCTOCAT)
                     .add("id", 1)
                     .add(
                         "avatar_url",
-                        "https://github.com/img/octocat.gif"
+                        OCTOCAT_GIF_URL
                     )
                     .build()
             );
