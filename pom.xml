@@ -361,7 +361,7 @@
                                 As this class need redesign and refactoring.
                                 See the class description for the exact problems.
                                 -->
-                                <exclude>checkstyle:\src\main\java\org\takes\http\Options.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/http/Options.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
