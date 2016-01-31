@@ -365,14 +365,14 @@
 
                                 <!--
                                 @todo #517 Found non-transient, non-static member.
-                                Checkstyle is complaining about transient variables,
+                                pmd is complaining about transient variables,
                                 while find bug is complaining the reverse.
                                 -->
-                                <exclude>checkstyle:/src/main/java/org/takes/facets/fork/FkRegex.java</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/http/MainRemote.java</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/HttpException.java</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/http/FtCLI.java</exclude>
-                                <exclude>checkstyle:/src/main/java/org/takes/facets/forward/RsForward.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkRegex.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/http/MainRemote.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/HttpException.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/http/FtCLI.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/forward/RsForward.java</exclude>
 
                             </excludes>
                         </configuration>
