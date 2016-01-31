@@ -62,7 +62,7 @@ public final class PsGithubTest {
     private static final String GIT_HUB_TOKEN = "GitHubToken";
 
     /**
-     * A constant for access_token.
+     * XPath element access_token.
      */
     private static final String ACCESS_TOKEN = "access_token";
     /**
@@ -72,11 +72,11 @@ public final class PsGithubTest {
     public transient ExpectedException thrown = ExpectedException.none();
 
     /**
-     * PsGithub can fails on no access token.
+     * PsGithub can fail on no access token.
      * @throws IOException If some problem inside.
      */
     @Test
-    public void failsOnNoAccessToken() throws IOException {
+    public void failOnNoAccessToken() throws IOException {
         this.thrown.expect(HttpException.class);
         this.thrown.expectMessage("No access token");
         this.performLogin(PsGithubTest.getDirectiveWithoutAccessToken());
@@ -96,10 +96,9 @@ public final class PsGithubTest {
     }
 
     /**
-     * A private method to perform the basic login.
+     * Performs the basic login.
      * @param directive The directive object.
      * @throws IOException If some problem inside.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)s
      */
     private void performLogin(final Directives directive) throws IOException {
         final Take take = new TkFork(
@@ -120,7 +119,7 @@ public final class PsGithubTest {
             ),
             new FkRegex(
                 "/user",
-                new PsGithubTestTake()
+                new TkFakeLogin()
             )
         );
         new FtRemote(take).exec(
@@ -152,7 +151,7 @@ public final class PsGithubTest {
     }
 
     /**
-     * A private method to create the basic directives, without access token.
+     * Creates the basic directives, without access token.
      * @return A basic directive.
      */
     private static Directives getDirectiveWithoutAccessToken() {
@@ -179,7 +178,7 @@ public final class PsGithubTest {
     /**
      * An inner class for the Take implementation testing.
      */
-    private static class PsGithubTestTake implements Take {
+    private static final class TkFakeLogin implements Take {
         @Override
         public Response act(final Request req) throws IOException {
             MatcherAssert.assertThat(
