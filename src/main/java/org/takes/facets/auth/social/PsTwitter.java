@@ -159,7 +159,7 @@ public final class PsTwitter implements Pass {
     */
     private static Identity parse(final JsonObject json) {
         final ConcurrentMap<String, String> props =
-                new ConcurrentHashMap<String, String>(json.size());
+            new ConcurrentHashMap<String, String>(json.size());
         props.put("name", json.getString("name"));
         props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(

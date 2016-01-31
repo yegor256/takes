@@ -98,7 +98,7 @@ public final class PsLinkedin implements Pass {
      * @checkstyle ParameterNumberCheck (3 lines)
      */
     public PsLinkedin(final Href thref, final Href ahref,
-            final String lapp, final String lkey) {
+        final String lapp, final String lkey) {
         this.tkhref = thref;
         this.apihref = ahref;
         this.app = lapp;

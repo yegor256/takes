@@ -71,9 +71,10 @@ public final class HmRsHeaderTest {
     public void testsHeaderNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RsWithBody("<html></html>"),
-            new HmRsHeader(
-                Matchers.not(Matchers.equalTo("cache-control")),
-                Matchers.not(Matchers.hasItems("no-cache", "no-store"))
+            Matchers.not(
+                new HmRsHeader(
+                    "cache-control", Matchers.hasItems("no-cache", "no-store")
+                )
             )
         );
     }
@@ -125,7 +126,7 @@ public final class HmRsHeaderTest {
     public void testsHeadersNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RsWithHeaders(new RsEmpty(), "header4: value4"),
-            new HmRsHeader("header41", Matchers.<String>iterableWithSize(0))
+            new HmRsHeader("header41", Matchers.emptyIterableOf(String.class))
         );
     }
 
@@ -144,7 +145,7 @@ public final class HmRsHeaderTest {
         );
         final StringDescription description = new StringDescription();
         final RsWithHeader req =
-                new RsWithHeader(HmRsHeaderTest.CONTENT_TYPE, "image/png");
+            new RsWithHeader(HmRsHeaderTest.CONTENT_TYPE, "image/png");
         matcher.matchesSafely(req);
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(

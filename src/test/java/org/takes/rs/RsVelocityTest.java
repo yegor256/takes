@@ -63,17 +63,17 @@ public final class RsVelocityTest {
     @Test
     public void closesTemplateInputStream() throws IOException {
         final String template = "hello, world!";
-        final StateAwareInputStream templateStream =
+        final StateAwareInputStream stream =
             new StateAwareInputStream(IOUtils.toInputStream(template));
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
-                    templateStream,
+                    stream,
                     Collections.<CharSequence, Object>emptyMap()
                 ).body()
             ),
             Matchers.equalTo(template)
         );
-        MatcherAssert.assertThat(templateStream.isClosed(), Matchers.is(true));
+        MatcherAssert.assertThat(stream.isClosed(), Matchers.is(true));
     }
 }

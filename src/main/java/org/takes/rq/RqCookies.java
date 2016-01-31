@@ -62,7 +62,7 @@ public interface RqCookies extends Request {
      * Request decorator, for HTTP cookies parsing.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
      * @since 0.14
      */

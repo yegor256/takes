@@ -82,7 +82,7 @@ public final class PsGithub implements Pass {
      * @param gkey Github key
      */
     public PsGithub(final String gapp, final String gkey) {
-      this(gapp, gkey, "https://github.com", "https://api.github.com");
+        this(gapp, gkey, "https://github.com", "https://api.github.com");
     }
 
     /**

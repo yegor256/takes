@@ -21,48 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes;
+package org.takes.rq;
 
 import java.io.IOException;
-import java.io.InputStream;
+import org.takes.Request;
 
 /**
- * HTTP request.
- *
- * <p>An object implementing this interface can be "parsed" using one
- * of the decorators available in {@link org.takes.rq} package. For example,
- * in order to fetch a query parameter you can use
- * {@link org.takes.rq.RqHref}:
- *
- * <pre> final Iterable&lt;String&gt; params =
- *   new RqHref(request).href().param("name");</pre>
- *
- * <p>All implementations of this interface must be immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Request with default header.
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.1
- * @see org.takes.Response
- * @see org.takes.Take
- * @see org.takes.facets.fork.RqRegex
- * @see org.takes.rq.RqHref
- * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">
- *     Composable Decorators vs. Imperative Utility Methods</a>
+ * @since 0.31
  */
-public interface Request {
+public final class RqWithDefaultHeader extends RqWrap {
 
     /**
-     * All lines above the body.
-     * @return List of lines
-     * @throws IOException If something goes wrong
+     * Ctor.
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @throws IOException in case of request errors
      */
-    Iterable<String> head() throws IOException;
+    public RqWithDefaultHeader(final Request req,
+        final String hdr,
+        final String val) throws IOException {
+        super(RqWithDefaultHeader.build(req, hdr, val));
+    }
 
     /**
-     * HTTP request body.
-     * @return Stream with body
-     * @throws IOException If something goes wrong
+     * Builds the request with the default header if it is not already present.
+     * @param req Original request.
+     * @param hdr Header name.
+     * @param val Header value.
+     * @return The new request.
+     * @throws IOException in case of request errors
      */
-    InputStream body() throws IOException;
+    private static Request build(final Request req,
+        final String hdr, final String val) throws IOException {
+        final Request request;
+        if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
+            request = req;
+        } else {
+            request = new RqWithHeader(req, hdr, val);
+        }
+        return request;
+    }
 
 }

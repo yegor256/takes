@@ -21,49 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 
 /**
- * A Take decorator which reads and ignores the request body.
+ * Request decorator that limits its body, according to
+ * the chunk sizes when it is a chunked Transfer-Encoding.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Dan Baleanu (dan.baleanu@gmail.com)
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- * @since 0.30
+ * @since 0.15
+ * @see org.takes.rq.RqPrint
  */
-@ToString(of = {"origin"})
-@EqualsAndHashCode(of = {"origin"})
-public final class TkReadAlways implements Take {
-
-    /**
-     * Original take.
-     */
-    private final transient Take origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
-     * @param take Original take
+     * @param req Original request
      */
-    public TkReadAlways(final Take take) {
-        this.origin = take;
+    public RqChunk(final Request req) {
+        super(
+            new Request() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return req.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RqChunk.cap(req);
+                }
+            }
+        );
     }
 
-    @Override
-    public Response act(final Request req) throws IOException {
-        final Response res = this.origin.act(req);
-        for (int count = req.body().available(); count > 0;
-            count = req.body().available()) {
-            req.body().skip(count);
+    /**
+     * Cap the steam.
+     * @param req Request
+     * @return Stream with a cap
+     * @throws IOException If fails
+     */
+    private static InputStream cap(final Request req) throws IOException {
+        final Iterator<String> hdr = new RqHeaders.Base(req)
+            .header("Transfer-Encoding").iterator();
+        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
+            throw new UnsupportedOperationException();
         }
-        return res;
+        return req.body();
     }
 
 }
