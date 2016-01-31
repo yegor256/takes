@@ -57,7 +57,7 @@ import org.xembly.Directives;
  */
 public final class PsGithubTest {
     /**
-     * A constant for GitHubToken.
+     * GitHubToken.
      */
     private static final String GIT_HUB_TOKEN = "GitHubToken";
 
@@ -72,13 +72,13 @@ public final class PsGithubTest {
     public transient ExpectedException thrown = ExpectedException.none();
 
     /**
-     * PsGithub can throw HttpExeption.
+     * PsGithub can fails on no access token.
      * @throws IOException If some problem inside.
      */
     @Test
-    public void throwHttpException() throws IOException {
+    public void failsOnNoAccessToken() throws IOException {
         this.thrown.expect(HttpException.class);
-        this.thrown.expectMessage("Invalid XML");
+        this.thrown.expectMessage("No access token");
         this.performLogin(PsGithubTest.getDirectiveWithoutAccessToken());
     }
 
@@ -152,8 +152,7 @@ public final class PsGithubTest {
     }
 
     /**
-     * A private method to create the basic directive.
-     * without the access token.
+     * A private method to create the basic directives, without access token.
      * @return A basic directive.
      */
     private static Directives getDirectiveWithoutAccessToken() {

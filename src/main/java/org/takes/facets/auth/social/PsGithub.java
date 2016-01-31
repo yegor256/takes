@@ -169,7 +169,7 @@ public final class PsGithub implements Pass {
                 .xml().xpath("/OAuth/access_token/text()").get(0);
         } catch (final IndexOutOfBoundsException exception) {
             throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST, "Invalid XML", exception
+                HttpURLConnection.HTTP_BAD_REQUEST, "No access token", exception
             );
         }
     }
