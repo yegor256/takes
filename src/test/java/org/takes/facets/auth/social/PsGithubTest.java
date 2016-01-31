@@ -56,7 +56,7 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
-    
+
     /**
      * GitHubToken.
      */
@@ -94,7 +94,7 @@ public final class PsGithubTest {
      * @throws IOException If some problem inside.
      */
     @Test
-    public void failOnNoAccessToken() throws IOException {
+    public void failsOnNoAccessToken() throws IOException {
         this.thrown.expect(HttpException.class);
         this.thrown.expectMessage("No access token");
         this.performLogin(PsGithubTest.directiveWithoutAccessToken());
