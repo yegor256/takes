@@ -37,7 +37,7 @@ import org.takes.rq.RqWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: ac8667ede0d9fe7dedfcf763f71cb00a8254d9f7 $
+ * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
@@ -131,42 +131,13 @@ public final class FtCLI implements Front {
         final long max = this.options.lifetime();
         return new Exit.Or(
             exit,
-            new FtCLIExit(start, max)
+            new Exit() {
+                @Override
+                public boolean ready() {
+                    return System.currentTimeMillis() - start > max;
+                }
+            }
         );
     }
 
-    /**
-     * A inner class to implement the Exit.
-     */
-    private static class FtCLIExit implements Exit {
-
-        /**
-         * Start field.
-         */
-        private final long start;
-
-        /**
-         * Max variable.
-         */
-        private final long max;
-
-        /**
-         * The constructor of the class.
-         * @param start The start value.
-         * @param max The max value.
-         */
-        FtCLIExit(final long start, final long max) {
-            this.start = start;
-            this.max = max;
-        }
-
-        /**
-         * Calculate the readiness.
-         * @return It return true if it is ready.
-         */
-        @Override
-        public boolean ready() {
-            return System.currentTimeMillis() - this.start > this.max;
-        }
-    }
 }

@@ -31,16 +31,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.net.HttpURLConnection;
 import java.net.ServerSocket;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
 
 /**
  * Command line options.
@@ -48,19 +45,8 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 27bab18e3251f714da54d31f464288973f6a101f $
+ * @version $Id$
  * @since 0.2
- *
- * @todo  #517 This class need refactoring
- * Reason one: Class Data Abstraction Coupling is 8 (max allowed is 7)
- * classes [
- *      ConcurrentHashMap, File, FileInputStream, FileOutputStream,
- *      HttpException, InputStreamReader, OutputStreamWriter,
- *      ServerSocket
- * ]. (ClassDataAbstractionCouplingCheck)
- *
- * Reason 2:
- *      Nested if-else depth is 2 (max allowed is 1). (NestedIfDepthCheck)
  */
 @EqualsAndHashCode(of = "map")
 final class Options {
@@ -127,17 +113,12 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 final Reader reader = new InputStreamReader(
-                    new FileInputStream(file), StandardCharsets.UTF_8
+                    new FileInputStream(file)
                 );
                 try {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
-                    if (reader.read(chars) < 0) {
-                        throw new HttpException(
-                            HttpURLConnection.HTTP_BAD_REQUEST,
-                            "The end of the stream has been reached"
-                        );
-                    }
+                    reader.read(chars);
                     socket = new ServerSocket(
                         Integer.parseInt(new String(chars))
                     );
@@ -147,7 +128,7 @@ final class Options {
             } else {
                 socket = new ServerSocket(0);
                 final Writer writer = new OutputStreamWriter(
-                    new FileOutputStream(file), StandardCharsets.UTF_8
+                    new FileOutputStream(file)
                 );
                 try {
                     writer.append(Integer.toString(socket.getLocalPort()));

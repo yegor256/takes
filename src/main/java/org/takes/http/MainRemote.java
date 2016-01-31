@@ -29,13 +29,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.takes.HttpException;
 
 /**
  * Front remote control.
@@ -43,7 +40,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 9fb2c6145a92a6852d8386812e05dc14eac3daae $
+ * @version $Id$
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -83,7 +80,6 @@ public final class MainRemote {
      * Execute this script against a running front.
      * @param script Script to run
      * @throws Exception If fails
-     * @todo #517 Find a better way to use the success of delete in the finally.
      */
     public void exec(final MainRemote.Script script) throws Exception {
         final File file = File.createTempFile("takes-", ".txt");
@@ -97,7 +93,18 @@ public final class MainRemote {
             passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
-            new MainRemoteRunnable(method, passed)
+            new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        method.invoke(null, (Object) passed);
+                    } catch (final InvocationTargetException ex) {
+                        throw new IllegalStateException(ex);
+                    } catch (final IllegalAccessException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            }
         );
         thread.start();
         try {
@@ -110,11 +117,7 @@ public final class MainRemote {
                 )
             );
         } finally {
-            if (!file.delete()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST, "Can not delete file"
-                );
-            }
+            file.delete();
             thread.interrupt();
         }
     }
@@ -139,9 +142,7 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(
-                new String(buf, StandardCharsets.UTF_8).trim()
-            );
+            port = Integer.parseInt(new String(buf).trim());
         } finally {
             input.close();
         }
@@ -152,7 +153,6 @@ public final class MainRemote {
      * Script to execute.
      */
     public interface Script {
-
         /**
          * Execute it against this URI.
          * @param home URI of the running front
@@ -161,50 +161,4 @@ public final class MainRemote {
         void exec(URI home) throws IOException;
     }
 
-    /**
-     * An Inner class for implementing the the Threading.
-     * @todo  #517 Convert the field variables to transient.
-     * Found non-transient, non-static member.
-     *
-     * @todo  #517
-     *
-     * @todo  #517
-     */
-    private static class MainRemoteRunnable implements Runnable {
-
-        /**
-         * Method variable.
-         */
-        private final Method method;
-
-        /**
-         * Passed values.
-         */
-        private final String[] passed;
-
-        /**
-         * A constructor for the class.
-         * @param method The method object.
-         * @param passed The strings passing to the method.
-         * @todo #517 The user-supplied array 'passed' is stored directly.
-         */
-        MainRemoteRunnable(final Method method, final String... passed) {
-            this.method = method;
-            this.passed = passed;
-        }
-
-        /**
-         * The threding implementation.
-         */
-        @Override
-        public void run() {
-            try {
-                this.method.invoke(null, (Object)  this.passed);
-            } catch (final InvocationTargetException ex) {
-                throw new IllegalStateException(ex);
-            } catch (final IllegalAccessException ex) {
-                throw new IllegalStateException(ex);
-            }
-        }
-    }
 }

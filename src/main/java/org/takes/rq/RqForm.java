@@ -163,8 +163,9 @@ public interface RqForm extends Request {
                     final ByteArrayOutputStream
                         baos = new ByteArrayOutputStream();
                     new RqPrint(this.req).printBody(baos);
-                    final String body =
-                        new String(baos.toByteArray(), StandardCharsets.UTF_8);
+                    final String body = new String(
+                        baos.toByteArray(), StandardCharsets.UTF_8
+                    );
                     final ConcurrentMap<String, List<String>> map =
                         new ConcurrentHashMap<String, List<String>>(1);
                     // @checkstyle MultipleStringLiteralsCheck (1 line)

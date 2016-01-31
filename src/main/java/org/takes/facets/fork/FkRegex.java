@@ -56,7 +56,7 @@ import org.takes.tk.TkText;
  * <p>Also, keep in mind that the second argument of the constructor may
  * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
- * convenient to reuse regular expression match, for example:
+ * convenient to reuse regular expression matcher, for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -65,9 +65,9 @@ import org.takes.tk.TkText;
  *       &#64;Override
  *       public Response act(final RqRegex req) {
  *         // Here we immediately getting access to the
- *         // match that was used during parsing of
+ *         // matcher that was used during parsing of
  *         // the incoming request
- *         final String file = req.match().group(1);
+ *         final String file = req.matcher().group(1);
  *       }
  *     }
  *   )
@@ -76,7 +76,7 @@ import org.takes.tk.TkText;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: f2810e906b1f0c42db9c9f328b2545dad77a18b5 $
+ * @version $Id$
  * @since 0.4
  * @see TkFork
  * @see TkRegex
@@ -188,7 +188,20 @@ public final class FkRegex implements Fork {
         if (matcher.matches()) {
             resp = new Opt.Single<Response>(
                 this.target.act(
-                    new FkRegexRqRegex(matcher, req)
+                    new RqRegex() {
+                        @Override
+                        public Matcher matcher() {
+                            return matcher;
+                        }
+                        @Override
+                        public Iterable<String> head() throws IOException {
+                            return req.head();
+                        }
+                        @Override
+                        public InputStream body() throws IOException {
+                            return req.body();
+                        }
+                    }
                 )
             );
         } else {
@@ -197,58 +210,4 @@ public final class FkRegex implements Fork {
         return resp;
     }
 
-    /**
-     * A private inner class for RqRegex implementation.
-     */
-    private static class FkRegexRqRegex implements RqRegex {
-
-        /**
-         * Match variable.
-         */
-        private final Matcher match;
-
-        /**
-         * Request.
-         */
-        private final Request req;
-
-        /**
-         * Constructor for the class.
-         * @param match The match object.
-         * @param req The Request object.
-         */
-        FkRegexRqRegex(final Matcher match, final Request req) {
-            this.match = match;
-            this.req = req;
-        }
-
-        /**
-         * Retrieving the match.
-         * @return The match instance.
-         */
-        @Override
-        public Matcher matcher() {
-            return this.match;
-        }
-
-        /**
-         * Retrieving the head value.
-         * @return The request head.
-         * @throws IOException if something goes wrong.
-         */
-        @Override
-        public Iterable<String> head() throws IOException {
-            return this.req.head();
-        }
-
-        /**
-         * Retrieving the body value.
-         * @return The body of request.
-         * @throws IOException If something goes wrong.
-         */
-        @Override
-        public InputStream body() throws IOException {
-            return this.req.body();
-        }
-    }
 }
