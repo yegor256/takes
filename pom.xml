@@ -358,7 +358,8 @@
 
                                 <!--
                                 @todo #517:30min Continue fixing FindBugs violations started in #517.
-                                 and remove all excludes of findbugs below.
+                                 #517 turned on the find bugs, temporarily excluded the find bugs.
+                                 Remove all excludes of findbugs below and fix the issues.
                                 -->
                                 <exclude>findbugs:org.takes.HttpException</exclude>
                                 <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>
