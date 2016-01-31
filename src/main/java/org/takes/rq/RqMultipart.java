@@ -493,23 +493,23 @@ public interface RqMultipart extends Request {
         }
 
         /**
-         * A private inner class for the specific implementation
-         * for the RqMultipart. see the over ridden methods for details.
+         * This class is  for the specific implementation
+         * for the RqMultipart. see the overridden methods for details.
          *
          * @todo #517:30min re-design the class.
-         * Why the super class is encapsulated inside the class?
-         * Find an implementation without doing aggregation
-         * and extending the same class
+         *  Why the super class is encapsulated inside the class?
+         *  Find an implementation without doing aggregation
+         *  and extending the same class
          */
         private static class RqMultipartRequest implements Request {
 
             /**
-             * Request variable encapsulated.
+             * Request object holds value for the header.
              */
             private final Request req;
 
             /**
-             * An array of Dispositions.
+             * Holding multiple request body parts.
              */
             private final Request[] dispositions;
 
