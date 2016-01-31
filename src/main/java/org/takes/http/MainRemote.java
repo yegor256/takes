@@ -109,6 +109,9 @@ public final class MainRemote {
                 )
             );
         } finally {
+            /**
+             * @todo # 517 find a better way to use the success of delete.
+             */
             if (!file.delete()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST, "Can not delete file"
@@ -162,6 +165,12 @@ public final class MainRemote {
 
     /**
      * An Inner class for implementing the the Threading.
+     * @todo  #517 Convert the field variables to transient.
+     * Found non-transient, non-static member.
+     *
+     * @todo  #517
+     *
+     * @todo  #517
      */
     private static class MainRemoteRunnable implements Runnable {
 
@@ -179,8 +188,10 @@ public final class MainRemote {
          * A constructor for the class.
          * @param method The method object.
          * @param passed The strings passing to the method.
+         *
+         * @todo  #517  The user-supplied array 'passed' is stored directly.
          */
-        MainRemoteRunnable(final Method method, final String[] passed) {
+        MainRemoteRunnable(final Method method, final String... passed) {
             this.method = method;
             this.passed = passed;
         }
