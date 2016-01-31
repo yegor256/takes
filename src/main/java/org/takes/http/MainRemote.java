@@ -83,6 +83,7 @@ public final class MainRemote {
      * Execute this script against a running front.
      * @param script Script to run
      * @throws Exception If fails
+     * @todo #517 Find a better way to use the success of delete in the finally.
      */
     public void exec(final MainRemote.Script script) throws Exception {
         final File file = File.createTempFile("takes-", ".txt");
@@ -109,9 +110,6 @@ public final class MainRemote {
                 )
             );
         } finally {
-            /**
-             * @todo # 517 find a better way to use the success of delete.
-             */
             if (!file.delete()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST, "Can not delete file"
@@ -188,8 +186,7 @@ public final class MainRemote {
          * A constructor for the class.
          * @param method The method object.
          * @param passed The strings passing to the method.
-         *
-         * @todo  #517  The user-supplied array 'passed' is stored directly.
+         * @todo #517 The user-supplied array 'passed' is stored directly.
          */
         MainRemoteRunnable(final Method method, final String... passed) {
             this.method = method;
