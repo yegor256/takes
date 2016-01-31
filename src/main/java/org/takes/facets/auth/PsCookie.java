@@ -43,7 +43,7 @@ import org.takes.rs.RsWithCookie;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 7872fcda977643bf707f6fae9c633a6f1457ecad $
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "codec", "cookie", "age" })
@@ -117,7 +117,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new String(this.codec.encode(idt),StandardCharsets.UTF_8);
+            text = new String(this.codec.encode(idt), StandardCharsets.UTF_8);
         }
         return new RsWithCookie(
             res, this.cookie, text,

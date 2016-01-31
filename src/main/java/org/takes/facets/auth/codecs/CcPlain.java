@@ -41,7 +41,7 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 23c614d2296ce93378179f5630b0e6cc8573d75b $
  * @since 0.1
  */
 @EqualsAndHashCode
@@ -66,7 +66,7 @@ public final class CcPlain implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final String[] parts =
-            new String(bytes,StandardCharsets.UTF_8).split(";");
+            new String(bytes, StandardCharsets.UTF_8).split(";");
         final ConcurrentMap<String, String> map =
             new ConcurrentHashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {

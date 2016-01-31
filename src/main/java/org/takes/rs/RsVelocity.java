@@ -65,7 +65,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 3e8f083eee5a0b5dd55ba29bdf51d15052bf3f9a $
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -81,8 +81,11 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final CharSequence template,
         final RsVelocity.Pair... params) {
-        this(new ByteArrayInputStream(
-            template.toString().getBytes(StandardCharsets.UTF_8)), params
+        this(
+            new ByteArrayInputStream(
+                template.toString()
+                    .getBytes(StandardCharsets.UTF_8)
+            ), params
         );
     }
 
@@ -140,7 +143,7 @@ public final class RsVelocity extends RsWrap {
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer =
-            new OutputStreamWriter(baos,StandardCharsets.UTF_8);
+            new OutputStreamWriter(baos, StandardCharsets.UTF_8);
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
@@ -150,7 +153,7 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new InputStreamReader(page,StandardCharsets.UTF_8)
+            new InputStreamReader(page, StandardCharsets.UTF_8)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());

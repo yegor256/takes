@@ -58,7 +58,7 @@ import org.takes.misc.VerboseIterable;
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
  * @since 0.9
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -90,7 +90,7 @@ public interface RqMultipart extends Request {
      * <p>The class is immutable and thread-safe.
      *
      * @author Yegor Bugayenko (yegor@teamed.io)
-     * @version $Id$
+     * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
      * @since 0.9
      * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
      *     Forms in HTML</a>
@@ -492,15 +492,30 @@ public interface RqMultipart extends Request {
             return builder;
         }
 
+        /**
+         * A private inner class for the Request implementation.
+         */
         private static class RqMultipartRequest implements Request {
             private final Request req;
             private final Request[] dispositions;
 
-            public RqMultipartRequest(final Request req, final Request... dispositions) {
+            /**
+             * The Constructor for the class.
+             * @param req The Request object.
+             * @param dispositions The disposition list.
+             */
+            public RqMultipartRequest(
+                final Request req, final Request... dispositions
+            ) {
                 this.req = req;
                 this.dispositions = dispositions;
             }
 
+            /**
+             * Retrieving the head.
+             * @return The head value.
+             * @throws IOException If something goes wrong.
+             */
             @Override
             public Iterable<String> head() throws IOException {
                 return new RqWithHeaders(
@@ -517,6 +532,11 @@ public interface RqMultipart extends Request {
                 ).head();
             }
 
+            /**
+             * The body retrieving from the request.
+             * @return The body.
+             * @throws IOException
+             */
             @Override
             public InputStream body() throws IOException {
                 return Fake.fakeStream(dispositions);

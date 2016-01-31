@@ -48,7 +48,7 @@ import org.takes.HttpException;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 27bab18e3251f714da54d31f464288973f6a101f $
  * @since 0.2
  */
 @EqualsAndHashCode(of = "map")
@@ -121,7 +121,7 @@ final class Options {
                 try {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
-                    if(reader.read(chars)<0){
+                    if( reader.read(chars) < 0 ) {
                         throw new HttpException(
                             HttpURLConnection.HTTP_BAD_REQUEST,
                             "The end of the stream has been reached"
@@ -136,7 +136,7 @@ final class Options {
             } else {
                 socket = new ServerSocket(0);
                 final Writer writer = new OutputStreamWriter(
-                    new FileOutputStream(file),StandardCharsets.UTF_8
+                    new FileOutputStream(file), StandardCharsets.UTF_8
                 );
                 try {
                     writer.append(Integer.toString(socket.getLocalPort()));

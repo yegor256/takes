@@ -41,7 +41,7 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 5a72dbe7dab049cdc95fbfaed481c0edccc7536e $
  * @since 0.1
  * @checkstyle CyclomaticComplexityCheck (500 lines)
  */
@@ -135,7 +135,7 @@ public final class RqLive extends RqWrap {
         Opt<String> header = new Opt.Empty<String>();
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Opt.Single<String>(
-                new String(baos.toByteArray(),StandardCharsets.UTF_8)
+                new String(baos.toByteArray(), StandardCharsets.UTF_8)
             );
             baos.reset();
         }
@@ -163,7 +163,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new String(baos.toByteArray(),StandardCharsets.UTF_8)
+                    new String(baos.toByteArray(), StandardCharsets.UTF_8)
                 )
             );
         }

@@ -39,7 +39,7 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: c67c6af2968194cb8b29b7906fa0b407b10299ba $
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
@@ -82,7 +82,7 @@ public final class RqPrint extends RqWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**
@@ -93,7 +93,7 @@ public final class RqPrint extends RqWrap {
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer =
-            new OutputStreamWriter(output,StandardCharsets.UTF_8);
+            new OutputStreamWriter(output, StandardCharsets.UTF_8);
         for (final String line : this.head()) {
             writer.append(line);
             writer.append(eol);
@@ -110,7 +110,7 @@ public final class RqPrint extends RqWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray(),StandardCharsets.UTF_8);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     /**

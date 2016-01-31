@@ -35,7 +35,7 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
+ * @version $Id: 64986f75e2afac34cbdbd983e0bb43af32a7a932 $
  * @since 0.22
  */
 @EqualsAndHashCode(callSuper = true)
@@ -54,7 +54,9 @@ public final class RqWithBody extends RqWrap {
             }
             @Override
             public InputStream body() {
-                return new ByteArrayInputStream(bdy.toString().getBytes(StandardCharsets.UTF_8));
+                return new ByteArrayInputStream(
+                    bdy.toString().getBytes(StandardCharsets.UTF_8)
+                );
             }
         });
     }
