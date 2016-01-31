@@ -56,7 +56,7 @@ import org.takes.tk.TkText;
  * <p>Also, keep in mind that the second argument of the constructor may
  * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
- * convenient to reuse regular expression matcher, for example:
+ * convenient to reuse regular expression match, for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -65,9 +65,9 @@ import org.takes.tk.TkText;
  *       &#64;Override
  *       public Response act(final RqRegex req) {
  *         // Here we immediately getting access to the
- *         // matcher that was used during parsing of
+ *         // match that was used during parsing of
  *         // the incoming request
- *         final String file = req.matcher().group(1);
+ *         final String file = req.match().group(1);
  *       }
  *     }
  *   )
@@ -203,9 +203,9 @@ public final class FkRegex implements Fork {
     private static class FkRegexRqRegex implements RqRegex {
 
         /**
-         * Macher.
+         * match variable.
          */
-        private final Matcher matcher;
+        private final Matcher match;
 
         /**
          * Request.
@@ -214,21 +214,21 @@ public final class FkRegex implements Fork {
 
         /**
          * Constructor for the class.
-         * @param matcher The matcher object.
+         * @param match The match object.
          * @param req The Request object.
          */
-        FkRegexRqRegex(final Matcher matcher, final Request req) {
-            this.matcher = matcher;
+        FkRegexRqRegex(final Matcher match, final Request req) {
+            this.match = match;
             this.req = req;
         }
 
         /**
-         * Retrieving the matcher.
-         * @return The matcher instance.
+         * Retrieving the match.
+         * @return The match instance.
          */
         @Override
         public Matcher matcher() {
-            return this.matcher;
+            return this.match;
         }
 
         /**
