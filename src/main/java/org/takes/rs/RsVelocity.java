@@ -83,8 +83,7 @@ public final class RsVelocity extends RsWrap {
         final RsVelocity.Pair... params) {
         this(
             new ByteArrayInputStream(
-                template.toString()
-                    .getBytes(StandardCharsets.UTF_8)
+                template.toString().getBytes(StandardCharsets.UTF_8)
             ), params
         );
     }
@@ -142,8 +141,9 @@ public final class RsVelocity extends RsWrap {
     private static InputStream render(final InputStream page,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer =
-            new OutputStreamWriter(baos, StandardCharsets.UTF_8);
+        final Writer writer = new OutputStreamWriter(
+            baos, StandardCharsets.UTF_8
+        );
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,

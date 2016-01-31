@@ -493,24 +493,30 @@ public interface RqMultipart extends Request {
         }
 
         /**
-         * A private inner class for the Request implementation.
+         * A private inner class for the specific implementation
+         * for the RqMultipart. see the over ridden methods for details.
+         *
+         * @todo #517:30min re-design the class.
+         * Why the super class is encapsulated inside the class?
+         * Find an implementation without doing aggregation
+         * and extending the same class
          */
         private static class RqMultipartRequest implements Request {
 
             /**
-             * Request variable.
+             * Request variable encapsulated.
              */
             private final Request req;
 
             /**
-             * Dispositions.
+             * An array of Dispositions.
              */
             private final Request[] dispositions;
 
             /**
              * The Constructor for the class.
-             * @param req The Request object.
-             * @param dispositions The disposition list.
+             * @param req The Request object
+             * @param dispositions The disposition list
              */
             RqMultipartRequest(
                 final Request req, final Request... dispositions
@@ -519,11 +525,6 @@ public interface RqMultipart extends Request {
                 this.dispositions = dispositions;
             }
 
-            /**
-             * Retrieving the head.
-             * @return The head value.
-             * @throws IOException If something goes wrong.
-             */
             @Override
             public Iterable<String> head() throws IOException {
                 return new RqWithHeaders(
@@ -540,11 +541,6 @@ public interface RqMultipart extends Request {
                 ).head();
             }
 
-            /**
-             * The body retrieving from the request.
-             * @return The body.
-             * @throws IOException
-             */
             @Override
             public InputStream body() throws IOException {
                 return Fake.fakeStream(this.dispositions);

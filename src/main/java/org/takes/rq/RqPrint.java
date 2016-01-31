@@ -92,8 +92,9 @@ public final class RqPrint extends RqWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer =
-            new OutputStreamWriter(output, StandardCharsets.UTF_8);
+        final Writer writer = new OutputStreamWriter(
+            output, StandardCharsets.UTF_8
+        );
         for (final String line : this.head()) {
             writer.append(line);
             writer.append(eol);
