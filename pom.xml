@@ -357,12 +357,11 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
 
                                 <!--
-                                @todo #517:240min pending tasks in fixing findbugs.
-                                major bugs find in these classes are [
+                                @todo #517:30min pending tasks in fixing findbugs.
+                                major bugs find in these classes are
                                     Synchronization performed on java.util.concurrent.CopyOnWriteArrayList
                                     refactored into a named _static_ inner class
                                     transient but isn't set by deserialization
-                                 ]
                                 -->
                                 <exclude>findbugs:org.takes.HttpException</exclude>
                                 <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>
