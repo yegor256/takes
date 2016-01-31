@@ -37,7 +37,7 @@ import org.takes.rq.RqWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: ac8667ede0d9fe7dedfcf763f71cb00a8254d9f7 $
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
@@ -139,7 +139,15 @@ public final class FtCLI implements Front {
      * A inner class to implement the Exit.
      */
     private static class FtCLIExit implements Exit {
+
+        /**
+         * Start field.
+         */
         private final long start;
+
+        /**
+         * Max variable.
+         */
         private final long max;
 
         /**
@@ -147,18 +155,18 @@ public final class FtCLI implements Front {
          * @param start The start value.
          * @param max The max value.
          */
-        public FtCLIExit(final long start, final long max) {
+        FtCLIExit(final long start, final long max) {
             this.start = start;
             this.max = max;
         }
 
         /**
-         *
-         * @return true if it is ready.
+         * Calculate the readiness.
+         * @return It return true if it is ready.
          */
         @Override
         public boolean ready() {
-            return System.currentTimeMillis() - start > max;
+            return System.currentTimeMillis() - this.start > this.max;
         }
     }
 }

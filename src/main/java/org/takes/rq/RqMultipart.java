@@ -58,7 +58,7 @@ import org.takes.misc.VerboseIterable;
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
  * @since 0.9
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -90,7 +90,7 @@ public interface RqMultipart extends Request {
      * <p>The class is immutable and thread-safe.
      *
      * @author Yegor Bugayenko (yegor@teamed.io)
-     * @version $Id$
+     * @version $Id: 42c6d726ea0545c4aff5e07185e4f849783b1330 $
      * @since 0.9
      * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
      *     Forms in HTML</a>
@@ -496,7 +496,15 @@ public interface RqMultipart extends Request {
          * A private inner class for the Request implementation.
          */
         private static class RqMultipartRequest implements Request {
+
+            /**
+             * Request variable.
+             */
             private final Request req;
+
+            /**
+             * Dispositions.
+             */
             private final Request[] dispositions;
 
             /**
@@ -504,7 +512,7 @@ public interface RqMultipart extends Request {
              * @param req The Request object.
              * @param dispositions The disposition list.
              */
-            public RqMultipartRequest(
+            RqMultipartRequest(
                 final Request req, final Request... dispositions
             ) {
                 this.req = req;
@@ -519,7 +527,7 @@ public interface RqMultipart extends Request {
             @Override
             public Iterable<String> head() throws IOException {
                 return new RqWithHeaders(
-                    req,
+                    this.req,
                     String.format(
                         //@checkstyle LineLength (1 line)
                         "Content-Type: multipart/form-data; boundary=%s",
@@ -527,7 +535,7 @@ public interface RqMultipart extends Request {
                     ),
                     String.format(
                         "Content-Length: %s",
-                        Fake.fakeBody(dispositions).length()
+                        Fake.fakeBody(this.dispositions).length()
                     )
                 ).head();
             }
@@ -539,7 +547,7 @@ public interface RqMultipart extends Request {
              */
             @Override
             public InputStream body() throws IOException {
-                return Fake.fakeStream(dispositions);
+                return Fake.fakeStream(this.dispositions);
             }
         }
     }
