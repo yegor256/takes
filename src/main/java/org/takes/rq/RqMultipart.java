@@ -428,7 +428,7 @@ public interface RqMultipart extends Request {
             throws IOException {
             this.fake = new RqMultipart.Base(
                 //@checkstyle AnonInnerLength (1 line)
-                new RqMultipartRequest(req, dispositions)
+                new FakeMultipartRequest(req, dispositions)
             );
         }
         @Override
@@ -494,9 +494,9 @@ public interface RqMultipart extends Request {
 
         /**
          * This class is using a decorator pattern for representing
-         * a one-to many header-body relation.
+         * a fake HTTP multipart request.
          */
-        private static class RqMultipartRequest implements Request {
+        private static class FakeMultipartRequest implements Request {
 
             /**
              * Request object. Holds a value for the header.
@@ -511,9 +511,9 @@ public interface RqMultipart extends Request {
             /**
              * The Constructor for the class.
              * @param req The Request object
-             * @param dispositions The disposition list
+             * @param dispositions The sequence of dispositions
              */
-            RqMultipartRequest(
+            FakeMultipartRequest(
                 final Request req, final Request... dispositions
             ) {
                 this.req = req;

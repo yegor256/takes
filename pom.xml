@@ -358,7 +358,7 @@
 
                                 <!--
                                 @todo #517:30min Continue fixing FindBugs violations started in #517.
-                                 #517 turned on the FindBugs, temporarily excluded the find bugs.
+                                 #517 turned on the FindBugs, temporarily excluding some classes.
                                  Remove all excludes of FindBugs below and fix the issues.
                                 -->
                                 <exclude>findbugs:org.takes.HttpException</exclude>

@@ -51,7 +51,9 @@ public class RsSimple extends RsWrap {
     public RsSimple(final Iterable<String> head, final String body) {
         this(
             head,
-            new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8))
+            new ByteArrayInputStream(
+                body.getBytes(StandardCharsets.UTF_8)
+            )
         );
     }
 
