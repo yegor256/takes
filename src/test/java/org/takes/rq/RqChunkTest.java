@@ -29,7 +29,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Test case for {@link RqChunk}.
@@ -61,7 +61,7 @@ public final class RqChunkTest {
      * RqChunk can read a one-chunk message.
      * @throws IOException If some problem inside
      */
-    @Ignore
+    @Test
     public void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
@@ -93,7 +93,7 @@ public final class RqChunkTest {
      * RqChunk can read a chunk message.
      * @throws IOException If some problem inside
      */
-    @Ignore
+    @Test
     public void readsManyChunks() throws IOException {
         final String first = "Takes is";
         final String second = "a true object-";
@@ -132,7 +132,7 @@ public final class RqChunkTest {
      * RqChunk accepts semi-colon and ignores parameters after a semi-colon.
      * @throws IOException If some problem inside
      */
-    @Ignore
+    @Test
     public void ignoresParameterAfterSemiColon() throws IOException {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
