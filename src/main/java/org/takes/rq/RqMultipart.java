@@ -493,21 +493,13 @@ public interface RqMultipart extends Request {
         }
 
         /**
-         * This class is  for the specific implementation
-         * for the RqMultipart, (see the overridden methods for details).
-         *
-         * @todo #517:30min re-design the class.
-         *  Why the super class is encapsulated inside the class?
-         *  Find an implementation which won't be using
-         *  both composition and inheritance of the same class.
-         *  Either get the header values from the super class,
-         *  or if the purpose is to have a one-to-many header to body relation,
-         *  create the class without extending Request.
+         * This class is using a decorator pattern for representing
+         * a one-to many header-body relation.
          */
         private static class RqMultipartRequest implements Request {
 
             /**
-             * Request object. Holds value for the header.
+             * Request object. Holds a value for the header.
              */
             private final Request req;
 
