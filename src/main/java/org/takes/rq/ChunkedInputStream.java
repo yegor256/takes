@@ -170,7 +170,8 @@ final class ChunkedInputStream extends InputStream {
         (
             {
                 "PMD.CyclomaticComplexity",
-                "PMD.StdCyclomaticComplexity"
+                "PMD.StdCyclomaticComplexity",
+                "PMD.MissingBreakInSwitch"
             }
         )
     private static int getChunkSizeFromInputStream(final InputStream stream)
