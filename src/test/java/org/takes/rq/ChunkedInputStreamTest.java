@@ -26,24 +26,20 @@ package org.takes.rq;
 import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
+import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RqChunk}.
+ * Test case for {@link ChunkedInputStream}.
  *
- * @author Hamdi Douss (douss.hamdi@gmail.com)
+ * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.31.2
  */
-public final class RqChunkTest {
+public final class ChunkedInputStreamTest {
 
-    /**
-     * Chunked message header.
-     */
-    private static final String CHUNKED_HEADER = "Transfer-Encoding: chunked";
     /**
      * Carriage return.
      */
@@ -61,13 +57,8 @@ public final class RqChunkTest {
     public void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
-        final InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=1",
-                    "Host: www.example.com",
-                    CHUNKED_HEADER
-                ),
+        final InputStream stream = new ChunkedInputStream(
+            IOUtils.toInputStream(
                 Joiner.on(CRLF).join(
                     length,
                     data,
@@ -75,7 +66,7 @@ public final class RqChunkTest {
                     ""
                 )
             )
-        ).body();
+        );
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
             stream.read(buf),
@@ -83,6 +74,7 @@ public final class RqChunkTest {
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        stream.close();
     }
 
     /**
@@ -96,13 +88,8 @@ public final class RqChunkTest {
         final String third = "oriented framework";
         final String data = first + second + third;
         final Integer length = data.length();
-        final InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=2",
-                    "Host: b.example.com",
-                    CHUNKED_HEADER
-                ),
+        final InputStream stream = new ChunkedInputStream(
+            IOUtils.toInputStream(
                 Joiner.on(CRLF).join(
                     Integer.toHexString(first.length()),
                     first,
@@ -114,7 +101,7 @@ public final class RqChunkTest {
                     ""
                 )
             )
-        ).body();
+        );
         final byte[] buf = new byte[length];
         MatcherAssert.assertThat(
             stream.read(buf),
@@ -122,6 +109,7 @@ public final class RqChunkTest {
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        stream.close();
     }
 
     /**
@@ -133,13 +121,8 @@ public final class RqChunkTest {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
-        final InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=3",
-                    "Host: c.example.com",
-                    CHUNKED_HEADER
-                ),
+        final InputStream stream = new ChunkedInputStream(
+            IOUtils.toInputStream(
                 Joiner.on(CRLF).join(
                     length + ignored,
                     data,
@@ -147,7 +130,7 @@ public final class RqChunkTest {
                     ""
                 )
             )
-        ).body();
+        );
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
             stream.read(buf),
@@ -155,5 +138,6 @@ public final class RqChunkTest {
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        stream.close();
     }
 }
