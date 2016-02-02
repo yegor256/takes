@@ -37,6 +37,7 @@ import org.junit.Test;
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.31.2
+ * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 public final class ChunkedInputStreamTest {
 

@@ -73,8 +73,11 @@ public final class RqChunk extends RqWrap {
             .header("Transfer-Encoding").iterator();
         if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
             return new ChunkedInputStream(req.body());
+        } else {
+            throw new IOException(
+                "There is no header: `Transfer-Encoding : chunked`"
+            );
         }
-        return req.body();
     }
 
 }

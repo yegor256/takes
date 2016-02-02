@@ -33,7 +33,6 @@ import java.io.InputStream;
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.31.2
- * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
 
@@ -78,6 +77,7 @@ final class ChunkedInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
+        final int result;
         if (this.closed) {
             throw new IOException("Attempted read from closed stream.");
         }
@@ -85,16 +85,18 @@ final class ChunkedInputStream extends InputStream {
             this.nextChunk();
         }
         if (this.eof) {
-            return -1;
+            result = -1;
         } else {
             ++this.pos;
-            return this.origin.read();
+            result = this.origin.read();
         }
+        return result;
     }
 
     @Override
     public int read(final byte[] buf, final int off, final int len)
         throws IOException {
+        final int result;
         if (this.closed) {
             throw new IOException("Attempted read bytes from closed stream.");
         }
@@ -102,19 +104,18 @@ final class ChunkedInputStream extends InputStream {
             this.nextChunk();
         }
         if (this.eof) {
-            return -1;
+            result = -1;
         } else {
             final int shift = Math.min(len, this.chunk - this.pos);
             final int count = this.origin.read(buf, off, shift);
             this.pos += count;
-            final int result;
             if (shift == len) {
                 result = len;
             } else {
                 result = shift + this.read(buf, off + shift, len - shift);
             }
-            return result;
         }
+        return result;
     }
 
     @Override
@@ -214,18 +215,20 @@ final class ChunkedInputStream extends InputStream {
                 default: throw new RuntimeException("assertion failed");
             }
         }
+        final int result;
         final String data = baos.toString();
         final int separator = data.indexOf(';');
         try {
             // @checkstyle MagicNumberCheck (10 lines)
             if (separator > 0) {
-                return Integer.parseInt(
+                result = Integer.parseInt(
                     data.substring(0, separator).trim(),
                     16
                 );
             } else {
-                return Integer.parseInt(data.trim(), 16);
+                result = Integer.parseInt(data.trim(), 16);
             }
+            return result;
         } catch (final NumberFormatException ex) {
             throw new IOException(
                 String.format(
