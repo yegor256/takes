@@ -33,6 +33,8 @@ import java.io.InputStream;
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.31.2
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
+ * @checkstyle CyclomaticComplexityCheck (500 lines)
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
@@ -41,32 +43,27 @@ final class ChunkedInputStream extends InputStream {
     /**
      * The inputstream that we're wrapping.
      */
-    private final InputStream origin;
+    private final transient InputStream origin;
 
     /**
      * The chunk size.
      */
-    private int chunk;
+    private transient int chunk;
 
     /**
      * The current position within the current chunk.
      */
-    private int pos;
+    private transient int pos;
 
     /**
      * True if we'are at the beginning of stream.
      */
-    private boolean bof = true;
+    private transient boolean bof;
 
     /**
      * True if we've reached the end of stream.
      */
-    private boolean eof;
-
-    /**
-     * True if this stream is closed.
-     */
-    private final boolean closed = false;
+    private transient boolean eof;
 
     /**
      * Ctor.
@@ -74,18 +71,17 @@ final class ChunkedInputStream extends InputStream {
      * @throws IOException If an IO error occurs
      */
     ChunkedInputStream(final InputStream stream) throws IOException {
+        super();
+        this.bof = true;
         this.origin = stream;
     }
 
     @Override
     public int read() throws IOException {
-        final int result;
-        if (this.closed) {
-            throw new IOException("Attempted read from closed stream.");
-        }
         if (!this.eof && this.pos >= this.chunk) {
             this.nextChunk();
         }
+        final int result;
         if (this.eof) {
             result = -1;
         } else {
@@ -98,13 +94,10 @@ final class ChunkedInputStream extends InputStream {
     @Override
     public int read(final byte[] buf, final int off, final int len)
         throws IOException {
-        final int result;
-        if (this.closed) {
-            throw new IOException("Attempted read bytes from closed stream.");
-        }
         if (!this.eof && this.pos >= this.chunk) {
             this.nextChunk();
         }
+        final int result;
         if (this.eof) {
             result = -1;
         } else {
@@ -132,7 +125,7 @@ final class ChunkedInputStream extends InputStream {
     private void readCRLF() throws IOException {
         final int crsymbol = this.origin.read();
         final int lfsymbol = this.origin.read();
-        if ((crsymbol != '\r') || (lfsymbol != '\n')) {
+        if (crsymbol != '\r' || lfsymbol != '\n') {
             throw new IOException(
                 "CRLF expected at end of chunk: " + crsymbol + "/" + lfsymbol
             );
