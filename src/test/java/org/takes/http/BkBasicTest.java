@@ -155,7 +155,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                BkBasic.HEADER_TAKES_LOCAL_ADDRESS,
+                Header.X_TAKES_LOCAL_ADDRESS.toString(),
                 ""
             ),
             Matchers.not(
@@ -164,7 +164,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                BkBasic.HEADER_TAKES_REMOTE_ADDRESS,
+                Header.X_TAKES_REMOTE_ADDRESS.toString(),
                 ""
             ),
             Matchers.not(
