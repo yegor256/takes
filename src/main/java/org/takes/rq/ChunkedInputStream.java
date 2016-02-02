@@ -38,6 +38,13 @@ import java.io.InputStream;
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
+@SuppressWarnings
+    (
+        {
+            "PMD.CyclomaticComplexity",
+            "PMD.StdCyclomaticComplexity"
+        }
+    )
 final class ChunkedInputStream extends InputStream {
 
     /**
@@ -156,9 +163,16 @@ final class ChunkedInputStream extends InputStream {
      * @param stream The new input stream.
      * @return The chunk size as integer
      * @throws IOException when the chunk size could not be parsed
-     * @checkstyle ExecutableStatementCountCheck (5 lines)
-     * @checkstyle CyclomaticComplexityCheck (5 lines)
+     * @checkstyle ExecutableStatementCountCheck (10 lines)
+     * @checkstyle CyclomaticComplexityCheck (10 lines)
      */
+    @SuppressWarnings
+        (
+            {
+                "PMD.CyclomaticComplexity",
+                "PMD.StdCyclomaticComplexity"
+            }
+        )
     private static int getChunkSizeFromInputStream(final InputStream stream)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -207,7 +221,8 @@ final class ChunkedInputStream extends InputStream {
                             baos.write(next);
                     }
                     break;
-                default: throw new RuntimeException("assertion failed");
+                default:
+                    throw new IllegalStateException("Bad state");
             }
         }
         final int result;
@@ -229,7 +244,8 @@ final class ChunkedInputStream extends InputStream {
                 String.format(
                     "Bad chunk size: %s",
                     baos.toString()
-                )
+                ),
+                ex
             );
         }
     }

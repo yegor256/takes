@@ -59,10 +59,10 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(CRLF).join(
+                Joiner.on(ChunkedInputStreamTest.CRLF).join(
                     length,
                     data,
-                    END_OF_CHUNK,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
                 )
             )
@@ -90,14 +90,14 @@ public final class ChunkedInputStreamTest {
         final Integer length = data.length();
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(CRLF).join(
+                Joiner.on(ChunkedInputStreamTest.CRLF).join(
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),
                     second,
                     Integer.toHexString(third.length()),
                     third,
-                    END_OF_CHUNK,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
                 )
             )
@@ -123,10 +123,10 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(CRLF).join(
+                Joiner.on(ChunkedInputStreamTest.CRLF).join(
                     length + ignored,
                     data,
-                    END_OF_CHUNK,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
                 )
             )
