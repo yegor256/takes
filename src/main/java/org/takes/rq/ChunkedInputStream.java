@@ -33,7 +33,7 @@ import java.io.InputStream;
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.31.2
- * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">
+ * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">
  *     Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
@@ -87,9 +87,10 @@ final class ChunkedInputStream extends InputStream {
         }
         if (this.eof) {
             return -1;
+        } else {
+            ++this.pos;
+            return this.origin.read();
         }
-        ++this.pos;
-        return this.origin.read();
     }
 
     @Override
@@ -103,17 +104,18 @@ final class ChunkedInputStream extends InputStream {
         }
         if (this.eof) {
             return -1;
-        }
-        final int shift = Math.min(len, this.chunk - this.pos);
-        final int count = this.origin.read(buf, off, shift);
-        this.pos += count;
-        final int result;
-        if (shift == len) {
-            result = len;
         } else {
-            result = shift + this.read(buf, off + shift, len - shift);
+            final int shift = Math.min(len, this.chunk - this.pos);
+            final int count = this.origin.read(buf, off, shift);
+            this.pos += count;
+            final int result;
+            if (shift == len) {
+                result = len;
+            } else {
+                result = shift + this.read(buf, off + shift, len - shift);
+            }
+            return result;
         }
-        return result;
     }
 
     @Override
@@ -163,7 +165,7 @@ final class ChunkedInputStream extends InputStream {
      * @checkstyle CyclomaticComplexityCheck (5 lines)
      */
     private static int getChunkSizeFromInputStream(final InputStream stream)
-      throws IOException {
+        throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int state = 0;
         while (state != -1) {
@@ -213,17 +215,17 @@ final class ChunkedInputStream extends InputStream {
                 default: throw new RuntimeException("assertion failed");
             }
         }
-        final String dataString = baos.toString();
-        final int separator = dataString.indexOf(';');
+        final String data = baos.toString();
+        final int separator = data.indexOf(';');
         try {
             // @checkstyle MagicNumberCheck (10 lines)
             if (separator > 0) {
                 return Integer.parseInt(
-                    dataString.substring(0, separator).trim(),
+                    data.substring(0, separator).trim(),
                     16
                 );
             } else {
-                return Integer.parseInt(dataString.trim(), 16);
+                return Integer.parseInt(data.trim(), 16);
             }
         } catch (final NumberFormatException ex) {
             throw new IOException(
