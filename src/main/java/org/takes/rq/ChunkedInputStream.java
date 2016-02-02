@@ -181,7 +181,6 @@ final class ChunkedInputStream extends InputStream {
                             state = 2;
                             break;
                         default:
-                            state = 2;
                             baos.write(next);
                     }
                     break;
@@ -208,7 +207,6 @@ final class ChunkedInputStream extends InputStream {
                             state = 0;
                             break;
                         default:
-                            state = 0;
                             baos.write(next);
                     }
                     break;
