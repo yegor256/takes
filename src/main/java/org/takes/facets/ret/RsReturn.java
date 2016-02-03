@@ -28,6 +28,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import lombok.ToString;
 import org.takes.Response;
@@ -75,6 +76,9 @@ public final class RsReturn extends RsWrap {
                     new Date(
                         System.currentTimeMillis()
                             + TimeUnit.HOURS.toMillis(1L)
+                            - TimeZone.getDefault().getOffset(
+                                System.currentTimeMillis()
+                            )
                     )
                 )
             )

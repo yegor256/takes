@@ -24,6 +24,11 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,6 +45,11 @@ import org.takes.rs.RsPrint;
 public final class PsCookieTest {
 
     /**
+     * Identity instance used in tests.
+     */
+    private static Identity identity = new Identity.Simple("urn:test:99");
+
+    /**
      * PsCookie can add a cookie.
      * @throws IOException If some problem inside
      */
@@ -49,10 +59,41 @@ public final class PsCookieTest {
             new RsPrint(
                 new PsCookie(
                     new CcPlain(), "foo", 1L
-                ).exit(new RsEmpty(), new Identity.Simple("urn:test:99"))
+                ).exit(new RsEmpty(), PsCookieTest.identity)
             ).print(),
             Matchers.containsString(
                 "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
+            )
+        );
+    }
+
+    /**
+     * The expiration date for a cookie must be a GMT time.
+     * @throws IOException If there are some problems inside
+     */
+    @Test
+    public void cookieExpiresInGMT() throws IOException {
+        final long age = 1L;
+        final SimpleDateFormat format = new SimpleDateFormat(
+            "EEE, dd MMM yyyy HH:mm:ss z",
+            Locale.ENGLISH
+        );
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new PsCookie(
+                    new CcPlain(), "bar", age
+                ).exit(new RsEmpty(), PsCookieTest.identity)
+            ).print(),
+            Matchers.containsString(
+                String.format(
+                    "Expires=%s;",
+                    format.format(
+                        new Date(System.currentTimeMillis()
+                            + TimeUnit.DAYS.toMillis(age)
+                        )
+                    )
+                )
             )
         );
     }

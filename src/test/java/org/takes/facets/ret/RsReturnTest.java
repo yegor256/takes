@@ -26,6 +26,11 @@ package org.takes.facets.ret;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -57,6 +62,34 @@ public final class RsReturnTest {
                     URLEncoder.encode(
                         destination,
                         Charset.defaultCharset().name()
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * The expiration date for a cookie must be a GMT time.
+     * @throws IOException If there are some problems inside
+     */
+    @Test
+    public void cookieExpiresInGMT() throws IOException {
+        final SimpleDateFormat format = new SimpleDateFormat(
+            "EEE, dd MMM yyyy HH:mm:ss z",
+            Locale.ENGLISH
+        );
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsReturn(new RsEmpty(), "/return/where")
+            ).print(),
+            Matchers.containsString(
+                String.format(
+                    "Expires=%s;",
+                    format.format(
+                        new Date(System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
+                        )
                     )
                 )
             )
