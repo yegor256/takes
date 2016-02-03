@@ -237,12 +237,15 @@ public interface RqMultipart extends Request {
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
+         * @todo #254:30min in order to delete temporary files InputStream
+         *  instance on Request.body should be closed. In context of multipart
+         *  requests that means that body of all parts should be closed once
+         *  they are not needed anymore.
          */
         private Request make(final byte[] boundary) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
                 file, "rw"
             ).getChannel();
@@ -258,9 +261,9 @@ public interface RqMultipart extends Request {
             }
             return new RqWithHeader(
                 new RqLive(
-                    new CapInputStream(
+                    new TempInputStream(
                         new FileInputStream(file),
-                        file.length()
+                        file
                     )
                 ),
                 "Content-Length",
