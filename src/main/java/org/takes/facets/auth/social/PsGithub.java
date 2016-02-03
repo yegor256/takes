@@ -30,6 +30,7 @@ import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import javax.json.JsonObject;
@@ -153,25 +154,25 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path("login").path("oauth").path("access_token")
             .toString();
-        try {
-            return new JdkRequest(uri)
-                .method("POST")
-                .header("Accept", "application/xml")
-                .body()
-                .formParam("client_id", this.app)
-                .formParam("redirect_uri", home)
-                .formParam("client_secret", this.key)
-                .formParam("code", code)
-                .back()
-                .fetch().as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .as(XmlResponse.class)
-                .xml().xpath("/OAuth/access_token/text()").get(0);
-        } catch (final IndexOutOfBoundsException exception) {
+        final List<String> tokens = new JdkRequest(uri)
+            .method("POST")
+            .header("Accept", "application/xml")
+            .body()
+            .formParam("client_id", this.app)
+            .formParam("redirect_uri", home)
+            .formParam("client_secret", this.key)
+            .formParam("code", code)
+            .back()
+            .fetch().as(RestResponse.class)
+            .assertStatus(HttpURLConnection.HTTP_OK)
+            .as(XmlResponse.class)
+            .xml().xpath("/OAuth/access_token/text()");
+        if (tokens.isEmpty()) {
             throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST, "No access token", exception
+                HttpURLConnection.HTTP_BAD_REQUEST, "No access token"
             );
         }
+        return tokens.get(0);
     }
 
     /**
