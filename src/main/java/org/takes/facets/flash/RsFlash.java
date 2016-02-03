@@ -103,7 +103,7 @@ public final class RsFlash extends RsWrap {
      *
      * @param msg Message to show
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      */
     public RsFlash(final String msg)
         throws UnsupportedEncodingException {
@@ -118,7 +118,7 @@ public final class RsFlash extends RsWrap {
      *
      * @param err Error
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      */
     public RsFlash(final Throwable err)
         throws UnsupportedEncodingException {
@@ -134,7 +134,7 @@ public final class RsFlash extends RsWrap {
      * @param err Error
      * @param level Level
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      * @since 0.17
      */
     public RsFlash(final Throwable err, final Level level)
@@ -150,7 +150,7 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      */
     public RsFlash(final String msg, final Level level)
         throws UnsupportedEncodingException {
@@ -164,7 +164,7 @@ public final class RsFlash extends RsWrap {
      * @param level Level
      * @param cookie Cookie name
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      */
     public RsFlash(final String msg, final Level level, final String cookie)
         throws UnsupportedEncodingException {
@@ -180,7 +180,7 @@ public final class RsFlash extends RsWrap {
      * @param cookie Cookie name
      * @return Response
      * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     *  supported
      */
     private static Response make(final String msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
