@@ -24,53 +24,62 @@
 package org.takes.http;
 
 /**
- * Http headers enum constants.
+ * Http headers used in back-ends.
  *
  * @author Dan Baleanu (dan.baleanu@gmail.com)
  * @version $Id$
  * @since 0.31.2
  */
-public enum Header {
+@SuppressWarnings("PMD.LongVariable")
+public final class Header {
 
     /**
      * The http header "X-Takes-LocalAddress".
      */
-    X_TAKES_LOCAL_ADDRESS("X-Takes-LocalAddress"),
+    public static final Header X_TAKES_LOCAL_ADDRESS = new Header(
+        "X-Takes-LocalAddress"
+    );
 
     /**
      * The http header "X-Takes-LocalPort".
      */
-    X_TAKES_LOCAL_PORT("X-Takes-LocalPort"),
+    public static final Header X_TAKES_LOCAL_PORT = new Header(
+        "X-Takes-LocalPort"
+    );
 
     /**
      * The http header "X-Takes-RemoteAddress".
      */
-    X_TAKES_REMOTE_ADDRESS("X-Takes-RemoteAddress"),
+    public static final Header X_TAKES_REMOTE_ADDRESS = new Header(
+        "X-Takes-RemoteAddress"
+    );
 
     /**
      * The http header "X-Takes-RemotePort".
      */
-    X_TAKES_REMOTE_PORT("X-Takes-RemotePort");
+    public static final Header X_TAKES_REMOTE_PORT = new Header(
+        "X-Takes-RemotePort"
+    );
 
     /**
-     * The header string value.
+     * The header name.
      */
-    private final String value;
+    private final transient String name;
 
     /**
      * Ctor.
-     * @param value Header string value.
+     * @param name Header name.
      */
-    Header(final String value) {
-        this.value = value;
+    private Header(final String name) {
+        this.name = name;
     }
 
     /**
-     * Returns the header string value.
-     * @return The header string value.
+     * Returns the header name.
+     * @return The header name.
      */
     @Override
     public String toString() {
-        return this.value;
+        return this.name;
     }
 }
