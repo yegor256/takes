@@ -182,7 +182,7 @@ final class ChunkedInputStream extends InputStream {
             throw new IOException(
                 String.format(
                     "Bad chunk size: %s",
-                    baos.toString()
+                    baos.toString(Charset.defaultCharset().name()))
                 ),
                 ex
             );
