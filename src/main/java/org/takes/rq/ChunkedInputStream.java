@@ -274,7 +274,7 @@ final class ChunkedInputStream extends InputStream {
      * @return Byte.
      * @throws IOException If there is no next byte.
      */
-    private int read(final InputStream stream) throws IOException {
+    private static int read(final InputStream stream) throws IOException {
         final int next = stream.read();
         if (next == -1) {
             throw new IOException("chunked stream ended unexpectedly");
