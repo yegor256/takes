@@ -25,11 +25,16 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Response decorator, with an additional cookie.
@@ -90,6 +95,18 @@ public final class RsWithCookie extends RsWrap {
     );
 
     /**
+     * Pattern for the expires cookie attribute.
+     */
+    private static final SimpleDateFormat EXPIRES_FORMAT = new SimpleDateFormat(
+        "'Expires='EEE, dd MMM yyyy HH:mm:ss 'GMT'",
+        Locale.ENGLISH
+    );
+
+    static {
+        RsWithCookie.EXPIRES_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
+
+    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -97,7 +114,20 @@ public final class RsWithCookie extends RsWrap {
      */
     public RsWithCookie(final CharSequence name, final CharSequence value,
         final CharSequence... attrs) {
-        this(new RsEmpty(), name, value, attrs);
+        this(name, value, new Opt.Empty<Date>(), attrs);
+    }
+
+    /**
+     * Ctor.
+     * @param name Cookie name
+     * @param value Value of it
+     * @param expires Expires Cookie attribute value
+     * @param attrs Optional attributes, for example "Path=/"
+     * @checkstyle ParameterNumberCheck (5 lines)
+     */
+    public RsWithCookie(final CharSequence name, final CharSequence value,
+        final Opt<Date> expires, final CharSequence... attrs) {
+        this(new RsEmpty(), name, value, expires, attrs);
     }
 
     /**
@@ -111,6 +141,22 @@ public final class RsWithCookie extends RsWrap {
     @SuppressWarnings("PMD.CallSuperInConstructor")
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
+        this(res, name, value, new Opt.Empty<Date>(), attrs);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param name Cookie name
+     * @param value Value of it
+     * @param expires Expires Cookie attribute value
+     * @param attrs Optional attributes, for example "Path=/"
+     * @checkstyle ParameterNumberCheck (5 lines)
+     */
+    @SuppressWarnings("PMD.CallSuperInConstructor")
+    public RsWithCookie(final Response res, final CharSequence name,
+        final CharSequence value, final Opt<Date> expires,
+        final CharSequence... attrs) {
         super(
             new Response() {
                 @Override
@@ -120,7 +166,7 @@ public final class RsWithCookie extends RsWrap {
                         RsWithCookie.SET_COOKIE,
                         RsWithCookie.make(
                             RsWithCookie.previousValue(res),
-                            name, value, attrs
+                            name, value, expires, attrs
                         )
                     ).head();
                 }
@@ -139,12 +185,14 @@ public final class RsWithCookie extends RsWrap {
      * @param previous Previous Cookie value.
      * @param name Cookie name
      * @param value Value of it
+     * @param expires Expires Cookie attribute value
      * @param attrs Optional attributes, for example "Path=/"
      * @return Text
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static String make(final String previous, final CharSequence name,
-        final CharSequence value, final CharSequence... attrs) {
+        final CharSequence value, final Opt<Date> expires,
+        final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder();
         if (!previous.isEmpty()) {
             text.append(String.format("%s,", previous));
@@ -152,6 +200,10 @@ public final class RsWithCookie extends RsWrap {
         text.append(String.format("%s=%s;", name, value));
         for (final CharSequence attr : attrs) {
             text.append(attr).append(';');
+        }
+        if (expires.has()) {
+            text.append(RsWithCookie.EXPIRES_FORMAT.format(expires.get()))
+                .append(';');
         }
         return text.toString();
     }

@@ -69,11 +69,11 @@ public final class RsReturnTest {
     }
 
     /**
-     * The expiration date for a cookie must be a GMT time.
+     * RsReturn can create cookie with expires attribute in GMT..
      * @throws IOException If there are some problems inside
      */
     @Test
-    public void cookieExpiresInGMT() throws IOException {
+    public void createCookieWithExpiresInGMT() throws IOException {
         final SimpleDateFormat format = new SimpleDateFormat(
             "EEE, dd MMM yyyy HH:mm:ss z",
             Locale.ENGLISH

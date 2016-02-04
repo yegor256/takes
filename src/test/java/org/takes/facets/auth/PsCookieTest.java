@@ -68,14 +68,14 @@ public final class PsCookieTest {
     }
 
     /**
-     * The expiration date for a cookie must be a GMT time.
+     * PsCookie can create cookie with expires attribute in GMT.
      * @throws IOException If there are some problems inside
      */
     @Test
-    public void cookieExpiresInGMT() throws IOException {
+    public void createCookieWithExpiresInGMT() throws IOException {
         final long age = 1L;
         final SimpleDateFormat format = new SimpleDateFormat(
-            "EEE, dd MMM yyyy HH:mm:ss z",
+            "'Expires='EEE, dd MMM yyyy HH:mm:ss z;",
             Locale.ENGLISH
         );
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -86,12 +86,9 @@ public final class PsCookieTest {
                 ).exit(new RsEmpty(), PsCookieTest.identity)
             ).print(),
             Matchers.containsString(
-                String.format(
-                    "Expires=%s;",
-                    format.format(
-                        new Date(System.currentTimeMillis()
-                            + TimeUnit.DAYS.toMillis(age)
-                        )
+                format.format(
+                    new Date(System.currentTimeMillis()
+                        + TimeUnit.DAYS.toMillis(age)
                     )
                 )
             )

@@ -27,11 +27,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
 
@@ -69,18 +68,12 @@ public final class RsReturn extends RsWrap {
                 res,
                 cookie,
                 URLEncoder.encode(loc, Charset.defaultCharset().name()),
-                "Path=/",
-                String.format(
-                    Locale.ENGLISH,
-                    "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
+                new Opt.Single<Date>(
                     new Date(
-                        System.currentTimeMillis()
-                            + TimeUnit.HOURS.toMillis(1L)
-                            - TimeZone.getDefault().getOffset(
-                                System.currentTimeMillis()
-                            )
+                        System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
                     )
-                )
+                ),
+                "Path=/"
             )
         );
     }
