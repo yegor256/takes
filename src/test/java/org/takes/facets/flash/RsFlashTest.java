@@ -74,9 +74,9 @@ public final class RsFlashTest {
      * @throws IOException If there are some problems inside
      */
     @Test
-    public void createCookieWithExpiresInGMT() throws IOException {
+    public void createsCookieWithExpiresInGMT() throws IOException {
         final SimpleDateFormat format = new SimpleDateFormat(
-            "EEE, dd MMM yyyy HH:mm:ss z",
+            "'Expires='EEE, dd MMM yyyy HH:mm:ss z;",
             Locale.ENGLISH
         );
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -85,12 +85,9 @@ public final class RsFlashTest {
                 new RsFlash("they are watching you")
             ).print(),
             Matchers.containsString(
-                String.format(
-                    "Expires=%s;",
-                    format.format(
-                        new Date(System.currentTimeMillis()
-                            + TimeUnit.HOURS.toMillis(1L)
-                        )
+                format.format(
+                    new Date(System.currentTimeMillis()
+                        + TimeUnit.HOURS.toMillis(1L)
                     )
                 )
             )

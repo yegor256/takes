@@ -45,11 +45,6 @@ import org.takes.rs.RsPrint;
 public final class PsCookieTest {
 
     /**
-     * Identity instance used in tests.
-     */
-    private static Identity identity = new Identity.Simple("urn:test:99");
-
-    /**
      * PsCookie can add a cookie.
      * @throws IOException If some problem inside
      */
@@ -59,7 +54,7 @@ public final class PsCookieTest {
             new RsPrint(
                 new PsCookie(
                     new CcPlain(), "foo", 1L
-                ).exit(new RsEmpty(), PsCookieTest.identity)
+                ).exit(new RsEmpty(), new Identity.Simple("urn:test:99"))
             ).print(),
             Matchers.containsString(
                 "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
@@ -72,7 +67,7 @@ public final class PsCookieTest {
      * @throws IOException If there are some problems inside
      */
     @Test
-    public void createCookieWithExpiresInGMT() throws IOException {
+    public void createsCookieWithExpiresInGMT() throws IOException {
         final long age = 1L;
         final SimpleDateFormat format = new SimpleDateFormat(
             "'Expires='EEE, dd MMM yyyy HH:mm:ss z;",
@@ -83,7 +78,7 @@ public final class PsCookieTest {
             new RsPrint(
                 new PsCookie(
                     new CcPlain(), "bar", age
-                ).exit(new RsEmpty(), PsCookieTest.identity)
+                ).exit(new RsEmpty(), Identity.ANONYMOUS)
             ).print(),
             Matchers.containsString(
                 format.format(

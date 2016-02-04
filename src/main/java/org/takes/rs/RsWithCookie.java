@@ -95,18 +95,6 @@ public final class RsWithCookie extends RsWrap {
     );
 
     /**
-     * Pattern for the expires cookie attribute.
-     */
-    private static final SimpleDateFormat EXPIRES_FORMAT = new SimpleDateFormat(
-        "'Expires='EEE, dd MMM yyyy HH:mm:ss 'GMT'",
-        Locale.ENGLISH
-    );
-
-    static {
-        RsWithCookie.EXPIRES_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }
-
-    /**
      * Ctor.
      * @param name Cookie name
      * @param value Value of it
@@ -202,8 +190,12 @@ public final class RsWithCookie extends RsWrap {
             text.append(attr).append(';');
         }
         if (expires.has()) {
-            text.append(RsWithCookie.EXPIRES_FORMAT.format(expires.get()))
-                .append(';');
+            final SimpleDateFormat format = new SimpleDateFormat(
+                "'Expires='EEE, dd MMM yyyy HH:mm:ss z",
+                Locale.ENGLISH
+            );
+            format.setTimeZone(TimeZone.getTimeZone("GMT"));
+            text.append(format.format(expires.get())).append(';');
         }
         return text.toString();
     }
