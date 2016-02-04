@@ -48,6 +48,7 @@ import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqPrint;
 import org.takes.rq.RqSocket;
 import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
@@ -142,7 +143,13 @@ public final class BkBasicTest {
         new BkBasic(
             new Take() {
                 @Override
+                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
+                    try {
+                        new RqPrint(req).printBody();
+                    } catch (final IOException exc) {
+                        throw new RuntimeException(exc);
+                    }
                     ref.set(req);
                     return new RsEmpty();
                 }

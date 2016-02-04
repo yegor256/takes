@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -64,7 +66,13 @@ public final class TkText extends TkWrap {
         super(
             new Take() {
                 @Override
+                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
+                    try {
+                        new RqPrint(req).printBody();
+                    } catch (final IOException exc) {
+                        throw new RuntimeException(exc);
+                    }
                     return new RsText(body);
                 }
             }
@@ -79,7 +87,13 @@ public final class TkText extends TkWrap {
         super(
             new Take() {
                 @Override
+                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
+                    try {
+                        new RqPrint(req).printBody();
+                    } catch (final IOException exc) {
+                        throw new RuntimeException(exc);
+                    }
                     return new RsText(body);
                 }
             }

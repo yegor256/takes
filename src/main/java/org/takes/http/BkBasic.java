@@ -39,10 +39,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqHeaders;
-import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
-import org.takes.rq.RqPrint;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -93,7 +90,7 @@ public final class BkBasic implements Back {
         final InputStream input = socket.getInputStream();
         try {
             while (true) {
-                final Request request = new RqLengthAware(new RqLive(input));
+                final Request request = new RqLive(input);
                 this.print(
                     BkBasic.addSocketHeaders(
                         request,
@@ -101,16 +98,7 @@ public final class BkBasic implements Back {
                     ),
                     new BufferedOutputStream(socket.getOutputStream())
                 );
-                if (new RqHeaders.Base(request)
-                        .header("Content-Length")
-                        .size() > 0) {
-                    new RqPrint(request).printBody();
-                    input.read();
-                    input.read();
-                    if (input.available() <= 0) {
-                        break;
-                    }
-                } else {
+                if (input.available() <= 0) {
                     break;
                 }
             }
