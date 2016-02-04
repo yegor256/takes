@@ -27,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -89,6 +90,17 @@ public final class RsWithBody extends RsWrap {
      */
     public RsWithBody(final Response res, final CharSequence body) {
         this(res, body.toString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param body Body
+     * @param charset The character set to use to serialize the body
+     */
+    public RsWithBody(final Response res, final CharSequence body,
+        final Charset charset) {
+        this(res, body.toString().getBytes(charset));
     }
 
     /**
