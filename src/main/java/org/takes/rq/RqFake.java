@@ -24,6 +24,7 @@
 package org.takes.rq;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -89,7 +90,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final CharSequence body) {
-        this(head, body.toString().getBytes());
+        this(head, body.toString().getBytes(StandardCharsets.UTF_8));
     }
 
     /**

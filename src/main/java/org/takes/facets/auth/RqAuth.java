@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -76,7 +77,9 @@ public final class RqAuth extends RqWrap {
             new RqHeaders.Base(this).header(this.header).iterator();
         final Identity user;
         if (headers.hasNext()) {
-            user = new CcPlain().decode(headers.next().getBytes());
+            user = new CcPlain().decode(
+                headers.next().getBytes(StandardCharsets.UTF_8)
+            );
         } else {
             user = Identity.ANONYMOUS;
         }

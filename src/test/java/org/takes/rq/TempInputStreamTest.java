@@ -23,41 +23,53 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 /**
- * Request with body.
- *
- * <p>The class is immutable and thread-safe.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * Test case for {@link TempInputStream}.
+ * @author Andrey Eliseev (aeg.exper@gmail.com)
  * @version $Id$
- * @since 0.22
+ * @since 0.31
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqWithBody extends RqWrap {
+public final class TempInputStreamTest {
 
     /**
-     * Ctor.
-     * @param req The request.
-     * @param bdy The body.
+     * TempInputStream can delete the underlying temporary file.
+     * @throws IOException if some problem occurs.
      */
-    public RqWithBody(final Request req, final CharSequence bdy) {
-        super(new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-            @Override
-            public InputStream body() {
-                return new ByteArrayInputStream(
-                    bdy.toString().getBytes(StandardCharsets.UTF_8)
-                );
-            }
-        });
+    @Test
+    public void deletesTempFile() throws IOException {
+        final File file = File.createTempFile("tempfile", ".tmp");
+        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        try {
+            out.write("Temp file deletion test");
+        } finally {
+            out.close();
+        }
+        final InputStream body = new TempInputStream(
+            new FileInputStream(file), file
+        );
+        try {
+            MatcherAssert.assertThat(
+                "File is not created!",
+                file.exists(),
+                Matchers.is(true)
+            );
+        } finally {
+            body.close();
+        }
+        MatcherAssert.assertThat(
+            "File exists after stream closure",
+            file.exists(),
+            Matchers.is(false)
+        );
     }
 }
