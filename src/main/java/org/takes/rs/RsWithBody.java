@@ -27,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
@@ -87,7 +88,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, body.toString().getBytes());
+        this(res, body.toString().getBytes(StandardCharsets.UTF_8));
     }
 
     /**
