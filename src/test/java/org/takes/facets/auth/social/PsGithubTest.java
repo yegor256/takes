@@ -28,7 +28,10 @@ import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -53,13 +56,71 @@ import org.xembly.Directives;
  * @since 0.15.2
  */
 public final class PsGithubTest {
+
+    /**
+     * GitHubToken.
+     */
+    private static final String GIT_HUB_TOKEN = "GitHubToken";
+
+    /**
+     * XPath access_token string.
+     */
+    private static final String ACCESS_TOKEN = "access_token";
+
+    /**
+     * XPath login string.
+     */
+    private static final String LOGIN = "login";
+
+    /**
+     * Octocat URL string.
+     */
+    private static final String OCTOCAT_GIF_URL =
+        "https://github.com/img/octocat.gif";
+
+    /**
+     * XPath octocat string.
+     */
+    private static final String OCTOCAT = "octocat";
+
+    /**
+     * A Junit Exception test variable.
+     */
+    @Rule
+    public transient ExpectedException thrown = ExpectedException.none();
+
+    /**
+     * PsGithub can fail on no access token.
+     * @throws IOException If some problem inside.
+     */
+    @Test
+    public void failsOnNoAccessToken() throws IOException {
+        this.thrown.expect(HttpException.class);
+        this.thrown.expectMessage("No access token");
+        this.performLogin(PsGithubTest.directiveWithoutAccessToken());
+    }
+
     /**
      * PsGithub can login.
-     * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)s
+     * @throws IOException If some problem inside.
      */
     @Test
     public void canLogin() throws IOException {
+        this.performLogin(
+            PsGithubTest.directiveWithoutAccessToken()
+                .add(PsGithubTest.ACCESS_TOKEN)
+                .set(PsGithubTest.GIT_HUB_TOKEN)
+        );
+    }
+
+    /**
+     * Performs the basic login.
+     * @param directive The directive object.
+     * @throws IOException If some problem inside.
+     */
+    private void performLogin(final Directives directive) throws IOException {
+        final String app = "app";
+        final String key = "key";
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
@@ -67,43 +128,19 @@ public final class PsGithubTest {
                     @Override
                     public Response act(final Request req) throws IOException {
                         final Request greq = new RqGreedy(req);
-                        PsGithubTest.assertParam(greq, "code", "code");
-                        PsGithubTest.assertParam(greq, "client_id", "app");
-                        PsGithubTest.assertParam(greq, "client_secret", "key");
+                        final String code = "code";
+                        PsGithubTest.assertParam(greq, code, code);
+                        PsGithubTest.assertParam(greq, "client_id", app);
+                        PsGithubTest.assertParam(greq, "client_secret", key);
                         return new RsXembly(
-                            new XeDirectives(
-                                new Directives().add("OAuth")
-                                    .add("token_type").set("bearer").up()
-                                    .add("scope").set("repo,gist").up()
-                                    .add("access_token").set("GitHubToken")
-                                    .toString()
-                            )
+                            new XeDirectives(directive.toString())
                         );
                     }
                 }
             ),
             new FkRegex(
                 "/user",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().param("access_token")
-                                .iterator().next(),
-                            Matchers.containsString("GitHubToken")
-                        );
-                        return new RsJSON(
-                            Json.createObjectBuilder()
-                                .add("login", "octocat")
-                                .add("id", 1)
-                                .add(
-                                    "avatar_url",
-                                    "https://github.com/img/octocat.gif"
-                                )
-                                .build()
-                        );
-                    }
-                }
+                new TkFakeLogin()
             )
         );
         new FtRemote(take).exec(
@@ -112,8 +149,8 @@ public final class PsGithubTest {
                 @Override
                 public void exec(final URI home) throws IOException {
                     final Identity identity = new PsGithub(
-                        "app",
-                        "key",
+                        app,
+                        key,
                         home.toString(),
                         home.toString()
                     ).enter(new RqFake("GET", "?code=code")).get();
@@ -122,16 +159,26 @@ public final class PsGithubTest {
                         Matchers.equalTo("urn:github:1")
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("login"),
-                        Matchers.equalTo("octocat")
+                        identity.properties().get(PsGithubTest.LOGIN),
+                        Matchers.equalTo(PsGithubTest.OCTOCAT)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get("avatar"),
-                        Matchers.equalTo("https://github.com/img/octocat.gif")
+                        Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
                     );
                 }
             }
         );
+    }
+
+    /**
+     * Creates the basic directives, without access token.
+     * @return A basic directive.
+     */
+    private static Directives directiveWithoutAccessToken() {
+        return new Directives().add("OAuth")
+            .add("token_type").set("bearer").up()
+            .add("scope").set("repo,gist").up();
     }
 
     /**
@@ -147,5 +194,30 @@ public final class PsGithubTest {
             new RqForm.Smart(new RqForm.Base(req)).single(param),
             Matchers.equalTo(value)
         );
+    }
+
+    /**
+     * An inner class for the Take implementation testing.
+     */
+    private static final class TkFakeLogin implements Take {
+        @Override
+        public Response act(final Request req) throws IOException {
+            MatcherAssert.assertThat(
+                new RqHref.Base(req).href()
+                    .param(PsGithubTest.ACCESS_TOKEN)
+                    .iterator().next(),
+                Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
+            );
+            return new RsJSON(
+                Json.createObjectBuilder()
+                    .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
+                    .add("id", 1)
+                    .add(
+                        "avatar_url",
+                        PsGithubTest.OCTOCAT_GIF_URL
+                    )
+                    .build()
+            );
+        }
     }
 }
