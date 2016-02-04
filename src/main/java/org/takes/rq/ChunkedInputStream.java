@@ -235,7 +235,7 @@ final class ChunkedInputStream extends InputStream {
      * @throws IOException If fails.
      */
     private static State next(final InputStream stream, final State state,
-            final ByteArrayOutputStream line) throws IOException {
+        final ByteArrayOutputStream line) throws IOException {
         final int next = ChunkedInputStream.read(stream);
         final State result;
         switch (state) {
