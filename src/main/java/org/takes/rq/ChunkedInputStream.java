@@ -33,18 +33,9 @@ import java.io.InputStream;
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.31.2
- * @checkstyle ExecutableStatementCountCheck (500 lines)
- * @checkstyle CyclomaticComplexityCheck (500 lines)
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
-@SuppressWarnings
-    (
-        {
-            "PMD.CyclomaticComplexity",
-            "PMD.StdCyclomaticComplexity"
-        }
-    )
 final class ChunkedInputStream extends InputStream {
 
     /**
@@ -55,7 +46,7 @@ final class ChunkedInputStream extends InputStream {
     /**
      * The chunk size.
      */
-    private transient int chunk;
+    private transient int size;
 
     /**
      * The current position within the current chunk.
@@ -85,7 +76,7 @@ final class ChunkedInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
-        if (!this.eof && this.pos >= this.chunk) {
+        if (!this.eof && this.pos >= this.size) {
             this.nextChunk();
         }
         final int result;
@@ -101,14 +92,14 @@ final class ChunkedInputStream extends InputStream {
     @Override
     public int read(final byte[] buf, final int off, final int len)
         throws IOException {
-        if (!this.eof && this.pos >= this.chunk) {
+        if (!this.eof && this.pos >= this.size) {
             this.nextChunk();
         }
         final int result;
         if (this.eof) {
             result = -1;
         } else {
-            final int shift = Math.min(len, this.chunk - this.pos);
+            final int shift = Math.min(len, this.size - this.pos);
             final int count = this.origin.read(buf, off, shift);
             this.pos += count;
             if (shift == len) {
@@ -134,7 +125,13 @@ final class ChunkedInputStream extends InputStream {
         final int lfsymbol = this.origin.read();
         if (crsymbol != '\r' || lfsymbol != '\n') {
             throw new IOException(
-                "CRLF expected at end of chunk: " + crsymbol + "/" + lfsymbol
+                String.format(
+                    "%s %d%s%d",
+                    "CRLF expected at end of chunk: ",
+                    crsymbol,
+                    "/",
+                    lfsymbol
+                )
             );
         }
     }
@@ -147,10 +144,10 @@ final class ChunkedInputStream extends InputStream {
         if (!this.bof) {
             this.readCRLF();
         }
-        this.chunk = getChunkSizeFromInputStream(this.origin);
+        this.size = this.chunkSize(this.origin);
         this.bof = false;
         this.pos = 0;
-        if (this.chunk == 0) {
+        if (this.size == 0) {
             this.eof = true;
         }
     }
@@ -159,73 +156,13 @@ final class ChunkedInputStream extends InputStream {
      * Expects the stream to start with a chunksize in hex with optional
      * comments after a semicolon. The line must end with a CRLF: "a3; some
      * comment\r\n" Positions the stream at the start of the next line.
-     * States: 0=normal, 1=\r was scanned, 2=inside quoted string, -1=end.
      * @param stream The new input stream.
      * @return The chunk size as integer
      * @throws IOException when the chunk size could not be parsed
-     * @checkstyle ExecutableStatementCountCheck (10 lines)
-     * @checkstyle CyclomaticComplexityCheck (10 lines)
      */
-    @SuppressWarnings
-        (
-            {
-                "PMD.CyclomaticComplexity",
-                "PMD.StdCyclomaticComplexity",
-                "PMD.MissingBreakInSwitch"
-            }
-        )
-    private static int getChunkSizeFromInputStream(final InputStream stream)
+    private int chunkSize(final InputStream stream)
         throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int state = 0;
-        while (state != -1) {
-            int next = stream.read();
-            if (next == -1) {
-                throw new IOException("chunked stream ended unexpectedly");
-            }
-            switch (state) {
-                case 0:
-                    switch (next) {
-                        case '\r':
-                            state = 1;
-                            break;
-                        case '\"':
-                            state = 2;
-                            break;
-                        default:
-                            baos.write(next);
-                    }
-                    break;
-                case 1:
-                    if (next == '\n') {
-                        state = -1;
-                    } else {
-                        throw new IOException(
-                            String.format(
-                                "%s%s",
-                                "Protocol violation: Unexpected",
-                                " single newline character in chunk size"
-                            )
-                        );
-                    }
-                    break;
-                case 2:
-                    switch (next) {
-                        case '\\':
-                            next = stream.read();
-                            baos.write(next);
-                            break;
-                        case '\"':
-                            state = 0;
-                            break;
-                        default:
-                            baos.write(next);
-                    }
-                    break;
-                default:
-                    throw new IllegalStateException("Bad state");
-            }
-        }
+        final ByteArrayOutputStream baos = this.sizeLine(stream);
         final int result;
         final String data = baos.toString();
         final int separator = data.indexOf(';');
@@ -249,5 +186,99 @@ final class ChunkedInputStream extends InputStream {
                 ex
             );
         }
+    }
+
+    /**
+     * Possible states of FSM that ised to find chunk size.
+     */
+    private enum State {
+        /**
+         * Normal.
+         */
+        NORMAL,
+        /**
+         * If \r was scanned.
+         */
+        R,
+        /**
+         * Inside quoted string.
+         */
+        QUOTED_STRING,
+        /**
+         * End.
+         */
+        END;
+    }
+
+    /**
+     * Extract line with chunk size from stream.
+     * @param stream Input stream.
+     * @return Line with chunk size.
+     * @throws IOException If fails.
+     */
+    private ByteArrayOutputStream sizeLine(final InputStream stream)
+        throws IOException {
+        State state = State.NORMAL;
+        final ByteArrayOutputStream result = new ByteArrayOutputStream();
+        while (state != State.END) {
+            int next = this.read(stream);
+            switch (state) {
+                case NORMAL:
+                    switch (next) {
+                        case '\r':
+                            state = State.R;
+                            break;
+                        case '\"':
+                            state = State.QUOTED_STRING;
+                            break;
+                        default:
+                            result.write(next);
+                    }
+                    break;
+                case R:
+                    if (next == '\n') {
+                        state = State.END;
+                    } else {
+                        throw new IOException(
+                            String.format(
+                                "%s%s",
+                                "Protocol violation: Unexpected",
+                                " single newline character in chunk size"
+                            )
+                        );
+                    }
+                    break;
+                case QUOTED_STRING:
+                    switch (next) {
+                        case '\\':
+                            next = stream.read();
+                            result.write(next);
+                            break;
+                        case '\"':
+                            state = State.NORMAL;
+                            break;
+                        default:
+                            result.write(next);
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("Bad state");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Validate next byte from stream.
+     * @param stream Input stream.
+     * @return Byte.
+     * @throws IOException If there is no next byte.
+     */
+    private int read(final InputStream stream) throws IOException {
+        final int next = stream.read();
+        if (next == -1) {
+            throw new IOException("chunked stream ended unexpectedly");
+        }
+        return next;
     }
 }
