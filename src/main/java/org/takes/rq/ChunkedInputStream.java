@@ -234,6 +234,7 @@ final class ChunkedInputStream extends InputStream {
      * @return New state.
      * @throws IOException If fails.
      */
+    @SuppressWarnings("PMD.MissingBreakInSwitch")
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
         final int next = ChunkedInputStream.read(stream);
