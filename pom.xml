@@ -255,7 +255,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>-Djava.awt.headless=true</argLine>
+                    <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8</argLine>
                     <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
                 </configuration>
             </plugin>
@@ -304,11 +304,98 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
+                        <version>0.15.4</version>
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                                <exclude>findbugs:.*</exclude>
+                                <!--
+                                @todo #530:30min Below excludes were created during migration
+                                 from qulice 0.13 to qulice 0.15.4. New qulice finds new
+                                 additional issues in the code that need to be fixed.
+                                 Checktyle issues were fixed in scope of #530, remaining
+                                 PMD and XML issues to be fixed in scope of this puzzle.
+                                -->
+                                <exclude>pmd:/src/main/java/org/takes/facets/auth/codecs/CcAES.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/auth/codecs/CcXOR.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/auth/codecs/CcXOR.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/auth/PsAll.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/auth/PsBasic.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fallback/FbChain.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fallback/FbStatus.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/MediaType.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/RqRegex.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/http/BkTimeable.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/http/Options.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/misc/Href.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rq/RqForm.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rq/RqMultipart.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rs/RsWithCookie.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rs/xe/XeLocalhost.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rs/xe/XeWhen.java</exclude>
+                                <exclude>pmd:/src/it/file-manager/src/main/java/org/takes/it/fm/App.java</exclude>
+                                <exclude>pmd:/src/it/file-manager/src/test/java/org/takes/it/fm/AppITCase.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/hamcrest/HmRsStatus.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/facets/auth/PsBasicTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/facets/fork/FkContentTypeTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/rq/RqChunkTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/rq/RqFormTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/rq/RqMultipartTest.java</exclude>
+                                <exclude>pmd:/src/test/java/org/takes/rs/RsWithTypeTest.java</exclude>
+                                <exclude>xml:/src/it/file-manager/pom.xml</exclude>
+                                <exclude>xml:/src/it/settings.xml</exclude>
+                                <exclude>xml:/src/site/site.xml</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/facets/fork/TkMethods.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/facets/hamcrest/AbstractHmHeader.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/http/BkWrap.java</exclude>
+                                <exclude>checkstyle:/src/main/java/org/takes/misc/VerboseList.java</exclude>
+                                <exclude>checkstyle:/src/test/java/org/takes/facets/auth/PsChainTest.java</exclude>
+                                <exclude>checkstyle:/src/test/java/org/takes/facets/auth/social/PsFacebookTest.java</exclude>
+                                <exclude>checkstyle:/src/test/java/org/takes/facets/fork/TkMethodsTest.java</exclude>
+                                <exclude>checkstyle:/src/test/java/org/takes/misc/StateAwareInputStream.java</exclude>
+                                <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
+
+                                <!--
+                                @todo #517:30min Continue fixing FindBugs violations started in #517.
+                                 #517 turned on the FindBugs, temporarily excluding some classes.
+                                 Remove all excludes of FindBugs below and fix the issues.
+                                -->
+                                <exclude>findbugs:org.takes.HttpException</exclude>
+                                <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>
+                                <exclude>findbugs:org.takes.facets.fallback.FbSlf4j</exclude>
+                                <exclude>findbugs:org.takes.facets.fallback</exclude>
+                                <exclude>findbugs:org.takes.facets.fork.FkRegex$2</exclude>
+                                <exclude>findbugs:org.takes.facets.fork.FkRegex</exclude>
+                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
+                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
+                                <exclude>findbugs:org.takes.facets.forward.TkForward$Safe</exclude>
+                                <exclude>findbugs:org.takes.facets.forward</exclude>
+                                <exclude>findbugs:org.takes.http.BkBasic</exclude>
+                                <exclude>findbugs:org.takes.http.FtCLI$3</exclude>
+                                <exclude>findbugs:org.takes.http.FtCLI</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote$1</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
+                                <exclude>findbugs:org.takes.http.Options</exclude>
+                                <exclude>findbugs:org.takes.rq.RqForm$Base</exclude>
+                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
+                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
+                                <exclude>findbugs:org.takes.rs.RsGzip</exclude>
+                                <exclude>findbugs:org.takes.rs.RsPrettyJSON</exclude>
+                                <exclude>findbugs:org.takes.rs.RsPrettyXML</exclude>
+                                <exclude>findbugs:org.takes.rs.RsWithHeader</exclude>
+                                <exclude>findbugs:org.takes.rs.RsXSLT</exclude>
+                                <exclude>findbugs:org.takes.tk.TkReadAlways</exclude>
                             </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
                         </configuration>
                     </plugin>
                 </plugins>

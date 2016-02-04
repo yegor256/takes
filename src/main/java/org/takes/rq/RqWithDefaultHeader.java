@@ -21,60 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
+import java.io.IOException;
+import org.takes.Request;
 
 /**
- * Simple response.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Request with default header.
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.17
+ * @since 0.31
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class RsSimple extends RsWrap {
+public final class RqWithDefaultHeader extends RqWrap {
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @throws IOException in case of request errors
      */
-    public RsSimple(final Iterable<String> head, final String body) {
-        this(
-            head,
-            new ByteArrayInputStream(
-                body.getBytes(StandardCharsets.UTF_8)
-            )
-        );
+    public RqWithDefaultHeader(final Request req,
+        final String hdr,
+        final String val) throws IOException {
+        super(RqWithDefaultHeader.build(req, hdr, val));
     }
 
     /**
-     * Ctor.
-     * @param head Head
-     * @param body Body
+     * Builds the request with the default header if it is not already present.
+     * @param req Original request.
+     * @param hdr Header name.
+     * @param val Header value.
+     * @return The new request.
+     * @throws IOException in case of request errors
      */
-    public RsSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
-        );
+    private static Request build(final Request req,
+        final String hdr, final String val) throws IOException {
+        final Request request;
+        if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
+            request = req;
+        } else {
+            request = new RqWithHeader(req, hdr, val);
+        }
+        return request;
     }
 
 }

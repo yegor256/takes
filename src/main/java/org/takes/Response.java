@@ -57,7 +57,8 @@ import java.io.InputStream;
  * @see org.takes.Take
  * @see org.takes.rs.RsWithBody
  * @see org.takes.rs.RsWithHeader
- * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">Composable Decorators vs. Imperative Utility Methods</a>
+ * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">
+ *     Composable Decorators vs. Imperative Utility Methods</a>
  */
 public interface Response {
 

@@ -108,11 +108,11 @@ public final class TkRetryTest {
             .when(take.act(Mockito.any(Request.class)))
             .thenThrow(new IOException())
             .thenReturn(new RsText(data));
-        final long startTime = System.nanoTime();
+        final long start = System.nanoTime();
         final RsPrint response = new RsPrint(
             new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET))
         );
-        final long spent = System.nanoTime() - startTime;
+        final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
             new Long(delay - Tv.HUNDRED) * Tv.MILLION,
             Matchers.lessThanOrEqualTo(spent)

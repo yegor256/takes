@@ -35,6 +35,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -91,7 +92,8 @@ public interface RqMultipart extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @version $Id$
      * @since 0.9
-     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+     *     Forms in HTML</a>
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see org.takes.rq.RqGreedy
      */
@@ -100,14 +102,12 @@ public interface RqMultipart extends Request {
         /**
          * Pattern to get boundary from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern BOUNDARY = Pattern.compile(
             ".*[^a-z]boundary=([^;]+).*"
         );
         /**
          * Pattern to get name from header.
          */
-        @SuppressWarnings("PMD.UnusedPrivateField")
         private static final Pattern NAME = Pattern.compile(
             ".*[^a-z]name=\"([^\"]+)\".*"
         );
@@ -132,12 +132,20 @@ public interface RqMultipart extends Request {
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();
-            this.body = Channels.newChannel(stream);
-            this.buffer = ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, stream.available())
-            );
-            this.map = this.buildRequests(req);
+            try {
+                this.body = Channels.newChannel(stream);
+                try {
+                    this.buffer = ByteBuffer.allocate(
+                        // @checkstyle MagicNumberCheck (1 line)
+                        Math.min(8192, stream.available())
+                    );
+                    this.map = this.buildRequests(req);
+                } finally {
+                    this.body.close();
+                }
+            } finally {
+                stream.close();
+            }
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -209,7 +217,7 @@ public interface RqMultipart extends Request {
             }
             final byte[] boundary = String.format(
                 "\r\n--%s", matcher.group(1)
-            ).getBytes();
+            ).getBytes(StandardCharsets.UTF_8);
             this.buffer.flip();
             this.buffer.position(boundary.length - 2);
             final Collection<Request> requests = new LinkedList<Request>();
@@ -230,18 +238,25 @@ public interface RqMultipart extends Request {
          * @param boundary Boundary
          * @return Request
          * @throws IOException If fails
+         * @todo #254:30min in order to delete temporary files InputStream
+         *  instance on Request.body should be closed. In context of multipart
+         *  requests that means that body of all parts should be closed once
+         *  they are not needed anymore.
          */
         private Request make(final byte[] boundary) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            file.deleteOnExit();
             final FileChannel channel = new RandomAccessFile(
                 file, "rw"
             ).getChannel();
             try {
                 channel.write(
-                    ByteBuffer.wrap(this.head().iterator().next().getBytes())
+                    ByteBuffer.wrap(
+                        this.head().iterator().next().getBytes(
+                            StandardCharsets.UTF_8
+                        )
+                    )
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(ByteBuffer.wrap("\r\n".getBytes()));
@@ -251,9 +266,9 @@ public interface RqMultipart extends Request {
             }
             return new RqWithHeader(
                 new RqLive(
-                    new CapInputStream(
+                    new TempInputStream(
                         new FileInputStream(file),
-                        file.length()
+                        file
                     )
                 ),
                 "Content-Length",
@@ -415,24 +430,8 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final Request... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
-                new Request() {
-                    @Override
-                    public Iterable<String> head() throws IOException {
-                        return new RqWithHeader(
-                            req,
-                            // @checkstyle MultipleStringLiteralsCheck (1 line)
-                            "Content-Type",
-                            String.format(
-                                "multipart/form-data; boundary=%s",
-                                RqMultipart.Fake.BOUNDARY
-                            )
-                        ).head();
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return RqMultipart.Fake.fakeBody(dispositions);
-                    }
-                }
+                //@checkstyle AnonInnerLength (1 line)
+                new FakeMultipartRequest(req, dispositions)
             );
         }
         @Override
@@ -452,13 +451,27 @@ public interface RqMultipart extends Request {
             return this.fake.body();
         }
         /**
-         * Fake body creator.
+         * Fake body stream creator.
          * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          * @throws IOException If fails
          */
+        private static InputStream fakeStream(final Request... dispositions)
+            throws IOException {
+            final StringBuilder builder = fakeBody(dispositions);
+            return new ByteArrayInputStream(
+                builder.toString().getBytes(StandardCharsets.UTF_8)
+            );
+        }
+
+        /**
+         * Fake body creator.
+         * @param dispositions Fake request body parts
+         * @return StringBuilder of given dispositions
+         * @throws IOException If fails
+         */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static InputStream fakeBody(final Request... dispositions)
+        private static StringBuilder fakeBody(final Request... dispositions)
             throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
@@ -479,9 +492,56 @@ public interface RqMultipart extends Request {
             }
             builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
                 .append(String.format("--%s--", BOUNDARY));
-            return new ByteArrayInputStream(
-                builder.toString().getBytes()
-            );
+            return builder;
+        }
+
+        /**
+         * This class is using a decorator pattern for representing
+         * a fake HTTP multipart request.
+         */
+        private static class FakeMultipartRequest implements Request {
+
+            /**
+             * Request object. Holds a value for the header.
+             */
+            private final Request req;
+
+            /**
+             * Holding multiple request body parts.
+             */
+            private final Request[] dispositions;
+
+            /**
+             * The Constructor for the class.
+             * @param req The Request object
+             * @param dispositions The sequence of dispositions
+             */
+            FakeMultipartRequest(
+                final Request req, final Request... dispositions
+            ) {
+                this.req = req;
+                this.dispositions = dispositions;
+            }
+
+            @Override
+            public Iterable<String> head() throws IOException {
+                return new RqWithHeaders(
+                    this.req,
+                    String.format(
+                        "Content-Type: multipart/form-data; boundary=%s",
+                        Fake.BOUNDARY
+                    ),
+                    String.format(
+                        "Content-Length: %s",
+                        Fake.fakeBody(this.dispositions).length()
+                    )
+                ).head();
+            }
+
+            @Override
+            public InputStream body() throws IOException {
+                return Fake.fakeStream(this.dispositions);
+            }
         }
     }
 

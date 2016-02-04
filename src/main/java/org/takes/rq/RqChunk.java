@@ -21,60 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
+import org.takes.Request;
 
 /**
- * Simple response.
+ * Request decorator that limits its body, according to
+ * the chunk sizes when it is a chunked Transfer-Encoding.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- * @since 0.17
+ * @since 0.15
+ * @see org.takes.rq.RqPrint
  */
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class RsSimple extends RsWrap {
+public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param req Original request
      */
-    public RsSimple(final Iterable<String> head, final String body) {
-        this(
-            head,
-            new ByteArrayInputStream(
-                body.getBytes(StandardCharsets.UTF_8)
-            )
+    public RqChunk(final Request req) {
+        super(
+            new Request() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return req.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RqChunk.cap(req);
+                }
+            }
         );
     }
 
     /**
-     * Ctor.
-     * @param head Head
-     * @param body Body
+     * Cap the steam.
+     * @param req Request
+     * @return Stream with a cap
+     * @throws IOException If fails
      */
-    public RsSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
-        );
+    private static InputStream cap(final Request req) throws IOException {
+        final Iterator<String> hdr = new RqHeaders.Base(req)
+            .header("Transfer-Encoding").iterator();
+        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
+            throw new UnsupportedOperationException();
+        }
+        return req.body();
     }
 
 }
