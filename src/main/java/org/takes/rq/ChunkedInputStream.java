@@ -221,49 +221,66 @@ final class ChunkedInputStream extends InputStream {
         State state = State.NORMAL;
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
         while (state != State.END) {
-            int next = ChunkedInputStream.read(stream);
-            switch (state) {
-                case NORMAL:
-                    switch (next) {
-                        case '\r':
-                            state = State.R;
-                            break;
-                        case '\"':
-                            state = State.QUOTED_STRING;
-                            break;
-                        default:
-                            result.write(next);
-                    }
-                    break;
-                case R:
-                    if (next == '\n') {
-                        state = State.END;
-                    } else {
-                        throw new IOException(
-                            String.format(
-                                "%s%s",
-                                "Protocol violation: Unexpected",
-                                " single newline character in chunk size"
-                            )
-                        );
-                    }
-                    break;
-                case QUOTED_STRING:
-                    switch (next) {
-                        case '\\':
-                            next = stream.read();
-                            result.write(next);
-                            break;
-                        case '\"':
-                            state = State.NORMAL;
-                            break;
-                        default:
-                            result.write(next);
-                    }
-                    break;
-                default:
-                    throw new IllegalStateException("Bad state");
-            }
+            state = next(stream, state, result);
+        }
+        return result;
+    }
+
+    /**
+     * Get next state for FSM.
+     * @param stream Input stream.
+     * @param state Current state.
+     * @param line Current chunk size line.
+     * @return New state.
+     * @throws IOException If fails.
+     */
+    private static State next(final InputStream stream, final State state,
+            final ByteArrayOutputStream line) throws IOException {
+        final int next = ChunkedInputStream.read(stream);
+        final State result;
+        switch (state) {
+            case NORMAL:
+                switch (next) {
+                    case '\r':
+                        result = State.R;
+                        break;
+                    case '\"':
+                        result = State.QUOTED_STRING;
+                        break;
+                    default:
+                        result = state;
+                        line.write(next);
+                }
+                break;
+            case R:
+                if (next == '\n') {
+                    result = State.END;
+                } else {
+                    throw new IOException(
+                        String.format(
+                            "%s%s",
+                            "Protocol violation: Unexpected",
+                            " single newline character in chunk size"
+                        )
+                    );
+                }
+                break;
+            case QUOTED_STRING:
+                switch (next) {
+                    case '\\':
+                        result = state;
+                        line.write(stream.read());
+                        break;
+                    case '\"':
+                        result = State.NORMAL;
+                        break;
+                    default:
+                        result = state;
+                        line.write(next);
+                }
+                break;
+            default:
+                throw new IllegalStateException("Bad state");
         }
         return result;
     }
