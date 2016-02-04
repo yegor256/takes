@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -59,6 +60,11 @@ public final class RsWithTypeTest {
     private static final String TYPE_TEXT = "text/plain";
 
     /**
+     * Content type application/json.
+     */
+    private static final String TYPE_JSON = "application/json";
+
+    /**
      * HTTP Status OK.
      */
     private static final String HTTP_OK = "HTTP/1.1 200 OK";
@@ -67,6 +73,12 @@ public final class RsWithTypeTest {
      * Content-Type format.
      */
     private static final String CONTENT_TYPE = "Content-Type: %s";
+
+    /**
+     * Content-Type format with charset.
+     */
+    private static final String CONTENT_TYPE_WITH_CHARSET =
+        "Content-Type: %s; charset=%s";
 
     /**
      * RsWithType can replace an existing type.
@@ -147,6 +159,28 @@ public final class RsWithTypeTest {
                 )
             )
         );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.HTML(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_XML
+                    ),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(
+                        CONTENT_TYPE_WITH_CHARSET,
+                        TYPE_HTML,
+                        StandardCharsets.ISO_8859_1
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
     }
 
     /**
@@ -166,7 +200,29 @@ public final class RsWithTypeTest {
             Matchers.equalTo(
                 Joiner.on(CRLF).join(
                     HTTP_OK,
-                    String.format(CONTENT_TYPE, "application/json"),
+                    String.format(CONTENT_TYPE, TYPE_JSON),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.JSON(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_XML
+                    ),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(
+                        CONTENT_TYPE_WITH_CHARSET,
+                        TYPE_JSON,
+                        StandardCharsets.ISO_8859_1
+                    ),
                     "",
                     ""
                 )
@@ -197,6 +253,28 @@ public final class RsWithTypeTest {
                 )
             )
         );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.XML(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_HTML
+                    ),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(
+                        CONTENT_TYPE_WITH_CHARSET,
+                        TYPE_XML,
+                        StandardCharsets.ISO_8859_1
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
     }
 
     /**
@@ -211,6 +289,71 @@ public final class RsWithTypeTest {
                     new RsWithType(
                         new RsEmpty(), TYPE_HTML
                     )
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, TYPE_TEXT),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.Text(
+                    new RsWithType(
+                        new RsEmpty(), TYPE_HTML
+                    ),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(
+                        CONTENT_TYPE_WITH_CHARSET,
+                        TYPE_TEXT,
+                        StandardCharsets.ISO_8859_1
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * Ensures that the charset set is properly added when explicitly
+     * specified and absent when not specified.
+     * @throws java.lang.Exception If a problem occurs.
+     */
+    @Test
+    public void withCharset() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(
+                    new RsEmpty(), TYPE_TEXT, StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(
+                        CONTENT_TYPE_WITH_CHARSET,
+                        TYPE_TEXT,
+                        StandardCharsets.ISO_8859_1
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(
+                    new RsEmpty(), TYPE_TEXT
                 )
             ).print(),
             Matchers.equalTo(
