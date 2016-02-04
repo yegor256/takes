@@ -162,7 +162,7 @@ final class ChunkedInputStream extends InputStream {
      */
     private int chunkSize(final InputStream stream)
         throws IOException {
-        final ByteArrayOutputStream baos = this.sizeLine(stream);
+        final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final int result;
         final String data = baos.toString();
         final int separator = data.indexOf(';');
@@ -216,7 +216,7 @@ final class ChunkedInputStream extends InputStream {
      * @return Line with chunk size.
      * @throws IOException If fails.
      */
-    private ByteArrayOutputStream sizeLine(final InputStream stream)
+    private static ByteArrayOutputStream sizeLine(final InputStream stream)
         throws IOException {
         State state = State.NORMAL;
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
