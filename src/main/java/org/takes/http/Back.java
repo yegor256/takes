@@ -24,7 +24,7 @@
 package org.takes.http;
 
 import java.io.IOException;
-import java.net.Socket;
+import org.takes.misc.Socket;
 
 /**
  * HTTP back.
@@ -32,6 +32,7 @@ import java.net.Socket;
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.1
  */
