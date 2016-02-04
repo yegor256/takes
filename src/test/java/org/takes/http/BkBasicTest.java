@@ -60,10 +60,6 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #306:30min At the moment we don't support HTTP
- *  persistent connections. Would be great to implement
- *  this feature. BkBasic.accept should handle more
- *  than one HTTP request in one connection.
  * @todo #516:30min It will be nice to refactor tests with Socket usage and
  *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
@@ -189,7 +185,6 @@ public final class BkBasicTest {
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
@@ -244,7 +239,7 @@ public final class BkBasicTest {
         }
         MatcherAssert.assertThat(
             output.toString(),
-            RegexMatchers.containsPattern(text + ".*?" + text)
+            RegexMatchers.containsPattern("(?s)" + text + ".*?" + text)
         );
     }
 

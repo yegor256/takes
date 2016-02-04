@@ -23,6 +23,7 @@
  */
 package org.takes.http;
 
+import com.jcabi.aspects.Tv;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,12 +33,16 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
+import org.takes.rq.RqPrint;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -58,6 +63,11 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
+     * Default socket timeouts (milliseconds).
+     */
+    private static final int TIMEOUT = Tv.THOUSAND;
+
+    /**
      * Take.
      */
     private final transient Take take;
@@ -70,17 +80,41 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+//      @todo #519:30min Need to support Keep-Alive header here and take
+//       into account specified timeout and max requests.
+//       See http://tools.ietf.org/id/draft-thomson-hybi-http-timeout-01.html
+//       for details
     @Override
+    @SuppressWarnings({
+        "PMD.EmptyCatchBlock",
+        "PMD.AvoidInstantiatingObjectsInLoops"})
     public void accept(final Socket socket) throws IOException {
+        socket.setSoTimeout(BkBasic.TIMEOUT);
         final InputStream input = socket.getInputStream();
         try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
-            );
+            while (true) {
+                final Request request = new RqLengthAware(new RqLive(input));
+                this.print(
+                    BkBasic.addSocketHeaders(
+                        request,
+                        socket
+                    ),
+                    new BufferedOutputStream(socket.getOutputStream())
+                );
+                if (new RqHeaders.Base(request)
+                        .header("Content-Length")
+                        .size() > 0) {
+                    new RqPrint(request).printBody();
+                    input.read();
+                    input.read();
+                    if (input.available() <= 0) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+        } catch (final SocketTimeoutException exc) {
         } finally {
             input.close();
         }
@@ -108,7 +142,7 @@ public final class BkBasic implements Back {
                 )
             ).print(output);
         } finally {
-            output.close();
+            output.flush();
         }
     }
 
