@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 /**
  * Input stream from chunked coded http request body.
@@ -164,7 +165,7 @@ final class ChunkedInputStream extends InputStream {
         throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final int result;
-        final String data = baos.toString();
+        final String data = baos.toString(Charset.defaultCharset().name());
         final int separator = data.indexOf(';');
         try {
             // @checkstyle MagicNumberCheck (10 lines)
