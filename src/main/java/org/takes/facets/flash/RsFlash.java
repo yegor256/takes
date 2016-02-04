@@ -44,13 +44,23 @@ import org.takes.rs.RsWrap;
  * to pass temporary variables between requests which is particularly helpful
  * especially in case of a redirect.
  *
+ * <p>The flash message mechanism is meant to be used in case you have a
+ * dynamic content to render in which you want to add success or error
+ * messages. The typical use case is when you have a form that the user can
+ * submit and you want to be able to indicate whether the request was
+ * successful or not.
+ *
+ * <p>The flash mechanism is a stateful mechanism based on a cookie so it is
+ * not meant to be used to implement stateless components such as a RESTful
+ * service.
+ *
+ *
  * <p>This class helps you to automate the flash message mechanism, by
  * adding flash messages to your responses, for example:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
  *   public Response act(final Request req) throws IOException {
- *     // save the post to the database
  *     return new RsForward(new RsFlash("thanks for the post"));
  *   }
  * }</pre>
