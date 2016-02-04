@@ -40,18 +40,17 @@ import org.takes.rs.RsWrap;
 /**
  * Forwarding response.
  *
- * <p>The Flash concept is taken from Ruby on Rails, it is actually the ability
- * to pass temporary variables between requests which is particularly helpful
- * especially in case of a redirect.
- *
- * <p>This class helps you to automate the flash message mechanism, by
+ * <p>This class helps you to automate flash message mechanism, by
  * adding flash messages to your responses, for example:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act(final Request req) throws IOException {
+ *   public Response act(final Request req) {
  *     // save the post to the database
- *     return new RsForward(new RsFlash("thanks for the post"));
+ *     return new RsFlash(
+ *       new RsForward(),
+ *       "thanks for the post"
+ *     );
  *   }
  * }</pre>
  *
@@ -63,10 +62,14 @@ import org.takes.rs.RsWrap;
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
- *   public Response act(final Request req) throws IOException {
- *     return new RsForward(
- *         new RsFlash("can't save your post, sorry",
- *         java.util.logging.Level.SEVERE));
+ *   public Response act(final Request req) {
+ *     if (failed) {
+ *       throw new RsFlash(
+ *         new RsForward(),
+ *         "can't save your post, sorry",
+ *         java.util.logging.Level.SEVERE
+ *       );
+ *     }
  *   }
  * }</pre>
  *
@@ -76,10 +79,8 @@ import org.takes.rs.RsWrap;
  * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
  * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
- * default name using a constructor of {@link org.takes.facets.flash.RsFlash}.
- *
- * <p>To clean up the cookie in the following requests, you will need to
- * decorate your {@code Take} with {@link TkFlash}.
+ * default name using a constructor of {@link org.takes.facets.flash.RsFlash},
+ * but it's not recommended. It's better to use the default name.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -98,12 +99,9 @@ public final class RsFlash extends RsWrap {
     private final transient String text;
 
     /**
-     * Constructs a {@code RsFlash} with the specified message.
-     * By default it will use {@code RsFlash} as cookie name.
-     *
+     * Ctor.
      * @param msg Message to show
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      */
     public RsFlash(final String msg)
         throws UnsupportedEncodingException {
@@ -111,14 +109,9 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Constructs a {@code RsFlash} with the specified error. The error is
-     * converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.
-     * By default it will use {@code RsFlash} as cookie name.
-     *
+     * Ctor.
      * @param err Error
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      */
     public RsFlash(final Throwable err)
         throws UnsupportedEncodingException {
@@ -126,15 +119,10 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Constructs a {@code RsFlash} with the specified error and logging level.
-     * The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.
-     * By default it will use {@code RsFlash} as cookie name.
-     *
+     * Ctor.
      * @param err Error
      * @param level Level
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      * @since 0.17
      */
     public RsFlash(final Throwable err, final Level level)
@@ -143,14 +131,10 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Constructs a {@code RsFlash} with the specified message and logging
-     * level.
-     * By default it will use {@code RsFlash} as cookie name.
-     *
+     * Ctor.
      * @param msg Message
      * @param level Level
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      */
     public RsFlash(final String msg, final Level level)
         throws UnsupportedEncodingException {
@@ -158,13 +142,11 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Constructs a {@code RsFlash} with the specified message, logging level
-     * and cookie name.
+     * Ctor.
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      */
     public RsFlash(final String msg, final Level level, final String cookie)
         throws UnsupportedEncodingException {
@@ -179,8 +161,7 @@ public final class RsFlash extends RsWrap {
      * @param level Level
      * @param cookie Cookie name
      * @return Response
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     * supported
+     * @throws UnsupportedEncodingException If fails
      */
     private static Response make(final String msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
