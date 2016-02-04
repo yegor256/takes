@@ -221,7 +221,7 @@ final class ChunkedInputStream extends InputStream {
         State state = State.NORMAL;
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
         while (state != State.END) {
-            int next = this.read(stream);
+            int next = ChunkedInputStream.read(stream);
             switch (state) {
                 case NORMAL:
                     switch (next) {
