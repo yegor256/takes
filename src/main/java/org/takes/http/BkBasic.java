@@ -78,9 +78,11 @@ public final class BkBasic implements Back {
     }
 
 //      @todo #519:30min Need to support Keep-Alive header here and take
-//       into account specified timeout and max requests.
+//       into account specified timeout and max requests parameters.
 //       See http://tools.ietf.org/id/draft-thomson-hybi-http-timeout-01.html
-//       for details
+//       for details. Also need to remove input.available <= 0 condition
+//       - this is done in order to prevent failure of some tests,
+//       should be replaced with proper Keep-Alive header in tests
     @Override
     @SuppressWarnings({
         "PMD.EmptyCatchBlock",
