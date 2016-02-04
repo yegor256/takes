@@ -144,7 +144,7 @@ final class ChunkedInputStream extends InputStream {
         if (!this.bof) {
             this.readCRLF();
         }
-        this.size = this.chunkSize(this.origin);
+        this.size = ChunkedInputStream.chunkSize(this.origin);
         this.bof = false;
         this.pos = 0;
         if (this.size == 0) {
@@ -160,7 +160,7 @@ final class ChunkedInputStream extends InputStream {
      * @return The chunk size as integer
      * @throws IOException when the chunk size could not be parsed
      */
-    private int chunkSize(final InputStream stream)
+    private static int chunkSize(final InputStream stream)
         throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final int result;
