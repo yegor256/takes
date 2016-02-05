@@ -71,7 +71,7 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnGet() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -79,7 +79,7 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(RqMethod.GET))
                         ).print(),
-                        Matchers.containsString(HELLO_WORLD_STRING)
+                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
                     );
                 }
             }
@@ -92,7 +92,7 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnPost() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -100,7 +100,7 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(RqMethod.POST))
                         ).print(),
-                        Matchers.containsString(HELLO_WORLD_STRING)
+                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
                     );
                 }
             }
@@ -113,7 +113,7 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnPut() throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -121,7 +121,7 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(RqMethod.PUT))
                         ).print(),
-                        Matchers.containsString(HELLO_WORLD_STRING)
+                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
                     );
                 }
             }
@@ -147,12 +147,12 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(RqMethod.GET, QUERY)
+                                new RqFake(RqMethod.GET, TkProxyTest.QUERY)
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                FORMAT,
+                                TkProxyTest.FORMAT,
                                 home.getHost(), home.getPort()
                             )
                         )
@@ -181,12 +181,12 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(RqMethod.POST, QUERY)
+                                new RqFake(RqMethod.POST, TkProxyTest.QUERY)
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                FORMAT,
+                                TkProxyTest.FORMAT,
                                 home.getHost(), home.getPort()
                             )
                         )
@@ -215,12 +215,12 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(RqMethod.PUT, QUERY)
+                                new RqFake(RqMethod.PUT, TkProxyTest.QUERY)
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                FORMAT,
+                                TkProxyTest.FORMAT,
                                 home.getHost(), home.getPort()
                             )
                         )
