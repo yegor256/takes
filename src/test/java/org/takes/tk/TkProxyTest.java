@@ -49,7 +49,7 @@ import org.takes.rs.RsText;
  *  as well as the different combinations of request/response headers.
  *
  * @todo #458:30min We need to support the http method CONNECT.
- *  Currently, the use of Connect throws an exception. 
+ *  Currently, the use of Connect throws an exception.
  */
 public final class TkProxyTest {
 
