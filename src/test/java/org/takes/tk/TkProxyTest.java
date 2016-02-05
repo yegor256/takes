@@ -48,12 +48,39 @@ import org.takes.rs.RsText;
 public final class TkProxyTest {
 
     /**
+     * Constant for the checking the content.
+     */
+    private static final String HELLO_WORLD_STRING = "hello, world!";
+
+    /**
+     * Http url format string.
+     */
+    private static final String FORMAT = "http://%s:%d/a/b/c";
+
+    /**
+     * Http query string.
+     */
+    private static final String QUERY = "/a/b/c";
+
+    /**
      * TkProxy can just works on POST.
      * @throws Exception If some problem inside.
      */
     @Test
     public void justWorksOnPost()throws Exception {
-        this.justWorks(RqMethod.POST);
+        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake(RqMethod.POST))
+                        ).print(),
+                        Matchers.containsString(HELLO_WORLD_STRING)
+                    );
+                }
+            }
+        );
     }
 
     /**
@@ -62,7 +89,19 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnGet()throws Exception {
-        this.justWorks(RqMethod.GET);
+        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake(RqMethod.GET))
+                        ).print(),
+                        Matchers.containsString(HELLO_WORLD_STRING)
+                    );
+                }
+            }
+        );
     }
 
     /**
@@ -71,47 +110,6 @@ public final class TkProxyTest {
      */
     @Test
     public void correctlyMapsPathStringOnGet() throws Exception {
-        this.correctlyMapsPathString(RqMethod.GET);
-    }
-
-    /**
-     *TkProxy can correctly maps path string on POST.
-     * @throws Exception If some problem inside.
-     */
-    @Test
-    public void correctlyMapsPathStringOnPost() throws Exception {
-        this.correctlyMapsPathString(RqMethod.POST);
-    }
-
-    /**
-     * A private method to do test with multiple httpMethods.
-     * @param method HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside.
-     */
-    private void justWorks(final String method) throws Exception {
-        new FtRemote(new TkFixed("hello, world!")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(new RqFake(method))
-                        ).print(),
-                        Matchers.containsString("hello")
-                    );
-                }
-            }
-        );
-    }
-
-    /**
-     * A private method to call the TkProxy. act with httpMethod.
-     *
-     * @param method HTTP methods (GET, POST, etc),
-     * @throws Exception If some problem inside.
-     */
-    private void correctlyMapsPathString(final String method)
-        throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
@@ -125,12 +123,12 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(method, "/a/b/c")
+                                new RqFake(RqMethod.GET, QUERY)
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                "http://%s:%d/a/b/c",
+                                FORMAT,
                                 home.getHost(), home.getPort()
                             )
                         )
@@ -138,6 +136,41 @@ public final class TkProxyTest {
                 }
             }
         );
+
     }
 
+    /**
+     *TkProxy can correctly maps path string on POST.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void correctlyMapsPathStringOnPost() throws Exception {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(new RqHref.Base(req).href().toString());
+            }
+        };
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(
+                                new RqFake(RqMethod.POST, QUERY)
+                            )
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                FORMAT,
+                                home.getHost(), home.getPort()
+                            )
+                        )
+                    );
+                }
+            }
+        );
+
+    }
 }
