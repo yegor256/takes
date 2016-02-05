@@ -47,6 +47,9 @@ import org.takes.rs.RsText;
  * @todo #377:30min/DEV We need more tests for TkProxy.
  *  The tests should verify the different HTTP methods (GET, POST, etc),
  *  as well as the different combinations of request/response headers.
+ *
+ * @todo #458:30min We need to support the http method CONNECT.
+ *  Currently, the use of Connect throws an exception. 
  */
 public final class TkProxyTest {
 
@@ -60,6 +63,11 @@ public final class TkProxyTest {
         RqMethod.DELETE,
         RqMethod.TRACE,
     };
+
+    /**
+     * The expected result for the Head http request.
+     */
+    private static final String RESULT = "";
 
     /**
      * TkProxy can just work.
@@ -83,6 +91,29 @@ public final class TkProxyTest {
                 }
             );
         }
+    }
+
+    /**
+     * TkProxy can just work on Head.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void justWorksOnHEAD() throws Exception {
+        new FtRemote(new TkFixed("Head test!")).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(
+                                new RqFake(RqMethod.HEAD)
+                            )
+                        ).print(),
+                        Matchers.containsString(TkProxyTest.RESULT)
+                    );
+                }
+            }
+        );
     }
 
     /**
@@ -120,5 +151,40 @@ public final class TkProxyTest {
                 }
             );
         }
+    }
+
+    /**
+     * TkProxy can correctly maps path string on head.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void correctlyMapsPathStringOnHead() throws Exception {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(new RqHref.Base(req).href().toString());
+            }
+        };
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(
+                                new RqFake(RqMethod.HEAD, "Head")
+                            )
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                TkProxyTest.RESULT,
+                                home.getHost(),
+                                home.getPort()
+                            )
+                        )
+                    );
+                }
+            }
+        );
     }
 }
