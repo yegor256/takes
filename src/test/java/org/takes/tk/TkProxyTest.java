@@ -53,10 +53,10 @@ public final class TkProxyTest {
     /**
      * An array of http methods for testing.
      */
-    private static final String [] METHODS = {
+    private static final String[] METHODS = {
         RqMethod.POST,
         RqMethod.GET,
-        RqMethod.PUT
+        RqMethod.PUT,
     };
 
     /**
@@ -116,7 +116,5 @@ public final class TkProxyTest {
                 }
             );
         }
-
     }
-
 }
