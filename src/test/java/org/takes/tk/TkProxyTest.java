@@ -63,6 +63,7 @@ public final class TkProxyTest {
      * TkProxy can just work.
      * @throws Exception If some problem inside
      */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void justWorks() throws Exception {
         for (final String method:TkProxyTest.METHODS) {
@@ -86,6 +87,7 @@ public final class TkProxyTest {
      * TkProxy can correctly maps path string.
      * @throws Exception If some problem inside
      */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
