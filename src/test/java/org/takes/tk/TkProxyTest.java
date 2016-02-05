@@ -49,7 +49,8 @@ import org.takes.rs.RsText;
  *  as well as the different combinations of request/response headers.
  *
  * @todo #458:30min We need to support the http method CONNECT.
- *  Currently, the use of Connect throws an exception.
+ *  Currently, the use of Connect request to  throws an IOException .
+ *  The com.jcabi.http.request.JdkReques classes send method is failing.
  */
 public final class TkProxyTest {
 
