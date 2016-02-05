@@ -95,14 +95,18 @@ public interface RqRegex extends Request {
         public Fake(final Request req, final Matcher matcher) {
             this.request = req;
             this.mtr = matcher;
-            if (!this.mtr.matches()) {
-                throw new IllegalArgumentException(
-                    String.format("%s doesn't match %s", req, matcher.pattern())
-                );
-            }
         }
         @Override
         public Matcher matcher() {
+            if (!this.mtr.matches()) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "%s doesn't match %s",
+                        this.request,
+                        this.mtr.pattern()
+                    )
+                );
+            }
             return this.mtr;
         }
         @Override

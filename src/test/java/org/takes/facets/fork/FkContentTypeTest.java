@@ -55,7 +55,11 @@ public final class FkContentTypeTest {
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("text/xml", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "*/* ")
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "*/* "
+                )
             ).has(),
             Matchers.is(true)
         );
@@ -71,7 +75,11 @@ public final class FkContentTypeTest {
             new FkContentType(
                 "application/json charset=utf-8", new RsEmpty()
             ).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "images/*")
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "images/*"
+                )
             ).has(),
             Matchers.is(false)
         );
@@ -88,8 +96,10 @@ public final class FkContentTypeTest {
                 "text/html charset=iso-8859-1", new RsEmpty()
             ).route(
                 new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    new RqFake(), CONTENT_TYPE, "text/html charset=iso-8859-1"
+                    "text/html charset=iso-8859-1"
                 )
             ).has(),
             Matchers.is(true)
@@ -104,7 +114,11 @@ public final class FkContentTypeTest {
     public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("*/*", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "")
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    ""
+                )
             ).has(),
             Matchers.is(true)
         );
@@ -121,7 +135,9 @@ public final class FkContentTypeTest {
                 "text/html charset=iso-8859-1", new RsEmpty()
             ).route(
                 new RqWithHeader(
-                    new RqFake(), CONTENT_TYPE, "text/html charset=utf8"
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "text/html charset=utf8"
                 )
             ).has(),
             Matchers.is(false)

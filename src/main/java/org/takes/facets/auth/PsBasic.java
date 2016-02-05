@@ -86,7 +86,7 @@ public final class PsBasic implements Pass {
             DatatypeConverter.parseBase64Binary(
                 new RqHeaders.Smart(
                     new RqHeaders.Base(request)
-                ).single("authorization").split(AUTH_HEAD)[1]
+                ).single("authorization").split(PsBasic.AUTH_HEAD)[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];

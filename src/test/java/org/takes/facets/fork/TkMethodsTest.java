@@ -36,6 +36,7 @@ import org.takes.rq.RqMethod;
  * Test case for {@link TkMethods}.
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
+ * @since 0.1
  */
 public final class TkMethodsTest {
     /**

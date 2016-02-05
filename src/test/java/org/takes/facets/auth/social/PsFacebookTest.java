@@ -43,6 +43,7 @@ import org.takes.rq.RqFake;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @checkstyle MagicNumberCheck (500 lines)
+ * @since 0.1
  */
 public class PsFacebookTest {
 

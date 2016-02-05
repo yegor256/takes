@@ -209,7 +209,7 @@ public final class RqMultipartTest {
         MatcherAssert.assertThat(
             new RqHeaders.Base(
                 multi.part("t4").iterator().next()
-            ).header(DISPOSITION),
+            ).header(RqMultipartTest.DISPOSITION),
             Matchers.hasItem("form-data; name=\"t4\"")
         );
         MatcherAssert.assertThat(
