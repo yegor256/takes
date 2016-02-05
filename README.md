@@ -279,7 +279,7 @@ public final class App {
 ## Templates
 
 Now let's see how we can render something more complex than an plain text.
-First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be 
+First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
@@ -901,14 +901,6 @@ sending us your pull request please run full Maven build:
 $ mvn clean install -Pqulice
 ```
 
-If your default encoding is not UTF-8, some of unit tests will break. This
-is an intentional behavior. To fix that, set this environment variable
-in console (in Windows, for example):
-
-```
-SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
-```
-
 To avoid build errors use maven 3.2+.
 
 Pay attention that our `pom.xml` inherits a lot of configuration
@@ -920,4 +912,3 @@ explains why it's done this way.
 
 If you have questions or general suggestions, don't hesitate to submit
 a new [Github issue](https://github.com/yegor256/takes/issues/new).
-

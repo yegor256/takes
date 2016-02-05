@@ -65,6 +65,7 @@ import java.io.IOException;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @checkstyle LineLengthCheck (1 lines)
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  */
 public interface Take {

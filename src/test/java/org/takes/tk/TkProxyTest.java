@@ -44,7 +44,10 @@ import org.takes.rs.RsText;
  * @version $Id$
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
-  */
+ * @todo #377:30min/DEV We need more tests for TkProxy.
+ *  The tests should verify the different HTTP methods (GET, POST, etc),
+ *  as well as the different combinations of request/response headers.
+ */
 public final class TkProxyTest {
 
     /**
@@ -63,32 +66,11 @@ public final class TkProxyTest {
     private static final String QUERY = "/a/b/c";
 
     /**
-     * TkProxy can just works on POST.
-     * @throws Exception If some problem inside.
+     * TkProxy can works on Get.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksOnPost()throws Exception {
-        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(new RqFake(RqMethod.POST))
-                        ).print(),
-                        Matchers.containsString(HELLO_WORLD_STRING)
-                    );
-                }
-            }
-        );
-    }
-
-    /**
-     *TkProxy can just works on GET.
-     * @throws Exception If some problem inside.
-     */
-    @Test
-    public void justWorksOnGet()throws Exception {
+    public void justWorksOnGet() throws Exception {
         new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
             new FtRemote.Script() {
                 @Override
@@ -105,8 +87,50 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can correctly maps path string on GET.
-     * @throws Exception If some problem inside.
+     * TkProxy can works on Post.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void justWorksOnPost() throws Exception {
+        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake(RqMethod.POST))
+                        ).print(),
+                        Matchers.containsString(HELLO_WORLD_STRING)
+                    );
+                }
+            }
+        );
+    }
+
+    /**
+     * TkProxy can works on Put.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void justWorksOnPut() throws Exception {
+        new FtRemote(new TkFixed(HELLO_WORLD_STRING)).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake(RqMethod.PUT))
+                        ).print(),
+                        Matchers.containsString(HELLO_WORLD_STRING)
+                    );
+                }
+            }
+        );
+    }
+
+    /**
+     * TkProxy can correctly maps path string on Get.
+     * @throws Exception If some problem inside
      */
     @Test
     public void correctlyMapsPathStringOnGet() throws Exception {
@@ -136,12 +160,11 @@ public final class TkProxyTest {
                 }
             }
         );
-
     }
 
     /**
-     *TkProxy can correctly maps path string on POST.
-     * @throws Exception If some problem inside.
+     * TkProxy can correctly maps path string on Post.
+     * @throws Exception If some problem inside
      */
     @Test
     public void correctlyMapsPathStringOnPost() throws Exception {
@@ -171,6 +194,40 @@ public final class TkProxyTest {
                 }
             }
         );
-
     }
+
+    /**
+     * TkProxy can correctly maps path string on Put.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void correctlyMapsPathStringOnPut() throws Exception {
+        final Take take = new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsText(new RqHref.Base(req).href().toString());
+            }
+        };
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(
+                                new RqFake(RqMethod.PUT, QUERY)
+                            )
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                FORMAT,
+                                home.getHost(), home.getPort()
+                            )
+                        )
+                    );
+                }
+            }
+        );
+    }
+
 }
