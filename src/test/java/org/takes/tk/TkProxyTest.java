@@ -57,6 +57,8 @@ public final class TkProxyTest {
         RqMethod.POST,
         RqMethod.GET,
         RqMethod.PUT,
+        RqMethod.DELETE,
+        RqMethod.TRACE,
     };
 
     /**
