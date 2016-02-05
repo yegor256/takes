@@ -51,127 +51,72 @@ import org.takes.rs.RsText;
 public final class TkProxyTest {
 
     /**
-     * Constant for the checking the content.
+     * An array of http methods for testing.
      */
-    private static final String CONTENT = "hello, world!";
+    private static final String [] METHODS = {
+        RqMethod.POST,
+        RqMethod.GET,
+        RqMethod.PUT
+    };
 
     /**
-     * Http url format string.
-     */
-    private static final String FORMAT = "http://%s:%d/a/b/c";
-
-    /**
-     * Http query string.
-     */
-    private static final String QUERY = "/a/b/c";
-
-    /**
-     * TkProxy can works on Get.
+     * TkProxy can just work.
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksOnGet() throws Exception {
-        new FtRemote(new TkFixed(TkProxyTest.CONTENT)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(new RqFake(RqMethod.GET))
-                        ).print(),
-                        Matchers.containsString(TkProxyTest.CONTENT)
-                    );
+    public void justWorks() throws Exception {
+        for (final String method:TkProxyTest.METHODS) {
+            new FtRemote(new TkFixed("hello, world!")).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                            new RsPrint(
+                                new TkProxy(home).act(new RqFake(method))
+                            ).print(),
+                            Matchers.containsString("hello")
+                        );
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     /**
-     * TkProxy can works on Post.
+     * TkProxy can correctly maps path string.
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorksOnPost() throws Exception {
-        new FtRemote(new TkFixed(TkProxyTest.CONTENT)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(new RqFake(RqMethod.POST))
-                        ).print(),
-                        Matchers.containsString(TkProxyTest.CONTENT)
-                    );
-                }
-            }
-        );
-    }
-
-    /**
-     * TkProxy can correctly maps path string on Get.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void correctlyMapsPathStringOnGet() throws Exception {
+    public void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
                 return new RsText(new RqHref.Base(req).href().toString());
             }
         };
-        new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(
-                                new RqFake(RqMethod.GET, TkProxyTest.QUERY)
+        for (final String method:TkProxyTest.METHODS) {
+            new FtRemote(take).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(final URI home) throws IOException {
+                        MatcherAssert.assertThat(
+                            new RsPrint(
+                                new TkProxy(home).act(
+                                    new RqFake(method, "/a/b/c")
+                                )
+                            ).printBody(),
+                            Matchers.equalTo(
+                                String.format(
+                                    "http://%s:%d/a/b/c",
+                                    home.getHost(), home.getPort()
+                                )
                             )
-                        ).printBody(),
-                        Matchers.equalTo(
-                            String.format(
-                                TkProxyTest.FORMAT,
-                                home.getHost(), home.getPort()
-                            )
-                        )
-                    );
+                        );
+                    }
                 }
-            }
-        );
+            );
+        }
+
     }
 
-    /**
-     * TkProxy can correctly maps path string on Post.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void correctlyMapsPathStringOnPost() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(new RqHref.Base(req).href().toString());
-            }
-        };
-        new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(
-                                new RqFake(RqMethod.POST, TkProxyTest.QUERY)
-                            )
-                        ).printBody(),
-                        Matchers.equalTo(
-                            String.format(
-                                TkProxyTest.FORMAT,
-                                home.getHost(), home.getPort()
-                            )
-                        )
-                    );
-                }
-            }
-        );
-    }
 }
