@@ -66,12 +66,11 @@ public final class TkText extends TkWrap {
         super(
             new Take() {
                 @Override
-                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
                     try {
                         new RqPrint(req).printBody();
                     } catch (final IOException exc) {
-                        throw new RuntimeException(exc);
+                        throw new IllegalStateException(exc);
                     }
                     return new RsText(body);
                 }
@@ -87,12 +86,11 @@ public final class TkText extends TkWrap {
         super(
             new Take() {
                 @Override
-                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
                     try {
                         new RqPrint(req).printBody();
                     } catch (final IOException exc) {
-                        throw new RuntimeException(exc);
+                        throw new IllegalStateException(exc);
                     }
                     return new RsText(body);
                 }

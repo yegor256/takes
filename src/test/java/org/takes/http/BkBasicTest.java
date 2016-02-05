@@ -143,12 +143,11 @@ public final class BkBasicTest {
         new BkBasic(
             new Take() {
                 @Override
-                @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
                 public Response act(final Request req) {
                     try {
                         new RqPrint(req).printBody();
                     } catch (final IOException exc) {
-                        throw new RuntimeException(exc);
+                        throw new IllegalStateException(exc);
                     }
                     ref.set(req);
                     return new RsEmpty();
