@@ -53,7 +53,7 @@ public final class TkProxyTest {
     /**
      * Constant for the checking the content.
      */
-    private static final String HELLO_WORLD_STRING = "hello, world!";
+    private static final String CONTENT = "hello, world!";
 
     /**
      * Http url format string.
@@ -71,7 +71,7 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnGet() throws Exception {
-        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
+        new FtRemote(new TkFixed(TkProxyTest.CONTENT)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -79,7 +79,7 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(RqMethod.GET))
                         ).print(),
-                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
+                        Matchers.containsString(TkProxyTest.CONTENT)
                     );
                 }
             }
@@ -92,7 +92,7 @@ public final class TkProxyTest {
      */
     @Test
     public void justWorksOnPost() throws Exception {
-        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
+        new FtRemote(new TkFixed(TkProxyTest.CONTENT)).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -100,28 +100,7 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(RqMethod.POST))
                         ).print(),
-                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
-                    );
-                }
-            }
-        );
-    }
-
-    /**
-     * TkProxy can works on Put.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void justWorksOnPut() throws Exception {
-        new FtRemote(new TkFixed(TkProxyTest.HELLO_WORLD_STRING)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(new RqFake(RqMethod.PUT))
-                        ).print(),
-                        Matchers.containsString(TkProxyTest.HELLO_WORLD_STRING)
+                        Matchers.containsString(TkProxyTest.CONTENT)
                     );
                 }
             }
@@ -195,39 +174,4 @@ public final class TkProxyTest {
             }
         );
     }
-
-    /**
-     * TkProxy can correctly maps path string on Put.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void correctlyMapsPathStringOnPut() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(new RqHref.Base(req).href().toString());
-            }
-        };
-        new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(
-                                new RqFake(RqMethod.PUT, TkProxyTest.QUERY)
-                            )
-                        ).printBody(),
-                        Matchers.equalTo(
-                            String.format(
-                                TkProxyTest.FORMAT,
-                                home.getHost(), home.getPort()
-                            )
-                        )
-                    );
-                }
-            }
-        );
-    }
-
 }
