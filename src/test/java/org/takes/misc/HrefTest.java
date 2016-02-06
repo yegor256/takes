@@ -106,13 +106,10 @@ public final class HrefTest {
      */
     @Test
     public void acceptsNonProperlyEncodedURL() {
-        final String url =
-            "http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt";
-        final String result =
-            "http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt";
         MatcherAssert.assertThat(
-            new Href(url).toString(),
-            Matchers.equalTo(result)
+            // @checkstyle LineLength (2 lines)
+            new Href("http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt").toString(),
+            Matchers.equalTo("http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt")
         );
     }
 }
