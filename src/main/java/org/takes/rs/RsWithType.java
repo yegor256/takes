@@ -54,7 +54,7 @@ public final class RsWithType extends RsWrap {
     /**
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type.
-     * <p>The resulting header is of type <code>Content-Type: media-type</code>.
+     * <p>The resulting header is of type {@code Content-Type: media-type}.
      * @param res Original response
      * @param type Content type
      */
@@ -67,7 +67,7 @@ public final class RsWithType extends RsWrap {
      * the response using the specified type as media type and the specified
      * charset as charset parameter value.
      * <p>The resulting header
-     * is of type <code>Content-Type: media-type; charset=charset-value</code>.
+     * is of type {@code Content-Type: media-type; charset=charset-value}.
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header
@@ -122,7 +122,8 @@ public final class RsWithType extends RsWrap {
     public static final class HTML extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code HTML} that will add text/html as the content type
+         * header to the response.
          * @param res Original response
          */
         public HTML(final Response res) {
@@ -130,7 +131,9 @@ public final class RsWithType extends RsWrap {
         }
 
         /**
-         * Ctor.
+         * Constructs a {@code HTML} that will add text/html as the content type
+         * header to the response using the specified charset as charset
+         * parameter value.
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
@@ -152,7 +155,8 @@ public final class RsWithType extends RsWrap {
     public static final class JSON extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code JSON} that will add application/json as the
+         * content type header to the response.
          * @param res Original response
          */
         public JSON(final Response res) {
@@ -160,7 +164,9 @@ public final class RsWithType extends RsWrap {
         }
 
         /**
-         * Ctor.
+         * Constructs a {@code JSON} that will add application/json as the
+         * content type header to the response using the specified charset as
+         * charset parameter value.
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
@@ -182,7 +188,8 @@ public final class RsWithType extends RsWrap {
     public static final class XML extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code XML} that will add text/xml as the content type
+         * header to the response.
          * @param res Original response
          */
         public XML(final Response res) {
@@ -190,7 +197,9 @@ public final class RsWithType extends RsWrap {
         }
 
         /**
-         * Ctor.
+         * Constructs a {@code XML} that will add text/xml as the content type
+         * header to the response using the specified charset as
+         * charset parameter value.
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
@@ -212,7 +221,8 @@ public final class RsWithType extends RsWrap {
     public static final class Text extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code Text} that will add text/plain as the content
+         * type header to the response.
          * @param res Original response
          */
         public Text(final Response res) {
@@ -220,7 +230,9 @@ public final class RsWithType extends RsWrap {
         }
 
         /**
-         * Ctor.
+         * Constructs a {@code Text} that will add text/plain as the content
+         * type header to the response using the specified charset as
+         * charset parameter value.
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
