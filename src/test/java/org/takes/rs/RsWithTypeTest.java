@@ -296,13 +296,31 @@ public final class RsWithTypeTest {
     }
 
     /**
-     * RsWithType can add the charset to the content type when it is explicitly
-     * specified and can still provide the content type without the charset
-     * when it is not explicitly specified.
+     * RsWithType can add properly the content type to the header.
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void addsCharsetToContentTypeIfNeeded() throws Exception {
+    public void addsContentType() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(new RsWithType(new RsEmpty(), TYPE_TEXT)).print(),
+            Matchers.equalTo(
+                Joiner.on(CRLF).join(
+                    HTTP_OK,
+                    String.format(CONTENT_TYPE, TYPE_TEXT),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType can add the charset to the content type when it is explicitly
+     * specified.
+     * @throws Exception If a problem occurs.
+     */
+    @Test
+    public void addsCharsetToContentType() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
@@ -317,17 +335,6 @@ public final class RsWithTypeTest {
                         TYPE_TEXT,
                         StandardCharsets.ISO_8859_1
                     ),
-                    "",
-                    ""
-                )
-            )
-        );
-        MatcherAssert.assertThat(
-            new RsPrint(new RsWithType(new RsEmpty(), TYPE_TEXT)).print(),
-            Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_TEXT),
                     "",
                     ""
                 )

@@ -52,36 +52,22 @@ public final class RsWithType extends RsWrap {
     private static final String CHARSET = "charset";
 
     /**
-     * Content type text/html.
-     */
-    private static final String TYPE_HTML = "text/html";
-
-    /**
-     * Content type text/xml.
-     */
-    private static final String TYPE_XML = "text/xml";
-
-    /**
-     * Content type text/plain.
-     */
-    private static final String TYPE_TEXT = "text/plain";
-
-    /**
-     * Content type application/json.
-     */
-    private static final String TYPE_JSON = "application/json";
-
-    /**
-     * Ctor.
+     * Constructs a {@code RsWithType} that will add the content type header to
+     * the response using the specified type as media type.
+     * <p>The resulting header is of type <code>Content-Type: media-type</code>.
      * @param res Original response
      * @param type Content type
      */
     public RsWithType(final Response res, final CharSequence type) {
-        super(RsWithType.make(res, type));
+        this(res, type, null);
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithType} that will add the content type header to
+     * the response using the specified type as media type and the specified
+     * charset as charset parameter value.
+     * <p>The resulting header
+     * is of type <code>Content-Type: media-type; charset=charset-value</code>.
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header
@@ -92,33 +78,36 @@ public final class RsWithType extends RsWrap {
     }
 
     /**
-     * Ctor.
-     * @param res Original response
-     * @param type Content type
-     * @return Response
-     */
-    private static Response make(final Response res, final CharSequence type) {
-        return new RsWithHeader(
-            new RsWithoutHeader(res, RsWithType.HEADER),
-            RsWithType.HEADER, type
-        );
-    }
-
-    /**
      * Factory allowing to create {@code Response} with the corresponding
      * content type and character set.
      * @param res Original response
      * @param type Content type
-     * @param charset The character set to add in the content type header
+     * @param charset The character set to add to the content type header. If
+     *  {@code null} no character set will be added to the content type header
      * @return Response
      */
     private static Response make(final Response res, final CharSequence type,
         final Charset charset) {
-        return new RsWithHeader(
-            new RsWithoutHeader(res, RsWithType.HEADER),
-            RsWithType.HEADER,
-            String.format("%s; %s=%s", type, RsWithType.CHARSET, charset.name())
-        );
+        final Response response;
+        if (charset == null) {
+            response = new RsWithHeader(
+                new RsWithoutHeader(res, RsWithType.HEADER),
+                RsWithType.HEADER,
+                type
+            );
+        } else {
+            response = new RsWithHeader(
+                new RsWithoutHeader(res, RsWithType.HEADER),
+                RsWithType.HEADER,
+                String.format(
+                    "%s; %s=%s",
+                    type,
+                    RsWithType.CHARSET,
+                    charset.name()
+                )
+            );
+        }
+        return response;
     }
 
     /**
@@ -137,7 +126,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public HTML(final Response res) {
-            super(RsWithType.make(res, RsWithType.TYPE_HTML));
+            this(res, null);
         }
 
         /**
@@ -146,7 +135,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header
          */
         public HTML(final Response res, final Charset charset) {
-            super(RsWithType.make(res, RsWithType.TYPE_HTML, charset));
+            super(RsWithType.make(res, "text/html", charset));
         }
 
     }
@@ -167,7 +156,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public JSON(final Response res) {
-            super(RsWithType.make(res, RsWithType.TYPE_JSON));
+            this(res, null);
         }
 
         /**
@@ -176,7 +165,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header
          */
         public JSON(final Response res, final Charset charset) {
-            super(RsWithType.make(res, RsWithType.TYPE_JSON, charset));
+            super(RsWithType.make(res, "application/json", charset));
         }
 
     }
@@ -197,7 +186,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public XML(final Response res) {
-            super(RsWithType.make(res, RsWithType.TYPE_XML));
+            this(res, null);
         }
 
         /**
@@ -206,7 +195,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header
          */
         public XML(final Response res, final Charset charset) {
-            super(RsWithType.make(res, RsWithType.TYPE_XML, charset));
+            super(RsWithType.make(res, "text/xml", charset));
         }
 
     }
@@ -227,7 +216,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public Text(final Response res) {
-            super(RsWithType.make(res, RsWithType.TYPE_TEXT));
+            this(res, null);
         }
 
         /**
@@ -236,7 +225,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header
          */
         public Text(final Response res, final Charset charset) {
-            super(RsWithType.make(res, RsWithType.TYPE_TEXT, charset));
+            super(RsWithType.make(res, "text/plain", charset));
         }
 
     }
