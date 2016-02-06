@@ -27,6 +27,7 @@ import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Response decorator, with content type.
@@ -88,14 +89,28 @@ public final class RsWithType extends RsWrap {
      */
     private static Response make(final Response res, final CharSequence type,
         final Charset charset) {
-        final Response response;
+        final Opt<Charset> opt;
         if (charset == null) {
-            response = new RsWithHeader(
-                new RsWithoutHeader(res, RsWithType.HEADER),
-                RsWithType.HEADER,
-                type
-            );
+            opt = new Opt.Empty<>();
         } else {
+            opt = new Opt.Single<>(charset);
+        }
+        return RsWithType.make(res, type, opt);
+    }
+
+    /**
+     * Factory allowing to create {@code Response} with the corresponding
+     * content type and character set.
+     * @param res Original response
+     * @param type Content type
+     * @param charset The character set to add to the content type header. If
+     *  absent no character set will be added to the content type header
+     * @return Response
+     */
+    private static Response make(final Response res, final CharSequence type,
+        final Opt<Charset> charset) {
+        final Response response;
+        if (charset.has()) {
             response = new RsWithHeader(
                 new RsWithoutHeader(res, RsWithType.HEADER),
                 RsWithType.HEADER,
@@ -103,8 +118,14 @@ public final class RsWithType extends RsWrap {
                     "%s; %s=%s",
                     type,
                     RsWithType.CHARSET,
-                    charset.name()
+                    charset.get().name()
                 )
+            );
+        } else {
+            response = new RsWithHeader(
+                new RsWithoutHeader(res, RsWithType.HEADER),
+                RsWithType.HEADER,
+                type
             );
         }
         return response;
