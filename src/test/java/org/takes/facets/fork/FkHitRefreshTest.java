@@ -49,7 +49,6 @@ public final class FkHitRefreshTest {
      * @throws Exception If some problem inside
      */
     @Test
-    @SuppressWarnings("PMD.DoNotUseThreads")
     public void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
             new RqFake(), "X-Takes-HitRefresh: yes"

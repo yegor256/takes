@@ -46,7 +46,6 @@ import org.takes.rs.RsText;
  * @version $Id$
  * @since 0.14.2
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeableTest {
 
     /**
