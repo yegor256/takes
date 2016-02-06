@@ -55,6 +55,10 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
+ * @todo #519:30min The logic of persistent connection should be moved to
+ *  separate implementation of Back. BkBasic should be refactored as well in
+ *  order to remove connection management (otherwise new Back implementation
+ *  cannot be used as decorator for BkBasic)
  */
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
@@ -104,6 +108,11 @@ public final class BkBasic implements Back {
                 }
             }
         } catch (final SocketTimeoutException exc) {
+            // @checkstyle MethodBodyCommentsCheck (4 lines)
+            // This exception is thrown on socket timeout, this is just
+            // indicator that no more request can be handled in this connection.
+            // No need to throw it upper and no need to do anything specific
+            // on this exception.
         } finally {
             input.close();
         }
