@@ -91,9 +91,9 @@ public final class RsWithType extends RsWrap {
         final Charset charset) {
         final Opt<Charset> opt;
         if (charset == null) {
-            opt = new Opt.Empty<>();
+            opt = new Opt.Empty<Charset>();
         } else {
-            opt = new Opt.Single<>(charset);
+            opt = new Opt.Single<Charset>(charset);
         }
         return RsWithType.make(res, type, opt);
     }
