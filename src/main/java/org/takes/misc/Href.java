@@ -29,11 +29,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * HTTP URI/HREF.
@@ -60,7 +59,7 @@ public final class Href implements CharSequence {
     /**
      * Params.
      */
-    private final transient ConcurrentMap<String, List<String>> params;
+    private final transient Map<String, List<String>> params;
 
     /**
      * Ctor.
@@ -75,7 +74,7 @@ public final class Href implements CharSequence {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Href(final CharSequence txt) {
-        this.params = new ConcurrentHashMap<String, List<String>>(0);
+        this.params = new HashMap<String, List<String>>(0);
         final URI link = URI.create(txt.toString());
         final String query = link.getRawQuery();
         if (query == null) {
@@ -107,7 +106,7 @@ public final class Href implements CharSequence {
      * @param map Map of params
      */
     private Href(final URI link,
-        final ConcurrentMap<String, List<String>> map) {
+        final Map<String, List<String>> map) {
         this.uri = link;
         this.params = map;
     }
@@ -225,12 +224,14 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
+        final Map<String, List<String>> map =
+            new HashMap<String, List<String>>(
                 this.params.size() + 1
             );
         map.putAll(this.params);
-        map.putIfAbsent(key.toString(), new LinkedList<String>());
+        if (!map.containsKey(key.toString())) {
+            map.put(key.toString(), new LinkedList<String>());
+        }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map);
     }
@@ -241,8 +242,8 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
+        final Map<String, List<String>> map =
+            new HashMap<String, List<String>>(
                 this.params.size()
             );
         map.putAll(this.params);

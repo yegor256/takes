@@ -38,12 +38,12 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -114,7 +114,7 @@ public interface RqMultipart extends Request {
         /**
          * Map of params and values.
          */
-        private final transient ConcurrentMap<String, List<Request>> map;
+        private final transient Map<String, List<Request>> map;
         /**
          * Internal buffer.
          */
@@ -181,7 +181,7 @@ public interface RqMultipart extends Request {
          * @return The requests map that use the part name as a map key
          * @throws IOException If fails
          */
-        private ConcurrentMap<String, List<Request>> buildRequests(
+        private Map<String, List<Request>> buildRequests(
             final Request req) throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
@@ -324,10 +324,10 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          */
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-        private static ConcurrentMap<String, List<Request>> asMap(
+        private static Map<String, List<Request>> asMap(
             final Collection<Request> reqs) throws IOException {
-            final ConcurrentMap<String, List<Request>> map =
-                new ConcurrentHashMap<String, List<Request>>(reqs.size());
+            final Map<String, List<Request>> map =
+                new HashMap<String, List<Request>>(reqs.size());
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
@@ -345,7 +345,9 @@ public interface RqMultipart extends Request {
                     );
                 }
                 final String name = matcher.group(1);
-                map.putIfAbsent(name, new LinkedList<Request>());
+                if (!map.containsKey(name)) {
+                    map.put(name, new LinkedList<Request>());
+                }
                 map.get(name).add(req);
             }
             return map;

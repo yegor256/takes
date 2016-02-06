@@ -33,8 +33,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
 import java.util.Arrays;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -54,7 +54,7 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient ConcurrentMap<String, String> map;
+    private final transient Map<String, String> map;
 
     /**
      * Ctor.
@@ -70,7 +70,7 @@ final class Options {
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
-        this.map = new ConcurrentHashMap<String, String>(0);
+        this.map = new HashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);
