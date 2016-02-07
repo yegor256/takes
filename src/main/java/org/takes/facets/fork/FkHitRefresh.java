@@ -115,6 +115,7 @@ public final class FkHitRefresh implements Fork {
      * @param tke Target
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public FkHitRefresh(final File file, final Runnable cmd,
         final Take tke) throws IOException {
         this.dir = file;

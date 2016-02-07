@@ -64,6 +64,7 @@ public final class CcXOR implements Codec {
      * @param codec Original codec
      * @param key Secret key for encoding
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public CcXOR(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.secret = new byte[key.length];

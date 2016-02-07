@@ -129,6 +129,10 @@ public interface RqMultipart extends Request {
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();

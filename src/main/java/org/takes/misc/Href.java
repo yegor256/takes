@@ -73,7 +73,13 @@ public final class Href implements CharSequence {
      * Ctor.
      * @param txt Text of the link
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidInstantiatingObjectsInLoops",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public Href(final CharSequence txt) {
         this.params = new ConcurrentHashMap<String, List<String>>(0);
         final URI link = URI.create(txt.toString());

@@ -224,6 +224,10 @@ public final class PsBasic implements Pass {
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Default(final String... users) {
             this.usernames = new HashMap<String, String>(users.length);
             for (final String user : users) {

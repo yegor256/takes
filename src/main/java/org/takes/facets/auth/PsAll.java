@@ -54,6 +54,7 @@ public class PsAll implements Pass {
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = new ArrayList<Pass>(passes);
         this.index = identity;

@@ -69,6 +69,7 @@ final class Options {
      * Ctor.
      * @param args Arguments
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     Options(final Iterable<String> args) {
         this.map = new ConcurrentHashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");

@@ -60,6 +60,7 @@ final class MediaType implements Comparable<MediaType> {
      * Ctor.
      * @param text Text to parse
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     MediaType(final String text) {
         final String[] parts = text.split(";", 2);
         if (parts.length > 1) {

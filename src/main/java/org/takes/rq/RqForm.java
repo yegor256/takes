@@ -288,6 +288,10 @@ public interface RqForm extends Request {
          * @param params Parameters
          * @throws IOException if something goes wrong.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Fake(final Request req, final String... params)
             throws IOException {
             if (params.length % 2 != 0) {

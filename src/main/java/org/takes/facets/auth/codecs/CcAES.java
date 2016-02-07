@@ -89,6 +89,7 @@ public final class CcAES implements Codec {
      * @param key The encryption key
      * @exception IOException errors on creating internal components
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public CcAES(final Codec codec, final byte[] key) throws IOException {
         final int block = 16;
         if (key.length != block) {

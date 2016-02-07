@@ -65,6 +65,10 @@ public final class BkTimeable extends BkWrap {
          * @param bck Original back
          * @param msec Execution latency
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         BkThreads(final long msec, final Back bck) {
             this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;
