@@ -159,7 +159,7 @@ public final class RsWithType extends RsWrap {
         /**
          * Constructs a {@code HTML} that will add text/html as the content type
          * header to the response using the specified charset as charset
-         * parameter value if present..
+         * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
          *  present.
