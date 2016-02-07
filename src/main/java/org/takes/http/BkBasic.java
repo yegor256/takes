@@ -64,11 +64,6 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
-     * Default socket timeouts (milliseconds).
-     */
-    private static final int TIMEOUT = Tv.THOUSAND;
-
-    /**
      * Take.
      */
     private final transient Take take;
@@ -91,8 +86,10 @@ public final class BkBasic implements Back {
     @SuppressWarnings({"PMD.EmptyCatchBlock",
         "PMD.AvoidInstantiatingObjectsInLoops"})
     public void accept(final Socket socket) throws IOException {
-        socket.setSoTimeout(BkBasic.TIMEOUT);
+        socket.setSoTimeout(Tv.THOUSAND);
         final InputStream input = socket.getInputStream();
+        final OutputStream output = socket.getOutputStream();
+        final BufferedOutputStream buffered = new BufferedOutputStream(output);
         try {
             while (true) {
                 final Request request = new RqLive(input);
@@ -101,7 +98,7 @@ public final class BkBasic implements Back {
                         request,
                         socket
                     ),
-                    new BufferedOutputStream(socket.getOutputStream())
+                    buffered
                 );
                 if (input.available() <= 0) {
                     break;
@@ -115,6 +112,7 @@ public final class BkBasic implements Back {
             // on this exception.
         } finally {
             input.close();
+            output.close();
         }
     }
 
