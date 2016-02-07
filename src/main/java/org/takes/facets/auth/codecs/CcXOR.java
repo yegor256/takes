@@ -63,6 +63,11 @@ public final class CcXOR implements Codec {
      * Ctor.
      * @param codec Original codec
      * @param key Secret key for encoding
+     * @todo #558:30min Remove. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public CcXOR(final Codec codec, final byte[] key) {

@@ -64,6 +64,11 @@ public final class BkTimeable extends BkWrap {
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
+         * @todo #558:30min Remove. According to new qulice version,
+         *  constructor must contain only variables initialization and other
+         *  constructor calls. Refactor code according to that rule and
+         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
         @SuppressWarnings
             (
