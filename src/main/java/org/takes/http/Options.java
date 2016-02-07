@@ -68,9 +68,9 @@ final class Options {
     /**
      * Ctor.
      * @param args Arguments
-     * @todo #558:30min Remove. According to new qulice version, constructor
-     *  must contain only variables initialization and other constructor calls.
-     *  Refactor code according to that rule and remove
+     * @todo #558:30min Options ctor. According to new qulice version,
+     *  constructor must contain only variables initialization and other
+     *  constructor calls. Refactor code according to that rule and remove
      *  `ConstructorOnlyInitializesOrCallOtherConstructors`
      *  warning suppression.
      */

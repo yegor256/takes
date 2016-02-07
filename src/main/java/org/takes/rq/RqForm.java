@@ -287,7 +287,7 @@ public interface RqForm extends Request {
          * @param req Original request
          * @param params Parameters
          * @throws IOException if something goes wrong.
-         * @todo #558:30min Remove. According to new qulice version,
+         * @todo #558:30min Fake ctor. According to new qulice version,
          *  constructor must contain only variables initialization and other
          *  constructor calls. Refactor code according to that rule and
          *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
