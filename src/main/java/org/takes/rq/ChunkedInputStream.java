@@ -190,7 +190,7 @@ final class ChunkedInputStream extends InputStream {
     }
 
     /**
-     * Possible states of FSM that ised to find chunk size.
+     * Possible states of FSM that used to find chunk size.
      */
     private enum State {
         /**
@@ -235,24 +235,16 @@ final class ChunkedInputStream extends InputStream {
      * @return New state.
      * @throws IOException If fails.
      */
-    @SuppressWarnings("PMD.MissingBreakInSwitch")
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
-        final int next = ChunkedInputStream.read(stream);
+        final int next = stream.read();
+        if (next == -1) {
+            throw new IOException("chunked stream ended unexpectedly");
+        }
         final State result;
         switch (state) {
             case NORMAL:
-                switch (next) {
-                    case '\r':
-                        result = State.R;
-                        break;
-                    case '\"':
-                        result = State.QUOTED_STRING;
-                        break;
-                    default:
-                        result = state;
-                        line.write(next);
-                }
+                result = nextNormal(state, line, next);
                 break;
             case R:
                 if (next == '\n') {
@@ -268,18 +260,7 @@ final class ChunkedInputStream extends InputStream {
                 }
                 break;
             case QUOTED_STRING:
-                switch (next) {
-                    case '\\':
-                        result = state;
-                        line.write(stream.read());
-                        break;
-                    case '\"':
-                        result = State.NORMAL;
-                        break;
-                    default:
-                        result = state;
-                        line.write(next);
-                }
+                result = nextQuoted(stream, state, line, next);
                 break;
             default:
                 throw new IllegalStateException("Bad state");
@@ -288,16 +269,57 @@ final class ChunkedInputStream extends InputStream {
     }
 
     /**
-     * Validate next byte from stream.
-     * @param stream Input stream.
-     * @return Byte.
-     * @throws IOException If there is no next byte.
+     * Maintain next symbol for current state = State.NORMAL.
+     * @param state Current state.
+     * @param line Current chunk size line.
+     * @param next Next symbol.
+     * @return New state.
      */
-    private static int read(final InputStream stream) throws IOException {
-        final int next = stream.read();
-        if (next == -1) {
-            throw new IOException("chunked stream ended unexpectedly");
+    private static State nextNormal(final State state,
+        final ByteArrayOutputStream line, final int next) {
+        final State result;
+        switch (next) {
+            case '\r':
+                result = State.R;
+                break;
+            case '\"':
+                result = State.QUOTED_STRING;
+                break;
+            default:
+                result = state;
+                line.write(next);
+                break;
         }
-        return next;
+        return result;
+    }
+
+    /**
+     * Maintain next symbol for current state = State.QUOTED_STRING.
+     * @param stream Input stream.
+     * @param state Current state.
+     * @param line Current chunk size line.
+     * @param next Next symbol.
+     * @return New state.
+     * @throws IOException If fails.
+     * @checkstyle ParameterNumberCheck (3 lines)
+     */
+    private static State nextQuoted(final InputStream stream, final State state,
+        final ByteArrayOutputStream line, final int next)
+            throws IOException {
+        final State result;
+        switch (next) {
+            case '\\':
+                result = state;
+                line.write(stream.read());
+                break;
+            case '\"':
+                result = State.NORMAL;
+                break;
+            default:
+                result = state;
+                line.write(next);
+                break;
+        }
+        return result;
     }
 }
