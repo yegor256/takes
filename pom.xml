@@ -304,6 +304,11 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
+                         <!--
+                         @todo #558:30min Upgrade Qulice to 0.16. Fix all checkstyle
+                          remarks (mostly `AtclauseOrderCheck`). Fix or add puzzle for
+                          PMD/findbugs remarks.
+                         -->
                         <version>0.15.4</version>
                         <configuration>
                             <excludes combine.children="append">
