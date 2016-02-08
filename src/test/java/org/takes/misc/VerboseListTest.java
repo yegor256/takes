@@ -42,7 +42,7 @@ import org.mockito.runners.MockitoJUnitRunner;
  *
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.32
  */
 @SuppressWarnings("PMD.TooManyMethods")
 @RunWith(MockitoJUnitRunner.class)

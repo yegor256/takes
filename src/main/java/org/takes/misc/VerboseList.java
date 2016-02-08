@@ -35,7 +35,7 @@ import java.util.ListIterator;
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
  * @param <T> Type of item
- * @since 0.1
+ * @since 0.31.1
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class VerboseList<T> implements List<T> {

@@ -25,6 +25,7 @@ package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -63,17 +64,10 @@ public final class CcXOR implements Codec {
      * Ctor.
      * @param codec Original codec
      * @param key Secret key for encoding
-     * @todo #558:30min CcXOR ctor. According to new qulice version,
-     *  constructor must contain only variables initialization and other
-     *  constructor calls. Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public CcXOR(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.secret = new byte[key.length];
-        System.arraycopy(key, 0, this.secret, 0, key.length);
+        this.secret = Arrays.copyOf(key, key.length);
     }
 
     @Override

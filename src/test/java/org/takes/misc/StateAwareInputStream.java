@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.31
  */
 public final class StateAwareInputStream extends InputStream {
 

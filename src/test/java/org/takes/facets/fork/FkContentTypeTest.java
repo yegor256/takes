@@ -48,6 +48,11 @@ public final class FkContentTypeTest {
     private static final String CONTENT_TYPE = "Content-Type";
 
     /**
+     * Content-Type value.
+     */
+    private static final String CTYPE = "text/html charset=iso-8859-1";
+
+    /**
      * FkContentType can match by Content-Type header with any of types.
      * @throws IOException If some problem inside
      */
@@ -93,13 +98,12 @@ public final class FkContentTypeTest {
     public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "text/html charset=iso-8859-1", new RsEmpty()
+                FkContentTypeTest.CTYPE, new RsEmpty()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    "text/html charset=iso-8859-1"
+                    FkContentTypeTest.CTYPE
                 )
             ).has(),
             Matchers.is(true)
@@ -115,9 +119,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType("*/*", new RsEmpty()).route(
                 new RqWithHeader(
-                    new RqFake(),
-                    FkContentTypeTest.CONTENT_TYPE,
-                    ""
+                    new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
                 )
             ).has(),
             Matchers.is(true)
@@ -132,7 +134,7 @@ public final class FkContentTypeTest {
     public void matchesDifferentEncodingsTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "text/html charset=iso-8859-1", new RsEmpty()
+                FkContentTypeTest.CTYPE, new RsEmpty()
             ).route(
                 new RqWithHeader(
                     new RqFake(),

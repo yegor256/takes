@@ -170,9 +170,8 @@ public final class RsWithTypeTest {
                 Joiner.on(RsWithTypeTest.CRLF).join(
                     RsWithTypeTest.HTTP_OK,
                     String.format(
-                        RsWithTypeTest.CONTENT_TYPE,
-                        "application/json"
-                            ),
+                        RsWithTypeTest.CONTENT_TYPE, "application/json"
+                    ),
                     "",
                     ""
                 )
@@ -198,8 +197,7 @@ public final class RsWithTypeTest {
                 Joiner.on(RsWithTypeTest.CRLF).join(
                     RsWithTypeTest.HTTP_OK,
                     String.format(
-                        RsWithTypeTest.CONTENT_TYPE,
-                        RsWithTypeTest.TYPE_XML
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_XML
                     ),
                     "",
                     ""
@@ -226,8 +224,7 @@ public final class RsWithTypeTest {
                 Joiner.on(RsWithTypeTest.CRLF).join(
                     RsWithTypeTest.HTTP_OK,
                     String.format(
-                        RsWithTypeTest.CONTENT_TYPE,
-                        RsWithTypeTest.TYPE_TEXT
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_TEXT
                     ),
                     "",
                     ""

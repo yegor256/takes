@@ -34,7 +34,7 @@ import org.takes.tk.TkWrap;
  *
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.1
+ * @since 0.16.1
  */
 @ToString(callSuper = true)
 public class TkMethods extends TkWrap {

@@ -44,7 +44,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.31.2
  */
 abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
 
