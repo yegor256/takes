@@ -21,50 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.rq;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rs.RsEmpty;
 
 /**
- * Test case for {@link PsChain}.
- * @author Aleksey Kurochka (eg04lt3r@gmail.com)
+ * Test case for {@link TempInputStream}.
+ * @author Andrey Eliseev (aeg.exper@gmail.com)
  * @version $Id$
- * @since 0.11
+ * @since 0.31
  */
-public final class PsChainTest {
+public final class TempInputStreamTest {
 
     /**
-     * PsChain returns proper identity.
-     * @throws IOException if some problems inside
+     * TempInputStream can delete the underlying temporary file.
+     * @throws IOException if some problem occurs.
      */
     @Test
-    public void chainExecutionTest() throws IOException {
-        MatcherAssert.assertThat(
-            new PsChain(
-                new PsLogout(),
-                new PsFake(true)
-            ).enter(new RqFake()).get(),
-            Matchers.is(Identity.ANONYMOUS)
+    public void deletesTempFile() throws IOException {
+        final File file = File.createTempFile("tempfile", ".tmp");
+        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        try {
+            out.write("Temp file deletion test");
+        } finally {
+            out.close();
+        }
+        final InputStream body = new TempInputStream(
+            new FileInputStream(file), file
         );
-    }
-
-    /**
-     * PsChain returns proper response.
-     * @throws IOException if some problems inside
-     */
-    @Test
-    public void exitChainTest() throws IOException {
+        try {
+            MatcherAssert.assertThat(
+                "File is not created!",
+                file.exists(),
+                Matchers.is(true)
+            );
+        } finally {
+            body.close();
+        }
         MatcherAssert.assertThat(
-            new PsChain(
-                new PsFake(true)
-            ).exit(new RsEmpty(), Identity.ANONYMOUS)
-                .head().iterator().next(),
-            Matchers.containsString("HTTP/1.1 200 O")
+            "File exists after stream closure",
+            file.exists(),
+            Matchers.is(false)
         );
     }
 }

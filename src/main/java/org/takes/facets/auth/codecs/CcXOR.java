@@ -24,6 +24,8 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -55,7 +57,7 @@ public final class CcXOR implements Codec {
      * @param key Secret key for encoding
      */
     public CcXOR(final Codec codec, final String key) {
-        this(codec, key.getBytes());
+        this(codec, key.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -65,8 +67,7 @@ public final class CcXOR implements Codec {
      */
     public CcXOR(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.secret = new byte[key.length];
-        System.arraycopy(key, 0, this.secret, 0, key.length);
+        this.secret = Arrays.copyOf(key, key.length);
     }
 
     @Override

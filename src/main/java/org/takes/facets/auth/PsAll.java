@@ -53,7 +53,13 @@ public class PsAll implements Pass {
      * @param passes All Passes to be checked.
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}
+     * @todo #558:30min PsAll ctor. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = new ArrayList<Pass>(passes);
         this.index = identity;

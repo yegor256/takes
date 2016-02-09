@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
  * Back Wrap.
  * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- *
+ * @since 0.28
  */
 @EqualsAndHashCode(of = "origin")
 public class BkWrap implements Back {

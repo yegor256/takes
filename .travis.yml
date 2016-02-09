@@ -19,8 +19,8 @@ install:
   - gem install est
 env:
   global:
-    - MAVEN_OPTS="-Xmx256m -Dfile.encoding=UTF-8"
-    - JAVA_OPTS="-Xmx256m -Dfile.encoding=UTF-8"
+    - MAVEN_OPTS="-Xmx256m"
+    - JAVA_OPTS="-Xmx256m"
 jdk:
   - oraclejdk8
   - oraclejdk7

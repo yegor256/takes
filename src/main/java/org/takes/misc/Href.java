@@ -72,8 +72,19 @@ public final class Href implements CharSequence {
     /**
      * Ctor.
      * @param txt Text of the link
+     * @todo #558:30min Href ctor. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidInstantiatingObjectsInLoops",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public Href(final CharSequence txt) {
         this.params = new ConcurrentHashMap<String, List<String>>(0);
         final URI link = URI.create(txt.toString());

@@ -28,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -85,8 +86,8 @@ public final class PsBasic implements Pass {
             DatatypeConverter.parseBase64Binary(
                 new RqHeaders.Smart(
                     new RqHeaders.Base(request)
-                ).single("authorization").split(AUTH_HEAD)[1]
-            )
+                ).single("authorization").split(PsBasic.AUTH_HEAD)[1]
+            ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
@@ -222,7 +223,16 @@ public final class PsBasic implements Pass {
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         * @todo #558:30min Default ctor. According to new qulice version,
+         *  constructor must contain only variables initialization and
+         *  other constructor calls. Refactor code according to that rule
+         *  and remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Default(final String... users) {
             this.usernames = new HashMap<String, String>(users.length);
             for (final String user : users) {
