@@ -15,7 +15,7 @@
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-Java6 web development framework. Its key benefits, comparing to all others, include these
+Java7 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
 
  1. not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
