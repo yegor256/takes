@@ -7,7 +7,7 @@
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.takes/takes/badge.svg?color=blue&prefix=v)](http://www.javadoc.io/doc/org.takes/takes)
-[![Coverage Status](https://coveralls.io/repos/yegor256/takes/badge.svg?branch=master&service=github)](https://coveralls.io/github/yegor256/takes?branch=master)
+[![Coverage Status](https://coveralls.io/repos/yegor256/takes/badge.svg?branch=__rultor&service=github)](https://coveralls.io/github/yegor256/takes?branch=__rultor)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
