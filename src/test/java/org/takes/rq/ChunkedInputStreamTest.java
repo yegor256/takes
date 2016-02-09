@@ -113,7 +113,7 @@ public final class ChunkedInputStreamTest {
     }
 
     /**
-     * RqChunk accepts semi-colon and ignores parameters after a semi-colon.
+     * RqChunk accepts semi-colon and ignores parameters after semi-colon.
      * @throws IOException If some problem inside
      */
     @Test
