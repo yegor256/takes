@@ -70,12 +70,12 @@ public final class RqChunkTest {
                 Arrays.asList(
                     "GET /h?a=1",
                     "Host: www.example.com",
-                    CHUNKED_HEADER
+                    RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(CRLF).join(
+                Joiner.on(RqChunkTest.CRLF).join(
                     length,
                     data,
-                    END_OF_CHUNK,
+                    RqChunkTest.END_OF_CHUNK,
                     ""
                 )
             )
@@ -105,16 +105,16 @@ public final class RqChunkTest {
                 Arrays.asList(
                     "GET /h?a=2",
                     "Host: b.example.com",
-                    CHUNKED_HEADER
+                    RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(CRLF).join(
+                Joiner.on(RqChunkTest.CRLF).join(
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),
                     second,
                     Integer.toHexString(third.length()),
                     third,
-                    END_OF_CHUNK,
+                    RqChunkTest.END_OF_CHUNK,
                     ""
                 )
             )
@@ -142,12 +142,12 @@ public final class RqChunkTest {
                 Arrays.asList(
                     "GET /h?a=3",
                     "Host: c.example.com",
-                    CHUNKED_HEADER
+                    RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(CRLF).join(
+                Joiner.on(RqChunkTest.CRLF).join(
                     length + ignored,
                     data,
-                    END_OF_CHUNK,
+                    RqChunkTest.END_OF_CHUNK,
                     ""
                 )
             )

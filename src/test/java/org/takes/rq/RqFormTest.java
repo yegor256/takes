@@ -58,7 +58,7 @@ public final class RqFormTest {
                         "GET /h?a=3",
                         "Host: www.example.com",
                         String.format(
-                            HEADER,
+                            RqFormTest.HEADER,
                             body.getBytes().length
                         )
                     ),
@@ -117,7 +117,7 @@ public final class RqFormTest {
                     "GET /form",
                     "Host: www.example5.com",
                     String.format(
-                        HEADER,
+                        RqFormTest.HEADER,
                         escaper.escape(key).length() + 1
                             + escaper.escape(value).length() + 1
                             + escaper.escape(key).length() + 1
