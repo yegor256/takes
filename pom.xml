@@ -355,38 +355,25 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/facets/fork/TkMethodsTest.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/StateAwareInputStream.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/misc/VerboseListTest.java</exclude>
-
                                 <!--
-                                @todo #517:30min Continue fixing FindBugs violations started in #517.
-                                 #517 turned on the FindBugs, temporarily excluding some classes.
+                                @todo #574:30min Continue fixing FindBugs violations started in #574.
+                                 #574 turned on the FindBugs, temporarily excluding some classes.
                                  Remove all excludes of FindBugs below and fix the issues.
                                 -->
-                                <exclude>findbugs:org.takes.HttpException</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback.FbLog4j</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback.FbSlf4j</exclude>
-                                <exclude>findbugs:org.takes.facets.fallback</exclude>
-                                <exclude>findbugs:org.takes.facets.fork.FkRegex$2</exclude>
-                                <exclude>findbugs:org.takes.facets.fork.FkRegex</exclude>
-                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
-                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
                                 <exclude>findbugs:org.takes.facets.forward.TkForward$Safe</exclude>
-                                <exclude>findbugs:org.takes.facets.forward</exclude>
-                                <exclude>findbugs:org.takes.http.BkBasic</exclude>
-                                <exclude>findbugs:org.takes.http.FtCLI$3</exclude>
-                                <exclude>findbugs:org.takes.http.FtCLI</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote$1</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
-                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
-                                <exclude>findbugs:org.takes.http.Options</exclude>
-                                <exclude>findbugs:org.takes.rq.RqForm$Base</exclude>
-                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
-                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
                                 <exclude>findbugs:org.takes.rs.RsGzip</exclude>
+                                <exclude>findbugs:org.takes.rq.RqForm$Base</exclude>
                                 <exclude>findbugs:org.takes.rs.RsPrettyJSON</exclude>
                                 <exclude>findbugs:org.takes.rs.RsPrettyXML</exclude>
-                                <exclude>findbugs:org.takes.rs.RsWithHeader</exclude>
-                                <exclude>findbugs:org.takes.rs.RsXSLT</exclude>
                                 <exclude>findbugs:org.takes.tk.TkReadAlways</exclude>
+                                <exclude>findbugs:org.takes.HttpException</exclude>
+                                <exclude>findbugs:org.takes.facets.forward.RsForward</exclude>
+                                <exclude>findbugs:org.takes.facets.fork.FkRegex$2</exclude>
+                                <exclude>findbugs:org.takes.http.FtCLI$3</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote$1</exclude>
+                                <exclude>findbugs:org.takes.http.MainRemote</exclude>
+                                <exclude>findbugs:org.takes.rq.RqMultipart$Base</exclude>
+                                <exclude>findbugs:org.takes.http.Options</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
