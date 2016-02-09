@@ -40,6 +40,7 @@ merge:
   - darkled
   - dmzaytsev
   - ggajos
+  - hdouss
   - krzyk
   - longtimeago
   - mkordas
@@ -69,4 +70,3 @@ release:
     #mvn clean site-deploy -Pcoveralls -Ptakes -Psite --errors --settings ../settings.xml
   commanders:
   - yegor256
-

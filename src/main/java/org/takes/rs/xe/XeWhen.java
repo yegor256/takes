@@ -46,7 +46,13 @@ public final class XeWhen extends XeWrap {
      * @param condition Condition
      * @param source Xembly source
      */
-    @SuppressWarnings("PMD.CallSuperInConstructor")
+    @SuppressWarnings
+        (
+            {
+                "PMD.CallSuperInConstructor",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public XeWhen(final boolean condition, final XeSource source) {
         super(
             new XeSource() {

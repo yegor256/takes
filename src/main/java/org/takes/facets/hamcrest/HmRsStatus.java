@@ -61,7 +61,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
      * @param matcher HTTP code matcher
      */
     public HmRsStatus(final Matcher<Integer> matcher) {
-        super(matcher, FEATURE_NAME, FEATURE_NAME);
+        super(matcher, HmRsStatus.FEATURE_NAME, HmRsStatus.FEATURE_NAME);
     }
 
     @Override
