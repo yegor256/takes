@@ -304,11 +304,17 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
+                         <!--
+                         @todo #558:30min Upgrade Qulice to 0.16. Fix all checkstyle
+                          violations (mostly `AtclauseOrderCheck`). Fix or add puzzle for
+                          PMD, findbugs and other types of violations.
+                         -->
                         <version>0.15.4</version>
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
+<<<<<<< HEAD
                                 @todo #530:30min Below excludes were created during migration
                                  from qulice 0.13 to qulice 0.15.4. New qulice finds new
                                  additional issues in the code that need to be fixed.

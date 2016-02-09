@@ -69,7 +69,13 @@ public final class XeLocalhost extends XeWrap {
      * Ctor.
      * @param attr Attribute name
      */
-    @SuppressWarnings("PMD.CallSuperInConstructor")
+    @SuppressWarnings
+        (
+            {
+                "PMD.CallSuperInConstructor",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public XeLocalhost(final CharSequence attr) {
         super(
             new XeSource() {

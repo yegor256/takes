@@ -64,7 +64,16 @@ public final class BkTimeable extends BkWrap {
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
+         * @todo #558:30min BkThreads ctor. According to new qulice version,
+         *  constructor must contain only variables initialization and other
+         *  constructor calls. Refactor code according to that rule and
+         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         BkThreads(final long msec, final Back bck) {
             this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;

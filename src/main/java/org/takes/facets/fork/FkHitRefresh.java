@@ -114,7 +114,13 @@ public final class FkHitRefresh implements Fork {
      * @param cmd Command to execute
      * @param tke Target
      * @throws IOException If fails
+     * @todo #558:30min FkHitRefresh ctor. According to new qulice version,
+     *  constructor must contain only variables initialization and other
+     *  constructor calls. Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public FkHitRefresh(final File file, final Runnable cmd,
         final Take tke) throws IOException {
         this.dir = file;

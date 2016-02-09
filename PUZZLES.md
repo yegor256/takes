@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 6 active puzzles (41 total):
+There are 9 active puzzles (46 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -44,3 +44,8 @@ There are 6 active puzzles (41 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[**438-dcc4d707**](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#530](https://github.com/yegor256/takes/issues/530):[<del>530</del>](https://github.com/yegor256/takes/issues/530) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#558](https://github.com/yegor256/takes/issues/558):[**530-0ac0fcef**](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#517](https://github.com/yegor256/takes/issues/517):[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#574](https://github.com/yegor256/takes/issues/574):[**517-9858229b**](https://github.com/yegor256/takes/issues/574) [`pom.xml:360-362`](../master/pom.xml#L360-L362)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#254](https://github.com/yegor256/takes/issues/254):[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#575](https://github.com/yegor256/takes/issues/575):[**254-d68bc52e**](https://github.com/yegor256/takes/issues/575) [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#576](https://github.com/yegor256/takes/issues/576):[**254-40a8e0fe**](https://github.com/yegor256/takes/issues/576) [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
