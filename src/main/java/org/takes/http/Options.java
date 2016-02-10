@@ -33,8 +33,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -54,14 +54,10 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient ConcurrentMap<String, String> map;
+    private final transient Map<String, String> map;
 
     /**
-     * Constructs an {@code Options} with the specified arguments. The expected
-     * format of each argument is {@code --([a-z\-]+)(=.+)?}, if any argument
-     * doesn't match with the expected format an {@code IllegalStateException}
-     * will be thrown. If no value has been assigned to a given argument, an
-     * empty {@code String} will be assigned to that parameter by default.
+     * Constructs an {@code Options} with the specified arguments.
      * @param args Arguments
      * @since 0.9
      */
@@ -70,11 +66,7 @@ final class Options {
     }
 
     /**
-     * Constructs an {@code Options} with the specified arguments. The expected
-     * format of each argument is {@code --([a-z\-]+)(=.+)?}, if any argument
-     * doesn't match with the expected format an {@code IllegalStateException}
-     * will be thrown. If no value has been assigned to a given argument, an
-     * empty {@code String} will be assigned to that parameter by default.
+     * Constructs an {@code Options} with the specified arguments.
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
@@ -188,20 +180,15 @@ final class Options {
     }
 
     /**
-     * Convert the provided arguments into a Map. The expected
-     * format of each argument is {@code --([a-z\-]+)(=.+)?}, if any argument
-     * doesn't match with the expected format an {@code IllegalStateException}
-     * will be thrown. If no value has been assigned to a given argument, an
-     * empty {@code String} will be assigned to that parameter by default.
+     * Convert the provided arguments into a Map.
      * @param args Arguments to parse.
      * @return Map A map containing all the arguments which are actually
      *  key/value pairs.
      * @throws IllegalStateException If an argument doesn't match with the
      *  expected format.
      */
-    private static ConcurrentMap<String, String> asMap(
-        final Iterable<String> args) throws IllegalStateException {
-        final ConcurrentMap<String, String> map =
+    private static Map<String, String> asMap(final Iterable<String> args) {
+        final Map<String, String> map =
             new ConcurrentHashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
