@@ -52,7 +52,7 @@ There are 19 active puzzles (57 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-12fc4eff**]() [`MediaType.java:62-66`](../master/src/main/java/org/takes/facets/fork/MediaType.java#L62-L66)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7c5810e9**]() [`BkTimeable.java:67-71`](../master/src/main/java/org/takes/http/BkTimeable.java#L67-L71)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#586](https://github.com/yegor256/takes/issues/586):[**558-e98f4792**](https://github.com/yegor256/takes/issues/586) [`Options.java:71-75`](../master/src/main/java/org/takes/http/Options.java#L71-L75)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-d5ffb2ba**]() [`Href.java:76-80`](../master/src/main/java/org/takes/misc/Href.java#L76-L80)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#588](https://github.com/yegor256/takes/issues/588):[**558-d5ffb2ba**](https://github.com/yegor256/takes/issues/588) [`Href.java:76-80`](../master/src/main/java/org/takes/misc/Href.java#L76-L80)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-79259f7e**]() [`RqForm.java:290-294`](../master/src/main/java/org/takes/rq/RqForm.java#L290-L294)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-afc1c081**]() [`RqMultipart.java:131-135`](../master/src/main/java/org/takes/rq/RqMultipart.java#L131-L135)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#517](https://github.com/yegor256/takes/issues/517):[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
