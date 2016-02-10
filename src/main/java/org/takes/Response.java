@@ -53,12 +53,12 @@ import java.io.InputStream;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @see org.takes.Take
  * @see org.takes.rs.RsWithBody
  * @see org.takes.rs.RsWithHeader
  * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">
  *     Composable Decorators vs. Imperative Utility Methods</a>
+ * @since 0.1
  */
 public interface Response {
 

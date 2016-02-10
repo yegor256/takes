@@ -37,8 +37,8 @@ import org.takes.rq.RqFake;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @see org.takes.facets.fork.FkRegex
+ * @since 0.1
  */
 public interface RqRegex extends Request {
 

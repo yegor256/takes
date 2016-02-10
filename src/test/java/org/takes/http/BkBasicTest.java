@@ -244,7 +244,7 @@ public final class BkBasicTest {
         }
         MatcherAssert.assertThat(
             output.toString(),
-            RegexMatchers.containsPattern(text + ".*?" + text)
+            RegexMatchers.containsPattern(String.format("%s.*?%s", text, text))
         );
     }
 

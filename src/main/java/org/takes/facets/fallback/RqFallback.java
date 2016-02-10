@@ -36,8 +36,8 @@ import org.takes.rq.RqFake;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @see TkFallback
+ * @since 0.1
  */
 public interface RqFallback extends Request {
 
