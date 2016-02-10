@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 9 active puzzles (46 total):
+There are 19 active puzzles (57 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -43,7 +43,18 @@ There are 9 active puzzles (46 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[#438](https://github.com/yegor256/takes/issues/438):[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[**438-dcc4d707**](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#530](https://github.com/yegor256/takes/issues/530):[<del>530</del>](https://github.com/yegor256/takes/issues/530) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#558](https://github.com/yegor256/takes/issues/558):[**530-0ac0fcef**](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#558](https://github.com/yegor256/takes/issues/558):[<del>530-0ac0fcef</del>](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-ffd45315**]() [`pom.xml:308-310`](../master/pom.xml#L308-L310)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-4ea33ea6**]() [`PsAll.java:56-60`](../master/src/main/java/org/takes/facets/auth/PsAll.java#L56-L60)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7b985928**]() [`PsBasic.java:226-230`](../master/src/main/java/org/takes/facets/auth/PsBasic.java#L226-L230)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7db66253**]() [`CcAES.java:91-95`](../master/src/main/java/org/takes/facets/auth/codecs/CcAES.java#L91-L95)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-b4a12ea6**]() [`FkHitRefresh.java:117-121`](../master/src/main/java/org/takes/facets/fork/FkHitRefresh.java#L117-L121)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-12fc4eff**]() [`MediaType.java:62-66`](../master/src/main/java/org/takes/facets/fork/MediaType.java#L62-L66)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7c5810e9**]() [`BkTimeable.java:67-71`](../master/src/main/java/org/takes/http/BkTimeable.java#L67-L71)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-e98f4792**]() [`Options.java:71-75`](../master/src/main/java/org/takes/http/Options.java#L71-L75)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-d5ffb2ba**]() [`Href.java:76-80`](../master/src/main/java/org/takes/misc/Href.java#L76-L80)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-79259f7e**]() [`RqForm.java:290-294`](../master/src/main/java/org/takes/rq/RqForm.java#L290-L294)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-afc1c081**]() [`RqMultipart.java:131-135`](../master/src/main/java/org/takes/rq/RqMultipart.java#L131-L135)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#517](https://github.com/yegor256/takes/issues/517):[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#574](https://github.com/yegor256/takes/issues/574):[**517-9858229b**](https://github.com/yegor256/takes/issues/574) [`pom.xml:360-362`](../master/pom.xml#L360-L362)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#254](https://github.com/yegor256/takes/issues/254):[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
