@@ -314,7 +314,6 @@
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
-<<<<<<< HEAD
                                 @todo #530:30min Below excludes were created during migration
                                  from qulice 0.13 to qulice 0.15.4. New qulice finds new
                                  additional issues in the code that need to be fixed.
