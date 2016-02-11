@@ -24,7 +24,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -34,7 +34,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
@@ -51,16 +50,11 @@ import org.takes.facets.auth.Identity;
  */
 @EqualsAndHashCode(of = { "origin", "secret", "enc", "dec" })
 public final class CcAES implements Codec {
-
     /**
-     * The cipher for encryption.
+     * The block size constant
      */
-    private final transient Cipher enc;
+    private final static int BLOCK = 16;
 
-    /**
-     * The cipher for decryption.
-     */
-    private final transient Cipher dec;
 
     /**
      * Original codec.
@@ -68,53 +62,28 @@ public final class CcAES implements Codec {
     private final transient Codec origin;
 
     /**
-     * The AES secret key object.
+     * The encryption key
      */
-    private final transient SecretKey secret;
+    private final String key;
 
     /**
-     * Ctor.
+     * Constructor for the class.
      * @param codec Original codec
      * @param key The encryption key
-     * @exception IOException errors on creating internal components
      * @since 0.22
      */
-    public CcAES(final Codec codec, final String key) throws IOException {
-        this(codec, key.getBytes(Charset.defaultCharset()));
+    public CcAES(final Codec codec, final String key){
+        this.origin = codec;
+        this.key = key;
     }
 
     /**
-     * Ctor.
+     * Constructor for the class.
      * @param codec Original codec
      * @param key The encryption key
-     * @exception IOException errors on creating internal components
-     * @todo #558:30min CcAES ctor. According to new qulice version, constructor
-     *  must contain only variables initialization and other constructor calls.
-     *  Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-    public CcAES(final Codec codec, final byte[] key) throws IOException {
-        final int block = 16;
-        if (key.length != block) {
-            throw new IllegalArgumentException(
-                String.format(
-                    "the length of the AES key must be exactly %d bytes",
-                    block
-                )
-            );
-        }
-        this.origin = codec;
-        final byte[] passcode = new byte[key.length];
-        System.arraycopy(key, 0, passcode, 0, key.length);
-        final SecureRandom random = new SecureRandom();
-        final byte[] ivbytes = new byte[block];
-        random.nextBytes(ivbytes);
-        final AlgorithmParameterSpec spec = new IvParameterSpec(ivbytes);
-        this.secret = new SecretKeySpec(passcode, "AES");
-        this.enc = this.create(Cipher.ENCRYPT_MODE, spec);
-        this.dec = this.create(Cipher.DECRYPT_MODE, spec);
+    public CcAES(final Codec codec, final byte[] key) {
+        this(codec, new String(key, StandardCharsets.UTF_8));
     }
 
     @Override
@@ -135,12 +104,36 @@ public final class CcAES implements Codec {
      * @throws IOException for all unexpected exceptions
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
+        this.checkBlockSize();
         try {
-            return this.enc.doFinal(bytes);
+            final AlgorithmParameterSpec spec =
+                CcAES.createAlgorithmParameterSpec();
+            return this.create(Cipher.ENCRYPT_MODE, spec).doFinal(bytes);
         } catch (final BadPaddingException ex) {
             throw new IOException(ex);
         } catch (final IllegalBlockSizeException ex) {
             throw new IOException(ex);
+        }
+    }
+
+    private static AlgorithmParameterSpec createAlgorithmParameterSpec() {
+        final SecureRandom random = new SecureRandom();
+        final byte[] bytes = new byte[CcAES.BLOCK];
+        random.nextBytes(bytes);
+        return new IvParameterSpec(bytes);
+    }
+
+    /**
+     * A private method to check the block size of the key.
+     */
+    private void checkBlockSize() {
+        if (this.key.length() != CcAES.BLOCK) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "the length of the AES key must be exactly %d bytes",
+                    CcAES.BLOCK
+                )
+            );
         }
     }
 
@@ -152,8 +145,11 @@ public final class CcAES implements Codec {
      * @throws IOException for all unexpected exceptions
      */
     private byte[] decrypt(final byte[] bytes) throws IOException {
+        this.checkBlockSize();
         try {
-            return this.dec.doFinal(bytes);
+            final AlgorithmParameterSpec spec =
+                CcAES.createAlgorithmParameterSpec();
+            return this.create(Cipher.DECRYPT_MODE, spec).doFinal(bytes);
         } catch (final BadPaddingException ex) {
             throw new IOException(ex);
         } catch (final IllegalBlockSizeException ex) {
@@ -171,8 +167,11 @@ public final class CcAES implements Codec {
     private Cipher create(final int mode, final AlgorithmParameterSpec spec)
         throws IOException {
         try {
+            final SecretKeySpec secret = new SecretKeySpec(
+                this.key.getBytes(StandardCharsets.UTF_8), "AES"
+            );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(mode, this.secret, spec);
+            cipher.init(mode, secret, spec);
             return cipher;
         } catch (final InvalidKeyException ex) {
             throw new IOException(ex);
