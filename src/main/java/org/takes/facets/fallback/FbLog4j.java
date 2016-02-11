@@ -70,8 +70,11 @@ public final class FbLog4j extends FbWrap {
         final PrintStream stream = new PrintStream(
             baos, false, StandardCharsets.UTF_8.toString()
         );
-        error.printStackTrace(stream);
-        stream.close();
+        try {
+            error.printStackTrace(stream);
+        } finally {
+            stream.close();
+        }
         Logger.getLogger(FbLog4j.class).error(
             String.format(
                 "%s %s failed with %s: %s",

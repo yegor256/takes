@@ -126,8 +126,11 @@ public final class BkBasic implements Back {
         final PrintStream stream = new PrintStream(
             baos, false, StandardCharsets.UTF_8.toString()
         );
-        err.printStackTrace(stream);
-        stream.close();
+        try {
+            err.printStackTrace(stream);
+        } finally {
+            stream.close();
+        }
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
             code

@@ -79,8 +79,11 @@ public final class FbSlf4j extends FbWrap {
         final PrintStream stream = new PrintStream(
             baos, false, StandardCharsets.UTF_8.toString()
         );
-        error.printStackTrace(stream);
-        stream.close();
+        try {
+            error.printStackTrace(stream);
+        } finally {
+            stream.close();
+        }
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",
             new RqMethod.Base(req).method(),
