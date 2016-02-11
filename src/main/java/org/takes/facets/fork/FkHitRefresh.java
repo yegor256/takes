@@ -131,7 +131,7 @@ public final class FkHitRefresh implements Fork {
         if (header.hasNext()) {
             if (this.expired()) {
                 this.exec.run();
-                this.touch();
+                FkHitRefresh.touch(this.last);
             }
             resp = new Opt.Single<Response>(this.take.act(req));
         } else {
@@ -157,14 +157,6 @@ public final class FkHitRefresh implements Fork {
             }
         }
         return expired;
-    }
-
-    /**
-     * Touch the file.
-     * @throws IOException If fails
-     */
-    private void touch() throws IOException {
-        FkHitRefresh.touch(this.last);
     }
 
     /**
