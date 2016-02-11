@@ -5,9 +5,9 @@ The following members are in the project team:
 Role | Members
 ---|---
 PM | @davvd
-CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @krzyk, @mkordas, @longtimeago
-DEV | @adko-pl, @rfqu, @danff, @erimerturk, @gmandnepr, @piddubnyi, @happy-neko, @mbarbieri, @michaelben, @amihaiemil, @essobedo, @prondzyn, @rajithd, @sebing, @xupyprmv, @yamstranger, @bertram25
-IMP | @adko-pl, @rfqu, @danff, @erimerturk, @gmandnepr, @piddubnyi, @happy-neko, @mbarbieri, @michaelben, @amihaiemil, @essobedo, @prondzyn, @rajithd, @sebing, @xupyprmv, @yamstranger, @bertram25
+CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @hdouss, @krzyk, @mkordas, @longtimeago
+DEV | @adko-pl, @rfqu, @danff, @erimerturk, @gmandnepr, @bubelov, @piddubnyi, @happy-neko, @2686747, @mbarbieri, @michaelben, @amihaiemil, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
+IMP | @adko-pl, @rfqu, @danff, @erimerturk, @gmandnepr, @bubelov, @piddubnyi, @happy-neko, @2686747, @mbarbieri, @michaelben, @amihaiemil, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
 ARC | 
 DES | @yegor256
 PO | @yegor256

@@ -79,7 +79,7 @@ public final class App implements Take {
                 new TkHTML(App.class.getResource("about.html"))
             ),
             new FkRegex("/robots.txt", ""),
-            new FkRegex("/f(.*)", new TkDir(App.this.home))
+            new FkRegex("/f(.*)", new TkDir(this.home))
         ).act(request);
     }
 }

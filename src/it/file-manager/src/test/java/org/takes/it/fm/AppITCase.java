@@ -52,7 +52,7 @@ public final class AppITCase {
     @Test
     public void justWorks() throws Exception {
         Assume.assumeNotNull(AppITCase.HOME);
-        new JdkRequest(String.format("%s/f", HOME))
+        new JdkRequest(String.format("%s/f", AppITCase.HOME))
             .through(VerboseWire.class)
             .fetch()
             .as(RestResponse.class)

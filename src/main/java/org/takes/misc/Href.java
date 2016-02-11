@@ -25,6 +25,7 @@ package org.takes.misc;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -72,11 +73,22 @@ public final class Href implements CharSequence {
     /**
      * Ctor.
      * @param txt Text of the link
+     * @todo #558:30min Href ctor. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidInstantiatingObjectsInLoops",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public Href(final CharSequence txt) {
         this.params = new ConcurrentHashMap<String, List<String>>(0);
-        final URI link = URI.create(txt.toString());
+        final URI link = Href.createURI(txt.toString());
         final String query = link.getRawQuery();
         if (query == null) {
             this.uri = link;
@@ -280,4 +292,35 @@ public final class Href implements CharSequence {
         }
     }
 
+    /**
+     * Parses the specified content to create the corresponding {@code URI}
+     * instance. In case of an {@code URISyntaxException}, it will automatically
+     * encode the character that causes the issue then it will try again
+     * if it is possible otherwise an {@code IllegalArgumentException} will
+     * be thrown.
+     * @param txt The content to parse
+     * @return The {@code URI} corresponding to the specified content.
+     * @throws IllegalArgumentException in case the content could not be parsed
+     * @throws IllegalStateException in case an invalid character could not be
+     *  encoded properly.
+     */
+    private static URI createURI(final String txt) {
+        URI result;
+        try {
+            result = new URI(txt);
+        } catch (final URISyntaxException ex) {
+            final int index = ex.getIndex();
+            if (index == -1) {
+                throw new IllegalArgumentException(ex.getMessage(), ex);
+            }
+            final StringBuilder value = new StringBuilder(txt);
+            value.replace(
+                index,
+                index + 1,
+                Href.encode(value.substring(index, index + 1))
+            );
+            result = Href.createURI(value.toString());
+        }
+        return result;
+    }
 }

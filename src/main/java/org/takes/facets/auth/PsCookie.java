@@ -60,7 +60,7 @@ public final class PsCookie implements Pass {
     private final transient String cookie;
 
     /**
-     * Max login age, in seconds.
+     * Max login age, in days.
      */
     private final transient long age;
 
@@ -86,13 +86,13 @@ public final class PsCookie implements Pass {
      * Ctor.
      * @param cdc Codec
      * @param name Cookie name
-     * @param sec Max age in seconds
+     * @param days Max age in days
      * @since 0.9.6
      */
-    public PsCookie(final Codec cdc, final String name, final long sec) {
+    public PsCookie(final Codec cdc, final String name, final long days) {
         this.codec = cdc;
         this.cookie = name;
-        this.age = sec;
+        this.age = days;
     }
 
     @Override
