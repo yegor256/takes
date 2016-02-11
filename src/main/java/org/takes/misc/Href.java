@@ -326,9 +326,10 @@ public final class Href implements CharSequence {
     }
 
     /**
-     * Remove the query part of the provided URI.
+     * Remove the query part from the provided URI and return the resulting URI.
      * @param link The link from which the query needs to be removed.
-     * @return The resulting URI without the query part.
+     * @return The URI corresponding to the same provided URI but without the
+     *  query part.
      */
     private static URI removeQuery(final URI link) {
         final String query = link.getRawQuery();
