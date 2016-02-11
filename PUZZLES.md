@@ -48,7 +48,7 @@ There are 19 active puzzles (57 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-4ea33ea6**]() [`PsAll.java:56-60`](../master/src/main/java/org/takes/facets/auth/PsAll.java#L56-L60)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7b985928**]() [`PsBasic.java:226-230`](../master/src/main/java/org/takes/facets/auth/PsBasic.java#L226-L230)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7db66253**]() [`CcAES.java:91-95`](../master/src/main/java/org/takes/facets/auth/codecs/CcAES.java#L91-L95)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-b4a12ea6**]() [`FkHitRefresh.java:117-121`](../master/src/main/java/org/takes/facets/fork/FkHitRefresh.java#L117-L121)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#589](https://github.com/yegor256/takes/issues/589):[**558-b4a12ea6**](https://github.com/yegor256/takes/issues/589) [`FkHitRefresh.java:117-121`](../master/src/main/java/org/takes/facets/fork/FkHitRefresh.java#L117-L121)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-12fc4eff**]() [`MediaType.java:62-66`](../master/src/main/java/org/takes/facets/fork/MediaType.java#L62-L66)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**558-7c5810e9**]() [`BkTimeable.java:67-71`](../master/src/main/java/org/takes/http/BkTimeable.java#L67-L71)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#586](https://github.com/yegor256/takes/issues/586):[**558-e98f4792**](https://github.com/yegor256/takes/issues/586) [`Options.java:71-75`](../master/src/main/java/org/takes/http/Options.java#L71-L75)<br/>
