@@ -114,21 +114,13 @@ public final class FkHitRefresh implements Fork {
      * @param cmd Command to execute
      * @param tke Target
      * @throws IOException If fails
-     * @todo #558:30min FkHitRefresh ctor. According to new qulice version,
-     *  constructor must contain only variables initialization and other
-     *  constructor calls. Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public FkHitRefresh(final File file, final Runnable cmd,
         final Take tke) throws IOException {
         this.dir = file;
         this.exec = cmd;
         this.take = tke;
-        this.last = File.createTempFile("take", ".txt");
-        this.last.deleteOnExit();
-        this.touch();
+        this.last = FkHitRefresh.createFileToTouch();
     }
 
     @Override
@@ -172,7 +164,16 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     private void touch() throws IOException {
-        final OutputStream out = new FileOutputStream(this.last);
+        FkHitRefresh.touch(this.last);
+    }
+
+    /**
+     * Touch the file.
+     * @param file The file to touch
+     * @throws IOException If fails
+     */
+    private static void touch(final File file) throws IOException {
+        final OutputStream out = new FileOutputStream(file);
         try {
             out.write('+');
         } finally {
@@ -180,4 +181,15 @@ public final class FkHitRefresh implements Fork {
         }
     }
 
+    /**
+     * Create the file to touch.
+     * @return The file to touch
+     * @throws IOException If fails
+     */
+    private static File createFileToTouch() throws IOException {
+        final File file = File.createTempFile("take", ".txt");
+        file.deleteOnExit();
+        FkHitRefresh.touch(file);
+        return file;
+    }
 }
