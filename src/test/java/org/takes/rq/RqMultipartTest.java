@@ -39,8 +39,10 @@ import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -52,7 +54,7 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link RqMultipart.Base}.
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: 37f595f280dc032586806cdefa9afea1f279d9e0 $
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
@@ -61,7 +63,10 @@ import org.takes.rs.RsText;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class RqMultipartTest {
-
+    /**
+     * T2 temporary part name.
+     */
+    private static final String PART_T2 = "t2";
     /**
      * Carriage return constant.
      */
@@ -70,6 +75,12 @@ public final class RqMultipartTest {
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
+    /**
+     * Temp directory.
+     * @checkstyle VisibilityModifierCheck (5 lines)
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * RqMultipart.Base can satisfy equals contract.
@@ -95,10 +106,22 @@ public final class RqMultipartTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RqMultipart.Base(req),
-            Matchers.equalTo(new RqMultipart.Base(req))
-        );
+        final RqMultipart.Base reqbaseone = new RqMultipart.Base(req);
+        final RqMultipart.Base reqbasetwo = new RqMultipart.Base(req);
+        try {
+            MatcherAssert.assertThat(
+                reqbaseone,
+                Matchers.equalTo(reqbasetwo)
+            );
+        } finally {
+            req.body().close();
+            reqbaseone.part("t-1")
+            .iterator()
+            .next().body().close();
+            reqbasetwo.part("t-1")
+            .iterator()
+            .next().body().close();
+        }
     }
 
     /**
@@ -206,23 +229,28 @@ public final class RqMultipartTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RqHeaders.Base(
-                multi.part("t4").iterator().next()
-            ).header(RqMultipartTest.DISPOSITION),
-            Matchers.hasItem("form-data; name=\"t4\"")
-        );
-        MatcherAssert.assertThat(
-            new RqPrint(
+        try {
+            MatcherAssert.assertThat(
                 new RqHeaders.Base(
                     multi.part("t4").iterator().next()
-                )
-            ).printBody(),
-            Matchers.allOf(
-                Matchers.startsWith("40 N"),
-                Matchers.endsWith("CA 94085")
-            )
-        );
+                    ).header(RqMultipartTest.DISPOSITION),
+                Matchers.hasItem("form-data; name=\"t4\"")
+            );
+            MatcherAssert.assertThat(
+                new RqPrint(
+                    new RqHeaders.Base(
+                        multi.part("t4").iterator().next()
+                        )
+                    ).printBody(),
+                Matchers.allOf(
+                    Matchers.startsWith("40 N"),
+                    Matchers.endsWith("CA 94085")
+                    )
+            );
+        } finally {
+            multi.body().close();
+            multi.part("t4").iterator().next().body().close();
+        }
     }
 
     /**
@@ -249,10 +277,14 @@ public final class RqMultipartTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            multi.part("fake").iterator().hasNext(),
-            Matchers.is(false)
-        );
+        try {
+            MatcherAssert.assertThat(
+                multi.part("fake").iterator().hasNext(),
+                Matchers.is(false)
+            );
+        } finally {
+            multi.body().close();
+        }
     }
 
     /**
@@ -279,12 +311,16 @@ public final class RqMultipartTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            multi.names(),
-            Matchers.<Iterable<String>>equalTo(
-                new HashSet<String>(Arrays.asList("address", "data"))
-            )
-        );
+        try {
+            MatcherAssert.assertThat(
+                multi.names(),
+                Matchers.<Iterable<String>>equalTo(
+                    new HashSet<String>(Arrays.asList("address", "data"))
+                    )
+            );
+        } finally {
+            multi.body().close();
+        }
     }
 
     /**
@@ -311,12 +347,18 @@ public final class RqMultipartTest {
             ),
             body
         );
-        MatcherAssert.assertThat(
-            new RqMultipart.Smart(
-                new RqMultipart.Base(req)
-            ).single("x-1").body().available(),
-            Matchers.equalTo(length)
+        final RqMultipart.Smart regsmart =  new RqMultipart.Smart(
+            new RqMultipart.Base(req)
         );
+        try {
+            MatcherAssert.assertThat(
+                regsmart.single("x-1").body().available(),
+                Matchers.equalTo(length)
+            );
+        } finally {
+            req.body().close();
+            regsmart.part("x-1").iterator().next().body().close();
+        }
     }
 
     /**
@@ -378,8 +420,8 @@ public final class RqMultipartTest {
     @Category(PerformanceTests.class)
     public void handlesRequestInTime() throws IOException {
         final int length = 100000000;
-        final File temp = File.createTempFile("handlesRequestInTime", ".tmp");
-        final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
+        final File tempfile = this.temp.newFile("handlesRequestInTime.tmp");
+        final BufferedWriter bwr = new BufferedWriter(new FileWriter(tempfile));
         bwr.write(
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz",
@@ -403,23 +445,28 @@ public final class RqMultipartTest {
                 "Content-Type: multipart/form-data; boundary=zzz",
                 String.format(
                     "Content-Length:%s",
-                    temp.length()
-                )
-            ),
-            new FileInputStream(temp)
-        );
-        MatcherAssert.assertThat(
-            new RqMultipart.Smart(
-                new RqMultipart.Base(req)
-            ).single("test").body().available(),
-            Matchers.equalTo(length)
-        );
-        MatcherAssert.assertThat(
-            System.currentTimeMillis() - start,
-            //@checkstyle MagicNumberCheck (1 line)
-            Matchers.lessThan(3000L)
-        );
-        temp.delete();
+                    tempfile.length()
+                    )
+                ),
+            new TempInputStream(new FileInputStream(tempfile), tempfile)
+            );
+        final RqMultipart.Smart smartreq = new RqMultipart.Smart(
+            new RqMultipart.Base(req)
+            );
+        try {
+            MatcherAssert.assertThat(
+                smartreq.single("test").body().available(),
+                Matchers.equalTo(length)
+            );
+            MatcherAssert.assertThat(
+                System.currentTimeMillis() - start,
+                //@checkstyle MagicNumberCheck (1 line)
+                Matchers.lessThan(3000L)
+            );
+        } finally {
+            req.body().close();
+            smartreq.part("test").iterator().next().body().close();
+        }
     }
     /**
      * RqMultipart.Base doesn't distort the content.
@@ -428,8 +475,8 @@ public final class RqMultipartTest {
     @Test
     public void notDistortContent() throws IOException {
         final int length = 1000000;
-        final File temp = File.createTempFile("notDistortContent", ".tmp");
-        final BufferedWriter bwr = new BufferedWriter(new FileWriter(temp));
+        final File tempfile = this.temp.newFile("notDistortContent.tmp");
+        final BufferedWriter bwr = new BufferedWriter(new FileWriter(tempfile));
         final String head =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz1",
@@ -459,23 +506,27 @@ public final class RqMultipartTest {
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
-            new FileInputStream(temp)
+            new TempInputStream(new FileInputStream(tempfile), tempfile)
         );
         final InputStream stream = new RqMultipart.Smart(
             new RqMultipart.Base(req)
-        ).single("test1").body();
-        MatcherAssert.assertThat(
-            stream.available(),
-            Matchers.equalTo(length)
-        );
-        for (int idx = 0; idx < length; ++idx) {
+            ).single("test1").body();
+        try {
             MatcherAssert.assertThat(
-                String.format("byte %d not matched", idx),
-                stream.read(),
-                Matchers.equalTo(idx % byt)
+                stream.available(),
+                Matchers.equalTo(length)
             );
+            for (int idx = 0; idx < length; ++idx) {
+                MatcherAssert.assertThat(
+                    String.format("byte %d not matched", idx),
+                    stream.read(),
+                    Matchers.equalTo(idx % byt)
+                );
+            }
+        } finally {
+            req.body().close();
+            stream.close();
         }
-        temp.delete();
     }
 
     /**
@@ -494,22 +545,30 @@ public final class RqMultipartTest {
                 ),
                 Joiner.on("\r\n").join(
                     "--AaB01x",
-                    "Content-Disposition: form-data; name=\"t2\"",
+                    new StringBuilder()
+                    .append("Content-Disposition: form-data; name=\"")
+                    .append(RqMultipartTest.PART_T2).append("\""),
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "--AaB01x"
                 )
             )
         );
-        MatcherAssert.assertThat(
-            multipart.part("t2")
+        try {
+            MatcherAssert.assertThat(
+                multipart.part(RqMultipartTest.PART_T2)
                 .iterator()
                 .next(),
-            new HmRqHeader(
-                "content-length",
-                "102"
-            )
-        );
+                new HmRqHeader(
+                    "content-length",
+                    "102"
+                    )
+            );
+        } finally {
+            multipart.body().close();
+            multipart.part(RqMultipartTest.PART_T2).iterator().next()
+            .body().close();
+        }
     }
 
     /**
