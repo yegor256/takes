@@ -185,7 +185,7 @@ final class Options {
      * @return Map A map containing all the arguments which are actually
      *  key/value pairs.
      * @throws IllegalStateException If an argument doesn't match with the
-     *  expected format.
+     *  expected format which is {@code --([a-z\-]+)(=.+)?}.
      */
     private static Map<String, String> asMap(final Iterable<String> args) {
         final Map<String, String> map =
