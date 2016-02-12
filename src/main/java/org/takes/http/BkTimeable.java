@@ -47,7 +47,7 @@ public final class BkTimeable extends BkWrap {
     /**
      * Back threads.
      */
-    private static final class BkThreads implements Back {
+    private static final class BkThreads extends Thread implements Back {
         /**
          * Original back.
          */
@@ -64,38 +64,34 @@ public final class BkTimeable extends BkWrap {
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
-         * @todo #558:30min BkThreads ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         BkThreads(final long msec, final Back bck) {
+            super();
             this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;
             this.latency = msec;
-            final Thread monitor = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        while (true) {
-                            BkThreads.this.check();
-                            try {
-                                TimeUnit.SECONDS.sleep(1L);
-                            } catch (final InterruptedException ex) {
-                                Thread.currentThread().interrupt();
-                                throw new IllegalStateException(ex);
-                            }
-                        }
-                    }
+        }
+
+        /**
+         *
+         */
+        public void startDaemonThread(){
+            this.setDaemon(true);
+            this.start();
+
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                this.check();
+                try {
+                    TimeUnit.SECONDS.sleep(1L);
+                } catch (final InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    throw new IllegalStateException(ex);
                 }
-            );
-            monitor.setDaemon(true);
-            monitor.start();
+            }
         }
 
         @Override
@@ -131,6 +127,10 @@ public final class BkTimeable extends BkWrap {
      */
     BkTimeable(final Back back, final long msec) {
         super(new BkThreads(msec, back));
+    }
+
+    public void startDaemonThread(){
+
     }
 
 }
