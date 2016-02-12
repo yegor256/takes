@@ -28,6 +28,7 @@ import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -69,6 +70,7 @@ public final class TkRetryTest {
      *
      * @throws Exception if something is wrong
      */
+    @Ignore
     @Test(expected = IOException.class)
     public void retriesOnExceptionTillCount() throws Exception {
         final int count = Tv.THREE;

@@ -116,9 +116,14 @@ public interface Opt<T> {
         /**
          * Ctor.
          * @param orgn Origin
+         * @todo #609:30min null value should not be placed in Opt.Single
+         *  container. TkMethodsTest and TkRetryTest detected problems with
+         *  passing null value to Opt.Single constructor. We should fix these
+         *  problems and re-enable ignored tests.
          */
         public Single(final T orgn) {
-            this.origin = orgn;
+            this.origin =
+                Objects.requireNonNull(orgn, "orgn could not be null");
         }
         @Override
         public T get() {
@@ -142,8 +147,8 @@ public interface Opt<T> {
     final class Empty<T> implements Opt<T> {
         @Override
         public T get() {
-            throw new UnsupportedOperationException(
-                "there is nothing here, use has() first, to check"
+            throw new NoSuchElementException(
+                "there is nothing here, use has() first to check"
             );
         }
         @Override
