@@ -43,12 +43,11 @@ import org.takes.facets.auth.Identity;
  * AES codec which supports 128 bits key.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
  * @since 0.13.8
  */
-@EqualsAndHashCode(of = { "origin", "key" })
+@EqualsAndHashCode(of = {"origin", "key"})
 public final class CcAES implements Codec {
     /**
      * The block size constant.
@@ -77,7 +76,7 @@ public final class CcAES implements Codec {
      * @since 0.22
      */
     public CcAES(final Codec codec, final String key) {
-        this(codec, key.getBytes( StandardCharsets.UTF_8));
+        this(codec, key.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
@@ -122,7 +121,7 @@ public final class CcAES implements Codec {
      * This method will create AlgorithmParameterSpec with the block size.
      */
     private void initAlgorithmParameterSpec() {
-        if(spec == null){
+        if (spec == null) {
             final SecureRandom random = new SecureRandom();
             final byte[] bytes = new byte[CcAES.BLOCK];
             random.nextBytes(bytes);
@@ -146,7 +145,6 @@ public final class CcAES implements Codec {
 
     /**
      * Decrypt the given bytes using AES.
-     *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
      * @throws IOException for all unexpected exceptions
