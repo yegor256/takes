@@ -44,7 +44,6 @@ public final class TkFilesTest {
 
     /**
      * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
     public final transient TemporaryFolder temp = new TemporaryFolder();

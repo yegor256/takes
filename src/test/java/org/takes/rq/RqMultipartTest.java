@@ -564,7 +564,7 @@ public final class RqMultipartTest {
         } finally {
             multipart.body().close();
             multipart.part(RqMultipartTest.PART_T2).iterator().next()
-            .body().close();
+                .body().close();
         }
     }
 
