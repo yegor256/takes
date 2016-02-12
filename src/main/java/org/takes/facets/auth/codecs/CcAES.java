@@ -70,6 +70,11 @@ public final class CcAES implements Codec {
     private transient AlgorithmParameterSpec spec;
 
     /**
+     * Tracks the spec variable is initialized or not.
+     */
+    private transient boolean initialized;
+
+    /**
      * Constructor for the class.
      * @param codec Original codec
      * @param key The encryption key
@@ -87,6 +92,7 @@ public final class CcAES implements Codec {
     public CcAES(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.key = key.clone();
+        this.initialized = false;
     }
 
     @Override
@@ -120,11 +126,12 @@ public final class CcAES implements Codec {
      * This method will create AlgorithmParameterSpec with the block size.
      */
     private void initAlgorithmParameterSpec() {
-        if (this.spec == null) {
+        if (!this.initialized) {
             final SecureRandom random = new SecureRandom();
             final byte[] bytes = new byte[CcAES.BLOCK];
             random.nextBytes(bytes);
             this.spec = new IvParameterSpec(bytes);
+            this.initialized == ture;
         }
     }
 
