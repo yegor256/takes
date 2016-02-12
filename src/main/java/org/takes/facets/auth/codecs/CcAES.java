@@ -67,7 +67,7 @@ public final class CcAES implements Codec {
     /**
      * The algorithm parameter spec for cipher.
      */
-    private AlgorithmParameterSpec spec;
+    private transient AlgorithmParameterSpec spec;
 
     /**
      * Constructor for the class.
