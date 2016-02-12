@@ -40,14 +40,13 @@ import org.takes.tk.TkEmpty;
 /**
  * Test case for {@link FkHitRefresh}.
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: e60e0217ac71dbde8b13fc678e4770cbd2f9982c $
+ * @version $Id$
  * @since 0.9
  */
 public final class FkHitRefreshTest {
 
     /**
      * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
     public final transient TemporaryFolder temp = new TemporaryFolder();
@@ -61,7 +60,7 @@ public final class FkHitRefreshTest {
     public void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
             new RqFake(), "X-Takes-HitRefresh: yes"
-            );
+        );
         final AtomicBoolean done = new AtomicBoolean(false);
         final Fork fork = new FkHitRefresh(
             this.temp.getRoot(),
@@ -72,7 +71,7 @@ public final class FkHitRefreshTest {
                 }
             },
             new TkEmpty()
-            );
+        );
         TimeUnit.SECONDS.sleep(2L);
         FileUtils.touch(this.temp.newFile("hey.txt"));
         MatcherAssert.assertThat(
@@ -92,7 +91,7 @@ public final class FkHitRefreshTest {
         MatcherAssert.assertThat(
             new FkHitRefresh(
                 dir, "", new TkEmpty()
-                ).route(new RqFake()).has(),
+            ).route(new RqFake()).has(),
             Matchers.is(false)
         );
     }

@@ -54,7 +54,7 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link RqMultipart.Base}.
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id: 37f595f280dc032586806cdefa9afea1f279d9e0 $
+ * @version $Id$
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
@@ -63,6 +63,7 @@ import org.takes.rs.RsText;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class RqMultipartTest {
+
     /**
      * T2 temporary part name.
      */
@@ -75,9 +76,9 @@ public final class RqMultipartTest {
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
+    
     /**
      * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
     public final transient TemporaryFolder temp = new TemporaryFolder();
@@ -115,12 +116,8 @@ public final class RqMultipartTest {
             );
         } finally {
             req.body().close();
-            reqbaseone.part("t-1")
-            .iterator()
-            .next().body().close();
-            reqbasetwo.part("t-1")
-            .iterator()
-            .next().body().close();
+            reqbaseone.part("t-1").iterator().next().body().close();
+            reqbasetwo.part("t-1").iterator().next().body().close();
         }
     }
 
@@ -233,19 +230,19 @@ public final class RqMultipartTest {
             MatcherAssert.assertThat(
                 new RqHeaders.Base(
                     multi.part("t4").iterator().next()
-                    ).header(RqMultipartTest.DISPOSITION),
+                ).header(RqMultipartTest.DISPOSITION),
                 Matchers.hasItem("form-data; name=\"t4\"")
             );
             MatcherAssert.assertThat(
                 new RqPrint(
                     new RqHeaders.Base(
                         multi.part("t4").iterator().next()
-                        )
-                    ).printBody(),
+                    )
+                ).printBody(),
                 Matchers.allOf(
                     Matchers.startsWith("40 N"),
                     Matchers.endsWith("CA 94085")
-                    )
+                )
             );
         } finally {
             multi.body().close();
@@ -316,7 +313,7 @@ public final class RqMultipartTest {
                 multi.names(),
                 Matchers.<Iterable<String>>equalTo(
                     new HashSet<String>(Arrays.asList("address", "data"))
-                    )
+                )
             );
         } finally {
             multi.body().close();
@@ -347,7 +344,7 @@ public final class RqMultipartTest {
             ),
             body
         );
-        final RqMultipart.Smart regsmart =  new RqMultipart.Smart(
+        final RqMultipart.Smart regsmart = new RqMultipart.Smart(
             new RqMultipart.Base(req)
         );
         try {
@@ -446,13 +443,13 @@ public final class RqMultipartTest {
                 String.format(
                     "Content-Length:%s",
                     tempfile.length()
-                    )
-                ),
+                )
+            ),
             new TempInputStream(new FileInputStream(tempfile), tempfile)
-            );
+        );
         final RqMultipart.Smart smartreq = new RqMultipart.Smart(
             new RqMultipart.Base(req)
-            );
+        );
         try {
             MatcherAssert.assertThat(
                 smartreq.single("test").body().available(),
@@ -510,7 +507,7 @@ public final class RqMultipartTest {
         );
         final InputStream stream = new RqMultipart.Smart(
             new RqMultipart.Base(req)
-            ).single("test1").body();
+        ).single("test1").body();
         try {
             MatcherAssert.assertThat(
                 stream.available(),
@@ -562,7 +559,7 @@ public final class RqMultipartTest {
                 new HmRqHeader(
                     "content-length",
                     "102"
-                    )
+                )
             );
         } finally {
             multipart.body().close();

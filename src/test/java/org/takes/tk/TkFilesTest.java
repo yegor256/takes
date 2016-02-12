@@ -61,9 +61,9 @@ public final class TkFilesTest {
                 new TkFiles(this.temp.getRoot()).act(
                     new RqFake(
                         "GET", "/a.txt?hash=a1b2c3", ""
-                        )
                     )
-                ).print(),
+                )
+            ).print(),
             Matchers.startsWith("HTTP/1.1 200 OK")
         );
     }
