@@ -54,8 +54,33 @@ import org.takes.rs.RsWithStatus;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
  */
+@SuppressWarnings("PMD.LongVariable")
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
+
+    /**
+     * The http header "X-Takes-LocalAddress".
+     */
+    private static final String HEADER_TAKES_LOCAL_ADDRESS =
+        "X-Takes-LocalAddress";
+
+    /**
+     * The http header "X-Takes-LocalPort".
+     */
+    private static final String HEADER_TAKES_LOCAL_PORT =
+        "X-Takes-LocalPort";
+
+    /**
+     * The http header "X-Takes-RemoteAddress".
+     */
+    private static final String HEADER_TAKES_REMOTE_ADDRESS =
+        "X-Takes-RemoteAddress";
+
+    /**
+     * The http header "X-Takes-RemotePort".
+     */
+    private static final String HEADER_TAKES_REMOTE_PORT =
+        "X-Takes-RemotePort";
 
     /**
      * Take.
@@ -142,22 +167,22 @@ public final class BkBasic implements Back {
             req,
             String.format(
                 "%s: %s",
-                Header.X_TAKES_LOCAL_ADDRESS.toString(),
+                BkBasic.HEADER_TAKES_LOCAL_ADDRESS,
                 socket.getLocalAddress().getHostAddress()
             ),
             String.format(
                 "%s: %d",
-                Header.X_TAKES_LOCAL_PORT.toString(),
+                BkBasic.HEADER_TAKES_LOCAL_PORT,
                 socket.getLocalPort()
             ),
             String.format(
                 "%s: %s",
-                Header.X_TAKES_REMOTE_ADDRESS.toString(),
+                BkBasic.HEADER_TAKES_REMOTE_ADDRESS,
                 socket.getInetAddress().getHostAddress()
             ),
             String.format(
                 "%s: %d",
-                Header.X_TAKES_REMOTE_PORT.toString(),
+                BkBasic.HEADER_TAKES_REMOTE_PORT,
                 socket.getPort()
             )
         );
