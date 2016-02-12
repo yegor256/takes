@@ -76,7 +76,7 @@ public final class RqMultipartTest {
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
-    
+
     /**
      * Temp directory.
      */
