@@ -45,16 +45,15 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
+ * @version $Id: f19e8ed931805b656a83fca744ab60e00963870b $
  * @since 0.13.8
  */
-@EqualsAndHashCode(of = { "origin" })
+@EqualsAndHashCode(of = { "origin", "key" })
 public final class CcAES implements Codec {
     /**
-     * The block size constant
+     * The block size constant.
      */
-    private final static int BLOCK = 16;
-
+    private static final int BLOCK = 16;
 
     /**
      * Original codec.
@@ -62,9 +61,9 @@ public final class CcAES implements Codec {
     private final transient Codec origin;
 
     /**
-     * The encryption key
+     * The encryption key.
      */
-    private final String key;
+    private final transient byte[] key;
 
     /**
      * Constructor for the class.
@@ -72,9 +71,8 @@ public final class CcAES implements Codec {
      * @param key The encryption key
      * @since 0.22
      */
-    public CcAES(final Codec codec, final String key){
-        this.origin = codec;
-        this.key = key;
+    public CcAES(final Codec codec, final String key) {
+        this(codec, key.getBytes( StandardCharsets.UTF_8));
     }
 
     /**
@@ -83,7 +81,8 @@ public final class CcAES implements Codec {
      * @param key The encryption key
      */
     public CcAES(final Codec codec, final byte[] key) {
-        this(codec, new String(key, StandardCharsets.UTF_8));
+        this.origin = codec;
+        this.key = key;
     }
 
     @Override
@@ -116,6 +115,10 @@ public final class CcAES implements Codec {
         }
     }
 
+    /**
+     * This method will create AlgorithmParameterSpec with the block size.
+     * @return The AlgorithmParameterSpec implementation.
+     */
     private static AlgorithmParameterSpec createAlgorithmParameterSpec() {
         final SecureRandom random = new SecureRandom();
         final byte[] bytes = new byte[CcAES.BLOCK];
@@ -124,10 +127,10 @@ public final class CcAES implements Codec {
     }
 
     /**
-     * A private method to check the block size of the key.
+     * This method to check the block size of the key.
      */
     private void checkBlockSize() {
-        if (this.key.length() != CcAES.BLOCK) {
+        if (this.key.length != CcAES.BLOCK) {
             throw new IllegalArgumentException(
                 String.format(
                     "the length of the AES key must be exactly %d bytes",
@@ -168,7 +171,7 @@ public final class CcAES implements Codec {
         throws IOException {
         try {
             final SecretKeySpec secret = new SecretKeySpec(
-                this.key.getBytes(StandardCharsets.UTF_8), "AES"
+                this.key, "AES"
             );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(mode, secret, spec);
