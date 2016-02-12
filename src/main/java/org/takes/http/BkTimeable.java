@@ -56,6 +56,18 @@ public final class BkTimeable extends Thread implements Back {
     private final transient ConcurrentMap<Thread, Long> threads;
 
     /**
+     * Ctor.
+     * @param back Original back
+     * @param msec Execution latency
+     */
+    BkTimeable(final Back back, final long msec) {
+        super();
+        this.threads = new ConcurrentHashMap<Thread, Long>(1);
+        this.back = back;
+        this.latency = msec;
+    }
+
+    /**
      * This method will start the damon thread.
      */
     public void startDaemonThread() {
@@ -100,17 +112,5 @@ public final class BkTimeable extends Thread implements Back {
                 this.threads.remove(thread);
             }
         }
-    }
-
-    /**
-     * Ctor.
-     * @param back Original back
-     * @param msec Execution latency
-     */
-    BkTimeable(final Back back, final long msec) {
-        super();
-        this.threads = new ConcurrentHashMap<Thread, Long>(1);
-        this.back = back;
-        this.latency = msec;
     }
 }
