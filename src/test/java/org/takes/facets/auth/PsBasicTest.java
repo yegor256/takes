@@ -207,6 +207,6 @@ public final class PsBasicTest {
         final String encoded = DatatypeConverter.printBase64Binary(
             auth.getBytes()
         );
-        return String.format(AUTH_BASIC, encoded);
+        return String.format(PsBasicTest.AUTH_BASIC, encoded);
     }
 }

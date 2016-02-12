@@ -68,7 +68,13 @@ final class Options {
     /**
      * Ctor.
      * @param args Arguments
+     * @todo #558:30min Options ctor. According to new qulice version,
+     *  constructor must contain only variables initialization and other
+     *  constructor calls. Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     Options(final Iterable<String> args) {
         this.map = new HashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");

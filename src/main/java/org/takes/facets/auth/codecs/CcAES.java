@@ -88,7 +88,13 @@ public final class CcAES implements Codec {
      * @param codec Original codec
      * @param key The encryption key
      * @exception IOException errors on creating internal components
+     * @todo #558:30min CcAES ctor. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public CcAES(final Codec codec, final byte[] key) throws IOException {
         final int block = 16;
         if (key.length != block) {

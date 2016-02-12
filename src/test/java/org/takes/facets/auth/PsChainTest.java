@@ -34,6 +34,7 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link PsChain}.
  * @author Aleksey Kurochka (eg04lt3r@gmail.com)
  * @version $Id$
+ * @since 0.11
  */
 public final class PsChainTest {
 

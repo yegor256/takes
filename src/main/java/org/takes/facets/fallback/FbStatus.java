@@ -136,7 +136,13 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    @SuppressWarnings("PMD.CallSuperInConstructor")
+    @SuppressWarnings
+        (
+            {
+                "PMD.CallSuperInConstructor",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public FbStatus(final Condition<Integer> check, final Fallback fallback) {
         super(
             new Fallback() {

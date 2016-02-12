@@ -74,18 +74,18 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replaceTypeToResponse() throws Exception {
-        final String type = TYPE_TEXT;
+        final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
-                    new RsWithType(new RsEmpty(), TYPE_XML),
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     type
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, type),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(RsWithTypeTest.CONTENT_TYPE, type),
                     "",
                     ""
                 )
@@ -109,11 +109,11 @@ public final class RsWithTypeTest {
                         ),
                         body
                     ),
-                    TYPE_HTML
+                    RsWithTypeTest.TYPE_HTML
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
+                Joiner.on(RsWithTypeTest.CRLF).join(
                     "HTTP/1.1 500 Internal Error",
                     "Content-Length: 6",
                     "Content-Type: text/html",
@@ -134,14 +134,17 @@ public final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType.HTML(
                     new RsWithType(
-                        new RsEmpty(), TYPE_XML
+                        new RsEmpty(), RsWithTypeTest.TYPE_XML
                     )
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_HTML),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE,
+                        RsWithTypeTest.TYPE_HTML
+                    ),
                     "",
                     ""
                 )
@@ -159,14 +162,16 @@ public final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType.JSON(
                     new RsWithType(
-                        new RsEmpty(), TYPE_XML
+                        new RsEmpty(), RsWithTypeTest.TYPE_XML
                     )
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, "application/json"),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE, "application/json"
+                    ),
                     "",
                     ""
                 )
@@ -184,14 +189,16 @@ public final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType.XML(
                     new RsWithType(
-                        new RsEmpty(), TYPE_HTML
+                        new RsEmpty(), RsWithTypeTest.TYPE_HTML
                     )
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_XML),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_XML
+                    ),
                     "",
                     ""
                 )
@@ -209,14 +216,16 @@ public final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(
-                        new RsEmpty(), TYPE_HTML
+                        new RsEmpty(), RsWithTypeTest.TYPE_HTML
                     )
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_TEXT),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_TEXT
+                    ),
                     "",
                     ""
                 )

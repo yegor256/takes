@@ -128,7 +128,16 @@ public interface RqMultipart extends Request {
          * @param req Original request
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
+         * @todo #558:30min Base ctor. According to new qulice version,
+         *  constructor must contain only variables initialization and other
+         *  constructor calls. Refactor code according to that rule and
+         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();
@@ -477,8 +486,8 @@ public interface RqMultipart extends Request {
             throws IOException {
             final StringBuilder builder = new StringBuilder();
             for (final Request each : dispositions) {
-                builder.append(String.format("--%s", BOUNDARY))
-                    .append(CRLF)
+                builder.append(String.format("--%s", Fake.BOUNDARY))
+                    .append(Fake.CRLF)
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
                     .append("Content-Disposition: ")
                     .append(
@@ -486,14 +495,14 @@ public interface RqMultipart extends Request {
                             new RqHeaders.Base(each)
                         // @checkstyle MultipleStringLiteralsCheck (1 line)
                         ).single("Content-Disposition")
-                    ).append(CRLF);
+                    ).append(Fake.CRLF);
                 final String body = new RqPrint(each).printBody();
-                if (!(CRLF.equals(body) || "".equals(body))) {
-                    builder.append(CRLF).append(body).append(CRLF);
+                if (!(Fake.CRLF.equals(body) || "".equals(body))) {
+                    builder.append(Fake.CRLF).append(body).append(Fake.CRLF);
                 }
             }
-            builder.append("Content-Transfer-Encoding: utf-8").append(CRLF)
-                .append(String.format("--%s--", BOUNDARY));
+            builder.append("Content-Transfer-Encoding: utf-8").append(Fake.CRLF)
+                .append(String.format("--%s--", Fake.BOUNDARY));
             return builder;
         }
 
