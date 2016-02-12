@@ -131,7 +131,7 @@ public final class CcAES implements Codec {
             final byte[] bytes = new byte[CcAES.BLOCK];
             random.nextBytes(bytes);
             this.spec = new IvParameterSpec(bytes);
-            this.initialized == ture;
+            this.initialized = true;
         }
     }
 
