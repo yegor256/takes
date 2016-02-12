@@ -86,8 +86,7 @@ public final class CcAES implements Codec {
      */
     public CcAES(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.key = new byte[key.length];
-        System.arraycopy(this.key, 0, key, 0, key.length);
+        this.key = key.clone();
     }
 
     @Override
