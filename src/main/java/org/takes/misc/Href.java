@@ -86,7 +86,7 @@ public final class Href implements CharSequence {
             }
         )
     public Href(final CharSequence txt) {
-        this.params = new HashMap<String, List<String>>(0);
+        this.params = new HashMap<>(0);
         final URI link = Href.createURI(txt.toString());
         final String query = link.getRawQuery();
         if (query == null) {
@@ -196,7 +196,7 @@ public final class Href implements CharSequence {
         final List<String> values = this.params.get(key.toString());
         final Iterable<String> iter;
         if (values == null) {
-            iter = new VerboseIterable<String>(
+            iter = new VerboseIterable<>(
                 Collections.<String>emptyList(),
                 String.format(
                     "there are no URI params by name \"%s\" among %d others",
@@ -204,7 +204,7 @@ public final class Href implements CharSequence {
                 )
             );
         } else {
-            iter = new VerboseIterable<String>(
+            iter = new VerboseIterable<>(
                 values,
                 String.format(
                     "there are only %d URI params by name \"%s\"",
@@ -239,9 +239,7 @@ public final class Href implements CharSequence {
      */
     public Href with(final Object key, final Object value) {
         final Map<String, List<String>> map =
-            new HashMap<String, List<String>>(
-                this.params.size() + 1
-            );
+            new HashMap<>(this.params.size() + 1);
         map.putAll(this.params);
         if (!map.containsKey(key.toString())) {
             map.put(key.toString(), new LinkedList<String>());
@@ -257,9 +255,7 @@ public final class Href implements CharSequence {
      */
     public Href without(final Object key) {
         final Map<String, List<String>> map =
-            new HashMap<String, List<String>>(
-                this.params.size()
-            );
+            new HashMap<>(this.params.size());
         map.putAll(this.params);
         map.remove(key.toString());
         return new Href(this.uri, map);
