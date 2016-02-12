@@ -55,7 +55,6 @@ public final class CcAESTest {
                 public Identity decode(final byte[] bytes) throws IOException {
                     return new Identity.Simple(new String(bytes));
                 }
-
                 @Override
                 public byte[] encode(final Identity identity)
                     throws IOException {

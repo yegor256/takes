@@ -121,7 +121,7 @@ public final class CcAES implements Codec {
      * This method will create AlgorithmParameterSpec with the block size.
      */
     private void initAlgorithmParameterSpec() {
-        if (spec == null) {
+        if (this.spec == null) {
             final SecureRandom random = new SecureRandom();
             final byte[] bytes = new byte[CcAES.BLOCK];
             random.nextBytes(bytes);
