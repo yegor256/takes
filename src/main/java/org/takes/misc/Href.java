@@ -106,7 +106,9 @@ public final class Href implements CharSequence {
                 } else {
                     value = "";
                 }
-                this.params.putIfAbsent(key, new LinkedList<String>());
+                if (!this.params.containsKey(key)) {
+                    this.params.put(key, new LinkedList<String>());
+                }
                 this.params.get(key).add(value);
             }
         }
