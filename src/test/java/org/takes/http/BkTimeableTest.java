@@ -41,7 +41,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link BkTimeable}.
- *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
