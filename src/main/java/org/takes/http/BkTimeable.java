@@ -42,12 +42,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class BkTimeable extends BkWrap {
-
-    /**
-     * Back threads.
-     */
-    private static final class BkThreads extends Thread implements Back {
+public final class BkTimeable extends Thread implements Back {
         /**
          * Original back.
          */
@@ -60,25 +55,13 @@ public final class BkTimeable extends BkWrap {
          * Threads storage.
          */
         private final transient ConcurrentMap<Thread, Long> threads;
-        /**
-         * Ctor.
-         * @param bck Original back
-         * @param msec Execution latency
-         */
-        BkThreads(final long msec, final Back bck) {
-            super();
-            this.threads = new ConcurrentHashMap<Thread, Long>(1);
-            this.back = bck;
-            this.latency = msec;
-        }
 
         /**
-         *
+         * This method will start the damon thread.
          */
         public void startDaemonThread(){
             this.setDaemon(true);
             this.start();
-
         }
 
         @Override
@@ -118,7 +101,6 @@ public final class BkTimeable extends BkWrap {
                 }
             }
         }
-    }
 
     /**
      * Ctor.
@@ -126,11 +108,9 @@ public final class BkTimeable extends BkWrap {
      * @param msec Execution latency
      */
     BkTimeable(final Back back, final long msec) {
-        super(new BkThreads(msec, back));
+        super();
+        this.threads = new ConcurrentHashMap<Thread, Long>(1);
+        this.back = back;
+        this.latency = msec;
     }
-
-    public void startDaemonThread(){
-
-    }
-
 }
