@@ -24,6 +24,8 @@
 
 package org.takes.misc;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -47,6 +49,54 @@ public interface Opt<T> {
      * @return True if present
      */
     boolean has();
+
+    /**
+     * Holder for a possible null element.
+     *
+     * <p>The class is immutable and thread-safe.
+     * @author I. Sokolov (happy.neko@gmail.com)
+     * @version $Id$
+     * @since 0.32
+     * @param <T> Type of item
+     * @todo #608:30min All library methods calls that may return null
+     *  should be wrapped in Opt.Nullable and checked for value presence
+     *  with Opt.has().
+     */
+    final class Nullable<T> implements Opt<T> {
+        /**
+         * Origin.
+         */
+        private final transient T origin;
+        /**
+         * Origin is non-null.
+         */
+        private final transient boolean has;
+
+        /**
+         * Ctor.
+         * @param orgn The possibly-null item to hold
+         */
+        public Nullable(final T orgn) {
+            this.origin = orgn;
+            this.has = orgn != null;
+        }
+
+        @Override
+        public T get() {
+            if (this.has) {
+                return this.origin;
+            } else {
+                throw new NoSuchElementException(
+                    "This container is empty"
+                );
+            }
+        }
+
+        @Override
+        public boolean has() {
+            return this.has;
+        }
+    }
 
     /**
      * Holder for a single element only.
