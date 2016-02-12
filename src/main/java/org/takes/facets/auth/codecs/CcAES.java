@@ -45,7 +45,7 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @author Jason Wong (super132j@yahoo.com)
- * @version $Id: f19e8ed931805b656a83fca744ab60e00963870b $
+ * @version $Id$
  * @since 0.13.8
  */
 @EqualsAndHashCode(of = { "origin", "key" })
@@ -66,6 +66,11 @@ public final class CcAES implements Codec {
     private final transient byte[] key;
 
     /**
+     * The algorithm parameter spec for cipher.
+     */
+    private AlgorithmParameterSpec spec;
+
+    /**
      * Constructor for the class.
      * @param codec Original codec
      * @param key The encryption key
@@ -82,7 +87,8 @@ public final class CcAES implements Codec {
      */
     public CcAES(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.key = key;
+        this.key = new byte[key.length];
+        System.arraycopy(this.key, 0, key, 0, key.length);
     }
 
     @Override
@@ -97,7 +103,6 @@ public final class CcAES implements Codec {
 
     /**
      * Encrypt the given bytes using AES.
-     *
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
      * @throws IOException for all unexpected exceptions
@@ -105,9 +110,7 @@ public final class CcAES implements Codec {
     private byte[] encrypt(final byte[] bytes) throws IOException {
         this.checkBlockSize();
         try {
-            final AlgorithmParameterSpec spec =
-                CcAES.createAlgorithmParameterSpec();
-            return this.create(Cipher.ENCRYPT_MODE, spec).doFinal(bytes);
+            return this.create(Cipher.ENCRYPT_MODE).doFinal(bytes);
         } catch (final BadPaddingException ex) {
             throw new IOException(ex);
         } catch (final IllegalBlockSizeException ex) {
@@ -117,13 +120,14 @@ public final class CcAES implements Codec {
 
     /**
      * This method will create AlgorithmParameterSpec with the block size.
-     * @return The AlgorithmParameterSpec implementation.
      */
-    private static AlgorithmParameterSpec createAlgorithmParameterSpec() {
-        final SecureRandom random = new SecureRandom();
-        final byte[] bytes = new byte[CcAES.BLOCK];
-        random.nextBytes(bytes);
-        return new IvParameterSpec(bytes);
+    private void initAlgorithmParameterSpec() {
+        if(spec == null){
+            final SecureRandom random = new SecureRandom();
+            final byte[] bytes = new byte[CcAES.BLOCK];
+            random.nextBytes(bytes);
+            this.spec = new IvParameterSpec(bytes);
+        }
     }
 
     /**
@@ -150,9 +154,7 @@ public final class CcAES implements Codec {
     private byte[] decrypt(final byte[] bytes) throws IOException {
         this.checkBlockSize();
         try {
-            final AlgorithmParameterSpec spec =
-                CcAES.createAlgorithmParameterSpec();
-            return this.create(Cipher.DECRYPT_MODE, spec).doFinal(bytes);
+            return this.create(Cipher.DECRYPT_MODE).doFinal(bytes);
         } catch (final BadPaddingException ex) {
             throw new IOException(ex);
         } catch (final IllegalBlockSizeException ex) {
@@ -163,18 +165,18 @@ public final class CcAES implements Codec {
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
      * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
-     * @param spec The algorithm parameter spec for cipher creation
      * @return The cipher
      * @throws IOException For any unexpected exceptions
      */
-    private Cipher create(final int mode, final AlgorithmParameterSpec spec)
+    private Cipher create(final int mode)
         throws IOException {
+        this.initAlgorithmParameterSpec();
         try {
             final SecretKeySpec secret = new SecretKeySpec(
                 this.key, "AES"
             );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(mode, secret, spec);
+            cipher.init(mode, secret, this.spec);
             return cipher;
         } catch (final InvalidKeyException ex) {
             throw new IOException(ex);
@@ -186,5 +188,4 @@ public final class CcAES implements Codec {
             throw new IOException(ex);
         }
     }
-
 }
