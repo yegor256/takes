@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth.codecs;
 
+import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
@@ -47,7 +48,8 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.13.8
  */
-@EqualsAndHashCode(of = {"origin", "key"})
+@EqualsAndHashCode(of = {"origin", "key", "spec"})
+@Immutable
 public final class CcAES implements Codec {
     /**
      * The block size constant.
@@ -67,12 +69,7 @@ public final class CcAES implements Codec {
     /**
      * The algorithm parameter spec for cipher.
      */
-    private transient AlgorithmParameterSpec spec;
-
-    /**
-     * Tracks the spec variable is initialized or not.
-     */
-    private transient boolean initialized;
+    private final transient AlgorithmParameterSpec spec;
 
     /**
      * Constructor for the class.
@@ -92,7 +89,7 @@ public final class CcAES implements Codec {
     public CcAES(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.key = key.clone();
-        this.initialized = false;
+        this.spec = CcAES.initAlgorithmParameterSpec();
     }
 
     @Override
@@ -124,15 +121,13 @@ public final class CcAES implements Codec {
 
     /**
      * This method will create AlgorithmParameterSpec with the block size.
+     * @return The AlgorithmParameterSpec
      */
-    private void initAlgorithmParameterSpec() {
-        if (!this.initialized) {
-            final SecureRandom random = new SecureRandom();
-            final byte[] bytes = new byte[CcAES.BLOCK];
-            random.nextBytes(bytes);
-            this.spec = new IvParameterSpec(bytes);
-            this.initialized = true;
-        }
+    private static AlgorithmParameterSpec initAlgorithmParameterSpec() {
+        final SecureRandom random = new SecureRandom();
+        final byte[] bytes = new byte[CcAES.BLOCK];
+        random.nextBytes(bytes);
+        return new IvParameterSpec(bytes);
     }
 
     /**
@@ -174,7 +169,6 @@ public final class CcAES implements Codec {
      */
     private Cipher create(final int mode)
         throws IOException {
-        this.initAlgorithmParameterSpec();
         try {
             final SecretKeySpec secret = new SecretKeySpec(
                 this.key, "AES"
