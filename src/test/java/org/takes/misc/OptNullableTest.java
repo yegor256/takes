@@ -27,7 +27,6 @@ package org.takes.misc;
 import java.util.NoSuchElementException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -36,39 +35,25 @@ import org.junit.Test;
  * @version $Id$
  * @since 0.32
  */
-public final class NullableTest {
+public final class OptNullableTest {
     /**
-     * Item to hold in {@link Opt.Nullable} container.
-     */
-    private transient Object item;
-
-    /**
-     * Make item instance.
-     * @throws Exception If something goes wrong
-     */
-    @Before
-    public void setUp() throws Exception {
-        this.item = new Object();
-    }
-
-    /**
-     * Has should return true for non-empty container.
+     * {@link Opt.Nullable} can return true for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
-    public void hasNonNullItemShouldReturnTrue() throws Exception {
+    public void returnsTrueForNonEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
-            new Opt.Nullable<>(this.item).has(),
+            new Opt.Nullable<>(new Object()).has(),
             Matchers.is(true)
         );
     }
 
     /**
-     * Has should return false for empty container.
+     * {@link Opt.Nullable} can return false for empty container.
      * @throws Exception If something goes wrong
      */
     @Test
-    public void hasNullItemShouldReturnFalse() throws Exception {
+    public void returnsFalseForEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
             new Opt.Nullable<>(null).has(),
             Matchers.is(false)
@@ -76,23 +61,26 @@ public final class NullableTest {
     }
 
     /**
-     * Get should return item for non-empty container.
+     * {@link Opt.Nullable} can return item for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
-    public void getNonNullItemShouldReturnIt() throws Exception {
+    public void returnsItemForNonEmptyContainer() throws Exception {
+        final Object item = new Object();
         MatcherAssert.assertThat(
-            new Opt.Nullable<>(this.item).get(),
-            Matchers.sameInstance(this.item)
+            new Opt.Nullable<>(item).get(),
+            Matchers.sameInstance(item)
         );
     }
 
     /**
-     * Get should throw NoSuchElementException for empty container.
+     * {@link Opt.Nullable} can throw NoSuchElementException for empty
+     * container.
      * @throws Exception If something goes wrong
      */
     @Test(expected = NoSuchElementException.class)
-    public void failsOnGetNullItem() throws Exception {
+    public void throwsNoSuchElementExceptionForEmptyContainer()
+        throws Exception {
         new Opt.Nullable<>(null).get();
     }
 }

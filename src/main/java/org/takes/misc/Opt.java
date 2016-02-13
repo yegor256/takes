@@ -67,10 +67,6 @@ public interface Opt<T> {
          * Origin.
          */
         private final transient T origin;
-        /**
-         * Origin is non-null.
-         */
-        private final transient boolean has;
 
         /**
          * Ctor.
@@ -78,23 +74,22 @@ public interface Opt<T> {
          */
         public Nullable(final T orgn) {
             this.origin = orgn;
-            this.has = orgn != null;
         }
 
         @Override
         public T get() {
-            if (this.has) {
-                return this.origin;
-            } else {
+            if (this.origin == null) {
                 throw new NoSuchElementException(
                     "This container is empty"
                 );
+            } else {
+                return this.origin;
             }
         }
 
         @Override
         public boolean has() {
-            return this.has;
+            return this.origin != null;
         }
     }
 
