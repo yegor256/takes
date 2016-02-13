@@ -287,35 +287,11 @@ public interface RqForm extends Request {
          * @param req Original request
          * @param params Parameters
          * @throws IOException if something goes wrong.
-         * @todo #558:30min Fake ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Fake(final Request req, final String... params)
             throws IOException {
-            if (params.length % 2 != 0) {
-                throw new IllegalArgumentException(
-                    "Wrong number of parameters"
-                );
-            }
-            final StringBuilder builder = new StringBuilder();
-            for (int idx = 0; idx < params.length; idx += 2) {
-                final String key = RqForm.Fake.encode(params[idx]);
-                final String value = RqForm.Fake.encode(params[idx + 1]);
-                builder.append(key)
-                    // @checkstyle MultipleStringLiteralsCheck (3 lines)
-                    .append('=')
-                    .append(value)
-                    .append('&');
-            }
             this.fake = new RqForm.Base(
-                new RqWithBody(req, builder.toString())
+                new RqWithBody(req, Fake.construct(Fake.validate(params)))
             );
         }
 
@@ -341,6 +317,36 @@ public interface RqForm extends Request {
         }
 
         /**
+         * Validate parameters.
+         * @param params Parameters
+         * @return Validated parameters
+         */
+        private static String[] validate(final String... params) {
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException(
+                    "Wrong number of parameters"
+                );
+            }
+            return params;
+        }
+
+        /**
+         * Construct request body from parameters.
+         * @param params Parameters
+         * @return Request body
+         */
+        private static String construct(final String... params) {
+            final StringBuilder builder = new StringBuilder();
+            for (int idx = 0; idx < params.length; idx += 2) {
+                builder.append(RqForm.Fake.encode(params[idx]))
+                    .append('=')
+                    .append(RqForm.Fake.encode(params[idx + 1]))
+                    .append('&');
+            }
+            return builder.toString();
+        }
+
+        /**
          * Encode text.
          * @param txt Text
          * @return Encoded text
@@ -356,4 +362,3 @@ public interface RqForm extends Request {
         }
     }
 }
-
