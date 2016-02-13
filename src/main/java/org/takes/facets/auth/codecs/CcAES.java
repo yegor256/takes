@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth.codecs;
 
-import com.jcabi.aspects.Immutable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
@@ -49,7 +48,6 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  */
 @EqualsAndHashCode(of = {"origin", "key", "spec"})
-@Immutable
 public final class CcAES implements Codec {
     /**
      * The block size constant.
