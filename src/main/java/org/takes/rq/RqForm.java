@@ -291,7 +291,7 @@ public interface RqForm extends Request {
         public Fake(final Request req, final String... params)
             throws IOException {
             this.fake = new RqForm.Base(
-                new RqWithBody(req, Fake.construct(Fake.validate(params)))
+                new RqWithBody(req, Fake.construct(Fake.validated(params)))
             );
         }
 
@@ -319,9 +319,10 @@ public interface RqForm extends Request {
         /**
          * Validate parameters.
          * @param params Parameters
-         * @return Validated parameters
+         * @return Validated parameters if their count is even.
+         * @throws IllegalArgumentException if parameters count is odd.
          */
-        private static String[] validate(final String... params) {
+        private static String[] validated(final String... params) {
             if (params.length % 2 != 0) {
                 throw new IllegalArgumentException(
                     "Wrong number of parameters"
