@@ -118,7 +118,7 @@ public final class CcAES implements Codec {
     }
 
     /**
-     * This method will create AlgorithmParameterSpec with the block size.
+     * Create AlgorithmParameterSpec with the block size.
      * @return The AlgorithmParameterSpec
      */
     private static AlgorithmParameterSpec initAlgorithmParameterSpec() {
@@ -129,7 +129,7 @@ public final class CcAES implements Codec {
     }
 
     /**
-     * This method to check the block size of the key.
+     * Check the block size of the key.
      */
     private void checkBlockSize() {
         if (this.key.length != CcAES.BLOCK) {
