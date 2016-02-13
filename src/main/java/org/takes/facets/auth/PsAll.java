@@ -56,7 +56,7 @@ public class PsAll implements Pass {
      */
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = new ArrayList<Pass>(passes);
-        this.index = this.validate(identity);
+        this.index = this.validated(identity);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class PsAll implements Pass {
      *  {@link PsAll#enter(Request)}
      * @return Validated index
      */
-    private int validate(final int idx) {
+    private int validated(final int idx) {
         if (idx < 0) {
             throw new IllegalArgumentException("Index must be >= 0");
         }
