@@ -71,7 +71,8 @@ import org.takes.tk.TkText;
     {
         "PMD.ExcessiveImports",
         "PMD.DoNotUseThreads",
-        "PMD.TooManyMethods"
+        "PMD.TooManyMethods",
+        "PMD.LongVariable"
     })
 public final class BkBasicTest {
     /**
@@ -88,6 +89,18 @@ public final class BkBasicTest {
      * Host header constant.
      */
     private static final String HOST = "Host:localhost";
+
+    /**
+     * The http header "X-Takes-LocalAddress".
+     */
+    private static final String HEADER_LOCAL_ADDRESS =
+        "X-Takes-LocalAddress";
+
+    /**
+     * The http header "X-Takes-RemoteAddress".
+     */
+    private static final String HEADER_REMOTE_ADDRESS =
+        "X-Takes-RemoteAddress";
 
     /**
      * BkBasic can handle socket data.
@@ -155,7 +168,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                "X-Takes-LocalAddress",
+                BkBasicTest.HEADER_LOCAL_ADDRESS,
                 ""
             ),
             Matchers.not(
@@ -164,7 +177,7 @@ public final class BkBasicTest {
         );
         MatcherAssert.assertThat(
             smart.single(
-                "X-Takes-RemoteAddress",
+                BkBasicTest.HEADER_REMOTE_ADDRESS,
                 ""
             ),
             Matchers.not(
