@@ -273,8 +273,7 @@ public interface RqMultipart extends Request {
          *  they are not needed anymore.
          */
         private Request make(final byte[] boundary,
-            final  ReadableByteChannel body)
-                throws IOException {
+            final ReadableByteChannel body) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
@@ -315,7 +314,7 @@ public interface RqMultipart extends Request {
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
-            final byte[] boundary,  final  ReadableByteChannel body)
+            final byte[] boundary, final ReadableByteChannel body)
                 throws IOException {
             int match = 0;
             boolean cont = true;
