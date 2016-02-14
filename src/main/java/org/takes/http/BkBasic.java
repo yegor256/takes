@@ -23,6 +23,7 @@
  */
 package org.takes.http;
 
+import com.jcabi.aspects.Tv;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,6 +33,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -53,6 +55,10 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
+ * @todo #519:30min The logic of persistent connection should be moved to
+ *  separate implementation of Back. BkBasic should be refactored as well in
+ *  order to remove connection management (otherwise new Back implementation
+ *  cannot be used as decorator for BkBasic)
  */
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
@@ -70,19 +76,43 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+    // @todo #519:30min Need to support Keep-Alive header here and take
+    //  into account specified timeout and max requests parameters.
+    //  See http://tools.ietf.org/id/draft-thomson-hybi-http-timeout-01.html
+    //  for details. Also need to remove input.available <= 0 condition
+    //  - this is done in order to prevent failure of some tests,
+    //  should be replaced with proper Keep-Alive header in tests
     @Override
+    @SuppressWarnings({"PMD.EmptyCatchBlock",
+        "PMD.AvoidInstantiatingObjectsInLoops"})
     public void accept(final Socket socket) throws IOException {
+        socket.setSoTimeout(Tv.THOUSAND);
         final InputStream input = socket.getInputStream();
+        final OutputStream output = socket.getOutputStream();
+        final BufferedOutputStream buffered = new BufferedOutputStream(output);
         try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
-            );
+            while (true) {
+                final Request request = new RqLive(input);
+                this.print(
+                    BkBasic.addSocketHeaders(
+                        request,
+                        socket
+                    ),
+                    buffered
+                );
+                if (input.available() <= 0) {
+                    break;
+                }
+            }
+        } catch (final SocketTimeoutException exc) {
+            // @checkstyle MethodBodyCommentsCheck (4 lines)
+            // This exception is thrown on socket timeout, this is just
+            // indicator that no more request can be handled in this connection.
+            // No need to throw it upper and no need to do anything specific
+            // on this exception.
         } finally {
             input.close();
+            output.close();
         }
     }
 
@@ -108,7 +138,7 @@ public final class BkBasic implements Back {
                 )
             ).print(output);
         } finally {
-            output.close();
+            output.flush();
         }
     }
 
