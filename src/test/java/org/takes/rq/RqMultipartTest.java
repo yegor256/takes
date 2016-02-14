@@ -65,10 +65,6 @@ import org.takes.rs.RsText;
 public final class RqMultipartTest {
 
     /**
-     * T2 temporary part name.
-     */
-    private static final String PART_T2 = "t2";
-    /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
@@ -107,17 +103,17 @@ public final class RqMultipartTest {
                 )
             )
         );
-        final RqMultipart.Base reqbaseone = new RqMultipart.Base(req);
-        final RqMultipart.Base reqbasetwo = new RqMultipart.Base(req);
+        final RqMultipart.Base one = new RqMultipart.Base(req);
+        final RqMultipart.Base two = new RqMultipart.Base(req);
         try {
             MatcherAssert.assertThat(
-                reqbaseone,
-                Matchers.equalTo(reqbasetwo)
+                one,
+                Matchers.equalTo(two)
             );
         } finally {
             req.body().close();
-            reqbaseone.part("t-1").iterator().next().body().close();
-            reqbasetwo.part("t-1").iterator().next().body().close();
+            one.part("t-1").iterator().next().body().close();
+            two.part("t-1").iterator().next().body().close();
         }
     }
 
@@ -245,7 +241,6 @@ public final class RqMultipartTest {
                 )
             );
         } finally {
-            multi.body().close();
             multi.part("t4").iterator().next().body().close();
         }
     }
@@ -532,6 +527,7 @@ public final class RqMultipartTest {
      */
     @Test
     public void producesPartsWithContentLength() throws IOException {
+        final String part = "t2";
         final RqMultipart.Base multipart = new RqMultipart.Base(
             new RqFake(
                 Arrays.asList(
@@ -542,9 +538,10 @@ public final class RqMultipartTest {
                 ),
                 Joiner.on("\r\n").join(
                     "--AaB01x",
-                    new StringBuilder()
-                    .append("Content-Disposition: form-data; name=\"")
-                    .append(RqMultipartTest.PART_T2).append("\""),
+                    String.format(
+                        "Content-Disposition: form-data; name=\"%s\"",
+                        part
+                    ),
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "--AaB01x"
@@ -553,7 +550,7 @@ public final class RqMultipartTest {
         );
         try {
             MatcherAssert.assertThat(
-                multipart.part(RqMultipartTest.PART_T2)
+                multipart.part(part)
                 .iterator()
                 .next(),
                 new HmRqHeader(
@@ -563,7 +560,7 @@ public final class RqMultipartTest {
             );
         } finally {
             multipart.body().close();
-            multipart.part(RqMultipartTest.PART_T2).iterator().next()
+            multipart.part(part).iterator().next()
                 .body().close();
         }
     }
