@@ -30,14 +30,14 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link Opt.Nullable}.
+ * Test case for Opt.Nullable.
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
  * @since 0.32
  */
 public final class OptNullableTest {
     /**
-     * {@link Opt.Nullable} can return true for non-empty container.
+     * Opt.Nullable can return true for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
@@ -49,7 +49,7 @@ public final class OptNullableTest {
     }
 
     /**
-     * {@link Opt.Nullable} can return false for empty container.
+     * Opt.Nullable can return false for empty container.
      * @throws Exception If something goes wrong
      */
     @Test
@@ -61,7 +61,7 @@ public final class OptNullableTest {
     }
 
     /**
-     * {@link Opt.Nullable} can return item for non-empty container.
+     * Opt.Nullable can return item for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
@@ -74,7 +74,7 @@ public final class OptNullableTest {
     }
 
     /**
-     * {@link Opt.Nullable} can throw NoSuchElementException for empty
+     * Opt.Nullable can throw NoSuchElementException for empty
      * container.
      * @throws Exception If something goes wrong
      */
