@@ -101,7 +101,6 @@ public final class CcAES implements Codec {
 
     /**
      * Encrypt the given bytes using AES.
-     * 
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
      * @throws IOException for all unexpected exceptions
@@ -144,7 +143,6 @@ public final class CcAES implements Codec {
 
     /**
      * Decrypt the given bytes using AES.
-     *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
      * @throws IOException for all unexpected exceptions
