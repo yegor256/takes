@@ -70,6 +70,7 @@ public final class CcAES implements Codec {
 
     /**
      * Constructor for the class.
+     *
      * @param codec Original codec
      * @param key The encryption key
      * @since 0.22
@@ -80,6 +81,7 @@ public final class CcAES implements Codec {
 
     /**
      * Constructor for the class.
+     *
      * @param codec Original codec
      * @param key The encryption key
      */
@@ -101,6 +103,7 @@ public final class CcAES implements Codec {
 
     /**
      * Encrypt the given bytes using AES.
+     *
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
      * @throws IOException for all unexpected exceptions
@@ -118,6 +121,7 @@ public final class CcAES implements Codec {
 
     /**
      * Create AlgorithmParameterSpec with the block size.
+     *
      * @return The AlgorithmParameterSpec
      */
     private static AlgorithmParameterSpec initAlgorithmParameterSpec() {
@@ -143,6 +147,7 @@ public final class CcAES implements Codec {
 
     /**
      * Decrypt the given bytes using AES.
+     *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
      * @throws IOException for all unexpected exceptions
@@ -160,6 +165,7 @@ public final class CcAES implements Codec {
 
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
+     *
      * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
      * @return The cipher
      * @throws IOException For any unexpected exceptions
