@@ -23,8 +23,8 @@
  */
 package org.takes.http;
 
-import java.net.Socket;
 import lombok.EqualsAndHashCode;
+import org.takes.misc.Socket;
 
 /**
  * Safe back-end.

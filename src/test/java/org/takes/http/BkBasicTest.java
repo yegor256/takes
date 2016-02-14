@@ -27,26 +27,23 @@ import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URI;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.misc.Socket;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
 import org.takes.rs.RsEmpty;
@@ -64,8 +61,6 @@ import org.takes.tk.TkText;
  *  persistent connections. Would be great to implement
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
- * @todo #516:30min It will be nice to refactor tests with Socket usage and
- *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
  *  Reusable header names will help in many situations. For example - in new
  *  integration tests.
@@ -99,12 +94,18 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        final Socket socket = new Socket.FakeSocket(
+            Joiner.on(BkBasicTest.CRLF).join(
+                "GET /1 HTTP/1.1",
+                "Host: localhost",
+                "Content-Length: 1",
+                "",
+                "hi1"
+            )
+        );
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
-            baos.toString(),
+            socket.output().toString(),
             Matchers.containsString("Hello world")
         );
     }
@@ -141,7 +142,15 @@ public final class BkBasicTest {
      */
     @Test
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
-        final Socket socket = BkBasicTest.createMockSocket();
+        final Socket socket = new Socket.FakeSocket(
+            Joiner.on(BkBasicTest.CRLF).join(
+                "GET / HTTP/1.1",
+                "Host:localhost",
+                "Content-Length: 2",
+                "",
+                "hi"
+            )
+        );
         final AtomicReference<Request> ref = new AtomicReference<Request>();
         new BkBasic(
             new Take() {
@@ -202,7 +211,7 @@ public final class BkBasicTest {
                     public void run() {
                         try {
                             new BkBasic(new TkText(text)).accept(
-                                server.accept()
+                                new Socket.TCPSocket(server.accept())
                             );
                         } catch (final IOException exception) {
                             throw new IllegalStateException(exception);
@@ -210,12 +219,14 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
+            final Socket socket = new Socket.TCPSocket(
+                new java.net.Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             );
             try {
-                socket.getOutputStream().write(
+                socket.output().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
@@ -229,7 +240,7 @@ public final class BkBasicTest {
                         "Hello Second"
                     ).getBytes()
                 );
-                final InputStream input = socket.getInputStream();
+                final InputStream input = socket.input();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
@@ -266,7 +277,7 @@ public final class BkBasicTest {
                     public void run() {
                         try {
                             new BkBasic(new TkText("411 Test")).accept(
-                                server.accept()
+                                new Socket.TCPSocket(server.accept())
                             );
                         } catch (final IOException exception) {
                             throw new IllegalStateException(exception);
@@ -274,12 +285,14 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
+            final Socket socket = new Socket.TCPSocket(
+                new java.net.Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             );
             try {
-                socket.getOutputStream().write(
+                socket.output().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
@@ -287,7 +300,7 @@ public final class BkBasicTest {
                         "Hello World!"
                     ).getBytes()
                 );
-                final InputStream input = socket.getInputStream();
+                final InputStream input = socket.input();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
@@ -324,7 +337,7 @@ public final class BkBasicTest {
                     public void run() {
                         try {
                             new BkBasic(new TkText(text)).accept(
-                                server.accept()
+                                new Socket.TCPSocket(server.accept())
                             );
                         } catch (final IOException exception) {
                             throw new IllegalStateException(exception);
@@ -332,12 +345,14 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
+            final Socket socket = new Socket.TCPSocket(
+                new java.net.Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             );
             try {
-                socket.getOutputStream().write(
+                socket.output().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
@@ -346,7 +361,7 @@ public final class BkBasicTest {
                         "Hello World!"
                     ).getBytes()
                 );
-                final InputStream input = socket.getInputStream();
+                final InputStream input = socket.input();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
@@ -363,37 +378,5 @@ public final class BkBasicTest {
             output.toString(),
             Matchers.containsString(text)
         );
-    }
-
-    /**
-     * Creates Socket mock for reuse.
-     *
-     * @return Prepared Socket mock
-     * @throws IOException If some problem inside
-     */
-    private static Socket createMockSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET / HTTP/1.1",
-                    "Host:localhost",
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
-            )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        return socket;
     }
 }

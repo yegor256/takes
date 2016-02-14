@@ -31,12 +31,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Socket;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
@@ -72,14 +72,14 @@ public final class BkBasic implements Back {
 
     @Override
     public void accept(final Socket socket) throws IOException {
-        final InputStream input = socket.getInputStream();
+        final InputStream input = socket.input();
         try {
             this.print(
                 BkBasic.addSocketHeaders(
                     new RqLive(input),
                     socket
                 ),
-                new BufferedOutputStream(socket.getOutputStream())
+                new BufferedOutputStream(socket.output())
             );
         } finally {
             input.close();
@@ -134,21 +134,22 @@ public final class BkBasic implements Back {
      * @param req Request
      * @param socket Socket
      * @return Request with custom headers
+     * @throws IOException If fails.
      */
     private static Request addSocketHeaders(final Request req,
-        final Socket socket) {
+        final Socket socket) throws IOException {
         return new RqWithHeaders(
             req,
             String.format(
                 "X-Takes-LocalAddress: %s",
-                socket.getLocalAddress().getHostAddress()
+                socket.localAddress().getHostAddress()
             ),
-            String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
+            String.format("X-Takes-LocalPort: %d", socket.localPort()),
             String.format(
                 "X-Takes-RemoteAddress: %s",
-                socket.getInetAddress().getHostAddress()
+                socket.address().getHostAddress()
             ),
-            String.format("X-Takes-RemotePort: %d", socket.getPort())
+            String.format("X-Takes-RemotePort: %d", socket.port())
         );
     }
 }

@@ -29,6 +29,7 @@ import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.Take;
+import org.takes.misc.Socket;
 
 /**
  * Basic front.
@@ -113,7 +114,7 @@ public final class FtBasic implements Front {
      */
     private void loop(final ServerSocket server) throws IOException {
         try {
-            this.back.accept(server.accept());
+            this.back.accept(new Socket.TCPSocket(server.accept()));
         } catch (final SocketTimeoutException ex) {
             assert ex != null;
         }

@@ -24,12 +24,12 @@
 package org.takes.http;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
+import org.takes.misc.Socket;
 
 /**
  * Back decorator with maximum lifetime.
