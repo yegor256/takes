@@ -24,7 +24,6 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -76,7 +75,7 @@ public final class CcAES implements Codec {
      * @since 0.22
      */
     public CcAES(final Codec codec, final String key) {
-        this(codec, key.getBytes(StandardCharsets.UTF_8));
+        this(codec, key.getBytes());
     }
 
     /**
@@ -102,6 +101,7 @@ public final class CcAES implements Codec {
 
     /**
      * Encrypt the given bytes using AES.
+     * 
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
      * @throws IOException for all unexpected exceptions
@@ -144,6 +144,7 @@ public final class CcAES implements Codec {
 
     /**
      * Decrypt the given bytes using AES.
+     *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
      * @throws IOException for all unexpected exceptions
