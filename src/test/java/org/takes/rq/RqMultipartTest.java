@@ -76,9 +76,7 @@ public final class RqMultipartTest {
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s",
-        RqMultipartTest.DISPOSITION,
-        "form-data; name=\"%s\""
+        "%s: %s", RqMultipartTest.DISPOSITION,"form-data; name=\"%s\""
     );
 
     /**
@@ -330,10 +328,7 @@ public final class RqMultipartTest {
         final String body =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz",
-                String.format(
-                    RqMultipartTest.CONTENT,
-                    part
-                ),
+                String.format(RqMultipartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("X", length),
                 "--zzz--"
@@ -446,10 +441,7 @@ public final class RqMultipartTest {
                 "POST /post?u=3 HTTP/1.1",
                 "Host: example.com",
                 "Content-Type: multipart/form-data; boundary=zzz",
-                String.format(
-                    "Content-Length:%s",
-                    file.length()
-                )
+                String.format("Content-Length:%s",file.length())
             ),
             new TempInputStream(new FileInputStream(file), file)
         );
