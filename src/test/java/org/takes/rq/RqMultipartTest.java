@@ -484,10 +484,7 @@ public final class RqMultipartTest {
         final String head =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--zzz1",
-                String.format(
-                    RqMultipartTest.CONTENT,
-                    part
-                ),
+                String.format(RqMultipartTest.CONTENT, part),
                 "",
                 ""
             );
@@ -553,10 +550,7 @@ public final class RqMultipartTest {
                 ),
                 Joiner.on("\r\n").join(
                     "--AaB01x",
-                    String.format(
-                        RqMultipartTest.CONTENT,
-                        part
-                    ),
+                    String.format(RqMultipartTest.CONTENT, part),
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "--AaB01x"
