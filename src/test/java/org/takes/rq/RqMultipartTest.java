@@ -378,8 +378,7 @@ public final class RqMultipartTest {
         final String body =
             Joiner.on(RqMultipartTest.CRLF).join(
                 "--AaB0zz",
-                String.format(RqMultipartTest.CONTENT, part),
-                "",
+                String.format(RqMultipartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
             );
         new FtRemote(take).exec(
