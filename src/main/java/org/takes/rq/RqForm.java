@@ -33,12 +33,12 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -97,7 +97,7 @@ public interface RqForm extends Request {
         /**
          * Saved map.
          */
-        private final transient List<ConcurrentMap<String, List<String>>> saved;
+        private final transient List<Map<String, List<String>>> saved;
         /**
          * Ctor.
          * @param request Original request
@@ -105,7 +105,7 @@ public interface RqForm extends Request {
         public Base(final Request request) {
             super(request);
             this.saved =
-                new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
+                new CopyOnWriteArrayList<Map<String, List<String>>>();
             this.req = request;
         }
         @Override
@@ -157,7 +157,7 @@ public interface RqForm extends Request {
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
-        private ConcurrentMap<String, List<String>> map() throws IOException {
+        private Map<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
                     final ByteArrayOutputStream
@@ -166,8 +166,8 @@ public interface RqForm extends Request {
                     final String body = new String(
                         baos.toByteArray(), StandardCharsets.UTF_8
                     );
-                    final ConcurrentMap<String, List<String>> map =
-                        new ConcurrentHashMap<String, List<String>>(1);
+                    final Map<String, List<String>> map =
+                        new HashMap<String, List<String>>(1);
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
                     for (final String pair : body.split("&")) {
                         if (pair.isEmpty()) {
@@ -186,7 +186,9 @@ public interface RqForm extends Request {
                         final String key = RqForm.Base.decode(
                             parts[0].trim().toLowerCase(Locale.ENGLISH)
                         );
-                        map.putIfAbsent(key, new LinkedList<String>());
+                        if (!map.containsKey(key)) {
+                            map.put(key, new LinkedList<String>());
+                        }
                         map.get(key).add(RqForm.Base.decode(parts[1].trim()));
                     }
                     this.saved.add(map);
