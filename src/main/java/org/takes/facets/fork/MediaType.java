@@ -23,8 +23,8 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Locale;
 import com.jcabi.aspects.Cacheable;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -91,7 +91,7 @@ final class MediaType implements Comparable<MediaType> {
     private String[] getParts() {
         return this.text.split(";", 2);
     }
-    
+
     /**
      * Get the priority.
      * @return The priority of the media type.
@@ -99,16 +99,16 @@ final class MediaType implements Comparable<MediaType> {
     @Cacheable(forever = true)
     private Double getPriority() {
         final String[] parts = this.getParts();
+        Double priority = 1.0d;
         if (parts.length > 1) {
             final String num = parts[1].replaceAll("[^0-9\\.]", "");
             if (num.isEmpty()) {
-                return 0.0d;
+                priority = 0.0d;
             } else {
-                return Double.parseDouble(num);
+                priority = Double.parseDouble(num);
             }
-        } else {
-            return 1.0d;
         }
+        return priority;
     }
 
     /**
@@ -127,12 +127,12 @@ final class MediaType implements Comparable<MediaType> {
      */
     @Cacheable(forever = true)
     private String getLow() {
+        String sector = "";
         final String[] sectors = this.getSectors();
         if (sectors.length > 1) {
-            return sectors[1].trim();
-        } else {
-            return "";
+            sector = sectors[1].trim();
         }
+        return sector;
     }
 
     /**
@@ -141,8 +141,7 @@ final class MediaType implements Comparable<MediaType> {
      */
     @Cacheable(forever = true)
     private String[] getSectors() {
-        return getParts()[0]
-                .toLowerCase(Locale.ENGLISH).split("/", 2);
+        return this.getParts()[0].toLowerCase(Locale.ENGLISH).split("/", 2);
     }
-    
+
 }
