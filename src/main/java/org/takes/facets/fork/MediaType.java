@@ -39,7 +39,7 @@ import lombok.ToString;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = { "text" })
+@EqualsAndHashCode(of = "text")
 final class MediaType implements Comparable<MediaType> {
 
     /**
@@ -93,7 +93,7 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the media type priority.
+     * Returns the media type priority.
      * @return The priority of the media type.
      */
     @Cacheable(forever = true)
@@ -112,7 +112,7 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the media type high part.
+     * Returns the high part of the media type.
      * @return The high part of the media type.
      */
     @Cacheable(forever = true)
@@ -122,7 +122,7 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the media type low part.
+     * Returns the low part of the media type.
      * @return The low part of the media type.
      */
     @Cacheable(forever = true)
@@ -136,7 +136,7 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the media type sectors.
+     * Returns the media type sectors.
      * @return String array with the sectors of the media type.
      */
     @Cacheable(forever = true)
