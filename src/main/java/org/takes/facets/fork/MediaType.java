@@ -24,9 +24,7 @@
 package org.takes.facets.fork;
 
 import java.util.Locale;
-
 import com.jcabi.aspects.Cacheable;
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -54,7 +52,7 @@ final class MediaType implements Comparable<MediaType> {
      * @param text Text to parse
      */
     MediaType(final String text) {
-    	this.text = text;
+        this.text = text;
     }
 
     @Override
@@ -86,46 +84,50 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
+     * Get the parts.
      * @return The parts of the media type.
      */
     @Cacheable(forever = true)
     private String[] getParts() {
-    	return text.split(";", 2);
+        return this.text.split(";", 2);
     }
     
     /**
+     * Get the priority.
      * @return The priority of the media type.
      */
     @Cacheable(forever = true)
     private Double getPriority() {
-    	 final String[] parts = getParts();
-         if (parts.length > 1) {
-             final String num = parts[1].replaceAll("[^0-9\\.]", "");
-             if (num.isEmpty()) {
-                 return 0.0d;
-             } else {
-                 return Double.parseDouble(num);
-             }
-         } else {
-             return 1.0d;
-         }
+        final String[] parts = this.getParts();
+        if (parts.length > 1) {
+            final String num = parts[1].replaceAll("[^0-9\\.]", "");
+            if (num.isEmpty()) {
+                return 0.0d;
+            } else {
+                return Double.parseDouble(num);
+            }
+        } else {
+            return 1.0d;
+        }
     }
 
     /**
+     * Get the high part.
      * @return The high part of the media type.
      */
     @Cacheable(forever = true)
     private String getHigh() {
-    	final String[] sectors = getSectors();
-    	return sectors[0];
+        final String[] sectors = this.getSectors();
+        return sectors[0];
     }
 
     /**
+     * Get the low part.
      * @return The low part of the media type.
      */
     @Cacheable(forever = true)
     private String getLow() {
-    	final String[] sectors = getSectors();
+        final String[] sectors = this.getSectors();
         if (sectors.length > 1) {
             return sectors[1].trim();
         } else {
@@ -134,11 +136,12 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
+     * Get the sectors.
      * @return String array with the sectors of the media type.
      */
     @Cacheable(forever = true)
     private String[] getSectors() {
-    	return getParts()[0]
+        return getParts()[0]
                 .toLowerCase(Locale.ENGLISH).split("/", 2);
     }
     
