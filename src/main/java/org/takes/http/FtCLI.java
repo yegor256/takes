@@ -74,7 +74,6 @@ public final class FtCLI implements Front {
     }
 
     @Override
-    @SuppressWarnings("PMD.DoNotUseThreads")
     public void start(final Exit exit) throws IOException {
         final Take tks;
         if (this.options.hitRefresh()) {
