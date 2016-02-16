@@ -48,7 +48,6 @@ import org.takes.rs.RsText;
  * @since 0.14.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeableTest {
 
     /**

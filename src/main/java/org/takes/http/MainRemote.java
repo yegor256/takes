@@ -45,7 +45,6 @@ import lombok.EqualsAndHashCode;
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 @EqualsAndHashCode(of = "app")
 public final class MainRemote {
 

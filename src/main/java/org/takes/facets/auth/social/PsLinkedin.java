@@ -29,9 +29,9 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -184,8 +184,8 @@ public final class PsLinkedin implements Pass {
         final String fname = "firstName";
         final String lname = "lastName";
         final String unknown = "?";
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(json.size());
+        final Map<String, String> props =
+            new HashMap<String, String>(json.size());
         props.put(fname, json.getString(fname, unknown));
         props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
