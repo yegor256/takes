@@ -134,10 +134,10 @@ public final class CcAES implements Codec {
     /**
      * Check the block size of the key.
      *
-     * @param The encryption key
+     * @param key The encryption key
      * @return The verified encryption key
      */
-    private static byte[] withCorrectBlockSize(byte[] key) {
+    private static byte[] withCorrectBlockSize(final byte[] key) {
         if (key.length != CcAES.BLOCK) {
             throw new IllegalArgumentException(
                 String.format(
