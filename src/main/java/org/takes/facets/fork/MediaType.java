@@ -85,7 +85,7 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Splits the text parts.
-     * @return The parts of the media type.
+     * @return Two first parts of the media type.
      */
     private String[] split() {
         return this.text.split(";", 2);
