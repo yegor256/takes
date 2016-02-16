@@ -268,7 +268,9 @@ public interface RqMultipart extends Request {
                     )
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
-                channel.write(ByteBuffer.wrap("\r\n".getBytes()));
+                channel.write(
+                    ByteBuffer.wrap(Fake.CRLF.getBytes(StandardCharsets.UTF_8))
+                );
                 this.copy(channel, boundary);
             } finally {
                 channel.close();

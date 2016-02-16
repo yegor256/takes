@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
@@ -142,7 +143,9 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new String(buf).trim());
+            port = Integer.parseInt(
+                new String(buf, StandardCharsets.UTF_8).trim()
+            );
         } finally {
             input.close();
         }
