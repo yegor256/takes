@@ -87,7 +87,6 @@ final class MediaType implements Comparable<MediaType> {
      * Splits the text parts.
      * @return The parts of the media type.
      */
-    @Cacheable(forever = true)
     private String[] split() {
         return this.text.split(";", 2);
     }
@@ -117,8 +116,7 @@ final class MediaType implements Comparable<MediaType> {
      */
     @Cacheable(forever = true)
     private String highPart() {
-        final String[] sectors = this.sectors();
-        return sectors[0];
+        return this.sectors()[0];
     }
 
     /**
