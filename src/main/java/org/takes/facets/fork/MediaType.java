@@ -57,11 +57,11 @@ final class MediaType implements Comparable<MediaType> {
 
     @Override
     public int compareTo(final MediaType type) {
-        int cmp = this.getPriority().compareTo(type.getPriority());
+        int cmp = this.priority().compareTo(type.priority());
         if (cmp == 0) {
-            cmp = this.getHigh().compareTo(type.getHigh());
+            cmp = this.highPart().compareTo(type.highPart());
             if (cmp == 0) {
-                cmp = this.getLow().compareTo(type.getLow());
+                cmp = this.lowPart().compareTo(type.lowPart());
             }
         }
         return cmp;
@@ -75,30 +75,30 @@ final class MediaType implements Comparable<MediaType> {
      */
     public boolean matches(final MediaType type) {
         final String star = "*";
-        return (this.getHigh().equals(star)
-            || type.getHigh().equals(star)
-            || this.getHigh().equals(type.getHigh()))
-            && (this.getLow().equals(star)
-            || type.getLow().equals(star)
-            || this.getLow().equals(type.getLow()));
+        return (this.highPart().equals(star)
+            || type.highPart().equals(star)
+            || this.highPart().equals(type.highPart()))
+            && (this.lowPart().equals(star)
+            || type.lowPart().equals(star)
+            || this.lowPart().equals(type.lowPart()));
     }
 
     /**
-     * Get the parts.
+     * Splits the text parts.
      * @return The parts of the media type.
      */
     @Cacheable(forever = true)
-    private String[] getParts() {
+    private String[] split() {
         return this.text.split(";", 2);
     }
 
     /**
-     * Get the priority.
+     * Get the media type priority.
      * @return The priority of the media type.
      */
     @Cacheable(forever = true)
-    private Double getPriority() {
-        final String[] parts = this.getParts();
+    private Double priority() {
+        final String[] parts = this.split();
         Double priority = 1.0d;
         if (parts.length > 1) {
             final String num = parts[1].replaceAll("[^0-9\\.]", "");
@@ -112,23 +112,23 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the high part.
+     * Get the media type high part.
      * @return The high part of the media type.
      */
     @Cacheable(forever = true)
-    private String getHigh() {
-        final String[] sectors = this.getSectors();
+    private String highPart() {
+        final String[] sectors = this.sectors();
         return sectors[0];
     }
 
     /**
-     * Get the low part.
+     * Get the media type low part.
      * @return The low part of the media type.
      */
     @Cacheable(forever = true)
-    private String getLow() {
+    private String lowPart() {
         String sector = "";
-        final String[] sectors = this.getSectors();
+        final String[] sectors = this.sectors();
         if (sectors.length > 1) {
             sector = sectors[1].trim();
         }
@@ -136,12 +136,12 @@ final class MediaType implements Comparable<MediaType> {
     }
 
     /**
-     * Get the sectors.
+     * Get the media type sectors.
      * @return String array with the sectors of the media type.
      */
     @Cacheable(forever = true)
-    private String[] getSectors() {
-        return this.getParts()[0].toLowerCase(Locale.ENGLISH).split("/", 2);
+    private String[] sectors() {
+        return this.split()[0].toLowerCase(Locale.ENGLISH).split("/", 2);
     }
 
 }
