@@ -24,6 +24,9 @@
 package org.takes.facets.fork;
 
 import java.util.Locale;
+
+import com.jcabi.aspects.Cacheable;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -38,63 +41,29 @@ import lombok.ToString;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = { "high", "low" })
+@EqualsAndHashCode(of = { "text" })
 final class MediaType implements Comparable<MediaType> {
 
     /**
-     * Priority.
+     * Text.
      */
-    private final transient Double priority;
-
-    /**
-     * High part.
-     */
-    private final transient String high;
-
-    /**
-     * Low part.
-     */
-    private final transient String low;
+    private final transient String text;
 
     /**
      * Ctor.
      * @param text Text to parse
-     * @todo #558:30min MediaType ctor. According to new qulice version,
-     *  constructor must contain only variables initialization and other
-     *  constructor calls. Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     MediaType(final String text) {
-        final String[] parts = text.split(";", 2);
-        if (parts.length > 1) {
-            final String num = parts[1].replaceAll("[^0-9\\.]", "");
-            if (num.isEmpty()) {
-                this.priority = 0.0d;
-            } else {
-                this.priority = Double.parseDouble(num);
-            }
-        } else {
-            this.priority = 1.0d;
-        }
-        final String[] sectors = parts[0]
-            .toLowerCase(Locale.ENGLISH).split("/", 2);
-        this.high = sectors[0];
-        if (sectors.length > 1) {
-            this.low = sectors[1].trim();
-        } else {
-            this.low = "";
-        }
+    	this.text = text;
     }
 
     @Override
     public int compareTo(final MediaType type) {
-        int cmp = this.priority.compareTo(type.priority);
+        int cmp = this.getPriority().compareTo(type.getPriority());
         if (cmp == 0) {
-            cmp = this.high.compareTo(type.high);
+            cmp = this.getHigh().compareTo(type.getHigh());
             if (cmp == 0) {
-                cmp = this.low.compareTo(type.low);
+                cmp = this.getLow().compareTo(type.getLow());
             }
         }
         return cmp;
@@ -108,12 +77,69 @@ final class MediaType implements Comparable<MediaType> {
      */
     public boolean matches(final MediaType type) {
         final String star = "*";
-        return (this.high.equals(star)
-            || type.high.equals(star)
-            || this.high.equals(type.high))
-            && (this.low.equals(star)
-            || type.low.equals(star)
-            || this.low.equals(type.low));
+        return (this.getHigh().equals(star)
+            || type.getHigh().equals(star)
+            || this.getHigh().equals(type.getHigh()))
+            && (this.getLow().equals(star)
+            || type.getLow().equals(star)
+            || this.getLow().equals(type.getLow()));
     }
 
+    /**
+     * @return The parts of the media type.
+     */
+    @Cacheable(forever = true)
+    private String[] getParts() {
+    	return text.split(";", 2);
+    }
+    
+    /**
+     * @return The priority of the media type.
+     */
+    @Cacheable(forever = true)
+    private Double getPriority() {
+    	 final String[] parts = getParts();
+         if (parts.length > 1) {
+             final String num = parts[1].replaceAll("[^0-9\\.]", "");
+             if (num.isEmpty()) {
+                 return 0.0d;
+             } else {
+                 return Double.parseDouble(num);
+             }
+         } else {
+             return 1.0d;
+         }
+    }
+
+    /**
+     * @return The high part of the media type.
+     */
+    @Cacheable(forever = true)
+    private String getHigh() {
+    	final String[] sectors = getSectors();
+    	return sectors[0];
+    }
+
+    /**
+     * @return The low part of the media type.
+     */
+    @Cacheable(forever = true)
+    private String getLow() {
+    	final String[] sectors = getSectors();
+        if (sectors.length > 1) {
+            return sectors[1].trim();
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * @return String array with the sectors of the media type.
+     */
+    @Cacheable(forever = true)
+    private String[] getSectors() {
+    	return getParts()[0]
+                .toLowerCase(Locale.ENGLISH).split("/", 2);
+    }
+    
 }
