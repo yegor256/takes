@@ -134,7 +134,7 @@ public final class CcAES implements Codec {
     /**
      * Check the block size of the key.
      *
-     * @param key encryption key
+     * @param The encryption key
      * @return The verified encryption key
      */
     private static byte[] withCorrectBlockSize(byte[] key) {
