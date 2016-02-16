@@ -236,27 +236,19 @@ public interface RqMultipart extends Request {
         private ConcurrentMap<String, List<Request>> initMap(final Request req)
             throws IOException {
             final InputStream stream = new RqLengthAware(req).body();
-            this.initBuffer(stream);
-            final ReadableByteChannel body = Channels.newChannel(stream);
-            ConcurrentMap<String, List<Request>> result = new
-                ConcurrentHashMap<String, List<Request>>();
             try {
-                result = this.buildRequests(req, body);
+                this.buffer = ByteBuffer.allocate(
+                    Math.min(Base.MIN_BUFF_SIZE, stream.available())
+                );
+                final ReadableByteChannel body = Channels.newChannel(stream);
+                try {
+                    return this.buildRequests(req, body);
+                } finally {
+                    body.close();
+                }
             } finally {
-                body.close();
                 stream.close();
             }
-            return result;
-        }
-        /**
-         * Init internal buffer.
-         * @param stream InputStream
-         * @throws IOException if an I/O error occurs.
-         */
-        private void initBuffer(final InputStream stream) throws IOException {
-            this.buffer = ByteBuffer.allocate(
-                Math.min(Base.MIN_BUFF_SIZE, stream.available())
-            );
         }
         /**
          * Make a request.
