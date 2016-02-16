@@ -42,7 +42,6 @@ import org.takes.Take;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 @EqualsAndHashCode(of = { "origin", "socket" })
 public final class FtRemote implements Front {
 

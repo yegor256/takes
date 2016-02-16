@@ -23,14 +23,15 @@
  */
 package org.takes.facets.fork;
 
-import com.google.common.io.Files;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -45,19 +46,23 @@ import org.takes.tk.TkEmpty;
 public final class FkHitRefreshTest {
 
     /**
+     * Temp directory.
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
+
+    /**
      * FkHitRefresh can refresh on demand.
      * @throws Exception If some problem inside
      */
     @Test
-    @SuppressWarnings("PMD.DoNotUseThreads")
     public void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
             new RqFake(), "X-Takes-HitRefresh: yes"
         );
-        final File dir = Files.createTempDir();
         final AtomicBoolean done = new AtomicBoolean(false);
         final Fork fork = new FkHitRefresh(
-            dir,
+            this.temp.getRoot(),
             new Runnable() {
                 @Override
                 public void run() {
@@ -67,7 +72,7 @@ public final class FkHitRefreshTest {
             new TkEmpty()
         );
         TimeUnit.SECONDS.sleep(2L);
-        FileUtils.touch(new File(dir, "hey.txt"));
+        FileUtils.touch(this.temp.newFile("hey.txt"));
         MatcherAssert.assertThat(
             fork.route(req).has(),
             Matchers.is(true)
@@ -81,7 +86,7 @@ public final class FkHitRefreshTest {
      */
     @Test
     public void ignoresWhenNoHeader() throws Exception {
-        final File dir = Files.createTempDir();
+        final File dir = this.temp.getRoot();
         MatcherAssert.assertThat(
             new FkHitRefresh(
                 dir, "", new TkEmpty()
