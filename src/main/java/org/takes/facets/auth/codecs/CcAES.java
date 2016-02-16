@@ -110,7 +110,6 @@ public final class CcAES implements Codec {
      * @throws IOException for all unexpected exceptions
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
-        this.checkBlockSize();
         try {
             return this.create(Cipher.ENCRYPT_MODE).doFinal(bytes);
         } catch (final BadPaddingException ex) {
@@ -134,9 +133,12 @@ public final class CcAES implements Codec {
 
     /**
      * Check the block size of the key.
+     *
+     * @param key encryption key
+     * @return The verified encryption key
      */
-    private void checkBlockSize() {
-        if (this.key.length != CcAES.BLOCK) {
+    private static byte[] withCorrectBlockSize(byte[] key) {
+        if (key.length != CcAES.BLOCK) {
             throw new IllegalArgumentException(
                 String.format(
                     "the length of the AES key must be exactly %d bytes",
@@ -144,6 +146,7 @@ public final class CcAES implements Codec {
                 )
             );
         }
+        return key;
     }
 
     /**
@@ -154,7 +157,6 @@ public final class CcAES implements Codec {
      * @throws IOException for all unexpected exceptions
      */
     private byte[] decrypt(final byte[] bytes) throws IOException {
-        this.checkBlockSize();
         try {
             return this.create(Cipher.DECRYPT_MODE).doFinal(bytes);
         } catch (final BadPaddingException ex) {
@@ -175,7 +177,7 @@ public final class CcAES implements Codec {
         throws IOException {
         try {
             final SecretKeySpec secret = new SecretKeySpec(
-                this.key, "AES"
+                CcAES.withCorrectBlockSize(this.key), "AES"
             );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(mode, secret, this.spec);
