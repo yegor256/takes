@@ -89,12 +89,14 @@ public class PsAll implements Pass {
      */
     private int validated(final int idx) {
         if (idx < 0) {
-            throw new IllegalArgumentException("Index must be >= 0");
+            throw new IllegalArgumentException(
+                String.format("Index %d must be >= 0.", idx)
+            );
         }
         if (idx >= this.all.size()) {
             throw new IllegalArgumentException(
                 String.format(
-                    "Trying to return index %s from a list of %s passes",
+                    "Trying to return index %d from a list of %d passes",
                     idx,
                     this.all.size()
                 )
