@@ -32,9 +32,10 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -98,7 +99,7 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 final Reader reader = new InputStreamReader(
-                    new FileInputStream(file)
+                    new FileInputStream(file), StandardCharsets.UTF_8
                 );
                 try {
                     // @checkstyle MagicNumber (1 line)
@@ -113,7 +114,7 @@ final class Options {
             } else {
                 socket = new ServerSocket(0);
                 final Writer writer = new OutputStreamWriter(
-                    new FileOutputStream(file)
+                    new FileOutputStream(file), StandardCharsets.UTF_8
                 );
                 try {
                     writer.append(Integer.toString(socket.getLocalPort()));
@@ -187,8 +188,7 @@ final class Options {
      *  expected format which is {@code --([a-z\-]+)(=.+)?}.
      */
     private static Map<String, String> asMap(final Iterable<String> args) {
-        final Map<String, String> map =
-            new ConcurrentHashMap<String, String>(0);
+        final Map<String, String> map = new HashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);
