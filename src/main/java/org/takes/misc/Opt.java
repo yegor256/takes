@@ -59,10 +59,10 @@ public interface Opt<T> {
      * @since 0.32
      * @param <T> Type of item
      * @todo #608:30min All library methods calls that may return null
-     *  should be wrapped in Opt.Nullable and checked for value presence
+     *  should be wrapped in Opt.Optional and checked for value presence
      *  with Opt.has().
      */
-    final class Nullable<T> implements Opt<T> {
+    final class Optional<T> implements Opt<T> {
         /**
          * Origin.
          */
@@ -72,7 +72,7 @@ public interface Opt<T> {
          * Ctor.
          * @param orgn The possibly-null item to hold
          */
-        public Nullable(final T orgn) {
+        public Optional(final T orgn) {
             this.origin = orgn;
         }
 

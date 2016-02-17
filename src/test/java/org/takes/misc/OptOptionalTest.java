@@ -30,57 +30,57 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for Opt.Nullable.
+ * Test case for Opt.Optional.
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
  * @since 0.32
  */
-public final class OptNullableTest {
+public final class OptOptionalTest {
     /**
-     * Opt.Nullable can return true for non-empty container.
+     * Opt.Optional can return true for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsTrueForNonEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
-            new Opt.Nullable<>(new Object()).has(),
+            new Opt.Optional<>(new Object()).has(),
             Matchers.is(true)
         );
     }
 
     /**
-     * Opt.Nullable can return false for empty container.
+     * Opt.Optional can return false for empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsFalseForEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
-            new Opt.Nullable<>(null).has(),
+            new Opt.Optional<>(null).has(),
             Matchers.is(false)
         );
     }
 
     /**
-     * Opt.Nullable can return item for non-empty container.
+     * Opt.Optional can return item for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsItemForNonEmptyContainer() throws Exception {
         final Object item = new Object();
         MatcherAssert.assertThat(
-            new Opt.Nullable<>(item).get(),
+            new Opt.Optional<>(item).get(),
             Matchers.sameInstance(item)
         );
     }
 
     /**
-     * Opt.Nullable can throw NoSuchElementException for empty
+     * Opt.Optional can throw NoSuchElementException for empty
      * container.
      * @throws Exception If something goes wrong
      */
     @Test(expected = NoSuchElementException.class)
     public void throwsNoSuchElementExceptionForEmptyContainer()
         throws Exception {
-        new Opt.Nullable<>(null).get();
+        new Opt.Optional<>(null).get();
     }
 }
