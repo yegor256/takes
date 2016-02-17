@@ -27,6 +27,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
@@ -50,7 +52,8 @@ import org.takes.Response;
 public final class RsWithBody extends RsWrap {
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithBody} with the specified body that will be
+     * encoded into UTF-8 by default.
      * @param body Body
      */
     public RsWithBody(final CharSequence body) {
@@ -58,7 +61,7 @@ public final class RsWithBody extends RsWrap {
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithBody} with the specified body.
      * @param body Body
      */
     public RsWithBody(final byte[] body) {
@@ -66,7 +69,7 @@ public final class RsWithBody extends RsWrap {
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithBody} with the specified body.
      * @param body Body
      */
     public RsWithBody(final InputStream body) {
@@ -74,7 +77,8 @@ public final class RsWithBody extends RsWrap {
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithBody} with the content located at the specified
+     * url as body.
      * @param url URL with body
      */
     public RsWithBody(final URL url) {
@@ -82,12 +86,25 @@ public final class RsWithBody extends RsWrap {
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithBody} with the specified response and body. The
+     * body will be encoded into UTF-8 by default.
      * @param res Original response
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, body.toString().getBytes());
+        this(res, body, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Constructs a {@code RsWithBody} with the specified response and body. The
+     * body will be encoded using the specified character set.
+     * @param res Original response
+     * @param body Body
+     * @param charset The character set to use to serialize the body
+     */
+    public RsWithBody(final Response res, final CharSequence body,
+        final Charset charset) {
+        this(res, body.toString().getBytes(charset));
     }
 
     /**

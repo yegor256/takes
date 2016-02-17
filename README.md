@@ -7,7 +7,7 @@
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.takes/takes/badge.svg?color=blue&prefix=v)](http://www.javadoc.io/doc/org.takes/takes)
-[![Coverage Status](https://coveralls.io/repos/yegor256/takes/badge.svg?branch=master&service=github)](https://coveralls.io/github/yegor256/takes?branch=master)
+[![Coverage Status](https://coveralls.io/repos/yegor256/takes/badge.svg?branch=__rultor&service=github)](https://coveralls.io/github/yegor256/takes?branch=__rultor)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
@@ -15,7 +15,7 @@
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-Java6 web development framework. Its key benefits, comparing to all others, include these
+Java7 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
 
  1. not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
@@ -216,7 +216,7 @@ parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
 (`tk` stands for "take") and expects it to return an instance of `Take` back.
 As you probably understood already, the first regular expression that matches
-returns a take. `TkIndex` is our custom class (`tk` stands for "take"),
+returns a take. `TkIndex` is our custom class,
 let's see how it looks:
 
 ```java
@@ -279,7 +279,7 @@ public final class App {
 ## Templates
 
 Now let's see how we can render something more complex than an plain text.
-First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may
+First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
@@ -901,14 +901,6 @@ sending us your pull request please run full Maven build:
 $ mvn clean install -Pqulice
 ```
 
-If your default encoding is not UTF-8, some of unit tests will break. This
-is an intentional behavior. To fix that, set this environment variable
-in console (in Windows, for example):
-
-```
-SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
-```
-
 To avoid build errors use maven 3.2+.
 
 Pay attention that our `pom.xml` inherits a lot of configuration
@@ -920,4 +912,3 @@ explains why it's done this way.
 
 If you have questions or general suggestions, don't hesitate to submit
 a new [Github issue](https://github.com/yegor256/takes/issues/new).
-

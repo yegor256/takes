@@ -100,4 +100,16 @@ public final class HrefTest {
             Matchers.equalTo(url)
         );
     }
+
+    /**
+     * Href can accept non properly encoded URL.
+     */
+    @Test
+    public void acceptsNonProperlyEncodedURL() {
+        MatcherAssert.assertThat(
+            // @checkstyle LineLength (2 lines)
+            new Href("http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt").toString(),
+            Matchers.equalTo("http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt")
+        );
+    }
 }

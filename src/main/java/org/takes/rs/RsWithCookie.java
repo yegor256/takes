@@ -106,9 +106,15 @@ public final class RsWithCookie extends RsWrap {
      * @param name Cookie name
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"
-     * @checkstyle ParameterNumberCheck (5 lines)
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
-    @SuppressWarnings("PMD.CallSuperInConstructor")
+    @SuppressWarnings
+        (
+            {
+                "PMD.CallSuperInConstructor",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         super(

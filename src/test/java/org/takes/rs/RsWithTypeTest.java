@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -59,6 +60,11 @@ public final class RsWithTypeTest {
     private static final String TYPE_TEXT = "text/plain";
 
     /**
+     * Content type application/json.
+     */
+    private static final String TYPE_JSON = "application/json";
+
+    /**
      * HTTP Status OK.
      */
     private static final String HTTP_OK = "HTTP/1.1 200 OK";
@@ -69,23 +75,29 @@ public final class RsWithTypeTest {
     private static final String CONTENT_TYPE = "Content-Type: %s";
 
     /**
+     * Content-Type format with charset.
+     */
+    private static final String TYPE_WITH_CHARSET =
+        "Content-Type: %s; charset=%s";
+
+    /**
      * RsWithType can replace an existing type.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void replaceTypeToResponse() throws Exception {
-        final String type = TYPE_TEXT;
+        final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(
-                    new RsWithType(new RsEmpty(), TYPE_XML),
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     type
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, type),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(RsWithTypeTest.CONTENT_TYPE, type),
                     "",
                     ""
                 )
@@ -95,7 +107,7 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType does not replace response code.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void doesNotReplaceResponseCode() throws Exception {
@@ -104,16 +116,14 @@ public final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType(
                     new RsWithBody(
-                        new RsWithStatus(
-                            HttpURLConnection.HTTP_INTERNAL_ERROR
-                        ),
+                        new RsWithStatus(HttpURLConnection.HTTP_INTERNAL_ERROR),
                         body
                     ),
-                    TYPE_HTML
+                    RsWithTypeTest.TYPE_HTML
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
+                Joiner.on(RsWithTypeTest.CRLF).join(
                     "HTTP/1.1 500 Internal Error",
                     "Content-Length: 6",
                     "Content-Type: text/html",
@@ -126,22 +136,43 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType.HTML can replace an existing type with text/html.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void replacesTypeWithHtml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.HTML(
-                    new RsWithType(
-                        new RsEmpty(), TYPE_XML
-                    )
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_HTML),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE,
+                        RsWithTypeTest.TYPE_HTML
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.HTML(
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.TYPE_WITH_CHARSET,
+                        RsWithTypeTest.TYPE_HTML,
+                        StandardCharsets.ISO_8859_1
+                    ),
                     "",
                     ""
                 )
@@ -151,22 +182,43 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType.JSON can replace an existing type with application/json.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void replacesTypeWithJson() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.JSON(
-                    new RsWithType(
-                        new RsEmpty(), TYPE_XML
-                    )
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, "application/json"),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE,
+                        RsWithTypeTest.TYPE_JSON
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.JSON(
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.TYPE_WITH_CHARSET,
+                        RsWithTypeTest.TYPE_JSON,
+                        StandardCharsets.ISO_8859_1
+                    ),
                     "",
                     ""
                 )
@@ -176,22 +228,42 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType.XML can replace an existing type with text/xml.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void replacesTypeWithXml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.XML(
-                    new RsWithType(
-                        new RsEmpty(), TYPE_HTML
-                    )
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_XML),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_XML
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.XML(
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.TYPE_WITH_CHARSET,
+                        RsWithTypeTest.TYPE_XML,
+                        StandardCharsets.ISO_8859_1
+                    ),
                     "",
                     ""
                 )
@@ -201,22 +273,96 @@ public final class RsWithTypeTest {
 
     /**
      * RsWithType.Text can replace an existing type with text/plain.
-     * @throws java.lang.Exception If a problem occurs.
+     * @throws Exception If a problem occurs.
      */
     @Test
     public void replacesTypeWithText() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Text(
-                    new RsWithType(
-                        new RsEmpty(), TYPE_HTML
-                    )
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(CRLF).join(
-                    HTTP_OK,
-                    String.format(CONTENT_TYPE, TYPE_TEXT),
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_TEXT
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType.Text(
+                    new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.TYPE_WITH_CHARSET,
+                        RsWithTypeTest.TYPE_TEXT,
+                        StandardCharsets.ISO_8859_1
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType can add properly the content type to the header.
+     * @throws Exception If a problem occurs.
+     */
+    @Test
+    public void addsContentType() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.CONTENT_TYPE,
+                        RsWithTypeTest.TYPE_TEXT
+                    ),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * RsWithType can add the charset to the content type when it is explicitly
+     * specified.
+     * @throws Exception If a problem occurs.
+     */
+    @Test
+    public void addsCharsetToContentType() throws Exception {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsWithType(
+                    new RsEmpty(),
+                    RsWithTypeTest.TYPE_TEXT,
+                    StandardCharsets.ISO_8859_1
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(RsWithTypeTest.CRLF).join(
+                    RsWithTypeTest.HTTP_OK,
+                    String.format(
+                        RsWithTypeTest.TYPE_WITH_CHARSET,
+                        RsWithTypeTest.TYPE_TEXT,
+                        StandardCharsets.ISO_8859_1
+                    ),
                     "",
                     ""
                 )

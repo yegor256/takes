@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
@@ -59,7 +60,7 @@ public final class PsCookie implements Pass {
     private final transient String cookie;
 
     /**
-     * Max login age, in seconds.
+     * Max login age, in days.
      */
     private final transient long age;
 
@@ -85,13 +86,13 @@ public final class PsCookie implements Pass {
      * Ctor.
      * @param cdc Codec
      * @param name Cookie name
-     * @param sec Max age in seconds
+     * @param days Max age in days
      * @since 0.9.6
      */
-    public PsCookie(final Codec cdc, final String name, final long sec) {
+    public PsCookie(final Codec cdc, final String name, final long days) {
         this.codec = cdc;
         this.cookie = name;
-        this.age = sec;
+        this.age = days;
     }
 
     @Override
@@ -101,7 +102,9 @@ public final class PsCookie implements Pass {
         Opt<Identity> user = new Opt.Empty<Identity>();
         if (cookies.hasNext()) {
             user = new Opt.Single<Identity>(
-                this.codec.decode(cookies.next().getBytes())
+                this.codec.decode(
+                    cookies.next().getBytes(StandardCharsets.UTF_8)
+                )
             );
         }
         return user;
@@ -114,7 +117,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new String(this.codec.encode(idt));
+            text = new String(this.codec.encode(idt), StandardCharsets.UTF_8);
         }
         return new RsWithCookie(
             res, this.cookie, text,

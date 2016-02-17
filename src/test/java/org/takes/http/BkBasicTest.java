@@ -70,7 +70,6 @@ import org.takes.tk.TkText;
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.DoNotUseThreads",
         "PMD.TooManyMethods",
         "PMD.LongVariable"
     })

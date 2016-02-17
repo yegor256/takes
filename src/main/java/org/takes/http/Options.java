@@ -32,9 +32,10 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -54,7 +55,7 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient ConcurrentMap<String, String> map;
+    private final transient Map<String, String> map;
 
     /**
      * Ctor.
@@ -68,9 +69,15 @@ final class Options {
     /**
      * Ctor.
      * @param args Arguments
+     * @todo #558:30min Options ctor. According to new qulice version,
+     *  constructor must contain only variables initialization and other
+     *  constructor calls. Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     Options(final Iterable<String> args) {
-        this.map = new ConcurrentHashMap<String, String>(0);
+        this.map = new HashMap<String, String>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);
@@ -113,7 +120,7 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 final Reader reader = new InputStreamReader(
-                    new FileInputStream(file)
+                    new FileInputStream(file), StandardCharsets.UTF_8
                 );
                 try {
                     // @checkstyle MagicNumber (1 line)
@@ -128,7 +135,7 @@ final class Options {
             } else {
                 socket = new ServerSocket(0);
                 final Writer writer = new OutputStreamWriter(
-                    new FileOutputStream(file)
+                    new FileOutputStream(file), StandardCharsets.UTF_8
                 );
                 try {
                     writer.append(Integer.toString(socket.getLocalPort()));

@@ -21,40 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.misc;
+package org.takes.rq;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
- * InputStream decorator that knows if it was closed or not.
+ * Input stream wrapper that removes associated File instance on close.
  *
- * @author I. Sokolov (happy.neko@gmail.com)
+ * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
  * @since 0.31
  */
-public final class StateAwareInputStream extends InputStream {
+final class TempInputStream extends InputStream {
 
     /**
-     * Original InputStream.
+     * Original stream.
      */
     private final transient InputStream origin;
 
     /**
-     * Stream was closed flag.
+     * Associated File instance.
      */
-    private final AtomicBoolean closed;
+    private final transient File file;
 
     /**
-     * Constructor.
-     *
-     * @param stream InputStream to decorate
+     * Ctor.
+     * @param stream Original stream
+     * @param temp File instance
      */
-    public StateAwareInputStream(final InputStream stream) {
+    TempInputStream(final InputStream stream, final File temp) {
         super();
-        this.closed = new AtomicBoolean(false);
         this.origin = stream;
+        this.file = temp;
+    }
+
+    /**
+     * Closes the Input stream, deleting associated file.
+     * @throws IOException if some problem occurs.
+     */
+    @Override
+    public void close() throws IOException {
+        this.origin.close();
+        Files.delete(Paths.get(this.file.getAbsolutePath()));
     }
 
     @Override
@@ -68,8 +80,8 @@ public final class StateAwareInputStream extends InputStream {
     }
 
     @Override
-    public int read(final byte[] buf, final int off, final int len) throws
-        IOException {
+    public int read(final byte[] buf, final int off,
+        final int len) throws IOException {
         return this.origin.read(buf, off, len);
     }
 
@@ -81,34 +93,5 @@ public final class StateAwareInputStream extends InputStream {
     @Override
     public int available() throws IOException {
         return this.origin.available();
-    }
-
-    @Override
-    public void close() throws IOException {
-        this.origin.close();
-        this.closed.set(true);
-    }
-
-    @Override
-    public void mark(final int readlimit) {
-        this.origin.mark(readlimit);
-    }
-
-    @Override
-    public void reset() throws IOException {
-        this.origin.reset();
-    }
-
-    @Override
-    public boolean markSupported() {
-        return this.origin.markSupported();
-    }
-
-    /**
-     * Checks whether stream was closed.
-     * @return True if stream was closed, otherwise false
-     */
-    public boolean isClosed() {
-        return this.closed.get();
     }
 }

@@ -29,8 +29,9 @@ import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import javax.json.JsonObject;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
@@ -158,8 +159,8 @@ public final class PsTwitter implements Pass {
      * @return Identity found
     */
     private static Identity parse(final JsonObject json) {
-        final ConcurrentMap<String, String> props =
-                new ConcurrentHashMap<String, String>(json.size());
+        final Map<String, String> props =
+            new HashMap<String, String>(json.size());
         props.put("name", json.getString("name"));
         props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(
@@ -184,7 +185,8 @@ public final class PsTwitter implements Pass {
                 "Authorization",
                 String.format(
                     "Basic %s", DatatypeConverter.printBase64Binary(
-                        String.format("%s:%s", this.app, this.key).getBytes()
+                        String.format("%s:%s", this.app, this.key)
+                            .getBytes(StandardCharsets.UTF_8)
                     )
                 )
             )

@@ -21,76 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
+package org.takes.rq;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.takes.Response;
-import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
+import org.takes.Request;
 
 /**
- * Fallback that logs all problems through SFL4J.
+ * Request decorator that limits its body, according to
+ * the chunk sizes when it is a chunked Transfer-Encoding.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Hamdi Douss (douss.hamdi@gmail.com)
  * @version $Id$
- * @since 0.25
+ * @since 0.15
+ * @see org.takes.rq.RqPrint
  */
 @EqualsAndHashCode(callSuper = true)
-public final class FbSlf4j extends FbWrap {
-
-    /**
-     * SLF4J logger.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FbSlf4j.class);
+public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
+     * @param req Original request
      */
-    public FbSlf4j() {
+    public RqChunk(final Request req) {
         super(
-            new Fallback() {
+            new Request() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws IOException {
-                    FbSlf4j.log(req);
-                    return new Opt.Empty<Response>();
+                public Iterable<String> head() throws IOException {
+                    return req.head();
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return RqChunk.cap(req);
                 }
             }
         );
     }
 
     /**
-     * Log this request.
+     * Cap the steam.
      * @param req Request
+     * @return Stream with a cap
      * @throws IOException If fails
      */
-    private static void log(final RqFallback req) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Throwable error = req.throwable();
-        final PrintStream stream = new PrintStream(
-            baos, false, StandardCharsets.UTF_8.toString()
-        );
-        try {
-            error.printStackTrace(stream);
-        } finally {
-            stream.close();
+    private static InputStream cap(final Request req) throws IOException {
+        final Iterator<String> hdr = new RqHeaders.Base(req)
+            .header("Transfer-Encoding").iterator();
+        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
+            throw new UnsupportedOperationException();
         }
-        FbSlf4j.LOGGER.error(
-            "{} {} failed with {}: {}",
-            new RqMethod.Base(req).method(),
-            new RqHref.Base(req).href(),
-            req.code(),
-            baos.toString("UTF-8")
-        );
+        return req.body();
     }
 
 }

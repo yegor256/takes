@@ -52,7 +52,7 @@ public interface Opt<T> {
      * Holder for a single element only.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
      * @since 0.14
      * @param <T> Type of item
@@ -84,7 +84,7 @@ public interface Opt<T> {
      * Empty instance.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gamil.com)
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
      * @since 0.14
      * @param <T> Type of item

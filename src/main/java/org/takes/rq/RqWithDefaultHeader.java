@@ -21,57 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.rq;
 
 import java.io.IOException;
-import org.hamcrest.FeatureMatcher;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.takes.Response;
+import org.takes.Request;
 
 /**
- * Response Status Matcher.
- *
- * <p>This "matcher" tests given response status code.
- * <p>The class is immutable and thread-safe.
- *
- * @author Erim Erturk (erimerturk@gmail.com)
+ * Request with default header.
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
- * @since 0.13
+ * @since 0.31
  */
-public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
+public final class RqWithDefaultHeader extends RqWrap {
 
     /**
-     * Description message.
+     * Ctor.
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @throws IOException in case of request errors
      */
-    private static final String FEATURE_NAME = "HTTP status code";
-
-    /**
-     * Create matcher using HTTP code.
-     * @param val HTTP code value
-     * @since 0.17
-     */
-    public HmRsStatus(final int val) {
-        this(Matchers.equalTo(val));
+    public RqWithDefaultHeader(final Request req,
+        final String hdr,
+        final String val) throws IOException {
+        super(RqWithDefaultHeader.build(req, hdr, val));
     }
 
     /**
-     * Create matcher using HTTP code matcher.
-     * @param matcher HTTP code matcher
+     * Builds the request with the default header if it is not already present.
+     * @param req Original request.
+     * @param hdr Header name.
+     * @param val Header value.
+     * @return The new request.
+     * @throws IOException in case of request errors
      */
-    public HmRsStatus(final Matcher<Integer> matcher) {
-        super(matcher, HmRsStatus.FEATURE_NAME, HmRsStatus.FEATURE_NAME);
-    }
-
-    @Override
-    public Integer featureValueOf(final Response response) {
-        try {
-            final String head = response.head().iterator().next();
-            final String[] parts = head.split(" ");
-            return Integer.parseInt(parts[1]);
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+    private static Request build(final Request req,
+        final String hdr, final String val) throws IOException {
+        final Request request;
+        if (new RqHeaders.Base(req).header(hdr).iterator().hasNext()) {
+            request = req;
+        } else {
+            request = new RqWithHeader(req, hdr, val);
         }
+        return request;
     }
+
 }

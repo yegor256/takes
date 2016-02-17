@@ -25,6 +25,7 @@ package org.takes.misc;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -32,8 +33,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * HTTP URI/HREF.
@@ -60,7 +61,7 @@ public final class Href implements CharSequence {
     /**
      * Params.
      */
-    private final transient ConcurrentMap<String, List<String>> params;
+    private final transient SortedMap<String, List<String>> params;
 
     /**
      * Ctor.
@@ -72,11 +73,22 @@ public final class Href implements CharSequence {
     /**
      * Ctor.
      * @param txt Text of the link
+     * @todo #558:30min Href ctor. According to new qulice version, constructor
+     *  must contain only variables initialization and other constructor calls.
+     *  Refactor code according to that rule and remove
+     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
+     *  warning suppression.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidInstantiatingObjectsInLoops",
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            }
+        )
     public Href(final CharSequence txt) {
-        this.params = new ConcurrentHashMap<String, List<String>>(0);
-        final URI link = URI.create(txt.toString());
+        this.params = new TreeMap<String, List<String>>();
+        final URI link = Href.createURI(txt.toString());
         final String query = link.getRawQuery();
         if (query == null) {
             this.uri = link;
@@ -95,7 +107,9 @@ public final class Href implements CharSequence {
                 } else {
                     value = "";
                 }
-                this.params.putIfAbsent(key, new LinkedList<String>());
+                if (!this.params.containsKey(key)) {
+                    this.params.put(key, new LinkedList<String>());
+                }
                 this.params.get(key).add(value);
             }
         }
@@ -107,7 +121,7 @@ public final class Href implements CharSequence {
      * @param map Map of params
      */
     private Href(final URI link,
-        final ConcurrentMap<String, List<String>> map) {
+        final SortedMap<String, List<String>> map) {
         this.uri = link;
         this.params = map;
     }
@@ -225,12 +239,11 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size() + 1
-            );
-        map.putAll(this.params);
-        map.putIfAbsent(key.toString(), new LinkedList<String>());
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
+        if (!map.containsKey(key.toString())) {
+            map.put(key.toString(), new LinkedList<String>());
+        }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map);
     }
@@ -241,11 +254,8 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size()
-            );
-        map.putAll(this.params);
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
         map.remove(key.toString());
         return new Href(this.uri, map);
     }
@@ -280,4 +290,35 @@ public final class Href implements CharSequence {
         }
     }
 
+    /**
+     * Parses the specified content to create the corresponding {@code URI}
+     * instance. In case of an {@code URISyntaxException}, it will automatically
+     * encode the character that causes the issue then it will try again
+     * if it is possible otherwise an {@code IllegalArgumentException} will
+     * be thrown.
+     * @param txt The content to parse
+     * @return The {@code URI} corresponding to the specified content.
+     * @throws IllegalArgumentException in case the content could not be parsed
+     * @throws IllegalStateException in case an invalid character could not be
+     *  encoded properly.
+     */
+    private static URI createURI(final String txt) {
+        URI result;
+        try {
+            result = new URI(txt);
+        } catch (final URISyntaxException ex) {
+            final int index = ex.getIndex();
+            if (index == -1) {
+                throw new IllegalArgumentException(ex.getMessage(), ex);
+            }
+            final StringBuilder value = new StringBuilder(txt);
+            value.replace(
+                index,
+                index + 1,
+                Href.encode(value.substring(index, index + 1))
+            );
+            result = Href.createURI(value.toString());
+        }
+        return result;
+    }
 }

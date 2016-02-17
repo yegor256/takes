@@ -31,10 +31,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
@@ -80,7 +80,11 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final CharSequence template,
         final RsVelocity.Pair... params) {
-        this(new ByteArrayInputStream(template.toString().getBytes()), params);
+        this(
+            new ByteArrayInputStream(
+                template.toString().getBytes(StandardCharsets.UTF_8)
+            ), params
+        );
     }
 
     /**
@@ -136,7 +140,9 @@ public final class RsVelocity extends RsWrap {
     private static InputStream render(final InputStream page,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new OutputStreamWriter(baos);
+        final Writer writer = new OutputStreamWriter(
+            baos, StandardCharsets.UTF_8
+        );
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
@@ -146,7 +152,7 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new InputStreamReader(page)
+            new InputStreamReader(page, StandardCharsets.UTF_8)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());
@@ -157,10 +163,11 @@ public final class RsVelocity extends RsWrap {
      * @param entries Entries
      * @return Map
      */
+    @SafeVarargs
     private static Map<CharSequence, Object> asMap(
         final Map.Entry<CharSequence, Object>... entries) {
-        final ConcurrentMap<CharSequence, Object> map =
-            new ConcurrentHashMap<CharSequence, Object>(entries.length);
+        final Map<CharSequence, Object> map =
+            new HashMap<CharSequence, Object>(entries.length);
         for (final Map.Entry<CharSequence, Object> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }

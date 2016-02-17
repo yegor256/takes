@@ -29,9 +29,10 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.List;
+import java.util.Map;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -82,7 +83,7 @@ public final class PsGithub implements Pass {
      * @param gkey Github key
      */
     public PsGithub(final String gapp, final String gkey) {
-      this(gapp, gkey, "https://github.com", "https://api.github.com");
+        this(gapp, gkey, "https://github.com", "https://api.github.com");
     }
 
     /**
@@ -153,7 +154,7 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path("login").path("oauth").path("access_token")
             .toString();
-        return new JdkRequest(uri)
+        final List<String> tokens = new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
             .body()
@@ -165,7 +166,13 @@ public final class PsGithub implements Pass {
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(XmlResponse.class)
-            .xml().xpath("/OAuth/access_token/text()").get(0);
+            .xml().xpath("/OAuth/access_token/text()");
+        if (tokens.isEmpty()) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST, "No access token"
+            );
+        }
+        return tokens.get(0);
     }
 
     /**
@@ -174,8 +181,8 @@ public final class PsGithub implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(json.size());
+        final Map<String, String> props =
+            new HashMap<String, String>(json.size());
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         props.put("login", json.getString("login", "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));

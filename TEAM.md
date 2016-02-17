@@ -5,9 +5,9 @@ The following members are in the project team:
 Role | Members
 ---|---
 PM | @davvd
-CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @krzyk, @mkordas, @longtimeago
-DEV | @adko-pl, @cyberone, @rfqu, @alexey-krylov, @exper0, @aschworer, @danff, @erimerturk, @gmandnepr, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @rajithd, @xupyprmv, @yamstranger, @bertram25, @lauresh
-IMP | @adko-pl, @cyberone, @rfqu, @alexey-krylov, @exper0, @aschworer, @danff, @erimerturk, @gmandnepr, @piddubnyi, @happy-neko, @mbarbieri, @nathansgreen, @prondzyn, @rajithd, @xupyprmv, @yamstranger, @bertram25, @lauresh
+CR | @darkled, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @hdouss, @krzyk, @mkordas, @longtimeago
+DEV | @adko-pl, @rfqu, @dalifreire, @danff, @erimerturk, @gmandnepr, @bubelov, @piddubnyi, @happy-neko, @2686747, @mbarbieri, @amihaiemil, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
+IMP | @adko-pl, @rfqu, @dalifreire, @danff, @erimerturk, @gmandnepr, @bubelov, @piddubnyi, @happy-neko, @2686747, @mbarbieri, @amihaiemil, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
 ARC | 
 DES | @yegor256
 PO | @yegor256

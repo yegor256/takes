@@ -28,9 +28,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -59,14 +59,16 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return text.toString().getBytes();
+        return text.toString().getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final String[] parts = new String(bytes).split(";");
-        final ConcurrentMap<String, String> map =
-            new ConcurrentHashMap<String, String>(parts.length);
+        final String[] parts = new String(
+            bytes, StandardCharsets.UTF_8
+        ).split(";");
+        final Map<String, String> map =
+            new HashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
             final String[] pair = parts[idx].split("=");
             try {

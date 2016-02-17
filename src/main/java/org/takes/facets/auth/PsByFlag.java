@@ -26,10 +26,9 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -124,10 +123,11 @@ public final class PsByFlag implements Pass {
      * @param entries Entries
      * @return Map
      */
+    @SafeVarargs
     private static Map<Pattern, Pass> asMap(
         final Map.Entry<Pattern, Pass>... entries) {
-        final ConcurrentMap<Pattern, Pass> map =
-            new ConcurrentHashMap<Pattern, Pass>(entries.length);
+        final Map<Pattern, Pass> map =
+            new HashMap<Pattern, Pass>(entries.length);
         for (final Map.Entry<Pattern, Pass> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }

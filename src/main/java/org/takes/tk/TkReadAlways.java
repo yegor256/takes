@@ -60,7 +60,7 @@ public final class TkReadAlways implements Take {
     public Response act(final Request req) throws IOException {
         final Response res = this.origin.act(req);
         for (int count = req.body().available(); count > 0;
-                count = req.body().available()) {
+            count = req.body().available()) {
             req.body().skip(count);
         }
         return res;

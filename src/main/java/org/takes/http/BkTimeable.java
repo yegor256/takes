@@ -41,7 +41,6 @@ import lombok.EqualsAndHashCode;
  * @since 0.14.2
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeable extends BkWrap {
 
     /**
@@ -64,7 +63,16 @@ public final class BkTimeable extends BkWrap {
          * Ctor.
          * @param bck Original back
          * @param msec Execution latency
+         * @todo #558:30min BkThreads ctor. According to new qulice version,
+         *  constructor must contain only variables initialization and other
+         *  constructor calls. Refactor code according to that rule and
+         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         BkThreads(final long msec, final Back bck) {
             this.threads = new ConcurrentHashMap<Thread, Long>(1);
             this.back = bck;
@@ -92,8 +100,8 @@ public final class BkTimeable extends BkWrap {
         @Override
         public void accept(final Socket socket) throws IOException {
             this.threads.put(
-                    Thread.currentThread(),
-                    System.currentTimeMillis()
+                Thread.currentThread(),
+                System.currentTimeMillis()
             );
             this.back.accept(socket);
         }
@@ -103,8 +111,8 @@ public final class BkTimeable extends BkWrap {
         private void check() {
             for (final Map.Entry<Thread, Long> entry
                 : this.threads.entrySet()) {
-                final long currentTime = System.currentTimeMillis();
-                if (currentTime - entry.getValue() > this.latency) {
+                final long time = System.currentTimeMillis();
+                if (time - entry.getValue() > this.latency) {
                     final Thread thread = entry.getKey();
                     if (thread.isAlive()) {
                         thread.interrupt();

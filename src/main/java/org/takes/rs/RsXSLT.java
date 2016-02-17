@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -151,14 +152,20 @@ public final class RsXSLT extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXSLT.stylesheet(
             factory, new StreamSource(
-                new InputStreamReader(new ByteArrayInputStream(input))
+                new InputStreamReader(
+                    new ByteArrayInputStream(input), StandardCharsets.UTF_8
+                )
             )
         );
         RsXSLT.transformer(factory, xsl).transform(
             new StreamSource(
-                new InputStreamReader(new ByteArrayInputStream(input))
+                new InputStreamReader(
+                    new ByteArrayInputStream(input), StandardCharsets.UTF_8
+                )
             ),
-            new StreamResult(new OutputStreamWriter(baos))
+            new StreamResult(
+                new OutputStreamWriter(baos, StandardCharsets.UTF_8)
+            )
         );
         return new ByteArrayInputStream(baos.toByteArray());
     }
@@ -253,7 +260,9 @@ public final class RsXSLT extends RsWrap {
                     )
                 );
             }
-            return new StreamSource(new InputStreamReader(input));
+            return new StreamSource(
+                new InputStreamReader(input, StandardCharsets.UTF_8)
+            );
         }
     }
 

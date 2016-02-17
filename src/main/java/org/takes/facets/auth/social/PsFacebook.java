@@ -35,9 +35,9 @@ import com.restfb.types.User;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -131,8 +131,8 @@ public final class PsFacebook implements Pass {
         final User user = this.fetch(
             this.token(href.toString(), code.next())
         );
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(0);
+        final Map<String, String> props =
+            new HashMap<String, String>(0);
         props.put("name", user.getName());
         props.put(
             "picture",

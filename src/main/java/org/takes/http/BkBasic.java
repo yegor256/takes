@@ -29,9 +29,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -142,12 +143,19 @@ public final class BkBasic implements Back {
      * @param err Error
      * @param code HTTP error code
      * @return Response
+     * @throws IOException If something goes wrong
      */
-    private static Response failure(final Throwable err, final int code) {
+    private static Response failure(final Throwable err, final int code)
+        throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final PrintWriter writer = new PrintWriter(baos);
-        err.printStackTrace(writer);
-        writer.close();
+        final PrintStream stream = new PrintStream(
+            baos, false, StandardCharsets.UTF_8.toString()
+        );
+        try {
+            err.printStackTrace(stream);
+        } finally {
+            stream.close();
+        }
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),
             code

@@ -31,13 +31,14 @@ import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -60,7 +61,8 @@ import org.takes.misc.VerboseIterable;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
- * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+ * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+ *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -95,7 +97,7 @@ public interface RqForm extends Request {
         /**
          * Saved map.
          */
-        private final transient List<ConcurrentMap<String, List<String>>> saved;
+        private final transient List<Map<String, List<String>>> saved;
         /**
          * Ctor.
          * @param request Original request
@@ -103,7 +105,7 @@ public interface RqForm extends Request {
         public Base(final Request request) {
             super(request);
             this.saved =
-                new CopyOnWriteArrayList<ConcurrentMap<String, List<String>>>();
+                new CopyOnWriteArrayList<Map<String, List<String>>>();
             this.req = request;
         }
         @Override
@@ -155,15 +157,17 @@ public interface RqForm extends Request {
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
-        private ConcurrentMap<String, List<String>> map() throws IOException {
+        private Map<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
                     final ByteArrayOutputStream
                         baos = new ByteArrayOutputStream();
                     new RqPrint(this.req).printBody(baos);
-                    final String body = new String(baos.toByteArray());
-                    final ConcurrentMap<String, List<String>> map =
-                        new ConcurrentHashMap<String, List<String>>(1);
+                    final String body = new String(
+                        baos.toByteArray(), StandardCharsets.UTF_8
+                    );
+                    final Map<String, List<String>> map =
+                        new HashMap<String, List<String>>(1);
                     // @checkstyle MultipleStringLiteralsCheck (1 line)
                     for (final String pair : body.split("&")) {
                         if (pair.isEmpty()) {
@@ -182,7 +186,9 @@ public interface RqForm extends Request {
                         final String key = RqForm.Base.decode(
                             parts[0].trim().toLowerCase(Locale.ENGLISH)
                         );
-                        map.putIfAbsent(key, new LinkedList<String>());
+                        if (!map.containsKey(key)) {
+                            map.put(key, new LinkedList<String>());
+                        }
                         map.get(key).add(RqForm.Base.decode(parts[1].trim()));
                     }
                     this.saved.add(map);
@@ -283,7 +289,16 @@ public interface RqForm extends Request {
          * @param req Original request
          * @param params Parameters
          * @throws IOException if something goes wrong.
+         * @todo #558:30min Fake ctor. According to new qulice version,
+         *  constructor must contain only variables initialization and other
+         *  constructor calls. Refactor code according to that rule and
+         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
+         *  warning suppression.
          */
+        @SuppressWarnings
+            (
+                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+            )
         public Fake(final Request req, final String... params)
             throws IOException {
             if (params.length % 2 != 0) {

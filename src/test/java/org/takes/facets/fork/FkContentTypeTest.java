@@ -48,6 +48,11 @@ public final class FkContentTypeTest {
     private static final String CONTENT_TYPE = "Content-Type";
 
     /**
+     * Content-Type value.
+     */
+    private static final String CTYPE = "text/html charset=iso-8859-1";
+
+    /**
      * FkContentType can match by Content-Type header with any of types.
      * @throws IOException If some problem inside
      */
@@ -55,7 +60,11 @@ public final class FkContentTypeTest {
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("text/xml", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "*/* ")
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "*/* "
+                )
             ).has(),
             Matchers.is(true)
         );
@@ -71,7 +80,11 @@ public final class FkContentTypeTest {
             new FkContentType(
                 "application/json charset=utf-8", new RsEmpty()
             ).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "images/*")
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "images/*"
+                )
             ).has(),
             Matchers.is(false)
         );
@@ -85,11 +98,12 @@ public final class FkContentTypeTest {
     public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "text/html charset=iso-8859-1", new RsEmpty()
+                FkContentTypeTest.CTYPE, new RsEmpty()
             ).route(
                 new RqWithHeader(
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    new RqFake(), CONTENT_TYPE, "text/html charset=iso-8859-1"
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    FkContentTypeTest.CTYPE
                 )
             ).has(),
             Matchers.is(true)
@@ -104,7 +118,9 @@ public final class FkContentTypeTest {
     public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType("*/*", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), CONTENT_TYPE, "")
+                new RqWithHeader(
+                    new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
+                )
             ).has(),
             Matchers.is(true)
         );
@@ -118,10 +134,12 @@ public final class FkContentTypeTest {
     public void matchesDifferentEncodingsTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "text/html charset=iso-8859-1", new RsEmpty()
+                FkContentTypeTest.CTYPE, new RsEmpty()
             ).route(
                 new RqWithHeader(
-                    new RqFake(), CONTENT_TYPE, "text/html charset=utf8"
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "text/html charset=utf8"
                 )
             ).has(),
             Matchers.is(false)
