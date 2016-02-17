@@ -297,7 +297,6 @@ public final class Href implements CharSequence {
      * Convert the provided query into a Map.
      * @param query The query to parse.
      * @return A map containing all the query arguments and their values.
-     * @checkstyle LineLength (3 lines)
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedMap<String, List<String>> asMap(final String query) {
