@@ -41,7 +41,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.DoNotUseThreads")
-public final class BkTimeable extends Thread implements Back {
+public final class BkTimeable extends Thread implements DaemonBack {
     /**
      * Original back.
      */
@@ -67,9 +67,7 @@ public final class BkTimeable extends Thread implements Back {
         this.latency = msec;
     }
 
-    /**
-     * This method will start the damon thread.
-     */
+    @Override
     public void startDaemonThread() {
         this.setDaemon(true);
         this.start();

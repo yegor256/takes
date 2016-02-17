@@ -91,14 +91,14 @@ public final class FtCLI implements Front {
         } else {
             tks = this.take;
         }
-        final BkTimeable timeable = new BkTimeable(
+        final DaemonBack daemon = new BkTimeable(
             new BkSafe(new BkBasic(tks)),
             this.options.maxLatency()
         );
-        timeable.startDaemonThread();
+        daemon.startDaemonThread();
         final Front front = new FtBasic(
             new BkParallel(
-                timeable,
+                daemon,
                 this.options.threads()
             ),
             this.options.socket()
