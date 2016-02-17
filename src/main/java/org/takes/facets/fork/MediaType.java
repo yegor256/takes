@@ -98,7 +98,7 @@ final class MediaType implements Comparable<MediaType> {
     @Cacheable(forever = true)
     private Double priority() {
         final String[] parts = this.split();
-        Double priority = 1.0d;
+        final Double priority;
         if (parts.length > 1) {
             final String num = parts[1].replaceAll("[^0-9\\.]", "");
             if (num.isEmpty()) {
@@ -106,6 +106,8 @@ final class MediaType implements Comparable<MediaType> {
             } else {
                 priority = Double.parseDouble(num);
             }
+        } else {
+            priority = 1.0d;
         }
         return priority;
     }
@@ -125,10 +127,12 @@ final class MediaType implements Comparable<MediaType> {
      */
     @Cacheable(forever = true)
     private String lowPart() {
-        String sector = "";
+        final String sector;
         final String[] sectors = this.sectors();
         if (sectors.length > 1) {
             sector = sectors[1].trim();
+        } else {
+            sector = "";
         }
         return sector;
     }
