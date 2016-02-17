@@ -58,7 +58,6 @@ public final class FtCLITest {
      * @throws Exception If some problem inside
      */
     @Test
-    @SuppressWarnings("PMD.DoNotUseThreads")
     public void understandsCommandLineArgs() throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {

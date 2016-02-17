@@ -163,7 +163,9 @@ public final class RsXSLT extends RsWrap {
                     new ByteArrayInputStream(input), StandardCharsets.UTF_8
                 )
             ),
-            new StreamResult(new OutputStreamWriter(baos))
+            new StreamResult(
+                new OutputStreamWriter(baos, StandardCharsets.UTF_8)
+            )
         );
         return new ByteArrayInputStream(baos.toByteArray());
     }

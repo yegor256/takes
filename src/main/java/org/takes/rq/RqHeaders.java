@@ -27,14 +27,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -141,8 +140,8 @@ public interface RqHeaders extends Request {
                 );
             }
             head.next();
-            final ConcurrentMap<String, List<String>> map =
-                new ConcurrentHashMap<String, List<String>>(0);
+            final Map<String, List<String>> map =
+                new HashMap<String, List<String>>(0);
             while (head.hasNext()) {
                 final String line = head.next();
                 final String[] parts = line.split(":", 2);
@@ -153,7 +152,9 @@ public interface RqHeaders extends Request {
                     );
                 }
                 final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
-                map.putIfAbsent(key, new LinkedList<String>());
+                if (!map.containsKey(key)) {
+                    map.put(key, new LinkedList<String>());
+                }
                 map.get(key).add(parts[1].trim());
             }
             return map;

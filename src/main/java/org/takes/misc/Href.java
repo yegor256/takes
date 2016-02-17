@@ -33,8 +33,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * HTTP URI/HREF.
@@ -61,7 +61,7 @@ public final class Href implements CharSequence {
     /**
      * Params.
      */
-    private final transient ConcurrentMap<String, List<String>> params;
+    private final transient SortedMap<String, List<String>> params;
 
     /**
      * Ctor.
@@ -92,7 +92,7 @@ public final class Href implements CharSequence {
      * @param map Map of params
      */
     private Href(final URI link,
-        final ConcurrentMap<String, List<String>> map) {
+        final SortedMap<String, List<String>> map) {
         this.uri = link;
         this.params = map;
     }
@@ -210,12 +210,11 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size() + 1
-            );
-        map.putAll(this.params);
-        map.putIfAbsent(key.toString(), new LinkedList<String>());
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
+        if (!map.containsKey(key.toString())) {
+            map.put(key.toString(), new LinkedList<String>());
+        }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map);
     }
@@ -226,11 +225,8 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final ConcurrentMap<String, List<String>> map =
-            new ConcurrentHashMap<String, List<String>>(
-                this.params.size()
-            );
-        map.putAll(this.params);
+        final SortedMap<String, List<String>> map =
+            new TreeMap<String, List<String>>(this.params);
         map.remove(key.toString());
         return new Href(this.uri, map);
     }
@@ -304,9 +300,9 @@ public final class Href implements CharSequence {
      * @checkstyle LineLength (3 lines)
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    private static ConcurrentMap<String, List<String>> asMap(final String query) {
-        final ConcurrentMap<String, List<String>> params =
-            new ConcurrentHashMap<String, List<String>>(0);
+    private static SortedMap<String, List<String>> asMap(final String query) {
+        final SortedMap<String, List<String>> params =
+            new TreeMap<String, List<String>>();
         if (query != null) {
             final String[] pairs = query.split("&");
             for (final String pair : pairs) {
@@ -318,7 +314,9 @@ public final class Href implements CharSequence {
                 } else {
                     value = "";
                 }
-                params.putIfAbsent(key, new LinkedList<String>());
+                if (!params.containsKey(key)) {
+                    params.put(key, new LinkedList<String>());
+                }
                 params.get(key).add(value);
             }
         }

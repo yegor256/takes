@@ -80,7 +80,6 @@ public final class BkParallel extends BkWrap {
         super(
             new Back() {
                 @Override
-                @SuppressWarnings("PMD.DoNotUseThreads")
                 public void accept(final Socket socket) {
                     svc.execute(
                         new Runnable() {
@@ -109,7 +108,6 @@ public final class BkParallel extends BkWrap {
         private final transient AtomicInteger total = new AtomicInteger();
 
         @Override
-        @SuppressWarnings("PMD.DoNotUseThreads")
         public Thread newThread(final Runnable runnable) {
             final Thread thread = new Thread(runnable);
             thread.setName(

@@ -28,9 +28,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -67,8 +66,8 @@ public final class CcCompact implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final ConcurrentMap<String, String> map =
-            new ConcurrentHashMap<String, String>(0);
+        final Map<String, String> map =
+            new HashMap<String, String>(0);
         final DataInputStream stream = new DataInputStream(
             new ByteArrayInputStream(bytes)
         );
