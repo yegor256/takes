@@ -73,7 +73,6 @@ import org.takes.tk.TkText;
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.DoNotUseThreads",
         "PMD.TooManyMethods"
     })
 public final class BkBasicTest {
