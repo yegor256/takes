@@ -23,9 +23,11 @@
  */
 package org.takes.rs;
 
+import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Response decorator, with content type.
@@ -46,25 +48,81 @@ public final class RsWithType extends RsWrap {
     private static final String HEADER = "Content-Type";
 
     /**
-     * Ctor.
+     * The name of the parameter allowing to define the character set.
+     */
+    private static final String CHARSET = "charset";
+
+    /**
+     * Constructs a {@code RsWithType} that will add the content type header to
+     * the response using the specified type as media type.
+     * <p>The resulting header is of type {@code Content-Type: media-type}.
      * @param res Original response
      * @param type Content type
      */
     public RsWithType(final Response res, final CharSequence type) {
-        super(RsWithType.make(res, type));
+        this(res, type, new Opt.Empty<Charset>());
     }
 
     /**
-     * Ctor.
+     * Constructs a {@code RsWithType} that will add the content type header to
+     * the response using the specified type as media type and the specified
+     * charset as charset parameter value.
+     * <p>The resulting header
+     * is of type {@code Content-Type: media-type; charset=charset-value}.
      * @param res Original response
      * @param type Content type
+     * @param charset The character set to add in the content type header
+     */
+    public RsWithType(final Response res, final CharSequence type,
+        final Charset charset) {
+        this(res, type, new Opt.Single<Charset>(charset));
+    }
+
+    /**
+     * Constructs a {@code RsWithType} that will add the content type header to
+     * the response using the specified type as media type and the specified
+     * charset as charset parameter value if present.
+     * @param res Original response
+     * @param type Content type
+     * @param charset The character set to add in the content type header if
+     *  present.
+     */
+    private RsWithType(final Response res, final CharSequence type,
+        final Opt<Charset> charset) {
+        super(RsWithType.make(res, type, charset));
+    }
+
+    /**
+     * Factory allowing to create {@code Response} with the corresponding
+     * content type and character set.
+     * @param res Original response
+     * @param type Content type
+     * @param charset The character set to add to the content type header. If
+     *  absent no character set will be added to the content type header
      * @return Response
      */
-    private static Response make(final Response res, final CharSequence type) {
-        return new RsWithHeader(
-            new RsWithoutHeader(res, RsWithType.HEADER),
-            RsWithType.HEADER, type
-        );
+    private static Response make(final Response res, final CharSequence type,
+        final Opt<Charset> charset) {
+        final Response response;
+        if (charset.has()) {
+            response = new RsWithHeader(
+                new RsWithoutHeader(res, RsWithType.HEADER),
+                RsWithType.HEADER,
+                String.format(
+                    "%s; %s=%s",
+                    type,
+                    RsWithType.CHARSET,
+                    charset.get().name()
+                )
+            );
+        } else {
+            response = new RsWithHeader(
+                new RsWithoutHeader(res, RsWithType.HEADER),
+                RsWithType.HEADER,
+                type
+            );
+        }
+        return response;
     }
 
     /**
@@ -79,11 +137,35 @@ public final class RsWithType extends RsWrap {
     public static final class HTML extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code HTML} that will add text/html as the content type
+         * header to the response.
          * @param res Original response
          */
         public HTML(final Response res) {
-            super(RsWithType.make(res, "text/html"));
+            this(res, new Opt.Empty<Charset>());
+        }
+
+        /**
+         * Constructs a {@code HTML} that will add text/html as the content type
+         * header to the response using the specified charset as charset
+         * parameter value.
+         * @param res Original response
+         * @param charset The character set to add in the content type header
+         */
+        public HTML(final Response res, final Charset charset) {
+            this(res, new Opt.Single<Charset>(charset));
+        }
+
+        /**
+         * Constructs a {@code HTML} that will add text/html as the content type
+         * header to the response using the specified charset as charset
+         * parameter value if present.
+         * @param res Original response
+         * @param charset The character set to add in the content type header if
+         *  present.
+         */
+        private HTML(final Response res, final Opt<Charset> charset) {
+            super(RsWithType.make(res, "text/html", charset));
         }
 
     }
@@ -100,11 +182,35 @@ public final class RsWithType extends RsWrap {
     public static final class JSON extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code JSON} that will add application/json as the
+         * content type header to the response.
          * @param res Original response
          */
         public JSON(final Response res) {
-            super(RsWithType.make(res, "application/json"));
+            this(res, new Opt.Empty<Charset>());
+        }
+
+        /**
+         * Constructs a {@code JSON} that will add application/json as the
+         * content type header to the response using the specified charset as
+         * charset parameter value.
+         * @param res Original response
+         * @param charset The character set to add in the content type header
+         */
+        public JSON(final Response res, final Charset charset) {
+            this(res, new Opt.Single<Charset>(charset));
+        }
+
+        /**
+         * Constructs a {@code JSON} that will add application/json as the
+         * content type header to the response using the specified charset as
+         * charset parameter value if present.
+         * @param res Original response
+         * @param charset The character set to add in the content type header if
+         *  present.
+         */
+        private JSON(final Response res, final Opt<Charset> charset) {
+            super(RsWithType.make(res, "application/json", charset));
         }
 
     }
@@ -121,11 +227,35 @@ public final class RsWithType extends RsWrap {
     public static final class XML extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code XML} that will add text/xml as the content type
+         * header to the response.
          * @param res Original response
          */
         public XML(final Response res) {
-            super(RsWithType.make(res, "text/xml"));
+            this(res, new Opt.Empty<Charset>());
+        }
+
+        /**
+         * Constructs a {@code XML} that will add text/xml as the content type
+         * header to the response using the specified charset as charset
+         * parameter value.
+         * @param res Original response
+         * @param charset The character set to add in the content type header
+         */
+        public XML(final Response res, final Charset charset) {
+            this(res, new Opt.Single<Charset>(charset));
+        }
+
+        /**
+         * Constructs a {@code XML} that will add text/xml as the content type
+         * header to the response using the specified charset as charset
+         * parameter value if present.
+         * @param res Original response
+         * @param charset The character set to add in the content type header if
+         *  present.
+         */
+        private XML(final Response res, final Opt<Charset> charset) {
+            super(RsWithType.make(res, "text/xml", charset));
         }
 
     }
@@ -142,11 +272,35 @@ public final class RsWithType extends RsWrap {
     public static final class Text extends RsWrap {
 
         /**
-         * Ctor.
+         * Constructs a {@code Text} that will add text/plain as the content
+         * type header to the response.
          * @param res Original response
          */
         public Text(final Response res) {
-            super(RsWithType.make(res, "text/plain"));
+            this(res, new Opt.Empty<Charset>());
+        }
+
+        /**
+         * Constructs a {@code Text} that will add text/plain as the content
+         * type header to the response using the specified charset as charset
+         * parameter value.
+         * @param res Original response
+         * @param charset The character set to add in the content type header
+         */
+        public Text(final Response res, final Charset charset) {
+            this(res, new Opt.Single<Charset>(charset));
+        }
+
+        /**
+         * Constructs a {@code Text} that will add text/plain as the content
+         * type header to the response using the specified charset as charset
+         * parameter value if present.
+         * @param res Original response
+         * @param charset The character set to add in the content type header if
+         *  present.
+         */
+        private Text(final Response res, final Opt<Charset> charset) {
+            super(RsWithType.make(res, "text/plain", charset));
         }
 
     }

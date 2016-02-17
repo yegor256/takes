@@ -28,6 +28,7 @@ import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
@@ -44,8 +45,8 @@ import org.takes.rs.RsText;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeableTest {
 
     /**
@@ -62,6 +63,14 @@ public final class BkTimeableTest {
     @Test
     public void stopsLongRunningBack() throws Exception {
         final String response = "interrupted";
+        final CountDownLatch ready = new CountDownLatch(1);
+        final Exit exit = new Exit() {
+            @Override
+            public boolean ready() {
+                ready.countDown();
+                return false;
+            }
+        };
         final Take take = new Take() {
             @Override
             public Response act(final Request req) {
@@ -90,7 +99,7 @@ public final class BkTimeableTest {
                             "--threads=1",
                             "--lifetime=3000",
                             "--max-latency=100"
-                        ).start(Exit.NEVER);
+                        ).start(exit);
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }
@@ -98,8 +107,7 @@ public final class BkTimeableTest {
             }
         );
         thread.start();
-        // @checkstyle MagicNumberCheck (1 line)
-        TimeUnit.MILLISECONDS.sleep(1500L);
+        ready.await();
         final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()

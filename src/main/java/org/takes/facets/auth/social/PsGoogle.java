@@ -28,9 +28,9 @@ import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -187,8 +187,8 @@ public final class PsGoogle implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final ConcurrentMap<String, String> props =
-            new ConcurrentHashMap<String, String>(json.size());
+        final Map<String, String> props =
+            new HashMap<String, String>(json.size());
         final JsonObject image = json.getJsonObject("image");
         if (image == null) {
             props.put("picture", "#");
