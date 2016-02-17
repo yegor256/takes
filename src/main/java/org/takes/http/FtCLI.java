@@ -94,7 +94,7 @@ public final class FtCLI implements Front {
             new BkSafe(new BkBasic(tks)),
             this.options.maxLatency()
         );
-        daemon.startDaemonThread();
+        daemon.start();
         final Front front = new FtBasic(
             new BkParallel(
                 daemon,
