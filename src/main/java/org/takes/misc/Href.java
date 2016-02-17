@@ -300,11 +300,9 @@ public final class Href implements CharSequence {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedMap<String, List<String>> asMap(final String query) {
-        final SortedMap<String, List<String>> params =
-            new TreeMap<String, List<String>>();
+        final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {
-            final String[] pairs = query.split("&");
-            for (final String pair : pairs) {
+            for (final String pair : query.split("&")) {
                 final String[] parts = pair.split("=", 2);
                 final String key = Href.decode(parts[0]);
                 final String value;
