@@ -33,9 +33,8 @@ import java.io.Writer;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
@@ -167,8 +166,8 @@ public final class RsVelocity extends RsWrap {
     @SafeVarargs
     private static Map<CharSequence, Object> asMap(
         final Map.Entry<CharSequence, Object>... entries) {
-        final ConcurrentMap<CharSequence, Object> map =
-            new ConcurrentHashMap<CharSequence, Object>(entries.length);
+        final Map<CharSequence, Object> map =
+            new HashMap<CharSequence, Object>(entries.length);
         for (final Map.Entry<CharSequence, Object> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }

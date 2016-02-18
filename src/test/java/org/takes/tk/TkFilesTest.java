@@ -23,13 +23,13 @@
  */
 package org.takes.tk;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -43,16 +43,21 @@ import org.takes.rs.RsPrint;
 public final class TkFilesTest {
 
     /**
+     * Temp directory.
+     */
+    @Rule
+    public final transient TemporaryFolder temp = new TemporaryFolder();
+
+    /**
      * TkFiles can dispatch by file name.
      * @throws IOException If some problem inside
      */
     @Test
     public void dispatchesByFileName() throws IOException {
-        final File dir = Files.createTempDir();
-        FileUtils.write(new File(dir, "a.txt"), "hello, world!");
+        FileUtils.write(this.temp.newFile("a.txt"), "hello, world!");
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkFiles(dir).act(
+                new TkFiles(this.temp.getRoot()).act(
                     new RqFake(
                         "GET", "/a.txt?hash=a1b2c3", ""
                     )
@@ -72,5 +77,4 @@ public final class TkFilesTest {
             new RqFake("PUT", "/something-else.txt", "")
         );
     }
-
 }

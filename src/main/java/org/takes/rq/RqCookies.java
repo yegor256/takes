@@ -25,10 +25,9 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
@@ -116,8 +115,8 @@ public interface RqCookies extends Request {
          * @throws IOException If fails
          */
         private Map<String, String> map() throws IOException {
-            final ConcurrentMap<String, String> map =
-                new ConcurrentHashMap<String, String>(0);
+            final Map<String, String> map =
+                new HashMap<String, String>(0);
             final Iterable<String> values =
                 new RqHeaders.Base(this).header("Cookie");
             for (final String value : values) {

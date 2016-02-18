@@ -49,7 +49,6 @@ import org.takes.tk.TkEmpty;
 @SuppressWarnings
     (
         {
-            "PMD.DoNotUseThreads",
             "PMD.CyclomaticComplexity",
             "PMD.AvoidInstantiatingObjectsInLoops",
             "PMD.StdCyclomaticComplexity",

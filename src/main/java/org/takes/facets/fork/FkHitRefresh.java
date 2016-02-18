@@ -47,7 +47,6 @@ import org.takes.rq.RqHeaders;
  * @since 0.9
  * @see TkFork
  */
-@SuppressWarnings("PMD.DoNotUseThreads")
 @EqualsAndHashCode(of = { "dir", "exec", "last", "take" })
 public final class FkHitRefresh implements Fork {
 

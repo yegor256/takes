@@ -25,7 +25,8 @@ package org.takes.facets.fallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,9 +76,14 @@ public final class FbSlf4j extends FbWrap {
     private static void log(final RqFallback req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Throwable error = req.throwable();
-        final PrintWriter writer = new PrintWriter(baos);
-        error.printStackTrace(writer);
-        writer.close();
+        final PrintStream stream = new PrintStream(
+            baos, false, StandardCharsets.UTF_8.toString()
+        );
+        try {
+            error.printStackTrace(stream);
+        } finally {
+            stream.close();
+        }
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",
             new RqMethod.Base(req).method(),
