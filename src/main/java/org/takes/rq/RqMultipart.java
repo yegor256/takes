@@ -121,13 +121,13 @@ public interface RqMultipart extends Request {
         private static final String REQUIRED_HEADER =
             "Content-Disposition";
         /**
-         * Map of params and values.
-         */
-        private final transient Map<String, List<Request>> map;
-        /**
          * Minimal buffer size.
          */
         private static final transient int MIN_BUFF_SIZE = 8192;
+        /**
+         * Map of params and values.
+         */
+        private final transient Map<String, List<Request>> map;
         /**
          * Temporary stream buffer.
          */
@@ -280,7 +280,6 @@ public interface RqMultipart extends Request {
                         )
                     )
                 );
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
                     ByteBuffer.wrap(Base.CRLF.getBytes(StandardCharsets.UTF_8))
                 );
