@@ -49,11 +49,11 @@ import org.takes.tk.TkFixed;
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
 	
-	/**
-	 * Split pattern.
-	 */
-	private static final Pattern splitPattern = Pattern.compile("\\s");
-	
+    /**
+     * Split pattern.
+     */
+	private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s");
+
     /**
      * Ctor.
      * @param code HTTP status code
@@ -84,7 +84,7 @@ public final class FbStatus extends FbWrap {
                             res,
                             String.format(
                                 "%s: %s",
-                                splitPattern.split(res.head().iterator().next(), 2)[1],
+                                SPLIT_PATTERN.split(res.head().iterator().next(), 2)[1],
                                 req.throwable().getLocalizedMessage()
                             )
                         ),

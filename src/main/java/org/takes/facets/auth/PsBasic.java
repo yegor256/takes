@@ -61,11 +61,11 @@ public final class PsBasic implements Pass {
      * Authorization response HTTP head.
      */
     private static final String AUTH_HEAD = "Basic";
-    
-	/**
-	 * Split pattern.
-	 */
-	private static final Pattern splitPattern = Pattern.compile(PsBasic.AUTH_HEAD);
+
+    /**
+     * Split pattern.
+     */
+	private static final Pattern SPLIT_PATTERN = Pattern.compile(PsBasic.AUTH_HEAD);
 
     /**
      * Entry to validate user information.
@@ -91,7 +91,10 @@ public final class PsBasic implements Pass {
     public Opt<Identity> enter(final Request request) throws IOException {
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
-                splitPattern.split(new RqHeaders.Smart(new RqHeaders.Base(request)).single("authorization"))[1]
+                SPLIT_PATTERN.split(
+                        new RqHeaders.Smart(
+                                new RqHeaders.Base(request))
+                        .single("authorization"))[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
