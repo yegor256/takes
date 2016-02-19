@@ -89,7 +89,7 @@ public final class CcAES implements Codec {
     public CcAES(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.key = key.clone();
-        this.spec = CcAES.initAlgorithmParameterSpec();
+        this.spec = CcAES.algorithmParameterSpec();
     }
 
     @Override
@@ -124,7 +124,7 @@ public final class CcAES implements Codec {
      *
      * @return The AlgorithmParameterSpec
      */
-    private static AlgorithmParameterSpec initAlgorithmParameterSpec() {
+    private static AlgorithmParameterSpec algorithmParameterSpec() {
         final SecureRandom random = new SecureRandom();
         final byte[] bytes = new byte[CcAES.BLOCK];
         random.nextBytes(bytes);
