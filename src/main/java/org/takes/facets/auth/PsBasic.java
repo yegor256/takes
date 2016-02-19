@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -65,7 +64,7 @@ public final class PsBasic implements Pass {
     /**
      * Split pattern.
      */
-	private static final Pattern SPLIT_PATTERN = Pattern.compile(PsBasic.AUTH_HEAD);
+    private static final Pattern PATTERN = Pattern.compile(PsBasic.AUTH_HEAD);
 
     /**
      * Entry to validate user information.
@@ -91,10 +90,12 @@ public final class PsBasic implements Pass {
     public Opt<Identity> enter(final Request request) throws IOException {
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
-                SPLIT_PATTERN.split(
+                PATTERN.split(
                         new RqHeaders.Smart(
-                                new RqHeaders.Base(request))
-                        .single("authorization"))[1]
+                                new RqHeaders.Base(request)
+                                )
+                        .single("authorization")
+                        )[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
