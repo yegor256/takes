@@ -42,7 +42,7 @@ import org.takes.tk.TkFixed;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @version $Id$
+ * @version $Id: 0f621de76a6b6bcc446242289b2e8ae1b4a67fc4 $
  * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
@@ -83,9 +83,9 @@ public final class FbStatus extends FbWrap {
                             res,
                             String.format(
                                 "%s: %s", SPLIT_PATTERN.split(
-                                     res.head().iterator().next(),
-                                     2
-                                     )[1], req.throwable().getLocalizedMessage()
+                                    res.head().iterator().next(),
+                                    2
+                                )[1], req.throwable().getLocalizedMessage()
                             )
                         ), "text/plain"
                     )

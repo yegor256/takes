@@ -50,7 +50,7 @@ import org.takes.rs.RsWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @author Endrigo Antonini (teamed@endrigo.com.br)
- * @version $Id$
+ * @version $Id: 5913e70e4877ecdd3f0cb85821dd8593f48a166a $
  * @since 0.20
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
@@ -91,11 +91,11 @@ public final class PsBasic implements Pass {
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
                 PATTERN.split(
-                        new RqHeaders.Smart(
-                                new RqHeaders.Base(request)
-                                )
+                    new RqHeaders.Smart(
+                        new RqHeaders.Base(request)
+                    )
                         .single("authorization")
-                        )[1]
+                )[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
@@ -130,7 +130,7 @@ public final class PsBasic implements Pass {
      * valid.
      *
      * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
+     * @version $Id: 5913e70e4877ecdd3f0cb85821dd8593f48a166a $
      * @since 0.20
      */
     public interface Entry {
@@ -150,7 +150,7 @@ public final class PsBasic implements Pass {
      * <p>The class is immutable and thread-safe.
      *
      * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
+     * @version $Id: 5913e70e4877ecdd3f0cb85821dd8593f48a166a $
      * @since 0.20
      *
      */
@@ -189,7 +189,7 @@ public final class PsBasic implements Pass {
      * Empty check.
      *
      * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
+     * @version $Id: 5913e70e4877ecdd3f0cb85821dd8593f48a166a $
      * @since 0.20
      */
     public static final class Empty implements PsBasic.Entry {
@@ -204,7 +204,7 @@ public final class PsBasic implements Pass {
      * Default entry.
      *
      * @author Georgy Vlasov (wlasowegor@gmail.com)
-     * @version $Id$
+     * @version $Id: 5913e70e4877ecdd3f0cb85821dd8593f48a166a $
      * @since 0.22
      */
     public static final class Default implements PsBasic.Entry {

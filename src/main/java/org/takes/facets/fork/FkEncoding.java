@@ -53,7 +53,7 @@ import org.takes.rq.RqHeaders;
  *
  * <p>The class is immutable and thread-safe.
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @version $Id$
+ * @version $Id: a38ce59de8810b15af2763d253fd5b2a7833976c $
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
  */
@@ -94,11 +94,11 @@ public final class FkEncoding implements Fork {
             resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
-                    SPLIT_PATTERN.split(
-                            headers.next()
-                            .trim()
-                            .toLowerCase(Locale.ENGLISH)
-                            )
+                SPLIT_PATTERN.split(
+                    headers.next()
+                        .trim()
+                        .toLowerCase(Locale.ENGLISH)
+                )
             );
             if (items.contains(this.encoding)) {
                 resp = new Opt.Single<Response>(this.origin);
