@@ -28,6 +28,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.regex.Pattern;
+
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -59,6 +61,11 @@ import org.takes.rq.RqHeaders;
 @EqualsAndHashCode(of = { "encoding", "origin" })
 public final class FkEncoding implements Fork {
 
+	/**
+	 * Split pattern.
+	 */
+	private static final Pattern splitPattern = Pattern.compile("\\s*,\\s*");
+	
     /**
      * Encoding we can deliver (or empty string).
      */
@@ -88,9 +95,7 @@ public final class FkEncoding implements Fork {
             resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
-                headers.next().trim()
-                    .toLowerCase(Locale.ENGLISH)
-                    .split("\\s*,\\s*")
+            	splitPattern.split(headers.next().trim().toLowerCase(Locale.ENGLISH))
             );
             if (items.contains(this.encoding)) {
                 resp = new Opt.Single<Response>(this.origin);

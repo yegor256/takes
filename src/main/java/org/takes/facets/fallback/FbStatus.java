@@ -24,6 +24,8 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
+
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
@@ -46,6 +48,12 @@ import org.takes.tk.TkFixed;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
+	
+	/**
+	 * Split pattern.
+	 */
+	private static final Pattern splitPattern = Pattern.compile("\\s");
+	
     /**
      * Ctor.
      * @param code HTTP status code
@@ -76,7 +84,7 @@ public final class FbStatus extends FbWrap {
                             res,
                             String.format(
                                 "%s: %s",
-                                res.head().iterator().next().split("\\s", 2)[1],
+                                splitPattern.split(res.head().iterator().next(), 2)[1],
                                 req.throwable().getLocalizedMessage()
                             )
                         ),
