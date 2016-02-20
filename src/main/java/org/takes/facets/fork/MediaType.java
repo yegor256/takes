@@ -38,7 +38,7 @@ import lombok.ToString;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = "text")
+@EqualsAndHashCode(of = { "high", "low" })
 final class MediaType implements Comparable<MediaType> {
 
     /**
