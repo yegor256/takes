@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import com.jcabi.aspects.Cacheable;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -43,25 +42,37 @@ import lombok.ToString;
 final class MediaType implements Comparable<MediaType> {
 
     /**
-     * Text.
+     * Priority.
      */
-    private final transient String text;
+    private final transient Double priority;
+
+    /**
+     * High part.
+     */
+    private final transient String high;
+
+    /**
+     * Low part.
+     */
+    private final transient String low;
 
     /**
      * Ctor.
      * @param text Text to parse
      */
     MediaType(final String text) {
-        this.text = text;
+        this.priority = MediaType.priority(text);
+        this.high = MediaType.highPart(text);
+        this.low = MediaType.lowPart(text);
     }
 
     @Override
     public int compareTo(final MediaType type) {
-        int cmp = this.priority().compareTo(type.priority());
+        int cmp = this.priority.compareTo(type.priority);
         if (cmp == 0) {
-            cmp = this.highPart().compareTo(type.highPart());
+            cmp = this.high.compareTo(type.high);
             if (cmp == 0) {
-                cmp = this.lowPart().compareTo(type.lowPart());
+                cmp = this.low.compareTo(type.low);
             }
         }
         return cmp;
@@ -75,29 +86,30 @@ final class MediaType implements Comparable<MediaType> {
      */
     public boolean matches(final MediaType type) {
         final String star = "*";
-        return (this.highPart().equals(star)
-            || type.highPart().equals(star)
-            || this.highPart().equals(type.highPart()))
-            && (this.lowPart().equals(star)
-            || type.lowPart().equals(star)
-            || this.lowPart().equals(type.lowPart()));
+        return (this.high.equals(star)
+            || type.high.equals(star)
+            || this.high.equals(type.high))
+            && (this.low.equals(star)
+            || type.low.equals(star)
+            || this.low.equals(type.low));
     }
 
     /**
      * Splits the text parts.
+     * @param text The text to be splited.
      * @return Two first parts of the media type.
      */
-    private String[] split() {
-        return this.text.split(";", 2);
+    private static String[] split(final String text) {
+        return text.split(";", 2);
     }
 
     /**
      * Returns the media type priority.
+     * @param text The media type text.
      * @return The priority of the media type.
      */
-    @Cacheable(forever = true)
-    private Double priority() {
-        final String[] parts = this.split();
+    private static Double priority(final String text) {
+        final String[] parts = MediaType.split(text);
         final Double priority;
         if (parts.length > 1) {
             final String num = parts[1].replaceAll("[^0-9\\.]", "");
@@ -114,21 +126,21 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the high part of the media type.
+     * @param text The media type text.
      * @return The high part of the media type.
      */
-    @Cacheable(forever = true)
-    private String highPart() {
-        return this.sectors()[0];
+    private static String highPart(final String text) {
+        return MediaType.sectors(text)[0];
     }
 
     /**
      * Returns the low part of the media type.
+     * @param text The media type text.
      * @return The low part of the media type.
      */
-    @Cacheable(forever = true)
-    private String lowPart() {
+    private static String lowPart(final String text) {
         final String sector;
-        final String[] sectors = this.sectors();
+        final String[] sectors = MediaType.sectors(text);
         if (sectors.length > 1) {
             sector = sectors[1].trim();
         } else {
@@ -139,11 +151,12 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the media type sectors.
+     * @param text The media type text.
      * @return String array with the sectors of the media type.
      */
-    @Cacheable(forever = true)
-    private String[] sectors() {
-        return this.split()[0].toLowerCase(Locale.ENGLISH).split("/", 2);
+    private static String[] sectors(final String text) {
+        return MediaType.split(text)[0]
+            .toLowerCase(Locale.ENGLISH).split("/", 2);
     }
 
 }

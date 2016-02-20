@@ -233,10 +233,6 @@
             <version>2.6</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.jcabi</groupId>
-            <artifactId>jcabi-aspects</artifactId>
-        </dependency>
     </dependencies>
     <build>
 		<testResources>
