@@ -67,7 +67,7 @@ public final class TkFallbackTest {
                     }
                 ).act(new RqFake())
             ).printBody(),
-            Matchers.equalTo(err)
+            Matchers.endsWith(err)
         );
     }
 

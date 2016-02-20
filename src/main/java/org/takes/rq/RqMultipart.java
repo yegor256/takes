@@ -229,7 +229,7 @@ public interface RqMultipart extends Request {
             ).getBytes(StandardCharsets.UTF_8);
             this.buffer.flip();
             this.buffer.position(boundary.length - 2);
-            final Collection<Request> requests = new LinkedList<Request>();
+            final Collection<Request> requests = new LinkedList<>();
             while (this.buffer.hasRemaining()) {
                 final byte data = this.buffer.get();
                 if (data == '-') {
