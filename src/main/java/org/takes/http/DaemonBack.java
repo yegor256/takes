@@ -35,5 +35,5 @@ public interface DaemonBack extends Back {
     /**
      * Start the damon thread.
      */
-    void start();
+    void daemon();
 }

@@ -68,7 +68,7 @@ public final class BkTimeable extends Thread implements DaemonBack {
     }
 
     @Override
-    public void start() {
+    public void daemon() {
         this.setDaemon(true);
         this.start();
     }
