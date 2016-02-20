@@ -96,7 +96,7 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Splits the text parts.
-     * @param text The text to be splited.
+     * @param text The text to be split.
      * @return Two first parts of the media type.
      */
     private static String[] split(final String text) {
@@ -155,8 +155,9 @@ final class MediaType implements Comparable<MediaType> {
      * @return String array with the sectors of the media type.
      */
     private static String[] sectors(final String text) {
-        return MediaType.split(text)[0]
-            .toLowerCase(Locale.ENGLISH).split("/", 2);
+        return MediaType.split(text)[0].toLowerCase(Locale.ENGLISH).split(
+            "/", 2
+        );
     }
 
 }
