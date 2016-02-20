@@ -119,7 +119,7 @@ public final class FkHitRefresh implements Fork {
         this.dir = file;
         this.exec = cmd;
         this.take = tke;
-        this.last = FkHitRefresh.createFileToTouch();
+        this.last = FkHitRefresh.touchedFile();
     }
 
     @Override
@@ -177,7 +177,7 @@ public final class FkHitRefresh implements Fork {
      * @return The file to touch
      * @throws IOException If fails
      */
-    private static File createFileToTouch() throws IOException {
+    private static File touchedFile() throws IOException {
         final File file = File.createTempFile("take", ".txt");
         file.deleteOnExit();
         FkHitRefresh.touch(file);
