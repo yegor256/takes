@@ -23,8 +23,6 @@
  */
 package org.takes.http;
 
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -39,6 +37,8 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsText;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 
 /**
  * Test case for {@link BkTimeable}.
@@ -99,23 +99,23 @@ public final class BkTimeableTest {
                             take,
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
-                            "--lifetime=3000",
+                            "--lifetime=4000",
                             "--max-latency=100"
-                        ).start(exit);
+                            ).start(exit);
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }
                 }
             }
-        );
+            );
         thread.start();
         ready.await();
         final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
-            .fetch()
-            .as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .assertBody(Matchers.startsWith(response));
+        .fetch()
+        .as(RestResponse.class)
+        .assertStatus(HttpURLConnection.HTTP_OK)
+        .assertBody(Matchers.startsWith(response));
         try {
             thread.join();
         } catch (final InterruptedException ex) {

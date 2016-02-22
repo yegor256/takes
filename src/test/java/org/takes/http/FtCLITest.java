@@ -23,8 +23,6 @@
  */
 package org.takes.http;
 
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -36,6 +34,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 
 /**
  * Test case for {@link FtCLI}.
@@ -79,22 +79,22 @@ public final class FtCLITest {
                             new TkFork(new FkRegex("/", "hello!")),
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
-                            "--lifetime=3000"
-                        ).start(exit);
+                            "--lifetime=4000"
+                            ).start(exit);
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }
                 }
             }
-        );
+            );
         thread.start();
         ready.await();
         final int port = Integer.parseInt(FileUtils.readFileToString(file));
         new JdkRequest(String.format("http://localhost:%d", port))
-            .fetch()
-            .as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .assertBody(Matchers.startsWith("hello"));
+        .fetch()
+        .as(RestResponse.class)
+        .assertStatus(HttpURLConnection.HTTP_OK)
+        .assertBody(Matchers.startsWith("hello"));
         try {
             thread.join();
         } catch (final InterruptedException ex) {
