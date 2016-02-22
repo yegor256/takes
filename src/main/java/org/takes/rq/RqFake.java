@@ -100,7 +100,10 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final byte[] body) {
-        this(head, new ByteArrayInputStream(body));
+        this(
+            head,
+            new ByteArrayInputStream(Arrays.copyOf(body, body.length))
+        );
     }
 
     /**
