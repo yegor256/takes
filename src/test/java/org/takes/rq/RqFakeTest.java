@@ -23,8 +23,11 @@
  */
 package org.takes.rq;
 
+import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -45,4 +48,22 @@ public final class RqFakeTest {
             .withRedefinedSuperclass()
             .verify();
     }
+
+    /**
+     * RqForm.Smart can parse one argument in body.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void printsBody() throws IOException {
+        final RqFake req = new RqFake(
+            "GET",
+            "/just-a-test",
+            "test-6=alpha"
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).print(),
+            Matchers.endsWith("=alpha")
+        );
+    }
+
 }
