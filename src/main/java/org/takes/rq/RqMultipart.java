@@ -337,8 +337,7 @@ public interface RqMultipart extends Request {
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         private static Map<String, List<Request>> asMap(
             final Collection<Request> reqs) throws IOException {
-            final Map<String, List<Request>> map =
-                new HashMap<String, List<Request>>(reqs.size());
+            final Map<String, List<Request>> map = new HashMap<>(reqs.size());
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)

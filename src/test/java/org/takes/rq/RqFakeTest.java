@@ -50,11 +50,11 @@ public final class RqFakeTest {
     }
 
     /**
-     * RqForm.Smart can parse one argument in body.
+     * RqFake can print correctly.
      * @throws IOException If some problem inside
      */
     @Test
-    public void printsBody() throws IOException {
+    public void printsCorrectly() throws IOException {
         final RqFake req = new RqFake(
             "GET",
             "/just-a-test",
@@ -62,7 +62,10 @@ public final class RqFakeTest {
         );
         MatcherAssert.assertThat(
             new RqPrint(req).print(),
-            Matchers.endsWith("=alpha")
+            Matchers.allOf(
+                Matchers.containsString("GET /just-a-test\r\n"),
+                Matchers.endsWith("=alpha")
+            )
         );
     }
 
