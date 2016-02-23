@@ -92,7 +92,8 @@ public interface RqMultipart extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @version $Id$
      * @since 0.9
-     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
+     * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
+     *  Forms in HTML</a>
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see RqGreedy
      */
@@ -268,7 +269,9 @@ public interface RqMultipart extends Request {
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
-                    ByteBuffer.wrap(RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8))
+                    ByteBuffer.wrap(
+                        RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
+                    )
                 );
                 this.copy(channel, boundary);
             } finally {

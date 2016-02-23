@@ -86,12 +86,12 @@ public final class RqFormTest {
             new RqFake(
                 "GET /just-a-test",
                 "Host: www.takes.org",
-                "test-6=alpha"
+                "test-6=blue"
             )
         );
         MatcherAssert.assertThat(
             new RqForm.Smart(req).single("test-6"),
-            Matchers.equalTo("alpha")
+            Matchers.equalTo("blue")
         );
     }
 
