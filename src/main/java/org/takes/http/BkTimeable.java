@@ -35,93 +35,25 @@ import lombok.EqualsAndHashCode;
  * Back decorator with maximum lifetime.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
  */
 @EqualsAndHashCode(callSuper = true)
-public final class BkTimeable extends BkWrap {
-
+@SuppressWarnings("PMD.DoNotUseThreads")
+public final class BkTimeable extends Thread implements Back {
     /**
-     * Back threads.
+     * Original back.
      */
-    private static final class BkThreads implements Back {
-        /**
-         * Original back.
-         */
-        private final transient Back back;
-        /**
-         * Maximum latency in milliseconds.
-         */
-        private final transient long latency;
-        /**
-         * Threads storage.
-         */
-        private final transient ConcurrentMap<Thread, Long> threads;
-        /**
-         * Ctor.
-         * @param bck Original back
-         * @param msec Execution latency
-         * @todo #558:30min BkThreads ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
-         */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
-        BkThreads(final long msec, final Back bck) {
-            this.threads = new ConcurrentHashMap<Thread, Long>(1);
-            this.back = bck;
-            this.latency = msec;
-            final Thread monitor = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        while (true) {
-                            BkThreads.this.check();
-                            try {
-                                TimeUnit.SECONDS.sleep(1L);
-                            } catch (final InterruptedException ex) {
-                                Thread.currentThread().interrupt();
-                                throw new IllegalStateException(ex);
-                            }
-                        }
-                    }
-                }
-            );
-            monitor.setDaemon(true);
-            monitor.start();
-        }
-
-        @Override
-        public void accept(final Socket socket) throws IOException {
-            this.threads.put(
-                Thread.currentThread(),
-                System.currentTimeMillis()
-            );
-            this.back.accept(socket);
-        }
-        /**
-         * Checking threads storage and interrupt long running threads.
-         */
-        private void check() {
-            for (final Map.Entry<Thread, Long> entry
-                : this.threads.entrySet()) {
-                final long time = System.currentTimeMillis();
-                if (time - entry.getValue() > this.latency) {
-                    final Thread thread = entry.getKey();
-                    if (thread.isAlive()) {
-                        thread.interrupt();
-                    }
-                    this.threads.remove(thread);
-                }
-            }
-        }
-    }
+    private final transient Back back;
+    /**
+     * Maximum latency in milliseconds.
+     */
+    private final transient long latency;
+    /**
+     * Threads storage.
+     */
+    private final transient ConcurrentMap<Thread, Long> threads;
 
     /**
      * Ctor.
@@ -129,7 +61,48 @@ public final class BkTimeable extends BkWrap {
      * @param msec Execution latency
      */
     BkTimeable(final Back back, final long msec) {
-        super(new BkThreads(msec, back));
+        super();
+        this.threads = new ConcurrentHashMap<Thread, Long>(1);
+        this.back = back;
+        this.latency = msec;
     }
 
+    @Override
+    public void run() {
+        while (true) {
+            this.check();
+            try {
+                TimeUnit.SECONDS.sleep(1L);
+            } catch (final InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                throw new IllegalStateException(ex);
+            }
+        }
+    }
+
+    @Override
+    public void accept(final Socket socket) throws IOException {
+        this.threads.put(
+            Thread.currentThread(),
+            System.currentTimeMillis()
+        );
+        this.back.accept(socket);
+    }
+
+    /**
+     * Checking threads storage and interrupt long running threads.
+     */
+    private void check() {
+        for (final Map.Entry<Thread, Long> entry
+            : this.threads.entrySet()) {
+            final long time = System.currentTimeMillis();
+            if (time - entry.getValue() > this.latency) {
+                final Thread thread = entry.getKey();
+                if (thread.isAlive()) {
+                    thread.interrupt();
+                }
+                this.threads.remove(thread);
+            }
+        }
+    }
 }
