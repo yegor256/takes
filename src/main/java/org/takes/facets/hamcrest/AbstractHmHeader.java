@@ -39,11 +39,11 @@ import org.hamcrest.TypeSafeMatcher;
  * <p>This "matcher" tests given item headers.
  * <p>The class is immutable and thread-safe.
  *
- * @param <T> Item type. Should be able to return own headers
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
  * @version $Id$
+ * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
  */
 abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {

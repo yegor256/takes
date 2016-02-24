@@ -28,8 +28,8 @@ package org.takes.misc;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13.8
  * @param <T> Type of items
+ * @since 0.13.8
  */
 public interface Condition<T> {
 

@@ -32,8 +32,8 @@ import lombok.EqualsAndHashCode;
  * <p>All implementations of this interface must be immutable and thread-safe.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.14
  * @param <T> Type of item
+ * @since 0.14
  */
 public interface Opt<T> {
     /**
@@ -86,8 +86,8 @@ public interface Opt<T> {
      * <p>The class is immutable and thread-safe.
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @version $Id$
-     * @since 0.14
      * @param <T> Type of item
+     * @since 0.14
      */
     final class Empty<T> implements Opt<T> {
         @Override
