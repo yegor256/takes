@@ -55,8 +55,33 @@ import org.takes.rs.RsWithStatus;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
  */
+@SuppressWarnings("PMD.LongVariable")
 @EqualsAndHashCode(of = "take")
 public final class BkBasic implements Back {
+
+    /**
+     * The http header "X-Takes-LocalAddress".
+     */
+    private static final String HEADER_TAKES_LOCAL_ADDRESS =
+        "X-Takes-LocalAddress";
+
+    /**
+     * The http header "X-Takes-LocalPort".
+     */
+    private static final String HEADER_TAKES_LOCAL_PORT =
+        "X-Takes-LocalPort";
+
+    /**
+     * The http header "X-Takes-RemoteAddress".
+     */
+    private static final String HEADER_TAKES_REMOTE_ADDRESS =
+        "X-Takes-RemoteAddress";
+
+    /**
+     * The http header "X-Takes-RemotePort".
+     */
+    private static final String HEADER_TAKES_REMOTE_PORT =
+        "X-Takes-RemotePort";
 
     /**
      * Take.
@@ -142,21 +167,32 @@ public final class BkBasic implements Back {
      * @param req Request
      * @param socket Socket
      * @return Request with custom headers
+     * @checkstyle MultipleStringLiteralsCheck (25 lines)
      */
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(
             req,
             String.format(
-                "X-Takes-LocalAddress: %s",
+                "%s: %s",
+                BkBasic.HEADER_TAKES_LOCAL_ADDRESS,
                 socket.getLocalAddress().getHostAddress()
             ),
-            String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
             String.format(
-                "X-Takes-RemoteAddress: %s",
+                "%s: %d",
+                BkBasic.HEADER_TAKES_LOCAL_PORT,
+                socket.getLocalPort()
+            ),
+            String.format(
+                "%s: %s",
+                BkBasic.HEADER_TAKES_REMOTE_ADDRESS,
                 socket.getInetAddress().getHostAddress()
             ),
-            String.format("X-Takes-RemotePort: %d", socket.getPort())
+            String.format(
+                "%s: %d",
+                BkBasic.HEADER_TAKES_REMOTE_PORT,
+                socket.getPort()
+            )
         );
     }
 }
