@@ -34,7 +34,6 @@ import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -43,50 +42,38 @@ import org.takes.rs.RsText;
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.25
+ * @todo #377:30min/DEV We need more tests for TkProxy.
+ *  The tests should verify the different HTTP methods (GET, POST, etc),
+ *  as well as the different combinations of request/response headers.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkProxyTest {
 
     /**
-     * An array of http methods for testing.
-     */
-    private static final String[] METHODS = {
-        RqMethod.POST,
-        RqMethod.GET,
-        RqMethod.PUT,
-        RqMethod.DELETE,
-        RqMethod.TRACE,
-    };
-
-    /**
-     * TkProxy can just work.
+     * TkProxy can work.
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void justWorks() throws Exception {
-        for (final String method:TkProxyTest.METHODS) {
-            new FtRemote(new TkFixed("hello, world!")).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RsPrint(
-                                new TkProxy(home).act(new RqFake(method))
-                            ).print(),
-                            Matchers.containsString("hello")
-                        );
-                    }
+        new FtRemote(new TkFixed("hello, world!")).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake("PUT"))
+                        ).print(),
+                        Matchers.containsString("hello")
+                    );
                 }
-            );
-        }
+            }
+        );
     }
 
     /**
-     * TkProxy can correctly maps path string.
+     * TkProxy can work.
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
@@ -95,27 +82,24 @@ public final class TkProxyTest {
                 return new RsText(new RqHref.Base(req).href().toString());
             }
         };
-        for (final String method:TkProxyTest.METHODS) {
-            new FtRemote(take).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RsPrint(
-                                new TkProxy(home).act(
-                                    new RqFake(method, "/a/b/c")
-                                )
-                            ).printBody(),
-                            Matchers.equalTo(
-                                String.format(
-                                    "http://%s:%d/a/b/c",
-                                    home.getHost(), home.getPort()
-                                )
+        new FtRemote(take).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake("GET", "/a/b/c"))
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                "http://%s:%d/a/b/c",
+                                home.getHost(), home.getPort()
                             )
-                        );
-                    }
+                        )
+                    );
                 }
-            );
-        }
+            }
+        );
     }
+
 }

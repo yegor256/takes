@@ -104,19 +104,17 @@ public interface RqForm extends Request {
          */
         public Base(final Request request) {
             super(request);
-            this.saved =
-                new CopyOnWriteArrayList<Map<String, List<String>>>();
+            this.saved = new CopyOnWriteArrayList<>();
             this.req = request;
         }
         @Override
-        public Iterable<String> param(
-            final CharSequence key
-        ) throws IOException {
+        public Iterable<String> param(final CharSequence key)
+            throws IOException {
             final List<String> values =
                 this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<String> iter;
             if (values == null) {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     Collections.<String>emptyList(),
                     new Sprintf(
                         "there are no params \"%s\" among %d others: %s",
@@ -124,7 +122,7 @@ public interface RqForm extends Request {
                     )
                 );
             } else {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     values,
                     new Sprintf(
                         "there are only %d params by name \"%s\"",
@@ -160,41 +158,47 @@ public interface RqForm extends Request {
         private Map<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
-                    final ByteArrayOutputStream
-                        baos = new ByteArrayOutputStream();
-                    new RqPrint(this.req).printBody(baos);
-                    final String body = new String(
-                        baos.toByteArray(), StandardCharsets.UTF_8
-                    );
-                    final Map<String, List<String>> map =
-                        new HashMap<String, List<String>>(1);
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    for (final String pair : body.split("&")) {
-                        if (pair.isEmpty()) {
-                            continue;
-                        }
-                        // @checkstyle MultipleStringLiteralsCheck (5 lines)
-                        final String[] parts = pair.split("=", 2);
-                        if (parts.length < 2) {
-                            throw new HttpException(
-                                HttpURLConnection.HTTP_BAD_REQUEST,
-                                String.format(
-                                    "invalid form body pair: %s", pair
-                                )
-                            );
-                        }
-                        final String key = RqForm.Base.decode(
-                            parts[0].trim().toLowerCase(Locale.ENGLISH)
-                        );
-                        if (!map.containsKey(key)) {
-                            map.put(key, new LinkedList<String>());
-                        }
-                        map.get(key).add(RqForm.Base.decode(parts[1].trim()));
-                    }
-                    this.saved.add(map);
+                    this.saved.add(this.freshMap());
                 }
                 return this.saved.get(0);
             }
+        }
+        /**
+         * Create map of request parameter.
+         * @return Parameters map or empty map in case of error.
+         * @throws IOException If something fails reading or parsing body
+         */
+        private Map<String, List<String>> freshMap() throws IOException {
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            new RqPrint(this.req).printBody(baos);
+            final String body = new String(
+                baos.toByteArray(), StandardCharsets.UTF_8
+            );
+            final Map<String, List<String>> map = new HashMap<>(1);
+            // @checkstyle MultipleStringLiteralsCheck (1 line)
+            for (final String pair : body.split("&")) {
+                if (pair.isEmpty()) {
+                    continue;
+                }
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                final String[] parts = pair.split("=", 2);
+                if (parts.length < 2) {
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
+                        String.format(
+                            "invalid form body pair: %s", pair
+                        )
+                    );
+                }
+                final String key = RqForm.Base.decode(
+                    parts[0].trim().toLowerCase(Locale.ENGLISH)
+                );
+                if (!map.containsKey(key)) {
+                    map.put(key, new LinkedList<String>());
+                }
+                map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+            }
+            return map;
         }
     }
     /**

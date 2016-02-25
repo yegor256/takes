@@ -42,8 +42,8 @@ import org.takes.rq.RqFake;
  * Test case for {@link PsFacebook}.
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @checkstyle MagicNumberCheck (500 lines)
  * @since 0.15
+ * @checkstyle MagicNumberCheck (500 lines)
  */
 public class PsFacebookTest {
 
