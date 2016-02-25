@@ -58,7 +58,7 @@ final class Options {
     private final transient Map<String, String> map;
 
     /**
-     * Ctor.
+     * Constructs an {@code Options} with the specified arguments.
      * @param args Arguments
      * @since 0.9
      */
@@ -67,32 +67,11 @@ final class Options {
     }
 
     /**
-     * Ctor.
+     * Constructs an {@code Options} with the specified arguments.
      * @param args Arguments
-     * @todo #558:30min Options ctor. According to new qulice version,
-     *  constructor must contain only variables initialization and other
-     *  constructor calls. Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     Options(final Iterable<String> args) {
-        this.map = new HashMap<String, String>(0);
-        final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
-        for (final String arg : args) {
-            final Matcher matcher = ptn.matcher(arg);
-            if (!matcher.matches()) {
-                throw new IllegalStateException(
-                    String.format("can't parse this argument: '%s'", arg)
-                );
-            }
-            final String value = matcher.group(2);
-            if (value == null) {
-                this.map.put(matcher.group(1), "");
-            } else {
-                this.map.put(matcher.group(1), value.substring(1));
-            }
-        }
+        this.map = Options.asMap(args);
     }
 
     /**
@@ -199,5 +178,32 @@ final class Options {
             msec = Long.parseLong(value);
         }
         return msec;
+    }
+
+    /**
+     * Convert the provided arguments into a Map.
+     * @param args Arguments to parse.
+     * @return Map A map containing all the arguments and their values.
+     * @throws IllegalStateException If an argument doesn't match with the
+     *  expected format which is {@code --([a-z\-]+)(=.+)?}.
+     */
+    private static Map<String, String> asMap(final Iterable<String> args) {
+        final Map<String, String> map = new HashMap<String, String>(0);
+        final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
+        for (final String arg : args) {
+            final Matcher matcher = ptn.matcher(arg);
+            if (!matcher.matches()) {
+                throw new IllegalStateException(
+                    String.format("can't parse this argument: '%s'", arg)
+                );
+            }
+            final String value = matcher.group(2);
+            if (value == null) {
+                map.put(matcher.group(1), "");
+            } else {
+                map.put(matcher.group(1), value.substring(1));
+            }
+        }
+        return map;
     }
 }

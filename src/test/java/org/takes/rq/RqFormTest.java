@@ -77,6 +77,25 @@ public final class RqFormTest {
     }
 
     /**
+     * RqForm.Smart can parse one argument in body.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void parsesOneArgumentInBody() throws IOException {
+        final RqForm req = new RqForm.Base(
+            new RqFake(
+                "GET /just-a-test",
+                "Host: www.takes.org",
+                "test-6=blue"
+            )
+        );
+        MatcherAssert.assertThat(
+            new RqForm.Smart(req).single("test-6"),
+            Matchers.equalTo("blue")
+        );
+    }
+
+    /**
      * Returns always same instances (Cache).
      * @throws IOException if fails
      */

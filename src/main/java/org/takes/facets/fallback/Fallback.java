@@ -34,8 +34,8 @@ import org.takes.misc.Opt;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @see org.takes.facets.fallback.TkFallback
+ * @since 0.1
  */
 public interface Fallback {
 
