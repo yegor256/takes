@@ -151,7 +151,7 @@ public interface RqForm extends Request {
             }
         }
         /**
-         * Create map of request parameter.
+         * Create map of request parameters.
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
