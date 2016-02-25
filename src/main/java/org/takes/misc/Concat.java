@@ -31,8 +31,8 @@ import java.util.Iterator;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.15.2
  * @param <T> Type of items
+ * @since 0.15.2
  */
 public final class Concat<T> implements Iterable<T> {
 

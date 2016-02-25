@@ -59,33 +59,11 @@ final class MediaType implements Comparable<MediaType> {
     /**
      * Ctor.
      * @param text Text to parse
-     * @todo #558:30min MediaType ctor. According to new qulice version,
-     *  constructor must contain only variables initialization and other
-     *  constructor calls. Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     MediaType(final String text) {
-        final String[] parts = text.split(";", 2);
-        if (parts.length > 1) {
-            final String num = parts[1].replaceAll("[^0-9\\.]", "");
-            if (num.isEmpty()) {
-                this.priority = 0.0d;
-            } else {
-                this.priority = Double.parseDouble(num);
-            }
-        } else {
-            this.priority = 1.0d;
-        }
-        final String[] sectors = parts[0]
-            .toLowerCase(Locale.ENGLISH).split("/", 2);
-        this.high = sectors[0];
-        if (sectors.length > 1) {
-            this.low = sectors[1].trim();
-        } else {
-            this.low = "";
-        }
+        this.priority = MediaType.priority(text);
+        this.high = MediaType.highPart(text);
+        this.low = MediaType.lowPart(text);
     }
 
     @Override
@@ -114,6 +92,72 @@ final class MediaType implements Comparable<MediaType> {
             && (this.low.equals(star)
             || type.low.equals(star)
             || this.low.equals(type.low));
+    }
+
+    /**
+     * Splits the text parts.
+     * @param text The text to be split.
+     * @return Two first parts of the media type.
+     */
+    private static String[] split(final String text) {
+        return text.split(";", 2);
+    }
+
+    /**
+     * Returns the media type priority.
+     * @param text The media type text.
+     * @return The priority of the media type.
+     */
+    private static Double priority(final String text) {
+        final String[] parts = MediaType.split(text);
+        final Double priority;
+        if (parts.length > 1) {
+            final String num = parts[1].replaceAll("[^0-9\\.]", "");
+            if (num.isEmpty()) {
+                priority = 0.0d;
+            } else {
+                priority = Double.parseDouble(num);
+            }
+        } else {
+            priority = 1.0d;
+        }
+        return priority;
+    }
+
+    /**
+     * Returns the high part of the media type.
+     * @param text The media type text.
+     * @return The high part of the media type.
+     */
+    private static String highPart(final String text) {
+        return MediaType.sectors(text)[0];
+    }
+
+    /**
+     * Returns the low part of the media type.
+     * @param text The media type text.
+     * @return The low part of the media type.
+     */
+    private static String lowPart(final String text) {
+        final String sector;
+        final String[] sectors = MediaType.sectors(text);
+        if (sectors.length > 1) {
+            sector = sectors[1].trim();
+        } else {
+            sector = "";
+        }
+        return sector;
+    }
+
+    /**
+     * Returns the media type sectors.
+     * @param text The media type text.
+     * @return String array with the sectors of the media type.
+     */
+    private static String[] sectors(final String text) {
+        return MediaType.split(text)[0].toLowerCase(Locale.ENGLISH).split(
+            "/", 2
+        );
     }
 
 }

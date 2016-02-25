@@ -97,7 +97,7 @@ public interface RqHeaders extends Request {
             );
             final List<String> list;
             if (values == null) {
-                list = new VerboseList<String>(
+                list = new VerboseList<>(
                     Collections.<String>emptyList(),
                     String.format(
                         // @checkstyle LineLengthCheck (1 line)
@@ -108,7 +108,7 @@ public interface RqHeaders extends Request {
                     )
                 );
             } else {
-                list = new VerboseList<String>(
+                list = new VerboseList<>(
                     values,
                     String.format(
                         // @checkstyle LineLengthCheck (1 line)
@@ -140,8 +140,7 @@ public interface RqHeaders extends Request {
                 );
             }
             head.next();
-            final Map<String, List<String>> map =
-                new HashMap<String, List<String>>(0);
+            final Map<String, List<String>> map = new HashMap<>(0);
             while (head.hasNext()) {
                 final String line = head.next();
                 final String[] parts = line.split(":", 2);
@@ -211,7 +210,8 @@ public interface RqHeaders extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        "header \"%s\" is mandatory", name
+                        "header \"%s\" is mandatory, not found among %s",
+                        name, this.names()
                     )
                 );
             }

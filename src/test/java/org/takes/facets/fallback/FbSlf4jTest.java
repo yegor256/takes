@@ -31,9 +31,9 @@ import org.junit.Test;
 /**
  * Test case for {@link FbSlf4j}.
  * @author Yegor Bugayenko (yegor@teamed.io)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.25
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FbSlf4jTest {
 
