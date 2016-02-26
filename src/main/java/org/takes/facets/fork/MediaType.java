@@ -44,7 +44,7 @@ final class MediaType implements Comparable<MediaType> {
     /**
      * Priority.
      */
-    private final transient Double priority;
+    private final transient Double prio;
 
     /**
      * High part.
@@ -61,14 +61,14 @@ final class MediaType implements Comparable<MediaType> {
      * @param text Text to parse
      */
     MediaType(final String text) {
-        this.priority = MediaType.priority(text);
+        this.prio = MediaType.priority(text);
         this.high = MediaType.highPart(text);
         this.low = MediaType.lowPart(text);
     }
 
     @Override
     public int compareTo(final MediaType type) {
-        int cmp = this.priority.compareTo(type.priority);
+        int cmp = this.prio.compareTo(type.prio);
         if (cmp == 0) {
             cmp = this.high.compareTo(type.high);
             if (cmp == 0) {
