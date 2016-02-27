@@ -61,9 +61,9 @@ import org.takes.rq.RqHeaders;
 public final class FkEncoding implements Fork {
 
     /**
-     * Realm.
+     * Accept-Encoding separator.
      */
-    private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s*,\\s*");
+    private static final Pattern ENCODING_SEP = Pattern.compile("\\s*,\\s*");
 
     /**
      * Encoding we can deliver (or empty string).
@@ -94,7 +94,7 @@ public final class FkEncoding implements Fork {
             resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
-                SPLIT_PATTERN.split(
+                ENCODING_SEP.split(
                     headers.next()
                         .trim()
                         .toLowerCase(Locale.ENGLISH)
