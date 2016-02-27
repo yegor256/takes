@@ -51,7 +51,7 @@ public final class FbStatus extends FbWrap {
     /**
      * Whitespace pattern, used for splitting.
      */
-    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s");
+    private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s");
 
     /**
      * Ctor.
@@ -82,7 +82,7 @@ public final class FbStatus extends FbWrap {
                         new RsWithBody(
                             res,
                             String.format(
-                                "%s: %s", WHITESPACE_PATTERN.split(
+                                "%s: %s", SPLIT_PATTERN.split(
                                     res.head().iterator().next(),
                                     2
                                 )[1], req.throwable().getLocalizedMessage()
