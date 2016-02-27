@@ -57,14 +57,9 @@ import org.takes.rs.RsWithHeader;
 public final class PsBasic implements Pass {
 
     /**
-     * Authorization response HTTP head.
-     */
-    private static final String AUTH = "Basic";
-
-    /**
      * Pattern for basic authorization name.
      */
-    private static final Pattern AUTH_PATTERN = Pattern.compile(PsBasic.AUTH);
+    private static final Pattern AUTH = Pattern.compile("Basic");
 
     /**
      * Entry to validate user information.
@@ -90,7 +85,7 @@ public final class PsBasic implements Pass {
     public Opt<Identity> enter(final Request request) throws IOException {
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
-                AUTH_PATTERN.split(
+                AUTH.split(
                     new RqHeaders.Smart(
                         new RqHeaders.Base(request)
                     ).single("authorization")
