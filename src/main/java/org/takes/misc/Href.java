@@ -55,9 +55,9 @@ import java.util.regex.Pattern;
 public final class Href implements CharSequence {
 
     /**
-     * Trailer slash pattern.
+     * Pattern matching trailing slash.
      */
-    private static final Pattern TRAILER = Pattern.compile("/$");
+    private static final Pattern TRAILING_SLASH = Pattern.compile("/$");
 
     /**
      * URI (without the query part).
@@ -202,7 +202,8 @@ public final class Href implements CharSequence {
         return new Href(
             URI.create(
                 new StringBuilder(
-                    TRAILER.matcher(this.uri.toString()).replaceAll("")
+                    Href.TRAILING_SLASH.matcher(this.uri.toString())
+                        .replaceAll("")
                 )
                 .append('/')
                 .append(Href.encode(suffix.toString())).toString()

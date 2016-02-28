@@ -43,9 +43,9 @@ import lombok.ToString;
 final class MediaType implements Comparable<MediaType> {
 
     /**
-     * Media type priority clean pattern.
+     * Pattern matching non-digit symbols.
      */
-    private static final Pattern CLEANER = Pattern.compile("[^0-9\\.]");
+    private static final Pattern NON_DIGITS = Pattern.compile("[^0-9\\.]");
 
     /**
      * Priority.
@@ -118,7 +118,8 @@ final class MediaType implements Comparable<MediaType> {
         final String[] parts = MediaType.split(text);
         final Double priority;
         if (parts.length > 1) {
-            final String num = CLEANER.matcher(parts[1]).replaceAll("");
+            final String num =
+                MediaType.NON_DIGITS.matcher(parts[1]).replaceAll("");
             if (num.isEmpty()) {
                 priority = 0.0d;
             } else {
