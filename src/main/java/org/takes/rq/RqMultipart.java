@@ -281,9 +281,7 @@ public interface RqMultipart extends Request {
                     )
                 );
                 channel.write(
-                    ByteBuffer.wrap(
-                    	RqMultipart.Base.CRLF.getBytes(StandardCharsets.UTF_8)
-                    	)
+                    ByteBuffer.wrap(Base.CRLF.getBytes(StandardCharsets.UTF_8))
                 );
                 this.copy(channel, boundary, body);
             } finally {
