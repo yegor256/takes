@@ -281,7 +281,9 @@ public interface RqMultipart extends Request {
                     )
                 );
                 channel.write(
-                    ByteBuffer.wrap(Base.CRLF.getBytes(StandardCharsets.UTF_8))
+                    ByteBuffer.wrap(
+                    	RqMultipart.Base.CRLF.getBytes(StandardCharsets.UTF_8)
+                    	)
                 );
                 this.copy(channel, boundary, body);
             } finally {
@@ -357,7 +359,7 @@ public interface RqMultipart extends Request {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
                 ).single(Base.REQUIRED_HEADER);
-                final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
+                final Matcher matcher = Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,

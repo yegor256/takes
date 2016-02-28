@@ -59,10 +59,6 @@ final class TempInputStream extends InputStream {
         this.file = temp;
     }
 
-    /**
-     * Closes the Input stream, deleting associated file.
-     * @throws IOException if some problem occurs.
-     */
     @Override
     public void close() throws IOException {
         this.origin.close();

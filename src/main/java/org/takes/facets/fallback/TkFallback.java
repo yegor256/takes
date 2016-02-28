@@ -26,6 +26,7 @@ package org.takes.facets.fallback;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.HttpException;
@@ -33,6 +34,8 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
+import org.takes.rq.RqHref;
+import org.takes.rq.RqMethod;
 import org.takes.tk.TkWrap;
 
 /**
@@ -76,6 +79,7 @@ public final class TkFallback extends TkWrap {
      */
     private static Response route(final Take take, final Fallback fbk,
         final Request req) throws IOException {
+        final long start = System.currentTimeMillis();
         Response res;
         try {
             res = TkFallback.wrap(
@@ -83,7 +87,13 @@ public final class TkFallback extends TkWrap {
             );
         } catch (final HttpException ex) {
             final Opt<Response> fbres = fbk.route(
-                new RqFallback.Fake(req, ex.code(), ex)
+                new RqFallback.Fake(
+                    req, ex.code(),
+                    TkFallback.error(
+                        ex, req,
+                        System.currentTimeMillis() - start
+                    )
+                )
             );
             if (!fbres.has()) {
                 throw new IOException(
@@ -91,14 +101,21 @@ public final class TkFallback extends TkWrap {
                         "There is no fallback available in %s",
                         fbk.getClass().getCanonicalName()
                     ),
-                    ex
+                    TkFallback.error(
+                        ex, req,
+                        System.currentTimeMillis() - start
+                    )
                 );
             }
             res = TkFallback.wrap(fbres.get(), fbk, req);
         } catch (final Throwable ex) {
             final Opt<Response> fbres = fbk.route(
                 new RqFallback.Fake(
-                    req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                    req, HttpURLConnection.HTTP_INTERNAL_ERROR,
+                    TkFallback.error(
+                        ex, req,
+                        System.currentTimeMillis() - start
+                    )
                 )
             );
             if (!fbres.has()) {
@@ -108,7 +125,10 @@ public final class TkFallback extends TkWrap {
                         ex.getClass().getCanonicalName(),
                         fbk.getClass().getCanonicalName()
                     ),
-                    ex
+                    TkFallback.error(
+                        ex, req,
+                        System.currentTimeMillis() - start
+                    )
                 );
             }
             res = TkFallback.wrap(
@@ -132,17 +152,28 @@ public final class TkFallback extends TkWrap {
         return new Response() {
             @Override
             public Iterable<String> head() throws IOException {
+                final long start = System.currentTimeMillis();
                 Iterable<String> head;
                 try {
                     head = res.head();
                 } catch (final HttpException ex) {
                     head = fbk.route(
-                        new RqFallback.Fake(req, ex.code(), ex)
+                        new RqFallback.Fake(
+                            req, ex.code(),
+                            TkFallback.error(
+                                ex, req,
+                                System.currentTimeMillis() - start
+                            )
+                        )
                     ).get().head();
                 } catch (final Throwable ex) {
                     head = fbk.route(
                         new RqFallback.Fake(
-                            req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                            req, HttpURLConnection.HTTP_INTERNAL_ERROR,
+                            TkFallback.error(
+                                ex, req,
+                                System.currentTimeMillis() - start
+                            )
                         )
                     ).get().head();
                 }
@@ -150,23 +181,64 @@ public final class TkFallback extends TkWrap {
             }
             @Override
             public InputStream body() throws IOException {
+                final long start = System.currentTimeMillis();
                 InputStream body;
                 try {
                     body = res.body();
                 } catch (final HttpException ex) {
                     body = fbk.route(
-                        new RqFallback.Fake(req, ex.code(), ex)
+                        new RqFallback.Fake(
+                            req, ex.code(),
+                            TkFallback.error(
+                                ex, req,
+                                System.currentTimeMillis() - start
+                            )
+                        )
                     ).get().body();
                 } catch (final Throwable ex) {
                     body = fbk.route(
                         new RqFallback.Fake(
-                            req, HttpURLConnection.HTTP_INTERNAL_ERROR, ex
+                            req, HttpURLConnection.HTTP_INTERNAL_ERROR,
+                            TkFallback.error(
+                                ex, req,
+                                System.currentTimeMillis() - start
+                            )
                         )
                     ).get().body();
                 }
                 return body;
             }
         };
+    }
+
+    /**
+     * Create an error.
+     * @param exp Exception original
+     * @param req Request we're processing
+     * @param msec Milliseconds it took
+     * @return Error
+     * @throws IOException If fails
+     */
+    private static Throwable error(final Throwable exp, final Request req,
+        final long msec) throws IOException {
+        final String time;
+        if (msec < TimeUnit.SECONDS.toMillis(1L)) {
+            time = String.format("%dms", msec);
+        } else {
+            time = String.format(
+                "%ds",
+                msec / TimeUnit.SECONDS.toMillis(1L)
+            );
+        }
+        return new IllegalStateException(
+            String.format(
+                "[%s %s] failed in %s: %s",
+                new RqMethod.Base(req).method(),
+                new RqHref.Base(req).href(),
+                time, exp.getLocalizedMessage()
+            ),
+            exp
+        );
     }
 
 }

@@ -33,8 +33,8 @@ import java.util.Queue;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.13.8
  * @param <T> Type of item
+ * @since 0.13.8
  */
 public final class Select<T> implements Iterable<T> {
 

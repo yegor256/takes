@@ -78,7 +78,7 @@ public final class FtCLITest {
                             new TkFork(new FkRegex("/", "hello!")),
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
-                            "--lifetime=3000"
+                            "--lifetime=4000"
                         ).start(exit);
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);

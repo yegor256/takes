@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -99,7 +100,10 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final byte[] body) {
-        super(new RqBytes(head, body));
+        this(
+            head,
+            new ByteArrayInputStream(Arrays.copyOf(body, body.length))
+        );
     }
 
     /**

@@ -34,6 +34,22 @@ import org.takes.rq.RqWithHeader;
 /**
  * Front with a command line interface.
  *
+ * <p>You must provide {@code --port} argument. Without it, the
+ * server won't start. If you want to start the server at random port, you
+ * should specify a file name as the value of this {@code --port} configuration
+ * option. For example:</p>
+ *
+ * <pre> new FtCLI(
+ *   new TkText("hello, world!"),
+ *   "--port=/tmp/port.txt",
+ *   "--threads=1",
+ *   "--lifetime=3000"
+ * ).start(Exit.NEVER);</pre>
+ *
+ * <p>The code above will start a server and will never stop it. It will
+ * work in the foreground. The server will be started at a random TCP
+ * port and its number will be saved to {@code /tmp/port.txt} file.</p>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
@@ -90,12 +106,15 @@ public final class FtCLI implements Front {
         } else {
             tks = this.take;
         }
+        final BkTimeable timeable = new BkTimeable(
+            new BkSafe(new BkBasic(tks)),
+            this.options.maxLatency()
+        );
+        timeable.setDaemon(true);
+        timeable.start();
         final Front front = new FtBasic(
             new BkParallel(
-                new BkTimeable(
-                    new BkSafe(new BkBasic(tks)),
-                    this.options.maxLatency()
-                ),
+                timeable,
                 this.options.threads()
             ),
             this.options.socket()

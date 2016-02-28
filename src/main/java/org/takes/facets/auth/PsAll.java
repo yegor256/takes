@@ -53,28 +53,10 @@ public class PsAll implements Pass {
      * @param passes All Passes to be checked.
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}
-     * @todo #558:30min PsAll ctor. According to new qulice version, constructor
-     *  must contain only variables initialization and other constructor calls.
-     *  Refactor code according to that rule and remove
-     *  `ConstructorOnlyInitializesOrCallOtherConstructors`
-     *  warning suppression.
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = new ArrayList<Pass>(passes);
-        this.index = identity;
-        if (this.index < 0) {
-            throw new IllegalArgumentException("Index must be >= 0");
-        }
-        if (this.index >= this.all.size()) {
-            throw new IllegalArgumentException(
-                String.format(
-                    "Trying to return index %s from a list of %s passes",
-                    this.index,
-                    this.all.size()
-                )
-            );
-        }
+        this.index = this.validated(identity);
     }
 
     @Override
@@ -97,6 +79,30 @@ public class PsAll implements Pass {
             );
         }
         return this.all.get(this.index).exit(response, identity);
+    }
+
+    /**
+     * Validate index.
+     * @param idx Index of a Pass whose Identity to return on successful
+     *  {@link PsAll#enter(Request)}
+     * @return Validated index
+     */
+    private int validated(final int idx) {
+        if (idx < 0) {
+            throw new IllegalArgumentException(
+                String.format("Index %d must be >= 0.", idx)
+            );
+        }
+        if (idx >= this.all.size()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Trying to return index %d from a list of %d passes",
+                    idx,
+                    this.all.size()
+                )
+            );
+        }
+        return idx;
     }
 
     /**

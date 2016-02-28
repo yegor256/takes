@@ -28,9 +28,9 @@ package org.takes.misc;
  *
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.15.2
  * @param <T> Type of item
  * @param <K> Type of key
+ * @since 0.15.2
  */
 public interface TransformAction<T, K> {
     /**
