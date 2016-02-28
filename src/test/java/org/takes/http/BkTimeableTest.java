@@ -97,7 +97,7 @@ public final class BkTimeableTest {
                             take,
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
-                            "--lifetime=3000",
+                            "--lifetime=4000",
                             "--max-latency=100"
                         ).start(exit);
                     } catch (final IOException ex) {
