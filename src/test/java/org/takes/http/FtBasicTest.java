@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -57,12 +58,19 @@ import org.takes.tk.TkFailure;
 public final class FtBasicTest {
 
     /**
+     * The root path.
+     */
+    private static final String ROOT_PATH = "/";
+
+    /**
      * FtBasic can work.
      * @throws Exception If some problem inside
      */
     @Test
     public void justWorks() throws Exception {
-        new FtRemote(new TkFork(new FkRegex("/", "hello, world!"))).exec(
+        new FtRemote(
+            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "hello, world!"))
+        ).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -196,4 +204,33 @@ public final class FtBasicTest {
         );
     }
 
+    /**
+     * FtBasic can consume twice the input stream.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void consumesTwiceInputStream() throws IOException {
+        final String result = "Hello World!";
+        final ByteArrayInputStream input =
+            new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
+        new FtRemote(
+            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, new RsText(input)))
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                }
+            }
+        );
+    }
 }
