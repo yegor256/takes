@@ -136,11 +136,10 @@ public interface RqMultipart extends Request {
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
-         * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         public Base(final Request req) throws IOException {
             super(req);
-            this.map = this.initMap(req);
+            this.map = this.map(req);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -177,7 +176,7 @@ public interface RqMultipart extends Request {
          * @return The requests map that use the part name as a map key
          * @throws IOException If fails
          */
-        private Map<String, List<Request>> buildRequests(
+        private Map<String, List<Request>> requests(
             final Request req, final  ReadableByteChannel body)
                 throws IOException {
             final String header = new RqHeaders.Smart(
@@ -233,21 +232,15 @@ public interface RqMultipart extends Request {
          * @return ConcurrentMap, emtpy if something wrong
          * @throws IOException if fails
          */
-        private Map<String, List<Request>> initMap(final Request req)
+        private Map<String, List<Request>> map(final Request req)
             throws IOException {
-            final InputStream stream = new RqLengthAware(req).body();
-            try {
+            try (InputStream stream = new RqLengthAware(req).body()) {
                 this.buffer = ByteBuffer.allocate(
                     Math.min(Base.MIN_BUFF_SIZE, stream.available())
                 );
-                final ReadableByteChannel body = Channels.newChannel(stream);
-                try {
-                    return this.buildRequests(req, body);
-                } finally {
-                    body.close();
+                try (ReadableByteChannel body = Channels.newChannel(stream)) {
+                    return this.requests(req, body);
                 }
-            } finally {
-                stream.close();
             }
         }
         /**
@@ -268,11 +261,10 @@ public interface RqMultipart extends Request {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            final RandomAccessFile accessfile = new RandomAccessFile(
+            try (RandomAccessFile accessfile = new RandomAccessFile(
                 file, "rw"
-                );
-            final FileChannel channel = accessfile.getChannel();
-            try {
+                )) {
+                final FileChannel channel = accessfile.getChannel();
                 channel.write(
                     ByteBuffer.wrap(
                         this.head().iterator().next().getBytes(
@@ -284,8 +276,6 @@ public interface RqMultipart extends Request {
                     ByteBuffer.wrap(Base.CRLF.getBytes(StandardCharsets.UTF_8))
                 );
                 this.copy(channel, boundary, body);
-            } finally {
-                accessfile.close();
             }
             return new RqWithHeader(
                 new RqLive(
@@ -352,7 +342,7 @@ public interface RqMultipart extends Request {
         private static Map<String, List<Request>> asMap(
             final Collection<Request> reqs) throws IOException {
             final Map<String, List<Request>> map =
-                new HashMap<String, List<Request>>(reqs.size());
+                new HashMap<>(reqs.size());
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
