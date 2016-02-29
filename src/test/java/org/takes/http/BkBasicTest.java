@@ -31,6 +31,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -41,7 +42,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -64,8 +64,6 @@ import org.takes.tk.TkText;
  *  persistent connections. Would be great to implement
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
- * @todo #516:30min It will be nice to refactor tests with Socket usage and
- *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
  *  Reusable header names will help in many situations. For example - in new
  *  integration tests.
@@ -98,9 +96,8 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        final BkBasicTest.MkSocket socket = createMockSocket();
+        final ByteArrayOutputStream baos = socket.bufferedOutput();
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
@@ -370,10 +367,38 @@ public final class BkBasicTest {
      * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
-    private static Socket createMockSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
-            new ByteArrayInputStream(
+    private static BkBasicTest.MkSocket createMockSocket() throws IOException {
+        return new BkBasicTest.MkSocket();
+    }
+
+    /**
+     * Socket mock for reuse.
+     */
+    private static final class MkSocket extends Socket {
+
+        /**
+         * The address to provide for testing purpose.
+         */
+        private final transient InetAddress address;
+        /**
+         * The output stream of the socket.
+         */
+        private final transient ByteArrayOutputStream output;
+
+        /**
+         * Constructs a {@code MkSocket}.
+         * @throws IOException in case the call to
+         *  {@link InetAddress#getLocalHost()} fails.
+         */
+        private MkSocket() throws IOException {
+            super();
+            this.address = InetAddress.getLocalHost();
+            this.output = new ByteArrayOutputStream();
+        }
+
+        @Override
+        public InputStream getInputStream() {
+            return new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
@@ -381,18 +406,41 @@ public final class BkBasicTest {
                     "",
                     "hi"
                 ).getBytes()
-            )
-        );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        return socket;
+            );
+        }
+
+        @Override
+        public OutputStream getOutputStream() {
+            return this.output;
+        }
+
+        @Override
+        public InetAddress getInetAddress() {
+            return this.address;
+        }
+
+        @Override
+        public InetAddress getLocalAddress() {
+            return this.address;
+        }
+
+        @Override
+        public int getPort() {
+            return 0;
+        }
+
+        @Override
+        public int getLocalPort() {
+            return 0;
+        }
+
+        /**
+         * Gives the output stream in {@link ByteArrayOutputStream} to be
+         * able to test it.
+         * @return The output in {@link ByteArrayOutputStream}.
+         */
+        private ByteArrayOutputStream bufferedOutput() {
+            return this.output;
+        }
     }
 }
