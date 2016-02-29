@@ -93,9 +93,9 @@ public interface RqMultipart extends Request {
      * @version $Id$
      * @since 0.9
      * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
-     *  Forms in HTML</a>
+     *     Forms in HTML</a>
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
-     * @see RqGreedy
+     * @see org.takes.rq.RqGreedy
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqMultipart {
@@ -112,49 +112,34 @@ public interface RqMultipart extends Request {
             ".*[^a-z]name=\"([^\"]+)\".*"
         );
         /**
+         * Carriage return constant.
+         */
+        private static final String CRLF = "\r\n";
+        /**
+         * Content disposition header name.
+         */
+        private static final String REQUIRED_HEADER =
+            "Content-Disposition";
+        /**
+         * Minimal buffer size.
+         */
+        private static final transient int MIN_BUFF_SIZE = 8192;
+        /**
          * Map of params and values.
          */
         private final transient Map<String, List<Request>> map;
         /**
-         * Internal buffer.
+         * Temporary stream buffer.
          */
-        private final transient ByteBuffer buffer;
-        /**
-         * Origin request body.
-         */
-        private final transient ReadableByteChannel body;
+        private transient ByteBuffer buffer;
         /**
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
-         * @checkstyle ExecutableStatementCountCheck (2 lines)
-         * @todo #558:30min Base ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Base(final Request req) throws IOException {
             super(req);
-            final InputStream stream = new RqLengthAware(req).body();
-            try {
-                this.body = Channels.newChannel(stream);
-                try {
-                    this.buffer = ByteBuffer.allocate(
-                        // @checkstyle MagicNumberCheck (1 line)
-                        Math.min(8192, stream.available())
-                    );
-                    this.map = this.requests(req);
-                } finally {
-                    this.body.close();
-                }
-            } finally {
-                stream.close();
-            }
+            this.map = this.map(req);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
@@ -162,7 +147,7 @@ public interface RqMultipart extends Request {
                 .get(name.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<Request> iter;
             if (values == null) {
-                iter = new VerboseIterable<>(
+                iter = new VerboseIterable<Request>(
                     Collections.<Request>emptyList(),
                     new Sprintf(
                         "there are no parts by name \"%s\" among %d others: %s",
@@ -170,7 +155,7 @@ public interface RqMultipart extends Request {
                     )
                 );
             } else {
-                iter = new VerboseIterable<>(
+                iter = new VerboseIterable<Request>(
                     values,
                     new Sprintf(
                         "there are just %d parts by name \"%s\"",
@@ -187,14 +172,15 @@ public interface RqMultipart extends Request {
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
+         * @param body Origin request body
          * @return The requests map that use the part name as a map key
          * @throws IOException If fails
          */
         private Map<String, List<Request>> requests(
-            final Request req) throws IOException {
+            final Request req, final  ReadableByteChannel body)
+                throws IOException {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
             ).single("Content-Type");
             if (!header.toLowerCase(Locale.ENGLISH)
                 .startsWith("multipart/form-data")) {
@@ -218,7 +204,7 @@ public interface RqMultipart extends Request {
                     )
                 );
             }
-            if (this.body.read(this.buffer) < 0) {
+            if (body.read(this.buffer) < 0) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     "failed to read the request body"
@@ -236,15 +222,33 @@ public interface RqMultipart extends Request {
                     break;
                 }
                 this.buffer.position(this.buffer.position() + 1);
-                requests.add(this.make(boundary));
+                requests.add(this.make(boundary, body));
             }
             return RqMultipart.Base.asMap(requests);
+        }
+        /**
+         * Init a map of params and values.
+         * @param req Request
+         * @return ConcurrentMap, emtpy if something wrong
+         * @throws IOException if fails
+         */
+        private Map<String, List<Request>> map(final Request req)
+            throws IOException {
+            try (InputStream stream = new RqLengthAware(req).body()) {
+                this.buffer = ByteBuffer.allocate(
+                    Math.min(Base.MIN_BUFF_SIZE, stream.available())
+                );
+                try (ReadableByteChannel body = Channels.newChannel(stream)) {
+                    return this.requests(req, body);
+                }
+            }
         }
         /**
          * Make a request.
          *  Scans the origin request until the boundary reached. Caches
          *  the  content into a temporary file and returns it as a new request.
          * @param boundary Boundary
+         * @param body Origin request body
          * @return Request
          * @throws IOException If fails
          * @todo #254:30min in order to delete temporary files InputStream
@@ -252,14 +256,15 @@ public interface RqMultipart extends Request {
          *  requests that means that body of all parts should be closed once
          *  they are not needed anymore.
          */
-        private Request make(final byte[] boundary) throws IOException {
+        private Request make(final byte[] boundary,
+            final ReadableByteChannel body) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
-            final FileChannel channel = new RandomAccessFile(
+            try (RandomAccessFile accessfile = new RandomAccessFile(
                 file, "rw"
-            ).getChannel();
-            try {
+                )) {
+                final FileChannel channel = accessfile.getChannel();
                 channel.write(
                     ByteBuffer.wrap(
                         this.head().iterator().next().getBytes(
@@ -267,15 +272,10 @@ public interface RqMultipart extends Request {
                         )
                     )
                 );
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
-                    ByteBuffer.wrap(
-                        RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
-                    )
+                    ByteBuffer.wrap(Base.CRLF.getBytes(StandardCharsets.UTF_8))
                 );
-                this.copy(channel, boundary);
-            } finally {
-                channel.close();
+                this.copy(channel, boundary, body);
             }
             return new RqWithHeader(
                 new RqLive(
@@ -292,11 +292,13 @@ public interface RqMultipart extends Request {
          * Copy until boundary reached.
          * @param target Output file channel
          * @param boundary Boundary
+         * @param body Origin request body
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
-            final byte[] boundary) throws IOException {
+            final byte[] boundary, final ReadableByteChannel body)
+                throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
@@ -306,7 +308,7 @@ public interface RqMultipart extends Request {
                         this.buffer.put(boundary[idx]);
                     }
                     match = 0;
-                    if (this.body.read(this.buffer) == -1) {
+                    if (body.read(this.buffer) == -1) {
                         break;
                     }
                     this.buffer.flip();
@@ -339,13 +341,13 @@ public interface RqMultipart extends Request {
         @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         private static Map<String, List<Request>> asMap(
             final Collection<Request> reqs) throws IOException {
-            final Map<String, List<Request>> map = new HashMap<>(reqs.size());
+            final Map<String, List<Request>> map =
+                new HashMap<>(reqs.size());
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
-                ).single("Content-Disposition");
-                final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
+                ).single(Base.REQUIRED_HEADER);
+                final Matcher matcher = Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
@@ -428,10 +430,6 @@ public interface RqMultipart extends Request {
          */
         private static final String BOUNDARY = "AaB02x";
         /**
-         * Carriage return constant.
-         */
-        private static final String CRLF = "\r\n";
-        /**
          * Fake multipart request.
          */
         private final RqMultipart fake;
@@ -444,9 +442,8 @@ public interface RqMultipart extends Request {
         public Fake(final Request req, final Request... dispositions)
             throws IOException {
             this.fake = new RqMultipart.Base(
-                new RqMultipart.Fake.FakeMultipartRequest(
-                    req, dispositions
-                )
+                //@checkstyle AnonInnerLength (1 line)
+                new FakeMultipartRequest(req, dispositions)
             );
         }
         @Override
@@ -467,50 +464,44 @@ public interface RqMultipart extends Request {
         }
         /**
          * Fake body stream creator.
-         * @param parts Fake request body parts
+         * @param dispositions Fake request body parts
          * @return InputStream of given dispositions
          * @throws IOException If fails
          */
-        private static InputStream fakeStream(final Request... parts)
+        private static InputStream fakeStream(final Request... dispositions)
             throws IOException {
+            final StringBuilder builder = fakeBody(dispositions);
             return new ByteArrayInputStream(
-                RqMultipart.Fake.fakeBody(parts).toString().getBytes(
-                    StandardCharsets.UTF_8
-                )
+                builder.toString().getBytes(StandardCharsets.UTF_8)
             );
         }
-
         /**
          * Fake body creator.
-         * @param parts Fake request body parts
+         * @param dispositions Fake request body parts
          * @return StringBuilder of given dispositions
          * @throws IOException If fails
          */
         @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static StringBuilder fakeBody(final Request... parts)
+        private static StringBuilder fakeBody(final Request... dispositions)
             throws IOException {
             final StringBuilder builder = new StringBuilder();
-            for (final Request part : parts) {
-                builder.append(String.format("--%s", RqMultipart.Fake.BOUNDARY))
-                    .append(RqMultipart.Fake.CRLF)
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    .append("Content-Disposition: ")
+            for (final Request each : dispositions) {
+                builder.append(String.format("--%s", Fake.BOUNDARY))
+                    .append(Base.CRLF)
+                    .append(Base.REQUIRED_HEADER)
+                    .append(": ")
                     .append(
                         new RqHeaders.Smart(
-                            new RqHeaders.Base(part)
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        ).single("Content-Disposition")
-                    ).append(RqMultipart.Fake.CRLF);
-                final String body = new RqPrint(part).printBody();
-                if (!(RqMultipart.Fake.CRLF.equals(body) || body.isEmpty())) {
-                    builder.append(RqMultipart.Fake.CRLF)
-                        .append(body)
-                        .append(RqMultipart.Fake.CRLF);
+                            new RqHeaders.Base(each)
+                        ).single(Base.REQUIRED_HEADER)
+                    ).append(Base.CRLF);
+                final String body = new RqPrint(each).printBody();
+                if (!(Base.CRLF.equals(body) || "".equals(body))) {
+                    builder.append(Base.CRLF).append(body).append(Base.CRLF);
                 }
             }
-            builder.append("Content-Transfer-Encoding: utf-8")
-                .append(RqMultipart.Fake.CRLF)
-                .append(String.format("--%s--", RqMultipart.Fake.BOUNDARY));
+            builder.append("Content-Transfer-Encoding: utf-8").append(Base.CRLF)
+                .append(String.format("--%s--", Fake.BOUNDARY));
             return builder;
         }
 
@@ -518,41 +509,48 @@ public interface RqMultipart extends Request {
          * This class is using a decorator pattern for representing
          * a fake HTTP multipart request.
          */
-        private static final class FakeMultipartRequest implements Request {
+        private static class FakeMultipartRequest implements Request {
+
             /**
              * Request object. Holds a value for the header.
              */
             private final Request req;
+
             /**
              * Holding multiple request body parts.
              */
-            private final Request[] parts;
+            private final Request[] dispositions;
+
             /**
              * The Constructor for the class.
-             * @param rqst The Request object
-             * @param list The sequence of dispositions
+             * @param req The Request object
+             * @param dispositions The sequence of dispositions
              */
-            FakeMultipartRequest(final Request rqst, final Request... list) {
-                this.req = rqst;
-                this.parts = list;
+            FakeMultipartRequest(
+                final Request req, final Request... dispositions
+            ) {
+                this.req = req;
+                this.dispositions = dispositions;
             }
+
             @Override
             public Iterable<String> head() throws IOException {
                 return new RqWithHeaders(
                     this.req,
                     String.format(
                         "Content-Type: multipart/form-data; boundary=%s",
-                        RqMultipart.Fake.BOUNDARY
+                        Fake.BOUNDARY
                     ),
                     String.format(
                         "Content-Length: %s",
-                        RqMultipart.Fake.fakeBody(this.parts).length()
+                        Fake.fakeBody(this.dispositions).length()
                     )
                 ).head();
             }
+
             @Override
             public InputStream body() throws IOException {
-                return RqMultipart.Fake.fakeStream(this.parts);
+                return Fake.fakeStream(this.dispositions);
             }
         }
     }
