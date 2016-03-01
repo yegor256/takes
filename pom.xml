@@ -289,6 +289,23 @@
                    <target>${jdk.version}</target>
                </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-verifier-plugin</artifactId>
+                <version>1.1</version>
+				<configuration>
+                    <verificationFile>src/verifier/verifications.xml</verificationFile>
+				</configuration>
+				<executions>
+                    <execution>
+                        <id>main</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+				</executions>
+            </plugin>
         </plugins>
     </build>
     <profiles>
