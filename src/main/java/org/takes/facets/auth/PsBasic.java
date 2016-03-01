@@ -52,7 +52,14 @@ import org.takes.rs.RsWithHeader;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @todo #600:30min This class has too many methods. Refactor the class.
+ *  Can move the subclasses into separate classes.
+ *  Remove the warning suppression for `TooManyMethods`.
  */
+@SuppressWarnings
+    (
+        "PMD.TooManyMethods"
+    )
 @EqualsAndHashCode(of = { "entry", "realm" })
 public final class PsBasic implements Pass {
 
@@ -226,26 +233,9 @@ public final class PsBasic implements Pass {
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @todo #558:30min Default ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and
-         *  other constructor calls. Refactor code according to that rule
-         *  and remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Default(final String... users) {
-            this.usernames = new HashMap<String, String>(users.length);
-            for (final String user : users) {
-                final String unified = user.replace("%20", "+");
-                PsBasic.Default.validateUser(unified);
-                this.usernames.put(
-                    PsBasic.Default.key(unified),
-                    unified.substring(unified.lastIndexOf(' ') + 1)
-                );
-            }
+            this.usernames = convert(users);
         }
 
         @Override
@@ -266,6 +256,27 @@ public final class PsBasic implements Pass {
                 identity = new Opt.Empty<Identity>();
             }
             return identity;
+        }
+
+        /**
+         * Covert the space URL Encoding into a '+' and create a hash map.
+         * @param users Strings with user's login, password and URN with
+         *  space characters as separators. Each of login, password and urn
+         *  are URL-encoded substrings.
+         * @return Map from login/password pairs to URNs.
+         */
+        private static Map<String, String> convert(final String... users) {
+            final Map<String, String> names =
+                new HashMap<String, String>(users.length);
+            for (final String user : users) {
+                final String unified = user.replace("%20", "+");
+                Default.validateUser(unified);
+                names.put(
+                    Default.key(unified),
+                    unified.substring(unified.lastIndexOf(' ') + 1)
+                );
+            }
+            return names;
         }
 
         /**
