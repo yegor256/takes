@@ -35,7 +35,7 @@ import java.net.Socket;
  *
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
- * @since 0.31
+ * @since 0.32
  */
 public final class MkSocket  extends Socket {
 
