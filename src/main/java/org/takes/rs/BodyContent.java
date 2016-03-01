@@ -27,18 +27,19 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * The body of a response used by {@link RsWithBody}.
  *
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
- * @since 0.31
+ * @since 0.32
  */
 interface BodyContent {
     /**
@@ -104,8 +105,7 @@ interface BodyContent {
          * @param content The content of the body.
          */
         ByteArrayContent(final byte[] content) {
-            //@checkstyle ArrayIsStoredDirectly (1 line)
-            this.bytes = content;
+            this.bytes = content.clone();
         }
 
         @Override
@@ -160,18 +160,12 @@ interface BodyContent {
             try {
                 file = File.createTempFile("InputStreamContent", "tmp");
                 file.deleteOnExit();
-                //@checkstyle MagicNumberCheck (1 line)
-                final byte[] buffer = new byte[4096];
-                //@checkstyle CascadeIndentationCheck (2 lines)
-                try (final InputStream content = input;
-                     final OutputStream output = new FileOutputStream(file)) {
-                    while (true) {
-                        final int bytes = content.read(buffer);
-                        if (bytes < 0) {
-                            break;
-                        }
-                        output.write(buffer, 0, bytes);
-                    }
+                try (final InputStream content = input) {
+                    Files.copy(
+                        content,
+                        Paths.get(file.getAbsolutePath()),
+                        StandardCopyOption.REPLACE_EXISTING
+                    );
                 }
             } catch (final IOException ex) {
                 throw new IllegalStateException(ex);
