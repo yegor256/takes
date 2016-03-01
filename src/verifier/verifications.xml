@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/verifications/1.0.0 http://maven.apache.org/xsd/verifications-1.0.0.xsd">
 	<files>
 		<file>
-			<location>/LICENSE.txt</location>
+			<location>LICENSE.txt</location>
 			<contains>\b20(?:1[4-6])\b</contains>
 		</file>
 	</files>
