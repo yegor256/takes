@@ -31,9 +31,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
@@ -96,7 +94,7 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final BkBasicTest.MkSocket socket = createMockSocket();
+        final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
@@ -367,38 +365,9 @@ public final class BkBasicTest {
      * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
-    private static BkBasicTest.MkSocket createMockSocket() throws IOException {
-        return new BkBasicTest.MkSocket();
-    }
-
-    /**
-     * Socket mock for reuse.
-     */
-    private static final class MkSocket extends Socket {
-
-        /**
-         * The address to provide for testing purpose.
-         */
-        private final transient InetAddress address;
-        /**
-         * The output stream of the socket.
-         */
-        private final transient ByteArrayOutputStream output;
-
-        /**
-         * Constructs a {@code MkSocket}.
-         * @throws IOException in case the call to
-         *  {@link InetAddress#getLocalHost()} fails.
-         */
-        private MkSocket() throws IOException {
-            super();
-            this.address = InetAddress.getLocalHost();
-            this.output = new ByteArrayOutputStream();
-        }
-
-        @Override
-        public InputStream getInputStream() {
-            return new ByteArrayInputStream(
+    private static MkSocket createMockSocket() throws IOException {
+        return new MkSocket(
+            new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
                     "Host:localhost",
@@ -406,41 +375,7 @@ public final class BkBasicTest {
                     "",
                     "hi"
                 ).getBytes()
-            );
-        }
-
-        @Override
-        public OutputStream getOutputStream() {
-            return this.output;
-        }
-
-        @Override
-        public InetAddress getInetAddress() {
-            return this.address;
-        }
-
-        @Override
-        public InetAddress getLocalAddress() {
-            return this.address;
-        }
-
-        @Override
-        public int getPort() {
-            return 0;
-        }
-
-        @Override
-        public int getLocalPort() {
-            return 0;
-        }
-
-        /**
-         * Gives the output stream in {@link ByteArrayOutputStream} to be
-         * able to test it.
-         * @return The output in {@link ByteArrayOutputStream}.
-         */
-        private ByteArrayOutputStream bufferedOutput() {
-            return this.output;
-        }
+            )
+        );
     }
 }
