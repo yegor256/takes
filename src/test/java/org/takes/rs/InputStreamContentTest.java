@@ -40,12 +40,12 @@ import org.junit.Test;
 public final class InputStreamContentTest {
 
     /**
-     * BodyContent.InputStreamContentTest can work.
+     * BodyContent.InputStreamContentTest can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void justWorks() throws Exception {
-        final String result = "Hello URLContentTest!";
+    public void returnsCorrectInput() throws Exception {
+        final String result = "Hello returnsCorrectInput!";
         final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
         final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
         final BodyContent.InputStreamContent content =
@@ -54,6 +54,19 @@ public final class InputStreamContentTest {
             ByteStreams.toByteArray(content.input()),
             Matchers.equalTo(bytes)
         );
+    }
+
+    /**
+     * BodyContent.InputStreamContentTest can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLength() throws Exception {
+        final String result = "Hello returnsCorrectLength!";
+        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+        final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
+        final BodyContent.InputStreamContent content =
+            new BodyContent.InputStreamContent(input);
         MatcherAssert.assertThat(
             content.length(),
             Matchers.equalTo(result.length())

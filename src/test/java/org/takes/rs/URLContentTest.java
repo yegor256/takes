@@ -33,8 +33,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -47,50 +45,61 @@ import org.junit.Test;
 public final class URLContentTest {
 
     /**
-     * The temporary file.
-     */
-    private transient Path file;
-
-    /**
-     * Initialize the test.
-     * @throws IOException In case the temporary file could not be created.
-     */
-    @Before
-    public void init() throws IOException {
-        this.file = Files.createTempFile("URLContentTest", "tmp");
-    }
-
-    /**
-     * Clean the test.
-     * @throws IOException In case the temporary file could not be deleted.
-     */
-    @After
-    public void clean() throws IOException {
-        Files.deleteIfExists(this.file);
-    }
-
-    /**
-     * BodyContent.URLContent can work.
+     * BodyContent.URLContent can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void justWorks() throws Exception {
-        final String result = "Hello URLContentTest!";
-        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        try (final InputStream input = new ByteArrayInputStream(bytes)) {
-            Files.copy(input, this.file, StandardCopyOption.REPLACE_EXISTING);
+    public void returnsCorrectInput() throws Exception {
+        final Path file = URLContentTest.createTempFile();
+        try {
+            final String result = "Hello returnsCorrectInput!";
+            final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+            try (final InputStream input = new ByteArrayInputStream(bytes)) {
+                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+            }
+            final BodyContent.URLContent content =
+                new BodyContent.URLContent(file.toUri().toURL());
+            try (final InputStream input = content.input()) {
+                MatcherAssert.assertThat(
+                    ByteStreams.toByteArray(input),
+                    Matchers.equalTo(bytes)
+                );
+            }
+        } finally {
+            Files.deleteIfExists(file);
         }
-        final BodyContent.URLContent content =
-            new BodyContent.URLContent(this.file.toUri().toURL());
-        try (final InputStream input = content.input()) {
+    }
+
+    /**
+     * BodyContent.URLContent can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLength() throws Exception {
+        final Path file = URLContentTest.createTempFile();
+        try {
+            final String result = "Hello returnsCorrectLength!";
+            final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+            try (final InputStream input = new ByteArrayInputStream(bytes)) {
+                Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+            }
+            final BodyContent.URLContent content =
+                new BodyContent.URLContent(file.toUri().toURL());
             MatcherAssert.assertThat(
-                ByteStreams.toByteArray(input),
-                Matchers.equalTo(bytes)
+                content.length(),
+                Matchers.equalTo(result.length())
             );
+        } finally {
+            Files.deleteIfExists(file);
         }
-        MatcherAssert.assertThat(
-            content.length(),
-            Matchers.equalTo(result.length())
-        );
+    }
+
+    /**
+     * Creates a temporary file for testing purpose.
+     * @return A temporary file for the test.
+     * @throws IOException If the file could not be created
+     */
+    private static Path createTempFile() throws IOException {
+        return Files.createTempFile("URLContentTest", "tmp");
     }
 }

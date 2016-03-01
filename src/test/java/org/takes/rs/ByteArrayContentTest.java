@@ -39,12 +39,12 @@ import org.junit.Test;
 public final class ByteArrayContentTest {
 
     /**
-     * BodyContent.ByteArrayContentTest can work.
+     * BodyContent.ByteArrayContentTest can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void justWorks() throws Exception {
-        final String result = "Hello ByteArrayContentTest!";
+    public void returnsCorrectInput() throws Exception {
+        final String result = "Hello returnsCorrectInput!";
         final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
         final BodyContent.ByteArrayContent content =
             new BodyContent.ByteArrayContent(bytes);
@@ -52,6 +52,18 @@ public final class ByteArrayContentTest {
             ByteStreams.toByteArray(content.input()),
             Matchers.equalTo(bytes)
         );
+    }
+
+    /**
+     * BodyContent.ByteArrayContentTest can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLength() throws Exception {
+        final String result = "Hello returnsCorrectLength!";
+        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+        final BodyContent.ByteArrayContent content =
+            new BodyContent.ByteArrayContent(bytes);
         MatcherAssert.assertThat(
             content.length(),
             Matchers.equalTo(result.length())
