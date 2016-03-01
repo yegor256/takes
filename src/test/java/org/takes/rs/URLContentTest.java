@@ -26,6 +26,7 @@ package org.takes.rs;
 import com.google.common.io.ByteStreams;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -76,8 +77,9 @@ public final class URLContentTest {
     public void justWorks() throws Exception {
         final String result = "Hello URLContentTest!";
         final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
-        Files.copy(input, this.file, StandardCopyOption.REPLACE_EXISTING);
+        try (final InputStream input = new ByteArrayInputStream(bytes)) {
+            Files.copy(input, this.file, StandardCopyOption.REPLACE_EXISTING);
+        }
         final BodyContent.URLContent content =
             new BodyContent.URLContent(this.file.toUri().toURL());
         MatcherAssert.assertThat(
