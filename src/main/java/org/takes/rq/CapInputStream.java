@@ -99,4 +99,14 @@ final class CapInputStream extends InputStream {
         }
         return readed;
     }
+
+    @Override
+    public long skip(final long num) throws IOException {
+        return this.origin.skip(num);
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.origin.close();
+    }
 }

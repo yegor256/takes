@@ -141,20 +141,12 @@ public interface RqMultipart extends Request {
         public Base(final Request req) throws IOException {
             super(req);
             final InputStream stream = new RqLengthAware(req).body();
-            try {
-                this.body = Channels.newChannel(stream);
-                try {
-                    this.buffer = ByteBuffer.allocate(
-                        // @checkstyle MagicNumberCheck (1 line)
-                        Math.min(8192, stream.available())
-                    );
-                    this.map = this.requests(req);
-                } finally {
-                    this.body.close();
-                }
-            } finally {
-                stream.close();
-            }
+            this.body = Channels.newChannel(stream);
+            this.buffer = ByteBuffer.allocate(
+                // @checkstyle MagicNumberCheck (1 line)
+                Math.min(8192, stream.available())
+            );
+            this.map = this.requests(req);
         }
         @Override
         public Iterable<Request> part(final CharSequence name) {
