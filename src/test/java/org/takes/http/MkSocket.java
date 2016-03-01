@@ -24,7 +24,6 @@
 package org.takes.http;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -57,12 +56,10 @@ public final class MkSocket  extends Socket {
     /**
      * Constructs a {@code MkSocket} with the specified input stream.
      * @param input The input stream of the socket.
-     * @throws IOException in case the call to
-     *  {@link InetAddress#getLocalHost()} fails.
      */
-    public MkSocket(final InputStream input) throws IOException {
+    public MkSocket(final InputStream input) {
         super();
-        this.address = InetAddress.getLocalHost();
+        this.address = InetAddress.getLoopbackAddress();
         this.output = new ByteArrayOutputStream();
         this.input = input;
     }
