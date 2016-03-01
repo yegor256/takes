@@ -82,10 +82,12 @@ public final class URLContentTest {
         }
         final BodyContent.URLContent content =
             new BodyContent.URLContent(this.file.toUri().toURL());
-        MatcherAssert.assertThat(
-            ByteStreams.toByteArray(content.input()),
-            Matchers.equalTo(bytes)
-        );
+        try (final InputStream input = content.input()) {
+            MatcherAssert.assertThat(
+                ByteStreams.toByteArray(input),
+                Matchers.equalTo(bytes)
+            );
+        }
         MatcherAssert.assertThat(
             content.length(),
             Matchers.equalTo(result.length())
