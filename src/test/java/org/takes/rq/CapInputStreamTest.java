@@ -58,31 +58,25 @@ public final class CapInputStreamTest {
 
     /**
      * CapInputStream can close a stream.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void closesStream() throws IOException {
+    public void closesStream() throws Exception {
         final InputStream stream = Mockito.mock(InputStream.class);
-        final CapInputStream wrapper = new CapInputStream(
-            stream,
-            0L
-        );
+        final CapInputStream wrapper = new CapInputStream(stream, 0L);
         wrapper.close();
         Mockito.verify(stream, Mockito.times(1)).close();
     }
 
     /**
      * CapInputStream can skip on a stream.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void skipsOnStream() throws IOException {
+    public void skipsOnStream() throws Exception {
         final long skip = 25L;
         final InputStream stream = Mockito.mock(InputStream.class);
-        final CapInputStream wrapper = new CapInputStream(
-            stream,
-            50L
-        );
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
         wrapper.skip(skip);
         Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
