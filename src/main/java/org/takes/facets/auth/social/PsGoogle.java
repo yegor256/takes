@@ -195,7 +195,12 @@ public final class PsGoogle implements Pass {
         } else {
             props.put("picture", image.getString("url", "#"));
         }
-        props.put("name", json.getString("displayName", "unknown"));
+        if (json.containsKey("displayName")
+            && json.get("displayName") != null) {
+            props.put("name", json.getString("displayName"));
+        } else {
+            props.put("name", "unknown");
+        }
         return new Identity.Simple(
             String.format("urn:google:%s", json.getString("id")), props
         );
