@@ -56,10 +56,7 @@ import org.takes.rs.RsWithHeader;
  *  Can move the subclasses into separate classes.
  *  Remove the warning suppression for `TooManyMethods`.
  */
-@SuppressWarnings
-    (
-        "PMD.TooManyMethods"
-    )
+@SuppressWarnings("PMD.TooManyMethods")
 @EqualsAndHashCode(of = { "entry", "realm" })
 public final class PsBasic implements Pass {
 
@@ -235,7 +232,7 @@ public final class PsBasic implements Pass {
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
          */
         public Default(final String... users) {
-            this.usernames = convert(users);
+            this.usernames = converter(users);
         }
 
         @Override
@@ -260,12 +257,12 @@ public final class PsBasic implements Pass {
 
         /**
          * Covert the space URL Encoding into a '+' and create a hash map.
-         * @param users Strings with user's login, password and URN with
+         * @param users Strings with users' login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings.
          * @return Map from login/password pairs to URNs.
          */
-        private static Map<String, String> convert(final String... users) {
+        private static Map<String, String> converter(final String... users) {
             final Map<String, String> names =
                 new HashMap<String, String>(users.length);
             for (final String user : users) {
