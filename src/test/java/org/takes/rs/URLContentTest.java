@@ -52,14 +52,13 @@ public final class URLContentTest {
     public void returnsCorrectInput() throws Exception {
         final Path file = URLContentTest.createTempFile();
         try {
-            final String result = "Hello returnsCorrectInput!";
-            final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+            final byte[] bytes =
+                "Hello returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
-            final BodyContent.URLContent content =
-                new BodyContent.URLContent(file.toUri().toURL());
-            try (final InputStream input = content.input()) {
+            try (final InputStream input =
+                new BodyContent.URLContent(file.toUri().toURL()).input()) {
                 MatcherAssert.assertThat(
                     ByteStreams.toByteArray(input),
                     Matchers.equalTo(bytes)
@@ -78,16 +77,14 @@ public final class URLContentTest {
     public void returnsCorrectLength() throws Exception {
         final Path file = URLContentTest.createTempFile();
         try {
-            final String result = "Hello returnsCorrectLength!";
-            final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
+            final byte[] bytes =
+                "Hello returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
-            final BodyContent.URLContent content =
-                new BodyContent.URLContent(file.toUri().toURL());
             MatcherAssert.assertThat(
-                content.length(),
-                Matchers.equalTo(result.length())
+                new BodyContent.URLContent(file.toUri().toURL()).length(),
+                Matchers.equalTo(bytes.length)
             );
         } finally {
             Files.deleteIfExists(file);

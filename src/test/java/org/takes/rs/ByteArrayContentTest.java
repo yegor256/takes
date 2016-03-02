@@ -44,12 +44,12 @@ public final class ByteArrayContentTest {
      */
     @Test
     public void returnsCorrectInput() throws Exception {
-        final String result = "Hello returnsCorrectInput!";
-        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        final BodyContent.ByteArrayContent content =
-            new BodyContent.ByteArrayContent(bytes);
+        final byte[] bytes =
+            "Hello returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            ByteStreams.toByteArray(content.input()),
+            ByteStreams.toByteArray(
+                new BodyContent.ByteArrayContent(bytes).input()
+            ),
             Matchers.equalTo(bytes)
         );
     }
@@ -60,13 +60,11 @@ public final class ByteArrayContentTest {
      */
     @Test
     public void returnsCorrectLength() throws Exception {
-        final String result = "Hello returnsCorrectLength!";
-        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        final BodyContent.ByteArrayContent content =
-            new BodyContent.ByteArrayContent(bytes);
+        final byte[] bytes =
+            "Hello returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            content.length(),
-            Matchers.equalTo(result.length())
+            new BodyContent.ByteArrayContent(bytes).length(),
+            Matchers.equalTo(bytes.length)
         );
     }
 }

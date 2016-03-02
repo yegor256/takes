@@ -45,13 +45,14 @@ public final class InputStreamContentTest {
      */
     @Test
     public void returnsCorrectInput() throws Exception {
-        final String result = "Hello returnsCorrectInput!";
-        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
-        final BodyContent.InputStreamContent content =
-            new BodyContent.InputStreamContent(input);
+        final byte[] bytes =
+            "Hello returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            ByteStreams.toByteArray(content.input()),
+            ByteStreams.toByteArray(
+                new BodyContent.InputStreamContent(
+                    new ByteArrayInputStream(bytes)
+                ).input()
+            ),
             Matchers.equalTo(bytes)
         );
     }
@@ -62,14 +63,13 @@ public final class InputStreamContentTest {
      */
     @Test
     public void returnsCorrectLength() throws Exception {
-        final String result = "Hello returnsCorrectLength!";
-        final byte[] bytes = result.getBytes(StandardCharsets.UTF_8);
-        final ByteArrayInputStream input = new ByteArrayInputStream(bytes);
-        final BodyContent.InputStreamContent content =
-            new BodyContent.InputStreamContent(input);
+        final byte[] bytes =
+            "Hello returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            content.length(),
-            Matchers.equalTo(result.length())
+            new BodyContent.InputStreamContent(
+                new ByteArrayInputStream(bytes)
+            ).length(),
+            Matchers.equalTo(bytes.length)
         );
     }
 }
