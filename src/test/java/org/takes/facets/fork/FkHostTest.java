@@ -24,38 +24,37 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.misc.Opt;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.tk.TkEmpty;
 
 /**
- * Fork fixed.
- *
- * <p>The class is immutable and thread-safe.
- *
+ * Test case for {@link FkHost}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
- * @see TkFork
+ * @since 0.32
  */
-@EqualsAndHashCode(callSuper = true)
-public final class FkFixed extends FkWrap {
+public final class FkHostTest {
 
     /**
-     * Ctor.
-     * @param take Take
+     * FkHost can match a host.
+     * @throws IOException If some problem inside
      */
-    public FkFixed(final Take take) {
-        super(
-            new Fork() {
-                @Override
-                public Opt<Response> route(final Request req)
-                    throws IOException {
-                    return new Opt.Single<>(take.act(req));
-                }
-            }
+    @Test
+    public void matchesByHost() throws IOException {
+        MatcherAssert.assertThat(
+            new FkHost("www.example.com", new TkEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ).has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkHost("google.com", new TkEmpty()).route(
+                new RqFake("PUT", "/?test")
+            ).has(),
+            Matchers.is(false)
         );
     }
 
