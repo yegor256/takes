@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 /**
  * HTTP URI/HREF.
@@ -52,6 +53,11 @@ import java.util.TreeMap;
         }
     )
 public final class Href implements CharSequence {
+
+    /**
+     * Pattern matching trailing slash.
+     */
+    private static final Pattern TRAILING_SLASH = Pattern.compile("/$");
 
     /**
      * URI (without the query part).
@@ -195,9 +201,12 @@ public final class Href implements CharSequence {
     public Href path(final Object suffix) {
         return new Href(
             URI.create(
-                new StringBuilder(this.uri.toString().replaceAll("/$", ""))
-                    .append('/')
-                    .append(Href.encode(suffix.toString())).toString()
+                new StringBuilder(
+                    Href.TRAILING_SLASH.matcher(this.uri.toString())
+                        .replaceAll("")
+                )
+                .append('/')
+                .append(Href.encode(suffix.toString())).toString()
             ),
             this.params
         );

@@ -24,6 +24,7 @@
 package org.takes.facets.fork;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -40,6 +41,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = { "high", "low" })
 final class MediaType implements Comparable<MediaType> {
+
+    /**
+     * Pattern matching non-digit symbols.
+     */
+    private static final Pattern NON_DIGITS = Pattern.compile("[^0-9\\.]");
 
     /**
      * Priority.
@@ -112,7 +118,8 @@ final class MediaType implements Comparable<MediaType> {
         final String[] parts = MediaType.split(text);
         final Double priority;
         if (parts.length > 1) {
-            final String num = parts[1].replaceAll("[^0-9\\.]", "");
+            final String num =
+                MediaType.NON_DIGITS.matcher(parts[1]).replaceAll("");
             if (num.isEmpty()) {
                 priority = 0.0d;
             } else {

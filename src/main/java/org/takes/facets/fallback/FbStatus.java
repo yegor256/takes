@@ -24,6 +24,7 @@
 package org.takes.facets.fallback;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
@@ -46,6 +47,12 @@ import org.takes.tk.TkFixed;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FbStatus extends FbWrap {
+
+    /**
+     * Whitespace pattern, used for splitting.
+     */
+    private static final Pattern WHITESPACE = Pattern.compile("\\s");
+
     /**
      * Ctor.
      * @param code HTTP status code
@@ -75,12 +82,12 @@ public final class FbStatus extends FbWrap {
                         new RsWithBody(
                             res,
                             String.format(
-                                "%s: %s",
-                                res.head().iterator().next().split("\\s", 2)[1],
-                                req.throwable().getLocalizedMessage()
+                                "%s: %s", WHITESPACE.split(
+                                    res.head().iterator().next(),
+                                    2
+                                )[1], req.throwable().getLocalizedMessage()
                             )
-                        ),
-                        "text/plain"
+                        ), "text/plain"
                     )
                 );
             }
