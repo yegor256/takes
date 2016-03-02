@@ -211,10 +211,17 @@ public final class FtBasicTest {
     @Test
     public void consumesTwiceInputStream() throws IOException {
         final String result = "Hello World!";
-        final ByteArrayInputStream input =
-            new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8));
         new FtRemote(
-            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, new RsText(input)))
+            new TkFork(
+                new FkRegex(
+                    FtBasicTest.ROOT_PATH,
+                    new RsText(
+                        new ByteArrayInputStream(
+                            result.getBytes(StandardCharsets.UTF_8)
+                        )
+                    )
+                )
+            )
         ).exec(
             new FtRemote.Script() {
                 @Override
