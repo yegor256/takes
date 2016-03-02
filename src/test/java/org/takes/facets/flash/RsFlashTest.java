@@ -26,6 +26,11 @@ package org.takes.facets.flash;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -59,6 +64,31 @@ public final class RsFlashTest {
                         Charset.defaultCharset().name()
                     ),
                     Level.INFO.getName()
+                )
+            )
+        );
+    }
+
+    /**
+     * RsFlash can create cookie with expires attribute in GMT.
+     * @throws IOException If there are some problems inside
+     */
+    @Test
+    public void createsCookieWithExpiresInGMT() throws IOException {
+        final SimpleDateFormat format = new SimpleDateFormat(
+            "'Expires='EEE, dd MMM yyyy HH:mm:ss z;",
+            Locale.ENGLISH
+        );
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsFlash("they are watching you")
+            ).print(),
+            Matchers.containsString(
+                format.format(
+                    new Date(System.currentTimeMillis()
+                        + TimeUnit.HOURS.toMillis(1L)
+                    )
                 )
             )
         );

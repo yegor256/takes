@@ -24,6 +24,11 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -53,6 +58,34 @@ public final class PsCookieTest {
             ).print(),
             Matchers.containsString(
                 "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
+            )
+        );
+    }
+
+    /**
+     * PsCookie can create cookie with expires attribute in GMT.
+     * @throws IOException If there are some problems inside
+     */
+    @Test
+    public void createsCookieWithExpiresInGMT() throws IOException {
+        final long age = 1L;
+        final SimpleDateFormat format = new SimpleDateFormat(
+            "'Expires='EEE, dd MMM yyyy HH:mm:ss z;",
+            Locale.ENGLISH
+        );
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new PsCookie(
+                    new CcPlain(), "bar", age
+                ).exit(new RsEmpty(), Identity.ANONYMOUS)
+            ).print(),
+            Matchers.containsString(
+                format.format(
+                    new Date(System.currentTimeMillis()
+                        + TimeUnit.DAYS.toMillis(age)
+                    )
+                )
             )
         );
     }

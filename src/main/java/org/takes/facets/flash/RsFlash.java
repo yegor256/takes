@@ -27,12 +27,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Opt;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
@@ -205,15 +205,12 @@ public final class RsFlash extends RsWrap {
                 URLEncoder.encode(msg, Charset.defaultCharset().name()),
                 level.getName()
             ),
-            "Path=/",
-            String.format(
-                Locale.ENGLISH,
-                "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
+            new Opt.Single<Date>(
                 new Date(
-                    System.currentTimeMillis()
-                        + TimeUnit.HOURS.toMillis(1L)
+                    System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
                 )
-            )
+            ),
+            "Path=/"
         );
     }
 
