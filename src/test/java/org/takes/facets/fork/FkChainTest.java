@@ -24,7 +24,6 @@
 package org.takes.facets.fork;
 
 import com.google.common.base.Joiner;
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -35,16 +34,31 @@ import org.takes.rs.RsPrint;
  * Test case for {@link FkChain}.
  * @author Carlos Gines (efrel.v2@gmail.com)
  * @version $Id$
- * @since 0.32
+ * @since 0.33
  */
 public final class FkChainTest {
 
     /**
-     * TkFork can dispatch by regular expression.
-     * @throws IOException If some problem inside
+     * FkChain can gracefully work when no fork matches the request.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws IOException {
+    public void gracefullyHandlesNoForkMatching() throws Exception {
+        MatcherAssert.assertThat(
+            new FkChain(
+                new FkRegex("/doyoumatch?", "Hello. It's me."),
+                new FkRegex("/plzmatch!", "I am your father")
+            ).route(new RqFake("POST", "/idontmatch")).has(),
+            Matchers.equalTo(false)
+        );
+    }
+
+    /**
+     * FkChain can dispatch by regular expression.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void dispatchesByRegularExpression() throws Exception {
         final String body = "hello test!";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -52,7 +66,7 @@ public final class FkChainTest {
                     new FkRegex("/g[a-z]{2}", ""),
                     new FkRegex("/h[a-z]{2}", body),
                     new FkRegex("/i[a-z]{2}", "")
-                ).route(new RqFake("GET", "/hey?yu", "")).get()
+                ).route(new RqFake("GET", "/hey?yu")).get()
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(

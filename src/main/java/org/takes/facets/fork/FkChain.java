@@ -32,11 +32,11 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * A {@link Fork} chain. Routes to each {@link Fork} in order until one returns
+ * A Fork chain. Routes to each given Fork in order until one returns
  * a response or until none are left.
  * @author Carlos Gines (efrel.v2@gmail.com)
  * @version $Id$
- * @since 0.32
+ * @since 0.33
  */
 public final class FkChain implements Fork {
 
