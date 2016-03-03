@@ -100,7 +100,9 @@ public final class TkFlash implements Take {
             response = new RsWithCookie(
                 this.origin.act(request),
                 this.cookie,
-                ""
+                "",
+                "Path=/",
+                "Max-Age=0"
             );
         } else {
             response = this.origin.act(request);
