@@ -29,6 +29,9 @@ import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
@@ -59,14 +62,20 @@ public final class FkContentTypeTest {
     @Test
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
-            new FkContentType("text/xml", new RsEmpty()).route(
-                new RqWithHeader(
-                    new RqFake(),
-                    FkContentTypeTest.CONTENT_TYPE,
-                    "*/* "
-                )
-            ).has(),
-            Matchers.is(true)
+            new FkContentType(
+                "text/xml", new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsEmpty();
+                    }
+                }).route(
+                    new RqWithHeader(
+                        new RqFake(),
+                        FkContentTypeTest.CONTENT_TYPE,
+                        "*/* "
+                    )
+                ).has(),
+                    Matchers.is(true)
         );
     }
 
@@ -78,8 +87,12 @@ public final class FkContentTypeTest {
     public void matchesDifferentTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "application/json charset=utf-8", new RsEmpty()
-            ).route(
+                "application/json charset=utf-8", new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsEmpty();
+                    }
+                }).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
@@ -98,8 +111,12 @@ public final class FkContentTypeTest {
     public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new RsEmpty()
-            ).route(
+                FkContentTypeTest.CTYPE, new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsEmpty();
+                    }
+                }).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
@@ -117,12 +134,17 @@ public final class FkContentTypeTest {
     @Test
     public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
-            new FkContentType("*/*", new RsEmpty()).route(
-                new RqWithHeader(
-                    new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
-                )
-            ).has(),
-            Matchers.is(true)
+            new FkContentType(
+                "*/*", new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsEmpty();
+                    }
+                }).route(
+                    new RqWithHeader(
+                        new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
+                    )
+                ).has(), Matchers.is(true)
         );
     }
 
@@ -134,8 +156,12 @@ public final class FkContentTypeTest {
     public void matchesDifferentEncodingsTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new RsEmpty()
-            ).route(
+                FkContentTypeTest.CTYPE, new Take() {
+                    @Override
+                    public Response act(final Request req) throws IOException {
+                        return new RsEmpty();
+                    }
+                }).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
