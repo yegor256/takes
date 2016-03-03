@@ -36,29 +36,93 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link BodyContent.URLContent}.
+ * Test case for {@link Body}.
  *
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
  * @since 0.32
  */
-public final class URLContentTest {
+public final class BodyTest {
 
     /**
-     * BodyContent.URLContent can provide the expected input.
+     * Body.ByteArrayContent can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectInput() throws Exception {
-        final Path file = URLContentTest.createTempFile();
+    public void returnsCorrectInputWithByteArrayContent() throws Exception {
+        final byte[] bytes =
+            "ByteArray returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            ByteStreams.toByteArray(
+                new Body.ByteArrayContent(bytes).input()
+            ),
+            Matchers.equalTo(bytes)
+        );
+    }
+
+    /**
+     * Body.ByteArrayContent can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLengthWithByteArrayContent() throws Exception {
+        final byte[] bytes =
+            "ByteArray returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            new Body.ByteArrayContent(bytes).length(),
+            Matchers.equalTo(bytes.length)
+        );
+    }
+
+    /**
+     * Body.Stream can provide the expected input.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectInputWithStream() throws Exception {
+        final byte[] bytes =
+            "Stream returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            ByteStreams.toByteArray(
+                new Body.Stream(
+                    new ByteArrayInputStream(bytes)
+                ).input()
+            ),
+            Matchers.equalTo(bytes)
+        );
+    }
+
+    /**
+     * Body.Stream can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLengthWithStream() throws Exception {
+        final byte[] bytes =
+            "Stream returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            new Body.Stream(
+                new ByteArrayInputStream(bytes)
+            ).length(),
+            Matchers.equalTo(bytes.length)
+        );
+    }
+
+    /**
+     * Body.URLContent can provide the expected input.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectInputWithURLContent() throws Exception {
+        final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                "Hello returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+                "URL returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             try (final InputStream input =
-                new BodyContent.URLContent(file.toUri().toURL()).input()) {
+                new Body.URLContent(file.toUri().toURL()).input()) {
                 MatcherAssert.assertThat(
                     ByteStreams.toByteArray(input),
                     Matchers.equalTo(bytes)
@@ -70,20 +134,20 @@ public final class URLContentTest {
     }
 
     /**
-     * BodyContent.URLContent can provide the expected length.
+     * Body.URLContent can provide the expected length.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectLength() throws Exception {
-        final Path file = URLContentTest.createTempFile();
+    public void returnsCorrectLengthWithURLContent() throws Exception {
+        final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                "Hello returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+                "URL returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             MatcherAssert.assertThat(
-                new BodyContent.URLContent(file.toUri().toURL()).length(),
+                new Body.URLContent(file.toUri().toURL()).length(),
                 Matchers.equalTo(bytes.length)
             );
         } finally {
@@ -97,6 +161,6 @@ public final class URLContentTest {
      * @throws IOException If the file could not be created
      */
     private static Path createTempFile() throws IOException {
-        return Files.createTempFile("URLContentTest", "tmp");
+        return Files.createTempFile("BodyTest", "tmp");
     }
 }

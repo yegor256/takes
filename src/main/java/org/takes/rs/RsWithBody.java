@@ -112,7 +112,7 @@ public final class RsWithBody extends RsWrap {
      * @param url URL with body
      */
     public RsWithBody(final Response res, final URL url) {
-        this(res, new BodyContent.URLContent(url));
+        this(res, new Body.URLContent(url));
     }
 
     /**
@@ -121,7 +121,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final byte[] body) {
-        this(res, new BodyContent.ByteArrayContent(body));
+        this(res, new Body.ByteArrayContent(body));
     }
 
     /**
@@ -130,7 +130,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        this(res, new BodyContent.InputStreamContent(body));
+        this(res, new Body.Stream(body));
     }
 
     /**
@@ -139,7 +139,7 @@ public final class RsWithBody extends RsWrap {
      * @param res Original response
      * @param body The content of the body
      */
-    private RsWithBody(final Response res, final BodyContent body) {
+    private RsWithBody(final Response res, final Body body) {
         super(
             new Response() {
                 @Override

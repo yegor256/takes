@@ -41,7 +41,7 @@ import java.nio.file.StandardCopyOption;
  * @version $Id$
  * @since 0.32
  */
-interface BodyContent {
+interface Body {
     /**
      * Gives a reusable {@code InputStream} corresponding to the content of
      * the body.
@@ -62,7 +62,7 @@ interface BodyContent {
     /**
      * Content of a body based on an {@link URL}.
      */
-    final class URLContent implements BodyContent {
+    final class URLContent implements Body {
 
         /**
          * The {@link URL} of the content.
@@ -93,7 +93,7 @@ interface BodyContent {
     /**
      * Content of a body based on a byte array.
      */
-    final class ByteArrayContent implements BodyContent {
+    final class ByteArrayContent implements Body {
 
         /**
          * The content of the body in a byte array.
@@ -122,7 +122,7 @@ interface BodyContent {
     /**
      * The content of the body based on an {@link InputStream}.
      */
-    final class InputStreamContent implements BodyContent {
+    final class Stream implements Body {
 
         /**
          * The temporary file that contains the content of the body.
@@ -130,12 +130,12 @@ interface BodyContent {
         private final transient File file;
 
         /**
-         * Constructs an {@code InputStreamContent} with the specified
+         * Constructs an {@code Stream} with the specified
          * {@link InputStream}.
          * @param input The content of the body as stream.
          */
-        InputStreamContent(final InputStream input) {
-            this.file = BodyContent.InputStreamContent.content(input);
+        Stream(final InputStream input) {
+            this.file = Body.Stream.content(input);
         }
 
         @Override
