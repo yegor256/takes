@@ -63,12 +63,9 @@ public final class FkContentTypeTest {
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "text/xml", new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsEmpty();
-                    }
-                }).route(
+                "text/xml",
+                FkContentTypeTest.createTakeWithEmptyResponse()
+                ).route(
                     new RqWithHeader(
                         new RqFake(),
                         FkContentTypeTest.CONTENT_TYPE,
@@ -87,12 +84,9 @@ public final class FkContentTypeTest {
     public void matchesDifferentTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "application/json charset=utf-8", new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsEmpty();
-                    }
-                }).route(
+                "application/json charset=utf-8",
+                FkContentTypeTest.createTakeWithEmptyResponse()
+                ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
@@ -111,12 +105,9 @@ public final class FkContentTypeTest {
     public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsEmpty();
-                    }
-                }).route(
+                FkContentTypeTest.CTYPE,
+                FkContentTypeTest.createTakeWithEmptyResponse()
+                ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
@@ -135,12 +126,9 @@ public final class FkContentTypeTest {
     public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "*/*", new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsEmpty();
-                    }
-                }).route(
+                "*/*",
+                FkContentTypeTest.createTakeWithEmptyResponse()
+                ).route(
                     new RqWithHeader(
                         new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
                     )
@@ -156,12 +144,9 @@ public final class FkContentTypeTest {
     public void matchesDifferentEncodingsTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsEmpty();
-                    }
-                }).route(
+                FkContentTypeTest.CTYPE,
+                FkContentTypeTest.createTakeWithEmptyResponse()
+                ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
@@ -181,5 +166,18 @@ public final class FkContentTypeTest {
         EqualsVerifier.forClass(FkContentType.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
+    }
+
+    /**
+     * Create a Take instance with empty response.
+     * @return Take
+     */
+    private static Take createTakeWithEmptyResponse() {
+        return new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsEmpty();
+            }
+        };
     }
 }
