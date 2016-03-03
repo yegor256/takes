@@ -42,6 +42,7 @@ import org.takes.rs.RsPrint;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsBasicTest {
 
@@ -49,6 +50,11 @@ public final class PsBasicTest {
      * Basic Auth.
      */
     private static final String AUTH_BASIC = "Authorization: Basic %s";
+
+    /**
+     * Valid code parameter.
+     */
+    private static final String VALID_CODE = "?valid_code=%s";
 
     /**
      * PsBasic can handle connection with valid credential.
@@ -65,12 +71,47 @@ public final class PsBasicTest {
                 new RqFake(
                     RqMethod.GET,
                     String.format(
-                        "?valid_code=%s",
+                        PsBasicTest.VALID_CODE,
                         // @checkstyle MagicNumberCheck (1 line)
                         RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 this.generateAuthenticateHead(user, "pass")
+            )
+        );
+        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            identity.get().urn(),
+            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+        );
+    }
+
+    /**
+     * PsBasic can handle connection with valid credential when.
+     * @throws Exception if any error occurs
+     */
+    @Test
+    public void handleConnectionWithValidCredentialDefaultEntry()
+        throws Exception {
+        final String user = "johny";
+        final String password = "password2";
+        final Opt<Identity> identity = new PsBasic(
+            "RealmAA",
+            new PsBasic.Default(
+                "mike my%20password1 urn:basic:michael",
+                String.format("%s %s urn:basic:%s", user, password, user)
+            )
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        PsBasicTest.VALID_CODE,
+                        // @checkstyle MagicNumberCheck (1 line)
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                this.generateAuthenticateHead(user, password)
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
@@ -192,6 +233,7 @@ public final class PsBasicTest {
     private String generateIdentityUrn(final String user) {
         return String.format("urn:basic:%s", user);
     }
+
     /**
      * Generate the string used on the request that store information about
      * authentication.
