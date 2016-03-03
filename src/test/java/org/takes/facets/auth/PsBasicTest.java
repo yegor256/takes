@@ -87,7 +87,8 @@ public final class PsBasicTest {
     }
 
     /**
-     * PsBasic can handle connection with valid credential when.
+     * PsBasic can handle connection with valid credential when Entry is
+     * a instance of Default.
      * @throws Exception if any error occurs
      */
     @Test
