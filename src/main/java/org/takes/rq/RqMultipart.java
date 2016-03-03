@@ -128,26 +128,14 @@ public interface RqMultipart extends Request {
          * @param req Original request
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
-         * @todo #558:30min Base ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Base(final Request req) throws IOException {
             super(req);
-            final InputStream stream = new RqLengthAware(req).body();
-            this.body = Channels.newChannel(stream);
-            this.buffer = ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, stream.available())
-            );
+            this.body = Base.body(req);
+            this.buffer = Base.buffer(req);
             this.map = this.requests(req);
         }
+
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
@@ -176,6 +164,32 @@ public interface RqMultipart extends Request {
         public Iterable<String> names() {
             return this.map.keySet();
         }
+
+        /**
+         * Returns the ReadableByteChannel based on request body.
+         * @param req Original request
+         * @return The ReadableByteChannel based on request body.
+         * @throws IOException If fails
+         */
+        private static ReadableByteChannel body(final Request req)
+            throws IOException {
+            return Channels.newChannel(new RqLengthAware(req).body());
+        }
+
+        /**
+         * Returns the ByteBuffer for the request body.
+         * @param req Original request
+         * @return The ByteBuffer for the request body.
+         * @throws IOException If fails
+         */
+        private static ByteBuffer buffer(final Request req)
+            throws IOException {
+            return ByteBuffer.allocate(
+                // @checkstyle MagicNumberCheck (1 line)
+                Math.min(8192, new RqLengthAware(req).body().available())
+            );
+        }
+
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
