@@ -25,9 +25,11 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Test case for {@link CapInputStream}.
@@ -52,6 +54,31 @@ public final class CapInputStreamTest {
             ).available(),
             Matchers.equalTo(length)
         );
+    }
+
+    /**
+     * CapInputStream can close a stream.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void closesStream() throws Exception {
+        final InputStream stream = Mockito.mock(InputStream.class);
+        final CapInputStream wrapper = new CapInputStream(stream, 0L);
+        wrapper.close();
+        Mockito.verify(stream, Mockito.times(1)).close();
+    }
+
+    /**
+     * CapInputStream can skip on a stream.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void skipsOnStream() throws Exception {
+        final long skip = 25L;
+        final InputStream stream = Mockito.mock(InputStream.class);
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
+        wrapper.skip(skip);
+        Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
 
 }

@@ -34,10 +34,6 @@ import java.io.InputStream;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.16
- * @todo #254:30min CapInputStream should delegate all standard InputStream
- *  calls to it's origin. It's very important in context of closing stream -
- *  right code should close the stream but default InputStream implementation
- *  just throws IOException
  */
 final class CapInputStream extends InputStream {
 
@@ -98,5 +94,15 @@ final class CapInputStream extends InputStream {
             this.more -= (long) readed;
         }
         return readed;
+    }
+
+    @Override
+    public long skip(final long num) throws IOException {
+        return this.origin.skip(num);
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.origin.close();
     }
 }

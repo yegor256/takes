@@ -32,7 +32,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
@@ -41,7 +40,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -64,8 +62,6 @@ import org.takes.tk.TkText;
  *  persistent connections. Would be great to implement
  *  this feature. BkBasic.accept should handle more
  *  than one HTTP request in one connection.
- * @todo #516:30min It will be nice to refactor tests with Socket usage and
- *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
  *  Reusable header names will help in many situations. For example - in new
  *  integration tests.
@@ -98,9 +94,8 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        final MkSocket socket = BkBasicTest.createMockSocket();
+        final ByteArrayOutputStream baos = socket.bufferedOutput();
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
@@ -370,9 +365,8 @@ public final class BkBasicTest {
      * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
-    private static Socket createMockSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
+    private static MkSocket createMockSocket() throws IOException {
+        return new MkSocket(
             new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
@@ -383,16 +377,5 @@ public final class BkBasicTest {
                 ).getBytes()
             )
         );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        return socket;
     }
 }
