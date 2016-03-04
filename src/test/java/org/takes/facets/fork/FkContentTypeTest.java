@@ -65,14 +65,14 @@ public final class FkContentTypeTest {
             new FkContentType(
                 "text/xml",
                 FkContentTypeTest.createTakeWithEmptyResponse()
-                ).route(
-                    new RqWithHeader(
-                        new RqFake(),
-                        FkContentTypeTest.CONTENT_TYPE,
-                        "*/* "
-                    )
-                ).has(),
-                    Matchers.is(true)
+            ).route(
+                new RqWithHeader(
+                    new RqFake(),
+                    FkContentTypeTest.CONTENT_TYPE,
+                    "*/* "
+                )
+            ).has(),
+                Matchers.is(true)
         );
     }
 
@@ -86,14 +86,14 @@ public final class FkContentTypeTest {
             new FkContentType(
                 "application/json charset=utf-8",
                 FkContentTypeTest.createTakeWithEmptyResponse()
-                ).route(
+            ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
                     "images/*"
                 )
             ).has(),
-            Matchers.is(false)
+                Matchers.is(false)
         );
     }
 
