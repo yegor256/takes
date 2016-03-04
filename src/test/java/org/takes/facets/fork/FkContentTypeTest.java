@@ -129,10 +129,10 @@ public final class FkContentTypeTest {
                 "*/*",
                 FkContentTypeTest.createTakeWithEmptyResponse()
             ).route(
-                    new RqWithHeader(
-                        new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
-                    )
-                ).has(), Matchers.is(true)
+                new RqWithHeader(
+                    new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
+                )
+            ).has(), Matchers.is(true)
         );
     }
 
