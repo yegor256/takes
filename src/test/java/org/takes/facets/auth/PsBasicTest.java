@@ -36,6 +36,7 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
+import com.jcabi.aspects.Tv;
 
 /**
  * Test of {@link PsBasic}.
@@ -72,8 +73,7 @@ public final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 this.generateAuthenticateHead(user, "pass")
@@ -108,8 +108,7 @@ public final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 this.generateAuthenticateHead(user, password)
@@ -139,8 +138,7 @@ public final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            // @checkstyle MagicNumberCheck (1 line)
-                            RandomStringUtils.randomAlphanumeric(10)
+                            RandomStringUtils.randomAlphanumeric(Tv.TEN)
                         )
                     ),
                     this.generateAuthenticateHead("username", "wrong")
@@ -176,8 +174,7 @@ public final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 this.generateAuthenticateHead(user, "changeit"),
