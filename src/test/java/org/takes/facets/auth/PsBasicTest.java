@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import com.jcabi.aspects.Tv;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -36,7 +37,6 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
-import com.jcabi.aspects.Tv;
 
 /**
  * Test of {@link PsBasic}.
