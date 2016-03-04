@@ -32,7 +32,7 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * A Fork chain. Routes to each given Fork in order until one returns
+ * A Fork chain. Routes to each given Fork in order, until one of them returns
  * a response or until none are left.
  * @author Carlos Gines (efrel.v2@gmail.com)
  * @version $Id$
