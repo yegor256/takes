@@ -128,7 +128,7 @@ public final class FkContentTypeTest {
             new FkContentType(
                 "*/*",
                 FkContentTypeTest.createTakeWithEmptyResponse()
-                ).route(
+            ).route(
                     new RqWithHeader(
                         new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
                     )
