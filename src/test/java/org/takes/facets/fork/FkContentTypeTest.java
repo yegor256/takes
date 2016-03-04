@@ -72,7 +72,7 @@ public final class FkContentTypeTest {
                     "*/* "
                 )
             ).has(),
-                Matchers.is(true)
+            Matchers.is(true)
         );
     }
 
@@ -93,7 +93,7 @@ public final class FkContentTypeTest {
                     "images/*"
                 )
             ).has(),
-                Matchers.is(false)
+            Matchers.is(false)
         );
     }
 
@@ -107,7 +107,7 @@ public final class FkContentTypeTest {
             new FkContentType(
                 FkContentTypeTest.CTYPE,
                 FkContentTypeTest.createTakeWithEmptyResponse()
-                ).route(
+            ).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
