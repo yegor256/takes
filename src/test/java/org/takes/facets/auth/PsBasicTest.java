@@ -114,13 +114,13 @@ public final class PsBasicTest {
                         RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
-                this.generateAuthenticateHead(user, password)
+                PsBasicTest.header(user, password)
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
