@@ -64,7 +64,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType(
                 "text/xml",
-                FkContentTypeTest.createTakeWithEmptyResponse()
+                new RsEmpty()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -85,7 +85,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType(
                 "application/json charset=utf-8",
-                FkContentTypeTest.createTakeWithEmptyResponse()
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -106,7 +106,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,
-                FkContentTypeTest.createTakeWithEmptyResponse()
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -127,7 +127,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType(
                 "*/*",
-                FkContentTypeTest.createTakeWithEmptyResponse()
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
@@ -145,7 +145,7 @@ public final class FkContentTypeTest {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,
-                FkContentTypeTest.createTakeWithEmptyResponse()
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -172,7 +172,7 @@ public final class FkContentTypeTest {
      * Create a Take instance with empty response.
      * @return Take
      */
-    private static Take createTakeWithEmptyResponse() {
+    private static Take emptyResponse() {
         return new Take() {
             @Override
             public Response act(final Request req) throws IOException {

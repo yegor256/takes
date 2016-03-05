@@ -30,6 +30,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
+import org.takes.tk.TkFixed;
 
 /**
  * Fork by Content-type accepted by "Content-Type" HTTP header.
@@ -53,6 +54,15 @@ public final class FkContentType implements Fork {
      * Take to handle the request and dynamically return the response.
      */
     private final transient Take take;
+
+    /**
+     * Ctor.
+     * @param atype Accepted type
+     * @param response Response to return
+     */
+    public FkContentType(final String atype, final Response response) {
+        this(atype, new TkFixed(response));
+    }
 
     /**
      * Ctor.
