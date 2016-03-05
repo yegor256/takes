@@ -283,7 +283,7 @@ public interface RqMultipart extends Request {
          */
         private void copy(final WritableByteChannel target,
             final byte[] boundary, final ReadableByteChannel body)
-                throws IOException {
+            throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
