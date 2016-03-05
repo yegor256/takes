@@ -62,10 +62,7 @@ public final class FkContentTypeTest {
     @Test
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
-            new FkContentType(
-                "text/xml",
-                new RsEmpty()
-            ).route(
+            new FkContentType("text/xml", new RsEmpty()).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,
