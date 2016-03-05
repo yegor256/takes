@@ -70,13 +70,13 @@ public final class PsBasicTest {
                         RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
-                this.generateAuthenticateHead(user, "pass")
+                PsBasicTest.head(user, "pass")
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
@@ -101,7 +101,7 @@ public final class PsBasicTest {
                             RandomStringUtils.randomAlphanumeric(10)
                         )
                     ),
-                    this.generateAuthenticateHead("username", "wrong")
+                    PsBasicTest.head("username", "wrong")
                 )
             );
         } catch (final RsForward ex) {
@@ -138,7 +138,7 @@ public final class PsBasicTest {
                         RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
-                this.generateAuthenticateHead(user, "changeit"),
+                PsBasicTest.head(user, "changeit"),
                 "Referer: http://teamed.io/",
                 "Connection:keep-alive",
                 "Content-Encoding:gzip",
@@ -149,7 +149,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
@@ -171,7 +171,7 @@ public final class PsBasicTest {
                     ),
                     String.format(
                         "XYZ%s",
-                        this.generateAuthenticateHead("user", "password")
+                        PsBasicTest.head("user", "password")
                     ),
                     "XYZReferer: http://teamed.io/",
                     "XYZConnection:keep-alive",
@@ -189,9 +189,10 @@ public final class PsBasicTest {
      * @param user User
      * @return URN
      */
-    private String generateIdentityUrn(final String user) {
+    private static String urn(final String user) {
         return String.format("urn:basic:%s", user);
     }
+
     /**
      * Generate the string used on the request that store information about
      * authentication.
@@ -199,10 +200,7 @@ public final class PsBasicTest {
      * @param pass Password
      * @return Header string.
      */
-    private String generateAuthenticateHead(
-        final String user,
-        final String pass
-    ) {
+    private static String head(final String user, final String pass) {
         final String auth = String.format("%s:%s", user, pass);
         final String encoded = DatatypeConverter.printBase64Binary(
             auth.getBytes()
