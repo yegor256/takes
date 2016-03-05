@@ -45,6 +45,7 @@ import org.takes.tk.TkText;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsBasicTest {
 
@@ -199,7 +200,7 @@ public final class PsBasicTest {
             ),
             new PsBasic(
                 "myrealm",
-                new PsBasic.Default("mike password urn:users:michael")
+                new PsBasic.Default("mike secret11 urn:users:michael")
             )
         );
         MatcherAssert.assertThat(
@@ -207,14 +208,13 @@ public final class PsBasicTest {
                 take.act(
                     new RqWithHeader(
                         new RqFake(),
-                        PsBasicTest.header("mike", "password")
+                        PsBasicTest.header("mike", "secret11")
                     )
                 )
             ).print(),
             Matchers.containsString("HTTP/1.1 200 OK")
         );
     }
-
 
     /**
      * Generate the identity urn.
