@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 import org.takes.tk.TkFixed;
 import org.takes.tk.TkText;
@@ -178,15 +178,15 @@ public final class FkRegex implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Optional<Response> route(final Request req) throws IOException {
         String path = new RqHref.Base(req).href().path();
         if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
             path = path.substring(0, path.length() - 1);
         }
         final Matcher matcher = this.pattern.matcher(path);
-        final Opt<Response> resp;
+        final Optional<Response> resp;
         if (matcher.matches()) {
-            resp = new Opt.Single<Response>(
+            resp = new Optional<>(
                 this.target.act(
                     new RqRegex() {
                         @Override
@@ -205,7 +205,7 @@ public final class FkRegex implements Fork {
                 )
             );
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = Optional.empty();
         }
         return resp;
     }

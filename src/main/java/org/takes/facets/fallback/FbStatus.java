@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Condition;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -74,10 +74,10 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final Condition<Integer> check) {
         this(check, new Fallback() {
             @Override
-            public Opt<Response> route(final RqFallback req)
+            public Optional<Response> route(final RqFallback req)
                 throws IOException {
                 final Response res = new RsWithStatus(req.code());
-                return new Opt.Single<Response>(
+                return new Optional<Response>(
                     new RsWithType(
                         new RsWithBody(
                             res,
@@ -113,9 +113,9 @@ public final class FbStatus extends FbWrap {
             code,
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
+                public Optional<Response> route(final RqFallback req)
                     throws IOException {
-                    return new Opt.Single<Response>(take.act(req));
+                    return new Optional<>(take.act(req));
                 }
             }
         );
@@ -154,11 +154,13 @@ public final class FbStatus extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
+                public Optional<Response> route(final RqFallback req)
                     throws IOException {
-                    Opt<Response> rsp = new Opt.Empty<Response>();
+                    final Optional<Response> rsp;
                     if (check.fits(req.code())) {
                         rsp = fallback.route(req);
+                    } else {
+                        rsp = Optional.empty();
                     }
                     return rsp;
                 }

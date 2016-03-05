@@ -26,7 +26,7 @@ package org.takes.facets.auth;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Logout.
@@ -41,8 +41,8 @@ import org.takes.misc.Opt;
 public final class PsLogout implements Pass {
 
     @Override
-    public Opt<Identity> enter(final Request request) {
-        return new Opt.Single<Identity>(Identity.ANONYMOUS);
+    public Optional<Identity> enter(final Request request) {
+        return new Optional<>(Identity.ANONYMOUS);
     }
 
     @Override

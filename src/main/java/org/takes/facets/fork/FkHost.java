@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHeaders;
 
 /**
@@ -71,16 +71,17 @@ public final class FkHost extends FkWrap {
     private static Fork fork(final String host, final Take take) {
         return new Fork() {
             @Override
-            public Opt<Response> route(final Request req) throws IOException {
+            public Optional<Response> route(final Request req)
+                throws IOException {
                 final String hst = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
                 ).single("host");
-                final Opt<Response> rsp;
+                final Optional<Response> rsp;
                 if (host.toLowerCase(Locale.ENGLISH)
                     .equals(hst.toLowerCase(Locale.ENGLISH))) {
-                    rsp = new Opt.Single<>(take.act(req));
+                    rsp = new Optional<>(take.act(req));
                 } else {
-                    rsp = new Opt.Empty<>();
+                    rsp = Optional.empty();
                 }
                 return rsp;
             }

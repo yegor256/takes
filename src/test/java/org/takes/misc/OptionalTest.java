@@ -30,57 +30,57 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for Opt.Optional.
+ * Test case for Optional.
  * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
  * @since 0.32
  */
-public final class OptOptionalTest {
+public final class OptionalTest {
     /**
-     * Opt.Optional can return true for non-empty container.
+     * Optional can return true for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsTrueForNonEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
-            new Opt.Optional<>(new Object()).has(),
+            new Optional<>(new Object()).has(),
             Matchers.is(true)
         );
     }
 
     /**
-     * Opt.Optional can return false for empty container.
+     * Optional can return false for empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsFalseForEmptyContainer() throws Exception {
         MatcherAssert.assertThat(
-            new Opt.Optional<>(null).has(),
+            new Optional<>(null).has(),
             Matchers.is(false)
         );
     }
 
     /**
-     * Opt.Optional can return item for non-empty container.
+     * Optional can return item for non-empty container.
      * @throws Exception If something goes wrong
      */
     @Test
     public void returnsItemForNonEmptyContainer() throws Exception {
         final Object item = new Object();
         MatcherAssert.assertThat(
-            new Opt.Optional<>(item).get(),
+            new Optional<>(item).get(),
             Matchers.sameInstance(item)
         );
     }
 
     /**
-     * Opt.Optional can throw NoSuchElementException for empty
+     * Optional can throw NoSuchElementException for empty
      * container.
      * @throws Exception If something goes wrong
      */
     @Test(expected = NoSuchElementException.class)
     public void throwsNoSuchElementExceptionForEmptyContainer()
         throws Exception {
-        new Opt.Optional<>(null).get();
+        new Optional<>(null).get();
     }
 }

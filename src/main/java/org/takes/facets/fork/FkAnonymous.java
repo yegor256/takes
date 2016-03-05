@@ -30,7 +30,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fork if no user is logged in now.
@@ -73,13 +73,13 @@ public final class FkAnonymous implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Optional<Response> route(final Request req) throws IOException {
         final Identity identity = new RqAuth(req).identity();
-        final Opt<Response> resp;
+        final Optional<Response> resp;
         if (identity.equals(Identity.ANONYMOUS)) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Optional<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = Optional.empty();
         }
         return resp;
     }

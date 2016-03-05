@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.misc.Transform;
 import org.takes.misc.TransformAction;
 
@@ -115,7 +115,7 @@ public final class TkRetry implements Take {
             new TransformAction<IOException, String>() {
                 @Override
                 public String transform(final IOException element) {
-                    final Opt<String> message = new Opt.Single<String>(
+                    final Optional<String> message = new Optional<>(
                         element.getMessage()
                     );
                     String result = "";

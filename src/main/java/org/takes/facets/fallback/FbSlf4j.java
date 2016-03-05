@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
@@ -59,10 +59,10 @@ public final class FbSlf4j extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
+                public Optional<Response> route(final RqFallback req)
                     throws IOException {
                     FbSlf4j.log(req);
-                    return new Opt.Empty<Response>();
+                    return Optional.empty();
                 }
             }
         );

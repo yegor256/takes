@@ -27,7 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Wrap for the fork.
@@ -56,7 +56,7 @@ public class FkWrap implements Fork {
     }
 
     @Override
-    public final Opt<Response> route(final Request req)
+    public final Optional<Response> route(final Request req)
         throws IOException {
         return this.origin.route(req);
     }

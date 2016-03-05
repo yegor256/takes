@@ -25,7 +25,7 @@ package org.takes.facets.fallback;
 
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Empty fallback.
@@ -46,8 +46,8 @@ public final class FbEmpty extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<Response>();
+                public Optional<Response> route(final RqFallback req) {
+                    return Optional.empty();
                 }
             }
         );

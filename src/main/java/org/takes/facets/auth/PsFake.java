@@ -26,7 +26,7 @@ package org.takes.facets.auth;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fake pass.
@@ -54,14 +54,14 @@ public final class PsFake implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request) {
-        final Opt<Identity> user;
+    public Optional<Identity> enter(final Request request) {
+        final Optional<Identity> user;
         if (this.condition) {
-            user = new Opt.Single<Identity>(
+            user = new Optional<Identity>(
                 new Identity.Simple("urn:test:1")
             );
         } else {
-            user = new Opt.Empty<Identity>();
+            user = Optional.empty();
         }
         return user;
     }

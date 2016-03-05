@@ -26,7 +26,7 @@ package org.takes.facets.auth;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Pass that doesn't do anything.
@@ -41,8 +41,8 @@ import org.takes.misc.Opt;
 public final class PsEmpty implements Pass {
 
     @Override
-    public Opt<Identity> enter(final Request request) {
-        return new Opt.Empty<Identity>();
+    public Optional<Identity> enter(final Request request) {
+        return Optional.empty();
     }
 
     @Override

@@ -32,7 +32,7 @@ import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rs.RsWrap;
 
 /**
@@ -87,7 +87,7 @@ public final class RsFork extends RsWrap {
     private static Response pick(final Request req,
         final Iterable<Fork> forks) throws IOException {
         for (final Fork fork : forks) {
-            final Opt<Response> rsps = fork.route(req);
+            final Optional<Response> rsps = fork.route(req);
             if (rsps.has()) {
                 return rsps.get();
             }

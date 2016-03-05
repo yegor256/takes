@@ -45,7 +45,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 
 /**
@@ -118,7 +118,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request trequest)
+    public Optional<Identity> enter(final Request trequest)
         throws IOException {
         final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param("code").iterator();
@@ -141,7 +141,7 @@ public final class PsFacebook implements Pass {
                 .path("picture")
                 .toString()
         );
-        return new Opt.Single<Identity>(
+        return new Optional<Identity>(
             new Identity.Simple(
                 String.format("urn:facebook:%s", user.getId()),
                 props

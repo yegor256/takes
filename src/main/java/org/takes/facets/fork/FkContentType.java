@@ -27,7 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHeaders;
 
 /**
@@ -64,12 +64,12 @@ public final class FkContentType implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
-        final Opt<Response> resp;
+    public Optional<Response> route(final Request req) throws IOException {
+        final Optional<Response> resp;
         if (FkContentType.getType(req).contains(this.type)) {
-            resp = new Opt.Single<Response>(this.origin);
+            resp = new Optional<>(this.origin);
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = Optional.empty();
         }
         return resp;
     }

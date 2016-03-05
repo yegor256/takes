@@ -30,7 +30,7 @@ import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.apache.log4j.Logger;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
@@ -50,10 +50,10 @@ public final class FbLog4j extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
+                public Optional<Response> route(final RqFallback req)
                     throws IOException {
                     FbLog4j.log(req);
-                    return new Opt.Empty<Response>();
+                    return Optional.empty();
                 }
             }
         );

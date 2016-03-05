@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqCookies;
 import org.takes.rs.RsWithCookie;
 
@@ -96,16 +96,18 @@ public final class PsCookie implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request req) throws IOException {
+    public Optional<Identity> enter(final Request req) throws IOException {
         final Iterator<String> cookies = new RqCookies.Base(req)
             .cookie(this.cookie).iterator();
-        Opt<Identity> user = new Opt.Empty<Identity>();
+        final Optional<Identity> user;
         if (cookies.hasNext()) {
-            user = new Opt.Single<Identity>(
+            user = new Optional<>(
                 this.codec.decode(
                     cookies.next().getBytes(StandardCharsets.UTF_8)
                 )
             );
+        } else {
+            user = Optional.empty();
         }
         return user;
     }
