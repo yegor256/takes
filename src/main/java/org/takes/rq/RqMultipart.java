@@ -120,9 +120,9 @@ public interface RqMultipart extends Request {
          */
         private final transient ByteBuffer buffer;
         /**
-         * Origin request body.
+         * InputStream based on request body.
          */
-        private final transient ReadableByteChannel body;
+        private final transient InputStream stream;
         /**
          * Ctor.
          * @param req Original request
@@ -131,11 +131,13 @@ public interface RqMultipart extends Request {
          */
         public Base(final Request req) throws IOException {
             super(req);
-            this.body = Base.body(req);
-            this.buffer = Base.buffer(req);
+            this.stream = new RqLengthAware(req).body();
+            this.buffer = ByteBuffer.allocate(
+                // @checkstyle MagicNumberCheck (1 line)
+                Math.min(8192, this.stream.available())
+            );
             this.map = this.requests(req);
         }
-
         @Override
         public Iterable<Request> part(final CharSequence name) {
             final List<Request> values = this.map
@@ -164,32 +166,6 @@ public interface RqMultipart extends Request {
         public Iterable<String> names() {
             return this.map.keySet();
         }
-
-        /**
-         * Returns the ReadableByteChannel based on request body.
-         * @param req Original request
-         * @return The ReadableByteChannel based on request body.
-         * @throws IOException If fails
-         */
-        private static ReadableByteChannel body(final Request req)
-            throws IOException {
-            return Channels.newChannel(new RqLengthAware(req).body());
-        }
-
-        /**
-         * Returns the ByteBuffer for the request body.
-         * @param req Original request
-         * @return The ByteBuffer for the request body.
-         * @throws IOException If fails
-         */
-        private static ByteBuffer buffer(final Request req)
-            throws IOException {
-            return ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, new RqLengthAware(req).body().available())
-            );
-        }
-
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
@@ -224,7 +200,8 @@ public interface RqMultipart extends Request {
                     )
                 );
             }
-            if (this.body.read(this.buffer) < 0) {
+            final ReadableByteChannel body = Channels.newChannel(this.stream);
+            if (body.read(this.buffer) < 0) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     "failed to read the request body"
@@ -242,7 +219,7 @@ public interface RqMultipart extends Request {
                     break;
                 }
                 this.buffer.position(this.buffer.position() + 1);
-                requests.add(this.make(boundary));
+                requests.add(this.make(boundary, body));
             }
             return RqMultipart.Base.asMap(requests);
         }
@@ -251,6 +228,7 @@ public interface RqMultipart extends Request {
          *  Scans the origin request until the boundary reached. Caches
          *  the  content into a temporary file and returns it as a new request.
          * @param boundary Boundary
+         * @param body Origin request body
          * @return Request
          * @throws IOException If fails
          * @todo #254:30min in order to delete temporary files InputStream
@@ -258,7 +236,8 @@ public interface RqMultipart extends Request {
          *  requests that means that body of all parts should be closed once
          *  they are not needed anymore.
          */
-        private Request make(final byte[] boundary) throws IOException {
+        private Request make(final byte[] boundary,
+            final ReadableByteChannel body) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
@@ -279,7 +258,7 @@ public interface RqMultipart extends Request {
                         RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
                     )
                 );
-                this.copy(channel, boundary);
+                this.copy(channel, boundary, body);
             } finally {
                 channel.close();
             }
@@ -298,11 +277,13 @@ public interface RqMultipart extends Request {
          * Copy until boundary reached.
          * @param target Output file channel
          * @param boundary Boundary
+         * @param body Origin request body
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
-            final byte[] boundary) throws IOException {
+            final byte[] boundary,
+            final ReadableByteChannel body) throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
@@ -312,7 +293,7 @@ public interface RqMultipart extends Request {
                         this.buffer.put(boundary[idx]);
                     }
                     match = 0;
-                    if (this.body.read(this.buffer) == -1) {
+                    if (body.read(this.buffer) == -1) {
                         break;
                     }
                     this.buffer.flip();
