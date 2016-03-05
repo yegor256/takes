@@ -282,8 +282,8 @@ public interface RqMultipart extends Request {
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
-            final byte[] boundary,
-            final ReadableByteChannel body) throws IOException {
+            final byte[] boundary, final ReadableByteChannel body)
+                throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
