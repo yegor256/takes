@@ -45,7 +45,7 @@ import org.junit.Test;
 public final class BodyTest {
 
     /**
-     * Body.ByteArrayContent can provide the expected input.
+     * Body.ByteArray can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
@@ -54,14 +54,14 @@ public final class BodyTest {
             "ByteArray returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
-                new Body.ByteArrayContent(bytes).input()
+                new Body.ByteArray(bytes).input()
             ),
             Matchers.equalTo(bytes)
         );
     }
 
     /**
-     * Body.ByteArrayContent can provide the expected length.
+     * Body.ByteArray can provide the expected length.
      * @throws Exception If some problem inside.
      */
     @Test
@@ -69,7 +69,7 @@ public final class BodyTest {
         final byte[] bytes =
             "ByteArray returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            new Body.ByteArrayContent(bytes).length(),
+            new Body.ByteArray(bytes).length(),
             Matchers.equalTo(bytes.length)
         );
     }
@@ -109,7 +109,7 @@ public final class BodyTest {
     }
 
     /**
-     * Body.URLContent can provide the expected input.
+     * Body.URL can provide the expected input.
      * @throws Exception If some problem inside.
      */
     @Test
@@ -122,7 +122,7 @@ public final class BodyTest {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             try (final InputStream input =
-                new Body.URLContent(file.toUri().toURL()).input()) {
+                new Body.URL(file.toUri().toURL()).input()) {
                 MatcherAssert.assertThat(
                     ByteStreams.toByteArray(input),
                     Matchers.equalTo(bytes)
@@ -134,7 +134,7 @@ public final class BodyTest {
     }
 
     /**
-     * Body.URLContent can provide the expected length.
+     * Body.URL can provide the expected length.
      * @throws Exception If some problem inside.
      */
     @Test
@@ -147,7 +147,7 @@ public final class BodyTest {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             MatcherAssert.assertThat(
-                new Body.URLContent(file.toUri().toURL()).length(),
+                new Body.URL(file.toUri().toURL()).length(),
                 Matchers.equalTo(bytes.length)
             );
         } finally {
@@ -161,6 +161,6 @@ public final class BodyTest {
      * @throws IOException If the file could not be created
      */
     private static Path createTempFile() throws IOException {
-        return Files.createTempFile("BodyTest", "tmp");
+        return Files.createTempFile(BodyTest.class.getName(), "tmp");
     }
 }

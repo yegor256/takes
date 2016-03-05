@@ -29,7 +29,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -60,20 +59,20 @@ interface Body {
     int length() throws IOException;
 
     /**
-     * Content of a body based on an {@link URL}.
+     * Content of a body based on an {@link java.net.URL}.
      */
-    final class URLContent implements Body {
+    final class URL implements Body {
 
         /**
-         * The {@link URL} of the content.
+         * The {@link java.net.URL} of the content.
          */
-        private final transient URL url;
+        private final transient java.net.URL url;
 
         /**
-         * Constructs an {@code URLContent} with the specified {@link URL}.
-         * @param content The {@link URL} of the content.
+         * Constructs an {@code URL} with the specified {@link java.net.URL}.
+         * @param content The {@link java.net.URL} of the content.
          */
-        URLContent(final URL content) {
+        URL(final java.net.URL content) {
             this.url = content;
         }
 
@@ -93,7 +92,7 @@ interface Body {
     /**
      * Content of a body based on a byte array.
      */
-    final class ByteArrayContent implements Body {
+    final class ByteArray implements Body {
 
         /**
          * The content of the body in a byte array.
@@ -101,10 +100,10 @@ interface Body {
         private final transient byte[] bytes;
 
         /**
-         * Constructs an {@code ByteArrayContent} with the specified byte array.
+         * Constructs an {@code ByteArray} with the specified byte array.
          * @param content The content of the body.
          */
-        ByteArrayContent(final byte[] content) {
+        ByteArray(final byte[] content) {
             this.bytes = content.clone();
         }
 
@@ -130,8 +129,11 @@ interface Body {
         private final transient File file;
 
         /**
-         * Constructs an {@code Stream} with the specified
-         * {@link InputStream}.
+         * Constructs an {@code Stream} with the specified {@link InputStream}.
+         * <p><b>The content of the Stream will be stored into a temporary
+         * file to be able to read it as many times as we want so use it only
+         * for large content, for small content use {@link Body.ByteArray}
+         * instead.</b>
          * @param input The content of the body as stream.
          */
         Stream(final InputStream input) {
@@ -148,6 +150,18 @@ interface Body {
             return (int) this.file.length();
         }
 
+        // Needed to remove the file once the Stream object is no more used.
+        // @checkstyle NoFinalizerCheck (2 lines)
+        // @checkstyle ProtectedMethodInFinalClassCheck (3 lines)
+        @Override
+        protected void finalize() throws Throwable {
+            try {
+                Files.delete(Paths.get(this.file.getAbsolutePath()));
+            } finally {
+                super.finalize();
+            }
+        }
+
         /**
          * Gives the {@code File} that contains the content of the provided
          * {@link InputStream}.
@@ -158,7 +172,7 @@ interface Body {
         private static File content(final InputStream input) {
             final File file;
             try {
-                file = File.createTempFile("InputStreamContent", "tmp");
+                file = File.createTempFile(Body.Stream.class.getName(), "tmp");
                 file.deleteOnExit();
                 try (final InputStream content = input) {
                     Files.copy(
