@@ -71,10 +71,13 @@ public final class RqChunk extends RqWrap {
     private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Transfer-Encoding").iterator();
+        final InputStream result;
         if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
-            throw new UnsupportedOperationException();
+            result = new ChunkedInputStream(req.body());
+        } else {
+            result = req.body();
         }
-        return req.body();
+        return result;
     }
 
 }

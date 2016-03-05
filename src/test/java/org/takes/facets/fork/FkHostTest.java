@@ -21,52 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.facets.fork;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.tk.TkEmpty;
 
 /**
- * Request in which the body is a byte array.
- *
- * @author Dragan Bozanovic (bozanovicdr@gmail.com)
+ * Test case for {@link FkHost}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.24
+ * @since 0.32
  */
-@EqualsAndHashCode
-public final class RqBytes implements Request {
-    /**
-     * Head.
-     */
-    private final transient List<String> hed;
+public final class FkHostTest {
 
     /**
-     * Body.
+     * FkHost can match a host.
+     * @throws IOException If some problem inside
      */
-    private final transient byte[] bdy;
-
-    /**
-     * Ctor.
-     * @param head Head
-     * @param body Body
-     */
-    public RqBytes(final List<String> head, final byte[] body) {
-        this.hed = Collections.unmodifiableList(head);
-        this.bdy = Arrays.copyOf(body, body.length);
+    @Test
+    public void matchesByHost() throws IOException {
+        MatcherAssert.assertThat(
+            new FkHost("www.example.com", new TkEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ).has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkHost("google.com", new TkEmpty()).route(
+                new RqFake("PUT", "/?test")
+            ).has(),
+            Matchers.is(false)
+        );
     }
 
-    @Override
-    public Iterable<String> head() {
-        return this.hed;
-    }
-
-    @Override
-    public InputStream body() {
-        return new ByteArrayInputStream(this.bdy);
-    }
 }

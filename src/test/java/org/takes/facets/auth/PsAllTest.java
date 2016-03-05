@@ -58,6 +58,21 @@ public final class PsAllTest {
     }
 
     /**
+     * Fails if index is less then 0.
+     * @throws Exception If fails
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void indexMustBeNonNegative() throws Exception {
+        MatcherAssert.assertThat(
+            new PsAll(
+                Collections.singletonList(new PsFake(true)),
+                -1
+            ).enter(new RqFake()).has(),
+            Matchers.is(false)
+        );
+    }
+
+    /**
      * Fails if index is greater or equal to the number of Passes to enter.
      * @throws Exception If fails
      */

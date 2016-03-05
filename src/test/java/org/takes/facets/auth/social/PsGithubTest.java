@@ -52,8 +52,8 @@ import org.xembly.Directives;
  * Test case for {@link org.takes.rq.RqMethod}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsGithubTest {
 

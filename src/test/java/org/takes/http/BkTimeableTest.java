@@ -42,7 +42,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link BkTimeable}.
- *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.14.2
@@ -98,7 +97,7 @@ public final class BkTimeableTest {
                             take,
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
-                            "--lifetime=3000",
+                            "--lifetime=4000",
                             "--max-latency=100"
                         ).start(exit);
                     } catch (final IOException ex) {

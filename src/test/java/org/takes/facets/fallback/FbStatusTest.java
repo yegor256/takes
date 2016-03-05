@@ -36,9 +36,9 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link FbStatus}.
  * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.16.10
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FbStatusTest {
 

@@ -21,42 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.misc;
+package org.takes.facets.fork;
 
-import java.util.Iterator;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
- * Verbose iterable.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * A Fork chain. Routes to each given Fork in order, until one of them returns
+ * a response or until none are left.
+ * @author Carlos Gines (efrel.v2@gmail.com)
  * @version $Id$
- * @param <T> Type of item
- * @since 0.10
+ * @since 0.33
  */
-public final class VerboseIterable<T> implements Iterable<T> {
+public final class FkChain implements Fork {
 
     /**
-     * Original iterator.
+     * Forks.
      */
-    private final transient Iterable<T> origin;
-
-    /**
-     * Error message when running out of items.
-     */
-    private final transient CharSequence error;
+    private final transient Collection<Fork> forks;
 
     /**
      * Ctor.
-     * @param iter Original iterator
-     * @param msg Error message
      */
-    public VerboseIterable(final Iterable<T> iter, final CharSequence msg) {
-        this.origin = iter;
-        this.error = msg;
+    public FkChain() {
+        this(Collections.<Fork>emptyList());
+    }
+
+    /**
+     * Ctor.
+     * @param forks Forks
+     */
+    public FkChain(final Fork... forks) {
+        this(Arrays.asList(forks));
+    }
+
+    /**
+     * Ctor.
+     * @param forks Forks
+     */
+    public FkChain(final Collection<Fork> forks) {
+        this.forks = Collections.unmodifiableCollection(forks);
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new VerboseIterator<T>(this.origin.iterator(), this.error);
+    public Opt<Response> route(final Request request) throws IOException {
+        Opt<Response> response = new Opt.Empty<Response>();
+        for (final Fork fork : this.forks) {
+            final Opt<Response> current = fork.route(request);
+            if (current.has()) {
+                response = current;
+                break;
+            }
+        }
+        return response;
     }
 }

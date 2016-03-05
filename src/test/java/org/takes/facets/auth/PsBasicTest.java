@@ -30,18 +30,22 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
+import org.takes.Take;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
+import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
+import org.takes.tk.TkText;
 
 /**
  * Test of {@link PsBasic}.
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class PsBasicTest {
 
@@ -70,13 +74,13 @@ public final class PsBasicTest {
                         RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
-                this.generateAuthenticateHead(user, "pass")
+                PsBasicTest.header(user, "pass")
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
@@ -101,7 +105,7 @@ public final class PsBasicTest {
                             RandomStringUtils.randomAlphanumeric(10)
                         )
                     ),
-                    this.generateAuthenticateHead("username", "wrong")
+                    PsBasicTest.header("username", "wrong")
                 )
             );
         } catch (final RsForward ex) {
@@ -138,7 +142,7 @@ public final class PsBasicTest {
                         RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
-                this.generateAuthenticateHead(user, "changeit"),
+                PsBasicTest.header(user, "changeit"),
                 "Referer: http://teamed.io/",
                 "Connection:keep-alive",
                 "Content-Encoding:gzip",
@@ -149,7 +153,7 @@ public final class PsBasicTest {
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
-            CoreMatchers.equalTo(this.generateIdentityUrn(user))
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
@@ -171,7 +175,7 @@ public final class PsBasicTest {
                     ),
                     String.format(
                         "XYZ%s",
-                        this.generateAuthenticateHead("user", "password")
+                        PsBasicTest.header("user", "password")
                     ),
                     "XYZReferer: http://teamed.io/",
                     "XYZConnection:keep-alive",
@@ -185,13 +189,42 @@ public final class PsBasicTest {
     }
 
     /**
+     * PsBasic can authenticate a user.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void authenticatesUser() throws Exception {
+        final Take take = new TkAuth(
+            new TkSecure(
+                new TkText("secured")
+            ),
+            new PsBasic(
+                "myrealm",
+                new PsBasic.Default("mike secret11 urn:users:michael")
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                take.act(
+                    new RqWithHeader(
+                        new RqFake(),
+                        PsBasicTest.header("mike", "secret11")
+                    )
+                )
+            ).print(),
+            Matchers.containsString("HTTP/1.1 200 OK")
+        );
+    }
+
+    /**
      * Generate the identity urn.
      * @param user User
      * @return URN
      */
-    private String generateIdentityUrn(final String user) {
+    private static String urn(final String user) {
         return String.format("urn:basic:%s", user);
     }
+
     /**
      * Generate the string used on the request that store information about
      * authentication.
@@ -199,10 +232,7 @@ public final class PsBasicTest {
      * @param pass Password
      * @return Header string.
      */
-    private String generateAuthenticateHead(
-        final String user,
-        final String pass
-    ) {
+    private static String header(final String user, final String pass) {
         final String auth = String.format("%s:%s", user, pass);
         final String encoded = DatatypeConverter.printBase64Binary(
             auth.getBytes()

@@ -54,7 +54,15 @@ public final class TkFlashTest {
                     "Cookie: RsFlash=Hello!"
                 )
             ).head(),
-            Matchers.hasItem("Set-Cookie: RsFlash=;")
+            Matchers.hasItem(
+                Matchers.allOf(
+                    Matchers.startsWith("Set-Cookie: RsFlash=deleted;"),
+                    Matchers.containsString("Path=/;"),
+                    Matchers.containsString(
+                        "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+                    )
+                )
+            )
         );
     }
 }

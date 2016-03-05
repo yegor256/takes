@@ -88,6 +88,14 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base can satisfy equals contract.
      * @throws IOException if some problem inside
+     * @todo #620:30min This test is using RqGreedy in order to survive. If
+     *  you remove RqGreedy, the test will crash. I can't find out why
+     *  exactly it's happening. But the main problem is that somehow
+     *  inside RqMultipart.Fake we're reading body() of dispositions
+     *  twice or more times. That's why RqGreedy is required now. I order
+     *  to always return the same content. Let's find what exactly is the
+     *  problem and remove RqGreedy from this test and three other
+     *  test methods below.
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
@@ -95,29 +103,35 @@ public final class RqMultipartTest {
         final String part = "t-1";
         final Request req = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                contentLengthHeader(body.getBytes().length),
-                contentDispositionHeader(
-                    String.format("form-data; name=\"%s\"", part)
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        String.format("form-data; name=\"%s\"", part)
+                    )
                 )
             ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                contentLengthHeader(0),
-                contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.bin\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", ""),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"data\"; filename=\"a.bin\""
+                    )
                 )
             )
         );
-        final RqMultipart.Base one = new RqMultipart.Base(req);
-        final RqMultipart.Base two = new RqMultipart.Base(req);
+        final RqMultipart.Base first = new RqMultipart.Base(req);
+        final RqMultipart.Base second = new RqMultipart.Base(req);
         try {
-            MatcherAssert.assertThat(one, Matchers.equalTo(two));
+            MatcherAssert.assertThat(first, Matchers.equalTo(second));
         } finally {
             req.body().close();
-            one.part(part).iterator().next().body().close();
-            two.part(part).iterator().next().body().close();
+            first.part(part).iterator().next().body().close();
+            second.part(part).iterator().next().body().close();
         }
     }
 
@@ -212,18 +226,24 @@ public final class RqMultipartTest {
         final String part = "t4";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                contentLengthHeader(body.getBytes().length),
-                contentDispositionHeader(
-                    String.format("form-data; name=\"%s\"", part)
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        String.format("form-data; name=\"%s\"", part)
+                    )
                 )
             ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                contentLengthHeader(0),
-                contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.bin\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", ""),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"data\"; filename=\"a.bin\""
+                    )
                 )
             )
         );
@@ -259,18 +279,24 @@ public final class RqMultipartTest {
         final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                contentLengthHeader(body.getBytes().length),
-                contentDispositionHeader(
-                    "form-data; name=\"t5\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"t5\""
+                    )
                 )
             ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                contentLengthHeader(0),
-                contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.zip\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", ""),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"data\"; filename=\"a.zip\""
+                    )
                 )
             )
         );
@@ -290,18 +316,24 @@ public final class RqMultipartTest {
         final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMultipart.Fake(
             new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                contentLengthHeader(body.getBytes().length),
-                contentDispositionHeader(
-                    "form-data; name=\"address\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"address\""
+                    )
                 )
             ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                contentLengthHeader(0),
-                contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.bin\""
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", ""),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"data\"; filename=\"a.bin\""
+                    )
                 )
             )
         );
@@ -337,7 +369,9 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: www.example.com",
-                contentLengthHeader(body.getBytes().length),
+                RqMultipartTest.contentLengthHeader(
+                    (long) body.getBytes().length
+                ),
                 "Content-Type: multipart/form-data; boundary=zzz"
             ),
             body
@@ -496,7 +530,7 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: exampl.com",
-                contentLengthHeader(
+                RqMultipartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"

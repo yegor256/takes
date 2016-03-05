@@ -104,19 +104,17 @@ public interface RqForm extends Request {
          */
         public Base(final Request request) {
             super(request);
-            this.saved =
-                new CopyOnWriteArrayList<Map<String, List<String>>>();
+            this.saved = new CopyOnWriteArrayList<>();
             this.req = request;
         }
         @Override
-        public Iterable<String> param(
-            final CharSequence key
-        ) throws IOException {
+        public Iterable<String> param(final CharSequence key)
+            throws IOException {
             final List<String> values =
                 this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
             final Iterable<String> iter;
             if (values == null) {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     Collections.<String>emptyList(),
                     new Sprintf(
                         "there are no params \"%s\" among %d others: %s",
@@ -124,7 +122,7 @@ public interface RqForm extends Request {
                     )
                 );
             } else {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     values,
                     new Sprintf(
                         "there are only %d params by name \"%s\"",
@@ -153,48 +151,54 @@ public interface RqForm extends Request {
             }
         }
         /**
-         * Create map of request parameter.
+         * Create map of request parameters.
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
         private Map<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {
-                    final ByteArrayOutputStream
-                        baos = new ByteArrayOutputStream();
-                    new RqPrint(this.req).printBody(baos);
-                    final String body = new String(
-                        baos.toByteArray(), StandardCharsets.UTF_8
-                    );
-                    final Map<String, List<String>> map =
-                        new HashMap<String, List<String>>(1);
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    for (final String pair : body.split("&")) {
-                        if (pair.isEmpty()) {
-                            continue;
-                        }
-                        // @checkstyle MultipleStringLiteralsCheck (5 lines)
-                        final String[] parts = pair.split("=", 2);
-                        if (parts.length < 2) {
-                            throw new HttpException(
-                                HttpURLConnection.HTTP_BAD_REQUEST,
-                                String.format(
-                                    "invalid form body pair: %s", pair
-                                )
-                            );
-                        }
-                        final String key = RqForm.Base.decode(
-                            parts[0].trim().toLowerCase(Locale.ENGLISH)
-                        );
-                        if (!map.containsKey(key)) {
-                            map.put(key, new LinkedList<String>());
-                        }
-                        map.get(key).add(RqForm.Base.decode(parts[1].trim()));
-                    }
-                    this.saved.add(map);
+                    this.saved.add(this.freshMap());
                 }
                 return this.saved.get(0);
             }
+        }
+        /**
+         * Create map of request parameter.
+         * @return Parameters map or empty map in case of error.
+         * @throws IOException If something fails reading or parsing body
+         */
+        private Map<String, List<String>> freshMap() throws IOException {
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            new RqPrint(this.req).printBody(baos);
+            final String body = new String(
+                baos.toByteArray(), StandardCharsets.UTF_8
+            );
+            final Map<String, List<String>> map = new HashMap<>(1);
+            // @checkstyle MultipleStringLiteralsCheck (1 line)
+            for (final String pair : body.split("&")) {
+                if (pair.isEmpty()) {
+                    continue;
+                }
+                // @checkstyle MultipleStringLiteralsCheck (1 line)
+                final String[] parts = pair.split("=", 2);
+                if (parts.length < 2) {
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
+                        String.format(
+                            "invalid form body pair: %s", pair
+                        )
+                    );
+                }
+                final String key = RqForm.Base.decode(
+                    parts[0].trim().toLowerCase(Locale.ENGLISH)
+                );
+                if (!map.containsKey(key)) {
+                    map.put(key, new LinkedList<String>());
+                }
+                map.get(key).add(RqForm.Base.decode(parts[1].trim()));
+            }
+            return map;
         }
     }
     /**
@@ -289,35 +293,11 @@ public interface RqForm extends Request {
          * @param req Original request
          * @param params Parameters
          * @throws IOException if something goes wrong.
-         * @todo #558:30min Fake ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Fake(final Request req, final String... params)
             throws IOException {
-            if (params.length % 2 != 0) {
-                throw new IllegalArgumentException(
-                    "Wrong number of parameters"
-                );
-            }
-            final StringBuilder builder = new StringBuilder();
-            for (int idx = 0; idx < params.length; idx += 2) {
-                final String key = RqForm.Fake.encode(params[idx]);
-                final String value = RqForm.Fake.encode(params[idx + 1]);
-                builder.append(key)
-                    // @checkstyle MultipleStringLiteralsCheck (3 lines)
-                    .append('=')
-                    .append(value)
-                    .append('&');
-            }
             this.fake = new RqForm.Base(
-                new RqWithBody(req, builder.toString())
+                new RqWithBody(req, Fake.construct(Fake.validated(params)))
             );
         }
 
@@ -343,6 +323,37 @@ public interface RqForm extends Request {
         }
 
         /**
+         * Validate parameters.
+         * @param params Parameters
+         * @return Validated parameters if their count is even.
+         * @throws IllegalArgumentException if parameters count is odd.
+         */
+        private static String[] validated(final String... params) {
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException(
+                    "Wrong number of parameters"
+                );
+            }
+            return params;
+        }
+
+        /**
+         * Construct request body from parameters.
+         * @param params Parameters
+         * @return Request body
+         */
+        private static String construct(final String... params) {
+            final StringBuilder builder = new StringBuilder();
+            for (int idx = 0; idx < params.length; idx += 2) {
+                builder.append(RqForm.Fake.encode(params[idx]))
+                    .append('=')
+                    .append(RqForm.Fake.encode(params[idx + 1]))
+                    .append('&');
+            }
+            return builder.toString();
+        }
+
+        /**
          * Encode text.
          * @param txt Text
          * @return Encoded text
@@ -358,4 +369,3 @@ public interface RqForm extends Request {
         }
     }
 }
-
