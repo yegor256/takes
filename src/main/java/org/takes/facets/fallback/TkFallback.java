@@ -33,7 +33,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 import org.takes.tk.TkWrap;
@@ -86,7 +86,7 @@ public final class TkFallback extends TkWrap {
                 take.act(req), fbk, req
             );
         } catch (final HttpException ex) {
-            final Opt<Response> fbres = fbk.route(
+            final Optional<Response> fbres = fbk.route(
                 new RqFallback.Fake(
                     req, ex.code(),
                     TkFallback.error(
@@ -109,7 +109,7 @@ public final class TkFallback extends TkWrap {
             }
             res = TkFallback.wrap(fbres.get(), fbk, req);
         } catch (final Throwable ex) {
-            final Opt<Response> fbres = fbk.route(
+            final Optional<Response> fbres = fbk.route(
                 new RqFallback.Fake(
                     req, HttpURLConnection.HTTP_INTERNAL_ERROR,
                     TkFallback.error(

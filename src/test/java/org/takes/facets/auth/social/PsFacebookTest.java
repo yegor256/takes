@@ -35,7 +35,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqFake;
 
 /**
@@ -80,7 +80,7 @@ public class PsFacebookTest {
             RandomStringUtils.random(10),
             RandomStringUtils.random(10)
         );
-        final Opt<Identity> identity = pass.enter(
+        final Optional<Identity> identity = pass.enter(
             new RqFake(
                 "GET",
                 String.format(

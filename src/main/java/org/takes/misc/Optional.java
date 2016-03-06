@@ -21,50 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
 
-import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import org.takes.Response;
-import org.takes.Take;
-import org.takes.misc.Optional;
-import org.takes.tk.TkFixed;
+package org.takes.misc;
+
+import java.util.NoSuchElementException;
 
 /**
- * Fallback with a fixed response.
+ * Container for item of type T that can be empty.
  *
  * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author I. Sokolov (happy.neko@gmail.com)
  * @version $Id$
- * @since 0.13
+ * @param <T> Type of item
+ * @since 0.32
+ * @todo #608:30min All library methods calls that may return null
+ *  should be wrapped in Optional and checked for value presence
+ *  with Optional.has().
  */
-@EqualsAndHashCode(callSuper = true)
-public final class FbFixed extends FbWrap {
+public final class Optional<T> {
+    /**
+     * Origin.
+     */
+    private final transient T origin;
 
     /**
      * Ctor.
-     * @param response Response to return
+     * @param orgn The possibly-null item to hold
      */
-    public FbFixed(final Response response) {
-        this(new TkFixed(response));
+    public Optional(final T orgn) {
+        this.origin = orgn;
     }
 
     /**
-     * Ctor.
-     * @param take Take to use
-     * @since 0.14
+     * Returns empty container.
+     * @param <T> Type of item
+     * @return Empty {@link Optional}
      */
-    public FbFixed(final Take take) {
-        super(
-            new Fallback() {
-                @Override
-                public Optional<Response> route(final RqFallback req)
-                    throws IOException {
-                    return new Optional<>(take.act(req));
-                }
-            }
-        );
+    public static <T> Optional<T> empty() {
+        return new Optional<>(null);
     }
 
+    /**
+     * Returns the contained item.
+     * @return Item instance
+     */
+    public T get() {
+        if (this.origin == null) {
+            throw new NoSuchElementException(
+                "This container is empty"
+            );
+        } else {
+            return this.origin;
+        }
+    }
+
+    /**
+     * Returns true if container has item inside.
+     * @return True if container is not empty
+     */
+    public boolean has() {
+        return this.origin != null;
+    }
 }

@@ -34,7 +34,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fork take.
@@ -97,7 +97,8 @@ public final class TkFork implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        final Opt<Response> response = new FkChain(this.forks).route(request);
+        final Optional<Response> response =
+            new FkChain(this.forks).route(request);
         if (response.has()) {
             return response.get();
         }

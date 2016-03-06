@@ -29,7 +29,7 @@ import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqWithoutHeader;
 
 /**
@@ -83,7 +83,7 @@ public final class TkAuth implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        final Opt<Identity> user = this.pass.enter(request);
+        final Optional<Identity> user = this.pass.enter(request);
         final Response response;
         if (user.has()) {
             response = this.act(request, user.get());

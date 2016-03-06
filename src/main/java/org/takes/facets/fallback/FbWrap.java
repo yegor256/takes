@@ -26,7 +26,7 @@ package org.takes.facets.fallback;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fallback wrap.
@@ -54,7 +54,7 @@ public class FbWrap implements Fallback {
     }
 
     @Override
-    public final Opt<Response> route(final RqFallback req)
+    public final Optional<Response> route(final RqFallback req)
         throws IOException {
         return this.origin.route(req);
     }

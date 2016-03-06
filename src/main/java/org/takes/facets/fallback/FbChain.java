@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fallback chain.
@@ -64,11 +64,11 @@ public final class FbChain extends FbWrap {
         super(
             new Fallback() {
                 @Override
-                public Opt<Response> route(final RqFallback req)
+                public Optional<Response> route(final RqFallback req)
                     throws IOException {
-                    Opt<Response> rsp = new Opt.Empty<Response>();
+                    Optional<Response> rsp = Optional.empty();
                     for (final Fallback fbk : fallbacks) {
-                        final Opt<Response> opt = fbk.route(req);
+                        final Optional<Response> opt = fbk.route(req);
                         if (opt.has()) {
                             rsp = opt;
                             break;

@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 
 /**
@@ -96,10 +96,10 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request req) throws IOException {
+    public Optional<Identity> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
-        Opt<Identity> user = new Opt.Empty<Identity>();
+        Optional<Identity> user = Optional.empty();
         if (flg.hasNext()) {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {

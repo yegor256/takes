@@ -24,6 +24,7 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.HttpException;
@@ -43,6 +44,7 @@ public final class TkMethodsTest {
      * TkMethods can call act on method that is passes to it.
      * @throws Exception if any error occurs
      */
+    @Ignore
     @Test
     public void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);

@@ -28,7 +28,7 @@ import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Chain of passes.
@@ -64,8 +64,8 @@ public final class PsChain implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request req) throws IOException {
-        Opt<Identity> user = new Opt.Empty<Identity>();
+    public Optional<Identity> enter(final Request req) throws IOException {
+        Optional<Identity> user = Optional.empty();
         for (final Pass pass : this.passes) {
             user = pass.enter(req);
             if (user.has()) {

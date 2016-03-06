@@ -39,7 +39,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeader;
@@ -82,7 +82,7 @@ public final class PsBasic implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request) throws IOException {
+    public Optional<Identity> enter(final Request request) throws IOException {
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
                 PsBasic.AUTH.split(
@@ -93,7 +93,7 @@ public final class PsBasic implements Pass {
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
-        final Opt<Identity> identity = this.entry.enter(
+        final Optional<Identity> identity = this.entry.enter(
             user,
             decoded.substring(user.length() + 1)
         );
@@ -133,7 +133,7 @@ public final class PsBasic implements Pass {
          * @param pwd Password
          * @return Identity.
          */
-        Opt<Identity> enter(String user, String pwd);
+        Optional<Identity> enter(String user, String pwd);
     }
 
     /**
@@ -159,16 +159,16 @@ public final class PsBasic implements Pass {
             this.condition = cond;
         }
         @Override
-        public Opt<Identity> enter(final String usr, final String pwd) {
-            final Opt<Identity> user;
+        public Optional<Identity> enter(final String usr, final String pwd) {
+            final Optional<Identity> user;
             if (this.condition) {
-                user = new Opt.Single<Identity>(
+                user = new Optional<Identity>(
                     new Identity.Simple(
                         String.format("urn:basic:%s", usr)
                     )
                 );
             } else {
-                user = new Opt.Empty<>();
+                user = Optional.empty();
             }
             return user;
         }
@@ -183,8 +183,8 @@ public final class PsBasic implements Pass {
      */
     public static final class Empty implements PsBasic.Entry {
         @Override
-        public Opt<Identity> enter(final String user, final String pwd) {
-            return new Opt.Empty<>();
+        public Optional<Identity> enter(final String user, final String pwd) {
+            return Optional.empty();
         }
     }
 
@@ -238,12 +238,12 @@ public final class PsBasic implements Pass {
             }
         }
         @Override
-        public Opt<Identity> enter(final String user, final String pwd) {
-            final Opt<String> urn = this.urn(user, pwd);
-            final Opt<Identity> identity;
+        public Optional<Identity> enter(final String user, final String pwd) {
+            final Optional<String> urn = this.urn(user, pwd);
+            final Optional<Identity> identity;
             if (urn.has()) {
                 try {
-                    identity = new Opt.Single<Identity>(
+                    identity = new Optional<Identity>(
                         new Identity.Simple(
                             URLDecoder.decode(
                                 urn.get(), PsBasic.Default.ENCODING
@@ -254,7 +254,7 @@ public final class PsBasic implements Pass {
                     throw new IllegalStateException(ex);
                 }
             } else {
-                identity = new Opt.Empty<>();
+                identity = Optional.empty();
             }
             return identity;
         }
@@ -262,10 +262,10 @@ public final class PsBasic implements Pass {
          * Returns an URN corresponding to a login-password pair.
          * @param user Login.
          * @param pwd Password.
-         * @return Opt with URN or empty if there is no such login-password
+         * @return Optional with URN or empty if there is no such login-password
          *  pair.
          */
-        private Opt<String> urn(final String user, final String pwd) {
+        private Optional<String> urn(final String user, final String pwd) {
             final String urn;
             try {
                 urn = this.usernames.get(
@@ -284,13 +284,7 @@ public final class PsBasic implements Pass {
             } catch (final UnsupportedEncodingException ex) {
                 throw new IllegalStateException(ex);
             }
-            final Opt<String> opt;
-            if (urn == null) {
-                opt = new Opt.Empty<>();
-            } else {
-                opt = new Opt.Single<>(urn);
-            }
-            return opt;
+            return new Optional<>(urn);
         }
         /**
          * Creates a key for

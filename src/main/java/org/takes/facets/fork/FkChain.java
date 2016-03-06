@@ -29,7 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * A Fork chain. Routes to each given Fork in order, until one of them returns
@@ -69,10 +69,10 @@ public final class FkChain implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request request) throws IOException {
-        Opt<Response> response = new Opt.Empty<Response>();
+    public Optional<Response> route(final Request request) throws IOException {
+        Optional<Response> response = Optional.empty();
         for (final Fork fork : this.forks) {
-            final Opt<Response> current = fork.route(request);
+            final Optional<Response> current = fork.route(request);
             if (current.has()) {
                 response = current;
                 break;

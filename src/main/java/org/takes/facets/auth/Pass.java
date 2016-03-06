@@ -26,7 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Pass to enter a user and let him exit.
@@ -45,7 +45,7 @@ public interface Pass {
      * @return Identity of the user found
      * @throws IOException If fails
      */
-    Opt<Identity> enter(Request request) throws IOException;
+    Optional<Identity> enter(Request request) throws IOException;
 
     /**
      * Wrap the response with the user.

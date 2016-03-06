@@ -32,7 +32,7 @@ import org.junit.Test;
 import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.forward.RsForward;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeader;
@@ -61,7 +61,7 @@ public final class PsBasicTest {
     @Test
     public void handleConnectionWithValidCredential() throws Exception {
         final String user = "john";
-        final Opt<Identity> identity = new PsBasic(
+        final Optional<Identity> identity = new PsBasic(
             "RealmA",
             new PsBasic.Fake(true)
         ).enter(
@@ -129,7 +129,7 @@ public final class PsBasicTest {
     @Test
     public void handleMultipleHeadersWithValidCredential() throws Exception {
         final String user = "bill";
-        final Opt<Identity> identity = new PsBasic(
+        final Optional<Identity> identity = new PsBasic(
             "RealmC",
             new PsBasic.Fake(true)
         ).enter(

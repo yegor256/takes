@@ -40,7 +40,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Twitter OAuth landing/callback page.
@@ -116,9 +116,9 @@ public final class PsTwitter implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
+    public Optional<Identity> enter(final Request request)
         throws IOException {
-        return new Opt.Single<Identity>(this.identity(this.fetch()));
+        return new Optional<>(this.identity(this.fetch()));
     }
 
     @Override

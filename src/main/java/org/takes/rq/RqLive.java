@@ -33,7 +33,7 @@ import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Live request.
@@ -76,7 +76,7 @@ public final class RqLive extends RqWrap {
         boolean eof = true;
         final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Opt<Integer> data = new Opt.Empty<Integer>();
+        Optional<Integer> data = Optional.empty();
         while (true) {
             data = RqLive.data(input, data);
             if (data.get() < 0) {
@@ -99,15 +99,15 @@ public final class RqLive extends RqWrap {
                 if (baos.size() == 0) {
                     break;
                 }
-                data = new Opt.Single<Integer>(input.read());
-                final Opt<String> header = newHeader(data, baos);
+                data = new Optional<>(input.read());
+                final Optional<String> header = newHeader(data, baos);
                 if (header.has()) {
                     head.add(header.get());
                 }
                 continue;
             }
             baos.write(legalCharacter(data, baos, head.size() + 1));
-            data = new Opt.Empty<Integer>();
+            data = Optional.empty();
         }
         if (eof) {
             throw new IOException("empty request");
@@ -130,11 +130,11 @@ public final class RqLive extends RqWrap {
      * @param baos Current read header
      * @return Read header
      */
-    private static Opt<String> newHeader(final Opt<Integer> data,
+    private static Optional<String> newHeader(final Optional<Integer> data,
         final ByteArrayOutputStream baos) {
-        Opt<String> header = new Opt.Empty<String>();
+        Optional<String> header = Optional.empty();
         if (data.get() != ' ' && data.get() != '\t') {
-            header = new Opt.Single<String>(
+            header = new Optional<>(
                 new String(baos.toByteArray(), StandardCharsets.UTF_8)
             );
             baos.reset();
@@ -150,7 +150,7 @@ public final class RqLive extends RqWrap {
      * @return A legal character
      * @throws HttpException if character is illegal
      */
-    private static Integer legalCharacter(final Opt<Integer> data,
+    private static Integer legalCharacter(final Optional<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws HttpException {
         // @checkstyle MagicNumber (1 line)
@@ -177,13 +177,13 @@ public final class RqLive extends RqWrap {
      * @return Next or current data
      * @throws IOException if input.read() fails
      */
-    private static Opt<Integer> data(final InputStream input,
-        final Opt<Integer> data) throws IOException {
-        final Opt<Integer> ret;
+    private static Optional<Integer> data(final InputStream input,
+        final Optional<Integer> data) throws IOException {
+        final Optional<Integer> ret;
         if (data.has()) {
             ret = data;
         } else {
-            ret = new Opt.Single<Integer>(input.read());
+            ret = new Optional<>(input.read());
         }
         return ret;
     }

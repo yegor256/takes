@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * A Pass which you can enter only if you can enter every Pass in a list.
@@ -60,12 +60,13 @@ public class PsAll implements Pass {
     }
 
     @Override
-    public final Opt<Identity> enter(final Request request) throws IOException {
-        final Opt<Identity> result;
+    public final Optional<Identity> enter(final Request request)
+        throws IOException {
+        final Optional<Identity> result;
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
         } else {
-            result = new Opt.Empty<Identity>();
+            result = Optional.empty();
         }
         return result;
     }

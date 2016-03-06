@@ -40,7 +40,7 @@ import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqHref;
 
 /**
@@ -106,7 +106,7 @@ public final class PsLinkedin implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
+    public Optional<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         // @checkstyle MultipleStringLiteralsCheck (1 line)
@@ -117,7 +117,7 @@ public final class PsLinkedin implements Pass {
                 "code is not provided by LinkedIn"
             );
         }
-        return new Opt.Single<Identity>(
+        return new Optional<>(
             this.fetch(this.token(href.toString(), code.next()))
         );
     }

@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 
 /**
  * Fork fixed.
@@ -51,9 +51,9 @@ public final class FkFixed extends FkWrap {
         super(
             new Fork() {
                 @Override
-                public Opt<Response> route(final Request req)
+                public Optional<Response> route(final Request req)
                     throws IOException {
-                    return new Opt.Single<>(take.act(req));
+                    return new Optional<>(take.act(req));
                 }
             }
         );

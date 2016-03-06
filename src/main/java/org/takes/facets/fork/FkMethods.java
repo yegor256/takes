@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
+import org.takes.misc.Optional;
 import org.takes.rq.RqMethod;
 import org.takes.tk.TkFixed;
 
@@ -96,13 +96,13 @@ public final class FkMethods implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Optional<Response> route(final Request req) throws IOException {
         final String mtd = new RqMethod.Base(req).method();
-        final Opt<Response> resp;
+        final Optional<Response> resp;
         if (this.methods.contains(mtd)) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Optional<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = Optional.empty();
         }
         return resp;
     }
