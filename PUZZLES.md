@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 10 active puzzles (59 total):
+There are 8 active puzzles (59 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -37,10 +37,10 @@ There are 10 active puzzles (59 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#508](https://github.com/yegor256/takes/issues/508):[<del>490-c74fee69</del>](https://github.com/yegor256/takes/issues/508) [`RqHeaders.java:93-98`](../master/src/main/java/org/takes/rq/RqHeaders.java#L93-L98)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#519](https://github.com/yegor256/takes/issues/519):[**306-b987400a**](https://github.com/yegor256/takes/issues/519) [`BkBasicTest.java:57-60`](../master/src/test/java/org/takes/http/BkBasicTest.java#L57-L60)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[#516](https://github.com/yegor256/takes/issues/516):[<del>516</del>](https://github.com/yegor256/takes/issues/516) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#533](https://github.com/yegor256/takes/issues/533):[**516-c8aa6c8f**](https://github.com/yegor256/takes/issues/533) [`BkBasicTest.java:67-68`](../master/src/test/java/org/takes/http/BkBasicTest.java#L67-L68)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<del>516</del>](https://github.com/yegor256/takes/issues/516) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#533](https://github.com/yegor256/takes/issues/533):[<del>516-c8aa6c8f</del>](https://github.com/yegor256/takes/issues/533) [`BkBasicTest.java:67-68`](../master/src/test/java/org/takes/http/BkBasicTest.java#L67-L68)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#534](https://github.com/yegor256/takes/issues/534):[**516-ffc97ad1**](https://github.com/yegor256/takes/issues/534) [`BkBasicTest.java:69-71`](../master/src/test/java/org/takes/http/BkBasicTest.java#L69-L71)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[#438](https://github.com/yegor256/takes/issues/438):[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[<del>438-dcc4d707</del>](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#530](https://github.com/yegor256/takes/issues/530):[<del>530</del>](https://github.com/yegor256/takes/issues/530) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#558](https://github.com/yegor256/takes/issues/558):[<del>530-0ac0fcef</del>](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
@@ -59,6 +59,6 @@ There are 10 active puzzles (59 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#574](https://github.com/yegor256/takes/issues/574):[<del>517-9858229b</del>](https://github.com/yegor256/takes/issues/574) [`pom.xml:360-362`](../master/pom.xml#L360-L362)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#624](https://github.com/yegor256/takes/issues/624):[**574-2964594e**](https://github.com/yegor256/takes/issues/624) [`pom.xml:373-375`](../master/pom.xml#L373-L375)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#254](https://github.com/yegor256/takes/issues/254):[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#575](https://github.com/yegor256/takes/issues/575):[**254-d68bc52e**](https://github.com/yegor256/takes/issues/575) [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#575](https://github.com/yegor256/takes/issues/575):[<del>254-d68bc52e</del>](https://github.com/yegor256/takes/issues/575) [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#576](https://github.com/yegor256/takes/issues/576):[**254-40a8e0fe**](https://github.com/yegor256/takes/issues/576) [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#625](https://github.com/yegor256/takes/issues/625):[**620-91883c6a**](https://github.com/yegor256/takes/issues/625) [`RqMultipartTest.java:91-98`](../master/src/test/java/org/takes/rq/RqMultipartTest.java#L91-L98)<br/>

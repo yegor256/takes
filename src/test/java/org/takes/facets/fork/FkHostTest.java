@@ -21,48 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.facets.fork;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Take;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
 import org.takes.tk.TkEmpty;
 
 /**
- * Test case for {@link TkFlash}.
+ * Test case for {@link FkHost}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.4
+ * @since 0.32
  */
-public final class TkFlashTest {
+public final class FkHostTest {
 
     /**
-     * TkFlash can remove a flash cookie.
+     * FkHost can match a host.
      * @throws IOException If some problem inside
      */
     @Test
-    public void removesFlashCookie() throws IOException {
-        final Take take = new TkFlash(new TkEmpty());
+    public void matchesByHost() throws IOException {
         MatcherAssert.assertThat(
-            take.act(
-                new RqWithHeader(
-                    new RqFake(),
-                    "Cookie: RsFlash=Hello!"
-                )
-            ).head(),
-            Matchers.hasItem(
-                Matchers.allOf(
-                    Matchers.startsWith("Set-Cookie: RsFlash=deleted;"),
-                    Matchers.containsString("Path=/;"),
-                    Matchers.containsString(
-                        "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
-                    )
-                )
-            )
+            new FkHost("www.example.com", new TkEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ).has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkHost("google.com", new TkEmpty()).route(
+                new RqFake("PUT", "/?test")
+            ).has(),
+            Matchers.is(false)
         );
     }
+
 }

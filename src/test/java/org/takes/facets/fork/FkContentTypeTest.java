@@ -29,6 +29,9 @@ import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
@@ -78,7 +81,8 @@ public final class FkContentTypeTest {
     public void matchesDifferentTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                "application/json charset=utf-8", new RsEmpty()
+                "application/json charset=utf-8",
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -98,7 +102,8 @@ public final class FkContentTypeTest {
     public void matchesIdenticalTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new RsEmpty()
+                FkContentTypeTest.CTYPE,
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -117,12 +122,14 @@ public final class FkContentTypeTest {
     @Test
     public void matchesEmptyType() throws IOException {
         MatcherAssert.assertThat(
-            new FkContentType("*/*", new RsEmpty()).route(
+            new FkContentType(
+                "*/*",
+                FkContentTypeTest.emptyResponse()
+            ).route(
                 new RqWithHeader(
                     new RqFake(), FkContentTypeTest.CONTENT_TYPE, ""
                 )
-            ).has(),
-            Matchers.is(true)
+            ).has(), Matchers.is(true)
         );
     }
 
@@ -134,7 +141,8 @@ public final class FkContentTypeTest {
     public void matchesDifferentEncodingsTypes() throws IOException {
         MatcherAssert.assertThat(
             new FkContentType(
-                FkContentTypeTest.CTYPE, new RsEmpty()
+                FkContentTypeTest.CTYPE,
+                FkContentTypeTest.emptyResponse()
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -155,5 +163,18 @@ public final class FkContentTypeTest {
         EqualsVerifier.forClass(FkContentType.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
+    }
+
+    /**
+     * Create a Take instance with empty response.
+     * @return Take
+     */
+    private static Take emptyResponse() {
+        return new Take() {
+            @Override
+            public Response act(final Request req) throws IOException {
+                return new RsEmpty();
+            }
+        };
     }
 }

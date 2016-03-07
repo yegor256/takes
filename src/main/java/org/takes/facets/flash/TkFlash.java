@@ -100,7 +100,9 @@ public final class TkFlash implements Take {
             response = new RsWithCookie(
                 this.origin.act(request),
                 this.cookie,
-                ""
+                "deleted",
+                "Path=/",
+                "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
             );
         } else {
             response = this.origin.act(request);

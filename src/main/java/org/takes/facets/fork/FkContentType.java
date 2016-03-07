@@ -27,8 +27,10 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
+import org.takes.tk.TkFixed;
 
 /**
  * Fork by Content-type accepted by "Content-Type" HTTP header.
@@ -40,7 +42,7 @@ import org.takes.rq.RqHeaders;
  * @since 1.0
  * @see RsFork
  */
-@EqualsAndHashCode(of = { "type", "origin" })
+@EqualsAndHashCode(of = { "type", "take" })
 public final class FkContentType implements Fork {
 
     /**
@@ -49,9 +51,9 @@ public final class FkContentType implements Fork {
     private final transient MediaTypes type;
 
     /**
-     * Response to return.
+     * Take to handle the request and dynamically return the response.
      */
-    private final transient Response origin;
+    private final transient Take take;
 
     /**
      * Ctor.
@@ -59,15 +61,24 @@ public final class FkContentType implements Fork {
      * @param response Response to return
      */
     public FkContentType(final String atype, final Response response) {
+        this(atype, new TkFixed(response));
+    }
+
+    /**
+     * Ctor.
+     * @param atype Accepted type
+     * @param take Take to handle the request dynamically.
+     */
+    public FkContentType(final String atype, final Take take) {
         this.type = new MediaTypes(atype);
-        this.origin = response;
+        this.take = take;
     }
 
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Opt<Response> resp;
         if (FkContentType.getType(req).contains(this.type)) {
-            resp = new Opt.Single<Response>(this.origin);
+            resp = new Opt.Single<Response>(this.take.act(req));
         } else {
             resp = new Opt.Empty<Response>();
         }

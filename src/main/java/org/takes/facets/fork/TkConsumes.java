@@ -55,7 +55,7 @@ public final class TkConsumes extends TkWrap {
                 public Response act(final Request req) throws IOException {
                     return new RsFork(
                         req,
-                        new FkContentType(type, take.act(req))
+                        new FkContentType(type, take)
                     );
                 }
             }
