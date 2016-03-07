@@ -40,6 +40,7 @@ import java.nio.file.StandardCopyOption;
  * @version $Id$
  * @since 0.32
  */
+@SuppressWarnings("PMD.TooManyMethods")
 interface Body {
     /**
      * Gives a reusable {@code InputStream} corresponding to the content of
@@ -124,20 +125,52 @@ interface Body {
     final class Stream implements Body {
 
         /**
+         * The content of the body in an InputStream.
+         */
+        private final transient InputStream stream;
+
+        /**
+         * Constructs an {@code Stream} with the specified {@link InputStream}.
+         * @param input The content of the body as stream.
+         */
+        Stream(final InputStream input) {
+            this.stream = input;
+        }
+
+        @Override
+        public InputStream input() {
+            return this.stream;
+        }
+
+        @Override
+        public int length() throws IOException {
+            try (final InputStream input = this.stream) {
+                return input.available();
+            }
+        }
+    }
+
+    /**
+     * Decorator that will store the content of the underlying Body into a
+     * temporary File.
+     */
+    final class TempFile implements Body {
+
+        /**
          * The temporary file that contains the content of the body.
          */
         private final transient File file;
 
         /**
-         * Constructs an {@code Stream} with the specified {@link InputStream}.
-         * <p><b>The content of the Stream will be stored into a temporary
+         * Constructs a {@code TempFile} with the specified {@link Body}.
+         * <p><b>The content of the Body will be stored into a temporary
          * file to be able to read it as many times as we want so use it only
          * for large content, for small content use {@link Body.ByteArray}
          * instead.</b>
-         * @param input The content of the body as stream.
+         * @param body The content of the body to store into a temporary file.
          */
-        Stream(final InputStream input) {
-            this.file = Body.Stream.content(input);
+        TempFile(final Body body) {
+            this.file = Body.TempFile.content(body);
         }
 
         @Override
@@ -164,17 +197,17 @@ interface Body {
 
         /**
          * Gives the {@code File} that contains the content of the provided
-         * {@link InputStream}.
-         * @param input The stream to store into the file.
+         * {@link Body}.
+         * @param body The body to store into the file.
          * @return The {@code File} in which we stored the content of the
-         *  stream.
+         *  body.
          */
-        private static File content(final InputStream input) {
+        private static File content(final Body body) {
             final File file;
             try {
                 file = File.createTempFile(Body.Stream.class.getName(), "tmp");
                 file.deleteOnExit();
-                try (final InputStream content = input) {
+                try (final InputStream content = body.input()) {
                     Files.copy(
                         content,
                         Paths.get(file.getAbsolutePath()),

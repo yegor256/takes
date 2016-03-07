@@ -44,6 +44,7 @@ import org.takes.Response;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
 @ToString(callSuper = true)
@@ -130,7 +131,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        this(res, new Body.Stream(body));
+        this(res, new Body.TempFile(new Body.Stream(body)));
     }
 
     /**

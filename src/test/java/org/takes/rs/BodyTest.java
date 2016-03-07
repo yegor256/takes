@@ -49,13 +49,11 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithByteArrayContent() throws Exception {
+    public void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
             "ByteArray returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            ByteStreams.toByteArray(
-                new Body.ByteArray(bytes).input()
-            ),
+            ByteStreams.toByteArray(new Body.ByteArray(bytes).input()),
             Matchers.equalTo(bytes)
         );
     }
@@ -65,7 +63,7 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithByteArrayContent() throws Exception {
+    public void returnsCorrectLengthWithByteArray() throws Exception {
         final byte[] bytes =
             "ByteArray returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
@@ -84,9 +82,7 @@ public final class BodyTest {
             "Stream returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
-                new Body.Stream(
-                    new ByteArrayInputStream(bytes)
-                ).input()
+                new Body.Stream(new ByteArrayInputStream(bytes)).input()
             ),
             Matchers.equalTo(bytes)
         );
@@ -101,9 +97,37 @@ public final class BodyTest {
         final byte[] bytes =
             "Stream returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
-            new Body.Stream(
-                new ByteArrayInputStream(bytes)
-            ).length(),
+            new Body.Stream(new ByteArrayInputStream(bytes)).length(),
+            Matchers.equalTo(bytes.length)
+        );
+    }
+
+    /**
+     * Body.TemFile can provide the expected input.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectInputWithTemFile() throws Exception {
+        final byte[] bytes =
+            "TempFile returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            ByteStreams.toByteArray(
+                new Body.TempFile(new Body.ByteArray(bytes)).input()
+            ),
+            Matchers.equalTo(bytes)
+        );
+    }
+
+    /**
+     * Body.TemFile can provide the expected length.
+     * @throws Exception If some problem inside.
+     */
+    @Test
+    public void returnsCorrectLengthWithTemFile() throws Exception {
+        final byte[] bytes =
+            "TempFile returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+        MatcherAssert.assertThat(
+            new Body.TempFile(new Body.ByteArray(bytes)).length(),
             Matchers.equalTo(bytes.length)
         );
     }
@@ -113,7 +137,7 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithURLContent() throws Exception {
+    public void returnsCorrectInputWithURL() throws Exception {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
@@ -138,7 +162,7 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithURLContent() throws Exception {
+    public void returnsCorrectLengthWithURL() throws Exception {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
