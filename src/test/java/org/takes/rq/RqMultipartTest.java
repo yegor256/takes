@@ -278,39 +278,34 @@ public final class RqMultipartTest {
      */
     @Test
     public void closesAllParts() throws Exception {
-        RqMultipart.Base multi = null;
-        try {
-            final String body = "RqMultipartTest.closesAllParts";
-            final RqMultipart request = new RqMultipart.Fake(
-                new RqFake(),
-                new RqGreedy(
-                    new RqWithHeaders(
-                        new RqFake("", "", body),
-                        RqMultipartTest.contentLengthHeader(
-                            (long) body.getBytes().length
-                        ),
-                        RqMultipartTest.contentDispositionHeader(
-                            "form-data; name=\"name\""
-                        )
-                    )
-                ),
-                new RqGreedy(
-                    new RqWithHeaders(
-                        new RqFake("", "", body),
-                        RqMultipartTest.contentLengthHeader(0L),
-                        RqMultipartTest.contentDispositionHeader(
-                            "form-data; name=\"content\"; filename=\"a.bin\""
-                        )
+        final String body = "RqMultipartTest.closesAllParts";
+        final RqMultipart request = new RqMultipart.Fake(
+            new RqFake(),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"name\""
                     )
                 )
-            );
-            multi = new RqMultipart.Base(request);
-            multi.part("name").iterator().next().body().read();
-            multi.part("content").iterator().next().body().read();
-            multi.body().close();
-        } catch (final IOException ex) {
-            Assert.fail("An IOException was not expected");
-        }
+            ),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"content\"; filename=\"a.bin\""
+                    )
+                )
+            )
+        );
+        final RqMultipart.Base multi = new RqMultipart.Base(request);
+        multi.part("name").iterator().next().body().read();
+        multi.part("content").iterator().next().body().read();
+        multi.body().close();
         MatcherAssert.assertThat(
             multi.part("name").iterator().next(),
             Matchers.notNullValue()
