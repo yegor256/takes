@@ -274,10 +274,10 @@ public final class RqMultipartTest {
     /**
      * RqMultipart.Base can close all parts once the request body has been
      * closed.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void closesAllParts() throws IOException {
+    @Test
+    public void closesAllParts() throws Exception {
         RqMultipart.Base multi = null;
         try {
             final String body = "RqMultipartTest.closesAllParts";
@@ -322,20 +322,37 @@ public final class RqMultipartTest {
             );
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
-                multi.part("content").iterator().next(),
-                Matchers.notNullValue()
+                ex.getMessage(),
+                Matchers.containsString("Closed")
             );
+        }
+        MatcherAssert.assertThat(
+            multi.part("content").iterator().next(),
+            Matchers.notNullValue()
+        );
+        try {
             multi.part("content").iterator().next().body().read();
+            Assert.fail(
+                "An IOException was expected since the Stream is closed"
+            );
+        } catch (final IOException ex) {
+            MatcherAssert.assertThat(
+                ex.getMessage(),
+                Matchers.containsString("Closed")
+            );
         }
     }
 
     /**
      * RqMultipart.Base can close all parts explicitly even if the request body
      * has been closed.
-     * @throws IOException If some problem inside
+     * <p>For backward compatibility reason we need to ensure that we don't get
+     * {@code IOException} when we close explicitly a part even after closing
+     * the input stream of the main request.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void closesExplicitlyAllParts() throws IOException {
+    public void closesExplicitlyAllParts() throws Exception {
         final String body = "RqMultipartTest.closesExplicitlyAllParts";
         final RqMultipart request = new RqMultipart.Fake(
             new RqFake(),
