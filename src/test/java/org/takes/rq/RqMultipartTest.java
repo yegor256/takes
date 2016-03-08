@@ -278,39 +278,48 @@ public final class RqMultipartTest {
      */
     @Test(expected = IOException.class)
     public void closesAllParts() throws IOException {
-        final String body = "RqMultipartTest.closesAllParts";
-        final RqMultipart request = new RqMultipart.Fake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartTest.contentDispositionHeader(
-                        "form-data; name=\"name\""
+        RqMultipart.Base multi = null;
+        try {
+            final String body = "RqMultipartTest.closesAllParts";
+            final RqMultipart request = new RqMultipart.Fake(
+                new RqFake(),
+                new RqGreedy(
+                    new RqWithHeaders(
+                        new RqFake("", "", body),
+                        RqMultipartTest.contentLengthHeader(
+                            (long) body.getBytes().length
+                        ),
+                        RqMultipartTest.contentDispositionHeader(
+                            "form-data; name=\"name\""
+                        )
+                    )
+                ),
+                new RqGreedy(
+                    new RqWithHeaders(
+                        new RqFake("", "", body),
+                        RqMultipartTest.contentLengthHeader(0L),
+                        RqMultipartTest.contentDispositionHeader(
+                            "form-data; name=\"content\"; filename=\"a.bin\""
+                        )
                     )
                 )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
-                        "form-data; name=\"content\"; filename=\"a.bin\""
-                    )
-                )
-            )
-        );
-        final RqMultipart.Base multi = new RqMultipart.Base(request);
-        multi.body().close();
+            );
+            multi = new RqMultipart.Base(request);
+            multi.part("name").iterator().next().body().read();
+            multi.part("content").iterator().next().body().read();
+            multi.body().close();
+        } catch (final IOException ex) {
+            Assert.fail("An IOException was not expected");
+        }
         MatcherAssert.assertThat(
             multi.part("name").iterator().next(),
             Matchers.notNullValue()
         );
         try {
             multi.part("name").iterator().next().body().read();
-            Assert.fail("An IOException was expected");
+            Assert.fail(
+                "An IOException was expected since the Stream is closed"
+            );
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 multi.part("content").iterator().next(),

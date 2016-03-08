@@ -370,7 +370,7 @@ public interface RqMultipart extends Request {
         private class CloseMultipart extends FilterInputStream {
 
             /**
-             * Creates a {@code CloseParts} with the specified {@code input}.
+             * Creates a {@code CloseParts} with the specified input.
              * @param input The underlying input stream.
              */
             CloseMultipart(final InputStream input) {
