@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -61,8 +62,14 @@ final class TempInputStream extends InputStream {
 
     @Override
     public void close() throws IOException {
-        this.origin.close();
-        Files.delete(Paths.get(this.file.getAbsolutePath()));
+        try {
+            this.origin.close();
+        } finally {
+            final Path path = Paths.get(this.file.getAbsolutePath());
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        }
     }
 
     @Override

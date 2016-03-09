@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 Yegor Bugayenko
+ * Copyright (c) 2015 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,42 +24,60 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Take;
-import org.takes.tk.TkWrap;
+import org.takes.misc.Opt;
 
 /**
- * Take that acts on request with specified "Content-Type" HTTP headers only.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
+ * A Fork chain. Routes to each given Fork in order, until one of them returns
+ * a response or until none are left.
+ * @author Carlos Gines (efrel.v2@gmail.com)
  * @version $Id$
- * @since 1.0
+ * @since 0.33
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public final class TkConsumes extends TkWrap {
+public final class FkChain implements Fork {
+
+    /**
+     * Forks.
+     */
+    private final transient Collection<Fork> forks;
+
     /**
      * Ctor.
-     * @param take Original take
-     * @param type Content-Type
      */
-    public TkConsumes(final Take take, final String type) {
-        super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return new RsFork(
-                        req,
-                        new FkContentType(type, take)
-                    );
-                }
-            }
-        );
+    public FkChain() {
+        this(Collections.<Fork>emptyList());
     }
 
+    /**
+     * Ctor.
+     * @param forks Forks
+     */
+    public FkChain(final Fork... forks) {
+        this(Arrays.asList(forks));
+    }
+
+    /**
+     * Ctor.
+     * @param forks Forks
+     */
+    public FkChain(final Collection<Fork> forks) {
+        this.forks = Collections.unmodifiableCollection(forks);
+    }
+
+    @Override
+    public Opt<Response> route(final Request request) throws IOException {
+        Opt<Response> response = new Opt.Empty<Response>();
+        for (final Fork fork : this.forks) {
+            final Opt<Response> current = fork.route(request);
+            if (current.has()) {
+                response = current;
+                break;
+            }
+        }
+        return response;
+    }
 }

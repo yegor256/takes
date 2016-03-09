@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
@@ -97,8 +98,8 @@ public interface RqMultipart extends Request {
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see RqGreedy
      */
-    @EqualsAndHashCode(callSuper = true)
-    final class Base extends RqWrap implements RqMultipart {
+    @EqualsAndHashCode(of = "origin")
+    final class Base implements RqMultipart {
         /**
          * Pattern to get boundary from header.
          */
@@ -120,31 +121,25 @@ public interface RqMultipart extends Request {
          */
         private final transient ByteBuffer buffer;
         /**
-         * Origin request body.
+         * InputStream based on request body.
          */
-        private final transient ReadableByteChannel body;
+        private final transient InputStream stream;
+        /**
+         * Original request.
+         */
+        private final transient Request origin;
         /**
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
-         * @todo #558:30min Base ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and other
-         *  constructor calls. Refactor code according to that rule and
-         *  remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Base(final Request req) throws IOException {
-            super(req);
-            final InputStream stream = new RqLengthAware(req).body();
-            this.body = Channels.newChannel(stream);
+            this.origin = req;
+            this.stream = new RqLengthAware(req).body();
             this.buffer = ByteBuffer.allocate(
                 // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, stream.available())
+                Math.min(8192, this.stream.available())
             );
             this.map = this.requests(req);
         }
@@ -176,6 +171,17 @@ public interface RqMultipart extends Request {
         public Iterable<String> names() {
             return this.map.keySet();
         }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return new CloseMultipart(this.origin.body());
+        }
+
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
@@ -210,7 +216,8 @@ public interface RqMultipart extends Request {
                     )
                 );
             }
-            if (this.body.read(this.buffer) < 0) {
+            final ReadableByteChannel body = Channels.newChannel(this.stream);
+            if (body.read(this.buffer) < 0) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     "failed to read the request body"
@@ -228,7 +235,7 @@ public interface RqMultipart extends Request {
                     break;
                 }
                 this.buffer.position(this.buffer.position() + 1);
-                requests.add(this.make(boundary));
+                requests.add(this.make(boundary, body));
             }
             return RqMultipart.Base.asMap(requests);
         }
@@ -237,14 +244,12 @@ public interface RqMultipart extends Request {
          *  Scans the origin request until the boundary reached. Caches
          *  the  content into a temporary file and returns it as a new request.
          * @param boundary Boundary
+         * @param body Origin request body
          * @return Request
          * @throws IOException If fails
-         * @todo #254:30min in order to delete temporary files InputStream
-         *  instance on Request.body should be closed. In context of multipart
-         *  requests that means that body of all parts should be closed once
-         *  they are not needed anymore.
          */
-        private Request make(final byte[] boundary) throws IOException {
+        private Request make(final byte[] boundary,
+            final ReadableByteChannel body) throws IOException {
             final File file = File.createTempFile(
                 RqMultipart.class.getName(), ".tmp"
             );
@@ -265,7 +270,7 @@ public interface RqMultipart extends Request {
                         RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
                     )
                 );
-                this.copy(channel, boundary);
+                this.copy(channel, boundary, body);
             } finally {
                 channel.close();
             }
@@ -284,11 +289,13 @@ public interface RqMultipart extends Request {
          * Copy until boundary reached.
          * @param target Output file channel
          * @param boundary Boundary
+         * @param body Origin request body
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         private void copy(final WritableByteChannel target,
-            final byte[] boundary) throws IOException {
+            final byte[] boundary, final ReadableByteChannel body)
+            throws IOException {
             int match = 0;
             boolean cont = true;
             while (cont) {
@@ -298,7 +305,7 @@ public interface RqMultipart extends Request {
                         this.buffer.put(boundary[idx]);
                     }
                     match = 0;
-                    if (this.body.read(this.buffer) == -1) {
+                    if (body.read(this.buffer) == -1) {
                         break;
                     }
                     this.buffer.flip();
@@ -355,6 +362,34 @@ public interface RqMultipart extends Request {
                 map.get(name).add(req);
             }
             return map;
+        }
+
+        /**
+         * Decorator allowing to close all the parts of the request.
+         */
+        private class CloseMultipart extends FilterInputStream {
+
+            /**
+             * Creates a {@code CloseParts} with the specified input.
+             * @param input The underlying input stream.
+             */
+            CloseMultipart(final InputStream input) {
+                super(input);
+            }
+
+            @Override
+            public void close() throws IOException {
+                try {
+                    super.close();
+                } finally {
+                    for (final List<Request> requests
+                        : RqMultipart.Base.this.map.values()) {
+                        for (final Request request : requests) {
+                            request.body().close();
+                        }
+                    }
+                }
+            }
         }
     }
 

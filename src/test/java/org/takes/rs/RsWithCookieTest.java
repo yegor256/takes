@@ -82,8 +82,8 @@ public final class RsWithCookieTest {
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    // @checkstyle LineLengthCheck (1 line)
-                    "Set-Cookie: foo=works?;Path=/;,bar=worksToo?;Path=/2nd/path/;",
+                    "Set-Cookie: foo=works?;Path=/;",
+                    "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
                     "",
                     ""
                 )

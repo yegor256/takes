@@ -97,13 +97,10 @@ public final class TkFork implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        for (final Fork fork : this.forks) {
-            final Opt<Response> response = fork.route(request);
-            if (response.has()) {
-                return response.get();
-            }
+        final Opt<Response> response = new FkChain(this.forks).route(request);
+        if (response.has()) {
+            return response.get();
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
-
 }

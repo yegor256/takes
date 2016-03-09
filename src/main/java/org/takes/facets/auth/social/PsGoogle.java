@@ -148,11 +148,19 @@ public final class PsGoogle implements Pass {
             .path("me")
             .with("access_token", token)
             .toString();
-        return PsGoogle.parse(
-            new JdkRequest(uri).fetch()
-                .as(JsonResponse.class).json()
-                .readObject()
-        );
+        final JsonObject json = new JdkRequest(uri).fetch()
+            .as(JsonResponse.class).json()
+            .readObject();
+        if (json.containsKey("error")) {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    "could not retrieve id from Google, possible cause: %s.",
+                    json.get("message")
+                )
+            );
+        }
+        return PsGoogle.parse(json);
     }
 
     /**
@@ -195,7 +203,12 @@ public final class PsGoogle implements Pass {
         } else {
             props.put("picture", image.getString("url", "#"));
         }
-        props.put("name", json.getString("displayName", "unknown"));
+        if (json.containsKey("displayName")
+            && json.get("displayName") != null) {
+            props.put("name", json.getString("displayName"));
+        } else {
+            props.put("name", "unknown");
+        }
         return new Identity.Simple(
             String.format("urn:google:%s", json.getString("id")), props
         );

@@ -39,6 +39,7 @@ import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -268,6 +269,121 @@ public final class RqMultipartTest {
         } finally {
             multi.part(part).iterator().next().body().close();
         }
+    }
+
+    /**
+     * RqMultipart.Base can close all parts once the request body has been
+     * closed.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void closesAllParts() throws Exception {
+        final String body = "RqMultipartTest.closesAllParts";
+        final RqMultipart request = new RqMultipart.Fake(
+            new RqFake(),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"name\""
+                    )
+                )
+            ),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"content\"; filename=\"a.bin\""
+                    )
+                )
+            )
+        );
+        final RqMultipart.Base multi = new RqMultipart.Base(request);
+        multi.part("name").iterator().next().body().read();
+        multi.part("content").iterator().next().body().read();
+        multi.body().close();
+        MatcherAssert.assertThat(
+            multi.part("name").iterator().next(),
+            Matchers.notNullValue()
+        );
+        try {
+            multi.part("name").iterator().next().body().read();
+            Assert.fail(
+                "An IOException was expected since the Stream is closed"
+            );
+        } catch (final IOException ex) {
+            MatcherAssert.assertThat(
+                ex.getMessage(),
+                Matchers.containsString("Closed")
+            );
+        }
+        MatcherAssert.assertThat(
+            multi.part("content").iterator().next(),
+            Matchers.notNullValue()
+        );
+        try {
+            multi.part("content").iterator().next().body().read();
+            Assert.fail(
+                "An IOException was expected since the Stream is closed"
+            );
+        } catch (final IOException ex) {
+            MatcherAssert.assertThat(
+                ex.getMessage(),
+                Matchers.containsString("Closed")
+            );
+        }
+    }
+
+    /**
+     * RqMultipart.Base can close all parts explicitly even if the request body
+     * has been closed.
+     * <p>For backward compatibility reason we need to ensure that we don't get
+     * {@code IOException} when we close explicitly a part even after closing
+     * the input stream of the main request.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void closesExplicitlyAllParts() throws Exception {
+        final String body = "RqMultipartTest.closesExplicitlyAllParts";
+        final RqMultipart request = new RqMultipart.Fake(
+            new RqFake(),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(
+                        (long) body.getBytes().length
+                    ),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"foo\""
+                    )
+                )
+            ),
+            new RqGreedy(
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    RqMultipartTest.contentLengthHeader(0L),
+                    RqMultipartTest.contentDispositionHeader(
+                        "form-data; name=\"bar\"; filename=\"a.bin\""
+                    )
+                )
+            )
+        );
+        final RqMultipart.Base multi = new RqMultipart.Base(request);
+        multi.body().close();
+        MatcherAssert.assertThat(
+            multi.part("foo").iterator().next(),
+            Matchers.notNullValue()
+        );
+        multi.part("foo").iterator().next().body().close();
+        MatcherAssert.assertThat(
+            multi.part("bar").iterator().next(),
+            Matchers.notNullValue()
+        );
+        multi.part("bar").iterator().next().body().close();
     }
 
     /**
