@@ -55,6 +55,7 @@ import org.takes.rs.RsWithHeader;
  * @since 0.20
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
+@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
     /**
@@ -156,7 +157,6 @@ public final class PsBasic implements Pass {
      * @author Endrigo Antonini (teamed@endrigo.com.br)
      * @version $Id$
      * @since 0.20
-     *
      */
     public static final class Fake implements PsBasic.Entry {
         /**
@@ -228,27 +228,11 @@ public final class PsBasic implements Pass {
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @todo #558:30min Default ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and
-         *  other constructor calls. Refactor code according to that rule
-         *  and remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Default(final String... users) {
-            this.usernames = new HashMap<>(users.length);
-            for (final String user : users) {
-                final String unified = user.replace("%20", "+");
-                PsBasic.Default.validateUser(unified);
-                this.usernames.put(
-                    PsBasic.Default.key(unified),
-                    unified.substring(unified.lastIndexOf(' ') + 1)
-                );
-            }
+            this.usernames = Default.converted(users);
         }
+
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             final Opt<String> urn = this.urn(user, pwd);
@@ -269,6 +253,27 @@ public final class PsBasic implements Pass {
                 identity = new Opt.Empty<>();
             }
             return identity;
+        }
+        /**
+         * Converts Strings with user's login, password and URN to Map.
+         * @param users Strings with user's login, password and URN with
+         *  space characters as separators. Each of login, password and urn
+         *  are URL-encoded substrings. For example,
+         *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         * @return Map from login/password pairs to URNs.
+         */
+        private static Map<String, String> converted(final String... users) {
+            final Map<String, String> result =
+                new HashMap<String, String>(users.length);
+            for (final String user : users) {
+                final String unified = user.replace("%20", "+");
+                PsBasic.Default.validateUser(unified);
+                result.put(
+                    PsBasic.Default.key(unified),
+                    unified.substring(unified.lastIndexOf(' ') + 1)
+                );
+            }
+            return result;
         }
         /**
          * Returns an URN corresponding to a login-password pair.

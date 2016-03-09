@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import com.jcabi.aspects.Tv;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -56,6 +57,11 @@ public final class PsBasicTest {
     private static final String AUTH_BASIC = "Authorization: Basic %s";
 
     /**
+     * Valid code parameter.
+     */
+    private static final String VALID_CODE = "?valid_code=%s";
+
+    /**
      * PsBasic can handle connection with valid credential.
      * @throws Exception if any error occurs
      */
@@ -70,12 +76,46 @@ public final class PsBasicTest {
                 new RqFake(
                     RqMethod.GET,
                     String.format(
-                        "?valid_code=%s",
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "pass")
+            )
+        );
+        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            identity.get().urn(),
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
+        );
+    }
+
+    /**
+     * PsBasic can handle connection with valid credential when Entry is
+     * a instance of Default.
+     * @throws Exception if any error occurs
+     */
+    @Test
+    public void handleConnectionWithValidCredentialDefaultEntry()
+        throws Exception {
+        final String user = "johny";
+        final String password = "password2";
+        final Opt<Identity> identity = new PsBasic(
+            "RealmAA",
+            new PsBasic.Default(
+                "mike my%20password1 urn:basic:michael",
+                String.format("%s %s urn:basic:%s", user, password, user)
+            )
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                    )
+                ),
+                PsBasicTest.header(user, password)
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
@@ -102,8 +142,7 @@ public final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            // @checkstyle MagicNumberCheck (1 line)
-                            RandomStringUtils.randomAlphanumeric(10)
+                            RandomStringUtils.randomAlphanumeric(Tv.TEN)
                         )
                     ),
                     PsBasicTest.header("username", "wrong")
@@ -139,8 +178,7 @@ public final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "changeit"),
