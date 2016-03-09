@@ -217,6 +217,29 @@ public final class PsBasicTest {
     }
 
     /**
+     * PsBasic can request authentication.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void requestAuthentication() throws Exception {
+        final Take take = new TkAuth(
+            new TkSecure(
+                new TkText("secured area...")
+            ),
+            new PsBasic(
+                "the realm 5",
+                new PsBasic.Default("bob pwd88 urn:users:bob")
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                take.act(new RqFake())
+            ).print(),
+            Matchers.containsString("HTTP/1.1 401 Unauthorized")
+        );
+    }
+
+    /**
      * Generate the identity urn.
      * @param user User
      * @return URN
