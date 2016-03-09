@@ -26,12 +26,12 @@ package org.takes.rs;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 /**
  * The body of a response used by {@link RsWithBody}.
@@ -43,10 +43,10 @@ import java.nio.file.StandardCopyOption;
 @SuppressWarnings("PMD.TooManyMethods")
 interface Body {
     /**
-     * Gives a reusable {@code InputStream} corresponding to the content of
+     * Gives an {@code InputStream} corresponding to the content of
      * the body.
-     * @return A reusable {@code InputStream}.
-     * @throws IOException in case a reusable {@code InputStream} could not
+     * @return The content of the body.
+     * @throws IOException in case the content of the body could not
      *  be provided.
      */
     InputStream input() throws IOException;
@@ -153,6 +153,10 @@ interface Body {
     /**
      * Decorator that will store the content of the underlying Body into a
      * temporary File.
+     * <p><b>The content of the Body will be stored into a temporary
+     * file to be able to read it as many times as we want so use it only
+     * for large content, for small content use {@link Body.ByteArray}
+     * instead.</b>
      */
     final class TempFile implements Body {
 
@@ -162,25 +166,34 @@ interface Body {
         private final transient File file;
 
         /**
+         * The underlying body.
+         */
+        private final transient Body body;
+
+        /**
          * Constructs a {@code TempFile} with the specified {@link Body}.
-         * <p><b>The content of the Body will be stored into a temporary
-         * file to be able to read it as many times as we want so use it only
-         * for large content, for small content use {@link Body.ByteArray}
-         * instead.</b>
          * @param body The content of the body to store into a temporary file.
          */
         TempFile(final Body body) {
-            this.file = Body.TempFile.content(body);
+            this.body = body;
+            this.file = new File(
+                System.getProperty("java.io.tmpdir"),
+                String.format(
+                    "%s-%s.tmp",
+                    Body.TempFile.class.getName(),
+                    UUID.randomUUID().toString()
+                )
+            );
         }
 
         @Override
-        public InputStream input() throws FileNotFoundException {
-            return new FileInputStream(this.file);
+        public InputStream input() throws IOException {
+            return new FileInputStream(this.file());
         }
 
         @Override
-        public int length() {
-            return (int) this.file.length();
+        public int length() throws IOException {
+            return (int) this.file().length();
         }
 
         // Needed to remove the file once the Stream object is no more used.
@@ -196,28 +209,27 @@ interface Body {
         }
 
         /**
-         * Gives the {@code File} that contains the content of the provided
-         * {@link Body}.
-         * @param body The body to store into the file.
+         * Gives the {@code File} that contains the content of the underlying
+         * {@code  Body}.
          * @return The {@code File} in which we stored the content of the
-         *  body.
+         *  underlying {@code  Body}.
+         * @throws IOException In case the content of the underlying
+         *  {@code Body} could not be stored into the file.
          */
-        private static File content(final Body body) {
-            final File file;
-            try {
-                file = File.createTempFile(Body.Stream.class.getName(), "tmp");
-                file.deleteOnExit();
-                try (final InputStream content = body.input()) {
-                    Files.copy(
-                        content,
-                        Paths.get(file.getAbsolutePath()),
-                        StandardCopyOption.REPLACE_EXISTING
-                    );
+        private File file() throws IOException {
+            synchronized (this.file) {
+                if (!this.file.exists()) {
+                    this.file.deleteOnExit();
+                    try (final InputStream content = this.body.input()) {
+                        Files.copy(
+                            content,
+                            Paths.get(this.file.getAbsolutePath()),
+                            StandardCopyOption.REPLACE_EXISTING
+                        );
+                    }
                 }
-            } catch (final IOException ex) {
-                throw new IllegalStateException(ex);
+                return this.file;
             }
-            return file;
         }
     }
 }
