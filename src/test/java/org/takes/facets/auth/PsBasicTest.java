@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.forward.RsForward;
+import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
@@ -222,20 +223,22 @@ public final class PsBasicTest {
      */
     @Test
     public void requestAuthentication() throws Exception {
-        final Take take = new TkAuth(
-            new TkSecure(
-                new TkText("secured area...")
-            ),
-            new PsBasic(
-                "the realm 5",
-                new PsBasic.Default("bob pwd88 urn:users:bob")
+        final Take take = new TkForward(
+            new TkAuth(
+                new TkSecure(
+                    new TkText("secured area...")
+                ),
+                new PsBasic(
+                    "the realm 5",
+                    new PsBasic.Default("bob pwd88 urn:users:bob")
+                )
             )
         );
         MatcherAssert.assertThat(
             new RsPrint(
                 take.act(new RqFake())
             ).print(),
-            Matchers.containsString("HTTP/1.1 401 Unauthorized")
+            Matchers.containsString("HTTP/1.1 401 Unauthorized\r\n")
         );
     }
 

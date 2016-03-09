@@ -30,6 +30,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -83,13 +84,24 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
+        final Iterator<String> headers = new RqHeaders.Smart(
+            new RqHeaders.Base(request)
+        ).header("authorization").iterator();
+        if (!headers.hasNext()) {
+            throw new RsForward(
+                new RsWithHeader(
+                    String.format(
+                        "WWW-Authenticate: Basic ream=\"%s\" ",
+                        this.realm
+                    )
+                ),
+                HttpURLConnection.HTTP_UNAUTHORIZED,
+                new RqHref.Base(request).href()
+            );
+        }
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
-                PsBasic.AUTH.split(
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(request)
-                    ).single("authorization")
-                )[1]
+                PsBasic.AUTH.split(headers.next())[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
