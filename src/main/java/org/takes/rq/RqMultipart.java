@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
@@ -97,8 +98,8 @@ public interface RqMultipart extends Request {
      * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
      * @see RqGreedy
      */
-    @EqualsAndHashCode(callSuper = true)
-    final class Base extends RqWrap implements RqMultipart {
+    @EqualsAndHashCode(of = "origin")
+    final class Base implements RqMultipart {
         /**
          * Pattern to get boundary from header.
          */
@@ -124,13 +125,17 @@ public interface RqMultipart extends Request {
          */
         private final transient InputStream stream;
         /**
+         * Original request.
+         */
+        private final transient Request origin;
+        /**
          * Ctor.
          * @param req Original request
          * @throws IOException If fails
          * @checkstyle ExecutableStatementCountCheck (2 lines)
          */
         public Base(final Request req) throws IOException {
-            super(req);
+            this.origin = req;
             this.stream = new RqLengthAware(req).body();
             this.buffer = ByteBuffer.allocate(
                 // @checkstyle MagicNumberCheck (1 line)
@@ -166,6 +171,17 @@ public interface RqMultipart extends Request {
         public Iterable<String> names() {
             return this.map.keySet();
         }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return new CloseMultipart(this.origin.body());
+        }
+
         /**
          * Build a request for each part of the origin request.
          * @param req Origin request
@@ -231,10 +247,6 @@ public interface RqMultipart extends Request {
          * @param body Origin request body
          * @return Request
          * @throws IOException If fails
-         * @todo #254:30min in order to delete temporary files InputStream
-         *  instance on Request.body should be closed. In context of multipart
-         *  requests that means that body of all parts should be closed once
-         *  they are not needed anymore.
          */
         private Request make(final byte[] boundary,
             final ReadableByteChannel body) throws IOException {
@@ -350,6 +362,34 @@ public interface RqMultipart extends Request {
                 map.get(name).add(req);
             }
             return map;
+        }
+
+        /**
+         * Decorator allowing to close all the parts of the request.
+         */
+        private class CloseMultipart extends FilterInputStream {
+
+            /**
+             * Creates a {@code CloseParts} with the specified input.
+             * @param input The underlying input stream.
+             */
+            CloseMultipart(final InputStream input) {
+                super(input);
+            }
+
+            @Override
+            public void close() throws IOException {
+                try {
+                    super.close();
+                } finally {
+                    for (final List<Request> requests
+                        : RqMultipart.Base.this.map.values()) {
+                        for (final Request request : requests) {
+                            request.body().close();
+                        }
+                    }
+                }
+            }
         }
     }
 
