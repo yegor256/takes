@@ -174,9 +174,9 @@ public final class MainRemote {
          * @param method Main method
          * @param passed Additional arguments to be passed to the main method
          */
-        MainMethod(final Method method, final String[] passed) {
+        MainMethod(final Method method, final String... passed) {
             this.method = method;
-            this.passed = passed;
+            this.passed = Arrays.copyOf(passed, passed.length);
         }
 
         @Override

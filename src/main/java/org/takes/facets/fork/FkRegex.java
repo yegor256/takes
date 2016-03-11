@@ -209,7 +209,7 @@ public final class FkRegex implements Fork {
         /**
          * Matcher.
          */
-        private final transient Matcher matcher;
+        private final transient Matcher mtr;
 
         /**
          * Original request.
@@ -219,11 +219,11 @@ public final class FkRegex implements Fork {
         /**
          * Ctor.
          * @param matcher Matcher
-         * @param req Request
+         * @param request Request
          */
-        RqMatcher(final Matcher matcher, final Request req) {
-            this.matcher = matcher;
-            this.req = req;
+        RqMatcher(final Matcher matcher, final Request request) {
+            this.mtr = matcher;
+            this.req = request;
         }
 
         @Override
@@ -238,7 +238,7 @@ public final class FkRegex implements Fork {
 
         @Override
         public Matcher matcher() {
-            return this.matcher;
+            return this.mtr;
         }
     }
 
