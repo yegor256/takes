@@ -188,26 +188,58 @@ public final class FkRegex implements Fork {
         if (matcher.matches()) {
             resp = new Opt.Single<Response>(
                 this.target.act(
-                    new RqRegex() {
-                        @Override
-                        public Matcher matcher() {
-                            return matcher;
-                        }
-                        @Override
-                        public Iterable<String> head() throws IOException {
-                            return req.head();
-                        }
-                        @Override
-                        public InputStream body() throws IOException {
-                            return req.body();
-                        }
-                    }
+                    new RqMatcher(matcher, req)
                 )
             );
         } else {
             resp = new Opt.Empty<Response>();
         }
         return resp;
+    }
+
+    /**
+     * Request with a matcher inside.
+     *
+     * @author Dali Freire (dalifreire@gmail.com)
+     * @version $Id$
+     * @since 0.32.5
+     */
+    private static final class RqMatcher implements RqRegex {
+
+        /**
+         * Matcher.
+         */
+        private final transient Matcher matcher;
+
+        /**
+         * Original request.
+         */
+        private final transient Request req;
+
+        /**
+         * Ctor.
+         * @param matcher Matcher
+         * @param req Request
+         */
+        RqMatcher(final Matcher matcher, final Request req) {
+            this.matcher = matcher;
+            this.req = req;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.req.head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.req.body();
+        }
+
+        @Override
+        public Matcher matcher() {
+            return this.matcher;
+        }
     }
 
 }
