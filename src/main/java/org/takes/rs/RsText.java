@@ -107,7 +107,7 @@ public final class RsText extends RsWrap {
      * @param body HTML body
      */
     public RsText(final Response res, final InputStream body) {
-        this(new RsWithBody(res, body));
+        this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
     }
 
     /**

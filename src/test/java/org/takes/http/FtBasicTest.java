@@ -44,6 +44,7 @@ import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
+import org.takes.rs.RsHTML;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
 
@@ -205,17 +206,54 @@ public final class FtBasicTest {
     }
 
     /**
-     * FtBasic can consume twice the input stream.
+     * FtBasic can consume twice the input stream in case of a RsText.
      * @throws IOException If some problem inside
      */
     @Test
-    public void consumesTwiceInputStream() throws IOException {
-        final String result = "Hello World!";
+    public void consumesTwiceInputStreamWithRsText() throws IOException {
+        final String result = "Hello RsText!";
         new FtRemote(
             new TkFork(
                 new FkRegex(
                     FtBasicTest.ROOT_PATH,
                     new RsText(
+                        new ByteArrayInputStream(
+                            result.getBytes(StandardCharsets.UTF_8)
+                        )
+                    )
+                )
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                }
+            }
+        );
+    }
+
+    /**
+     * FtBasic can consume twice the input stream in case of a RsHTML.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void consumesTwiceInputStreamWithRsHTML() throws IOException {
+        final String result = "Hello RsHTML!";
+        new FtRemote(
+            new TkFork(
+                new FkRegex(
+                    FtBasicTest.ROOT_PATH,
+                    new RsHTML(
                         new ByteArrayInputStream(
                             result.getBytes(StandardCharsets.UTF_8)
                         )

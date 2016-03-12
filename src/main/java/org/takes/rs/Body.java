@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -130,11 +130,17 @@ interface Body {
         private final transient InputStream stream;
 
         /**
+         * The length of the stream.
+         */
+        private final transient int length;
+
+        /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
          * @param input The content of the body as stream.
          */
         Stream(final InputStream input) {
             this.stream = input;
+            this.length = Body.Stream.length(input);
         }
 
         @Override
@@ -143,9 +149,22 @@ interface Body {
         }
 
         @Override
-        public int length() throws IOException {
-            try (final InputStream input = this.stream) {
+        public int length() {
+            return this.length;
+        }
+
+        /**
+         * Gives an estimated length of the specified {@code InputStream}.
+         * @param input The stream for which we want an estimated length.
+         * @return The estimated length of the {@code InputStream}.
+         * @throws IllegalStateException in case the length could not be
+         *  estimated.
+         */
+        private static int length(final InputStream input) {
+            try {
                 return input.available();
+            } catch (final IOException ioe) {
+                throw new IllegalStateException(ioe);
             }
         }
     }

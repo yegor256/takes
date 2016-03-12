@@ -131,7 +131,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        this(res, new Body.TempFile(new Body.Stream(body)));
+        this(res, new Body.Stream(body));
     }
 
     /**
@@ -140,7 +140,7 @@ public final class RsWithBody extends RsWrap {
      * @param res Original response
      * @param body The content of the body
      */
-    private RsWithBody(final Response res, final Body body) {
+    RsWithBody(final Response res, final Body body) {
         super(
             new Response() {
                 @Override
