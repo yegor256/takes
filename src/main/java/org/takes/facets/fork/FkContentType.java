@@ -30,7 +30,6 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
-import org.takes.tk.TkFixed;
 
 /**
  * Fork by Content-type accepted by "Content-Type" HTTP header.
@@ -40,7 +39,6 @@ import org.takes.tk.TkFixed;
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 1.0
- * @see RsFork
  */
 @EqualsAndHashCode(of = { "type", "take" })
 public final class FkContentType implements Fork {
@@ -58,15 +56,6 @@ public final class FkContentType implements Fork {
     /**
      * Ctor.
      * @param atype Accepted type
-     * @param response Response to return
-     */
-    public FkContentType(final String atype, final Response response) {
-        this(atype, new TkFixed(response));
-    }
-
-    /**
-     * Ctor.
-     * @param atype Accepted type
      * @param take Take to handle the request dynamically.
      */
     public FkContentType(final String atype, final Take take) {
@@ -78,9 +67,9 @@ public final class FkContentType implements Fork {
     public Opt<Response> route(final Request req) throws IOException {
         final Opt<Response> resp;
         if (FkContentType.getType(req).contains(this.type)) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Opt.Single<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }
