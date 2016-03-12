@@ -92,7 +92,7 @@ public final class FkParams implements Fork {
             && this.pattern.matcher(params.next()).matches()) {
             resp = new Optional<>(this.take.act(req));
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

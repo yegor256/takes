@@ -47,7 +47,7 @@ public final class FbEmpty extends FbWrap {
             new Fallback() {
                 @Override
                 public Optional<Response> route(final RqFallback req) {
-                    return Optional.empty();
+                    return new Optional<>(null);
                 }
             }
         );

@@ -69,7 +69,7 @@ public final class FkContentType implements Fork {
         if (FkContentType.getType(req).contains(this.type)) {
             resp = new Optional<>(this.origin);
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

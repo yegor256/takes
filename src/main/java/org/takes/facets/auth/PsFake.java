@@ -61,7 +61,7 @@ public final class PsFake implements Pass {
                 new Identity.Simple("urn:test:1")
             );
         } else {
-            user = Optional.empty();
+            user = new Optional<>(null);
         }
         return user;
     }

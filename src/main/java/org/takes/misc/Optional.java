@@ -53,15 +53,6 @@ public final class Optional<T> {
     }
 
     /**
-     * Returns empty container.
-     * @param <T> Type of item
-     * @return Empty {@link Optional}
-     */
-    public static <T> Optional<T> empty() {
-        return new Optional<>(null);
-    }
-
-    /**
      * Returns the contained item.
      * @return Item instance
      */

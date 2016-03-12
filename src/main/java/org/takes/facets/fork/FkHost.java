@@ -81,7 +81,7 @@ public final class FkHost extends FkWrap {
                     .equals(hst.toLowerCase(Locale.ENGLISH))) {
                     rsp = new Optional<>(take.act(req));
                 } else {
-                    rsp = Optional.empty();
+                    rsp = new Optional<>(null);
                 }
                 return rsp;
             }

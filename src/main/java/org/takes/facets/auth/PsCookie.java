@@ -107,7 +107,7 @@ public final class PsCookie implements Pass {
                 )
             );
         } else {
-            user = Optional.empty();
+            user = new Optional<>(null);
         }
         return user;
     }

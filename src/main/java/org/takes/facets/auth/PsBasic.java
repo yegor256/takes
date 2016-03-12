@@ -168,7 +168,7 @@ public final class PsBasic implements Pass {
                     )
                 );
             } else {
-                user = Optional.empty();
+                user = new Optional<>(null);
             }
             return user;
         }
@@ -184,7 +184,7 @@ public final class PsBasic implements Pass {
     public static final class Empty implements PsBasic.Entry {
         @Override
         public Optional<Identity> enter(final String user, final String pwd) {
-            return Optional.empty();
+            return new Optional<>(null);
         }
     }
 
@@ -254,7 +254,7 @@ public final class PsBasic implements Pass {
                     throw new IllegalStateException(ex);
                 }
             } else {
-                identity = Optional.empty();
+                identity = new Optional<>(null);
             }
             return identity;
         }

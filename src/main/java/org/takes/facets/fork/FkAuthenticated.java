@@ -77,7 +77,7 @@ public final class FkAuthenticated implements Fork {
         final Identity identity = new RqAuth(req).identity();
         final Optional<Response> resp;
         if (identity.equals(Identity.ANONYMOUS)) {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         } else {
             resp = new Optional<>(this.take.act(req));
         }

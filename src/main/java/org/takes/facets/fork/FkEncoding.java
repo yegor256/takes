@@ -103,10 +103,10 @@ public final class FkEncoding implements Fork {
             if (items.contains(this.encoding)) {
                 resp = new Optional<>(this.origin);
             } else {
-                resp = Optional.empty();
+                resp = new Optional<>(null);
             }
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

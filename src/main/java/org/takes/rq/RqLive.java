@@ -76,7 +76,7 @@ public final class RqLive extends RqWrap {
         boolean eof = true;
         final Collection<String> head = new LinkedList<String>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Optional<Integer> data = Optional.empty();
+        Optional<Integer> data = new Optional<>(null);
         while (true) {
             data = RqLive.data(input, data);
             if (data.get() < 0) {
@@ -107,7 +107,7 @@ public final class RqLive extends RqWrap {
                 continue;
             }
             baos.write(legalCharacter(data, baos, head.size() + 1));
-            data = Optional.empty();
+            data = new Optional<>(null);
         }
         if (eof) {
             throw new IOException("empty request");
@@ -132,7 +132,7 @@ public final class RqLive extends RqWrap {
      */
     private static Optional<String> newHeader(final Optional<Integer> data,
         final ByteArrayOutputStream baos) {
-        Optional<String> header = Optional.empty();
+        Optional<String> header = new Optional<>(null);
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Optional<>(
                 new String(baos.toByteArray(), StandardCharsets.UTF_8)

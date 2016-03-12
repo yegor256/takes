@@ -102,7 +102,7 @@ public final class FkMethods implements Fork {
         if (this.methods.contains(mtd)) {
             resp = new Optional<>(this.take.act(req));
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

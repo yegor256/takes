@@ -60,7 +60,7 @@ public final class RsWithType extends RsWrap {
      * @param type Content type
      */
     public RsWithType(final Response res, final CharSequence type) {
-        this(res, type, Optional.<Charset>empty());
+        this(res, type, new Optional<Charset>(null));
     }
 
     /**
@@ -142,7 +142,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public HTML(final Response res) {
-            this(res, Optional.<Charset>empty());
+            this(res, new Optional<Charset>(null));
         }
 
         /**
@@ -187,7 +187,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public JSON(final Response res) {
-            this(res, Optional.<Charset>empty());
+            this(res, new Optional<Charset>(null));
         }
 
         /**
@@ -232,7 +232,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public XML(final Response res) {
-            this(res, Optional.<Charset>empty());
+            this(res, new Optional<Charset>(null));
         }
 
         /**
@@ -277,7 +277,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          */
         public Text(final Response res) {
-            this(res, Optional.<Charset>empty());
+            this(res, new Optional<Charset>(null));
         }
 
         /**

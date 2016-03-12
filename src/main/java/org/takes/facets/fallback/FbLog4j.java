@@ -53,7 +53,7 @@ public final class FbLog4j extends FbWrap {
                 public Optional<Response> route(final RqFallback req)
                     throws IOException {
                     FbLog4j.log(req);
-                    return Optional.empty();
+                    return new Optional<>(null);
                 }
             }
         );

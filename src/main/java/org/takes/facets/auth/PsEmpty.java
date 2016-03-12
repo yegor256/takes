@@ -42,7 +42,7 @@ public final class PsEmpty implements Pass {
 
     @Override
     public Optional<Identity> enter(final Request request) {
-        return Optional.empty();
+        return new Optional<>(null);
     }
 
     @Override

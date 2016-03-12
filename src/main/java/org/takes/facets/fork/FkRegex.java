@@ -205,7 +205,7 @@ public final class FkRegex implements Fork {
                 )
             );
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

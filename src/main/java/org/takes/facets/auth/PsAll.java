@@ -66,7 +66,7 @@ public class PsAll implements Pass {
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
         } else {
-            result = Optional.empty();
+            result = new Optional<>(null);
         }
         return result;
     }

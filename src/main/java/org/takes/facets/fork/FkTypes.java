@@ -69,7 +69,7 @@ public final class FkTypes implements Fork {
         if (FkTypes.accepted(req).contains(this.types)) {
             resp = new Optional<>(this.origin);
         } else {
-            resp = Optional.empty();
+            resp = new Optional<>(null);
         }
         return resp;
     }

@@ -99,7 +99,7 @@ public final class PsByFlag implements Pass {
     public Optional<Identity> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
-        Optional<Identity> user = Optional.empty();
+        Optional<Identity> user = new Optional<>(null);
         if (flg.hasNext()) {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {

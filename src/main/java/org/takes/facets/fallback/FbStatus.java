@@ -160,7 +160,7 @@ public final class FbStatus extends FbWrap {
                     if (check.fits(req.code())) {
                         rsp = fallback.route(req);
                     } else {
-                        rsp = Optional.empty();
+                        rsp = new Optional<>(null);
                     }
                     return rsp;
                 }
