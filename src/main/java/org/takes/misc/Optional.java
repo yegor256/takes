@@ -58,12 +58,9 @@ public final class Optional<T> {
      */
     public T get() {
         if (this.origin == null) {
-            throw new NoSuchElementException(
-                "This container is empty"
-            );
-        } else {
-            return this.origin;
+            throw new NoSuchElementException("This container is empty");
         }
+        return this.origin;
     }
 
     /**
