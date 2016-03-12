@@ -69,7 +69,7 @@ public final class RqLive extends RqWrap {
             {
                 "PMD.AvoidInstantiatingObjectsInLoops",
                 "PMD.StdCyclomaticComplexity",
-                "PMD.ModifiedCyclomaticComplexity"
+                "PMD.ModifiedCyclomaticComplexity",
             }
         )
     private static Request parse(final InputStream input) throws IOException {
@@ -84,18 +84,7 @@ public final class RqLive extends RqWrap {
             }
             eof = false;
             if (data.get() == '\r') {
-                if (input.read() != '\n') {
-                    throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format(
-                            // @checkstyle LineLength (1 line)
-                            "there is no LF after CR in header, line #%d: \"%s\"",
-                            head.size() + 1, new String(
-                                baos.toByteArray(), StandardCharsets.UTF_8
-                            )
-                        )
-                    );
-                }
+                RqLive.headerChecker(input, head, baos);
                 if (baos.size() == 0) {
                     break;
                 }
@@ -108,7 +97,7 @@ public final class RqLive extends RqWrap {
             }
             baos.write(legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
-            if(input.available() <= 0){
+            if (input.available() <= 0) {
                 break;
             }
         }
@@ -125,6 +114,31 @@ public final class RqLive extends RqWrap {
                 return input;
             }
         };
+    }
+
+    /**
+     * Check the headers are valid.
+     * @param input Input stream
+     * @param head Http head information
+     * @param baos Parced bite array stream
+     * @throws IOException if fails
+     */
+    private static void headerChecker(
+        final InputStream input,
+        final Collection<String> head,
+        final ByteArrayOutputStream baos) throws IOException {
+        if (input.read() != '\n') {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "there is no LF after CR in header, line #%d: \"%s\"",
+                    head.size() + 1, new String(
+                        baos.toByteArray(), StandardCharsets.UTF_8
+                    )
+                )
+            );
+        }
     }
 
     /**
