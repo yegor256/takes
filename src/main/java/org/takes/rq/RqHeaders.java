@@ -139,7 +139,6 @@ public interface RqHeaders extends Request {
                     "a valid request must contain at least one line in the head"
                 );
             }
-            head.next();
             final Map<String, List<String>> map = new HashMap<>(0);
             while (head.hasNext()) {
                 final String line = head.next();
