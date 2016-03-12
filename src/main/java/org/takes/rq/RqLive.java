@@ -89,31 +89,19 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 data = new Opt.Single<Integer>(input.read());
-                final Opt<String> header = newHeader(data, baos);
+                final Opt<String> header = RqLive.newHeader(data, baos);
                 if (header.has()) {
                     head.add(header.get());
                 }
                 continue;
             }
-            baos.write(legalCharacter(data, baos, head.size() + 1));
+            baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
-            if (input.available() <= 0) {
-                break;
-            }
         }
         if (eof) {
             throw new IOException("empty request");
         }
-        return new Request() {
-            @Override
-            public Iterable<String> head() {
-                return head;
-            }
-            @Override
-            public InputStream body() {
-                return input;
-            }
-        };
+        return new RqLive.LiveRequest(head, input);
     }
 
     /**
@@ -121,7 +109,7 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @param head Http head information
      * @param baos Parced bite array stream
-     * @throws IOException if fails
+     * @throws IOException if fails.
      */
     private static void headerChecker(
         final InputStream input,
@@ -203,5 +191,40 @@ public final class RqLive extends RqWrap {
             ret = new Opt.Single<Integer>(input.read());
         }
         return ret;
+    }
+
+    /**
+     * A live represnetation of Request with head and input.
+     */
+    private static class LiveRequest implements org.takes.Request {
+        /**
+         * Http header info.
+         */
+        private final Collection<String> head;
+
+        /**
+         * Input stream.
+         */
+        private final InputStream input;
+
+        /**
+         * Ctor.
+         * @param head Header values
+         * @param input Input stream
+         */
+        LiveRequest(final Collection<String> head, final InputStream input) {
+            this.head = head;
+            this.input = input;
+        }
+
+        @Override
+        public Iterable<String> head() {
+            return head;
+        }
+
+        @Override
+        public InputStream body() {
+            return input;
+        }
     }
 }
