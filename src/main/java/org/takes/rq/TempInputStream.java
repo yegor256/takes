@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -61,8 +62,14 @@ final class TempInputStream extends InputStream {
 
     @Override
     public void close() throws IOException {
-        this.origin.close();
-        Files.delete(Paths.get(this.file.getAbsolutePath()));
+        try {
+            this.origin.close();
+        } finally {
+            final Path path = Paths.get(this.file.getAbsolutePath());
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        }
     }
 
     @Override

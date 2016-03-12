@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import com.jcabi.aspects.Tv;
 import javax.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
@@ -32,6 +33,7 @@ import org.junit.Test;
 import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.forward.RsForward;
+import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
@@ -55,6 +57,11 @@ public final class PsBasicTest {
     private static final String AUTH_BASIC = "Authorization: Basic %s";
 
     /**
+     * Valid code parameter.
+     */
+    private static final String VALID_CODE = "?valid_code=%s";
+
+    /**
      * PsBasic can handle connection with valid credential.
      * @throws Exception if any error occurs
      */
@@ -69,12 +76,46 @@ public final class PsBasicTest {
                 new RqFake(
                     RqMethod.GET,
                     String.format(
-                        "?valid_code=%s",
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "pass")
+            )
+        );
+        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            identity.get().urn(),
+            CoreMatchers.equalTo(PsBasicTest.urn(user))
+        );
+    }
+
+    /**
+     * PsBasic can handle connection with valid credential when Entry is
+     * a instance of Default.
+     * @throws Exception if any error occurs
+     */
+    @Test
+    public void handleConnectionWithValidCredentialDefaultEntry()
+        throws Exception {
+        final String user = "johny";
+        final String password = "password2";
+        final Opt<Identity> identity = new PsBasic(
+            "RealmAA",
+            new PsBasic.Default(
+                "mike my%20password1 urn:basic:michael",
+                String.format("%s %s urn:basic:%s", user, password, user)
+            )
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                    )
+                ),
+                PsBasicTest.header(user, password)
             )
         );
         MatcherAssert.assertThat(identity.has(), Matchers.is(true));
@@ -101,8 +142,7 @@ public final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            // @checkstyle MagicNumberCheck (1 line)
-                            RandomStringUtils.randomAlphanumeric(10)
+                            RandomStringUtils.randomAlphanumeric(Tv.TEN)
                         )
                     ),
                     PsBasicTest.header("username", "wrong")
@@ -138,8 +178,7 @@ public final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        // @checkstyle MagicNumberCheck (1 line)
-                        RandomStringUtils.randomAlphanumeric(10)
+                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "changeit"),
@@ -213,6 +252,31 @@ public final class PsBasicTest {
                 )
             ).print(),
             Matchers.containsString("HTTP/1.1 200 OK")
+        );
+    }
+
+    /**
+     * PsBasic can request authentication.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void requestAuthentication() throws Exception {
+        final Take take = new TkForward(
+            new TkAuth(
+                new TkSecure(
+                    new TkText("secured area...")
+                ),
+                new PsBasic(
+                    "the realm 5",
+                    new PsBasic.Default("bob pwd88 urn:users:bob")
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            new RsPrint(
+                take.act(new RqFake())
+            ).print(),
+            Matchers.containsString("HTTP/1.1 401 Unauthorized\r\n")
         );
     }
 

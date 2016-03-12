@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -54,6 +55,7 @@ import org.takes.rs.RsWithHeader;
  * @since 0.20
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
+@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
     /**
@@ -83,13 +85,24 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
+        final Iterator<String> headers = new RqHeaders.Smart(
+            new RqHeaders.Base(request)
+        ).header("authorization").iterator();
+        if (!headers.hasNext()) {
+            throw new RsForward(
+                new RsWithHeader(
+                    String.format(
+                        "WWW-Authenticate: Basic ream=\"%s\" ",
+                        this.realm
+                    )
+                ),
+                HttpURLConnection.HTTP_UNAUTHORIZED,
+                new RqHref.Base(request).href()
+            );
+        }
         final String decoded = new String(
             DatatypeConverter.parseBase64Binary(
-                PsBasic.AUTH.split(
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(request)
-                    ).single("authorization")
-                )[1]
+                PsBasic.AUTH.split(headers.next())[1]
             ), StandardCharsets.UTF_8
         ).trim();
         final String user = decoded.split(":")[0];
@@ -144,7 +157,6 @@ public final class PsBasic implements Pass {
      * @author Endrigo Antonini (teamed@endrigo.com.br)
      * @version $Id$
      * @since 0.20
-     *
      */
     public static final class Fake implements PsBasic.Entry {
         /**
@@ -216,27 +228,11 @@ public final class PsBasic implements Pass {
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @todo #558:30min Default ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and
-         *  other constructor calls. Refactor code according to that rule
-         *  and remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Default(final String... users) {
-            this.usernames = new HashMap<>(users.length);
-            for (final String user : users) {
-                final String unified = user.replace("%20", "+");
-                PsBasic.Default.validateUser(unified);
-                this.usernames.put(
-                    PsBasic.Default.key(unified),
-                    unified.substring(unified.lastIndexOf(' ') + 1)
-                );
-            }
+            this.usernames = Default.converted(users);
         }
+
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             final Opt<String> urn = this.urn(user, pwd);
@@ -257,6 +253,27 @@ public final class PsBasic implements Pass {
                 identity = new Opt.Empty<>();
             }
             return identity;
+        }
+        /**
+         * Converts Strings with user's login, password and URN to Map.
+         * @param users Strings with user's login, password and URN with
+         *  space characters as separators. Each of login, password and urn
+         *  are URL-encoded substrings. For example,
+         *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         * @return Map from login/password pairs to URNs.
+         */
+        private static Map<String, String> converted(final String... users) {
+            final Map<String, String> result =
+                new HashMap<String, String>(users.length);
+            for (final String user : users) {
+                final String unified = user.replace("%20", "+");
+                PsBasic.Default.validateUser(unified);
+                result.put(
+                    PsBasic.Default.key(unified),
+                    unified.substring(unified.lastIndexOf(' ') + 1)
+                );
+            }
+            return result;
         }
         /**
          * Returns an URN corresponding to a login-password pair.
