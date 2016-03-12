@@ -74,15 +74,25 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
+        final BufferedOutputStream output = new BufferedOutputStream(
+            socket.getOutputStream()
+        );
         try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
-            );
+            while (true) {
+                this.print(
+                    BkBasic.addSocketHeaders(
+                        new RqLive(input),
+                        socket
+                    ),
+                    output
+                );
+                if (input.available() <= 0) {
+                    break;
+                }
+            }
         } finally {
+            output.flush();
+            output.close();
             input.close();
         }
     }
@@ -108,8 +118,6 @@ public final class BkBasic implements Back {
                     HttpURLConnection.HTTP_INTERNAL_ERROR
                 )
             ).print(output);
-        } finally {
-            output.close();
         }
     }
 

@@ -108,6 +108,9 @@ public final class RqLive extends RqWrap {
             }
             baos.write(legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
+            if(input.available() <= 0){
+                break;
+            }
         }
         if (eof) {
             throw new IOException("empty request");
