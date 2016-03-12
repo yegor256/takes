@@ -69,7 +69,7 @@ public final class RqLive extends RqWrap {
             {
                 "PMD.AvoidInstantiatingObjectsInLoops",
                 "PMD.StdCyclomaticComplexity",
-                "PMD.ModifiedCyclomaticComplexity",
+                "PMD.ModifiedCyclomaticComplexity"
             }
         )
     private static Request parse(final InputStream input) throws IOException {
