@@ -29,7 +29,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.rs.RsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkEncoding}.
@@ -47,19 +47,19 @@ public final class FkEncodingTest {
     public void matchesByAcceptEncodingHeader() throws IOException {
         final String header = "Accept-Encoding";
         MatcherAssert.assertThat(
-            new FkEncoding("gzip", new RsEmpty()).route(
+            new FkEncoding("gzip", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,deflate")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
-            new FkEncoding("", new RsEmpty()).route(
+            new FkEncoding("", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
-            new FkEncoding("deflate", new RsEmpty()).route(
+            new FkEncoding("deflate", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,exi")
             ).has(),
             Matchers.is(false)

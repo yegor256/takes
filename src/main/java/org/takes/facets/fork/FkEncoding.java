@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -54,7 +55,6 @@ import org.takes.rq.RqHeaders;
  * <p>The class is immutable and thread-safe.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @see org.takes.facets.fork.RsFork
  * @since 0.10
  */
 @EqualsAndHashCode(of = { "encoding", "origin" })
@@ -71,18 +71,18 @@ public final class FkEncoding implements Fork {
     private final transient String encoding;
 
     /**
-     * Response to return.
+     * Take to handle the request and dynamically return the response.
      */
-    private final transient Response origin;
+    private final transient Take origin;
 
     /**
      * Ctor.
      * @param enc Encoding we accept
-     * @param response Response to return
+     * @param take Take to handle the request dynamically.
      */
-    public FkEncoding(final String enc, final Response response) {
+    public FkEncoding(final String enc, final Take take) {
         this.encoding = enc.trim().toLowerCase(Locale.ENGLISH);
-        this.origin = response;
+        this.origin = take;
     }
 
     @Override
@@ -91,7 +91,7 @@ public final class FkEncoding implements Fork {
             new RqHeaders.Base(req).header("Accept-Encoding").iterator();
         final Opt<Response> resp;
         if (this.encoding.isEmpty()) {
-            resp = new Opt.Single<Response>(this.origin);
+            resp = new Opt.Single<>(this.origin.act(req));
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
                 ENCODING_SEP.split(
@@ -101,12 +101,12 @@ public final class FkEncoding implements Fork {
                 )
             );
             if (items.contains(this.encoding)) {
-                resp = new Opt.Single<Response>(this.origin);
+                resp = new Opt.Single<>(this.origin.act(req));
             } else {
-                resp = new Opt.Empty<Response>();
+                resp = new Opt.Empty<>();
             }
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }
