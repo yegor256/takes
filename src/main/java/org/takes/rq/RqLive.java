@@ -44,6 +44,9 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.1
  * @checkstyle CyclomaticComplexityCheck (500 lines)
+ * @todo #519:30min Refactor the parse method into a new class.
+ *  This method is too long and too much if-else statements. Covert this
+ *  into an IfElseClass.
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.CyclomaticComplexity")
@@ -63,6 +66,7 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @return Request
      * @throws IOException If fails
+     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     @SuppressWarnings
         (
@@ -84,7 +88,18 @@ public final class RqLive extends RqWrap {
             }
             eof = false;
             if (data.get() == '\r') {
-                RqLive.headerChecker(input, head, baos);
+                if (input.read() != '\n') {
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_BAD_REQUEST,
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "there is no LF after CR in header, line #%d: \"%s\"",
+                            head.size() + 1, new String(
+                                baos.toByteArray(), StandardCharsets.UTF_8
+                            )
+                        )
+                    );
+                }
                 if (baos.size() == 0) {
                     break;
                 }
@@ -97,36 +112,23 @@ public final class RqLive extends RqWrap {
             }
             baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
+            if (input.available() <= 0) {
+                break;
+            }
         }
         if (eof) {
             throw new IOException("empty request");
         }
-        return new RqLive.LiveRequest(head, input);
-    }
-
-    /**
-     * Check the headers are valid.
-     * @param input Input stream
-     * @param head Http head information
-     * @param baos Parced bite array stream
-     * @throws IOException if fails.
-     */
-    private static void headerChecker(
-        final InputStream input,
-        final Collection<String> head,
-        final ByteArrayOutputStream baos) throws IOException {
-        if (input.read() != '\n') {
-            throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    // @checkstyle LineLength (1 line)
-                    "there is no LF after CR in header, line #%d: \"%s\"",
-                    head.size() + 1, new String(
-                        baos.toByteArray(), StandardCharsets.UTF_8
-                    )
-                )
-            );
-        }
+        return new Request() {
+            @Override
+            public Iterable<String> head() {
+                return head;
+            }
+            @Override
+            public InputStream body() {
+                return input;
+            }
+        };
     }
 
     /**
@@ -191,40 +193,5 @@ public final class RqLive extends RqWrap {
             ret = new Opt.Single<Integer>(input.read());
         }
         return ret;
-    }
-
-    /**
-     * A live represnetation of Request with head and input.
-     */
-    private static class LiveRequest implements org.takes.Request {
-        /**
-         * Http header info.
-         */
-        private final Collection<String> head;
-
-        /**
-         * Input stream.
-         */
-        private final InputStream input;
-
-        /**
-         * Ctor.
-         * @param head Header values
-         * @param input Input stream
-         */
-        LiveRequest(final Collection<String> head, final InputStream input) {
-            this.head = head;
-            this.input = input;
-        }
-
-        @Override
-        public Iterable<String> head() {
-            return head;
-        }
-
-        @Override
-        public InputStream body() {
-            return input;
-        }
     }
 }

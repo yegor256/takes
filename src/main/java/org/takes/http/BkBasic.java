@@ -71,6 +71,7 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+    @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
         final InputStream input = socket.getInputStream();
