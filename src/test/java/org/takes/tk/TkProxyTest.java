@@ -31,6 +31,8 @@ import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.facets.fork.FkMethods;
+import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
@@ -67,8 +69,12 @@ public final class TkProxyTest {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void justWorks() throws Exception {
-        for (final String method:TkProxyTest.METHODS) {
-            new FtRemote(new TkFixed("hello, world!")).exec(
+        for (final String method : TkProxyTest.METHODS) {
+            new FtRemote(
+                new TkFork(
+                    new FkMethods(method, new TkFixed("hello, world!"))
+                )
+            ).exec(
                 new FtRemote.Script() {
                     @Override
                     public void exec(final URI home) throws IOException {
@@ -98,8 +104,10 @@ public final class TkProxyTest {
             }
         };
         for (final String method:TkProxyTest.METHODS) {
-            new FtRemote(take).exec(
-                new FtRemote.Script() {
+            new FtRemote(
+                new TkFork(
+                    new FkMethods(method,take))).exec(
+                        new FtRemote.Script() {
                     @Override
                     public void exec(final URI home) throws IOException {
                         MatcherAssert.assertThat(
