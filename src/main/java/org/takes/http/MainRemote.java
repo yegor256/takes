@@ -188,17 +188,15 @@ public final class MainRemote {
                     String.format(
                         "The %s method has been invoked at an illegal time.",
                         this.method.getName()
-                        ),
-                    ex
-                    );
+                    ), ex
+                );
             } catch (final IllegalAccessException ex) {
                 throw new IllegalStateException(
                     String.format(
                         "The visibility of the %s method do not allow access.",
                         this.method.getName()
-                        ),
-                    ex
-                    );
+                    ), ex
+                );
             }
         }
     }
