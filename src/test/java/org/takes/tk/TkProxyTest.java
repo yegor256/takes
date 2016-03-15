@@ -43,6 +43,8 @@ import org.takes.rs.RsText;
  * @author Dragan Bozanovic (bozanovicdr@gmail.com)
  * @version $Id$
  * @since 0.25
+ * @todo #458:30min/DEV We need more tests for TkProxy.
+ *  The tests should verify different combinations of request/response headers.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkProxyTest {
