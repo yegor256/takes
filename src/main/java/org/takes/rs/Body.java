@@ -32,6 +32,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The body of a response used by {@link RsWithBody}.
@@ -132,7 +133,7 @@ interface Body {
         /**
          * The length of the stream.
          */
-        private final transient int length;
+        private final transient AtomicInteger length;
 
         /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
@@ -140,31 +141,28 @@ interface Body {
          */
         Stream(final InputStream input) {
             this.stream = input;
-            this.length = Body.Stream.length(input);
+            this.length = new AtomicInteger(-1);
         }
 
         @Override
-        public InputStream input() {
+        public InputStream input() throws IOException {
+            this.estimate();
             return this.stream;
         }
 
         @Override
-        public int length() {
-            return this.length;
+        public int length() throws IOException {
+            this.estimate();
+            return this.length.get();
         }
 
         /**
-         * Gives an estimated length of the specified {@code InputStream}.
-         * @param input The stream for which we want an estimated length.
-         * @return The estimated length of the {@code InputStream}.
-         * @throws IllegalStateException in case the length could not be
-         *  estimated.
+         * Estimates the length of the {@code InputStream}.
+         * @throws IOException in case the length could not be estimated.
          */
-        private static int length(final InputStream input) {
-            try {
-                return input.available();
-            } catch (final IOException ioe) {
-                throw new IllegalStateException(ioe);
+        private void estimate() throws IOException {
+            if (this.length.get() == -1) {
+                this.length.compareAndSet(-1, this.stream.available());
             }
         }
     }
