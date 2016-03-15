@@ -103,11 +103,13 @@ public final class TkProxyTest {
                 return new RsText(new RqHref.Base(req).href().toString());
             }
         };
-        for (final String method:TkProxyTest.METHODS) {
+        for (final String method : TkProxyTest.METHODS) {
             new FtRemote(
                 new TkFork(
-                    new FkMethods(method,take))).exec(
-                        new FtRemote.Script() {
+                    new FkMethods(method, take)
+                )
+            ).exec(
+                new FtRemote.Script() {
                     @Override
                     public void exec(final URI home) throws IOException {
                         MatcherAssert.assertThat(
