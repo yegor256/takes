@@ -184,9 +184,21 @@ public final class MainRemote {
             try {
                 this.method.invoke(null, (Object) this.passed);
             } catch (final InvocationTargetException ex) {
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    String.format(
+                        "The %s method has been invoked at an illegal time.",
+                        this.method.getName()
+                        ),
+                    ex
+                    );
             } catch (final IllegalAccessException ex) {
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    String.format(
+                        "The visibility of the %s method do not allow access.",
+                        this.method.getName()
+                        ),
+                    ex
+                    );
             }
         }
     }
