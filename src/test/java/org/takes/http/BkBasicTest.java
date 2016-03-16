@@ -129,7 +129,7 @@ public final class BkBasicTest {
      *
      * @throws IOException If some problem inside
      * @todo #519:30min In org.takes.rq.RqHeaders.Base#map is skipping the
-     *  first element in the map. So the first eilement 'X-Takes-LocalAddress'
+     *  first element in the map. So the first element 'X-Takes-LocalAddress'
      *  is skipped. Which is the reason for failing this test.
      */
     @Ignore

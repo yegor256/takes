@@ -74,11 +74,12 @@ public final class BkBasic implements Back {
     @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
-        final InputStream input = socket.getInputStream();
-        final BufferedOutputStream output = new BufferedOutputStream(
-            socket.getOutputStream()
-        );
-        try {
+        try (
+            final InputStream input = socket.getInputStream();
+            final BufferedOutputStream output = new BufferedOutputStream(
+                socket.getOutputStream()
+            )
+        ) {
             while (true) {
                 this.print(
                     BkBasic.addSocketHeaders(
@@ -91,10 +92,6 @@ public final class BkBasic implements Back {
                     break;
                 }
             }
-        } finally {
-            output.flush();
-            output.close();
-            input.close();
         }
     }
 
