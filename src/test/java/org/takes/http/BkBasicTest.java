@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -47,7 +48,6 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
-import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -128,11 +128,7 @@ public final class BkBasicTest {
      * BkBasic produces headers with addresses without slashes.
      *
      * @throws IOException If some problem inside
-     * @todo #519:30min In org.takes.rq.RqHeaders.Base#map is skipping the
-     *  first element in the map. So the first element 'X-Takes-LocalAddress'
-     *  is skipped. Which is the reason for failing this test.
      */
-    @Ignore
     @Test
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
         final Socket socket = BkBasicTest.createMockSocket();
@@ -142,7 +138,18 @@ public final class BkBasicTest {
                 @Override
                 public Response act(final Request req) {
                     ref.set(req);
-                    return new RsEmpty();
+                    return new Response() {
+                        @Override
+                        public Iterable<String> head() throws IOException {
+                            return Collections.singletonList("HTTP/1.1 200 OK");
+                        }
+
+                        @Override
+                        public InputStream body() throws IOException {
+                            return req.body();
+                        }
+
+                    };
                 }
             }
         ).accept(socket);
