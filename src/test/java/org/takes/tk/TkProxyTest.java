@@ -108,7 +108,8 @@ public final class TkProxyTest {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(new RqFake(
-                                TkProxyTest.this.method)
+                                    TkProxyTest.this.method
+                                )
                             )
                         ).print(),
                         Matchers.containsString(
