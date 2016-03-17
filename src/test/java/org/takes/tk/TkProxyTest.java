@@ -25,9 +25,13 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -49,52 +53,77 @@ import org.takes.rs.RsText;
  *  The tests should verify different combinations of request/response headers.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@RunWith(Parameterized.class)
 public final class TkProxyTest {
+    /**
+     * Http method.
+     */
+    private String method;
 
     /**
-     * An array of http methods for testing.
+     * Expected test result.
      */
-    private static final String[] METHODS = {
-        RqMethod.POST,
-        RqMethod.GET,
-        RqMethod.PUT,
-        RqMethod.DELETE,
-        RqMethod.TRACE,
-    };
+    private String expected;
+
+    /**
+     * Constructor.
+     * @param method Http method.
+     * @param expected Expected test result.
+     */
+    public TkProxyTest(final String method, final String expected) {
+        this.method = method;
+        this.expected = expected;
+    }
+
+    /**
+     * Http methods for testing.
+     * @return The testing data
+     */
+    @Parameterized.Parameters
+    public static Collection<Object[]> methods() {
+        return Arrays.asList(
+            new Object[][]{
+                {RqMethod.POST, "hello, post!"},
+                {RqMethod.GET, "hello, get!"},
+                {RqMethod.PUT, "hello, put!"},
+                {RqMethod.DELETE, "hello, delete!"},
+                {RqMethod.TRACE, "hello, trace!"},
+            });
+    }
 
     /**
      * TkProxy can just work.
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void justWorks() throws Exception {
-        for (final String method : TkProxyTest.METHODS) {
-            new FtRemote(
-                new TkFork(
-                    new FkMethods(method, new TkFixed("hello, world!"))
-                )
-            ).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RsPrint(
-                                new TkProxy(home).act(new RqFake(method))
-                            ).print(),
-                            Matchers.containsString("hello")
-                        );
-                    }
+        new FtRemote(
+            new TkFork(
+                new FkMethods(this.method, new TkFixed(this.expected))
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(new RqFake(
+                                TkProxyTest.this.method)
+                            )
+                        ).print(),
+                        Matchers.containsString(
+                            TkProxyTest.this.expected
+                        )
+                    );
                 }
-            );
-        }
+            }
+        );
     }
 
     /**
      * TkProxy can correctly maps path string.
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Test
     public void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
@@ -103,31 +132,31 @@ public final class TkProxyTest {
                 return new RsText(new RqHref.Base(req).href().toString());
             }
         };
-        for (final String method : TkProxyTest.METHODS) {
-            new FtRemote(
-                new TkFork(
-                    new FkMethods(method, take)
-                )
-            ).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(final URI home) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RsPrint(
-                                new TkProxy(home).act(
-                                    new RqFake(method, "/a/b/c")
-                                )
-                            ).printBody(),
-                            Matchers.equalTo(
-                                String.format(
-                                    "http://%s:%d/a/b/c",
-                                    home.getHost(), home.getPort()
+        new FtRemote(
+            new TkFork(
+                new FkMethods(this.method, take)
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    MatcherAssert.assertThat(
+                        new RsPrint(
+                            new TkProxy(home).act(
+                                new RqFake(
+                                    TkProxyTest.this.method, "/a/b/c"
                                 )
                             )
-                        );
-                    }
+                        ).printBody(),
+                        Matchers.equalTo(
+                            String.format(
+                                "http://%s:%d/a/b/c",
+                                home.getHost(), home.getPort()
+                            )
+                        )
+                    );
                 }
-            );
-        }
+            }
+        );
     }
 }
