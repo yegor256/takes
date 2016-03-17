@@ -64,7 +64,10 @@ import org.takes.misc.VerboseIterable;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqMultipart extends Request {
-
+    /**
+     * Carriage return constant.
+     */
+    String CRLF = "\r\n";
     /**
      * Get single part.
      * @param name Name of the part to get
@@ -451,14 +454,6 @@ public interface RqMultipart extends Request {
      */
     final class Fake implements RqMultipart {
         /**
-         * Fake boundary constant.
-         */
-        private static final String BOUNDARY = "AaB02x";
-        /**
-         * Carriage return constant.
-         */
-        private static final String CRLF = "\r\n";
-        /**
          * Fake multipart request.
          */
         private final RqMultipart fake;
@@ -492,54 +487,6 @@ public interface RqMultipart extends Request {
         public InputStream body() throws IOException {
             return this.fake.body();
         }
-        /**
-         * Fake body stream creator.
-         * @param parts Fake request body parts
-         * @return InputStream of given dispositions
-         * @throws IOException If fails
-         */
-        private static InputStream fakeStream(final Request... parts)
-            throws IOException {
-            return new ByteArrayInputStream(
-                RqMultipart.Fake.fakeBody(parts).toString().getBytes(
-                    StandardCharsets.UTF_8
-                )
-            );
-        }
-
-        /**
-         * Fake body creator.
-         * @param parts Fake request body parts
-         * @return StringBuilder of given dispositions
-         * @throws IOException If fails
-         */
-        @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
-        private static StringBuilder fakeBody(final Request... parts)
-            throws IOException {
-            final StringBuilder builder = new StringBuilder();
-            for (final Request part : parts) {
-                builder.append(String.format("--%s", RqMultipart.Fake.BOUNDARY))
-                    .append(RqMultipart.Fake.CRLF)
-                    // @checkstyle MultipleStringLiteralsCheck (1 line)
-                    .append("Content-Disposition: ")
-                    .append(
-                        new RqHeaders.Smart(
-                            new RqHeaders.Base(part)
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        ).single("Content-Disposition")
-                    ).append(RqMultipart.Fake.CRLF);
-                final String body = new RqPrint(part).printBody();
-                if (!(RqMultipart.Fake.CRLF.equals(body) || body.isEmpty())) {
-                    builder.append(RqMultipart.Fake.CRLF)
-                        .append(body)
-                        .append(RqMultipart.Fake.CRLF);
-                }
-            }
-            builder.append("Content-Transfer-Encoding: utf-8")
-                .append(RqMultipart.Fake.CRLF)
-                .append(String.format("--%s--", RqMultipart.Fake.BOUNDARY));
-            return builder;
-        }
 
         /**
          * This class is using a decorator pattern for representing
@@ -547,21 +494,27 @@ public interface RqMultipart extends Request {
          */
         private static final class FakeMultipartRequest implements Request {
             /**
+             * Fake boundary constant.
+             */
+            private static final String BOUNDARY = "AaB02x";
+            /**
              * Request object. Holds a value for the header.
              */
             private final Request req;
             /**
              * Holding multiple request body parts.
              */
-            private final Request[] parts;
+            private final String body;
             /**
              * The Constructor for the class.
              * @param rqst The Request object
              * @param list The sequence of dispositions
+             * @throws IOException if can't process requests
              */
-            FakeMultipartRequest(final Request rqst, final Request... list) {
+            FakeMultipartRequest(final Request rqst, final Request... list)
+                throws IOException {
                 this.req = rqst;
-                this.parts = list;
+                this.body = FakeMultipartRequest.fakeBody(list).toString();
             }
             @Override
             public Iterable<String> head() throws IOException {
@@ -569,18 +522,59 @@ public interface RqMultipart extends Request {
                     this.req,
                     String.format(
                         "Content-Type: multipart/form-data; boundary=%s",
-                        RqMultipart.Fake.BOUNDARY
+                        FakeMultipartRequest.BOUNDARY
                     ),
                     String.format(
                         "Content-Length: %s",
-                        RqMultipart.Fake.fakeBody(this.parts).length()
+                        this.body.length()
                     )
                 ).head();
             }
             @Override
             public InputStream body() throws IOException {
-                return RqMultipart.Fake.fakeStream(this.parts);
+                return new ByteArrayInputStream(
+                    this.body.getBytes(StandardCharsets.UTF_8)
+                );
             }
+
+            /**
+             * Fake body creator.
+             * @param parts Fake request body parts
+             * @return StringBuilder of given dispositions
+             * @throws IOException If fails
+             */
+            @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
+            private static StringBuilder fakeBody(final Request... parts)
+                throws IOException {
+                final StringBuilder builder = new StringBuilder();
+                for (final Request part : parts) {
+                    builder.append(
+                        String.format("--%s", FakeMultipartRequest.BOUNDARY)
+                        )
+                        .append(RqMultipart.CRLF)
+                        // @checkstyle MultipleStringLiteralsCheck (1 line)
+                        .append("Content-Disposition: ")
+                        .append(
+                            new RqHeaders.Smart(
+                                new RqHeaders.Base(part)
+                            // @checkstyle MultipleStringLiteralsCheck (1 line)
+                            ).single("Content-Disposition")
+                        ).append(RqMultipart.CRLF);
+                    final String body = new RqPrint(part).printBody();
+                    if (!(RqMultipart.CRLF.equals(body) || body.isEmpty())) {
+                        builder.append(RqMultipart.CRLF)
+                            .append(body)
+                            .append(RqMultipart.CRLF);
+                    }
+                }
+                builder.append("Content-Transfer-Encoding: utf-8")
+                    .append(RqMultipart.CRLF)
+                    .append(
+                        String.format("--%s--", FakeMultipartRequest.BOUNDARY)
+                    );
+                return builder;
+            }
+
         }
     }
 
