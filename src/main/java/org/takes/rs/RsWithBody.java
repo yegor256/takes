@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -45,6 +44,7 @@ import org.takes.Response;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
 @ToString(callSuper = true)
@@ -113,18 +113,7 @@ public final class RsWithBody extends RsWrap {
      * @param url URL with body
      */
     public RsWithBody(final Response res, final URL url) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithBody.append(res, url.openStream().available());
-                }
-                @Override
-                public InputStream body() throws IOException {
-                    return url.openStream();
-                }
-            }
-        );
+        this(res, new Body.URL(url));
     }
 
     /**
@@ -133,18 +122,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final byte[] body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithBody.append(res, body.length);
-                }
-                @Override
-                public InputStream body() {
-                    return new ByteArrayInputStream(body);
-                }
-            }
-        );
+        this(res, new Body.ByteArray(body));
     }
 
     /**
@@ -153,33 +131,28 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final InputStream body) {
-        super(RsWithBody.make(res, body));
+        this(res, new Body.Stream(body));
     }
 
     /**
-     * Makes a response asking InputStream available bytes without delay, since
-     * further this InputStream may happen to be closed already.
+     * Constructs a {@code RsWithBody} with the specified response and body
+     * content.
      * @param res Original response
-     * @param body Body
-     * @return Response just made
+     * @param body The content of the body
      */
-    private static Response make(final Response res, final InputStream body) {
-        final int length;
-        try {
-            length = body.available();
-        } catch (final IOException ioe) {
-            throw new IllegalStateException(ioe);
-        }
-        return new Response() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return RsWithBody.append(res, length);
+    RsWithBody(final Response res, final Body body) {
+        super(
+            new Response() {
+                @Override
+                public Iterable<String> head() throws IOException {
+                    return RsWithBody.append(res, body.length());
+                }
+                @Override
+                public InputStream body() throws IOException {
+                    return body.input();
+                }
             }
-            @Override
-            public InputStream body() {
-                return body;
-            }
-        };
+        );
     }
 
     /**

@@ -108,7 +108,7 @@ public final class RsHTML extends RsWrap {
      * @param body HTML body
      */
     public RsHTML(final Response res, final InputStream body) {
-        this(new RsWithBody(res, body));
+        this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
     }
 
     /**
@@ -130,8 +130,7 @@ public final class RsHTML extends RsWrap {
             new RsWithType(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),
                 "text/html"
-        )
+            )
         );
     }
-
 }
