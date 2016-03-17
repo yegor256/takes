@@ -107,9 +107,8 @@ public final class TkProxyTest {
                 public void exec(final URI home) throws IOException {
                     MatcherAssert.assertThat(
                         new RsPrint(
-                            new TkProxy(home).act(new RqFake(
-                                    TkProxyTest.this.method
-                                )
+                            new TkProxy(home).act(
+                                new RqFake(TkProxyTest.this.method)
                             )
                         ).print(),
                         Matchers.containsString(
