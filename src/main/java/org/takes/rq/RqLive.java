@@ -44,6 +44,9 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.1
  * @checkstyle CyclomaticComplexityCheck (500 lines)
+ * @todo #519:30min Refactor the parse method into a new class.
+ *  This method is too long and too much if-else statements. Covert this
+ *  into an IfElseClass.
  */
 @EqualsAndHashCode(callSuper = true)
 @SuppressWarnings("PMD.CyclomaticComplexity")
@@ -63,6 +66,7 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @return Request
      * @throws IOException If fails
+     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     @SuppressWarnings
         (
@@ -100,14 +104,17 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 data = new Opt.Single<Integer>(input.read());
-                final Opt<String> header = newHeader(data, baos);
+                final Opt<String> header = RqLive.newHeader(data, baos);
                 if (header.has()) {
                     head.add(header.get());
                 }
                 continue;
             }
-            baos.write(legalCharacter(data, baos, head.size() + 1));
+            baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
             data = new Opt.Empty<Integer>();
+            if (input.available() <= 0) {
+                break;
+            }
         }
         if (eof) {
             throw new IOException("empty request");
