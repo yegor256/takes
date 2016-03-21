@@ -60,7 +60,7 @@ public final class BkTimeable extends Thread implements Back {
      * @param back Original back
      * @param msec Execution latency
      */
-    BkTimeable(final Back back, final long msec) {
+    public BkTimeable(final Back back, final long msec) {
         super();
         this.threads = new ConcurrentHashMap<Thread, Long>(1);
         this.back = back;
