@@ -45,7 +45,7 @@ There are 5 active puzzles (61 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>438</del>](https://github.com/yegor256/takes/issues/438) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#544](https://github.com/yegor256/takes/issues/544):[<del>438-dcc4d707</del>](https://github.com/yegor256/takes/issues/544) [`RqChunkTest.java:40-43`](../master/src/test/java/org/takes/rq/RqChunkTest.java#L40-L43)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>530</del>](https://github.com/yegor256/takes/issues/530) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#558](https://github.com/yegor256/takes/issues/558):[<del>530-0ac0fcef</del>](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>530-0ac0fcef</del>](https://github.com/yegor256/takes/issues/558) [`pom.xml:313-317`](../master/pom.xml#L313-L317)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#584](https://github.com/yegor256/takes/issues/584):[<del>558-ffd45315</del>](https://github.com/yegor256/takes/issues/584) [`pom.xml:308-310`](../master/pom.xml#L308-L310)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#604](https://github.com/yegor256/takes/issues/604):[<del>558-4ea33ea6</del>](https://github.com/yegor256/takes/issues/604) [`PsAll.java:56-60`](../master/src/main/java/org/takes/facets/auth/PsAll.java#L56-L60)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#600](https://github.com/yegor256/takes/issues/600):[<del>558-7b985928</del>](https://github.com/yegor256/takes/issues/600) [`PsBasic.java:226-230`](../master/src/main/java/org/takes/facets/auth/PsBasic.java#L226-L230)<br/>
