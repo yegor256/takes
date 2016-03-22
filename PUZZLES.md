@@ -32,7 +32,7 @@ There are 5 active puzzles (61 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>306-07904f4e</del> [`BkReuseTest.java:50-53`](../master/src/test/java/org/takes/http/BkReuseTest.java#L50-L53)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>377</del>](https://github.com/yegor256/takes/issues/377) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#458](https://github.com/yegor256/takes/issues/458):[<del>377-e6ce369a</del>](https://github.com/yegor256/takes/issues/458) [`TkProxyTest.java:40-42`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**458-ca123cf9**]() [`TkProxyTest.java:52-54`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L52-L54)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#656](https://github.com/yegor256/takes/issues/656):[**458-ca123cf9**](https://github.com/yegor256/takes/issues/656) [`TkProxyTest.java:52-54`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L52-L54)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>445</del>](https://github.com/yegor256/takes/issues/445) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>445-5323c196</del> [`RqHref.java:83-86`](../master/src/main/java/org/takes/rq/RqHref.java#L83-L86)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
@@ -57,7 +57,7 @@ There are 5 active puzzles (61 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#588](https://github.com/yegor256/takes/issues/588):[<del>558-d5ffb2ba</del>](https://github.com/yegor256/takes/issues/588) [`Href.java:76-80`](../master/src/main/java/org/takes/misc/Href.java#L76-L80)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#602](https://github.com/yegor256/takes/issues/602):[<del>558-79259f7e</del>](https://github.com/yegor256/takes/issues/602) [`RqForm.java:290-294`](../master/src/main/java/org/takes/rq/RqForm.java#L290-L294)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#594](https://github.com/yegor256/takes/issues/594):[<del>558-afc1c081</del>](https://github.com/yegor256/takes/issues/594) [`RqMultipart.java:131-135`](../master/src/main/java/org/takes/rq/RqMultipart.java#L131-L135)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[#517](https://github.com/yegor256/takes/issues/517):[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#574](https://github.com/yegor256/takes/issues/574):[<del>517-9858229b</del>](https://github.com/yegor256/takes/issues/574) [`pom.xml:360-362`](../master/pom.xml#L360-L362)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#624](https://github.com/yegor256/takes/issues/624):[**574-2964594e**](https://github.com/yegor256/takes/issues/624) [`pom.xml:373-375`](../master/pom.xml#L373-L375)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
