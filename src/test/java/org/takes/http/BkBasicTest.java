@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -47,7 +48,6 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
-import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -58,10 +58,6 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #306:30min At the moment we don't support HTTP
- *  persistent connections. Would be great to implement
- *  this feature. BkBasic.accept should handle more
- *  than one HTTP request in one connection.
  * @todo #516:15min Move header names from BkBasic to public constants.
  *  Reusable header names will help in many situations. For example - in new
  *  integration tests.
@@ -142,7 +138,16 @@ public final class BkBasicTest {
                 @Override
                 public Response act(final Request req) {
                     ref.set(req);
-                    return new RsEmpty();
+                    return new Response() {
+                        @Override
+                        public Iterable<String> head() throws IOException {
+                            return Collections.singletonList("HTTP/1.1 200 OK");
+                        }
+                        @Override
+                        public InputStream body() throws IOException {
+                            return req.body();
+                        }
+                    };
                 }
             }
         ).accept(socket);
@@ -183,7 +188,6 @@ public final class BkBasicTest {
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
@@ -238,7 +242,9 @@ public final class BkBasicTest {
         }
         MatcherAssert.assertThat(
             output.toString(),
-            RegexMatchers.containsPattern(String.format("%s.*?%s", text, text))
+            RegexMatchers.containsPattern(
+                String.format("(?s)%s.*?%s", text, text)
+            )
         );
     }
 

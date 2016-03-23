@@ -71,19 +71,27 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+    @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
-        final InputStream input = socket.getInputStream();
-        try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
-            );
-        } finally {
-            input.close();
+        try (
+            final InputStream input = socket.getInputStream();
+            final BufferedOutputStream output = new BufferedOutputStream(
+                socket.getOutputStream()
+            )
+        ) {
+            while (true) {
+                this.print(
+                    BkBasic.addSocketHeaders(
+                        new RqLive(input),
+                        socket
+                    ),
+                    output
+                );
+                if (input.available() <= 0) {
+                    break;
+                }
+            }
         }
     }
 
@@ -108,8 +116,6 @@ public final class BkBasic implements Back {
                     HttpURLConnection.HTTP_INTERNAL_ERROR
                 )
             ).print(output);
-        } finally {
-            output.close();
         }
     }
 
