@@ -69,6 +69,10 @@ public interface RqMultipart extends Request {
      */
     String CRLF = "\r\n";
     /**
+     * Content disposition header.
+     */
+    String DISPOSITION = "Content-Disposition";
+    /**
      * Get single part.
      * @param name Name of the part to get
      * @return List of parts (can be empty)
@@ -267,7 +271,6 @@ public interface RqMultipart extends Request {
                         )
                     )
                 );
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
                     ByteBuffer.wrap(
                         RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
@@ -345,15 +348,14 @@ public interface RqMultipart extends Request {
             for (final Request req : reqs) {
                 final String header = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
-                ).single("Content-Disposition");
+                ).single(RqMultipart.DISPOSITION);
                 final Matcher matcher = RqMultipart.Base.NAME.matcher(header);
                 if (!matcher.matches()) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
                         String.format(
-                            // @checkstyle LineLength (1 line)
-                            "\"name\" not found in Content-Disposition header: %s",
+                            "\"name\" not found in %s header: %s",
+                            RqMultipart.DISPOSITION,
                             header
                         )
                     );
@@ -552,13 +554,12 @@ public interface RqMultipart extends Request {
                         String.format("--%s", FakeMultipartRequest.BOUNDARY)
                         )
                         .append(RqMultipart.CRLF)
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        .append("Content-Disposition: ")
+                        .append(RqMultipart.DISPOSITION)
+                        .append(": ")
                         .append(
                             new RqHeaders.Smart(
                                 new RqHeaders.Base(part)
-                            // @checkstyle MultipleStringLiteralsCheck (1 line)
-                            ).single("Content-Disposition")
+                            ).single(RqMultipart.DISPOSITION)
                         ).append(RqMultipart.CRLF);
                     final String body = new RqPrint(part).printBody();
                     if (!(RqMultipart.CRLF.equals(body) || body.isEmpty())) {
