@@ -545,10 +545,9 @@ public interface RqMultipart extends Request {
              * @return StringBuilder of given dispositions
              * @throws IOException If fails
              */
-            @SuppressWarnings("PMD.InsufficientStringBufferDeclaration")
             private static StringBuilder fakeBody(final Request... parts)
                 throws IOException {
-                final StringBuilder builder = new StringBuilder();
+                final StringBuilder builder = new StringBuilder(100);
                 for (final Request part : parts) {
                     builder.append(
                         String.format("--%s", FakeMultipartRequest.BOUNDARY)
