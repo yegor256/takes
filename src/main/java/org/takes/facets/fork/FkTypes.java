@@ -27,6 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -38,7 +39,6 @@ import org.takes.rq.RqHeaders;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.6
- * @see RsFork
  */
 @EqualsAndHashCode(of = { "types", "origin" })
 public final class FkTypes implements Fork {
@@ -49,27 +49,27 @@ public final class FkTypes implements Fork {
     private final transient MediaTypes types;
 
     /**
-     * Response to return.
+     * Take to handle the request and dynamically return the response.
      */
-    private final transient Response origin;
+    private final transient Take origin;
 
     /**
      * Ctor.
      * @param list List of types
-     * @param response Response to return
+     * @param take Take to handle the request dynamically.
      */
-    public FkTypes(final String list, final Response response) {
+    public FkTypes(final String list, final Take take) {
         this.types = new MediaTypes(list);
-        this.origin = response;
+        this.origin = take;
     }
 
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Opt<Response> resp;
         if (FkTypes.accepted(req).contains(this.types)) {
-            resp = new Opt.Single<Response>(this.origin);
+            resp = new Opt.Single<>(this.origin.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

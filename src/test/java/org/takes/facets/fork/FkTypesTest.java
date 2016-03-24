@@ -29,7 +29,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
-import org.takes.rs.RsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkTypes}.
@@ -47,19 +47,19 @@ public final class FkTypesTest {
     public void matchesByAcceptHeader() throws IOException {
         final String accept = "Accept";
         MatcherAssert.assertThat(
-            new FkTypes("text/xml", new RsEmpty()).route(
+            new FkTypes("text/xml", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "*/* ")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
-            new FkTypes("application/json", new RsEmpty()).route(
+            new FkTypes("application/json", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "image/*")
             ).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
-            new FkTypes("*/*", new RsEmpty()).route(
+            new FkTypes("*/*", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), accept, "text/html")
             ).has(),
             Matchers.is(true)
@@ -73,7 +73,7 @@ public final class FkTypesTest {
     @Test
     public void matchesByCompositeType() throws IOException {
         MatcherAssert.assertThat(
-            new FkTypes("text/xml,text/json", new RsEmpty()).route(
+            new FkTypes("text/xml,text/json", new TkEmpty()).route(
                 new RqWithHeader(new RqFake(), "Accept ", "text/json")
             ).has(),
             Matchers.is(true)
@@ -87,7 +87,7 @@ public final class FkTypesTest {
     @Test
     public void ignoresWithoutHeader() throws IOException {
         MatcherAssert.assertThat(
-            new FkTypes("text/plain", new RsEmpty()).route(
+            new FkTypes("text/plain", new TkEmpty()).route(
                 new RqFake()
             ).has(),
             Matchers.is(false)
@@ -101,7 +101,7 @@ public final class FkTypesTest {
     @Test
     public void matchesWithoutHeader() throws IOException {
         MatcherAssert.assertThat(
-            new FkTypes("text/plain,*/*", new RsEmpty()).route(
+            new FkTypes("text/plain,*/*", new TkEmpty()).route(
                 new RqFake()
             ).has(),
             Matchers.is(true)

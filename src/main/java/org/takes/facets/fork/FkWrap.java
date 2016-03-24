@@ -37,7 +37,6 @@ import org.takes.misc.Opt;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.13
- * @see org.takes.facets.fork.RsFork
  */
 @EqualsAndHashCode(of = "origin")
 public class FkWrap implements Fork {

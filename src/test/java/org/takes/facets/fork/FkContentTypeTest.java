@@ -35,6 +35,7 @@ import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkContentType}.
@@ -62,7 +63,7 @@ public final class FkContentTypeTest {
     @Test
     public void matchesWithAnyTypes() throws IOException {
         MatcherAssert.assertThat(
-            new FkContentType("text/xml", new RsEmpty()).route(
+            new FkContentType("text/xml", new TkEmpty()).route(
                 new RqWithHeader(
                     new RqFake(),
                     FkContentTypeTest.CONTENT_TYPE,

@@ -30,7 +30,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkEncoding;
-import org.takes.facets.fork.RsFork;
+import org.takes.facets.fork.TkFork;
 import org.takes.rs.RsGzip;
 
 /**
@@ -52,17 +52,18 @@ public final class TkGzip extends TkWrap {
      */
     public TkGzip(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    final Response response = take.act(req);
-                    return new RsFork(
-                        req,
-                        new FkEncoding("gzip", new RsGzip(response)),
-                        new FkEncoding("", response)
-                    );
-                }
-            }
+            new TkFork(
+                new FkEncoding(
+                    "gzip",
+                    new Take() {
+                        @Override
+                        public Response act(final Request req)
+                            throws IOException {
+                            return new RsGzip(take.act(req));
+                        }
+                    }),
+                new FkEncoding("", take)
+            )
         );
     }
 
