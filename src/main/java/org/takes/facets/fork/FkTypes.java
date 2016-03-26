@@ -27,6 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -40,7 +41,7 @@ import org.takes.rq.RqHeaders;
  * @since 0.6
  * @see RsFork
  */
-@EqualsAndHashCode(of = { "types", "origin" })
+@EqualsAndHashCode(of = { "types", "response", "take" })
 public final class FkTypes implements Fork {
 
     /**
@@ -51,25 +52,55 @@ public final class FkTypes implements Fork {
     /**
      * Response to return.
      */
-    private final transient Response origin;
+    private final transient Opt<Response> response;
+
+    /**
+     * Response to return.
+     */
+    private final transient Opt<Take> take;
 
     /**
      * Ctor.
      * @param list List of types
-     * @param response Response to return
+     * @param resp Response to return
      */
-    public FkTypes(final String list, final Response response) {
+    public FkTypes(final String list, final Response resp) {
+        this(list, new Opt.Single<>(resp), new Opt.Empty<Take>());
+    }
+
+    /**
+     * Ctor.
+     * @param list List of types
+     * @param tke The take to use to build the response to return
+     */
+    public FkTypes(final String list, final Take tke) {
+        this(list, new Opt.Empty<Response>(), new Opt.Single<>(tke));
+    }
+
+    /**
+     * Ctor.
+     * @param list List of types
+     * @param resp Response to return
+     * @param tke The take to use to build the response to return
+     */
+    private FkTypes(final String list, final Opt<Response> resp,
+        final Opt<Take> tke) {
         this.types = new MediaTypes(list);
-        this.origin = response;
+        this.response = resp;
+        this.take = tke;
     }
 
     @Override
     public Opt<Response> route(final Request req) throws IOException {
         final Opt<Response> resp;
         if (FkTypes.accepted(req).contains(this.types)) {
-            resp = new Opt.Single<Response>(this.origin);
+            if (this.response.has()) {
+                resp = new Opt.Single<>(this.response.get());
+            } else {
+                resp = new Opt.Single<>(this.take.get().act(req));
+            }
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

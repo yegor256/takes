@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkTypes}.
@@ -108,4 +109,17 @@ public final class FkTypesTest {
         );
     }
 
+    /**
+     * FkTypes can rely on a Take to provide the response.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void reliesOnTake() throws IOException {
+        MatcherAssert.assertThat(
+            new FkTypes("*/*,text/plain", new TkEmpty()).route(
+                new RqFake()
+            ).has(),
+            Matchers.is(true)
+        );
+    }
 }

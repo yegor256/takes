@@ -23,11 +23,8 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.tk.TkWrap;
 
@@ -49,17 +46,7 @@ public final class TkConsumes extends TkWrap {
      * @param type Content-Type
      */
     public TkConsumes(final Take take, final String type) {
-        super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return new RsFork(
-                        req,
-                        new FkContentType(type, take)
-                    );
-                }
-            }
-        );
+        super(new TkFork(new FkContentType(type, take)));
     }
 
 }
