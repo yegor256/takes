@@ -43,13 +43,8 @@ import org.takes.misc.Opt;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @checkstyle CyclomaticComplexityCheck (500 lines)
- * @todo #519:30min Refactor the parse method into a new class.
- *  This method is too long and too much if-else statements. Covert this
- *  into an IfElseClass.
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CyclomaticComplexity")
 public final class RqLive extends RqWrap {
 
     /**
@@ -68,53 +63,30 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
-    @SuppressWarnings
-        (
-            {
-                "PMD.AvoidInstantiatingObjectsInLoops",
-                "PMD.StdCyclomaticComplexity",
-                "PMD.ModifiedCyclomaticComplexity"
-            }
-        )
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
-        final Collection<String> head = new LinkedList<String>();
+        final Collection<String> head = new LinkedList<>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Opt<Integer> data = new Opt.Empty<Integer>();
-        while (true) {
-            data = RqLive.data(input, data);
-            if (data.get() < 0) {
-                break;
-            }
+        Opt<Integer> data = new Opt.Empty<>();
+        data = RqLive.data(input, data, false);
+        while (data.get() > 0) {
             eof = false;
             if (data.get() == '\r') {
-                if (input.read() != '\n') {
-                    throw new HttpException(
-                        HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format(
-                            // @checkstyle LineLength (1 line)
-                            "there is no LF after CR in header, line #%d: \"%s\"",
-                            head.size() + 1, new String(
-                                baos.toByteArray(), StandardCharsets.UTF_8
-                            )
-                        )
-                    );
-                }
+                RqLive.checkLineFeed(input, baos, head.size() + 1);
                 if (baos.size() == 0) {
                     break;
                 }
-                data = new Opt.Single<Integer>(input.read());
+                data = new Opt.Single<>(input.read());
                 final Opt<String> header = RqLive.newHeader(data, baos);
                 if (header.has()) {
                     head.add(header.get());
                 }
+                data = RqLive.data(input, data, false);
                 continue;
             }
             baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
-            data = new Opt.Empty<Integer>();
-            if (input.available() <= 0) {
-                break;
-            }
+            data = RqLive.data(input, new Opt.Empty<Integer>(), true);
         }
         if (eof) {
             throw new IOException("empty request");
@@ -132,6 +104,28 @@ public final class RqLive extends RqWrap {
     }
 
     /**
+     * Checks whether or not the next byte to read is a Line Feed.
+     * @param input The input stream to read
+     * @param baos Current read header
+     * @param position Header line number
+     * @throws IOException If the next byte is not a Line Feed as expected.
+     */
+    private static void checkLineFeed(final InputStream input,
+        final ByteArrayOutputStream baos, final Integer position)
+        throws IOException {
+        if (input.read() != '\n') {
+            throw new HttpException(
+                HttpURLConnection.HTTP_BAD_REQUEST,
+                String.format(
+                    "there is no LF after CR in header, line #%d: \"%s\"",
+                    position,
+                    new String(baos.toByteArray(), StandardCharsets.UTF_8)
+                )
+            );
+        }
+    }
+
+    /**
      * Builds current read header.
      * @param data Current read character
      * @param baos Current read header
@@ -139,9 +133,9 @@ public final class RqLive extends RqWrap {
      */
     private static Opt<String> newHeader(final Opt<Integer> data,
         final ByteArrayOutputStream baos) {
-        Opt<String> header = new Opt.Empty<String>();
+        Opt<String> header = new Opt.Empty<>();
         if (data.get() != ' ' && data.get() != '\t') {
-            header = new Opt.Single<String>(
+            header = new Opt.Single<>(
                 new String(baos.toByteArray(), StandardCharsets.UTF_8)
             );
             baos.reset();
@@ -166,7 +160,6 @@ public final class RqLive extends RqWrap {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
@@ -181,16 +174,20 @@ public final class RqLive extends RqWrap {
      * Obtains new byte if hasn't.
      * @param input Stream
      * @param data Empty or current data
+     * @param available Indicates whether or not it should check first if there
+     *  are available bytes
      * @return Next or current data
      * @throws IOException if input.read() fails
      */
     private static Opt<Integer> data(final InputStream input,
-        final Opt<Integer> data) throws IOException {
+        final Opt<Integer> data, final boolean available) throws IOException {
         final Opt<Integer> ret;
         if (data.has()) {
             ret = data;
+        } else if (available && input.available() <= 0) {
+            ret = new Opt.Single<>(-1);
         } else {
-            ret = new Opt.Single<Integer>(input.read());
+            ret = new Opt.Single<>(input.read());
         }
         return ret;
     }
