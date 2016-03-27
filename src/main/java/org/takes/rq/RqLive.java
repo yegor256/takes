@@ -108,7 +108,7 @@ public final class RqLive extends RqWrap {
      * @param input The input stream to read
      * @param baos Current read header
      * @param position Header line number
-     * @throws IOException If the next byte is not a Line Feed as expected.
+     * @throws IOException If the next byte is not a Line Feed as expected
      */
     private static void checkLineFeed(final InputStream input,
         final ByteArrayOutputStream baos, final Integer position)
