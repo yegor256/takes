@@ -105,6 +105,8 @@ public final class RqLive extends RqWrap {
 
     /**
      * Checks whether or not the next byte to read is a Line Feed.
+     * <p><i>Please note that this method assumes that the previous byte read
+     * was a Carriage Return.</i>
      * @param input The input stream to read
      * @param baos Current read header
      * @param position Header line number
