@@ -318,7 +318,7 @@
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
-                                @TODO #624:30min Continue fixing FindBugs violations started in #624.
+                                @todo #624:30min Continue fixing FindBugs violations started in #624.
                                  #624 turned on the FindBugs, temporarily excluding some classes.
                                  Remove all excludes of FindBugs below and fix the issues.
                                 -->
