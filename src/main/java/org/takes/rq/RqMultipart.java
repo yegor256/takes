@@ -224,7 +224,7 @@ public interface RqMultipart extends Request {
                 );
             }
             final byte[] boundary = String.format(
-                "\r%n--%s", matcher.group(1)
+                "%s--%s", RqMultipart.Fake.CRLF, matcher.group(1)
             ).getBytes(StandardCharsets.UTF_8);
             this.buffer.flip();
             this.buffer.position(boundary.length - 2);
