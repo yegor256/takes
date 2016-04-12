@@ -507,6 +507,49 @@ public final class RqMultipartTest {
     }
 
     /**
+     * RqMultipart.Base can identify the boundary even if the last content to
+     * read before the pattern pattern is an empty line.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void identifiesBoundary() throws IOException {
+        final int length = 9000;
+        final String part = "foo-1";
+        final String body =
+            Joiner.on(RqMultipartTest.CRLF).join(
+                "----foo",
+                String.format(RqMultipartTest.CONTENT, part),
+                "",
+                StringUtils.repeat("F", length),
+                "",
+                "----foo--"
+            );
+        final Request req = new RqFake(
+            Arrays.asList(
+                "POST /post?foo=3 HTTP/1.1",
+                "Host: www.foo.com",
+                RqMultipartTest.contentLengthHeader(
+                    (long) body.getBytes().length
+                ),
+                "Content-Type: multipart/form-data; boundary=--foo"
+            ),
+            body
+        );
+        final RqMultipart.Smart regsmart = new RqMultipart.Smart(
+            new RqMultipart.Base(req)
+        );
+        try {
+            MatcherAssert.assertThat(
+                regsmart.single(part).body().available(),
+                Matchers.equalTo(length)
+            );
+        } finally {
+            req.body().close();
+            regsmart.part(part).iterator().next().body().close();
+        }
+    }
+
+    /**
      * RqMultipart.Base can work in integration mode.
      * @throws IOException if some problem inside
      */
