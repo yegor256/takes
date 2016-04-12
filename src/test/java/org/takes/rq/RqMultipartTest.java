@@ -508,7 +508,7 @@ public final class RqMultipartTest {
 
     /**
      * RqMultipart.Base can identify the boundary even if the last content to
-     * read before the pattern pattern is an empty line.
+     * read before the pattern is an empty line.
      * @throws IOException If some problem inside
      */
     @Test
