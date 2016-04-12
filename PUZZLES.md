@@ -60,7 +60,7 @@ There are 4 active puzzles (62 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>517</del>](https://github.com/yegor256/takes/issues/517) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>517-9858229b</del>](https://github.com/yegor256/takes/issues/574) [`pom.xml:360-362`](../master/pom.xml#L360-L362)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#624](https://github.com/yegor256/takes/issues/624):[<del>574-2964594e</del>](https://github.com/yegor256/takes/issues/624) [`pom.xml:373-375`](../master/pom.xml#L373-L375)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**624-78dfe52a**]() [`pom.xml:338-340`](../master/pom.xml#L338-L340)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#660](https://github.com/yegor256/takes/issues/660):[**624-78dfe52a**](https://github.com/yegor256/takes/issues/660) [`pom.xml:338-340`](../master/pom.xml#L338-L340)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#575](https://github.com/yegor256/takes/issues/575):[<del>254-d68bc52e</del>](https://github.com/yegor256/takes/issues/575) [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#576](https://github.com/yegor256/takes/issues/576):[<del>254-40a8e0fe</del>](https://github.com/yegor256/takes/issues/576) [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
