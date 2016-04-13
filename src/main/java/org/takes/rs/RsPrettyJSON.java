@@ -27,8 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.json.Json;
 import javax.json.JsonException;
 import javax.json.JsonObject;
@@ -60,14 +59,14 @@ public final class RsPrettyJSON implements Response {
     /**
      * Response with properly transformed body.
      */
-    private final transient List<Response> transformed;
+    private final transient AtomicReference<Response> transformed;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyJSON(final Response res) {
-        this.transformed = new CopyOnWriteArrayList<Response>();
+        this.transformed = new AtomicReference<>();
         this.origin = res;
     }
 
@@ -87,17 +86,16 @@ public final class RsPrettyJSON implements Response {
      * @throws IOException If fails
      */
     private Response make() throws IOException {
-        synchronized (this.transformed) {
-            if (this.transformed.isEmpty()) {
-                this.transformed.add(
-                    new RsWithBody(
-                        this.origin,
-                        RsPrettyJSON.transform(this.origin.body())
-                    )
-                );
-            }
+        if (this.transformed.get() == null) {
+            this.transformed.compareAndSet(
+                null,
+                new RsWithBody(
+                    this.origin,
+                    RsPrettyJSON.transform(this.origin.body())
+                )
+            );
         }
-        return this.transformed.get(0);
+        return this.transformed.get();
     }
 
     /**

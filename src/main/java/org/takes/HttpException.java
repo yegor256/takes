@@ -32,7 +32,11 @@ import java.io.IOException;
  * @version $Id$
  * @since 0.13
  */
-@SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
+@SuppressWarnings(
+    {
+        "PMD.OnlyOneConstructorShouldDoInitialization",
+        "PMD.BeanMembersShouldSerialize"
+    })
 public class HttpException extends IOException {
 
     /**
@@ -43,7 +47,7 @@ public class HttpException extends IOException {
     /**
      * Status code.
      */
-    private final transient int status;
+    private final int status;
 
     /**
      * Ctor.

@@ -27,8 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.GZIPOutputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -55,14 +54,14 @@ public final class RsGzip implements Response {
     /**
      * Compressed and cached response.
      */
-    private final transient List<Response> zipped;
+    private final transient AtomicReference<Response> zipped;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsGzip(final Response res) {
-        this.zipped = new CopyOnWriteArrayList<Response>();
+        this.zipped = new AtomicReference<>();
         this.origin = res;
     }
 
@@ -82,21 +81,20 @@ public final class RsGzip implements Response {
      * @throws IOException If fails
      */
     private Response make() throws IOException {
-        synchronized (this.zipped) {
-            if (this.zipped.isEmpty()) {
-                this.zipped.add(
-                    new RsWithHeader(
-                        new RsWithBody(
-                            this.origin,
-                            RsGzip.gzip(this.origin.body())
-                        ),
-                        "Content-Encoding",
-                        "gzip"
-                    )
-                );
-            }
+        if (this.zipped.get() == null) {
+            this.zipped.compareAndSet(
+                null,
+                new RsWithHeader(
+                    new RsWithBody(
+                        this.origin,
+                        RsGzip.gzip(this.origin.body())
+                    ),
+                    "Content-Encoding",
+                    "gzip"
+                )
+            );
         }
-        return this.zipped.get(0);
+        return this.zipped.get();
     }
 
     /**

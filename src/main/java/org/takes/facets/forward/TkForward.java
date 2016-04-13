@@ -25,8 +25,7 @@ package org.takes.facets.forward;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -84,14 +83,14 @@ public final class TkForward implements Take {
         /**
          * Saved response.
          */
-        private final transient List<Response> saved;
+        private final transient AtomicReference<Response> saved;
         /**
          * Ctor.
          * @param res Original response
          */
         private Safe(final Response res) {
             this.origin = res;
-            this.saved = new CopyOnWriteArrayList<Response>();
+            this.saved = new AtomicReference<>();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -107,21 +106,19 @@ public final class TkForward implements Take {
          * @throws IOException If fails
          */
         private Response load() throws IOException {
-            synchronized (this.saved) {
-                if (this.saved.isEmpty()) {
-                    Iterable<String> head;
-                    InputStream body;
-                    try {
-                        head = this.origin.head();
-                        body = this.origin.body();
-                    } catch (final RsForward ex) {
-                        head = ex.head();
-                        body = ex.body();
-                    }
-                    this.saved.add(new RsSimple(head, body));
+            if (this.saved.get() == null) {
+                Iterable<String> head;
+                InputStream body;
+                try {
+                    head = this.origin.head();
+                    body = this.origin.body();
+                } catch (final RsForward ex) {
+                    head = ex.head();
+                    body = ex.body();
                 }
+                this.saved.compareAndSet(null, new RsSimple(head, body));
             }
-            return this.saved.get(0);
+            return this.saved.get();
         }
     }
 

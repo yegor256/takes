@@ -83,7 +83,9 @@ public final class MainRemote {
      */
     public void exec(final MainRemote.Script script) throws Exception {
         final File file = File.createTempFile("takes-", ".txt");
-        file.delete();
+        if (!file.delete()) {
+            file.deleteOnExit();
+        }
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
         );
@@ -104,7 +106,9 @@ public final class MainRemote {
                 )
             );
         } finally {
-            file.delete();
+            if (!file.delete()) {
+                file.deleteOnExit();
+            }
             thread.interrupt();
         }
     }

@@ -61,7 +61,9 @@ public final class TkReadAlways implements Take {
         final Response res = this.origin.act(req);
         for (int count = req.body().available(); count > 0;
             count = req.body().available()) {
-            req.body().skip(count);
+            if (req.body().skip((long) count) < (long) count) {
+                break;
+            }
         }
         return res;
     }

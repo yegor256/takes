@@ -39,7 +39,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -96,15 +96,16 @@ public interface RqForm extends Request {
         private final transient Request req;
         /**
          * Saved map.
+         * @checkstyle LineLength (2 lines)
          */
-        private final transient List<Map<String, List<String>>> saved;
+        private final transient AtomicReference<Map<String, List<String>>> saved;
         /**
          * Ctor.
          * @param request Original request
          */
         public Base(final Request request) {
             super(request);
-            this.saved = new CopyOnWriteArrayList<>();
+            this.saved = new AtomicReference<>();
             this.req = request;
         }
         @Override
@@ -156,12 +157,13 @@ public interface RqForm extends Request {
          * @throws IOException If something fails reading or parsing body
          */
         private Map<String, List<String>> map() throws IOException {
-            synchronized (this.saved) {
-                if (this.saved.isEmpty()) {
-                    this.saved.add(this.freshMap());
-                }
-                return this.saved.get(0);
+            if (this.saved.get() == null) {
+                this.saved.compareAndSet(
+                    null,
+                    Collections.unmodifiableMap(this.freshMap())
+                );
             }
+            return this.saved.get();
         }
         /**
          * Create map of request parameter.
