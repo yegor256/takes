@@ -558,14 +558,11 @@ public interface RqMultipart extends Request {
                         "Content-Type: multipart/form-data; boundary=%s",
                         RqMultipart.Fake.BOUNDARY
                     ),
-                    String.format(
-                        "Content-Length: %s",
-                        this.body.length()
-                    )
+                    String.format("Content-Length: %s", this.body.length())
                 ).head();
             }
             @Override
-            public InputStream body() throws IOException {
+            public InputStream body() {
                 return new ByteArrayInputStream(
                     this.body.getBytes(StandardCharsets.UTF_8)
                 );
