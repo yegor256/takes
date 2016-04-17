@@ -62,7 +62,7 @@ import org.takes.misc.VerboseIterable;
  * @version $Id$
  * @since 0.9
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.GodClass"})
 public interface RqMultipart extends Request {
 
     /**
@@ -317,13 +317,15 @@ public interface RqMultipart extends Request {
                     final byte data = this.buffer.get();
                     if (data == boundary[match]) {
                         ++match;
-                        if (match == boundary.length) {
-                            cont = false;
-                            break;
-                        }
+                    } else if (data == boundary[0]) {
+                        match = 1;
                     } else {
                         match = 0;
                         btarget.limit(this.buffer.position() - offset);
+                    }
+                    if (match == boundary.length) {
+                        cont = false;
+                        break;
                     }
                 }
                 target.write(btarget);
