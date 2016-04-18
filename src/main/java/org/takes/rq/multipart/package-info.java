@@ -21,38 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
-
-import org.takes.Request;
-import org.takes.rq.multipart.RqMultipartBase;
-import org.takes.rq.multipart.RqMultipartFake;
-import org.takes.rq.multipart.RqMultipartSmart;
 
 /**
- * HTTP multipart FORM data decoding.
+ * Implementations of the interface {@link org.takes.rq.RqMultipart}.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
- * @see RqMultipartSmart
- * @see RqMultipartBase
- * @see RqMultipartFake
- * @since 0.9
+ * @since 0.32.8
  */
-public interface RqMultipart extends Request {
-
-    /**
-     * Get single part.
-     * @param name Name of the part to get
-     * @return List of parts (can be empty)
-     */
-    Iterable<Request> part(CharSequence name);
-
-    /**
-     * Get all part names.
-     * @return All names
-     */
-    Iterable<String> names();
-
-}
+package org.takes.rq.multipart;

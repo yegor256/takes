@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rq.multipart;
 
 import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
@@ -50,10 +50,18 @@ import org.takes.Take;
 import org.takes.facets.hamcrest.HmRqHeader;
 import org.takes.http.FtRemote;
 import org.takes.misc.PerformanceTests;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqGreedy;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqMultipart;
+import org.takes.rq.RqPrint;
+import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithHeaders;
+import org.takes.rq.TempInputStream;
 import org.takes.rs.RsText;
 
 /**
- * Test case for {@link RqMultipart.Base}.
+ * Test case for {@link RqMultipartBase}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.9
@@ -62,8 +70,8 @@ import org.takes.rs.RsText;
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
-@SuppressWarnings("PMD.TooManyMethods")
-public final class RqMultipartTest {
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
+public final class RqMultipartBaseTest {
 
     /**
      * Carriage return constant.
@@ -77,7 +85,7 @@ public final class RqMultipartTest {
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMultipartTest.DISPOSITION, "form-data; name=\"%s\""
+        "%s: %s", RqMultipartBaseTest.DISPOSITION, "form-data; name=\"%s\""
     );
 
     /**
@@ -87,12 +95,12 @@ public final class RqMultipartTest {
     public final transient TemporaryFolder temp = new TemporaryFolder();
 
     /**
-     * RqMultipart.Base can satisfy equals contract.
+     * RqMultipartBase can satisfy equals contract.
      * @throws IOException if some problem inside
      * @todo #620:30min This test is using RqGreedy in order to survive. If
      *  you remove RqGreedy, the test will crash. I can't find out why
      *  exactly it's happening. But the main problem is that somehow
-     *  inside RqMultipart.Fake we're reading body() of dispositions
+     *  inside RqMultipartFake we're reading body() of dispositions
      *  twice or more times. That's why RqGreedy is required now. I order
      *  to always return the same content. Let's find what exactly is the
      *  problem and remove RqGreedy from this test and three other
@@ -102,15 +110,15 @@ public final class RqMultipartTest {
     public void satisfiesEqualsContract() throws IOException {
         final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t-1";
-        final Request req = new RqMultipart.Fake(
+        final Request req = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         String.format("form-data; name=\"%s\"", part)
                     )
                 )
@@ -118,15 +126,15 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", ""),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"data\"; filename=\"a.bin\""
                     )
                 )
             )
         );
-        final RqMultipart.Base first = new RqMultipart.Base(req);
-        final RqMultipart.Base second = new RqMultipart.Base(req);
+        final RqMultipartBase first = new RqMultipartBase(req);
+        final RqMultipartBase second = new RqMultipartBase(req);
         try {
             MatcherAssert.assertThat(first, Matchers.equalTo(second));
         } finally {
@@ -137,12 +145,12 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can throw exception on no closing boundary found.
+     * RqMultipartBase can throw exception on no closing boundary found.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoClosingBoundaryFound() throws IOException {
-        new RqMultipart.Base(
+        new RqMultipartBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?a=4 HTTP/1.1",
@@ -150,7 +158,7 @@ public final class RqMultipartTest {
                     "Content-Type: multipart/form-data; boundary=AaB01x",
                     "Content-Length: 100007"
                 ),
-                Joiner.on(RqMultipartTest.CRLF).join(
+                Joiner.on(RqMultipartBaseTest.CRLF).join(
                     "--AaB01x",
                     "Content-Disposition: form-data; fake=\"t2\"",
                     "",
@@ -162,30 +170,30 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Fake can throw exception on no name
+     * RqMultipartFake can throw exception on no name
      * at Content-Disposition header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoNameAtContentDispositionHeader()
         throws IOException {
-        new RqMultipart.Fake(
+        new RqMultipartFake(
             new RqWithHeader(
                 new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                RqMultipartTest.DISPOSITION, "form-data; fake=\"t-3\""
+                RqMultipartBaseTest.DISPOSITION, "form-data; fake=\"t-3\""
             )
         );
     }
 
     /**
-     * RqMultipart.Base can throw exception on no boundary
+     * RqMultipartBase can throw exception on no boundary
      * at Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
         throws IOException {
-        new RqMultipart.Base(
+        new RqMultipartBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?s=3 HTTP/1.1",
@@ -199,12 +207,12 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can throw exception on invalid Content-Type header.
+     * RqMultipartBase can throw exception on invalid Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnInvalidContentTypeHeader() throws IOException {
-        new RqMultipart.Base(
+        new RqMultipartBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?r=3 HTTP/1.1",
@@ -218,22 +226,22 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can parse http body.
+     * RqMultipartBase can parse http body.
      * @throws IOException If some problem inside
      */
     @Test
     public void parsesHttpBody() throws IOException {
         final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t4";
-        final RqMultipart multi = new RqMultipart.Fake(
+        final RqMultipart multi = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         String.format("form-data; name=\"%s\"", part)
                     )
                 )
@@ -241,8 +249,8 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", ""),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"data\"; filename=\"a.bin\""
                     )
                 )
@@ -252,7 +260,7 @@ public final class RqMultipartTest {
             MatcherAssert.assertThat(
                 new RqHeaders.Base(
                     multi.part(part).iterator().next()
-                ).header(RqMultipartTest.DISPOSITION),
+                ).header(RqMultipartBaseTest.DISPOSITION),
                 Matchers.hasItem("form-data; name=\"t4\"")
             );
             MatcherAssert.assertThat(
@@ -272,22 +280,22 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can close all parts once the request body has been
+     * RqMultipartBase can close all parts once the request body has been
      * closed.
      * @throws Exception If some problem inside
      */
     @Test
     public void closesAllParts() throws Exception {
         final String body = "RqMultipartTest.closesAllParts";
-        final RqMultipart request = new RqMultipart.Fake(
+        final RqMultipart request = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"name\""
                     )
                 )
@@ -295,14 +303,14 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"content\"; filename=\"a.bin\""
                     )
                 )
             )
         );
-        final RqMultipart.Base multi = new RqMultipart.Base(request);
+        final RqMultipartBase multi = new RqMultipartBase(request);
         multi.part("name").iterator().next().body().read();
         multi.part("content").iterator().next().body().read();
         multi.body().close();
@@ -339,7 +347,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can close all parts explicitly even if the request body
+     * RqMultipartBase can close all parts explicitly even if the request body
      * has been closed.
      * <p>For backward compatibility reason we need to ensure that we don't get
      * {@code IOException} when we close explicitly a part even after closing
@@ -349,15 +357,15 @@ public final class RqMultipartTest {
     @Test
     public void closesExplicitlyAllParts() throws Exception {
         final String body = "RqMultipartTest.closesExplicitlyAllParts";
-        final RqMultipart request = new RqMultipart.Fake(
+        final RqMultipart request = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"foo\""
                     )
                 )
@@ -365,14 +373,14 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"bar\"; filename=\"a.bin\""
                     )
                 )
             )
         );
-        final RqMultipart.Base multi = new RqMultipart.Base(request);
+        final RqMultipartBase multi = new RqMultipartBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
             multi.part("foo").iterator().next(),
@@ -387,21 +395,21 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Fake can return empty iterator on invalid part request.
+     * RqMultipartFake can return empty iterator on invalid part request.
      * @throws IOException If some problem inside
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
         final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipart.Fake(
+        final RqMultipart multi = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"t5\""
                     )
                 )
@@ -409,8 +417,8 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", ""),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"data\"; filename=\"a.zip\""
                     )
                 )
@@ -424,21 +432,21 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Fake can return correct name set.
+     * RqMultipartFake can return correct name set.
      * @throws IOException If some problem inside
      */
     @Test
     public void returnsCorrectNamesSet() throws IOException {
         final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipart.Fake(
+        final RqMultipart multi = new RqMultipartFake(
             new RqFake(),
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", body),
-                    RqMultipartTest.contentLengthHeader(
+                    RqMultipartBaseTest.contentLengthHeader(
                         (long) body.getBytes().length
                     ),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"address\""
                     )
                 )
@@ -446,8 +454,8 @@ public final class RqMultipartTest {
             new RqGreedy(
                 new RqWithHeaders(
                     new RqFake("", "", ""),
-                    RqMultipartTest.contentLengthHeader(0L),
-                    RqMultipartTest.contentDispositionHeader(
+                    RqMultipartBaseTest.contentLengthHeader(0L),
+                    RqMultipartBaseTest.contentDispositionHeader(
                         "form-data; name=\"data\"; filename=\"a.bin\""
                     )
                 )
@@ -466,7 +474,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can return correct part length.
+     * RqMultipartBase can return correct part length.
      * @throws IOException If some problem inside
      */
     @Test
@@ -474,9 +482,9 @@ public final class RqMultipartTest {
         final int length = 5000;
         final String part = "x-1";
         final String body =
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "--zzz",
-                String.format(RqMultipartTest.CONTENT, part),
+                String.format(RqMultipartBaseTest.CONTENT, part),
                 "",
                 StringUtils.repeat("X", length),
                 "--zzz--"
@@ -485,15 +493,15 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: www.example.com",
-                RqMultipartTest.contentLengthHeader(
+                RqMultipartBaseTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz"
             ),
             body
         );
-        final RqMultipart.Smart regsmart = new RqMultipart.Smart(
-            new RqMultipart.Base(req)
+        final RqMultipartSmart regsmart = new RqMultipartSmart(
+            new RqMultipartBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -507,7 +515,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can identify the boundary even if the last content to
+     * RqMultipartBase can identify the boundary even if the last content to
      * read before the pattern is an empty line.
      * @throws IOException If some problem inside
      */
@@ -516,9 +524,9 @@ public final class RqMultipartTest {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "----foo",
-                String.format(RqMultipartTest.CONTENT, part),
+                String.format(RqMultipartBaseTest.CONTENT, part),
                 "",
                 StringUtils.repeat("F", length),
                 "",
@@ -528,15 +536,15 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
                 "Host: www.foo.com",
-                RqMultipartTest.contentLengthHeader(
+                RqMultipartBaseTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=--foo"
             ),
             body
         );
-        final RqMultipart.Smart regsmart = new RqMultipart.Smart(
-            new RqMultipart.Base(req)
+        final RqMultipartSmart regsmart = new RqMultipartSmart(
+            new RqMultipartBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -550,7 +558,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can work in integration mode.
+     * RqMultipartBase can work in integration mode.
      * @throws IOException if some problem inside
      */
     @Test
@@ -561,17 +569,17 @@ public final class RqMultipartTest {
             public Response act(final Request req) throws IOException {
                 return new RsText(
                     new RqPrint(
-                        new RqMultipart.Smart(
-                            new RqMultipart.Base(req)
+                        new RqMultipartSmart(
+                            new RqMultipartBase(req)
                         ).single(part)
                     ).printBody()
                 );
             }
         };
         final String body =
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "--AaB0zz",
-                String.format(RqMultipartTest.CONTENT, part), "",
+                String.format(RqMultipartBaseTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
             );
         new FtRemote(take).exec(
@@ -602,7 +610,7 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can handle a big request in an acceptable time.
+     * RqMultipartBase can handle a big request in an acceptable time.
      * @throws IOException If some problem inside
      */
     @Test
@@ -613,9 +621,9 @@ public final class RqMultipartTest {
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
         bwr.write(
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "--zzz",
-                String.format(RqMultipartTest.CONTENT, part),
+                String.format(RqMultipartBaseTest.CONTENT, part),
                 "",
                 ""
             )
@@ -623,9 +631,9 @@ public final class RqMultipartTest {
         for (int ind = 0; ind < length; ++ind) {
             bwr.write("X");
         }
-        bwr.write(RqMultipartTest.CRLF);
+        bwr.write(RqMultipartBaseTest.CRLF);
         bwr.write("--zzz--");
-        bwr.write(RqMultipartTest.CRLF);
+        bwr.write(RqMultipartBaseTest.CRLF);
         bwr.close();
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
@@ -637,8 +645,8 @@ public final class RqMultipartTest {
             ),
             new TempInputStream(new FileInputStream(file), file)
         );
-        final RqMultipart.Smart smart = new RqMultipart.Smart(
-            new RqMultipart.Base(req)
+        final RqMultipartSmart smart = new RqMultipartSmart(
+            new RqMultipartBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -656,7 +664,7 @@ public final class RqMultipartTest {
         }
     }
     /**
-     * RqMultipart.Base doesn't distort the content.
+     * RqMultipartBase doesn't distort the content.
      * @throws IOException If some problem inside
      */
     @Test
@@ -666,9 +674,9 @@ public final class RqMultipartTest {
         final File file = this.temp.newFile("notDistortContent.tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
         final String head =
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "--zzz1",
-                String.format(RqMultipartTest.CONTENT, part),
+                String.format(RqMultipartBaseTest.CONTENT, part),
                 "",
                 ""
             );
@@ -678,7 +686,7 @@ public final class RqMultipartTest {
             bwr.write(idx % byt);
         }
         final String foot =
-            Joiner.on(RqMultipartTest.CRLF).join(
+            Joiner.on(RqMultipartBaseTest.CRLF).join(
                 "",
                 "--zzz1--",
                 ""
@@ -689,15 +697,15 @@ public final class RqMultipartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: exampl.com",
-                RqMultipartTest.contentLengthHeader(
+                RqMultipartBaseTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
             new TempInputStream(new FileInputStream(file), file)
         );
-        final InputStream stream = new RqMultipart.Smart(
-            new RqMultipart.Base(req)
+        final InputStream stream = new RqMultipartSmart(
+            new RqMultipartBase(req)
         ).single(part).body();
         try {
             MatcherAssert.assertThat(
@@ -718,13 +726,13 @@ public final class RqMultipartTest {
     }
 
     /**
-     * RqMultipart.Base can produce parts with Content-Length.
+     * RqMultipartBase can produce parts with Content-Length.
      * @throws IOException If some problem inside
      */
     @Test
     public void producesPartsWithContentLength() throws IOException {
         final String part = "t2";
-        final RqMultipart.Base multipart = new RqMultipart.Base(
+        final RqMultipartBase multipart = new RqMultipartBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?a=4 HTTP/1.1",
@@ -734,7 +742,7 @@ public final class RqMultipartTest {
                 ),
                 Joiner.on("\r\n").join(
                     "--AaB01x",
-                    String.format(RqMultipartTest.CONTENT, part),
+                    String.format(RqMultipartBaseTest.CONTENT, part),
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "--AaB01x"
