@@ -77,6 +77,10 @@ import org.takes.rq.TempInputStream;
  *  Forms in HTML</a>
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see RqGreedy
+ * @todo #651:30min This class is highly coupled, it should be refactored in
+ * order to be able to reduce the overall coupling of this class which will
+ * allow to remove the violations ClassDataAbstractionCouplingCheck and
+ * PMD.ExcessiveImports.
  */
 @SuppressWarnings("PMD.ExcessiveImports")
 @EqualsAndHashCode(of = "origin")

@@ -81,21 +81,6 @@ public final class RqMultipartFake implements RqMultipart {
         return this.fake.body();
     }
     /**
-     * Fake body stream creator.
-     * @param parts Fake request body parts
-     * @return InputStream of given dispositions
-     * @throws IOException If fails
-     */
-    private static InputStream fakeStream(final Request... parts)
-        throws IOException {
-        return new ByteArrayInputStream(
-            RqMultipartFake.fakeBody(parts).toString().getBytes(
-                StandardCharsets.UTF_8
-            )
-        );
-    }
-
-    /**
      * Fake body creator.
      * @param parts Fake request body parts
      * @return StringBuilder of given dispositions
@@ -143,15 +128,17 @@ public final class RqMultipartFake implements RqMultipart {
         /**
          * Holding multiple request body parts.
          */
-        private final transient Request[] parts;
+        private final transient String parts;
         /**
          * The Constructor for the class.
          * @param rqst The Request object
          * @param list The sequence of dispositions
+         * @throws IOException if can't process requests
          */
-        FakeMultipartRequest(final Request rqst, final Request... list) {
+        FakeMultipartRequest(final Request rqst, final Request... list)
+            throws IOException {
             this.req = rqst;
-            this.parts = list;
+            this.parts = RqMultipartFake.fakeBody(list).toString();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -161,15 +148,14 @@ public final class RqMultipartFake implements RqMultipart {
                     "Content-Type: multipart/form-data; boundary=%s",
                     RqMultipartFake.BOUNDARY
                 ),
-                String.format(
-                    "Content-Length: %s",
-                    RqMultipartFake.fakeBody(this.parts).length()
-                )
+                String.format("Content-Length: %s", this.parts.length())
             ).head();
         }
         @Override
-        public InputStream body() throws IOException {
-            return RqMultipartFake.fakeStream(this.parts);
+        public InputStream body() {
+            return new ByteArrayInputStream(
+                this.parts.getBytes(StandardCharsets.UTF_8)
+            );
         }
     }
 }

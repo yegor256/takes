@@ -35,11 +35,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Arrays;
-import java.util.HashSet;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -51,11 +49,7 @@ import org.takes.facets.hamcrest.HmRqHeader;
 import org.takes.http.FtRemote;
 import org.takes.misc.PerformanceTests;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqGreedy;
-import org.takes.rq.RqHeaders;
-import org.takes.rq.RqMultipart;
 import org.takes.rq.RqPrint;
-import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rq.TempInputStream;
 import org.takes.rs.RsText;
@@ -64,7 +58,7 @@ import org.takes.rs.RsText;
  * Test case for {@link RqMultipartBase}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
+ * @since 0.32.8
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle LineLengthCheck (1 lines)
@@ -97,14 +91,6 @@ public final class RqMultipartBaseTest {
     /**
      * RqMultipartBase can satisfy equals contract.
      * @throws IOException if some problem inside
-     * @todo #620:30min This test is using RqGreedy in order to survive. If
-     *  you remove RqGreedy, the test will crash. I can't find out why
-     *  exactly it's happening. But the main problem is that somehow
-     *  inside RqMultipartFake we're reading body() of dispositions
-     *  twice or more times. That's why RqGreedy is required now. I order
-     *  to always return the same content. Let's find what exactly is the
-     *  problem and remove RqGreedy from this test and three other
-     *  test methods below.
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
@@ -112,24 +98,20 @@ public final class RqMultipartBaseTest {
         final String part = "t-1";
         final Request req = new RqMultipartFake(
             new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        String.format("form-data; name=\"%s\"", part)
-                    )
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                RqMultipartBaseTest.contentLengthHeader(
+                    (long) body.getBytes().length
+                ),
+                RqMultipartBaseTest.contentDispositionHeader(
+                    String.format("form-data; name=\"%s\"", part)
                 )
             ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", ""),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"data\"; filename=\"a.bin\""
-                    )
+            new RqWithHeaders(
+                new RqFake("", "", ""),
+                RqMultipartBaseTest.contentLengthHeader(0L),
+                RqMultipartBaseTest.contentDispositionHeader(
+                    "form-data; name=\"data\"; filename=\"a.bin\""
                 )
             )
         );
@@ -167,310 +149,6 @@ public final class RqMultipartBaseTest {
                 )
             )
         );
-    }
-
-    /**
-     * RqMultipartFake can throw exception on no name
-     * at Content-Disposition header.
-     * @throws IOException if some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoNameAtContentDispositionHeader()
-        throws IOException {
-        new RqMultipartFake(
-            new RqWithHeader(
-                new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                RqMultipartBaseTest.DISPOSITION, "form-data; fake=\"t-3\""
-            )
-        );
-    }
-
-    /**
-     * RqMultipartBase can throw exception on no boundary
-     * at Content-Type header.
-     * @throws IOException if some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
-        throws IOException {
-        new RqMultipartBase(
-            new RqFake(
-                Arrays.asList(
-                    "POST /h?s=3 HTTP/1.1",
-                    "Host: wwo.example.com",
-                    "Content-Type: multipart/form-data; boundaryAaB03x",
-                    "Content-Length: 100005"
-                ),
-                ""
-            )
-        );
-    }
-
-    /**
-     * RqMultipartBase can throw exception on invalid Content-Type header.
-     * @throws IOException if some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnInvalidContentTypeHeader() throws IOException {
-        new RqMultipartBase(
-            new RqFake(
-                Arrays.asList(
-                    "POST /h?r=3 HTTP/1.1",
-                    "Host: www.example.com",
-                    "Content-Type: multipart; boundary=AaB03x",
-                    "Content-Length: 100004"
-                ),
-                ""
-            )
-        );
-    }
-
-    /**
-     * RqMultipartBase can parse http body.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void parsesHttpBody() throws IOException {
-        final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
-        final String part = "t4";
-        final RqMultipart multi = new RqMultipartFake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        String.format("form-data; name=\"%s\"", part)
-                    )
-                )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", ""),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"data\"; filename=\"a.bin\""
-                    )
-                )
-            )
-        );
-        try {
-            MatcherAssert.assertThat(
-                new RqHeaders.Base(
-                    multi.part(part).iterator().next()
-                ).header(RqMultipartBaseTest.DISPOSITION),
-                Matchers.hasItem("form-data; name=\"t4\"")
-            );
-            MatcherAssert.assertThat(
-                new RqPrint(
-                    new RqHeaders.Base(
-                        multi.part(part).iterator().next()
-                    )
-                ).printBody(),
-                Matchers.allOf(
-                    Matchers.startsWith("40 N"),
-                    Matchers.endsWith("CA 94085")
-                )
-            );
-        } finally {
-            multi.part(part).iterator().next().body().close();
-        }
-    }
-
-    /**
-     * RqMultipartBase can close all parts once the request body has been
-     * closed.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void closesAllParts() throws Exception {
-        final String body = "RqMultipartTest.closesAllParts";
-        final RqMultipart request = new RqMultipartFake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"name\""
-                    )
-                )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"content\"; filename=\"a.bin\""
-                    )
-                )
-            )
-        );
-        final RqMultipartBase multi = new RqMultipartBase(request);
-        multi.part("name").iterator().next().body().read();
-        multi.part("content").iterator().next().body().read();
-        multi.body().close();
-        MatcherAssert.assertThat(
-            multi.part("name").iterator().next(),
-            Matchers.notNullValue()
-        );
-        try {
-            multi.part("name").iterator().next().body().read();
-            Assert.fail(
-                "An IOException was expected since the Stream is closed"
-            );
-        } catch (final IOException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString("Closed")
-            );
-        }
-        MatcherAssert.assertThat(
-            multi.part("content").iterator().next(),
-            Matchers.notNullValue()
-        );
-        try {
-            multi.part("content").iterator().next().body().read();
-            Assert.fail(
-                "An IOException was expected since the Stream is closed"
-            );
-        } catch (final IOException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString("Closed")
-            );
-        }
-    }
-
-    /**
-     * RqMultipartBase can close all parts explicitly even if the request body
-     * has been closed.
-     * <p>For backward compatibility reason we need to ensure that we don't get
-     * {@code IOException} when we close explicitly a part even after closing
-     * the input stream of the main request.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void closesExplicitlyAllParts() throws Exception {
-        final String body = "RqMultipartTest.closesExplicitlyAllParts";
-        final RqMultipart request = new RqMultipartFake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"foo\""
-                    )
-                )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"bar\"; filename=\"a.bin\""
-                    )
-                )
-            )
-        );
-        final RqMultipartBase multi = new RqMultipartBase(request);
-        multi.body().close();
-        MatcherAssert.assertThat(
-            multi.part("foo").iterator().next(),
-            Matchers.notNullValue()
-        );
-        multi.part("foo").iterator().next().body().close();
-        MatcherAssert.assertThat(
-            multi.part("bar").iterator().next(),
-            Matchers.notNullValue()
-        );
-        multi.part("bar").iterator().next().body().close();
-    }
-
-    /**
-     * RqMultipartFake can return empty iterator on invalid part request.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
-        final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipartFake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"t5\""
-                    )
-                )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", ""),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"data\"; filename=\"a.zip\""
-                    )
-                )
-            )
-        );
-        MatcherAssert.assertThat(
-            multi.part("fake").iterator().hasNext(),
-            Matchers.is(false)
-        );
-        multi.body().close();
-    }
-
-    /**
-     * RqMultipartFake can return correct name set.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void returnsCorrectNamesSet() throws IOException {
-        final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipartFake(
-            new RqFake(),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    RqMultipartBaseTest.contentLengthHeader(
-                        (long) body.getBytes().length
-                    ),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"address\""
-                    )
-                )
-            ),
-            new RqGreedy(
-                new RqWithHeaders(
-                    new RqFake("", "", ""),
-                    RqMultipartBaseTest.contentLengthHeader(0L),
-                    RqMultipartBaseTest.contentDispositionHeader(
-                        "form-data; name=\"data\"; filename=\"a.bin\""
-                    )
-                )
-            )
-        );
-        try {
-            MatcherAssert.assertThat(
-                multi.names(),
-                Matchers.<Iterable<String>>equalTo(
-                    new HashSet<String>(Arrays.asList("address", "data"))
-                )
-            );
-        } finally {
-            multi.body().close();
-        }
     }
 
     /**

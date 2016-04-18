@@ -24,9 +24,6 @@
 package org.takes.rq;
 
 import org.takes.Request;
-import org.takes.rq.multipart.RqMultipartBase;
-import org.takes.rq.multipart.RqMultipartFake;
-import org.takes.rq.multipart.RqMultipartSmart;
 
 /**
  * HTTP multipart FORM data decoding.
@@ -35,9 +32,6 @@ import org.takes.rq.multipart.RqMultipartSmart;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @see RqMultipartSmart
- * @see RqMultipartBase
- * @see RqMultipartFake
  * @since 0.9
  */
 public interface RqMultipart extends Request {
