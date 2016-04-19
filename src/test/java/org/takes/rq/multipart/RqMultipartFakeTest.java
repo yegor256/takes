@@ -41,7 +41,7 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMultipartFake}.
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
- * @since 0.32.8
+ * @since 0.33
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class RqMultipartFakeTest {
