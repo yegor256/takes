@@ -35,7 +35,7 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 
 /**
- * Test case for {@link RqMultipartBase}.
+ * Test case for {@link RqMtBase}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.33
@@ -43,7 +43,7 @@ import org.takes.rq.RqWithHeaders;
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
-public final class RqMultipartBaseTest {
+public final class RqMtBaseTest {
 
     /**
      * Carriage return constant.
@@ -57,38 +57,38 @@ public final class RqMultipartBaseTest {
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMultipartBaseTest.DISPOSITION, "form-data; name=\"%s\""
+        "%s: %s", RqMtBaseTest.DISPOSITION, "form-data; name=\"%s\""
     );
 
     /**
-     * RqMultipartBase can satisfy equals contract.
+     * RqMtBase can satisfy equals contract.
      * @throws IOException if some problem inside
      */
     @Test
     public void satisfiesEqualsContract() throws IOException {
         final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t-1";
-        final Request req = new RqMultipartFake(
+        final Request req = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartBaseTest.contentLengthHeader(
+                RqMtBaseTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartBaseTest.contentDispositionHeader(
+                RqMtBaseTest.contentDispositionHeader(
                     String.format("form-data; name=\"%s\"", part)
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", ""),
-                RqMultipartBaseTest.contentLengthHeader(0L),
-                RqMultipartBaseTest.contentDispositionHeader(
+                RqMtBaseTest.contentLengthHeader(0L),
+                RqMtBaseTest.contentDispositionHeader(
                     "form-data; name=\"data\"; filename=\"a.bin\""
                 )
             )
         );
-        final RqMultipartBase first = new RqMultipartBase(req);
-        final RqMultipartBase second = new RqMultipartBase(req);
+        final RqMtBase first = new RqMtBase(req);
+        final RqMtBase second = new RqMtBase(req);
         try {
             MatcherAssert.assertThat(first, Matchers.equalTo(second));
         } finally {
@@ -99,12 +99,12 @@ public final class RqMultipartBaseTest {
     }
 
     /**
-     * RqMultipartBase can throw exception on no closing boundary found.
+     * RqMtBase can throw exception on no closing boundary found.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoClosingBoundaryFound() throws IOException {
-        new RqMultipartBase(
+        new RqMtBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?a=4 HTTP/1.1",
@@ -112,7 +112,7 @@ public final class RqMultipartBaseTest {
                     "Content-Type: multipart/form-data; boundary=AaB01x",
                     "Content-Length: 100007"
                 ),
-                Joiner.on(RqMultipartBaseTest.CRLF).join(
+                Joiner.on(RqMtBaseTest.CRLF).join(
                     "--AaB01x",
                     "Content-Disposition: form-data; fake=\"t2\"",
                     "",
@@ -124,13 +124,13 @@ public final class RqMultipartBaseTest {
     }
 
     /**
-     * RqMultipartBase can produce parts with Content-Length.
+     * RqMtBase can produce parts with Content-Length.
      * @throws IOException If some problem inside
      */
     @Test
     public void producesPartsWithContentLength() throws IOException {
         final String part = "t2";
-        final RqMultipartBase multipart = new RqMultipartBase(
+        final RqMtBase multipart = new RqMtBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?a=4 HTTP/1.1",
@@ -138,9 +138,9 @@ public final class RqMultipartBaseTest {
                     "Content-Type: multipart/form-data; boundary=AaB01x",
                     "Content-Length: 100007"
                 ),
-                Joiner.on(RqMultipartBaseTest.CRLF).join(
+                Joiner.on(RqMtBaseTest.CRLF).join(
                     "--AaB01x",
-                    String.format(RqMultipartBaseTest.CONTENT, part),
+                    String.format(RqMtBaseTest.CONTENT, part),
                     "",
                     "447 N Wolfe Rd, Sunnyvale, CA 94085",
                     "--AaB01x"

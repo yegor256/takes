@@ -39,7 +39,7 @@ import org.takes.rq.RqWithHeaders;
  * @version $Id$
  * @since 0.33
  */
-public final class RqMultipartFake implements RqMultipart {
+public final class RqMtFake implements RqMultipart {
     /**
      * Fake boundary constant.
      */
@@ -58,10 +58,10 @@ public final class RqMultipartFake implements RqMultipart {
      * @param dispositions Fake request body parts
      * @throws IOException If fails
      */
-    public RqMultipartFake(final Request req, final Request... dispositions)
+    public RqMtFake(final Request req, final Request... dispositions)
         throws IOException {
-        this.fake = new RqMultipartBase(
-            new RqMultipartFake.FakeMultipartRequest(req, dispositions)
+        this.fake = new RqMtBase(
+            new RqMtFake.FakeMultipartRequest(req, dispositions)
         );
     }
     @Override
@@ -95,24 +95,24 @@ public final class RqMultipartFake implements RqMultipart {
         throws IOException {
         final StringBuilder builder = new StringBuilder();
         for (final Request part : parts) {
-            builder.append(String.format("--%s", RqMultipartFake.BOUNDARY))
-                .append(RqMultipartFake.CRLF)
+            builder.append(String.format("--%s", RqMtFake.BOUNDARY))
+                .append(RqMtFake.CRLF)
                 .append("Content-Disposition: ")
                 .append(
                     new RqHeaders.Smart(
                         new RqHeaders.Base(part)
                     ).single("Content-Disposition")
-                ).append(RqMultipartFake.CRLF);
+                ).append(RqMtFake.CRLF);
             final String body = new RqPrint(part).printBody();
-            if (!(RqMultipartFake.CRLF.equals(body) || body.isEmpty())) {
-                builder.append(RqMultipartFake.CRLF)
+            if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
+                builder.append(RqMtFake.CRLF)
                     .append(body)
-                    .append(RqMultipartFake.CRLF);
+                    .append(RqMtFake.CRLF);
             }
         }
         builder.append("Content-Transfer-Encoding: utf-8")
-            .append(RqMultipartFake.CRLF)
-            .append(String.format("--%s--", RqMultipartFake.BOUNDARY));
+            .append(RqMtFake.CRLF)
+            .append(String.format("--%s--", RqMtFake.BOUNDARY));
         return builder;
     }
 
@@ -138,7 +138,7 @@ public final class RqMultipartFake implements RqMultipart {
         FakeMultipartRequest(final Request rqst, final Request... list)
             throws IOException {
             this.req = rqst;
-            this.parts = RqMultipartFake.fakeBody(list).toString();
+            this.parts = RqMtFake.fakeBody(list).toString();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -146,7 +146,7 @@ public final class RqMultipartFake implements RqMultipart {
                 this.req,
                 String.format(
                     "Content-Type: multipart/form-data; boundary=%s",
-                    RqMultipartFake.BOUNDARY
+                    RqMtFake.BOUNDARY
                 ),
                 String.format("Content-Length: %s", this.parts.length())
             ).head();

@@ -84,7 +84,7 @@ import org.takes.rq.TempInputStream;
  */
 @SuppressWarnings("PMD.ExcessiveImports")
 @EqualsAndHashCode(of = "origin")
-public final class RqMultipartBase implements RqMultipart {
+public final class RqMtBase implements RqMultipart {
     /**
      * Pattern to get boundary from header.
      */
@@ -123,7 +123,7 @@ public final class RqMultipartBase implements RqMultipart {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
-    public RqMultipartBase(final Request req) throws IOException {
+    public RqMtBase(final Request req) throws IOException {
         this.origin = req;
         this.stream = new RqLengthAware(req).body();
         this.buffer = ByteBuffer.allocate(
@@ -188,12 +188,12 @@ public final class RqMultipartBase implements RqMultipart {
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
                     // @checkstyle LineLength (1 line)
-                    "RqMultipart.Base can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
+                    "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
                     header
                 )
             );
         }
-        final Matcher matcher = RqMultipartBase.BOUNDARY.matcher(header);
+        final Matcher matcher = RqMtBase.BOUNDARY.matcher(header);
         if (!matcher.matches()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -211,7 +211,7 @@ public final class RqMultipartBase implements RqMultipart {
             );
         }
         final byte[] boundary = String.format(
-            "%s--%s", RqMultipartBase.CRLF, matcher.group(1)
+            "%s--%s", RqMtBase.CRLF, matcher.group(1)
         ).getBytes(StandardCharsets.UTF_8);
         this.buffer.flip();
         this.buffer.position(boundary.length - 2);
@@ -224,7 +224,7 @@ public final class RqMultipartBase implements RqMultipart {
             this.buffer.position(this.buffer.position() + 1);
             requests.add(this.make(boundary, body));
         }
-        return RqMultipartBase.asMap(requests);
+        return RqMtBase.asMap(requests);
     }
     /**
      * Make a request.
@@ -253,7 +253,7 @@ public final class RqMultipartBase implements RqMultipart {
             );
             channel.write(
                 ByteBuffer.wrap(
-                    RqMultipartBase.CRLF.getBytes(StandardCharsets.UTF_8)
+                    RqMtBase.CRLF.getBytes(StandardCharsets.UTF_8)
                 )
             );
             this.copy(channel, boundary, body);
@@ -331,7 +331,7 @@ public final class RqMultipartBase implements RqMultipart {
             final String header = new RqHeaders.Smart(
                 new RqHeaders.Base(req)
             ).single("Content-Disposition");
-            final Matcher matcher = RqMultipartBase.NAME.matcher(header);
+            final Matcher matcher = RqMtBase.NAME.matcher(header);
             if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -369,7 +369,7 @@ public final class RqMultipartBase implements RqMultipart {
                 super.close();
             } finally {
                 for (final List<Request> requests
-                    : RqMultipartBase.this.map.values()) {
+                    : RqMtBase.this.map.values()) {
                     for (final Request request : requests) {
                         request.body().close();
                     }

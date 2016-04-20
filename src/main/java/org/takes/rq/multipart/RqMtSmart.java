@@ -37,7 +37,7 @@ import org.takes.rq.RqMultipart;
  * @version $Id$
  * @since 0.33
  */
-public final class RqMultipartSmart implements RqMultipart {
+public final class RqMtSmart implements RqMultipart {
     /**
      * Original request.
      */
@@ -46,7 +46,7 @@ public final class RqMultipartSmart implements RqMultipart {
      * Ctor.
      * @param req Original
      */
-    public RqMultipartSmart(final RqMultipart req) {
+    public RqMtSmart(final RqMultipart req) {
         this.origin = req;
     }
     /**

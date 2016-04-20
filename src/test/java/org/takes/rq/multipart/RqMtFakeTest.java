@@ -38,42 +38,42 @@ import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
 
 /**
- * Test case for {@link RqMultipartFake}.
+ * Test case for {@link RqMtFake}.
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
  * @since 0.33
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class RqMultipartFakeTest {
+public final class RqMtFakeTest {
     /**
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
     /**
-     * RqMultipartFake can throw exception on no name
+     * RqMtFake can throw exception on no name
      * at Content-Disposition header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoNameAtContentDispositionHeader()
         throws IOException {
-        new RqMultipartFake(
+        new RqMtFake(
             new RqWithHeader(
                 new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                RqMultipartFakeTest.DISPOSITION, "form-data; fake=\"t-3\""
+                RqMtFakeTest.DISPOSITION, "form-data; fake=\"t-3\""
             )
         );
     }
 
     /**
-     * RqMultipartBase can throw exception on no boundary
+     * RqMtFake can throw exception on no boundary
      * at Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
         throws IOException {
-        new RqMultipartBase(
+        new RqMtBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?s=3 HTTP/1.1",
@@ -87,12 +87,12 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartBase can throw exception on invalid Content-Type header.
+     * RqMtFake can throw exception on invalid Content-Type header.
      * @throws IOException if some problem inside
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnInvalidContentTypeHeader() throws IOException {
-        new RqMultipartBase(
+        new RqMtBase(
             new RqFake(
                 Arrays.asList(
                     "POST /h?r=3 HTTP/1.1",
@@ -106,28 +106,28 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartBase can parse http body.
+     * RqMtFake can parse http body.
      * @throws IOException If some problem inside
      */
     @Test
     public void parsesHttpBody() throws IOException {
         final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t4";
-        final RqMultipart multi = new RqMultipartFake(
+        final RqMultipart multi = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(
+                RqMtFakeTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentDispositionHeader(
                     String.format("form-data; name=\"%s\"", part)
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", ""),
-                RqMultipartFakeTest.contentLengthHeader(0L),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentLengthHeader(0L),
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"data\"; filename=\"a.bin\""
                 )
             )
@@ -136,7 +136,7 @@ public final class RqMultipartFakeTest {
             MatcherAssert.assertThat(
                 new RqHeaders.Base(
                     multi.part(part).iterator().next()
-                ).header(RqMultipartFakeTest.DISPOSITION),
+                ).header(RqMtFakeTest.DISPOSITION),
                 Matchers.hasItem("form-data; name=\"t4\"")
             );
             MatcherAssert.assertThat(
@@ -156,33 +156,33 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartBase can close all parts once the request body has been
+     * RqMtFake can close all parts once the request body has been
      * closed.
      * @throws Exception If some problem inside
      */
     @Test
     public void closesAllParts() throws Exception {
-        final String body = "RqMultipartTest.closesAllParts";
-        final RqMultipart request = new RqMultipartFake(
+        final String body = "RqMtFakeTest.closesAllParts";
+        final RqMultipart request = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(
+                RqMtFakeTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"name\""
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(0L),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentLengthHeader(0L),
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"content\"; filename=\"a.bin\""
                 )
             )
         );
-        final RqMultipartBase multi = new RqMultipartBase(request);
+        final RqMtBase multi = new RqMtBase(request);
         multi.part("name").iterator().next().body().read();
         multi.part("content").iterator().next().body().read();
         multi.body().close();
@@ -219,7 +219,7 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartBase can close all parts explicitly even if the request body
+     * RqMtFake can close all parts explicitly even if the request body
      * has been closed.
      * <p>For backward compatibility reason we need to ensure that we don't get
      * {@code IOException} when we close explicitly a part even after closing
@@ -228,27 +228,27 @@ public final class RqMultipartFakeTest {
      */
     @Test
     public void closesExplicitlyAllParts() throws Exception {
-        final String body = "RqMultipartTest.closesExplicitlyAllParts";
-        final RqMultipart request = new RqMultipartFake(
+        final String body = "RqMtFakeTest.closesExplicitlyAllParts";
+        final RqMultipart request = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(
+                RqMtFakeTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"foo\""
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(0L),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentLengthHeader(0L),
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"bar\"; filename=\"a.bin\""
                 )
             )
         );
-        final RqMultipartBase multi = new RqMultipartBase(request);
+        final RqMtBase multi = new RqMtBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
             multi.part("foo").iterator().next(),
@@ -263,27 +263,27 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartFake can return empty iterator on invalid part request.
+     * RqMtFake can return empty iterator on invalid part request.
      * @throws IOException If some problem inside
      */
     @Test
     public void returnsEmptyIteratorOnInvalidPartRequest() throws IOException {
         final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipartFake(
+        final RqMultipart multi = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(
+                RqMtFakeTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"t5\""
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", ""),
-                RqMultipartFakeTest.contentLengthHeader(0L),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentLengthHeader(0L),
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"data\"; filename=\"a.zip\""
                 )
             )
@@ -296,27 +296,27 @@ public final class RqMultipartFakeTest {
     }
 
     /**
-     * RqMultipartFake can return correct name set.
+     * RqMtFake can return correct name set.
      * @throws IOException If some problem inside
      */
     @Test
     public void returnsCorrectNamesSet() throws IOException {
         final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
-        final RqMultipart multi = new RqMultipartFake(
+        final RqMultipart multi = new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
                 new RqFake("", "", body),
-                RqMultipartFakeTest.contentLengthHeader(
+                RqMtFakeTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"address\""
                 )
             ),
             new RqWithHeaders(
                 new RqFake("", "", ""),
-                RqMultipartFakeTest.contentLengthHeader(0L),
-                RqMultipartFakeTest.contentDispositionHeader(
+                RqMtFakeTest.contentLengthHeader(0L),
+                RqMtFakeTest.contentDispositionHeader(
                     "form-data; name=\"data\"; filename=\"a.bin\""
                 )
             )

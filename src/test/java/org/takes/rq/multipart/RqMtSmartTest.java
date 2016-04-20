@@ -53,14 +53,14 @@ import org.takes.rq.TempInputStream;
 import org.takes.rs.RsText;
 
 /**
- * Test case for {@link RqMultipartSmart}.
+ * Test case for {@link RqMtSmart}.
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
  * @since 0.33
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RqMultipartSmartTest {
+public final class RqMtSmartTest {
     /**
      * Carriage return constant.
      */
@@ -73,7 +73,7 @@ public final class RqMultipartSmartTest {
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMultipartSmartTest.DISPOSITION, "form-data; name=\"%s\""
+        "%s: %s", RqMtSmartTest.DISPOSITION, "form-data; name=\"%s\""
     );
     /**
      * Temp directory.
@@ -81,7 +81,7 @@ public final class RqMultipartSmartTest {
     @Rule
     public final transient TemporaryFolder temp = new TemporaryFolder();
     /**
-     * RqMultipartSmart can return correct part length.
+     * RqMtSmart can return correct part length.
      * @throws IOException If some problem inside
      */
     @Test
@@ -89,9 +89,9 @@ public final class RqMultipartSmartTest {
         final int length = 5000;
         final String part = "x-1";
         final String body =
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "--zzz",
-                String.format(RqMultipartSmartTest.CONTENT, part),
+                String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("X", length),
                 "--zzz--"
@@ -100,15 +100,15 @@ public final class RqMultipartSmartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: www.example.com",
-                RqMultipartSmartTest.contentLengthHeader(
+                RqMtSmartTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz"
             ),
             body
         );
-        final RqMultipartSmart regsmart = new RqMultipartSmart(
-            new RqMultipartBase(req)
+        final RqMtSmart regsmart = new RqMtSmart(
+            new RqMtBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -122,7 +122,7 @@ public final class RqMultipartSmartTest {
     }
 
     /**
-     * RqMultipartSmart can identify the boundary even if the last content to
+     * RqMtSmart can identify the boundary even if the last content to
      * read before the pattern is an empty line.
      * @throws IOException If some problem inside
      */
@@ -131,9 +131,9 @@ public final class RqMultipartSmartTest {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "----foo",
-                String.format(RqMultipartSmartTest.CONTENT, part),
+                String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("F", length),
                 "",
@@ -143,15 +143,15 @@ public final class RqMultipartSmartTest {
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
                 "Host: www.foo.com",
-                RqMultipartSmartTest.contentLengthHeader(
+                RqMtSmartTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=--foo"
             ),
             body
         );
-        final RqMultipartSmart regsmart = new RqMultipartSmart(
-            new RqMultipartBase(req)
+        final RqMtSmart regsmart = new RqMtSmart(
+            new RqMtBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -165,7 +165,7 @@ public final class RqMultipartSmartTest {
     }
 
     /**
-     * RqMultipartSmart can work in integration mode.
+     * RqMtSmart can work in integration mode.
      * @throws IOException if some problem inside
      */
     @Test
@@ -176,17 +176,17 @@ public final class RqMultipartSmartTest {
             public Response act(final Request req) throws IOException {
                 return new RsText(
                     new RqPrint(
-                        new RqMultipartSmart(
-                            new RqMultipartBase(req)
+                        new RqMtSmart(
+                            new RqMtBase(req)
                         ).single(part)
                     ).printBody()
                 );
             }
         };
         final String body =
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "--AaB0zz",
-                String.format(RqMultipartSmartTest.CONTENT, part), "",
+                String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
             );
         new FtRemote(take).exec(
@@ -217,7 +217,7 @@ public final class RqMultipartSmartTest {
     }
 
     /**
-     * RqMultipartSmart can handle a big request in an acceptable time.
+     * RqMtSmart can handle a big request in an acceptable time.
      * @throws IOException If some problem inside
      */
     @Test
@@ -228,9 +228,9 @@ public final class RqMultipartSmartTest {
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
         bwr.write(
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "--zzz",
-                String.format(RqMultipartSmartTest.CONTENT, part),
+                String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
             )
@@ -238,9 +238,9 @@ public final class RqMultipartSmartTest {
         for (int ind = 0; ind < length; ++ind) {
             bwr.write("X");
         }
-        bwr.write(RqMultipartSmartTest.CRLF);
+        bwr.write(RqMtSmartTest.CRLF);
         bwr.write("--zzz--");
-        bwr.write(RqMultipartSmartTest.CRLF);
+        bwr.write(RqMtSmartTest.CRLF);
         bwr.close();
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
@@ -252,8 +252,8 @@ public final class RqMultipartSmartTest {
             ),
             new TempInputStream(new FileInputStream(file), file)
         );
-        final RqMultipartSmart smart = new RqMultipartSmart(
-            new RqMultipartBase(req)
+        final RqMtSmart smart = new RqMtSmart(
+            new RqMtBase(req)
         );
         try {
             MatcherAssert.assertThat(
@@ -271,7 +271,7 @@ public final class RqMultipartSmartTest {
         }
     }
     /**
-     * RqMultipartSmart doesn't distort the content.
+     * RqMtSmart doesn't distort the content.
      * @throws IOException If some problem inside
      */
     @Test
@@ -281,9 +281,9 @@ public final class RqMultipartSmartTest {
         final File file = this.temp.newFile("notDistortContent.tmp");
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
         final String head =
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "--zzz1",
-                String.format(RqMultipartSmartTest.CONTENT, part),
+                String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
             );
@@ -293,7 +293,7 @@ public final class RqMultipartSmartTest {
             bwr.write(idx % byt);
         }
         final String foot =
-            Joiner.on(RqMultipartSmartTest.CRLF).join(
+            Joiner.on(RqMtSmartTest.CRLF).join(
                 "",
                 "--zzz1--",
                 ""
@@ -304,15 +304,15 @@ public final class RqMultipartSmartTest {
             Arrays.asList(
                 "POST /post?u=3 HTTP/1.1",
                 "Host: exampl.com",
-                RqMultipartSmartTest.contentLengthHeader(
+                RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
             new TempInputStream(new FileInputStream(file), file)
         );
-        final InputStream stream = new RqMultipartSmart(
-            new RqMultipartBase(req)
+        final InputStream stream = new RqMtSmart(
+            new RqMtBase(req)
         ).single(part).body();
         try {
             MatcherAssert.assertThat(
