@@ -37,7 +37,7 @@ import java.nio.file.Paths;
  * @version $Id$
  * @since 0.31
  */
-final class TempInputStream extends InputStream {
+public final class TempInputStream extends InputStream {
 
     /**
      * Original stream.
@@ -54,7 +54,7 @@ final class TempInputStream extends InputStream {
      * @param stream Original stream
      * @param temp File instance
      */
-    TempInputStream(final InputStream stream, final File temp) {
+    public TempInputStream(final InputStream stream, final File temp) {
         super();
         this.origin = stream;
         this.file = temp;

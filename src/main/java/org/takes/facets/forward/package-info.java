@@ -37,7 +37,7 @@
  *   &#64;Override
  *   public Response act(final Request req) {
  *     final InputStream content =
- *       new RqMultipart.Base(req).part("file").body();
+ *       new RqMtBase(req).part("file").body();
  *     // save content to whenever you want
  *     return new RsForward(new RqHref(req).href());
  *   }
