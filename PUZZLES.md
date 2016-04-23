@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 2 active puzzles (62 total):
+There are 3 active puzzles (64 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -65,3 +65,5 @@ There are 2 active puzzles (62 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-d68bc52e</del> [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-40a8e0fe</del> [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#625](https://github.com/yegor256/takes/issues/625):[<del>620-91883c6a</del>](https://github.com/yegor256/takes/issues/625) [`RqMultipartTest.java:91-98`](../master/src/test/java/org/takes/rq/RqMultipartTest.java#L91-L98)<br/>
+[#651](https://github.com/yegor256/takes/issues/651):[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[**651-43df2f64**]() [`RqMtBase.java:80-83`](../master/src/main/java/org/takes/rq/multipart/RqMtBase.java#L80-L83)<br/>
