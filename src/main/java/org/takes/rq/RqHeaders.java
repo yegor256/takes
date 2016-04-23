@@ -181,6 +181,13 @@ public interface RqHeaders extends Request {
         public Smart(final RqHeaders req) {
             this.origin = req;
         }
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        public Smart(final Request req) {
+            this(new RqHeaders.Base(req));
+        }
         @Override
         public List<String> header(final CharSequence name)
             throws IOException {
