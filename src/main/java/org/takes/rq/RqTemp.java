@@ -29,7 +29,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 
 /**
- * Live request with a temporary file has body.
+ * Live request with a temporary file as body.
  * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
  * @since 0.33
