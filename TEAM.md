@@ -6,8 +6,8 @@ Role | Members
 ---|---
 PM | @davvd
 CR | @darkled, @original-brownbear, @caarlos0, @carlosmiranda, @dmzaytsev, @pinaf, @ggajos, @hdouss, @krzyk, @mkordas, @longtimeago
-DEV | @adko-pl, @rfqu, @carlosgines, @dalifreire, @danff, @ericbatemandev, @erimerturk, @gmandnepr, @bubelov, @happy-neko, @2686747, @mbarbieri, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
-IMP | @adko-pl, @rfqu, @carlosgines, @dalifreire, @danff, @ericbatemandev, @erimerturk, @gmandnepr, @bubelov, @happy-neko, @2686747, @mbarbieri, @essobedo, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
+DEV | @adko-pl, @rfqu, @carlosgines, @dalifreire, @danff, @ericbatemandev, @erimerturk, @gmandnepr, @bubelov, @happy-neko, @2686747, @mbarbieri, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
+IMP | @adko-pl, @rfqu, @carlosgines, @dalifreire, @danff, @ericbatemandev, @erimerturk, @gmandnepr, @bubelov, @happy-neko, @2686747, @mbarbieri, @prondzyn, @raphaelln, @sebing, @xupyprmv, @yamstranger, @bertram25
 ARC | 
 DES | @yegor256
 PO | @yegor256
