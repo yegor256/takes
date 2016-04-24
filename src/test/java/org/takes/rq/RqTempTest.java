@@ -23,13 +23,14 @@
  */
 package org.takes.rq;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
 
 /**
  * Test case for {@link RqTemp}.
@@ -49,13 +50,11 @@ public final class RqTempTest {
             RqTempTest.class.getName(),
             ".tmp"
         );
-        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
-        try {
-            out.write("Temp file deletion test");
-        } finally {
-            out.close();
-        }
-        final RqTemp request = new RqTemp(file);
+        Files.write(
+            file.toPath(),
+            "Temp file deletion test".getBytes(StandardCharsets.UTF_8)
+        );
+        final Request request = new RqTemp(file);
         try {
             MatcherAssert.assertThat(
                 "File is not created!",
