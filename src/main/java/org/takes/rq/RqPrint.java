@@ -32,6 +32,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.UTF8String;
 
 /**
  * Request decorator, to print it all.
@@ -61,7 +62,7 @@ public final class RqPrint extends RqWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**
@@ -82,7 +83,7 @@ public final class RqPrint extends RqWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**
@@ -111,7 +112,7 @@ public final class RqPrint extends RqWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**

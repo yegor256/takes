@@ -25,12 +25,12 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.UTF8String;
 
 /**
  * Fake request (for unit tests).
@@ -91,7 +91,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final CharSequence body) {
-        this(head, body.toString().getBytes(StandardCharsets.UTF_8));
+        this(head, new UTF8String(body.toString()).bytes());
     }
 
     /**

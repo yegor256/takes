@@ -140,6 +140,9 @@ public final class RsXSLT extends RsWrap {
      * @param xml XML page to be transformed.
      * @return Resulting HTML page.
      * @throws TransformerException If fails
+     * @todo #664:30min continue removing usage StandardCharsets.UTF_8 from
+     *  takes code (remove usage not only from this class but also from other
+     *  parts of project). Please look at #664 for more details.
      */
     private static InputStream transform(final TransformerFactory factory,
         final InputStream xml) throws TransformerException {

@@ -35,7 +35,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,6 +49,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
+import org.takes.misc.UTF8String;
 import org.takes.misc.VerboseIterable;
 
 /**
@@ -224,9 +224,9 @@ public interface RqMultipart extends Request {
                     "failed to read the request body"
                 );
             }
-            final byte[] boundary = String.format(
-                "\r\n--%s", matcher.group(1)
-            ).getBytes(StandardCharsets.UTF_8);
+            final byte[] boundary = new UTF8String(
+                String.format("\r\n--%s", matcher.group(1))
+            ).bytes();
             this.buffer.flip();
             this.buffer.position(boundary.length - 2);
             final Collection<Request> requests = new LinkedList<>();
@@ -262,15 +262,13 @@ public interface RqMultipart extends Request {
             try {
                 channel.write(
                     ByteBuffer.wrap(
-                        this.head().iterator().next().getBytes(
-                            StandardCharsets.UTF_8
-                        )
+                        new UTF8String(this.head().iterator().next()).bytes()
                     )
                 );
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 channel.write(
                     ByteBuffer.wrap(
-                        RqMultipart.Fake.CRLF.getBytes(StandardCharsets.UTF_8)
+                        new UTF8String(RqMultipart.Fake.CRLF).bytes()
                     )
                 );
                 this.copy(channel, boundary);
@@ -474,9 +472,9 @@ public interface RqMultipart extends Request {
         private static InputStream fakeStream(final Request... parts)
             throws IOException {
             return new ByteArrayInputStream(
-                RqMultipart.Fake.fakeBody(parts).toString().getBytes(
-                    StandardCharsets.UTF_8
-                )
+                new UTF8String(
+                    RqMultipart.Fake.fakeBody(parts).toString()
+                ).bytes()
             );
         }
 

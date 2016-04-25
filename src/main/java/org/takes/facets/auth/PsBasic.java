@@ -28,7 +28,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -40,6 +39,7 @@ import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
+import org.takes.misc.UTF8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeader;
@@ -83,15 +83,15 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
-        final String decoded = new String(
+        final String decoded = new UTF8String(
             DatatypeConverter.parseBase64Binary(
                 AUTH.split(
                     new RqHeaders.Smart(
                         new RqHeaders.Base(request)
                     ).single("authorization")
                 )[1]
-            ), StandardCharsets.UTF_8
-        ).trim();
+            )
+        ).string().trim();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
             user,

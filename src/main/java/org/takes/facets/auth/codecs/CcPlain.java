@@ -28,11 +28,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
+import org.takes.misc.UTF8String;
 
 /**
  * Plain codec.
@@ -59,14 +59,12 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return text.toString().getBytes(StandardCharsets.UTF_8);
+        return new UTF8String(text.toString()).bytes();
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final String[] parts = new String(
-            bytes, StandardCharsets.UTF_8
-        ).split(";");
+        final String[] parts = new UTF8String(bytes).string().split(";");
         final Map<String, String> map =
             new HashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {

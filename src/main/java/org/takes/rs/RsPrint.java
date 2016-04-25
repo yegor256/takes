@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.UTF8String;
 
 /**
  * Response decorator that can print an entire response in HTTP format.
@@ -78,7 +79,7 @@ public final class RsPrint extends RsWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**
@@ -89,7 +90,7 @@ public final class RsPrint extends RsWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**
@@ -101,7 +102,7 @@ public final class RsPrint extends RsWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new UTF8String(baos.toByteArray()).string();
     }
 
     /**

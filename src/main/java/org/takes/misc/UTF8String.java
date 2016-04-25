@@ -21,43 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.misc;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.misc.UTF8String;
+import java.nio.charset.Charset;
 
 /**
- * Request with body.
+ * UTF string.
  *
- * <p>The class is immutable and thread-safe.
- * @author Erim Erturk (erimerturk@gmail.com)
+ * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.22
+ * @since 0.32.8
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqWithBody extends RqWrap {
+public final class UTF8String {
+
+    /**
+     * UTF-8 encoding.
+     */
+    private static final String ENCODING = "UTF-8";
+
+    /**
+     * String value.
+     */
+    private final transient String value;
 
     /**
      * Ctor.
-     * @param req The request.
-     * @param bdy The body.
+     * @param string String value
      */
-    public RqWithBody(final Request req, final CharSequence bdy) {
-        super(new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-            @Override
-            public InputStream body() {
-                return new ByteArrayInputStream(
-                    new UTF8String(bdy.toString()).bytes()
-                );
-            }
-        });
+    public UTF8String(final String string) {
+        this.value = string;
+    }
+
+    /**
+     * Ctor.
+     * @param bytes Bytes to construct UTF-8 string value
+     */
+    public UTF8String(final byte... bytes) {
+        this(new String(bytes, Charset.forName(UTF8String.ENCODING)));
+    }
+
+    /**
+     * Encodes string value into a sequence of bytes using UTF-8 charset.
+     * @return Sequence of bytes
+     */
+    public byte[] bytes() {
+        return this.value.getBytes(Charset.forName(UTF8String.ENCODING));
+    }
+
+    /**
+     * Returns string value.
+     * @return String value
+     */
+    public String string() {
+        return this.value;
     }
 }
