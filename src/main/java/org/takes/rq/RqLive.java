@@ -121,7 +121,7 @@ public final class RqLive extends RqWrap {
                 String.format(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new String(baos.toByteArray(), StandardCharsets.UTF_8)
+                    new UTF8String(baos.toByteArray()).string()
                 )
             );
         }

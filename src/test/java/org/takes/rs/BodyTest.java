@@ -27,13 +27,13 @@ import com.google.common.io.ByteStreams;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.misc.UTF8String;
 
 /**
  * Test case for {@link Body}.
@@ -51,7 +51,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
-            "ByteArray returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("ByteArray returnsCorrectInput!").bytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(new Body.ByteArray(bytes).input()),
             Matchers.equalTo(bytes)
@@ -65,7 +65,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithByteArray() throws Exception {
         final byte[] bytes =
-            "ByteArray returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("ByteArray returnsCorrectLength!").bytes();
         MatcherAssert.assertThat(
             new Body.ByteArray(bytes).length(),
             Matchers.equalTo(bytes.length)
@@ -79,7 +79,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithStream() throws Exception {
         final byte[] bytes =
-            "Stream returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("Stream returnsCorrectInput!").bytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
                 new Body.Stream(new ByteArrayInputStream(bytes)).input()
@@ -95,7 +95,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =
-            "Stream returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("Stream returnsCorrectLength!").bytes();
         MatcherAssert.assertThat(
             new Body.Stream(new ByteArrayInputStream(bytes)).length(),
             Matchers.equalTo(bytes.length)
@@ -109,7 +109,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithTemFile() throws Exception {
         final byte[] bytes =
-            "TempFile returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("TempFile returnsCorrectInput!").bytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
                 new Body.TempFile(new Body.ByteArray(bytes)).input()
@@ -125,7 +125,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithTemFile() throws Exception {
         final byte[] bytes =
-            "TempFile returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+            new UTF8String("TempFile returnsCorrectLength!").bytes();
         MatcherAssert.assertThat(
             new Body.TempFile(new Body.ByteArray(bytes)).length(),
             Matchers.equalTo(bytes.length)
@@ -141,7 +141,7 @@ public final class BodyTest {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                "URL returnsCorrectInput!".getBytes(StandardCharsets.UTF_8);
+                new UTF8String("URL returnsCorrectInput!").bytes();
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -166,7 +166,7 @@ public final class BodyTest {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                "URL returnsCorrectLength!".getBytes(StandardCharsets.UTF_8);
+                new UTF8String("URL returnsCorrectLength!").bytes();
             try (final InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }

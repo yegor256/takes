@@ -25,10 +25,10 @@ package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.UTF8String;
 
 /**
  * Simple response.
@@ -51,9 +51,7 @@ public class RsSimple extends RsWrap {
     public RsSimple(final Iterable<String> head, final String body) {
         this(
             head,
-            new ByteArrayInputStream(
-                body.getBytes(StandardCharsets.UTF_8)
-            )
+            new ByteArrayInputStream(new UTF8String(body).bytes())
         );
     }
 

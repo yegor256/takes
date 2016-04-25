@@ -102,11 +102,7 @@ public final class PsBasic implements Pass {
         }
         final String decoded = new UTF8String(
             DatatypeConverter.parseBase64Binary(
-                AUTH.split(
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(request)
-                    ).single("authorization")
-                )[1]
+                PsBasic.AUTH.split(headers.next())[1]
             )
         ).string().trim();
         final String user = decoded.split(":")[0];
