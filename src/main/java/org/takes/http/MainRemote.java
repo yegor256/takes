@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -92,20 +92,7 @@ public final class MainRemote {
         for (int idx = 0; idx < this.args.length; ++idx) {
             passed[idx + 1] = this.args[idx];
         }
-        final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        method.invoke(null, (Object) passed);
-                    } catch (final InvocationTargetException ex) {
-                        throw new IllegalStateException(ex);
-                    } catch (final IllegalAccessException ex) {
-                        throw new IllegalStateException(ex);
-                    }
-                }
-            }
-        );
+        final Thread thread = new Thread(new MainMethod(method, passed));
         thread.start();
         try {
             script.exec(
@@ -161,4 +148,54 @@ public final class MainRemote {
         void exec(URI home) throws IOException;
     }
 
+    /**
+     * Runnable main method.
+     *
+     * @author Dali Freire (dalifreire@gmail.com)
+     * @version $Id$
+     * @since 0.32.5
+     */
+    private static final class MainMethod implements Runnable {
+
+        /**
+         * Method.
+         */
+        private final transient Method method;
+
+        /**
+         * Additional arguments.
+         */
+        private final transient String[] passed;
+
+        /**
+         * Ctor.
+         * @param method Main method
+         * @param passed Additional arguments to be passed to the main method
+         */
+        MainMethod(final Method method, final String... passed) {
+            this.method = method;
+            this.passed = Arrays.copyOf(passed, passed.length);
+        }
+
+        @Override
+        public void run() {
+            try {
+                this.method.invoke(null, (Object) this.passed);
+            } catch (final InvocationTargetException ex) {
+                throw new IllegalStateException(
+                    String.format(
+                        "The %s method has been invoked at an illegal time.",
+                        this.method.getName()
+                    ), ex
+                );
+            } catch (final IllegalAccessException ex) {
+                throw new IllegalStateException(
+                    String.format(
+                        "The visibility of the %s method do not allow access.",
+                        this.method.getName()
+                    ), ex
+                );
+            }
+        }
+    }
 }

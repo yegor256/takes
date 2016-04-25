@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@
  *   &#64;Override
  *   public Response act(final Request req) {
  *     final InputStream content =
- *       new RqMultipart.Base(req).part("file").body();
+ *       new RqMtBase(req).part("file").body();
  *     // save content to whenever you want
  *     return new RsForward(new RqHref(req).href());
  *   }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ public final class FkFixed extends FkWrap {
                 @Override
                 public Opt<Response> route(final Request req)
                     throws IOException {
-                    return new Opt.Single<Response>(take.act(req));
+                    return new Opt.Single<>(take.act(req));
                 }
             }
         );

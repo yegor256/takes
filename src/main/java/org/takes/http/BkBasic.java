@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -71,19 +71,27 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
+    @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
-        final InputStream input = socket.getInputStream();
-        try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                new BufferedOutputStream(socket.getOutputStream())
-            );
-        } finally {
-            input.close();
+        try (
+            final InputStream input = socket.getInputStream();
+            final BufferedOutputStream output = new BufferedOutputStream(
+                socket.getOutputStream()
+            )
+        ) {
+            while (true) {
+                this.print(
+                    BkBasic.addSocketHeaders(
+                        new RqLive(input),
+                        socket
+                    ),
+                    output
+                );
+                if (input.available() <= 0) {
+                    break;
+                }
+            }
         }
     }
 
@@ -108,8 +116,6 @@ public final class BkBasic implements Back {
                     HttpURLConnection.HTTP_INTERNAL_ERROR
                 )
             ).print(output);
-        } finally {
-            output.close();
         }
     }
 

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -49,7 +48,6 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
-import org.takes.rs.RsEmpty;
 import org.takes.tk.TkText;
 
 /**
@@ -60,12 +58,6 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #306:30min At the moment we don't support HTTP
- *  persistent connections. Would be great to implement
- *  this feature. BkBasic.accept should handle more
- *  than one HTTP request in one connection.
- * @todo #516:30min It will be nice to refactor tests with Socket usage and
- *  replace them to real statements. See usage of BkBasicTest.createMockSocket.
  * @todo #516:15min Move header names from BkBasic to public constants.
  *  Reusable header names will help in many situations. For example - in new
  *  integration tests.
@@ -98,9 +90,8 @@ public final class BkBasicTest {
      */
     @Test
     public void handlesSocket() throws IOException {
-        final Socket socket = createMockSocket();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
+        final MkSocket socket = BkBasicTest.createMockSocket();
+        final ByteArrayOutputStream baos = socket.bufferedOutput();
         new BkBasic(new TkText("Hello world!")).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
@@ -147,7 +138,16 @@ public final class BkBasicTest {
                 @Override
                 public Response act(final Request req) {
                     ref.set(req);
-                    return new RsEmpty();
+                    return new Response() {
+                        @Override
+                        public Iterable<String> head() throws IOException {
+                            return Collections.singletonList("HTTP/1.1 200 OK");
+                        }
+                        @Override
+                        public InputStream body() throws IOException {
+                            return req.body();
+                        }
+                    };
                 }
             }
         ).accept(socket);
@@ -188,7 +188,6 @@ public final class BkBasicTest {
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
     @Test
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
@@ -243,7 +242,9 @@ public final class BkBasicTest {
         }
         MatcherAssert.assertThat(
             output.toString(),
-            RegexMatchers.containsPattern(String.format("%s.*?%s", text, text))
+            RegexMatchers.containsPattern(
+                String.format("(?s)%s.*?%s", text, text)
+            )
         );
     }
 
@@ -370,9 +371,8 @@ public final class BkBasicTest {
      * @return Prepared Socket mock
      * @throws IOException If some problem inside
      */
-    private static Socket createMockSocket() throws IOException {
-        final Socket socket = Mockito.mock(Socket.class);
-        Mockito.when(socket.getInputStream()).thenReturn(
+    private static MkSocket createMockSocket() throws IOException {
+        return new MkSocket(
             new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
@@ -383,16 +383,5 @@ public final class BkBasicTest {
                 ).getBytes()
             )
         );
-        Mockito.when(socket.getLocalAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getLocalPort()).thenReturn(0);
-        Mockito.when(socket.getInetAddress()).thenReturn(
-            InetAddress.getLocalHost()
-        );
-        Mockito.when(socket.getPort()).thenReturn(0);
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Mockito.when(socket.getOutputStream()).thenReturn(baos);
-        return socket;
     }
 }

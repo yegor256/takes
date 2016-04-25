@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.Request;
 
 /**
  * Test case for {@link RqFake}.
@@ -66,6 +67,24 @@ public final class RqFakeTest {
                 Matchers.containsString("GET /just-a-test\r\n"),
                 Matchers.endsWith("=alpha")
             )
+        );
+    }
+
+    /**
+     * RqFake can print body only once.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void printsBodyOnlyOnce() throws IOException {
+        final String body = "the body text";
+        final Request req = new RqFake("", "", body);
+        MatcherAssert.assertThat(
+            new RqPrint(req).print(),
+            Matchers.containsString(body)
+        );
+        MatcherAssert.assertThat(
+            new RqPrint(req).print(),
+            Matchers.not(Matchers.containsString(body))
         );
     }
 

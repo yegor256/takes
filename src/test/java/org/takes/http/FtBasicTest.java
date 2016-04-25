@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -43,6 +44,7 @@ import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
+import org.takes.rs.RsHTML;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
 
@@ -57,12 +59,19 @@ import org.takes.tk.TkFailure;
 public final class FtBasicTest {
 
     /**
+     * The root path.
+     */
+    private static final String ROOT_PATH = "/";
+
+    /**
      * FtBasic can work.
      * @throws Exception If some problem inside
      */
     @Test
     public void justWorks() throws Exception {
-        new FtRemote(new TkFork(new FkRegex("/", "hello, world!"))).exec(
+        new FtRemote(
+            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "hello, world!"))
+        ).exec(
             new FtRemote.Script() {
                 @Override
                 public void exec(final URI home) throws IOException {
@@ -196,4 +205,77 @@ public final class FtBasicTest {
         );
     }
 
+    /**
+     * FtBasic can consume twice the input stream in case of a RsText.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void consumesTwiceInputStreamWithRsText() throws IOException {
+        final String result = "Hello RsText!";
+        new FtRemote(
+            new TkFork(
+                new FkRegex(
+                    FtBasicTest.ROOT_PATH,
+                    new RsText(
+                        new ByteArrayInputStream(
+                            result.getBytes(StandardCharsets.UTF_8)
+                        )
+                    )
+                )
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                }
+            }
+        );
+    }
+
+    /**
+     * FtBasic can consume twice the input stream in case of a RsHTML.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void consumesTwiceInputStreamWithRsHTML() throws IOException {
+        final String result = "Hello RsHTML!";
+        new FtRemote(
+            new TkFork(
+                new FkRegex(
+                    FtBasicTest.ROOT_PATH,
+                    new RsHTML(
+                        new ByteArrayInputStream(
+                            result.getBytes(StandardCharsets.UTF_8)
+                        )
+                    )
+                )
+            )
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.equalTo(result));
+                }
+            }
+        );
+    }
 }

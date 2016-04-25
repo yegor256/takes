@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -160,19 +160,16 @@ public final class RsPrint extends RsWrap {
      */
     public void printBody(final OutputStream output) throws IOException {
         final InputStream body = this.body();
-        try {
-            //@checkstyle MagicNumberCheck (1 line)
-            final byte[] buf = new byte[4096];
-            while (true) {
-                final int bytes = body.read(buf);
-                if (bytes < 0) {
-                    break;
-                }
-                output.write(buf, 0, bytes);
+        //@checkstyle MagicNumberCheck (1 line)
+        final byte[] buf = new byte[4096];
+        while (true) {
+            final int bytes = body.read(buf);
+            if (bytes < 0) {
+                break;
             }
-        } finally {
-            body.close();
+            output.write(buf, 0, bytes);
         }
+        output.flush();
     }
 
 }

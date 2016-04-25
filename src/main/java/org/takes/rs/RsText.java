@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -107,7 +107,7 @@ public final class RsText extends RsWrap {
      * @param body HTML body
      */
     public RsText(final Response res, final InputStream body) {
-        this(new RsWithBody(res, body));
+        this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
     }
 
     /**

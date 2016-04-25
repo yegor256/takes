@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,8 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.tk.TkWrap;
 
@@ -49,17 +46,7 @@ public final class TkConsumes extends TkWrap {
      * @param type Content-Type
      */
     public TkConsumes(final Take take, final String type) {
-        super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return new RsFork(
-                        req,
-                        new FkContentType(type, take.act(req))
-                    );
-                }
-            }
-        );
+        super(new TkFork(new FkContentType(type, take)));
     }
 
 }

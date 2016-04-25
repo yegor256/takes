@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -100,7 +100,9 @@ public final class TkFlash implements Take {
             response = new RsWithCookie(
                 this.origin.act(request),
                 this.cookie,
-                ""
+                "deleted",
+                "Path=/",
+                "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
             );
         } else {
             response = this.origin.act(request);

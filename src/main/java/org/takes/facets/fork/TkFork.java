@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -97,13 +97,10 @@ public final class TkFork implements Take {
 
     @Override
     public Response act(final Request request) throws IOException {
-        for (final Fork fork : this.forks) {
-            final Opt<Response> response = fork.route(request);
-            if (response.has()) {
-                return response.get();
-            }
+        final Opt<Response> response = new FkChain(this.forks).route(request);
+        if (response.has()) {
+            return response.get();
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
-
 }

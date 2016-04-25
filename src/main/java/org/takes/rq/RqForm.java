@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ import org.takes.misc.VerboseIterable;
  * {@code application/x-www-form-urlencoded} format (RFC 1738).
  *
  * <p>For {@code multipart/form-data} format use
- * {@link org.takes.rq.RqMultipart.Base}.
+ * {@link org.takes.rq.multipart.RqMtBase}.
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
  * decorator before passing request to this class.

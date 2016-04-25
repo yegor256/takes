@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -54,6 +55,7 @@ import org.takes.rs.RsWithHeader;
  * @since 0.20
  */
 @EqualsAndHashCode(of = { "entry", "realm" })
+@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
     /**
@@ -83,6 +85,21 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
+        final Iterator<String> headers = new RqHeaders.Smart(
+            new RqHeaders.Base(request)
+        ).header("authorization").iterator();
+        if (!headers.hasNext()) {
+            throw new RsForward(
+                new RsWithHeader(
+                    String.format(
+                        "WWW-Authenticate: Basic ream=\"%s\" ",
+                        this.realm
+                    )
+                ),
+                HttpURLConnection.HTTP_UNAUTHORIZED,
+                new RqHref.Base(request).href()
+            );
+        }
         final String decoded = new UTF8String(
             DatatypeConverter.parseBase64Binary(
                 AUTH.split(
@@ -114,8 +131,7 @@ public final class PsBasic implements Pass {
     }
 
     @Override
-    public Response exit(final Response response, final Identity identity)
-        throws IOException {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -128,7 +144,6 @@ public final class PsBasic implements Pass {
      * @since 0.20
      */
     public interface Entry {
-
         /**
          * Check if is a valid user.
          * @param user User
@@ -146,15 +161,12 @@ public final class PsBasic implements Pass {
      * @author Endrigo Antonini (teamed@endrigo.com.br)
      * @version $Id$
      * @since 0.20
-     *
      */
     public static final class Fake implements PsBasic.Entry {
-
         /**
          * Should we authenticate a user?
          */
         private final transient boolean condition;
-
         /**
          * Ctor.
          * @param cond Condition
@@ -162,7 +174,6 @@ public final class PsBasic implements Pass {
         public Fake(final boolean cond) {
             this.condition = cond;
         }
-
         @Override
         public Opt<Identity> enter(final String usr, final String pwd) {
             final Opt<Identity> user;
@@ -173,7 +184,7 @@ public final class PsBasic implements Pass {
                     )
                 );
             } else {
-                user = new Opt.Empty<Identity>();
+                user = new Opt.Empty<>();
             }
             return user;
         }
@@ -187,10 +198,9 @@ public final class PsBasic implements Pass {
      * @since 0.20
      */
     public static final class Empty implements PsBasic.Entry {
-
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
-            return new Opt.Empty<Identity>();
+            return new Opt.Empty<>();
         }
     }
 
@@ -202,50 +212,29 @@ public final class PsBasic implements Pass {
      * @since 0.22
      */
     public static final class Default implements PsBasic.Entry {
-
         /**
          * How keys in
          * {@link org.takes.facets.auth.PsBasic.Default#usernames} are
          * formatted.
          */
         private static final String KEY_FORMAT = "%s %s";
-
         /**
          * Encoding for URLEncode#encode.
          */
         private static final String ENCODING = "UTF-8";
-
         /**
          * Map from login/password pairs to URNs.
          */
         private final transient Map<String, String> usernames;
-
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @todo #558:30min Default ctor. According to new qulice version,
-         *  constructor must contain only variables initialization and
-         *  other constructor calls. Refactor code according to that rule
-         *  and remove `ConstructorOnlyInitializesOrCallOtherConstructors`
-         *  warning suppression.
          */
-        @SuppressWarnings
-            (
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            )
         public Default(final String... users) {
-            this.usernames = new HashMap<String, String>(users.length);
-            for (final String user : users) {
-                final String unified = user.replace("%20", "+");
-                PsBasic.Default.validateUser(unified);
-                this.usernames.put(
-                    PsBasic.Default.key(unified),
-                    unified.substring(unified.lastIndexOf(' ') + 1)
-                );
-            }
+            this.usernames = Default.converted(users);
         }
 
         @Override
@@ -256,18 +245,40 @@ public final class PsBasic implements Pass {
                 try {
                     identity = new Opt.Single<Identity>(
                         new Identity.Simple(
-                            URLDecoder.decode(urn.get(), Default.ENCODING)
+                            URLDecoder.decode(
+                                urn.get(), PsBasic.Default.ENCODING
+                            )
                         )
                     );
                 } catch (final UnsupportedEncodingException ex) {
                     throw new IllegalStateException(ex);
                 }
             } else {
-                identity = new Opt.Empty<Identity>();
+                identity = new Opt.Empty<>();
             }
             return identity;
         }
-
+        /**
+         * Converts Strings with user's login, password and URN to Map.
+         * @param users Strings with user's login, password and URN with
+         *  space characters as separators. Each of login, password and urn
+         *  are URL-encoded substrings. For example,
+         *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         * @return Map from login/password pairs to URNs.
+         */
+        private static Map<String, String> converted(final String... users) {
+            final Map<String, String> result =
+                new HashMap<String, String>(users.length);
+            for (final String user : users) {
+                final String unified = user.replace("%20", "+");
+                PsBasic.Default.validateUser(unified);
+                result.put(
+                    PsBasic.Default.key(unified),
+                    unified.substring(unified.lastIndexOf(' ') + 1)
+                );
+            }
+            return result;
+        }
         /**
          * Returns an URN corresponding to a login-password pair.
          * @param user Login.
@@ -280,14 +291,14 @@ public final class PsBasic implements Pass {
             try {
                 urn = this.usernames.get(
                     String.format(
-                        Default.KEY_FORMAT,
+                        PsBasic.Default.KEY_FORMAT,
                         URLEncoder.encode(
                             user,
-                            Default.ENCODING
+                            PsBasic.Default.ENCODING
                         ),
                         URLEncoder.encode(
                             pwd,
-                            Default.ENCODING
+                            PsBasic.Default.ENCODING
                         )
                     )
                 );
@@ -296,13 +307,12 @@ public final class PsBasic implements Pass {
             }
             final Opt<String> opt;
             if (urn == null) {
-                opt = new Opt.Empty<String>();
+                opt = new Opt.Empty<>();
             } else {
-                opt = new Opt.Single<String>(urn);
+                opt = new Opt.Single<>(urn);
             }
             return opt;
         }
-
         /**
          * Creates a key for
          *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
@@ -321,14 +331,13 @@ public final class PsBasic implements Pass {
                 )
             );
         }
-
         /**
          * Checks if a unified user string is correctly formatted.
          * @param unified String with urlencoded user login, password and urn
          *  separated with spaces.
          */
         private static void validateUser(final String unified) {
-            final boolean amount = Default.countSpaces(unified) != 2;
+            final boolean amount = PsBasic.Default.countSpaces(unified) != 2;
             final boolean nearby =
                 unified.indexOf(' ') + 1 == unified.lastIndexOf(' ');
             if (amount || nearby) {
@@ -340,15 +349,14 @@ public final class PsBasic implements Pass {
                 );
             }
         }
-
         /**
          * Counts spaces in a string.
-         * @param string Any string.
+         * @param txt Any string.
          * @return Amount of spaces in string.
          */
-        private static int countSpaces(final String string) {
+        private static int countSpaces(final String txt) {
             int spaces = 0;
-            for (final char character : string.toCharArray()) {
+            for (final char character : txt.toCharArray()) {
                 if (character == ' ') {
                     spaces += 1;
                 }

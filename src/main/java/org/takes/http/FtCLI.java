@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -149,13 +149,43 @@ public final class FtCLI implements Front {
         final long max = this.options.lifetime();
         return new Exit.Or(
             exit,
-            new Exit() {
-                @Override
-                public boolean ready() {
-                    return System.currentTimeMillis() - start > max;
-                }
-            }
+            new Lifetime(start, max)
         );
     }
+
+    /**
+     * Lifetime exceeded exit.
+     *
+     * @author Dali Freire (dalifreire@gmail.com)
+     * @version $Id$
+     * @since 0.32.5
+     */
+    private static final class Lifetime implements Exit {
+
+        /**
+         * Start time.
+         */
+        private final transient long start;
+
+        /**
+         * Max lifetime.
+         */
+        private final transient long max;
+
+        /**
+         * Ctor.
+         * @param start Start time
+         * @param max Max lifetime
+         */
+        Lifetime(final long start, final long max) {
+            this.start = start;
+            this.max = max;
+        }
+
+        @Override
+        public boolean ready() {
+            return System.currentTimeMillis() - this.start > this.max;
+        }
+    };
 
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Yegor Bugayenko
+ * Copyright (c) 2014-2016 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -60,7 +60,7 @@ public final class BkTimeable extends Thread implements Back {
      * @param back Original back
      * @param msec Execution latency
      */
-    BkTimeable(final Back back, final long msec) {
+    public BkTimeable(final Back back, final long msec) {
         super();
         this.threads = new ConcurrentHashMap<Thread, Long>(1);
         this.back = back;
