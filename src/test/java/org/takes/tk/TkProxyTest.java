@@ -162,7 +162,7 @@ public final class TkProxyTest {
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                "http://%s:%d/a/b/c?h=1#test",
+                                "http://%s:%d/a/b/c?h=1",
                                 home.getHost(), home.getPort()
                             )
                         )
