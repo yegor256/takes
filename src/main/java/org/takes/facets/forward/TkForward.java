@@ -85,12 +85,17 @@ public final class TkForward implements Take {
          */
         private final transient AtomicReference<Response> saved;
         /**
+         * Mutex used to ensure the thread safety of the lazy loading.
+         */
+        private final transient Object mutex;
+        /**
          * Ctor.
          * @param res Original response
          */
         private Safe(final Response res) {
             this.origin = res;
             this.saved = new AtomicReference<>();
+            this.mutex = new Object();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -107,16 +112,20 @@ public final class TkForward implements Take {
          */
         private Response load() throws IOException {
             if (this.saved.get() == null) {
-                Iterable<String> head;
-                InputStream body;
-                try {
-                    head = this.origin.head();
-                    body = this.origin.body();
-                } catch (final RsForward ex) {
-                    head = ex.head();
-                    body = ex.body();
+                synchronized (this.mutex) {
+                    if (this.saved.get() == null) {
+                        Iterable<String> head;
+                        InputStream body;
+                        try {
+                            head = this.origin.head();
+                            body = this.origin.body();
+                        } catch (final RsForward ex) {
+                            head = ex.head();
+                            body = ex.body();
+                        }
+                        this.saved.set(new RsSimple(head, body));
+                    }
                 }
-                this.saved.compareAndSet(null, new RsSimple(head, body));
             }
             return this.saved.get();
         }

@@ -57,12 +57,18 @@ public final class RsGzip implements Response {
     private final transient AtomicReference<Response> zipped;
 
     /**
+     * Mutex used to ensure the thread safety of the lazy loading.
+     */
+    private final transient Object mutex;
+
+    /**
      * Ctor.
      * @param res Original response
      */
     public RsGzip(final Response res) {
         this.zipped = new AtomicReference<>();
         this.origin = res;
+        this.mutex = new Object();
     }
 
     @Override
@@ -82,17 +88,20 @@ public final class RsGzip implements Response {
      */
     private Response make() throws IOException {
         if (this.zipped.get() == null) {
-            this.zipped.compareAndSet(
-                null,
-                new RsWithHeader(
-                    new RsWithBody(
-                        this.origin,
-                        RsGzip.gzip(this.origin.body())
-                    ),
-                    "Content-Encoding",
-                    "gzip"
-                )
-            );
+            synchronized (this.mutex) {
+                if (this.zipped.get() == null) {
+                    this.zipped.set(
+                        new RsWithHeader(
+                            new RsWithBody(
+                                this.origin,
+                                RsGzip.gzip(this.origin.body())
+                            ),
+                            "Content-Encoding",
+                            "gzip"
+                        )
+                    );
+                }
+            }
         }
         return this.zipped.get();
     }

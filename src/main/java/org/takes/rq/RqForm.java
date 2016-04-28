@@ -100,6 +100,10 @@ public interface RqForm extends Request {
          */
         private final transient AtomicReference<Map<String, List<String>>> saved;
         /**
+         * Mutex used to ensure the thread safety of the lazy loading.
+         */
+        private final transient Object mutex;
+        /**
          * Ctor.
          * @param request Original request
          */
@@ -107,6 +111,7 @@ public interface RqForm extends Request {
             super(request);
             this.saved = new AtomicReference<>();
             this.req = request;
+            this.mutex = new Object();
         }
         @Override
         public Iterable<String> param(final CharSequence key)
@@ -158,10 +163,13 @@ public interface RqForm extends Request {
          */
         private Map<String, List<String>> map() throws IOException {
             if (this.saved.get() == null) {
-                this.saved.compareAndSet(
-                    null,
-                    Collections.unmodifiableMap(this.freshMap())
-                );
+                synchronized (this.mutex) {
+                    if (this.saved.get() == null) {
+                        this.saved.set(
+                            Collections.unmodifiableMap(this.freshMap())
+                        );
+                    }
+                }
             }
             return this.saved.get();
         }
