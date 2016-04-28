@@ -62,12 +62,18 @@ public final class RsPrettyJSON implements Response {
     private final transient AtomicReference<Response> transformed;
 
     /**
+     * Mutex used to ensure the thread safety of the lazy loading.
+     */
+    private final transient Object mutex;
+
+    /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyJSON(final Response res) {
         this.transformed = new AtomicReference<>();
         this.origin = res;
+        this.mutex = new Object();
     }
 
     @Override
@@ -87,13 +93,16 @@ public final class RsPrettyJSON implements Response {
      */
     private Response make() throws IOException {
         if (this.transformed.get() == null) {
-            this.transformed.compareAndSet(
-                null,
-                new RsWithBody(
-                    this.origin,
-                    RsPrettyJSON.transform(this.origin.body())
-                )
-            );
+            synchronized (this.mutex) {
+                if (this.transformed.get() == null) {
+                    this.transformed.set(
+                        new RsWithBody(
+                            this.origin,
+                            RsPrettyJSON.transform(this.origin.body())
+                        )
+                    );
+                }
+            }
         }
         return this.transformed.get();
     }
