@@ -26,10 +26,10 @@ package org.takes.misc;
 import java.nio.charset.Charset;
 
 /**
- * String that used UTF-8 encoding for all byte operations.
+ * String that uses UTF-8 encoding for all byte operations.
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.32.9
+ * @since 0.33
  */
 public final class Utf8String {
 
