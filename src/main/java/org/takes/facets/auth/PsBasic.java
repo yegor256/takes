@@ -40,7 +40,7 @@ import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeader;
@@ -100,7 +100,7 @@ public final class PsBasic implements Pass {
                 new RqHref.Base(request).href()
             );
         }
-        final String decoded = new UTF8String(
+        final String decoded = new Utf8String(
             DatatypeConverter.parseBase64Binary(
                 PsBasic.AUTH.split(headers.next())[1]
             )

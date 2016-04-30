@@ -27,7 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
@@ -112,7 +112,7 @@ public final class RqWithAuth extends RqWrap {
         return new RqWithHeader(
             req,
             header,
-            new UTF8String(new CcPlain().encode(identity)).string()
+            new Utf8String(new CcPlain().encode(identity)).string()
         );
     }
 

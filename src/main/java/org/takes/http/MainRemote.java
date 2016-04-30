@@ -33,7 +33,7 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 
 /**
  * Front remote control.
@@ -129,7 +129,7 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new UTF8String(buf).string().trim());
+            port = Integer.parseInt(new Utf8String(buf).string().trim());
         } finally {
             input.close();
         }

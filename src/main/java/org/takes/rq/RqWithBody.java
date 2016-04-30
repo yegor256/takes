@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 
 /**
  * Request with body.
@@ -55,7 +55,7 @@ public final class RqWithBody extends RqWrap {
             @Override
             public InputStream body() {
                 return new ByteArrayInputStream(
-                    new UTF8String(bdy.toString()).bytes()
+                    new Utf8String(bdy.toString()).bytes()
                 );
             }
         });

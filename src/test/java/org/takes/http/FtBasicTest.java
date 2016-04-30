@@ -39,7 +39,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
@@ -218,7 +218,7 @@ public final class FtBasicTest {
                     FtBasicTest.ROOT_PATH,
                     new RsText(
                         new ByteArrayInputStream(
-                            new UTF8String(result).bytes()
+                            new Utf8String(result).bytes()
                         )
                     )
                 )
@@ -255,7 +255,7 @@ public final class FtBasicTest {
                     FtBasicTest.ROOT_PATH,
                     new RsHTML(
                         new ByteArrayInputStream(
-                            new UTF8String(result).bytes()
+                            new Utf8String(result).bytes()
                         )
                     )
                 )

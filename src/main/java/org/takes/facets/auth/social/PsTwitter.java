@@ -40,7 +40,7 @@ import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
 import org.takes.misc.Opt;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 
 /**
  * Twitter OAuth landing/callback page.
@@ -185,7 +185,7 @@ public final class PsTwitter implements Pass {
                 "Authorization",
                 String.format(
                     "Basic %s", DatatypeConverter.printBase64Binary(
-                        new UTF8String(
+                        new Utf8String(
                             String.format("%s:%s", this.app, this.key)
                         ).bytes()
                     )

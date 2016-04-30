@@ -28,7 +28,7 @@ import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWrap;
 
@@ -78,7 +78,7 @@ public final class RqAuth extends RqWrap {
         final Identity user;
         if (headers.hasNext()) {
             user = new CcPlain().decode(
-                new UTF8String(headers.next()).bytes()
+                new Utf8String(headers.next()).bytes()
             );
         } else {
             user = Identity.ANONYMOUS;

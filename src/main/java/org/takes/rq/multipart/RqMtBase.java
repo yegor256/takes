@@ -48,7 +48,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHeaders;
@@ -210,7 +210,7 @@ public final class RqMtBase implements RqMultipart {
                 "failed to read the request body"
             );
         }
-        final byte[] boundary = new UTF8String(
+        final byte[] boundary = new Utf8String(
             String.format("%s--%s", RqMtBase.CRLF, matcher.group(1))
         ).bytes();
         this.buffer.flip();
@@ -246,11 +246,11 @@ public final class RqMtBase implements RqMultipart {
         try {
             channel.write(
                 ByteBuffer.wrap(
-                    new UTF8String(this.head().iterator().next()).bytes()
+                    new Utf8String(this.head().iterator().next()).bytes()
                 )
             );
             channel.write(
-                ByteBuffer.wrap(new UTF8String(RqMtBase.CRLF).bytes())
+                ByteBuffer.wrap(new Utf8String(RqMtBase.CRLF).bytes())
             );
             this.copy(channel, boundary, body);
         } finally {

@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 
 /**
  * Plain codec.
@@ -59,12 +59,12 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return new UTF8String(text.toString()).bytes();
+        return new Utf8String(text.toString()).bytes();
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final String[] parts = new UTF8String(bytes).string().split(";");
+        final String[] parts = new Utf8String(bytes).string().split(";");
         final Map<String, String> map =
             new HashMap<String, String>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {

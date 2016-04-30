@@ -29,12 +29,12 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link UTF8String}.
+ * Test case for {@link Utf8String}.
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.32.8
+ * @since 0.32.9
  */
-public final class UTF8StringTest {
+public final class Utf8StringTest {
 
     /**
      * UTF-8 encoding.
@@ -42,35 +42,35 @@ public final class UTF8StringTest {
     private static final String ENCODING = "UTF-8";
 
     /**
-     * Can be constructed from string.
+     * Utf8String can be constructed from string.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
     public void canConstructFromString() throws UnsupportedEncodingException {
         final String test = "Hello こんにちは Привет";
-        final UTF8String str = new UTF8String(test);
+        final Utf8String str = new Utf8String(test);
         MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
         MatcherAssert.assertThat(
             str.bytes(),
-            Matchers.equalTo(test.getBytes(UTF8StringTest.ENCODING))
+            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 
     /**
-     * Can be constructed from bytes array.
+     * Utf8String can be constructed from bytes array.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
     public void canBeConstructedFromBytes()
         throws UnsupportedEncodingException {
         final String test = "Bye 同時に Пока";
-        final UTF8String str = new UTF8String(
-            test.getBytes(UTF8StringTest.ENCODING)
+        final Utf8String str = new Utf8String(
+            test.getBytes(Utf8StringTest.ENCODING)
         );
         MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
         MatcherAssert.assertThat(
             str.bytes(),
-            Matchers.equalTo(test.getBytes(UTF8StringTest.ENCODING))
+            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 }

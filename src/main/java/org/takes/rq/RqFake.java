@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 
 /**
  * Fake request (for unit tests).
@@ -91,7 +91,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final CharSequence body) {
-        this(head, new UTF8String(body.toString()).bytes());
+        this(head, new Utf8String(body.toString()).bytes());
     }
 
     /**

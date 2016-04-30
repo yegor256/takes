@@ -26,13 +26,12 @@ package org.takes.misc;
 import java.nio.charset.Charset;
 
 /**
- * UTF string.
- *
+ * String that used UTF-8 encoding for all byte operations.
  * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.32.8
+ * @since 0.32.9
  */
-public final class UTF8String {
+public final class Utf8String {
 
     /**
      * UTF-8 encoding.
@@ -48,7 +47,7 @@ public final class UTF8String {
      * Ctor.
      * @param string String value
      */
-    public UTF8String(final String string) {
+    public Utf8String(final String string) {
         this.value = string;
     }
 
@@ -56,8 +55,8 @@ public final class UTF8String {
      * Ctor.
      * @param bytes Bytes to construct UTF-8 string value
      */
-    public UTF8String(final byte... bytes) {
-        this(new String(bytes, Charset.forName(UTF8String.ENCODING)));
+    public Utf8String(final byte... bytes) {
+        this(new String(bytes, Charset.forName(Utf8String.ENCODING)));
     }
 
     /**
@@ -65,7 +64,7 @@ public final class UTF8String {
      * @return Sequence of bytes
      */
     public byte[] bytes() {
-        return this.value.getBytes(Charset.forName(UTF8String.ENCODING));
+        return this.value.getBytes(Charset.forName(Utf8String.ENCODING));
     }
 
     /**

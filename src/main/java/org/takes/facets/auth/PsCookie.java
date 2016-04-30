@@ -33,7 +33,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
 import org.takes.misc.Opt;
-import org.takes.misc.UTF8String;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqCookies;
 import org.takes.rs.RsWithCookie;
 
@@ -103,7 +103,7 @@ public final class PsCookie implements Pass {
         if (cookies.hasNext()) {
             user = new Opt.Single<Identity>(
                 this.codec.decode(
-                    new UTF8String(cookies.next()).bytes()
+                    new Utf8String(cookies.next()).bytes()
                 )
             );
         }
@@ -117,7 +117,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new UTF8String(this.codec.encode(idt)).string();
+            text = new Utf8String(this.codec.encode(idt)).string();
         }
         return new RsWithCookie(
             res, this.cookie, text,
