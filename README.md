@@ -38,6 +38,33 @@ This is what is not supported and won't be supported:
 
 These [blog posts](http://www.yegor256.com/tag/takes.org.html) may help you too.
 
+## Contents
+
+- [Quick Start](#quick-start)
+- [Build and Run With Maven](#build-a-run-with-maven)
+- [Unit Testing](#unit-testing)
+- [Integration Testing](#integration-testing)
+- [A Bigger Example](#a-bigger-example)
+- [Templates](#templates)
+	- [Velocity Templates](#velocity-templates)
+- [Static Resources](#static-resources)
+- [Hit Refresh Debugging](#hit-refresh-debugging)
+- [Request Methods (POST, PUT, HEAD, etc.)](#request-methods)
+- [Request Parsing](#request-parsing)
+- [Form Processing](#form-processing)
+- [Exception Handling](#exception-handling)
+- [Redirects](#redirects)
+- [RsJSON](#rsjson)
+- [RsXembly](#rsxembly)
+- [GZIP Compression](#gzip-compression)
+- [Authentication](#authentication)
+- [Command Line Arguments](#command-line-arguments)
+- [Logging](#logging)
+- [Directory Layout](#directory-layout)
+- [Optional dependencies](#optional-dependencies)
+- [How to contribute](#how-to-contribute)
+- [Got questions?](#got-questions)
+
 ## Quick Start
 
 Create this `App.java` file:
