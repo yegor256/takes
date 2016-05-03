@@ -29,7 +29,6 @@ import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import javax.json.JsonObject;
@@ -41,6 +40,7 @@ import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
 import org.takes.misc.Opt;
+import org.takes.misc.Utf8String;
 
 /**
  * Twitter OAuth landing/callback page.
@@ -185,8 +185,9 @@ public final class PsTwitter implements Pass {
                 "Authorization",
                 String.format(
                     "Basic %s", DatatypeConverter.printBase64Binary(
-                        String.format("%s:%s", this.app, this.key)
-                            .getBytes(StandardCharsets.UTF_8)
+                        new Utf8String(
+                            String.format("%s:%s", this.app, this.key)
+                        ).bytes()
                     )
                 )
             )

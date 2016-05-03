@@ -42,6 +42,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.log.NullLogChute;
 import org.takes.Response;
+import org.takes.misc.Utf8String;
 
 /**
  * Response that converts Velocity template to text.
@@ -82,7 +83,7 @@ public final class RsVelocity extends RsWrap {
         final RsVelocity.Pair... params) {
         this(
             new ByteArrayInputStream(
-                template.toString().getBytes(StandardCharsets.UTF_8)
+                new Utf8String(template.toString()).bytes()
             ), params
         );
     }

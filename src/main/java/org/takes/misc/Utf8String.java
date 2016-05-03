@@ -21,58 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.misc;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
-import org.takes.misc.Utf8String;
+import java.nio.charset.Charset;
 
 /**
- * Simple response.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * String that uses UTF-8 encoding for all byte operations.
+ * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
- * @since 0.17
+ * @since 0.33
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class RsSimple extends RsWrap {
+public final class Utf8String {
+
+    /**
+     * UTF-8 encoding.
+     */
+    private static final String ENCODING = "UTF-8";
+
+    /**
+     * String value.
+     */
+    private final transient String value;
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param string String value
      */
-    public RsSimple(final Iterable<String> head, final String body) {
-        this(
-            head,
-            new ByteArrayInputStream(new Utf8String(body).bytes())
-        );
+    public Utf8String(final String string) {
+        this.value = string;
     }
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param bytes Bytes to construct UTF-8 string value
      */
-    public RsSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
-        );
+    public Utf8String(final byte... bytes) {
+        this(new String(bytes, Charset.forName(Utf8String.ENCODING)));
     }
 
+    /**
+     * Encodes string value into a sequence of bytes using UTF-8 charset.
+     * @return Sequence of bytes
+     */
+    public byte[] bytes() {
+        return this.value.getBytes(Charset.forName(Utf8String.ENCODING));
+    }
+
+    /**
+     * Returns string value.
+     * @return String value
+     */
+    public String string() {
+        return this.value;
+    }
 }

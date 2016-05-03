@@ -35,7 +35,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,6 +48,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
+import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHeaders;
@@ -210,9 +210,9 @@ public final class RqMtBase implements RqMultipart {
                 "failed to read the request body"
             );
         }
-        final byte[] boundary = String.format(
-            "%s--%s", RqMtBase.CRLF, matcher.group(1)
-        ).getBytes(StandardCharsets.UTF_8);
+        final byte[] boundary = new Utf8String(
+            String.format("%s--%s", RqMtBase.CRLF, matcher.group(1))
+        ).bytes();
         this.buffer.flip();
         this.buffer.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
@@ -246,15 +246,11 @@ public final class RqMtBase implements RqMultipart {
         try {
             channel.write(
                 ByteBuffer.wrap(
-                    this.head().iterator().next().getBytes(
-                        StandardCharsets.UTF_8
-                    )
+                    new Utf8String(this.head().iterator().next()).bytes()
                 )
             );
             channel.write(
-                ByteBuffer.wrap(
-                    RqMtBase.CRLF.getBytes(StandardCharsets.UTF_8)
-                )
+                ByteBuffer.wrap(new Utf8String(RqMtBase.CRLF).bytes())
             );
             this.copy(channel, boundary, body);
         } finally {

@@ -24,10 +24,10 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
+import org.takes.misc.Utf8String;
 
 /**
  * XOR codec.
@@ -57,7 +57,7 @@ public final class CcXOR implements Codec {
      * @param key Secret key for encoding
      */
     public CcXOR(final Codec codec, final String key) {
-        this(codec, key.getBytes(StandardCharsets.UTF_8));
+        this(codec, new Utf8String(key).bytes());
     }
 
     /**
