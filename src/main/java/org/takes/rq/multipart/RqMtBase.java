@@ -24,6 +24,7 @@
 package org.takes.rq.multipart;
 
 import java.io.File;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -32,8 +33,10 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,11 +50,7 @@ import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
-import org.takes.rq.RqLive;
 import org.takes.rq.RqMultipart;
-import org.takes.rq.RqWithHeader;
-import org.takes.rq.RqWrap;
-import org.takes.rq.TempInputStream;
 
 /**
  * Request decorator, that decodes FORM data from
@@ -132,7 +131,7 @@ public final class RqMtBase implements RqMultipart {
         final Iterable<Request> iter;
         if (values == null) {
             iter = new VerboseIterable<>(
-                java.util.Collections.<Request>emptyList(),
+                Collections.<Request>emptyList(),
                 new Sprintf(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
@@ -231,7 +230,7 @@ public final class RqMtBase implements RqMultipart {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );
-        try (WritableByteChannel channel = java.nio.file.Files.newByteChannel(
+        try (WritableByteChannel channel = Files.newByteChannel(
             file.toPath(),
             StandardOpenOption.READ,
             StandardOpenOption.WRITE
@@ -247,7 +246,7 @@ public final class RqMtBase implements RqMultipart {
             );
             this.copy(channel, boundary, body);
         }
-        return new RqMtBase.RqTemp(file);
+        return new RqTemp(file);
     }
     /**
      * Copy until boundary reached.
@@ -330,7 +329,7 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Decorator allowing to close all the parts of the request.
      */
-    private class CloseMultipart extends java.io.FilterInputStream {
+    private class CloseMultipart extends FilterInputStream {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
@@ -352,34 +351,6 @@ public final class RqMtBase implements RqMultipart {
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * Request with a temporary file as body. The temporary file will be deleted
-     * automatically when the body of the request will be closed.
-     */
-    @lombok.EqualsAndHashCode(callSuper = true)
-    private static final class RqTemp extends RqWrap {
-
-        /**
-         * Creates a {@code RqTemp} with the specified temporary file.
-         * @param file The temporary file.
-         * @throws IOException If fails
-         */
-        RqTemp(final File file) throws IOException {
-            super(
-                new RqWithHeader(
-                    new RqLive(
-                        new TempInputStream(
-                            new java.io.FileInputStream(file),
-                            file
-                        )
-                    ),
-                    "Content-Length",
-                    String.valueOf(file.length())
-                )
-            );
         }
     }
 }
