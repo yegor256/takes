@@ -24,7 +24,6 @@
 package org.takes.rq.multipart;
 
 import java.io.File;
-import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -32,11 +31,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.nio.charset.Charset;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,8 +47,11 @@ import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
+import org.takes.rq.RqLive;
 import org.takes.rq.RqMultipart;
-import org.takes.rq.RqTemp;
+import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWrap;
+import org.takes.rq.TempInputStream;
 
 /**
  * Request decorator, that decodes FORM data from
@@ -74,6 +74,10 @@ import org.takes.rq.RqTemp;
  */
 @lombok.EqualsAndHashCode(of = "origin")
 public final class RqMtBase implements RqMultipart {
+    /**
+     * The encoding used to create the request.
+     */
+    private static final Charset ENCODING = Charset.forName("UTF-8");
     /**
      * Pattern to get boundary from header.
      */
@@ -128,7 +132,7 @@ public final class RqMtBase implements RqMultipart {
         final Iterable<Request> iter;
         if (values == null) {
             iter = new VerboseIterable<>(
-                Collections.<Request>emptyList(),
+                java.util.Collections.<Request>emptyList(),
                 new Sprintf(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
@@ -199,7 +203,7 @@ public final class RqMtBase implements RqMultipart {
         }
         final byte[] boundary = String.format(
             "%s--%s", RqMtBase.CRLF, matcher.group(1)
-        ).getBytes(StandardCharsets.UTF_8);
+        ).getBytes(RqMtBase.ENCODING);
         this.buffer.flip();
         this.buffer.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
@@ -227,7 +231,7 @@ public final class RqMtBase implements RqMultipart {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );
-        try (WritableByteChannel channel = Files.newByteChannel(
+        try (WritableByteChannel channel = java.nio.file.Files.newByteChannel(
             file.toPath(),
             StandardOpenOption.READ,
             StandardOpenOption.WRITE
@@ -235,19 +239,15 @@ public final class RqMtBase implements RqMultipart {
         ) {
             channel.write(
                 ByteBuffer.wrap(
-                    this.head().iterator().next().getBytes(
-                        StandardCharsets.UTF_8
-                    )
+                    this.head().iterator().next().getBytes(RqMtBase.ENCODING)
                 )
             );
             channel.write(
-                ByteBuffer.wrap(
-                    RqMtBase.CRLF.getBytes(StandardCharsets.UTF_8)
-                )
+                ByteBuffer.wrap(RqMtBase.CRLF.getBytes(RqMtBase.ENCODING))
             );
             this.copy(channel, boundary, body);
         }
-        return new RqTemp(file);
+        return new RqMtBase.RqTemp(file);
     }
     /**
      * Copy until boundary reached.
@@ -330,7 +330,7 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Decorator allowing to close all the parts of the request.
      */
-    private class CloseMultipart extends FilterInputStream {
+    private class CloseMultipart extends java.io.FilterInputStream {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
@@ -352,6 +352,34 @@ public final class RqMtBase implements RqMultipart {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Request with a temporary file as body. The temporary file will be deleted
+     * automatically when the body of the request will be closed.
+     */
+    @lombok.EqualsAndHashCode(callSuper = true)
+    private static final class RqTemp extends RqWrap {
+
+        /**
+         * Creates a {@code RqTemp} with the specified temporary file.
+         * @param file The temporary file.
+         * @throws IOException If fails
+         */
+        RqTemp(final File file) throws IOException {
+            super(
+                new RqWithHeader(
+                    new RqLive(
+                        new TempInputStream(
+                            new java.io.FileInputStream(file),
+                            file
+                        )
+                    ),
+                    "Content-Length",
+                    String.valueOf(file.length())
+                )
+            );
         }
     }
 }

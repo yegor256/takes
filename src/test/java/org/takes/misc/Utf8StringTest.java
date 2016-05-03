@@ -21,53 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.misc;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.UnsupportedEncodingException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.Request;
 
 /**
- * Test case for {@link RqTemp}.
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
+ * Test case for {@link Utf8String}.
+ * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.33
  */
-public final class RqTempTest {
+public final class Utf8StringTest {
 
     /**
-     * RqTemp can delete the underlying temporary file.
-     * @throws IOException if some problem occurs.
+     * UTF-8 encoding.
+     */
+    private static final String ENCODING = "UTF-8";
+
+    /**
+     * Utf8String can be constructed from string.
+     * @throws UnsupportedEncodingException If fails
      */
     @Test
-    public void deletesTempFile() throws IOException {
-        final File file = File.createTempFile(
-            RqTempTest.class.getName(),
-            ".tmp"
-        );
-        Files.write(
-            file.toPath(),
-            "Temp file deletion test".getBytes(StandardCharsets.UTF_8)
-        );
-        final Request request = new RqTemp(file);
-        try {
-            MatcherAssert.assertThat(
-                "File is not created!",
-                file.exists(),
-                Matchers.is(true)
-            );
-        } finally {
-            request.body().close();
-        }
+    public void canConstructFromString() throws UnsupportedEncodingException {
+        final String test = "Hello こんにちは Привет";
+        final Utf8String str = new Utf8String(test);
+        MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
         MatcherAssert.assertThat(
-            "File exists after stream closure",
-            file.exists(),
-            Matchers.is(false)
+            str.bytes(),
+            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
+        );
+    }
+
+    /**
+     * Utf8String can be constructed from bytes array.
+     * @throws UnsupportedEncodingException If fails
+     */
+    @Test
+    public void canBeConstructedFromBytes()
+        throws UnsupportedEncodingException {
+        final String test = "Bye 同時に Пока";
+        final Utf8String str = new Utf8String(
+            test.getBytes(Utf8StringTest.ENCODING)
+        );
+        MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
+        MatcherAssert.assertThat(
+            str.bytes(),
+            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 }

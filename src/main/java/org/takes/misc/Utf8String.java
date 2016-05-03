@@ -21,39 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.misc;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import lombok.EqualsAndHashCode;
+import java.nio.charset.Charset;
 
 /**
- * Live request with a temporary file as body.
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
+ * String that uses UTF-8 encoding for all byte operations.
+ * @author Maksimenko Vladimir (xupypr@xupypr.com)
  * @version $Id$
  * @since 0.33
- * @see org.takes.rq.RqLive
- * @see org.takes.rq.TempInputStream
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqTemp extends RqWrap {
+public final class Utf8String {
 
     /**
-     * Creates a {@code RqTemp} with the specified temporary file.
-     * @param file The temporary that will be automatically deleted when the
-     *  body of the request will be closed.
-     * @throws IOException If fails
+     * UTF-8 encoding.
      */
-    public RqTemp(final File file) throws IOException {
-        super(
-            new RqWithHeader(
-                new RqLive(
-                    new TempInputStream(new FileInputStream(file), file)
-                ),
-                "Content-Length",
-                String.valueOf(file.length())
-            )
-        );
+    private static final String ENCODING = "UTF-8";
+
+    /**
+     * String value.
+     */
+    private final transient String value;
+
+    /**
+     * Ctor.
+     * @param string String value
+     */
+    public Utf8String(final String string) {
+        this.value = string;
+    }
+
+    /**
+     * Ctor.
+     * @param bytes Bytes to construct UTF-8 string value
+     */
+    public Utf8String(final byte... bytes) {
+        this(new String(bytes, Charset.forName(Utf8String.ENCODING)));
+    }
+
+    /**
+     * Encodes string value into a sequence of bytes using UTF-8 charset.
+     * @return Sequence of bytes
+     */
+    public byte[] bytes() {
+        return this.value.getBytes(Charset.forName(Utf8String.ENCODING));
+    }
+
+    /**
+     * Returns string value.
+     * @return String value
+     */
+    public String string() {
+        return this.value;
     }
 }

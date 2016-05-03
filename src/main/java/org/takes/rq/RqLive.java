@@ -27,13 +27,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Opt;
+import org.takes.misc.Utf8String;
 
 /**
  * Live request.
@@ -121,7 +121,7 @@ public final class RqLive extends RqWrap {
                 String.format(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new String(baos.toByteArray(), StandardCharsets.UTF_8)
+                    new Utf8String(baos.toByteArray()).string()
                 )
             );
         }
@@ -138,7 +138,7 @@ public final class RqLive extends RqWrap {
         Opt<String> header = new Opt.Empty<>();
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Opt.Single<>(
-                new String(baos.toByteArray(), StandardCharsets.UTF_8)
+                new Utf8String(baos.toByteArray()).string()
             );
             baos.reset();
         }
@@ -165,7 +165,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new String(baos.toByteArray(), StandardCharsets.UTF_8)
+                    new Utf8String(baos.toByteArray()).string()
                 )
             );
         }
