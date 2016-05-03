@@ -37,7 +37,7 @@ import lombok.EqualsAndHashCode;
  * @see org.takes.rq.TempInputStream
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqTemp extends RqLive {
+public final class RqTemp extends RqWrap {
 
     /**
      * Creates a {@code RqTemp} with the specified temporary file.
@@ -46,6 +46,14 @@ public final class RqTemp extends RqLive {
      * @throws IOException If fails
      */
     public RqTemp(final File file) throws IOException {
-        super(new TempInputStream(new FileInputStream(file), file));
+        super(
+            new RqWithHeader(
+                new RqLive(
+                    new TempInputStream(new FileInputStream(file), file)
+                ),
+                "Content-Length",
+                String.valueOf(file.length())
+            )
+        );
     }
 }

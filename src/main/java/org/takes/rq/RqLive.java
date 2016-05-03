@@ -45,7 +45,7 @@ import org.takes.misc.Opt;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-public class RqLive extends RqWrap {
+public final class RqLive extends RqWrap {
 
     /**
      * Ctor.

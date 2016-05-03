@@ -46,12 +46,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMultipart;
 import org.takes.rq.RqTemp;
-import org.takes.rq.RqWithHeader;
 
 /**
  * Request decorator, that decodes FORM data from
@@ -129,7 +129,7 @@ public final class RqMtBase implements RqMultipart {
         if (values == null) {
             iter = new VerboseIterable<>(
                 Collections.<Request>emptyList(),
-                String.format(
+                new Sprintf(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
                 )
@@ -137,7 +137,7 @@ public final class RqMtBase implements RqMultipart {
         } else {
             iter = new VerboseIterable<>(
                 values,
-                String.format(
+                new Sprintf(
                     "there are just %d parts by name \"%s\"",
                     values.size(), name
                 )
@@ -247,11 +247,7 @@ public final class RqMtBase implements RqMultipart {
             );
             this.copy(channel, boundary, body);
         }
-        return new RqWithHeader(
-            new RqTemp(file),
-            "Content-Length",
-            String.valueOf(file.length())
-        );
+        return new RqTemp(file);
     }
     /**
      * Copy until boundary reached.
