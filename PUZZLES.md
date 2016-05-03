@@ -31,13 +31,13 @@ There are 3 active puzzles (64 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>306-0f8af5fd</del> [`BkReuseTest.java:46-49`](../master/src/test/java/org/takes/http/BkReuseTest.java#L46-L49)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>306-07904f4e</del> [`BkReuseTest.java:50-53`](../master/src/test/java/org/takes/http/BkReuseTest.java#L50-L53)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>377</del>](https://github.com/yegor256/takes/issues/377) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#458](https://github.com/yegor256/takes/issues/458):[<del>377-e6ce369a</del>](https://github.com/yegor256/takes/issues/458) [`TkProxyTest.java:40-42`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>377-e6ce369a</del>](https://github.com/yegor256/takes/issues/458) [`TkProxyTest.java:40-42`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L40-L42)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#656](https://github.com/yegor256/takes/issues/656):[<del>458-ca123cf9</del>](https://github.com/yegor256/takes/issues/656) [`TkProxyTest.java:52-54`](../master/src/test/java/org/takes/tk/TkProxyTest.java#L52-L54)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>445</del>](https://github.com/yegor256/takes/issues/445) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>445-5323c196</del> [`RqHref.java:83-86`](../master/src/main/java/org/takes/rq/RqHref.java#L83-L86)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>490</del>](https://github.com/yegor256/takes/issues/490) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>490-c74fee69</del> [`RqHeaders.java:93-98`](../master/src/main/java/org/takes/rq/RqHeaders.java#L93-L98)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[#519](https://github.com/yegor256/takes/issues/519):[<del>306-b987400a</del>](https://github.com/yegor256/takes/issues/519) [`BkBasicTest.java:57-60`](../master/src/test/java/org/takes/http/BkBasicTest.java#L57-L60)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<del>306-b987400a</del>](https://github.com/yegor256/takes/issues/519) [`BkBasicTest.java:57-60`](../master/src/test/java/org/takes/http/BkBasicTest.java#L57-L60)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#655](https://github.com/yegor256/takes/issues/655):[<del>519-af7d4687</del>](https://github.com/yegor256/takes/issues/655) [`RqLive.java:47-49`](../master/src/main/java/org/takes/rq/RqLive.java#L47-L49)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>516</del>](https://github.com/yegor256/takes/issues/516) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>516-c8aa6c8f</del> [`BkBasicTest.java:67-68`](../master/src/test/java/org/takes/http/BkBasicTest.java#L67-L68)<br/>
@@ -65,5 +65,5 @@ There are 3 active puzzles (64 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-d68bc52e</del> [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-40a8e0fe</del> [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#625](https://github.com/yegor256/takes/issues/625):[<del>620-91883c6a</del>](https://github.com/yegor256/takes/issues/625) [`RqMultipartTest.java:91-98`](../master/src/test/java/org/takes/rq/RqMultipartTest.java#L91-L98)<br/>
-[#651](https://github.com/yegor256/takes/issues/651):[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[**651-43df2f64**]() [`RqMtBase.java:80-83`](../master/src/main/java/org/takes/rq/multipart/RqMtBase.java#L80-L83)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#651](https://github.com/yegor256/takes/issues/651):[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#666](https://github.com/yegor256/takes/issues/666):[**651-43df2f64**](https://github.com/yegor256/takes/issues/666) [`RqMtBase.java:80-83`](../master/src/main/java/org/takes/rq/multipart/RqMtBase.java#L80-L83)<br/>

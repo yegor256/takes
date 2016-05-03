@@ -156,13 +156,13 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(
                                 new RqFake(
-                                    TkProxyTest.this.method, "/a/b/c"
+                                    TkProxyTest.this.method, "/a/b/c?h=1#test"
                                 )
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                "http://%s:%d/a/b/c",
+                                "http://%s:%d/a/b/c?h=1",
                                 home.getHost(), home.getPort()
                             )
                         )
