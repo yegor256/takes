@@ -23,9 +23,11 @@
  */
 package org.takes.facets.forward;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -83,19 +85,14 @@ public final class TkForward implements Take {
         /**
          * Saved response.
          */
-        private final transient AtomicReference<Response> saved;
-        /**
-         * Mutex used to ensure the thread safety of the lazy loading.
-         */
-        private final transient Object mutex;
+        private final transient List<Response> saved;
         /**
          * Ctor.
          * @param res Original response
          */
         private Safe(final Response res) {
             this.origin = res;
-            this.saved = new AtomicReference<>();
-            this.mutex = new Object();
+            this.saved = new CopyOnWriteArrayList<Response>();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -110,24 +107,23 @@ public final class TkForward implements Take {
          * @return Response
          * @throws IOException If fails
          */
+        @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
         private Response load() throws IOException {
-            if (this.saved.get() == null) {
-                synchronized (this.mutex) {
-                    if (this.saved.get() == null) {
-                        Iterable<String> head;
-                        InputStream body;
-                        try {
-                            head = this.origin.head();
-                            body = this.origin.body();
-                        } catch (final RsForward ex) {
-                            head = ex.head();
-                            body = ex.body();
-                        }
-                        this.saved.set(new RsSimple(head, body));
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    Iterable<String> head;
+                    InputStream body;
+                    try {
+                        head = this.origin.head();
+                        body = this.origin.body();
+                    } catch (final RsForward ex) {
+                        head = ex.head();
+                        body = ex.body();
                     }
+                    this.saved.add(new RsSimple(head, body));
                 }
             }
-            return this.saved.get();
+            return this.saved.get(0);
         }
     }
 

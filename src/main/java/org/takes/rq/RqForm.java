@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +40,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -96,22 +97,16 @@ public interface RqForm extends Request {
         private final transient Request req;
         /**
          * Saved map.
-         * @checkstyle LineLength (2 lines)
          */
-        private final transient AtomicReference<Map<String, List<String>>> saved;
-        /**
-         * Mutex used to ensure the thread safety of the lazy loading.
-         */
-        private final transient Object mutex;
+        private final transient List<Map<String, List<String>>> saved;
         /**
          * Ctor.
          * @param request Original request
          */
         public Base(final Request request) {
             super(request);
-            this.saved = new AtomicReference<>();
+            this.saved = new CopyOnWriteArrayList<>();
             this.req = request;
-            this.mutex = new Object();
         }
         @Override
         public Iterable<String> param(final CharSequence key)
@@ -161,17 +156,14 @@ public interface RqForm extends Request {
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
+        @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
         private Map<String, List<String>> map() throws IOException {
-            if (this.saved.get() == null) {
-                synchronized (this.mutex) {
-                    if (this.saved.get() == null) {
-                        this.saved.set(
-                            Collections.unmodifiableMap(this.freshMap())
-                        );
-                    }
+            synchronized (this.saved) {
+                if (this.saved.isEmpty()) {
+                    this.saved.add(this.freshMap());
                 }
+                return this.saved.get(0);
             }
-            return this.saved.get();
         }
         /**
          * Create map of request parameter.

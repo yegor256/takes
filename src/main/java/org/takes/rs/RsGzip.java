@@ -23,11 +23,13 @@
  */
 package org.takes.rs;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.zip.GZIPOutputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -54,21 +56,15 @@ public final class RsGzip implements Response {
     /**
      * Compressed and cached response.
      */
-    private final transient AtomicReference<Response> zipped;
-
-    /**
-     * Mutex used to ensure the thread safety of the lazy loading.
-     */
-    private final transient Object mutex;
+    private final transient List<Response> zipped;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsGzip(final Response res) {
-        this.zipped = new AtomicReference<>();
+        this.zipped = new CopyOnWriteArrayList<Response>();
         this.origin = res;
-        this.mutex = new Object();
     }
 
     @Override
@@ -86,24 +82,23 @@ public final class RsGzip implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
+    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Response make() throws IOException {
-        if (this.zipped.get() == null) {
-            synchronized (this.mutex) {
-                if (this.zipped.get() == null) {
-                    this.zipped.set(
-                        new RsWithHeader(
-                            new RsWithBody(
-                                this.origin,
-                                RsGzip.gzip(this.origin.body())
-                            ),
-                            "Content-Encoding",
-                            "gzip"
-                        )
-                    );
-                }
+        synchronized (this.zipped) {
+            if (this.zipped.isEmpty()) {
+                this.zipped.add(
+                    new RsWithHeader(
+                        new RsWithBody(
+                            this.origin,
+                            RsGzip.gzip(this.origin.body())
+                        ),
+                        "Content-Encoding",
+                        "gzip"
+                    )
+                );
             }
         }
-        return this.zipped.get();
+        return this.zipped.get(0);
     }
 
     /**

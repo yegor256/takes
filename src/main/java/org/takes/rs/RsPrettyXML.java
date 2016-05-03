@@ -23,10 +23,12 @@
  */
 package org.takes.rs;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -71,21 +73,15 @@ public final class RsPrettyXML implements Response {
     /**
      * Response with properly transformed body.
      */
-    private final transient AtomicReference<Response> transformed;
-
-    /**
-     * Mutex used to ensure the thread safety of the lazy loading.
-     */
-    private final transient Object mutex;
+    private final transient List<Response> transformed;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyXML(final Response res) {
-        this.transformed = new AtomicReference<>();
+        this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
-        this.mutex = new Object();
     }
 
     @Override
@@ -103,20 +99,19 @@ public final class RsPrettyXML implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
+    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Response make() throws IOException {
-        if (this.transformed.get() == null) {
-            synchronized (this.mutex) {
-                if (this.transformed.get() == null) {
-                    this.transformed.set(
-                        new RsWithBody(
-                            this.origin,
-                            RsPrettyXML.transform(this.origin.body())
-                        )
-                    );
-                }
+        synchronized (this.transformed) {
+            if (this.transformed.isEmpty()) {
+                this.transformed.add(
+                    new RsWithBody(
+                        this.origin,
+                        RsPrettyXML.transform(this.origin.body())
+                    )
+                );
             }
         }
-        return this.transformed.get();
+        return this.transformed.get(0);
     }
 
     /**

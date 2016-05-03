@@ -49,6 +49,12 @@ import lombok.EqualsAndHashCode;
 public final class MainRemote {
 
     /**
+     * The format of the error message indicating that the file could not be
+     * deleted.
+     * @checkstyle LineLength (2 lines)
+     */
+    private static final String DEL_FILE_ERR_MSG = "The file '%s' could not be deleted";
+    /**
      * Application with {@code main()} method.
      */
     private final transient Class<?> app;
@@ -84,7 +90,12 @@ public final class MainRemote {
     public void exec(final MainRemote.Script script) throws Exception {
         final File file = File.createTempFile("takes-", ".txt");
         if (!file.delete()) {
-            file.deleteOnExit();
+            throw new IOException(
+                String.format(
+                    MainRemote.DEL_FILE_ERR_MSG,
+                    file.getAbsolutePath()
+                )
+            );
         }
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
@@ -105,11 +116,28 @@ public final class MainRemote {
                     )
                 )
             );
-        } finally {
+        } catch (final IOException ex) {
             if (!file.delete()) {
-                file.deleteOnExit();
+                ex.addSuppressed(
+                    new IOException(
+                        String.format(
+                            MainRemote.DEL_FILE_ERR_MSG,
+                            file.getAbsolutePath()
+                        )
+                    )
+                );
             }
+            throw ex;
+        } finally {
             thread.interrupt();
+        }
+        if (!file.delete()) {
+            throw new IOException(
+                String.format(
+                    MainRemote.DEL_FILE_ERR_MSG,
+                    file.getAbsolutePath()
+                )
+            );
         }
     }
 
