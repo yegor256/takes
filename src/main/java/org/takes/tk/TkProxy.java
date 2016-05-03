@@ -36,10 +36,10 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHeaders;
-import org.takes.rq.RqHref;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
+import org.takes.rq.RqRequestLine;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
@@ -114,7 +114,7 @@ public final class TkProxy implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        final String input = new RqHref.Base(req).href().path();
+        final String input = new RqRequestLine.Base(req).uri();
         final URI output = this.target.resolve(URI.create(input));
         return this.response(
             input, output,
