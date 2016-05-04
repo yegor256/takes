@@ -67,5 +67,5 @@ There are 3 active puzzles (66 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[#625](https://github.com/yegor256/takes/issues/625):[<del>620-91883c6a</del>](https://github.com/yegor256/takes/issues/625) [`RqMultipartTest.java:91-98`](../master/src/test/java/org/takes/rq/RqMultipartTest.java#L91-L98)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#651](https://github.com/yegor256/takes/issues/651):[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#666](https://github.com/yegor256/takes/issues/666):[<del>651-43df2f64</del>](https://github.com/yegor256/takes/issues/666) [`RqMtBase.java:80-83`](../master/src/main/java/org/takes/rq/multipart/RqMtBase.java#L80-L83)<br/>
-[#664](https://github.com/yegor256/takes/issues/664):[<del>664</del>](https://github.com/yegor256/takes/issues/664) [`?`](../master/?)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[**664-ddd2c9b3**]() [`RsXSLT.java:143-145`](../master/src/main/java/org/takes/rs/RsXSLT.java#L143-L145)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[#664](https://github.com/yegor256/takes/issues/664):[<del>664</del>](https://github.com/yegor256/takes/issues/664) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#674](https://github.com/yegor256/takes/issues/674):[**664-ddd2c9b3**](https://github.com/yegor256/takes/issues/674) [`RsXSLT.java:143-145`](../master/src/main/java/org/takes/rs/RsXSLT.java#L143-L145)<br/>
