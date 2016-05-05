@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Utf8String;
 
 /**
  * Response decorator, with body.
@@ -92,7 +92,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, body, StandardCharsets.UTF_8);
+        this(res, new Utf8String(body.toString()).bytes());
     }
 
     /**

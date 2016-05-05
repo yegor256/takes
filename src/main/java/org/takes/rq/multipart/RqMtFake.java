@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.takes.Request;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqMultipart;
 import org.takes.rq.RqPrint;
@@ -154,7 +155,7 @@ public final class RqMtFake implements RqMultipart {
         @Override
         public InputStream body() {
             return new ByteArrayInputStream(
-                this.parts.getBytes(StandardCharsets.UTF_8)
+                new Utf8String(this.parts).bytes()
             );
         }
     }
