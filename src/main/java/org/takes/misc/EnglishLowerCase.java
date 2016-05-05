@@ -48,7 +48,7 @@ public final class EnglishLowerCase {
      * @param string String value
      */
     public EnglishLowerCase(final String string) {
-        this.value = string.toLowerCase(ENGLISH);
+        this.value = string.toLowerCase(EnglishLowerCase.ENGLISH);
     }
 
     /**
