@@ -26,11 +26,9 @@ package org.takes.facets.fork;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import org.takes.misc.EnglishLowerCase;
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.takes.misc.EnglishLowerCase;
 
 /**
  * Media types.
