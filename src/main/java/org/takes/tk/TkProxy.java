@@ -130,6 +130,7 @@ public final class TkProxy implements Take {
      * @return Request to be forwarded
      * @throws IOException If some problem inside
      */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private com.jcabi.http.Request request(final Request req,
         final URI dest) throws IOException {
         final String method = new RqMethod.Base(req).method();
