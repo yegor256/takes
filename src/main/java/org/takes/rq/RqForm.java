@@ -64,6 +64,7 @@ import org.takes.misc.VerboseIterable;
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqForm extends Request {

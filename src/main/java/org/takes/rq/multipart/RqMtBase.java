@@ -70,6 +70,7 @@ import org.takes.rq.RqMultipart;
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @lombok.EqualsAndHashCode(of = "origin")
 public final class RqMtBase implements RqMultipart {

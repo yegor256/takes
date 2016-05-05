@@ -24,11 +24,9 @@
 package org.takes.facets.fork;
 
 import java.util.regex.Pattern;
-
-import org.takes.misc.EnglishLowerCase;
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.takes.misc.EnglishLowerCase;
 
 /**
  * Media type.
