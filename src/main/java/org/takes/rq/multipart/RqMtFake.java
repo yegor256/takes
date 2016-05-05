@@ -26,7 +26,6 @@ package org.takes.rq.multipart;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import org.takes.Request;
 import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;

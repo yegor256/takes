@@ -42,10 +42,10 @@ public class Utf8InputStreamReader extends InputStreamReader {
 
     /**
      * Ctor.
-     * @param in InpputStream value
+     * @param inputStream InpputStream value
      */
-    public Utf8InputStreamReader(InputStream in) {
-        super(in, Charset.forName(Utf8InputStreamReader.ENCODING));
+    public Utf8InputStreamReader(final InputStream inputStream) {
+        super(inputStream, Charset.forName(Utf8InputStreamReader.ENCODING));
     }
 
 }
