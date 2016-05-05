@@ -42,10 +42,10 @@ public class Utf8OutputStreamWriter extends OutputStreamWriter {
 
     /**
      * Ctor.
-     * @param out OutputStream value
+     * @param output OutputStream value
      */
-    public Utf8OutputStreamWriter(final OutputStream outputStream) {
-        super(outputStream, Charset.forName(Utf8OutputStreamWriter.ENCODING));
+    public Utf8OutputStreamWriter(final OutputStream output) {
+        super(output, Charset.forName(Utf8OutputStreamWriter.ENCODING));
     }
 
 }

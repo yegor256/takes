@@ -42,13 +42,13 @@ public class Utf8PrintStream extends PrintStream {
 
     /**
      * Ctor.
-     * @param out The output stream to which values and objects will be printed
-     * @param autoFlush if true, the output buffer will be flushed
-     * @throws UnsupportedEncodingException
+     * @param output The output stream to which values and objects will be printed
+     * @param flush if true, the output buffer will be flushed
+     * @throws UnsupportedEncodingException if fails 
      */
-    public Utf8PrintStream(final OutputStream outputStream, final boolean autoFlush)
+    public Utf8PrintStream(final OutputStream output, final boolean flush)
         throws UnsupportedEncodingException {
-        super(outputStream, autoFlush, Utf8PrintStream.ENCODING);
+        super(output, flush, Utf8PrintStream.ENCODING);
     }
 
 }
