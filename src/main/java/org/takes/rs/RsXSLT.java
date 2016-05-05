@@ -27,7 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -153,14 +152,14 @@ public final class RsXSLT extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXSLT.stylesheet(
             factory, new StreamSource(
-                new InputStreamReader(
+                new Utf8InputStreamReader(
                     new ByteArrayInputStream(new Utf8String(input).bytes())
                 )
             )
         );
         RsXSLT.transformer(factory, xsl).transform(
             new StreamSource(
-                new InputStreamReader(
+                new Utf8InputStreamReader(
                     new ByteArrayInputStream(new Utf8String(input).bytes())
                 )
             ),
