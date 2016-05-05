@@ -31,12 +31,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.VerboseList;
 
 /**
@@ -93,7 +93,7 @@ public interface RqHeaders extends Request {
         public List<String> header(final CharSequence key)
             throws IOException {
             final List<String> values = this.map().get(
-                key.toString().toLowerCase(Locale.ENGLISH)
+                new EnglishLowerCase(key.toString()).string()
             );
             final List<String> list;
             if (values == null) {
@@ -150,7 +150,9 @@ public interface RqHeaders extends Request {
                         String.format("invalid HTTP header: \"%s\"", line)
                     );
                 }
-                final String key = parts[0].trim().toLowerCase(Locale.ENGLISH);
+                final String key = new EnglishLowerCase(
+                    parts[0].trim()
+                ).string();
                 if (!map.containsKey(key)) {
                     map.put(key, new LinkedList<String>());
                 }

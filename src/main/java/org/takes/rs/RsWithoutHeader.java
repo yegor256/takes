@@ -25,11 +25,11 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Condition;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Select;
 
 /**
@@ -57,14 +57,14 @@ public final class RsWithoutHeader extends RsWrap {
                 @Override
                 public Iterable<String> head() throws IOException {
                     final String prefix = String.format(
-                        "%s:", name.toString().toLowerCase(Locale.ENGLISH)
+                        "%s:", new EnglishLowerCase(name.toString()).string()
                     );
                     return new Select<String>(
                         res.head(),
                         new Condition<String>() {
                             @Override
                             public boolean fits(final String header) {
-                                return !header.toLowerCase(Locale.ENGLISH)
+                                return !new EnglishLowerCase(header).string()
                                     .startsWith(prefix);
                             }
                         }

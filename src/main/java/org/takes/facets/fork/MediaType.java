@@ -23,8 +23,10 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Locale;
 import java.util.regex.Pattern;
+
+import org.takes.misc.EnglishLowerCase;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -162,9 +164,10 @@ final class MediaType implements Comparable<MediaType> {
      * @return String array with the sectors of the media type.
      */
     private static String[] sectors(final String text) {
-        return MediaType.split(text)[0].toLowerCase(Locale.ENGLISH).split(
-            "/", 2
-        );
+        return new EnglishLowerCase(MediaType.split(text)[0]).string()
+            .split(
+                "/", 2
+            );
     }
 
 }
