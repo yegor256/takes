@@ -25,7 +25,7 @@ package org.takes.misc;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * InputStreamReader that uses UTF-8 encoding for all operations.
@@ -36,16 +36,11 @@ import java.nio.charset.Charset;
 public class Utf8InputStreamReader extends InputStreamReader {
 
     /**
-     * UTF-8 encoding.
-     */
-    private static final String ENCODING = "UTF-8";
-
-    /**
      * Ctor.
      * @param input InpputStream value
      */
     public Utf8InputStreamReader(final InputStream input) {
-        super(input, Charset.forName(Utf8InputStreamReader.ENCODING));
+        super(input, StandardCharsets.UTF_8);
     }
 
 }

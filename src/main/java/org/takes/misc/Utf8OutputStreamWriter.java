@@ -25,7 +25,7 @@ package org.takes.misc;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * OutputStreamWriter that uses UTF-8 encoding for all operations.
@@ -36,16 +36,11 @@ import java.nio.charset.Charset;
 public class Utf8OutputStreamWriter extends OutputStreamWriter {
 
     /**
-     * UTF-8 encoding.
-     */
-    private static final String ENCODING = "UTF-8";
-
-    /**
      * Ctor.
      * @param output OutputStream value
      */
     public Utf8OutputStreamWriter(final OutputStream output) {
-        super(output, Charset.forName(Utf8OutputStreamWriter.ENCODING));
+        super(output, StandardCharsets.UTF_8);
     }
 
 }

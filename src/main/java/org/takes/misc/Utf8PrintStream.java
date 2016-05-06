@@ -26,6 +26,7 @@ package org.takes.misc;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * PrintStream that uses UTF-8 encoding for all operations.
@@ -36,11 +37,6 @@ import java.io.UnsupportedEncodingException;
 public class Utf8PrintStream extends PrintStream {
 
     /**
-     * UTF-8 encoding.
-     */
-    private static final String ENCODING = "UTF-8";
-
-    /**
      * Ctor.
      * @param output The output stream which values and objects will be printed
      * @param flush If true, the output buffer will be flushed
@@ -48,7 +44,7 @@ public class Utf8PrintStream extends PrintStream {
      */
     public Utf8PrintStream(final OutputStream output, final boolean flush)
         throws UnsupportedEncodingException {
-        super(output, flush, Utf8PrintStream.ENCODING);
+        super(output, flush, StandardCharsets.UTF_8.toString());
     }
 
 }
