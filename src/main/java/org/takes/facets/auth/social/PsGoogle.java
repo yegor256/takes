@@ -156,7 +156,7 @@ public final class PsGoogle implements Pass {
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
                     "could not retrieve id from Google, possible cause: %s.",
-                    json.get("message")
+                    json.getJsonObject("error").get("message")
                 )
             );
         }

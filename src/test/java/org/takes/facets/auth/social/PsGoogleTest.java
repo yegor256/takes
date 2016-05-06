@@ -371,10 +371,13 @@ public final class PsGoogleTest {
                                             "https://developers.google.com"
                                         )
                                 )
-                            )
+                        )
+                        .add(
+                            PsGoogleTest.CODE,
+                            HttpURLConnection.HTTP_BAD_REQUEST
+                        )
+                        .add(message, "Access Not Configured.")
                    )
-                  .add(PsGoogleTest.CODE, HttpURLConnection.HTTP_BAD_REQUEST)
-                  .add(message, "Access Not Configured.")
                   .build()
         );
     }
