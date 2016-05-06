@@ -34,21 +34,24 @@ import java.util.Locale;
 public final class EnglishLowerCase {
 
     /**
-     * English locale.
-     */
-    private static final Locale ENGLISH = Locale.ENGLISH;
-
-    /**
      * String value.
      */
     private final transient String value;
 
     /**
      * Ctor.
+     * @param text Text value
+     */
+    public EnglishLowerCase(final CharSequence text) {
+        this(text.toString());
+    }
+
+    /**
+     * Ctor.
      * @param string String value
      */
     public EnglishLowerCase(final String string) {
-        this.value = string.toLowerCase(EnglishLowerCase.ENGLISH);
+        this.value = string.toLowerCase(Locale.ENGLISH);
     }
 
     /**

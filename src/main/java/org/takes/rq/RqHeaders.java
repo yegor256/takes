@@ -93,7 +93,7 @@ public interface RqHeaders extends Request {
         public List<String> header(final CharSequence key)
             throws IOException {
             final List<String> values = this.map().get(
-                new EnglishLowerCase(key.toString()).string()
+                new EnglishLowerCase(key).string()
             );
             final List<String> list;
             if (values == null) {
