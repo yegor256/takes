@@ -65,8 +65,8 @@ import org.takes.misc.VerboseIterable;
  *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #667:30min Reduce the data abstraction coupling of RqForm in order
- *  to get rid of the checkstyle suppression of
+ * @todo #667:30min Refacor this class to reduce the data abstraction
+ *  coupling in order to get rid of the checkstyle suppression of
  *  ClassDataAbstractionCouplingCheck
  */
 @SuppressWarnings("PMD.TooManyMethods")
