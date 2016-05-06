@@ -66,7 +66,7 @@ import org.takes.misc.VerboseIterable;
  * @see org.takes.rq.RqGreedy
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @todo #667 refactor this class and get rid the
- *     ClassDataAbstractionCouplingCheck checkstyle supression.
+ * ClassDataAbstractionCouplingCheck checkstyle supression.
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqForm extends Request {
