@@ -132,8 +132,8 @@ final class MediaTypes {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<MediaType>();
-        final String[] split = new EnglishLowerCase(text).string().split(",");
-        for (final String name : split) {
+        for (final String name
+            : new EnglishLowerCase(text).string().split(",")) {
             if (!name.isEmpty()) {
                 list.add(new MediaType(name));
             }
