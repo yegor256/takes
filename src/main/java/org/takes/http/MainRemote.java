@@ -49,12 +49,6 @@ import org.takes.misc.Utf8String;
 public final class MainRemote {
 
     /**
-     * The format of the error message indicating that the file could not be
-     * deleted.
-     * @checkstyle LineLength (2 lines)
-     */
-    private static final String DEL_FILE_ERR_MSG = "The file '%s' could not be deleted";
-    /**
      * Application with {@code main()} method.
      */
     private final transient Class<?> app;
@@ -92,7 +86,8 @@ public final class MainRemote {
         if (!file.delete()) {
             throw new IOException(
                 String.format(
-                    MainRemote.DEL_FILE_ERR_MSG,
+                    // @checkstyle LineLength (1 line)
+                    "The temporary file '%s' could not be deleted before calling the exec method",
                     file.getAbsolutePath()
                 )
             );
@@ -121,7 +116,8 @@ public final class MainRemote {
                 ex.addSuppressed(
                     new IOException(
                         String.format(
-                            MainRemote.DEL_FILE_ERR_MSG,
+                            // @checkstyle LineLength (1 line)
+                            "The temporary file '%s' could not be deleted while catching the error",
                             file.getAbsolutePath()
                         )
                     )
@@ -134,7 +130,8 @@ public final class MainRemote {
         if (!file.delete()) {
             throw new IOException(
                 String.format(
-                    MainRemote.DEL_FILE_ERR_MSG,
+                    // @checkstyle LineLength (1 line)
+                    "The temporary file '%s' could not be deleted after calling the exec method",
                     file.getAbsolutePath()
                 )
             );
