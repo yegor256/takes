@@ -51,7 +51,7 @@ public final class EnglishLowerCase {
      * @param string String value
      */
     public EnglishLowerCase(final String string) {
-        this.value = EnglishLowerCase.lowerCase(string);
+        this.value = string;
     }
 
     /**
@@ -59,16 +59,7 @@ public final class EnglishLowerCase {
      * @return String value
      */
     public String string() {
-        return this.value;
-    }
-
-    /**
-     * Returns the lower case string.
-     * @param string String value
-     * @return The english lower case string
-     */
-    private static String lowerCase(final String string) {
-        return string.toLowerCase(Locale.ENGLISH);
+        return this.value.toLowerCase(Locale.ENGLISH);
     }
 
 }
