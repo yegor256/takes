@@ -32,12 +32,12 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Utf8PrintStream;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
@@ -129,8 +129,8 @@ public final class BkBasic implements Back {
     private static Response failure(final Throwable err, final int code)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final PrintStream stream = new PrintStream(
-            baos, false, StandardCharsets.UTF_8.toString()
+        final PrintStream stream = new Utf8PrintStream(
+            baos, false
         );
         try {
             err.printStackTrace(stream);

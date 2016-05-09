@@ -27,13 +27,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8String;
 
 /**
  * Response decorator that can print an entire response in HTTP format.
@@ -78,7 +78,7 @@ public final class RsPrint extends RsWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new Utf8String(baos.toByteArray()).string();
     }
 
     /**
@@ -89,7 +89,7 @@ public final class RsPrint extends RsWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new Utf8String(baos.toByteArray()).string();
     }
 
     /**
@@ -101,7 +101,7 @@ public final class RsPrint extends RsWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+        return new Utf8String(baos.toByteArray()).string();
     }
 
     /**
@@ -123,7 +123,7 @@ public final class RsPrint extends RsWrap {
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer =
-            new OutputStreamWriter(output, StandardCharsets.UTF_8);
+            new Utf8OutputStreamWriter(output);
         int pos = 0;
         for (final String line : this.head()) {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {

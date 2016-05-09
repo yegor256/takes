@@ -24,10 +24,10 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
+import org.takes.misc.Utf8String;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
@@ -112,7 +112,7 @@ public final class RqWithAuth extends RqWrap {
         return new RqWithHeader(
             req,
             header,
-            new String(new CcPlain().encode(identity), StandardCharsets.UTF_8)
+            new Utf8String(new CcPlain().encode(identity)).string()
         );
     }
 

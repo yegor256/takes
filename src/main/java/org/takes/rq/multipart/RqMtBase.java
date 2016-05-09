@@ -24,18 +24,17 @@
 package org.takes.rq.multipart;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,18 +44,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
-import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
-import org.takes.rq.RqLive;
 import org.takes.rq.RqMultipart;
-import org.takes.rq.RqWithHeader;
-import org.takes.rq.TempInputStream;
 
 /**
  * Request decorator, that decodes FORM data from
@@ -75,16 +69,14 @@ import org.takes.rq.TempInputStream;
  * @since 0.33
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @see RqGreedy
- * @todo #651:30min This class is highly coupled, it should be refactored in
- *  order to be able to reduce the overall coupling of this class which will
- *  allow to remove the violations ClassDataAbstractionCouplingCheck and
- *  PMD.ExcessiveImports.
+ * @see org.takes.rq.RqGreedy
  */
-@SuppressWarnings("PMD.ExcessiveImports")
-@EqualsAndHashCode(of = "origin")
+@lombok.EqualsAndHashCode(of = "origin")
 public final class RqMtBase implements RqMultipart {
+    /**
+     * The encoding used to create the request.
+     */
+    private static final Charset ENCODING = Charset.forName("UTF-8");
     /**
      * Pattern to get boundary from header.
      */
@@ -179,9 +171,7 @@ public final class RqMtBase implements RqMultipart {
      */
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
-        final String header = new RqHeaders.Smart(
-            new RqHeaders.Base(req)
-        ).single("Content-Type");
+        final String header = new RqHeaders.Smart(req).single("Content-Type");
         if (!header.toLowerCase(Locale.ENGLISH)
             .startsWith("multipart/form-data")) {
             throw new HttpException(
@@ -212,7 +202,7 @@ public final class RqMtBase implements RqMultipart {
         }
         final byte[] boundary = String.format(
             "%s--%s", RqMtBase.CRLF, matcher.group(1)
-        ).getBytes(StandardCharsets.UTF_8);
+        ).getBytes(RqMtBase.ENCODING);
         this.buffer.flip();
         this.buffer.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
@@ -240,36 +230,23 @@ public final class RqMtBase implements RqMultipart {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );
-        final FileChannel channel = new RandomAccessFile(
-            file, "rw"
-        ).getChannel();
-        try {
+        try (WritableByteChannel channel = Files.newByteChannel(
+            file.toPath(),
+            StandardOpenOption.READ,
+            StandardOpenOption.WRITE
+        )
+        ) {
             channel.write(
                 ByteBuffer.wrap(
-                    this.head().iterator().next().getBytes(
-                        StandardCharsets.UTF_8
-                    )
+                    this.head().iterator().next().getBytes(RqMtBase.ENCODING)
                 )
             );
             channel.write(
-                ByteBuffer.wrap(
-                    RqMtBase.CRLF.getBytes(StandardCharsets.UTF_8)
-                )
+                ByteBuffer.wrap(RqMtBase.CRLF.getBytes(RqMtBase.ENCODING))
             );
             this.copy(channel, boundary, body);
-        } finally {
-            channel.close();
         }
-        return new RqWithHeader(
-            new RqLive(
-                new TempInputStream(
-                    new FileInputStream(file),
-                    file
-                )
-            ),
-            "Content-Length",
-            String.valueOf(file.length())
-        );
+        return new RqTemp(file);
     }
     /**
      * Copy until boundary reached.
@@ -328,9 +305,8 @@ public final class RqMtBase implements RqMultipart {
         final Collection<Request> reqs) throws IOException {
         final Map<String, List<Request>> map = new HashMap<>(reqs.size());
         for (final Request req : reqs) {
-            final String header = new RqHeaders.Smart(
-                new RqHeaders.Base(req)
-            ).single("Content-Disposition");
+            final String header =
+                new RqHeaders.Smart(req).single("Content-Disposition");
             final Matcher matcher = RqMtBase.NAME.matcher(header);
             if (!matcher.matches()) {
                 throw new HttpException(

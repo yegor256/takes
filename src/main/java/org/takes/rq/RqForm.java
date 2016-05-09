@@ -32,7 +32,6 @@ import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,6 +44,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
+import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
 
 /**
@@ -173,9 +173,9 @@ public interface RqForm extends Request {
         private Map<String, List<String>> freshMap() throws IOException {
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             new RqPrint(this.req).printBody(baos);
-            final String body = new String(
-                baos.toByteArray(), StandardCharsets.UTF_8
-            );
+            final String body = new Utf8String(
+                baos.toByteArray()
+            ).string();
             final Map<String, List<String>> map = new HashMap<>(1);
             // @checkstyle MultipleStringLiteralsCheck (1 line)
             for (final String pair : body.split("&")) {

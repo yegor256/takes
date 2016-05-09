@@ -21,69 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
+package org.takes.rq.multipart;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.misc.Utf8String;
-import org.takes.rq.RqHeaders;
+import org.takes.rq.RqLive;
+import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
+import org.takes.rq.TempInputStream;
 
 /**
- * Request with auth information.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Request with a temporary file as body. The temporary file will be deleted
+ * automatically when the body of the request will be closed.
+ * @author Nicolas Filotto (nicolas.filotto@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.33
+ * @see org.takes.rq.RqLive
+ * @see org.takes.rq.TempInputStream
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqAuth extends RqWrap {
+final class RqTemp extends RqWrap {
 
     /**
-     * Header with authentication info.
-     */
-    private final transient String header;
-
-    /**
-     * Ctor.
-     * @param request Original
-     */
-    public RqAuth(final Request request) {
-        this(request, TkAuth.class.getSimpleName());
-    }
-
-    /**
-     * Ctor.
-     * @param request Original
-     * @param hdr Header to read
-     */
-    public RqAuth(final Request request, final String hdr) {
-        super(request);
-        this.header = hdr;
-    }
-
-    /**
-     * Authenticated user.
-     * @return User identity
+     * Creates a {@code RqTemp} with the specified temporary file.
+     * @param file The temporary that will be automatically deleted when the
+     *  body of the request will be closed.
      * @throws IOException If fails
      */
-    public Identity identity() throws IOException {
-        final Iterator<String> headers =
-            new RqHeaders.Base(this).header(this.header).iterator();
-        final Identity user;
-        if (headers.hasNext()) {
-            user = new CcPlain().decode(
-                new Utf8String(headers.next()).bytes()
-            );
-        } else {
-            user = Identity.ANONYMOUS;
-        }
-        return user;
+    RqTemp(final File file) throws IOException {
+        super(
+            new RqWithHeader(
+                new RqLive(
+                    new TempInputStream(new FileInputStream(file), file)
+                ),
+                "Content-Length",
+                String.valueOf(file.length())
+            )
+        );
     }
-
 }

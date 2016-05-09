@@ -21,58 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.misc;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
-import org.takes.misc.Utf8String;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 /**
- * Simple response.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * InputStreamReader that uses UTF-8 encoding for all operations.
+ * @author Dali Freire (dalifreire@gmail.com)
  * @version $Id$
- * @since 0.17
+ * @since 0.33
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class RsSimple extends RsWrap {
+public class Utf8InputStreamReader extends InputStreamReader {
 
     /**
      * Ctor.
-     * @param head Head
-     * @param body Body
+     * @param input InpputStream value
      */
-    public RsSimple(final Iterable<String> head, final String body) {
-        this(
-            head,
-            new ByteArrayInputStream(new Utf8String(body).bytes())
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param head Head
-     * @param body Body
-     */
-    public RsSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
-        );
+    public Utf8InputStreamReader(final InputStream input) {
+        super(input, StandardCharsets.UTF_8);
     }
 
 }

@@ -27,9 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -43,6 +41,7 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -150,7 +149,7 @@ public final class RsXembly extends RsWrap {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
                 new StreamResult(
-                    new OutputStreamWriter(baos, StandardCharsets.UTF_8)
+                    new Utf8OutputStreamWriter(baos)
                 )
             );
         } catch (final TransformerException ex) {

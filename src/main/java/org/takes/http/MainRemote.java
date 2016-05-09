@@ -30,10 +30,10 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
+import org.takes.misc.Utf8String;
 
 /**
  * Front remote control.
@@ -161,9 +161,7 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(
-                new String(buf, StandardCharsets.UTF_8).trim()
-            );
+            port = Integer.parseInt(new Utf8String(buf).string().trim());
         } finally {
             input.close();
         }
