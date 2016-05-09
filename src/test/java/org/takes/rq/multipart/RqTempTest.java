@@ -25,12 +25,12 @@ package org.takes.rq.multipart;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
+import org.takes.misc.Utf8String;
 
 /**
  * Test case for {@link RqTemp}.
@@ -52,7 +52,7 @@ public final class RqTempTest {
         );
         Files.write(
             file.toPath(),
-            "Temp file deletion test".getBytes(StandardCharsets.UTF_8)
+            new Utf8String("Temp file deletion test").bytes()
         );
         final Request request = new RqTemp(file);
         try {

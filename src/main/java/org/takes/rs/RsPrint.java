@@ -27,13 +27,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
 
 /**
@@ -124,7 +123,7 @@ public final class RsPrint extends RsWrap {
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
         final Writer writer =
-            new OutputStreamWriter(output, StandardCharsets.UTF_8);
+            new Utf8OutputStreamWriter(output);
         int pos = 0;
         for (final String line : this.head()) {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {

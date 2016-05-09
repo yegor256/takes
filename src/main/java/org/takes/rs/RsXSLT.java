@@ -27,10 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -42,6 +39,9 @@ import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.misc.Utf8InputStreamReader;
+import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8String;
 
 /**
  * Response that converts XML into HTML using attached XSL stylesheet.
@@ -140,9 +140,6 @@ public final class RsXSLT extends RsWrap {
      * @param xml XML page to be transformed.
      * @return Resulting HTML page.
      * @throws TransformerException If fails
-     * @todo #664:30min continue removing usage StandardCharsets.UTF_8 from
-     *  takes code (remove usage not only from this class but also from other
-     *  parts of project). Please look at #664 for more details.
      */
     private static InputStream transform(final TransformerFactory factory,
         final InputStream xml) throws TransformerException {
@@ -155,22 +152,24 @@ public final class RsXSLT extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXSLT.stylesheet(
             factory, new StreamSource(
-                new InputStreamReader(
-                    new ByteArrayInputStream(input), StandardCharsets.UTF_8
+                new Utf8InputStreamReader(
+                    new ByteArrayInputStream(new Utf8String(input).bytes())
                 )
             )
         );
         RsXSLT.transformer(factory, xsl).transform(
             new StreamSource(
-                new InputStreamReader(
-                    new ByteArrayInputStream(input), StandardCharsets.UTF_8
+                new Utf8InputStreamReader(
+                    new ByteArrayInputStream(new Utf8String(input).bytes())
                 )
             ),
             new StreamResult(
-                new OutputStreamWriter(baos, StandardCharsets.UTF_8)
+                new Utf8OutputStreamWriter(baos)
             )
         );
-        return new ByteArrayInputStream(baos.toByteArray());
+        return new ByteArrayInputStream(
+            new Utf8String(baos.toByteArray()).bytes()
+        );
     }
 
     /**
@@ -264,7 +263,7 @@ public final class RsXSLT extends RsWrap {
                 );
             }
             return new StreamSource(
-                new InputStreamReader(input, StandardCharsets.UTF_8)
+                new Utf8InputStreamReader(input)
             );
         }
     }

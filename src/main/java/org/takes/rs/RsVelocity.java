@@ -27,11 +27,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +39,8 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.log.NullLogChute;
 import org.takes.Response;
+import org.takes.misc.Utf8InputStreamReader;
+import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
 
 /**
@@ -141,9 +140,7 @@ public final class RsVelocity extends RsWrap {
     private static InputStream render(final InputStream page,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new OutputStreamWriter(
-            baos, StandardCharsets.UTF_8
-        );
+        final Writer writer = new Utf8OutputStreamWriter(baos);
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
@@ -153,7 +150,7 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new InputStreamReader(page, StandardCharsets.UTF_8)
+            new Utf8InputStreamReader(page)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());
