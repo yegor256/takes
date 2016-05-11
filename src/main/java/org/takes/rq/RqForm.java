@@ -23,6 +23,7 @@
  */
 package org.takes.rq;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -155,6 +156,7 @@ public interface RqForm extends Request {
          * @return Parameters map or empty map in case of error.
          * @throws IOException If something fails reading or parsing body
          */
+        @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
         private Map<String, List<String>> map() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {

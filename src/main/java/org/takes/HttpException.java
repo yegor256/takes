@@ -31,8 +31,15 @@ import java.io.IOException;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.13
+ * @todo #660:30min Remove the SuppressWarnings PMD.BeanMembersShouldSerialize
+ *  once the next release of Qulice will be available as it has been removed by
+ *  https://github.com/teamed/qulice/issues/675
  */
-@SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
+@SuppressWarnings(
+    {
+        "PMD.OnlyOneConstructorShouldDoInitialization",
+        "PMD.BeanMembersShouldSerialize"
+    })
 public class HttpException extends IOException {
 
     /**
@@ -43,7 +50,7 @@ public class HttpException extends IOException {
     /**
      * Status code.
      */
-    private final transient int status;
+    private final int status;
 
     /**
      * Ctor.

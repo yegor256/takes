@@ -83,7 +83,15 @@ public final class MainRemote {
      */
     public void exec(final MainRemote.Script script) throws Exception {
         final File file = File.createTempFile("takes-", ".txt");
-        file.delete();
+        if (!file.delete()) {
+            throw new IOException(
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "The temporary file '%s' could not be deleted before calling the exec method",
+                    file.getAbsolutePath()
+                )
+            );
+        }
         final Method method = this.app.getDeclaredMethod(
             "main", String[].class
         );
@@ -103,9 +111,30 @@ public final class MainRemote {
                     )
                 )
             );
+        } catch (final IOException ex) {
+            if (!file.delete()) {
+                ex.addSuppressed(
+                    new IOException(
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "The temporary file '%s' could not be deleted while catching the error",
+                            file.getAbsolutePath()
+                        )
+                    )
+                );
+            }
+            throw ex;
         } finally {
-            file.delete();
             thread.interrupt();
+        }
+        if (!file.delete()) {
+            throw new IOException(
+                String.format(
+                    // @checkstyle LineLength (1 line)
+                    "The temporary file '%s' could not be deleted after calling the exec method",
+                    file.getAbsolutePath()
+                )
+            );
         }
     }
 

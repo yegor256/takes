@@ -103,9 +103,9 @@ final class Options {
                 try {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
-                    reader.read(chars);
+                    final int length = reader.read(chars);
                     socket = new ServerSocket(
-                        Integer.parseInt(new String(chars))
+                        Integer.parseInt(new String(chars, 0, length))
                     );
                 } finally {
                     reader.close();
