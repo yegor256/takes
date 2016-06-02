@@ -66,7 +66,7 @@ There are 2 active puzzles (67 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-d68bc52e</del> [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-40a8e0fe</del> [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<del>620-91883c6a</del> [`RqMultipartTest.java:91-98`](../master/src/test/java/org/takes/rq/RqMultipartTest.java#L91-L98)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;[#651](https://github.com/yegor256/takes/issues/651):[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<del>651</del>](https://github.com/yegor256/takes/issues/651) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#666](https://github.com/yegor256/takes/issues/666):[<del>651-43df2f64</del>](https://github.com/yegor256/takes/issues/666) [`RqMtBase.java:80-83`](../master/src/main/java/org/takes/rq/multipart/RqMtBase.java#L80-L83)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[#664](https://github.com/yegor256/takes/issues/664):[<del>664</del>](https://github.com/yegor256/takes/issues/664) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#674](https://github.com/yegor256/takes/issues/674):[<del>664-ddd2c9b3</del>](https://github.com/yegor256/takes/issues/674) [`RsXSLT.java:143-145`](../master/src/main/java/org/takes/rs/RsXSLT.java#L143-L145)<br/>
