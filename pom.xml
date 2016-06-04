@@ -342,8 +342,8 @@
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
                                 @todo #678:30min After upgrade to qulice 0.16.4 we have to fix 
-                                AbbreviationAsWordInNameCheck checkstyle warings in next classes. 
-                                Fix issues and remove all excludes of PMD here.
+                                 AbbreviationAsWordInNameCheck checkstyle warings in next classes. 
+                                 Fix issues and remove all excludes of PMD here.
                                 -->
                                 <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcAES.java</exclude>
                                 <exclude>checkstyle:/src/main/java/org/takes/facets/auth/codecs/CcXOR.java</exclude>
@@ -378,8 +378,8 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/http/FtCLITest.java</exclude>
                                 <!--
                                 @todo #678:30min After upgrade to qulice 0.16.4 we have to fix 
-                                AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
-                                remove all excludes of PMD here.
+                                 AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
+                                 remove all excludes of PMD here.
                                 -->                                
                                 <exclude>pmd:/src/main/java/org/takes/facets/fork/TkFork.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
