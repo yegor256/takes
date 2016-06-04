@@ -294,10 +294,8 @@ public interface RqForm extends Request {
          * Ctor.
          * @param req Original request
          * @param params Parameters
-         * @throws IOException if something goes wrong.
          */
-        public Fake(final Request req, final String... params)
-            throws IOException {
+        public Fake(final Request req, final String... params) {
             this.fake = new RqForm.Base(
                 new RqWithBody(req, Fake.construct(Fake.validated(params)))
             );

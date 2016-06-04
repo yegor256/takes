@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth.codecs;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
@@ -55,7 +54,7 @@ public final class CcBase64 implements Codec {
     // method have been already created, do not forget to remove Ignore
     // annotation on it.
     @Override
-    public byte[] encode(final Identity identity) throws IOException {
+    public byte[] encode(final Identity identity) {
         assert this.origin != null;
         throw new UnsupportedOperationException("#encode()");
     }
@@ -65,7 +64,7 @@ public final class CcBase64 implements Codec {
     // method have been already created, do not forget to remove Ignore
     // annotation on it.
     @Override
-    public Identity decode(final byte[] bytes) throws IOException {
+    public Identity decode(final byte[] bytes) {
         assert this.origin != null;
         throw new UnsupportedOperationException("#decode()");
     }
