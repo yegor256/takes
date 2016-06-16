@@ -67,9 +67,8 @@ final class ChunkedInputStream extends InputStream {
     /**
      * Ctor.
      * @param stream The raw input stream
-     * @throws IOException If an IO error occurs
      */
-    ChunkedInputStream(final InputStream stream) throws IOException {
+    ChunkedInputStream(final InputStream stream) {
         super();
         this.bof = true;
         this.origin = stream;
