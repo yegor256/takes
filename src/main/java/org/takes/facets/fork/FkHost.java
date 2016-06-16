@@ -24,11 +24,11 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -76,8 +76,8 @@ public final class FkHost extends FkWrap {
                     new RqHeaders.Base(req)
                 ).single("host");
                 final Opt<Response> rsp;
-                if (host.toLowerCase(Locale.ENGLISH)
-                    .equals(hst.toLowerCase(Locale.ENGLISH))) {
+                if (new EnglishLowerCase(host).string()
+                    .equals(new EnglishLowerCase(hst).string())) {
                     rsp = new Opt.Single<>(take.act(req));
                 } else {
                     rsp = new Opt.Empty<>();

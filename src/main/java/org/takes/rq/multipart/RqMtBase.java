@@ -40,12 +40,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
@@ -70,6 +70,7 @@ import org.takes.rq.RqMultipart;
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @lombok.EqualsAndHashCode(of = "origin")
 public final class RqMtBase implements RqMultipart {
@@ -127,7 +128,7 @@ public final class RqMtBase implements RqMultipart {
     @Override
     public Iterable<Request> part(final CharSequence name) {
         final List<Request> values = this.map
-            .get(name.toString().toLowerCase(Locale.ENGLISH));
+            .get(new EnglishLowerCase(name.toString()).string());
         final Iterable<Request> iter;
         if (values == null) {
             iter = new VerboseIterable<>(
@@ -172,7 +173,7 @@ public final class RqMtBase implements RqMultipart {
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");
-        if (!header.toLowerCase(Locale.ENGLISH)
+        if (!new EnglishLowerCase(header).string()
             .startsWith("multipart/form-data")) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,

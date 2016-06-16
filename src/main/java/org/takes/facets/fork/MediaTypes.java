@@ -24,11 +24,11 @@
 package org.takes.facets.fork;
 
 import java.util.Collections;
-import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.takes.misc.EnglishLowerCase;
 
 /**
  * Media types.
@@ -132,7 +132,8 @@ final class MediaTypes {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<MediaType>();
-        for (final String name : text.toLowerCase(Locale.ENGLISH).split(",")) {
+        for (final String name
+            : new EnglishLowerCase(text).string().split(",")) {
             if (!name.isEmpty()) {
                 list.add(new MediaType(name));
             }

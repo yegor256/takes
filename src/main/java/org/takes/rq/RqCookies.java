@@ -26,10 +26,10 @@ package org.takes.rq;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 
@@ -80,7 +80,7 @@ public interface RqCookies extends Request {
             throws IOException {
             final Map<String, String> map = this.map();
             final String value = map.get(
-                key.toString().toLowerCase(Locale.ENGLISH)
+                new EnglishLowerCase(key.toString()).string()
             );
             final Iterable<String> iter;
             if (value == null) {
@@ -123,7 +123,7 @@ public interface RqCookies extends Request {
                 for (final String pair : value.split(";")) {
                     final String[] parts = pair.split("=", 2);
                     final String key =
-                        parts[0].trim().toLowerCase(Locale.ENGLISH);
+                        new EnglishLowerCase(parts[0].trim()).string();
                     if (parts.length > 1 && !parts[1].isEmpty()) {
                         map.put(key, parts[1].trim());
                     } else {

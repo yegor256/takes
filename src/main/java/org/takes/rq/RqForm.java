@@ -37,12 +37,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
@@ -65,6 +65,10 @@ import org.takes.misc.VerboseIterable;
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo #667:30min Refacor this class to reduce the data abstraction
+ *  coupling in order to get rid of the checkstyle suppression of
+ *  ClassDataAbstractionCouplingCheck
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface RqForm extends Request {
@@ -112,7 +116,7 @@ public interface RqForm extends Request {
         public Iterable<String> param(final CharSequence key)
             throws IOException {
             final List<String> values =
-                this.map().get(key.toString().toLowerCase(Locale.ENGLISH));
+                this.map().get(new EnglishLowerCase(key.toString()).string());
             final Iterable<String> iter;
             if (values == null) {
                 iter = new VerboseIterable<>(
@@ -193,7 +197,7 @@ public interface RqForm extends Request {
                     );
                 }
                 final String key = RqForm.Base.decode(
-                    parts[0].trim().toLowerCase(Locale.ENGLISH)
+                    new EnglishLowerCase(parts[0].trim()).string()
                 );
                 if (!map.containsKey(key)) {
                     map.put(key, new LinkedList<String>());
