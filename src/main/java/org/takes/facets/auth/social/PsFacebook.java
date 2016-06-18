@@ -63,6 +63,32 @@ import org.takes.rq.RqHref;
 public final class PsFacebook implements Pass {
 
     /**
+     * Client id.
+     */
+    private static final String CLIENT_ID = "client_id";
+
+    /**
+     * Client secret.
+     */
+    private static final String CLIENT_SECRET = "client_secret";
+
+    /**
+     * Code.
+     */
+    private static final String CODE = "code";
+
+    /**
+     * Picture.
+     */
+    private static final String PICTURE = "picture";
+
+    /**
+     * Facebook access token URL.
+     */
+    private static final String FB_ACCESS_TOKEN_URL =
+        "https://graph.facebook.com/oauth/access_token";
+
+    /**
      * Request for fetching app token.
      */
     private final transient com.jcabi.http.Request request;
@@ -83,11 +109,6 @@ public final class PsFacebook implements Pass {
     private final transient String key;
 
     /**
-     * Client secret.
-     */
-    private static final String CLIENT_SECRET = "client_secret";
-
-    /**
      * Ctor.
      * @param fapp Facebook app
      * @param fkey Facebook key
@@ -95,8 +116,8 @@ public final class PsFacebook implements Pass {
     public PsFacebook(final String fapp, final String fkey) {
         this(
             new JdkRequest(
-                new Href("https://graph.facebook.com/oauth/access_token")
-                    .with("client_id", fapp)
+                new Href(PsFacebook.FB_ACCESS_TOKEN_URL)
+                    .with(PsFacebook.CLIENT_ID, fapp)
                     .with(PsFacebook.CLIENT_SECRET, fkey)
                     .toString()
             ),
@@ -126,7 +147,7 @@ public final class PsFacebook implements Pass {
     public Opt<Identity> enter(final Request trequest)
         throws IOException {
         final Href href = new RqHref.Base(trequest).href();
-        final Iterator<String> code = href.param("code").iterator();
+        final Iterator<String> code = href.param(PsFacebook.CODE).iterator();
         if (!code.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -140,10 +161,10 @@ public final class PsFacebook implements Pass {
             new HashMap<String, String>(0);
         props.put("name", user.getName());
         props.put(
-            "picture",
+            PsFacebook.PICTURE,
             new Href("https://graph.facebook.com/")
                 .path(user.getId())
-                .path("picture")
+                .path(PsFacebook.PICTURE)
                 .toString()
         );
         return new Opt.Single<Identity>(
@@ -193,11 +214,11 @@ public final class PsFacebook implements Pass {
             .uri()
             .set(
                 URI.create(
-                    new Href("https://graph.facebook.com/oauth/access_token")
-                        .with("client_id", this.app)
+                    new Href(PsFacebook.FB_ACCESS_TOKEN_URL)
+                        .with(PsFacebook.CLIENT_ID, this.app)
                         .with("redirect_uri", home)
                         .with(PsFacebook.CLIENT_SECRET, this.key)
-                        .with("code", code)
+                        .with(PsFacebook.CODE, code)
                         .toString()
                 )
             )
