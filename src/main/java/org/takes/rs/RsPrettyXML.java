@@ -55,9 +55,20 @@ import org.xml.sax.XMLReader;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyXML implements Response {
+
+    /**
+     * Yes.
+     */
+    private static final String YES = "yes";
+
+    /**
+     * Html.
+     */
+    private static final String HTML = "html";
 
     /**
      * Xerces feature to disable external DTD validation.
@@ -134,10 +145,10 @@ public final class RsPrettyXML implements Response {
                 .newTransformer();
             // @checkstyle MultipleStringLiteralsCheck (2 line)
             transformer.setOutputProperty(
-                OutputKeys.OMIT_XML_DECLARATION, "yes"
+                OutputKeys.OMIT_XML_DECLARATION, RsPrettyXML.YES
             );
             RsPrettyXML.prepareDocType(body, transformer);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.INDENT, RsPrettyXML.YES);
             transformer.transform(source, new StreamResult(result));
         } catch (final TransformerException ex) {
             throw new IOException(ex);
@@ -164,8 +175,10 @@ public final class RsPrettyXML implements Response {
                 if (null == doctype.getSystemId()
                     && null == doctype.getPublicId()
                     // @checkstyle MultipleStringLiteralsCheck (3 line)
-                    && "html".equalsIgnoreCase(doctype.getName())) {
-                    transformer.setOutputProperty(OutputKeys.METHOD, "html");
+                    && RsPrettyXML.HTML.equalsIgnoreCase(doctype.getName())) {
+                    transformer.setOutputProperty(
+                        OutputKeys.METHOD, RsPrettyXML.HTML
+                    );
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
                     return;
                 }
