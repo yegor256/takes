@@ -59,6 +59,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.1
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "cookie" })
 @EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TkFlash implements Take {

@@ -63,6 +63,7 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "forks")
 @EqualsAndHashCode(of = "forks")
 public final class TkFork implements Take {

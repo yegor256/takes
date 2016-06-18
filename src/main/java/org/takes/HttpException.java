@@ -36,6 +36,11 @@ import java.io.IOException;
 public class HttpException extends IOException {
 
     /**
+     * Message format.
+     */
+    private static final String MESSAGE_FORMAT = "[%03d] %s";
+
+    /**
      * Serialization marker.
      */
     private static final long serialVersionUID = -505306086879848229L;
@@ -61,7 +66,7 @@ public class HttpException extends IOException {
      */
     public HttpException(final int code, final String cause) {
         // @checkstyle MultipleStringLiteralsCheck (1 line)
-        super(String.format("[%03d] %s", code, cause));
+        super(String.format(HttpException.MESSAGE_FORMAT, code, cause));
         this.status = code;
     }
 
@@ -83,7 +88,7 @@ public class HttpException extends IOException {
      */
     public HttpException(final int code, final String msg,
         final Throwable cause) {
-        super(String.format("[%03d] %s", code, msg), cause);
+        super(String.format(HttpException.MESSAGE_FORMAT, code, msg), cause);
         this.status = code;
     }
 

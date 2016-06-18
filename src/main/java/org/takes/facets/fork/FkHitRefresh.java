@@ -51,6 +51,11 @@ import org.takes.rq.RqHeaders;
 public final class FkHitRefresh implements Fork {
 
     /**
+     * Take.
+     */
+    private static final String TAKE = "take";
+
+    /**
      * Directory to watch.
      */
     private final transient File dir;
@@ -178,7 +183,7 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     private static File touchedFile() throws IOException {
-        final File file = File.createTempFile("take", ".txt");
+        final File file = File.createTempFile(FkHitRefresh.TAKE, ".txt");
         file.deleteOnExit();
         FkHitRefresh.touch(file);
         return file;

@@ -45,6 +45,7 @@ import org.takes.rs.RsWithCookie;
  * @version $Id$
  * @since 0.20
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "cookie" })
 @EqualsAndHashCode(of = { "origin", "cookie" })
 public final class TkReturn implements Take {

@@ -106,6 +106,11 @@ import org.takes.rs.RsWrap;
 public final class RsFlash extends RsWrap {
 
     /**
+     * Text format.
+     */
+    private static final String TEXT_FORMAT = "%s/%s";
+
+    /**
      * To string.
      */
     @SuppressWarnings("unused")
@@ -184,7 +189,7 @@ public final class RsFlash extends RsWrap {
         throws UnsupportedEncodingException {
         super(RsFlash.make(msg, level, cookie));
         // @checkstyle MultipleStringLiteralsCheck (1 line)
-        this.text = String.format("%s/%s", level, msg);
+        this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
 
     /**
@@ -201,7 +206,7 @@ public final class RsFlash extends RsWrap {
         return new RsWithCookie(
             cookie,
             new Sprintf(
-                "%s/%s",
+                RsFlash.TEXT_FORMAT,
                 URLEncoder.encode(msg, Charset.defaultCharset().name()),
                 level.getName()
             ),

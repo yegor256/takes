@@ -81,6 +81,13 @@ public interface RqRequestLine extends Request {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqRequestLine {
+
+        /**
+         * Bad request message.
+         */
+        private static final String BAD_REQUEST_MESSAGE =
+            "Invalid HTTP Request-Line header: %s";
+
         /**
          * HTTP Request-line pattern.
          * [!-~] is for method or extension-method token (octets 33 - 126).
@@ -194,7 +201,7 @@ public interface RqRequestLine extends Request {
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        "Invalid HTTP Request-Line header: %s",
+                        Base.BAD_REQUEST_MESSAGE,
                         line
                     )
                 );
@@ -216,7 +223,7 @@ public interface RqRequestLine extends Request {
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
                         // @checkstyle MultipleStringLiteralsCheck (1 line)
-                        "Invalid HTTP Request-Line header: %s",
+                        Base.BAD_REQUEST_MESSAGE,
                         line
                     )
                 );
