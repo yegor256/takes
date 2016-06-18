@@ -58,6 +58,21 @@ import org.takes.rq.RqHref;
 public final class PsGithub implements Pass {
 
     /**
+     * Access token.
+     */
+    private static final String ACCESS_TOKEN = "access_token";
+
+    /**
+     * Code.
+     */
+    private static final String CODE = "code";
+
+    /**
+     * Login.
+     */
+    private static final String LOGIN = "login";
+
+    /**
      * App name.
      */
     private final transient String app;
@@ -106,7 +121,7 @@ public final class PsGithub implements Pass {
     public Opt<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
-        final Iterator<String> code = href.param("code").iterator();
+        final Iterator<String> code = href.param(PsGithub.CODE).iterator();
         if (!code.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -132,7 +147,7 @@ public final class PsGithub implements Pass {
      */
     private Identity fetch(final String token) throws IOException {
         final String uri = new Href(this.api).path("user")
-            .with("access_token", token).toString();
+            .with(PsGithub.ACCESS_TOKEN, token).toString();
         return PsGithub.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
@@ -152,7 +167,7 @@ public final class PsGithub implements Pass {
     private String token(final String home, final String code)
         throws IOException {
         final String uri = new Href(this.github)
-            .path("login").path("oauth").path("access_token")
+            .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
             .toString();
         final List<String> tokens = new JdkRequest(uri)
             .method("POST")
@@ -161,7 +176,7 @@ public final class PsGithub implements Pass {
             .formParam("client_id", this.app)
             .formParam("redirect_uri", home)
             .formParam("client_secret", this.key)
-            .formParam("code", code)
+            .formParam(PsGithub.CODE, code)
             .back()
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
@@ -184,7 +199,7 @@ public final class PsGithub implements Pass {
         final Map<String, String> props =
             new HashMap<String, String>(json.size());
         // @checkstyle MultipleStringLiteralsCheck (1 line)
-        props.put("login", json.getString("login", "unknown"));
+        props.put(PsGithub.LOGIN, json.getString(PsGithub.LOGIN, "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new Identity.Simple(
             String.format("urn:github:%d", json.getInt("id")), props
