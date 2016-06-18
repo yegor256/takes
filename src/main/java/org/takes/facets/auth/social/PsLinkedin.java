@@ -55,6 +55,11 @@ import org.takes.rq.RqHref;
 public final class PsLinkedin implements Pass {
 
     /**
+     * Code.
+     */
+    private static final String CODE = "code";
+
+    /**
      * App name.
      */
     private final transient String app;
@@ -110,7 +115,7 @@ public final class PsLinkedin implements Pass {
         throws IOException {
         final Href href = new RqHref.Base(request).href();
         // @checkstyle MultipleStringLiteralsCheck (1 line)
-        final Iterator<String> code = href.param("code").iterator();
+        final Iterator<String> code = href.param(PsLinkedin.CODE).iterator();
         if (!code.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -167,7 +172,7 @@ public final class PsLinkedin implements Pass {
             .formParam("client_id", this.app)
             .formParam("redirect_uri", home)
             .formParam("client_secret", this.key)
-            .formParam("code", code)
+            .formParam(PsLinkedin.CODE, code)
             .back()
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
