@@ -53,7 +53,7 @@ import org.takes.rs.RsWithStatus;
  */
 @ToString(of = { "origin", "allowed" })
 @EqualsAndHashCode(of = { "origin", "allowed" })
-public final class TkCORS implements Take {
+public final class TkCors implements Take {
 
     /**
      * Original take.
@@ -70,7 +70,7 @@ public final class TkCORS implements Take {
      * @param take Original
      * @param domains Allow domains
      */
-    public TkCORS(final Take take, final String... domains) {
+    public TkCors(final Take take, final String... domains) {
         this.origin = take;
         this.allowed = new HashSet<String>(Arrays.asList(domains));
     }

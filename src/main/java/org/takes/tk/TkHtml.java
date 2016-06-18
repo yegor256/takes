@@ -21,20 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.tk;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import javax.json.Json;
-import javax.json.JsonStructure;
-import javax.json.JsonWriter;
+import java.io.InputStream;
+import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.takes.Request;
 import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsHtml;
 
 /**
- * Response that converts Java object to JSON.
+ * HTML take.
+ *
+ * <p>This take returns an HTML response by wrapping the provided
+ * content into {@link org.takes.rs.RsHtml}.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -44,19 +46,18 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsJSON extends RsWrap {
+public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param json JSON object
-     * @throws IOException If fails
+     * @param body Text
      */
-    public RsJSON(final JsonStructure json) throws IOException {
-        this(
-            new RsJSON.Source() {
+    public TkHtml(final String body) {
+        super(
+            new Take() {
                 @Override
-                public JsonStructure toJSON() {
-                    return json;
+                public Response act(final Request req) {
+                    return new RsHtml(body);
                 }
             }
         );
@@ -64,53 +65,47 @@ public final class RsJSON extends RsWrap {
 
     /**
      * Ctor.
-     * @param src Source
-     * @throws IOException If fails
+     * @param body Body with HTML
      */
-    public RsJSON(final RsJSON.Source src) throws IOException {
-        this(new RsWithBody(RsJSON.print(src)));
-    }
-
-    /**
-     * Ctor.
-     * @param res Resource
-     */
-    public RsJSON(final Response res) {
+    public TkHtml(final byte[] body) {
         super(
-            new RsWithType(
-                new RsWithStatus(res, HttpURLConnection.HTTP_OK),
-                "application/json"
-        )
+            new Take() {
+                @Override
+                public Response act(final Request req) {
+                    return new RsHtml(body);
+                }
+            }
         );
     }
 
     /**
-     * Print JSON.
-     * @param src Source
-     * @return JSON
-     * @throws IOException If fails
+     * Ctor.
+     * @param url URL with content
      */
-    private static byte[] print(final RsJSON.Source src) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final JsonWriter writer = Json.createWriter(baos);
-        try {
-            writer.write(src.toJSON());
-        } finally {
-            writer.close();
-        }
-        return baos.toByteArray();
+    public TkHtml(final URL url) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request req) {
+                    return new RsHtml(url);
+                }
+            }
+        );
     }
 
     /**
-     * Source with JSON.
+     * Ctor.
+     * @param body Content
      */
-    public interface Source {
-        /**
-         * Get JSON value.
-         * @return JSON
-         * @throws IOException If fails
-         */
-        JsonStructure toJSON() throws IOException;
+    public TkHtml(final InputStream body) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request req) {
+                    return new RsHtml(body);
+                }
+            }
+        );
     }
 
 }

@@ -33,12 +33,12 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsPrettyXML}.
+ * Test case for {@link RsPrettyXml}.
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-public final class RsPrettyXMLTest {
+public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with XML body.
@@ -48,7 +48,7 @@ public final class RsPrettyXMLTest {
     public void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyXML(
+                new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
@@ -65,7 +65,7 @@ public final class RsPrettyXMLTest {
     public void formatsHtml5DoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyXML(
+                new RsPrettyXml(
                     new RsWithBody(
                         "<!DOCTYPE html><html><head></head><body></body></html>"
                     )
@@ -85,7 +85,7 @@ public final class RsPrettyXMLTest {
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyXML(
+                new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
                             new StringBuilder("<!DOCTYPE html "),
@@ -124,7 +124,7 @@ public final class RsPrettyXMLTest {
             .concat("lang=\"en\">");
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyXML(
+                new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
                             new StringBuilder("<!DOCTYPE HTML "),
@@ -158,7 +158,7 @@ public final class RsPrettyXMLTest {
      */
     @Test(expected = IOException.class)
     public void formatsNonXmlBody() throws IOException {
-        new RsPrint(new RsPrettyXML(new RsWithBody("foo"))).printBody();
+        new RsPrint(new RsPrettyXml(new RsWithBody("foo"))).printBody();
     }
 
     /**
@@ -175,7 +175,7 @@ public final class RsPrettyXMLTest {
         ).printBody(baos);
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyXML(
+                new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
                 )
             ).printHead(),
@@ -194,7 +194,7 @@ public final class RsPrettyXMLTest {
      */
     @Test
     public void conformsToEqualsAndHashCode() throws Exception {
-        EqualsVerifier.forClass(RsPrettyXML.class)
+        EqualsVerifier.forClass(RsPrettyXml.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
             .verify();

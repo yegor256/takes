@@ -32,12 +32,12 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link RsPrettyJSON}.
+ * Test case for {@link RsPrettyJson}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-public final class RsPrettyJSONTest {
+public final class RsPrettyJsonTest {
 
     /**
      * RsPrettyJSON can format response with JSON body.
@@ -47,7 +47,7 @@ public final class RsPrettyJSONTest {
     public void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyJSON(
+                new RsPrettyJson(
                     new RsWithBody("{\"widget\": {\"debug\": \"on\" }}")
                 )
             ).printBody(),
@@ -63,7 +63,7 @@ public final class RsPrettyJSONTest {
      */
     @Test(expected = IOException.class)
     public void rejectsNonJsonBody() throws Exception {
-        new RsPrint(new RsPrettyJSON(new RsWithBody("foo"))).printBody();
+        new RsPrint(new RsPrettyJson(new RsWithBody("foo"))).printBody();
     }
 
     /**
@@ -80,7 +80,7 @@ public final class RsPrettyJSONTest {
         ).printBody(baos);
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrettyJSON(
+                new RsPrettyJson(
                     new RsWithBody("{\"test\": {\"test\": \"test\" }}")
                 )
             ).printHead(),
@@ -99,7 +99,7 @@ public final class RsPrettyJSONTest {
      */
     @Test
     public void conformsToEqualsAndHashCode() throws Exception {
-        EqualsVerifier.forClass(RsPrettyJSON.class)
+        EqualsVerifier.forClass(RsPrettyJson.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
             .verify();

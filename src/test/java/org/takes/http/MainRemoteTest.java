@@ -98,7 +98,7 @@ public final class MainRemoteTest {
          * @throws IOException If fails
          */
         public static void main(final String... args) throws IOException {
-            new FtCLI(new TkFixed("works fine!"), args).start(Exit.NEVER);
+            new FtCli(new TkFixed("works fine!"), args).start(Exit.NEVER);
         }
     }
 
@@ -118,7 +118,7 @@ public final class MainRemoteTest {
          * @throws IOException If fails
          */
         public static void main(final String... args) throws IOException {
-            new FtCLI(new TkFixed(args[1]), args[0]).start(Exit.NEVER);
+            new FtCli(new TkFixed(args[1]), args[0]).start(Exit.NEVER);
         }
     }
 

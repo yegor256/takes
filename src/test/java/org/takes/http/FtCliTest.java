@@ -38,13 +38,13 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 
 /**
- * Test case for {@link FtCLI}.
+ * Test case for {@link FtCli}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FtCLITest {
+public final class FtCliTest {
 
     /**
      * Temp directory.
@@ -74,7 +74,7 @@ public final class FtCLITest {
                 @Override
                 public void run() {
                     try {
-                        new FtCLI(
+                        new FtCli(
                             new TkFork(new FkRegex("/", "hello!")),
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",

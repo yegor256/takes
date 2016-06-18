@@ -81,7 +81,7 @@ public final class Href implements CharSequence {
      * @param txt Text of the link
      */
     public Href(final CharSequence txt) {
-        this(Href.createURI(txt.toString()));
+        this(Href.createUri(txt.toString()));
     }
 
     /**
@@ -282,7 +282,7 @@ public final class Href implements CharSequence {
      * @throws IllegalStateException in case an invalid character could not be
      *  encoded properly.
      */
-    private static URI createURI(final String txt) {
+    private static URI createUri(final String txt) {
         URI result;
         try {
             result = new URI(txt);
@@ -297,7 +297,7 @@ public final class Href implements CharSequence {
                 index + 1,
                 Href.encode(value.substring(index, index + 1))
             );
-            result = Href.createURI(value.toString());
+            result = Href.createUri(value.toString());
         }
         return result;
     }

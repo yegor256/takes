@@ -41,13 +41,13 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsHTML extends RsWrap {
+public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
      * @since 0.10
      */
-    public RsHTML() {
+    public RsHtml() {
         this("<html/>");
     }
 
@@ -55,7 +55,7 @@ public final class RsHTML extends RsWrap {
      * Ctor.
      * @param body HTML body
      */
-    public RsHTML(final CharSequence body) {
+    public RsHtml(final CharSequence body) {
         this(new RsEmpty(), body);
     }
 
@@ -63,7 +63,7 @@ public final class RsHTML extends RsWrap {
      * Ctor.
      * @param body HTML body
      */
-    public RsHTML(final byte[] body) {
+    public RsHtml(final byte[] body) {
         this(new RsEmpty(), body);
     }
 
@@ -72,7 +72,7 @@ public final class RsHTML extends RsWrap {
      * @param url URL with body
      * @since 0.10
      */
-    public RsHTML(final URL url) {
+    public RsHtml(final URL url) {
         this(new RsEmpty(), url);
     }
 
@@ -80,7 +80,7 @@ public final class RsHTML extends RsWrap {
      * Ctor.
      * @param body HTML body
      */
-    public RsHTML(final InputStream body) {
+    public RsHtml(final InputStream body) {
         this(new RsEmpty(), body);
     }
 
@@ -89,7 +89,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @param body HTML body
      */
-    public RsHTML(final Response res, final CharSequence body) {
+    public RsHtml(final Response res, final CharSequence body) {
         this(new RsWithBody(res, body));
     }
 
@@ -98,7 +98,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @param body HTML body
      */
-    public RsHTML(final Response res, final byte[] body) {
+    public RsHtml(final Response res, final byte[] body) {
         this(new RsWithBody(res, body));
     }
 
@@ -107,7 +107,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @param body HTML body
      */
-    public RsHTML(final Response res, final InputStream body) {
+    public RsHtml(final Response res, final InputStream body) {
         this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
     }
 
@@ -116,7 +116,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @param url URL with body
      */
-    public RsHTML(final Response res, final URL url) {
+    public RsHtml(final Response res, final URL url) {
         this(new RsWithBody(res, url));
     }
 
@@ -125,7 +125,7 @@ public final class RsHTML extends RsWrap {
      * @param res Original response
      * @since 0.10
      */
-    public RsHTML(final Response res) {
+    public RsHtml(final Response res) {
         super(
             new RsWithType(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),
