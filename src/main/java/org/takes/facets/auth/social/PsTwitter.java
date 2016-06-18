@@ -56,6 +56,11 @@ import org.takes.misc.Utf8String;
 public final class PsTwitter implements Pass {
 
     /**
+     * Access token.
+     */
+    private static final String ACCESS_TOKEN = "access_token";
+
+    /**
      * URL for verifying user credentials.
      */
     private static final String VERIFY_URL =
@@ -139,7 +144,7 @@ public final class PsTwitter implements Pass {
                 .set(
                     URI.create(
                         new Href(PsTwitter.VERIFY_URL)
-                            .with("access_token", tkn)
+                            .with(PsTwitter.ACCESS_TOKEN, tkn)
                             .toString()
                     )
                 )
@@ -194,6 +199,6 @@ public final class PsTwitter implements Pass {
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(JsonResponse.class)
-            .json().readObject().getString("access_token");
+            .json().readObject().getString(PsTwitter.ACCESS_TOKEN);
     }
 }
