@@ -83,6 +83,11 @@ public final class PsFacebook implements Pass {
     private final transient String key;
 
     /**
+     * Client secret.
+     */
+    private static final String CLIENT_SECRET = "client_secret";
+
+    /**
      * Ctor.
      * @param fapp Facebook app
      * @param fkey Facebook key
@@ -92,7 +97,7 @@ public final class PsFacebook implements Pass {
             new JdkRequest(
                 new Href("https://graph.facebook.com/oauth/access_token")
                     .with("client_id", fapp)
-                    .with("client_secret", fkey)
+                    .with(PsFacebook.CLIENT_SECRET, fkey)
                     .toString()
             ),
             new DefaultWebRequestor(),
@@ -191,7 +196,7 @@ public final class PsFacebook implements Pass {
                     new Href("https://graph.facebook.com/oauth/access_token")
                         .with("client_id", this.app)
                         .with("redirect_uri", home)
-                        .with("client_secret", this.key)
+                        .with(PsFacebook.CLIENT_SECRET, this.key)
                         .with("code", code)
                         .toString()
                 )
