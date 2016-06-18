@@ -39,6 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.30
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = {"origin"})
 @EqualsAndHashCode(of = {"origin"})
 public final class TkReadAlways implements Take {

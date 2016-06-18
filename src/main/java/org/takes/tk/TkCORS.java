@@ -51,6 +51,7 @@ import org.takes.rs.RsWithStatus;
  * @version $Id$
  * @since 0.20
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "allowed" })
 @EqualsAndHashCode(of = { "origin", "allowed" })
 public final class TkCORS implements Take {

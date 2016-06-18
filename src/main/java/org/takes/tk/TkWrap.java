@@ -39,6 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.4
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public class TkWrap implements Take {

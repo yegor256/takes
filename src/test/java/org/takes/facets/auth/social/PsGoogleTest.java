@@ -57,7 +57,47 @@ import org.takes.rs.RsJSON;
 public final class PsGoogleTest {
 
     /**
+     * Octocat.
+     */
+    private static final String OCTOCAT = "octocat";
+    /**
+     * Image.
+     */
+    private static final String IMAGE = "image";
+    /**
+     * GET.
+     */
+    private static final String GET = "GET";
+    /**
+     * Name.
+     */
+    private static final String NAME = "name";
+    /**
+     * Picture.
+     */
+    private static final String PICTURE = "picture";
+    /**
+     * Url.
+     */
+    private static final String URL = "url";
+    /**
+     * Act head.
+     */
+    private static final String ACT_HEAD = "GET /plus/v1/people/me";
+    /**
+     * Identity urn.
+     */
+    private static final String IDENTITY_URN = "urn:google:1";
+    /**
+     * Regex pattern.
+     */
+    private static final String REGEX_PATTERN = "/plus/v1/people/me";
+    /**
      * Code parameter.
+     */
+    private static final String CODE_PARAM = "?code=code";
+    /**
+     * Code.
      */
     private static final String CODE = "code";
     /**
@@ -94,7 +134,7 @@ public final class PsGoogleTest {
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
-                "/plus/v1/people/me",
+                PsGoogleTest.REGEX_PATTERN,
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
@@ -102,7 +142,7 @@ public final class PsGoogleTest {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
-                                "GET /plus/v1/people/me"
+                                PsGoogleTest.ACT_HEAD
                             )
                         );
                         MatcherAssert.assertThat(
@@ -113,13 +153,13 @@ public final class PsGoogleTest {
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
-                                .add("displayName", "octocat")
+                                .add("displayName", PsGoogleTest.OCTOCAT)
                                 .add("id", "1")
                                 .add(
-                                    "image",
+                                    PsGoogleTest.IMAGE,
                                     Json.createObjectBuilder()
                                         .add(
-                                            "url",
+                                            PsGoogleTest.URL,
                                             PsGoogleTest.AVATAR
                                         )
                                 )
@@ -140,17 +180,19 @@ public final class PsGoogleTest {
                         PsGoogleTest.ACCOUNT,
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
+                    ).enter(
+                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                    ).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
-                        Matchers.equalTo("urn:google:1")
+                        Matchers.equalTo(PsGoogleTest.IDENTITY_URN)
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("name"),
-                        Matchers.equalTo("octocat")
+                        identity.properties().get(PsGoogleTest.NAME),
+                        Matchers.equalTo(PsGoogleTest.OCTOCAT)
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("picture"),
+                        identity.properties().get(PsGoogleTest.PICTURE),
                         Matchers.equalTo(PsGoogleTest.AVATAR)
                     );
                 }
@@ -167,7 +209,7 @@ public final class PsGoogleTest {
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
-                "/plus/v1/people/me",
+                PsGoogleTest.REGEX_PATTERN,
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
@@ -175,7 +217,7 @@ public final class PsGoogleTest {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
-                                "GET /plus/v1/people/me"
+                                PsGoogleTest.ACT_HEAD
                             )
                         );
                         MatcherAssert.assertThat(
@@ -200,7 +242,9 @@ public final class PsGoogleTest {
                         PsGoogleTest.ACCOUNT,
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
+                    ).enter(
+                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                    ).get();
                 }
             }
         );
@@ -215,7 +259,7 @@ public final class PsGoogleTest {
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
-                "/plus/v1/people/me",
+                PsGoogleTest.REGEX_PATTERN,
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 new Take() {
                     @Override
@@ -223,7 +267,7 @@ public final class PsGoogleTest {
                         MatcherAssert.assertThat(
                             new RqPrint(req).printHead(),
                             Matchers.containsString(
-                                "GET /plus/v1/people/me"
+                                PsGoogleTest.ACT_HEAD
                             )
                         );
                         MatcherAssert.assertThat(
@@ -236,10 +280,10 @@ public final class PsGoogleTest {
                             Json.createObjectBuilder()
                                 .add("id", "1")
                                 .add(
-                                    "image",
+                                    PsGoogleTest.IMAGE,
                                     Json.createObjectBuilder()
                                         .add(
-                                            "url",
+                                            PsGoogleTest.URL,
                                             PsGoogleTest.AVATAR
                                         )
                                 )
@@ -260,17 +304,19 @@ public final class PsGoogleTest {
                         PsGoogleTest.ACCOUNT,
                         home.toString(),
                         home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
+                    ).enter(
+                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                    ).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
-                        Matchers.equalTo("urn:google:1")
+                        Matchers.equalTo(PsGoogleTest.IDENTITY_URN)
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("name"),
+                        identity.properties().get(PsGoogleTest.NAME),
                         Matchers.equalTo("unknown")
                     );
                     MatcherAssert.assertThat(
-                        identity.properties().get("picture"),
+                        identity.properties().get(PsGoogleTest.PICTURE),
                         Matchers.equalTo(PsGoogleTest.AVATAR)
                     );
                 }
