@@ -42,7 +42,6 @@ import org.takes.facets.forward.RsForward;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "loc" })
 @EqualsAndHashCode(of = { "origin", "loc" })
 public final class TkSecure implements Take {

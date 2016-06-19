@@ -45,7 +45,6 @@ import org.takes.rq.RqMethod;
  * @version $Id$
  * @since 0.11.2
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "target" })
 @EqualsAndHashCode(of = { "origin", "target" })
 public final class TkSlf4j implements Take {

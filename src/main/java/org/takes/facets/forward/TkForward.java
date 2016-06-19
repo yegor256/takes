@@ -45,7 +45,6 @@ import org.takes.rs.RsSimple;
  * @since 0.1
  * @see org.takes.facets.forward.TkForward
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class TkForward implements Take {

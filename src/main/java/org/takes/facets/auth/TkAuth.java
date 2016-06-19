@@ -41,7 +41,6 @@ import org.takes.rq.RqWithoutHeader;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "pass", "header" })
 @EqualsAndHashCode(of = { "origin", "pass", "header" })
 public final class TkAuth implements Take {

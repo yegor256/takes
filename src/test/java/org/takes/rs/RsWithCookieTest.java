@@ -38,6 +38,35 @@ import org.junit.Test;
 public final class RsWithCookieTest {
 
     /**
+     * Carriage return constant.
+     */
+    private static final String CRLF = "\r\n";
+    /**
+     * Bar.
+     */
+    private static final String BAR = "bar";
+    /**
+     * Http ok.
+     */
+    private static final String HTTP_OK = "HTTP/1.1 200 OK";
+    /**
+     * Works.
+     */
+    private static final String WORKS = "works?";
+    /**
+     * Set cookie.
+     */
+    private static final String SET_COOKIE = "Set-Cookie: foo=works?;Path=/;";
+    /**
+     * Foo.
+     */
+    private static final String FOO = "foo";
+    /**
+     * Path.
+     */
+    private static final String PATH = "Path=/";
+
+    /**
      * RsWithCookie can add cookies.
      * @throws IOException If some problem inside
      * @checkstyle MultipleStringLiteralsCheck (17 lines)
@@ -48,13 +77,15 @@ public final class RsWithCookieTest {
             new RsPrint(
                 new RsWithCookie(
                     new RsEmpty(),
-                    "foo", "works?", "Path=/"
+                    RsWithCookieTest.FOO, 
+                    RsWithCookieTest.WORKS, 
+                    RsWithCookieTest.PATH
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Set-Cookie: foo=works?;Path=/;",
+                Joiner.on(RsWithCookieTest.CRLF).join(
+                    RsWithCookieTest.HTTP_OK,
+                    RsWithCookieTest.SET_COOKIE,
                     "",
                     ""
                 )
@@ -74,15 +105,17 @@ public final class RsWithCookieTest {
                 new RsWithCookie(
                     new RsWithCookie(
                         new RsEmpty(),
-                        "foo", "works?", "Path=/"
+                        RsWithCookieTest.FOO, 
+                        RsWithCookieTest.WORKS, 
+                        RsWithCookieTest.PATH
                     ),
-                    "bar", "worksToo?", "Path=/2nd/path/"
+                    RsWithCookieTest.BAR, "worksToo?", "Path=/2nd/path/"
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Set-Cookie: foo=works?;Path=/;",
+                Joiner.on(RsWithCookieTest.CRLF).join(
+                    RsWithCookieTest.HTTP_OK,
+                    RsWithCookieTest.SET_COOKIE,
                     "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
                     "",
                     ""
@@ -104,6 +137,6 @@ public final class RsWithCookieTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void rejectsInvalidValue() {
-        new RsWithCookie(new RsEmpty(), "bar", "wo\"rks");
+        new RsWithCookie(new RsEmpty(), RsWithCookieTest.BAR, "wo\"rks");
     }
 }

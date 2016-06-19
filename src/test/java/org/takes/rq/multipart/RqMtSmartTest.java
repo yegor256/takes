@@ -62,6 +62,19 @@ import org.takes.rs.RsText;
  */
 public final class RqMtSmartTest {
     /**
+     * Post.
+     */
+    private static final String POST = "POST /post?u=3 HTTP/1.1";
+    /**
+     * Body element.
+     */
+    private static final String BODY_ELEMENT = "--zzz";
+    /**
+     * Content type.
+     */
+    private static final String CONTENT_TYPE =
+        "Content-Type: multipart/form-data; boundary=zzz";
+    /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
@@ -90,20 +103,20 @@ public final class RqMtSmartTest {
         final String part = "x-1";
         final String body =
             Joiner.on(RqMtSmartTest.CRLF).join(
-                "--zzz",
+                RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("X", length),
-                "--zzz--"
+                String.format("%s--", RqMtSmartTest.BODY_ELEMENT)
             );
         final Request req = new RqFake(
             Arrays.asList(
-                "POST /post?u=3 HTTP/1.1",
+                RqMtSmartTest.POST,
                 "Host: www.example.com",
                 RqMtSmartTest.contentLengthHeader(
                     (long) body.getBytes().length
                 ),
-                "Content-Type: multipart/form-data; boundary=zzz"
+                RqMtSmartTest.CONTENT_TYPE
             ),
             body
         );
@@ -229,7 +242,7 @@ public final class RqMtSmartTest {
         final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
         bwr.write(
             Joiner.on(RqMtSmartTest.CRLF).join(
-                "--zzz",
+                RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
@@ -239,15 +252,15 @@ public final class RqMtSmartTest {
             bwr.write("X");
         }
         bwr.write(RqMtSmartTest.CRLF);
-        bwr.write("--zzz--");
+        bwr.write(String.format("%s--", RqMtSmartTest.BODY_ELEMENT));
         bwr.write(RqMtSmartTest.CRLF);
         bwr.close();
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
             Arrays.asList(
-                "POST /post?u=3 HTTP/1.1",
+                RqMtSmartTest.POST,
                 "Host: example.com",
-                "Content-Type: multipart/form-data; boundary=zzz",
+                RqMtSmartTest.CONTENT_TYPE,
                 String.format("Content-Length:%s", file.length())
             ),
             new TempInputStream(new FileInputStream(file), file)
@@ -302,7 +315,7 @@ public final class RqMtSmartTest {
         bwr.close();
         final Request req = new RqFake(
             Arrays.asList(
-                "POST /post?u=3 HTTP/1.1",
+                RqMtSmartTest.POST,
                 "Host: exampl.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length

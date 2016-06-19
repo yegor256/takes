@@ -44,7 +44,6 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.10
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsGzip implements Response {

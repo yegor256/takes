@@ -38,7 +38,6 @@ import org.takes.Response;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public class RsWrap implements Response {

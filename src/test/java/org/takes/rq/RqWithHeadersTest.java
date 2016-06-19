@@ -40,6 +40,14 @@ import org.junit.Test;
  */
 public final class RqWithHeadersTest {
     /**
+     * Test header.
+     */
+    private static final String TEST_HEADER = "TestHeader: someValue";
+    /**
+     * Some header.
+     */
+    private static final String SOME_HEADER = "SomeHeader: testValue";
+    /**
      * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
@@ -49,16 +57,16 @@ public final class RqWithHeadersTest {
             new RqPrint(
                 new RqWithHeaders(
                     new RqFake(),
-                    "TestHeader: someValue",
-                    "SomeHeader: testValue"
+                    RqWithHeadersTest.TEST_HEADER,
+                    RqWithHeadersTest.SOME_HEADER
                 )
             ).print(),
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    "TestHeader: someValue",
-                    "SomeHeader: testValue"
+                    RqWithHeadersTest.TEST_HEADER,
+                    RqWithHeadersTest.SOME_HEADER
                 )
             )
         );

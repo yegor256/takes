@@ -46,7 +46,6 @@ import org.takes.rs.RsWithoutHeader;
  * @version $Id$
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(callSuper = true, of = "origin")
 @EqualsAndHashCode(callSuper = true, of = "origin")
 @SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
