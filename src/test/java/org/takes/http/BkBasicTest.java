@@ -101,7 +101,7 @@ public final class BkBasicTest {
         new BkBasic(new TkText(BkBasicTest.HELLO_WORLD)).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
-            Matchers.containsString("Hello world")
+            Matchers.containsString("Hello World")
         );
     }
 
