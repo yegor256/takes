@@ -52,8 +52,8 @@ import org.takes.rs.RsWithStatus;
  * @since 0.20
  * @todo #684:15min Remove PMD.AvoidDuplicateLiterals exclude here and in
  *  {@link RsPrettyJson}, {@link RsPrettyXml}. Note that this puzzle depends on
- *  https://github.com/teamed/qulice/issues/760. Also remove some of PMD
- *  excludes that are mentioned in https://github.com/yegor256/takes/issues/686
+ *  https://github.com/teamed/qulice/issues/760. Note that this puzzle has
+ *  partially overlap with https://github.com/yegor256/takes/issues/686
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "allowed" })
