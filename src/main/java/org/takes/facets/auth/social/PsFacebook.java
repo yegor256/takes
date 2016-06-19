@@ -85,7 +85,7 @@ public final class PsFacebook implements Pass {
     /**
      * Facebook access token URL.
      */
-    private static final String FB_ACCESS_TOKEN_URL =
+    private static final String ACCESS_TOKEN_URL =
         "https://graph.facebook.com/oauth/access_token";
 
     /**
@@ -116,7 +116,7 @@ public final class PsFacebook implements Pass {
     public PsFacebook(final String fapp, final String fkey) {
         this(
             new JdkRequest(
-                new Href(PsFacebook.FB_ACCESS_TOKEN_URL)
+                new Href(PsFacebook.ACCESS_TOKEN_URL)
                     .with(PsFacebook.CLIENT_ID, fapp)
                     .with(PsFacebook.CLIENT_SECRET, fkey)
                     .toString()
@@ -214,7 +214,7 @@ public final class PsFacebook implements Pass {
             .uri()
             .set(
                 URI.create(
-                    new Href(PsFacebook.FB_ACCESS_TOKEN_URL)
+                    new Href(PsFacebook.ACCESS_TOKEN_URL)
                         .with(PsFacebook.CLIENT_ID, this.app)
                         .with("redirect_uri", home)
                         .with(PsFacebook.CLIENT_SECRET, this.key)

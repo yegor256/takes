@@ -58,6 +58,27 @@ import org.takes.rs.RsJSON;
 public final class PsLinkedinTest {
 
     /**
+     * First name.
+     */
+    private static final String FIRST_NAME = "firstName";
+    /**
+     * Last name.
+     */
+    private static final String LAST_NAME = "lastName";
+    /**
+     * Frodo.
+     */
+    private static final String FRODO = "Frodo";
+    /**
+     * Baggins.
+     */
+    private static final String BAGGINS = "Baggins";
+    /**
+     * Regex pattern.
+     */
+    private static final String REGEX_PATTERN = "/uas/oauth2/accessToken";
+
+    /**
      * PsLinkedin can login.
      * @throws IOException If some problem inside
      */
@@ -69,7 +90,7 @@ public final class PsLinkedinTest {
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
         final Take take = new TkFork(
             new FkRegex(
-                "/uas/oauth2/accessToken",
+                PsLinkedinTest.REGEX_PATTERN,
                 // @checkstyle AnonInnerLengthCheck (100 lines)
                 new Take() {
                     @Override
@@ -91,7 +112,7 @@ public final class PsLinkedinTest {
                         );
                         MatcherAssert.assertThat(
                             new RqHref.Base(req).href().toString(),
-                            Matchers.endsWith("/uas/oauth2/accessToken")
+                            Matchers.endsWith(PsLinkedinTest.REGEX_PATTERN)
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
@@ -111,9 +132,13 @@ public final class PsLinkedinTest {
                         return new RsJSON(
                             Json.createObjectBuilder()
                                 .add("id", identifier)
-                                .add("firstName", "Frodo")
-                                .add("lastName", "Baggins")
-                                .build()
+                                .add(
+                                    PsLinkedinTest.FIRST_NAME,
+                                    PsLinkedinTest.FRODO
+                                ).add(
+                                    PsLinkedinTest.LAST_NAME,
+                                    PsLinkedinTest.BAGGINS
+                                ).build()
                         );
                     }
                 }
@@ -146,8 +171,14 @@ public final class PsLinkedinTest {
                     MatcherAssert.assertThat(
                         identity.properties(),
                         Matchers.allOf(
-                            Matchers.hasEntry("firstName", "Frodo"),
-                            Matchers.hasEntry("lastName", "Baggins")
+                            Matchers.hasEntry(
+                                PsLinkedinTest.FIRST_NAME,
+                                PsLinkedinTest.FRODO
+                            ),
+                            Matchers.hasEntry(
+                                PsLinkedinTest.LAST_NAME,
+                                PsLinkedinTest.BAGGINS
+                            )
                         )
                     );
                 }
