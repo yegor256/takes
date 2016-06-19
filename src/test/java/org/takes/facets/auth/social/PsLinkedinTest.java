@@ -55,6 +55,7 @@ import org.takes.rs.RsJSON;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@SuppressWarnings("PMD.ExcessiveMethodLength")
 public final class PsLinkedinTest {
 
     /**

@@ -252,7 +252,7 @@ public final class RqMtSmartTest {
             bwr.write("X");
         }
         bwr.write(RqMtSmartTest.CRLF);
-        bwr.write(String.format("%s--", RqMtSmartTest.BODY_ELEMENT));
+        bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
         bwr.write(RqMtSmartTest.CRLF);
         bwr.close();
         final long start = System.currentTimeMillis();

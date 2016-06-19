@@ -101,6 +101,7 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.1
  */
+@SuppressWarnings("PMD.SingularField")
 @ToString(callSuper = true, of = "text")
 @EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {

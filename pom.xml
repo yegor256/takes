@@ -384,11 +384,13 @@
                                 <exclude>pmd:/src/main/java/org/takes/facets/fork/TkFork.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/ret/TkReturn.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/flash/TkFlash.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/auth/TkAuth.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/auth/TkSecure.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/forward/TkForward.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/forward/RsForward.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyJSON.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyXML.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsGzip.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsWrap.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/tk/TkSlf4j.java</exclude>

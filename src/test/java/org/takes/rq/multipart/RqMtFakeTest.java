@@ -64,12 +64,12 @@ public final class RqMtFakeTest {
     /**
      * Form data.
      */
-    private static final String FORM_DATA_FILENAME =
+    private static final String FORM_DATA =
         "form-data; name=\"data\"; filename=\"%s\"";
     /**
      * IOException message.
      */
-    private static final String IOEXCEPTION_MESSAGE =
+    private static final String IOEXCEPTION_MSG =
         "An IOException was expected since the Stream is closed";
     /**
      * Foo.
@@ -158,7 +158,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    String.format(RqMtFakeTest.FORM_DATA_FILENAME, "a.bin")
+                    String.format(RqMtFakeTest.FORM_DATA, "a.rar")
                 )
             )
         );
@@ -223,7 +223,7 @@ public final class RqMtFakeTest {
         try {
             multi.part(RqMtFakeTest.NAME).iterator().next().body().read();
             Assert.fail(
-                RqMtFakeTest.IOEXCEPTION_MESSAGE
+                RqMtFakeTest.IOEXCEPTION_MSG
             );
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
@@ -238,7 +238,7 @@ public final class RqMtFakeTest {
         try {
             multi.part(RqMtFakeTest.CONTENT).iterator().next().body().read();
             Assert.fail(
-                RqMtFakeTest.IOEXCEPTION_MESSAGE
+                RqMtFakeTest.IOEXCEPTION_MSG
             );
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
@@ -314,7 +314,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    String.format(RqMtFakeTest.FORM_DATA_FILENAME, "a.zip")
+                    String.format(RqMtFakeTest.FORM_DATA, "a.zip")
                 )
             )
         );
@@ -347,7 +347,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    String.format(RqMtFakeTest.FORM_DATA_FILENAME, "a.bin")
+                    String.format(RqMtFakeTest.FORM_DATA, "a.bin")
                 )
             )
         );
