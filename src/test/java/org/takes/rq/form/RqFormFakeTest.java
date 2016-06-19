@@ -21,105 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rq.form;
 
 import com.google.common.escape.Escaper;
 import com.google.common.net.UrlEscapers;
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rq.RqFake;
+import org.takes.rq.RqForm;
 
 /**
- * Test case for {@link RqForm}.
+ * Test case for {@link RqFormFake}.
+ *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.9
+ * @since 0.33
  */
-public final class RqFormTest {
-
+public final class RqFormFakeTest {
     /**
      * Content-Length header template.
      */
     private static final String HEADER = "Content-Length: %d";
 
     /**
-     * RqForm can parse body.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void parsesHttpBody() throws IOException {
-        final String body = "alpha=a+b+c&beta=%20Yes%20";
-        final RqForm req = new RqForm.Base(
-            new RqBuffered(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /h?a=3",
-                        "Host: www.example.com",
-                        String.format(
-                            RqFormTest.HEADER,
-                            body.getBytes().length
-                        )
-                    ),
-                    body
-                )
-            )
-        );
-        MatcherAssert.assertThat(
-            req.param("beta"),
-            Matchers.hasItem(" Yes ")
-        );
-        MatcherAssert.assertThat(
-            req.names(),
-            Matchers.hasItem("alpha")
-        );
-    }
-
-    /**
-     * RqForm.Smart can parse one argument in body.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void parsesOneArgumentInBody() throws IOException {
-        final RqForm req = new RqForm.Base(
-            new RqFake(
-                "GET /just-a-test",
-                "Host: www.takes.org",
-                "test-6=blue"
-            )
-        );
-        MatcherAssert.assertThat(
-            new RqForm.Smart(req).single("test-6"),
-            Matchers.equalTo("blue")
-        );
-    }
-
-    /**
-     * Returns always same instances (Cache).
-     * @throws IOException if fails
-     */
-    @Test
-    public void sameInstance() throws IOException {
-        final RqForm req = new RqForm.Base(
-            new RqBuffered(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /path?a=3",
-                        "Host: www.example2.com"
-                    ),
-                    "alpha=a+b+c&beta=%20No%20"
-                )
-            )
-        );
-        MatcherAssert.assertThat(
-            req.names() == req.names(),
-            Matchers.is(Boolean.TRUE)
-        );
-    }
-
-    /**
-     * RqForm.Fake can create fake forms with parameters list.
+     * RqFormFake can create fake forms with parameters list.
+     *
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -130,13 +58,13 @@ public final class RqFormTest {
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
         final Escaper escaper = UrlEscapers.urlFormParameterEscaper();
-        final RqForm req = new RqForm.Fake(
+        final RqForm req = new RqFormFake(
             new RqFake(
                 Arrays.asList(
                     "GET /form",
                     "Host: www.example5.com",
                     String.format(
-                        RqFormTest.HEADER,
+                        RqFormFakeTest.HEADER,
                         escaper.escape(key).length() + 1
                             + escaper.escape(value).length() + 1
                             + escaper.escape(key).length() + 1
@@ -166,14 +94,15 @@ public final class RqFormTest {
     }
 
     /**
-     * RqForm.Fake throws an IllegalArgumentException when invoked with
+     * RqFormFake throws an IllegalArgumentException when invoked with
      * wrong number of parameters.
+     *
      * @throws Exception If something goes wrong.
      */
     @Test(expected = IllegalArgumentException.class)
     public void throwsExceptionWhenNotCorrectlyCreated()
         throws Exception {
-        new RqForm.Fake(
+        new RqFormFake(
             new RqFake(),
             "param"
         );

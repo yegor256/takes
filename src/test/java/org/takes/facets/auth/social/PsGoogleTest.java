@@ -38,10 +38,11 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqForm;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqPrint;
+import org.takes.rq.form.RqFormBase;
+import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJSON;
 
 /**
@@ -343,7 +344,7 @@ public final class PsGoogleTest {
     private static void assertParam(final Request req,
         final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
-            new RqForm.Smart(new RqForm.Base(req)).single(param),
+            new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );
     }
