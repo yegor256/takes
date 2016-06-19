@@ -34,7 +34,6 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHeaders;
-import org.takes.rs.RsPrettyJson;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
 
@@ -51,7 +50,6 @@ import org.takes.rs.RsWithStatus;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
- *
  * @todo #684:15min Remove PMD.AvoidDuplicateLiterals exclude here and in
  *  {@link RsPrettyJson}, {@link RsPrettyXml}. Note that this puzzle depends on
  *  https://github.com/teamed/qulice/issues/760. Also remove some of PMD
