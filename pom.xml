@@ -377,7 +377,7 @@
                                 <exclude>checkstyle:/src/test/java/org/takes/http/FtBasicTest.java</exclude>
                                 <exclude>checkstyle:/src/test/java/org/takes/http/FtCLITest.java</exclude>
                                 <!--
-                                @todo #678:30min After upgrade to qulice 0.16.4 we have to fix 
+                                @todo #686:30min After upgrade to qulice 0.16.4 we have to fix 
                                  AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
                                  remove all excludes of PMD here.
                                 -->                                

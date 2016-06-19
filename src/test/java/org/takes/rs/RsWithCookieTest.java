@@ -77,8 +77,8 @@ public final class RsWithCookieTest {
             new RsPrint(
                 new RsWithCookie(
                     new RsEmpty(),
-                    RsWithCookieTest.FOO, 
-                    RsWithCookieTest.WORKS, 
+                    RsWithCookieTest.FOO,
+                    RsWithCookieTest.WORKS,
                     RsWithCookieTest.PATH
                 )
             ).print(),
@@ -105,8 +105,8 @@ public final class RsWithCookieTest {
                 new RsWithCookie(
                     new RsWithCookie(
                         new RsEmpty(),
-                        RsWithCookieTest.FOO, 
-                        RsWithCookieTest.WORKS, 
+                        RsWithCookieTest.FOO,
+                        RsWithCookieTest.WORKS,
                         RsWithCookieTest.PATH
                     ),
                     RsWithCookieTest.BAR, "worksToo?", "Path=/2nd/path/"
