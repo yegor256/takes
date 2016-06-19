@@ -68,6 +68,12 @@ import org.takes.tk.TkText;
         "PMD.TooManyMethods"
     })
 public final class BkBasicTest {
+
+    /**
+     * Hello world.
+     */
+    private static final String HELLO_WORLD = "Hello World!";
+
     /**
      * Carriage return constant.
      */
@@ -92,7 +98,7 @@ public final class BkBasicTest {
     public void handlesSocket() throws IOException {
         final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
-        new BkBasic(new TkText("Hello world!")).accept(socket);
+        new BkBasic(new TkText(BkBasicTest.HELLO_WORLD)).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
             Matchers.containsString("Hello world")
@@ -284,7 +290,7 @@ public final class BkBasicTest {
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
                         "",
-                        "Hello World!"
+                        BkBasicTest.HELLO_WORLD
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();
@@ -343,7 +349,7 @@ public final class BkBasicTest {
                         BkBasicTest.HOST,
                         "Connection: Close",
                         "",
-                        "Hello World!"
+                        BkBasicTest.HELLO_WORLD
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();
@@ -376,7 +382,7 @@ public final class BkBasicTest {
             new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
-                    "Host:localhost",
+                    BkBasicTest.HOST,
                     "Content-Length: 2",
                     "",
                     "hi"

@@ -46,6 +46,35 @@ import org.takes.rq.RqWithHeaders;
 public final class RqMtBaseTest {
 
     /**
+     * Body element.
+     */
+    private static final String BODY_ELEMENT = "--AaB01x";
+    /**
+     * Content type.
+     */
+    private static final String CONTENT_TYPE =
+        "Content-Type: multipart/form-data; boundary=AaB01x";
+    /**
+     * Host example.
+     */
+    private static final String HOST_EXAMPLE = "Host: rtw.example.com";
+    /**
+     * Form data.
+     */
+    private static final String FORM_DATA = "form-data; name=\"%s\"";
+    /**
+     * POST head.
+     */
+    private static final String POST_HEAD = "POST /h?a=4 HTTP/1.1";
+    /**
+     * Content length.
+     */
+    private static final String LENGTH = "Content-Length: 100007";
+    /**
+     * Address.
+     */
+    private static final String ADDRESS = "447 N Wolfe Rd, Sunnyvale, CA 94085";
+    /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
@@ -57,7 +86,7 @@ public final class RqMtBaseTest {
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMtBaseTest.DISPOSITION, "form-data; name=\"%s\""
+        "%s: %s", RqMtBaseTest.DISPOSITION, RqMtBaseTest.FORM_DATA
     );
 
     /**
@@ -76,7 +105,7 @@ public final class RqMtBaseTest {
                     (long) body.getBytes().length
                 ),
                 RqMtBaseTest.contentDispositionHeader(
-                    String.format("form-data; name=\"%s\"", part)
+                    String.format(RqMtBaseTest.FORM_DATA, part)
                 )
             ),
             new RqWithHeaders(
@@ -107,16 +136,16 @@ public final class RqMtBaseTest {
         new RqMtBase(
             new RqFake(
                 Arrays.asList(
-                    "POST /h?a=4 HTTP/1.1",
-                    "Host: rtw.example.com",
-                    "Content-Type: multipart/form-data; boundary=AaB01x",
-                    "Content-Length: 100007"
+                    RqMtBaseTest.POST_HEAD,
+                    RqMtBaseTest.HOST_EXAMPLE,
+                    RqMtBaseTest.CONTENT_TYPE,
+                    RqMtBaseTest.LENGTH
                 ),
                 Joiner.on(RqMtBaseTest.CRLF).join(
-                    "--AaB01x",
+                    RqMtBaseTest.BODY_ELEMENT,
                     "Content-Disposition: form-data; fake=\"t2\"",
                     "",
-                    "447 N Wolfe Rd, Sunnyvale, CA 94085",
+                    RqMtBaseTest.ADDRESS,
                     "Content-Transfer-Encoding: uwf-8"
                 )
             )
@@ -133,17 +162,17 @@ public final class RqMtBaseTest {
         final RqMtBase multipart = new RqMtBase(
             new RqFake(
                 Arrays.asList(
-                    "POST /h?a=4 HTTP/1.1",
-                    "Host: rtw.example.com",
-                    "Content-Type: multipart/form-data; boundary=AaB01x",
-                    "Content-Length: 100007"
+                    RqMtBaseTest.POST_HEAD,
+                    RqMtBaseTest.HOST_EXAMPLE,
+                    RqMtBaseTest.CONTENT_TYPE,
+                    RqMtBaseTest.LENGTH
                 ),
                 Joiner.on(RqMtBaseTest.CRLF).join(
-                    "--AaB01x",
+                    RqMtBaseTest.BODY_ELEMENT,
                     String.format(RqMtBaseTest.CONTENT, part),
                     "",
-                    "447 N Wolfe Rd, Sunnyvale, CA 94085",
-                    "--AaB01x"
+                    RqMtBaseTest.ADDRESS,
+                    RqMtBaseTest.BODY_ELEMENT
                 )
             )
         );
