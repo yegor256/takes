@@ -100,6 +100,9 @@ import org.takes.rs.RsWrap;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @todo #686:30min After upgrade to qulice 0.16.4 we have to fix
+ *  SingularField PMD warings in this classe. Fix this warning
+ *  and rid of the PMD suppression here.
  */
 @SuppressWarnings("PMD.SingularField")
 @ToString(callSuper = true, of = "text")

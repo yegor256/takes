@@ -54,6 +54,9 @@ import org.takes.rs.RsJSON;
  * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @todo #686:30min After upgrade to qulice 0.16.4 we have to fix
+ *  ExcessiveMethodLength PMD warings in this classe. Fix this warning
+ *  and rid of the PMD suppression here.
  */
 @SuppressWarnings("PMD.ExcessiveMethodLength")
 public final class PsLinkedinTest {
