@@ -50,6 +50,15 @@ import org.takes.rq.RqFake;
 public final class PsTwitterTest {
 
     /**
+     * Http ok.
+     */
+    private static final String HTTP_OK = "HTTP OK";
+    /**
+     * Name.
+     */
+    private static final String NAME = "name";
+
+    /**
      * PsTwitter can login.
      * @throws IOException If error occurs in the process
      */
@@ -61,7 +70,7 @@ public final class PsTwitterTest {
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
-                "HTTP OK",
+                PsTwitterTest.HTTP_OK,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
@@ -70,11 +79,11 @@ public final class PsTwitterTest {
             ),
             new FakeRequest(
                 200,
-                "HTTP OK",
+                PsTwitterTest.HTTP_OK,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
-                    .add("name", name)
+                    .add(PsTwitterTest.NAME, name)
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
@@ -91,7 +100,7 @@ public final class PsTwitterTest {
             CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
         );
         MatcherAssert.assertThat(
-            identity.properties().get("name"),
+            identity.properties().get(PsTwitterTest.NAME),
             CoreMatchers.equalTo(name)
         );
         MatcherAssert.assertThat(
