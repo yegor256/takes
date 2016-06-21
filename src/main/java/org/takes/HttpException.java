@@ -65,7 +65,6 @@ public class HttpException extends IOException {
      * @param cause Cause of the problem
      */
     public HttpException(final int code, final String cause) {
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
         super(String.format(HttpException.MESSAGE_FORMAT, code, cause));
         this.status = code;
     }

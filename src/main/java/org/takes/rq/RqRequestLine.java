@@ -200,7 +200,6 @@ public interface RqRequestLine extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
                         Base.BAD_REQUEST_MSG,
                         line
                     )
@@ -222,7 +221,6 @@ public interface RqRequestLine extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        // @checkstyle MultipleStringLiteralsCheck (1 line)
                         Base.BAD_REQUEST_MSG,
                         line
                     )
