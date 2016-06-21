@@ -38,7 +38,7 @@ import org.takes.rq.RqForm;
  *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.14
+ * @since 0.33
  */
 @EqualsAndHashCode(of = "origin")
 public final class RqFormSmart implements RqForm {

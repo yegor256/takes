@@ -35,6 +35,7 @@ import org.takes.rq.RqForm;
 /**
  * Test case for {@link RqFormBase}.
  * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33
  */
@@ -46,7 +47,7 @@ public final class RqFormBaseTest {
     private static final String HEADER = "Content-Length: %d";
 
     /**
-     * RqForm can parse body.
+     * RqFormBase can parse body.
      * @throws IOException If some problem inside
      */
     @Test
@@ -78,7 +79,7 @@ public final class RqFormBaseTest {
     }
 
     /**
-     * Returns always same instances (Cache).
+     * RqFormBase returns always the same instances (Cache).
      * @throws IOException if fails
      */
     @Test

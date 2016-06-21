@@ -48,11 +48,14 @@ import org.takes.rq.RqPrint;
 import org.takes.rq.RqWrap;
 
 /**
- * Base implementation of @link RqForm.
+ * Base implementation of {@link RqForm}.
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
- * @since 0.9
+ * @since 0.33
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @todo Refactor this class to reduce the data abstraction
+ *  coupling in order to get rid of the checkstyle suppression of
+ *  ClassDataAbstractionCouplingCheck.
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true, of = "req")
