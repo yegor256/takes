@@ -34,7 +34,6 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormBase}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.33
@@ -48,7 +47,6 @@ public final class RqFormBaseTest {
 
     /**
      * RqForm can parse body.
-     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -81,7 +79,6 @@ public final class RqFormBaseTest {
 
     /**
      * Returns always same instances (Cache).
-     *
      * @throws IOException if fails
      */
     @Test

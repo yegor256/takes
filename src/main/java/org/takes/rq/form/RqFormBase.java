@@ -49,7 +49,6 @@ import org.takes.rq.RqWrap;
 
 /**
  * Base implementation of @link RqForm.
- *
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @since 0.9
@@ -58,10 +57,12 @@ import org.takes.rq.RqWrap;
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true, of = "req")
 public final class RqFormBase extends RqWrap implements RqForm {
+
     /**
      * Request.
      */
     private final transient Request req;
+
     /**
      * Saved map.
      */
@@ -69,7 +70,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Ctor.
-     *
      * @param request Original request
      */
     public RqFormBase(final Request request) {
@@ -111,7 +111,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Decode from URL.
-     *
      * @param txt Text
      * @return Decoded
      */
@@ -127,7 +126,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameters.
-     *
      * @return Parameters map or empty map in case of error.
      * @throws IOException If something fails reading or parsing body
      */
@@ -143,7 +141,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameter.
-     *
      * @return Parameters map or empty map in case of error.
      * @throws IOException If something fails reading or parsing body
      */

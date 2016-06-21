@@ -42,10 +42,12 @@ import org.takes.rq.RqForm;
  */
 @EqualsAndHashCode(of = "origin")
 public final class RqFormSmart implements RqForm {
+
     /**
      * Original.
      */
     private final transient RqForm origin;
+
     /**
      * Ctor.
      * @param req Original request
@@ -53,23 +55,28 @@ public final class RqFormSmart implements RqForm {
     public RqFormSmart(final RqForm req) {
         this.origin = req;
     }
+
     @Override
     public Iterable<String> param(final CharSequence name)
         throws IOException {
         return this.origin.param(name);
     }
+
     @Override
     public Iterable<String> names() throws IOException {
         return this.origin.names();
     }
+
     @Override
     public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
+
     @Override
     public InputStream body() throws IOException {
         return this.origin.body();
     }
+
     /**
      * Get single param or throw HTTP exception.
      * @param name Name of query param
@@ -88,6 +95,7 @@ public final class RqFormSmart implements RqForm {
         }
         return params.next();
     }
+
     /**
      * Get single param or default.
      * @param name Name of query param

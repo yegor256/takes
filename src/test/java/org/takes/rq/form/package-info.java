@@ -24,7 +24,6 @@
 
 /**
  * Form tests.
- *
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33

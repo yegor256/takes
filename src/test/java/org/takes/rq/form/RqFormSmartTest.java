@@ -32,7 +32,6 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormSmart}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.33
@@ -41,7 +40,6 @@ public final class RqFormSmartTest {
 
     /**
      * RqFormSmart can parse one argument in body.
-     *
      * @throws IOException If some problem inside
      */
     @Test

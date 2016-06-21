@@ -34,12 +34,12 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormFake}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.33
  */
 public final class RqFormFakeTest {
+
     /**
      * Content-Length header template.
      */
@@ -47,7 +47,6 @@ public final class RqFormFakeTest {
 
     /**
      * RqFormFake can create fake forms with parameters list.
-     *
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -96,7 +95,6 @@ public final class RqFormFakeTest {
     /**
      * RqFormFake throws an IllegalArgumentException when invoked with
      * wrong number of parameters.
-     *
      * @throws Exception If something goes wrong.
      */
     @Test(expected = IllegalArgumentException.class)
