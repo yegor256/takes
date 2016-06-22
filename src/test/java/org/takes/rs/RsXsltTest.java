@@ -39,12 +39,12 @@ import org.junit.Test;
 import org.takes.misc.StateAwareInputStream;
 
 /**
- * Test case for {@link RsXSLT}.
+ * Test case for {@link RsXslt}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
  */
-public final class RsXSLTTest {
+public final class RsXsltTest {
 
     /**
      * Validate encoding.
@@ -77,7 +77,7 @@ public final class RsXSLTTest {
         );
         MatcherAssert.assertThat(
             IOUtils.toString(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(xml),
                     new URIResolver() {
                         @Override
@@ -110,7 +110,7 @@ public final class RsXSLTTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(xml),
                     new URIResolver() {
                         @Override
@@ -146,7 +146,7 @@ public final class RsXSLTTest {
             new StateAwareInputStream(IOUtils.toInputStream(xml));
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(stream),
                     new URIResolver() {
                         @Override
@@ -173,7 +173,7 @@ public final class RsXSLTTest {
     public void resolvesInClasspath() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(
                         Joiner.on(' ').join(
                             "<?xml-stylesheet",
@@ -188,7 +188,7 @@ public final class RsXSLTTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(
                         Joiner.on(' ').join(
                             "<?xml-stylesheet ",
@@ -203,7 +203,7 @@ public final class RsXSLTTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsXSLT(
+                new RsXslt(
                     new RsText(
                         Joiner.on(' ').join(
                             "<?xml-stylesheet  ",

@@ -134,14 +134,14 @@ public final class RsWithType extends RsWrap {
      * @version $Id$
      * @since 0.30
      */
-    public static final class HTML extends RsWrap {
+    public static final class Html extends RsWrap {
 
         /**
          * Constructs a {@code HTML} that will add text/html as the content type
          * header to the response.
          * @param res Original response
          */
-        public HTML(final Response res) {
+        public Html(final Response res) {
             this(res, new Opt.Empty<Charset>());
         }
 
@@ -152,7 +152,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
-        public HTML(final Response res, final Charset charset) {
+        public Html(final Response res, final Charset charset) {
             this(res, new Opt.Single<Charset>(charset));
         }
 
@@ -164,7 +164,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header if
          *  present.
          */
-        private HTML(final Response res, final Opt<Charset> charset) {
+        private Html(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "text/html", charset));
         }
 
@@ -179,14 +179,14 @@ public final class RsWithType extends RsWrap {
      * @version $Id$
      * @since 0.30
      */
-    public static final class JSON extends RsWrap {
+    public static final class Json extends RsWrap {
 
         /**
          * Constructs a {@code JSON} that will add application/json as the
          * content type header to the response.
          * @param res Original response
          */
-        public JSON(final Response res) {
+        public Json(final Response res) {
             this(res, new Opt.Empty<Charset>());
         }
 
@@ -197,7 +197,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
-        public JSON(final Response res, final Charset charset) {
+        public Json(final Response res, final Charset charset) {
             this(res, new Opt.Single<Charset>(charset));
         }
 
@@ -209,7 +209,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header if
          *  present.
          */
-        private JSON(final Response res, final Opt<Charset> charset) {
+        private Json(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "application/json", charset));
         }
 
@@ -224,14 +224,14 @@ public final class RsWithType extends RsWrap {
      * @version $Id$
      * @since 0.30
      */
-    public static final class XML extends RsWrap {
+    public static final class Xml extends RsWrap {
 
         /**
          * Constructs a {@code XML} that will add text/xml as the content type
          * header to the response.
          * @param res Original response
          */
-        public XML(final Response res) {
+        public Xml(final Response res) {
             this(res, new Opt.Empty<Charset>());
         }
 
@@ -242,7 +242,7 @@ public final class RsWithType extends RsWrap {
          * @param res Original response
          * @param charset The character set to add in the content type header
          */
-        public XML(final Response res, final Charset charset) {
+        public Xml(final Response res, final Charset charset) {
             this(res, new Opt.Single<Charset>(charset));
         }
 
@@ -254,7 +254,7 @@ public final class RsWithType extends RsWrap {
          * @param charset The character set to add in the content type header if
          *  present.
          */
-        private XML(final Response res, final Opt<Charset> charset) {
+        private Xml(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "text/xml", charset));
         }
 

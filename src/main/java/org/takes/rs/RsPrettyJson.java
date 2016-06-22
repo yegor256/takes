@@ -49,9 +49,10 @@ import org.takes.Response;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
-public final class RsPrettyJSON implements Response {
+public final class RsPrettyJson implements Response {
 
     /**
      * Original response.
@@ -67,7 +68,7 @@ public final class RsPrettyJSON implements Response {
      * Ctor.
      * @param res Original response
      */
-    public RsPrettyJSON(final Response res) {
+    public RsPrettyJson(final Response res) {
         this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
     }
@@ -94,7 +95,7 @@ public final class RsPrettyJSON implements Response {
                 this.transformed.add(
                     new RsWithBody(
                         this.origin,
-                        RsPrettyJSON.transform(this.origin.body())
+                        RsPrettyJson.transform(this.origin.body())
                     )
                 );
             }

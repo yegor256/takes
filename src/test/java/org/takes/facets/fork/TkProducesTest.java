@@ -34,7 +34,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
-import org.takes.rs.RsJSON;
+import org.takes.rs.RsJson;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkEmpty;
 import org.takes.tk.TkFixed;
@@ -76,7 +76,7 @@ public final class TkProducesTest {
     @Test
     public void producesCorrectContentTypeResponse() throws IOException {
         final Take produces = new TkProduces(
-            new TkFixed(new RsJSON(new RsEmpty())),
+            new TkFixed(new RsJson(new RsEmpty())),
             "text/json"
         );
         final Response response = produces.act(

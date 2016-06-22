@@ -88,7 +88,7 @@ public final class RqMethodTest {
      * @throws IOException If some problem inside
      */
     @Test(expected = IOException.class)
-    public void failsOnMissingURI() throws IOException {
+    public void failsOnMissingUri() throws IOException {
         new RqMethod.Base(new RqSimple(Arrays.asList("GET"), null)).method();
     }
 

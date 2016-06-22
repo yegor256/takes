@@ -39,7 +39,7 @@ import org.takes.misc.Utf8String;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "origin", "secret" })
-public final class CcXOR implements Codec {
+public final class CcXor implements Codec {
 
     /**
      * Original codec.
@@ -56,7 +56,7 @@ public final class CcXOR implements Codec {
      * @param codec Original codec
      * @param key Secret key for encoding
      */
-    public CcXOR(final Codec codec, final String key) {
+    public CcXor(final Codec codec, final String key) {
         this(codec, new Utf8String(key).bytes());
     }
 
@@ -65,7 +65,7 @@ public final class CcXOR implements Codec {
      * @param codec Original codec
      * @param key Secret key for encoding
      */
-    public CcXOR(final Codec codec, final byte[] key) {
+    public CcXor(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.secret = Arrays.copyOf(key, key.length);
     }

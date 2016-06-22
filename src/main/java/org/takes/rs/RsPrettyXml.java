@@ -55,9 +55,10 @@ import org.xml.sax.XMLReader;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
-public final class RsPrettyXML implements Response {
+public final class RsPrettyXml implements Response {
 
     /**
      * Xerces feature to disable external DTD validation.
@@ -79,7 +80,7 @@ public final class RsPrettyXML implements Response {
      * Ctor.
      * @param res Original response
      */
-    public RsPrettyXML(final Response res) {
+    public RsPrettyXml(final Response res) {
         this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
     }
@@ -106,7 +107,7 @@ public final class RsPrettyXML implements Response {
                 this.transformed.add(
                     new RsWithBody(
                         this.origin,
-                        RsPrettyXML.transform(this.origin.body())
+                        RsPrettyXml.transform(this.origin.body())
                     )
                 );
             }
@@ -128,16 +129,17 @@ public final class RsPrettyXML implements Response {
                 .newSAXParser().getXMLReader();
             source.setXMLReader(xmlreader);
             xmlreader.setFeature(
-                RsPrettyXML.LOAD_EXTERNAL_DTD, false
+                RsPrettyXml.LOAD_EXTERNAL_DTD, false
             );
+            final String yes = "yes";
             final Transformer transformer = TransformerFactory.newInstance()
                 .newTransformer();
             // @checkstyle MultipleStringLiteralsCheck (2 line)
             transformer.setOutputProperty(
-                OutputKeys.OMIT_XML_DECLARATION, "yes"
+                OutputKeys.OMIT_XML_DECLARATION, yes
             );
-            RsPrettyXML.prepareDocType(body, transformer);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            RsPrettyXml.prepareDocType(body, transformer);
+            transformer.setOutputProperty(OutputKeys.INDENT, yes);
             transformer.transform(source, new StreamResult(result));
         } catch (final TransformerException ex) {
             throw new IOException(ex);
@@ -159,13 +161,14 @@ public final class RsPrettyXML implements Response {
     private static void prepareDocType(final InputStream body,
         final Transformer transformer) throws IOException {
         try {
-            final DocumentType doctype = RsPrettyXML.getDocType(body);
+            final String html = "html";
+            final DocumentType doctype = RsPrettyXml.getDocType(body);
             if (null != doctype) {
                 if (null == doctype.getSystemId()
                     && null == doctype.getPublicId()
                     // @checkstyle MultipleStringLiteralsCheck (3 line)
-                    && "html".equalsIgnoreCase(doctype.getName())) {
-                    transformer.setOutputProperty(OutputKeys.METHOD, "html");
+                    && html.equalsIgnoreCase(doctype.getName())) {
+                    transformer.setOutputProperty(OutputKeys.METHOD, html);
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
                     return;
                 }
@@ -199,7 +202,7 @@ public final class RsPrettyXML implements Response {
         final DocumentBuilderFactory factory =
             DocumentBuilderFactory.newInstance();
         try {
-            factory.setFeature(RsPrettyXML.LOAD_EXTERNAL_DTD, false);
+            factory.setFeature(RsPrettyXml.LOAD_EXTERNAL_DTD, false);
             final DocumentBuilder builder = factory.newDocumentBuilder();
             return builder.parse(body).getDoctype();
         } catch (final ParserConfigurationException ex) {

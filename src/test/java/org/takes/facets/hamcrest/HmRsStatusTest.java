@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
-import org.takes.tk.TkHTML;
+import org.takes.tk.TkHtml;
 
 /**
  * Test case for {@link HmRsStatus}.
@@ -45,9 +45,9 @@ public final class HmRsStatusTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void testsStatusOK() throws IOException {
+    public void testsStatusOk() throws IOException {
         MatcherAssert.assertThat(
-            new TkHTML("<html></html>").act(new RqFake()),
+            new TkHtml("<html></html>").act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_OK)
         );
         MatcherAssert.assertThat(
@@ -63,7 +63,7 @@ public final class HmRsStatusTest {
     @Test
     public void testsStatusNotFound() throws IOException {
         MatcherAssert.assertThat(
-            new TkHTML("<html><body/></html>").act(new RqFake()),
+            new TkHtml("<html><body/></html>").act(new RqFake()),
             Matchers.not(
                 new HmRsStatus(
                     HttpURLConnection.HTTP_NOT_FOUND

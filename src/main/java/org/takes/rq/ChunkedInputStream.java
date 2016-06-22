@@ -120,7 +120,7 @@ final class ChunkedInputStream extends InputStream {
      * Read the CRLF terminator.
      * @throws IOException If an IO error occurs.
      */
-    private void readCRLF() throws IOException {
+    private void readCrlf() throws IOException {
         final int crsymbol = this.origin.read();
         final int lfsymbol = this.origin.read();
         if (crsymbol != '\r' || lfsymbol != '\n') {
@@ -142,7 +142,7 @@ final class ChunkedInputStream extends InputStream {
      */
     private void nextChunk() throws IOException {
         if (!this.bof) {
-            this.readCRLF();
+            this.readCrlf();
         }
         this.size = ChunkedInputStream.chunkSize(this.origin);
         this.bof = false;

@@ -63,7 +63,7 @@ interface Body {
     /**
      * Content of a body based on an {@link java.net.URL}.
      */
-    final class URL implements Body {
+    final class Url implements Body {
 
         /**
          * The {@link java.net.URL} of the content.
@@ -74,7 +74,7 @@ interface Body {
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
          * @param content The {@link java.net.URL} of the content.
          */
-        URL(final java.net.URL content) {
+        Url(final java.net.URL content) {
             this.url = content;
         }
 
