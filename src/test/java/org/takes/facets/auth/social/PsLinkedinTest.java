@@ -44,7 +44,7 @@ import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqPrint;
-import org.takes.rs.RsJSON;
+import org.takes.rs.RsJson;
 
 /**
  * Test case for {@link PsLinkedin}.
@@ -102,7 +102,7 @@ public final class PsLinkedinTest {
                             new RqHref.Base(req).href().toString(),
                             Matchers.endsWith(pattern)
                         );
-                        return new RsJSON(
+                        return new RsJson(
                             Json.createObjectBuilder()
                                 .add(
                                     "access_token",
@@ -117,7 +117,7 @@ public final class PsLinkedinTest {
                 new Take() {
                     @Override
                     public Response act(final Request req) throws IOException {
-                        return new RsJSON(
+                        return new RsJson(
                             Json.createObjectBuilder()
                                 .add("id", identifier)
                                 .add(

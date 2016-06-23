@@ -93,7 +93,7 @@ public final class BkTimeableTest {
                 @Override
                 public void run() {
                     try {
-                        new FtCLI(
+                        new FtCli(
                             take,
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",

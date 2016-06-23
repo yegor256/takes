@@ -42,7 +42,7 @@ import org.takes.rq.RqForm;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqPrint;
-import org.takes.rs.RsJSON;
+import org.takes.rs.RsJson;
 
 /**
  * Test case for {@link PsGoogle}.
@@ -145,7 +145,7 @@ public final class PsGoogleTest {
                                 .iterator().next(),
                             Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
                         );
-                        return new RsJSON(
+                        return new RsJson(
                             Json.createObjectBuilder()
                                 .add("displayName", octocat)
                                 .add("id", "1")
@@ -271,7 +271,7 @@ public final class PsGoogleTest {
                                 .iterator().next(),
                             Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
                         );
-                        return new RsJSON(
+                        return new RsJson(
                             Json.createObjectBuilder()
                                 .add("id", "2")
                                 .add(
@@ -359,7 +359,7 @@ public final class PsGoogleTest {
                         PsGoogleTest.CODE,
                         PsGoogleTest.CODE
                     );
-                    return new RsJSON(
+                    return new RsJson(
                         Json.createObjectBuilder()
                             .add(
                                 PsGoogleTest.ACCESS_TOKEN,
@@ -393,9 +393,9 @@ public final class PsGoogleTest {
      * @return Json with error.
      * @throws IOException If some problem inside
      */
-    private static RsJSON createErrorJson() throws IOException {
+    private static RsJson createErrorJson() throws IOException {
         final String message = "message";
-        return new RsJSON(
+        return new RsJson(
             Json.createObjectBuilder()
                 .add(
                     "error",

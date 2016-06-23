@@ -54,7 +54,7 @@ import org.takes.misc.Utf8String;
  * &lt;page/&gt;
  * </pre>
  *
- * <p>{@link org.takes.rs.RsXSLT} will try to find that {@code /xsl/home.xsl}
+ * <p>{@link org.takes.rs.RsXslt} will try to find that {@code /xsl/home.xsl}
  * resource in classpath. If it's not found a runtime exception will thrown.
  *
  * <p>The best way to use this decorator is in combination with
@@ -86,14 +86,14 @@ import org.takes.misc.Utf8String;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsXSLT extends RsWrap {
+public final class RsXslt extends RsWrap {
 
     /**
      * Ctor.
      * @param rsp Original response
      */
-    public RsXSLT(final Response rsp) {
-        this(rsp, new RsXSLT.InClasspath());
+    public RsXslt(final Response rsp) {
+        this(rsp, new RsXslt.InClasspath());
     }
 
     /**
@@ -101,7 +101,7 @@ public final class RsXSLT extends RsWrap {
      * @param rsp Original response
      * @param resolver URI resolver
      */
-    public RsXSLT(final Response rsp, final URIResolver resolver) {
+    public RsXslt(final Response rsp, final URIResolver resolver) {
         super(
             new Response() {
                 @Override
@@ -110,7 +110,7 @@ public final class RsXSLT extends RsWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RsXSLT.transform(rsp.body(), resolver);
+                    return RsXslt.transform(rsp.body(), resolver);
                 }
             }
         );
@@ -128,7 +128,7 @@ public final class RsXSLT extends RsWrap {
         try {
             final TransformerFactory factory = TransformerFactory.newInstance();
             factory.setURIResolver(resolver);
-            return RsXSLT.transform(factory, origin);
+            return RsXslt.transform(factory, origin);
         } catch (final TransformerException ex) {
             throw new IOException(ex);
         }
@@ -145,19 +145,19 @@ public final class RsXSLT extends RsWrap {
         final InputStream xml) throws TransformerException {
         final byte[] input;
         try {
-            input = RsXSLT.consume(xml);
+            input = RsXslt.consume(xml);
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Source xsl = RsXSLT.stylesheet(
+        final Source xsl = RsXslt.stylesheet(
             factory, new StreamSource(
                 new Utf8InputStreamReader(
                     new ByteArrayInputStream(new Utf8String(input).bytes())
                 )
             )
         );
-        RsXSLT.transformer(factory, xsl).transform(
+        RsXslt.transformer(factory, xsl).transform(
             new StreamSource(
                 new Utf8InputStreamReader(
                     new ByteArrayInputStream(new Utf8String(input).bytes())

@@ -58,7 +58,7 @@ import org.takes.rq.RqWithHeader;
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "take", "options" })
-public final class FtCLI implements Front {
+public final class FtCli implements Front {
 
     /**
      * Take.
@@ -75,7 +75,7 @@ public final class FtCLI implements Front {
      * @param tks Take
      * @param args Arguments
      */
-    public FtCLI(final Take tks, final String... args) {
+    public FtCli(final Take tks, final String... args) {
         this(tks, Arrays.asList(args));
     }
 
@@ -84,7 +84,7 @@ public final class FtCLI implements Front {
      * @param tks Take
      * @param args Arguments
      */
-    public FtCLI(final Take tks, final Iterable<String> args) {
+    public FtCli(final Take tks, final Iterable<String> args) {
         this.take = tks;
         this.options = new Options(args);
     }
@@ -96,7 +96,7 @@ public final class FtCLI implements Front {
             tks = new Take() {
                 @Override
                 public Response act(final Request request) throws IOException {
-                    return FtCLI.this.take.act(
+                    return FtCli.this.take.act(
                         new RqWithHeader(
                             request, "X-Takes-HitRefresh: yes"
                         )
@@ -125,7 +125,7 @@ public final class FtCLI implements Front {
                     @Override
                     public void run() {
                         try {
-                            front.start(FtCLI.this.exit(exit));
+                            front.start(FtCli.this.exit(exit));
                         } catch (final IOException ex) {
                             throw new IllegalStateException(ex);
                         }

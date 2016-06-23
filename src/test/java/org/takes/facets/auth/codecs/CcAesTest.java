@@ -21,61 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonStructure;
+import javax.crypto.KeyGenerator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link RsJSON}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * Test case for {@link CcAes}.
+ * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.13.8
  */
-public final class RsJSONTest {
+public final class CcAesTest {
 
     /**
-     * RsJSON can build JSON response.
-     * @throws IOException If some problem inside
+     * CcAES can encode and decode.
+     * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void buildsJsonResponse() throws IOException {
-        final String key = "name";
-        final JsonStructure json = Json.createObjectBuilder()
-            .add(key, "Jeffrey Lebowski")
-            .build();
+    public void encodesAndDecodes() throws Exception {
+        final int length = 128;
+        final KeyGenerator generator = KeyGenerator.getInstance("AES");
+        generator.init(length);
+        final byte[] key = generator.generateKey().getEncoded();
+        final String plain = "This is a test!!@@**";
+        final Codec codec = new CcAes(
+            new Codec() {
+                @Override
+                public Identity decode(final byte[] bytes) throws IOException {
+                    return new Identity.Simple(new String(bytes));
+                }
+                @Override
+                public byte[] encode(final Identity identity)
+                    throws IOException {
+                    return identity.urn().getBytes();
+                }
+            },
+            key
+        );
         MatcherAssert.assertThat(
-            Json.createReader(
-                new RsJSON(json).body()
-            ).readObject().getString(key),
-            Matchers.startsWith("Jeffrey")
+            codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
+            Matchers.equalTo(plain)
         );
     }
-
-    /**
-     * RsJSON can build a big JSON response.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void buildsBigJsonResponse() throws IOException {
-        final int size = 100000;
-        final JsonArrayBuilder builder = Json.createArrayBuilder();
-        for (int idx = 0; idx < size; ++idx) {
-            builder.add(
-                Json.createObjectBuilder().add("number", "212 555-1234")
-            );
-        }
-        MatcherAssert.assertThat(
-            Json.createReader(
-                new RsJSON(builder.build()).body()
-            ).readArray().size(),
-            Matchers.equalTo(size)
-        );
-    }
-
 }

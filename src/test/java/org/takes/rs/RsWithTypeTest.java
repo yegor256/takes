@@ -142,7 +142,7 @@ public final class RsWithTypeTest {
     public void replacesTypeWithHtml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.HTML(
+                new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ).print(),
@@ -160,7 +160,7 @@ public final class RsWithTypeTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.HTML(
+                new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
@@ -188,7 +188,7 @@ public final class RsWithTypeTest {
     public void replacesTypeWithJson() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.JSON(
+                new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ).print(),
@@ -206,7 +206,7 @@ public final class RsWithTypeTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.JSON(
+                new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
@@ -234,7 +234,7 @@ public final class RsWithTypeTest {
     public void replacesTypeWithXml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.XML(
+                new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ).print(),
@@ -251,7 +251,7 @@ public final class RsWithTypeTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsWithType.XML(
+                new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )

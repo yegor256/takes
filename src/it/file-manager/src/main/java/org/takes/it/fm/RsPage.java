@@ -26,7 +26,7 @@ package org.takes.it.fm;
 import java.io.IOException;
 import java.io.InputStream;
 import org.takes.Response;
-import org.takes.rs.RsXSLT;
+import org.takes.rs.RsXslt;
 import org.takes.rs.xe.RsXembly;
 import org.takes.rs.xe.XeAppend;
 import org.takes.rs.xe.XeMillis;
@@ -53,7 +53,7 @@ final class RsPage implements Response {
      * @param source Xembly source
      */
     RsPage(final String xsl, final XeSource source) {
-        this.origin = new RsXSLT(
+        this.origin = new RsXslt(
             new RsXembly(
                 new XeStylesheet(xsl),
                 new XeAppend(

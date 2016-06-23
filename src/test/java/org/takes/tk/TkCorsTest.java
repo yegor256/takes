@@ -34,12 +34,12 @@ import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
 /**
- * Test case for {@link TkCORS}.
+ * Test case for {@link TkCors}.
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
  */
-public final class TkCORSTest {
+public final class TkCorsTest {
 
     /**
      * TkCORS can handle connections without origin in the request.
@@ -49,7 +49,7 @@ public final class TkCORSTest {
     public void handleConnectionsWithoutOriginInTheRequest() throws Exception {
         MatcherAssert.assertThat(
             "It was expected to receive a 403 error.",
-            new TkCORS(
+            new TkCors(
                 new TkFixed(new RsText()),
                 "http://www.netbout.io",
                 "http://www.example.com"
@@ -66,7 +66,7 @@ public final class TkCORSTest {
     public void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
         MatcherAssert.assertThat(
             "Invalid HTTP status for a request with correct domain.",
-            new TkCORS(
+            new TkCors(
                 new TkFixed(new RsText()),
                 "http://teamed.io",
                 "http://example.com"
@@ -90,7 +90,7 @@ public final class TkCORSTest {
         MatcherAssert.assertThat(
             "Wrong value on header.",
             new RsPrint(
-                new TkCORS(
+                new TkCors(
                     new TkFixed(new RsText()),
                     "http://www.teamed.io",
                     "http://sample.com"
