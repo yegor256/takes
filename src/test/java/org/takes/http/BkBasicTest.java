@@ -70,11 +70,6 @@ import org.takes.tk.TkText;
 public final class BkBasicTest {
 
     /**
-     * Hello world.
-     */
-    private static final String HELLO_WORLD = "Hello World!";
-
-    /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
@@ -98,10 +93,11 @@ public final class BkBasicTest {
     public void handlesSocket() throws IOException {
         final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
-        new BkBasic(new TkText(BkBasicTest.HELLO_WORLD)).accept(socket);
+        final String hello = "Hello World";
+        new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
-            Matchers.containsString("Hello World")
+            Matchers.containsString(hello)
         );
     }
 
@@ -265,6 +261,7 @@ public final class BkBasicTest {
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final ServerSocket server = new ServerSocket(0);
+        final String text = "Say hello!";
         try {
             new Thread(
                 new Runnable() {
@@ -290,7 +287,7 @@ public final class BkBasicTest {
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
                         "",
-                        BkBasicTest.HELLO_WORLD
+                        text
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();
@@ -323,6 +320,7 @@ public final class BkBasicTest {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final ServerSocket server = new ServerSocket(0);
+        final String greetings = "Hi everyone";
         try {
             new Thread(
                 new Runnable() {
@@ -349,7 +347,7 @@ public final class BkBasicTest {
                         BkBasicTest.HOST,
                         "Connection: Close",
                         "",
-                        BkBasicTest.HELLO_WORLD
+                        greetings
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();

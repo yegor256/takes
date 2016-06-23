@@ -57,10 +57,6 @@ import org.takes.rs.RsJSON;
 public final class PsGoogleTest {
 
     /**
-     * Octocat.
-     */
-    private static final String OCTOCAT = "octocat";
-    /**
      * Image.
      */
     private static final String IMAGE = "image";
@@ -84,10 +80,6 @@ public final class PsGoogleTest {
      * Act head.
      */
     private static final String ACT_HEAD = "GET /plus/v1/people/me";
-    /**
-     * Identity urn.
-     */
-    private static final String IDENTITY_URN = "urn:google:1";
     /**
      * Regex pattern.
      */
@@ -131,6 +123,8 @@ public final class PsGoogleTest {
      */
     @Test
     public void logsIn() throws Exception {
+        final String octocat = "octocat";
+        final String urn = "urn:google:1";
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
@@ -153,7 +147,7 @@ public final class PsGoogleTest {
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
-                                .add("displayName", PsGoogleTest.OCTOCAT)
+                                .add("displayName", octocat)
                                 .add("id", "1")
                                 .add(
                                     PsGoogleTest.IMAGE,
@@ -185,11 +179,11 @@ public final class PsGoogleTest {
                     ).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
-                        Matchers.equalTo(PsGoogleTest.IDENTITY_URN)
+                        Matchers.equalTo(urn)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get(PsGoogleTest.NAME),
-                        Matchers.equalTo(PsGoogleTest.OCTOCAT)
+                        Matchers.equalTo(octocat)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get(PsGoogleTest.PICTURE),
@@ -256,6 +250,7 @@ public final class PsGoogleTest {
      */
     @Test
     public void noDisplayNameResponse() throws Exception {
+        final String urn = "urn:google:2";
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
@@ -278,7 +273,7 @@ public final class PsGoogleTest {
                         );
                         return new RsJSON(
                             Json.createObjectBuilder()
-                                .add("id", "1")
+                                .add("id", "2")
                                 .add(
                                     PsGoogleTest.IMAGE,
                                     Json.createObjectBuilder()
@@ -309,7 +304,7 @@ public final class PsGoogleTest {
                     ).get();
                     MatcherAssert.assertThat(
                         identity.urn(),
-                        Matchers.equalTo(PsGoogleTest.IDENTITY_URN)
+                        Matchers.equalTo(urn)
                     );
                     MatcherAssert.assertThat(
                         identity.properties().get(PsGoogleTest.NAME),

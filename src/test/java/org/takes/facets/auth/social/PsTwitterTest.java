@@ -50,27 +50,20 @@ import org.takes.rq.RqFake;
 public final class PsTwitterTest {
 
     /**
-     * Http ok.
-     */
-    private static final String HTTP_OK = "HTTP OK";
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
-
-    /**
      * PsTwitter can login.
      * @throws IOException If error occurs in the process
      */
     @Test
     public void logsIn() throws IOException {
         final int tid = RandomUtils.nextInt(1000);
-        final String name = RandomStringUtils.randomAlphanumeric(10);
+        final String randname = RandomStringUtils.randomAlphanumeric(10);
         final String picture = RandomStringUtils.randomAlphanumeric(10);
+        final String httpok = "HTTP OK";
+        final String name = "name";
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
-                PsTwitterTest.HTTP_OK,
+                httpok,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
@@ -79,11 +72,11 @@ public final class PsTwitterTest {
             ),
             new FakeRequest(
                 200,
-                PsTwitterTest.HTTP_OK,
+                httpok,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
-                    .add(PsTwitterTest.NAME, name)
+                    .add(name, randname)
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
@@ -100,8 +93,8 @@ public final class PsTwitterTest {
             CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
         );
         MatcherAssert.assertThat(
-            identity.properties().get(PsTwitterTest.NAME),
-            CoreMatchers.equalTo(name)
+            identity.properties().get(name),
+            CoreMatchers.equalTo(randname)
         );
         MatcherAssert.assertThat(
             identity.properties().get("picture"),

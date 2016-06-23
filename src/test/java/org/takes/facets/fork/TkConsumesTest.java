@@ -53,10 +53,6 @@ public final class TkConsumesTest {
      * Application json.
      */
     private static final String APPLICATION_JSON = "application/json";
-    /**
-     * Content-type json.
-     */
-    private static final String CT_JSON = "Content-Type: application/json";
 
     /**
      * TkConsumes can accept request with certain Content-Type.
@@ -64,6 +60,7 @@ public final class TkConsumesTest {
      */
     @Test
     public void acceptsCorrectContentTypeRequest() throws IOException {
+        final String contenttype = "Content-Type: application/json";
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJSON(new RsEmpty())),
             TkConsumesTest.APPLICATION_JSON
@@ -72,7 +69,7 @@ public final class TkConsumesTest {
             new RqFake(
                 Arrays.asList(
                     "GET /?TkConsumes",
-                    TkConsumesTest.CT_JSON
+                    contenttype
                 ),
                 ""
             )
@@ -82,7 +79,7 @@ public final class TkConsumesTest {
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    TkConsumesTest.CT_JSON
+                    contenttype
                 )
             )
         );
