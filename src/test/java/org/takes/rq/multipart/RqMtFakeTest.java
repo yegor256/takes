@@ -46,35 +46,10 @@ import org.takes.rq.RqWithHeaders;
  */
 public final class RqMtFakeTest {
     /**
-     * Bar.
-     */
-    private static final String BAR = "bar";
-    /**
-     * Content.
-     */
-    private static final String CONTENT = "content";
-    /**
-     * Closed.
-     */
-    private static final String CLOSED = "Closed";
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
-    /**
      * Form data.
      */
     private static final String FORM_DATA =
         "form-data; name=\"data\"; filename=\"%s\"";
-    /**
-     * IOException message.
-     */
-    private static final String IOEXCEPTION_MSG =
-        "An IOException was expected since the Stream is closed";
-    /**
-     * Foo.
-     */
-    private static final String FOO = "foo";
     /**
      * Content disposition.
      */
@@ -212,38 +187,39 @@ public final class RqMtFakeTest {
                 )
             )
         );
+        final String exmessage =
+            "An IOException was expected since the Stream is closed";
+        final String name = "name";
+        final String closed = "Closed";
+        final String content = "content";
         final RqMtBase multi = new RqMtBase(request);
-        multi.part(RqMtFakeTest.NAME).iterator().next().body().read();
-        multi.part(RqMtFakeTest.CONTENT).iterator().next().body().read();
+        multi.part(name).iterator().next().body().read();
+        multi.part(content).iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
-            multi.part(RqMtFakeTest.NAME).iterator().next(),
+            multi.part(name).iterator().next(),
             Matchers.notNullValue()
         );
         try {
-            multi.part(RqMtFakeTest.NAME).iterator().next().body().read();
-            Assert.fail(
-                RqMtFakeTest.IOEXCEPTION_MSG
-            );
+            multi.part(name).iterator().next().body().read();
+            Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.containsString(RqMtFakeTest.CLOSED)
+                Matchers.containsString(closed)
             );
         }
         MatcherAssert.assertThat(
-            multi.part(RqMtFakeTest.CONTENT).iterator().next(),
+            multi.part(content).iterator().next(),
             Matchers.notNullValue()
         );
         try {
-            multi.part(RqMtFakeTest.CONTENT).iterator().next().body().read();
-            Assert.fail(
-                RqMtFakeTest.IOEXCEPTION_MSG
-            );
+            multi.part(content).iterator().next().body().read();
+            Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.containsString(RqMtFakeTest.CLOSED)
+                Matchers.containsString(closed)
             );
         }
     }
@@ -278,18 +254,20 @@ public final class RqMtFakeTest {
                 )
             )
         );
+        final String foo = "foo";
+        final String bar = "bar";
         final RqMtBase multi = new RqMtBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
-            multi.part(RqMtFakeTest.FOO).iterator().next(),
+            multi.part(foo).iterator().next(),
             Matchers.notNullValue()
         );
-        multi.part(RqMtFakeTest.FOO).iterator().next().body().close();
+        multi.part(foo).iterator().next().body().close();
         MatcherAssert.assertThat(
-            multi.part(RqMtFakeTest.BAR).iterator().next(),
+            multi.part(bar).iterator().next(),
             Matchers.notNullValue()
         );
-        multi.part(RqMtFakeTest.BAR).iterator().next().body().close();
+        multi.part(bar).iterator().next().body().close();
     }
 
     /**
