@@ -118,7 +118,7 @@ public final class RsWithCookieTest {
      * @return Joined cookie
      */
     private String joiner(final String... cookies) {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<String>(cookies.length + 3);
         list.add("HTTP/1.1 200 OK");
         for (final String cookie : cookies) {
             list.add(String.format("Set-Cookie: %s;", cookie));

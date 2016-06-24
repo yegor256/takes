@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,10 +57,10 @@ import org.takes.rs.RsJson;
 @SuppressWarnings("PMD.TooManyMethods")
 public final class PsGoogleTest {
 
-    /**
-     * Image.
-     */
-    private static final String IMAGE = "image";
+//    /**
+//     * Image.
+//     */
+//    private static final String IMAGE = "image";
     /**
      * GET.
      */
@@ -72,10 +73,10 @@ public final class PsGoogleTest {
      * Picture.
      */
     private static final String PICTURE = "picture";
-    /**
-     * Url.
-     */
-    private static final String URL = "url";
+//    /**
+//     * Url.
+//     */
+//    private static final String URL = "url";
     /**
      * Act head.
      */
@@ -146,18 +147,7 @@ public final class PsGoogleTest {
                             Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
                         );
                         return new RsJson(
-                            Json.createObjectBuilder()
-                                .add("displayName", octocat)
-                                .add("id", "1")
-                                .add(
-                                    PsGoogleTest.IMAGE,
-                                    Json.createObjectBuilder()
-                                        .add(
-                                            PsGoogleTest.URL,
-                                            PsGoogleTest.AVATAR
-                                        )
-                                )
-                                .build()
+                            jsonBuilder("1").add("displayName", octocat).build()
                         );
                     }
                 }
@@ -271,19 +261,7 @@ public final class PsGoogleTest {
                                 .iterator().next(),
                             Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
                         );
-                        return new RsJson(
-                            Json.createObjectBuilder()
-                                .add("id", "2")
-                                .add(
-                                    PsGoogleTest.IMAGE,
-                                    Json.createObjectBuilder()
-                                        .add(
-                                            PsGoogleTest.URL,
-                                            PsGoogleTest.AVATAR
-                                        )
-                                )
-                                .build()
-                        );
+                        return new RsJson(jsonBuilder("2").build());
                     }
                 }
             )
@@ -421,5 +399,18 @@ public final class PsGoogleTest {
                    )
                   .build()
         );
+    }
+    /**
+     * Constructs a json object builder.
+     * @param id The id field value
+     * @return JsonObjectBuilder The json object builder
+     */
+    private static JsonObjectBuilder jsonBuilder(final String id) {
+        return Json.createObjectBuilder()
+            .add("id", id)
+            .add(
+                "image", 
+                Json.createObjectBuilder().add("url", PsGoogleTest.AVATAR)
+            );
     }
 }
