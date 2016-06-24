@@ -58,9 +58,7 @@ public final class RsWithCookieTest {
                     path
                 )
             ).print(),
-            Matchers.equalTo(
-                this.joiner(String.format("%s=%s;%s", foo, works, path))
-            )
+            Matchers.equalTo(joiner(formatCookie(foo, works, path)))
         );
     }
 
@@ -88,8 +86,8 @@ public final class RsWithCookieTest {
                 )
             ).print(),
             Matchers.equalTo(
-                this.joiner(
-                    String.format("%s=%s;%s", qux, value, path),
+                joiner(
+                    formatCookie(qux, value, path),
                     "bar=worksToo?;Path=/2nd/path/"
                 )
             )
@@ -117,7 +115,7 @@ public final class RsWithCookieTest {
      * @param cookies Cookies values
      * @return Joined cookie
      */
-    private String joiner(final String... cookies) {
+    private static String joiner(final String... cookies) {
         final List<String> list = new ArrayList<String>(cookies.length + 3);
         list.add("HTTP/1.1 200 OK");
         for (final String cookie : cookies) {
@@ -126,5 +124,17 @@ public final class RsWithCookieTest {
         list.add("");
         list.add("");
         return Joiner.on("\r\n").join(list.iterator());
+    }
+
+    /**
+     * Returns the formatted cookie.
+     * @param name Cookie name
+     * @param value Cookie value
+     * @param path Cookie path
+     * @return Formatted cookie value
+     */
+    private static String formatCookie(final String name, final String value,
+        final String path) {
+        return String.format("%s=%s;%s", name, value, path);
     }
 }
