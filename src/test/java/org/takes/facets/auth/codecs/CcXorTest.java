@@ -21,51 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import javax.crypto.KeyGenerator;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link CcAES}.
- * @author Jason Wong (super132j@yahoo.com)
+ * Test case for {@link CcXor}.
+ * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
- * @since 0.13.8
+ * @since 0.13.7
  */
-public final class CcAESTest {
+public final class CcXorTest {
 
     /**
-     * CcAES can encode and decode.
-     * @throws Exception any unexpected exception to throw
+     * CcXor can encode and decode.
+     * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws Exception {
-        final int length = 128;
-        final KeyGenerator generator = KeyGenerator.getInstance("AES");
-        generator.init(length);
-        final byte[] key = generator.generateKey().getEncoded();
-        final String plain = "This is a test!!@@**";
-        final Codec codec = new CcAES(
+    public void encodesAndDecodes() throws IOException {
+        final String urn = "urn:domain:9";
+        final Codec codec = new CcXor(
             new Codec() {
                 @Override
-                public Identity decode(final byte[] bytes) throws IOException {
-                    return new Identity.Simple(new String(bytes));
-                }
-                @Override
-                public byte[] encode(final Identity identity)
-                    throws IOException {
+                public byte[] encode(final Identity identity) {
                     return identity.urn().getBytes();
                 }
+                @Override
+                public Identity decode(final byte[] bytes) {
+                    return new Identity.Simple(new String(bytes));
+                }
             },
-            key
+            "secret"
         );
         MatcherAssert.assertThat(
-            codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
-            Matchers.equalTo(plain)
+            codec.decode(codec.encode(new Identity.Simple(urn))).urn(),
+            Matchers.equalTo(urn)
         );
     }
 }

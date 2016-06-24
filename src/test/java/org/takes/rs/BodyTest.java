@@ -137,7 +137,7 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithURL() throws Exception {
+    public void returnsCorrectInputWithUrl() throws Exception {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
@@ -146,7 +146,7 @@ public final class BodyTest {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             try (final InputStream input =
-                new Body.URL(file.toUri().toURL()).input()) {
+                new Body.Url(file.toUri().toURL()).input()) {
                 MatcherAssert.assertThat(
                     ByteStreams.toByteArray(input),
                     Matchers.equalTo(bytes)
@@ -162,7 +162,7 @@ public final class BodyTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithURL() throws Exception {
+    public void returnsCorrectLengthWithUrl() throws Exception {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
@@ -171,7 +171,7 @@ public final class BodyTest {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             MatcherAssert.assertThat(
-                new Body.URL(file.toUri().toURL()).length(),
+                new Body.Url(file.toUri().toURL()).length(),
                 Matchers.equalTo(bytes.length)
             );
         } finally {

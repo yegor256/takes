@@ -55,12 +55,12 @@ import org.xembly.Directives;
  * @since 0.3
  */
 @EqualsAndHashCode(callSuper = true)
-public final class XeSLA extends XeWrap {
+public final class XeSla extends XeWrap {
 
     /**
      * Ctor.
      */
-    public XeSLA() {
+    public XeSla() {
         this("sla");
     }
 
@@ -68,7 +68,7 @@ public final class XeSLA extends XeWrap {
      * Ctor.
      * @param attr Attribute name
      */
-    public XeSLA(final CharSequence attr) {
+    public XeSla(final CharSequence attr) {
         super(
             new XeSource() {
                 @Override

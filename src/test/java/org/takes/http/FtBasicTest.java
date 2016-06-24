@@ -44,7 +44,7 @@ import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
-import org.takes.rs.RsHTML;
+import org.takes.rs.RsHtml;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
 
@@ -247,13 +247,13 @@ public final class FtBasicTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void consumesTwiceInputStreamWithRsHTML() throws IOException {
+    public void consumesTwiceInputStreamWithRsHtml() throws IOException {
         final String result = "Hello RsHTML!";
         new FtRemote(
             new TkFork(
                 new FkRegex(
                     FtBasicTest.ROOT_PATH,
-                    new RsHTML(
+                    new RsHtml(
                         new ByteArrayInputStream(
                             new Utf8String(result).bytes()
                         )

@@ -31,8 +31,8 @@ import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.Exit;
-import org.takes.http.FtCLI;
-import org.takes.tk.TkHTML;
+import org.takes.http.FtCli;
+import org.takes.tk.TkHtml;
 import org.takes.tk.TkRedirect;
 
 /**
@@ -64,7 +64,7 @@ public final class App implements Take {
      * @throws IOException If fails
      */
     public static void main(final String... args) throws IOException {
-        new FtCLI(
+        new FtCli(
             new App(new File(System.getProperty("user.dir"))),
             args
         ).start(Exit.NEVER);
@@ -76,7 +76,7 @@ public final class App implements Take {
             new FkRegex("/", new TkRedirect("/f")),
             new FkRegex(
                 "/about",
-                new TkHTML(App.class.getResource("about.html"))
+                new TkHtml(App.class.getResource("about.html"))
             ),
             new FkRegex("/robots.txt", ""),
             new FkRegex("/f(.*)", new TkDir(this.home))

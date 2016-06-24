@@ -21,46 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes.rs.xe;
 
-package org.takes.facets.auth.codecs;
-
+import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.facets.auth.Identity;
 
 /**
- * Test case for {@link CcXOR}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+ * Test case for {@link XeSla}.
+ * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.13.7
+ * @since 0.3
  */
-public final class CcXORTest {
+public final class XeSlaTest {
 
     /**
-     * CcXor can encode and decode.
+     * XeSLA can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws IOException {
-        final String urn = "urn:domain:9";
-        final Codec codec = new CcXOR(
-            new Codec() {
-                @Override
-                public byte[] encode(final Identity identity) {
-                    return identity.urn().getBytes();
-                }
-                @Override
-                public Identity decode(final byte[] bytes) {
-                    return new Identity.Simple(new String(bytes));
-                }
-            },
-            "secret"
-        );
+    public void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
-            codec.decode(codec.encode(new Identity.Simple(urn))).urn(),
-            Matchers.equalTo(urn)
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeSla()
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root[@sla]"
+            )
         );
     }
+
 }

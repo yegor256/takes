@@ -48,7 +48,7 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  */
 @EqualsAndHashCode(of = {"origin", "key", "spec"})
-public final class CcAES implements Codec {
+public final class CcAes implements Codec {
     /**
      * The block size constant.
      */
@@ -76,7 +76,7 @@ public final class CcAES implements Codec {
      * @param key The encryption key
      * @since 0.22
      */
-    public CcAES(final Codec codec, final String key) {
+    public CcAes(final Codec codec, final String key) {
         this(codec, key.getBytes(Charset.defaultCharset()));
     }
 
@@ -86,10 +86,10 @@ public final class CcAES implements Codec {
      * @param codec Original codec
      * @param key The encryption key
      */
-    public CcAES(final Codec codec, final byte[] key) {
+    public CcAes(final Codec codec, final byte[] key) {
         this.origin = codec;
         this.key = key.clone();
-        this.spec = CcAES.algorithmParameterSpec();
+        this.spec = CcAes.algorithmParameterSpec();
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class CcAES implements Codec {
      */
     private static AlgorithmParameterSpec algorithmParameterSpec() {
         final SecureRandom random = new SecureRandom();
-        final byte[] bytes = new byte[CcAES.BLOCK];
+        final byte[] bytes = new byte[CcAes.BLOCK];
         random.nextBytes(bytes);
         return new IvParameterSpec(bytes);
     }
@@ -138,11 +138,11 @@ public final class CcAES implements Codec {
      * @return The verified encryption key
      */
     private static byte[] withCorrectBlockSize(final byte[] key) {
-        if (key.length != CcAES.BLOCK) {
+        if (key.length != CcAes.BLOCK) {
             throw new IllegalArgumentException(
                 String.format(
                     "the length of the AES key must be exactly %d bytes",
-                    CcAES.BLOCK
+                    CcAes.BLOCK
                 )
             );
         }
@@ -177,7 +177,7 @@ public final class CcAES implements Codec {
         throws IOException {
         try {
             final SecretKeySpec secret = new SecretKeySpec(
-                CcAES.withCorrectBlockSize(this.key), "AES"
+                CcAes.withCorrectBlockSize(this.key), "AES"
             );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(mode, secret, this.spec);

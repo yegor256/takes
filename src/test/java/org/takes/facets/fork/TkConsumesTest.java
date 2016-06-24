@@ -36,7 +36,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
-import org.takes.rs.RsJSON;
+import org.takes.rs.RsJson;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkFixed;
 
@@ -56,7 +56,7 @@ public final class TkConsumesTest {
     @Test
     public void acceptsCorrectContentTypeRequest() throws IOException {
         final Take consumes = new TkConsumes(
-            new TkFixed(new RsJSON(new RsEmpty())),
+            new TkFixed(new RsJson(new RsEmpty())),
             "application/json"
         );
         final Response response = consumes.act(
@@ -86,7 +86,7 @@ public final class TkConsumesTest {
     @Test(expected = HttpException.class)
     public void failsOnUnsupportedAcceptHeader() throws IOException {
         final Take consumes = new TkConsumes(
-            new TkFixed(new RsJSON(new RsEmpty())),
+            new TkFixed(new RsJson(new RsEmpty())),
             "application/json"
         );
         consumes.act(

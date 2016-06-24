@@ -21,40 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs.xe;
+package org.takes.rs;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import org.apache.commons.io.IOUtils;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonStructure;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link XeSLA}.
+ * Test case for {@link RsJson}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.3
+ * @since 0.1
  */
-public final class XeSLATest {
+public final class RsJsonTest {
 
     /**
-     * XeSLA can build XML response.
+     * RsJSON can build JSON response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    public void buildsJsonResponse() throws IOException {
+        final String key = "name";
+        final JsonStructure json = Json.createObjectBuilder()
+            .add(key, "Jeffrey Lebowski")
+            .build();
         MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeSLA()
-                    )
-                ).body()
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root[@sla]"
-            )
+            Json.createReader(
+                new RsJson(json).body()
+            ).readObject().getString(key),
+            Matchers.startsWith("Jeffrey")
+        );
+    }
+
+    /**
+     * RsJSON can build a big JSON response.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsBigJsonResponse() throws IOException {
+        final int size = 100000;
+        final JsonArrayBuilder builder = Json.createArrayBuilder();
+        for (int idx = 0; idx < size; ++idx) {
+            builder.add(
+                Json.createObjectBuilder().add("number", "212 555-1234")
+            );
+        }
+        MatcherAssert.assertThat(
+            Json.createReader(
+                new RsJson(builder.build()).body()
+            ).readArray().size(),
+            Matchers.equalTo(size)
         );
     }
 

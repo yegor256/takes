@@ -33,12 +33,12 @@ import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TkHTML}.
+ * Test case for {@link TkHtml}.
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.10
  */
-public final class TkHTMLTest {
+public final class TkHtmlTest {
 
     /**
      * TkHTML can create a text.
@@ -48,7 +48,7 @@ public final class TkHTMLTest {
     public void createsTextResponse() throws IOException {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
-            new RsPrint(new TkHTML(body).act(new RqFake())).print(),
+            new RsPrint(new TkHtml(body).act(new RqFake())).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
@@ -68,7 +68,7 @@ public final class TkHTMLTest {
     @Test
     public void printsResourceMultipleTimes() throws IOException {
         final String body = "<html>hello, dude!</html>";
-        final Take take = new TkHTML(body);
+        final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
             new RsPrint(take.act(new RqFake())).print(),
             Matchers.containsString(body)

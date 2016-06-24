@@ -53,7 +53,7 @@ public final class TkRedirectTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithURL() throws IOException {
+    public void createsRedirectResponseWithUrl() throws IOException {
         final String url = "/about";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -75,7 +75,7 @@ public final class TkRedirectTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithURLAndStatus() throws IOException {
+    public void createsRedirectResponseWithUrlAndStatus() throws IOException {
         final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(

@@ -44,7 +44,7 @@ import org.takes.rq.RqGreedy;
 import org.takes.rq.RqHref;
 import org.takes.rq.form.RqFormBase;
 import org.takes.rq.form.RqFormSmart;
-import org.takes.rs.RsJSON;
+import org.takes.rs.RsJson;
 import org.takes.rs.xe.RsXembly;
 import org.takes.rs.xe.XeDirectives;
 import org.xembly.Directives;
@@ -192,7 +192,7 @@ public final class PsGithubTest {
     private static void assertParam(final Request req,
         final CharSequence param, final String value)  throws IOException {
         MatcherAssert.assertThat(
-            new RqFormSmart(new RqFormBase(req)).single(param),
+            new RqForm.Smart(new RqForm.Base(req)).single(param),
             Matchers.equalTo(value)
         );
     }
@@ -209,7 +209,7 @@ public final class PsGithubTest {
                     .iterator().next(),
                 Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
             );
-            return new RsJSON(
+            return new RsJson(
                 Json.createObjectBuilder()
                     .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
                     .add("id", 1)
