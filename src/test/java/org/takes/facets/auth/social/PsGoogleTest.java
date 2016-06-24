@@ -56,11 +56,6 @@ import org.takes.rs.RsJson;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class PsGoogleTest {
-
-//    /**
-//     * Image.
-//     */
-//    private static final String IMAGE = "image";
     /**
      * GET.
      */
@@ -73,10 +68,6 @@ public final class PsGoogleTest {
      * Picture.
      */
     private static final String PICTURE = "picture";
-//    /**
-//     * Url.
-//     */
-//    private static final String URL = "url";
     /**
      * Act head.
      */
@@ -409,7 +400,7 @@ public final class PsGoogleTest {
         return Json.createObjectBuilder()
             .add("id", id)
             .add(
-                "image", 
+                "image",
                 Json.createObjectBuilder().add("url", PsGoogleTest.AVATAR)
             );
     }
