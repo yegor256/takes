@@ -89,7 +89,7 @@ public final class RsWithCookieTest {
             ).print(),
             Matchers.equalTo(
                 this.joiner(
-                    String.format("%s=%s;%s", qux, value, path), 
+                    String.format("%s=%s;%s", qux, value, path),
                     "bar=worksToo?;Path=/2nd/path/"
                 )
             )
