@@ -27,5 +27,6 @@
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33
+ * @todo #687:15min Improve documentation for package org.takes.rq.form.
  */
 package org.takes.rq.form;

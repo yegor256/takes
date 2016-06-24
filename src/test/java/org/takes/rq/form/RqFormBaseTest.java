@@ -79,7 +79,7 @@ public final class RqFormBaseTest {
     }
 
     /**
-     * RqFormBase returns always the same instances (Cache).
+     * RqFormBase can return the same (cached) instances in every call.
      * @throws IOException if fails
      */
     @Test

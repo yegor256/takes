@@ -53,7 +53,7 @@ import org.takes.rq.RqWrap;
  * @version $Id$
  * @since 0.33
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo Refactor this class to reduce the data abstraction
+ * @todo #687:15min Refactor this class to reduce the data abstraction
  *  coupling in order to get rid of the checkstyle suppression of
  *  ClassDataAbstractionCouplingCheck.
  */
