@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 4 active puzzles (71 total):
+There are 4 active puzzles (72 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -62,7 +62,8 @@ There are 4 active puzzles (71 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>574-2964594e</del>](https://github.com/yegor256/takes/issues/624) [`pom.xml:373-375`](../master/pom.xml#L373-L375)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#660](https://github.com/yegor256/takes/issues/660):[<del>624-78dfe52a</del>](https://github.com/yegor256/takes/issues/660) [`pom.xml:338-340`](../master/pom.xml#L338-L340)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#678](https://github.com/yegor256/takes/issues/678):[<del>660-949a08e1</del>](https://github.com/yegor256/takes/issues/678) [`HttpException.java:34-36`](../master/src/main/java/org/takes/HttpException.java#L34-L36)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#684](https://github.com/yegor256/takes/issues/684):[**678-b4f3ecf4**](https://github.com/yegor256/takes/issues/684) [`pom.xml:344-346`](../master/pom.xml#L344-L346)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#684](https://github.com/yegor256/takes/issues/684):[<del>678-b4f3ecf4</del>](https://github.com/yegor256/takes/issues/684) [`pom.xml:344-346`](../master/pom.xml#L344-L346)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**684-70270140**]() [`TkCors.java:53-56`](../master/src/main/java/org/takes/tk/TkCors.java#L53-L56)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#686](https://github.com/yegor256/takes/issues/686):[**678-832c7c24**](https://github.com/yegor256/takes/issues/686) [`pom.xml:380-382`](../master/pom.xml#L380-L382)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-d68bc52e</del> [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
