@@ -121,7 +121,7 @@ public final class PsLinkedinTest {
                             Json.createObjectBuilder()
                                 .add("id", identifier)
                                 .add(firstname, frodo)
-                                .add(lastname,baggins)
+                                .add(lastname, baggins)
                                 .build()
                         );
                     }

@@ -25,6 +25,8 @@ package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -56,7 +58,9 @@ public final class RsWithCookieTest {
                     path
                 )
             ).print(),
-            Matchers.equalTo(this.joiner(foo, works, path))
+            Matchers.equalTo(
+                this.joiner(String.format("%s=%s;%s", foo, works, path))
+            )
         );
     }
 
@@ -84,10 +88,9 @@ public final class RsWithCookieTest {
                 )
             ).print(),
             Matchers.equalTo(
-                this.joinerMultiple(
-                    qux,
-                    value,
-                    path
+                this.joiner(
+                    String.format("%s=%s;%s", qux, value, path), 
+                    "bar=worksToo?;Path=/2nd/path/"
                 )
             )
         );
@@ -111,63 +114,17 @@ public final class RsWithCookieTest {
 
     /**
      * Returns the joined cookie.
-     * @param name Cookie name
-     * @param value Cookie value
-     * @param path Cookie path
+     * @param cookies Cookies values
      * @return Joined cookie
      */
-    private String joiner(final String name, final String value,
-        final String path) {
-        final String[] parts = {
-            this.httpOk(),
-            this.cookie(name, value, path),
-            "",
-            "",
-        };
-        return this.joiner().join(parts);
-    }
-
-    /**
-     * Returns the multiple cookies that are joined.
-     * @param name Cookie name
-     * @param value Cookie value
-     * @param path Cookie path
-     * @return Joined cookies
-     */
-    private String joinerMultiple(final String name, final String value,
-        final String path) {
-        final String[] parts = {
-            this.httpOk(),
-            this.cookie(name, value, path),
-            "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
-            "",
-            "",
-        };
-        return this.joiner().join(parts);
-    }
-    /**
-     * Returns the set-cookie.
-     * @param name Cookie name
-     * @param value Coolie value
-     * @param path Cookie path
-     * @return Set cookie header
-     */
-    private String cookie(final String name, final String value,
-        final String path) {
-        return String.format("Set-Cookie: %s=%s;%s;", name, value, path);
-    }
-    /**
-     * Returns the http ok.
-     * @return HTTP OK
-     */
-    private String httpOk() {
-        return "HTTP/1.1 200 OK";
-    }
-    /**
-     * Returns the carriage return joiner.
-     * @return Joiner
-     */
-    private Joiner joiner() {
-        return Joiner.on("\r\n");
+    private String joiner(final String... cookies) {
+        final List<String> list = new ArrayList<String>();
+        list.add("HTTP/1.1 200 OK");
+        for (final String cookie : cookies) {
+            list.add(String.format("Set-Cookie: %s;", cookie));
+        }
+        list.add("");
+        list.add("");
+        return Joiner.on("\r\n").join(list.iterator());
     }
 }
