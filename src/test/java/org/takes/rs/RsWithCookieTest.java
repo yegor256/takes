@@ -38,45 +38,25 @@ import org.junit.Test;
 public final class RsWithCookieTest {
 
     /**
-     * Carriage return constant.
-     */
-    private static final String CRLF = "\r\n";
-    /**
-     * Http ok.
-     */
-    private static final String HTTP_OK = "HTTP/1.1 200 OK";
-    /**
-     * Path.
-     */
-    private static final String PATH = "Path=/";
-
-    /**
      * RsWithCookie can add cookies.
      * @throws IOException If some problem inside
      * @checkstyle MultipleStringLiteralsCheck (17 lines)
      */
     @Test
     public void addsCookieToResponse() throws IOException {
-        final String setcookie = "Set-Cookie: foo=works?;Path=/;";
         final String foo = "foo";
         final String works = "works?";
+        final String path = "Path=/";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsEmpty(),
                     foo,
                     works,
-                    RsWithCookieTest.PATH
+                    path
                 )
             ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithCookieTest.CRLF).join(
-                    RsWithCookieTest.HTTP_OK,
-                    setcookie,
-                    "",
-                    ""
-                )
-            )
+            Matchers.equalTo(this.joiner(foo, works, path))
         );
     }
 
@@ -87,29 +67,27 @@ public final class RsWithCookieTest {
      */
     @Test
     public void addsMultipleCookies() throws IOException {
-        final String setcookie = "Set-Cookie: xoo=value?;Path=/;";
-        final String xoo = "xoo";
+        final String qux = "qux";
         final String bar = "bar";
         final String value = "value?";
+        final String path = "Path=/qux";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsWithCookie(
                         new RsEmpty(),
-                        xoo,
+                        qux,
                         value,
-                        RsWithCookieTest.PATH
+                        path
                     ),
                     bar, "worksToo?", "Path=/2nd/path/"
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on(RsWithCookieTest.CRLF).join(
-                    RsWithCookieTest.HTTP_OK,
-                    setcookie,
-                    "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
-                    "",
-                    ""
+                this.joinerMultiple(
+                    qux,
+                    value,
+                    path
                 )
             )
         );
@@ -128,7 +106,68 @@ public final class RsWithCookieTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void rejectsInvalidValue() {
-        final String cookiename = "cookiename";
-        new RsWithCookie(new RsEmpty(), cookiename, "wo\"rks");
+        new RsWithCookie(new RsEmpty(), "cookiename", "wo\"rks");
+    }
+
+    /**
+     * Returns the joined cookie.
+     * @param name Cookie name
+     * @param value Cookie value
+     * @param path Cookie path
+     * @return Joined cookie
+     */
+    private String joiner(final String name, final String value,
+        final String path) {
+        final String[] parts = {
+            this.httpOk(),
+            this.cookie(name, value, path),
+            "",
+            "",
+        };
+        return this.joiner().join(parts);
+    }
+
+    /**
+     * Returns the multiple cookies that are joined.
+     * @param name Cookie name
+     * @param value Cookie value
+     * @param path Cookie path
+     * @return Joined cookies
+     */
+    private String joinerMultiple(final String name, final String value,
+        final String path) {
+        final String[] parts = {
+            this.httpOk(),
+            this.cookie(name, value, path),
+            "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
+            "",
+            "",
+        };
+        return this.joiner().join(parts);
+    }
+    /**
+     * Returns the set-cookie.
+     * @param name Cookie name
+     * @param value Coolie value
+     * @param path Cookie path
+     * @return Set cookie header
+     */
+    private String cookie(final String name, final String value,
+        final String path) {
+        return String.format("Set-Cookie: %s=%s;%s;", name, value, path);
+    }
+    /**
+     * Returns the http ok.
+     * @return HTTP OK
+     */
+    private String httpOk() {
+        return "HTTP/1.1 200 OK";
+    }
+    /**
+     * Returns the carriage return joiner.
+     * @return Joiner
+     */
+    private Joiner joiner() {
+        return Joiner.on("\r\n");
     }
 }

@@ -120,13 +120,9 @@ public final class PsLinkedinTest {
                         return new RsJson(
                             Json.createObjectBuilder()
                                 .add("id", identifier)
-                                .add(
-                                    firstname,
-                                    frodo
-                                ).add(
-                                    lastname,
-                                    baggins
-                                ).build()
+                                .add(firstname, frodo)
+                                .add(lastname,baggins)
+                                .build()
                         );
                     }
                 }
@@ -159,14 +155,8 @@ public final class PsLinkedinTest {
                     MatcherAssert.assertThat(
                         identity.properties(),
                         Matchers.allOf(
-                            Matchers.hasEntry(
-                                firstname,
-                                frodo
-                            ),
-                            Matchers.hasEntry(
-                                lastname,
-                                baggins
-                            )
+                            Matchers.hasEntry(firstname, frodo),
+                            Matchers.hasEntry(lastname, baggins)
                         )
                     );
                 }
