@@ -42,25 +42,9 @@ public final class RsWithCookieTest {
      */
     private static final String CRLF = "\r\n";
     /**
-     * Bar.
-     */
-    private static final String BAR = "bar";
-    /**
      * Http ok.
      */
     private static final String HTTP_OK = "HTTP/1.1 200 OK";
-    /**
-     * Works.
-     */
-    private static final String WORKS = "works?";
-    /**
-     * Set cookie.
-     */
-    private static final String SET_COOKIE = "Set-Cookie: foo=works?;Path=/;";
-    /**
-     * Foo.
-     */
-    private static final String FOO = "foo";
     /**
      * Path.
      */
@@ -73,19 +57,22 @@ public final class RsWithCookieTest {
      */
     @Test
     public void addsCookieToResponse() throws IOException {
+        final String setcookie = "Set-Cookie: foo=works?;Path=/;";
+        final String foo = "foo";
+        final String works = "works?";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsEmpty(),
-                    RsWithCookieTest.FOO,
-                    RsWithCookieTest.WORKS,
+                    foo,
+                    works,
                     RsWithCookieTest.PATH
                 )
             ).print(),
             Matchers.equalTo(
                 Joiner.on(RsWithCookieTest.CRLF).join(
                     RsWithCookieTest.HTTP_OK,
-                    RsWithCookieTest.SET_COOKIE,
+                    setcookie,
                     "",
                     ""
                 )
@@ -100,22 +87,26 @@ public final class RsWithCookieTest {
      */
     @Test
     public void addsMultipleCookies() throws IOException {
+        final String setcookie = "Set-Cookie: xoo=value?;Path=/;";
+        final String xoo = "xoo";
+        final String bar = "bar";
+        final String value = "value?";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsWithCookie(
                         new RsEmpty(),
-                        RsWithCookieTest.FOO,
-                        RsWithCookieTest.WORKS,
+                        xoo,
+                        value,
                         RsWithCookieTest.PATH
                     ),
-                    RsWithCookieTest.BAR, "worksToo?", "Path=/2nd/path/"
+                    bar, "worksToo?", "Path=/2nd/path/"
                 )
             ).print(),
             Matchers.equalTo(
                 Joiner.on(RsWithCookieTest.CRLF).join(
                     RsWithCookieTest.HTTP_OK,
-                    RsWithCookieTest.SET_COOKIE,
+                    setcookie,
                     "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
                     "",
                     ""
@@ -137,6 +128,7 @@ public final class RsWithCookieTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void rejectsInvalidValue() {
-        new RsWithCookie(new RsEmpty(), RsWithCookieTest.BAR, "wo\"rks");
+        final String cookiename = "cookiename";
+        new RsWithCookie(new RsEmpty(), cookiename, "wo\"rks");
     }
 }

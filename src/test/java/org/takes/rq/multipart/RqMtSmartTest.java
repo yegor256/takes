@@ -62,10 +62,6 @@ import org.takes.rs.RsText;
  */
 public final class RqMtSmartTest {
     /**
-     * Post.
-     */
-    private static final String POST = "POST /post?u=3 HTTP/1.1";
-    /**
      * Body element.
      */
     private static final String BODY_ELEMENT = "--zzz";
@@ -99,6 +95,7 @@ public final class RqMtSmartTest {
      */
     @Test
     public void returnsCorrectPartLength() throws IOException {
+        final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
         final String body =
@@ -111,7 +108,7 @@ public final class RqMtSmartTest {
             );
         final Request req = new RqFake(
             Arrays.asList(
-                RqMtSmartTest.POST,
+                post,
                 "Host: www.example.com",
                 RqMtSmartTest.contentLengthHeader(
                     (long) body.getBytes().length
@@ -255,10 +252,11 @@ public final class RqMtSmartTest {
         bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
         bwr.write(RqMtSmartTest.CRLF);
         bwr.close();
+        final String post = "POST /post?u=4 HTTP/1.1";
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
             Arrays.asList(
-                RqMtSmartTest.POST,
+                post,
                 "Host: example.com",
                 RqMtSmartTest.CONTENT_TYPE,
                 String.format("Content-Length:%s", file.length())
@@ -313,9 +311,10 @@ public final class RqMtSmartTest {
             );
         bwr.write(foot);
         bwr.close();
+        final String post = "POST /post?u=5 HTTP/1.1";
         final Request req = new RqFake(
             Arrays.asList(
-                RqMtSmartTest.POST,
+                post,
                 "Host: exampl.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
