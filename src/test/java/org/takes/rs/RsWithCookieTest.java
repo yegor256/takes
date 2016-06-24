@@ -58,7 +58,11 @@ public final class RsWithCookieTest {
                     path
                 )
             ).print(),
-            Matchers.equalTo(joiner(formatCookie(foo, works, path)))
+            Matchers.equalTo(
+                RsWithCookieTest.cookies(
+                    RsWithCookieTest.formatCookie(foo, works, path)
+                )
+            )
         );
     }
 
@@ -86,8 +90,8 @@ public final class RsWithCookieTest {
                 )
             ).print(),
             Matchers.equalTo(
-                joiner(
-                    formatCookie(qux, value, path),
+                RsWithCookieTest.cookies(
+                    RsWithCookieTest.formatCookie(qux, value, path),
                     "bar=worksToo?;Path=/2nd/path/"
                 )
             )
@@ -115,7 +119,7 @@ public final class RsWithCookieTest {
      * @param cookies Cookies values
      * @return Joined cookie
      */
-    private static String joiner(final String... cookies) {
+    private static String cookies(final String... cookies) {
         final List<String> list = new ArrayList<String>(cookies.length + 3);
         list.add("HTTP/1.1 200 OK");
         for (final String cookie : cookies) {
