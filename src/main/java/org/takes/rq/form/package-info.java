@@ -23,7 +23,8 @@
  */
 
 /**
- * Implementations of the interface {@link org.takes.rq.RqForm}.
+ * This package contains implementations of the interface
+ * {@link org.takes.rq.RqForm}.
  *
  * <p>{@link org.takes.rq.RqForm} implementations can parse form data
  * from {@link org.takes.Request} objects.
