@@ -26,8 +26,9 @@
  * This package contains implementations of the interface
  * {@link org.takes.rq.RqForm}.
  *
- * <p>{@link org.takes.rq.RqForm} implementations can parse form data
- * from {@link org.takes.Request} objects.
+ * <p>{@link org.takes.rq.RqForm} implementations can parse FORM data in
+ * {@code application/x-www-form-urlencoded} format (RFC 1738) from
+ * {@link org.takes.Request} objects.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
