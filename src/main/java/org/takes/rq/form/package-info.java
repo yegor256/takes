@@ -24,9 +24,16 @@
 
 /**
  * Implementations of the interface {@link org.takes.rq.RqForm}.
+ *
+ * <p>{@link org.takes.rq.RqForm} implementations can parse form data
+ * from {@link org.takes.Request} objects.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
+ *
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33
- * @todo #687:15min Improve documentation for package org.takes.rq.form.
+ * @todo #687:15min Improve documentation for package org.takes.rq.form explaining
+ *  what a form is and providing code examples of usage of existing classes.
  */
 package org.takes.rq.form;
