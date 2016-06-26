@@ -36,7 +36,7 @@
  * @version $Id$
  * @since 0.33
  * @todo #687:15min Improve documentation for package org.takes.rq.form
- *  explaining what a form is and providing code examples of usage of
- *  existing classes.
+ *  explaining what a form is, providing code examples of usage of
+ *  existing classes and other info that may be relevant.
  */
 package org.takes.rq.form;
