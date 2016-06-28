@@ -534,15 +534,16 @@ public final class TkPostMessage implements Take {
   public Response act(final Request req) {
     final String body = new RqPring(req).printBody();
     if (body.isEmpty()) {
-      throw new RsFlash(
-        new RsForward(),
-        "message can't be empty"
+      throw new RsForward(
+        new RsFlash("message can't be empty")
       );
     }
     // save the message to the database
-    return new RsFlash(
-      new RsForward("/"),
-      "thanks, the message was posted"
+    return new RsForward(
+      new RsFlash(
+        "thanks, the message was posted"
+      ),
+      "/"
     );
   }
 }
