@@ -39,7 +39,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqForm;
+import org.takes.rq.form.RqFormBase;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFixed;
 
@@ -83,7 +83,7 @@ public final class FtRemoteTest {
             public Response act(final org.takes.Request req)
                 throws IOException {
                 MatcherAssert.assertThat(
-                    new RqForm.Base(req).param("alpha"),
+                    new RqFormBase(req).param("alpha"),
                     Matchers.hasItem("123")
                 );
                 return new RsText("works fine");
