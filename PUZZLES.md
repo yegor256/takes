@@ -76,4 +76,4 @@ There are 5 active puzzles (74 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[#667](https://github.com/yegor256/takes/issues/667):[<del>667</del>](https://github.com/yegor256/takes/issues/667) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#687](https://github.com/yegor256/takes/issues/687):[<del>667-ace435e8</del>](https://github.com/yegor256/takes/issues/687) [`RqForm.java:69-71`](../master/src/main/java/org/takes/rq/RqForm.java#L69-L71)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**687-65dc14c7**]() [`RqFormBase.java:56-58`](../master/src/main/java/org/takes/rq/form/RqFormBase.java#L56-L58)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[**687-875c0e1d**]() [`package-info.java:38-40`](../master/src/main/java/org/takes/rq/form/package-info.java#L38-L40)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#694]():[**687-875c0e1d**]() [`package-info.java:38-40`](../master/src/main/java/org/takes/rq/form/package-info.java#L38-L40)<br/>
