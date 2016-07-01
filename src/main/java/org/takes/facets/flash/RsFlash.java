@@ -100,10 +100,19 @@ import org.takes.rs.RsWrap;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
+ * @todo #686:15min After upgrade to qulice 0.16.4 we have to fix
+ *  SingularField PMD warings in this class. Fix this warning
+ *  and rid of the PMD suppression here.
  */
+@SuppressWarnings("PMD.SingularField")
 @ToString(callSuper = true, of = "text")
 @EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {
+
+    /**
+     * Text format.
+     */
+    private static final String TEXT_FORMAT = "%s/%s";
 
     /**
      * To string.
@@ -183,8 +192,7 @@ public final class RsFlash extends RsWrap {
     public RsFlash(final String msg, final Level level, final String cookie)
         throws UnsupportedEncodingException {
         super(RsFlash.make(msg, level, cookie));
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
-        this.text = String.format("%s/%s", level, msg);
+        this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
 
     /**
@@ -201,7 +209,7 @@ public final class RsFlash extends RsWrap {
         return new RsWithCookie(
             cookie,
             new Sprintf(
-                "%s/%s",
+                RsFlash.TEXT_FORMAT,
                 URLEncoder.encode(msg, Charset.defaultCharset().name()),
                 level.getName()
             ),

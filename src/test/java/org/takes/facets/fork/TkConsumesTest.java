@@ -50,20 +50,26 @@ import org.takes.tk.TkFixed;
 public final class TkConsumesTest {
 
     /**
+     * Application json.
+     */
+    private static final String APPLICATION_JSON = "application/json";
+
+    /**
      * TkConsumes can accept request with certain Content-Type.
      * @throws IOException If some problem inside
      */
     @Test
     public void acceptsCorrectContentTypeRequest() throws IOException {
+        final String contenttype = "Content-Type: application/json";
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJson(new RsEmpty())),
-            "application/json"
+            TkConsumesTest.APPLICATION_JSON
         );
         final Response response = consumes.act(
             new RqFake(
                 Arrays.asList(
                     "GET /?TkConsumes",
-                    "Content-Type: application/json"
+                    contenttype
                 ),
                 ""
             )
@@ -73,7 +79,7 @@ public final class TkConsumesTest {
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
-                    "Content-Type: application/json"
+                    contenttype
                 )
             )
         );
@@ -87,7 +93,7 @@ public final class TkConsumesTest {
     public void failsOnUnsupportedAcceptHeader() throws IOException {
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJson(new RsEmpty())),
-            "application/json"
+            TkConsumesTest.APPLICATION_JSON
         );
         consumes.act(
             new RqFake(

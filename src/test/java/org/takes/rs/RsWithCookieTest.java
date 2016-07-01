@@ -25,6 +25,8 @@ package org.takes.rs;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -44,19 +46,21 @@ public final class RsWithCookieTest {
      */
     @Test
     public void addsCookieToResponse() throws IOException {
+        final String foo = "foo";
+        final String works = "works?";
+        final String path = "Path=/";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsEmpty(),
-                    "foo", "works?", "Path=/"
+                    foo,
+                    works,
+                    path
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Set-Cookie: foo=works?;Path=/;",
-                    "",
-                    ""
+                RsWithCookieTest.cookies(
+                    RsWithCookieTest.formatCookie(foo, works, path)
                 )
             )
         );
@@ -69,23 +73,26 @@ public final class RsWithCookieTest {
      */
     @Test
     public void addsMultipleCookies() throws IOException {
+        final String qux = "qux";
+        final String bar = "bar";
+        final String value = "value?";
+        final String path = "Path=/qux";
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithCookie(
                     new RsWithCookie(
                         new RsEmpty(),
-                        "foo", "works?", "Path=/"
+                        qux,
+                        value,
+                        path
                     ),
-                    "bar", "worksToo?", "Path=/2nd/path/"
+                    bar, "worksToo?", "Path=/2nd/path/"
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
-                    "Set-Cookie: foo=works?;Path=/;",
-                    "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
-                    "",
-                    ""
+                RsWithCookieTest.cookies(
+                    RsWithCookieTest.formatCookie(qux, value, path),
+                    "bar=worksToo?;Path=/2nd/path/"
                 )
             )
         );
@@ -104,6 +111,34 @@ public final class RsWithCookieTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void rejectsInvalidValue() {
-        new RsWithCookie(new RsEmpty(), "bar", "wo\"rks");
+        new RsWithCookie(new RsEmpty(), "cookiename", "wo\"rks");
+    }
+
+    /**
+     * Returns the joined cookie.
+     * @param cookies Cookies values
+     * @return Joined cookie
+     */
+    private static String cookies(final String... cookies) {
+        final List<String> list = new ArrayList<String>(cookies.length + 3);
+        list.add("HTTP/1.1 200 OK");
+        for (final String cookie : cookies) {
+            list.add(String.format("Set-Cookie: %s;", cookie));
+        }
+        list.add("");
+        list.add("");
+        return Joiner.on("\r\n").join(list.iterator());
+    }
+
+    /**
+     * Returns the formatted cookie.
+     * @param name Cookie name
+     * @param value Cookie value
+     * @param path Cookie path
+     * @return Formatted cookie value
+     */
+    private static String formatCookie(final String name, final String value,
+        final String path) {
+        return String.format("%s=%s;%s", name, value, path);
     }
 }

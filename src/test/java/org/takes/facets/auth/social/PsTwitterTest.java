@@ -56,12 +56,14 @@ public final class PsTwitterTest {
     @Test
     public void logsIn() throws IOException {
         final int tid = RandomUtils.nextInt(1000);
-        final String name = RandomStringUtils.randomAlphanumeric(10);
+        final String randname = RandomStringUtils.randomAlphanumeric(10);
         final String picture = RandomStringUtils.randomAlphanumeric(10);
+        final String httpok = "HTTP OK";
+        final String name = "name";
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
-                "HTTP OK",
+                httpok,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
@@ -70,11 +72,11 @@ public final class PsTwitterTest {
             ),
             new FakeRequest(
                 200,
-                "HTTP OK",
+                httpok,
                 Collections.<Map.Entry<String, String>>emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
-                    .add("name", name)
+                    .add(name, randname)
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
@@ -91,8 +93,8 @@ public final class PsTwitterTest {
             CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
         );
         MatcherAssert.assertThat(
-            identity.properties().get("name"),
-            CoreMatchers.equalTo(name)
+            identity.properties().get(name),
+            CoreMatchers.equalTo(randname)
         );
         MatcherAssert.assertThat(
             identity.properties().get("picture"),

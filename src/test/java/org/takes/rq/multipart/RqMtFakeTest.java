@@ -46,6 +46,11 @@ import org.takes.rq.RqWithHeaders;
  */
 public final class RqMtFakeTest {
     /**
+     * Form data.
+     */
+    private static final String FORM_DATA =
+        "form-data; name=\"data\"; filename=\"%s\"";
+    /**
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
@@ -128,7 +133,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.bin\""
+                    String.format(RqMtFakeTest.FORM_DATA, "a.rar")
                 )
             )
         );
@@ -182,38 +187,39 @@ public final class RqMtFakeTest {
                 )
             )
         );
+        final String exmessage =
+            "An IOException was expected since the Stream is closed";
+        final String name = "name";
+        final String closed = "Closed";
+        final String content = "content";
         final RqMtBase multi = new RqMtBase(request);
-        multi.part("name").iterator().next().body().read();
-        multi.part("content").iterator().next().body().read();
+        multi.part(name).iterator().next().body().read();
+        multi.part(content).iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
-            multi.part("name").iterator().next(),
+            multi.part(name).iterator().next(),
             Matchers.notNullValue()
         );
         try {
-            multi.part("name").iterator().next().body().read();
-            Assert.fail(
-                "An IOException was expected since the Stream is closed"
-            );
+            multi.part(name).iterator().next().body().read();
+            Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.containsString("Closed")
+                Matchers.containsString(closed)
             );
         }
         MatcherAssert.assertThat(
-            multi.part("content").iterator().next(),
+            multi.part(content).iterator().next(),
             Matchers.notNullValue()
         );
         try {
-            multi.part("content").iterator().next().body().read();
-            Assert.fail(
-                "An IOException was expected since the Stream is closed"
-            );
+            multi.part(content).iterator().next().body().read();
+            Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex.getMessage(),
-                Matchers.containsString("Closed")
+                Matchers.containsString(closed)
             );
         }
     }
@@ -248,18 +254,20 @@ public final class RqMtFakeTest {
                 )
             )
         );
+        final String foo = "foo";
+        final String bar = "bar";
         final RqMtBase multi = new RqMtBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
-            multi.part("foo").iterator().next(),
+            multi.part(foo).iterator().next(),
             Matchers.notNullValue()
         );
-        multi.part("foo").iterator().next().body().close();
+        multi.part(foo).iterator().next().body().close();
         MatcherAssert.assertThat(
-            multi.part("bar").iterator().next(),
+            multi.part(bar).iterator().next(),
             Matchers.notNullValue()
         );
-        multi.part("bar").iterator().next().body().close();
+        multi.part(bar).iterator().next().body().close();
     }
 
     /**
@@ -284,7 +292,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.zip\""
+                    String.format(RqMtFakeTest.FORM_DATA, "a.zip")
                 )
             )
         );
@@ -317,7 +325,7 @@ public final class RqMtFakeTest {
                 new RqFake("", "", ""),
                 RqMtFakeTest.contentLengthHeader(0L),
                 RqMtFakeTest.contentDispositionHeader(
-                    "form-data; name=\"data\"; filename=\"a.bin\""
+                    String.format(RqMtFakeTest.FORM_DATA, "a.bin")
                 )
             )
         );

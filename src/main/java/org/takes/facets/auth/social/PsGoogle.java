@@ -56,6 +56,36 @@ import org.takes.rq.RqHref;
 public final class PsGoogle implements Pass {
 
     /**
+     * Error.
+     */
+    private static final String ERROR = "error";
+
+    /**
+     * Picture.
+     */
+    private static final String PICTURE = "picture";
+
+    /**
+     * Display name.
+     */
+    private static final String DISPLAY_NAME = "displayName";
+
+    /**
+     * Access token.
+     */
+    private static final String ACCESS_TOKEN = "access_token";
+
+    /**
+     * Name.
+     */
+    private static final String NAME = "name";
+
+    /**
+     * Code.
+     */
+    private static final String CODE = "code";
+
+    /**
      * App name.
      */
     private final transient String app;
@@ -119,7 +149,7 @@ public final class PsGoogle implements Pass {
     public Opt<Identity> enter(final Request request)
         throws IOException {
         final Href href = new RqHref.Base(request).href();
-        final Iterator<String> code = href.param("code").iterator();
+        final Iterator<String> code = href.param(PsGoogle.CODE).iterator();
         if (!code.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -146,17 +176,17 @@ public final class PsGoogle implements Pass {
         final String uri = new Href(this.gapi).path("plus").path("v1")
             .path("people")
             .path("me")
-            .with("access_token", token)
+            .with(PsGoogle.ACCESS_TOKEN, token)
             .toString();
         final JsonObject json = new JdkRequest(uri).fetch()
             .as(JsonResponse.class).json()
             .readObject();
-        if (json.containsKey("error")) {
+        if (json.containsKey(PsGoogle.ERROR)) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
                     "could not retrieve id from Google, possible cause: %s.",
-                    json.getJsonObject("error").get("message")
+                    json.getJsonObject(PsGoogle.ERROR).get("message")
                 )
             );
         }
@@ -178,7 +208,7 @@ public final class PsGoogle implements Pass {
             .formParam("redirect_uri", this.redir)
             .formParam("client_secret", this.key)
             .formParam("grant_type", "authorization_code")
-            .formParam("code", code)
+            .formParam(PsGoogle.CODE, code)
             .back()
             .header("Content-Type", "application/x-www-form-urlencoded")
             .method(com.jcabi.http.Request.POST)
@@ -186,7 +216,7 @@ public final class PsGoogle implements Pass {
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(JsonResponse.class).json()
             .readObject()
-            .getString("access_token");
+            .getString(PsGoogle.ACCESS_TOKEN);
     }
 
     /**
@@ -199,15 +229,15 @@ public final class PsGoogle implements Pass {
             new HashMap<String, String>(json.size());
         final JsonObject image = json.getJsonObject("image");
         if (image == null) {
-            props.put("picture", "#");
+            props.put(PsGoogle.PICTURE, "#");
         } else {
-            props.put("picture", image.getString("url", "#"));
+            props.put(PsGoogle.PICTURE, image.getString("url", "#"));
         }
-        if (json.containsKey("displayName")
-            && json.get("displayName") != null) {
-            props.put("name", json.getString("displayName"));
+        if (json.containsKey(PsGoogle.DISPLAY_NAME)
+            && json.get(PsGoogle.DISPLAY_NAME) != null) {
+            props.put(PsGoogle.NAME, json.getString(PsGoogle.DISPLAY_NAME));
         } else {
-            props.put("name", "unknown");
+            props.put(PsGoogle.NAME, "unknown");
         }
         return new Identity.Simple(
             String.format("urn:google:%s", json.getString("id")), props

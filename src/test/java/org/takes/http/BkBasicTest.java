@@ -68,6 +68,7 @@ import org.takes.tk.TkText;
         "PMD.TooManyMethods"
     })
 public final class BkBasicTest {
+
     /**
      * Carriage return constant.
      */
@@ -92,10 +93,11 @@ public final class BkBasicTest {
     public void handlesSocket() throws IOException {
         final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
-        new BkBasic(new TkText("Hello world!")).accept(socket);
+        final String hello = "Hello World";
+        new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
             baos.toString(),
-            Matchers.containsString("Hello world")
+            Matchers.containsString(hello)
         );
     }
 
@@ -259,6 +261,7 @@ public final class BkBasicTest {
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final ServerSocket server = new ServerSocket(0);
+        final String text = "Say hello!";
         try {
             new Thread(
                 new Runnable() {
@@ -284,7 +287,7 @@ public final class BkBasicTest {
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
                         "",
-                        "Hello World!"
+                        text
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();
@@ -317,6 +320,7 @@ public final class BkBasicTest {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final ServerSocket server = new ServerSocket(0);
+        final String greetings = "Hi everyone";
         try {
             new Thread(
                 new Runnable() {
@@ -343,7 +347,7 @@ public final class BkBasicTest {
                         BkBasicTest.HOST,
                         "Connection: Close",
                         "",
-                        "Hello World!"
+                        greetings
                     ).getBytes()
                 );
                 final InputStream input = socket.getInputStream();
@@ -376,7 +380,7 @@ public final class BkBasicTest {
             new ByteArrayInputStream(
                 Joiner.on(BkBasicTest.CRLF).join(
                     "GET / HTTP/1.1",
-                    "Host:localhost",
+                    BkBasicTest.HOST,
                     "Content-Length: 2",
                     "",
                     "hi"

@@ -341,44 +341,26 @@
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
-                                @todo #678:30min After upgrade to qulice 0.16.4 we have to fix 
+                                @todo #686:30min After upgrade to qulice 0.16.4 we have to fix 
                                  AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
                                  remove all excludes of PMD here.
                                 -->                                
                                 <exclude>pmd:/src/main/java/org/takes/facets/fork/TkFork.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/ret/TkReturn.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/flash/RsFlash.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/flash/TkFlash.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/auth/TkAuth.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/auth/TkSecure.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/social/PsLinkedin.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/social/PsFacebook.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/social/PsGoogle.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/social/PsTwitter.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/social/PsGithub.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/forward/TkForward.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/forward/RsForward.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyJSON.java</exclude>
+                                <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyXML.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsGzip.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/rs/RsWrap.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyXML.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/tk/TkSlf4j.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/tk/TkReadAlways.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/tk/TkWrap.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/tk/TkCORS.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rq/RqRequestLine.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/HttpException.java</exclude>
-                                <exclude>pmd:/src/test/java/org/takes/facets/fork/TkConsumesTest.java</exclude>
-                                <exclude>pmd:/src/test/java/org/takes/facets/auth/social/PsLinkedinTest.java</exclude>
-                                <exclude>pmd:/src/test/java/org/takes/facets/auth/social/PsTwitterTest.java</exclude>
-                                <exclude>pmd:/src/test/java/org/takes/facets/auth/social/PsGoogleTest.java</exclude>
-                                <exclude>pmd:/src/test/java/org/takes/rs/RsWithCookieTest.java</exclude>                                
-                                <exclude>pmd:/src/test/java/org/takes/rq/multipart/RqMtBaseTest.java</exclude>                                
-                                <exclude>pmd:/src/test/java/org/takes/rq/multipart/RqMtFakeTest.java</exclude>                                
-                                <exclude>pmd:/src/test/java/org/takes/rq/multipart/RqMtSmartTest.java</exclude>                                
-                                <exclude>pmd:/src/test/java/org/takes/rq/RqWithHeadersTest.java</exclude>                                
-                                <exclude>pmd:/src/test/java/org/takes/http/BkBasicTest.java</exclude>    
                             </excludes>
                         </configuration>
                     </plugin>

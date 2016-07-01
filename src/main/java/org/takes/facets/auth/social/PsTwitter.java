@@ -56,6 +56,16 @@ import org.takes.misc.Utf8String;
 public final class PsTwitter implements Pass {
 
     /**
+     * Access token.
+     */
+    private static final String ACCESS_TOKEN = "access_token";
+
+    /**
+     * Name.
+     */
+    private static final String NAME = "name";
+
+    /**
      * URL for verifying user credentials.
      */
     private static final String VERIFY_URL =
@@ -139,7 +149,7 @@ public final class PsTwitter implements Pass {
                 .set(
                     URI.create(
                         new Href(PsTwitter.VERIFY_URL)
-                            .with("access_token", tkn)
+                            .with(PsTwitter.ACCESS_TOKEN, tkn)
                             .toString()
                     )
                 )
@@ -161,7 +171,7 @@ public final class PsTwitter implements Pass {
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props =
             new HashMap<String, String>(json.size());
-        props.put("name", json.getString("name"));
+        props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
         props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(
             String.format("urn:twitter:%d", json.getInt("id")),
@@ -194,6 +204,6 @@ public final class PsTwitter implements Pass {
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(JsonResponse.class)
-            .json().readObject().getString("access_token");
+            .json().readObject().getString(PsTwitter.ACCESS_TOKEN);
     }
 }

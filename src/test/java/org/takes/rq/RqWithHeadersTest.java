@@ -39,26 +39,29 @@ import org.junit.Test;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class RqWithHeadersTest {
+
     /**
      * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
     public void addsHeadersToRequest() throws IOException {
+        final String testheader = "TestHeader: someValue";
+        final String someheader = "SomeHeader: testValue";
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithHeaders(
                     new RqFake(),
-                    "TestHeader: someValue",
-                    "SomeHeader: testValue"
+                    testheader,
+                    someheader
                 )
             ).print(),
             Matchers.startsWith(
                 Joiner.on("\r\n").join(
                     "GET /",
                     "Host: www.example.com",
-                    "TestHeader: someValue",
-                    "SomeHeader: testValue"
+                    testheader,
+                    someheader
                 )
             )
         );
