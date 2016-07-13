@@ -872,6 +872,12 @@ port number, use it to start a server, and save it to the file.
 The framework sends all logs to SLF4J logging facility. If you want to see them,
 configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
 
+To make a `Take` log, wrap it in a `TkSlf4j` - for example:
+
+     new TkSlf4j(
+         new TkFork(...)
+     )
+
 ## Directory Layout
 
 You are free to use any build tool, but we recommend Maven. This is how your project directory layout may/should look like:
