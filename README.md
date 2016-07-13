@@ -36,7 +36,7 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-These [blog posts](http://www.yegor256.com/tag/takes.org.html) may help you too.
+These [blog posts](http://www.yegor256.com/tag/takes.html) may help you too.
 
 ## Contents
 
