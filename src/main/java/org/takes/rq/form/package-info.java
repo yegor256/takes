@@ -34,7 +34,7 @@
  *
  * <p>Current implementations:
  * {@link org.takes.rq.form.RqFormBase} base implementation;
- * {@link org.takes.rq.form.RqFormFake} implementation that useful for
+ * {@link org.takes.rq.form.RqFormFake} implementation that is useful for
  * testing purposes. You can add your parameters in constructor;
  * {@link org.takes.rq.form.RqFormSmart} decorator with extra features:
  * Get single parameter and, if parameter not exists use default value or
