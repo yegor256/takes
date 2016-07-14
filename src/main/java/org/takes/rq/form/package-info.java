@@ -32,17 +32,15 @@
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * Current implementations:
+ * <p>Current implementations:
  * {@link org.takes.rq.form.RqFormBase} base implementation;
  * {@link org.takes.rq.form.RqFormFake} implementation that useful for
- * testing purposes;
- * {@link org.takes.rq.form.RqFormSmart} decorator with extra features.
+ * testing purposes. You can add your parameters in constructor;
+ * {@link org.takes.rq.form.RqFormSmart} decorator with extra features:
+ * Get single parameter and, if parameter not exists use default value or
+ * throw HTTP exception.
  *
- * Also please look at usage examples:
- *
- * {@link org.takes.rq.form.RqFormBaseTest};
- * {@link org.takes.rq.form.RqFormFakeTest};
- * {@link org.takes.rq.form.RqFormSmartTest}.
+ * <p>Also please look at usage examples:
  *
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
