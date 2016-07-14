@@ -57,15 +57,55 @@ import org.takes.rs.RsJson;
  */
 public final class PsLinkedinTest {
 
-    final private String code = RandomStringUtils.randomAlphanumeric(10);
-    final private String lapp = RandomStringUtils.randomAlphanumeric(10);
-    final private String lkey = RandomStringUtils.randomAlphanumeric(10);
-    final private String identifier = RandomStringUtils.randomAlphanumeric(10);
-    final private String firstname = "firstName";
-    final private String frodo = "Frodo";
-    final private String lastname = "lastName";
-    final private String baggins = "Baggins";
-    final private String pattern = "/uas/oauth2/accessToken";
+    /**
+     * Field name for "First name".
+     */
+    private static final String FIRST_NAME = "firstName";
+
+    /**
+     * Test value for "First name".
+     */
+    private static final String FRODO = "Frodo";
+
+    /**
+     * Field name for "Last name".
+     */
+    private static final String LAST_NAME = "lastName";
+
+    /**
+     * Test value for "Last name".
+     */
+    private static final String BAGGINS = "Baggins";
+
+    /**
+     * Request path pattern for token endpoint.
+     */
+    private static final String TOKEN_PATTERN = "/uas/oauth2/accessToken";
+
+    /**
+     * Request path pattern for people endpoint.
+     */
+    private static final String PEOPLE_PATTERN = "/v1/people";
+
+    /**
+     * Linkedin authorization code.
+     */
+    private final String code = RandomStringUtils.randomAlphanumeric(10);
+
+    /**
+     * Linkedin app.
+     */
+    private final String lapp = RandomStringUtils.randomAlphanumeric(10);
+
+    /**
+     * Linkedin key.
+     */
+    private final String lkey = RandomStringUtils.randomAlphanumeric(10);
+
+    /**
+     * Linkedin user identifier.
+     */
+    private final String identifier = RandomStringUtils.randomAlphanumeric(10);
 
     /**
      * PsLinkedin can login.
@@ -74,22 +114,14 @@ public final class PsLinkedinTest {
     @Test
     public void logins() throws IOException {
         final Take take = new TkFork(
-            new FkRegex(
-                pattern,
-                new TokenTake()
-            ),
-            new FkRegex(
-                "/v1/people",
-                new PeopleTake()
-            )
+            new FkRegex(PsLinkedinTest.TOKEN_PATTERN, new TokenTake()),
+            new FkRegex(PsLinkedinTest.PEOPLE_PATTERN, new PeopleTake())
         );
-        new FtRemote(take).exec(
-            new LinkedinScript()
-        );
+        new FtRemote(take).exec(new LinkedinScript());
     }
 
     /**
-     * Take that creates a test authorization token.
+     * Take that returns JSON with the authorization token.
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @author Rui Castro (rui.castro@gmail.com)
      * @version $Id$
@@ -104,19 +136,22 @@ public final class PsLinkedinTest {
                 Matchers.stringContainsInOrder(
                     Arrays.asList(
                         "grant_type=authorization_code",
-                        String.format("client_id=%s", lapp),
+                        String.format(
+                            "client_id=%s",
+                            PsLinkedinTest.this.lapp
+                        ),
                         "redirect_uri=",
                         String.format(
                             "client_secret=%s",
-                            lkey
+                            PsLinkedinTest.this.lkey
                         ),
-                        String.format("code=%s", code)
+                        String.format("code=%s", PsLinkedinTest.this.code)
                     )
                 )
             );
             MatcherAssert.assertThat(
                 new RqHref.Base(req).href().toString(),
-                Matchers.endsWith(pattern)
+                Matchers.endsWith(PsLinkedinTest.TOKEN_PATTERN)
             );
             return new RsJson(
                 Json.createObjectBuilder()
@@ -129,7 +164,7 @@ public final class PsLinkedinTest {
     }
 
     /**
-     * Take that returns JSON with the test user data.
+     * Take that returns JSON with test user data.
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @author Rui Castro (rui.castro@gmail.com)
      * @version $Id$
@@ -141,14 +176,19 @@ public final class PsLinkedinTest {
         public Response act(final Request req) throws IOException {
             return new RsJson(
                 Json.createObjectBuilder()
-                    .add("id", identifier)
-                    .add(firstname, frodo)
-                    .add(lastname, baggins)
-                    .build()
+                    .add(
+                        "id",
+                        PsLinkedinTest.this.identifier
+                    ).add(
+                        PsLinkedinTest.FIRST_NAME,
+                        PsLinkedinTest.FRODO
+                    ).add(
+                        PsLinkedinTest.LAST_NAME,
+                        PsLinkedinTest.BAGGINS
+                    ).build()
             );
         }
     }
-
 
     /**
      * Script to test Linkedin authorization.
@@ -163,28 +203,37 @@ public final class PsLinkedinTest {
         public void exec(final URI home) throws IOException {
             final Identity identity = new PsLinkedin(
                 new Href(
-                    String.format(
-                        "%s/uas/oauth2/accessToken",
-                        home
-                    )
+                    String.format("%s/uas/oauth2/accessToken", home)
                 ),
                 new Href(String.format("%s/v1/people/", home)),
-                lapp,
-                lkey
+                PsLinkedinTest.this.lapp,
+                PsLinkedinTest.this.lkey
             ).enter(
-                new RqFake("GET", String.format("?code=%s", code))
+                new RqFake(
+                    "GET",
+                    String.format("?code=%s", PsLinkedinTest.this.code)
+                )
             ).get();
             MatcherAssert.assertThat(
                 identity.urn(),
                 CoreMatchers.equalTo(
-                    String.format("urn:linkedin:%s", identifier)
+                    String.format(
+                        "urn:linkedin:%s",
+                        PsLinkedinTest.this.identifier
+                    )
                 )
             );
             MatcherAssert.assertThat(
                 identity.properties(),
                 Matchers.allOf(
-                    Matchers.hasEntry(firstname, frodo),
-                    Matchers.hasEntry(lastname, baggins)
+                    Matchers.hasEntry(
+                        PsLinkedinTest.FIRST_NAME,
+                        PsLinkedinTest.FRODO
+                    ),
+                    Matchers.hasEntry(
+                        PsLinkedinTest.LAST_NAME,
+                        PsLinkedinTest.BAGGINS
+                    )
                 )
             );
         }
