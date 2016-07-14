@@ -37,7 +37,7 @@
  * {@link org.takes.rq.form.RqFormFake} implementation that is useful for
  * testing purposes. You can add your parameters in constructor;
  * {@link org.takes.rq.form.RqFormSmart} decorator with extra features:
- * Get single parameter and, if parameter not exists use default value or
+ * Get single parameter and, if parameter doesn't exist use default value or
  * throw HTTP exception.
  *
  * <p>Also please look at usage examples:
