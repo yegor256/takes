@@ -42,6 +42,42 @@
  *
  * <p>Also please look at usage examples:
  *
+ * <pre>
+ * {@code
+ * final String body = "alpha=a+b+c&beta=%20Yes%20";
+ * final RqForm base = new RqFormBase(
+ *     new RqBuffered(
+ *         new RqFake(
+ *             Arrays.asList(
+ *                 "GET /h?a=3",
+ *                 "Host: www.example.com",
+ *                 String.format(
+ *                     "Content-Length: %d",
+ *                     body.getBytes().length
+ *                 )
+ *             ),
+ *             body
+ *         )
+ *     )
+ * );
+ * }
+ * </pre>
+ * Create fake form with parameter: "param=value"
+ * <pre>
+ * {@code
+ * final RqForm final = new RqFormFake(
+ *     new RqFake(),
+ *     "param",
+ *     "value"
+ * );
+ * }
+ * </pre>
+ * Get "alpha" value form parameters:
+ * <pre>
+ * {@code
+ * new RqFormSmart(base).single("alpha")
+ * }
+ * </pre>
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33
