@@ -32,11 +32,20 @@
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
+ * Current implementations:
+ * {@link org.takes.rq.form.RqFormBase} base implementation;
+ * {@link org.takes.rq.form.RqFormFake} implementation that useful for
+ * testing purposes;
+ * {@link org.takes.rq.form.RqFormSmart} decorator with extra features.
+ *
+ * Also please look at usage examples:
+ *
+ * {@link org.takes.rq.form.RqFormBaseTest};
+ * {@link org.takes.rq.form.RqFormFakeTest};
+ * {@link org.takes.rq.form.RqFormSmartTest}.
+ *
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33
- * @todo #687:15min Improve documentation for package org.takes.rq.form
- *  explaining what a form is, providing code examples of usage of
- *  existing classes and other info that may be relevant.
  */
 package org.takes.rq.form;
