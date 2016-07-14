@@ -63,8 +63,8 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
  */
-@ToString(of = "forks")
-@EqualsAndHashCode(of = "forks")
+@ToString
+@EqualsAndHashCode
 public final class TkFork implements Take {
 
     /**
