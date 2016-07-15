@@ -67,11 +67,11 @@ public final class PsLinkedinTest {
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
-        final String tokenpattern = "/uas/oauth2/accessToken";
-        final String peoplepattern = "/v1/people";
+        final String tokenpath = "/uas/oauth2/accessToken";
+        final String peoplepath = "/v1/people";
         final Take take = new TkFork(
-            new FkRegex(tokenpattern, new TokenTake(code, lapp, lkey)),
-            new FkRegex(peoplepattern, new PeopleTake(identifier))
+            new FkRegex(tokenpath, new TokenTake(code, lapp, lkey)),
+            new FkRegex(peoplepath, new PeopleTake(identifier))
         );
         new FtRemote(take).exec(
             new LinkedinScript(code, lapp, lkey, identifier)
@@ -90,22 +90,22 @@ public final class PsLinkedinTest {
         /**
          * Request path pattern for token endpoint.
          */
-        private final String tokenpattern = "/uas/oauth2/accessToken";
+        private final String tokenpath;
 
         /**
          * Linkedin authorization code.
          */
-        private String code;
+        private final String code;
 
         /**
          * Linkedin app.
          */
-        private String lapp;
+        private final String lapp;
 
         /**
          * Linkedin key.
          */
-        private String lkey;
+        private final String lkey;
 
         /**
          * Ctor.
@@ -114,6 +114,7 @@ public final class PsLinkedinTest {
          * @param lkey Linkedin key.
          */
         TokenTake(final String code, final String lapp, final String lkey) {
+            this.tokenpath = "/uas/oauth2/accessToken";
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;
@@ -135,7 +136,7 @@ public final class PsLinkedinTest {
             );
             MatcherAssert.assertThat(
                 new RqHref.Base(req).href().toString(),
-                Matchers.endsWith(this.tokenpattern)
+                Matchers.endsWith(this.tokenpath)
             );
             return new RsJson(
                 Json.createObjectBuilder()
@@ -159,7 +160,7 @@ public final class PsLinkedinTest {
         /**
          * Linkedin user identifier.
          */
-        private String identifier;
+        private final String identifier;
 
         /**
          * Ctor.
@@ -174,8 +175,8 @@ public final class PsLinkedinTest {
             return new RsJson(
                 Json.createObjectBuilder()
                     .add("id", this.identifier)
-                    .add("firstname", "Frodo")
-                    .add("lastname", "Baggins")
+                    .add("firstName", "Frodo")
+                    .add("lastName", "Baggins")
                     .build()
             );
         }
@@ -193,22 +194,22 @@ public final class PsLinkedinTest {
         /**
          * Linkedin authorization code.
          */
-        private String code;
+        private final String code;
 
         /**
          * Linkedin app.
          */
-        private String lapp;
+        private final String lapp;
 
         /**
          * Linkedin key.
          */
-        private String lkey;
+        private final String lkey;
 
         /**
          * Linkedin user identifier.
          */
-        private String identifier;
+        private final String identifier;
 
         /**
          * Ctor.
@@ -216,9 +217,10 @@ public final class PsLinkedinTest {
          * @param lapp Linkedin app.
          * @param lkey Linkedin key.
          * @param identifier Linkedin user identifier.
+         * @checkstyle ParameterNumberCheck (4 lines)
          */
         LinkedinScript(final String code, final String lapp,
-                       final String lkey, final String identifier) {
+            final String lkey, final String identifier) {
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;
@@ -243,8 +245,8 @@ public final class PsLinkedinTest {
             MatcherAssert.assertThat(
                 identity.properties(),
                 Matchers.allOf(
-                    Matchers.hasEntry("firstname", "Frodo"),
-                    Matchers.hasEntry("lastname", "Baggins")
+                    Matchers.hasEntry("firstName", "Frodo"),
+                    Matchers.hasEntry("lastName", "Baggins")
                 )
             );
         }
