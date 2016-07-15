@@ -63,18 +63,31 @@ public final class PsLinkedinTest {
      */
     @Test
     public void logins() throws IOException {
+        final String tokenpath = "/uas/oauth2/accessToken";
+        final String peoplepath = "/v1/people";
+        final String firstname = "firstName";
+        final String lastname = "lastName";
+        final String frodo = "Frodo";
+        final String baggins = "Baggins";
         final String code = RandomStringUtils.randomAlphanumeric(10);
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
-        final String tokenpath = "/uas/oauth2/accessToken";
-        final String peoplepath = "/v1/people";
         final Take take = new TkFork(
-            new FkRegex(tokenpath, new TokenTake(code, lapp, lkey)),
-            new FkRegex(peoplepath, new PeopleTake(identifier))
+            new FkRegex(
+                tokenpath,
+                new TokenTake(code, lapp, lkey, tokenpath)
+            ),
+            new FkRegex(
+                peoplepath,
+                new PeopleTake(identifier, firstname, lastname, frodo, baggins)
+            )
         );
         new FtRemote(take).exec(
-            new LinkedinScript(code, lapp, lkey, identifier)
+            new LinkedinScript(
+                code, lapp, lkey, identifier,
+                firstname, lastname, frodo, baggins
+            )
         );
     }
 
@@ -112,12 +125,15 @@ public final class PsLinkedinTest {
          * @param code Linkedin authorization code.
          * @param lapp Linkedin app.
          * @param lkey Linkedin key.
+         * @param tokenpath Request path for token endpoint.
+         * @checkstyle ParameterNumberCheck (4 lines)
          */
-        TokenTake(final String code, final String lapp, final String lkey) {
-            this.tokenpath = "/uas/oauth2/accessToken";
+        TokenTake(final String code, final String lapp, final String lkey,
+            final String tokenpath) {
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;
+            this.tokenpath = tokenpath;
         }
 
         @Override
@@ -163,11 +179,42 @@ public final class PsLinkedinTest {
         private final String identifier;
 
         /**
+         * Field name for "First name".
+         */
+        private final String firstname;
+
+        /**
+         * Test value for "First name".
+         */
+        private final String frodo;
+
+        /**
+         * Field name for "Last name".
+         */
+        private final String lastname;
+
+        /**
+         * Test value for "Last name".
+         */
+        private final String baggins;
+
+        /**
          * Ctor.
          * @param identifier Linkedin user identifier.
+         * @param firstname Field name for "First name".
+         * @param lastname Field name for "Last name".
+         * @param frodo Test value for "First name".
+         * @param baggins Test value for "Last name".
+         * @checkstyle ParameterNumberCheck (4 lines)
          */
-        PeopleTake(final String identifier) {
+        PeopleTake(final String identifier,
+            final String firstname, final String lastname,
+            final String frodo, final String baggins) {
             this.identifier = identifier;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.frodo = frodo;
+            this.baggins = baggins;
         }
 
         @Override
@@ -175,8 +222,8 @@ public final class PsLinkedinTest {
             return new RsJson(
                 Json.createObjectBuilder()
                     .add("id", this.identifier)
-                    .add("firstName", "Frodo")
-                    .add("lastName", "Baggins")
+                    .add(this.firstname, this.frodo)
+                    .add(this.lastname, this.baggins)
                     .build()
             );
         }
@@ -212,19 +259,49 @@ public final class PsLinkedinTest {
         private final String identifier;
 
         /**
+         * Field name for "First name".
+         */
+        private final String firstname;
+
+        /**
+         * Test value for "First name".
+         */
+        private final String frodo;
+
+        /**
+         * Field name for "Last name".
+         */
+        private final String lastname;
+
+        /**
+         * Test value for "Last name".
+         */
+        private final String baggins;
+
+        /**
          * Ctor.
          * @param code Linkedin authorization code.
          * @param lapp Linkedin app.
          * @param lkey Linkedin key.
          * @param identifier Linkedin user identifier.
+         * @param firstname Field name for "First name".
+         * @param lastname Field name for "Last name".
+         * @param frodo Test value for "First name".
+         * @param baggins Test value for "Last name".
          * @checkstyle ParameterNumberCheck (4 lines)
          */
         LinkedinScript(final String code, final String lapp,
-            final String lkey, final String identifier) {
+            final String lkey, final String identifier,
+            final String firstname, final String lastname,
+            final String frodo, final String baggins) {
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;
             this.identifier = identifier;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.frodo = frodo;
+            this.baggins = baggins;
         }
 
         @Override
@@ -245,8 +322,8 @@ public final class PsLinkedinTest {
             MatcherAssert.assertThat(
                 identity.properties(),
                 Matchers.allOf(
-                    Matchers.hasEntry("firstName", "Frodo"),
-                    Matchers.hasEntry("lastName", "Baggins")
+                    Matchers.hasEntry(this.firstname, this.frodo),
+                    Matchers.hasEntry(this.lastname, this.baggins)
                 )
             );
         }
