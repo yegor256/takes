@@ -51,9 +51,6 @@ import org.takes.rs.RsJson;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.16
- * @checkstyle MagicNumberCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class PsLinkedinTest {
 
@@ -69,6 +66,7 @@ public final class PsLinkedinTest {
         final String lastname = "lastName";
         final String frodo = "Frodo";
         final String baggins = "Baggins";
+        // @checkstyle MagicNumber (4 lines)
         final String code = RandomStringUtils.randomAlphanumeric(10);
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
@@ -96,7 +94,7 @@ public final class PsLinkedinTest {
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @author Rui Castro (rui.castro@gmail.com)
      * @version $Id$
-     * @since 0.33
+     * @since 1.1
      */
     private final class TokenTake implements Take {
 
@@ -158,6 +156,7 @@ public final class PsLinkedinTest {
                 Json.createObjectBuilder()
                     .add(
                         "access_token",
+                        // @checkstyle MagicNumber (1 line)
                         RandomStringUtils.randomAlphanumeric(10)
                     ).build()
             );
@@ -169,7 +168,7 @@ public final class PsLinkedinTest {
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @author Rui Castro (rui.castro@gmail.com)
      * @version $Id$
-     * @since 0.33
+     * @since 1.1
      */
     private final class PeopleTake implements Take {
 
@@ -234,7 +233,7 @@ public final class PsLinkedinTest {
      * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
      * @author Rui Castro (rui.castro@gmail.com)
      * @version $Id$
-     * @since 0.33
+     * @since 1.1
      */
     private final class LinkedinScript implements FtRemote.Script {
 
