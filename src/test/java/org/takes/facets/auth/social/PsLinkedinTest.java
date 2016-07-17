@@ -61,7 +61,6 @@ public final class PsLinkedinTest {
     @Test
     public void logins() throws IOException {
         final String tokenpath = "/uas/oauth2/accessToken";
-        final String peoplepath = "/v1/people";
         final String firstname = "firstName";
         final String lastname = "lastName";
         final String frodo = "Frodo";
@@ -77,7 +76,7 @@ public final class PsLinkedinTest {
                 new TokenTake(code, lapp, lkey, tokenpath)
             ),
             new FkRegex(
-                peoplepath,
+                "/v1/people",
                 new PeopleTake(identifier, firstname, lastname, frodo, baggins)
             )
         );
@@ -120,11 +119,11 @@ public final class PsLinkedinTest {
 
         /**
          * Ctor.
-         * @param code Linkedin authorization code.
-         * @param lapp Linkedin app.
-         * @param lkey Linkedin key.
-         * @param tokenpath Request path for token endpoint.
-         * @checkstyle ParameterNumberCheck (4 lines)
+         * @param code Linkedin authorization code
+         * @param lapp Linkedin app
+         * @param lkey Linkedin key
+         * @param tokenpath Request path for token endpoint
+         * @checkstyle ParameterNumber (4 lines)
          */
         TokenTake(final String code, final String lapp, final String lkey,
             final String tokenpath) {
@@ -199,11 +198,11 @@ public final class PsLinkedinTest {
 
         /**
          * Ctor.
-         * @param identifier Linkedin user identifier.
-         * @param firstname Field name for "First name".
-         * @param lastname Field name for "Last name".
-         * @param frodo Test value for "First name".
-         * @param baggins Test value for "Last name".
+         * @param identifier Linkedin user identifier
+         * @param firstname Field name for "First name"
+         * @param lastname Field name for "Last name"
+         * @param frodo Test value for "First name"
+         * @param baggins Test value for "Last name"
          * @checkstyle ParameterNumberCheck (4 lines)
          */
         PeopleTake(final String identifier,
@@ -279,14 +278,14 @@ public final class PsLinkedinTest {
 
         /**
          * Ctor.
-         * @param code Linkedin authorization code.
-         * @param lapp Linkedin app.
-         * @param lkey Linkedin key.
-         * @param identifier Linkedin user identifier.
-         * @param firstname Field name for "First name".
-         * @param lastname Field name for "Last name".
-         * @param frodo Test value for "First name".
-         * @param baggins Test value for "Last name".
+         * @param code Linkedin authorization code
+         * @param lapp Linkedin app
+         * @param lkey Linkedin key
+         * @param identifier Linkedin user identifier
+         * @param firstname Field name for "First name"
+         * @param lastname Field name for "Last name"
+         * @param frodo Test value for "First name"
+         * @param baggins Test value for "Last name"
          * @checkstyle ParameterNumberCheck (4 lines)
          */
         LinkedinScript(final String code, final String lapp,
