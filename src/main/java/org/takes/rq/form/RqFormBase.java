@@ -39,7 +39,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
@@ -52,10 +51,6 @@ import org.takes.rq.RqWrap;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #687:30min Refactor this class to reduce the data abstraction
- *  coupling in order to get rid of the checkstyle suppression of
- *  ClassDataAbstractionCouplingCheck.
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true, of = "req")
@@ -85,7 +80,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     public Iterable<String> param(final CharSequence key)
         throws IOException {
         final List<String> values =
-            this.map().get(new EnglishLowerCase(key.toString()).string());
+            this.map().get(new Utf8String(key.toString()).englishLowerCase());
         final Iterable<String> iter;
         if (values == null) {
             iter = new VerboseIterable<>(
@@ -168,7 +163,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 );
             }
             final String key = decode(
-                new EnglishLowerCase(parts[0].trim()).string()
+                new Utf8String(parts[0].trim()).englishLowerCase()
             );
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<String>());

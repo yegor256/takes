@@ -24,6 +24,7 @@
 package org.takes.misc;
 
 import java.nio.charset.Charset;
+import java.util.Locale;
 
 /**
  * String that uses UTF-8 encoding for all byte operations.
@@ -73,5 +74,13 @@ public final class Utf8String {
      */
     public String string() {
         return this.value;
+    }
+
+    /**
+     * Returns the english lower case string representation.
+     * @return String value
+     */
+    public String englishLowerCase() {
+        return this.value.toLowerCase(Locale.ENGLISH);
     }
 }
