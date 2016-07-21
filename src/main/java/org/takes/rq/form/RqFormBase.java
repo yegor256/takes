@@ -24,7 +24,6 @@
 package org.takes.rq.form;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -39,6 +38,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
@@ -80,7 +80,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     public Iterable<String> param(final CharSequence key)
         throws IOException {
         final List<String> values =
-            this.map().get(new Utf8String(key.toString()).englishLowerCase());
+            this.map().get(new EnglishLowerCase(key.toString()).string());
         final Iterable<String> iter;
         if (values == null) {
             iter = new VerboseIterable<>(
@@ -143,9 +143,9 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(this.req).printBody(baos);
-        final String body = new Utf8String(baos.toByteArray()).string();
+        final String body = new Utf8String(
+            new RqPrint(this.req).printBody()
+        ).string();
         final Map<String, List<String>> map = new HashMap<>(1);
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         for (final String pair : body.split("&")) {
@@ -163,7 +163,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 );
             }
             final String key = decode(
-                new Utf8String(parts[0].trim()).englishLowerCase()
+                new EnglishLowerCase(parts[0].trim()).string()
             );
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<String>());
