@@ -40,7 +40,6 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
-import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqForm;
 import org.takes.rq.RqPrint;
@@ -143,9 +142,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {
-        final String body = new Utf8String(
-            new RqPrint(this.req).printBody()
-        ).string();
+        final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         for (final String pair : body.split("&")) {
