@@ -51,14 +51,7 @@ import org.takes.rs.RsJson;
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @version $Id$
  * @since 0.16
- * @checkstyle MagicNumberCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #686:30min After upgrade to qulice 0.16.4 we have to fix
- *  ExcessiveMethodLength PMD warings in this classe. Fix this warning
- *  and rid of the PMD suppression here.
  */
-@SuppressWarnings("PMD.ExcessiveMethodLength")
 public final class PsLinkedinTest {
 
     /**
@@ -67,100 +60,270 @@ public final class PsLinkedinTest {
      */
     @Test
     public void logins() throws IOException {
+        final String tokenpath = "/uas/oauth2/accessToken";
+        final String firstname = "firstName";
+        final String lastname = "lastName";
+        final String frodo = "Frodo";
+        final String baggins = "Baggins";
+        // @checkstyle MagicNumber (4 lines)
         final String code = RandomStringUtils.randomAlphanumeric(10);
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
-        final String firstname = "firstName";
-        final String frodo = "Frodo";
-        final String lastname = "lastName";
-        final String baggins = "Baggins";
-        final String pattern = "/uas/oauth2/accessToken";
         final Take take = new TkFork(
             new FkRegex(
-                pattern,
-                // @checkstyle AnonInnerLengthCheck (100 lines)
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqPrint(req).printBody(),
-                            Matchers.stringContainsInOrder(
-                                Arrays.asList(
-                                    "grant_type=authorization_code",
-                                    String.format("client_id=%s", lapp),
-                                    "redirect_uri=",
-                                    String.format(
-                                        "client_secret=%s",
-                                        lkey
-                                    ),
-                                    String.format("code=%s", code)
-                                )
-                            )
-                        );
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href().toString(),
-                            Matchers.endsWith(pattern)
-                        );
-                        return new RsJson(
-                            Json.createObjectBuilder()
-                                .add(
-                                    "access_token",
-                                    RandomStringUtils.randomAlphanumeric(10)
-                                ).build()
-                        );
-                    }
-                }
+                tokenpath,
+                new TokenTake(code, lapp, lkey, tokenpath)
             ),
             new FkRegex(
                 "/v1/people",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        return new RsJson(
-                            Json.createObjectBuilder()
-                                .add("id", identifier)
-                                .add(firstname, frodo)
-                                .add(lastname, baggins)
-                                .build()
-                        );
-                    }
-                }
+                new PeopleTake(identifier, firstname, lastname, frodo, baggins)
             )
         );
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsLinkedin(
-                        new Href(
-                            String.format(
-                                "%s/uas/oauth2/accessToken",
-                                home
-                            )
-                        ),
-                        new Href(String.format("%s/v1/people/", home)),
-                        lapp,
-                        lkey
-                    ).enter(
-                        new RqFake("GET", String.format("?code=%s", code))
-                    ).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        CoreMatchers.equalTo(
-                            String.format("urn:linkedin:%s", identifier)
-                        )
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties(),
-                        Matchers.allOf(
-                            Matchers.hasEntry(firstname, frodo),
-                            Matchers.hasEntry(lastname, baggins)
-                        )
-                    );
-                }
-            }
+            new LinkedinScript(
+                code, lapp, lkey, identifier,
+                firstname, lastname, frodo, baggins
+            )
         );
+    }
+
+    /**
+     * Take that returns JSON with the authorization token.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @author Rui Castro (rui.castro@gmail.com)
+     * @version $Id$
+     * @since 1.1
+     */
+    private final class TokenTake implements Take {
+
+        /**
+         * Request path pattern for token endpoint.
+         */
+        private final String tokenpath;
+
+        /**
+         * Linkedin authorization code.
+         */
+        private final String code;
+
+        /**
+         * Linkedin app.
+         */
+        private final String lapp;
+
+        /**
+         * Linkedin key.
+         */
+        private final String lkey;
+
+        /**
+         * Ctor.
+         * @param code Linkedin authorization code
+         * @param lapp Linkedin app
+         * @param lkey Linkedin key
+         * @param tokenpath Request path for token endpoint
+         * @checkstyle ParameterNumber (4 lines)
+         */
+        TokenTake(final String code, final String lapp, final String lkey,
+            final String tokenpath) {
+            this.code = code;
+            this.lapp = lapp;
+            this.lkey = lkey;
+            this.tokenpath = tokenpath;
+        }
+
+        @Override
+        public Response act(final Request req) throws IOException {
+            MatcherAssert.assertThat(
+                new RqPrint(req).printBody(),
+                Matchers.stringContainsInOrder(
+                    Arrays.asList(
+                        "grant_type=authorization_code",
+                        String.format("client_id=%s", this.lapp),
+                        "redirect_uri=",
+                        String.format("client_secret=%s", this.lkey),
+                        String.format("code=%s", this.code)
+                    )
+                )
+            );
+            MatcherAssert.assertThat(
+                new RqHref.Base(req).href().toString(),
+                Matchers.endsWith(this.tokenpath)
+            );
+            return new RsJson(
+                Json.createObjectBuilder()
+                    .add(
+                        "access_token",
+                        // @checkstyle MagicNumber (1 line)
+                        RandomStringUtils.randomAlphanumeric(10)
+                    ).build()
+            );
+        }
+    }
+
+    /**
+     * Take that returns JSON with test user data.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @author Rui Castro (rui.castro@gmail.com)
+     * @version $Id$
+     * @since 1.1
+     */
+    private final class PeopleTake implements Take {
+
+        /**
+         * Linkedin user identifier.
+         */
+        private final String identifier;
+
+        /**
+         * Field name for "First name".
+         */
+        private final String firstname;
+
+        /**
+         * Test value for "First name".
+         */
+        private final String frodo;
+
+        /**
+         * Field name for "Last name".
+         */
+        private final String lastname;
+
+        /**
+         * Test value for "Last name".
+         */
+        private final String baggins;
+
+        /**
+         * Ctor.
+         * @param identifier Linkedin user identifier
+         * @param firstname Field name for "First name"
+         * @param lastname Field name for "Last name"
+         * @param frodo Test value for "First name"
+         * @param baggins Test value for "Last name"
+         * @checkstyle ParameterNumberCheck (4 lines)
+         */
+        PeopleTake(final String identifier,
+            final String firstname, final String lastname,
+            final String frodo, final String baggins) {
+            this.identifier = identifier;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.frodo = frodo;
+            this.baggins = baggins;
+        }
+
+        @Override
+        public Response act(final Request req) throws IOException {
+            return new RsJson(
+                Json.createObjectBuilder()
+                    .add("id", this.identifier)
+                    .add(this.firstname, this.frodo)
+                    .add(this.lastname, this.baggins)
+                    .build()
+            );
+        }
+    }
+
+    /**
+     * Script to test Linkedin authorization.
+     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
+     * @author Rui Castro (rui.castro@gmail.com)
+     * @version $Id$
+     * @since 1.1
+     */
+    private final class LinkedinScript implements FtRemote.Script {
+
+        /**
+         * Linkedin authorization code.
+         */
+        private final String code;
+
+        /**
+         * Linkedin app.
+         */
+        private final String lapp;
+
+        /**
+         * Linkedin key.
+         */
+        private final String lkey;
+
+        /**
+         * Linkedin user identifier.
+         */
+        private final String identifier;
+
+        /**
+         * Field name for "First name".
+         */
+        private final String firstname;
+
+        /**
+         * Test value for "First name".
+         */
+        private final String frodo;
+
+        /**
+         * Field name for "Last name".
+         */
+        private final String lastname;
+
+        /**
+         * Test value for "Last name".
+         */
+        private final String baggins;
+
+        /**
+         * Ctor.
+         * @param code Linkedin authorization code
+         * @param lapp Linkedin app
+         * @param lkey Linkedin key
+         * @param identifier Linkedin user identifier
+         * @param firstname Field name for "First name"
+         * @param lastname Field name for "Last name"
+         * @param frodo Test value for "First name"
+         * @param baggins Test value for "Last name"
+         * @checkstyle ParameterNumberCheck (4 lines)
+         */
+        LinkedinScript(final String code, final String lapp,
+            final String lkey, final String identifier,
+            final String firstname, final String lastname,
+            final String frodo, final String baggins) {
+            this.code = code;
+            this.lapp = lapp;
+            this.lkey = lkey;
+            this.identifier = identifier;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.frodo = frodo;
+            this.baggins = baggins;
+        }
+
+        @Override
+        public void exec(final URI home) throws IOException {
+            final Identity identity = new PsLinkedin(
+                new Href(String.format("%s/uas/oauth2/accessToken", home)),
+                new Href(String.format("%s/v1/people", home)),
+                this.lapp,
+                this.lkey
+            ).enter(new RqFake("GET", String.format("?code=%s", this.code)))
+                .get();
+            MatcherAssert.assertThat(
+                identity.urn(),
+                CoreMatchers.equalTo(
+                    String.format("urn:linkedin:%s", this.identifier)
+                )
+            );
+            MatcherAssert.assertThat(
+                identity.properties(),
+                Matchers.allOf(
+                    Matchers.hasEntry(this.firstname, this.frodo),
+                    Matchers.hasEntry(this.lastname, this.baggins)
+                )
+            );
+        }
     }
 }
