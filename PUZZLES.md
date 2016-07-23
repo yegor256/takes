@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 7 active puzzles (77 total):
+There are 5 active puzzles (77 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -67,7 +67,7 @@ There are 7 active puzzles (77 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#686](https://github.com/yegor256/takes/issues/686):[<del>678-832c7c24</del>](https://github.com/yegor256/takes/issues/686) [`pom.xml:380-382`](../master/pom.xml#L380-L382)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#697](https://github.com/yegor256/takes/issues/697):[**686-832c7c24**](https://github.com/yegor256/takes/issues/697) [`pom.xml:344-346`](../master/pom.xml#L344-L346)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#698](https://github.com/yegor256/takes/issues/698):[**686-55806871**](https://github.com/yegor256/takes/issues/698) [`RsFlash.java:103-105`](../master/src/main/java/org/takes/facets/flash/RsFlash.java#L103-L105)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#696](https://github.com/yegor256/takes/issues/696):[**686-bac26563**](https://github.com/yegor256/takes/issues/696) [`PsLinkedinTest.java:57-59`](../master/src/test/java/org/takes/facets/auth/social/PsLinkedinTest.java#L57-L59)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#696](https://github.com/yegor256/takes/issues/696):[<del>686-bac26563</del>](https://github.com/yegor256/takes/issues/696) [`PsLinkedinTest.java:57-59`](../master/src/test/java/org/takes/facets/auth/social/PsLinkedinTest.java#L57-L59)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>254</del>](https://github.com/yegor256/takes/issues/254) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-d68bc52e</del> [`CapInputStream.java:37-40`](../master/src/main/java/org/takes/rq/CapInputStream.java#L37-L40)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>254-40a8e0fe</del> [`RqMultipart.java:241-244`](../master/src/main/java/org/takes/rq/RqMultipart.java#L241-L244)<br/>
@@ -79,4 +79,4 @@ There are 7 active puzzles (77 total):
 &nbsp;&nbsp;&nbsp;&nbsp;[#667](https://github.com/yegor256/takes/issues/667):[<del>667</del>](https://github.com/yegor256/takes/issues/667) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#687](https://github.com/yegor256/takes/issues/687):[<del>667-ace435e8</del>](https://github.com/yegor256/takes/issues/687) [`RqForm.java:69-71`](../master/src/main/java/org/takes/rq/RqForm.java#L69-L71)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#695](https://github.com/yegor256/takes/issues/695):[**687-65dc14c7**](https://github.com/yegor256/takes/issues/695) [`RqFormBase.java:56-58`](../master/src/main/java/org/takes/rq/form/RqFormBase.java#L56-L58)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#694](https://github.com/yegor256/takes/issues/694):[**687-875c0e1d**](https://github.com/yegor256/takes/issues/694) [`package-info.java:38-40`](../master/src/main/java/org/takes/rq/form/package-info.java#L38-L40)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#694](https://github.com/yegor256/takes/issues/694):[<del>687-875c0e1d</del>](https://github.com/yegor256/takes/issues/694) [`package-info.java:38-40`](../master/src/main/java/org/takes/rq/form/package-info.java#L38-L40)<br/>
