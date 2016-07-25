@@ -25,11 +25,15 @@ package org.takes.facets.fork;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkFork}.
@@ -38,6 +42,10 @@ import org.takes.rs.RsPrint;
  * @since 0.4
  */
 public final class TkForkTest {
+    /**
+     * Regular expression constant for FkRegex creation.
+     */
+    private static final String PATTERN = "/h[a-z]{2}";
 
     /**
      * TkFork can dispatch by regular expression.
@@ -48,7 +56,7 @@ public final class TkForkTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkFork(new FkRegex("/h[a-z]{2}", body)).act(
+                new TkFork(new FkRegex(TkForkTest.PATTERN, body)).act(
                     new RqFake("GET", "/hey?yu", "")
                 )
             ).print(),
@@ -64,4 +72,25 @@ public final class TkForkTest {
         );
     }
 
+    /**
+     * TkFork can equals with another TkFork.
+     * @todo #697:30min/DEV The current implementation with lombok
+     *  EqualsAndHashCode is not checking the in depth forks equals.
+     */
+    @Ignore
+    @Test
+    public void equalsWithAnotherTkFork() {
+        final String body = "Test Equals";
+        final List<Fork> actual = new ArrayList<Fork>(2);
+        actual.add(new FkRegex(TkForkTest.PATTERN, body));
+        actual.add(new FkRegex("/", new TkEmpty()));
+        final List<Fork> expected = new ArrayList<Fork>(1);
+        expected.add(new FkRegex(TkForkTest.PATTERN, body));
+        MatcherAssert.assertThat(
+            new TkFork(actual), Matchers.equalTo(new TkFork(actual))
+        );
+        MatcherAssert.assertThat(
+            new TkFork(actual), Matchers.not(new TkFork(expected))
+        );
+    }
 }

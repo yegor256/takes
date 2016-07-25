@@ -341,10 +341,10 @@
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                                 <!--
-                                @todo #686:30min After upgrade to qulice 0.16.4 we have to fix
-                                 AvoidDuplicateLiterals PMD warings in next classes. Fix issues and
+                                @todo #686:30min After upgrade to qulice 0.16.4 we have to fix 
+                                 AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
                                  remove all excludes of PMD here.
-                                -->
+                                -->                                
                                 <exclude>pmd:/src/main/java/org/takes/facets/fork/TkFork.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/ret/TkReturn.java</exclude>
                                 <exclude>pmd:/src/main/java/org/takes/facets/flash/TkFlash.java</exclude>
