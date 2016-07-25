@@ -81,16 +81,16 @@ public final class TkForkTest {
     @Test
     public void equalsWithAnotherTkFork() {
         final String body = "Test Equals";
-        final List<Fork> actual = new ArrayList<Fork>(2);
-        actual.add(new FkRegex(TkForkTest.PATTERN, body));
-        actual.add(new FkRegex("/", new TkEmpty()));
-        final List<Fork> expected = new ArrayList<Fork>(1);
-        expected.add(new FkRegex(TkForkTest.PATTERN, body));
+        final List<Fork> same = new ArrayList<Fork>(2);
+        same.add(new FkRegex(TkForkTest.PATTERN, body));
+        same.add(new FkRegex("/", new TkEmpty()));
+        final List<Fork> different = new ArrayList<Fork>(1);
+        different.add(new FkRegex(TkForkTest.PATTERN, body));
         MatcherAssert.assertThat(
-            new TkFork(actual), Matchers.equalTo(new TkFork(actual))
+            new TkFork(same), Matchers.equalTo(new TkFork(same))
         );
         MatcherAssert.assertThat(
-            new TkFork(actual), Matchers.not(new TkFork(expected))
+            new TkFork(same), Matchers.not(new TkFork(different))
         );
     }
 }
