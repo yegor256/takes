@@ -28,8 +28,10 @@ import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -63,11 +65,17 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
  */
-@ToString(of = "forks")
-@EqualsAndHashCode(of = "forks")
+@ToString(of = TkFork.FORKS)
+@EqualsAndHashCode(of = TkFork.FORKS)
 public final class TkFork implements Take {
 
     /**
+     * Constant for the Lombok.
+     * Lombok doesn't include transient fields by default.
+     */
+	static final String FORKS = "forks";
+
+	/**
      * Patterns and their respective take.
      */
     private final transient Collection<Fork> forks;
