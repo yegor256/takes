@@ -113,7 +113,7 @@
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-http</artifactId>
-            <version>1.14.2</version>
+            <version>1.16</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -154,7 +154,7 @@
         <dependency>
             <groupId>com.restfb</groupId>
             <artifactId>restfb</artifactId>
-            <version>1.18.1</version>
+            <version>1.28.0</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -195,13 +195,13 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.19</version>
+            <version>1.19.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>9.7.0-1</version>
+            <version>9.7.0-7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -217,7 +217,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.13</version>
+            <version>1.7.21</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -231,7 +231,7 @@
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>1.7.6</version>
+            <version>2.1.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
