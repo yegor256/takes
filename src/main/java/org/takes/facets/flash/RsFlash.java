@@ -118,7 +118,7 @@ public final class RsFlash extends RsWrap {
      * To string.
      */
     @SuppressWarnings("unused")
-    private final transient String text;
+    private final transient CharSequence text;
 
     /**
      * Constructs a {@code RsFlash} with the specified message.
@@ -128,7 +128,7 @@ public final class RsFlash extends RsWrap {
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final String msg)
+    public RsFlash(final CharSequence msg)
         throws UnsupportedEncodingException {
         this(msg, Level.INFO);
     }
@@ -175,7 +175,7 @@ public final class RsFlash extends RsWrap {
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final String msg, final Level level)
+    public RsFlash(final CharSequence msg, final Level level)
         throws UnsupportedEncodingException {
         this(msg, level, RsFlash.class.getSimpleName());
     }
@@ -189,8 +189,8 @@ public final class RsFlash extends RsWrap {
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final String msg, final Level level, final String cookie)
-        throws UnsupportedEncodingException {
+    public RsFlash(final CharSequence msg, final Level level,
+        final String cookie) throws UnsupportedEncodingException {
         super(RsFlash.make(msg, level, cookie));
         this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
@@ -204,13 +204,16 @@ public final class RsFlash extends RsWrap {
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    private static Response make(final String msg, final Level level,
+    private static Response make(final CharSequence msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
             new Sprintf(
                 RsFlash.TEXT_FORMAT,
-                URLEncoder.encode(msg, Charset.defaultCharset().name()),
+                URLEncoder.encode(
+                    msg.toString(),
+                    Charset.defaultCharset().name()
+                ),
                 level.getName()
             ),
             "Path=/",
