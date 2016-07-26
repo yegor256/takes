@@ -24,7 +24,6 @@
 package org.takes.rq.form;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -41,7 +40,6 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
-import org.takes.misc.Utf8String;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqForm;
 import org.takes.rq.RqPrint;
@@ -52,10 +50,6 @@ import org.takes.rq.RqWrap;
  * @author Aleksey Popov (alopen@yandex.ru)
  * @version $Id$
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #687:30min Refactor this class to reduce the data abstraction
- *  coupling in order to get rid of the checkstyle suppression of
- *  ClassDataAbstractionCouplingCheck.
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true, of = "req")
@@ -148,9 +142,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(this.req).printBody(baos);
-        final String body = new Utf8String(baos.toByteArray()).string();
+        final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         for (final String pair : body.split("&")) {
