@@ -42,10 +42,6 @@ import org.takes.tk.TkEmpty;
  * @since 0.4
  */
 public final class TkForkTest {
-    /**
-     * Regular expression constant for FkRegex creation.
-     */
-    private static final String PATTERN = "/h[a-z]{2}";
 
     /**
      * TkFork can dispatch by regular expression.
@@ -56,7 +52,7 @@ public final class TkForkTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(
-                new TkFork(new FkRegex(TkForkTest.PATTERN, body)).act(
+                new TkFork(new FkRegex("/h[a-z]{2}", body)).act(
                     new RqFake("GET", "/hey?yu", "")
                 )
             ).print(),
@@ -82,10 +78,11 @@ public final class TkForkTest {
     public void equalsWithAnotherTkFork() {
         final String body = "Test Equals";
         final List<Fork> same = new ArrayList<Fork>(2);
-        same.add(new FkRegex(TkForkTest.PATTERN, body));
+        final String pattern = "/h/tail";
+        same.add(new FkRegex(pattern, body));
         same.add(new FkRegex("/", new TkEmpty()));
         final List<Fork> different = new ArrayList<Fork>(1);
-        different.add(new FkRegex(TkForkTest.PATTERN, body));
+        different.add(new FkRegex(pattern, body));
         MatcherAssert.assertThat(
             new TkFork(same), Matchers.equalTo(new TkFork(same))
         );
