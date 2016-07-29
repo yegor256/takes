@@ -63,15 +63,9 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
  */
-@ToString(of = TkFork.LOMBOK)
-@EqualsAndHashCode(of = TkFork.LOMBOK + "")
+@ToString(of = "forks")
+@EqualsAndHashCode(of = "forks")
 public final class TkFork implements Take {
-
-    /**
-     * Constant for the Lombok.
-     * Lombok doesn't include transient fields by default.
-     */
-    static final String LOMBOK = "forks";
 
     /**
      * Patterns and their respective take.
