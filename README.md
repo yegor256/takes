@@ -250,7 +250,7 @@ let's see how it looks:
 public final class TkIndex implements Take {
   @Override
   public Response act(final Request req) {
-    return new RsHTML("<html>Hello, world!</html>");
+    return new RsHtml("<html>Hello, world!</html>");
   }
 }
 ```
