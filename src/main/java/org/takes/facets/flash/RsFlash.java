@@ -31,7 +31,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithCookie;
@@ -101,7 +100,6 @@ import org.takes.rs.RsWrap;
  * @version $Id$
  * @since 0.1
  */
-@ToString(callSuper = true, of = "text")
 @EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {
 
@@ -223,4 +221,8 @@ public final class RsFlash extends RsWrap {
         );
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.text);
+    }
 }
