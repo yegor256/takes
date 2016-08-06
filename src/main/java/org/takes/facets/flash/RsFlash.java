@@ -188,6 +188,11 @@ public final class RsFlash extends RsWrap {
         this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.text);
+    }
+
     /**
      * Make a response.
      * @param msg Message
@@ -219,10 +224,5 @@ public final class RsFlash extends RsWrap {
                 )
             )
         );
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(this.text);
     }
 }
