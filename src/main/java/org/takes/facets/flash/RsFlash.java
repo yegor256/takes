@@ -100,11 +100,7 @@ import org.takes.rs.RsWrap;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @todo #686:15min After upgrade to qulice 0.16.4 we have to fix
- *  SingularField PMD warings in this class. Fix this warning
- *  and rid of the PMD suppression here.
  */
-@SuppressWarnings("PMD.SingularField")
 @ToString(callSuper = true, of = "text")
 @EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {
@@ -117,7 +113,6 @@ public final class RsFlash extends RsWrap {
     /**
      * To string.
      */
-    @SuppressWarnings("unused")
     private final transient CharSequence text;
 
     /**
