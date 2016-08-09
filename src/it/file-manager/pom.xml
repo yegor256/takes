@@ -141,7 +141,7 @@
                             <source>${jdk.version}</source>
                             <target>${jdk.version}</target>
                         </configuration>
-		            </plugin>
+                    </plugin>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
