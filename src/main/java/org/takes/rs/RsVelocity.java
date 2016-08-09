@@ -164,8 +164,7 @@ public final class RsVelocity extends RsWrap {
     @SafeVarargs
     private static Map<CharSequence, Object> asMap(
         final Map.Entry<CharSequence, Object>... entries) {
-        final Map<CharSequence, Object> map =
-            new HashMap<CharSequence, Object>(entries.length);
+        final Map<CharSequence, Object> map = new HashMap<>(entries.length);
         for (final Map.Entry<CharSequence, Object> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }

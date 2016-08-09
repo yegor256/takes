@@ -114,7 +114,7 @@ public final class TkRetry implements Take {
             new TransformAction<IOException, String>() {
                 @Override
                 public String transform(final IOException element) {
-                    final Opt<String> message = new Opt.Single<String>(
+                    final Opt<String> message = new Opt.Single<>(
                         element.getMessage()
                     );
                     String result = "";

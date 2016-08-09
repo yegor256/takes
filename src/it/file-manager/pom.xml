@@ -135,12 +135,12 @@
                         </executions>
                     </plugin>
                     <plugin>
-		               <groupId>org.apache.maven.plugins</groupId>
-		               <artifactId>maven-compiler-plugin</artifactId>
-		               <configuration>
-		                   <source>${jdk.version}</source>
-		                   <target>${jdk.version}</target>
-		               </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>${jdk.version}</source>
+                            <target>${jdk.version}</target>
+                        </configuration>
 		            </plugin>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
