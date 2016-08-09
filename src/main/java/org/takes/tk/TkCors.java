@@ -50,12 +50,7 @@ import org.takes.rs.RsWithStatus;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
- * @todo #684:15min Remove PMD.AvoidDuplicateLiterals exclude here and in
- *  {@link RsPrettyJson}, {@link RsPrettyXml}. Note that this puzzle depends on
- *  https://github.com/teamed/qulice/issues/760. Note that this puzzle has
- *  partially overlap with https://github.com/yegor256/takes/issues/686
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "allowed" })
 @EqualsAndHashCode(of = { "origin", "allowed" })
 public final class TkCors implements Take {

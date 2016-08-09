@@ -169,8 +169,7 @@ public final class PsTwitter implements Pass {
      * @return Identity found
     */
     private static Identity parse(final JsonObject json) {
-        final Map<String, String> props =
-            new HashMap<String, String>(json.size());
+        final Map<String, String> props = new HashMap<>(json.size());
         props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
         props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(

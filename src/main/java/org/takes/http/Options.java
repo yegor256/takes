@@ -187,7 +187,7 @@ final class Options {
      *  expected format which is {@code --([a-z\-]+)(=.+)?}.
      */
     private static Map<String, String> asMap(final Iterable<String> args) {
-        final Map<String, String> map = new HashMap<String, String>(0);
+        final Map<String, String> map = new HashMap<>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);

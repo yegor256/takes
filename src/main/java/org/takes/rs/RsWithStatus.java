@@ -149,8 +149,7 @@ public final class RsWithStatus extends RsWrap {
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     private static Map<Integer, String> make() {
-        final Map<Integer, String> map =
-            new HashMap<Integer, String>(0);
+        final Map<Integer, String> map = new HashMap<>(0);
         map.put(HttpURLConnection.HTTP_OK, "OK");
         map.put(HttpURLConnection.HTTP_NO_CONTENT, "No Content");
         map.put(HttpURLConnection.HTTP_CREATED, "Created");

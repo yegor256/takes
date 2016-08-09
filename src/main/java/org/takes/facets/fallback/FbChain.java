@@ -66,7 +66,7 @@ public final class FbChain extends FbWrap {
                 @Override
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    Opt<Response> rsp = new Opt.Empty<Response>();
+                    Opt<Response> rsp = new Opt.Empty<>();
                     for (final Fallback fbk : fallbacks) {
                         final Opt<Response> opt = fbk.route(req);
                         if (opt.has()) {

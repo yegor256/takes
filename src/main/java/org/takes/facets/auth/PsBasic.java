@@ -263,8 +263,7 @@ public final class PsBasic implements Pass {
          * @return Map from login/password pairs to URNs.
          */
         private static Map<String, String> converted(final String... users) {
-            final Map<String, String> result =
-                new HashMap<String, String>(users.length);
+            final Map<String, String> result = new HashMap<>(users.length);
             for (final String user : users) {
                 final String unified = user.replace("%20", "+");
                 PsBasic.Default.validateUser(unified);

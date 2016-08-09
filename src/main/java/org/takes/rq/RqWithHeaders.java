@@ -63,7 +63,7 @@ public final class RqWithHeaders extends RqWrap {
             new Request() {
                 @Override
                 public List<String> head() throws IOException {
-                    final List<String> head = new LinkedList<String>();
+                    final List<String> head = new LinkedList<>();
                     for (final String hdr : req.head()) {
                         head.add(hdr);
                     }

@@ -117,7 +117,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
             if (headers.hasNext()) {
                 headers.next();
             }
-            final Collection<String> values = new ArrayList<String>(0);
+            final Collection<String> values = new ArrayList<>(0);
             while (headers.hasNext()) {
                 final String[] parts = AbstractHmHeader.split(headers.next());
                 if (this.header.matches(parts[0].trim())) {

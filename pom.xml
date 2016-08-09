@@ -336,31 +336,10 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
-                        <version>0.16.4</version>
+                        <version>0.17.1</version>
                         <configuration>
                             <excludes combine.children="append">
                                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                                <!--
-                                @todo #686:30min After upgrade to qulice 0.16.4 we have to fix 
-                                 AvoidDuplicateLiterals PMD warings in next classes. Fix issues and  
-                                 remove all excludes of PMD here.
-                                -->                                
-                                <exclude>pmd:/src/main/java/org/takes/facets/fork/TkFork.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/ret/TkReturn.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/flash/TkFlash.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/fork/FkHitRefresh.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/TkAuth.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/auth/TkSecure.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/forward/TkForward.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/facets/forward/RsForward.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyJSON.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rs/RsPrettyXML.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rs/RsGzip.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/rs/RsWrap.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/tk/TkSlf4j.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/tk/TkReadAlways.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/tk/TkWrap.java</exclude>
-                                <exclude>pmd:/src/main/java/org/takes/tk/TkCORS.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>

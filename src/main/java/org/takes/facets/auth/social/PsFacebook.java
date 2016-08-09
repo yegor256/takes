@@ -157,8 +157,7 @@ public final class PsFacebook implements Pass {
         final User user = this.fetch(
             this.token(href.toString(), code.next())
         );
-        final Map<String, String> props =
-            new HashMap<String, String>(0);
+        final Map<String, String> props = new HashMap<>(0);
         props.put("name", user.getName());
         props.put(
             PsFacebook.PICTURE,

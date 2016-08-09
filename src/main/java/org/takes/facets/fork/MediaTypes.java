@@ -110,7 +110,7 @@ final class MediaTypes {
      * @return Merged list
      */
     public MediaTypes merge(final MediaTypes types) {
-        final SortedSet<MediaType> set = new TreeSet<MediaType>();
+        final SortedSet<MediaType> set = new TreeSet<>();
         set.addAll(this.list);
         set.addAll(types.list);
         return new MediaTypes(set);
@@ -131,7 +131,7 @@ final class MediaTypes {
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
-        final SortedSet<MediaType> list = new TreeSet<MediaType>();
+        final SortedSet<MediaType> list = new TreeSet<>();
         for (final String name
             : new EnglishLowerCase(text).string().split(",")) {
             if (!name.isEmpty()) {

@@ -110,8 +110,7 @@ public final class FtRemoteTest {
             }
         };
         final int total = Runtime.getRuntime().availableProcessors() << 2;
-        final Collection<Callable<Long>> tasks =
-            new ArrayList<Callable<Long>>(total);
+        final Collection<Callable<Long>> tasks = new ArrayList<>(total);
         for (int idx = 0; idx < total; ++idx) {
             tasks.add(task);
         }

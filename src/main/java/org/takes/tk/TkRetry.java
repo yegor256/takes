@@ -82,8 +82,7 @@ public final class TkRetry implements Take {
             );
         }
         int attempts = 0;
-        final List<IOException> failures =
-            new ArrayList<IOException>(this.count);
+        final List<IOException> failures = new ArrayList<>(this.count);
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
@@ -109,8 +108,8 @@ public final class TkRetry implements Take {
      * @return A list of exceptions messages.
      */
     private static List<String> strings(final List<IOException> failures) {
-        final List<String> result = new ArrayList<String>(failures.size());
-        final Iterable<String> transform = new Transform<IOException, String>(
+        final List<String> result = new ArrayList<>(failures.size());
+        final Iterable<String> transform = new Transform<>(
             failures,
             new TransformAction<IOException, String>() {
                 @Override

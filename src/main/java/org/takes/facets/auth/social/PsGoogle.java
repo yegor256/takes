@@ -225,8 +225,7 @@ public final class PsGoogle implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final Map<String, String> props =
-            new HashMap<String, String>(json.size());
+        final Map<String, String> props = new HashMap<>(json.size());
         final JsonObject image = json.getJsonObject("image");
         if (image == null) {
             props.put(PsGoogle.PICTURE, "#");

@@ -134,7 +134,7 @@ public final class BkBasicTest {
     @Test
     public void addressesInHeadersAddedWithoutSlashes() throws IOException {
         final Socket socket = BkBasicTest.createMockSocket();
-        final AtomicReference<Request> ref = new AtomicReference<Request>();
+        final AtomicReference<Request> ref = new AtomicReference<>();
         new BkBasic(
             new Take() {
                 @Override

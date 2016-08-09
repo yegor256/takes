@@ -70,7 +70,7 @@ public final class FkChain implements Fork {
 
     @Override
     public Opt<Response> route(final Request request) throws IOException {
-        Opt<Response> response = new Opt.Empty<Response>();
+        Opt<Response> response = new Opt.Empty<>();
         for (final Fork fork : this.forks) {
             final Opt<Response> current = fork.route(request);
             if (current.has()) {

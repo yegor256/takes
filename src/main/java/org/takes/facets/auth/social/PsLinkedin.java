@@ -188,8 +188,7 @@ public final class PsLinkedin implements Pass {
         final String fname = "firstName";
         final String lname = "lastName";
         final String unknown = "?";
-        final Map<String, String> props =
-            new HashMap<String, String>(json.size());
+        final Map<String, String> props = new HashMap<>(json.size());
         props.put(fname, json.getString(fname, unknown));
         props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
