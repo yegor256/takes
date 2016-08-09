@@ -191,8 +191,9 @@ public final class RsFlash extends RsWrap {
     @Override
     public String toString() {
         return String.format(
-            "%s(text=%s)",
+            "%s(super=%s, text=%s)",
             RsFlash.class.getSimpleName(),
+            super.toString(),
             this.text
         );
     }
