@@ -49,6 +49,7 @@ import org.takes.Response;
  * @version $Id$
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
 @EqualsAndHashCode(of = "origin")
 public final class RsPrettyJson implements Response {
