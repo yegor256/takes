@@ -41,7 +41,7 @@ import org.takes.rs.RsWithStatus;
  * CORS take.
  *
  * <p>This take checks if the request (Origin) is allowed to perform
- * the desired action against the list of the given domains.</p>
+ * the desired action against the list of the given domains.
  *
  * <p>The specification of CORS can be found on the W3C web site on the
  * following <a href="http://www.w3.org/TR/cors/">link</a> or even on the <a
