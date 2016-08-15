@@ -57,7 +57,7 @@ public final class XeFlashTest {
             "^Set-Cookie: RsFlash=(.*?);Path.*"
         );
         final Iterator<String> itr = new RsFlash("hello").head().iterator();
-        final List<String> cookies = new ArrayList<String>(0);
+        final List<String> cookies = new ArrayList<>(0);
         while (itr.hasNext()) {
             final Matcher matcher = pattern.matcher(itr.next());
             if (matcher.find()) {

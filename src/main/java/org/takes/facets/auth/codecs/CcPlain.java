@@ -65,8 +65,7 @@ public final class CcPlain implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final String[] parts = new Utf8String(bytes).string().split(";");
-        final Map<String, String> map =
-            new HashMap<String, String>(parts.length);
+        final Map<String, String> map = new HashMap<>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
             final String[] pair = parts[idx].split("=");
             try {

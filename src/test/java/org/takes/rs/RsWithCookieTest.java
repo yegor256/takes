@@ -120,7 +120,7 @@ public final class RsWithCookieTest {
      * @return Joined cookie
      */
     private static String cookies(final String... cookies) {
-        final List<String> list = new ArrayList<String>(cookies.length + 3);
+        final List<String> list = new ArrayList<>(cookies.length + 3);
         list.add("HTTP/1.1 200 OK");
         for (final String cookie : cookies) {
             list.add(String.format("Set-Cookie: %s;", cookie));

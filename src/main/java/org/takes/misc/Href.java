@@ -219,8 +219,7 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final SortedMap<String, List<String>> map =
-            new TreeMap<String, List<String>>(this.params);
+        final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
         if (!map.containsKey(key.toString())) {
             map.put(key.toString(), new LinkedList<String>());
         }
@@ -234,8 +233,7 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final SortedMap<String, List<String>> map =
-            new TreeMap<String, List<String>>(this.params);
+        final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
         map.remove(key.toString());
         return new Href(this.uri, map);
     }

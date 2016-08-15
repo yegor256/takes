@@ -115,8 +115,7 @@ public interface RqCookies extends Request {
          * @throws IOException If fails
          */
         private Map<String, String> map() throws IOException {
-            final Map<String, String> map =
-                new HashMap<String, String>(0);
+            final Map<String, String> map = new HashMap<>(0);
             final Iterable<String> values =
                 new RqHeaders.Base(this).header("Cookie");
             for (final String value : values) {

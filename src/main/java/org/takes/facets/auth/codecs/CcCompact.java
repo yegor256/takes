@@ -66,8 +66,7 @@ public final class CcCompact implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final Map<String, String> map =
-            new HashMap<String, String>(0);
+        final Map<String, String> map = new HashMap<>(0);
         final DataInputStream stream = new DataInputStream(
             new ByteArrayInputStream(bytes)
         );

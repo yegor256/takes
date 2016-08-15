@@ -167,7 +167,7 @@ public final class TkProxy implements Take {
      */
     private Response response(final String home, final URI dest,
         final com.jcabi.http.Response rsp) {
-        final Collection<String> hdrs = new LinkedList<String>();
+        final Collection<String> hdrs = new LinkedList<>();
         hdrs.add(
             String.format(
                 "X-Takes-TkProxy: from %s to %s by %s",

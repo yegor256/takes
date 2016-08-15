@@ -196,8 +196,7 @@ public final class PsGithub implements Pass {
      * @return Identity found
      */
     private static Identity parse(final JsonObject json) {
-        final Map<String, String> props =
-            new HashMap<String, String>(json.size());
+        final Map<String, String> props = new HashMap<>(json.size());
         // @checkstyle MultipleStringLiteralsCheck (1 line)
         props.put(PsGithub.LOGIN, json.getString(PsGithub.LOGIN, "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));

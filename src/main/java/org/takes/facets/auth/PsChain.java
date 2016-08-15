@@ -65,7 +65,7 @@ public final class PsChain implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request req) throws IOException {
-        Opt<Identity> user = new Opt.Empty<Identity>();
+        Opt<Identity> user = new Opt.Empty<>();
         for (final Pass pass : this.passes) {
             user = pass.enter(req);
             if (user.has()) {

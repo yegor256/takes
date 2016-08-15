@@ -156,7 +156,7 @@ public final class FbStatus extends FbWrap {
                 @Override
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    Opt<Response> rsp = new Opt.Empty<Response>();
+                    Opt<Response> rsp = new Opt.Empty<>();
                     if (check.fits(req.code())) {
                         rsp = fallback.route(req);
                     }

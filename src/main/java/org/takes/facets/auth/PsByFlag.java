@@ -99,7 +99,7 @@ public final class PsByFlag implements Pass {
     public Opt<Identity> enter(final Request req) throws IOException {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
-        Opt<Identity> user = new Opt.Empty<Identity>();
+        Opt<Identity> user = new Opt.Empty<>();
         if (flg.hasNext()) {
             final String value = flg.next();
             for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
@@ -126,8 +126,7 @@ public final class PsByFlag implements Pass {
     @SafeVarargs
     private static Map<Pattern, Pass> asMap(
         final Map.Entry<Pattern, Pass>... entries) {
-        final Map<Pattern, Pass> map =
-            new HashMap<Pattern, Pass>(entries.length);
+        final Map<Pattern, Pass> map = new HashMap<>(entries.length);
         for (final Map.Entry<Pattern, Pass> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
         }
