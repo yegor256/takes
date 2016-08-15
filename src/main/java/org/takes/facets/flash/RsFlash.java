@@ -31,7 +31,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsWithCookie;
@@ -100,12 +99,7 @@ import org.takes.rs.RsWrap;
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.1
- * @todo #686:15min After upgrade to qulice 0.16.4 we have to fix
- *  SingularField PMD warings in this class. Fix this warning
- *  and rid of the PMD suppression here.
  */
-@SuppressWarnings("PMD.SingularField")
-@ToString(callSuper = true, of = "text")
 @EqualsAndHashCode(callSuper = true)
 public final class RsFlash extends RsWrap {
 
@@ -117,7 +111,6 @@ public final class RsFlash extends RsWrap {
     /**
      * To string.
      */
-    @SuppressWarnings("unused")
     private final transient CharSequence text;
 
     /**
@@ -195,6 +188,14 @@ public final class RsFlash extends RsWrap {
         this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+            "%s(super=%s, text=%s)",
+            RsFlash.class.getSimpleName(), super.toString(), this.text
+        );
+    }
+
     /**
      * Make a response.
      * @param msg Message
@@ -227,5 +228,4 @@ public final class RsFlash extends RsWrap {
             )
         );
     }
-
 }
