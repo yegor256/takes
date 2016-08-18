@@ -48,17 +48,17 @@ public final class TkAuth implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Pass.
      */
-    private final transient Pass pass;
+    private final Pass pass;
 
     /**
      * Header to set in case of authentication.
      */
-    private final transient String header;
+    private final String header;
 
     /**
      * Ctor.

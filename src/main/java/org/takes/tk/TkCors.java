@@ -63,12 +63,12 @@ public final class TkCors implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * List of allowed domains.
      */
-    private final transient Set<String> allowed;
+    private final Set<String> allowed;
 
     /**
      * Ctor.

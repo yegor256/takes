@@ -52,12 +52,12 @@ public final class TkSlf4j implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Log target.
      */
-    private final transient String target;
+    private final String target;
 
     /**
      * Ctor.

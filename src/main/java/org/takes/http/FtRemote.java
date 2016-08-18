@@ -48,17 +48,17 @@ public final class FtRemote implements Front {
     /**
      * Original front.
      */
-    private final transient Front origin;
+    private final Front origin;
 
     /**
      * Server socket.
      */
-    private final transient ServerSocket socket;
+    private final ServerSocket socket;
 
     /**
      * Indicates whether the front is secure (HTTPS).
      */
-    private final transient boolean secured;
+    private final boolean secured;
 
     /**
      * Ctor.

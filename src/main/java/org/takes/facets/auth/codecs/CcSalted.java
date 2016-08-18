@@ -50,7 +50,7 @@ public final class CcSalted implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Ctor.

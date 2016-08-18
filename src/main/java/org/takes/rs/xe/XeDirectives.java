@@ -46,7 +46,7 @@ public final class XeDirectives implements XeSource {
     /**
      * Items.
      */
-    private final transient Iterable<Directive> directives;
+    private final Iterable<Directive> directives;
 
     /**
      * Ctor.

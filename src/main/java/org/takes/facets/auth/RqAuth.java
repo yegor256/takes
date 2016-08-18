@@ -47,7 +47,7 @@ public final class RqAuth extends RqWrap {
     /**
      * Header with authentication info.
      */
-    private final transient String header;
+    private final String header;
 
     /**
      * Ctor.

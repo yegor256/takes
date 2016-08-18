@@ -39,12 +39,12 @@ public class Transform<T, K> implements Iterable<K> {
     /**
      * Internal storage.
      */
-    private final transient Iterable<T> list;
+    private final Iterable<T> list;
 
     /**
      * The action to transform the elements in the iterator.
      */
-    private final transient TransformAction<T, K> action;
+    private final TransformAction<T, K> action;
 
     /**
      * Ctor.
@@ -81,12 +81,12 @@ public class Transform<T, K> implements Iterable<K> {
         /**
          * The iterator to reflect the traverse state.
          */
-        private final transient Iterator<B> iterator;
+        private final Iterator<B> iterator;
 
         /**
          * The action to transform the elements in the iterator.
          */
-        private final transient TransformAction<B, A> action;
+        private final TransformAction<B, A> action;
 
         /**
          * Ctor. ConcatIterator traverses the element.

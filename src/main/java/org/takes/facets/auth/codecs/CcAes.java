@@ -57,17 +57,17 @@ public final class CcAes implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * The encryption key.
      */
-    private final transient byte[] key;
+    private final byte[] key;
 
     /**
      * The algorithm parameter spec for cipher.
      */
-    private final transient AlgorithmParameterSpec spec;
+    private final AlgorithmParameterSpec spec;
 
     /**
      * Constructor for the class.

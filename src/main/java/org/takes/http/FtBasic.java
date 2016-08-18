@@ -45,12 +45,12 @@ public final class FtBasic implements Front {
     /**
      * Back.
      */
-    private final transient Back back;
+    private final Back back;
 
     /**
      * Server socket.
      */
-    private final transient ServerSocket socket;
+    private final ServerSocket socket;
 
     /**
      * Ctor.

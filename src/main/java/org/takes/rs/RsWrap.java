@@ -45,7 +45,7 @@ public class RsWrap implements Response {
     /**
      * Original response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Ctor.

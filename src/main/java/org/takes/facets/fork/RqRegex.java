@@ -64,11 +64,11 @@ public interface RqRegex extends Request {
         /**
          * Original request.
          */
-        private final transient Request request;
+        private final Request request;
         /**
          * Matcher.
          */
-        private final transient Matcher mtr;
+        private final Matcher mtr;
         /**
          * Ctor.
          * @param ptn Pattern

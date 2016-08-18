@@ -62,12 +62,12 @@ public final class Href implements CharSequence {
     /**
      * URI (without the query part).
      */
-    private final transient URI uri;
+    private final URI uri;
 
     /**
      * Params.
      */
-    private final transient SortedMap<String, List<String>> params;
+    private final SortedMap<String, List<String>> params;
 
     /**
      * Ctor.

@@ -43,7 +43,7 @@ public class FbWrap implements Fallback {
     /**
      * Original fallback.
      */
-    private final transient Fallback origin;
+    private final Fallback origin;
 
     /**
      * Ctor.

@@ -39,12 +39,12 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * Internal reference to hold the first elements from constructor.
      */
-    private final transient Iterable<T> left;
+    private final Iterable<T> left;
 
     /**
      * Internal reference to hold the second elements from constructor.
      */
-    private final transient Iterable<T> right;
+    private final Iterable<T> right;
 
     /**
      * Ctor.
@@ -81,11 +81,11 @@ public final class Concat<T> implements Iterable<T> {
         /**
          * Internal reference for holding the first iterator from constructor.
          */
-        private final transient Iterator<E> left;
+        private final Iterator<E> left;
         /**
          * Internal reference for holding the second iterator from constructor.
          */
-        private final transient Iterator<E> right;
+        private final Iterator<E> right;
         /**
          * Ctor.
          * @param aitr The first iterable to traverse

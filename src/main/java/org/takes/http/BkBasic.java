@@ -61,7 +61,7 @@ public final class BkBasic implements Back {
     /**
      * Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

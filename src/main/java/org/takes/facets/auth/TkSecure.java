@@ -49,12 +49,12 @@ public final class TkSecure implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Location where to forward.
      */
-    private final transient String loc;
+    private final String loc;
 
     /**
      * Ctor.

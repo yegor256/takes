@@ -49,17 +49,17 @@ public final class FkParams implements Fork {
     /**
      * Param name.
      */
-    private final transient String name;
+    private final String name;
 
     /**
      * Pattern for param value.
      */
-    private final transient Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

@@ -38,7 +38,7 @@ public class BkWrap implements Back {
     /**
      * Original back.
      */
-    private final transient Back origin;
+    private final Back origin;
     /**
      * Ctor.
      * @param back Original back

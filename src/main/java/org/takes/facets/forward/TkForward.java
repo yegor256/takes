@@ -52,7 +52,7 @@ public final class TkForward implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Ctor.
@@ -81,11 +81,11 @@ public final class TkForward implements Take {
         /**
          * Original response.
          */
-        private final transient Response origin;
+        private final Response origin;
         /**
          * Saved response.
          */
-        private final transient List<Response> saved;
+        private final List<Response> saved;
         /**
          * Ctor.
          * @param res Original response

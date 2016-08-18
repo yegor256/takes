@@ -175,7 +175,7 @@ public interface RqHeaders extends Request {
         /**
          * Original.
          */
-        private final transient RqHeaders origin;
+        private final RqHeaders origin;
         /**
          * Ctor.
          * @param req Original request

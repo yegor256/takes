@@ -40,7 +40,7 @@ public final class CcBase64 implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
     /**
      * Ctor.
      * @param codec Original codec

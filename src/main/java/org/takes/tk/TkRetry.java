@@ -48,17 +48,17 @@ public final class TkRetry implements Take {
     /**
      * Maximum number of retry attempts.
      */
-    private final transient int count;
+    private final int count;
 
     /**
      * Amount of time between retries, in milliseconds.
      */
-    private final transient int delay;
+    private final int delay;
 
     /**
      * Original Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Constructor.

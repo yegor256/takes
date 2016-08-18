@@ -47,7 +47,7 @@ public final class FtSecure implements Front {
     /**
      * The original front that is initialized with an SSLServerSocket.
      */
-    private final transient Front front;
+    private final Front front;
 
     /**
      * Ctor.

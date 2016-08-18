@@ -88,27 +88,27 @@ public final class PsGoogle implements Pass {
     /**
      * App name.
      */
-    private final transient String app;
+    private final String app;
 
     /**
      * Key.
      */
-    private final transient String key;
+    private final String key;
 
     /**
      * Redirect URI.
      */
-    private final transient String redir;
+    private final String redir;
 
     /**
      * Google OAuth url.
      */
-    private final transient String gauth;
+    private final String gauth;
 
     /**
      * Google API url.
      */
-    private final transient String gapi;
+    private final String gapi;
 
     /**
      * Ctor.

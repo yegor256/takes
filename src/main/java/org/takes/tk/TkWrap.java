@@ -46,7 +46,7 @@ public class TkWrap implements Take {
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Ctor.

@@ -54,7 +54,7 @@ final class Options {
     /**
      * Map of arguments and their values.
      */
-    private final transient Map<String, String> map;
+    private final Map<String, String> map;
 
     /**
      * Constructs an {@code Options} with the specified arguments.

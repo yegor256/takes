@@ -57,12 +57,12 @@ public final class XeFlash implements XeSource {
     /**
      * Request.
      */
-    private final transient Request req;
+    private final Request req;
 
     /**
      * Cookie name.
      */
-    private final transient String cookie;
+    private final String cookie;
 
     /**
      * Ctor.

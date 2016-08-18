@@ -47,7 +47,7 @@ final class MediaTypes {
     /**
      * Set of types.
      */
-    private final transient SortedSet<MediaType> list;
+    private final SortedSet<MediaType> list;
 
     /**
      * Ctor.

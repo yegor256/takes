@@ -71,7 +71,7 @@ public final class CcHex implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Ctor.

@@ -38,12 +38,12 @@ public final class VerboseIterable<T> implements Iterable<T> {
     /**
      * Original iterator.
      */
-    private final transient Iterable<T> origin;
+    private final Iterable<T> origin;
 
     /**
      * Error message when running out of items.
      */
-    private final transient CharSequence error;
+    private final CharSequence error;
 
     /**
      * Ctor.

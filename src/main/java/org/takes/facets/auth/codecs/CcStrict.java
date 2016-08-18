@@ -48,7 +48,7 @@ public final class CcStrict implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Ctor.

@@ -43,7 +43,7 @@ public final class PsFixed implements Pass {
     /**
      * User to return always.
      */
-    private final transient Identity user;
+    private final Identity user;
 
     /**
      * Identity to return always.

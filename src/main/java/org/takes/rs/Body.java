@@ -68,7 +68,7 @@ interface Body {
         /**
          * The {@link java.net.URL} of the content.
          */
-        private final transient java.net.URL url;
+        private final java.net.URL url;
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
@@ -99,7 +99,7 @@ interface Body {
         /**
          * The content of the body in a byte array.
          */
-        private final transient byte[] bytes;
+        private final byte[] bytes;
 
         /**
          * Constructs an {@code ByteArray} with the specified byte array.
@@ -128,12 +128,12 @@ interface Body {
         /**
          * The content of the body in an InputStream.
          */
-        private final transient InputStream stream;
+        private final InputStream stream;
 
         /**
          * The length of the stream.
          */
-        private final transient AtomicInteger length;
+        private final AtomicInteger length;
 
         /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
@@ -180,12 +180,12 @@ interface Body {
         /**
          * The temporary file that contains the content of the body.
          */
-        private final transient File file;
+        private final File file;
 
         /**
          * The underlying body.
          */
-        private final transient Body body;
+        private final Body body;
 
         /**
          * Constructs a {@code TempFile} with the specified {@link Body}.

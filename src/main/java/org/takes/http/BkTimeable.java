@@ -45,15 +45,15 @@ public final class BkTimeable extends Thread implements Back {
     /**
      * Original back.
      */
-    private final transient Back back;
+    private final Back back;
     /**
      * Maximum latency in milliseconds.
      */
-    private final transient long latency;
+    private final long latency;
     /**
      * Threads storage.
      */
-    private final transient ConcurrentMap<Thread, Long> threads;
+    private final ConcurrentMap<Thread, Long> threads;
 
     /**
      * Ctor.

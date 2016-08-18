@@ -45,7 +45,7 @@ public class FkWrap implements Fork {
     /**
      * Original fork.
      */
-    private final transient Fork origin;
+    private final Fork origin;
 
     /**
      * Ctor.

@@ -46,7 +46,7 @@ public final class RqFormSmart implements RqForm {
     /**
      * Original.
      */
-    private final transient RqForm origin;
+    private final RqForm origin;
 
     /**
      * Ctor.

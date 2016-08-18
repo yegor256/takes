@@ -62,7 +62,7 @@ public interface Opt<T> {
         /**
          * Origin.
          */
-        private final transient T origin;
+        private final T origin;
         /**
          * Ctor.
          * @param orgn Origin

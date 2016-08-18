@@ -68,12 +68,12 @@ public final class FkEncoding implements Fork {
     /**
      * Encoding we can deliver (or empty string).
      */
-    private final transient String encoding;
+    private final String encoding;
 
     /**
      * Response to return.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Ctor.

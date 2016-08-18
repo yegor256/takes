@@ -62,7 +62,7 @@ public final class FkAuthenticated implements Fork {
     /**
      * Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

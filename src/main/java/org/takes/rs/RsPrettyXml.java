@@ -69,12 +69,12 @@ public final class RsPrettyXml implements Response {
     /**
      * Original response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Response with properly transformed body.
      */
-    private final transient List<Response> transformed;
+    private final List<Response> transformed;
 
     /**
      * Ctor.

@@ -53,22 +53,22 @@ public final class FkHitRefresh implements Fork {
     /**
      * Directory to watch.
      */
-    private final transient File dir;
+    private final File dir;
 
     /**
      * Command to execute.
      */
-    private final transient Runnable exec;
+    private final Runnable exec;
 
     /**
      * Target.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * File touched on every exec run.
      */
-    private final transient File last;
+    private final File last;
 
     /**
      * Ctor.

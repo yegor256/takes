@@ -51,12 +51,12 @@ public final class PsByFlag implements Pass {
     /**
      * The flag.
      */
-    private final transient String flag;
+    private final String flag;
 
     /**
      * Flags and passes.
      */
-    private final transient Map<Pattern, Pass> passes;
+    private final Map<Pattern, Pass> passes;
 
     /**
      * Ctor.

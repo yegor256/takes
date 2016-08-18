@@ -59,12 +59,12 @@ public final class TkProxy implements Take {
     /**
      * Target.
      */
-    private final transient URI target;
+    private final URI target;
 
     /**
      * Label, to add to the HTTP header.
      */
-    private final transient String label;
+    private final String label;
 
     /**
      * Ctor.

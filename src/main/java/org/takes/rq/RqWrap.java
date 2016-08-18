@@ -43,7 +43,7 @@ public class RqWrap implements Request {
     /**
      * Original request.
      */
-    private final transient Request origin;
+    private final Request origin;
 
     /**
      * Ctor.

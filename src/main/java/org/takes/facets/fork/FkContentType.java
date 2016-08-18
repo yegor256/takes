@@ -48,12 +48,12 @@ public final class FkContentType implements Fork {
     /**
      * Type we can deliver.
      */
-    private final transient MediaTypes type;
+    private final MediaTypes type;
 
     /**
      * Take to handle the request and dynamically return the response.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

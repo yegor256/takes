@@ -42,12 +42,12 @@ public final class XeMillis implements XeSource {
     /**
      * Name of element.
      */
-    private final transient CharSequence name;
+    private final CharSequence name;
 
     /**
      * Is it a finish?
      */
-    private final transient boolean finish;
+    private final boolean finish;
 
     /**
      * Ctor.

@@ -74,22 +74,22 @@ public final class PsTwitter implements Pass {
     /**
      * App name.
      */
-    private final transient String app;
+    private final String app;
 
     /**
      * Key.
      */
-    private final transient String key;
+    private final String key;
 
     /**
      * Request for fetching app token.
      */
-    private final transient com.jcabi.http.Request token;
+    private final com.jcabi.http.Request token;
 
     /**
      * Request for verifying user credentials.
      */
-    private final transient com.jcabi.http.Request user;
+    private final com.jcabi.http.Request user;
 
     /**
      * Ctor.

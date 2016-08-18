@@ -44,12 +44,12 @@ public final class CcXor implements Codec {
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Secret to use for encoding.
      */
-    private final transient byte[] secret;
+    private final byte[] secret;
 
     /**
      * Ctor.

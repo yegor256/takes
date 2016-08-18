@@ -41,7 +41,7 @@ public final class RqMtSmart implements RqMultipart {
     /**
      * Original request.
      */
-    private final transient RqMultipart origin;
+    private final RqMultipart origin;
     /**
      * Ctor.
      * @param req Original

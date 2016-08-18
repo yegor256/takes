@@ -36,7 +36,7 @@ public final class EnglishLowerCase {
     /**
      * String value.
      */
-    private final transient String value;
+    private final String value;
 
     /**
      * Ctor.

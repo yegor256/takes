@@ -41,12 +41,12 @@ public final class Select<T> implements Iterable<T> {
     /**
      * Internal storage to hold the elements from iterables.
      */
-    private final transient Iterable<T> list;
+    private final Iterable<T> list;
 
     /**
      * The condition to filter the element in the iterator.
      */
-    private final transient Condition<T> condition;
+    private final Condition<T> condition;
 
     /**
      * To produce an iterable collection, determined by condition, combining a
@@ -84,15 +84,15 @@ public final class Select<T> implements Iterable<T> {
         /**
          * The iterator to reflect the traverse state.
          */
-        private final transient Iterator<E> iterator;
+        private final Iterator<E> iterator;
         /**
          * The condition to filter the elements in the iterator.
          */
-        private final transient Condition<E> condition;
+        private final Condition<E> condition;
         /**
          * The buffer storing the objects of the iterator.
          */
-        private final transient Queue<E> buffer;
+        private final Queue<E> buffer;
         /**
          * Ctor. ConcatIterator traverses the element.
          * @param itr Iterator of the original iterable

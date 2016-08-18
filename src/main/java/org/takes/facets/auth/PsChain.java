@@ -45,7 +45,7 @@ public final class PsChain implements Pass {
     /**
      * Passes.
      */
-    private final transient Iterable<Pass> passes;
+    private final Iterable<Pass> passes;
 
     /**
      * Ctor.

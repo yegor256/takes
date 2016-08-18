@@ -98,7 +98,7 @@ public interface RqHref extends Request {
         /**
          * Original.
          */
-        private final transient RqHref origin;
+        private final RqHref origin;
         /**
          * Ctor.
          * @param req Original request

@@ -40,12 +40,12 @@ final class CapInputStream extends InputStream {
     /**
      * Original stream.
      */
-    private final transient InputStream origin;
+    private final InputStream origin;
 
     /**
      * More bytes to read.
      */
-    private transient long more;
+    private long more;
 
     /**
      * Ctor.

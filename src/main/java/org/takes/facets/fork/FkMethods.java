@@ -59,12 +59,12 @@ public final class FkMethods implements Fork {
     /**
      * Methods to match.
      */
-    private final transient Collection<String> methods;
+    private final Collection<String> methods;
 
     /**
      * Target.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

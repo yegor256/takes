@@ -58,12 +58,12 @@ public final class RqFormBase extends RqWrap implements RqForm {
     /**
      * Request.
      */
-    private final transient Request req;
+    private final Request req;
 
     /**
      * Saved map.
      */
-    private final transient List<Map<String, List<String>>> saved;
+    private final List<Map<String, List<String>>> saved;
 
     /**
      * Ctor.

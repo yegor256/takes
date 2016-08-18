@@ -52,17 +52,17 @@ public final class PsCookie implements Pass {
     /**
      * Codec.
      */
-    private final transient Codec codec;
+    private final Codec codec;
 
     /**
      * Cookie to read.
      */
-    private final transient String cookie;
+    private final String cookie;
 
     /**
      * Max login age, in days.
      */
-    private final transient long age;
+    private final long age;
 
     /**
      * Ctor.

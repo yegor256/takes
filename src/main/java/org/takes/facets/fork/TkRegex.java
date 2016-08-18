@@ -57,11 +57,11 @@ public interface TkRegex {
         /**
          * Original take, expecting {@link RqRegex}.
          */
-        private final transient TkRegex origin;
+        private final TkRegex origin;
         /**
          * Matcher.
          */
-        private final transient Matcher matcher;
+        private final Matcher matcher;
         /**
          * Ctor.
          * @param rgx Original destination

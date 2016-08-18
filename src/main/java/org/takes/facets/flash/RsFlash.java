@@ -111,7 +111,7 @@ public final class RsFlash extends RsWrap {
     /**
      * To string.
      */
-    private final transient CharSequence text;
+    private final CharSequence text;
 
     /**
      * Constructs a {@code RsFlash} with the specified message.

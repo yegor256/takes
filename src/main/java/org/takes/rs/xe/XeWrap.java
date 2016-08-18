@@ -42,7 +42,7 @@ public class XeWrap implements XeSource {
     /**
      * Source to add.
      */
-    private final transient XeSource origin;
+    private final XeSource origin;
 
     /**
      * Ctor.

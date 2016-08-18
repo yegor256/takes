@@ -56,17 +56,17 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
     /**
      * Header matcher.
      */
-    private final transient Matcher<String> header;
+    private final Matcher<String> header;
 
     /**
      * Value matcher.
      */
-    private final transient Matcher<Iterable<String>> value;
+    private final Matcher<Iterable<String>> value;
 
     /**
      * Mismatched header values.
      */
-    private transient Collection<String> failed;
+    private Collection<String> failed;
 
     /**
      * Ctor.

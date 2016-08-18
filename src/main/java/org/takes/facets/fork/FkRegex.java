@@ -87,12 +87,12 @@ public final class FkRegex implements Fork {
     /**
      * Pattern.
      */
-    private final transient Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Target.
      */
-    private final transient TkRegex target;
+    private final TkRegex target;
 
     /**
      * Ctor.
@@ -209,12 +209,12 @@ public final class FkRegex implements Fork {
         /**
          * Matcher.
          */
-        private final transient Matcher mtr;
+        private final Matcher mtr;
 
         /**
          * Original request.
          */
-        private final transient Request req;
+        private final Request req;
 
         /**
          * Ctor.
