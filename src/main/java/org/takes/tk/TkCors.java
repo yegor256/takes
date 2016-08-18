@@ -41,7 +41,7 @@ import org.takes.rs.RsWithStatus;
  * CORS take.
  *
  * <p>This take checks if the request (Origin) is allowed to perform
- * the desired action against the list of the given domains.</p>
+ * the desired action against the list of the given domains.
  *
  * <p>The specification of CORS can be found on the W3C web site on the
  * following <a href="http://www.w3.org/TR/cors/">link</a> or even on the <a
@@ -50,12 +50,7 @@ import org.takes.rs.RsWithStatus;
  * @author Endrigo Antonini (teamed@endrigo.com.br)
  * @version $Id$
  * @since 0.20
- * @todo #684:15min Remove PMD.AvoidDuplicateLiterals exclude here and in
- *  {@link RsPrettyJson}, {@link RsPrettyXml}. Note that this puzzle depends on
- *  https://github.com/teamed/qulice/issues/760. Note that this puzzle has
- *  partially overlap with https://github.com/yegor256/takes/issues/686
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = { "origin", "allowed" })
 @EqualsAndHashCode(of = { "origin", "allowed" })
 public final class TkCors implements Take {
