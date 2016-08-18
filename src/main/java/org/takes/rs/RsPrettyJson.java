@@ -51,7 +51,7 @@ import org.takes.Response;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class RsPrettyJson implements Response {
 
     /**

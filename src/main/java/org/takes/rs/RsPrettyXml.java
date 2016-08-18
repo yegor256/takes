@@ -57,7 +57,7 @@ import org.xml.sax.XMLReader;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class RsPrettyXml implements Response {
 
     /**
