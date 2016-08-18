@@ -42,7 +42,7 @@ import org.takes.tk.TkFixed;
  * @since 1.0
  * @see RsFork
  */
-@EqualsAndHashCode(of = { "type", "take" })
+@EqualsAndHashCode
 public final class FkContentType implements Fork {
 
     /**

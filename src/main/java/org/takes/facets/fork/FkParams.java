@@ -43,7 +43,7 @@ import org.takes.rq.RqHref;
  * @since 0.4
  * @see TkFork
  */
-@EqualsAndHashCode(of = { "name", "pattern", "take" })
+@EqualsAndHashCode
 public final class FkParams implements Fork {
 
     /**

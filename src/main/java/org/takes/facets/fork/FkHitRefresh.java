@@ -47,7 +47,7 @@ import org.takes.rq.RqHeaders;
  * @since 0.9
  * @see TkFork
  */
-@EqualsAndHashCode(of = { "dir", "exec", "last", "take" })
+@EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
 
     /**

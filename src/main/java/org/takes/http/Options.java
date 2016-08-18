@@ -48,7 +48,7 @@ import org.takes.misc.Utf8OutputStreamWriter;
  * @version $Id$
  * @since 0.2
  */
-@EqualsAndHashCode(of = "map")
+@EqualsAndHashCode
 final class Options {
 
     /**

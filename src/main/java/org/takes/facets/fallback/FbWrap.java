@@ -37,7 +37,7 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.13
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class FbWrap implements Fallback {
 
     /**

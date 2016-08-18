@@ -51,7 +51,7 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.11.3
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode
 public final class PsLinkedin implements Pass {
 
     /**

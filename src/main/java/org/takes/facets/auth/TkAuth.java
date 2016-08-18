@@ -42,7 +42,7 @@ import org.takes.rq.RqWithoutHeader;
  * @since 0.1
  */
 @ToString(of = { "origin", "pass", "header" })
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
+@EqualsAndHashCode
 public final class TkAuth implements Take {
 
     /**

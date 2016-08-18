@@ -41,7 +41,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.25
  */
-@EqualsAndHashCode(of = { "front" })
+@EqualsAndHashCode
 public final class FtSecure implements Front {
 
     /**

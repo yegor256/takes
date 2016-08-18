@@ -41,7 +41,7 @@ import org.takes.rq.RqHeaders;
  * @since 0.6
  * @see RsFork
  */
-@EqualsAndHashCode(of = { "types", "response", "take" })
+@EqualsAndHashCode
 public final class FkTypes implements Fork {
 
     /**

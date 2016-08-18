@@ -57,7 +57,7 @@ import org.takes.rq.RqWithHeader;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "take", "options" })
+@EqualsAndHashCode
 public final class FtCli implements Front {
 
     /**

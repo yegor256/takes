@@ -46,7 +46,7 @@ import org.takes.rs.RsSimple;
  * @see org.takes.facets.forward.TkForward
  */
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class TkForward implements Take {
 
     /**

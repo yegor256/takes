@@ -43,7 +43,7 @@ import org.takes.facets.forward.RsForward;
  * @since 0.1
  */
 @ToString(of = { "origin", "loc" })
-@EqualsAndHashCode(of = { "origin", "loc" })
+@EqualsAndHashCode
 public final class TkSecure implements Take {
 
     /**

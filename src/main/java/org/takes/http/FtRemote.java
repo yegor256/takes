@@ -42,7 +42,7 @@ import org.takes.Take;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "origin", "socket" })
+@EqualsAndHashCode
 public final class FtRemote implements Front {
 
     /**

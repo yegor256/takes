@@ -47,7 +47,7 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.13.8
  */
-@EqualsAndHashCode(of = {"origin", "key", "spec"})
+@EqualsAndHashCode
 public final class CcAes implements Codec {
     /**
      * The block size constant.

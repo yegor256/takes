@@ -55,7 +55,7 @@ import org.takes.rs.RsWithStatus;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
  */
-@EqualsAndHashCode(of = "take")
+@EqualsAndHashCode
 public final class BkBasic implements Back {
 
     /**

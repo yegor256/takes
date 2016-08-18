@@ -52,7 +52,7 @@ import org.takes.rq.RqWrap;
  * @since 0.33
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-@EqualsAndHashCode(callSuper = true, of = "req")
+@EqualsAndHashCode(callSuper = true)
 public final class RqFormBase extends RqWrap implements RqForm {
 
     /**

@@ -64,7 +64,7 @@ import lombok.EqualsAndHashCode;
  * @since 0.1
  * @param <T> Type of item
  */
-@EqualsAndHashCode(of = { "objects", "func" })
+@EqualsAndHashCode
 public final class XeTransform<T> implements Iterable<XeSource> {
 
     /**

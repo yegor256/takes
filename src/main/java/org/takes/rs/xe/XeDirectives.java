@@ -40,7 +40,7 @@ import org.xembly.SyntaxException;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "directives")
+@EqualsAndHashCode
 public final class XeDirectives implements XeSource {
 
     /**

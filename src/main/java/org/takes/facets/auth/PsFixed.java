@@ -37,7 +37,7 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.9
  */
-@EqualsAndHashCode(of = "user")
+@EqualsAndHashCode
 public final class PsFixed implements Pass {
 
     /**

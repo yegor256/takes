@@ -54,7 +54,7 @@ import org.takes.rs.RsWithHeader;
  * @version $Id$
  * @since 0.20
  */
-@EqualsAndHashCode(of = { "entry", "realm" })
+@EqualsAndHashCode
 @SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 

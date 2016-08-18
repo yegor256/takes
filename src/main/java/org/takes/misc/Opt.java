@@ -57,7 +57,7 @@ public interface Opt<T> {
      * @since 0.14
      * @param <T> Type of item
      */
-    @EqualsAndHashCode(of = "origin")
+    @EqualsAndHashCode
     final class Single<T> implements Opt<T> {
         /**
          * Origin.

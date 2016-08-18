@@ -54,7 +54,7 @@ import org.takes.rq.RqHref;
  * @since 0.1
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode
 public final class PsGithub implements Pass {
 
     /**

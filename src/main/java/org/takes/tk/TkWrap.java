@@ -40,7 +40,7 @@ import org.takes.Take;
  * @since 0.4
  */
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class TkWrap implements Take {
 
     /**

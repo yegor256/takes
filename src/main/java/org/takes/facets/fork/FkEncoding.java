@@ -57,7 +57,7 @@ import org.takes.rq.RqHeaders;
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
  */
-@EqualsAndHashCode(of = { "encoding", "origin" })
+@EqualsAndHashCode
 public final class FkEncoding implements Fork {
 
     /**

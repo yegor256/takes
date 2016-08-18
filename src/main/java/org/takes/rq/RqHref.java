@@ -93,7 +93,7 @@ public interface RqHref extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.14
      */
-    @EqualsAndHashCode(of = "origin")
+    @EqualsAndHashCode
     final class Smart implements RqHref {
         /**
          * Original.

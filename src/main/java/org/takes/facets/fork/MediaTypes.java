@@ -41,7 +41,7 @@ import org.takes.misc.EnglishLowerCase;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = "list")
+@EqualsAndHashCode
 final class MediaTypes {
 
     /**

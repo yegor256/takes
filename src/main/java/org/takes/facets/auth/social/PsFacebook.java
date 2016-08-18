@@ -59,7 +59,7 @@ import org.takes.rq.RqHref;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode
 public final class PsFacebook implements Pass {
 
     /**

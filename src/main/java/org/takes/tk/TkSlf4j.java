@@ -46,7 +46,7 @@ import org.takes.rq.RqMethod;
  * @since 0.11.2
  */
 @ToString(of = { "origin", "target" })
-@EqualsAndHashCode(of = { "origin", "target" })
+@EqualsAndHashCode
 public final class TkSlf4j implements Take {
 
     /**

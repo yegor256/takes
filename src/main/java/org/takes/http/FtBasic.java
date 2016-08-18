@@ -39,7 +39,7 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "back", "socket" })
+@EqualsAndHashCode
 public final class FtBasic implements Front {
 
     /**

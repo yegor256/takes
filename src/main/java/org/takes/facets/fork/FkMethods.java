@@ -53,7 +53,7 @@ import org.takes.tk.TkFixed;
  * @since 0.4
  * @see TkFork
  */
-@EqualsAndHashCode(of = { "methods", "take" })
+@EqualsAndHashCode
 public final class FkMethods implements Fork {
 
     /**

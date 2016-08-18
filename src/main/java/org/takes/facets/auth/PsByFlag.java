@@ -45,7 +45,7 @@ import org.takes.rq.RqHref;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "flag", "passes" })
+@EqualsAndHashCode
 public final class PsByFlag implements Pass {
 
     /**

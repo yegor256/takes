@@ -81,7 +81,7 @@ import org.takes.tk.TkText;
  * @see TkFork
  * @see TkRegex
  */
-@EqualsAndHashCode(of = { "pattern", "target" })
+@EqualsAndHashCode
 public final class FkRegex implements Fork {
 
     /**

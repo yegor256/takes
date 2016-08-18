@@ -45,7 +45,7 @@ import org.takes.misc.Utf8String;
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = "app")
+@EqualsAndHashCode
 public final class MainRemote {
 
     /**

@@ -45,7 +45,7 @@ import org.takes.Response;
  * @since 0.10
  */
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class RsGzip implements Response {
 
     /**

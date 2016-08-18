@@ -36,7 +36,7 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "name", "finish" })
+@EqualsAndHashCode
 public final class XeMillis implements XeSource {
 
     /**

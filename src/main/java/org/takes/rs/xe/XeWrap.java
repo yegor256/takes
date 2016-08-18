@@ -36,7 +36,7 @@ import org.xembly.Directive;
  * @version $Id$
  * @since 0.4
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class XeWrap implements XeSource {
 
     /**

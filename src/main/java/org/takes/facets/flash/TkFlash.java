@@ -60,7 +60,7 @@ import org.takes.rs.RsWithCookie;
  * @since 0.1
  */
 @ToString(of = { "origin", "cookie" })
-@EqualsAndHashCode(of = { "origin", "cookie" })
+@EqualsAndHashCode
 public final class TkFlash implements Take {
 
     /**

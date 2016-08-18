@@ -52,7 +52,7 @@ import org.takes.rq.RqHref;
  * @since 0.9
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key", "redir" })
+@EqualsAndHashCode
 public final class PsGoogle implements Pass {
 
     /**

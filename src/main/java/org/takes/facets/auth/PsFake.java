@@ -37,7 +37,7 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.9
  */
-@EqualsAndHashCode(of = "condition")
+@EqualsAndHashCode
 public final class PsFake implements Pass {
 
     /**

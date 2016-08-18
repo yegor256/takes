@@ -37,7 +37,7 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class CcHex implements Codec {
 
     /**
