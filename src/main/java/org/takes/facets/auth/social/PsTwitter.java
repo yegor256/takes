@@ -52,7 +52,7 @@ import org.takes.misc.Utf8String;
  * @since 0.16
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "app", "key" })
 public final class PsTwitter implements Pass {
 
     /**
