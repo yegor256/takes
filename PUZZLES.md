@@ -1,6 +1,6 @@
 ## Puzzles
 
-There are 2 active puzzles (77 total):
+There are 1 active puzzles (77 total):
 
 
 <del>unknown</del> [`?`](../master/?)<br/>
@@ -63,7 +63,7 @@ There are 2 active puzzles (77 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>624-78dfe52a</del>](https://github.com/yegor256/takes/issues/660) [`pom.xml:338-340`](../master/pom.xml#L338-L340)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>660-949a08e1</del>](https://github.com/yegor256/takes/issues/678) [`HttpException.java:34-36`](../master/src/main/java/org/takes/HttpException.java#L34-L36)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>678-b4f3ecf4</del>](https://github.com/yegor256/takes/issues/684) [`pom.xml:344-346`](../master/pom.xml#L344-L346)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#692](https://github.com/yegor256/takes/issues/692):[**684-70270140**](https://github.com/yegor256/takes/issues/692) [`TkCors.java:53-56`](../master/src/main/java/org/takes/tk/TkCors.java#L53-L56)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#692](https://github.com/yegor256/takes/issues/692):[<del>684-70270140</del>](https://github.com/yegor256/takes/issues/692) [`TkCors.java:53-56`](../master/src/main/java/org/takes/tk/TkCors.java#L53-L56)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>678-832c7c24</del>](https://github.com/yegor256/takes/issues/686) [`pom.xml:380-382`](../master/pom.xml#L380-L382)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#697](https://github.com/yegor256/takes/issues/697):[<del>686-832c7c24</del>](https://github.com/yegor256/takes/issues/697) [`pom.xml:344-346`](../master/pom.xml#L344-L346)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#698](https://github.com/yegor256/takes/issues/698):[<del>686-55806871</del>](https://github.com/yegor256/takes/issues/698) [`RsFlash.java:103-105`](../master/src/main/java/org/takes/facets/flash/RsFlash.java#L103-L105)<br/>
