@@ -64,18 +64,18 @@ import lombok.EqualsAndHashCode;
  * @since 0.1
  * @param <T> Type of item
  */
-@EqualsAndHashCode(of = { "objects", "func" })
+@EqualsAndHashCode
 public final class XeTransform<T> implements Iterable<XeSource> {
 
     /**
      * Iterable of objects.
      */
-    private final transient Iterable<T> objects;
+    private final Iterable<T> objects;
 
     /**
      * Function to use for mapping.
      */
-    private final transient XeTransform.Func<T> func;
+    private final XeTransform.Func<T> func;
 
     /**
      * Ctor.

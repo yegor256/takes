@@ -33,12 +33,12 @@ import lombok.EqualsAndHashCode;
  * @version $Id$
  * @since 0.28
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class BkWrap implements Back {
     /**
      * Original back.
      */
-    private final transient Back origin;
+    private final Back origin;
     /**
      * Ctor.
      * @param back Original back

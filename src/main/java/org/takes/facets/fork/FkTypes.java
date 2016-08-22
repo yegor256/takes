@@ -41,23 +41,23 @@ import org.takes.rq.RqHeaders;
  * @since 0.6
  * @see RsFork
  */
-@EqualsAndHashCode(of = { "types", "response", "take" })
+@EqualsAndHashCode
 public final class FkTypes implements Fork {
 
     /**
      * Types we can deliver.
      */
-    private final transient MediaTypes types;
+    private final MediaTypes types;
 
     /**
      * Response to return.
      */
-    private final transient Opt<Response> response;
+    private final Opt<Response> response;
 
     /**
      * Response to return.
      */
-    private final transient Opt<Take> take;
+    private final Opt<Take> take;
 
     /**
      * Ctor.

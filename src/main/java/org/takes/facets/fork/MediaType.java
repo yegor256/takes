@@ -39,7 +39,7 @@ import org.takes.misc.EnglishLowerCase;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = { "high", "low" })
+@EqualsAndHashCode
 final class MediaType implements Comparable<MediaType> {
 
     /**
@@ -50,17 +50,17 @@ final class MediaType implements Comparable<MediaType> {
     /**
      * Priority.
      */
-    private final transient Double prio;
+    private final Double prio;
 
     /**
      * High part.
      */
-    private final transient String high;
+    private final String high;
 
     /**
      * Low part.
      */
-    private final transient String low;
+    private final String low;
 
     /**
      * Ctor.

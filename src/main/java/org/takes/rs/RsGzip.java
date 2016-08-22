@@ -45,18 +45,18 @@ import org.takes.Response;
  * @since 0.10
  */
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class RsGzip implements Response {
 
     /**
      * Original response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Compressed and cached response.
      */
-    private final transient List<Response> zipped;
+    private final List<Response> zipped;
 
     /**
      * Ctor.

@@ -97,19 +97,19 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Map of params and values.
      */
-    private final transient Map<String, List<Request>> map;
+    private final Map<String, List<Request>> map;
     /**
      * Internal buffer.
      */
-    private final transient ByteBuffer buffer;
+    private final ByteBuffer buffer;
     /**
      * InputStream based on request body.
      */
-    private final transient InputStream stream;
+    private final InputStream stream;
     /**
      * Original request.
      */
-    private final transient Request origin;
+    private final Request origin;
     /**
      * Ctor.
      * @param req Original request

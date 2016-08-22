@@ -45,7 +45,7 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "req", "cookie" })
+@EqualsAndHashCode
 public final class XeFlash implements XeSource {
     /**
      * Compiled RsFlash message regexp pattern.
@@ -57,12 +57,12 @@ public final class XeFlash implements XeSource {
     /**
      * Request.
      */
-    private final transient Request req;
+    private final Request req;
 
     /**
      * Cookie name.
      */
-    private final transient String cookie;
+    private final String cookie;
 
     /**
      * Ctor.

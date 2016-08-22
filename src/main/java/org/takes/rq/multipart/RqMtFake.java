@@ -51,7 +51,7 @@ public final class RqMtFake implements RqMultipart {
     /**
      * Fake multipart request.
      */
-    private final transient RqMultipart fake;
+    private final RqMultipart fake;
     /**
      * Fake ctor.
      * @param req Fake request header holder
@@ -124,11 +124,11 @@ public final class RqMtFake implements RqMultipart {
         /**
          * Request object. Holds a value for the header.
          */
-        private final transient Request req;
+        private final Request req;
         /**
          * Holding multiple request body parts.
          */
-        private final transient String parts;
+        private final String parts;
         /**
          * The Constructor for the class.
          * @param rqst The Request object

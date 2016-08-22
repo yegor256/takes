@@ -75,22 +75,22 @@ public final class PsGithub implements Pass {
     /**
      * App name.
      */
-    private final transient String app;
+    private final String app;
 
     /**
      * Key.
      */
-    private final transient String key;
+    private final String key;
 
     /**
      * GitHub OAuth url.
      */
-    private final transient String github;
+    private final String github;
 
     /**
      * GitHub API url.
      */
-    private final transient String api;
+    private final String api;
 
     /**
      * Ctor.

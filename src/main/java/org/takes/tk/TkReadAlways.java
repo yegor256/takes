@@ -40,13 +40,13 @@ import org.takes.Take;
  * @since 0.30
  */
 @ToString(of = {"origin"})
-@EqualsAndHashCode(of = {"origin"})
+@EqualsAndHashCode
 public final class TkReadAlways implements Take {
 
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Ctor.

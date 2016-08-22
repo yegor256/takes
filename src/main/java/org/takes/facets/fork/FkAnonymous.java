@@ -56,13 +56,13 @@ import org.takes.misc.Opt;
  * @see TkFork
  * @see TkRegex
  */
-@EqualsAndHashCode(of = "take")
+@EqualsAndHashCode
 public final class FkAnonymous implements Fork {
 
     /**
      * Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Ctor.

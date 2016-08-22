@@ -40,13 +40,13 @@ import org.xembly.SyntaxException;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "directives")
+@EqualsAndHashCode
 public final class XeDirectives implements XeSource {
 
     /**
      * Items.
      */
-    private final transient Iterable<Directive> directives;
+    private final Iterable<Directive> directives;
 
     /**
      * Ctor.

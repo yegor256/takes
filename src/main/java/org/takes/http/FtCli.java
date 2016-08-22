@@ -57,18 +57,18 @@ import org.takes.rq.RqWithHeader;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "take", "options" })
+@EqualsAndHashCode
 public final class FtCli implements Front {
 
     /**
      * Take.
      */
-    private final transient Take take;
+    private final Take take;
 
     /**
      * Command line args.
      */
-    private final transient Options options;
+    private final Options options;
 
     /**
      * Ctor.
@@ -165,12 +165,12 @@ public final class FtCli implements Front {
         /**
          * Start time.
          */
-        private final transient long start;
+        private final long start;
 
         /**
          * Max lifetime.
          */
-        private final transient long max;
+        private final long max;
 
         /**
          * Ctor.

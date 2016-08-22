@@ -42,12 +42,12 @@ public final class TempInputStream extends InputStream {
     /**
      * Original stream.
      */
-    private final transient InputStream origin;
+    private final InputStream origin;
 
     /**
      * Associated File instance.
      */
-    private final transient File file;
+    private final File file;
 
     /**
      * Ctor.

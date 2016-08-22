@@ -42,27 +42,27 @@ final class ChunkedInputStream extends InputStream {
     /**
      * The inputstream that we're wrapping.
      */
-    private final transient InputStream origin;
+    private final InputStream origin;
 
     /**
      * The chunk size.
      */
-    private transient int size;
+    private int size;
 
     /**
      * The current position within the current chunk.
      */
-    private transient int pos;
+    private int pos;
 
     /**
      * True if we'are at the beginning of stream.
      */
-    private transient boolean bof;
+    private boolean bof;
 
     /**
      * True if we've reached the end of stream.
      */
-    private transient boolean eof;
+    private boolean eof;
 
     /**
      * Ctor.

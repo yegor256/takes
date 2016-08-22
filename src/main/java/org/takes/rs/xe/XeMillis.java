@@ -36,18 +36,18 @@ import org.xembly.Directives;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "name", "finish" })
+@EqualsAndHashCode
 public final class XeMillis implements XeSource {
 
     /**
      * Name of element.
      */
-    private final transient CharSequence name;
+    private final CharSequence name;
 
     /**
      * Is it a finish?
      */
-    private final transient boolean finish;
+    private final boolean finish;
 
     /**
      * Ctor.

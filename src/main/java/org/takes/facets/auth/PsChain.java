@@ -39,13 +39,13 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = "passes")
+@EqualsAndHashCode
 public final class PsChain implements Pass {
 
     /**
      * Passes.
      */
-    private final transient Iterable<Pass> passes;
+    private final Iterable<Pass> passes;
 
     /**
      * Ctor.

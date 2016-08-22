@@ -43,12 +43,12 @@ public final class VerboseList<T> implements List<T> {
     /**
      * Original list.
      */
-    private final transient List<T> origin;
+    private final List<T> origin;
 
     /**
      * Error message for IndexOutOfBoundsException.
      */
-    private final transient String message;
+    private final String message;
 
     /**
      * Ctor.

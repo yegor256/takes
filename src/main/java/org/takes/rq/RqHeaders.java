@@ -170,12 +170,12 @@ public interface RqHeaders extends Request {
      * @author Yegor Bugayenko (yegor@teamed.io)
      * @since 0.16
      */
-    @EqualsAndHashCode(of = "origin")
+    @EqualsAndHashCode
     final class Smart implements RqHeaders {
         /**
          * Original.
          */
-        private final transient RqHeaders origin;
+        private final RqHeaders origin;
         /**
          * Ctor.
          * @param req Original request

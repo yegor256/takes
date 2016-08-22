@@ -45,18 +45,18 @@ import org.takes.misc.Utf8String;
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EqualsAndHashCode(of = "app")
+@EqualsAndHashCode
 public final class MainRemote {
 
     /**
      * Application with {@code main()} method.
      */
-    private final transient Class<?> app;
+    private final Class<?> app;
 
     /**
      * Additional arguments to be passed to the main class.
      */
-    private final transient String[] args;
+    private final String[] args;
 
     /**
      * Ctor.
@@ -189,12 +189,12 @@ public final class MainRemote {
         /**
          * Method.
          */
-        private final transient Method method;
+        private final Method method;
 
         /**
          * Additional arguments.
          */
-        private final transient String[] passed;
+        private final String[] passed;
 
         /**
          * Ctor.

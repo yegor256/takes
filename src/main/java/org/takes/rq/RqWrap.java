@@ -37,13 +37,13 @@ import org.takes.Request;
  * @version $Id$
  * @since 0.6
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class RqWrap implements Request {
 
     /**
      * Original request.
      */
-    private final transient Request origin;
+    private final Request origin;
 
     /**
      * Ctor.

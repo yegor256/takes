@@ -52,18 +52,18 @@ import org.takes.rq.RqWrap;
  * @since 0.33
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-@EqualsAndHashCode(callSuper = true, of = "req")
+@EqualsAndHashCode(callSuper = true)
 public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Request.
      */
-    private final transient Request req;
+    private final Request req;
 
     /**
      * Saved map.
      */
-    private final transient List<Map<String, List<String>>> saved;
+    private final List<Map<String, List<String>>> saved;
 
     /**
      * Ctor.

@@ -58,11 +58,11 @@ public interface Exit {
         /**
          * Left.
          */
-        private final transient Exit left;
+        private final Exit left;
         /**
          * Right.
          */
-        private final transient Exit right;
+        private final Exit right;
         /**
          * Ctor.
          * @param lft Left
@@ -86,11 +86,11 @@ public interface Exit {
         /**
          * Left.
          */
-        private final transient Exit left;
+        private final Exit left;
         /**
          * Right.
          */
-        private final transient Exit right;
+        private final Exit right;
         /**
          * Ctor.
          * @param lft Left
@@ -114,7 +114,7 @@ public interface Exit {
         /**
          * Origin.
          */
-        private final transient Exit origin;
+        private final Exit origin;
         /**
          * Ctor.
          * @param exit Original

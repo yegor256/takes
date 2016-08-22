@@ -40,13 +40,13 @@ import org.takes.rq.RqForm;
  * @version $Id$
  * @since 0.33
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class RqFormSmart implements RqForm {
 
     /**
      * Original.
      */
-    private final transient RqForm origin;
+    private final RqForm origin;
 
     /**
      * Ctor.

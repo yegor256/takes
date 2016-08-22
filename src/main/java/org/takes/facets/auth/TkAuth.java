@@ -42,23 +42,23 @@ import org.takes.rq.RqWithoutHeader;
  * @since 0.1
  */
 @ToString(of = { "origin", "pass", "header" })
-@EqualsAndHashCode(of = { "origin", "pass", "header" })
+@EqualsAndHashCode
 public final class TkAuth implements Take {
 
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Pass.
      */
-    private final transient Pass pass;
+    private final Pass pass;
 
     /**
      * Header to set in case of authentication.
      */
-    private final transient String header;
+    private final String header;
 
     /**
      * Ctor.

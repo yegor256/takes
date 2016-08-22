@@ -74,11 +74,11 @@ public interface Identity {
         /**
          * URN.
          */
-        private final transient String name;
+        private final String name;
         /**
          * Map of properties.
          */
-        private final transient Map<String, String> props;
+        private final Map<String, String> props;
         /**
          * Ctor.
          * @param urn URN of the identity

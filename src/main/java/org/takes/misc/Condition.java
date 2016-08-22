@@ -48,7 +48,7 @@ public interface Condition<T> {
         /**
          * Condition.
          */
-        private final transient Condition<T> condition;
+        private final Condition<T> condition;
         /**
          * Ctor.
          * @param cond The condition to negate

@@ -62,22 +62,22 @@ public final class PsLinkedin implements Pass {
     /**
      * App name.
      */
-    private final transient String app;
+    private final String app;
 
     /**
      * Key.
      */
-    private final transient String key;
+    private final String key;
 
     /**
      * Linkedin token href.
      */
-    private final transient Href tkhref;
+    private final Href tkhref;
 
     /**
      * Linkedin api href.
      */
-    private final transient Href apihref;
+    private final Href apihref;
 
     /**
      * Ctor.

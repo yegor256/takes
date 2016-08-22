@@ -41,12 +41,12 @@ public class PsAll implements Pass {
     /**
      * Passes that have to be entered.
      */
-    private final transient List<? extends Pass> all;
+    private final List<? extends Pass> all;
 
     /**
      * Index of identity to return.
      */
-    private final transient int index;
+    private final int index;
 
     /**
      * Ctor.

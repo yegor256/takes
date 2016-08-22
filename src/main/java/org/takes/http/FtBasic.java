@@ -39,18 +39,18 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "back", "socket" })
+@EqualsAndHashCode
 public final class FtBasic implements Front {
 
     /**
      * Back.
      */
-    private final transient Back back;
+    private final Back back;
 
     /**
      * Server socket.
      */
-    private final transient ServerSocket socket;
+    private final ServerSocket socket;
 
     /**
      * Ctor.

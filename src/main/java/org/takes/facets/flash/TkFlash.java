@@ -60,18 +60,18 @@ import org.takes.rs.RsWithCookie;
  * @since 0.1
  */
 @ToString(of = { "origin", "cookie" })
-@EqualsAndHashCode(of = { "origin", "cookie" })
+@EqualsAndHashCode
 public final class TkFlash implements Take {
 
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Cookie name.
      */
-    private final transient String cookie;
+    private final String cookie;
 
     /**
      * Ctor.

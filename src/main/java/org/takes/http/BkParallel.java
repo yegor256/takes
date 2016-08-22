@@ -105,7 +105,7 @@ public final class BkParallel extends BkWrap {
         /**
          * Total threads created so far.
          */
-        private final transient AtomicInteger total = new AtomicInteger();
+        private final AtomicInteger total = new AtomicInteger();
 
         @Override
         public Thread newThread(final Runnable runnable) {

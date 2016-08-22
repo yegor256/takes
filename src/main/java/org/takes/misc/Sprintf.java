@@ -40,12 +40,12 @@ public final class Sprintf implements CharSequence {
     /**
      * Pattern.
      */
-    private final transient String pattern;
+    private final String pattern;
 
     /**
      * Arguments.
      */
-    private final transient Collection<Object> args;
+    private final Collection<Object> args;
 
     /**
      * Ctor.

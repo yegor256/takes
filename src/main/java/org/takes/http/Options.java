@@ -48,13 +48,13 @@ import org.takes.misc.Utf8OutputStreamWriter;
  * @version $Id$
  * @since 0.2
  */
-@EqualsAndHashCode(of = "map")
+@EqualsAndHashCode
 final class Options {
 
     /**
      * Map of arguments and their values.
      */
-    private final transient Map<String, String> map;
+    private final Map<String, String> map;
 
     /**
      * Constructs an {@code Options} with the specified arguments.

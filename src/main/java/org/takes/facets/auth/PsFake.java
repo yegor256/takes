@@ -37,13 +37,13 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.9
  */
-@EqualsAndHashCode(of = "condition")
+@EqualsAndHashCode
 public final class PsFake implements Pass {
 
     /**
      * Should we authenticate a user?
      */
-    private final transient boolean condition;
+    private final boolean condition;
 
     /**
      * Ctor.

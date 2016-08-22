@@ -70,15 +70,15 @@ public interface RqFallback extends Request {
         /**
          * Original request.
          */
-        private final transient Request request;
+        private final Request request;
         /**
          * HTTP status code.
          */
-        private final transient int status;
+        private final int status;
         /**
          * Throwable.
          */
-        private final transient Throwable err;
+        private final Throwable err;
         /**
          * Ctor.
          * @param code HTTP status code

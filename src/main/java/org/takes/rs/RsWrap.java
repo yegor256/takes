@@ -39,13 +39,13 @@ import org.takes.Response;
  * @since 0.1
  */
 @ToString(of = "origin")
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class RsWrap implements Response {
 
     /**
      * Original response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Ctor.

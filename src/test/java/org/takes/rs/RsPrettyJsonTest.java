@@ -26,7 +26,6 @@ package org.takes.rs;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -100,7 +99,6 @@ public final class RsPrettyJsonTest {
     @Test
     public void conformsToEqualsAndHashCode() throws Exception {
         EqualsVerifier.forClass(RsPrettyJson.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()
             .verify();
     }

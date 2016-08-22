@@ -52,18 +52,18 @@ import org.takes.rs.RsWithStatus;
  * @since 0.20
  */
 @ToString(of = { "origin", "allowed" })
-@EqualsAndHashCode(of = { "origin", "allowed" })
+@EqualsAndHashCode
 public final class TkCors implements Take {
 
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * List of allowed domains.
      */
-    private final transient Set<String> allowed;
+    private final Set<String> allowed;
 
     /**
      * Ctor.

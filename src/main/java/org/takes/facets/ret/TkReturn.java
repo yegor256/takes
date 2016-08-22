@@ -46,18 +46,18 @@ import org.takes.rs.RsWithCookie;
  * @since 0.20
  */
 @ToString(of = { "origin", "cookie" })
-@EqualsAndHashCode(of = { "origin", "cookie" })
+@EqualsAndHashCode
 public final class TkReturn implements Take {
 
     /**
      * Original take.
      */
-    private final transient Take origin;
+    private final Take origin;
 
     /**
      * Cookie name.
      */
-    private final transient String cookie;
+    private final String cookie;
 
     /**
      * Ctor.

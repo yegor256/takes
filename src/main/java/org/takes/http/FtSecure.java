@@ -41,13 +41,13 @@ import org.takes.Take;
  * @version $Id$
  * @since 0.25
  */
-@EqualsAndHashCode(of = { "front" })
+@EqualsAndHashCode
 public final class FtSecure implements Front {
 
     /**
      * The original front that is initialized with an SSLServerSocket.
      */
-    private final transient Front front;
+    private final Front front;
 
     /**
      * Ctor.

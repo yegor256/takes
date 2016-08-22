@@ -39,13 +39,13 @@ import org.takes.misc.Opt;
  * @since 0.13
  * @see org.takes.facets.fork.RsFork
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public class FkWrap implements Fork {
 
     /**
      * Original fork.
      */
-    private final transient Fork origin;
+    private final Fork origin;
 
     /**
      * Ctor.

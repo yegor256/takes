@@ -54,7 +54,7 @@ import org.takes.rs.RsWithHeader;
  * @version $Id$
  * @since 0.20
  */
-@EqualsAndHashCode(of = { "entry", "realm" })
+@EqualsAndHashCode
 @SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
@@ -66,12 +66,12 @@ public final class PsBasic implements Pass {
     /**
      * Entry to validate user information.
      */
-    private final transient PsBasic.Entry entry;
+    private final PsBasic.Entry entry;
 
     /**
      * Realm.
      */
-    private final transient String realm;
+    private final String realm;
 
     /**
      * Ctor.
@@ -162,7 +162,7 @@ public final class PsBasic implements Pass {
         /**
          * Should we authenticate a user?
          */
-        private final transient boolean condition;
+        private final boolean condition;
         /**
          * Ctor.
          * @param cond Condition
@@ -221,7 +221,7 @@ public final class PsBasic implements Pass {
         /**
          * Map from login/password pairs to URNs.
          */
-        private final transient Map<String, String> usernames;
+        private final Map<String, String> usernames;
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with

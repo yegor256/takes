@@ -38,18 +38,18 @@ import org.takes.misc.Utf8String;
  * @version $Id$
  * @since 0.1
  */
-@EqualsAndHashCode(of = { "origin", "secret" })
+@EqualsAndHashCode
 public final class CcXor implements Codec {
 
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Secret to use for encoding.
      */
-    private final transient byte[] secret;
+    private final byte[] secret;
 
     /**
      * Ctor.

@@ -36,13 +36,13 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.5
  */
-@EqualsAndHashCode(of = "origin")
+@EqualsAndHashCode
 public final class CcSafe implements Codec {
 
     /**
      * Original codec.
      */
-    private final transient Codec origin;
+    private final Codec origin;
 
     /**
      * Ctor.

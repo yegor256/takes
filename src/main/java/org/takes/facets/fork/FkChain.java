@@ -43,7 +43,7 @@ public final class FkChain implements Fork {
     /**
      * Forks.
      */
-    private final transient Collection<Fork> forks;
+    private final Collection<Fork> forks;
 
     /**
      * Ctor.

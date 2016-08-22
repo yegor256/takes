@@ -40,12 +40,12 @@ public final class EntryImpl<K, V> implements Map.Entry<K, V> {
     /**
      * Key.
      */
-    private final transient K key;
+    private final K key;
 
     /**
      * Value.
      */
-    private final transient V value;
+    private final V value;
 
     /**
      * Ctor.

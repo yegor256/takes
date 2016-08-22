@@ -41,13 +41,13 @@ import org.takes.misc.EnglishLowerCase;
  * @see org.takes.facets.fork.FkTypes
  */
 @ToString
-@EqualsAndHashCode(of = "list")
+@EqualsAndHashCode
 final class MediaTypes {
 
     /**
      * Set of types.
      */
-    private final transient SortedSet<MediaType> list;
+    private final SortedSet<MediaType> list;
 
     /**
      * Ctor.

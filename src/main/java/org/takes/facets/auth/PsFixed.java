@@ -37,13 +37,13 @@ import org.takes.misc.Opt;
  * @version $Id$
  * @since 0.9
  */
-@EqualsAndHashCode(of = "user")
+@EqualsAndHashCode
 public final class PsFixed implements Pass {
 
     /**
      * User to return always.
      */
-    private final transient Identity user;
+    private final Identity user;
 
     /**
      * Identity to return always.

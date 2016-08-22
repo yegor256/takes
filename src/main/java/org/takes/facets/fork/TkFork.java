@@ -64,13 +64,13 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fork.FkParams
  */
 @ToString(of = "forks")
-@EqualsAndHashCode(of = "forks")
+@EqualsAndHashCode
 public final class TkFork implements Take {
 
     /**
      * Patterns and their respective take.
      */
-    private final transient Collection<Fork> forks;
+    private final Collection<Fork> forks;
 
     /**
      * Ctor.
