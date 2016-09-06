@@ -78,5 +78,5 @@ There are 1 active puzzles (77 total):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>664-ddd2c9b3</del> [`RsXSLT.java:143-145`](../master/src/main/java/org/takes/rs/RsXSLT.java#L143-L145)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<del>667</del>](https://github.com/yegor256/takes/issues/667) [`?`](../master/?)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<del>667-ace435e8</del>](https://github.com/yegor256/takes/issues/687) [`RqForm.java:69-71`](../master/src/main/java/org/takes/rq/RqForm.java#L69-L71)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[#695](https://github.com/yegor256/takes/issues/695):[<del>687-65dc14c7</del>](https://github.com/yegor256/takes/issues/695) [`RqFormBase.java:56-58`](../master/src/main/java/org/takes/rq/form/RqFormBase.java#L56-L58)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>687-65dc14c7</del> [`RqFormBase.java:56-58`](../master/src/main/java/org/takes/rq/form/RqFormBase.java#L56-L58)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<del>687-875c0e1d</del> [`package-info.java:38-40`](../master/src/main/java/org/takes/rq/form/package-info.java#L38-L40)<br/>
