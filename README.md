@@ -271,7 +271,7 @@ new TkFork(
         final File file = new File(
           request.matcher().group("path")
         );
-        return new RsHTML(
+        return new RsHtml(
           FileUtils.readFileToString(file, Charsets.UTF_8)
         );
       }
@@ -508,7 +508,7 @@ public final class App {
             @Override
             public Iterator<Response> route(final RqFallback req) {
               return Collections.<Response>singleton(
-                new RsHTML("oops, something went terribly wrong!")
+                new RsH("oops, something went terribly wrong!")
               ).iterator();
             }
           }
