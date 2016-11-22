@@ -242,21 +242,21 @@
         </dependency>
     </dependencies>
     <build>
-		<testResources>
-        	<testResource>
-          		<filtering>true</filtering>
-          		<directory>${project.basedir}/src/test/resources</directory>
-          		<excludes>
-        			<exclude>org/takes/http/keystore</exclude>
-          		</excludes>
-        	</testResource>
-	    	<testResource>
-	      		<filtering>false</filtering>
-	      		<directory>${project.basedir}/src/test/resources</directory>
-	      		<includes>
-        			<include>org/takes/http/keystore</include>
-          		</includes>
-	    	</testResource>
+        <testResources>
+            <testResource>
+                <filtering>true</filtering>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <excludes>
+                    <exclude>org/takes/http/keystore</exclude>
+               </excludes>
+            </testResource>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <includes>
+                    <include>org/takes/http/keystore</include>
+                </includes>
+            </testResource>
         </testResources>
         <plugins>
             <plugin>
