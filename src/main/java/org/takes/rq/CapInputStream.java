@@ -60,10 +60,13 @@ final class CapInputStream extends InputStream {
 
     @Override
     public int available() throws IOException {
+        /*
         return (int) Math.min(
             (long) Integer.MAX_VALUE,
             Math.max((long) this.origin.available(), this.more)
         );
+        */
+        return (int) Math.min(this.origin.available(), this.more);
     }
 
     @Override
@@ -98,7 +101,13 @@ final class CapInputStream extends InputStream {
 
     @Override
     public long skip(final long num) throws IOException {
-        return this.origin.skip(num);
+        //return this.origin.skip(num);
+        /*
+        */
+        long skipped = this.origin.skip(num);
+        this.more -= skipped;
+        this.more = this.more < -1 ? 0 : this.more;
+        return skipped;
     }
 
     @Override

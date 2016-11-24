@@ -24,12 +24,21 @@
 
 package org.takes.tk;
 
-import java.io.IOException;
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import com.jcabi.http.wire.VerboseWire;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
 
 /**
  * Test case for {@link TkSlf4j}.
+ *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -39,6 +48,7 @@ public final class TkSlf4jTest {
 
     /**
      * TkSlf4j can log message.
+     *
      * @throws IOException If some problem inside
      */
     @Test
@@ -48,11 +58,37 @@ public final class TkSlf4jTest {
 
     /**
      * TkSlf4j can log exception.
+     *
      * @throws IOException If some problem inside
      */
     @Test(expected = IOException.class)
     public void logsException() throws IOException {
         new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
+    }
+
+    /**
+     * {@link TkSlf4j} can output an empty body for {@link TkEmpty}.
+     *
+     * @throws IOException if some I/O problem occurred.
+     */
+    @Test
+    public void testEmptyResponseBody() throws IOException {
+        new FtRemote(
+                new TkSlf4j(new TkEmpty())
+        ).exec(
+                new FtRemote.Script() {
+                    @Override
+                    public void exec(URI home) throws IOException {
+                        new JdkRequest(home)
+                                .method("POST")
+                                .body().set("test").back()
+                                .fetch()
+                                .as(RestResponse.class)
+                                .assertBody(new IsEqual<>(""))
+                                .assertStatus(HttpURLConnection.HTTP_OK);
+                    }
+                }
+        );
     }
 
 }
