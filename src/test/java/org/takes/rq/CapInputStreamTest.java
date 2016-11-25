@@ -45,7 +45,7 @@ public final class CapInputStreamTest {
      */
     @Test
     public void putsCapOnStream() throws IOException {
-        final byte[] bytes = "test1".getBytes();
+        final byte[] bytes = "putsCapOnStream".getBytes();
         MatcherAssert.assertThat(
             (long) new CapInputStream(
                 new ByteArrayInputStream(bytes),
@@ -68,13 +68,27 @@ public final class CapInputStreamTest {
     }
 
     /**
-     * CapInputStream can skip on a stream and
-     * decrease the available bytes after a skip call.
+     * CapInputStream can skip on a stream.
      * @throws IOException If some problem inside
      */
     @Test
-    public void skipsOnStreamAndDecreaseAvailable() throws IOException {
-        final byte[] bytes = "test2".getBytes();
+    public void skipsOnStream() throws IOException {
+        final byte[] bytes = "skipsOnStream".getBytes();
+        final CapInputStream input = new CapInputStream(
+            new ByteArrayInputStream(bytes),
+            bytes.length
+        );
+        final long skipped = input.skip(2);
+        MatcherAssert.assertThat(skipped, Matchers.equalTo(2L));
+    }
+
+    /**
+     * CapInputStream decreases the available bytes after a skip call.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void skipDecreaseAvailableBytes() throws IOException {
+        final byte[] bytes = "skipDecreaseAvailableBytes".getBytes();
         final CapInputStream input = new CapInputStream(
             new ByteArrayInputStream(bytes),
             bytes.length

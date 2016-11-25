@@ -38,7 +38,7 @@ import org.takes.rq.RqLengthAware;
  * <p>The class is immutable and thread-safe.
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
- * @since 0.43
+ * @since 1.1.1
  */
 public final class TkConsumeBody implements Take {
 

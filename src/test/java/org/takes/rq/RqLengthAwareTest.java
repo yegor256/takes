@@ -66,7 +66,7 @@ public final class RqLengthAwareTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void respectRealBodyLength() throws IOException {
+    public void respectsRealBodyLength() throws IOException {
         MatcherAssert.assertThat(
             new RqLengthAware(
                 new RqFake(

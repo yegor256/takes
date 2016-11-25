@@ -75,8 +75,8 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
-            InputStream input = socket.getInputStream();
-            BufferedOutputStream output = new BufferedOutputStream(
+            final InputStream input = socket.getInputStream();
+            final BufferedOutputStream output = new BufferedOutputStream(
                 socket.getOutputStream()
             )
         ) {
