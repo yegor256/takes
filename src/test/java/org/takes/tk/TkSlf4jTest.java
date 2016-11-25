@@ -70,7 +70,7 @@ public final class TkSlf4jTest {
      * @throws IOException if some I/O problem occurred.
      */
     @Test
-    public void testEmptyResponseBody() throws IOException {
+    public void outputsEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
         ).exec(
@@ -79,7 +79,7 @@ public final class TkSlf4jTest {
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
                         .method("POST")
-                        .body().set("testEmptyResponseBody").back()
+                        .body().set("outputsEmptyResponseBody").back()
                         .fetch()
                         .as(RestResponse.class)
                         .assertBody(Matchers.isEmptyOrNullString())
