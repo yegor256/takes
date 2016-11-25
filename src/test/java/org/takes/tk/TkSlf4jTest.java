@@ -41,8 +41,8 @@ import org.takes.rq.RqFake;
  * @version $Id$
  * @since 0.11.2
  * @todo #712:30min Refactor this class to reduce the data abstraction coupling
- * in order to get rid of the checkstyle suppression of
- * ClassDataAbstractionCouplingCheck.
+ *  in order to get rid of the checkstyle suppression of
+ *  ClassDataAbstractionCouplingCheck.
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkSlf4jTest {
@@ -67,7 +67,7 @@ public final class TkSlf4jTest {
 
     /**
      * {@link TkSlf4j} can output an empty body for {@link TkEmpty}.
-     * @throws IOException if some I/O problem occurred.
+     * @throws IOException if some I/O problem occurred
      */
     @Test
     public void outputsEmptyResponseBody() throws IOException {

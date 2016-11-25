@@ -69,26 +69,24 @@ public final class CapInputStreamTest {
 
     /**
      * CapInputStream can skip on a stream.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void skipsOnStream() throws IOException {
-        final byte[] bytes = "skipsOnStream".getBytes();
-        final CapInputStream input = new CapInputStream(
-            new ByteArrayInputStream(bytes),
-            bytes.length
-        );
-        final long skipped = input.skip(2);
-        MatcherAssert.assertThat(skipped, Matchers.equalTo(2L));
+    public void skipsOnStream() throws Exception {
+        final long skip = 25L;
+        final InputStream stream = Mockito.mock(InputStream.class);
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
+        wrapper.skip(skip);
+        Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
 
     /**
-     * CapInputStream decreases the available bytes after a skip call.
-     * @throws IOException If some problem inside
+     * CapInputStream can decrease the available bytes on a skip call.
+     * @throws Exception If some problem inside
      */
     @Test
-    public void skipDecreaseAvailableBytes() throws IOException {
-        final byte[] bytes = "skipDecreaseAvailableBytes".getBytes();
+    public void decreasesAvailableBytesOnSkip() throws Exception {
+        final byte[] bytes = "decreasesAvailableBytesOnSkip".getBytes();
         final CapInputStream input = new CapInputStream(
             new ByteArrayInputStream(bytes),
             bytes.length
