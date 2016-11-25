@@ -33,7 +33,6 @@ import org.mockito.Mockito;
 
 /**
  * Test case for {@link CapInputStream}.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.16
@@ -46,13 +45,13 @@ public final class CapInputStreamTest {
      */
     @Test
     public void putsCapOnStream() throws IOException {
-        final long length = 50L;
+        final byte[] bytes = "test1".getBytes();
         MatcherAssert.assertThat(
             (long) new CapInputStream(
-                new ByteArrayInputStream("test".getBytes()),
-                length
+                new ByteArrayInputStream(bytes),
+                bytes.length * 2
             ).available(),
-            Matchers.equalTo(length)
+            Matchers.equalTo((long) bytes.length)
         );
     }
 
@@ -69,16 +68,22 @@ public final class CapInputStreamTest {
     }
 
     /**
-     * CapInputStream can skip on a stream.
-     * @throws Exception If some problem inside
+     * CapInputStream can skip on a stream and
+     * decrease the available bytes after a skip call.
+     * @throws IOException If some problem inside
      */
     @Test
-    public void skipsOnStream() throws Exception {
-        final long skip = 25L;
-        final InputStream stream = Mockito.mock(InputStream.class);
-        final CapInputStream wrapper = new CapInputStream(stream, 50L);
-        wrapper.skip(skip);
-        Mockito.verify(stream, Mockito.times(1)).skip(skip);
+    public void skipsOnStreamAndDecreaseAvailable() throws IOException {
+        final byte[] bytes = "test2".getBytes();
+        final CapInputStream input = new CapInputStream(
+            new ByteArrayInputStream(bytes),
+            bytes.length
+        );
+        final long skipped = input.skip(2);
+        MatcherAssert.assertThat(
+            (long) input.available(),
+            Matchers.equalTo(bytes.length - skipped)
+        );
     }
 
 }

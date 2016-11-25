@@ -30,7 +30,6 @@ import java.io.InputStream;
  * Input stream with a cap.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
  * @since 0.16
@@ -60,12 +59,6 @@ final class CapInputStream extends InputStream {
 
     @Override
     public int available() throws IOException {
-        /*
-        return (int) Math.min(
-            (long) Integer.MAX_VALUE,
-            Math.max((long) this.origin.available(), this.more)
-        );
-        */
         return (int) Math.min(this.origin.available(), this.more);
     }
 
@@ -101,12 +94,11 @@ final class CapInputStream extends InputStream {
 
     @Override
     public long skip(final long num) throws IOException {
-        //return this.origin.skip(num);
-        /*
-        */
-        long skipped = this.origin.skip(num);
+        final long skipped = this.origin.skip(num);
         this.more -= skipped;
-        this.more = this.more < -1 ? 0 : this.more;
+        if (this.more < 0) {
+            this.more = 0;
+        }
         return skipped;
     }
 

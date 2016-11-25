@@ -26,19 +26,16 @@ package org.takes.tk;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import com.jcabi.http.wire.VerboseWire;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-
 /**
  * Test case for {@link TkSlf4j}.
- *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
@@ -48,17 +45,15 @@ public final class TkSlf4jTest {
 
     /**
      * TkSlf4j can log message.
-     *
      * @throws IOException If some problem inside
      */
     @Test
     public void logsMessage() throws IOException {
-        new TkSlf4j(new TkText("test")).act(new RqFake());
+        new TkSlf4j(new TkEmpty()).act(new RqFake());
     }
 
     /**
      * TkSlf4j can log exception.
-     *
      * @throws IOException If some problem inside
      */
     @Test(expected = IOException.class)
@@ -68,27 +63,34 @@ public final class TkSlf4jTest {
 
     /**
      * {@link TkSlf4j} can output an empty body for {@link TkEmpty}.
-     *
      * @throws IOException if some I/O problem occurred.
      */
     @Test
     public void testEmptyResponseBody() throws IOException {
         new FtRemote(
-                new TkSlf4j(new TkEmpty())
+            new TkSlf4j(new TkEmpty())
         ).exec(
-                new FtRemote.Script() {
-                    @Override
-                    public void exec(URI home) throws IOException {
-                        new JdkRequest(home)
-                                .method("POST")
-                                .body().set("test").back()
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertBody(new IsEqual<>(""))
-                                .assertStatus(HttpURLConnection.HTTP_OK);
-                    }
-                }
+            new FtRemoteScriptPost()
         );
+    }
+
+    /**
+     * {@link FtRemote.Script} that does a POST request with a "test" body.
+     * @author Rui Castro (rui.castro@gmail.com)
+     * @version $Id$
+     * @since 0.43
+     */
+    private class FtRemoteScriptPost implements FtRemote.Script {
+        @Override
+        public void exec(final URI home) throws IOException {
+            new JdkRequest(home)
+                .method("POST")
+                .body().set("test").back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertBody(new IsEqual<>(""))
+                .assertStatus(HttpURLConnection.HTTP_OK);
+        }
     }
 
 }

@@ -49,12 +49,11 @@ import org.takes.tk.TkConsumeBody;
  * Basic back-end.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
+ * @since 0.1
  */
 @EqualsAndHashCode
 public final class BkBasic implements Back {
@@ -72,12 +71,12 @@ public final class BkBasic implements Back {
         this.take = new TkConsumeBody(tks);
     }
 
-    @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
-            final InputStream input = socket.getInputStream();
-            final BufferedOutputStream output = new BufferedOutputStream(
+            InputStream input = socket.getInputStream();
+            BufferedOutputStream output = new BufferedOutputStream(
                 socket.getOutputStream()
             )
         ) {
