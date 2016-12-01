@@ -43,7 +43,7 @@ import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
-import org.takes.tk.TkConsumeBody;
+import org.takes.tk.TkReadAlways;
 
 /**
  * Basic back-end.
@@ -68,7 +68,7 @@ public final class BkBasic implements Back {
      * @param tks Take
      */
     public BkBasic(final Take tks) {
-        this.take = new TkConsumeBody(tks);
+        this.take = new TkReadAlways(tks);
     }
 
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
