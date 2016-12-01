@@ -59,7 +59,7 @@ final class CapInputStream extends InputStream {
 
     @Override
     public int available() throws IOException {
-        return (int) Math.min(this.origin.available(), this.more);
+        return (int) Math.min((long) this.origin.available(), this.more);
     }
 
     @Override
