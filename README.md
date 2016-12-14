@@ -14,6 +14,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![Dependencies](https://www.versioneye.com/user/projects/561a9c5ca193340f2f00110d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/561a9c5ca193340f2f00110d)
+[![PDD status](http://www.0pdd.com/svg?name=yegor256/takes)](http://www.0pdd.com/p?name=yegor256/takes)
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
