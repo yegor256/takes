@@ -48,11 +48,11 @@ public final class CapInputStreamTest {
     public void putsCapOnStream() throws IOException {
         final byte[] bytes = "test1".getBytes();
         MatcherAssert.assertThat(
-            (long) new CapInputStream(
+            new CapInputStream(
                 new ByteArrayInputStream(bytes),
                 bytes.length * 2
             ).available(),
-            Matchers.equalTo((long) bytes.length)
+            Matchers.equalTo(bytes.length)
         );
     }
 
