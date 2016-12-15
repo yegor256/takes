@@ -1,7 +1,7 @@
 assets:
-  settings.xml: yegor256/home#assets/takes/settings.xml
-  pubring.gpg: yegor256/home#assets/pubring.gpg
-  secring.gpg: yegor256/home#assets/secring.gpg
+  settings.xml: teamed/home#assets/takes/settings.xml
+  pubring.gpg: teamed/home#assets/pubring.gpg
+  secring.gpg: teamed/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
@@ -59,8 +59,6 @@ deploy:
     done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
-    pdd --source=$(pwd) --verbose --file=takes.xml
-    s3cmd --no-progress put takes.xml --config=../s3cfg s3://pdd.teamed.io/takes.xml
     est --dir=./est --verbose --file=takes.xml --format=xml
     s3cmd --no-progress put takes.xml --config=../s3cfg s3://est.teamed.io/takes.xml
 release:
