@@ -1,8 +1,8 @@
 assets:
-  settings.xml: teamed/home#assets/takes/settings.xml
-  pubring.gpg: teamed/home#assets/pubring.gpg
-  secring.gpg: teamed/home#assets/secring.gpg
-  s3cfg: yegor256/home#assets/s3cfg
+  settings.xml: zerocracy/home#assets/takes/settings.xml
+  pubring.gpg: zerocracy/home#assets/pubring.gpg
+  secring.gpg: zerocracy/home#assets/secring.gpg
+  s3cfg: zerocracy/home#assets/s3cfg
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 env:
