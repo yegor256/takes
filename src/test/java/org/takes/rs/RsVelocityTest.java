@@ -25,6 +25,8 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -75,5 +77,21 @@ public final class RsVelocityTest {
             Matchers.equalTo(template)
         );
         MatcherAssert.assertThat(stream.isClosed(), Matchers.is(true));
+    }
+
+    /**
+     * RsVelocity should use template's folder to load macros defined in different files.
+     */
+    @Test
+    public void useTemplateFolder() throws IOException {
+        MatcherAssert.assertThat(
+                IOUtils.toString(
+                        new RsVelocity(new RsVelocity.TemplateFolder(RsVelocityTest.class.getResource("/vtl").getPath()),
+                                RsVelocityTest.class.getResourceAsStream("/vtl/simple.vm"),
+                                new HashMap<CharSequence, Object>()
+                        ).body()
+                ),
+                Matchers.equalTo("Hello World!\n")
+        );
     }
 }

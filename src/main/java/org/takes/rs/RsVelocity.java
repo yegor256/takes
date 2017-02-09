@@ -23,11 +23,7 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Writer;
+import java.io.*;
 import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -111,33 +107,43 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
-     * @param tpl Template
+     * @param template Template
      * @param params Map of params
      */
-    public RsVelocity(final InputStream tpl, final Map<CharSequence,
+    public RsVelocity(final InputStream template, final Map<CharSequence,
         Object> params) {
+        this(new TemplateFolder(),template,params);
+    }
+    /**
+     * Ctor.
+     * @param templateFolder Template folder
+     * @param template Template
+     * @param params Map of params
+     */
+    public RsVelocity(final TemplateFolder templateFolder, final InputStream template, final Map<CharSequence,
+            Object> params) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return new RsEmpty().head();
+                new Response() {
+                    @Override
+                    public Iterable<String> head() {
+                        return new RsEmpty().head();
+                    }
+                    @Override
+                    public InputStream body() throws IOException {
+                        return RsVelocity.render(templateFolder, template, params);
+                    }
                 }
-                @Override
-                public InputStream body() throws IOException {
-                    return RsVelocity.render(tpl, params);
-                }
-            }
         );
     }
 
     /**
      * Render it.
-     * @param page Page template
+     * @param template Page template
      * @param params Params for velocity
      * @return Page body
      * @throws IOException If fails
      */
-    private static InputStream render(final InputStream page,
+    private static InputStream render(final TemplateFolder templateFolder,final InputStream template,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer = new Utf8OutputStreamWriter(baos);
@@ -148,13 +154,13 @@ public final class RsVelocity extends RsWrap {
         );
         engine.setProperty(
                 "file.resource.loader.path",
-                RsVelocity.class.getResource("/vtl").getPath()
+                templateFolder.path()
         );
         engine.evaluate(
             new VelocityContext(params),
             writer,
             "",
-            new Utf8InputStreamReader(page)
+            new Utf8InputStreamReader(template)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());
@@ -191,6 +197,47 @@ public final class RsVelocity extends RsWrap {
          */
         public Pair(final CharSequence key, final Object obj) {
             super(key, obj);
+        }
+    }
+
+    /**
+     * Template folder.
+     */
+    public static final class TemplateFolder {
+
+        private final File folder;
+
+        /**
+         * Ctor.
+         * With default folder name "."
+         */
+        public TemplateFolder() {
+            this(".");
+        }
+
+        /**
+         * Ctor.
+         *
+         * @param folderName Folder name
+         */
+        public TemplateFolder(final String folderName) {
+            this(new File(folderName));
+        }
+
+        /**
+         * Ctor.
+         *
+         * @param folder Folder
+         */
+        public TemplateFolder(final File folder) {
+            if (folder.isFile()) {
+                throw new IllegalArgumentException("Must be a folder!");
+            }
+            this.folder = folder;
+        }
+
+        public String path() {
+            return folder.getPath();
         }
     }
 }
