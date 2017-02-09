@@ -894,6 +894,7 @@ You are free to use any build tool, but we recommend Maven. This is how your pro
     /scss
     /coffeescript
     /resources
+      /vtl
       /xsl
       /js
       /css

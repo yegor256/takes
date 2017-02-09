@@ -146,6 +146,10 @@ public final class RsVelocity extends RsWrap {
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
             new NullLogChute()
         );
+        engine.setProperty(
+                "file.resource.loader.path",
+                RsVelocity.class.getResource("/vtl").getPath()
+        );
         engine.evaluate(
             new VelocityContext(params),
             writer,
