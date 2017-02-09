@@ -23,7 +23,11 @@
  */
 package org.takes.rs;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
 import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -112,38 +116,40 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final InputStream template, final Map<CharSequence,
         Object> params) {
-        this(new TemplateFolder(),template,params);
+        this(new TemplateFolder("."), template, params);
     }
     /**
      * Ctor.
-     * @param templateFolder Template folder
+     * @param folder Template folder
      * @param template Template
      * @param params Map of params
      */
-    public RsVelocity(final TemplateFolder templateFolder, final InputStream template, final Map<CharSequence,
-            Object> params) {
+    public RsVelocity(final TemplateFolder folder,
+        final InputStream template, final Map<CharSequence, Object> params) {
         super(
-                new Response() {
-                    @Override
-                    public Iterable<String> head() {
-                        return new RsEmpty().head();
-                    }
-                    @Override
-                    public InputStream body() throws IOException {
-                        return RsVelocity.render(templateFolder, template, params);
-                    }
+            new Response() {
+                @Override
+                public Iterable<String> head() {
+                    return new RsEmpty().head();
                 }
+                @Override
+                public InputStream body() throws IOException {
+                    return RsVelocity.render(folder, template, params);
+                }
+            }
         );
     }
 
     /**
      * Render it.
+     * @param folder Template folder
      * @param template Page template
      * @param params Params for velocity
      * @return Page body
      * @throws IOException If fails
      */
-    private static InputStream render(final TemplateFolder templateFolder,final InputStream template,
+    private static InputStream render(final TemplateFolder folder,
+        final InputStream template,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer = new Utf8OutputStreamWriter(baos);
@@ -153,8 +159,8 @@ public final class RsVelocity extends RsWrap {
             new NullLogChute()
         );
         engine.setProperty(
-                "file.resource.loader.path",
-                templateFolder.path()
+            "file.resource.loader.path",
+            folder.path()
         );
         engine.evaluate(
             new VelocityContext(params),
@@ -205,39 +211,25 @@ public final class RsVelocity extends RsWrap {
      */
     public static final class TemplateFolder {
 
-        private final File folder;
+        /**
+         * Template folder location.
+         */
+        private final String folder;
 
         /**
          * Ctor.
-         * With default folder name "."
+         * @param folder Template folder
          */
-        public TemplateFolder() {
-            this(".");
-        }
-
-        /**
-         * Ctor.
-         *
-         * @param folderName Folder name
-         */
-        public TemplateFolder(final String folderName) {
-            this(new File(folderName));
-        }
-
-        /**
-         * Ctor.
-         *
-         * @param folder Folder
-         */
-        public TemplateFolder(final File folder) {
-            if (folder.isFile()) {
-                throw new IllegalArgumentException("Must be a folder!");
-            }
+        public TemplateFolder(final String folder) {
             this.folder = folder;
         }
 
+        /**
+         * Template folder.
+         * @return The template folder location
+         */
         public String path() {
-            return folder.getPath();
+            return this.folder;
         }
     }
 }
