@@ -42,7 +42,7 @@ import org.takes.rq.RqFake;
  * @version $Id$
  * @since 0.11.2
  * @todo #712:30min Prepare implementation for empty response body test and
- *  unignore testEmptyResponseBody test to fix error reported in #712.
+ *  unignore returnsAnEmptyResponseBody test to fix error reported in #712.
  * @todo #712:30min Refactor this class to reduce the data abstraction coupling
  *  in order to get rid of the checkstyle suppression of
  *  ClassDataAbstractionCouplingCheck.
@@ -69,12 +69,12 @@ public final class TkSlf4jTest {
     }
 
     /**
-     * {@link TkSlf4j} can output an empty body for {@link TkEmpty}.
+     * {@link TkSlf4j} can return an empty response body for {@link TkEmpty}.
      * @throws IOException if some I/O problem occurred.
      */
     @Ignore
     @Test
-    public void testEmptyResponseBody() throws IOException {
+    public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
         ).exec(
@@ -83,7 +83,7 @@ public final class TkSlf4jTest {
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
                         .method("POST")
-                        .body().set("returnsEmptyResponseBody").back()
+                        .body().set("returnsAnEmptyResponseBody").back()
                         .fetch()
                         .as(RestResponse.class)
                         .assertBody(new IsEqual<>(""))
