@@ -24,14 +24,11 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqChunk;
-import org.takes.rq.RqLengthAware;
 
 /**
  * A Take decorator which reads and ignores the request body.
@@ -61,12 +58,10 @@ public final class TkReadAlways implements Take {
 
     @Override
     public Response act(final Request req) throws IOException {
-        final Request reqsafe = new RqChunk(new RqLengthAware(req));
-        final Response res = this.origin.act(reqsafe);
-        final InputStream body = reqsafe.body();
-        for (int count = body.available(); count > 0;
-            count = body.available()) {
-            if (body.skip((long) count) < (long) count) {
+        final Response res = this.origin.act(req);
+        for (int count = req.body().available(); count > 0;
+            count = req.body().available()) {
+            if (req.body().skip((long) count) < (long) count) {
                 break;
             }
         }

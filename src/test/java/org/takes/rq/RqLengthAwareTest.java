@@ -62,12 +62,11 @@ public final class RqLengthAwareTest {
     }
 
     /**
-     * RqLengthAware can respect the real body length over
-     * "Content-Length" value.
+     * RqLengthAware can add BIG length to body.
      * @throws IOException If some problem inside
      */
     @Test
-    public void respectsRealBodyLength() throws IOException {
+    public void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
             new RqLengthAware(
                 new RqFake(
@@ -80,7 +79,7 @@ public final class RqLengthAwareTest {
                     "HI"
                 )
             ).body().available(),
-            Matchers.equalTo(2)
+            Matchers.equalTo(Integer.MAX_VALUE)
         );
     }
 
