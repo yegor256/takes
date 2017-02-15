@@ -87,11 +87,9 @@ public final class RsVelocityTest {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
-                    new RsVelocity.TemplateFolder(
-                        RsVelocityTest.class.getResource(
-                            "/vtl"
-                        ).getPath()
-                    ),
+                    RsVelocityTest.class.getResource(
+                        "/vtl"
+                    ).getPath(),
                     RsVelocityTest.class.getResourceAsStream(
                         "/vtl/simple.vm"
                     ),

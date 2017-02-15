@@ -116,7 +116,7 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final InputStream template, final Map<CharSequence,
         Object> params) {
-        this(new TemplateFolder("."), template, params);
+        this(".", template, params);
     }
     /**
      * Ctor.
@@ -124,7 +124,7 @@ public final class RsVelocity extends RsWrap {
      * @param template Template
      * @param params Map of params
      */
-    public RsVelocity(final TemplateFolder folder,
+    public RsVelocity(final String folder,
         final InputStream template, final Map<CharSequence, Object> params) {
         super(
             new Response() {
@@ -148,7 +148,7 @@ public final class RsVelocity extends RsWrap {
      * @return Page body
      * @throws IOException If fails
      */
-    private static InputStream render(final TemplateFolder folder,
+    private static InputStream render(final String folder,
         final InputStream template,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -160,7 +160,7 @@ public final class RsVelocity extends RsWrap {
         );
         engine.setProperty(
             "file.resource.loader.path",
-            folder.path()
+            folder
         );
         engine.evaluate(
             new VelocityContext(params),
@@ -206,30 +206,4 @@ public final class RsVelocity extends RsWrap {
         }
     }
 
-    /**
-     * Template folder.
-     */
-    public static final class TemplateFolder {
-
-        /**
-         * Template folder location.
-         */
-        private final String folder;
-
-        /**
-         * Ctor.
-         * @param folder Template folder
-         */
-        public TemplateFolder(final String folder) {
-            this.folder = folder;
-        }
-
-        /**
-         * Template folder.
-         * @return The template folder location
-         */
-        public String path() {
-            return this.folder;
-        }
-    }
 }
