@@ -69,7 +69,7 @@ public final class TkSlf4jTest {
     }
 
     /**
-     * {@link TkSlf4j} can return an empty response body for {@link TkEmpty}.
+     * TkSlf4j can return an empty response body for {@link TkEmpty}.
      * @throws IOException if some I/O problem occurred.
      */
     @Ignore
