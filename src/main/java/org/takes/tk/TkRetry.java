@@ -67,8 +67,7 @@ public final class TkRetry implements Take {
      * @param wait Time between retries
      * @param original Original take
      */
-    public TkRetry(final int retries, final int
-        wait, final Take original) {
+    public TkRetry(final int retries, final int wait, final Take original) {
         this.count = retries;
         this.delay = wait;
         this.take = original;
