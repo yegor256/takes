@@ -945,6 +945,22 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
+For Eclipse users, in order to generate Eclipse metadata (.settings, .classpath and .project files), execute:
+
+```
+$ mvn eclipse:clean eclipse:eclipse
+```
+
+Once complete, you may then import the project into the Eclipse IDE as usual:
+
+ *File -> Import -> Existing projects into workspace*
+
+Browse to the *'takes'* root directory. The project should be easy to import free from errors.
+
+As the project dependencies get updated from time to time in the `pom.xml` file, Eclipse generates errors as it is
+unable to reference the appropriate JAR's in the IDE classpath with those newly added in the ```.m2``` repository.
+To resolve this issue, just execute the Maven Eclipse command again and then refresh or rebuild your project in the IDE.
+
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
