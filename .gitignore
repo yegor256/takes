@@ -1,7 +1,10 @@
 target/
 .idea/
 *.iml
+local-repo/
+/bin
 .DS_Store
 .classpath
 .project
 .settings
+.wtpmodules
