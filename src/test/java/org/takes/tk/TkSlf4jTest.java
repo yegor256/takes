@@ -42,7 +42,8 @@ import org.takes.rq.RqFake;
  * @version $Id$
  * @since 0.11.2
  * @todo #712:30min Prepare implementation for empty response body test and
- *  unignore returnsAnEmptyResponseBody test to fix error reported in #712.
+ *  unignore returnsAnEmptyResponseBody test to fix such error which was
+ *  reported in #712.
  * @todo #712:30min Refactor this class to reduce the data abstraction coupling
  *  in order to get rid of the checkstyle suppression of
  *  ClassDataAbstractionCouplingCheck.
