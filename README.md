@@ -535,7 +535,7 @@ illustrates both methods:
 public final class TkPostMessage implements Take {
   @Override
   public Response act(final Request req) {
-    final String body = new RqPring(req).printBody();
+    final String body = new RqPrint(req).printBody();
     if (body.isEmpty()) {
       throw new RsForward(
         new RsFlash("message can't be empty")
