@@ -43,17 +43,17 @@ import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
+import org.takes.tk.TkReadAlways;
 
 /**
  * Basic back-end.
  *
  * <p>The class is immutable and thread-safe.
- *
  * @author Yegor Bugayenko (yegor@teamed.io)
  * @version $Id$
- * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle IndentationCheck (500 lines)
+ * @since 0.1
  */
 @EqualsAndHashCode
 public final class BkBasic implements Back {
@@ -68,10 +68,10 @@ public final class BkBasic implements Back {
      * @param tks Take
      */
     public BkBasic(final Take tks) {
-        this.take = tks;
+        this.take = new TkReadAlways(tks);
     }
 
-    @SuppressWarnings ("PMD.AvoidInstantiatingObjectsInLoops")
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
