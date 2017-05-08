@@ -41,13 +41,13 @@ public final class HrefTest {
     @Test
     public void buildsUri() {
         MatcherAssert.assertThat(
-            new Href("http://example.com?a=8&b=9")
-                .with("a", "hello")
+            new Href("http://example.com?%D0%B0=8&b=9")
+                .with("д", "hello")
                 // @checkstyle MultipleStringLiteralsCheck (1 line)
                 .without("b")
                 .with("b", "test")
                 .toString(),
-            Matchers.equalTo("http://example.com/?a=8&a=hello&b=test")
+            Matchers.equalTo("http://example.com/?b=test&%D0%B0=8&%D0%B4=hello")
         );
     }
 
@@ -57,8 +57,8 @@ public final class HrefTest {
     @Test
     public void buildsUriFromEmpty() {
         MatcherAssert.assertThat(
-            new Href().path("boom-4").with("f1", "").toString(),
-            Matchers.equalTo("/boom-4?f1")
+            new Href().path("boom-4").with("д", "").toString(),
+            Matchers.equalTo("/boom-4?%D0%B4")
         );
     }
 
@@ -80,12 +80,12 @@ public final class HrefTest {
     @Test
     public void addsPath() {
         MatcherAssert.assertThat(
-            new Href("http://example.com").path("c").path("d").toString(),
-            Matchers.equalTo("http://example.com/c/d")
+            new Href("http://example.com").path("д").path("d").toString(),
+            Matchers.equalTo("http://example.com/%D0%B4/d")
         );
         MatcherAssert.assertThat(
-            new Href("http://example.com/").path("e").path("f").toString(),
-            Matchers.equalTo("http://example.com/e/f")
+            new Href("http://example.com/").path("а").path("f").toString(),
+            Matchers.equalTo("http://example.com/%D0%B0/f")
         );
     }
 
@@ -98,6 +98,10 @@ public final class HrefTest {
         MatcherAssert.assertThat(
             new Href(url).toString(),
             Matchers.equalTo(url)
+        );
+        MatcherAssert.assertThat(
+            new Href(url).param("file").iterator().next(),
+            Matchers.equalTo("[]().txt")
         );
     }
 
