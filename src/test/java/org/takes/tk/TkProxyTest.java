@@ -135,6 +135,7 @@ public final class TkProxyTest {
     /**
      * TkProxy can correctly maps path string.
      * @throws Exception If some problem inside
+     * @checkstyle AnonInnerLengthCheck (100 lines)
      */
     @Test
     public void correctlyMapsPathString() throws Exception {
@@ -156,13 +157,14 @@ public final class TkProxyTest {
                         new RsPrint(
                             new TkProxy(home).act(
                                 new RqFake(
-                                    TkProxyTest.this.method, "/a/b/c?h=1#test"
+                                    TkProxyTest.this.method,
+                                    "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
                                 )
                             )
                         ).printBody(),
                         Matchers.equalTo(
                             String.format(
-                                "http://%s:%d/a/b/c?h=1",
+                                "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
                                 home.getHost(), home.getPort()
                             )
                         )
@@ -194,7 +196,7 @@ public final class TkProxyTest {
                             new RqFake(
                                 Arrays.asList(
                                     String.format(
-                                        "%s /f?a=3&b-6",
+                                        "%s /f?%%D0%%B0=3&b-6",
                                         TkProxyTest.this.method
                                     ),
                                     "Host: example.com",
@@ -241,7 +243,7 @@ public final class TkProxyTest {
                             new RqFake(
                                 Arrays.asList(
                                     String.format(
-                                        "%s /hello",
+                                        "%s /%%D0%%B0",
                                         TkProxyTest.this.method
                                     ),
                                     "Host: www.bar.com"
@@ -252,7 +254,7 @@ public final class TkProxyTest {
                         Matchers.containsString(
                             String.format(
                                 // @checkstyle LineLengthCheck (1 line)
-                                "X-Takes-TkProxy: from /hello to %s/hello by %s",
+                                "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
                                 home,
                                 mark
                             )
@@ -284,7 +286,7 @@ public final class TkProxyTest {
                             new TkProxy(home).act(
                                 new RqFake(
                                     Arrays.asList(
-                                        "POST /world",
+                                        "POST /%D0%B0",
                                         String.format(
                                             "Content-Length: %s",
                                             body.length()

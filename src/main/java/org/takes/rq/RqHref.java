@@ -71,8 +71,7 @@ public interface RqHref extends Request {
 
         @Override
         public Href href() throws IOException {
-            final String uri = new RqRequestLine.Base(this)
-                .uri();
+            final String uri = new RqRequestLine.Base(this).uri();
             return new Href(
                 String.format(
                     "http://%s%s",
