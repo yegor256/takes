@@ -35,7 +35,7 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link RsFork}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.6
  */

@@ -41,7 +41,7 @@ import org.takes.rq.RqMethod;
  * <p>The class is immutable and thread-safe.
  *
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.11.2
  */

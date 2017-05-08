@@ -145,7 +145,7 @@
  * <p>Don't forget that the cookie you receive is not just a flash message,
  * but also other parameters, URL-encoded and separated by "slash".</p>
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.1
  */

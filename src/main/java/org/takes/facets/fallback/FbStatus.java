@@ -40,7 +40,7 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @version $Id$
  * @since 0.13

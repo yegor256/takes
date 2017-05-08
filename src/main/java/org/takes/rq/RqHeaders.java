@@ -45,7 +45,7 @@ import org.takes.misc.VerboseList;
  * <p>All implementations of this interface must be immutable and
  * thread-safe.</p>
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.1
  */
@@ -167,7 +167,7 @@ public interface RqHeaders extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @author Yegor Bugayenko (yegor256@gmail.com)
      * @since 0.16
      */
     @EqualsAndHashCode

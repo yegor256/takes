@@ -31,7 +31,7 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqOnce}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.26
  */

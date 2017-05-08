@@ -52,7 +52,7 @@ import org.takes.rq.RqHeaders;
  * in any case.
  *
  * <p>The class is immutable and thread-safe.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @see org.takes.facets.fork.RsFork
  * @since 0.10

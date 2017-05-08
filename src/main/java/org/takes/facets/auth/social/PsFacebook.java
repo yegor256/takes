@@ -53,7 +53,7 @@ import org.takes.rq.RqHref;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.5
  * @checkstyle MultipleStringLiteralsCheck (500 lines)

@@ -45,7 +45,7 @@ import org.takes.rq.RqHeaders;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @see TkFork
  * @since 0.32

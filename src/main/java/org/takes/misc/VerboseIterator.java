@@ -29,7 +29,7 @@ import java.util.NoSuchElementException;
 /**
  * Verbose iterator.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @param <T> Type of item
  * @since 0.10

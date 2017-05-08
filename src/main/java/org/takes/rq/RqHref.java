@@ -37,7 +37,7 @@ import org.takes.misc.Href;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.9
  */
@@ -90,7 +90,7 @@ public interface RqHref extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Yegor Bugayenko (yegor@teamed.io)
+     * @author Yegor Bugayenko (yegor256@gmail.com)
      * @since 0.14
      */
     @EqualsAndHashCode

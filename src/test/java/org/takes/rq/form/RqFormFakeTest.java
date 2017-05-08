@@ -34,7 +34,7 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormFake}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @author Rui Castro (rui.castro@gmail.com)
  * @version $Id$
  * @since 0.33

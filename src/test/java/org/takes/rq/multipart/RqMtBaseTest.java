@@ -36,7 +36,7 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link RqMtBase}.
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.33
  * @checkstyle MultipleStringLiteralsCheck (500 lines)

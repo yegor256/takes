@@ -76,7 +76,7 @@
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
  * convert them to responses.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.1
  */

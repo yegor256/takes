@@ -33,7 +33,7 @@
  * working with the framework, check out our introduction page in Github:
  * <a href="https://github.com/yegor256/take">README</a>.
  *
- * @author Yegor Bugayenko (yegor@teamed.io)
+ * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.1
  * @see <a href="http://www.takes.org">project site www.takes.org</a>
