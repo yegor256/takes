@@ -44,7 +44,6 @@ merge:
   - krzyk
   - longtimeago
   - mkordas
-  - original-brownbear
   - pinaf
 deploy:
   script: |
