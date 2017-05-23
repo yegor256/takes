@@ -37,6 +37,48 @@ import org.junit.Test;
  */
 @Ignore
 public final class Base64Test {
+	/**
+     * Base64 can encode a String.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void encodeThreeString() throws IOException {
+        MatcherAssert.assertThat(
+            new String(
+                new Base64().encode("Pia")
+            ),
+            Matchers.equalTo("UGlh")
+        );
+    }
+
+    /**
+     * Base64 can encode a String.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void encodeFourString() throws IOException {
+        MatcherAssert.assertThat(
+            new String(
+                new Base64().encode("Pian")
+            ),
+            Matchers.equalTo("UGlhbg==")
+        );
+    }
+
+    /**
+     * Base64 can encode a String.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void encodeFiveString() throws IOException {
+        MatcherAssert.assertThat(
+            new String(
+                new Base64().encode("Piano")
+            ),
+            Matchers.equalTo("UGlhbm8=")
+        );
+    }
+
     /**
      * Base64 can encode a String.
      * @throws IOException If some problem inside

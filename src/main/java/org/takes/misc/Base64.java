@@ -88,15 +88,15 @@ public final class Base64 {
 		final StringBuilder padding = new StringBuilder();
 
 		int c = input.length % 3;
-		final ByteBuffer bb = ByteBuffer.allocate(input.length + c);
-		bb.put(input);
 
 		if (c > 0) {
 			for (; c < 3; c++) {
 				padding.append("=");
-				bb.putChar('\0');
 			}
 		}
+
+		final ByteBuffer bb = ByteBuffer.allocate(input.length + padding.length());
+		bb.put(input);
 
 		final byte[] bytes = bb.array();
 
