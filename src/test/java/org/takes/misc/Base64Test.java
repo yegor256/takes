@@ -37,6 +37,31 @@ import org.junit.Test;
  */
 @Ignore
 public final class Base64Test {
+
+    /**
+     * A short text to encode with Base64.
+     */
+    private static final String SHORTTEXT =
+        "We didn't start the fire!";
+    /**
+     * The corresponding short Base64 key.
+     */
+    private static final String SHORTKEY =
+        "V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==";
+    /**
+     * A long text that ensures a linebreak in the key.
+     * @checkstyle LineLength (3 lines)
+     */
+    private static final String LONGTEXT =
+        "We didn't start the fire, it was always burning, since the world's been turning.";
+    /**
+     * The corresponding key.
+     * @checkstyle LineLength (4 lines)
+     * @checkstyle StringLiteralsConcatenation (3 lines)
+     */
+    private static final String LONGKEY =
+        "V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlLCBpdCB3YXMgYWx3YXlzIGJ1cm5pbmcsIHNpbmNlIHR" + System.lineSeparator() + "oZSB3b3JsZCdzIGJlZW4gdHVybmluZy4=";
+
     /**
      * Base64 can encode a String.
      * @throws IOException If some problem inside
@@ -87,9 +112,9 @@ public final class Base64Test {
     public void encodeString() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().encode("We didn't start the fire!")
+                new Base64().encode(Base64Test.SHORTTEXT)
             ),
-            Matchers.equalTo("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==")
+            Matchers.equalTo(Base64Test.SHORTKEY)
         );
     }
 
@@ -101,9 +126,9 @@ public final class Base64Test {
     public void encodeByteArray() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().encode("We didn't start the fire!".getBytes())
+                new Base64().encode(Base64Test.SHORTTEXT.getBytes())
             ),
-            Matchers.equalTo("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==")
+            Matchers.equalTo(Base64Test.SHORTKEY)
         );
     }
 
@@ -115,9 +140,9 @@ public final class Base64Test {
     public void decodeString() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().decode("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==")
+                new Base64().decode(Base64Test.SHORTKEY)
             ),
-            Matchers.equalTo("We didn't start the fire!")
+            Matchers.equalTo(Base64Test.SHORTTEXT)
         );
     }
 
@@ -130,9 +155,9 @@ public final class Base64Test {
         MatcherAssert.assertThat(
             new String(
                 new Base64()
-                    .decode("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==".getBytes())
+                    .decode(Base64Test.SHORTKEY.getBytes())
             ),
-            Matchers.equalTo("We didn't start the fire!")
+            Matchers.equalTo(Base64Test.SHORTTEXT)
         );
     }
 
@@ -142,21 +167,12 @@ public final class Base64Test {
      */
     @Test
     public void encodeWithLineBreaks() throws IOException {
-        final StringBuilder longtext = new StringBuilder();
-        longtext.append("We didn't start the fire, ");
-        longtext.append("it was always burning, ");
-        longtext.append("since the world's been turning.");
-        final StringBuilder longkey = new StringBuilder();
-        longkey.append("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlLCB");
-        longkey.append("pdCB3YXMgYWx3YXlzIGJ1cm5pbmcsIHNpbmNlIHR");
-        longkey.append(System.lineSeparator());
-        longkey.append("oZSB3b3JsZCdzIGJlZW4gdHVybmluZy4=");
         MatcherAssert.assertThat(
             new String(
                 new Base64()
-                    .encode(longtext.toString(), true)
+                    .encode(Base64Test.LONGTEXT, true)
             ),
-            Matchers.equalTo(longkey.toString())
+            Matchers.equalTo(Base64Test.LONGKEY)
         );
     }
 
@@ -166,20 +182,11 @@ public final class Base64Test {
      */
     @Test
     public void decodeWithLineBreaks() throws IOException {
-        final StringBuilder longtext = new StringBuilder();
-        longtext.append("We didn't start the fire, ");
-        longtext.append("it was always burning, ");
-        longtext.append("since the world's been turning.");
-        final StringBuilder longkey = new StringBuilder();
-        longkey.append("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlLCB");
-        longkey.append("pdCB3YXMgYWx3YXlzIGJ1cm5pbmcsIHNpbmNlIHR");
-        longkey.append(System.lineSeparator());
-        longkey.append("oZSB3b3JsZCdzIGJlZW4gdHVybmluZy4=");
         MatcherAssert.assertThat(
             new String(
-                new Base64().decode(longkey.toString())
+                new Base64().decode(Base64Test.LONGKEY)
             ),
-            Matchers.equalTo(longtext.toString())
+            Matchers.equalTo(Base64Test.LONGTEXT)
         );
     }
 }
