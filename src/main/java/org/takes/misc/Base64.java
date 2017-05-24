@@ -37,140 +37,139 @@ import java.nio.ByteBuffer;
  */
 public final class Base64 {
 
-	private final static String base64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    /**
+     * All legal Base64 chars.
+     */
+    private final String basechars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-	/**
-	 * Base64-encode the input string.
-	 * This is the same as {@code encode(input, false)}.
-	 * 
-	 * @param input The value to be encoded.
-	 * @return Encoded
-	 * @throws IOException
-	 */
-	public byte[] encode(String input) throws IOException {
-		return encode(input.getBytes(), false);
-	}
+    /**
+     * Base64-encode the input string.
+     * This is the same as {@code encode(input, false)}.
+     *
+     * @param input The value to be encoded.
+     * @return Encoded
+     * @throws IOException For anything gone wrong
+     */
+    public byte[] encode(final String input) throws IOException {
+        return this.encode(input.getBytes(), false);
+    }
 
-	/**
-	 * Base64-encode the input string.
-	 * 
-	 * @param input The value to be encoded.
-	 * @param linebreak Set to true to insert line breaks after 76 chars.
-	 * @return Encoded
-	 * @throws IOException
-	 */
-	public byte[] encode(String input, boolean linebreak) throws IOException {
-		return encode(input.getBytes(), linebreak);
-	}
+    /**
+     * Base64-encode the input string.
+     *
+     * @param input The value to be encoded.
+     * @param linebreak Set to true to insert line breaks after 76 chars.
+     * @return Encoded
+     * @throws IOException For anything gone wrong
+     */
+    public byte[] encode(final String input, final boolean linebreak)
+        throws IOException {
+        return this.encode(input.getBytes(), linebreak);
+    }
 
-	/**
-	 * Base64-encode the input array.
-	 * This is the same as {@code encode(input, false)}.
-	 * 
-	 * @param input The value to be encoded.
-	 * @return Encoded
-	 * @throws IOException
-	 */
-	public byte[] encode(byte[] input) throws IOException {
-		return encode(input, false);
-	}
-	
-	/**
-	 * Base64-encode the input array.
-	 * 
-	 * @param input The value to be encoded.
-	 * @param linebreak Set to true to insert line breaks after 76 chars.
-	 * @return Encoded
-	 * @throws IOException
-	 */
-	public byte[] encode(byte[] input, boolean linebreak) throws IOException {
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final StringBuilder padding = new StringBuilder();
+    /**
+     * Base64-encode the input array.
+     * This is the same as {@code encode(input, false)}.
+     *
+     * @param input The value to be encoded.
+     * @return Encoded
+     * @throws IOException For anything gone wrong
+     */
+    public byte[] encode(final byte[] input) throws IOException {
+        return this.encode(input, false);
+    }
 
-		int c = input.length % 3;
+    /**
+     * Base64-encode the input array.
+     *
+     * @param input The value to be encoded.
+     * @param linebreak Set to true to insert line breaks after 76 chars.
+     * @return Encoded
+     * @throws IOException For anything gone wrong
+     */
+    public byte[] encode(final byte[] input, final boolean linebreak)
+        throws IOException {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final StringBuilder padding = new StringBuilder();
+        // @checkstyle MagicNumber (3 lines)
+        int pos = input.length % 3;
+        if (pos > 0) {
+            for (; pos < 3; ++pos) {
+                padding.append("=");
+            }
+        }
+        final ByteBuffer tmp = ByteBuffer.allocate(
+            input.length + padding.length()
+        );
+        final byte[] bytes = tmp.put(input).array();
+        // @checkstyle MagicNumber (2 lines)
+        for (pos = 0; pos < bytes.length; pos += 3) {
+            if (linebreak && pos > 0 && (pos / 3 * 4) % 76 == 0) {
+                out.write(System.lineSeparator().getBytes());
+            }
+            // @checkstyle MagicNumber (6 lines)
+            final int inbits =
+                (bytes[pos] << 16) + (bytes[pos + 1] << 8) + (bytes[pos + 2]);
+            out.write(this.basechars.charAt((inbits >> 18) & 63));
+            out.write(this.basechars.charAt((inbits >> 12) & 63));
+            out.write(this.basechars.charAt((inbits >> 6) & 63));
+            out.write(this.basechars.charAt(inbits & 63));
+        }
+        final String encoded = out.toString();
+        return (encoded.substring(
+            0, encoded.length() - padding.length()
+        ) + padding).getBytes();
+    }
 
-		if (c > 0) {
-			for (; c < 3; c++) {
-				padding.append("=");
-			}
-		}
+    /**
+     * Base64-decode the input string.
+     * Prior to decoding, all non-Base64 characters are removed.
+     *
+     * @param input The value to be decoded.
+     * @return Decoded
+     */
+    public byte[] decode(final String input) {
+        return this.decode(input.getBytes());
+    }
 
-		final ByteBuffer bb = ByteBuffer.allocate(input.length + padding.length());
-		bb.put(input);
-
-		final byte[] bytes = bb.array();
-
-		for (c = 0; c < bytes.length; c += 3) {
-
-			if (linebreak && c > 0 && (c / 3 * 4) % 76 == 0) {
-				out.write(System.lineSeparator().getBytes());
-			}
-
-			int n = (bytes[c] << 16) + (bytes[c + 1] << 8) + (bytes[c + 2]);
-			int n1 = (n >> 18) & 63, n2 = (n >> 12) & 63, n3 = (n >> 6) & 63, n4 = n & 63;
-
-			out.write(base64chars.charAt(n1));
-			out.write(base64chars.charAt(n2));
-			out.write(base64chars.charAt(n3));
-			out.write(base64chars.charAt(n4));
-		}
-		String encoded = out.toString();
-
-		return (encoded.substring(0, encoded.length() - padding.length()) + padding).getBytes();
-	}
-
-	/**
-	 * Base64-decode the input string.
-	 * Prior to decoding, all non-Base64 characters are removed.
-	 * 
-	 * @param input The value to be decoded.
-	 * @return Decoded
-	 */
-	public byte[] decode(String input) {
-		return decode(input.getBytes());
-	}
-
-	/**
-	 * Base64-decode the input array.
-	 * Prior to decoding, all non-Base64 characters are removed.
-	 * 
-	 * @param input The value to be decoded.
-	 * @return Decoded
-	 */
-	public byte[] decode(byte[] input) {
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final ByteBuffer bb = ByteBuffer.allocate(input.length);
-		int padding = 0;
-
-		if (input[input.length - 1] == '=') {
-			input[input.length - 1] = 'A';
-			padding++;
-		}
-		if (input[input.length - 2] == '=') {
-			input[input.length - 2] = 'A';
-			padding++;
-		}
-
-		for (int c = 0; c < input.length; c++) {
-			if (base64chars.indexOf(input[c]) >= 0) {
-				bb.put(input[c]);
-			}
-		}
-
-		final byte[] bytes = bb.array();
-
-		for (int c = 0; c < bytes.length; c += 4) {
-
-			int n = (base64chars.indexOf(bytes[c]) << 18) + (base64chars.indexOf(bytes[c + 1]) << 12)
-					+ (base64chars.indexOf(bytes[c + 2]) << 6) + base64chars.indexOf(bytes[c + 3]);
-
-			out.write((char) ((n >>> 16) & 0xFF));
-			out.write((char) ((n >>> 8) & 0xFF));
-			out.write((char) ((n) & 0xFF));
-		}
-
-		String decoded = out.toString();
-
-		return decoded.substring(0, decoded.length() - padding).getBytes();
-	}
+    /**
+     * Base64-decode the input array.
+     * Prior to decoding, all non-Base64 characters are removed.
+     *
+     * @param input The value to be decoded.
+     * @return Decoded
+     */
+    public byte[] decode(final byte[] input) {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final ByteBuffer tmp = ByteBuffer.allocate(input.length);
+        int padding = 0;
+        if (input[input.length - 1] == '=') {
+            input[input.length - 1] = 'A';
+            ++padding;
+        }
+        if (input[input.length - 2] == '=') {
+            input[input.length - 2] = 'A';
+            ++padding;
+        }
+        for (int pos = 0; pos < input.length; ++pos) {
+            if (this.basechars.indexOf(input[pos]) >= 0) {
+                tmp.put(input[pos]);
+            }
+        }
+        final byte[] bytes = tmp.array();
+        // @checkstyle MagicNumber (9 lines)
+        for (int pos = 0; pos < bytes.length; pos += 4) {
+            final int bits =
+                (this.basechars.indexOf(bytes[pos]) << 18)
+                + (this.basechars.indexOf(bytes[pos + 1]) << 12)
+                + (this.basechars.indexOf(bytes[pos + 2]) << 6)
+                + this.basechars.indexOf(bytes[pos + 3]);
+            out.write((char) ((bits >>> 16) & 0xFF));
+            out.write((char) ((bits >>> 8) & 0xFF));
+            out.write((char) (bits & 0xFF));
+        }
+        final String decoded = out.toString();
+        return decoded.substring(0, decoded.length() - padding).getBytes();
+    }
 }

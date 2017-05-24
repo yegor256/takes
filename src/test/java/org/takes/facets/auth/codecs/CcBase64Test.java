@@ -32,7 +32,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.Base64;
 
 /**
  * Test case for {@link CcBase64}.
