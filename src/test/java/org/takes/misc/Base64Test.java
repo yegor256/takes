@@ -39,30 +39,6 @@ import org.junit.Test;
 public final class Base64Test {
 
     /**
-     * A short text to encode with Base64.
-     */
-    private static final String SHORTTEXT =
-        "We didn't start the fire!";
-    /**
-     * The corresponding short Base64 key.
-     */
-    private static final String SHORTKEY =
-        "V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==";
-    /**
-     * A long text that ensures a linebreak in the key.
-     * @checkstyle LineLength (3 lines)
-     */
-    private static final String LONGTEXT =
-        "We didn't start the fire, it was always burning, since the world's been turning.";
-    /**
-     * The corresponding key.
-     * @checkstyle LineLength (4 lines)
-     * @checkstyle StringLiteralsConcatenation (3 lines)
-     */
-    private static final String LONGKEY =
-        "V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlLCBpdCB3YXMgYWx3YXlzIGJ1cm5pbmcsIHNpbmNlIHR" + System.lineSeparator() + "oZSB3b3JsZCdzIGJlZW4gdHVybmluZy4=";
-
-    /**
      * Base64 can encode a String.
      * @throws IOException If some problem inside
      */
@@ -105,20 +81,6 @@ public final class Base64Test {
     }
 
     /**
-     * Base64 can encode a String.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void encodeString() throws IOException {
-        MatcherAssert.assertThat(
-            new String(
-                new Base64().encode(Base64Test.SHORTTEXT)
-            ),
-            Matchers.equalTo(Base64Test.SHORTKEY)
-        );
-    }
-
-    /**
      * Base64 can encode a byte[].
      * @throws IOException If some problem inside
      */
@@ -126,9 +88,9 @@ public final class Base64Test {
     public void encodeByteArray() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().encode(Base64Test.SHORTTEXT.getBytes())
+                new Base64().encode("We didn't start the fire!".getBytes())
             ),
-            Matchers.equalTo(Base64Test.SHORTKEY)
+            Matchers.equalTo("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlIQ==")
         );
     }
 
@@ -140,9 +102,9 @@ public final class Base64Test {
     public void decodeString() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().decode(Base64Test.SHORTKEY)
+                new Base64().decode("SSBhbSB0aGU=")
             ),
-            Matchers.equalTo(Base64Test.SHORTTEXT)
+            Matchers.equalTo("I am the")
         );
     }
 
@@ -155,9 +117,9 @@ public final class Base64Test {
         MatcherAssert.assertThat(
             new String(
                 new Base64()
-                    .decode(Base64Test.SHORTKEY.getBytes())
+                    .decode("ZW50ZXJ0YWluZXI=".getBytes())
             ),
-            Matchers.equalTo(Base64Test.SHORTTEXT)
+            Matchers.equalTo("entertainer")
         );
     }
 
@@ -170,9 +132,12 @@ public final class Base64Test {
         MatcherAssert.assertThat(
             new String(
                 new Base64()
-                    .encode(Base64Test.LONGTEXT, true)
+                    // @checkstyle LineLength (1 line)
+                    .encode("We didn't start the fire, it was always burning, since the world's been turning.", true)
             ),
-            Matchers.equalTo(Base64Test.LONGKEY)
+            // @checkstyle LineLength (2 lines)
+            // @checkstyle StringLiteralsConcatenation (1 line)
+            Matchers.equalTo("V2UgZGlkbid0IHN0YXJ0IHRoZSBmaXJlLCBpdCB3YXMgYWx3YXlzIGJ1cm5pbmcsIHNpbmNlIHR" + System.lineSeparator() + "oZSB3b3JsZCdzIGJlZW4gdHVybmluZy4=")
         );
     }
 
@@ -184,9 +149,12 @@ public final class Base64Test {
     public void decodeWithLineBreaks() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new Base64().decode(Base64Test.LONGKEY)
+                // @checkstyle LineLength (2 lines)
+                // @checkstyle StringLiteralsConcatenation (1 line)
+                new Base64().decode("V2hvIG5lZWRzIGEgaG91c2Ugb3V0IGluIEhhY2tlbnNhY2s/IElzIHRoYXQgYWxsIHlvdSBnZXQ" + System.lineSeparator() + "gZm9yIHlvdXIgbW9uZXk/")
             ),
-            Matchers.equalTo(Base64Test.LONGTEXT)
+            // @checkstyle LineLength (1 line)
+            Matchers.equalTo("Who needs a house out in Hackensack? Is that all you get for your money?")
         );
     }
 }
