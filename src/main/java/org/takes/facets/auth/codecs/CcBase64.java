@@ -23,8 +23,12 @@
  */
 package org.takes.facets.auth.codecs;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
+import org.takes.misc.Base64;
 
 /**
  * Base64 codec.
@@ -32,15 +36,24 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
+ * @author Sven Windisch (sven.windisch@gmail.com)
  * @version $Id$
  * @since 0.13
  */
 @EqualsAndHashCode
 public final class CcBase64 implements Codec {
+
+    /**
+     * All legal Base64 chars.
+     */
+    private static final String BASE64CHARS =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
     /**
      * Original codec.
      */
     private final Codec origin;
+
     /**
      * Ctor.
      * @param codec Original codec
@@ -49,24 +62,38 @@ public final class CcBase64 implements Codec {
         this.origin = codec;
     }
 
-    //@todo #19:30min to implement own simple Base64 encode algorithm
-    // without using 3d-party Base64 encode libraries. Tests for this
-    // method have been already created, do not forget to remove Ignore
-    // annotation on it.
     @Override
-    public byte[] encode(final Identity identity) {
-        assert this.origin != null;
-        throw new UnsupportedOperationException("#encode()");
+    public byte[] encode(final Identity identity) throws IOException {
+        return new Base64().encode(this.origin.encode(identity));
     }
 
-    //@todo #19:30min to implement own simple Base64 decode algorithm
-    // without using 3d-party Base64 decode libraries. Tests for this
-    // method have been already created, do not forget to remove Ignore
-    // annotation on it.
     @Override
-    public Identity decode(final byte[] bytes) {
-        assert this.origin != null;
-        throw new UnsupportedOperationException("#decode()");
+    public Identity decode(final byte[] bytes) throws IOException {
+        final byte[] illegal = CcBase64.checkIllegalCharacters(bytes);
+        if (illegal.length > 0) {
+            throw new DecodingException(
+                String.format(
+                    "Illegal character in Base64 encoded data. %s",
+                    Arrays.toString(illegal)
+                    )
+                );
+        }
+        return this.origin.decode(new Base64().decode(bytes));
     }
 
+    /**
+     * Check the byte array for non-Base64 characters.
+     *
+     * @param bytes The values to check
+     * @return An array of the found non-Base64 characters.
+     */
+    private static byte[] checkIllegalCharacters(final byte[] bytes) {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        for (int pos = 0; pos < bytes.length; ++pos) {
+            if (BASE64CHARS.indexOf(bytes[pos]) < 0) {
+                out.write(bytes[pos]);
+            }
+        }
+        return out.toByteArray();
+    }
 }

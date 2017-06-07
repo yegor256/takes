@@ -30,7 +30,6 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 
@@ -40,7 +39,6 @@ import org.takes.facets.auth.Identity;
  * @version $Id$
  * @since 0.13
  */
-@Ignore
 public final class CcBase64Test {
     /**
      * CcBase64 can encode.
