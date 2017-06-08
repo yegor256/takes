@@ -65,6 +65,6 @@ release:
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
     mvn clean deploy -Ptakes -Psonatype --errors --settings ../settings.xml
-    #mvn clean site-deploy -Pcoveralls -Ptakes -Psite --errors --settings ../settings.xml
+    mvn clean site-deploy -Pjacoco -Ptakes -Psite --errors --settings ../settings.xml
   commanders:
   - yegor256
