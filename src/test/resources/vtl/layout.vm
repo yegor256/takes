@@ -1,0 +1,3 @@
+#macro(layout $say)
+Hello $say
+#end
