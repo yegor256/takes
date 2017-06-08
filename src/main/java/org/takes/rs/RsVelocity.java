@@ -111,11 +111,21 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
-     * @param tpl Template
+     * @param template Template
      * @param params Map of params
      */
-    public RsVelocity(final InputStream tpl, final Map<CharSequence,
+    public RsVelocity(final InputStream template, final Map<CharSequence,
         Object> params) {
+        this(".", template, params);
+    }
+    /**
+     * Ctor.
+     * @param folder Template folder
+     * @param template Template
+     * @param params Map of params
+     */
+    public RsVelocity(final String folder,
+        final InputStream template, final Map<CharSequence, Object> params) {
         super(
             new Response() {
                 @Override
@@ -124,7 +134,7 @@ public final class RsVelocity extends RsWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RsVelocity.render(tpl, params);
+                    return RsVelocity.render(folder, template, params);
                 }
             }
         );
@@ -132,12 +142,14 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Render it.
-     * @param page Page template
+     * @param folder Template folder
+     * @param template Page template
      * @param params Params for velocity
      * @return Page body
      * @throws IOException If fails
      */
-    private static InputStream render(final InputStream page,
+    private static InputStream render(final String folder,
+        final InputStream template,
         final Map<CharSequence, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer = new Utf8OutputStreamWriter(baos);
@@ -146,11 +158,15 @@ public final class RsVelocity extends RsWrap {
             RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
             new NullLogChute()
         );
+        engine.setProperty(
+            "file.resource.loader.path",
+            folder
+        );
         engine.evaluate(
             new VelocityContext(params),
             writer,
             "",
-            new Utf8InputStreamReader(page)
+            new Utf8InputStreamReader(template)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());
@@ -189,4 +205,5 @@ public final class RsVelocity extends RsWrap {
             super(key, obj);
         }
     }
+
 }
