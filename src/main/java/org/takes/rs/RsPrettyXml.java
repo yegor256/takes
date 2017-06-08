@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,12 +75,18 @@ public final class RsPrettyXml implements Response {
     private final List<Response> transformed;
 
     /**
+     * Synchronization lock.
+     */
+    private final Boolean lock;
+
+    /**
      * Ctor.
      * @param res Original response
      */
     public RsPrettyXml(final Response res) {
         this.transformed = new CopyOnWriteArrayList<Response>();
         this.origin = res;
+        this.lock = true;
     }
 
     @Override
@@ -99,9 +104,8 @@ public final class RsPrettyXml implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
-    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Response make() throws IOException {
-        synchronized (this.transformed) {
+        synchronized (this.lock) {
             if (this.transformed.isEmpty()) {
                 this.transformed.add(
                     new RsWithBody(
@@ -140,11 +144,9 @@ public final class RsPrettyXml implements Response {
             RsPrettyXml.prepareDocType(body, transformer);
             transformer.setOutputProperty(OutputKeys.INDENT, yes);
             transformer.transform(source, new StreamResult(result));
-        } catch (final TransformerException ex) {
-            throw new IOException(ex);
-        } catch (final SAXException ex) {
-            throw new IOException(ex);
-        } catch (final ParserConfigurationException ex) {
+        } catch (final TransformerException
+            | ParserConfigurationException
+            | SAXException ex) {
             throw new IOException(ex);
         }
         return result.toByteArray();
@@ -204,9 +206,7 @@ public final class RsPrettyXml implements Response {
             factory.setFeature(RsPrettyXml.LOAD_EXTERNAL_DTD, false);
             final DocumentBuilder builder = factory.newDocumentBuilder();
             return builder.parse(body).getDoctype();
-        } catch (final ParserConfigurationException ex) {
-            throw new IOException(ex);
-        } catch (final SAXException ex) {
+        } catch (final ParserConfigurationException | SAXException ex) {
             throw new IOException(ex);
         }
     }

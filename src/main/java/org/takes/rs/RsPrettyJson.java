@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,7 +67,7 @@ public final class RsPrettyJson implements Response {
      * @param res Original response
      */
     public RsPrettyJson(final Response res) {
-        this.transformed = new CopyOnWriteArrayList<Response>();
+        this.transformed = new CopyOnWriteArrayList<>();
         this.origin = res;
     }
 
@@ -87,7 +86,6 @@ public final class RsPrettyJson implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
-    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Response make() throws IOException {
         synchronized (this.transformed) {
             if (this.transformed.isEmpty()) {

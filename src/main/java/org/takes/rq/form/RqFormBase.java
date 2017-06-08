@@ -23,7 +23,6 @@
  */
 package org.takes.rq.form;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -126,7 +125,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @return Parameters map or empty map in case of error.
      * @throws IOException If something fails reading or parsing body
      */
-    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Map<String, List<String>> map() throws IOException {
         synchronized (this.saved) {
             if (this.saved.isEmpty()) {
@@ -159,13 +157,13 @@ public final class RqFormBase extends RqWrap implements RqForm {
                     )
                 );
             }
-            final String key = decode(
+            final String key = RqFormBase.decode(
                 new EnglishLowerCase(parts[0].trim()).string()
             );
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<String>());
             }
-            map.get(key).add(decode(parts[1].trim()));
+            map.get(key).add(RqFormBase.decode(parts[1].trim()));
         }
         return map;
     }

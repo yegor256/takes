@@ -23,7 +23,6 @@
  */
 package org.takes.facets.forward;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -92,7 +91,7 @@ public final class TkForward implements Take {
          */
         private Safe(final Response res) {
             this.origin = res;
-            this.saved = new CopyOnWriteArrayList<Response>();
+            this.saved = new CopyOnWriteArrayList<>();
         }
         @Override
         public Iterable<String> head() throws IOException {
@@ -107,7 +106,6 @@ public final class TkForward implements Take {
          * @return Response
          * @throws IOException If fails
          */
-        @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
         private Response load() throws IOException {
             synchronized (this.saved) {
                 if (this.saved.isEmpty()) {

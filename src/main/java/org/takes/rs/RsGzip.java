@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +62,7 @@ public final class RsGzip implements Response {
      * @param res Original response
      */
     public RsGzip(final Response res) {
-        this.zipped = new CopyOnWriteArrayList<Response>();
+        this.zipped = new CopyOnWriteArrayList<>();
         this.origin = res;
     }
 
@@ -82,7 +81,6 @@ public final class RsGzip implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
-    @SuppressFBWarnings("JLM_JSR166_UTILCONCURRENT_MONITORENTER")
     private Response make() throws IOException {
         synchronized (this.zipped) {
             if (this.zipped.isEmpty()) {

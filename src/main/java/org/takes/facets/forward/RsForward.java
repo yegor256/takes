@@ -23,7 +23,6 @@
  */
 package org.takes.facets.forward;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -48,7 +47,6 @@ import org.takes.rs.RsWithoutHeader;
  */
 @ToString(callSuper = true, of = "origin")
 @EqualsAndHashCode(callSuper = true, of = "origin")
-@SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
 public class RsForward extends HttpException implements Response {
 
     /**
