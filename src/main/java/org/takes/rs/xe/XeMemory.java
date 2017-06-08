@@ -28,7 +28,7 @@ import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
- * Xembly source to create "millis" element at the root.
+ * Xembly source to report memory usage.
  *
  * <p>Add this Xembly source to your page like this:
  *
@@ -36,7 +36,7 @@ import org.xembly.Directives;
  *   new XsStylesheet("/xsl/home.xsl"),
  *   new XsAppend(
  *     "page",
- *     new XsMillis()
+ *     new XsMemory()
  *   )
  * )</pre>
  *
@@ -45,7 +45,7 @@ import org.xembly.Directives;
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page&gt;
- * &lt;millis&gt;3.675&lt;/millis&gt;
+ * &lt;memory&gt;free="1344" max="2048" total="334"&lt;/memory&gt;
  * &lt;/page&gt;
  * </pre>
  *
@@ -53,55 +53,53 @@ import org.xembly.Directives;
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 1.2
  */
-@EqualsAndHashCode
-public final class XeMillis implements XeSource {
-
-    /**
-     * Name of element.
-     */
-    private final CharSequence name;
-
-    /**
-     * Is it a finish?
-     */
-    private final boolean finish;
+@EqualsAndHashCode(callSuper = true)
+public final class XeMemory extends XeWrap {
 
     /**
      * Ctor.
-     * @param fin Is it the finish?
      */
-    public XeMillis(final boolean fin) {
-        this("millis", fin);
+    public XeMemory() {
+        this("memory");
     }
 
     /**
      * Ctor.
-     * @param elm Element name
-     * @param fin Is it the finish?
+     * @param node Node name
      */
-    public XeMillis(final CharSequence elm, final boolean fin) {
-        this.name = elm;
-        this.finish = fin;
+    public XeMemory(final CharSequence node) {
+        super(
+            new XeSource() {
+                @Override
+                public Iterable<Directive> toXembly() {
+                    return new Directives().add(node.toString())
+                        .attr(
+                            "total",
+                            XeMemory.mbs(Runtime.getRuntime().totalMemory())
+                        )
+                        .attr(
+                            "free",
+                            XeMemory.mbs(Runtime.getRuntime().freeMemory())
+                        )
+                        .attr(
+                            "max",
+                            XeMemory.mbs(Runtime.getRuntime().maxMemory())
+                        );
+                }
+            }
+        );
     }
 
-    @Override
-    public Iterable<Directive> toXembly() {
-        final Directives dirs = new Directives();
-        if (this.finish) {
-            dirs.xpath(this.name.toString())
-                .strict(1)
-                .xset(
-                    String.format(
-                        "%d - number(text())",
-                        System.currentTimeMillis()
-                    )
-                );
-        } else {
-            dirs.add(this.name.toString())
-                .set(Long.toString(System.currentTimeMillis()));
-        }
-        return dirs;
+    /**
+     * Format memory.
+     * @param bytes Bytes
+     * @return Mbytes
+     */
+    private static long mbs(final long bytes) {
+        // @checkstyle MagicNumber (1 line)
+        return bytes >> 20;
     }
+
 }
