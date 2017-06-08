@@ -8,7 +8,7 @@ script:
   - mvn clean
   - pdd --source=$(pwd) --file=/dev/null
   - est --dir=est --file=/dev/null
-  - mvn clean install -Pqulice --errors --batch-mode
+  - mvn clean install -Pqulice -Pjacoco --errors --batch-mode
 before_install:
   - rvm install 2.2.2
   - rvm use 2.2.2
