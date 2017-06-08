@@ -5,15 +5,10 @@ cache:
     - $HOME/.m2
 script:
   - set -e
-  - mvn clean install -Pqulice --errors --batch-mode
   - mvn clean
   - pdd --source=$(pwd) --file=/dev/null
   - est --dir=est --file=/dev/null
-addons:
-  apt:
-    packages:
-    - libmagic1
-    - libmagic-dev
+  - mvn clean install -Pqulice --errors --batch-mode
 before_install:
   - rvm install 2.2.2
   - rvm use 2.2.2
@@ -28,3 +23,5 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   #- openjdk6 - jcabi-http doesn't work with JDK 6
+after_success:
+  - "bash <(curl -s https://codecov.io/bash)"
