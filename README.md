@@ -139,15 +139,15 @@ If you're using Maven, this is how your `pom.xml` should look like:
                 <goals>
                   <goal>java</goal>
                 </goals>
-                <configuration>
-                  <mainClass>foo.App</mainClass> <!-- your main class -->
-                  <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                  <arguments>
-                    <argument>--port=${port}</argument>
-                  </arguments>
-                </configuration>
               </execution>
             </executions>
+            <configuration>
+              <mainClass>foo.App</mainClass> <!-- your main class -->
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
+              <arguments>
+                <argument>--port=${port}</argument>
+              </arguments>
+            </configuration>
           </plugin>
         </plugins>
       </build>
