@@ -21,104 +21,68 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.flash;
+package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rq.RqWithHeader;
-import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsXslt;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
-import org.takes.rs.xe.XeStylesheet;
 
 /**
- * Test case for {@link XeFlash}.
+ * Test case for {@link XeSla}.
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 1.4
  */
-public final class XeFlashTest {
+public final class XeMillisTest {
 
     /**
-     * XeFlash can accept RsFlash cookie.
+     * XeMillis can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void acceptsRsFlashCookie() throws IOException {
-        final Pattern pattern = Pattern.compile(
-            "^Set-Cookie: RsFlash=(.*?);Path.*"
-        );
-        final Iterator<String> itr = new RsFlash("hello").head().iterator();
-        final List<String> cookies = new ArrayList<>(0);
-        while (itr.hasNext()) {
-            final Matcher matcher = pattern.matcher(itr.next());
-            if (matcher.find()) {
-                cookies.add(matcher.group(1));
-            }
-        }
-        MatcherAssert.assertThat(cookies, Matchers.hasSize(1));
+    public void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
                         "root",
-                        new XeFlash(
-                            new RqWithHeader(
-                                new RqFake(),
-                                "Cookie",
-                                "RsFlash=".concat(cookies.get(0))
-                            )
-                        )
+                        new XeMillis(false),
+                        new XeMillis(true)
                     )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/flash[message='hello']",
-                "/root/flash[level='INFO']"
+                "/root/millis"
             )
         );
     }
 
     /**
-     * XeFlash can accept RsFlash cookie.
+     * XeMillis can build HTML response with default XSL template.
      * @throws IOException If some problem inside
      */
     @Test
-    public void rendersViaStandardXsltTemplate() throws IOException {
+    public void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXslt(
                     new RsXembly(
-                        new XeStylesheet(
-                            "/org/takes/facets/flash/test_flash.xsl"
-                        ),
+                        new XeStylesheet("/org/takes/rs/xe/test_millis.xsl"),
                         new XeAppend(
                             "page",
-                            new XeFlash(
-                                new RqWithHeaders(
-                                    new RqFake(),
-                                    "Cookie: RsFlash=how are you?/INFO"
-                                )
-                            )
+                            new XeMillis(false),
+                            new XeMillis(true)
                         )
                     )
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/xhtml:html/xhtml:p[.='how are you?' and @class='flash INFO']"
+                "/xhtml:html/xhtml:span"
             )
         );
     }
+
 }

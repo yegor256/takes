@@ -28,6 +28,7 @@ import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.takes.rs.RsXslt;
 
 /**
  * Test case for {@link XeSla}.
@@ -54,6 +55,30 @@ public final class XeSlaTest {
             ),
             XhtmlMatchers.hasXPaths(
                 "/root[@sla]"
+            )
+        );
+    }
+
+    /**
+     * XeSLA can build HTML response with default XSL template.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsHtmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXslt(
+                    new RsXembly(
+                        new XeStylesheet("/org/takes/rs/xe/test_sla.xsl"),
+                        new XeAppend(
+                            "page",
+                            new XeSla()
+                        )
+                    )
+                ).body()
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/xhtml:html/xhtml:span"
             )
         );
     }
