@@ -218,4 +218,26 @@ public final class RsXsltTest {
         );
     }
 
+    /**
+     * RsXSLT can load XSL stylesheets from the web.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void loadsExternalImports() throws IOException {
+        final String xml = Joiner.on(' ').join(
+            "<?xml-stylesheet",
+            " href='/org/takes/rs/stylesheet-with-include.xsl'",
+            " type='text/xsl'?>",
+            "<page sla='0.324'/>"
+        );
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXslt(
+                    new RsText(xml)
+                ).body()
+            ),
+            XhtmlMatchers.hasXPath("//xhtml:p[.='\u0443']")
+        );
+    }
+
 }
