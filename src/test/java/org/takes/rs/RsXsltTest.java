@@ -225,10 +225,9 @@ public final class RsXsltTest {
     @Test
     public void loadsExternalImports() throws IOException {
         final String xml = Joiner.on(' ').join(
-            "<?xml-stylesheet",
+            "<?xml-stylesheet   ",
             " href='/org/takes/rs/stylesheet-with-include.xsl'",
-            " type='text/xsl'?>",
-            "<page sla='0.324'/>"
+            " type='text/xsl'?><page sla='0.324'/>"
         );
         MatcherAssert.assertThat(
             IOUtils.toString(
