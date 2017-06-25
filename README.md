@@ -41,6 +41,10 @@ This is what is not supported and won't be supported:
 
 These [blog posts](http://www.yegor256.com/tag/takes.html) may help you too.
 
+These two web systems use Takes, and they are open source:
+[wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
+[jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
+
 ## Contents
 
 - [Quick Start](#quick-start)

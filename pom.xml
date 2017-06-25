@@ -256,7 +256,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8</argLine>
+                    <argLine>${argLine} -Djava.awt.headless=true -Dfile.encoding=UTF-8</argLine>
                     <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
                 </configuration>
             </plugin>
