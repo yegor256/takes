@@ -31,16 +31,16 @@
                 <xsl:text> </xsl:text>
                 <xsl:choose>
                     <xsl:when test="$millis &gt; 10000">
-                        <xsl:text>dead</xsl:text>
+                        <xsl:text>millis-dead</xsl:text>
                     </xsl:when>
                     <xsl:when test="$millis &gt; 1000">
-                        <xsl:text>slow</xsl:text>
+                        <xsl:text>millis-slow</xsl:text>
                     </xsl:when>
                     <xsl:when test="$millis &gt; 200">
-                        <xsl:text>normal</xsl:text>
+                        <xsl:text>millis-normal</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>fast</xsl:text>
+                        <xsl:text>millis-fast</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>

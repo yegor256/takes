@@ -117,7 +117,8 @@ public final class XeFlashTest {
                 ).body()
             ),
             XhtmlMatchers.hasXPaths(
-                "/xhtml:html/xhtml:p[.='how are you?' and @class='flash INFO']"
+                "/xhtml:html/xhtml:p[.='how are you?']",
+                "/xhtml:html/xhtml:p[@class='flash flash-INFO']"
             )
         );
     }

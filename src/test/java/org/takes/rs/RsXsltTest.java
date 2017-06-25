@@ -236,7 +236,9 @@ public final class RsXsltTest {
                     new RsText(xml)
                 ).body()
             ),
-            XhtmlMatchers.hasXPath("//xhtml:p[.='\u0443']")
+            XhtmlMatchers.hasXPath(
+                "/xhtml:html/xhtml:span[starts-with(@class, 'sla ')]"
+            )
         );
     }
 

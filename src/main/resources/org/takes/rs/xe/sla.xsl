@@ -32,13 +32,13 @@
                 <xsl:text> </xsl:text>
                 <xsl:choose>
                     <xsl:when test="$sla &gt; 10">
-                        <xsl:text>critical</xsl:text>
+                        <xsl:text>sla-critical</xsl:text>
                     </xsl:when>
                     <xsl:when test="$sla &gt; 5">
-                        <xsl:text>high</xsl:text>
+                        <xsl:text>sla-high</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>normal</xsl:text>
+                        <xsl:text>sla-normal</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>

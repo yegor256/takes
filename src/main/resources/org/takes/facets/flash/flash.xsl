@@ -28,7 +28,7 @@
         <p>
             <xsl:attribute name="class">
                 <xsl:text>flash</xsl:text>
-                <xsl:text> </xsl:text>
+                <xsl:text> flash-</xsl:text>
                 <xsl:value-of select="$flash/level"/>
             </xsl:attribute>
             <xsl:value-of select="$flash/message"/>
