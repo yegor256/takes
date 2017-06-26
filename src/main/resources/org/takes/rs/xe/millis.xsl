@@ -25,7 +25,7 @@
     xmlns="http://www.w3.org/1999/xhtml" version="1.0">
     <xsl:template name="takes_millis">
         <xsl:param name="millis"/>
-        <span>
+        <span title="The time server took to generate this page">
             <xsl:attribute name="class">
                 <xsl:text>millis</xsl:text>
                 <xsl:text> </xsl:text>

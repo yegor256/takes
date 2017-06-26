@@ -25,7 +25,7 @@
     xmlns="http://www.w3.org/1999/xhtml" version="1.0">
     <xsl:template name="takes_memory">
         <xsl:param name="memory"/>
-        <span>
+        <span title="Used memory on the server versus the total available">
             <xsl:attribute name="class">
                 <xsl:text>memory</xsl:text>
             </xsl:attribute>

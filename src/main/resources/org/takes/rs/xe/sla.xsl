@@ -26,7 +26,7 @@
     xmlns="http://www.w3.org/1999/xhtml" version="1.0">
     <xsl:template name="takes_sla">
         <xsl:param name="sla"/>
-        <span>
+        <span title="Load average at the server">
             <xsl:attribute name="class">
                 <xsl:text>sla</xsl:text>
                 <xsl:text> </xsl:text>
