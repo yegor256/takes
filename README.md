@@ -39,7 +39,7 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-These [blog posts](http://www.yegor256.com/tag/takes.html) may help you too.
+This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html) may help you too.
 
 These two web systems use Takes, and they are open source:
 [wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
@@ -603,7 +603,7 @@ public final class User implements XeSource, RsJSON.Source {
 
 ## RsXembly
 
-Here is how you generate an XML page using [Xembly](http://www.takes.org):
+Here is how you generate an XML page using [Xembly](http://www.xembly.org):
 
 ```java
 Response response = new RsXembly(
