@@ -26,6 +26,7 @@ package org.takes.rq;
 import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -64,7 +65,8 @@ public final class ChunkedInputStreamTest {
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                )
+                ),
+                StandardCharsets.UTF_8
             )
         );
         final byte[] buf = new byte[data.length()];
@@ -99,7 +101,8 @@ public final class ChunkedInputStreamTest {
                     third,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                )
+                ),
+                StandardCharsets.UTF_8
             )
         );
         final byte[] buf = new byte[length];
@@ -128,7 +131,8 @@ public final class ChunkedInputStreamTest {
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                )
+                ),
+                StandardCharsets.UTF_8
             )
         );
         final byte[] buf = new byte[data.length()];

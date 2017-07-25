@@ -28,6 +28,7 @@ import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import javax.xml.transform.Source;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
@@ -86,7 +87,8 @@ public final class RsXsltTest {
                             return new StreamSource(new StringReader(xsl));
                         }
                     }
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPath("//xhtml:p[.='\u0443']")
         );
@@ -142,8 +144,9 @@ public final class RsXsltTest {
             "<output method='text'/><template match='/'> ",
             "Hello, <value-of select='/subject'/>!</template></stylesheet>"
         );
-        final StateAwareInputStream stream =
-            new StateAwareInputStream(IOUtils.toInputStream(xml));
+        final StateAwareInputStream stream = new StateAwareInputStream(
+            IOUtils.toInputStream(xml, StandardCharsets.UTF_8)
+        );
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
@@ -233,7 +236,8 @@ public final class RsXsltTest {
             IOUtils.toString(
                 new RsXslt(
                     new RsText(xml)
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPath(
                 "/xhtml:html/xhtml:span[starts-with(@class, 'sla ')]"

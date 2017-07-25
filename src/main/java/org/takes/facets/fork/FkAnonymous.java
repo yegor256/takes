@@ -27,6 +27,7 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
@@ -62,13 +63,29 @@ public final class FkAnonymous implements Fork {
     /**
      * Take.
      */
-    private final Take take;
+    private final Scalar<Take> take;
 
     /**
      * Ctor.
      * @param tke Target
      */
     public FkAnonymous(final Take tke) {
+        this(
+            new Scalar<Take>() {
+                @Override
+                public Take get() {
+                    return tke;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param tke Target
+     * @since 1.4
+     */
+    public FkAnonymous(final Scalar<Take> tke) {
         this.take = tke;
     }
 
@@ -77,9 +94,9 @@ public final class FkAnonymous implements Fork {
         final Identity identity = new RqAuth(req).identity();
         final Opt<Response> resp;
         if (identity.equals(Identity.ANONYMOUS)) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Opt.Single<>(this.take.get().act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

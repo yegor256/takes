@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
@@ -80,6 +81,7 @@ import org.takes.tk.TkText;
  * @since 0.4
  * @see TkFork
  * @see TkRegex
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class FkRegex implements Fork {
@@ -92,7 +94,7 @@ public final class FkRegex implements Fork {
     /**
      * Target.
      */
-    private final TkRegex target;
+    private final Scalar<TkRegex> target;
 
     /**
      * Ctor.
@@ -173,6 +175,24 @@ public final class FkRegex implements Fork {
      * @param tke Take
      */
     public FkRegex(final Pattern ptn, final TkRegex tke) {
+        this(
+            ptn,
+            new Scalar<TkRegex>() {
+                @Override
+                public TkRegex get() {
+                    return tke;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern
+     * @param tke Take
+     * @since 1.4
+     */
+    public FkRegex(final Pattern ptn, final Scalar<TkRegex> tke) {
         this.pattern = ptn;
         this.target = tke;
     }
@@ -186,13 +206,13 @@ public final class FkRegex implements Fork {
         final Matcher matcher = this.pattern.matcher(path);
         final Opt<Response> resp;
         if (matcher.matches()) {
-            resp = new Opt.Single<Response>(
-                this.target.act(
+            resp = new Opt.Single<>(
+                this.target.get().act(
                     new RqMatcher(matcher, req)
                 )
             );
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

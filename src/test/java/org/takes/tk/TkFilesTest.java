@@ -24,6 +24,7 @@
 package org.takes.tk;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -54,7 +55,9 @@ public final class TkFilesTest {
      */
     @Test
     public void dispatchesByFileName() throws IOException {
-        FileUtils.write(this.temp.newFile("a.txt"), "hello, world!");
+        FileUtils.write(
+            this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
+        );
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFiles(this.temp.getRoot()).act(

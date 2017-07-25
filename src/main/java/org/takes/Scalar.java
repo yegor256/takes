@@ -21,46 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth.social;
+package org.takes;
 
-import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import org.apache.commons.io.IOUtils;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
 
 /**
- * Test case for {@link XeGoogleLink}.
+ * Scalar that returns an object.
+ *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.9
+ * @param <T> Type of object
+ * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
+ * @since 1.4
+ * @checkstyle LineLengthCheck (1 lines)
  */
-public final class XeGoogleLinkTest {
+public interface Scalar<T> {
 
     /**
-     * XeGoogleLink can create a correct link.
-     * @throws IOException If some problem inside
+     * Get the object.
+     * @return Object
+     * @throws IOException If fails
      */
-    @Test
-    public void generatesCorrectLink() throws IOException {
-        MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeGoogleLink(new RqFake(), "abcdef")
-                    )
-                ).body(),
-                StandardCharsets.UTF_8
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='takes:google']"
-            )
-        );
-    }
+    T get() throws IOException;
 
 }

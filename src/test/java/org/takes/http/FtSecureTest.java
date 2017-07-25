@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
@@ -151,7 +152,8 @@ public final class FtSecureTest {
             public Response act(final Request req) throws IOException {
                 return new RsText(
                     IOUtils.toString(
-                        new RqLengthAware(req).body()
+                        new RqLengthAware(req).body(),
+                        StandardCharsets.UTF_8
                     )
                 );
             }

@@ -24,6 +24,7 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
@@ -51,7 +52,8 @@ public final class RsVelocityTest {
                 new RsVelocity(
                     "hello, ${name}!",
                     new RsVelocity.Pair("name", "Jeffrey")
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("hello, Jeffrey!")
         );
@@ -64,14 +66,16 @@ public final class RsVelocityTest {
     @Test
     public void closesTemplateInputStream() throws IOException {
         final String template = "hello, world!";
-        final StateAwareInputStream stream =
-            new StateAwareInputStream(IOUtils.toInputStream(template));
+        final StateAwareInputStream stream = new StateAwareInputStream(
+            IOUtils.toInputStream(template, StandardCharsets.UTF_8)
+        );
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
                     stream,
                     Collections.<CharSequence, Object>emptyMap()
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo(template)
         );
@@ -94,7 +98,8 @@ public final class RsVelocityTest {
                         "/vtl/simple.vm"
                     ),
                     new HashMap<CharSequence, Object>()
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("Hello World!\n")
         );

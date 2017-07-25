@@ -23,10 +23,12 @@
  */
 package org.takes.rs.xe;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.takes.Scalar;
 import org.xembly.Directive;
 import org.xembly.Directives;
 import org.xembly.SyntaxException;
@@ -46,7 +48,7 @@ public final class XeDirectives implements XeSource {
     /**
      * Items.
      */
-    private final Iterable<Directive> directives;
+    private final Scalar<Iterable<Directive>> directives;
 
     /**
      * Ctor.
@@ -69,12 +71,27 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final Iterable<Directive> dirs) {
+        this(
+            new Scalar<Iterable<Directive>>() {
+                @Override
+                public Iterable<Directive> get() {
+                    return dirs;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param dirs Directives
+     */
+    public XeDirectives(final Scalar<Iterable<Directive>> dirs) {
         this.directives = dirs;
     }
 
     @Override
-    public Iterable<Directive> toXembly() {
-        return this.directives;
+    public Iterable<Directive> toXembly() throws IOException {
+        return this.directives.get();
     }
 
     /**

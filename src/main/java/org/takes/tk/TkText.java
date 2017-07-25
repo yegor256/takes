@@ -23,12 +23,14 @@
  */
 package org.takes.tk;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.rs.RsText;
 
@@ -66,6 +68,22 @@ public final class TkText extends TkWrap {
                 @Override
                 public Response act(final Request req) {
                     return new RsText(body);
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param body Text
+     * @since 1.4
+     */
+    public TkText(final Scalar<String> body) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request req) throws IOException {
+                    return new RsText(body.get());
                 }
             }
         );

@@ -26,6 +26,7 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.takes.Scalar;
 import org.xembly.Directive;
 
 /**
@@ -46,6 +47,23 @@ public final class XeWhen extends XeWrap {
      * @param condition Condition
      * @param source Xembly source
      */
+    public XeWhen(final boolean condition, final XeSource source) {
+        this(
+            condition,
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return source;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
+     */
     @SuppressWarnings
         (
             {
@@ -53,14 +71,14 @@ public final class XeWhen extends XeWrap {
                 "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
             }
         )
-    public XeWhen(final boolean condition, final XeSource source) {
+    public XeWhen(final boolean condition, final Scalar<XeSource> source) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
                     if (condition) {
-                        dirs = source.toXembly();
+                        dirs = source.get().toXembly();
                     } else {
                         dirs = Collections.emptyList();
                     }

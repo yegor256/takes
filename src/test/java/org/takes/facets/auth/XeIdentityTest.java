@@ -25,6 +25,7 @@ package org.takes.facets.auth;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -60,7 +61,8 @@ public final class XeIdentityTest {
                             )
                         )
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/identity[urn='urn:test:1']",

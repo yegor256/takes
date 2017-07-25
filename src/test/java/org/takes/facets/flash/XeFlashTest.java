@@ -25,6 +25,7 @@ package org.takes.facets.flash;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -82,7 +83,8 @@ public final class XeFlashTest {
                             )
                         )
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/flash[message='hello']",
@@ -114,7 +116,8 @@ public final class XeFlashTest {
                             )
                         )
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/xhtml:html/xhtml:p[.='how are you?']",

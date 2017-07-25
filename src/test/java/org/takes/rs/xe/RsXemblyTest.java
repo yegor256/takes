@@ -25,6 +25,7 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
@@ -63,7 +64,8 @@ public final class RsXemblyTest {
                         },
                         new XeMillis(true)
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/hey",
@@ -94,7 +96,8 @@ public final class RsXemblyTest {
                             .xpath("/world")
                             .add("hi")
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPath(query)
         );

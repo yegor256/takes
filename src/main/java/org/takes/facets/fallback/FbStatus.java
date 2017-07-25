@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.misc.Condition;
 import org.takes.misc.Opt;
@@ -115,7 +116,7 @@ public final class FbStatus extends FbWrap {
                 @Override
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    return new Opt.Single<Response>(take.act(req));
+                    return new Opt.Single<>(take.act(req));
                 }
             }
         );
@@ -140,6 +141,39 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
+     * @param code HTTP status code
+     * @param fallback Fallback
+     */
+    public FbStatus(final int code, final Scalar<Fallback> fallback) {
+        this(
+            new Condition<Integer>() {
+                @Override
+                public boolean fits(final Integer status) {
+                    return code == status;
+                }
+            },
+            fallback
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param check Check
+     * @param fallback Fallback
+     */
+    public FbStatus(final Condition<Integer> check, final Fallback fallback) {
+        this(
+            check,
+            new Scalar<Fallback>() {
+                @Override
+                public Fallback get() {
+                    return fallback;
+                }
+            }
+        );
+    }
+    /**
+     * Ctor.
      * @param check Check
      * @param fallback Fallback
      */
@@ -150,7 +184,8 @@ public final class FbStatus extends FbWrap {
                 "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
             }
         )
-    public FbStatus(final Condition<Integer> check, final Fallback fallback) {
+    public FbStatus(final Condition<Integer> check,
+        final Scalar<Fallback> fallback) {
         super(
             new Fallback() {
                 @Override
@@ -158,7 +193,7 @@ public final class FbStatus extends FbWrap {
                     throws IOException {
                     Opt<Response> rsp = new Opt.Empty<>();
                     if (check.fits(req.code())) {
-                        rsp = fallback.route(req);
+                        rsp = fallback.get().route(req);
                     }
                     return rsp;
                 }

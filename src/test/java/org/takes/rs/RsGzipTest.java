@@ -28,6 +28,7 @@ import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
@@ -58,7 +59,10 @@ public final class RsGzipTest {
             Matchers.containsString("Content-Encoding: gzip")
         );
         MatcherAssert.assertThat(
-            IOUtils.toString(new GZIPInputStream(response.body())),
+            IOUtils.toString(
+                new GZIPInputStream(response.body()),
+                StandardCharsets.UTF_8
+            ),
             Matchers.equalTo(text)
         );
     }

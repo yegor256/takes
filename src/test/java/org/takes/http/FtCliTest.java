@@ -28,6 +28,7 @@ import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
@@ -88,7 +89,9 @@ public final class FtCliTest {
         );
         thread.start();
         ready.await();
-        final int port = Integer.parseInt(FileUtils.readFileToString(file));
+        final int port = Integer.parseInt(
+            FileUtils.readFileToString(file, StandardCharsets.UTF_8)
+        );
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()
             .as(RestResponse.class)
