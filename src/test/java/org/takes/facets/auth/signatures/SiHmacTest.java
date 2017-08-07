@@ -45,7 +45,7 @@ public final class SiHmacTest {
     public void corrects() throws IOException {
         MatcherAssert.assertThat(
             // @checkstyle MagicNumber (1 line)
-            new SiHmac("key", 123).bits(),
+            new SiHmac("test", 123).bitlength(),
             Matchers.equalTo(SiHmac.HMAC256)
         );
     }

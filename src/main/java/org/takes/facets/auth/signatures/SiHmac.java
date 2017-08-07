@@ -37,7 +37,7 @@ import lombok.EqualsAndHashCode;
  *
  * <p>
  * The class is immutable and thread-safe.
- * 
+ *
  * @author Sven Windisch (sven.windisch@gmail.com)
  * @version $Id$
  * @since 1.4
@@ -73,7 +73,7 @@ public final class SiHmac implements Signature {
      * Ctor.
      *
      * @param key
-     *            The encryption key
+     *  The encryption key
      */
     public SiHmac(final String key) {
         this(key.getBytes(Charset.defaultCharset()), SiHmac.HMAC256);
@@ -83,9 +83,9 @@ public final class SiHmac implements Signature {
      * Ctor.
      *
      * @param key
-     *            The encryption key
+     *  The encryption key
      * @param bits
-     *            The signature bit length
+     *  The signature bit length
      */
     public SiHmac(final String key, final int bits) {
         this(key.getBytes(Charset.defaultCharset()), bits);
@@ -95,9 +95,9 @@ public final class SiHmac implements Signature {
      * Ctor.
      *
      * @param key
-     *            The encryption key
+     *  The encryption key
      * @param bits
-     *            The signature bit length
+     *  The signature bit length
      */
     public SiHmac(final byte[] key, final int bits) {
         this.key = key.clone();
@@ -111,10 +111,10 @@ public final class SiHmac implements Signature {
 
     /**
      * Signature bit length.
-     * 
-     * @return bitlength
+     *
+     * @return The bitlength
      */
-    public int bits() {
+    public int bitlength() {
         return this.bits;
     }
 
@@ -122,7 +122,7 @@ public final class SiHmac implements Signature {
      * Check for correct bit length.
      *
      * @param bits
-     *            Given bit length
+     *  Given bit length
      * @return Original bit length when appropriate, 256 bits otherwise.
      */
     private static int bitLength(final int bits) {
@@ -139,10 +139,10 @@ public final class SiHmac implements Signature {
      * Encrypt the given bytes using HMAC.
      *
      * @param bytes
-     *            Bytes to encrypt
+     *  Bytes to encrypt
      * @return Encrypted bytes
      * @throws IOException
-     *             for all unexpected exceptions
+     *  for all unexpected exceptions
      */
     @SuppressWarnings("resource")
     private byte[] encrypt(final byte[] bytes) throws IOException {
@@ -158,15 +158,17 @@ public final class SiHmac implements Signature {
      *
      * @return The mac
      * @throws IOException
-     *             For any unexpected exceptions
+     *  For any unexpected exceptions
      */
     private Mac create()
         throws IOException {
+        final String algo = String.format("HmacSHA%s", this.bits);
         try {
             final SecretKeySpec secret = new SecretKeySpec(
-                this.key, String.format("HmacSHA%s", this.bits));
+                this.key, algo
+            );
             final Mac mac = Mac
-                .getInstance(String.format("HmacSHA%s", this.bits));
+                .getInstance(algo);
             mac.init(secret);
             return mac;
         } catch (final InvalidKeyException ex) {
