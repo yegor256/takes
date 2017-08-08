@@ -26,8 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.Iterator;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -52,6 +51,7 @@ import org.takes.rs.RsJson;
  * @since 1.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle AvoidDuplicateLiterals (500 lines)
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsToken implements Pass {
@@ -130,20 +130,20 @@ public final class PsToken implements Pass {
             final byte[] jwtpayload = jwt.split(dot)[1].getBytes();
             final byte[] jwtsign = jwt.split(dot)[2].getBytes();
             final ByteBuffer tocheck = ByteBuffer.allocate(
-                jwtheader.length + jwtheader.length + 1
+                jwtheader.length + jwtpayload.length + 1
             );
             tocheck.put(jwtheader).put(".".getBytes()).put(jwtpayload);
             final byte[] checked = this.signature.sign(tocheck.array());
-            if (jwtsign.equals(checked)) {
+            if (Arrays.equals(jwtsign, checked)) {
                 final JsonObject jsonv = Json.createReader(
                     new StringReader(
-                        new String(jwtpayload)
+                        new String(new Base64().decode(jwtpayload))
                         )
                     )
                     .readObject();
                 user = new Opt.Single<Identity>(
                     new Identity.Simple(
-                        jsonv.getString(Jwt.SUBJECT, new String())
+                        jsonv.getString(Token.Jwt.SUBJECT)
                     )
                 );
             }
@@ -154,8 +154,10 @@ public final class PsToken implements Pass {
     @Override
     public Response exit(final Response res,
         final Identity idt) throws IOException {
-        final byte[] jwtheader = new Jose(this.signature.bitlength()).encode();
-        final byte[] jwtpayload = new Jwt(idt, this.age).encode();
+        final byte[] jwtheader = new Token.Jose(
+            this.signature.bitlength()
+        ).encoded();
+        final byte[] jwtpayload = new Token.Jwt(idt, this.age).encoded();
         final ByteBuffer tosign = ByteBuffer.allocate(
             jwtheader.length + jwtpayload.length + 1
         );
@@ -167,7 +169,7 @@ public final class PsToken implements Pass {
         final JsonObject target = Json.createObjectBuilder()
             .add("response", reader.read())
             .add(
-                "jwto", String.format(
+                "jwt", String.format(
                     "%s.%s.%s",
                     new String(jwtheader),
                     new String(jwtpayload),
@@ -178,105 +180,5 @@ public final class PsToken implements Pass {
         return new RsJson(
             target
         );
-    }
-
-    /**
-     * JSON Object Signing and Encryption Header.
-     */
-    final class Jose {
-        /**
-         * JOSE object.
-         */
-        private final JsonObject joseo;
-
-        /**
-         * JSON Object Signing and Encryption Header.
-         * @param bitlength Number of bits to use for encryption.
-         */
-        Jose(final int bitlength) {
-            this.joseo = Json.createObjectBuilder()
-                .add("alg", String.format("HS%s", bitlength))
-                .add("typ", "JWT")
-                .build();
-        }
-
-        /**
-         * JSON output.
-         * @return The JOSE header as JSON.
-         */
-        public JsonObject json() {
-            return this.joseo;
-        }
-
-        /**
-         * Base64 encoded JSON output.
-         * @return The JOSE header as JSON, Base64-encoded.
-         * @throws IOException If sth. goes wrong.
-         */
-        public byte[] encode() throws IOException {
-            return new Base64().encode(this.joseo.toString());
-        }
-    }
-
-    /**
-     * JSON Web Token.
-     */
-    final class Jwt {
-        /**
-         * The header short for subject.
-         */
-        public static final String SUBJECT = "sub";
-
-        /**
-         * JWT object.
-         */
-        private final JsonObject jwto;
-
-        /**
-         * JSON Web Token.
-         * Calling this is equivalent to {@code Jwt(idt, 3600)}.
-         * @param idt The identity to provide.
-         */
-        Jwt(final Identity idt) {
-            // @checkstyle MagicNumber (1 line)
-            this(idt, 3600L);
-        }
-
-        /**
-         * JSON Web Token.
-         * @param idt The identity to provide.
-         * @param age Lifetime of the token (in seconds).
-         */
-        Jwt(final Identity idt, final long age) {
-            this.jwto = Json.createObjectBuilder()
-                .add(
-                    "exp", DateFormat.getDateInstance()
-                        .format(
-                            new Date(System.currentTimeMillis()
-                                // @checkstyle MagicNumber (1 line)
-                                + (age * 1000)
-                            )
-                        )
-                    )
-                .add(Jwt.SUBJECT, idt.urn())
-                .build();
-        }
-
-        /**
-         * JSON output.
-         * @return The JWT as JSON.
-         */
-        public JsonObject json() {
-            return this.jwto;
-        }
-
-        /**
-         * Base64 encoded JSON output.
-         * @return The JWT as JSON, Base64-encoded.
-         * @throws IOException If sth. goes wrong.
-         */
-        public byte[] encode() throws IOException {
-            return new Base64().encode(this.jwto.toString());
-        }
     }
 }
