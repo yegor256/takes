@@ -103,7 +103,7 @@ public final class RsXembly extends RsWrap {
      * @param src Source
      */
     public RsXembly(final XeSource src) {
-        this(emptyDocument(), src);
+        this(RsXembly.emptyDocument(), src);
     }
 
     /**

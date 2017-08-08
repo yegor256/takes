@@ -64,6 +64,42 @@ public final class XeWhen extends XeWrap {
      * @param condition Condition
      * @param source Xembly source
      */
+    public XeWhen(final boolean condition, final Scalar<XeSource> source) {
+        this(
+            new Scalar<Boolean>() {
+                @Override
+                public Boolean get() {
+                    return condition;
+                }
+            },
+            source
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
+     * @since 1.5
+     */
+    public XeWhen(final Scalar<Boolean> condition, final XeSource source) {
+        this(
+            condition,
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return source;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
+     * @since 1.5
+     */
     @SuppressWarnings
         (
             {
@@ -71,13 +107,14 @@ public final class XeWhen extends XeWrap {
                 "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
             }
         )
-    public XeWhen(final boolean condition, final Scalar<XeSource> source) {
+    public XeWhen(final Scalar<Boolean> condition,
+        final Scalar<XeSource> source) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
-                    if (condition) {
+                    if (condition.get()) {
                         dirs = source.get().toXembly();
                     } else {
                         dirs = Collections.emptyList();
