@@ -125,10 +125,11 @@ public final class PsToken implements Pass {
         }
         final String dot = "\\.";
         if (head.length() > 0) {
-            final String jwt = head.trim().split(" ", 2)[1].trim();
-            final byte[] jwtheader = jwt.split(dot)[0].getBytes();
-            final byte[] jwtpayload = jwt.split(dot)[1].getBytes();
-            final byte[] jwtsign = jwt.split(dot)[2].getBytes();
+            final String jwt = head.split(" ", 2)[1].trim();
+            final String[] parts = jwt.split(dot);
+            final byte[] jwtheader = parts[0].getBytes();
+            final byte[] jwtpayload = parts[1].getBytes();
+            final byte[] jwtsign = parts[2].getBytes();
             final ByteBuffer tocheck = ByteBuffer.allocate(
                 jwtheader.length + jwtpayload.length + 1
             );
