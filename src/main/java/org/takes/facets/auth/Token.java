@@ -53,8 +53,9 @@ public interface Token {
      * Base64 encoded JSON output.
      *
      * @return The Token in JSON notation, Base64-encoded.
+     * @throws IOException If encoding fails
      */
-    byte[] encoded();
+    byte[] encoded() throws IOException;
 
     /**
      * JSON Object Signing and Encryption Header.
@@ -92,14 +93,8 @@ public interface Token {
         }
 
         @Override
-        public byte[] encoded() {
-            byte[] bytes;
-            try {
-                bytes = new Base64().encode(this.joseo.toString());
-            } catch (final IOException ignore) {
-                bytes = new byte[] {};
-            }
-            return bytes;
+        public byte[] encoded() throws IOException {
+            return new Base64().encode(this.joseo.toString());
         }
     };
 
@@ -108,10 +103,7 @@ public interface Token {
      */
     @SuppressWarnings
         (
-            {
-                "PMD.ConstructorShouldDoInitialization",
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            }
+            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
         )
     final class Jwt implements Token {
         /**
@@ -142,16 +134,12 @@ public interface Token {
         /**
          * Time of lifespan start.
          */
-        private final Calendar now = Calendar.getInstance(
-            TimeZone.getTimeZone("Z")
-        );
+        private final Calendar now;
 
         /**
          * Time of lifespan end.
          */
-        private final Calendar exp = Calendar.getInstance(
-            TimeZone.getTimeZone("Z")
-        );
+        private final Calendar exp;
 
         /**
          * JSON Web Token.
@@ -159,6 +147,8 @@ public interface Token {
          * @param age Lifetime of token.
          */
         public Jwt(final Identity idt, final long age) {
+            this.now = Calendar.getInstance(TimeZone.getTimeZone("Z"));
+            this.exp = Calendar.getInstance(TimeZone.getTimeZone("Z"));
             // @checkstyle MagicNumber (1 line)
             this.exp.setTimeInMillis(this.now.getTimeInMillis() + (age * 1000));
             this.jwto = Json.createObjectBuilder()
@@ -174,14 +164,8 @@ public interface Token {
         }
 
         @Override
-        public byte[] encoded() {
-            byte[] bytes;
-            try {
-                bytes = new Base64().encode(this.jwto.toString());
-            } catch (final IOException ignore) {
-                bytes = new byte[] {};
-            }
-            return bytes;
+        public byte[] encoded() throws IOException {
+            return new Base64().encode(this.jwto.toString());
         }
     };
 }

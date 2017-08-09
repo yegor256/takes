@@ -144,13 +144,15 @@ public final class SiHmac implements Signature {
      * @throws IOException
      *  for all unexpected exceptions
      */
-    @SuppressWarnings("resource")
     private byte[] encrypt(final byte[] bytes) throws IOException {
-        final Formatter formatter = new Formatter();
-        for (final byte byt : this.create().doFinal(bytes)) {
-            formatter.format("%02x", byt);
+        final byte[] encrypted;
+        try (final Formatter formatter = new Formatter()) {
+            for (final byte byt : this.create().doFinal(bytes)) {
+                formatter.format("%02x", byt);
+            }
+            encrypted = formatter.toString().getBytes();
         }
-        return formatter.toString().getBytes();
+        return encrypted;
     }
 
     /**
