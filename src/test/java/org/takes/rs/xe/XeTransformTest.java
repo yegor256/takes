@@ -25,6 +25,7 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Locale;
 import org.apache.commons.io.IOUtils;
@@ -65,7 +66,8 @@ public final class XeTransformTest {
                             }
                         )
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root[count(bowler)=2]",

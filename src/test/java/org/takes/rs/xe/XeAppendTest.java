@@ -25,6 +25,7 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -51,7 +52,8 @@ public final class XeAppendTest {
                         new XeDate(),
                         new XeLocalhost()
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/test[@date and @ip]"

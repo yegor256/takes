@@ -25,6 +25,7 @@ package org.takes.facets.flash;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,14 +37,18 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithHeaders;
+import org.takes.rs.RsXslt;
 import org.takes.rs.xe.RsXembly;
 import org.takes.rs.xe.XeAppend;
+import org.takes.rs.xe.XeStylesheet;
 
 /**
  * Test case for {@link XeFlash}.
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.4
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class XeFlashTest {
 
@@ -78,11 +83,45 @@ public final class XeFlashTest {
                             )
                         )
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/flash[message='hello']",
                 "/root/flash[level='INFO']"
+            )
+        );
+    }
+
+    /**
+     * XeFlash can accept RsFlash cookie.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void rendersViaStandardXsltTemplate() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXslt(
+                    new RsXembly(
+                        new XeStylesheet(
+                            "/org/takes/facets/flash/test_flash.xsl"
+                        ),
+                        new XeAppend(
+                            "page",
+                            new XeFlash(
+                                new RqWithHeaders(
+                                    new RqFake(),
+                                    "Cookie: RsFlash=how are you?/INFO"
+                                )
+                            )
+                        )
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/xhtml:html/xhtml:p[.='how are you?']",
+                "/xhtml:html/xhtml:p[@class='flash flash-INFO']"
             )
         );
     }

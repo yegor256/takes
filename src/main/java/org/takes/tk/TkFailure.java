@@ -28,6 +28,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.Take;
 
 /**
@@ -47,7 +48,7 @@ public final class TkFailure extends TkWrap {
      * Ctor.
      */
     public TkFailure() {
-        this("intentional failure");
+        this("Intentional failure");
     }
 
     /**
@@ -68,6 +69,22 @@ public final class TkFailure extends TkWrap {
                 @Override
                 public Response act(final Request request) {
                     throw err;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param err Error to throw
+     * @since 1.4
+     */
+    public TkFailure(final Scalar<IOException> err) {
+        super(
+            new Take() {
+                @Override
+                public Response act(final Request request) throws IOException {
+                    throw err.get();
                 }
             }
         );

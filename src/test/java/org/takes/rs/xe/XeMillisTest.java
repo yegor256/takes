@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth.social;
+package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
@@ -29,36 +29,61 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.takes.rq.RqFake;
-import org.takes.rs.xe.RsXembly;
-import org.takes.rs.xe.XeAppend;
+import org.takes.rs.RsXslt;
 
 /**
- * Test case for {@link XeGoogleLink}.
+ * Test case for {@link XeSla}.
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.9
+ * @since 1.4
  */
-public final class XeGoogleLinkTest {
+public final class XeMillisTest {
 
     /**
-     * XeGoogleLink can create a correct link.
+     * XeMillis can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesCorrectLink() throws IOException {
+    public void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
                         "root",
-                        new XeGoogleLink(new RqFake(), "abcdef")
+                        new XeMillis(false),
+                        new XeMillis(true)
                     )
                 ).body(),
                 StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
-                "/root/links/link[@rel='takes:google']"
+                "/root/millis"
+            )
+        );
+    }
+
+    /**
+     * XeMillis can build HTML response with default XSL template.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsHtmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXslt(
+                    new RsXembly(
+                        new XeStylesheet("/org/takes/rs/xe/test_millis.xsl"),
+                        new XeAppend(
+                            "page",
+                            new XeMillis(false),
+                            new XeMillis(true)
+                        )
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/xhtml:html/xhtml:span"
             )
         );
     }

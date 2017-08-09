@@ -25,6 +25,7 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -50,7 +51,8 @@ public final class XeLinkTest {
                         "root",
                         new XeLink("hey", "#a")
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/links/link[@rel='hey' and @href='#a']"

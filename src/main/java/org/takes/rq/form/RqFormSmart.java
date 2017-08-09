@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
+import org.takes.Request;
 import org.takes.rq.RqForm;
 
 /**
@@ -47,6 +48,15 @@ public final class RqFormSmart implements RqForm {
      * Original.
      */
     private final RqForm origin;
+
+    /**
+     * Ctor.
+     * @param req Original request
+     * @since 1.4
+     */
+    public RqFormSmart(final Request req) {
+        this(new RqFormBase(req));
+    }
 
     /**
      * Ctor.

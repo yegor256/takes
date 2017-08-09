@@ -1,4 +1,5 @@
-/**
+<?xml version="1.0"?>
+<!--
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2017 Yegor Bugayenko
@@ -20,44 +21,17 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */
-package org.takes.rs.xe;
-
-import com.jcabi.matchers.XhtmlMatchers;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import org.apache.commons.io.IOUtils;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-
-/**
- * Test case for {@link XeLocalhost}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
- * @since 0.3
- */
-public final class XeLocalhostTest {
-
-    /**
-     * XeLocalhost can build XML response.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void buildsXmlResponse() throws IOException {
-        MatcherAssert.assertThat(
-            IOUtils.toString(
-                new RsXembly(
-                    new XeAppend(
-                        "root",
-                        new XeLocalhost()
-                    )
-                ).body(),
-                StandardCharsets.UTF_8
-            ),
-            XhtmlMatchers.hasXPaths(
-                "/root[@ip]"
-            )
-        );
-    }
-
-}
+ -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+    <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes"/>
+    <xsl:strip-space elements="*"/>
+    <xsl:include href="/org/takes/rs/xe/memory.xsl"/>
+    <xsl:template match="/page">
+        <html>
+            <xsl:call-template name="takes_memory">
+                <xsl:with-param name="memory" select="memory"/>
+            </xsl:call-template>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>

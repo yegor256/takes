@@ -1,6 +1,6 @@
 <img src="http://www.takes.org/logo.png" width="96px" height="96px"/>
 
-[![Made By Teamed.io](http://img.teamed.io/btn.svg)](http://www.teamed.io)
+[![Managed by Zerocracy](http://www.zerocracy.com/badge.svg)](http://www.zerocracy.com)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](http://img.teamed.io/intellij-idea-recommend.svg)](https://www.jetbrains.com/idea/)
 
@@ -39,7 +39,11 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-These [blog posts](http://www.yegor256.com/tag/takes.html) may help you too.
+This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html) may help you too.
+
+These two web systems use Takes, and they are open source:
+[wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
+[jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
 
 ## Contents
 
@@ -599,7 +603,7 @@ public final class User implements XeSource, RsJSON.Source {
 
 ## RsXembly
 
-Here is how you generate an XML page using [Xembly](http://www.takes.org):
+Here is how you generate an XML page using [Xembly](http://www.xembly.org):
 
 ```java
 Response response = new RsXembly(

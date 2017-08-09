@@ -60,7 +60,6 @@ public interface RqHref extends Request {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqHref {
-
         /**
          * Ctor.
          * @param req Original request
@@ -68,7 +67,6 @@ public interface RqHref extends Request {
         public Base(final Request req) {
             super(req);
         }
-
         @Override
         public Href href() throws IOException {
             final String uri = new RqRequestLine.Base(this).uri();
@@ -98,6 +96,14 @@ public interface RqHref extends Request {
          * Original.
          */
         private final RqHref origin;
+        /**
+         * Ctor.
+         * @param req Original request
+         * @since 1.4
+         */
+        public Smart(final Request req) {
+            this(new RqHref.Base(req));
+        }
         /**
          * Ctor.
          * @param req Original request

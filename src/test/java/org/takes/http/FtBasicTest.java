@@ -29,6 +29,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -183,7 +184,8 @@ public final class FtBasicTest {
             public Response act(final Request req) throws IOException {
                 return new RsText(
                     IOUtils.toString(
-                        new RqLengthAware(req).body()
+                        new RqLengthAware(req).body(),
+                        StandardCharsets.UTF_8
                     )
                 );
             }

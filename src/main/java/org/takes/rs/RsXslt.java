@@ -251,16 +251,23 @@ public final class RsXslt extends RsWrap {
             } else {
                 uri = URI.create(base).resolve(href);
             }
-            final InputStream input = this.getClass().getResourceAsStream(
-                uri.getPath()
-            );
-            if (input == null) {
-                throw new TransformerException(
-                    String.format(
-                        "\"%s\" not found in classpath, base=\"%s\"",
-                        href, base
-                    )
-                );
+            final InputStream input;
+            if (uri.isAbsolute()) {
+                try {
+                    input = uri.toURL().openStream();
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
+                }
+            } else {
+                input = this.getClass().getResourceAsStream(uri.getPath());
+                if (input == null) {
+                    throw new TransformerException(
+                        String.format(
+                            "\"%s\" not found in classpath, base=\"%s\"",
+                            href, base
+                        )
+                    );
+                }
             }
             return new StreamSource(
                 new Utf8InputStreamReader(input)

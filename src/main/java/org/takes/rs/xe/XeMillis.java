@@ -33,10 +33,12 @@ import org.xembly.Directives;
  * <p>Add this Xembly source to your page like this:
  *
  * <pre> new RsXembly(
- *   new XsStylesheet("/xsl/home.xsl"),
- *   new XsAppend(
+ *   new XeStylesheet("/xsl/home.xsl"),
+ *   new XeAppend(
  *     "page",
- *     new XsMillis()
+ *     new XeMillis(),
+ *     // some other Xembly elements
+ *     new XeMillis(true)
  *   )
  * )</pre>
  *
@@ -67,6 +69,14 @@ public final class XeMillis implements XeSource {
      * Is it a finish?
      */
     private final boolean finish;
+
+    /**
+     * Ctor.
+     * @since 1.4
+     */
+    public XeMillis() {
+        this(false);
+    }
 
     /**
      * Ctor.

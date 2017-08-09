@@ -25,9 +25,11 @@ package org.takes.rs.xe;
 
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.takes.rs.RsXslt;
 
 /**
  * Test case for {@link XeMemory}.
@@ -50,10 +52,36 @@ public final class XeMemoryTest {
                         "root",
                         new XeMemory()
                     )
-                ).body()
+                ).body(),
+                StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
                 "/root/memory[@total and @max and @free]"
+            )
+        );
+    }
+
+    /**
+     * XeMillis can build HTML response with default XSL template.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsHtmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXslt(
+                    new RsXembly(
+                        new XeStylesheet("/org/takes/rs/xe/test_memory.xsl"),
+                        new XeAppend(
+                            "page",
+                            new XeMemory()
+                        )
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/xhtml:html/xhtml:span"
             )
         );
     }

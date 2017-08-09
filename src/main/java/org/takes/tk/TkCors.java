@@ -72,7 +72,7 @@ public final class TkCors implements Take {
      */
     public TkCors(final Take take, final String... domains) {
         this.origin = take;
-        this.allowed = new HashSet<String>(Arrays.asList(domains));
+        this.allowed = new HashSet<>(Arrays.asList(domains));
     }
 
     @Override
