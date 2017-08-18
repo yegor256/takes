@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -49,12 +50,6 @@ import org.takes.rq.RqHeaders;
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
-
-    /**
-     * Directory to watch.
-     */
-    private final File dir;
-
     /**
      * Command to execute.
      */
@@ -66,19 +61,17 @@ public final class FkHitRefresh implements Fork {
     private final Take take;
 
     /**
-     * File touched on every exec run.
+     * A handle for tracking changes.
      */
-    private final File last;
+    private final HitRefreshHandle handle;
 
     /**
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
      * @param tke Target
-     * @throws IOException If fails
      */
-    public FkHitRefresh(final File file, final String cmd,
-        final Take tke) throws IOException {
+    public FkHitRefresh(final File file, final String cmd, final Take tke) {
         this(file, Arrays.asList(cmd.split(" ")), tke);
     }
 
@@ -87,10 +80,9 @@ public final class FkHitRefresh implements Fork {
      * @param file Directory to watch
      * @param cmd Command to execute
      * @param tke Target
-     * @throws IOException If fails
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-        final Take tke) throws IOException {
+        final Take tke) {
         this(
             file,
             new Runnable() {
@@ -112,14 +104,26 @@ public final class FkHitRefresh implements Fork {
      * @param file Directory to watch
      * @param cmd Command to execute
      * @param tke Target
-     * @throws IOException If fails
      */
-    public FkHitRefresh(final File file, final Runnable cmd,
-        final Take tke) throws IOException {
-        this.dir = file;
+    public FkHitRefresh(final File file, final Runnable cmd, final Take tke) {
+        this(
+            cmd,
+            tke,
+            new HitRefreshHandle(file)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param cmd Command to execute
+     * @param tke Target
+     * @param handle Hit refresh handle
+     */
+    private FkHitRefresh(final Runnable cmd, final Take tke,
+        final HitRefreshHandle handle) {
         this.exec = cmd;
         this.take = tke;
-        this.last = FkHitRefresh.touchedFile();
+        this.handle = handle;
     }
 
     @Override
@@ -128,9 +132,9 @@ public final class FkHitRefresh implements Fork {
             new RqHeaders.Base(req).header("X-Takes-HitRefresh").iterator();
         final Opt<Response> resp;
         if (header.hasNext()) {
-            if (this.expired()) {
+            if (this.handle.expired()) {
                 this.exec.run();
-                FkHitRefresh.touch(this.last);
+                this.handle.touch();
             }
             resp = new Opt.Single<Response>(this.take.act(req));
         } else {
@@ -140,47 +144,96 @@ public final class FkHitRefresh implements Fork {
     }
 
     /**
-     * Expired?
-     * @return TRUE if expired
+     * A handle for serving hit-refresh feature.
      */
-    private boolean expired() {
-        final long recent = this.last.lastModified();
-        boolean expired = false;
-        final File[] files = this.dir.listFiles();
-        if (files != null) {
-            for (final File file : files) {
-                if (file.lastModified() > recent) {
-                    expired = true;
-                    break;
+    private static final class HitRefreshHandle {
+        /**
+         * Directory to watch.
+         */
+        private final File dir;
+
+        /**
+         * Internal state. Flag file touched on every exec run.
+         * Instantiated at first touch.
+         */
+        private File flag;
+
+        /**
+         * Ctor.
+         * @param dir Directory to watch
+         */
+        HitRefreshHandle(final File dir) {
+            this.dir = dir;
+        }
+
+        /**
+         * Create the file to touch, if it is not yet created.
+         * @return The file to touch
+         * @throws IOException If fails
+         */
+        public synchronized File touchedFile() throws IOException {
+            if (Objects.isNull(this.flag)) {
+                this.flag = File.createTempFile("take", ".txt");
+                this.flag.deleteOnExit();
+                touch(this.flag);
+            }
+            return this.flag;
+        }
+
+        /**
+         * Touch the temporary file.
+         * @throws IOException If fails
+         */
+        public synchronized void touch() throws IOException {
+            touch(this.touchedFile());
+        }
+
+        /**
+         * Expired?
+         * @return TRUE if expired
+         * @throws IOException If fails
+         */
+        private synchronized boolean expired() throws IOException {
+            boolean expired = false;
+            if (Objects.isNull(this.flag)) {
+                expired = true;
+            } else {
+                expired = this.directoryUpdated();
+            }
+            return expired;
+        }
+
+        /**
+         * Directory contents updated?
+         * @return TRUE if contents were updated
+         */
+        private boolean directoryUpdated() {
+            final long recent = this.flag.lastModified();
+            final File[] files = this.dir.listFiles();
+            boolean expired = false;
+            if (files != null) {
+                for (final File file : files) {
+                    if (file.lastModified() > recent) {
+                        expired = true;
+                        break;
+                    }
                 }
             }
+            return expired;
         }
-        return expired;
-    }
 
-    /**
-     * Touch the file.
-     * @param file The file to touch
-     * @throws IOException If fails
-     */
-    private static void touch(final File file) throws IOException {
-        final OutputStream out = new FileOutputStream(file);
-        try {
-            out.write('+');
-        } finally {
-            out.close();
+        /**
+         * Touch the file.
+         * @param file The file to touch
+         * @throws IOException If fails
+         */
+        private static void touch(final File file) throws IOException {
+            final OutputStream out = new FileOutputStream(file);
+            try {
+                out.write('+');
+            } finally {
+                out.close();
+            }
         }
-    }
-
-    /**
-     * Create the file to touch.
-     * @return The file to touch
-     * @throws IOException If fails
-     */
-    private static File touchedFile() throws IOException {
-        final File file = File.createTempFile("take", ".txt");
-        file.deleteOnExit();
-        FkHitRefresh.touch(file);
-        return file;
     }
 }
