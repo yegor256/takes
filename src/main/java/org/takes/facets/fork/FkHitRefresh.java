@@ -30,7 +30,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -156,14 +156,33 @@ public final class FkHitRefresh implements Fork {
          * Internal state. Flag file touched on every exec run.
          * Instantiated at first touch.
          */
-        private File flag;
+        private volatile File flag;
+
+        /**
+         * A lock for concurrent access to flag file.
+         */
+        private final ReentrantReadWriteLock lock;
 
         /**
          * Ctor.
          * @param dir Directory to watch
          */
         HitRefreshHandle(final File dir) {
+            this(
+                dir,
+                new ReentrantReadWriteLock()
+            );
+        }
+
+        /**
+         * Ctor.
+         * @param dir Directory to watch
+         * @param lock Lock for access to flag file
+         */
+        private HitRefreshHandle(final File dir,
+            final ReentrantReadWriteLock lock) {
             this.dir = dir;
+            this.lock = lock;
         }
 
         /**
@@ -171,11 +190,16 @@ public final class FkHitRefresh implements Fork {
          * @return The file to touch
          * @throws IOException If fails
          */
-        public synchronized File touchedFile() throws IOException {
-            if (Objects.isNull(this.flag)) {
+        public File touchedFile() throws IOException {
+            this.lock.readLock().lock();
+            final boolean cold = this.flag == null;
+            this.lock.readLock().unlock();
+            if (cold) {
+                this.lock.writeLock().lock();
                 this.flag = File.createTempFile("take", ".txt");
                 this.flag.deleteOnExit();
-                touch(this.flag);
+                this.lock.writeLock().unlock();
+                this.touch();
             }
             return this.flag;
         }
@@ -184,8 +208,15 @@ public final class FkHitRefresh implements Fork {
          * Touch the temporary file.
          * @throws IOException If fails
          */
-        public synchronized void touch() throws IOException {
-            touch(this.touchedFile());
+        public void touch() throws IOException {
+            final OutputStream out = new FileOutputStream(
+                this.touchedFile()
+            );
+            try {
+                out.write('+');
+            } finally {
+                out.close();
+            }
         }
 
         /**
@@ -193,9 +224,12 @@ public final class FkHitRefresh implements Fork {
          * @return TRUE if expired
          * @throws IOException If fails
          */
-        private synchronized boolean expired() throws IOException {
+        private boolean expired() throws IOException {
+            this.lock.readLock().lock();
+            final boolean cold = this.flag == null;
+            this.lock.readLock().unlock();
             boolean expired = false;
-            if (Objects.isNull(this.flag)) {
+            if (cold) {
                 expired = true;
             } else {
                 expired = this.directoryUpdated();
@@ -208,7 +242,9 @@ public final class FkHitRefresh implements Fork {
          * @return TRUE if contents were updated
          */
         private boolean directoryUpdated() {
+            this.lock.readLock().lock();
             final long recent = this.flag.lastModified();
+            this.lock.readLock().unlock();
             final File[] files = this.dir.listFiles();
             boolean expired = false;
             if (files != null) {
@@ -220,20 +256,6 @@ public final class FkHitRefresh implements Fork {
                 }
             }
             return expired;
-        }
-
-        /**
-         * Touch the file.
-         * @param file The file to touch
-         * @throws IOException If fails
-         */
-        private static void touch(final File file) throws IOException {
-            final OutputStream out = new FileOutputStream(file);
-            try {
-                out.write('+');
-            } finally {
-                out.close();
-            }
         }
     }
 }
