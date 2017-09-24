@@ -70,7 +70,7 @@ public class PsFacebookTest {
                     return new Response(
                         HttpURLConnection.HTTP_OK,
                         String.format(
-                            "{'id':'%s', 'name':'%s'}",
+                            "{\"id\":\"%s\",\"name\":\"%s\"}",
                             identifier,
                             RandomStringUtils.random(10)
                         )
