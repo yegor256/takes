@@ -15,6 +15,7 @@ before_install:
 install:
   - gem install pdd
   - gem install est
+  - gem install xcop
 env:
   global:
     - MAVEN_OPTS="-Xmx256m"
