@@ -149,8 +149,7 @@ public final class MainRemote {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
         final int port;
-        final InputStream input = new FileInputStream(file);
-        try {
+        try (InputStream input = new FileInputStream(file)) {
             // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
             while (true) {
@@ -159,8 +158,6 @@ public final class MainRemote {
                 }
             }
             port = Integer.parseInt(new Utf8String(buf).string().trim());
-        } finally {
-            input.close();
         }
         return port;
     }

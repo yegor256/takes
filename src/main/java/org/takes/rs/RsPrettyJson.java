@@ -108,24 +108,15 @@ public final class RsPrettyJson implements Response {
      */
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
-        final JsonReader rdr = Json.createReader(body);
-        try {
+        try (JsonReader rdr = Json.createReader(body)) {
             final JsonObject obj = rdr.readObject();
-            final JsonWriter wrt = Json.createWriterFactory(
-                Collections.singletonMap(
-                    JsonGenerator.PRETTY_PRINTING,
-                    true
-                )
-            ).createWriter(res);
-            try {
+            try (JsonWriter wrt = Json
+                .createWriterFactory(Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true))
+                .createWriter(res)) {
                 wrt.writeObject(obj);
-            } finally {
-                wrt.close();
             }
         } catch (final JsonException ex) {
             throw new IOException(ex);
-        } finally {
-            rdr.close();
         }
         return res.toByteArray();
     }

@@ -67,13 +67,8 @@ public final class FbLog4j extends FbWrap {
     private static void log(final RqFallback req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Throwable error = req.throwable();
-        final PrintStream stream = new Utf8PrintStream(
-            baos, false
-        );
-        try {
+        try (PrintStream stream = new Utf8PrintStream(baos, false)) {
             error.printStackTrace(stream);
-        } finally {
-            stream.close();
         }
         Logger.getLogger(FbLog4j.class).error(
             String.format(

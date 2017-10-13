@@ -48,18 +48,14 @@ public final class CcCompact implements Codec {
     @Override
     public byte[] encode(final Identity identity) throws IOException {
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
-        final DataOutputStream stream = new DataOutputStream(data);
-        try {
+        try (DataOutputStream stream = new DataOutputStream(data)) {
             stream.writeUTF(identity.urn());
-            for (final Map.Entry<String, String> ent
-                : identity.properties().entrySet()) {
+            for (final Map.Entry<String, String> ent : identity.properties().entrySet()) {
                 stream.writeUTF(ent.getKey());
                 stream.writeUTF(ent.getValue());
             }
         } catch (final IOException ex) {
             throw new IllegalArgumentException(ex);
-        } finally {
-            stream.close();
         }
         return data.toByteArray();
     }
@@ -67,10 +63,7 @@ public final class CcCompact implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final Map<String, String> map = new HashMap<>(0);
-        final DataInputStream stream = new DataInputStream(
-            new ByteArrayInputStream(bytes)
-        );
-        try {
+        try (DataInputStream stream = new DataInputStream(new ByteArrayInputStream(bytes))) {
             final String urn = stream.readUTF();
             while (stream.available() > 0) {
                 map.put(stream.readUTF(), stream.readUTF());
@@ -78,8 +71,6 @@ public final class CcCompact implements Codec {
             return new Identity.Simple(urn, map);
         } catch (final IOException ex) {
             throw new DecodingException(ex);
-        } finally {
-            stream.close();
         }
     }
 
