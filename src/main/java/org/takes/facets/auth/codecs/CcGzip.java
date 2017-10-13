@@ -69,7 +69,10 @@ public final class CcGzip implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        try (InputStream gzip = new GZIPInputStream(new ByteArrayInputStream(bytes))) {
+        try (InputStream gzip = new GZIPInputStream(
+            new ByteArrayInputStream(bytes)
+            )
+        ) {
             while (true) {
                 final int data = gzip.read();
                 if (data < 0) {

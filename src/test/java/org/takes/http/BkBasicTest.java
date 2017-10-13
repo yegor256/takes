@@ -209,7 +209,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(server.getInetAddress(), server.getLocalPort())) {
+            try (Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
@@ -267,7 +271,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(server.getInetAddress(), server.getLocalPort())) {
+            try (Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
@@ -317,7 +325,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(server.getInetAddress(), server.getLocalPort())) {
+            try (Socket socket = new Socket(
+                server.getInetAddress(),
+                server.getLocalPort()
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
