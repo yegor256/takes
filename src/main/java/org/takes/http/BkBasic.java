@@ -129,13 +129,8 @@ public final class BkBasic implements Back {
     private static Response failure(final Throwable err, final int code)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final PrintStream stream = new Utf8PrintStream(
-            baos, false
-        );
-        try {
+        try (PrintStream stream = new Utf8PrintStream(baos, false)) {
             err.printStackTrace(stream);
-        } finally {
-            stream.close();
         }
         return new RsWithStatus(
             new RsText(new ByteArrayInputStream(baos.toByteArray())),

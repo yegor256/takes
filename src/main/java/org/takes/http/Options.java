@@ -97,28 +97,24 @@ final class Options {
         } else {
             final File file = new File(port);
             if (file.exists()) {
-                final Reader reader = new Utf8InputStreamReader(
+                try (Reader reader = new Utf8InputStreamReader(
                     new FileInputStream(file)
-                );
-                try {
+                    )
+                ) {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
                     final int length = reader.read(chars);
                     socket = new ServerSocket(
                         Integer.parseInt(new String(chars, 0, length))
                     );
-                } finally {
-                    reader.close();
                 }
             } else {
                 socket = new ServerSocket(0);
-                final Writer writer = new Utf8OutputStreamWriter(
+                try (Writer writer = new Utf8OutputStreamWriter(
                     new FileOutputStream(file)
-                );
-                try {
+                    )
+                ) {
                     writer.append(Integer.toString(socket.getLocalPort()));
-                } finally {
-                    writer.close();
                 }
             }
         }

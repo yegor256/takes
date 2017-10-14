@@ -164,11 +164,8 @@ public final class FkHitRefresh implements Fork {
      * @throws IOException If fails
      */
     private static void touch(final File file) throws IOException {
-        final OutputStream out = new FileOutputStream(file);
-        try {
+        try (OutputStream out = new FileOutputStream(file)) {
             out.write('+');
-        } finally {
-            out.close();
         }
     }
 

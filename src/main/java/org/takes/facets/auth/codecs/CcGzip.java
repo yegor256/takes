@@ -60,11 +60,8 @@ public final class CcGzip implements Codec {
     @Override
     public byte[] encode(final Identity identity) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        final GZIPOutputStream gzip = new GZIPOutputStream(out);
-        try {
+        try (GZIPOutputStream gzip = new GZIPOutputStream(out)) {
             gzip.write(this.origin.encode(identity));
-        } finally {
-            gzip.close();
         }
         return out.toByteArray();
     }
@@ -72,10 +69,10 @@ public final class CcGzip implements Codec {
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        final InputStream gzip = new GZIPInputStream(
+        try (InputStream gzip = new GZIPInputStream(
             new ByteArrayInputStream(bytes)
-        );
-        try {
+            )
+        ) {
             while (true) {
                 final int data = gzip.read();
                 if (data < 0) {
@@ -83,8 +80,6 @@ public final class CcGzip implements Codec {
                 }
                 out.write(data);
             }
-        } finally {
-            gzip.close();
         }
         return this.origin.decode(out.toByteArray());
     }
