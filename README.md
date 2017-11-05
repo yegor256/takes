@@ -6,7 +6,7 @@
 
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.takes/takes/badge.svg?color=blue&prefix=v)](http://www.javadoc.io/doc/org.takes/takes)
+[![Javadoc](http://www.javadoc.io/badge/org.takes/takes.svg)](http://www.javadoc.io/doc/org.takes/takes)
 [![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/938e7683fcfa4db9bff362c2b4a9b78e)](https://www.codacy.com/app/github_90/takes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yegor256/takes&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
