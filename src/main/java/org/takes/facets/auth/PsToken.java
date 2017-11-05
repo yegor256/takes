@@ -136,17 +136,17 @@ public final class PsToken implements Pass {
             tocheck.put(jwtheader).put(".".getBytes()).put(jwtpayload);
             final byte[] checked = this.signature.sign(tocheck.array());
             if (Arrays.equals(jwtsign, checked)) {
-                final JsonObject jsonv = Json.createReader(
+                try (final JsonReader rdr = Json.createReader(
                     new StringReader(
                         new String(new Base64().decode(jwtpayload))
+                    )
+                )) {
+                    user = new Opt.Single<Identity>(
+                        new Identity.Simple(
+                            rdr.readObject().getString(Token.Jwt.SUBJECT)
                         )
-                    )
-                    .readObject();
-                user = new Opt.Single<Identity>(
-                    new Identity.Simple(
-                        jsonv.getString(Token.Jwt.SUBJECT)
-                    )
-                );
+                    );
+                }
             }
         }
         return user;
@@ -166,20 +166,19 @@ public final class PsToken implements Pass {
         tosign.put(".".getBytes());
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
-        final JsonReader reader = Json.createReader(res.body());
-        final JsonObject target = Json.createObjectBuilder()
-            .add("response", reader.read())
-            .add(
-                "jwt", String.format(
-                    "%s.%s.%s",
-                    new String(jwtheader),
-                    new String(jwtpayload),
-                    new String(sign)
+        try (final JsonReader reader = Json.createReader(res.body())) {
+            final JsonObject target = Json.createObjectBuilder()
+                .add("response", reader.read())
+                .add(
+                    "jwt", String.format(
+                        "%s.%s.%s",
+                        new String(jwtheader),
+                        new String(jwtpayload),
+                        new String(sign)
+                    )
                 )
-            )
-            .build();
-        return new RsJson(
-            target
-        );
+                .build();
+            return new RsJson(target);
+        }
     }
 }
