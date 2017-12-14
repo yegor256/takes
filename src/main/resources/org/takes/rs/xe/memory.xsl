@@ -29,9 +29,9 @@ SOFTWARE.
       <xsl:attribute name="class">
         <xsl:text>memory</xsl:text>
       </xsl:attribute>
-      <xsl:value-of select="$memory/@total"/>
+      <xsl:value-of select="$memory/@free"/>
       <xsl:text>/</xsl:text>
-      <xsl:value-of select="$memory/@max"/>
+      <xsl:value-of select="$memory/@total"/>
     </span>
   </xsl:template>
 </xsl:stylesheet>
