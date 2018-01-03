@@ -37,7 +37,7 @@ public class Utf8InputStreamReader extends InputStreamReader {
 
     /**
      * Ctor.
-     * @param input InpputStream value
+     * @param input InputStream value
      */
     public Utf8InputStreamReader(final InputStream input) {
         super(input, StandardCharsets.UTF_8);

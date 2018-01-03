@@ -49,7 +49,7 @@ public final class Concat<T> implements Iterable<T> {
     /**
      * Ctor.
      * @param aitb First iterable to concat
-     * @param bitb Second iterable to conat
+     * @param bitb Second iterable to concat
      */
     public Concat(final Iterable<T> aitb, final Iterable<T> bitb) {
         this.left = aitb;
