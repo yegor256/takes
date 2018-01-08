@@ -24,7 +24,6 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.takes.Scalar;
 import org.xembly.Directive;
@@ -45,15 +44,24 @@ public final class XeWhen extends XeWrap {
     /**
      * Ctor.
      * @param condition Condition
-     * @param source Xembly source
+     * @param positive Xembly source when condition is positive
+     * @param negative Xembly source when condition is negative
      */
-    public XeWhen(final boolean condition, final XeSource source) {
+    public XeWhen(final boolean condition,
+        final XeSource positive,
+        final XeSource negative) {
         this(
             condition,
             new Scalar<XeSource>() {
                 @Override
                 public XeSource get() {
-                    return source;
+                    return positive;
+                }
+            },
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return negative;
                 }
             }
         );
@@ -62,9 +70,12 @@ public final class XeWhen extends XeWrap {
     /**
      * Ctor.
      * @param condition Condition
-     * @param source Xembly source
+     * @param positive Xembly source when condition is positive
+     * @param negative Xembly source when condition is negative
      */
-    public XeWhen(final boolean condition, final Scalar<XeSource> source) {
+    public XeWhen(final boolean condition,
+        final Scalar<XeSource> positive,
+        final Scalar<XeSource> negative) {
         this(
             new Scalar<Boolean>() {
                 @Override
@@ -72,23 +83,33 @@ public final class XeWhen extends XeWrap {
                     return condition;
                 }
             },
-            source
+            positive,
+            negative
         );
     }
 
     /**
      * Ctor.
      * @param condition Condition
-     * @param source Xembly source
+     * @param positive Xembly source when condition is positive
+     * @param negative Xembly source when condition is negative
      * @since 1.5
      */
-    public XeWhen(final Scalar<Boolean> condition, final XeSource source) {
+    public XeWhen(final Scalar<Boolean> condition,
+        final XeSource positive,
+        final XeSource negative) {
         this(
             condition,
             new Scalar<XeSource>() {
                 @Override
                 public XeSource get() {
-                    return source;
+                    return positive;
+                }
+            },
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return negative;
                 }
             }
         );
@@ -97,7 +118,8 @@ public final class XeWhen extends XeWrap {
     /**
      * Ctor.
      * @param condition Condition
-     * @param source Xembly source
+     * @param positive Xembly source when condition is positive
+     * @param negative Xembly source when condition is negative
      * @since 1.5
      */
     @SuppressWarnings
@@ -108,16 +130,17 @@ public final class XeWhen extends XeWrap {
             }
         )
     public XeWhen(final Scalar<Boolean> condition,
-        final Scalar<XeSource> source) {
+        final Scalar<XeSource> positive,
+        final Scalar<XeSource> negative) {
         super(
             new XeSource() {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
                     if (condition.get()) {
-                        dirs = source.get().toXembly();
+                        dirs = positive.get().toXembly();
                     } else {
-                        dirs = Collections.emptyList();
+                        dirs = negative.get().toXembly();
                     }
                     return dirs;
                 }

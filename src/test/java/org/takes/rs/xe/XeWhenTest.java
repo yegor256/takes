@@ -29,6 +29,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.takes.Scalar;
 
 /**
  * Test case for {@link XeWhen}.
@@ -39,23 +40,64 @@ import org.junit.Test;
 public final class XeWhenTest {
 
     /**
-     * XeWhen can build XML response.
+     * XeWhen can build XML response with positive condition.
+     *
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    public void buildsXmlResponseFromPositiveCondition() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
-                        "test",
-                        new XeWhen(true, new XeDate())
+                        "positive",
+                        new XeWhen(
+                            true,
+                            new XeDate(),
+                            new XeMemory()
+                        )
                     )
                 ).body(),
                 StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPaths(
-                "/test[@date]"
+                "/positive[@date]"
+            )
+        );
+    }
+
+    /**
+     * XeWhen can build XML response with negative condition.
+     *
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsXmlResponseFromNegativeCondition() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "negative",
+                        new XeWhen(
+                            false,
+                            new Scalar<XeSource>() {
+                                @Override
+                                public XeSource get() throws IOException {
+                                    return new XeDate();
+                                }
+                            },
+                            new Scalar<XeSource>() {
+                                @Override
+                                public XeSource get() throws IOException {
+                                    return new XeMemory();
+                                }
+                            })
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/negative/memory"
             )
         );
     }
