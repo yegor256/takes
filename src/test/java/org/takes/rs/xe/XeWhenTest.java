@@ -40,6 +40,32 @@ import org.takes.Scalar;
 public final class XeWhenTest {
 
     /**
+     * XeWhen can build XML response.
+     *
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void buildsXmlResponse() throws IOException {
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "test",
+                        new XeWhen(
+                            true,
+                            new XeDate()
+                        )
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/test[@date]"
+            )
+        );
+    }
+
+    /**
      * XeWhen can build XML response with positive condition.
      *
      * @throws IOException If some problem inside

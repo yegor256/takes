@@ -44,6 +44,76 @@ public final class XeWhen extends XeWrap {
     /**
      * Ctor.
      * @param condition Condition
+     * @param source Xembly source
+     */
+    public XeWhen(final boolean condition, final XeSource source) {
+        this(
+            condition,
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return source;
+                }
+            },
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() throws IOException {
+                    return XeSource.EMPTY;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
+     */
+    public XeWhen(final boolean condition, final Scalar<XeSource> source) {
+        this(
+            new Scalar<Boolean>() {
+                @Override
+                public Boolean get() {
+                    return condition;
+                }
+            },
+            source,
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() throws IOException {
+                    return XeSource.EMPTY;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
+     * @param source Xembly source
+     * @since 1.5
+     */
+    public XeWhen(final Scalar<Boolean> condition, final XeSource source) {
+        this(
+            condition,
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() {
+                    return source;
+                }
+            },
+            new Scalar<XeSource>() {
+                @Override
+                public XeSource get() throws IOException {
+                    return XeSource.EMPTY;
+                }
+            }
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param condition Condition
      * @param positive Xembly source when condition is positive
      * @param negative Xembly source when condition is negative
      */
