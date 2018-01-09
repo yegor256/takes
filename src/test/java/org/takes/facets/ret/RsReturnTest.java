@@ -62,4 +62,13 @@ public final class RsReturnTest {
             )
         );
     }
+
+    /**
+     * RsReturn can reject invalid location.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = IOException.class)
+    public void rejectsInvalidLocation() throws IOException {
+        new RsReturn(new RsEmpty(), "http://www.netbout.com/,PsCookie=");
+    }
 }
