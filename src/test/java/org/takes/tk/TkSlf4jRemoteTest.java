@@ -33,38 +33,16 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.http.FtRemote;
-import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link TkSlf4j}.
+ * Test case for {@link TkSlf4j} when used in conjunction
+ * with {@link FtRemote} and {@link TkEmpty}.
  * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.11.2
- * @todo #712:30min Prepare implementation for empty response body test and
- *  unignore returnsAnEmptyResponseBody test to fix such error which was
- *  reported in #712.
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkSlf4jTest {
-
-    /**
-     * TkSlf4j can log message.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void logsMessage() throws IOException {
-        new TkSlf4j(new TkText("test")).act(new RqFake());
-    }
-
-    /**
-     * TkSlf4j can log exception.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void logsException() throws IOException {
-        new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
-    }
+public final class TkSlf4jRemoteTest {
 
     /**
      * TkSlf4j can return an empty response body for {@link TkEmpty}.
