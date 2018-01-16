@@ -24,15 +24,8 @@
 
 package org.takes.tk;
 
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import org.hamcrest.core.IsEqual;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 
 /**
@@ -41,9 +34,6 @@ import org.takes.rq.RqFake;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.11.2
- * @todo #712:30min Prepare implementation for empty response body test and
- *  unignore returnsAnEmptyResponseBody test to fix such error which was
- *  reported in #712.
  */
 public final class TkSlf4jTest {
 
@@ -63,30 +53,5 @@ public final class TkSlf4jTest {
     @Test(expected = IOException.class)
     public void logsException() throws IOException {
         new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
-    }
-
-    /**
-     * TkSlf4j can return an empty response body for {@link TkEmpty}.
-     * @throws IOException if some I/O problem occurred.
-     */
-    @Ignore
-    @Test
-    public void returnsAnEmptyResponseBody() throws IOException {
-        new FtRemote(
-            new TkSlf4j(new TkEmpty())
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .body().set("returnsAnEmptyResponseBody").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
-        );
     }
 }
