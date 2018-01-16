@@ -44,7 +44,6 @@ import org.takes.rq.RqFake;
  * @todo #712:30min Prepare implementation for empty response body test and
  *  unignore returnsAnEmptyResponseBody test to fix such error which was
  *  reported in #712.
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkSlf4jTest {
 
