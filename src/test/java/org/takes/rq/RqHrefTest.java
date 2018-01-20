@@ -61,6 +61,26 @@ public final class RqHrefTest {
     }
 
     /**
+     * RqHref.Base can parse a query without a Host.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void parsesHttpQueryWithoutHost() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=300",
+                        "Content-type: text/plain+xml"
+                    ),
+                    ""
+                )
+            ).href().toString(),
+            Matchers.equalTo("http://localhost/h?a=300")
+        );
+    }
+
+    /**
      * RqHref.Base should throw {@link HttpException} when parsing
      * Request without Request-Line.
      * @throws IOException If some problem inside
