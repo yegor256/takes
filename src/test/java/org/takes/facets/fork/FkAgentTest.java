@@ -37,23 +37,10 @@ import org.takes.tk.TkEmpty;
  * @author Valeriy Zhirnov (neonailol@gmail.com)
  * @version $Id$
  * @since 1.7.2
+ * @checkstyle JavadocMethodCheck (500 lines)
  */
 public final class FkAgentTest {
 
-    /**
-     * Some small version number.
-     */
-    private static final int VERSION_12 = 12;
-
-    /**
-     * Some big version number.
-     */
-    private static final int VERSION_90 = 90;
-
-    /**
-     * FkAgent can match by User-Agent header.
-     * @throws IOException If some problem inside
-     */
     @Test
     public void matchesByVersionGreater() throws IOException {
         final String header = "User-Agent";
@@ -61,7 +48,8 @@ public final class FkAgentTest {
         MatcherAssert.assertThat(
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion(agent, new AmVersion.VmGt(FkAgentTest.VERSION_12))
+                // @checkstyle MagicNumber (1 line)
+                new AmVersion(agent, new AmVersion.VmGreater(12))
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -74,7 +62,8 @@ public final class FkAgentTest {
         MatcherAssert.assertThat(
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion(agent, new AmVersion.VmGt(FkAgentTest.VERSION_90))
+                // @checkstyle MagicNumber (1 line)
+                new AmVersion(agent, new AmVersion.VmGreater(90))
             ).route(
                 new RqWithHeader(
                     new RqFake(),

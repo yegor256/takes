@@ -61,7 +61,7 @@ public final class AmVersion implements AgentMatch {
             result = false;
         } else if (!this.agent.equalsIgnoreCase(parts[0])) {
             result = false;
-        } else if (!this.version.matches(extractMajorVersion(parts[1]))) {
+        } else if (!this.version.matches(majorVersion(parts[1]))) {
             result = false;
         }
         return result;
@@ -72,9 +72,8 @@ public final class AmVersion implements AgentMatch {
      * @param part Token part.
      * @return Parsed major version number.
      */
-    private static int extractMajorVersion(final String part) {
-        final String[] parts = part.split("\\.");
-        return Integer.parseInt(parts[0]);
+    private static int majorVersion(final String part) {
+        return Integer.parseInt(part.split("\\.")[0]);
     }
 
     /**
@@ -84,7 +83,7 @@ public final class AmVersion implements AgentMatch {
      * @version $Id$
      * @since 1.7.2
      */
-    public static final class VmGt implements VersionMatch {
+    public static final class VmGreater implements VersionMatch {
 
         /**
          * Version.
@@ -95,7 +94,7 @@ public final class AmVersion implements AgentMatch {
          * Ctor.
          * @param ver Version.
          */
-        public VmGt(final int ver) {
+        public VmGreater(final int ver) {
             this.ver = ver;
         }
 

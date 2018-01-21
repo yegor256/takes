@@ -49,6 +49,12 @@ import org.takes.rq.RqHeaders;
 public final class FkAgent implements Fork {
 
     /**
+     * Pattern to extract name and version from user-agent.
+     */
+    private static final Pattern PATTERN =
+        Pattern.compile("(\\w+)\\/([\\d\\.]+)");
+
+    /**
      * Take to handle the request and dynamically return the response.
      */
     private final Take take;
@@ -89,12 +95,11 @@ public final class FkAgent implements Fork {
      * @throws IOException If some problems inside.
      */
     private static List<String> tokens(final Request req) throws IOException {
-        final Pattern pattern = Pattern.compile("(\\w+)\\/([\\d\\.]+)");
         final List<String> tokens = new LinkedList<>();
         final Iterable<String> headers =
             new RqHeaders.Base(req).header("User-Agent");
         for (final String header : headers) {
-            final Matcher matcher = pattern.matcher(header);
+            final Matcher matcher = PATTERN.matcher(header);
             if (matcher.matches()) {
                 tokens.add(matcher.group());
             }
