@@ -51,7 +51,7 @@ These two web systems use Takes, and they are open source:
 ## Contents
 
 - [Quick Start](#quick-start)
-- [Build and Run With Maven](#build-a-run-with-maven)
+- [Build and Run With Maven](#build-and-run-with-maven)
 - [Unit Testing](#unit-testing)
 - [Integration Testing](#integration-testing)
 - [A Bigger Example](#a-bigger-example)
