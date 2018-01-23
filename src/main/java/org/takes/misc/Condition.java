@@ -23,6 +23,9 @@
  */
 package org.takes.misc;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Condition to determine how {@link Select} behave when filtering an iterable.
  *
@@ -30,6 +33,13 @@ package org.takes.misc;
  * @version $Id$
  * @param <T> Type of items
  * @since 0.13.8
+ *
+ * @todo #218:30min Implement Condition.Range that should select elements
+ *  within given range of indexes. It should be constructable with specified
+ *  ranges and with starting position. Having that we can implement
+ *  Condition.Skip that will simply negate Condition.Range so that elements
+ *  are skipped that are inside the given range or from given starting
+ *  position.
  */
 public interface Condition<T> {
 
@@ -74,6 +84,59 @@ public interface Condition<T> {
         @Override
         public boolean fits(final T element) {
             return true;
+        }
+    }
+
+    /**
+     * Regexp condition that check items with given regexp.
+     * @author Izbassar Tolegen (t.izbassar@gmail.com)
+     * @version $Id$
+     * @since 2.0
+     */
+    final class Regexp implements Condition<String> {
+
+        /**
+         * Condition.
+         */
+        private final Condition<String> condition;
+
+        /**
+         * Regex to validate against.
+         */
+        private final String regexp;
+
+        /**
+         * Ctor.
+         * @param condition Original condition
+         * @param regexp Regex to validate against
+         */
+        public Regexp(final Condition<String> condition, final String regexp) {
+            this.condition = condition;
+            this.regexp = regexp;
+        }
+
+        /**
+         * Ctor with original condition set to {@link Condition.True}.
+         * @param regexp Regex to validate against
+         */
+        public Regexp(final String regexp) {
+            this(new Condition.True<String>(), regexp);
+        }
+
+        @Override
+        public boolean fits(final String element) {
+            return this.valid(element) && this.condition.fits(element);
+        }
+
+        /**
+         * Checks given element against regex.
+         * @param element Element to check
+         * @return True if element fits regex
+         */
+        private boolean valid(final String element) {
+            final Pattern pattern = Pattern.compile(this.regexp);
+            final Matcher matcher = pattern.matcher(element);
+            return matcher.matches();
         }
     }
 }

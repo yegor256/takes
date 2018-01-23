@@ -97,4 +97,20 @@ public final class SelectTest {
             Matchers.equalTo("1 2 33 4")
         );
     }
+
+    /**
+     * Select can select according to regex.
+     */
+    @Test
+    public void selectsWithRegex() {
+        MatcherAssert.assertThat(
+            Joiner.on(" ").join(
+                new Select<String>(
+                    Arrays.asList("true", "Yes", "no", "True"),
+                    new Condition.Regexp("[tT]rue|[yY]es")
+                )
+            ),
+            Matchers.equalTo("true Yes True")
+        );
+    }
 }
