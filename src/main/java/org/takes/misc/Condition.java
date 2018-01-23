@@ -62,4 +62,18 @@ public interface Condition<T> {
         }
     }
 
+    /**
+     * Condition that always evaluate to true.
+     * @author Izbassar Tolegen (t.izbassar@gmail.com)
+     * @version $Id$
+     * @param <T> Type of items
+     * @since 2.0
+     */
+    final class True<T> implements Condition<T> {
+
+        @Override
+        public boolean fits(final T element) {
+            return true;
+        }
+    }
 }

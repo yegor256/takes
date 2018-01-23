@@ -81,4 +81,20 @@ public final class SelectTest {
             Matchers.equalTo("at4+at5")
         );
     }
+
+    /**
+     * Select will select all with true condition.
+     */
+    @Test
+    public void selectsAllWithTrueCondition() {
+        MatcherAssert.assertThat(
+            Joiner.on(" ").join(
+                new Select<String>(
+                    Arrays.asList("1", "2", "33", "4"),
+                    new Condition.True<String>()
+                )
+            ),
+            Matchers.equalTo("1 2 33 4")
+        );
+    }
 }
