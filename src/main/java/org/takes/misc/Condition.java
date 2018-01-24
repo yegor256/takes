@@ -23,7 +23,6 @@
  */
 package org.takes.misc;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -88,7 +87,7 @@ public interface Condition<T> {
     }
 
     /**
-     * Regexp condition that check items with given regexp.
+     * Regexp condition that check items with given pattern.
      * @author Izbassar Tolegen (t.izbassar@gmail.com)
      * @version $Id$
      * @since 2.0
@@ -101,9 +100,19 @@ public interface Condition<T> {
         private final Condition<String> condition;
 
         /**
-         * Regex to validate against.
+         * Pattern.
          */
-        private final String regexp;
+        private final Pattern ptn;
+
+        /**
+         * Ctor.
+         * @param condition Original condition
+         * @param ptn Pattern to validate against
+         */
+        public Regexp(final Condition<String> condition, final Pattern ptn) {
+            this.condition = condition;
+            this.ptn = ptn;
+        }
 
         /**
          * Ctor.
@@ -111,8 +120,13 @@ public interface Condition<T> {
          * @param regexp Regex to validate against
          */
         public Regexp(final Condition<String> condition, final String regexp) {
-            this.condition = condition;
-            this.regexp = regexp;
+            this(
+                condition,
+                Pattern.compile(
+                    regexp,
+                    Pattern.CASE_INSENSITIVE | Pattern.DOTALL
+                )
+            );
         }
 
         /**
@@ -123,20 +137,18 @@ public interface Condition<T> {
             this(new Condition.True<String>(), regexp);
         }
 
-        @Override
-        public boolean fits(final String element) {
-            return this.valid(element) && this.condition.fits(element);
+        /**
+         * Ctor with original condition set to {@link Condition.True}.
+         * @param ptn Pattern to validate against
+         */
+        public Regexp(final Pattern ptn) {
+            this(new Condition.True<String>(), ptn);
         }
 
-        /**
-         * Checks given element against regex.
-         * @param element Element to check
-         * @return True if element fits regex
-         */
-        private boolean valid(final String element) {
-            final Pattern pattern = Pattern.compile(this.regexp);
-            final Matcher matcher = pattern.matcher(element);
-            return matcher.matches();
+        @Override
+        public boolean fits(final String element) {
+            return this.ptn.matcher(element).matches()
+                && this.condition.fits(element);
         }
     }
 }
