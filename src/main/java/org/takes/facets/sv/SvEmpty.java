@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.servlet;
+package org.takes.facets.sv;
 
 import org.takes.Take;
 import org.takes.tk.TkEmpty;

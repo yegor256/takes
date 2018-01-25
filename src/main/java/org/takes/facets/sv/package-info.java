@@ -39,4 +39,4 @@
  * @version $Id.$
  * @since 2.0
  */
-package org.takes.facets.servlet;
+package org.takes.facets.sv;

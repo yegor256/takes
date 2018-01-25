@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.servlet;
+package org.takes.facets.sv;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +41,7 @@ public abstract class AbstractTakesServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Take that handles servlet request.
+     * Take that handles sv request.
      * @return Take
      */
     public abstract Take take();

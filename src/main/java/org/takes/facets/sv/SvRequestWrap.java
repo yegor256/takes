@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.servlet;
+package org.takes.facets.sv;
 
 import java.io.IOException;
 import java.io.InputStream;
