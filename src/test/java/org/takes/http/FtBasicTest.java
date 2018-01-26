@@ -289,15 +289,16 @@ public final class FtBasicTest {
     }
 
     /**
-     * FtBasic can work with broken pipe.
+     * FtBasic can work with broken pipe if {@link BkSafe} is used.
      * @throws IOException If some problem inside
      */
     @Test
-    @Ignore
     public void gracefullyHandlesBrokenPipe() throws IOException {
         new FtBasic(
-            new BkBasic(
-                new TkText("Body")
+            new BkSafe(
+                new BkBasic(
+                    new TkText("Body")
+                )
             ),
             FtBasicTest.server()
         ).start(
