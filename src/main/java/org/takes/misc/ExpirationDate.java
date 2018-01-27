@@ -40,7 +40,7 @@ public final class ExpirationDate {
     /**
      * DateFormat for expiration.
      */
-    private final SimpleDateFormat format;
+    private final ThreadLocal<SimpleDateFormat> format;
 
     /**
      * Expires date.
@@ -74,22 +74,30 @@ public final class ExpirationDate {
      */
     public ExpirationDate(final String ptn, final Locale locale,
         final long expiration) {
-        this(new SimpleDateFormat(ptn, locale), new Date(expiration));
+        this(ptn, locale, new Date(expiration));
     }
 
     /**
      * Ctor.
-     * @param format Date format
+     * @param ptn Date format pattern
+     * @param locale Locale
      * @param expires Date when expires
      */
-    public ExpirationDate(final SimpleDateFormat format, final Date expires) {
-        this.format = format;
+    public ExpirationDate(final String ptn, final Locale locale,
+        final Date expires) {
+        this.format = new ThreadLocal<SimpleDateFormat>() {
+            @Override
+            protected SimpleDateFormat initialValue() {
+                return new SimpleDateFormat(ptn, locale);
+            }
+        };
         this.expires = expires;
     }
 
     @Override
     public String toString() {
-        this.format.setTimeZone(TimeZone.getTimeZone("GMT"));
-        return this.format.format(this.expires);
+        final SimpleDateFormat fmt = this.format.get();
+        fmt.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return fmt.format(this.expires);
     }
 }
