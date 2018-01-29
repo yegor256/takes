@@ -67,6 +67,7 @@ These two web systems use Takes, and they are open source:
 - [RsJSON](#rsjson)
 - [RsXembly](#rsxembly)
 - [GZIP Compression](#gzip-compression)
+- [SSL Configuration](#ssl-configuration)
 - [Authentication](#authentication)
 - [Command Line Arguments](#command-line-arguments)
 - [Logging](#logging)
@@ -772,7 +773,7 @@ System.setProperty("javax.net.ssl.trustStore", file);
 System.setProperty("javax.net.ssl.trustStorePassword", password);
 ```
 
-Then simple create exemplar of class [FtSecure](master/src/main/java/org/takes/http/FtSecure.java) with socket factory
+Then simple create exemplar of class [FtSecure](src/main/java/org/takes/http/FtSecure.java) with socket factory
 
 ```java
 final ServerSocket skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
