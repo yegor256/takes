@@ -23,6 +23,8 @@
  */
 package org.takes.misc;
 
+import java.util.regex.Pattern;
+
 /**
  * Condition to determine how {@link Select} behave when filtering an iterable.
  *
@@ -30,6 +32,13 @@ package org.takes.misc;
  * @version $Id$
  * @param <T> Type of items
  * @since 0.13.8
+ *
+ * @todo #218:30min Implement Condition.Range that should select elements
+ *  within given range of indexes. It should be constructable with specified
+ *  ranges and with starting position. Having that we can implement
+ *  Condition.Skip that will simply negate Condition.Range so that elements
+ *  are skipped that are inside the given range or from given starting
+ *  position.
  */
 public interface Condition<T> {
 
@@ -62,4 +71,84 @@ public interface Condition<T> {
         }
     }
 
+    /**
+     * Condition that always evaluate to true.
+     * @author Izbassar Tolegen (t.izbassar@gmail.com)
+     * @version $Id$
+     * @param <T> Type of items
+     * @since 2.0
+     */
+    final class True<T> implements Condition<T> {
+
+        @Override
+        public boolean fits(final T element) {
+            return true;
+        }
+    }
+
+    /**
+     * Regexp condition that check items with given pattern.
+     * @author Izbassar Tolegen (t.izbassar@gmail.com)
+     * @version $Id$
+     * @since 2.0
+     */
+    final class Regexp implements Condition<String> {
+
+        /**
+         * Condition.
+         */
+        private final Condition<String> condition;
+
+        /**
+         * Pattern.
+         */
+        private final Pattern ptn;
+
+        /**
+         * Ctor.
+         * @param condition Original condition
+         * @param ptn Pattern to validate against
+         */
+        public Regexp(final Condition<String> condition, final Pattern ptn) {
+            this.condition = condition;
+            this.ptn = ptn;
+        }
+
+        /**
+         * Ctor.
+         * @param condition Original condition
+         * @param regexp Regex to validate against
+         */
+        public Regexp(final Condition<String> condition, final String regexp) {
+            this(
+                condition,
+                Pattern.compile(
+                    regexp,
+                    Pattern.CASE_INSENSITIVE | Pattern.DOTALL
+                )
+            );
+        }
+
+        /**
+         * Ctor with original condition set to {@link Condition.True}.
+         * @param regexp Regex to validate against
+         */
+        public Regexp(final String regexp) {
+            this(new Condition.True<String>(), regexp);
+        }
+
+        /**
+         * Ctor with original condition set to {@link Condition.True}.
+         * @param ptn Pattern to validate against
+         */
+        public Regexp(final Pattern ptn) {
+            this(new Condition.True<String>(), ptn);
+        }
+
+        @Override
+        public boolean fits(final String element) {
+            return this.ptn.matcher(element).matches()
+                && this.condition.fits(element);
+        }
+    }
 }
