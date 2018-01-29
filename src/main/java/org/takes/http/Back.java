@@ -34,6 +34,10 @@ import java.net.Socket;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.1
+ *
+ * @todo #373:15min Document usage of Back interface in README.md.
+ *  Provide information about implementations and how and when they
+ *  can be used in client's code.
  */
 public interface Back {
 

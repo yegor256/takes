@@ -60,7 +60,7 @@ public final class FtBasic implements Front {
      */
     public FtBasic(final Take tks) throws IOException {
         // @checkstyle MagicNumber (1 line)
-        this(new BkBasic(tks), 80);
+        this(new BkSafe(new BkBasic(tks)), 80);
     }
 
     /**
@@ -70,7 +70,7 @@ public final class FtBasic implements Front {
      * @throws IOException If fails
      */
     public FtBasic(final Take tks, final int prt) throws IOException {
-        this(new BkBasic(tks), prt);
+        this(new BkSafe(new BkBasic(tks)), prt);
     }
 
     /**
