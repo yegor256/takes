@@ -24,14 +24,13 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
+import org.takes.misc.ExpirationDate;
 import org.takes.misc.Opt;
 import org.takes.misc.Utf8String;
 import org.takes.rq.RqCookies;
@@ -123,14 +122,10 @@ public final class PsCookie implements Pass {
             res, this.cookie, text,
             "Path=/",
             "HttpOnly",
-            String.format(
-                Locale.ENGLISH,
-                "Expires=%1$ta, %1$td %1$tb %1$tY %1$tT GMT",
-                new Date(
-                    System.currentTimeMillis()
-                        + TimeUnit.DAYS.toMillis(this.age)
-                )
-            )
+            new ExpirationDate(
+                System.currentTimeMillis()
+                    + TimeUnit.DAYS.toMillis(this.age)
+            ).toString()
         );
     }
 }
