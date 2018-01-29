@@ -759,6 +759,30 @@ public final class TkIndex implements Take {
   }
 }
 ```
+## SSL Configuration
+
+First of all, setup your keystore settings, for example
+
+```java
+final String file = this.getClass().getResource("/org/takes/http/keystore").getFile();
+final String password = "abc123";
+System.setProperty("javax.net.ssl.keyStore", file);
+System.setProperty("javax.net.ssl.keyStorePassword", password);
+System.setProperty("javax.net.ssl.trustStore", file);
+System.setProperty("javax.net.ssl.trustStorePassword", password);
+```
+
+Then simple create exemplar of class [FtSecure](master/src/main/java/org/takes/http/FtSecure.java) with socket factory
+
+```java
+final ServerSocket skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
+final FtRemote remote = new FtRemote(
+                            new FtSecure(new BkBasic(new TkFixed("hello, world")), skt),
+                            skt,
+                            true
+                        );
+```
+
 
 ## Authentication
 
