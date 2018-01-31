@@ -25,10 +25,8 @@
 package org.takes.facets.hamcrest;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -64,33 +62,6 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
      * Body.
      */
     private final InputStream body;
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     */
-    protected AbstractHmBody(final byte[] value) {
-        this(new ByteArrayInputStream(value));
-    }
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     * @param charset Charset of given value
-     */
-    protected AbstractHmBody(final String value, final Charset charset) {
-        this(value.getBytes(charset));
-    }
-
-    /**
-     * Ctor.
-     *
-     * <p>Will create instance with defaultCharset.
-     * @param value Value to test against
-     */
-    protected AbstractHmBody(final String value) {
-        this(value, Charset.defaultCharset());
-    }
 
     /**
      * Ctor.

@@ -24,6 +24,7 @@
 
 package org.takes.facets.hamcrest;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -47,7 +48,7 @@ public final class HmRqBody extends AbstractHmBody<Request> {
      * @param value Value to test against
      */
     public HmRqBody(final String value) {
-        super(value);
+        this(value, Charset.defaultCharset());
     }
 
     /**
@@ -56,7 +57,7 @@ public final class HmRqBody extends AbstractHmBody<Request> {
      * @param charset Charset of given value
      */
     public HmRqBody(final String value, final Charset charset) {
-        super(value, charset);
+        this(value.getBytes(charset));
     }
 
     /**
@@ -64,7 +65,7 @@ public final class HmRqBody extends AbstractHmBody<Request> {
      * @param value Value to test against
      */
     public HmRqBody(final byte[] value) {
-        super(value);
+        this(new ByteArrayInputStream(value));
     }
 
     /**
