@@ -114,7 +114,8 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Constructs a {@code RsFlash} with the specified message.
-     * By default it will use {@code RsFlash} as cookie name.
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name.</p>
      *
      * @param msg Message to show
      * @throws UnsupportedEncodingException In case the default encoding is not
@@ -126,10 +127,29 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Constructs a {@code RsFlash} with the specified error. The error is
-     * converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.
-     * By default it will use {@code RsFlash} as cookie name.
+     * Constructs a {@code RsFlash} with the specified message and expiration
+     * date of the cookie.
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     *
+     * @param msg Message
+     * @param expires ExpirationDate of the cookie
+     * @throws UnsupportedEncodingException In case the default encoding is not
+     *  supported
+     */
+    public RsFlash(final CharSequence msg, final ExpirationDate expires)
+        throws UnsupportedEncodingException {
+        this(msg, Level.INFO, expires);
+    }
+
+    /**
+     * Constructs a {@code RsFlash} with the specified error.
+     *
+     * <p>The error is converted into a flash message by calling
+     * {@link Throwable#getLocalizedMessage()}}.</p>
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name and expiration
+     * date of the cookie will be 1 hour after instance creation.</p>
      *
      * @param err Error
      * @throws UnsupportedEncodingException In case the default encoding is not
@@ -141,10 +161,33 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
+     * Constructs a {@code RsFlash} with the specified error and cookie
+     * expiration date.
+     *
+     * <p>The error is converted into a flash message by calling
+     * {@link Throwable#getLocalizedMessage()}}.</p>
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     *
+     * @param err Error
+     * @param expires ExpirationDate of the cookie
+     * @throws UnsupportedEncodingException In case the default encoding is not
+     *  supported
+     * @since 2.0
+     */
+    public RsFlash(final Throwable err, final ExpirationDate expires)
+        throws UnsupportedEncodingException {
+        this(err, Level.SEVERE, expires);
+    }
+
+    /**
      * Constructs a {@code RsFlash} with the specified error and logging level.
-     * The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.
-     * By default it will use {@code RsFlash} as cookie name.
+     *
+     * <p>The error is converted into a flash message by calling
+     * {@link Throwable#getLocalizedMessage()}}.</p>
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name and expiration
+     * date of the cookie will be 1 hour after instance creation.</p>
      *
      * @param err Error
      * @param level Level
@@ -158,9 +201,31 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
+     * Constructs a {@code RsFlash} with the specified error, logging level
+     * and cookie expiration date.
+     *
+     * <p>The error is converted into a flash message by calling
+     * {@link Throwable#getLocalizedMessage()}}.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     *
+     * @param err Error
+     * @param level Level
+     * @param expires ExpirationDate of the cookie
+     * @throws UnsupportedEncodingException In case the default encoding is
+     *  not supported
+     * @since 2.0
+     */
+    public RsFlash(final Throwable err, final Level level,
+        final ExpirationDate expires) throws UnsupportedEncodingException {
+        this(err.getLocalizedMessage(), level, expires);
+    }
+
+    /**
      * Constructs a {@code RsFlash} with the specified message and logging
      * level.
-     * By default it will use {@code RsFlash} as cookie name.
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name and default
+     * cookie expiration date will be 1 hour after instance creation.</p>
      *
      * @param msg Message
      * @param level Level
@@ -174,16 +239,69 @@ public final class RsFlash extends RsWrap {
 
     /**
      * Constructs a {@code RsFlash} with the specified message, logging level
+     * and cookie expiration date.
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name
+     *
+     * @param msg Message
+     * @param level Level
+     * @param expires ExpirationDate of the cookie
+     * @throws UnsupportedEncodingException In case the default encoding is
+     *  not supported
+     * @since 2.0
+     */
+    public RsFlash(final CharSequence msg, final Level level,
+        final ExpirationDate expires) throws UnsupportedEncodingException {
+        this(
+            msg,
+            level,
+            RsFlash.class.getSimpleName(),
+            expires
+        );
+    }
+
+    /**
+     * Constructs a {@code RsFlash} with the specified message, logging level
+     * and cookie name.
+     *
+     * <p>By default cookie expiration will be 1 hour after object creation.
+     *
+     * @param msg Message
+     * @param level Level
+     * @param cookie Cookie name
+     * @throws UnsupportedEncodingException In case the default encoding is
+     *  not supported
+     * @since 2.0
+     */
+    public RsFlash(final CharSequence msg, final Level level,
+        final String cookie) throws UnsupportedEncodingException {
+        this(
+            msg,
+            level,
+            cookie,
+            new ExpirationDate(
+                System.currentTimeMillis()
+                + TimeUnit.HOURS.toMillis(1L)
+            )
+        );
+    }
+
+    /**
+     * Constructs a {@code RsFlash} with the specified message, logging level
      * and cookie name.
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
+     * @param expires ExpirationDate of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
+     * @since 2.0
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final String cookie) throws UnsupportedEncodingException {
-        super(RsFlash.make(msg, level, cookie));
+        final String cookie, final ExpirationDate expires)
+        throws UnsupportedEncodingException {
+        super(RsFlash.make(msg, level, cookie, expires));
         this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
     }
 
@@ -200,12 +318,15 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
+     * @param expires ExpirationDate of the cookie
      * @return Response
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,
-        final String cookie) throws UnsupportedEncodingException {
+        final String cookie, final ExpirationDate expires)
+        throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
             new Sprintf(
@@ -217,10 +338,7 @@ public final class RsFlash extends RsWrap {
                 level.getName()
             ),
             "Path=/",
-            new ExpirationDate(
-                System.currentTimeMillis()
-                    + TimeUnit.HOURS.toMillis(1L)
-            ).toString()
+            expires.toString()
         );
     }
 }
