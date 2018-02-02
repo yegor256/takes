@@ -157,7 +157,13 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final Throwable err)
         throws UnsupportedEncodingException {
-        this(err, Level.SEVERE);
+        this(
+            err,
+            new ExpirationDate(
+                System.currentTimeMillis()
+                    + TimeUnit.HOURS.toMillis(1L)
+            )
+        );
     }
 
     /**
@@ -197,7 +203,14 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final Throwable err, final Level level)
         throws UnsupportedEncodingException {
-        this(err.getLocalizedMessage(), level);
+        this(
+            err.getLocalizedMessage(),
+            level,
+            new ExpirationDate(
+                System.currentTimeMillis()
+                    + TimeUnit.HOURS.toMillis(1L)
+            )
+        );
     }
 
     /**

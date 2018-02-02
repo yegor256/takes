@@ -70,14 +70,29 @@ public final class RsFlashTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsCookieWithSpeicifiedExpiresToResponse() throws IOException {
-        final String msg = "some problem";
+    public void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsFlash(msg, new ExpirationDate(0L))
+                new RsFlash("i'm good, thanks", new ExpirationDate(0L))
             ).print(),
             Matchers.containsString(
                 "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+            )
+        );
+    }
+
+    /**
+     * RsFlash can print itself from Throwable.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void printsItselfFromThrowable() throws IOException {
+        MatcherAssert.assertThat(
+            new RsFlash(
+                new IOException("and you?")
+            ).toString(),
+            Matchers.containsString(
+                "text=SEVERE/and you?"
             )
         );
     }
