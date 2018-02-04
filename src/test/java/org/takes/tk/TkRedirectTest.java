@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -102,21 +103,12 @@ public final class TkRedirectTest {
     @Test
     public void redirectCarriesQueryAndFragment() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
-                new TkRedirect("http://www.google.com/abc?b=2").act(
-                    new RqFake("GET", "/hi?a=1#test")
-                )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(TkRedirectTest.NEWLINE).join(
-                    "HTTP/1.1 303 See Other",
-                    String.format(
-                        TkRedirectTest.LOCATION,
-                        "http://www.google.com/abc?b=2&a=1#test"
-                    ),
-                    "",
-                    ""
-                )
+            new TkRedirect("http://www.google.com/abc?b=2").act(
+                new RqFake("GET", "/hi?a=1#test")
+            ),
+            new HmRsHeader(
+                "Location",
+                "http://www.google.com/abc?b=2&a=1#test"
             )
         );
     }
