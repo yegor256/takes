@@ -38,6 +38,7 @@ import org.takes.rs.RsPrint;
  * @version $Id$
  * @since 0.10
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
@@ -87,6 +88,32 @@ public final class TkRedirectTest {
                 Joiner.on(TkRedirectTest.NEWLINE).join(
                     "HTTP/1.1 302 Moved Temporarily",
                     String.format(TkRedirectTest.LOCATION, url),
+                    "",
+                    ""
+                )
+            )
+        );
+    }
+
+    /**
+     * TkRedirect should carry on the query and the fragment.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void redirectCarriesQueryAndFragment() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new TkRedirect("http://www.google.com/abc?b=2").act(
+                    new RqFake("GET", "/hi?a=1#test")
+                )
+            ).print(),
+            Matchers.equalTo(
+                Joiner.on(TkRedirectTest.NEWLINE).join(
+                    "HTTP/1.1 303 See Other",
+                    String.format(
+                        TkRedirectTest.LOCATION,
+                        "http://www.google.com/abc?b=2&a=1#test"
+                    ),
                     "",
                     ""
                 )
