@@ -83,8 +83,8 @@ public final class TkRedirect extends TkWrap {
     /**
      * Extract params from original query.
      * @todo #793:15min Replace this class usages with
-     *  RqHref(req).href() when the issue with parsing anchors is fixed
-     *  and delete this implementation
+     *  RqHref(req).href() or simply Href when the issue with parsing anchors
+     *  is fixed and delete this implementation for good
      */
     private static final class RedirectParams {
 
