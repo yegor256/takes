@@ -47,8 +47,8 @@ import org.hamcrest.TypeSafeMatcher;
  *  hamcrest. The usage will be like that:
  *  ```
  *  MatcherAssert.assertThat(
- *      response,
- *      new HmRsTextBody<>(Matchers.startsWith("<html>"))
+ *  response,
+ *  new HmRsTextBody<>(Matchers.startsWith("<html>"))
  *  );
  *  ```
  *  The default constructor should use `Matcher.containsString`
