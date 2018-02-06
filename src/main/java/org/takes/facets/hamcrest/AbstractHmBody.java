@@ -42,14 +42,20 @@ import org.hamcrest.TypeSafeMatcher;
  *
  * @todo #485:30min Right now we can only check that InputStream
  *  have the same content as other InputStream. This is very
- *  limited usage. Task is to distinguish Body that is byte[]
- *  and Body that is String. For String bodies we can use
- *  various useful matchers (i.e. Matchers.contains() and others).
- *  So there should be two different matcher classes. One -
- *  for byte[] body, where we only can check that bytes are the
- *  same; Second - for String body, where can be used
- *  String matchers. And user can decide which matcher is suitable
- *  for his case.
+ *  limited usage. Task is to introduce `HmTextBody` that will
+ *  make available to us to use useful string matchers from
+ *  hamcrest. The usage will be like that:
+ *  ```
+ *  MatcherAssert.assertThat(
+ *      response,
+ *      new HmRsTextBody<>(Matchers.startsWith("<html>"))
+ *  );
+ *  ```
+ *  The default constructor should use `Matcher.containsString`
+ *  as default matcher, which is used for matching string to body.
+ *  Current implementation of `AbstractHmBody` should be converted
+ *  to `HmBytesBody` that will check equality of bytes. We can think
+ *  of improving that class lately.
  *
  * @todo #485:30min Right now the describeTo doesn't properly
  *  show the reason behind mismatch. It should show expected
