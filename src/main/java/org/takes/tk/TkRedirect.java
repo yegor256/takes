@@ -23,12 +23,14 @@
  */
 package org.takes.tk;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqRequestLine;
 import org.takes.rs.RsRedirect;
 
 /**
@@ -68,11 +70,62 @@ public final class TkRedirect extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) {
-                    return new RsRedirect(location, code);
+                public Response act(final Request req) throws IOException {
+                    return new RsRedirect(
+                        new RedirectParams(req, location).location(),
+                        code
+                    );
                 }
             }
         );
+    }
+
+    /**
+     * Extract params from original query.
+     * @todo #793:15min Replace this class usages with
+     *  RqHref(req).href() or simply Href when the issue with parsing anchors
+     *  is fixed and delete this implementation for good
+     */
+    private static final class RedirectParams {
+
+        /**
+         * Original request.
+         */
+        private final Request req;
+
+        /**
+         * Original location.
+         */
+        private final String origin;
+
+        /**
+         * Ctor.
+         * @param req Original request.
+         * @param origin Original location.
+         */
+        RedirectParams(final Request req, final String origin) {
+            this.req = req;
+            this.origin = origin;
+        }
+
+        /**
+         * Get location with composed params.
+         * @return New location.
+         * @throws IOException in case of error.
+         */
+        public String location() throws IOException {
+            String loc = this.origin;
+            final String uri = new RqRequestLine.Base(this.req).uri();
+            final int idx = uri.indexOf('?');
+            if (idx != -1) {
+                loc = String.format(
+                    "%s&%s",
+                    loc,
+                    uri.substring(idx + 1)
+                );
+            }
+            return loc;
+        }
     }
 
 }

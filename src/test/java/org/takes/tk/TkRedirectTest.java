@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -38,6 +39,7 @@ import org.takes.rs.RsPrint;
  * @version $Id$
  * @since 0.10
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
@@ -90,6 +92,23 @@ public final class TkRedirectTest {
                     "",
                     ""
                 )
+            )
+        );
+    }
+
+    /**
+     * TkRedirect should carry on the query and the fragment.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void redirectCarriesQueryAndFragment() throws IOException {
+        MatcherAssert.assertThat(
+            new TkRedirect("http://www.google.com/abc?b=2").act(
+                new RqFake("GET", "/hi?a=1#test")
+            ),
+            new HmRsHeader(
+                "Location",
+                "http://www.google.com/abc?b=2&a=1#test"
             )
         );
     }
