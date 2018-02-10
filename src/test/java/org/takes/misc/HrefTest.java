@@ -116,4 +116,28 @@ public final class HrefTest {
             Matchers.equalTo("http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt")
         );
     }
+
+    /**
+     * Href can build an URI with params and fragment.
+     */
+    @Test
+    public void buildsUriWithParamsAndFragment() {
+        final String uri = "http://example.com/%D0%B0/?a=1#hello";
+        MatcherAssert.assertThat(
+            new Href(uri).toString(),
+            Matchers.equalTo(uri)
+        );
+    }
+
+    /**
+     * Href can build an URI with fragment.
+     */
+    @Test
+    public void buildsUriWithFragment() {
+        final String uri = "http://example.com/#hello";
+        MatcherAssert.assertThat(
+            new Href(uri).toString(),
+            Matchers.equalTo(uri)
+        );
+    }
 }

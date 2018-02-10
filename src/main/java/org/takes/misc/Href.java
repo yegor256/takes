@@ -60,7 +60,7 @@ public final class Href implements CharSequence {
     private static final Pattern TRAILING_SLASH = Pattern.compile("/$");
 
     /**
-     * URI (without the query part).
+     * URI (without query and fragment parts).
      */
     private final URI uri;
 
@@ -68,6 +68,11 @@ public final class Href implements CharSequence {
      * Params.
      */
     private final SortedMap<String, List<String>> params;
+
+    /**
+     * Fragment.
+     */
+    private final Opt<String> fragment;
 
     /**
      * Ctor.
@@ -89,18 +94,22 @@ public final class Href implements CharSequence {
      * @param link The link
      */
     private Href(final URI link) {
-        this(Href.removeQuery(link), Href.asMap(link.getRawQuery()));
+        this(Href.createBare(link), Href.asMap(link.getRawQuery()),
+            Href.readFragment(link));
     }
 
     /**
      * Ctor.
      * @param link The link
      * @param map Map of params
+     * @param frgmnt Fragment part
      */
     private Href(final URI link,
-        final SortedMap<String, List<String>> map) {
+        final SortedMap<String, List<String>> map,
+        final Opt<String> frgmnt) {
         this.uri = link;
         this.params = map;
+        this.fragment = frgmnt;
     }
 
     @Override
@@ -138,6 +147,10 @@ public final class Href implements CharSequence {
                     }
                 }
             }
+        }
+        if (this.fragment.has()) {
+            text.append('#');
+            text.append(this.fragment.get());
         }
         return text.toString();
     }
@@ -208,7 +221,8 @@ public final class Href implements CharSequence {
                 .append('/')
                 .append(Href.encode(suffix.toString())).toString()
             ),
-            this.params
+            this.params,
+            this.fragment
         );
     }
 
@@ -224,7 +238,7 @@ public final class Href implements CharSequence {
             map.put(key.toString(), new LinkedList<String>());
         }
         map.get(key.toString()).add(value.toString());
-        return new Href(this.uri, map);
+        return new Href(this.uri, map, this.fragment);
     }
 
     /**
@@ -235,7 +249,7 @@ public final class Href implements CharSequence {
     public Href without(final Object key) {
         final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
         map.remove(key.toString());
-        return new Href(this.uri, map);
+        return new Href(this.uri, map, this.fragment);
     }
 
     /**
@@ -328,22 +342,41 @@ public final class Href implements CharSequence {
     }
 
     /**
-     * Remove the query part from the provided URI and return the resulting URI.
-     * @param link The link from which the query needs to be removed.
-     * @return The URI corresponding to the same provided URI but without the
-     *  query part.
+     * Remove query and fragment parts from the provided URI and
+     *   return the resulting URI.
+     * @param link The link from which parts need to be removed.
+     * @return The URI corresponding to the same provided URI but without
+     *  query and fragment parts.
      */
-    private static URI removeQuery(final URI link) {
-        final String query = link.getRawQuery();
+    private static URI createBare(final URI link) {
         final URI uri;
-        if (query == null) {
+        if (link.getRawQuery() == null && link.getRawFragment() == null) {
             uri = link;
         } else {
             final String href = link.toString();
-            uri = URI.create(
-                href.substring(0, href.length() - query.length() - 1)
-            );
+            final int idx;
+            if (link.getRawQuery() == null) {
+                idx = href.indexOf('#');
+            } else {
+                idx = href.indexOf('?');
+            }
+            uri = URI.create(href.substring(0, idx));
         }
         return uri;
+    }
+
+    /**
+     * Read fragment part from the given URI.
+     * @param link The link from which the fragment needs to be returned.
+     * @return Opt with fragment or empty if there is no fragment.
+     */
+    private static Opt<String> readFragment(final URI link) {
+        final Opt<String> fragment;
+        if (link.getRawFragment() == null) {
+            fragment = new Opt.Empty<>();
+        } else {
+            fragment = new Opt.Single<>(link.getRawFragment());
+        }
+        return fragment;
     }
 }
