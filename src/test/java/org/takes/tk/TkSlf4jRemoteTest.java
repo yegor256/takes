@@ -41,10 +41,6 @@ import org.takes.http.FtRemote;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.11.2
- *
- * @todo #712:30min Prepare implementation for empty response body test and
- *  unignore returnsAnEmptyResponseBody test to fix such error which was
- *  reported in #712.
  */
 public final class TkSlf4jRemoteTest {
 

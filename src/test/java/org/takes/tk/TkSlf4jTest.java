@@ -54,4 +54,13 @@ public final class TkSlf4jTest {
     public void logsException() throws IOException {
         new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
     }
+
+    /**
+     * TkSlf4j can work with {@link TkEmpty}.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void logsEmptyMessage() throws IOException {
+        new TkSlf4j(new TkEmpty()).act(new RqFake());
+    }
 }
