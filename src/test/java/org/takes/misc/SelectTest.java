@@ -113,4 +113,38 @@ public final class SelectTest {
             Matchers.equalTo("true Yes True")
         );
     }
+
+    /**
+     * Select can select from starting position.
+     */
+    @Test
+    public void selectsFromStartingPosition() {
+        MatcherAssert.assertThat(
+            Joiner.on(".").join(
+                new Select<Integer>(
+                    // @checkstyle MagicNumberCheck (2 lines)
+                    Arrays.asList(2, 4, 6, 8, 10, 12),
+                    new Condition.Range<Integer>(3)
+                )
+            ),
+            Matchers.equalTo("8.10.12")
+        );
+    }
+
+    /**
+     * Select can select within given range.
+     */
+    @Test
+    public void selectsWithinGivenRange() {
+        MatcherAssert.assertThat(
+            Joiner.on(",").join(
+                new Select<Integer>(
+                    // @checkstyle MagicNumberCheck (2 lines)
+                    Arrays.asList(3, 5, 7, 9, 11, 13, 15),
+                    new Condition.Range<Integer>(2, 4)
+                )
+            ),
+            Matchers.equalTo("7,9,11")
+        );
+    }
 }

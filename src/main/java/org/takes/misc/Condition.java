@@ -23,6 +23,7 @@
  */
 package org.takes.misc;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 /**
@@ -33,12 +34,9 @@ import java.util.regex.Pattern;
  * @param <T> Type of items
  * @since 0.13.8
  *
- * @todo #218:30min Implement Condition.Range that should select elements
- *  within given range of indexes. It should be constructable with specified
- *  ranges and with starting position. Having that we can implement
- *  Condition.Skip that will simply negate Condition.Range so that elements
- *  are skipped that are inside the given range or from given starting
- *  position.
+ * @todo #780:30min Implement Condition.Skip that will simply negate
+ *  Condition.Range so that elements are skipped that are inside the
+ *  given range or from given starting position.
  */
 public interface Condition<T> {
 
@@ -148,6 +146,76 @@ public interface Condition<T> {
         @Override
         public boolean fits(final String element) {
             return this.ptn.matcher(element).matches()
+                && this.condition.fits(element);
+        }
+    }
+
+    /**
+     * Condition that will fit elements in given range.
+     * @author Tolegen Izbassar (t.izbassar@gmail.com)
+     * @version $Id$
+     * @param <T> Type of items
+     * @since 2.0
+     */
+    final class Range<T> implements Condition<T> {
+
+        /**
+         * Starting position.
+         */
+        private final int start;
+
+        /**
+         * Ending position.
+         */
+        private final int end;
+
+        /**
+         * Condition.
+         */
+        private final Condition<T> condition;
+
+        /**
+         * Current position.
+         */
+        private final AtomicInteger current;
+
+        /**
+         * Ctor with original condition set to {@link Condition.True}
+         * and ending position to the max possible value.
+         * @param strtpos Starting position
+         */
+        public Range(final int strtpos) {
+            this(strtpos, Integer.MAX_VALUE);
+        }
+
+        /**
+         * Ctor with original condition set to {@link Condition.True}.
+         * @param strtpos Starting position
+         * @param endpos Ending position
+         */
+        public Range(final int strtpos, final int endpos) {
+            this(strtpos, endpos, new Condition.True<T>());
+        }
+
+        /**
+         * Ctor.
+         * @param strtpos Starting position
+         * @param endpos Ending position
+         * @param cndtn Original condition
+         */
+        public Range(final int strtpos, final int endpos,
+            final Condition<T> cndtn) {
+            this.start = strtpos;
+            this.end = endpos;
+            this.condition = cndtn;
+            this.current = new AtomicInteger(0);
+        }
+
+        @Override
+        public boolean fits(final T element) {
+            final int position = this.current.getAndIncrement();
+            return position >= this.start
+                && position <= this.end
                 && this.condition.fits(element);
         }
     }
