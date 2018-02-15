@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -38,6 +39,7 @@ import org.takes.rs.RsPrint;
  * @version $Id$
  * @since 0.10
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
@@ -90,6 +92,23 @@ public final class TkRedirectTest {
                     "",
                     ""
                 )
+            )
+        );
+    }
+
+    /**
+     * TkRedirect should carry on the query and the fragment.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void redirectCarriesQueryAndFragment() throws IOException {
+        MatcherAssert.assertThat(
+            new TkRedirect("http://www.google.com/abc?b=2").act(
+                new RqFake("GET", "/hi?a=1#test")
+            ),
+            new HmRsHeader(
+                "Location",
+                "http://www.google.com/abc?b=2&a=1#test"
             )
         );
     }

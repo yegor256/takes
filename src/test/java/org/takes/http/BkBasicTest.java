@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -194,8 +194,7 @@ public final class BkBasicTest {
     public void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
-        final ServerSocket server = new ServerSocket(0);
-        try {
+        try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
                 new Runnable() {
                     @Override
@@ -210,11 +209,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
+            try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-            );
-            try {
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
@@ -236,11 +235,7 @@ public final class BkBasicTest {
                     count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
-            } finally {
-                socket.close();
             }
-        } finally {
-            server.close();
         }
         MatcherAssert.assertThat(
             output.toString(),
@@ -260,9 +255,8 @@ public final class BkBasicTest {
     @Test
     public void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
-        final ServerSocket server = new ServerSocket(0);
         final String text = "Say hello!";
-        try {
+        try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
                 new Runnable() {
                     @Override
@@ -277,11 +271,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
+            try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-            );
-            try {
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
@@ -297,11 +291,7 @@ public final class BkBasicTest {
                     count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
-            } finally {
-                socket.close();
             }
-        } finally {
-            server.close();
         }
         MatcherAssert.assertThat(
             output.toString(),
@@ -319,9 +309,8 @@ public final class BkBasicTest {
     public void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
-        final ServerSocket server = new ServerSocket(0);
         final String greetings = "Hi everyone";
-        try {
+        try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
                 new Runnable() {
                     @Override
@@ -336,11 +325,11 @@ public final class BkBasicTest {
                     }
                 }
             ).start();
-            final Socket socket = new Socket(
+            try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-            );
-            try {
+                )
+            ) {
                 socket.getOutputStream().write(
                     Joiner.on(BkBasicTest.CRLF).join(
                         BkBasicTest.POST,
@@ -357,11 +346,7 @@ public final class BkBasicTest {
                     count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
-            } finally {
-                socket.close();
             }
-        } finally {
-            server.close();
         }
         MatcherAssert.assertThat(
             output.toString(),

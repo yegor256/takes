@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -70,15 +70,15 @@ public interface RqHref extends Request {
         @Override
         public Href href() throws IOException {
             final String uri = new RqRequestLine.Base(this).uri();
-            return new Href(
-                String.format(
-                    "http://%s%s",
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(this)
-                    ).single("host"),
-                    uri
-                )
-            );
+            final Iterator<String> header = new RqHeaders.Base(this)
+                .header("host").iterator();
+            final String host;
+            if (header.hasNext()) {
+                host = header.next();
+            } else {
+                host = "localhost";
+            }
+            return new Href(String.format("http://%s%s", host, uri));
         }
     }
 

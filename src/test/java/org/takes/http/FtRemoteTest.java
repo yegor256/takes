@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,11 +36,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.form.RqFormBase;
 import org.takes.rs.RsText;
+import org.takes.tk.TkEmpty;
 import org.takes.tk.TkFixed;
 
 /**
@@ -48,6 +51,12 @@ import org.takes.tk.TkFixed;
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
  * @since 0.21
+ *
+ * @todo #730:30min Fix FtRemote for empty response body test case and
+ *  unignore returnsAnEmptyResponseBody. After that the
+ *  {@link org.takes.tk.TkSlf4jRemoteTest} should be fixed and relevant
+ *  test case should be unignored.
+ *
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtRemoteTest {
@@ -121,4 +130,28 @@ public final class FtRemoteTest {
         }
     }
 
+    /**
+     * FtRemote can return empty response body for {@link TkEmpty}.
+     * @throws IOException If some problems inside
+     */
+    @Ignore
+    @Test
+    public void returnsAnEmptyResponseBody() throws IOException {
+        new FtRemote(
+            new TkEmpty()
+        ).exec(
+            new FtRemote.Script() {
+                @Override
+                public void exec(final URI home) throws IOException {
+                    new JdkRequest(home)
+                        .method("POST")
+                        .body().set("returnsAnEmptyResponseBody").back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertBody(new IsEqual<>(""))
+                        .assertStatus(HttpURLConnection.HTTP_OK);
+                }
+            }
+        );
+    }
 }

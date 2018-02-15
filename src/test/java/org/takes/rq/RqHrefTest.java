@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,26 @@ public final class RqHrefTest {
                 )
             ).href().toString(),
             Matchers.equalTo("http://www.example.com/h?a=3")
+        );
+    }
+
+    /**
+     * RqHref.Base can parse a query without a Host.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void parsesHttpQueryWithoutHost() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=300",
+                        "Content-type: text/plain+xml"
+                    ),
+                    ""
+                )
+            ).href().toString(),
+            Matchers.equalTo("http://localhost/h?a=300")
         );
     }
 

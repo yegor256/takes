@@ -1,16 +1,19 @@
 <img src="http://www.takes.org/logo.png" width="96px" height="96px"/>
 
-[![Managed by Zerocracy](http://www.zerocracy.com/badge.svg)](http://www.zerocracy.com)
+[![Managed by Zerocracy](http://www.0crat.com/badge/C3FFK3YAY.svg)](http://www.0crat.com/p/C3FFK3YAY)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](http://img.teamed.io/intellij-idea-recommend.svg)](https://www.jetbrains.com/idea/)
 
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.takes/takes/badge.svg?color=blue&prefix=v)](http://www.javadoc.io/doc/org.takes/takes)
-[![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
+[![Javadoc](http://www.javadoc.io/badge/org.takes/takes.svg)](http://www.javadoc.io/doc/org.takes/takes)
 [![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/938e7683fcfa4db9bff362c2b4a9b78e)](https://www.codacy.com/app/github_90/takes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yegor256/takes&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
+
+[![jpeek report](http://i.jpeek.org/org.takes/takes/badge.svg)](http://i.jpeek.org/org.takes/takes/)
+[![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
+[![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=org.takes%3Atakes)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![Dependencies](https://www.versioneye.com/user/projects/561a9c5ca193340f2f00110d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/561a9c5ca193340f2f00110d)
@@ -48,7 +51,7 @@ These two web systems use Takes, and they are open source:
 ## Contents
 
 - [Quick Start](#quick-start)
-- [Build and Run With Maven](#build-a-run-with-maven)
+- [Build and Run With Maven](#build-and-run-with-maven)
 - [Unit Testing](#unit-testing)
 - [Integration Testing](#integration-testing)
 - [A Bigger Example](#a-bigger-example)
@@ -64,6 +67,7 @@ These two web systems use Takes, and they are open source:
 - [RsJSON](#rsjson)
 - [RsXembly](#rsxembly)
 - [GZIP Compression](#gzip-compression)
+- [SSL Configuration](#ssl-configuration)
 - [Authentication](#authentication)
 - [Command Line Arguments](#command-line-arguments)
 - [Logging](#logging)
@@ -755,6 +759,29 @@ public final class TkIndex implements Take {
     );
   }
 }
+```
+## SSL Configuration
+
+First of all, setup your keystore settings, for example
+
+```java
+final String file = this.getClass().getResource("/org/takes/http/keystore").getFile();
+final String password = "abc123";
+System.setProperty("javax.net.ssl.keyStore", file);
+System.setProperty("javax.net.ssl.keyStorePassword", password);
+System.setProperty("javax.net.ssl.trustStore", file);
+System.setProperty("javax.net.ssl.trustStorePassword", password);
+```
+
+Then simple create exemplar of class [FtSecure](src/main/java/org/takes/http/FtSecure.java) with socket factory
+
+```java
+final ServerSocket skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
+new FtRemote(
+  new FtSecure(new BkBasic(new TkFixed("hello, world")), skt),
+  skt,
+  true
+);
 ```
 
 ## Authentication

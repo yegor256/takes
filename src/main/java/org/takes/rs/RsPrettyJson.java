@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -108,24 +108,17 @@ public final class RsPrettyJson implements Response {
      */
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
-        final JsonReader rdr = Json.createReader(body);
-        try {
+        try (JsonReader rdr = Json.createReader(body)) {
             final JsonObject obj = rdr.readObject();
-            final JsonWriter wrt = Json.createWriterFactory(
-                Collections.singletonMap(
-                    JsonGenerator.PRETTY_PRINTING,
-                    true
+            try (JsonWriter wrt = Json.createWriterFactory(
+                Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
                 )
-            ).createWriter(res);
-            try {
+                .createWriter(res)
+            ) {
                 wrt.writeObject(obj);
-            } finally {
-                wrt.close();
             }
         } catch (final JsonException ex) {
             throw new IOException(ex);
-        } finally {
-            rdr.close();
         }
         return res.toByteArray();
     }

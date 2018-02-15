@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -70,7 +70,7 @@ public class PsFacebookTest {
                     return new Response(
                         HttpURLConnection.HTTP_OK,
                         String.format(
-                            "{'id':'%s', 'name':'%s'}",
+                            "{\"id\":\"%s\",\"name\":\"%s\"}",
                             identifier,
                             RandomStringUtils.random(10)
                         )

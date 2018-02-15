@@ -1,3 +1,5 @@
+docker:
+  image: yegor256/java8
 assets:
   settings.xml: zerocracy/home#assets/takes/settings.xml
   pubring.gpg: zerocracy/home#assets/pubring.gpg
@@ -16,6 +18,7 @@ install: |
   export LANGUAGE=en_US.UTF-8
   sudo gem install --no-rdoc --no-ri pdd
   sudo gem install --no-rdoc --no-ri est
+  sudo gem install --no-rdoc --no-ri xcop
 architect:
 - yegor256
 - davvd
@@ -64,6 +67,6 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Ptakes -Psonatype --errors --settings ../settings.xml
+    mvn clean deploy -Ptakes -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
   commanders:
   - yegor256

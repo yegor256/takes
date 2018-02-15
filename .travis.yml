@@ -15,13 +15,13 @@ before_install:
 install:
   - gem install pdd
   - gem install est
+  - gem install xcop
 env:
   global:
     - MAVEN_OPTS="-Xmx256m"
     - JAVA_OPTS="-Xmx256m"
 jdk:
   - oraclejdk8
-  - oraclejdk7
   #- openjdk6 - jcabi-http doesn't work with JDK 6
 after_success:
   - "bash <(curl -s https://codecov.io/bash)"

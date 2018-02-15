@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -92,11 +92,8 @@ public final class RsJson extends RsWrap {
      */
     private static byte[] print(final RsJson.Source src) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final JsonWriter writer = Json.createWriter(baos);
-        try {
+        try (JsonWriter writer = Json.createWriter(baos)) {
             writer.write(src.toJson());
-        } finally {
-            writer.close();
         }
         return baos.toByteArray();
     }

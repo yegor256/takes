@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.misc.ExpirationDate;
 import org.takes.rs.RsPrint;
 
 /**
@@ -60,6 +61,38 @@ public final class RsFlashTest {
                     ),
                     Level.INFO.getName()
                 )
+            )
+        );
+    }
+
+    /**
+     * RsFlash can add cookie with specified ExpirationDate.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
+        MatcherAssert.assertThat(
+            new RsPrint(
+                new RsFlash("i'm good, thanks", new ExpirationDate(0L))
+            ).print(),
+            Matchers.containsString(
+                "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+            )
+        );
+    }
+
+    /**
+     * RsFlash can print itself from Throwable.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void printsItselfFromThrowable() throws IOException {
+        MatcherAssert.assertThat(
+            new RsFlash(
+                new IOException("and you?")
+            ).toString(),
+            Matchers.containsString(
+                "text=SEVERE/and you?"
             )
         );
     }

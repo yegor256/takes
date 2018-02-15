@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,9 @@ import com.jcabi.http.response.RestResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
@@ -35,6 +38,9 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -48,6 +54,7 @@ import org.takes.rq.RqPrint;
 import org.takes.rs.RsHtml;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
+import org.takes.tk.TkText;
 
 /**
  * Test case for {@link FtBasic}.
@@ -56,7 +63,7 @@ import org.takes.tk.TkFailure;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
 public final class FtBasicTest {
 
     /**
@@ -279,5 +286,50 @@ public final class FtBasicTest {
                 }
             }
         );
+    }
+
+    /**
+     * FtBasic can work with broken pipe if {@link BkSafe} is used.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void gracefullyHandlesBrokenPipe() throws IOException {
+        new FtBasic(
+            new BkSafe(
+                new BkBasic(
+                    new TkText("Body")
+                )
+            ),
+            FtBasicTest.server()
+        ).start(
+            new Exit() {
+                @Override
+                public boolean ready() {
+                    return true;
+                }
+            }
+        );
+    }
+
+    /**
+     * Mocked ServerSocket so that Socket will throw SocketException.
+     * @return Mocked instance of ServerSocket
+     * @throws IOException If some problem inside
+     */
+    private static ServerSocket server() throws IOException {
+        final ServerSocket server = Mockito.mock(ServerSocket.class);
+        final Socket socket = Mockito.mock(
+            Socket.class,
+            new Answer<Socket>() {
+                @Override
+                public Socket answer(
+                    final InvocationOnMock invocation
+                ) throws Throwable {
+                    throw new SocketException("Broken pipe");
+                }
+            }
+        );
+        Mockito.when(server.accept()).thenReturn(socket);
+        return server;
     }
 }

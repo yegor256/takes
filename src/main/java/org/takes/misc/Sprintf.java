@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -69,10 +69,13 @@ public final class Sprintf implements CharSequence {
     @Override
     public String toString() {
         final StringBuilder out = new StringBuilder(0);
-        new Formatter(out).format(
-            this.pattern, this.args.toArray(new Object[this.args.size()])
-        );
-        return out.toString();
+        try (final Formatter fmt = new Formatter(out)) {
+            fmt.format(
+                this.pattern,
+                this.args.toArray(new Object[this.args.size()])
+            );
+            return out.toString();
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2017 Yegor Bugayenko
+ * Copyright (c) 2014-2018 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -209,13 +209,10 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         public void touch() throws IOException {
-            final OutputStream out = new FileOutputStream(
+            try (final OutputStream out = new FileOutputStream(
                 this.touchedFile()
-            );
-            try {
+            )) {
                 out.write('+');
-            } finally {
-                out.close();
             }
         }
 
