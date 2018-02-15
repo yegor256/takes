@@ -243,6 +243,9 @@ public final class FkHitRefresh implements Fork {
         /**
          * Directory contents updated?
          * @return TRUE if contents were updated
+         * @todo #744:30min `null` constant usage in the function
+         *  `directoryUpdated` is violating the key principles, defined
+         *  in README.md file and must be eliminated.
          */
         private boolean directoryUpdated() {
             this.lock.readLock().lock();
