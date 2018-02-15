@@ -148,6 +148,11 @@ public final class FkHitRefresh implements Fork {
      */
     private static final class HitRefreshHandle {
         /**
+         * A flag File, which is not yet instantiated.
+         */
+        private static final File INEXISTENT_FLAG = new File("/inexistent");
+
+        /**
          * Directory to watch.
          */
         private final File dir;
@@ -183,6 +188,7 @@ public final class FkHitRefresh implements Fork {
             final ReentrantReadWriteLock lock) {
             this.dir = dir;
             this.lock = lock;
+            this.flag = HitRefreshHandle.INEXISTENT_FLAG;
         }
 
         /**
@@ -192,7 +198,7 @@ public final class FkHitRefresh implements Fork {
          */
         public File touchedFile() throws IOException {
             this.lock.readLock().lock();
-            final boolean cold = this.flag == null;
+            final boolean cold = this.flag == HitRefreshHandle.INEXISTENT_FLAG;
             this.lock.readLock().unlock();
             if (cold) {
                 this.lock.writeLock().lock();
@@ -223,7 +229,7 @@ public final class FkHitRefresh implements Fork {
          */
         private boolean expired() throws IOException {
             this.lock.readLock().lock();
-            final boolean cold = this.flag == null;
+            final boolean cold = this.flag == HitRefreshHandle.INEXISTENT_FLAG;
             this.lock.readLock().unlock();
             boolean expired = false;
             if (cold) {
