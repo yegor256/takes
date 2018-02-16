@@ -34,9 +34,9 @@ import java.util.regex.Pattern;
  * @param <T> Type of items
  * @since 0.13.8
  *
- * @todo #780:30min Implement Condition.Skip that will simply negate
- *  Condition.Range so that elements are skipped that are inside the
- *  given range or from given starting position.
+ * @todo #780:30min Bring Cactoos dependency to the project. Replace
+ *  Select and Condition usages by Cactoos analogues. The Condition.Skip
+ *  should be also available in Cactoos.
  */
 public interface Condition<T> {
 
