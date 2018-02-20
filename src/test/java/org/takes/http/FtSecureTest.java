@@ -34,7 +34,6 @@ import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -55,20 +54,6 @@ import org.takes.tk.TkFixed;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class FtSecureTest {
-
-    /**
-     * Sets the certificate related properties.
-     */
-    @Before
-    public void before() {
-        final String file = this.getClass()
-            .getResource("/org/takes/http/keystore").getFile();
-        final String password = "abc123";
-        System.setProperty("javax.net.ssl.keyStore", file);
-        System.setProperty("javax.net.ssl.keyStorePassword", password);
-        System.setProperty("javax.net.ssl.trustStore", file);
-        System.setProperty("javax.net.ssl.trustStorePassword", password);
-    }
 
     /**
      * FtSecure can work.
