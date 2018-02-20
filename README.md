@@ -55,6 +55,7 @@ These two web systems use Takes, and they are open source:
 - [Unit Testing](#unit-testing)
 - [Integration Testing](#integration-testing)
 - [A Bigger Example](#a-bigger-example)
+    - [Front Interface](#front-interface)
 - [Templates](#templates)
 	- [Velocity Templates](#velocity-templates)
 - [Static Resources](#static-resources)
@@ -313,6 +314,27 @@ public final class App {
   }
 }
 ```
+
+## Front interface
+
+Essential part of [Bigger Example](#a-bigger-example) is 
+[Front](src/main/java/org/takes/http/Front.java) interface.
+It's encapsulates server's [back-end](src/main/java/org/takes/http/Back.java) 
+and used to start an instance, which will accept requests and return results. 
+`FtBasic`, which is a basic front, implements that interface - you've
+seen it's usage in above mentioned example.
+
+There are other useful implementations of this interface: 
+
+* The [FtRemote](src/main/java/org/takes/http/FtRemote.java)
+class allows you to provide script, that will be executed against
+given front. You can see how it's used in [integration tests](#integration-testing).
+* The [FtCli](src/main/java/org/takes/http/FtCli.java) class
+allows you to start your application with command line arguments. More details
+in [Command Line Arguments](#command-line-arguments).
+* The [FtSecure](src/main/java/org/takes/http/FtSecure.java) class allows
+you to start your application with SSL. More details in 
+[SSL Configuration](#ssl-configuration).
 
 ## Templates
 
