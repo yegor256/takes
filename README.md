@@ -1,6 +1,6 @@
 <img src="http://www.takes.org/logo.png" width="96px" height="96px"/>
 
-[![Managed by Zerocracy](https://www.0crat.com/badge/C3FFK3YAY.svg)](http://www.0crat.com/p/C3FFK3YAY)
+[![Managed by Zerocracy](https://www.0crat.com/badge/C3FFK3YAY.svg)](https://www.0crat.com/p/C3FFK3YAY)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](http://img.teamed.io/intellij-idea-recommend.svg)](https://www.jetbrains.com/idea/)
 
