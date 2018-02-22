@@ -161,14 +161,17 @@ public final class RsPrint extends RsWrap {
         final InputStream body = this.body();
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        while (true) {
-            final int bytes = body.read(buf);
-            if (bytes < 0) {
-                break;
+        try {
+            while (true) {
+                final int bytes = body.read(buf);
+                if (bytes < 0) {
+                    break;
+                }
+                output.write(buf, 0, bytes);
             }
-            output.write(buf, 0, bytes);
+        } finally {
+            output.flush();
         }
-        output.flush();
     }
 
 }
