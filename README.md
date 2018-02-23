@@ -3,7 +3,7 @@
 [![EO principles respected here](https://cdn.rawgit.com/yegor256/elegantobjects.github.io/master/badge.svg)](http://www.elegantobjects.org)
 [![Managed by Zerocracy](https://www.0crat.com/badge/C3FFK3YAY.svg)](https://www.0crat.com/p/C3FFK3YAY)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
-[![We recommend IntelliJ IDEA](http://img.teamed.io/intellij-idea-recommend.svg)](https://www.jetbrains.com/idea/)
+[![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
 [![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
@@ -318,14 +318,14 @@ public final class App {
 
 ## Front interface
 
-Essential part of [Bigger Example](#a-bigger-example) is 
+Essential part of [Bigger Example](#a-bigger-example) is
 [Front](src/main/java/org/takes/http/Front.java) interface.
-It's encapsulates server's [back-end](src/main/java/org/takes/http/Back.java) 
-and used to start an instance, which will accept requests and return results. 
+It's encapsulates server's [back-end](src/main/java/org/takes/http/Back.java)
+and used to start an instance, which will accept requests and return results.
 `FtBasic`, which is a basic front, implements that interface - you've
 seen it's usage in above mentioned example.
 
-There are other useful implementations of this interface: 
+There are other useful implementations of this interface:
 
 * The [FtRemote](src/main/java/org/takes/http/FtRemote.java)
 class allows you to provide script, that will be executed against
@@ -334,7 +334,7 @@ given front. You can see how it's used in [integration tests](#integration-testi
 allows you to start your application with command line arguments. More details
 in [Command Line Arguments](#command-line-arguments).
 * The [FtSecure](src/main/java/org/takes/http/FtSecure.java) class allows
-you to start your application with SSL. More details in 
+you to start your application with SSL. More details in
 [SSL Configuration](#ssl-configuration).
 
 ## Templates
