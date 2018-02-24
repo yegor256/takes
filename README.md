@@ -341,16 +341,16 @@ you to start your application with SSL. More details in
 ## Back interface
 
 [Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
-is responsible for accepting the incoming requests through the `Socket`, 
-dispatching them to relevant `Takes` instance and printing the result of 
-the request to the client. There are various useful implementations:
+is responsible for IO operations on TCP network level. There are various useful 
+implementations of that interface:
 
 * The [BkBasic](src/main/java/org/takes/http/BkBasic.java) class is a basic
 implementation of the `Back` interface. It is responsible for accepting the
 request from `Socket`, converting the socket's input to the 
 [Request](src/main/java/org/takes/Request.java), dispatching it to the
-provided [Takes](src/main/java/org/takes/Take.java) instance, getting 
-the result and printing it to the socket's output until all the request is fulfilled.
+provided [Take](src/main/java/org/takes/Take.java) instance, getting 
+the result and printing it to the socket's output until all the request is 
+fulfilled.
 * The [BkParallel](src/main/java/org/takes/http/BkParallel.java) class is
 a decorator of the `Back` interface, that is responsible for running the 
 back-end in parallel threads. You can specify the number of threads or try 
