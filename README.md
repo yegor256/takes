@@ -57,6 +57,7 @@ These two web systems use Takes, and they are open source:
 - [Integration Testing](#integration-testing)
 - [A Bigger Example](#a-bigger-example)
     - [Front Interface](#front-interface)
+    - [Back Interface](#back-interface)
 - [Templates](#templates)
 	- [Velocity Templates](#velocity-templates)
 - [Static Resources](#static-resources)
@@ -336,6 +337,36 @@ in [Command Line Arguments](#command-line-arguments).
 * The [FtSecure](src/main/java/org/takes/http/FtSecure.java) class allows
 you to start your application with SSL. More details in
 [SSL Configuration](#ssl-configuration).
+
+## Back interface
+
+[Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
+is responsible for IO operations on TCP network level. There are various useful 
+implementations of that interface:
+
+* The [BkBasic](src/main/java/org/takes/http/BkBasic.java) class is a basic
+implementation of the `Back` interface. It is responsible for accepting the
+request from `Socket`, converting the socket's input to the 
+[Request](src/main/java/org/takes/Request.java), dispatching it to the
+provided [Take](src/main/java/org/takes/Take.java) instance, getting 
+the result and printing it to the socket's output until all the request is 
+fulfilled.
+* The [BkParallel](src/main/java/org/takes/http/BkParallel.java) class is
+a decorator of the `Back` interface, that is responsible for running the 
+back-end in parallel threads. You can specify the number of threads or try 
+to use the default number, which depends on available processors number in JVM.
+* The [BkSafe](src/main/java/org/takes/http/BkSafe.java) class is a decorator
+of the `Back` interface, that is responsible for running the back-end in a
+safe mode. That means that it will ignore exception thrown from original `Back`.
+* The [BkTimeable](src/main/java/org/takes/http/BkTimeable.java) class is a
+decorator of the `Back` interface, that is responsible for running the back-end
+for specified maximum lifetime in milliseconds. It is constantly checking if
+the thread with original `back` exceeds provided limit and if so - it's
+interrupts the thread of that `back`.
+* The [BkWrap](src/main/java/org/takes/http/BkWrap.java) class is a convenient
+wrap over the original `Back` instance. It's just delegates the `accept`
+to that `Back` and might be useful if you want to add your own decorators of the
+`Back` interface. This class is used in `BkParallel` and `BkSafe` as a parent class.
 
 ## Templates
 
