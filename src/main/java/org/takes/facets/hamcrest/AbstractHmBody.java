@@ -40,21 +40,8 @@ import org.hamcrest.TypeSafeMatcher;
  * @param <T> Item type. Should be able to return own item
  * @since 2.0
  *
- * @todo #485:30min Right now we can only check that InputStream
- *  have the same content as other InputStream. This is very
- *  limited usage. Task is to introduce `HmTextBody` that will
- *  make available to us to use useful string matchers from
- *  hamcrest. The usage will be like that:
- *  ```
- *  MatcherAssert.assertThat(
- *  response,
- *  new HmRsTextBody<>(Matchers.startsWith("<html>"))
- *  );
- *  ```
- *  The default constructor should use `Matcher.containsString`
- *  as default matcher, which is used for matching string to body.
- *  Current implementation of `AbstractHmBody` should be converted
- *  to `HmBytesBody` that will check equality of bytes. We can think
+ * @todo #794:30min Current implementation of `AbstractHmBody` should be
+ *  converted to `HmBytesBody` that will check equality of bytes. We can think
  *  of improving that class lately.
  *
  * @todo #485:30min Right now the describeTo doesn't properly
