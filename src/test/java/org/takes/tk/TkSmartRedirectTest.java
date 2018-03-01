@@ -23,75 +23,33 @@
  */
 package org.takes.tk;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.hamcrest.HmRsHeader;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link TkRedirect}.
+ * Test case for {@link TkSmartRedirect}.
  * @author Dmitry Molotchko (dima.molotchko@gmail.com)
  * @version $Id$
  * @since 0.10
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class TkRedirectTest {
+public final class TkSmartRedirectTest {
     /**
-     * Constant variable for HTTP header testing.
-     */
-    private static final String LOCATION = "Location: %1$s";
-    /**
-     * New line constant.
-     */
-    private static final String NEWLINE = "\r\n";
-
-    /**
-     * TkRedirect can create a response with url string.
+     * TkRedirect should carry on the query and the fragment.
      * @throws IOException If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithUrl() throws IOException {
-        final String url = "/about";
+    public void redirectCarriesQueryAndFragment() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
-                new TkRedirect(url).act(new RqFake())
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(TkRedirectTest.NEWLINE).join(
-                    "HTTP/1.1 303 See Other",
-                    String.format(TkRedirectTest.LOCATION, url),
-                    "",
-                    ""
-                )
-            )
-        );
-    }
-
-    /**
-     * TkRedirect can create a response with HTTP status code and url string.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    public void createsRedirectResponseWithUrlAndStatus() throws IOException {
-        final String url = "/";
-        MatcherAssert.assertThat(
-            new RsPrint(
-                new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act(
-                    new RqFake()
-                )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(TkRedirectTest.NEWLINE).join(
-                    "HTTP/1.1 302 Moved Temporarily",
-                    String.format(TkRedirectTest.LOCATION, url),
-                    "",
-                    ""
-                )
+            new TkSmartRedirect("http://www.google.com/abc?b=2").act(
+                new RqFake("GET", "/hi?a=1#test")
+            ),
+            new HmRsHeader(
+                "Location",
+                "http://www.google.com/abc?b=2&a=1#test"
             )
         );
     }
@@ -101,15 +59,14 @@ public final class TkRedirectTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void ignoresQueryAndFragmentOnEmptyUrl() throws IOException {
-        final String target = "/the-target";
+    public void redirectCarriesQueryAndFragmentOnEmptyUrl() throws IOException {
         MatcherAssert.assertThat(
-            new TkRedirect(target).act(
+            new TkSmartRedirect().act(
                 new RqFake("GET", "/hey-you?f=1#xxx")
             ),
             new HmRsHeader(
                 "Location",
-                target
+                "/?f=1#xxx"
             )
         );
     }
