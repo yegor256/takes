@@ -68,4 +68,15 @@ public final class CcAesTest {
             Matchers.equalTo(plain)
         );
     }
+
+    /**
+     * CcAES can throw the right exception.
+     * @throws Exception any unexpected exception to throw
+     */
+    @Test(expected = DecodingException.class)
+    public void throwsRightWhenBroken() throws Exception {
+        new CcAes(
+            new CcPlain(), "0123456701234567"
+        ).decode("broken input".getBytes());
+    }
 }

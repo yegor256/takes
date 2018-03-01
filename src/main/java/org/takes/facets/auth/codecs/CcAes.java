@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
@@ -112,9 +113,7 @@ public final class CcAes implements Codec {
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
             return this.create(Cipher.ENCRYPT_MODE).doFinal(bytes);
-        } catch (final BadPaddingException ex) {
-            throw new IOException(ex);
-        } catch (final IllegalBlockSizeException ex) {
+        } catch (final BadPaddingException | IllegalBlockSizeException ex) {
             throw new IOException(ex);
         }
     }
@@ -159,10 +158,8 @@ public final class CcAes implements Codec {
     private byte[] decrypt(final byte[] bytes) throws IOException {
         try {
             return this.create(Cipher.DECRYPT_MODE).doFinal(bytes);
-        } catch (final BadPaddingException ex) {
-            throw new IOException(ex);
-        } catch (final IllegalBlockSizeException ex) {
-            throw new IOException(ex);
+        } catch (final BadPaddingException | IllegalBlockSizeException ex) {
+            throw new DecodingException(ex);
         }
     }
 
@@ -176,19 +173,14 @@ public final class CcAes implements Codec {
     private Cipher create(final int mode)
         throws IOException {
         try {
-            final SecretKeySpec secret = new SecretKeySpec(
+            final Key secret = new SecretKeySpec(
                 CcAes.withCorrectBlockSize(this.key), "AES"
             );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(mode, secret, this.spec);
             return cipher;
-        } catch (final InvalidKeyException ex) {
-            throw new IOException(ex);
-        } catch (final NoSuchAlgorithmException ex) {
-            throw new IOException(ex);
-        } catch (final NoSuchPaddingException ex) {
-            throw new IOException(ex);
-        } catch (final InvalidAlgorithmParameterException ex) {
+        } catch (final InvalidKeyException | NoSuchAlgorithmException
+            | NoSuchPaddingException | InvalidAlgorithmParameterException ex) {
             throw new IOException(ex);
         }
     }
