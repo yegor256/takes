@@ -113,4 +113,21 @@ public final class TkRedirectTest {
         );
     }
 
+    /**
+     * TkRedirect should carry on the query and the fragment.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void redirectCarriesQueryAndFragmentOnEmptyUrl() throws IOException {
+        MatcherAssert.assertThat(
+            new TkRedirect().act(
+                new RqFake("GET", "/hey-you?f=1#xxx")
+            ),
+            new HmRsHeader(
+                "Location",
+                "/?f=1#xxx"
+            )
+        );
+    }
+
 }

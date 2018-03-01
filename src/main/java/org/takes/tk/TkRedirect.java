@@ -25,6 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -72,7 +73,7 @@ public final class TkRedirect extends TkWrap {
                 @Override
                 public Response act(final Request req) throws IOException {
                     return new RsRedirect(
-                        new RedirectParams(req, location).location(),
+                        new TkRedirect.RedirectParams(req, location).location(),
                         code
                     );
                 }
@@ -82,22 +83,16 @@ public final class TkRedirect extends TkWrap {
 
     /**
      * Extract params from original query.
-     * @todo #793:15min Replace this class usages with
-     *  RqHref(req).href() or simply Href when the issue with parsing anchors
-     *  is fixed and delete this implementation for good
      */
     private static final class RedirectParams {
-
         /**
          * Original request.
          */
         private final Request req;
-
         /**
          * Original location.
          */
         private final String origin;
-
         /**
          * Ctor.
          * @param req Original request.
@@ -107,24 +102,28 @@ public final class TkRedirect extends TkWrap {
             this.req = req;
             this.origin = origin;
         }
-
         /**
          * Get location with composed params.
          * @return New location.
          * @throws IOException in case of error.
          */
         public String location() throws IOException {
-            String loc = this.origin;
-            final String uri = new RqRequestLine.Base(this.req).uri();
-            final int idx = uri.indexOf('?');
-            if (idx != -1) {
-                loc = String.format(
-                    "%s&%s",
-                    loc,
-                    uri.substring(idx + 1)
-                );
+            final StringBuilder loc = new StringBuilder(this.origin);
+            final URI target = URI.create(this.origin);
+            final URI uri = URI.create(new RqRequestLine.Base(this.req).uri());
+            if (uri.getQuery() != null) {
+                if (target.getQuery() == null) {
+                    loc.append('?');
+                } else {
+                    loc.append('&');
+                }
+                loc.append(uri.getQuery());
             }
-            return loc;
+            if (uri.getFragment() != null) {
+                loc.append('#');
+                loc.append(uri.getFragment());
+            }
+            return loc.toString();
         }
     }
 
