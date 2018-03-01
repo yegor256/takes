@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
@@ -169,7 +168,7 @@ public final class PsGithub implements Pass {
         final String uri = new Href(this.github)
             .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
             .toString();
-        final List<String> tokens = new JdkRequest(uri)
+        return new JdkRequest(uri)
             .method("POST")
             .header("Accept", "application/xml")
             .body()
@@ -181,13 +180,10 @@ public final class PsGithub implements Pass {
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)
             .as(XmlResponse.class)
-            .xml().xpath("/OAuth/access_token/text()");
-        if (tokens.isEmpty()) {
-            throw new HttpException(
-                HttpURLConnection.HTTP_BAD_REQUEST, "No access token"
-            );
-        }
-        return tokens.get(0);
+            .assertXPath("/OAuth/access_token")
+            .xml()
+            .xpath("/OAuth/access_token/text()")
+            .get(0);
     }
 
     /**

@@ -31,7 +31,6 @@ import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -96,8 +95,7 @@ public final class PsGithubTest {
      */
     @Test
     public void failsOnNoAccessToken() throws IOException {
-        this.thrown.expect(HttpException.class);
-        this.thrown.expectMessage("No access token");
+        this.thrown.expect(AssertionError.class);
         this.performLogin(PsGithubTest.directiveWithoutAccessToken());
     }
 
