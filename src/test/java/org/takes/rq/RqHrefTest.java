@@ -61,6 +61,27 @@ public final class RqHrefTest {
     }
 
     /**
+     * RqHref.Base can parse a query with proto.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void takesProtoIntoAccount() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /test1",
+                        "Host: takes.org",
+                        "X-Forwarded-Proto: https"
+                    ),
+                    ""
+                )
+            ).href().toString(),
+            Matchers.equalTo("https://takes.org/test1")
+        );
+    }
+
+    /**
      * RqHref.Base can parse a query without a Host.
      * @throws IOException If some problem inside
      */

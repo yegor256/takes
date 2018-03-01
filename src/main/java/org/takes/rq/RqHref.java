@@ -70,15 +70,23 @@ public interface RqHref extends Request {
         @Override
         public Href href() throws IOException {
             final String uri = new RqRequestLine.Base(this).uri();
-            final Iterator<String> header = new RqHeaders.Base(this)
+            final Iterator<String> hosts = new RqHeaders.Base(this)
                 .header("host").iterator();
+            final Iterator<String> protos = new RqHeaders.Base(this)
+                .header("x-forwarded-proto").iterator();
             final String host;
-            if (header.hasNext()) {
-                host = header.next();
+            if (hosts.hasNext()) {
+                host = hosts.next().trim();
             } else {
                 host = "localhost";
             }
-            return new Href(String.format("http://%s%s", host, uri));
+            final String proto;
+            if (protos.hasNext()) {
+                proto = protos.next().trim();
+            } else {
+                proto = "http";
+            }
+            return new Href(String.format("%s://%s%s", proto, host, uri));
         }
     }
 
