@@ -43,8 +43,10 @@ import org.hamcrest.TypeSafeMatcher;
  * @since 2.0
  *
  * @todo #794:30min Implement describeMismatchSafely and cover mismatch
- *  descriptions with relevant test cases. It should show, what was
- *  expected and what was actually in the body for clear understanding.
+ *  descriptions with relevant test cases. Update describeTo implementation
+ *  to be more informative and add relevant test cases for that. Both  should
+ *  show, what was expected, what was actually in the body and text description
+ *  for clear understanding.
  */
 public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
