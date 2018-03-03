@@ -44,11 +44,11 @@ import org.takes.Response;
 public final class HmRsTextBody extends AbstractHmTextBody<Response> {
 
     /**
-     * Ctor with containsString matcher and default charset.
+     * Ctor with equalTo matcher and default charset.
      * @param expected String to test against
      */
     public HmRsTextBody(final String expected) {
-        this(Matchers.containsString(expected));
+        this(Matchers.equalTo(expected));
     }
 
     /**

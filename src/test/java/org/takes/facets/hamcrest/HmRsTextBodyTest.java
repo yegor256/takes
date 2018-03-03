@@ -38,18 +38,19 @@ import org.takes.rs.RsWithBody;
 public final class HmRsTextBodyTest {
 
     /**
-     * HmRsTextBody can test if body contains text.
+     * HmRsTextBody can test if body equals text.
      */
     @Test
     public void testsBodyValueContainsText() {
+        final String same = "<h1>Hello</h1>";
         MatcherAssert.assertThat(
-            new RsWithBody("<html><h1>Hello</h1></html>"),
-            new HmRsTextBody("<h1>Hello</h1>")
+            new RsWithBody(same),
+            new HmRsTextBody(same)
         );
     }
 
     /**
-     * HmRsTextBody can test if body doesn't contains text.
+     * HmRsTextBody can test if body doesn't equal to text.
      */
     @Test
     public void testsBodyValueDoesNotContainsText() {

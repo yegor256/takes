@@ -39,21 +39,22 @@ import org.takes.rq.RqFake;
 public final class HmRqTextBodyTest {
 
     /**
-     * HmRqTextBody can test if body contains text.
+     * HmRqTextBody can test if body equals text.
      */
     @Test
     public void testsBodyValueContainsText() {
+        final String same = "Same text";
         MatcherAssert.assertThat(
             new RqFake(
                 Collections.<String>emptyList(),
-                "Some text"
+                same
             ),
-            new HmRqTextBody("text")
+            new HmRqTextBody(same)
         );
     }
 
     /**
-     * HmRqTextBody can test if body doesn't contains text.
+     * HmRqTextBody can test if body doesn't equal to text.
      */
     @Test
     public void testsBodyValueDoesNotContainsText() {
