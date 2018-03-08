@@ -100,10 +100,18 @@ public final class CcSalted implements Codec {
             throw new DecodingException("empty input");
         }
         final int size = text[0];
+        if (size < 0) {
+            throw new DecodingException(
+                String.format(
+                    "Length of salt %+d is negative, something is wrong",
+                    size
+                )
+            );
+        }
         if (text.length < size + 2) {
             throw new DecodingException(
                 String.format(
-                    "not enough bytes for salt, length is %d while %d required",
+                    "Not enough bytes for salt, length is %d while %d required",
                     text.length, size + 2
                 )
             );
@@ -115,7 +123,7 @@ public final class CcSalted implements Codec {
         if (text[text.length - 1] != sum) {
             throw new DecodingException(
                 String.format(
-                    "checksum %d failure, while %d expected",
+                    "Checksum %d failure, while %d expected",
                     text[text.length - 1], sum
                 )
             );

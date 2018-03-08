@@ -57,4 +57,37 @@ public final class CcSaltedTest {
         );
     }
 
+    /**
+     * CcSalted can encrypt/decrypt big chunk of data.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void encryptsLargeData() throws IOException {
+        final Identity identity = new Identity.Simple(
+            new String(new char[10000])
+        );
+        final byte[] bytes = new CcSalted(new CcPlain()).encode(identity);
+        new CcSalted(new CcPlain()).decode(bytes);
+    }
+
+    /**
+     * CcSalted can throw when incomplete data.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = DecodingException.class)
+    public void throwsOnIncompleteData() throws IOException {
+        new CcSalted(new CcPlain()).decode(
+            "\u0010\u0000\u0000\u0000".getBytes()
+        );
+    }
+
+    /**
+     * CcSalted can throw on empty input.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = DecodingException.class)
+    public void throwsOnEmptyInput() throws IOException {
+        new CcSalted(new CcPlain()).decode(new byte[0]);
+    }
+
 }
