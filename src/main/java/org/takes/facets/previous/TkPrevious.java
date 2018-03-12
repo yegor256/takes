@@ -70,7 +70,9 @@ public final class TkPrevious implements Take {
             response = new RsWithCookie(
                 new RsRedirect(cookies.next()),
                 TkPrevious.class.getName(),
-                ""
+                "",
+                "Path=/",
+                "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
             );
         } else {
             response = this.origin.act(req);
