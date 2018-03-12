@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.facets.cookies;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -32,6 +32,8 @@ import org.takes.Request;
 import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqWrap;
 
 /**
  * HTTP cookies parsing.

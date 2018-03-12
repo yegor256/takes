@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.ExpirationDate;
-import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
 
 /**

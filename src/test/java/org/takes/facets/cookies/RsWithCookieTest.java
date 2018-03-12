@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.cookies;
 
 import com.google.common.base.Joiner;
 import java.io.IOException;
@@ -30,6 +30,8 @@ import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.takes.rs.RsEmpty;
+import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsWithCookie}.

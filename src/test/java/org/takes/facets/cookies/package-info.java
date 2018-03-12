@@ -21,41 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.auth;
-
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.Response;
-import org.takes.facets.cookies.RsWithCookie;
-import org.takes.rs.RsWrap;
 
 /**
- * Logout response.
- *
- * <p>The class is immutable and thread-safe.
+ * Cookies, tests.
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.11
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public final class RsLogout extends RsWrap {
-
-    /**
-     * Ctor.
-     * @param res Original response
-     */
-    public RsLogout(final Response res) {
-        this(res, PsCookie.class.getSimpleName());
-    }
-    /**
-     * Ctor.
-     * @param res Original response
-     * @param cookie The cookie
-     */
-    public RsLogout(final Response res, final String cookie) {
-        super(new RsWithCookie(res, cookie, ""));
-    }
-
-}
+package org.takes.facets.cookies;

@@ -26,12 +26,13 @@ package org.takes.tk;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Take;
+import org.takes.facets.cookies.RsWithCookie;
 
 /**
  * Take that headers.
  *
  * <p>This take wraps all responses of another take, adding
- * cookies to them, through {@link org.takes.rs.RsWithCookie}.
+ * cookies to them, through {@link RsWithCookie}.
  *
  * <p>The class is immutable and thread-safe.
  *

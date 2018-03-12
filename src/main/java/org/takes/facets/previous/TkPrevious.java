@@ -30,9 +30,9 @@ import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqCookies;
+import org.takes.facets.cookies.RqCookies;
+import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsRedirect;
-import org.takes.rs.RsWithCookie;
 
 /**
  * Take that redirects to previous URL

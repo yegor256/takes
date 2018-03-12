@@ -31,7 +31,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqCookies;
+import org.takes.facets.cookies.RqCookies;
 import org.takes.rs.xe.XeSource;
 import org.xembly.Directive;
 import org.xembly.Directives;

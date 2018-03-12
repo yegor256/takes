@@ -26,7 +26,7 @@ package org.takes.facets.previous;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
-import org.takes.rs.RsWithCookie;
+import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsWrap;
 
 /**

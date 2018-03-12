@@ -30,11 +30,11 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
+import org.takes.facets.cookies.RqCookies;
+import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.ExpirationDate;
 import org.takes.misc.Opt;
 import org.takes.misc.Utf8String;
-import org.takes.rq.RqCookies;
-import org.takes.rs.RsWithCookie;
 
 /**
  * Pass via cookie information.

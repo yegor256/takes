@@ -107,7 +107,8 @@
  * }</pre>
  *
  * <p>The last step is to fetch that cookie from the request and add
- * to the HTML page. You can use {@link org.takes.rq.RqCookies} for that
+ * to the HTML page. You can use
+ * {@link org.takes.facets.cookies.RqCookies} for that
  * (it's a pseudo-code, don't build HTML like this!):
  *
  * <pre>public final class TkDiscussion implements Take {

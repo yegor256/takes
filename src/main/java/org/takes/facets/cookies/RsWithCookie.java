@@ -21,12 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.cookies;
 
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
+import org.takes.rs.RsEmpty;
+import org.takes.rs.RsWithHeader;
+import org.takes.rs.RsWrap;
 
 /**
  * Response decorator, with an additional cookie.

@@ -30,9 +30,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
+import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.ExpirationDate;
 import org.takes.misc.Sprintf;
-import org.takes.rs.RsWithCookie;
 import org.takes.rs.RsWrap;
 
 /**

@@ -30,8 +30,8 @@ import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqCookies;
-import org.takes.rs.RsWithCookie;
+import org.takes.facets.cookies.RqCookies;
+import org.takes.facets.cookies.RsWithCookie;
 
 /**
  * Take that understands Flash cookie and converts it into a HTTP header.
