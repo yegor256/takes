@@ -52,7 +52,7 @@ public final class TkPreviousTest {
                     new RqWithHeader(
                         new RqFake(),
                         "Cookie",
-                        "org.takes.facets.previous.TkPrevious=/home"
+                        "TkPrevious=/home"
                     )
                 )
             ).print(),

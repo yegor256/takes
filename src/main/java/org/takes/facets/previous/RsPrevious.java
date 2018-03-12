@@ -51,7 +51,7 @@ public final class RsPrevious extends RsWrap {
         super(
             new RsWithCookie(
                 rsp,
-                TkPrevious.class.getName(),
+                TkPrevious.class.getSimpleName(),
                 location
             )
         );

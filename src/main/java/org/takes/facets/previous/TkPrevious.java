@@ -63,7 +63,7 @@ public final class TkPrevious implements Take {
     @Override
     public Response act(final Request req) throws IOException {
         final Iterator<String> cookies = new RqCookies.Base(req)
-            .cookie(TkPrevious.class.getName())
+            .cookie(TkPrevious.class.getSimpleName())
             .iterator();
         final Response response;
         if (cookies.hasNext()) {

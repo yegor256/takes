@@ -21,36 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.previous;
+package org.takes.rs;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rs.RsPrint;
-import org.takes.rs.RsText;
 
 /**
- * Test case for {@link RsPrevious}.
+ * Test case for {@link RsRedirect}.
  * @author Yegor Bugayenko (yegor256@gmail.com)
  * @version $Id$
- * @since 0.2
+ * @since 0.12
  */
-public final class RsPreviousTest {
+public final class RsRedirectTest {
 
     /**
-     * RsPrevious can build a response.
+     * RsRedirect can redirect.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsResponse() throws IOException {
+    public void redirects() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsPrevious(new RsText(""), "/home")
+                new RsRedirect(
+                    "/home"
+                )
             ).print(),
-            Matchers.containsString(
-                "Set-Cookie: TkPrevious=/home"
-            )
+            Matchers.containsString("HTTP/1.1 303 See Other")
         );
     }
 
