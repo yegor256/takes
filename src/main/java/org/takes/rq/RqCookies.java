@@ -88,7 +88,7 @@ public interface RqCookies extends Request {
                     Collections.<String>emptyList(),
                     new Sprintf(
                         // @checkstyle LineLengthCheck (1 line)
-                        "there are no Cookies by name \"%s\" among %d others: %s",
+                        "There are no Cookies by name \"%s\" among %d others: %s",
                         key, map.size(), map.keySet()
                     )
                 );
@@ -96,7 +96,7 @@ public interface RqCookies extends Request {
                 iter = new VerboseIterable<String>(
                     Collections.singleton(value),
                     new Sprintf(
-                        "there is always only one Cookie by name \"%s\"",
+                        "There is always only one Cookie by name \"%s\"",
                         key
                     )
                 );
