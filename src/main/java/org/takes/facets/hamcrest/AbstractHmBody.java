@@ -25,8 +25,10 @@
 package org.takes.facets.hamcrest;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -43,11 +45,6 @@ import org.hamcrest.TypeSafeMatcher;
  * @todo #794:30min Current implementation of `AbstractHmBody` should be
  *  converted to `HmBytesBody` that will check equality of bytes. We can think
  *  of improving that class lately.
- *
- * @todo #485:30min Right now the describeTo doesn't properly
- *  show the reason behind mismatch. It should show expected
- *  bytes and actual bytes for better clarification for
- *  end user. Also describeMismatchSafely should be implemented.
  */
 abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
 
@@ -65,10 +62,32 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
         this.body = value;
     }
 
+    // @todo #795:30min Right now the describeTo method do not covered
+    //  with tests. Cover this method with unit test to increase coverage
+    //  of the class.
     @Override
     public final void describeTo(final Description description) {
-        description.appendText("item: ")
-            .appendValue(this.body);
+        try {
+            description.appendText("body: ")
+                .appendText(Arrays.toString(AbstractHmBody.asBytes(this.body)));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    @Override
+    protected void describeMismatchSafely(final T item,
+        final Description description) {
+        try {
+            description.appendText("body was: ")
+                .appendText(
+                    Arrays.toString(
+                        AbstractHmBody.asBytes(this.itemBody(item))
+                    )
+                );
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     @Override
@@ -103,5 +122,25 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
      * @throws IOException If some problem inside
      */
     protected abstract InputStream itemBody(final T item) throws IOException;
-}
 
+    /**
+     * InputStream as bytes.
+     * @param input Input
+     * @return Bytes
+     * @throws IOException If some problem inside
+     */
+    @SuppressWarnings("PMD.AssignmentInOperand")
+    private static byte[] asBytes(final InputStream input) throws IOException {
+        input.reset();
+        try (final ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            // @checkstyle MagicNumberCheck (1 line)
+            final byte[] buffer = new byte[1024];
+            int read;
+            while ((read = input.read(buffer, 0, buffer.length)) != -1) {
+                output.write(buffer, 0, read);
+            }
+            output.flush();
+            return output.toByteArray();
+        }
+    }
+}
