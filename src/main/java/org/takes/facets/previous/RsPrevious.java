@@ -23,6 +23,8 @@
  */
 package org.takes.facets.previous;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
@@ -46,13 +48,15 @@ public final class RsPrevious extends RsWrap {
      * Ctor.
      * @param rsp Response to decorate
      * @param location The location user is trying to access
+     * @throws UnsupportedEncodingException If fails to encode
      */
-    public RsPrevious(final Response rsp, final String location) {
+    public RsPrevious(final Response rsp, final String location)
+        throws UnsupportedEncodingException {
         super(
             new RsWithCookie(
                 rsp,
                 TkPrevious.class.getSimpleName(),
-                location
+                URLEncoder.encode(location, "UTF-8")
             )
         );
     }

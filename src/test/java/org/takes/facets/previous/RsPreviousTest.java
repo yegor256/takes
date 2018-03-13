@@ -49,7 +49,7 @@ public final class RsPreviousTest {
                 new RsPrevious(new RsText(""), "/home")
             ).print(),
             Matchers.containsString(
-                "Set-Cookie: TkPrevious=/home"
+                "Set-Cookie: TkPrevious=%2Fhome"
             )
         );
     }
