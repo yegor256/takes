@@ -38,6 +38,11 @@ import org.takes.tk.TkWrap;
 /**
  * Set-Cookie headers will be joined.
  *
+ * <p>This may be useful for some browsers. When you drop a few cookies,
+ * the RFC-6265 requires them to be joined in one Set-Cookie header. However,
+ * most browsers don't support that. They want to see separate
+ * headers. This class may be useful, but in some very specific cases.</p>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @author Yegor Bugayenko (yegor256@gmail.com)
