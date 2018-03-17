@@ -43,6 +43,10 @@ import org.takes.facets.auth.Identity;
 /**
  * AES codec which supports 128 bits key.
  *
+ * <p>It's recommended to use it in conjunction with {@link CcSigned} codec,
+ * which can be applied
+ * <a href="https://crypto.stackexchange.com/a/205">before or after</a>
+ * encryption.
  * <p>The class is immutable and thread-safe.
  * @author Jason Wong (super132j@yahoo.com)
  * @version $Id$
@@ -50,6 +54,11 @@ import org.takes.facets.auth.Identity;
  */
 @EqualsAndHashCode
 public final class CcAes implements Codec {
+    /**
+     * Secure random instance.
+     */
+    private static final SecureRandom RANDOM = new SecureRandom();
+
     /**
      * The block size constant.
      */
@@ -63,12 +72,11 @@ public final class CcAes implements Codec {
     /**
      * The encryption key.
      */
-    private final byte[] key;
-
+    private final Key key;
     /**
-     * The algorithm parameter spec for cipher.
+     * Random.
      */
-    private final AlgorithmParameterSpec spec;
+    private final SecureRandom random;
 
     /**
      * Constructor for the class.
@@ -80,7 +88,6 @@ public final class CcAes implements Codec {
     public CcAes(final Codec codec, final String key) {
         this(codec, key.getBytes(Charset.defaultCharset()));
     }
-
     /**
      * Constructor for the class.
      *
@@ -88,9 +95,30 @@ public final class CcAes implements Codec {
      * @param key The encryption key
      */
     public CcAes(final Codec codec, final byte[] key) {
+        this(
+            codec,
+            CcAes.RANDOM,
+            new SecretKeySpec(
+                CcAes.withCorrectBlockSize(key.clone()), "AES"
+            )
+        );
+    }
+
+    /**
+     * Constructor for the class.
+     *
+     * @param codec Original codec
+     * @param random Random generator
+     * @param key The encryption key
+     */
+    public CcAes(
+        final Codec codec,
+        final SecureRandom random,
+        final Key key
+    ) {
         this.origin = codec;
-        this.key = key.clone();
-        this.spec = CcAes.algorithmParameterSpec();
+        this.key = key;
+        this.random = random;
     }
 
     @Override
@@ -112,22 +140,25 @@ public final class CcAes implements Codec {
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
-            return this.create(Cipher.ENCRYPT_MODE).doFinal(bytes);
+            final byte[] vector = new byte[CcAes.BLOCK];
+            this.random.nextBytes(vector);
+            final byte[] message = this.cipher(
+                Cipher.ENCRYPT_MODE,
+                new IvParameterSpec(vector)
+            ).doFinal(bytes);
+            final byte[] res = new byte[vector.length + message.length];
+            System.arraycopy(vector, 0, res, 0, vector.length);
+            System.arraycopy(
+                message,
+                0,
+                res,
+                vector.length,
+                message.length
+            );
+            return res;
         } catch (final BadPaddingException | IllegalBlockSizeException ex) {
             throw new IOException(ex);
         }
-    }
-
-    /**
-     * Create AlgorithmParameterSpec with the block size.
-     *
-     * @return The AlgorithmParameterSpec
-     */
-    private static AlgorithmParameterSpec algorithmParameterSpec() {
-        final SecureRandom random = new SecureRandom();
-        final byte[] bytes = new byte[CcAes.BLOCK];
-        random.nextBytes(bytes);
-        return new IvParameterSpec(bytes);
     }
 
     /**
@@ -156,8 +187,24 @@ public final class CcAes implements Codec {
      * @throws IOException for all unexpected exceptions
      */
     private byte[] decrypt(final byte[] bytes) throws IOException {
+        if (bytes.length < CcAes.BLOCK << 1) {
+            throw new DecodingException("Invalid encrypted message format");
+        }
         try {
-            return this.create(Cipher.DECRYPT_MODE).doFinal(bytes);
+            final byte[] vector = new byte[CcAes.BLOCK];
+            final byte[] message = new byte[bytes.length - vector.length];
+            System.arraycopy(bytes, 0, vector, 0, vector.length);
+            System.arraycopy(
+                bytes,
+                vector.length,
+                message,
+                0,
+                message.length
+            );
+            return this.cipher(
+                Cipher.DECRYPT_MODE,
+                new IvParameterSpec(vector)
+            ).doFinal(message);
         } catch (final BadPaddingException | IllegalBlockSizeException ex) {
             throw new DecodingException(ex);
         }
@@ -167,20 +214,19 @@ public final class CcAes implements Codec {
      * Create new cipher based on the valid mode from {@link Cipher} class.
      *
      * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
+     * @param spec Param spec (IV)
      * @return The cipher
      * @throws IOException For any unexpected exceptions
      */
-    private Cipher create(final int mode)
+    private Cipher cipher(final int mode, final AlgorithmParameterSpec spec)
         throws IOException {
         try {
-            final Key secret = new SecretKeySpec(
-                CcAes.withCorrectBlockSize(this.key), "AES"
-            );
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(mode, secret, this.spec);
+            cipher.init(mode, this.key, spec, this.random);
             return cipher;
         } catch (final InvalidKeyException | NoSuchAlgorithmException
-            | NoSuchPaddingException | InvalidAlgorithmParameterException ex) {
+            | InvalidAlgorithmParameterException
+            | NoSuchPaddingException ex) {
             throw new IOException(ex);
         }
     }
