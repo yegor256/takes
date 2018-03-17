@@ -27,7 +27,9 @@ package org.takes.facets.hamcrest;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.StringDescription;
 import org.junit.Test;
+import org.takes.Request;
 import org.takes.rq.RqFake;
 
 /**
@@ -67,5 +69,25 @@ public final class HmRqBodyTest {
             Matchers.not(new HmRqBody("that"))
         );
     }
-}
 
+    /**
+     * HmRqBody can describe mismatch in readable way.
+     */
+    @Test
+    public void describesMismatchInReadableWay() {
+        final Request request = new RqFake(
+            Collections.<String>emptyList(),
+            "other"
+        );
+        final HmRqBody matcher = new HmRqBody("some");
+        matcher.matchesSafely(request);
+        final StringDescription description = new StringDescription();
+        matcher.describeMismatchSafely(request, description);
+        MatcherAssert.assertThat(
+            description.toString(),
+            Matchers.equalTo(
+                "body was: [111, 116, 104, 101, 114]"
+            )
+        );
+    }
+}
