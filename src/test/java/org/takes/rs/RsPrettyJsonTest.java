@@ -51,7 +51,7 @@ public final class RsPrettyJsonTest {
                 )
             ).printBody(),
             Matchers.is(
-                "\n{\n    \"widget\":{\n        \"debug\":\"on\"\n    }\n}"
+                "\n{\n    \"widget\": {\n        \"debug\": \"on\"\n    }\n}"
             )
         );
     }
@@ -74,7 +74,7 @@ public final class RsPrettyJsonTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RsPrint(
             new RsWithBody(
-                "\n{\n    \"test\":{\n        \"test\":\"test\"\n    }\n}"
+                "\n{\n    \"test\": {\n        \"test\": \"test\"\n    }\n}"
             )
         ).printBody(baos);
         MatcherAssert.assertThat(
