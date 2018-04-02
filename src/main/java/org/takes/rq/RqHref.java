@@ -26,6 +26,7 @@ package org.takes.rq;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
@@ -138,12 +139,12 @@ public interface RqHref extends Request {
          * @since 0.14
          */
         public Href home() throws IOException {
+            final URI full = URI.create(this.href().toString());
             return new Href(
                 String.format(
-                    "http://%s/",
-                    new RqHeaders.Smart(
-                        new RqHeaders.Base(this)
-                    ).single("Host")
+                    "%s://%s/",
+                    full.getScheme(),
+                    full.getHost()
                 )
             );
         }

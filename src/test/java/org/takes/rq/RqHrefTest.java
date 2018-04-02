@@ -37,6 +37,7 @@ import org.takes.HttpException;
  * @version $Id$
  * @since 0.1
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RqHrefTest {
 
     /**
@@ -191,6 +192,29 @@ public final class RqHrefTest {
                 )
             ).home(),
             Matchers.hasToString("http://ddd.example.com/")
+        );
+    }
+
+    /**
+     * RqHref.Smart can extract home URI.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void extractsHomeWithProtocol() throws IOException {
+        MatcherAssert.assertThat(
+            new RqHref.Smart(
+                new RqHref.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /bye-dude?extra=343",
+                            "Host: ff9.example.com",
+                            "X-Forwarded-Proto: https"
+                        ),
+                        ""
+                    )
+                )
+            ).home(),
+            Matchers.hasToString("https://ff9.example.com/")
         );
     }
 
