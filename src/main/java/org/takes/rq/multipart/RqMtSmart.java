@@ -45,6 +45,14 @@ public final class RqMtSmart implements RqMultipart {
     /**
      * Ctor.
      * @param req Original
+     * @throws IOException If fails
+     */
+    public RqMtSmart(final Request req) throws IOException {
+        this(new RqMtBase(req));
+    }
+    /**
+     * Ctor.
+     * @param req Original
      */
     public RqMtSmart(final RqMultipart req) {
         this.origin = req;
