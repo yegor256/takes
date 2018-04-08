@@ -177,6 +177,45 @@ $ mvn clean integration-test -Phit-refresh -Dport=8080
 
 Maven will start the server and you can see it at `http://localhost:8080`.
 
+## Using in servlet app
+
+Create a take with constructor accepting `ServletContext`:
+
+```java
+package com.myapp;
+
+public final class TkApp implements Take {
+  private final ServletContext ctx;
+
+  public TkApp(final ServletContext context) {
+    this.ctx = context;
+  }
+
+  @Override
+  public Response act(final Request req) throws IOException {
+    return new RsText("Hello servlet!");
+  }
+}
+```
+
+Add `org.takes.servlet.SrvTake` to your `web.xml`, don't forget to specify
+take class as servlet `init-param`:
+
+```xml
+  <servlet>
+    <servlet-name>takes</servlet-name>
+    <servlet-class>org.takes.servlet.SrvTake</servlet-class>
+    <init-param>
+      <param-name>take</param-name>
+      <param-value>com.myapp.TkApp</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>takes</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+```
+
 ## Unit Testing
 
 This is how you can unit test the app, using JUnit 4.x and
