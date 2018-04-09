@@ -41,6 +41,9 @@ import org.takes.Response;
  * @author Kirill (g4s8.public@gmail.com)
  * @version $Id $
  * @since 2.0
+ * @todo #682:30min Servlet request and response adapters are not unit-tested.
+ *  There should be tests for reading headers and body from servlet request
+ *  and test for validating servlet response after applying takes request.
  */
 final class ResponseOf {
     /**
