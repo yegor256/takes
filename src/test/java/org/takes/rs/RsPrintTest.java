@@ -23,12 +23,16 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Test case for {@link RsPrint}.
@@ -94,6 +98,19 @@ public final class RsPrintTest {
             output.haveFlushed(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    public void testStreamIsCLoses() throws IOException {
+        final AtomicBoolean closed = new AtomicBoolean(false);
+        new RsPrint(new RsWithBody(new ByteArrayInputStream("test body...".getBytes()) {
+            @Override
+            public void close() throws IOException {
+                closed.set(true);
+                super.close();
+            }
+        })).print(new ByteArrayOutputStream());
+        MatcherAssert.assertThat(closed.get(), Matchers.is(true));
     }
 
     /**

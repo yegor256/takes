@@ -23,17 +23,14 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Writer;
-import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
+
+import java.io.*;
+import java.util.regex.Pattern;
 
 /**
  * Response decorator that can print an entire response in HTTP format.
@@ -158,10 +155,9 @@ public final class RsPrint extends RsWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final InputStream body = this.body();
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        try {
+        try (final InputStream body = this.body()) {
             while (true) {
                 final int bytes = body.read(buf);
                 if (bytes < 0) {
