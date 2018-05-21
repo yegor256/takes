@@ -29,7 +29,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -100,8 +99,13 @@ public final class RsPrintTest {
         );
     }
 
+    /**
+     * RsPrint test that Response body stream is closed
+     * after printing it to an output strea,
+     * @throws IOException If some problem inside
+     */
     @Test
-    public void testStreamIsCLoses() throws IOException {
+    public void assetStreamIsClosed() throws IOException {
         final AtomicBoolean closed = new AtomicBoolean(false);
         new RsPrint(new RsWithBody(new ByteArrayInputStream("test body...".getBytes()) {
             @Override
@@ -109,7 +113,7 @@ public final class RsPrintTest {
                 closed.set(true);
                 super.close();
             }
-        })).print(new ByteArrayOutputStream());
+        })).print();
         MatcherAssert.assertThat(closed.get(), Matchers.is(true));
     }
 

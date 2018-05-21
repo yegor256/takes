@@ -28,8 +28,11 @@ import lombok.ToString;
 import org.takes.Response;
 import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
-
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Writer;
 import java.util.regex.Pattern;
 
 /**
