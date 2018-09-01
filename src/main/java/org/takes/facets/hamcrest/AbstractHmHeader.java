@@ -30,7 +30,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
@@ -78,28 +77,6 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
         super();
         this.header = hdrm;
         this.value = vlm;
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    protected AbstractHmHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(hdr), vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    protected AbstractHmHeader(final String hdr, final String val) {
-        this(
-            Matchers.equalToIgnoringCase(hdr),
-            Matchers.hasItems(val)
-        );
     }
 
     @Override
