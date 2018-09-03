@@ -28,22 +28,22 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
- * Test case for {@link ExpirationDate}.
+ * Test case for {@link Expires.Date}.
  *
  * @author Izbassar Tolegen (t.izbassar@gmail.com)
  * @version $Id$
  * @since 2.0
  */
-public final class ExpirationDateTest {
+public final class DateTest {
 
     /**
-     * ExpirationDate can return expires date string in GMT.
+     * Date can return expires date string in GMT.
      */
     @Test
     public void returnsExpiresStringInGmt() {
         MatcherAssert.assertThat(
             // @checkstyle MagicNumberCheck (2 lines)
-            new ExpirationDate(
+            new Expires.Date(
                 1517048057117L
             ).toString(),
             Matchers.equalTo("Expires=Sat, 27 Jan 2018 10:14:17 GMT")

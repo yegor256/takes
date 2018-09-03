@@ -31,7 +31,7 @@ import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
-import org.takes.misc.ExpirationDate;
+import org.takes.misc.Expires;
 import org.takes.misc.Sprintf;
 import org.takes.rs.RsWrap;
 
@@ -133,11 +133,11 @@ public final class RsFlash extends RsWrap {
      * <p>By default it will use {@code RsFlash} as cookie name.</p>
      *
      * @param msg Message
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final CharSequence msg, final ExpirationDate expires)
+    public RsFlash(final CharSequence msg, final Expires.Date expires)
         throws UnsupportedEncodingException {
         this(msg, Level.INFO, expires);
     }
@@ -159,7 +159,7 @@ public final class RsFlash extends RsWrap {
         throws UnsupportedEncodingException {
         this(
             err,
-            new ExpirationDate(
+            new Expires.Date(
                 System.currentTimeMillis()
                     + TimeUnit.HOURS.toMillis(1L)
             )
@@ -176,12 +176,12 @@ public final class RsFlash extends RsWrap {
      * <p>By default it will use {@code RsFlash} as cookie name.</p>
      *
      * @param err Error
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      * @since 2.0
      */
-    public RsFlash(final Throwable err, final ExpirationDate expires)
+    public RsFlash(final Throwable err, final Expires.Date expires)
         throws UnsupportedEncodingException {
         this(err, Level.SEVERE, expires);
     }
@@ -206,7 +206,7 @@ public final class RsFlash extends RsWrap {
         this(
             err.getLocalizedMessage(),
             level,
-            new ExpirationDate(
+            new Expires.Date(
                 System.currentTimeMillis()
                     + TimeUnit.HOURS.toMillis(1L)
             )
@@ -223,13 +223,13 @@ public final class RsFlash extends RsWrap {
      *
      * @param err Error
      * @param level Level
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is
      *  not supported
      * @since 2.0
      */
     public RsFlash(final Throwable err, final Level level,
-        final ExpirationDate expires) throws UnsupportedEncodingException {
+        final Expires.Date expires) throws UnsupportedEncodingException {
         this(err.getLocalizedMessage(), level, expires);
     }
 
@@ -258,13 +258,13 @@ public final class RsFlash extends RsWrap {
      *
      * @param msg Message
      * @param level Level
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is
      *  not supported
      * @since 2.0
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final ExpirationDate expires) throws UnsupportedEncodingException {
+        final Expires.Date expires) throws UnsupportedEncodingException {
         this(
             msg,
             level,
@@ -292,7 +292,7 @@ public final class RsFlash extends RsWrap {
             msg,
             level,
             cookie,
-            new ExpirationDate(
+            new Expires.Date(
                 System.currentTimeMillis()
                 + TimeUnit.HOURS.toMillis(1L)
             )
@@ -305,14 +305,14 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      * @since 2.0
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final String cookie, final ExpirationDate expires)
+        final String cookie, final Expires.Date expires)
         throws UnsupportedEncodingException {
         super(RsFlash.make(msg, level, cookie, expires));
         this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
@@ -331,14 +331,14 @@ public final class RsFlash extends RsWrap {
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name
-     * @param expires ExpirationDate of the cookie
+     * @param expires Date of the cookie
      * @return Response
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,
-        final String cookie, final ExpirationDate expires)
+        final String cookie, final Expires.Date expires)
         throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
