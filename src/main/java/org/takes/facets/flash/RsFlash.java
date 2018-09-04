@@ -351,7 +351,7 @@ public final class RsFlash extends RsWrap {
                 level.getName()
             ),
             "Path=/",
-            expires.toString()
+            expires.print()
         );
     }
 }

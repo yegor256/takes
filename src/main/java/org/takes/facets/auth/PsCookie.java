@@ -125,7 +125,7 @@ public final class PsCookie implements Pass {
             new Expires.Date(
                 System.currentTimeMillis()
                     + TimeUnit.DAYS.toMillis(this.age)
-            ).toString()
+            ).print()
         );
     }
 }

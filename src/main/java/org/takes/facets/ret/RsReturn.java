@@ -84,7 +84,7 @@ public final class RsReturn extends RsWrap {
                 new Expires.Date(
                     System.currentTimeMillis()
                         + TimeUnit.HOURS.toMillis(1L)
-                ).toString()
+                ).print()
             )
         );
     }
