@@ -21,57 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes;
 
 import java.io.IOException;
-import org.hamcrest.Matcher;
-import org.takes.Response;
+import java.io.InputStream;
 
 /**
- * Response Header Matcher.
- *
- * <p>This "matcher" tests given response headers.
- * <p>The class is immutable and thread-safe.
- *
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author I. Sokolov (happy.neko@gmail.com)
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * Body abstraction for {@link Request} and {@link Response}.
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
- * @since 0.23.3
+ * @since 2.0
  */
-public final class HmRsHeader extends AbstractHmHeader<Response> {
-
+public interface Body {
     /**
-     * Ctor.
-     * @param hdrm Header matcher
-     * @param vlm Value matcher
+     * Body.
+     * @return Stream with body
+     * @throws IOException If something goes wrong
      */
-    public HmRsHeader(final Matcher<String> hdrm,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdrm, vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    public HmRsHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdr, vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    public HmRsHeader(final String hdr, final String val) {
-        super(hdr, val);
-    }
-
-    @Override
-    public Iterable<String> headers(final Response item) throws IOException {
-        return item.head();
-    }
+    InputStream body() throws IOException;
 }

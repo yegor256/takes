@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
-import org.takes.facets.hamcrest.HmRqHeader;
+import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
 
@@ -173,7 +173,7 @@ public final class RqMtBaseTest {
                 multipart.part(part)
                 .iterator()
                 .next(),
-                new HmRqHeader(
+                new HmHeader<>(
                     "content-length",
                     "102"
                 )

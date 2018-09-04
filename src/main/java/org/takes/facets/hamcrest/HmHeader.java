@@ -32,6 +32,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.takes.Head;
 
 /**
  * Header Matcher.
@@ -42,11 +43,12 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
  * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
  */
-abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
+public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Values string used in description of mismatches.
@@ -73,7 +75,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
      * @param hdrm Header matcher
      * @param vlm Value matcher
      */
-    protected AbstractHmHeader(final Matcher<String> hdrm,
+    public HmHeader(final Matcher<String> hdrm,
         final Matcher<Iterable<String>> vlm) {
         super();
         this.header = hdrm;
@@ -85,7 +87,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
      * @param hdr Header name
      * @param vlm Value matcher
      */
-    protected AbstractHmHeader(final String hdr,
+    public HmHeader(final String hdr,
         final Matcher<Iterable<String>> vlm) {
         this(Matchers.equalToIgnoringCase(hdr), vlm);
     }
@@ -95,7 +97,7 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
      * @param hdr Header name
      * @param val Header value
      */
-    protected AbstractHmHeader(final String hdr, final String val) {
+    public HmHeader(final String hdr, final String val) {
         this(
             Matchers.equalToIgnoringCase(hdr),
             Matchers.hasItems(val)
@@ -103,23 +105,23 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
     }
 
     @Override
-    public final void describeTo(final Description description) {
+    public void describeTo(final Description description) {
         description.appendText("header: ")
             .appendDescriptionOf(this.header)
-            .appendText(AbstractHmHeader.VALUES_STR)
+            .appendText(HmHeader.VALUES_STR)
             .appendDescriptionOf(this.value);
     }
 
     @Override
-    public final boolean matchesSafely(final T item) {
+    public boolean matchesSafely(final T item) {
         try {
-            final Iterator<String> headers = this.headers(item).iterator();
+            final Iterator<String> headers = HmHeader.headers(item).iterator();
             if (headers.hasNext()) {
                 headers.next();
             }
             final Collection<String> values = new ArrayList<>(0);
             while (headers.hasNext()) {
-                final String[] parts = AbstractHmHeader.split(headers.next());
+                final String[] parts = HmHeader.split(headers.next());
                 if (this.header.matches(parts[0].trim())) {
                     values.add(parts[1].trim());
                 }
@@ -135,11 +137,11 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
     }
 
     @Override
-    public final void describeMismatchSafely(final T item,
+    public void describeMismatchSafely(final T item,
         final Description description) {
         description.appendText("header was: ")
             .appendDescriptionOf(this.header)
-            .appendText(AbstractHmHeader.VALUES_STR)
+            .appendText(HmHeader.VALUES_STR)
             .appendValue(this.failed);
     }
 
@@ -150,8 +152,10 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
      * @throws IOException If something goes wrong
      * @checkstyle NonStaticMethodCheck (2 lines)
      */
-    protected abstract Iterable<String> headers(final T item)
-        throws IOException;
+    private static Iterable<String> headers(final Head item) throws
+        IOException {
+        return item.head();
+    }
 
     /**
      * Splits the given header to [name, value] array.

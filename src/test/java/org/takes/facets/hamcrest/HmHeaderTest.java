@@ -28,17 +28,19 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
+import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
 
 /**
- * Test case for {@link org.takes.facets.hamcrest.HmRqHeader}.
+ * Test case for {@link org.takes.facets.hamcrest.HmHeader}.
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
  * @since 0.23.3
  */
-public final class HmRqHeaderTest {
+public final class HmHeaderTest {
 
     /**
      * HmRqHeader can test whether a header is available.
@@ -56,7 +58,7 @@ public final class HmRqHeaderTest {
                 ),
                 ""
             ),
-            new HmRqHeader(
+            new HmHeader<>(
                 "accept", Matchers.hasItems("text/xml", "text/html")
             )
         );
@@ -78,7 +80,7 @@ public final class HmRqHeaderTest {
                 ""
             ),
             Matchers.not(
-                new HmRqHeader(
+                new HmHeader<>(
                     "host", "fake.org"
                 )
             )
@@ -93,7 +95,7 @@ public final class HmRqHeaderTest {
     public void testsHeaderNameAndValueAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeader(new RqFake(), "header1: value1"),
-            new HmRqHeader(
+            new HmHeader<>(
                 "header1", "value1"
             )
         );
@@ -109,7 +111,7 @@ public final class HmRqHeaderTest {
         MatcherAssert.assertThat(
             new RqWithHeader(new RqFake(), "header2: value2"),
             Matchers.not(
-                new HmRqHeader(
+                new HmHeader<>(
                     "header2", "value21"
                 )
             )
@@ -127,7 +129,7 @@ public final class HmRqHeaderTest {
                 new RqFake(),
                 "header3: value31", "header3: value32"
             ),
-            new HmRqHeader(
+            new HmHeader<>(
                 "header3", Matchers.hasItems("value31", "value32")
             )
         );
@@ -141,7 +143,7 @@ public final class HmRqHeaderTest {
     public void testsHeaderNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeaders(new RqFake(), "header4: value4"),
-            new HmRqHeader(
+            new HmHeader<>(
                 "header41", Matchers.emptyIterableOf(String.class)
             )
         );
@@ -152,7 +154,7 @@ public final class HmRqHeaderTest {
      */
     @Test
     public void testMismatchMessage() {
-        final HmRqHeader matcher = new HmRqHeader(
+        final HmHeader<Request> matcher = new HmHeader<>(
             "content-type", "text/plain"
         );
         final StringDescription description = new StringDescription();

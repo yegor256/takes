@@ -21,56 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes;
 
 import java.io.IOException;
-import org.hamcrest.Matcher;
-import org.takes.Request;
 
 /**
- * Request Header Matcher.
- *
- * <p>This "matcher" tests given request headers.
- * <p>The class is immutable and thread-safe.
- *
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author I. Sokolov (happy.neko@gmail.com)
+ * Head abstraction for {@link Request} and {@link Response}.
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
- * @since 0.23.3
+ * @since 2.0
  */
-public final class HmRqHeader extends AbstractHmHeader<Request> {
-
+public interface Head {
     /**
-     * Ctor.
-     * @param hdrm Header matcher
-     * @param vlm Value matcher
+     * All lines above the body.
+     * @return List of lines
+     * @throws IOException If something goes wrong
      */
-    public HmRqHeader(final Matcher<String> hdrm,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdrm, vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    public HmRqHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        super(hdr, vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    public HmRqHeader(final String hdr, final String val) {
-        super(hdr, val);
-    }
-
-    @Override
-    public Iterable<String> headers(final Request item) throws IOException {
-        return item.head();
-    }
+    Iterable<String> head() throws IOException;
 }
