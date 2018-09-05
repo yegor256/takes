@@ -38,8 +38,9 @@ import org.takes.Response;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
- * @since 0.23.3
+ * @since 2.0
  */
 public final class HmRsHeader extends AbstractHmHeader<Response> {
 
