@@ -69,6 +69,7 @@ public final class ExpiresTest {
     @Test
     public void returnsExpiresStringInGmt() {
         MatcherAssert.assertThat(
+            "Wrong expiration time in GMT",
             // @checkstyle MagicNumberCheck (2 lines)
             new Expires.Date(
                 1517048057117L
