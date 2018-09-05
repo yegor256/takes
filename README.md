@@ -182,7 +182,7 @@ Maven will start the server and you can see it at `http://localhost:8080`.
 
 If you're using Gradle, this is how your `build.gradle` should look like:
 
-```
+```gradle
 plugins {
     id 'java'
     id 'application'
@@ -196,12 +196,12 @@ dependencies {
     compile group: 'org.takes', name: 'takes', version: '1.11.3'
 }
 
-mainClassName='App'
+mainClassName='foo.App' //your main class
 ```
 
 With this configuration you can run it from command line:
 
-```
+```gradle
 $ gradle run -Phit-refresh -Dport=8080
 ```
 
@@ -484,7 +484,7 @@ You will need this extra dependency in classpath:
 
 For Gradle users:
 
-```
+```gradle
 dependencies {
     ...
     runtime group: 'org.apache.velocity', name: 'velocity-engine-core', version: 'x.xx'//put the version here
@@ -1055,7 +1055,7 @@ the `restfb` API in your project:
 
 For Gradle, you should add the dependencies as usual:
 
-```
+```gradle
 dependencies {
     ...
     runtime group: 'com.restfb', name: 'restfb', version: '1.15.0'
@@ -1073,10 +1073,6 @@ sending us your pull request please run full Maven build:
 $ mvn clean install -Pqulice
 ```
 To avoid build errors use maven 3.2+.
-
-<!-- @todo #790:30min Complete instructions for Gradle build writing -->
-<!--  instructions on how to run gradle build with all integration tests -->
-<!--  and qulice profile for static analisys. -->
 
 Pay attention that our `pom.xml` inherits a lot of configuration
 from [jcabi-parent](http://parent.jcabi.com).
