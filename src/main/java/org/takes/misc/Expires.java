@@ -66,6 +66,16 @@ public interface Expires {
     }
 
     /**
+     * Already expired. Returns "0" according to RFC7234.
+     */
+    final class Expired implements Expires {
+        @Override
+        public String print() {
+            return "Expires=0";
+        }
+    }
+
+    /**
      * Expires in one hour of the given time.
      */
     final class Hour implements Expires {

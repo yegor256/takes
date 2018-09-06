@@ -37,6 +37,18 @@ import org.junit.Test;
 public final class ExpiresTest {
 
     /**
+     * {@link Expires.Expired} can return expired time (0).
+     */
+    @Test
+    public void returnsExpired() {
+        MatcherAssert.assertThat(
+            "Wrong expiration time for expired time",
+            new Expires.Expired().print(),
+            new IsEqual<>("Expires=0")
+        );
+    }
+
+    /**
      * {@link Expires.Never} can return epoch time.
      */
     @Test

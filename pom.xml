@@ -254,7 +254,7 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>${argLine} -Djava.awt.headless=true -Dfile.encoding=UTF-8</argLine>
+          <argLine>${argLine} -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US</argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
