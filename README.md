@@ -78,6 +78,7 @@ These two web systems use Takes, and they are open source:
 - [Logging](#logging)
 - [Directory Layout](#directory-layout)
 - [Optional dependencies](#optional-dependencies)
+- [Backward compatibility](#backward-compatibility)
 - [How to contribute](#how-to-contribute)
 - [Got questions?](#got-questions)
 
@@ -1014,6 +1015,9 @@ the `restfb` API in your project:
   <scope>runtime</scope>
 </dependency>
 ```
+
+## Backward compatibility
+Version 2.0 is not backward compatible with previous versions.
 
 ## How to contribute
 
