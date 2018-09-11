@@ -31,10 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.iterable.Filtered;
 import org.takes.Response;
 import org.takes.misc.Concat;
-import org.takes.misc.Condition;
-import org.takes.misc.Select;
 
 /**
  * Response decorator, with status code.
@@ -118,14 +117,11 @@ public final class RsWithStatus extends RsWrap {
             Collections.singletonList(
                 String.format("HTTP/1.1 %d %s", status, reason)
             ),
-            new Select<String>(
-                origin.head(),
-                new Condition<String>() {
-                    @Override
-                    public boolean fits(final String item) {
-                        return !item.startsWith("HTTP/");
-                    }
-                }
+            new Filtered<String>(
+                item -> {
+                    return !item.startsWith("HTTP/");
+                },
+                origin.head()
             )
         );
     }
