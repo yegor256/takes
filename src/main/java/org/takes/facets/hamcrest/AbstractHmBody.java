@@ -42,9 +42,6 @@ import org.hamcrest.TypeSafeMatcher;
  * @param <T> Item type. Should be able to return own item
  * @since 2.0
  *
- * @todo #794:30min Current implementation of `AbstractHmBody` should be
- *  converted to `HmBytesBody` that will check equality of bytes. We can think
- *  of improving that class lately.
  */
 abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
 
