@@ -59,6 +59,26 @@ import org.takes.rs.RsWithStatus;
 public final class BkBasic implements Back {
 
     /**
+     * Local address header name.
+     */
+     public static final String LOCALADDR =  "X-Takes-LocalAddress";
+
+    /**
+     * Local port header name.
+     */
+     public static final String LOCALPORT = "X-Takes-LocalPort";
+
+    /**
+     * Remote address header name.
+     */
+     public static final String REMOTEADDR = "X-Takes-RemoteAddress";
+
+    /**
+     * Remote port header name.
+     */
+     public static final String REMOTEPORT = "X-Takes-RemotePort";
+
+    /**
      * Take.
      */
     private final Take take;
@@ -144,20 +164,23 @@ public final class BkBasic implements Back {
      * @param socket Socket
      * @return Request with custom headers
      */
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(
             req,
             String.format(
-                "X-Takes-LocalAddress: %s",
+                "%s: %s",
+                BkBasic.LOCALADDR,
                 socket.getLocalAddress().getHostAddress()
             ),
-            String.format("X-Takes-LocalPort: %d", socket.getLocalPort()),
+            String.format("%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()),
             String.format(
-                "X-Takes-RemoteAddress: %s",
+                "%s: %s",
+                BkBasic.REMOTEADDR,
                 socket.getInetAddress().getHostAddress()
             ),
-            String.format("X-Takes-RemotePort: %d", socket.getPort())
+            String.format("%s: %d", BkBasic.REMOTEADDR, socket.getPort())
         );
     }
 }
