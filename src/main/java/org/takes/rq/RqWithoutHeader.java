@@ -57,10 +57,8 @@ public final class RqWithoutHeader extends RqWrap {
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
                     return new Filtered<String>(
-                        (header) -> {
-                            return !new EnglishLowerCase(header).string()
-                            .startsWith(prefix);
-                        },
+                        (header) -> !new EnglishLowerCase(header).string()
+                            .startsWith(prefix),
                         req.head()
                     );
                 }

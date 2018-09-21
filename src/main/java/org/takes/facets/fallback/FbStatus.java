@@ -63,9 +63,7 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final int code) {
         this(
             new Filtered<>(
-                (value) -> {
-                    return code == value.intValue();
-                }, code
+                (value) -> code == value.intValue(), code
             )
         );
     }
@@ -74,7 +72,7 @@ public final class FbStatus extends FbWrap {
      * @param check HTTP status code predicate
      * @since 0.16.10
      */
-    public FbStatus(final Filtered<Integer> check) {
+    public FbStatus(final Iterable<Integer> check) {
         this(check, new Fallback() {
             @Override
             public Opt<Response> route(final RqFallback req)
@@ -132,9 +130,7 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final int code, final Fallback fallback) {
         this(
             new Filtered<Integer>(
-                (status) -> {
-                    return code == status.intValue();
-                }, code
+                (status) -> code == status.intValue(), code
             ),
             fallback
         );
@@ -148,9 +144,7 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final int code, final Scalar<Fallback> fallback) {
         this(
             new Filtered<Integer>(
-                (status) -> {
-                    return code == status.intValue();
-                }, code
+                (status) -> code == status.intValue(), code
             ),
             fallback
         );
@@ -161,7 +155,7 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    public FbStatus(final Filtered<Integer> check, final Fallback fallback) {
+    public FbStatus(final Iterable<Integer> check, final Fallback fallback) {
         this(
             check,
             new Scalar<Fallback>() {
@@ -184,7 +178,7 @@ public final class FbStatus extends FbWrap {
                 "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
             }
         )
-    public FbStatus(final Filtered<Integer> check,
+    public FbStatus(final Iterable<Integer> check,
         final Scalar<Fallback> fallback) {
         super(
             new Fallback() {

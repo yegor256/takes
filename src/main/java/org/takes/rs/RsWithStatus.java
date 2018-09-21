@@ -118,9 +118,7 @@ public final class RsWithStatus extends RsWrap {
                 String.format("HTTP/1.1 %d %s", status, reason)
             ),
             new Filtered<String>(
-                item -> {
-                    return !item.startsWith("HTTP/");
-                },
+                item -> !item.startsWith("HTTP/"),
                 origin.head()
             )
         );
