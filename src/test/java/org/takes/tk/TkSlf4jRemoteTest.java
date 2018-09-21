@@ -49,7 +49,6 @@ public final class TkSlf4jRemoteTest {
      * @throws IOException if some I/O problem occurred.
      */
     @Ignore
-    @Test
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkSlf4j(new TkEmpty())

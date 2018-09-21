@@ -52,11 +52,6 @@ import org.takes.tk.TkFixed;
  * @version $Id$
  * @since 0.21
  *
- * @todo #730:30min Fix FtRemote for empty response body test case and
- *  unignore returnsAnEmptyResponseBody. After that the
- *  {@link org.takes.tk.TkSlf4jRemoteTest} should be fixed and relevant
- *  test case should be unignored.
- *
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtRemoteTest {
@@ -135,7 +130,6 @@ public final class FtRemoteTest {
      * @throws IOException If some problems inside
      */
     @Ignore
-    @Test
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkEmpty()
