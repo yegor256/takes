@@ -52,10 +52,11 @@ import org.takes.tk.TkFixed;
  * @version $Id$
  * @since 0.21
  *
- * @todo #730:30min Fix FtRemote for empty response body test case and
- *  unignore returnsAnEmptyResponseBody. After that the
- *  {@link org.takes.tk.TkSlf4jRemoteTest} should be fixed and relevant
- *  test case should be unignored.
+ * @todo #800:30min We can't assert if FtRemote returns an emptybody because
+ *  some bug in jcabi-http (reported in
+ *  https://github.com/jcabi/jcabi-http/issues/177). After this bug is fixed,
+ *  correct the testing for this condition in returnsAnEmptyResponseBody and
+ *  TkSlf4jRemoteTest.
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
