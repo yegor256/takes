@@ -49,7 +49,6 @@ public final class TkSlf4jRemoteTest {
      * @throws IOException if some I/O problem occurred.
      */
     @Ignore
-    @Test
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
@@ -62,7 +61,7 @@ public final class TkSlf4jRemoteTest {
                         .body().set("returnsAnEmptyResponseBody").back()
                         .fetch()
                         .as(RestResponse.class)
-                        .assertBody(new IsEqual<>(""))
+                        .assertBody(new IsEqual<>("HTTP/1.1 200 OK\r\n\r\n"))
                         .assertStatus(HttpURLConnection.HTTP_OK);
                 }
             }
