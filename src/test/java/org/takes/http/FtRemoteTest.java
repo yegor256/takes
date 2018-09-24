@@ -136,6 +136,7 @@ public final class FtRemoteTest {
      * @throws IOException If some problems inside
      */
     @Ignore
+    @Test
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkEmpty()
@@ -148,7 +149,7 @@ public final class FtRemoteTest {
                         .body().set("returnsAnEmptyResponseBody").back()
                         .fetch()
                         .as(RestResponse.class)
-                        .assertBody(new IsEqual<>("HTTP/1.1 200 OK\r\n\r\n"))
+                        .assertBody(new IsEqual<>(""))
                         .assertStatus(HttpURLConnection.HTTP_OK);
                 }
             }
