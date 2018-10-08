@@ -28,6 +28,7 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.takes.Request;
 import org.takes.rq.RqFake;
@@ -87,6 +88,27 @@ public final class HmRqBodyTest {
             description.toString(),
             Matchers.equalTo(
                 "body was: [111, 116, 104, 101, 114]"
+            )
+        );
+    }
+
+    /**
+     * HmRqBody can describe in readable way.
+     */
+    @Test
+    public void describeToInReadableWay() {
+        final Request request = new RqFake(
+            Collections.<String>emptyList(),
+            "one"
+        );
+        final HmRqBody matcher = new HmRqBody("two");
+        matcher.matchesSafely(request);
+        final StringDescription description = new StringDescription();
+        matcher.describeTo(description);
+        MatcherAssert.assertThat(
+            description.toString(),
+            new IsEqual<>(
+                "body: [116, 119, 111]"
             )
         );
     }
