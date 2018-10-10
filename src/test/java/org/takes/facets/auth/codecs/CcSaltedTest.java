@@ -83,6 +83,17 @@ public final class CcSaltedTest {
     }
 
     /**
+     * CcSalted can throw when length of salt is negative.
+     * @throws IOException If some problem inside
+     */
+    @Test(expected = DecodingException.class)
+    public void throwsOnZeroData() throws IOException {
+        new CcSalted(new CcPlain()).decode(
+            "\u1111\u0000\u0000\u0000".getBytes()
+        );
+    }
+
+    /**
      * CcSalted can throw on empty input.
      * @throws IOException If some problem inside
      */

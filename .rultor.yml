@@ -21,7 +21,7 @@ install: |
   sudo gem install --no-rdoc --no-ri xcop
 architect:
 - yegor256
-- davvd
+- paulodamaso
 merge:
   script: |
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
@@ -37,17 +37,6 @@ merge:
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
-  commanders:
-  - carlosmiranda
-  - darkled
-  - dmzaytsev
-  - essobedo
-  - ggajos
-  - hdouss
-  - krzyk
-  - longtimeago
-  - mkordas
-  - pinaf
 deploy:
   script: |
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
@@ -68,5 +57,3 @@ release:
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
     mvn clean deploy -Ptakes -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
-  commanders:
-  - yegor256
