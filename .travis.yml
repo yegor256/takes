@@ -5,6 +5,7 @@ cache:
     - $HOME/.m2
 script:
   - set -e
+  - mvn -version
   - mvn clean
   - pdd --source=$(pwd) --file=/dev/null
   - est --dir=est --file=/dev/null
