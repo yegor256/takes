@@ -30,7 +30,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
@@ -42,6 +41,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
  * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
@@ -78,28 +78,6 @@ abstract class AbstractHmHeader<T> extends TypeSafeMatcher<T> {
         super();
         this.header = hdrm;
         this.value = vlm;
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    protected AbstractHmHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(hdr), vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    protected AbstractHmHeader(final String hdr, final String val) {
-        this(
-            Matchers.equalToIgnoringCase(hdr),
-            Matchers.hasItems(val)
-        );
     }
 
     @Override
