@@ -25,6 +25,8 @@ package org.takes.facets.hamcrest;
 
 import java.io.IOException;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import org.hamcrest.text.IsEqualIgnoringCase;
 import org.takes.Response;
 
 /**
@@ -36,8 +38,9 @@ import org.takes.Response;
  * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
  * @author I. Sokolov (happy.neko@gmail.com)
  * @author Andrey Eliseev (aeg.exper0@gmail.com)
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
- * @since 0.23.3
+ * @since 2.0
  */
 public final class HmRsHeader extends AbstractHmHeader<Response> {
 
@@ -58,7 +61,7 @@ public final class HmRsHeader extends AbstractHmHeader<Response> {
      */
     public HmRsHeader(final String hdr,
         final Matcher<Iterable<String>> vlm) {
-        super(hdr, vlm);
+        super(new IsEqualIgnoringCase(hdr), vlm);
     }
 
     /**
@@ -67,7 +70,7 @@ public final class HmRsHeader extends AbstractHmHeader<Response> {
      * @param val Header value
      */
     public HmRsHeader(final String hdr, final String val) {
-        super(hdr, val);
+        this(hdr, Matchers.hasItems(val));
     }
 
     @Override
