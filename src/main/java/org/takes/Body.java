@@ -21,64 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package org.takes;
 
-package org.takes.facets.hamcrest;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
-import org.takes.Request;
 
 /**
- * Request Body Matcher.
- *
- * <p>This "matcher" tests given request body.
- *
- * @author Tolegen Izbassar (t.izbassar@gmail.com)
+ * Body abstraction for {@link Request} and {@link Response}.
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
  * @since 2.0
  */
-public final class HmRqBody extends AbstractHmBody<Request> {
-
+public interface Body {
     /**
-     * Ctor.
-     *
-     * <p>Will create instance with defaultCharset.
-     * @param value Value to test against
+     * Body.
+     * @return Stream with body
+     * @throws IOException If something goes wrong
      */
-    public HmRqBody(final String value) {
-        this(value, Charset.defaultCharset());
-    }
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     * @param charset Charset of given value
-     */
-    public HmRqBody(final String value, final Charset charset) {
-        this(value.getBytes(charset));
-    }
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     */
-    public HmRqBody(final byte[] value) {
-        this(new ByteArrayInputStream(value));
-    }
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     */
-    public HmRqBody(final InputStream value) {
-        super(value);
-    }
-
-    @Override
-    public InputStream itemBody(final Request item) throws IOException {
-        return item.body();
-    }
+    InputStream body() throws IOException;
 }
-

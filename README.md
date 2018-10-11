@@ -79,6 +79,7 @@ These two web systems use Takes, and they are open source:
 - [Logging](#logging)
 - [Directory Layout](#directory-layout)
 - [Optional dependencies](#optional-dependencies)
+- [Backward compatibility](#backward-compatibility)
 - [How to contribute](#how-to-contribute)
 - [Got questions?](#got-questions)
 
@@ -1062,6 +1063,9 @@ dependencies {
 }
 ```
 
+## Backward compatibility
+Version 2.0 is not backward compatible with previous versions.
+
 ## How to contribute
 
 Fork repository, make changes, send us a pull request. We will review
@@ -1072,6 +1076,7 @@ sending us your pull request please run full Maven build:
 ```
 $ mvn clean install -Pqulice
 ```
+
 To avoid build errors use maven 3.2+.
 
 Pay attention that our `pom.xml` inherits a lot of configuration

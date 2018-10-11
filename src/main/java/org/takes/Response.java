@@ -23,7 +23,6 @@
  */
 package org.takes;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -60,20 +59,5 @@ import java.io.InputStream;
  *     Composable Decorators vs. Imperative Utility Methods</a>
  * @since 0.1
  */
-public interface Response {
-
-    /**
-     * HTTP response head.
-     * @return Lines in HTTP response head
-     * @throws IOException If something goes wrong
-     */
-    Iterable<String> head() throws IOException;
-
-    /**
-     * HTTP response body.
-     * @return Stream with body
-     * @throws IOException If something goes wrong
-     */
-    InputStream body() throws IOException;
-
+public interface Response extends Head, Body {
 }

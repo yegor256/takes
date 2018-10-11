@@ -28,65 +28,88 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.takes.Response;
-import org.takes.rs.RsSimple;
+import org.takes.Body;
+import org.takes.Request;
+import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link HmRsBody}.
+ * Test case for {@link HmBody}.
  *
  * @author Tolegen Izbassar (t.izbassar@gmail.com)
  * @version $Id$
  * @since 2.0
  */
-public final class HmRsBodyTest {
+public final class HmBodyTest {
 
     /**
-     * HmRsBody can test if values of bodies are same.
+     * HmRqBody can test if values of bodies are same.
      */
     @Test
-    public void bodyValuesAreSame() {
+    public void testsBodyValuesAreSame() {
         final String body = "Same";
         MatcherAssert.assertThat(
-            new RsSimple(
+            new RqFake(
                 Collections.<String>emptyList(),
                 body
             ),
-            new HmRsBody(body)
+            new HmBody<>(body)
         );
     }
 
     /**
-     * HmRsBody can test if values of bodies are different.
+     * HmRqBody can test if values of bodies are different.
      */
     @Test
-    public void bodyValuesAreDifferent() {
+    public void testsBodyValuesAreDifferent() {
         MatcherAssert.assertThat(
-            new RsSimple(
+            new RqFake(
                 Collections.<String>emptyList(),
                 "this"
             ),
-            Matchers.not(new HmRsBody("that"))
+            Matchers.not(new HmBody<>("that"))
         );
     }
 
     /**
-     * HmRsBody can describe mismatch in readable way.
+     * HmRqBody can describe mismatch in readable way.
      */
     @Test
     public void describesMismatchInReadableWay() {
-        final Response response = new RsSimple(
+        final Request request = new RqFake(
             Collections.<String>emptyList(),
             "other"
         );
-        final HmRsBody matcher = new HmRsBody("some");
-        matcher.matchesSafely(response);
+        final HmBody<Body> matcher = new HmBody<>("some");
+        matcher.matchesSafely(request);
         final StringDescription description = new StringDescription();
-        matcher.describeMismatchSafely(response, description);
+        matcher.describeMismatchSafely(request, description);
         MatcherAssert.assertThat(
             description.toString(),
             Matchers.equalTo(
                 "body was: [111, 116, 104, 101, 114]"
+            )
+        );
+    }
+
+    /**
+     * HmRqBody can describe in readable way.
+     */
+    @Test
+    public void describeToInReadableWay() {
+        final Request request = new RqFake(
+            Collections.<String>emptyList(),
+            "one"
+        );
+        final HmRqBody matcher = new HmRqBody("two");
+        matcher.matchesSafely(request);
+        final StringDescription description = new StringDescription();
+        matcher.describeTo(description);
+        MatcherAssert.assertThat(
+            description.toString(),
+            new IsEqual<>(
+                "body: [116, 119, 111]"
             )
         );
     }
