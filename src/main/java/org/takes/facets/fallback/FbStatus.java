@@ -26,10 +26,11 @@ package org.takes.facets.fallback;
 import java.io.IOException;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.list.ListOf;
 import org.takes.Response;
 import org.takes.Scalar;
 import org.takes.Take;
-import org.takes.misc.Condition;
 import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;
 import org.takes.rs.RsWithStatus;
@@ -60,19 +61,18 @@ public final class FbStatus extends FbWrap {
      * @since 0.16.10
      */
     public FbStatus(final int code) {
-        this(new Condition<Integer>() {
-            @Override
-            public boolean fits(final Integer status) {
-                return code == status.intValue();
-            }
-        });
+        this(
+            new Filtered<>(
+                (value) -> code == value.intValue(), code
+            )
+        );
     }
     /**
      * Ctor.
      * @param check HTTP status code predicate
      * @since 0.16.10
      */
-    public FbStatus(final Condition<Integer> check) {
+    public FbStatus(final Iterable<Integer> check) {
         this(check, new Fallback() {
             @Override
             public Opt<Response> route(final RqFallback req)
@@ -129,12 +129,9 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Fallback fallback) {
         this(
-            new Condition<Integer>() {
-                @Override
-                public boolean fits(final Integer status) {
-                    return code == status;
-                }
-            },
+            new Filtered<Integer>(
+                (status) -> code == status.intValue(), code
+            ),
             fallback
         );
     }
@@ -146,12 +143,9 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Scalar<Fallback> fallback) {
         this(
-            new Condition<Integer>() {
-                @Override
-                public boolean fits(final Integer status) {
-                    return code == status;
-                }
-            },
+            new Filtered<Integer>(
+                (status) -> code == status.intValue(), code
+            ),
             fallback
         );
     }
@@ -161,7 +155,7 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    public FbStatus(final Condition<Integer> check, final Fallback fallback) {
+    public FbStatus(final Iterable<Integer> check, final Fallback fallback) {
         this(
             check,
             new Scalar<Fallback>() {
@@ -184,7 +178,7 @@ public final class FbStatus extends FbWrap {
                 "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
             }
         )
-    public FbStatus(final Condition<Integer> check,
+    public FbStatus(final Iterable<Integer> check,
         final Scalar<Fallback> fallback) {
         super(
             new Fallback() {
@@ -192,7 +186,7 @@ public final class FbStatus extends FbWrap {
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
                     Opt<Response> rsp = new Opt.Empty<>();
-                    if (check.fits(req.code())) {
+                    if (new ListOf<>(check).contains(req.code())) {
                         rsp = fallback.get().route(req);
                     }
                     return rsp;
