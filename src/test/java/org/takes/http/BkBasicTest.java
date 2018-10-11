@@ -58,9 +58,6 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @todo #516:15min Move header names from BkBasic to public constants.
- *  Reusable header names will help in many situations. For example - in new
- *  integration tests.
  */
 @SuppressWarnings(
     {

@@ -30,7 +30,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
-import org.takes.misc.ExpirationDate;
+import org.takes.misc.Expires;
 import org.takes.rs.RsWrap;
 
 /**
@@ -60,9 +60,9 @@ public final class RsPrevious extends RsWrap {
                 TkPrevious.class.getSimpleName(),
                 URLEncoder.encode(location, "UTF-8"),
                 "Path=/",
-                new ExpirationDate(
+                new Expires.Date(
                     System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
-                ).toString()
+                ).print()
             )
         );
     }

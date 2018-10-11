@@ -26,7 +26,7 @@ package org.takes.tk;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.takes.facets.hamcrest.HmRsHeader;
+import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 
 /**
@@ -47,7 +47,7 @@ public final class TkSmartRedirectTest {
             new TkSmartRedirect("http://www.google.com/abc?b=2").act(
                 new RqFake("GET", "/hi?a=1#test")
             ),
-            new HmRsHeader(
+            new HmHeader<>(
                 "Location",
                 "http://www.google.com/abc?b=2&a=1#test"
             )
@@ -64,7 +64,7 @@ public final class TkSmartRedirectTest {
             new TkSmartRedirect().act(
                 new RqFake("GET", "/hey-you?f=1#xxx")
             ),
-            new HmRsHeader(
+            new HmHeader<>(
                 "Location",
                 "/?f=1#xxx"
             )

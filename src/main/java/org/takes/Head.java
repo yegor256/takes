@@ -21,32 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.misc;
+package org.takes;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.io.IOException;
 
 /**
- * Test case for {@link ExpirationDate}.
- *
- * @author Izbassar Tolegen (t.izbassar@gmail.com)
+ * Head abstraction for {@link Request} and {@link Response}.
+ * @author Paulo Lobo (pauloeduardolobo@gmail.com)
  * @version $Id$
  * @since 2.0
  */
-public final class ExpirationDateTest {
-
+public interface Head {
     /**
-     * ExpirationDate can return expires date string in GMT.
+     * All lines above the body.
+     * @return List of lines
+     * @throws IOException If something goes wrong
      */
-    @Test
-    public void returnsExpiresStringInGmt() {
-        MatcherAssert.assertThat(
-            // @checkstyle MagicNumberCheck (2 lines)
-            new ExpirationDate(
-                1517048057117L
-            ).toString(),
-            Matchers.equalTo("Expires=Sat, 27 Jan 2018 10:14:17 GMT")
-        );
-    }
+    Iterable<String> head() throws IOException;
 }

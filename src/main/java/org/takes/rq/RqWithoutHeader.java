@@ -26,10 +26,9 @@ package org.takes.rq;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
+import org.cactoos.iterable.Filtered;
 import org.takes.Request;
-import org.takes.misc.Condition;
 import org.takes.misc.EnglishLowerCase;
-import org.takes.misc.Select;
 
 /**
  * Request without a header (even if it was absent).
@@ -57,15 +56,10 @@ public final class RqWithoutHeader extends RqWrap {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
-                    return new Select<String>(
-                        req.head(),
-                        new Condition<String>() {
-                            @Override
-                            public boolean fits(final String header) {
-                                return !new EnglishLowerCase(header).string()
-                                    .startsWith(prefix);
-                            }
-                        }
+                    return new Filtered<String>(
+                        (header) -> !new EnglishLowerCase(header).string()
+                            .startsWith(prefix),
+                        req.head()
                     );
                 }
                 @Override

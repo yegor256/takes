@@ -29,7 +29,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.facets.hamcrest.HmRsHeader;
+import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -107,7 +107,7 @@ public final class TkRedirectTest {
             new TkRedirect(target).act(
                 new RqFake("GET", "/hey-you?f=1#xxx")
             ),
-            new HmRsHeader(
+            new HmHeader<>(
                 "Location",
                 target
             )
