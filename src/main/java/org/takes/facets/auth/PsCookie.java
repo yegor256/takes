@@ -32,7 +32,7 @@ import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
 import org.takes.facets.cookies.RqCookies;
 import org.takes.facets.cookies.RsWithCookie;
-import org.takes.misc.ExpirationDate;
+import org.takes.misc.Expires;
 import org.takes.misc.Opt;
 import org.takes.misc.Utf8String;
 
@@ -122,10 +122,10 @@ public final class PsCookie implements Pass {
             res, this.cookie, text,
             "Path=/",
             "HttpOnly",
-            new ExpirationDate(
+            new Expires.Date(
                 System.currentTimeMillis()
                     + TimeUnit.DAYS.toMillis(this.age)
-            ).toString()
+            ).print()
         );
     }
 }
