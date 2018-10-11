@@ -26,9 +26,9 @@ package org.takes.facets.auth.codecs;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.Base64;
 
 /**
  * Base64 codec.
@@ -37,7 +37,7 @@ import org.takes.misc.Base64;
  *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
+ * @version $$
  * @since 0.13
  */
 @EqualsAndHashCode
@@ -64,7 +64,7 @@ public final class CcBase64 implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return new Base64().encode(this.origin.encode(identity));
+        return Base64.getEncoder().encode(this.origin.encode(identity));
     }
 
     @Override
@@ -78,7 +78,7 @@ public final class CcBase64 implements Codec {
                     )
                 );
         }
-        return this.origin.decode(new Base64().decode(bytes));
+        return this.origin.decode(Base64.getDecoder().decode(bytes));
     }
 
     /**

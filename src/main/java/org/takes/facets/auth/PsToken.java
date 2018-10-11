@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Iterator;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -35,7 +36,6 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.signatures.SiHmac;
-import org.takes.misc.Base64;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 import org.takes.rs.RsJson;
@@ -138,7 +138,7 @@ public final class PsToken implements Pass {
             if (Arrays.equals(jwtsign, checked)) {
                 try (final JsonReader rdr = Json.createReader(
                     new StringReader(
-                        new String(new Base64().decode(jwtpayload))
+                        new String(Base64.getDecoder().decode(jwtpayload))
                     )
                 )) {
                     user = new Opt.Single<Identity>(

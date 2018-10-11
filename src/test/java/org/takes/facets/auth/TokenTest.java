@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Locale;
 import javax.json.JsonObject;
 import org.hamcrest.MatcherAssert;
@@ -33,7 +34,6 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.facets.auth.Token.Jose;
 import org.takes.facets.auth.Token.Jwt;
-import org.takes.misc.Base64;
 
 /**
  * Test case for {@link Token}.
@@ -67,7 +67,9 @@ public final class TokenTest {
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
             code,
-            Matchers.equalTo(new Base64().encode(jose.toString()))
+            Matchers.equalTo(
+                Base64.getEncoder().encode(jose.toString().getBytes())
+            )
         );
     }
 
@@ -116,7 +118,9 @@ public final class TokenTest {
         ).json();
         MatcherAssert.assertThat(
             code,
-            Matchers.equalTo(new Base64().encode(jose.toString()))
+            Matchers.equalTo(
+                Base64.getEncoder().encode(jose.toString().getBytes())
+            )
         );
     }
 }
