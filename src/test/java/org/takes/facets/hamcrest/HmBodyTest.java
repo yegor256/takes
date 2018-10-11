@@ -94,7 +94,7 @@ public final class HmBodyTest {
     }
 
     /**
-     * HmRqBody can describe in readable way.
+     * HmBody can describe in readable way.
      */
     @Test
     public void describeToInReadableWay() {
@@ -102,7 +102,7 @@ public final class HmBodyTest {
             Collections.<String>emptyList(),
             "one"
         );
-        final HmRqBody matcher = new HmRqBody("two");
+        final HmBody<Body> matcher = new HmBody<>("two");
         matcher.matchesSafely(request);
         final StringDescription description = new StringDescription();
         matcher.describeTo(description);
