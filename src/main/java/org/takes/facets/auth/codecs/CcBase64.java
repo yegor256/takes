@@ -37,7 +37,7 @@ import org.takes.facets.auth.Identity;
  *
  * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
  * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $$
+ * @version $Id$
  * @since 0.13
  */
 @EqualsAndHashCode
