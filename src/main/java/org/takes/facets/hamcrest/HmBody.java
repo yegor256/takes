@@ -88,9 +88,6 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
         this.body = value;
     }
 
-    // @todo #795:30min Right now the describeTo method do not covered
-    //  with tests. Cover this method with unit test to increase coverage
-    //  of the class.
     @Override
     public void describeTo(final Description description) {
         try {
