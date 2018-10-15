@@ -44,10 +44,6 @@ import org.takes.Body;
  * @version $Id$
  * @param <T> Item type. Should be able to return own item
  * @since 2.0
- *
- * @todo #794:30min Current implementation of `HmBody` should be
- *  converted to `HmBytesBody` that will check equality of bytes. We can think
- *  of improving that class lately.
  */
 public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
 
@@ -92,9 +88,6 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
         this.body = value;
     }
 
-    // @todo #795:30min Right now the describeTo method do not covered
-    //  with tests. Cover this method with unit test to increase coverage
-    //  of the class.
     @Override
     public void describeTo(final Description description) {
         try {
