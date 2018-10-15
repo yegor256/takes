@@ -31,6 +31,7 @@ import java.util.Locale;
 import javax.json.JsonObject;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.takes.facets.auth.Token.Jose;
 import org.takes.facets.auth.Token.Jwt;
@@ -64,11 +65,12 @@ public final class TokenTest {
     public void joseEncoded() throws IOException {
         // @checkstyle MagicNumber (2 lines)
         final byte[] code = new Token.Jose(256).encoded();
-        final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
             code,
-            Matchers.equalTo(
-                Base64.getEncoder().encode(jose.toString().getBytes())
+            new IsEqual<>(
+                Base64.getEncoder().encode(
+                    "{\"alg\":\"HS256\",\"typ\":\"JWT\"}".getBytes()
+                )
             )
         );
     }
