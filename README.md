@@ -24,7 +24,7 @@
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-Java7 web development framework. Its key benefits, comparing to all others, include these
+Java8 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
 
  1. not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
@@ -55,6 +55,7 @@ These two web systems use Takes, and they are open source:
 
 - [Quick Start](#quick-start)
 - [Build and Run With Maven](#build-and-run-with-maven)
+- [Build and Run With Gradle](#build-and-run-with-gradle)
 - [Unit Testing](#unit-testing)
 - [Integration Testing](#integration-testing)
 - [A Bigger Example](#a-bigger-example)
@@ -78,6 +79,7 @@ These two web systems use Takes, and they are open source:
 - [Logging](#logging)
 - [Directory Layout](#directory-layout)
 - [Optional dependencies](#optional-dependencies)
+- [Backward compatibility](#backward-compatibility)
 - [How to contribute](#how-to-contribute)
 - [Got questions?](#got-questions)
 
@@ -169,7 +171,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
 </project>
 ```
 
-With this configutation you can run it from command line:
+With this configuration you can run it from command line:
 
 ```
 $ mvn clean integration-test -Phit-refresh -Dport=8080
@@ -214,6 +216,33 @@ take class as servlet `init-param`:
     <servlet-name>takes</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
+```
+
+## Build and Run With Gradle
+
+If you're using Gradle, this is how your `build.gradle` should look like:
+
+```gradle
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.takes', name: 'takes', version: '1.11.3'
+}
+
+mainClassName='foo.App' //your main class
+```
+
+With this configuration you can run it from command line:
+
+```gradle
+$ gradle run -Phit-refresh -Dport=8080
 ```
 
 ## Unit Testing
@@ -491,6 +520,16 @@ You will need this extra dependency in classpath:
   <artifactId>velocity-engine-core</artifactId>
   <scope>runtime</scope>
 </dependency>
+```
+
+For Gradle users:
+
+```gradle
+dependencies {
+    ...
+    runtime group: 'org.apache.velocity', name: 'velocity-engine-core', version: 'x.xx'//put the version here
+    ...
+}
 ```
 
 ## Static Resources
@@ -1053,6 +1092,18 @@ the `restfb` API in your project:
   <scope>runtime</scope>
 </dependency>
 ```
+
+For Gradle, you should add the dependencies as usual:
+
+```gradle
+dependencies {
+    ...
+    runtime group: 'com.restfb', name: 'restfb', version: '1.15.0'
+}
+```
+
+## Backward compatibility
+Version 2.0 is not backward compatible with previous versions.
 
 ## How to contribute
 

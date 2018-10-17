@@ -25,12 +25,15 @@
 package org.takes.facets.hamcrest;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.takes.Body;
 
 /**
  * Body Matcher.
@@ -41,12 +44,8 @@ import org.hamcrest.TypeSafeMatcher;
  * @version $Id$
  * @param <T> Item type. Should be able to return own item
  * @since 2.0
- *
- * @todo #794:30min Current implementation of `AbstractHmBody` should be
- *  converted to `HmBytesBody` that will check equality of bytes. We can think
- *  of improving that class lately.
  */
-abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
+public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
 
     /**
      * Body.
@@ -55,34 +54,58 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     *
+     * <p>Will create instance with defaultCharset.
+     * @param value Value to test against
+     */
+    public HmBody(final String value) {
+        this(value, Charset.defaultCharset());
+    }
+
+    /**
+     * Ctor.
+     * @param value Value to test against
+     * @param charset Charset of given value
+     */
+    public HmBody(final String value, final Charset charset) {
+        this(value.getBytes(charset));
+    }
+
+    /**
+     * Ctor.
+     * @param value Value to test against
+     */
+    public HmBody(final byte[] value) {
+        this(new ByteArrayInputStream(value));
+    }
+
+    /**
+     * Ctor.
      * @param value Value to test against.
      */
-    protected AbstractHmBody(final InputStream value) {
+    public HmBody(final InputStream value) {
         super();
         this.body = value;
     }
 
-    // @todo #795:30min Right now the describeTo method do not covered
-    //  with tests. Cover this method with unit test to increase coverage
-    //  of the class.
     @Override
-    public final void describeTo(final Description description) {
+    public void describeTo(final Description description) {
         try {
             description.appendText("body: ")
-                .appendText(Arrays.toString(AbstractHmBody.asBytes(this.body)));
+                .appendText(Arrays.toString(HmBody.asBytes(this.body)));
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
     }
 
     @Override
-    protected void describeMismatchSafely(final T item,
+    public void describeMismatchSafely(final T item,
         final Description description) {
         try {
             description.appendText("body was: ")
                 .appendText(
                     Arrays.toString(
-                        AbstractHmBody.asBytes(this.itemBody(item))
+                        HmBody.asBytes(HmBody.itemBody(item))
                     )
                 );
         } catch (final IOException ex) {
@@ -91,10 +114,12 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
     }
 
     @Override
-    protected final boolean matchesSafely(final T item) {
+    public boolean matchesSafely(final T item) {
         boolean result = true;
         try (
-            final InputStream val = new BufferedInputStream(this.itemBody(item))
+            final InputStream val = new BufferedInputStream(
+                HmBody.itemBody(item)
+            )
         ) {
             int left = this.body.read();
             while (left != -1) {
@@ -121,7 +146,9 @@ abstract class AbstractHmBody<T> extends TypeSafeMatcher<T> {
      * @return InputStream of body
      * @throws IOException If some problem inside
      */
-    protected abstract InputStream itemBody(final T item) throws IOException;
+    private static InputStream itemBody(final Body item) throws IOException {
+        return item.body();
+    }
 
     /**
      * InputStream as bytes.

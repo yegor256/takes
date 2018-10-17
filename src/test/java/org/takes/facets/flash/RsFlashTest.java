@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.misc.ExpirationDate;
+import org.takes.misc.Expires;
 import org.takes.rs.RsPrint;
 
 /**
@@ -66,14 +66,14 @@ public final class RsFlashTest {
     }
 
     /**
-     * RsFlash can add cookie with specified ExpirationDate.
+     * RsFlash can add cookie with specified Date.
      * @throws IOException If some problem inside
      */
     @Test
     public void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
-                new RsFlash("i'm good, thanks", new ExpirationDate(0L))
+                new RsFlash("i'm good, thanks", new Expires.Date(0L))
             ).print(),
             Matchers.containsString(
                 "Expires=Thu, 01 Jan 1970 00:00:00 GMT"

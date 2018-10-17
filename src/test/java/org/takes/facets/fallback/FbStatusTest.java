@@ -25,10 +25,11 @@ package org.takes.facets.fallback;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import org.cactoos.iterable.Filtered;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.misc.Condition;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFixed;
@@ -73,13 +74,16 @@ public final class FbStatusTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new FbStatus(
-                    new Condition<Integer>() {
-                        @Override
-                        public boolean fits(final Integer status) {
+                    new Filtered<Integer>(
+                        (status) -> {
                             return status == HttpURLConnection.HTTP_MOVED_PERM
                                 || status == HttpURLConnection.HTTP_MOVED_TEMP;
-                        };
-                    },
+                        },
+                        new ListOf<Integer>(
+                            HttpURLConnection.HTTP_MOVED_PERM,
+                            HttpURLConnection.HTTP_MOVED_TEMP
+                        )
+                    ),
                     new FbFixed(new RsText("response text"))
                 ).route(req).get()
             ).printBody(),

@@ -24,11 +24,11 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.TimeZone;
 import javax.json.Json;
 import javax.json.JsonObject;
-import org.takes.misc.Base64;
 
 /**
  * JSON Token.
@@ -94,7 +94,7 @@ public interface Token {
 
         @Override
         public byte[] encoded() throws IOException {
-            return new Base64().encode(this.joseo.toString());
+            return Base64.getEncoder().encode(this.joseo.toString().getBytes());
         }
     };
 
@@ -165,7 +165,7 @@ public interface Token {
 
         @Override
         public byte[] encoded() throws IOException {
-            return new Base64().encode(this.jwto.toString());
+            return Base64.getEncoder().encode(this.jwto.toString().getBytes());
         }
     };
 }

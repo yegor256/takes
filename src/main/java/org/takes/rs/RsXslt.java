@@ -62,12 +62,12 @@ import org.takes.misc.Utf8String;
  *
  * <pre> new RsXSLT(
  *   new RsXembly(
- *     new XsStylesheet("/xsl/home.xsl"),
- *     new XsAppend(
+ *     new XeStylesheet("/xsl/home.xsl"),
+ *     new XeAppend(
  *       "page",
- *       new XsDate(),
- *       new XsLocalhost(),
- *       new XsSLA()
+ *       new XeDate(),
+ *       new XeLocalhost(),
+ *       new XeSLA()
  *     )
  *   )
  * )</pre>

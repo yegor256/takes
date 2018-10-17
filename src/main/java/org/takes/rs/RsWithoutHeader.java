@@ -27,10 +27,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.iterable.Filtered;
 import org.takes.Response;
-import org.takes.misc.Condition;
 import org.takes.misc.EnglishLowerCase;
-import org.takes.misc.Select;
 
 /**
  * Response decorator, without a header.
@@ -59,15 +58,12 @@ public final class RsWithoutHeader extends RsWrap {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
-                    return new Select<String>(
-                        res.head(),
-                        new Condition<String>() {
-                            @Override
-                            public boolean fits(final String header) {
-                                return !new EnglishLowerCase(header).string()
-                                    .startsWith(prefix);
-                            }
-                        }
+                    return new Filtered<String>(
+                        (header) -> {
+                            return !new EnglishLowerCase(header).string()
+                            .startsWith(prefix);
+                        },
+                        res.head()
                     );
                 }
                 @Override

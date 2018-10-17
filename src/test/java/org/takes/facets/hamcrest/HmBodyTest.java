@@ -28,18 +28,20 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.takes.Body;
 import org.takes.Request;
 import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link HmRqBody}.
+ * Test case for {@link HmBody}.
  *
  * @author Tolegen Izbassar (t.izbassar@gmail.com)
  * @version $Id$
  * @since 2.0
  */
-public final class HmRqBodyTest {
+public final class HmBodyTest {
 
     /**
      * HmRqBody can test if values of bodies are same.
@@ -52,7 +54,7 @@ public final class HmRqBodyTest {
                 Collections.<String>emptyList(),
                 body
             ),
-            new HmRqBody(body)
+            new HmBody<>(body)
         );
     }
 
@@ -66,7 +68,7 @@ public final class HmRqBodyTest {
                 Collections.<String>emptyList(),
                 "this"
             ),
-            Matchers.not(new HmRqBody("that"))
+            Matchers.not(new HmBody<>("that"))
         );
     }
 
@@ -79,7 +81,7 @@ public final class HmRqBodyTest {
             Collections.<String>emptyList(),
             "other"
         );
-        final HmRqBody matcher = new HmRqBody("some");
+        final HmBody<Body> matcher = new HmBody<>("some");
         matcher.matchesSafely(request);
         final StringDescription description = new StringDescription();
         matcher.describeMismatchSafely(request, description);
@@ -87,6 +89,27 @@ public final class HmRqBodyTest {
             description.toString(),
             Matchers.equalTo(
                 "body was: [111, 116, 104, 101, 114]"
+            )
+        );
+    }
+
+    /**
+     * HmBody can describe in readable way.
+     */
+    @Test
+    public void describeToInReadableWay() {
+        final Request request = new RqFake(
+            Collections.<String>emptyList(),
+            "one"
+        );
+        final HmBody<Body> matcher = new HmBody<>("two");
+        matcher.matchesSafely(request);
+        final StringDescription description = new StringDescription();
+        matcher.describeTo(description);
+        MatcherAssert.assertThat(
+            description.toString(),
+            new IsEqual<>(
+                "body: [116, 119, 111]"
             )
         );
     }
