@@ -41,6 +41,10 @@ import org.takes.Take;
  * @author Kirill (g4s8.public@gmail.com)
  * @version $Id $
  * @since 2.0
+ * @todo #682:30min Continue to integrate with Servlet API,
+ *  see https://github.com/yegor256/takes/pull/836 discussion for details.
+ *  Also add unit tests for servlet related classes: SrvTake, RqFrom and
+ *  ResponseOf.
  */
 public final class SrvTake extends HttpServlet {
     /**
