@@ -55,11 +55,6 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
     private final Charset charset;
 
     /**
-     * Text from item for mismatch description.
-     */
-    private String itext;
-
-    /**
      * Ctor.
      * @param body Body matcher.
      * @param charset Charset of the text.
@@ -79,8 +74,7 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
     @Override
     protected final boolean matchesSafely(final T item) {
         try {
-            this.itext = this.text(item);
-            return this.body.matches(this.itext);
+            return this.body.matches(this.text(item));
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
@@ -89,7 +83,11 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
     @Override
     protected final void describeMismatchSafely(final T item, final
         Description description) {
-        description.appendText("body was: ").appendText(this.itext);
+        try {
+            description.appendText("body was: ").appendText(this.text(item));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     /**
