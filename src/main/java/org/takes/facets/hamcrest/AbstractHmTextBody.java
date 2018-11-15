@@ -41,12 +41,6 @@ import org.hamcrest.TypeSafeMatcher;
  * @version $Id$
  * @param <T> Item type. Should be able to return own body
  * @since 2.0
- *
- * @todo #794:30min Implement describeMismatchSafely and cover mismatch
- *  descriptions with relevant test cases. Update describeTo implementation
- *  to be more informative and add relevant test cases for that. Both  should
- *  show, what was expected, what was actually in the body and text description
- *  for clear understanding.
  */
 public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
@@ -59,6 +53,11 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
      * Charset of the text.
      */
     private final Charset charset;
+
+    /**
+     * Text from item for mismatch description.
+     */
+    private String itext;
 
     /**
      * Ctor.
@@ -74,16 +73,23 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
     @Override
     public final void describeTo(final Description description) {
-        description.appendDescriptionOf(this.body);
+        description.appendText("body: ").appendDescriptionOf(this.body);
     }
 
     @Override
     protected final boolean matchesSafely(final T item) {
         try {
-            return this.body.matches(this.text(item));
+            this.itext = this.text(item);
+            return this.body.matches(this.itext);
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }
+    }
+
+    @Override
+    protected final void describeMismatchSafely(final T item, final
+        Description description) {
+        description.appendText("body was: ").appendText(this.itext);
     }
 
     /**
