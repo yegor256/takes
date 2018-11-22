@@ -115,41 +115,52 @@ public final class RsPrint extends RsWrap {
     }
 
     /**
-     * Print it into output stream.
+     * Print it into output stream in UTF8.
      * @param output Output to print into
      * @throws IOException If fails
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
+        this.printHead(new Utf8OutputStreamWriter(output));
+    }
+
+    /**
+     * Print it into a writer.
+     * @param writer Writer to print into
+     * @throws IOException If fails
+     * @since 2.0
+     */
+    public void printHead(final Writer writer) throws IOException {
         final String eol = "\r\n";
-        final Writer writer =
-            new Utf8OutputStreamWriter(output);
         int pos = 0;
-        for (final String line : this.head()) {
-            if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
-                throw new IllegalArgumentException(
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        line, RsPrint.FIRST
-                    )
-                );
+        try {
+            for (final String line : this.head()) {
+                if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
+                    throw new IllegalArgumentException(
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                            line, RsPrint.FIRST
+                        )
+                    );
+                }
+                if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
+                    throw new IllegalArgumentException(
+                        String.format(
+                            // @checkstyle LineLength (1 line)
+                            "header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                            pos + 1, line, RsPrint.OTHERS
+                        )
+                    );
+                }
+                writer.append(line);
+                writer.append(eol);
+                ++pos;
             }
-            if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
-                throw new IllegalArgumentException(
-                    String.format(
-                        // @checkstyle LineLength (1 line)
-                        "header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        pos + 1, line, RsPrint.OTHERS
-                    )
-                );
-            }
-            writer.append(line);
             writer.append(eol);
-            ++pos;
+        } finally {
+            writer.flush();
         }
-        writer.append(eol);
-        writer.flush();
     }
 
     /**

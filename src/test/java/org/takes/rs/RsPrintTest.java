@@ -25,9 +25,10 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -72,28 +73,75 @@ public final class RsPrintTest {
     /**
      * RsPrint can flush head contents even when exception happens.
      * @throws IOException If some problem inside
-     * @todo #778:30min Fix flushHeadEvenWhenExceptionHappens test
-     *  and remove Ignore annotation. Implementation could not rely
-     *  on simple try-finally block as OutputStreamWriter do not call
-     *  to the flush() of OutputStream. It has additional checks.
      */
     @Test
-    @Ignore
     public void flushHeadEvenWhenExceptionHappens() throws IOException {
         final IOException exception = new IOException("Error");
-        final FailOutputStream output = new FailOutputStream(exception);
+        final FailWriter writer = new FailWriter(exception);
         try {
             new RsPrint(new RsText("World!"))
-                .printHead(output);
+                .printHead(writer);
         } catch (final IOException ex) {
             if (!ex.equals(exception)) {
                 throw ex;
             }
         }
         MatcherAssert.assertThat(
-            output.haveFlushed(),
+            writer.haveFlushed(),
             Matchers.is(true)
         );
+    }
+
+    /**
+     * Writer that throws IOException on method write.
+     *
+     * @author Victor Noel (victor.noel@crazydwarves.org)
+     * @version $Id$
+     * @since 2.0
+     */
+    private static final class FailWriter extends Writer {
+
+        /**
+         * Failing output stream.
+         */
+        private final FailOutputStream output;
+
+        /**
+         * Ctor.
+         * @param exception Exception to throw
+         */
+        FailWriter(final IOException exception) {
+            super();
+            this.output = new FailOutputStream(exception);
+        }
+
+        @Override
+        public void write(final char[] cbuf, final int off, final int len)
+            throws IOException {
+            this.output.write(
+                new String(cbuf).getBytes(StandardCharsets.UTF_8),
+                off,
+                len
+            );
+        }
+
+        @Override
+        public void flush() throws IOException {
+            this.output.flush();
+        }
+
+        @Override
+        public void close() throws IOException {
+            this.output.close();
+        }
+
+        /**
+         * Have contents been flushed?
+         * @return True, if contents were flushed, false - otherwise
+         */
+        public boolean haveFlushed() {
+            return this.output.haveFlushed();
+        }
     }
 
     /**
