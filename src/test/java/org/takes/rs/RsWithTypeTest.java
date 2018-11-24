@@ -23,12 +23,12 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsWithType}.
@@ -91,9 +91,10 @@ public final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     type
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(RsWithTypeTest.CONTENT_TYPE, type),
                     "",
@@ -119,9 +120,10 @@ public final class RsWithTypeTest {
                     ),
                     RsWithTypeTest.TYPE_HTML
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     "HTTP/1.1 500 Internal Error",
                     "Content-Length: 6",
                     "Content-Type: text/html",
@@ -143,9 +145,10 @@ public final class RsWithTypeTest {
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
@@ -162,9 +165,10 @@ public final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
@@ -189,9 +193,10 @@ public final class RsWithTypeTest {
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
@@ -208,9 +213,10 @@ public final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
@@ -235,9 +241,10 @@ public final class RsWithTypeTest {
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_XML
@@ -253,9 +260,10 @@ public final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
@@ -280,9 +288,10 @@ public final class RsWithTypeTest {
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_TEXT
@@ -298,9 +307,10 @@ public final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
@@ -323,9 +333,10 @@ public final class RsWithTypeTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
@@ -352,9 +363,10 @@ public final class RsWithTypeTest {
                     RsWithTypeTest.TYPE_TEXT,
                     StandardCharsets.ISO_8859_1
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(RsWithTypeTest.CRLF).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_OK,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,

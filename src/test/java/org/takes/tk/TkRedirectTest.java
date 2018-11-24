@@ -23,12 +23,12 @@
  */
 package org.takes.tk;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -58,9 +58,10 @@ public final class TkRedirectTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkRedirect(url).act(new RqFake())
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(TkRedirectTest.NEWLINE).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    TkRedirectTest.NEWLINE,
                     "HTTP/1.1 303 See Other",
                     String.format(TkRedirectTest.LOCATION, url),
                     "",
@@ -82,9 +83,10 @@ public final class TkRedirectTest {
                 new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act(
                     new RqFake()
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on(TkRedirectTest.NEWLINE).join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    TkRedirectTest.NEWLINE,
                     "HTTP/1.1 302 Moved Temporarily",
                     String.format(TkRedirectTest.LOCATION, url),
                     "",

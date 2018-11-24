@@ -23,12 +23,13 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsText}.
@@ -44,9 +45,10 @@ public final class RsTextTest {
     public void makesPlainTextResponse() throws IOException {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
+            new RsPrint(new RsBuffered(new RsText(body))),
+            new TextIs(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",

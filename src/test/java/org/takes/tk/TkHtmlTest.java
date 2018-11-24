@@ -23,11 +23,12 @@
  */
 package org.takes.tk;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -46,9 +47,10 @@ public final class TkHtmlTest {
     public void createsTextResponse() throws IOException {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
-            new RsPrint(new TkHtml(body).act(new RqFake())).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
+            new RsPrint(new TkHtml(body).act(new RqFake())),
+            new TextIs(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/html",
@@ -68,12 +70,12 @@ public final class TkHtmlTest {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
-            new RsPrint(take.act(new RqFake())).print(),
-            Matchers.containsString(body)
+            new RsPrint(take.act(new RqFake())),
+            new TextHasString(body)
         );
         MatcherAssert.assertThat(
-            new RsPrint(take.act(new RqFake())).print(),
-            Matchers.containsString(body)
+            new RsPrint(take.act(new RqFake())),
+            new TextHasString(body)
         );
     }
 

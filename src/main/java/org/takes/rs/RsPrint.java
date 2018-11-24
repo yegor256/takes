@@ -31,6 +31,7 @@ import java.io.Writer;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Text;
 import org.takes.Response;
 import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
@@ -41,10 +42,19 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @todo #804:30min Continue removing Guava's code from tests, starting
+ *  with all the calls to Joiner by replacing them with Cactoos JoinedText
+ *  and the use of cactoos-matchers TextIs or TextHasContent coupled with this
+ *  class RsPrint as a Text as it was started in #804. When there is no more
+ *  use for the method print, remove it and extract printHead and printBody
+ *  in two different classes BodyPrint and HeadPrint both implementing Text
+ *  and start again replacing guava in tests in the same manner.
+ *  Create new todos until guava is removed and Takes is much more Cactoos
+ *  oriented as started with #804.
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsPrint extends RsWrap {
+public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Pattern for first line.
@@ -77,6 +87,11 @@ public final class RsPrint extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
         return new Utf8String(baos.toByteArray()).string();
+    }
+
+    @Override
+    public String asString() throws IOException {
+        return this.print();
     }
 
     /**
