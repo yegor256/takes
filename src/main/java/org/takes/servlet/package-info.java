@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -25,8 +25,6 @@
 /**
  * Servlet (javax) integration.
  *
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id $
  * @since 2.0
  */
 package org.takes.servlet;

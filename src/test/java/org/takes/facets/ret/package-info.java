@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -25,8 +25,6 @@
 /**
  * Return, tests.
  *
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.20
  */
 package org.takes.facets.ret;

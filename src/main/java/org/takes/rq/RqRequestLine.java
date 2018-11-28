@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -36,8 +36,6 @@ import org.takes.Request;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Vladimir Maksimenko (xupypr@xupypr.com)
- * @version $Id$
  * @since 0.29.1
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -75,8 +73,6 @@ public interface RqRequestLine extends Request {
      * Request decorator for Request-Line header validation
      *
      * <p>The class is immutable and thread-safe.
-     * @author Vladimir Maksimenko (xupypr@xupypr.com)
-     * @version $Id$
      * @since 1.0
      */
     @EqualsAndHashCode(callSuper = true)

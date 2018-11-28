@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Hamdi Douss (douss.hamdi@gmail.com)
- * @version $Id$
  * @since 0.15
  * @see org.takes.rq.RqPrint
  */

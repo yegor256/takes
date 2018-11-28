@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -42,9 +42,7 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @version $Id$
  * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)
@@ -83,7 +81,7 @@ public final class FbStatus extends FbWrap {
                         new RsWithBody(
                             res,
                             String.format(
-                                "%s: %s", WHITESPACE.split(
+                                "%s: %s", FbStatus.WHITESPACE.split(
                                     res.head().iterator().next(),
                                     2
                                 )[1], req.throwable().getLocalizedMessage()

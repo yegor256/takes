@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -37,9 +37,6 @@ import org.takes.http.FtRemote;
 /**
  * Test case for {@link TkSlf4j} when used in conjunction
  * with {@link FtRemote} and {@link TkEmpty}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.11.2
  */
 public final class TkSlf4jRemoteTest {

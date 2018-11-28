@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -27,8 +27,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test codec.
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id$
  * @since 1.11.1
  */
 final class CcTest implements Codec {

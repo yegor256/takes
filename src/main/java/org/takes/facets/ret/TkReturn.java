@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -41,8 +41,6 @@ import org.takes.rs.RsRedirect;
  * is set, sends redirect response to stored location.
  * Otherwise delegates to original Take.
  *
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.20
  */
 @ToString(of = { "origin", "cookie" })

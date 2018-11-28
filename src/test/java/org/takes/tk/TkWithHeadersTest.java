@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link org.takes.tk.TkWithHeaders}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.9.1
  */
 public final class TkWithHeadersTest {

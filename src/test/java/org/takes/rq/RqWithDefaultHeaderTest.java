@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link RqWithDefaultHeader}.
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
- * @version $Id$
  * @since 0.31
  */
 public final class RqWithDefaultHeaderTest {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -25,8 +25,6 @@ package org.takes.misc;
 
 /**
  * Marker interface for performance tests.
- * @author Mesut Ozen (mesutozen36@gmail.com)
- * @version $Id$
  * @since 0.24
  */
 public interface PerformanceTests {

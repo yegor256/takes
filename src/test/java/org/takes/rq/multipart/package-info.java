@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -25,8 +25,6 @@
 /**
  * Multipart tests.
  *
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 package org.takes.rq.multipart;

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -36,8 +36,6 @@ package org.takes;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @see org.takes.Response
  * @see org.takes.Take
  * @see org.takes.facets.fork.RqRegex

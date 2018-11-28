@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -76,8 +76,6 @@ import org.takes.tk.TkText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.4
  * @see TkFork
  * @see TkRegex
@@ -220,8 +218,6 @@ public final class FkRegex implements Fork {
     /**
      * Request with a matcher inside.
      *
-     * @author Dali Freire (dalifreire@gmail.com)
-     * @version $Id$
      * @since 0.32.5
      */
     private static final class RqMatcher implements RqRegex {

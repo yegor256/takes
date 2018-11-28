@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -52,8 +52,6 @@ import org.takes.rq.RqHeaders;
  * in any case.
  *
  * <p>The class is immutable and thread-safe.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
  */
@@ -94,7 +92,7 @@ public final class FkEncoding implements Fork {
             resp = new Opt.Single<Response>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
-                ENCODING_SEP.split(
+                FkEncoding.ENCODING_SEP.split(
                     new EnglishLowerCase(headers.next().trim())
                         .string()
                 )

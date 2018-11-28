@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -30,8 +30,6 @@ import org.junit.Test;
 
 /**
  * Unit tests for {@link org.takes.facets.auth.PsBasic.Default}.
- * @author Georgy Vlasov (wlasowegor@gmail.com)
- * @version $Id$
  * @since 0.22
  */
 public final class PsBasicDefaultTest {

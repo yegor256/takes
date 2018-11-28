@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,9 +35,6 @@ import org.takes.facets.auth.Identity;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
- * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
  * @since 0.13
  */
 @EqualsAndHashCode

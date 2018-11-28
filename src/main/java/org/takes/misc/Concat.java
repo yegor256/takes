@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -29,8 +29,6 @@ import java.util.Iterator;
  * Concatenating iterables. It produces an iterable collection combining A and
  * B, with order of the elements in A first.
  *
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @param <T> Type of items
  * @since 0.15.2
  */

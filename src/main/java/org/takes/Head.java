@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -27,8 +27,6 @@ import java.io.IOException;
 
 /**
  * Head abstraction for {@link Request} and {@link Response}.
- * @author Paulo Lobo (pauloeduardolobo@gmail.com)
- * @version $Id$
  * @since 2.0
  */
 public interface Head {

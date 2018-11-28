@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.takes.misc.Opt;
 
 /**
  * A Pass which you can enter only if you can enter every Pass in a list.
- * @author Georgy Vlasov (wlasowegor@gmail.com)
- * @version $Id$
  * @since 0.22
  */
 public class PsAll implements Pass {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -49,8 +49,6 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsGoogle}.
  *
  * <p>The class is immutable and thread-safe.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.16.3
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

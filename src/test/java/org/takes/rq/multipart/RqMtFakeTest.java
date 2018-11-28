@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -39,8 +39,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link RqMtFake}.
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.33
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -44,8 +44,6 @@ import org.takes.tk.TkText;
 
 /**
  * Test of {@link PsBasic}.
- * @author Endrigo Antonini (teamed@endrigo.com.br)
- * @version $Id$
  * @since 0.20
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

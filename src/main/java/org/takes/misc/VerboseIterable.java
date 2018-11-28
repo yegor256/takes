@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -28,8 +28,6 @@ import java.util.Iterator;
 /**
  * Verbose iterable.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @param <T> Type of item
  * @since 0.10
  */

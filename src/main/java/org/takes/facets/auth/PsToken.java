@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -46,8 +46,6 @@ import org.takes.rs.RsJson;
  * <p>
  * The class is immutable and thread-safe.
  *
- * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
  * @since 1.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle AvoidDuplicateLiterals (500 lines)
@@ -124,7 +122,7 @@ public final class PsToken implements Pass {
             }
         }
         final String dot = "\\.";
-        if (head.length() > 0) {
+        if (!head.isEmpty()) {
             final String jwt = head.split(" ", 2)[1].trim();
             final String[] parts = jwt.split(dot);
             final byte[] jwtheader = parts[0].getBytes();

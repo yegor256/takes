@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.Request;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.13.7
  */
 public interface RqMethod extends Request {
@@ -97,8 +95,6 @@ public interface RqMethod extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
-     * @version $Id$
      * @since 0.13.7
      */
     @EqualsAndHashCode(callSuper = true)
@@ -123,7 +119,7 @@ public interface RqMethod extends Request {
         public String method() throws IOException {
             final String method = new RqRequestLine.Base(this)
                 .method();
-            if (SEPARATORS.matcher(method).find()) {
+            if (Base.SEPARATORS.matcher(method).find()) {
                 throw new IOException(
                     String.format("Invalid HTTP method: %s", method)
                 );

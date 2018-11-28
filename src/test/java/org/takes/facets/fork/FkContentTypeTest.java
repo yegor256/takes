@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link FkContentType}.
- * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */

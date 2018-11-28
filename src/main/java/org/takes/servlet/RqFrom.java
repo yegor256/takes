@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.Request;
 /**
  * Request from {@link HttpServletRequest}.
  *
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id $
  * @since 2.0
  */
 final class RqFrom implements Request {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import lombok.EqualsAndHashCode;
  * Back decorator with maximum lifetime.
  *
  * <p>The class is immutable and thread-safe.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.14.2
  */
 @EqualsAndHashCode(callSuper = true)

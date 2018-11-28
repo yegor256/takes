@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link RsPrint}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.8
  */
 public final class RsPrintTest {
@@ -95,8 +93,6 @@ public final class RsPrintTest {
     /**
      * Writer that throws IOException on method write.
      *
-     * @author Victor Noel (victor.noel@crazydwarves.org)
-     * @version $Id$
      * @since 2.0
      */
     private static final class FailWriter extends Writer {
@@ -147,8 +143,6 @@ public final class RsPrintTest {
     /**
      * FailOutputStream that throws IOException on method write.
      *
-     * @author Izbassar Tolegen (t.izbassar@gmail.com)
-     * @version $Id$
      * @since 2.0
      */
     private static final class FailOutputStream extends OutputStream {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.Response;
 /**
  * Takes response as servlet response.
  *
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id $
  * @since 2.0
  * @todo #682:30min Servlet request and response adapters are not unit-tested.
  *  There should be tests for reading headers and body from servlet request

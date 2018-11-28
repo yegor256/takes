@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -26,8 +26,6 @@ package org.takes.facets.fork.am;
 /**
  * Matches specified version.
  *
- * @author Valeriy Zhirnov (neonailol@gmail.com)
- * @version $Id$
  * @since 1.7.2
  */
 public final class AmVersion implements AgentMatch {
@@ -79,8 +77,6 @@ public final class AmVersion implements AgentMatch {
     /**
      * Matches specified version when it greater than specified one.
      *
-     * @author Valeriy Zhirnov (neonailol@gmail.com)
-     * @version $Id$
      * @since 1.7.2
      */
     public static final class VmGreater implements VersionMatch {

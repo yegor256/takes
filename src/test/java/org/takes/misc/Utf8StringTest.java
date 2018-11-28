@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -30,8 +30,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link Utf8String}.
- * @author Maksimenko Vladimir (xupypr@xupypr.com)
- * @version $Id$
  * @since 0.33
  */
 public final class Utf8StringTest {

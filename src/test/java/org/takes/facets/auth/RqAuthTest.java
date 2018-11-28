@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import org.takes.rq.RqWithHeader;
 
 /**
  * Test case for {@link RqAuth}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.9.12
  */
 public class RqAuthTest {

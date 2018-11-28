@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -40,9 +40,6 @@ import org.takes.rq.RqMethod;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.11.2
  */
 @ToString(of = { "origin", "target" })

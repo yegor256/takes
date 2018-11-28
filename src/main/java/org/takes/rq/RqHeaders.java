@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -45,8 +45,6 @@ import org.takes.misc.VerboseList;
  * <p>All implementations of this interface must be immutable and
  * thread-safe.</p>
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 @SuppressWarnings("PMD.TooManyMethods")
@@ -74,8 +72,6 @@ public interface RqHeaders extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Yury Lauresh (lavresh@gmail.com)
-     * @version $Id$
      * @since 0.13.8
      */
     @EqualsAndHashCode(callSuper = true)
@@ -166,7 +162,6 @@ public interface RqHeaders extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Yegor Bugayenko (yegor256@gmail.com)
      * @since 0.16
      */
     @EqualsAndHashCode

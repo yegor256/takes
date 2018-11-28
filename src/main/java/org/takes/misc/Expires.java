@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -30,8 +30,6 @@ import java.util.TimeZone;
 /**
  * Expiration date in GMT.
  *
- * @author Paulo Lobo (pauloeduardolobo@gmail.com)
- * @version $Id$
  * @since 2.0
  */
 public interface Expires {
@@ -102,8 +100,6 @@ public interface Expires {
     /**
      * Expiration date in GMT.
      *
-     * @author Izbassar Tolegen (t.izbassar@gmail.com)
-     * @version $Id$
      * @since 2.0
      */
     final class Date implements Expires {

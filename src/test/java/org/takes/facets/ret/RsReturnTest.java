@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsReturn}.
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.20
  */
 public final class RsReturnTest {

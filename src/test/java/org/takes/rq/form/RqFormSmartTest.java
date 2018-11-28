@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,9 +32,6 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormSmart}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @author Rui Castro (rui.castro@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class RqFormSmartTest {

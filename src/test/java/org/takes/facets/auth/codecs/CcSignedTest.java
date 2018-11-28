@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcSigned}.
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id$
  * @since 1.11.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumber (500 line)

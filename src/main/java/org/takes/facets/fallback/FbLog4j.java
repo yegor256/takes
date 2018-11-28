@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -36,8 +36,6 @@ import org.takes.rq.RqMethod;
 
 /**
  * Fallback that logs all problems through Log4J.
- * @author Igor Piddubnyi (igor.piddubnyi@gmail.com)
- * @version $Id$
  * @since 0.25
  */
 @EqualsAndHashCode(callSuper = true)

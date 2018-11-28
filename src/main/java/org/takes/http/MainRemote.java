@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -40,8 +40,6 @@ import org.takes.misc.Utf8String;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
@@ -177,8 +175,6 @@ public final class MainRemote {
     /**
      * Runnable main method.
      *
-     * @author Dali Freire (dalifreire@gmail.com)
-     * @version $Id$
      * @since 0.32.5
      */
     private static final class MainMethod implements Runnable {

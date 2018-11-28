@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.rq.TempInputStream;
 /**
  * Request with a temporary file as body. The temporary file will be deleted
  * automatically when the body of the request will be closed.
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.33
  * @see org.takes.rq.RqLive
  * @see org.takes.rq.TempInputStream

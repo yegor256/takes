@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -36,8 +36,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkReturn}.
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.20
  */
 public final class TkReturnTest {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link SiHmac}.
- * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
  * @since 1.3
  */
 public final class SiHmacTest {

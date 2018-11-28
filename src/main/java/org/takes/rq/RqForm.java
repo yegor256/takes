@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy

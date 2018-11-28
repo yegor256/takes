@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcAes}.
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @since 0.13.8
  * @checkstyle MagicNumber (500 line)
  */

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -31,8 +31,6 @@ import java.io.InputStream;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.16
  */
 final class CapInputStream extends InputStream {

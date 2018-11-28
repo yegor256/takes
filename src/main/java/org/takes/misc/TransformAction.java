@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -26,8 +26,6 @@ package org.takes.misc;
 /**
  * Action for {@link Transform} to perform actual transformation.
  *
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @param <T> Type of item
  * @param <K> Type of key
  * @since 0.15.2

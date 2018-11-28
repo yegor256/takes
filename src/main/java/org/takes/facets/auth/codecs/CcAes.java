@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -48,8 +48,6 @@ import org.takes.facets.auth.Identity;
  * <a href="https://crypto.stackexchange.com/a/205">before or after</a>
  * encryption.
  * <p>The class is immutable and thread-safe.
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @since 0.13.8
  */
 @EqualsAndHashCode

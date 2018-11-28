@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -31,8 +31,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcHex}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 public final class CcHexTest {

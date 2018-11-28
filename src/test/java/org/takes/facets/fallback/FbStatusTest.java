@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -36,8 +36,6 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FbStatus}.
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.16.10
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

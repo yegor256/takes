@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -24,8 +24,6 @@
 
 /**
  * Form tests.
- * @author Rui Castro (rui.castro@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 package org.takes.rq.form;

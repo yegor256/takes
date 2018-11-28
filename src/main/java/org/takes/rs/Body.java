@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -37,8 +37,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * The body of a response used by {@link RsWithBody}.
  *
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.32
  */
 @SuppressWarnings("PMD.TooManyMethods")

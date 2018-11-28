@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -48,8 +48,6 @@
  * through a series of fallbacks. The first of them who will return
  * some response will stop the chain.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 package org.takes.facets.fallback;

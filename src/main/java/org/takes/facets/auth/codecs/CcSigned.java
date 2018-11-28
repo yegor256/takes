@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * MAC codec which sign identity with provided algorithm and key.
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id$
  * @since 1.11.1
  */
 public final class CcSigned implements Codec {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,9 +35,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link org.takes.facets.hamcrest.HmHeader}.
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author Paulo Lobo (pauloeduardolobo@gmail.com)
- * @version $Id$
  * @since 0.23.3
  */
 public final class HmHeaderTest {

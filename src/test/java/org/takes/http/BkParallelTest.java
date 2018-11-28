@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -41,8 +41,6 @@ import org.takes.tk.TkEmpty;
 /**
  * Test case for {@link BkParallel}.
  *
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.15.2
  */

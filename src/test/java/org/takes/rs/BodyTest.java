@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.misc.Utf8String;
 /**
  * Test case for {@link Body}.
  *
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.32
  */
 public final class BodyTest {

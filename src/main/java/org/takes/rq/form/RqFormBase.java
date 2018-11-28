@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -46,8 +46,6 @@ import org.takes.rq.RqWrap;
 
 /**
  * Base implementation of {@link RqForm}.
- * @author Aleksey Popov (alopen@yandex.ru)
- * @version $Id$
  * @since 0.33
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")

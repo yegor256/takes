@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -40,11 +40,6 @@ import org.takes.Head;
  * <p>This "matcher" tests given item headers.
  * <p>The class is immutable and thread-safe.
  *
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @author I. Sokolov (happy.neko@gmail.com)
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
- * @author Paulo Lobo (pauloeduardolobo@gmail.com)
- * @version $Id$
  * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
  */

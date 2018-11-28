@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -29,8 +29,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * InputStreamReader that uses UTF-8 encoding for all operations.
- * @author Dali Freire (dalifreire@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public class Utf8InputStreamReader extends InputStreamReader {

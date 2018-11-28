@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -26,8 +26,6 @@ package org.takes.facets.fork.am;
 /**
  * Version match.
  *
- * @author Valeriy Zhirnov (neonailol@gmail.com)
- * @version $Id$
  * @since 1.7.2
  */
 public interface VersionMatch {

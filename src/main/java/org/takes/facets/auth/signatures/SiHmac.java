@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import lombok.EqualsAndHashCode;
  * <p>
  * The class is immutable and thread-safe.
  *
- * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
  * @since 1.4
  */
 @EqualsAndHashCode

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAgent}.
- * @author Valeriy Zhirnov (neonailol@gmail.com)
- * @version $Id$
  * @since 1.7.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */

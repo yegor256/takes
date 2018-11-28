@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -39,8 +39,6 @@
  *   }
  * }</pre>
  *
- * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
  * @since 0.13
  */
 package org.takes.facets.hamcrest;

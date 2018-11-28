@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.rq.RqWithBody;
 
 /**
  * RqFormFake accepts parameters in the constructor.
- * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class RqFormFake implements RqForm {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 @ToString(callSuper = true)
@@ -130,8 +128,6 @@ public final class RsWithType extends RsWrap {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
-     * @version $Id$
      * @since 0.30
      */
     public static final class Html extends RsWrap {
@@ -175,8 +171,6 @@ public final class RsWithType extends RsWrap {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
-     * @version $Id$
      * @since 0.30
      */
     public static final class Json extends RsWrap {
@@ -220,8 +214,6 @@ public final class RsWithType extends RsWrap {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
-     * @version $Id$
      * @since 0.30
      */
     public static final class Xml extends RsWrap {
@@ -265,8 +257,6 @@ public final class RsWithType extends RsWrap {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Eléna Ihde-Simon (elena.ihde-simon@posteo.de)
-     * @version $Id$
      * @since 0.30
      */
     public static final class Text extends RsWrap {

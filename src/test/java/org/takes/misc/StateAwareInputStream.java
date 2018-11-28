@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -30,8 +30,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * InputStream decorator that knows if it was closed or not.
  *
- * @author I. Sokolov (happy.neko@gmail.com)
- * @version $Id$
  * @since 0.31
  */
 public final class StateAwareInputStream extends InputStream {

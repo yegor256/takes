@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -50,8 +50,6 @@ import org.xembly.Directives;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

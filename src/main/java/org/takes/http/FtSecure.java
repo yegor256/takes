@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -37,8 +37,6 @@ import org.takes.Take;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Dragan Bozanovic (bozanovicdr@gmail.com)
- * @version $Id$
  * @since 0.25
  */
 @EqualsAndHashCode

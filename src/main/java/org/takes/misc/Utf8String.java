@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -27,8 +27,6 @@ import java.nio.charset.Charset;
 
 /**
  * String that uses UTF-8 encoding for all byte operations.
- * @author Maksimenko Vladimir (xupypr@xupypr.com)
- * @version $Id$
  * @since 0.33
  */
 public final class Utf8String {

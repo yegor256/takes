@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -30,8 +30,6 @@ import org.takes.Request;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.9
  */
 public interface RqMultipart extends Request {

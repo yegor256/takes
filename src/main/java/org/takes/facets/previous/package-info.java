@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -43,8 +43,6 @@
  * <p>Then, you decorate your application with
  * {@link org.takes.facets.previous.TkPrevious} and that's it.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.10
  */
 package org.takes.facets.previous;

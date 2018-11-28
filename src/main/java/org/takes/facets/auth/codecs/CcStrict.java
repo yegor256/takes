@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -31,8 +31,6 @@ import org.takes.facets.auth.Identity;
  * Decorator which check incoming and outgoing identities.
  *
  * <p>The class is immutable and thread-safe.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.11.2
  */
 public final class CcStrict implements Codec {

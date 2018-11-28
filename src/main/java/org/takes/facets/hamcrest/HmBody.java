@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -40,8 +40,6 @@ import org.takes.Body;
  *
  * <p>This "matcher" tests given item body</p>
  *
- * @author Tolegen Izbassar (t.izbassar@gmail.com)
- * @version $Id$
  * @param <T> Item type. Should be able to return own item
  * @since 2.0
  */

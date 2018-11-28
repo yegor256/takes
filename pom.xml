@@ -84,6 +84,7 @@ SOFTWARE.
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
+    <qulice.version>0.17.5</qulice.version>
   </properties>
   <dependencies>
     <!--
@@ -368,12 +369,24 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.17.1</version>
+            <!--
+              @todo #837:30min Upgrade qulice to latest 0.17.x and if possible
+               to latest 0.18.x and fix all the issues it detects for the build
+               to pass. In 0.17.6, some changes impact a lot of file, while in
+               0.18 there should be less new issues. Don't forget about the it
+               test ran by maven-invoker-plugin.
+            -->
+            <version>${qulice.version}</version>
             <configuration>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
+                <!--
+                  @todo #837:30min Un-exclude findbugs from qulice checks
+                   and fix the bugs it detects for the build to pass.
+                   Most of those are related to reliance on default encoding
+                   and synchronization problems. 
+                -->
                 <exclude>findbugs:.*</exclude>
-                <exclude>xml:/src/it/settings.xml</exclude>
               </excludes>
             </configuration>
           </plugin>

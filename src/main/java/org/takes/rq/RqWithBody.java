@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.misc.Utf8String;
  * Request with body.
  *
  * <p>The class is immutable and thread-safe.
- * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
  * @since 0.22
  */
 @EqualsAndHashCode(callSuper = true)

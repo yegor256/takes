@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -39,8 +39,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkMethods}.
- * @author Aleksey Popov (alopen@yandex.ru)
- * @version $Id$
  * @since 0.17
  */
 public final class TkMethodsTest {

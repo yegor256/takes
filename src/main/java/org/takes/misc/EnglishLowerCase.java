@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -27,8 +27,6 @@ import java.util.Locale;
 
 /**
  * English lower case string representation.
- * @author Dali Freire (dalifreire@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class EnglishLowerCase {

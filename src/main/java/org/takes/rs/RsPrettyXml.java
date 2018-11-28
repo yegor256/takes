@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -50,8 +50,6 @@ import org.xml.sax.XMLReader;
  * Response with properly indented XML body.
  *
  * <p>The class is immutable and thread-safe.
- * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 @ToString(of = "origin")

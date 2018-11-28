@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -50,8 +50,6 @@ import org.takes.rs.RsWithHeader;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Endrigo Antonini (teamed@endrigo.com.br)
- * @version $Id$
  * @since 0.20
  */
 @EqualsAndHashCode
@@ -135,8 +133,6 @@ public final class PsBasic implements Pass {
      * Entry interface that is used to check if the received information is
      * valid.
      *
-     * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
      * @since 0.20
      */
     public interface Entry {
@@ -154,8 +150,6 @@ public final class PsBasic implements Pass {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
      * @since 0.20
      */
     public static final class Fake implements PsBasic.Entry {
@@ -189,8 +183,6 @@ public final class PsBasic implements Pass {
     /**
      * Empty check.
      *
-     * @author Endrigo Antonini (teamed@endrigo.com.br)
-     * @version $Id$
      * @since 0.20
      */
     public static final class Empty implements PsBasic.Entry {
@@ -203,8 +195,6 @@ public final class PsBasic implements Pass {
     /**
      * Default entry.
      *
-     * @author Georgy Vlasov (wlasowegor@gmail.com)
-     * @version $Id$
      * @since 0.22
      */
     public static final class Default implements PsBasic.Entry {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,9 +35,6 @@ import org.takes.Response;
  * <p>This "matcher" tests given response status code.
  * <p>The class is immutable and thread-safe.
  *
- * @author Erim Erturk (erimerturk@gmail.com)
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
- * @version $Id$
  * @since 0.13
  */
 public final class HmRsStatus extends FeatureMatcher<Response, Integer> {

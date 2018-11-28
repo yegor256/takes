@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.facets.auth.Token.Jwt;
 
 /**
  * Test case for {@link Token}.
- * @author Sven Windisch (sven.windisch@gmail.com)
- * @version $Id$
  * @since 1.5
  */
 public final class TokenTest {

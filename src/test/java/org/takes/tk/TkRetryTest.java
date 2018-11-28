@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -40,8 +40,6 @@ import org.takes.rs.RsText;
 /**
  * TkRetry can retry till success or retry count is reached.
  *
- * @author Hamdi Douss (douss.hamdi@gmail.com)
- * @version $Id$
  * @since 0.28.3
  */
 public final class TkRetryTest {

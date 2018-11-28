@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -146,8 +146,6 @@
  * <p>Don't forget that the cookie you receive is not just a flash message,
  * but also other parameters, URL-encoded and separated by "slash".</p>
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 package org.takes.facets.flash;

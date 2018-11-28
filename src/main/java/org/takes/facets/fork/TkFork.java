@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -56,8 +56,6 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.4
  * @see org.takes.facets.fork.FkMethods
  * @see org.takes.facets.fork.FkRegex

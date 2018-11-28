@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.misc.Href;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.9
  */
 public interface RqHref extends Request {
@@ -55,8 +53,6 @@ public interface RqHref extends Request {
      * Request decorator, for HTTP URI query parsing.
      *
      * <p>The class is immutable and thread-safe.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
-     * @version $Id$
      * @since 0.13.1
      */
     @EqualsAndHashCode(callSuper = true)
@@ -96,7 +92,6 @@ public interface RqHref extends Request {
      *
      * <p>The class is immutable and thread-safe.
      *
-     * @author Yegor Bugayenko (yegor256@gmail.com)
      * @since 0.14
      */
     @EqualsAndHashCode

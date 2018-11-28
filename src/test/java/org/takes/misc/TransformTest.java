@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.junit.Test;
 /**
  * Test case for {@link Transform}.
  *
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @since 0.15.2
  */
 public final class TransformTest {

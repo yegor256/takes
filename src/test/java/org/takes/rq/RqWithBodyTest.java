@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -29,8 +29,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link RqWithBody}.
- * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
  * @since 0.22
  */
 public final class RqWithBodyTest {

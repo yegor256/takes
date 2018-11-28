@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -37,8 +37,6 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link HmBody}.
  *
- * @author Tolegen Izbassar (t.izbassar@gmail.com)
- * @version $Id$
  * @since 2.0
  */
 public final class HmBodyTest {

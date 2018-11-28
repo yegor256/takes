@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -47,8 +47,6 @@ import org.takes.misc.Utf8String;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Prasath Premkumar (popprem@gmail.com)
- * @version $Id$
  * @since 0.16
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */

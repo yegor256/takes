@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -43,8 +43,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link BkTimeable}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.14.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */

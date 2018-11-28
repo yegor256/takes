@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.tk.TkWrap;
  * Take that acts on request with specified methods only.
  * <p>The class is immutable and thread-safe.
  *
- * @author Aleksey Popov (alopen@yandex.ru)
- * @version $Id$
  * @since 0.16.1
  */
 @ToString(callSuper = true)

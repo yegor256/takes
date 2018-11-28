@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.Take;
 /**
  * Servlet for take.
  *
- * @author Kirill (g4s8.public@gmail.com)
- * @version $Id $
  * @since 2.0
  * @todo #682:30min Continue to integrate with Servlet API,
  *  see https://github.com/yegor256/takes/pull/836 discussion for details.

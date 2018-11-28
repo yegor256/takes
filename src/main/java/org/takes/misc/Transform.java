@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -28,8 +28,6 @@ import java.util.Iterator;
 /**
  * Transform elements in an iterable (in type T) into others (in type K).
  *
- * @author Jason Wong (super132j@yahoo.com)
- * @version $Id$
  * @param <T> Type of item
  * @param <K> Type of key
  * @since 0.15.2

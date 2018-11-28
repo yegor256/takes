@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import org.takes.rq.RqMultipart;
 
 /**
  * Smart decorator.
- * @author Nicolas Filotto (nicolas.filotto@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class RqMtSmart implements RqMultipart {

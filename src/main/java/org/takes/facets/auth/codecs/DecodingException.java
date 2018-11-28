@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -26,8 +26,6 @@ package org.takes.facets.auth.codecs;
 /**
  * Decoding exception.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.5
  */
 public final class DecodingException extends RuntimeException {

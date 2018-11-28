@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -29,8 +29,6 @@ import lombok.EqualsAndHashCode;
 
 /**
  * Back Wrap.
- * @author Hamdi Douss (douss.hamdi@gmail.com)
- * @version $Id$
  * @since 0.28
  */
 @EqualsAndHashCode

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.tk.TkHtml;
 
 /**
  * Test case for {@link HmRsStatus}.
- * @author Erim Erturk (erimerturk@gmail.com)
- * @version $Id$
  * @since 0.13
  */
 public final class HmRsStatusTest {

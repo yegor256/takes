@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.HttpException;
 
 /**
  * Test case for {@link RqSocket}.
- * @author Igor Khvostenkov (ikhvostenkov@gmail.com)
- * @version $Id$
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)

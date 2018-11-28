@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -35,8 +35,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkCors}.
- * @author Endrigo Antonini (teamed@endrigo.com.br)
- * @version $Id$
  * @since 0.20
  */
 public final class TkCorsTest {

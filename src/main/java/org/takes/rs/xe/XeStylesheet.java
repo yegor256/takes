@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.xembly.Directives;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  * @checkstyle LineLengthCheck (2 lines)
  * @see <a href="http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html">XML+XSLT in a Browser</a>

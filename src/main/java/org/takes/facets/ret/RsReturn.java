@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -37,8 +37,6 @@ import org.takes.rs.RsWrap;
 /**
  * Response decorator which sets cookie with return location.
  *
- * @author Ivan Inozemtsev (ivan.inozemtsev@gmail.com)
- * @version $Id$
  * @since 0.20
  */
 @ToString(callSuper = true)

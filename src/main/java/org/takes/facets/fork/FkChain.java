@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.misc.Opt;
 /**
  * A Fork chain. Routes to each given Fork in order, until one of them returns
  * a response or until none are left.
- * @author Carlos Gines (efrel.v2@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class FkChain implements Fork {

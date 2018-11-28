@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import java.util.ListIterator;
 /**
  * Verbose List that wraps OutOfBoundsException with custom message.
  *
- * @author I. Sokolov (happy.neko@gmail.com)
- * @version $Id$
  * @param <T> Type of item
  * @since 0.31.1
  */

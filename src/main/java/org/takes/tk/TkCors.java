@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -47,8 +47,6 @@ import org.takes.rs.RsWithStatus;
  * following <a href="http://www.w3.org/TR/cors/">link</a> or even on the <a
  * href="https://tools.ietf.org/html/rfc6454">RFC-6454</a> specification.
  *
- * @author Endrigo Antonini (teamed@endrigo.com.br)
- * @version $Id$
  * @since 0.20
  */
 @ToString(of = { "origin", "allowed" })

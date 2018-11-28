@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -38,8 +38,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkReadAlways}.
- * @author Dan Baleanu (dan.baleanu@gmail.com)
- * @version $Id$
  * @since 0.30
  */
 public final class TkReadAlwaysTest {

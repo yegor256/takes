@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -76,8 +76,6 @@
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
  * convert them to responses.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.1
  */
 package org.takes.facets.forward;

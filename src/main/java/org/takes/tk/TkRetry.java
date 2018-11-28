@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -39,8 +39,6 @@ import org.takes.misc.TransformAction;
  * Decorator TkRetry, which will not fail immediately on IOException, but
  * will retry a few times.
  *
- * @author Hamdi Douss (douss.hamdi@gmail.com)
- * @version $Id$
  * @since 0.28.3
  */
 public final class TkRetry implements Take {

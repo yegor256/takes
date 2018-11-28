@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -31,8 +31,6 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqOnce}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.26
  */
 public final class RqOnceTest {

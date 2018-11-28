@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -29,8 +29,6 @@ import java.util.Map;
  * An immutable and thread-safe implementation of
  * {@link Map.Entry} interface.
  *
- * @author Dragan Bozanovic (bozanovicdr@gmail.com)
- * @version $Id$
  * @param <K> Key type
  * @param <V> Value type
  * @since 0.27

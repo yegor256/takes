@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -28,8 +28,6 @@ import java.io.IOException;
 /**
  * Scalar that returns an object.
  *
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @param <T> Type of object
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  * @since 1.4

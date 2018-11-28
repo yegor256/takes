@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -34,8 +34,6 @@ import org.takes.facets.auth.Identity;
 /**
  * Test case for {@link CcGzip}.
  *
- * @author Aleksey Kurochka (eg04lt3r@gmail.com)
- * @version $Id$
  * @since 0.16
  */
 public final class CcGzipTest {

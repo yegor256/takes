@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -48,8 +48,6 @@ import org.takes.rs.RsJson;
 
 /**
  * Test case for {@link PsLinkedin}.
- * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
- * @version $Id$
  * @since 0.16
  */
 public final class PsLinkedinTest {
@@ -90,9 +88,6 @@ public final class PsLinkedinTest {
 
     /**
      * Take that returns JSON with the authorization token.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
-     * @author Rui Castro (rui.castro@gmail.com)
-     * @version $Id$
      * @since 1.1
      */
     private final class TokenTake implements Take {
@@ -164,9 +159,6 @@ public final class PsLinkedinTest {
 
     /**
      * Take that returns JSON with test user data.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
-     * @author Rui Castro (rui.castro@gmail.com)
-     * @version $Id$
      * @since 1.1
      */
     private final class PeopleTake implements Take {
@@ -229,9 +221,6 @@ public final class PsLinkedinTest {
 
     /**
      * Script to test Linkedin authorization.
-     * @author Dmitry Zaytsev (dmitry.zaytsev@gmail.com)
-     * @author Rui Castro (rui.castro@gmail.com)
-     * @version $Id$
      * @since 1.1
      */
     private final class LinkedinScript implements FtRemote.Script {

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.junit.Test;
 
 /**
  * Test case for {@link RsPrettyJson}.
- * @author Eugene Kondrashev (eugene.kondrashev@gmail.com)
- * @version $Id$
  * @since 1.0
  */
 public final class RsPrettyJsonTest {

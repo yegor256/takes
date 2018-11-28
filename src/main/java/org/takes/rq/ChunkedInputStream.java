@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -31,8 +31,6 @@ import java.nio.charset.Charset;
 /**
  * Input stream from chunked coded http request body.
  *
- * @author Maksimenko Vladimir (xupypr@xupypr.com)
- * @version $Id$
  * @since 0.31.2
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>

@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -33,8 +33,6 @@ import java.nio.file.Paths;
 /**
  * Input stream wrapper that removes associated File instance on close.
  *
- * @author Andrey Eliseev (aeg.exper0@gmail.com)
- * @version $Id$
  * @since 0.31
  */
 public final class TempInputStream extends InputStream {

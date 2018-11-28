@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -32,8 +32,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link FkChain}.
- * @author Carlos Gines (efrel.v2@gmail.com)
- * @version $Id$
  * @since 0.33
  */
 public final class FkChainTest {

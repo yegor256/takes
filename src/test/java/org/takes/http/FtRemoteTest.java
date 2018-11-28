@@ -1,4 +1,4 @@
-/**
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2014-2018 Yegor Bugayenko
@@ -48,8 +48,6 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FtRemote}.
- * @author Yegor Bugayenko (yegor256@gmail.com)
- * @version $Id$
  * @since 0.21
  *
  * @todo #800:30min We can't assert if FtRemote returns an empty body because
