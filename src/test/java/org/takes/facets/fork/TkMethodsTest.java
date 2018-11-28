@@ -23,14 +23,19 @@
  */
 package org.takes.facets.fork;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Take;
+import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
+import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkMethods}.
@@ -60,6 +65,21 @@ public final class TkMethodsTest {
         IOException {
         new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
             new RqFake(RqMethod.GET)
+        );
+    }
+
+    /**
+     * TkMethods can return 405 status when acting on unknown method.
+     * @throws IOException If any I/O error occurs
+     */
+    @Test
+    public void returnsMethodIsNotAllowedForUnsupportedMethods() throws
+        IOException {
+        new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(
+            url -> new JdkRequest(url)
+                .method(RqMethod.POST)
+                .fetch().as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_BAD_METHOD)
         );
     }
 }
