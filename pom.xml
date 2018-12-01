@@ -373,8 +373,14 @@ SOFTWARE.
               @todo #837:30min Upgrade qulice to latest 0.17.x and if possible
                to latest 0.18.x and fix all the issues it detects for the build
                to pass. In 0.17.6, some changes impact a lot of file, while in
-               0.18 there should be less new issues. Don't forget about the it
+               0.18 there should be less new issues. Don't forget about the IT
                test ran by maven-invoker-plugin.
+              @todo #837:30min Finish the upgrade to qulice 0.17.5 by reviewing
+               all diamond usage: it was required until now to explicit the
+               type in generics but it is not needed anymore. For example in
+               BkTimetable line 65, new ConcurrentHashMap<Thread, Long>(1)
+               should be new ConcurrentHashMap<>(1). There are around 70
+               cases like that.
             -->
             <version>${qulice.version}</version>
             <configuration>
