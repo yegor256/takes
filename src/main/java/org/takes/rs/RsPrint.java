@@ -169,10 +169,9 @@ public final class RsPrint extends RsWrap {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final InputStream body = this.body();
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        try {
+        try (final InputStream body = this.body()) {
             while (true) {
                 final int bytes = body.read(buf);
                 if (bytes < 0) {
