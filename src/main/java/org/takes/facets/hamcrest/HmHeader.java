@@ -111,9 +111,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
     public boolean matchesSafely(final T item) {
         try {
             final Iterator<String> headers = HmHeader.headers(item).iterator();
-            if (headers.hasNext()) {
-                headers.next();
-            }
             final Collection<String> values = new ArrayList<>(0);
             while (headers.hasNext()) {
                 final String[] parts = HmHeader.split(headers.next());
