@@ -88,12 +88,15 @@ public final class RsPrintTest {
             new RsPrint(new RsText(input))
                 .printBody(output);
         } catch (final IOException ex) {
-            if (!ex.equals(exception)) {
-                throw ex;
-            }
+            MatcherAssert.assertThat(
+                "Wrong exception",
+                ex,
+                new IsEqual<>(exception)
+            );
         }
         MatcherAssert.assertThat(
-            input.haveClosed(),
+            "Input body was not closed",
+            input.isClosed(),
             new IsEqual<>(true)
         );
     }
@@ -262,7 +265,7 @@ public final class RsPrintTest {
          * Have input been closed?
          * @return True, if input wes closed, false - otherwise
          */
-        public boolean haveClosed() {
+        public boolean isClosed() {
             return this.closed;
         }
     }
