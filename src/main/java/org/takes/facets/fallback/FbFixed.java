@@ -59,7 +59,7 @@ public final class FbFixed extends FbWrap {
                 @Override
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
-                    return new Opt.Single<Response>(take.act(req));
+                    return new Opt.Single<>(take.act(req));
                 }
             }
         );

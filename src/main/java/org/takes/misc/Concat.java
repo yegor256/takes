@@ -61,7 +61,7 @@ public final class Concat<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Concat.ConcatIterator<T>(
+        return new Concat.ConcatIterator<>(
             this.left.iterator(),
             this.right.iterator()
         );

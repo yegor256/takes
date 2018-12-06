@@ -126,7 +126,7 @@ public final class PsTwitter implements Pass {
     @Override
     public Opt<Identity> enter(final Request request)
         throws IOException {
-        return new Opt.Single<Identity>(this.identity(this.fetch()));
+        return new Opt.Single<>(this.identity(this.fetch()));
     }
 
     @Override

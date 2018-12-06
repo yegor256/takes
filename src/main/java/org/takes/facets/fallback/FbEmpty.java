@@ -45,7 +45,7 @@ public final class FbEmpty extends FbWrap {
             new Fallback() {
                 @Override
                 public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<Response>();
+                    return new Opt.Empty<>();
                 }
             }
         );

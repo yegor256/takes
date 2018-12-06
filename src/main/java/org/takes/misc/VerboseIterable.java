@@ -55,6 +55,6 @@ public final class VerboseIterable<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new VerboseIterator<T>(this.origin.iterator(), this.error);
+        return new VerboseIterator<>(this.origin.iterator(), this.error);
     }
 }

@@ -159,7 +159,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 new EnglishLowerCase(parts[0].trim()).string()
             );
             if (!map.containsKey(key)) {
-                map.put(key, new LinkedList<String>());
+                map.put(key, new LinkedList<>());
             }
             map.get(key).add(RqFormBase.decode(parts[1].trim()));
         }

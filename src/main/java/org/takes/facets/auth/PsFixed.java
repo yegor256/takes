@@ -53,7 +53,7 @@ public final class PsFixed implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) {
-        return new Opt.Single<Identity>(this.user);
+        return new Opt.Single<>(this.user);
     }
 
     @Override

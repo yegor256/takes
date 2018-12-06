@@ -56,10 +56,10 @@ public final class RsWithoutHeader extends RsWrap {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
-                    return new Filtered<String>(
+                    return new Filtered<>(
                         (header) -> {
                             return !new EnglishLowerCase(header).string()
-                            .startsWith(prefix);
+                                .startsWith(prefix);
                         },
                         res.head()
                     );

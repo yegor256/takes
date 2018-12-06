@@ -134,9 +134,9 @@ public final class FkHitRefresh implements Fork {
                 this.exec.run();
                 this.handle.touch();
             }
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Opt.Single<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

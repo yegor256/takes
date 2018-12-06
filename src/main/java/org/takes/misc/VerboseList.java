@@ -75,7 +75,7 @@ public final class VerboseList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new VerboseIterator<T>(this.origin.iterator(), this.message);
+        return new VerboseIterator<>(this.origin.iterator(), this.message);
     }
 
     @Override
