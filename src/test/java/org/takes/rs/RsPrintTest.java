@@ -24,17 +24,22 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
  * Test case for {@link RsPrint}.
  * @since 0.8
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class RsPrintTest {
 
     /**
@@ -65,6 +70,30 @@ public final class RsPrintTest {
         MatcherAssert.assertThat(
             output.haveFlushed(),
             Matchers.is(true)
+        );
+    }
+
+    /**
+     * RsPrint can close body contents even when exception happens.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void closeBodyEvenWhenExceptionHappens() throws IOException {
+        final IOException exception = new IOException("Smth went wrong");
+        final FailOutputStream output = new FailOutputStream(exception);
+        final FakeInput input = new FakeInput(new InputStreamOf("abc"));
+        try {
+            new RsPrint(new RsText(input))
+                .printBody(output);
+        } catch (final IOException ex) {
+            if (!ex.equals(exception)) {
+                throw ex;
+            }
+        }
+        MatcherAssert.assertThat(
+            "Input body was not closed",
+            input.isClosed(),
+            new IsEqual<>(true)
         );
     }
 
@@ -182,6 +211,54 @@ public final class RsPrintTest {
          */
         public boolean haveFlushed() {
             return this.flushed;
+        }
+    }
+
+    /**
+     * Fake wrapper for InputStream to make sure body is closed.
+     *
+     * @author Alena Gerasimova (olena.gerasimova@gmail.com)
+     * @version $Id$
+     * @since 2.0
+     */
+    private static final class FakeInput extends InputStream {
+
+        /**
+         * Have input been closed?
+         */
+        private boolean closed;
+
+        /**
+         * Origin.
+         */
+        private final InputStream origin;
+
+        /**
+         * Ctor.
+         * @param origin Origin input
+         */
+        FakeInput(final InputStream origin) {
+            super();
+            this.origin = origin;
+        }
+
+        @Override
+        public int read() throws IOException {
+            return this.origin.read();
+        }
+
+        @Override
+        public void close() throws IOException {
+            this.origin.close();
+            this.closed = true;
+        }
+
+        /**
+         * Have input been closed?
+         * @return True, if input wes closed, false - otherwise
+         */
+        public boolean isClosed() {
+            return this.closed;
         }
     }
 }
