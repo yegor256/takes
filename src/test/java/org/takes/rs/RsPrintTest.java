@@ -88,11 +88,9 @@ public final class RsPrintTest {
             new RsPrint(new RsText(input))
                 .printBody(output);
         } catch (final IOException ex) {
-            MatcherAssert.assertThat(
-                "Wrong exception",
-                ex,
-                new IsEqual<>(exception)
-            );
+            if (!ex.equals(exception)) {
+                throw ex;
+            }
         }
         MatcherAssert.assertThat(
             "Input body was not closed",
