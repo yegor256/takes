@@ -26,9 +26,10 @@ package org.takes.facets.auth.social;
 import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.Map;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.text.RandomStringGenerator;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -52,15 +53,20 @@ public class PsFacebookTest {
     @Test
     public final void canLogin() throws Exception {
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
+        final RandomStringGenerator generator =
+            new RandomStringGenerator.Builder()
+                .filteredBy(
+                    Character::isLetterOrDigit, Character::isIdeographic
+                ).build();
         final Pass pass = new PsFacebook(
             new FakeRequest(
                 200,
                 "HTTP OK",
-                Collections.<Map.Entry<String, String>>emptyList(),
+                Collections.emptyList(),
                 String.format(
                     "access_token=%s",
                     RandomStringUtils.randomAlphanumeric(10)
-                ).getBytes("utf-8")
+                ).getBytes(StandardCharsets.UTF_8)
             ),
             new DefaultWebRequestor() {
                 @Override
@@ -70,13 +76,13 @@ public class PsFacebookTest {
                         String.format(
                             "{\"id\":\"%s\",\"name\":\"%s\"}",
                             identifier,
-                            RandomStringUtils.random(10)
+                            generator.generate(10)
                         )
                     );
                 }
             },
-            RandomStringUtils.random(10),
-            RandomStringUtils.random(10)
+            generator.generate(10),
+            generator.generate(10)
         );
         final Opt<Identity> identity = pass.enter(
             new RqFake(

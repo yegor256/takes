@@ -244,7 +244,13 @@ SOFTWARE.
       <version>2.6</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.4</version>
+    </dependency>
   </dependencies>
+  
   <build>
     <testResources>
       <testResource>
@@ -375,12 +381,6 @@ SOFTWARE.
                to pass. In 0.17.6, some changes impact a lot of file, while in
                0.18 there should be less new issues. Don't forget about the IT
                test ran by maven-invoker-plugin.
-              @todo #837:30min Finish the upgrade to qulice 0.17.5 by reviewing
-               all diamond usage: it was required until now to explicit the
-               type in generics but it is not needed anymore. For example in
-               BkTimetable line 65, new ConcurrentHashMap<Thread, Long>(1)
-               should be new ConcurrentHashMap<>(1). There are around 70
-               cases like that.
             -->
             <version>${qulice.version}</version>
             <configuration>
