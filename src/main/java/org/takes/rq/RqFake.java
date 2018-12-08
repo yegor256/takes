@@ -116,6 +116,7 @@ public final class RqFake extends RqWrap {
                 public Iterable<String> head() {
                     return Collections.unmodifiableList(head);
                 }
+
                 @Override
                 public InputStream body() {
                     return body;

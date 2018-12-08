@@ -140,6 +140,7 @@ public final class PsByFlag implements Pass {
          * Serialization marker.
          */
         private static final long serialVersionUID = 7362482770166663015L;
+
         /**
          * Ctor.
          * @param key Key
@@ -148,6 +149,7 @@ public final class PsByFlag implements Pass {
         public Pair(final String key, final Pass pass) {
             this(Pattern.compile(Pattern.quote(key)), pass);
         }
+
         /**
          * Ctor.
          * @param key Key

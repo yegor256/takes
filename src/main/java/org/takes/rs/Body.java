@@ -25,7 +25,6 @@ package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -88,7 +87,7 @@ interface Body {
 
         @Override
         public int length() throws IOException {
-            try (final InputStream input = this.url.openStream()) {
+            try (InputStream input = this.url.openStream()) {
                 return input.available();
             }
         }
@@ -208,7 +207,7 @@ interface Body {
 
         @Override
         public InputStream input() throws IOException {
-            return new FileInputStream(this.file());
+            return Files.newInputStream(this.file().toPath());
         }
 
         @Override
@@ -240,7 +239,7 @@ interface Body {
             synchronized (this.file) {
                 if (!this.file.exists()) {
                     this.file.deleteOnExit();
-                    try (final InputStream content = this.body.input()) {
+                    try (InputStream content = this.body.input()) {
                         Files.copy(
                             content,
                             Paths.get(this.file.getAbsolutePath()),

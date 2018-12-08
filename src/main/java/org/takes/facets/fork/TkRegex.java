@@ -56,10 +56,12 @@ public interface TkRegex {
          * Original take, expecting {@link RqRegex}.
          */
         private final TkRegex origin;
+
         /**
          * Matcher.
          */
         private final Matcher matcher;
+
         /**
          * Ctor.
          * @param rgx Original destination
@@ -70,6 +72,7 @@ public interface TkRegex {
             final CharSequence query) {
             this(rgx, Pattern.compile(ptn).matcher(query));
         }
+
         /**
          * Ctor.
          * @param rgx Original destination
@@ -79,6 +82,7 @@ public interface TkRegex {
             this.origin = rgx;
             this.matcher = mtr;
         }
+
         @Override
         public Response act(final Request req) throws IOException {
             return this.origin.act(new RqRegex.Fake(req, this.matcher));

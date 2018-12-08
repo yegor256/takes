@@ -47,6 +47,7 @@ public final class RsLogout extends RsWrap {
     public RsLogout(final Response res) {
         this(res, PsCookie.class.getSimpleName());
     }
+
     /**
      * Ctor.
      * @param res Original response

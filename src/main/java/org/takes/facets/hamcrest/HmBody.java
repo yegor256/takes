@@ -115,9 +115,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
     public boolean matchesSafely(final T item) {
         boolean result = true;
         try (
-            final InputStream val = new BufferedInputStream(
-                HmBody.itemBody(item)
-            )
+            InputStream val = new BufferedInputStream(HmBody.itemBody(item))
         ) {
             int left = this.body.read();
             while (left != -1) {
@@ -157,7 +155,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
     @SuppressWarnings("PMD.AssignmentInOperand")
     private static byte[] asBytes(final InputStream input) throws IOException {
         input.reset();
-        try (final ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             // @checkstyle MagicNumberCheck (1 line)
             final byte[] buffer = new byte[1024];
             int read;

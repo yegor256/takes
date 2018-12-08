@@ -67,6 +67,7 @@ public final class RsFork extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return RsFork.pick(req, list).head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RsFork.pick(req, list).body();

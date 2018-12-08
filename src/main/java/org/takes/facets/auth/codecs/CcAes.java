@@ -71,6 +71,7 @@ public final class CcAes implements Codec {
      * The encryption key.
      */
     private final Key key;
+
     /**
      * Random.
      */
@@ -86,6 +87,7 @@ public final class CcAes implements Codec {
     public CcAes(final Codec codec, final String key) {
         this(codec, key.getBytes(Charset.defaultCharset()));
     }
+
     /**
      * Constructor for the class.
      *

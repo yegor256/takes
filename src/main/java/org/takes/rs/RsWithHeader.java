@@ -107,6 +107,7 @@ public final class RsWithHeader extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return RsWithHeader.extend(res.head(), header.toString());
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return res.body();

@@ -24,9 +24,9 @@
 package org.takes.facets.fork;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -213,8 +213,8 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         public void touch() throws IOException {
-            try (final OutputStream out = new FileOutputStream(
-                this.touchedFile()
+            try (OutputStream out = Files.newOutputStream(
+                this.touchedFile().toPath()
             )) {
                 out.write('+');
             }

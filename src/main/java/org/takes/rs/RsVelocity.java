@@ -115,6 +115,7 @@ public final class RsVelocity extends RsWrap {
         Object> params) {
         this(".", template, params);
     }
+
     /**
      * Ctor.
      * @param folder Template folder
@@ -140,6 +141,7 @@ public final class RsVelocity extends RsWrap {
                 public Iterable<String> head() {
                     return new RsEmpty().head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RsVelocity.render(folder, template, params.get());
@@ -214,6 +216,7 @@ public final class RsVelocity extends RsWrap {
          * Serialization marker.
          */
         private static final long serialVersionUID = 7362489770169963015L;
+
         /**
          * Ctor.
          * @param key Key

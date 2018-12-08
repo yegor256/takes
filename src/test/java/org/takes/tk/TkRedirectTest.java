@@ -43,6 +43,7 @@ public final class TkRedirectTest {
      * Constant variable for HTTP header testing.
      */
     private static final String LOCATION = "Location: %1$s";
+
     /**
      * New line constant.
      */

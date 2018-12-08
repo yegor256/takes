@@ -84,7 +84,7 @@ SOFTWARE.
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
-    <qulice.version>0.17.5</qulice.version>
+    <qulice.version>0.18.5</qulice.version>
   </properties>
   <dependencies>
     <!--
@@ -386,13 +386,6 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <!--
-              @todo #837:30min Upgrade qulice to latest 0.17.x and if possible
-               to latest 0.18.x and fix all the issues it detects for the build
-               to pass. In 0.17.6, some changes impact a lot of file, while in
-               0.18 there should be less new issues. Don't forget about the IT
-               test ran by maven-invoker-plugin.
-            -->
             <version>${qulice.version}</version>
             <configuration>
               <excludes combine.children="append">

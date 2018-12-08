@@ -76,38 +76,46 @@ public final class RqMtBase implements RqMultipart {
      * The encoding used to create the request.
      */
     private static final Charset ENCODING = Charset.forName("UTF-8");
+
     /**
      * Pattern to get boundary from header.
      */
     private static final Pattern BOUNDARY = Pattern.compile(
         ".*[^a-z]boundary=([^;]+).*"
     );
+
     /**
      * Pattern to get name from header.
      */
     private static final Pattern NAME = Pattern.compile(
         ".*[^a-z]name=\"([^\"]+)\".*"
     );
+
     /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * Map of params and values.
      */
     private final Map<String, List<Request>> map;
+
     /**
      * Internal buffer.
      */
     private final ByteBuffer buffer;
+
     /**
      * InputStream based on request body.
      */
     private final InputStream stream;
+
     /**
      * Original request.
      */
     private final Request origin;
+
     /**
      * Ctor.
      * @param req Original request
@@ -123,6 +131,7 @@ public final class RqMtBase implements RqMultipart {
         );
         this.map = this.requests(req);
     }
+
     @Override
     public Iterable<Request> part(final CharSequence name) {
         final List<Request> values = this.map
@@ -147,6 +156,7 @@ public final class RqMtBase implements RqMultipart {
         }
         return iter;
     }
+
     @Override
     public Iterable<String> names() {
         return this.map.keySet();
@@ -215,6 +225,7 @@ public final class RqMtBase implements RqMultipart {
         }
         return RqMtBase.asMap(requests);
     }
+
     /**
      * Make a request.
      *  Scans the origin request until the boundary reached. Caches
@@ -247,6 +258,7 @@ public final class RqMtBase implements RqMultipart {
         }
         return new RqTemp(file);
     }
+
     /**
      * Copy until boundary reached.
      * @param target Output file channel
@@ -293,6 +305,7 @@ public final class RqMtBase implements RqMultipart {
             target.write(btarget);
         }
     }
+
     /**
      * Convert a list of requests to a map.
      * @param reqs Requests

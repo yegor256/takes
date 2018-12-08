@@ -44,10 +44,12 @@ public final class BkTimeable extends Thread implements Back {
      * Original back.
      */
     private final Back back;
+
     /**
      * Maximum latency in milliseconds.
      */
     private final long latency;
+
     /**
      * Threads storage.
      */

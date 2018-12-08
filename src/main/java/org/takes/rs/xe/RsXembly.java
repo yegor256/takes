@@ -122,6 +122,7 @@ public final class RsXembly extends RsWrap {
                         "text/xml"
                     ).head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RsXembly.render(dom, src);

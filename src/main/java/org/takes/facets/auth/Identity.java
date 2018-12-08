@@ -43,10 +43,12 @@ public interface Identity {
         public String toString() {
             return "anonymous";
         }
+
         @Override
         public String urn() {
             throw new UnsupportedOperationException("#urn()");
         }
+
         @Override
         public Map<String, String> properties() {
             throw new UnsupportedOperationException("#properties()");
@@ -73,10 +75,12 @@ public interface Identity {
          * URN.
          */
         private final String name;
+
         /**
          * Map of properties.
          */
         private final Map<String, String> props;
+
         /**
          * Ctor.
          * @param urn URN of the identity
@@ -84,6 +88,7 @@ public interface Identity {
         public Simple(final String urn) {
             this(urn, Collections.<String, String>emptyMap());
         }
+
         /**
          * Ctor.
          * @param urn URN of the identity
@@ -93,10 +98,12 @@ public interface Identity {
             this.name = urn;
             this.props = Collections.unmodifiableMap(map);
         }
+
         @Override
         public String urn() {
             return this.name;
         }
+
         @Override
         public Map<String, String> properties() {
             return Collections.unmodifiableMap(this.props);

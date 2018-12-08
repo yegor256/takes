@@ -83,6 +83,7 @@ public final class RsWithStatus extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return RsWithStatus.head(res, code, rsn);
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return res.body();

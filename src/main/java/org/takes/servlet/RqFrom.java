@@ -42,6 +42,7 @@ final class RqFrom implements Request {
      * Servlet request.
      */
     private final HttpServletRequest sreq;
+
     /**
      * Ctor.
      * @param request Servlet request
@@ -94,6 +95,7 @@ final class RqFrom implements Request {
          * Servlet request.
          */
         private final HttpServletRequest req;
+
         /**
          * Ctor.
          * @param request Servlet request
@@ -129,10 +131,12 @@ final class RqFrom implements Request {
          * Default http port.
          */
         private static final int PORT_DEFAULT = 80;
+
         /**
          * Servlet request.
          */
         private final HttpServletRequest req;
+
         /**
          * Ctor.
          * @param request Servlet request.

@@ -63,6 +63,7 @@ public final class RqLengthAware extends RqWrap {
                 public Iterable<String> head() throws IOException {
                     return req.head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RqLengthAware.cap(req);

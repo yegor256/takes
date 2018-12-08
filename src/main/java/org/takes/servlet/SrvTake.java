@@ -49,10 +49,12 @@ public final class SrvTake extends HttpServlet {
      * Id for serializable.
      */
     private static final long serialVersionUID = -8119918127398448635L;
+
     /**
      * Take, initialize in {@link #init()}.
      */
     private final AtomicReference<Take> tke;
+
     /**
      * Ctor.
      */
@@ -62,6 +64,7 @@ public final class SrvTake extends HttpServlet {
     }
 
     @Override
+    @SuppressWarnings("PMD.CyclomaticComplexity")
     public void init() throws ServletException {
         super.init();
         final String cname = this.getServletConfig()

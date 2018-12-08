@@ -84,6 +84,7 @@ public interface RqHeaders extends Request {
         public Base(final Request req) {
             super(req);
         }
+
         @Override
         public List<String> header(final CharSequence key)
             throws IOException {
@@ -115,10 +116,12 @@ public interface RqHeaders extends Request {
             }
             return list;
         }
+
         @Override
         public Set<String> names() throws IOException {
             return this.map().keySet();
         }
+
         /**
          * Parse them all in a map.
          *
@@ -170,6 +173,7 @@ public interface RqHeaders extends Request {
          * Original.
          */
         private final RqHeaders origin;
+
         /**
          * Ctor.
          * @param req Original request
@@ -177,6 +181,7 @@ public interface RqHeaders extends Request {
         public Smart(final RqHeaders req) {
             this.origin = req;
         }
+
         /**
          * Ctor.
          * @param req Original request
@@ -184,23 +189,28 @@ public interface RqHeaders extends Request {
         public Smart(final Request req) {
             this(new RqHeaders.Base(req));
         }
+
         @Override
         public List<String> header(final CharSequence name)
             throws IOException {
             return this.origin.header(name);
         }
+
         @Override
         public Set<String> names() throws IOException {
             return this.origin.names();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.origin.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
         }
+
         /**
          * Get single header or throw HTTP exception.
          * @param name Name of header
@@ -220,6 +230,7 @@ public interface RqHeaders extends Request {
             }
             return params.next();
         }
+
         /**
          * If header is present, returns the first header value.
          * If not, returns a default value.

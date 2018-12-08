@@ -94,7 +94,7 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
      * @return InputStream of body
      * @throws IOException If some problem inside
      */
-    protected abstract InputStream itemBody(final T item) throws IOException;
+    protected abstract InputStream itemBody(T item) throws IOException;
 
     /**
      * Text from item.
@@ -106,8 +106,8 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
     private String text(final T item) throws IOException {
         final String text;
         try (
-            final InputStream input = this.itemBody(item);
-            final ByteArrayOutputStream output = new ByteArrayOutputStream()
+            InputStream input = this.itemBody(item);
+            ByteArrayOutputStream output = new ByteArrayOutputStream()
         ) {
             // @checkstyle MagicNumberCheck (1 line)
             final byte[] buffer = new byte[1024];

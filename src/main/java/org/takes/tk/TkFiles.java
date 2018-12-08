@@ -24,9 +24,9 @@
 package org.takes.tk;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.HttpException;
@@ -89,7 +89,7 @@ public final class TkFiles extends TkWrap {
                             )
                         );
                     }
-                    return new RsWithBody(new FileInputStream(file));
+                    return new RsWithBody(Files.newInputStream(file.toPath()));
                 }
             }
         );

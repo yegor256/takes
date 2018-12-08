@@ -134,7 +134,7 @@ public final class PsToken implements Pass {
             tocheck.put(jwtheader).put(".".getBytes()).put(jwtpayload);
             final byte[] checked = this.signature.sign(tocheck.array());
             if (Arrays.equals(jwtsign, checked)) {
-                try (final JsonReader rdr = Json.createReader(
+                try (JsonReader rdr = Json.createReader(
                     new StringReader(
                         new String(Base64.getDecoder().decode(jwtpayload))
                     )
@@ -164,7 +164,7 @@ public final class PsToken implements Pass {
         tosign.put(".".getBytes());
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
-        try (final JsonReader reader = Json.createReader(res.body())) {
+        try (JsonReader reader = Json.createReader(res.body())) {
             final JsonObject target = Json.createObjectBuilder()
                 .add("response", reader.read())
                 .add(

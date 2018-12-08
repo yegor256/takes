@@ -79,10 +79,12 @@ public final class TkForward implements Take {
          * Original response.
          */
         private final Response origin;
+
         /**
          * Saved response.
          */
         private final List<Response> saved;
+
         /**
          * Ctor.
          * @param res Original response
@@ -91,14 +93,17 @@ public final class TkForward implements Take {
             this.origin = res;
             this.saved = new CopyOnWriteArrayList<>();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.load().head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.load().body();
         }
+
         /**
          * Load it.
          * @return Response

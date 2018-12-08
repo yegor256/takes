@@ -52,6 +52,7 @@ public final class RsBuffered extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return res.head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return new BufferedInputStream(res.body());

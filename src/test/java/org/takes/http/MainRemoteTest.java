@@ -90,6 +90,7 @@ public final class MainRemoteTest {
         private DemoApp() {
             // it's a utility class
         }
+
         /**
          * Main entry point.
          * @param args Command line args
@@ -110,6 +111,7 @@ public final class MainRemoteTest {
         private DemoAppArgs() {
             // it's a utility class
         }
+
         /**
          * Main entry point.
          * @param args Command line args

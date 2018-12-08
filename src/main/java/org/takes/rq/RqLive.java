@@ -94,6 +94,7 @@ public final class RqLive extends RqWrap {
             public Iterable<String> head() {
                 return head;
             }
+
             @Override
             public InputStream body() {
                 return input;

@@ -59,12 +59,9 @@ public final class FbStatus extends FbWrap {
      * @since 0.16.10
      */
     public FbStatus(final int code) {
-        this(
-            new Filtered<>(
-                (value) -> code == value.intValue(), code
-            )
-        );
+        this(new Filtered<>(value -> code == value.intValue(), code));
     }
+
     /**
      * Ctor.
      * @param check HTTP status code predicate
@@ -92,6 +89,7 @@ public final class FbStatus extends FbWrap {
             }
         });
     }
+
     /**
      * Ctor.
      * @param code HTTP status code
@@ -127,9 +125,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Fallback fallback) {
         this(
-            new Filtered<>(
-                (status) -> code == status.intValue(), code
-            ),
+            new Filtered<>(status -> code == status.intValue(), code),
             fallback
         );
     }
@@ -141,9 +137,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Scalar<Fallback> fallback) {
         this(
-            new Filtered<>(
-                (status) -> code == status.intValue(), code
-            ),
+            new Filtered<>(status -> code == status.intValue(), code),
             fallback
         );
     }
@@ -164,6 +158,7 @@ public final class FbStatus extends FbWrap {
             }
         );
     }
+
     /**
      * Ctor.
      * @param check Check

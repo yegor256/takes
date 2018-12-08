@@ -99,6 +99,7 @@ public final class RqHeadersTest {
             Matchers.equalTo("www.takes.com")
         );
     }
+
     /**
      * RqHeaders.Smart can return a default header.
      * @throws IOException If some problem inside

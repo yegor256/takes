@@ -63,10 +63,12 @@ public interface RqRegex extends Request {
          * Original request.
          */
         private final Request request;
+
         /**
          * Matcher.
          */
         private final Matcher mtr;
+
         /**
          * Ctor.
          * @param ptn Pattern
@@ -75,6 +77,7 @@ public interface RqRegex extends Request {
         public Fake(final String ptn, final CharSequence query) {
             this(new RqFake(), ptn, query);
         }
+
         /**
          * Ctor.
          * @param req Request
@@ -85,6 +88,7 @@ public interface RqRegex extends Request {
             final CharSequence query) {
             this(req, Pattern.compile(ptn).matcher(query));
         }
+
         /**
          * Ctor.
          * @param req Request
@@ -94,6 +98,7 @@ public interface RqRegex extends Request {
             this.request = req;
             this.mtr = matcher;
         }
+
         @Override
         public Matcher matcher() {
             if (!this.mtr.matches()) {
@@ -107,10 +112,12 @@ public interface RqRegex extends Request {
             }
             return this.mtr;
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.request.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.request.body();
