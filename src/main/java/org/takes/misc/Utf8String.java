@@ -28,6 +28,11 @@ import java.nio.charset.Charset;
 /**
  * String that uses UTF-8 encoding for all byte operations.
  * @since 0.33
+ * @todo #804:30min Make this implements Cactoos Bytes and Text
+ *  and make the places in Takes that use it be able to directly
+ *  take either a Bytes or a Text depending on the situation.
+ *  For example RsWithBody should take Bytes and Text in its constructors.
+ *  Also reimplement this class with BytesOf.
  */
 public final class Utf8String {
 

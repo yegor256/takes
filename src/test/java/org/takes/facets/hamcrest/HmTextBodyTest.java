@@ -95,7 +95,7 @@ public final class HmTextBodyTest {
 
         @Override
         public InputStream itemBody(final Text item) throws IOException {
-            return new InputStreamOf(item.asString());
+            return new InputStreamOf(item);
         }
     }
 }

@@ -38,6 +38,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * The body of a response used by {@link RsWithBody}.
  *
  * @since 0.32
+ * @todo #804:30min Make Body extends Cactoos's Input and replace input method
+ *  with stream method. Once this is done, rewrite the tests (such as BodyTest)
+ *  so that they do not use guava but Cactoos objects and cactoos-matchers
+ *  InputHasContent. When there is no more need for the method input,
+ *  remove it.
  */
 @SuppressWarnings("PMD.TooManyMethods")
 interface Body {
