@@ -256,6 +256,12 @@ SOFTWARE.
       <version>2.6</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.3.1</version>
+        <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <testResources>
