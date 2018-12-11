@@ -36,9 +36,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.log.NullLogChute;
 import org.takes.Response;
+import org.takes.Scalar;
 import org.takes.misc.Utf8InputStreamReader;
 import org.takes.misc.Utf8OutputStreamWriter;
 import org.takes.misc.Utf8String;
@@ -124,6 +123,17 @@ public final class RsVelocity extends RsWrap {
      */
     public RsVelocity(final String folder,
         final InputStream template, final Map<CharSequence, Object> params) {
+        this(folder, template, () -> RsVelocity.convert(params));
+    }
+
+    /**
+     * Ctor.
+     * @param folder Template folder
+     * @param template Template
+     * @param params Map of params
+     */
+    public RsVelocity(final String folder,
+        final InputStream template, final Scalar<Map<String, Object>> params) {
         super(
             new Response() {
                 @Override
@@ -132,7 +142,7 @@ public final class RsVelocity extends RsWrap {
                 }
                 @Override
                 public InputStream body() throws IOException {
-                    return RsVelocity.render(folder, template, params);
+                    return RsVelocity.render(folder, template, params.get());
                 }
             }
         );
@@ -148,14 +158,10 @@ public final class RsVelocity extends RsWrap {
      */
     private static InputStream render(final String folder,
         final InputStream template,
-        final Map<CharSequence, Object> params) throws IOException {
+        final Map<String, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Writer writer = new Utf8OutputStreamWriter(baos);
         final VelocityEngine engine = new VelocityEngine();
-        engine.setProperty(
-            RuntimeConstants.RUNTIME_LOG_LOGSYSTEM,
-            new NullLogChute()
-        );
         engine.setProperty(
             "file.resource.loader.path",
             folder
@@ -181,6 +187,20 @@ public final class RsVelocity extends RsWrap {
         final Map<CharSequence, Object> map = new HashMap<>(entries.length);
         for (final Map.Entry<CharSequence, Object> ent : entries) {
             map.put(ent.getKey(), ent.getValue());
+        }
+        return map;
+    }
+
+    /**
+     * Converts Map of CharSequence, Object to Map of String, Object.
+     * @param params Parameters in Map of CharSequence, Object
+     * @return Map of String, Object.
+     */
+    private static Map<String, Object> convert(
+        final Map<CharSequence, Object> params) {
+        final Map<String, Object> map = new HashMap<>(params.size());
+        for (final Map.Entry<CharSequence, Object> ent : params.entrySet()) {
+            map.put(ent.getKey().toString(), ent.getValue());
         }
         return map;
     }
