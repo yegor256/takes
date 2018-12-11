@@ -20,8 +20,8 @@ install: |
   sudo gem install --no-rdoc --no-ri est
   sudo gem install --no-rdoc --no-ri xcop
 architect:
-- yegor256
 - paulodamaso
+- yegor256
 merge:
   script: |
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', pullRequestId: '${pull_id}'}" https://ci.appveyor.com/api/builds | jq -r '.version')
