@@ -51,7 +51,7 @@ public final class FbLog4j extends FbWrap {
                 public Opt<Response> route(final RqFallback req)
                     throws IOException {
                     FbLog4j.log(req);
-                    return new Opt.Empty<Response>();
+                    return new Opt.Empty<>();
                 }
             }
         );

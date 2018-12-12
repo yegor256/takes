@@ -98,7 +98,7 @@ public final class PsCookie implements Pass {
             .cookie(this.cookie).iterator();
         Opt<Identity> user = new Opt.Empty<>();
         if (cookies.hasNext()) {
-            user = new Opt.Single<Identity>(
+            user = new Opt.Single<>(
                 this.codec.decode(
                     new Utf8String(cookies.next()).bytes()
                 )

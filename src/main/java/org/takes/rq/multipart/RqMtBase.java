@@ -318,7 +318,7 @@ public final class RqMtBase implements RqMultipart {
             }
             final String name = matcher.group(1);
             if (!map.containsKey(name)) {
-                map.put(name, new LinkedList<Request>());
+                map.put(name, new LinkedList<>());
             }
             map.get(name).add(req);
         }

@@ -139,7 +139,7 @@ public final class PsToken implements Pass {
                         new String(Base64.getDecoder().decode(jwtpayload))
                     )
                 )) {
-                    user = new Opt.Single<Identity>(
+                    user = new Opt.Single<>(
                         new Identity.Simple(
                             rdr.readObject().getString(Token.Jwt.SUBJECT)
                         )

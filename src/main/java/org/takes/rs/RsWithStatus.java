@@ -111,11 +111,11 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        return new Concat<String>(
+        return new Concat<>(
             Collections.singletonList(
                 String.format("HTTP/1.1 %d %s", status, reason)
             ),
-            new Filtered<String>(
+            new Filtered<>(
                 item -> !item.startsWith("HTTP/"),
                 origin.head()
             )

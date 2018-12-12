@@ -63,7 +63,7 @@ public final class FkTypes implements Fork {
      * @param resp Response to return
      */
     public FkTypes(final String list, final Response resp) {
-        this(list, new Opt.Single<>(resp), new Opt.Empty<Take>());
+        this(list, new Opt.Single<>(resp), new Opt.Empty<>());
     }
 
     /**
@@ -72,7 +72,7 @@ public final class FkTypes implements Fork {
      * @param tke The take to use to build the response to return
      */
     public FkTypes(final String list, final Take tke) {
-        this(list, new Opt.Empty<Response>(), new Opt.Single<>(tke));
+        this(list, new Opt.Empty<>(), new Opt.Single<>(tke));
     }
 
     /**

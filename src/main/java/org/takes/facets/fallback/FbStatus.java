@@ -76,7 +76,7 @@ public final class FbStatus extends FbWrap {
             public Opt<Response> route(final RqFallback req)
                 throws IOException {
                 final Response res = new RsWithStatus(req.code());
-                return new Opt.Single<Response>(
+                return new Opt.Single<>(
                     new RsWithType(
                         new RsWithBody(
                             res,
@@ -127,7 +127,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Fallback fallback) {
         this(
-            new Filtered<Integer>(
+            new Filtered<>(
                 (status) -> code == status.intValue(), code
             ),
             fallback
@@ -141,7 +141,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Scalar<Fallback> fallback) {
         this(
-            new Filtered<Integer>(
+            new Filtered<>(
                 (status) -> code == status.intValue(), code
             ),
             fallback

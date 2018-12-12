@@ -168,7 +168,7 @@ public final class PsBasic implements Pass {
         public Opt<Identity> enter(final String usr, final String pwd) {
             final Opt<Identity> user;
             if (this.condition) {
-                user = new Opt.Single<Identity>(
+                user = new Opt.Single<>(
                     new Identity.Simple(
                         String.format("urn:basic:%s", usr)
                     )
@@ -229,7 +229,7 @@ public final class PsBasic implements Pass {
             final Opt<Identity> identity;
             if (urn.has()) {
                 try {
-                    identity = new Opt.Single<Identity>(
+                    identity = new Opt.Single<>(
                         new Identity.Simple(
                             URLDecoder.decode(
                                 urn.get(), PsBasic.Default.ENCODING

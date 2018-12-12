@@ -40,7 +40,7 @@ public final class PsEmpty implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) {
-        return new Opt.Empty<Identity>();
+        return new Opt.Empty<>();
     }
 
     @Override

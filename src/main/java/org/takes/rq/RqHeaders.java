@@ -149,7 +149,7 @@ public interface RqHeaders extends Request {
                     parts[0].trim()
                 ).string();
                 if (!map.containsKey(key)) {
-                    map.put(key, new LinkedList<String>());
+                    map.put(key, new LinkedList<>());
                 }
                 map.get(key).add(parts[1].trim());
             }

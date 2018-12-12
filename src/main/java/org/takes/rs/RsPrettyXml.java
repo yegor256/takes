@@ -82,7 +82,7 @@ public final class RsPrettyXml implements Response {
      * @param res Original response
      */
     public RsPrettyXml(final Response res) {
-        this.transformed = new CopyOnWriteArrayList<Response>();
+        this.transformed = new CopyOnWriteArrayList<>();
         this.origin = res;
         this.lock = new Object();
     }

@@ -62,7 +62,7 @@ public class Transform<T, K> implements Iterable<K> {
 
     @Override
     public final Iterator<K> iterator() {
-        return new TransformIterator<T, K>(this.list.iterator(), this.action);
+        return new TransformIterator<>(this.list.iterator(), this.action);
     }
 
     /**

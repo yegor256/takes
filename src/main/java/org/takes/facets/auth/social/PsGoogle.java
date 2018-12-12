@@ -154,7 +154,7 @@ public final class PsGoogle implements Pass {
                 "code is not provided by Google, probably some mistake"
             );
         }
-        return new Opt.Single<Identity>(this.fetch(this.token(code.next())));
+        return new Opt.Single<>(this.fetch(this.token(code.next())));
     }
 
     @Override

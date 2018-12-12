@@ -84,7 +84,7 @@ public final class RqLive extends RqWrap {
                 continue;
             }
             baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
-            data = RqLive.data(input, new Opt.Empty<Integer>(), true);
+            data = RqLive.data(input, new Opt.Empty<>(), true);
         }
         if (eof) {
             throw new IOException("empty request");
