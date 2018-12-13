@@ -45,7 +45,7 @@ public class TkMethods extends TkWrap {
      * @param take Original take
      * @param methods Methods the take should act
      */
-    public TkMethods(final Take take, final String ...methods) {
+    public TkMethods(final Take take, final String... methods) {
         super(
             new TkFork(
                 new FkMethods(Arrays.asList(methods), take),

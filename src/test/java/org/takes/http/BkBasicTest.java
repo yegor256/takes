@@ -140,6 +140,7 @@ public final class BkBasicTest {
                         public Iterable<String> head() throws IOException {
                             return Collections.singletonList("HTTP/1.1 200 OK");
                         }
+
                         @Override
                         public InputStream body() throws IOException {
                             return req.body();

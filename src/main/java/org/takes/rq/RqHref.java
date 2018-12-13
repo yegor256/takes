@@ -64,6 +64,7 @@ public interface RqHref extends Request {
         public Base(final Request req) {
             super(req);
         }
+
         @Override
         public Href href() throws IOException {
             final String uri = new RqRequestLine.Base(this).uri();
@@ -100,6 +101,7 @@ public interface RqHref extends Request {
          * Original.
          */
         private final RqHref origin;
+
         /**
          * Ctor.
          * @param req Original request
@@ -108,6 +110,7 @@ public interface RqHref extends Request {
         public Smart(final Request req) {
             this(new RqHref.Base(req));
         }
+
         /**
          * Ctor.
          * @param req Original request
@@ -115,18 +118,22 @@ public interface RqHref extends Request {
         public Smart(final RqHref req) {
             this.origin = req;
         }
+
         @Override
         public Href href() throws IOException {
             return this.origin.href();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.origin.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.origin.body();
         }
+
         /**
          * Get self.
          * @return Self page, full URL
@@ -143,6 +150,7 @@ public interface RqHref extends Request {
                 )
             );
         }
+
         /**
          * Get param or throw HTTP exception.
          * @param name Name of query param
@@ -161,6 +169,7 @@ public interface RqHref extends Request {
             }
             return params.next();
         }
+
         /**
          * Get param or default.
          * @param name Name of query param

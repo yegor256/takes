@@ -140,10 +140,10 @@ public final class BodyTest {
         try {
             final byte[] bytes =
                 new Utf8String("URL returnsCorrectInput!").bytes();
-            try (final InputStream input = new ByteArrayInputStream(bytes)) {
+            try (InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
-            try (final InputStream input =
+            try (InputStream input =
                 new Body.Url(file.toUri().toURL()).input()) {
                 MatcherAssert.assertThat(
                     ByteStreams.toByteArray(input),
@@ -165,7 +165,7 @@ public final class BodyTest {
         try {
             final byte[] bytes =
                 new Utf8String("URL returnsCorrectLength!").bytes();
-            try (final InputStream input = new ByteArrayInputStream(bytes)) {
+            try (InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
             MatcherAssert.assertThat(

@@ -143,7 +143,7 @@ public final class SiHmac implements Signature {
      *  for all unexpected exceptions
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
-        try (final Formatter formatter = new Formatter()) {
+        try (Formatter formatter = new Formatter()) {
             for (final byte byt : this.create().doFinal(bytes)) {
                 formatter.format("%02x", byt);
             }
@@ -165,13 +165,10 @@ public final class SiHmac implements Signature {
             final SecretKeySpec secret = new SecretKeySpec(
                 this.key, algo
             );
-            final Mac mac = Mac
-                .getInstance(algo);
+            final Mac mac = Mac.getInstance(algo);
             mac.init(secret);
             return mac;
-        } catch (final InvalidKeyException ex) {
-            throw new IOException(ex);
-        } catch (final NoSuchAlgorithmException ex) {
+        } catch (final NoSuchAlgorithmException | InvalidKeyException ex) {
             throw new IOException(ex);
         }
     }

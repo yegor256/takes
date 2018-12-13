@@ -49,6 +49,7 @@ public class RqSimple extends RqWrap {
                 public Iterable<String> head() {
                     return head;
                 }
+
                 @Override
                 public InputStream body() {
                     return body;

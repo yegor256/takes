@@ -71,6 +71,7 @@ public final class RsWithHeaders extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return RsWithHeaders.extend(res, headers);
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return res.body();

@@ -59,62 +59,77 @@ public final class PsGoogleTest {
      * Image.
      */
     private static final String IMAGE = "image";
+
     /**
      * GET.
      */
     private static final String GET = "GET";
+
     /**
      * Name.
      */
     private static final String NAME = "name";
+
     /**
      * Picture.
      */
     private static final String PICTURE = "picture";
+
     /**
      * Url.
      */
     private static final String URL = "url";
+
     /**
      * Act head.
      */
     private static final String ACT_HEAD = "GET /plus/v1/people/me";
+
     /**
      * Regex pattern.
      */
     private static final String REGEX_PATTERN = "/plus/v1/people/me";
+
     /**
      * Code parameter.
      */
     private static final String CODE_PARAM = "?code=code";
+
     /**
      * Code.
      */
     private static final String CODE = "code";
+
     /**
      * Google token parameter.
      */
     private static final String GOOGLE_TOKEN = "GoogleToken";
+
     /**
      * Avatar google url.
      */
     private static final String AVATAR = "https://google.com/img/avatar.gif";
+
     /**
      * XPath access_token string.
      */
     private static final String ACCESS_TOKEN = "access_token";
+
     /**
      * Account url.
      */
     private static final String ACCOUNT = "http://localhost/account";
+
     /**
      * Key request parameter.
      */
     private static final String KEY = "key";
+
     /**
      * App request parameter.
      */
     private static final String APP = "app";
+
     /**
      * PsGoogle login.
      * @checkstyle MultipleStringLiteralsCheck (100 lines)
@@ -192,6 +207,7 @@ public final class PsGoogleTest {
             }
         );
     }
+
     /**
      * PsGoogle login with fail due a bad response from google.
      * @checkstyle MultipleStringLiteralsCheck (100 lines)
@@ -242,6 +258,7 @@ public final class PsGoogleTest {
             }
         );
     }
+
     /**
      * Test a google response without the displayName property.
      * @checkstyle MultipleStringLiteralsCheck (100 lines)
@@ -317,6 +334,7 @@ public final class PsGoogleTest {
             }
         );
     }
+
     /**
      * Build a token request fork.
      * @return Returns the token request
@@ -387,6 +405,7 @@ public final class PsGoogleTest {
             Matchers.equalTo(value)
         );
     }
+
     /**
      * Construct a error response with google json syntax for errors.
      * @return Json with error.

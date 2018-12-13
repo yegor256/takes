@@ -63,7 +63,7 @@ public class PsAll implements Pass {
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
         } else {
-            result = new Opt.Empty<Identity>();
+            result = new Opt.Empty<>();
         }
         return result;
     }

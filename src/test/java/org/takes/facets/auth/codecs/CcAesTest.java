@@ -163,6 +163,7 @@ public final class CcAesTest {
          * Serial id.
          */
         private static final long serialVersionUID = 8646596235826414879L;
+
         /**
          * Ctor.
          * @param fake Bytes
@@ -177,14 +178,17 @@ public final class CcAesTest {
      */
     @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     private static final class FkRandomSpi extends SecureRandomSpi {
+
         /**
          * Serial id.
          */
         private static final long serialVersionUID = -5153681125995322457L;
+
         /**
          * Bytes.
          */
         private final byte[] fake;
+
         /**
          * Ctor.
          * @param fake Bytes

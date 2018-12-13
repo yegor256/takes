@@ -69,14 +69,17 @@ public interface RqFallback extends Request {
          * Original request.
          */
         private final Request request;
+
         /**
          * HTTP status code.
          */
         private final int status;
+
         /**
          * Throwable.
          */
         private final Throwable err;
+
         /**
          * Ctor.
          * @param code HTTP status code
@@ -84,6 +87,7 @@ public interface RqFallback extends Request {
         public Fake(final int code) {
             this(code, new HttpException(code));
         }
+
         /**
          * Ctor.
          * @param code HTTP status code
@@ -92,6 +96,7 @@ public interface RqFallback extends Request {
         public Fake(final int code, final Throwable error) {
             this(new RqFake(), code, error);
         }
+
         /**
          * Ctor.
          * @param req Request
@@ -103,18 +108,22 @@ public interface RqFallback extends Request {
             this.status = code;
             this.err = error;
         }
+
         @Override
         public int code() {
             return this.status;
         }
+
         @Override
         public Throwable throwable() {
             return this.err;
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return this.request.head();
         }
+
         @Override
         public InputStream body() throws IOException {
             return this.request.body();

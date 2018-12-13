@@ -47,23 +47,28 @@ public final class RqMtBaseTest {
      * Body element.
      */
     private static final String BODY_ELEMENT = "--AaB01x";
+
     /**
      * Content type.
      */
     private static final String CONTENT_TYPE =
         "Content-Type: multipart/form-data; boundary=AaB01x";
+
     /**
      * Form data.
      */
     private static final String FORM_DATA = "form-data; name=\"%s\"";
+
     /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
+
     /**
      * Content disposition plus form data.
      */

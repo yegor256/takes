@@ -185,7 +185,7 @@ public final class Href implements CharSequence {
         final List<String> values = this.params.get(key.toString());
         final Iterable<String> iter;
         if (values == null) {
-            iter = new VerboseIterable<String>(
+            iter = new VerboseIterable<>(
                 Collections.<String>emptyList(),
                 String.format(
                     "there are no URI params by name \"%s\" among %d others",
@@ -193,7 +193,7 @@ public final class Href implements CharSequence {
                 )
             );
         } else {
-            iter = new VerboseIterable<String>(
+            iter = new VerboseIterable<>(
                 values,
                 String.format(
                     "there are only %d URI params by name \"%s\"",
@@ -233,7 +233,7 @@ public final class Href implements CharSequence {
     public Href with(final Object key, final Object value) {
         final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
         if (!map.containsKey(key.toString())) {
-            map.put(key.toString(), new LinkedList<String>());
+            map.put(key.toString(), new LinkedList<>());
         }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri, map, this.fragment);
@@ -331,7 +331,7 @@ public final class Href implements CharSequence {
                     value = "";
                 }
                 if (!params.containsKey(key)) {
-                    params.put(key, new LinkedList<String>());
+                    params.put(key, new LinkedList<>());
                 }
                 params.get(key).add(value);
             }

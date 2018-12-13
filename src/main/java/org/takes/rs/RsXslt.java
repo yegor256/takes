@@ -106,6 +106,7 @@ public final class RsXslt extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return rsp.head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return RsXslt.transform(rsp.body(), resolver);
@@ -193,6 +194,7 @@ public final class RsXslt extends RsWrap {
         }
         return baos.toByteArray();
     }
+
     /**
      * Retrieve a stylesheet from this XML (throws an exception if
      * no stylesheet is attached).

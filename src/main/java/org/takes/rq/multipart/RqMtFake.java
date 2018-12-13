@@ -42,14 +42,17 @@ public final class RqMtFake implements RqMultipart {
      * Fake boundary constant.
      */
     private static final String BOUNDARY = "AaB02x";
+
     /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * Fake multipart request.
      */
     private final RqMultipart fake;
+
     /**
      * Fake ctor.
      * @param req Fake request header holder
@@ -62,22 +65,27 @@ public final class RqMtFake implements RqMultipart {
             new RqMtFake.FakeMultipartRequest(req, dispositions)
         );
     }
+
     @Override
     public Iterable<Request> part(final CharSequence name) {
         return this.fake.part(name);
     }
+
     @Override
     public Iterable<String> names() {
         return this.fake.names();
     }
+
     @Override
     public Iterable<String> head() throws IOException {
         return this.fake.head();
     }
+
     @Override
     public InputStream body() throws IOException {
         return this.fake.body();
     }
+
     /**
      * Fake body creator.
      * @param parts Fake request body parts
@@ -123,10 +131,12 @@ public final class RqMtFake implements RqMultipart {
          * Request object. Holds a value for the header.
          */
         private final Request req;
+
         /**
          * Holding multiple request body parts.
          */
         private final String parts;
+
         /**
          * The Constructor for the class.
          * @param rqst The Request object
@@ -138,6 +148,7 @@ public final class RqMtFake implements RqMultipart {
             this.req = rqst;
             this.parts = RqMtFake.fakeBody(list).toString();
         }
+
         @Override
         public Iterable<String> head() throws IOException {
             return new RqWithHeaders(
@@ -149,6 +160,7 @@ public final class RqMtFake implements RqMultipart {
                 String.format("Content-Length: %s", this.parts.length())
             ).head();
         }
+
         @Override
         public InputStream body() {
             return new ByteArrayInputStream(

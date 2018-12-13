@@ -40,14 +40,17 @@ public final class CcSigned implements Codec {
      * Origin codec.
      */
     private final Codec cdc;
+
     /**
      * MAC algorithm.
      */
     private final String alg;
+
     /**
      * Secret key.
      */
     private final Key key;
+
     /**
      * Ctor.
      * @param origin Origin codec

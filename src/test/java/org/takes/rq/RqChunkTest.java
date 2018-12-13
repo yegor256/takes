@@ -42,10 +42,12 @@ public final class RqChunkTest {
      * Chunked message header.
      */
     private static final String CHUNKED_HEADER = "Transfer-Encoding: chunked";
+
     /**
      * Carriage return.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * End of chunk byte.
      */

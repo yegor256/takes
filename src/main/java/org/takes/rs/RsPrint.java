@@ -184,7 +184,7 @@ public final class RsPrint extends RsWrap implements Text {
     public void printBody(final OutputStream output) throws IOException {
         //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        try (final InputStream body = this.body()) {
+        try (InputStream body = this.body()) {
             while (true) {
                 final int bytes = body.read(buf);
                 if (bytes < 0) {

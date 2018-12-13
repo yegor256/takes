@@ -24,8 +24,8 @@
 package org.takes.rq.multipart;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeader;
@@ -52,7 +52,10 @@ final class RqTemp extends RqWrap {
         super(
             new RqWithHeader(
                 new RqLive(
-                    new TempInputStream(new FileInputStream(file), file)
+                    new TempInputStream(
+                        Files.newInputStream(file.toPath()),
+                        file
+                    )
                 ),
                 "Content-Length",
                 String.valueOf(file.length())

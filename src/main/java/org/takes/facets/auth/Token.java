@@ -94,7 +94,7 @@ public interface Token {
         public byte[] encoded() throws IOException {
             return Base64.getEncoder().encode(this.joseo.toString().getBytes());
         }
-    };
+    }
 
     /**
      * JSON Web Token.
@@ -165,5 +165,5 @@ public interface Token {
         public byte[] encoded() throws IOException {
             return Base64.getEncoder().encode(this.jwto.toString().getBytes());
         }
-    };
+    }
 }

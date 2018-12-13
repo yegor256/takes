@@ -93,6 +93,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
             public boolean hasNext() {
                 return origin.hasNext();
             }
+
             @Override
             public XeSource next() {
                 try {
@@ -101,6 +102,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
                     throw new IllegalStateException(ex);
                 }
             }
+
             @Override
             public void remove() {
                 origin.remove();

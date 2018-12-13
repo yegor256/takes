@@ -88,9 +88,9 @@ public final class FkParams implements Fork {
         final Opt<Response> resp;
         if (params.hasNext()
             && this.pattern.matcher(params.next()).matches()) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Opt.Single<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

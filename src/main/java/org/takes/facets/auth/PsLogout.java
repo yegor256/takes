@@ -40,7 +40,7 @@ public final class PsLogout implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) {
-        return new Opt.Single<Identity>(Identity.ANONYMOUS);
+        return new Opt.Single<>(Identity.ANONYMOUS);
     }
 
     @Override

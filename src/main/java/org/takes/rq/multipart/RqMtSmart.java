@@ -40,6 +40,7 @@ public final class RqMtSmart implements RqMultipart {
      * Original request.
      */
     private final RqMultipart origin;
+
     /**
      * Ctor.
      * @param req Original
@@ -48,6 +49,7 @@ public final class RqMtSmart implements RqMultipart {
     public RqMtSmart(final Request req) throws IOException {
         this(new RqMtBase(req));
     }
+
     /**
      * Ctor.
      * @param req Original
@@ -55,6 +57,7 @@ public final class RqMtSmart implements RqMultipart {
     public RqMtSmart(final RqMultipart req) {
         this.origin = req;
     }
+
     /**
      * Get single part.
      * @param name Name of the part to get
@@ -73,18 +76,22 @@ public final class RqMtSmart implements RqMultipart {
         }
         return parts.next();
     }
+
     @Override
     public Iterable<Request> part(final CharSequence name) {
         return this.origin.part(name);
     }
+
     @Override
     public Iterable<String> names() {
         return this.origin.names();
     }
+
     @Override
     public Iterable<String> head() throws IOException {
         return this.origin.head();
     }
+
     @Override
     public InputStream body() throws IOException {
         return this.origin.body();

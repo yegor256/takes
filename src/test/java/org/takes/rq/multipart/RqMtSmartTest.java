@@ -28,12 +28,11 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
 import org.hamcrest.MatcherAssert;
@@ -63,30 +62,36 @@ public final class RqMtSmartTest {
      * Body element.
      */
     private static final String BODY_ELEMENT = "--zzz";
+
     /**
      * Content type.
      */
     private static final String CONTENT_TYPE =
         "Content-Type: multipart/form-data; boundary=zzz";
+
     /**
      * Carriage return constant.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
+
     /**
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
         "%s: %s", RqMtSmartTest.DISPOSITION, "form-data; name=\"%s\""
     );
+
     /**
      * Temp directory.
      */
     @Rule
     public final transient TemporaryFolder temp = new TemporaryFolder();
+
     /**
      * RqMtSmart can return correct part length.
      * @throws IOException If some problem inside
@@ -234,7 +239,7 @@ public final class RqMtSmartTest {
         final int length = 100000000;
         final String part = "test";
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
-        final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
+        final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         bwr.write(
             Joiner.on(RqMtSmartTest.CRLF).join(
                 RqMtSmartTest.BODY_ELEMENT,
@@ -259,7 +264,7 @@ public final class RqMtSmartTest {
                 RqMtSmartTest.CONTENT_TYPE,
                 String.format("Content-Length:%s", file.length())
             ),
-            new TempInputStream(new FileInputStream(file), file)
+            new TempInputStream(Files.newInputStream(file.toPath()), file)
         );
         final RqMtSmart smart = new RqMtSmart(
             new RqMtBase(req)
@@ -279,6 +284,7 @@ public final class RqMtSmartTest {
             smart.part(part).iterator().next().body().close();
         }
     }
+
     /**
      * RqMtSmart doesn't distort the content.
      * @throws IOException If some problem inside
@@ -288,7 +294,7 @@ public final class RqMtSmartTest {
         final int length = 1000000;
         final String part = "test1";
         final File file = this.temp.newFile("notDistortContent.tmp");
-        final BufferedWriter bwr = new BufferedWriter(new FileWriter(file));
+        final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         final String head =
             Joiner.on(RqMtSmartTest.CRLF).join(
                 "--zzz1",
@@ -319,7 +325,7 @@ public final class RqMtSmartTest {
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
-            new TempInputStream(new FileInputStream(file), file)
+            new TempInputStream(Files.newInputStream(file.toPath()), file)
         );
         final InputStream stream = new RqMtSmart(
             new RqMtBase(req)

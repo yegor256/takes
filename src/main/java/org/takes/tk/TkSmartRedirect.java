@@ -89,10 +89,12 @@ public final class TkSmartRedirect extends TkWrap {
          * Original request.
          */
         private final Request req;
+
         /**
          * Original location.
          */
         private final String origin;
+
         /**
          * Ctor.
          * @param req Original request.
@@ -102,6 +104,7 @@ public final class TkSmartRedirect extends TkWrap {
             this.req = req;
             this.origin = origin;
         }
+
         /**
          * Get location with composed params.
          * @return New location.

@@ -61,6 +61,7 @@ public final class RsReturn extends RsWrap {
         throws IOException {
         this(res, loc, RsReturn.class.getSimpleName());
     }
+
     /**
      * Ctor.
      * @param res Response to decorate

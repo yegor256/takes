@@ -182,6 +182,5 @@ public final class FtCli implements Front {
         public boolean ready() {
             return System.currentTimeMillis() - this.start > this.max;
         }
-    };
-
+    }
 }

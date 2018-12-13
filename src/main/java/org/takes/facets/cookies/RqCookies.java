@@ -82,7 +82,7 @@ public interface RqCookies extends Request {
             );
             final Iterable<String> iter;
             if (value == null) {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     Collections.<String>emptyList(),
                     new Sprintf(
                         // @checkstyle LineLengthCheck (1 line)
@@ -91,7 +91,7 @@ public interface RqCookies extends Request {
                     )
                 );
             } else {
-                iter = new VerboseIterable<String>(
+                iter = new VerboseIterable<>(
                     Collections.singleton(value),
                     new Sprintf(
                         "There is always only one Cookie by name \"%s\"",

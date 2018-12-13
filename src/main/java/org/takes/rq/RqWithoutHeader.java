@@ -54,12 +54,13 @@ public final class RqWithoutHeader extends RqWrap {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
-                    return new Filtered<String>(
-                        (header) -> !new EnglishLowerCase(header).string()
+                    return new Filtered<>(
+                        header -> !new EnglishLowerCase(header).string()
                             .startsWith(prefix),
                         req.head()
                     );
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return req.body();

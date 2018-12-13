@@ -49,6 +49,7 @@ public final class CcXorTest {
                 public byte[] encode(final Identity identity) {
                     return identity.urn().getBytes();
                 }
+
                 @Override
                 public Identity decode(final byte[] bytes) {
                     return new Identity.Simple(new String(bytes));

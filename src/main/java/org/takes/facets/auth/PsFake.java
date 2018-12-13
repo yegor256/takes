@@ -55,11 +55,11 @@ public final class PsFake implements Pass {
     public Opt<Identity> enter(final Request request) {
         final Opt<Identity> user;
         if (this.condition) {
-            user = new Opt.Single<Identity>(
+            user = new Opt.Single<>(
                 new Identity.Simple("urn:test:1")
             );
         } else {
-            user = new Opt.Empty<Identity>();
+            user = new Opt.Empty<>();
         }
         return user;
     }

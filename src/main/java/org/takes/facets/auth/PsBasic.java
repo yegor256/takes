@@ -157,6 +157,7 @@ public final class PsBasic implements Pass {
          * Should we authenticate a user?
          */
         private final boolean condition;
+
         /**
          * Ctor.
          * @param cond Condition
@@ -164,11 +165,12 @@ public final class PsBasic implements Pass {
         public Fake(final boolean cond) {
             this.condition = cond;
         }
+
         @Override
         public Opt<Identity> enter(final String usr, final String pwd) {
             final Opt<Identity> user;
             if (this.condition) {
-                user = new Opt.Single<Identity>(
+                user = new Opt.Single<>(
                     new Identity.Simple(
                         String.format("urn:basic:%s", usr)
                     )
@@ -204,14 +206,17 @@ public final class PsBasic implements Pass {
          * formatted.
          */
         private static final String KEY_FORMAT = "%s %s";
+
         /**
          * Encoding for URLEncode#encode.
          */
         private static final String ENCODING = "UTF-8";
+
         /**
          * Map from login/password pairs to URNs.
          */
         private final Map<String, String> usernames;
+
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with
@@ -229,7 +234,7 @@ public final class PsBasic implements Pass {
             final Opt<Identity> identity;
             if (urn.has()) {
                 try {
-                    identity = new Opt.Single<Identity>(
+                    identity = new Opt.Single<>(
                         new Identity.Simple(
                             URLDecoder.decode(
                                 urn.get(), PsBasic.Default.ENCODING
@@ -244,6 +249,7 @@ public final class PsBasic implements Pass {
             }
             return identity;
         }
+
         /**
          * Converts Strings with user's login, password and URN to Map.
          * @param users Strings with user's login, password and URN with
@@ -264,6 +270,7 @@ public final class PsBasic implements Pass {
             }
             return result;
         }
+
         /**
          * Returns an URN corresponding to a login-password pair.
          * @param user Login.
@@ -298,6 +305,7 @@ public final class PsBasic implements Pass {
             }
             return opt;
         }
+
         /**
          * Creates a key for
          *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
@@ -316,6 +324,7 @@ public final class PsBasic implements Pass {
                 )
             );
         }
+
         /**
          * Checks if a unified user string is correctly formatted.
          * @param unified String with urlencoded user login, password and urn
@@ -334,6 +343,7 @@ public final class PsBasic implements Pass {
                 );
             }
         }
+
         /**
          * Counts spaces in a string.
          * @param txt Any string.
