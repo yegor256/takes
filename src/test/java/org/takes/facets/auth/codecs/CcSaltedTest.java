@@ -26,7 +26,8 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -73,10 +74,15 @@ public final class CcSaltedTest {
      * CcSalted can throw when incomplete data.
      * @throws IOException If some problem inside
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void throwsOnIncompleteData() throws IOException {
-        new CcSalted(new CcPlain()).decode(
-            "\u0010\u0000\u0000\u0000".getBytes()
+        Assertions.assertThrows(
+            DecodingException.class,
+            ()-> {
+                new CcSalted(new CcPlain()).decode(
+                    "\u0010\u0000\u0000\u0000".getBytes()
+                );
+            }
         );
     }
 
@@ -84,10 +90,15 @@ public final class CcSaltedTest {
      * CcSalted can throw when length of salt is negative.
      * @throws IOException If some problem inside
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void throwsOnZeroData() throws IOException {
-        new CcSalted(new CcPlain()).decode(
-            "\u1111\u0000\u0000\u0000".getBytes()
+        Assertions.assertThrows(
+            DecodingException.class,
+            ()-> {
+                new CcSalted(new CcPlain()).decode(
+                    "\u1111\u0000\u0000\u0000".getBytes()
+                );
+            }
         );
     }
 
@@ -95,9 +106,14 @@ public final class CcSaltedTest {
      * CcSalted can throw on empty input.
      * @throws IOException If some problem inside
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void throwsOnEmptyInput() throws IOException {
-        new CcSalted(new CcPlain()).decode(new byte[0]);
+        Assertions.assertThrows(
+            DecodingException.class,
+            ()-> {
+                new CcSalted(new CcPlain()).decode(new byte[0]);
+            }
+        );
     }
 
 }

@@ -30,7 +30,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -142,11 +143,16 @@ public final class CcAesTest {
      * CcAES can throw the right exception.
      * @throws Exception any unexpected exception to throw
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void throwsRightWhenBroken() throws Exception {
-        new CcAes(
-            new CcPlain(), "0123456701234567"
-        ).decode("broken input".getBytes());
+        Assertions.assertThrows(
+            DecodingException.class,
+            ()-> {
+                new CcAes(
+                    new CcPlain(), "0123456701234567"
+                ).decode("broken input".getBytes());
+            }
+        );
     }
 
     /**
