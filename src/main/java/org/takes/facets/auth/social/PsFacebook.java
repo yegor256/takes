@@ -164,7 +164,7 @@ public final class PsFacebook implements Pass {
                 .path(PsFacebook.PICTURE)
                 .toString()
         );
-        return new Opt.Single<Identity>(
+        return new Opt.Single<>(
             new Identity.Simple(
                 String.format("urn:facebook:%s", user.getId()),
                 props

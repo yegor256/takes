@@ -24,12 +24,11 @@
 package org.takes.http;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,7 +95,7 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 try (Reader reader = new Utf8InputStreamReader(
-                    new FileInputStream(file)
+                    Files.newInputStream(file.toPath())
                     )
                 ) {
                     // @checkstyle MagicNumber (1 line)
@@ -109,9 +108,8 @@ final class Options {
             } else {
                 socket = new ServerSocket(0);
                 try (Writer writer = new Utf8OutputStreamWriter(
-                    new FileOutputStream(file)
-                    )
-                ) {
+                    Files.newOutputStream(file.toPath())
+                )) {
                     writer.append(Integer.toString(socket.getLocalPort()));
                 }
             }

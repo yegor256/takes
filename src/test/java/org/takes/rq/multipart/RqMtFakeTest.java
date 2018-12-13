@@ -24,10 +24,12 @@
 package org.takes.rq.multipart;
 
 import java.io.IOException;
+import java.nio.channels.ClosedChannelException;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Test;
 import org.takes.rq.RqFake;
@@ -40,6 +42,7 @@ import org.takes.rq.RqWithHeaders;
 /**
  * Test case for {@link RqMtFake}.
  * @since 0.33
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 public final class RqMtFakeTest {
@@ -48,10 +51,12 @@ public final class RqMtFakeTest {
      */
     private static final String FORM_DATA =
         "form-data; name=\"data\"; filename=\"%s\"";
+
     /**
      * Content disposition.
      */
     private static final String DISPOSITION = "Content-Disposition";
+
     /**
      * RqMtFake can throw exception on no name
      * at Content-Disposition header.
@@ -188,7 +193,6 @@ public final class RqMtFakeTest {
         final String exmessage =
             "An IOException was expected since the Stream is closed";
         final String name = "name";
-        final String closed = "Closed";
         final String content = "content";
         final RqMtBase multi = new RqMtBase(request);
         multi.part(name).iterator().next().body().read();
@@ -203,8 +207,8 @@ public final class RqMtFakeTest {
             Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(closed)
+                ex,
+                new IsInstanceOf(ClosedChannelException.class)
             );
         }
         MatcherAssert.assertThat(
@@ -216,8 +220,8 @@ public final class RqMtFakeTest {
             Assert.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(closed)
+                ex,
+                new IsInstanceOf(ClosedChannelException.class)
             );
         }
     }

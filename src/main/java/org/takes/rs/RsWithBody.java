@@ -145,6 +145,7 @@ public final class RsWithBody extends RsWrap {
                 public Iterable<String> head() throws IOException {
                     return RsWithBody.append(res, body.length());
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return body.input();

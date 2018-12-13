@@ -119,7 +119,7 @@ public final class PsLinkedin implements Pass {
                 "code is not provided by LinkedIn"
             );
         }
-        return new Opt.Single<Identity>(
+        return new Opt.Single<>(
             this.fetch(this.token(href.toString(), code.next()))
         );
     }

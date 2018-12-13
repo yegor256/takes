@@ -25,10 +25,9 @@ package org.takes.rq;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -46,14 +45,14 @@ public final class TempInputStreamTest {
     @Test
     public void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");
-        final BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        final BufferedWriter out = Files.newBufferedWriter(file.toPath());
         try {
             out.write("Temp file deletion test");
         } finally {
             out.close();
         }
         final InputStream body = new TempInputStream(
-            new FileInputStream(file), file
+            Files.newInputStream(file.toPath()), file
         );
         try {
             MatcherAssert.assertThat(

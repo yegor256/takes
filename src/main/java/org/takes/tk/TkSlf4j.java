@@ -90,34 +90,40 @@ public final class TkSlf4j implements Take {
         final Logger logger = LoggerFactory.getLogger(this.target);
         try {
             final Response rsp = this.origin.act(req);
-            logger.info(
-                "[{} {}] returned \"{}\" in {} ms",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                rsp.head().iterator().next(),
-                System.currentTimeMillis() - start
-            );
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] returned \"{}\" in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    rsp.head().iterator().next(),
+                    System.currentTimeMillis() - start
+                );
+            }
             return rsp;
         } catch (final IOException ex) {
-            logger.info(
-                "[{} {}] thrown {}(\"{}\") in {} ms",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                ex.getClass().getCanonicalName(),
-                ex.getLocalizedMessage(),
-                System.currentTimeMillis() - start
-            );
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] thrown {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
+                );
+            }
             throw ex;
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
-            logger.info(
-                "[{} {}] thrown runtime {}(\"{}\") in {} ms",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                ex.getClass().getCanonicalName(),
-                ex.getLocalizedMessage(),
-                System.currentTimeMillis() - start
-            );
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
+                );
+            }
             throw ex;
         }
     }

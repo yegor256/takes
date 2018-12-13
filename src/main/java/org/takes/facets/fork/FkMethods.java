@@ -98,9 +98,9 @@ public final class FkMethods implements Fork {
         final String mtd = new RqMethod.Base(req).method();
         final Opt<Response> resp;
         if (this.methods.contains(mtd)) {
-            resp = new Opt.Single<Response>(this.take.act(req));
+            resp = new Opt.Single<>(this.take.act(req));
         } else {
-            resp = new Opt.Empty<Response>();
+            resp = new Opt.Empty<>();
         }
         return resp;
     }

@@ -61,7 +61,7 @@ public final class Concat<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Concat.ConcatIterator<T>(
+        return new Concat.ConcatIterator<>(
             this.left.iterator(),
             this.right.iterator()
         );
@@ -80,10 +80,12 @@ public final class Concat<T> implements Iterable<T> {
          * Internal reference for holding the first iterator from constructor.
          */
         private final Iterator<E> left;
+
         /**
          * Internal reference for holding the second iterator from constructor.
          */
         private final Iterator<E> right;
+
         /**
          * Ctor.
          * @param aitr The first iterable to traverse
@@ -93,10 +95,12 @@ public final class Concat<T> implements Iterable<T> {
             this.left = aitr;
             this.right = bitr;
         }
+
         @Override
         public boolean hasNext() {
             return this.left.hasNext() || this.right.hasNext();
         }
+
         @Override
         public E next() {
             final E object;
@@ -107,6 +111,7 @@ public final class Concat<T> implements Iterable<T> {
             }
             return object;
         }
+
         @Override
         public void remove() {
             throw new UnsupportedOperationException(

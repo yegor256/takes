@@ -24,8 +24,6 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -51,34 +49,15 @@ public final class CcGzipTest {
                     throws IOException {
                     return identity.urn().getBytes();
                 }
+
                 @Override
                 public Identity decode(final byte[] bytes) throws IOException {
-                    return new Identity() {
-                        @Override
-                        public String urn() {
-                            return new String(bytes);
-                        }
-                        @Override
-                        public Map<String, String> properties() {
-                            return new HashMap<String, String>();
-                        }
-                    };
+                    return new Identity.Simple(new String(bytes));
                 }
             }
         );
         final String urn = "test:gzip";
-        final byte[] encode = gzip.encode(
-            new Identity() {
-                @Override
-                public String urn() {
-                    return urn;
-                }
-                @Override
-                public Map<String, String> properties() {
-                    return new HashMap<String, String>();
-                }
-            }
-        );
+        final byte[] encode = gzip.encode(new Identity.Simple(urn));
         MatcherAssert.assertThat(
             gzip.decode(encode).urn(),
             Matchers.containsString(urn)

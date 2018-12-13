@@ -59,6 +59,7 @@ public final class RqOnce extends RqWrap {
             public Iterable<String> head() throws IOException {
                 return req.head();
             }
+
             @Override
             public InputStream body() throws IOException {
                 if (!seen.getAndSet(true)) {

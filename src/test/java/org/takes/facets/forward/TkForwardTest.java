@@ -75,6 +75,7 @@ public final class TkForwardTest {
                     public Iterable<String> head() {
                         return new RsEmpty().head();
                     }
+
                     @Override
                     public InputStream body() throws IOException {
                         throw new RsForward("/b");

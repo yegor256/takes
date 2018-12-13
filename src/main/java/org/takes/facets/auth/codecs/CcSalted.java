@@ -93,6 +93,7 @@ public final class CcSalted implements Codec {
      * @param text Salted text
      * @return Original text
      */
+    @SuppressWarnings("PMD.CyclomaticComplexity")
     private static byte[] unsalt(final byte[] text) {
         if (text.length == 0) {
             throw new DecodingException("empty input");

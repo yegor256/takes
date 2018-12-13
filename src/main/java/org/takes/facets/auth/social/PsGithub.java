@@ -125,7 +125,7 @@ public final class PsGithub implements Pass {
                 "code is not provided by Github"
             );
         }
-        return new Opt.Single<Identity>(
+        return new Opt.Single<>(
             this.fetch(this.token(href.toString(), code.next()))
         );
     }

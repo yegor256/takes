@@ -38,6 +38,7 @@ import org.takes.facets.auth.Identity;
  * @since 0.13
  */
 public final class CcBase64Test {
+
     /**
      * CcBase64 can encode.
      * @throws IOException If some problem inside
@@ -53,6 +54,7 @@ public final class CcBase64Test {
             Matchers.equalTo("dXJuJTNBdGVzdCUzQTM=")
         );
     }
+
     /**
      * CcBase64 can decode.
      * @throws IOException If some problem inside
@@ -67,6 +69,7 @@ public final class CcBase64Test {
             Matchers.equalTo("urn:test:test")
         );
     }
+
     /**
      * CcBase64 can encode and decode.
      * @throws IOException If some problem inside
@@ -89,6 +92,7 @@ public final class CcBase64Test {
             Matchers.equalTo(properties)
         );
     }
+
     /**
      * CcBase64 can encode empty byte array.
      * @throws IOException If some problem inside
@@ -104,6 +108,7 @@ public final class CcBase64Test {
             Matchers.equalTo("")
         );
     }
+
     /**
      * CcBase64 can decode non Base64 alphabet symbols.
      * @throws IOException If some problem inside
@@ -123,6 +128,7 @@ public final class CcBase64Test {
             );
         }
     }
+
     /**
      * Checks CcBase64 equals method.
      * @throws Exception If some problem inside

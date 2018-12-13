@@ -43,6 +43,7 @@ public final class ChunkedInputStreamTest {
      * Carriage return.
      */
     private static final String CRLF = "\r\n";
+
     /**
      * End of chunk byte.
      */

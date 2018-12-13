@@ -54,27 +54,28 @@ import org.takes.rs.RsWithStatus;
  * @checkstyle IndentationCheck (500 lines)
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.DataClass")
 public final class BkBasic implements Back {
 
     /**
      * Local address header name.
      */
-     public static final String LOCALADDR =  "X-Takes-LocalAddress";
+    public static final String LOCALADDR =  "X-Takes-LocalAddress";
 
     /**
      * Local port header name.
      */
-     public static final String LOCALPORT = "X-Takes-LocalPort";
+    public static final String LOCALPORT = "X-Takes-LocalPort";
 
     /**
      * Remote address header name.
      */
-     public static final String REMOTEADDR = "X-Takes-RemoteAddress";
+    public static final String REMOTEADDR = "X-Takes-RemoteAddress";
 
     /**
      * Remote port header name.
      */
-     public static final String REMOTEPORT = "X-Takes-RemotePort";
+    public static final String REMOTEPORT = "X-Takes-RemotePort";
 
     /**
      * Take.
@@ -93,8 +94,8 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
-            final InputStream input = socket.getInputStream();
-            final BufferedOutputStream output = new BufferedOutputStream(
+            InputStream input = socket.getInputStream();
+            BufferedOutputStream output = new BufferedOutputStream(
                 socket.getOutputStream()
             )
         ) {

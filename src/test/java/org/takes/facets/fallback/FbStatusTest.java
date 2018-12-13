@@ -72,12 +72,12 @@ public final class FbStatusTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new FbStatus(
-                    new Filtered<Integer>(
-                        (status) -> {
+                    new Filtered<>(
+                        status -> {
                             return status == HttpURLConnection.HTTP_MOVED_PERM
                                 || status == HttpURLConnection.HTTP_MOVED_TEMP;
                         },
-                        new ListOf<Integer>(
+                        new ListOf<>(
                             HttpURLConnection.HTTP_MOVED_PERM,
                             HttpURLConnection.HTTP_MOVED_TEMP
                         )

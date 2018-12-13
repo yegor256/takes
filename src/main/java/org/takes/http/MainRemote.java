@@ -24,12 +24,12 @@
 package org.takes.http;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
@@ -147,7 +147,7 @@ public final class MainRemote {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
         final int port;
-        try (InputStream input = new FileInputStream(file)) {
+        try (InputStream input = Files.newInputStream(file.toPath())) {
             // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
             while (true) {

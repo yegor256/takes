@@ -34,6 +34,7 @@ final class CcTest implements Codec {
     public Identity decode(final byte[] bytes) {
         return new Identity.Simple(new String(bytes));
     }
+
     @Override
     public byte[] encode(final Identity identity) {
         return identity.urn().getBytes();

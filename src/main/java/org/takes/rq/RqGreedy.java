@@ -63,6 +63,7 @@ public final class RqGreedy extends RqWrap {
             public Iterable<String> head() throws IOException {
                 return req.head();
             }
+
             @Override
             public InputStream body() {
                 return new ByteArrayInputStream(baos.toByteArray());

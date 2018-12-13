@@ -47,6 +47,7 @@ public final class SiHmacTest {
             Matchers.equalTo(SiHmac.HMAC256)
         );
     }
+
     /**
      * SiHmac can sign.
      * @throws IOException If some problem inside
@@ -64,6 +65,7 @@ public final class SiHmacTest {
             )
         );
     }
+
     /**
      * Checks SiHmac equals method.
      * @throws Exception If some problem inside

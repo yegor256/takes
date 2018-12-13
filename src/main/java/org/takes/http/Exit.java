@@ -57,10 +57,12 @@ public interface Exit {
          * Left.
          */
         private final Exit left;
+
         /**
          * Right.
          */
         private final Exit right;
+
         /**
          * Ctor.
          * @param lft Left
@@ -70,6 +72,7 @@ public interface Exit {
             this.left = lft;
             this.right = rht;
         }
+
         @Override
         public boolean ready() {
             return this.left.ready() || this.right.ready();
@@ -85,10 +88,12 @@ public interface Exit {
          * Left.
          */
         private final Exit left;
+
         /**
          * Right.
          */
         private final Exit right;
+
         /**
          * Ctor.
          * @param lft Left
@@ -98,6 +103,7 @@ public interface Exit {
             this.left = lft;
             this.right = rht;
         }
+
         @Override
         public boolean ready() {
             return this.left.ready() && this.right.ready();
@@ -113,6 +119,7 @@ public interface Exit {
          * Origin.
          */
         private final Exit origin;
+
         /**
          * Ctor.
          * @param exit Original
@@ -120,6 +127,7 @@ public interface Exit {
         public Not(final Exit exit) {
             this.origin = exit;
         }
+
         @Override
         public boolean ready() {
             return !this.origin.ready();

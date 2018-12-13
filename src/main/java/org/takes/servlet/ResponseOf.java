@@ -48,6 +48,7 @@ final class ResponseOf {
      * Buffer size.
      */
     private static final int BUFSIZE = 8192;
+
     /**
      * Http response first line head pattern.
      */
@@ -55,10 +56,12 @@ final class ResponseOf {
         "^HTTP/(?:1\\.1|2) (?<code>\\d+).*$",
         Pattern.CANON_EQ | Pattern.DOTALL | Pattern.CASE_INSENSITIVE
     );
+
     /**
      * Origin response.
      */
     private final Response rsp;
+
     /**
      * Ctor.
      * @param response Origin takes response
@@ -66,6 +69,7 @@ final class ResponseOf {
     ResponseOf(final Response response) {
         this.rsp = response;
     }
+
     /**
      * Apply to servlet response.
      * @param sresp Servlet response
@@ -80,8 +84,8 @@ final class ResponseOf {
                 ResponseOf.applyHeader(sresp, head.next());
             }
             try (
-                final InputStream body = this.rsp.body();
-                final OutputStream out = sresp.getOutputStream()
+                InputStream body = this.rsp.body();
+                OutputStream out = sresp.getOutputStream()
             ) {
                 final byte[] buff = new byte[ResponseOf.BUFSIZE];
                 // @checkstyle LineLengthCheck (1 line)

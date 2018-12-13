@@ -59,6 +59,7 @@ public interface Opt<T> {
          * Origin.
          */
         private final T origin;
+
         /**
          * Ctor.
          * @param orgn Origin
@@ -66,10 +67,12 @@ public interface Opt<T> {
         public Single(final T orgn) {
             this.origin = orgn;
         }
+
         @Override
         public T get() {
             return this.origin;
         }
+
         @Override
         public boolean has() {
             return true;
@@ -90,6 +93,7 @@ public interface Opt<T> {
                 "there is nothing here, use has() first, to check"
             );
         }
+
         @Override
         public boolean has() {
             return false;

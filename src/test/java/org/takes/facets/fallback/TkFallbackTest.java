@@ -86,6 +86,7 @@ public final class TkFallbackTest {
                                 public Iterable<String> head() {
                                     throw new UnsupportedOperationException("");
                                 }
+
                                 @Override
                                 public InputStream body() {
                                     throw new IllegalArgumentException(

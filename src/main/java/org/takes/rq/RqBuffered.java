@@ -50,6 +50,7 @@ public final class RqBuffered extends RqWrap {
                 public Iterable<String> head() throws IOException {
                     return req.head();
                 }
+
                 @Override
                 public InputStream body() throws IOException {
                     return new BufferedInputStream(req.body());
