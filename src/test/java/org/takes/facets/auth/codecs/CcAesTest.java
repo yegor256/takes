@@ -147,7 +147,7 @@ public final class CcAesTest {
     public void throwsRightWhenBroken() throws Exception {
         Assertions.assertThrows(
             DecodingException.class,
-            ()-> {
+            () -> {
                 new CcAes(
                     new CcPlain(), "0123456701234567"
                 ).decode("broken input".getBytes());
