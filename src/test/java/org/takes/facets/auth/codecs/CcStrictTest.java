@@ -41,7 +41,7 @@ public final class CcStrictTest {
      * @throws IOException If some problem inside
      * @todo #877:30min replace all org.junit.Test occurrences in the project
      *  by JUnit 5 equivalent org.junit.jupiter.api.Test and replaces
-     *  all expected Exceptions by it's lamba style. Check
+     *  all expected Exceptions by Assertions.assertThrows. Check
      *  org.takes.facets.auth.codecs.CcAesTest or
      *  org.takes.facets.auth.codecs.CcSaltedTest as examples.
      */
