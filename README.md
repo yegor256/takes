@@ -1123,6 +1123,12 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
+In the same way for those who are using `Gradle` and want to avoid frustrations in sending the pull request it is recommended to execute the following command:
+
+```
+$ gradle clean build --refresh-dependencies
+```
+
 ## Got questions?
 
 If you have questions or general suggestions, don't hesitate to submit
