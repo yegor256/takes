@@ -243,6 +243,7 @@ With this configuration you can run it from command line:
 ```gradle
 $ gradle run -Phit-refresh -Dport=8080
 ```
+Gradle will start the server and you can see it at `http://localhost:8080`.
 
 ## Unit Testing
 
