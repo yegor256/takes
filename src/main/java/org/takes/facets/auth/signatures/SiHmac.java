@@ -134,11 +134,11 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Encrypt the given bytes using HMAC.
+     * Encrypt the given asBytes using HMAC.
      *
      * @param bytes
      *  Bytes to encrypt
-     * @return Encrypted bytes
+     * @return Encrypted asBytes
      * @throws IOException
      *  for all unexpected exceptions
      */

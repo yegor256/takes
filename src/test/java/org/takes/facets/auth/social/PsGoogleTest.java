@@ -111,7 +111,7 @@ public final class PsGoogleTest {
     private static final String AVATAR = "https://google.com/img/avatar.gif";
 
     /**
-     * XPath access_token string.
+     * XPath access_token asString.
      */
     private static final String ACCESS_TOKEN = "access_token";
 

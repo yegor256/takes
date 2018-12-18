@@ -36,7 +36,7 @@ import org.takes.facets.auth.Identity;
 public interface Codec {
 
     /**
-     * Encode identity into bytes.
+     * Encode identity into asBytes.
      * @param identity The identity
      * @return Text
      * @throws IOException If fails

@@ -100,7 +100,7 @@ public final class PsCookie implements Pass {
         if (cookies.hasNext()) {
             user = new Opt.Single<>(
                 this.codec.decode(
-                    new Utf8String(cookies.next()).bytes()
+                    new Utf8String(cookies.next()).asBytes()
                 )
             );
         }
@@ -114,7 +114,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new Utf8String(this.codec.encode(idt)).string();
+            text = new Utf8String(this.codec.encode(idt)).asString();
         }
         return new RsWithCookie(
             res, this.cookie, text,

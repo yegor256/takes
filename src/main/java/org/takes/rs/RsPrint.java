@@ -79,14 +79,14 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     /**
-     * Print it into string.
+     * Print it into asString.
      * @return Entire HTTP response
      * @throws IOException If fails
      */
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     @Override
@@ -95,18 +95,18 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     /**
-     * Print body into string.
+     * Print body into asString.
      * @return Entire body of HTTP response
      * @throws IOException If fails
      */
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     /**
-     * Print head into string.
+     * Print head into asString.
      * @return Entire head of HTTP response
      * @throws IOException If fails
      * @since 0.10
@@ -114,7 +114,7 @@ public final class RsPrint extends RsWrap implements Text {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     /**

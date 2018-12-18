@@ -54,7 +54,7 @@ public final class RqWithBody extends RqWrap {
             @Override
             public InputStream body() {
                 return new ByteArrayInputStream(
-                    new Utf8String(bdy.toString()).bytes()
+                    new Utf8String(bdy.toString()).asBytes()
                 );
             }
         });

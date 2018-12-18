@@ -89,7 +89,7 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final CharSequence body) {
-        this(head, new Utf8String(body.toString()).bytes());
+        this(head, new Utf8String(body.toString()).asBytes());
     }
 
     /**

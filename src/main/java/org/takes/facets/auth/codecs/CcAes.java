@@ -132,7 +132,7 @@ public final class CcAes implements Codec {
     }
 
     /**
-     * Encrypt the given bytes using AES.
+     * Encrypt the given asBytes using AES.
      *
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
@@ -171,7 +171,7 @@ public final class CcAes implements Codec {
         if (key.length != CcAes.BLOCK) {
             throw new IllegalArgumentException(
                 String.format(
-                    "the length of the AES key must be exactly %d bytes",
+                    "the length of the AES key must be exactly %d asBytes",
                     CcAes.BLOCK
                 )
             );
@@ -180,10 +180,10 @@ public final class CcAes implements Codec {
     }
 
     /**
-     * Decrypt the given bytes using AES.
+     * Decrypt the given asBytes using AES.
      *
      * @param bytes Bytes to decrypt
-     * @return Decrypted bytes
+     * @return Decrypted asBytes
      * @throws IOException for all unexpected exceptions
      */
     private byte[] decrypt(final byte[] bytes) throws IOException {

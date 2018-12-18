@@ -155,7 +155,7 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(new Utf8String(buf).string().trim());
+            port = Integer.parseInt(new Utf8String(buf).asString().trim());
         }
         return port;
     }

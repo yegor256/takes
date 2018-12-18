@@ -115,7 +115,7 @@ public final class RsWithCookie extends RsWrap {
     }
 
     /**
-     * Build cookie string.
+     * Build cookie asString.
      * @param name Cookie name
      * @param value Value of it
      * @param attrs Optional attributes, for example "Path=/"

@@ -46,7 +46,7 @@ import org.takes.Head;
 public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
-     * Values string used in description of mismatches.
+     * Values asString used in description of mismatches.
      */
     private static final String VALUES_STR = " -> values: ";
 

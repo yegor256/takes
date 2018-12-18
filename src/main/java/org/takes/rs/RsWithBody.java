@@ -90,7 +90,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, new Utf8String(body.toString()).bytes());
+        this(res, new Utf8String(body.toString()).asBytes());
     }
 
     /**

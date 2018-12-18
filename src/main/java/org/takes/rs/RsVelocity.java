@@ -79,7 +79,7 @@ public final class RsVelocity extends RsWrap {
         final RsVelocity.Pair... params) {
         this(
             new ByteArrayInputStream(
-                new Utf8String(template.toString()).bytes()
+                new Utf8String(template.toString()).asBytes()
             ), params
         );
     }

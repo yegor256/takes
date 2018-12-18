@@ -26,7 +26,7 @@ package org.takes.misc;
 import java.util.Locale;
 
 /**
- * English lower case string representation.
+ * English lower case asString representation.
  * @since 0.33
  */
 public final class EnglishLowerCase {
@@ -53,7 +53,7 @@ public final class EnglishLowerCase {
     }
 
     /**
-     * Returns string value.
+     * Returns asString value.
      * @return String value
      */
     public String string() {

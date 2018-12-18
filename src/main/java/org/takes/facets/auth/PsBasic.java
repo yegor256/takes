@@ -102,7 +102,7 @@ public final class PsBasic implements Pass {
             DatatypeConverter.parseBase64Binary(
                 PsBasic.AUTH.split(headers.next())[1]
             )
-        ).string().trim();
+        ).asString().trim();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
             user,
@@ -309,7 +309,7 @@ public final class PsBasic implements Pass {
         /**
          * Creates a key for
          *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
-         * @param unified User string made of 3 urlencoded substrings
+         * @param unified User asString made of 3 urlencoded substrings
          *  separated with non-urlencoded space characters.
          * @return Login and password parts with <pre>%20</pre> replaced with
          *  <pre>+</pre>.
@@ -326,7 +326,7 @@ public final class PsBasic implements Pass {
         }
 
         /**
-         * Checks if a unified user string is correctly formatted.
+         * Checks if a unified user asString is correctly formatted.
          * @param unified String with urlencoded user login, password and urn
          *  separated with spaces.
          */
@@ -345,9 +345,9 @@ public final class PsBasic implements Pass {
         }
 
         /**
-         * Counts spaces in a string.
-         * @param txt Any string.
-         * @return Amount of spaces in string.
+         * Counts spaces in a asString.
+         * @param txt Any asString.
+         * @return Amount of spaces in asString.
          */
         private static int countSpaces(final String txt) {
             int spaces = 0;

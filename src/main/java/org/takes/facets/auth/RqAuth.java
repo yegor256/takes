@@ -76,7 +76,7 @@ public final class RqAuth extends RqWrap {
         final Identity user;
         if (headers.hasNext()) {
             user = new CcPlain().decode(
-                new Utf8String(headers.next()).bytes()
+                new Utf8String(headers.next()).asBytes()
             );
         } else {
             user = Identity.ANONYMOUS;

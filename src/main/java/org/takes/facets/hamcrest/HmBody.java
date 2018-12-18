@@ -147,7 +147,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
     }
 
     /**
-     * InputStream as bytes.
+     * InputStream as asBytes.
      * @param input Input
      * @return Bytes
      * @throws IOException If some problem inside

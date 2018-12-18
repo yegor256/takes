@@ -61,23 +61,23 @@ public final class PsGithubTest {
     private static final String GIT_HUB_TOKEN = "GitHubToken";
 
     /**
-     * XPath access_token string.
+     * XPath access_token asString.
      */
     private static final String ACCESS_TOKEN = "access_token";
 
     /**
-     * XPath login string.
+     * XPath login asString.
      */
     private static final String LOGIN = "login";
 
     /**
-     * Octocat URL string.
+     * Octocat URL asString.
      */
     private static final String OCTOCAT_GIF_URL =
         "https://github.com/img/octocat.gif";
 
     /**
-     * XPath octocat string.
+     * XPath octocat asString.
      */
     private static final String OCTOCAT = "octocat";
 

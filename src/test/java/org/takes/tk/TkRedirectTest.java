@@ -50,7 +50,7 @@ public final class TkRedirectTest {
     private static final String NEWLINE = "\r\n";
 
     /**
-     * TkRedirect can create a response with url string.
+     * TkRedirect can create a response with url asString.
      * @throws IOException If some problem inside
      */
     @Test
@@ -73,7 +73,7 @@ public final class TkRedirectTest {
     }
 
     /**
-     * TkRedirect can create a response with HTTP status code and url string.
+     * TkRedirect can create a response with HTTP status code and url asString.
      * @throws IOException If some problem inside
      */
     @Test

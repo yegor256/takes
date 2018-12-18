@@ -55,7 +55,7 @@ public final class CcXor implements Codec {
      * @param key Secret key for encoding
      */
     public CcXor(final Codec codec, final String key) {
-        this(codec, new Utf8String(key).bytes());
+        this(codec, new Utf8String(key).asBytes());
     }
 
     /**
@@ -79,7 +79,7 @@ public final class CcXor implements Codec {
     }
 
     /**
-     * XOR array of bytes.
+     * XOR array of asBytes.
      * @param input The input to XOR
      * @return Encrypted output
      */

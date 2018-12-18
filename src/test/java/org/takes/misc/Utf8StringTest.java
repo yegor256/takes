@@ -40,22 +40,22 @@ public final class Utf8StringTest {
     private static final String ENCODING = "UTF-8";
 
     /**
-     * Utf8String can be constructed from string.
+     * Utf8String can be constructed from asString.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
     public void canConstructFromString() throws UnsupportedEncodingException {
         final String test = "Hello こんにちは Привет";
         final Utf8String str = new Utf8String(test);
-        MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
+        MatcherAssert.assertThat(str.asString(), Matchers.equalTo(test));
         MatcherAssert.assertThat(
-            str.bytes(),
+            str.asBytes(),
             Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 
     /**
-     * Utf8String can be constructed from bytes array.
+     * Utf8String can be constructed from asBytes array.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
@@ -65,9 +65,9 @@ public final class Utf8StringTest {
         final Utf8String str = new Utf8String(
             test.getBytes(Utf8StringTest.ENCODING)
         );
-        MatcherAssert.assertThat(str.string(), Matchers.equalTo(test));
+        MatcherAssert.assertThat(str.asString(), Matchers.equalTo(test));
         MatcherAssert.assertThat(
-            str.bytes(),
+            str.asBytes(),
             Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
         );
     }

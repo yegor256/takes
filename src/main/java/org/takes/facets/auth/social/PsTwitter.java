@@ -194,7 +194,7 @@ public final class PsTwitter implements Pass {
                     "Basic %s", DatatypeConverter.printBase64Binary(
                         new Utf8String(
                             String.format("%s:%s", this.app, this.key)
-                        ).bytes()
+                        ).asBytes()
                     )
                 )
             )

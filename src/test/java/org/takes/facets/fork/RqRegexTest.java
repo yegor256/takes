@@ -35,7 +35,7 @@ import org.junit.Test;
 public final class RqRegexTest {
 
     /**
-     * RqRegex can match a string.
+     * RqRegex can match a asString.
      * @throws IOException If some problem inside
      */
     @Test

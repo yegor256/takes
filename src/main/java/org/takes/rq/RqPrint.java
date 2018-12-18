@@ -59,7 +59,7 @@ public final class RqPrint extends RqWrap {
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     /**
@@ -80,7 +80,7 @@ public final class RqPrint extends RqWrap {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     /**
@@ -107,7 +107,7 @@ public final class RqPrint extends RqWrap {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new Utf8String(baos.toByteArray()).string();
+        return new Utf8String(baos.toByteArray()).asString();
     }
 
     /**

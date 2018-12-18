@@ -24,17 +24,14 @@
 package org.takes.misc;
 
 import java.nio.charset.Charset;
+import org.cactoos.Bytes;
+import org.cactoos.Text;
 
 /**
  * String that uses UTF-8 encoding for all byte operations.
  * @since 0.33
- * @todo #804:30min Make this implements Cactoos Bytes and Text
- *  and make the places in Takes that use it be able to directly
- *  take either a Bytes or a Text depending on the situation.
- *  For example RsWithBody should take Bytes and Text in its constructors.
- *  Also reimplement this class with BytesOf.
  */
-public final class Utf8String {
+public final class Utf8String implements Bytes, Text {
 
     /**
      * UTF-8 encoding.
@@ -56,25 +53,19 @@ public final class Utf8String {
 
     /**
      * Ctor.
-     * @param bytes Bytes to construct UTF-8 string value
+     * @param bytes Bytes to construct UTF-8 asString value
      */
     public Utf8String(final byte... bytes) {
         this(new String(bytes, Charset.forName(Utf8String.ENCODING)));
     }
 
-    /**
-     * Encodes string value into a sequence of bytes using UTF-8 charset.
-     * @return Sequence of bytes
-     */
-    public byte[] bytes() {
+    @Override
+    public byte[] asBytes() {
         return this.value.getBytes(Charset.forName(Utf8String.ENCODING));
     }
 
-    /**
-     * Returns string value.
-     * @return String value
-     */
-    public String string() {
+    @Override
+    public String asString() {
         return this.value;
     }
 }

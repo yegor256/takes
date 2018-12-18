@@ -164,7 +164,7 @@ public final class RqMtFake implements RqMultipart {
         @Override
         public InputStream body() {
             return new ByteArrayInputStream(
-                new Utf8String(this.parts).bytes()
+                new Utf8String(this.parts).asBytes()
             );
         }
     }

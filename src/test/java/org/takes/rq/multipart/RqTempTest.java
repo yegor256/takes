@@ -50,7 +50,7 @@ public final class RqTempTest {
         );
         Files.write(
             file.toPath(),
-            new Utf8String("Temp file deletion test").bytes()
+            new Utf8String("Temp file deletion test").asBytes()
         );
         final Request request = new RqTemp(file);
         try {

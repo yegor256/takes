@@ -35,7 +35,7 @@ import java.io.IOException;
 public interface Signature {
 
     /**
-     * Create signature for data bytes.
+     * Create signature for data asBytes.
      * @param data The data to be signed
      * @return Signature
      * @throws IOException If anything fails

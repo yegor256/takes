@@ -225,7 +225,7 @@ public final class FtBasicTest {
                     FtBasicTest.ROOT_PATH,
                     new RsText(
                         new ByteArrayInputStream(
-                            new Utf8String(result).bytes()
+                            new Utf8String(result).asBytes()
                         )
                     )
                 )
@@ -262,7 +262,7 @@ public final class FtBasicTest {
                     FtBasicTest.ROOT_PATH,
                     new RsHtml(
                         new ByteArrayInputStream(
-                            new Utf8String(result).bytes()
+                            new Utf8String(result).asBytes()
                         )
                     )
                 )

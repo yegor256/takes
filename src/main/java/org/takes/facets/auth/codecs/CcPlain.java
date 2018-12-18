@@ -57,12 +57,12 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return new Utf8String(text.toString()).bytes();
+        return new Utf8String(text.toString()).asBytes();
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final String[] parts = new Utf8String(bytes).string().split(";");
+        final String[] parts = new Utf8String(bytes).asString().split(";");
         final Map<String, String> map = new HashMap<>(parts.length);
         for (int idx = 1; idx < parts.length; ++idx) {
             final String[] pair = parts[idx].split("=");

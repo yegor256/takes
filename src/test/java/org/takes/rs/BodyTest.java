@@ -49,7 +49,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
-            new Utf8String("ByteArray returnsCorrectInput!").bytes();
+            new Utf8String("ByteArray returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(new Body.ByteArray(bytes).input()),
             Matchers.equalTo(bytes)
@@ -63,7 +63,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithByteArray() throws Exception {
         final byte[] bytes =
-            new Utf8String("ByteArray returnsCorrectLength!").bytes();
+            new Utf8String("ByteArray returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
             new Body.ByteArray(bytes).length(),
             Matchers.equalTo(bytes.length)
@@ -77,7 +77,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithStream() throws Exception {
         final byte[] bytes =
-            new Utf8String("Stream returnsCorrectInput!").bytes();
+            new Utf8String("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
                 new Body.Stream(new ByteArrayInputStream(bytes)).input()
@@ -93,7 +93,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =
-            new Utf8String("Stream returnsCorrectLength!").bytes();
+            new Utf8String("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
             new Body.Stream(new ByteArrayInputStream(bytes)).length(),
             Matchers.equalTo(bytes.length)
@@ -107,7 +107,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectInputWithTemFile() throws Exception {
         final byte[] bytes =
-            new Utf8String("TempFile returnsCorrectInput!").bytes();
+            new Utf8String("TempFile returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
             ByteStreams.toByteArray(
                 new Body.TempFile(new Body.ByteArray(bytes)).input()
@@ -123,7 +123,7 @@ public final class BodyTest {
     @Test
     public void returnsCorrectLengthWithTemFile() throws Exception {
         final byte[] bytes =
-            new Utf8String("TempFile returnsCorrectLength!").bytes();
+            new Utf8String("TempFile returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
             new Body.TempFile(new Body.ByteArray(bytes)).length(),
             Matchers.equalTo(bytes.length)
@@ -139,7 +139,7 @@ public final class BodyTest {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                new Utf8String("URL returnsCorrectInput!").bytes();
+                new Utf8String("URL returnsCorrectInput!").asBytes();
             try (InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -164,7 +164,7 @@ public final class BodyTest {
         final Path file = BodyTest.createTempFile();
         try {
             final byte[] bytes =
-                new Utf8String("URL returnsCorrectLength!").bytes();
+                new Utf8String("URL returnsCorrectLength!").asBytes();
             try (InputStream input = new ByteArrayInputStream(bytes)) {
                 Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             }

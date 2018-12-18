@@ -120,7 +120,7 @@ public final class RqLive extends RqWrap {
                 String.format(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new Utf8String(baos.toByteArray()).string()
+                    new Utf8String(baos.toByteArray()).asString()
                 )
             );
         }
@@ -137,7 +137,7 @@ public final class RqLive extends RqWrap {
         Opt<String> header = new Opt.Empty<>();
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Opt.Single<>(
-                new Utf8String(baos.toByteArray()).string()
+                new Utf8String(baos.toByteArray()).asString()
             );
             baos.reset();
         }
@@ -164,7 +164,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new Utf8String(baos.toByteArray()).string()
+                    new Utf8String(baos.toByteArray()).asString()
                 )
             );
         }
@@ -176,7 +176,7 @@ public final class RqLive extends RqWrap {
      * @param input Stream
      * @param data Empty or current data
      * @param available Indicates whether or not it should check first if there
-     *  are available bytes
+     *  are available asBytes
      * @return Next or current data
      * @throws IOException if input.read() fails
      */

@@ -49,7 +49,7 @@ public class RsSimple extends RsWrap {
     public RsSimple(final Iterable<String> head, final String body) {
         this(
             head,
-            new ByteArrayInputStream(new Utf8String(body).bytes())
+            new ByteArrayInputStream(new Utf8String(body).asBytes())
         );
     }
 

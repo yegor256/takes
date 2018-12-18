@@ -152,14 +152,14 @@ public final class RsXslt extends RsWrap {
         final Source xsl = RsXslt.stylesheet(
             factory, new StreamSource(
                 new Utf8InputStreamReader(
-                    new ByteArrayInputStream(new Utf8String(input).bytes())
+                    new ByteArrayInputStream(new Utf8String(input).asBytes())
                 )
             )
         );
         RsXslt.transformer(factory, xsl).transform(
             new StreamSource(
                 new Utf8InputStreamReader(
-                    new ByteArrayInputStream(new Utf8String(input).bytes())
+                    new ByteArrayInputStream(new Utf8String(input).asBytes())
                 )
             ),
             new StreamResult(
@@ -167,7 +167,7 @@ public final class RsXslt extends RsWrap {
             )
         );
         return new ByteArrayInputStream(
-            new Utf8String(baos.toByteArray()).bytes()
+            new Utf8String(baos.toByteArray()).asBytes()
         );
     }
 
