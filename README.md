@@ -1123,10 +1123,16 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
-In the same way for those who are using `Gradle` and want to avoid frustrations in sending the pull request it is recommended to execute the following command:
+For testing using Gradle and you must first migrate the Maven project to `Gradle` using the following command to generate the `build.gradle` file based on the information in the pom.xml:
 
 ```
-$ gradle clean build --refresh-dependencies
+$ gradle init
+```
+
+And also to avoid frustrations, before requesting the pull, please execute the complete build:
+
+```
+$ gradle build -x test
 ```
 
 ## Got questions?
