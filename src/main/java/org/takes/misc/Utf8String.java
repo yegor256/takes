@@ -53,7 +53,7 @@ public final class Utf8String implements Bytes, Text {
 
     /**
      * Ctor.
-     * @param bytes Bytes to construct UTF-8 asString value
+     * @param bytes Bytes to construct UTF-8 string value
      */
     public Utf8String(final byte... bytes) {
         this(new String(bytes, Charset.forName(Utf8String.ENCODING)));

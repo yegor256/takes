@@ -29,8 +29,12 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
+import org.cactoos.list.ListOf;
+import org.cactoos.text.SplitText;
 import org.takes.facets.auth.Identity;
 import org.takes.misc.Utf8String;
 
@@ -62,17 +66,17 @@ public final class CcPlain implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final String[] parts = new Utf8String(bytes).asString().split(";");
-        final Map<String, String> map = new HashMap<>(parts.length);
-        for (int idx = 1; idx < parts.length; ++idx) {
-            final String[] pair = parts[idx].split("=");
+        final List<Text> parts = new ListOf<>(new SplitText(new Utf8String(bytes), ";"));
+        final Map<String, String> map = new HashMap<>(parts.size());
+        for (int idx = 1; idx < parts.size(); ++idx) {
+            final String[] pair = parts.get(idx).asString().split("=");
             try {
                 map.put(pair[0], CcPlain.decode(pair[1]));
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
             }
         }
-        return new Identity.Simple(CcPlain.decode(parts[0]), map);
+        return new Identity.Simple(CcPlain.decode(parts.get(0).asString()), map);
     }
 
     /**

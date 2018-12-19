@@ -199,7 +199,7 @@ final class ChunkedInputStream extends InputStream {
          */
         R,
         /**
-         * Inside quoted asString.
+         * Inside quoted string.
          */
         QUOTED_STRING,
         /**

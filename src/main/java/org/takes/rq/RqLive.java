@@ -176,7 +176,7 @@ public final class RqLive extends RqWrap {
      * @param input Stream
      * @param data Empty or current data
      * @param available Indicates whether or not it should check first if there
-     *  are available asBytes
+     *  are available bytes
      * @return Next or current data
      * @throws IOException if input.read() fails
      */

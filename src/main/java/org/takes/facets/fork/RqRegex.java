@@ -41,7 +41,7 @@ import org.takes.rq.RqFake;
 public interface RqRegex extends Request {
 
     /**
-     * Get matcher of query asString.
+     * Get matcher of query string.
      * @return Matcher
      */
     Matcher matcher();

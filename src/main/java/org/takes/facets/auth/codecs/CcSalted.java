@@ -69,9 +69,9 @@ public final class CcSalted implements Codec {
     }
 
     /**
-     * Salt the asString.
+     * Salt the string.
      * @param text Original text to salt
-     * @return Salted asString
+     * @return Salted string
      */
     @SuppressWarnings("PMD.AvoidArrayLoops")
     private static byte[] salt(final byte[] text) {
@@ -89,7 +89,7 @@ public final class CcSalted implements Codec {
     }
 
     /**
-     * Un-salt the asString.
+     * Un-salt the string.
      * @param text Salted text
      * @return Original text
      */

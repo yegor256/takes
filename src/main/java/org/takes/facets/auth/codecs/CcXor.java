@@ -79,7 +79,7 @@ public final class CcXor implements Codec {
     }
 
     /**
-     * XOR array of asBytes.
+     * XOR array of bytes.
      * @param input The input to XOR
      * @return Encrypted output
      */

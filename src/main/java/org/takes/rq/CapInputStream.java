@@ -41,7 +41,7 @@ final class CapInputStream extends InputStream {
     private final InputStream origin;
 
     /**
-     * More asBytes to read.
+     * More bytes to read.
      */
     private long more;
 

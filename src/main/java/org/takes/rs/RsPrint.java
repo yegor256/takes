@@ -79,7 +79,7 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     /**
-     * Print it into asString.
+     * Print it into string.
      * @return Entire HTTP response
      * @throws IOException If fails
      */
@@ -95,7 +95,7 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     /**
-     * Print body into asString.
+     * Print body into string.
      * @return Entire body of HTTP response
      * @throws IOException If fails
      */
@@ -106,7 +106,7 @@ public final class RsPrint extends RsWrap implements Text {
     }
 
     /**
-     * Print head into asString.
+     * Print head into string.
      * @return Entire head of HTTP response
      * @throws IOException If fails
      * @since 0.10

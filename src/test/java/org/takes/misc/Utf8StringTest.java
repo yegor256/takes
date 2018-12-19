@@ -26,6 +26,7 @@ package org.takes.misc;
 import java.io.UnsupportedEncodingException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
@@ -40,22 +41,22 @@ public final class Utf8StringTest {
     private static final String ENCODING = "UTF-8";
 
     /**
-     * Utf8String can be constructed from asString.
+     * Utf8String can be constructed from string.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
     public void canConstructFromString() throws UnsupportedEncodingException {
         final String test = "Hello こんにちは Привет";
         final Utf8String str = new Utf8String(test);
-        MatcherAssert.assertThat(str.asString(), Matchers.equalTo(test));
+        MatcherAssert.assertThat(str.asString(), new IsEqual<>(test));
         MatcherAssert.assertThat(
             str.asBytes(),
-            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
+            new IsEqual<>(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 
     /**
-     * Utf8String can be constructed from asBytes array.
+     * Utf8String can be constructed from bytes array.
      * @throws UnsupportedEncodingException If fails
      */
     @Test
@@ -65,10 +66,10 @@ public final class Utf8StringTest {
         final Utf8String str = new Utf8String(
             test.getBytes(Utf8StringTest.ENCODING)
         );
-        MatcherAssert.assertThat(str.asString(), Matchers.equalTo(test));
+        MatcherAssert.assertThat(str.asString(), new IsEqual<>(test));
         MatcherAssert.assertThat(
             str.asBytes(),
-            Matchers.equalTo(test.getBytes(Utf8StringTest.ENCODING))
+            new IsEqual<>(test.getBytes(Utf8StringTest.ENCODING))
         );
     }
 }

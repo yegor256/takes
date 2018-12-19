@@ -131,7 +131,7 @@ public final class TkProxyTest {
     }
 
     /**
-     * TkProxy can correctly maps path asString.
+     * TkProxy can correctly maps path string.
      * @throws Exception If some problem inside
      * @checkstyle AnonInnerLengthCheck (100 lines)
      */

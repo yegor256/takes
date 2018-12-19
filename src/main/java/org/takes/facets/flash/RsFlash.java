@@ -106,7 +106,7 @@ public final class RsFlash extends RsWrap {
     private static final String TEXT_FORMAT = "%s/%s";
 
     /**
-     * To asString.
+     * To string.
      */
     private final CharSequence text;
 

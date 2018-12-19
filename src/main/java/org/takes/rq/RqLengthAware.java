@@ -39,7 +39,7 @@ import org.takes.Request;
  * most cases, the browser will not close the request and will always
  * return positive number in available() method. Thus, you won't be
  * able to reach the end of the stream ever. The browser wants you
- * to respect the "Content-Length" header and read as many asBytes
+ * to respect the "Content-Length" header and read as many bytes
  * as it requests. To solve that, just wrap your request into this
  * decorator.
  *

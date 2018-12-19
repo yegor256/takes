@@ -288,11 +288,11 @@ public final class PsBasicTest {
     }
 
     /**
-     * Generate the asString used on the request that store information about
+     * Generate the string used on the request that store information about
      * authentication.
      * @param user Username
      * @param pass Password
-     * @return Header asString.
+     * @return Header string.
      */
     private static String header(final String user, final String pass) {
         final String auth = String.format("%s:%s", user, pass);

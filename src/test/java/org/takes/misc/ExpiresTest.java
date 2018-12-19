@@ -74,7 +74,7 @@ public final class ExpiresTest {
     }
 
     /**
-     * Date can return expires date asString in GMT.
+     * Date can return expires date string in GMT.
      */
     @Test
     public void returnsExpiresStringInGmt() {

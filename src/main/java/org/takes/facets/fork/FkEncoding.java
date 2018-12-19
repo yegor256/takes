@@ -48,7 +48,7 @@ import org.takes.rq.RqHeaders;
  *   new FkEncoding("", response)
  * )</pre>
  *
- * <p>Empty asString as an encoding means that the fork should match
+ * <p>Empty string as an encoding means that the fork should match
  * in any case.
  *
  * <p>The class is immutable and thread-safe.
@@ -64,7 +64,7 @@ public final class FkEncoding implements Fork {
     private static final Pattern ENCODING_SEP = Pattern.compile("\\s*,\\s*");
 
     /**
-     * Encoding we can deliver (or empty asString).
+     * Encoding we can deliver (or empty string).
      */
     private final String encoding;
 
