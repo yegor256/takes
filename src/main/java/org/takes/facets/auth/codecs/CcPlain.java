@@ -34,6 +34,8 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.SplitText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 import org.takes.misc.Utf8String;
 
@@ -65,17 +67,30 @@ public final class CcPlain implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final List<Text> parts = new ListOf<>(new SplitText(new Utf8String(bytes), ";"));
+        final List<Text> parts = new ListOf<>(
+            new SplitText(
+                new Utf8String(bytes), ";"
+            )
+        );
         final Map<String, String> map = new HashMap<>(parts.size());
         for (int idx = 1; idx < parts.size(); ++idx) {
-            final List<Text> pair = new ListOf<>(new SplitText(parts.get(idx), "="));
+            final List<Text> pair = new ListOf<>(
+                new SplitText(parts.get(idx), "=")
+            );
             try {
-                map.put(pair.get(0).asString(), CcPlain.decode(pair.get(1).asString()));
+                map.put(
+                    new UncheckedText(pair.get(0)).asString(),
+                    CcPlain.decode(new UncheckedText(pair.get(1)).asString())
+                );
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
             }
         }
-        return new Identity.Simple(CcPlain.decode(parts.get(0).asString()), map);
+        return new Identity.Simple(
+            CcPlain.decode(
+                new UncheckedText(parts.get(0)).asString()
+            ), map
+        );
     }
 
     /**

@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.TrimmedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -52,6 +53,7 @@ import org.takes.rs.RsWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.20
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 @EqualsAndHashCode
 @SuppressWarnings("PMD.TooManyMethods")
@@ -99,11 +101,15 @@ public final class PsBasic implements Pass {
                 new RqHref.Base(request).href()
             );
         }
-        final String decoded = new TrimmedText(new Utf8String(
-            DatatypeConverter.parseBase64Binary(
-                PsBasic.AUTH.split(headers.next())[1]
+        final String decoded = new UncheckedText(
+            new TrimmedText(
+                new Utf8String(
+                    DatatypeConverter.parseBase64Binary(
+                        PsBasic.AUTH.split(headers.next())[1]
+                    )
+                )
             )
-        )).asString();
+        ).asString();
         final String user = decoded.split(":")[0];
         final Opt<Identity> identity = this.entry.enter(
             user,

@@ -25,7 +25,6 @@ package org.takes.misc;
 
 import java.io.UnsupportedEncodingException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
