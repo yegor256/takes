@@ -34,7 +34,6 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.list.ListOf;
-import org.cactoos.text.SplitText;
 import org.takes.facets.auth.Identity;
 import org.takes.misc.Utf8String;
 
@@ -69,9 +68,9 @@ public final class CcPlain implements Codec {
         final List<Text> parts = new ListOf<>(new SplitText(new Utf8String(bytes), ";"));
         final Map<String, String> map = new HashMap<>(parts.size());
         for (int idx = 1; idx < parts.size(); ++idx) {
-            final String[] pair = parts.get(idx).asString().split("=");
+            final List<Text> pair = new ListOf<>(new SplitText(parts.get(idx), "="));
             try {
-                map.put(pair[0], CcPlain.decode(pair[1]));
+                map.put(pair.get(0).asString(), CcPlain.decode(pair.get(1).asString()));
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
             }
