@@ -45,6 +45,8 @@ import org.takes.rq.RqHeaders;
  *
  * @since 0.9
  * @see TkFork
+ * @todo #863:30min Continue removing nulls from the code base, there are still
+ *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {

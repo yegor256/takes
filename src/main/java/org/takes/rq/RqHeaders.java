@@ -88,13 +88,14 @@ public interface RqHeaders extends Request {
         @Override
         public List<String> header(final CharSequence key)
             throws IOException {
-            final List<String> values = this.map().get(
-                new EnglishLowerCase(key).string()
+            final List<String> values = this.map().getOrDefault(
+                new EnglishLowerCase(key).string(),
+                Collections.emptyList()
             );
             final List<String> list;
-            if (values == null) {
+            if (values.isEmpty()) {
                 list = new VerboseList<>(
-                    Collections.<String>emptyList(),
+                    Collections.emptyList(),
                     String.format(
                         // @checkstyle LineLengthCheck (1 line)
                         "there are no headers by name \"%s\" among %d others: %s",

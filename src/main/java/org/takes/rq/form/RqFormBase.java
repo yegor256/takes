@@ -75,12 +75,14 @@ public final class RqFormBase extends RqWrap implements RqForm {
     @Override
     public Iterable<String> param(final CharSequence key)
         throws IOException {
-        final List<String> values =
-            this.map().get(new EnglishLowerCase(key.toString()).string());
+        final List<String> values = this.map().getOrDefault(
+            new EnglishLowerCase(key.toString()).string(),
+            Collections.emptyList()
+        );
         final Iterable<String> iter;
-        if (values == null) {
+        if (values.isEmpty()) {
             iter = new VerboseIterable<>(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 new Sprintf(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()

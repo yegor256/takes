@@ -112,8 +112,7 @@ public final class FtBasic implements Front {
     private void loop(final ServerSocket server) throws IOException {
         try {
             this.back.accept(server.accept());
-        } catch (final SocketTimeoutException ex) {
-            assert ex != null;
+        } catch (final SocketTimeoutException ignored) {
         }
     }
 
