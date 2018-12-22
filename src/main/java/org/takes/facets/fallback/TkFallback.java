@@ -85,13 +85,7 @@ public final class TkFallback extends TkWrap {
             );
         } catch (final HttpException ex) {
             final Opt<Response> fbres = fbk.route(
-                new RqFallback.Fake(
-                    req, ex.code(),
-                    TkFallback.error(
-                        ex, req,
-                        System.currentTimeMillis() - start
-                    )
-                )
+                TkFallback.fallback(req, start, ex, ex.code())
             );
             if (!fbres.has()) {
                 throw new IOException(
@@ -99,21 +93,15 @@ public final class TkFallback extends TkWrap {
                         "There is no fallback available in %s",
                         fbk.getClass().getCanonicalName()
                     ),
-                    TkFallback.error(
-                        ex, req,
-                        System.currentTimeMillis() - start
-                    )
+                    TkFallback.error(ex, req, start)
                 );
             }
             res = TkFallback.wrap(fbres.get(), fbk, req);
         } catch (final Throwable ex) {
             final Opt<Response> fbres = fbk.route(
-                new RqFallback.Fake(
-                    req, HttpURLConnection.HTTP_INTERNAL_ERROR,
-                    TkFallback.error(
-                        ex, req,
-                        System.currentTimeMillis() - start
-                    )
+                TkFallback.fallback(
+                    req, start, ex,
+                    HttpURLConnection.HTTP_INTERNAL_ERROR
                 )
             );
             if (!fbres.has()) {
@@ -123,10 +111,7 @@ public final class TkFallback extends TkWrap {
                         ex.getClass().getCanonicalName(),
                         fbk.getClass().getCanonicalName()
                     ),
-                    TkFallback.error(
-                        ex, req,
-                        System.currentTimeMillis() - start
-                    )
+                    TkFallback.error(ex, req, start)
                 );
             }
             res = TkFallback.wrap(
@@ -135,6 +120,23 @@ public final class TkFallback extends TkWrap {
             );
         }
         return res;
+    }
+
+    /**
+     * Fallback request.
+     * @param req Request
+     * @param start Start time of request processing
+     * @param throwable Exception thrown
+     * @param code Error code
+     * @return Fallback request
+     * @throws IOException In case of error
+     * @checkstyle ParameterNumber (3 lines)
+     */
+    private static RqFallback.Fake fallback(final Request req, final long start,
+        final Throwable throwable, final int code) throws IOException {
+        return new RqFallback.Fake(
+            req, code, TkFallback.error(throwable, req, start)
+        );
     }
 
     /**
@@ -156,22 +158,13 @@ public final class TkFallback extends TkWrap {
                     head = res.head();
                 } catch (final HttpException ex) {
                     head = fbk.route(
-                        new RqFallback.Fake(
-                            req, ex.code(),
-                            TkFallback.error(
-                                ex, req,
-                                System.currentTimeMillis() - start
-                            )
-                        )
+                        TkFallback.fallback(req, start, ex, ex.code())
                     ).get().head();
                 } catch (final Throwable ex) {
                     head = fbk.route(
-                        new RqFallback.Fake(
-                            req, HttpURLConnection.HTTP_INTERNAL_ERROR,
-                            TkFallback.error(
-                                ex, req,
-                                System.currentTimeMillis() - start
-                            )
+                        TkFallback.fallback(
+                            req, start, ex,
+                            HttpURLConnection.HTTP_INTERNAL_ERROR
                         )
                     ).get().head();
                 }
@@ -186,22 +179,13 @@ public final class TkFallback extends TkWrap {
                     body = res.body();
                 } catch (final HttpException ex) {
                     body = fbk.route(
-                        new RqFallback.Fake(
-                            req, ex.code(),
-                            TkFallback.error(
-                                ex, req,
-                                System.currentTimeMillis() - start
-                            )
-                        )
+                        TkFallback.fallback(req, start, ex, ex.code())
                     ).get().body();
                 } catch (final Throwable ex) {
                     body = fbk.route(
-                        new RqFallback.Fake(
-                            req, HttpURLConnection.HTTP_INTERNAL_ERROR,
-                            TkFallback.error(
-                                ex, req,
-                                System.currentTimeMillis() - start
-                            )
+                        TkFallback.fallback(
+                            req, start, ex,
+                            HttpURLConnection.HTTP_INTERNAL_ERROR
                         )
                     ).get().body();
                 }
@@ -214,13 +198,14 @@ public final class TkFallback extends TkWrap {
      * Create an error.
      * @param exp Exception original
      * @param req Request we're processing
-     * @param msec Milliseconds it took
+     * @param start When started
      * @return Error
      * @throws IOException If fails
      */
     private static Throwable error(final Throwable exp, final Request req,
-        final long msec) throws IOException {
+        final long start) throws IOException {
         final String time;
+        final long msec = System.currentTimeMillis() - start;
         if (msec < TimeUnit.SECONDS.toMillis(1L)) {
             time = String.format("%dms", msec);
         } else {
