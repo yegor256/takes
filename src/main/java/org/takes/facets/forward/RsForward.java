@@ -25,6 +25,8 @@ package org.takes.facets.forward;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -60,7 +62,7 @@ public class RsForward extends HttpException implements Response {
     /**
      * Original response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Ctor.
@@ -170,5 +172,28 @@ public class RsForward extends HttpException implements Response {
     @Override
     public final InputStream body() throws IOException {
         return this.origin.body();
+    }
+
+    /**
+     * Set default object to write serializated data.
+     * @param stream Stream to write
+     * @throws IOException if fails
+     */
+    private static void writeObject(
+        final ObjectOutputStream stream
+    ) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Set default object to read serializated data.
+     * @param stream Stream to read
+     * @throws IOException if fails
+     * @throws ClassNotFoundException if class doesn't exists
+     */
+    private static void readObject(
+        final ObjectInputStream stream
+    ) throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
     }
 }

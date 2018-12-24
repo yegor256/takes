@@ -24,6 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -92,7 +93,9 @@ public interface Token {
 
         @Override
         public byte[] encoded() throws IOException {
-            return Base64.getEncoder().encode(this.joseo.toString().getBytes());
+            return Base64.getEncoder().encode(
+                this.joseo.toString().getBytes(Charset.defaultCharset())
+            );
         }
     }
 
@@ -163,7 +166,9 @@ public interface Token {
 
         @Override
         public byte[] encoded() throws IOException {
-            return Base64.getEncoder().encode(this.jwto.toString().getBytes());
+            return Base64.getEncoder().encode(
+                this.jwto.toString().getBytes(Charset.defaultCharset())
+            );
         }
     }
 }

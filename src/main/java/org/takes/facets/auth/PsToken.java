@@ -26,6 +26,7 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Iterator;
@@ -125,18 +126,26 @@ public final class PsToken implements Pass {
         if (!head.isEmpty()) {
             final String jwt = head.split(" ", 2)[1].trim();
             final String[] parts = jwt.split(dot);
-            final byte[] jwtheader = parts[0].getBytes();
-            final byte[] jwtpayload = parts[1].getBytes();
-            final byte[] jwtsign = parts[2].getBytes();
+            final byte[] jwtheader = parts[0].getBytes(
+                Charset.defaultCharset()
+            );
+            final byte[] jwtpayload = parts[1].getBytes(
+                Charset.defaultCharset()
+            );
+            final byte[] jwtsign = parts[2].getBytes(Charset.defaultCharset());
             final ByteBuffer tocheck = ByteBuffer.allocate(
                 jwtheader.length + jwtpayload.length + 1
             );
-            tocheck.put(jwtheader).put(".".getBytes()).put(jwtpayload);
+            tocheck.put(jwtheader).put(".".getBytes(Charset.defaultCharset()))
+                .put(jwtpayload);
             final byte[] checked = this.signature.sign(tocheck.array());
             if (Arrays.equals(jwtsign, checked)) {
                 try (JsonReader rdr = Json.createReader(
                     new StringReader(
-                        new String(Base64.getDecoder().decode(jwtpayload))
+                        new String(
+                            Base64.getDecoder().decode(jwtpayload),
+                            Charset.defaultCharset()
+                        )
                     )
                 )) {
                     user = new Opt.Single<>(
@@ -161,7 +170,7 @@ public final class PsToken implements Pass {
             jwtheader.length + jwtpayload.length + 1
         );
         tosign.put(jwtheader);
-        tosign.put(".".getBytes());
+        tosign.put(".".getBytes(Charset.defaultCharset()));
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
         try (JsonReader reader = Json.createReader(res.body())) {
@@ -170,9 +179,9 @@ public final class PsToken implements Pass {
                 .add(
                     "jwt", String.format(
                         "%s.%s.%s",
-                        new String(jwtheader),
-                        new String(jwtpayload),
-                        new String(sign)
+                        new String(jwtheader, Charset.defaultCharset()),
+                        new String(jwtpayload, Charset.defaultCharset()),
+                        new String(sign, Charset.defaultCharset())
                     )
                 )
                 .build();

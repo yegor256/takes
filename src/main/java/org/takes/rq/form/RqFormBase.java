@@ -124,12 +124,10 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> map() throws IOException {
-        synchronized (this.saved) {
-            if (this.saved.isEmpty()) {
-                this.saved.add(this.freshMap());
-            }
-            return this.saved.get(0);
+        if (this.saved.isEmpty()) {
+            this.saved.add(this.freshMap());
         }
+        return this.saved.get(0);
     }
 
     /**

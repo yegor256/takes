@@ -147,7 +147,7 @@ public final class SiHmac implements Signature {
             for (final byte byt : this.create().doFinal(bytes)) {
                 formatter.format("%02x", byt);
             }
-            return formatter.toString().getBytes();
+            return formatter.toString().getBytes(Charset.defaultCharset());
         }
     }
 
