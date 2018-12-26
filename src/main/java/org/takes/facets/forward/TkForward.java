@@ -110,19 +110,17 @@ public final class TkForward implements Take {
          * @throws IOException If fails
          */
         private Response load() throws IOException {
-            synchronized (this.saved) {
-                if (this.saved.isEmpty()) {
-                    Iterable<String> head;
-                    InputStream body;
-                    try {
-                        head = this.origin.head();
-                        body = this.origin.body();
-                    } catch (final RsForward ex) {
-                        head = ex.head();
-                        body = ex.body();
-                    }
-                    this.saved.add(new RsSimple(head, body));
+            if (this.saved.isEmpty()) {
+                Iterable<String> head;
+                InputStream body;
+                try {
+                    head = this.origin.head();
+                    body = this.origin.body();
+                } catch (final RsForward ex) {
+                    head = ex.head();
+                    body = ex.body();
                 }
+                this.saved.add(new RsSimple(head, body));
             }
             return this.saved.get(0);
         }

@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -148,11 +149,6 @@ public final class FkHitRefresh implements Fork {
      */
     private static final class HitRefreshHandle {
         /**
-         * A flag File, which is not yet instantiated.
-         */
-        private static final File INEXISTENT_FLAG = new File("/inexistent");
-
-        /**
          * Directory to watch.
          */
         private final File dir;
@@ -161,7 +157,7 @@ public final class FkHitRefresh implements Fork {
          * Internal state. Flag file touched on every exec run.
          * Instantiated at first touch.
          */
-        private volatile File flag;
+        private final List<File> flag;
 
         /**
          * A lock for concurrent access to flag file.
@@ -188,7 +184,7 @@ public final class FkHitRefresh implements Fork {
             final ReentrantReadWriteLock lock) {
             this.dir = dir;
             this.lock = lock;
-            this.flag = HitRefreshHandle.INEXISTENT_FLAG;
+            this.flag = new CopyOnWriteArrayList<>();
         }
 
         /**
@@ -197,17 +193,15 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         public File touchedFile() throws IOException {
-            this.lock.readLock().lock();
-            final boolean cold = this.flag == HitRefreshHandle.INEXISTENT_FLAG;
-            this.lock.readLock().unlock();
-            if (cold) {
+            if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
-                this.flag = File.createTempFile("take", ".txt");
-                this.flag.deleteOnExit();
+                final File file = File.createTempFile("take", ".txt");
+                file.deleteOnExit();
+                this.flag.add(file);
                 this.lock.writeLock().unlock();
                 this.touch();
             }
-            return this.flag;
+            return this.flag.get(0);
         }
 
         /**
@@ -228,11 +222,8 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         private boolean expired() throws IOException {
-            this.lock.readLock().lock();
-            final boolean cold = this.flag == HitRefreshHandle.INEXISTENT_FLAG;
-            this.lock.readLock().unlock();
-            boolean expired = false;
-            if (cold) {
+            final boolean expired;
+            if (this.flag.isEmpty()) {
                 expired = true;
             } else {
                 expired = this.directoryUpdated();
@@ -248,9 +239,13 @@ public final class FkHitRefresh implements Fork {
          *  in README.md file and must be eliminated.
          */
         private boolean directoryUpdated() {
-            this.lock.readLock().lock();
-            final long recent = this.flag.lastModified();
-            this.lock.readLock().unlock();
+            final long recent;
+            try {
+                this.lock.readLock().lock();
+                recent = this.flag.get(0).lastModified();
+            } finally {
+                this.lock.readLock().unlock();
+            }
             final File[] files = this.dir.listFiles();
             boolean expired = false;
             if (files != null) {

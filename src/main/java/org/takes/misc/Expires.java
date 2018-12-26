@@ -152,13 +152,10 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final java.util.Date expires) {
-            this.format = new ThreadLocal<SimpleDateFormat>() {
-                @Override
-                protected SimpleDateFormat initialValue() {
-                    return new SimpleDateFormat(ptn, locale);
-                }
-            };
-            this.expires = expires;
+            this.format = ThreadLocal.withInitial(
+                () -> new SimpleDateFormat(ptn, locale)
+            );
+            this.expires = new java.util.Date(expires.getTime());
         }
 
         @Override

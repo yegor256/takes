@@ -80,19 +80,17 @@ public final class RsGzip implements Response {
      * @throws IOException If fails
      */
     private Response make() throws IOException {
-        synchronized (this.zipped) {
-            if (this.zipped.isEmpty()) {
-                this.zipped.add(
-                    new RsWithHeader(
-                        new RsWithBody(
-                            this.origin,
-                            RsGzip.gzip(this.origin.body())
-                        ),
-                        "Content-Encoding",
-                        "gzip"
-                    )
-                );
-            }
+        if (this.zipped.isEmpty()) {
+            this.zipped.add(
+                new RsWithHeader(
+                    new RsWithBody(
+                        this.origin,
+                        RsGzip.gzip(this.origin.body())
+                    ),
+                    "Content-Encoding",
+                    "gzip"
+                )
+            );
         }
         return this.zipped.get(0);
     }

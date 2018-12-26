@@ -417,13 +417,6 @@ SOFTWARE.
             <configuration>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                <!--
-                  @todo #837:30min Un-exclude findbugs from qulice checks
-                   and fix the bugs it detects for the build to pass.
-                   Most of those are related to reliance on default encoding
-                   and synchronization problems. 
-                -->
-                <exclude>findbugs:.*</exclude>
               </excludes>
             </configuration>
           </plugin>

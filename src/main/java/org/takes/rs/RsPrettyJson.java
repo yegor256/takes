@@ -85,15 +85,13 @@ public final class RsPrettyJson implements Response {
      * @throws IOException If fails
      */
     private Response make() throws IOException {
-        synchronized (this.transformed) {
-            if (this.transformed.isEmpty()) {
-                this.transformed.add(
-                    new RsWithBody(
-                        this.origin,
-                        RsPrettyJson.transform(this.origin.body())
-                    )
-                );
-            }
+        if (this.transformed.isEmpty()) {
+            this.transformed.add(
+                new RsWithBody(
+                    this.origin,
+                    RsPrettyJson.transform(this.origin.body())
+                )
+            );
         }
         return this.transformed.get(0);
     }
