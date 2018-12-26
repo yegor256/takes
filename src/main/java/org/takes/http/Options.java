@@ -75,7 +75,7 @@ final class Options {
      * @return TRUE if yes
      */
     public boolean isDaemon() {
-        return this.map.get("daemon") != null;
+        return this.map.containsKey("daemon");
     }
 
     /**
@@ -131,14 +131,11 @@ final class Options {
      * @return Port number
      */
     public long lifetime() {
-        final String value = this.map.get("lifetime");
-        final long msec;
-        if (value == null) {
-            msec = Long.MAX_VALUE;
-        } else {
-            msec = Long.parseLong(value);
-        }
-        return msec;
+        return Long.parseLong(
+            this.map.getOrDefault(
+                "lifetime", String.valueOf(Long.MAX_VALUE)
+            )
+        );
     }
 
     /**
@@ -146,14 +143,12 @@ final class Options {
      * @return Threads
      */
     public int threads() {
-        final String value = this.map.get("threads");
-        final int threads;
-        if (value == null) {
-            threads = Runtime.getRuntime().availableProcessors() << 2;
-        } else {
-            threads = Integer.parseInt(value);
-        }
-        return threads;
+        return Integer.parseInt(
+            this.map.getOrDefault(
+                "threads",
+                String.valueOf(Runtime.getRuntime().availableProcessors() << 2)
+            )
+        );
     }
 
     /**
@@ -161,14 +156,12 @@ final class Options {
      * @return Latency
      */
     public long maxLatency() {
-        final String value = this.map.get("max-latency");
-        final long msec;
-        if (value == null) {
-            msec = Long.MAX_VALUE;
-        } else {
-            msec = Long.parseLong(value);
-        }
-        return msec;
+        return Long.parseLong(
+            this.map.getOrDefault(
+                "max-latency",
+                String.valueOf(Long.MAX_VALUE)
+            )
+        );
     }
 
     /**

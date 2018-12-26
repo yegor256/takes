@@ -48,8 +48,7 @@ public final class BkSafe extends BkWrap {
                 try {
                     back.accept(socket);
                     // @checkstyle IllegalCatchCheck (1 line)
-                } catch (final Throwable ex) {
-                    assert ex != null;
+                } catch (final Throwable ignored) {
                 }
             }
         });

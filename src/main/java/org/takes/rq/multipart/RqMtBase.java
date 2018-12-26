@@ -134,12 +134,14 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public Iterable<Request> part(final CharSequence name) {
-        final List<Request> values = this.map
-            .get(new EnglishLowerCase(name.toString()).string());
+        final List<Request> values = this.map.getOrDefault(
+            new EnglishLowerCase(name.toString()).string(),
+            Collections.emptyList()
+        );
         final Iterable<Request> iter;
-        if (values == null) {
+        if (values.isEmpty()) {
             iter = new VerboseIterable<>(
-                Collections.<Request>emptyList(),
+                Collections.emptyList(),
                 new Sprintf(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()

@@ -129,11 +129,7 @@ public final class RsWithStatus extends RsWrap {
      * @return Reason
      */
     private static String best(final int code) {
-        String reason = RsWithStatus.REASONS.get(code);
-        if (reason == null) {
-            reason = "Unknown";
-        }
-        return reason;
+        return RsWithStatus.REASONS.getOrDefault(code, "Unknown");
     }
 
     /**

@@ -182,11 +182,14 @@ public final class Href implements CharSequence {
      * @since 0.9
      */
     public Iterable<String> param(final Object key) {
-        final List<String> values = this.params.get(key.toString());
+        final List<String> values = this.params.getOrDefault(
+            key.toString(),
+            Collections.emptyList()
+        );
         final Iterable<String> iter;
-        if (values == null) {
+        if (values.isEmpty()) {
             iter = new VerboseIterable<>(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 String.format(
                     "there are no URI params by name \"%s\" among %d others",
                     key, this.params.size()
