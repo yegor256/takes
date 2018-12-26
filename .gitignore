@@ -5,3 +5,7 @@ target/
 .classpath
 .project
 .settings
+.gradle
+gradle
+gradlew
+gradlew.bat

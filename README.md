@@ -61,7 +61,7 @@ These two web systems use Takes, and they are open source:
     - [Front Interface](#front-interface)
     - [Back Interface](#back-interface)
 - [Templates](#templates)
-	- [Velocity Templates](#velocity-templates)
+  - [Velocity Templates](#velocity-templates)
 - [Static Resources](#static-resources)
 - [Hit Refresh Debugging](#hit-refresh-debugging)
 - [Request Methods (POST, PUT, HEAD, etc.)](#request-methods-post-put-head-etc)
@@ -1109,7 +1109,9 @@ Version 2.0 is not backward compatible with previous versions.
 Fork repository, make changes, send us a pull request. We will review
 your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
-sending us your pull request please run full Maven build:
+sending us your pull request please build the framework.
+
+### Build using Maven
 
 ```
 $ mvn clean install -Pqulice
@@ -1121,6 +1123,11 @@ Pay attention that our `pom.xml` inherits a lot of configuration
 from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
+
+### Build using gradle
+```
+$ gradle clean build
+```
 
 ## Got questions?
 
