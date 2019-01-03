@@ -36,6 +36,8 @@ import org.takes.Request;
  * Request from {@link HttpServletRequest}.
  *
  * @since 2.0
+ * @todo #866:30min Servlet request adapter is not unit-tested.
+ *  There should be tests for reading headers and body from servlet request.
  */
 final class RqFrom implements Request {
     /**
