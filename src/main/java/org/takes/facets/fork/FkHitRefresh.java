@@ -46,7 +46,6 @@ import org.takes.rq.RqHeaders;
  *
  * @since 0.9
  * @see TkFork
- * @todo #863:30min Continue removing nulls from the code base, there are still
  *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
@@ -86,14 +85,11 @@ public final class FkHitRefresh implements Fork {
         final Take tke) {
         this(
             file,
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new ProcessBuilder().command(cmd).start();
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+            () -> {
+                try {
+                    new ProcessBuilder().command(cmd).start();
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
             },
             tke
@@ -234,7 +230,6 @@ public final class FkHitRefresh implements Fork {
         /**
          * Directory contents updated?
          * @return TRUE if contents were updated
-         * @todo #744:30min `null` constant usage in the function
          *  `directoryUpdated` is violating the key principles, defined
          *  in README.md file and must be eliminated.
          */
@@ -248,7 +243,7 @@ public final class FkHitRefresh implements Fork {
             }
             final File[] files = this.dir.listFiles();
             boolean expired = false;
-            if (files != null) {
+            if (new Opt.Single<>(files).has()) {
                 for (final File file : files) {
                     if (file.lastModified() > recent) {
                         expired = true;
