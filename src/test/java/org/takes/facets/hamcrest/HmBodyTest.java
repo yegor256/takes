@@ -26,9 +26,9 @@ package org.takes.facets.hamcrest;
 
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.IsNot;
 import org.junit.Test;
 import org.takes.Body;
 import org.takes.Request;
@@ -58,6 +58,11 @@ public final class HmBodyTest {
 
     /**
      * HmRqBody can test if values of bodies are different.
+     * @todo #893:30min Continue removing static class Matchers.
+     *  Use the classes PsFacebookTest.java, HmBodyTest.java,
+     *  HmRqTextBodyTest.java, HmRsStatusTest.java,
+     *  RsPreviousTest.java, TkPreviousTest.java,
+     *  RsReturnTest.java and RsPrintTest.java as an example.
      */
     @Test
     public void testsBodyValuesAreDifferent() {
@@ -66,7 +71,7 @@ public final class HmBodyTest {
                 Collections.<String>emptyList(),
                 "this"
             ),
-            Matchers.not(new HmBody<>("that"))
+            new IsNot<>(new HmBody<>("that"))
         );
     }
 
@@ -85,7 +90,7 @@ public final class HmBodyTest {
         matcher.describeMismatchSafely(request, description);
         MatcherAssert.assertThat(
             description.toString(),
-            Matchers.equalTo(
+            new IsEqual<>(
                 "body was: [111, 116, 104, 101, 114]"
             )
         );

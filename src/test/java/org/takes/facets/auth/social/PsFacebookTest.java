@@ -25,6 +25,7 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
+
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -32,7 +33,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.text.RandomStringGenerator;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
@@ -93,7 +94,7 @@ public class PsFacebookTest {
                 )
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(identity.has(), new IsEqual<>(true));
         MatcherAssert.assertThat(
             identity.get().urn(),
             CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))

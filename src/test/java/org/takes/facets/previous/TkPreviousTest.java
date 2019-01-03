@@ -25,7 +25,7 @@ package org.takes.facets.previous;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.StringStartsWith;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -54,7 +54,7 @@ public final class TkPreviousTest {
                     )
                 )
             ).print(),
-            Matchers.startsWith("HTTP/1.1 303 See Other")
+            new StringStartsWith("HTTP/1.1 303 See Other")
         );
     }
 

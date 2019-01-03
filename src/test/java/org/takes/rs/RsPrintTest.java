@@ -30,7 +30,6 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
@@ -69,7 +68,7 @@ public final class RsPrintTest {
         }
         MatcherAssert.assertThat(
             output.haveFlushed(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
     }
 
@@ -115,7 +114,7 @@ public final class RsPrintTest {
         }
         MatcherAssert.assertThat(
             writer.haveFlushed(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
     }
 

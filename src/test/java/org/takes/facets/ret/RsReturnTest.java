@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
@@ -49,7 +49,7 @@ public final class RsReturnTest {
             new RsPrint(
                 new RsReturn(new RsEmpty(), destination)
             ).print(),
-            Matchers.containsString(
+            new StringContains(
                 String.format(
                     "Set-Cookie: RsReturn=%s;Path=/",
                     URLEncoder.encode(
