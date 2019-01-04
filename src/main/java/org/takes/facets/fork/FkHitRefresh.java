@@ -46,7 +46,6 @@ import org.takes.rq.RqHeaders;
  *
  * @since 0.9
  * @see TkFork
- *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
@@ -230,8 +229,6 @@ public final class FkHitRefresh implements Fork {
         /**
          * Directory contents updated?
          * @return TRUE if contents were updated
-         *  `directoryUpdated` is violating the key principles, defined
-         *  in README.md file and must be eliminated.
          */
         private boolean directoryUpdated() {
             final long recent;
