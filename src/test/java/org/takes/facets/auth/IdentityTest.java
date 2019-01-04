@@ -25,7 +25,7 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
@@ -42,7 +42,7 @@ public final class IdentityTest {
     public void equalsToItself() throws IOException {
         MatcherAssert.assertThat(
             Identity.ANONYMOUS,
-            Matchers.equalTo(Identity.ANONYMOUS)
+            new IsEqual<>(Identity.ANONYMOUS)
         );
     }
 

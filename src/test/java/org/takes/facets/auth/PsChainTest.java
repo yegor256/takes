@@ -25,7 +25,8 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
@@ -47,7 +48,7 @@ public final class PsChainTest {
                 new PsLogout(),
                 new PsFake(true)
             ).enter(new RqFake()).get(),
-            Matchers.is(Identity.ANONYMOUS)
+            new IsEqual<>(Identity.ANONYMOUS)
         );
     }
 
@@ -62,7 +63,7 @@ public final class PsChainTest {
                 new PsFake(true)
             ).exit(new RsEmpty(), Identity.ANONYMOUS)
                 .head().iterator().next(),
-            Matchers.containsString("HTTP/1.1 200 O")
+            new StringContains("HTTP/1.1 200 O")
         );
     }
 }
