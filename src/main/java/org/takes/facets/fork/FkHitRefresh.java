@@ -234,9 +234,10 @@ public final class FkHitRefresh implements Fork {
         /**
          * Directory contents updated?
          * @return TRUE if contents were updated
-         * @todo #744:30min `null` constant usage in the function
-         *  `directoryUpdated` is violating the key principles, defined
-         *  in README.md file and must be eliminated.
+         * @todo #802:30min Continue removing nulls from the codebase,
+         *  which still exist in the code. The way it is violates
+         *  the key principles, defined in the README.md file and should be
+         *  deleted.
          */
         private boolean directoryUpdated() {
             final long recent;
@@ -248,7 +249,7 @@ public final class FkHitRefresh implements Fork {
             }
             final File[] files = this.dir.listFiles();
             boolean expired = false;
-            if (files != null) {
+            if (new Opt.Single<>(files).has()) {
                 for (final File file : files) {
                     if (file.lastModified() > recent) {
                         expired = true;
