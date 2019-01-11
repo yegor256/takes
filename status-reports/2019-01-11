@@ -1,0 +1,14 @@
+Scope Status
+* Add servlet support [70%]
+* Description for Takes based REST services [none]
+* Replace Guava with Cactoos [15%]
+* Null removal [25%]
+
+Issues:
+* Takes does not comply fully to EO standards anymore
+* Project needs funding.
+
+Risks
+* Cactoos may not provide all features to fully replace Guava [1/7]
+* Some project members may not agree in working for free until funds are added
+ to project. This can cause our team to shrink and make delivery pace to slow again [4/7]
