@@ -27,7 +27,7 @@ import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Enumeration;
+import java.util.Collections;
 import java.util.LinkedList;
 import javax.servlet.http.HttpServletRequest;
 import org.takes.Request;
@@ -36,9 +36,6 @@ import org.takes.Request;
  * Request from {@link HttpServletRequest}.
  *
  * @since 2.0
- * @todo #866:30min Servlet request adapter is not unit-tested.
- *  There should be tests for reading headers and body from servlet request.
- *  See https://github.com/yegor256/takes/pull/865 discussion for details.
  */
 final class RqFrom implements Request {
     /**
@@ -57,19 +54,22 @@ final class RqFrom implements Request {
     @Override
     public Iterable<String> head() {
         final Collection<String> head = new LinkedList<>();
-        head.add(new RqFrom.HttpHead(this.sreq).toString());
-        head.add(new RqFrom.HttpHost(this.sreq).toString());
-        final Enumeration<String> names = this.sreq.getHeaderNames();
-        while (names.hasMoreElements()) {
-            final String header = names.nextElement();
-            head.add(
+        head.add(new HttpHead(this.sreq).toString());
+        final Collection<String> names = Collections.list(
+            this.sreq.getHeaderNames()
+        );
+        if (!names.stream().anyMatch("host"::equalsIgnoreCase)) {
+            head.add(new HttpHost(this.sreq).toString());
+        }
+        names.forEach(
+            header -> head.add(
                 String.format(
                     "%s: %s",
                     header,
                     this.sreq.getHeader(header)
                 )
-            );
-        }
+            )
+        );
         head.add(
             String.format(
                 "X-Takes-LocalAddress: %s",
@@ -153,7 +153,7 @@ final class RqFrom implements Request {
             final StringBuilder bld = new StringBuilder(Tv.HUNDRED);
             bld.append("Host: ").append(this.req.getServerName());
             final int port = this.req.getServerPort();
-            if (port != RqFrom.HttpHost.PORT_DEFAULT) {
+            if (port != HttpHost.PORT_DEFAULT) {
                 bld.append(':').append(port);
             }
             return bld.toString();
