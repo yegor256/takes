@@ -148,7 +148,7 @@ public final class RsWithBody extends RsWrap {
 
                 @Override
                 public InputStream body() throws IOException {
-                    return body.input();
+                    return body.stream();
                 }
             }
         );

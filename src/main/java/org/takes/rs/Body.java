@@ -32,19 +32,14 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.cactoos.Input;
 
 /**
  * The body of a response used by {@link RsWithBody}.
  *
  * @since 0.32
- * @todo #804:30min Make Body extends Cactoos's Input and replace input method
- *  with stream method. Once this is done, rewrite the tests (such as BodyTest)
- *  so that they do not use guava but Cactoos objects and cactoos-matchers
- *  InputHasContent. When there is no more need for the method input,
- *  remove it.
  */
-@SuppressWarnings("PMD.TooManyMethods")
-interface Body {
+interface Body extends Input {
     /**
      * Gives an {@code InputStream} corresponding to the content of
      * the body.
@@ -52,7 +47,7 @@ interface Body {
      * @throws IOException in case the content of the body could not
      *  be provided.
      */
-    InputStream input() throws IOException;
+    InputStream stream() throws IOException;
 
     /**
      * Gives the length of the stream.
@@ -81,7 +76,7 @@ interface Body {
         }
 
         @Override
-        public InputStream input() throws IOException {
+        public InputStream stream() throws IOException {
             return this.url.openStream();
         }
 
@@ -112,7 +107,7 @@ interface Body {
         }
 
         @Override
-        public InputStream input() {
+        public InputStream stream() {
             return new ByteArrayInputStream(this.bytes);
         }
 
@@ -147,7 +142,7 @@ interface Body {
         }
 
         @Override
-        public InputStream input() throws IOException {
+        public InputStream stream() throws IOException {
             this.estimate();
             return this.stream;
         }
@@ -206,7 +201,7 @@ interface Body {
         }
 
         @Override
-        public InputStream input() throws IOException {
+        public InputStream stream() throws IOException {
             return Files.newInputStream(this.file().toPath());
         }
 
@@ -239,7 +234,7 @@ interface Body {
             synchronized (this.file) {
                 if (!this.file.exists()) {
                     this.file.deleteOnExit();
-                    try (InputStream content = this.body.input()) {
+                    try (InputStream content = this.body.stream()) {
                         Files.copy(
                             content,
                             Paths.get(this.file.getAbsolutePath()),
