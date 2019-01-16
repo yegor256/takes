@@ -286,9 +286,6 @@ public final class PsBasic implements Pass {
          * @param pwd Password.
          * @return Opt with URN or empty if there is no such login-password
          *  pair.
-         * @todo #744:30min `null` constant usage in the function
-         *  `urn` is violating the key principles, defined
-         *  in README.md file and must be eliminated.
          */
         private Opt<String> urn(final String user, final String pwd) {
             final String urn;
