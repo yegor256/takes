@@ -224,11 +224,13 @@ public final class PsGoogle implements Pass {
      */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
-        final JsonObject image = json.getJsonObject("image");
-        if (image == null) {
-            props.put(PsGoogle.PICTURE, "#");
+        final Opt<JsonObject> image = new Opt.Single<>(
+            json.getJsonObject("image")
+        );
+        if (image.has()) {
+            props.put(PsGoogle.PICTURE, image.get().getString("url", "#"));
         } else {
-            props.put(PsGoogle.PICTURE, image.getString("url", "#"));
+            props.put(PsGoogle.PICTURE, "#");
         }
         props.put(
             PsGoogle.NAME, json.getString(PsGoogle.DISPLAY_NAME, "unknown")

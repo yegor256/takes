@@ -77,11 +77,12 @@ public interface RqCookies extends Request {
         public Iterable<String> cookie(final CharSequence key)
             throws IOException {
             final Map<String, String> map = this.map();
-            final String value = map.get(
-                new EnglishLowerCase(key.toString()).string()
+            final String value = map.getOrDefault(
+                new EnglishLowerCase(key.toString()).string(),
+                ""
             );
             final Iterable<String> iter;
-            if (value == null) {
+            if (value.isEmpty()) {
                 iter = new VerboseIterable<>(
                     Collections.<String>emptyList(),
                     new Sprintf(

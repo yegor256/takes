@@ -46,8 +46,6 @@ import org.takes.rq.RqHeaders;
  *
  * @since 0.9
  * @see TkFork
- * @todo #863:30min Continue removing nulls from the code base, there are still
- *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
@@ -86,14 +84,11 @@ public final class FkHitRefresh implements Fork {
         final Take tke) {
         this(
             file,
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new ProcessBuilder().command(cmd).start();
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+            () -> {
+                try {
+                    new ProcessBuilder().command(cmd).start();
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
             },
             tke
@@ -234,10 +229,6 @@ public final class FkHitRefresh implements Fork {
         /**
          * Directory contents updated?
          * @return TRUE if contents were updated
-         * @todo #802:30min Continue removing nulls from the codebase,
-         *  which still exist in the code. The way it is violates
-         *  the key principles, defined in the README.md file and should be
-         *  deleted.
          */
         private boolean directoryUpdated() {
             final long recent;
