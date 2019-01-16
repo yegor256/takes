@@ -25,7 +25,7 @@ package org.takes.facets.auth;
 
 import java.net.URLEncoder;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
@@ -53,7 +53,7 @@ public final class PsBasicDefaultTest {
             )
                 .get()
                 .urn(),
-            Matchers.equalTo("urn:foo:robert")
+                new IsEqual<>("urn:foo:robert")
         );
     }
 
@@ -75,7 +75,7 @@ public final class PsBasicDefaultTest {
                     "hey you"
             )
                 .has(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
         MatcherAssert.assertThat(
             new PsBasic.Default(
@@ -88,7 +88,7 @@ public final class PsBasicDefaultTest {
                     "hey me"
             )
                 .has(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
     }
 
@@ -109,7 +109,7 @@ public final class PsBasicDefaultTest {
                     "qwer"
             )
                 .has(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
     }
 
@@ -135,7 +135,7 @@ public final class PsBasicDefaultTest {
             )
                 .get()
                 .urn(),
-            Matchers.is(urn)
+            new IsEqual<>(urn)
         );
     }
 
@@ -154,7 +154,7 @@ public final class PsBasicDefaultTest {
             )
                 .enter("charlie", "wrongpassword")
                 .has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -173,7 +173,7 @@ public final class PsBasicDefaultTest {
             )
                 .enter("mike", "anything")
                 .has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 }

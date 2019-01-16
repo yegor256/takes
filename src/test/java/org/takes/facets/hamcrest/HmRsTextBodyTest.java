@@ -24,7 +24,7 @@
 package org.takes.facets.hamcrest;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
 import org.junit.Test;
 import org.takes.rs.RsWithBody;
 
@@ -54,7 +54,7 @@ public final class HmRsTextBodyTest {
     public void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
             new RsWithBody("Some response"),
-            Matchers.not(new HmRsTextBody("expected something else"))
+            new IsNot<>(new HmRsTextBody("expected something else"))
         );
     }
 }

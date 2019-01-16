@@ -26,7 +26,7 @@ package org.takes.facets.hamcrest;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
@@ -62,7 +62,7 @@ public final class HmRsStatusTest {
     public void testsStatusNotFound() throws IOException {
         MatcherAssert.assertThat(
             new TkHtml("<html><body/></html>").act(new RqFake()),
-            Matchers.not(
+            new IsNot<>(
                 new HmRsStatus(
                     HttpURLConnection.HTTP_NOT_FOUND
                 )

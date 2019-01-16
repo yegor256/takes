@@ -25,7 +25,7 @@ package org.takes.facets.hamcrest;
 
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsNot;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 
@@ -61,7 +61,7 @@ public final class HmRqTextBodyTest {
                 Collections.<String>emptyList(),
                 "some"
             ),
-            Matchers.not(new HmRqTextBody("other"))
+            new IsNot<>(new HmRqTextBody("other"))
         );
     }
 }
