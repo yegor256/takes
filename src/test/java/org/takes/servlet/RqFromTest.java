@@ -24,11 +24,12 @@
 
 package org.takes.servlet;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.StringContains;
+import org.hamcrest.core.StringStartsWith;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqPrint;
@@ -37,6 +38,7 @@ import org.takes.rq.RqPrint;
  * Test case for {@link  RqFrom}.
  *
  * @since 1.15
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RqFromTest {
@@ -51,7 +53,7 @@ public final class RqFromTest {
                     )
                 )
             ).printHead(),
-            Matchers.startsWith("GET /")
+            new StringStartsWith("GET /")
         );
     }
 
@@ -72,14 +74,15 @@ public final class RqFromTest {
                     )
                 )
             ).printHead(),
-            Matchers.startsWith(
-                Joiner.on("\r\n").join(
+            new StringStartsWith(
+                new JoinedText(
+                    "\r\n",
                     "GET /a-test",
                     "Host: localhost",
                     "foo: bar",
                     "X-Takes-LocalAddress: 127.0.0.1",
                     "X-Takes-RemoteAddress: 127.0.0.1"
-                )
+                ).asString()
             )
         );
     }
@@ -101,13 +104,14 @@ public final class RqFromTest {
                     )
                 )
             ).printHead(),
-            Matchers.startsWith(
-                Joiner.on("\r\n").join(
+            new StringStartsWith(
+                new JoinedText(
+                    "\r\n",
                     "GET /one-more-test",
                     "host: www.thesite.com",
                     "X-Takes-LocalAddress: 127.0.0.1",
                     "X-Takes-RemoteAddress: 127.0.0.1"
-                )
+                ).asString()
             )
         );
     }
@@ -129,13 +133,14 @@ public final class RqFromTest {
                     )
                 )
             ).printHead(),
-            Matchers.startsWith(
-                Joiner.on("\r\n").join(
+            new StringStartsWith(
+                new JoinedText(
+                    "\r\n",
                     "GET /b-test",
                     "host: 192.168.0.1:12345",
                     "X-Takes-LocalAddress: 127.0.0.1",
                     "X-Takes-RemoteAddress: 127.0.0.1"
-                )
+                ).asString()
             )
         );
     }
@@ -155,7 +160,7 @@ public final class RqFromTest {
                     )
                 )
             ).printBody(),
-            Matchers.containsString(content)
+            new StringContains(content)
         );
     }
 }

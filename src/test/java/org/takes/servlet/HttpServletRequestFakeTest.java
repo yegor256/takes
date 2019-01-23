@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
@@ -98,7 +99,7 @@ public final class HttpServletRequestFakeTest {
         MatcherAssert.assertThat(
             "Can't get the request method",
             new HttpServletRequestFake(new RqFake()).getMethod(),
-            Matchers.equalTo("GET")
+            new IsEqual<>("GET")
         );
     }
 }
