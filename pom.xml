@@ -129,9 +129,9 @@ SOFTWARE.
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>com.sun.grizzly</groupId>
-      <artifactId>grizzly-servlet-webserver</artifactId>
-      <version>1.9.65</version>
+      <groupId>org.glassfish.grizzly</groupId>
+      <artifactId>grizzly-http-servlet-server</artifactId>
+      <version>2.4.3.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>

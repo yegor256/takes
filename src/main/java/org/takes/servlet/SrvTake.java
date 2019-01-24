@@ -39,9 +39,9 @@ import org.takes.Take;
  * Servlet for take.
  *
  * @since 2.0
- * @todo #865:30min Continue to integrate with Servlet API,
+ * @todo #953:30min Integration with Servlets Session API,
  *  see https://github.com/yegor256/takes/pull/865 discussion for details.
- *  Also add unit tests for servlet related class SrvTake.
+ *  Add support and tests to Servlet Session.
  */
 public final class SrvTake extends HttpServlet {
     /**
