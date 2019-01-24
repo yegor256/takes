@@ -26,13 +26,16 @@ package org.takes.servlet;
 
 import java.util.Collections;
 import java.util.NoSuchElementException;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsEqual;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeaders;
 
 /**
@@ -48,7 +51,7 @@ public final class HttpServletRequestFakeTest {
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void headersNotFound() {
+    public void failsIfAHeaderIsNotFound() {
         this.exception.expect(NoSuchElementException.class);
         this.exception.expectMessage("Value of header foo not found");
         new HttpServletRequestFake(
@@ -61,7 +64,7 @@ public final class HttpServletRequestFakeTest {
     }
 
     @Test
-    public void headers() {
+    public void containsAHeaderAndItsValue() {
         MatcherAssert.assertThat(
             "Can't get the headers",
             Collections.list(
@@ -73,12 +76,15 @@ public final class HttpServletRequestFakeTest {
                     )
                 ).getHeaders("testheader")
             ),
-            Matchers.hasItems("someValue")
+            new IsCollectionContaining<>(
+                new IsEqual<>("someValue")
+            )
         );
     }
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void headerNames() {
+    public void containsAllHeadersNames() {
         MatcherAssert.assertThat(
             "Can't get the header names",
             Collections.list(
@@ -90,16 +96,22 @@ public final class HttpServletRequestFakeTest {
                     )
                 ).getHeaderNames()
             ),
-            Matchers.hasItems("host", "anyheader", "crazyheader")
+            new IsIterableContainingInAnyOrder<>(
+                new ListOf<>(
+                    new IsEqual<>("host"),
+                    new IsEqual<>("crazyheader"),
+                    new IsEqual<>("anyheader")
+                )
+            )
         );
     }
 
     @Test
-    public void method() {
+    public void defaultMethodIsGet() {
         MatcherAssert.assertThat(
             "Can't get the request method",
             new HttpServletRequestFake(new RqFake()).getMethod(),
-            new IsEqual<>("GET")
+            new IsEqual<>(RqMethod.GET)
         );
     }
 }

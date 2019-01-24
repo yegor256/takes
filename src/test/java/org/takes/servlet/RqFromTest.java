@@ -40,10 +40,32 @@ import org.takes.rq.RqPrint;
  * @since 1.15
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RqFromTest {
+
+    /**
+     * Takes default local address.
+     */
+    private static final String LOCAL_ADDRESS =
+        "X-Takes-LocalAddress: 127.0.0.1";
+
+    /**
+     * Takes default remote address.
+     */
+    private static final String REMOTE_ADDRESS =
+        "X-Takes-RemoteAddress: 127.0.0.1";
+
+    /**
+     * End Of Line for HTTP protocol.
+     */
+    private static final String EOL = "\r\n";
+
+    /**
+     * Default GET method.
+     */
+    private static final String GET_METHOD = "GET /";
+
     @Test
-    public void method() throws IOException {
+    public void defaultMethodForAFakeResquestIsGet() throws IOException {
         MatcherAssert.assertThat(
             "Can't add a method to a servlet request",
             new RqPrint(
@@ -53,12 +75,14 @@ public final class RqFromTest {
                     )
                 )
             ).printHead(),
-            new StringStartsWith("GET /")
+            new StringStartsWith(RqFromTest.GET_METHOD)
         );
     }
 
     @Test
-    public void header() throws IOException {
+    public void containsMethodAndHeader() throws IOException {
+        final String method = "GET /a-test";
+        final String header = "foo: bar";
         MatcherAssert.assertThat(
             "Can't add a header to a servlet request",
             new RqPrint(
@@ -66,8 +90,8 @@ public final class RqFromTest {
                     new HttpServletRequestFake(
                         new RqFake(
                             new ListOf<>(
-                                "GET /a-test",
-                                "foo: bar"
+                                method,
+                                header
                             ),
                             ""
                         )
@@ -76,19 +100,21 @@ public final class RqFromTest {
             ).printHead(),
             new StringStartsWith(
                 new JoinedText(
-                    "\r\n",
-                    "GET /a-test",
+                    RqFromTest.EOL,
+                    method,
                     "Host: localhost",
-                    "foo: bar",
-                    "X-Takes-LocalAddress: 127.0.0.1",
-                    "X-Takes-RemoteAddress: 127.0.0.1"
+                    header,
+                    RqFromTest.LOCAL_ADDRESS,
+                    RqFromTest.REMOTE_ADDRESS
                 ).asString()
             )
         );
     }
 
     @Test
-    public void hostInHeader() throws IOException {
+    public void containsHostHeaderInHeader() throws IOException {
+        final String method = "GET /one-more-test";
+        final String header = "Host: www.thesite.com";
         MatcherAssert.assertThat(
             "Can't set a host in a servlet request",
             new RqPrint(
@@ -96,8 +122,8 @@ public final class RqFromTest {
                     new HttpServletRequestFake(
                         new RqFake(
                             new ListOf<>(
-                                "GET /one-more-test",
-                                "Host: www.thesite.com"
+                                method,
+                                header
                             ),
                             ""
                         )
@@ -106,18 +132,20 @@ public final class RqFromTest {
             ).printHead(),
             new StringStartsWith(
                 new JoinedText(
-                    "\r\n",
-                    "GET /one-more-test",
-                    "host: www.thesite.com",
-                    "X-Takes-LocalAddress: 127.0.0.1",
-                    "X-Takes-RemoteAddress: 127.0.0.1"
+                    RqFromTest.EOL,
+                    method,
+                    header,
+                    RqFromTest.LOCAL_ADDRESS,
+                    RqFromTest.REMOTE_ADDRESS
                 ).asString()
             )
         );
     }
 
     @Test
-    public void hostAndPortInHeader() throws IOException {
+    public void containsHostAndPortInHeader() throws IOException {
+        final String method = "GET /b-test";
+        final String header = "Host: 192.168.0.1:12345";
         MatcherAssert.assertThat(
             "Can't set a host and port in a servlet request",
             new RqPrint(
@@ -125,8 +153,8 @@ public final class RqFromTest {
                     new HttpServletRequestFake(
                         new RqFake(
                             new ListOf<>(
-                                "GET /b-test",
-                                "Host: 192.168.0.1:12345"
+                                method,
+                                header
                             ),
                             ""
                         )
@@ -135,18 +163,18 @@ public final class RqFromTest {
             ).printHead(),
             new StringStartsWith(
                 new JoinedText(
-                    "\r\n",
-                    "GET /b-test",
-                    "host: 192.168.0.1:12345",
-                    "X-Takes-LocalAddress: 127.0.0.1",
-                    "X-Takes-RemoteAddress: 127.0.0.1"
+                    RqFromTest.EOL,
+                    method,
+                    header,
+                    RqFromTest.LOCAL_ADDRESS,
+                    RqFromTest.REMOTE_ADDRESS
                 ).asString()
             )
         );
     }
 
     @Test
-    public void body() throws IOException {
+    public void containsContentInRequestBody() throws IOException {
         final String content = "My name is neo!";
         MatcherAssert.assertThat(
             "Can't add a body to servlet request",
@@ -154,7 +182,7 @@ public final class RqFromTest {
                 new RqFrom(
                     new HttpServletRequestFake(
                         new RqFake(
-                            new ListOf<>("GET /"),
+                            new ListOf<>(RqFromTest.EOL),
                             content
                         )
                     )
