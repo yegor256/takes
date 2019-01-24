@@ -29,7 +29,8 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 
 /**
- * ServletInputStreamOf.
+ * ServletIInputStream that decorates a {@link InputStream} to be used
+ * by a {@link HttpServletRequestFake}.
  *
  * @since 1.15
  */
