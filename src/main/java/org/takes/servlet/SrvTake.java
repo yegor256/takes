@@ -41,7 +41,8 @@ import org.takes.Take;
  * @since 2.0
  * @todo #953:30min Integration with Servlets Session API,
  *  see https://github.com/yegor256/takes/pull/865 discussion for details.
- *  Add support and tests to Servlet Session.
+ *  Add support and tests to Servlet Session. This implementation will
+ *  able store data in the server side, as a session does.
  */
 public final class SrvTake extends HttpServlet {
     /**
