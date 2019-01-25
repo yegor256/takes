@@ -26,13 +26,20 @@ package org.takes.servlet;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import java.io.IOException;
 import java.net.HttpURLConnection;
+import javax.servlet.ServletContext;
 import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Test;
+import org.takes.Request;
+import org.takes.Response;
+import org.takes.Take;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link SrvTake}.
@@ -40,6 +47,12 @@ import org.junit.jupiter.api.Test;
  * @since 1.16
  */
 public final class SrvTakeTest {
+    /**
+     * Message returned if servlet Takes is executed correctly.
+     */
+    private static final String MSG =
+        "Hello servlet! Using [%s] ServletContext.";
+
     @Test
     public void executeATakesAsAServlet() throws Exception {
         final String name = "webapp";
@@ -49,7 +62,7 @@ public final class SrvTakeTest {
             "takes",
             SrvTake.class
         );
-        servlet.setInitParameter("take", TkServletApp.class.getName());
+        servlet.setInitParameter("take", TkApp.class.getName());
         servlet.addMapping("/test");
         context.deploy(server);
         server.start();
@@ -60,11 +73,43 @@ public final class SrvTakeTest {
             .assertBody(
                 new StringContains(
                     new FormattedText(
-                        "Hello servlet! Using [%s] ServletContext.",
+                        SrvTakeTest.MSG,
                         name
                     ).asString()
                 )
             );
         server.shutdownNow();
+    }
+
+    /**
+     * Fake TkApp (for {@link SrvTake} test only).
+     *
+     * @since 1.16
+     */
+    final class TkApp implements Take {
+        /**
+         * ServletContext.
+         */
+        private final ServletContext context;
+
+        /**
+         * Ctor.
+         * @param ctx A ServletContext
+         */
+        TkApp(final ServletContext ctx) {
+            this.context = ctx;
+        }
+
+        @Override
+        public Response act(final Request req) throws IOException {
+            return new RsText(
+                new UncheckedText(
+                    new FormattedText(
+                        SrvTakeTest.MSG,
+                        this.context.getServletContextName()
+                    )
+                ).asString()
+            );
+        }
     }
 }
