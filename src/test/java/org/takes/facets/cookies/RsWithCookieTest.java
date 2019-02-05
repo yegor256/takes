@@ -23,10 +23,10 @@
  */
 package org.takes.facets.cookies;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -118,8 +118,9 @@ public final class RsWithCookieTest {
      * Returns the joined cookie.
      * @param cookies Cookies values
      * @return Joined cookie
+     * @throws IOException when there is a problem
      */
-    private static String cookies(final String... cookies) {
+    private static String cookies(final String... cookies) throws IOException {
         final List<String> list = new ArrayList<>(cookies.length + 3);
         list.add("HTTP/1.1 200 OK");
         for (final String cookie : cookies) {
@@ -127,7 +128,7 @@ public final class RsWithCookieTest {
         }
         list.add("");
         list.add("");
-        return Joiner.on("\r\n").join(list.iterator());
+        return new JoinedText("\r\n", list).asString();
     }
 
     /**

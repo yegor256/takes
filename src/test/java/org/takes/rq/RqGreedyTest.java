@@ -23,9 +23,9 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -43,12 +43,13 @@ public final class RqGreedyTest {
      */
     @Test
     public void makesRequestGreedy() throws IOException {
-        final String body = Joiner.on("\r\n").join(
+        final String body = new JoinedText(
+            "\r\n",
             "GET /test HTTP/1.1",
             "Host: localhost",
             "",
             "... the body ..."
-        );
+        ).asString();
         final Request req = new RqGreedy(
             new RqWithHeader(
                 new RqLive(

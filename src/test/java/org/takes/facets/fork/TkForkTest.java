@@ -23,8 +23,8 @@
  */
 package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -51,13 +51,14 @@ public final class TkForkTest {
                 )
             ).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
                     "",
                     body
-                )
+                ).asString()
             )
         );
     }

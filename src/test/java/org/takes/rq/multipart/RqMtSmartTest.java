@@ -23,7 +23,6 @@
  */
 package org.takes.rq.multipart;
 
-import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.BufferedWriter;
@@ -35,6 +34,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -102,13 +102,14 @@ public final class RqMtSmartTest {
         final int length = 5000;
         final String part = "x-1";
         final String body =
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("X", length),
                 String.format("%s--", RqMtSmartTest.BODY_ELEMENT)
-            );
+            ).asString();
         final Request req = new RqFake(
             Arrays.asList(
                 post,
@@ -144,14 +145,15 @@ public final class RqMtSmartTest {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 "----foo",
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 StringUtils.repeat("F", length),
                 "",
                 "----foo--"
-            );
+            ).asString();
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
@@ -197,11 +199,12 @@ public final class RqMtSmartTest {
             }
         };
         final String body =
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 "--AaB0zz",
                 String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
-            );
+            ).asString();
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new FtRemote.Script() {
@@ -241,12 +244,13 @@ public final class RqMtSmartTest {
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         bwr.write(
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            )
+            ).asString()
         );
         for (int ind = 0; ind < length; ++ind) {
             bwr.write("X");
@@ -296,23 +300,25 @@ public final class RqMtSmartTest {
         final File file = this.temp.newFile("notDistortContent.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         final String head =
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 "--zzz1",
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            );
+            ).asString();
         bwr.write(head);
         final int byt = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
             bwr.write(idx % byt);
         }
         final String foot =
-            Joiner.on(RqMtSmartTest.CRLF).join(
+            new JoinedText(
+                RqMtSmartTest.CRLF,
                 "",
                 "--zzz1--",
                 ""
-            );
+            ).asString();
         bwr.write(foot);
         bwr.close();
         final String post = "POST /post?u=5 HTTP/1.1";

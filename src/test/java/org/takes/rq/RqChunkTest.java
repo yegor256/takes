@@ -23,10 +23,10 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -68,12 +68,13 @@ public final class RqChunkTest {
                     "Host: www.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(RqChunkTest.CRLF).join(
+                new JoinedText(
+                    RqChunkTest.CRLF,
                     length,
                     data,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                )
+                ).asString()
             )
         ).body();
         final byte[] buf = new byte[data.length()];
@@ -103,7 +104,8 @@ public final class RqChunkTest {
                     "Host: b.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(RqChunkTest.CRLF).join(
+                new JoinedText(
+                    RqChunkTest.CRLF,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),
@@ -112,7 +114,7 @@ public final class RqChunkTest {
                     third,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                )
+                ).asString()
             )
         ).body();
         final byte[] buf = new byte[length];
@@ -140,12 +142,13 @@ public final class RqChunkTest {
                     "Host: c.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                Joiner.on(RqChunkTest.CRLF).join(
+                new JoinedText(
+                    RqChunkTest.CRLF,
                     length + ignored,
                     data,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                )
+                ).asString()
             )
         ).body();
         final byte[] buf = new byte[data.length()];

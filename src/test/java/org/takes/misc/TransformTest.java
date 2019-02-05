@@ -23,8 +23,9 @@
  */
 package org.takes.misc;
 
-import com.google.common.base.Joiner;
+import java.io.IOException;
 import java.util.Arrays;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,11 +39,13 @@ public final class TransformTest {
 
     /**
      * Transform can transform list.
+     * @throws IOException when there is a problem
      */
     @Test
-    public void transformsList() {
+    public void transformsList() throws IOException {
         MatcherAssert.assertThat(
-            Joiner.on(" ").join(
+            new JoinedText(
+                " ",
                 new Transform<String, String>(
                     Arrays.asList("one", "two", "three"),
                     new TransformAction<String, String>() {
@@ -52,7 +55,7 @@ public final class TransformTest {
                         }
                     }
                 )
-            ),
+            ).asString(),
             Matchers.equalTo("onet twot threet")
         );
     }

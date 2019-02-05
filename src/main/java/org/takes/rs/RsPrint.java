@@ -42,7 +42,7 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #804:30min Continue removing Guava's code from tests, starting
+ * @todo #888:30min Continue removing Guava's code from tests, starting
  *  with all the calls to Joiner by replacing them with Cactoos JoinedText
  *  and the use of cactoos-matchers TextIs or TextHasContent coupled with this
  *  class RsPrint as a Text as it was started in #804. When there is no more

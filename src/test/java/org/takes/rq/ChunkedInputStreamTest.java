@@ -23,11 +23,11 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -59,12 +59,13 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(ChunkedInputStreamTest.CRLF).join(
+                new JoinedText(
+                    ChunkedInputStreamTest.CRLF,
                     length,
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ),
+                ).asString(),
                 StandardCharsets.UTF_8
             )
         );
@@ -91,7 +92,8 @@ public final class ChunkedInputStreamTest {
         final Integer length = data.length();
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(ChunkedInputStreamTest.CRLF).join(
+                new JoinedText(
+                    ChunkedInputStreamTest.CRLF,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),
@@ -100,7 +102,7 @@ public final class ChunkedInputStreamTest {
                     third,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ),
+                ).asString(),
                 StandardCharsets.UTF_8
             )
         );
@@ -125,12 +127,13 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                Joiner.on(ChunkedInputStreamTest.CRLF).join(
+                new JoinedText(
+                    ChunkedInputStreamTest.CRLF,
                     length + ignored,
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ),
+                ).asString(),
                 StandardCharsets.UTF_8
             )
         );

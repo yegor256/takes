@@ -23,9 +23,9 @@
  */
 package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -42,6 +42,7 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link TkProduces}.
  * @since 0.14
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkProducesTest {
 
@@ -90,12 +91,12 @@ public final class TkProducesTest {
         MatcherAssert.assertThat(
             new RsPrint(response).print(),
             Matchers.equalTo(
-                Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
+                new JoinedText(
+                    "\r\n", "HTTP/1.1 200 OK",
                     "Content-Type: application/json",
                     "",
                     ""
-                )
+                ).asString()
             )
         );
     }

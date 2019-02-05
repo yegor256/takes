@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import com.google.common.base.Joiner;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
@@ -37,6 +36,8 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
+import org.cactoos.io.BytesOf;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -82,10 +83,10 @@ public final class BkBasicTest {
     /**
      * BkBasic can handle socket data.
      *
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void handlesSocket() throws IOException {
+    public void handlesSocket() throws Exception {
         final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
         final String hello = "Hello World";
@@ -124,10 +125,10 @@ public final class BkBasicTest {
     /**
      * BkBasic produces headers with addresses without slashes.
      *
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void addressesInHeadersAddedWithoutSlashes() throws IOException {
+    public void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
         new BkBasic(
@@ -211,7 +212,8 @@ public final class BkBasicTest {
                 )
             ) {
                 socket.getOutputStream().write(
-                    Joiner.on(BkBasicTest.CRLF).join(
+                    new JoinedText(
+                        BkBasicTest.CRLF,
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
                         "Content-Length: 11",
@@ -222,7 +224,7 @@ public final class BkBasicTest {
                         "Content-Length: 12",
                         "",
                         "Hello Second"
-                    ).getBytes()
+                    ).asString().getBytes()
                 );
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
@@ -273,12 +275,15 @@ public final class BkBasicTest {
                 )
             ) {
                 socket.getOutputStream().write(
-                    Joiner.on(BkBasicTest.CRLF).join(
-                        BkBasicTest.POST,
-                        BkBasicTest.HOST,
-                        "",
-                        text
-                    ).getBytes()
+                    new BytesOf(
+                        new JoinedText(
+                            BkBasicTest.CRLF,
+                            BkBasicTest.POST,
+                            BkBasicTest.HOST,
+                            "",
+                            text
+                        )
+                    ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
@@ -327,13 +332,16 @@ public final class BkBasicTest {
                 )
             ) {
                 socket.getOutputStream().write(
-                    Joiner.on(BkBasicTest.CRLF).join(
-                        BkBasicTest.POST,
-                        BkBasicTest.HOST,
-                        "Connection: Close",
-                        "",
-                        greetings
-                    ).getBytes()
+                    new BytesOf(
+                        new JoinedText(
+                            BkBasicTest.CRLF,
+                            BkBasicTest.POST,
+                            BkBasicTest.HOST,
+                            "Connection: Close",
+                            "",
+                            greetings
+                        )
+                    ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
@@ -354,18 +362,21 @@ public final class BkBasicTest {
      * Creates Socket mock for reuse.
      *
      * @return Prepared Socket mock
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
-    private static MkSocket createMockSocket() throws IOException {
+    private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
-                Joiner.on(BkBasicTest.CRLF).join(
-                    "GET / HTTP/1.1",
-                    BkBasicTest.HOST,
-                    "Content-Length: 2",
-                    "",
-                    "hi"
-                ).getBytes()
+                new BytesOf(
+                    new JoinedText(
+                        BkBasicTest.CRLF,
+                        "GET / HTTP/1.1",
+                        BkBasicTest.HOST,
+                        "Content-Length: 2",
+                        "",
+                        "hi"
+                    )
+                ).asBytes()
             )
         );
     }

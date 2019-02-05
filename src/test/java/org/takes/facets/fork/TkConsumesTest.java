@@ -23,11 +23,11 @@
  */
 package org.takes.facets.fork;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -75,10 +75,11 @@ public final class TkConsumesTest {
         MatcherAssert.assertThat(
             new RsPrint(response).print(),
             Matchers.startsWith(
-                Joiner.on("\r\n").join(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 200 OK",
                     contenttype
-                )
+                ).asString()
             )
         );
     }
