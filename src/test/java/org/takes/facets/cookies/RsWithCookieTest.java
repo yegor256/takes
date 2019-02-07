@@ -29,7 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.takes.facets.auth.codecs.DecodingException;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -101,17 +103,29 @@ public final class RsWithCookieTest {
     /**
      * RsWithCookie can reject invalid cookie name.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectsInvalidName() {
-        new RsWithCookie(new RsEmpty(), "f oo", "works");
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RsWithCookie(new RsEmpty(), "f oo", "works");
+            }
+        );
     }
 
     /**
      * RsWithCookie can reject invalid cookie value.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectsInvalidValue() {
-        new RsWithCookie(new RsEmpty(), "cookiename", "wo\"rks");
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RsWithCookie(
+                    new RsEmpty(), "cookiename", "wo\"rks"
+                );
+            }
+        );
     }
 
     /**

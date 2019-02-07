@@ -28,8 +28,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
+import org.takes.facets.auth.codecs.DecodingException;
 
 /**
  * Test case for {@link RqLive}.
@@ -114,12 +116,17 @@ public final class RqLiveTest {
      * RqLive can fail when request is broken.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
+    @Test
     public void failsOnBrokenHttpRequest() throws IOException {
-        new RqLive(
-            new ByteArrayInputStream(
-                "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
-            )
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RqLive(
+                    new ByteArrayInputStream(
+                        "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
+                    )
+                );
+            }
         );
     }
 
@@ -127,12 +134,17 @@ public final class RqLiveTest {
      * RqLive can fail when request is broken.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
+    @Test
     public void failsOnInvalidCrLfInRequest() throws IOException {
-        new RqLive(
-            new ByteArrayInputStream(
-                "GET /test HTTP/1.1\rHost: localhost".getBytes()
-            )
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RqLive(
+                    new ByteArrayInputStream(
+                        "GET /test HTTP/1.1\rHost: localhost".getBytes()
+                    )
+                );
+            }
         );
     }
 

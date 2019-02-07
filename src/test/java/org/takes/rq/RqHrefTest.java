@@ -28,8 +28,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
+import org.takes.facets.auth.codecs.DecodingException;
 
 /**
  * Test case for {@link RqHref.Base}.
@@ -105,11 +107,16 @@ public final class RqHrefTest {
      * Request without Request-Line.
      * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
+    @Test
     public void failsOnAbsentRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqSimple(Collections.<String>emptyList(), null)
-        ).href();
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RqHref.Base(
+                    new RqSimple(Collections.<String>emptyList(), null)
+                ).href();
+            }
+        );
     }
 
     /**
@@ -117,17 +124,22 @@ public final class RqHrefTest {
      * Request with illegal Request-Line.
      * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
+    @Test
     public void failsOnIllegalRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GIVE/contacts",
-                    "Host: 2.example.com"
-                ),
-                ""
-            )
-        ).href();
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RqHref.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GIVE/contacts",
+                            "Host: 2.example.com"
+                        ),
+                        ""
+                    )
+                ).href();
+            }
+        );
     }
 
     /**

@@ -28,7 +28,9 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.takes.facets.auth.codecs.DecodingException;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -65,8 +67,15 @@ public final class RsReturnTest {
      * RsReturn can reject invalid location.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
+    @Test
     public void rejectsInvalidLocation() throws IOException {
-        new RsReturn(new RsEmpty(), "http://www.netbout.com/,PsCookie=");
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new RsReturn(
+                    new RsEmpty(), "http://www.netbout.com/,PsCookie="
+                );
+            }
+        );
     }
 }

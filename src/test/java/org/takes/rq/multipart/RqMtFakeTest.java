@@ -82,6 +82,10 @@ public final class RqMtFakeTest {
      * RqMtFake can throw exception on no boundary
      * at Content-Type header.
      * @throws Exception if there is some problem inside
+     * @todo #895:30min replace all org.junit.Test occurrences in the project
+     *  by JUnit 5 equivalent org.junit.jupiter.api.Test and replaces
+     *  all expected Exceptions by Assertions.assertThrows. Check
+     *  org.takes.rq.RqHrefTest or org.takes.rq.RqRequestLineTest as examples.
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoBoundaryAtContentTypeHeader()

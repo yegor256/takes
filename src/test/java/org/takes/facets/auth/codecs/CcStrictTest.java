@@ -27,7 +27,8 @@ import java.io.IOException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.takes.facets.auth.Identity;
 
@@ -39,24 +40,33 @@ public final class CcStrictTest {
     /**
      * CcStrict can block empty urn.
      * @throws IOException If some problem inside
-     * @todo #877:30min replace all org.junit.Test occurrences in the project
-     *  by JUnit 5 equivalent org.junit.jupiter.api.Test and replaces
-     *  all expected Exceptions by Assertions.assertThrows. Check
-     *  org.takes.facets.auth.codecs.CcAesTest or
-     *  org.takes.facets.auth.codecs.CcSaltedTest as examples.
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void blocksEmptyUrn() throws IOException {
-        new CcStrict(new CcPlain()).encode(new Identity.Simple(""));
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new CcStrict(new CcPlain()).encode(
+                    new Identity.Simple("")
+                );
+            }
+        );
     }
 
     /**
      * CcStrict can block invalid urn.
      * @throws IOException If some problem inside
      */
-    @Test(expected = DecodingException.class)
+    @Test
     public void blocksInvalidUrn() throws IOException {
-        new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes());
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new CcStrict(new CcPlain()).decode(
+                    "u%3Atest%3A9".getBytes()
+                );
+            }
+        );
     }
 
     /**
