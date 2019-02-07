@@ -31,7 +31,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.takes.facets.auth.codecs.DecodingException;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -106,7 +105,7 @@ public final class RsWithCookieTest {
     @Test
     public void rejectsInvalidName() {
         Assertions.assertThrows(
-            DecodingException.class,
+            IllegalArgumentException.class,
             () -> {
                 new RsWithCookie(new RsEmpty(), "f oo", "works");
             }
@@ -119,7 +118,7 @@ public final class RsWithCookieTest {
     @Test
     public void rejectsInvalidValue() {
         Assertions.assertThrows(
-            DecodingException.class,
+            IllegalArgumentException.class,
             () -> {
                 new RsWithCookie(
                     new RsEmpty(), "cookiename", "wo\"rks"

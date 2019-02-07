@@ -31,7 +31,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
-import org.takes.facets.auth.codecs.DecodingException;
 
 /**
  * Test case for {@link RqLive}.
@@ -119,7 +118,7 @@ public final class RqLiveTest {
     @Test
     public void failsOnBrokenHttpRequest() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            IOException.class,
             () -> {
                 new RqLive(
                     new ByteArrayInputStream(
@@ -137,7 +136,7 @@ public final class RqLiveTest {
     @Test
     public void failsOnInvalidCrLfInRequest() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            IOException.class,
             () -> {
                 new RqLive(
                     new ByteArrayInputStream(

@@ -31,7 +31,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
-import org.takes.facets.auth.codecs.DecodingException;
 
 /**
  * Test case for {@link RqHref.Base}.
@@ -110,7 +109,7 @@ public final class RqHrefTest {
     @Test
     public void failsOnAbsentRequestLine() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            HttpException.class,
             () -> {
                 new RqHref.Base(
                     new RqSimple(Collections.<String>emptyList(), null)
@@ -127,7 +126,7 @@ public final class RqHrefTest {
     @Test
     public void failsOnIllegalRequestLine() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            HttpException.class,
             () -> {
                 new RqHref.Base(
                     new RqFake(

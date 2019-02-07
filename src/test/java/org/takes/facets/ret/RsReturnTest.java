@@ -30,7 +30,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.takes.facets.auth.codecs.DecodingException;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -70,7 +69,7 @@ public final class RsReturnTest {
     @Test
     public void rejectsInvalidLocation() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            IOException.class,
             () -> {
                 new RsReturn(
                     new RsEmpty(), "http://www.netbout.com/,PsCookie="

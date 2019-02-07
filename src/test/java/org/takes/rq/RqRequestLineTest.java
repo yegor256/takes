@@ -67,7 +67,7 @@ public final class RqRequestLineTest {
     @Test
     public void failsOnIllegalRequestLine() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            HttpException.class,
             () -> {
                 new RqRequestLine.Base(
                     new RqFake(
@@ -114,7 +114,7 @@ public final class RqRequestLineTest {
     @Test
     public void failsOnAbsentRequestLineToken() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            HttpException.class,
             () -> {
                 new RqRequestLine.Base(
                     new RqSimple(Collections.<String>emptyList(), null)
@@ -132,7 +132,7 @@ public final class RqRequestLineTest {
     @Test
     public void failsOnIllegalRequestLineToken() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            HttpException.class,
             () -> {
                 new RqRequestLine.Base(
                     new RqFake(
@@ -222,7 +222,7 @@ public final class RqRequestLineTest {
     @Test
     public void extractsEmptyThirdParam() throws IOException {
         Assertions.assertThrows(
-            DecodingException.class,
+            IllegalArgumentException.class,
             () -> {
                 MatcherAssert.assertThat(
                     new RqRequestLine.Base(
