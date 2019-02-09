@@ -67,21 +67,18 @@ public final class FkHost extends FkWrap {
      * @return Fork
      */
     private static Fork fork(final String host, final Take take) {
-        return new Fork() {
-            @Override
-            public Opt<Response> route(final Request req) throws IOException {
-                final String hst = new RqHeaders.Smart(
+        return (final Request req) -> {
+            final String hst = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
-                ).single("host");
-                final Opt<Response> rsp;
-                if (new EnglishLowerCase(host).string()
+            ).single("host");
+            final Opt<Response> rsp;
+            if (new EnglishLowerCase(host).string()
                     .equals(new EnglishLowerCase(hst).string())) {
-                    rsp = new Opt.Single<>(take.act(req));
-                } else {
-                    rsp = new Opt.Empty<>();
-                }
-                return rsp;
+                rsp = new Opt.Single<>(take.act(req));
+            } else {
+                rsp = new Opt.Empty<>();
             }
+            return rsp;
         };
     }
 

@@ -111,23 +111,18 @@ public final class TkProxyTest {
             new TkFork(
                 new FkMethods(this.method, new TkFixed(this.expected))
             )
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
+        ).exec((final URI home) -> {
+            MatcherAssert.assertThat(
+                    new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(TkProxyTest.this.method)
+                                    new RqFake(TkProxyTest.this.method)
                             )
-                        ).print(),
-                        Matchers.containsString(
+                    ).print(),
+                    Matchers.containsString(
                             TkProxyTest.this.expected
-                        )
-                    );
-                }
-            }
-        );
+                    )
+            );
+        });
     }
 
     /**
@@ -137,39 +132,29 @@ public final class TkProxyTest {
      */
     @Test
     public void correctlyMapsPathString() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(new RqHref.Base(req).href().toString());
-            }
-        };
+        final Take take = (final Request req) -> new RsText(new RqHref.Base(req).href().toString());
         new FtRemote(
             new TkFork(
                 new FkMethods(this.method, take)
             )
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
+        ).exec((final URI home) -> {
+            MatcherAssert.assertThat(
+                    new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(
-                                    TkProxyTest.this.method,
-                                    "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
-                                )
+                                    new RqFake(
+                                            TkProxyTest.this.method,
+                                            "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
+                                    )
                             )
-                        ).printBody(),
-                        Matchers.equalTo(
+                    ).printBody(),
+                    Matchers.equalTo(
                             String.format(
-                                "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
-                                home.getHost(), home.getPort()
+                                    "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
+                                    home.getHost(), home.getPort()
                             )
-                        )
-                    );
-                }
-            }
-        );
+                    )
+            );
+        });
     }
 
     /**
@@ -182,39 +167,34 @@ public final class TkProxyTest {
             new TkFork(
                 new FkMethods(this.method, TkProxyTest.ECHO)
             )
-        ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
+        ).exec( // @checkstyle AnonInnerLengthCheck (100 lines)
+        (final URI home) -> {
+            MatcherAssert.assertThat(
+                    new RsPrint(new TkProxy(
                             home.toURL().toString()
-                        ).act(
+                    ).act(
                             new RqFake(
-                                Arrays.asList(
-                                    String.format(
-                                        "%s /f?%%D0%%B0=3&b-6",
-                                        TkProxyTest.this.method
+                                    Arrays.asList(
+                                            String.format(
+                                                    "%s /f?%%D0%%B0=3&b-6",
+                                                    TkProxyTest.this.method
+                                            ),
+                                            "Host: example.com",
+                                            "Accept: text/xml",
+                                            "Accept: text/html"
                                     ),
-                                    "Host: example.com",
-                                    "Accept: text/xml",
-                                    "Accept: text/html"
-                                ),
-                                ""
+                                    ""
                             )
-                        )).printBody(),
-                        Matchers.containsString(
+                    )).printBody(),
+                    Matchers.containsString(
                             String.format(
-                                "Host: %s:%d",
-                                home.getHost(),
-                                home.getPort()
+                                    "Host: %s:%d",
+                                    home.getHost(),
+                                    home.getPort()
                             )
-                        )
-                    );
-                }
-            }
-        );
+                    )
+            );
+        });
     }
 
     /**
@@ -228,39 +208,34 @@ public final class TkProxyTest {
             new TkFork(
                 new FkMethods(this.method, TkProxyTest.ECHO)
             )
-        ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
+        ).exec( // @checkstyle AnonInnerLengthCheck (100 lines)
+        (final URI home) -> {
+            MatcherAssert.assertThat(
+                    new RsPrint(new TkProxy(
                             home.toURL().toString(),
                             mark
-                        ).act(
+                    ).act(
                             new RqFake(
-                                Arrays.asList(
-                                    String.format(
-                                        "%s /%%D0%%B0",
-                                        TkProxyTest.this.method
+                                    Arrays.asList(
+                                            String.format(
+                                                    "%s /%%D0%%B0",
+                                                    TkProxyTest.this.method
+                                            ),
+                                            "Host: www.bar.com"
                                     ),
-                                    "Host: www.bar.com"
-                                ),
-                                ""
+                                    ""
                             )
-                        )).printHead(),
-                        Matchers.containsString(
+                    )).printHead(),
+                    Matchers.containsString(
                             String.format(
-                                // @checkstyle LineLengthCheck (1 line)
-                                "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
-                                home,
-                                mark
+                                    // @checkstyle LineLengthCheck (1 line)
+                                    "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
+                                    home,
+                                    mark
                             )
-                        )
-                    );
-                }
-            }
-        );
+                    )
+            );
+        });
     }
 
     /**
@@ -274,43 +249,38 @@ public final class TkProxyTest {
             new TkFork(
                 new FkMethods("POST", TkProxyTest.ECHO)
             )
-        ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
+        ).exec( // @checkstyle AnonInnerLengthCheck (100 lines)
+        (final URI home) -> {
+            MatcherAssert.assertThat(
+                    new RsPrint(
                             new TkProxy(home).act(
-                                new RqFake(
-                                    Arrays.asList(
-                                        "POST /%D0%B0",
-                                        String.format(
-                                            "Content-Length: %s",
-                                            body.length()
-                                        ),
-                                        "Content-Type: text/plain",
-                                        "Accept: text/json",
-                                        "Cookie: a=45",
-                                        "Cookie: ttt=ALPHA",
-                                        "Accept-Encoding: gzip",
-                                        "Host: www.bar-foo.com"
-                                    ),
-                                    body
-                                )
+                                    new RqFake(
+                                            Arrays.asList(
+                                                    "POST /%D0%B0",
+                                                    String.format(
+                                                            "Content-Length: %s",
+                                                            body.length()
+                                                    ),
+                                                    "Content-Type: text/plain",
+                                                    "Accept: text/json",
+                                                    "Cookie: a=45",
+                                                    "Cookie: ttt=ALPHA",
+                                                    "Accept-Encoding: gzip",
+                                                    "Host: www.bar-foo.com"
+                                            ),
+                                            body
+                                    )
                             )
-                        ).printBody(),
-                        Matchers.allOf(
+                    ).printBody(),
+                    Matchers.allOf(
                             Matchers.containsString("Content-Length:"),
                             Matchers.containsString("Content-Type:"),
                             Matchers.containsString("Accept:"),
                             Matchers.containsString("Cookie: a"),
                             Matchers.containsString("Cookie: ttt"),
                             Matchers.containsString("Accept-Encoding:")
-                        )
-                    );
-                }
-            }
-        );
+                    )
+            );
+        });
     }
 }

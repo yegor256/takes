@@ -35,12 +35,7 @@ public interface Exit {
     /**
      * Never exit.
      */
-    Exit NEVER = new Exit() {
-        @Override
-        public boolean ready() {
-            return false;
-        }
-    };
+    Exit NEVER = () -> false;
 
     /**
      * Ready to exit?

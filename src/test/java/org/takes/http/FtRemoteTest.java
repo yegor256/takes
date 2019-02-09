@@ -66,18 +66,14 @@ public final class FtRemoteTest {
      */
     @Test
     public void simplyWorks() throws Exception {
-        new FtRemote(new TkFixed(new RsText("simple answer"))).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+        new FtRemote(new TkFixed(new RsText("simple answer")))
+                .exec((final URI home) -> {
                     new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("simple"));
-                }
-            }
-        );
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("simple"));
+                });
     }
 
     /**
@@ -86,36 +82,24 @@ public final class FtRemoteTest {
      */
     @Test
     public void worksInParallelThreads() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final org.takes.Request req)
-                throws IOException {
-                MatcherAssert.assertThat(
+        final Take take = (final org.takes.Request req) -> {
+            MatcherAssert.assertThat(
                     new RqFormBase(req).param("alpha"),
                     Matchers.hasItem("123")
-                );
-                return new RsText("works fine");
-            }
+            );
+            return new RsText("works fine");
         };
-        final Callable<Long> task = new Callable<Long>() {
-            @Override
-            public Long call() throws Exception {
-                new FtRemote(take).exec(
-                    new FtRemote.Script() {
-                        @Override
-                        public void exec(final URI home) throws IOException {
-                            new JdkRequest(home)
-                                .method(Request.POST)
-                                .body().set("alpha=123").back()
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK)
-                                .assertBody(Matchers.startsWith("works"));
-                        }
-                    }
-                );
-                return 0L;
-            }
+        final Callable<Long> task = () -> {
+            new FtRemote(take).exec((final URI home) -> {
+                new JdkRequest(home)
+                        .method(Request.POST)
+                        .body().set("alpha=123").back()
+                        .fetch()
+                        .as(RestResponse.class)
+                        .assertStatus(HttpURLConnection.HTTP_OK)
+                        .assertBody(Matchers.startsWith("works"));
+            });
+            return 0L;
         };
         final int total = Runtime.getRuntime().availableProcessors() << 2;
         final Collection<Callable<Long>> tasks = new ArrayList<>(total);
@@ -138,19 +122,14 @@ public final class FtRemoteTest {
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkEmpty()
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .body().set("returnsAnEmptyResponseBody").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
-        );
+        ).exec((final URI home) -> {
+            new JdkRequest(home)
+                    .method("POST")
+                    .body().set("returnsAnEmptyResponseBody").back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertBody(new IsEqual<>(""))
+                    .assertStatus(HttpURLConnection.HTTP_OK);
+        });
     }
 }

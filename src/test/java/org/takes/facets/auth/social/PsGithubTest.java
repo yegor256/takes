@@ -104,9 +104,9 @@ public final class PsGithubTest {
     @Test
     public void canLogin() throws IOException {
         this.performLogin(
-            PsGithubTest.directiveWithoutAccessToken()
-                .add(PsGithubTest.ACCESS_TOKEN)
-                .set(PsGithubTest.GIT_HUB_TOKEN)
+                PsGithubTest.directiveWithoutAccessToken()
+                        .add(PsGithubTest.ACCESS_TOKEN)
+                        .set(PsGithubTest.GIT_HUB_TOKEN)
         );
     }
 
@@ -119,53 +119,43 @@ public final class PsGithubTest {
         final String app = "app";
         final String key = "key";
         final Take take = new TkFork(
-            new FkRegex(
-                "/login/oauth/access_token",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        final Request greq = new RqGreedy(req);
-                        final String code = "code";
-                        PsGithubTest.assertParam(greq, code, code);
-                        PsGithubTest.assertParam(greq, "client_id", app);
-                        PsGithubTest.assertParam(greq, "client_secret", key);
-                        return new RsXembly(
-                            new XeDirectives(directive.toString())
-                        );
-                    }
-                }
-            ),
-            new FkRegex(
-                "/user",
-                new TkFakeLogin()
-            )
+                new FkRegex(
+                        "/login/oauth/access_token", (final Request req) -> {
+                            final Request greq = new RqGreedy(req);
+                            final String code = "code";
+                            PsGithubTest.assertParam(greq, code, code);
+                            PsGithubTest.assertParam(greq, "client_id", app);
+                            PsGithubTest.assertParam(greq, "client_secret", key);
+                            return new RsXembly(
+                                    new XeDirectives(directive.toString())
+                            );
+                        }),
+                new FkRegex(
+                        "/user",
+                        new TkFakeLogin()
+                )
         );
-        new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsGithub(
-                        app,
-                        key,
-                        home.toString(),
-                        home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        Matchers.equalTo("urn:github:1")
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGithubTest.LOGIN),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get("avatar"),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
-                    );
-                }
-            }
-        );
+        new FtRemote(take).exec( // @checkstyle AnonInnerLengthCheck (100 lines)
+        (final URI home) -> {
+            final Identity identity = new PsGithub(
+                    app,
+                    key,
+                    home.toString(),
+                    home.toString()
+            ).enter(new RqFake("GET", "?code=code")).get();
+            MatcherAssert.assertThat(
+                    identity.urn(),
+                    Matchers.equalTo("urn:github:1")
+            );
+            MatcherAssert.assertThat(
+                    identity.properties().get(PsGithubTest.LOGIN),
+                    Matchers.equalTo(PsGithubTest.OCTOCAT)
+            );
+            MatcherAssert.assertThat(
+                    identity.properties().get("avatar"),
+                    Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
+            );
+        });
     }
 
     /**
@@ -174,8 +164,8 @@ public final class PsGithubTest {
      */
     private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
-            .add("token_type").set("bearer").up()
-            .add("scope").set("repo,gist").up();
+                .add("token_type").set("bearer").up()
+                .add("scope").set("repo,gist").up();
     }
 
     /**
@@ -188,8 +178,8 @@ public final class PsGithubTest {
     private static void assertParam(final Request req,
         final CharSequence param, final String value)  throws IOException {
         MatcherAssert.assertThat(
-            new RqFormSmart(new RqFormBase(req)).single(param),
-            Matchers.equalTo(value)
+                new RqFormSmart(new RqFormBase(req)).single(param),
+                Matchers.equalTo(value)
         );
     }
 
@@ -200,20 +190,20 @@ public final class PsGithubTest {
         @Override
         public Response act(final Request req) throws IOException {
             MatcherAssert.assertThat(
-                new RqHref.Base(req).href()
-                    .param(PsGithubTest.ACCESS_TOKEN)
-                    .iterator().next(),
-                Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
+                    new RqHref.Base(req).href()
+                            .param(PsGithubTest.ACCESS_TOKEN)
+                            .iterator().next(),
+                    Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
             );
             return new RsJson(
-                Json.createObjectBuilder()
-                    .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
-                    .add("id", 1)
-                    .add(
-                        "avatar_url",
-                        PsGithubTest.OCTOCAT_GIF_URL
-                    )
-                    .build()
+                    Json.createObjectBuilder()
+                            .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
+                            .add("id", 1)
+                            .add(
+                                    "avatar_url",
+                                    PsGithubTest.OCTOCAT_GIF_URL
+                            )
+                            .build()
             );
         }
     }

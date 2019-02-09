@@ -184,49 +184,39 @@ public final class RqMtSmartTest {
     @Test
     public void consumesHttpRequest() throws IOException {
         final String part = "f-1";
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(
-                    new RqPrint(
+        final Take take = (final Request req) -> new RsText(
+                new RqPrint(
                         new RqMtSmart(
-                            new RqMtBase(req)
+                                new RqMtBase(req)
                         ).single(part)
-                    ).printBody()
-                );
-            }
-        };
+                ).printBody()
+        );
         final String body =
             Joiner.on(RqMtSmartTest.CRLF).join(
                 "--AaB0zz",
                 String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
             );
-        new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (50 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .header(
+        new FtRemote(take).exec( // @checkstyle AnonInnerLengthCheck (50 lines)
+        (final URI home) -> {
+            new JdkRequest(home)
+                    .method("POST")
+                    .header(
                             "Content-Type",
                             "multipart/form-data; boundary=AaB0zz"
-                        )
-                        .header(
+                    )
+                    .header(
                             "Content-Length",
                             String.valueOf(body.getBytes().length)
-                        )
-                        .body()
-                        .set(body)
-                        .back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.containsString("pic"));
-                }
-            }
-        );
+                    )
+                    .body()
+                    .set(body)
+                    .back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.containsString("pic"));
+        });
     }
 
     /**

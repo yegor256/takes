@@ -49,13 +49,7 @@ public final class TkSecureTest {
     @Test(expected = RsForward.class)
     public void failsOnAnonymous() throws IOException {
         new TkSecure(
-            new Take() {
-                @Override
-                public Response act(final Request request) {
-                    return new RsEmpty();
-                }
-            }
-        ).act(new RqFake());
+            (final Request request) -> new RsEmpty()).act(new RqFake());
     }
 
     /**
@@ -66,12 +60,7 @@ public final class TkSecureTest {
     public void passesOnRegisteredUser() throws IOException {
         MatcherAssert.assertThat(
             new TkSecure(
-                new Take() {
-                    @Override
-                    public Response act(final Request request) {
-                        return new RsEmpty();
-                    }
-                }
+                (final Request request) -> new RsEmpty()
             ).act(
                 new RqWithHeader(
                     new RqFake(),

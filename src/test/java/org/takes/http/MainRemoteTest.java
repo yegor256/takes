@@ -45,18 +45,13 @@ public final class MainRemoteTest {
      */
     @Test
     public void startsAndStopsApp() throws Exception {
-        new MainRemote(MainRemoteTest.DemoApp.class).exec(
-            new MainRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("works"));
-                }
-            }
-        );
+        new MainRemote(MainRemoteTest.DemoApp.class).exec((final URI home) -> {
+            new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("works"));
+        });
     }
 
     /**
@@ -66,18 +61,14 @@ public final class MainRemoteTest {
     @Test
     public void passesArgumentsToApp() throws Exception {
         final String[] args = {"works well!"};
-        new MainRemote(MainRemoteTest.DemoAppArgs.class, args).exec(
-            new MainRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+        new MainRemote(MainRemoteTest.DemoAppArgs.class, args)
+                .exec((final URI home) -> {
                     new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("works well"));
-                }
-            }
-        );
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("works well"));
+                });
     }
 
     /**

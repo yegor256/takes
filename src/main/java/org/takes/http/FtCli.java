@@ -91,16 +91,11 @@ public final class FtCli implements Front {
     public void start(final Exit exit) throws IOException {
         final Take tks;
         if (this.options.hitRefresh()) {
-            tks = new Take() {
-                @Override
-                public Response act(final Request request) throws IOException {
-                    return FtCli.this.take.act(
-                        new RqWithHeader(
+            tks = (final Request request) -> FtCli.this.take.act(
+                    new RqWithHeader(
                             request, "X-Takes-HitRefresh: yes"
-                        )
-                    );
-                }
-            };
+                    )
+            );
         } else {
             tks = this.take;
         }
@@ -119,17 +114,13 @@ public final class FtCli implements Front {
         );
         if (this.options.isDaemon()) {
             final Thread thread = new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            front.start(FtCli.this.exit(exit));
-                        } catch (final IOException ex) {
-                            throw new IllegalStateException(ex);
-                        }
+                () -> {
+                    try {
+                        front.start(FtCli.this.exit(exit));
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
                     }
-                }
-            );
+            });
             thread.setDaemon(true);
             thread.start();
         } else {

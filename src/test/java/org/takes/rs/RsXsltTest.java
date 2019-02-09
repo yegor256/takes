@@ -78,14 +78,9 @@ public final class RsXsltTest {
             IOUtils.toString(
                 new RsXslt(
                     new RsText(xml),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
-                ).body(),
+                        (final String href, final String base) ->
+                                new StreamSource(new StringReader(xsl)))
+                        .body(),
                 StandardCharsets.UTF_8
             ),
             XhtmlMatchers.hasXPath("//xhtml:p[.='\u0443']")
@@ -112,14 +107,8 @@ public final class RsXsltTest {
             new RsPrint(
                 new RsXslt(
                     new RsText(xml),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
-                )
+                        (final String href, final String base) ->
+                                new StreamSource(new StringReader(xsl)))
             ).print(),
             Matchers.endsWith("Hey, Jeffrey!")
         );
@@ -148,15 +137,9 @@ public final class RsXsltTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
-                    new RsText(stream),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
-                )
+                        new RsText(stream),
+                        (final String href, final String base) ->
+                                new StreamSource(new StringReader(xsl)))
             ).print(),
             Matchers.endsWith("Hello, World!")
         );

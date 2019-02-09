@@ -25,13 +25,11 @@ package org.takes.tk;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rs.RsText;
@@ -49,29 +47,20 @@ public final class TkReadAlwaysTest {
     @Test
     public void requestBodyIsIgnored() throws Exception {
         final String expected = "response ok";
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(expected);
-            }
-        };
+        final Take take = (final Request req) -> new RsText(expected);
         new FtRemote(new TkReadAlways(take)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+                (final URI home) -> {
                     new JdkRequest(home)
-                        .method("POST").header(
+                            .method("POST").header(
                             "Content-Type", "application/x-www-form-urlencoded"
-                        ).body()
-                        .formParam("name", "Jeff Warraby")
-                        .formParam("age", "4")
-                        .back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(expected));
-                }
-            }
-        );
+                    ).body()
+                            .formParam("name", "Jeff Warraby")
+                            .formParam("age", "4")
+                            .back()
+                            .fetch()
+                            .as(RestResponse.class)
+                            .assertStatus(HttpURLConnection.HTTP_OK)
+                            .assertBody(Matchers.equalTo(expected));
+                });
     }
 }

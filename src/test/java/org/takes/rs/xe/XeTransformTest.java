@@ -51,18 +51,11 @@ public final class XeTransformTest {
                     new XeAppend(
                         "root",
                         new XeTransform<String>(
-                            Arrays.asList("Jeff", "Walter"),
-                            new XeTransform.Func<String>() {
-                                @Override
-                                public XeSource transform(final String obj) {
-                                    return new XeDirectives(
-                                        new Directives().add("bowler").set(
+                            Arrays.asList("Jeff", "Walter"), (final String obj) -> new XeDirectives(
+                                    new Directives().add("bowler").set(
                                             obj.toUpperCase(Locale.ENGLISH)
-                                        )
-                                    );
-                                }
-                            }
-                        )
+                                    )
+                            ))
                     )
                 ).body(),
                 StandardCharsets.UTF_8

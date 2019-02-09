@@ -60,13 +60,9 @@ public final class FkHitRefreshTest {
         );
         final AtomicBoolean done = new AtomicBoolean(false);
         final Fork fork = new FkHitRefresh(
-            this.temp.getRoot(),
-            new Runnable() {
-                @Override
-                public void run() {
-                    done.set(true);
-                }
-            },
+            this.temp.getRoot(), () -> {
+                done.set(true);
+        },
             new TkEmpty()
         );
         TimeUnit.SECONDS.sleep(2L);

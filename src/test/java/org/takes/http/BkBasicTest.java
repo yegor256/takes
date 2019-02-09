@@ -108,17 +108,12 @@ public final class BkBasicTest {
                 new FkRegex("/path/a", new TkText("a")),
                 new FkRegex("/path/b", new TkText("b"))
             )
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(String.format("%s/path/c", home))
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
-                }
-            }
-        );
+        ).exec((final URI home) -> {
+            new JdkRequest(String.format("%s/path/c", home))
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
+        });
     }
 
     /**
@@ -192,19 +187,15 @@ public final class BkBasicTest {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText(text)).accept(
+                () -> {
+                    try {
+                        new BkBasic(new TkText(text)).accept(
                                 server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
-                }
-            ).start();
+            }).start();
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
@@ -254,19 +245,15 @@ public final class BkBasicTest {
         final String text = "Say hello!";
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText("411 Test")).accept(
+                () -> {
+                    try {
+                        new BkBasic(new TkText("411 Test")).accept(
                                 server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
-                }
-            ).start();
+            }).start();
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
@@ -308,19 +295,15 @@ public final class BkBasicTest {
         final String greetings = "Hi everyone";
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText(text)).accept(
+                () -> {
+                    try {
+                        new BkBasic(new TkText(text)).accept(
                                 server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
-                }
-            ).start();
+            }).start();
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()

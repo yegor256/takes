@@ -39,12 +39,7 @@ public interface XeSource {
     /**
      * Empty.
      */
-    XeSource EMPTY = new XeSource() {
-        @Override
-        public Iterable<Directive> toXembly() {
-            return Collections.emptyList();
-        }
-    };
+    XeSource EMPTY = () -> Collections.emptyList();
 
     /**
      * Get Xembly directives.

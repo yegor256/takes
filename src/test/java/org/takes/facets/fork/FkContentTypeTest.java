@@ -168,11 +168,6 @@ public final class FkContentTypeTest {
      * @return Take
      */
     private static Take emptyResponse() {
-        return new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsEmpty();
-            }
-        };
+        return (final Request req) -> new RsEmpty();
     }
 }

@@ -30,7 +30,6 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 
@@ -46,11 +45,8 @@ public final class TkVerboseTest {
      */
     @Test
     public void extendsNotFoundException() throws IOException {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
-            }
+        final Take take = (final Request request) -> {
+            throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
         };
         try {
             new TkVerbose(take).act(new RqFake());

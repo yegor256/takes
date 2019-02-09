@@ -59,18 +59,14 @@ public final class FtSecureTest {
      */
     @Test
     public void justWorks() throws Exception {
-        FtSecureTest.secure(new TkFixed("hello, world")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+        FtSecureTest.secure(new TkFixed("hello, world"))
+                .exec((final URI home) -> {
                     new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("hello"));
-                }
-            }
-        );
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("hello"));
+                });
     }
 
     /**
@@ -79,18 +75,14 @@ public final class FtSecureTest {
      */
     @Test
     public void gracefullyHandlesBrokenBack() throws Exception {
-        FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+        FtSecureTest.secure(new TkFailure("Jeffrey Lebowski"))
+                .exec((final URI home) -> {
                     new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
-                        .assertBody(Matchers.containsString("Lebowski"));
-                }
-            }
-        );
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
+                    .assertBody(Matchers.containsString("Lebowski"));
+                });
     }
 
     /**
@@ -99,29 +91,22 @@ public final class FtSecureTest {
      */
     @Test
     public void parsesIncomingHttpRequest() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                MatcherAssert.assertThat(
+        final Take take = (final Request request) -> {
+            MatcherAssert.assertThat(
                     new RqPrint(request).printBody(),
                     Matchers.containsString("Jeff")
-                );
-                return new RsText("works!");
-            }
+            );
+            return new RsText("works!");
         };
-        FtSecureTest.secure(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
+        FtSecureTest.secure(take)
+                .exec((final URI home) -> {
                     new JdkRequest(home)
-                        .method("PUT")
-                        .body().set("Jeff, how are you?").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
-        );
+                    .method("PUT")
+                    .body().set("Jeff, how are you?").back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK);
+                });
     }
 
     /**
@@ -130,32 +115,22 @@ public final class FtSecureTest {
      */
     @Test
     public void consumesIncomingDataStream() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(
-                    IOUtils.toString(
+        final Take take = (final Request req) -> new RsText(
+                IOUtils.toString(
                         new RqLengthAware(req).body(),
                         StandardCharsets.UTF_8
-                    )
-                );
-            }
-        };
-        FtSecureTest.secure(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final String body = "here is your data";
-                    new JdkRequest(home)
-                        .method(RqMethod.POST)
-                        .body().set(body).back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(body));
-                }
-            }
+                )
         );
+        FtSecureTest.secure(take).exec((final URI home) -> {
+            final String body = "here is your data";
+            new JdkRequest(home)
+                    .method(RqMethod.POST)
+                    .body().set(body).back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(body));
+        });
     }
 
     /**

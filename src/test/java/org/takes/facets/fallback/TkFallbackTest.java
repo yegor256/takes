@@ -54,16 +54,9 @@ public final class TkFallbackTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFallback(
-                    new TkFailure(err),
-                    new Fallback() {
-                        @Override
-                        public Opt<Response> route(final RqFallback req) {
-                            return new Opt.Single<Response>(
-                                new RsText(req.throwable().getMessage())
-                            );
-                        }
-                    }
-                ).act(new RqFake())
+                    new TkFailure(err), (final RqFallback req) -> new Opt.Single<Response>(
+                            new RsText(req.throwable().getMessage())
+                    )).act(new RqFake())
             ).printBody(),
             Matchers.endsWith(err)
         );

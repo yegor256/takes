@@ -63,48 +63,38 @@ public final class BkTimeableTest {
     public void stopsLongRunningBack() throws Exception {
         final String response = "interrupted";
         final CountDownLatch ready = new CountDownLatch(1);
-        final Exit exit = new Exit() {
-            @Override
-            public boolean ready() {
-                ready.countDown();
-                return false;
-            }
+        final Exit exit = () -> {
+            ready.countDown();
+            return false;
         };
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) {
-                Response rsp;
-                try {
-                    // @checkstyle MagicNumberCheck (1 line)
-                    TimeUnit.SECONDS.sleep(10L);
-                    rsp = new RsText("finish");
-                } catch (final InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    rsp = new RsText(response);
-                }
-                return rsp;
+        final Take take = (final Request req) -> {
+            Response rsp;
+            try {
+                // @checkstyle MagicNumberCheck (1 line)
+                TimeUnit.SECONDS.sleep(10L);
+                rsp = new RsText("finish");
+            } catch (final InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                rsp = new RsText(response);
             }
+            return rsp;
         };
         final File file = this.temp.newFile();
         file.delete();
         final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new FtCli(
+            () -> {
+                try {
+                    new FtCli(
                             take,
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
                             "--lifetime=4000",
                             "--max-latency=100"
-                        ).start(exit);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+                    ).start(exit);
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
-            }
-        );
+        });
         thread.start();
         ready.await();
         final int port = Integer.parseInt(

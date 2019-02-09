@@ -44,15 +44,9 @@ public final class TransformTest {
         MatcherAssert.assertThat(
             Joiner.on(" ").join(
                 new Transform<String, String>(
-                    Arrays.asList("one", "two", "three"),
-                    new TransformAction<String, String>() {
-                        @Override
-                        public String transform(final String element) {
-                            return element.concat("t");
-                        }
-                    }
-                )
-            ),
+                        Arrays.asList("one", "two", "three"),
+                        (final String element) -> element.concat("t")
+                )),
             Matchers.equalTo("onet twot threet")
         );
     }

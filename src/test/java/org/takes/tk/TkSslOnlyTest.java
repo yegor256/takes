@@ -59,16 +59,9 @@ public final class TkSslOnlyTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkSslOnly(
-                    new Take() {
-                        @Override
-                        public Response act(final Request request)
-                            throws IOException {
-                            return new RsText(
-                                new RqPrint(request).print()
-                            );
-                        }
-                    }
-                ).act(req)
+                    (final Request request) -> new RsText(
+                            new RqPrint(request).print()
+                    )).act(req)
             ).print(),
             Matchers.containsString("https://www.0crat.com/one/two?a=1")
         );

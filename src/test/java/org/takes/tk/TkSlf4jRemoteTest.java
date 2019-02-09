@@ -50,19 +50,14 @@ public final class TkSlf4jRemoteTest {
     public void returnsAnEmptyResponseBody() throws IOException {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .body().set("returnsAnEmptyResponseBody").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
-        );
+        ).exec((final URI home) -> {
+            new JdkRequest(home)
+                    .method("POST")
+                    .body().set("returnsAnEmptyResponseBody").back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertBody(new IsEqual<>(""))
+                    .assertStatus(HttpURLConnection.HTTP_OK);
+        });
     }
 }

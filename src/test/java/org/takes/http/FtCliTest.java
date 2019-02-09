@@ -59,32 +59,25 @@ public final class FtCliTest {
     @Test
     public void understandsCommandLineArgs() throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
-        final Exit exit = new Exit() {
-            @Override
-            public boolean ready() {
-                ready.countDown();
-                return false;
-            }
+        final Exit exit = () -> {
+            ready.countDown();
+            return false;
         };
         final File file = this.temp.newFile();
         file.delete();
         final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new FtCli(
+            () -> {
+                try {
+                    new FtCli(
                             new TkFork(new FkRegex("/", "hello!")),
                             String.format("--port=%s", file.getAbsoluteFile()),
                             "--threads=1",
                             "--lifetime=4000"
-                        ).start(exit);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+                    ).start(exit);
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
-            }
-        );
+        });
         thread.start();
         ready.await();
         final int port = Integer.parseInt(
