@@ -29,7 +29,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
@@ -46,12 +48,12 @@ public final class PsAllTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void thereShouldBeAtLeastOnePass() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 new ArrayList<Pass>(0),
                 0
             ).enter(new RqFake()).has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -61,12 +63,12 @@ public final class PsAllTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void indexMustBeNonNegative() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 -1
             ).enter(new RqFake()).has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -76,7 +78,7 @@ public final class PsAllTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void indexMustBeSmallEnough() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -84,7 +86,7 @@ public final class PsAllTest {
                 ),
                 2
             ).enter(new RqFake()).has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -94,12 +96,12 @@ public final class PsAllTest {
      */
     @Test
     public void testOneSuccessfull() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 0
             ).enter(new RqFake()).has(),
-            Matchers.is(true)
+            new IsEqual<>(true)
         );
     }
 
@@ -109,12 +111,12 @@ public final class PsAllTest {
      */
     @Test
     public void testOneFail() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Collections.singletonList(new PsFake(false)),
                 0
             ).enter(new RqFake()).has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -129,7 +131,7 @@ public final class PsAllTest {
             new Identity.Simple("urn:foo:test")
         );
         final RqFake request = new RqFake();
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -139,7 +141,7 @@ public final class PsAllTest {
                 ),
                 Tv.THREE
             ).enter(request).get().urn(),
-            Matchers.equalTo(resulting.enter(request).get().urn())
+            new IsEqual<>(resulting.enter(request).get().urn())
         );
     }
 
@@ -149,7 +151,7 @@ public final class PsAllTest {
      */
     @Test
     public void testFail() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -159,7 +161,7 @@ public final class PsAllTest {
                 ),
                 1
             ).enter(new RqFake()).has(),
-            Matchers.is(false)
+            new IsEqual<>(false)
         );
     }
 
@@ -171,7 +173,7 @@ public final class PsAllTest {
     public void exits() throws Exception {
         final Response response = new RsEmpty();
         final PsFake exiting = new PsFake(true);
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -179,7 +181,7 @@ public final class PsAllTest {
                 ),
                 1
             ).exit(response, exiting.enter(new RqFake()).get()),
-            Matchers.equalTo(response)
+            new IsEqual<>(response)
         );
     }
 }

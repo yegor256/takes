@@ -27,9 +27,12 @@ import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+
 
 /**
  * Test case for {@link RsPrettyXml}.
@@ -43,14 +46,14 @@ public final class RsPrettyXmlTest {
      */
     @Test
     public void formatsXmlBody() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
-        );
+            new IsEqual<>("<test>\n   <a>foo</a>\n</test>\n")
+        ).verify();
     }
 
     /**
@@ -60,7 +63,7 @@ public final class RsPrettyXmlTest {
     @Test
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5DoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
@@ -68,7 +71,7 @@ public final class RsPrettyXmlTest {
                     )
                 )
             ).printBody(),
-            Matchers.containsString("<!DOCTYPE HTML>")
+            new StringContains("<!DOCTYPE HTML>")
         );
     }
 
@@ -80,7 +83,7 @@ public final class RsPrettyXmlTest {
     @Test
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
@@ -119,7 +122,7 @@ public final class RsPrettyXmlTest {
         final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
@@ -170,7 +173,7 @@ public final class RsPrettyXmlTest {
                 "<test>\n   <a>test</a>\n</test>\n"
             )
         ).printBody(baos);
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")

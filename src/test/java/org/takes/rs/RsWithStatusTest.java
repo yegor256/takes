@@ -26,9 +26,10 @@ package org.takes.rs;
 import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Response;
 
 /**
@@ -44,14 +45,14 @@ public final class RsWithStatusTest {
      */
     @Test
     public void addsStatus() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithStatus(
                     new RsWithHeader("Host", "example.com"),
                     HttpURLConnection.HTTP_NOT_FOUND
                 )
             ).print(),
-            Matchers.equalTo(
+            new IsEqual<>(
                 Joiner.on("\r\n").join(
                     "HTTP/1.1 404 Not Found",
                     "Host: example.com",
@@ -75,11 +76,11 @@ public final class RsWithStatusTest {
             ),
             HttpURLConnection.HTTP_SEE_OTHER
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             response.head(),
             Matchers.<String>iterableWithSize(1)
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             response.head(),
             Matchers.<String>iterableWithSize(1)
         );

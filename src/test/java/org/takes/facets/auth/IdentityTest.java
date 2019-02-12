@@ -24,9 +24,9 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link Identity}.
@@ -40,10 +40,10 @@ public final class IdentityTest {
      */
     @Test
     public void equalsToItself() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             Identity.ANONYMOUS,
-            Matchers.equalTo(Identity.ANONYMOUS)
-        );
+            new IsEqual<>(Identity.ANONYMOUS)
+        ).affirm();
     }
 
 }

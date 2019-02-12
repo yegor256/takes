@@ -26,9 +26,9 @@ package org.takes.rs;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.text.JoinedText;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsWithType}.
@@ -85,7 +85,7 @@ public final class RsWithTypeTest {
     @Test
     public void replaceTypeToResponse() throws Exception {
         final String type = RsWithTypeTest.TYPE_TEXT;
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -111,7 +111,7 @@ public final class RsWithTypeTest {
     @Test
     public void doesNotReplaceResponseCode() throws Exception {
         final String body = "Error!";
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType(
                     new RsWithBody(
@@ -140,7 +140,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithHtml() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
@@ -159,7 +159,7 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -188,7 +188,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithJson() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
@@ -207,7 +207,7 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -236,7 +236,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithXml() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
@@ -254,7 +254,7 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
@@ -283,7 +283,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithText() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
@@ -301,7 +301,7 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
@@ -330,7 +330,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void addsContentType() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
@@ -356,7 +356,7 @@ public final class RsWithTypeTest {
      */
     @Test
     public void addsCharsetToContentType() throws Exception {
-        MatcherAssert.assertThat(
+        new Assertion<>(
             new RsPrint(
                 new RsWithType(
                     new RsEmpty(),
