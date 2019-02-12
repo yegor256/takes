@@ -27,30 +27,32 @@ import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
  */
 public final class RsPrettyXmlTest {
-
     /**
      * RsPrettyXML can format response with XML body.
      * @throws IOException If some problem inside
      */
     @Test
     public void formatsXmlBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing formatsXmlBody()",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
-        );
+            new IsEqual<>("<test>\n   <a>foo</a>\n</test>\n")
+        ).affirm();
     }
 
     /**
@@ -60,15 +62,16 @@ public final class RsPrettyXmlTest {
     @Test
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5DoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing formatsHtml5DoctypeBody()",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         "<!DOCTYPE html><html><head></head><body></body></html>"
                     )
                 )
             ).printBody(),
-            Matchers.containsString("<!DOCTYPE HTML>")
+            new StringContains("<!DOCTYPE HTML>")
         );
     }
 
@@ -80,8 +83,9 @@ public final class RsPrettyXmlTest {
     @Test
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
@@ -92,7 +96,7 @@ public final class RsPrettyXmlTest {
                     )
                 )
             ).printBody(),
-            Matchers.is(
+            new IsEqual<>(
                 Joiner.on("").appendTo(
                     new StringBuilder("<!DOCTYPE html\n"),
                     "  SYSTEM \"about:legacy-compat\">\n",
@@ -119,8 +123,9 @@ public final class RsPrettyXmlTest {
         final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing formatsHtml4DoctypeBody()",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
@@ -134,7 +139,7 @@ public final class RsPrettyXmlTest {
                     )
                 )
             ).printBody(),
-            Matchers.is(
+            new IsEqual<>(
                 Joiner.on("").appendTo(
                     new StringBuilder("<!DOCTYPE html\n  "),
                     pid,
@@ -170,8 +175,9 @@ public final class RsPrettyXmlTest {
                 "<test>\n   <a>test</a>\n</test>\n"
             )
         ).printBody(baos);
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing reportsCorrectContentLength()",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
                 )

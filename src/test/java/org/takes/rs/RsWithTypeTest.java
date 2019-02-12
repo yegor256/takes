@@ -26,8 +26,8 @@ package org.takes.rs;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.text.JoinedText;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextIs;
 
 /**
@@ -85,8 +85,9 @@ public final class RsWithTypeTest {
     @Test
     public void replaceTypeToResponse() throws Exception {
         final String type = RsWithTypeTest.TYPE_TEXT;
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replaceTypeToResponse()",
+            () -> new RsPrint(
                 new RsWithType(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     type
@@ -111,8 +112,9 @@ public final class RsWithTypeTest {
     @Test
     public void doesNotReplaceResponseCode() throws Exception {
         final String body = "Error!";
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing doesNotReplaceResponseCode()",
+            () -> new RsPrint(
                 new RsWithType(
                     new RsWithBody(
                         new RsWithStatus(HttpURLConnection.HTTP_INTERNAL_ERROR),
@@ -140,8 +142,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithHtml() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithHtml()",
+            () -> new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
@@ -159,8 +162,9 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithHtml() - ISO",
+            () -> new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
@@ -188,8 +192,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithJson() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithJson()",
+            () -> new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
@@ -207,8 +212,9 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithJson() - ISO",
+            () -> new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
@@ -236,8 +242,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithXml() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithXml()",
+            () -> new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
@@ -254,8 +261,9 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithXml() - ISO",
+            () -> new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
@@ -283,8 +291,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void replacesTypeWithText() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithText()",
+            () -> new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
@@ -301,8 +310,9 @@ public final class RsWithTypeTest {
                 )
             )
         );
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing replacesTypeWithText() - ISO",
+            () -> new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
@@ -330,8 +340,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void addsContentType() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing addsContentType()",
+            () -> new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
             new TextIs(
@@ -356,8 +367,9 @@ public final class RsWithTypeTest {
      */
     @Test
     public void addsCharsetToContentType() throws Exception {
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "An error occurred while executing addsCharsetToContentType()",
+            () -> new RsPrint(
                 new RsWithType(
                     new RsEmpty(),
                     RsWithTypeTest.TYPE_TEXT,

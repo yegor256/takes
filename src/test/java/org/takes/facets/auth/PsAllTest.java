@@ -27,9 +27,9 @@ import com.jcabi.aspects.Tv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
@@ -37,6 +37,7 @@ import org.takes.rs.RsEmpty;
 /**
  * Test of {@link PsAll}.
  * @since 0.22
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public final class PsAllTest {
 
@@ -44,10 +45,11 @@ public final class PsAllTest {
      * Fails if PsAll with 0 Passes is created.
      * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void thereShouldBeAtLeastOnePass() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing thereShouldBeAtLeastOnePass()",
+            () -> new PsAll(
                 new ArrayList<Pass>(0),
                 0
             ).enter(new RqFake()).has(),
@@ -59,10 +61,11 @@ public final class PsAllTest {
      * Fails if index is less then 0.
      * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void indexMustBeNonNegative() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing indexMustBeNonNegative()",
+            () -> new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 -1
             ).enter(new RqFake()).has(),
@@ -74,10 +77,11 @@ public final class PsAllTest {
      * Fails if index is greater or equal to the number of Passes to enter.
      * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void indexMustBeSmallEnough() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing indexMustBeSmallEnough()",
+            () -> new PsAll(
                 Arrays.asList(
                     new PsFake(true),
                     new PsFake(false)
@@ -94,8 +98,9 @@ public final class PsAllTest {
      */
     @Test
     public void testOneSuccessfull() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing testOneSuccessfull()",
+            () -> new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 0
             ).enter(new RqFake()).has(),
@@ -109,8 +114,9 @@ public final class PsAllTest {
      */
     @Test
     public void testOneFail() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing testOneFail()",
+            () -> new PsAll(
                 Collections.singletonList(new PsFake(false)),
                 0
             ).enter(new RqFake()).has(),
@@ -129,8 +135,9 @@ public final class PsAllTest {
             new Identity.Simple("urn:foo:test")
         );
         final RqFake request = new RqFake();
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing testSuccessfullIdx()",
+            () -> new PsAll(
                 Arrays.asList(
                     new PsFake(true),
                     new PsFake(true),
@@ -149,8 +156,9 @@ public final class PsAllTest {
      */
     @Test
     public void testFail() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing testFail()",
+            () -> new PsAll(
                 Arrays.asList(
                     new PsFake(true),
                     new PsFake(true),
@@ -171,8 +179,9 @@ public final class PsAllTest {
     public void exits() throws Exception {
         final Response response = new RsEmpty();
         final PsFake exiting = new PsFake(true);
-        MatcherAssert.assertThat(
-            new PsAll(
+        new Assertion<>(
+            "An error occurred while executing exits()",
+            () -> new PsAll(
                 Arrays.asList(
                     new PsFake(true),
                     exiting
