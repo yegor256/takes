@@ -39,17 +39,17 @@ public final class MkSocket  extends Socket {
     /**
      * The address to provide for testing purpose.
      */
-    private final transient InetAddress address;
+    private final InetAddress address;
 
     /**
      * The output stream of the socket.
      */
-    private final transient ByteArrayOutputStream output;
+    private final ByteArrayOutputStream output;
 
     /**
      * The input stream of the socket.
      */
-    private final transient InputStream input;
+    private final InputStream input;
 
     /**
      * Constructs a {@code MkSocket} with the specified input stream.

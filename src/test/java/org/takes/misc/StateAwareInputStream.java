@@ -37,7 +37,7 @@ public final class StateAwareInputStream extends InputStream {
     /**
      * Original InputStream.
      */
-    private final transient InputStream origin;
+    private final InputStream origin;
 
     /**
      * Stream was closed flag.

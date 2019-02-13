@@ -38,7 +38,7 @@ final class Item implements XeSource {
     /**
      * File.
      */
-    private final transient File file;
+    private final File file;
 
     /**
      * Ctor.

@@ -85,7 +85,7 @@ public final class PsGithubTest {
      * A Junit Exception test variable.
      */
     @Rule
-    public transient ExpectedException thrown = ExpectedException.none();
+    public ExpectedException thrown = ExpectedException.none();
 
     /**
      * PsGithub can fail on no access token.

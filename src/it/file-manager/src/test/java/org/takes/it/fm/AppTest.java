@@ -48,7 +48,7 @@ public final class AppTest {
      * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
+    public final TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * App can work.

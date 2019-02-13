@@ -47,7 +47,7 @@ public final class FkHitRefreshTest {
      * Temp directory.
      */
     @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
+    public final TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * FkHitRefresh can refresh on demand.
