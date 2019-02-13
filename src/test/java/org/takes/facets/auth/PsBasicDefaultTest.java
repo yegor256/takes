@@ -37,9 +37,10 @@ public final class PsBasicDefaultTest {
     /**
      * PsBasic.Default can accept a correct login/password pair.
      * @throws Exception If fails
-     * @todo #944:30min Continue replacing MatcherAsssert.assertThat
-     *  with Assertion (org.llorllale.cactoos.matchers.Assertion of
-     *  cactus-matchers).
+     * @todo #944:30min Continue replacing all the MatcherAsssert.assertThat
+     *  of the project by Assertion (org.llorllale.cactoos.matchers.Assertion
+     *  of cactus-matchers). PsAllTest and RsPrettyXmlTest can be used as an
+     *  example.
      */
     @Test
     public void acceptsCorrectLoginPasswordPair() throws Exception {
