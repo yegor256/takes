@@ -453,13 +453,13 @@ SOFTWARE.
                   <goal>prepare-agent</goal>
                 </goals>
               </execution>
-	          <execution>
-	            <id>jacoco-site</id>
-	            <phase>install</phase>
-	            <goals>
-	              <goal>report</goal>
-	            </goals>
-	          </execution>
+              <execution>
+                <id>jacoco-site</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
             </executions>
           </plugin>
         </plugins>
