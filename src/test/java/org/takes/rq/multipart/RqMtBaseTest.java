@@ -23,9 +23,9 @@
  */
 package org.takes.rq.multipart;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Arrays;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -132,13 +132,14 @@ public final class RqMtBaseTest {
                     RqMtBaseTest.CONTENT_TYPE,
                     length
                 ),
-                Joiner.on(RqMtBaseTest.CRLF).join(
+                new JoinedText(
+                    RqMtBaseTest.CRLF,
                     RqMtBaseTest.BODY_ELEMENT,
                     "Content-Disposition: form-data; fake=\"t2\"",
                     "",
                     address,
                     "Content-Transfer-Encoding: uwf-8"
-                )
+                ).asString()
             )
         );
     }
@@ -162,13 +163,14 @@ public final class RqMtBaseTest {
                     RqMtBaseTest.CONTENT_TYPE,
                     length
                 ),
-                Joiner.on(RqMtBaseTest.CRLF).join(
+                new JoinedText(
+                    RqMtBaseTest.CRLF,
                     RqMtBaseTest.BODY_ELEMENT,
                     String.format(RqMtBaseTest.CONTENT, part),
                     "",
                     address,
                     RqMtBaseTest.BODY_ELEMENT
-                )
+                ).asString()
             )
         );
         try {

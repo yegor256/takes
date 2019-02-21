@@ -23,9 +23,10 @@
  */
 package org.takes.misc;
 
-import com.google.common.base.Joiner;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,32 +40,36 @@ public final class ConcatTest {
 
     /**
      * Concat can concatenate.
+     * @throws IOException when there is a problem
      */
     @Test
-    public void concatenates() {
+    public void concatenates() throws IOException {
         MatcherAssert.assertThat(
-            Joiner.on(" ").join(
+            new JoinedText(
+                " ",
                 new Concat<String>(
                     Arrays.asList("one", "two"),
                     Arrays.asList("three", "four")
                 )
-            ),
+            ).asString(),
             Matchers.equalTo("one two three four")
         );
     }
 
     /**
      * Concat can concatenate with empty list.
+     * @throws IOException when there is a problem
      */
     @Test
-    public void concatenatesWithEmptyList() {
+    public void concatenatesWithEmptyList() throws IOException {
         MatcherAssert.assertThat(
-            Joiner.on("+").join(
+            new JoinedText(
+                "+",
                 new Concat<String>(
                     Arrays.asList("five", "six"),
                     Collections.<String>emptyList()
                 )
-            ),
+            ).asString(),
             Matchers.equalTo("five+six")
         );
     }
