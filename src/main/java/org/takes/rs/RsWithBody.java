@@ -25,6 +25,7 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
@@ -55,7 +56,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final CharSequence body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**
@@ -63,7 +64,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final byte[] body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**
@@ -71,7 +72,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final InputStream body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**
@@ -80,7 +81,7 @@ public final class RsWithBody extends RsWrap {
      * @param url URL with body
      */
     public RsWithBody(final URL url) {
-        this(new RsEmpty(), url);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), url);
     }
 
     /**

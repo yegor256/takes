@@ -53,7 +53,7 @@ public final class RsWithHeadersTest {
             ).print(),
             Matchers.equalTo(
                 Joiner.on("\r\n").join(
-                    "HTTP/1.1 200 OK",
+                    "HTTP/1.1 204 No Content",
                     host,
                     type,
                     "",

@@ -50,7 +50,7 @@ public final class HmRsStatusTest {
         );
         MatcherAssert.assertThat(
             new TkEmpty().act(new RqFake()),
-            new HmRsStatus(HttpURLConnection.HTTP_OK)
+            new HmRsStatus(HttpURLConnection.HTTP_NO_CONTENT)
         );
     }
 
