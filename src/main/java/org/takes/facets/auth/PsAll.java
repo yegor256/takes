@@ -34,7 +34,7 @@ import org.takes.misc.Opt;
  * A Pass which you can enter only if you can enter every Pass in a list.
  * @since 0.22
  */
-public class PsAll implements Pass {
+public final class PsAll implements Pass {
 
     /**
      * Passes that have to be entered.
@@ -58,7 +58,7 @@ public class PsAll implements Pass {
     }
 
     @Override
-    public final Opt<Identity> enter(final Request request) throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         final Opt<Identity> result;
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
@@ -69,7 +69,7 @@ public class PsAll implements Pass {
     }
 
     @Override
-    public final Response exit(final Response response, final Identity identity)
+    public Response exit(final Response response, final Identity identity)
         throws IOException {
         if (this.index >= this.all.size()) {
             throw new IOException(

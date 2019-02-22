@@ -32,7 +32,7 @@ import java.util.Iterator;
  * @param <K> Type of key
  * @since 0.15.2
  */
-public class Transform<T, K> implements Iterable<K> {
+public final class Transform<T, K> implements Iterable<K> {
 
     /**
      * Internal storage.
@@ -56,12 +56,12 @@ public class Transform<T, K> implements Iterable<K> {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return String.format("%s [via %s]", this.list, this.action);
     }
 
     @Override
-    public final Iterator<K> iterator() {
+    public Iterator<K> iterator() {
         return new TransformIterator<>(this.list.iterator(), this.action);
     }
 

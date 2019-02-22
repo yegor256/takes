@@ -35,7 +35,7 @@ import org.takes.Request;
  * @since 0.17
  */
 @EqualsAndHashCode(callSuper = true)
-public class RqSimple extends RqWrap {
+public final class RqSimple extends RqWrap {
 
     /**
      * Ctor.
