@@ -50,7 +50,7 @@ public final class FtCliTest {
      * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
+    public final TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * FtCLI can work with command line args.

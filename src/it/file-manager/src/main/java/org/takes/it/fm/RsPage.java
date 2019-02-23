@@ -43,7 +43,7 @@ final class RsPage implements Response {
     /**
      * Response.
      */
-    private final transient Response origin;
+    private final Response origin;
 
     /**
      * Ctor.

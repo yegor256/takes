@@ -53,7 +53,7 @@ public final class BkTimeableTest {
      * @checkstyle VisibilityModifierCheck (5 lines)
      */
     @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
+    public final TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * BkTimeable can stop long running Back.

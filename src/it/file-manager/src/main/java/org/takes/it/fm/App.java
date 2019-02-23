@@ -46,7 +46,7 @@ public final class App implements Take {
     /**
      * Home.
      */
-    private final transient File home;
+    private final File home;
 
     /**
      * Ctor.

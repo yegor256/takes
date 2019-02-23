@@ -90,7 +90,7 @@ public final class RqMtSmartTest {
      * Temp directory.
      */
     @Rule
-    public final transient TemporaryFolder temp = new TemporaryFolder();
+    public final TemporaryFolder temp = new TemporaryFolder();
 
     /**
      * RqMtSmart can return correct part length.

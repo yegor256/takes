@@ -68,12 +68,12 @@ public final class TkProxyTest {
     /**
      * Http method.
      */
-    private final transient String method;
+    private final String method;
 
     /**
      * Expected test result.
      */
-    private final transient String expected;
+    private final String expected;
 
     /**
      * Constructor.

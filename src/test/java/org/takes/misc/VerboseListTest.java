@@ -55,18 +55,18 @@ public class VerboseListTest {
      * Rule for asserting thrown exceptions.
      */
     @Rule
-    public final transient ExpectedException thrown = ExpectedException.none();
+    public final ExpectedException thrown = ExpectedException.none();
 
     /**
      * Decorated List.
      */
     @Mock
-    private transient List<Object> origin;
+    private List<Object> origin;
 
     /**
      * Decorator.
      */
-    private transient VerboseList<Object> list;
+    private VerboseList<Object> list;
 
     /**
      * Creates decorator.

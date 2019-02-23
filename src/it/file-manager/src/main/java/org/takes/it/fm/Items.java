@@ -42,7 +42,7 @@ final class Items implements XeSource {
     /**
      * Home.
      */
-    private final transient File home;
+    private final File home;
 
     /**
      * Ctor.

@@ -38,7 +38,7 @@ final class TkDir implements TkRegex {
     /**
      * Home.
      */
-    private final transient File home;
+    private final File home;
 
     /**
      * Ctor.
