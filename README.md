@@ -1104,6 +1104,26 @@ dependencies {
 ## Backward compatibility
 Version 2.0 is not backward compatible with previous versions.
 
+## Version pattern for RESTful API
+
+The URL should NOT contain the versions, but the type requested.
+
+For example:
+```
+===>
+GET /architect/256 HTTP/1.1
+Accept: application/org.takes.architect-v1+xml
+<===
+HTTP/1.1 200 OK
+Content-Type: application/org.takes.architect-v1+xml
+<architect>
+  <name>Yegor Bugayenko</name>
+</architect>
+```
+
+[This article] (http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
+explains why it´s done this way.
+
 ## How to contribute
 
 Fork repository, make changes, send us a pull request. We will review
