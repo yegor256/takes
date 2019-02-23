@@ -1139,7 +1139,7 @@ Content-Type: application/org.takes.architect-v2+xml
 </architect>
 ```
 
-[This article] (http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
+[This article](http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
 explains why it´s done this way.
 
 ## How to contribute
