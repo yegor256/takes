@@ -1121,6 +1121,23 @@ Content-Type: application/org.takes.architect-v1+xml
 </architect>
 ```
 
+Then clients aware of newer version of this service can call:
+
+```
+===>
+GET /architect/256 HTTP/1.1
+Accept: application/org.takes.architect-v2+xml
+<===
+HTTP/1.1 200 OK
+Content-Type: application/org.takes.architect-v2+xml
+
+<architect>
+  <firstName>Yegor</firstName>
+  <lastName>Bugayenko</lastName>
+  <salutation>Mr.</salutation>
+</architect>
+```
+
 [This article] (http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
 explains why it´s done this way.
 
