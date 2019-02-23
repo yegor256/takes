@@ -79,6 +79,7 @@ These two web systems use Takes, and they are open source:
 - [Directory Layout](#directory-layout)
 - [Optional dependencies](#optional-dependencies)
 - [Backward compatibility](#backward-compatibility)
+- [Version pattern for RESTful API](#version-pattern-for-restful-api)
 - [How to contribute](#how-to-contribute)
 - [Got questions?](#got-questions)
 
