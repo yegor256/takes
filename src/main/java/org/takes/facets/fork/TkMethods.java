@@ -38,7 +38,7 @@ import org.takes.tk.TkWrap;
  * @since 0.16.1
  */
 @ToString(callSuper = true)
-public class TkMethods extends TkWrap {
+public final class TkMethods extends TkWrap {
     /**
      * Ctor.
      *

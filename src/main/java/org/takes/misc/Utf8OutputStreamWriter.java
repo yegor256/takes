@@ -31,7 +31,7 @@ import java.nio.charset.StandardCharsets;
  * OutputStreamWriter that uses UTF-8 encoding for all operations.
  * @since 0.33
  */
-public class Utf8OutputStreamWriter extends OutputStreamWriter {
+public final class Utf8OutputStreamWriter extends OutputStreamWriter {
 
     /**
      * Ctor.

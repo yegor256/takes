@@ -39,7 +39,7 @@ import org.takes.misc.Utf8String;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class RsSimple extends RsWrap {
+public final class RsSimple extends RsWrap {
 
     /**
      * Ctor.

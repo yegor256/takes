@@ -32,7 +32,7 @@ import java.nio.charset.StandardCharsets;
  * PrintStream that uses UTF-8 encoding for all operations.
  * @since 0.33
  */
-public class Utf8PrintStream extends PrintStream {
+public final class Utf8PrintStream extends PrintStream {
 
     /**
      * Ctor.

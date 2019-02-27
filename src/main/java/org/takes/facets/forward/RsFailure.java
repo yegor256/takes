@@ -39,7 +39,7 @@ import org.takes.facets.flash.RsFlash;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class RsFailure extends RsForward {
+public final class RsFailure extends RsForward {
 
     /**
      * Serialization marker.
