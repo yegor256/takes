@@ -309,7 +309,7 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>${argLine} -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US</argLine>
+          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US</argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
@@ -318,29 +318,6 @@ SOFTWARE.
             <javax.net.ssl.trustStorePassword>abc123</javax.net.ssl.trustStorePassword>
           </systemPropertyVariables>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.8</version>
-        <configuration>
-          <output>file</output>
-        </configuration>
-        <executions>
-          <execution>
-            <id>jacoco-initialize</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>jacoco-site</id>
-            <phase>install</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
@@ -451,6 +428,36 @@ SOFTWARE.
                 <phase>package</phase>
                 <goals>
                   <goal>sonar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>jacoco</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.8</version>
+            <configuration>
+              <output>file</output>
+            </configuration>
+            <executions>
+              <execution>
+                <id>jacoco-initialize</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>jacoco-site</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>report</goal>
                 </goals>
               </execution>
             </executions>
