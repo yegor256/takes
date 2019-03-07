@@ -31,13 +31,13 @@ import java.nio.charset.StandardCharsets;
  * InputStreamReader that uses UTF-8 encoding for all operations.
  * @since 0.33
  */
-public final class Utf8InputStreamReader extends InputStreamReader {
+public final class Utf8InputStreamContent extends InputStreamReader {
 
     /**
      * Ctor.
      * @param input InputStream value
      */
-    public Utf8InputStreamReader(final InputStream input) {
+    public Utf8InputStreamContent(final InputStream input) {
         super(input, StandardCharsets.UTF_8);
     }
 

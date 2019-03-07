@@ -30,7 +30,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
 /**
@@ -90,7 +90,7 @@ public final class RqPrint extends RqWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer = new Utf8OutputStreamWriter(output);
+        final Writer writer = new Utf8OutputStreamContent(output);
         for (final String line : this.head()) {
             writer.append(line);
             writer.append(eol);
