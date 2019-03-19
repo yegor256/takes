@@ -63,9 +63,9 @@ public final class RsWithTypeTest {
     private static final String TYPE_JSON = "application/json";
 
     /**
-     * HTTP Status OK.
+     * HTTP Status No Content.
      */
-    private static final String HTTP_OK = "HTTP/1.1 200 OK";
+    private static final String HTTP_NO_CONTENT = "HTTP/1.1 204 No Content";
 
     /**
      * Content-Type format.
@@ -95,7 +95,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(RsWithTypeTest.CONTENT_TYPE, type),
                     "",
                     ""
@@ -149,7 +149,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
                         RsWithTypeTest.TYPE_HTML
@@ -169,7 +169,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
                         RsWithTypeTest.TYPE_HTML,
@@ -197,7 +197,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
                         RsWithTypeTest.TYPE_JSON
@@ -217,7 +217,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
                         RsWithTypeTest.TYPE_JSON,
@@ -245,7 +245,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_XML
                     ),
@@ -264,7 +264,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
                         RsWithTypeTest.TYPE_XML,
@@ -292,7 +292,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE, RsWithTypeTest.TYPE_TEXT
                     ),
@@ -311,7 +311,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
                         RsWithTypeTest.TYPE_TEXT,
@@ -337,7 +337,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.CONTENT_TYPE,
                         RsWithTypeTest.TYPE_TEXT
@@ -367,7 +367,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new JoinedText(
                     RsWithTypeTest.CRLF,
-                    RsWithTypeTest.HTTP_OK,
+                    RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
                         RsWithTypeTest.TYPE_WITH_CHARSET,
                         RsWithTypeTest.TYPE_TEXT,

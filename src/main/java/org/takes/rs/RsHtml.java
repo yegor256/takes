@@ -54,7 +54,7 @@ public final class RsHtml extends RsWrap {
      * @param body HTML body
      */
     public RsHtml(final CharSequence body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**
@@ -62,7 +62,7 @@ public final class RsHtml extends RsWrap {
      * @param body HTML body
      */
     public RsHtml(final byte[] body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**
@@ -71,7 +71,7 @@ public final class RsHtml extends RsWrap {
      * @since 0.10
      */
     public RsHtml(final URL url) {
-        this(new RsEmpty(), url);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), url);
     }
 
     /**
@@ -79,7 +79,7 @@ public final class RsHtml extends RsWrap {
      * @param body HTML body
      */
     public RsHtml(final InputStream body) {
-        this(new RsEmpty(), body);
+        this(new RsWithStatus(HttpURLConnection.HTTP_OK), body);
     }
 
     /**

@@ -56,7 +56,7 @@ public final class TkWithHeadersTest {
             new TextIs(
                 new JoinedText(
                     "\r\n",
-                    "HTTP/1.1 200 OK",
+                    "HTTP/1.1 204 No Content",
                     host,
                     type,
                     "",

@@ -63,7 +63,7 @@ public final class PsChainTest {
                 new PsFake(true)
             ).exit(new RsEmpty(), Identity.ANONYMOUS)
                 .head().iterator().next(),
-            new StringContains("HTTP/1.1 200 O")
+            new StringContains("HTTP/1.1 204 No")
         );
     }
 }

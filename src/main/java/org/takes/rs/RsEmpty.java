@@ -25,9 +25,9 @@ package org.takes.rs;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.Response;
 
 /**
@@ -43,7 +43,7 @@ public final class RsEmpty implements Response {
 
     @Override
     public Iterable<String> head() {
-        return Collections.singletonList("HTTP/1.1 200 OK");
+        return new ListOf<>("HTTP/1.1 204 No Content");
     }
 
     @Override

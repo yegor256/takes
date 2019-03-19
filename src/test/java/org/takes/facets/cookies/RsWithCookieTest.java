@@ -122,7 +122,7 @@ public final class RsWithCookieTest {
      */
     private static String cookies(final String... cookies) throws IOException {
         final List<String> list = new ArrayList<>(cookies.length + 3);
-        list.add("HTTP/1.1 200 OK");
+        list.add("HTTP/1.1 204 No Content");
         for (final String cookie : cookies) {
             list.add(String.format("Set-Cookie: %s;", cookie));
         }
