@@ -23,9 +23,9 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Collections;
+import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -57,10 +57,11 @@ public final class RqWithDefaultHeaderTest {
                 )
             ).print(),
             Matchers.startsWith(
-                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
+                new JoinedText(
+                    RqWithDefaultHeaderTest.CRLF,
                     req,
                     "X-Default-Header1: X-Default-Value"
-                )
+                ).asString()
             )
         );
     }
@@ -86,10 +87,11 @@ public final class RqWithDefaultHeaderTest {
                 )
             ).print(),
             Matchers.startsWith(
-                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
+                new JoinedText(
+                    RqWithDefaultHeaderTest.CRLF,
                     req,
                     "X-Default-Header2: Non-Default-Value"
-                )
+                ).asString()
             )
         );
     }
