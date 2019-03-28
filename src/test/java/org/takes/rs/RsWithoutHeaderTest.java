@@ -23,8 +23,8 @@
  */
 package org.takes.rs;
 
+import com.google.common.base.Joiner;
 import java.io.IOException;
-import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -49,12 +49,11 @@ public final class RsWithoutHeaderTest {
                 )
             ).print(),
             Matchers.equalTo(
-                new JoinedText(
-                    "\r\n",
+                Joiner.on("\r\n").join(
                     "HTTP/1.1 200 OK",
                     "",
                     ""
-                ).asString()
+                )
             )
         );
     }
