@@ -39,8 +39,8 @@ import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
-import org.takes.misc.Utf8InputStreamReader;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8InputStreamContent;
+import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
 /**
@@ -151,19 +151,19 @@ public final class RsXslt extends RsWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXslt.stylesheet(
             factory, new StreamSource(
-                new Utf8InputStreamReader(
+                new Utf8InputStreamContent(
                     new ByteArrayInputStream(new Utf8String(input).asBytes())
                 )
             )
         );
         RsXslt.transformer(factory, xsl).transform(
             new StreamSource(
-                new Utf8InputStreamReader(
+                new Utf8InputStreamContent(
                     new ByteArrayInputStream(new Utf8String(input).asBytes())
                 )
             ),
             new StreamResult(
-                new Utf8OutputStreamWriter(baos)
+                new Utf8OutputStreamContent(baos)
             )
         );
         return new ByteArrayInputStream(
@@ -270,7 +270,7 @@ public final class RsXslt extends RsWrap {
                 }
             }
             return new StreamSource(
-                new Utf8InputStreamReader(input)
+                new Utf8InputStreamContent(input)
             );
         }
     }

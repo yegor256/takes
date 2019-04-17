@@ -41,7 +41,7 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -148,7 +148,7 @@ public final class RsXembly extends RsWrap {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
                 new StreamResult(
-                    new Utf8OutputStreamWriter(baos)
+                    new Utf8OutputStreamContent(baos)
                 )
             );
         } catch (final TransformerException ex) {

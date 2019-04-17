@@ -35,8 +35,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
-import org.takes.misc.Utf8InputStreamReader;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8InputStreamContent;
+import org.takes.misc.Utf8OutputStreamContent;
 
 /**
  * Command line options.
@@ -94,7 +94,7 @@ final class Options {
         } else {
             final File file = new File(port);
             if (file.exists()) {
-                try (Reader reader = new Utf8InputStreamReader(
+                try (Reader reader = new Utf8InputStreamContent(
                     Files.newInputStream(file.toPath())
                     )
                 ) {
@@ -107,7 +107,7 @@ final class Options {
                 }
             } else {
                 socket = new ServerSocket(0);
-                try (Writer writer = new Utf8OutputStreamWriter(
+                try (Writer writer = new Utf8OutputStreamContent(
                     Files.newOutputStream(file.toPath())
                 )) {
                     writer.append(Integer.toString(socket.getLocalPort()));

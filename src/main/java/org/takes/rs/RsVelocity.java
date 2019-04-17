@@ -38,8 +38,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.takes.Response;
 import org.takes.Scalar;
-import org.takes.misc.Utf8InputStreamReader;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8InputStreamContent;
+import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
 /**
@@ -162,7 +162,7 @@ public final class RsVelocity extends RsWrap {
         final InputStream template,
         final Map<String, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new Utf8OutputStreamWriter(baos);
+        final Writer writer = new Utf8OutputStreamContent(baos);
         final VelocityEngine engine = new VelocityEngine();
         engine.setProperty(
             "file.resource.loader.path",
@@ -172,7 +172,7 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new Utf8InputStreamReader(template)
+            new Utf8InputStreamContent(template)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());

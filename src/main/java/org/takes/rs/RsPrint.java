@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
 import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamWriter;
+import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
 /**
@@ -134,7 +134,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
-        this.printHead(new Utf8OutputStreamWriter(output));
+        this.printHead(new Utf8OutputStreamContent(output));
     }
 
     /**
