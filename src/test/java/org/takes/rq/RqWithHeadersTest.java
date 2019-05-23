@@ -23,13 +23,12 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.text.JoinedText;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.StartsWith;
 
 /**
  * Test case for {@link RqWithHeaders}.
@@ -40,37 +39,37 @@ public final class RqWithHeadersTest {
 
     /**
      * RqWithHeaders can add headers.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void addsHeadersToRequest() throws IOException {
+    public void addsHeadersToRequest() {
         final String testheader = "TestHeader: someValue";
         final String someheader = "SomeHeader: testValue";
-        MatcherAssert.assertThat(
-            new RqPrint(
+        new Assertion<>(
+            "Request must contain headers",
+            () -> new RqPrint(
                 new RqWithHeaders(
                     new RqFake(),
                     testheader,
                     someheader
                 )
             ).print(),
-            Matchers.startsWith(
-                Joiner.on("\r\n").join(
+            new StartsWith(
+                new JoinedText(
+                    "\r\n",
                     "GET /",
                     "Host: www.example.com",
                     testheader,
                     someheader
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
      * Checks RqWithHeaders equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
+    public void equalsAndHashCodeEqualTest() {
         EqualsVerifier.forClass(RqWithHeaders.class)
             .suppress(Warning.TRANSIENT_FIELDS)
             .withRedefinedSuperclass()

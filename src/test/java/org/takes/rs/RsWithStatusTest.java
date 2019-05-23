@@ -23,12 +23,13 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.Scalar;
+import org.cactoos.text.JoinedText;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasSize;
+import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.Response;
 
 /**
@@ -36,38 +37,47 @@ import org.takes.Response;
  *
  * <p>The class is immutable and thread-safe.
  * @since 0.16.9
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public final class RsWithStatusTest {
+
     /**
      * RsWithStatus can add status.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void addsStatus() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+    public void addsStatus() {
+        new Assertion<>(
+            "Response must contain not found status",
+            () -> new RsPrint(
                 new RsWithStatus(
                     new RsWithHeader("Host", "example.com"),
                     HttpURLConnection.HTTP_NOT_FOUND
                 )
             ).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
+            new TextIs(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 404 Not Found",
                     "Host: example.com",
                     "",
                     ""
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsWithStatus can add status multiple times.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
+    @SuppressWarnings(
+        {
+            "PMD.JUnitTestContainsTooManyAsserts",
+            "PMD.ProhibitPlainJunitAssertionsRule"
+        }
+    )
     @Test
-    public void addsStatusMultipleTimes() throws IOException {
+    public void addsStatusMultipleTimes() throws Exception {
         final Response response = new RsWithStatus(
             new RsWithStatus(
                 new RsEmpty(),
@@ -75,13 +85,12 @@ public final class RsWithStatusTest {
             ),
             HttpURLConnection.HTTP_SEE_OTHER
         );
-        MatcherAssert.assertThat(
+        final Scalar<Assertion<Iterable<?>>> factory = () -> new Assertion<>(
+            "Head with one line",
             response.head(),
-            Matchers.<String>iterableWithSize(1)
+            new HasSize(1)
         );
-        MatcherAssert.assertThat(
-            response.head(),
-            Matchers.<String>iterableWithSize(1)
-        );
+        factory.value().affirm();
+        factory.value().affirm();
     }
 }

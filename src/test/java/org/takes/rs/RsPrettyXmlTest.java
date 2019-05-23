@@ -27,61 +27,66 @@ import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.JoinedText;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.Throws;
 
 /**
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with XML body.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void formatsXmlBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+    public void formatsXmlBody() {
+        new Assertion<>(
+            "Must return formatted response",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).printBody(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
-        );
+            new TextIs("<test>\n   <a>foo</a>\n</test>\n")
+        ).affirm();
     }
 
     /**
      * RsPrettyXML can format HTML5 markup with proper DOCTYPE.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5DoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+    public void formatsHtml5DoctypeBody() {
+        new Assertion<>(
+            "Must return proper DOCTYPE",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         "<!DOCTYPE html><html><head></head><body></body></html>"
                     )
                 )
             ).printBody(),
-            Matchers.containsString("<!DOCTYPE HTML>")
-        );
+            new TextHasString("<!DOCTYPE HTML>")
+        ).affirm();
     }
 
     /**
      * RsPrettyXML can format HTML5 markup with DOCTYPE for
      * legacy browser support.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
-        MatcherAssert.assertThat(
-            new RsPrint(
+    public void formatsHtml5ForLegacyBrowsersDoctypeBody() {
+        new Assertion<>(
+            "Formatted for legacy browser support",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
@@ -92,9 +97,10 @@ public final class RsPrettyXmlTest {
                     )
                 )
             ).printBody(),
-            Matchers.is(
-                Joiner.on("").appendTo(
-                    new StringBuilder("<!DOCTYPE html\n"),
+            new TextIs(
+                new JoinedText(
+                    "",
+                    "<!DOCTYPE html\n",
                     "  SYSTEM \"about:legacy-compat\">\n",
                     "<html>\n",
                     "   <head>\n",
@@ -103,24 +109,24 @@ public final class RsPrettyXmlTest {
                     "   </head>\n",
                     "   <body></body>\n",
                     "</html>"
-                ).toString()
+                )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsPrettyXML can format HTML4 markup with DOCTYPE with public
      * and system id.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml4DoctypeBody() throws IOException {
+    public void formatsHtml4DoctypeBody() {
         final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "Formatted HTML4 markup",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         Joiner.on("").appendTo(
@@ -134,9 +140,10 @@ public final class RsPrettyXmlTest {
                     )
                 )
             ).printBody(),
-            Matchers.is(
-                Joiner.on("").appendTo(
-                    new StringBuilder("<!DOCTYPE html\n  "),
+            new TextIs(
+                new JoinedText(
+                    "",
+                    "<!DOCTYPE html\n  ",
                     pid,
                     "\"http://www.w3.org/TR/html4/loose.dtd\">\n",
                     xhtml,
@@ -144,18 +151,32 @@ public final class RsPrettyXmlTest {
                     "<meta http-equiv=\"Content-Type\" content=\"text/html; ",
                     "charset=UTF-8\" /><a>foo</a></head>\n   ",
                     "<body>this is body</body>\n</html>"
-                ).toString()
+                )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsPrettyXML can format response with non XML body.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
+    @Test
     public void formatsNonXmlBody() throws IOException {
-        new RsPrint(new RsPrettyXml(new RsWithBody("foo"))).printBody();
+        new Assertion<>(
+            "Can't format response with non XML body",
+            () -> new RsPrint(
+                new RsPrettyXml(new RsWithBody("foo"))
+            ).printBody(),
+            new Throws<>(
+                new JoinedText(
+                    "",
+                    "org.xml.sax.SAXParseException; ",
+                    "lineNumber: 1; columnNumber: 1; ",
+                    "Content is not allowed in prolog."
+                ).asString(),
+                IOException.class
+            )
+        ).affirm();
     }
 
     /**
@@ -170,27 +191,26 @@ public final class RsPrettyXmlTest {
                 "<test>\n   <a>test</a>\n</test>\n"
             )
         ).printBody(baos);
-        MatcherAssert.assertThat(
-            new RsPrint(
+        new Assertion<>(
+            "Response with correct content length",
+            () -> new RsPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
                 )
             ).printHead(),
-            Matchers.containsString(
-                String.format(
-                    "Content-Length: %d",
-                    baos.toByteArray().length
+            new TextHasString(
+                new FormattedText(
+                    "Content-Length: %d", baos.toByteArray().length
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsPrettyXML can conform to equals and hash code contract.
-     * @throws Exception If some problem inside
      */
     @Test
-    public void conformsToEqualsAndHashCode() throws Exception {
+    public void conformsToEqualsAndHashCode() {
         EqualsVerifier.forClass(RsPrettyXml.class)
             .withRedefinedSuperclass()
             .verify();
