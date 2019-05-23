@@ -11,8 +11,8 @@ script:
   - est --dir=est --file=/dev/null
   - mvn clean install -Pqulice -Pjacoco --errors --batch-mode
 before_install:
-  - rvm install 2.2.2
-  - rvm use 2.2.2
+  - rvm install 2.6.0
+  - rvm use 2.6.0
 install:
   - gem install pdd
   - gem install est
