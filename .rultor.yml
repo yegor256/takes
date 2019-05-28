@@ -1,10 +1,10 @@
 docker:
   image: yegor256/java8
 assets:
-  settings.xml: zerocracy/home#assets/takes/settings.xml
-  pubring.gpg: zerocracy/home#assets/pubring.gpg
-  secring.gpg: zerocracy/home#assets/secring.gpg
-  s3cfg: zerocracy/home#assets/s3cfg
+  settings.xml: yegor256/home#assets/takes/settings.xml
+  pubring.gpg: yegor256/home#assets/pubring.gpg
+  secring.gpg: yegor256/home#assets/secring.gpg
+  s3cfg: yegor256/home#assets/s3cfg
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 env:
