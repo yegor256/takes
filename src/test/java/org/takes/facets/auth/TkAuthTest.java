@@ -24,9 +24,15 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.AllOf;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.StartsWith;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -70,32 +76,38 @@ public final class TkAuthTest {
 
     /**
      * TkAuth can login a user via cookie.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsInUserViaCookie() throws IOException {
-        final Pass pass = new PsChain(
-            new PsCookie(new CcPlain()),
-            new PsLogout()
-        );
-        MatcherAssert.assertThat(
+    @SuppressWarnings("unchecked")
+    public void logsInUserViaCookie() throws Exception {
+        new Assertion<>(
+            "Response with header Set-Cookie",
             new RsPrint(
-                new TkAuth(new TkText(), pass).act(
+                new TkAuth(
+                    new TkText(),
+                    new PsChain(
+                        new PsCookie(new CcPlain()),
+                        new PsLogout()
+                    )
+                ).act(
                     new RqWithHeader(
                         new RqFake(),
-                        String.format(
+                        new FormattedText(
                             "Cookie:  %s=%s",
                             PsCookie.class.getSimpleName(),
                             "urn%3Atest%3A0"
-                        )
+                        ).asString()
                     )
                 )
-            ).print(),
-            Matchers.allOf(
-                Matchers.startsWith("HTTP/1.1 200 "),
-                Matchers.containsString("Set-Cookie: PsCookie=urn%3Atest%3A0")
+            ),
+            new AllOf<>(
+                new IterableOf<>(
+                    new StartsWith("HTTP/1.1 200 "),
+                    new TextHasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
+                )
             )
-        );
+        ).affirm();
     }
 
     /**
@@ -132,13 +144,16 @@ public final class TkAuthTest {
      */
     @Test
     public void logsUserOutWithCookiePresent() throws IOException {
-        final Pass pass = new PsChain(
-            new PsLogout(),
-            new PsCookie(new CcPlain())
-        );
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Response with header setting empty cookie",
             new RsPrint(
-                new TkAuth(new TkText(), pass).act(
+                new TkAuth(
+                    new TkText(),
+                    new PsChain(
+                        new PsLogout(),
+                        new PsCookie(new CcPlain())
+                    )
+                ).act(
                     new RqWithHeader(
                         new RqFake(),
                         String.format(
@@ -148,9 +163,9 @@ public final class TkAuthTest {
                         )
                     )
                 )
-            ).print(),
-            Matchers.containsString("Set-Cookie: PsCookie=")
-        );
+            ),
+            new TextHasString("Set-Cookie: PsCookie=")
+        ).affirm();
     }
 
 }

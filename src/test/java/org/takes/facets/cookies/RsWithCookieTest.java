@@ -23,14 +23,11 @@
  */
 package org.takes.facets.cookies;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.cactoos.text.JoinedText;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.takes.rs.RsEmpty;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.Throws;
 import org.takes.rs.RsPrint;
 
 /**
@@ -40,106 +37,89 @@ import org.takes.rs.RsPrint;
 public final class RsWithCookieTest {
 
     /**
+     * Carriage return constant.
+     */
+    private static final String CRLF = "\r\n";
+
+    /**
      * RsWithCookie can add cookies.
-     * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (17 lines)
      */
     @Test
-    public void addsCookieToResponse() throws IOException {
-        final String foo = "foo";
-        final String works = "works?";
-        final String path = "Path=/";
-        MatcherAssert.assertThat(
+    public void addsCookieToResponse() {
+        new Assertion<>(
+            "Response should contain \"Set-Cookie\" header",
             new RsPrint(
                 new RsWithCookie(
-                    new RsEmpty(),
-                    foo,
-                    works,
-                    path
+                    "foo",
+                    "works?",
+                    "Path=/"
                 )
-            ).print(),
-            Matchers.equalTo(
-                RsWithCookieTest.cookies(
-                    RsWithCookieTest.formatCookie(foo, works, path)
+            ),
+            new TextHasString(
+                new JoinedText(
+                    RsWithCookieTest.CRLF,
+                    "Set-Cookie: foo=works?;Path=/;",
+                    ""
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsWithCookie can add several cookies (with several decorations).
-     * @throws IOException If some problem inside
-     * @checkstyle MultipleStringLiteralsCheck (17 lines)
      */
     @Test
-    public void addsMultipleCookies() throws IOException {
-        final String qux = "qux";
-        final String bar = "bar";
-        final String value = "value?";
-        final String path = "Path=/qux";
-        MatcherAssert.assertThat(
+    public void addsMultipleCookies() {
+        new Assertion<>(
+            "Response should contain \"Set-Cookie\" headers",
             new RsPrint(
                 new RsWithCookie(
                     new RsWithCookie(
-                        new RsEmpty(),
-                        qux,
-                        value,
-                        path
+                        "qux",
+                        "value?",
+                        "Path=/qux"
                     ),
-                    bar, "worksToo?", "Path=/2nd/path/"
+                    "bar", "worksToo?", "Path=/2nd/path/"
                 )
-            ).print(),
-            Matchers.equalTo(
-                RsWithCookieTest.cookies(
-                    RsWithCookieTest.formatCookie(qux, value, path),
-                    "bar=worksToo?;Path=/2nd/path/"
+            ),
+            new TextHasString(
+                new JoinedText(
+                    RsWithCookieTest.CRLF,
+                    "Set-Cookie: qux=value?;Path=/qux;",
+                    "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",
+                    ""
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
      * RsWithCookie can reject invalid cookie name.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectsInvalidName() {
-        new RsWithCookie(new RsEmpty(), "f oo", "works");
+        new Assertion<>(
+            "RsWithCookie should reject invalid cookie name",
+            () -> new RsWithCookie("f oo", "works"),
+            new Throws<>(
+                "Cookie name \"f oo\" contains invalid characters",
+                IllegalArgumentException.class
+            )
+        ).affirm();
     }
 
     /**
      * RsWithCookie can reject invalid cookie value.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void rejectsInvalidValue() {
-        new RsWithCookie(new RsEmpty(), "cookiename", "wo\"rks");
-    }
-
-    /**
-     * Returns the joined cookie.
-     * @param cookies Cookies values
-     * @return Joined cookie
-     * @throws IOException when there is a problem
-     */
-    private static String cookies(final String... cookies) throws IOException {
-        final List<String> list = new ArrayList<>(cookies.length + 3);
-        list.add("HTTP/1.1 204 No Content");
-        for (final String cookie : cookies) {
-            list.add(String.format("Set-Cookie: %s;", cookie));
-        }
-        list.add("");
-        list.add("");
-        return new JoinedText("\r\n", list).asString();
-    }
-
-    /**
-     * Returns the formatted cookie.
-     * @param name Cookie name
-     * @param value Cookie value
-     * @param path Cookie path
-     * @return Formatted cookie value
-     */
-    private static String formatCookie(final String name, final String value,
-        final String path) {
-        return String.format("%s=%s;%s", name, value, path);
+        new Assertion<>(
+            "RsWithCookie should reject invalid cookie value",
+            () -> new RsWithCookie("cookiename", "wo\"rks"),
+            new Throws<>(
+                "Cookie value \"wo\"rks\" contains invalid characters",
+                IllegalArgumentException.class
+            )
+        ).affirm();
     }
 }

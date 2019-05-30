@@ -24,9 +24,9 @@
 package org.takes.facets.cookies;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -37,6 +37,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link TkJoinedCookies}.
  *
  * @since 0.11
+ * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 public final class TkJoinedCookiesTest {
 
@@ -46,7 +47,8 @@ public final class TkJoinedCookiesTest {
      */
     @Test
     public void joinsCookies() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Response with joined cookies",
             new RsPrint(
                 new TkJoinedCookies(
                     new TkFixed(
@@ -57,9 +59,9 @@ public final class TkJoinedCookiesTest {
                         )
                     )
                 ).act(new RqFake())
-            ).print(),
-            Matchers.containsString("Set-Cookie: a=1, b=1; Path=/")
-        );
+            ),
+            new TextHasString("Set-Cookie: a=1, b=1; Path=/")
+        ).affirm();
     }
 
 }

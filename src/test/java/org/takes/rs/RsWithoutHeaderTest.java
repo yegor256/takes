@@ -23,11 +23,10 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.text.JoinedText;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsWithoutHeader}.
@@ -37,25 +36,26 @@ public final class RsWithoutHeaderTest {
 
     /**
      * RsWithoutHeader can remove a header.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void addsHeadersToResponse() throws IOException {
-        MatcherAssert.assertThat(
+    public void addsHeadersToResponse() {
+        new Assertion<>(
+            "Response without 'Host' header",
             new RsPrint(
                 new RsWithoutHeader(
                     new RsWithHeader(new RsEmpty(), "host", "b.example.com"),
                     "Host"
                 )
-            ).print(),
-            Matchers.equalTo(
-                Joiner.on("\r\n").join(
+            ),
+            new TextIs(
+                new JoinedText(
+                    "\r\n",
                     "HTTP/1.1 204 No Content",
                     "",
                     ""
                 )
             )
-        );
+        ).affirm();
     }
 
 }
