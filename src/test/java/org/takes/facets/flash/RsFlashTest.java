@@ -27,9 +27,10 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.text.FormattedText;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.misc.Expires;
 import org.takes.rs.RsPrint;
 
@@ -46,12 +47,13 @@ public final class RsFlashTest {
     @Test
     public void addsCookieToResponse() throws IOException {
         final String msg = "hey, how are you?";
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Response must contain a flash cookie",
             new RsPrint(
                 new RsFlash(msg)
-            ).print(),
-            Matchers.containsString(
-                String.format(
+            ),
+            new TextHasString(
+                new FormattedText(
                     "Set-Cookie: RsFlash=%s/%s",
                     URLEncoder.encode(
                         msg,
@@ -60,7 +62,7 @@ public final class RsFlashTest {
                     Level.INFO.getName()
                 )
             )
-        );
+        ).affirm();
     }
 
     /**
@@ -69,29 +71,26 @@ public final class RsFlashTest {
      */
     @Test
     public void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Response must contain a flash cookie with an expiration date.",
             new RsPrint(
                 new RsFlash("i'm good, thanks", new Expires.Date(0L))
-            ).print(),
-            Matchers.containsString(
-                "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
-            )
-        );
+            ),
+            new TextHasString("Expires=Thu, 01 Jan 1970 00:00:00 GMT")
+        ).affirm();
     }
 
     /**
      * RsFlash can print itself from Throwable.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void printsItselfFromThrowable() throws IOException {
-        MatcherAssert.assertThat(
-            new RsFlash(
+    public void printsItselfFromThrowable() {
+        new Assertion<>(
+            "RsFlash should print a message from Throwable",
+            () -> new RsFlash(
                 new IOException("and you?")
             ).toString(),
-            Matchers.containsString(
-                "text=SEVERE/and you?"
-            )
-        );
+            new TextHasString("text=SEVERE/and you?")
+        ).affirm();
     }
 }

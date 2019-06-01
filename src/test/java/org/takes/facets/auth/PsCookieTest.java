@@ -24,9 +24,9 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
@@ -43,15 +43,16 @@ public final class PsCookieTest {
      */
     @Test
     public void addsCookieToResponse() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Response with Set-Cookie header",
             new RsPrint(
                 new PsCookie(
                     new CcPlain(), "foo", 1L
                 ).exit(new RsEmpty(), new Identity.Simple("urn:test:99"))
-            ).print(),
-            Matchers.containsString(
+            ),
+            new TextHasString(
                 "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
             )
-        );
+        ).affirm();
     }
 }
