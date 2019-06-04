@@ -25,7 +25,7 @@ package org.takes.misc;
 
 import java.io.IOException;
 import java.util.Arrays;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public final class TransformTest {
     @Test
     public void transformsList() throws IOException {
         MatcherAssert.assertThat(
-            new JoinedText(
+            new Joined(
                 " ",
                 new Transform<String, String>(
                     Arrays.asList("one", "two", "three"),

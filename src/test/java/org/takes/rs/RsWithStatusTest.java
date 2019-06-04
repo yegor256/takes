@@ -25,7 +25,7 @@ package org.takes.rs;
 
 import java.net.HttpURLConnection;
 import org.cactoos.Scalar;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
@@ -56,7 +56,7 @@ public final class RsWithStatusTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 404 Not Found",
                     "Host: example.com",

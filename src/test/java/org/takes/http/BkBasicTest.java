@@ -37,7 +37,7 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.io.BytesOf;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -212,7 +212,7 @@ public final class BkBasicTest {
                 )
             ) {
                 socket.getOutputStream().write(
-                    new JoinedText(
+                    new Joined(
                         BkBasicTest.CRLF,
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
@@ -276,7 +276,7 @@ public final class BkBasicTest {
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
-                        new JoinedText(
+                        new Joined(
                             BkBasicTest.CRLF,
                             BkBasicTest.POST,
                             BkBasicTest.HOST,
@@ -333,7 +333,7 @@ public final class BkBasicTest {
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
-                        new JoinedText(
+                        new Joined(
                             BkBasicTest.CRLF,
                             BkBasicTest.POST,
                             BkBasicTest.HOST,
@@ -368,7 +368,7 @@ public final class BkBasicTest {
         return new MkSocket(
             new ByteArrayInputStream(
                 new BytesOf(
-                    new JoinedText(
+                    new Joined(
                         BkBasicTest.CRLF,
                         "GET / HTTP/1.1",
                         BkBasicTest.HOST,

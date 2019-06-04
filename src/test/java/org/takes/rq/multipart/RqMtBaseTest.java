@@ -25,7 +25,7 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.util.Arrays;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -132,7 +132,7 @@ public final class RqMtBaseTest {
                     RqMtBaseTest.CONTENT_TYPE,
                     length
                 ),
-                new JoinedText(
+                new Joined(
                     RqMtBaseTest.CRLF,
                     RqMtBaseTest.BODY_ELEMENT,
                     "Content-Disposition: form-data; fake=\"t2\"",
@@ -163,7 +163,7 @@ public final class RqMtBaseTest {
                     RqMtBaseTest.CONTENT_TYPE,
                     length
                 ),
-                new JoinedText(
+                new Joined(
                     RqMtBaseTest.CRLF,
                     RqMtBaseTest.BODY_ELEMENT,
                     String.format(RqMtBaseTest.CONTENT, part),

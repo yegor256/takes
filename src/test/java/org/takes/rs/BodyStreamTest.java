@@ -25,7 +25,7 @@ package org.takes.rs;
 
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputOf;
-import org.cactoos.io.LengthOf;
+import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;

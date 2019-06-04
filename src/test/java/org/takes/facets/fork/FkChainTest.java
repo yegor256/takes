@@ -23,7 +23,7 @@
  */
 package org.takes.facets.fork;
 
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public final class FkChainTest {
                 ).route(new RqFake("GET", "/hey?yu")).get()
             ).print(),
             Matchers.equalTo(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),

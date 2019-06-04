@@ -26,7 +26,7 @@ package org.takes.rq;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -68,7 +68,7 @@ public final class RqChunkTest {
                     "Host: www.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                new JoinedText(
+                new Joined(
                     RqChunkTest.CRLF,
                     length,
                     data,
@@ -104,7 +104,7 @@ public final class RqChunkTest {
                     "Host: b.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                new JoinedText(
+                new Joined(
                     RqChunkTest.CRLF,
                     Integer.toHexString(first.length()),
                     first,
@@ -142,7 +142,7 @@ public final class RqChunkTest {
                     "Host: c.example.com",
                     RqChunkTest.CHUNKED_HEADER
                 ),
-                new JoinedText(
+                new Joined(
                     RqChunkTest.CRLF,
                     length + ignored,
                     data,

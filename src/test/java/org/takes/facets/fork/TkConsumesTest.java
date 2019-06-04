@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -75,7 +75,7 @@ public final class TkConsumesTest {
         MatcherAssert.assertThat(
             new RsPrint(response).print(),
             Matchers.startsWith(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
                     contenttype

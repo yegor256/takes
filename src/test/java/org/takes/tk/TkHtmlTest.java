@@ -24,7 +24,7 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -49,7 +49,7 @@ public final class TkHtmlTest {
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body).act(new RqFake())),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),

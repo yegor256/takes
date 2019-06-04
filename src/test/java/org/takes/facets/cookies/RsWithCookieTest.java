@@ -23,7 +23,7 @@
  */
 package org.takes.facets.cookies;
 
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -56,7 +56,7 @@ public final class RsWithCookieTest {
                 )
             ),
             new TextHasString(
-                new JoinedText(
+                new Joined(
                     RsWithCookieTest.CRLF,
                     "Set-Cookie: foo=works?;Path=/;",
                     ""
@@ -83,7 +83,7 @@ public final class RsWithCookieTest {
                 )
             ),
             new TextHasString(
-                new JoinedText(
+                new Joined(
                     RsWithCookieTest.CRLF,
                     "Set-Cookie: qux=value?;Path=/qux;",
                     "Set-Cookie: bar=worksToo?;Path=/2nd/path/;",

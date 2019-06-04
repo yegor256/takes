@@ -25,7 +25,7 @@ package org.takes.rs;
 
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextIs;
@@ -93,7 +93,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(RsWithTypeTest.CONTENT_TYPE, type),
@@ -122,7 +122,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     "HTTP/1.1 500 Internal Error",
                     "Content-Length: 6",
@@ -147,7 +147,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -167,7 +167,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -195,7 +195,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -215,7 +215,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -243,7 +243,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -262,7 +262,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -290,7 +290,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -309,7 +309,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -335,7 +335,7 @@ public final class RsWithTypeTest {
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(
@@ -365,7 +365,7 @@ public final class RsWithTypeTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
                     String.format(

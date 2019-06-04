@@ -23,7 +23,7 @@
  */
 package org.takes.rs;
 
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextIs;
@@ -48,7 +48,7 @@ public final class RsWithoutHeaderTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 204 No Content",
                     "",

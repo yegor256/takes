@@ -35,7 +35,7 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.TrimmedText;
+import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
@@ -104,7 +104,7 @@ public final class PsBasic implements Pass {
             );
         }
         final String decoded = new UncheckedText(
-            new TrimmedText(
+            new Trimmed(
                 new Utf8String(
                     DatatypeConverter.parseBase64Binary(
                         PsBasic.AUTH.split(headers.next())[1]

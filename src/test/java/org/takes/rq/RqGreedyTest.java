@@ -25,7 +25,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public final class RqGreedyTest {
      */
     @Test
     public void makesRequestGreedy() throws IOException {
-        final String body = new JoinedText(
+        final String body = new Joined(
             "\r\n",
             "GET /test HTTP/1.1",
             "Host: localhost",

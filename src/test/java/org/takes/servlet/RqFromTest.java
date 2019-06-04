@@ -26,7 +26,7 @@ package org.takes.servlet;
 
 import java.io.IOException;
 import org.cactoos.list.ListOf;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.StringContains;
 import org.hamcrest.core.StringStartsWith;
@@ -99,7 +99,7 @@ public final class RqFromTest {
                 )
             ).printHead(),
             new StringStartsWith(
-                new JoinedText(
+                new Joined(
                     RqFromTest.EOL,
                     method,
                     "Host: localhost",
@@ -131,7 +131,7 @@ public final class RqFromTest {
                 )
             ).printHead(),
             new StringStartsWith(
-                new JoinedText(
+                new Joined(
                     RqFromTest.EOL,
                     method,
                     header,
@@ -162,7 +162,7 @@ public final class RqFromTest {
                 )
             ).printHead(),
             new StringStartsWith(
-                new JoinedText(
+                new Joined(
                     RqFromTest.EOL,
                     method,
                     header,

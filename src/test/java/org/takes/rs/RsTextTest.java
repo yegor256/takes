@@ -25,7 +25,7 @@ package org.takes.rs;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public final class RsTextTest {
         MatcherAssert.assertThat(
             new RsPrint(new RsBuffered(new RsText(body))),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),

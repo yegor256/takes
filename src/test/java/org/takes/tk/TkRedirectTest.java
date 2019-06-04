@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextIs;
@@ -61,7 +61,7 @@ public final class TkRedirectTest {
                 new TkRedirect(url).act(new RqFake())
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     TkRedirectTest.NEWLINE,
                     "HTTP/1.1 303 See Other",
                     String.format(TkRedirectTest.LOCATION, url),
@@ -86,7 +86,7 @@ public final class TkRedirectTest {
                 )
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     TkRedirectTest.NEWLINE,
                     "HTTP/1.1 302 Moved Temporarily",
                     String.format(TkRedirectTest.LOCATION, url),

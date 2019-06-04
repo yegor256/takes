@@ -34,7 +34,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -102,7 +102,7 @@ public final class RqMtSmartTest {
         final int length = 5000;
         final String part = "x-1";
         final String body =
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
@@ -145,7 +145,7 @@ public final class RqMtSmartTest {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 "----foo",
                 String.format(RqMtSmartTest.CONTENT, part),
@@ -199,7 +199,7 @@ public final class RqMtSmartTest {
             }
         };
         final String body =
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 "--AaB0zz",
                 String.format(RqMtSmartTest.CONTENT, part), "",
@@ -244,7 +244,7 @@ public final class RqMtSmartTest {
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         bwr.write(
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
                 String.format(RqMtSmartTest.CONTENT, part),
@@ -300,7 +300,7 @@ public final class RqMtSmartTest {
         final File file = this.temp.newFile("notDistortContent.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         final String head =
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 "--zzz1",
                 String.format(RqMtSmartTest.CONTENT, part),
@@ -313,7 +313,7 @@ public final class RqMtSmartTest {
             bwr.write(idx % byt);
         }
         final String foot =
-            new JoinedText(
+            new Joined(
                 RqMtSmartTest.CRLF,
                 "",
                 "--zzz1--",

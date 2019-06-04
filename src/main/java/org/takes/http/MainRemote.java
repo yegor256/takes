@@ -33,7 +33,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.TrimmedText;
+import org.cactoos.text.Trimmed;
 import org.takes.misc.Utf8String;
 
 /**
@@ -157,7 +157,7 @@ public final class MainRemote {
                 }
             }
             port = Integer.parseInt(
-                new TrimmedText(new Utf8String(buf)).asString()
+                new Trimmed(new Utf8String(buf)).asString()
             );
         }
         return port;

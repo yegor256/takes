@@ -24,7 +24,7 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextIs;
@@ -54,7 +54,7 @@ public final class TkWithHeadersTest {
                 ).act(new RqFake())
             ),
             new TextIs(
-                new JoinedText(
+                new Joined(
                     "\r\n",
                     "HTTP/1.1 204 No Content",
                     host,

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -59,7 +59,7 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                new JoinedText(
+                new Joined(
                     ChunkedInputStreamTest.CRLF,
                     length,
                     data,
@@ -92,7 +92,7 @@ public final class ChunkedInputStreamTest {
         final Integer length = data.length();
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                new JoinedText(
+                new Joined(
                     ChunkedInputStreamTest.CRLF,
                     Integer.toHexString(first.length()),
                     first,
@@ -127,7 +127,7 @@ public final class ChunkedInputStreamTest {
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
-                new JoinedText(
+                new Joined(
                     ChunkedInputStreamTest.CRLF,
                     length + ignored,
                     data,

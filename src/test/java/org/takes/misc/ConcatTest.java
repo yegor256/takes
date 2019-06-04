@@ -26,7 +26,7 @@ package org.takes.misc;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import org.cactoos.text.JoinedText;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public final class ConcatTest {
     @Test
     public void concatenates() throws IOException {
         MatcherAssert.assertThat(
-            new JoinedText(
+            new Joined(
                 " ",
                 new Concat<String>(
                     Arrays.asList("one", "two"),
@@ -63,7 +63,7 @@ public final class ConcatTest {
     @Test
     public void concatenatesWithEmptyList() throws IOException {
         MatcherAssert.assertThat(
-            new JoinedText(
+            new Joined(
                 "+",
                 new Concat<String>(
                     Arrays.asList("five", "six"),
