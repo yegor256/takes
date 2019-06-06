@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.iterable.Filtered;
@@ -71,7 +70,7 @@ public final class FbStatus extends FbWrap {
         this(check, new Fallback() {
             @Override
             public Opt<Response> route(final RqFallback req)
-                throws IOException {
+                throws Exception {
                 final Response res = new RsWithStatus(req.code());
                 return new Opt.Single<>(
                     new RsWithType(
@@ -111,7 +110,7 @@ public final class FbStatus extends FbWrap {
             new Fallback() {
                 @Override
                 public Opt<Response> route(final RqFallback req)
-                    throws IOException {
+                    throws Exception {
                     return new Opt.Single<>(take.act(req));
                 }
             }
@@ -177,7 +176,7 @@ public final class FbStatus extends FbWrap {
             new Fallback() {
                 @Override
                 public Opt<Response> route(final RqFallback req)
-                    throws IOException {
+                    throws Exception {
                     Opt<Response> rsp = new Opt.Empty<>();
                     if (new ListOf<>(check).contains(req.code())) {
                         rsp = fallback.get().route(req);

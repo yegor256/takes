@@ -83,12 +83,18 @@ public final class RsFork extends RsWrap {
      * @return Response
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response pick(final Request req,
         final Iterable<Fork> forks) throws IOException {
         for (final Fork fork : forks) {
-            final Opt<Response> rsps = fork.route(req);
-            if (rsps.has()) {
-                return rsps.get();
+            try {
+                final Opt<Response> rsps = fork.route(req);
+                if (rsps.has()) {
+                    return rsps.get();
+                }
+                //@checkstyle IllegalCatch (1 line)
+            } catch (final Exception ex) {
+                throw new IOException(ex);
             }
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);

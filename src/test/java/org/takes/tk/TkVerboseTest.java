@@ -42,10 +42,10 @@ public final class TkVerboseTest {
 
     /**
      * TkVerbose can extend not-found exception.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void extendsNotFoundException() throws IOException {
+    public void extendsNotFoundException() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {

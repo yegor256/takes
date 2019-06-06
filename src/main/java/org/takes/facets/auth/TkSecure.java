@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -74,7 +73,7 @@ public final class TkSecure implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         if (new RqAuth(request).identity().equals(Identity.ANONYMOUS)) {
             throw new RsForward(
                 new RsFlash("access denied", Level.WARNING),

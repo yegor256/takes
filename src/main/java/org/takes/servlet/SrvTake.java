@@ -125,6 +125,7 @@ public final class SrvTake extends HttpServlet {
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void service(
         final HttpServletRequest req,
         final HttpServletResponse resp
@@ -134,7 +135,8 @@ public final class SrvTake extends HttpServlet {
                 .applyTo(resp);
         } catch (final HttpException err) {
             resp.sendError(err.code(), err.getMessage());
-        } catch (final IOException ignored) {
+            //@checkstyle IllegalCatch (1 line)
+        } catch (final Exception ignored) {
             resp.sendError(
                 HttpURLConnection.HTTP_INTERNAL_ERROR,
                 "Internal error"

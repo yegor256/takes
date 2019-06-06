@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
@@ -48,10 +47,10 @@ public final class TkProducesTest {
 
     /**
      * TkProduces can fail on unsupported Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void failsOnUnsupportedAcceptHeader() throws IOException {
+    public void failsOnUnsupportedAcceptHeader() throws Exception {
         final Take produces = new TkProduces(
             new TkEmpty(),
             "text/json,application/json"
@@ -70,10 +69,10 @@ public final class TkProducesTest {
 
     /**
      * TkProduce can produce correct type response.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void producesCorrectContentTypeResponse() throws IOException {
+    public void producesCorrectContentTypeResponse() throws Exception {
         final Take produces = new TkProduces(
             new TkFixed(new RsJson(new RsEmpty())),
             "text/json"

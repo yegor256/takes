@@ -23,7 +23,6 @@
  */
 package org.takes.facets.hamcrest;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNot;
@@ -40,10 +39,10 @@ public final class HmRsStatusTest {
 
     /**
      * HmRsStatus can test status HTTP_OK.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void testsStatusOk() throws IOException {
+    public void testsStatusOk() throws Exception {
         MatcherAssert.assertThat(
             new TkHtml("<html></html>").act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_OK)
@@ -56,10 +55,10 @@ public final class HmRsStatusTest {
 
     /**
      * HmRsStatus can test status HTTP_NOT_FOUND.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void testsStatusNotFound() throws IOException {
+    public void testsStatusNotFound() throws Exception {
         MatcherAssert.assertThat(
             new TkHtml("<html><body/></html>").act(new RqFake()),
             new IsNot<>(

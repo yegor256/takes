@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -41,8 +40,8 @@ public interface Fork {
      * Process this request or ignore it.
      * @param req Request
      * @return Non-empty list of responses if it was processed
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Opt<Response> route(Request req) throws IOException;
+    Opt<Response> route(Request req) throws Exception;
 
 }

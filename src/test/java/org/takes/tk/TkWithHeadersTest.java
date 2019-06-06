@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.cactoos.text.JoinedText;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -39,10 +38,10 @@ public final class TkWithHeadersTest {
 
     /**
      * TkWithHeaders can add headers.
-     * @throws java.io.IOException If some problem inside
+     * @throws java.lang.Exception If some problem inside
      */
     @Test
-    public void addHeaders() throws IOException {
+    public void addHeaders() throws Exception {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(

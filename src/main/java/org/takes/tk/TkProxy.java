@@ -25,7 +25,6 @@ package org.takes.tk;
 
 import com.jcabi.http.request.JdkRequest;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -111,7 +110,7 @@ public final class TkProxy implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final String input = new RqRequestLine.Base(req).uri();
         final URI output = this.target.resolve(URI.create(input));
         return this.response(
@@ -126,11 +125,11 @@ public final class TkProxy implements Take {
      * @param req Original request
      * @param dest Destination URL
      * @return Request to be forwarded
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private com.jcabi.http.Request request(final Request req,
-        final URI dest) throws IOException {
+        final URI dest) throws Exception {
         final String method = new RqMethod.Base(req).method();
         com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
         final RqHeaders headers = new RqHeaders.Base(req);

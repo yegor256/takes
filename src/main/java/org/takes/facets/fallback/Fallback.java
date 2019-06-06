@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import org.takes.Response;
 import org.takes.misc.Opt;
 
@@ -41,8 +40,8 @@ public interface Fallback {
      * Dispatch this request and either swallow it or ignore.
      * @param req Request
      * @return An iterator of responses or an empty iterator
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Opt<Response> route(RqFallback req) throws IOException;
+    Opt<Response> route(RqFallback req) throws Exception;
 
 }

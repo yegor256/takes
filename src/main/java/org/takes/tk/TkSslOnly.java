@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -59,7 +58,7 @@ public final class TkSslOnly implements Take {
 
     @Override
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final String href = new RqHref.Base(req).href().toString();
         final String proto = new RqHeaders.Smart(
             new RqHeaders.Base(req)

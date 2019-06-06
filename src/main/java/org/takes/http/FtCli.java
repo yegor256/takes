@@ -93,7 +93,7 @@ public final class FtCli implements Front {
         if (this.options.hitRefresh()) {
             tks = new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
+                public Response act(final Request request) throws Exception {
                     return FtCli.this.take.act(
                         new RqWithHeader(
                             request, "X-Takes-HitRefresh: yes"

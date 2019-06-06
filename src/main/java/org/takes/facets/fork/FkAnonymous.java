@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -88,7 +87,7 @@ public final class FkAnonymous implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final Identity identity = new RqAuth(req).identity();
         final Opt<Response> resp;
         if (identity.equals(Identity.ANONYMOUS)) {

@@ -73,7 +73,7 @@ public final class FkContentType implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final Opt<Response> resp;
         if (FkContentType.getType(req).contains(this.type)) {
             resp = new Opt.Single<>(this.take.act(req));

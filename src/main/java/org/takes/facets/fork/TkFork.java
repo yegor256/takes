@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Collection;
@@ -94,7 +93,7 @@ public final class TkFork implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         final Opt<Response> response = new FkChain(this.forks).route(request);
         if (response.has()) {
             return response.get();

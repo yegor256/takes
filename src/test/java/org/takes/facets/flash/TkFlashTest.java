@@ -23,7 +23,6 @@
  */
 package org.takes.facets.flash;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,10 +39,10 @@ public final class TkFlashTest {
 
     /**
      * TkFlash can remove a flash cookie.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void removesFlashCookie() throws IOException {
+    public void removesFlashCookie() throws Exception {
         final Take take = new TkFlash(new TkEmpty());
         MatcherAssert.assertThat(
             take.act(

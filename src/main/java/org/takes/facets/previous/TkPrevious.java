@@ -23,7 +23,6 @@
  */
 package org.takes.facets.previous;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
@@ -60,7 +59,7 @@ public final class TkPrevious implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final Iterator<String> cookies = new RqCookies.Base(req)
             .cookie(TkPrevious.class.getSimpleName())
             .iterator();

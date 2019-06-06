@@ -89,7 +89,7 @@ public final class FkTypes implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final Opt<Response> resp;
         if (FkTypes.accepted(req).contains(this.types)) {
             if (this.response.has()) {

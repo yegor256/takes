@@ -23,7 +23,6 @@
  */
 package org.takes.facets.cookies;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -67,7 +66,7 @@ public final class TkJoinedCookies extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     return TkJoinedCookies.join(take.act(req));
                 }
             }
@@ -78,9 +77,9 @@ public final class TkJoinedCookies extends TkWrap {
      * Join them.
      * @param response The response
      * @return New response
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    private static Response join(final Response response) throws IOException {
+    private static Response join(final Response response) throws Exception {
         final StringBuilder cookies = new StringBuilder();
         for (final String header : response.head()) {
             final Matcher matcher =

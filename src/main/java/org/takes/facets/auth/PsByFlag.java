@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
@@ -94,7 +93,7 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request req) throws IOException {
+    public Opt<Identity> enter(final Request req) throws Exception {
         final Iterator<String> flg = new RqHref.Base(req).href()
             .param(this.flag).iterator();
         Opt<Identity> user = new Opt.Empty<>();

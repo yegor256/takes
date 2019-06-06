@@ -214,10 +214,10 @@ public final class FtBasicTest {
 
     /**
      * FtBasic can consume twice the input stream in case of a RsText.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void consumesTwiceInputStreamWithRsText() throws IOException {
+    public void consumesTwiceInputStreamWithRsText() throws Exception {
         final String result = "Hello RsText!";
         new FtRemote(
             new TkFork(
@@ -251,10 +251,10 @@ public final class FtBasicTest {
 
     /**
      * FtBasic can consume twice the input stream in case of a RsHTML.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void consumesTwiceInputStreamWithRsHtml() throws IOException {
+    public void consumesTwiceInputStreamWithRsHtml() throws Exception {
         final String result = "Hello RsHTML!";
         new FtRemote(
             new TkFork(

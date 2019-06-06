@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class TkMeasuredTest {
 
     /**
      * TkMeasured can create a response with HTTP header "X-Take-Millis".
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void createsMeasuredResponse() throws IOException {
+    public void createsMeasuredResponse() throws Exception {
         final String header = "X-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -55,10 +54,10 @@ public final class TkMeasuredTest {
 
     /**
      * TkMeasured can create a response with custom HTTP header.
-     * @throws IOException If some problem occurs
+     * @throws Exception If some problem occurs
      */
     @Test
-    public void createsMeasuredResponseWithCustomHeader() throws IOException {
+    public void createsMeasuredResponseWithCustomHeader() throws Exception {
         final String header = "X-Custom-Take-Millis";
         MatcherAssert.assertThat(
             new RsPrint(

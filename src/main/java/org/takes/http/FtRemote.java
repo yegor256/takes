@@ -108,9 +108,9 @@ public final class FtRemote implements Front {
     /**
      * Execute this script against a running front.
      * @param script Script to run
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    public void exec(final FtRemote.Script script) throws IOException {
+    public void exec(final FtRemote.Script script) throws Exception {
         final AtomicBoolean exit = new AtomicBoolean();
         final CountDownLatch latch = new CountDownLatch(1);
         final Thread thread = new Thread(
@@ -186,8 +186,8 @@ public final class FtRemote implements Front {
         /**
          * Execute it against this URI.
          * @param home URI of the running front
-         * @throws IOException If fails
+         * @throws Exception If fails
          */
-        void exec(URI home) throws IOException;
+        void exec(URI home) throws Exception;
     }
 }

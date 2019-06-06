@@ -123,7 +123,7 @@ public final class FkHitRefresh implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final Iterator<String> header =
             new RqHeaders.Base(req).header("X-Takes-HitRefresh").iterator();
         final Opt<Response> resp;

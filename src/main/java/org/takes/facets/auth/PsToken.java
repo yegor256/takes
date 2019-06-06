@@ -161,7 +161,7 @@ public final class PsToken implements Pass {
 
     @Override
     public Response exit(final Response res,
-        final Identity idt) throws IOException {
+        final Identity idt) throws Exception {
         final byte[] jwtheader = new Token.Jose(
             this.signature.bitlength()
         ).encoded();

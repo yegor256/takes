@@ -148,7 +148,7 @@ public final class FkRegex implements Fork {
             ptn,
             new TkRegex() {
                 @Override
-                public Response act(final RqRegex req) throws IOException {
+                public Response act(final RqRegex req) throws Exception {
                     return tke.act(req);
                 }
             }
@@ -196,7 +196,7 @@ public final class FkRegex implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         String path = new RqHref.Base(req).href().path();
         if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
             path = path.substring(0, path.length() - 1);
