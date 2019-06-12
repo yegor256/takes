@@ -16,6 +16,7 @@
 
 [![jpeek report](http://i.jpeek.org/org.takes/takes/badge.svg)](http://i.jpeek.org/org.takes/takes/)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
+[![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
 [![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=org.takes%3Atakes)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
