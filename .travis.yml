@@ -14,7 +14,7 @@ before_install:
   - rvm install 2.6.0
   - rvm use 2.6.0
 install:
-  - gem install pdd
+  - gem install pdd -v 0.20.5
   - gem install est
   - gem install xcop
 env:
