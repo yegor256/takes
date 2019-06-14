@@ -15,8 +15,8 @@ before_install:
   - rvm use 2.6.0
 install:
   - gem install pdd -v 0.20.5
-  - gem install est
-  - gem install xcop
+  - gem install est -v 0.3.4
+  - gem install xcop -v 0.6
 env:
   global:
     - MAVEN_OPTS="-Xmx256m"
