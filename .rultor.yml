@@ -19,7 +19,7 @@ architect:
 - yegor256
 merge:
   script: |
-    mvn clean install -Pqulice --errors --settings ../settings.xml
+    mvn clean install -Pqulice -Pnullfree --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
     pdd --source=$(pwd) --verbose --file=/dev/null
 deploy:
@@ -34,7 +34,7 @@ deploy:
       echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
-    mvn clean deploy -Pqulice --errors --settings ../settings.xml
+    mvn clean deploy -Pqulice -Pnullfree --errors --settings ../settings.xml
     mvn clean
     est --dir=./est --verbose --file=takes.xml --format=xml
     s3cmd --no-progress put takes.xml --config=../s3cfg s3://est.teamed.io/takes.xml
@@ -42,4 +42,4 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    mvn clean deploy -Psonar -Psonatype -Pqulice -Pnullfree -Dinvoker.skip --errors --settings ../settings.xml

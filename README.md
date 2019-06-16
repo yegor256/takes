@@ -12,6 +12,7 @@
 [![Javadoc](http://www.javadoc.io/badge/org.takes/takes.svg)](http://www.javadoc.io/doc/org.takes/takes)
 [![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/938e7683fcfa4db9bff362c2b4a9b78e)](https://www.codacy.com/app/github_90/takes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yegor256/takes&amp;utm_campaign=Badge_Grade)
+![nullfree status](https://iwillfailyou.com/nullfree/yegor256/takes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 
 [![jpeek report](https://i.jpeek.org/org.takes/takes/badge.svg)](https://i.jpeek.org/org.takes/takes/)
@@ -1157,7 +1158,7 @@ they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
 ```
-$ mvn clean install -Pqulice
+$ mvn clean install -Pqulice -Pnullfree
 ```
 
 To avoid build errors use maven 3.2+.
