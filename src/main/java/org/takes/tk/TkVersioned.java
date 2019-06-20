@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -66,7 +65,7 @@ public final class TkVersioned extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     return new RsWithHeader(
                         take.act(req), header, TkVersioned.VERSION
                     );

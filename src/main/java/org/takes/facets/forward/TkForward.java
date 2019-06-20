@@ -60,7 +60,7 @@ public final class TkForward implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         Response res;
         try {
             res = this.origin.act(req);

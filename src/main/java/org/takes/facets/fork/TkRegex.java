@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.takes.Request;
@@ -43,9 +42,9 @@ public interface TkRegex {
      * Route this request.
      * @param req Request
      * @return Take
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Response act(RqRegex req) throws IOException;
+    Response act(RqRegex req) throws Exception;
 
     /**
      * Fake of {@link TkRegex} as {@link org.takes.Take}.
@@ -84,7 +83,7 @@ public interface TkRegex {
         }
 
         @Override
-        public Response act(final Request req) throws IOException {
+        public Response act(final Request req) throws Exception {
             return this.origin.act(new RqRegex.Fake(req, this.matcher));
         }
     }

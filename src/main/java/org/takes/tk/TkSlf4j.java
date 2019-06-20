@@ -85,7 +85,7 @@ public final class TkSlf4j implements Take {
 
     @Override
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final long start = System.currentTimeMillis();
         final Logger logger = LoggerFactory.getLogger(this.target);
         try {

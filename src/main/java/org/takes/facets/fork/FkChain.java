@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,7 +66,7 @@ public final class FkChain implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request request) throws IOException {
+    public Opt<Response> route(final Request request) throws Exception {
         Opt<Response> response = new Opt.Empty<>();
         for (final Fork fork : this.forks) {
             final Opt<Response> current = fork.route(request);

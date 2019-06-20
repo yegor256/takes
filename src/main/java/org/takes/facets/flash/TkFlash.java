@@ -23,7 +23,6 @@
  */
 package org.takes.facets.flash;
 
-import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -90,7 +89,7 @@ public final class TkFlash implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         final RqCookies cookies = new RqCookies.Base(request);
         final Iterator<String> values = cookies.cookie(this.cookie).iterator();
         final Response response;

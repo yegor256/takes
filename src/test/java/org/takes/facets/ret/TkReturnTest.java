@@ -23,7 +23,6 @@
  */
 package org.takes.facets.ret;
 
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
@@ -43,10 +42,10 @@ public final class TkReturnTest {
     /**
      * TkReturn can redirect to return location
      * and remove a return cookie.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void redirectsAndRemovesCookie() throws IOException {
+    public void redirectsAndRemovesCookie() throws Exception {
         final Take take = new TkReturn(new TkEmpty());
         final String destination = "/return/to";
         MatcherAssert.assertThat(

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.previous;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,10 +39,10 @@ public final class TkPreviousTest {
 
     /**
      * TkPrevious can redirect.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void redirectsOnCookie() throws IOException {
+    public void redirectsOnCookie() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkPrevious(new TkText("")).act(

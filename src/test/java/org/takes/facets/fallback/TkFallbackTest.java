@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -46,10 +45,10 @@ public final class TkFallbackTest {
 
     /**
      * TkFallback can fall back.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void fallsBack() throws IOException {
+    public void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -71,10 +70,10 @@ public final class TkFallbackTest {
 
     /**
      * TkFallback can fall back.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void fallsBackInsideResponse() throws IOException {
+    public void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFallback(
@@ -104,9 +103,10 @@ public final class TkFallbackTest {
     }
 
     /**
-     * TkFallback can throw an IOException when no fallback is available.
+     * TkFallback can throw an Exception when no fallback is available.
      */
     @Test
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void fallsBackWithProperMessage() {
         try {
             new TkFallback(
@@ -114,7 +114,8 @@ public final class TkFallbackTest {
                 new FbChain()
             ).act(new RqFake());
             MatcherAssert.assertThat("Must throw exception", false);
-        } catch (final IOException exception) {
+            //@checkstyle IllegalCatch (1 line)
+        } catch (final Exception exception) {
             MatcherAssert.assertThat(
                 exception.getMessage(),
                 Matchers.containsString("fallback ")

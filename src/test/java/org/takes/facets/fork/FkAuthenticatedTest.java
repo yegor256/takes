@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -42,10 +41,10 @@ public final class FkAuthenticatedTest {
 
     /**
      * FkAuthenticated can match by user status.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesIfAuthenticatedUser() throws IOException {
+    public void matchesIfAuthenticatedUser() throws Exception {
         MatcherAssert.assertThat(
             new FkAuthenticated(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

@@ -46,10 +46,10 @@ import org.takes.rs.RsWithType;
 public final class PsByFlagTest {
     /**
      * PsByFlag can skip if nothing found.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void skipsIfNothingFound() throws IOException {
+    public void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
             new PsByFlag(
                 new PsByFlag.Pair(
@@ -64,10 +64,10 @@ public final class PsByFlagTest {
 
     /**
      * PsByFlag finds flag and authenticates user.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void flagIsFoundUserAuthenticated() throws IOException {
+    public void flagIsFoundUserAuthenticated() throws Exception {
         MatcherAssert.assertThat(
             new PsByFlag(
                 new PsByFlag.Pair(

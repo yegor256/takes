@@ -74,7 +74,7 @@ public final class FkAgent implements Fork {
 
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final List<String> tokens = FkAgent.tokens(req);
         Opt<Response> resp = new Opt.Empty<>();
         for (final String token : tokens) {

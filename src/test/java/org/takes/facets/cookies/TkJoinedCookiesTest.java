@@ -23,7 +23,6 @@
  */
 package org.takes.facets.cookies;
 
-import java.io.IOException;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -43,10 +42,10 @@ public final class TkJoinedCookiesTest {
 
     /**
      * TkJoinedCookies can join cookies.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void joinsCookies() throws IOException {
+    public void joinsCookies() throws Exception {
         new Assertion<>(
             "Response with joined cookies",
             new RsPrint(

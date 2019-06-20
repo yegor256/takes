@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -41,17 +40,17 @@ public interface Pass {
      * Authenticate the user by the request.
      * @param request The request
      * @return Identity of the user found
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Opt<Identity> enter(Request request) throws IOException;
+    Opt<Identity> enter(Request request) throws Exception;
 
     /**
      * Wrap the response with the user.
      * @param response Response
      * @param identity Identity
      * @return New response
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Response exit(Response response, Identity identity) throws IOException;
+    Response exit(Response response, Identity identity) throws Exception;
 
 }

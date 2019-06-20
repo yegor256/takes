@@ -55,10 +55,10 @@ public final class FkContentTypeTest {
 
     /**
      * FkContentType can match by Content-Type header with any of types.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesWithAnyTypes() throws IOException {
+    public void matchesWithAnyTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType("text/xml", new RsEmpty()).route(
                 new RqWithHeader(
@@ -73,10 +73,10 @@ public final class FkContentTypeTest {
 
     /**
      * FkContentType can match by Content-Type header with different types.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesDifferentTypes() throws IOException {
+    public void matchesDifferentTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 "application/json charset=utf-8",
@@ -94,10 +94,10 @@ public final class FkContentTypeTest {
 
     /**
      * FkContentType can match by Content-Type header with identical types.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesIdenticalTypes() throws IOException {
+    public void matchesIdenticalTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,
@@ -115,10 +115,10 @@ public final class FkContentTypeTest {
 
     /**
      * FkContentType can match by Content-Type header with empty type.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesEmptyType() throws IOException {
+    public void matchesEmptyType() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 "*/*",
@@ -133,10 +133,10 @@ public final class FkContentTypeTest {
 
     /**
      * FkContentType can match by Content-Type header with different encodings.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesDifferentEncodingsTypes() throws IOException {
+    public void matchesDifferentEncodingsTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,

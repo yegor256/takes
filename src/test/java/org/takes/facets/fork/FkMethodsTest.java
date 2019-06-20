@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class FkMethodsTest {
 
     /**
      * FkMethods can match by method.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkMethods("PUT,GET", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

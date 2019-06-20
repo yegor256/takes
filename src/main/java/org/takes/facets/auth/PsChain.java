@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -62,7 +61,7 @@ public final class PsChain implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request req) throws IOException {
+    public Opt<Identity> enter(final Request req) throws Exception {
         Opt<Identity> user = new Opt.Empty<>();
         for (final Pass pass : this.passes) {
             user = pass.enter(req);
@@ -75,7 +74,7 @@ public final class PsChain implements Pass {
 
     @Override
     public Response exit(final Response response,
-        final Identity identity) throws IOException {
+        final Identity identity) throws Exception {
         Response res = response;
         for (final Pass pass : this.passes) {
             res = pass.exit(res, identity);

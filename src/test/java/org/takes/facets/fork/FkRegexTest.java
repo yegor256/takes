@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class FkRegexTest {
 
     /**
      * FkRegex can match by regular expression.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
@@ -58,10 +57,10 @@ public final class FkRegexTest {
 
     /**
      * FkRegex can remove trailing slash from URI.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void removesTrailingSlash() throws IOException {
+    public void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
                 new RqFake("POST", "/h/tail/")

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class FkHostTest {
 
     /**
      * FkHost can match a host.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByHost() throws IOException {
+    public void matchesByHost() throws Exception {
         MatcherAssert.assertThat(
             new FkHost("www.example.com", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

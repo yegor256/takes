@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.HttpException;
@@ -52,7 +51,7 @@ public final class TkVerbose extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
+                public Response act(final Request request) throws Exception {
                     try {
                         return take.act(request);
                     } catch (final HttpException ex) {

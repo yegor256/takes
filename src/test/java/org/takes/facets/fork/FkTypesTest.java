@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,10 +39,10 @@ public final class FkTypesTest {
 
     /**
      * FkTypes can match by Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByAcceptHeader() throws IOException {
+    public void matchesByAcceptHeader() throws Exception {
         final String accept = "Accept";
         MatcherAssert.assertThat(
             new FkTypes("text/xml", new RsEmpty()).route(
@@ -67,10 +66,10 @@ public final class FkTypesTest {
 
     /**
      * FkTypes can match by Accept header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByCompositeType() throws IOException {
+    public void matchesByCompositeType() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/xml,text/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), "Accept ", "text/json")
@@ -81,10 +80,10 @@ public final class FkTypesTest {
 
     /**
      * FkTypes can ignore if no Accept header present.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresWithoutHeader() throws IOException {
+    public void ignoresWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/plain", new RsEmpty()).route(
                 new RqFake()
@@ -95,10 +94,10 @@ public final class FkTypesTest {
 
     /**
      * FkTypes can match if no Accept header present.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesWithoutHeader() throws IOException {
+    public void matchesWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/plain,*/*", new RsEmpty()).route(
                 new RqFake()
@@ -109,10 +108,10 @@ public final class FkTypesTest {
 
     /**
      * FkTypes can rely on a Take to provide the response.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void reliesOnTake() throws IOException {
+    public void reliesOnTake() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("*/*,text/plain", new TkEmpty()).route(
                 new RqFake()

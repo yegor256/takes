@@ -131,11 +131,11 @@ public final class FtRemoteTest {
 
     /**
      * FtRemote can return empty response body for {@link TkEmpty}.
-     * @throws IOException If some problems inside
+     * @throws Exception If some problems inside
      */
     @Ignore
     @Test
-    public void returnsAnEmptyResponseBody() throws IOException {
+    public void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkEmpty()
         ).exec(

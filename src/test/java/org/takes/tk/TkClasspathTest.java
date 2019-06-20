@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -39,10 +38,10 @@ public final class TkClasspathTest {
 
     /**
      * TkClasspath can dispatch by resource name.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByResourceName() throws IOException {
+    public void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkClasspath().act(
@@ -57,10 +56,10 @@ public final class TkClasspathTest {
 
     /**
      * TkClasspath can throw when resource not found.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
+    public void throwsWhenResourceNotFound() throws Exception {
         new TkClasspath().act(
             new RqFake("PUT", "/something-else", "")
         );

@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,10 +37,10 @@ public final class TkVersionedTest {
 
     /**
      * TkVersioned can add a header with version name.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void attachesHeader() throws IOException {
+    public void attachesHeader() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkVersioned(new TkEmpty()).act(

@@ -23,8 +23,6 @@
  */
 package org.takes;
 
-import java.io.IOException;
-
 /**
  * Take.
  *
@@ -72,8 +70,8 @@ public interface Take {
      * Convert request to response.
      * @param req Request to process
      * @return Response
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    Response act(Request req) throws IOException;
+    Response act(Request req) throws Exception;
 
 }

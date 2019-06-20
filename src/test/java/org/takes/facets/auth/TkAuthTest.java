@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
@@ -54,10 +53,10 @@ public final class TkAuthTest {
 
     /**
      * TkAuth can login a user.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserIn() throws IOException {
+    public void logsUserIn() throws Exception {
         final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
@@ -112,10 +111,10 @@ public final class TkAuthTest {
 
     /**
      * TkAuth can logout a user.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserOut() throws IOException {
+    public void logsUserOut() throws Exception {
         final Pass pass = new PsLogout();
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
@@ -140,10 +139,10 @@ public final class TkAuthTest {
 
     /**
      * TkAuth can logout a user when a login cookie is present.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserOutWithCookiePresent() throws IOException {
+    public void logsUserOutWithCookiePresent() throws Exception {
         new Assertion<>(
             "Response with header setting empty cookie",
             new RsPrint(

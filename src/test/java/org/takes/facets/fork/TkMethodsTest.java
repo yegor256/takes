@@ -25,7 +25,6 @@ package org.takes.facets.fork;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -56,11 +55,11 @@ public final class TkMethodsTest {
 
     /**
      * TkMethods can throw HttpExcection when acting on unproper method.
-     * @throws IOException if any I/O error occurs.
+     * @throws Exception if any I/O error occurs.
      */
     @Test(expected = HttpException.class)
     public void throwsExceptionOnActinOnUnproperMethod() throws
-        IOException {
+        Exception {
         new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
             new RqFake(RqMethod.GET)
         );
@@ -68,11 +67,11 @@ public final class TkMethodsTest {
 
     /**
      * TkMethods can return 405 status when acting on unknown method.
-     * @throws IOException If any I/O error occurs
+     * @throws Exception If any I/O error occurs
      */
     @Test
     public void returnsMethodIsNotAllowedForUnsupportedMethods() throws
-        IOException {
+        Exception {
         new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(
             url -> new JdkRequest(url)
                 .method(RqMethod.POST)

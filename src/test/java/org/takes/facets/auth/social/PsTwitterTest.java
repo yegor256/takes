@@ -25,7 +25,6 @@
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 import javax.json.Json;
@@ -48,10 +47,10 @@ public final class PsTwitterTest {
 
     /**
      * PsTwitter can login.
-     * @throws IOException If error occurs in the process
+     * @throws Exception If error occurs in the process
      */
     @Test
-    public void logsIn() throws IOException {
+    public void logsIn() throws Exception {
         final int tid = RandomUtils.nextInt(1000);
         final String randname = RandomStringUtils.randomAlphanumeric(10);
         final String picture = RandomStringUtils.randomAlphanumeric(10);

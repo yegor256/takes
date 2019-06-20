@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,10 +38,10 @@ public final class FbChainTest {
 
     /**
      * FbChain can chain fallbacks.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void chainsFallbacks() throws IOException {
+    public void chainsFallbacks() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND
         );

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.takes.Response;
@@ -63,7 +62,7 @@ public final class FbChain extends FbWrap {
             new Fallback() {
                 @Override
                 public Opt<Response> route(final RqFallback req)
-                    throws IOException {
+                    throws Exception {
                     Opt<Response> rsp = new Opt.Empty<>();
                     for (final Fallback fbk : fallbacks) {
                         final Opt<Response> opt = fbk.route(req);

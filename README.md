@@ -195,7 +195,7 @@ public final class TkApp implements Take {
   }
 
   @Override
-  public Response act(final Request req) throws IOException {
+  public Response act(final Request req) throws Exception {
     return new RsText("Hello servlet!");
   }
 }
@@ -350,7 +350,7 @@ new TkFork(
     "/file/(?<path>[^/]+)",
     new TkRegex() {
       @Override
-      public Response act(final RqRegex request) throws IOException {
+      public Response act(final RqRegex request) throws Exception {
         final File file = new File(
           request.matcher().group("path")
         );
