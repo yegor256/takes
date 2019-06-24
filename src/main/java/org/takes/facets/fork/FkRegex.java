@@ -95,6 +95,11 @@ public final class FkRegex implements Fork {
     private final Scalar<TkRegex> target;
 
     /**
+     * Remove trailing slashes is optional
+     */
+    private boolean removeTrailingSlash = true;
+
+    /**
      * Ctor.
      * @param ptn Pattern
      * @param text Text
@@ -195,10 +200,20 @@ public final class FkRegex implements Fork {
         this.target = tke;
     }
 
+    /**
+     * Allows disabling the standard way for handling trailing slashes.
+     * @param removeTrailingSlash
+     * @return
+     */
+    public FkRegex setRemoveTrailingSlash(boolean removeTrailingSlash) {
+        this.removeTrailingSlash = removeTrailingSlash;
+        return this;
+    }
+
     @Override
     public Opt<Response> route(final Request req) throws Exception {
         String path = new RqHref.Base(req).href().path();
-        if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
+        if (removeTrailingSlash && path.length() > 1 && path.charAt(path.length() - 1) == '/') {
             path = path.substring(0, path.length() - 1);
         }
         final Matcher matcher = this.pattern.matcher(path);

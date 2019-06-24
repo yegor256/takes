@@ -69,4 +69,20 @@ public final class FkRegexTest {
         );
     }
 
+    /**
+     * FkRegex can remove trailing slash from URI.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void keepsTrailingSlash() throws Exception {
+        MatcherAssert.assertThat(
+                new FkRegex("/h/tail/", new TkEmpty())
+                        .setRemoveTrailingSlash(false)
+                        .route(
+                        new RqFake("POST", "/h/tail/")
+                ).has(),
+                Matchers.is(true)
+        );
+    }
+
 }
