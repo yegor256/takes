@@ -36,7 +36,10 @@ import org.takes.tk.TkEmpty;
  */
 public final class FkRegexTest {
 
-    private static final String testpath =  "/h/tail/";
+    /**
+     * Test path for trailing slash.
+     */
+    private static final String TESTPATH =  "/h/tail/";
 
     /**
      * FkRegex can match by regular expression.
@@ -66,7 +69,7 @@ public final class FkRegexTest {
     public void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
-                new RqFake(RqMethod.POST, "/h/tail/")
+                new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
             ).has(),
             Matchers.is(true)
         );
@@ -79,10 +82,10 @@ public final class FkRegexTest {
     @Test
     public void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
-                new FkRegex(testpath, new TkEmpty())
+                new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
                         .setRemoveTrailingSlash(false)
                         .route(
-                        new RqFake(RqMethod.POST, testpath)
+                        new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
                 ).has(),
                 Matchers.is(true)
         );

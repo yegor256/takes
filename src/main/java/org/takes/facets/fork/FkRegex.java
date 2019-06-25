@@ -203,10 +203,10 @@ public final class FkRegex implements Fork {
 
     /**
      * Allows disabling the standard way for handling trailing slashes.
-     * @param enabled
+     * @param enabled Enables/Disables the removal of a trailing slash.
      * @return FkRegex
      */
-    public FkRegex setRemoveTrailingSlash(boolean enabled) {
+    public FkRegex setRemoveTrailingSlash(final boolean enabled) {
         this.removeslash = enabled;
         return this;
     }
