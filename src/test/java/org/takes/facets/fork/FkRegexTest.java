@@ -27,6 +27,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
 import org.takes.tk.TkEmpty;
 
 /**
@@ -34,6 +35,8 @@ import org.takes.tk.TkEmpty;
  * @since 0.4
  */
 public final class FkRegexTest {
+
+    private static final String testpath =  "/h/tail/";
 
     /**
      * FkRegex can match by regular expression.
@@ -63,7 +66,7 @@ public final class FkRegexTest {
     public void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
-                new RqFake("POST", "/h/tail/")
+                new RqFake(RqMethod.POST, "/h/tail/")
             ).has(),
             Matchers.is(true)
         );
@@ -76,10 +79,10 @@ public final class FkRegexTest {
     @Test
     public void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
-                new FkRegex("/h/tail/", new TkEmpty())
+                new FkRegex(testpath, new TkEmpty())
                         .setRemoveTrailingSlash(false)
                         .route(
-                        new RqFake("POST", "/h/tail/")
+                        new RqFake(RqMethod.POST, testpath)
                 ).has(),
                 Matchers.is(true)
         );
