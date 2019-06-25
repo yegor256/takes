@@ -198,6 +198,7 @@ public final class FkRegex implements Fork {
     public FkRegex(final Pattern ptn, final Scalar<TkRegex> tke) {
         this.pattern = ptn;
         this.target = tke;
+        this.removeslash = true;
     }
 
     /**
