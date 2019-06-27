@@ -216,8 +216,8 @@ public final class FkRegex implements Fork {
         String path = new RqHref.Base(req).href().path();
         if (
             this.removeslash
-            && path.length() > 1
-            && path.charAt(path.length() - 1) == '/'
+                && path.length() > 1
+                && path.charAt(path.length() - 1) == '/'
         ) {
             path = path.substring(0, path.length() - 1);
         }
