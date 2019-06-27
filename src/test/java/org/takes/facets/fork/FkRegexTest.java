@@ -62,7 +62,7 @@ public final class FkRegexTest {
     }
 
     /**
-     * FkRegex can remove trailing slash from URI.
+     * FkRegex can remove trailing slash from URI (default).
      * @throws Exception If some problem inside
      */
     @Test
@@ -76,7 +76,7 @@ public final class FkRegexTest {
     }
 
     /**
-     * FkRegex can remove trailing slash from URI.
+     * FkRegex can keep trailing slash from URI.
      * @throws Exception If some problem inside
      */
     @Test
