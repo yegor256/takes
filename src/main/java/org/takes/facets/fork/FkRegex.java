@@ -215,9 +215,9 @@ public final class FkRegex implements Fork {
     public Opt<Response> route(final Request req) throws Exception {
         String path = new RqHref.Base(req).href().path();
         if (
-                this.removeslash
-                && path.length() > 1
-                && path.charAt(path.length() - 1) == '/'
+            this.removeslash
+            && path.length() > 1
+            && path.charAt(path.length() - 1) == '/'
         ) {
             path = path.substring(0, path.length() - 1);
         }

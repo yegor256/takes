@@ -82,12 +82,12 @@ public final class FkRegexTest {
     @Test
     public void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
-                new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
-                        .setRemoveTrailingSlash(false)
-                        .route(
-                        new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
-                ).has(),
-                Matchers.is(true)
+            new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
+            .setRemoveTrailingSlash(false)
+            .route(
+                new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
+            ).has(),
+            Matchers.is(true)
         );
     }
 
