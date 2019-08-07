@@ -104,7 +104,7 @@ SOFTWARE.
          https://github.com/yegor256/takes/pull/886#issuecomment-446030223
          for details.
        -->
-      <version>0.41</version>
+      <version>0.42</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
@@ -192,7 +192,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.llorllale</groupId>
       <artifactId>cactoos-matchers</artifactId>
-      <version>0.15</version>
+      <version>0.17</version>
       <scope>test</scope>
     </dependency>
     <dependency>
