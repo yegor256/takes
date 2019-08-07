@@ -58,7 +58,7 @@ public final class PsAll implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request) throws IOException {
+    public Opt<Identity> enter(final Request request) throws Exception {
         final Opt<Identity> result;
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
@@ -70,7 +70,7 @@ public final class PsAll implements Pass {
 
     @Override
     public Response exit(final Response response, final Identity identity)
-        throws IOException {
+        throws Exception {
         if (this.index >= this.all.size()) {
             throw new IOException(
                 "Index of identity is greater than Pass collection size"
@@ -107,9 +107,9 @@ public final class PsAll implements Pass {
      * Checks if you can enter every Pass with a request.
      * @param request Request that is used to enter Passes.
      * @return True if every request can be entered, false otherwise
-     * @throws IOException If any of enter attempts fail
+     * @throws Exception If any of enter attempts fail
      */
-    private boolean allMatch(final Request request) throws IOException {
+    private boolean allMatch(final Request request) throws Exception {
         boolean success = true;
         for (final Pass pass : this.all) {
             if (!pass.enter(request).has()) {

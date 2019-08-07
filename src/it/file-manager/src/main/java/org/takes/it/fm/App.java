@@ -69,7 +69,7 @@ public final class App implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         return new TkFork(
             new FkRegex("/", new TkRedirect("/f")),
             new FkRegex(

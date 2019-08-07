@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,10 +38,10 @@ public final class TkGzipTest {
 
     /**
      * TkGzip can compress on demand only.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void compressesOnDemandOnly() throws IOException {
+    public void compressesOnDemandOnly() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
@@ -62,10 +61,10 @@ public final class TkGzipTest {
 
     /**
      * TkGzip can return uncompressed content.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void doesntCompressIfNotRequired() throws IOException {
+    public void doesntCompressIfNotRequired() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(

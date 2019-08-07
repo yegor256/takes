@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -74,7 +73,7 @@ public final class TkCors implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final Response response;
         final String domain = new RqHeaders.Smart(
             new RqHeaders.Base(req)

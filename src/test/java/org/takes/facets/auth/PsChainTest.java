@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.StringContains;
@@ -39,10 +38,10 @@ public final class PsChainTest {
 
     /**
      * PsChain returns proper identity.
-     * @throws IOException if some problems inside
+     * @throws Exception if some problems inside
      */
     @Test
-    public void chainExecutionTest() throws IOException {
+    public void chainExecutionTest() throws Exception {
         MatcherAssert.assertThat(
             new PsChain(
                 new PsLogout(),
@@ -54,10 +53,10 @@ public final class PsChainTest {
 
     /**
      * PsChain returns proper response.
-     * @throws IOException if some problems inside
+     * @throws Exception if some problems inside
      */
     @Test
-    public void exitChainTest() throws IOException {
+    public void exitChainTest() throws Exception {
         MatcherAssert.assertThat(
             new PsChain(
                 new PsFake(true)

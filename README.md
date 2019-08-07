@@ -16,25 +16,28 @@
 
 [![jpeek report](http://i.jpeek.org/org.takes/takes/badge.svg)](http://i.jpeek.org/org.takes/takes/)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
+[![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
 [![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=org.takes%3Atakes)
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/takes)](http://www.0pdd.com/p?name=yegor256/takes)
+
+Project architect: [@paulodamaso](https://github.com/paulodamaso)
 
 **Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
 and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
 Java8 web development framework. Its key benefits, comparing to all others, include these
 four fundamental principles:
 
- 1. not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
- 2. not a single `public` `static` method ([why they are bad?](http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
- 3. not a single mutable class ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
- 4. not a single `instanceof` keyword, type casting, or reflection ([why?](http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html))
+ 1. Not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
+ 2. Not a single `public` `static` method ([why they are bad?](http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
+ 3. Not a single mutable class ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
+ 4. Not a single `instanceof` keyword, type casting, or reflection ([why?](http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html))
 
 Of course, there are no configuration files.
 Besides that, these are more traditional features, out of the box:
 
- * hit-refresh debugging
+ * Hit-refresh debugging
  * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
  * [JSON](http://en.wikipedia.org/wiki/JSON)
  * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
@@ -194,7 +197,7 @@ public final class TkApp implements Take {
   }
 
   @Override
-  public Response act(final Request req) throws IOException {
+  public Response act(final Request req) throws Exception {
     return new RsText("Hello servlet!");
   }
 }
@@ -349,7 +352,7 @@ new TkFork(
     "/file/(?<path>[^/]+)",
     new TkRegex() {
       @Override
-      public Response act(final RqRegex request) throws IOException {
+      public Response act(final RqRegex request) throws Exception {
         final File file = new File(
           request.matcher().group("path")
         );

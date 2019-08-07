@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -55,7 +54,7 @@ public final class TkReadAlways implements Take {
     }
 
     @Override
-    public Response act(final Request req) throws IOException {
+    public Response act(final Request req) throws Exception {
         final Response res = this.origin.act(req);
         for (int count = req.body().available(); count > 0;
             count = req.body().available()) {

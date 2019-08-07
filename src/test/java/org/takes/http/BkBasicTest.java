@@ -100,10 +100,10 @@ public final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 404 when accessing invalid URL.
      *
-     * @throws IOException if any I/O error occurs.
+     * @throws Exception if any I/O error occurs.
      */
     @Test
-    public void returnsProperResponseCodeOnInvalidUrl() throws IOException {
+    public void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
             new TkFork(
                 new FkRegex("/path/a", new TkText("a")),

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Arrays;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -54,10 +53,10 @@ public final class TkConsumesTest {
 
     /**
      * TkConsumes can accept request with certain Content-Type.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void acceptsCorrectContentTypeRequest() throws IOException {
+    public void acceptsCorrectContentTypeRequest() throws Exception {
         final String contenttype = "Content-Type: application/json";
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJson(new RsEmpty())),
@@ -86,10 +85,10 @@ public final class TkConsumesTest {
 
     /**
      * TkConsumes can fail on unsupported Content-Type header.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void failsOnUnsupportedAcceptHeader() throws IOException {
+    public void failsOnUnsupportedAcceptHeader() throws Exception {
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJson(new RsEmpty())),
             TkConsumesTest.APPLICATION_JSON

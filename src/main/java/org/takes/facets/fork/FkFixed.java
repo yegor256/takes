@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -49,8 +48,7 @@ public final class FkFixed extends FkWrap {
         super(
             new Fork() {
                 @Override
-                public Opt<Response> route(final Request req)
-                    throws IOException {
+                public Opt<Response> route(final Request req) throws Exception {
                     return new Opt.Single<>(take.act(req));
                 }
             }

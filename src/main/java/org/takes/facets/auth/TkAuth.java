@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -80,7 +79,7 @@ public final class TkAuth implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         final Opt<Identity> user = this.pass.enter(request);
         final Response response;
         if (user.has()) {
@@ -96,10 +95,10 @@ public final class TkAuth implements Take {
      * @param req Request
      * @param identity Identity
      * @return Take
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private Response act(final Request req, final Identity identity)
-        throws IOException {
+        throws Exception {
         Request wrap = new RqWithoutHeader(req, this.header);
         if (!identity.equals(Identity.ANONYMOUS)) {
             wrap = new RqWithAuth(identity, this.header, wrap);

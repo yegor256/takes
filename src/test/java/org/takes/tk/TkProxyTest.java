@@ -114,7 +114,7 @@ public final class TkProxyTest {
         ).exec(
             new FtRemote.Script() {
                 @Override
-                public void exec(final URI home) throws IOException {
+                public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
@@ -150,7 +150,7 @@ public final class TkProxyTest {
         ).exec(
             new FtRemote.Script() {
                 @Override
-                public void exec(final URI home) throws IOException {
+                public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(
@@ -186,7 +186,7 @@ public final class TkProxyTest {
             // @checkstyle AnonInnerLengthCheck (100 lines)
             new FtRemote.Script() {
                 @Override
-                public void exec(final URI home) throws IOException {
+                public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
                         new RsPrint(new TkProxy(
                             home.toURL().toString()
@@ -232,7 +232,7 @@ public final class TkProxyTest {
             // @checkstyle AnonInnerLengthCheck (100 lines)
             new FtRemote.Script() {
                 @Override
-                public void exec(final URI home) throws IOException {
+                public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
                         new RsPrint(new TkProxy(
                             home.toURL().toString(),
@@ -278,7 +278,7 @@ public final class TkProxyTest {
             // @checkstyle AnonInnerLengthCheck (100 lines)
             new FtRemote.Script() {
                 @Override
-                public void exec(final URI home) throws IOException {
+                public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
                         new RsPrint(
                             new TkProxy(home).act(

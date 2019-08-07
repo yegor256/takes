@@ -181,10 +181,10 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart can work in integration mode.
-     * @throws IOException if some problem inside
+     * @throws Exception if some problem inside
      */
     @Test
-    public void consumesHttpRequest() throws IOException {
+    public void consumesHttpRequest() throws Exception {
         final String part = "f-1";
         final Take take = new Take() {
             @Override

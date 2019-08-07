@@ -23,11 +23,11 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
 import org.takes.tk.TkEmpty;
 
 /**
@@ -37,11 +37,16 @@ import org.takes.tk.TkEmpty;
 public final class FkRegexTest {
 
     /**
+     * Test path for trailing slash.
+     */
+    private static final String TESTPATH =  "/h/tail/";
+
+    /**
      * FkRegex can match by regular expression.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws IOException {
+    public void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
@@ -57,14 +62,30 @@ public final class FkRegexTest {
     }
 
     /**
-     * FkRegex can remove trailing slash from URI.
-     * @throws IOException If some problem inside
+     * FkRegex can remove trailing slash from URI (default).
+     * @throws Exception If some problem inside
      */
     @Test
-    public void removesTrailingSlash() throws IOException {
+    public void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
-                new RqFake("POST", "/h/tail/")
+                new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
+            ).has(),
+            Matchers.is(true)
+        );
+    }
+
+    /**
+     * FkRegex can keep trailing slash from URI.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    public void keepsTrailingSlash() throws Exception {
+        MatcherAssert.assertThat(
+            new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
+            .setRemoveTrailingSlash(false)
+            .route(
+                new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
             ).has(),
             Matchers.is(true)
         );

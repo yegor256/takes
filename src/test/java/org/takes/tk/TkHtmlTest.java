@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -41,10 +40,10 @@ public final class TkHtmlTest {
 
     /**
      * TkHTML can create a text.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void createsTextResponse() throws IOException {
+    public void createsTextResponse() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body).act(new RqFake())),
@@ -63,10 +62,10 @@ public final class TkHtmlTest {
 
     /**
      * TkHTML can print multiple times.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void printsResourceMultipleTimes() throws IOException {
+    public void printsResourceMultipleTimes() throws Exception {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(

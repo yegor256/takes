@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -55,7 +54,7 @@ public class TkWrap implements Take {
     }
 
     @Override
-    public final Response act(final Request req) throws IOException {
+    public final Response act(final Request req) throws Exception {
         return this.origin.act(req);
     }
 }

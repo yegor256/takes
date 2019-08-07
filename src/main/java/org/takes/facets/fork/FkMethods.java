@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -94,7 +93,7 @@ public final class FkMethods implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final String mtd = new RqMethod.Base(req).method();
         final Opt<Response> resp;
         if (this.methods.contains(mtd)) {

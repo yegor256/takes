@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,10 +38,10 @@ public final class TkForkTest {
 
     /**
      * TkFork can dispatch by regular expression.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws IOException {
+    public void dispatchesByRegularExpression() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(

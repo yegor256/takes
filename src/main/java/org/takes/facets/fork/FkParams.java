@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -82,7 +81,7 @@ public final class FkParams implements Fork {
     }
 
     @Override
-    public Opt<Response> route(final Request req) throws IOException {
+    public Opt<Response> route(final Request req) throws Exception {
         final Iterator<String> params = new RqHref.Base(req).href()
             .param(this.name).iterator();
         final Opt<Response> resp;

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.ret;
 
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Iterator;
@@ -76,7 +75,7 @@ public final class TkReturn implements Take {
     }
 
     @Override
-    public Response act(final Request request) throws IOException {
+    public Response act(final Request request) throws Exception {
         final RqCookies cookies = new RqCookies.Base(request);
         final Iterator<String> values = cookies.cookie(this.cookie).iterator();
         final Response response;

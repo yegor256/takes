@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
@@ -69,7 +68,7 @@ public final class FkHost extends FkWrap {
     private static Fork fork(final String host, final Take take) {
         return new Fork() {
             @Override
-            public Opt<Response> route(final Request req) throws IOException {
+            public Opt<Response> route(final Request req) throws Exception {
                 final String hst = new RqHeaders.Smart(
                     new RqHeaders.Base(req)
                 ).single("host");

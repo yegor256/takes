@@ -60,7 +60,7 @@ public final class TkFallback extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     return TkFallback.route(take, fbk, req);
                 }
             }
@@ -73,10 +73,10 @@ public final class TkFallback extends TkWrap {
      * @param fbk Fallback
      * @param req Request
      * @return Response
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
     private static Response route(final Take take, final Fallback fbk,
-        final Request req) throws IOException {
+        final Request req) throws Exception {
         final long start = System.currentTimeMillis();
         Response res;
         try {
@@ -146,6 +146,7 @@ public final class TkFallback extends TkWrap {
      * @param req Request
      * @return Response
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
         // @checkstyle AnonInnerLengthCheck (50 lines)
@@ -157,16 +158,24 @@ public final class TkFallback extends TkWrap {
                 try {
                     head = res.head();
                 } catch (final HttpException ex) {
-                    head = fbk.route(
-                        TkFallback.fallback(req, start, ex, ex.code())
-                    ).get().head();
+                    try {
+                        head = fbk.route(
+                            TkFallback.fallback(req, start, ex, ex.code())
+                        ).get().head();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 } catch (final Throwable ex) {
-                    head = fbk.route(
-                        TkFallback.fallback(
-                            req, start, ex,
-                            HttpURLConnection.HTTP_INTERNAL_ERROR
-                        )
-                    ).get().head();
+                    try {
+                        head = fbk.route(
+                            TkFallback.fallback(
+                                req, start, ex,
+                                HttpURLConnection.HTTP_INTERNAL_ERROR
+                            )
+                        ).get().head();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 }
                 return head;
             }
@@ -178,16 +187,24 @@ public final class TkFallback extends TkWrap {
                 try {
                     body = res.body();
                 } catch (final HttpException ex) {
-                    body = fbk.route(
-                        TkFallback.fallback(req, start, ex, ex.code())
-                    ).get().body();
+                    try {
+                        body = fbk.route(
+                            TkFallback.fallback(req, start, ex, ex.code())
+                        ).get().body();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 } catch (final Throwable ex) {
-                    body = fbk.route(
-                        TkFallback.fallback(
-                            req, start, ex,
-                            HttpURLConnection.HTTP_INTERNAL_ERROR
-                        )
-                    ).get().body();
+                    try {
+                        body = fbk.route(
+                            TkFallback.fallback(
+                                req, start, ex,
+                                HttpURLConnection.HTTP_INTERNAL_ERROR
+                            )
+                        ).get().body();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 }
                 return body;
             }

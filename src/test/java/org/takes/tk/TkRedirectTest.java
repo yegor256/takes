@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -51,10 +50,10 @@ public final class TkRedirectTest {
 
     /**
      * TkRedirect can create a response with url string.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithUrl() throws IOException {
+    public void createsRedirectResponseWithUrl() throws Exception {
         final String url = "/about";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -74,10 +73,10 @@ public final class TkRedirectTest {
 
     /**
      * TkRedirect can create a response with HTTP status code and url string.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithUrlAndStatus() throws IOException {
+    public void createsRedirectResponseWithUrlAndStatus() throws Exception {
         final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -99,10 +98,10 @@ public final class TkRedirectTest {
 
     /**
      * TkRedirect should carry on the query and the fragment.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresQueryAndFragmentOnEmptyUrl() throws IOException {
+    public void ignoresQueryAndFragmentOnEmptyUrl() throws Exception {
         final String target = "/the-target";
         MatcherAssert.assertThat(
             new TkRedirect(target).act(

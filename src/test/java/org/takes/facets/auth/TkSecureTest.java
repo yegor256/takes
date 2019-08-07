@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -44,10 +43,10 @@ public final class TkSecureTest {
 
     /**
      * TkSecure can fail on anonymous access.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = RsForward.class)
-    public void failsOnAnonymous() throws IOException {
+    public void failsOnAnonymous() throws Exception {
         new TkSecure(
             new Take() {
                 @Override
@@ -60,10 +59,10 @@ public final class TkSecureTest {
 
     /**
      * TkSecure can pass on registered user.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void passesOnRegisteredUser() throws IOException {
+    public void passesOnRegisteredUser() throws Exception {
         MatcherAssert.assertThat(
             new TkSecure(
                 new Take() {

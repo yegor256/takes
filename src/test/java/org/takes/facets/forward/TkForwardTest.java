@@ -43,10 +43,10 @@ public final class TkForwardTest {
 
     /**
      * TkForward can catch RsForward.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void catchesExceptionCorrectly() throws IOException {
+    public void catchesExceptionCorrectly() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws RsForward {
@@ -63,10 +63,10 @@ public final class TkForwardTest {
 
     /**
      * TkForward can catch RsForward throws by Response.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void catchesExceptionThrownByResponse() throws IOException {
+    public void catchesExceptionThrownByResponse() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) {

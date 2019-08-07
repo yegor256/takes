@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
@@ -50,7 +49,7 @@ public final class TkGreedy extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
+                public Response act(final Request request) throws Exception {
                     return take.act(new RqGreedy(request));
                 }
             }

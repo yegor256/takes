@@ -54,10 +54,10 @@ public final class PsLinkedinTest {
 
     /**
      * PsLinkedin can login.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logins() throws IOException {
+    public void logins() throws Exception {
         final String tokenpath = "/uas/oauth2/accessToken";
         final String firstname = "firstName";
         final String lastname = "lastName";

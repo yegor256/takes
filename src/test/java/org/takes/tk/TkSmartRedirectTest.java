@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.takes.facets.hamcrest.HmHeader;
@@ -37,10 +36,10 @@ import org.takes.rq.RqFake;
 public final class TkSmartRedirectTest {
     /**
      * TkRedirect should carry on the query and the fragment.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void redirectCarriesQueryAndFragment() throws IOException {
+    public void redirectCarriesQueryAndFragment() throws Exception {
         MatcherAssert.assertThat(
             new TkSmartRedirect("http://www.google.com/abc?b=2").act(
                 new RqFake("GET", "/hi?a=1#test")
@@ -54,10 +53,10 @@ public final class TkSmartRedirectTest {
 
     /**
      * TkRedirect should carry on the query and the fragment.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void redirectCarriesQueryAndFragmentOnEmptyUrl() throws IOException {
+    public void redirectCarriesQueryAndFragmentOnEmptyUrl() throws Exception {
         MatcherAssert.assertThat(
             new TkSmartRedirect().act(
                 new RqFake("GET", "/hey-you?f=1#xxx")

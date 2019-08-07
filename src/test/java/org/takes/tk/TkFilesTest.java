@@ -23,7 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
@@ -49,10 +48,10 @@ public final class TkFilesTest {
 
     /**
      * TkFiles can dispatch by file name.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByFileName() throws IOException {
+    public void dispatchesByFileName() throws Exception {
         FileUtils.write(
             this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
         );
@@ -70,10 +69,10 @@ public final class TkFilesTest {
 
     /**
      * TkFiles can throw when file not found.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws IOException {
+    public void throwsWhenResourceNotFound() throws Exception {
         new TkFiles("/absent-dir-for-sure").act(
             new RqFake("PUT", "/something-else.txt", "")
         );

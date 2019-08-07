@@ -36,7 +36,7 @@ import org.takes.misc.Transform;
 import org.takes.misc.TransformAction;
 
 /**
- * Decorator TkRetry, which will not fail immediately on IOException, but
+ * Decorator TkRetry, which will not fail immediately on Exception, but
  * will retry a few times.
  *
  * @since 0.28.3
@@ -72,6 +72,7 @@ public final class TkRetry implements Take {
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws IOException {
         if (this.count <= 0) {
             throw new IllegalArgumentException(
@@ -79,11 +80,12 @@ public final class TkRetry implements Take {
             );
         }
         int attempts = 0;
-        final List<IOException> failures = new ArrayList<>(this.count);
+        final List<Exception> failures = new ArrayList<>(this.count);
         while (attempts < this.count) {
             try {
                 return this.take.act(req);
-            } catch (final IOException ex) {
+                //@checkstyle IllegalCatch (1 line)
+            } catch (final Exception ex) {
                 ++attempts;
                 failures.add(ex);
                 this.sleep();
@@ -104,13 +106,13 @@ public final class TkRetry implements Take {
      * @param failures Input : a list of exceptions.
      * @return A list of exceptions messages.
      */
-    private static List<String> strings(final List<IOException> failures) {
+    private static List<String> strings(final List<Exception> failures) {
         final List<String> result = new ArrayList<>(failures.size());
         final Iterable<String> transform = new Transform<>(
             failures,
-            new TransformAction<IOException, String>() {
+            new TransformAction<Exception, String>() {
                 @Override
-                public String transform(final IOException element) {
+                public String transform(final Exception element) {
                     final Opt<String> message = new Opt.Single<>(
                         element.getMessage()
                     );

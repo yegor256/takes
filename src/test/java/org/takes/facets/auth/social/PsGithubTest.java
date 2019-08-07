@@ -89,20 +89,20 @@ public final class PsGithubTest {
 
     /**
      * PsGithub can fail on no access token.
-     * @throws IOException If some problem inside.
+     * @throws Exception If some problem inside.
      */
     @Test
-    public void failsOnNoAccessToken() throws IOException {
+    public void failsOnNoAccessToken() throws Exception {
         this.thrown.expect(AssertionError.class);
         this.performLogin(PsGithubTest.directiveWithoutAccessToken());
     }
 
     /**
      * PsGithub can login.
-     * @throws IOException If some problem inside.
+     * @throws Exception If some problem inside.
      */
     @Test
-    public void canLogin() throws IOException {
+    public void canLogin() throws Exception {
         this.performLogin(
             PsGithubTest.directiveWithoutAccessToken()
                 .add(PsGithubTest.ACCESS_TOKEN)
@@ -113,9 +113,9 @@ public final class PsGithubTest {
     /**
      * Performs the basic login.
      * @param directive The directive object.
-     * @throws IOException If some problem inside.
+     * @throws Exception If some problem inside.
      */
-    private void performLogin(final Directives directive) throws IOException {
+    private void performLogin(final Directives directive) throws Exception {
         final String app = "app";
         final String key = "key";
         final Take take = new TkFork(

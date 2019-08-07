@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -40,7 +39,7 @@ import org.takes.tk.TkEmpty;
 public final class FkAgentTest {
 
     @Test
-    public void matchesByVersionGreater() throws IOException {
+    public void matchesByVersionGreater() throws Exception {
         final String header = "User-Agent";
         final String agent = "Chrome";
         MatcherAssert.assertThat(

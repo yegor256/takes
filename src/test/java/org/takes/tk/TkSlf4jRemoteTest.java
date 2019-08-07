@@ -43,11 +43,11 @@ public final class TkSlf4jRemoteTest {
 
     /**
      * TkSlf4j can return an empty response body for {@link TkEmpty}.
-     * @throws IOException if some I/O problem occurred.
+     * @throws Exception if some I/O problem occurred.
      */
     @Ignore
     @Test
-    public void returnsAnEmptyResponseBody() throws IOException {
+    public void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
         ).exec(

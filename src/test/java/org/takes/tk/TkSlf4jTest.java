@@ -36,28 +36,28 @@ public final class TkSlf4jTest {
 
     /**
      * TkSlf4j can log message.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsMessage() throws IOException {
+    public void logsMessage() throws Exception {
         new TkSlf4j(new TkText("test")).act(new RqFake());
     }
 
     /**
      * TkSlf4j can log exception.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test(expected = IOException.class)
-    public void logsException() throws IOException {
+    public void logsException() throws Exception {
         new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
     }
 
     /**
      * TkSlf4j can work with {@link TkEmpty}.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    public void logsEmptyMessage() throws IOException {
+    public void logsEmptyMessage() throws Exception {
         new TkSlf4j(new TkEmpty()).act(new RqFake());
     }
 }
