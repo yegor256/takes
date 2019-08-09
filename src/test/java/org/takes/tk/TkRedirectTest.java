@@ -87,7 +87,7 @@ public final class TkRedirectTest {
             new TextIs(
                 new JoinedText(
                     TkRedirectTest.NEWLINE,
-                    "HTTP/1.1 302 Moved Temporarily",
+                    "HTTP/1.1 302 Found",
                     String.format(TkRedirectTest.LOCATION, url),
                     "",
                     ""
