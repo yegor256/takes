@@ -140,11 +140,18 @@ public final class RsWithStatus extends RsWrap {
     private static Map<Integer, String> make() {
         final Map<Integer, String> map = new HashMap<>(0);
         map.put(HttpURLConnection.HTTP_OK, "OK");
-        map.put(HttpURLConnection.HTTP_NO_CONTENT, "No Content");
         map.put(HttpURLConnection.HTTP_CREATED, "Created");
         map.put(HttpURLConnection.HTTP_ACCEPTED, "Accepted");
+        map.put(
+            HttpURLConnection.HTTP_NOT_AUTHORITATIVE,
+            "Non-Authoritative Information"
+        );
+        map.put(HttpURLConnection.HTTP_NO_CONTENT, "No Content");
+        map.put(HttpURLConnection.HTTP_RESET, "Reset Content");
+        map.put(HttpURLConnection.HTTP_PARTIAL, "Partial Content");
+        map.put(HttpURLConnection.HTTP_MULT_CHOICE, "Multiple Choices");
         map.put(HttpURLConnection.HTTP_MOVED_PERM, "Moved Permanently");
-        map.put(HttpURLConnection.HTTP_MOVED_TEMP, "Moved Temporarily");
+        map.put(HttpURLConnection.HTTP_MOVED_TEMP, "Found");
         map.put(HttpURLConnection.HTTP_SEE_OTHER, "See Other");
         map.put(HttpURLConnection.HTTP_NOT_MODIFIED, "Not Modified");
         map.put(HttpURLConnection.HTTP_USE_PROXY, "Use Proxy");
@@ -153,19 +160,27 @@ public final class RsWithStatus extends RsWrap {
         map.put(HttpURLConnection.HTTP_PAYMENT_REQUIRED, "Payment Required");
         map.put(HttpURLConnection.HTTP_FORBIDDEN, "Forbidden");
         map.put(HttpURLConnection.HTTP_NOT_FOUND, "Not Found");
-        map.put(HttpURLConnection.HTTP_BAD_METHOD, "Bad Method");
+        map.put(HttpURLConnection.HTTP_BAD_METHOD, "Method Not Allowed");
         map.put(HttpURLConnection.HTTP_NOT_ACCEPTABLE, "Not Acceptable");
-        map.put(HttpURLConnection.HTTP_CLIENT_TIMEOUT, "Client Timeout");
+        map.put(
+            HttpURLConnection.HTTP_PROXY_AUTH, "Proxy Authentication Required"
+        );
+        map.put(HttpURLConnection.HTTP_CLIENT_TIMEOUT, "Request Timeout");
+        map.put(HttpURLConnection.HTTP_CONFLICT, "Conflict");
         map.put(HttpURLConnection.HTTP_GONE, "Gone");
         map.put(HttpURLConnection.HTTP_LENGTH_REQUIRED, "Length Required");
-        map.put(HttpURLConnection.HTTP_PRECON_FAILED, "Precon Failed");
-        map.put(HttpURLConnection.HTTP_ENTITY_TOO_LARGE, "Entity Too Large");
-        map.put(HttpURLConnection.HTTP_REQ_TOO_LONG, "Request Too Long");
-        map.put(HttpURLConnection.HTTP_UNSUPPORTED_TYPE, "Unsupported Type");
-        map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, "Internal Error");
-        map.put(HttpURLConnection.HTTP_BAD_GATEWAY, "Bad Gateway");
+        map.put(HttpURLConnection.HTTP_PRECON_FAILED, "Precondition Failed");
+        map.put(HttpURLConnection.HTTP_ENTITY_TOO_LARGE, "Payload Too Large");
+        map.put(HttpURLConnection.HTTP_REQ_TOO_LONG, "URI Too Long");
+        map.put(
+            HttpURLConnection.HTTP_UNSUPPORTED_TYPE, "Unsupported Media Type"
+        );
+        map.put(HttpURLConnection.HTTP_INTERNAL_ERROR, "Internal Server Error");
         map.put(HttpURLConnection.HTTP_NOT_IMPLEMENTED, "Not Implemented");
+        map.put(HttpURLConnection.HTTP_BAD_GATEWAY, "Bad Gateway");
+        map.put(HttpURLConnection.HTTP_UNAVAILABLE, "Service Unavailable");
+        map.put(HttpURLConnection.HTTP_GATEWAY_TIMEOUT, "Gateway Timeout");
+        map.put(HttpURLConnection.HTTP_VERSION, "HTTP Version Not Supported");
         return map;
     }
-
 }

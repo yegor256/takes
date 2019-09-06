@@ -124,7 +124,7 @@ public final class RsWithTypeTest {
             new TextIs(
                 new Joined(
                     RsWithTypeTest.CRLF,
-                    "HTTP/1.1 500 Internal Error",
+                    "HTTP/1.1 500 Internal Server Error",
                     "Content-Length: 6",
                     "Content-Type: text/html",
                     "",
