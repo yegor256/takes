@@ -27,12 +27,12 @@ SOFTWARE.
   <xsl:strip-space elements="*"/>
   <xsl:template match="/page">
     <html>
-      <shead>
+      <head>
         <title>directory</title>
-      </shead>
-      <sbody>
+      </head>
+      <body>
         <xsl:apply-templates select="files"/>
-      </sbody>
+      </body>
     </html>
   </xsl:template>
   <xsl:template match="files">

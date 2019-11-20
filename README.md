@@ -67,7 +67,7 @@ These two web systems use Takes, and they are open source:
 	- [Velocity Templates](#velocity-templates)
 - [Static Resources](#static-resources)
 - [Hit Refresh Debugging](#hit-refresh-debugging)
-- [Request Methods (POST, PUT, HEAD, etc.)](#request-methods-post-put-shead-etc)
+- [Request Methods (POST, PUT, HEAD, etc.)](#request-methods-post-put-head-etc)
 - [Request Parsing](#request-parsing)
 - [Form Processing](#form-processing)
 - [Exception Handling](#exception-handling)
@@ -680,8 +680,8 @@ illustrates both methods:
 public final class TkPostMessage implements Take {
   @Override
   public Response act(final Request req) {
-    final String sbody = new RqPrint(req).printBody();
-    if (sbody.isEmpty()) {
+    final String body = new RqPrint(req).printBody();
+    if (body.isEmpty()) {
       throw new RsForward(
         new RsFlash("message can't be empty")
       );
