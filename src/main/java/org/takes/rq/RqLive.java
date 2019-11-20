@@ -89,10 +89,7 @@ public final class RqLive extends RqWrap {
         if (eof) {
             throw new IOException("empty request");
         }
-        return new RqOf(
-            () -> head,
-            () -> input
-        );
+        return new RequestOf(head, input);
     }
 
     /**

@@ -58,12 +58,7 @@ public final class RsSimple extends RsWrap {
      * @param body Body
      */
     public RsSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new RsOf(
-                () -> head,
-                () -> body
-            )
-        );
+        super(new ResponseOf(head, body));
     }
 
 }

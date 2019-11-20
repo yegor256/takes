@@ -45,7 +45,7 @@ public final class RsBuffered extends RsWrap {
      */
     public RsBuffered(final Response res) {
         super(
-            new RsOf(
+            new ResponseOf(
                 res::head,
                 () -> new BufferedInputStream(res.body())
             )

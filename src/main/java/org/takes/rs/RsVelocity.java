@@ -135,7 +135,7 @@ public final class RsVelocity extends RsWrap {
     public RsVelocity(final String folder,
         final InputStream template, final Scalar<Map<String, Object>> params) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> new RsEmpty().head(),
                 () -> RsVelocity.render(folder, template, params.get())
             )

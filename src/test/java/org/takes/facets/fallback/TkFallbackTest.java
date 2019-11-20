@@ -31,7 +31,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsOf;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
@@ -80,7 +80,7 @@ public final class TkFallbackTest {
                     new Take() {
                         @Override
                         public Response act(final Request req) {
-                            return new RsOf(
+                            return new ResponseOf(
                                 () -> {
                                     throw new UnsupportedOperationException("");
                                 },

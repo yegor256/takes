@@ -47,7 +47,7 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
-import org.takes.rs.RsOf;
+import org.takes.rs.ResponseOf;
 import org.takes.tk.TkText;
 
 /**
@@ -133,7 +133,7 @@ public final class BkBasicTest {
         new BkBasic(
             req -> {
                 ref.set(req);
-                return new RsOf(
+                return new ResponseOf(
                     () -> Collections.singletonList("HTTP/1.1 200 OK"),
                     req::body
                 );

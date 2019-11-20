@@ -101,7 +101,7 @@ public final class RsXslt extends RsWrap {
      */
     public RsXslt(final Response rsp, final URIResolver resolver) {
         super(
-            new RsOf(
+            new ResponseOf(
                 rsp::head,
                 () -> RsXslt.transform(rsp.body(), resolver)
             )

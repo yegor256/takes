@@ -32,12 +32,11 @@ import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
-import org.takes.rs.RsOf;
+import org.takes.rs.ResponseOf;
 import org.takes.tk.TkWrap;
 
 /**
@@ -47,6 +46,8 @@ import org.takes.tk.TkWrap;
  *
  * @since 0.1
  * @checkstyle IllegalCatchCheck (500 lines)
+ * @todo #918:30min {@link TkFallback} class is very complicated, hard to read.
+ *  Please consider removing static methods and replace them with decorators.
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -147,23 +148,31 @@ public final class TkFallback extends TkWrap {
      * @param fbk Fallback
      * @param req Request
      * @return Response
-     * @checkstyle ExecutableStatementCount
+     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
-        return new RsOf(
+        return new ResponseOf(
             () -> {
                 final long start = System.currentTimeMillis();
                 Iterable<String> head;
                 try {
                     head = res.head();
+                } catch (final HttpException ex) {
+                    try {
+                        head = fbk.route(
+                            TkFallback.fallback(req, start, ex, ex.code())
+                        ).get().head();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 } catch (final Throwable ex) {
                     try {
                         head = fbk.route(
                             TkFallback.fallback(
                                 req, start, ex,
-                                new TkFallback.HtErrCodeOf(ex).get()
+                                HttpURLConnection.HTTP_INTERNAL_ERROR
                             )
                         ).get().head();
                     } catch (final Exception exx) {
@@ -177,12 +186,20 @@ public final class TkFallback extends TkWrap {
                 InputStream body;
                 try {
                     body = res.body();
+                } catch (final HttpException ex) {
+                    try {
+                        body = fbk.route(
+                            TkFallback.fallback(req, start, ex, ex.code())
+                        ).get().body();
+                    } catch (final Exception exx) {
+                        throw (IOException) new IOException(exx).initCause(ex);
+                    }
                 } catch (final Throwable ex) {
                     try {
                         body = fbk.route(
                             TkFallback.fallback(
                                 req, start, ex,
-                                new TkFallback.HtErrCodeOf(ex).get()
+                                HttpURLConnection.HTTP_INTERNAL_ERROR
                             )
                         ).get().body();
                     } catch (final Exception exx) {
@@ -223,37 +240,6 @@ public final class TkFallback extends TkWrap {
             ),
             exp
         );
-    }
-
-    /**
-     * Scalar to retrieve Http Status Error Code from Exception.
-     * @since 2.0
-     */
-    private static final class HtErrCodeOf implements Scalar<Integer> {
-
-        /**
-         * Throwable object.
-         */
-        private final Throwable throwable;
-
-        /**
-         * Ctor.
-         * @param throwable Throwable param
-         */
-        HtErrCodeOf(final Throwable throwable) {
-            this.throwable = throwable;
-        }
-
-        @Override
-        public Integer get() throws IOException {
-            final int code;
-            if (this.throwable instanceof HttpException) {
-                code = ((HttpException) throwable).code();
-            } else {
-                code = HttpURLConnection.HTTP_INTERNAL_ERROR;
-            }
-            return code;
-        }
     }
 
 }

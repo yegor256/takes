@@ -100,7 +100,7 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence header) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> RsWithHeader.extend(res.head(), header.toString()),
                 res::body
             )

@@ -24,8 +24,6 @@
 package org.takes.facets.auth.signatures;
 
 import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -42,11 +40,14 @@ public final class SiHmacTest {
      */
     @Test
     public void corrects() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Must have proper bit length",
             // @checkstyle MagicNumber (1 line)
             new SiHmac("test", 123).bitlength(),
-            Matchers.equalTo(SiHmac.HMAC256)
-        );
+            new IsEqual<>(
+                SiHmac.HMAC256
+            )
+        ).affirm();
     }
 
     /**
@@ -55,20 +56,18 @@ public final class SiHmacTest {
      */
     @Test
     public void signs() throws IOException {
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Must have proper signature",
             new String(
-                new SiHmac(
-                    "key",
-                    SiHmac.HMAC256
-                ).sign(
+                new SiHmac("key", SiHmac.HMAC256).sign(
                     "The quick brown fox jumps over the lazy dog".getBytes()
                 )
             ),
-            Matchers.equalTo(
+            new IsEqual<>(
                 // @checkstyle LineLength (1 line)
                 "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8"
             )
-        );
+        ).affirm();
     }
 
     /**
@@ -79,10 +78,7 @@ public final class SiHmacTest {
     public void mustEvaluateTrueEqualityTest() throws Exception {
         new Assertion<>(
             "Must evaluate true equality",
-            new SiHmac(
-                "key",
-                SiHmac.HMAC256
-            ),
+            new SiHmac("key", SiHmac.HMAC256),
             new IsEqual<>(
                 new SiHmac("key", SiHmac.HMAC256)
             )

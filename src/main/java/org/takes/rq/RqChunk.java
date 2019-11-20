@@ -47,7 +47,7 @@ public final class RqChunk extends RqWrap {
      */
     public RqChunk(final Request req) {
         super(
-            new RqOf(
+            new RequestOf(
                 req::head,
                 () -> RqChunk.cap(req)
             )

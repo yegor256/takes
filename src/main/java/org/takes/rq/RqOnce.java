@@ -52,7 +52,7 @@ public final class RqOnce extends RqWrap {
      */
     private static Request wrap(final Request req) {
         final AtomicBoolean seen = new AtomicBoolean(false);
-        return new RqOf(
+        return new RequestOf(
             req::head,
             () -> {
                 if (!seen.getAndSet(true)) {

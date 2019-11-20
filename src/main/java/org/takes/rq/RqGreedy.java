@@ -57,7 +57,7 @@ public final class RqGreedy extends RqWrap {
     private static Request consume(final Request req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RqPrint(req).printBody(baos);
-        return new RqOf(
+        return new RequestOf(
             req::head,
             () -> new ByteArrayInputStream(baos.toByteArray())
         );

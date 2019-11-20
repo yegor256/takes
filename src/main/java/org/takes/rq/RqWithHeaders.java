@@ -56,7 +56,7 @@ public final class RqWithHeaders extends RqWrap {
     public RqWithHeaders(final Request req,
         final Iterable<? extends CharSequence> headers) {
         super(
-            new RqOf(
+            new RequestOf(
                 () -> {
                     final List<String> head = new LinkedList<>();
                     for (final String hdr : req.head()) {

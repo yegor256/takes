@@ -65,7 +65,7 @@ public final class RsWithHeaders extends RsWrap {
     public RsWithHeaders(final Response res,
         final Iterable<? extends CharSequence> headers) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> RsWithHeaders.extend(res, headers),
                 res::body
             )

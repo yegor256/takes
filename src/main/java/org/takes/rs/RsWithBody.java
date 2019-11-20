@@ -141,7 +141,7 @@ public final class RsWithBody extends RsWrap {
      */
     RsWithBody(final Response res, final Body body) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> RsWithBody.append(res, body.length()),
                 body::stream
             )

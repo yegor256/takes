@@ -77,7 +77,7 @@ public final class RsWithStatus extends RsWrap {
     public RsWithStatus(final Response res, final int code,
         final CharSequence rsn) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> RsWithStatus.head(res, code, rsn),
                 res::body
             )

@@ -27,8 +27,8 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.text.FormattedText;
+import org.cactoos.text.Lowered;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
 
 /**
  * Request without a header (even if it was absent).
@@ -48,16 +48,14 @@ public final class RqWithoutHeader extends RqWrap {
     public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
             // @checkstyle AnonInnerLengthCheck (50 lines)
-            new RqOf(
+            new RequestOf(
                 () -> {
                     final Text prefix = new FormattedText(
                         "%s:",
-                        new EnglishLowerCase(
-                            name.toString()
-                        ).string()
+                        new Lowered(name.toString()).asString()
                     );
                     return new Filtered<>(
-                        header -> !new EnglishLowerCase(header).string()
+                        header -> !new Lowered(header).asString()
                             .startsWith(prefix.asString()),
                         req.head()
                     );

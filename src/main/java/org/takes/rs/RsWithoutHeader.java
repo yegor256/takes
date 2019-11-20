@@ -47,7 +47,7 @@ public final class RsWithoutHeader extends RsWrap {
      */
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()

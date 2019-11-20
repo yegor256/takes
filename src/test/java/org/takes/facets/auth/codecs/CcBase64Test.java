@@ -137,13 +137,9 @@ public final class CcBase64Test {
     public void equalsTest() throws Exception {
         new Assertion<>(
             "CcBase64 objects must be equal",
-            new CcBase64(
-                new CcPlain()
-            ),
+            new CcBase64(new CcPlain()),
             new IsEqual<>(
-                new CcBase64(
-                    new CcPlain()
-                )
+                new CcBase64(new CcPlain())
             )
         ).affirm();
     }
@@ -152,13 +148,9 @@ public final class CcBase64Test {
     public void hashCodeTest() throws Exception {
         new Assertion<>(
             "Hash codes must be equal",
-            new CcBase64(
-                new CcPlain()
-            ).hashCode(),
+            new CcBase64(new CcPlain()).hashCode(),
             new IsEqual<>(
-                new CcBase64(
-                    new CcPlain()
-                ).hashCode()
+                new CcBase64(new CcPlain()).hashCode()
             )
         ).affirm();
     }

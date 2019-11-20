@@ -30,8 +30,8 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
-import org.takes.rs.RsOf;
 import org.takes.rs.RsPrint;
 
 /**
@@ -67,7 +67,7 @@ public final class TkForwardTest {
     @Test
     public void catchesExceptionThrownByResponse() throws Exception {
         final Take take =
-            request -> new RsOf(
+            request -> new ResponseOf(
                 () -> new RsEmpty().head(),
                 () -> {
                     throw new RsForward("/b");

@@ -110,7 +110,7 @@ public final class RqFake extends RqWrap {
      */
     public RqFake(final List<String> head, final InputStream body) {
         super(
-            new RqOf(
+            new RequestOf(
                 () -> Collections.unmodifiableList(head),
                 () -> body
             )

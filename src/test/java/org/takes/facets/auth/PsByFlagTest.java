@@ -113,19 +113,12 @@ public final class PsByFlagTest {
     @Test
     public void mustEvaluateTrueEqualityTest() throws Exception {
         final Map<Pattern, Pass> passes = new HashMap<>(1);
-        passes.put(
-            Pattern.compile("key"),
-            new PsFake(true)
-        );
+        passes.put(Pattern.compile("key"), new PsFake(true));
         new Assertion<>(
             "Must evaluate true equality",
-            new PsByFlag(
-                passes
-            ),
+            new PsByFlag(passes),
             new IsEqual<>(
-                new PsByFlag(
-                    passes
-                )
+                new PsByFlag(passes)
             )
         ).affirm();
     }

@@ -32,7 +32,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
-import org.takes.rs.RsOf;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsWrap;
 
 /**
@@ -62,7 +62,7 @@ public final class RsFork extends RsWrap {
      */
     public RsFork(final Request req, final Iterable<Fork> list) {
         super(
-            new RsOf(
+            new ResponseOf(
                 () -> RsFork.pick(req, list).head(),
                 () -> RsFork.pick(req, list).body()
             )

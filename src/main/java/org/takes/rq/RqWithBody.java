@@ -44,7 +44,7 @@ public final class RqWithBody extends RqWrap {
      */
     public RqWithBody(final Request req, final CharSequence bdy) {
         super(
-            new RqOf(
+            new RequestOf(
                 req::head,
                 () -> new ByteArrayInputStream(
                     new Utf8String(bdy.toString()).asBytes()
