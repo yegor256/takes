@@ -134,24 +134,20 @@ public final class CcBase64Test {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsTest() throws Exception {
+    public void mustEvaluateTrueEquality() throws Exception {
         new Assertion<>(
-            "CcBase64 objects must be equal",
+            "Must evaluate equality of CcBase64 objects",
             new CcBase64(new CcPlain()),
-            new IsEqual<>(
-                new CcBase64(new CcPlain())
-            )
+            new IsEqual<>(new CcBase64(new CcPlain()))
         ).affirm();
     }
 
     @Test
-    public void hashCodeTest() throws Exception {
+    public void mustEvaluateIdenticalHashCodes() throws Exception {
         new Assertion<>(
-            "Hash codes must be equal",
+            "Must evaluate identical hash codes",
             new CcBase64(new CcPlain()).hashCode(),
-            new IsEqual<>(
-                new CcBase64(new CcPlain()).hashCode()
-            )
+            new IsEqual<>(new CcBase64(new CcPlain()).hashCode())
         ).affirm();
     }
 }

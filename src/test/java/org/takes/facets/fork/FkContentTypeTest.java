@@ -160,18 +160,11 @@ public final class FkContentTypeTest {
     @Test
     public void mustEvaluateEqualsTest() throws Exception {
         final Take take = req -> new RsEmpty();
+        final String type = "text/xml";
         new Assertion<>(
             "Must evaluate true equality",
-            new FkContentType(
-                "text/xml",
-                take
-            ),
-            new IsEqual<>(
-                new FkContentType(
-                    "text/xml",
-                    take
-                )
-            )
+            new FkContentType(type, take),
+            new IsEqual<>(new FkContentType(type, take))
         ).affirm();
     }
 

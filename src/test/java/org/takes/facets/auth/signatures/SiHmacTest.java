@@ -44,9 +44,7 @@ public final class SiHmacTest {
             "Must have proper bit length",
             // @checkstyle MagicNumber (1 line)
             new SiHmac("test", 123).bitlength(),
-            new IsEqual<>(
-                SiHmac.HMAC256
-            )
+            new IsEqual<>(SiHmac.HMAC256)
         ).affirm();
     }
 
@@ -76,12 +74,11 @@ public final class SiHmacTest {
      */
     @Test
     public void mustEvaluateTrueEqualityTest() throws Exception {
+        final String key = "key";
         new Assertion<>(
             "Must evaluate true equality",
-            new SiHmac("key", SiHmac.HMAC256),
-            new IsEqual<>(
-                new SiHmac("key", SiHmac.HMAC256)
-            )
+            new SiHmac(key, SiHmac.HMAC256),
+            new IsEqual<>(new SiHmac(key, SiHmac.HMAC256))
         ).affirm();
     }
 }

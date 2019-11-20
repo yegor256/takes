@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -142,27 +141,16 @@ public final class RsWithBody extends RsWrap {
     RsWithBody(final Response res, final Body body) {
         super(
             new ResponseOf(
-                () -> RsWithBody.append(res, body.length()),
+                () -> {
+                    final String header = "Content-Length";
+                    return new RsWithHeader(
+                        new RsWithoutHeader(res, header),
+                        header,
+                        Integer.toString(body.length())
+                    ).head();
+                },
                 body::stream
             )
         );
     }
-
-    /**
-     * Appends content length to header from response.
-     * @param res Response
-     * @param length Response body content length
-     * @return Iterable String of header attributes
-     * @throws IOException if something goes wrong.
-     */
-    private static Iterable<String> append(final Response res,
-        final int length) throws IOException {
-        final String header = "Content-Length";
-        return new RsWithHeader(
-            new RsWithoutHeader(res, header),
-            header,
-            Integer.toString(length)
-        ).head();
-    }
-
 }

@@ -117,9 +117,7 @@ public final class PsByFlagTest {
         new Assertion<>(
             "Must evaluate true equality",
             new PsByFlag(passes),
-            new IsEqual<>(
-                new PsByFlag(passes)
-            )
+            new IsEqual<>(new PsByFlag(passes))
         ).affirm();
     }
 }

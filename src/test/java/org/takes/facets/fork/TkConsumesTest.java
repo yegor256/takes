@@ -114,18 +114,11 @@ public final class TkConsumesTest {
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void equalsAndHashCodeEqualTest() throws Exception {
         final Take take = new TkText("text");
+        final String type = "Content-Type: text/plain";
         new Assertion<>(
             "Must evaluate true equality",
-            new TkConsumes(
-                take,
-                "Content-Type: text/plain"
-            ),
-            new IsEqual<>(
-                new TkConsumes(
-                    take,
-                    "Content-Type: text/plain"
-                )
-            )
+            new TkConsumes(take, type),
+            new IsEqual<>(new TkConsumes(take, type))
         ).affirm();
     }
 }

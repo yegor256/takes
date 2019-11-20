@@ -57,12 +57,7 @@ public final class RqLengthAware extends RqWrap {
      * @param req Original request
      */
     public RqLengthAware(final Request req) {
-        super(
-            new RequestOf(
-                req::head,
-                () -> RqLengthAware.cap(req)
-            )
-        );
+        super(new RequestOf(req::head, () -> RqLengthAware.cap(req)));
     }
 
     /**

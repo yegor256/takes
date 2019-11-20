@@ -23,10 +23,17 @@
  */
 package org.takes.rq;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
+import org.cactoos.scalar.And;
+import org.cactoos.scalar.HashCode;
+import org.cactoos.scalar.Or;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Request;
 import org.takes.Scalar;
+import org.takes.misc.InputStreamsEqual;
 
 /**
  * This {@link Request} implementation provides a way to build a request
@@ -51,12 +58,8 @@ public final class RequestOf implements Request {
      * @param head Iterable head value
      * @param body InputStream body value
      */
-    public RequestOf(final Iterable<String> head,
-        final InputStream body) {
-        this(
-            () -> head,
-            () -> body
-        );
+    public RequestOf(final Iterable<String> head, final InputStream body) {
+        this(() -> head, () -> body);
     }
 
     /**
@@ -64,8 +67,8 @@ public final class RequestOf implements Request {
      * @param head Scalar to provide head value
      * @param body Scalar to provide body value
      */
-    public RequestOf(final Scalar<Iterable<String>> head,
-        final Scalar<InputStream> body) {
+    public RequestOf(
+        final Scalar<Iterable<String>> head, final Scalar<InputStream> body) {
         this.shead = head;
         this.sbody = body;
     }
@@ -81,12 +84,35 @@ public final class RequestOf implements Request {
     }
 
     @Override
+    @SuppressFBWarnings("EQ_UNUSUAL")
     public boolean equals(final Object that) {
-        return this == that || RequestOf.class.equals(that.getClass());
+        return new Unchecked<>(
+            new Or(
+                () -> this == that,
+                new And(
+                    () -> that != null,
+                    () -> RequestOf.class.equals(that.getClass()),
+                    () -> {
+                        final RequestOf other = (RequestOf) that;
+                        return new And(
+                            () -> {
+                                final Iterator<String> iter = other.head()
+                                    .iterator();
+                                return new And(
+                                    (String hdr) -> hdr.equals(iter.next()),
+                                    this.head()
+                                ).value();
+                            },
+                            new InputStreamsEqual(this.body(), other.body())
+                        ).value();
+                    }
+                )
+            )
+        ).value();
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return new HashCode(new Unchecked<>(this.shead::get).value()).value();
     }
 }

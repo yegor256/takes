@@ -97,15 +97,15 @@ public final class RsPrettyJsonTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void conformsToEqualsAndHashCode() throws Exception {
+    public void mustEvaluateTrueEquality() throws Exception {
         new Assertion<>(
             "Must evaluate true equality",
             new RsPrettyJson(
-                new RsWithBody("{\"test\": {\"test\": \"test\" }}")
+                new RsWithBody("{\"person\":{\"name\":\"John\"}}")
             ),
             new IsEqual<>(
                 new RsPrettyJson(
-                    new RsWithBody("{\"test\": {\"test\": \"test\" }}")
+                    new RsWithBody("{\"person\":{\"name\":\"John\"}}")
                 )
             )
         ).affirm();

@@ -33,6 +33,9 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.36
+ * @todo #918:30min Please use {@link org.cactoos.scalar.Sticky} decorator
+ *  class so that multiple calls to body() would produce the same cached result
+ *  rather than throwing an exception.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqOnce extends RqWrap {
@@ -64,5 +67,4 @@ public final class RqOnce extends RqWrap {
             }
         );
     }
-
 }

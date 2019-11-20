@@ -109,11 +109,6 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final InputStream body) {
-        super(
-            new RequestOf(
-                () -> Collections.unmodifiableList(head),
-                () -> body
-            )
-        );
+        super(new RequestOf(Collections.unmodifiableList(head), body));
     }
 }

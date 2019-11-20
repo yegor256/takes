@@ -28,6 +28,10 @@ import java.util.Locale;
 /**
  * English lower case string representation.
  * @since 0.33
+ * @todo #918:30min Remove this class in favour of
+ *  {@link org.cactoos.text.Lowered} which does the same. Find all usages of
+ *  this class in the project and replace by suggested
+ *  {@link org.cactoos.text.Lowered} class.
  */
 public final class EnglishLowerCase {
 
