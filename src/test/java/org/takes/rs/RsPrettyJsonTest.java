@@ -98,14 +98,15 @@ public final class RsPrettyJsonTest {
      */
     @Test
     public void mustEvaluateTrueEquality() throws Exception {
+        final String body = "{\"person\":{\"name\":\"John\"}}";
         new Assertion<>(
             "Must evaluate true equality",
             new RsPrettyJson(
-                new RsWithBody("{\"person\":{\"name\":\"John\"}}")
+                new RsWithBody(body)
             ),
             new IsEqual<>(
                 new RsPrettyJson(
-                    new RsWithBody("{\"person\":{\"name\":\"John\"}}")
+                    new RsWithBody(body)
                 )
             )
         ).affirm();
