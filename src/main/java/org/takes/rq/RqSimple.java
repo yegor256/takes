@@ -42,12 +42,7 @@ public final class RqSimple extends RqWrap {
      * @param body Body
      */
     public RqSimple(final Iterable<String> head, final InputStream body) {
-        super(
-            new RequestOf(
-                () -> head,
-                () -> body
-            )
-        );
+        super(new RequestOf(head, body));
     }
 
 }
