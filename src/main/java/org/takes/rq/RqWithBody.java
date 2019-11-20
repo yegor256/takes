@@ -24,8 +24,6 @@
 package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.misc.Utf8String;
@@ -45,18 +43,13 @@ public final class RqWithBody extends RqWrap {
      * @param bdy The body.
      */
     public RqWithBody(final Request req, final CharSequence bdy) {
-        super(new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-
-            @Override
-            public InputStream body() {
-                return new ByteArrayInputStream(
+        super(
+            new RqOf(
+                req::head,
+                () -> new ByteArrayInputStream(
                     new Utf8String(bdy.toString()).asBytes()
-                );
-            }
-        });
+                )
+            )
+        );
     }
 }

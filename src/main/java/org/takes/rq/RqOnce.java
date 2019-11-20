@@ -23,8 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -54,14 +52,9 @@ public final class RqOnce extends RqWrap {
      */
     private static Request wrap(final Request req) {
         final AtomicBoolean seen = new AtomicBoolean(false);
-        return new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-
-            @Override
-            public InputStream body() throws IOException {
+        return new RqOf(
+            req::head,
+            () -> {
                 if (!seen.getAndSet(true)) {
                     throw new IllegalStateException(
                         "It's not allowed to call body() more than once"
@@ -69,7 +62,7 @@ public final class RqOnce extends RqWrap {
                 }
                 return req.body();
             }
-        };
+        );
     }
 
 }

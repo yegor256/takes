@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -66,17 +65,10 @@ public final class RsWithHeaders extends RsWrap {
     public RsWithHeaders(final Response res,
         final Iterable<? extends CharSequence> headers) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithHeaders.extend(res, headers);
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+            new RsOf(
+                () -> RsWithHeaders.extend(res, headers),
+                res::body
+            )
         );
     }
 
@@ -91,7 +83,7 @@ public final class RsWithHeaders extends RsWrap {
     private static Iterable<String> extend(final Response res,
         final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;
-        for (final CharSequence hdr: headers) {
+        for (final CharSequence hdr : headers) {
             resp = new RsWithHeader(resp, hdr);
         }
         return resp.head();

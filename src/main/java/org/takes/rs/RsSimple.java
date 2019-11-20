@@ -27,7 +27,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.Response;
 import org.takes.misc.Utf8String;
 
 /**
@@ -60,17 +59,10 @@ public final class RsSimple extends RsWrap {
      */
     public RsSimple(final Iterable<String> head, final InputStream body) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
+            new RsOf(
+                () -> head,
+                () -> body
+            )
         );
     }
 

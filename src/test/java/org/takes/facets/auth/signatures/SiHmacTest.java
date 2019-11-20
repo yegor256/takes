@@ -24,16 +24,17 @@
 package org.takes.facets.auth.signatures;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link SiHmac}.
  * @since 1.3
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class SiHmacTest {
     /**
      * SiHmac corrects wrong bit length.
@@ -56,8 +57,12 @@ public final class SiHmacTest {
     public void signs() throws IOException {
         MatcherAssert.assertThat(
             new String(
-                new SiHmac("key", SiHmac.HMAC256)
-                .sign("The quick brown fox jumps over the lazy dog".getBytes())
+                new SiHmac(
+                    "key",
+                    SiHmac.HMAC256
+                ).sign(
+                    "The quick brown fox jumps over the lazy dog".getBytes()
+                )
             ),
             Matchers.equalTo(
                 // @checkstyle LineLength (1 line)
@@ -71,10 +76,16 @@ public final class SiHmacTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(SiHmac.class)
-            .suppress(Warning.ALL_FIELDS_SHOULD_BE_USED)
-            .suppress(Warning.INHERITED_DIRECTLY_FROM_OBJECT)
-            .verify();
+    public void mustEvaluateTrueEqualityTest() throws Exception {
+        new Assertion<>(
+            "Must evaluate true equality",
+            new SiHmac(
+                "key",
+                SiHmac.HMAC256
+            ),
+            new IsEqual<>(
+                new SiHmac("key", SiHmac.HMAC256)
+            )
+        ).affirm();
     }
 }

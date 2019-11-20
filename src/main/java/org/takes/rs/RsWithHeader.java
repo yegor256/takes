@@ -23,8 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -102,17 +100,10 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence header) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithHeader.extend(res.head(), header.toString());
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+            new RsOf(
+                () -> RsWithHeader.extend(res.head(), header.toString()),
+                res::body
+            )
         );
     }
 

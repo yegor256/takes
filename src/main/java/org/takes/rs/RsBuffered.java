@@ -24,8 +24,6 @@
 package org.takes.rs;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
@@ -47,17 +45,10 @@ public final class RsBuffered extends RsWrap {
      */
     public RsBuffered(final Response res) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return res.head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return new BufferedInputStream(res.body());
-                }
-            }
+            new RsOf(
+                res::head,
+                () -> new BufferedInputStream(res.body())
+            )
         );
     }
 

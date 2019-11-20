@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -78,17 +77,10 @@ public final class RsWithStatus extends RsWrap {
     public RsWithStatus(final Response res, final int code,
         final CharSequence rsn) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithStatus.head(res, code, rsn);
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+            new RsOf(
+                () -> RsWithStatus.head(res, code, rsn),
+                res::body
+            )
         );
     }
 

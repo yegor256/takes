@@ -141,17 +141,10 @@ public final class RsWithBody extends RsWrap {
      */
     RsWithBody(final Response res, final Body body) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithBody.append(res, body.length());
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return body.stream();
-                }
-            }
+            new RsOf(
+                () -> RsWithBody.append(res, body.length()),
+                body::stream
+            )
         );
     }
 

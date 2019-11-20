@@ -25,12 +25,13 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.HttpException;
+import org.takes.Request;
 
 /**
  * Test case for {@link RqSocket}.
@@ -38,7 +39,7 @@ import org.takes.HttpException;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+@SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
 public final class RqSocketTest {
 
     /**
@@ -194,10 +195,39 @@ public final class RqSocketTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqSocket.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
+    public void mustEqualToSameTypeRequest() throws Exception {
+        final Request request = new RqWithHeader(
+            new RqFake(), "X-Takes-LocalPort: 55555"
+        );
+        new Assertion<>(
+            "RqSocket must equal to other RqSocket",
+            new RqSocket(
+                request
+            ),
+            new IsEqual<>(
+                new RqSocket(
+                    request
+                )
+            )
+        ).affirm();
     }
+
+    @Test
+    public void hashCodeMustEqualToSameTypeRequest() throws Exception {
+        final Request request = new RqWithHeader(
+            new RqFake(), "X-Takes-LocalPort: 55555"
+        );
+        new Assertion<>(
+            "RqSocket must equal to other RqSocket",
+            new RqSocket(
+                request
+            ).hashCode(),
+            new IsEqual<>(
+                new RqSocket(
+                    request
+                ).hashCode()
+            )
+        ).affirm();
+    }
+
 }

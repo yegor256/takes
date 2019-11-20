@@ -23,8 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,9 +56,8 @@ public final class RqWithHeaders extends RqWrap {
     public RqWithHeaders(final Request req,
         final Iterable<? extends CharSequence> headers) {
         super(
-            new Request() {
-                @Override
-                public List<String> head() throws IOException {
+            new RqOf(
+                () -> {
                     final List<String> head = new LinkedList<>();
                     for (final String hdr : req.head()) {
                         head.add(hdr);
@@ -69,13 +66,9 @@ public final class RqWithHeaders extends RqWrap {
                         head.add(header.toString().trim());
                     }
                     return head;
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return req.body();
-                }
-            }
+                },
+                req::body
+            )
         );
     }
 }

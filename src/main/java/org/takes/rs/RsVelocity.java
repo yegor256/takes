@@ -36,7 +36,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.takes.Response;
 import org.takes.Scalar;
 import org.takes.misc.Utf8InputStreamContent;
 import org.takes.misc.Utf8OutputStreamContent;
@@ -136,17 +135,10 @@ public final class RsVelocity extends RsWrap {
     public RsVelocity(final String folder,
         final InputStream template, final Scalar<Map<String, Object>> params) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return new RsEmpty().head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RsVelocity.render(folder, template, params.get());
-                }
-            }
+            new RsOf(
+                () -> new RsEmpty().head(),
+                () -> RsVelocity.render(folder, template, params.get())
+            )
         );
     }
 

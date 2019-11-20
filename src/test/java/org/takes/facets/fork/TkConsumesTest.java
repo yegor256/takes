@@ -24,12 +24,12 @@
 package org.takes.facets.fork;
 
 import java.util.Arrays;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -38,11 +38,13 @@ import org.takes.rs.RsEmpty;
 import org.takes.rs.RsJson;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkFixed;
+import org.takes.tk.TkText;
 
 /**
  * Test case for {@link TkConsumes}.
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkConsumesTest {
 
@@ -109,10 +111,21 @@ public final class TkConsumesTest {
      * @throws Exception If some problem inside
      */
     @Test
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(TkConsumes.class)
-            .withRedefinedSuperclass()
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+        final Take take = new TkText("text");
+        new Assertion<>(
+            "Must evaluate true equality",
+            new TkConsumes(
+                take,
+                "Content-Type: text/plain"
+            ),
+            new IsEqual<>(
+                new TkConsumes(
+                    take,
+                    "Content-Type: text/plain"
+                )
+            )
+        ).affirm();
     }
 }

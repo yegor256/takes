@@ -89,17 +89,10 @@ public final class RqLive extends RqWrap {
         if (eof) {
             throw new IOException("empty request");
         }
-        return new Request() {
-            @Override
-            public Iterable<String> head() {
-                return head;
-            }
-
-            @Override
-            public InputStream body() {
-                return input;
-            }
-        };
+        return new RqOf(
+            () -> head,
+            () -> input
+        );
     }
 
     /**

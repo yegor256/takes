@@ -25,15 +25,17 @@ package org.takes.rs;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrettyJson}.
  * @since 1.0
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RsPrettyJsonTest {
 
     /**
@@ -91,13 +93,21 @@ public final class RsPrettyJsonTest {
     }
 
     /**
-     * RsPrettyJSON can conform to equals and hash code contract.
+     * RsPrettyJSON can conform to equals.
      * @throws Exception If some problem inside
      */
     @Test
     public void conformsToEqualsAndHashCode() throws Exception {
-        EqualsVerifier.forClass(RsPrettyJson.class)
-            .withRedefinedSuperclass()
-            .verify();
+        new Assertion<>(
+            "Must evaluate true equality",
+            new RsPrettyJson(
+                new RsWithBody("{\"test\": {\"test\": \"test\" }}")
+            ),
+            new IsEqual<>(
+                new RsPrettyJson(
+                    new RsWithBody("{\"test\": {\"test\": \"test\" }}")
+                )
+            )
+        ).affirm();
     }
 }

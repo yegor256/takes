@@ -26,10 +26,12 @@ package org.takes.rs;
 import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.takes.Response;
 
 /**
  * Test case for {@link RsPrettyXml}.
@@ -190,9 +192,18 @@ public final class RsPrettyXmlTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void conformsToEqualsAndHashCode() throws Exception {
-        EqualsVerifier.forClass(RsPrettyXml.class)
-            .withRedefinedSuperclass()
-            .verify();
+    public void conformsToEqualsTest() throws Exception {
+        final Response response = new RsWithBody("<test> <a>test</a></test>");
+        new Assertion<>(
+            "Must evaluate true equality",
+            new RsPrettyXml(
+                response
+            ),
+            new IsEqual<>(
+                new RsPrettyXml(
+                    response
+                )
+            )
+        ).affirm();
     }
 }

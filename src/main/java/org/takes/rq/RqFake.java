@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
 import org.takes.misc.Utf8String;
 
 /**
@@ -111,17 +110,10 @@ public final class RqFake extends RqWrap {
      */
     public RqFake(final List<String> head, final InputStream body) {
         super(
-            new Request() {
-                @Override
-                public Iterable<String> head() {
-                    return Collections.unmodifiableList(head);
-                }
-
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
+            new RqOf(
+                () -> Collections.unmodifiableList(head),
+                () -> body
+            )
         );
     }
 }

@@ -23,10 +23,10 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.text.FormattedText;
 import org.takes.Request;
 import org.takes.misc.EnglishLowerCase;
 
@@ -48,24 +48,22 @@ public final class RqWithoutHeader extends RqWrap {
     public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
             // @checkstyle AnonInnerLengthCheck (50 lines)
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    final String prefix = String.format(
-                        "%s:", new EnglishLowerCase(name.toString()).string()
+            new RqOf(
+                () -> {
+                    final Text prefix = new FormattedText(
+                        "%s:",
+                        new EnglishLowerCase(
+                            name.toString()
+                        ).string()
                     );
                     return new Filtered<>(
                         header -> !new EnglishLowerCase(header).string()
-                            .startsWith(prefix),
+                            .startsWith(prefix.asString()),
                         req.head()
                     );
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return req.body();
-                }
-            }
+                },
+                req::body
+            )
         );
     }
 

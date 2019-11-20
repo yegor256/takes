@@ -101,17 +101,10 @@ public final class RsXslt extends RsWrap {
      */
     public RsXslt(final Response rsp, final URIResolver resolver) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return rsp.head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RsXslt.transform(rsp.body(), resolver);
-                }
-            }
+            new RsOf(
+                rsp::head,
+                () -> RsXslt.transform(rsp.body(), resolver)
+            )
         );
     }
 

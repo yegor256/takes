@@ -53,7 +53,7 @@ import org.xml.sax.XMLReader;
  * @since 1.0
  */
 @ToString(of = "origin")
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"lock"})
 public final class RsPrettyXml implements Response {
 
     /**

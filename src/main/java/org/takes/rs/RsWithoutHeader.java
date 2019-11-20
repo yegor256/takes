@@ -23,8 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.iterable.Filtered;
@@ -49,9 +47,8 @@ public final class RsWithoutHeader extends RsWrap {
      */
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
+            new RsOf(
+                () -> {
                     final String prefix = String.format(
                         "%s:", new EnglishLowerCase(name.toString()).string()
                     );
@@ -62,13 +59,9 @@ public final class RsWithoutHeader extends RsWrap {
                         },
                         res.head()
                     );
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+                },
+                res::body
+            )
         );
     }
 }

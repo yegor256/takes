@@ -25,51 +25,47 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
+import org.takes.Scalar;
 
 /**
- * Request decorator that limits its body, according to
- * the chunk sizes when it is a chunked Transfer-Encoding.
+ * This {@link Request} implementation provides a way to build a request
+ * with custom {@link Scalar} head and body values.
  *
  * <p>The class is immutable and thread-safe.
- *
- * @since 0.15
- * @see org.takes.rq.RqPrint
+ * @since 2.0
  */
-@EqualsAndHashCode(callSuper = true)
-public final class RqChunk extends RqWrap {
+@EqualsAndHashCode(exclude = {"shead", "sbody"})
+public final class RqOf implements Request {
+    /**
+     * Original head scalar.
+     */
+    private final Scalar<Iterable<String>> shead;
+
+    /**
+     * Original body scalar.
+     */
+    private final Scalar<InputStream> sbody;
 
     /**
      * Ctor.
-     * @param req Original request
+     * @param head Scalar to provide head value
+     * @param body Scalar to provide body value
      */
-    public RqChunk(final Request req) {
-        super(
-            new RqOf(
-                req::head,
-                () -> RqChunk.cap(req)
-            )
-        );
+    public RqOf(final Scalar<Iterable<String>> head,
+        final Scalar<InputStream> body) {
+        this.shead = head;
+        this.sbody = body;
     }
 
-    /**
-     * Cap the steam.
-     * @param req Request
-     * @return Stream with a cap
-     * @throws IOException If fails
-     */
-    private static InputStream cap(final Request req) throws IOException {
-        final Iterator<String> hdr = new RqHeaders.Base(req)
-            .header("Transfer-Encoding").iterator();
-        final InputStream result;
-        if (hdr.hasNext() && "chunked".equalsIgnoreCase(hdr.next())) {
-            result = new ChunkedInputStream(req.body());
-        } else {
-            result = req.body();
-        }
-        return result;
+    @Override
+    public Iterable<String> head() throws IOException {
+        return this.shead.get();
     }
 
+    @Override
+    public InputStream body() throws IOException {
+        return this.sbody.get();
+    }
 }

@@ -25,7 +25,6 @@ package org.takes.rq;
 
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
 
 /**
  * Simple request.
@@ -44,17 +43,10 @@ public final class RqSimple extends RqWrap {
      */
     public RqSimple(final Iterable<String> head, final InputStream body) {
         super(
-            new Request() {
-                @Override
-                public Iterable<String> head() {
-                    return head;
-                }
-
-                @Override
-                public InputStream body() {
-                    return body;
-                }
-            }
+            new RqOf(
+                () -> head,
+                () -> body
+            )
         );
     }
 

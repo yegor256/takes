@@ -24,17 +24,18 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Request;
 
 /**
  * Test case for {@link RqFake}.
  * @since 0.24
  */
+@SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
 public final class RqFakeTest {
 
     /**
@@ -42,10 +43,19 @@ public final class RqFakeTest {
      */
     @Test
     public void conformsToEquality() {
-        EqualsVerifier.forClass(RqFake.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
+        new Assertion<>(
+            "Must evaluate true equality",
+            new RqFake(
+                "GET",
+                "https://localhost:8080"
+            ),
+            new IsEqual<>(
+                new RqFake(
+                    "GET",
+                    "https://localhost:8080"
+                )
+            )
+        ).affirm();
     }
 
     /**
