@@ -26,7 +26,8 @@ package org.takes.facets.fork;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.misc.EnglishLowerCase;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Media type.
@@ -160,10 +161,9 @@ final class MediaType implements Comparable<MediaType> {
      * @return String array with the sectors of the media type.
      */
     private static String[] sectors(final String text) {
-        return new EnglishLowerCase(MediaType.split(text)[0]).string()
-            .split(
-                "/", 2
-            );
+        return new UncheckedText(
+            new Lowered(MediaType.split(text)[0])
+        ).asString().split("/", 2);
     }
 
 }

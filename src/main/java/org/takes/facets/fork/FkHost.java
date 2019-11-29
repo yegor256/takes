@@ -24,10 +24,12 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
+import org.cactoos.scalar.Equals;
+import org.cactoos.scalar.Ternary;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.Lowered;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -66,22 +68,19 @@ public final class FkHost extends FkWrap {
      * @return Fork
      */
     private static Fork fork(final String host, final Take take) {
-        return new Fork() {
-            @Override
-            public Opt<Response> route(final Request req) throws Exception {
-                final String hst = new RqHeaders.Smart(
-                    new RqHeaders.Base(req)
-                ).single("host");
-                final Opt<Response> rsp;
-                if (new EnglishLowerCase(host).string()
-                    .equals(new EnglishLowerCase(hst).string())) {
-                    rsp = new Opt.Single<>(take.act(req));
-                } else {
-                    rsp = new Opt.Empty<>();
-                }
-                return rsp;
-            }
+        return req -> {
+            final String hst = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("host");
+            return new Unchecked<Opt<Response>>(
+                new Ternary<>(
+                    new Equals<>(
+                        () -> new Lowered(host).asString(),
+                        () -> new Lowered(hst).asString()
+                    ),
+                    () -> new Opt.Single<>(take.act(req)),
+                    Opt.Empty::new
+                )).value();
         };
     }
-
 }

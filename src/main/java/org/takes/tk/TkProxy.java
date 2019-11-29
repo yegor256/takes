@@ -30,10 +30,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
@@ -134,7 +135,7 @@ public final class TkProxy implements Take {
         com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
         final RqHeaders headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {
-            if ("content-length".equals(new EnglishLowerCase(name).string())) {
+            if ("content-length".equals(new Lowered(name).asString())) {
                 continue;
             }
             if (TkProxy.isHost(name)) {
@@ -200,6 +201,6 @@ public final class TkProxy implements Take {
      *  header name, {@code false} otherwise
      */
     private static boolean isHost(final String header) {
-        return "host".equals(new EnglishLowerCase(header).string());
+        return "host".equals(new UncheckedText(new Lowered(header)).asString());
     }
 }

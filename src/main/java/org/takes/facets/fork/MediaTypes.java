@@ -28,7 +28,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.misc.EnglishLowerCase;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Media types.
@@ -130,8 +131,8 @@ final class MediaTypes {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<>();
-        for (final String name
-            : new EnglishLowerCase(text).string().split(",")) {
+        final UncheckedText lowered = new UncheckedText(new Lowered(text));
+        for (final String name : lowered.asString().split(",")) {
             if (!name.isEmpty()) {
                 list.add(new MediaType(name));
             }

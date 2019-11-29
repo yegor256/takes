@@ -26,8 +26,9 @@ package org.takes.rs;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.Lowered;
 import org.takes.Response;
-import org.takes.misc.EnglishLowerCase;
 
 /**
  * Response decorator, without a header.
@@ -49,13 +50,15 @@ public final class RsWithoutHeader extends RsWrap {
         super(
             new ResponseOf(
                 () -> {
-                    final String prefix = String.format(
-                        "%s:", new EnglishLowerCase(name.toString()).string()
-                    );
+                    final String prefix = new FormattedText(
+                        "%s:", new Lowered(name.toString())
+                    ).asString();
                     return new Filtered<>(
                         header -> {
-                            return !new EnglishLowerCase(header).string()
-                                .startsWith(prefix);
+                            final String lowered = new Lowered(
+                                header
+                            ).asString();
+                            return !lowered.startsWith(prefix);
                         },
                         res.head()
                     );
