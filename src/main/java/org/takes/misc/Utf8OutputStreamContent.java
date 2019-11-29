@@ -30,6 +30,10 @@ import java.nio.charset.StandardCharsets;
 /**
  * OutputStreamWriter that uses UTF-8 encoding for all operations.
  * @since 0.33
+ * @todo #998:30min Please remove this class and use
+ *  {@link org.cactoos.io.WriterTo} decorator instead of this class.
+ *  The {@link org.cactoos.io.WriterTo} contains several different constructors
+ *  for most of the inputs and supports UTF-8.
  */
 public final class Utf8OutputStreamContent extends OutputStreamWriter {
 

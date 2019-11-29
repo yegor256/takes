@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
@@ -86,10 +87,10 @@ public final class RqFormBase extends RqWrap implements RqForm {
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                new Sprintf(
+                new FormattedText(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()
-                )
+                ).asString()
             );
         } else {
             iter = new VerboseIterable<>(

@@ -32,6 +32,10 @@ import java.util.Formatter;
  * Sprintf in a class.
  *
  * @since 0.10
+ * @todo #998:30min Please remove this class and use
+ *  {@link org.cactoos.text.FormattedText} decorator instead of this class.
+ *  The {@link org.cactoos.text.FormattedText} does the same job and supports
+ *  decorating functionality of other {@link org.cactoos.Text} objects.
  */
 public final class Sprintf implements CharSequence {
 

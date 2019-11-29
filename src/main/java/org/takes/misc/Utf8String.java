@@ -30,6 +30,12 @@ import org.cactoos.Text;
 /**
  * String that uses UTF-8 encoding for all byte operations.
  * @since 0.33
+ * @todo #998:30min Please remove this class and use
+ *  {@link org.cactoos.io.BytesOf} decorator instead of this class.
+ *  Use {@link org.cactoos.text.TextOf} decorator where required with
+ *  combination of {@link org.cactoos.io.BytesOf}.
+ *  The {@link org.cactoos.io.BytesOf} contains several different constructors
+ *  for most of the inputs and supports UTF-8.
  */
 public final class Utf8String implements Bytes, Text {
 
