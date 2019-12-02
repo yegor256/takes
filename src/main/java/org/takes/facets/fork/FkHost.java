@@ -24,10 +24,11 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -46,6 +47,11 @@ import org.takes.rq.RqHeaders;
  *
  * @see TkFork
  * @since 0.32
+ * @todo #998:30min Use {@link org.cactoos.scalar.Ternary} scalar here for
+ *  conditionally evaluated result. Please refere to
+ *  https://github.com/yegor256/cactoos/blob/master/src/main/java/org/cactoos/
+ *  scalar/Ternary.java class for javadoc on how to use this scalar in an
+ *  elegant way.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FkHost extends FkWrap {
@@ -66,6 +72,7 @@ public final class FkHost extends FkWrap {
      * @return Fork
      */
     private static Fork fork(final String host, final Take take) {
+        // @checkstyle AnonInnerLengthCheck (50 lines)
         return new Fork() {
             @Override
             public Opt<Response> route(final Request req) throws Exception {
@@ -73,8 +80,14 @@ public final class FkHost extends FkWrap {
                     new RqHeaders.Base(req)
                 ).single("host");
                 final Opt<Response> rsp;
-                if (new EnglishLowerCase(host).string()
-                    .equals(new EnglishLowerCase(hst).string())) {
+                if (new UncheckedText(
+                    new Lowered(host)
+                ).asString().equals(
+                    new UncheckedText(
+                        new Lowered(hst)
+                    ).asString()
+                )
+                ) {
                     rsp = new Opt.Single<>(take.act(req));
                 } else {
                     rsp = new Opt.Empty<>();
