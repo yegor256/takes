@@ -38,13 +38,9 @@ import org.cactoos.io.TeeInput;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.LengthOf;
-import org.cactoos.scalar.Ternary;
-import org.cactoos.scalar.Unchecked;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.Lowered;
-import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithoutHeader;
@@ -121,24 +117,14 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     @Override
     public Collection<String> getHeaders(final String header) {
-        final String lheader = new UncheckedText(
-            new Lowered(header)
-        ).asString();
-        final String prefix = new Unchecked<>(
-            new Ternary<>(
-                lheader.startsWith("http/1.1"),
-                lheader,
-                new UncheckedText(
-                    new FormattedText("%s:", new Lowered(header))
-                ).asString()
-            )).value();
+        final String prefix = String.format(
+            "%s:", new EnglishLowerCase(header)
+        );
         try {
             return new ListOf<>(
                 new Filtered<>(
-                    hdr -> {
-                        final String loweredhdr = new Lowered(hdr).asString();
-                        return loweredhdr.startsWith(prefix);
-                    },
+                    hdr -> !new EnglishLowerCase(hdr).string()
+                        .startsWith(prefix),
                     this.response.get().head()
                 )
             );

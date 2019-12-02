@@ -24,20 +24,14 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
-import org.cactoos.list.Mapped;
-import org.cactoos.scalar.Ternary;
-import org.cactoos.scalar.Unchecked;
-import org.cactoos.text.IsBlank;
-import org.cactoos.text.Lowered;
-import org.cactoos.text.Split;
-import org.cactoos.text.TextOf;
-import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -60,14 +54,19 @@ import org.takes.rq.RqHeaders;
  * <p>The class is immutable and thread-safe.
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class FkEncoding implements Fork {
+
+    /**
+     * Accept-Encoding separator.
+     */
+    private static final Pattern ENCODING_SEP = Pattern.compile("\\s*,\\s*");
+
     /**
      * Encoding we can deliver (or empty string).
      */
-    private final UncheckedText encoding;
+    private final String encoding;
 
     /**
      * Response to return.
@@ -80,9 +79,7 @@ public final class FkEncoding implements Fork {
      * @param response Response to return
      */
     public FkEncoding(final String enc, final Response response) {
-        this.encoding = new UncheckedText(
-            new Lowered(new Trimmed(new TextOf(enc)))
-        );
+        this.encoding = new EnglishLowerCase(enc.trim()).string();
         this.origin = response;
     }
 
@@ -90,37 +87,25 @@ public final class FkEncoding implements Fork {
     public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> headers =
             new RqHeaders.Base(req).header("Accept-Encoding").iterator();
-        return new Unchecked<Opt<Response>>(
-            new Ternary<>(
-                new IsBlank(this.encoding),
-                () -> new Opt.Single<>(this.origin),
-                new Ternary<>(
-                    headers::hasNext,
-                    () -> {
-                        final List<String> items = new Mapped<>(
-                            text -> new UncheckedText(text).asString(),
-                            new Split(
-                                new UncheckedText(
-                                    new Lowered(
-                                        new Trimmed(
-                                            new TextOf(
-                                                headers.next()
-                                            )
-                                        )
-                                    )),
-                                "\\s*,\\s*"
-                            )
-                        );
-                        return new Ternary<Opt<Response>>(
-                            () -> items.contains(this.encoding.asString()),
-                            () -> new Opt.Single<>(this.origin),
-                            Opt.Empty::new
-                        ).value();
-                    },
-                    Opt.Empty::new
+        final Opt<Response> resp;
+        if (this.encoding.isEmpty()) {
+            resp = new Opt.Single<>(this.origin);
+        } else if (headers.hasNext()) {
+            final Collection<String> items = Arrays.asList(
+                FkEncoding.ENCODING_SEP.split(
+                    new EnglishLowerCase(headers.next().trim())
+                        .string()
                 )
-            )
-        ).value();
+            );
+            if (items.contains(this.encoding)) {
+                resp = new Opt.Single<>(this.origin);
+            } else {
+                resp = new Opt.Empty<>();
+            }
+        } else {
+            resp = new Opt.Empty<>();
+        }
+        return resp;
     }
 
 }

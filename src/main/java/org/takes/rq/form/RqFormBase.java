@@ -35,12 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.Lowered;
-import org.cactoos.text.TextOf;
-import org.cactoos.text.Trimmed;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqForm;
@@ -50,7 +47,6 @@ import org.takes.rq.RqWrap;
 /**
  * Base implementation of {@link RqForm}.
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true)
@@ -80,17 +76,17 @@ public final class RqFormBase extends RqWrap implements RqForm {
     public Iterable<String> param(final CharSequence key)
         throws IOException {
         final List<String> values = this.map().getOrDefault(
-            new Lowered(key.toString()).asString(),
+            new EnglishLowerCase(key.toString()).string(),
             Collections.emptyList()
         );
         final Iterable<String> iter;
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                new FormattedText(
+                new Sprintf(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()
-                ).asString()
+                )
             );
         } else {
             iter = new VerboseIterable<>(
@@ -160,7 +156,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 );
             }
             final String key = RqFormBase.decode(
-                new Lowered(new Trimmed(new TextOf(parts[0].trim()))).asString()
+                new EnglishLowerCase(parts[0].trim()).string()
             );
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<>());

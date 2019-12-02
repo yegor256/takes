@@ -43,10 +43,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.cactoos.text.Lowered;
-import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
@@ -136,7 +135,7 @@ public final class RqMtBase implements RqMultipart {
     @Override
     public Iterable<Request> part(final CharSequence name) {
         final List<Request> values = this.map.getOrDefault(
-            new UncheckedText(new Lowered(name.toString())).asString(),
+            new EnglishLowerCase(name.toString()).string(),
             Collections.emptyList()
         );
         final Iterable<Request> iter;
@@ -184,7 +183,7 @@ public final class RqMtBase implements RqMultipart {
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");
-        if (!new Lowered(header).asString()
+        if (!new EnglishLowerCase(header).string()
             .startsWith("multipart/form-data")) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,

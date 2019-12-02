@@ -31,8 +31,6 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 
@@ -51,13 +49,17 @@ public final class HttpServletResponseFakeTest {
             new RsEmpty()
         );
         sresp.addCookie(new Cookie(name, value));
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Can't add a cookie in servlet response",
-            sresp.getHeaders("set-cookie"),
-            new HasValues<>(
-                "Set-Cookie: foo=bar;"
+            sresp.getHeaders(name),
+            Matchers.hasItem(
+                new FormattedText(
+                    "Set-Cookie: %s=%s;",
+                    name,
+                    value
+                ).asString()
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -111,7 +113,7 @@ public final class HttpServletResponseFakeTest {
         sresp.setStatus(502);
         MatcherAssert.assertThat(
             "Can't set a status in servlet response",
-            sresp.getHeaders("HTTP/1.1"),
+            sresp.getHeaders("Status"),
             Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
         );
     }
@@ -125,7 +127,7 @@ public final class HttpServletResponseFakeTest {
         sresp.sendError(101, "Custom error message");
         MatcherAssert.assertThat(
             "Can't send a error in servlet response",
-            sresp.getHeaders("HTTP/1.1"),
+            sresp.getHeaders("Status"),
             Matchers.hasItem("HTTP/1.1 101 Custom error message")
         );
     }

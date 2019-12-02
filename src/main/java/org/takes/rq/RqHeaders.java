@@ -34,11 +34,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.Lowered;
-import org.cactoos.text.TextOf;
-import org.cactoos.text.Trimmed;
 import org.takes.HttpException;
 import org.takes.Request;
+import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.VerboseList;
 
 /**
@@ -91,7 +89,7 @@ public interface RqHeaders extends Request {
         public List<String> header(final CharSequence key)
             throws IOException {
             final List<String> values = this.map().getOrDefault(
-                new Lowered(key.toString()).asString(),
+                new EnglishLowerCase(key).string(),
                 Collections.emptyList()
             );
             final List<String> list;
@@ -151,9 +149,9 @@ public interface RqHeaders extends Request {
                         String.format("invalid HTTP header: \"%s\"", line)
                     );
                 }
-                final String key = new Lowered(
-                    new Trimmed(new TextOf(parts[0]))
-                ).asString();
+                final String key = new EnglishLowerCase(
+                    parts[0].trim()
+                ).string();
                 if (!map.containsKey(key)) {
                     map.put(key, new LinkedList<>());
                 }

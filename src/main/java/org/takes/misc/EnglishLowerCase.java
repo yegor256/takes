@@ -21,47 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.misc;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.cactoos.iterable.Filtered;
-import org.takes.Response;
-import org.takes.misc.EnglishLowerCase;
+import java.util.Locale;
 
 /**
- * Response decorator, without a header.
- *
- * <p>The class is immutable and thread-safe.
- *
- * @since 0.9
+ * English lower case string representation.
+ * @since 0.33
+ * @todo #918:30min Remove this class in favour of
+ *  {@link org.cactoos.text.Lowered} which does the same. Find all usages of
+ *  this class in the project and replace by suggested
+ *  {@link org.cactoos.text.Lowered} class.
  */
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public final class RsWithoutHeader extends RsWrap {
+public final class EnglishLowerCase {
+
+    /**
+     * String value.
+     */
+    private final String value;
 
     /**
      * Ctor.
-     * @param res Original response
-     * @param name Header name
+     * @param text Text value
      */
-    public RsWithoutHeader(final Response res, final CharSequence name) {
-        super(
-            new ResponseOf(
-                () -> {
-                    final String prefix = String.format(
-                        "%s:", new EnglishLowerCase(name.toString()).string()
-                    );
-                    return new Filtered<>(
-                        header -> {
-                            return !new EnglishLowerCase(header).string()
-                                .startsWith(prefix);
-                        },
-                        res.head()
-                    );
-                },
-                res::body
-            )
-        );
+    public EnglishLowerCase(final CharSequence text) {
+        this(text.toString());
     }
+
+    /**
+     * Ctor.
+     * @param string String value
+     */
+    public EnglishLowerCase(final String string) {
+        this.value = string;
+    }
+
+    /**
+     * Returns string value.
+     * @return String value
+     */
+    public String string() {
+        return this.value.toLowerCase(Locale.ENGLISH);
+    }
+
 }
