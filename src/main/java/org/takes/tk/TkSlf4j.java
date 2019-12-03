@@ -100,31 +100,23 @@ public final class TkSlf4j implements Take {
                 );
             }
             return rsp;
-        } catch (final IOException ex) {
-            if (logger.isInfoEnabled()) {
-                logger.info(
-                    "[{} {}] thrown {}(\"{}\") in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage(),
-                    System.currentTimeMillis() - start
-                );
-            }
+        } catch (final IOException | RuntimeException ex) {
+            doLog(logger, ex, req, start);
             throw ex;
             // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final RuntimeException ex) {
-            if (logger.isInfoEnabled()) {
-                logger.info(
-                    "[{} {}] thrown runtime {}(\"{}\") in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage(),
-                    System.currentTimeMillis() - start
-                );
-            }
-            throw ex;
+        }
+    }
+
+    private void doLog(Logger logger, Exception ex, Request req, long start) throws IOException {
+        if (logger.isInfoEnabled()) {
+            logger.info(
+                "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                new RqMethod.Base(req).method(),
+                new RqHref.Base(req).href(),
+                ex.getClass().getCanonicalName(),
+                ex.getLocalizedMessage(),
+                System.currentTimeMillis() - start
+            );
         }
     }
 }
