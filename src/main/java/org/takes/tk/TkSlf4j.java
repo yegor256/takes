@@ -103,14 +103,13 @@ public final class TkSlf4j implements Take {
         } catch (final IOException | RuntimeException ex) {
             doLog(logger, ex, req, start);
             throw ex;
-            // @checkstyle IllegalCatchCheck (1 line)
         }
     }
 
     private void doLog(Logger logger, Exception ex, Request req, long start) throws IOException {
         if (logger.isInfoEnabled()) {
             logger.info(
-                "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                "[{} {}] thrown {}(\"{}\") in {} ms",
                 new RqMethod.Base(req).method(),
                 new RqHref.Base(req).href(),
                 ex.getClass().getCanonicalName(),
