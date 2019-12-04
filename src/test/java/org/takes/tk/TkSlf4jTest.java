@@ -52,6 +52,11 @@ public final class TkSlf4jTest {
         new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void logsRuntimeException() throws Exception {
+        new TkSlf4j(new TkFailure(new RuntimeException(""))).act(new RqFake());
+    }
+
     /**
      * TkSlf4j can work with {@link TkEmpty}.
      * @throws Exception If some problem inside

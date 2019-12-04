@@ -25,6 +25,10 @@
 package org.takes.tk;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.slf4j.Logger;
@@ -87,35 +91,95 @@ public final class TkSlf4j implements Take {
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws Exception {
         final long start = System.currentTimeMillis();
-        final Logger logger = LoggerFactory.getLogger(this.target);
         try {
             final Response rsp = this.origin.act(req);
-            if (logger.isInfoEnabled()) {
-                logger.info(
-                    "[{} {}] returned \"{}\" in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    rsp.head().iterator().next(),
-                    System.currentTimeMillis() - start
-                );
-            }
+            new TkLoggerReturning(this.target, req, rsp, start).log();
             return rsp;
-        } catch (final IOException | RuntimeException ex) {
-            doLog(logger, ex, req, start);
+        } catch (final IOException ex) {
+            new TkLoggerIOEx(this.target, ex, req, start).log();
+            throw ex;
+        } catch (final RuntimeException ex) {
+            new TkLoggerRuntimeEx(this.target, ex, req, start).log();
             throw ex;
         }
     }
 
-    private void doLog(Logger logger, Exception ex, Request req, long start) throws IOException {
-        if (logger.isInfoEnabled()) {
-            logger.info(
-                "[{} {}] thrown {}(\"{}\") in {} ms",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                ex.getClass().getCanonicalName(),
-                ex.getLocalizedMessage(),
-                System.currentTimeMillis() - start
-            );
+    private interface TkLogger {
+        void log();
+    }
+
+    private static class TkLoggerBase implements TkLogger {
+        private final Logger logger;
+        private final String customArgsPattern;
+        private final Object[] objects;
+
+        public TkLoggerBase(String target, Request request, long start, String customArgsPattern, Object... objects) throws IOException {
+            this.logger = LoggerFactory.getLogger(target);
+            this.customArgsPattern = customArgsPattern;
+            final List<Object> objectList = new ArrayList<>(2 + objects.length + 1);
+            objectList.add(new RqMethod.Base(request).method());
+            objectList.add(new RqHref.Base(request).href());
+            objectList.addAll(Arrays.asList(objects));
+            objectList.add(System.currentTimeMillis() - start);
+            this.objects = objectList.toArray();
+        }
+
+        @Override
+        public void log() {
+            if (logger.isInfoEnabled()) {
+                logger.info("[{} {}] " + customArgsPattern + " in {} ms", this.objects);
+            }
+        }
+    }
+
+    private static class TkLoggerReturning implements TkLogger {
+        private final TkLogger origin;
+
+        public TkLoggerReturning(String target, Request request, Response response, long start) throws IOException {
+            this.origin = new TkLoggerBase(target, request, start,
+                    "returned \"{}\"",
+                    response.head().iterator().next());
+        }
+
+        @Override
+        public void log() {
+            origin.log();
+        }
+    }
+
+    private static class TkLoggerIOEx implements TkLogger {
+        private final TkLogger origin;
+
+        public TkLoggerIOEx(String target, Exception exception, Request request, long start) throws IOException {
+            this.origin = new TkLoggerBase(target,
+                    request,
+                    start,
+                    "thrown {}(\"{}\")",
+                    exception.getClass().getCanonicalName(),
+                    exception.getLocalizedMessage());
+        }
+
+        @Override
+        public void log() {
+            origin.log();
+        }
+    }
+
+    private static class TkLoggerRuntimeEx implements TkLogger {
+        private final TkLogger origin;
+
+        public TkLoggerRuntimeEx(String target, Exception exception, Request request, long start) throws IOException {
+            this.origin = new TkLoggerBase(target,
+                    request,
+                    start,
+                    "thrown runtime {}(\"{}\")",
+                    exception.getClass().getCanonicalName(),
+                    exception.getLocalizedMessage());
+        }
+
+        @Override
+        public void log() {
+            origin.log();
         }
     }
 }
