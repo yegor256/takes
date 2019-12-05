@@ -97,49 +97,93 @@ public final class TkSlf4j implements Take {
             return rsp;
         } catch (final IOException ex) {
             log.append(
-                    "thrown {}(\"{}\")",
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage()
+                "thrown {}(\"{}\")",
+                ex.getClass().getCanonicalName(),
+                ex.getLocalizedMessage()
             );
             throw ex;
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
             log.append(
-                    "thrown runtime {}(\"{}\")",
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage()
+                "thrown runtime {}(\"{}\")",
+                ex.getClass().getCanonicalName(),
+                ex.getLocalizedMessage()
             );
             throw ex;
         }
     }
 
+    /**
+     * The Log that can append several objects in the {}-pattern.
+     */
     private interface TkPatternLog {
+        /**
+         * Here it does it.
+         * @param pattern The {}-pattern.
+         * @param objects Several objects.
+         */
         void append(String pattern, Object... objects);
     }
 
+    /**
+     * Log that appends your objects by pattern,
+     * adding info about http request and response time.
+     */
     private static class TkRqPatternLog implements TkPatternLog {
+        /**
+         * The logger.
+         */
+        @SuppressWarnings("PMD.LoggerIsNotStaticFinal")
         private final Logger logger;
-        private final String rqMethod;
-        private final String rqHref;
-        private final long ms;
 
-        public TkRqPatternLog(String target, Request request, long start) throws IOException {
+        /**
+         * Request method.
+         */
+        private final String method;
+
+        /**
+         * Request href.
+         */
+        private final String href;
+
+        /**
+         * Request time in milliseconds.
+         */
+        private final long duration;
+
+        /**
+         * Log for requests.
+         * @param target Target
+         * @param request Request
+         * @param start Start time in milliseconds
+         * @throws IOException If something wrong getting the request info
+         */
+        TkRqPatternLog(
+            final String target, final Request request, final long start
+        ) throws IOException {
             this.logger = LoggerFactory.getLogger(target);
-            this.rqMethod = new RqMethod.Base(request).method();
-            this.rqHref = new RqHref.Base(request).href().toString();
-            this.ms = System.currentTimeMillis() - start;
+            this.method = new RqMethod.Base(request).method();
+            this.href = new RqHref.Base(request).href().toString();
+            this.duration = System.currentTimeMillis() - start;
         }
 
         @Override
-        public void append(String pattern, Object... objects) {
-            if (logger.isInfoEnabled()) {
-                final List<Object> objectList = new ArrayList<>(2 + objects.length + 1);
-                objectList.add(this.rqMethod);
-                objectList.add(this.rqHref);
-                objectList.addAll(Arrays.asList(objects));
-                objectList.add(this.ms);
-                logger.info("[{} {}] " + pattern + " in {} ms", objectList.toArray());
+        public void append(final String pattern, final Object... objects) {
+            if (this.logger.isInfoEnabled()) {
+                final List<Object> list =
+                    new ArrayList<>(2 + objects.length + 1);
+                list.add(this.method);
+                list.add(this.href);
+                list.addAll(Arrays.asList(objects));
+                list.add(this.duration);
+                this.logger.info(
+                    new StringBuilder("[{} {}] ")
+                        .append(pattern).append(" in {} ms").toString(),
+                    list.toArray()
+                );
             }
         }
+
+        //private static class
     }
 }
