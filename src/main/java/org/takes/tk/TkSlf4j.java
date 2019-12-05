@@ -100,7 +100,7 @@ public final class TkSlf4j implements Take {
                             ex.getClass().getCanonicalName(),
                             ex.getLocalizedMessage());
             throw ex;
-            // @checkstyle 
+            // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
             log.append("thrown runtime {}(\"{}\")",
                             ex.getClass().getCanonicalName(),
