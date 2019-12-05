@@ -90,21 +90,25 @@ public final class TkSlf4j implements Take {
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws Exception {
         final long start = System.currentTimeMillis();
-        TkPatternLog log = new TkRqPatternLog(this.target, req, start);
+        final TkPatternLog log = new TkRqPatternLog(this.target, req, start);
         try {
             final Response rsp = this.origin.act(req);
             log.append("returned \"{}\"", rsp.head().iterator().next());
             return rsp;
         } catch (final IOException ex) {
-            log.append("thrown {}(\"{}\")",
-                            ex.getClass().getCanonicalName(),
-                            ex.getLocalizedMessage());
+            log.append(
+                    "thrown {}(\"{}\")",
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage()
+            );
             throw ex;
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
-            log.append("thrown runtime {}(\"{}\")",
-                            ex.getClass().getCanonicalName(),
-                            ex.getLocalizedMessage());
+            log.append(
+                    "thrown runtime {}(\"{}\")",
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage()
+            );
             throw ex;
         }
     }
