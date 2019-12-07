@@ -27,10 +27,6 @@ package org.takes.tk;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.Func;
-import org.cactoos.Text;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.Joined;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Request;
@@ -59,39 +55,6 @@ public final class TkSlf4j implements Take {
      * Log target.
      */
     private final String target;
-
-    /**
-     * Function to transform Request to string for log
-     */
-    private final Func<Request, String> funcRq =
-        req -> new FormattedText(
-            "[%s %s]",
-            new RqMethod.Base(req).method(),
-            new RqHref.Base(req).href()
-        ).asString();
-
-    /**
-     * Function to transform successful Response to string for log
-     */
-    private final Func<Response, String> funcRs =
-        rsp -> new FormattedText(
-                "\"%s\"", rsp.head().iterator().next()).asString();
-
-    /**
-     * Function to transform Exception to string for log
-     */
-    private final Func<Exception, String> funcEx =
-        ex -> new FormattedText(
-            "%s(\"%s\")",
-            ex.getClass().getCanonicalName(),
-            ex.getLocalizedMessage()
-        ).asString();
-
-    /**
-     * Function to transform duration of request to string for log
-     */
-    private final Func<Long, String> funcMs =
-        dur -> new FormattedText("in %s ms", dur).asString();
 
     /**
      * Ctor.
@@ -129,26 +92,23 @@ public final class TkSlf4j implements Take {
             final Response rsp = this.origin.act(req);
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    new Joined(" ",
-                        funcRq.apply(req),
-                        "returned",
-                        funcRs.apply(rsp),
-                        funcMs.apply(
-                            System.currentTimeMillis() - start)
-                    ).asString()
+                    "[{} {}] returned \"{}\" in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    rsp.head().iterator().next(),
+                    System.currentTimeMillis() - start
                 );
             }
             return rsp;
         } catch (final IOException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    new Joined(" ",
-                        funcRq.apply(req),
-                        "thrown",
-                        funcEx.apply(ex),
-                        funcMs.apply(
-                            System.currentTimeMillis() - start)
-                    ).asString()
+                    "[{} {}] thrown {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
                 );
             }
             throw ex;
@@ -156,13 +116,12 @@ public final class TkSlf4j implements Take {
         } catch (final RuntimeException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    new Joined(" ",
-                        funcRq.apply(req),
-                        "thrown runtime",
-                        funcEx.apply(ex),
-                        funcMs.apply(
-                            System.currentTimeMillis() - start)
-                    ).asString()
+                    "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
                 );
             }
             throw ex;
