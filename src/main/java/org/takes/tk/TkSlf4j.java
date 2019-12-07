@@ -25,9 +25,6 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.slf4j.Logger;
@@ -90,100 +87,44 @@ public final class TkSlf4j implements Take {
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws Exception {
         final long start = System.currentTimeMillis();
-        final TkPatternLog log = new TkRqPatternLog(this.target, req, start);
+        final Logger logger = LoggerFactory.getLogger(this.target);
         try {
             final Response rsp = this.origin.act(req);
-            log.append("returned \"{}\"", rsp.head().iterator().next());
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] returned \"{}\" in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    rsp.head().iterator().next(),
+                    System.currentTimeMillis() - start
+                );
+            }
             return rsp;
         } catch (final IOException ex) {
-            log.append(
-                "thrown {}(\"{}\")",
-                ex.getClass().getCanonicalName(),
-                ex.getLocalizedMessage()
-            );
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] thrown {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
+                );
+            }
             throw ex;
             // @checkstyle IllegalCatchCheck (1 line)
         } catch (final RuntimeException ex) {
-            log.append(
-                "thrown runtime {}(\"{}\")",
-                ex.getClass().getCanonicalName(),
-                ex.getLocalizedMessage()
-            );
-            throw ex;
-        }
-    }
-
-    /**
-     * The Log that can append several objects in the {}-pattern.
-     */
-    private interface TkPatternLog {
-        /**
-         * Here it does it.
-         * @param pattern The {}-pattern.
-         * @param objects Several objects.
-         */
-        void append(String pattern, Object... objects);
-    }
-
-    /**
-     * Log that appends your objects by pattern,
-     * adding info about http request and response time.
-     */
-    private static class TkRqPatternLog implements TkPatternLog {
-        /**
-         * The logger.
-         */
-        @SuppressWarnings("PMD.LoggerIsNotStaticFinal")
-        private final Logger logger;
-
-        /**
-         * Request method.
-         */
-        private final String method;
-
-        /**
-         * Request href.
-         */
-        private final String href;
-
-        /**
-         * Request time in milliseconds.
-         */
-        private final long duration;
-
-        /**
-         * Log for requests.
-         * @param target Target
-         * @param request Request
-         * @param start Start time in milliseconds
-         * @throws IOException If something wrong getting the request info
-         */
-        TkRqPatternLog(
-            final String target, final Request request, final long start
-        ) throws IOException {
-            this.logger = LoggerFactory.getLogger(target);
-            this.method = new RqMethod.Base(request).method();
-            this.href = new RqHref.Base(request).href().toString();
-            this.duration = System.currentTimeMillis() - start;
-        }
-
-        @Override
-        public void append(final String pattern, final Object... objects) {
-            if (this.logger.isInfoEnabled()) {
-                final List<Object> list =
-                    new ArrayList<>(2 + objects.length + 1);
-                list.add(this.method);
-                list.add(this.href);
-                list.addAll(Arrays.asList(objects));
-                list.add(this.duration);
-                this.logger.info(
-                    new StringBuilder("[{} {}] ")
-                        .append(pattern).append(" in {} ms").toString(),
-                    list.toArray()
+            if (logger.isInfoEnabled()) {
+                logger.info(
+                    "[{} {}] thrown runtime {}(\"{}\") in {} ms",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    ex.getClass().getCanonicalName(),
+                    ex.getLocalizedMessage(),
+                    System.currentTimeMillis() - start
                 );
             }
+            throw ex;
         }
-
-        //private static class
     }
 }
