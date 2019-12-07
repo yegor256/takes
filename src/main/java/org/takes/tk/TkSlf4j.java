@@ -27,6 +27,9 @@ package org.takes.tk;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Func;
+import org.cactoos.map.MapEntry;
+import org.cactoos.text.FormattedText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Request;
@@ -88,27 +91,47 @@ public final class TkSlf4j implements Take {
     public Response act(final Request req) throws Exception {
         final long start = System.currentTimeMillis();
         final Logger logger = LoggerFactory.getLogger(this.target);
+        final String rqinfo = new FormattedText(
+            "[%s %s]",
+            new RqMethod.Base(req).method(),
+            new RqHref.Base(req).href().toString()
+        ).asString();
+        final Func<MapEntry<String, Object[]>, String> func =
+            input -> new FormattedText(
+                input.getKey(),
+                input.getValue()
+            ).asString();
         try {
             final Response rsp = this.origin.act(req);
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    "[{} {}] returned \"{}\" in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    rsp.head().iterator().next(),
-                    System.currentTimeMillis() - start
+                    func.apply(
+                        new MapEntry<>(
+                            "%s returned \"%s\" in %s ms",
+                            new Object[]{
+                                rqinfo,
+                                rsp.head().iterator().next(),
+                                System.currentTimeMillis() - start,
+                            }
+                        )
+                    )
                 );
             }
             return rsp;
         } catch (final IOException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    "[{} {}] thrown {}(\"{}\") in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage(),
-                    System.currentTimeMillis() - start
+                    func.apply(
+                        new MapEntry<>(
+                            "%s thrown %s(\"%s\") in %s ms",
+                            new Object[]{
+                                rqinfo,
+                                ex.getClass().getCanonicalName(),
+                                ex.getLocalizedMessage(),
+                                System.currentTimeMillis() - start,
+                            }
+                        )
+                    )
                 );
             }
             throw ex;
@@ -116,12 +139,17 @@ public final class TkSlf4j implements Take {
         } catch (final RuntimeException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    "[{} {}] thrown runtime {}(\"{}\") in {} ms",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    ex.getClass().getCanonicalName(),
-                    ex.getLocalizedMessage(),
-                    System.currentTimeMillis() - start
+                    func.apply(
+                        new MapEntry<>(
+                            "%s thrown runtime %s(\"%s\") in %s ms",
+                            new Object[]{
+                                rqinfo,
+                                ex.getClass().getCanonicalName(),
+                                ex.getLocalizedMessage(),
+                                System.currentTimeMillis() - start,
+                            }
+                        )
+                    )
                 );
             }
             throw ex;
