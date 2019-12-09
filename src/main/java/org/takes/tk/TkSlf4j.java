@@ -28,8 +28,11 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Func;
+import org.cactoos.Scalar;
 import org.cactoos.map.MapEntry;
 import org.cactoos.text.FormattedText;
+import org.cactoos.text.Joined;
+import org.cactoos.text.TextOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Request;
@@ -45,7 +48,7 @@ import org.takes.rq.RqMethod;
  *
  * @since 0.11.2
  */
-@ToString(of = { "origin", "target" })
+@ToString(of = {"origin", "target"})
 @EqualsAndHashCode
 public final class TkSlf4j implements Take {
 
@@ -89,30 +92,28 @@ public final class TkSlf4j implements Take {
     @Override
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws Exception {
-        final long start = System.currentTimeMillis();
+        final Scalar<Long> time = System::currentTimeMillis;
+        final long start = time.value();
         final Logger logger = LoggerFactory.getLogger(this.target);
-        final String rqinfo = new FormattedText(
-            "[%s %s]",
-            new RqMethod.Base(req).method(),
-            new RqHref.Base(req).href().toString()
-        ).asString();
-        final Func<MapEntry<String, Object[]>, String> func =
-            input -> new FormattedText(
-                input.getKey(),
-                input.getValue()
+        final Func<MapEntry<String, Object[]>, String> entry =
+            params -> new Joined(
+                new TextOf(" "),
+                new FormattedText(
+                    "[%s %s]",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href()
+                ),
+                new FormattedText(params.getKey(), params.getValue()),
+                new FormattedText("in %d ms", time.value() - start)
             ).asString();
         try {
             final Response rsp = this.origin.act(req);
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    func.apply(
+                    entry.apply(
                         new MapEntry<>(
-                            "%s returned \"%s\" in %s ms",
-                            new Object[]{
-                                rqinfo,
-                                rsp.head().iterator().next(),
-                                System.currentTimeMillis() - start,
-                            }
+                            "returned \"%s\"",
+                            new Object[]{rsp.head().iterator().next()}
                         )
                     )
                 );
@@ -121,14 +122,12 @@ public final class TkSlf4j implements Take {
         } catch (final IOException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    func.apply(
+                    entry.apply(
                         new MapEntry<>(
-                            "%s thrown %s(\"%s\") in %s ms",
+                            "thrown %s(\"%s\")",
                             new Object[]{
-                                rqinfo,
                                 ex.getClass().getCanonicalName(),
                                 ex.getLocalizedMessage(),
-                                System.currentTimeMillis() - start,
                             }
                         )
                     )
@@ -139,14 +138,12 @@ public final class TkSlf4j implements Take {
         } catch (final RuntimeException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
-                    func.apply(
+                    entry.apply(
                         new MapEntry<>(
-                            "%s thrown runtime %s(\"%s\") in %s ms",
+                            "thrown runtime %s(\"%s\")",
                             new Object[]{
-                                rqinfo,
                                 ex.getClass().getCanonicalName(),
                                 ex.getLocalizedMessage(),
-                                System.currentTimeMillis() - start,
                             }
                         )
                     )
