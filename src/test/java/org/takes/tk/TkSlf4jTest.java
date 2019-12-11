@@ -53,6 +53,15 @@ public final class TkSlf4jTest {
     }
 
     /**
+     * TkSlf4j can log runtime exception.
+     * @throws Exception If some problem inside
+     */
+    @Test(expected = RuntimeException.class)
+    public void logsRuntimeException() throws Exception {
+        new TkSlf4j(new TkFailure(new RuntimeException(""))).act(new RqFake());
+    }
+
+    /**
      * TkSlf4j can work with {@link TkEmpty}.
      * @throws Exception If some problem inside
      */
