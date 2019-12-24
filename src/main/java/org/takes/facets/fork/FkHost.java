@@ -24,6 +24,7 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
@@ -80,14 +81,9 @@ public final class FkHost extends FkWrap {
                     new RqHeaders.Base(req)
                 ).single("host");
                 final Opt<Response> rsp;
-                if (new UncheckedText(
-                    new Lowered(host)
-                ).asString().equals(
-                    new UncheckedText(
-                        new Lowered(hst)
-                    ).asString()
-                )
-                ) {
+                final Text lowhost = new UncheckedText(new Lowered(host));
+                final Text lowhst = new UncheckedText(new Lowered(hst));
+                if (lowhost.asString().equals(lowhst.asString())) {
                     rsp = new Opt.Single<>(take.act(req));
                 } else {
                     rsp = new Opt.Empty<>();

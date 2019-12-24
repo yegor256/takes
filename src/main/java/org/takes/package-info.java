@@ -45,5 +45,9 @@
  * @todo #998:30min Replace the usage of {@link java.lang.String}.trim
  *  in the project and leverage {@link org.cactoos.text.Trimmed} decorator
  *  as it is an elegant object oriented way.
+ * @todo #998:30min Replace the usage of {@link java.lang.String}.startsWith
+ *  in the project and leverage the future functionality described in the issue
+ *  https://github.com/yegor256/cactoos/issues/1265 as it is an elegant object
+ *  oriented way.
  */
 package org.takes;

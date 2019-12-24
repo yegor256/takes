@@ -28,7 +28,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Text;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.Split;
 import org.cactoos.text.UncheckedText;
 
 /**
@@ -131,15 +133,16 @@ final class MediaTypes {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<>();
-        final String[] parts = new UncheckedText(
-            new Lowered(text)
-        ).asString().split(",");
-        for (final String name : parts) {
+        final Iterable<Text> parts = new Split(
+            new UncheckedText(new Lowered(text)),
+            ","
+        );
+        for (final Text part : parts) {
+            final String name = new UncheckedText(part).asString();
             if (!name.isEmpty()) {
                 list.add(new MediaType(name));
             }
         }
         return list;
     }
-
 }

@@ -36,6 +36,12 @@ import org.cactoos.text.UncheckedText;
  *
  * @since 0.6
  * @see org.takes.facets.fork.FkTypes
+ * @todo #998:30min Please use {@link org.cactoos.text.Split} instead of
+ *  {@link String.split} as an elegant way.
+ *  To completely leverage the {@link org.cactoos.text.Split} here, it is
+ *  required for the completion of issue
+ *  https://github.com/yegor256/cactoos/issues/1251 and upgrading to that
+ *  version of Cactoos.
  */
 @ToString
 @EqualsAndHashCode
