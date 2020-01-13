@@ -31,6 +31,10 @@ import java.util.Iterator;
  * @param <T> Type of item
  * @param <K> Type of key
  * @since 0.15.2
+ * @todo #998:30min Please remove this class and also
+ *  {@link org.takes.misc.TransformAction} and leverage one of the followings
+ *  {@link org.cactoos.iterable.Mapped}, {@link org.cactoos.iterator.Mapped},
+ *  {@link org.cactoos.list.Mapped} decorators.
  */
 public final class Transform<T, K> implements Iterable<K> {
 

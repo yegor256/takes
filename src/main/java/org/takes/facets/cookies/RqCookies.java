@@ -28,8 +28,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
@@ -78,7 +79,9 @@ public interface RqCookies extends Request {
             throws IOException {
             final Map<String, String> map = this.map();
             final String value = map.getOrDefault(
-                new EnglishLowerCase(key.toString()).string(),
+                new UncheckedText(
+                    new Lowered(key.toString())
+                ).asString(),
                 ""
             );
             final Iterable<String> iter;
@@ -121,7 +124,9 @@ public interface RqCookies extends Request {
                 for (final String pair : value.split(";")) {
                     final String[] parts = pair.split("=", 2);
                     final String key =
-                        new EnglishLowerCase(parts[0].trim()).string();
+                        new UncheckedText(
+                            new Lowered(parts[0].trim())
+                        ).asString();
                     if (parts.length > 1 && !parts[1].isEmpty()) {
                         map.put(key, parts[1].trim());
                     } else {

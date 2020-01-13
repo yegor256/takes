@@ -39,5 +39,15 @@
  * @checkstyle LineLengthCheck (2 lines)
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  * @see <a href="https://en.wikipedia.org/wiki/Takes_(framework)">wikipedia about Takes framework</a>
+ * @todo #998:30min Replace the usage of {@link java.lang.String}.format
+ *  in the project and leverage {@link org.cactoos.text.FormattedText} decorator
+ *  as it is an elegant object oriented way.
+ * @todo #998:30min Replace the usage of {@link java.lang.String}.trim
+ *  in the project and leverage {@link org.cactoos.text.Trimmed} decorator
+ *  as it is an elegant object oriented way.
+ * @todo #998:30min Replace the usage of {@link java.lang.String}.startsWith
+ *  in the project and leverage the future functionality described in the issue
+ *  https://github.com/yegor256/cactoos/issues/1265 as it is an elegant object
+ *  oriented way.
  */
 package org.takes;

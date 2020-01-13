@@ -35,9 +35,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqForm;
@@ -76,7 +77,9 @@ public final class RqFormBase extends RqWrap implements RqForm {
     public Iterable<String> param(final CharSequence key)
         throws IOException {
         final List<String> values = this.map().getOrDefault(
-            new EnglishLowerCase(key.toString()).string(),
+            new UncheckedText(
+                new Lowered(key.toString())
+            ).asString(),
             Collections.emptyList()
         );
         final Iterable<String> iter;
@@ -156,7 +159,9 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 );
             }
             final String key = RqFormBase.decode(
-                new EnglishLowerCase(parts[0].trim()).string()
+                new UncheckedText(
+                    new Lowered(parts[0])
+                ).asString()
             );
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<>());
