@@ -54,6 +54,10 @@ These two web systems use Takes, and they are open source:
 [wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
 
+Watch these videos to learn more:
+[An Immutable Object-Oriented Web Framework](https://www.youtube.com/watch?v=-Y4XS7ZtQ2g) and
+[Takes, Java Web Framework, Intro](https://www.youtube.com/watch?v=nheD2LNYrpk).
+
 ## Contents
 
 - [Quick Start](#quick-start)
