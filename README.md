@@ -48,8 +48,6 @@ This is what is not supported and won't be supported:
 
  * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html) may help you too.
-
 These two web systems use Takes, and they are open source:
 [wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
@@ -57,6 +55,7 @@ These two web systems use Takes, and they are open source:
 Watch these videos to learn more:
 [An Immutable Object-Oriented Web Framework](https://www.youtube.com/watch?v=-Y4XS7ZtQ2g) and
 [Takes, Java Web Framework, Intro](https://www.youtube.com/watch?v=nheD2LNYrpk).
+This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html) may help you too.
 
 ## Contents
 
