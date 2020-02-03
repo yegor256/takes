@@ -49,10 +49,6 @@ import org.takes.rs.RsWithoutHeader;
  *
  * @since 1.14
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #998:30min The method 'getHeaders' is broken. Please fix that.
- *  The {@link org.takes.servlet.HttpServletResponseFakeTest} can use any
- *  value when using 'getHeaders(param)' method and the tests will pass
- *  successfully. So the tests are invalid as well.
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class HttpServletResponseFake implements HttpServletResponse {
