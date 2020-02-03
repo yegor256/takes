@@ -51,7 +51,7 @@ public final class HttpServletResponseFakeTest {
         sresp.addCookie(new Cookie(name, value));
         MatcherAssert.assertThat(
             "Can't add a cookie in servlet response",
-            sresp.getHeaders(name),
+            sresp.getHeaders("Set-Cookie:"),
             Matchers.hasItem(
                 new FormattedText(
                     "Set-Cookie: %s=%s;",
@@ -113,7 +113,7 @@ public final class HttpServletResponseFakeTest {
         sresp.setStatus(502);
         MatcherAssert.assertThat(
             "Can't set a status in servlet response",
-            sresp.getHeaders("Status"),
+            sresp.getHeaders("HTTP/1.1"),
             Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
         );
     }
@@ -127,7 +127,7 @@ public final class HttpServletResponseFakeTest {
         sresp.sendError(101, "Custom error message");
         MatcherAssert.assertThat(
             "Can't send a error in servlet response",
-            sresp.getHeaders("Status"),
+            sresp.getHeaders("HTTP/1.1"),
             Matchers.hasItem("HTTP/1.1 101 Custom error message")
         );
     }
