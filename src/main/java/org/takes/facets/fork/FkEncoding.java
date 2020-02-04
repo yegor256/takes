@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
@@ -80,7 +82,9 @@ public final class FkEncoding implements Fork {
      * @param response Response to return
      */
     public FkEncoding(final String enc, final Response response) {
-        this.encoding = new UncheckedText(new Lowered(enc.trim())).asString();
+        this.encoding = new UncheckedText(
+            new Lowered(new Trimmed(new TextOf(enc)))
+        ).asString();
         this.origin = response;
     }
 
@@ -95,7 +99,11 @@ public final class FkEncoding implements Fork {
             final Collection<String> items = Arrays.asList(
                 FkEncoding.ENCODING_SEP.split(
                     new UncheckedText(
-                        new Lowered(headers.next().trim())
+                        new Lowered(
+                            new Trimmed(
+                                new TextOf(headers.next())
+                            )
+                        )
                     ).asString()
                 )
             );
