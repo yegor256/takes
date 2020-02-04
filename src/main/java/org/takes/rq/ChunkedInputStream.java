@@ -27,12 +27,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import org.cactoos.scalar.Ternary;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.Sub;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Input stream from chunked coded http request body.
  *
  * @since 0.31.2
  * @checkstyle LineLengthCheck (1 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
@@ -161,20 +168,22 @@ final class ChunkedInputStream extends InputStream {
     private static int chunkSize(final InputStream stream)
         throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
-        final int result;
         final String data = baos.toString(Charset.defaultCharset().name());
         final int separator = data.indexOf(';');
+        final String number = new UncheckedText(
+            new Trimmed(
+                new Unchecked<>(
+                    new Ternary<>(
+                        separator > 0,
+                        new Sub(data, 0, separator),
+                        new TextOf(data)
+                    )
+                ).value()
+            )
+        ).asString();
         try {
-            // @checkstyle MagicNumberCheck (10 lines)
-            if (separator > 0) {
-                result = Integer.parseInt(
-                    data.substring(0, separator).trim(),
-                    16
-                );
-            } else {
-                result = Integer.parseInt(data.trim(), 16);
-            }
-            return result;
+            // @checkstyle MagicNumberCheck (1 line)
+            return Integer.parseInt(number, 16);
         } catch (final NumberFormatException ex) {
             throw new IOException(
                 String.format(
@@ -302,7 +311,7 @@ final class ChunkedInputStream extends InputStream {
      */
     private static State nextQuoted(final InputStream stream, final State state,
         final ByteArrayOutputStream line, final int next)
-            throws IOException {
+        throws IOException {
         final State result;
         switch (next) {
             case '\\':
