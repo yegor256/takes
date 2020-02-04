@@ -26,7 +26,10 @@ package org.takes.facets.fork;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Text;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 
 /**
@@ -151,14 +154,12 @@ final class MediaType implements Comparable<MediaType> {
      * @return The low part of the media type.
      */
     private static String lowPart(final String text) {
-        final String sector;
         final String[] sectors = MediaType.sectors(text);
+        Text sector = new TextOf("");
         if (sectors.length > 1) {
-            sector = sectors[1].trim();
-        } else {
-            sector = "";
+            sector = new Trimmed(new TextOf(sectors[1]));
         }
-        return sector;
+        return new UncheckedText(sector).asString();
     }
 
     /**
