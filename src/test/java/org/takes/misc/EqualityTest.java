@@ -51,7 +51,7 @@ public final class EqualityTest {
     @Test
     public void mustEvaluateFalseEqualityOfTexts() {
         new Assertion<>(
-            "Must evaluate true equality for Texts",
+            "Must evaluate false equality for Texts",
             new Equality<>(
                 new TextOf("John"),
                 new TextOf("Robert")

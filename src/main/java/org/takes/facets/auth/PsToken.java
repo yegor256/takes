@@ -34,6 +34,9 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.signatures.SiHmac;
@@ -117,14 +120,19 @@ public final class PsToken implements Pass {
         String head = "";
         while (headers.hasNext()) {
             final String nexthead = headers.next();
-            if (nexthead.trim().startsWith("Bearer")) {
+            final UncheckedText trimmed = new UncheckedText(
+                new Trimmed(new TextOf(nexthead))
+            );
+            if (trimmed.asString().startsWith("Bearer")) {
                 head = nexthead;
                 break;
             }
         }
         final String dot = "\\.";
         if (!head.isEmpty()) {
-            final String jwt = head.split(" ", 2)[1].trim();
+            final String jwt = new UncheckedText(
+                new Trimmed(new TextOf(head.split(" ", 2)[1]))
+            ).asString();
             final String[] parts = jwt.split(dot);
             final byte[] jwtheader = parts[0].getBytes(
                 Charset.defaultCharset()

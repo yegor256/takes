@@ -23,6 +23,10 @@
  */
 package org.takes.misc;
 
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
+
 /**
  * Action for {@link Transform} to perform actual transformation.
  *
@@ -44,7 +48,9 @@ public interface TransformAction<T, K> {
     final class Trim implements TransformAction<String, String> {
         @Override
         public String transform(final String element) {
-            return element.trim();
+            return new UncheckedText(
+                new Trimmed(new TextOf(element))
+            ).asString();
         }
     }
 

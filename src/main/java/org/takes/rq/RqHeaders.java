@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -153,12 +155,16 @@ public interface RqHeaders extends Request {
                     );
                 }
                 final String key = new UncheckedText(
-                    new Lowered(parts[0].trim())
+                    new Lowered(new Trimmed(new TextOf(parts[0])))
                 ).asString();
                 if (!map.containsKey(key)) {
                     map.put(key, new LinkedList<>());
                 }
-                map.get(key).add(parts[1].trim());
+                map.get(key).add(
+                    new UncheckedText(
+                        new Trimmed(new TextOf(parts[1]))
+                    ).asString()
+                );
             }
             return map;
         }
