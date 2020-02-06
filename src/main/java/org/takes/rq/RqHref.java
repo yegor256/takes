@@ -76,13 +76,17 @@ public interface RqHref extends Request {
                 .header("host").iterator();
             final Iterator<String> protos = new RqHeaders.Base(this)
                 .header("x-forwarded-proto").iterator();
-            Text host = new TextOf("localhost");
+            final Text host;
             if (hosts.hasNext()) {
                 host = new Trimmed(new TextOf(hosts.next()));
+            } else {
+                host = new TextOf("localhost");
             }
-            Text proto = new TextOf("http");
+            final Text proto;
             if (protos.hasNext()) {
                 proto = new Trimmed(new TextOf(protos.next()));
+            } else {
+                proto = new TextOf("http");
             }
             return new Href(
                 String.format(

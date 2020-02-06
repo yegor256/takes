@@ -155,9 +155,11 @@ final class MediaType implements Comparable<MediaType> {
      */
     private static String lowPart(final String text) {
         final String[] sectors = MediaType.sectors(text);
-        Text sector = new TextOf("");
+        final Text sector;
         if (sectors.length > 1) {
             sector = new Trimmed(new TextOf(sectors[1]));
+        } else {
+            sector = new TextOf("");
         }
         return new UncheckedText(sector).asString();
     }
