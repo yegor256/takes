@@ -27,6 +27,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -63,7 +66,11 @@ public final class RqWithHeaders extends RqWrap {
                         head.add(hdr);
                     }
                     for (final CharSequence header : headers) {
-                        head.add(header.toString().trim());
+                        head.add(
+                            new UncheckedText(
+                                new Trimmed(new TextOf(header))
+                            ).asString()
+                        );
                     }
                     return head;
                 },

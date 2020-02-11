@@ -23,44 +23,40 @@
  */
 package org.takes.misc;
 
+import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
-import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
+import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.ScalarHasValue;
 
 /**
- * Action for {@link Transform} to perform actual transformation.
+ * Test case for {@link Equality}.
  *
- * @param <T> Type of item
- * @param <K> Type of key
- * @since 0.15.2
+ * @since 2.0.0
  */
-public interface TransformAction<T, K> {
-    /**
-     * The transform action of the element of type T to K.
-     * @param element Element of the iterable
-     * @return Transformed element
-     */
-    K transform(T element);
+public final class EqualityTest {
 
-    /**
-     * Trimming action used with {@link Transform}.
-     */
-    final class Trim implements TransformAction<String, String> {
-        @Override
-        public String transform(final String element) {
-            return new UncheckedText(
-                new Trimmed(new TextOf(element))
-            ).asString();
-        }
+    @Test
+    public void mustEvaluateTrueEqualityOfTexts() {
+        new Assertion<>(
+            "Must evaluate true equality for Texts",
+            new Equality<>(
+                new Lowered(new TextOf("Hello")),
+                new TextOf("hello")
+            ),
+            new ScalarHasValue<>(true)
+        ).affirm();
     }
 
-    /**
-     * Convert CharSequence into String.
-     */
-    final class ToString implements TransformAction<CharSequence, String> {
-        @Override
-        public String transform(final CharSequence element) {
-            return element.toString();
-        }
+    @Test
+    public void mustEvaluateFalseEqualityOfTexts() {
+        new Assertion<>(
+            "Must evaluate false equality for Texts",
+            new Equality<>(
+                new TextOf("John"),
+                new TextOf("Robert")
+            ),
+            new ScalarHasValue<>(false)
+        ).affirm();
     }
 }

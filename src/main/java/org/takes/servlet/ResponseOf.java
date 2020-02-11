@@ -28,17 +28,24 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpCookie;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import org.cactoos.Text;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.Split;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
+import org.takes.misc.Equality;
 
 /**
  * Takes response as servlet response.
  *
  * @since 2.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class ResponseOf {
     /**
@@ -103,17 +110,21 @@ final class ResponseOf {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static void applyHeader(final HttpServletResponse sresp,
         final String header) {
-        final String[] parts = header.split(":");
-        final String name = parts[0].trim();
-        final String val = parts[1].trim();
-        if ("set-cookie".equals(name.toLowerCase(Locale.getDefault()))) {
+        final Iterator<Text> split = new Split(header, ":").iterator();
+        final UncheckedText name = new UncheckedText(new Trimmed(split.next()));
+        final UncheckedText val = new UncheckedText(new Trimmed(split.next()));
+        if (new Equality<Text>(
+            new TextOf("set-cookie"),
+            new Lowered(name)
+        ).value()
+        ) {
             for (final HttpCookie cck : HttpCookie.parse(header)) {
                 sresp.addCookie(
                     new Cookie(cck.getName(), cck.getValue())
                 );
             }
         } else {
-            sresp.setHeader(name, val);
+            sresp.setHeader(name.asString(), val.asString());
         }
     }
 }

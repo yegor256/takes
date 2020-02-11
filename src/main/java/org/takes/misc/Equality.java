@@ -23,44 +23,54 @@
  */
 package org.takes.misc;
 
-import org.cactoos.text.TextOf;
-import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
+import java.util.Objects;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Unchecked;
 
 /**
- * Action for {@link Transform} to perform actual transformation.
- *
- * @param <T> Type of item
- * @param <K> Type of key
- * @since 0.15.2
+ * Scalar (@link org.cactoos.Scalar} that checks whether two objects
+ *  are equal by content.
+ * This class is just a temporary solution until Cactoos project provides
+ *  similar scalar.
+ * @param <T> Type of items
+ * @since 2.0.0
  */
-public interface TransformAction<T, K> {
-    /**
-     * The transform action of the element of type T to K.
-     * @param element Element of the iterable
-     * @return Transformed element
-     */
-    K transform(T element);
+public final class Equality<T> implements Scalar<Boolean> {
 
     /**
-     * Trimming action used with {@link Transform}.
+     * The first scalar.
      */
-    final class Trim implements TransformAction<String, String> {
-        @Override
-        public String transform(final String element) {
-            return new UncheckedText(
-                new Trimmed(new TextOf(element))
-            ).asString();
-        }
+    private final Scalar<T> first;
+
+    /**
+     * The second scalar.
+     */
+    private final Scalar<T> second;
+
+    /**
+     * Ctor.
+     * @param source The first object to compare.
+     * @param compared The second object to compare.
+     */
+    public Equality(final T source, final T compared) {
+        this(() -> source, () -> compared);
     }
 
     /**
-     * Convert CharSequence into String.
+     * Ctor.
+     * @param source The first scalar to compare.
+     * @param compared The second scalar to compare.
      */
-    final class ToString implements TransformAction<CharSequence, String> {
-        @Override
-        public String transform(final CharSequence element) {
-            return element.toString();
-        }
+    public Equality(final Scalar<T> source, final Scalar<T> compared) {
+        this.first = source;
+        this.second = compared;
+    }
+
+    @Override
+    public Boolean value() {
+        return Objects.equals(
+            new Unchecked<>(this.first).value(),
+            new Unchecked<>(this.second).value()
+        );
     }
 }

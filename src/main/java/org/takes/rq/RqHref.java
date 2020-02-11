@@ -29,6 +29,10 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Href;
@@ -72,19 +76,26 @@ public interface RqHref extends Request {
                 .header("host").iterator();
             final Iterator<String> protos = new RqHeaders.Base(this)
                 .header("x-forwarded-proto").iterator();
-            final String host;
+            final Text host;
             if (hosts.hasNext()) {
-                host = hosts.next().trim();
+                host = new Trimmed(new TextOf(hosts.next()));
             } else {
-                host = "localhost";
+                host = new TextOf("localhost");
             }
-            final String proto;
+            final Text proto;
             if (protos.hasNext()) {
-                proto = protos.next().trim();
+                proto = new Trimmed(new TextOf(protos.next()));
             } else {
-                proto = "http";
+                proto = new TextOf("http");
             }
-            return new Href(String.format("%s://%s%s", proto, host, uri));
+            return new Href(
+                String.format(
+                    "%s://%s%s",
+                    new UncheckedText(proto).asString(),
+                    new UncheckedText(host).asString(),
+                    uri
+                )
+            );
         }
     }
 

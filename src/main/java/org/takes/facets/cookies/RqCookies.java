@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.misc.Sprintf;
@@ -125,10 +127,15 @@ public interface RqCookies extends Request {
                     final String[] parts = pair.split("=", 2);
                     final String key =
                         new UncheckedText(
-                            new Lowered(parts[0].trim())
+                            new Lowered(new Trimmed(new TextOf(parts[0])))
                         ).asString();
                     if (parts.length > 1 && !parts[1].isEmpty()) {
-                        map.put(key, parts[1].trim());
+                        map.put(
+                            key,
+                            new UncheckedText(
+                                new Trimmed(new TextOf(parts[1]))
+                            ).asString()
+                        );
                     } else {
                         map.remove(key);
                     }
