@@ -45,6 +45,7 @@ public final class HttpServletResponseFakeTest {
      * Set-Cookie header name.
      */
     private static final String SET_COOKIE = "Set-Cookie:";
+    
     /**
      * HTTP/1.1 header name.
      */
@@ -60,7 +61,7 @@ public final class HttpServletResponseFakeTest {
         sresp.addCookie(new Cookie(name, value));
         MatcherAssert.assertThat(
             "Can't add a cookie in servlet response",
-            sresp.getHeaders(SET_COOKIE),
+            sresp.getHeaders(HttpServletResponseFakeTest.SET_COOKIE),
             Matchers.hasItem(
                 new FormattedText(
                     "%s %s=%s;",
