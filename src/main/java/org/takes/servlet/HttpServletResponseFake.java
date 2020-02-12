@@ -122,10 +122,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
         );
         try {
             return new Filtered<>(
-                hdr -> {
-                    final Lowered low = new Lowered(hdr);
-                    return low.asString().startsWith(prefix);
-                },
+                hdr -> new Lowered(hdr).asString().startsWith(prefix),
                 this.response.get().head()
             );
         } catch (final IOException ex) {

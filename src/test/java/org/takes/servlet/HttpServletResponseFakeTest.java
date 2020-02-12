@@ -41,6 +41,9 @@ import org.takes.rs.RsWithHeader;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HttpServletResponseFakeTest {
+    private static final String SET_COOKIE = "Set-Cookie:";
+    private static final String HTTP_1_1 = "HTTP/1.1";
+
     @Test
     public void cookie() throws Exception {
         final String name = "foo";
@@ -51,10 +54,11 @@ public final class HttpServletResponseFakeTest {
         sresp.addCookie(new Cookie(name, value));
         MatcherAssert.assertThat(
             "Can't add a cookie in servlet response",
-            sresp.getHeaders("Set-Cookie:"),
+            sresp.getHeaders(SET_COOKIE),
             Matchers.hasItem(
                 new FormattedText(
-                    "Set-Cookie: %s=%s;",
+                    "%s %s=%s;",
+                    SET_COOKIE,
                     name,
                     value
                 ).asString()
@@ -113,7 +117,7 @@ public final class HttpServletResponseFakeTest {
         sresp.setStatus(502);
         MatcherAssert.assertThat(
             "Can't set a status in servlet response",
-            sresp.getHeaders("HTTP/1.1"),
+            sresp.getHeaders(HTTP_1_1),
             Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
         );
     }
