@@ -45,7 +45,7 @@ public final class HttpServletResponseFakeTest {
      * Set-Cookie header name.
      */
     private static final String SET_COOKIE = "Set-Cookie:";
-    
+
     /**
      * HTTP/1.1 header name.
      */
