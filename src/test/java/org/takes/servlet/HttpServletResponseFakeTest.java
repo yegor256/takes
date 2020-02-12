@@ -41,7 +41,13 @@ import org.takes.rs.RsWithHeader;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HttpServletResponseFakeTest {
+    /**
+     * Set-Cookie header name.
+     */
     private static final String SET_COOKIE = "Set-Cookie:";
+    /**
+     * HTTP/1.1 header name.
+     */
     private static final String HTTP_1_1 = "HTTP/1.1";
 
     @Test
@@ -58,7 +64,7 @@ public final class HttpServletResponseFakeTest {
             Matchers.hasItem(
                 new FormattedText(
                     "%s %s=%s;",
-                    SET_COOKIE,
+                    HttpServletResponseFakeTest.SET_COOKIE,
                     name,
                     value
                 ).asString()
@@ -117,7 +123,7 @@ public final class HttpServletResponseFakeTest {
         sresp.setStatus(502);
         MatcherAssert.assertThat(
             "Can't set a status in servlet response",
-            sresp.getHeaders(HTTP_1_1),
+            sresp.getHeaders(HttpServletResponseFakeTest.HTTP_1_1),
             Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
         );
     }
