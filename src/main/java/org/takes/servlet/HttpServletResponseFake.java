@@ -32,14 +32,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import org.cactoos.collection.Filtered;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
-import org.cactoos.iterable.Filtered;
-import org.cactoos.list.ListOf;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.Lowered;
-import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsWithHeader;
@@ -51,10 +49,6 @@ import org.takes.rs.RsWithoutHeader;
  *
  * @since 1.14
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @todo #998:30min The method 'getHeaders' is broken. Please fix that.
- *  The {@link org.takes.servlet.HttpServletResponseFakeTest} can use any
- *  value when using 'getHeaders(param)' method and the tests will pass
- *  successfully. So the tests are invalid as well.
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class HttpServletResponseFake implements HttpServletResponse {
@@ -123,18 +117,13 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     @Override
     public Collection<String> getHeaders(final String header) {
         final String prefix = String.format(
-            "%s:",
-            new UncheckedText(
-                new Lowered(header)
-            ));
+            "%s",
+            new Lowered(header)
+        );
         try {
-            return new ListOf<>(
-                new Filtered<>(
-                    hdr -> !new UncheckedText(
-                        new Lowered(hdr)
-                    ).asString().startsWith(prefix),
-                    this.response.get().head()
-                )
+            return new Filtered<>(
+                hdr -> new Lowered(hdr).asString().startsWith(prefix),
+                this.response.get().head()
             );
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
