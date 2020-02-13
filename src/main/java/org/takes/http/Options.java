@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
-import org.takes.misc.Utf8InputStreamContent;
+import org.cactoos.io.ReaderOf;
 import org.takes.misc.Utf8OutputStreamContent;
 
 /**
@@ -94,10 +94,7 @@ final class Options {
         } else {
             final File file = new File(port);
             if (file.exists()) {
-                try (Reader reader = new Utf8InputStreamContent(
-                    Files.newInputStream(file.toPath())
-                    )
-                ) {
+                try (Reader reader = new ReaderOf(file.toPath())) {
                     // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
                     final int length = reader.read(chars);
