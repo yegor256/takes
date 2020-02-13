@@ -31,6 +31,8 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 
@@ -49,18 +51,18 @@ public final class HttpServletResponseFakeTest {
     /**
      * HTTP/1.1 header name.
      */
-    private static final String HTTP_1_1 = "HTTP/1.1";
+    private static final String VERSION = "HTTP/1.1";
 
     /**
      * HTTP/1.1 502 bad gateway.
      */
-    private static final String HTTP_1_1_502 = "HTTP/1.1 502 Bad Gateway";
+    private static final String ERROR = "HTTP/1.1 502 Bad Gateway";
 
     /**
      * HTTP/1.1 101 custom error message.
      */
-    private static final String HTTP_1_1_101 =
-        "HTTP/1.1 101 Custom error message";
+    private static final String INFO =
+        "HTTP/1.1 101 Switching Protocol";
 
     @Test
     public void cookie() throws Exception {
@@ -133,13 +135,13 @@ public final class HttpServletResponseFakeTest {
         );
         // @checkstyle MagicNumber (1 line)
         sresp.setStatus(502);
-        MatcherAssert.assertThat(
+        new Assertion<>(
             "Can't set a status in servlet response",
-            sresp.getHeaders(HttpServletResponseFakeTest.HTTP_1_1),
-            Matchers.hasItem(
-                HttpServletResponseFakeTest.HTTP_1_1_502
+            sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
+            new HasValues<>(
+                HttpServletResponseFakeTest.ERROR
             )
-        );
+        ).affirm();
     }
 
     @Test
@@ -148,13 +150,13 @@ public final class HttpServletResponseFakeTest {
             new RsEmpty()
         );
         // @checkstyle MagicNumber (1 line)
-        sresp.sendError(101, "Custom error message");
-        MatcherAssert.assertThat(
+        sresp.sendError(101, "Switching Protocol");
+        new Assertion<>(
             "Can't send a error in servlet response",
-            sresp.getHeaders(HttpServletResponseFakeTest.HTTP_1_1),
-            Matchers.hasItem(
-                HttpServletResponseFakeTest.HTTP_1_1_101
+            sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
+            new HasValues<>(
+                HttpServletResponseFakeTest.INFO
             )
-        );
+        ).affirm();
     }
 }
