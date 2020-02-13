@@ -36,8 +36,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.cactoos.io.ReaderOf;
 import org.takes.Scalar;
-import org.takes.misc.Utf8InputStreamContent;
 import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
@@ -164,7 +164,7 @@ public final class RsVelocity extends RsWrap {
             new VelocityContext(params),
             writer,
             "",
-            new Utf8InputStreamContent(template)
+            new ReaderOf(template)
         );
         writer.close();
         return new ByteArrayInputStream(baos.toByteArray());

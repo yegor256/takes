@@ -38,8 +38,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.ReaderOf;
 import org.takes.Response;
-import org.takes.misc.Utf8InputStreamContent;
 import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
 
@@ -143,17 +143,12 @@ public final class RsXslt extends RsWrap {
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXslt.stylesheet(
-            factory, new StreamSource(
-                new Utf8InputStreamContent(
-                    new ByteArrayInputStream(new Utf8String(input).asBytes())
-                )
-            )
+            factory,
+            new StreamSource(new ReaderOf(input))
         );
         RsXslt.transformer(factory, xsl).transform(
             new StreamSource(
-                new Utf8InputStreamContent(
-                    new ByteArrayInputStream(new Utf8String(input).asBytes())
-                )
+                new ReaderOf(input)
             ),
             new StreamResult(
                 new Utf8OutputStreamContent(baos)
@@ -263,7 +258,7 @@ public final class RsXslt extends RsWrap {
                 }
             }
             return new StreamSource(
-                new Utf8InputStreamContent(input)
+                new ReaderOf(input)
             );
         }
     }
