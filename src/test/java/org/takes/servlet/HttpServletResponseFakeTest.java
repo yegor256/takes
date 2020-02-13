@@ -51,6 +51,17 @@ public final class HttpServletResponseFakeTest {
      */
     private static final String HTTP_1_1 = "HTTP/1.1";
 
+    /**
+     * HTTP/1.1 502 bad gateway.
+     */
+    private static final String HTTP_1_1_502 = "HTTP/1.1 502 Bad Gateway";
+
+    /**
+     * HTTP/1.1 101 custom error message.
+     */
+    private static final String HTTP_1_1_101 =
+        "HTTP/1.1 101 Custom error message";
+
     @Test
     public void cookie() throws Exception {
         final String name = "foo";
@@ -125,7 +136,9 @@ public final class HttpServletResponseFakeTest {
         MatcherAssert.assertThat(
             "Can't set a status in servlet response",
             sresp.getHeaders(HttpServletResponseFakeTest.HTTP_1_1),
-            Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
+            Matchers.hasItem(
+                HttpServletResponseFakeTest.HTTP_1_1_502
+            )
         );
     }
 
@@ -138,8 +151,10 @@ public final class HttpServletResponseFakeTest {
         sresp.sendError(101, "Custom error message");
         MatcherAssert.assertThat(
             "Can't send a error in servlet response",
-            sresp.getHeaders("HTTP/1.1"),
-            Matchers.hasItem("HTTP/1.1 101 Custom error message")
+            sresp.getHeaders(HttpServletResponseFakeTest.HTTP_1_1),
+            Matchers.hasItem(
+                HttpServletResponseFakeTest.HTTP_1_1_101
+            )
         );
     }
 }
