@@ -33,7 +33,6 @@ import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.takes.misc.Utf8String;
 
 /**
  * Test case for {@link Body.Url}.
@@ -50,7 +49,7 @@ public final class BodyUrlTest {
     @Test
     public void returnsCorrectInputWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
-            final Bytes body = new Utf8String("URL returnsCorrectInput!");
+            final Bytes body = new BytesOf("URL returnsCorrectInput!");
             try (OutputStream outStream =
                 new OutputTo(file.value()).stream()) {
                 new LengthOf(
@@ -73,7 +72,7 @@ public final class BodyUrlTest {
     @Test
     public void returnsCorrectLengthWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
-            final Bytes body = new Utf8String("URL returnsCorrectLength!");
+            final Bytes body = new BytesOf("URL returnsCorrectLength!");
             try (OutputStream outStream =
                 new OutputTo(file.value()).stream()) {
                 new LengthOf(

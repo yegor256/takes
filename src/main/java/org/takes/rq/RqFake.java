@@ -29,7 +29,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.takes.misc.Utf8String;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 
 /**
  * Fake request (for unit tests).
@@ -88,7 +89,11 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final CharSequence body) {
-        this(head, new Utf8String(body.toString()).asBytes());
+        this(
+            head,
+            new UncheckedBytes(
+                new BytesOf(body.toString())
+            ).asBytes());
     }
 
     /**

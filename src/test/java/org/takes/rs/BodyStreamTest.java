@@ -29,7 +29,6 @@ import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.takes.misc.Utf8String;
 
 /**
  * Test case for {@link Body.Stream}.
@@ -45,7 +44,7 @@ public final class BodyStreamTest {
     @Test
     public void returnsCorrectInputWithStream() throws Exception {
         final byte[] bytes =
-            new Utf8String("Stream returnsCorrectInput!").asBytes();
+            new BytesOf("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
             "Body content of Body.Stream doesn't provide the correct bytes",
             new BytesOf(
@@ -62,7 +61,7 @@ public final class BodyStreamTest {
     @Test
     public void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =
-            new Utf8String("Stream returnsCorrectLength!").asBytes();
+            new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
             "Body content of Body.Stream doesn't have the correct length",
             new LengthOf(

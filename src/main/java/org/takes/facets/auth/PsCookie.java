@@ -27,6 +27,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
+import org.cactoos.text.TextOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.codecs.Codec;
@@ -34,7 +37,6 @@ import org.takes.facets.cookies.RqCookies;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.Expires;
 import org.takes.misc.Opt;
-import org.takes.misc.Utf8String;
 
 /**
  * Pass via cookie information.
@@ -42,6 +44,7 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsCookie implements Pass {
@@ -100,7 +103,9 @@ public final class PsCookie implements Pass {
         if (cookies.hasNext()) {
             user = new Opt.Single<>(
                 this.codec.decode(
-                    new Utf8String(cookies.next()).asBytes()
+                    new UncheckedBytes(
+                        new BytesOf(cookies.next())
+                    ).asBytes()
                 )
             );
         }
@@ -114,7 +119,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new Utf8String(this.codec.encode(idt)).asString();
+            text = new TextOf(this.codec.encode(idt)).asString();
         }
         return new RsWithCookie(
             res, this.cookie, text,

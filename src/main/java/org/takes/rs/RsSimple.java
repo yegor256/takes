@@ -23,11 +23,10 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.misc.Utf8String;
+import org.cactoos.io.InputStreamOf;
 
 /**
  * Simple response.
@@ -48,7 +47,7 @@ public final class RsSimple extends RsWrap {
     public RsSimple(final Iterable<String> head, final String body) {
         this(
             head,
-            new ByteArrayInputStream(new Utf8String(body).asBytes())
+            new InputStreamOf(body)
         );
     }
 

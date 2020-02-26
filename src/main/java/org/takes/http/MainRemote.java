@@ -33,8 +33,11 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
+import org.cactoos.io.BytesOf;
+import org.cactoos.scalar.NumberOf;
+import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
-import org.takes.misc.Utf8String;
 
 /**
  * Front remote control.
@@ -147,7 +150,7 @@ public final class MainRemote {
         while (!file.exists()) {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
-        final int port;
+        final Scalar<Number> port;
         try (InputStream input = Files.newInputStream(file.toPath())) {
             // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
@@ -156,11 +159,9 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = Integer.parseInt(
-                new Trimmed(new Utf8String(buf)).asString()
-            );
+            port = new NumberOf(new Trimmed(new TextOf(new BytesOf(buf))));
         }
-        return port;
+        return port.value().intValue();
     }
 
     /**

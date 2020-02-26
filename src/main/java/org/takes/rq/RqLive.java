@@ -30,10 +30,11 @@ import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.misc.Opt;
-import org.takes.misc.Utf8String;
 
 /**
  * Live request.
@@ -41,6 +42,7 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLive extends RqWrap {
@@ -110,7 +112,7 @@ public final class RqLive extends RqWrap {
                 String.format(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new Utf8String(baos.toByteArray()).asString()
+                    new TextOf(baos.toByteArray()).asString()
                 )
             );
         }
@@ -127,7 +129,11 @@ public final class RqLive extends RqWrap {
         Opt<String> header = new Opt.Empty<>();
         if (data.get() != ' ' && data.get() != '\t') {
             header = new Opt.Single<>(
-                new Utf8String(baos.toByteArray()).asString()
+                new UncheckedText(
+                    new TextOf(
+                        baos.toByteArray()
+                    )
+                ).asString()
             );
             baos.reset();
         }
@@ -140,11 +146,11 @@ public final class RqLive extends RqWrap {
      * @param baos Byte stream containing read header
      * @param position Header line number
      * @return A legal character
-     * @throws HttpException if character is illegal
+     * @throws IOException if character is illegal
      */
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
-        throws HttpException {
+        throws IOException {
         // @checkstyle MagicNumber (1 line)
         if ((data.get() > 0x7f || data.get() < 0x20)
             && data.get() != '\t') {
@@ -154,7 +160,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new Utf8String(baos.toByteArray()).asString()
+                    new TextOf(baos.toByteArray()).asString()
                 )
             );
         }

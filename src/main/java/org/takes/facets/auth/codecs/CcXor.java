@@ -26,8 +26,9 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.Utf8String;
 
 /**
  * XOR codec.
@@ -55,7 +56,11 @@ public final class CcXor implements Codec {
      * @param key Secret key for encoding
      */
     public CcXor(final Codec codec, final String key) {
-        this(codec, new Utf8String(key).asBytes());
+        this(
+            codec,
+            new UncheckedBytes(
+                new BytesOf(key)
+            ).asBytes());
     }
 
     /**

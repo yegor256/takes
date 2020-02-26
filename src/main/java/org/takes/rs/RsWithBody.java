@@ -29,8 +29,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.Response;
-import org.takes.misc.Utf8String;
 
 /**
  * Response decorator, with body.
@@ -90,7 +91,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, new Utf8String(body.toString()).asBytes());
+        this(res, new UncheckedBytes(new BytesOf(body)).asBytes());
     }
 
     /**
