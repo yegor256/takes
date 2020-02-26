@@ -75,6 +75,7 @@ import org.takes.rq.RqMultipart;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @lombok.EqualsAndHashCode(of = "origin")
+@SuppressWarnings("PMD.ExcessiveImports")
 public final class RqMtBase implements RqMultipart {
     /**
      * The encoding used to create the request.

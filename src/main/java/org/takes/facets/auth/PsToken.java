@@ -123,11 +123,10 @@ public final class PsToken implements Pass {
         Opt<Identity> user = new Opt.Empty<>();
         final UncheckedText head = new Unchecked<>(
             new FirstOf<>(
-                text ->
-                    new StartsWith(
-                        new Trimmed(text),
-                        new TextOf("Bearer")
-                    ).value(),
+                text -> new StartsWith(
+                    new Trimmed(text),
+                    new TextOf("Bearer")
+                ).value(),
                 new Mapped<>(
                     UncheckedText::new,
                     new RqHeaders.Base(req).header(this.header)

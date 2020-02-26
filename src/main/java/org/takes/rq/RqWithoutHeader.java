@@ -51,16 +51,15 @@ public final class RqWithoutHeader extends RqWrap {
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new RequestOf(
                 () -> new Filtered<>(
-                    header ->
-                        new Not(
-                            new StartsWith(
-                                new Lowered(header),
-                                new FormattedText(
-                                    "%s:",
-                                    new Lowered(name.toString())
-                                )
+                    header -> new Not(
+                        new StartsWith(
+                            new Lowered(header),
+                            new FormattedText(
+                                "%s:",
+                                new Lowered(name.toString())
                             )
-                        ).value(),
+                        )
+                    ).value(),
                     req.head()
                 ),
                 req::body

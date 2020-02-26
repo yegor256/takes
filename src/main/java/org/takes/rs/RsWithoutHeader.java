@@ -51,21 +51,18 @@ public final class RsWithoutHeader extends RsWrap {
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
             new ResponseOf(
-                () -> {
-                    return new Filtered<>(
-                        header ->
-                            new Not(
-                                new StartsWith(
-                                    new Lowered(header),
-                                    new FormattedText(
-                                        "%s:",
-                                        new Lowered(name.toString())
-                                    )
-                                )
-                            ).value(),
-                        res.head()
-                    );
-                },
+                () -> new Filtered<>(
+                    header -> new Not(
+                        new StartsWith(
+                            new Lowered(header),
+                            new FormattedText(
+                                "%s:",
+                                new Lowered(name.toString())
+                            )
+                        )
+                    ).value(),
+                    res.head()
+                ),
                 res::body
             )
         );
