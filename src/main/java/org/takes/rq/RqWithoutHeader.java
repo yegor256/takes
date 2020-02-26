@@ -24,10 +24,11 @@
 package org.takes.rq;
 
 import lombok.EqualsAndHashCode;
-import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.scalar.Not;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.StartsWith;
 import org.takes.Request;
 
 /**
@@ -49,17 +50,19 @@ public final class RqWithoutHeader extends RqWrap {
         super(
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new RequestOf(
-                () -> {
-                    final Text prefix = new FormattedText(
-                        "%s:",
-                        new Lowered(name.toString()).asString()
-                    );
-                    return new Filtered<>(
-                        header -> !new Lowered(header).asString()
-                            .startsWith(prefix.asString()),
-                        req.head()
-                    );
-                },
+                () -> new Filtered<>(
+                    header ->
+                        new Not(
+                            new StartsWith(
+                                new Lowered(header),
+                                new FormattedText(
+                                    "%s:",
+                                    new Lowered(name.toString())
+                                )
+                            )
+                        ).value(),
+                    req.head()
+                ),
                 req::body
             )
         );
