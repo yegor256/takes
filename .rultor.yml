@@ -1,15 +1,12 @@
-docker:
-  image: yegor256/rultor-image
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
+docker:
+  as_root: true
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
-env:
-  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
 install: |
   sudo locale-gen en_US en_US.UTF-8
   sudo dpkg-reconfigure locales
