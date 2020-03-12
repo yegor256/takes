@@ -38,6 +38,8 @@ import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.StartsWith;
+import org.cactoos.text.TextOf;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsWithHeader;
@@ -122,7 +124,9 @@ public final class HttpServletResponseFake implements HttpServletResponse {
         );
         try {
             return new Filtered<>(
-                hdr -> new Lowered(hdr).asString().startsWith(prefix),
+                hdr -> new StartsWith(
+                    new Lowered(hdr), new TextOf(prefix)
+                ).value(),
                 this.response.get().head()
             );
         } catch (final IOException ex) {

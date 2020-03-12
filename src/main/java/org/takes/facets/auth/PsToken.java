@@ -39,6 +39,7 @@ import org.cactoos.scalar.FirstOf;
 import org.cactoos.scalar.Not;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.IsBlank;
+import org.cactoos.text.StartsWith;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -122,7 +123,10 @@ public final class PsToken implements Pass {
         Opt<Identity> user = new Opt.Empty<>();
         final UncheckedText head = new Unchecked<>(
             new FirstOf<>(
-                text -> new Trimmed(text).asString().startsWith("Bearer"),
+                text -> new StartsWith(
+                    new Trimmed(text),
+                    new TextOf("Bearer")
+                ).value(),
                 new Mapped<>(
                     UncheckedText::new,
                     new RqHeaders.Base(req).header(this.header)

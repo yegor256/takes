@@ -26,8 +26,10 @@ package org.takes.rs;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.scalar.Not;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
-import org.cactoos.text.UncheckedText;
+import org.cactoos.text.StartsWith;
 import org.takes.Response;
 
 /**
@@ -49,19 +51,18 @@ public final class RsWithoutHeader extends RsWrap {
     public RsWithoutHeader(final Response res, final CharSequence name) {
         super(
             new ResponseOf(
-                () -> {
-                    final String prefix = String.format(
-                        "%s:", new UncheckedText(
-                            new Lowered(name.toString())
-                        ).asString()
-                    );
-                    return new Filtered<>(
-                        header -> !new UncheckedText(
-                            new Lowered(header)
-                        ).asString().startsWith(prefix),
-                        res.head()
-                    );
-                },
+                () -> new Filtered<>(
+                    header -> new Not(
+                        new StartsWith(
+                            new Lowered(header),
+                            new FormattedText(
+                                "%s:",
+                                new Lowered(name.toString())
+                            )
+                        )
+                    ).value(),
+                    res.head()
+                ),
                 res::body
             )
         );

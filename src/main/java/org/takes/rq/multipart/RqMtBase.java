@@ -43,7 +43,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.StartsWith;
+import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -72,6 +75,7 @@ import org.takes.rq.RqMultipart;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @lombok.EqualsAndHashCode(of = "origin")
+@SuppressWarnings("PMD.ExcessiveImports")
 public final class RqMtBase implements RqMultipart {
     /**
      * The encoding used to create the request.
@@ -186,9 +190,13 @@ public final class RqMtBase implements RqMultipart {
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");
-        if (!new UncheckedText(
-            new Lowered(header)
-        ).asString().startsWith("multipart/form-data")) {
+        final Unchecked<Boolean> multipart = new Unchecked<>(
+            new StartsWith(
+                new Lowered(header),
+                new TextOf("multipart/form-data")
+            )
+        );
+        if (!multipart.value()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
