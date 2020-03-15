@@ -13,7 +13,6 @@ install: |
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
   sudo gem install --no-rdoc --no-ri pdd
-  sudo gem install --no-rdoc --no-ri est
   sudo gem install --no-rdoc --no-ri xcop
 architect:
 - paulodamaso
@@ -35,6 +34,7 @@ merge:
     pdd --source=$(pwd) --verbose --file=/dev/null
 deploy:
   script: |
+    sudo gem install --no-rdoc --no-ri est
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true
       do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
