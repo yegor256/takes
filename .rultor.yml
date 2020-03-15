@@ -1,18 +1,14 @@
-docker:
-  image: yegor256/rultor-image
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
+docker:
+  image: g4s8/rultor:alpine3.10
+  as_root: true
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
-env:
-  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
 install: |
-  sudo locale-gen en_US en_US.UTF-8
-  sudo dpkg-reconfigure locales
   export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
@@ -33,7 +29,7 @@ merge:
       echo "waiting for AppVeyor build ${version}: ${status}"
       sleep 5s
     done
-    mvn clean install -Ptakes -Pqulice --errors --settings ../settings.xml
+    mvn clean install -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
     mvn clean
     pdd --source=$(pwd) --verbose --file=/dev/null
@@ -56,4 +52,4 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Ptakes -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    mvn clean deploy -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
