@@ -33,11 +33,13 @@ import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.cactoos.list.ListOf;
 import org.cactoos.text.Split;
+import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
-import org.takes.misc.Utf8String;
 
 /**
  * Plain codec.
@@ -45,6 +47,7 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class CcPlain implements Codec {
@@ -62,14 +65,16 @@ public final class CcPlain implements Codec {
                 .append('=')
                 .append(URLEncoder.encode(ent.getValue(), encoding));
         }
-        return new Utf8String(text.toString()).asBytes();
+        return new UncheckedBytes(
+            new BytesOf(text)
+        ).asBytes();
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
         final List<Text> parts = new ListOf<>(
             new Split(
-                new Utf8String(bytes), ";"
+                new TextOf(new BytesOf(bytes)), ";"
             )
         );
         final Map<String, String> map = new HashMap<>(parts.size());

@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,10 +37,10 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.takes.Response;
 import org.takes.misc.Utf8OutputStreamContent;
-import org.takes.misc.Utf8String;
 
 /**
  * Response that converts XML into HTML using attached XSL stylesheet.
@@ -154,9 +153,7 @@ public final class RsXslt extends RsWrap {
                 new Utf8OutputStreamContent(baos)
             )
         );
-        return new ByteArrayInputStream(
-            new Utf8String(baos.toByteArray()).asBytes()
-        );
+        return new InputStreamOf(baos.toByteArray());
     }
 
     /**

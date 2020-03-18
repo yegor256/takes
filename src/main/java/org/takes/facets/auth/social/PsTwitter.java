@@ -34,13 +34,14 @@ import java.util.Map;
 import javax.json.JsonObject;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
 import org.takes.misc.Opt;
-import org.takes.misc.Utf8String;
 
 /**
  * Twitter OAuth landing/callback page.
@@ -50,7 +51,7 @@ import org.takes.misc.Utf8String;
  * @since 0.16
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@EqualsAndHashCode(of = { "app", "key" })
+@EqualsAndHashCode(of = {"app", "key"})
 public final class PsTwitter implements Pass {
 
     /**
@@ -165,7 +166,7 @@ public final class PsTwitter implements Pass {
      * Make identity from JSON object.
      * @param json JSON received from Twitter
      * @return Identity found
-    */
+     */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
         props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
@@ -192,8 +193,10 @@ public final class PsTwitter implements Pass {
                 "Authorization",
                 String.format(
                     "Basic %s", DatatypeConverter.printBase64Binary(
-                        new Utf8String(
-                            String.format("%s:%s", this.app, this.key)
+                        new UncheckedBytes(
+                            new BytesOf(
+                                String.format("%s:%s", this.app, this.key)
+                            )
                         ).asBytes()
                     )
                 )

@@ -34,6 +34,7 @@ import java.net.SocketException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
@@ -46,7 +47,6 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.misc.Utf8String;
 import org.takes.rq.RqGreedy;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqMethod;
@@ -224,9 +224,7 @@ public final class FtBasicTest {
                 new FkRegex(
                     FtBasicTest.ROOT_PATH,
                     new RsText(
-                        new ByteArrayInputStream(
-                            new Utf8String(result).asBytes()
-                        )
+                        new InputStreamOf(result)
                     )
                 )
             )
@@ -261,9 +259,7 @@ public final class FtBasicTest {
                 new FkRegex(
                     FtBasicTest.ROOT_PATH,
                     new RsHtml(
-                        new ByteArrayInputStream(
-                            new Utf8String(result).asBytes()
-                        )
+                        new InputStreamOf(result)
                     )
                 )
             )

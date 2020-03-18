@@ -25,9 +25,9 @@ package org.takes.facets.auth;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.TextOf;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.misc.Utf8String;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
@@ -110,7 +110,7 @@ public final class RqWithAuth extends RqWrap {
         return new RqWithHeader(
             req,
             header,
-            new Utf8String(new CcPlain().encode(identity)).asString()
+            new TextOf(new CcPlain().encode(identity)).asString()
         );
     }
 

@@ -25,8 +25,9 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.Request;
-import org.takes.misc.Utf8String;
 
 /**
  * Request with body.
@@ -47,7 +48,9 @@ public final class RqWithBody extends RqWrap {
             new RequestOf(
                 req::head,
                 () -> new ByteArrayInputStream(
-                    new Utf8String(bdy.toString()).asBytes()
+                    new UncheckedBytes(
+                        new BytesOf(bdy.toString())
+                    ).asBytes()
                 )
             )
         );
