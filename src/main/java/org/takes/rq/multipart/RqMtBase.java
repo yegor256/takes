@@ -44,13 +44,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.StartsWith;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
@@ -149,18 +149,18 @@ public final class RqMtBase implements RqMultipart {
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                new Sprintf(
+                new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
-                )
+                ).toString()
             );
         } else {
             iter = new VerboseIterable<>(
                 values,
-                new Sprintf(
+                new FormattedText(
                     "there are just %d parts by name \"%s\"",
                     values.size(), name
-                )
+                ).toString()
             );
         }
         return iter;

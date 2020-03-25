@@ -29,10 +29,10 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.Expires;
-import org.takes.misc.Sprintf;
 import org.takes.rs.RsWrap;
 
 /**
@@ -292,7 +292,7 @@ public final class RsFlash extends RsWrap {
             cookie,
             new Expires.Date(
                 System.currentTimeMillis()
-                + TimeUnit.HOURS.toMillis(1L)
+                    + TimeUnit.HOURS.toMillis(1L)
             )
         );
     }
@@ -340,14 +340,14 @@ public final class RsFlash extends RsWrap {
         throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
-            new Sprintf(
+            new FormattedText(
                 RsFlash.TEXT_FORMAT,
                 URLEncoder.encode(
                     msg.toString(),
                     Charset.defaultCharset().name()
                 ),
                 level.getName()
-            ),
+            ).toString(),
             "Path=/",
             expires.print()
         );

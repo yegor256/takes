@@ -30,9 +30,9 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
 import org.takes.HttpException;
 import org.takes.Response;
-import org.takes.misc.Sprintf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
@@ -160,7 +160,9 @@ public class RsForward extends HttpException implements Response {
                 new RsWithStatus(res, code),
                 "Location"
             ),
-            new Sprintf("Location: %s", loc)
+            new FormattedText(
+                "Location: %s", loc
+            ).toString()
         );
     }
 
