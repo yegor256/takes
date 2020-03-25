@@ -24,10 +24,9 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
-import org.cactoos.Text;
+import org.cactoos.scalar.EqualsNullable;
+import org.cactoos.scalar.Ternary;
 import org.cactoos.text.Lowered;
-import org.cactoos.text.UncheckedText;
-import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
@@ -48,11 +47,6 @@ import org.takes.rq.RqHeaders;
  *
  * @see TkFork
  * @since 0.32
- * @todo #998:30min Use {@link org.cactoos.scalar.Ternary} scalar here for
- *  conditionally evaluated result. Please refere to
- *  https://github.com/yegor256/cactoos/blob/master/src/main/java/org/cactoos/
- *  scalar/Ternary.java class for javadoc on how to use this scalar in an
- *  elegant way.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FkHost extends FkWrap {
@@ -73,23 +67,17 @@ public final class FkHost extends FkWrap {
      * @return Fork
      */
     private static Fork fork(final String host, final Take take) {
-        // @checkstyle AnonInnerLengthCheck (50 lines)
-        return new Fork() {
-            @Override
-            public Opt<Response> route(final Request req) throws Exception {
-                final String hst = new RqHeaders.Smart(
-                    new RqHeaders.Base(req)
-                ).single("host");
-                final Opt<Response> rsp;
-                final Text lowhost = new UncheckedText(new Lowered(host));
-                final Text lowhst = new UncheckedText(new Lowered(hst));
-                if (lowhost.asString().equals(lowhst.asString())) {
-                    rsp = new Opt.Single<>(take.act(req));
-                } else {
-                    rsp = new Opt.Empty<>();
-                }
-                return rsp;
-            }
+        return req -> {
+            final String hst = new RqHeaders.Smart(
+                new RqHeaders.Base(req)
+            ).single("host");
+            return new Ternary<Opt<Response>>(
+                new EqualsNullable(
+                    new Lowered(host), new Lowered(hst)
+                ),
+                new Opt.Single<>(take.act(req)),
+                new Opt.Empty<>()
+            ).value();
         };
     }
 
