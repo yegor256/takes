@@ -26,12 +26,12 @@ package org.takes.facets.fallback;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Response;
 import org.takes.misc.Opt;
-import org.takes.misc.Utf8PrintStream;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
@@ -74,7 +74,9 @@ public final class FbSlf4j extends FbWrap {
     private static void log(final RqFallback req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Throwable error = req.throwable();
-        try (PrintStream stream = new Utf8PrintStream(baos, false)) {
+        try (PrintStream stream = new PrintStream(
+            baos, false, StandardCharsets.UTF_8.toString()
+        )) {
             error.printStackTrace(stream);
         }
         FbSlf4j.LOGGER.error(
