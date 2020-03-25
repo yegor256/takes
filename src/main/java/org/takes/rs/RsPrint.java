@@ -32,9 +32,9 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
+import org.cactoos.io.WriterTo;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamContent;
 
 /**
  * Response decorator that can print an entire response in HTTP format.
@@ -134,7 +134,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
-        this.printHead(new Utf8OutputStreamContent(output));
+        this.printHead(new WriterTo(output));
     }
 
     /**

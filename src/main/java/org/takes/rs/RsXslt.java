@@ -39,8 +39,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
+import org.cactoos.io.WriterTo;
 import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamContent;
 
 /**
  * Response that converts XML into HTML using attached XSL stylesheet.
@@ -150,7 +150,7 @@ public final class RsXslt extends RsWrap {
                 new ReaderOf(input)
             ),
             new StreamResult(
-                new Utf8OutputStreamContent(baos)
+                new WriterTo(baos)
             )
         );
         return new InputStreamOf(baos.toByteArray());
