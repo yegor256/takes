@@ -24,16 +24,14 @@
 package org.takes.http;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.InputStreamOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -143,18 +141,14 @@ public final class BkBasic implements Back {
      * @param err Error
      * @param code HTTP error code
      * @return Response
-     * @throws IOException If something goes wrong
      */
-    private static Response failure(final Throwable err, final int code)
-        throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (PrintStream stream = new PrintStream(
-            baos, false, StandardCharsets.UTF_8.toString()
-        )) {
-            err.printStackTrace(stream);
-        }
+    private static Response failure(final Throwable err, final int code) {
         return new RsWithStatus(
-            new RsText(new ByteArrayInputStream(baos.toByteArray())),
+            new RsText(
+                new InputStreamOf(
+                    new BytesOf(err)
+                )
+            ),
             code
         );
     }
