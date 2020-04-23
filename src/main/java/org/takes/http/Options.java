@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.ReaderOf;
-import org.takes.misc.Utf8OutputStreamContent;
+import org.cactoos.io.WriterTo;
 
 /**
  * Command line options.
@@ -104,9 +103,7 @@ final class Options {
                 }
             } else {
                 socket = new ServerSocket(0);
-                try (Writer writer = new Utf8OutputStreamContent(
-                    Files.newOutputStream(file.toPath())
-                )) {
+                try (Writer writer = new WriterTo(file.toPath())) {
                     writer.append(Integer.toString(socket.getLocalPort()));
                 }
             }

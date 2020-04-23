@@ -40,7 +40,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.misc.Utf8OutputStreamContent;
+import org.cactoos.io.WriterTo;
 import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
@@ -139,7 +139,7 @@ public final class RsXembly extends RsWrap {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
                 new StreamResult(
-                    new Utf8OutputStreamContent(baos)
+                    new WriterTo(baos)
                 )
             );
         } catch (final TransformerException ex) {

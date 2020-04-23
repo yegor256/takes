@@ -29,9 +29,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.WriterTo;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
-import org.takes.misc.Utf8OutputStreamContent;
 
 /**
  * Request decorator, to print it all.
@@ -90,13 +90,14 @@ public final class RqPrint extends RqWrap {
      */
     public void printHead(final OutputStream output) throws IOException {
         final String eol = "\r\n";
-        final Writer writer = new Utf8OutputStreamContent(output);
-        for (final String line : this.head()) {
-            writer.append(line);
+        try (Writer writer = new WriterTo(output)) {
+            for (final String line : this.head()) {
+                writer.append(line);
+                writer.append(eol);
+            }
             writer.append(eol);
+            writer.flush();
         }
-        writer.append(eol);
-        writer.flush();
     }
 
     /**

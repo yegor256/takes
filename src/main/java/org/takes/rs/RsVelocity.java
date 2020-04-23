@@ -38,8 +38,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
+import org.cactoos.io.WriterTo;
 import org.takes.Scalar;
-import org.takes.misc.Utf8OutputStreamContent;
 
 /**
  * Response that converts Velocity template to text.
@@ -153,19 +153,19 @@ public final class RsVelocity extends RsWrap {
         final InputStream template,
         final Map<String, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new Utf8OutputStreamContent(baos);
-        final VelocityEngine engine = new VelocityEngine();
-        engine.setProperty(
-            "file.resource.loader.path",
-            folder
-        );
-        engine.evaluate(
-            new VelocityContext(params),
-            writer,
-            "",
-            new ReaderOf(template)
-        );
-        writer.close();
+        try (Writer writer = new WriterTo(baos)) {
+            final VelocityEngine engine = new VelocityEngine();
+            engine.setProperty(
+                "file.resource.loader.path",
+                folder
+            );
+            engine.evaluate(
+                new VelocityContext(params),
+                writer,
+                "",
+                new ReaderOf(template)
+            );
+        }
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
