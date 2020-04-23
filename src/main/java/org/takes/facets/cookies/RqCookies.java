@@ -28,12 +28,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
-import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWrap;
@@ -90,19 +90,19 @@ public interface RqCookies extends Request {
             if (value.isEmpty()) {
                 iter = new VerboseIterable<>(
                     Collections.<String>emptyList(),
-                    new Sprintf(
+                    new FormattedText(
                         // @checkstyle LineLengthCheck (1 line)
                         "There are no Cookies by name \"%s\" among %d others: %s",
                         key, map.size(), map.keySet()
-                    )
+                    ).asString()
                 );
             } else {
                 iter = new VerboseIterable<>(
                     Collections.singleton(value),
-                    new Sprintf(
+                    new FormattedText(
                         "There is always only one Cookie by name \"%s\"",
                         key
-                    )
+                    ).asString()
                 );
             }
             return iter;
