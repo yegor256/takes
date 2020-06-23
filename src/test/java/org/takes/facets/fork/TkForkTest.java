@@ -25,8 +25,9 @@ package org.takes.facets.fork;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -48,8 +49,8 @@ public final class TkForkTest {
                 new TkFork(new FkRegex("/h[a-z]{2}", body)).act(
                     new RqFake("GET", "/hey?yu", "")
                 )
-            ).print(),
-            Matchers.equalTo(
+            ),
+            new TextHasString(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -57,7 +58,7 @@ public final class TkForkTest {
                     "Content-Type: text/plain",
                     "",
                     body
-                ).asString()
+                )
             )
         );
     }

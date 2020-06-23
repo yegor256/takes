@@ -25,8 +25,8 @@ package org.takes.facets.previous;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -45,8 +45,8 @@ public final class RsPreviousTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrevious(new RsText(""), "/home")
-            ).print(),
-            Matchers.containsString(
+            ),
+            new TextHasString(
                 "Set-Cookie: TkPrevious=%2Fhome"
             )
         );

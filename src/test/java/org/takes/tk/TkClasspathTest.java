@@ -24,8 +24,8 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -33,6 +33,7 @@ import org.takes.rs.RsPrint;
 /**
  * Test case for {@link TkClasspath}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public final class TkClasspathTest {
 
@@ -49,8 +50,8 @@ public final class TkClasspathTest {
                         "GET", "/org/takes/Take.class?a", ""
                     )
                 )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
+            ),
+            new StartsWith("HTTP/1.1 200 OK")
         );
     }
 

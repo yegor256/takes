@@ -25,8 +25,8 @@ package org.takes.tk;
 
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -54,8 +54,8 @@ public final class TkGzipTest {
                         ""
                     )
                 )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
+            ),
+            new StartsWith("HTTP/1.1 200 OK")
         );
     }
 
@@ -76,8 +76,8 @@ public final class TkGzipTest {
                         ""
                     )
                 )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200")
+            ),
+            new StartsWith("HTTP/1.1 200")
         );
     }
 

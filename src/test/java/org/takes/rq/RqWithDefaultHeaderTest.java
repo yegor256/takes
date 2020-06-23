@@ -23,12 +23,13 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import java.util.Collections;
+import org.cactoos.text.Joined;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 
 /**
  * Test case for {@link RqWithDefaultHeader}.
@@ -49,15 +50,18 @@ public final class RqWithDefaultHeaderTest {
     public void providesDefaultHeader() throws IOException {
         final String req = "GET /";
         MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithDefaultHeader(
-                    new RqFake(Collections.singletonList(req), "body"),
-                    "X-Default-Header1",
-                    "X-Default-Value1"
-                )
-            ).print(),
-            Matchers.startsWith(
-                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
+            new TextOf(
+                new RqPrint(
+                    new RqWithDefaultHeader(
+                        new RqFake(Collections.singletonList(req), "body"),
+                        "X-Default-Header1",
+                        "X-Default-Value1"
+                    )
+                ).print()
+            ),
+            new StartsWith(
+                new Joined(
+                    RqWithDefaultHeaderTest.CRLF,
                     req,
                     "X-Default-Header1: X-Default-Value"
                 )
@@ -74,19 +78,22 @@ public final class RqWithDefaultHeaderTest {
         final String req = "POST /";
         final String header = "X-Default-Header2";
         MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithDefaultHeader(
-                    new RqWithHeader(
-                        new RqFake(Collections.singletonList(req), "body2"),
+            new TextOf(
+                new RqPrint(
+                    new RqWithDefaultHeader(
+                        new RqWithHeader(
+                            new RqFake(Collections.singletonList(req), "body2"),
+                            header,
+                            "Non-Default-Value2"
+                        ),
                         header,
-                        "Non-Default-Value2"
-                    ),
-                    header,
-                    "X-Default-Value"
-                )
-            ).print(),
-            Matchers.startsWith(
-                Joiner.on(RqWithDefaultHeaderTest.CRLF).join(
+                        "X-Default-Value"
+                    )
+                ).print()
+            ),
+            new StartsWith(
+                new Joined(
+                    RqWithDefaultHeaderTest.CRLF,
                     req,
                     "X-Default-Header2: Non-Default-Value"
                 )

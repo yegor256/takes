@@ -25,8 +25,8 @@ package org.takes.rs;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 
 /**
  * Test case for {@link RsRedirect}.
@@ -45,8 +45,8 @@ public final class RsRedirectTest {
                 new RsRedirect(
                     "/home"
                 )
-            ).print(),
-            Matchers.containsString("HTTP/1.1 303 See Other")
+            ),
+            new TextHasString("HTTP/1.1 303 See Other")
         );
     }
 

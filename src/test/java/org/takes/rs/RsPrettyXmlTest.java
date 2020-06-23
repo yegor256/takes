@@ -23,17 +23,21 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.Joined;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 /**
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public final class RsPrettyXmlTest {
 
@@ -81,20 +85,26 @@ public final class RsPrettyXmlTest {
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
-                new RsPrettyXml(
-                    new RsWithBody(
-                        Joiner.on("").appendTo(
-                            new StringBuilder("<!DOCTYPE html "),
-                            "SYSTEM \"about:legacy-compat\">",
-                            "<html><head></head><body></body></html>"
-                        ).toString()
+            new TextOf(
+                new RsPrint(
+                    new RsPrettyXml(
+                        new RsWithBody(
+                            new InputStreamOf(
+                                new Joined(
+                                    "",
+                                    "<!DOCTYPE html ",
+                                    "SYSTEM \"about:legacy-compat\">",
+                                    "<html><head></head><body></body></html>"
+                                )
+                            )
+                        )
                     )
-                )
-            ).printBody(),
-            Matchers.is(
-                Joiner.on("").appendTo(
-                    new StringBuilder("<!DOCTYPE html\n"),
+                ).printBody()
+            ),
+            new IsEqual<>(
+                new Joined(
+                    "",
+                    "<!DOCTYPE html\n",
                     "  SYSTEM \"about:legacy-compat\">\n",
                     "<html>\n",
                     "   <head>\n",
@@ -103,7 +113,7 @@ public final class RsPrettyXmlTest {
                     "   </head>\n",
                     "   <body></body>\n",
                     "</html>"
-                ).toString()
+                )
             )
         );
     }
@@ -120,23 +130,29 @@ public final class RsPrettyXmlTest {
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
         MatcherAssert.assertThat(
-            new RsPrint(
-                new RsPrettyXml(
-                    new RsWithBody(
-                        Joiner.on("").appendTo(
-                            new StringBuilder("<!DOCTYPE HTML "),
-                            pid,
-                            "\"http://www.w3.org/TR/html4/loose.dtd\">",
-                            xhtml,
-                            "<head><a>foo</a></head>",
-                            "<body>this is body</body></html>"
+            new TextOf(
+                new RsPrint(
+                    new RsPrettyXml(
+                        new RsWithBody(
+                            new InputStreamOf(
+                                new Joined(
+                                    "",
+                                    "<!DOCTYPE HTML ",
+                                    pid,
+                                    "\"http://www.w3.org/TR/html4/loose.dtd\">",
+                                    xhtml,
+                                    "<head><a>foo</a></head>",
+                                    "<body>this is body</body></html>"
+                                )
+                            )
                         )
                     )
-                )
-            ).printBody(),
-            Matchers.is(
-                Joiner.on("").appendTo(
-                    new StringBuilder("<!DOCTYPE html\n  "),
+                ).printBody()
+            ),
+            new IsEqual<>(
+                new Joined(
+                    "",
+                    "<!DOCTYPE html\n  ",
                     pid,
                     "\"http://www.w3.org/TR/html4/loose.dtd\">\n",
                     xhtml,
@@ -144,7 +160,7 @@ public final class RsPrettyXmlTest {
                     "<meta http-equiv=\"Content-Type\" content=\"text/html; ",
                     "charset=UTF-8\" /><a>foo</a></head>\n   ",
                     "<body>this is body</body>\n</html>"
-                ).toString()
+                )
             )
         );
     }

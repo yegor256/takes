@@ -29,6 +29,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Take;
@@ -56,8 +57,8 @@ public final class TkRetryTest {
             new RsPrint(
                 new TkRetry(2, 2, new TkText(test))
                     .act(new RqFake())
-            ).print(),
-            Matchers.containsString(test)
+            ),
+            new TextHasString(test)
         );
     }
 
@@ -116,8 +117,8 @@ public final class TkRetryTest {
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(
-            response.print(),
-            Matchers.containsString(data)
+            response,
+            new TextHasString(data)
         );
     }
 }

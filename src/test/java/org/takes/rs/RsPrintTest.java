@@ -48,7 +48,7 @@ public final class RsPrintTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void failsOnInvalidHeader() throws IOException {
-        new RsPrint(new RsWithHeader("name", "\n\n\n")).print();
+        new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
     }
 
     /**

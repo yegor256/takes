@@ -26,8 +26,8 @@ package org.takes.facets.forward;
 import java.io.IOException;
 import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -38,6 +38,7 @@ import org.takes.rs.RsPrint;
 /**
  * Test case for {@link TkForward}.
  * @since 0.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public final class TkForwardTest {
 
@@ -56,8 +57,8 @@ public final class TkForwardTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkForward(take).act(new RqFake())
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 303 See Other")
+            ),
+            new StartsWith("HTTP/1.1 303 See Other")
         );
     }
 
@@ -86,8 +87,8 @@ public final class TkForwardTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkForward(take).act(new RqFake())
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 303")
+            ),
+            new StartsWith("HTTP/1.1 303")
         );
     }
 

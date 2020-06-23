@@ -24,8 +24,8 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -46,8 +46,8 @@ public final class TkVersionedTest {
                 new TkVersioned(new TkEmpty()).act(
                     new RqFake()
                 )
-            ).print(),
-            Matchers.containsString("X-Takes-Version")
+            ),
+            new TextHasString("X-Takes-Version")
         );
     }
 

@@ -28,8 +28,8 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -43,6 +43,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link TkConsumes}.
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 public final class TkConsumesTest {
 
@@ -72,13 +73,13 @@ public final class TkConsumesTest {
             )
         );
         MatcherAssert.assertThat(
-            new RsPrint(response).print(),
-            Matchers.startsWith(
+            new RsPrint(response),
+            new StartsWith(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
                     contenttype
-                ).asString()
+                )
             )
         );
     }

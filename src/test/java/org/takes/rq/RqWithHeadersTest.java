@@ -23,13 +23,14 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.IOException;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.cactoos.text.Joined;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 
 /**
  * Test case for {@link RqWithHeaders}.
@@ -47,15 +48,18 @@ public final class RqWithHeadersTest {
         final String testheader = "TestHeader: someValue";
         final String someheader = "SomeHeader: testValue";
         MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithHeaders(
-                    new RqFake(),
-                    testheader,
-                    someheader
-                )
-            ).print(),
-            Matchers.startsWith(
-                Joiner.on("\r\n").join(
+            new TextOf(
+                new RqPrint(
+                    new RqWithHeaders(
+                        new RqFake(),
+                        testheader,
+                        someheader
+                    )
+                ).print()
+            ),
+            new StartsWith(
+                new Joined(
+                    "\r\n",
                     "GET /",
                     "Host: www.example.com",
                     testheader,

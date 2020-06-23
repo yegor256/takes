@@ -26,8 +26,8 @@ package org.takes.tk;
 import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -69,8 +69,8 @@ public final class TkSslOnlyTest {
                         }
                     }
                 ).act(req)
-            ).print(),
-            Matchers.containsString("https://www.0crat.com/one/two?a=1")
+            ),
+            new TextHasString("https://www.0crat.com/one/two?a=1")
         );
     }
 

@@ -25,11 +25,12 @@ package org.takes.tk;
 
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -56,14 +57,16 @@ public final class TkFilesTest {
             this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
-            new RsPrint(
-                new TkFiles(this.temp.getRoot()).act(
-                    new RqFake(
-                        "GET", "/a.txt?hash=a1b2c3", ""
+            new TextOf(
+                new RsPrint(
+                    new TkFiles(this.temp.getRoot()).act(
+                        new RqFake(
+                            "GET", "/a.txt?hash=a1b2c3", ""
+                        )
                     )
-                )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 200 OK")
+                ).asString()
+            ),
+            new StartsWith("HTTP/1.1 200 OK")
         );
     }
 

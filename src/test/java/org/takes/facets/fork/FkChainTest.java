@@ -27,6 +27,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -65,8 +66,8 @@ public final class FkChainTest {
                     new FkRegex("/h[a-z]{2}", body),
                     new FkRegex("/i[a-z]{2}", "")
                 ).route(new RqFake("GET", "/hey?yu")).get()
-            ).print(),
-            Matchers.equalTo(
+            ),
+            new TextHasString(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -74,7 +75,7 @@ public final class FkChainTest {
                     "Content-Type: text/plain",
                     "",
                     body
-                ).asString()
+                )
             )
         );
     }

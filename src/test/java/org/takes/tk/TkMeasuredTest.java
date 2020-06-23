@@ -24,8 +24,8 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -47,8 +47,8 @@ public final class TkMeasuredTest {
                 new TkMeasured(new TkText("default header response")).act(
                     new RqFake()
                 )
-            ).print(),
-            Matchers.containsString(header)
+            ),
+            new TextHasString(header)
         );
     }
 
@@ -65,8 +65,8 @@ public final class TkMeasuredTest {
                     new TkText("custom header response"),
                     header
                 ).act(new RqFake())
-            ).print(),
-            Matchers.containsString(header)
+            ),
+            new TextHasString(header)
         );
     }
 }

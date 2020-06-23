@@ -23,25 +23,26 @@
  */
 package org.takes.rs;
 
-import com.google.common.base.Joiner;
 import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
-import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import javax.xml.transform.Source;
-import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.Text;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.EndsWith;
 import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsXslt}.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public final class RsXsltTest {
 
@@ -63,11 +64,13 @@ public final class RsXsltTest {
      */
     @Test
     public void convertsXmlToHtml() throws IOException {
-        final String xml = Joiner.on(' ').join(
+        final Text xml = new Joined(
+            " ",
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
             "<page><data>ура</data></page>"
         );
-        final String xsl = Joiner.on(' ').join(
+        final Text xsl = new Joined(
+            " ",
             "<stylesheet xmlns='http://www.w3.org/1999/XSL/Transform'",
             " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0'>",
             "<template match='/'>",
@@ -77,14 +80,8 @@ public final class RsXsltTest {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXslt(
-                    new RsText(xml),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
+                    new RsText(new InputStreamOf(xml)),
+                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
                 ).body(),
                 StandardCharsets.UTF_8
             ),
@@ -98,11 +95,13 @@ public final class RsXsltTest {
      */
     @Test
     public void convertsXmlToPlainText() throws IOException {
-        final String xml = Joiner.on(' ').join(
+        final Text xml = new Joined(
+            " ",
             "<?xml-stylesheet href='/x.xsl' type='text/xsl'?>",
             "<p><name>Jeffrey</name></p>"
         );
-        final String xsl = Joiner.on(' ').join(
+        final Text xsl = new Joined(
+            " ",
             "<stylesheet xmlns='http://www.w3.org/1999/XSL/Transform' ",
             " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0' >",
             "<output method='text'/><template match='/'>",
@@ -111,17 +110,11 @@ public final class RsXsltTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
-                    new RsText(xml),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
+                    new RsText(new InputStreamOf(xml)),
+                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
                 )
-            ).print(),
-            Matchers.endsWith("Hey, Jeffrey!")
+            ),
+            new EndsWith("Hey, Jeffrey!")
         );
     }
 
@@ -132,33 +125,30 @@ public final class RsXsltTest {
      */
     @Test
     public void closesDecoratedResponseInputStream() throws Exception {
-        final String xml = Joiner.on(' ').join(
+        final Text xml = new Joined(
+            " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
             "<subject>World</subject>"
         );
-        final String xsl = Joiner.on(' ').join(
-            "<stylesheet xmlns='http://www.w3.org/1999/XSL/Transform'  ",
-            " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0'  >",
-            "<output method='text'/><template match='/'> ",
-            "Hello, <value-of select='/subject'/>!</template></stylesheet>"
-        );
+        final Text xsl =
+            new Joined(
+                " ",
+                "<stylesheet xmlns='http://www.w3.org/1999/XSL/Transform'  ",
+                " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0'  >",
+                "<output method='text'/><template match='/'> ",
+                "Hello, <value-of select='/subject'/>!</template></stylesheet>"
+            );
         final StateAwareInputStream stream = new StateAwareInputStream(
-            IOUtils.toInputStream(xml, StandardCharsets.UTF_8)
+            new InputStreamOf(xml)
         );
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
                     new RsText(stream),
-                    new URIResolver() {
-                        @Override
-                        public Source resolve(final String href,
-                            final String base) {
-                            return new StreamSource(new StringReader(xsl));
-                        }
-                    }
+                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
                 )
-            ).print(),
-            Matchers.endsWith("Hello, World!")
+            ),
+            new EndsWith("Hello, World!")
         );
         MatcherAssert.assertThat(
             stream.isClosed(),
@@ -176,46 +166,55 @@ public final class RsXsltTest {
             new RsPrint(
                 new RsXslt(
                     new RsText(
-                        Joiner.on(' ').join(
-                            "<?xml-stylesheet",
-                            " href='/org/takes/rs/simple.xsl?0'",
-                            " type='text/xsl'?>",
-                            "<p><name>Bobby</name></p>"
+                        new InputStreamOf(
+                            new Joined(
+                                " ",
+                                "<?xml-stylesheet",
+                                " href='/org/takes/rs/simple.xsl?0'",
+                                " type='text/xsl'?>",
+                                "<p><name>Bobby</name></p>"
+                            )
                         )
                     )
                 )
-            ).print(),
-            Matchers.endsWith("Hello, Bobby!")
+            ),
+            new EndsWith("Hello, Bobby!")
         );
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
                     new RsText(
-                        Joiner.on(' ').join(
-                            "<?xml-stylesheet ",
-                            " href='/org/takes/rs/simple.xsl'",
-                            " type='text/xsl' ?>",
-                            "<p><name>Dan</name></p>"
+                        new InputStreamOf(
+                            new Joined(
+                                " ",
+                                "<?xml-stylesheet ",
+                                " href='/org/takes/rs/simple.xsl'",
+                                " type='text/xsl' ?>",
+                                "<p><name>Dan</name></p>"
+                            )
                         )
                     )
                 )
-            ).print(),
-            Matchers.endsWith("Hello, Dan!")
+            ),
+            new EndsWith("Hello, Dan!")
         );
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
                     new RsText(
-                        Joiner.on(' ').join(
-                            "<?xml-stylesheet  ",
-                            " href='/org/takes/rs/includes.xsl'",
-                            "  type='text/xsl' ?>",
-                            "<p><name>Miranda</name></p>"
+                        new InputStreamOf(
+                            new Joined(
+                                " ",
+                                "<?xml-stylesheet  ",
+                                " href='/org/takes/rs/includes.xsl'",
+                                "  type='text/xsl' ?>",
+                                "<p><name>Miranda</name></p>"
+                            )
                         )
                     )
                 )
-            ).print(),
-            Matchers.endsWith("Hello, Miranda!")
+            ),
+            new EndsWith("Hello, Miranda!")
         );
     }
 
@@ -225,7 +224,8 @@ public final class RsXsltTest {
      */
     @Test
     public void loadsExternalImports() throws IOException {
-        final String xml = Joiner.on(' ').join(
+        final Text xml = new Joined(
+            " ",
             "<?xml-stylesheet   ",
             " href='/org/takes/rs/stylesheet-with-include.xsl'",
             " type='text/xsl'?><page sla='0.324'/>"
@@ -233,7 +233,7 @@ public final class RsXsltTest {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXslt(
-                    new RsText(xml)
+                    new RsText(new InputStreamOf(xml))
                 ).body(),
                 StandardCharsets.UTF_8
             ),

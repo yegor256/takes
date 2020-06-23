@@ -26,8 +26,8 @@ package org.takes.facets.fork;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -88,14 +88,15 @@ public final class TkProducesTest {
             )
         );
         MatcherAssert.assertThat(
-            new RsPrint(response).print(),
-            Matchers.equalTo(
+            new RsPrint(response),
+            new TextHasString(
                 new Joined(
-                    "\r\n", "HTTP/1.1 200 OK",
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
                     "Content-Type: application/json",
                     "",
                     ""
-                ).asString()
+                )
             )
         );
     }

@@ -26,9 +26,10 @@ package org.takes.facets.ret;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -48,9 +49,9 @@ public final class RsReturnTest {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsReturn(new RsEmpty(), destination)
-            ).print(),
-            Matchers.containsString(
-                String.format(
+            ),
+            new TextHasString(
+                new FormattedText(
                     "Set-Cookie: RsReturn=%s;Path=/",
                     URLEncoder.encode(
                         destination,

@@ -32,6 +32,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -120,8 +121,8 @@ public final class TkProxyTest {
                             new TkProxy(home).act(
                                 new RqFake(TkProxyTest.this.method)
                             )
-                        ).print(),
-                        Matchers.containsString(
+                        ),
+                        new TextHasString(
                             TkProxyTest.this.expected
                         )
                     );
