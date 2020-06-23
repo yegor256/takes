@@ -27,7 +27,7 @@ import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsWithHeader}.
@@ -48,7 +48,7 @@ public final class RsWithHeaderTest {
                     "Host", "a.example.com"
                 )
             ),
-            new TextHasString(
+            new TextIs(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 204 No Content",

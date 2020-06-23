@@ -27,7 +27,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -50,7 +50,7 @@ public final class TkForkTest {
                     new RqFake("GET", "/hey?yu", "")
                 )
             ),
-            new TextHasString(
+            new TextIs(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
