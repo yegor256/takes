@@ -31,6 +31,7 @@ import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
+import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Request;
@@ -47,12 +48,12 @@ public final class RequestOf implements Request {
     /**
      * Original head scalar.
      */
-    private final Scalar<Iterable<String>> shead;
+    private final IoChecked<Iterable<String>> shead;
 
     /**
      * Original body scalar.
      */
-    private final Scalar<InputStream> sbody;
+    private final IoChecked<InputStream> sbody;
 
     /**
      * Ctor.
@@ -70,8 +71,8 @@ public final class RequestOf implements Request {
      */
     public RequestOf(
         final Scalar<Iterable<String>> head, final Scalar<InputStream> body) {
-        this.shead = head;
-        this.sbody = body;
+        this.shead = new IoChecked<>(head::value);
+        this.sbody = new IoChecked<>(body::value);
     }
 
     @Override

@@ -80,7 +80,7 @@ public final class TkText extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     return new RsText(body.value());
                 }
             }

@@ -26,6 +26,7 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.scalar.IoChecked;
 import org.takes.Scalar;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -74,7 +75,7 @@ public final class XeChain extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Directives dirs = new Directives();
-                    for (final XeSource src : items.value()) {
+                    for (final XeSource src : new IoChecked<>(items::value).value()) {
                         dirs.push().append(src.toXembly()).pop();
                     }
                     return dirs;

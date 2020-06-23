@@ -38,8 +38,8 @@ public interface Scalar<T> {
     /**
      * Get the object.
      * @return Object
-     * @throws IOException If fails
+     * @throws Exception If fails
      */
-    T value() throws IOException;
+    T value() throws Exception;
 
 }

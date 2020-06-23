@@ -72,7 +72,7 @@ public final class TkHtml extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) throws Exception {
                     return new RsHtml(body.value());
                 }
             }

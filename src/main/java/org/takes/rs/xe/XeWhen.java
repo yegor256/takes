@@ -25,6 +25,7 @@ package org.takes.rs.xe;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.cactoos.scalar.IoChecked;
 import org.takes.Scalar;
 import org.xembly.Directive;
 
@@ -205,10 +206,10 @@ public final class XeWhen extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
-                    if (condition.value()) {
-                        dirs = positive.value().toXembly();
+                    if (new IoChecked<>(condition::value).value()) {
+                        dirs = new IoChecked<>(positive::value).value().toXembly();
                     } else {
-                        dirs = negative.value().toXembly();
+                        dirs = new IoChecked<>(negative::value).value().toXembly();
                     }
                     return dirs;
                 }

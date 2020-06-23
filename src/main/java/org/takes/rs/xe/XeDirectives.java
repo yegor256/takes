@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.scalar.IoChecked;
 import org.takes.Scalar;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -46,7 +47,7 @@ public final class XeDirectives implements XeSource {
     /**
      * Items.
      */
-    private final Scalar<Iterable<Directive>> directives;
+    private final IoChecked<Iterable<Directive>> directives;
 
     /**
      * Ctor.
@@ -84,7 +85,7 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final Scalar<Iterable<Directive>> dirs) {
-        this.directives = dirs;
+        this.directives = new IoChecked<>(dirs::value);
     }
 
     @Override

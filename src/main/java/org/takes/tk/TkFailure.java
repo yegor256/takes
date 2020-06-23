@@ -81,7 +81,7 @@ public final class TkFailure extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
+                public Response act(final Request request) throws Exception {
                     throw err.value();
                 }
             }
