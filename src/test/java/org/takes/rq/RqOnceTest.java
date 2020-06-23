@@ -23,9 +23,9 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.Joined;
 import org.junit.Test;
 import org.takes.Request;
 
@@ -43,13 +43,14 @@ public final class RqOnceTest {
     public void makesRequestReadOnlyOnce() throws IOException {
         final Request req = new RqOnce(
             new RqLive(
-                new ByteArrayInputStream(
-                    Joiner.on("\r\n").join(
+                new InputStreamOf(
+                    new Joined(
+                        "\r\n",
                         "GET /test HTTP/1.1",
                         "Host: localhost",
                         "",
                         "... the body ..."
-                    ).getBytes()
+                    )
                 )
             )
         );
