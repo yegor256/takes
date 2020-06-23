@@ -89,7 +89,7 @@ public final class XeAppend extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     return new Directives().add(target.toString()).append(
-                        src.get().toXembly()
+                        src.value().toXembly()
                     );
                 }
             }

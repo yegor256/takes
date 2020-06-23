@@ -151,7 +151,7 @@ public final class FbStatus extends FbWrap {
             check,
             new Scalar<Fallback>() {
                 @Override
-                public Fallback get() {
+                public Fallback value() {
                     return fallback;
                 }
             }
@@ -179,7 +179,7 @@ public final class FbStatus extends FbWrap {
                     throws Exception {
                     Opt<Response> rsp = new Opt.Empty<>();
                     if (new ListOf<>(check).contains(req.code())) {
-                        rsp = fallback.get().route(req);
+                        rsp = fallback.value().route(req);
                     }
                     return rsp;
                 }

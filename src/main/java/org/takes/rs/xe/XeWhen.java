@@ -49,13 +49,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return source;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -71,14 +71,14 @@ public final class XeWhen extends XeWrap {
         this(
             new Scalar<Boolean>() {
                 @Override
-                public Boolean get() {
+                public Boolean value() {
                     return condition;
                 }
             },
             source,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -96,13 +96,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return source;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -122,13 +122,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return positive;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return negative;
                 }
             }
@@ -147,7 +147,7 @@ public final class XeWhen extends XeWrap {
         this(
             new Scalar<Boolean>() {
                 @Override
-                public Boolean get() {
+                public Boolean value() {
                     return condition;
                 }
             },
@@ -170,13 +170,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return positive;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return negative;
                 }
             }
@@ -205,10 +205,10 @@ public final class XeWhen extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
-                    if (condition.get()) {
-                        dirs = positive.get().toXembly();
+                    if (condition.value()) {
+                        dirs = positive.value().toXembly();
                     } else {
-                        dirs = negative.get().toXembly();
+                        dirs = negative.value().toXembly();
                     }
                     return dirs;
                 }

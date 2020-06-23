@@ -106,13 +106,13 @@ public final class XeWhenTest {
                             false,
                             new Scalar<XeSource>() {
                                 @Override
-                                public XeSource get() throws IOException {
+                                public XeSource value() throws IOException {
                                     return new XeDate();
                                 }
                             },
                             new Scalar<XeSource>() {
                                 @Override
-                                public XeSource get() throws IOException {
+                                public XeSource value() throws IOException {
                                     return new XeMemory();
                                 }
                             })

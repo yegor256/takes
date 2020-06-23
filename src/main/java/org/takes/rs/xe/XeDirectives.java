@@ -72,7 +72,7 @@ public final class XeDirectives implements XeSource {
         this(
             new Scalar<Iterable<Directive>>() {
                 @Override
-                public Iterable<Directive> get() {
+                public Iterable<Directive> value() {
                     return dirs;
                 }
             }
@@ -89,7 +89,7 @@ public final class XeDirectives implements XeSource {
 
     @Override
     public Iterable<Directive> toXembly() throws IOException {
-        return this.directives.get();
+        return this.directives.value();
     }
 
     /**

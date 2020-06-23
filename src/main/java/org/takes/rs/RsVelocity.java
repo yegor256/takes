@@ -136,7 +136,7 @@ public final class RsVelocity extends RsWrap {
         super(
             new ResponseOf(
                 () -> new RsEmpty().head(),
-                () -> RsVelocity.render(folder, template, params.get())
+                () -> RsVelocity.render(folder, template, params.value())
             )
         );
     }

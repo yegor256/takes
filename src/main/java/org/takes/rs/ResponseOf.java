@@ -77,12 +77,12 @@ public final class ResponseOf implements Response {
 
     @Override
     public Iterable<String> head() throws IOException {
-        return this.shead.get();
+        return this.shead.value();
     }
 
     @Override
     public InputStream body() throws IOException {
-        return this.sbody.get();
+        return this.sbody.value();
     }
 
     @Override
@@ -118,6 +118,6 @@ public final class ResponseOf implements Response {
 
     @Override
     public int hashCode() {
-        return new HashCode(new Unchecked<>(this.shead::get).value()).value();
+        return new HashCode(new Unchecked<>(this.shead::value).value()).value();
     }
 }

@@ -182,7 +182,7 @@ public final class FkRegex implements Fork {
             ptn,
             new Scalar<TkRegex>() {
                 @Override
-                public TkRegex get() {
+                public TkRegex value() {
                     return tke;
                 }
             }
@@ -225,7 +225,7 @@ public final class FkRegex implements Fork {
         final Opt<Response> resp;
         if (matcher.matches()) {
             resp = new Opt.Single<>(
-                this.target.get().act(
+                this.target.value().act(
                     new RqMatcher(matcher, req)
                 )
             );

@@ -40,6 +40,6 @@ public interface Scalar<T> {
      * @return Object
      * @throws IOException If fails
      */
-    T get() throws IOException;
+    T value() throws IOException;
 
 }

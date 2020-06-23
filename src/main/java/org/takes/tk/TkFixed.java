@@ -65,7 +65,7 @@ public final class TkFixed extends TkWrap {
             new Take() {
                 @Override
                 public Response act(final Request req) throws IOException {
-                    return res.get();
+                    return res.value();
                 }
             }
         );
