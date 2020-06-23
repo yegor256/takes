@@ -38,6 +38,10 @@ import org.takes.misc.Utf8String;
  *
  * <p>The class is immutable and thread-safe.
  *
+ * @todo #984:30m This class should implement Text in accordance with RsPrint.
+ *  Make it implement text, then clean up code from
+ *  `new TextOf(new RqPrint(...).print())` idiom and remove method `print`.
+ *
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
