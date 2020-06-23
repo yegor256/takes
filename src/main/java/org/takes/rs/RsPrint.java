@@ -45,10 +45,8 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #984:30min Continue removing Guava's code from tests, starting
- *  class RsPrint as a Text as it was started in #804. When there is no more
- *  use for the method print, remove it and extract printHead and printBody
- *  in two different classes BodyPrint and HeadPrint both implementing Text
+ * @todo #984:30min Extract printHead and printBody in two different classes
+ *  BodyPrint and HeadPrint both implementing Text
  *  and start again replacing guava in tests in the same manner.
  *  Create new todos until guava is removed and Takes is much more Cactoos
  *  oriented as started with #804.
