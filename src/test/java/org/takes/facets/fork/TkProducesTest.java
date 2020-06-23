@@ -27,7 +27,7 @@ import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -89,7 +89,7 @@ public final class TkProducesTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(response),
-            new TextHasString(
+            new TextIs(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
