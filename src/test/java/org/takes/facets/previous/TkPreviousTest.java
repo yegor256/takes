@@ -24,8 +24,8 @@
 package org.takes.facets.previous;
 
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
@@ -52,8 +52,8 @@ public final class TkPreviousTest {
                         "TkPrevious=/home"
                     )
                 )
-            ).print(),
-            Matchers.startsWith("HTTP/1.1 303 See Other")
+            ),
+            new StartsWith("HTTP/1.1 303 See Other")
         );
     }
 
