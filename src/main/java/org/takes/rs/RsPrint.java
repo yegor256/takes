@@ -31,7 +31,10 @@ import java.io.Writer;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.Sticky;
 import org.takes.Response;
 import org.takes.misc.Utf8OutputStreamContent;
 import org.takes.misc.Utf8String;
@@ -42,9 +45,7 @@ import org.takes.misc.Utf8String;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #968:30min Continue removing Guava's code from tests, starting
- *  with all the calls to Joiner by replacing them with Cactoos JoinedText
- *  and the use of cactoos-matchers TextIs or TextHasContent coupled with this
+ * @todo #984:30min Continue removing Guava's code from tests, starting
  *  class RsPrint as a Text as it was started in #804. When there is no more
  *  use for the method print, remove it and extract printHead and printBody
  *  in two different classes BodyPrint and HeadPrint both implementing Text
@@ -71,27 +72,38 @@ public final class RsPrint extends RsWrap implements Text {
     );
 
     /**
+     * Textual representation.
+     */
+    private final IoChecked<String> text;
+
+    /**
      * Ctor.
      * @param res Original response
      */
     public RsPrint(final Response res) {
         super(res);
-    }
+        this.text = new IoChecked<>(
+            new Sticky<>(
+                new Scalar<String>() {
+                    private final ByteArrayOutputStream baos =
+                        new ByteArrayOutputStream();
 
-    /**
-     * Print it into string.
-     * @return Entire HTTP response
-     * @throws IOException If fails
-     */
-    public String print() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.print(baos);
-        return new Utf8String(baos.toByteArray()).asString();
+                    @Override
+                    public String value() throws Exception {
+                        RsPrint.this.printHead(this.baos);
+                        RsPrint.this.printBody(this.baos);
+                        return new Utf8String(
+                            this.baos.toByteArray()
+                        ).asString();
+                    }
+                }
+            )
+        );
     }
 
     @Override
     public String asString() throws IOException {
-        return this.print();
+        return this.text.value();
     }
 
     /**
