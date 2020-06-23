@@ -47,17 +47,10 @@ public final class RqChunk extends RqWrap {
      */
     public RqChunk(final Request req) {
         super(
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return req.head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RqChunk.cap(req);
-                }
-            }
+            new RequestOf(
+                req::head,
+                () -> RqChunk.cap(req)
+            )
         );
     }
 

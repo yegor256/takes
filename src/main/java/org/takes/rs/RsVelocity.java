@@ -36,11 +36,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.takes.Response;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.ReaderOf;
+import org.cactoos.io.WriterTo;
 import org.takes.Scalar;
-import org.takes.misc.Utf8InputStreamContent;
-import org.takes.misc.Utf8OutputStreamContent;
-import org.takes.misc.Utf8String;
 
 /**
  * Response that converts Velocity template to text.
@@ -78,9 +77,8 @@ public final class RsVelocity extends RsWrap {
     public RsVelocity(final CharSequence template,
         final RsVelocity.Pair... params) {
         this(
-            new ByteArrayInputStream(
-                new Utf8String(template.toString()).asBytes()
-            ), params
+            new InputStreamOf(template),
+            params
         );
     }
 
@@ -136,17 +134,10 @@ public final class RsVelocity extends RsWrap {
     public RsVelocity(final String folder,
         final InputStream template, final Scalar<Map<String, Object>> params) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() {
-                    return new RsEmpty().head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RsVelocity.render(folder, template, params.get());
-                }
-            }
+            new ResponseOf(
+                () -> new RsEmpty().head(),
+                () -> RsVelocity.render(folder, template, params.get())
+            )
         );
     }
 
@@ -162,19 +153,19 @@ public final class RsVelocity extends RsWrap {
         final InputStream template,
         final Map<String, Object> params) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Writer writer = new Utf8OutputStreamContent(baos);
-        final VelocityEngine engine = new VelocityEngine();
-        engine.setProperty(
-            "file.resource.loader.path",
-            folder
-        );
-        engine.evaluate(
-            new VelocityContext(params),
-            writer,
-            "",
-            new Utf8InputStreamContent(template)
-        );
-        writer.close();
+        try (Writer writer = new WriterTo(baos)) {
+            final VelocityEngine engine = new VelocityEngine();
+            engine.setProperty(
+                "file.resource.loader.path",
+                folder
+            );
+            engine.evaluate(
+                new VelocityContext(params),
+                writer,
+                "",
+                new ReaderOf(template)
+            );
+        }
         return new ByteArrayInputStream(baos.toByteArray());
     }
 

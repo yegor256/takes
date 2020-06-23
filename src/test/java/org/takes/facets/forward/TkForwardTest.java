@@ -23,8 +23,6 @@
  */
 package org.takes.facets.forward;
 
-import java.io.IOException;
-import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
@@ -32,6 +30,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -68,22 +67,13 @@ public final class TkForwardTest {
      */
     @Test
     public void catchesExceptionThrownByResponse() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) {
-                return new Response() {
-                    @Override
-                    public Iterable<String> head() {
-                        return new RsEmpty().head();
-                    }
-
-                    @Override
-                    public InputStream body() throws IOException {
-                        throw new RsForward("/b");
-                    }
-                };
-            }
-        };
+        final Take take =
+            request -> new ResponseOf(
+                () -> new RsEmpty().head(),
+                () -> {
+                    throw new RsForward("/b");
+                }
+            );
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkForward(take).act(new RqFake())

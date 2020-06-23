@@ -23,41 +23,40 @@
  */
 package org.takes.misc;
 
-import java.io.IOException;
-import java.util.Arrays;
-import org.cactoos.text.Joined;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.ScalarHasValue;
 
 /**
- * Test case for {@link Transform}.
+ * Test case for {@link Equality}.
  *
- * @since 0.15.2
+ * @since 2.0.0
  */
-public final class TransformTest {
+public final class EqualityTest {
 
-    /**
-     * Transform can transform list.
-     * @throws IOException when there is a problem
-     */
     @Test
-    public void transformsList() throws IOException {
-        MatcherAssert.assertThat(
-            new Joined(
-                " ",
-                new Transform<String, String>(
-                    Arrays.asList("one", "two", "three"),
-                    new TransformAction<String, String>() {
-                        @Override
-                        public String transform(final String element) {
-                            return element.concat("t");
-                        }
-                    }
-                )
-            ).asString(),
-            Matchers.equalTo("onet twot threet")
-        );
+    public void mustEvaluateTrueEqualityOfTexts() {
+        new Assertion<>(
+            "Must evaluate true equality for Texts",
+            new Equality<>(
+                new Lowered(new TextOf("Hello")),
+                new TextOf("hello")
+            ),
+            new ScalarHasValue<>(true)
+        ).affirm();
     }
 
+    @Test
+    public void mustEvaluateFalseEqualityOfTexts() {
+        new Assertion<>(
+            "Must evaluate false equality for Texts",
+            new Equality<>(
+                new TextOf("John"),
+                new TextOf("Robert")
+            ),
+            new ScalarHasValue<>(false)
+        ).affirm();
+    }
 }

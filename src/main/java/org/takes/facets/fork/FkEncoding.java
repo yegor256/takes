@@ -29,9 +29,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 
@@ -79,7 +82,9 @@ public final class FkEncoding implements Fork {
      * @param response Response to return
      */
     public FkEncoding(final String enc, final Response response) {
-        this.encoding = new EnglishLowerCase(enc.trim()).string();
+        this.encoding = new UncheckedText(
+            new Lowered(new Trimmed(new TextOf(enc)))
+        ).asString();
         this.origin = response;
     }
 
@@ -93,8 +98,13 @@ public final class FkEncoding implements Fork {
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
                 FkEncoding.ENCODING_SEP.split(
-                    new EnglishLowerCase(headers.next().trim())
-                        .string()
+                    new UncheckedText(
+                        new Lowered(
+                            new Trimmed(
+                                new TextOf(headers.next())
+                            )
+                        )
+                    ).asString()
                 )
             );
             if (items.contains(this.encoding)) {

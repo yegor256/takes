@@ -60,7 +60,7 @@ public final class TkSlf4jRemoteTest {
                         .fetch()
                         .as(RestResponse.class)
                         .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_OK);
+                        .assertStatus(HttpURLConnection.HTTP_NO_CONTENT);
                 }
             }
         );

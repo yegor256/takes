@@ -29,11 +29,20 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Iterator;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import lombok.EqualsAndHashCode;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.scalar.Constant;
+import org.cactoos.scalar.FirstOf;
+import org.cactoos.scalar.Not;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.IsBlank;
+import org.cactoos.text.StartsWith;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.signatures.SiHmac;
@@ -111,21 +120,25 @@ public final class PsToken implements Pass {
     @Override
     public Opt<Identity> enter(final Request req) throws IOException {
         // @checkstyle ExecutableStatementCount (100 lines)
-        final Iterator<String> headers = new RqHeaders.Base(req)
-            .header(this.header).iterator();
         Opt<Identity> user = new Opt.Empty<>();
-        String head = "";
-        while (headers.hasNext()) {
-            final String nexthead = headers.next();
-            if (nexthead.trim().startsWith("Bearer")) {
-                head = nexthead;
-                break;
-            }
-        }
-        final String dot = "\\.";
-        if (!head.isEmpty()) {
-            final String jwt = head.split(" ", 2)[1].trim();
-            final String[] parts = jwt.split(dot);
+        final UncheckedText head = new Unchecked<>(
+            new FirstOf<>(
+                text -> new StartsWith(
+                    new Trimmed(text),
+                    new TextOf("Bearer")
+                ).value(),
+                new Mapped<>(
+                    UncheckedText::new,
+                    new RqHeaders.Base(req).header(this.header)
+                ),
+                new Constant<>(new UncheckedText(""))
+            )
+        ).value();
+        if (new Unchecked<>(new Not(new IsBlank(head))).value()) {
+            final String jwt = new UncheckedText(
+                new Trimmed(new TextOf(head.asString().split(" ", 2)[1]))
+            ).asString();
+            final String[] parts = jwt.split("\\.");
             final byte[] jwtheader = parts[0].getBytes(
                 Charset.defaultCharset()
             );

@@ -23,11 +23,10 @@
  */
 package org.takes.rq.multipart;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import org.cactoos.io.InputStreamOf;
 import org.takes.Request;
-import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqMultipart;
 import org.takes.rq.RqPrint;
@@ -163,9 +162,7 @@ public final class RqMtFake implements RqMultipart {
 
         @Override
         public InputStream body() {
-            return new ByteArrayInputStream(
-                new Utf8String(this.parts).asBytes()
-            );
+            return new InputStreamOf(this.parts);
         }
     }
 }

@@ -25,7 +25,6 @@ package org.takes.facets.fork;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.rq.RqFake;

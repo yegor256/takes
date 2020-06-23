@@ -26,12 +26,14 @@ package org.takes.facets.auth;
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.rq.RqFake;
@@ -42,7 +44,9 @@ import org.takes.rs.RsWithType;
 /**
  * Test case for {@link PsByFlag}.
  * @since 0.10
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class PsByFlagTest {
     /**
      * PsByFlag can skip if nothing found.
@@ -88,7 +92,7 @@ public final class PsByFlagTest {
         final Response response = new RsWithStatus(
             new RsWithType(
                 new RsWithBody("<html>This is test response</html>"),
-                    "text/html"
+                "text/html"
             ),
             HttpURLConnection.HTTP_OK
         );
@@ -107,9 +111,13 @@ public final class PsByFlagTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(PsByFlag.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+    public void mustEvaluateTrueEqualityTest() throws Exception {
+        final Map<Pattern, Pass> passes = new HashMap<>(1);
+        passes.put(Pattern.compile("key"), new PsFake(true));
+        new Assertion<>(
+            "Must evaluate true equality",
+            new PsByFlag(passes),
+            new IsEqual<>(new PsByFlag(passes))
+        ).affirm();
     }
 }

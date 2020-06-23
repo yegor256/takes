@@ -24,16 +24,17 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RqWithHeader}.
  * @since 0.9
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RqWithHeaderTest {
 
     /**
@@ -58,10 +59,19 @@ public final class RqWithHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeader.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
+    public void evaluateTrueEqualityTest() throws Exception {
+        new Assertion<>(
+            "Must evaluate true equality",
+            new RqWithHeader(
+                new RqFake(),
+                "X-Custom-Header", "Custom-Value"
+            ),
+            new IsEqual<>(
+                new RqWithHeader(
+                    new RqFake(),
+                    "X-Custom-Header", "Custom-Value"
+                )
+            )
+        ).affirm();
     }
 }

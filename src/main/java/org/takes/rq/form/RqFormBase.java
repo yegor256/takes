@@ -35,10 +35,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
-import org.takes.misc.Sprintf;
 import org.takes.misc.VerboseIterable;
 import org.takes.rq.RqForm;
 import org.takes.rq.RqPrint;
@@ -47,6 +51,7 @@ import org.takes.rq.RqWrap;
 /**
  * Base implementation of {@link RqForm}.
  * @since 0.33
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true)
@@ -76,25 +81,27 @@ public final class RqFormBase extends RqWrap implements RqForm {
     public Iterable<String> param(final CharSequence key)
         throws IOException {
         final List<String> values = this.map().getOrDefault(
-            new EnglishLowerCase(key.toString()).string(),
+            new UncheckedText(
+                new Lowered(key.toString())
+            ).asString(),
             Collections.emptyList()
         );
         final Iterable<String> iter;
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                new Sprintf(
+                new FormattedText(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()
-                )
+                ).asString()
             );
         } else {
             iter = new VerboseIterable<>(
                 values,
-                new Sprintf(
+                new FormattedText(
                     "there are only %d params by name \"%s\"",
                     values.size(), key
-                )
+                ).asString()
             );
         }
         return iter;
@@ -110,10 +117,11 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @param txt Text
      * @return Decoded
      */
-    private static String decode(final CharSequence txt) {
+    private static String decode(final Text txt) {
         try {
             return URLDecoder.decode(
-                txt.toString(), Charset.defaultCharset().name()
+                new UncheckedText(txt).asString(),
+                Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(ex);
@@ -155,13 +163,15 @@ public final class RqFormBase extends RqWrap implements RqForm {
                     )
                 );
             }
-            final String key = RqFormBase.decode(
-                new EnglishLowerCase(parts[0].trim()).string()
-            );
+            final String key = RqFormBase.decode(new Lowered(parts[0]));
             if (!map.containsKey(key)) {
                 map.put(key, new LinkedList<>());
             }
-            map.get(key).add(RqFormBase.decode(parts[1].trim()));
+            map.get(key).add(
+                RqFormBase.decode(
+                    new Trimmed(new TextOf(parts[1]))
+                )
+            );
         }
         return map;
     }

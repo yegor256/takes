@@ -40,8 +40,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamContent;
+import org.cactoos.io.WriterTo;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithType;
@@ -111,23 +111,14 @@ public final class RsXembly extends RsWrap {
      */
     public RsXembly(final Node dom, final XeSource src) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return new RsWithType(
-                        new RsWithStatus(
-                            new RsEmpty(),
-                            HttpURLConnection.HTTP_OK
-                        ),
-                        "text/xml"
-                    ).head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RsXembly.render(dom, src);
-                }
-            }
+            new ResponseOf(
+                () -> new RsWithType(
+                    new RsWithStatus(
+                        new RsEmpty(), HttpURLConnection.HTTP_OK
+                    ), "text/xml"
+                ).head(),
+                () -> RsXembly.render(dom, src)
+            )
         );
     }
 
@@ -148,7 +139,7 @@ public final class RsXembly extends RsWrap {
             TransformerFactory.newInstance().newTransformer().transform(
                 new DOMSource(node),
                 new StreamResult(
-                    new Utf8OutputStreamContent(baos)
+                    new WriterTo(baos)
                 )
             );
         } catch (final TransformerException ex) {

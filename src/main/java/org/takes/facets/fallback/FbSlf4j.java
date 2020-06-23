@@ -23,15 +23,14 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.text.TextOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.Response;
 import org.takes.misc.Opt;
-import org.takes.misc.Utf8PrintStream;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
@@ -72,17 +71,12 @@ public final class FbSlf4j extends FbWrap {
      * @throws IOException If fails
      */
     private static void log(final RqFallback req) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Throwable error = req.throwable();
-        try (PrintStream stream = new Utf8PrintStream(baos, false)) {
-            error.printStackTrace(stream);
-        }
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",
             new RqMethod.Base(req).method(),
             new RqHref.Base(req).href(),
             req.code(),
-            baos.toString("UTF-8")
+            new TextOf(new BytesOf(req.throwable()))
         );
     }
 

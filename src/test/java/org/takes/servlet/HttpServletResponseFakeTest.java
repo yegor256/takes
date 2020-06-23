@@ -31,6 +31,8 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
 
@@ -41,6 +43,27 @@ import org.takes.rs.RsWithHeader;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HttpServletResponseFakeTest {
+    /**
+     * Set-Cookie header name.
+     */
+    private static final String SET_COOKIE = "Set-Cookie:";
+
+    /**
+     * HTTP/1.1 header name.
+     */
+    private static final String VERSION = "HTTP/1.1";
+
+    /**
+     * HTTP/1.1 502 bad gateway.
+     */
+    private static final String ERROR = "HTTP/1.1 502 Bad Gateway";
+
+    /**
+     * HTTP/1.1 101 custom error message.
+     */
+    private static final String INFO =
+        "HTTP/1.1 101 Switching Protocol";
+
     @Test
     public void cookie() throws Exception {
         final String name = "foo";
@@ -51,10 +74,11 @@ public final class HttpServletResponseFakeTest {
         sresp.addCookie(new Cookie(name, value));
         MatcherAssert.assertThat(
             "Can't add a cookie in servlet response",
-            sresp.getHeaders(name),
+            sresp.getHeaders(HttpServletResponseFakeTest.SET_COOKIE),
             Matchers.hasItem(
                 new FormattedText(
-                    "Set-Cookie: %s=%s;",
+                    "%s %s=%s;",
+                    HttpServletResponseFakeTest.SET_COOKIE,
                     name,
                     value
                 ).asString()
@@ -111,11 +135,13 @@ public final class HttpServletResponseFakeTest {
         );
         // @checkstyle MagicNumber (1 line)
         sresp.setStatus(502);
-        MatcherAssert.assertThat(
+        new Assertion<>(
             "Can't set a status in servlet response",
-            sresp.getHeaders("Status"),
-            Matchers.hasItem("HTTP/1.1 502 Bad Gateway")
-        );
+            sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
+            new HasValues<>(
+                HttpServletResponseFakeTest.ERROR
+            )
+        ).affirm();
     }
 
     @Test
@@ -124,11 +150,13 @@ public final class HttpServletResponseFakeTest {
             new RsEmpty()
         );
         // @checkstyle MagicNumber (1 line)
-        sresp.sendError(101, "Custom error message");
-        MatcherAssert.assertThat(
+        sresp.sendError(101, "Switching Protocol");
+        new Assertion<>(
             "Can't send a error in servlet response",
-            sresp.getHeaders("Status"),
-            Matchers.hasItem("HTTP/1.1 101 Custom error message")
-        );
+            sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
+            new HasValues<>(
+                HttpServletResponseFakeTest.INFO
+            )
+        ).affirm();
     }
 }

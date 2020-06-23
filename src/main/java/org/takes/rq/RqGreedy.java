@@ -26,7 +26,6 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -58,17 +57,10 @@ public final class RqGreedy extends RqWrap {
     private static Request consume(final Request req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RqPrint(req).printBody(baos);
-        return new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-
-            @Override
-            public InputStream body() {
-                return new ByteArrayInputStream(baos.toByteArray());
-            }
-        };
+        return new RequestOf(
+            req::head,
+            () -> new ByteArrayInputStream(baos.toByteArray())
+        );
     }
 
 }

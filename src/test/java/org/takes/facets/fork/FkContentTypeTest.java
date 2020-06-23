@@ -24,11 +24,11 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,6 +41,7 @@ import org.takes.rs.RsEmpty;
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class FkContentTypeTest {
 
     /**
@@ -157,10 +158,14 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(FkContentType.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+    public void mustEvaluateEqualsTest() throws Exception {
+        final Take take = req -> new RsEmpty();
+        final String type = "text/xml";
+        new Assertion<>(
+            "Must evaluate true equality",
+            new FkContentType(type, take),
+            new IsEqual<>(new FkContentType(type, take))
+        ).affirm();
     }
 
     /**

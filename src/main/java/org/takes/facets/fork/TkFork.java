@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -89,7 +90,7 @@ public final class TkFork implements Take {
      * @param frks Forks
      */
     public TkFork(final Collection<Fork> frks) {
-        this.forks = Collections.unmodifiableCollection(frks);
+        this.forks = new ListOf<>(frks);
     }
 
     @Override

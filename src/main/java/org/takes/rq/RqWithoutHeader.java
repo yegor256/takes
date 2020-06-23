@@ -23,12 +23,13 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.scalar.Not;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.StartsWith;
 import org.takes.Request;
-import org.takes.misc.EnglishLowerCase;
 
 /**
  * Request without a header (even if it was absent).
@@ -48,24 +49,21 @@ public final class RqWithoutHeader extends RqWrap {
     public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
             // @checkstyle AnonInnerLengthCheck (50 lines)
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    final String prefix = String.format(
-                        "%s:", new EnglishLowerCase(name.toString()).string()
-                    );
-                    return new Filtered<>(
-                        header -> !new EnglishLowerCase(header).string()
-                            .startsWith(prefix),
-                        req.head()
-                    );
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return req.body();
-                }
-            }
+            new RequestOf(
+                () -> new Filtered<>(
+                    header -> new Not(
+                        new StartsWith(
+                            new Lowered(header),
+                            new FormattedText(
+                                "%s:",
+                                new Lowered(name.toString())
+                            )
+                        )
+                    ).value(),
+                    req.head()
+                ),
+                req::body
+            )
         );
     }
 

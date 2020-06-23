@@ -26,9 +26,10 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.Request;
 import org.takes.facets.auth.codecs.CcPlain;
-import org.takes.misc.Utf8String;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWrap;
 
@@ -76,7 +77,9 @@ public final class RqAuth extends RqWrap {
         final Identity user;
         if (headers.hasNext()) {
             user = new CcPlain().decode(
-                new Utf8String(headers.next()).asBytes()
+                new UncheckedBytes(
+                    new BytesOf(headers.next())
+                ).asBytes()
             );
         } else {
             user = Identity.ANONYMOUS;

@@ -24,7 +24,6 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
@@ -33,6 +32,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsWrap;
 
 /**
@@ -62,17 +62,10 @@ public final class RsFork extends RsWrap {
      */
     public RsFork(final Request req, final Iterable<Fork> list) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsFork.pick(req, list).head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RsFork.pick(req, list).body();
-                }
-            }
+            new ResponseOf(
+                () -> RsFork.pick(req, list).head(),
+                () -> RsFork.pick(req, list).body()
+            )
         );
     }
 

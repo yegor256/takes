@@ -43,12 +43,11 @@ import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqSocket;
+import org.takes.rs.ResponseOf;
 import org.takes.tk.TkText;
 
 /**
@@ -132,22 +131,12 @@ public final class BkBasicTest {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
         new BkBasic(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    ref.set(req);
-                    return new Response() {
-                        @Override
-                        public Iterable<String> head() throws IOException {
-                            return Collections.singletonList("HTTP/1.1 200 OK");
-                        }
-
-                        @Override
-                        public InputStream body() throws IOException {
-                            return req.body();
-                        }
-                    };
-                }
+            req -> {
+                ref.set(req);
+                return new ResponseOf(
+                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
+                    req::body
+                );
             }
         ).accept(socket);
         final Request request = ref.get();
@@ -209,7 +198,7 @@ public final class BkBasicTest {
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-                )
+            )
             ) {
                 socket.getOutputStream().write(
                     new Joined(
@@ -272,7 +261,7 @@ public final class BkBasicTest {
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-                )
+            )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
@@ -329,7 +318,7 @@ public final class BkBasicTest {
             try (Socket socket = new Socket(
                 server.getInetAddress(),
                 server.getLocalPort()
-                )
+            )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(

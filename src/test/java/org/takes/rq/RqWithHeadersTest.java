@@ -24,19 +24,22 @@
 package org.takes.rq;
 
 import java.io.IOException;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
+import org.takes.Request;
 
 /**
  * Test case for {@link RqWithHeaders}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
+ * @checkstyle MultipleStringLiteralsCheck (100 lines)
+ * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RqWithHeadersTest {
 
     /**
@@ -74,10 +77,23 @@ public final class RqWithHeadersTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(RqWithHeaders.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
+    public void mustEqualTest() throws Exception {
+        final Request request = new RqWithHeader(
+            new RqFake(),
+            "jsessionid", "abcdefghigklmnop"
+        );
+        new Assertion<>(
+            "Must evaluate true equality",
+            new RqWithHeaders(
+                request,
+                "clusterNode: 5"
+            ),
+            new IsEqual<>(
+                new RqWithHeaders(
+                    request,
+                    "clusterNode: 5"
+                )
+            )
+        ).affirm();
     }
 }

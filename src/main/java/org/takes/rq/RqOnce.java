@@ -23,8 +23,6 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
@@ -35,6 +33,9 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.36
+ * @todo #918:30min Please use {@link org.cactoos.scalar.Sticky} decorator
+ *  class so that multiple calls to body() would produce the same cached result
+ *  rather than throwing an exception.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqOnce extends RqWrap {
@@ -54,14 +55,9 @@ public final class RqOnce extends RqWrap {
      */
     private static Request wrap(final Request req) {
         final AtomicBoolean seen = new AtomicBoolean(false);
-        return new Request() {
-            @Override
-            public Iterable<String> head() throws IOException {
-                return req.head();
-            }
-
-            @Override
-            public InputStream body() throws IOException {
+        return new RequestOf(
+            req::head,
+            () -> {
                 if (!seen.getAndSet(true)) {
                     throw new IllegalStateException(
                         "It's not allowed to call body() more than once"
@@ -69,7 +65,6 @@ public final class RqOnce extends RqWrap {
                 }
                 return req.body();
             }
-        };
+        );
     }
-
 }

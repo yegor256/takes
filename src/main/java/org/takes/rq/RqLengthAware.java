@@ -57,19 +57,7 @@ public final class RqLengthAware extends RqWrap {
      * @param req Original request
      */
     public RqLengthAware(final Request req) {
-        super(
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return req.head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return RqLengthAware.cap(req);
-                }
-            }
-        );
+        super(new RequestOf(req::head, () -> RqLengthAware.cap(req)));
     }
 
     /**

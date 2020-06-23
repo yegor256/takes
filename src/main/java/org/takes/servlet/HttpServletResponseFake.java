@@ -32,15 +32,16 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import org.cactoos.collection.Filtered;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
-import org.cactoos.iterable.Filtered;
-import org.cactoos.list.ListOf;
 import org.cactoos.scalar.LengthOf;
+import org.cactoos.text.Lowered;
+import org.cactoos.text.StartsWith;
+import org.cactoos.text.TextOf;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
-import org.takes.misc.EnglishLowerCase;
 import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithoutHeader;
@@ -118,15 +119,15 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     @Override
     public Collection<String> getHeaders(final String header) {
         final String prefix = String.format(
-            "%s:", new EnglishLowerCase(header)
+            "%s",
+            new Lowered(header)
         );
         try {
-            return new ListOf<>(
-                new Filtered<>(
-                    hdr -> !new EnglishLowerCase(hdr).string()
-                        .startsWith(prefix),
-                    this.response.get().head()
-                )
+            return new Filtered<>(
+                hdr -> new StartsWith(
+                    new Lowered(hdr), new TextOf(prefix)
+                ).value(),
+                this.response.get().head()
             );
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);

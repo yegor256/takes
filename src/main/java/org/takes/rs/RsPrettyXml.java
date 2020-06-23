@@ -23,6 +23,7 @@
  */
 package org.takes.rs;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,8 +39,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.scalar.And;
+import org.cactoos.scalar.HashCode;
+import org.cactoos.scalar.Or;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 import org.w3c.dom.DocumentType;
 import org.xml.sax.InputSource;
@@ -51,9 +55,9 @@ import org.xml.sax.XMLReader;
  *
  * <p>The class is immutable and thread-safe.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(of = "origin")
-@EqualsAndHashCode
 public final class RsPrettyXml implements Response {
 
     /**
@@ -95,6 +99,32 @@ public final class RsPrettyXml implements Response {
     @Override
     public InputStream body() throws IOException {
         return this.make().body();
+    }
+
+    @Override
+    @SuppressFBWarnings("EQ_UNUSUAL")
+    public boolean equals(final Object that) {
+        return new Unchecked<>(
+            new Or(
+                () -> this == that,
+                new And(
+                    () -> that != null,
+                    () -> RsPrettyXml.class.equals(that.getClass()),
+                    () -> {
+                        final RsPrettyXml other = (RsPrettyXml) that;
+                        return new And(
+                            () -> this.origin.equals(other.origin),
+                            () -> this.transformed.equals(other.transformed)
+                        ).value();
+                    }
+                )
+            )
+        ).value();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCode(this.origin, this.transformed).value();
     }
 
     /**
@@ -208,5 +238,4 @@ public final class RsPrettyXml implements Response {
             throw new IOException(ex);
         }
     }
-
 }

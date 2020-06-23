@@ -23,7 +23,6 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -32,6 +31,7 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
@@ -80,19 +80,16 @@ public final class TkFallbackTest {
                     new Take() {
                         @Override
                         public Response act(final Request req) {
-                            return new Response() {
-                                @Override
-                                public Iterable<String> head() {
+                            return new ResponseOf(
+                                () -> {
                                     throw new UnsupportedOperationException("");
-                                }
-
-                                @Override
-                                public InputStream body() {
+                                },
+                                () -> {
                                     throw new IllegalArgumentException(
                                         "here we fail"
                                     );
                                 }
-                            };
+                            );
                         }
                     },
                     new FbFixed(new RsText("caught here!"))

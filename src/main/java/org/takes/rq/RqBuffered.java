@@ -24,8 +24,6 @@
 package org.takes.rq;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
@@ -45,17 +43,10 @@ public final class RqBuffered extends RqWrap {
      */
     public RqBuffered(final Request req) {
         super(
-            new Request() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return req.head();
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return new BufferedInputStream(req.body());
-                }
-            }
+            new RequestOf(
+                req::head,
+                () -> new BufferedInputStream(req.body())
+            )
         );
     }
 

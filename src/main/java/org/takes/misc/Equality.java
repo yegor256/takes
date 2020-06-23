@@ -23,51 +23,54 @@
  */
 package org.takes.misc;
 
-import java.util.Map;
+import java.util.Objects;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Unchecked;
 
 /**
- * An immutable and thread-safe implementation of
- * {@link Map.Entry} interface.
- *
- * @param <K> Key type
- * @param <V> Value type
- * @since 0.27
+ * Scalar (@link org.cactoos.Scalar} that checks whether two objects
+ *  are equal by content.
+ * This class is just a temporary solution until Cactoos project provides
+ *  similar scalar.
+ * @param <T> Type of items
+ * @since 2.0.0
  */
-public final class EntryImpl<K, V> implements Map.Entry<K, V> {
+public final class Equality<T> implements Scalar<Boolean> {
 
     /**
-     * Key.
+     * The first scalar.
      */
-    private final K key;
+    private final Scalar<T> first;
 
     /**
-     * Value.
+     * The second scalar.
      */
-    private final V value;
+    private final Scalar<T> second;
 
     /**
      * Ctor.
-     * @param keyy Key
-     * @param val Value
+     * @param source The first object to compare.
+     * @param compared The second object to compare.
      */
-    public EntryImpl(final K keyy, final V val) {
-        super();
-        this.key = keyy;
-        this.value = val;
+    public Equality(final T source, final T compared) {
+        this(() -> source, () -> compared);
+    }
+
+    /**
+     * Ctor.
+     * @param source The first scalar to compare.
+     * @param compared The second scalar to compare.
+     */
+    public Equality(final Scalar<T> source, final Scalar<T> compared) {
+        this.first = source;
+        this.second = compared;
     }
 
     @Override
-    public K getKey() {
-        return this.key;
-    }
-
-    @Override
-    public V getValue() {
-        return this.value;
-    }
-
-    @Override
-    public V setValue(final V val) {
-        throw new UnsupportedOperationException("This object is immutable.");
+    public Boolean value() {
+        return Objects.equals(
+            new Unchecked<>(this.first).value(),
+            new Unchecked<>(this.second).value()
+        );
     }
 }

@@ -26,11 +26,11 @@ package org.takes.facets.auth.codecs;
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.util.Map;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -134,9 +134,20 @@ public final class CcBase64Test {
      * @throws Exception If some problem inside
      */
     @Test
-    public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(CcBase64.class)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+    public void mustEvaluateTrueEquality() throws Exception {
+        new Assertion<>(
+            "Must evaluate equality of CcBase64 objects",
+            new CcBase64(new CcPlain()),
+            new IsEqual<>(new CcBase64(new CcPlain()))
+        ).affirm();
+    }
+
+    @Test
+    public void mustEvaluateIdenticalHashCodes() throws Exception {
+        new Assertion<>(
+            "Must evaluate identical hash codes",
+            new CcBase64(new CcPlain()).hashCode(),
+            new IsEqual<>(new CcBase64(new CcPlain()).hashCode())
+        ).affirm();
     }
 }

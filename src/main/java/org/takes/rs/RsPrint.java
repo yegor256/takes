@@ -33,11 +33,11 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.TextOf;
 import org.takes.Response;
-import org.takes.misc.Utf8OutputStreamContent;
-import org.takes.misc.Utf8String;
 
 /**
  * Response decorator that can print an entire response in HTTP format.
@@ -90,7 +90,7 @@ public final class RsPrint extends RsWrap implements Text {
                     public String value() throws Exception {
                         RsPrint.this.printHead(this.baos);
                         RsPrint.this.printBody(this.baos);
-                        return new Utf8String(
+                        return new TextOf(
                             this.baos.toByteArray()
                         ).asString();
                     }
@@ -112,7 +112,7 @@ public final class RsPrint extends RsWrap implements Text {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new Utf8String(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).asString();
     }
 
     /**
@@ -124,7 +124,7 @@ public final class RsPrint extends RsWrap implements Text {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new Utf8String(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).asString();
     }
 
     /**
@@ -144,7 +144,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
-        this.printHead(new Utf8OutputStreamContent(output));
+        this.printHead(new WriterTo(output));
     }
 
     /**

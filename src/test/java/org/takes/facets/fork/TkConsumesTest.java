@@ -24,11 +24,11 @@
 package org.takes.facets.fork;
 
 import java.util.Arrays;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.Response;
@@ -38,6 +38,7 @@ import org.takes.rs.RsEmpty;
 import org.takes.rs.RsJson;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkFixed;
+import org.takes.tk.TkText;
 
 /**
  * Test case for {@link TkConsumes}.
@@ -110,10 +111,14 @@ public final class TkConsumesTest {
      * @throws Exception If some problem inside
      */
     @Test
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public void equalsAndHashCodeEqualTest() throws Exception {
-        EqualsVerifier.forClass(TkConsumes.class)
-            .withRedefinedSuperclass()
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+        final Take take = new TkText("text");
+        final String type = "Content-Type: text/plain";
+        new Assertion<>(
+            "Must evaluate true equality",
+            new TkConsumes(take, type),
+            new IsEqual<>(new TkConsumes(take, type))
+        ).affirm();
     }
 }

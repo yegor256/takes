@@ -37,7 +37,6 @@ import java.util.concurrent.Future;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.Response;
 import org.takes.Take;
@@ -49,13 +48,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link FtRemote}.
  * @since 0.21
- *
- * @todo #800:30min We can't assert if FtRemote returns an empty body because
- *  some bug in jcabi-http (reported in
- *  https://github.com/jcabi/jcabi-http/issues/177). After this bug is fixed,
- *  the {@link org.takes.tk.TkSlf4jRemoteTest} should be fixed and relevant
- *  test case should be unignored.
- *
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class FtRemoteTest {
@@ -133,7 +125,6 @@ public final class FtRemoteTest {
      * FtRemote can return empty response body for {@link TkEmpty}.
      * @throws Exception If some problems inside
      */
-    @Ignore
     @Test
     public void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
@@ -148,7 +139,7 @@ public final class FtRemoteTest {
                         .fetch()
                         .as(RestResponse.class)
                         .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_OK);
+                        .assertStatus(HttpURLConnection.HTTP_NO_CONTENT);
                 }
             }
         );

@@ -28,6 +28,9 @@ import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.TextOf;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 
@@ -114,6 +117,7 @@ public interface RqRequestLine extends Request {
              * Value.
              */
             private final int value;
+
             /**
              * Ctor.
              * @param val Value
@@ -242,7 +246,9 @@ public interface RqRequestLine extends Request {
                     )
                 );
             }
-            return value.trim();
+            return new UncheckedText(
+                new Trimmed(new TextOf(value))
+            ).asString();
         }
     }
 }

@@ -23,15 +23,15 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.BytesOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.Response;
-import org.takes.misc.Utf8String;
 
 /**
  * Response decorator, with body.
@@ -91,7 +91,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, new Utf8String(body.toString()).asBytes());
+        this(res, new UncheckedBytes(new BytesOf(body)).asBytes());
     }
 
     /**
@@ -141,35 +141,17 @@ public final class RsWithBody extends RsWrap {
      */
     RsWithBody(final Response res, final Body body) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithBody.append(res, body.length());
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return body.stream();
-                }
-            }
+            new ResponseOf(
+                () -> {
+                    final String header = "Content-Length";
+                    return new RsWithHeader(
+                        new RsWithoutHeader(res, header),
+                        header,
+                        Integer.toString(body.length())
+                    ).head();
+                },
+                body::stream
+            )
         );
     }
-
-    /**
-     * Appends content length to header from response.
-     * @param res Response
-     * @param length Response body content length
-     * @return Iterable String of header attributes
-     * @throws IOException if something goes wrong.
-     */
-    private static Iterable<String> append(final Response res,
-        final int length) throws IOException {
-        final String header = "Content-Length";
-        return new RsWithHeader(
-            new RsWithoutHeader(res, header),
-            header,
-            Integer.toString(length)
-        ).head();
-    }
-
 }

@@ -36,6 +36,7 @@ import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
+import org.takes.rs.ResponseOf;
 import org.takes.tk.TkWrap;
 
 /**
@@ -45,6 +46,10 @@ import org.takes.tk.TkWrap;
  *
  * @since 0.1
  * @checkstyle IllegalCatchCheck (500 lines)
+ * @todo #918:30min {@link TkFallback} class is very complicated, hard to read.
+ *  Please consider removing static methods and replace them by dedicated
+ *  elegant classes according to
+ *  https://www.yegor256.com/2017/02/07/private-method-is-new-class.html
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -145,14 +150,13 @@ public final class TkFallback extends TkWrap {
      * @param fbk Fallback
      * @param req Request
      * @return Response
+     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
-        // @checkstyle AnonInnerLengthCheck (50 lines)
-        return new Response() {
-            @Override
-            public Iterable<String> head() throws IOException {
+        return new ResponseOf(
+            () -> {
                 final long start = System.currentTimeMillis();
                 Iterable<String> head;
                 try {
@@ -178,10 +182,8 @@ public final class TkFallback extends TkWrap {
                     }
                 }
                 return head;
-            }
-
-            @Override
-            public InputStream body() throws IOException {
+            },
+            () -> {
                 final long start = System.currentTimeMillis();
                 InputStream body;
                 try {
@@ -208,7 +210,7 @@ public final class TkFallback extends TkWrap {
                 }
                 return body;
             }
-        };
+        );
     }
 
     /**

@@ -26,11 +26,11 @@ package org.takes.rq.multipart;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import org.cactoos.io.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.Request;
-import org.takes.misc.Utf8String;
 
 /**
  * Test case for {@link RqTemp}.
@@ -43,14 +43,14 @@ public final class RqTempTest {
      * @throws IOException if some problem occurs.
      */
     @Test
-    public void deletesTempFile() throws IOException {
+    public void deletesTempFile() throws Exception {
         final File file = File.createTempFile(
             RqTempTest.class.getName(),
             ".tmp"
         );
         Files.write(
             file.toPath(),
-            new Utf8String("Temp file deletion test").asBytes()
+            new BytesOf("Temp file deletion test").asBytes()
         );
         final Request request = new RqTemp(file);
         try {

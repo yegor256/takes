@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,8 +31,11 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.iterable.Filtered;
+import org.cactoos.iterable.Joined;
+import org.cactoos.scalar.Not;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.StartsWith;
 import org.takes.Response;
-import org.takes.misc.Concat;
 
 /**
  * Response decorator, with status code.
@@ -78,17 +80,10 @@ public final class RsWithStatus extends RsWrap {
     public RsWithStatus(final Response res, final int code,
         final CharSequence rsn) {
         super(
-            new Response() {
-                @Override
-                public Iterable<String> head() throws IOException {
-                    return RsWithStatus.head(res, code, rsn);
-                }
-
-                @Override
-                public InputStream body() throws IOException {
-                    return res.body();
-                }
-            }
+            new ResponseOf(
+                () -> RsWithStatus.head(res, code, rsn),
+                res::body
+            )
         );
     }
 
@@ -112,12 +107,14 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        return new Concat<>(
-            Collections.singletonList(
-                String.format("HTTP/1.1 %d %s", status, reason)
-            ),
+        return new Joined<>(
+            new FormattedText(
+                "HTTP/1.1 %d %s", status, reason
+            ).asString(),
             new Filtered<>(
-                item -> !item.startsWith("HTTP/"),
+                item -> new Not(
+                    new StartsWith(item, "HTTP/")
+                ).value(),
                 origin.head()
             )
         );
