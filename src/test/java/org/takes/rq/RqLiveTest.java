@@ -23,9 +23,10 @@
  */
 package org.takes.rq;
 
-import com.google.common.base.Joiner;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,20 +39,26 @@ import org.takes.Request;
 public final class RqLiveTest {
 
     /**
+     * Carriage return constant.
+     */
+    private static final String CRLF = "\r\n";
+
+    /**
      * RqLive can build a request.
      * @throws IOException If some problem inside
      */
     @Test
     public void buildsHttpRequest() throws IOException {
         final Request req = new RqLive(
-            new ByteArrayInputStream(
-                this.joiner().join(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
                     "GET / HTTP/1.1",
                     "Host:e",
                     "Content-Length: 5",
                     "",
                     "hello"
-                ).getBytes()
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -71,14 +78,15 @@ public final class RqLiveTest {
     @Test
     public void supportMultiLineHeaders() throws IOException {
         final Request req = new RqLive(
-            new ByteArrayInputStream(
-                this.joiner().join(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
                     "GET /multiline HTTP/1.1",
                     "X-Foo: this is a test",
                     " header for you",
                     "",
                     "hello multi part"
-                ).getBytes()
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -95,13 +103,14 @@ public final class RqLiveTest {
     @Test
     public void supportMultiLineHeadersWithColon() throws IOException {
         final Request req = new RqLive(
-            new ByteArrayInputStream(
-                this.joiner().join(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
                     "GET /multilinecolon HTTP/1.1",
                     "Foo: first line",
                     " second: line",
                     ""
-                ).getBytes()
+                )
             )
         );
         MatcherAssert.assertThat(
@@ -134,14 +143,6 @@ public final class RqLiveTest {
                 "GET /test HTTP/1.1\rHost: localhost".getBytes()
             )
         );
-    }
-
-    /**
-     * Create a joiner for a header.
-     * @return Joiner
-     */
-    private Joiner joiner() {
-        return Joiner.on("\r\n");
     }
 
 }
