@@ -45,7 +45,6 @@ import org.takes.rs.RsWithoutHeader;
  *
  * @since 0.1
  */
-@ToString(callSuper = true, of = "origin")
 @EqualsAndHashCode(callSuper = true, of = "origin")
 public class RsForward extends HttpException implements Response {
 
@@ -197,5 +196,10 @@ public class RsForward extends HttpException implements Response {
         final ObjectInputStream stream
     ) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
