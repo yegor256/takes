@@ -90,7 +90,7 @@ public final class XeAppend extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     return new Directives().add(target.toString()).append(
-                        new IoChecked<>(src::value).value().toXembly()
+                        new IoChecked<>(src).value().toXembly()
                     );
                 }
             }

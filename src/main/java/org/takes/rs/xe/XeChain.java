@@ -75,7 +75,7 @@ public final class XeChain extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Directives dirs = new Directives();
-                    for (final XeSource src : new IoChecked<>(items::value).value()) {
+                    for (final XeSource src : new IoChecked<>(items).value()) {
                         dirs.push().append(src.toXembly()).pop();
                     }
                     return dirs;

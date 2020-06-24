@@ -72,8 +72,8 @@ public final class ResponseOf implements Response {
      */
     public ResponseOf(
         final Scalar<Iterable<String>> head, final Scalar<InputStream> body) {
-        this.shead = new IoChecked<>(head::value);
-        this.sbody = new IoChecked<>(body::value);
+        this.shead = new IoChecked<>(head);
+        this.sbody = new IoChecked<>(body);
     }
 
     @Override

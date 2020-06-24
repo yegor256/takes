@@ -85,7 +85,7 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final Scalar<Iterable<Directive>> dirs) {
-        this.directives = new IoChecked<>(dirs::value);
+        this.directives = new IoChecked<>(dirs);
     }
 
     @Override

@@ -206,10 +206,10 @@ public final class XeWhen extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
-                    if (new IoChecked<>(condition::value).value()) {
-                        dirs = new IoChecked<>(positive::value).value().toXembly();
+                    if (new IoChecked<>(condition).value()) {
+                        dirs = new IoChecked<>(positive).value().toXembly();
                     } else {
-                        dirs = new IoChecked<>(negative::value).value().toXembly();
+                        dirs = new IoChecked<>(negative).value().toXembly();
                     }
                     return dirs;
                 }
