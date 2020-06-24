@@ -25,10 +25,10 @@ package org.takes.facets.fallback;
 
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.takes.Response;
-import org.cactoos.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;

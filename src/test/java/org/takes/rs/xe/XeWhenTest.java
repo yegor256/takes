@@ -27,9 +27,9 @@ import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.Scalar;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.cactoos.Scalar;
 
 /**
  * Test case for {@link XeWhen}.

@@ -29,7 +29,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.cactoos.text.FormattedText;
 import org.takes.HttpException;
 import org.takes.Response;
@@ -175,6 +174,11 @@ public class RsForward extends HttpException implements Response {
         return this.origin.body();
     }
 
+    @Override
+    public final String toString() {
+        return super.toString();
+    }
+
     /**
      * Set default object to write serializated data.
      * @param stream Stream to write
@@ -198,8 +202,4 @@ public class RsForward extends HttpException implements Response {
         stream.defaultReadObject();
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

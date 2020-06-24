@@ -36,10 +36,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
-import org.cactoos.Scalar;
 
 /**
  * Response that converts Velocity template to text.

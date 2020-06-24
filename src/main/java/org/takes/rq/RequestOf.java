@@ -27,6 +27,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import org.cactoos.Scalar;
 import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
@@ -35,7 +36,6 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Request;
-import org.cactoos.Scalar;
 
 /**
  * This {@link Request} implementation provides a way to build a request
