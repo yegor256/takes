@@ -23,8 +23,6 @@
  */
 package org.takes;
 
-import java.io.IOException;
-
 /**
  * Scalar that returns an object.
  *
@@ -33,13 +31,5 @@ import java.io.IOException;
  * @since 1.4
  * @checkstyle LineLengthCheck (1 lines)
  */
-public interface Scalar<T> {
-
-    /**
-     * Get the object.
-     * @return Object
-     * @throws Exception If fails
-     */
-    T value() throws Exception;
-
+public interface Scalar<T> extends org.cactoos.Scalar<T> {
 }
