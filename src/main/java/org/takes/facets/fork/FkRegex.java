@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;

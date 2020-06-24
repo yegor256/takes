@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 import org.takes.Take;
 
 /**

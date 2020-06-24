@@ -39,7 +39,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 
 /**
  * Response that converts Velocity template to text.

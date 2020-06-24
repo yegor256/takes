@@ -35,7 +35,7 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Request;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 
 /**
  * This {@link Request} implementation provides a way to build a request

@@ -26,7 +26,7 @@ package org.takes.facets.fork;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;

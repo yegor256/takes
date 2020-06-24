@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 
 /**
  * Test case for {@link XeWhen}.

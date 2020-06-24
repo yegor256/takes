@@ -35,7 +35,7 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 
 /**
  * Response of head and body.
@@ -119,6 +119,6 @@ public final class ResponseOf implements Response {
 
     @Override
     public int hashCode() {
-        return new HashCode(new Unchecked<>(this.shead::value).value()).value();
+        return new HashCode(new Unchecked<>(this.shead).value()).value();
     }
 }

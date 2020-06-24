@@ -26,8 +26,8 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
 import org.cactoos.scalar.IoChecked;
-import org.takes.Scalar;
 import org.xembly.Directive;
 import org.xembly.Directives;
 

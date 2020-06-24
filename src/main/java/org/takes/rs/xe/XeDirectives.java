@@ -29,7 +29,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.cactoos.scalar.IoChecked;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
 import org.xembly.Directive;
 import org.xembly.Directives;
 import org.xembly.SyntaxException;
