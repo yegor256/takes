@@ -23,6 +23,11 @@
  */
 package org.takes.rq;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Writer;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
@@ -30,7 +35,6 @@ import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
-import java.io.*;
 
 /**
  * Request decorator, to print it all.
