@@ -29,6 +29,8 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.EndsWith;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 
 /**
@@ -70,10 +72,10 @@ public final class RqFakeTest {
             "test-6=alpha"
         );
         MatcherAssert.assertThat(
-            new RqPrint(req).print(),
+            new RqPrint(req),
             Matchers.allOf(
-                Matchers.containsString("GET /just-a-test\r\n"),
-                Matchers.endsWith("=alpha")
+                new TextHasString("GET /just-a-test\r\n"),
+                new EndsWith("=alpha")
             )
         );
     }
