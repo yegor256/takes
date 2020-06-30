@@ -23,29 +23,32 @@
  */
 package org.takes.rq;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Writer;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
+import org.cactoos.Text;
 import org.cactoos.io.WriterTo;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
+import java.io.*;
 
 /**
  * Request decorator, to print it all.
  *
  * <p>The class is immutable and thread-safe.
- *
- * @todo #984:30m This class should implement Text in accordance with RsPrint.
- *  Make it implement text, then clean up code from
- *  `new TextOf(new RqPrint(...).print())` idiom and remove method `print`.
- *
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqPrint extends RqWrap {
+public final class RqPrint extends RqWrap implements Text {
+
+    /**
+     * The textual representation.
+     * @todo #1050:30m When (and if) cactoos/#1403 is done, change type of this
+     *  field to Text. And replace code to its initialization to with
+     *  simpler `new TextOf(new Bytes { ... })` and leave another
+     *  puzzle to do the same in RsPrint.
+     */
+    private final Scalar<String> text;
 
     /**
      * Ctor.
@@ -53,6 +56,19 @@ public final class RqPrint extends RqWrap {
      */
     public RqPrint(final Request req) {
         super(req);
+        this.text = new Sticky<>(
+            new Scalar<String>() {
+                private final ByteArrayOutputStream baos =
+                    new ByteArrayOutputStream();
+
+                @Override
+                public String value() throws Exception {
+                    RqPrint.this.printHead(this.baos);
+                    RqPrint.this.printBody(this.baos);
+                    return new TextOf(this.baos.toByteArray()).asString();
+                }
+            }
+        );
     }
 
     /**
@@ -133,4 +149,8 @@ public final class RqPrint extends RqWrap {
         }
     }
 
+    @Override
+    public String asString() throws Exception {
+        return this.text.value();
+    }
 }
