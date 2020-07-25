@@ -26,8 +26,11 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Set;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -94,6 +97,33 @@ public final class RsPrintTest {
             "Input body was not closed",
             input.isClosed(),
             new IsEqual<>(true)
+        );
+    }
+
+    @Test
+    public void simple() throws IOException {
+        final StringWriter writer = new StringWriter();
+        final String firstline = "HTTP/1.1 500 Internal Server Error";
+        final Set<String> head = Collections.singleton(firstline);
+        new RsPrint(new RsSimple(head, "")).printHead(writer);
+        MatcherAssert.assertThat(
+            writer.getBuffer().toString(),
+            Matchers.equalTo("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+        );
+    }
+
+    /**
+     * RFC 7230 says we shall support dashes in response first line.
+     */
+    @Test
+    public void simpleWithDash() throws IOException {
+        final StringWriter writer = new StringWriter();
+        final String firstline = "HTTP/1.1 203 Non-Authoritative";
+        final Set<String> head = Collections.singleton(firstline);
+        new RsPrint(new RsSimple(head, "")).printHead(writer);
+        MatcherAssert.assertThat(
+            writer.getBuffer().toString(),
+            Matchers.equalTo("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 
