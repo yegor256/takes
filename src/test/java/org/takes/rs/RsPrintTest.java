@@ -103,8 +103,8 @@ public final class RsPrintTest {
     @Test
     public void simple() throws IOException {
         final StringWriter writer = new StringWriter();
-        final String firstLine = "HTTP/1.1 500 Internal Server Error";
-        final Set<String> head = Collections.singleton(firstLine);
+        final String firstline = "HTTP/1.1 500 Internal Server Error";
+        final Set<String> head = Collections.singleton(firstline);
         new RsPrint(new RsSimple(head, "")).printHead(writer);
         MatcherAssert.assertThat(
             writer.getBuffer().toString(),
@@ -118,12 +118,12 @@ public final class RsPrintTest {
     @Test
     public void simpleWithDash() throws IOException {
         final StringWriter writer = new StringWriter();
-        final String firstLine = "HTTP/1.1 203 Non-Authoritative Information";
-        final Set<String> head = Collections.singleton(firstLine);
+        final String firstline = "HTTP/1.1 203 Non-Authoritative";
+        final Set<String> head = Collections.singleton(firstline);
         new RsPrint(new RsSimple(head, "")).printHead(writer);
         MatcherAssert.assertThat(
             writer.getBuffer().toString(),
-            Matchers.equalTo("HTTP/1.1 203 Non-Authoritative Information\r\n\r\n")
+            Matchers.equalTo("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 
