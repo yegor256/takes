@@ -59,7 +59,7 @@ public final class RsPrint extends RsWrap implements Text {
      * Pattern for first line.
      */
     private static final Pattern FIRST = Pattern.compile(
-        "HTTP/1\\.1 \\d{3} [a-zA-Z ]+"
+        "HTTP/1\\.1 \\d{3} [a-zA-Z- ]+"
     );
 
     /**
