@@ -27,9 +27,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
-import java.util.Collections;
 import java.io.Writer;
+import java.util.Collections;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
+
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -101,8 +103,9 @@ public final class RsPrintTest {
 
     @Test
     public void simple() throws IOException {
-        StringWriter writer = new StringWriter();
-        new RsPrint(new RsSimple(Collections.singleton("HTTP/1.1 500 Internal Server Error"), "")).printHead(writer);
+        final StringWriter writer = new StringWriter();
+        final Set<String> head = Collections.singleton("HTTP/1.1 500 Internal Server Error");
+        new RsPrint(new RsSimple(head, "")).printHead(writer);
 
         MatcherAssert.assertThat(
                 writer.getBuffer().toString(),
@@ -115,8 +118,9 @@ public final class RsPrintTest {
      */
     @Test
     public void simpleWithDash() throws IOException {
-        StringWriter writer = new StringWriter();
-        new RsPrint(new RsSimple(Collections.singleton("HTTP/1.1 203 Non-Authoritative Information"), "")).printHead(writer);
+        final StringWriter writer = new StringWriter();
+        final Set<String> head = Collections.singleton("HTTP/1.1 203 Non-Authoritative Information");
+        new RsPrint(new RsSimple(head, "")).printHead(writer);
         MatcherAssert.assertThat(
                 writer.getBuffer().toString(),
                 Matchers.equalTo("HTTP/1.1 203 Non-Authoritative Information\r\n\r\n")
