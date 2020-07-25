@@ -114,7 +114,7 @@ public final class RsPrintTest {
     }
 
     /**
-     * RFC 7230 says we shall support dashes in response first line
+     * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
     public void simpleWithDash() throws IOException {
