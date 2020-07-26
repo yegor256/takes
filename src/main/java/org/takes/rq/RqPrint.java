@@ -47,12 +47,12 @@ public final class RqPrint extends RqWrap implements Text {
 
     /**
      * The textual representation.
-     * @todo #1050:30m When (and if) cactoos/#1403 is done, change type of this
-     *  field to Text. And replace code to its initialization to with
-     *  simpler `new TextOf(new Bytes { ... })` and leave another
-     *  puzzle to do the same in RsPrint.
+     * @todo #1050:30m Text lacks a decorator for caching its value.
+     *  The anonymous implementation here probably belongs to cactoos.
+     *  Extract it as a separate class. After that add a new puzzle to do
+     *  the same for the rest of Text implementing classes (such as RsPrint).
      */
-    private final Scalar<String> text;
+    private final Text text;
 
     /**
      * Ctor.
@@ -60,19 +60,29 @@ public final class RqPrint extends RqWrap implements Text {
      */
     public RqPrint(final Request req) {
         super(req);
-        this.text = new Sticky<>(
-            new Scalar<String>() {
-                private final ByteArrayOutputStream baos =
-                    new ByteArrayOutputStream();
+        this.text = new Text() {
+            /**
+             * Textual value evaluated one.
+             */
+            private final Scalar<String> scalar = new Sticky<>(
+                new Scalar<String>() {
+                    private final ByteArrayOutputStream baos =
+                        new ByteArrayOutputStream();
 
-                @Override
-                public String value() throws Exception {
-                    RqPrint.this.printHead(this.baos);
-                    RqPrint.this.printBody(this.baos);
-                    return new TextOf(this.baos.toByteArray()).asString();
+                    @Override
+                    public String value() throws Exception {
+                        RqPrint.this.printHead(this.baos);
+                        RqPrint.this.printBody(this.baos);
+                        return new TextOf(this.baos.toByteArray()).asString();
+                    }
                 }
+            );
+
+            @Override
+            public String asString() throws Exception {
+                return this.scalar.value();
             }
-        );
+        };
     }
 
     /**
@@ -155,6 +165,6 @@ public final class RqPrint extends RqWrap implements Text {
 
     @Override
     public String asString() throws Exception {
-        return this.text.value();
+        return this.text.asString();
     }
 }
