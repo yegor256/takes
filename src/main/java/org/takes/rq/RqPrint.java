@@ -41,6 +41,7 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqPrint extends RqWrap implements Text {
@@ -57,13 +58,11 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Ctor.
      * @param req Original request
+     * @checkstyle AnonInnerLengthCheck (30 lines)
      */
     public RqPrint(final Request req) {
         super(req);
         this.text = new Text() {
-            /**
-             * Textual value evaluated one.
-             */
             private final Scalar<String> scalar = new Sticky<>(
                 new Scalar<String>() {
                     private final ByteArrayOutputStream baos =
