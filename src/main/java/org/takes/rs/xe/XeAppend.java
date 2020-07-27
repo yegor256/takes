@@ -26,7 +26,8 @@ package org.takes.rs.xe;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.IoChecked;
 import org.xembly.Directive;
 import org.xembly.Directives;
 
@@ -89,7 +90,7 @@ public final class XeAppend extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     return new Directives().add(target.toString()).append(
-                        src.get().toXembly()
+                        new IoChecked<>(src).value().toXembly()
                     );
                 }
             }

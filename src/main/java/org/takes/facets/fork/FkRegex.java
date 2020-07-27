@@ -28,9 +28,9 @@ import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
@@ -182,7 +182,7 @@ public final class FkRegex implements Fork {
             ptn,
             new Scalar<TkRegex>() {
                 @Override
-                public TkRegex get() {
+                public TkRegex value() {
                     return tke;
                 }
             }
@@ -225,7 +225,7 @@ public final class FkRegex implements Fork {
         final Opt<Response> resp;
         if (matcher.matches()) {
             resp = new Opt.Single<>(
-                this.target.get().act(
+                this.target.value().act(
                     new RqMatcher(matcher, req)
                 )
             );

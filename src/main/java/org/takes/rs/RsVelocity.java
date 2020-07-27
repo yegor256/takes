@@ -36,10 +36,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
-import org.takes.Scalar;
 
 /**
  * Response that converts Velocity template to text.
@@ -136,7 +136,7 @@ public final class RsVelocity extends RsWrap {
         super(
             new ResponseOf(
                 () -> new RsEmpty().head(),
-                () -> RsVelocity.render(folder, template, params.get())
+                () -> RsVelocity.render(folder, template, params.value())
             )
         );
     }

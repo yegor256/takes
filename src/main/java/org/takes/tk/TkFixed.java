@@ -23,12 +23,11 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.rs.RsText;
 
@@ -64,8 +63,8 @@ public final class TkFixed extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
-                    return res.get();
+                public Response act(final Request req) throws Exception {
+                    return res.value();
                 }
             }
         );

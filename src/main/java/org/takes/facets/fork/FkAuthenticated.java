@@ -24,9 +24,9 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.RqAuth;
@@ -70,7 +70,7 @@ public final class FkAuthenticated implements Fork {
         this(
             new Scalar<Take>() {
                 @Override
-                public Take get() {
+                public Take value() {
                     return tke;
                 }
             }
@@ -93,7 +93,7 @@ public final class FkAuthenticated implements Fork {
         if (identity.equals(Identity.ANONYMOUS)) {
             resp = new Opt.Empty<>();
         } else {
-            resp = new Opt.Single<>(this.take.get().act(req));
+            resp = new Opt.Single<>(this.take.value().act(req));
         }
         return resp;
     }

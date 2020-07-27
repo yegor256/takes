@@ -26,9 +26,10 @@ package org.takes.tk;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.IoChecked;
 import org.takes.Request;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 
 /**
@@ -82,7 +83,7 @@ public final class TkFailure extends TkWrap {
             new Take() {
                 @Override
                 public Response act(final Request request) throws IOException {
-                    throw err.get();
+                    throw new IoChecked<>(err).value();
                 }
             }
         );
