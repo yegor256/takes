@@ -166,8 +166,8 @@ public final class BkBasicTest {
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
-                new RqSocket(request).getLocalPort(),
-                Matchers.equalTo(0)
+            new RqSocket(request).getLocalPort(),
+            Matchers.equalTo(0)
         );
         MatcherAssert.assertThat(
             new RqSocket(request).getRemoteAddress(),
