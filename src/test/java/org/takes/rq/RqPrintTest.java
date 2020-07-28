@@ -23,11 +23,10 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.TextHasString;
 
 /**
  * Test case for {@link RqPrint}.
@@ -37,10 +36,9 @@ public final class RqPrintTest {
 
     /**
      * RqPrint can print a request.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void printsHttpRequest() throws IOException {
+    public void printsHttpRequest() {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqFake(
@@ -52,8 +50,8 @@ public final class RqPrintTest {
                     ),
                     ""
                 )
-            ).print(),
-            Matchers.containsString("/h?a=3")
+            ),
+            new TextHasString("/h?a=3")
         );
     }
 

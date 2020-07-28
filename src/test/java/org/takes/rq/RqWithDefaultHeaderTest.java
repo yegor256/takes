@@ -26,7 +26,6 @@ package org.takes.rq;
 import java.io.IOException;
 import java.util.Collections;
 import org.cactoos.text.Joined;
-import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
@@ -50,14 +49,12 @@ public final class RqWithDefaultHeaderTest {
     public void providesDefaultHeader() throws IOException {
         final String req = "GET /";
         MatcherAssert.assertThat(
-            new TextOf(
-                new RqPrint(
-                    new RqWithDefaultHeader(
-                        new RqFake(Collections.singletonList(req), "body"),
-                        "X-Default-Header1",
-                        "X-Default-Value1"
-                    )
-                ).print()
+            new RqPrint(
+                new RqWithDefaultHeader(
+                    new RqFake(Collections.singletonList(req), "body"),
+                    "X-Default-Header1",
+                    "X-Default-Value1"
+                )
             ),
             new StartsWith(
                 new Joined(
@@ -78,18 +75,16 @@ public final class RqWithDefaultHeaderTest {
         final String req = "POST /";
         final String header = "X-Default-Header2";
         MatcherAssert.assertThat(
-            new TextOf(
-                new RqPrint(
-                    new RqWithDefaultHeader(
-                        new RqWithHeader(
-                            new RqFake(Collections.singletonList(req), "body2"),
-                            header,
-                            "Non-Default-Value2"
-                        ),
+            new RqPrint(
+                new RqWithDefaultHeader(
+                    new RqWithHeader(
+                        new RqFake(Collections.singletonList(req), "body2"),
                         header,
-                        "X-Default-Value"
-                    )
-                ).print()
+                        "Non-Default-Value2"
+                    ),
+                    header,
+                    "X-Default-Value"
+                )
             ),
             new StartsWith(
                 new Joined(

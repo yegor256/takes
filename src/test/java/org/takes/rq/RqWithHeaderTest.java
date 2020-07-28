@@ -23,12 +23,11 @@
  */
 package org.takes.rq;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
 
 /**
  * Test case for {@link RqWithHeader}.
@@ -39,27 +38,25 @@ public final class RqWithHeaderTest {
 
     /**
      * RqWithHeader can add a header.
-     * @throws IOException If some problem inside
      */
     @Test
-    public void addsHttpHeaders() throws IOException {
+    public void addsHttpHeaders() {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithHeader(
                     new RqFake(),
                     "X-Custom-Header", "Custom-Value"
                 )
-            ).print(),
-            Matchers.containsString("X-Custom-Header: Custom-Value")
+            ),
+            new TextHasString("X-Custom-Header: Custom-Value")
         );
     }
 
     /**
      * Checks RqWithHeader equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    public void evaluateTrueEqualityTest() throws Exception {
+    public void evaluateTrueEqualityTest() {
         new Assertion<>(
             "Must evaluate true equality",
             new RqWithHeader(
