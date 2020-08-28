@@ -27,12 +27,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 import org.cactoos.Text;
 import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
+import org.takes.Head;
 import org.takes.Response;
 
 /**
@@ -43,7 +48,7 @@ import org.takes.Response;
  *
  * @since 2.0
  */
-public final class HeadPrint implements Text {
+public final class HeadPrint implements Head, Text {
 
     /**
      * Pattern for first line.
@@ -58,6 +63,11 @@ public final class HeadPrint implements Text {
     private static final Pattern OTHERS = Pattern.compile(
         "[a-zA-Z0-9\\-]+:\\p{Print}+"
     );
+
+    /**
+     * HTTP End Of Line.
+     */
+    private static final String EOL = "\r\n";
 
     /**
      * Bytes representation.
@@ -75,7 +85,6 @@ public final class HeadPrint implements Text {
                     final ByteArrayOutputStream baos =
                         new ByteArrayOutputStream();
                     final Writer writer = new WriterTo(baos);
-                    final String eol = "\r\n";
                     int pos = 0;
                     try {
                         for (final String line : res.head()) {
@@ -100,10 +109,10 @@ public final class HeadPrint implements Text {
                                 );
                             }
                             writer.append(line);
-                            writer.append(eol);
+                            writer.append(HeadPrint.EOL);
                             ++pos;
                         }
-                        writer.append(eol);
+                        writer.append(HeadPrint.EOL);
                     } finally {
                         writer.flush();
                     }
@@ -130,6 +139,19 @@ public final class HeadPrint implements Text {
     @Override
     public String asString() throws IOException {
         return new TextOf(this.bytes.value()).asString();
+    }
+
+    @Override
+    public Iterable<String> head() throws IOException {
+        final Iterable<Text> lines = new Split(
+            HeadPrint.EOL,
+            new TextOf(this.bytes.value())
+        );
+        final List<String> result = new LinkedList<>();
+        for (final Text line : lines) {
+            result.add(new UncheckedText(line).asString());
+        }
+        return result;
     }
 
 }

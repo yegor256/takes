@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.cactoos.Text;
+import org.cactoos.io.InputOf;
+import org.cactoos.io.UncheckedInput;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
@@ -41,7 +43,7 @@ import org.takes.Response;
  *
  * @since 2.0
  */
-public final class BodyPrint implements Text {
+public final class BodyPrint implements Body, Text {
 
     /**
      * Bytes representation.
@@ -94,6 +96,18 @@ public final class BodyPrint implements Text {
     @Override
     public String asString() throws IOException {
         return new TextOf(this.bytes.value()).asString();
+    }
+
+    @Override
+    public InputStream stream() throws IOException {
+        return new UncheckedInput(new InputOf(this.bytes.value())).stream();
+    }
+
+    @Override
+    public int length() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.print(baos);
+        return baos.size();
     }
 
 }
