@@ -15,8 +15,6 @@ install: |
   export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
-  sudo gem install --no-rdoc --no-ri pdd
-  sudo gem install --no-rdoc --no-ri xcop
 merge:
   script: |
     mvn clean install -Pqulice --errors --settings ../settings.xml
