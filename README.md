@@ -90,7 +90,7 @@ This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.htm
 - [How to contribute](#how-to-contribute)
 - [Got questions?](#got-questions)
 
-## Quick Start
+## Quick Start[⬆](#contents)<!-- Link generated with jump2header -->
 
 Create this `App.java` file:
 
@@ -133,7 +133,7 @@ our code mostly because this would be against the entire idea of Java localizati
 according to which a user always should have a choice of encoding and language
 selection. We're using `Charset.defaultCharset()` everywhere in the code.
 
-## Build and Run With Maven
+## Build and Run With Maven[⬆](#contents)<!-- Link generated with jump2header -->
 
 If you're using Maven, this is how your `pom.xml` should look like:
 
@@ -186,7 +186,7 @@ $ mvn clean integration-test -Phit-refresh -Dport=8080
 
 Maven will start the server and you can see it at `http://localhost:8080`.
 
-## Using in servlet app
+## Using in servlet app[⬆](#contents)<!-- Link generated with jump2header -->
 
 Create a take with constructor accepting `ServletContext`:
 
@@ -225,7 +225,7 @@ take class as servlet `init-param`:
   </servlet-mapping>
 ```
 
-## Build and Run With Gradle
+## Build and Run With Gradle[⬆](#contents)<!-- Link generated with jump2header -->
 
 If you're using Gradle, this is how your `build.gradle` should look like:
 
@@ -252,7 +252,7 @@ With this configuration you can run it from command line:
 $ gradle run -Phit-refresh -Dport=8080
 ```
 
-## Unit Testing
+## Unit Testing[⬆](#contents)<!-- Link generated with jump2header -->
 
 This is how you can unit test the app, using JUnit 4.x and
 [Hamcrest](http://hamcrest.org):
@@ -282,7 +282,7 @@ new RqForm.Fake(
 )
 ```
 
-## Integration Testing
+## Integration Testing[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is how you can test the entire server via HTTP, using JUnit and
 [jcabi-http](http://http.jcabi.com) for making HTTP requests:
@@ -311,7 +311,7 @@ More complex integration testing examples you can find in one
 of the open source projects that are using Take, for example:
 [rultor.com](https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web).
 
-## A Bigger Example
+## A Bigger Example[⬆](#contents)<!-- Link generated with jump2header -->
 
 Let's make it a bit more sophisticated:
 
@@ -394,7 +394,7 @@ public final class App {
 }
 ```
 
-## Front interface
+## Front interface[⬆](#contents)<!-- Link generated with jump2header -->
 
 Essential part of [Bigger Example](#a-bigger-example) is
 [Front](src/main/java/org/takes/http/Front.java) interface.
@@ -415,7 +415,7 @@ in [Command Line Arguments](#command-line-arguments).
 you to start your application with SSL. More details in
 [SSL Configuration](#ssl-configuration).
 
-## Back interface
+## Back interface[⬆](#contents)<!-- Link generated with jump2header -->
 
 [Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
 is responsible for IO operations on TCP network level. There are various useful
@@ -445,7 +445,7 @@ wrap over the original `Back` instance. It's just delegates the `accept`
 to that `Back` and might be useful if you want to add your own decorators of the
 `Back` interface. This class is used in `BkParallel` and `BkSafe` as a parent class.
 
-## Templates
+## Templates[⬆](#contents)<!-- Link generated with jump2header -->
 
 Now let's see how we can render something more complex than an plain text.
 First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be
@@ -503,7 +503,7 @@ public final class RsLogin extends RsWrap {
 }
 ```
 
-## Velocity Templates
+## Velocity Templates[⬆](#contents)<!-- Link generated with jump2header -->
 
 Let's say, you want to use [Velocity](http://velocity.apache.org/):
 
@@ -539,7 +539,7 @@ dependencies {
 }
 ```
 
-## Static Resources
+## Static Resources[⬆](#contents)<!-- Link generated with jump2header -->
 
 Very often you need to serve static resources to your web users, like CSS
 stylesheets, images, JavaScript files, etc. There are a few supplementary
@@ -558,7 +558,7 @@ Class `TkClasspath` take static part of the request URI and finds a resource wit
 
 `TkWithType` sets content type of all responses coming out of the decorated take.
 
-## Hit Refresh Debugging
+## Hit Refresh Debugging[⬆](#contents)<!-- Link generated with jump2header -->
 
 It is a very convenient feature. Once you start the app you want to be able to
 modify its static resources (CSS, JS, XSL, etc), refresh the page in a browser
@@ -592,7 +592,7 @@ passes the request it tries to understand whether any of the resources
 are older than compiled files. If they are older, it tries
 to run compilation tool to build them again.
 
-## Request Methods (POST, PUT, HEAD, etc.)
+## Request Methods (POST, PUT, HEAD, etc.)[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is an example:
 
@@ -609,7 +609,7 @@ new TkFork(
 )
 ```
 
-## Request Parsing
+## Request Parsing[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is how you can parse an instance of `Request`:
 
@@ -622,7 +622,7 @@ Iterable<String> values = href.param("key");
 For a more complex parsing try to use Apache Http Client or something
 similar.
 
-## Form Processing
+## Form Processing[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is an example:
 
@@ -636,7 +636,7 @@ public final class TkSavePhoto implements Take {
 }
 ```
 
-## Exception Handling
+## Exception Handling[⬆](#contents)<!-- Link generated with jump2header -->
 
 By default, `TkFork` lets all exceptions bubble up. If one of your take
 crashes, a user will see a default error page. Here is how you can configure
@@ -674,7 +674,7 @@ public final class App {
 its take may throw. Once it's thrown, an instance of `FbChain` will
 find the most suitable fallback and will fetch a response from there.
 
-## Redirects
+## Redirects[⬆](#contents)<!-- Link generated with jump2header -->
 
 Sometimes it's very useful to return a redirect response (`30x` status code),
 either by a normal `return` or by throwing an exception. This example
@@ -718,7 +718,7 @@ public final class App {
 }
 ```
 
-## RsJSON
+## RsJSON[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is how we can deal with JSON:
 
@@ -746,7 +746,7 @@ public final class User implements XeSource, RsJSON.Source {
 }
 ```
 
-## RsXembly
+## RsXembly[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is how you generate an XML page using [Xembly](http://www.xembly.org):
 
@@ -837,7 +837,7 @@ You will need this extra dependency in classpath:
 More about this mechanism in this blog post:
 [XML Data and XSL Views in Takes Framework](http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-framework.html).
 
-## Cookies
+## Cookies[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is how we drop a cookie to the user:
 
@@ -870,7 +870,7 @@ public final class TkIndex implements Take {
 }
 ```
 
-## GZIP Compression
+## GZIP Compression[⬆](#contents)<!-- Link generated with jump2header -->
 
 If you want to compress all your responses with GZIP, wrap your take in
 `TkGzip`:
@@ -883,7 +883,7 @@ Now, each request that contains `Accept-Encoding` request header with `gzip`
 compression method inside will receive a GZIP-compressed response. Also,
 you can compress an individual response, using `RsGzip` decorator.
 
-## Content Negotiation
+## Content Negotiation[⬆](#contents)<!-- Link generated with jump2header -->
 
 Say, you want to return different content based on `Accept` header
 of the request (a.k.a. [content negotation](http://en.wikipedia.org/wiki/Content_negotiation)):
@@ -901,7 +901,7 @@ public final class TkIndex implements Take {
   }
 }
 ```
-## SSL Configuration
+## SSL Configuration[⬆](#contents)<!-- Link generated with jump2header -->
 
 First of all, setup your keystore settings, for example
 
@@ -925,7 +925,7 @@ new FtRemote(
 );
 ```
 
-## Authentication
+## Authentication[⬆](#contents)<!-- Link generated with jump2header -->
 
 Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
 
@@ -998,7 +998,7 @@ public final class TkAccount implements Take {
 More about it in this blog post:
 [How Cookie-Based Authentication Works in the Takes Framework](http://www.yegor256.com/2015/05/18/cookie-based-authentication.html)
 
-## Command Line Arguments
+## Command Line Arguments[⬆](#contents)<!-- Link generated with jump2header -->
 
 There is a convenient class `FtCLI` that parses command line arguments and
 starts the necessary `Front` accordingly.
@@ -1042,7 +1042,7 @@ exists, `FtCLI` will try to read its content and use it as
 port number. If the file is absent, `FtCLI` will allocate a new random
 port number, use it to start a server, and save it to the file.
 
-## Logging
+## Logging[⬆](#contents)<!-- Link generated with jump2header -->
 
 The framework sends all logs to SLF4J logging facility. If you want to see them,
 configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
@@ -1053,7 +1053,7 @@ To make a `Take` log, wrap it in a `TkSlf4j` - for example:
          new TkFork(...)
      )
 
-## Directory Layout
+## Directory Layout[⬆](#contents)<!-- Link generated with jump2header -->
 
 You are free to use any build tool, but we recommend Maven. This is how your project directory layout may/should look like:
 
@@ -1082,7 +1082,7 @@ pom.xml
 LICENSE.txt
 ```
 
-## Optional dependencies
+## Optional dependencies[⬆](#contents)<!-- Link generated with jump2header -->
 
 If you're using Maven and include Takes as a dependency in your own project,
 you can choose which of the optional dependencies to include in your project.
@@ -1109,10 +1109,10 @@ dependencies {
 }
 ```
 
-## Backward compatibility
+## Backward compatibility[⬆](#contents)<!-- Link generated with jump2header -->
 Version 2.0 is not backward compatible with previous versions.
 
-## Version pattern for RESTful API
+## Version pattern for RESTful API[⬆](#contents)<!-- Link generated with jump2header -->
 
 The URL should NOT contain the versions, but the type requested.
 
@@ -1149,7 +1149,7 @@ Content-Type: application/org.takes.architect-v2+xml
 [This article](http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
 explains why it´s done this way.
 
-## How to contribute
+## How to contribute[⬆](#contents)<!-- Link generated with jump2header -->
 
 Fork repository, make changes, send us a pull request. We will review
 your changes and apply them to the `master` branch shortly, provided
@@ -1167,7 +1167,7 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
-## Got questions?
+## Got questions?[⬆](#contents)<!-- Link generated with jump2header -->
 
 If you have questions or general suggestions, don't hesitate to submit
 a new [Github issue](https://github.com/yegor256/takes/issues/new).
