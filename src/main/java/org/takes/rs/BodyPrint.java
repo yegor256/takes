@@ -23,11 +23,11 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.cactoos.Text;
+import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.UncheckedInput;
 import org.cactoos.scalar.IoChecked;
@@ -44,7 +44,6 @@ import org.takes.Response;
  * @since 2.0
  */
 public final class BodyPrint implements Body, Text {
-
     /**
      * Bytes representation.
      */
@@ -52,29 +51,13 @@ public final class BodyPrint implements Body, Text {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public BodyPrint(final Response res) {
         this.bytes = new IoChecked<>(
             new Sticky<>(
-                () -> {
-                    final ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-                    //@checkstyle MagicNumberCheck (1 line)
-                    final byte[] buf = new byte[4096];
-                    try (InputStream body = res.body()) {
-                        while (true) {
-                            final int bts = body.read(buf);
-                            if (bts < 0) {
-                                break;
-                            }
-                            baos.write(buf, 0, bts);
-                        }
-                    } finally {
-                        baos.flush();
-                    }
-                    return baos.toByteArray();
-                }
+                () -> new BytesOf(res.body()).asBytes()
             )
         );
     }
@@ -105,9 +88,6 @@ public final class BodyPrint implements Body, Text {
 
     @Override
     public int length() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.print(baos);
-        return baos.size();
+        return this.bytes.value().length;
     }
-
 }
