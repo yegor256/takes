@@ -23,13 +23,13 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
+import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
 
@@ -68,10 +68,11 @@ public final class RsPrint extends RsWrap implements Text {
 
     @Override
     public String asString() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.head.print(baos);
-        this.body.print(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return new Joined(
+            new TextOf(""),
+            this.head,
+            this.body
+        ).asString();
     }
 
     /**
@@ -120,10 +121,8 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 2.0
      */
     public void printHead(final Writer writer) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            this.head.print(baos);
-            writer.write(new TextOf(baos.toByteArray()).asString());
+            writer.write(this.head.asString());
         } finally {
             writer.flush();
         }

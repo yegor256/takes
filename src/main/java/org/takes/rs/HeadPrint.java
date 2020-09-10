@@ -23,20 +23,12 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.Writer;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.Text;
-import org.cactoos.io.WriterTo;
-import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Sticky;
-import org.cactoos.text.Split;
-import org.cactoos.text.TextOf;
-import org.cactoos.text.UncheckedText;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.Joined;
 import org.takes.Head;
 import org.takes.Response;
 
@@ -51,75 +43,21 @@ import org.takes.Response;
 public final class HeadPrint implements Head, Text {
 
     /**
-     * Pattern for first line.
-     */
-    private static final Pattern FIRST = Pattern.compile(
-        "HTTP/1\\.1 \\d{3} [a-zA-Z ]+"
-    );
-
-    /**
-     * Pattern for all other lines in the head.
-     */
-    private static final Pattern OTHERS = Pattern.compile(
-        "[a-zA-Z0-9\\-]+:\\p{Print}+"
-    );
-
-    /**
      * HTTP End Of Line.
      */
     private static final String EOL = "\r\n";
 
     /**
-     * Bytes representation.
+     * The HTTP Response.
      */
-    private final IoChecked<byte[]> bytes;
+    private final Response response;
 
     /**
      * Ctor.
      * @param res Original response
      */
     public HeadPrint(final Response res) {
-        this.bytes = new IoChecked<>(
-            new Sticky<>(
-                () -> {
-                    final ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-                    final Writer writer = new WriterTo(baos);
-                    int pos = 0;
-                    try {
-                        for (final String line : res.head()) {
-                            if (pos == 0 && !HeadPrint.FIRST.matcher(line)
-                                .matches()) {
-                                throw new IllegalArgumentException(
-                                    String.format(
-                                        // @checkstyle LineLength (1 line)
-                                        "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                                        line, HeadPrint.FIRST
-                                    )
-                                );
-                            }
-                            if (pos > 0 && !HeadPrint.OTHERS.matcher(line)
-                                .matches()) {
-                                throw new IllegalArgumentException(
-                                    String.format(
-                                        // @checkstyle LineLength (1 line)
-                                        "header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                                        pos + 1, line, HeadPrint.OTHERS
-                                    )
-                                );
-                            }
-                            writer.append(line);
-                            writer.append(HeadPrint.EOL);
-                            ++pos;
-                        }
-                        writer.append(HeadPrint.EOL);
-                    } finally {
-                        writer.flush();
-                    }
-                    return baos.toByteArray();
-                }
-            )
-        );
+        this.response = res;
     }
 
     /**
@@ -130,7 +68,7 @@ public final class HeadPrint implements Head, Text {
      */
     public void print(final OutputStream output) throws IOException {
         try {
-            output.write(this.bytes.value());
+            output.write(this.asString().getBytes(StandardCharsets.UTF_8));
         } finally {
             output.flush();
         }
@@ -138,20 +76,20 @@ public final class HeadPrint implements Head, Text {
 
     @Override
     public String asString() throws IOException {
-        return new TextOf(this.bytes.value()).asString();
+        return new FormattedText(
+            "%s%s%s",
+            new Joined(
+                HeadPrint.EOL,
+                this.response.head()
+            ),
+            HeadPrint.EOL,
+            HeadPrint.EOL
+        ).asString();
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        final Iterable<Text> lines = new Split(
-            HeadPrint.EOL,
-            new TextOf(this.bytes.value())
-        );
-        final List<String> result = new LinkedList<>();
-        for (final Text line : lines) {
-            result.add(new UncheckedText(line).asString());
-        }
-        return result;
+        return this.response.head();
     }
 
 }

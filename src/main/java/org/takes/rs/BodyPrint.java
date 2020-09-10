@@ -23,15 +23,11 @@
  */
 package org.takes.rs;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.cactoos.Text;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.InputOf;
-import org.cactoos.io.UncheckedInput;
-import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
 
@@ -44,10 +40,11 @@ import org.takes.Response;
  * @since 2.0
  */
 public final class BodyPrint implements Body, Text {
+
     /**
-     * Bytes representation.
+     * The HTTP Response.
      */
-    private final IoChecked<byte[]> bytes;
+    private final Response response;
 
     /**
      * Ctor.
@@ -55,11 +52,7 @@ public final class BodyPrint implements Body, Text {
      * @param res Original response
      */
     public BodyPrint(final Response res) {
-        this.bytes = new IoChecked<>(
-            new Sticky<>(
-                () -> new BytesOf(res.body()).asBytes()
-            )
-        );
+        this.response = res;
     }
 
     /**
@@ -69,8 +62,17 @@ public final class BodyPrint implements Body, Text {
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
+        // @checkstyle MagicNumber (1 line)
+        final byte[] buf = new byte[4096];
+        final InputStream body = this.response.body();
         try {
-            output.write(this.bytes.value());
+            while (true) {
+                final int bts = body.read(buf);
+                if (bts < 0) {
+                    break;
+                }
+                output.write(buf, 0, bts);
+            }
         } finally {
             output.flush();
         }
@@ -78,16 +80,18 @@ public final class BodyPrint implements Body, Text {
 
     @Override
     public String asString() throws IOException {
-        return new TextOf(this.bytes.value()).asString();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.print(baos);
+        return new TextOf(baos.toByteArray()).asString();
     }
 
     @Override
     public InputStream stream() throws IOException {
-        return new UncheckedInput(new InputOf(this.bytes.value())).stream();
+        return this.response.body();
     }
 
     @Override
     public int length() throws IOException {
-        return this.bytes.value().length;
+        return this.asString().length();
     }
 }
