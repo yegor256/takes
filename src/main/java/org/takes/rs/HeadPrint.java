@@ -39,6 +39,9 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
+ * @todo #1054:30min Develop tests for {@link HeadPrint} and {@link BodyPrint}.
+ *  Although these classes are tested by {@link RsPrint} they need your own
+ *  unit tests.
  */
 public final class HeadPrint implements Head, Text {
 

@@ -98,6 +98,10 @@ public final class RsPrint extends RsWrap implements Text {
      * Print it into output stream.
      * @param output Output to print into
      * @throws IOException If fails
+     * @todo #1054:30min Remove the #print(OutputStream) methods.
+     *  After the creation of {@link HeadPrint} and {@link BodyPrint} classes,
+     *  these methods lost sense and need be removed from these classes and
+     *  all tests that uses #print() method.
      */
     public void print(final OutputStream output) throws IOException {
         this.head.print(output);
