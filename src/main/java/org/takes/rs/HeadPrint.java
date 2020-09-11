@@ -40,7 +40,7 @@ import org.takes.Response;
  *
  * @since 2.0
  * @todo #1054:30min Develop tests for {@link HeadPrint} and {@link BodyPrint}.
- *  Although these classes are tested by {@link RsPrint} they need your own
+ *  Although these classes are tested by {@link RsPrint} they need their own
  *  unit tests.
  */
 public final class HeadPrint implements Head, Text {
