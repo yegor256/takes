@@ -25,37 +25,60 @@ package org.takes.rq;
 
 import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.text.Joined;
-import org.junit.Test;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.text.Randomized;
+import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Request;
 
 /**
  * Test case for {@link RqOnce}.
  * @since 0.26
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class RqOnceTest {
 
     /**
-     * RqOnce can make request read-only-once.
+     * RqOnce can make request read-only-once for header.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IllegalStateException.class)
-    public void makesRequestReadOnlyOnce() throws IOException {
+    @Test
+    public void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
         final Request req = new RqOnce(
-            new RqLive(
-                new InputStreamOf(
-                    new Joined(
-                        "\r\n",
-                        "GET /test HTTP/1.1",
-                        "Host: localhost",
-                        "",
-                        "... the body ..."
-                    )
-                )
+            new RequestOf(
+                () -> new IterableOf<>(new Randomized().asString()),
+                () -> new InputStreamOf(new Randomized())
             )
         );
-        new RqPrint(req).printBody();
-        new RqPrint(req).printBody();
+        new Assertion<>(
+            "the head must be cached",
+            new RqPrint(req).printHead(),
+            new IsEqual<>(
+                new RqPrint(req).printHead()
+            )
+        ).affirm();
+    }
+
+    /**
+     * RqOnce can make request read-only-once for body.
+     * @throws IOException If some problem inside
+     */
+    @Test
+    public void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
+        final Request req = new RqOnce(
+            new RequestOf(
+                new IterableOf<>(new Randomized().asString()),
+                new InputStreamOf(new Randomized())
+            )
+        );
+        new Assertion<>(
+            "the body must be cached",
+            new RqPrint(req).printBody(),
+            new IsEqual<>(
+                new RqPrint(req).printBody()
+            )
+        ).affirm();
     }
 
 }
