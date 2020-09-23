@@ -42,10 +42,15 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
+import org.takes.misc.Href;
+import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqPrint;
 import org.takes.rq.RqSocket;
 import org.takes.rs.ResponseOf;
 import org.takes.tk.TkText;
@@ -166,8 +171,16 @@ final class BkBasicTest {
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            new RqSocket(request).getLocalPort(),
+            Matchers.equalTo(0)
+        );
+        MatcherAssert.assertThat(
             new RqSocket(request).getRemoteAddress(),
             Matchers.notNullValue()
+        );
+        MatcherAssert.assertThat(
+            new RqSocket(request).getRemotePort(),
+            Matchers.equalTo(0)
         );
     }
 
@@ -336,7 +349,7 @@ final class BkBasicTest {
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                     count = input.read(buffer)) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -345,6 +358,70 @@ final class BkBasicTest {
             output.toString(),
             Matchers.containsString(text)
         );
+    }
+
+    /**
+     * BkBasic can return HTTP status 400 (Bad Request) when a request has an
+     * invalid URI.
+     * @todo #1058:30min This test address the bug reported by issue #1058.
+     *  The problem is {@link Href#createUri} method is recursive and
+     *  isn't working properly (the index doesn't match with the correct
+     *  position). But even fixing it, this leave a other question: should or
+     *  not Takes send a 400 Bad Request response? By the HTTP protocol, the
+     *  answer is yes. So, you should: 1) fix the recursive call in
+     *  {@link Href#createUri} 2) change {@link BkBasic#print} to return a
+     *  400 Bad Request response and finally 3) unignore this test (that should
+     *  pass).
+     */
+    @Ignore
+    @Test
+    public void returnsABadRequestToAnInvalidRequestUri() {
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        new Assertion<>(
+            "Must return bad request to an invalid request URI",
+            () -> {
+                try (ServerSocket server = new ServerSocket(0)) {
+                    new Thread(
+                        () -> {
+                            try {
+                                new BkBasic(
+                                    new TkFork(
+                                        new FkRegex("/", new TkText("hello"))
+                                    )
+                                ).accept(
+                                    server.accept()
+                                );
+                            } catch (final IOException exception) {
+                                throw new IllegalStateException(exception);
+                            }
+                        }
+                    ).start();
+                    try (
+                        Socket socket = new Socket(
+                            server.getInetAddress(),
+                            server.getLocalPort()
+                        )
+                    ) {
+                        socket.getOutputStream().write(
+                            new RqPrint(
+                                new RqFake("GET", "\\")
+                            ).asString().getBytes()
+                        );
+                        final InputStream input = socket.getInputStream();
+                        // @checkstyle MagicNumber (1 line)
+                        final byte[] buffer = new byte[4096];
+                        for (
+                            int count = input.read(buffer); count != -1;
+                            count = input.read(buffer)
+                        ) {
+                            output.write(buffer, 0, count);
+                        }
+                    }
+                }
+                return output.toString();
+            },
+            new TextHasString("400 Bad Request")
+        ).affirm();
     }
 
     /**

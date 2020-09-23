@@ -175,7 +175,7 @@ public final class BkBasic implements Back {
                 BkBasic.REMOTEADDR,
                 socket.getInetAddress().getHostAddress()
             ),
-            String.format("%s: %d", BkBasic.REMOTEADDR, socket.getPort())
+            String.format("%s: %d", BkBasic.REMOTEPORT, socket.getPort())
         );
     }
 }

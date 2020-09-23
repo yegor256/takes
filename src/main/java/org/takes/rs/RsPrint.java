@@ -23,19 +23,13 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
-import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.Scalar;
 import org.cactoos.Text;
-import org.cactoos.io.WriterTo;
-import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Sticky;
+import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
 
@@ -45,34 +39,22 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #984:30min Extract printHead and printBody in two different classes
- *  BodyPrint and HeadPrint both implementing Text
- *  and start again replacing guava in tests in the same manner.
+ * @todo #1054:30min Continue replacing guava in tests.
  *  Create new todos until guava is removed and Takes is much more Cactoos
  *  oriented as started with #804.
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsPrint extends RsWrap implements Text {
+    /**
+     * Head print representation.
+     */
+    private final HeadPrint head;
 
     /**
-     * Pattern for first line.
+     * Body print representation.
      */
-    private static final Pattern FIRST = Pattern.compile(
-        "HTTP/1\\.1 \\d{3} [a-zA-Z ]+"
-    );
-
-    /**
-     * Pattern for all other lines in the head.
-     */
-    private static final Pattern OTHERS = Pattern.compile(
-        "[a-zA-Z0-9\\-]+:\\p{Print}+"
-    );
-
-    /**
-     * Textual representation.
-     */
-    private final IoChecked<String> text;
+    private final BodyPrint body;
 
     /**
      * Ctor.
@@ -80,28 +62,17 @@ public final class RsPrint extends RsWrap implements Text {
      */
     public RsPrint(final Response res) {
         super(res);
-        this.text = new IoChecked<>(
-            new Sticky<>(
-                new Scalar<String>() {
-                    private final ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-
-                    @Override
-                    public String value() throws Exception {
-                        RsPrint.this.printHead(this.baos);
-                        RsPrint.this.printBody(this.baos);
-                        return new TextOf(
-                            this.baos.toByteArray()
-                        ).asString();
-                    }
-                }
-            )
-        );
+        this.head = new HeadPrint(res);
+        this.body = new BodyPrint(res);
     }
 
     @Override
     public String asString() throws IOException {
-        return this.text.value();
+        return new Joined(
+            new TextOf(""),
+            this.head,
+            this.body
+        ).asString();
     }
 
     /**
@@ -110,9 +81,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @throws IOException If fails
      */
     public String printBody() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.printBody(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return this.body.asString();
     }
 
     /**
@@ -122,19 +91,21 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public String printHead() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.printHead(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return this.head.asString();
     }
 
     /**
      * Print it into output stream.
      * @param output Output to print into
      * @throws IOException If fails
+     * @todo #1054:30min Remove the #print(OutputStream) methods.
+     *  After the creation of {@link HeadPrint} and {@link BodyPrint} classes,
+     *  these methods lost sense and need be removed from these classes and
+     *  all tests that uses #print() method.
      */
     public void print(final OutputStream output) throws IOException {
-        this.printHead(output);
-        this.printBody(output);
+        this.head.print(output);
+        this.body.print(output);
     }
 
     /**
@@ -144,7 +115,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
-        this.printHead(new WriterTo(output));
+        this.head.print(output);
     }
 
     /**
@@ -154,33 +125,8 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 2.0
      */
     public void printHead(final Writer writer) throws IOException {
-        final String eol = "\r\n";
-        int pos = 0;
         try {
-            for (final String line : this.head()) {
-                if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
-                    throw new IllegalArgumentException(
-                        String.format(
-                            // @checkstyle LineLength (1 line)
-                            "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                            line, RsPrint.FIRST
-                        )
-                    );
-                }
-                if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
-                    throw new IllegalArgumentException(
-                        String.format(
-                            // @checkstyle LineLength (1 line)
-                            "header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                            pos + 1, line, RsPrint.OTHERS
-                        )
-                    );
-                }
-                writer.append(line);
-                writer.append(eol);
-                ++pos;
-            }
-            writer.append(eol);
+            writer.write(this.head.asString());
         } finally {
             writer.flush();
         }
@@ -192,19 +138,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        //@checkstyle MagicNumberCheck (1 line)
-        final byte[] buf = new byte[4096];
-        try (InputStream body = this.body()) {
-            while (true) {
-                final int bytes = body.read(buf);
-                if (bytes < 0) {
-                    break;
-                }
-                output.write(buf, 0, bytes);
-            }
-        } finally {
-            output.flush();
-        }
+        this.body.print(output);
     }
 
 }
