@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqBuffered;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
@@ -36,7 +36,7 @@ import org.takes.rq.RqForm;
  * Test case for {@link RqFormBase}.
  * @since 0.33
  */
-public final class RqFormBaseTest {
+final class RqFormBaseTest {
 
     /**
      * Content-Length header template.
@@ -48,7 +48,7 @@ public final class RqFormBaseTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpBody() throws IOException {
+    void parsesHttpBody() throws IOException {
         final String body = "alpha=a+b+c&beta=%20Yes%20";
         final RqForm req = new RqFormBase(
             new RqBuffered(
@@ -80,7 +80,7 @@ public final class RqFormBaseTest {
      * @throws IOException if fails
      */
     @Test
-    public void sameInstance() throws IOException {
+    void sameInstance() throws IOException {
         final RqForm req = new RqFormBase(
             new RqBuffered(
                 new RqFake(

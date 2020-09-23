@@ -28,21 +28,21 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rs.RsXslt;
 
 /**
  * Test case for {@link XeSla}.
  * @since 0.3
  */
-public final class XeSlaTest {
+final class XeSlaTest {
 
     /**
      * XeSLA can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -64,7 +64,7 @@ public final class XeSlaTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsHtmlResponse() throws IOException {
+    void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXslt(

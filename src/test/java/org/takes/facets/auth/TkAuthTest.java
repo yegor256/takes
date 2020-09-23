@@ -28,7 +28,7 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.AllOf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -49,14 +49,14 @@ import org.takes.tk.TkText;
  * @since 0.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkAuthTest {
+final class TkAuthTest {
 
     /**
      * TkAuth can login a user.
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserIn() throws Exception {
+    void logsUserIn() throws Exception {
         final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
@@ -79,7 +79,7 @@ public final class TkAuthTest {
      */
     @Test
     @SuppressWarnings("unchecked")
-    public void logsInUserViaCookie() throws Exception {
+    void logsInUserViaCookie() throws Exception {
         new Assertion<>(
             "Response with header Set-Cookie",
             new RsPrint(
@@ -114,7 +114,7 @@ public final class TkAuthTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserOut() throws Exception {
+    void logsUserOut() throws Exception {
         final Pass pass = new PsLogout();
         final Take take = Mockito.mock(Take.class);
         Mockito.doReturn(new RsText()).when(take)
@@ -142,7 +142,7 @@ public final class TkAuthTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsUserOutWithCookiePresent() throws Exception {
+    void logsUserOutWithCookiePresent() throws Exception {
         new Assertion<>(
             "Response with header setting empty cookie",
             new RsPrint(

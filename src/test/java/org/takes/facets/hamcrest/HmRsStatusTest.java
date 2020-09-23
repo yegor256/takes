@@ -26,7 +26,7 @@ package org.takes.facets.hamcrest;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNot;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
 import org.takes.tk.TkHtml;
@@ -35,14 +35,14 @@ import org.takes.tk.TkHtml;
  * Test case for {@link HmRsStatus}.
  * @since 0.13
  */
-public final class HmRsStatusTest {
+final class HmRsStatusTest {
 
     /**
      * HmRsStatus can test status HTTP_OK.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsStatusOk() throws Exception {
+    void testsStatusOk() throws Exception {
         MatcherAssert.assertThat(
             new TkHtml("<html></html>").act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_OK)
@@ -58,7 +58,7 @@ public final class HmRsStatusTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsStatusNotFound() throws Exception {
+    void testsStatusNotFound() throws Exception {
         MatcherAssert.assertThat(
             new TkHtml("<html><body/></html>").act(new RqFake()),
             new IsNot<>(

@@ -29,20 +29,20 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonStructure;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsJson}.
  * @since 0.1
  */
-public final class RsJsonTest {
+final class RsJsonTest {
 
     /**
      * RsJSON can build JSON response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsJsonResponse() throws IOException {
+    void buildsJsonResponse() throws IOException {
         final String key = "name";
         final JsonStructure json = Json.createObjectBuilder()
             .add(key, "Jeffrey Lebowski")
@@ -60,7 +60,7 @@ public final class RsJsonTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsBigJsonResponse() throws IOException {
+    void buildsBigJsonResponse() throws IOException {
         final int size = 100000;
         final JsonArrayBuilder builder = Json.createArrayBuilder();
         for (int idx = 0; idx < size; ++idx) {

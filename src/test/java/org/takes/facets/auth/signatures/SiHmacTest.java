@@ -25,7 +25,7 @@ package org.takes.facets.auth.signatures;
 
 import java.io.IOException;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 
 /**
@@ -33,13 +33,13 @@ import org.llorllale.cactoos.matchers.Assertion;
  * @since 1.3
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class SiHmacTest {
+final class SiHmacTest {
     /**
      * SiHmac corrects wrong bit length.
      * @throws IOException If some problem inside
      */
     @Test
-    public void corrects() throws IOException {
+    void corrects() throws IOException {
         new Assertion<>(
             "Must have proper bit length",
             // @checkstyle MagicNumber (1 line)
@@ -53,7 +53,7 @@ public final class SiHmacTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void signs() throws IOException {
+    void signs() throws IOException {
         new Assertion<>(
             "Must have proper signature",
             new String(
@@ -73,7 +73,7 @@ public final class SiHmacTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEvaluateTrueEqualityTest() throws Exception {
+    void mustEvaluateTrueEqualityTest() throws Exception {
         final String key = "key";
         new Assertion<>(
             "Must evaluate true equality",

@@ -26,7 +26,7 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -34,14 +34,14 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.16
  */
-public final class CcGzipTest {
+final class CcGzipTest {
 
     /**
      * CcGzip can compress and decompress.
      * @throws Exception If some problem inside
      */
     @Test
-    public void compressesAndDecompresses() throws Exception {
+    void compressesAndDecompresses() throws Exception {
         final Codec gzip = new CcGzip(
             new Codec() {
                 @Override

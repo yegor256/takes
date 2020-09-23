@@ -27,7 +27,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.EndsWith;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -38,13 +38,13 @@ import org.takes.Request;
  * @since 0.24
  */
 @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
-public final class RqFakeTest {
+final class RqFakeTest {
 
     /**
      * Can conform to the Object.equals() contract.
      */
     @Test
-    public void conformsToEquality() {
+    void conformsToEquality() {
         new Assertion<>(
             "Must evaluate true equality",
             new RqFake(
@@ -65,7 +65,7 @@ public final class RqFakeTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void printsCorrectly() throws IOException {
+    void printsCorrectly() throws IOException {
         final RqFake req = new RqFake(
             "GET",
             "/just-a-test",
@@ -85,7 +85,7 @@ public final class RqFakeTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void printsBodyOnlyOnce() throws IOException {
+    void printsBodyOnlyOnce() throws IOException {
         final String body = "the body text";
         final Request req = new RqFake("", "", body);
         MatcherAssert.assertThat(

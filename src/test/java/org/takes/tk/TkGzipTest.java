@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -34,14 +34,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkGzip}.
  * @since 0.17
  */
-public final class TkGzipTest {
+final class TkGzipTest {
 
     /**
      * TkGzip can compress on demand only.
      * @throws Exception If some problem inside
      */
     @Test
-    public void compressesOnDemandOnly() throws Exception {
+    void compressesOnDemandOnly() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
@@ -64,7 +64,7 @@ public final class TkGzipTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void doesntCompressIfNotRequired() throws Exception {
+    void doesntCompressIfNotRequired() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(

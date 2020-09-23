@@ -28,20 +28,20 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeAppend}.
  * @since 0.13
  */
-public final class XeAppendTest {
+final class XeAppendTest {
 
     /**
      * XeAppend can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(

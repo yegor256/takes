@@ -25,20 +25,20 @@ package org.takes.rq;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqWithBody}.
  * @since 0.22
  */
-public final class RqWithBodyTest {
+final class RqWithBodyTest {
 
     /**
      * RqWithBody returns body.
      * @throws Exception If some problem inside
      */
     @Test
-    public void returnsBody() throws Exception {
+    void returnsBody() throws Exception {
         final String body = "body";
         MatcherAssert.assertThat(
             new RqPrint(

@@ -27,21 +27,21 @@ import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Body.TempFile}.
  *
  * @since 1.15
  */
-public final class BodyTempFileTest {
+final class BodyTempFileTest {
 
     /**
      * Body.TemFile can provide the expected input.
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithStream() throws Exception {
+    void returnsCorrectInputWithStream() throws Exception {
         final byte[] bytes =
             new BytesOf("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
@@ -58,7 +58,7 @@ public final class BodyTempFileTest {
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithTempFile() throws Exception {
+    void returnsCorrectLengthWithTempFile() throws Exception {
         final byte[] bytes =
             new BytesOf("TempFile returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(

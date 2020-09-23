@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqBuffered;
 import org.takes.rq.RqFake;
 
@@ -36,14 +36,14 @@ import org.takes.rq.RqFake;
  *
  * @since 0.4
  */
-public final class RqCookiesTest {
+final class RqCookiesTest {
 
     /**
      * RqCookies can parse a query.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpQuery() throws IOException {
+    void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqBuffered(
@@ -66,7 +66,7 @@ public final class RqCookiesTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpQueryWithEmptyCookie() throws IOException {
+    void parsesHttpQueryWithEmptyCookie() throws IOException {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqFake(
@@ -87,7 +87,7 @@ public final class RqCookiesTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpRequestWithMultipleCookies() throws IOException {
+    void parsesHttpRequestWithMultipleCookies() throws IOException {
         MatcherAssert.assertThat(
             new RqCookies.Base(
                 new RqFake(

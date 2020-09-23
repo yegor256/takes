@@ -25,19 +25,19 @@ package org.takes.misc;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Href}.
  * @since 0.7
  */
-public final class HrefTest {
+final class HrefTest {
 
     /**
      * Href can build an URI.
      */
     @Test
-    public void buildsUri() {
+    void buildsUri() {
         MatcherAssert.assertThat(
             new Href("http://example.com?%D0%B0=8&b=9")
                 .with("д", "hello")
@@ -53,7 +53,7 @@ public final class HrefTest {
      * Href can build an URI from empty start.
      */
     @Test
-    public void buildsUriFromEmpty() {
+    void buildsUriFromEmpty() {
         MatcherAssert.assertThat(
             new Href().path("boom-4").with("д", "").toString(),
             Matchers.equalTo("/boom-4?%D0%B4")
@@ -64,7 +64,7 @@ public final class HrefTest {
      * Href can build an URI without params.
      */
     @Test
-    public void buildsUriWithoutParams() {
+    void buildsUriWithoutParams() {
         final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
             new Href(uri).toString(),
@@ -76,7 +76,7 @@ public final class HrefTest {
      * Href can add path.
      */
     @Test
-    public void addsPath() {
+    void addsPath() {
         MatcherAssert.assertThat(
             new Href("http://example.com").path("д").path("d").toString(),
             Matchers.equalTo("http://example.com/%D0%B4/d")
@@ -91,7 +91,7 @@ public final class HrefTest {
      * Href can accept encoded query part.
      */
     @Test
-    public void acceptsEncodedQuery() {
+    void acceptsEncodedQuery() {
         final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
         MatcherAssert.assertThat(
             new Href(url).toString(),
@@ -107,7 +107,7 @@ public final class HrefTest {
      * Href can accept non properly encoded URL.
      */
     @Test
-    public void acceptsNonProperlyEncodedUrl() {
+    void acceptsNonProperlyEncodedUrl() {
         MatcherAssert.assertThat(
             // @checkstyle LineLength (2 lines)
             new Href("http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt").toString(),
@@ -120,7 +120,7 @@ public final class HrefTest {
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
-    public void buildsUriWithFragmentAndParams() {
+    void buildsUriWithFragmentAndParams() {
         MatcherAssert.assertThat(
             new Href("http://example.com/%D0%B0/?a=1#hello").toString(),
             Matchers.equalTo("http://example.com/%D0%B0/?a=1#hello")
@@ -132,7 +132,7 @@ public final class HrefTest {
      */
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
-    public void buildsUriWithFragmentAndNoParams() {
+    void buildsUriWithFragmentAndNoParams() {
         MatcherAssert.assertThat(
             new Href("http://example.com/#hello").toString(),
             Matchers.equalTo("http://example.com/#hello")

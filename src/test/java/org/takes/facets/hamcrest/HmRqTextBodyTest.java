@@ -26,7 +26,7 @@ package org.takes.facets.hamcrest;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNot;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 
 /**
@@ -34,13 +34,13 @@ import org.takes.rq.RqFake;
  *
  * @since 2.0
  */
-public final class HmRqTextBodyTest {
+final class HmRqTextBodyTest {
 
     /**
      * HmRqTextBody can test if body equals text.
      */
     @Test
-    public void testsBodyValueContainsText() {
+    void testsBodyValueContainsText() {
         final String same = "Same text";
         MatcherAssert.assertThat(
             new RqFake(
@@ -55,7 +55,7 @@ public final class HmRqTextBodyTest {
      * HmRqTextBody can test if body doesn't equal to text.
      */
     @Test
-    public void testsBodyValueDoesNotContainsText() {
+    void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
             new RqFake(
                 Collections.<String>emptyList(),

@@ -28,7 +28,7 @@ import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.Request;
@@ -40,14 +40,14 @@ import org.takes.Request;
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RqWithHeadersTest {
+final class RqWithHeadersTest {
 
     /**
      * RqWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsHeadersToRequest() throws IOException {
+    void addsHeadersToRequest() throws IOException {
         final String testheader = "TestHeader: someValue";
         final String someheader = "SomeHeader: testValue";
         MatcherAssert.assertThat(
@@ -77,7 +77,7 @@ public final class RqWithHeadersTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEqualTest() throws Exception {
+    void mustEqualTest() throws Exception {
         final Request request = new RqWithHeader(
             new RqFake(),
             "jsessionid", "abcdefghigklmnop"

@@ -27,7 +27,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -37,7 +37,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkReturn}.
  * @since 0.20
  */
-public final class TkReturnTest {
+final class TkReturnTest {
 
     /**
      * TkReturn can redirect to return location
@@ -45,7 +45,7 @@ public final class TkReturnTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void redirectsAndRemovesCookie() throws Exception {
+    void redirectsAndRemovesCookie() throws Exception {
         final Take take = new TkReturn(new TkEmpty());
         final String destination = "/return/to";
         MatcherAssert.assertThat(

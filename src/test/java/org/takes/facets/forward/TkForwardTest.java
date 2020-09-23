@@ -24,7 +24,7 @@
 package org.takes.facets.forward;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.Request;
 import org.takes.Response;
@@ -39,14 +39,14 @@ import org.takes.rs.RsPrint;
  * @since 0.2
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public final class TkForwardTest {
+final class TkForwardTest {
 
     /**
      * TkForward can catch RsForward.
      * @throws Exception If some problem inside
      */
     @Test
-    public void catchesExceptionCorrectly() throws Exception {
+    void catchesExceptionCorrectly() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws RsForward {
@@ -66,7 +66,7 @@ public final class TkForwardTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void catchesExceptionThrownByResponse() throws Exception {
+    void catchesExceptionThrownByResponse() throws Exception {
         final Take take =
             request -> new ResponseOf(
                 () -> new RsEmpty().head(),

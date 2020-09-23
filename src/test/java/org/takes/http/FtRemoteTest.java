@@ -37,7 +37,7 @@ import java.util.concurrent.Future;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.form.RqFormBase;
@@ -50,14 +50,14 @@ import org.takes.tk.TkFixed;
  * @since 0.21
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FtRemoteTest {
+final class FtRemoteTest {
 
     /**
      * FtRemote can work.
      * @throws Exception If some problem inside
      */
     @Test
-    public void simplyWorks() throws Exception {
+    void simplyWorks() throws Exception {
         new FtRemote(new TkFixed(new RsText("simple answer"))).exec(
             new FtRemote.Script() {
                 @Override
@@ -77,7 +77,7 @@ public final class FtRemoteTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void worksInParallelThreads() throws Exception {
+    void worksInParallelThreads() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final org.takes.Request req)
@@ -126,7 +126,7 @@ public final class FtRemoteTest {
      * @throws Exception If some problems inside
      */
     @Test
-    public void returnsAnEmptyResponseBody() throws Exception {
+    void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkEmpty()
         ).exec(

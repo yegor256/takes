@@ -32,7 +32,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -53,7 +53,7 @@ import org.takes.tk.TkEmpty;
             "PMD.ModifiedCyclomaticComplexity"
         }
     )
-public final class BkParallelTest {
+final class BkParallelTest {
     /**
      * BkParallel runs requests in parallel, hence even
      * when handling of a request blocks, other requests
@@ -61,7 +61,7 @@ public final class BkParallelTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void requestsAreParallel() throws Exception {
+    void requestsAreParallel() throws Exception {
         final ServerSocket socket = new ServerSocket(0);
         final String uri = String.format(
             "http://localhost:%d", socket.getLocalPort()

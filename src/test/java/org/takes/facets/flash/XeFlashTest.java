@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
@@ -48,14 +48,14 @@ import org.takes.rs.xe.XeStylesheet;
  * @since 0.4
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class XeFlashTest {
+final class XeFlashTest {
 
     /**
      * XeFlash can accept RsFlash cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void acceptsRsFlashCookie() throws IOException {
+    void acceptsRsFlashCookie() throws IOException {
         final Pattern pattern = Pattern.compile(
             "^Set-Cookie: RsFlash=(.*?);Path.*"
         );
@@ -96,7 +96,7 @@ public final class XeFlashTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void rendersViaStandardXsltTemplate() throws IOException {
+    void rendersViaStandardXsltTemplate() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXslt(

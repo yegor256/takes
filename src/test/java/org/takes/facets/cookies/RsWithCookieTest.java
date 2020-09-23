@@ -24,7 +24,7 @@
 package org.takes.facets.cookies;
 
 import org.cactoos.text.Joined;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.llorllale.cactoos.matchers.Throws;
@@ -34,7 +34,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsWithCookie}.
  * @since 0.9.6
  */
-public final class RsWithCookieTest {
+final class RsWithCookieTest {
 
     /**
      * Carriage return constant.
@@ -45,7 +45,7 @@ public final class RsWithCookieTest {
      * RsWithCookie can add cookies.
      */
     @Test
-    public void addsCookieToResponse() {
+    void addsCookieToResponse() {
         new Assertion<>(
             "Response should contain \"Set-Cookie\" header",
             new RsPrint(
@@ -69,7 +69,7 @@ public final class RsWithCookieTest {
      * RsWithCookie can add several cookies (with several decorations).
      */
     @Test
-    public void addsMultipleCookies() {
+    void addsMultipleCookies() {
         new Assertion<>(
             "Response should contain \"Set-Cookie\" headers",
             new RsPrint(
@@ -97,7 +97,7 @@ public final class RsWithCookieTest {
      * RsWithCookie can reject invalid cookie name.
      */
     @Test
-    public void rejectsInvalidName() {
+    void rejectsInvalidName() {
         new Assertion<>(
             "RsWithCookie should reject invalid cookie name",
             () -> new RsWithCookie("f oo", "works"),
@@ -112,7 +112,7 @@ public final class RsWithCookieTest {
      * RsWithCookie can reject invalid cookie value.
      */
     @Test
-    public void rejectsInvalidValue() {
+    void rejectsInvalidValue() {
         new Assertion<>(
             "RsWithCookie should reject invalid cookie value",
             () -> new RsWithCookie("cookiename", "wo\"rks"),

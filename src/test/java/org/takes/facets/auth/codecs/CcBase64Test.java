@@ -29,7 +29,7 @@ import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.facets.auth.Identity;
 
@@ -37,14 +37,14 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcBase64}.
  * @since 0.13
  */
-public final class CcBase64Test {
+final class CcBase64Test {
 
     /**
      * CcBase64 can encode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodes() throws IOException {
+    void encodes() throws IOException {
         MatcherAssert.assertThat(
             new String(
                 new CcBase64(new CcPlain()).encode(
@@ -60,7 +60,7 @@ public final class CcBase64Test {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodes() throws IOException {
+    void decodes() throws IOException {
         MatcherAssert.assertThat(
             new CcBase64(new CcPlain()).decode(
                 "dXJuJTNBdGVzdCUzQXRlc3Q="
@@ -75,7 +75,7 @@ public final class CcBase64Test {
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:Hello World!";
         final Map<String, String> properties =
             ImmutableMap.of("userName", "user");
@@ -98,7 +98,7 @@ public final class CcBase64Test {
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesEmptyByteArray() throws IOException {
+    void encodesEmptyByteArray() throws IOException {
         MatcherAssert.assertThat(
             new String(
                 new CcBase64(new CcPlain()).encode(
@@ -114,7 +114,7 @@ public final class CcBase64Test {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
+    void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
         try {
             new CcStrict(new CcBase64(new CcPlain())).decode(
                 " ^^^".getBytes()
@@ -134,7 +134,7 @@ public final class CcBase64Test {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEvaluateTrueEquality() throws Exception {
+    void mustEvaluateTrueEquality() throws Exception {
         new Assertion<>(
             "Must evaluate equality of CcBase64 objects",
             new CcBase64(new CcPlain()),
@@ -143,7 +143,7 @@ public final class CcBase64Test {
     }
 
     @Test
-    public void mustEvaluateIdenticalHashCodes() throws Exception {
+    void mustEvaluateIdenticalHashCodes() throws Exception {
         new Assertion<>(
             "Must evaluate identical hash codes",
             new CcBase64(new CcPlain()).hashCode(),

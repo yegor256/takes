@@ -34,14 +34,14 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcSalted}.
  * @since 0.5
  */
-public final class CcSaltedTest {
+final class CcSaltedTest {
 
     /**
      * CcSalted can decode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesInvalidData() throws IOException {
+    void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
             new CcSafe(new CcSalted(new CcPlain())).decode(
                 " % tjw".getBytes()
@@ -61,7 +61,7 @@ public final class CcSaltedTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void encryptsLargeData() throws IOException {
+    void encryptsLargeData() throws IOException {
         final Identity identity = new Identity.Simple(
             // @checkstyle MagicNumber (1 line)
             new String(new char[10000])
@@ -75,7 +75,7 @@ public final class CcSaltedTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void throwsOnIncompleteData() throws IOException {
+    void throwsOnIncompleteData() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
             () -> {
@@ -91,7 +91,7 @@ public final class CcSaltedTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void throwsOnZeroData() throws IOException {
+    void throwsOnZeroData() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
             () -> {
@@ -107,7 +107,7 @@ public final class CcSaltedTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void throwsOnEmptyInput() throws IOException {
+    void throwsOnEmptyInput() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
             () -> {

@@ -25,21 +25,21 @@ package org.takes.rs;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 
 /**
  * Test case for {@link RsRedirect}.
  * @since 0.12
  */
-public final class RsRedirectTest {
+final class RsRedirectTest {
 
     /**
      * RsRedirect can redirect.
      * @throws IOException If some problem inside
      */
     @Test
-    public void redirects() throws IOException {
+    void redirects() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsRedirect(

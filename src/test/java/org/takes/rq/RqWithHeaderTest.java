@@ -25,7 +25,7 @@ package org.takes.rq;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 
@@ -34,13 +34,13 @@ import org.llorllale.cactoos.matchers.TextHasString;
  * @since 0.9
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RqWithHeaderTest {
+final class RqWithHeaderTest {
 
     /**
      * RqWithHeader can add a header.
      */
     @Test
-    public void addsHttpHeaders() {
+    void addsHttpHeaders() {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithHeader(
@@ -56,7 +56,7 @@ public final class RqWithHeaderTest {
      * Checks RqWithHeader equals method.
      */
     @Test
-    public void evaluateTrueEqualityTest() {
+    void evaluateTrueEqualityTest() {
         new Assertion<>(
             "Must evaluate true equality",
             new RqWithHeader(

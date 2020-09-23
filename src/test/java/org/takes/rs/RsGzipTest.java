@@ -34,7 +34,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Response;
 
 /**
@@ -42,14 +42,14 @@ import org.takes.Response;
  * @since 0.10
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RsGzipTest {
+final class RsGzipTest {
 
     /**
      * RsGzip can build a compressed response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesCompressedResponse() throws IOException {
+    void makesCompressedResponse() throws IOException {
         final String text = "some unicode text: \u20ac\n\t";
         final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
@@ -70,7 +70,7 @@ public final class RsGzipTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesCompressedPngImage() throws IOException {
+    void makesCompressedPngImage() throws IOException {
         final RenderedImage image = new BufferedImage(
             1, 1, BufferedImage.TYPE_INT_ARGB
         );
@@ -93,7 +93,7 @@ public final class RsGzipTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void reportsCorrectContentLength() throws IOException {
+    void reportsCorrectContentLength() throws IOException {
         final String text = "some text to encode";
         final Response response = new RsGzip(new RsText(text));
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();

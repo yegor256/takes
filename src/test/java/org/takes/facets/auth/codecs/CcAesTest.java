@@ -40,13 +40,13 @@ import org.takes.facets.auth.Identity;
  * @checkstyle MagicNumber (500 line)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class CcAesTest {
+final class CcAesTest {
     /**
      * CcAes can encrypt identity.
      * @throws Exception If fails
      */
     @Test
-    public void encryptIdentity() throws Exception {
+    void encryptIdentity() throws Exception {
         final byte[] key = {
             (byte) -25, (byte) 62, (byte) 118, (byte) 92,
             (byte) -35, (byte) -24, (byte) 92, (byte) 48,
@@ -90,7 +90,7 @@ public final class CcAesTest {
      * @throws Exception If fails
      */
     @Test
-    public void decryptIdentity() throws Exception {
+    void decryptIdentity() throws Exception {
         final byte[] encrypted = {
             (byte) 83, (byte) -12, (byte) -8, (byte) 30,
             (byte) -24, (byte) -5, (byte) -72, (byte) -33,
@@ -126,7 +126,7 @@ public final class CcAesTest {
      * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void encodesAndDecodes() throws Exception {
+    void encodesAndDecodes() throws Exception {
         final int length = 128;
         final KeyGenerator generator = KeyGenerator.getInstance("AES");
         generator.init(length);
@@ -144,7 +144,7 @@ public final class CcAesTest {
      * @throws Exception any unexpected exception to throw
      */
     @Test
-    public void throwsRightWhenBroken() throws Exception {
+    void throwsRightWhenBroken() throws Exception {
         Assertions.assertThrows(
             DecodingException.class,
             () -> {

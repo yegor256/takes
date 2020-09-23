@@ -23,7 +23,7 @@
  */
 package org.takes.facets.cookies;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
@@ -38,14 +38,14 @@ import org.takes.tk.TkFixed;
  * @since 0.11
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
-public final class TkJoinedCookiesTest {
+final class TkJoinedCookiesTest {
 
     /**
      * TkJoinedCookies can join cookies.
      * @throws Exception If some problem inside
      */
     @Test
-    public void joinsCookies() throws Exception {
+    void joinsCookies() throws Exception {
         new Assertion<>(
             "Response with joined cookies",
             new RsPrint(

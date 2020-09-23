@@ -30,21 +30,21 @@ import java.util.Arrays;
 import java.util.Locale;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xembly.Directives;
 
 /**
  * Test case for {@link XeTransform}.
  * @since 0.13
  */
-public final class XeTransformTest {
+final class XeTransformTest {
 
     /**
      * XeTransform can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(

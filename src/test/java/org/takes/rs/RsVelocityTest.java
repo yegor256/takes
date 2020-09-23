@@ -30,21 +30,21 @@ import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsVelocity}.
  * @since 0.1
  */
-public final class RsVelocityTest {
+final class RsVelocityTest {
 
     /**
      * RsVelocity can build text response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsTextResponse() throws IOException {
+    void buildsTextResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
@@ -62,7 +62,7 @@ public final class RsVelocityTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void closesTemplateInputStream() throws IOException {
+    void closesTemplateInputStream() throws IOException {
         final String template = "hello, world!";
         final StateAwareInputStream stream = new StateAwareInputStream(
             IOUtils.toInputStream(template, StandardCharsets.UTF_8)
@@ -85,7 +85,7 @@ public final class RsVelocityTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void useTemplateFolder() throws IOException {
+    void useTemplateFolder() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsVelocity(
