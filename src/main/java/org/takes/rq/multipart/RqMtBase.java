@@ -126,6 +126,12 @@ public final class RqMtBase implements RqMultipart {
      * @param req Original request
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (2 lines)
+     * @todo #950:30m Remove code from this ctor, leaving only
+     *  initialization. Currently this constructor access body
+     *  of the request and triggers its evaluation. This breaks
+     *  composition of multiple request, as it can be seen in
+     *  {@link RqMtFake.}. When this task is done, remove
+     *  explicit lazy evaluation for RqMtFake.
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
