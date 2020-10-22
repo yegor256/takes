@@ -32,7 +32,6 @@ import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
-import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Body;

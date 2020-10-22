@@ -67,8 +67,7 @@ public final class RqMtFake implements RqMultipart {
      * @param dispositions Fake request body parts
      * @throws IOException If fails
      */
-    public RqMtFake(final Request req, final Request... dispositions)
-        throws IOException {
+    public RqMtFake(final Request req, final Request... dispositions) {
         this.fake = new Sticky<>(
             () -> new RqMtBase(
                 new RqMtFake.FakeMultipartRequest(req, dispositions)
@@ -141,20 +140,25 @@ public final class RqMtFake implements RqMultipart {
 
     /**
      * Fake body .
-     * 
      * @since 0.33
      */
     private static final class FakeBody implements Body {
 
-        private final String text;
+        /**
+         * Content of the body.
+         */
+        private final String content;
 
         /**
-         * Ctor
+         * Ctor.
          * @param parts Fake request body partsFakeBody
          * @throws IOException If fails
          */
+        @SuppressWarnings(
+            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+        )
         private FakeBody(final Request... parts) throws IOException {
-            final StringBuilder builder = new StringBuilder();
+            final StringBuilder builder = new StringBuilder(128);
             for (final Request part : parts) {
                 builder.append(String.format("--%s", RqMtFake.BOUNDARY))
                     .append(RqMtFake.CRLF)
@@ -174,12 +178,12 @@ public final class RqMtFake implements RqMultipart {
             builder.append("Content-Transfer-Encoding: utf-8")
                 .append(RqMtFake.CRLF)
                 .append(String.format("--%s--", RqMtFake.BOUNDARY));
-            this.text = builder.toString();
+            this.content = builder.toString();
         }
 
         @Override
         public InputStream body() throws IOException {
-            return new InputStreamOf(this.text);
+            return new InputStreamOf(this.content);
         }
 
     }

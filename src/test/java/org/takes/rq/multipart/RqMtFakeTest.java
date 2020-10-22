@@ -33,7 +33,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
