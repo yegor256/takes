@@ -64,7 +64,7 @@ public final class RequestOf implements Request {
      * @param body InputStream body value
      */
     public RequestOf(final Iterable<String> head, final InputStream body) {
-        this((Head) () -> head, (Body) () -> body);
+        this(() -> head, () -> body);
     }
 
     /**
