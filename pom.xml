@@ -82,6 +82,7 @@ SOFTWARE.
     </site>
   </distributionManagement>
   <properties>
+    <argLine/>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
     <qulice.version>0.18.5</qulice.version>
