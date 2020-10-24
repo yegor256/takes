@@ -46,6 +46,7 @@ import org.takes.Response;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsPrint extends RsWrap implements Text {
+
     /**
      * Head print representation.
      */
