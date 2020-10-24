@@ -1,22 +1,20 @@
+docker:
+  image: yegor256/rultor-image:1.3
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
   s3cfg: yegor256/home#assets/s3cfg
-docker:
-  image: g4s8/rultor:alpine3.10
-  as_root: true
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
+architect:
+  - paulodamaso
+  - yegor256
 install: |
+  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
   export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
-  sudo gem install --no-rdoc --no-ri pdd
-  sudo gem install --no-rdoc --no-ri xcop
-architect:
-- paulodamaso
-- yegor256
 merge:
   script: |
     mvn clean install -Pqulice --errors --settings ../settings.xml

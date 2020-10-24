@@ -27,14 +27,15 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import org.cactoos.Scalar;
 import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
+import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
-import org.takes.Scalar;
 
 /**
  * Response of head and body.
@@ -48,12 +49,12 @@ public final class ResponseOf implements Response {
     /**
      * Original head scalar.
      */
-    private final Scalar<Iterable<String>> shead;
+    private final IoChecked<Iterable<String>> shead;
 
     /**
      * Original body scalar.
      */
-    private final Scalar<InputStream> sbody;
+    private final IoChecked<InputStream> sbody;
 
     /**
      * Ctor.
@@ -71,18 +72,18 @@ public final class ResponseOf implements Response {
      */
     public ResponseOf(
         final Scalar<Iterable<String>> head, final Scalar<InputStream> body) {
-        this.shead = head;
-        this.sbody = body;
+        this.shead = new IoChecked<>(head);
+        this.sbody = new IoChecked<>(body);
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        return this.shead.get();
+        return this.shead.value();
     }
 
     @Override
     public InputStream body() throws IOException {
-        return this.sbody.get();
+        return this.sbody.value();
     }
 
     @Override
@@ -118,6 +119,6 @@ public final class ResponseOf implements Response {
 
     @Override
     public int hashCode() {
-        return new HashCode(new Unchecked<>(this.shead::get).value()).value();
+        return new HashCode(new Unchecked<>(this.shead).value()).value();
     }
 }

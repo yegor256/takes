@@ -25,7 +25,8 @@ package org.takes.rs.xe;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
-import org.takes.Scalar;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.IoChecked;
 import org.xembly.Directive;
 
 /**
@@ -49,13 +50,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return source;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -71,14 +72,14 @@ public final class XeWhen extends XeWrap {
         this(
             new Scalar<Boolean>() {
                 @Override
-                public Boolean get() {
+                public Boolean value() {
                     return condition;
                 }
             },
             source,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -96,13 +97,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return source;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() throws IOException {
+                public XeSource value() throws IOException {
                     return XeSource.EMPTY;
                 }
             }
@@ -122,13 +123,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return positive;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return negative;
                 }
             }
@@ -147,7 +148,7 @@ public final class XeWhen extends XeWrap {
         this(
             new Scalar<Boolean>() {
                 @Override
-                public Boolean get() {
+                public Boolean value() {
                     return condition;
                 }
             },
@@ -170,13 +171,13 @@ public final class XeWhen extends XeWrap {
             condition,
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return positive;
                 }
             },
             new Scalar<XeSource>() {
                 @Override
-                public XeSource get() {
+                public XeSource value() {
                     return negative;
                 }
             }
@@ -205,10 +206,10 @@ public final class XeWhen extends XeWrap {
                 @Override
                 public Iterable<Directive> toXembly() throws IOException {
                     final Iterable<Directive> dirs;
-                    if (condition.get()) {
-                        dirs = positive.get().toXembly();
+                    if (new IoChecked<>(condition).value()) {
+                        dirs = new IoChecked<>(positive).value().toXembly();
                     } else {
-                        dirs = negative.get().toXembly();
+                        dirs = new IoChecked<>(negative).value().toXembly();
                     }
                     return dirs;
                 }

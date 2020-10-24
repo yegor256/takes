@@ -25,10 +25,10 @@ package org.takes.facets.fallback;
 
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Scalar;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.takes.Response;
-import org.takes.Scalar;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rs.RsWithBody;
@@ -151,7 +151,7 @@ public final class FbStatus extends FbWrap {
             check,
             new Scalar<Fallback>() {
                 @Override
-                public Fallback get() {
+                public Fallback value() {
                     return fallback;
                 }
             }
@@ -179,7 +179,7 @@ public final class FbStatus extends FbWrap {
                     throws Exception {
                     Opt<Response> rsp = new Opt.Empty<>();
                     if (new ListOf<>(check).contains(req.code())) {
-                        rsp = fallback.get().route(req);
+                        rsp = fallback.value().route(req);
                     }
                     return rsp;
                 }

@@ -26,7 +26,6 @@ package org.takes.facets.forward;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.takes.facets.flash.RsFlash;
 
 /**
@@ -37,7 +36,6 @@ import org.takes.facets.flash.RsFlash;
  *
  * @since 0.18
  */
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsFailure extends RsForward {
 

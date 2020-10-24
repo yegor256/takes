@@ -108,7 +108,7 @@ public final class App {
 }
 ```
 
-Then, download [`takes.jar`](http://repo1.maven.org/maven2/org/takes/takes/) and compile your Java code:
+Then, download [`takes.jar`](https://repo1.maven.org/maven2/org/takes/takes/) and compile your Java code:
 
 ```
 $ javac -cp takes.jar App.java

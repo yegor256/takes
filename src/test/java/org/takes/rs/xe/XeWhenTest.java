@@ -27,9 +27,9 @@ import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.Scalar;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.takes.Scalar;
 
 /**
  * Test case for {@link XeWhen}.
@@ -106,13 +106,13 @@ public final class XeWhenTest {
                             false,
                             new Scalar<XeSource>() {
                                 @Override
-                                public XeSource get() throws IOException {
+                                public XeSource value() throws IOException {
                                     return new XeDate();
                                 }
                             },
                             new Scalar<XeSource>() {
                                 @Override
-                                public XeSource get() throws IOException {
+                                public XeSource value() throws IOException {
                                     return new XeMemory();
                                 }
                             })
