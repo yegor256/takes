@@ -26,7 +26,7 @@ package org.takes.rq.form;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
 
@@ -34,14 +34,14 @@ import org.takes.rq.RqForm;
  * Test case for {@link RqFormSmart}.
  * @since 0.33
  */
-public final class RqFormSmartTest {
+final class RqFormSmartTest {
 
     /**
      * RqFormSmart can parse one argument in body.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesOneArgumentInBody() throws IOException {
+    void parsesOneArgumentInBody() throws IOException {
         final RqForm req = new RqFormBase(
             new RqFake(
                 "GET /just-a-test",

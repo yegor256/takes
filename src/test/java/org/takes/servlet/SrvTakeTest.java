@@ -46,7 +46,7 @@ import org.takes.rs.RsText;
  *
  * @since 1.16
  */
-public final class SrvTakeTest {
+final class SrvTakeTest {
     /**
      * Message returned if servlet Takes is executed correctly.
      */
@@ -54,7 +54,7 @@ public final class SrvTakeTest {
         "Hello servlet! Using [%s] ServletContext.";
 
     @Test
-    public void executeATakesAsAServlet() throws Exception {
+    void executeATakesAsAServlet() throws Exception {
         final String name = "webapp";
         final HttpServer server = HttpServer.createSimpleServer("./", 18_080);
         final WebappContext context = new WebappContext(name);

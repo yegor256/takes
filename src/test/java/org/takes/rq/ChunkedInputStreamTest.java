@@ -30,14 +30,14 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link ChunkedInputStream}.
  *
  * @since 0.31.2
  */
-public final class ChunkedInputStreamTest {
+final class ChunkedInputStreamTest {
 
     /**
      * Carriage return.
@@ -54,7 +54,7 @@ public final class ChunkedInputStreamTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsOneChunk() throws IOException {
+    void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
@@ -84,7 +84,7 @@ public final class ChunkedInputStreamTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsManyChunks() throws IOException {
+    void readsManyChunks() throws IOException {
         final String first = "Takes is";
         final String second = "a true object-";
         final String third = "oriented framework";
@@ -121,7 +121,7 @@ public final class ChunkedInputStreamTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void ignoresParameterAfterSemiColon() throws IOException {
+    void ignoresParameterAfterSemiColon() throws IOException {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());

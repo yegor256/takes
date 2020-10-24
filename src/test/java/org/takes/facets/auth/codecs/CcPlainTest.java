@@ -27,21 +27,21 @@ import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcPlain}.
  * @since 0.4
  */
-public final class CcPlainTest {
+final class CcPlainTest {
 
     /**
      * CcPlain can encode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodes() throws IOException {
+    void encodes() throws IOException {
         final Identity identity = new Identity.Simple(
             "urn:test:3",
             new ImmutableMap.Builder<String, String>()
@@ -59,7 +59,7 @@ public final class CcPlainTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodes() throws IOException {
+    void decodes() throws IOException {
         MatcherAssert.assertThat(
             new CcPlain().decode(
                 "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
@@ -73,7 +73,7 @@ public final class CcPlainTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesInvalidData() throws IOException {
+    void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
             new CcSafe(new CcPlain()).decode(
                 " % tjw".getBytes()

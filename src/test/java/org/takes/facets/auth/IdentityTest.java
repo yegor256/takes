@@ -26,20 +26,20 @@ package org.takes.facets.auth;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Identity}.
  * @since 0.17
  */
-public final class IdentityTest {
+final class IdentityTest {
 
     /**
      * Identity.ANONYMOUS can be equal to itself.
      * @throws IOException If some problem inside
      */
     @Test
-    public void equalsToItself() throws IOException {
+    void equalsToItself() throws IOException {
         MatcherAssert.assertThat(
             Identity.ANONYMOUS,
             new IsEqual<>(Identity.ANONYMOUS)

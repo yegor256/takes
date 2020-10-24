@@ -26,21 +26,21 @@ package org.takes.rs;
 import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsWithHeaders}.
  * @since 0.1
  */
-public final class RsWithHeadersTest {
+final class RsWithHeadersTest {
 
     /**
      * RsWithHeaders can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsHeadersToResponse() throws IOException {
+    void addsHeadersToResponse() throws IOException {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(

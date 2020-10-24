@@ -30,20 +30,20 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link TempInputStream}.
  * @since 0.31
  */
-public final class TempInputStreamTest {
+final class TempInputStreamTest {
 
     /**
      * TempInputStream can delete the underlying temporary file.
      * @throws IOException if some problem occurs.
      */
     @Test
-    public void deletesTempFile() throws IOException {
+    void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");
         final BufferedWriter out = Files.newBufferedWriter(file.toPath());
         try {

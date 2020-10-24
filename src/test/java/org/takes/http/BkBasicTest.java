@@ -41,7 +41,8 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
@@ -60,15 +61,15 @@ import org.takes.tk.TkText;
  *
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ClassFanOutComplexityCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.TooManyMethods",
-        "PMD.ClassFanOutComplexityCheck"
+        "PMD.TooManyMethods"
     })
-public final class BkBasicTest {
+final class BkBasicTest {
 
     /**
      * Carriage return constant.
@@ -91,7 +92,7 @@ public final class BkBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void handlesSocket() throws Exception {
+    void handlesSocket() throws Exception {
         final MkSocket socket = BkBasicTest.createMockSocket();
         final ByteArrayOutputStream baos = socket.bufferedOutput();
         final String hello = "Hello World";
@@ -108,7 +109,7 @@ public final class BkBasicTest {
      * @throws Exception if any I/O error occurs.
      */
     @Test
-    public void returnsProperResponseCodeOnInvalidUrl() throws Exception {
+    void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
             new TkFork(
                 new FkRegex("/path/a", new TkText("a")),
@@ -133,7 +134,7 @@ public final class BkBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void addressesInHeadersAddedWithoutSlashes() throws Exception {
+    void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
         new BkBasic(
@@ -191,7 +192,7 @@ public final class BkBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void handlesTwoRequestInOneConnection() throws Exception {
+    void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         try (ServerSocket server = new ServerSocket(0)) {
@@ -254,7 +255,7 @@ public final class BkBasicTest {
      */
     @Ignore
     @Test
-    public void returnsProperResponseCodeOnNoContentLength() throws Exception {
+    void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String text = "Say hello!";
         try (ServerSocket server = new ServerSocket(0)) {
@@ -310,7 +311,7 @@ public final class BkBasicTest {
      */
     @Ignore
     @Test
-    public void acceptsNoContentLengthOnClosedConnection() throws Exception {
+    void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String greetings = "Hi everyone";
@@ -347,10 +348,13 @@ public final class BkBasicTest {
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
+                // @checkstyle MagicNumber (10 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -2;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -374,9 +378,9 @@ public final class BkBasicTest {
      *  400 Bad Request response and finally 3) unignore this test (that should
      *  pass).
      */
-    @Ignore
+    @Disabled
     @Test
-    public void returnsABadRequestToAnInvalidRequestUri() {
+    void returnsABadRequestToAnInvalidRequestUri() {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         new Assertion<>(
             "Must return bad request to an invalid request URI",

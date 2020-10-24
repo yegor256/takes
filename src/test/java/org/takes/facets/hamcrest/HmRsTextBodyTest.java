@@ -25,7 +25,7 @@ package org.takes.facets.hamcrest;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsNot;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rs.RsWithBody;
 
 /**
@@ -33,13 +33,13 @@ import org.takes.rs.RsWithBody;
  *
  * @since 2.0
  */
-public final class HmRsTextBodyTest {
+final class HmRsTextBodyTest {
 
     /**
      * HmRsTextBody can test if body equals text.
      */
     @Test
-    public void testsBodyValueContainsText() {
+    void testsBodyValueContainsText() {
         final String same = "<h1>Hello</h1>";
         MatcherAssert.assertThat(
             new RsWithBody(same),
@@ -51,7 +51,7 @@ public final class HmRsTextBodyTest {
      * HmRsTextBody can test if body doesn't equal to text.
      */
     @Test
-    public void testsBodyValueDoesNotContainsText() {
+    void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
             new RsWithBody("Some response"),
             new IsNot<>(new HmRsTextBody("expected something else"))

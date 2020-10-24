@@ -27,21 +27,21 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcXor}.
  * @since 0.13.7
  */
-public final class CcXorTest {
+final class CcXorTest {
 
     /**
      * CcXor can encode and decode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() throws IOException {
         final String urn = "urn:domain:9";
         final Codec codec = new CcXor(
             new Codec() {

@@ -26,19 +26,19 @@ package org.takes.misc;
 import java.time.Instant;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests of {@link Expires} interface and direct implementations.
  * @since 2.0
  */
-public final class ExpiresTest {
+final class ExpiresTest {
 
     /**
      * {@link Expires.Expired} can return expired time (0).
      */
     @Test
-    public void returnsExpired() {
+    void returnsExpired() {
         MatcherAssert.assertThat(
             "Wrong expiration time for expired time",
             new Expires.Expired().print(),
@@ -50,7 +50,7 @@ public final class ExpiresTest {
      * {@link Expires.Never} can return epoch time.
      */
     @Test
-    public void returnsNever() {
+    void returnsNever() {
         MatcherAssert.assertThat(
             "Wrong expiration time for never",
             new Expires.Never().print(),
@@ -62,7 +62,7 @@ public final class ExpiresTest {
      * {@link Expires.Hour} can return expiration time of an hour.
      */
     @Test
-    public void returnsHour() {
+    void returnsHour() {
         MatcherAssert.assertThat(
             "Wrong expiration time for Hour",
             new Expires.Hour(
@@ -77,7 +77,7 @@ public final class ExpiresTest {
      * Date can return expires date string in GMT.
      */
     @Test
-    public void returnsExpiresStringInGmt() {
+    void returnsExpiresStringInGmt() {
         MatcherAssert.assertThat(
             "Wrong expiration time in GMT",
             // @checkstyle MagicNumberCheck (2 lines)

@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -36,14 +36,14 @@ import org.mockito.Mockito;
  *
  * @since 0.16
  */
-public final class CapInputStreamTest {
+final class CapInputStreamTest {
 
     /**
      * CapInputStream can put a cap on a stream.
      * @throws IOException If some problem inside
      */
     @Test
-    public void putsCapOnStream() throws IOException {
+    void putsCapOnStream() throws IOException {
         final long length = 50L;
         MatcherAssert.assertThat(
             (long) new CapInputStream(
@@ -59,7 +59,7 @@ public final class CapInputStreamTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void closesStream() throws Exception {
+    void closesStream() throws Exception {
         final InputStream stream = Mockito.mock(InputStream.class);
         final CapInputStream wrapper = new CapInputStream(stream, 0L);
         wrapper.close();
@@ -71,7 +71,7 @@ public final class CapInputStreamTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void skipsOnStream() throws Exception {
+    void skipsOnStream() throws Exception {
         final long skip = 25L;
         final InputStream stream = Mockito.mock(InputStream.class);
         final CapInputStream wrapper = new CapInputStream(stream, 50L);

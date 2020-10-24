@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.tk.TkEmpty;
@@ -34,7 +34,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkRegex}.
  * @since 0.4
  */
-public final class FkRegexTest {
+final class FkRegexTest {
 
     /**
      * Test path for trailing slash.
@@ -46,7 +46,7 @@ public final class FkRegexTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws Exception {
+    void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
@@ -66,7 +66,7 @@ public final class FkRegexTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void removesTrailingSlash() throws Exception {
+    void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h/tail", new TkEmpty()).route(
                 new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
@@ -80,7 +80,7 @@ public final class FkRegexTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void keepsTrailingSlash() throws Exception {
+    void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
             .setRemoveTrailingSlash(false)

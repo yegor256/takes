@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.fork.am.AmVersion;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -36,10 +36,10 @@ import org.takes.tk.TkEmpty;
  * @since 1.7.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class FkAgentTest {
+final class FkAgentTest {
 
     @Test
-    public void matchesByVersionGreater() throws Exception {
+    void matchesByVersionGreater() throws Exception {
         final String header = "User-Agent";
         final String agent = "Chrome";
         MatcherAssert.assertThat(

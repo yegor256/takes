@@ -42,7 +42,7 @@ public interface Expires {
 
     /**
      * Never expires.
-     * 
+     *
      * @since 2.0
      */
     final class Never implements Expires {

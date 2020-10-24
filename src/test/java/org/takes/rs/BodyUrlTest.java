@@ -32,7 +32,7 @@ import org.cactoos.io.TempFile;
 import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Body.Url}.
@@ -40,14 +40,14 @@ import org.junit.Test;
  * @since 1.15
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class BodyUrlTest {
+final class BodyUrlTest {
 
     /**
      * Body.URL can provide the expected input.
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithUrl() throws Exception {
+    void returnsCorrectInputWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
             final Bytes body = new BytesOf("URL returnsCorrectInput!");
             try (OutputStream outStream =
@@ -70,7 +70,7 @@ public final class BodyUrlTest {
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithUrl() throws Exception {
+    void returnsCorrectLengthWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
             final Bytes body = new BytesOf("URL returnsCorrectLength!");
             try (OutputStream outStream =

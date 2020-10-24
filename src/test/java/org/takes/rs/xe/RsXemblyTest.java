@@ -30,7 +30,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -39,14 +39,14 @@ import org.xembly.Directives;
  * Test case for {@link RsXembly}.
  * @since 0.1
  */
-public final class RsXemblyTest {
+final class RsXemblyTest {
 
     /**
      * RsXembly can build XML response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -78,7 +78,7 @@ public final class RsXemblyTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void modifiesXmlResponse() throws Exception {
+    void modifiesXmlResponse() throws Exception {
         final Document dom = DocumentBuilderFactory.newInstance()
             .newDocumentBuilder()
             .newDocument();

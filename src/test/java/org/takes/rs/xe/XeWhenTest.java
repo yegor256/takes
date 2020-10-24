@@ -29,13 +29,13 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.cactoos.Scalar;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeWhen}.
  * @since 0.13
  */
-public final class XeWhenTest {
+final class XeWhenTest {
 
     /**
      * XeWhen can build XML response.
@@ -43,7 +43,7 @@ public final class XeWhenTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponse() throws IOException {
+    void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -69,7 +69,7 @@ public final class XeWhenTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponseFromPositiveCondition() throws IOException {
+    void buildsXmlResponseFromPositiveCondition() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -96,7 +96,7 @@ public final class XeWhenTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsXmlResponseFromNegativeCondition() throws IOException {
+    void buildsXmlResponseFromNegativeCondition() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(

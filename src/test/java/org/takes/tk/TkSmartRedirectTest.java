@@ -24,7 +24,7 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 
@@ -33,13 +33,13 @@ import org.takes.rq.RqFake;
  * @since 0.10
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class TkSmartRedirectTest {
+final class TkSmartRedirectTest {
     /**
      * TkRedirect should carry on the query and the fragment.
      * @throws Exception If some problem inside
      */
     @Test
-    public void redirectCarriesQueryAndFragment() throws Exception {
+    void redirectCarriesQueryAndFragment() throws Exception {
         MatcherAssert.assertThat(
             new TkSmartRedirect("http://www.google.com/abc?b=2").act(
                 new RqFake("GET", "/hi?a=1#test")
@@ -56,7 +56,7 @@ public final class TkSmartRedirectTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void redirectCarriesQueryAndFragmentOnEmptyUrl() throws Exception {
+    void redirectCarriesQueryAndFragmentOnEmptyUrl() throws Exception {
         MatcherAssert.assertThat(
             new TkSmartRedirect().act(
                 new RqFake("GET", "/hey-you?f=1#xxx")

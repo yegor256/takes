@@ -24,7 +24,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.facets.auth.codecs.CcPlain;
@@ -35,14 +35,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link PsCookie}.
  * @since 0.10
  */
-public final class PsCookieTest {
+final class PsCookieTest {
 
     /**
      * PsCookie can add a cookie.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsCookieToResponse() throws IOException {
+    void addsCookieToResponse() throws IOException {
         new Assertion<>(
             "Response with Set-Cookie header",
             new RsPrint(

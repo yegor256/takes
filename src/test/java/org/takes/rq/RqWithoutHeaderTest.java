@@ -26,20 +26,20 @@ package org.takes.rq;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqWithoutHeader}.
  * @since 0.9
  */
-public final class RqWithoutHeaderTest {
+final class RqWithoutHeaderTest {
 
     /**
      * RqWithoutHeader can remove a header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void removesHttpHeaders() throws IOException {
+    void removesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqWithoutHeader(

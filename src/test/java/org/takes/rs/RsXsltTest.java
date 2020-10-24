@@ -35,7 +35,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.EndsWith;
 import org.takes.misc.StateAwareInputStream;
 
@@ -44,7 +44,7 @@ import org.takes.misc.StateAwareInputStream;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
-public final class RsXsltTest {
+final class RsXsltTest {
 
     /**
      * Validate encoding.
@@ -63,7 +63,7 @@ public final class RsXsltTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void convertsXmlToHtml() throws IOException {
+    void convertsXmlToHtml() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
@@ -94,7 +94,7 @@ public final class RsXsltTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void convertsXmlToPlainText() throws IOException {
+    void convertsXmlToPlainText() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/x.xsl' type='text/xsl'?>",
@@ -124,7 +124,7 @@ public final class RsXsltTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void closesDecoratedResponseInputStream() throws Exception {
+    void closesDecoratedResponseInputStream() throws Exception {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
@@ -161,7 +161,7 @@ public final class RsXsltTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void resolvesInClasspath() throws IOException {
+    void resolvesInClasspath() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(
@@ -223,7 +223,7 @@ public final class RsXsltTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void loadsExternalImports() throws IOException {
+    void loadsExternalImports() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet   ",

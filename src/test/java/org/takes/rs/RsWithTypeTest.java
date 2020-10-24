@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 
 /**
@@ -35,7 +35,7 @@ import org.llorllale.cactoos.matchers.TextIs;
  * @since 0.16.9
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RsWithTypeTest {
+final class RsWithTypeTest {
 
     /**
      * Carriage return constant.
@@ -83,7 +83,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void replaceTypeToResponse() throws Exception {
+    void replaceTypeToResponse() throws Exception {
         final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
             new RsPrint(
@@ -109,7 +109,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void doesNotReplaceResponseCode() throws Exception {
+    void doesNotReplaceResponseCode() throws Exception {
         final String body = "Error!";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -139,7 +139,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void replacesTypeWithHtml() throws Exception {
+    void replacesTypeWithHtml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Html(
@@ -187,7 +187,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void replacesTypeWithJson() throws Exception {
+    void replacesTypeWithJson() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Json(
@@ -235,7 +235,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void replacesTypeWithXml() throws Exception {
+    void replacesTypeWithXml() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Xml(
@@ -282,7 +282,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void replacesTypeWithText() throws Exception {
+    void replacesTypeWithText() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Text(
@@ -329,7 +329,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void addsContentType() throws Exception {
+    void addsContentType() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
@@ -355,7 +355,7 @@ public final class RsWithTypeTest {
      * @throws Exception If a problem occurs.
      */
     @Test
-    public void addsCharsetToContentType() throws Exception {
+    void addsCharsetToContentType() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(

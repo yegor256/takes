@@ -31,7 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.core.IsEqual;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.http.FtRemote;
 
 /**
@@ -39,7 +39,7 @@ import org.takes.http.FtRemote;
  * with {@link FtRemote} and {@link TkEmpty}.
  * @since 0.11.2
  */
-public final class TkSlf4jRemoteTest {
+final class TkSlf4jRemoteTest {
 
     /**
      * TkSlf4j can return an empty response body for {@link TkEmpty}.
@@ -47,7 +47,7 @@ public final class TkSlf4jRemoteTest {
      */
     @Ignore
     @Test
-    public void returnsAnEmptyResponseBody() throws Exception {
+    void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkSlf4j(new TkEmpty())
         ).exec(

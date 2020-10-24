@@ -26,20 +26,20 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link MediaTypes}.
  * @since 0.6
  */
-public final class MediaTypesTest {
+final class MediaTypesTest {
 
     /**
      * MediaTypes can match two lists.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesTwoTypes() throws IOException {
+    void matchesTwoTypes() throws IOException {
         MatcherAssert.assertThat(
             new MediaTypes("*/*").contains(
                 new MediaTypes("application/xml")
@@ -77,7 +77,7 @@ public final class MediaTypesTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesTwoCompositeTypes() throws IOException {
+    void matchesTwoCompositeTypes() throws IOException {
         MatcherAssert.assertThat(
             new MediaTypes("text/xml,text/json").contains(
                 new MediaTypes("text/json")
@@ -97,7 +97,7 @@ public final class MediaTypesTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesInvalidTypes() throws IOException {
+    void parsesInvalidTypes() throws IOException {
         new MediaTypes("hello, how are you?");
         new MediaTypes("////");
         new MediaTypes("/;/;q=0.9");

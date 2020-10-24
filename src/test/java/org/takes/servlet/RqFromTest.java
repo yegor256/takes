@@ -40,7 +40,7 @@ import org.takes.rq.RqPrint;
  * @since 1.15
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RqFromTest {
+final class RqFromTest {
 
     /**
      * Takes default local address.
@@ -65,7 +65,7 @@ public final class RqFromTest {
     private static final String GET_METHOD = "GET /";
 
     @Test
-    public void defaultMethodForAFakeResquestIsGet() throws IOException {
+    void defaultMethodForAFakeResquestIsGet() throws IOException {
         MatcherAssert.assertThat(
             "Can't add a method to a servlet request",
             new RqPrint(
@@ -80,7 +80,7 @@ public final class RqFromTest {
     }
 
     @Test
-    public void containsMethodAndHeader() throws IOException {
+    void containsMethodAndHeader() throws IOException {
         final String method = "GET /a-test";
         final String header = "foo: bar";
         MatcherAssert.assertThat(
@@ -112,7 +112,7 @@ public final class RqFromTest {
     }
 
     @Test
-    public void containsHostHeaderInHeader() throws IOException {
+    void containsHostHeaderInHeader() throws IOException {
         final String method = "GET /one-more-test";
         final String header = "Host: www.thesite.com";
         MatcherAssert.assertThat(
@@ -143,7 +143,7 @@ public final class RqFromTest {
     }
 
     @Test
-    public void containsHostAndPortInHeader() throws IOException {
+    void containsHostAndPortInHeader() throws IOException {
         final String method = "GET /b-test";
         final String header = "Host: 192.168.0.1:12345";
         MatcherAssert.assertThat(
@@ -174,7 +174,7 @@ public final class RqFromTest {
     }
 
     @Test
-    public void containsContentInRequestBody() throws IOException {
+    void containsContentInRequestBody() throws IOException {
         final String content = "My name is neo!";
         MatcherAssert.assertThat(
             "Can't add a body to servlet request",

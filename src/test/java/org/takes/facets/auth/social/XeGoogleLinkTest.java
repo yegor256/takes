@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.xe.RsXembly;
 import org.takes.rs.xe.XeAppend;
@@ -37,14 +37,14 @@ import org.takes.rs.xe.XeAppend;
  * Test case for {@link XeGoogleLink}.
  * @since 0.9
  */
-public final class XeGoogleLinkTest {
+final class XeGoogleLinkTest {
 
     /**
      * XeGoogleLink can create a correct link.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesCorrectLink() throws IOException {
+    void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(

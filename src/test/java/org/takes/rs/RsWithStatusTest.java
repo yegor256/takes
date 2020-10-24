@@ -26,7 +26,7 @@ package org.takes.rs;
 import java.net.HttpURLConnection;
 import org.cactoos.Scalar;
 import org.cactoos.text.Joined;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 import org.llorllale.cactoos.matchers.ScalarHasValue;
@@ -40,13 +40,13 @@ import org.takes.Response;
  * @since 0.16.9
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public final class RsWithStatusTest {
+final class RsWithStatusTest {
 
     /**
      * RsWithStatus can add status.
      */
     @Test
-    public void addsStatus() {
+    void addsStatus() {
         new Assertion<>(
             "Response must contain not found status",
             new RsPrint(
@@ -77,7 +77,7 @@ public final class RsWithStatusTest {
         }
     )
     @Test
-    public void addsStatusMultipleTimes() {
+    void addsStatusMultipleTimes() {
         final Response response = new RsWithStatus(
             new RsWithStatus(
                 new RsEmpty(),

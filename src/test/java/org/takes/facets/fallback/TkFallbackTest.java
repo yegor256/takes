@@ -25,7 +25,7 @@ package org.takes.facets.fallback;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,14 +41,14 @@ import org.takes.tk.TkFailure;
  * @since 0.9.6
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkFallbackTest {
+final class TkFallbackTest {
 
     /**
      * TkFallback can fall back.
      * @throws Exception If some problem inside
      */
     @Test
-    public void fallsBack() throws Exception {
+    void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -73,7 +73,7 @@ public final class TkFallbackTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void fallsBackInsideResponse() throws Exception {
+    void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkFallback(
@@ -104,7 +104,7 @@ public final class TkFallbackTest {
      */
     @Test
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    public void fallsBackWithProperMessage() {
+    void fallsBackWithProperMessage() {
         try {
             new TkFallback(
                 new TkFailure(),

@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -34,14 +34,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link org.takes.tk.TkWithHeaders}.
  * @since 0.9.1
  */
-public final class TkWithHeadersTest {
+final class TkWithHeadersTest {
 
     /**
      * TkWithHeaders can add headers.
      * @throws java.lang.Exception If some problem inside
      */
     @Test
-    public void addHeaders() throws Exception {
+    void addHeaders() throws Exception {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(
