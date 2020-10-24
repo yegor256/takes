@@ -98,6 +98,7 @@ public final class RsJson extends RsWrap {
 
     /**
      * Source with JSON.
+     * @since 0.1
      */
     public interface Source {
         /**

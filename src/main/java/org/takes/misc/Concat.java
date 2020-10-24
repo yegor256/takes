@@ -74,6 +74,7 @@ public final class Concat<T> implements Iterable<T> {
      * <p>This class is NOT thread-safe.
      *
      * @param <E> Type of items
+     * @since 0.15.2
      */
     private static final class ConcatIterator<E> implements Iterator<E> {
         /**

@@ -83,6 +83,7 @@ public final class TkSmartRedirect extends TkWrap {
 
     /**
      * Extract params from original query.
+     * @since 1.9
      */
     private static final class RedirectParams {
         /**

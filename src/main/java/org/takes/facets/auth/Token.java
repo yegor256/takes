@@ -58,6 +58,7 @@ public interface Token {
 
     /**
      * JSON Object Signing and Encryption Header.
+     * @since 1.4
      */
     final class Jose implements Token {
         /**
@@ -101,6 +102,7 @@ public interface Token {
 
     /**
      * JSON Web Token.
+     * @since 1.4
      */
     @SuppressWarnings
         (

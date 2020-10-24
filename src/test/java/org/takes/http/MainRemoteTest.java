@@ -82,6 +82,8 @@ public final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
+     * @since 0.23
      */
     public static final class DemoApp {
         /**
@@ -103,6 +105,8 @@ public final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
+     * @since 0.23
      */
     public static final class DemoAppArgs {
         /**

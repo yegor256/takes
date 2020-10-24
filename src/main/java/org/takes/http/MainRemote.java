@@ -166,6 +166,7 @@ public final class MainRemote {
 
     /**
      * Script to execute.
+     * @since 0.23
      */
     public interface Script {
         /**

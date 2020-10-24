@@ -141,6 +141,7 @@ public final class FkHitRefresh implements Fork {
 
     /**
      * A handle for serving hit-refresh feature.
+     * @since 0.9
      */
     private static final class HitRefreshHandle {
         /**

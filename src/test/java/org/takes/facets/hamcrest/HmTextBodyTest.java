@@ -80,6 +80,7 @@ public final class HmTextBodyTest {
 
     /**
      * Fake child of {@link AbstractHmTextBody} for the test.
+     * @since 2.0
      */
     private final class HmTextBodyFake extends AbstractHmTextBody<Text> {
 
