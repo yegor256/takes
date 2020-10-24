@@ -217,7 +217,6 @@ public final class RsPrintTest {
     /**
      * Fake wrapper for InputStream to make sure body is closed.
      *
-     * @version $Id$
      * @since 2.0
      */
     private static final class FakeInput extends InputStream {
