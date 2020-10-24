@@ -84,7 +84,7 @@ SOFTWARE.
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
-    <qulice.version>0.18.5</qulice.version>
+    <qulice.version>0.18.19</qulice.version>
   </properties>
   <dependencies>
     <!--
