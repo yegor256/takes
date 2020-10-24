@@ -217,7 +217,6 @@ public final class RsPrintTest {
     /**
      * Fake wrapper for InputStream to make sure body is closed.
      *
-     * @author Alena Gerasimova (olena.gerasimova@gmail.com)
      * @version $Id$
      * @since 2.0
      */
