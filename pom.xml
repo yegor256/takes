@@ -68,7 +68,8 @@ SOFTWARE.
   </issueManagement>
   <scm>
     <connection>scm:git:git@github.com:yegor256/takes.git</connection>
-    <developerConnection>scm:git:git@github.com:yegor256/takes.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:yegor256/takes.git
+    </developerConnection>
     <url>https://github.com/yegor256/takes</url>
   </scm>
   <ciManagement>
@@ -320,13 +321,21 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US ${argLine}</argLine>
+          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8
+            -Duser.language=en -Duser.country=US ${argLine}
+          </argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
-            <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
-            <javax.net.ssl.keyStorePassword>abc123</javax.net.ssl.keyStorePassword>
-            <javax.net.ssl.trustStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.trustStore>
-            <javax.net.ssl.trustStorePassword>abc123</javax.net.ssl.trustStorePassword>
+            <javax.net.ssl.keyStore>
+              ${project.build.directory}/test-classes/org/takes/http/keystore
+            </javax.net.ssl.keyStore>
+            <javax.net.ssl.keyStorePassword>abc123
+            </javax.net.ssl.keyStorePassword>
+            <javax.net.ssl.trustStore>
+              ${project.build.directory}/test-classes/org/takes/http/keystore
+            </javax.net.ssl.trustStore>
+            <javax.net.ssl.trustStorePassword>abc123
+            </javax.net.ssl.trustStorePassword>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -373,7 +382,8 @@ SOFTWARE.
               <goal>verify</goal>
             </goals>
             <configuration>
-              <verificationFile>src/verifier/verifications.xml</verificationFile>
+              <verificationFile>src/verifier/verifications.xml
+              </verificationFile>
             </configuration>
           </execution>
         </executions>
@@ -457,8 +467,9 @@ SOFTWARE.
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.6</version>
             <configuration>
-                <output>file</output>
-                <outputDirectory>${project.build.directory}/coverage</outputDirectory>
+              <output>file</output>
+              <outputDirectory>${project.build.directory}/coverage
+              </outputDirectory>
             </configuration>
             <executions>
               <execution>
