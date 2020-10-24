@@ -68,7 +68,7 @@ public final class RqSocketTest {
             new RqSocket(
                 new RqWithHeader(new RqFake(), "X-Takes-LocalPort: 55555")
             ).getLocalPort(),
-            Matchers.is(55555)
+            Matchers.is(55_555)
         );
     }
 

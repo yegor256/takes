@@ -61,7 +61,7 @@ public final class RsJsonTest {
      */
     @Test
     public void buildsBigJsonResponse() throws IOException {
-        final int size = 100000;
+        final int size = 100_000;
         final JsonArrayBuilder builder = Json.createArrayBuilder();
         for (int idx = 0; idx < size; ++idx) {
             builder.add(

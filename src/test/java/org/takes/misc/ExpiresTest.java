@@ -82,7 +82,7 @@ public final class ExpiresTest {
             "Wrong expiration time in GMT",
             // @checkstyle MagicNumberCheck (2 lines)
             new Expires.Date(
-                1517048057117L
+                1_517_048_057_117L
             ).print(),
             new IsEqual<>("Expires=Sat, 27 Jan 2018 10:14:17 GMT")
         );
