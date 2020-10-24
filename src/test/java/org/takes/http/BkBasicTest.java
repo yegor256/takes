@@ -41,6 +41,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -60,13 +61,13 @@ import org.takes.tk.TkText;
  *
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ClassFanOutComplexityCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.TooManyMethods",
-        "PMD.ClassFanOutComplexityCheck"
+        "PMD.TooManyMethods"
     })
 final class BkBasicTest {
 
@@ -347,10 +348,13 @@ final class BkBasicTest {
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
+                // @checkstyle MagicNumber (10 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                     count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -2;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -374,9 +378,9 @@ final class BkBasicTest {
      *  400 Bad Request response and finally 3) unignore this test (that should
      *  pass).
      */
-    @Ignore
+    @Disabled
     @Test
-    public void returnsABadRequestToAnInvalidRequestUri() {
+    void returnsABadRequestToAnInvalidRequestUri() {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         new Assertion<>(
             "Must return bad request to an invalid request URI",
