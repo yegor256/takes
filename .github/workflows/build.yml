@@ -22,7 +22,7 @@ jobs:
         run: mvn clean test --errors --batch-mode
       - name: CodeCov
         uses: codecov/codecov-action@v1.0.13
-        if: matrix.os == 'ubuntu-20.10' && github.repository == 'yegor256/takes'
+        if: matrix.os == 'ubuntu-latest' && github.repository == 'yegor256/takes'
         timeout-minutes: 10
         with:
           file: target/coverage/jacoco.xml
