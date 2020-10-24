@@ -29,8 +29,6 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Set;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.set.SetOf;
@@ -181,9 +179,11 @@ public final class RsPrintTest {
         }
 
         @Override
-        public void write(final char[] cbuf, final int off, final int len)
-            throws IOException
-        {
+        public void write(
+            final char[] cbuf,
+            final int off,
+            final int len
+        ) throws IOException {
             this.output.write(
                 new String(cbuf).getBytes(StandardCharsets.UTF_8),
                 off,
