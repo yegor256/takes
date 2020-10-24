@@ -64,7 +64,7 @@ final class CcSaltedTest {
     void encryptsLargeData() throws IOException {
         final Identity identity = new Identity.Simple(
             // @checkstyle MagicNumber (1 line)
-            new String(new char[10000])
+            new String(new char[10_000])
         );
         final byte[] bytes = new CcSalted(new CcPlain()).encode(identity);
         new CcSalted(new CcPlain()).decode(bytes);

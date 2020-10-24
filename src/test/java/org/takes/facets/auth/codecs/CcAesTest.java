@@ -157,6 +157,7 @@ final class CcAesTest {
 
     /**
      * Fake random with provided random result.
+     * @since 0.13.8
      */
     private static final class FkRandom extends SecureRandom {
         /**
@@ -175,6 +176,7 @@ final class CcAesTest {
 
     /**
      * Fake random SPI.
+     * @since 0.13.8
      */
     @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     private static final class FkRandomSpi extends SecureRandomSpi {

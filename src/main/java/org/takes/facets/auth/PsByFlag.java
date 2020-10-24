@@ -132,6 +132,7 @@ public final class PsByFlag implements Pass {
 
     /**
      * Pair of values.
+     * @since 0.1
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<Pattern, Pass> {

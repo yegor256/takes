@@ -92,6 +92,7 @@ final class RqFrom implements Request {
 
     /**
      * Http request first line: method, uri, version.
+     * @since 2.0
      */
     private static final class HttpHead {
         /**
@@ -128,6 +129,7 @@ final class RqFrom implements Request {
 
     /**
      * Host header line from request.
+     * @since 2.0
      */
     private static final class HttpHost {
         /**

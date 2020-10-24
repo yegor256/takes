@@ -59,6 +59,7 @@ interface Body extends Input {
 
     /**
      * Content of a body based on an {@link java.net.URL}.
+     * @since 0.32
      */
     final class Url implements Body {
 
@@ -90,6 +91,7 @@ interface Body extends Input {
 
     /**
      * Content of a body based on a byte array.
+     * @since 0.32
      */
     final class ByteArray implements Body {
 
@@ -119,6 +121,7 @@ interface Body extends Input {
 
     /**
      * The content of the body based on an {@link InputStream}.
+     * @since 0.32
      */
     final class Stream implements Body {
 
@@ -171,6 +174,7 @@ interface Body extends Input {
      * file to be able to read it as many times as we want so use it only
      * for large content, for small content use {@link Body.ByteArray}
      * instead.</b>
+     * @since 0.32
      */
     final class TempFile implements Body {
 

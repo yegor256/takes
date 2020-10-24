@@ -56,7 +56,7 @@ final class SrvTakeTest {
     @Test
     void executeATakesAsAServlet() throws Exception {
         final String name = "webapp";
-        final HttpServer server = HttpServer.createSimpleServer("./", 18080);
+        final HttpServer server = HttpServer.createSimpleServer("./", 18_080);
         final WebappContext context = new WebappContext(name);
         final ServletRegistration servlet = context.addServlet(
             "takes",

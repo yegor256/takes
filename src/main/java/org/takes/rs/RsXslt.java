@@ -225,6 +225,7 @@ public final class RsXslt extends RsWrap {
 
     /**
      * Classpath URI resolver.
+     * @since 0.1
      */
     private static final class InClasspath implements URIResolver {
         @Override
