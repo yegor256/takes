@@ -65,7 +65,8 @@ import org.takes.tk.TkText;
 @SuppressWarnings(
     {
         "PMD.ExcessiveImports",
-        "PMD.TooManyMethods"
+        "PMD.TooManyMethods",
+        "PMD.ClassFanOutComplexityCheck"
     })
 public final class BkBasicTest {
 
