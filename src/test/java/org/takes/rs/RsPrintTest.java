@@ -32,10 +32,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Set;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.set.SetOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.object.HasToString;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrint}.
@@ -103,12 +107,15 @@ public final class RsPrintTest {
     @Test
     public void simple() throws IOException {
         final StringWriter writer = new StringWriter();
-        final String firstline = "HTTP/1.1 500 Internal Server Error";
-        final Set<String> head = Collections.singleton(firstline);
-        new RsPrint(new RsSimple(head, "")).printHead(writer);
+        new RsPrint(
+            new RsSimple(new SetOf<>("HTTP/1.1 500 Internal Server Error"), "")
+        ).printHead(writer);
         MatcherAssert.assertThat(
-            writer.getBuffer().toString(),
-            Matchers.equalTo("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            "must write head",
+            writer.getBuffer(),
+            new HasToString<>(
+                new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            )
         );
     }
 
@@ -118,12 +125,15 @@ public final class RsPrintTest {
     @Test
     public void simpleWithDash() throws IOException {
         final StringWriter writer = new StringWriter();
-        final String firstline = "HTTP/1.1 203 Non-Authoritative";
-        final Set<String> head = Collections.singleton(firstline);
-        new RsPrint(new RsSimple(head, "")).printHead(writer);
-        MatcherAssert.assertThat(
-            writer.getBuffer().toString(),
-            Matchers.equalTo("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+        new RsPrint(
+            new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
+        ).printHead(writer);
+        new Assertion<>(
+            "must write head with dashes",
+            writer.getBuffer(),
+            new HasToString<>(
+                new IsEqual<>("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+            )
         );
     }
 
@@ -172,7 +182,8 @@ public final class RsPrintTest {
 
         @Override
         public void write(final char[] cbuf, final int off, final int len)
-            throws IOException {
+            throws IOException
+        {
             this.output.write(
                 new String(cbuf).getBytes(StandardCharsets.UTF_8),
                 off,
