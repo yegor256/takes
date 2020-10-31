@@ -98,6 +98,7 @@ public final class RqMtFake implements RqMultipart {
     /**
      * This class is using a decorator pattern for representing a fake HTTP
      * multipart request.
+     * @since 0.33
      */
     private static final class FakeMultipartRequest extends RqWrap {
         /**
