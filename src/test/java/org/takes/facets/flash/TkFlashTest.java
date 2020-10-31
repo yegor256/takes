@@ -25,7 +25,7 @@ package org.takes.facets.flash;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -35,14 +35,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkFlash}.
  * @since 0.4
  */
-public final class TkFlashTest {
+final class TkFlashTest {
 
     /**
      * TkFlash can remove a flash cookie.
      * @throws Exception If some problem inside
      */
     @Test
-    public void removesFlashCookie() throws Exception {
+    void removesFlashCookie() throws Exception {
         final Take take = new TkFlash(new TkEmpty());
         MatcherAssert.assertThat(
             take.act(

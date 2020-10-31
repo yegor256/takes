@@ -26,13 +26,18 @@ package org.takes.rs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.set.SetOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
+import org.hamcrest.object.HasToString;
 import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrint}.
@@ -97,6 +102,39 @@ public final class RsPrintTest {
         );
     }
 
+    @Test
+    public void simple() throws IOException {
+        final StringWriter writer = new StringWriter();
+        new RsPrint(
+            new RsSimple(new SetOf<>("HTTP/1.1 500 Internal Server Error"), "")
+        ).printHead(writer);
+        MatcherAssert.assertThat(
+            "must write head",
+            writer.getBuffer(),
+            new HasToString<>(
+                new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            )
+        );
+    }
+
+    /**
+     * RFC 7230 says we shall support dashes in response first line.
+     */
+    @Test
+    public void simpleWithDash() throws IOException {
+        final StringWriter writer = new StringWriter();
+        new RsPrint(
+            new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
+        ).printHead(writer);
+        new Assertion<>(
+            "must write head with dashes",
+            writer.getBuffer(),
+            new HasToString<>(
+                new IsEqual<>("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+            )
+        );
+    }
+
     /**
      * RsPrint can flush head contents even when exception happens.
      * @throws IOException If some problem inside
@@ -141,8 +179,11 @@ public final class RsPrintTest {
         }
 
         @Override
-        public void write(final char[] cbuf, final int off, final int len)
-            throws IOException {
+        public void write(
+            final char[] cbuf,
+            final int off,
+            final int len
+        ) throws IOException {
             this.output.write(
                 new String(cbuf).getBytes(StandardCharsets.UTF_8),
                 off,
@@ -217,8 +258,6 @@ public final class RsPrintTest {
     /**
      * Fake wrapper for InputStream to make sure body is closed.
      *
-     * @author Alena Gerasimova (olena.gerasimova@gmail.com)
-     * @version $Id$
      * @since 2.0
      */
     private static final class FakeInput extends InputStream {

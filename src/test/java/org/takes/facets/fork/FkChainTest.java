@@ -26,7 +26,7 @@ package org.takes.facets.fork;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -35,14 +35,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link FkChain}.
  * @since 0.33
  */
-public final class FkChainTest {
+final class FkChainTest {
 
     /**
      * FkChain can gracefully work when no fork matches the request.
      * @throws Exception If some problem inside
      */
     @Test
-    public void gracefullyHandlesNoForkMatching() throws Exception {
+    void gracefullyHandlesNoForkMatching() throws Exception {
         MatcherAssert.assertThat(
             new FkChain(
                 new FkRegex("/doyoumatch?", "Hello. It's me."),
@@ -57,7 +57,7 @@ public final class FkChainTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws Exception {
+    void dispatchesByRegularExpression() throws Exception {
         final String body = "hello test!";
         MatcherAssert.assertThat(
             new RsPrint(

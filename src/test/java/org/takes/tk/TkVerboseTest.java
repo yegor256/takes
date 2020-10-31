@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -38,14 +38,14 @@ import org.takes.rq.RqFake;
  * Test case for {@link TkVerbose}.
  * @since 0.10
  */
-public final class TkVerboseTest {
+final class TkVerboseTest {
 
     /**
      * TkVerbose can extend not-found exception.
      * @throws Exception If some problem inside
      */
     @Test
-    public void extendsNotFoundException() throws Exception {
+    void extendsNotFoundException() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {

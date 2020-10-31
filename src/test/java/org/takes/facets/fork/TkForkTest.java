@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -34,14 +34,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkFork}.
  * @since 0.4
  */
-public final class TkForkTest {
+final class TkForkTest {
 
     /**
      * TkFork can dispatch by regular expression.
      * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByRegularExpression() throws Exception {
+    void dispatchesByRegularExpression() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(

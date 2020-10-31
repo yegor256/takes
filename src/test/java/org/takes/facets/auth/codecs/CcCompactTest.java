@@ -27,21 +27,21 @@ import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcCompact}.
  * @since 0.5
  */
-public final class CcCompactTest {
+final class CcCompactTest {
 
     /**
      * CcCompact can encode and decode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:3";
         final Identity identity = new Identity.Simple(
             urn,
@@ -61,7 +61,7 @@ public final class CcCompactTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesInvalidData() throws IOException {
+    void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
             new CcSafe(new CcCompact()).decode(
                 " % tjw".getBytes()

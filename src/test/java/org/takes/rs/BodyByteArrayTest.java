@@ -27,21 +27,21 @@ import org.cactoos.io.BytesOf;
 import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Body.ByteArray}.
  *
  * @since 1.15
  */
-public final class BodyByteArrayTest {
+final class BodyByteArrayTest {
 
     /**
      * Body.ByteArray can provide the expected input.
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithByteArray() throws Exception {
+    void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
             new BytesOf("ByteArray returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
@@ -56,7 +56,7 @@ public final class BodyByteArrayTest {
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithStream() throws Exception {
+    void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =
             new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(

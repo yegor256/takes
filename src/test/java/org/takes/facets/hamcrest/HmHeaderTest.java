@@ -27,7 +27,7 @@ import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.StringDescription;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -37,14 +37,14 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link org.takes.facets.hamcrest.HmHeader}.
  * @since 0.23.3
  */
-public final class HmHeaderTest {
+final class HmHeaderTest {
 
     /**
      * HmRqHeader can test whether a header is available.
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderAvailable() throws Exception {
+    void testsHeaderAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqFake(
                 Arrays.asList(
@@ -66,7 +66,7 @@ public final class HmHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderValueNotAvailable() throws Exception {
+    void testsHeaderValueNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqFake(
                 Arrays.asList(
@@ -89,7 +89,7 @@ public final class HmHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderNameAndValueAvailable() throws Exception {
+    void testsHeaderNameAndValueAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeader(new RqFake(), "header1: value1"),
             new HmHeader<>(
@@ -104,7 +104,7 @@ public final class HmHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsValueNotAvailable() throws Exception {
+    void testsValueNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeader(new RqFake(), "header2: value2"),
             Matchers.not(
@@ -120,7 +120,7 @@ public final class HmHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsMultipleHeadersAvailable() throws Exception {
+    void testsMultipleHeadersAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeaders(
                 new RqFake(),
@@ -137,7 +137,7 @@ public final class HmHeaderTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void testsHeaderNotAvailable() throws Exception {
+    void testsHeaderNotAvailable() throws Exception {
         MatcherAssert.assertThat(
             new RqWithHeaders(new RqFake(), "header4: value4"),
             new HmHeader<>(
@@ -150,7 +150,7 @@ public final class HmHeaderTest {
      * Checks is mismatch message is readable.
      */
     @Test
-    public void testMismatchMessage() {
+    void testMismatchMessage() {
         final HmHeader<Request> matcher = new HmHeader<>(
             "content-type", "text/plain"
         );

@@ -25,7 +25,7 @@ package org.takes.facets.previous;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -34,14 +34,14 @@ import org.takes.rs.RsText;
  * Test case for {@link RsPrevious}.
  * @since 0.2
  */
-public final class RsPreviousTest {
+final class RsPreviousTest {
 
     /**
      * RsPrevious can build a response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsResponse() throws IOException {
+    void buildsResponse() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsPrevious(new RsText(""), "/home")

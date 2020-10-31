@@ -29,21 +29,21 @@ import java.nio.file.Files;
 import org.cactoos.io.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 
 /**
  * Test case for {@link RqTemp}.
  * @since 0.33
  */
-public final class RqTempTest {
+final class RqTempTest {
 
     /**
      * RqTemp can delete the underlying temporary file.
      * @throws IOException if some problem occurs.
      */
     @Test
-    public void deletesTempFile() throws Exception {
+    void deletesTempFile() throws Exception {
         final File file = File.createTempFile(
             RqTempTest.class.getName(),
             ".tmp"

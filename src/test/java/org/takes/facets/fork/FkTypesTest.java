@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
@@ -35,14 +35,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkTypes}.
  * @since 0.9
  */
-public final class FkTypesTest {
+final class FkTypesTest {
 
     /**
      * FkTypes can match by Accept header.
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByAcceptHeader() throws Exception {
+    void matchesByAcceptHeader() throws Exception {
         final String accept = "Accept";
         MatcherAssert.assertThat(
             new FkTypes("text/xml", new RsEmpty()).route(
@@ -69,7 +69,7 @@ public final class FkTypesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByCompositeType() throws Exception {
+    void matchesByCompositeType() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/xml,text/json", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), "Accept ", "text/json")
@@ -83,7 +83,7 @@ public final class FkTypesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresWithoutHeader() throws Exception {
+    void ignoresWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/plain", new RsEmpty()).route(
                 new RqFake()
@@ -97,7 +97,7 @@ public final class FkTypesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesWithoutHeader() throws Exception {
+    void matchesWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("text/plain,*/*", new RsEmpty()).route(
                 new RqFake()
@@ -111,7 +111,7 @@ public final class FkTypesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void reliesOnTake() throws Exception {
+    void reliesOnTake() throws Exception {
         MatcherAssert.assertThat(
             new FkTypes("*/*,text/plain", new TkEmpty()).route(
                 new RqFake()

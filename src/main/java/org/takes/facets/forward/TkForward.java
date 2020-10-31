@@ -72,6 +72,7 @@ public final class TkForward implements Take {
 
     /**
      * Safe response.
+     * @since 0.1
      */
     @ToString(of = { "origin", "saved" })
     private static final class Safe implements Response {

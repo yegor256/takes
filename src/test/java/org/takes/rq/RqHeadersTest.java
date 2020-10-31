@@ -27,20 +27,20 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqHeaders}.
  * @since 0.1
  */
-public final class RqHeadersTest {
+final class RqHeadersTest {
 
     /**
      * RqHeaders can parse headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpHeaders() throws IOException {
+    void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
             new RqHeaders.Base(
                 new RqFake(
@@ -61,7 +61,7 @@ public final class RqHeadersTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void findsAllHeaders() throws IOException {
+    void findsAllHeaders() throws IOException {
         MatcherAssert.assertThat(
             new RqHeaders.Base(
                 new RqFake(
@@ -83,7 +83,7 @@ public final class RqHeadersTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnsSingleHeader() throws IOException {
+    void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
             new RqHeaders.Smart(
                 new RqHeaders.Base(
@@ -105,7 +105,7 @@ public final class RqHeadersTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnsDefaultHeader() throws IOException {
+    void returnsDefaultHeader() throws IOException {
         final String type = "text/plain";
         MatcherAssert.assertThat(
             new RqHeaders.Smart(

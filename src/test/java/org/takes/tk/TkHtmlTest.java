@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.Take;
@@ -36,14 +36,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
-public final class TkHtmlTest {
+final class TkHtmlTest {
 
     /**
      * TkHTML can create a text.
      * @throws Exception If some problem inside
      */
     @Test
-    public void createsTextResponse() throws Exception {
+    void createsTextResponse() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body).act(new RqFake())),
@@ -65,7 +65,7 @@ public final class TkHtmlTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void printsResourceMultipleTimes() throws Exception {
+    void printsResourceMultipleTimes() throws Exception {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(

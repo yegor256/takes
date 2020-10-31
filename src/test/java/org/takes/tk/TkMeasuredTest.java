@@ -24,7 +24,7 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -33,14 +33,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkMeasured}.
  * @since 0.10
  */
-public final class TkMeasuredTest {
+final class TkMeasuredTest {
 
     /**
      * TkMeasured can create a response with HTTP header "X-Take-Millis".
      * @throws Exception If some problem inside
      */
     @Test
-    public void createsMeasuredResponse() throws Exception {
+    void createsMeasuredResponse() throws Exception {
         final String header = "X-Takes-Millis";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -57,7 +57,7 @@ public final class TkMeasuredTest {
      * @throws Exception If some problem occurs
      */
     @Test
-    public void createsMeasuredResponseWithCustomHeader() throws Exception {
+    void createsMeasuredResponseWithCustomHeader() throws Exception {
         final String header = "X-Custom-Take-Millis";
         MatcherAssert.assertThat(
             new RsPrint(

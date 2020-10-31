@@ -28,21 +28,21 @@ import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsText}.
  * @since 0.1
  */
-public final class RsTextTest {
+final class RsTextTest {
 
     /**
      * RsText can build a plain text response.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesPlainTextResponse() throws IOException {
+    void makesPlainTextResponse() throws IOException {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(new RsBuffered(new RsText(body))),
@@ -64,7 +64,7 @@ public final class RsTextTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesTextResponseWithStatus() throws IOException {
+    void makesTextResponseWithStatus() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsText(

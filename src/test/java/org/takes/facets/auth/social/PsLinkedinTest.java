@@ -32,7 +32,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -50,14 +50,14 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsLinkedin}.
  * @since 0.16
  */
-public final class PsLinkedinTest {
+final class PsLinkedinTest {
 
     /**
      * PsLinkedin can login.
      * @throws Exception If some problem inside
      */
     @Test
-    public void logins() throws Exception {
+    void logins() throws Exception {
         final String tokenpath = "/uas/oauth2/accessToken";
         final String firstname = "firstName";
         final String lastname = "lastName";

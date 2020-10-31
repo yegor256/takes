@@ -38,7 +38,7 @@ import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -62,7 +62,7 @@ import org.takes.tk.TkText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
-public final class FtBasicTest {
+final class FtBasicTest {
 
     /**
      * The root path.
@@ -74,7 +74,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorks() throws Exception {
+    void justWorks() throws Exception {
         new FtRemote(
             new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "hello, world!"))
         ).exec(
@@ -96,7 +96,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void gracefullyHandlesBrokenBack() throws Exception {
+    void gracefullyHandlesBrokenBack() throws Exception {
         new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
@@ -116,7 +116,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void parsesIncomingHttpRequest() throws Exception {
+    void parsesIncomingHttpRequest() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {
@@ -148,7 +148,7 @@ public final class FtBasicTest {
      */
     @Test
     @Ignore
-    public void gracefullyHandlesStuckBack() throws Exception {
+    void gracefullyHandlesStuckBack() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {
@@ -183,7 +183,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void consumesIncomingDataStream() throws Exception {
+    void consumesIncomingDataStream() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
@@ -217,7 +217,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void consumesTwiceInputStreamWithRsText() throws Exception {
+    void consumesTwiceInputStreamWithRsText() throws Exception {
         final String result = "Hello RsText!";
         new FtRemote(
             new TkFork(
@@ -252,7 +252,7 @@ public final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void consumesTwiceInputStreamWithRsHtml() throws Exception {
+    void consumesTwiceInputStreamWithRsHtml() throws Exception {
         final String result = "Hello RsHTML!";
         new FtRemote(
             new TkFork(
@@ -287,7 +287,7 @@ public final class FtBasicTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void gracefullyHandlesBrokenPipe() throws IOException {
+    void gracefullyHandlesBrokenPipe() throws IOException {
         new FtBasic(
             new BkSafe(
                 new BkBasic(

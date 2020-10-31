@@ -24,7 +24,7 @@
 package org.takes.rs;
 
 import org.cactoos.text.Joined;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextIs;
 
@@ -32,13 +32,13 @@ import org.llorllale.cactoos.matchers.TextIs;
  * Test case for {@link RsWithoutHeader}.
  * @since 0.9
  */
-public final class RsWithoutHeaderTest {
+final class RsWithoutHeaderTest {
 
     /**
      * RsWithoutHeader can remove a header.
      */
     @Test
-    public void addsHeadersToResponse() {
+    void addsHeadersToResponse() {
         new Assertion<>(
             "Response without 'Host' header",
             new RsPrint(

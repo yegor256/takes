@@ -69,6 +69,7 @@ public interface Identity {
 
     /**
      * Simple identity.
+     * @since 0.1
      */
     final class Simple implements Identity {
         /**

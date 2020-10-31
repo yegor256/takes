@@ -42,6 +42,8 @@ public interface Expires {
 
     /**
      * Never expires.
+     *
+     * @since 2.0
      */
     final class Never implements Expires {
 
@@ -65,6 +67,8 @@ public interface Expires {
 
     /**
      * Already expired. Returns "0" according to RFC7234.
+     *
+     * @since 2.0
      */
     final class Expired implements Expires {
         @Override
@@ -75,6 +79,8 @@ public interface Expires {
 
     /**
      * Expires in one hour of the given time.
+     *
+     * @since 2.0
      */
     final class Hour implements Expires {
 

@@ -113,6 +113,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
     /**
      * Function to map them.
      * @param <T> Type of item
+     * @since 0.1
      */
     public interface Func<T> {
         /**

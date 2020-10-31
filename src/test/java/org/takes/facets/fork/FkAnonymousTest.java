@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
 
@@ -33,14 +33,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkAnonymous}.
  * @since 0.9
  */
-public final class FkAnonymousTest {
+final class FkAnonymousTest {
 
     /**
      * FkAnonymous can match by user status.
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesIfAnonymousUser() throws Exception {
+    void matchesIfAnonymousUser() throws Exception {
         MatcherAssert.assertThat(
             new FkAnonymous(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

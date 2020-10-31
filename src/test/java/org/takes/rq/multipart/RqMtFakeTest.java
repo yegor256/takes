@@ -86,7 +86,7 @@ public final class RqMtFakeTest {
     @Test(expected = IOException.class)
     public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
         throws Exception {
-        final int len = 100005;
+        final int len = 100_005;
         new RqMtBase(
             new RqFake(
                 Arrays.asList(
@@ -108,7 +108,7 @@ public final class RqMtFakeTest {
      */
     @Test(expected = IOException.class)
     public void throwsExceptionOnInvalidContentTypeHeader() throws Exception {
-        final int len = 100004;
+        final int len = 100_004;
         new RqMtBase(
             new RqFake(
                 Arrays.asList(

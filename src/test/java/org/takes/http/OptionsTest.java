@@ -25,20 +25,20 @@ package org.takes.http;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link OptionsTest}.
  * @since 0.9
  */
-public final class OptionsTest {
+final class OptionsTest {
 
     /**
      * Options can parse command line arguments.
      * @throws Exception If some problem inside
      */
     @Test
-    public void understandsCommandLineArgs() throws Exception {
+    void understandsCommandLineArgs() throws Exception {
         final Options opts = new Options(
             "--hit-refresh --threads=2".split(" ")
         );

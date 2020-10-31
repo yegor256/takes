@@ -25,7 +25,7 @@ package org.takes.misc;
 
 import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.ScalarHasValue;
 
@@ -34,10 +34,10 @@ import org.llorllale.cactoos.matchers.ScalarHasValue;
  *
  * @since 2.0.0
  */
-public final class EqualityTest {
+final class EqualityTest {
 
     @Test
-    public void mustEvaluateTrueEqualityOfTexts() {
+    void mustEvaluateTrueEqualityOfTexts() {
         new Assertion<>(
             "Must evaluate true equality for Texts",
             new Equality<>(
@@ -49,7 +49,7 @@ public final class EqualityTest {
     }
 
     @Test
-    public void mustEvaluateFalseEqualityOfTexts() {
+    void mustEvaluateFalseEqualityOfTexts() {
         new Assertion<>(
             "Must evaluate false equality for Texts",
             new Equality<>(

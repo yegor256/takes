@@ -26,7 +26,7 @@ package org.takes.tk;
 import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 import org.takes.Response;
@@ -40,14 +40,14 @@ import org.takes.rs.RsText;
  * Test case for {@link TkSslOnly}.
  * @since 1.9
  */
-public final class TkSslOnlyTest {
+final class TkSslOnlyTest {
 
     /**
      * Redirects when it's HTTP instead of HTTPS.
      * @throws Exception If fails
      */
     @Test
-    public void redirects() throws Exception {
+    void redirects() throws Exception {
         final Request req = new RqFake(
             Arrays.asList(
                 "GET /one/two?a=1",

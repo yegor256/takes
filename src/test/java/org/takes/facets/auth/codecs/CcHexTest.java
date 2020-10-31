@@ -26,21 +26,21 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcHex}.
  * @since 0.1
  */
-public final class CcHexTest {
+final class CcHexTest {
 
     /**
      * CcHex can encode.
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodes() throws IOException {
+    void encodes() throws IOException {
         final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
             new String(new CcHex(new CcPlain()).encode(identity)),
@@ -53,7 +53,7 @@ public final class CcHexTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:8";
         final Identity identity = new Identity.Simple(urn);
         final Codec codec = new CcHex(new CcPlain());
@@ -68,7 +68,7 @@ public final class CcHexTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodes() throws IOException {
+    void decodes() throws IOException {
         MatcherAssert.assertThat(
             new CcHex(new CcPlain()).decode(
                 "75726E25-33417465-73742533-4141".getBytes()
@@ -82,7 +82,7 @@ public final class CcHexTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void decodesInvalidData() throws IOException {
+    void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
             new CcSafe(new CcHex(new CcPlain())).decode(
                 " % tjw".getBytes()

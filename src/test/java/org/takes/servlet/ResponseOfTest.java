@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
@@ -37,9 +37,9 @@ import org.takes.rs.RsWithHeader;
  *
  * @since 1.14
  */
-public final class ResponseOfTest {
+final class ResponseOfTest {
     @Test
-    public void header() throws Exception {
+    void header() throws Exception {
         final String name = "fabricio";
         final String value = "cabral";
         final HttpServletResponse sresp = new HttpServletResponseFake(
@@ -60,7 +60,7 @@ public final class ResponseOfTest {
     }
 
     @Test
-    public void cookie() throws Exception {
+    void cookie() throws Exception {
         final String name = "paulo";
         final String value = "damaso";
         final HttpServletResponse sresp = new HttpServletResponseFake(

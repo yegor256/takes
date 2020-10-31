@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
 
@@ -33,14 +33,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkHost}.
  * @since 0.32
  */
-public final class FkHostTest {
+final class FkHostTest {
 
     /**
      * FkHost can match a host.
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByHost() throws Exception {
+    void matchesByHost() throws Exception {
         MatcherAssert.assertThat(
             new FkHost("www.example.com", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

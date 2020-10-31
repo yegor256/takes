@@ -26,20 +26,20 @@ package org.takes.facets.auth;
 import java.net.URLEncoder;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link org.takes.facets.auth.PsBasic.Default}.
  * @since 0.22
  */
-public final class PsBasicDefaultTest {
+final class PsBasicDefaultTest {
 
     /**
      * PsBasic.Default can accept a correct login/password pair.
      * @throws Exception If fails
      */
     @Test
-    public void acceptsCorrectLoginPasswordPair() throws Exception {
+    void acceptsCorrectLoginPasswordPair() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -63,7 +63,7 @@ public final class PsBasicDefaultTest {
      * @throws Exception If fails
      */
     @Test
-    public void supportsBothKindsOfSpace() throws Exception {
+    void supportsBothKindsOfSpace() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -97,7 +97,7 @@ public final class PsBasicDefaultTest {
      * @throws Exception If fails
      */
     @Test
-    public void supportsUsersWithSpacesInTheirNames() throws Exception {
+    void supportsUsersWithSpacesInTheirNames() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -118,7 +118,7 @@ public final class PsBasicDefaultTest {
      * @throws Exception If fails
      */
     @Test
-    public void supportsUrlencodedUrns() throws Exception {
+    void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
         MatcherAssert.assertThat(
             new PsBasic.Default(
@@ -144,7 +144,7 @@ public final class PsBasicDefaultTest {
      * @throws Exception If fails
      */
     @Test
-    public void rejectsIncorrectPassword() throws Exception {
+    void rejectsIncorrectPassword() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -163,7 +163,7 @@ public final class PsBasicDefaultTest {
      * @throws Exception If fails
      */
     @Test
-    public void rejectsIncorrectLogin() throws Exception {
+    void rejectsIncorrectLogin() throws Exception {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{

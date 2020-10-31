@@ -28,21 +28,21 @@ import org.cactoos.io.InputOf;
 import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Body.Stream}.
  *
  * @since 1.15
  */
-public final class BodyStreamTest {
+final class BodyStreamTest {
 
     /**
      * Body.Stream can provide the expected input.
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectInputWithStream() throws Exception {
+    void returnsCorrectInputWithStream() throws Exception {
         final byte[] bytes =
             new BytesOf("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
@@ -59,7 +59,7 @@ public final class BodyStreamTest {
      * @throws Exception If there is some problem inside.
      */
     @Test
-    public void returnsCorrectLengthWithStream() throws Exception {
+    void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =
             new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(

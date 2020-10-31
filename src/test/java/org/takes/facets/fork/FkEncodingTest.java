@@ -26,7 +26,7 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsEmpty;
@@ -35,14 +35,14 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link FkEncoding}.
  * @since 0.10
  */
-public final class FkEncodingTest {
+final class FkEncodingTest {
 
     /**
      * FkEncoding can match by Accept-Encoding header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesByAcceptEncodingHeader() throws IOException {
+    void matchesByAcceptEncodingHeader() throws IOException {
         final String header = "Accept-Encoding";
         MatcherAssert.assertThat(
             new FkEncoding("gzip", new RsEmpty()).route(

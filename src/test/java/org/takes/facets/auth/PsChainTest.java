@@ -26,7 +26,7 @@ package org.takes.facets.auth;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.StringContains;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
 
@@ -34,14 +34,14 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link PsChain}.
  * @since 0.11
  */
-public final class PsChainTest {
+final class PsChainTest {
 
     /**
      * PsChain returns proper identity.
      * @throws Exception if some problems inside
      */
     @Test
-    public void chainExecutionTest() throws Exception {
+    void chainExecutionTest() throws Exception {
         MatcherAssert.assertThat(
             new PsChain(
                 new PsLogout(),
@@ -56,7 +56,7 @@ public final class PsChainTest {
      * @throws Exception if some problems inside
      */
     @Test
-    public void exitChainTest() throws Exception {
+    void exitChainTest() throws Exception {
         MatcherAssert.assertThat(
             new PsChain(
                 new PsFake(true)

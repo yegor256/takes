@@ -26,7 +26,7 @@ package org.takes.tk;
 import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
@@ -37,7 +37,7 @@ import org.takes.rs.RsPrint;
  * @since 0.10
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class TkRedirectTest {
+final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
      */
@@ -53,7 +53,7 @@ public final class TkRedirectTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithUrl() throws Exception {
+    void createsRedirectResponseWithUrl() throws Exception {
         final String url = "/about";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -76,7 +76,7 @@ public final class TkRedirectTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void createsRedirectResponseWithUrlAndStatus() throws Exception {
+    void createsRedirectResponseWithUrlAndStatus() throws Exception {
         final String url = "/";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -101,7 +101,7 @@ public final class TkRedirectTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresQueryAndFragmentOnEmptyUrl() throws Exception {
+    void ignoresQueryAndFragmentOnEmptyUrl() throws Exception {
         final String target = "/the-target";
         MatcherAssert.assertThat(
             new TkRedirect(target).act(
