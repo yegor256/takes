@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rs.RsEmpty;
@@ -42,7 +42,7 @@ import org.takes.rs.RsWithHeader;
  * @since 1.14
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class HttpServletResponseFakeTest {
+final class HttpServletResponseFakeTest {
     /**
      * Set-Cookie header name.
      */
@@ -65,7 +65,7 @@ public final class HttpServletResponseFakeTest {
         "HTTP/1.1 101 Switching Protocol";
 
     @Test
-    public void cookie() throws Exception {
+    void cookie() throws Exception {
         final String name = "foo";
         final String value = "bar";
         final HttpServletResponse sresp = new HttpServletResponseFake(
@@ -87,7 +87,7 @@ public final class HttpServletResponseFakeTest {
     }
 
     @Test
-    public void addHeader() throws Exception {
+    void addHeader() throws Exception {
         final String name = "oba";
         final String value = "abo";
         final HttpServletResponse sresp = new HttpServletResponseFake(
@@ -108,7 +108,7 @@ public final class HttpServletResponseFakeTest {
     }
 
     @Test
-    public void changeHeader() throws Exception {
+    void changeHeader() throws Exception {
         final String name = "marco";
         final String value = "polo";
         final HttpServletResponse sresp = new HttpServletResponseFake(
@@ -129,7 +129,7 @@ public final class HttpServletResponseFakeTest {
     }
 
     @Test
-    public void status() {
+    void status() {
         final HttpServletResponse sresp = new HttpServletResponseFake(
             new RsEmpty()
         );
@@ -145,7 +145,7 @@ public final class HttpServletResponseFakeTest {
     }
 
     @Test
-    public void sendError() throws IOException {
+    void sendError() throws IOException {
         final HttpServletResponse sresp = new HttpServletResponseFake(
             new RsEmpty()
         );

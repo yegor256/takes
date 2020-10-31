@@ -26,7 +26,7 @@ package org.takes.facets.fallback;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -34,14 +34,14 @@ import org.takes.rs.RsText;
  * Test case for {@link FbChain}.
  * @since 0.13
  */
-public final class FbChainTest {
+final class FbChainTest {
 
     /**
      * FbChain can chain fallbacks.
      * @throws Exception If some problem inside
      */
     @Test
-    public void chainsFallbacks() throws Exception {
+    void chainsFallbacks() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND
         );

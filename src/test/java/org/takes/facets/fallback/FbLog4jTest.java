@@ -32,20 +32,20 @@ import org.apache.log4j.SimpleLayout;
 import org.apache.log4j.WriterAppender;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link FbSlf4j}.
  * @since 0.25
  */
-public final class FbLog4jTest {
+final class FbLog4jTest {
 
     /**
      * FbLog4j can log a problem.
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsProblem() throws Exception {
+    void logsProblem() throws Exception {
         final ByteArrayOutputStream baos = this.setUpLoggerStream();
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND

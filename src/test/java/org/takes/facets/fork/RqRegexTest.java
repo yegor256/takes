@@ -26,20 +26,20 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqRegex}.
  * @since 0.9
  */
-public final class RqRegexTest {
+final class RqRegexTest {
 
     /**
      * RqRegex can match a string.
      * @throws IOException If some problem inside
      */
     @Test
-    public void matchesString() throws IOException {
+    void matchesString() throws IOException {
         MatcherAssert.assertThat(
             new RqRegex.Fake("/([a-z\\.]+)", "/hello.txt").matcher().group(1),
             Matchers.equalTo("hello.txt")

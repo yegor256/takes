@@ -24,7 +24,7 @@
 package org.takes.facets.previous;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -35,14 +35,14 @@ import org.takes.tk.TkText;
  * Test case for {@link TkPrevious}.
  * @since 0.2
  */
-public final class TkPreviousTest {
+final class TkPreviousTest {
 
     /**
      * TkPrevious can redirect.
      * @throws Exception If some problem inside
      */
     @Test
-    public void redirectsOnCookie() throws Exception {
+    void redirectsOnCookie() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkPrevious(new TkText("")).act(

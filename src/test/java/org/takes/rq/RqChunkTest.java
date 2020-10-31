@@ -29,14 +29,14 @@ import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqChunk}.
  *
  * @since 0.1
  */
-public final class RqChunkTest {
+final class RqChunkTest {
 
     /**
      * Chunked message header.
@@ -58,7 +58,7 @@ public final class RqChunkTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsOneChunk() throws IOException {
+    void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new RqChunk(
@@ -91,7 +91,7 @@ public final class RqChunkTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsManyChunks() throws IOException {
+    void readsManyChunks() throws IOException {
         final String first = "Takes is";
         final String second = "a true object-";
         final String third = "oriented framework";
@@ -131,7 +131,7 @@ public final class RqChunkTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void ignoresParameterAfterSemiColon() throws IOException {
+    void ignoresParameterAfterSemiColon() throws IOException {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());

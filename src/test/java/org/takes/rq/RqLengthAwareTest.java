@@ -28,21 +28,21 @@ import java.io.InputStream;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqLengthAware}.
  *
  * @since 0.1
  */
-public final class RqLengthAwareTest {
+final class RqLengthAwareTest {
 
     /**
      * RqLengthAware can add length to body.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsLengthToBody() throws IOException {
+    void addsLengthToBody() throws IOException {
         MatcherAssert.assertThat(
             new RqLengthAware(
                 new RqFake(
@@ -64,7 +64,7 @@ public final class RqLengthAwareTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsBigLengthToBody() throws IOException {
+    void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
             new RqLengthAware(
                 new RqFake(
@@ -86,7 +86,7 @@ public final class RqLengthAwareTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsByte() throws IOException {
+    void readsByte() throws IOException {
         final String data = "test";
         final InputStream stream = new RqLengthAware(
             new RqFake(
@@ -113,7 +113,7 @@ public final class RqLengthAwareTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsByteArray() throws IOException {
+    void readsByteArray() throws IOException {
         final String data = "array";
         final InputStream stream = new RqLengthAware(
             new RqFake(
@@ -140,7 +140,7 @@ public final class RqLengthAwareTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void readsPartialArray() throws IOException {
+    void readsPartialArray() throws IOException {
         final String data = "hello world";
         final int len = 3;
         final InputStream stream = new RqLengthAware(

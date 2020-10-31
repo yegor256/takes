@@ -32,7 +32,7 @@ import javax.json.JsonObject;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Token.Jose;
 import org.takes.facets.auth.Token.Jwt;
 
@@ -40,13 +40,13 @@ import org.takes.facets.auth.Token.Jwt;
  * Test case for {@link Token}.
  * @since 1.5
  */
-public final class TokenTest {
+final class TokenTest {
     /**
      * JOSE header has correct algorithm name.
      * @throws IOException If some problem inside
      */
     @Test
-    public void joseAlgorithm() throws IOException {
+    void joseAlgorithm() throws IOException {
         // @checkstyle MagicNumber (1 line)
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
@@ -60,7 +60,7 @@ public final class TokenTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void joseEncoded() throws IOException {
+    void joseEncoded() throws IOException {
         // @checkstyle MagicNumber (2 lines)
         final byte[] code = new Token.Jose(256).encoded();
         MatcherAssert.assertThat(
@@ -79,7 +79,7 @@ public final class TokenTest {
      * @throws ParseException If date parsing fails
      */
     @Test
-    public void jwtExpiration() throws IOException, ParseException {
+    void jwtExpiration() throws IOException, ParseException {
         final JsonObject jose = new Token.Jwt(
             (Identity) new Identity.Simple("user"),
             // @checkstyle MagicNumber (1 line)
@@ -106,7 +106,7 @@ public final class TokenTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void jwtEncoded() throws IOException {
+    void jwtEncoded() throws IOException {
         final Identity user = new Identity.Simple("test");
         final byte[] code = new Token.Jwt(
             // @checkstyle MagicNumber (1 line)

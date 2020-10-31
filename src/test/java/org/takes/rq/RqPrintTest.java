@@ -25,20 +25,20 @@ package org.takes.rq;
 
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 
 /**
  * Test case for {@link RqPrint}.
  * @since 0.1
  */
-public final class RqPrintTest {
+final class RqPrintTest {
 
     /**
      * RqPrint can print a request.
      */
     @Test
-    public void printsHttpRequest() {
+    void printsHttpRequest() {
         MatcherAssert.assertThat(
             new RqPrint(
                 new RqFake(

@@ -239,7 +239,7 @@ public final class RqMtSmartTest {
     @Test
     @Category(PerformanceTests.class)
     public void handlesRequestInTime() throws IOException {
-        final int length = 100000000;
+        final int length = 100_000_000;
         final String part = "test";
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
@@ -295,7 +295,7 @@ public final class RqMtSmartTest {
      */
     @Test
     public void notDistortContent() throws IOException {
-        final int length = 1000000;
+        final int length = 1_000_000;
         final String part = "test1";
         final File file = this.temp.newFile("notDistortContent.tmp");
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());

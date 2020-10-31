@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.tk.TkEmpty;
 
@@ -33,14 +33,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkParams}.
  * @since 0.4
  */
-public final class FkParamsTest {
+final class FkParamsTest {
 
     /**
      * FkParams can match by param regex.
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesByRegularExpression() throws Exception {
+    void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkParams("a", "[0-9]+", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

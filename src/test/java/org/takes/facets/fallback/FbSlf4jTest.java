@@ -26,21 +26,21 @@ package org.takes.facets.fallback;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link FbSlf4j}.
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FbSlf4jTest {
+final class FbSlf4jTest {
 
     /**
      * FbSlf4j can log a problem.
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsProblem() throws Exception {
+    void logsProblem() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND
         );

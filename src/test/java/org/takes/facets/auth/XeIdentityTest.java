@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.xe.RsXembly;
@@ -38,14 +38,14 @@ import org.takes.rs.xe.XeAppend;
  * Test case for {@link org.takes.facets.auth.social.XeGithubLink}.
  * @since 0.4
  */
-public final class XeIdentityTest {
+final class XeIdentityTest {
 
     /**
      * XeIdentity can create a correct link.
      * @throws IOException If some problem inside
      */
     @Test
-    public void generatesIdentityInXml() throws IOException {
+    void generatesIdentityInXml() throws IOException {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(

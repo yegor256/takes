@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.mockito.Mockito;
 import org.takes.Response;
@@ -47,13 +47,13 @@ import org.takes.rs.RsWithType;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class PsByFlagTest {
+final class PsByFlagTest {
     /**
      * PsByFlag can skip if nothing found.
      * @throws Exception If some problem inside
      */
     @Test
-    public void skipsIfNothingFound() throws Exception {
+    void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
             new PsByFlag(
                 new PsByFlag.Pair(
@@ -71,7 +71,7 @@ public final class PsByFlagTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void flagIsFoundUserAuthenticated() throws Exception {
+    void flagIsFoundUserAuthenticated() throws Exception {
         MatcherAssert.assertThat(
             new PsByFlag(
                 new PsByFlag.Pair(
@@ -88,7 +88,7 @@ public final class PsByFlagTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void exitTest() throws IOException {
+    void exitTest() throws IOException {
         final Response response = new RsWithStatus(
             new RsWithType(
                 new RsWithBody("<html>This is test response</html>"),
@@ -111,7 +111,7 @@ public final class PsByFlagTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEvaluateTrueEqualityTest() throws Exception {
+    void mustEvaluateTrueEqualityTest() throws Exception {
         final Map<Pattern, Pass> passes = new HashMap<>(1);
         passes.put(Pattern.compile("key"), new PsFake(true));
         new Assertion<>(

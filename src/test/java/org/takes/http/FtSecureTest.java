@@ -34,7 +34,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -51,14 +51,14 @@ import org.takes.tk.TkFixed;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public final class FtSecureTest {
+final class FtSecureTest {
 
     /**
      * FtSecure can work.
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorks() throws Exception {
+    void justWorks() throws Exception {
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
             new FtRemote.Script() {
                 @Override
@@ -78,7 +78,7 @@ public final class FtSecureTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void gracefullyHandlesBrokenBack() throws Exception {
+    void gracefullyHandlesBrokenBack() throws Exception {
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
             new FtRemote.Script() {
                 @Override
@@ -98,7 +98,7 @@ public final class FtSecureTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void parsesIncomingHttpRequest() throws Exception {
+    void parsesIncomingHttpRequest() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request request) throws IOException {
@@ -129,7 +129,7 @@ public final class FtSecureTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void consumesIncomingDataStream() throws Exception {
+    void consumesIncomingDataStream() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {

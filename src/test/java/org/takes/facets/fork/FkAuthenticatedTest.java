@@ -25,7 +25,7 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.TkAuth;
 import org.takes.facets.auth.codecs.CcPlain;
@@ -37,14 +37,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkAuthenticated}.
  * @since 0.9
  */
-public final class FkAuthenticatedTest {
+final class FkAuthenticatedTest {
 
     /**
      * FkAuthenticated can match by user status.
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesIfAuthenticatedUser() throws Exception {
+    void matchesIfAuthenticatedUser() throws Exception {
         MatcherAssert.assertThat(
             new FkAuthenticated(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")

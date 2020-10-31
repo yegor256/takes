@@ -200,6 +200,8 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Pair of values.
+     *
+     * @since 0.1
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<CharSequence, Object> {

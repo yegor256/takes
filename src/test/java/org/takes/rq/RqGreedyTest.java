@@ -28,21 +28,21 @@ import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 
 /**
  * Test case for {@link RqGreedy}.
  * @since 0.16
  */
-public final class RqGreedyTest {
+final class RqGreedyTest {
 
     /**
      * RqGreedy can make request greedy.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesRequestGreedy() throws IOException {
+    void makesRequestGreedy() throws IOException {
         final String body = new Joined(
             "\r\n",
             "GET /test HTTP/1.1",

@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.tk.TkFixed;
 
 /**
@@ -37,14 +37,14 @@ import org.takes.tk.TkFixed;
  * @since 0.23
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class MainRemoteTest {
+final class MainRemoteTest {
 
     /**
      * MainRemote can work.
      * @throws Exception If some problem inside
      */
     @Test
-    public void startsAndStopsApp() throws Exception {
+    void startsAndStopsApp() throws Exception {
         new MainRemote(MainRemoteTest.DemoApp.class).exec(
             new MainRemote.Script() {
                 @Override
@@ -64,7 +64,7 @@ public final class MainRemoteTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void passesArgumentsToApp() throws Exception {
+    void passesArgumentsToApp() throws Exception {
         final String[] args = {"works well!"};
         new MainRemote(MainRemoteTest.DemoAppArgs.class, args).exec(
             new MainRemote.Script() {
@@ -82,6 +82,8 @@ public final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
+     * @since 0.23
      */
     public static final class DemoApp {
         /**
@@ -103,6 +105,8 @@ public final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
+     * @since 0.23
      */
     public static final class DemoAppArgs {
         /**

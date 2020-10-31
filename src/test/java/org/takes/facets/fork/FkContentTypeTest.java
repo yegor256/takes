@@ -27,7 +27,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Request;
 import org.takes.Response;
@@ -42,7 +42,7 @@ import org.takes.rs.RsEmpty;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class FkContentTypeTest {
+final class FkContentTypeTest {
 
     /**
      * Content-Type header.
@@ -59,7 +59,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesWithAnyTypes() throws Exception {
+    void matchesWithAnyTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType("text/xml", new RsEmpty()).route(
                 new RqWithHeader(
@@ -77,7 +77,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesDifferentTypes() throws Exception {
+    void matchesDifferentTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 "application/json charset=utf-8",
@@ -98,7 +98,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesIdenticalTypes() throws Exception {
+    void matchesIdenticalTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,
@@ -119,7 +119,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesEmptyType() throws Exception {
+    void matchesEmptyType() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 "*/*",
@@ -137,7 +137,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void matchesDifferentEncodingsTypes() throws Exception {
+    void matchesDifferentEncodingsTypes() throws Exception {
         MatcherAssert.assertThat(
             new FkContentType(
                 FkContentTypeTest.CTYPE,
@@ -158,7 +158,7 @@ public final class FkContentTypeTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEvaluateEqualsTest() throws Exception {
+    void mustEvaluateEqualsTest() throws Exception {
         final Take take = req -> new RsEmpty();
         final String type = "text/xml";
         new Assertion<>(

@@ -29,7 +29,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNot;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Body;
 import org.takes.Request;
 import org.takes.rq.RqFake;
@@ -39,13 +39,13 @@ import org.takes.rq.RqFake;
  *
  * @since 2.0
  */
-public final class HmBodyTest {
+final class HmBodyTest {
 
     /**
      * HmRqBody can test if values of bodies are same.
      */
     @Test
-    public void testsBodyValuesAreSame() {
+    void testsBodyValuesAreSame() {
         final String body = "Same";
         MatcherAssert.assertThat(
             new RqFake(
@@ -60,7 +60,7 @@ public final class HmBodyTest {
      * HmRqBody can test if values of bodies are different.
      */
     @Test
-    public void testsBodyValuesAreDifferent() {
+    void testsBodyValuesAreDifferent() {
         MatcherAssert.assertThat(
             new RqFake(
                 Collections.<String>emptyList(),
@@ -74,7 +74,7 @@ public final class HmBodyTest {
      * HmRqBody can describe mismatch in readable way.
      */
     @Test
-    public void describesMismatchInReadableWay() {
+    void describesMismatchInReadableWay() {
         final Request request = new RqFake(
             Collections.<String>emptyList(),
             "other"
@@ -99,7 +99,7 @@ public final class HmBodyTest {
      *  HmRsStatusTest.java, and HmRsTextBodyTest.java as an example.
      */
     @Test
-    public void describeToInReadableWay() {
+    void describeToInReadableWay() {
         final Request request = new RqFake(
             Collections.<String>emptyList(),
             "one"

@@ -360,6 +360,7 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Decorator allowing to close all the parts of the request.
+     * @since 0.33
      */
     private class CloseMultipart extends FilterInputStream {
 

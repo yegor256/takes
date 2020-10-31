@@ -24,7 +24,7 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -33,14 +33,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkVersioned}.
  * @since 0.4
  */
-public final class TkVersionedTest {
+final class TkVersionedTest {
 
     /**
      * TkVersioned can add a header with version name.
      * @throws Exception If some problem inside
      */
     @Test
-    public void attachesHeader() throws Exception {
+    void attachesHeader() throws Exception {
         MatcherAssert.assertThat(
             new RsPrint(
                 new TkVersioned(new TkEmpty()).act(

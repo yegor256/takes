@@ -28,7 +28,7 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import org.cactoos.text.FormattedText;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.misc.Expires;
@@ -38,14 +38,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsFlash}.
  * @since 0.9.6
  */
-public final class RsFlashTest {
+final class RsFlashTest {
 
     /**
      * RsFlash can add cookies.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsCookieToResponse() throws IOException {
+    void addsCookieToResponse() throws IOException {
         final String msg = "hey, how are you?";
         new Assertion<>(
             "Response must contain a flash cookie",
@@ -70,7 +70,7 @@ public final class RsFlashTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
+    void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
         new Assertion<>(
             "Response must contain a flash cookie with an expiration date.",
             new RsPrint(
@@ -84,7 +84,7 @@ public final class RsFlashTest {
      * RsFlash can print itself from Throwable.
      */
     @Test
-    public void printsItselfFromThrowable() {
+    void printsItselfFromThrowable() {
         new Assertion<>(
             "RsFlash should print a message from Throwable",
             () -> new RsFlash(

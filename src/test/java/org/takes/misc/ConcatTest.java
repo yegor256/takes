@@ -29,21 +29,21 @@ import java.util.Collections;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Concat}.
  *
  * @since 0.15.2
  */
-public final class ConcatTest {
+final class ConcatTest {
 
     /**
      * Concat can concatenate.
      * @throws IOException when there is a problem
      */
     @Test
-    public void concatenates() throws IOException {
+    void concatenates() throws IOException {
         MatcherAssert.assertThat(
             new Joined(
                 " ",
@@ -61,7 +61,7 @@ public final class ConcatTest {
      * @throws IOException when there is a problem
      */
     @Test
-    public void concatenatesWithEmptyList() throws IOException {
+    void concatenatesWithEmptyList() throws IOException {
         MatcherAssert.assertThat(
             new Joined(
                 "+",

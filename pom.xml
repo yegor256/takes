@@ -68,7 +68,8 @@ SOFTWARE.
   </issueManagement>
   <scm>
     <connection>scm:git:git@github.com:yegor256/takes.git</connection>
-    <developerConnection>scm:git:git@github.com:yegor256/takes.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:yegor256/takes.git
+    </developerConnection>
     <url>https://github.com/yegor256/takes</url>
   </scm>
   <ciManagement>
@@ -82,9 +83,10 @@ SOFTWARE.
     </site>
   </distributionManagement>
   <properties>
+    <argLine/>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
-    <qulice.version>0.18.5</qulice.version>
+    <qulice.version>0.18.19</qulice.version>
   </properties>
   <dependencies>
     <!--
@@ -319,13 +321,21 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US</argLine>
+          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8
+            -Duser.language=en -Duser.country=US ${argLine}
+          </argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
-            <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
-            <javax.net.ssl.keyStorePassword>abc123</javax.net.ssl.keyStorePassword>
-            <javax.net.ssl.trustStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.trustStore>
-            <javax.net.ssl.trustStorePassword>abc123</javax.net.ssl.trustStorePassword>
+            <javax.net.ssl.keyStore>
+              ${project.build.directory}/test-classes/org/takes/http/keystore
+            </javax.net.ssl.keyStore>
+            <javax.net.ssl.keyStorePassword>abc123
+            </javax.net.ssl.keyStorePassword>
+            <javax.net.ssl.trustStore>
+              ${project.build.directory}/test-classes/org/takes/http/keystore
+            </javax.net.ssl.trustStore>
+            <javax.net.ssl.trustStorePassword>abc123
+            </javax.net.ssl.trustStorePassword>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -372,7 +382,8 @@ SOFTWARE.
               <goal>verify</goal>
             </goals>
             <configuration>
-              <verificationFile>src/verifier/verifications.xml</verificationFile>
+              <verificationFile>src/verifier/verifications.xml
+              </verificationFile>
             </configuration>
           </execution>
         </executions>
@@ -454,9 +465,11 @@ SOFTWARE.
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.7.8</version>
+            <version>0.8.6</version>
             <configuration>
               <output>file</output>
+              <outputDirectory>${project.build.directory}/coverage
+              </outputDirectory>
             </configuration>
             <executions>
               <execution>
@@ -466,11 +479,52 @@ SOFTWARE.
                 </goals>
               </execution>
               <execution>
-                <id>jacoco-site</id>
-                <phase>install</phase>
+                <id>jacoco-check</id>
+                <phase>test</phase>
                 <goals>
+                  <goal>check</goal>
                   <goal>report</goal>
                 </goals>
+                <!--
+                    @todo #1067:30m This limits are set according to
+                     current metrics. Improve test coverage and
+                     increase a limit, than update this task.
+                     Remove this task when 0.99 is reached for each metric.
+                  -->
+                <configuration>
+                  <rules>
+                    <rule>
+                      <element>BUNDLE</element>
+                      <limits>
+                        <limit>
+                          <counter>INSTRUCTION</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.54</minimum>
+                        </limit>
+                        <limit>
+                          <counter>LINE</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.70</minimum>
+                        </limit>
+                        <limit>
+                          <counter>BRANCH</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.24</minimum>
+                        </limit>
+                        <limit>
+                          <counter>COMPLEXITY</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.40</minimum>
+                        </limit>
+                        <limit>
+                          <counter>METHOD</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.57</minimum>
+                        </limit>
+                      </limits>
+                    </rule>
+                  </rules>
+                </configuration>
               </execution>
             </executions>
           </plugin>

@@ -98,6 +98,7 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Thread factory.
+     * @since 0.1
      */
     private static final class Threads implements ThreadFactory {
         /**

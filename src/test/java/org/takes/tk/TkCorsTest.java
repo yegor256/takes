@@ -26,7 +26,7 @@ package org.takes.tk;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.hamcrest.HmRsStatus;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
@@ -37,14 +37,14 @@ import org.takes.rs.RsText;
  * Test case for {@link TkCors}.
  * @since 0.20
  */
-public final class TkCorsTest {
+final class TkCorsTest {
 
     /**
      * TkCORS can handle connections without origin in the request.
      * @throws Exception If some problem inside
      */
     @Test
-    public void handleConnectionsWithoutOriginInTheRequest() throws Exception {
+    void handleConnectionsWithoutOriginInTheRequest() throws Exception {
         MatcherAssert.assertThat(
             "It was expected to receive a 403 error.",
             new TkCors(
@@ -61,7 +61,7 @@ public final class TkCorsTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
+    void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
         MatcherAssert.assertThat(
             "Invalid HTTP status for a request with correct domain.",
             new TkCors(
@@ -83,7 +83,7 @@ public final class TkCorsTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void cantHandleConnectionsWithWrongDomainOnOrigin()
+    void cantHandleConnectionsWithWrongDomainOnOrigin()
         throws Exception {
         MatcherAssert.assertThat(
             "Wrong value on header.",

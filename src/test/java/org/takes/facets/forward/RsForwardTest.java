@@ -27,21 +27,21 @@ import java.io.IOException;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.flash.RsFlash;
 
 /**
  * Test case for {@link RsForward}.
  * @since 0.17
  */
-public final class RsForwardTest {
+final class RsForwardTest {
 
     /**
      * RsForward can build a proper stacktrace.
      * @throws IOException If some problem inside
      */
     @Test
-    public void buildsStackTrace() throws IOException {
+    void buildsStackTrace() throws IOException {
         MatcherAssert.assertThat(
             ExceptionUtils.getFullStackTrace(
                 new RsForward(new RsFlash(new IOException("the failure")))

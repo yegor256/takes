@@ -32,7 +32,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.rq.RqFake;
@@ -43,14 +43,14 @@ import org.takes.rq.RqFake;
  * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-public final class PsTwitterTest {
+final class PsTwitterTest {
 
     /**
      * PsTwitter can login.
      * @throws Exception If error occurs in the process
      */
     @Test
-    public void logsIn() throws Exception {
+    void logsIn() throws Exception {
         final int tid = RandomUtils.nextInt(1000);
         final String randname = RandomStringUtils.randomAlphanumeric(10);
         final String picture = RandomStringUtils.randomAlphanumeric(10);

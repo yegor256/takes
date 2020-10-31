@@ -29,7 +29,7 @@ import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFixed;
@@ -39,14 +39,14 @@ import org.takes.tk.TkFixed;
  * @since 0.16.10
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FbStatusTest {
+final class FbStatusTest {
 
     /**
      * FbStatus can react to correct status.
      * @throws Exception If some problem inside
      */
     @Test
-    public void reactsToCorrectStatus() throws Exception {
+    void reactsToCorrectStatus() throws Exception {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(status);
         MatcherAssert.assertThat(
@@ -65,7 +65,7 @@ public final class FbStatusTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void reactsToCondition() throws Exception {
+    void reactsToCondition() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_MOVED_PERM
         );
@@ -94,7 +94,7 @@ public final class FbStatusTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresDifferentStatus() throws Exception {
+    void ignoresDifferentStatus() throws Exception {
         final RqFallback req = new RqFallback.Fake(
             HttpURLConnection.HTTP_NOT_FOUND
         );
@@ -114,7 +114,7 @@ public final class FbStatusTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void sendsCorrectDefaultResponse() throws Exception {
+    void sendsCorrectDefaultResponse() throws Exception {
         final int code = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(
             code,

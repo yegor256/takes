@@ -27,14 +27,14 @@ import java.io.IOException;
 import java.util.Collections;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 
 /**
  * Test case for {@link RqWithDefaultHeader}.
  * @since 0.31
  */
-public final class RqWithDefaultHeaderTest {
+final class RqWithDefaultHeaderTest {
 
     /**
      * Carriage return constant.
@@ -46,7 +46,7 @@ public final class RqWithDefaultHeaderTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void providesDefaultHeader() throws IOException {
+    void providesDefaultHeader() throws IOException {
         final String req = "GET /";
         MatcherAssert.assertThat(
             new RqPrint(
@@ -71,7 +71,7 @@ public final class RqWithDefaultHeaderTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void allowsOverrideDefaultHeader() throws IOException {
+    void allowsOverrideDefaultHeader() throws IOException {
         final String req = "POST /";
         final String header = "X-Default-Header2";
         MatcherAssert.assertThat(

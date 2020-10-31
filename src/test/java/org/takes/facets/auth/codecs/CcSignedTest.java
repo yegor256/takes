@@ -27,7 +27,7 @@ import java.io.IOException;
 import javax.crypto.spec.SecretKeySpec;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -36,9 +36,9 @@ import org.takes.facets.auth.Identity;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumber (500 line)
  */
-public final class CcSignedTest {
+final class CcSignedTest {
     @Test
-    public void signAndVerify() throws IOException {
+    void signAndVerify() throws IOException {
         final String urn = "urn:github:346236";
         final String alg = "HmacSHA1";
         final CcSigned target = new CcSigned(
