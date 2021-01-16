@@ -23,12 +23,12 @@
  */
 package org.takes.rs;
 
-import java.util.Collections;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.iterable.Joined;
 import org.takes.Response;
-import org.takes.misc.Concat;
 
 /**
  * Response decorator, with an additional header.
@@ -124,7 +124,7 @@ public final class RsWithHeader extends RsWrap {
                 )
             );
         }
-        return new Concat<>(head, Collections.singleton(header));
+        return new Joined<String>(head, new IterableOf<>(header));
     }
 
 }
