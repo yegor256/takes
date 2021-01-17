@@ -25,6 +25,10 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.UnaryOperator;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.InputStreamOf;
@@ -143,49 +147,60 @@ public final class RqMtFake implements RqMultipart {
      * Fake body .
      * @since 0.33
      */
+    @RequiredArgsConstructor
     private static final class FakeBody implements Body {
 
         /**
-         * Content of the body.
+         * The parts.
          */
-        private final String content;
+        private final Request[] parts;
 
         /**
-         * Ctor.
-         * @param parts Fake request body partsFakeBody
-         * @throws IOException If fails
+         * The content.
          */
-        @SuppressWarnings(
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        )
-        private FakeBody(final Request... parts) throws IOException {
-            final StringBuilder builder = new StringBuilder(128);
-            for (final Request part : parts) {
-                builder.append(String.format("--%s", RqMtFake.BOUNDARY))
-                    .append(RqMtFake.CRLF)
-                    .append("Content-Disposition: ")
-                    .append(
-                        new RqHeaders.Smart(
-                            new RqHeaders.Base(part)
-                        ).single("Content-Disposition")
-                    ).append(RqMtFake.CRLF);
-                final String body = new RqPrint(part).printBody();
-                if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
-                    builder.append(RqMtFake.CRLF)
-                        .append(body)
-                        .append(RqMtFake.CRLF);
+        private final AtomicReference<String> content = new AtomicReference<>();
+
+        /**
+         * The update function.
+         * @checkstyle AnonInnerLengthCheck (100 lines)
+         */
+        private final UnaryOperator<String> update = new UnaryOperator<String>() {
+            @Override
+            @SneakyThrows
+            public String apply(final String current) {
+                final String result;
+                if (current == null) {
+                    final StringBuilder builder = new StringBuilder(128);
+                    for (final Request part : FakeBody.this.parts) {
+                        builder.append(String.format("--%s", RqMtFake.BOUNDARY))
+                            .append(RqMtFake.CRLF)
+                            .append("Content-Disposition: ")
+                            .append(
+                                new RqHeaders.Smart(
+                                    new RqHeaders.Base(part)
+                                ).single("Content-Disposition")
+                            ).append(RqMtFake.CRLF);
+                        final String body = new RqPrint(part).printBody();
+                        if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
+                            builder.append(RqMtFake.CRLF)
+                                .append(body)
+                                .append(RqMtFake.CRLF);
+                        }
+                    }
+                    builder.append("Content-Transfer-Encoding: utf-8")
+                        .append(RqMtFake.CRLF)
+                        .append(String.format("--%s--", RqMtFake.BOUNDARY));
+                    result = builder.toString();
+                } else {
+                    result = current;
                 }
+                return result;
             }
-            builder.append("Content-Transfer-Encoding: utf-8")
-                .append(RqMtFake.CRLF)
-                .append(String.format("--%s--", RqMtFake.BOUNDARY));
-            this.content = builder.toString();
-        }
+        };
 
         @Override
         public InputStream body() throws IOException {
-            return new InputStreamOf(this.content);
+            return new InputStreamOf(this.content.updateAndGet(this.update));
         }
-
     }
 }
