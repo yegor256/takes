@@ -25,10 +25,6 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.UnaryOperator;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.InputStreamOf;
@@ -147,31 +143,22 @@ public final class RqMtFake implements RqMultipart {
      * Fake body .
      * @since 0.33
      */
-    @RequiredArgsConstructor
     private static final class FakeBody implements Body {
-
-        /**
-         * The parts.
-         */
-        private final Request[] parts;
-
         /**
          * The content.
          */
-        private final AtomicReference<String> content = new AtomicReference<>();
+        private final Scalar<String> content;
 
         /**
-         * The update function.
-         * @checkstyle AnonInnerLengthCheck (100 lines)
+         * Ctor.
+         *
+         * @param parts The Body parts.
          */
-        private final UnaryOperator<String> update = new UnaryOperator<String>() {
-            @Override
-            @SneakyThrows
-            public String apply(final String current) {
-                final String result;
-                if (current == null) {
+        private FakeBody(final Request... parts) {
+            this.content = new Sticky<>(
+                () -> {
                     final StringBuilder builder = new StringBuilder(128);
-                    for (final Request part : FakeBody.this.parts) {
+                    for (final Request part : parts) {
                         builder.append(String.format("--%s", RqMtFake.BOUNDARY))
                             .append(RqMtFake.CRLF)
                             .append("Content-Disposition: ")
@@ -190,17 +177,14 @@ public final class RqMtFake implements RqMultipart {
                     builder.append("Content-Transfer-Encoding: utf-8")
                         .append(RqMtFake.CRLF)
                         .append(String.format("--%s--", RqMtFake.BOUNDARY));
-                    result = builder.toString();
-                } else {
-                    result = current;
+                    return builder.toString();
                 }
-                return result;
-            }
-        };
+            );
+        }
 
         @Override
         public InputStream body() throws IOException {
-            return new InputStreamOf(this.content.updateAndGet(this.update));
+            return new InputStreamOf(this.content::value);
         }
     }
 }
