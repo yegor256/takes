@@ -180,7 +180,7 @@ public final class RsPrettyXmlTest {
      */
     @Test
     public void reportsCorrectContentLength() throws IOException {
-        final int contentlength = new BodyPrint(
+        final int clength = new BodyPrint(
             new RsWithBody(
                 "<test>\n   <a>test</a>\n</test>\n"
             )
@@ -194,7 +194,7 @@ public final class RsPrettyXmlTest {
             Matchers.containsString(
                 String.format(
                     "Content-Length: %d",
-                    contentlength
+                    clength
                 )
             )
         );

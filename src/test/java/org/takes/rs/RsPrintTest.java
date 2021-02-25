@@ -24,8 +24,8 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import org.cactoos.io.BytesOf;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.set.SetOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.object.HasToString;
@@ -35,7 +35,9 @@ import org.llorllale.cactoos.matchers.Assertion;
 /**
  * Test case for {@link RsPrint}.
  * @since 1.19
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RsPrintTest {
 
     /**
@@ -48,14 +50,22 @@ public final class RsPrintTest {
     }
 
     @Test
-    public void simple() throws IOException {
+    public void simple() throws Exception {
+        final RsPrint response = new RsPrint(
+            new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
+        );
         MatcherAssert.assertThat(
-            "must write head",
-            new RsPrint(
-                new RsSimple(new SetOf<>("HTTP/1.1 500 Internal Server Error"), "")
-            ).asString(),
+            "must write head as String",
+            response.asString(),
             new HasToString<>(
                 new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            )
+        );
+        MatcherAssert.assertThat(
+            "must write head as Bytes",
+            response.asBytes(),
+            new IsEqual<>(
+                new BytesOf("HTTP/1.1 500 Internal Server Error\r\n\r\n").asBytes()
             )
         );
     }

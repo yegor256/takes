@@ -27,12 +27,13 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.object.HasToString;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link BodyPrint}.
  * @since 1.19
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class BodyPrintTest {
 
     @Test

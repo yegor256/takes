@@ -25,8 +25,8 @@ package org.takes.rs;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.Writer;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -36,6 +36,7 @@ import org.llorllale.cactoos.matchers.Assertion;
 /**
  * Test case for {@link RsPrettyJson}.
  * @since 1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class RsPrettyJsonTest {

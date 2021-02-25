@@ -25,12 +25,11 @@ package org.takes.rs;
 
 import java.io.IOException;
 import org.cactoos.iterable.IterableOf;
-import org.cactoos.set.SetOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.object.HasToString;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.Throws;
 
 /**
  * Test case for {@link HeadPrint}.
@@ -42,9 +41,16 @@ public final class HeadPrintTest {
      * HeadPrint can fail on invalid chars.
      * @throws IOException If some problem inside
      */
-    @Test(expected = IllegalArgumentException.class)
     public void failsOnInvalidHeader() throws IOException {
-        new HeadPrint(new RsWithHeader("name", "\n\n\n")).asString();
+        MatcherAssert.assertThat(
+            "Must catch invalid header exception",
+            () -> {
+                return new HeadPrint(
+                    new RsWithHeader("name", "\n\n\n")
+                ).asString();
+            },
+            new Throws<>(IllegalArgumentException.class)
+        );
     }
 
     @Test
@@ -52,11 +58,9 @@ public final class HeadPrintTest {
         MatcherAssert.assertThat(
             "must write head",
             new HeadPrint(
-                new RsSimple(new SetOf<>("HTTP/1.1 500 Internal Server Error"), "")
-            ).asString(),
-            new HasToString<>(
-                new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
-            )
+                new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
+            ),
+            new TextIs("HTTP/1.1 500 Internal Server Error\r\n\r\n")
         );
     }
 
@@ -69,10 +73,8 @@ public final class HeadPrintTest {
             "must write head with dashes",
             new HeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
-            ).asString(),
-            new HasToString<>(
-                new IsEqual<>("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
-            )
+            ),
+            new TextIs("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 }

@@ -29,10 +29,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -124,27 +124,25 @@ public final class BkBasic implements Back {
         throws IOException {
         try {
             output.write(
-                new RsPrint(this.take.act(req))
-                    .asString()
-                    .getBytes(StandardCharsets.UTF_8)
+                new RsPrint(this.take.act(req)).asBytes()
             );
         } catch (final HttpException ex) {
             output.write(
-                new RsPrint(BkBasic.failure(ex, ex.code()))
-                    .asString()
-                    .getBytes(StandardCharsets.UTF_8)
+                new UncheckedBytes(
+                    new RsPrint(BkBasic.failure(ex, ex.code()))
+                ).asBytes()
             );
             // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
             output.write(
-                new RsPrint(
-                    BkBasic.failure(
-                        ex,
-                        HttpURLConnection.HTTP_INTERNAL_ERROR
+                new UncheckedBytes(
+                    new RsPrint(
+                        BkBasic.failure(
+                            ex,
+                            HttpURLConnection.HTTP_INTERNAL_ERROR
+                        )
                     )
-                )
-                .asString()
-                .getBytes(StandardCharsets.UTF_8)
+                ).asBytes()
             );
         }
     }

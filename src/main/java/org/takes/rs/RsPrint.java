@@ -24,9 +24,12 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Bytes;
 import org.cactoos.Text;
+import org.cactoos.io.BytesOf;
 import org.cactoos.text.Joined;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
@@ -43,7 +46,7 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsPrint extends RsWrap implements Text {
+public final class RsPrint extends RsWrap implements Text, Bytes {
 
     /**
      * Head print representation.
@@ -72,5 +75,13 @@ public final class RsPrint extends RsWrap implements Text {
             this.head,
             this.body
         ).asString();
+    }
+
+    @Override
+    public byte[] asBytes() throws Exception {
+        return new BytesOf(
+            this.asString(),
+            StandardCharsets.UTF_8
+        ).asBytes();
     }
 }
