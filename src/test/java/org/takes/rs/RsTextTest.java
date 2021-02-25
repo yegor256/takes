@@ -66,12 +66,12 @@ final class RsTextTest {
     @Test
     void makesTextResponseWithStatus() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new HeadPrint(
                 new RsText(
                     new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
                     "something not found"
                 )
-            ).printHead(),
+            ).asString(),
             Matchers.containsString(
                 Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
             )

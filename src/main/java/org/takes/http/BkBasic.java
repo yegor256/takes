@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputStreamOf;
@@ -122,17 +123,29 @@ public final class BkBasic implements Back {
     private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
-            new RsPrint(this.take.act(req)).print(output);
+            output.write(
+                new RsPrint(this.take.act(req))
+                    .asString()
+                    .getBytes(StandardCharsets.UTF_8)
+            );
         } catch (final HttpException ex) {
-            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
-            // @checkstyle IllegalCatchCheck (7 lines)
+            output.write(
+                new RsPrint(BkBasic.failure(ex, ex.code()))
+                    .asString()
+                    .getBytes(StandardCharsets.UTF_8)
+            );
+            // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
-            new RsPrint(
-                BkBasic.failure(
-                    ex,
-                    HttpURLConnection.HTTP_INTERNAL_ERROR
+            output.write(
+                new RsPrint(
+                    BkBasic.failure(
+                        ex,
+                        HttpURLConnection.HTTP_INTERNAL_ERROR
+                    )
                 )
-            ).print(output);
+                .asString()
+                .getBytes(StandardCharsets.UTF_8)
+            );
         }
     }
 

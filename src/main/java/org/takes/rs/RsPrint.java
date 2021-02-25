@@ -24,8 +24,6 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Writer;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
@@ -75,71 +73,4 @@ public final class RsPrint extends RsWrap implements Text {
             this.body
         ).asString();
     }
-
-    /**
-     * Print body into string.
-     * @return Entire body of HTTP response
-     * @throws IOException If fails
-     */
-    public String printBody() throws IOException {
-        return this.body.asString();
-    }
-
-    /**
-     * Print head into string.
-     * @return Entire head of HTTP response
-     * @throws IOException If fails
-     * @since 0.10
-     */
-    public String printHead() throws IOException {
-        return this.head.asString();
-    }
-
-    /**
-     * Print it into output stream.
-     * @param output Output to print into
-     * @throws IOException If fails
-     * @todo #1054:30min Remove the #print(OutputStream) methods.
-     *  After the creation of {@link HeadPrint} and {@link BodyPrint} classes,
-     *  these methods lost sense and need be removed from these classes and
-     *  all tests that uses #print() method.
-     */
-    public void print(final OutputStream output) throws IOException {
-        this.head.print(output);
-        this.body.print(output);
-    }
-
-    /**
-     * Print it into output stream in UTF8.
-     * @param output Output to print into
-     * @throws IOException If fails
-     * @since 0.10
-     */
-    public void printHead(final OutputStream output) throws IOException {
-        this.head.print(output);
-    }
-
-    /**
-     * Print it into a writer.
-     * @param writer Writer to print into
-     * @throws IOException If fails
-     * @since 2.0
-     */
-    public void printHead(final Writer writer) throws IOException {
-        try {
-            writer.write(this.head.asString());
-        } finally {
-            writer.flush();
-        }
-    }
-
-    /**
-     * Print it into output stream.
-     * @param output Output to print into
-     * @throws IOException If fails
-     */
-    public void printBody(final OutputStream output) throws IOException {
-        this.body.print(output);
-    }
-
 }

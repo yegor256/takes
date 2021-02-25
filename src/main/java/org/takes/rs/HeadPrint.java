@@ -24,8 +24,6 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Joined;
@@ -39,9 +37,6 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
- * @todo #1054:30min Develop tests for {@link HeadPrint} and {@link BodyPrint}.
- *  Although these classes are tested by {@link RsPrint} they need their own
- *  unit tests.
  */
 public final class HeadPrint implements Head, Text {
 
@@ -63,27 +58,13 @@ public final class HeadPrint implements Head, Text {
         this.response = res;
     }
 
-    /**
-     * Print it into output stream in UTF8.
-     *
-     * @param output Output to print into
-     * @throws IOException If fails
-     */
-    public void print(final OutputStream output) throws IOException {
-        try {
-            output.write(this.asString().getBytes(StandardCharsets.UTF_8));
-        } finally {
-            output.flush();
-        }
-    }
-
     @Override
     public String asString() throws IOException {
         return new FormattedText(
             "%s%s%s",
             new Joined(
                 HeadPrint.EOL,
-                this.response.head()
+                this.head()
             ),
             HeadPrint.EOL,
             HeadPrint.EOL

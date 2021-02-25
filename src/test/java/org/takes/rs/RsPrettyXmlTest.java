@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
@@ -49,11 +48,11 @@ public final class RsPrettyXmlTest {
     @Test
     public void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
         );
     }
@@ -66,13 +65,13 @@ public final class RsPrettyXmlTest {
     // @checkstyle MethodNameCheck (1 line)
     public void formatsHtml5DoctypeBody() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         "<!DOCTYPE html><html><head></head><body></body></html>"
                     )
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.containsString("<!DOCTYPE HTML>")
         );
     }
@@ -87,7 +86,7 @@ public final class RsPrettyXmlTest {
     public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new TextOf(
-                new RsPrint(
+                new BodyPrint(
                     new RsPrettyXml(
                         new RsWithBody(
                             new InputStreamOf(
@@ -100,7 +99,7 @@ public final class RsPrettyXmlTest {
                             )
                         )
                     )
-                ).printBody()
+                ).asString()
             ),
             new IsEqual<>(
                 new Joined(
@@ -132,7 +131,7 @@ public final class RsPrettyXmlTest {
             .concat("lang=\"en\">");
         MatcherAssert.assertThat(
             new TextOf(
-                new RsPrint(
+                new BodyPrint(
                     new RsPrettyXml(
                         new RsWithBody(
                             new InputStreamOf(
@@ -148,7 +147,7 @@ public final class RsPrettyXmlTest {
                             )
                         )
                     )
-                ).printBody()
+                ).asString()
             ),
             new IsEqual<>(
                 new Joined(
@@ -172,7 +171,7 @@ public final class RsPrettyXmlTest {
      */
     @Test(expected = IOException.class)
     public void formatsNonXmlBody() throws IOException {
-        new RsPrint(new RsPrettyXml(new RsWithBody("foo"))).printBody();
+        new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString();
     }
 
     /**
@@ -181,22 +180,21 @@ public final class RsPrettyXmlTest {
      */
     @Test
     public void reportsCorrectContentLength() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RsPrint(
+        final int contentlength = new BodyPrint(
             new RsWithBody(
                 "<test>\n   <a>test</a>\n</test>\n"
             )
-        ).printBody(baos);
+        ).length();
         MatcherAssert.assertThat(
-            new RsPrint(
+            new HeadPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
                 )
-            ).printHead(),
+            ).asString(),
             Matchers.containsString(
                 String.format(
                     "Content-Length: %d",
-                    baos.toByteArray().length
+                    contentlength
                 )
             )
         );

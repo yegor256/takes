@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import org.takes.rs.HeadPrint;
 
 /**
  * Test case for {@link TkClasspath}.
@@ -44,7 +44,7 @@ public final class TkClasspathTest {
     @Test
     public void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new HeadPrint(
                 new TkClasspath().act(
                     new RqFake(
                         "GET", "/org/takes/Take.class?a", ""
@@ -65,5 +65,4 @@ public final class TkClasspathTest {
             new RqFake("PUT", "/something-else", "")
         );
     }
-
 }

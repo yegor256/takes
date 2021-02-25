@@ -43,6 +43,8 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
+import org.takes.rs.BodyPrint;
+import org.takes.rs.HeadPrint;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -153,14 +155,14 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
-                        new RsPrint(
+                        new BodyPrint(
                             new TkProxy(home).act(
                                 new RqFake(
                                     TkProxyTest.this.method,
                                     "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
                                 )
                             )
-                        ).printBody(),
+                        ).asString(),
                         Matchers.equalTo(
                             String.format(
                                 "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
@@ -189,7 +191,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
+                        new BodyPrint(new TkProxy(
                             home.toURL().toString()
                         ).act(
                             new RqFake(
@@ -204,7 +206,7 @@ public final class TkProxyTest {
                                 ),
                                 ""
                             )
-                        )).printBody(),
+                        )).asString(),
                         Matchers.containsString(
                             String.format(
                                 "Host: %s:%d",
@@ -235,7 +237,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
-                        new RsPrint(new TkProxy(
+                        new HeadPrint(new TkProxy(
                             home.toURL().toString(),
                             mark
                         ).act(
@@ -249,7 +251,7 @@ public final class TkProxyTest {
                                 ),
                                 ""
                             )
-                        )).printHead(),
+                        )).asString(),
                         Matchers.containsString(
                             String.format(
                                 // @checkstyle LineLengthCheck (1 line)
@@ -281,7 +283,7 @@ public final class TkProxyTest {
                 @Override
                 public void exec(final URI home) throws Exception {
                     MatcherAssert.assertThat(
-                        new RsPrint(
+                        new BodyPrint(
                             new TkProxy(home).act(
                                 new RqFake(
                                     Arrays.asList(
@@ -300,7 +302,7 @@ public final class TkProxyTest {
                                     body
                                 )
                             )
-                        ).printBody(),
+                        ).asString(),
                         Matchers.allOf(
                             Matchers.containsString("Content-Length:"),
                             Matchers.containsString("Content-Type:"),

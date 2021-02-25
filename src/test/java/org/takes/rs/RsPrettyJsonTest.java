@@ -25,6 +25,8 @@ package org.takes.rs;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -45,11 +47,11 @@ public final class RsPrettyJsonTest {
     @Test
     public void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"widget\": {\"debug\": \"on\" }}")
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.is(
                 "\n{\n    \"widget\":{\n        \"debug\":\"on\"\n    }\n}"
             )
@@ -62,7 +64,7 @@ public final class RsPrettyJsonTest {
      */
     @Test(expected = IOException.class)
     public void rejectsNonJsonBody() throws Exception {
-        new RsPrint(new RsPrettyJson(new RsWithBody("foo"))).printBody();
+        new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString();
     }
 
     /**
@@ -72,17 +74,21 @@ public final class RsPrettyJsonTest {
     @Test
     public void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RsPrint(
-            new RsWithBody(
-                "\n{\n    \"test\":{\n        \"test\":\"test\"\n    }\n}"
-            )
-        ).printBody(baos);
+        try (Writer w = new OutputStreamWriter(baos)) {
+            w.write(
+                new BodyPrint(
+                    new RsWithBody(
+                        "\n{\n    \"test\":{\n        \"test\":\"test\"\n    }\n}"
+                    )
+                ).asString()
+            );
+        }
         MatcherAssert.assertThat(
-            new RsPrint(
+            new HeadPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"test\": {\"test\": \"test\" }}")
                 )
-            ).printHead(),
+            ).asString(),
             Matchers.containsString(
                 String.format(
                     "Content-Length: %d",
