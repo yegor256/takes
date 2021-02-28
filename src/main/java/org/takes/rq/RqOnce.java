@@ -23,12 +23,10 @@
  */
 package org.takes.rq;
 
-import java.io.InputStream;
 import lombok.EqualsAndHashCode;
-import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.scalar.Mapped;
 import org.cactoos.scalar.Sticky;
-import org.cactoos.text.TextOf;
 import org.takes.Request;
 
 /**
@@ -37,9 +35,6 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.36
- * @todo #999:30min Please use {@link org.cactoos.text.Sticky} decorator
- *  class instead of inner anonymous class below, which prevents input
- *  from being read twice by caching results of first call internally.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqOnce extends RqWrap {
@@ -52,16 +47,10 @@ public final class RqOnce extends RqWrap {
         super(
             new RequestOf(
                 new Sticky<>(req::head),
-                new Scalar<InputStream>() {
-                    private final Scalar<String> text = new Sticky<>(
-                        new TextOf(req::body)::asString
-                    );
-
-                    @Override
-                    public InputStream value() throws Exception {
-                        return new InputStreamOf(this.text.value());
-                    }
-                }
+                new Mapped<>(
+                    InputStreamOf::new,
+                    new Sticky<>(new RqPrint(req)::asString)
+                )
             )
         );
     }
