@@ -23,6 +23,9 @@
  */
 package org.takes.tk;
 
+import java.io.InputStream;
+
+import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -47,6 +50,72 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/html",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkHTML can create a text from {@link Scalar}.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromScalar() throws Exception {
+        final String body = "<html>hello, world!</html>";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkHtml(() -> body).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/html",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkHTML can create a text from byte array.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromByteArray() throws Exception {
+        final String body = "<html>hello, world!</html>";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/html",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkHTML can create a text from {@link InputStream}.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromInputStream() throws Exception {
+        final String body = "<html>hello, world!</html>";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
             new TextIs(
                 new Joined(
                     "\r\n",

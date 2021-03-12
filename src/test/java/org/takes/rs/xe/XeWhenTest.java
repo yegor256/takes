@@ -124,6 +124,23 @@ final class XeWhenTest {
                 "/negative/memory"
             )
         );
+        MatcherAssert.assertThat(
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "negative",
+                        new XeWhen(
+                            false,
+                            new XeDate()
+                        )
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/negative"
+            )
+        );
     }
 
 }

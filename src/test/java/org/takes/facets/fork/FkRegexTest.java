@@ -23,6 +23,8 @@
  */
 package org.takes.facets.fork;
 
+import java.util.regex.Pattern;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -49,6 +51,15 @@ final class FkRegexTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
+                new RqFake("GET", "/hel?a=1")
+            ).has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            new FkRegex(
+                Pattern.compile("/h[a-z]{2}"),
+                new TkEmpty()
+            ).route(
                 new RqFake("GET", "/hel?a=1")
             ).has(),
             Matchers.is(true)

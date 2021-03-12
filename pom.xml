@@ -486,7 +486,7 @@ SOFTWARE.
                   <goal>report</goal>
                 </goals>
                 <!--
-                    @todo #1067:30m This limits are set according to
+                    @todo #1088:30m This limits are set according to
                      current metrics. Improve test coverage and
                      increase a limit, than update this task.
                      Remove this task when 0.99 is reached for each metric.
