@@ -24,7 +24,6 @@
 package org.takes.facets.fork;
 
 import java.util.regex.Pattern;
-
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -36,6 +35,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkRegex}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class FkRegexTest {
 
     /**

@@ -35,6 +35,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link XeWhen}.
  * @since 0.13
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class XeWhenTest {
 
     /**

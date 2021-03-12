@@ -24,7 +24,6 @@
 package org.takes.tk;
 
 import java.io.InputStream;
-
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -39,6 +38,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkText}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkTextTest {
 
     /**
