@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.cactoos.Scalar;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -128,7 +129,7 @@ final class XeWhenTest {
         );
         new Assertion<>(
             "Must be empty when negative condition without negative source",
-            IOUtils.toString(
+            new TextOf(
                 new RsXembly(
                     new XeAppend(
                         "negative",
@@ -137,9 +138,8 @@ final class XeWhenTest {
                             new XeDate()
                         )
                     )
-                ).body(),
-                StandardCharsets.UTF_8
-            ),
+                ).body()
+            ).asString(),
             XhtmlMatchers.hasXPaths(
                 "/negative"
             )
