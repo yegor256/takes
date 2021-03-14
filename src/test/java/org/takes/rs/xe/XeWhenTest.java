@@ -30,6 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.Scalar;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link XeWhen}.
@@ -125,7 +126,8 @@ final class XeWhenTest {
                 "/negative/memory"
             )
         );
-        MatcherAssert.assertThat(
+        new Assertion<>(
+            "Must be empty when negative condition without negative source",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -141,7 +143,7 @@ final class XeWhenTest {
             XhtmlMatchers.hasXPaths(
                 "/negative"
             )
-        );
+        ).affirm();
     }
 
 }
