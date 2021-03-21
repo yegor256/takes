@@ -53,12 +53,6 @@ public final class XeWhen extends XeWrap {
                 public XeSource value() {
                     return source;
                 }
-            },
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() throws IOException {
-                    return XeSource.EMPTY;
-                }
             }
         );
     }
