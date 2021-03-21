@@ -33,7 +33,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
@@ -75,7 +74,7 @@ public final class RqMtFakeTest {
                     RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
                 ).asString()
             )
-        );
+        ).body();
     }
 
     /**
@@ -364,20 +363,12 @@ public final class RqMtFakeTest {
         }
     }
 
-    /*
-     * @todo #577:30min The test below fails with the message
-     *  "header "Content-Disposition" is mandatory".
-     *  The error disappears when `new RqFake(new ListOf<>(""), "")` is
-     *  changed to `new RqFake(new ListOf<>(""), "someValue")`.
-     *  Fix the underlying problem and remove the `@Ignore` annotation.
-     * */
     /**
      * Tests the bug described in #577.
      *
      * @throws Exception If there is some error inside
      */
     @Test
-    @Ignore("See puzzle above")
     public void contentDispositionShouldBeRecognized() throws Exception {
         new RqMtFake(
             new RqFake(),
