@@ -78,10 +78,10 @@ final class HrefTest {
      */
     @Test
     void getQueryParameters() {
-        final String uri = "http://a.example.com?param1=hello&param2=world";
+        final String uri = "http://a.example.com?param1=hellow&param2=world";
         MatcherAssert.assertThat(
             new Href(uri).param("param1"),
-            new HasValues<>("hello")
+            new HasValues<>("hellow")
         );
         MatcherAssert.assertThat(
             new Href(uri).param("param2"),
