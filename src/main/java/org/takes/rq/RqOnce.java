@@ -39,7 +39,8 @@ import org.takes.Request;
  *
  * @since 0.36
  * @todo #1080:30min Please make two decorators (HeadOnce and BodyOnce)
- *  that prevent multiple reads of their contents.
+ *  that prevent multiple reads of their contents. Introduce some units
+ *  tests for these new classes.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqOnce extends RqWrap {
