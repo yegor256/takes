@@ -26,6 +26,7 @@ package org.takes.misc;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * Test case for {@link Href}.
@@ -69,6 +70,22 @@ final class HrefTest {
         MatcherAssert.assertThat(
             new Href(uri).toString(),
             Matchers.equalTo("http://a.example.com/")
+        );
+    }
+
+    /**
+     * Href can get query parameters.
+     */
+    @Test
+    void getQueryParameters() {
+        final String uri = "http://a.example.com?param1=hello&param2=world";
+        MatcherAssert.assertThat(
+            new Href(uri).param("param1"),
+            new HasValues<>("hello")
+        );
+        MatcherAssert.assertThat(
+            new Href(uri).param("param2"),
+            new HasValues<>("world")
         );
     }
 
