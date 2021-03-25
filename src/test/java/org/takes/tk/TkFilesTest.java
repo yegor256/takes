@@ -32,7 +32,7 @@ import org.junit.rules.TemporaryFolder;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import org.takes.rs.HeadPrint;
 
 /**
  * Test case for {@link TkFiles}.
@@ -56,7 +56,7 @@ public final class TkFilesTest {
             this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
-            new RsPrint(
+            new HeadPrint(
                 new TkFiles(this.temp.getRoot()).act(
                     new RqFake(
                         "GET", "/a.txt?hash=a1b2c3", ""

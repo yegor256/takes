@@ -41,6 +41,7 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWithHeaders;
+import org.takes.rs.HeadPrint;
 import org.takes.rs.RsPrint;
 import org.takes.tk.TkText;
 
@@ -152,7 +153,7 @@ public final class PsBasicTest {
             forward = ex;
         }
         MatcherAssert.assertThat(
-            new RsPrint(forward).printHead(),
+            new HeadPrint(forward).asString(),
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 401 Unauthorized"),
                 Matchers.containsString(

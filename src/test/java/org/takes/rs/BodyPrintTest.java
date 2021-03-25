@@ -24,56 +24,27 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
+import org.hamcrest.object.HasToString;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
 
 /**
- * Test case for {@link RsText}.
- * @since 0.1
+ * Test case for {@link BodyPrint}.
+ * @since 1.19
  */
-final class RsTextTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public final class BodyPrintTest {
 
-    /**
-     * RsText can build a plain text response.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void simple() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))),
-            new TextIs(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
-        );
-    }
-
-    /**
-     * RsText can build a response with a status.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    void makesTextResponseWithStatus() throws IOException {
-        MatcherAssert.assertThat(
-            new HeadPrint(
-                new RsText(
-                    new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
-                    "something not found"
-                )
+            "must write body",
+            new BodyPrint(
+                new RsText("World!")
             ).asString(),
-            Matchers.containsString(
-                Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
+            new HasToString<>(
+                new IsEqual<>("World!")
             )
         );
     }

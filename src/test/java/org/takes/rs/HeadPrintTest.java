@@ -24,57 +24,57 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import org.cactoos.text.Joined;
+import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.Throws;
 
 /**
- * Test case for {@link RsText}.
- * @since 0.1
+ * Test case for {@link HeadPrint}.
+ * @since 1.19
  */
-final class RsTextTest {
+public final class HeadPrintTest {
 
     /**
-     * RsText can build a plain text response.
+     * HeadPrint can fail on invalid chars.
      * @throws IOException If some problem inside
      */
-    @Test
-    void makesPlainTextResponse() throws IOException {
-        final String body = "hello, world!";
+    public void failsOnInvalidHeader() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(new RsBuffered(new RsText(body))),
-            new TextIs(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/plain",
-                    "",
-                    body
-                )
-            )
+            "Must catch invalid header exception",
+            () -> {
+                return new HeadPrint(
+                    new RsWithHeader("name", "\n\n\n")
+                ).asString();
+            },
+            new Throws<>(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    public void simple() throws IOException {
+        MatcherAssert.assertThat(
+            "must write head",
+            new HeadPrint(
+                new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
+            ),
+            new TextIs("HTTP/1.1 500 Internal Server Error\r\n\r\n")
         );
     }
 
     /**
-     * RsText can build a response with a status.
-     * @throws IOException If some problem inside
+     * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    void makesTextResponseWithStatus() throws IOException {
-        MatcherAssert.assertThat(
+    public void simpleWithDash() throws IOException {
+        new Assertion<>(
+            "must write head with dashes",
             new HeadPrint(
-                new RsText(
-                    new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
-                    "something not found"
-                )
-            ).asString(),
-            Matchers.containsString(
-                Integer.toString(HttpURLConnection.HTTP_NOT_FOUND)
-            )
+                new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
+            ),
+            new TextIs("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 }

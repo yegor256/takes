@@ -30,6 +30,9 @@ import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.TextIs;
+import org.takes.rs.BodyPrint;
+import org.takes.rs.HeadPrint;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFixed;
@@ -50,12 +53,12 @@ final class FbStatusTest {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(status);
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new FbStatus(
                     status,
                     new TkFixed(new RsText("not found response"))
                 ).route(req).get()
-            ).printBody(),
+            ).asString(),
             Matchers.startsWith("not found")
         );
     }
@@ -70,7 +73,7 @@ final class FbStatusTest {
             HttpURLConnection.HTTP_MOVED_PERM
         );
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new FbStatus(
                     new Filtered<>(
                         status -> {
@@ -84,7 +87,7 @@ final class FbStatusTest {
                     ),
                     new FbFixed(new RsText("response text"))
                 ).route(req).get()
-            ).printBody(),
+            ).asString(),
             Matchers.startsWith("response")
         );
     }
@@ -124,11 +127,11 @@ final class FbStatusTest {
             new FbStatus(code).route(req).get()
         );
         MatcherAssert.assertThat(
-            response.printBody(),
-            Matchers.equalTo("404 Not Found: Exception message")
+            new BodyPrint(response),
+            new TextIs("404 Not Found: Exception message")
         );
         MatcherAssert.assertThat(
-            response.printHead(),
+            new HeadPrint(response).asString(),
             Matchers.both(
                 Matchers.containsString("Content-Type: text/plain")
             ).and(Matchers.containsString("404 Not Found"))

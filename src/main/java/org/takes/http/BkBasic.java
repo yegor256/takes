@@ -32,6 +32,7 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.BytesOf;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.UncheckedBytes;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -122,17 +123,27 @@ public final class BkBasic implements Back {
     private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
-            new RsPrint(this.take.act(req)).print(output);
+            output.write(
+                new RsPrint(this.take.act(req)).asBytes()
+            );
         } catch (final HttpException ex) {
-            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
-            // @checkstyle IllegalCatchCheck (7 lines)
+            output.write(
+                new UncheckedBytes(
+                    new RsPrint(BkBasic.failure(ex, ex.code()))
+                ).asBytes()
+            );
+            // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
-            new RsPrint(
-                BkBasic.failure(
-                    ex,
-                    HttpURLConnection.HTTP_INTERNAL_ERROR
-                )
-            ).print(output);
+            output.write(
+                new UncheckedBytes(
+                    new RsPrint(
+                        BkBasic.failure(
+                            ex,
+                            HttpURLConnection.HTTP_INTERNAL_ERROR
+                        )
+                    )
+                ).asBytes()
+            );
         }
     }
 

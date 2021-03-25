@@ -31,8 +31,8 @@ import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
+import org.takes.rs.BodyPrint;
 import org.takes.rs.ResponseOf;
-import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
 
@@ -51,7 +51,7 @@ final class TkFallbackTest {
     void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new TkFallback(
                     new TkFailure(err),
                     new Fallback() {
@@ -63,7 +63,7 @@ final class TkFallbackTest {
                         }
                     }
                 ).act(new RqFake())
-            ).printBody(),
+            ).asString(),
             Matchers.endsWith(err)
         );
     }
@@ -75,7 +75,7 @@ final class TkFallbackTest {
     @Test
     void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new TkFallback(
                     new Take() {
                         @Override
@@ -94,7 +94,7 @@ final class TkFallbackTest {
                     },
                     new FbFixed(new RsText("caught here!"))
                 ).act(new RqFake())
-            ).printBody(),
+            ).asString(),
             Matchers.startsWith("caught")
         );
     }

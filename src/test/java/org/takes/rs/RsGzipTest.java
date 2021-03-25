@@ -25,13 +25,14 @@ package org.takes.rs;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
+import org.cactoos.Text;
+import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,7 @@ final class RsGzipTest {
         final String text = "some unicode text: \u20ac\n\t";
         final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
-            new RsPrint(response).printHead(),
+            new HeadPrint(response).asString(),
             Matchers.containsString("Content-Encoding: gzip")
         );
         MatcherAssert.assertThat(
@@ -76,14 +77,15 @@ final class RsGzipTest {
         );
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
-        final ByteArrayOutputStream gzip = new ByteArrayOutputStream();
-        new RsPrint(
+        final Text bodytxt = new BodyPrint(
             new RsGzip(
                 new RsWithBody(baos.toByteArray())
             )
-        ).printBody(gzip);
+        );
         final BufferedImage reverse = ImageIO.read(
-            new GZIPInputStream(new ByteArrayInputStream(gzip.toByteArray()))
+            new GZIPInputStream(
+                new InputStreamOf(bodytxt)
+            )
         );
         MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(1));
     }
@@ -96,14 +98,12 @@ final class RsGzipTest {
     void reportsCorrectContentLength() throws IOException {
         final String text = "some text to encode";
         final Response response = new RsGzip(new RsText(text));
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RsPrint(response).printBody(baos);
         MatcherAssert.assertThat(
-            new RsPrint(response).printHead(),
+            new HeadPrint(response).asString(),
             Matchers.containsString(
                 String.format(
                     "Content-Length: %d",
-                    baos.toByteArray().length
+                    new BodyPrint(response).length()
                 )
             )
         );
