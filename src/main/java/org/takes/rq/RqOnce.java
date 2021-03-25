@@ -23,8 +23,8 @@
  */
 package org.takes.rq;
 
-import lombok.EqualsAndHashCode;
 import java.io.InputStream;
+import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.IoChecked;
