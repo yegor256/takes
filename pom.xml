@@ -137,6 +137,10 @@ SOFTWARE.
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-core</artifactId>
       <version>2.1</version>
       <optional>true</optional>
