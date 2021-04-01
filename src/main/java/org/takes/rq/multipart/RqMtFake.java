@@ -28,10 +28,8 @@ import java.io.InputStream;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.scalar.Sticky;
-import org.cactoos.scalar.Unchecked;
 import org.takes.Body;
 import org.takes.Request;
 import org.takes.rq.RequestOf;
@@ -59,7 +57,7 @@ public final class RqMtFake implements RqMultipart {
     /**
      * Fake multipart request.
      */
-    private final Scalar<RqMultipart> fake;
+    private final RqMultipart fake;
 
     /**
      * Fake ctor.
@@ -67,32 +65,31 @@ public final class RqMtFake implements RqMultipart {
      * @param dispositions Fake request body parts
      * @throws IOException If fails
      */
-    public RqMtFake(final Request req, final Request... dispositions) {
-        this.fake = new Sticky<>(
-            () -> new RqMtBase(
-                new RqMtFake.FakeMultipartRequest(req, dispositions)
-            )
+    public RqMtFake(final Request req, final Request... dispositions)
+        throws IOException {
+        this.fake = new RqMtBase(
+            new RqMtFake.FakeMultipartRequest(req, dispositions)
         );
     }
 
     @Override
     public Iterable<Request> part(final CharSequence name) {
-        return new Unchecked<>(this.fake).value().part(name);
+        return this.fake.part(name);
     }
 
     @Override
     public Iterable<String> names() {
-        return new Unchecked<>(this.fake).value().names();
+        return this.fake.names();
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        return new IoChecked<>(this.fake).value().head();
+        return this.fake.head();
     }
 
     @Override
     public InputStream body() throws IOException {
-        return new IoChecked<>(this.fake).value().body();
+        return this.fake.body();
     }
 
     /**

@@ -43,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
@@ -102,19 +104,19 @@ public final class RqMtBase implements RqMultipart {
     private static final String CRLF = "\r\n";
 
     /**
-     * Map of params and values.
+     * Scalar of Map of params and values.
      */
-    private final Map<String, List<Request>> map;
+    private final Scalar<Map<String, List<Request>>> smap;
 
     /**
-     * Internal buffer.
+     * Scalar of Internal buffer.
      */
-    private final ByteBuffer buffer;
+    private final Scalar<ByteBuffer> sbuffer;
 
     /**
-     * InputStream based on request body.
+     * Scalar of InputStream based on request body.
      */
-    private final InputStream stream;
+    private final Scalar<InputStream> sstream;
 
     /**
      * Original request.
@@ -125,27 +127,24 @@ public final class RqMtBase implements RqMultipart {
      * Ctor.
      * @param req Original request
      * @throws IOException If fails
-     * @todo #950:30m Remove code from this ctor, leaving only
-     *  initialization. Currently this constructor access body
-     *  of the request and triggers its evaluation. This breaks
-     *  composition of multiple request, as it can be seen in
-     *  {@link RqMtFake}. When this task is done, remove
-     *  explicit lazy evaluation for RqMtFake.
      * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
-        this.stream = new RqLengthAware(req).body();
-        this.buffer = ByteBuffer.allocate(
-            // @checkstyle MagicNumberCheck (1 line)
-            Math.min(8192, this.stream.available())
-        );
-        this.map = this.requests(req);
+        this.sstream = new Sticky<>(() -> new RqLengthAware(req).body());
+        this.sbuffer = new Sticky<>(() -> {
+            return ByteBuffer.allocate(
+                // @checkstyle MagicNumberCheck (1 line)
+                Math.min(8192, RqMtBase.this.sstream.value().available())
+            );
+        });
+        this.smap = new Sticky<>(() -> RqMtBase.this.requests(req));
     }
 
     @Override
     public Iterable<Request> part(final CharSequence name) {
-        final List<Request> values = this.map.getOrDefault(
+        final Map<String, List<Request>> map = new Unchecked<>(this.smap).value();
+        final List<Request> values = map.getOrDefault(
             new UncheckedText(
                 new Lowered(name.toString())
             ).asString(),
@@ -157,7 +156,7 @@ public final class RqMtBase implements RqMultipart {
                 Collections.emptyList(),
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
-                    name, this.map.size(), this.map.keySet()
+                    name, map.size(), map.keySet()
                 ).toString()
             );
         } else {
@@ -174,7 +173,7 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public Iterable<String> names() {
-        return this.map.keySet();
+        return new Unchecked<>(this.smap).value().keySet();
     }
 
     @Override
@@ -222,8 +221,10 @@ public final class RqMtBase implements RqMultipart {
                 )
             );
         }
-        final ReadableByteChannel body = Channels.newChannel(this.stream);
-        if (body.read(this.buffer) < 0) {
+        final ByteBuffer buffer = new Unchecked<>(this.sbuffer).value();
+        final InputStream stream = new Unchecked<>(this.sstream).value();
+        final ReadableByteChannel body = Channels.newChannel(stream);
+        if (body.read(buffer) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 "failed to read the request body"
@@ -232,15 +233,15 @@ public final class RqMtBase implements RqMultipart {
         final byte[] boundary = String.format(
             "%s--%s", RqMtBase.CRLF, matcher.group(1)
         ).getBytes(RqMtBase.ENCODING);
-        this.buffer.flip();
-        this.buffer.position(boundary.length - 2);
+        buffer.flip();
+        buffer.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
-        while (this.buffer.hasRemaining()) {
-            final byte data = this.buffer.get();
+        while (buffer.hasRemaining()) {
+            final byte data = buffer.get();
             if (data == '-') {
                 break;
             }
-            this.buffer.position(this.buffer.position() + 1);
+            buffer.position(buffer.position() + 1);
             requests.add(this.make(boundary, body));
         }
         return RqMtBase.asMap(requests);
@@ -292,30 +293,31 @@ public final class RqMtBase implements RqMultipart {
         throws IOException {
         int match = 0;
         boolean cont = true;
+        final ByteBuffer buffer = new Unchecked<>(this.sbuffer).value();
         while (cont) {
-            if (!this.buffer.hasRemaining()) {
-                this.buffer.clear();
+            if (!buffer.hasRemaining()) {
+                buffer.clear();
                 for (int idx = 0; idx < match; ++idx) {
-                    this.buffer.put(boundary[idx]);
+                    buffer.put(boundary[idx]);
                 }
                 match = 0;
-                if (body.read(this.buffer) == -1) {
+                if (body.read(buffer) == -1) {
                     break;
                 }
-                this.buffer.flip();
+                buffer.flip();
             }
-            final ByteBuffer btarget = this.buffer.slice();
-            final int offset = this.buffer.position();
+            final ByteBuffer btarget = buffer.slice();
+            final int offset = buffer.position();
             btarget.limit(0);
-            while (this.buffer.hasRemaining()) {
-                final byte data = this.buffer.get();
+            while (buffer.hasRemaining()) {
+                final byte data = buffer.get();
                 if (data == boundary[match]) {
                     ++match;
                 } else if (data == boundary[0]) {
                     match = 1;
                 } else {
                     match = 0;
-                    btarget.limit(this.buffer.position() - offset);
+                    btarget.limit(buffer.position() - offset);
                 }
                 if (match == boundary.length) {
                     cont = false;
@@ -378,7 +380,7 @@ public final class RqMtBase implements RqMultipart {
                 super.close();
             } finally {
                 for (final List<Request> requests
-                    : RqMtBase.this.map.values()) {
+                    : new Unchecked<>(RqMtBase.this.smap).value().values()) {
                     for (final Request request : requests) {
                         request.body().close();
                     }
