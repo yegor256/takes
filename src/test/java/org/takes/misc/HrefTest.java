@@ -99,7 +99,7 @@ final class HrefTest {
 
     /**
      * Href can add path.
-     */ 
+     */
     @Test
     void addsPath() {
         MatcherAssert.assertThat(
