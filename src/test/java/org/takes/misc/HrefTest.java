@@ -32,6 +32,7 @@ import org.llorllale.cactoos.matchers.HasValues;
  * Test case for {@link Href}.
  * @since 0.7
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class HrefTest {
 
     /**
@@ -77,21 +78,28 @@ final class HrefTest {
      * Href can get query parameters.
      */
     @Test
-    void getQueryParameters() {
-        final String uri = "http://a.example.com?param1=hellow&param2=world";
+    void extractsParamtetersFromQuery() {
+        final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
         MatcherAssert.assertThat(
+            "Can't get first parameter.",
             new Href(uri).param("param1"),
-            new HasValues<>("hellow")
+            new HasValues<>("hello")
         );
         MatcherAssert.assertThat(
+            "Can't get second parameter.",
             new Href(uri).param("param2"),
             new HasValues<>("world")
+        );
+        MatcherAssert.assertThat(
+            "Can't extract correctly escaped sequences in parameter value.",
+            new Href(uri).param("param3"),
+            new HasValues<>("hello world")
         );
     }
 
     /**
      * Href can add path.
-     */
+     */ 
     @Test
     void addsPath() {
         MatcherAssert.assertThat(
