@@ -26,11 +26,13 @@ package org.takes.misc;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * Test case for {@link Href}.
  * @since 0.7
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class HrefTest {
 
     /**
@@ -69,6 +71,29 @@ final class HrefTest {
         MatcherAssert.assertThat(
             new Href(uri).toString(),
             Matchers.equalTo("http://a.example.com/")
+        );
+    }
+
+    /**
+     * Href can get query parameters.
+     */
+    @Test
+    void extractsParamtetersFromQuery() {
+        final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
+        MatcherAssert.assertThat(
+            "Can't get first parameter.",
+            new Href(uri).param("param1"),
+            new HasValues<>("hello")
+        );
+        MatcherAssert.assertThat(
+            "Can't get second parameter.",
+            new Href(uri).param("param2"),
+            new HasValues<>("world")
+        );
+        MatcherAssert.assertThat(
+            "Can't extract correctly escaped sequences in parameter value.",
+            new Href(uri).param("param3"),
+            new HasValues<>("hello world")
         );
     }
 
