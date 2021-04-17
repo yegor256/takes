@@ -36,9 +36,10 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 
 /**
- * Test for {@link CopyBytesUntilBoundary}
+ * Test for {@link CopyBytesUntilBoundary}.
  *
  * @since 1.19
+ * @checkstyle MagicNumberCheck (500 lines)
  */
 public final class CopyBytesUntilBoundaryTest {
 
@@ -58,7 +59,7 @@ public final class CopyBytesUntilBoundaryTest {
         buffer.put(new byte[] {0, 0, 0, 13, 13});
         buffer.position(3);
         buffer.limit(5);
-        byte[] boundary = {13, 10, 45, 45, 102};
+        final byte[] boundary = {13, 10, 45, 45, 102};
         new CopyBytesUntilBoundary(
             target,
             boundary,

@@ -33,7 +33,7 @@ import java.nio.channels.WritableByteChannel;
  *
  * @since 1.19
  */
-public class CopyBytesUntilBoundary {
+public final class CopyBytesUntilBoundary {
 
     /**
      * Buffer.
@@ -56,11 +56,12 @@ public class CopyBytesUntilBoundary {
     private final ReadableByteChannel src;
 
     /**
-     * 
-     * @param buffer Buffer
+     * Ctor.
      * @param target Target
      * @param boundary Boundary
      * @param src Source
+     * @param buffer Buffer
+     * @checkstyle ParameterNumberCheck (5 lines)
      */
     public CopyBytesUntilBoundary(
         final WritableByteChannel target,
@@ -70,10 +71,15 @@ public class CopyBytesUntilBoundary {
     ) {
         this.buffer = buffer;
         this.target = target;
-        this.boundary = boundary;
+        this.boundary = boundary.clone();
         this.src = src;
     }
 
+    /**
+     * Run pipeline.
+     * @throws IOException If problems found in
+     * @checkstyle ExecutableStatementCountCheck (500 lines)
+     */
     public void copy() throws IOException {
         int match = 0;
         boolean cont = true;
@@ -81,7 +87,7 @@ public class CopyBytesUntilBoundary {
             if (!this.buffer.hasRemaining()) {
                 this.buffer.clear();
                 for (int idx = 0; idx < match; ++idx) {
-                    this.buffer.put(boundary[idx]);
+                    this.buffer.put(this.boundary[idx]);
                 }
                 match = 0;
                 if (this.src.read(this.buffer) == -1) {
@@ -94,20 +100,20 @@ public class CopyBytesUntilBoundary {
             btarget.limit(0);
             while (this.buffer.hasRemaining()) {
                 final byte data = this.buffer.get();
-                if (data == boundary[match]) {
+                if (data == this.boundary[match]) {
                     ++match;
-                } else if (data == boundary[0]) {
+                } else if (data == this.boundary[0]) {
                     match = 1;
                 } else {
                     match = 0;
                     btarget.limit(this.buffer.position() - offset);
                 }
-                if (match == boundary.length) {
+                if (match == this.boundary.length) {
                     cont = false;
                     break;
                 }
             }
-            target.write(btarget);
+            this.target.write(btarget);
         }
     }
 }
