@@ -41,7 +41,7 @@ import org.llorllale.cactoos.matchers.Assertion;
  * @since 1.19
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class CopyBytesUntilBoundaryTest {
+final class CopyBytesUntilBoundaryTest {
 
     /**
      * Copies last repeated bytes.
@@ -52,7 +52,7 @@ public final class CopyBytesUntilBoundaryTest {
      */
     @Test
     @Disabled
-    public void copiesLastRepeatedBytes() throws IOException {
+    void copiesLastRepeatedBytes() throws IOException {
         final ReadableByteChannel src = Channels.newChannel(new ClosedInputStream());
         final WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream());
         final ByteBuffer buffer = ByteBuffer.allocate(5);
