@@ -274,56 +274,14 @@ public final class RqMtBase implements RqMultipart {
             channel.write(
                 ByteBuffer.wrap(RqMtBase.CRLF.getBytes(RqMtBase.ENCODING))
             );
-            this.copy(channel, boundary, body);
+            new CopyBytesUntilBoundary(
+                channel,
+                boundary,
+                body,
+                this.buffer
+            ).copy();
         }
         return new RqTemp(file);
-    }
-
-    /**
-     * Copy until boundary reached.
-     * @param target Output file channel
-     * @param boundary Boundary
-     * @param body Origin request body
-     * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (2 lines)
-     */
-    private void copy(final WritableByteChannel target,
-        final byte[] boundary, final ReadableByteChannel body)
-        throws IOException {
-        int match = 0;
-        boolean cont = true;
-        while (cont) {
-            if (!this.buffer.hasRemaining()) {
-                this.buffer.clear();
-                for (int idx = 0; idx < match; ++idx) {
-                    this.buffer.put(boundary[idx]);
-                }
-                match = 0;
-                if (body.read(this.buffer) == -1) {
-                    break;
-                }
-                this.buffer.flip();
-            }
-            final ByteBuffer btarget = this.buffer.slice();
-            final int offset = this.buffer.position();
-            btarget.limit(0);
-            while (this.buffer.hasRemaining()) {
-                final byte data = this.buffer.get();
-                if (data == boundary[match]) {
-                    ++match;
-                } else if (data == boundary[0]) {
-                    match = 1;
-                } else {
-                    match = 0;
-                    btarget.limit(this.buffer.position() - offset);
-                }
-                if (match == boundary.length) {
-                    cont = false;
-                    break;
-                }
-            }
-            target.write(btarget);
-        }
     }
 
     /**
