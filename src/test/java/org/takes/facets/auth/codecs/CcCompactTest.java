@@ -42,11 +42,12 @@ final class CcCompactTest {
      * @throws IOException If some problem inside
      */
     @Test
+    @SuppressWarnings("unchecked")
     void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:3";
         final Identity identity = new Identity.Simple(
             urn,
-            new MapOf<String ,String>(new MapEntry<>("name", "Jeff Lebowski"))
+            new MapOf<>(new MapEntry<>("name", "Jeff Lebowski"))
         );
         final byte[] bytes = new CcCompact().encode(identity);
         MatcherAssert.assertThat(

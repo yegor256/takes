@@ -37,6 +37,7 @@ import org.takes.facets.auth.Identity;
 /**
  * Test case for {@link CcBase64}.
  * @since 0.13
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class CcBase64Test {
 
@@ -76,10 +77,11 @@ final class CcBase64Test {
      * @throws IOException If some problem inside
      */
     @Test
+    @SuppressWarnings("unchecked")
     void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:Hello World!";
         final Map<String, String> properties =
-            new MapOf<String, String>(new MapEntry<>("userName", "user"));
+            new MapOf<>(new MapEntry<>("userName", "user"));
         final Codec codec = new CcBase64(new CcPlain());
         final Identity expected = codec.decode(
             codec.encode(new Identity.Simple(urn, properties))

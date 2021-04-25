@@ -42,10 +42,11 @@ final class CcPlainTest {
      * @throws IOException If some problem inside
      */
     @Test
+    @SuppressWarnings("unchecked")
     void encodes() throws IOException {
         final Identity identity = new Identity.Simple(
             "urn:test:3",
-            new MapOf<String, String>(new MapEntry<>("name", "Jeff Lebowski"))
+            new MapOf<>(new MapEntry<>("name", "Jeff Lebowski"))
         );
         MatcherAssert.assertThat(
             new String(new CcPlain().encode(identity)),
