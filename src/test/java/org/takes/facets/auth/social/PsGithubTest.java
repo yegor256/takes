@@ -29,7 +29,8 @@ import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport;
 import org.junit.rules.ExpectedException;
 import org.takes.Request;
 import org.takes.Response;
@@ -53,7 +54,7 @@ import org.xembly.Directives;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class PsGithubTest {
+@EnableRuleMigrationSupport final class PsGithubTest {
 
     /**
      * GitHubToken.
@@ -85,14 +86,15 @@ public final class PsGithubTest {
      * A Junit Exception test variable.
      */
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @SuppressWarnings("deprecation")
+    public final ExpectedException thrown = ExpectedException.none();
 
     /**
      * PsGithub can fail on no access token.
      * @throws Exception If some problem inside.
      */
     @Test
-    public void failsOnNoAccessToken() throws Exception {
+    void failsOnNoAccessToken() throws Exception {
         this.thrown.expect(AssertionError.class);
         this.performLogin(PsGithubTest.directiveWithoutAccessToken());
     }
@@ -102,7 +104,7 @@ public final class PsGithubTest {
      * @throws Exception If some problem inside.
      */
     @Test
-    public void canLogin() throws Exception {
+    void canLogin() throws Exception {
         this.performLogin(
             PsGithubTest.directiveWithoutAccessToken()
                 .add(PsGithubTest.ACCESS_TOKEN)
@@ -185,8 +187,10 @@ public final class PsGithubTest {
      * @param value Parameter value
      * @throws IOException  If some problem inside
      */
-    private static void assertParam(final Request req,
-        final CharSequence param, final String value)  throws IOException {
+    private static void assertParam(
+        final Request req,
+        final CharSequence param, final String value
+    ) throws IOException {
         MatcherAssert.assertThat(
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)

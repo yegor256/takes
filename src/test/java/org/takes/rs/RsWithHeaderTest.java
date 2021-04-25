@@ -26,21 +26,22 @@ package org.takes.rs;
 import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 
 /**
  * Test case for {@link RsWithHeader}.
  * @since 0.1
  */
-public final class RsWithHeaderTest {
+final class RsWithHeaderTest {
 
     /**
      * RsWithHeader can add headers.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsHeadersToResponse() throws IOException {
+    void addsHeadersToResponse() throws IOException {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithHeader(
@@ -63,13 +64,17 @@ public final class RsWithHeaderTest {
 
     /**
      * RsWithHeader can't add invalid headers.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void notAddsInvalidHeadersToResponse() throws IOException {
-        new RsWithHeader(
-            new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
-            "Host MY", "d.example.com"
-        ).head();
+    @Test
+    void notAddsInvalidHeadersToResponse() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                new RsWithHeader(
+                    new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
+                    "Host MY", "d.example.com"
+                ).head();
+            }
+        );
     }
 }

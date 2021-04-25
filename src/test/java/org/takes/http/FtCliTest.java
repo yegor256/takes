@@ -33,7 +33,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -43,7 +43,7 @@ import org.takes.facets.fork.TkFork;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FtCliTest {
+final class FtCliTest {
 
     /**
      * Temp directory.
@@ -57,7 +57,7 @@ public final class FtCliTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void understandsCommandLineArgs() throws Exception {
+    void understandsCommandLineArgs() throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {
             @Override

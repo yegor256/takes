@@ -29,7 +29,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
@@ -38,53 +39,65 @@ import org.takes.rs.RsEmpty;
  * Test of {@link PsAll}.
  * @since 0.22
  */
-public final class PsAllTest {
+final class PsAllTest {
 
     /**
      * Fails if PsAll with 0 Passes is created.
-     * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void thereShouldBeAtLeastOnePass() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                new ArrayList<Pass>(0),
-                0
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
+    @Test
+    void thereShouldBeAtLeastOnePass() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                MatcherAssert.assertThat(
+                    new PsAll(
+                        new ArrayList<Pass>(0),
+                        0
+                    ).enter(new RqFake()).has(),
+                    new IsEqual<>(false)
+                );
+            }
         );
     }
 
     /**
      * Fails if index is less then 0.
-     * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void indexMustBeNonNegative() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                Collections.singletonList(new PsFake(true)),
-                -1
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
+    @Test
+    void indexMustBeNonNegative() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                MatcherAssert.assertThat(
+                    new PsAll(
+                        Collections.singletonList(new PsFake(true)),
+                        -1
+                    ).enter(new RqFake()).has(),
+                    new IsEqual<>(false)
+                );
+            }
         );
     }
 
     /**
      * Fails if index is greater or equal to the number of Passes to enter.
-     * @throws Exception If fails
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void indexMustBeSmallEnough() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                Arrays.asList(
-                    new PsFake(true),
-                    new PsFake(false)
-                ),
-                2
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
+    @Test
+    void indexMustBeSmallEnough() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                MatcherAssert.assertThat(
+                    new PsAll(
+                        Arrays.asList(
+                            new PsFake(true),
+                            new PsFake(false)
+                        ),
+                        2
+                    ).enter(new RqFake()).has(),
+                    new IsEqual<>(false)
+                );
+            }
         );
     }
 
@@ -93,7 +106,7 @@ public final class PsAllTest {
      * @throws Exception If fails
      */
     @Test
-    public void testOneSuccessfull() throws Exception {
+    void testOneSuccessfull() throws Exception {
         MatcherAssert.assertThat(
             new PsAll(
                 Collections.singletonList(new PsFake(true)),
@@ -108,7 +121,7 @@ public final class PsAllTest {
      * @throws Exception if exception
      */
     @Test
-    public void testOneFail() throws Exception {
+    void testOneFail() throws Exception {
         MatcherAssert.assertThat(
             new PsAll(
                 Collections.singletonList(new PsFake(false)),
@@ -124,7 +137,7 @@ public final class PsAllTest {
      * @throws Exception If fails
      */
     @Test
-    public void testSuccessfullIdx() throws Exception {
+    void testSuccessfullIdx() throws Exception {
         final Pass resulting = new PsFixed(
             new Identity.Simple("urn:foo:test")
         );
@@ -148,7 +161,7 @@ public final class PsAllTest {
      * @throws Exception if exception
      */
     @Test
-    public void testFail() throws Exception {
+    void testFail() throws Exception {
         MatcherAssert.assertThat(
             new PsAll(
                 Arrays.asList(
@@ -168,7 +181,7 @@ public final class PsAllTest {
      * @throws Exception If fails
      */
     @Test
-    public void exits() throws Exception {
+    void exits() throws Exception {
         final Response response = new RsEmpty();
         final PsFake exiting = new PsFake(true);
         MatcherAssert.assertThat(

@@ -38,14 +38,13 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
-import org.takes.misc.PerformanceTests;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqPrint;
 import org.takes.rq.TempInputStream;
@@ -57,7 +56,7 @@ import org.takes.rs.RsText;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RqMtSmartTest {
+final class RqMtSmartTest {
     /**
      * Body element.
      */
@@ -97,7 +96,7 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnsCorrectPartLength() throws IOException {
+    void returnsCorrectPartLength() throws IOException {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
@@ -141,7 +140,7 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void identifiesBoundary() throws IOException {
+    void identifiesBoundary() throws IOException {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
@@ -184,7 +183,7 @@ public final class RqMtSmartTest {
      * @throws Exception if some problem inside
      */
     @Test
-    public void consumesHttpRequest() throws Exception {
+    void consumesHttpRequest() throws Exception {
         final String part = "f-1";
         final Take take = new Take() {
             @Override
@@ -237,8 +236,8 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    @Category(PerformanceTests.class)
-    public void handlesRequestInTime() throws IOException {
+    @Tag("performance")
+    void handlesRequestInTime() throws IOException {
         final int length = 100_000_000;
         final String part = "test";
         final File file = this.temp.newFile("handlesRequestInTime.tmp");
@@ -294,7 +293,7 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void notDistortContent() throws IOException {
+    void notDistortContent() throws IOException {
         final int length = 1_000_000;
         final String part = "test1";
         final File file = this.temp.newFile("notDistortContent.tmp");

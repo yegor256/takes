@@ -30,7 +30,8 @@ import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Response;
 
@@ -39,14 +40,14 @@ import org.takes.Response;
  * @since 1.0
  * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
-public final class RsPrettyXmlTest {
+final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with XML body.
      * @throws IOException If some problem inside
      */
     @Test
-    public void formatsXmlBody() throws IOException {
+    void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
             new BodyPrint(
                 new RsPrettyXml(
@@ -59,11 +60,10 @@ public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format HTML5 markup with proper DOCTYPE.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5DoctypeBody() throws IOException {
+    void formatsHtml5DoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new BodyPrint(
                 new RsPrettyXml(
@@ -79,11 +79,10 @@ public final class RsPrettyXmlTest {
     /**
      * RsPrettyXML can format HTML5 markup with DOCTYPE for
      * legacy browser support.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
+    void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new TextOf(
                 new BodyPrint(
@@ -121,11 +120,10 @@ public final class RsPrettyXmlTest {
     /**
      * RsPrettyXML can format HTML4 markup with DOCTYPE with public
      * and system id.
-     * @throws IOException If some problem inside
      */
     @Test
     // @checkstyle MethodNameCheck (1 line)
-    public void formatsHtml4DoctypeBody() throws IOException {
+    void formatsHtml4DoctypeBody() throws IOException {
         final String pid = "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" ";
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
@@ -167,11 +165,15 @@ public final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can format response with non XML body.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void formatsNonXmlBody() throws IOException {
-        new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString();
+    @Test
+    void formatsNonXmlBody() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString();
+            }
+        );
     }
 
     /**
@@ -179,7 +181,7 @@ public final class RsPrettyXmlTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void reportsCorrectContentLength() throws IOException {
+    void reportsCorrectContentLength() throws IOException {
         final int clength = new BodyPrint(
             new RsWithBody(
                 "<test>\n   <a>test</a>\n</test>\n"
@@ -205,7 +207,7 @@ public final class RsPrettyXmlTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void conformsToEqualsTest() throws Exception {
+    void conformsToEqualsTest() throws Exception {
         final Response response = new RsWithBody("<test> <a>test</a></test>");
         new Assertion<>(
             "Must evaluate true equality",

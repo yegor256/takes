@@ -28,7 +28,8 @@ import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
@@ -41,7 +42,7 @@ import org.takes.rq.RqWithHeaders;
  * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
-public final class RqMtBaseTest {
+final class RqMtBaseTest {
 
     /**
      * Body element.
@@ -81,7 +82,7 @@ public final class RqMtBaseTest {
      * @throws IOException if some problem inside
      */
     @Test
-    public void satisfiesEqualsContract() throws IOException {
+    void satisfiesEqualsContract() throws IOException {
         final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t-1";
         final Request req = new RqMtFake(
@@ -116,31 +117,35 @@ public final class RqMtBaseTest {
 
     /**
      * RqMtBase can throw exception on no closing boundary found.
-     * @throws IOException if some problem inside
      */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoClosingBoundaryFound() throws IOException {
-        final String host = "Host: rtw.example.com";
-        final String length = "Content-Length: 100007";
-        final String posthead = "POST /h?a=4 HTTP/1.1";
-        final String address = "447 N Wolfe Rd, Sunnyvale, CA 94085";
-        new RqMtBase(
-            new RqFake(
-                Arrays.asList(
-                    posthead,
-                    host,
-                    RqMtBaseTest.CONTENT_TYPE,
-                    length
-                ),
-                new Joined(
-                    RqMtBaseTest.CRLF,
-                    RqMtBaseTest.BODY_ELEMENT,
-                    "Content-Disposition: form-data; fake=\"t2\"",
-                    "",
-                    address,
-                    "Content-Transfer-Encoding: uwf-8"
-                ).asString()
-            )
+    @Test
+    void throwsExceptionOnNoClosingBoundaryFound() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                final String host = "Host: rtw.example.com";
+                final String length = "Content-Length: 100007";
+                final String posthead = "POST /h?a=4 HTTP/1.1";
+                final String address = "447 N Wolfe Rd, Sunnyvale, CA 94085";
+                new RqMtBase(
+                    new RqFake(
+                        Arrays.asList(
+                            posthead,
+                            host,
+                            RqMtBaseTest.CONTENT_TYPE,
+                            length
+                        ),
+                        new Joined(
+                            RqMtBaseTest.CRLF,
+                            RqMtBaseTest.BODY_ELEMENT,
+                            "Content-Disposition: form-data; fake=\"t2\"",
+                            "",
+                            address,
+                            "Content-Transfer-Encoding: uwf-8"
+                        ).asString()
+                    )
+                );
+            }
         );
     }
 
@@ -149,7 +154,7 @@ public final class RqMtBaseTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void producesPartsWithContentLength() throws IOException {
+    void producesPartsWithContentLength() throws IOException {
         final String part = "t2";
         final String host = "Host: rtw.example.com.br";
         final String length = "Content-Length: 100008";
@@ -176,8 +181,8 @@ public final class RqMtBaseTest {
         try {
             MatcherAssert.assertThat(
                 multipart.part(part)
-                .iterator()
-                .next(),
+                    .iterator()
+                    .next(),
                 new HmHeader<>(
                     "content-length",
                     "102"

@@ -28,7 +28,8 @@ import com.google.common.net.UrlEscapers;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
 
@@ -36,7 +37,7 @@ import org.takes.rq.RqForm;
  * Test case for {@link RqFormFake}.
  * @since 0.33
  */
-public final class RqFormFakeTest {
+final class RqFormFakeTest {
 
     /**
      * Content-Length header template.
@@ -48,7 +49,7 @@ public final class RqFormFakeTest {
      * @throws Exception If something goes wrong.
      */
     @Test
-    public void createsFormRequestWithParams() throws Exception {
+    void createsFormRequestWithParams() throws Exception {
         final String key = "key";
         final String akey = "anotherkey";
         final String value = "value";
@@ -93,14 +94,17 @@ public final class RqFormFakeTest {
     /**
      * RqFormFake throws an IllegalArgumentException when invoked with
      * wrong number of parameters.
-     * @throws Exception If something goes wrong.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void throwsExceptionWhenNotCorrectlyCreated()
-        throws Exception {
-        new RqFormFake(
-            new RqFake(),
-            "param"
+    @Test
+    void throwsExceptionWhenNotCorrectlyCreated() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                new RqFormFake(
+                    new RqFake(),
+                    "param"
+                );
+            }
         );
     }
 }

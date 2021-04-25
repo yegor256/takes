@@ -29,7 +29,8 @@ import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -52,8 +53,7 @@ import org.takes.rs.RsJson;
  * @since 0.16.3
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.TooManyMethods")
-public final class PsGoogleTest {
+@SuppressWarnings("PMD.TooManyMethods") final class PsGoogleTest {
 
     /**
      * Image.
@@ -136,7 +136,7 @@ public final class PsGoogleTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsIn() throws Exception {
+    void logsIn() throws Exception {
         final String octocat = "octocat";
         final String urn = "urn:google:1";
         final Take take = new TkFork(
@@ -211,50 +211,56 @@ public final class PsGoogleTest {
     /**
      * PsGoogle login with fail due a bad response from google.
      * @checkstyle MultipleStringLiteralsCheck (100 lines)
-     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void badGoogleResponse() throws Exception {
-        final Take take = new TkFork(
-            this.requestToken(),
-            new FkRegex(
-                PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqPrint(req).printHead(),
-                            Matchers.containsString(
-                                PsGoogleTest.ACT_HEAD
-                            )
-                        );
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href()
-                                .param(PsGoogleTest.ACCESS_TOKEN)
-                                .iterator().next(),
-                            Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                        );
-                        return createErrorJson();
+    @Test
+    void badGoogleResponse() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                final Take take = new TkFork(
+                    this.requestToken(),
+                    new FkRegex(
+                        PsGoogleTest.REGEX_PATTERN,
+                        // @checkstyle AnonInnerLengthCheck (1 line)
+                        new Take() {
+                            @Override
+                            public Response act(
+                                final Request req
+                            ) throws IOException {
+                                MatcherAssert.assertThat(
+                                    new RqPrint(req).printHead(),
+                                    Matchers.containsString(
+                                        PsGoogleTest.ACT_HEAD
+                                    )
+                                );
+                                MatcherAssert.assertThat(
+                                    new RqHref.Base(req).href()
+                                        .param(PsGoogleTest.ACCESS_TOKEN)
+                                        .iterator().next(),
+                                    Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
+                                );
+                                return createErrorJson();
+                            }
+                        }
+                    )
+                );
+                new FtRemote(take).exec(
+                    // @checkstyle AnonInnerLengthCheck (100 lines)
+                    new FtRemote.Script() {
+                        @Override
+                        public void exec(final URI home) throws IOException {
+                            new PsGoogle(
+                                PsGoogleTest.APP,
+                                PsGoogleTest.KEY,
+                                PsGoogleTest.ACCOUNT,
+                                home.toString(),
+                                home.toString()
+                            ).enter(
+                                new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                            ).get();
+                        }
                     }
-                }
-            )
-        );
-        new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new PsGoogle(
-                        PsGoogleTest.APP,
-                        PsGoogleTest.KEY,
-                        PsGoogleTest.ACCOUNT,
-                        home.toString(),
-                        home.toString()
-                    ).enter(
-                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                    ).get();
-                }
+                );
             }
         );
     }
@@ -265,7 +271,7 @@ public final class PsGoogleTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void noDisplayNameResponse() throws Exception {
+    void noDisplayNameResponse() throws Exception {
         final String urn = "urn:google:2";
         final Take take = new TkFork(
             this.requestToken(),
@@ -381,7 +387,7 @@ public final class PsGoogleTest {
                             .add(
                                 PsGoogleTest.ACCESS_TOKEN,
                                 PsGoogleTest.GOOGLE_TOKEN
-                             )
+                            )
                             .add("expires_in", 1)
                             .add("token_type", "Bearer")
                             .build()
@@ -398,8 +404,10 @@ public final class PsGoogleTest {
      * @param value Parameter value
      * @throws IOException If some problem inside
      */
-    private static void assertParam(final Request req,
-        final CharSequence param, final String value) throws IOException {
+    private static void assertParam(
+        final Request req,
+        final CharSequence param, final String value
+    ) throws IOException {
         MatcherAssert.assertThat(
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
@@ -436,8 +444,8 @@ public final class PsGoogleTest {
                             HttpURLConnection.HTTP_BAD_REQUEST
                         )
                         .add(message, "Access Not Configured.")
-                   )
-                  .build()
+                )
+                .build()
         );
     }
 }

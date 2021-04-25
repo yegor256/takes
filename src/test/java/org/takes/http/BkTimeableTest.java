@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.Response;
@@ -46,7 +46,7 @@ import org.takes.rs.RsText;
  * @since 0.14.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class BkTimeableTest {
+final class BkTimeableTest {
 
     /**
      * Temp directory.
@@ -60,7 +60,7 @@ public final class BkTimeableTest {
      * @throws java.lang.Exception If some problem inside
      */
     @Test
-    public void stopsLongRunningBack() throws Exception {
+    void stopsLongRunningBack() throws Exception {
         final String response = "interrupted";
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {

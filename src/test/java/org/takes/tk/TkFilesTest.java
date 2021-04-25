@@ -27,7 +27,8 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
@@ -38,7 +39,7 @@ import org.takes.rs.HeadPrint;
  * Test case for {@link TkFiles}.
  * @since 0.8
  */
-public final class TkFilesTest {
+final class TkFilesTest {
 
     /**
      * Temp directory.
@@ -51,7 +52,7 @@ public final class TkFilesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByFileName() throws Exception {
+    void dispatchesByFileName() throws Exception {
         FileUtils.write(
             this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
         );
@@ -69,12 +70,16 @@ public final class TkFilesTest {
 
     /**
      * TkFiles can throw when file not found.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws Exception {
-        new TkFiles("/absent-dir-for-sure").act(
-            new RqFake("PUT", "/something-else.txt", "")
+    @Test
+    void throwsWhenResourceNotFound() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new TkFiles("/absent-dir-for-sure").act(
+                    new RqFake("PUT", "/something-else.txt", "")
+                );
+            }
         );
     }
 }

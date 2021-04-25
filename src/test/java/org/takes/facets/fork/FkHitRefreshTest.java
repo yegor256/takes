@@ -30,7 +30,7 @@ import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.takes.Request;
 import org.takes.rq.RqFake;
@@ -41,7 +41,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkHitRefresh}.
  * @since 0.9
  */
-public final class FkHitRefreshTest {
+final class FkHitRefreshTest {
 
     /**
      * Temp directory.
@@ -54,7 +54,7 @@ public final class FkHitRefreshTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void refreshesOnDemand() throws Exception {
+    void refreshesOnDemand() throws Exception {
         final Request req = new RqWithHeader(
             new RqFake(), "X-Takes-HitRefresh: yes"
         );
@@ -83,7 +83,7 @@ public final class FkHitRefreshTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void ignoresWhenNoHeader() throws Exception {
+    void ignoresWhenNoHeader() throws Exception {
         final File dir = this.temp.getRoot();
         MatcherAssert.assertThat(
             new FkHitRefresh(

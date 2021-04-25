@@ -27,7 +27,8 @@ import java.io.IOException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.takes.facets.auth.Identity;
 
@@ -35,28 +36,36 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcStrict}.
  * @since 0.11.2
  */
-public final class CcStrictTest {
+final class CcStrictTest {
     /**
      * CcStrict can block empty urn.
-     * @throws IOException If some problem inside
      * @todo #877:30min replace all org.junit.Test occurrences in the project
      *  by JUnit 5 equivalent org.junit.jupiter.api.Test and replaces
      *  all expected Exceptions by Assertions.assertThrows. Check
      *  org.takes.facets.auth.codecs.CcAesTest or
      *  org.takes.facets.auth.codecs.CcSaltedTest as examples.
      */
-    @Test(expected = DecodingException.class)
-    public void blocksEmptyUrn() throws IOException {
-        new CcStrict(new CcPlain()).encode(new Identity.Simple(""));
+    @Test
+    void blocksEmptyUrn() {
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new CcStrict(new CcPlain()).encode(new Identity.Simple(""));
+            }
+        );
     }
 
     /**
      * CcStrict can block invalid urn.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = DecodingException.class)
-    public void blocksInvalidUrn() throws IOException {
-        new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes());
+    @Test
+    void blocksInvalidUrn() {
+        Assertions.assertThrows(
+            DecodingException.class,
+            () -> {
+                new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes());
+            }
+        );
     }
 
     /**
@@ -64,7 +73,7 @@ public final class CcStrictTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void canDecodeAnonymousIdentity() throws Exception {
+    void canDecodeAnonymousIdentity() throws Exception {
         final Codec codec = Mockito.mock(Codec.class);
         Mockito.when(codec.decode(Mockito.<byte[]>any())).thenReturn(
             Identity.ANONYMOUS
@@ -80,7 +89,7 @@ public final class CcStrictTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void passesValid() throws IOException {
+    void passesValid() throws IOException {
         MatcherAssert.assertThat(
             new String(
                 new CcStrict(new CcPlain()).encode(

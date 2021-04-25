@@ -33,8 +33,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link BodyPrint}.
  * @since 1.19
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class BodyPrintTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class BodyPrintTest {
 
     @Test
     void simple() throws IOException {

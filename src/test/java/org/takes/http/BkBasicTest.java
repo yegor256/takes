@@ -68,8 +68,7 @@ import org.takes.tk.TkText;
     {
         "PMD.ExcessiveImports",
         "PMD.TooManyMethods"
-    })
-final class BkBasicTest {
+    }) final class BkBasicTest {
 
     /**
      * Carriage return constant.
@@ -233,8 +232,11 @@ final class BkBasicTest {
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -292,8 +294,11 @@ final class BkBasicTest {
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }

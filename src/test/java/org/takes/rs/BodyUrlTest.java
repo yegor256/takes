@@ -50,10 +50,9 @@ final class BodyUrlTest {
     void returnsCorrectInputWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
             final Bytes body = new BytesOf("URL returnsCorrectInput!");
-            try (OutputStream outStream =
-                new OutputTo(file.value()).stream()) {
+            try (OutputStream out = new OutputTo(file.value()).stream()) {
                 new LengthOf(
-                    new TeeInput(body, new OutputTo(outStream))
+                    new TeeInput(body, new OutputTo(out))
                 ).intValue();
             }
             final Body.Url input = new Body.Url(file.value().toUri().toURL());
@@ -73,10 +72,9 @@ final class BodyUrlTest {
     void returnsCorrectLengthWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
             final Bytes body = new BytesOf("URL returnsCorrectLength!");
-            try (OutputStream outStream =
-                new OutputTo(file.value()).stream()) {
+            try (OutputStream out = new OutputTo(file.value()).stream()) {
                 new LengthOf(
-                    new TeeInput(body, new OutputTo(outStream))
+                    new TeeInput(body, new OutputTo(out))
                 ).intValue();
             }
             MatcherAssert.assertThat(
