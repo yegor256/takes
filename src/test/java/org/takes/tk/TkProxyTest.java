@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.llorllale.cactoos.matchers.TextHasString;
@@ -55,7 +55,7 @@ import org.takes.rs.RsText;
  */
 @RunWith(Parameterized.class)
 @SuppressWarnings("PMD.TooManyMethods")
-public final class TkProxyTest {
+final class TkProxyTest {
 
     /**
      * A {@code Take} implementation that returns the content of the request
@@ -109,7 +109,7 @@ public final class TkProxyTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorks() throws Exception {
+    void justWorks() throws Exception {
         new FtRemote(
             new TkFork(
                 new FkMethods(this.method, new TkFixed(this.expected))
@@ -139,7 +139,7 @@ public final class TkProxyTest {
      * @checkstyle AnonInnerLengthCheck (100 lines)
      */
     @Test
-    public void correctlyMapsPathString() throws Exception {
+    void correctlyMapsPathString() throws Exception {
         final Take take = new Take() {
             @Override
             public Response act(final Request req) throws IOException {
@@ -180,7 +180,7 @@ public final class TkProxyTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void modifiesHost() throws Exception {
+    void modifiesHost() throws Exception {
         new FtRemote(
             new TkFork(
                 new FkMethods(this.method, TkProxyTest.ECHO)
@@ -225,7 +225,7 @@ public final class TkProxyTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void addsSpecificHeader() throws Exception {
+    void addsSpecificHeader() throws Exception {
         final String mark = "foo";
         new FtRemote(
             new TkFork(
@@ -271,7 +271,7 @@ public final class TkProxyTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void addsAllInitialHeaders() throws Exception {
+    void addsAllInitialHeaders() throws Exception {
         final String body = "Hello World !";
         new FtRemote(
             new TkFork(

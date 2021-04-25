@@ -35,13 +35,13 @@ import org.llorllale.cactoos.matchers.Throws;
  * Test case for {@link HeadPrint}.
  * @since 1.19
  */
-public final class HeadPrintTest {
+final class HeadPrintTest {
 
     /**
      * HeadPrint can fail on invalid chars.
      * @throws IOException If some problem inside
      */
-    public void failsOnInvalidHeader() throws IOException {
+    void failsOnInvalidHeader() throws IOException {
         MatcherAssert.assertThat(
             "Must catch invalid header exception",
             () -> {
@@ -54,7 +54,7 @@ public final class HeadPrintTest {
     }
 
     @Test
-    public void simple() throws IOException {
+    void simple() throws IOException {
         MatcherAssert.assertThat(
             "must write head",
             new HeadPrint(
@@ -68,7 +68,7 @@ public final class HeadPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    public void simpleWithDash() throws IOException {
+    void simpleWithDash() throws IOException {
         new Assertion<>(
             "must write head with dashes",
             new HeadPrint(

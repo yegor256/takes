@@ -34,10 +34,10 @@ import org.junit.jupiter.api.Test;
  * @since 1.19
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class BodyPrintTest {
+final class BodyPrintTest {
 
     @Test
-    public void simple() throws IOException {
+    void simple() throws IOException {
         MatcherAssert.assertThat(
             "must write body",
             new BodyPrint(
