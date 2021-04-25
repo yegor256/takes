@@ -23,9 +23,10 @@
  */
 package org.takes.facets.auth.codecs;
 
-import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.util.Map;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -78,7 +79,7 @@ final class CcBase64Test {
     void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:Hello World!";
         final Map<String, String> properties =
-            ImmutableMap.of("userName", "user");
+            new MapOf<String, String>(new MapEntry<>("userName", "user"));
         final Codec codec = new CcBase64(new CcPlain());
         final Identity expected = codec.decode(
             codec.encode(new Identity.Simple(urn, properties))
