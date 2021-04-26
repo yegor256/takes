@@ -29,10 +29,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import lombok.EqualsAndHashCode;
-import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.io.OutputTo;
+import org.cactoos.io.TeeInput;
 import org.cactoos.io.WriterTo;
-import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.LengthOf;
+import org.cactoos.text.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
 
@@ -48,10 +50,6 @@ public final class RqPrint extends RqWrap implements Text {
 
     /**
      * The textual representation.
-     * @todo #1050:30m Text lacks a decorator for caching its value.
-     *  The anonymous implementation here probably belongs to cactoos.
-     *  Extract it as a separate class. After that add a new puzzle to do
-     *  the same for the rest of Text implementing classes (such as RsPrint).
      */
     private final Text text;
 
@@ -62,26 +60,16 @@ public final class RqPrint extends RqWrap implements Text {
      */
     public RqPrint(final Request req) {
         super(req);
-        this.text = new Text() {
-            private final Scalar<String> scalar = new Sticky<>(
-                new Scalar<String>() {
-                    private final ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-
-                    @Override
-                    public String value() throws Exception {
-                        RqPrint.this.printHead(this.baos);
-                        RqPrint.this.printBody(this.baos);
-                        return new TextOf(this.baos.toByteArray()).asString();
-                    }
+        this.text = new Sticky(
+            new TextOf(
+                () -> {
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    RqPrint.this.printHead(baos);
+                    RqPrint.this.printBody(baos);
+                    return new TextOf(baos.toByteArray()).asString();
                 }
-            );
-
-            @Override
-            public String asString() throws Exception {
-                return this.scalar.value();
-            }
-        };
+            )
+        );
     }
 
     /**
@@ -90,9 +78,10 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public String print() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.print(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            this.print(baos);
+            return new TextOf(baos.toByteArray()).toString();
+        }
     }
 
     /**
@@ -101,8 +90,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
-        this.printHead(output);
-        this.printBody(output);
+        new LengthOf(new TeeInput(this.text, new OutputTo(output))).intValue();
     }
 
     /**
@@ -113,7 +101,7 @@ public final class RqPrint extends RqWrap implements Text {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).toString();
     }
 
     /**
@@ -141,7 +129,7 @@ public final class RqPrint extends RqWrap implements Text {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).toString();
     }
 
     /**
