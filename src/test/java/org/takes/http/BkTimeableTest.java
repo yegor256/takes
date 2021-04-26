@@ -33,9 +33,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -49,18 +48,12 @@ import org.takes.rs.RsText;
 final class BkTimeableTest {
 
     /**
-     * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
      * BkTimeable can stop long running Back.
+     * @param temp Temporary temp.
      * @throws java.lang.Exception If some problem inside
      */
     @Test
-    void stopsLongRunningBack() throws Exception {
+    void stopsLongRunningBack(@TempDir final File temp) throws Exception {
         final String response = "interrupted";
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = new Exit() {
@@ -85,8 +78,7 @@ final class BkTimeableTest {
                 return rsp;
             }
         };
-        final File file = this.temp.newFile();
-        file.delete();
+        temp.delete();
         final Thread thread = new Thread(
             new Runnable() {
                 @Override
@@ -94,7 +86,7 @@ final class BkTimeableTest {
                     try {
                         new FtCli(
                             take,
-                            String.format("--port=%s", file.getAbsoluteFile()),
+                            String.format("--port=%s", temp.getAbsoluteFile()),
                             "--threads=1",
                             "--lifetime=4000",
                             "--max-latency=100"
@@ -108,7 +100,7 @@ final class BkTimeableTest {
         thread.start();
         ready.await();
         final int port = Integer.parseInt(
-            FileUtils.readFileToString(file, StandardCharsets.UTF_8)
+            FileUtils.readFileToString(temp, StandardCharsets.UTF_8)
         );
         new JdkRequest(String.format("http://localhost:%d", port))
             .fetch()

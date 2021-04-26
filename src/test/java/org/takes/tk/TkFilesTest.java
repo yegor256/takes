@@ -24,12 +24,12 @@
 package org.takes.tk;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
-import org.junit.Rule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
@@ -42,23 +42,19 @@ import org.takes.rs.HeadPrint;
 final class TkFilesTest {
 
     /**
-     * Temp directory.
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
      * TkFiles can dispatch by file name.
+     * @param temp Temporary folder.
      * @throws Exception If some problem inside
      */
     @Test
-    void dispatchesByFileName() throws Exception {
+    void dispatchesByFileName(@TempDir final Path temp) throws Exception {
         FileUtils.write(
-            this.temp.newFile("a.txt"), "hello, world!", StandardCharsets.UTF_8
+            temp.resolve("a.txt").toFile(), "hello, world!",
+            StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
             new HeadPrint(
-                new TkFiles(this.temp.getRoot()).act(
+                new TkFiles(temp.toFile()).act(
                     new RqFake(
                         "GET", "/a.txt?hash=a1b2c3", ""
                     )

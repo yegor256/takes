@@ -24,14 +24,14 @@
 package org.takes.facets.fork;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -44,33 +44,23 @@ import org.takes.tk.TkEmpty;
 final class FkHitRefreshTest {
 
     /**
-     * Temp directory.
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
      * FkHitRefresh can refresh on demand.
+     * @param temp Temporary folder.
      * @throws Exception If some problem inside
      */
     @Test
-    void refreshesOnDemand() throws Exception {
+    void refreshesOnDemand(@TempDir final Path temp) throws Exception {
         final Request req = new RqWithHeader(
             new RqFake(), "X-Takes-HitRefresh: yes"
         );
         final AtomicBoolean done = new AtomicBoolean(false);
         final Fork fork = new FkHitRefresh(
-            this.temp.getRoot(),
-            new Runnable() {
-                @Override
-                public void run() {
-                    done.set(true);
-                }
-            },
+            temp.toFile(),
+            () -> done.set(true),
             new TkEmpty()
         );
         TimeUnit.SECONDS.sleep(2L);
-        FileUtils.touch(this.temp.newFile("hey.txt"));
+        FileUtils.touch(temp.resolve("hey.txt").toFile());
         MatcherAssert.assertThat(
             fork.route(req).has(),
             Matchers.is(true)
@@ -80,14 +70,14 @@ final class FkHitRefreshTest {
 
     /**
      * FkHitRefresh can ignore when header is absent.
+     * @param temp Temporary folder.
      * @throws Exception If some problem inside
      */
     @Test
-    void ignoresWhenNoHeader() throws Exception {
-        final File dir = this.temp.getRoot();
+    void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
         MatcherAssert.assertThat(
             new FkHitRefresh(
-                dir, "", new TkEmpty()
+                temp, "", new TkEmpty()
             ).route(new RqFake()).has(),
             Matchers.is(false)
         );
