@@ -64,8 +64,8 @@ public final class RqPrint extends RqWrap implements Text {
             new TextOf(
                 () -> {
                     final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    RqPrint.this.printHead(baos);
-                    RqPrint.this.printBody(baos);
+                    this.printHead(baos);
+                    this.printBody(baos);
                     return new TextOf(baos.toByteArray()).asString();
                 }
             )

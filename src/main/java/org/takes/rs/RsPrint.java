@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Bytes;
