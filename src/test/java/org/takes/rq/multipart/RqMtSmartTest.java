@@ -109,7 +109,7 @@ public final class RqMtSmartTest {
                 "",
                 StringUtils.repeat("X", length),
                 String.format("%s--", RqMtSmartTest.BODY_ELEMENT)
-            ).asString();
+            ).toString();
         final Request req = new RqFake(
             Arrays.asList(
                 post,
@@ -153,7 +153,7 @@ public final class RqMtSmartTest {
                 StringUtils.repeat("F", length),
                 "",
                 "----foo--"
-            ).asString();
+            ).toString();
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
@@ -250,7 +250,7 @@ public final class RqMtSmartTest {
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            ).asString()
+            ).toString()
         );
         for (int ind = 0; ind < length; ++ind) {
             bwr.write("X");
@@ -306,7 +306,7 @@ public final class RqMtSmartTest {
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            ).asString();
+            ).toString();
         bwr.write(head);
         final int byt = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
@@ -318,7 +318,7 @@ public final class RqMtSmartTest {
                 "",
                 "--zzz1--",
                 ""
-            ).asString();
+            ).toString();
         bwr.write(foot);
         bwr.close();
         final String post = "POST /post?u=5 HTTP/1.1";

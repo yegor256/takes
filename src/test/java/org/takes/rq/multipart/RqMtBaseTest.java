@@ -139,7 +139,7 @@ public final class RqMtBaseTest {
                     "",
                     address,
                     "Content-Transfer-Encoding: uwf-8"
-                ).asString()
+                ).toString()
             )
         );
     }
@@ -170,7 +170,7 @@ public final class RqMtBaseTest {
                     "",
                     address,
                     RqMtBaseTest.BODY_ELEMENT
-                ).asString()
+                ).toString()
             )
         );
         try {

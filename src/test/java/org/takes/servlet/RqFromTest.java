@@ -106,7 +106,7 @@ final class RqFromTest {
                     header,
                     RqFromTest.LOCAL_ADDRESS,
                     RqFromTest.REMOTE_ADDRESS
-                ).asString()
+                ).toString()
             )
         );
     }
@@ -137,7 +137,7 @@ final class RqFromTest {
                     header,
                     RqFromTest.LOCAL_ADDRESS,
                     RqFromTest.REMOTE_ADDRESS
-                ).asString()
+                ).toString()
             )
         );
     }
@@ -168,7 +168,7 @@ final class RqFromTest {
                     header,
                     RqFromTest.LOCAL_ADDRESS,
                     RqFromTest.REMOTE_ADDRESS
-                ).asString()
+                ).toString()
             )
         );
     }

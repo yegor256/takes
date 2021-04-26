@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.cactoos.list.Mapped;
+import org.cactoos.iterable.Mapped;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;

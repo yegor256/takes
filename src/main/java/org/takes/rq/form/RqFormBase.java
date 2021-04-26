@@ -93,7 +93,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 new FormattedText(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()
-                ).asString()
+                ).toString()
             );
         } else {
             iter = new VerboseIterable<>(
@@ -101,7 +101,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 new FormattedText(
                     "there are only %d params by name \"%s\"",
                     values.size(), key
-                ).asString()
+                ).toString()
             );
         }
         return iter;

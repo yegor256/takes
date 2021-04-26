@@ -36,7 +36,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;

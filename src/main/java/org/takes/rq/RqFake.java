@@ -29,8 +29,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 
 /**
  * Fake request (for unit tests).

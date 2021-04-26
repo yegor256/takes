@@ -48,14 +48,14 @@ public final class HeadPrint implements Head, Text {
     /**
      * The HTTP Response.
      */
-    private final Response response;
+    private final Head head;
 
     /**
      * Ctor.
-     * @param res Original response
+     * @param head Original head
      */
-    public HeadPrint(final Response res) {
-        this.response = res;
+    public HeadPrint(final Head head) {
+        this.head = head;
     }
 
     @Override
@@ -68,12 +68,12 @@ public final class HeadPrint implements Head, Text {
             ),
             HeadPrint.EOL,
             HeadPrint.EOL
-        ).asString();
+        ).toString();
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        return this.response.head();
+        return this.head.head();
     }
 
 }
