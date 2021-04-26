@@ -106,7 +106,7 @@ SOFTWARE.
          https://github.com/yegor256/takes/pull/886#issuecomment-446030223
          for details.
        -->
-      <version>0.44</version>
+      <version>0.49</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
@@ -298,6 +298,11 @@ SOFTWARE.
           <artifactId>jsr305</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>
