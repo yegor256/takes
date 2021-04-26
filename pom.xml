@@ -299,11 +299,6 @@ SOFTWARE.
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
   <build>
     <testResources>
