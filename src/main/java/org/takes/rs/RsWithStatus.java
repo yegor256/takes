@@ -46,6 +46,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
