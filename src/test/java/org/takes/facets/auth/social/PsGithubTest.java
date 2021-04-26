@@ -28,10 +28,8 @@ import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.migrationsupport.rules.EnableRuleMigrationSupport;
-import org.junit.rules.ExpectedException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -54,7 +52,7 @@ import org.xembly.Directives;
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@EnableRuleMigrationSupport final class PsGithubTest {
+final class PsGithubTest {
 
     /**
      * GitHubToken.
@@ -83,20 +81,15 @@ import org.xembly.Directives;
     private static final String OCTOCAT = "octocat";
 
     /**
-     * A Junit Exception test variable.
-     */
-    @Rule
-    @SuppressWarnings("deprecation")
-    public final ExpectedException thrown = ExpectedException.none();
-
-    /**
      * PsGithub can fail on no access token.
      * @throws Exception If some problem inside.
      */
     @Test
     void failsOnNoAccessToken() throws Exception {
-        this.thrown.expect(AssertionError.class);
-        this.performLogin(PsGithubTest.directiveWithoutAccessToken());
+        Assertions.assertThrows(
+            AssertionError.class,
+            () -> this.performLogin(PsGithubTest.directiveWithoutAccessToken())
+        );
     }
 
     /**
