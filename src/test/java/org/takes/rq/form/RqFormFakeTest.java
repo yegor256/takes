@@ -30,7 +30,6 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
-import org.takes.rq.RqPrint;
 
 /**
  * Test case for {@link RqFormFake}.
@@ -73,7 +72,6 @@ public final class RqFormFakeTest {
             key, avalue,
             akey, aavalue
         );
-        new RqPrint(req).printBody(System.err);
         MatcherAssert.assertThat(
             req.param(key),
             Matchers.hasItems(value, avalue)
