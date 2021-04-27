@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
 import org.takes.Response;
@@ -119,7 +119,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new TextOf(this.codec.encode(idt)).asString();
+            text = new TextOf(this.codec.encode(idt)).toString();
         }
         return new RsWithCookie(
             res, this.cookie, text,

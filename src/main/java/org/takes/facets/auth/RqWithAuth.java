@@ -110,7 +110,7 @@ public final class RqWithAuth extends RqWrap {
         return new RqWithHeader(
             req,
             header,
-            new TextOf(new CcPlain().encode(identity)).asString()
+            new TextOf(new CcPlain().encode(identity)).toString()
         );
     }
 

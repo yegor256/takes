@@ -25,7 +25,7 @@ package org.takes.rs;
 
 import java.io.OutputStream;
 import org.cactoos.Bytes;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
 import org.cactoos.io.TempFile;

@@ -24,7 +24,7 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
@@ -45,7 +45,7 @@ public final class RsPrintTest {
      * @throws IOException If some problem inside
      */
     @Test(expected = IllegalArgumentException.class)
-    public void failsOnInvalidHeader() throws IOException {
+    public void failsOnInvalidHeader() throws Exception {
         new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
     }
 
@@ -74,7 +74,7 @@ public final class RsPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    public void simpleWithDash() throws IOException {
+    public void simpleWithDash() throws Exception {
         new Assertion<>(
             "must write head with dashes",
             new RsPrint(

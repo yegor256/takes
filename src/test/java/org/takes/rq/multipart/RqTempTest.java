@@ -26,7 +26,7 @@ package org.takes.rq.multipart;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

@@ -29,8 +29,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Response;
 
 /**

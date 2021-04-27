@@ -71,7 +71,7 @@ public final class BodyPrint implements Body, Text {
         } finally {
             baos.flush();
         }
-        return new TextOf(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).toString();
     }
 
     @Override

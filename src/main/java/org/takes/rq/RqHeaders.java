@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
@@ -101,7 +102,7 @@ public interface RqHeaders extends Request {
             if (values.isEmpty()) {
                 list = new VerboseList<>(
                     Collections.emptyList(),
-                    String.format(
+                    new FormattedText(
                         // @checkstyle LineLengthCheck (1 line)
                         "there are no headers by name \"%s\" among %d others: %s",
                         key,
@@ -112,7 +113,7 @@ public interface RqHeaders extends Request {
             } else {
                 list = new VerboseList<>(
                     values,
-                    String.format(
+                    new FormattedText(
                         // @checkstyle LineLengthCheck (1 line)
                         "there are only %d headers by name \"%s\"",
                         values.size(),

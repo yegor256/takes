@@ -30,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
@@ -109,11 +110,11 @@ public final class RqLive extends RqWrap {
         if (input.read() != '\n') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
+                new FormattedText(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new TextOf(baos.toByteArray()).asString()
-                )
+                    new TextOf(baos.toByteArray())
+                ).toString()
             );
         }
     }
@@ -160,7 +161,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new TextOf(baos.toByteArray()).asString()
+                    new TextOf(baos.toByteArray())
                 )
             );
         }

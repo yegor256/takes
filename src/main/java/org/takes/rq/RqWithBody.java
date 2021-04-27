@@ -25,8 +25,8 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Request;
 
 /**

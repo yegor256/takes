@@ -28,6 +28,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import org.cactoos.Text;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Verbose List that wraps OutOfBoundsException with custom message.
@@ -46,14 +48,14 @@ public final class VerboseList<T> implements List<T> {
     /**
      * Error message for IndexOutOfBoundsException.
      */
-    private final String message;
+    private final Text message;
 
     /**
      * Ctor.
      * @param list Original list
      * @param msg Error message for IndexOutOfBoundsException
      */
-    public VerboseList(final List<T> list, final String msg) {
+    public VerboseList(final List<T> list, final Text msg) {
         this.origin = list;
         this.message = msg;
     }
@@ -210,7 +212,9 @@ public final class VerboseList<T> implements List<T> {
     private IndexOutOfBoundsException wrapException(
         final IndexOutOfBoundsException cause) {
         final IndexOutOfBoundsException exc =
-            new IndexOutOfBoundsException(this.message);
+            new IndexOutOfBoundsException(
+                new UncheckedText(this.message).asString()
+            );
         exc.initCause(cause);
         return exc;
     }

@@ -23,14 +23,13 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Bytes;
 import org.cactoos.Text;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
+import org.cactoos.text.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
 
@@ -51,12 +50,12 @@ public final class RsPrint extends RsWrap implements Text, Bytes {
     /**
      * Head print representation.
      */
-    private final HeadPrint head;
+    private final Text head;
 
     /**
      * Body print representation.
      */
-    private final BodyPrint body;
+    private final Text body;
 
     /**
      * Ctor.
@@ -64,12 +63,12 @@ public final class RsPrint extends RsWrap implements Text, Bytes {
      */
     public RsPrint(final Response res) {
         super(res);
-        this.head = new HeadPrint(res);
-        this.body = new BodyPrint(res);
+        this.head = new Sticky(new HeadPrint(res));
+        this.body = new Sticky(new BodyPrint(res));
     }
 
     @Override
-    public String asString() throws IOException {
+    public String asString() throws Exception {
         return new Joined(
             new TextOf(""),
             this.head,
@@ -79,9 +78,6 @@ public final class RsPrint extends RsWrap implements Text, Bytes {
 
     @Override
     public byte[] asBytes() throws Exception {
-        return new BytesOf(
-            this.asString(),
-            StandardCharsets.UTF_8
-        ).asBytes();
+        return new BytesOf(this.asString()).asBytes();
     }
 }

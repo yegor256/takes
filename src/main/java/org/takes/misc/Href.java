@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import org.cactoos.text.FormattedText;
 
 /**
  * HTTP URI/HREF.
@@ -190,7 +191,7 @@ public final class Href implements CharSequence {
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                String.format(
+                new FormattedText(
                     "there are no URI params by name \"%s\" among %d others",
                     key, this.params.size()
                 )
@@ -198,7 +199,7 @@ public final class Href implements CharSequence {
         } else {
             iter = new VerboseIterable<>(
                 values,
-                String.format(
+                new FormattedText(
                     "there are only %d URI params by name \"%s\"",
                     values.size(), key
                 )

@@ -65,7 +65,7 @@ final class ChunkedInputStreamTest {
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ).asString(),
+                ).toString(),
                 StandardCharsets.UTF_8
             )
         );
@@ -102,7 +102,7 @@ final class ChunkedInputStreamTest {
                     third,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ).asString(),
+                ).toString(),
                 StandardCharsets.UTF_8
             )
         );
@@ -133,7 +133,7 @@ final class ChunkedInputStreamTest {
                     data,
                     ChunkedInputStreamTest.END_OF_CHUNK,
                     ""
-                ).asString(),
+                ).toString(),
                 StandardCharsets.UTF_8
             )
         );

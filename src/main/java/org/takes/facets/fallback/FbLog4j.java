@@ -26,7 +26,7 @@ package org.takes.facets.fallback;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.apache.log4j.Logger;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
 import org.takes.Response;
 import org.takes.misc.Opt;
