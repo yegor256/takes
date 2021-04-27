@@ -34,7 +34,13 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
+import org.cactoos.Text;
+import org.cactoos.io.OutputTo;
+import org.cactoos.io.TeeInput;
+import org.cactoos.scalar.LengthOf;
+import org.cactoos.scalar.SumOf;
 import org.cactoos.text.Joined;
+import org.cactoos.text.UncheckedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -101,7 +107,7 @@ public final class RqMtSmartTest {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
@@ -109,13 +115,13 @@ public final class RqMtSmartTest {
                 "",
                 StringUtils.repeat("X", length),
                 String.format("%s--", RqMtSmartTest.BODY_ELEMENT)
-            ).toString();
+            );
         final Request req = new RqFake(
             Arrays.asList(
                 post,
                 "Host: www.example.com",
                 RqMtSmartTest.contentLengthHeader(
-                    (long) body.getBytes().length
+                    new LengthOf(body).longValue()
                 ),
                 RqMtSmartTest.CONTENT_TYPE
             ),
@@ -144,7 +150,7 @@ public final class RqMtSmartTest {
     public void identifiesBoundary() throws IOException {
         final int length = 9000;
         final String part = "foo-1";
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 "----foo",
@@ -153,13 +159,13 @@ public final class RqMtSmartTest {
                 StringUtils.repeat("F", length),
                 "",
                 "----foo--"
-            ).toString();
+            );
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
                 "Host: www.foo.com",
                 RqMtSmartTest.contentLengthHeader(
-                    (long) body.getBytes().length
+                    new LengthOf(body).longValue()
                 ),
                 "Content-Type: multipart/form-data; boundary=--foo"
             ),
@@ -198,13 +204,13 @@ public final class RqMtSmartTest {
                 );
             }
         };
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 "--AaB0zz",
                 String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
-            ).asString();
+            );
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new FtRemote.Script() {
@@ -218,10 +224,12 @@ public final class RqMtSmartTest {
                         )
                         .header(
                             "Content-Length",
-                            String.valueOf(body.getBytes().length)
+                            String.valueOf(
+                                new LengthOf(body).longValue()
+                            )
                         )
                         .body()
-                        .set(body)
+                        .set(new UncheckedText(body).asString())
                         .back()
                         .fetch()
                         .as(RestResponse.class)
@@ -294,7 +302,7 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void notDistortContent() throws IOException {
+    public void notDistortContent() throws Exception {
         final int length = 1_000_000;
         final String part = "test1";
         final File file = this.temp.newFile("notDistortContent.tmp");
@@ -306,7 +314,7 @@ public final class RqMtSmartTest {
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            ).toString();
+            ).asString();
         bwr.write(head);
         final int byt = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
@@ -318,7 +326,7 @@ public final class RqMtSmartTest {
                 "",
                 "--zzz1--",
                 ""
-            ).toString();
+            ).asString();
         bwr.write(foot);
         bwr.close();
         final String post = "POST /post?u=5 HTTP/1.1";

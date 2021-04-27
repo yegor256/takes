@@ -29,8 +29,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.bytes.UncheckedBytes;
+import org.cactoos.io.InputStreamOf;
 
 /**
  * Fake request (for unit tests).
@@ -94,6 +96,18 @@ public final class RqFake extends RqWrap {
             new UncheckedBytes(
                 new BytesOf(body.toString())
             ).asBytes());
+    }
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    public RqFake(final List<String> head, final Text body) {
+        this(
+            head,
+            new InputStreamOf(body)
+        );
     }
 
     /**
