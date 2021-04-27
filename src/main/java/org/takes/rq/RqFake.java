@@ -54,7 +54,7 @@ public final class RqFake extends RqWrap {
      * @param method HTTP method
      */
     public RqFake(final CharSequence method) {
-        this(method, "/");
+        this(method, "/ HTTP/1.1 ");
     }
 
     /**
