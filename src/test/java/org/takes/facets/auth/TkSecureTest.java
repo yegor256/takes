@@ -27,8 +27,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.facets.forward.RsForward;
@@ -47,18 +45,10 @@ final class TkSecureTest {
      */
     @Test
     void failsOnAnonymous() {
+        final Take secure = new TkSecure(request -> new RsEmpty());
         Assertions.assertThrows(
             RsForward.class,
-            () -> {
-                new TkSecure(
-                    new Take() {
-                        @Override
-                        public Response act(final Request request) {
-                            return new RsEmpty();
-                        }
-                    }
-                ).act(new RqFake());
-            }
+            () -> secure.act(new RqFake())
         );
     }
 
@@ -70,12 +60,7 @@ final class TkSecureTest {
     void passesOnRegisteredUser() throws Exception {
         MatcherAssert.assertThat(
             new TkSecure(
-                new Take() {
-                    @Override
-                    public Response act(final Request request) {
-                        return new RsEmpty();
-                    }
-                }
+                request -> new RsEmpty()
             ).act(
                 new RqWithHeader(
                     new RqFake(),

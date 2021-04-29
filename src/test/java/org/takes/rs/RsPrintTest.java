@@ -24,6 +24,7 @@
 package org.takes.rs;
 
 import java.io.IOException;
+import org.cactoos.Text;
 import org.cactoos.io.BytesOf;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
@@ -46,11 +47,10 @@ final class RsPrintTest {
      */
     @Test
     void failsOnInvalidHeader() {
+        final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
-            }
+            response::asString
         );
     }
 

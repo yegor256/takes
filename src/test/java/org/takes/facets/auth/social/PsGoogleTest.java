@@ -53,7 +53,8 @@ import org.takes.rs.RsJson;
  * @since 0.16.3
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.TooManyMethods") final class PsGoogleTest {
+@SuppressWarnings("PMD.TooManyMethods")
+final class PsGoogleTest {
 
     /**
      * Image.
@@ -214,52 +215,42 @@ import org.takes.rs.RsJson;
      */
     @Test
     void badGoogleResponse() {
+        final Take take = new TkFork(
+            this.requestToken(),
+            new FkRegex(
+                PsGoogleTest.REGEX_PATTERN,
+                // @checkstyle AnonInnerLengthCheck (1 line)
+                (Take) req -> {
+                    MatcherAssert.assertThat(
+                        new RqPrint(req).printHead(),
+                        Matchers.containsString(
+                            PsGoogleTest.ACT_HEAD
+                        )
+                    );
+                    MatcherAssert.assertThat(
+                        new RqHref.Base(req).href()
+                            .param(PsGoogleTest.ACCESS_TOKEN)
+                            .iterator().next(),
+                        Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
+                    );
+                    return createErrorJson();
+                }
+            )
+        );
         Assertions.assertThrows(
             IOException.class,
             () -> {
-                final Take take = new TkFork(
-                    this.requestToken(),
-                    new FkRegex(
-                        PsGoogleTest.REGEX_PATTERN,
-                        // @checkstyle AnonInnerLengthCheck (1 line)
-                        new Take() {
-                            @Override
-                            public Response act(
-                                final Request req
-                            ) throws IOException {
-                                MatcherAssert.assertThat(
-                                    new RqPrint(req).printHead(),
-                                    Matchers.containsString(
-                                        PsGoogleTest.ACT_HEAD
-                                    )
-                                );
-                                MatcherAssert.assertThat(
-                                    new RqHref.Base(req).href()
-                                        .param(PsGoogleTest.ACCESS_TOKEN)
-                                        .iterator().next(),
-                                    Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                                );
-                                return createErrorJson();
-                            }
-                        }
-                    )
-                );
                 new FtRemote(take).exec(
                     // @checkstyle AnonInnerLengthCheck (100 lines)
-                    new FtRemote.Script() {
-                        @Override
-                        public void exec(final URI home) throws IOException {
-                            new PsGoogle(
-                                PsGoogleTest.APP,
-                                PsGoogleTest.KEY,
-                                PsGoogleTest.ACCOUNT,
-                                home.toString(),
-                                home.toString()
-                            ).enter(
-                                new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                            ).get();
-                        }
-                    }
+                    home -> new PsGoogle(
+                        PsGoogleTest.APP,
+                        PsGoogleTest.KEY,
+                        PsGoogleTest.ACCOUNT,
+                        home.toString(),
+                        home.toString()
+                    ).enter(
+                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                    ).get()
                 );
             }
         );

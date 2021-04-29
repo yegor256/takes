@@ -27,6 +27,7 @@ package org.takes.tk;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 
 /**
@@ -49,11 +50,10 @@ final class TkSlf4jTest {
      */
     @Test
     void logsException() {
+        final Take take = new TkSlf4j(new TkFailure(new IOException("")));
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
-            }
+            () -> take.act(new RqFake())
         );
     }
 
@@ -62,11 +62,10 @@ final class TkSlf4jTest {
      */
     @Test
     void logsRuntimeException() {
+        final Take take = new TkSlf4j(new TkFailure(new RuntimeException("")));
         Assertions.assertThrows(
             RuntimeException.class,
-            () -> {
-                new TkSlf4j(new TkFailure(new RuntimeException(""))).act(new RqFake());
-            }
+            () -> take.act(new RqFake())
         );
     }
 
@@ -76,6 +75,9 @@ final class TkSlf4jTest {
      */
     @Test
     void logsEmptyMessage() throws Exception {
-        new TkSlf4j(new TkEmpty()).act(new RqFake());
+        final Take take = new TkSlf4j(new TkEmpty());
+        Assertions.assertDoesNotThrow(
+            () -> take.act(new RqFake())
+        );
     }
 }
