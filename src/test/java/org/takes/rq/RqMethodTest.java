@@ -27,20 +27,21 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
  * @since 0.9.1
  */
-public final class RqMethodTest {
+final class RqMethodTest {
 
     /**
      * RqMethod can return its method.
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnsMethod() throws IOException {
+    void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
             new RqMethod.Base(new RqFake(RqMethod.POST)).method(),
             Matchers.equalTo(RqMethod.POST)
@@ -53,13 +54,13 @@ public final class RqMethodTest {
      */
     @Test
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-    public void supportsAllStandardMethods() throws IOException {
+    void supportsAllStandardMethods() throws IOException {
         for (final String method
             : Arrays.asList(
-                RqMethod.DELETE, RqMethod.GET, RqMethod.HEAD, RqMethod.OPTIONS,
-                RqMethod.PATCH, RqMethod.POST, RqMethod.PUT, RqMethod.TRACE,
-                RqMethod.CONNECT
-            )
+            RqMethod.DELETE, RqMethod.GET, RqMethod.HEAD, RqMethod.OPTIONS,
+            RqMethod.PATCH, RqMethod.POST, RqMethod.PUT, RqMethod.TRACE,
+            RqMethod.CONNECT
+        )
         ) {
             MatcherAssert.assertThat(
                 new RqMethod.Base(new RqFake(method)).method(),
@@ -73,7 +74,7 @@ public final class RqMethodTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void supportsExtensionMethods() throws IOException {
+    void supportsExtensionMethods() throws IOException {
         final String method = "CUSTOM";
         MatcherAssert.assertThat(
             new RqMethod.Base(new RqFake(method)).method(),
@@ -83,44 +84,61 @@ public final class RqMethodTest {
 
     /**
      * RqMethod can fail when request URI is missing.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnMissingUri() throws IOException {
-        new RqMethod.Base(new RqSimple(Arrays.asList("GET"), null)).method();
+    @Test
+    void failsOnMissingUri() {
+        final RqMethod.Base req = new RqMethod.Base(
+            new RqSimple(Arrays.asList("GET"), null)
+        );
+        Assertions.assertThrows(
+            IOException.class,
+            req::method
+        );
     }
 
     /**
      * RqMethod can fail when HTTP method line has any extra undefined
      * elements.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnExtraLineElement() throws IOException {
-        new RqMethod.Base(
-            new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
-        ).method();
+    @Test
+    void failsOnExtraLineElement() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new RqMethod.Base(
+                    new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
+                ).method();
+            }
+        );
     }
 
     /**
      * RqMethod can fail when HTTP method line has any extra spaces
      * between the elements.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnExtraSpaces() throws IOException {
-        new RqMethod.Base(
-            new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
-        ).method();
+    @Test
+    void failsOnExtraSpaces() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new RqMethod.Base(
+                    new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
+                ).method();
+            }
+        );
     }
 
     /**
      * RqMethod can fail when HTTP extension method name contains separator
      * characters.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void failsOnSeparatorsInExtensionMethod() throws IOException {
-        new RqMethod.Base(new RqFake("CUSTO{M)")).method();
+    @Test
+    void failsOnSeparatorsInExtensionMethod() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new RqMethod.Base(new RqFake("CUSTO{M)")).method();
+            }
+        );
     }
 }

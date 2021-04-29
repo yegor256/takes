@@ -131,6 +131,7 @@ final class RqFromTest {
                 )
             ).printHead(),
             new StringStartsWith(
+                true,
                 new Joined(
                     RqFromTest.EOL,
                     method,
@@ -162,6 +163,7 @@ final class RqFromTest {
                 )
             ).printHead(),
             new StringStartsWith(
+                true,
                 new Joined(
                     RqFromTest.EOL,
                     method,

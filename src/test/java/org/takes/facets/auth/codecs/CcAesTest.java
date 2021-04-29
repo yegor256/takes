@@ -39,8 +39,7 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  * @checkstyle MagicNumber (500 line)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class CcAesTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class CcAesTest {
     /**
      * CcAes can encrypt identity.
      * @throws Exception If fails

@@ -28,12 +28,12 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsEqual;
-import org.junit.Rule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
+import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqWithHeaders;
@@ -43,28 +43,34 @@ import org.takes.rq.RqWithHeaders;
  *
  * @since 1.15
  */
-public final class HttpServletRequestFakeTest {
+final class HttpServletRequestFakeTest {
     /**
      * A rule for handling an exception.
      */
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
-
     @Test
-    public void failsIfAHeaderIsNotFound() {
-        this.exception.expect(NoSuchElementException.class);
-        this.exception.expectMessage("Value of header foo not found");
-        new HttpServletRequestFake(
+    void failsIfAHeaderIsNotFound() {
+        final HttpServletRequestFake req = new HttpServletRequestFake(
             new RqWithHeaders(
                 new RqFake(),
                 "MyHeader: theValue",
                 "MyOtherHeader: aValue"
             )
-        ).getHeaders("foo");
+        );
+        MatcherAssert.assertThat(
+            Assertions.assertThrows(
+                NoSuchElementException.class, () -> {
+                    req.getHeader("foo");
+                }
+            ),
+            Matchers.hasProperty(
+                "message",
+                Matchers.is("Value of header foo not found")
+            )
+        );
     }
 
     @Test
-    public void containsAHeaderAndItsValue() {
+    void containsAHeaderAndItsValue() {
         MatcherAssert.assertThat(
             "Can't get the headers",
             Collections.list(
@@ -76,15 +82,15 @@ public final class HttpServletRequestFakeTest {
                     )
                 ).getHeaders("testheader")
             ),
-            new IsCollectionContaining<>(
-                new IsEqual<>("someValue")
+            new HasValues<>(
+                "someValue"
             )
         );
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void containsAllHeadersNames() {
+    void containsAllHeadersNames() {
         MatcherAssert.assertThat(
             "Can't get the header names",
             Collections.list(
@@ -107,7 +113,7 @@ public final class HttpServletRequestFakeTest {
     }
 
     @Test
-    public void defaultMethodIsGet() {
+    void defaultMethodIsGet() {
         MatcherAssert.assertThat(
             "Can't get the request method",
             new HttpServletRequestFake(new RqFake()).getMethod(),

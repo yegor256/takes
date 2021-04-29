@@ -37,14 +37,14 @@ import org.takes.Request;
  * @since 0.26
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RqOnceTest {
+final class RqOnceTest {
 
     /**
      * RqOnce can make request read-only-once for header.
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
+    void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
         final Request req = new RqOnce(
             new RequestOf(
                 () -> new IterableOf<>(new Randomized().asString()),
@@ -65,7 +65,7 @@ public final class RqOnceTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
+    void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
         final Request req = new RqOnce(
             new RequestOf(
                 new IterableOf<>(new Randomized().asString()),

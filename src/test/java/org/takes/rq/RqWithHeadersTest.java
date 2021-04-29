@@ -39,8 +39,7 @@ import org.takes.Request;
  * @checkstyle MultipleStringLiteralsCheck (100 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class RqWithHeadersTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqWithHeadersTest {
 
     /**
      * RqWithHeaders can add headers.

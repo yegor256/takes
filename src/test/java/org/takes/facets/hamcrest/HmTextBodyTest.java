@@ -33,20 +33,20 @@ import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.StringDescription;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link AbstractHmTextBody}.
  *
  * @since 2.0
  */
-public final class HmTextBodyTest {
+final class HmTextBodyTest {
 
     /**
      * Tests mismatch description.
      */
     @Test
-    public void describesMismatchCorrectly() {
+    void describesMismatchCorrectly() {
         final AbstractHmTextBody<Text> matcher = new HmTextBodyFake(
             new IsEqual<>("courage"), Charset.defaultCharset()
         );
@@ -65,7 +65,7 @@ public final class HmTextBodyTest {
      * Tests expected description.
      */
     @Test
-    public void describesExpectedCorrectly() {
+    void describesExpectedCorrectly() {
         final String expected = "red";
         final AbstractHmTextBody<Text> matcher = new HmTextBodyFake(
             new IsEqual<>(expected), Charset.defaultCharset()

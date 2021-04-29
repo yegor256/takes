@@ -25,40 +25,48 @@
 package org.takes.tk;
 
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.takes.Take;
 import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link TkSlf4j}.
  * @since 0.11.2
  */
-public final class TkSlf4jTest {
+final class TkSlf4jTest {
 
     /**
      * TkSlf4j can log message.
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsMessage() throws Exception {
+    void logsMessage() throws Exception {
         new TkSlf4j(new TkText("test")).act(new RqFake());
     }
 
     /**
      * TkSlf4j can log exception.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void logsException() throws Exception {
-        new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake());
+    @Test
+    void logsException() {
+        final Take take = new TkSlf4j(new TkFailure(new IOException("")));
+        Assertions.assertThrows(
+            IOException.class,
+            () -> take.act(new RqFake())
+        );
     }
 
     /**
      * TkSlf4j can log runtime exception.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = RuntimeException.class)
-    public void logsRuntimeException() throws Exception {
-        new TkSlf4j(new TkFailure(new RuntimeException(""))).act(new RqFake());
+    @Test
+    void logsRuntimeException() {
+        final Take take = new TkSlf4j(new TkFailure(new RuntimeException("")));
+        Assertions.assertThrows(
+            RuntimeException.class,
+            () -> take.act(new RqFake())
+        );
     }
 
     /**
@@ -66,7 +74,10 @@ public final class TkSlf4jTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void logsEmptyMessage() throws Exception {
-        new TkSlf4j(new TkEmpty()).act(new RqFake());
+    void logsEmptyMessage() throws Exception {
+        final Take take = new TkSlf4j(new TkEmpty());
+        Assertions.assertDoesNotThrow(
+            () -> take.act(new RqFake())
+        );
     }
 }

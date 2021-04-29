@@ -30,7 +30,8 @@ import java.io.Writer;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 
 /**
@@ -39,14 +40,14 @@ import org.llorllale.cactoos.matchers.Assertion;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RsPrettyJsonTest {
+final class RsPrettyJsonTest {
 
     /**
      * RsPrettyJSON can format response with JSON body.
      * @throws Exception If some problem inside
      */
     @Test
-    public void formatsJsonBody() throws Exception {
+    void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
             new BodyPrint(
                 new RsPrettyJson(
@@ -61,11 +62,15 @@ public final class RsPrettyJsonTest {
 
     /**
      * RsPrettyJSON can reject a non-JSON body.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void rejectsNonJsonBody() throws Exception {
-        new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString();
+    @Test
+    void rejectsNonJsonBody() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString();
+            }
+        );
     }
 
     /**
@@ -73,7 +78,7 @@ public final class RsPrettyJsonTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void reportsCorrectContentLength() throws Exception {
+    void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (Writer w = new OutputStreamWriter(baos)) {
             w.write(
@@ -104,7 +109,7 @@ public final class RsPrettyJsonTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void mustEvaluateTrueEquality() throws Exception {
+    void mustEvaluateTrueEquality() throws Exception {
         final String body = "{\"person\":{\"name\":\"John\"}}";
         new Assertion<>(
             "Must evaluate true equality",

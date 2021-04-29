@@ -120,8 +120,10 @@ final class PsLinkedinTest {
          * @param tokenpath Request path for token endpoint
          * @checkstyle ParameterNumber (4 lines)
          */
-        TokenTake(final String code, final String lapp, final String lkey,
-            final String tokenpath) {
+        TokenTake(
+            final String code, final String lapp, final String lkey,
+            final String tokenpath
+        ) {
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;
@@ -197,9 +199,11 @@ final class PsLinkedinTest {
          * @param baggins Test value for "Last name"
          * @checkstyle ParameterNumberCheck (4 lines)
          */
-        PeopleTake(final String identifier,
+        PeopleTake(
+            final String identifier,
             final String firstname, final String lastname,
-            final String frodo, final String baggins) {
+            final String frodo, final String baggins
+        ) {
             this.identifier = identifier;
             this.firstname = firstname;
             this.lastname = lastname;
@@ -277,10 +281,12 @@ final class PsLinkedinTest {
          * @param baggins Test value for "Last name"
          * @checkstyle ParameterNumberCheck (4 lines)
          */
-        LinkedinScript(final String code, final String lapp,
+        LinkedinScript(
+            final String code, final String lapp,
             final String lkey, final String identifier,
             final String firstname, final String lastname,
-            final String frodo, final String baggins) {
+            final String frodo, final String baggins
+        ) {
             this.code = code;
             this.lapp = lapp;
             this.lkey = lkey;

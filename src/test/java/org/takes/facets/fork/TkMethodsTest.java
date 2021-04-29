@@ -26,7 +26,8 @@ package org.takes.facets.fork;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -40,13 +41,13 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkMethods}.
  * @since 0.17
  */
-public final class TkMethodsTest {
+final class TkMethodsTest {
     /**
      * TkMethods can call act on method that is passes to it.
      * @throws Exception if any error occurs
      */
     @Test
-    public void callsActOnProperMethods() throws Exception {
+    void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
         new TkMethods(take, RqMethod.GET).act(req);
@@ -55,13 +56,16 @@ public final class TkMethodsTest {
 
     /**
      * TkMethods can throw HttpExcection when acting on unproper method.
-     * @throws Exception if any I/O error occurs.
      */
-    @Test(expected = HttpException.class)
-    public void throwsExceptionOnActinOnUnproperMethod() throws
-        Exception {
-        new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
-            new RqFake(RqMethod.GET)
+    @Test
+    void throwsExceptionOnActinOnUnproperMethod() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
+                    new RqFake(RqMethod.GET)
+                );
+            }
         );
     }
 
@@ -70,7 +74,7 @@ public final class TkMethodsTest {
      * @throws Exception If any I/O error occurs
      */
     @Test
-    public void returnsMethodIsNotAllowedForUnsupportedMethods() throws
+    void returnsMethodIsNotAllowedForUnsupportedMethods() throws
         Exception {
         new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(
             url -> new JdkRequest(url)

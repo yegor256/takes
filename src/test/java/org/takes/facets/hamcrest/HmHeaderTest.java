@@ -161,10 +161,9 @@ final class HmHeaderTest {
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(
             description.toString(),
-            Matchers.equalTo(new StringBuilder()
-                .append("header was: equalToIgnoringCase")
-                .append("(\"content-type\") -> values: <[image/png]>")
-                .toString()
+            Matchers.stringContainsInOrder(
+                "header was: a string equal to ",
+                "\"content-type\" ignoring case -> values: <[image/png]>"
             )
         );
     }

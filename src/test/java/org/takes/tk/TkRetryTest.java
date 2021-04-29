@@ -28,7 +28,8 @@ import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -43,7 +44,7 @@ import org.takes.rs.RsText;
  *
  * @since 0.28.3
  */
-public final class TkRetryTest {
+final class TkRetryTest {
 
     /**
      * TkRetry can work when no IOException.
@@ -51,7 +52,7 @@ public final class TkRetryTest {
      * @throws Exception if something is wrong
      */
     @Test
-    public void worksWithNoException() throws Exception {
+    void worksWithNoException() throws Exception {
         final String test = "test";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -65,30 +66,33 @@ public final class TkRetryTest {
     /**
      * TkRetry can retry when initial take fails once
      * with IOException, till retry count is reached.
-     *
-     * @throws Exception if something is wrong
      */
-    @Test(expected = IOException.class)
-    public void retriesOnExceptionTillCount() throws Exception {
-        final int count = Tv.THREE;
-        final int delay = Tv.THOUSAND;
-        final Take take = Mockito.mock(Take.class);
-        Mockito
-            .when(take.act(Mockito.any(Request.class)))
-            .thenThrow(new IOException());
-        final long start = System.nanoTime();
-        try {
-            new TkRetry(count, delay, take).act(
-                new RqFake(RqMethod.GET)
-            );
-        } catch (final IOException exception) {
-            final long spent = System.nanoTime() - start;
-            MatcherAssert.assertThat(
-                Long.valueOf(count * delay - Tv.HUNDRED) * Tv.MILLION,
-                Matchers.lessThanOrEqualTo(spent)
-            );
-            throw exception;
-        }
+    @Test
+    void retriesOnExceptionTillCount() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                final int count = Tv.THREE;
+                final int delay = Tv.THOUSAND;
+                final Take take = Mockito.mock(Take.class);
+                Mockito
+                    .when(take.act(Mockito.any(Request.class)))
+                    .thenThrow(new IOException());
+                final long start = System.nanoTime();
+                try {
+                    new TkRetry(count, delay, take).act(
+                        new RqFake(RqMethod.GET)
+                    );
+                } catch (final IOException exception) {
+                    final long spent = System.nanoTime() - start;
+                    MatcherAssert.assertThat(
+                        Long.valueOf(count * delay - Tv.HUNDRED) * Tv.MILLION,
+                        Matchers.lessThanOrEqualTo(spent)
+                    );
+                    throw exception;
+                }
+            }
+        );
     }
 
     /**
@@ -98,7 +102,7 @@ public final class TkRetryTest {
      * @throws Exception if something is wrong
      */
     @Test
-    public void retriesOnExceptionTillSuccess() throws Exception {
+    void retriesOnExceptionTillSuccess() throws Exception {
         final int count = Tv.THREE;
         final int delay = Tv.THOUSAND;
         final String data = "data";

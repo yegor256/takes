@@ -26,7 +26,8 @@ package org.takes.facets.fork;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextIs;
 import org.takes.HttpException;
 import org.takes.Response;
@@ -43,28 +44,32 @@ import org.takes.tk.TkFixed;
  * @since 0.14
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkProducesTest {
+final class TkProducesTest {
 
     /**
      * TkProduces can fail on unsupported Accept header.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnUnsupportedAcceptHeader() throws Exception {
-        final Take produces = new TkProduces(
-            new TkEmpty(),
-            "text/json,application/json"
+    @Test
+    void failsOnUnsupportedAcceptHeader() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                final Take produces = new TkProduces(
+                    new TkEmpty(),
+                    "text/json,application/json"
+                );
+                produces.act(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /hz0",
+                            "Host: as0.example.com",
+                            "Accept: text/xml"
+                        ),
+                        ""
+                    )
+                ).head();
+            }
         );
-        produces.act(
-            new RqFake(
-                Arrays.asList(
-                    "GET /hz0",
-                    "Host: as0.example.com",
-                    "Accept: text/xml"
-                ),
-                ""
-            )
-        ).head();
     }
 
     /**
@@ -72,7 +77,7 @@ public final class TkProducesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void producesCorrectContentTypeResponse() throws Exception {
+    void producesCorrectContentTypeResponse() throws Exception {
         final Take produces = new TkProduces(
             new TkFixed(new RsJson(new RsEmpty())),
             "text/json"

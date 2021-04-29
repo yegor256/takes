@@ -33,13 +33,13 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link VerboseIterable}.
  * @since 0.15.1
  */
-public class VerboseIterableTest {
+final class VerboseIterableTest {
 
     /**
      * VerboseIterable can return correct size collection.
      */
     @Test
-    public final void returnsCorrectSize() {
+    void returnsCorrectSize() {
         final List<String> valid = Arrays.asList(
             "Accept: text/plain",
             "Accept-Charset: utf-8",

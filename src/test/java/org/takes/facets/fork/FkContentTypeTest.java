@@ -41,8 +41,7 @@ import org.takes.rs.RsEmpty;
  * @since 1.0
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class FkContentTypeTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class FkContentTypeTest {
 
     /**
      * Content-Type header.

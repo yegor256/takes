@@ -33,8 +33,7 @@ import org.llorllale.cactoos.matchers.TextHasString;
  * Test case for {@link RqWithHeader}.
  * @since 0.9
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class RqWithHeaderTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqWithHeaderTest {
 
     /**
      * RqWithHeader can add a header.

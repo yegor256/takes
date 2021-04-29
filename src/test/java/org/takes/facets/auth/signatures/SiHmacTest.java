@@ -32,8 +32,7 @@ import org.llorllale.cactoos.matchers.Assertion;
  * Test case for {@link SiHmac}.
  * @since 1.3
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class SiHmacTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class SiHmacTest {
     /**
      * SiHmac corrects wrong bit length.
      * @throws IOException If some problem inside

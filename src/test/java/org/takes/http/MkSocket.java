@@ -34,7 +34,7 @@ import java.net.Socket;
  *
  * @since 0.32
  */
-public final class MkSocket  extends Socket {
+public final class MkSocket extends Socket {
 
     /**
      * The address to provide for testing purpose.

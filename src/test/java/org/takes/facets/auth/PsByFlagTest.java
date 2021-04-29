@@ -46,8 +46,7 @@ import org.takes.rs.RsWithType;
  * @since 0.10
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class PsByFlagTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class PsByFlagTest {
     /**
      * PsByFlag can skip if nothing found.
      * @throws Exception If some problem inside

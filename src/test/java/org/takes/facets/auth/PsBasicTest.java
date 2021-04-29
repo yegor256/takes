@@ -29,7 +29,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.HttpException;
@@ -50,7 +51,7 @@ import org.takes.tk.TkText;
  * @since 0.20
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class PsBasicTest {
+final class PsBasicTest {
 
     /**
      * Basic Auth.
@@ -67,7 +68,7 @@ public final class PsBasicTest {
      * @throws Exception if any error occurs
      */
     @Test
-    public void handleConnectionWithValidCredential() throws Exception {
+    void handleConnectionWithValidCredential() throws Exception {
         final String user = "john";
         final Opt<Identity> identity = new PsBasic(
             "RealmA",
@@ -97,7 +98,7 @@ public final class PsBasicTest {
      * @throws Exception if any error occurs
      */
     @Test
-    public void handleConnectionWithValidCredentialDefaultEntry()
+    void handleConnectionWithValidCredentialDefaultEntry()
         throws Exception {
         final String user = "johny";
         final String password = "password2";
@@ -131,7 +132,7 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void handleConnectionWithInvalidCredential() throws Exception {
+    void handleConnectionWithInvalidCredential() throws Exception {
         RsForward forward = new RsForward();
         try {
             new PsBasic(
@@ -168,7 +169,7 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void handleMultipleHeadersWithValidCredential() throws Exception {
+    void handleMultipleHeadersWithValidCredential() throws Exception {
         final String user = "bill";
         final Opt<Identity> identity = new PsBasic(
             "RealmC",
@@ -199,32 +200,36 @@ public final class PsBasicTest {
 
     /**
      * PsBasic can handle multiple headers with invalid content.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void handleMultipleHeadersWithInvalidContent() throws Exception {
-        MatcherAssert.assertThat(
-            new PsBasic(
-                "RealmD",
-                new PsBasic.Fake(true)
-            ).enter(
-                new RqWithHeaders(
-                    new RqFake(
-                        "XPTO",
-                        "/wrong-url"
-                    ),
-                    String.format(
-                        "XYZ%s",
-                        PsBasicTest.header("user", "password")
-                    ),
-                    "XYZReferer: http://teamed.io/",
-                    "XYZConnection:keep-alive",
-                    "XYZContent-Encoding:gzip",
-                    "XYZX-Check-Cacheable:YES",
-                    "XYZX-Powered-By:Java/1.7"
-                )
-            ).has(),
-            Matchers.is(false)
+    @Test
+    void handleMultipleHeadersWithInvalidContent() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                MatcherAssert.assertThat(
+                    new PsBasic(
+                        "RealmD",
+                        new PsBasic.Fake(true)
+                    ).enter(
+                        new RqWithHeaders(
+                            new RqFake(
+                                "XPTO",
+                                "/wrong-url"
+                            ),
+                            String.format(
+                                "XYZ%s",
+                                PsBasicTest.header("user", "password")
+                            ),
+                            "XYZReferer: http://teamed.io/",
+                            "XYZConnection:keep-alive",
+                            "XYZContent-Encoding:gzip",
+                            "XYZX-Check-Cacheable:YES",
+                            "XYZX-Powered-By:Java/1.7"
+                        )
+                    ).has(),
+                    Matchers.is(false)
+                );
+            }
         );
     }
 
@@ -233,7 +238,7 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void authenticatesUser() throws Exception {
+    void authenticatesUser() throws Exception {
         final Take take = new TkAuth(
             new TkSecure(
                 new TkText("secured")
@@ -262,7 +267,7 @@ public final class PsBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void requestAuthentication() throws Exception {
+    void requestAuthentication() throws Exception {
         final Take take = new TkForward(
             new TkAuth(
                 new TkSecure(

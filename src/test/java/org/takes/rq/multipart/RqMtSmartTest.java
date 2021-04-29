@@ -32,20 +32,19 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
-import org.takes.misc.PerformanceTests;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqPrint;
 import org.takes.rq.TempInputStream;
@@ -57,7 +56,7 @@ import org.takes.rs.RsText;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class RqMtSmartTest {
+final class RqMtSmartTest {
     /**
      * Body element.
      */
@@ -87,17 +86,11 @@ public final class RqMtSmartTest {
     );
 
     /**
-     * Temp directory.
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
      * RqMtSmart can return correct part length.
      * @throws IOException If some problem inside
      */
     @Test
-    public void returnsCorrectPartLength() throws IOException {
+    void returnsCorrectPartLength() throws IOException {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
@@ -141,7 +134,7 @@ public final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void identifiesBoundary() throws IOException {
+    void identifiesBoundary() throws IOException {
         final int length = 9000;
         final String part = "foo-1";
         final String body =
@@ -184,7 +177,7 @@ public final class RqMtSmartTest {
      * @throws Exception if some problem inside
      */
     @Test
-    public void consumesHttpRequest() throws Exception {
+    void consumesHttpRequest() throws Exception {
         final String part = "f-1";
         final Take take = new Take() {
             @Override
@@ -234,14 +227,15 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart can handle a big request in an acceptable time.
+     * @param temp Temporary folder.
      * @throws IOException If some problem inside
      */
     @Test
-    @Category(PerformanceTests.class)
-    public void handlesRequestInTime() throws IOException {
+    @Tag("performance")
+    void handlesRequestInTime(@TempDir final Path temp) throws IOException {
         final int length = 100_000_000;
         final String part = "test";
-        final File file = this.temp.newFile("handlesRequestInTime.tmp");
+        final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
         final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
         bwr.write(
             new Joined(
@@ -291,14 +285,15 @@ public final class RqMtSmartTest {
 
     /**
      * RqMtSmart doesn't distort the content.
+     * @param temp Temporary folder.
      * @throws IOException If some problem inside
      */
     @Test
-    public void notDistortContent() throws IOException {
+    void notDistortContent(@TempDir final Path temp) throws IOException {
         final int length = 1_000_000;
         final String part = "test1";
-        final File file = this.temp.newFile("notDistortContent.tmp");
-        final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
+        final Path file = temp.resolve("notDistortContent.tmp");
+        final BufferedWriter bwr = Files.newBufferedWriter(file);
         final String head =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -331,7 +326,7 @@ public final class RqMtSmartTest {
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
-            new TempInputStream(Files.newInputStream(file.toPath()), file)
+            new TempInputStream(Files.newInputStream(file), file.toFile())
         );
         final InputStream stream = new RqMtSmart(
             new RqMtBase(req)
