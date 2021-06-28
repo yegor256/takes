@@ -127,7 +127,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
-      <version>1.17.1</version>
+      <version>1.17.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
