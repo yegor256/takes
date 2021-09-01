@@ -39,9 +39,6 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #1054:30min Continue replacing guava in tests.
- *  Create new todos until guava is removed and Takes is much more Cactoos
- *  oriented as started with #804.
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
