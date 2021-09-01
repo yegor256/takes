@@ -26,6 +26,7 @@ package org.takes.misc;
 
 import java.util.Collections;
 import java.util.List;
+import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -74,7 +75,10 @@ public class VerboseListTest {
      */
     @Before
     public final void setUp() throws Exception {
-        this.list = new VerboseList<Object>(this.origin, VerboseListTest.MSG);
+        this.list = new VerboseList<Object>(
+            this.origin,
+            new FormattedText(VerboseListTest.MSG)
+        );
     }
 
     /**

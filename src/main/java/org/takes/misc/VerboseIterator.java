@@ -25,6 +25,8 @@ package org.takes.misc;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import org.cactoos.Text;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Verbose iterator.
@@ -42,16 +44,16 @@ public final class VerboseIterator<T> implements Iterator<T> {
     /**
      * Error message when running out of items.
      */
-    private final CharSequence error;
+    private final Text error;
 
     /**
      * Ctor.
      * @param iter Original iterator
      * @param msg Error message
      */
-    public VerboseIterator(final Iterator<T> iter, final CharSequence msg) {
+    public VerboseIterator(final Iterator<T> iter, final Text msg) {
         this.origin = iter;
-        this.error = msg;
+        this.error = new UncheckedText(msg);
     }
 
     @Override

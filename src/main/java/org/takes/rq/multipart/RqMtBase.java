@@ -158,7 +158,7 @@ public final class RqMtBase implements RqMultipart {
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
                     name, this.map.size(), this.map.keySet()
-                ).toString()
+                )
             );
         } else {
             iter = new VerboseIterable<>(
@@ -166,7 +166,7 @@ public final class RqMtBase implements RqMultipart {
                 new FormattedText(
                     "there are just %d parts by name \"%s\"",
                     values.size(), name
-                ).toString()
+                )
             );
         }
         return iter;

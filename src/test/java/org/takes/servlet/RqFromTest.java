@@ -80,7 +80,7 @@ final class RqFromTest {
     }
 
     @Test
-    void containsMethodAndHeader() throws IOException {
+    void containsMethodAndHeader() throws Exception {
         final String method = "GET /a-test";
         final String header = "foo: bar";
         MatcherAssert.assertThat(
@@ -112,7 +112,7 @@ final class RqFromTest {
     }
 
     @Test
-    void containsHostHeaderInHeader() throws IOException {
+    void containsHostHeaderInHeader() throws Exception {
         final String method = "GET /one-more-test";
         final String header = "Host: www.thesite.com";
         MatcherAssert.assertThat(
@@ -143,7 +143,7 @@ final class RqFromTest {
     }
 
     @Test
-    void containsHostAndPortInHeader() throws IOException {
+    void containsHostAndPortInHeader() throws Exception {
         final String method = "GET /b-test";
         final String header = "Host: 192.168.0.1:12345";
         MatcherAssert.assertThat(
