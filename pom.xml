@@ -106,7 +106,7 @@ SOFTWARE.
          https://github.com/yegor256/takes/pull/886#issuecomment-446030223
          for details.
        -->
-      <version>0.44</version>
+      <version>0.49</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
@@ -127,7 +127,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
-      <version>1.17.1</version>
+      <version>1.17.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -186,11 +186,6 @@ SOFTWARE.
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>

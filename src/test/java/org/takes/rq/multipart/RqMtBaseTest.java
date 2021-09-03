@@ -175,7 +175,7 @@ final class RqMtBaseTest {
                     "",
                     address,
                     RqMtBaseTest.BODY_ELEMENT
-                ).asString()
+                ).toString()
             )
         );
         try {

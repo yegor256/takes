@@ -23,9 +23,8 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import org.cactoos.Text;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
@@ -79,7 +78,7 @@ final class RsPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    void simpleWithDash() throws IOException {
+    void simpleWithDash() throws Exception {
         new Assertion<>(
             "must write head with dashes",
             new RsPrint(

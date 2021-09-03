@@ -47,7 +47,7 @@ final class RqOnceTest {
     void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
         final Request req = new RqOnce(
             new RequestOf(
-                () -> new IterableOf<>(new Randomized().asString()),
+                () -> new IterableOf<>(new Randomized().toString()),
                 () -> new InputStreamOf(new Randomized())
             )
         );
@@ -68,7 +68,7 @@ final class RqOnceTest {
     void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
         final Request req = new RqOnce(
             new RequestOf(
-                new IterableOf<>(new Randomized().asString()),
+                new IterableOf<>(new Randomized().toString()),
                 new InputStreamOf(new Randomized())
             )
         );

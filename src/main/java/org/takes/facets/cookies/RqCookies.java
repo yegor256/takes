@@ -94,7 +94,7 @@ public interface RqCookies extends Request {
                         // @checkstyle LineLengthCheck (1 line)
                         "There are no Cookies by name \"%s\" among %d others: %s",
                         key, map.size(), map.keySet()
-                    ).asString()
+                    )
                 );
             } else {
                 iter = new VerboseIterable<>(
@@ -102,7 +102,7 @@ public interface RqCookies extends Request {
                     new FormattedText(
                         "There is always only one Cookie by name \"%s\"",
                         key
-                    ).asString()
+                    )
                 );
             }
             return iter;

@@ -26,6 +26,7 @@ package org.takes.misc;
 
 import java.util.Collections;
 import java.util.List;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -67,7 +68,10 @@ final class VerboseListTest {
      */
     @BeforeEach
     void setUp() {
-        this.list = new VerboseList<Object>(this.origin, VerboseListTest.MSG);
+        this.list = new VerboseList<Object>(
+            this.origin,
+            new TextOf(VerboseListTest.MSG)
+        );
     }
 
     /**

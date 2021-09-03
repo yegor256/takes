@@ -25,6 +25,7 @@ package org.takes.misc;
 
 import java.util.Arrays;
 import java.util.List;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -50,7 +51,7 @@ final class VerboseIterableTest {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 valid,
-                "Empty Error Message"
+                new TextOf("Empty Error Message")
             ),
             Matchers.<String>iterableWithSize(valid.size())
         );

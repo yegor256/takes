@@ -30,11 +30,14 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Text;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.iterable.Joined;
+import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Not;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.StartsWith;
+import org.cactoos.text.TextOf;
 import org.takes.Response;
 
 /**
@@ -43,6 +46,7 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -107,15 +111,21 @@ public final class RsWithStatus extends RsWrap {
                 )
             );
         }
-        return new Joined<>(
-            new FormattedText(
-                "HTTP/1.1 %d %s", status, reason
-            ).asString(),
-            new Filtered<>(
-                item -> new Not(
-                    new StartsWith(item, "HTTP/")
-                ).value(),
-                origin.head()
+        return new Mapped<>(
+            Text::asString,
+            new Joined<>(
+                new FormattedText(
+                    "HTTP/1.1 %d %s", status, reason
+                ),
+                new Mapped<>(
+                    TextOf::new,
+                    new Filtered<>(
+                        item -> new Not(
+                            new StartsWith(item, "HTTP/")
+                        ).value(),
+                        origin.head()
+                    )
+                )
             )
         );
     }

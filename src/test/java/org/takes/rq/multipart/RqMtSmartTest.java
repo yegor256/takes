@@ -35,7 +35,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import org.apache.commons.lang.StringUtils;
+import org.cactoos.Text;
+import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.Joined;
+import org.cactoos.text.UncheckedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Tag;
@@ -87,14 +90,14 @@ final class RqMtSmartTest {
 
     /**
      * RqMtSmart can return correct part length.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void returnsCorrectPartLength() throws IOException {
+    void returnsCorrectPartLength() throws Exception {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
         final String part = "x-1";
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 RqMtSmartTest.BODY_ELEMENT,
@@ -102,13 +105,13 @@ final class RqMtSmartTest {
                 "",
                 StringUtils.repeat("X", length),
                 String.format("%s--", RqMtSmartTest.BODY_ELEMENT)
-            ).asString();
+            );
         final Request req = new RqFake(
             Arrays.asList(
                 post,
                 "Host: www.example.com",
                 RqMtSmartTest.contentLengthHeader(
-                    (long) body.getBytes().length
+                    new LengthOf(body).longValue()
                 ),
                 RqMtSmartTest.CONTENT_TYPE
             ),
@@ -137,7 +140,7 @@ final class RqMtSmartTest {
     void identifiesBoundary() throws IOException {
         final int length = 9000;
         final String part = "foo-1";
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 "----foo",
@@ -146,13 +149,13 @@ final class RqMtSmartTest {
                 StringUtils.repeat("F", length),
                 "",
                 "----foo--"
-            ).asString();
+            );
         final Request req = new RqFake(
             Arrays.asList(
                 "POST /post?foo=3 HTTP/1.1",
                 "Host: www.foo.com",
                 RqMtSmartTest.contentLengthHeader(
-                    (long) body.getBytes().length
+                    new LengthOf(body).longValue()
                 ),
                 "Content-Type: multipart/form-data; boundary=--foo"
             ),
@@ -191,13 +194,13 @@ final class RqMtSmartTest {
                 );
             }
         };
-        final String body =
+        final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
                 "--AaB0zz",
                 String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
-            ).asString();
+            );
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (50 lines)
             new FtRemote.Script() {
@@ -211,10 +214,12 @@ final class RqMtSmartTest {
                         )
                         .header(
                             "Content-Length",
-                            String.valueOf(body.getBytes().length)
+                            String.valueOf(
+                                new LengthOf(body).longValue()
+                            )
                         )
                         .body()
-                        .set(body)
+                        .set(new UncheckedText(body).asString())
                         .back()
                         .fetch()
                         .as(RestResponse.class)
@@ -244,7 +249,7 @@ final class RqMtSmartTest {
                 String.format(RqMtSmartTest.CONTENT, part),
                 "",
                 ""
-            ).asString()
+            ).toString()
         );
         for (int ind = 0; ind < length; ++ind) {
             bwr.write("X");
@@ -286,10 +291,10 @@ final class RqMtSmartTest {
     /**
      * RqMtSmart doesn't distort the content.
      * @param temp Temporary folder.
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void notDistortContent(@TempDir final Path temp) throws IOException {
+    void notDistortContent(@TempDir final Path temp) throws Exception {
         final int length = 1_000_000;
         final String part = "test1";
         final Path file = temp.resolve("notDistortContent.tmp");

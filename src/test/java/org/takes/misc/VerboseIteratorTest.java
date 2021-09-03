@@ -25,6 +25,7 @@ package org.takes.misc;
 
 import java.util.Arrays;
 import java.util.Collections;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -51,7 +52,7 @@ final class VerboseIteratorTest {
                     "Cache-Control: no-cache",
                     "From: user@example.com"
                 ),
-                "Empty Error Message"
+                new TextOf("Empty Error Message")
             ).iterator().next(),
             Matchers.equalTo(accept)
         );
@@ -70,7 +71,7 @@ final class VerboseIteratorTest {
                     "Accept: text/*;",
                     "Accept-Encoding: gzip;q=1.0"
                 ),
-                "This error should not be thrown"
+                new TextOf("This error should not be thrown")
             ).iterator().hasNext(), Matchers.equalTo(true)
         );
     }
@@ -85,7 +86,7 @@ final class VerboseIteratorTest {
             () -> {
                 new VerboseIterable<String>(
                     Collections.<String>emptyList(),
-                    "Expected Error Message"
+                    new TextOf("Expected Error Message")
                 ).iterator().next();
             }
         );
@@ -99,7 +100,7 @@ final class VerboseIteratorTest {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Collections.<String>emptyList(),
-                "Non used Error Message"
+                new TextOf("Non used Error Message")
             ).iterator().hasNext(),
             Matchers.equalTo(false)
         );
@@ -121,7 +122,7 @@ final class VerboseIteratorTest {
                         "Origin: http://www.example-social-network.com",
                         "User-Agent: Mozilla/5.0 (X11; Linux x86_64) Gecko/2010010"
                     ),
-                    "Thrown Error Message"
+                    new TextOf("Thrown Error Message")
                 ).iterator().remove();
             }
         );

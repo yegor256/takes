@@ -23,12 +23,13 @@
  */
 package org.takes.facets.auth;
 
-import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -97,8 +98,10 @@ import org.takes.rs.RsWithType;
         );
         MatcherAssert.assertThat(
             new PsByFlag(
-                ImmutableMap.<Pattern, Pass>of(
-                    Pattern.compile("key"), new PsFake(true)
+                new MapOf<Pattern, Pass>(
+                    new MapEntry<>(
+                        Pattern.compile("key"), new PsFake(true)
+                    )
                 )
             ).exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)

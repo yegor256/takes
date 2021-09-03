@@ -23,9 +23,8 @@
  */
 package org.takes.rq.form;
 
-import com.google.common.escape.Escaper;
-import com.google.common.net.UrlEscapers;
-import java.util.Arrays;
+import java.net.URLEncoder;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -55,20 +54,17 @@ final class RqFormFakeTest {
         final String value = "value";
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
-        final Escaper escaper = UrlEscapers.urlFormParameterEscaper();
         final RqForm req = new RqFormFake(
             new RqFake(
-                Arrays.asList(
+                new ListOf<String>(
                     "GET /form",
                     "Host: www.example5.com",
                     String.format(
                         RqFormFakeTest.HEADER,
-                        escaper.escape(key).length() + 1
-                            + escaper.escape(value).length() + 1
-                            + escaper.escape(key).length() + 1
-                            + escaper.escape(avalue).length() + 1
-                            + escaper.escape(akey).length() + 1
-                            + escaper.escape(aavalue).length()
+                        URLEncoder.encode(
+                            "key=value&key=a&b&anotherkey=againanothervalue",
+                            "UTF-8"
+                        ).length()
                     )
                 ),
                 ""
