@@ -23,13 +23,14 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import org.cactoos.io.BytesOf;
+import org.cactoos.Text;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.object.HasToString;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 
 /**
@@ -38,19 +39,22 @@ import org.llorllale.cactoos.matchers.Assertion;
  * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RsPrintTest {
+final class RsPrintTest {
 
     /**
      * RsPrint can fail on invalid chars.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void failsOnInvalidHeader() throws IOException {
-        new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
+    @Test
+    void failsOnInvalidHeader() {
+        final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            response::asString
+        );
     }
 
     @Test
-    public void simple() throws Exception {
+    void simple() throws Exception {
         final RsPrint response = new RsPrint(
             new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
         );
@@ -74,7 +78,7 @@ public final class RsPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    public void simpleWithDash() throws IOException {
+    void simpleWithDash() throws Exception {
         new Assertion<>(
             "must write head with dashes",
             new RsPrint(

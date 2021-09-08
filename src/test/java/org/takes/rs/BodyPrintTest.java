@@ -33,11 +33,10 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link BodyPrint}.
  * @since 1.19
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class BodyPrintTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class BodyPrintTest {
 
     @Test
-    public void simple() throws IOException {
+    void simple() throws IOException {
         MatcherAssert.assertThat(
             "must write body",
             new BodyPrint(

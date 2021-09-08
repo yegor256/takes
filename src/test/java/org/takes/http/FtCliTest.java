@@ -29,12 +29,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 
@@ -43,45 +43,33 @@ import org.takes.facets.fork.TkFork;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class FtCliTest {
-
-    /**
-     * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
+final class FtCliTest {
 
     /**
      * FtCLI can work with command line args.
+     * @param temp Temporary folder.
      * @throws Exception If some problem inside
      */
     @Test
-    public void understandsCommandLineArgs() throws Exception {
+    void understandsCommandLineArgs(@TempDir final Path temp) throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
-        final Exit exit = new Exit() {
-            @Override
-            public boolean ready() {
-                ready.countDown();
-                return false;
-            }
+        final Exit exit = () -> {
+            ready.countDown();
+            return false;
         };
-        final File file = this.temp.newFile();
+        final File file = temp.toFile();
         file.delete();
         final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new FtCli(
-                            new TkFork(new FkRegex("/", "hello!")),
-                            String.format("--port=%s", file.getAbsoluteFile()),
-                            "--threads=1",
-                            "--lifetime=4000"
-                        ).start(exit);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+            () -> {
+                try {
+                    new FtCli(
+                        new TkFork(new FkRegex("/", "hello!")),
+                        String.format("--port=%s", file.getAbsoluteFile()),
+                        "--threads=1",
+                        "--lifetime=4000"
+                    ).start(exit);
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
             }
         );

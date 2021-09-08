@@ -28,7 +28,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
@@ -37,14 +38,14 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsReturn}.
  * @since 0.20
  */
-public final class RsReturnTest {
+final class RsReturnTest {
 
     /**
      * RsReturn can add cookies.
      * @throws IOException If some problem inside
      */
     @Test
-    public void addsCookieToResponse() throws IOException {
+    void addsCookieToResponse() throws IOException {
         final String destination = "/return/to";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -64,10 +65,14 @@ public final class RsReturnTest {
 
     /**
      * RsReturn can reject invalid location.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IOException.class)
-    public void rejectsInvalidLocation() throws IOException {
-        new RsReturn(new RsEmpty(), "http://www.netbout.com/,PsCookie=");
+    @Test
+    void rejectsInvalidLocation() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new RsReturn(new RsEmpty(), "http://www.netbout.com/,PsCookie=");
+            }
+        );
     }
 }

@@ -28,46 +28,54 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
 /**
  * Test case for {@link RqRequestLine.Base}.
  * @since 0.29.1
  */
-@SuppressWarnings("PMD.TooManyMethods")
-public final class RqRequestLineTest {
+@SuppressWarnings("PMD.TooManyMethods") final class RqRequestLineTest {
 
     /**
      * RqRequestLine.Base should throw {@link HttpException} when
      * we call requestLineHeader with
      * Request without Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnAbsentRequestLine() throws IOException {
-        new RqRequestLine.Base(
-            new RqSimple(Collections.<String>emptyList(), null)
-        ).header();
+    @Test
+    void failsOnAbsentRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqRequestLine.Base(
+                    new RqSimple(Collections.<String>emptyList(), null)
+                ).header();
+            }
+        );
     }
 
     /**
      * RqRequestLine.Base should throw {@link HttpException} when
      * we call requestLineHeader with
      * Request with illegal Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnIllegalRequestLine() throws IOException {
-        new RqRequestLine.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GIVE/contacts2",
-                    "Host: 1.example.com"
-                ),
-                ""
-            )
-        ).header();
+    @Test
+    void failsOnIllegalRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqRequestLine.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GIVE/contacts2",
+                            "Host: 1.example.com"
+                        ),
+                        ""
+                    )
+                ).header();
+            }
+        );
     }
 
     /**
@@ -76,7 +84,7 @@ public final class RqRequestLineTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsParams() throws IOException {
+    void extractsParams() throws IOException {
         final String requestline = "GET /hello?a=6&b=7&c&d=9%28x%29&ff";
         MatcherAssert.assertThat(
             new RqRequestLine.Base(
@@ -97,32 +105,40 @@ public final class RqRequestLineTest {
      * RqRequestLine.Base should throw {@link HttpException} when
      * we call requestLineHeaderToken with
      * Request without Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnAbsentRequestLineToken() throws IOException {
-        new RqRequestLine.Base(
-            new RqSimple(Collections.<String>emptyList(), null)
-        ).method();
+    @Test
+    void failsOnAbsentRequestLineToken() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqRequestLine.Base(
+                    new RqSimple(Collections.<String>emptyList(), null)
+                ).method();
+            }
+        );
     }
 
     /**
      * RqRequestLine.Base should throw {@link HttpException} when
      * we call requestLineHeaderToken with
      * Request with illegal Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnIllegalRequestLineToken() throws IOException {
-        new RqRequestLine.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GIVE/contacts",
-                    "Host: 3.example.com"
-                ),
-                ""
-            )
-        ).method();
+    @Test
+    void failsOnIllegalRequestLineToken() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqRequestLine.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GIVE/contacts",
+                            "Host: 3.example.com"
+                        ),
+                        ""
+                    )
+                ).method();
+            }
+        );
     }
 
     /**
@@ -132,7 +148,7 @@ public final class RqRequestLineTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsFirstParam() throws IOException {
+    void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
             new RqRequestLine.Base(
                 new RqFake(
@@ -154,7 +170,7 @@ public final class RqRequestLineTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsSecondParam() throws IOException {
+    void extractsSecondParam() throws IOException {
         MatcherAssert.assertThat(
             new RqRequestLine.Base(
                 new RqFake(
@@ -176,7 +192,7 @@ public final class RqRequestLineTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsThirdParam() throws IOException {
+    void extractsThirdParam() throws IOException {
         MatcherAssert.assertThat(
             new RqRequestLine.Base(
                 new RqFake(
@@ -195,21 +211,25 @@ public final class RqRequestLineTest {
      * RqRequestLine.Base should throw {@link IllegalArgumentException}
      * when we call requestLineHeaderToken(Token.HTTPVERSION)
      * even for valid Request-Line without HTTP VERSION.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void extractsEmptyThirdParam() throws IOException {
-        MatcherAssert.assertThat(
-            new RqRequestLine.Base(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /hello?since=3433",
-                        "Host: f4.example.com"
-                    ),
-                    ""
-                )
-            ).version(),
-            Matchers.equalTo(null)
+    @Test
+    void extractsEmptyThirdParam() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                MatcherAssert.assertThat(
+                    new RqRequestLine.Base(
+                        new RqFake(
+                            Arrays.asList(
+                                "GET /hello?since=3433",
+                                "Host: f4.example.com"
+                            ),
+                            ""
+                        )
+                    ).version(),
+                    Matchers.equalTo(null)
+                );
+            }
         );
     }
 }

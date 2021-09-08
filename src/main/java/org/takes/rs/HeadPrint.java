@@ -28,7 +28,6 @@ import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Joined;
 import org.takes.Head;
-import org.takes.Response;
 
 /**
  * Response head decorator that can print an entire head response in HTTP
@@ -48,14 +47,14 @@ public final class HeadPrint implements Head, Text {
     /**
      * The HTTP Response.
      */
-    private final Response response;
+    private final Head origin;
 
     /**
      * Ctor.
-     * @param res Original response
+     * @param head Original head
      */
-    public HeadPrint(final Response res) {
-        this.response = res;
+    public HeadPrint(final Head head) {
+        this.origin = head;
     }
 
     @Override
@@ -68,12 +67,12 @@ public final class HeadPrint implements Head, Text {
             ),
             HeadPrint.EOL,
             HeadPrint.EOL
-        ).asString();
+        ).toString();
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        return this.response.head();
+        return this.origin.head();
     }
 
 }
