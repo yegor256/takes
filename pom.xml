@@ -402,6 +402,14 @@ SOFTWARE.
             <configuration>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
+                <exclude>dependencies:javax.json:javax.json-api</exclude>
+                <exclude>dependencies:javax.xml.bind:jaxb-api</exclude>
+                <!--
+                  @todo #958:30min FindBugs found duplicate and different classes
+                   in [javax.json:javax.json-api:1.1,javax.xml.bind:jaxb-api:2.3.0].
+                   We suggest locate these classes and use Maven shade plugin to exclude them.
+                   After resolving this ticket, remove here exclusion of theses two dependencies.
+                 -->
               </excludes>
             </configuration>
           </plugin>
