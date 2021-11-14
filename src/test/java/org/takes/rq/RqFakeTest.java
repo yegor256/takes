@@ -38,7 +38,7 @@ import org.takes.Request;
  * @since 0.24
  */
 @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
-final class RqFakeTest {
+public final class RqFakeTest {
 
     /**
      * Can conform to the Object.equals() contract.

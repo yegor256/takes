@@ -170,10 +170,12 @@ interface Body extends Input {
     /**
      * Decorator that will store the content of the underlying Body into a
      * temporary File.
+     *
      * <p><b>The content of the Body will be stored into a temporary
      * file to be able to read it as many times as we want so use it only
      * for large content, for small content use {@link Body.ByteArray}
      * instead.</b>
+     *
      * @since 0.32
      */
     final class TempFile implements Body {
@@ -192,6 +194,7 @@ interface Body extends Input {
          * Constructs a {@code TempFile} with the specified {@link Body}.
          * @param body The content of the body to store into a temporary file.
          */
+        @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
         TempFile(final Body body) {
             this.body = body;
             this.file = new File(
@@ -202,6 +205,7 @@ interface Body extends Input {
                     UUID.randomUUID().toString()
                 )
             );
+            this.file.deleteOnExit();
         }
 
         @Override
@@ -212,18 +216,6 @@ interface Body extends Input {
         @Override
         public int length() throws IOException {
             return (int) this.file().length();
-        }
-
-        // Needed to remove the file once the Stream object is no more used.
-        // @checkstyle NoFinalizerCheck (2 lines)
-        // @checkstyle ProtectedMethodInFinalClassCheck (3 lines)
-        @Override
-        protected void finalize() throws Throwable {
-            try {
-                Files.delete(Paths.get(this.file.getAbsolutePath()));
-            } finally {
-                super.finalize();
-            }
         }
 
         /**

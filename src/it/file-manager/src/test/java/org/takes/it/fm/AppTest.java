@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import org.apache.commons.io.FileUtils;
+import java.nio.file.Files;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -57,7 +57,7 @@ public final class AppTest {
     @Test
     public void justWorks() throws Exception {
         final File dir = this.temp.newFolder();
-        FileUtils.write(new File(dir, "hello.txt"), "hello, world!");
+        Files.write(new File(dir, "hello.txt").toPath(), "hello, world!".getBytes());
         new FtRemote(new App(dir)).exec(
             new FtRemote.Script() {
                 @Override
