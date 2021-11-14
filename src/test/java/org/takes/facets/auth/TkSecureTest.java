@@ -25,9 +25,8 @@ package org.takes.facets.auth;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.takes.Request;
-import org.takes.Response;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.facets.forward.RsForward;
@@ -39,22 +38,18 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link TkSecure}.
  * @since 0.11
  */
-public final class TkSecureTest {
+final class TkSecureTest {
 
     /**
      * TkSecure can fail on anonymous access.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = RsForward.class)
-    public void failsOnAnonymous() throws Exception {
-        new TkSecure(
-            new Take() {
-                @Override
-                public Response act(final Request request) {
-                    return new RsEmpty();
-                }
-            }
-        ).act(new RqFake());
+    @Test
+    void failsOnAnonymous() {
+        final Take secure = new TkSecure(request -> new RsEmpty());
+        Assertions.assertThrows(
+            RsForward.class,
+            () -> secure.act(new RqFake())
+        );
     }
 
     /**
@@ -62,15 +57,10 @@ public final class TkSecureTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void passesOnRegisteredUser() throws Exception {
+    void passesOnRegisteredUser() throws Exception {
         MatcherAssert.assertThat(
             new TkSecure(
-                new Take() {
-                    @Override
-                    public Response act(final Request request) {
-                        return new RsEmpty();
-                    }
-                }
+                request -> new RsEmpty()
             ).act(
                 new RqWithHeader(
                     new RqFake(),

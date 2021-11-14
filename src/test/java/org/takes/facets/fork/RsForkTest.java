@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.rq.RqFake;
-import org.takes.rs.RsPrint;
+import org.takes.rs.BodyPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -54,13 +54,13 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsFork(
                     req,
                     new FkTypes("text/plain", new RsText("it's a text")),
                     new FkTypes("image/*", new RsText("it's an image"))
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.endsWith("a text")
         );
     }
@@ -72,12 +72,12 @@ final class RsForkTest {
     @Test
     void negotiatesContentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsFork(
                     new RqFake(),
                     new FkTypes("image/png,*/*", new RsText("a png"))
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.endsWith("png")
         );
     }
@@ -96,7 +96,7 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsFork(
                     req,
                     new FkTypes(
@@ -104,7 +104,7 @@ final class RsForkTest {
                         new RsText("how are you?")
                     )
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.endsWith("you?")
         );
     }
@@ -116,13 +116,13 @@ final class RsForkTest {
     @Test
     void dispatchesByRequestMethod() throws IOException {
         MatcherAssert.assertThat(
-            new RsPrint(
+            new BodyPrint(
                 new RsFork(
                     new RqFake("POST", "/test?1", "alpha=1"),
                     new FkMethods("GET", new RsText("it's a GET")),
                     new FkMethods("POST,PUT", new RsText("it's a POST"))
                 )
-            ).printBody(),
+            ).asString(),
             Matchers.endsWith("a POST")
         );
     }

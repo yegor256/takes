@@ -49,7 +49,7 @@ final class RqGreedyTest {
             "Host: localhost",
             "",
             "... the body ..."
-        ).asString();
+        ).toString();
         final Request req = new RqGreedy(
             new RqWithHeader(
                 new RqLive(

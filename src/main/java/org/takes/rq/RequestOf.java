@@ -28,32 +28,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import org.cactoos.Scalar;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
-import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
+import org.takes.Body;
+import org.takes.Head;
 import org.takes.Request;
 
 /**
- * This {@link Request} implementation provides a way to build a request
- * with custom {@link Scalar} head and body values.
+ * This {@link Request} implementation provides a way to build a request with
+ * custom {@link Scalar} head and body values.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>
+ * The class is immutable and thread-safe.
  * @since 2.0
  */
 public final class RequestOf implements Request {
     /**
      * Original head scalar.
      */
-    private final IoChecked<Iterable<String>> shead;
+    private final Head shead;
 
     /**
      * Original body scalar.
      */
-    private final IoChecked<InputStream> sbody;
+    private final Body sbody;
 
     /**
      * Ctor.
@@ -66,23 +68,22 @@ public final class RequestOf implements Request {
 
     /**
      * Ctor.
-     * @param head Scalar to provide head value
-     * @param body Scalar to provide body value
+     * @param head Head value
+     * @param body Body value
      */
-    public RequestOf(
-        final Scalar<Iterable<String>> head, final Scalar<InputStream> body) {
-        this.shead = new IoChecked<>(head);
-        this.sbody = new IoChecked<>(body);
+    public RequestOf(final Head head, final Body body) {
+        this.shead = head;
+        this.sbody = body;
     }
 
     @Override
     public Iterable<String> head() throws IOException {
-        return this.shead.value();
+        return this.shead.head();
     }
 
     @Override
     public InputStream body() throws IOException {
-        return this.sbody.value();
+        return this.sbody.body();
     }
 
     @Override
@@ -118,6 +119,6 @@ public final class RequestOf implements Request {
 
     @Override
     public int hashCode() {
-        return new HashCode(new Unchecked<>(this.shead::value).value()).value();
+        return new HashCode(new Unchecked<>(this.shead::head).value()).value();
     }
 }

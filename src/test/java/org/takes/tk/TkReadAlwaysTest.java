@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -40,14 +40,14 @@ import org.takes.rs.RsText;
  * Test case for {@link TkReadAlways}.
  * @since 0.30
  */
-public final class TkReadAlwaysTest {
+final class TkReadAlwaysTest {
 
     /**
      * Send a request with body which is ignored.
      * @throws Exception If there are problems
      */
     @Test
-    public void requestBodyIsIgnored() throws Exception {
+    void requestBodyIsIgnored() throws Exception {
         final String expected = "response ok";
         final Take take = new Take() {
             @Override
@@ -61,8 +61,8 @@ public final class TkReadAlwaysTest {
                 public void exec(final URI home) throws IOException {
                     new JdkRequest(home)
                         .method("POST").header(
-                            "Content-Type", "application/x-www-form-urlencoded"
-                        ).body()
+                        "Content-Type", "application/x-www-form-urlencoded"
+                    ).body()
                         .formParam("name", "Jeff Warraby")
                         .formParam("age", "4")
                         .back()

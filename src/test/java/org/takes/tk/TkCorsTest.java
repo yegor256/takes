@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.takes.facets.hamcrest.HmRsStatus;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
-import org.takes.rs.RsPrint;
+import org.takes.rs.HeadPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -87,7 +87,7 @@ final class TkCorsTest {
         throws Exception {
         MatcherAssert.assertThat(
             "Wrong value on header.",
-            new RsPrint(
+            new HeadPrint(
                 new TkCors(
                     new TkFixed(new RsText()),
                     "http://www.teamed.io",
@@ -98,7 +98,7 @@ final class TkCorsTest {
                         "Origin: http://wrong.teamed.io"
                     )
                 )
-            ).printHead(),
+            ).asString(),
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 403"),
                 Matchers.containsString(

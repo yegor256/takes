@@ -25,21 +25,23 @@ package org.takes.misc;
 
 import java.util.Arrays;
 import java.util.Collections;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link VerboseIterator}.
  * @since 0.15.1
  */
-public class VerboseIteratorTest {
+final class VerboseIteratorTest {
 
     /**
      * VerboseIterator can return next value on a valid list.
      */
     @Test
-    public final void returnsNextValue() {
+    void returnsNextValue() {
         final String accept = "Accept: text/plain";
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
@@ -50,7 +52,7 @@ public class VerboseIteratorTest {
                     "Cache-Control: no-cache",
                     "From: user@example.com"
                 ),
-                "Empty Error Message"
+                new TextOf("Empty Error Message")
             ).iterator().next(),
             Matchers.equalTo(accept)
         );
@@ -60,7 +62,7 @@ public class VerboseIteratorTest {
      * VerboseIterator can inform has a next value on a valid list.
      */
     @Test
-    public final void informsHasNextValue() {
+    void informsHasNextValue() {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Arrays.asList(
@@ -69,7 +71,7 @@ public class VerboseIteratorTest {
                     "Accept: text/*;",
                     "Accept-Encoding: gzip;q=1.0"
                 ),
-                "This error should not be thrown"
+                new TextOf("This error should not be thrown")
             ).iterator().hasNext(), Matchers.equalTo(true)
         );
     }
@@ -77,23 +79,28 @@ public class VerboseIteratorTest {
     /**
      * VerboseIterator next value throws exception on an empty list.
      */
-    @Test(expected = RuntimeException.class)
-    public final void nextValueThrowsExceptionOnEmptyList() {
-        new VerboseIterable<String>(
-            Collections.<String>emptyList(),
-            "Expected Error Message"
-        ).iterator().next();
+    @Test
+    void nextValueThrowsExceptionOnEmptyList() {
+        Assertions.assertThrows(
+            RuntimeException.class,
+            () -> {
+                new VerboseIterable<String>(
+                    Collections.<String>emptyList(),
+                    new TextOf("Expected Error Message")
+                ).iterator().next();
+            }
+        );
     }
 
     /**
      * VerboseIterator returns false in has next value on empty list.
      */
     @Test
-    public final void returnFalseInHasNextValueOnEmptyList() {
+    void returnFalseInHasNextValueOnEmptyList() {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 Collections.<String>emptyList(),
-                "Non used Error Message"
+                new TextOf("Non used Error Message")
             ).iterator().hasNext(),
             Matchers.equalTo(false)
         );
@@ -102,17 +109,22 @@ public class VerboseIteratorTest {
     /**
      * VerboseIterator can remove a value.
      */
-    @Test(expected = UnsupportedOperationException.class)
-    public final void removeValue() {
-        new VerboseIterable<String>(
-            Arrays.asList(
-                "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
-                "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
-                "Max-Forwards: 10",
-                "Origin: http://www.example-social-network.com",
-                "User-Agent: Mozilla/5.0 (X11; Linux x86_64) Gecko/2010010"
-            ),
-            "Thrown Error Message"
-        ).iterator().remove();
+    @Test
+    void removeValue() {
+        Assertions.assertThrows(
+            UnsupportedOperationException.class,
+            () -> {
+                new VerboseIterable<String>(
+                    Arrays.asList(
+                        "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
+                        "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
+                        "Max-Forwards: 10",
+                        "Origin: http://www.example-social-network.com",
+                        "User-Agent: Mozilla/5.0 (X11; Linux x86_64) Gecko/2010010"
+                    ),
+                    new TextOf("Thrown Error Message")
+                ).iterator().remove();
+            }
+        );
     }
 }

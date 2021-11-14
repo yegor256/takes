@@ -27,14 +27,14 @@ SOFTWARE.
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.40.1</version>
+    <version>0.49.1</version>
   </parent>
   <groupId>org.takes.test</groupId>
   <artifactId>file-manager</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
     <saxon.version>9.1.0.8</saxon.version>
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.8</jdk.version>
   </properties>
   <dependencies>
     <dependency>
@@ -70,6 +70,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-log</artifactId>
+      <version>0.20.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -209,7 +210,7 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>@qulice.version@</version>
+            <version>0.19.4</version>
           </plugin>
         </plugins>
       </build>

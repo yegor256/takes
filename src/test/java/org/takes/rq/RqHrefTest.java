@@ -28,22 +28,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
 /**
  * Test case for {@link RqHref.Base}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RqHrefTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqHrefTest {
 
     /**
      * RqHref.Base can parse a query.
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpQuery() throws IOException {
+    void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Base(
                 new RqFake(
@@ -64,7 +64,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void takesProtoIntoAccount() throws IOException {
+    void takesProtoIntoAccount() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Base(
                 new RqFake(
@@ -85,7 +85,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void parsesHttpQueryWithoutHost() throws IOException {
+    void parsesHttpQueryWithoutHost() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Base(
                 new RqFake(
@@ -103,31 +103,39 @@ public final class RqHrefTest {
     /**
      * RqHref.Base should throw {@link HttpException} when parsing
      * Request without Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnAbsentRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqSimple(Collections.<String>emptyList(), null)
-        ).href();
+    @Test
+    void failsOnAbsentRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqHref.Base(
+                    new RqSimple(Collections.<String>emptyList(), null)
+                ).href();
+            }
+        );
     }
 
     /**
      * RqHref.Base should throw {@link HttpException} when parsing
      * Request with illegal Request-Line.
-     * @throws IOException If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnIllegalRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GIVE/contacts",
-                    "Host: 2.example.com"
-                ),
-                ""
-            )
-        ).href();
+    @Test
+    void failsOnIllegalRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new RqHref.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GIVE/contacts",
+                            "Host: 2.example.com"
+                        ),
+                        ""
+                    )
+                ).href();
+            }
+        );
     }
 
     /**
@@ -135,7 +143,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsParams() throws IOException {
+    void extractsParams() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Base(
                 new RqFake(
@@ -156,7 +164,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsFirstParam() throws IOException {
+    void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Base(
                 new RqFake(
@@ -176,7 +184,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsHome() throws IOException {
+    void extractsHome() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Smart(
                 new RqHref.Base(
@@ -198,7 +206,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsHomeWithProtocol() throws IOException {
+    void extractsHomeWithProtocol() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Smart(
                 new RqHref.Base(
@@ -221,7 +229,7 @@ public final class RqHrefTest {
      * @throws IOException If some problem inside
      */
     @Test
-    public void extractsParamByDefault() throws IOException {
+    void extractsParamByDefault() throws IOException {
         MatcherAssert.assertThat(
             new RqHref.Smart(
                 new RqHref.Base(

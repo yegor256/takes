@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.list.ListOf;
 import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
@@ -74,7 +74,7 @@ public final class CcPlain implements Codec {
     public Identity decode(final byte[] bytes) throws IOException {
         final List<Text> parts = new ListOf<>(
             new Split(
-                new TextOf(new BytesOf(bytes)), ";"
+                new TextOf(bytes), ";"
             )
         );
         final Map<String, String> map = new HashMap<>(parts.size());

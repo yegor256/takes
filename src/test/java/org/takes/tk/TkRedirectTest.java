@@ -36,8 +36,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkRedirect}.
  * @since 0.10
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-final class TkRedirectTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class TkRedirectTest {
     /**
      * Constant variable for HTTP header testing.
      */

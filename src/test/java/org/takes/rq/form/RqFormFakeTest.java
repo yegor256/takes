@@ -23,12 +23,12 @@
  */
 package org.takes.rq.form;
 
-import com.google.common.escape.Escaper;
-import com.google.common.net.UrlEscapers;
-import java.util.Arrays;
+import java.net.URLEncoder;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqForm;
 
@@ -36,7 +36,7 @@ import org.takes.rq.RqForm;
  * Test case for {@link RqFormFake}.
  * @since 0.33
  */
-public final class RqFormFakeTest {
+final class RqFormFakeTest {
 
     /**
      * Content-Length header template.
@@ -48,26 +48,23 @@ public final class RqFormFakeTest {
      * @throws Exception If something goes wrong.
      */
     @Test
-    public void createsFormRequestWithParams() throws Exception {
+    void createsFormRequestWithParams() throws Exception {
         final String key = "key";
         final String akey = "anotherkey";
         final String value = "value";
         final String avalue = "a&b";
         final String aavalue = "againanothervalue";
-        final Escaper escaper = UrlEscapers.urlFormParameterEscaper();
         final RqForm req = new RqFormFake(
             new RqFake(
-                Arrays.asList(
+                new ListOf<String>(
                     "GET /form",
                     "Host: www.example5.com",
                     String.format(
                         RqFormFakeTest.HEADER,
-                        escaper.escape(key).length() + 1
-                            + escaper.escape(value).length() + 1
-                            + escaper.escape(key).length() + 1
-                            + escaper.escape(avalue).length() + 1
-                            + escaper.escape(akey).length() + 1
-                            + escaper.escape(aavalue).length()
+                        URLEncoder.encode(
+                            "key=value&key=a&b&anotherkey=againanothervalue",
+                            "UTF-8"
+                        ).length()
                     )
                 ),
                 ""
@@ -93,14 +90,17 @@ public final class RqFormFakeTest {
     /**
      * RqFormFake throws an IllegalArgumentException when invoked with
      * wrong number of parameters.
-     * @throws Exception If something goes wrong.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void throwsExceptionWhenNotCorrectlyCreated()
-        throws Exception {
-        new RqFormFake(
-            new RqFake(),
-            "param"
+    @Test
+    void throwsExceptionWhenNotCorrectlyCreated() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+                new RqFormFake(
+                    new RqFake(),
+                    "param"
+                );
+            }
         );
     }
 }

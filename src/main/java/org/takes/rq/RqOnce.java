@@ -27,6 +27,7 @@ import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
@@ -51,17 +52,19 @@ public final class RqOnce extends RqWrap {
     public RqOnce(final Request req) {
         super(
             new RequestOf(
-                new Sticky<>(req::head),
-                new Scalar<InputStream>() {
-                    private final Scalar<String> text = new Sticky<>(
-                        new TextOf(req::body)::asString
-                    );
+                new IoChecked<>(new Sticky<>(req::head))::value,
+                new IoChecked<>(
+                    new Scalar<InputStream>() {
+                        private final Scalar<String> text = new Sticky<>(
+                            new TextOf(req::body)::asString
+                        );
 
-                    @Override
-                    public InputStream value() throws Exception {
-                        return new InputStreamOf(this.text.value());
+                        @Override
+                        public InputStream value() throws Exception {
+                            return new InputStreamOf(this.text.value());
+                        }
                     }
-                }
+                )::value
             )
         );
     }
