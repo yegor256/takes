@@ -314,7 +314,7 @@ SOFTWARE.
         <version>3.0.0-M5</version>
         <configuration>
           <!--
-          @todo #1110 There are 18 tests that fail now, mostly due to versions
+          @todo #1110:1h There are 18 tests that fail now, mostly due to versions
            upgrade (or an old Mockito version).
            We must fix them ASAP and then remove the next line
           -->
