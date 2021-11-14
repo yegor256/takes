@@ -97,10 +97,10 @@ final class XeWhenTest {
     /**
      * XeWhen can build XML response with negative condition.
      *
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void buildsXmlResponseFromNegativeCondition() throws IOException {
+    void buildsXmlResponseFromNegativeCondition() throws Exception {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
