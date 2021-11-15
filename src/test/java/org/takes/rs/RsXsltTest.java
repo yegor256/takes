@@ -34,7 +34,7 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.EndsWith;
 import org.takes.misc.StateAwareInputStream;
@@ -49,7 +49,8 @@ final class RsXsltTest {
     /**
      * Validate encoding.
      */
-    @BeforeClass
+    @BeforeAll
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
     public static void before() {
         MatcherAssert.assertThat(
             "default charset during testing must be UTF-8",
