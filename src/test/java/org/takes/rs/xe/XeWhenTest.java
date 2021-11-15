@@ -28,13 +28,17 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 import org.cactoos.Scalar;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link XeWhen}.
  * @since 0.13
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class XeWhenTest {
 
     /**
@@ -93,10 +97,10 @@ final class XeWhenTest {
     /**
      * XeWhen can build XML response with negative condition.
      *
-     * @throws IOException If some problem inside
+     * @throws Exception If some problem inside
      */
     @Test
-    void buildsXmlResponseFromNegativeCondition() throws IOException {
+    void buildsXmlResponseFromNegativeCondition() throws Exception {
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
@@ -124,6 +128,23 @@ final class XeWhenTest {
                 "/negative/memory"
             )
         );
+        new Assertion<>(
+            "Must be empty when negative condition without negative source",
+            new TextOf(
+                new RsXembly(
+                    new XeAppend(
+                        "negative",
+                        new XeWhen(
+                            false,
+                            new XeDate()
+                        )
+                    )
+                ).body()
+            ).asString(),
+            XhtmlMatchers.hasXPaths(
+                "/negative"
+            )
+        ).affirm();
     }
 
 }

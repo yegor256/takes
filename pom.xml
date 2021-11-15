@@ -469,7 +469,7 @@ SOFTWARE.
                   <goal>report</goal>
                 </goals>
                 <!--
-                    @todo #1067:30m This limits are set according to
+                    @todo #1088:30m This limits are set according to
                      current metrics. Improve test coverage and
                      increase a limit, than update this task.
                      Remove this task when 0.99 is reached for each metric.
@@ -482,12 +482,12 @@ SOFTWARE.
                         <limit>
                           <counter>INSTRUCTION</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.54</minimum>
+                          <minimum>0.67</minimum>
                         </limit>
                         <limit>
                           <counter>LINE</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.70</minimum>
+                          <minimum>0.76</minimum>
                         </limit>
                         <limit>
                           <counter>BRANCH</counter>
@@ -497,12 +497,12 @@ SOFTWARE.
                         <limit>
                           <counter>COMPLEXITY</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.40</minimum>
+                          <minimum>0.52</minimum>
                         </limit>
                         <limit>
                           <counter>METHOD</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.57</minimum>
+                          <minimum>0.70</minimum>
                         </limit>
                       </limits>
                     </rule>

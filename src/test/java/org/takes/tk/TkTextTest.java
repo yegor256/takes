@@ -23,6 +23,8 @@
  */
 package org.takes.tk;
 
+import java.io.InputStream;
+import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -36,6 +38,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkText}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkTextTest {
 
     /**
@@ -47,6 +50,72 @@ final class TkTextTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(new TkText(body).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkText can create a text from {@link Scalar}.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromScalar() throws Exception {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkText(() -> body).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkText can create a text from byte array.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromByteArray() throws Exception {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkText(body.getBytes()).act(new RqFake())),
+            new TextIs(
+                new Joined(
+                    "\r\n",
+                    "HTTP/1.1 200 OK",
+                    String.format("Content-Length: %s", body.length()),
+                    "Content-Type: text/plain",
+                    "",
+                    body
+                )
+            )
+        );
+    }
+
+    /**
+     * TkText can create a text from {@link InputStream}.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void createsTextResponseFromInputStream() throws Exception {
+        final String body = "hello, world!";
+        MatcherAssert.assertThat(
+            new RsPrint(new TkText(new InputStreamOf(body)).act(new RqFake())),
             new TextIs(
                 new Joined(
                     "\r\n",
