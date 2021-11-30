@@ -74,7 +74,7 @@ final class RqChunkTest {
                     data,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                ).asString()
+                ).toString()
             )
         ).body();
         final byte[] buf = new byte[data.length()];
@@ -114,7 +114,7 @@ final class RqChunkTest {
                     third,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                ).asString()
+                ).toString()
             )
         ).body();
         final byte[] buf = new byte[length];
@@ -148,7 +148,7 @@ final class RqChunkTest {
                     data,
                     RqChunkTest.END_OF_CHUNK,
                     ""
-                ).asString()
+                ).toString()
             )
         ).body();
         final byte[] buf = new byte[data.length()];

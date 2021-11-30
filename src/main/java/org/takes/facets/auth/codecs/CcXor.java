@@ -26,8 +26,8 @@ package org.takes.facets.auth.codecs;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.takes.facets.auth.Identity;
 
 /**

@@ -108,7 +108,7 @@ public final class RsPrettyJson implements Response {
             final JsonObject obj = rdr.readObject();
             try (JsonWriter wrt = Json.createWriterFactory(
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
-                )
+            )
                 .createWriter(res)
             ) {
                 wrt.writeObject(obj);

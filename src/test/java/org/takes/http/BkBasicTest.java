@@ -36,11 +36,10 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -68,8 +67,7 @@ import org.takes.tk.TkText;
     {
         "PMD.ExcessiveImports",
         "PMD.TooManyMethods"
-    })
-final class BkBasicTest {
+    }) final class BkBasicTest {
 
     /**
      * Carriage return constant.
@@ -233,8 +231,11 @@ final class BkBasicTest {
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -253,7 +254,7 @@ final class BkBasicTest {
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -292,8 +293,11 @@ final class BkBasicTest {
                 final InputStream input = socket.getInputStream();
                 // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
@@ -309,7 +313,7 @@ final class BkBasicTest {
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";

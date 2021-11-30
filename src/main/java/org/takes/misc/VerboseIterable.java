@@ -24,6 +24,7 @@
 package org.takes.misc;
 
 import java.util.Iterator;
+import org.cactoos.Text;
 
 /**
  * Verbose iterable.
@@ -41,14 +42,14 @@ public final class VerboseIterable<T> implements Iterable<T> {
     /**
      * Error message when running out of items.
      */
-    private final CharSequence error;
+    private final Text error;
 
     /**
      * Ctor.
      * @param iter Original iterator
      * @param msg Error message
      */
-    public VerboseIterable(final Iterable<T> iter, final CharSequence msg) {
+    public VerboseIterable(final Iterable<T> iter, final Text msg) {
         this.origin = iter;
         this.error = msg;
     }

@@ -52,8 +52,7 @@ import org.takes.tk.TkEmpty;
             "PMD.StdCyclomaticComplexity",
             "PMD.ModifiedCyclomaticComplexity"
         }
-    )
-final class BkParallelTest {
+    ) final class BkParallelTest {
     /**
      * BkParallel runs requests in parallel, hence even
      * when handling of a request blocks, other requests

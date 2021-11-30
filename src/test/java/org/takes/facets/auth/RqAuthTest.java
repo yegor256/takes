@@ -35,14 +35,14 @@ import org.takes.rq.RqWithHeader;
  * Test case for {@link RqAuth}.
  * @since 0.9.12
  */
-public class RqAuthTest {
+final class RqAuthTest {
 
     /**
      * RqAuth can return identity.
      * @throws IOException If some problem inside
      */
     @Test
-    public final void returnsIdentity() throws IOException {
+    void returnsIdentity() throws IOException {
         final Identity.Simple identity = new Identity.Simple("urn:test:1");
         MatcherAssert.assertThat(
             new RqAuth(

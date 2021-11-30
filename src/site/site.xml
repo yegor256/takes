@@ -26,21 +26,21 @@ SOFTWARE.
   <skin>
     <groupId>com.jcabi</groupId>
     <artifactId>jcabi-maven-skin</artifactId>
-    <version>1.5.1</version>
+    <version>1.7.1</version>
   </skin>
   <bannerLeft>
     <name>takes.org</name>
     <src>logo.svg</src>
-    <href>http://www.takes.org/</href>
+    <href>https://www.takes.org/</href>
     <width>96</width>
     <height>96</height>
   </bannerLeft>
   <body>
     <head>
-      <link href="http://www.takes.org/logo.png" rel="shortcut icon"/>
+      &lt;link href="http://www.takes.org/logo.png" rel="shortcut icon"/&gt;
     </head>
     <breadcrumbs>
-      <item name="take.com" href="http://www.takes.org"/>
+      <item name="take.com" href="https://www.takes.org"/>
     </breadcrumbs>
     <menu name="Overview">
       <item name="Introduction" href="./index.html"/>

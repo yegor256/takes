@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.scalar.NumberOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;

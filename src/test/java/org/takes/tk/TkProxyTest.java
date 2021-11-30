@@ -23,18 +23,15 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
-import java.util.Collection;
+import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.llorllale.cactoos.matchers.TextHasString;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.TkFork;
@@ -53,152 +50,104 @@ import org.takes.rs.RsText;
  * @since 0.25
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@RunWith(Parameterized.class)
 @SuppressWarnings("PMD.TooManyMethods")
-public final class TkProxyTest {
+final class TkProxyTest {
 
     /**
      * A {@code Take} implementation that returns the content of the request
      * as body of its response.
      */
-    private static final Take ECHO = new Take() {
-        @Override
-        public Response act(final Request req) throws IOException {
-            return new RsText(new RqPrint(req).print());
-        }
-    };
-
-    /**
-     * Http method.
-     */
-    private final String method;
-
-    /**
-     * Expected test result.
-     */
-    private final String expected;
-
-    /**
-     * Constructor.
-     * @param method Http method.
-     * @param expected Expected test result.
-     */
-    public TkProxyTest(final String method, final String expected) {
-        this.method = method;
-        this.expected = expected;
-    }
+    private static final Take ECHO = req -> new RsText(new RqPrint(req).print());
 
     /**
      * Http methods for testing.
      * @return The testing data
      */
-    @Parameterized.Parameters
-    public static Collection<Object[]> methods() {
-        return Arrays.asList(
-            new Object[][]{
-                {RqMethod.POST, "hello, post!"},
-                {RqMethod.GET, "hello, get!"},
-                {RqMethod.PUT, "hello, put!"},
-                {RqMethod.DELETE, "hello, delete!"},
-                {RqMethod.TRACE, "hello, trace!"},
-            });
-    }
-
-    /**
-     * TkProxy can just work.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void justWorks() throws Exception {
-        new FtRemote(
-            new TkFork(
-                new FkMethods(this.method, new TkFixed(this.expected))
-            )
-        ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws Exception {
-                    MatcherAssert.assertThat(
-                        new RsPrint(
-                            new TkProxy(home).act(
-                                new RqFake(TkProxyTest.this.method)
-                            )
-                        ),
-                        new TextHasString(
-                            TkProxyTest.this.expected
-                        )
-                    );
-                }
-            }
+    static Iterable<Arguments> cases() {
+        return new IterableOf<>(
+            Arguments.arguments(RqMethod.POST, "hello, post!"),
+            Arguments.arguments(RqMethod.GET, "hello, get!"),
+            Arguments.arguments(RqMethod.PUT, "hello, put!"),
+            Arguments.arguments(RqMethod.DELETE, "hello, delete!"),
+            Arguments.arguments(RqMethod.TRACE, "hello, trace!")
         );
     }
 
-    /**
-     * TkProxy can correctly maps path string.
-     * @throws Exception If some problem inside
-     * @checkstyle AnonInnerLengthCheck (100 lines)
-     */
-    @Test
-    public void correctlyMapsPathString() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(new RqHref.Base(req).href().toString());
-            }
-        };
+    @ParameterizedTest
+    @MethodSource("cases")
+    void justWorks(
+        final String method, final String expected
+    ) throws Exception {
         new FtRemote(
             new TkFork(
-                new FkMethods(this.method, take)
+                new FkMethods(method, new TkFixed(expected))
             )
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws Exception {
-                    MatcherAssert.assertThat(
-                        new BodyPrint(
-                            new TkProxy(home).act(
-                                new RqFake(
-                                    TkProxyTest.this.method,
-                                    "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
-                                )
-                            )
-                        ).asString(),
-                        Matchers.equalTo(
-                            String.format(
-                                "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
-                                home.getHost(), home.getPort()
-                            )
+            home ->
+                MatcherAssert.assertThat(
+                    new RsPrint(
+                        new TkProxy(home).act(
+                            new RqFake(method)
                         )
-                    );
-                }
-            }
+                    ),
+                    new TextHasString(
+                        expected
+                    )
+                )
         );
     }
 
-    /**
-     * TkProxy can properly modifies the host header.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void modifiesHost() throws Exception {
+    @ParameterizedTest
+    @MethodSource("cases")
+    void correctlyMapsPathString(final String method, final String expected)
+        throws Exception {
+        final Take take = req ->
+            new RsText(new RqHref.Base(req).href().toString());
         new FtRemote(
             new TkFork(
-                new FkMethods(this.method, TkProxyTest.ECHO)
+                new FkMethods(method, take)
+            )
+        ).exec(
+            home ->
+                MatcherAssert.assertThat(
+                    new BodyPrint(
+                        new TkProxy(home).act(
+                            new RqFake(
+                                method,
+                                "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
+                            )
+                        )
+                    ).asString(),
+                    Matchers.equalTo(
+                        String.format(
+                            "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
+                            home.getHost(), home.getPort()
+                        )
+                    )
+                )
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("cases")
+    void modifiesHost(
+        final String method, final String expected
+    ) throws Exception {
+        new FtRemote(
+            new TkFork(
+                new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
             // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws Exception {
-                    MatcherAssert.assertThat(
-                        new BodyPrint(new TkProxy(
-                            home.toURL().toString()
-                        ).act(
+            home ->
+                MatcherAssert.assertThat(
+                    new BodyPrint(
+                        new TkProxy(home.toURL().toString()).act(
                             new RqFake(
                                 Arrays.asList(
                                     String.format(
                                         "%s /f?%%D0%%B0=3&b-6",
-                                        TkProxyTest.this.method
+                                        method
                                     ),
                                     "Host: example.com",
                                     "Accept: text/xml",
@@ -206,38 +155,34 @@ public final class TkProxyTest {
                                 ),
                                 ""
                             )
-                        )).asString(),
-                        Matchers.containsString(
-                            String.format(
-                                "Host: %s:%d",
-                                home.getHost(),
-                                home.getPort()
-                            )
                         )
-                    );
-                }
-            }
+                    ).asString(),
+                    Matchers.containsString(
+                        String.format(
+                            "Host: %s:%d",
+                            home.getHost(),
+                            home.getPort()
+                        )
+                    )
+                )
         );
     }
 
-    /**
-     * TkProxy can add its specific header.
-     * @throws Exception If some problem inside
-     */
-    @Test
-    public void addsSpecificHeader() throws Exception {
+    @ParameterizedTest
+    @MethodSource("cases")
+    void addsSpecificHeader(
+        final String method, final String expected
+    ) throws Exception {
         final String mark = "foo";
         new FtRemote(
             new TkFork(
-                new FkMethods(this.method, TkProxyTest.ECHO)
+                new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws Exception {
-                    MatcherAssert.assertThat(
-                        new HeadPrint(new TkProxy(
+            home ->
+                MatcherAssert.assertThat(
+                    new HeadPrint(
+                        new TkProxy(
                             home.toURL().toString(),
                             mark
                         ).act(
@@ -245,75 +190,65 @@ public final class TkProxyTest {
                                 Arrays.asList(
                                     String.format(
                                         "%s /%%D0%%B0",
-                                        TkProxyTest.this.method
+                                        method
                                     ),
                                     "Host: www.bar.com"
                                 ),
                                 ""
                             )
-                        )).asString(),
-                        Matchers.containsString(
-                            String.format(
-                                // @checkstyle LineLengthCheck (1 line)
-                                "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
-                                home,
-                                mark
-                            )
                         )
-                    );
-                }
-            }
+                    ).asString(),
+                    Matchers.containsString(
+                        String.format(
+                            // @checkstyle LineLengthCheck (1 line)
+                            "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
+                            home,
+                            mark
+                        )
+                    )
+                )
         );
     }
 
-    /**
-     * TkProxy can add all initial headers.
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void addsAllInitialHeaders() throws Exception {
+    void addsAllInitialHeaders() throws Exception {
         final String body = "Hello World !";
         new FtRemote(
             new TkFork(
                 new FkMethods("POST", TkProxyTest.ECHO)
             )
         ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws Exception {
-                    MatcherAssert.assertThat(
-                        new BodyPrint(
-                            new TkProxy(home).act(
-                                new RqFake(
-                                    Arrays.asList(
-                                        "POST /%D0%B0",
-                                        String.format(
-                                            "Content-Length: %s",
-                                            body.length()
-                                        ),
-                                        "Content-Type: text/plain",
-                                        "Accept: text/json",
-                                        "Cookie: a=45",
-                                        "Cookie: ttt=ALPHA",
-                                        "Accept-Encoding: gzip",
-                                        "Host: www.bar-foo.com"
+            home ->
+                MatcherAssert.assertThat(
+                    new BodyPrint(
+                        new TkProxy(home).act(
+                            new RqFake(
+                                Arrays.asList(
+                                    "POST /%D0%B0",
+                                    String.format(
+                                        "Content-Length: %s",
+                                        body.length()
                                     ),
-                                    body
-                                )
+                                    "Content-Type: text/plain",
+                                    "Accept: text/json",
+                                    "Cookie: a=45",
+                                    "Cookie: ttt=ALPHA",
+                                    "Accept-Encoding: gzip",
+                                    "Host: www.bar-foo.com"
+                                ),
+                                body
                             )
-                        ).asString(),
-                        Matchers.allOf(
-                            Matchers.containsString("Content-Length:"),
-                            Matchers.containsString("Content-Type:"),
-                            Matchers.containsString("Accept:"),
-                            Matchers.containsString("Cookie: a"),
-                            Matchers.containsString("Cookie: ttt"),
-                            Matchers.containsString("Accept-Encoding:")
                         )
-                    );
-                }
-            }
+                    ).asString(),
+                    Matchers.allOf(
+                        Matchers.containsString("Content-Length:"),
+                        Matchers.containsString("Content-Type:"),
+                        Matchers.containsString("Accept:"),
+                        Matchers.containsString("Cookie: a"),
+                        Matchers.containsString("Cookie: ttt"),
+                        Matchers.containsString("Accept-Encoding:")
+                    )
+                )
         );
     }
 }

@@ -32,8 +32,8 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqMultipart;
@@ -47,7 +47,7 @@ import org.takes.rq.RqWithHeaders;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
-public final class RqMtFakeTest {
+final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.
      */
@@ -62,64 +62,74 @@ public final class RqMtFakeTest {
     /**
      * RqMtFake can throw exception on no name
      * at Content-Disposition header.
-     * @throws Exception if there is some problem inside
      */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoNameAtContentDispositionHeader()
-        throws Exception {
-        new RqMtFake(
-            new RqWithHeader(
-                new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
-                ).asString()
-            )
-        ).body();
+    @Test
+    void throwsExceptionOnNoNameAtContentDispositionHeader() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                new RqMtFake(
+                    new RqWithHeader(
+                        new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
+                        new FormattedText(
+                            RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
+                        ).asString()
+                    )
+                ).body();
+            }
+        );
     }
 
     /**
      * RqMtFake can throw exception on no boundary
      * at Content-Type header.
-     * @throws Exception if there is some problem inside
      */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnNoBoundaryAtContentTypeHeader()
-        throws Exception {
-        final int len = 100_005;
-        new RqMtBase(
-            new RqFake(
-                Arrays.asList(
-                    "POST /h?s=3 HTTP/1.1",
-                    "Host: wwo.example.com",
-                    "Content-Type: multipart/form-data; boundaryAaB03x",
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_LENGTH, len
-                    ).asString()
-                ),
-                ""
-            )
+    @Test
+    void throwsExceptionOnNoBoundaryAtContentTypeHeader() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                final int len = 100_005;
+                new RqMtBase(
+                    new RqFake(
+                        Arrays.asList(
+                            "POST /h?s=3 HTTP/1.1",
+                            "Host: wwo.example.com",
+                            "Content-Type: multipart/form-data; boundaryAaB03x",
+                            new FormattedText(
+                                RqMtFakeTest.CONTENT_LENGTH, len
+                            ).asString()
+                        ),
+                        ""
+                    )
+                );
+            }
         );
     }
 
     /**
      * RqMtFake can throw exception on invalid Content-Type header.
-     * @throws Exception if there is some error inside.
      */
-    @Test(expected = IOException.class)
-    public void throwsExceptionOnInvalidContentTypeHeader() throws Exception {
-        final int len = 100_004;
-        new RqMtBase(
-            new RqFake(
-                Arrays.asList(
-                    "POST /h?r=3 HTTP/1.1",
-                    "Host: www.example.com",
-                    "Content-Type: multipart; boundary=AaB03x",
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_LENGTH, len
-                    ).asString()
-                ),
-                ""
-            )
+    @Test
+    void throwsExceptionOnInvalidContentTypeHeader() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                final int len = 100_004;
+                new RqMtBase(
+                    new RqFake(
+                        Arrays.asList(
+                            "POST /h?r=3 HTTP/1.1",
+                            "Host: www.example.com",
+                            "Content-Type: multipart; boundary=AaB03x",
+                            new FormattedText(
+                                RqMtFakeTest.CONTENT_LENGTH, len
+                            ).asString()
+                        ),
+                        ""
+                    )
+                );
+            }
         );
     }
 
@@ -128,7 +138,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some problem inside
      */
     @Test
-    public void parsesHttpBody() throws Exception {
+    void parsesHttpBody() throws Exception {
         final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t4";
         final RqMultipart multi = new RqMtFake(
@@ -183,7 +193,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some problem inside
      */
     @Test
-    public void closesAllParts() throws Exception {
+    void closesAllParts() throws Exception {
         final String body = "RqMtFakeTest.closesAllParts";
         final RqMultipart request = new RqMtFake(
             new RqFake(),
@@ -221,7 +231,7 @@ public final class RqMtFakeTest {
         );
         try {
             multi.part(name).iterator().next().body().read();
-            Assert.fail(exmessage);
+            Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex,
@@ -234,7 +244,7 @@ public final class RqMtFakeTest {
         );
         try {
             multi.part(content).iterator().next().body().read();
-            Assert.fail(exmessage);
+            Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex,
@@ -252,7 +262,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some problem inside
      */
     @Test
-    public void closesExplicitlyAllParts() throws Exception {
+    void closesExplicitlyAllParts() throws Exception {
         final String body = "RqMtFakeTest.closesExplicitlyAllParts";
         final RqMultipart request = new RqMtFake(
             new RqFake(),
@@ -295,7 +305,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some problem inside
      */
     @Test
-    public void returnsEmptyIteratorOnInvalidPartRequest() throws Exception {
+    void returnsEmptyIteratorOnInvalidPartRequest() throws Exception {
         final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMtFake(
             new RqFake(),
@@ -329,7 +339,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some problem inside
      */
     @Test
-    public void returnsCorrectNamesSet() throws Exception {
+    void returnsCorrectNamesSet() throws Exception {
         final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
         final RqMultipart multi = new RqMtFake(
             new RqFake(),
@@ -369,7 +379,7 @@ public final class RqMtFakeTest {
      * @throws Exception If there is some error inside
      */
     @Test
-    public void contentDispositionShouldBeRecognized() throws Exception {
+    void contentDispositionShouldBeRecognized() throws Exception {
         new RqMtFake(
             new RqFake(),
             new RqWithHeader(

@@ -27,7 +27,8 @@ import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
@@ -46,7 +47,7 @@ import org.takes.tk.TkText;
  * @checkstyle MultipleStringLiteralsCheck (500 lines)
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public final class TkConsumesTest {
+final class TkConsumesTest {
 
     /**
      * Application json.
@@ -58,7 +59,7 @@ public final class TkConsumesTest {
      * @throws Exception If some problem inside
      */
     @Test
-    public void acceptsCorrectContentTypeRequest() throws Exception {
+    void acceptsCorrectContentTypeRequest() throws Exception {
         final String contenttype = "Content-Type: application/json";
         final Take consumes = new TkConsumes(
             new TkFixed(new RsJson(new RsEmpty())),
@@ -87,32 +88,35 @@ public final class TkConsumesTest {
 
     /**
      * TkConsumes can fail on unsupported Content-Type header.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void failsOnUnsupportedAcceptHeader() throws Exception {
-        final Take consumes = new TkConsumes(
-            new TkFixed(new RsJson(new RsEmpty())),
-            TkConsumesTest.APPLICATION_JSON
+    @Test
+    void failsOnUnsupportedAcceptHeader() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                final Take consumes = new TkConsumes(
+                    new TkFixed(new RsJson(new RsEmpty())),
+                    TkConsumesTest.APPLICATION_JSON
+                );
+                consumes.act(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /?TkConsumes error",
+                            "Content-Type: application/xml"
+                        ),
+                        ""
+                    )
+                ).head();
+            }
         );
-        consumes.act(
-            new RqFake(
-                Arrays.asList(
-                    "GET /?TkConsumes error",
-                    "Content-Type: application/xml"
-                ),
-                ""
-            )
-        ).head();
     }
 
     /**
      * Checks TkConsumes equals method.
-     * @throws Exception If some problem inside
      */
     @Test
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public void equalsAndHashCodeEqualTest() throws Exception {
+    void equalsAndHashCodeEqualTest() {
         final Take take = new TkText("text");
         final String type = "Content-Type: text/plain";
         new Assertion<>(

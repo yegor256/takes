@@ -25,6 +25,7 @@ package org.takes.misc;
 
 import java.util.Arrays;
 import java.util.List;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -33,13 +34,13 @@ import org.junit.jupiter.api.Test;
  * Tests for {@link VerboseIterable}.
  * @since 0.15.1
  */
-public class VerboseIterableTest {
+final class VerboseIterableTest {
 
     /**
      * VerboseIterable can return correct size collection.
      */
     @Test
-    public final void returnsCorrectSize() {
+    void returnsCorrectSize() {
         final List<String> valid = Arrays.asList(
             "Accept: text/plain",
             "Accept-Charset: utf-8",
@@ -50,7 +51,7 @@ public class VerboseIterableTest {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
                 valid,
-                "Empty Error Message"
+                new TextOf("Empty Error Message")
             ),
             Matchers.<String>iterableWithSize(valid.size())
         );

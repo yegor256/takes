@@ -50,10 +50,10 @@ final class PsBasicDefaultTest {
                 .enter(
                     "bob",
                     "qwe r ty:+"
-            )
+                )
                 .get()
                 .urn(),
-                new IsEqual<>("urn:foo:robert")
+            new IsEqual<>("urn:foo:robert")
         );
     }
 
@@ -73,7 +73,7 @@ final class PsBasicDefaultTest {
                 .enter(
                     "yvonne",
                     "hey you"
-            )
+                )
                 .has(),
             new IsEqual<>(true)
         );
@@ -86,7 +86,7 @@ final class PsBasicDefaultTest {
                 .enter(
                     "zak",
                     "hey me"
-            )
+                )
                 .has(),
             new IsEqual<>(true)
         );
@@ -107,7 +107,7 @@ final class PsBasicDefaultTest {
                 .enter(
                     "abraham lincoln",
                     "qwer"
-            )
+                )
                 .has(),
             new IsEqual<>(true)
         );
@@ -132,7 +132,7 @@ final class PsBasicDefaultTest {
                 .enter(
                     "login",
                     "password"
-            )
+                )
                 .get()
                 .urn(),
             new IsEqual<>(urn)

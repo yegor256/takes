@@ -44,14 +44,14 @@ import org.takes.rq.RqFake;
  * @since 0.15
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public class PsFacebookTest {
+final class PsFacebookTest {
 
     /**
      * Tests if PsFacebook can call DefaultFacebookClient APIs.
      * @throws Exception if any error occurs
      */
     @Test
-    public final void canLogin() throws Exception {
+    void canLogin() throws Exception {
         final String identifier = RandomStringUtils.randomAlphanumeric(10);
         final RandomStringGenerator generator =
             new RandomStringGenerator.Builder()

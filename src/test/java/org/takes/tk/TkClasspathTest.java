@@ -24,7 +24,8 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
@@ -35,14 +36,14 @@ import org.takes.rs.HeadPrint;
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
-public final class TkClasspathTest {
+final class TkClasspathTest {
 
     /**
      * TkClasspath can dispatch by resource name.
      * @throws Exception If some problem inside
      */
     @Test
-    public void dispatchesByResourceName() throws Exception {
+    void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
             new HeadPrint(
                 new TkClasspath().act(
@@ -57,12 +58,16 @@ public final class TkClasspathTest {
 
     /**
      * TkClasspath can throw when resource not found.
-     * @throws Exception If some problem inside
      */
-    @Test(expected = HttpException.class)
-    public void throwsWhenResourceNotFound() throws Exception {
-        new TkClasspath().act(
-            new RqFake("PUT", "/something-else", "")
+    @Test
+    void throwsWhenResourceNotFound() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                new TkClasspath().act(
+                    new RqFake("PUT", "/something-else", "")
+                );
+            }
         );
     }
 }
