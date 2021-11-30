@@ -372,29 +372,29 @@ SOFTWARE.
         </executions>
       </plugin>
       <plugin>
-		  <groupId>com.ning.maven.plugins</groupId>
-		  <artifactId>duplicate-finder-maven-plugin</artifactId>
-		  <configuration>
-		    <ignoredDependencies>
-		      <dependency>
-		        <groupId>javax.json</groupId>
-		        <artifactId>javax.json-api</artifactId>
-		        <version>1.1</version>
-		      </dependency>
-		      <dependency>
-		        <groupId>javax.xml.bind</groupId>
-		        <artifactId>jaxb-api</artifactId>
-		        <version>2.3.0</version>
-		      </dependency>
-		    </ignoredDependencies>
-		  </configuration>
-		  <!--
+        <groupId>com.ning.maven.plugins</groupId>
+        <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <configuration>
+          <ignoredDependencies>
+            <dependency>
+              <groupId>javax.json</groupId>
+              <artifactId>javax.json-api</artifactId>
+              <version>1.1</version>
+            </dependency>
+            <dependency>
+              <groupId>javax.xml.bind</groupId>
+              <artifactId>jaxb-api</artifactId>
+              <version>2.3.0</version>
+            </dependency>
+          </ignoredDependencies>
+        </configuration>
+        <!--
             @todo #958:30min duplicate-finder-maven-plugin found module-info as duplicate
              and different class in [javax.json:javax.json-api:1.1,javax.xml.bind:jaxb-api:2.3.0].
              After resolving duplicatefinder in Qulice, remove this plugin and configure qulice
              plugin to enable these exclusions (see at https://www.qulice.com/qulice-maven-plugin/example-exclude.html).
            -->
-	  </plugin>
+      </plugin>
     </plugins>
   </build>
   <profiles>
