@@ -426,9 +426,8 @@ SOFTWARE.
             <configuration>
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
-                <exclude>duplicate:javax.json:javax.json-api:1.1</exclude>
-                <exclude>duplicate:javax.xml.bind:jaxb-api:2.3.0</exclude>
-                
+                <exclude>duplicatefinder:.*</exclude>
+                <exclude>dependencies:.*</exclude>
               </excludes>
             </configuration>
           </plugin>
