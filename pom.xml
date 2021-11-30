@@ -401,6 +401,7 @@ SOFTWARE.
               <excludes combine.children="append">
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                 <exclude>duplicatefinder:.*</exclude>
+                <exclude>dependencies:.*</exclude>
               </excludes>
             </configuration>
           </plugin>
