@@ -2,25 +2,25 @@ assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-  s3cfg: yegor256/home#assets/s3cfg
+env:
+  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
+  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
 decrypt:
   curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 architect:
   - paulodamaso
   - yegor256
 install: |
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
   export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 merge:
   script: |
+    pdd --source=$(pwd) --verbose --file=/dev/null
     mvn clean install -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
-    pdd --source=$(pwd) --verbose --file=/dev/null
 deploy:
   script: |
-    sudo gem install --no-rdoc --no-ri est
     version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
     while true
       do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
@@ -32,8 +32,6 @@ deploy:
     done
     mvn clean deploy -Pqulice --errors --settings ../settings.xml
     mvn clean
-    est --dir=./est --verbose --file=takes.xml --format=xml
-    s3cmd --no-progress put takes.xml --config=../s3cfg s3://est.teamed.io/takes.xml
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"

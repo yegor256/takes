@@ -65,7 +65,6 @@ public final class RqMtFake implements RqMultipart {
      * Fake ctor.
      * @param req Fake request header holder
      * @param dispositions Fake request body parts
-     * @throws IOException If fails
      */
     public RqMtFake(final Request req, final Request... dispositions) {
         this.fake = new Sticky<>(

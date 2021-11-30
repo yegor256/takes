@@ -32,7 +32,6 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsInstanceOf;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
@@ -232,7 +231,7 @@ final class RqMtFakeTest {
         );
         try {
             multi.part(name).iterator().next().body().read();
-            Assert.fail(exmessage);
+            Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex,
@@ -245,7 +244,7 @@ final class RqMtFakeTest {
         );
         try {
             multi.part(content).iterator().next().body().read();
-            Assert.fail(exmessage);
+            Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
                 ex,

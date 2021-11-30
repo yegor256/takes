@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import org.hamcrest.core.IsEqual;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.http.FtRemote;
 
@@ -45,7 +45,7 @@ final class TkSlf4jRemoteTest {
      * TkSlf4j can return an empty response body for {@link TkEmpty}.
      * @throws Exception if some I/O problem occurred.
      */
-    @Ignore
+    @Disabled
     @Test
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(

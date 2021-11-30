@@ -40,7 +40,6 @@ import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -255,7 +254,7 @@ import org.takes.tk.TkText;
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -314,7 +313,7 @@ import org.takes.tk.TkText;
      *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";

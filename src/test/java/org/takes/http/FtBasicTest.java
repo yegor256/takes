@@ -37,7 +37,7 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -147,7 +147,7 @@ final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    @Ignore
+    @Disabled
     void gracefullyHandlesStuckBack() throws Exception {
         final Take take = new Take() {
             @Override
