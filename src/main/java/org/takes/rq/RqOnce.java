@@ -38,9 +38,9 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.36
- * @todo #999:30min Please use {@link org.cactoos.text.Sticky} decorator
- *  class instead of inner anonymous class below, which prevents input
- *  from being read twice by caching results of first call internally.
+ * @todo #1080:30min Please make two decorators (HeadOnce and BodyOnce)
+ *  that prevent multiple reads of their contents. Introduce some units
+ *  tests for these new classes.
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqOnce extends RqWrap {
