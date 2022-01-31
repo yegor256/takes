@@ -65,16 +65,16 @@ public final class RqFakeTest {
      * @throws IOException If some problem inside
      */
     @Test
-    void printsCorrectly() throws IOException {
+    void printsCorrectly() {
         final RqFake req = new RqFake(
             "GET",
-            "/just-a-test",
+            "/just-a-test HTTP/1.1",
             "test-6=alpha"
         );
         MatcherAssert.assertThat(
             new RqPrint(req),
             Matchers.allOf(
-                new TextHasString("GET /just-a-test\r\n"),
+                new TextHasString("GET /just-a-test HTTP/1.1\r\n"),
                 new EndsWith("=alpha")
             )
         );
