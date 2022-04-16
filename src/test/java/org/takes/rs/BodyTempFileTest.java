@@ -65,7 +65,7 @@ final class BodyTempFileTest {
             "Body content of Body.TempFile doesn't have the correct length",
             new LengthOf(
                 new Body.TempFile(new Body.ByteArray(bytes))
-            ).intValue(),
+            ).value(),
             new IsEqual<>(bytes.length)
         );
     }

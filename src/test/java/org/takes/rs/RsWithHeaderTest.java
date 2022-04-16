@@ -28,7 +28,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsWithHeader}.
@@ -49,7 +49,7 @@ final class RsWithHeaderTest {
                     "Host", "a.example.com"
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 204 No Content",

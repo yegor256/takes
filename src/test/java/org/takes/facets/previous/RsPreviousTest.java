@@ -26,7 +26,7 @@ package org.takes.facets.previous;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -46,7 +46,7 @@ final class RsPreviousTest {
             new RsPrint(
                 new RsPrevious(new RsText(""), "/home")
             ),
-            new TextHasString(
+            new HasString(
                 "Set-Cookie: TkPrevious=%2Fhome"
             )
         );

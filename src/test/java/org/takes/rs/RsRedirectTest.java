@@ -26,7 +26,7 @@ package org.takes.rs;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RsRedirect}.
@@ -46,7 +46,7 @@ final class RsRedirectTest {
                     "/home"
                 )
             ),
-            new TextHasString("HTTP/1.1 303 See Other")
+            new HasString("HTTP/1.1 303 See Other")
         );
     }
 

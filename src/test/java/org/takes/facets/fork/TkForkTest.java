@@ -26,7 +26,7 @@ package org.takes.facets.fork;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -49,7 +49,7 @@ final class TkForkTest {
                     new RqFake("GET", "/hey?yu", "")
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",

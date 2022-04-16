@@ -30,7 +30,7 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.EndsWith;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 
 /**
@@ -74,7 +74,7 @@ public final class RqFakeTest {
         MatcherAssert.assertThat(
             new RqPrint(req),
             Matchers.allOf(
-                new TextHasString("GET /just-a-test HTTP/1.1\r\n"),
+                new HasString("GET /just-a-test HTTP/1.1\r\n"),
                 new EndsWith("=alpha")
             )
         );

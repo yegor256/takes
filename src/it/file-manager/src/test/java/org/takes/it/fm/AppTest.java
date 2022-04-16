@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.file.Files;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.nio.file.Path;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.http.FtRemote;
 
 /**
@@ -44,19 +44,13 @@ import org.takes.http.FtRemote;
 public final class AppTest {
 
     /**
-     * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
      * App can work.
+     * @param temp Temporal directory
      * @throws Exception If some problem inside
      */
     @Test
-    public void justWorks() throws Exception {
-        final File dir = this.temp.newFolder();
+    public void justWorks(@TempDir final Path temp) throws Exception {
+        final File dir = temp.toFile();
         Files.write(new File(dir, "hello.txt").toPath(), "hello, world!".getBytes());
         new FtRemote(new App(dir)).exec(
             new FtRemote.Script() {

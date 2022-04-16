@@ -26,7 +26,7 @@ package org.takes.rs;
 import org.cactoos.text.Joined;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsWithoutHeader}.
@@ -47,7 +47,7 @@ final class RsWithoutHeaderTest {
                     "Host"
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 204 No Content",

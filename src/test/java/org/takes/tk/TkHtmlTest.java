@@ -28,8 +28,8 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.HasString;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -50,7 +50,7 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body).act(new RqFake())),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -72,7 +72,7 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(() -> body).act(new RqFake())),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -94,7 +94,7 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -116,7 +116,7 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",
@@ -139,11 +139,11 @@ final class TkHtmlTest {
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
             new RsPrint(take.act(new RqFake())),
-            new TextHasString(body)
+            new HasString(body)
         );
         MatcherAssert.assertThat(
             new RsPrint(take.act(new RqFake())),
-            new TextHasString(body)
+            new HasString(body)
         );
     }
 

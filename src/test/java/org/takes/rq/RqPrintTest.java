@@ -26,7 +26,7 @@ package org.takes.rq;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RqPrint}.
@@ -51,7 +51,7 @@ final class RqPrintTest {
                     ""
                 )
             ),
-            new TextHasString("/h?a=3")
+            new HasString("/h?a=3")
         );
     }
 

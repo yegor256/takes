@@ -28,7 +28,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -94,7 +94,7 @@ final class TkProducesTest {
         );
         MatcherAssert.assertThat(
             new RsPrint(response),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",

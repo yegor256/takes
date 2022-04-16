@@ -32,7 +32,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.facets.forward.RsForward;
@@ -258,7 +258,7 @@ final class PsBasicTest {
                     )
                 )
             ),
-            new TextHasString("HTTP/1.1 200 OK")
+            new HasString("HTTP/1.1 200 OK")
         ).affirm();
     }
 
@@ -284,7 +284,7 @@ final class PsBasicTest {
             new RsPrint(
                 take.act(new RqFake())
             ),
-            new TextHasString("HTTP/1.1 401 Unauthorized\r\n")
+            new HasString("HTTP/1.1 401 Unauthorized\r\n")
         ).affirm();
     }
 

@@ -27,7 +27,7 @@ SOFTWARE.
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.56.0</version>
+    <version>0.57.2</version>
   </parent>
   <groupId>org.takes</groupId>
   <artifactId>takes</artifactId>
@@ -60,6 +60,17 @@ SOFTWARE.
         <role>Developer</role>
       </roles>
       <timezone>-7</timezone>
+    </developer>
+    <developer>
+      <id>1</id>
+      <name>Olivier B. OURA</name>
+      <email>baudoliver7@gmail.com</email>
+      <organization>Baudoliver7.com</organization>
+      <organizationUrl>https://www.baudoliver7.com</organizationUrl>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+0</timezone>
     </developer>
   </developers>
   <issueManagement>
@@ -105,7 +116,7 @@ SOFTWARE.
          https://github.com/yegor256/takes/pull/886#issuecomment-446030223
          for details.
        -->
-      <version>0.49</version>
+      <version>0.50</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
@@ -163,7 +174,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi.incubator</groupId>
       <artifactId>xembly</artifactId>
-      <version>0.22</version>
+      <version>0.25.0</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -198,7 +209,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.llorllale</groupId>
       <artifactId>cactoos-matchers</artifactId>
-      <version>0.17</version>
+      <version>0.25</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -420,8 +431,9 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
+            <version>0.19.4</version>
             <configuration>
-              <excludes combine.children="append">
+              <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
                 <exclude>duplicatefinder:.*</exclude>
                 <exclude>dependencies:.*</exclude>

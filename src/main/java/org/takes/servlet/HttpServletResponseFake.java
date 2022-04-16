@@ -38,6 +38,7 @@ import org.cactoos.io.TeeInput;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.LengthOf;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.StartsWith;
 import org.cactoos.text.TextOf;
@@ -140,12 +141,14 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new LengthOf(
-            new TeeInput(
-                new InputOf(this.response.get().body()),
-                new OutputTo(baos)
+        new Unchecked<>(
+            new LengthOf(
+                new TeeInput(
+                    new InputOf(this.response.get().body()),
+                    new OutputTo(baos)
+                )
             )
-        ).intValue();
+        ).value();
         return new ServletOutputStreamTo(baos);
     }
 

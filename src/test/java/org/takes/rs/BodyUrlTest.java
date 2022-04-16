@@ -53,7 +53,7 @@ final class BodyUrlTest {
             try (OutputStream out = new OutputTo(file.value()).stream()) {
                 new LengthOf(
                     new TeeInput(body, new OutputTo(out))
-                ).intValue();
+                ).value();
             }
             final Body.Url input = new Body.Url(file.value().toUri().toURL());
             MatcherAssert.assertThat(
@@ -75,13 +75,13 @@ final class BodyUrlTest {
             try (OutputStream out = new OutputTo(file.value()).stream()) {
                 new LengthOf(
                     new TeeInput(body, new OutputTo(out))
-                ).intValue();
+                ).value();
             }
             MatcherAssert.assertThat(
                 "Body content of Body.Url doesn't have the correct length",
                 new LengthOf(
                     new Body.Url(file.value().toUri().toURL())
-                ).intValue(),
+                ).value(),
                 new IsEqual<>(body.asBytes().length)
             );
         }

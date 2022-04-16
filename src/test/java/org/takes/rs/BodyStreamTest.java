@@ -66,7 +66,7 @@ final class BodyStreamTest {
             "Body content of Body.Stream doesn't have the correct length",
             new LengthOf(
                 new Body.Stream(new InputOf(bytes).stream())
-            ).intValue(),
+            ).value(),
             new IsEqual<>(bytes.length)
         );
     }

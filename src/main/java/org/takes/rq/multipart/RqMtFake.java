@@ -129,7 +129,9 @@ public final class RqMtFake implements RqMultipart {
                         ),
                         String.format(
                             "Content-Length: %s",
-                            new LengthOf(new InputOf(body.body())).intValue()
+                            new Unchecked<>(
+                                new LengthOf(new InputOf(body.body()))
+                            ).value()
                         )
                     ),
                     body

@@ -34,6 +34,7 @@ import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
 import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.LengthOf;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
@@ -90,7 +91,9 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
-        new LengthOf(new TeeInput(this.text, new OutputTo(output))).intValue();
+        new Unchecked<>(
+            new LengthOf(new TeeInput(this.text, new OutputTo(output)))
+        ).value();
     }
 
     /**

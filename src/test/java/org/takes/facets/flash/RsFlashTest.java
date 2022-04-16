@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import org.cactoos.text.FormattedText;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.misc.Expires;
 import org.takes.rs.RsPrint;
 
@@ -52,7 +52,7 @@ final class RsFlashTest {
             new RsPrint(
                 new RsFlash(msg)
             ),
-            new TextHasString(
+            new HasString(
                 new FormattedText(
                     "Set-Cookie: RsFlash=%s/%s",
                     URLEncoder.encode(
@@ -76,7 +76,7 @@ final class RsFlashTest {
             new RsPrint(
                 new RsFlash("i'm good, thanks", new Expires.Date(0L))
             ),
-            new TextHasString("Expires=Thu, 01 Jan 1970 00:00:00 GMT")
+            new HasString("Expires=Thu, 01 Jan 1970 00:00:00 GMT")
         ).affirm();
     }
 
@@ -90,7 +90,7 @@ final class RsFlashTest {
             () -> new RsFlash(
                 new IOException("and you?")
             ).toString(),
-            new TextHasString("text=SEVERE/and you?")
+            new HasString("text=SEVERE/and you?")
         ).affirm();
     }
 }

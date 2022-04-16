@@ -25,7 +25,7 @@ package org.takes.facets.cookies;
 
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
@@ -59,7 +59,7 @@ final class TkJoinedCookiesTest {
                     )
                 ).act(new RqFake())
             ),
-            new TextHasString("Set-Cookie: a=1, b=1; Path=/")
+            new HasString("Set-Cookie: a=1, b=1; Path=/")
         ).affirm();
     }
 

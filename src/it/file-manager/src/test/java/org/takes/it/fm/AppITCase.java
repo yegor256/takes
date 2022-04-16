@@ -28,8 +28,8 @@ import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import com.jcabi.http.wire.VerboseWire;
 import java.net.HttpURLConnection;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link App}.
@@ -49,7 +49,7 @@ public final class AppITCase {
      */
     @Test
     public void justWorks() throws Exception {
-        Assume.assumeNotNull(AppITCase.HOME);
+        Assertions.assertNotNull(AppITCase.HOME);
         new JdkRequest(String.format("%s/f", AppITCase.HOME))
             .through(VerboseWire.class)
             .fetch()

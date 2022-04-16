@@ -27,7 +27,7 @@ import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.ScalarHasValue;
+import org.llorllale.cactoos.matchers.HasValue;
 
 /**
  * Test case for {@link Equality}.
@@ -44,7 +44,7 @@ final class EqualityTest {
                 new Lowered(new TextOf("Hello")),
                 new TextOf("hello")
             ),
-            new ScalarHasValue<>(true)
+            new HasValue<>(true)
         ).affirm();
     }
 
@@ -56,7 +56,7 @@ final class EqualityTest {
                 new TextOf("John"),
                 new TextOf("Robert")
             ),
-            new ScalarHasValue<>(false)
+            new HasValue<>(false)
         ).affirm();
     }
 }

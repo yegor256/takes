@@ -61,7 +61,7 @@ final class BodyByteArrayTest {
             new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
             "Body content of Body.ByteArray doesn't have the correct length",
-            new LengthOf(new Body.ByteArray(bytes)).intValue(),
+            new LengthOf(new Body.ByteArray(bytes)).value(),
             new IsEqual<>(bytes.length)
         );
     }

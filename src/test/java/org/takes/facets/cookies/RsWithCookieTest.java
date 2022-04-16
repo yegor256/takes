@@ -26,7 +26,7 @@ package org.takes.facets.cookies;
 import org.cactoos.text.Joined;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.Throws;
 import org.takes.rs.RsPrint;
 
@@ -55,7 +55,7 @@ final class RsWithCookieTest {
                     "Path=/"
                 )
             ),
-            new TextHasString(
+            new HasString(
                 new Joined(
                     RsWithCookieTest.CRLF,
                     "Set-Cookie: foo=works?;Path=/;",
@@ -82,7 +82,7 @@ final class RsWithCookieTest {
                     "bar", "worksToo?", "Path=/2nd/path/"
                 )
             ),
-            new TextHasString(
+            new HasString(
                 new Joined(
                     RsWithCookieTest.CRLF,
                     "Set-Cookie: qux=value?;Path=/qux;",

@@ -27,7 +27,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RqWithHeader}.
@@ -47,7 +47,7 @@ import org.llorllale.cactoos.matchers.TextHasString;
                     "X-Custom-Header", "Custom-Value"
                 )
             ),
-            new TextHasString("X-Custom-Header: Custom-Value")
+            new HasString("X-Custom-Header: Custom-Value")
         );
     }
 

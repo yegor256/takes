@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -47,7 +47,7 @@ final class TkVersionedTest {
                     new RqFake()
                 )
             ),
-            new TextHasString("X-Takes-Version")
+            new HasString("X-Takes-Version")
         );
     }
 

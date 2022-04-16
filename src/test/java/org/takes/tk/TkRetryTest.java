@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.mockito.Mockito;
 import org.takes.Request;
 import org.takes.Take;
@@ -59,7 +59,7 @@ final class TkRetryTest {
                 new TkRetry(2, 2, new TkText(test))
                     .act(new RqFake())
             ),
-            new TextHasString(test)
+            new HasString(test)
         );
     }
 
@@ -122,7 +122,7 @@ final class TkRetryTest {
         );
         MatcherAssert.assertThat(
             response,
-            new TextHasString(data)
+            new HasString(data)
         );
     }
 }

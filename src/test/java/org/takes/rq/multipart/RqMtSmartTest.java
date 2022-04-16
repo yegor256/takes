@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -45,7 +44,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
@@ -111,7 +109,7 @@ final class RqMtSmartTest {
                 post,
                 "Host: www.example.com",
                 RqMtSmartTest.contentLengthHeader(
-                    new LengthOf(body).longValue()
+                    new LengthOf(body).value()
                 ),
                 RqMtSmartTest.CONTENT_TYPE
             ),
@@ -137,7 +135,7 @@ final class RqMtSmartTest {
      * @throws IOException If some problem inside
      */
     @Test
-    void identifiesBoundary() throws IOException {
+    void identifiesBoundary() throws Exception {
         final int length = 9000;
         final String part = "foo-1";
         final Text body =
@@ -155,7 +153,7 @@ final class RqMtSmartTest {
                 "POST /post?foo=3 HTTP/1.1",
                 "Host: www.foo.com",
                 RqMtSmartTest.contentLengthHeader(
-                    new LengthOf(body).longValue()
+                    new LengthOf(body).value()
                 ),
                 "Content-Type: multipart/form-data; boundary=--foo"
             ),
@@ -182,18 +180,13 @@ final class RqMtSmartTest {
     @Test
     void consumesHttpRequest() throws Exception {
         final String part = "f-1";
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(
-                    new RqPrint(
-                        new RqMtSmart(
-                            new RqMtBase(req)
-                        ).single(part)
-                    ).printBody()
-                );
-            }
-        };
+        final Take take = req -> new RsText(
+            new RqPrint(
+                new RqMtSmart(
+                    new RqMtBase(req)
+                ).single(part)
+            ).printBody()
+        );
         final Text body =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -203,30 +196,25 @@ final class RqMtSmartTest {
             );
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (50 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .header(
-                            "Content-Type",
-                            "multipart/form-data; boundary=AaB0zz"
-                        )
-                        .header(
-                            "Content-Length",
-                            String.valueOf(
-                                new LengthOf(body).longValue()
-                            )
-                        )
-                        .body()
-                        .set(new UncheckedText(body).asString())
-                        .back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.containsString("pic"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("POST")
+                .header(
+                    "Content-Type",
+                    "multipart/form-data; boundary=AaB0zz"
+                )
+                .header(
+                    "Content-Length",
+                    String.valueOf(
+                        new LengthOf(body).value()
+                    )
+                )
+                .body()
+                .set(new UncheckedText(body).asString())
+                .back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.containsString("pic"))
         );
     }
 

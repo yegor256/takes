@@ -43,7 +43,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -429,7 +429,7 @@ import org.takes.tk.TkText;
                 }
                 return output.toString();
             },
-            new TextHasString("400 Bad Request")
+            new HasString("400 Bad Request")
         ).affirm();
     }
 

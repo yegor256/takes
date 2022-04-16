@@ -28,7 +28,7 @@ import java.nio.charset.StandardCharsets;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsWithType}.
@@ -92,7 +92,7 @@ final class RsWithTypeTest {
                     type
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -121,7 +121,7 @@ final class RsWithTypeTest {
                     RsWithTypeTest.TYPE_HTML
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     "HTTP/1.1 500 Internal Server Error",
@@ -146,7 +146,7 @@ final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -166,7 +166,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -194,7 +194,7 @@ final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -214,7 +214,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -242,7 +242,7 @@ final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -261,7 +261,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -289,7 +289,7 @@ final class RsWithTypeTest {
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -308,7 +308,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -334,7 +334,7 @@ final class RsWithTypeTest {
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -364,7 +364,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,

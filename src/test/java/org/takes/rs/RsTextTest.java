@@ -29,7 +29,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsText}.
@@ -46,7 +46,7 @@ final class RsTextTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(new RsBuffered(new RsText(body))),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 200 OK",

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Take;
 import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.TkFork;
@@ -90,7 +90,7 @@ final class TkProxyTest {
                             new RqFake(method)
                         )
                     ),
-                    new TextHasString(
+                    new HasString(
                         expected
                     )
                 )

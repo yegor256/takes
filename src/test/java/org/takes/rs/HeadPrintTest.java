@@ -28,7 +28,7 @@ import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 import org.llorllale.cactoos.matchers.Throws;
 
 /**
@@ -60,7 +60,7 @@ final class HeadPrintTest {
             new HeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
             ),
-            new TextIs("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            new IsText("HTTP/1.1 500 Internal Server Error\r\n\r\n")
         );
     }
 
@@ -74,7 +74,7 @@ final class HeadPrintTest {
             new HeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
             ),
-            new TextIs("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+            new IsText("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 }

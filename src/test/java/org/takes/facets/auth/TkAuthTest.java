@@ -30,8 +30,8 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.AllOf;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.StartsWith;
-import org.llorllale.cactoos.matchers.TextHasString;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -103,7 +103,7 @@ final class TkAuthTest {
             new AllOf<>(
                 new IterableOf<>(
                     new StartsWith("HTTP/1.1 200 "),
-                    new TextHasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
+                    new HasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
                 )
             )
         ).affirm();
@@ -163,7 +163,7 @@ final class TkAuthTest {
                     )
                 )
             ),
-            new TextHasString("Set-Cookie: PsCookie=")
+            new HasString("Set-Cookie: PsCookie=")
         ).affirm();
     }
 

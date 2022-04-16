@@ -25,7 +25,7 @@ package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
@@ -48,7 +48,7 @@ final class TkMeasuredTest {
                     new RqFake()
                 )
             ),
-            new TextHasString(header)
+            new HasString(header)
         );
     }
 
@@ -66,7 +66,7 @@ final class TkMeasuredTest {
                     header
                 ).act(new RqFake())
             ),
-            new TextHasString(header)
+            new HasString(header)
         );
     }
 }

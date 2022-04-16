@@ -29,8 +29,8 @@ import org.cactoos.text.Joined;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
-import org.llorllale.cactoos.matchers.ScalarHasValue;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.HasValue;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.Response;
 
 /**
@@ -55,7 +55,7 @@ final class RsWithStatusTest {
                     HttpURLConnection.HTTP_NOT_FOUND
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     "\r\n",
                     "HTTP/1.1 404 Not Found",
@@ -88,7 +88,7 @@ final class RsWithStatusTest {
         final Assertion<Scalar<Iterable<?>>> assertion = new Assertion<>(
             "Head with one line",
             response::head,
-            new ScalarHasValue<>(new HasSize(1))
+            new HasValue<>(new HasSize(1))
         );
         assertion.affirm();
         assertion.affirm();

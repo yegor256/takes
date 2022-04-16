@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -58,7 +58,7 @@ import org.takes.rs.RsPrint;
             new RsPrint(
                 new TkRedirect(url).act(new RqFake())
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     TkRedirectTest.NEWLINE,
                     "HTTP/1.1 303 See Other",
@@ -83,7 +83,7 @@ import org.takes.rs.RsPrint;
                     new RqFake()
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     TkRedirectTest.NEWLINE,
                     "HTTP/1.1 302 Found",

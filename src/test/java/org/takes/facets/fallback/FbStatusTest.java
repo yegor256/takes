@@ -30,7 +30,7 @@ import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.rs.BodyPrint;
 import org.takes.rs.HeadPrint;
 import org.takes.rs.RsPrint;
@@ -128,7 +128,7 @@ final class FbStatusTest {
         );
         MatcherAssert.assertThat(
             new BodyPrint(response),
-            new TextIs("404 Not Found: Exception message")
+            new IsText("404 Not Found: Exception message")
         );
         MatcherAssert.assertThat(
             new HeadPrint(response).asString(),

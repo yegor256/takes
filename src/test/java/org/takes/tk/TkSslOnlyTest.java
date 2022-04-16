@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -70,7 +70,7 @@ final class TkSslOnlyTest {
                     }
                 ).act(req)
             ),
-            new TextHasString("https://www.0crat.com/one/two?a=1")
+            new HasString("https://www.0crat.com/one/two?a=1")
         );
     }
 

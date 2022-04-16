@@ -30,7 +30,7 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextHasString;
+import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsPrint;
 
@@ -51,7 +51,7 @@ final class RsReturnTest {
             new RsPrint(
                 new RsReturn(new RsEmpty(), destination)
             ),
-            new TextHasString(
+            new HasString(
                 new FormattedText(
                     "Set-Cookie: RsReturn=%s;Path=/",
                     URLEncoder.encode(
