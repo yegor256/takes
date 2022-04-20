@@ -143,11 +143,14 @@ public final class PsGithub implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(this.api).path("user")
-            .with(PsGithub.ACCESS_TOKEN, token).toString();
+        // @checkstyle MethodBodyCommentsCheck (2 lines)
+        // @checkstyle LineLengthCheck (1 line)
+        // @see https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/
+        final String uri = new Href(this.api).path("user").toString();
         return PsGithub.parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
+                .header("Authorization", String.format("token %s", token))
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class).json().readObject()
