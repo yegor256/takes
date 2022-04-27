@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.InputOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -89,7 +90,7 @@ public final class TkFiles extends TkWrap {
                             )
                         );
                     }
-                    return new RsWithBody(Files.newInputStream(file.toPath()));
+                    return new RsWithBody(new InputOf(file));
                 }
             }
         );
