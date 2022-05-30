@@ -383,8 +383,9 @@ SOFTWARE.
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.ning.maven.plugins</groupId>
+        <groupId>org.basepom.maven</groupId>
         <artifactId>duplicate-finder-maven-plugin</artifactId>
+        <version>1.5.1</version>
         <configuration>
           <ignoredDependencies>
             <dependency>
