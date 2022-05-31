@@ -34,6 +34,9 @@ deploy:
     mvn clean
 release:
   script: |-
+    [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
+    gpg --import /home/r/pubring.gpg
+    gpg --allow-secret-key-import --no-tty --batch --import /home/r/secring.gpg
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    mvn clean deploy -Ptakes -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
