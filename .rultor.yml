@@ -36,4 +36,4 @@ release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    mvn clean deploy -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
