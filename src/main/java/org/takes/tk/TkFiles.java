@@ -24,11 +24,10 @@
 package org.takes.tk;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.InputOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -77,7 +76,7 @@ public final class TkFiles extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request request) throws IOException {
+                public Response act(final Request request) throws Exception {
                     final File file = new File(
                         base, new RqHref.Base(request).href().path()
                     );
@@ -89,7 +88,7 @@ public final class TkFiles extends TkWrap {
                             )
                         );
                     }
-                    return new RsWithBody(Files.newInputStream(file.toPath()));
+                    return new RsWithBody(new InputOf(file).stream());
                 }
             }
         );
