@@ -23,6 +23,7 @@
  */
 package org.takes.tk;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import org.apache.commons.io.FileUtils;
@@ -48,8 +49,9 @@ final class TkFilesTest {
      */
     @Test
     void dispatchesByFileName(@TempDir final Path temp) throws Exception {
+        final File file = temp.resolve("a.txt").toFile();
         FileUtils.write(
-            temp.resolve("a.txt").toFile(), "hello, world!",
+            file, "hello, world!",
             StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
@@ -62,6 +64,7 @@ final class TkFilesTest {
             ),
             new StartsWith("HTTP/1.1 200 OK")
         );
+        FileUtils.delete(file);
     }
 
     /**
