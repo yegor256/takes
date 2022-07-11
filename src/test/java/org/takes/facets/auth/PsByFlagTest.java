@@ -86,6 +86,7 @@ import org.takes.rs.RsWithType;
      * PsByFlag wraps response with authenticated user.
      */
     @Test
+    @SuppressWarnings("unchecked")
     void exitTest() {
         final Response response = new RsWithStatus(
             new RsWithType(
