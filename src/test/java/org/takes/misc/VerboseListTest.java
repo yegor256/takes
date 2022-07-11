@@ -68,7 +68,7 @@ final class VerboseListTest {
      */
     @BeforeEach
     void setUp() {
-        this.list = new VerboseList<Object>(
+        this.list = new VerboseList<>(
             this.origin,
             new TextOf(VerboseListTest.MSG)
         );

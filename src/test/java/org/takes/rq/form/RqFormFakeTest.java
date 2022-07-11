@@ -56,7 +56,7 @@ final class RqFormFakeTest {
         final String aavalue = "againanothervalue";
         final RqForm req = new RqFormFake(
             new RqFake(
-                new ListOf<String>(
+                new ListOf<>(
                     "GET /form",
                     "Host: www.example5.com",
                     String.format(

@@ -49,7 +49,7 @@ final class VerboseIterableTest {
             "From: user@example.com"
         );
         MatcherAssert.assertThat(
-            new VerboseIterable<String>(
+            new VerboseIterable<>(
                 valid,
                 new TextOf("Empty Error Message")
             ),

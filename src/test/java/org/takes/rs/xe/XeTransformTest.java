@@ -50,7 +50,7 @@ final class XeTransformTest {
                 new RsXembly(
                     new XeAppend(
                         "root",
-                        new XeTransform<String>(
+                        new XeTransform<>(
                             Arrays.asList("Jeff", "Walter"),
                             new XeTransform.Func<String>() {
                                 @Override

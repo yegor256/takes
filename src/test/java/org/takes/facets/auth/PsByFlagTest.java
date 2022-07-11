@@ -97,7 +97,7 @@ import org.takes.rs.RsWithType;
         );
         MatcherAssert.assertThat(
             new PsByFlag(
-                new MapOf<Pattern, Pass>(
+                new MapOf<>(
                     new MapEntry<>(
                         Pattern.compile("key"), new PsFake(true)
                     )

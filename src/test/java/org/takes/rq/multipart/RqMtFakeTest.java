@@ -363,7 +363,7 @@ final class RqMtFakeTest {
             MatcherAssert.assertThat(
                 multi.names(),
                 Matchers.equalTo(
-                    new HashSet<String>(Arrays.asList("address", "data"))
+                    new HashSet<>(Arrays.asList("address", "data"))
                 )
             );
         } finally {

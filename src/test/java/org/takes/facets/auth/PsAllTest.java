@@ -50,7 +50,7 @@ final class PsAllTest {
             IllegalArgumentException.class,
             () -> MatcherAssert.assertThat(
                 new PsAll(
-                    new ArrayList<Pass>(0),
+                    new ArrayList<>(0),
                     0
                 ).enter(new RqFake()).has(),
                 new IsEqual<>(false)

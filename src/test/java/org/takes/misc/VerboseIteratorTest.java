@@ -44,7 +44,7 @@ final class VerboseIteratorTest {
     void returnsNextValue() {
         final String accept = "Accept: text/plain";
         MatcherAssert.assertThat(
-            new VerboseIterable<String>(
+            new VerboseIterable<>(
                 Arrays.asList(
                     accept,
                     "Accept-Charset: utf-8",
@@ -64,7 +64,7 @@ final class VerboseIteratorTest {
     @Test
     void informsHasNextValue() {
         MatcherAssert.assertThat(
-            new VerboseIterable<String>(
+            new VerboseIterable<>(
                 Arrays.asList(
                     "User-Agent: LII-Cello/1.0 libwww/2.5",
                     "accept-extension = \";\"",
@@ -111,7 +111,7 @@ final class VerboseIteratorTest {
     void removeValue() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
-            () -> new VerboseIterable<String>(
+            () -> new VerboseIterable<>(
                 Arrays.asList(
                     "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
                     "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",

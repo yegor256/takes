@@ -95,7 +95,7 @@ final class RsVelocityTest {
                     RsVelocityTest.class.getResourceAsStream(
                         "/vtl/simple.vm"
                     ),
-                    new HashMap<CharSequence, Object>()
+                    new HashMap<>()
                 ).body(),
                 StandardCharsets.UTF_8
             ),
