@@ -57,16 +57,13 @@ public final class TkMeasured extends TkWrap {
      */
     public TkMeasured(final Take take, final String header) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    final long start = System.currentTimeMillis();
-                    final Response res = take.act(req);
-                    return new RsWithHeader(
-                        res, header,
-                        Long.toString(System.currentTimeMillis() - start)
-                    );
-                }
+            req -> {
+                final long start = System.currentTimeMillis();
+                final Response res = take.act(req);
+                return new RsWithHeader(
+                    res, header,
+                    Long.toString(System.currentTimeMillis() - start)
+                );
             }
         );
     }

@@ -63,12 +63,7 @@ public final class TkFallback extends TkWrap {
      */
     public TkFallback(final Take take, final Fallback fbk) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return TkFallback.route(take, fbk, req);
-                }
-            }
+            req -> TkFallback.route(take, fbk, req)
         );
     }
 

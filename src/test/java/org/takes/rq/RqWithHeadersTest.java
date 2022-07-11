@@ -62,7 +62,7 @@ import org.takes.Request;
             new StartsWith(
                 new Joined(
                     "\r\n",
-                    "GET /",
+                    "GET / HTTP/1.1",
                     "Host: www.example.com",
                     testheader,
                     someheader

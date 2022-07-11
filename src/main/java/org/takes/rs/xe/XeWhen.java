@@ -48,12 +48,7 @@ public final class XeWhen extends XeWrap {
     public XeWhen(final boolean condition, final XeSource source) {
         this(
             condition,
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return source;
-                }
-            }
+            () -> source
         );
     }
 
@@ -64,19 +59,9 @@ public final class XeWhen extends XeWrap {
      */
     public XeWhen(final boolean condition, final Scalar<XeSource> source) {
         this(
-            new Scalar<Boolean>() {
-                @Override
-                public Boolean value() {
-                    return condition;
-                }
-            },
+            () -> condition,
             source,
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return XeSource.EMPTY;
-                }
-            }
+            () -> XeSource.EMPTY
         );
     }
 
@@ -89,18 +74,8 @@ public final class XeWhen extends XeWrap {
     public XeWhen(final Scalar<Boolean> condition, final XeSource source) {
         this(
             condition,
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return source;
-                }
-            },
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return XeSource.EMPTY;
-                }
-            }
+            () -> source,
+            () -> XeSource.EMPTY
         );
     }
 
@@ -115,18 +90,8 @@ public final class XeWhen extends XeWrap {
         final XeSource negative) {
         this(
             condition,
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return positive;
-                }
-            },
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return negative;
-                }
-            }
+            () -> positive,
+            () -> negative
         );
     }
 
@@ -140,12 +105,7 @@ public final class XeWhen extends XeWrap {
         final Scalar<XeSource> positive,
         final Scalar<XeSource> negative) {
         this(
-            new Scalar<Boolean>() {
-                @Override
-                public Boolean value() {
-                    return condition;
-                }
-            },
+            () -> condition,
             positive,
             negative
         );
@@ -163,18 +123,8 @@ public final class XeWhen extends XeWrap {
         final XeSource negative) {
         this(
             condition,
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return positive;
-                }
-            },
-            new Scalar<XeSource>() {
-                @Override
-                public XeSource value() {
-                    return negative;
-                }
-            }
+            () -> positive,
+            () -> negative
         );
     }
 
@@ -196,17 +146,14 @@ public final class XeWhen extends XeWrap {
         final Scalar<XeSource> positive,
         final Scalar<XeSource> negative) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    final Iterable<Directive> dirs;
-                    if (new IoChecked<>(condition).value()) {
-                        dirs = new IoChecked<>(positive).value().toXembly();
-                    } else {
-                        dirs = new IoChecked<>(negative).value().toXembly();
-                    }
-                    return dirs;
+            () -> {
+                final Iterable<Directive> dirs;
+                if (new IoChecked<>(condition).value()) {
+                    dirs = new IoChecked<>(positive).value().toXembly();
+                } else {
+                    dirs = new IoChecked<>(negative).value().toXembly();
                 }
+                return dirs;
             }
         );
     }

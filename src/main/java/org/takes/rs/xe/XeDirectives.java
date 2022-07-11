@@ -71,12 +71,7 @@ public final class XeDirectives implements XeSource {
      */
     public XeDirectives(final Iterable<Directive> dirs) {
         this(
-            new Scalar<Iterable<Directive>>() {
-                @Override
-                public Iterable<Directive> value() {
-                    return dirs;
-                }
-            }
+            () -> dirs
         );
     }
 

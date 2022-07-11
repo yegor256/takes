@@ -41,15 +41,11 @@ public final class BkSafe extends BkWrap {
      * @param back Original back
      */
     public BkSafe(final Back back) {
-        super(new Back() {
-            @Override
-            @SuppressWarnings("PMD.AvoidCatchingThrowable")
-            public void accept(final Socket socket) {
-                try {
-                    back.accept(socket);
-                    // @checkstyle IllegalCatchCheck (1 line)
-                } catch (final Throwable ignored) {
-                }
+        super(socket -> {
+            try {
+                back.accept(socket);
+                // @checkstyle IllegalCatchCheck (1 line)
+            } catch (final Throwable ignored) {
             }
         });
     }

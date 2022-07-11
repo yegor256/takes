@@ -46,12 +46,7 @@ public final class FkFixed extends FkWrap {
      */
     public FkFixed(final Take take) {
         super(
-            new Fork() {
-                @Override
-                public Opt<Response> route(final Request req) throws Exception {
-                    return new Opt.Single<>(take.act(req));
-                }
-            }
+            req -> new Opt.Single<>(take.act(req))
         );
     }
 

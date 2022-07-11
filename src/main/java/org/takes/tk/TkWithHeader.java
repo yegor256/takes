@@ -61,12 +61,7 @@ public final class TkWithHeader extends TkWrap {
      */
     public TkWithHeader(final Take take, final String header) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return new RsWithHeader(take.act(req), header);
-                }
-            }
+            req -> new RsWithHeader(take.act(req), header)
         );
     }
 

@@ -49,22 +49,19 @@ public final class TkVerbose extends TkWrap {
      */
     public TkVerbose(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws Exception {
-                    try {
-                        return take.act(request);
-                    } catch (final HttpException ex) {
-                        throw new HttpException(
-                            ex.code(),
-                            String.format(
-                                "%s %s",
-                                new RqMethod.Base(request).method(),
-                                new RqHref.Base(request).href()
-                            ),
-                            ex
-                        );
-                    }
+            request -> {
+                try {
+                    return take.act(request);
+                } catch (final HttpException ex) {
+                    throw new HttpException(
+                        ex.code(),
+                        String.format(
+                            "%s %s",
+                            new RqMethod.Base(request).method(),
+                            new RqHref.Base(request).href()
+                        ),
+                        ex
+                    );
                 }
             }
         );

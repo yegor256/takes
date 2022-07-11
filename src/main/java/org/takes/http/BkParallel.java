@@ -76,23 +76,15 @@ public final class BkParallel extends BkWrap {
      */
     public BkParallel(final Back back, final ExecutorService svc) {
         super(
-            new Back() {
-                @Override
-                public void accept(final Socket socket) {
-                    svc.execute(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    back.accept(socket);
-                                } catch (final IOException ex) {
-                                    throw new IllegalStateException(ex);
-                                }
-                            }
-                        }
-                    );
+            socket -> svc.execute(
+                () -> {
+                    try {
+                        back.accept(socket);
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
                 }
-            }
+            )
         );
     }
 

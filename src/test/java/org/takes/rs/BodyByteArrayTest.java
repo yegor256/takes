@@ -62,7 +62,7 @@ final class BodyByteArrayTest {
         MatcherAssert.assertThat(
             "Body content of Body.ByteArray doesn't have the correct length",
             new LengthOf(new Body.ByteArray(bytes)).value(),
-            new IsEqual<>(bytes.length)
+            new IsEqual<>((long) bytes.length)
         );
     }
 }

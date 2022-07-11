@@ -108,18 +108,8 @@ final class XeWhenTest {
                         "negative",
                         new XeWhen(
                             false,
-                            new Scalar<XeSource>() {
-                                @Override
-                                public XeSource value() {
-                                    return new XeDate();
-                                }
-                            },
-                            new Scalar<XeSource>() {
-                                @Override
-                                public XeSource value() {
-                                    return new XeMemory();
-                                }
-                            })
+                            () -> new XeDate(),
+                            () -> new XeMemory())
                     )
                 ).body(),
                 StandardCharsets.UTF_8

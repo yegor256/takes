@@ -54,13 +54,7 @@ public final class FbFixed extends FbWrap {
      */
     public FbFixed(final Take take) {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws Exception {
-                    return new Opt.Single<>(take.act(req));
-                }
-            }
+            req -> new Opt.Single<>(take.act(req))
         );
     }
 

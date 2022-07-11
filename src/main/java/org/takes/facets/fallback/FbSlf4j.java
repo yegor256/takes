@@ -54,13 +54,9 @@ public final class FbSlf4j extends FbWrap {
      */
     public FbSlf4j() {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws IOException {
-                    FbSlf4j.log(req);
-                    return new Opt.Empty<>();
-                }
+            req -> {
+                FbSlf4j.log(req);
+                return new Opt.Empty<>();
             }
         );
     }

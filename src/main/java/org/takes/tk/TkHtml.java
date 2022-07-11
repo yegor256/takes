@@ -53,12 +53,7 @@ public final class TkHtml extends TkWrap {
      */
     public TkHtml(final String body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsHtml(body);
-                }
-            }
+            req -> new RsHtml(body)
         );
     }
 
@@ -69,12 +64,7 @@ public final class TkHtml extends TkWrap {
      */
     public TkHtml(final Scalar<String> body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return new RsHtml(body.value());
-                }
-            }
+            req -> new RsHtml(body.value())
         );
     }
 
@@ -84,12 +74,7 @@ public final class TkHtml extends TkWrap {
      */
     public TkHtml(final byte[] body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsHtml(body);
-                }
-            }
+            req -> new RsHtml(body)
         );
     }
 
@@ -99,12 +84,7 @@ public final class TkHtml extends TkWrap {
      */
     public TkHtml(final URL url) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsHtml(url);
-                }
-            }
+            req -> new RsHtml(url)
         );
     }
 
@@ -114,12 +94,7 @@ public final class TkHtml extends TkWrap {
      */
     public TkHtml(final InputStream body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsHtml(body);
-                }
-            }
+            req -> new RsHtml(body)
         );
     }
 

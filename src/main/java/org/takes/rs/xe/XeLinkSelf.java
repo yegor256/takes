@@ -45,14 +45,9 @@ public final class XeLinkSelf extends XeWrap {
      */
     public XeLinkSelf(final Request req) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new XeLink(
-                        "self", new RqHref.Base(req).href()
-                    ).toXembly();
-                }
-            }
+            () -> new XeLink(
+                "self", new RqHref.Base(req).href()
+            ).toXembly()
         );
     }
 

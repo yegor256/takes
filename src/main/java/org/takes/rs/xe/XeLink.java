@@ -55,19 +55,14 @@ public final class XeLink extends XeWrap {
     public XeLink(final CharSequence rel, final CharSequence href,
         final CharSequence type) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives()
-                        .addIf("links")
-                        .add("link")
-                        .attr("rel", rel.toString())
-                        .attr("href", href.toString())
-                        .attr("type", type.toString())
-                        .up()
-                        .up();
-                }
-            }
+            () -> new Directives()
+                .addIf("links")
+                .add("link")
+                .attr("rel", rel.toString())
+                .attr("href", href.toString())
+                .attr("type", type.toString())
+                .up()
+                .up()
         );
     }
 

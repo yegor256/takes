@@ -49,29 +49,19 @@ final class TkReadAlwaysTest {
     @Test
     void requestBodyIsIgnored() throws Exception {
         final String expected = "response ok";
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) {
-                return new RsText(expected);
-            }
-        };
+        final Take take = req -> new RsText(expected);
         new FtRemote(new TkReadAlways(take)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST").header(
-                        "Content-Type", "application/x-www-form-urlencoded"
-                    ).body()
-                        .formParam("name", "Jeff Warraby")
-                        .formParam("age", "4")
-                        .back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(expected));
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("POST").header(
+                "Content-Type", "application/x-www-form-urlencoded"
+            ).body()
+                .formParam("name", "Jeff Warraby")
+                .formParam("age", "4")
+                .back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.equalTo(expected))
         );
     }
 }

@@ -63,14 +63,9 @@ public final class TkVersioned extends TkWrap {
      */
     public TkVersioned(final Take take, final String header) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return new RsWithHeader(
-                        take.act(req), header, TkVersioned.VERSION
-                    );
-                }
-            }
+            req -> new RsWithHeader(
+                take.act(req), header, TkVersioned.VERSION
+            )
         );
     }
 

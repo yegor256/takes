@@ -59,10 +59,10 @@ SOFTWARE.
         <role>Architect</role>
         <role>Developer</role>
       </roles>
-      <timezone>-7</timezone>
+      <timezone>+3</timezone>
     </developer>
     <developer>
-      <id>1</id>
+      <id>2</id>
       <name>Olivier B. OURA</name>
       <email>baudoliver7@gmail.com</email>
       <organization>Baudoliver7.com</organization>
@@ -100,40 +100,44 @@ SOFTWARE.
   </properties>
   <dependencies>
     <!--
-        Pay attention that we are NOT allowed to use ANY third-party
-        dependencies here, unless they are in PROVIDED, TEST of RUNTIME
-        scope. The project must be self-sufficient and work in a single
-        JAR dependency.
-        -->
+    Pay attention that we are NOT allowed to use ANY third-party
+    dependencies here, unless they are in PROVIDED, TEST of RUNTIME
+    scope. The project must be self-sufficient and work in a single
+    JAR dependency.
+    -->
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
       <!--
-        @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
-         remove all references to Files.newXXX static methods and
-         replace them with OO objects such as InputOf or OutputOf
-         depending on the need. See
-         https://github.com/yegor256/takes/pull/886#issuecomment-446030223
-         for details.
-       -->
-      <version>0.50</version>
+      @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
+       remove all references to Files.newXXX static methods and
+       replace them with OO objects such as InputOf or OutputOf
+       depending on the need. See
+       https://github.com/yegor256/takes/pull/886#issuecomment-446030223
+       for details.
+      -->
+      <version>0.50.1</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
+      <version>1.4.01</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.json</groupId>
       <artifactId>javax.json-api</artifactId>
+      <version>1.1.4</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
     </dependency>
     <dependency>
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
+      <version>2.3.0</version>
     </dependency>
     <dependency>
       <groupId>com.jcabi</groupId>
@@ -144,6 +148,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-xml</artifactId>
+      <version>0.23.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -174,9 +179,8 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi.incubator</groupId>
       <artifactId>xembly</artifactId>
-      <version>0.25.0</version>
+      <version>0.26.2</version>
       <scope>compile</scope>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>com.restfb</groupId>
@@ -199,11 +203,13 @@ SOFTWARE.
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.json</artifactId>
+      <version>1.1.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -215,16 +221,19 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-matchers</artifactId>
+      <version>1.5.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-log</artifactId>
+      <version>0.20.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
+      <version>1.1.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -242,17 +251,25 @@ SOFTWARE.
     <dependency>
       <groupId>javax.el</groupId>
       <artifactId>javax.el-api</artifactId>
+      <version>3.0.1-b06</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
+      <version>1.8.0-alpha2</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.8.0-alpha2</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -317,12 +334,6 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <!--
-          @todo #1110:1h There are 18 tests that fail now, mostly due to versions
-           upgrade (or an old Mockito version).
-           We must fix them ASAP and then remove the next line
-          -->
-          <testFailureIgnore>true</testFailureIgnore>
           <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US ${argLine}</argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>

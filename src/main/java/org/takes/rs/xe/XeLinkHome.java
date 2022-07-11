@@ -45,15 +45,10 @@ public final class XeLinkHome extends XeWrap {
      */
     public XeLinkHome(final Request req) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new XeLink(
-                        "home",
-                        new RqHref.Smart(new RqHref.Base(req)).home()
-                    ).toXembly();
-                }
-            }
+            () -> new XeLink(
+                "home",
+                new RqHref.Smart(new RqHref.Base(req)).home()
+            ).toXembly()
         );
     }
 

@@ -66,7 +66,7 @@ final class BodyTempFileTest {
             new LengthOf(
                 new Body.TempFile(new Body.ByteArray(bytes))
             ).value(),
-            new IsEqual<>(bytes.length)
+            new IsEqual<>((long) bytes.length)
         );
     }
 }

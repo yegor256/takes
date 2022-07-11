@@ -64,12 +64,7 @@ public final class TkJoinedCookies extends TkWrap {
      */
     public TkJoinedCookies(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return TkJoinedCookies.join(take.act(req));
-                }
-            }
+            req -> TkJoinedCookies.join(take.act(req))
         );
     }
 

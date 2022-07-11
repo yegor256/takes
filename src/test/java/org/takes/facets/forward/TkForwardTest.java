@@ -47,11 +47,8 @@ final class TkForwardTest {
      */
     @Test
     void catchesExceptionCorrectly() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws RsForward {
-                throw new RsForward("/");
-            }
+        final Take take = request -> {
+            throw new RsForward("/");
         };
         MatcherAssert.assertThat(
             new RsPrint(

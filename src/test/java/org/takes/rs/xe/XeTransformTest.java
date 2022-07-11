@@ -52,16 +52,11 @@ final class XeTransformTest {
                         "root",
                         new XeTransform<>(
                             Arrays.asList("Jeff", "Walter"),
-                            new XeTransform.Func<String>() {
-                                @Override
-                                public XeSource transform(final String obj) {
-                                    return new XeDirectives(
-                                        new Directives().add("bowler").set(
-                                            obj.toUpperCase(Locale.ENGLISH)
-                                        )
-                                    );
-                                }
-                            }
+                            obj -> new XeDirectives(
+                                new Directives().add("bowler").set(
+                                    obj.toUpperCase(Locale.ENGLISH)
+                                )
+                            )
                         )
                     )
                 ).body(),

@@ -51,12 +51,7 @@ public final class RsJson extends RsWrap {
      */
     public RsJson(final JsonStructure json) throws IOException {
         this(
-            new RsJson.Source() {
-                @Override
-                public JsonStructure toJson() {
-                    return json;
-                }
-            }
+            () -> json
         );
     }
 

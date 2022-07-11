@@ -59,16 +59,11 @@ final class FtRemoteTest {
     @Test
     void simplyWorks() throws Exception {
         new FtRemote(new TkFixed(new RsText("simple answer"))).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("simple"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.startsWith("simple"))
         );
     }
 
@@ -78,36 +73,24 @@ final class FtRemoteTest {
      */
     @Test
     void worksInParallelThreads() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final org.takes.Request req)
-                throws IOException {
-                MatcherAssert.assertThat(
-                    new RqFormBase(req).param("alpha"),
-                    Matchers.hasItem("123")
-                );
-                return new RsText("works fine");
-            }
+        final Take take = req -> {
+            MatcherAssert.assertThat(
+                new RqFormBase(req).param("alpha"),
+                Matchers.hasItem("123")
+            );
+            return new RsText("works fine");
         };
-        final Callable<Long> task = new Callable<Long>() {
-            @Override
-            public Long call() throws Exception {
-                new FtRemote(take).exec(
-                    new FtRemote.Script() {
-                        @Override
-                        public void exec(final URI home) throws IOException {
-                            new JdkRequest(home)
-                                .method(Request.POST)
-                                .body().set("alpha=123").back()
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK)
-                                .assertBody(Matchers.startsWith("works"));
-                        }
-                    }
-                );
-                return 0L;
-            }
+        final Callable<Long> task = () -> {
+            new FtRemote(take).exec(
+                home -> new JdkRequest(home)
+                    .method(Request.POST)
+                    .body().set("alpha=123").back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.startsWith("works"))
+            );
+            return 0L;
         };
         final int total = Runtime.getRuntime().availableProcessors() << 2;
         final Collection<Callable<Long>> tasks = new ArrayList<>(total);
@@ -130,18 +113,13 @@ final class FtRemoteTest {
         new FtRemote(
             new TkEmpty()
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .body().set("returnsAnEmptyResponseBody").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertBody(new IsEqual<>(""))
-                        .assertStatus(HttpURLConnection.HTTP_NO_CONTENT);
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("POST")
+                .body().set("returnsAnEmptyResponseBody").back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertBody(new IsEqual<>(""))
+                .assertStatus(HttpURLConnection.HTTP_NO_CONTENT)
         );
     }
 }

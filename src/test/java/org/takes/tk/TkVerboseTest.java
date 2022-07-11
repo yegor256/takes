@@ -46,11 +46,8 @@ final class TkVerboseTest {
      */
     @Test
     void extendsNotFoundException() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
-            }
+        final Take take = request -> {
+            throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
         };
         try {
             new TkVerbose(take).act(new RqFake());

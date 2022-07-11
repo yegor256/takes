@@ -67,25 +67,21 @@ public final class FbStatus extends FbWrap {
      * @since 0.16.10
      */
     public FbStatus(final Iterable<Integer> check) {
-        this(check, new Fallback() {
-            @Override
-            public Opt<Response> route(final RqFallback req)
-                throws Exception {
-                final Response res = new RsWithStatus(req.code());
-                return new Opt.Single<>(
-                    new RsWithType(
-                        new RsWithBody(
-                            res,
-                            String.format(
-                                "%s: %s", FbStatus.WHITESPACE.split(
-                                    res.head().iterator().next(),
-                                    2
-                                )[1], req.throwable().getLocalizedMessage()
-                            )
-                        ), "text/plain"
-                    )
-                );
-            }
+        this(check, req -> {
+            final Response res = new RsWithStatus(req.code());
+            return new Opt.Single<>(
+                new RsWithType(
+                    new RsWithBody(
+                        res,
+                        String.format(
+                            "%s: %s", FbStatus.WHITESPACE.split(
+                                res.head().iterator().next(),
+                                2
+                            )[1], req.throwable().getLocalizedMessage()
+                        )
+                    ), "text/plain"
+                )
+            );
         });
     }
 
@@ -107,13 +103,7 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final int code, final Take take) {
         this(
             code,
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws Exception {
-                    return new Opt.Single<>(take.act(req));
-                }
-            }
+            (Fallback) req -> new Opt.Single<>(take.act(req))
         );
     }
 
@@ -149,12 +139,7 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final Iterable<Integer> check, final Fallback fallback) {
         this(
             check,
-            new Scalar<Fallback>() {
-                @Override
-                public Fallback value() {
-                    return fallback;
-                }
-            }
+            () -> fallback
         );
     }
 
@@ -173,16 +158,12 @@ public final class FbStatus extends FbWrap {
     public FbStatus(final Iterable<Integer> check,
         final Scalar<Fallback> fallback) {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws Exception {
-                    Opt<Response> rsp = new Opt.Empty<>();
-                    if (new ListOf<>(check).contains(req.code())) {
-                        rsp = fallback.value().route(req);
-                    }
-                    return rsp;
+            req -> {
+                Opt<Response> rsp = new Opt.Empty<>();
+                if (new ListOf<>(check).contains(req.code())) {
+                    rsp = fallback.value().route(req);
                 }
+                return rsp;
             }
         );
     }

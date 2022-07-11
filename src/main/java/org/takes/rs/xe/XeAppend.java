@@ -67,14 +67,9 @@ public final class XeAppend extends XeWrap {
      */
     public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target.toString()).append(
-                        new XeChain(src).toXembly()
-                    );
-                }
-            }
+            () -> new Directives().add(target.toString()).append(
+                new XeChain(src).toXembly()
+            )
         );
     }
 
@@ -86,14 +81,9 @@ public final class XeAppend extends XeWrap {
      */
     public XeAppend(final CharSequence target, final Scalar<XeSource> src) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    return new Directives().add(target.toString()).append(
-                        new IoChecked<>(src).value().toXembly()
-                    );
-                }
-            }
+            () -> new Directives().add(target.toString()).append(
+                new IoChecked<>(src).value().toXembly()
+            )
         );
     }
 

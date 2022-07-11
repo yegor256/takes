@@ -61,12 +61,7 @@ public final class TkFixed extends TkWrap {
      */
     public TkFixed(final Scalar<Response> res) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return res.value();
-                }
-            }
+            req -> res.value()
         );
     }
 
@@ -76,12 +71,7 @@ public final class TkFixed extends TkWrap {
      */
     public TkFixed(final Response res) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return res;
-                }
-            }
+            req -> res
         );
     }
 

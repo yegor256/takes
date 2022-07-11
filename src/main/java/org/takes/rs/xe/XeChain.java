@@ -55,12 +55,7 @@ public final class XeChain extends XeWrap {
      */
     public XeChain(final Iterable<XeSource> items) {
         this(
-            new Scalar<Iterable<XeSource>>() {
-                @Override
-                public Iterable<XeSource> value() {
-                    return items;
-                }
-            }
+            () -> items
         );
     }
 
@@ -71,15 +66,12 @@ public final class XeChain extends XeWrap {
      */
     public XeChain(final Scalar<Iterable<XeSource>> items) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() throws IOException {
-                    final Directives dirs = new Directives();
-                    for (final XeSource src : new IoChecked<>(items).value()) {
-                        dirs.push().append(src.toXembly()).pop();
-                    }
-                    return dirs;
+            () -> {
+                final Directives dirs = new Directives();
+                for (final XeSource src : new IoChecked<>(items).value()) {
+                    dirs.push().append(src.toXembly()).pop();
                 }
+                return dirs;
             }
         );
     }

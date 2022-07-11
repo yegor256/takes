@@ -59,20 +59,16 @@ public final class FbChain extends FbWrap {
         )
     public FbChain(final Iterable<Fallback> fallbacks) {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req)
-                    throws Exception {
-                    Opt<Response> rsp = new Opt.Empty<>();
-                    for (final Fallback fbk : fallbacks) {
-                        final Opt<Response> opt = fbk.route(req);
-                        if (opt.has()) {
-                            rsp = opt;
-                            break;
-                        }
+            req -> {
+                Opt<Response> rsp = new Opt.Empty<>();
+                for (final Fallback fbk : fallbacks) {
+                    final Opt<Response> opt = fbk.route(req);
+                    if (opt.has()) {
+                        rsp = opt;
+                        break;
                     }
-                    return rsp;
                 }
+                return rsp;
             }
         );
     }

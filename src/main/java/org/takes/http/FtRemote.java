@@ -114,22 +114,16 @@ public final class FtRemote implements Front {
         final AtomicBoolean exit = new AtomicBoolean();
         final CountDownLatch latch = new CountDownLatch(1);
         final Thread thread = new Thread(
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        FtRemote.this.start(
-                            new Exit() {
-                                @Override
-                                public boolean ready() {
-                                    latch.countDown();
-                                    return exit.get();
-                                }
-                            }
-                        );
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+            () -> {
+                try {
+                    FtRemote.this.start(
+                        () -> {
+                            latch.countDown();
+                            return exit.get();
+                        }
+                    );
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
             }
         );

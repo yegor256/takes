@@ -69,24 +69,19 @@ public final class XeMemory extends XeWrap {
      */
     public XeMemory(final CharSequence node) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives().add(node.toString())
-                        .attr(
-                            "total",
-                            XeMemory.mbs(Runtime.getRuntime().totalMemory())
-                        )
-                        .attr(
-                            "free",
-                            XeMemory.mbs(Runtime.getRuntime().freeMemory())
-                        )
-                        .attr(
-                            "max",
-                            XeMemory.mbs(Runtime.getRuntime().maxMemory())
-                        );
-                }
-            }
+            () -> new Directives().add(node.toString())
+                .attr(
+                    "total",
+                    XeMemory.mbs(Runtime.getRuntime().totalMemory())
+                )
+                .attr(
+                    "free",
+                    XeMemory.mbs(Runtime.getRuntime().freeMemory())
+                )
+                .attr(
+                    "max",
+                    XeMemory.mbs(Runtime.getRuntime().maxMemory())
+                )
         );
     }
 

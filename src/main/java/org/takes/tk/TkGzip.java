@@ -49,16 +49,13 @@ public final class TkGzip extends TkWrap {
      */
     public TkGzip(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    final Response response = take.act(req);
-                    return new RsFork(
-                        req,
-                        new FkEncoding("gzip", new RsGzip(response)),
-                        new FkEncoding("", response)
-                    );
-                }
+            req -> {
+                final Response response = take.act(req);
+                return new RsFork(
+                    req,
+                    new FkEncoding("gzip", new RsGzip(response)),
+                    new FkEncoding("", response)
+                );
             }
         );
     }

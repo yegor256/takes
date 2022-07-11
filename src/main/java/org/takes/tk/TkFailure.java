@@ -64,11 +64,8 @@ public final class TkFailure extends TkWrap {
      */
     public TkFailure(final RuntimeException err) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) {
-                    throw err;
-                }
+            request -> {
+                throw err;
             }
         );
     }
@@ -80,11 +77,8 @@ public final class TkFailure extends TkWrap {
      */
     public TkFailure(final Scalar<IOException> err) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws IOException {
-                    throw new IoChecked<>(err).value();
-                }
+            request -> {
+                throw new IoChecked<>(err).value();
             }
         );
     }
@@ -96,11 +90,8 @@ public final class TkFailure extends TkWrap {
      */
     public TkFailure(final IOException err) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws IOException {
-                    throw err;
-                }
+            request -> {
+                throw err;
             }
         );
     }

@@ -151,12 +151,7 @@ public final class FkRegex implements Fork {
     public FkRegex(final Pattern ptn, final Take tke) {
         this(
             ptn,
-            new TkRegex() {
-                @Override
-                public Response act(final RqRegex req) throws Exception {
-                    return tke.act(req);
-                }
-            }
+            (TkRegex) req -> tke.act(req)
         );
     }
 
@@ -180,12 +175,7 @@ public final class FkRegex implements Fork {
     public FkRegex(final Pattern ptn, final TkRegex tke) {
         this(
             ptn,
-            new Scalar<TkRegex>() {
-                @Override
-                public TkRegex value() {
-                    return tke;
-                }
-            }
+            () -> tke
         );
     }
 

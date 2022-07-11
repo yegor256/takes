@@ -61,12 +61,7 @@ public final class TkText extends TkWrap {
      */
     public TkText(final String body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsText(body);
-                }
-            }
+            req -> new RsText(body)
         );
     }
 
@@ -77,12 +72,7 @@ public final class TkText extends TkWrap {
      */
     public TkText(final Scalar<String> body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return new RsText(body.value());
-                }
-            }
+            req -> new RsText(body.value())
         );
     }
 
@@ -92,12 +82,7 @@ public final class TkText extends TkWrap {
      */
     public TkText(final byte[] body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsText(body);
-                }
-            }
+            req -> new RsText(body)
         );
     }
 
@@ -107,12 +92,7 @@ public final class TkText extends TkWrap {
      */
     public TkText(final URL url) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsText(url);
-                }
-            }
+            req -> new RsText(url)
         );
     }
 
@@ -122,12 +102,7 @@ public final class TkText extends TkWrap {
      */
     public TkText(final InputStream body) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsText(body);
-                }
-            }
+            req -> new RsText(body)
         );
     }
 

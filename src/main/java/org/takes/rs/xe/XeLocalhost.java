@@ -76,17 +76,14 @@ public final class XeLocalhost extends XeWrap {
         )
     public XeLocalhost(final CharSequence attr) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    String addr;
-                    try {
-                        addr = InetAddress.getLocalHost().getHostAddress();
-                    } catch (final UnknownHostException ex) {
-                        addr = ex.getClass().getCanonicalName();
-                    }
-                    return new Directives().attr(attr.toString(), addr);
+            () -> {
+                String addr;
+                try {
+                    addr = InetAddress.getLocalHost().getHostAddress();
+                } catch (final UnknownHostException ex) {
+                    addr = ex.getClass().getCanonicalName();
                 }
+                return new Directives().attr(attr.toString(), addr);
             }
         );
     }

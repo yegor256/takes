@@ -65,12 +65,7 @@ public final class TkRedirect extends TkWrap {
      */
     public TkRedirect(final String location, final int code) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) {
-                    return new RsRedirect(location, code);
-                }
-            }
+            req -> new RsRedirect(location, code)
         );
     }
 

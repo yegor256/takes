@@ -47,12 +47,7 @@ public final class TkGreedy extends TkWrap {
      */
     public TkGreedy(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws Exception {
-                    return take.act(new RqGreedy(request));
-                }
-            }
+            request -> take.act(new RqGreedy(request))
         );
     }
 

@@ -70,17 +70,12 @@ public final class XeLifetime extends XeWrap {
      */
     public XeLifetime(final CharSequence elm) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives().attr(
-                        elm.toString(),
-                        Long.toString(
-                            System.currentTimeMillis() - XeLifetime.START
-                        )
-                    );
-                }
-            }
+            () -> new Directives().attr(
+                elm.toString(),
+                Long.toString(
+                    System.currentTimeMillis() - XeLifetime.START
+                )
+            )
         );
     }
 }

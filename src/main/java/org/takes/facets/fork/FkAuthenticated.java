@@ -68,12 +68,7 @@ public final class FkAuthenticated implements Fork {
      */
     public FkAuthenticated(final Take tke) {
         this(
-            new Scalar<Take>() {
-                @Override
-                public Take value() {
-                    return tke;
-                }
-            }
+            () -> tke
         );
     }
 

@@ -1,12 +1,9 @@
+docker:
+  image: yegor256/rultor-image:1.9.1
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-env:
-  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
-decrypt:
-  curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
 architect:
   - paulodamaso
   - yegor256
@@ -19,19 +16,6 @@ merge:
     pdd --source=$(pwd) --verbose --file=/dev/null
     mvn clean install -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
-deploy:
-  script: |
-    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
-    while true
-      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
-      if [ "${status}" == "null" ]; then exit 1; fi
-      if [ "${status}" == "success" ]; then break; fi
-      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
-      echo "waiting for AppVeyor build ${version}: ${status}"
-      sleep 5s
-    done
-    mvn clean deploy -Pqulice --errors --settings ../settings.xml
-    mvn clean
 release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1

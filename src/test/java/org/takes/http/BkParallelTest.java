@@ -69,57 +69,43 @@ import org.takes.tk.TkEmpty;
         final int count = 3;
         final CountDownLatch started = new CountDownLatch(count);
         final CountDownLatch completed = new CountDownLatch(count);
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) {
-                started.countDown();
-                try {
-                    started.await();
-                } catch (final InterruptedException ex) {
-                    throw new IllegalStateException(ex);
-                }
-                completed.countDown();
-                return new TkEmpty().act(req);
+        final Take take = req -> {
+            started.countDown();
+            try {
+                started.await();
+            } catch (final InterruptedException ex) {
+                throw new IllegalStateException(ex);
             }
+            completed.countDown();
+            return new TkEmpty().act(req);
         };
-        final Exit exit = new Exit() {
-            @Override
-            public boolean ready() {
-                return completed.getCount() == 0;
-            }
-        };
+        final Exit exit = () -> completed.getCount() == 0;
         new Thread(
             // @checkstyle AnonInnerLengthCheck (23 lines)
-            new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        new FtBasic(
-                            new BkParallel(
-                                new BkBasic(take),
-                                count
-                            ),
-                            socket
-                        ).start(exit);
-                    } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
-                    }
+            () -> {
+                try {
+                    new FtBasic(
+                        new BkParallel(
+                            new BkBasic(take),
+                            count
+                        ),
+                        socket
+                    ).start(exit);
+                } catch (final IOException ex) {
+                    throw new IllegalStateException(ex);
                 }
             }
         ).start();
         for (int idx = 0; idx < count; ++idx) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new JdkRequest(uri)
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK);
-                        } catch (final IOException ex) {
-                            throw new IllegalStateException(ex);
-                        }
+                () -> {
+                    try {
+                        new JdkRequest(uri)
+                            .fetch()
+                            .as(RestResponse.class)
+                            .assertStatus(HttpURLConnection.HTTP_OK);
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
                     }
                 }
             ).start();

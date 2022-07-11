@@ -57,15 +57,10 @@ public final class XeStylesheet extends XeWrap {
      */
     public XeStylesheet(final CharSequence xsl) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives().pi(
-                        "xml-stylesheet",
-                        String.format("href='%s' type='text/xsl'", xsl)
-                    );
-                }
-            }
+            () -> new Directives().pi(
+                "xml-stylesheet",
+                String.format("href='%s' type='text/xsl'", xsl)
+            )
         );
     }
 

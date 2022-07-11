@@ -47,12 +47,7 @@ public final class TkOnce extends TkWrap {
      */
     public TkOnce(final Take take) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws Exception {
-                    return take.act(new RqGreedy(request));
-                }
-            }
+            request -> take.act(new RqGreedy(request))
         );
     }
 

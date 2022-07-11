@@ -115,18 +115,15 @@ final class PsGithubTest {
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        final Request greq = new RqGreedy(req);
-                        final String code = "code";
-                        PsGithubTest.assertParam(greq, code, code);
-                        PsGithubTest.assertParam(greq, "client_id", app);
-                        PsGithubTest.assertParam(greq, "client_secret", key);
-                        return new RsXembly(
-                            new XeDirectives(directive.toString())
-                        );
-                    }
+                (Take) req -> {
+                    final Request greq = new RqGreedy(req);
+                    final String code = "code";
+                    PsGithubTest.assertParam(greq, code, code);
+                    PsGithubTest.assertParam(greq, "client_id", app);
+                    PsGithubTest.assertParam(greq, "client_secret", key);
+                    return new RsXembly(
+                        new XeDirectives(directive.toString())
+                    );
                 }
             ),
             new FkRegex(
@@ -136,28 +133,25 @@ final class PsGithubTest {
         );
         new FtRemote(take).exec(
             // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsGithub(
-                        app,
-                        key,
-                        home.toString(),
-                        home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        Matchers.equalTo("urn:github:1")
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGithubTest.LOGIN),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get("avatar"),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
-                    );
-                }
+            home -> {
+                final Identity identity = new PsGithub(
+                    app,
+                    key,
+                    home.toString(),
+                    home.toString()
+                ).enter(new RqFake("GET", "?code=code")).get();
+                MatcherAssert.assertThat(
+                    identity.urn(),
+                    Matchers.equalTo("urn:github:1")
+                );
+                MatcherAssert.assertThat(
+                    identity.properties().get(PsGithubTest.LOGIN),
+                    Matchers.equalTo(PsGithubTest.OCTOCAT)
+                );
+                MatcherAssert.assertThat(
+                    identity.properties().get("avatar"),
+                    Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
+                );
             }
         );
     }

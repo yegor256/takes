@@ -78,16 +78,11 @@ final class FtBasicTest {
         new FtRemote(
             new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "hello, world!"))
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("hello"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.startsWith("hello"))
         );
     }
 
@@ -98,16 +93,11 @@ final class FtBasicTest {
     @Test
     void gracefullyHandlesBrokenBack() throws Exception {
         new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
-                        .assertBody(Matchers.containsString("Lebowski"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
+                .assertBody(Matchers.containsString("Lebowski"))
         );
     }
 
@@ -117,28 +107,20 @@ final class FtBasicTest {
      */
     @Test
     void parsesIncomingHttpRequest() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                MatcherAssert.assertThat(
-                    new RqPrint(request).printBody(),
-                    Matchers.containsString("Jeff")
-                );
-                return new RsText("works!");
-            }
+        final Take take = request -> {
+            MatcherAssert.assertThat(
+                new RqPrint(request).printBody(),
+                Matchers.containsString("Jeff")
+            );
+            return new RsText("works!");
         };
         new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("PUT")
-                        .body().set("Jeff, how are you?").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("PUT")
+                .body().set("Jeff, how are you?").back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
         );
     }
 
@@ -149,32 +131,24 @@ final class FtBasicTest {
     @Test
     @Disabled
     void gracefullyHandlesStuckBack() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                final Request req = new RqGreedy(request);
-                return new RsText(
-                    String.format(
-                        "first: %s, second: %s",
-                        new RqPrint(req).printBody(),
-                        new RqPrint(req).printBody()
-                    )
-                );
-            }
+        final Take take = request -> {
+            final Request req = new RqGreedy(request);
+            return new RsText(
+                String.format(
+                    "first: %s, second: %s",
+                    new RqPrint(req).printBody(),
+                    new RqPrint(req).printBody()
+                )
+            );
         };
         new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("POST")
-                        .header("Content-Length", "4")
-                        .fetch(new ByteArrayInputStream("ddgg".getBytes()))
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.containsString("second: dd"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("POST")
+                .header("Content-Length", "4")
+                .fetch(new ByteArrayInputStream("ddgg".getBytes()))
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.containsString("second: dd"))
         );
     }
 
@@ -184,30 +158,22 @@ final class FtBasicTest {
      */
     @Test
     void consumesIncomingDataStream() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(
-                    IOUtils.toString(
-                        new RqLengthAware(req).body(),
-                        StandardCharsets.UTF_8
-                    )
-                );
-            }
-        };
+        final Take take = req -> new RsText(
+            IOUtils.toString(
+                new RqLengthAware(req).body(),
+                StandardCharsets.UTF_8
+            )
+        );
         new FtRemote(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final String body = "here is your data";
-                    new JdkRequest(home)
-                        .method(RqMethod.POST)
-                        .body().set(body).back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(body));
-                }
+            home -> {
+                final String body = "here is your data";
+                new JdkRequest(home)
+                    .method(RqMethod.POST)
+                    .body().set(body).back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(body));
             }
         );
     }
@@ -229,20 +195,17 @@ final class FtBasicTest {
                 )
             )
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(result));
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(result));
-                }
+            home -> {
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(result));
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(result));
             }
         );
     }
@@ -264,20 +227,17 @@ final class FtBasicTest {
                 )
             )
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(result));
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(result));
-                }
+            home -> {
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(result));
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(result));
             }
         );
     }
@@ -296,12 +256,7 @@ final class FtBasicTest {
             ),
             FtBasicTest.server()
         ).start(
-            new Exit() {
-                @Override
-                public boolean ready() {
-                    return true;
-                }
-            }
+            () -> true
         );
     }
 
@@ -314,13 +269,8 @@ final class FtBasicTest {
         final ServerSocket server = Mockito.mock(ServerSocket.class);
         final Socket socket = Mockito.mock(
             Socket.class,
-            new Answer<Socket>() {
-                @Override
-                public Socket answer(
-                    final InvocationOnMock invocation
-                ) throws Throwable {
-                    throw new SocketException("Broken pipe");
-                }
+            (Answer<Socket>) invocation -> {
+                throw new SocketException("Broken pipe");
             }
         );
         Mockito.when(server.accept()).thenReturn(socket);

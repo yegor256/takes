@@ -72,17 +72,14 @@ public final class XeDate extends XeWrap {
      */
     public XeDate(final CharSequence attr) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    final DateFormat fmt = new SimpleDateFormat(
-                        "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
-                    );
-                    fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-                    return new Directives().attr(
-                        attr.toString(), fmt.format(new Date())
-                    );
-                }
+            () -> {
+                final DateFormat fmt = new SimpleDateFormat(
+                    "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
+                );
+                fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
+                return new Directives().attr(
+                    attr.toString(), fmt.format(new Date())
+                );
             }
         );
     }

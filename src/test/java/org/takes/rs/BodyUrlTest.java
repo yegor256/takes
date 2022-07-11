@@ -82,7 +82,7 @@ final class BodyUrlTest {
                 new LengthOf(
                     new Body.Url(file.value().toUri().toURL())
                 ).value(),
-                new IsEqual<>(body.asBytes().length)
+                new IsEqual<>((long) body.asBytes().length)
             );
         }
     }

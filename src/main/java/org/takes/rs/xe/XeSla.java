@@ -68,19 +68,14 @@ public final class XeSla extends XeWrap {
      */
     public XeSla(final CharSequence attr) {
         super(
-            new XeSource() {
-                @Override
-                public Iterable<Directive> toXembly() {
-                    return new Directives().attr(
-                        attr.toString(),
-                        String.format(
-                            "%.3f",
-                            ManagementFactory.getOperatingSystemMXBean()
-                                .getSystemLoadAverage()
-                        )
-                    );
-                }
-            }
+            () -> new Directives().attr(
+                attr.toString(),
+                String.format(
+                    "%.3f",
+                    ManagementFactory.getOperatingSystemMXBean()
+                        .getSystemLoadAverage()
+                )
+            )
         );
     }
 

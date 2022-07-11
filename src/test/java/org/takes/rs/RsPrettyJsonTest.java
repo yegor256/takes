@@ -55,7 +55,7 @@ final class RsPrettyJsonTest {
                 )
             ).asString(),
             Matchers.is(
-                "\n{\n    \"widget\":{\n        \"debug\":\"on\"\n    }\n}"
+                "\n{\n    \"widget\": {\n        \"debug\": \"on\"\n    }\n}"
             )
         );
     }
@@ -82,7 +82,7 @@ final class RsPrettyJsonTest {
             w.write(
                 new BodyPrint(
                     new RsWithBody(
-                        "\n{\n    \"test\":{\n        \"test\":\"test\"\n    }\n}"
+                        "\n{\n    \"test\": {\n        \"test\": \"test\"\n    }\n}"
                     )
                 ).asString()
             );

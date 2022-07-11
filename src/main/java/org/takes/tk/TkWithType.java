@@ -51,12 +51,7 @@ public final class TkWithType extends TkWrap {
      */
     public TkWithType(final Take take, final String type) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws Exception {
-                    return new RsWithType(take.act(req), type);
-                }
-            }
+            req -> new RsWithType(take.act(req), type)
         );
     }
 

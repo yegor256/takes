@@ -54,12 +54,7 @@ final class RsXemblyTest {
                     new XeAppend(
                         "root",
                         new XeMillis(false),
-                        new XeSource() {
-                            @Override
-                            public Iterable<Directive> toXembly() {
-                                return new Directives().add("hey");
-                            }
-                        },
+                        () -> new Directives().add("hey"),
                         new XeMillis(true)
                     )
                 ).body(),

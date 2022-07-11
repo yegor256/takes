@@ -68,12 +68,7 @@ public final class FkAnonymous implements Fork {
      */
     public FkAnonymous(final Take tke) {
         this(
-            new Scalar<Take>() {
-                @Override
-                public Take value() {
-                    return tke;
-                }
-            }
+            () -> tke
         );
     }
 

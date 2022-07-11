@@ -171,11 +171,6 @@ import org.takes.rs.RsEmpty;
      * @return Take
      */
     private static Take emptyResponse() {
-        return new Take() {
-            @Override
-            public Response act(final Request req) {
-                return new RsEmpty();
-            }
-        };
+        return req -> new RsEmpty();
     }
 }

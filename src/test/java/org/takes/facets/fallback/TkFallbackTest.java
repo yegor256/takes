@@ -54,14 +54,9 @@ final class TkFallbackTest {
             new BodyPrint(
                 new TkFallback(
                     new TkFailure(err),
-                    new Fallback() {
-                        @Override
-                        public Opt<Response> route(final RqFallback req) {
-                            return new Opt.Single<>(
-                                new RsText(req.throwable().getMessage())
-                            );
-                        }
-                    }
+                    req -> new Opt.Single<>(
+                        new RsText(req.throwable().getMessage())
+                    )
                 ).act(new RqFake())
             ).asString(),
             Matchers.endsWith(err)
@@ -77,21 +72,16 @@ final class TkFallbackTest {
         MatcherAssert.assertThat(
             new BodyPrint(
                 new TkFallback(
-                    new Take() {
-                        @Override
-                        public Response act(final Request req) {
-                            return new ResponseOf(
-                                () -> {
-                                    throw new UnsupportedOperationException("");
-                                },
-                                () -> {
-                                    throw new IllegalArgumentException(
-                                        "here we fail"
-                                    );
-                                }
+                    req -> new ResponseOf(
+                        () -> {
+                            throw new UnsupportedOperationException("");
+                        },
+                        () -> {
+                            throw new IllegalArgumentException(
+                                "here we fail"
                             );
                         }
-                    },
+                    ),
                     new FbFixed(new RsText("caught here!"))
                 ).act(new RqFake())
             ).asString(),

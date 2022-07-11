@@ -42,12 +42,7 @@ public final class FbEmpty extends FbWrap {
      */
     public FbEmpty() {
         super(
-            new Fallback() {
-                @Override
-                public Opt<Response> route(final RqFallback req) {
-                    return new Opt.Empty<>();
-                }
-            }
+            req -> new Opt.Empty<>()
         );
     }
 

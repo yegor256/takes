@@ -67,7 +67,7 @@ final class BodyStreamTest {
             new LengthOf(
                 new Body.Stream(new InputOf(bytes).stream())
             ).value(),
-            new IsEqual<>(bytes.length)
+            new IsEqual<>((long) bytes.length)
         );
     }
 }

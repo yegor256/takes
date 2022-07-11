@@ -74,22 +74,19 @@ public final class TkFiles extends TkWrap {
      */
     public TkFiles(final File base) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws Exception {
-                    final File file = new File(
-                        base, new RqHref.Base(request).href().path()
+            request -> {
+                final File file = new File(
+                    base, new RqHref.Base(request).href().path()
+                );
+                if (!file.exists()) {
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_NOT_FOUND,
+                        String.format(
+                            "%s not found", file.getAbsolutePath()
+                        )
                     );
-                    if (!file.exists()) {
-                        throw new HttpException(
-                            HttpURLConnection.HTTP_NOT_FOUND,
-                            String.format(
-                                "%s not found", file.getAbsolutePath()
-                            )
-                        );
-                    }
-                    return new RsWithBody(new InputOf(file).stream());
                 }
+                return new RsWithBody(new InputOf(file).stream());
             }
         );
     }

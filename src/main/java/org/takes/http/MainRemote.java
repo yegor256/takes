@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.bytes.BytesOf;
-import org.cactoos.scalar.NumberOf;
+import org.cactoos.number.NumberOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 
@@ -150,7 +150,7 @@ public final class MainRemote {
         while (!file.exists()) {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
-        final Scalar<Number> port;
+        final int port;
         try (InputStream input = Files.newInputStream(file.toPath())) {
             // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
@@ -159,9 +159,11 @@ public final class MainRemote {
                     break;
                 }
             }
-            port = new NumberOf(new Trimmed(new TextOf(new BytesOf(buf))));
+            port = new NumberOf(
+                new Trimmed(new TextOf(new BytesOf(buf)))
+            ).intValue();
         }
-        return port.value().intValue();
+        return port;
     }
 
     /**

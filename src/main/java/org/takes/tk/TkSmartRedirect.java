@@ -67,17 +67,12 @@ public final class TkSmartRedirect extends TkWrap {
      */
     public TkSmartRedirect(final String location, final int code) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return new RsRedirect(
-                        new TkSmartRedirect.RedirectParams(
-                            req, location
-                        ).location(),
-                        code
-                    );
-                }
-            }
+            req -> new RsRedirect(
+                new RedirectParams(
+                    req, location
+                ).location(),
+                code
+            )
         );
     }
 

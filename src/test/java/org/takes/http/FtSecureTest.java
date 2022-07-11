@@ -59,16 +59,11 @@ import org.takes.tk.TkFixed;
     @Test
     void justWorks() throws Exception {
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.startsWith("hello"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.startsWith("hello"))
         );
     }
 
@@ -79,16 +74,11 @@ import org.takes.tk.TkFixed;
     @Test
     void gracefullyHandlesBrokenBack() throws Exception {
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
-                        .assertBody(Matchers.containsString("Lebowski"));
-                }
-            }
+            home -> new JdkRequest(home)
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
+                .assertBody(Matchers.containsString("Lebowski"))
         );
     }
 
@@ -98,28 +88,20 @@ import org.takes.tk.TkFixed;
      */
     @Test
     void parsesIncomingHttpRequest() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request request) throws IOException {
-                MatcherAssert.assertThat(
-                    new RqPrint(request).printBody(),
-                    Matchers.containsString("Jeff")
-                );
-                return new RsText("works!");
-            }
+        final Take take = request -> {
+            MatcherAssert.assertThat(
+                new RqPrint(request).printBody(),
+                Matchers.containsString("Jeff")
+            );
+            return new RsText("works!");
         };
         FtSecureTest.secure(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .method("PUT")
-                        .body().set("Jeff, how are you?").back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK);
-                }
-            }
+            home -> new JdkRequest(home)
+                .method("PUT")
+                .body().set("Jeff, how are you?").back()
+                .fetch()
+                .as(RestResponse.class)
+                .assertStatus(HttpURLConnection.HTTP_OK)
         );
     }
 
@@ -129,30 +111,22 @@ import org.takes.tk.TkFixed;
      */
     @Test
     void consumesIncomingDataStream() throws Exception {
-        final Take take = new Take() {
-            @Override
-            public Response act(final Request req) throws IOException {
-                return new RsText(
-                    IOUtils.toString(
-                        new RqLengthAware(req).body(),
-                        StandardCharsets.UTF_8
-                    )
-                );
-            }
-        };
+        final Take take = req -> new RsText(
+            IOUtils.toString(
+                new RqLengthAware(req).body(),
+                StandardCharsets.UTF_8
+            )
+        );
         FtSecureTest.secure(take).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final String body = "here is your data";
-                    new JdkRequest(home)
-                        .method(RqMethod.POST)
-                        .body().set(body).back()
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .assertBody(Matchers.equalTo(body));
-                }
+            home -> {
+                final String body = "here is your data";
+                new JdkRequest(home)
+                    .method(RqMethod.POST)
+                    .body().set(body).back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(body));
             }
         );
     }
