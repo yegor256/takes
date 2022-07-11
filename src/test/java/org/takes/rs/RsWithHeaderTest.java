@@ -69,12 +69,10 @@ final class RsWithHeaderTest {
     void notAddsInvalidHeadersToResponse() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                new RsWithHeader(
-                    new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
-                    "Host MY", "d.example.com"
-                ).head();
-            }
+            () -> new RsWithHeader(
+                new RsWithHeader(new RsEmpty(), "host:", "c.example.com"),
+                "Host MY", "d.example.com"
+            ).head()
         );
     }
 }

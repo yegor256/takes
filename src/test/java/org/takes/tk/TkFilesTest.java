@@ -71,11 +71,9 @@ final class TkFilesTest {
     void throwsWhenResourceNotFound() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new TkFiles("/absent-dir-for-sure").act(
-                    new RqFake("PUT", "/something-else.txt", "")
-                );
-            }
+            () -> new TkFiles("/absent-dir-for-sure").act(
+                new RqFake("PUT", "/something-else.txt", "")
+            )
         );
     }
 }

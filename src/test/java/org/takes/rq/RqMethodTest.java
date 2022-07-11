@@ -104,11 +104,9 @@ final class RqMethodTest {
     void failsOnExtraLineElement() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqMethod.Base(
-                    new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
-                ).method();
-            }
+            () -> new RqMethod.Base(
+                new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
+            ).method()
         );
     }
 
@@ -120,11 +118,9 @@ final class RqMethodTest {
     void failsOnExtraSpaces() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqMethod.Base(
-                    new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
-                ).method();
-            }
+            () -> new RqMethod.Base(
+                new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
+            ).method()
         );
     }
 
@@ -136,9 +132,7 @@ final class RqMethodTest {
     void failsOnSeparatorsInExtensionMethod() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqMethod.Base(new RqFake("CUSTO{M)")).method();
-            }
+            () -> new RqMethod.Base(new RqFake("CUSTO{M)")).method()
         );
     }
 }

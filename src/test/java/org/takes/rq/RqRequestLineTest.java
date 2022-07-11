@@ -47,11 +47,9 @@ import org.takes.HttpException;
     void failsOnAbsentRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqRequestLine.Base(
-                    new RqSimple(Collections.<String>emptyList(), null)
-                ).header();
-            }
+            () -> new RqRequestLine.Base(
+                new RqSimple(Collections.emptyList(), null)
+            ).header()
         );
     }
 
@@ -64,17 +62,15 @@ import org.takes.HttpException;
     void failsOnIllegalRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqRequestLine.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GIVE/contacts2",
-                            "Host: 1.example.com"
-                        ),
-                        ""
-                    )
-                ).header();
-            }
+            () -> new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GIVE/contacts2",
+                        "Host: 1.example.com"
+                    ),
+                    ""
+                )
+            ).header()
         );
     }
 
@@ -110,11 +106,9 @@ import org.takes.HttpException;
     void failsOnAbsentRequestLineToken() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqRequestLine.Base(
-                    new RqSimple(Collections.<String>emptyList(), null)
-                ).method();
-            }
+            () -> new RqRequestLine.Base(
+                new RqSimple(Collections.emptyList(), null)
+            ).method()
         );
     }
 
@@ -127,17 +121,15 @@ import org.takes.HttpException;
     void failsOnIllegalRequestLineToken() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqRequestLine.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GIVE/contacts",
-                            "Host: 3.example.com"
-                        ),
-                        ""
-                    )
-                ).method();
-            }
+            () -> new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GIVE/contacts",
+                        "Host: 3.example.com"
+                    ),
+                    ""
+                )
+            ).method()
         );
     }
 
@@ -216,20 +208,18 @@ import org.takes.HttpException;
     void extractsEmptyThirdParam() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    new RqRequestLine.Base(
-                        new RqFake(
-                            Arrays.asList(
-                                "GET /hello?since=3433",
-                                "Host: f4.example.com"
-                            ),
-                            ""
-                        )
-                    ).version(),
-                    Matchers.equalTo(null)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                new RqRequestLine.Base(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /hello?since=3433",
+                            "Host: f4.example.com"
+                        ),
+                        ""
+                    )
+                ).version(),
+                Matchers.equalTo(null)
+            )
         );
     }
 }

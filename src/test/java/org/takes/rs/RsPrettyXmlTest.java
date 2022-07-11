@@ -170,9 +170,7 @@ final class RsPrettyXmlTest {
     void formatsNonXmlBody() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString();
-            }
+            () -> new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString()
         );
     }
 

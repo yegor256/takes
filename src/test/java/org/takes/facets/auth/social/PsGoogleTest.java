@@ -239,20 +239,18 @@ final class PsGoogleTest {
         );
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new FtRemote(take).exec(
-                    // @checkstyle AnonInnerLengthCheck (100 lines)
-                    home -> new PsGoogle(
-                        PsGoogleTest.APP,
-                        PsGoogleTest.KEY,
-                        PsGoogleTest.ACCOUNT,
-                        home.toString(),
-                        home.toString()
-                    ).enter(
-                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                    ).get()
-                );
-            }
+            () -> new FtRemote(take).exec(
+                // @checkstyle AnonInnerLengthCheck (100 lines)
+                home -> new PsGoogle(
+                    PsGoogleTest.APP,
+                    PsGoogleTest.KEY,
+                    PsGoogleTest.ACCOUNT,
+                    home.toString(),
+                    home.toString()
+                ).enter(
+                    new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                ).get()
+            )
         );
     }
 

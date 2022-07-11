@@ -49,7 +49,7 @@ final class HmBodyTest {
         final String body = "Same";
         MatcherAssert.assertThat(
             new RqFake(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 body
             ),
             new HmBody<>(body)
@@ -63,7 +63,7 @@ final class HmBodyTest {
     void testsBodyValuesAreDifferent() {
         MatcherAssert.assertThat(
             new RqFake(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 "this"
             ),
             new IsNot<>(new HmBody<>("that"))
@@ -76,7 +76,7 @@ final class HmBodyTest {
     @Test
     void describesMismatchInReadableWay() {
         final Request request = new RqFake(
-            Collections.<String>emptyList(),
+            Collections.emptyList(),
             "other"
         );
         final HmBody<Body> matcher = new HmBody<>("some");
@@ -101,7 +101,7 @@ final class HmBodyTest {
     @Test
     void describeToInReadableWay() {
         final Request request = new RqFake(
-            Collections.<String>emptyList(),
+            Collections.emptyList(),
             "one"
         );
         final HmBody<Body> matcher = new HmBody<>("two");

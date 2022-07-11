@@ -60,7 +60,7 @@ final class PsTwitterTest {
             new FakeRequest(
                 200,
                 httpok,
-                Collections.<Map.Entry<String, String>>emptyList(),
+                Collections.emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
                     RandomStringUtils.randomAlphanumeric(10)
@@ -69,7 +69,7 @@ final class PsTwitterTest {
             new FakeRequest(
                 200,
                 httpok,
-                Collections.<Map.Entry<String, String>>emptyList(),
+                Collections.emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
                     .add(name, randname)

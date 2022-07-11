@@ -74,7 +74,7 @@ final class RqHeadersTest {
                     ""
                 )
             ).header("Accept"),
-            Matchers.<String>iterableWithSize(2)
+            Matchers.iterableWithSize(2)
         );
     }
 

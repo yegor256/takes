@@ -46,7 +46,7 @@ public final class FkChain implements Fork {
      * Ctor.
      */
     public FkChain() {
-        this(Collections.<Fork>emptyList());
+        this(Collections.emptyList());
     }
 
     /**

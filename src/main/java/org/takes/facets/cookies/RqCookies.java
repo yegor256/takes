@@ -89,7 +89,7 @@ public interface RqCookies extends Request {
             final Iterable<String> iter;
             if (value.isEmpty()) {
                 iter = new VerboseIterable<>(
-                    Collections.<String>emptyList(),
+                    Collections.emptyList(),
                     new FormattedText(
                         // @checkstyle LineLengthCheck (1 line)
                         "There are no Cookies by name \"%s\" among %d others: %s",

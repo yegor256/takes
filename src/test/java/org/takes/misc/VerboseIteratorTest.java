@@ -83,12 +83,10 @@ final class VerboseIteratorTest {
     void nextValueThrowsExceptionOnEmptyList() {
         Assertions.assertThrows(
             RuntimeException.class,
-            () -> {
-                new VerboseIterable<String>(
-                    Collections.<String>emptyList(),
-                    new TextOf("Expected Error Message")
-                ).iterator().next();
-            }
+            () -> new VerboseIterable<String>(
+                Collections.emptyList(),
+                new TextOf("Expected Error Message")
+            ).iterator().next()
         );
     }
 
@@ -99,7 +97,7 @@ final class VerboseIteratorTest {
     void returnFalseInHasNextValueOnEmptyList() {
         MatcherAssert.assertThat(
             new VerboseIterable<String>(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 new TextOf("Non used Error Message")
             ).iterator().hasNext(),
             Matchers.equalTo(false)
@@ -113,18 +111,16 @@ final class VerboseIteratorTest {
     void removeValue() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
-            () -> {
-                new VerboseIterable<String>(
-                    Arrays.asList(
-                        "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
-                        "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
-                        "Max-Forwards: 10",
-                        "Origin: http://www.example-social-network.com",
-                        "User-Agent: Mozilla/5.0 (X11; Linux x86_64) Gecko/2010010"
-                    ),
-                    new TextOf("Thrown Error Message")
-                ).iterator().remove();
-            }
+            () -> new VerboseIterable<String>(
+                Arrays.asList(
+                    "If-None-Match: \"737060cd8c284d8af7ad3082f209582d\"",
+                    "If-Range: \"737060cd8c284d8af7ad3082f209582d\"",
+                    "Max-Forwards: 10",
+                    "Origin: http://www.example-social-network.com",
+                    "User-Agent: Mozilla/5.0 (X11; Linux x86_64) Gecko/2010010"
+                ),
+                new TextOf("Thrown Error Message")
+            ).iterator().remove()
         );
     }
 }

@@ -87,7 +87,7 @@ public interface Identity {
          * @param urn URN of the identity
          */
         public Simple(final String urn) {
-            this(urn, Collections.<String, String>emptyMap());
+            this(urn, Collections.emptyMap());
         }
 
         /**

@@ -76,10 +76,8 @@ final class FbStatusTest {
             new BodyPrint(
                 new FbStatus(
                     new Filtered<>(
-                        status -> {
-                            return status == HttpURLConnection.HTTP_MOVED_PERM
-                                || status == HttpURLConnection.HTTP_MOVED_TEMP;
-                        },
+                        status -> status == HttpURLConnection.HTTP_MOVED_PERM
+                            || status == HttpURLConnection.HTTP_MOVED_TEMP,
                         new ListOf<>(
                             HttpURLConnection.HTTP_MOVED_PERM,
                             HttpURLConnection.HTTP_MOVED_TEMP

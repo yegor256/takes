@@ -67,9 +67,7 @@ final class RsPrettyJsonTest {
     void rejectsNonJsonBody() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString();
-            }
+            () -> new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString()
         );
     }
 

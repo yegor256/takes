@@ -78,11 +78,9 @@ final class CcSaltedTest {
     void throwsOnIncompleteData() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcSalted(new CcPlain()).decode(
-                    "\u0010\u0000\u0000\u0000".getBytes()
-                );
-            }
+            () -> new CcSalted(new CcPlain()).decode(
+                "\u0010\u0000\u0000\u0000".getBytes()
+            )
         );
     }
 
@@ -94,11 +92,9 @@ final class CcSaltedTest {
     void throwsOnZeroData() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcSalted(new CcPlain()).decode(
-                    "\u1111\u0000\u0000\u0000".getBytes()
-                );
-            }
+            () -> new CcSalted(new CcPlain()).decode(
+                "\u1111\u0000\u0000\u0000".getBytes()
+            )
         );
     }
 
@@ -110,9 +106,7 @@ final class CcSaltedTest {
     void throwsOnEmptyInput() throws IOException {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcSalted(new CcPlain()).decode(new byte[0]);
-            }
+            () -> new CcSalted(new CcPlain()).decode(new byte[0])
         );
     }
 

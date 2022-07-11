@@ -127,13 +127,11 @@ final class RqLiveTest {
     void failsOnBrokenHttpRequest() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqLive(
-                    new ByteArrayInputStream(
-                        "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
-                    )
-                );
-            }
+            () -> new RqLive(
+                new ByteArrayInputStream(
+                    "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
+                )
+            )
         );
     }
 
@@ -144,13 +142,11 @@ final class RqLiveTest {
     void failsOnInvalidCrLfInRequest() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqLive(
-                    new ByteArrayInputStream(
-                        "GET /test HTTP/1.1\rHost: localhost".getBytes()
-                    )
-                );
-            }
+            () -> new RqLive(
+                new ByteArrayInputStream(
+                    "GET /test HTTP/1.1\rHost: localhost".getBytes()
+                )
+            )
         );
     }
 

@@ -61,11 +61,9 @@ final class TkMethodsTest {
     void throwsExceptionOnActinOnUnproperMethod() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
-                    new RqFake(RqMethod.GET)
-                );
-            }
+            () -> new TkMethods(Mockito.mock(Take.class), RqMethod.POST).act(
+                new RqFake(RqMethod.GET)
+            )
         );
     }
 

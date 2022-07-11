@@ -44,11 +44,9 @@ final class HeadPrintTest {
     void failsOnInvalidHeader() throws IOException {
         MatcherAssert.assertThat(
             "Must catch invalid header exception",
-            () -> {
-                return new HeadPrint(
-                    new RsWithHeader("name", "\n\n\n")
-                ).asString();
-            },
+            () -> new HeadPrint(
+                new RsWithHeader("name", "\n\n\n")
+            ).asString(),
             new Throws<>(IllegalArgumentException.class)
         );
     }

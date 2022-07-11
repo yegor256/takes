@@ -95,12 +95,10 @@ final class RqFormFakeTest {
     void throwsExceptionWhenNotCorrectlyCreated() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                new RqFormFake(
-                    new RqFake(),
-                    "param"
-                );
-            }
+            () -> new RqFormFake(
+                new RqFake(),
+                "param"
+            )
         );
     }
 }

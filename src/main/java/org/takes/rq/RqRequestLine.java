@@ -85,7 +85,7 @@ public interface RqRequestLine extends Request {
          * Bad request message.
          */
         private static final String BAD_REQUEST_MSG =
-            "Invalid HTTP Request-Line header: %s";
+            "Invalid HTTP Request-Line header: '%s'";
 
         /**
          * HTTP Request-line pattern.
@@ -142,17 +142,17 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String method() throws IOException {
-            return this.token(Token.METHOD);
+            return this.token(RqRequestLine.Base.Token.METHOD);
         }
 
         @Override
         public String uri() throws IOException {
-            return this.token(Token.URI);
+            return this.token(RqRequestLine.Base.Token.URI);
         }
 
         @Override
         public String version() throws IOException {
-            return this.token(Token.HTTPVERSION);
+            return this.token(RqRequestLine.Base.Token.HTTPVERSION);
         }
 
         /**
@@ -161,7 +161,7 @@ public interface RqRequestLine extends Request {
          * @return HTTP Request-Line header token
          * @throws IOException If fails
          */
-        private String token(final Token token)
+        private String token(final RqRequestLine.Base.Token token)
             throws IOException {
             return RqRequestLine.Base.trimmed(
                 RqRequestLine.Base.matcher(this.line()).group(token.value),
@@ -195,12 +195,12 @@ public interface RqRequestLine extends Request {
          */
         private static Matcher matcher(final String line)
             throws HttpException {
-            final Matcher matcher = PATTERN.matcher(line);
+            final Matcher matcher = RqRequestLine.Base.PATTERN.matcher(line);
             if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        Base.BAD_REQUEST_MSG,
+                        RqRequestLine.Base.BAD_REQUEST_MSG,
                         line
                     )
                 );
@@ -221,7 +221,7 @@ public interface RqRequestLine extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        Base.BAD_REQUEST_MSG,
+                        RqRequestLine.Base.BAD_REQUEST_MSG,
                         line
                     )
                 );
@@ -237,7 +237,7 @@ public interface RqRequestLine extends Request {
          * @param token Token
          * @return Trimmed token value
          */
-        private static String trimmed(final String value, final Token token) {
+        private static String trimmed(final String value, final RqRequestLine.Base.Token token) {
             if (value == null) {
                 throw new IllegalArgumentException(
                     String.format(

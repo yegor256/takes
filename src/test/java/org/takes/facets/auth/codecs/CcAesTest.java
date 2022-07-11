@@ -146,11 +146,9 @@ import org.takes.facets.auth.Identity;
     void throwsRightWhenBroken() throws Exception {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcAes(
-                    new CcPlain(), "0123456701234567"
-                ).decode("broken input".getBytes());
-            }
+            () -> new CcAes(
+                new CcPlain(), "0123456701234567"
+            ).decode("broken input".getBytes())
         );
     }
 

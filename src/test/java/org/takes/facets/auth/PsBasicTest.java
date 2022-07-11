@@ -205,31 +205,29 @@ final class PsBasicTest {
     void handleMultipleHeadersWithInvalidContent() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    new PsBasic(
-                        "RealmD",
-                        new PsBasic.Fake(true)
-                    ).enter(
-                        new RqWithHeaders(
-                            new RqFake(
-                                "XPTO",
-                                "/wrong-url"
-                            ),
-                            String.format(
-                                "XYZ%s",
-                                PsBasicTest.header("user", "password")
-                            ),
-                            "XYZReferer: http://teamed.io/",
-                            "XYZConnection:keep-alive",
-                            "XYZContent-Encoding:gzip",
-                            "XYZX-Check-Cacheable:YES",
-                            "XYZX-Powered-By:Java/1.7"
-                        )
-                    ).has(),
-                    Matchers.is(false)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                new PsBasic(
+                    "RealmD",
+                    new PsBasic.Fake(true)
+                ).enter(
+                    new RqWithHeaders(
+                        new RqFake(
+                            "XPTO",
+                            "/wrong-url"
+                        ),
+                        String.format(
+                            "XYZ%s",
+                            PsBasicTest.header("user", "password")
+                        ),
+                        "XYZReferer: http://teamed.io/",
+                        "XYZConnection:keep-alive",
+                        "XYZContent-Encoding:gzip",
+                        "XYZX-Check-Cacheable:YES",
+                        "XYZX-Powered-By:Java/1.7"
+                    )
+                ).has(),
+                Matchers.is(false)
+            )
         );
     }
 

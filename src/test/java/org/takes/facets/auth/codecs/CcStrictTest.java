@@ -49,9 +49,7 @@ final class CcStrictTest {
     void blocksEmptyUrn() {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcStrict(new CcPlain()).encode(new Identity.Simple(""));
-            }
+            () -> new CcStrict(new CcPlain()).encode(new Identity.Simple(""))
         );
     }
 
@@ -62,9 +60,7 @@ final class CcStrictTest {
     void blocksInvalidUrn() {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes());
-            }
+            () -> new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes())
         );
     }
 
@@ -75,7 +71,7 @@ final class CcStrictTest {
     @Test
     void canDecodeAnonymousIdentity() throws Exception {
         final Codec codec = Mockito.mock(Codec.class);
-        Mockito.when(codec.decode(Mockito.<byte[]>any())).thenReturn(
+        Mockito.when(codec.decode(Mockito.any())).thenReturn(
             Identity.ANONYMOUS
         );
         MatcherAssert.assertThat(

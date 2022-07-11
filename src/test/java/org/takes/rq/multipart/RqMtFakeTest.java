@@ -67,16 +67,14 @@ final class RqMtFakeTest {
     void throwsExceptionOnNoNameAtContentDispositionHeader() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                new RqMtFake(
-                    new RqWithHeader(
-                        new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
-                        new FormattedText(
-                            RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
-                        ).asString()
-                    )
-                ).body();
-            }
+            () -> new RqMtFake(
+                new RqWithHeader(
+                    new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
+                    ).asString()
+                )
+            ).body()
         );
     }
 
@@ -364,7 +362,7 @@ final class RqMtFakeTest {
         try {
             MatcherAssert.assertThat(
                 multi.names(),
-                Matchers.<Iterable<String>>equalTo(
+                Matchers.equalTo(
                     new HashSet<String>(Arrays.asList("address", "data"))
                 )
             );

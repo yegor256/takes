@@ -53,7 +53,7 @@ final class VerboseIterableTest {
                 valid,
                 new TextOf("Empty Error Message")
             ),
-            Matchers.<String>iterableWithSize(valid.size())
+            Matchers.iterableWithSize(valid.size())
         );
     }
 }

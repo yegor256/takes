@@ -44,7 +44,7 @@ final class HmRqTextBodyTest {
         final String same = "Same text";
         MatcherAssert.assertThat(
             new RqFake(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 same
             ),
             new HmRqTextBody(same)
@@ -58,7 +58,7 @@ final class HmRqTextBodyTest {
     void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
             new RqFake(
-                Collections.<String>emptyList(),
+                Collections.emptyList(),
                 "some"
             ),
             new IsNot<>(new HmRqTextBody("other"))

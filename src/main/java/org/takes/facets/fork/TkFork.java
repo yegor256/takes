@@ -74,7 +74,7 @@ public final class TkFork implements Take {
      * Ctor.
      */
     public TkFork() {
-        this(Collections.<Fork>emptyList());
+        this(Collections.emptyList());
     }
 
     /**

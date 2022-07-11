@@ -108,11 +108,9 @@ import org.takes.HttpException;
     void failsOnAbsentRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqHref.Base(
-                    new RqSimple(Collections.<String>emptyList(), null)
-                ).href();
-            }
+            () -> new RqHref.Base(
+                new RqSimple(Collections.emptyList(), null)
+            ).href()
         );
     }
 
@@ -124,17 +122,15 @@ import org.takes.HttpException;
     void failsOnIllegalRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new RqHref.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GIVE/contacts",
-                            "Host: 2.example.com"
-                        ),
-                        ""
-                    )
-                ).href();
-            }
+            () -> new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GIVE/contacts",
+                        "Host: 2.example.com"
+                    ),
+                    ""
+                )
+            ).href()
         );
     }
 

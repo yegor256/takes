@@ -58,9 +58,7 @@ final class HttpServletRequestFakeTest {
         );
         MatcherAssert.assertThat(
             Assertions.assertThrows(
-                NoSuchElementException.class, () -> {
-                    req.getHeader("foo");
-                }
+                NoSuchElementException.class, () -> req.getHeader("foo")
             ),
             Matchers.hasProperty(
                 "message",

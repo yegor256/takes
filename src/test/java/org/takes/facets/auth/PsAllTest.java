@@ -48,15 +48,13 @@ final class PsAllTest {
     void thereShouldBeAtLeastOnePass() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    new PsAll(
-                        new ArrayList<Pass>(0),
-                        0
-                    ).enter(new RqFake()).has(),
-                    new IsEqual<>(false)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                new PsAll(
+                    new ArrayList<Pass>(0),
+                    0
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
         );
     }
 
@@ -67,15 +65,13 @@ final class PsAllTest {
     void indexMustBeNonNegative() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    new PsAll(
-                        Collections.singletonList(new PsFake(true)),
-                        -1
-                    ).enter(new RqFake()).has(),
-                    new IsEqual<>(false)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                new PsAll(
+                    Collections.singletonList(new PsFake(true)),
+                    -1
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
         );
     }
 
@@ -86,18 +82,16 @@ final class PsAllTest {
     void indexMustBeSmallEnough() {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    new PsAll(
-                        Arrays.asList(
-                            new PsFake(true),
-                            new PsFake(false)
-                        ),
-                        2
-                    ).enter(new RqFake()).has(),
-                    new IsEqual<>(false)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                new PsAll(
+                    Arrays.asList(
+                        new PsFake(true),
+                        new PsFake(false)
+                    ),
+                    2
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
         );
     }
 

@@ -71,7 +71,7 @@ final class RsVelocityTest {
             IOUtils.toString(
                 new RsVelocity(
                     stream,
-                    Collections.<CharSequence, Object>emptyMap()
+                    Collections.emptyMap()
                 ).body(),
                 StandardCharsets.UTF_8
             ),

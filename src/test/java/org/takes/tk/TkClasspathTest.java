@@ -63,11 +63,9 @@ final class TkClasspathTest {
     void throwsWhenResourceNotFound() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> {
-                new TkClasspath().act(
-                    new RqFake("PUT", "/something-else", "")
-                );
-            }
+            () -> new TkClasspath().act(
+                new RqFake("PUT", "/something-else", "")
+            )
         );
     }
 }
