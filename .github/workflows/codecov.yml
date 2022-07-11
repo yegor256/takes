@@ -18,7 +18,7 @@ jobs:
           key: maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             maven-
-      - run: mvn test -Pjacoco -Dinvoker.skip
+      - run: mvn install -Pjacoco -Dinvoker.skip
       - uses: codecov/codecov-action@v1
         with:
           file: ./target/site/jacoco/jacoco.xml
