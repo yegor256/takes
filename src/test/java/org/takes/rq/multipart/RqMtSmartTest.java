@@ -268,7 +268,7 @@ final class RqMtSmartTest {
             MatcherAssert.assertThat(
                 System.currentTimeMillis() - start,
                 //@checkstyle MagicNumberCheck (1 line)
-                Matchers.lessThan(3000L)
+                Matchers.lessThan(10_000L)
             );
         } finally {
             req.body().close();
