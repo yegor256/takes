@@ -94,7 +94,6 @@ SOFTWARE.
     </site>
   </distributionManagement>
   <properties>
-    <argLine/>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
   </properties>
@@ -334,9 +333,12 @@ SOFTWARE.
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <argLine>-Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=US ${argLine}</argLine>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
+            <java.awt.headless>true</java.awt.headless>
+            <file.encoding>UTF-8</file.encoding>
+            <user.language>en</user.language>
+            <user.country>US</user.country>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
             <javax.net.ssl.keyStorePassword>abc123
             </javax.net.ssl.keyStorePassword>
