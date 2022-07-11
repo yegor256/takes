@@ -82,10 +82,9 @@ final class PsGithubTest {
 
     /**
      * PsGithub can fail on no access token.
-     * @throws Exception If some problem inside.
      */
     @Test
-    void failsOnNoAccessToken() throws Exception {
+    void failsOnNoAccessToken() {
         Assertions.assertThrows(
             AssertionError.class,
             () -> this.performLogin(PsGithubTest.directiveWithoutAccessToken())

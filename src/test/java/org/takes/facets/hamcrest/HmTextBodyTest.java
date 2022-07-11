@@ -95,7 +95,7 @@ final class HmTextBodyTest {
         }
 
         @Override
-        public InputStream itemBody(final Text item) throws IOException {
+        public InputStream itemBody(final Text item) {
             return new InputStreamOf(item);
         }
     }

@@ -96,11 +96,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
 
             @Override
             public XeSource next() {
-                try {
-                    return XeTransform.this.func.transform(origin.next());
-                } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
-                }
+                return XeTransform.this.func.transform(origin.next());
             }
 
             @Override
@@ -120,8 +116,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
          * Transform an object.
          * @param obj Object
          * @return Xembly source
-         * @throws IOException If fails
          */
-        XeSource transform(T obj) throws IOException;
+        XeSource transform(T obj);
     }
 }

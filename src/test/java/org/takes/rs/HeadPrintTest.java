@@ -39,9 +39,8 @@ final class HeadPrintTest {
 
     /**
      * HeadPrint can fail on invalid chars.
-     * @throws IOException If some problem inside
      */
-    void failsOnInvalidHeader() throws IOException {
+    void failsOnInvalidHeader() {
         MatcherAssert.assertThat(
             "Must catch invalid header exception",
             () -> new HeadPrint(
@@ -52,7 +51,7 @@ final class HeadPrintTest {
     }
 
     @Test
-    void simple() throws IOException {
+    void simple() {
         MatcherAssert.assertThat(
             "must write head",
             new HeadPrint(
@@ -66,7 +65,7 @@ final class HeadPrintTest {
      * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    void simpleWithDash() throws IOException {
+    void simpleWithDash() {
         new Assertion<>(
             "must write head with dashes",
             new HeadPrint(

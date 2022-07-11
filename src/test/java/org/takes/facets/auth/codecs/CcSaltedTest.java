@@ -72,10 +72,9 @@ final class CcSaltedTest {
 
     /**
      * CcSalted can throw when incomplete data.
-     * @throws IOException If some problem inside
      */
     @Test
-    void throwsOnIncompleteData() throws IOException {
+    void throwsOnIncompleteData() {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
@@ -86,10 +85,9 @@ final class CcSaltedTest {
 
     /**
      * CcSalted can throw when length of salt is negative.
-     * @throws IOException If some problem inside
      */
     @Test
-    void throwsOnZeroData() throws IOException {
+    void throwsOnZeroData() {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
@@ -100,10 +98,9 @@ final class CcSaltedTest {
 
     /**
      * CcSalted can throw on empty input.
-     * @throws IOException If some problem inside
      */
     @Test
-    void throwsOnEmptyInput() throws IOException {
+    void throwsOnEmptyInput() {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(new byte[0])

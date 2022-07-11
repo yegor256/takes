@@ -36,10 +36,9 @@ final class IdentityTest {
 
     /**
      * Identity.ANONYMOUS can be equal to itself.
-     * @throws IOException If some problem inside
      */
     @Test
-    void equalsToItself() throws IOException {
+    void equalsToItself() {
         MatcherAssert.assertThat(
             Identity.ANONYMOUS,
             new IsEqual<>(Identity.ANONYMOUS)

@@ -108,7 +108,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     public void sendError(
         final int code,
         final String reason
-    ) throws IOException {
+    ) {
         this.response.set(
             new RsWithStatus(
                 this.response.get(),
@@ -195,12 +195,12 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     }
 
     @Override
-    public void sendError(final int code) throws IOException {
+    public void sendError(final int code) {
         throw new UnsupportedOperationException("#sendError()");
     }
 
     @Override
-    public void sendRedirect(final String location) throws IOException {
+    public void sendRedirect(final String location) {
         throw new UnsupportedOperationException("#sendRedirect()");
     }
 
@@ -261,7 +261,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     }
 
     @Override
-    public PrintWriter getWriter() throws IOException {
+    public PrintWriter getWriter() {
         throw new UnsupportedOperationException("#getWriter()");
     }
 
@@ -296,7 +296,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     }
 
     @Override
-    public void flushBuffer() throws IOException {
+    public void flushBuffer() {
         throw new UnsupportedOperationException("#flushBuffer()");
     }
 

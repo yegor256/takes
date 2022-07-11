@@ -36,10 +36,9 @@ final class RsRedirectTest {
 
     /**
      * RsRedirect can redirect.
-     * @throws IOException If some problem inside
      */
     @Test
-    void redirects() throws IOException {
+    void redirects() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsRedirect(

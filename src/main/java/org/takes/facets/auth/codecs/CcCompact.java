@@ -44,7 +44,7 @@ import org.takes.facets.auth.Identity;
 public final class CcCompact implements Codec {
 
     @Override
-    public byte[] encode(final Identity identity) throws IOException {
+    public byte[] encode(final Identity identity) {
         final ByteArrayOutputStream data = new ByteArrayOutputStream();
         try (DataOutputStream stream = new DataOutputStream(data)) {
             stream.writeUTF(identity.urn());
@@ -60,7 +60,7 @@ public final class CcCompact implements Codec {
     }
 
     @Override
-    public Identity decode(final byte[] bytes) throws IOException {
+    public Identity decode(final byte[] bytes) {
         final Map<String, String> map = new HashMap<>(0);
         try (DataInputStream stream = new DataInputStream(
             new ByteArrayInputStream(bytes)

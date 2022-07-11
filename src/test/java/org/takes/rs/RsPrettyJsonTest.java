@@ -104,10 +104,9 @@ final class RsPrettyJsonTest {
 
     /**
      * RsPrettyJSON can conform to equals.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEvaluateTrueEquality() throws Exception {
+    void mustEvaluateTrueEquality() {
         final String body = "{\"person\":{\"name\":\"John\"}}";
         new Assertion<>(
             "Must evaluate true equality",

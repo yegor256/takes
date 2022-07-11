@@ -92,10 +92,9 @@ final class RsXsltTest {
 
     /**
      * RsXSLT can convert XML to plain text.
-     * @throws IOException If some problem inside
      */
     @Test
-    void convertsXmlToPlainText() throws IOException {
+    void convertsXmlToPlainText() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/x.xsl' type='text/xsl'?>",
@@ -122,10 +121,9 @@ final class RsXsltTest {
     /**
      * RsXSLT closes decorated Response body's InputStream when XML conversion
      * is done.
-     * @throws Exception If some problem inside
      */
     @Test
-    void closesDecoratedResponseInputStream() throws Exception {
+    void closesDecoratedResponseInputStream() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
@@ -159,10 +157,9 @@ final class RsXsltTest {
 
     /**
      * RsXSLT can resolve in classpath.
-     * @throws IOException If some problem inside
      */
     @Test
-    void resolvesInClasspath() throws IOException {
+    void resolvesInClasspath() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsXslt(

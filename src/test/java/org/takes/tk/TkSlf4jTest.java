@@ -71,10 +71,9 @@ final class TkSlf4jTest {
 
     /**
      * TkSlf4j can work with {@link TkEmpty}.
-     * @throws Exception If some problem inside
      */
     @Test
-    void logsEmptyMessage() throws Exception {
+    void logsEmptyMessage() {
         final Take take = new TkSlf4j(new TkEmpty());
         Assertions.assertDoesNotThrow(
             () -> take.act(new RqFake())

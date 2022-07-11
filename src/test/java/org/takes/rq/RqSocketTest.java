@@ -209,10 +209,9 @@ final class RqSocketTest {
 
     /**
      * Checks RqSocket equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEqualToSameTypeRequest() throws Exception {
+    void mustEqualToSameTypeRequest() {
         final Request request = new RqWithHeader(
             new RqFake(), "X-Takes-LocalPort: 55555"
         );

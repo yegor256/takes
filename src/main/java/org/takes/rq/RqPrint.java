@@ -88,9 +88,8 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Print it all.
      * @param output Output stream
-     * @throws IOException If fails
      */
-    public void print(final OutputStream output) throws IOException {
+    public void print(final OutputStream output) {
         new Unchecked<>(
             new LengthOf(new TeeInput(this.text, new OutputTo(output)))
         ).value();

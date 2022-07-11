@@ -101,7 +101,7 @@ final class SrvTakeTest {
         }
 
         @Override
-        public Response act(final Request req) throws IOException {
+        public Response act(final Request req) {
             return new RsText(
                 new UncheckedText(
                     new FormattedText(

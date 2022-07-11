@@ -39,10 +39,9 @@ final class RsTextTest {
 
     /**
      * RsText can build a plain text response.
-     * @throws IOException If some problem inside
      */
     @Test
-    void makesPlainTextResponse() throws IOException {
+    void makesPlainTextResponse() {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             new RsPrint(new RsBuffered(new RsText(body))),

@@ -184,7 +184,7 @@ public final class RqMtFake implements RqMultipart {
         }
 
         @Override
-        public InputStream body() throws IOException {
+        public InputStream body() {
             return new InputStreamOf(this.content::value);
         }
     }

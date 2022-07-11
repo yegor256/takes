@@ -80,10 +80,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType can replace an existing type.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void replaceTypeToResponse() throws Exception {
+    void replaceTypeToResponse() {
         final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
             new RsPrint(
@@ -106,10 +105,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType does not replace response code.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void doesNotReplaceResponseCode() throws Exception {
+    void doesNotReplaceResponseCode() {
         final String body = "Error!";
         MatcherAssert.assertThat(
             new RsPrint(
@@ -136,10 +134,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType.HTML can replace an existing type with text/html.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void replacesTypeWithHtml() throws Exception {
+    void replacesTypeWithHtml() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Html(
@@ -184,10 +181,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType.JSON can replace an existing type with application/json.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void replacesTypeWithJson() throws Exception {
+    void replacesTypeWithJson() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Json(
@@ -232,10 +228,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType.XML can replace an existing type with text/xml.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void replacesTypeWithXml() throws Exception {
+    void replacesTypeWithXml() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Xml(
@@ -279,10 +274,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType.Text can replace an existing type with text/plain.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void replacesTypeWithText() throws Exception {
+    void replacesTypeWithText() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType.Text(
@@ -326,10 +320,9 @@ final class RsWithTypeTest {
 
     /**
      * RsWithType can add properly the content type to the header.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void addsContentType() throws Exception {
+    void addsContentType() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
@@ -352,10 +345,9 @@ final class RsWithTypeTest {
     /**
      * RsWithType can add the charset to the content type when it is explicitly
      * specified.
-     * @throws Exception If a problem occurs.
      */
     @Test
-    void addsCharsetToContentType() throws Exception {
+    void addsCharsetToContentType() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithType(

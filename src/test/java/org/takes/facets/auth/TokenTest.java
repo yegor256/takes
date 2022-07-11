@@ -43,10 +43,9 @@ import org.takes.facets.auth.Token.Jwt;
 final class TokenTest {
     /**
      * JOSE header has correct algorithm name.
-     * @throws IOException If some problem inside
      */
     @Test
-    void joseAlgorithm() throws IOException {
+    void joseAlgorithm() {
         // @checkstyle MagicNumber (1 line)
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
@@ -75,11 +74,10 @@ final class TokenTest {
 
     /**
      * JWT header exp date is set correctly.
-     * @throws IOException If some problem inside
      * @throws ParseException If date parsing fails
      */
     @Test
-    void jwtExpiration() throws IOException, ParseException {
+    void jwtExpiration() throws ParseException {
         final JsonObject jose = new Token.Jwt(
             (Identity) new Identity.Simple("user"),
             // @checkstyle MagicNumber (1 line)

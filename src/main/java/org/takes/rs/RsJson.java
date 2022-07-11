@@ -104,9 +104,8 @@ public final class RsJson extends RsWrap {
         /**
          * Get JSON value.
          * @return JSON
-         * @throws IOException If fails
          */
-        JsonStructure toJson() throws IOException;
+        JsonStructure toJson();
     }
 
 }

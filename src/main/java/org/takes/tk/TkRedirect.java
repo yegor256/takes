@@ -67,7 +67,7 @@ public final class TkRedirect extends TkWrap {
         super(
             new Take() {
                 @Override
-                public Response act(final Request req) throws IOException {
+                public Response act(final Request req) {
                     return new RsRedirect(location, code);
                 }
             }

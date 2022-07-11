@@ -38,10 +38,9 @@ final class RsWithHeaderTest {
 
     /**
      * RsWithHeader can add headers.
-     * @throws IOException If some problem inside
      */
     @Test
-    void addsHeadersToResponse() throws IOException {
+    void addsHeadersToResponse() {
         MatcherAssert.assertThat(
             new RsPrint(
                 new RsWithHeader(

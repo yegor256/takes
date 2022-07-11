@@ -35,10 +35,9 @@ final class OptionsTest {
 
     /**
      * Options can parse command line arguments.
-     * @throws Exception If some problem inside
      */
     @Test
-    void understandsCommandLineArgs() throws Exception {
+    void understandsCommandLineArgs() {
         final Options opts = new Options(
             "--hit-refresh --threads=2".split(" ")
         );

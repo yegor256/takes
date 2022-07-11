@@ -35,10 +35,9 @@ import org.llorllale.cactoos.matchers.Assertion;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals") final class SiHmacTest {
     /**
      * SiHmac corrects wrong bit length.
-     * @throws IOException If some problem inside
      */
     @Test
-    void corrects() throws IOException {
+    void corrects() {
         new Assertion<>(
             "Must have proper bit length",
             // @checkstyle MagicNumber (1 line)
@@ -69,10 +68,9 @@ import org.llorllale.cactoos.matchers.Assertion;
 
     /**
      * Checks SiHmac equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEvaluateTrueEqualityTest() throws Exception {
+    void mustEvaluateTrueEqualityTest() {
         final String key = "key";
         new Assertion<>(
             "Must evaluate true equality",

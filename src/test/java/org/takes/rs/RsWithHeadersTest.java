@@ -37,10 +37,9 @@ final class RsWithHeadersTest {
 
     /**
      * RsWithHeaders can add headers.
-     * @throws IOException If some problem inside
      */
     @Test
-    void addsHeadersToResponse() throws IOException {
+    void addsHeadersToResponse() {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(

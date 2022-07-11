@@ -36,10 +36,9 @@ final class PsBasicDefaultTest {
 
     /**
      * PsBasic.Default can accept a correct login/password pair.
-     * @throws Exception If fails
      */
     @Test
-    void acceptsCorrectLoginPasswordPair() throws Exception {
+    void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -60,10 +59,9 @@ final class PsBasicDefaultTest {
     /**
      * PsBasic.Default can handle both <pre>%20</pre> and <pre>+</pre>
      * variants of encoding spaces in constructor parameters.
-     * @throws Exception If fails
      */
     @Test
-    void supportsBothKindsOfSpace() throws Exception {
+    void supportsBothKindsOfSpace() {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -94,10 +92,9 @@ final class PsBasicDefaultTest {
 
     /**
      * PsBasic.Default can be entered by a user with a space in his name.
-     * @throws Exception If fails
      */
     @Test
-    void supportsUsersWithSpacesInTheirNames() throws Exception {
+    void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -141,10 +138,9 @@ final class PsBasicDefaultTest {
 
     /**
      * PsBasic.Default can reject incorrect password.
-     * @throws Exception If fails
      */
     @Test
-    void rejectsIncorrectPassword() throws Exception {
+    void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{
@@ -160,10 +156,9 @@ final class PsBasicDefaultTest {
 
     /**
      * PsBasic.Default can reject a non-existing login.
-     * @throws Exception If fails
      */
     @Test
-    void rejectsIncorrectLogin() throws Exception {
+    void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(
             new PsBasic.Default(
                 new String[]{

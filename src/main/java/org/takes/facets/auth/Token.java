@@ -52,9 +52,8 @@ public interface Token {
      * Base64 encoded JSON output.
      *
      * @return The Token in JSON notation, Base64-encoded.
-     * @throws IOException If encoding fails
      */
-    byte[] encoded() throws IOException;
+    byte[] encoded();
 
     /**
      * JSON Object Signing and Encryption Header.
@@ -93,7 +92,7 @@ public interface Token {
         }
 
         @Override
-        public byte[] encoded() throws IOException {
+        public byte[] encoded() {
             return Base64.getEncoder().encode(
                 this.joseo.toString().getBytes(Charset.defaultCharset())
             );
@@ -167,7 +166,7 @@ public interface Token {
         }
 
         @Override
-        public byte[] encoded() throws IOException {
+        public byte[] encoded() {
             return Base64.getEncoder().encode(
                 this.jwto.toString().getBytes(Charset.defaultCharset())
             );

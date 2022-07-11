@@ -134,10 +134,9 @@ final class CcBase64Test {
 
     /**
      * Checks CcBase64 equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEvaluateTrueEquality() throws Exception {
+    void mustEvaluateTrueEquality() {
         new Assertion<>(
             "Must evaluate equality of CcBase64 objects",
             new CcBase64(new CcPlain()),
@@ -146,7 +145,7 @@ final class CcBase64Test {
     }
 
     @Test
-    void mustEvaluateIdenticalHashCodes() throws Exception {
+    void mustEvaluateIdenticalHashCodes() {
         new Assertion<>(
             "Must evaluate identical hash codes",
             new CcBase64(new CcPlain()).hashCode(),

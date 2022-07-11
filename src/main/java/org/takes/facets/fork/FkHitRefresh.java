@@ -215,9 +215,8 @@ public final class FkHitRefresh implements Fork {
         /**
          * Expired?
          * @return TRUE if expired
-         * @throws IOException If fails
          */
-        private boolean expired() throws IOException {
+        private boolean expired() {
             final boolean expired;
             if (this.flag.isEmpty()) {
                 expired = true;

@@ -36,10 +36,9 @@ final class MediaTypesTest {
 
     /**
      * MediaTypes can match two lists.
-     * @throws IOException If some problem inside
      */
     @Test
-    void matchesTwoTypes() throws IOException {
+    void matchesTwoTypes() {
         MatcherAssert.assertThat(
             new MediaTypes("*/*").contains(
                 new MediaTypes("application/xml")
@@ -74,10 +73,9 @@ final class MediaTypesTest {
 
     /**
      * MediaTypes can match two composite lists.
-     * @throws IOException If some problem inside
      */
     @Test
-    void matchesTwoCompositeTypes() throws IOException {
+    void matchesTwoCompositeTypes() {
         MatcherAssert.assertThat(
             new MediaTypes("text/xml,text/json").contains(
                 new MediaTypes("text/json")
@@ -94,10 +92,9 @@ final class MediaTypesTest {
 
     /**
      * MediaTypes can parse invalid types.
-     * @throws IOException If some problem inside
      */
     @Test
-    void parsesInvalidTypes() throws IOException {
+    void parsesInvalidTypes() {
         new MediaTypes("hello, how are you?");
         new MediaTypes("////");
         new MediaTypes("/;/;q=0.9");

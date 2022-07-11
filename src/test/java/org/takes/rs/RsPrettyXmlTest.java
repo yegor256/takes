@@ -202,10 +202,9 @@ final class RsPrettyXmlTest {
 
     /**
      * RsPrettyXML can conform to equals and hash code contract.
-     * @throws Exception If some problem inside
      */
     @Test
-    void conformsToEqualsTest() throws Exception {
+    void conformsToEqualsTest() {
         final Response response = new RsWithBody("<test> <a>test</a></test>");
         new Assertion<>(
             "Must evaluate true equality",

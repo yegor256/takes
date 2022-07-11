@@ -51,7 +51,7 @@ final class TkReadAlwaysTest {
         final String expected = "response ok";
         final Take take = new Take() {
             @Override
-            public Response act(final Request req) throws IOException {
+            public Response act(final Request req) {
                 return new RsText(expected);
             }
         };

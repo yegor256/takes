@@ -319,7 +319,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public boolean authenticate(
         final HttpServletResponse resp
-    ) throws IOException, ServletException {
+    ) {
         throw new UnsupportedOperationException("#authenticate()");
     }
 
@@ -327,31 +327,31 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     public void login(
         final String user,
         final String password
-    ) throws ServletException {
+    ) {
         throw new UnsupportedOperationException("#login()");
     }
 
     @Override
-    public void logout() throws ServletException {
+    public void logout() {
         throw new UnsupportedOperationException("#logout()");
     }
 
     @Override
-    public Collection<Part> getParts() throws IOException, ServletException {
+    public Collection<Part> getParts() {
         throw new UnsupportedOperationException("#getParts()");
     }
 
     @Override
     public Part getPart(
         final String name
-    ) throws IOException, ServletException {
+    ) {
         throw new UnsupportedOperationException("#getPart()");
     }
 
     @Override
     public <T extends HttpUpgradeHandler> T upgrade(
         final Class<T> cls
-    ) throws IOException, ServletException {
+    ) {
         throw new UnsupportedOperationException("#upgrade()");
     }
 
@@ -373,7 +373,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public void setCharacterEncoding(
         final String encoding
-    ) throws UnsupportedEncodingException {
+    ) {
         throw new UnsupportedOperationException("#setCharacterEncoding()");
     }
 
@@ -423,7 +423,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public BufferedReader getReader() throws IOException {
+    public BufferedReader getReader() {
         throw new UnsupportedOperationException("#getReader()");
     }
 

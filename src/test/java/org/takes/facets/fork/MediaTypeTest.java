@@ -36,10 +36,9 @@ final class MediaTypeTest {
 
     /**
      * MediaType can match two types.
-     * @throws IOException If some problem inside
      */
     @Test
-    void matchesTwoTypes() throws IOException {
+    void matchesTwoTypes() {
         MatcherAssert.assertThat(
             new MediaType("*/*").matches(new MediaType("application/pdf")),
             Matchers.is(true)
@@ -66,10 +65,9 @@ final class MediaTypeTest {
 
     /**
      * MediaType can match two types.
-     * @throws IOException If some problem inside
      */
     @Test
-    void comparesTwoTypes() throws IOException {
+    void comparesTwoTypes() {
         MatcherAssert.assertThat(
             new MediaType("text/b").compareTo(new MediaType("text/a")),
             Matchers.not(Matchers.equalTo(0))
@@ -78,10 +76,9 @@ final class MediaTypeTest {
 
     /**
      * MediaType can parse invalid types.
-     * @throws IOException If some problem inside
      */
     @Test
-    void parsesInvalidTypes() throws IOException {
+    void parsesInvalidTypes() {
         new MediaType("hello, how are you?");
         new MediaType("////");
         new MediaType("/;/;q=0.9");

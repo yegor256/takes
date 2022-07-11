@@ -73,10 +73,9 @@ import org.takes.Request;
 
     /**
      * Checks RqWithHeaders equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEqualTest() throws Exception {
+    void mustEqualTest() {
         final Request request = new RqWithHeader(
             new RqFake(),
             "jsessionid", "abcdefghigklmnop"

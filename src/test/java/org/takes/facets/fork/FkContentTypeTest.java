@@ -154,10 +154,9 @@ import org.takes.rs.RsEmpty;
 
     /**
      * Checks FkContentType equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEvaluateEqualsTest() throws Exception {
+    void mustEvaluateEqualsTest() {
         final Take take = req -> new RsEmpty();
         final String type = "text/xml";
         new Assertion<>(
@@ -174,7 +173,7 @@ import org.takes.rs.RsEmpty;
     private static Take emptyResponse() {
         return new Take() {
             @Override
-            public Response act(final Request req) throws IOException {
+            public Response act(final Request req) {
                 return new RsEmpty();
             }
         };

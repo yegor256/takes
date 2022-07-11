@@ -140,10 +140,9 @@ import org.takes.facets.auth.Identity;
 
     /**
      * CcAES can throw the right exception.
-     * @throws Exception any unexpected exception to throw
      */
     @Test
-    void throwsRightWhenBroken() throws Exception {
+    void throwsRightWhenBroken() {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcAes(

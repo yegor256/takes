@@ -36,10 +36,9 @@ final class RqRegexTest {
 
     /**
      * RqRegex can match a string.
-     * @throws IOException If some problem inside
      */
     @Test
-    void matchesString() throws IOException {
+    void matchesString() {
         MatcherAssert.assertThat(
             new RqRegex.Fake("/([a-z\\.]+)", "/hello.txt").matcher().group(1),
             Matchers.equalTo("hello.txt")

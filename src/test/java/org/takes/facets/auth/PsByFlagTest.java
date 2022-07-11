@@ -85,10 +85,9 @@ import org.takes.rs.RsWithType;
 
     /**
      * PsByFlag wraps response with authenticated user.
-     * @throws IOException If some problem inside
      */
     @Test
-    void exitTest() throws IOException {
+    void exitTest() {
         final Response response = new RsWithStatus(
             new RsWithType(
                 new RsWithBody("<html>This is test response</html>"),
@@ -110,10 +109,9 @@ import org.takes.rs.RsWithType;
 
     /**
      * Checks PsByFlag equals method.
-     * @throws Exception If some problem inside
      */
     @Test
-    void mustEvaluateTrueEqualityTest() throws Exception {
+    void mustEvaluateTrueEqualityTest() {
         final Map<Pattern, Pass> passes = new HashMap<>(1);
         passes.put(Pattern.compile("key"), new PsFake(true));
         new Assertion<>(

@@ -45,13 +45,12 @@ final class CcGzipTest {
         final Codec gzip = new CcGzip(
             new Codec() {
                 @Override
-                public byte[] encode(final Identity identity)
-                    throws IOException {
+                public byte[] encode(final Identity identity) {
                     return identity.urn().getBytes();
                 }
 
                 @Override
-                public Identity decode(final byte[] bytes) throws IOException {
+                public Identity decode(final byte[] bytes) {
                     return new Identity.Simple(new String(bytes));
                 }
             }
