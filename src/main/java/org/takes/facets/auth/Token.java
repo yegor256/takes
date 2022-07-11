@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Calendar;

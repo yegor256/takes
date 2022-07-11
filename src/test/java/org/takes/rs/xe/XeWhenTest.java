@@ -27,7 +27,6 @@ import com.jcabi.matchers.XhtmlMatchers;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
-import org.cactoos.Scalar;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -109,7 +108,8 @@ final class XeWhenTest {
                         new XeWhen(
                             false,
                             () -> new XeDate(),
-                            () -> new XeMemory())
+                            () -> new XeMemory()
+                        )
                     )
                 ).body(),
                 StandardCharsets.UTF_8

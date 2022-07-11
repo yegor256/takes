@@ -25,8 +25,6 @@ package org.takes.tk;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsWithHeader;
 

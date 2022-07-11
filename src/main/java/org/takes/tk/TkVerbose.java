@@ -26,8 +26,6 @@ package org.takes.tk;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;

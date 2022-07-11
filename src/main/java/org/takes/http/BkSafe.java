@@ -23,7 +23,6 @@
  */
 package org.takes.http;
 
-import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -40,6 +39,7 @@ public final class BkSafe extends BkWrap {
      * Ctor.
      * @param back Original back
      */
+    @SuppressWarnings("PMD.AvoidCatchingThrowable")
     public BkSafe(final Back back) {
         super(socket -> {
             try {

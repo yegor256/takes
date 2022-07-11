@@ -33,7 +33,6 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.cactoos.Scalar;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.number.NumberOf;
 import org.cactoos.text.TextOf;

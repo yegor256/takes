@@ -26,7 +26,6 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import java.util.Collections;
-import java.util.Map;
 import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.math.RandomUtils;

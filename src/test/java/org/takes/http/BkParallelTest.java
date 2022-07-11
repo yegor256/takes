@@ -33,8 +33,6 @@ import java.util.concurrent.TimeUnit;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.tk.TkEmpty;
 
@@ -42,6 +40,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link BkParallel}.
  *
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  * @since 0.15.2
  */
 @SuppressWarnings

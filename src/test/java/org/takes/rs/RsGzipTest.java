@@ -31,8 +31,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.IOUtils;
-import org.cactoos.Text;
-import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -77,14 +75,13 @@ final class RsGzipTest {
         );
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
-        final Text bodytxt = new BodyPrint(
-            new RsGzip(
-                new RsWithBody(baos.toByteArray())
-            )
-        );
         final BufferedImage reverse = ImageIO.read(
             new GZIPInputStream(
-                new InputStreamOf(bodytxt)
+                new RsPrint(
+                    new RsGzip(
+                        new RsWithBody(baos.toByteArray())
+                    )
+                ).body()
             )
         );
         MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(1));

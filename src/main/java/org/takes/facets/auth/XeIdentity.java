@@ -23,13 +23,10 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**

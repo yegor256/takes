@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 

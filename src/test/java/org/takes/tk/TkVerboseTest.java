@@ -23,14 +23,11 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 

@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth.codecs;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

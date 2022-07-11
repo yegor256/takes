@@ -23,11 +23,9 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqHref;
-import org.xembly.Directive;
 
 /**
  * Xembly source to create an HOME Atom LINK element.

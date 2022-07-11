@@ -23,14 +23,11 @@
  */
 package org.takes.tk;
 
-import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsPrint;

@@ -122,7 +122,7 @@ public final class PsGithub implements Pass {
         if (!code.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                "code is not provided by Github"
+                "'code' is not provided by Github"
             );
         }
         return new Opt.Single<>(

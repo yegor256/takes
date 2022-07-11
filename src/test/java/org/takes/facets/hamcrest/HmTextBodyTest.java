@@ -23,7 +23,6 @@
  */
 package org.takes.facets.hamcrest;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import org.cactoos.Text;

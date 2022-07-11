@@ -23,14 +23,11 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;

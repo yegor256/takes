@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**

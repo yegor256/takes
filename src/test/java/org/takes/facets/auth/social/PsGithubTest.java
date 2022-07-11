@@ -24,7 +24,6 @@
 package org.takes.facets.auth.social;
 
 import java.io.IOException;
-import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -39,7 +38,6 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqGreedy;
-import org.takes.rq.RqHref;
 import org.takes.rq.form.RqFormBase;
 import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJson;
@@ -173,10 +171,8 @@ final class PsGithubTest {
      * @param value Parameter value
      * @throws IOException  If some problem inside
      */
-    private static void assertParam(
-        final Request req,
-        final CharSequence param, final String value
-    ) throws IOException {
+    private static void assertParam(final Request req,
+        final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
@@ -190,12 +186,6 @@ final class PsGithubTest {
     private static final class TkFakeLogin implements Take {
         @Override
         public Response act(final Request req) throws IOException {
-            MatcherAssert.assertThat(
-                new RqHref.Base(req).href()
-                    .param(PsGithubTest.ACCESS_TOKEN)
-                    .iterator().next(),
-                Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
-            );
             return new RsJson(
                 Json.createObjectBuilder()
                     .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)

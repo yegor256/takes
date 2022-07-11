@@ -26,9 +26,7 @@ package org.takes.tk;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

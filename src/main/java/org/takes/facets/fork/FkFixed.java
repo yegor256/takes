@@ -24,8 +24,6 @@
 package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
 

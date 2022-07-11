@@ -26,7 +26,6 @@ package org.takes.rs.xe;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**

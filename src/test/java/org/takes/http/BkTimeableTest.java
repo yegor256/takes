@@ -35,7 +35,6 @@ import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rs.RsText;
@@ -44,6 +43,7 @@ import org.takes.rs.RsText;
  * Test case for {@link BkTimeable}.
  * @since 0.14.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 final class BkTimeableTest {
 

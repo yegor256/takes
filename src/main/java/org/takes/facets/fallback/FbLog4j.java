@@ -28,7 +28,6 @@ import lombok.EqualsAndHashCode;
 import org.apache.log4j.Logger;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
-import org.takes.Response;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;

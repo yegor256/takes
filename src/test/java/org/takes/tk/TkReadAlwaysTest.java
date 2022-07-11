@@ -25,13 +25,9 @@ package org.takes.tk;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.http.FtRemote;
 import org.takes.rs.RsText;

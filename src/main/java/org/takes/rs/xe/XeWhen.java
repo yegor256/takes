@@ -23,7 +23,6 @@
  */
 package org.takes.rs.xe;
 
-import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.IoChecked;

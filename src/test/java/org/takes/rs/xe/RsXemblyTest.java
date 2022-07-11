@@ -32,7 +32,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**

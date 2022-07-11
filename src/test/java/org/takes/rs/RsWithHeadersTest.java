@@ -23,7 +23,6 @@
  */
 package org.takes.rs;
 
-import java.io.IOException;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;

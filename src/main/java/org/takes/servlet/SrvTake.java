@@ -75,7 +75,7 @@ public final class SrvTake extends HttpServlet {
         } catch (final ClassNotFoundException err) {
             throw new ServletException(
                 String.format(
-                    "Failed to initialize. Class %s was not found",
+                    "Class %s was not found",
                     cname
                 ),
                 err
@@ -89,32 +89,32 @@ public final class SrvTake extends HttpServlet {
         } catch (final InstantiationException err) {
             throw new ServletException(
                 String.format(
-                    "Failed to initialize. Can't construct %s class",
-                    cname
+                    "Can't construct %s class",
+                    cls.getCanonicalName()
                 ),
                 err
             );
         } catch (final IllegalAccessException err) {
             throw new ServletException(
                 String.format(
-                    "Failed to initialize. Constructor %s(ServletContext) is private",
-                    cname
+                    "Constructor %s(ServletContext) is private",
+                    cls.getCanonicalName()
                 ),
                 err
             );
         } catch (final InvocationTargetException err) {
             throw new ServletException(
                 String.format(
-                    "Failed to initialize. Error during instantiating %s",
-                    cname
+                    "Error during instantiating %s",
+                    cls.getCanonicalName()
                 ),
                 err
             );
         } catch (final NoSuchMethodException err) {
             throw new ServletException(
                 String.format(
-                    "Failed to initialize. Constructor %s(ServletContext) was not found",
-                    cname
+                    "Constructor %s(ServletContext) was not found",
+                    cls.getCanonicalName()
                 ),
                 err
             );

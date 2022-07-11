@@ -26,8 +26,6 @@ package org.takes.http;
 import java.io.IOException;
 import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqWithHeader;
 
@@ -91,7 +89,7 @@ public final class FtCli implements Front {
     public void start(final Exit exit) throws IOException {
         final Take tks;
         if (this.options.hitRefresh()) {
-            tks = request -> FtCli.this.take.act(
+            tks = request -> this.take.act(
                 new RqWithHeader(
                     request, "X-Takes-HitRefresh: yes"
                 )
@@ -116,7 +114,7 @@ public final class FtCli implements Front {
             final Thread thread = new Thread(
                 () -> {
                     try {
-                        front.start(FtCli.this.exit(exit));
+                        front.start(this.exit(exit));
                     } catch (final IOException ex) {
                         throw new IllegalStateException(ex);
                     }

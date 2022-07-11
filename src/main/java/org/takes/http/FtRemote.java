@@ -39,6 +39,7 @@ import org.takes.Take;
  *
  * @since 0.1
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class FtRemote implements Front {
@@ -116,7 +117,7 @@ public final class FtRemote implements Front {
         final Thread thread = new Thread(
             () -> {
                 try {
-                    FtRemote.this.start(
+                    this.start(
                         () -> {
                             latch.countDown();
                             return exit.get();

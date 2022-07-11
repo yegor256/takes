@@ -24,7 +24,6 @@
 package org.takes.facets.fallback;
 
 import lombok.EqualsAndHashCode;
-import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**

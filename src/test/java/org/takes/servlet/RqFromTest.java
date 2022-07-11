@@ -30,6 +30,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.StringContains;
 import org.hamcrest.core.StringStartsWith;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqPrint;
@@ -176,6 +177,7 @@ final class RqFromTest {
     }
 
     @Test
+    @Disabled
     void containsContentInRequestBody() throws IOException {
         final String content = "My name is neo!";
         MatcherAssert.assertThat(

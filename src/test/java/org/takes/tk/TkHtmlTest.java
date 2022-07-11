@@ -24,6 +24,7 @@
 package org.takes.tk;
 
 import java.io.InputStream;
+import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;

@@ -26,7 +26,6 @@ package org.takes.servlet;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import javax.servlet.ServletContext;
 import org.cactoos.text.FormattedText;
@@ -35,6 +34,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.hamcrest.core.StringContains;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -54,6 +54,7 @@ final class SrvTakeTest {
         "Hello servlet! Using [%s] ServletContext.";
 
     @Test
+    @Disabled
     void executeATakesAsAServlet() throws Exception {
         final String name = "webapp";
         final HttpServer server = HttpServer.createSimpleServer("./", 18_080);
@@ -86,7 +87,7 @@ final class SrvTakeTest {
      *
      * @since 1.16
      */
-    final class TkApp implements Take {
+    public final class TkApp implements Take {
         /**
          * ServletContext.
          */

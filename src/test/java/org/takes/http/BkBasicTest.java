@@ -33,7 +33,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.bytes.BytesOf;

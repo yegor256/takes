@@ -25,14 +25,12 @@ package org.takes.facets.auth.social;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.fork.FkRegex;

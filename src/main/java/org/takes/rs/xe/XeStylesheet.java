@@ -24,7 +24,6 @@
 package org.takes.rs.xe;
 
 import lombok.EqualsAndHashCode;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
