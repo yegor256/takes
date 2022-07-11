@@ -156,7 +156,7 @@ public final class RsVelocity extends RsWrap {
         try (Writer writer = new WriterTo(baos)) {
             final VelocityEngine engine = new VelocityEngine();
             engine.setProperty(
-                "file.resource.loader.path",
+                "resource.loader.file.path",
                 folder
             );
             engine.evaluate(

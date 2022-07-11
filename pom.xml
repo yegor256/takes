@@ -142,31 +142,19 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
-      <version>1.17.7</version>
+      <version>1.20.0</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-xml</artifactId>
-      <version>0.23.1</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-      <version>3.9.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest</artifactId>
-      <version>2.2</version>
+      <version>0.23.2</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.apache.velocity</groupId>
       <artifactId>velocity-engine-core</artifactId>
-      <version>2.0</version>
+      <version>2.3</version>
       <scope>compile</scope>
       <optional>true</optional>
       <exclusions>
@@ -192,7 +180,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.22</version>
+      <version>1.18.24</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.grizzly</groupId>
@@ -227,7 +215,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-log</artifactId>
-      <version>0.20.0</version>
+      <version>0.20.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -292,14 +280,26 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>4.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.2</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
-      <version>1.4</version>
+      <version>1.9</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
-      <version>3.0.1</version>
+      <version>3.0.1u2</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -491,78 +491,6 @@ SOFTWARE.
       </build>
     </profile>
     <profile>
-      <id>jacoco</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.6</version>
-            <configuration>
-              <output>file</output>
-              <outputDirectory>${project.build.directory}/coverage</outputDirectory>
-            </configuration>
-            <executions>
-              <execution>
-                <id>jacoco-initialize</id>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>jacoco-check</id>
-                <phase>test</phase>
-                <goals>
-                  <goal>check</goal>
-                  <goal>report</goal>
-                </goals>
-                <!--
-                    @todo #1088:30m This limits are set according to
-                     current metrics. Improve test coverage and
-                     increase a limit, than update this task.
-                     Remove this task when 0.99 is reached for each metric.
-                  -->
-                <configuration>
-                  <rules>
-                    <rule>
-                      <element>BUNDLE</element>
-                      <limits>
-                        <limit>
-                          <counter>INSTRUCTION</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.67</minimum>
-                        </limit>
-                        <limit>
-                          <counter>LINE</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.76</minimum>
-                        </limit>
-                        <limit>
-                          <counter>BRANCH</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.24</minimum>
-                        </limit>
-                        <limit>
-                          <counter>COMPLEXITY</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.52</minimum>
-                        </limit>
-                        <limit>
-                          <counter>METHOD</counter>
-                          <value>COVEREDRATIO</value>
-                          <minimum>0.70</minimum>
-                        </limit>
-                      </limits>
-                    </rule>
-                  </rules>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <!-- https://stackoverflow.com/questions/52502189/java-11-package-javax-xml-bind-does-not-exist -->
       <id>java-xml-bind</id>
       <activation>
@@ -572,18 +500,18 @@ SOFTWARE.
         <dependency>
           <groupId>javax.xml.bind</groupId>
           <artifactId>jaxb-api</artifactId>
-          <version>2.3.0</version>
+          <version>2.4.0-b180830.0359</version>
         </dependency>
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-core</artifactId>
-          <version>2.3.0</version>
+          <version>4.0.0</version>
           <scope>runtime</scope>
         </dependency>
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-impl</artifactId>
-          <version>2.3.0</version>
+          <version>4.0.0</version>
           <scope>runtime</scope>
         </dependency>
       </dependencies>

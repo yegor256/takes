@@ -25,6 +25,7 @@
 package org.takes.servlet;
 
 import java.io.IOException;
+import java.util.Locale;
 import org.cactoos.list.ListOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -130,16 +131,15 @@ final class RqFromTest {
                         )
                     )
                 )
-            ).printHead(),
+            ).printHead().toLowerCase(Locale.ENGLISH),
             new StringStartsWith(
-                true,
                 new Joined(
                     RqFromTest.EOL,
                     method,
                     header,
                     RqFromTest.LOCAL_ADDRESS,
                     RqFromTest.REMOTE_ADDRESS
-                ).asString()
+                ).asString().toLowerCase(Locale.ENGLISH)
             )
         );
     }
@@ -162,16 +162,15 @@ final class RqFromTest {
                         )
                     )
                 )
-            ).printHead(),
+            ).printHead().toLowerCase(Locale.ENGLISH),
             new StringStartsWith(
-                true,
                 new Joined(
                     RqFromTest.EOL,
                     method,
                     header,
                     RqFromTest.LOCAL_ADDRESS,
                     RqFromTest.REMOTE_ADDRESS
-                ).asString()
+                ).asString().toLowerCase(Locale.ENGLISH)
             )
         );
     }
