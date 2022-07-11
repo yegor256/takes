@@ -4,8 +4,6 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
-[![Build Status](https://img.shields.io/travis/yegor256/takes/master.svg)](https://travis-ci.org/yegor256/takes)
-[![Build status](https://img.shields.io/appveyor/ci/yegor256/takes/master.svg)](https://ci.appveyor.com/project/yegor256/takes/branch/master)
 [![Javadoc](http://www.javadoc.io/badge/org.takes/takes.svg)](http://www.javadoc.io/doc/org.takes/takes)
 [![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
