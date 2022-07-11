@@ -23,8 +23,10 @@
  */
 package org.takes.misc;
 
+import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasValues;
 
@@ -40,6 +42,7 @@ final class HrefTest {
      */
     @Test
     void buildsUri() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
             new Href("http://example.com?%D0%B0=8&b=9")
                 .with("д", "hello")
@@ -56,6 +59,7 @@ final class HrefTest {
      */
     @Test
     void buildsUriFromEmpty() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
             new Href().path("boom-4").with("д", "").toString(),
             Matchers.equalTo("/boom-4?%D0%B4")
@@ -102,6 +106,7 @@ final class HrefTest {
      */
     @Test
     void addsPath() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
             new Href("http://example.com").path("д").path("d").toString(),
             Matchers.equalTo("http://example.com/%D0%B4/d")
