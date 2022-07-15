@@ -70,8 +70,10 @@ final class RsGzipTest {
      */
     @Test
     void makesCompressedPngImage() throws IOException {
+        final int width = 42;
+        final int height = 256;
         final RenderedImage image = new BufferedImage(
-            1, 1, BufferedImage.TYPE_INT_ARGB
+            width, height, BufferedImage.TYPE_INT_ARGB
         );
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "png", baos);
@@ -84,7 +86,8 @@ final class RsGzipTest {
                 ).body()
             )
         );
-        MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(1));
+        MatcherAssert.assertThat(reverse.getWidth(), Matchers.equalTo(width));
+        MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(height));
     }
 
     /**
