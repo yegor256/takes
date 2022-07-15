@@ -35,9 +35,9 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -103,7 +103,7 @@ public final class PsBasic implements Pass {
                 new RqHref.Base(request).href()
             );
         }
-        final String decoded = new UncheckedText(
+        final String decoded = new IoCheckedText(
             new Trimmed(
                 new TextOf(
                     DatatypeConverter.parseBase64Binary(

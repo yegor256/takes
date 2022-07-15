@@ -43,6 +43,7 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link TkGzip}.
  * @since 0.17
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkGzipTest {
 
@@ -96,6 +97,33 @@ final class TkGzipTest {
      * @throws Exception If there are problems
      */
     @Test
+    void returnsExactlyGzipBody() throws Exception {
+        final String body = "Halo, Siñor!"
+        new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
+            home -> MatcherAssert.assertThat(
+                new TextOf(
+                    new GZIPInputStream(
+                        new ByteArrayInputStream(
+                            new JdkRequest(home)
+                                .method("GET")
+                                .header("Accept-Encoding", "gzip")
+                                .fetch()
+                                .as(RestResponse.class)
+                                .assertStatus(HttpURLConnection.HTTP_OK)
+                                .binary()
+                        )
+                    )
+                ).asString(),
+                Matchers.startsWith("Hi, ")
+            )
+        );
+    }
+
+    /**
+     * Compresses the output over HTTP.
+     * @throws Exception If there are problems
+     */
+    @Test
     @Disabled
     void compressesOverHttp() throws Exception {
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
@@ -117,5 +145,4 @@ final class TkGzipTest {
             )
         );
     }
-
 }

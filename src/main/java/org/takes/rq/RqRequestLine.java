@@ -28,9 +28,9 @@ import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 
@@ -236,8 +236,10 @@ public interface RqRequestLine extends Request {
          * @param value Token value
          * @param token Token
          * @return Trimmed token value
+         * @throws IOException If fails
          */
-        private static String trimmed(final String value, final RqRequestLine.Base.Token token) {
+        private static String trimmed(final String value,
+            final RqRequestLine.Base.Token token) throws IOException {
             if (value == null) {
                 throw new IllegalArgumentException(
                     String.format(
@@ -246,7 +248,7 @@ public interface RqRequestLine extends Request {
                     )
                 );
             }
-            return new UncheckedText(
+            return new IoCheckedText(
                 new Trimmed(new TextOf(value))
             ).asString();
         }
