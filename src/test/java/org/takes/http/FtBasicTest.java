@@ -36,7 +36,6 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
@@ -73,13 +72,13 @@ final class FtBasicTest {
     @Test
     void justWorks() throws Exception {
         new FtRemote(
-            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "hello, world!"))
+            new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "привет!"))
         ).exec(
             home -> new JdkRequest(home)
                 .fetch()
                 .as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("hello"))
+                .assertBody(Matchers.startsWith("привет"))
         );
     }
 
@@ -109,7 +108,7 @@ final class FtBasicTest {
                 new RqPrint(request).printBody(),
                 Matchers.containsString("Jeff")
             );
-            return new RsText("works!");
+            return new RsText("ура!");
         };
         new FtRemote(take).exec(
             home -> new JdkRequest(home)
@@ -118,6 +117,7 @@ final class FtBasicTest {
                 .fetch()
                 .as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
+                .assertBody(Matchers.startsWith("ура"))
         );
     }
 
@@ -126,7 +126,6 @@ final class FtBasicTest {
      * @throws Exception If some problem inside
      */
     @Test
-    @Disabled
     void gracefullyHandlesStuckBack() throws Exception {
         final Take take = request -> {
             final Request req = new RqGreedy(request);
@@ -163,7 +162,7 @@ final class FtBasicTest {
         );
         new FtRemote(take).exec(
             home -> {
-                final String body = "here is your data";
+                final String body = "here is ВАШИ data";
                 new JdkRequest(home)
                     .method(RqMethod.POST)
                     .body().set(body).back()
@@ -181,7 +180,7 @@ final class FtBasicTest {
      */
     @Test
     void consumesTwiceInputStreamWithRsText() throws Exception {
-        final String result = "Hello RsText!";
+        final String result = "Привет RsText!";
         new FtRemote(
             new TkFork(
                 new FkRegex(

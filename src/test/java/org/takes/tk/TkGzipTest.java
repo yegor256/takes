@@ -23,12 +23,22 @@
  */
 package org.takes.tk;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import java.io.ByteArrayInputStream;
+import java.net.HttpURLConnection;
 import java.util.Arrays;
+import java.util.zip.GZIPInputStream;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
+import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkGzip}.
@@ -78,6 +88,33 @@ final class TkGzipTest {
                 )
             ),
             new StartsWith("HTTP/1.1 200")
+        );
+    }
+
+    /**
+     * Compresses the output over HTTP.
+     * @throws Exception If there are problems
+     */
+    @Test
+    @Disabled
+    void compressesOverHttp() throws Exception {
+        new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
+            home -> MatcherAssert.assertThat(
+                new TextOf(
+                    new GZIPInputStream(
+                        new ByteArrayInputStream(
+                            new JdkRequest(home)
+                                .method("GET")
+                                .header("Accept-Encoding", "gzip")
+                                .fetch()
+                                .as(RestResponse.class)
+                                .assertStatus(HttpURLConnection.HTTP_OK)
+                                .binary()
+                        )
+                    )
+                ).asString(),
+                Matchers.startsWith("Hi, ")
+            )
         );
     }
 
