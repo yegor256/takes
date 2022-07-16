@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
-import org.takes.rs.HeadPrint;
+import org.takes.rs.RsHeadPrint;
 
 /**
  * Test case for {@link TkClasspath}.
@@ -45,7 +45,7 @@ final class TkClasspathTest {
     @Test
     void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
-            new HeadPrint(
+            new RsHeadPrint(
                 new TkClasspath().act(
                     new RqFake(
                         "GET", "/org/takes/Take.class?a", ""

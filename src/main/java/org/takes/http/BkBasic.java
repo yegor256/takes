@@ -31,7 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
-import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.io.InputStreamOf;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -123,27 +122,17 @@ public final class BkBasic implements Back {
     private void print(final Request req, final OutputStream output)
         throws IOException {
         try {
-            output.write(
-                new RsPrint(this.take.act(req)).asBytes()
-            );
+            new RsPrint(this.take.act(req)).print(output);
         } catch (final HttpException ex) {
-            output.write(
-                new UncheckedBytes(
-                    new RsPrint(BkBasic.failure(ex, ex.code()))
-                ).asBytes()
-            );
+            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
-            output.write(
-                new UncheckedBytes(
-                    new RsPrint(
-                        BkBasic.failure(
-                            ex,
-                            HttpURLConnection.HTTP_INTERNAL_ERROR
-                        )
-                    )
-                ).asBytes()
-            );
+            new RsPrint(
+                BkBasic.failure(
+                    ex,
+                    HttpURLConnection.HTTP_INTERNAL_ERROR
+                )
+            ).print(output);
         }
     }
 
@@ -189,4 +178,5 @@ public final class BkBasic implements Back {
             String.format("%s: %d", BkBasic.REMOTEPORT, socket.getPort())
         );
     }
+
 }

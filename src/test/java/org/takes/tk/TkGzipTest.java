@@ -29,14 +29,16 @@ import java.io.ByteArrayInputStream;
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsGzip;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -45,7 +47,57 @@ import org.takes.rs.RsText;
  * @since 0.17
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkGzipTest {
+
+    /**
+     * TkGzip can compress correctly.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void compressesExactly() throws Exception {
+        final String body = "hello";
+        MatcherAssert.assertThat(
+            new BytesOf(
+                new RsPrint(
+                    new TkGzip(new TkText(body)).act(
+                        new RqWithHeader(
+                            new RqFake("GET", "/"),
+                            "Accept-Encoding", "gzip"
+                        )
+                    )
+                ).body()
+            ).asBytes(),
+            Matchers.equalTo(
+                new BytesOf(
+                    new RsGzip(new RsText(body)).body()
+                ).asBytes()
+            )
+        );
+    }
+
+    /**
+     * TkGzip can compress correctly.
+     * @throws Exception If some problem inside
+     */
+    @Test
+    void compressesCorrectly() throws Exception {
+        MatcherAssert.assertThat(
+            new TextOf(
+                new GZIPInputStream(
+                    new RsPrint(
+                        new TkGzip(new TkText("привет, world!")).act(
+                            new RqWithHeader(
+                                new RqFake("GET", "/"),
+                                "Accept-Encoding", "gzip"
+                            )
+                        )
+                    ).body()
+                )
+            ),
+            new StartsWith("привет, ")
+        );
+    }
 
     /**
      * TkGzip can compress on demand only.
@@ -98,23 +150,21 @@ final class TkGzipTest {
      */
     @Test
     void returnsExactlyGzipBody() throws Exception {
-        final String body = "Halo, Siñor!"
-        new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
+        final String body = "Halo, Siñor!";
+        new FtRemote(new TkGzip(req -> new RsText(body))).exec(
             home -> MatcherAssert.assertThat(
-                new TextOf(
-                    new GZIPInputStream(
-                        new ByteArrayInputStream(
-                            new JdkRequest(home)
-                                .method("GET")
-                                .header("Accept-Encoding", "gzip")
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK)
-                                .binary()
-                        )
-                    )
-                ).asString(),
-                Matchers.startsWith("Hi, ")
+                new JdkRequest(home)
+                    .method("GET")
+                    .header("Accept-Encoding", "gzip")
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .binary(),
+                Matchers.equalTo(
+                    new BytesOf(
+                        new RsPrint(new RsGzip(new RsText(body))).body()
+                    ).asBytes()
+                )
             )
         );
     }
@@ -124,7 +174,6 @@ final class TkGzipTest {
      * @throws Exception If there are problems
      */
     @Test
-    @Disabled
     void compressesOverHttp() throws Exception {
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
             home -> MatcherAssert.assertThat(

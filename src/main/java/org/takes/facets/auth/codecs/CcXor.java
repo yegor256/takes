@@ -58,9 +58,8 @@ public final class CcXor implements Codec {
     public CcXor(final Codec codec, final String key) {
         this(
             codec,
-            new UncheckedBytes(
-                new BytesOf(key)
-            ).asBytes());
+            new UncheckedBytes(new BytesOf(key)).asBytes()
+        );
     }
 
     /**

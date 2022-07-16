@@ -21,58 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.hamcrest;
 
-import java.io.IOException;
-import org.cactoos.Text;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.Joined;
-import org.takes.Head;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsNot;
+import org.junit.jupiter.api.Test;
+import org.takes.rs.RsWithBody;
 
 /**
- * Response head decorator that can print an entire head response in HTTP
- * format.
- *
- * <p>The class is immutable and thread-safe.
+ * Test case for {@link HmRsTextBody}.
  *
  * @since 2.0
  */
-public final class HeadPrint implements Head, Text {
+final class HmRsTextRsBodyTest {
 
     /**
-     * HTTP End Of Line.
+     * HmRsTextBody can test if body equals text.
      */
-    private static final String EOL = "\r\n";
+    @Test
+    void testsBodyValueContainsText() {
+        final String same = "<h1>Hello</h1>";
+        MatcherAssert.assertThat(
+            new RsWithBody(same),
+            new HmRsTextBody(same)
+        );
+    }
 
     /**
-     * The HTTP Response.
+     * HmRsTextBody can test if body doesn't equal to text.
      */
-    private final Head origin;
-
-    /**
-     * Ctor.
-     * @param head Original head
-     */
-    public HeadPrint(final Head head) {
-        this.origin = head;
+    @Test
+    void testsBodyValueDoesNotContainsText() {
+        MatcherAssert.assertThat(
+            new RsWithBody("Some response"),
+            new IsNot<>(new HmRsTextBody("expected something else"))
+        );
     }
-
-    @Override
-    public String asString() throws IOException {
-        return new FormattedText(
-            "%s%s%s",
-            new Joined(
-                HeadPrint.EOL,
-                this.head()
-            ),
-            HeadPrint.EOL,
-            HeadPrint.EOL
-        ).toString();
-    }
-
-    @Override
-    public Iterable<String> head() throws IOException {
-        return this.origin.head();
-    }
-
 }

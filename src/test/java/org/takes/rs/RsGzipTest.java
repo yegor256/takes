@@ -52,7 +52,7 @@ final class RsGzipTest {
         final String text = "some unicode text: \u20ac\n\t";
         final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
-            new HeadPrint(response).asString(),
+            new RsHeadPrint(response).asString(),
             Matchers.containsString("Content-Encoding: gzip")
         );
         MatcherAssert.assertThat(
@@ -99,11 +99,11 @@ final class RsGzipTest {
         final String text = "some text to encode";
         final Response response = new RsGzip(new RsText(text));
         MatcherAssert.assertThat(
-            new HeadPrint(response).asString(),
+            new RsHeadPrint(response).asString(),
             Matchers.containsString(
                 String.format(
                     "Content-Length: %d",
-                    new BodyPrint(response).length()
+                    new RsBodyPrint(response).asString().length()
                 )
             )
         );

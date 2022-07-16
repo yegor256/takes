@@ -49,7 +49,7 @@ final class RsPrettyXmlTest {
     @Test
     void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
                 )
@@ -65,7 +65,7 @@ final class RsPrettyXmlTest {
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml5DoctypeBody() throws IOException {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsPrettyXml(
                     new RsWithBody(
                         "<!DOCTYPE html><html><head></head><body></body></html>"
@@ -85,7 +85,7 @@ final class RsPrettyXmlTest {
     void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
             new TextOf(
-                new BodyPrint(
+                new RsBodyPrint(
                     new RsPrettyXml(
                         new RsWithBody(
                             new InputStreamOf(
@@ -129,7 +129,7 @@ final class RsPrettyXmlTest {
             .concat("lang=\"en\">");
         MatcherAssert.assertThat(
             new TextOf(
-                new BodyPrint(
+                new RsBodyPrint(
                     new RsPrettyXml(
                         new RsWithBody(
                             new InputStreamOf(
@@ -170,7 +170,7 @@ final class RsPrettyXmlTest {
     void formatsNonXmlBody() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new BodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString()
+            () -> new RsBodyPrint(new RsPrettyXml(new RsWithBody("foo"))).asString()
         );
     }
 
@@ -180,13 +180,13 @@ final class RsPrettyXmlTest {
      */
     @Test
     void reportsCorrectContentLength() throws IOException {
-        final int clength = new BodyPrint(
+        final int clength = new RsBodyPrint(
             new RsWithBody(
                 "<test>\n   <a>test</a>\n</test>\n"
             )
-        ).length();
+        ).asString().length();
         MatcherAssert.assertThat(
-            new HeadPrint(
+            new RsHeadPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
                 )

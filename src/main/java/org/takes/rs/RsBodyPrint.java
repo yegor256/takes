@@ -21,38 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rs;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import org.cactoos.Text;
+import org.takes.Response;
 
 /**
- * Test case for {@link RqWithBody}.
- * @since 0.22
+ * Response body decorator that can print an entire textual (!)
+ * body response in HTTP format.
+ *
+ * <p>This class is mostly used for testing. Don't use it for
+ * production code, since it will break the binary content of your
+ * HTTP response. It's only suitable for texts in HTTP responses.</p>
+ *
+ * <p>The class is immutable and thread-safe.
+ *
+ * @since 2.0
  */
-final class RqWithBodyTest {
+public final class RsBodyPrint implements Text {
 
     /**
-     * RqWithBody returns body.
-     * @throws Exception If some problem inside
+     * The HTTP Response.
      */
-    @Test
-    void returnsBody() throws Exception {
-        final String body = "body";
-        MatcherAssert.assertThat(
-            new RqPrint(
-                new RqWithBody(
-                    new RqWithHeader(
-                        new RqFake(),
-                        "Content-Length",
-                        String.valueOf(body.getBytes().length)
-                    ),
-                    body
-                )
-            ).printBody(),
-            Matchers.equalTo(body)
-        );
+    private final Response response;
+
+    /**
+     * Ctor.
+     *
+     * @param res Original response
+     */
+    public RsBodyPrint(final Response res) {
+        this.response = res;
     }
 
+    @Override
+    public String asString() throws IOException {
+        return new RsPrint(this.response).printBody();
+    }
 }

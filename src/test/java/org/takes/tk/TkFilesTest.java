@@ -36,7 +36,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
-import org.takes.rs.HeadPrint;
+import org.takes.rs.RsHeadPrint;
 
 /**
  * Test case for {@link TkFiles}.
@@ -58,7 +58,7 @@ final class TkFilesTest {
             StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
-            new HeadPrint(
+            new RsHeadPrint(
                 new TkFiles(temp.toFile()).act(
                     new RqFake(
                         "GET", "/a.txt?hash=a1b2c3", ""

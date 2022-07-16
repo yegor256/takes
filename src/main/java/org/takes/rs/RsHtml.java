@@ -106,7 +106,7 @@ public final class RsHtml extends RsWrap {
      * @param body HTML body
      */
     public RsHtml(final Response res, final InputStream body) {
-        this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
+        this(new RsWithBody(res, new RsBody.TempFile(new RsBody.Stream(body))));
     }
 
     /**

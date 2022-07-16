@@ -21,56 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.facets.hamcrest;
 
-import org.cactoos.iterable.IterableOf;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsNot;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.IsText;
-import org.llorllale.cactoos.matchers.Throws;
+import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link HeadPrint}.
- * @since 1.19
+ * Test case for {@link HmRqTextBody}.
+ *
+ * @since 2.0
  */
-final class HeadPrintTest {
+final class HmRqTextRsBodyTest {
 
     /**
-     * HeadPrint can fail on invalid chars.
+     * HmRqTextBody can test if body equals text.
      */
-    void failsOnInvalidHeader() {
-        MatcherAssert.assertThat(
-            "Must catch invalid header exception",
-            () -> new HeadPrint(
-                new RsWithHeader("name", "\n\n\n")
-            ).asString(),
-            new Throws<>(IllegalArgumentException.class)
-        );
-    }
-
     @Test
-    void simple() {
+    void testsBodyValueContainsText() {
+        final String same = "Same text";
         MatcherAssert.assertThat(
-            "must write head",
-            new HeadPrint(
-                new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
+            new RqFake(
+                Collections.emptyList(),
+                same
             ),
-            new IsText("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            new HmRqTextBody(same)
         );
     }
 
     /**
-     * RFC 7230 says we shall support dashes in response first line.
+     * HmRqTextBody can test if body doesn't equal to text.
      */
     @Test
-    void simpleWithDash() {
-        new Assertion<>(
-            "must write head with dashes",
-            new HeadPrint(
-                new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
+    void testsBodyValueDoesNotContainsText() {
+        MatcherAssert.assertThat(
+            new RqFake(
+                Collections.emptyList(),
+                "some"
             ),
-            new IsText("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+            new IsNot<>(new HmRqTextBody("other"))
         );
     }
 }

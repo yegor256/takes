@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.rq.RqFake;
-import org.takes.rs.BodyPrint;
+import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -54,7 +54,7 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsFork(
                     req,
                     new FkTypes("text/plain", new RsText("it's a text")),
@@ -72,7 +72,7 @@ final class RsForkTest {
     @Test
     void negotiatesContentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsFork(
                     new RqFake(),
                     new FkTypes("image/png,*/*", new RsText("a png"))
@@ -96,7 +96,7 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsFork(
                     req,
                     new FkTypes(
@@ -116,7 +116,7 @@ final class RsForkTest {
     @Test
     void dispatchesByRequestMethod() throws IOException {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsFork(
                     new RqFake("POST", "/test?1", "alpha=1"),
                     new FkMethods("GET", new RsText("it's a GET")),

@@ -35,12 +35,12 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link Body.Url}.
+ * Test case for {@link RsBody.Url}.
  *
  * @since 1.15
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-final class BodyUrlTest {
+final class RsBodyUrlTest {
 
     /**
      * Body.URL can provide the expected input.
@@ -55,7 +55,7 @@ final class BodyUrlTest {
                     new TeeInput(body, new OutputTo(out))
                 ).value();
             }
-            final Body.Url input = new Body.Url(file.value().toUri().toURL());
+            final RsBody.Url input = new RsBody.Url(file.value().toUri().toURL());
             MatcherAssert.assertThat(
                 "Body content of Body.Url doesn't provide the correct bytes",
                 new BytesOf(input).asBytes(),
@@ -80,7 +80,7 @@ final class BodyUrlTest {
             MatcherAssert.assertThat(
                 "Body content of Body.Url doesn't have the correct length",
                 new LengthOf(
-                    new Body.Url(file.value().toUri().toURL())
+                    new RsBody.Url(file.value().toUri().toURL())
                 ).value(),
                 new IsEqual<>((long) body.asBytes().length)
             );

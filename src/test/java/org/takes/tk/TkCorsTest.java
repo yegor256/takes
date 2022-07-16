@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.takes.facets.hamcrest.HmRsStatus;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeaders;
-import org.takes.rs.HeadPrint;
+import org.takes.rs.RsHeadPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -87,7 +87,7 @@ final class TkCorsTest {
         throws Exception {
         MatcherAssert.assertThat(
             "Wrong value on header.",
-            new HeadPrint(
+            new RsHeadPrint(
                 new TkCors(
                     new TkFixed(new RsText()),
                     "http://www.teamed.io",

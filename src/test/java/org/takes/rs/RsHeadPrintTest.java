@@ -23,46 +23,54 @@
  */
 package org.takes.rs;
 
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.scalar.LengthOf;
+import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.IsText;
+import org.llorllale.cactoos.matchers.Throws;
 
 /**
- * Test case for {@link Body.ByteArray}.
- *
- * @since 1.15
+ * Test case for {@link RsHeadPrint}.
+ * @since 1.19
  */
-final class BodyByteArrayTest {
+final class RsHeadPrintTest {
 
     /**
-     * Body.ByteArray can provide the expected input.
-     * @throws Exception If there is some problem inside.
+     * HeadPrint can fail on invalid chars.
      */
-    @Test
-    void returnsCorrectInputWithByteArray() throws Exception {
-        final byte[] bytes =
-            new BytesOf("ByteArray returnsCorrectInput!").asBytes();
+    void failsOnInvalidHeader() {
         MatcherAssert.assertThat(
-            "Body content of Body.ByteArray doesn't provide the correct bytes",
-            new BytesOf(new Body.ByteArray(bytes)).asBytes(),
-            new IsEqual<>(bytes)
+            "Must catch invalid header exception",
+            () -> new RsHeadPrint(
+                new RsWithHeader("name", "\n\n\n")
+            ).asString(),
+            new Throws<>(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void simple() {
+        MatcherAssert.assertThat(
+            "must write head",
+            new RsHeadPrint(
+                new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
+            ),
+            new IsText("HTTP/1.1 500 Internal Server Error\r\n\r\n")
         );
     }
 
     /**
-     * Body.ByteArray can provide the expected length.
-     * @throws Exception If there is some problem inside.
+     * RFC 7230 says we shall support dashes in response first line.
      */
     @Test
-    void returnsCorrectLengthWithStream() throws Exception {
-        final byte[] bytes =
-            new BytesOf("Stream returnsCorrectLength!").asBytes();
-        MatcherAssert.assertThat(
-            "Body content of Body.ByteArray doesn't have the correct length",
-            new LengthOf(new Body.ByteArray(bytes)).value(),
-            new IsEqual<>((long) bytes.length)
+    void simpleWithDash() {
+        new Assertion<>(
+            "must write head with dashes",
+            new RsHeadPrint(
+                new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
+            ),
+            new IsText("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
         );
     }
 }

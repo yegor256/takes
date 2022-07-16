@@ -49,7 +49,7 @@ final class RsPrettyJsonTest {
     @Test
     void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"widget\": {\"debug\": \"on\" }}")
                 )
@@ -67,7 +67,7 @@ final class RsPrettyJsonTest {
     void rejectsNonJsonBody() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new BodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString()
+            () -> new RsBodyPrint(new RsPrettyJson(new RsWithBody("foo"))).asString()
         );
     }
 
@@ -80,7 +80,7 @@ final class RsPrettyJsonTest {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (Writer w = new OutputStreamWriter(baos)) {
             w.write(
-                new BodyPrint(
+                new RsBodyPrint(
                     new RsWithBody(
                         "\n{\n    \"test\": {\n        \"test\": \"test\"\n    }\n}"
                     )
@@ -88,7 +88,7 @@ final class RsPrettyJsonTest {
             );
         }
         MatcherAssert.assertThat(
-            new HeadPrint(
+            new RsHeadPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"test\": {\"test\": \"test\" }}")
                 )

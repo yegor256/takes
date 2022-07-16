@@ -40,8 +40,8 @@ import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
-import org.takes.rs.BodyPrint;
-import org.takes.rs.HeadPrint;
+import org.takes.rs.RsBodyPrint;
+import org.takes.rs.RsHeadPrint;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 
@@ -110,7 +110,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
-                    new BodyPrint(
+                    new RsBodyPrint(
                         new TkProxy(home).act(
                             new RqFake(
                                 method,
@@ -141,7 +141,7 @@ final class TkProxyTest {
             // @checkstyle AnonInnerLengthCheck (100 lines)
             home ->
                 MatcherAssert.assertThat(
-                    new BodyPrint(
+                    new RsBodyPrint(
                         new TkProxy(home.toURL().toString()).act(
                             new RqFake(
                                 Arrays.asList(
@@ -181,7 +181,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
-                    new HeadPrint(
+                    new RsHeadPrint(
                         new TkProxy(
                             home.toURL().toString(),
                             mark
@@ -220,7 +220,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
-                    new BodyPrint(
+                    new RsBodyPrint(
                         new TkProxy(home).act(
                             new RqFake(
                                 Arrays.asList(

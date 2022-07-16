@@ -28,8 +28,8 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
-import org.takes.rs.BodyPrint;
 import org.takes.rs.ResponseOf;
+import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFailure;
 
@@ -48,7 +48,7 @@ final class TkFallbackTest {
     void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new TkFallback(
                     new TkFailure(err),
                     req -> new Opt.Single<>(
@@ -67,7 +67,7 @@ final class TkFallbackTest {
     @Test
     void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new TkFallback(
                     req -> new ResponseOf(
                         () -> {

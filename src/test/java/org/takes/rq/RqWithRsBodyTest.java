@@ -21,52 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rs;
+package org.takes.rq;
 
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link Body.TempFile}.
- *
- * @since 1.15
+ * Test case for {@link RqWithBody}.
+ * @since 0.22
  */
-final class BodyTempFileTest {
+final class RqWithRsBodyTest {
 
     /**
-     * Body.TemFile can provide the expected input.
-     * @throws Exception If there is some problem inside.
+     * RqWithBody returns body.
+     * @throws Exception If some problem inside
      */
     @Test
-    void returnsCorrectInputWithStream() throws Exception {
-        final byte[] bytes =
-            new BytesOf("Stream returnsCorrectInput!").asBytes();
+    void returnsBody() throws Exception {
+        final String body = "body";
         MatcherAssert.assertThat(
-            "Body content of Body.TempFile doesn't provide the correct bytes",
-            new BytesOf(
-                new Body.TempFile(new Body.ByteArray(bytes))
-            ).asBytes(),
-            new IsEqual<>(bytes)
+            new RqPrint(
+                new RqWithBody(
+                    new RqWithHeader(
+                        new RqFake(),
+                        "Content-Length",
+                        String.valueOf(body.getBytes().length)
+                    ),
+                    body
+                )
+            ).printBody(),
+            Matchers.equalTo(body)
         );
     }
 
-    /**
-     * Body.TemFile can provide the expected length.
-     * @throws Exception If there is some problem inside.
-     */
-    @Test
-    void returnsCorrectLengthWithTempFile() throws Exception {
-        final byte[] bytes =
-            new BytesOf("TempFile returnsCorrectLength!").asBytes();
-        MatcherAssert.assertThat(
-            "Body content of Body.TempFile doesn't have the correct length",
-            new LengthOf(
-                new Body.TempFile(new Body.ByteArray(bytes))
-            ).value(),
-            new IsEqual<>((long) bytes.length)
-        );
-    }
 }

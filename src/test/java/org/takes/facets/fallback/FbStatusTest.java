@@ -31,8 +31,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.IsText;
-import org.takes.rs.BodyPrint;
-import org.takes.rs.HeadPrint;
+import org.takes.rs.RsBodyPrint;
+import org.takes.rs.RsHeadPrint;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.tk.TkFixed;
@@ -53,7 +53,7 @@ final class FbStatusTest {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(status);
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new FbStatus(
                     status,
                     new TkFixed(new RsText("not found response"))
@@ -73,7 +73,7 @@ final class FbStatusTest {
             HttpURLConnection.HTTP_MOVED_PERM
         );
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new FbStatus(
                     new Filtered<>(
                         status -> status == HttpURLConnection.HTTP_MOVED_PERM
@@ -125,11 +125,11 @@ final class FbStatusTest {
             new FbStatus(code).route(req).get()
         );
         MatcherAssert.assertThat(
-            new BodyPrint(response),
+            new RsBodyPrint(response),
             new IsText("404 Not Found: Exception message")
         );
         MatcherAssert.assertThat(
-            new HeadPrint(response).asString(),
+            new RsHeadPrint(response).asString(),
             Matchers.both(
                 Matchers.containsString("Content-Type: text/plain")
             ).and(Matchers.containsString("404 Not Found"))

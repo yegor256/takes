@@ -65,7 +65,7 @@ final class RsTextTest {
     @Test
     void makesTextResponseWithStatus() throws IOException {
         MatcherAssert.assertThat(
-            new HeadPrint(
+            new RsHeadPrint(
                 new RsText(
                     new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),
                     "something not found"

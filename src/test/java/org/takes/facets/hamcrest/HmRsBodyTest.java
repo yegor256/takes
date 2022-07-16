@@ -39,7 +39,7 @@ import org.takes.rq.RqFake;
  *
  * @since 2.0
  */
-final class HmBodyTest {
+final class HmRsBodyTest {
 
     /**
      * HmRqBody can test if values of bodies are same.

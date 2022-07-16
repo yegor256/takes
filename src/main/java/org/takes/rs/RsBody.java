@@ -39,7 +39,7 @@ import org.cactoos.Input;
  *
  * @since 0.32
  */
-interface Body extends Input {
+interface RsBody extends Input {
     /**
      * Gives an {@code InputStream} corresponding to the content of
      * the body.
@@ -61,7 +61,7 @@ interface Body extends Input {
      * Content of a body based on an {@link java.net.URL}.
      * @since 0.32
      */
-    final class Url implements Body {
+    final class Url implements RsBody {
 
         /**
          * The {@link java.net.URL} of the content.
@@ -93,7 +93,7 @@ interface Body extends Input {
      * Content of a body based on a byte array.
      * @since 0.32
      */
-    final class ByteArray implements Body {
+    final class ByteArray implements RsBody {
 
         /**
          * The content of the body in a byte array.
@@ -123,7 +123,7 @@ interface Body extends Input {
      * The content of the body based on an {@link InputStream}.
      * @since 0.32
      */
-    final class Stream implements Body {
+    final class Stream implements RsBody {
 
         /**
          * The content of the body in an InputStream.
@@ -173,12 +173,12 @@ interface Body extends Input {
      *
      * <p><b>The content of the Body will be stored into a temporary
      * file to be able to read it as many times as we want so use it only
-     * for large content, for small content use {@link Body.ByteArray}
+     * for large content, for small content use {@link RsBody.ByteArray}
      * instead.</b>
      *
      * @since 0.32
      */
-    final class TempFile implements Body {
+    final class TempFile implements RsBody {
 
         /**
          * The temporary file that contains the content of the body.
@@ -188,20 +188,20 @@ interface Body extends Input {
         /**
          * The underlying body.
          */
-        private final Body body;
+        private final RsBody body;
 
         /**
-         * Constructs a {@code TempFile} with the specified {@link Body}.
-         * @param body The content of the body to store into a temporary file.
+         * Constructs a {@code TempFile} with the specified {@link RsBody}.
+         * @param content The content of the body to store into a temporary file.
          */
         @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
-        TempFile(final Body body) {
-            this.body = body;
+        TempFile(final RsBody content) {
+            this.body = content;
             this.file = new File(
                 System.getProperty("java.io.tmpdir"),
                 String.format(
                     "%s-%s.tmp",
-                    Body.TempFile.class.getName(),
+                    RsBody.TempFile.class.getName(),
                     UUID.randomUUID().toString()
                 )
             );

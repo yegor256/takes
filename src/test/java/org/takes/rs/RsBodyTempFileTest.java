@@ -21,47 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.rs;
 
-import java.util.Collections;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.takes.rq.RqFake;
 
 /**
- * Test case for {@link HmRqTextBody}.
+ * Test case for {@link RsBody.TempFile}.
  *
- * @since 2.0
+ * @since 1.15
  */
-final class HmRqTextBodyTest {
+final class RsBodyTempFileTest {
 
     /**
-     * HmRqTextBody can test if body equals text.
+     * Body.TemFile can provide the expected input.
+     * @throws Exception If there is some problem inside.
      */
     @Test
-    void testsBodyValueContainsText() {
-        final String same = "Same text";
+    void returnsCorrectInputWithStream() throws Exception {
+        final byte[] bytes =
+            new BytesOf("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
-            new RqFake(
-                Collections.emptyList(),
-                same
-            ),
-            new HmRqTextBody(same)
+            "Body content of Body.TempFile doesn't provide the correct bytes",
+            new BytesOf(
+                new RsBody.TempFile(new RsBody.ByteArray(bytes))
+            ).asBytes(),
+            new IsEqual<>(bytes)
         );
     }
 
     /**
-     * HmRqTextBody can test if body doesn't equal to text.
+     * Body.TemFile can provide the expected length.
+     * @throws Exception If there is some problem inside.
      */
     @Test
-    void testsBodyValueDoesNotContainsText() {
+    void returnsCorrectLengthWithTempFile() throws Exception {
+        final byte[] bytes =
+            new BytesOf("TempFile returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
-            new RqFake(
-                Collections.emptyList(),
-                "some"
-            ),
-            new IsNot<>(new HmRqTextBody("other"))
+            "Body content of Body.TempFile doesn't have the correct length",
+            new LengthOf(
+                new RsBody.TempFile(new RsBody.ByteArray(bytes))
+            ).value(),
+            new IsEqual<>((long) bytes.length)
         );
     }
 }

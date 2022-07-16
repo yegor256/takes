@@ -39,7 +39,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 2.0
  */
-final class HmTextBodyTest {
+final class HmTextRsBodyTest {
 
     /**
      * Tests mismatch description.

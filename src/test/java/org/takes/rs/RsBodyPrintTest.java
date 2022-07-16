@@ -30,16 +30,16 @@ import org.hamcrest.object.HasToString;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link BodyPrint}.
+ * Test case for {@link RsBodyPrint}.
  * @since 1.19
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class BodyPrintTest {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RsBodyPrintTest {
 
     @Test
     void simple() throws IOException {
         MatcherAssert.assertThat(
             "must write body",
-            new BodyPrint(
+            new RsBodyPrint(
                 new RsText("World!")
             ).asString(),
             new HasToString<>(

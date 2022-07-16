@@ -21,40 +21,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.hamcrest;
+package org.takes.rs;
 
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.io.InputOf;
+import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsNot;
+import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.takes.rs.RsWithBody;
 
 /**
- * Test case for {@link HmRsTextBody}.
+ * Test case for {@link RsBody.Stream}.
  *
- * @since 2.0
+ * @since 1.15
  */
-final class HmRsTextBodyTest {
+final class RsBodyStreamTest {
 
     /**
-     * HmRsTextBody can test if body equals text.
+     * Body.Stream can provide the expected input.
+     * @throws Exception If there is some problem inside.
      */
     @Test
-    void testsBodyValueContainsText() {
-        final String same = "<h1>Hello</h1>";
+    void returnsCorrectInputWithStream() throws Exception {
+        final byte[] bytes =
+            new BytesOf("Stream returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
-            new RsWithBody(same),
-            new HmRsTextBody(same)
+            "Body content of Body.Stream doesn't provide the correct bytes",
+            new BytesOf(
+                new RsBody.Stream(new InputOf(bytes).stream())
+            ).asBytes(),
+            new IsEqual<>(bytes)
         );
     }
 
     /**
-     * HmRsTextBody can test if body doesn't equal to text.
+     * Body.Stream can provide the expected length.
+     * @throws Exception If there is some problem inside.
      */
     @Test
-    void testsBodyValueDoesNotContainsText() {
+    void returnsCorrectLengthWithStream() throws Exception {
+        final byte[] bytes =
+            new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
-            new RsWithBody("Some response"),
-            new IsNot<>(new HmRsTextBody("expected something else"))
+            "Body content of Body.Stream doesn't have the correct length",
+            new LengthOf(
+                new RsBody.Stream(new InputOf(bytes).stream())
+            ).value(),
+            new IsEqual<>((long) bytes.length)
         );
     }
 }

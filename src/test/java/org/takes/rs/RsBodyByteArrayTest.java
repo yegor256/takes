@@ -24,38 +24,35 @@
 package org.takes.rs;
 
 import org.cactoos.bytes.BytesOf;
-import org.cactoos.io.InputOf;
 import org.cactoos.scalar.LengthOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link Body.Stream}.
+ * Test case for {@link RsBody.ByteArray}.
  *
  * @since 1.15
  */
-final class BodyStreamTest {
+final class RsBodyByteArrayTest {
 
     /**
-     * Body.Stream can provide the expected input.
+     * Body.ByteArray can provide the expected input.
      * @throws Exception If there is some problem inside.
      */
     @Test
-    void returnsCorrectInputWithStream() throws Exception {
+    void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
-            new BytesOf("Stream returnsCorrectInput!").asBytes();
+            new BytesOf("ByteArray returnsCorrectInput!").asBytes();
         MatcherAssert.assertThat(
-            "Body content of Body.Stream doesn't provide the correct bytes",
-            new BytesOf(
-                new Body.Stream(new InputOf(bytes).stream())
-            ).asBytes(),
+            "Body content of Body.ByteArray doesn't provide the correct bytes",
+            new BytesOf(new RsBody.ByteArray(bytes)).asBytes(),
             new IsEqual<>(bytes)
         );
     }
 
     /**
-     * Body.Stream can provide the expected length.
+     * Body.ByteArray can provide the expected length.
      * @throws Exception If there is some problem inside.
      */
     @Test
@@ -63,10 +60,8 @@ final class BodyStreamTest {
         final byte[] bytes =
             new BytesOf("Stream returnsCorrectLength!").asBytes();
         MatcherAssert.assertThat(
-            "Body content of Body.Stream doesn't have the correct length",
-            new LengthOf(
-                new Body.Stream(new InputOf(bytes).stream())
-            ).value(),
+            "Body content of Body.ByteArray doesn't have the correct length",
+            new LengthOf(new RsBody.ByteArray(bytes)).value(),
             new IsEqual<>((long) bytes.length)
         );
     }

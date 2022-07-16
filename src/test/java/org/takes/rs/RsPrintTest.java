@@ -24,7 +24,6 @@
 package org.takes.rs;
 
 import org.cactoos.Text;
-import org.cactoos.bytes.BytesOf;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
@@ -40,6 +39,18 @@ import org.llorllale.cactoos.matchers.Assertion;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RsPrintTest {
+
+    /**
+     * RsPrint can fail on invalid chars.
+     */
+    @Test
+    void printsBytesCorrectly() {
+        final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            response::asString
+        );
+    }
 
     /**
      * RsPrint can fail on invalid chars.
@@ -63,13 +74,6 @@ final class RsPrintTest {
             response.asString(),
             new HasToString<>(
                 new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
-            )
-        );
-        MatcherAssert.assertThat(
-            "must write head as Bytes",
-            response.asBytes(),
-            new IsEqual<>(
-                new BytesOf("HTTP/1.1 500 Internal Server Error\r\n\r\n").asBytes()
             )
         );
     }

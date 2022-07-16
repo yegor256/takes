@@ -23,64 +23,36 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import org.cactoos.Text;
-import org.cactoos.text.TextOf;
 import org.takes.Response;
 
 /**
- * Response body decorator that can print an entire body response in HTTP
+ * Response head decorator that can print an entire head response in HTTP
  * format.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
-public final class BodyPrint implements Body, Text {
+public final class RsHeadPrint implements Text {
 
     /**
      * The HTTP Response.
      */
-    private final Response response;
+    private final Response origin;
 
     /**
      * Ctor.
-     *
-     * @param res Original response
+     * @param head Original head
      */
-    public BodyPrint(final Response res) {
-        this.response = res;
+    public RsHeadPrint(final Response head) {
+        this.origin = head;
     }
 
     @Override
     public String asString() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // @checkstyle MagicNumber (1 line)
-        final byte[] buf = new byte[4096];
-        final InputStream body = this.response.body();
-        try {
-            while (true) {
-                final int bts = body.read(buf);
-                if (bts < 0) {
-                    break;
-                }
-                baos.write(buf, 0, bts);
-            }
-        } finally {
-            baos.flush();
-        }
-        return new TextOf(baos.toByteArray()).toString();
+        return new RsPrint(this.origin).printHead();
     }
 
-    @Override
-    public InputStream stream() throws IOException {
-        return this.response.body();
-    }
-
-    @Override
-    public int length() throws IOException {
-        return this.asString().length();
-    }
 }

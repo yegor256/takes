@@ -55,12 +55,18 @@ final class FtRemoteTest {
      */
     @Test
     void simplyWorks() throws Exception {
-        new FtRemote(new TkFixed(new RsText("simple answer"))).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("simple"))
+        // @checkstyle MagicNumber (2 lines)
+        final byte[] data = new byte[4];
+        data[0] = (byte) 0xff;
+        new FtRemote(new TkFixed(new RsText(data))).exec(
+            home -> MatcherAssert.assertThat(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .binary(),
+                Matchers.equalTo(data)
+            )
         );
     }
 

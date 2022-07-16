@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.takes.rs.BodyPrint;
+import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsText;
 
 /**
@@ -46,7 +46,7 @@ final class FbChainTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
-            new BodyPrint(
+            new RsBodyPrint(
                 new FbChain(
                     new FbEmpty(),
                     new FbFixed(new RsText("first rs")),
