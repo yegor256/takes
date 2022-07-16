@@ -1,6 +1,6 @@
 ---
 name: codecov
-"on":
+on:
   push:
     branches:
       - master
