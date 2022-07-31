@@ -139,9 +139,7 @@ import org.takes.tk.TkText;
             }
         ).accept(socket);
         final Request request = ref.get();
-        final RqHeaders.Smart smart = new RqHeaders.Smart(
-            new RqHeaders.Base(request)
-        );
+        final RqHeaders.Smart smart = new RqHeaders.Smart(request);
         MatcherAssert.assertThat(
             smart.single(
                 "X-Takes-LocalAddress",

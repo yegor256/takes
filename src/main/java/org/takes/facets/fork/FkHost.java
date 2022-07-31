@@ -68,9 +68,7 @@ public final class FkHost extends FkWrap {
      */
     private static Fork fork(final String host, final Take take) {
         return req -> {
-            final String hst = new RqHeaders.Smart(
-                new RqHeaders.Base(req)
-            ).single("host");
+            final String hst = new RqHeaders.Smart(req).single("host");
             return new Ternary<Opt<Response>>(
                 new EqualsNullable(
                     new Lowered(host), new Lowered(hst)

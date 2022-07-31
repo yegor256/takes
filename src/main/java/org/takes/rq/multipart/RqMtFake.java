@@ -164,9 +164,7 @@ public final class RqMtFake implements RqMultipart {
                             .append(RqMtFake.CRLF)
                             .append("Content-Disposition: ")
                             .append(
-                                new RqHeaders.Smart(
-                                    new RqHeaders.Base(part)
-                                ).single("Content-Disposition")
+                                new RqHeaders.Smart(part).single("Content-Disposition")
                             ).append(RqMtFake.CRLF);
                         final String body = new RqPrint(part).printBody();
                         if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {

@@ -88,9 +88,7 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
-        final Iterator<String> headers = new RqHeaders.Smart(
-            new RqHeaders.Base(request)
-        ).header("authorization").iterator();
+        final Iterator<String> headers = new RqHeaders.Smart(request).header("authorization").iterator();
         if (!headers.hasNext()) {
             throw new RsForward(
                 new RsWithHeader(
