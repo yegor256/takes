@@ -86,14 +86,12 @@ final class RqHeadersTest {
     void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
             new RqHeaders.Smart(
-                new RqHeaders.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GET /g",
-                            "Host: www.takes.com"
-                        ),
-                        ""
-                    )
+                new RqFake(
+                    Arrays.asList(
+                        "GET /g",
+                        "Host: www.takes.com"
+                    ),
+                    ""
                 )
             ).single("host", "www.takes.net"),
             Matchers.equalTo("www.takes.com")
@@ -109,14 +107,12 @@ final class RqHeadersTest {
         final String type = "text/plain";
         MatcherAssert.assertThat(
             new RqHeaders.Smart(
-                new RqHeaders.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GET /f",
-                            "Accept: text/json"
-                        ),
-                        ""
-                    )
+                new RqFake(
+                    Arrays.asList(
+                        "GET /f",
+                        "Accept: text/json"
+                    ),
+                    ""
                 )
             ).single("Content-type", type),
             Matchers.equalTo(type)

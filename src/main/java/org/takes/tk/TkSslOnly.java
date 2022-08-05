@@ -59,9 +59,7 @@ public final class TkSslOnly implements Take {
     @Override
     public Response act(final Request req) throws Exception {
         final String href = new RqHref.Base(req).href().toString();
-        final String proto = new RqHeaders.Smart(
-            new RqHeaders.Base(req)
-        ).single("x-forwarded-proto", "https");
+        final String proto = new RqHeaders.Smart(req).single("x-forwarded-proto", "https");
         final Response answer;
         if ("https".equalsIgnoreCase(proto)) {
             answer = this.origin.act(req);
