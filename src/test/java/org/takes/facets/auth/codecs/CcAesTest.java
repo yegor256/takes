@@ -38,7 +38,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcAes}.
  * @since 0.13.8
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class CcAesTest {
+final class CcAesTest {
     /**
      * CcAes can encrypt identity.
      * @throws Exception If fails

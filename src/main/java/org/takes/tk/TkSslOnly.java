@@ -57,7 +57,6 @@ public final class TkSslOnly implements Take {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public Response act(final Request req) throws Exception {
         final String href = new RqHref.Base(req).href().toString();
         final String proto = new RqHeaders.Smart(

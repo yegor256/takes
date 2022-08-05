@@ -45,7 +45,7 @@ import org.takes.rs.RsWithType;
  * Test case for {@link PsByFlag}.
  * @since 0.10
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class PsByFlagTest {
+final class PsByFlagTest {
     /**
      * PsByFlag can skip if nothing found.
      * @throws Exception If some problem inside

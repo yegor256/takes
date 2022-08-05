@@ -37,7 +37,7 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link FkContentType}.
  * @since 1.0
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class FkContentTypeTest {
+final class FkContentTypeTest {
 
     /**
      * Content-Type header.

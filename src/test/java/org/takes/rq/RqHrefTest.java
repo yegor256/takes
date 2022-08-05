@@ -36,7 +36,7 @@ import org.takes.HttpException;
  * Test case for {@link RqHref.Base}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqHrefTest {
+final class RqHrefTest {
 
     /**
      * RqHref.Base can parse a query.

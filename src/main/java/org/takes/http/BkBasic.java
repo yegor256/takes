@@ -157,7 +157,6 @@ public final class BkBasic implements Back {
      * @param socket Socket
      * @return Request with custom headers
      */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(

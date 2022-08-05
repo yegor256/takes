@@ -46,7 +46,6 @@ import org.takes.rs.RsText;
  * Test case for {@link TkGzip}.
  * @since 0.17
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkGzipTest {
 
     /**

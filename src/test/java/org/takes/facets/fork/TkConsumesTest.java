@@ -113,7 +113,6 @@ final class TkConsumesTest {
      * Checks TkConsumes equals method.
      */
     @Test
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     void equalsAndHashCodeEqualTest() {
         final Take take = new TkText("text");
         final String type = "Content-Type: text/plain";

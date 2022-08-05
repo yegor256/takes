@@ -37,7 +37,7 @@ import org.takes.Request;
  * Test case for {@link RqWithHeaders}.
  * @since 1.0
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqWithHeadersTest {
+final class RqWithHeadersTest {
 
     /**
      * RqWithHeaders can add headers.

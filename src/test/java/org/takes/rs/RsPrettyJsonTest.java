@@ -38,7 +38,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  * Test case for {@link RsPrettyJson}.
  * @since 1.0
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RsPrettyJsonTest {
 
     /**

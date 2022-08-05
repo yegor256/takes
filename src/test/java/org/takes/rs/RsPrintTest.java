@@ -36,7 +36,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  * Test case for {@link RsPrint}.
  * @since 1.19
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RsPrintTest {
 
     /**

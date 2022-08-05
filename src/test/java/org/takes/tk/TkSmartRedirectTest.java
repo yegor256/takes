@@ -32,7 +32,6 @@ import org.takes.rq.RqFake;
  * Test case for {@link TkSmartRedirect}.
  * @since 0.10
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkSmartRedirectTest {
     /**
      * TkRedirect should carry on the query and the fragment.

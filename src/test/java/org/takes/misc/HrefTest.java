@@ -34,7 +34,6 @@ import org.llorllale.cactoos.matchers.HasValues;
  * Test case for {@link Href}.
  * @since 0.7
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class HrefTest {
 
     /**
@@ -147,7 +146,6 @@ final class HrefTest {
     /**
      * Href can build an URI with fragment.
      */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
     void buildsUriWithFragmentAndParams() {
         MatcherAssert.assertThat(
@@ -159,7 +157,6 @@ final class HrefTest {
     /**
      * Href can build an URI with fragment and no params.
      */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
     void buildsUriWithFragmentAndNoParams() {
         MatcherAssert.assertThat(

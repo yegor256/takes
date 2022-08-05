@@ -41,7 +41,6 @@ import org.takes.rs.RsWithHeader;
  *
  * @since 1.14
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class HttpServletResponseFakeTest {
     /**
      * Set-Cookie header name.

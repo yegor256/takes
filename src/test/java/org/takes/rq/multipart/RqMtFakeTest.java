@@ -45,7 +45,7 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
-@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
+@SuppressWarnings("PMD.TooManyMethods")
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.

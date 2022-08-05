@@ -25,26 +25,21 @@ package org.takes.rs;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.IsEqual;
-import org.hamcrest.object.HasToString;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link RsBodyPrint}.
- * @since 1.19
+ * Test case for {@link RsStatus}.
+ * @since 1.22
  */
-final class RsBodyPrintTest {
+final class RsStatusTest {
 
     @Test
-    void simple() throws IOException {
+    void readsStatusCode() throws IOException {
+        final int status = 200;
         MatcherAssert.assertThat(
-            "must write body",
-            new RsBodyPrint(
-                new RsText("World!")
-            ).asString(),
-            new HasToString<>(
-                new IsEqual<>("World!")
-            )
+            new RsStatus.Base(new RsWithStatus(new RsEmpty(), status)).status(),
+            Matchers.equalTo(status)
         );
     }
 }
