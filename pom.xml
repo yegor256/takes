@@ -27,7 +27,7 @@ SOFTWARE.
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.59.0</version>
+    <version>0.60.0</version>
   </parent>
   <groupId>org.takes</groupId>
   <artifactId>takes</artifactId>
@@ -298,8 +298,20 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
+      <version>4.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
       <version>4.6.1</version>
       <scope>test</scope>
     </dependency>
@@ -349,10 +361,7 @@ SOFTWARE.
         <configuration>
           <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
           <systemPropertyVariables>
-            <argLine>${argLine} -Dfile.encoding=UTF-8</argLine>
-            <java.awt.headless>true</java.awt.headless>
-            <user.language>en</user.language>
-            <user.country>US</user.country>
+            <argLine>@{argLine} -Dfile.encoding=UTF-8 -Djava.awt.headless=true -Duser.language=en -Duser.country=US</argLine>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
             <javax.net.ssl.keyStorePassword>abc123
             </javax.net.ssl.keyStorePassword>
@@ -458,7 +467,7 @@ SOFTWARE.
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.19.4</version>
+            <version>0.21.0</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
