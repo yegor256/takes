@@ -46,7 +46,6 @@ final class TokenTest {
      */
     @Test
     void joseAlgorithm() {
-        // @checkstyle MagicNumber (1 line)
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
             jose.getString(Jose.ALGORITHM),
@@ -60,7 +59,6 @@ final class TokenTest {
      */
     @Test
     void joseEncoded() throws IOException {
-        // @checkstyle MagicNumber (2 lines)
         final byte[] code = new Token.Jose(256).encoded();
         MatcherAssert.assertThat(
             code,
@@ -80,7 +78,6 @@ final class TokenTest {
     void jwtExpiration() throws ParseException {
         final JsonObject jose = new Token.Jwt(
             (Identity) new Identity.Simple("user"),
-            // @checkstyle MagicNumber (1 line)
             3600L
         ).json();
         MatcherAssert.assertThat(
@@ -107,11 +104,9 @@ final class TokenTest {
     void jwtEncoded() throws IOException {
         final Identity user = new Identity.Simple("test");
         final byte[] code = new Token.Jwt(
-            // @checkstyle MagicNumber (1 line)
             user, 3600L
         ).encoded();
         final JsonObject jose = new Token.Jwt(
-            // @checkstyle MagicNumber (1 line)
             user, 3600L
         ).json();
         MatcherAssert.assertThat(

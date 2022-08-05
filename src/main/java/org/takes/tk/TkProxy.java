@@ -50,7 +50,6 @@ import org.takes.rs.RsWithStatus;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.25
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkProxy implements Take {
 

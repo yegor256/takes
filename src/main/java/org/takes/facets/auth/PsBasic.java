@@ -53,7 +53,6 @@ import org.takes.rs.RsWithHeader;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.20
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  * @todo #863:30min Continue removing nulls from the code base, there are still
  *  some places that use it and can be replaced with better code constructs.
  */

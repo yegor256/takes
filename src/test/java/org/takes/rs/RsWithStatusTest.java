@@ -38,7 +38,6 @@ import org.takes.Response;
  *
  * <p>The class is immutable and thread-safe.
  * @since 0.16.9
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 final class RsWithStatusTest {
 

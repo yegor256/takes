@@ -43,7 +43,6 @@ import org.takes.misc.StateAwareInputStream;
 /**
  * Test case for {@link RsXslt}.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 final class RsXsltTest {
 

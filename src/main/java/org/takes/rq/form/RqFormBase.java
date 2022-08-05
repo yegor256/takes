@@ -51,7 +51,6 @@ import org.takes.rq.RqWrap;
 /**
  * Base implementation of {@link RqForm}.
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true)
@@ -148,12 +147,10 @@ public final class RqFormBase extends RqWrap implements RqForm {
     private Map<String, List<String>> freshMap() throws IOException {
         final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
         for (final String pair : body.split("&")) {
             if (pair.isEmpty()) {
                 continue;
             }
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
             final String[] parts = pair.split("=", 2);
             if (parts.length < 2) {
                 throw new HttpException(

@@ -49,7 +49,6 @@ import org.takes.rs.RsJson;
  *
  * <p>The class is immutable and thread-safe.
  * @since 0.16.3
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods")
 final class PsGoogleTest {
@@ -131,7 +130,6 @@ final class PsGoogleTest {
 
     /**
      * PsGoogle login.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
      * @throws Exception If some problem inside
      */
     @Test
@@ -203,7 +201,6 @@ final class PsGoogleTest {
 
     /**
      * PsGoogle login with fail due a bad response from google.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
      */
     @Test
     void badGoogleResponse() {
@@ -248,7 +245,6 @@ final class PsGoogleTest {
 
     /**
      * Test a google response without the displayName property.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
      * @throws Exception If some problem inside
      */
     @Test

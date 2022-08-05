@@ -34,7 +34,6 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcSigned}.
  * @since 1.11.1
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumber (500 line)
  */
 final class CcSignedTest {
     @Test

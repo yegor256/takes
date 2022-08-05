@@ -44,7 +44,6 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqPrint extends RqWrap implements Text {
@@ -142,7 +141,6 @@ public final class RqPrint extends RqWrap implements Text {
      */
     public void printBody(final OutputStream output) throws IOException {
         final InputStream input = new RqChunk(new RqLengthAware(this)).body();
-        //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         while (true) {
             final int bytes = input.read(buf);

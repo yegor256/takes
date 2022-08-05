@@ -57,7 +57,6 @@ public final class FtBasic implements Front {
      * @since 0.24
      */
     public FtBasic(final Take tks) throws IOException {
-        // @checkstyle MagicNumber (1 line)
         this(new BkSafe(new BkBasic(tks)), 80);
     }
 

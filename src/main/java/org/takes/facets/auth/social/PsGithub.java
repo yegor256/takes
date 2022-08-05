@@ -49,7 +49,6 @@ import org.takes.rq.RqHref;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
@@ -194,7 +193,6 @@ public final class PsGithub implements Pass {
      */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
         props.put(PsGithub.LOGIN, json.getString(PsGithub.LOGIN, "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new Identity.Simple(

@@ -49,7 +49,6 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.16
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = {"app", "key"})
 public final class PsTwitter implements Pass {

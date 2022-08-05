@@ -45,7 +45,6 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link TkGzip}.
  * @since 0.17
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class TkGzipTest {

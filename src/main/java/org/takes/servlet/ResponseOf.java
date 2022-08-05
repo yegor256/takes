@@ -45,7 +45,6 @@ import org.takes.misc.Equality;
  * Takes response as servlet response.
  *
  * @since 2.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class ResponseOf {
     /**

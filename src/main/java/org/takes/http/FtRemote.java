@@ -38,7 +38,6 @@ import org.takes.Take;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
@@ -130,7 +129,6 @@ public final class FtRemote implements Front {
         );
         thread.start();
         try {
-            // @checkstyle MagicNumber (1 line)
             if (!latch.await(10L, TimeUnit.SECONDS)) {
                 throw new IllegalArgumentException(
                     "failed to start the app"

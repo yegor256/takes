@@ -38,7 +38,6 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link RsBody.Url}.
  *
  * @since 1.15
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RsBodyUrlTest {
 

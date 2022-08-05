@@ -35,7 +35,6 @@ import org.llorllale.cactoos.matchers.Assertion;
 /**
  * Test case for {@link XeWhen}.
  * @since 0.13
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class XeWhenTest {

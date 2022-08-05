@@ -40,7 +40,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link FbStatus}.
  * @since 0.16.10
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class FbStatusTest {
 

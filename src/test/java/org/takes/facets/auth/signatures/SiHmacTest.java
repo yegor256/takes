@@ -40,7 +40,6 @@ import org.llorllale.cactoos.matchers.Assertion;
     void corrects() {
         new Assertion<>(
             "Must have proper bit length",
-            // @checkstyle MagicNumber (1 line)
             new SiHmac("test", 123).bitlength(),
             new IsEqual<>(SiHmac.HMAC256)
         ).affirm();

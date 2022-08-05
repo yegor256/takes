@@ -57,7 +57,6 @@ import org.takes.rq.RqMethod;
  * Fake HttpServletRequest (for unit tests).
  *
  * @since 1.15
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
@@ -192,7 +191,6 @@ public final class HttpServletRequestFake implements HttpServletRequest {
         try {
             int port = new URI(this.getRequestURI()).getPort();
             if (port == -1) {
-                // @checkstyle MagicNumber (1 line)
                 port = 80;
             }
             return port;

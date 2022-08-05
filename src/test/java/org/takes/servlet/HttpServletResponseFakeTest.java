@@ -133,7 +133,6 @@ final class HttpServletResponseFakeTest {
         final HttpServletResponse sresp = new HttpServletResponseFake(
             new RsEmpty()
         );
-        // @checkstyle MagicNumber (1 line)
         sresp.setStatus(502);
         new Assertion<>(
             "Can't set a status in servlet response",
@@ -149,7 +148,6 @@ final class HttpServletResponseFakeTest {
         final HttpServletResponse sresp = new HttpServletResponseFake(
             new RsEmpty()
         );
-        // @checkstyle MagicNumber (1 line)
         sresp.sendError(101, "Switching Protocol");
         new Assertion<>(
             "Can't send a error in servlet response",

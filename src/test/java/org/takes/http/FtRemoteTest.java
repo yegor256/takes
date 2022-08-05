@@ -45,7 +45,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link FtRemote}.
  * @since 0.21
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class FtRemoteTest {
 
@@ -55,7 +54,6 @@ final class FtRemoteTest {
      */
     @Test
     void simplyWorks() throws Exception {
-        // @checkstyle MagicNumber (2 lines)
         final byte[] data = new byte[4];
         data[0] = (byte) 0xff;
         new FtRemote(new TkFixed(new RsText(data))).exec(

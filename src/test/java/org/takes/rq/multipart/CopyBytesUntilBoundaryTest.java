@@ -39,7 +39,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  * Test for {@link CopyBytesUntilBoundary}.
  *
  * @since 1.19
- * @checkstyle MagicNumberCheck (500 lines)
  */
 final class CopyBytesUntilBoundaryTest {
 

@@ -49,7 +49,6 @@ import org.takes.tk.TkText;
 /**
  * Test of {@link PsBasic}.
  * @since 0.20
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class PsBasicTest {
 

@@ -40,7 +40,6 @@ import org.takes.rq.RqPrint;
  * Test case for {@link  RqFrom}.
  *
  * @since 1.15
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RqFromTest {
 

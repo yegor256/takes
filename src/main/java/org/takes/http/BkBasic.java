@@ -48,8 +48,6 @@ import org.takes.rs.RsWithStatus;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle IndentationCheck (500 lines)
  */
 @EqualsAndHashCode
 @SuppressWarnings("PMD.DataClass")

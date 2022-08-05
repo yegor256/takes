@@ -35,7 +35,6 @@ import org.llorllale.cactoos.matchers.Assertion;
 /**
  * Test case for {@link RsPrint}.
  * @since 1.19
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RsPrintTest {

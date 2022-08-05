@@ -42,7 +42,6 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link BkTimeable}.
  * @since 0.14.2
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 final class BkTimeableTest {
@@ -63,7 +62,6 @@ final class BkTimeableTest {
         final Take take = req -> {
             Response rsp;
             try {
-                // @checkstyle MagicNumberCheck (1 line)
                 TimeUnit.SECONDS.sleep(10L);
                 rsp = new RsText("finish");
             } catch (final InterruptedException ex) {

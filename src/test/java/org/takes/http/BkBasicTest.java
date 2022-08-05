@@ -58,9 +58,7 @@ import org.takes.tk.TkText;
  * Test case for {@link BkBasic}.
  *
  * @since 0.15.2
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @SuppressWarnings(
     {
@@ -220,7 +218,6 @@ import org.takes.tk.TkText;
                     ).asString().getBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (
                     int count = input.read(buffer);
@@ -279,7 +276,6 @@ import org.takes.tk.TkText;
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
                 for (
                     int count = input.read(buffer);
@@ -337,7 +333,6 @@ import org.takes.tk.TkText;
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (10 line)
                 final byte[] buffer = new byte[4096];
                 for (
                     int count = input.read(buffer);
@@ -402,7 +397,6 @@ import org.takes.tk.TkText;
                             ).asString().getBytes()
                         );
                         final InputStream input = socket.getInputStream();
-                        // @checkstyle MagicNumber (1 line)
                         final byte[] buffer = new byte[4096];
                         for (
                             int count = input.read(buffer); count != -1;

@@ -40,7 +40,6 @@ import org.cactoos.text.UncheckedText;
  *
  * @since 0.31.2
  * @checkstyle LineLengthCheck (1 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
@@ -181,7 +180,6 @@ final class ChunkedInputStream extends InputStream {
             ).value()
         );
         try {
-            // @checkstyle MagicNumberCheck (10 lines)
             return Integer.parseInt(
                 new UncheckedText(
                     number

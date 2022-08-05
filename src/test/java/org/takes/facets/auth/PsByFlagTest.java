@@ -44,7 +44,6 @@ import org.takes.rs.RsWithType;
 /**
  * Test case for {@link PsByFlag}.
  * @since 0.10
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals") final class PsByFlagTest {
     /**

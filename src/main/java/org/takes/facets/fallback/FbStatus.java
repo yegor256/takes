@@ -41,7 +41,6 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.13
  */
 @EqualsAndHashCode(callSuper = true)

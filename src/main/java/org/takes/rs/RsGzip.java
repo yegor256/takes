@@ -104,7 +104,6 @@ public final class RsGzip implements Response {
     private static byte[] gzip(final InputStream input)
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // @checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         final OutputStream gzip = new GZIPOutputStream(baos);
         try {

@@ -156,7 +156,6 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
     private static byte[] asBytes(final InputStream input) throws IOException {
         input.reset();
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-            // @checkstyle MagicNumberCheck (1 line)
             final byte[] buffer = new byte[1024];
             int read;
             while ((read = input.read(buffer, 0, buffer.length)) != -1) {

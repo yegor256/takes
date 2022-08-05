@@ -37,7 +37,6 @@ import org.takes.facets.auth.Identity;
 /**
  * Test case for {@link CcAes}.
  * @since 0.13.8
- * @checkstyle MagicNumber (500 line)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals") final class CcAesTest {
     /**

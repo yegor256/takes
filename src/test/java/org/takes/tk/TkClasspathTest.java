@@ -34,7 +34,6 @@ import org.takes.rs.RsHeadPrint;
 /**
  * Test case for {@link TkClasspath}.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 final class TkClasspathTest {
 

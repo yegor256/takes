@@ -44,7 +44,6 @@ import org.takes.rq.RqWithHeaders;
 /**
  * Test case for {@link RqMtFake}.
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 final class RqMtFakeTest {

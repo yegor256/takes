@@ -78,7 +78,6 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see org.takes.rs.xe.RsXembly
  */
 @ToString(callSuper = true)
@@ -164,7 +163,6 @@ public final class RsXslt extends RsWrap {
      */
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         try {
             while (true) {

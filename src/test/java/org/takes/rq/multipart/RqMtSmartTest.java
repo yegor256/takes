@@ -54,8 +54,6 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link RqMtSmart}.
  * @since 0.33
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RqMtSmartTest {
     /**
@@ -267,7 +265,6 @@ final class RqMtSmartTest {
             );
             MatcherAssert.assertThat(
                 System.currentTimeMillis() - start,
-                //@checkstyle MagicNumberCheck (1 line)
                 Matchers.lessThan(20_000L)
             );
         } finally {

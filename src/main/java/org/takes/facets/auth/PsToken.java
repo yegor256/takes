@@ -57,8 +57,6 @@ import org.takes.rs.RsJson;
  * The class is immutable and thread-safe.
  *
  * @since 1.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle AvoidDuplicateLiterals (500 lines)
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
@@ -87,7 +85,6 @@ public final class PsToken implements Pass {
      *  The secret key to sign with
      */
     public PsToken(final String key) {
-        // @checkstyle MagicNumber (1 line)
         this(new SiHmac(key, SiHmac.HMAC256), 3600L);
     }
 

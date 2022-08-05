@@ -47,7 +47,6 @@ import org.takes.tk.TkText;
 /**
  * Test case for {@link TkAuth}.
  * @since 0.9
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class TkAuthTest {
 

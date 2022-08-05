@@ -50,7 +50,6 @@ import org.takes.rq.RqWithHeader;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @since 0.1
  */
 @EqualsAndHashCode

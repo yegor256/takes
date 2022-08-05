@@ -34,7 +34,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link MainRemote}.
  * @since 0.23
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class MainRemoteTest {
 

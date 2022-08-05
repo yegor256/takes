@@ -63,7 +63,6 @@ final class PsLinkedinTest {
         final String lastname = "lastName";
         final String frodo = "Frodo";
         final String baggins = "Baggins";
-        // @checkstyle MagicNumber (4 lines)
         final String code = RandomStringUtils.randomAlphanumeric(10);
         final String lapp = RandomStringUtils.randomAlphanumeric(10);
         final String lkey = RandomStringUtils.randomAlphanumeric(10);
@@ -152,7 +151,6 @@ final class PsLinkedinTest {
                 Json.createObjectBuilder()
                     .add(
                         "access_token",
-                        // @checkstyle MagicNumber (1 line)
                         RandomStringUtils.randomAlphanumeric(10)
                     ).build()
             );

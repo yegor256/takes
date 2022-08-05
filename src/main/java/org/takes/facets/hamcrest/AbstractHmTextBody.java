@@ -109,7 +109,6 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
             InputStream input = this.itemBody(item);
             ByteArrayOutputStream output = new ByteArrayOutputStream()
         ) {
-            // @checkstyle MagicNumberCheck (1 line)
             final byte[] buffer = new byte[1024];
             int len;
             while ((len = input.read(buffer, 0, buffer.length)) != -1) {

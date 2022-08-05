@@ -79,7 +79,6 @@ import org.takes.tk.TkText;
  * @since 0.4
  * @see TkFork
  * @see TkRegex
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class FkRegex implements Fork {

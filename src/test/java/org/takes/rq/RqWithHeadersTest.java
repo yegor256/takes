@@ -36,8 +36,6 @@ import org.takes.Request;
 /**
  * Test case for {@link RqWithHeaders}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (100 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals") final class RqWithHeadersTest {
 

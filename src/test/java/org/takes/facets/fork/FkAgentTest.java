@@ -45,7 +45,6 @@ final class FkAgentTest {
         MatcherAssert.assertThat(
             new FkAgent(
                 new TkEmpty(),
-                // @checkstyle MagicNumber (1 line)
                 new AmVersion(agent, new AmVersion.VmGreater(12))
             ).route(
                 new RqWithHeader(
@@ -59,7 +58,6 @@ final class FkAgentTest {
         MatcherAssert.assertThat(
             new FkAgent(
                 new TkEmpty(),
-                // @checkstyle MagicNumber (1 line)
                 new AmVersion(agent, new AmVersion.VmGreater(90))
             ).route(
                 new RqWithHeader(

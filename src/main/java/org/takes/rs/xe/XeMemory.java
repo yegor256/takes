@@ -90,7 +90,6 @@ public final class XeMemory extends XeWrap {
      * @return Mbytes
      */
     private static long mbs(final long bytes) {
-        // @checkstyle MagicNumber (1 line)
         return bytes >> 20;
     }
 

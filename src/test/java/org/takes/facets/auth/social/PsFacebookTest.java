@@ -42,7 +42,6 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link PsFacebook}.
  * @since 0.15
- * @checkstyle MagicNumberCheck (500 lines)
  */
 final class PsFacebookTest {
 

@@ -33,7 +33,6 @@ import org.takes.Response;
 /**
  * Test case for {@link RsWithBody}.
  * @since 1.22
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RsWithBodyTest {
 

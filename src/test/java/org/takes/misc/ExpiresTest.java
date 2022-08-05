@@ -66,7 +66,6 @@ final class ExpiresTest {
         MatcherAssert.assertThat(
             "Wrong expiration time for Hour",
             new Expires.Hour(
-                //@checkstyle MagicNumberCheck (1 line)
                 new Expires.Date(Instant.ofEpochSecond(3600).toEpochMilli())
             ).print(),
             new IsEqual<>("Expires=Thu, 01 Jan 1970 01:00:00 GMT")
@@ -80,7 +79,6 @@ final class ExpiresTest {
     void returnsExpiresStringInGmt() {
         MatcherAssert.assertThat(
             "Wrong expiration time in GMT",
-            // @checkstyle MagicNumberCheck (2 lines)
             new Expires.Date(
                 1_517_048_057_117L
             ).print(),

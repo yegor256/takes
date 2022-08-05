@@ -44,7 +44,6 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsCookie implements Pass {
@@ -78,7 +77,6 @@ public final class PsCookie implements Pass {
      * @param name Cookie name
      */
     public PsCookie(final Codec cdc, final String name) {
-        // @checkstyle MagicNumber (1 line)
         this(cdc, name, 30L);
     }
 

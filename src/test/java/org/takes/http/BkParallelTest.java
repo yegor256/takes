@@ -39,7 +39,6 @@ import org.takes.tk.TkEmpty;
 /**
  * Test case for {@link BkParallel}.
  *
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  * @since 0.15.2
  */
@@ -64,7 +63,6 @@ import org.takes.tk.TkEmpty;
         final String uri = String.format(
             "http://localhost:%d", socket.getLocalPort()
         );
-        // @checkstyle MagicNumberCheck (1 line)
         final int count = 3;
         final CountDownLatch started = new CountDownLatch(count);
         final CountDownLatch completed = new CountDownLatch(count);

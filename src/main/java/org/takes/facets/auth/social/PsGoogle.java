@@ -48,7 +48,6 @@ import org.takes.rq.RqHref;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.9
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key", "redir" })
 public final class PsGoogle implements Pass {

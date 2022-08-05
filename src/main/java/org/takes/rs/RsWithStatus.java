@@ -46,7 +46,6 @@ import org.takes.Response;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -101,7 +100,6 @@ public final class RsWithStatus extends RsWrap {
      */
     private static Iterable<String> head(final Response origin,
         final int status, final CharSequence reason) throws IOException {
-        // @checkstyle MagicNumber (1 line)
         if (status < 100 || status > 999) {
             throw new IllegalArgumentException(
                 String.format(

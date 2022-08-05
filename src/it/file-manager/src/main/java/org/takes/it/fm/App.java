@@ -39,7 +39,6 @@ import org.takes.tk.TkRedirect;
  * App.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class App implements Take {
 

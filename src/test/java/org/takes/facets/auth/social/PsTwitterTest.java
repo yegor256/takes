@@ -39,8 +39,6 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link PsTwitter}.
  * @since 1.0
- * @checkstyle MagicNumberCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 final class PsTwitterTest {
 

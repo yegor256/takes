@@ -52,7 +52,6 @@ import org.takes.rs.RsWithoutHeader;
  * Fake HttpServletResponse (for unit tests).
  *
  * @since 1.14
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class HttpServletResponseFake implements HttpServletResponse {

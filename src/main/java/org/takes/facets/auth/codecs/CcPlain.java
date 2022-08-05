@@ -47,7 +47,6 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class CcPlain implements Codec {

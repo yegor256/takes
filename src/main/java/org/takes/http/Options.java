@@ -94,7 +94,6 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 try (Reader reader = new ReaderOf(file.toPath())) {
-                    // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
                     final int length = reader.read(chars);
                     socket = new ServerSocket(

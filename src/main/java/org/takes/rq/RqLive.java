@@ -43,7 +43,6 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLive extends RqWrap {
@@ -152,7 +151,6 @@ public final class RqLive extends RqWrap {
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
-        // @checkstyle MagicNumber (1 line)
         if ((data.get() > 0x7f || data.get() < 0x20)
             && data.get() != '\t') {
             throw new HttpException(

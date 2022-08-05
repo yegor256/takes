@@ -33,7 +33,6 @@ import org.llorllale.cactoos.matchers.IsText;
 /**
  * Test case for {@link RsWithType}.
  * @since 0.16.9
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RsWithTypeTest {
 

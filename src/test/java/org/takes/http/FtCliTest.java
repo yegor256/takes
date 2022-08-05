@@ -41,7 +41,6 @@ import org.takes.facets.fork.TkFork;
 /**
  * Test case for {@link FtCli}.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class FtCliTest {
 

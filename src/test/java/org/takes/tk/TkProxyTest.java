@@ -48,7 +48,6 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link TkProxy}.
  * @since 0.25
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods")
 final class TkProxyTest {

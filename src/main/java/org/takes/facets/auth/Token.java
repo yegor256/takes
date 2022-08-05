@@ -150,7 +150,6 @@ public interface Token {
         public Jwt(final Identity idt, final long age) {
             this.now = Calendar.getInstance(TimeZone.getTimeZone("Z"));
             this.exp = Calendar.getInstance(TimeZone.getTimeZone("Z"));
-            // @checkstyle MagicNumber (1 line)
             this.exp.setTimeInMillis(this.now.getTimeInMillis() + (age * 1000));
             this.jwto = Json.createObjectBuilder()
                 .add(Jwt.ISSUED, String.format(Jwt.ISOFORMAT, this.now))

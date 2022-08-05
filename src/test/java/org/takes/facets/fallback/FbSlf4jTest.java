@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Test;
 /**
  * Test case for {@link FbSlf4j}.
  * @since 0.25
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class FbSlf4jTest {
 

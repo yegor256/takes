@@ -55,7 +55,6 @@ import org.xml.sax.XMLReader;
  *
  * <p>The class is immutable and thread-safe.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(of = "origin")
 public final class RsPrettyXml implements Response {
@@ -165,7 +164,6 @@ public final class RsPrettyXml implements Response {
             final String yes = "yes";
             final Transformer transformer = TransformerFactory.newInstance()
                 .newTransformer();
-            // @checkstyle MultipleStringLiteralsCheck (2 line)
             transformer.setOutputProperty(
                 OutputKeys.OMIT_XML_DECLARATION, yes
             );
@@ -195,7 +193,6 @@ public final class RsPrettyXml implements Response {
             if (null != doctype) {
                 if (null == doctype.getSystemId()
                     && null == doctype.getPublicId()
-                    // @checkstyle MultipleStringLiteralsCheck (3 line)
                     && html.equalsIgnoreCase(doctype.getName())) {
                     transformer.setOutputProperty(OutputKeys.METHOD, html);
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");

@@ -46,7 +46,6 @@ import org.takes.rs.xe.XeStylesheet;
 /**
  * Test case for {@link XeFlash}.
  * @since 0.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class XeFlashTest {
 

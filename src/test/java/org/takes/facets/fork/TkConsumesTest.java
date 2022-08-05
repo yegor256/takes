@@ -44,8 +44,6 @@ import org.takes.tk.TkText;
 /**
  * Test case for {@link TkConsumes}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
 final class TkConsumesTest {
 

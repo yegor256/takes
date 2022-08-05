@@ -37,8 +37,6 @@ import org.takes.Request;
 /**
  * Test case for {@link RqSocket}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
 @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
 final class RqSocketTest {

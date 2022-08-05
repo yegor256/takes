@@ -39,7 +39,6 @@ import org.takes.Response;
 /**
  * Test case for {@link RsGzip}.
  * @since 0.10
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RsGzipTest {
 

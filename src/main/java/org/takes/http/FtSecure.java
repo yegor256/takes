@@ -53,7 +53,6 @@ public final class FtSecure implements Front {
      * @throws IOException If fails
      */
     public FtSecure(final Take tks) throws IOException {
-        // @checkstyle MagicNumber (1 line)
         this(tks, 443);
     }
 

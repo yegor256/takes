@@ -44,7 +44,6 @@ import org.cactoos.text.Trimmed;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.23
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class MainRemote {
@@ -151,7 +150,6 @@ public final class MainRemote {
         }
         final int port;
         try (InputStream input = Files.newInputStream(file.toPath())) {
-            // @checkstyle MagicNumber (1 line)
             final byte[] buf = new byte[10];
             while (true) {
                 if (input.read(buf) > 0) {

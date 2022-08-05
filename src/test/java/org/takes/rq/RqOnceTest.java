@@ -35,7 +35,6 @@ import org.takes.Request;
 /**
  * Test case for {@link RqOnce}.
  * @since 0.26
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 final class RqOnceTest {
 

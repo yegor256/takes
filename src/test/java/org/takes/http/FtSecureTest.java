@@ -45,7 +45,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link FtSecure}.
  * @since 0.25
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings("PMD.TooManyMethods") final class FtSecureTest {
 

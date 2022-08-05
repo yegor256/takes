@@ -38,7 +38,6 @@ import org.takes.Response;
 /**
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 final class RsPrettyXmlTest {
 
