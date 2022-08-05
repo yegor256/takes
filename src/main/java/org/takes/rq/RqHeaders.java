@@ -103,7 +103,6 @@ public interface RqHeaders extends Request {
                 list = new VerboseList<>(
                     Collections.emptyList(),
                     new FormattedText(
-                        // @checkstyle LineLengthCheck (1 line)
                         "there are no headers by name \"%s\" among %d others: %s",
                         key,
                         this.map().size(),
@@ -114,7 +113,6 @@ public interface RqHeaders extends Request {
                 list = new VerboseList<>(
                     values,
                     new FormattedText(
-                        // @checkstyle LineLengthCheck (1 line)
                         "there are only %d headers by name \"%s\"",
                         values.size(),
                         key

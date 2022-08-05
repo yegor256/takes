@@ -82,7 +82,6 @@ public final class SrvTake extends HttpServlet {
             );
         }
         final Take take;
-        // @checkstyle LineLengthCheck (40 lines)
         try {
             take = (Take) cls.getConstructor(ServletContext.class)
                 .newInstance(this.getServletContext());

@@ -199,7 +199,6 @@ final class TkProxyTest {
                     ).asString(),
                     Matchers.containsString(
                         String.format(
-                            // @checkstyle LineLengthCheck (1 line)
                             "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
                             home,
                             mark

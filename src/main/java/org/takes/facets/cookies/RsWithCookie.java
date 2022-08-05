@@ -62,7 +62,6 @@ public final class RsWithCookie extends RsWrap {
 
     /**
      * Cookie value validation regexp.
-     * @checkstyle LineLengthCheck (3 lines)
      */
     private static final Pattern CVALUE_PTRN = Pattern.compile(
         "[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*|\"[\\x21\\x23-\\x2B\\x2D-\\x3A\\x3C-\\x5B\\x5D-\\x7E]*\""

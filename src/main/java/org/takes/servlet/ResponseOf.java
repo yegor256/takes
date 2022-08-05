@@ -91,7 +91,6 @@ final class ResponseOf {
                 OutputStream out = sresp.getOutputStream()
             ) {
                 final byte[] buff = new byte[ResponseOf.BUFSIZE];
-                // @checkstyle LineLengthCheck (1 line)
                 for (int read = body.read(buff); read >= 0; read = body.read(buff)) {
                     out.write(buff);
                 }

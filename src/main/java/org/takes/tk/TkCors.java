@@ -82,7 +82,6 @@ public final class TkCors implements Take {
             response = new RsWithHeaders(
                 this.origin.act(req),
                 "Access-Control-Allow-Credentials: true",
-                // @checkstyle LineLengthCheck (1 line)
                 "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
                 String.format(
                     "Access-Control-Allow-Origin: %s",

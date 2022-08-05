@@ -91,7 +91,6 @@ public interface RqRequestLine extends Request {
          * HTTP Request-line pattern.
          * [!-~] is for method or extension-method token (octets 33 - 126).
          * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
-         * @checkstyle LineLengthCheck (1 lines)
          */
         private static final Pattern PATTERN = Pattern.compile(
             "([!-~]+) ([^ ]+)( [^ ]+)?"

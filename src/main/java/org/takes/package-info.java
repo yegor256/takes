@@ -36,7 +36,6 @@
  * @since 0.1
  * @see <a href="http://www.takes.org">project site www.takes.org</a>
  * @see <a href="https://github.com/yegor256/take">Github project</a>
- * @checkstyle LineLengthCheck (2 lines)
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  * @see <a href="https://en.wikipedia.org/wiki/Takes_(framework)">wikipedia about Takes framework</a>
  * @todo #998:30min Replace the usage of {@link java.lang.String}.format

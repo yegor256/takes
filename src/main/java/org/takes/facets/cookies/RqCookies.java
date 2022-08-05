@@ -91,7 +91,6 @@ public interface RqCookies extends Request {
                 iter = new VerboseIterable<>(
                     Collections.emptyList(),
                     new FormattedText(
-                        // @checkstyle LineLengthCheck (1 line)
                         "There are no Cookies by name \"%s\" among %d others: %s",
                         key, map.size(), map.keySet()
                     )

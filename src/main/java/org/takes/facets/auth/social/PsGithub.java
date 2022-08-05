@@ -140,11 +140,9 @@ public final class PsGithub implements Pass {
      * @param token Github access token
      * @return The user found in Github
      * @throws IOException If fails
+     * @link https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/
      */
     private Identity fetch(final String token) throws IOException {
-        // @checkstyle MethodBodyCommentsCheck (2 lines)
-        // @checkstyle LineLengthCheck (1 line)
-        // @see https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/
         final String uri = new Href(this.api).path("user").toString();
         return PsGithub.parse(
             new JdkRequest(uri)

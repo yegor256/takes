@@ -39,7 +39,6 @@ import org.cactoos.text.UncheckedText;
  * Input stream from chunked coded http request body.
  *
  * @since 0.31.2
- * @checkstyle LineLengthCheck (1 lines)
  * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
