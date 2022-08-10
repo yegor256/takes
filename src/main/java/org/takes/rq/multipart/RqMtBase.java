@@ -204,7 +204,6 @@ public final class RqMtBase implements RqMultipart {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
                     header
                 )

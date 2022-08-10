@@ -59,7 +59,6 @@ final class SiHmacTest {
                 )
             ),
             new IsEqual<>(
-                // @checkstyle LineLength (1 line)
                 "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8"
             )
         ).affirm();

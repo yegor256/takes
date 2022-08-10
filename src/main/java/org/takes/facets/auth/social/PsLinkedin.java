@@ -85,7 +85,6 @@ public final class PsLinkedin implements Pass {
     public PsLinkedin(final String lapp, final String lkey) {
         this(
             new Href("https://www.linkedin.com/uas/oauth2/accessToken"),
-            // @checkstyle LineLength (1 line)
             new Href("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,picture-url)"),
             lapp,
             lkey
@@ -137,7 +136,6 @@ public final class PsLinkedin implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        // @checkstyle LineLength (1 line)
         final String uri = this.apihref
             .with("oauth2_access_token", token)
             .with("format", "json")

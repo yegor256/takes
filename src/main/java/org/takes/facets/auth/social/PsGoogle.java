@@ -169,7 +169,6 @@ public final class PsGoogle implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        // @checkstyle LineLength (1 line)
         final String uri = new Href(this.gapi).path("plus").path("v1")
             .path("people")
             .path("me")

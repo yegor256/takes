@@ -158,7 +158,6 @@ public final class RsXembly extends RsWrap {
                 .newDocument();
         } catch (final ParserConfigurationException ex) {
             throw new IllegalStateException(
-                // @checkstyle LineLength (1 line)
                 "Could not instantiate DocumentBuilderFactory and build empty Document",
                 ex
             );

@@ -39,7 +39,6 @@ public final class CcStrict implements Codec {
      * URN matching pattern.
      */
     private static final Pattern PTN = Pattern.compile(
-        // @checkstyle LineLength (1 line)
         "^(?i)^urn(?-i):[a-zA-Z0-9]([\\-a-zA-Z0-9]{1,31})(:([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)+(\\?\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?(&\\w+(=([\\-a-zA-Z0-9/]|%[0-9a-fA-F]{2})*)?)*)?\\*?$"
     );
 

@@ -86,7 +86,6 @@ public final class MainRemote {
         if (!file.delete()) {
             throw new IOException(
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "The temporary file '%s' could not be deleted before calling the exec method",
                     file.getAbsolutePath()
                 )
@@ -116,7 +115,6 @@ public final class MainRemote {
                 ex.addSuppressed(
                     new IOException(
                         String.format(
-                            // @checkstyle LineLength (1 line)
                             "The temporary file '%s' could not be deleted while catching the error",
                             file.getAbsolutePath()
                         )
@@ -130,7 +128,6 @@ public final class MainRemote {
         if (!file.delete()) {
             throw new IOException(
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "The temporary file '%s' could not be deleted after calling the exec method",
                     file.getAbsolutePath()
                 )

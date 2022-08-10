@@ -118,7 +118,6 @@ public final class RsWithHeader extends RsWrap {
         if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
                     header, RsWithHeader.HEADER
                 )
