@@ -25,13 +25,15 @@ package org.takes.rs.xe;
 
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Func;
+import org.cactoos.func.UncheckedFunc;
 
 /**
  * Iterable to transform an iterable of some objects
  * into an iterable of Xembly sources.
  *
  * <p>Use this class to create a collection of
- * {@link org.takes.rs.xe.XeSource} objects and pass them to,
+ * {@link XeSource} objects and pass them to,
  * for example, {@link org.takes.rs.xe.XeAppend}:
  *
  * <pre> return new RsXembly(
@@ -72,14 +74,14 @@ public final class XeTransform<T> implements Iterable<XeSource> {
     /**
      * Function to use for mapping.
      */
-    private final XeTransform.Func<T> func;
+    private final Func<T, XeSource> func;
 
     /**
      * Ctor.
      * @param list List of objects
      * @param fnc Function
      */
-    public XeTransform(final Iterable<T> list, final XeTransform.Func<T> fnc) {
+    public XeTransform(final Iterable<T> list, final Func<T, XeSource> fnc) {
         this.objects = list;
         this.func = fnc;
     }
@@ -95,7 +97,9 @@ public final class XeTransform<T> implements Iterable<XeSource> {
 
             @Override
             public XeSource next() {
-                return XeTransform.this.func.transform(origin.next());
+                return new UncheckedFunc<>(
+                    XeTransform.this.func
+                ).apply(origin.next());
             }
 
             @Override
@@ -105,17 +109,4 @@ public final class XeTransform<T> implements Iterable<XeSource> {
         };
     }
 
-    /**
-     * Function to map them.
-     * @param <T> Type of item
-     * @since 0.1
-     */
-    public interface Func<T> {
-        /**
-         * Transform an object.
-         * @param obj Object
-         * @return Xembly source
-         */
-        XeSource transform(T obj);
-    }
 }
