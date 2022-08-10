@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   codecov:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
@@ -18,7 +18,7 @@ jobs:
           key: maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             maven-
-      - run: mvn install -Pjacoco -Dinvoker.skip
+      - run: mvn install -Pjacoco
       - uses: codecov/codecov-action@v1
         with:
           file: ./target/site/jacoco/jacoco.xml
