@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.rq;
+package org.takes.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,7 +40,7 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
-import org.takes.Request;
+import org.takes.Response;
 import org.takes.misc.VerboseList;
 
 /**
@@ -52,7 +52,7 @@ import org.takes.misc.VerboseList;
  * @since 0.1
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public interface RqHeaders extends Request {
+public interface RsHeaders extends Response {
 
     /**
      * Get single header.
@@ -79,13 +79,13 @@ public interface RqHeaders extends Request {
      * @since 0.13.8
      */
     @EqualsAndHashCode(callSuper = true)
-    final class Base extends RqWrap implements RqHeaders {
+    final class Base extends RsWrap implements RsHeaders {
         /**
          * Ctor.
          *
          * @param req Original request
          */
-        public Base(final Request req) {
+        public Base(final Response req) {
             super(req);
         }
 
@@ -177,17 +177,17 @@ public interface RqHeaders extends Request {
      * @since 0.16
      */
     @EqualsAndHashCode
-    final class Smart implements RqHeaders {
+    final class Smart implements RsHeaders {
         /**
          * Original.
          */
-        private final RqHeaders origin;
+        private final RsHeaders origin;
 
         /**
          * Ctor.
          * @param req Original request
          */
-        public Smart(final RqHeaders req) {
+        public Smart(final RsHeaders req) {
             this.origin = req;
         }
 
@@ -195,8 +195,8 @@ public interface RqHeaders extends Request {
          * Ctor.
          * @param req Original request
          */
-        public Smart(final Request req) {
-            this(new RqHeaders.Base(req));
+        public Smart(final Response req) {
+            this(new RsHeaders.Base(req));
         }
 
         @Override
