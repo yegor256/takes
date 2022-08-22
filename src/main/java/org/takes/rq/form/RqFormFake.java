@@ -117,7 +117,10 @@ public final class RqFormFake implements RqForm {
                 txt.toString(), Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to encode '%s'", txt),
+                ex
+            );
         }
     }
 }

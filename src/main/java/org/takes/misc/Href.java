@@ -265,7 +265,10 @@ public final class Href implements CharSequence {
                 txt, Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to encode '%s'", txt),
+                ex
+            );
         }
     }
 
@@ -280,7 +283,10 @@ public final class Href implements CharSequence {
                 txt, Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to decode '%s'", txt),
+                ex
+            );
         }
     }
 

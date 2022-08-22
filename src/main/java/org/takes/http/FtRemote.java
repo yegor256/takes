@@ -123,7 +123,10 @@ public final class FtRemote implements Front {
                         }
                     );
                 } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        "Failed to start the app thread",
+                        ex
+                    );
                 }
             }
         );
@@ -131,12 +134,15 @@ public final class FtRemote implements Front {
         try {
             if (!latch.await(10L, TimeUnit.SECONDS)) {
                 throw new IllegalArgumentException(
-                    "failed to start the app"
+                    "Failed to start the app"
                 );
             }
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Interrupted while waiting for latch",
+                ex
+            );
         }
         final String protocol;
         if (this.secured) {
@@ -157,7 +163,10 @@ public final class FtRemote implements Front {
             thread.join();
         } catch (final InterruptedException ex) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Thread waiting interrupted",
+                ex
+            );
         }
     }
 

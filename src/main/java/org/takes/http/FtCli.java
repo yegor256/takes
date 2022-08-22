@@ -115,7 +115,10 @@ public final class FtCli implements Front {
                     try {
                         front.start(this.exit(exit));
                     } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
+                        throw new IllegalStateException(
+                            "Failed to start the front",
+                            ex
+                        );
                     }
                 }
             );

@@ -133,7 +133,7 @@ public final class RsPrint extends RsWrap implements Text {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
                 throw new IllegalArgumentException(
                     String.format(
-                        "first line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        "First line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
                         line, RsPrint.FIRST
                     )
                 );
@@ -141,7 +141,7 @@ public final class RsPrint extends RsWrap implements Text {
             if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
                 throw new IllegalArgumentException(
                     String.format(
-                        "header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        "Header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
                         pos + 1, line, RsPrint.OTHERS
                     )
                 );

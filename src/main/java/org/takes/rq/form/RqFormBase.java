@@ -117,13 +117,17 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @return Decoded
      */
     private static String decode(final Text txt) {
+        final String body = new UncheckedText(txt).asString();
         try {
             return URLDecoder.decode(
-                new UncheckedText(txt).asString(),
+                body,
                 Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to decode '%s'", body),
+                ex
+            );
         }
     }
 

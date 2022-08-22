@@ -137,7 +137,10 @@ public final class RsXslt extends RsWrap {
         try {
             input = RsXslt.consume(xml);
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to consume XML by XSLT",
+                ex
+            );
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final Source xsl = RsXslt.stylesheet(
@@ -193,7 +196,7 @@ public final class RsXslt extends RsWrap {
         );
         if (stylesheet == null) {
             throw new IllegalArgumentException(
-                "no associated stylesheet found in XML"
+                "No associated stylesheet found in XML"
             );
         }
         return stylesheet;
@@ -240,7 +243,10 @@ public final class RsXslt extends RsWrap {
                 try {
                     input = uri.toURL().openStream();
                 } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to open URL '%s'", uri),
+                        ex
+                    );
                 }
             } else {
                 input = this.getClass().getResourceAsStream(uri.getPath());

@@ -88,7 +88,10 @@ public final class FkHitRefresh implements Fork {
                 try {
                     new ProcessBuilder().command(cmd).start();
                 } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to run command '%s'", cmd),
+                        ex
+                    );
                 }
             },
             tke

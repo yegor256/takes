@@ -119,22 +119,24 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     @Override
     public Collection<String> getHeaders(final String header) {
-        final String prefix = String.format(
-            "%s",
-            new Lowered(header)
-        );
+        final Iterable<String> head;
         try {
-            return new ListOf<>(
-                new Filtered<>(
-                    hdr -> new StartsWith(
-                        new Lowered(hdr), new TextOf(prefix)
-                    ).value(),
-                    this.response.get().head()
-                )
-            );
+            head = this.response.get().head();
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to read the head from the request",
+                ex
+            );
         }
+        return new ListOf<>(
+            new Filtered<>(
+                hdr -> new StartsWith(
+                    new Lowered(hdr),
+                    new TextOf(String.format("%s", new Lowered(header)))
+                ).value(),
+                head
+            )
+        );
     }
 
     @Override

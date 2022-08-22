@@ -102,7 +102,10 @@ public final class XeDirectives implements XeSource {
                     list.add(dir);
                 }
             } catch (final SyntaxException ex) {
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    "Failed to parse Xembly directives",
+                    ex
+                );
             }
         }
         return list;

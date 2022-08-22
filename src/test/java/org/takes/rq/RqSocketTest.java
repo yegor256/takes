@@ -119,7 +119,7 @@ final class RqSocketTest {
                     MatcherAssert.assertThat(
                         ex.getMessage(),
                         Matchers.containsString(
-                            "header \"X-Takes-RemoteAddress\" is mandatory"
+                            "Header \"X-Takes-RemoteAddress\" is mandatory"
                         )
                     );
                     throw ex;
@@ -146,7 +146,7 @@ final class RqSocketTest {
                     MatcherAssert.assertThat(
                         ex.getMessage(),
                         Matchers.containsString(
-                            "header \"X-Takes-LocalAddress\" is mandatory"
+                            "Header \"X-Takes-LocalAddress\" is mandatory"
                         )
                     );
                     throw ex;
@@ -171,7 +171,7 @@ final class RqSocketTest {
                     MatcherAssert.assertThat(
                         ex.getMessage(),
                         Matchers.containsString(
-                            "header \"X-Takes-RemotePort\" is mandatory"
+                            "Header \"X-Takes-RemotePort\" is mandatory"
                         )
                     );
                     throw ex;
@@ -196,7 +196,7 @@ final class RqSocketTest {
                     MatcherAssert.assertThat(
                         ex.getMessage(),
                         Matchers.containsString(
-                            "header \"X-Takes-LocalPort\" is mandatory"
+                            "Header \"X-Takes-LocalPort\" is mandatory"
                         )
                     );
                     throw ex;

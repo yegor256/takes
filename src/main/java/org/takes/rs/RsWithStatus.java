@@ -103,7 +103,7 @@ public final class RsWithStatus extends RsWrap {
         if (status < 100 || status > 999) {
             throw new IllegalArgumentException(
                 String.format(
-                    "according to RFC 7230 HTTP status code must have three digits: %d",
+                    "According to RFC 7230 HTTP status code must have three digits: %d",
                     status
                 )
             );

@@ -249,7 +249,10 @@ public final class PsBasic implements Pass {
                         )
                     );
                 } catch (final UnsupportedEncodingException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to decode URN '%s'", urn.get()),
+                        ex
+                    );
                 }
             } else {
                 identity = new Opt.Empty<>();
@@ -302,7 +305,10 @@ public final class PsBasic implements Pass {
                     )
                 );
             } catch (final UnsupportedEncodingException ex) {
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    "Failed to encode user name or password",
+                    ex
+                );
             }
             final Opt<String> opt;
             if (urn == null) {

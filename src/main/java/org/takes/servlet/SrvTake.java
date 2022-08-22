@@ -119,7 +119,9 @@ public final class SrvTake extends HttpServlet {
             );
         }
         if (!this.tke.compareAndSet(null, take)) {
-            throw new IllegalStateException("Take already constructed.");
+            throw new IllegalStateException(
+                "Take is already constructed"
+            );
         }
     }
 

@@ -98,7 +98,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
                 new RqHeaders.Base(this.request).header(key)
             );
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                String.format("Failed to read header '%s'", key),
+                ex
+            );
         }
     }
 
@@ -109,7 +112,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
                 new RqHeaders.Base(this.request).names()
             );
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to parse headers in the request",
+                ex
+            );
         }
     }
 
@@ -118,7 +124,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
         try {
             return new RqMethod.Base(this.request).method();
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to get method from the request",
+                ex
+            );
         }
     }
 
@@ -159,43 +168,64 @@ public final class HttpServletRequestFake implements HttpServletRequest {
         try {
             return new RqHref.Base(this.request).href().path();
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to get HREF from Request",
+                ex
+            );
         }
     }
 
     @Override
     public String getQueryString() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            return new URI(this.getRequestURI()).getQuery();
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        return uri.getQuery();
     }
 
     @Override
     public String getServerName() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            String host = new URI(this.getRequestURI()).getHost();
-            if (host == null || host.isEmpty()) {
-                host = "localhost";
-            }
-            return host;
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        String host = uri.getHost();
+        if (host == null || host.isEmpty()) {
+            host = "localhost";
+        }
+        return host;
     }
 
     @Override
     public int getServerPort() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            int port = new URI(this.getRequestURI()).getPort();
-            if (port == -1) {
-                port = 80;
-            }
-            return port;
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        int port = uri.getPort();
+        if (port == -1) {
+            port = 80;
+        }
+        return port;
     }
 
     @Override

@@ -75,7 +75,10 @@ public final class BkTimeable extends Thread implements Back {
                 TimeUnit.SECONDS.sleep(1L);
             } catch (final InterruptedException ex) {
                 Thread.currentThread().interrupt();
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    "Interrupted while waiting",
+                    ex
+                );
             }
         }
     }

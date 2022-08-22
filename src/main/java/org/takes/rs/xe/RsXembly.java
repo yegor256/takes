@@ -142,7 +142,10 @@ public final class RsXembly extends RsWrap {
                 )
             );
         } catch (final TransformerException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to transform XML via XSLT",
+                ex
+            );
         }
         return new ByteArrayInputStream(baos.toByteArray());
     }

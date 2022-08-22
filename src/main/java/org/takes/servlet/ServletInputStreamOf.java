@@ -55,7 +55,10 @@ public final class ServletInputStreamOf extends ServletInputStream {
         try {
             finished = this.available() == 0;
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to check the available() status of the stream",
+                ex
+            );
         }
         return finished;
     }

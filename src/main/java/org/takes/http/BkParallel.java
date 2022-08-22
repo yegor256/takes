@@ -80,7 +80,10 @@ public final class BkParallel extends BkWrap {
                     try {
                         back.accept(socket);
                     } catch (final IOException ex) {
-                        throw new IllegalStateException(ex);
+                        throw new IllegalStateException(
+                            "Socket wasn't accepted by the back",
+                            ex
+                        );
                     }
                 }
             )

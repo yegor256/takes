@@ -103,7 +103,7 @@ public interface RqHeaders extends Request {
                 list = new VerboseList<>(
                     Collections.emptyList(),
                     new FormattedText(
-                        "there are no headers by name \"%s\" among %d others: %s",
+                        "There are no headers by name \"%s\" among %d others: %s",
                         key,
                         this.map().size(),
                         this.map().keySet()
@@ -113,7 +113,7 @@ public interface RqHeaders extends Request {
                 list = new VerboseList<>(
                     values,
                     new FormattedText(
-                        "there are only %d headers by name \"%s\"",
+                        "There are only %d headers by name \"%s\"",
                         values.size(),
                         key
                     )
@@ -139,18 +139,22 @@ public interface RqHeaders extends Request {
             if (!head.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    "a valid request must contain at least one line in the head"
+                    "A valid request must contain at least one line in the head"
                 );
             }
             head.next();
             final Map<String, List<String>> map = new HashMap<>(0);
+            int pos = 1;
             while (head.hasNext()) {
                 final String line = head.next();
                 final String[] parts = line.split(":", 2);
                 if (parts.length < 2) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format("invalid HTTP header: \"%s\"", line)
+                        String.format(
+                            "Invalid HTTP header on line #%d: \"%s\"",
+                            pos, line
+                        )
                     );
                 }
                 final String key = new UncheckedText(
@@ -164,6 +168,7 @@ public interface RqHeaders extends Request {
                         new Trimmed(new TextOf(parts[1]))
                     ).asString()
                 );
+                pos += 1;
             }
             return map;
         }
@@ -232,7 +237,7 @@ public interface RqHeaders extends Request {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
-                        "header \"%s\" is mandatory, not found among %s",
+                        "Header \"%s\" is mandatory, not found among %s",
                         name, this.names()
                     )
                 );

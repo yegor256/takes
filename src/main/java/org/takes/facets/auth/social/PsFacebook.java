@@ -188,11 +188,12 @@ public final class PsFacebook implements Pass {
                 this.requestor,
                 new DefaultJsonMapper(),
                 Version.LATEST
-            ).fetchObject(
-                "me", User.class
-            );
+            ).fetchObject("me", User.class);
         } catch (final FacebookException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to fetch object from Facebook token",
+                ex
+            );
         }
     }
 

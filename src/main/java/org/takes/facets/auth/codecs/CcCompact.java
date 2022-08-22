@@ -54,7 +54,10 @@ public final class CcCompact implements Codec {
                 stream.writeUTF(ent.getValue());
             }
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to encode the identity",
+                ex
+            );
         }
         return data.toByteArray();
     }

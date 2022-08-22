@@ -74,7 +74,7 @@ public final class TkRetry implements Take {
     public Response act(final Request req) throws IOException {
         if (this.count <= 0) {
             throw new IllegalArgumentException(
-                "can't make less than one attempt"
+                "Can't make less than one attempt"
             );
         }
         int attempts = 0;

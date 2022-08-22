@@ -171,7 +171,7 @@ final class Options {
             final Matcher matcher = ptn.matcher(arg);
             if (!matcher.matches()) {
                 throw new IllegalStateException(
-                    String.format("can't parse this argument: '%s'", arg)
+                    String.format("Can't parse this argument: '%s'", arg)
                 );
             }
             final String value = matcher.group(2);
