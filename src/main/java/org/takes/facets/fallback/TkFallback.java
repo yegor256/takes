@@ -233,10 +233,31 @@ public final class TkFallback extends TkWrap {
                 "[%s %s] failed in %s: %s",
                 new RqMethod.Base(req).method(),
                 new RqHref.Base(req).href(),
-                time, exp.getLocalizedMessage()
+                time, TkFallback.msg(exp)
             ),
             exp
         );
+    }
+
+    /**
+     * Get full error message from the exception and all its kids.
+     * @param exp Exception original
+     * @return Error message
+     */
+    private static String msg(final Throwable exp) {
+        final StringBuilder txt = new StringBuilder(0);
+        final String localized = exp.getLocalizedMessage();
+        if (localized == null) {
+            txt.append("NULL");
+        } else {
+            txt.append(localized);
+        }
+        final Throwable cause = exp.getCause();
+        if (cause != null) {
+            txt.append("; ");
+            txt.append(TkFallback.msg(cause));
+        }
+        return txt.toString();
     }
 
 }
