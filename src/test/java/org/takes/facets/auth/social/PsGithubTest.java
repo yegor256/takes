@@ -77,9 +77,6 @@ final class PsGithubTest {
      */
     private static final String OCTOCAT = "octocat";
 
-    /**
-     * PsGithub can fail on no access token.
-     */
     @Test
     void failsOnNoAccessToken() {
         Assertions.assertThrows(
@@ -88,10 +85,6 @@ final class PsGithubTest {
         );
     }
 
-    /**
-     * PsGithub can login.
-     * @throws Exception If some problem inside.
-     */
     @Test
     void canLogin() throws Exception {
         this.performLogin(

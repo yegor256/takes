@@ -49,10 +49,6 @@ final class FkContentTypeTest {
      */
     private static final String CTYPE = "text/html charset=iso-8859-1";
 
-    /**
-     * FkContentType can match by Content-Type header with any of types.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesWithAnyTypes() throws Exception {
         MatcherAssert.assertThat(
@@ -67,10 +63,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * FkContentType can match by Content-Type header with different types.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesDifferentTypes() throws Exception {
         MatcherAssert.assertThat(
@@ -88,10 +80,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * FkContentType can match by Content-Type header with identical types.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesIdenticalTypes() throws Exception {
         MatcherAssert.assertThat(
@@ -109,10 +97,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * FkContentType can match by Content-Type header with empty type.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesEmptyType() throws Exception {
         MatcherAssert.assertThat(
@@ -127,10 +111,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * FkContentType can match by Content-Type header with different encodings.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesDifferentEncodingsTypes() throws Exception {
         MatcherAssert.assertThat(
@@ -148,9 +128,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * Checks FkContentType equals method.
-     */
     @Test
     void mustEvaluateEqualsTest() {
         final Take take = req -> new RsEmpty();

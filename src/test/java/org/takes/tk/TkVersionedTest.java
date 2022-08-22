@@ -35,10 +35,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkVersionedTest {
 
-    /**
-     * TkVersioned can add a header with version name.
-     * @throws Exception If some problem inside
-     */
     @Test
     void attachesHeader() throws Exception {
         MatcherAssert.assertThat(

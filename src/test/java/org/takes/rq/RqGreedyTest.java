@@ -37,10 +37,6 @@ import org.takes.Request;
  */
 final class RqGreedyTest {
 
-    /**
-     * RqGreedy can make request greedy.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesRequestGreedy() throws IOException {
         final String body = new Joined(

@@ -38,11 +38,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  */
 final class XeWhenTest {
 
-    /**
-     * XeWhen can build XML response.
-     *
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
@@ -64,11 +59,6 @@ final class XeWhenTest {
         );
     }
 
-    /**
-     * XeWhen can build XML response with positive condition.
-     *
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponseFromPositiveCondition() throws IOException {
         MatcherAssert.assertThat(
@@ -91,11 +81,6 @@ final class XeWhenTest {
         );
     }
 
-    /**
-     * XeWhen can build XML response with negative condition.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
     void buildsXmlResponseFromNegativeCondition() throws Exception {
         MatcherAssert.assertThat(

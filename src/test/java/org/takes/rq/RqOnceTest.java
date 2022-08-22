@@ -38,10 +38,6 @@ import org.takes.Request;
  */
 final class RqOnceTest {
 
-    /**
-     * RqOnce can make request read-only-once for header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesRequestReadOnlyOnceAndCachesHead() throws IOException {
         final Request req = new RqOnce(
@@ -59,10 +55,6 @@ final class RqOnceTest {
         ).affirm();
     }
 
-    /**
-     * RqOnce can make request read-only-once for body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesRequestReadOnlyOnceAndCachesBody() throws IOException {
         final Request req = new RqOnce(

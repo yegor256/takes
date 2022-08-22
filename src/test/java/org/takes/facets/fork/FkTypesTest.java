@@ -37,10 +37,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkTypesTest {
 
-    /**
-     * FkTypes can match by Accept header.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByAcceptHeader() throws Exception {
         final String accept = "Accept";
@@ -64,10 +60,6 @@ final class FkTypesTest {
         );
     }
 
-    /**
-     * FkTypes can match by Accept header.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByCompositeType() throws Exception {
         MatcherAssert.assertThat(
@@ -78,10 +70,6 @@ final class FkTypesTest {
         );
     }
 
-    /**
-     * FkTypes can ignore if no Accept header present.
-     * @throws Exception If some problem inside
-     */
     @Test
     void ignoresWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
@@ -92,10 +80,6 @@ final class FkTypesTest {
         );
     }
 
-    /**
-     * FkTypes can match if no Accept header present.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesWithoutHeader() throws Exception {
         MatcherAssert.assertThat(
@@ -106,10 +90,6 @@ final class FkTypesTest {
         );
     }
 
-    /**
-     * FkTypes can rely on a Take to provide the response.
-     * @throws Exception If some problem inside
-     */
     @Test
     void reliesOnTake() throws Exception {
         MatcherAssert.assertThat(

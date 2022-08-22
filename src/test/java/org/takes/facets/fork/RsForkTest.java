@@ -39,10 +39,6 @@ import org.takes.rs.RsText;
  */
 final class RsForkTest {
 
-    /**
-     * RsFork can route by the Accept header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void negotiatesContent() throws IOException {
         final Request req = new RqFake(
@@ -65,10 +61,6 @@ final class RsForkTest {
         );
     }
 
-    /**
-     * RsFork can route without Accept header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void negotiatesContentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
@@ -82,10 +74,6 @@ final class RsForkTest {
         );
     }
 
-    /**
-     * RsFork can route by the Accept header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void negotiatesContentWithComplexHeader() throws IOException {
         final Request req = new RqFake(
@@ -109,10 +97,6 @@ final class RsForkTest {
         );
     }
 
-    /**
-     * RsFork can dispatch by request method.
-     * @throws IOException If some problem inside
-     */
     @Test
     void dispatchesByRequestMethod() throws IOException {
         MatcherAssert.assertThat(

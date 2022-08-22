@@ -35,9 +35,6 @@ import org.llorllale.cactoos.matchers.HasString;
  */
 final class RqWithHeaderTest {
 
-    /**
-     * RqWithHeader can add a header.
-     */
     @Test
     void addsHttpHeaders() {
         MatcherAssert.assertThat(
@@ -51,9 +48,6 @@ final class RqWithHeaderTest {
         );
     }
 
-    /**
-     * Checks RqWithHeader equals method.
-     */
     @Test
     void evaluateTrueEqualityTest() {
         new Assertion<>(

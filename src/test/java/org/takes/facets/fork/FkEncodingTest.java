@@ -37,10 +37,6 @@ import org.takes.rs.RsEmpty;
  */
 final class FkEncodingTest {
 
-    /**
-     * FkEncoding can match by Accept-Encoding header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void matchesByAcceptEncodingHeader() throws IOException {
         final String header = "Accept-Encoding";

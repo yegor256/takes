@@ -34,9 +34,6 @@ import org.llorllale.cactoos.matchers.IsText;
  */
 final class RsWithoutHeaderTest {
 
-    /**
-     * RsWithoutHeader can remove a header.
-     */
     @Test
     void addsHeadersToResponse() {
         new Assertion<>(

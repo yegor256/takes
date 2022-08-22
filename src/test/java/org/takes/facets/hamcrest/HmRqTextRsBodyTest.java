@@ -36,9 +36,6 @@ import org.takes.rq.RqFake;
  */
 final class HmRqTextRsBodyTest {
 
-    /**
-     * HmRqTextBody can test if body equals text.
-     */
     @Test
     void testsBodyValueContainsText() {
         final String same = "Same text";
@@ -51,9 +48,6 @@ final class HmRqTextRsBodyTest {
         );
     }
 
-    /**
-     * HmRqTextBody can test if body doesn't equal to text.
-     */
     @Test
     void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(

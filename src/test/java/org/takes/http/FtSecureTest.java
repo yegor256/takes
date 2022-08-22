@@ -48,10 +48,6 @@ import org.takes.tk.TkFixed;
  */
 @SuppressWarnings("PMD.TooManyMethods") final class FtSecureTest {
 
-    /**
-     * FtSecure can work.
-     * @throws Exception If some problem inside
-     */
     @Test
     void justWorks() throws Exception {
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
@@ -63,10 +59,6 @@ import org.takes.tk.TkFixed;
         );
     }
 
-    /**
-     * FtSecure can gracefully work with a broken back.
-     * @throws Exception If some problem inside
-     */
     @Test
     void gracefullyHandlesBrokenBack() throws Exception {
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
@@ -78,10 +70,6 @@ import org.takes.tk.TkFixed;
         );
     }
 
-    /**
-     * FtSecure can properly parse incoming HTTP request.
-     * @throws Exception If some problem inside
-     */
     @Test
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
@@ -101,10 +89,6 @@ import org.takes.tk.TkFixed;
         );
     }
 
-    /**
-     * FtSecure can consume incoming data stream.
-     * @throws Exception If some problem inside
-     */
     @Test
     void consumesIncomingDataStream() throws Exception {
         final Take take = req -> new RsText(

@@ -41,9 +41,6 @@ import org.junit.jupiter.api.Test;
  */
 final class HmTextRsBodyTest {
 
-    /**
-     * Tests mismatch description.
-     */
     @Test
     void describesMismatchCorrectly() {
         final AbstractHmTextBody<Text> matcher = new HmTextBodyFake(
@@ -60,9 +57,6 @@ final class HmTextRsBodyTest {
         );
     }
 
-    /**
-     * Tests expected description.
-     */
     @Test
     void describesExpectedCorrectly() {
         final String expected = "red";

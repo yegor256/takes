@@ -39,10 +39,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkForwardTest {
 
-    /**
-     * TkForward can catch RsForward.
-     * @throws Exception If some problem inside
-     */
     @Test
     void catchesExceptionCorrectly() throws Exception {
         final Take take = request -> {
@@ -56,10 +52,6 @@ final class TkForwardTest {
         );
     }
 
-    /**
-     * TkForward can catch RsForward throws by Response.
-     * @throws Exception If some problem inside
-     */
     @Test
     void catchesExceptionThrownByResponse() throws Exception {
         final Take take =

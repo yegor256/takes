@@ -52,10 +52,6 @@ import org.takes.rs.RsJson;
  */
 final class PsLinkedinTest {
 
-    /**
-     * PsLinkedin can login.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logins() throws Exception {
         final String tokenpath = "/uas/oauth2/accessToken";

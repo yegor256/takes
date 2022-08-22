@@ -36,10 +36,6 @@ import org.takes.rs.RsText;
  */
 final class RsPreviousTest {
 
-    /**
-     * RsPrevious can build a response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsResponse() throws IOException {
         MatcherAssert.assertThat(

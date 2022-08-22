@@ -36,10 +36,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkForkTest {
 
-    /**
-     * TkFork can dispatch by regular expression.
-     * @throws Exception If some problem inside
-     */
     @Test
     void dispatchesByRegularExpression() throws Exception {
         final String body = "hello, world!";

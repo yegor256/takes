@@ -41,9 +41,6 @@ import org.takes.rq.RqFake;
  */
 final class HmRsBodyTest {
 
-    /**
-     * HmRqBody can test if values of bodies are same.
-     */
     @Test
     void testsBodyValuesAreSame() {
         final String body = "Same";
@@ -56,9 +53,6 @@ final class HmRsBodyTest {
         );
     }
 
-    /**
-     * HmRqBody can test if values of bodies are different.
-     */
     @Test
     void testsBodyValuesAreDifferent() {
         MatcherAssert.assertThat(
@@ -70,9 +64,6 @@ final class HmRsBodyTest {
         );
     }
 
-    /**
-     * HmRqBody can describe mismatch in readable way.
-     */
     @Test
     void describesMismatchInReadableWay() {
         final Request request = new RqFake(
@@ -91,13 +82,6 @@ final class HmRsBodyTest {
         );
     }
 
-    /**
-     * HmBody can describe in readable way.
-     * @todo #893:30min Continue removing static class Matchers. Use the
-     *  classes IdentityTest.java, PsAllTest.java, PsBasicDefaultTest.java,
-     *  PsChainTest.java, HmBodyTest.java, HmRqTextBodyTest.java,
-     *  HmRsStatusTest.java, and HmRsTextBodyTest.java as an example.
-     */
     @Test
     void describeToInReadableWay() {
         final Request request = new RqFake(

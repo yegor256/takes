@@ -37,10 +37,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcPlainTest {
 
-    /**
-     * CcPlain can encode.
-     * @throws IOException If some problem inside
-     */
     @Test
     @SuppressWarnings("unchecked")
     void encodes() throws IOException {
@@ -54,10 +50,6 @@ final class CcPlainTest {
         );
     }
 
-    /**
-     * CcPlain can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
@@ -68,10 +60,6 @@ final class CcPlainTest {
         );
     }
 
-    /**
-     * CcPlain can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(

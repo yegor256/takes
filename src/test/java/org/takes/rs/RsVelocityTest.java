@@ -39,10 +39,6 @@ import org.takes.misc.StateAwareInputStream;
  */
 final class RsVelocityTest {
 
-    /**
-     * RsVelocity can build text response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsTextResponse() throws IOException {
         MatcherAssert.assertThat(
@@ -57,10 +53,6 @@ final class RsVelocityTest {
         );
     }
 
-    /**
-     * RsVelocity should close template's InputStream after serving response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void closesTemplateInputStream() throws IOException {
         final String template = "hello, world!";
@@ -80,10 +72,6 @@ final class RsVelocityTest {
         MatcherAssert.assertThat(stream.isClosed(), Matchers.is(true));
     }
 
-    /**
-     * RsVelocity should use template folder to load macros in different files.
-     * @throws IOException If some problem inside
-     */
     @Test
     void useTemplateFolder() throws IOException {
         MatcherAssert.assertThat(

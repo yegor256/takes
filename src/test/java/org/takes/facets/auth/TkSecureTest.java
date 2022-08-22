@@ -40,9 +40,6 @@ import org.takes.rs.RsEmpty;
  */
 final class TkSecureTest {
 
-    /**
-     * TkSecure can fail on anonymous access.
-     */
     @Test
     void failsOnAnonymous() {
         final Take secure = new TkSecure(request -> new RsEmpty());
@@ -52,10 +49,6 @@ final class TkSecureTest {
         );
     }
 
-    /**
-     * TkSecure can pass on registered user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void passesOnRegisteredUser() throws Exception {
         MatcherAssert.assertThat(

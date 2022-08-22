@@ -36,18 +36,11 @@ import org.takes.rq.RqFake;
  */
 final class TkSlf4jTest {
 
-    /**
-     * TkSlf4j can log message.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsMessage() throws Exception {
         new TkSlf4j(new TkText("test")).act(new RqFake());
     }
 
-    /**
-     * TkSlf4j can log exception.
-     */
     @Test
     void logsException() {
         final Take take = new TkSlf4j(new TkFailure(new IOException("")));
@@ -57,9 +50,6 @@ final class TkSlf4jTest {
         );
     }
 
-    /**
-     * TkSlf4j can log runtime exception.
-     */
     @Test
     void logsRuntimeException() {
         final Take take = new TkSlf4j(new TkFailure(new RuntimeException("")));
@@ -69,9 +59,6 @@ final class TkSlf4jTest {
         );
     }
 
-    /**
-     * TkSlf4j can work with {@link TkEmpty}.
-     */
     @Test
     void logsEmptyMessage() {
         final Take take = new TkSlf4j(new TkEmpty());

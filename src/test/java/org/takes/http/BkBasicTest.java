@@ -81,11 +81,6 @@ import org.takes.tk.TkText;
      */
     private static final String HOST = "Host:localhost";
 
-    /**
-     * BkBasic can handle socket data.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
     void handlesSocket() throws Exception {
         final MkSocket socket = BkBasicTest.createMockSocket();
@@ -98,11 +93,6 @@ import org.takes.tk.TkText;
         );
     }
 
-    /**
-     * BkBasic can return HTTP status 404 when accessing invalid URL.
-     *
-     * @throws Exception if any I/O error occurs.
-     */
     @Test
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
@@ -118,11 +108,6 @@ import org.takes.tk.TkText;
         );
     }
 
-    /**
-     * BkBasic produces headers with addresses without slashes.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
     void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
@@ -174,11 +159,6 @@ import org.takes.tk.TkText;
         );
     }
 
-    /**
-     * BkBasic can handle two requests in one connection.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";

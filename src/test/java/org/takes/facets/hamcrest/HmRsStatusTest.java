@@ -37,10 +37,6 @@ import org.takes.tk.TkHtml;
  */
 final class HmRsStatusTest {
 
-    /**
-     * HmRsStatus can test status HTTP_OK.
-     * @throws Exception If some problem inside
-     */
     @Test
     void testsStatusOk() throws Exception {
         MatcherAssert.assertThat(
@@ -53,10 +49,6 @@ final class HmRsStatusTest {
         );
     }
 
-    /**
-     * HmRsStatus can test status HTTP_NOT_FOUND.
-     * @throws Exception If some problem inside
-     */
     @Test
     void testsStatusNotFound() throws Exception {
         MatcherAssert.assertThat(

@@ -36,10 +36,6 @@ import org.takes.facets.flash.RsFlash;
  */
 final class RsForwardTest {
 
-    /**
-     * RsForward can build a proper stacktrace.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsStackTrace() throws IOException {
         MatcherAssert.assertThat(

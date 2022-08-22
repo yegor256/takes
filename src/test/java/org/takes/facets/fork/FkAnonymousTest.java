@@ -35,10 +35,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkAnonymousTest {
 
-    /**
-     * FkAnonymous can match by user status.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesIfAnonymousUser() throws Exception {
         MatcherAssert.assertThat(

@@ -37,10 +37,6 @@ import org.takes.rs.RsHeadPrint;
  */
 final class TkClasspathTest {
 
-    /**
-     * TkClasspath can dispatch by resource name.
-     * @throws Exception If some problem inside
-     */
     @Test
     void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
@@ -55,9 +51,6 @@ final class TkClasspathTest {
         );
     }
 
-    /**
-     * TkClasspath can throw when resource not found.
-     */
     @Test
     void throwsWhenResourceNotFound() {
         Assertions.assertThrows(

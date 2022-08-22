@@ -37,10 +37,6 @@ import org.takes.rs.RsPrint;
  */
 final class PsCookieTest {
 
-    /**
-     * PsCookie can add a cookie.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsCookieToResponse() throws IOException {
         new Assertion<>(

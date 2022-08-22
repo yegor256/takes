@@ -38,10 +38,6 @@ import org.mockito.Mockito;
  */
 final class CapInputStreamTest {
 
-    /**
-     * CapInputStream can put a cap on a stream.
-     * @throws IOException If some problem inside
-     */
     @Test
     void putsCapOnStream() throws IOException {
         final long length = 50L;
@@ -54,10 +50,6 @@ final class CapInputStreamTest {
         );
     }
 
-    /**
-     * CapInputStream can close a stream.
-     * @throws Exception If some problem inside
-     */
     @Test
     void closesStream() throws Exception {
         final InputStream stream = Mockito.mock(InputStream.class);
@@ -66,10 +58,6 @@ final class CapInputStreamTest {
         Mockito.verify(stream, Mockito.times(1)).close();
     }
 
-    /**
-     * CapInputStream can skip on a stream.
-     * @throws Exception If some problem inside
-     */
     @Test
     void skipsOnStream() throws Exception {
         final long skip = 25L;

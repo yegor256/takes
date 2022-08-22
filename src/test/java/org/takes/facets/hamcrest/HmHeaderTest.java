@@ -39,9 +39,6 @@ import org.takes.rq.RqWithHeaders;
  */
 final class HmHeaderTest {
 
-    /**
-     * HmRqHeader can test whether a header is available.
-     */
     @Test
     void testsHeaderAvailable() {
         MatcherAssert.assertThat(
@@ -60,9 +57,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * HmRqHeader can test whether a header value is not available.
-     */
     @Test
     void testsHeaderValueNotAvailable() {
         MatcherAssert.assertThat(
@@ -82,9 +76,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * HmRqHeader can test whether header name and value are available.
-     */
     @Test
     void testsHeaderNameAndValueAvailable() {
         MatcherAssert.assertThat(
@@ -95,10 +86,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * HmRqHeader can test whether header name is available
-     * and value is not available.
-     */
     @Test
     void testsValueNotAvailable() {
         MatcherAssert.assertThat(
@@ -111,9 +98,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * HmRqHeader can test whether multiple headers are available.
-     */
     @Test
     void testsMultipleHeadersAvailable() {
         MatcherAssert.assertThat(
@@ -127,9 +111,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * HmRqHeader can test whether a header is not available.
-     */
     @Test
     void testsHeaderNotAvailable() {
         MatcherAssert.assertThat(
@@ -140,9 +121,6 @@ final class HmHeaderTest {
         );
     }
 
-    /**
-     * Checks is mismatch message is readable.
-     */
     @Test
     void testMismatchMessage() {
         final HmHeader<Request> matcher = new HmHeader<>(

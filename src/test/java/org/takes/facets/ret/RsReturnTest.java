@@ -40,10 +40,6 @@ import org.takes.rs.RsPrint;
  */
 final class RsReturnTest {
 
-    /**
-     * RsReturn can add cookies.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsCookieToResponse() throws IOException {
         final String destination = "/return/to";
@@ -63,9 +59,6 @@ final class RsReturnTest {
         );
     }
 
-    /**
-     * RsReturn can reject invalid location.
-     */
     @Test
     void rejectsInvalidLocation() {
         Assertions.assertThrows(

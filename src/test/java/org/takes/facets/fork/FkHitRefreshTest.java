@@ -43,11 +43,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkHitRefreshTest {
 
-    /**
-     * FkHitRefresh can refresh on demand.
-     * @param temp Temporary folder.
-     * @throws Exception If some problem inside
-     */
     @Test
     void refreshesOnDemand(@TempDir final Path temp) throws Exception {
         final Request req = new RqWithHeader(
@@ -68,11 +63,6 @@ final class FkHitRefreshTest {
         MatcherAssert.assertThat(done.get(), Matchers.is(true));
     }
 
-    /**
-     * FkHitRefresh can ignore when header is absent.
-     * @param temp Temporary folder.
-     * @throws Exception If some problem inside
-     */
     @Test
     void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
         MatcherAssert.assertThat(

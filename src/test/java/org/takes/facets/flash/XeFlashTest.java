@@ -49,10 +49,6 @@ import org.takes.rs.xe.XeStylesheet;
  */
 final class XeFlashTest {
 
-    /**
-     * XeFlash can accept RsFlash cookie.
-     * @throws IOException If some problem inside
-     */
     @Test
     void acceptsRsFlashCookie() throws IOException {
         final Pattern pattern = Pattern.compile(
@@ -90,10 +86,6 @@ final class XeFlashTest {
         );
     }
 
-    /**
-     * XeFlash can accept RsFlash cookie.
-     * @throws IOException If some problem inside
-     */
     @Test
     void rendersViaStandardXsltTemplate() throws IOException {
         MatcherAssert.assertThat(

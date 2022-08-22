@@ -33,9 +33,6 @@ import org.llorllale.cactoos.matchers.HasString;
  */
 final class RsRedirectTest {
 
-    /**
-     * RsRedirect can redirect.
-     */
     @Test
     void redirects() {
         MatcherAssert.assertThat(

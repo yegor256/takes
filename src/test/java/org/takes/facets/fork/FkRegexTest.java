@@ -42,10 +42,6 @@ final class FkRegexTest {
      */
     private static final String TESTPATH = "/h/tail/";
 
-    /**
-     * FkRegex can match by regular expression.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
@@ -71,10 +67,6 @@ final class FkRegexTest {
         );
     }
 
-    /**
-     * FkRegex can remove trailing slash from URI (default).
-     * @throws Exception If some problem inside
-     */
     @Test
     void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
@@ -85,10 +77,6 @@ final class FkRegexTest {
         );
     }
 
-    /**
-     * FkRegex can keep trailing slash from URI.
-     * @throws Exception If some problem inside
-     */
     @Test
     void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(

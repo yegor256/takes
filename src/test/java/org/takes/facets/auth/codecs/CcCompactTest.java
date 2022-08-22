@@ -37,10 +37,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcCompactTest {
 
-    /**
-     * CcCompact can encode and decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     @SuppressWarnings("unchecked")
     void encodesAndDecodes() throws IOException {
@@ -56,10 +52,6 @@ final class CcCompactTest {
         );
     }
 
-    /**
-     * CcHex can decode invalid data.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(

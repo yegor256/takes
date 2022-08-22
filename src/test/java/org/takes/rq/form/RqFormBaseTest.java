@@ -43,10 +43,6 @@ final class RqFormBaseTest {
      */
     private static final String HEADER = "Content-Length: %d";
 
-    /**
-     * RqFormBase can parse body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpBody() throws IOException {
         final String body = "alpha=a+b+c&beta=%20Yes%20";
@@ -75,10 +71,6 @@ final class RqFormBaseTest {
         );
     }
 
-    /**
-     * RqFormBase can return the same (cached) instances in every call.
-     * @throws IOException if fails
-     */
     @Test
     void sameInstance() throws IOException {
         final RqForm req = new RqFormBase(

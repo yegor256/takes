@@ -42,10 +42,6 @@ import org.takes.tk.TkEmpty;
  * @since 0.17
  */
 final class TkMethodsTest {
-    /**
-     * TkMethods can call act on method that is passes to it.
-     * @throws Exception if any error occurs
-     */
     @Test
     void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);
@@ -54,9 +50,6 @@ final class TkMethodsTest {
         Mockito.verify(take).act(req);
     }
 
-    /**
-     * TkMethods can throw HttpExcection when acting on unproper method.
-     */
     @Test
     void throwsExceptionOnActinOnUnproperMethod() {
         Assertions.assertThrows(
@@ -67,10 +60,6 @@ final class TkMethodsTest {
         );
     }
 
-    /**
-     * TkMethods can return 405 status when acting on unknown method.
-     * @throws Exception If any I/O error occurs
-     */
     @Test
     void returnsMethodIsNotAllowedForUnsupportedMethods() throws
         Exception {

@@ -35,9 +35,6 @@ import org.takes.rs.RsWithBody;
  */
 final class HmRsTextRsBodyTest {
 
-    /**
-     * HmRsTextBody can test if body equals text.
-     */
     @Test
     void testsBodyValueContainsText() {
         final String same = "<h1>Hello</h1>";
@@ -47,9 +44,6 @@ final class HmRsTextRsBodyTest {
         );
     }
 
-    /**
-     * HmRsTextBody can test if body doesn't equal to text.
-     */
     @Test
     void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(

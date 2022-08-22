@@ -38,11 +38,6 @@ import org.takes.HttpException;
  */
 @SuppressWarnings("PMD.TooManyMethods") final class RqRequestLineTest {
 
-    /**
-     * RqRequestLine.Base should throw {@link HttpException} when
-     * we call requestLineHeader with
-     * Request without Request-Line.
-     */
     @Test
     void failsOnAbsentRequestLine() {
         Assertions.assertThrows(
@@ -53,11 +48,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base should throw {@link HttpException} when
-     * we call requestLineHeader with
-     * Request with illegal Request-Line.
-     */
     @Test
     void failsOnIllegalRequestLine() {
         Assertions.assertThrows(
@@ -74,11 +64,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base can return Request-Line header
-     * we call requestLineHeader with valid Request-Line.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsParams() throws IOException {
         final String requestline = "GET /hello?a=6&b=7&c&d=9%28x%29&ff";
@@ -97,11 +82,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base should throw {@link HttpException} when
-     * we call requestLineHeaderToken with
-     * Request without Request-Line.
-     */
     @Test
     void failsOnAbsentRequestLineToken() {
         Assertions.assertThrows(
@@ -112,11 +92,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base should throw {@link HttpException} when
-     * we call requestLineHeaderToken with
-     * Request with illegal Request-Line.
-     */
     @Test
     void failsOnIllegalRequestLineToken() {
         Assertions.assertThrows(
@@ -133,12 +108,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base can extract first token (METHOD)
-     * when we call requestLineHeaderToken
-     * with valid Request-Line.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
@@ -155,12 +124,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base can extract second token (URI)
-     * when we call requestLineHeaderToken
-     * with valid Request-Line.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsSecondParam() throws IOException {
         MatcherAssert.assertThat(
@@ -177,12 +140,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base can extract third token (HTTP VERSION)
-     * when we call requestLineHeaderToken
-     * with valid Request-Line.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsThirdParam() throws IOException {
         MatcherAssert.assertThat(
@@ -199,11 +156,6 @@ import org.takes.HttpException;
         );
     }
 
-    /**
-     * RqRequestLine.Base should throw {@link IllegalArgumentException}
-     * when we call requestLineHeaderToken(Token.HTTPVERSION)
-     * even for valid Request-Line without HTTP VERSION.
-     */
     @Test
     void extractsEmptyThirdParam() {
         Assertions.assertThrows(

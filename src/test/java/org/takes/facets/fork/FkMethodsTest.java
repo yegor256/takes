@@ -35,10 +35,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkMethodsTest {
 
-    /**
-     * FkMethods can match by method.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(

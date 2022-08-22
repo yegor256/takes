@@ -37,10 +37,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqLengthAwareTest {
 
-    /**
-     * RqLengthAware can add length to body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsLengthToBody() throws IOException {
         MatcherAssert.assertThat(
@@ -59,10 +55,6 @@ final class RqLengthAwareTest {
         );
     }
 
-    /**
-     * RqLengthAware can add BIG length to body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
@@ -81,10 +73,6 @@ final class RqLengthAwareTest {
         );
     }
 
-    /**
-     * RqLengthAware can read byte.
-     * @throws IOException If some problem inside
-     */
     @Test
     void readsByte() throws IOException {
         final String data = "test";
@@ -108,10 +96,6 @@ final class RqLengthAwareTest {
         );
     }
 
-    /**
-     * RqLengthAware can read byte array.
-     * @throws IOException If some problem inside
-     */
     @Test
     void readsByteArray() throws IOException {
         final String data = "array";
@@ -135,10 +119,6 @@ final class RqLengthAwareTest {
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
     }
 
-    /**
-     * RqLengthAware can read partial array.
-     * @throws IOException If some problem inside
-     */
     @Test
     void readsPartialArray() throws IOException {
         final String data = "hello world";

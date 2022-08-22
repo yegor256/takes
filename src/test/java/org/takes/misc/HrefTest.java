@@ -36,9 +36,6 @@ import org.llorllale.cactoos.matchers.HasValues;
  */
 final class HrefTest {
 
-    /**
-     * Href can build an URI.
-     */
     @Test
     void buildsUri() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
@@ -52,9 +49,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can build an URI from empty start.
-     */
     @Test
     void buildsUriFromEmpty() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
@@ -64,9 +58,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can build an URI without params.
-     */
     @Test
     void buildsUriWithoutParams() {
         final String uri = "http://a.example.com";
@@ -76,9 +67,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can get query parameters.
-     */
     @Test
     void extractsParamtetersFromQuery() {
         final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
@@ -99,9 +87,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can add path.
-     */
     @Test
     void addsPath() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
@@ -115,9 +100,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can accept encoded query part.
-     */
     @Test
     void acceptsEncodedQuery() {
         final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
@@ -131,9 +113,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can accept non properly encoded URL.
-     */
     @Test
     void acceptsNonProperlyEncodedUrl() {
         MatcherAssert.assertThat(
@@ -142,9 +121,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can build an URI with fragment.
-     */
     @Test
     void buildsUriWithFragmentAndParams() {
         MatcherAssert.assertThat(
@@ -153,9 +129,6 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can build an URI with fragment and no params.
-     */
     @Test
     void buildsUriWithFragmentAndNoParams() {
         MatcherAssert.assertThat(

@@ -34,9 +34,6 @@ import org.llorllale.cactoos.matchers.IsText;
  */
 final class RsWithHeadersTest {
 
-    /**
-     * RsWithHeaders can add headers.
-     */
     @Test
     void addsHeadersToResponse() {
         final String host = "Host: www.example.com";

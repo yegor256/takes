@@ -38,10 +38,6 @@ import org.takes.rq.RqFake;
  */
 final class RqCookiesTest {
 
-    /**
-     * RqCookies can parse a query.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
@@ -61,10 +57,6 @@ final class RqCookiesTest {
         );
     }
 
-    /**
-     * RqCookies can parse a query with empty cookie.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpQueryWithEmptyCookie() throws IOException {
         MatcherAssert.assertThat(
@@ -82,10 +74,6 @@ final class RqCookiesTest {
         );
     }
 
-    /**
-     * RqCookies can parse a request with multiple cookies.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpRequestWithMultipleCookies() throws IOException {
         MatcherAssert.assertThat(

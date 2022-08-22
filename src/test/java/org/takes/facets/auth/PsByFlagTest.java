@@ -46,10 +46,6 @@ import org.takes.rs.RsWithType;
  * @since 0.10
  */
 final class PsByFlagTest {
-    /**
-     * PsByFlag can skip if nothing found.
-     * @throws Exception If some problem inside
-     */
     @Test
     void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
@@ -64,10 +60,6 @@ final class PsByFlagTest {
         );
     }
 
-    /**
-     * PsByFlag finds flag and authenticates user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void flagIsFoundUserAuthenticated() throws Exception {
         MatcherAssert.assertThat(
@@ -81,9 +73,6 @@ final class PsByFlagTest {
         );
     }
 
-    /**
-     * PsByFlag wraps response with authenticated user.
-     */
     @Test
     @SuppressWarnings("unchecked")
     void exitTest() {
@@ -106,9 +95,6 @@ final class PsByFlagTest {
         );
     }
 
-    /**
-     * Checks PsByFlag equals method.
-     */
     @Test
     void mustEvaluateTrueEqualityTest() {
         final Map<Pattern, Pass> passes = new HashMap<>(1);

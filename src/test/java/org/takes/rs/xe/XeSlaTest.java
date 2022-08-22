@@ -37,10 +37,6 @@ import org.takes.rs.RsXslt;
  */
 final class XeSlaTest {
 
-    /**
-     * XeSLA can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
@@ -59,10 +55,6 @@ final class XeSlaTest {
         );
     }
 
-    /**
-     * XeSLA can build HTML response with default XSL template.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(

@@ -39,10 +39,6 @@ import org.takes.rs.xe.XeAppend;
  */
 final class XeGoogleLinkTest {
 
-    /**
-     * XeGoogleLink can create a correct link.
-     * @throws IOException If some problem inside
-     */
     @Test
     void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(

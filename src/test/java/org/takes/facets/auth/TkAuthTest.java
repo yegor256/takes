@@ -50,10 +50,6 @@ import org.takes.tk.TkText;
  */
 final class TkAuthTest {
 
-    /**
-     * TkAuth can login a user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserIn() throws Exception {
         final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
@@ -72,10 +68,6 @@ final class TkAuthTest {
         );
     }
 
-    /**
-     * TkAuth can login a user via cookie.
-     * @throws Exception If some problem inside
-     */
     @Test
     @SuppressWarnings("unchecked")
     void logsInUserViaCookie() throws Exception {
@@ -108,10 +100,6 @@ final class TkAuthTest {
         ).affirm();
     }
 
-    /**
-     * TkAuth can logout a user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserOut() throws Exception {
         final Pass pass = new PsLogout();
@@ -136,10 +124,6 @@ final class TkAuthTest {
         );
     }
 
-    /**
-     * TkAuth can logout a user when a login cookie is present.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserOutWithCookiePresent() throws Exception {
         new Assertion<>(

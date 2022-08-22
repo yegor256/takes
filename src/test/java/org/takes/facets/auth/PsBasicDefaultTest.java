@@ -34,9 +34,6 @@ import org.junit.jupiter.api.Test;
  */
 final class PsBasicDefaultTest {
 
-    /**
-     * PsBasic.Default can accept a correct login/password pair.
-     */
     @Test
     void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
@@ -56,10 +53,6 @@ final class PsBasicDefaultTest {
         );
     }
 
-    /**
-     * PsBasic.Default can handle both <pre>%20</pre> and <pre>+</pre>
-     * variants of encoding spaces in constructor parameters.
-     */
     @Test
     void supportsBothKindsOfSpace() {
         MatcherAssert.assertThat(
@@ -90,9 +83,6 @@ final class PsBasicDefaultTest {
         );
     }
 
-    /**
-     * PsBasic.Default can be entered by a user with a space in his name.
-     */
     @Test
     void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
@@ -110,10 +100,6 @@ final class PsBasicDefaultTest {
         );
     }
 
-    /**
-     * PsBasic.Default can url-decode an urn from its parameter.
-     * @throws Exception If fails
-     */
     @Test
     void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
@@ -136,9 +122,6 @@ final class PsBasicDefaultTest {
         );
     }
 
-    /**
-     * PsBasic.Default can reject incorrect password.
-     */
     @Test
     void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
@@ -154,9 +137,6 @@ final class PsBasicDefaultTest {
         );
     }
 
-    /**
-     * PsBasic.Default can reject a non-existing login.
-     */
     @Test
     void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(

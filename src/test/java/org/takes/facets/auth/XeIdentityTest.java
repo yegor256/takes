@@ -40,10 +40,6 @@ import org.takes.rs.xe.XeAppend;
  */
 final class XeIdentityTest {
 
-    /**
-     * XeIdentity can create a correct link.
-     * @throws IOException If some problem inside
-     */
     @Test
     void generatesIdentityInXml() throws IOException {
         MatcherAssert.assertThat(

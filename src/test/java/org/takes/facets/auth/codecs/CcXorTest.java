@@ -36,10 +36,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcXorTest {
 
-    /**
-     * CcXor can encode and decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encodesAndDecodes() throws IOException {
         final String urn = "urn:domain:9";

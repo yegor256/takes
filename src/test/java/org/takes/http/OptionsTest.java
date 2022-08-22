@@ -33,9 +33,6 @@ import org.junit.jupiter.api.Test;
  */
 final class OptionsTest {
 
-    /**
-     * Options can parse command line arguments.
-     */
     @Test
     void understandsCommandLineArgs() {
         final Options opts = new Options(

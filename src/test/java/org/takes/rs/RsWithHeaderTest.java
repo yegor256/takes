@@ -35,9 +35,6 @@ import org.llorllale.cactoos.matchers.IsText;
  */
 final class RsWithHeaderTest {
 
-    /**
-     * RsWithHeader can add headers.
-     */
     @Test
     void addsHeadersToResponse() {
         MatcherAssert.assertThat(
@@ -60,9 +57,6 @@ final class RsWithHeaderTest {
         );
     }
 
-    /**
-     * RsWithHeader can't add invalid headers.
-     */
     @Test
     void notAddsInvalidHeadersToResponse() {
         Assertions.assertThrows(

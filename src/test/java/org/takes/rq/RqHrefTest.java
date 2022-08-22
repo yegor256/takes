@@ -38,10 +38,6 @@ import org.takes.HttpException;
  */
 final class RqHrefTest {
 
-    /**
-     * RqHref.Base can parse a query.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
@@ -59,10 +55,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can parse a query with proto.
-     * @throws IOException If some problem inside
-     */
     @Test
     void takesProtoIntoAccount() throws IOException {
         MatcherAssert.assertThat(
@@ -80,10 +72,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can parse a query without a Host.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpQueryWithoutHost() throws IOException {
         MatcherAssert.assertThat(
@@ -100,10 +88,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base should throw {@link HttpException} when parsing
-     * Request without Request-Line.
-     */
     @Test
     void failsOnAbsentRequestLine() {
         Assertions.assertThrows(
@@ -114,10 +98,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base should throw {@link HttpException} when parsing
-     * Request with illegal Request-Line.
-     */
     @Test
     void failsOnIllegalRequestLine() {
         Assertions.assertThrows(
@@ -134,10 +114,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can extract params.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsParams() throws IOException {
         MatcherAssert.assertThat(
@@ -155,10 +131,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can extract first params.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
@@ -175,10 +147,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract home URI.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsHome() throws IOException {
         MatcherAssert.assertThat(
@@ -197,10 +165,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract home URI.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsHomeWithProtocol() throws IOException {
         MatcherAssert.assertThat(
@@ -220,10 +184,6 @@ final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract param with default value.
-     * @throws IOException If some problem inside
-     */
     @Test
     void extractsParamByDefault() throws IOException {
         MatcherAssert.assertThat(

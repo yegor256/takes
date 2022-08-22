@@ -37,10 +37,6 @@ import org.takes.rs.RsPrint;
  */
 final class FkChainTest {
 
-    /**
-     * FkChain can gracefully work when no fork matches the request.
-     * @throws Exception If some problem inside
-     */
     @Test
     void gracefullyHandlesNoForkMatching() throws Exception {
         MatcherAssert.assertThat(
@@ -52,10 +48,6 @@ final class FkChainTest {
         );
     }
 
-    /**
-     * FkChain can dispatch by regular expression.
-     * @throws Exception If some problem inside
-     */
     @Test
     void dispatchesByRegularExpression() throws Exception {
         final String body = "hello test!";

@@ -34,9 +34,6 @@ import org.junit.jupiter.api.Test;
  */
 final class ExpiresTest {
 
-    /**
-     * {@link Expires.Expired} can return expired time (0).
-     */
     @Test
     void returnsExpired() {
         MatcherAssert.assertThat(
@@ -46,9 +43,6 @@ final class ExpiresTest {
         );
     }
 
-    /**
-     * {@link Expires.Never} can return epoch time.
-     */
     @Test
     void returnsNever() {
         MatcherAssert.assertThat(
@@ -58,9 +52,6 @@ final class ExpiresTest {
         );
     }
 
-    /**
-     * {@link Expires.Hour} can return expiration time of an hour.
-     */
     @Test
     void returnsHour() {
         MatcherAssert.assertThat(
@@ -72,9 +63,6 @@ final class ExpiresTest {
         );
     }
 
-    /**
-     * Date can return expires date string in GMT.
-     */
     @Test
     void returnsExpiresStringInGmt() {
         MatcherAssert.assertThat(

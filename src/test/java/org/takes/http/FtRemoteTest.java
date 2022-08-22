@@ -48,10 +48,6 @@ import org.takes.tk.TkFixed;
  */
 final class FtRemoteTest {
 
-    /**
-     * FtRemote can work.
-     * @throws Exception If some problem inside
-     */
     @Test
     void simplyWorks() throws Exception {
         final byte[] data = new byte[4];
@@ -68,10 +64,6 @@ final class FtRemoteTest {
         );
     }
 
-    /**
-     * FtRemote can work in parallel threads.
-     * @throws Exception If some problem inside
-     */
     @Test
     void worksInParallelThreads() throws Exception {
         final Take take = req -> {
@@ -105,10 +97,6 @@ final class FtRemoteTest {
         }
     }
 
-    /**
-     * FtRemote can return empty response body for {@link TkEmpty}.
-     * @throws Exception If some problems inside
-     */
     @Test
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(

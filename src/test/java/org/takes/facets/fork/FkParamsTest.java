@@ -35,10 +35,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkParamsTest {
 
-    /**
-     * FkParams can match by param regex.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(

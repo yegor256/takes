@@ -43,11 +43,6 @@ import org.takes.http.FtRemote;
  */
 public final class AppTest {
 
-    /**
-     * App can work.
-     * @param temp Temporal directory
-     * @throws Exception If some problem inside
-     */
     @Test
     public void justWorks(@TempDir final Path temp) throws Exception {
         final File dir = temp.toFile();

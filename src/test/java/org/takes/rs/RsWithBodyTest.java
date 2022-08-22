@@ -36,10 +36,6 @@ import org.takes.Response;
  */
 final class RsWithBodyTest {
 
-    /**
-     * RsWithType can replace an existing type.
-     * @throws IOException If fails
-     */
     @Test
     void buildsResponseWithBody() throws IOException {
         final Response res = new RsWithBody(

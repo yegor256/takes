@@ -46,11 +46,6 @@ import org.takes.rs.RsText;
  */
 final class TkRetryTest {
 
-    /**
-     * TkRetry can work when no IOException.
-     *
-     * @throws Exception if something is wrong
-     */
     @Test
     void worksWithNoException() throws Exception {
         final String test = "test";
@@ -63,10 +58,6 @@ final class TkRetryTest {
         );
     }
 
-    /**
-     * TkRetry can retry when initial take fails once
-     * with IOException, till retry count is reached.
-     */
     @Test
     void retriesOnExceptionTillCount() {
         Assertions.assertThrows(
@@ -95,12 +86,6 @@ final class TkRetryTest {
         );
     }
 
-    /**
-     * TkRetry can retry when initial take fails with IOException,
-     * till get successful result.
-     *
-     * @throws Exception if something is wrong
-     */
     @Test
     void retriesOnExceptionTillSuccess() throws Exception {
         final int count = Tv.THREE;

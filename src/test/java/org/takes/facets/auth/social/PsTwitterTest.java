@@ -42,10 +42,6 @@ import org.takes.rq.RqFake;
  */
 final class PsTwitterTest {
 
-    /**
-     * PsTwitter can login.
-     * @throws Exception If error occurs in the process
-     */
     @Test
     void logsIn() throws Exception {
         final int tid = RandomUtils.nextInt(1000);

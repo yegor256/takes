@@ -33,9 +33,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  * @since 1.3
  */
 final class SiHmacTest {
-    /**
-     * SiHmac corrects wrong bit length.
-     */
     @Test
     void corrects() {
         new Assertion<>(
@@ -45,10 +42,6 @@ final class SiHmacTest {
         ).affirm();
     }
 
-    /**
-     * SiHmac can sign.
-     * @throws IOException If some problem inside
-     */
     @Test
     void signs() throws IOException {
         new Assertion<>(
@@ -64,9 +57,6 @@ final class SiHmacTest {
         ).affirm();
     }
 
-    /**
-     * Checks SiHmac equals method.
-     */
     @Test
     void mustEvaluateTrueEqualityTest() {
         final String key = "key";

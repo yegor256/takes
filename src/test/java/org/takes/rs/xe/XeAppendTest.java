@@ -36,10 +36,6 @@ import org.junit.jupiter.api.Test;
  */
 final class XeAppendTest {
 
-    /**
-     * XeAppend can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(

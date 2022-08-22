@@ -64,10 +64,6 @@ final class FtBasicTest {
      */
     private static final String ROOT_PATH = "/";
 
-    /**
-     * FtBasic can work.
-     * @throws Exception If some problem inside
-     */
     @Test
     void justWorks() throws Exception {
         new FtRemote(
@@ -81,10 +77,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can work with a broken back.
-     * @throws Exception If some problem inside
-     */
     @Test
     void gracefullyHandlesBrokenBack() throws Exception {
         new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
@@ -96,10 +88,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can properly parse incoming HTTP request.
-     * @throws Exception If some problem inside
-     */
     @Test
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
@@ -120,10 +108,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can work with a stuck back.
-     * @throws Exception If some problem inside
-     */
     @Test
     void gracefullyHandlesStuckBack() throws Exception {
         final Take take = request -> {
@@ -147,10 +131,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can consume incoming data stream.
-     * @throws Exception If some problem inside
-     */
     @Test
     void consumesIncomingDataStream() throws Exception {
         final Take take = req -> new RsText(
@@ -173,10 +153,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can consume twice the input stream in case of a RsText.
-     * @throws Exception If some problem inside
-     */
     @Test
     void consumesTwiceInputStreamWithRsText() throws Exception {
         final String result = "Привет RsText!";
@@ -205,10 +181,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can consume twice the input stream in case of a RsHTML.
-     * @throws Exception If some problem inside
-     */
     @Test
     void consumesTwiceInputStreamWithRsHtml() throws Exception {
         final String result = "Hello RsHTML!";
@@ -237,10 +209,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * FtBasic can work with broken pipe if {@link BkSafe} is used.
-     * @throws IOException If some problem inside
-     */
     @Test
     void gracefullyHandlesBrokenPipe() throws IOException {
         new FtBasic(

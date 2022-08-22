@@ -45,10 +45,6 @@ import org.takes.rq.RqFake;
  */
 final class PsFacebookTest {
 
-    /**
-     * Tests if PsFacebook can call DefaultFacebookClient APIs.
-     * @throws Exception if any error occurs
-     */
     @Test
     void canLogin() throws Exception {
         final String identifier = RandomStringUtils.randomAlphanumeric(10);

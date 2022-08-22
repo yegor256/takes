@@ -36,10 +36,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcSaltedTest {
 
-    /**
-     * CcSalted can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
@@ -56,10 +52,6 @@ final class CcSaltedTest {
         );
     }
 
-    /**
-     * CcSalted can encrypt/decrypt big chunk of data.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encryptsLargeData() throws IOException {
         final Identity identity = new Identity.Simple(
@@ -69,9 +61,6 @@ final class CcSaltedTest {
         new CcSalted(new CcPlain()).decode(bytes);
     }
 
-    /**
-     * CcSalted can throw when incomplete data.
-     */
     @Test
     void throwsOnIncompleteData() {
         Assertions.assertThrows(
@@ -82,9 +71,6 @@ final class CcSaltedTest {
         );
     }
 
-    /**
-     * CcSalted can throw when length of salt is negative.
-     */
     @Test
     void throwsOnZeroData() {
         Assertions.assertThrows(
@@ -95,9 +81,6 @@ final class CcSaltedTest {
         );
     }
 
-    /**
-     * CcSalted can throw on empty input.
-     */
     @Test
     void throwsOnEmptyInput() {
         Assertions.assertThrows(

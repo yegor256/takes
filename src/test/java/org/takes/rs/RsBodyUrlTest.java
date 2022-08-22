@@ -41,10 +41,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RsBodyUrlTest {
 
-    /**
-     * Body.URL can provide the expected input.
-     * @throws Exception If there is some problem inside.
-     */
     @Test
     void returnsCorrectInputWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {
@@ -63,10 +59,6 @@ final class RsBodyUrlTest {
         }
     }
 
-    /**
-     * Body.URL can provide the expected length.
-     * @throws Exception If there is some problem inside.
-     */
     @Test
     void returnsCorrectLengthWithUrl() throws Exception {
         try (TempFile file = new TempFile()) {

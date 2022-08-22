@@ -49,10 +49,6 @@ final class ChunkedInputStreamTest {
      */
     private static final String END_OF_CHUNK = "0";
 
-    /**
-     * RqChunk can read a one-chunk message.
-     * @throws IOException If some problem inside
-     */
     @Test
     void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
@@ -79,10 +75,6 @@ final class ChunkedInputStreamTest {
         stream.close();
     }
 
-    /**
-     * RqChunk can read a chunk message.
-     * @throws IOException If some problem inside
-     */
     @Test
     void readsManyChunks() throws IOException {
         final String first = "Takes is";
@@ -116,10 +108,6 @@ final class ChunkedInputStreamTest {
         stream.close();
     }
 
-    /**
-     * RqChunk accepts semi-colon and ignores parameters after semi-colon.
-     * @throws IOException If some problem inside
-     */
     @Test
     void ignoresParameterAfterSemiColon() throws IOException {
         final String data = "Build and Run";

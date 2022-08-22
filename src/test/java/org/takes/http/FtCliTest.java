@@ -44,11 +44,6 @@ import org.takes.facets.fork.TkFork;
  */
 final class FtCliTest {
 
-    /**
-     * FtCLI can work with command line args.
-     * @param temp Temporary folder.
-     * @throws Exception If some problem inside
-     */
     @Test
     void understandsCommandLineArgs(@TempDir final Path temp) throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);

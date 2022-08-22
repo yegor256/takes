@@ -37,10 +37,6 @@ import org.takes.rq.RqFake;
  */
 final class XeLinkSelfTest {
 
-    /**
-     * XeHomeSelf can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(

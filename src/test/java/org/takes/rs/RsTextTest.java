@@ -37,9 +37,6 @@ import org.llorllale.cactoos.matchers.IsText;
  */
 final class RsTextTest {
 
-    /**
-     * RsText can build a plain text response.
-     */
     @Test
     void makesPlainTextResponse() {
         final String body = "hello, world!";
@@ -58,10 +55,6 @@ final class RsTextTest {
         );
     }
 
-    /**
-     * RsText can build a response with a status.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesTextResponseWithStatus() throws IOException {
         MatcherAssert.assertThat(

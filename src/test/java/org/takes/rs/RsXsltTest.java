@@ -57,10 +57,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can convert XML to HTML.
-     * @throws IOException If some problem inside
-     */
     @Test
     void convertsXmlToHtml() throws IOException {
         final Text xml = new Joined(
@@ -88,9 +84,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can convert XML to plain text.
-     */
     @Test
     void convertsXmlToPlainText() {
         final Text xml = new Joined(
@@ -116,10 +109,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT closes decorated Response body's InputStream when XML conversion
-     * is done.
-     */
     @Test
     void closesDecoratedResponseInputStream() {
         final Text xml = new Joined(
@@ -153,9 +142,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can resolve in classpath.
-     */
     @Test
     void resolvesInClasspath() {
         MatcherAssert.assertThat(
@@ -214,10 +200,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can load XSL stylesheets from the web.
-     * @throws IOException If some problem inside
-     */
     @Test
     void loadsExternalImports() throws IOException {
         final Text xml = new Joined(

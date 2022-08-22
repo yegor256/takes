@@ -77,9 +77,6 @@ final class RsWithTypeTest {
     private static final String TYPE_WITH_CHARSET =
         "Content-Type: %s; charset=%s";
 
-    /**
-     * RsWithType can replace an existing type.
-     */
     @Test
     void replaceTypeToResponse() {
         final String type = RsWithTypeTest.TYPE_TEXT;
@@ -102,9 +99,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType does not replace response code.
-     */
     @Test
     void doesNotReplaceResponseCode() {
         final String body = "Error!";
@@ -131,9 +125,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.HTML can replace an existing type with text/html.
-     */
     @Test
     void replacesTypeWithHtml() {
         MatcherAssert.assertThat(
@@ -178,9 +169,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.JSON can replace an existing type with application/json.
-     */
     @Test
     void replacesTypeWithJson() {
         MatcherAssert.assertThat(
@@ -225,9 +213,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.XML can replace an existing type with text/xml.
-     */
     @Test
     void replacesTypeWithXml() {
         MatcherAssert.assertThat(
@@ -271,9 +256,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.Text can replace an existing type with text/plain.
-     */
     @Test
     void replacesTypeWithText() {
         MatcherAssert.assertThat(
@@ -317,9 +299,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType can add properly the content type to the header.
-     */
     @Test
     void addsContentType() {
         MatcherAssert.assertThat(
@@ -341,10 +320,6 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType can add the charset to the content type when it is explicitly
-     * specified.
-     */
     @Test
     void addsCharsetToContentType() {
         MatcherAssert.assertThat(

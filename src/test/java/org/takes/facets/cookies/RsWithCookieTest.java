@@ -41,9 +41,6 @@ final class RsWithCookieTest {
      */
     private static final String CRLF = "\r\n";
 
-    /**
-     * RsWithCookie can add cookies.
-     */
     @Test
     void addsCookieToResponse() {
         new Assertion<>(
@@ -65,9 +62,6 @@ final class RsWithCookieTest {
         ).affirm();
     }
 
-    /**
-     * RsWithCookie can add several cookies (with several decorations).
-     */
     @Test
     void addsMultipleCookies() {
         new Assertion<>(
@@ -93,9 +87,6 @@ final class RsWithCookieTest {
         ).affirm();
     }
 
-    /**
-     * RsWithCookie can reject invalid cookie name.
-     */
     @Test
     void rejectsInvalidName() {
         new Assertion<>(
@@ -108,9 +99,6 @@ final class RsWithCookieTest {
         ).affirm();
     }
 
-    /**
-     * RsWithCookie can reject invalid cookie value.
-     */
     @Test
     void rejectsInvalidValue() {
         new Assertion<>(

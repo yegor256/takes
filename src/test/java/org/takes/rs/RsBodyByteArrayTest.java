@@ -36,10 +36,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RsBodyByteArrayTest {
 
-    /**
-     * Body.ByteArray can provide the expected input.
-     * @throws Exception If there is some problem inside.
-     */
     @Test
     void returnsCorrectInputWithByteArray() throws Exception {
         final byte[] bytes =
@@ -51,10 +47,6 @@ final class RsBodyByteArrayTest {
         );
     }
 
-    /**
-     * Body.ByteArray can provide the expected length.
-     * @throws Exception If there is some problem inside.
-     */
     @Test
     void returnsCorrectLengthWithStream() throws Exception {
         final byte[] bytes =

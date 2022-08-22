@@ -60,9 +60,6 @@ final class RsHeadPrintTest {
         );
     }
 
-    /**
-     * RFC 7230 says we shall support dashes in response first line.
-     */
     @Test
     void simpleWithDash() {
         new Assertion<>(

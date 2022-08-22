@@ -45,9 +45,6 @@ import org.takes.tk.TkFixed;
  */
 final class TkProducesTest {
 
-    /**
-     * TkProduces can fail on unsupported Accept header.
-     */
     @Test
     void failsOnUnsupportedAcceptHeader() {
         Assertions.assertThrows(
@@ -71,10 +68,6 @@ final class TkProducesTest {
         );
     }
 
-    /**
-     * TkProduce can produce correct type response.
-     * @throws Exception If some problem inside
-     */
     @Test
     void producesCorrectContentTypeResponse() throws Exception {
         final Take produces = new TkProduces(

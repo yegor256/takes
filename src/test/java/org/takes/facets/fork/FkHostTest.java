@@ -35,10 +35,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkHostTest {
 
-    /**
-     * FkHost can match a host.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesByHost() throws Exception {
         MatcherAssert.assertThat(

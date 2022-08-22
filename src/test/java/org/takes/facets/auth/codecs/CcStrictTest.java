@@ -37,14 +37,6 @@ import org.takes.facets.auth.Identity;
  * @since 0.11.2
  */
 final class CcStrictTest {
-    /**
-     * CcStrict can block empty urn.
-     * @todo #877:30min replace all org.junit.Test occurrences in the project
-     *  by JUnit 5 equivalent org.junit.jupiter.api.Test and replaces
-     *  all expected Exceptions by Assertions.assertThrows. Check
-     *  org.takes.facets.auth.codecs.CcAesTest or
-     *  org.takes.facets.auth.codecs.CcSaltedTest as examples.
-     */
     @Test
     void blocksEmptyUrn() {
         Assertions.assertThrows(
@@ -53,9 +45,6 @@ final class CcStrictTest {
         );
     }
 
-    /**
-     * CcStrict can block invalid urn.
-     */
     @Test
     void blocksInvalidUrn() {
         Assertions.assertThrows(
@@ -64,10 +53,6 @@ final class CcStrictTest {
         );
     }
 
-    /**
-     * Ccstrict can decode anonymous identity without exception.
-     * @throws Exception If some problem inside
-     */
     @Test
     void canDecodeAnonymousIdentity() throws Exception {
         final Codec codec = Mockito.mock(Codec.class);
@@ -80,10 +65,6 @@ final class CcStrictTest {
         );
     }
 
-    /**
-     * CcStrict can pass valid Identities.
-     * @throws IOException If some problem inside
-     */
     @Test
     void passesValid() throws IOException {
         MatcherAssert.assertThat(

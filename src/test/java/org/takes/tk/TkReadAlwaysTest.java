@@ -38,10 +38,6 @@ import org.takes.rs.RsText;
  */
 final class TkReadAlwaysTest {
 
-    /**
-     * Send a request with body which is ignored.
-     * @throws Exception If there are problems
-     */
     @Test
     void requestBodyIsIgnored() throws Exception {
         final String expected = "response ok";

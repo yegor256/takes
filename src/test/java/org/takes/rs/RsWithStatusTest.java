@@ -41,9 +41,6 @@ import org.takes.Response;
  */
 final class RsWithStatusTest {
 
-    /**
-     * RsWithStatus can add status.
-     */
     @Test
     void addsStatus() {
         new Assertion<>(

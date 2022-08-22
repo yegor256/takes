@@ -36,9 +36,6 @@ import org.junit.jupiter.api.Test;
  */
 final class VerboseIterableTest {
 
-    /**
-     * VerboseIterable can return correct size collection.
-     */
     @Test
     void returnsCorrectSize() {
         final List<String> valid = Arrays.asList(

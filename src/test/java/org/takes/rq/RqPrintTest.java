@@ -34,9 +34,6 @@ import org.llorllale.cactoos.matchers.HasString;
  */
 final class RqPrintTest {
 
-    /**
-     * RqPrint can print a request.
-     */
     @Test
     void printsHttpRequest() {
         MatcherAssert.assertThat(

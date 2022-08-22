@@ -41,9 +41,6 @@ import org.takes.rs.RsEmpty;
  */
 final class PsAllTest {
 
-    /**
-     * Fails if PsAll with 0 Passes is created.
-     */
     @Test
     void thereShouldBeAtLeastOnePass() {
         Assertions.assertThrows(
@@ -58,9 +55,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * Fails if index is less then 0.
-     */
     @Test
     void indexMustBeNonNegative() {
         Assertions.assertThrows(
@@ -75,9 +69,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * Fails if index is greater or equal to the number of Passes to enter.
-     */
     @Test
     void indexMustBeSmallEnough() {
         Assertions.assertThrows(
@@ -95,10 +86,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * PsAll with a single Pass that can be entered should succeed.
-     * @throws Exception If fails
-     */
     @Test
     void testOneSuccessfull() throws Exception {
         MatcherAssert.assertThat(
@@ -110,10 +97,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * Fail with only one failure test.
-     * @throws Exception if exception
-     */
     @Test
     void testOneFail() throws Exception {
         MatcherAssert.assertThat(
@@ -125,11 +108,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * PsAll with multiple passes that all can be entered returns the
-     * identity specified by an index.
-     * @throws Exception If fails
-     */
     @Test
     void testSuccessfullIdx() throws Exception {
         final Pass resulting = new PsFixed(
@@ -150,10 +128,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * Fail if one of Pass fails.
-     * @throws Exception if exception
-     */
     @Test
     void testFail() throws Exception {
         MatcherAssert.assertThat(
@@ -170,10 +144,6 @@ final class PsAllTest {
         );
     }
 
-    /**
-     * Exits.
-     * @throws Exception If fails
-     */
     @Test
     void exits() throws Exception {
         final Response response = new RsEmpty();

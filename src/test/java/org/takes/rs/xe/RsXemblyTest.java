@@ -40,10 +40,6 @@ import org.xembly.Directives;
  */
 final class RsXemblyTest {
 
-    /**
-     * RsXembly can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
@@ -67,10 +63,6 @@ final class RsXemblyTest {
         );
     }
 
-    /**
-     * RsXembly can modify XML response.
-     * @throws Exception If some problem inside
-     */
     @Test
     void modifiesXmlResponse() throws Exception {
         final Document dom = DocumentBuilderFactory.newInstance()

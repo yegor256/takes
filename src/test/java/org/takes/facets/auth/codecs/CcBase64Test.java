@@ -40,10 +40,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcBase64Test {
 
-    /**
-     * CcBase64 can encode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encodes() throws IOException {
         MatcherAssert.assertThat(
@@ -56,10 +52,6 @@ final class CcBase64Test {
         );
     }
 
-    /**
-     * CcBase64 can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
@@ -71,10 +63,6 @@ final class CcBase64Test {
         );
     }
 
-    /**
-     * CcBase64 can encode and decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     @SuppressWarnings("unchecked")
     void encodesAndDecodes() throws IOException {
@@ -95,10 +83,6 @@ final class CcBase64Test {
         );
     }
 
-    /**
-     * CcBase64 can encode empty byte array.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encodesEmptyByteArray() throws IOException {
         MatcherAssert.assertThat(
@@ -111,10 +95,6 @@ final class CcBase64Test {
         );
     }
 
-    /**
-     * CcBase64 can decode non Base64 alphabet symbols.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
         try {
@@ -131,9 +111,6 @@ final class CcBase64Test {
         }
     }
 
-    /**
-     * Checks CcBase64 equals method.
-     */
     @Test
     void mustEvaluateTrueEquality() {
         new Assertion<>(

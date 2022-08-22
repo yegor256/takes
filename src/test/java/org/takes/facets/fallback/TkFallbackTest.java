@@ -39,10 +39,6 @@ import org.takes.tk.TkFailure;
  */
 final class TkFallbackTest {
 
-    /**
-     * TkFallback can fall back.
-     * @throws Exception If some problem inside
-     */
     @Test
     void fallsBack() throws Exception {
         final String err = "message";
@@ -59,10 +55,6 @@ final class TkFallbackTest {
         );
     }
 
-    /**
-     * TkFallback can fall back.
-     * @throws Exception If some problem inside
-     */
     @Test
     void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
@@ -85,9 +77,6 @@ final class TkFallbackTest {
         );
     }
 
-    /**
-     * TkFallback can throw an Exception when no fallback is available.
-     */
     @Test
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     void fallsBackWithProperMessage() {

@@ -33,9 +33,6 @@ import org.junit.jupiter.api.Test;
  */
 final class MediaTypeTest {
 
-    /**
-     * MediaType can match two types.
-     */
     @Test
     void matchesTwoTypes() {
         MatcherAssert.assertThat(
@@ -62,9 +59,6 @@ final class MediaTypeTest {
         );
     }
 
-    /**
-     * MediaType can match two types.
-     */
     @Test
     void comparesTwoTypes() {
         MatcherAssert.assertThat(
@@ -73,9 +67,6 @@ final class MediaTypeTest {
         );
     }
 
-    /**
-     * MediaType can parse invalid types.
-     */
     @Test
     void parsesInvalidTypes() {
         new MediaType("hello, how are you?");

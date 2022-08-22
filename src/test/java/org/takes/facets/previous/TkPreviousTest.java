@@ -37,10 +37,6 @@ import org.takes.tk.TkText;
  */
 final class TkPreviousTest {
 
-    /**
-     * TkPrevious can redirect.
-     * @throws Exception If some problem inside
-     */
     @Test
     void redirectsOnCookie() throws Exception {
         MatcherAssert.assertThat(

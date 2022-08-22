@@ -37,10 +37,6 @@ import org.takes.tk.TkEmpty;
  */
 final class TkFlashTest {
 
-    /**
-     * TkFlash can remove a flash cookie.
-     * @throws Exception If some problem inside
-     */
     @Test
     void removesFlashCookie() throws Exception {
         final Take take = new TkFlash(new TkEmpty());

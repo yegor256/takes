@@ -39,10 +39,6 @@ import org.takes.Request;
  */
 final class RqWithHeadersTest {
 
-    /**
-     * RqWithHeaders can add headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsHeadersToRequest() throws IOException {
         final String testheader = "TestHeader: someValue";
@@ -69,9 +65,6 @@ final class RqWithHeadersTest {
         );
     }
 
-    /**
-     * Checks RqWithHeaders equals method.
-     */
     @Test
     void mustEqualTest() {
         final Request request = new RqWithHeader(

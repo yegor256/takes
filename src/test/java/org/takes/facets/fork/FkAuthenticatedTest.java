@@ -39,10 +39,6 @@ import org.takes.tk.TkEmpty;
  */
 final class FkAuthenticatedTest {
 
-    /**
-     * FkAuthenticated can match by user status.
-     * @throws Exception If some problem inside
-     */
     @Test
     void matchesIfAuthenticatedUser() throws Exception {
         MatcherAssert.assertThat(

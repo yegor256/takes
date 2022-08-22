@@ -58,10 +58,6 @@ final class RqMtFakeTest {
     private static final String CONTENT_DISP =
         "Content-Disposition: form-data; %s";
 
-    /**
-     * RqMtFake can throw exception on no name
-     * at Content-Disposition header.
-     */
     @Test
     void throwsExceptionOnNoNameAtContentDispositionHeader() {
         Assertions.assertThrows(
@@ -77,10 +73,6 @@ final class RqMtFakeTest {
         );
     }
 
-    /**
-     * RqMtFake can throw exception on no boundary
-     * at Content-Type header.
-     */
     @Test
     void throwsExceptionOnNoBoundaryAtContentTypeHeader() {
         Assertions.assertThrows(
@@ -104,9 +96,6 @@ final class RqMtFakeTest {
         );
     }
 
-    /**
-     * RqMtFake can throw exception on invalid Content-Type header.
-     */
     @Test
     void throwsExceptionOnInvalidContentTypeHeader() {
         Assertions.assertThrows(
@@ -130,10 +119,6 @@ final class RqMtFakeTest {
         );
     }
 
-    /**
-     * RqMtFake can parse http body.
-     * @throws Exception If there is some problem inside
-     */
     @Test
     void parsesHttpBody() throws Exception {
         final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
@@ -184,11 +169,6 @@ final class RqMtFakeTest {
         }
     }
 
-    /**
-     * RqMtFake can close all parts once the request body has been
-     * closed.
-     * @throws Exception If there is some problem inside
-     */
     @Test
     void closesAllParts() throws Exception {
         final String body = "RqMtFakeTest.closesAllParts";
@@ -250,14 +230,6 @@ final class RqMtFakeTest {
         }
     }
 
-    /**
-     * RqMtFake can close all parts explicitly even if the request body
-     * has been closed.
-     * <p>For backward compatibility reason we need to ensure that we don't get
-     * {@code IOException} when we close explicitly a part even after closing
-     * the input stream of the main request.
-     * @throws Exception If there is some problem inside
-     */
     @Test
     void closesExplicitlyAllParts() throws Exception {
         final String body = "RqMtFakeTest.closesExplicitlyAllParts";
@@ -297,10 +269,6 @@ final class RqMtFakeTest {
         multi.part(bar).iterator().next().body().close();
     }
 
-    /**
-     * RqMtFake can return empty iterator on invalid part request.
-     * @throws Exception If there is some problem inside
-     */
     @Test
     void returnsEmptyIteratorOnInvalidPartRequest() throws Exception {
         final String body = "443 N Wolfe Rd, Sunnyvale, CA 94085";
@@ -331,10 +299,6 @@ final class RqMtFakeTest {
         multi.body().close();
     }
 
-    /**
-     * RqMtFake can return correct name set.
-     * @throws Exception If there is some problem inside
-     */
     @Test
     void returnsCorrectNamesSet() throws Exception {
         final String body = "441 N Wolfe Rd, Sunnyvale, CA 94085";
@@ -370,11 +334,6 @@ final class RqMtFakeTest {
         }
     }
 
-    /**
-     * Tests the bug described in #577.
-     *
-     * @throws Exception If there is some error inside
-     */
     @Test
     void contentDispositionShouldBeRecognized() throws Exception {
         new RqMtFake(

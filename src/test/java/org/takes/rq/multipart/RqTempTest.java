@@ -24,7 +24,6 @@
 package org.takes.rq.multipart;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import org.cactoos.bytes.BytesOf;
 import org.hamcrest.MatcherAssert;
@@ -38,10 +37,6 @@ import org.takes.Request;
  */
 final class RqTempTest {
 
-    /**
-     * RqTemp can delete the underlying temporary file.
-     * @throws IOException if some problem occurs.
-     */
     @Test
     void deletesTempFile() throws Exception {
         final File file = File.createTempFile(

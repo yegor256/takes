@@ -36,10 +36,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqMethodTest {
 
-    /**
-     * RqMethod can return its method.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
@@ -48,10 +44,6 @@ final class RqMethodTest {
         );
     }
 
-    /**
-     * RqMethod supports all standard HTTP methods.
-     * @throws IOException If some problem inside
-     */
     @Test
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     void supportsAllStandardMethods() throws IOException {
@@ -69,10 +61,6 @@ final class RqMethodTest {
         }
     }
 
-    /**
-     * RqMethod supports extension methods.
-     * @throws IOException If some problem inside
-     */
     @Test
     void supportsExtensionMethods() throws IOException {
         final String method = "CUSTOM";
@@ -82,9 +70,6 @@ final class RqMethodTest {
         );
     }
 
-    /**
-     * RqMethod can fail when request URI is missing.
-     */
     @Test
     void failsOnMissingUri() {
         final RqMethod.Base req = new RqMethod.Base(
@@ -96,10 +81,6 @@ final class RqMethodTest {
         );
     }
 
-    /**
-     * RqMethod can fail when HTTP method line has any extra undefined
-     * elements.
-     */
     @Test
     void failsOnExtraLineElement() {
         Assertions.assertThrows(
@@ -110,10 +91,6 @@ final class RqMethodTest {
         );
     }
 
-    /**
-     * RqMethod can fail when HTTP method line has any extra spaces
-     * between the elements.
-     */
     @Test
     void failsOnExtraSpaces() {
         Assertions.assertThrows(
@@ -124,10 +101,6 @@ final class RqMethodTest {
         );
     }
 
-    /**
-     * RqMethod can fail when HTTP extension method name contains separator
-     * characters.
-     */
     @Test
     void failsOnSeparatorsInExtensionMethod() {
         Assertions.assertThrows(

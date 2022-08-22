@@ -75,10 +75,6 @@ final class RqMtBaseTest {
         "%s: %s", RqMtBaseTest.DISPOSITION, RqMtBaseTest.FORM_DATA
     );
 
-    /**
-     * RqMtBase can satisfy equals contract.
-     * @throws IOException if some problem inside
-     */
     @Test
     void satisfiesEqualsContract() throws IOException {
         final String body = "449 N Wolfe Rd, Sunnyvale, CA 94085";
@@ -113,9 +109,6 @@ final class RqMtBaseTest {
         }
     }
 
-    /**
-     * RqMtBase can throw exception on no closing boundary found.
-     */
     @Test
     void throwsExceptionOnNoClosingBoundaryFound() {
         Assertions.assertThrows(
@@ -147,10 +140,6 @@ final class RqMtBaseTest {
         );
     }
 
-    /**
-     * RqMtBase can produce parts with Content-Length.
-     * @throws IOException If some problem inside
-     */
     @Test
     void producesPartsWithContentLength() throws IOException {
         final String part = "t2";

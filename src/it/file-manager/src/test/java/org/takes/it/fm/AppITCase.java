@@ -42,11 +42,6 @@ public final class AppITCase {
      */
     private static final String HOME = System.getProperty("takes.home");
 
-    /**
-     * App can work.
-     * @throws Exception If some problem inside
-     * @checkstyle NonStaticMethodCheck (2 lines)
-     */
     @Test
     public void justWorks() throws Exception {
         Assertions.assertNotNull(AppITCase.HOME);

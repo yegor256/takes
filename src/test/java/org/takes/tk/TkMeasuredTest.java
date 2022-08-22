@@ -35,10 +35,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkMeasuredTest {
 
-    /**
-     * TkMeasured can create a response with HTTP header "X-Take-Millis".
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsMeasuredResponse() throws Exception {
         final String header = "X-Takes-Millis";
@@ -52,10 +48,6 @@ final class TkMeasuredTest {
         );
     }
 
-    /**
-     * TkMeasured can create a response with custom HTTP header.
-     * @throws Exception If some problem occurs
-     */
     @Test
     void createsMeasuredResponseWithCustomHeader() throws Exception {
         final String header = "X-Custom-Take-Millis";

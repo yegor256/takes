@@ -40,10 +40,6 @@ import org.takes.tk.TkFixed;
  */
 final class TkJoinedCookiesTest {
 
-    /**
-     * TkJoinedCookies can join cookies.
-     * @throws Exception If some problem inside
-     */
     @Test
     void joinsCookies() throws Exception {
         new Assertion<>(

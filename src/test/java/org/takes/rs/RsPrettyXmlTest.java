@@ -41,10 +41,6 @@ import org.takes.Response;
  */
 final class RsPrettyXmlTest {
 
-    /**
-     * RsPrettyXML can format response with XML body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
@@ -57,9 +53,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can format HTML5 markup with proper DOCTYPE.
-     */
     @Test
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml5DoctypeBody() throws IOException {
@@ -75,10 +68,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can format HTML5 markup with DOCTYPE for
-     * legacy browser support.
-     */
     @Test
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
@@ -116,10 +105,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can format HTML4 markup with DOCTYPE with public
-     * and system id.
-     */
     @Test
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml4DoctypeBody() throws IOException {
@@ -162,9 +147,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can format response with non XML body.
-     */
     @Test
     void formatsNonXmlBody() {
         Assertions.assertThrows(
@@ -173,10 +155,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can report correct content length.
-     * @throws IOException If some problem inside
-     */
     @Test
     void reportsCorrectContentLength() throws IOException {
         final int clength = new RsBodyPrint(
@@ -199,9 +177,6 @@ final class RsPrettyXmlTest {
         );
     }
 
-    /**
-     * RsPrettyXML can conform to equals and hash code contract.
-     */
     @Test
     void conformsToEqualsTest() {
         final Response response = new RsWithBody("<test> <a>test</a></test>");

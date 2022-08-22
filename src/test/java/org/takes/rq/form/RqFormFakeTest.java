@@ -43,10 +43,6 @@ final class RqFormFakeTest {
      */
     private static final String HEADER = "Content-Length: %d";
 
-    /**
-     * RqFormFake can create fake forms with parameters list.
-     * @throws Exception If something goes wrong.
-     */
     @Test
     void createsFormRequestWithParams() throws Exception {
         final String key = "key";
@@ -87,10 +83,6 @@ final class RqFormFakeTest {
         );
     }
 
-    /**
-     * RqFormFake throws an IllegalArgumentException when invoked with
-     * wrong number of parameters.
-     */
     @Test
     void throwsExceptionWhenNotCorrectlyCreated() {
         Assertions.assertThrows(

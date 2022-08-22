@@ -38,10 +38,6 @@ import org.junit.jupiter.api.Test;
  */
 final class TempInputStreamTest {
 
-    /**
-     * TempInputStream can delete the underlying temporary file.
-     * @throws IOException if some problem occurs.
-     */
     @Test
     void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");

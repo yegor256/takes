@@ -35,10 +35,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqHeadersTest {
 
-    /**
-     * RqHeaders can parse headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
@@ -56,10 +52,6 @@ final class RqHeadersTest {
         );
     }
 
-    /**
-     * RqHeaders can find all headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void findsAllHeaders() throws IOException {
         MatcherAssert.assertThat(
@@ -78,10 +70,6 @@ final class RqHeadersTest {
         );
     }
 
-    /**
-     * RqHeaders.Smart can return a single header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
@@ -98,10 +86,6 @@ final class RqHeadersTest {
         );
     }
 
-    /**
-     * RqHeaders.Smart can return a default header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsDefaultHeader() throws IOException {
         final String type = "text/plain";

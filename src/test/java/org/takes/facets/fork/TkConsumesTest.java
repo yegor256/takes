@@ -52,10 +52,6 @@ final class TkConsumesTest {
      */
     private static final String APPLICATION_JSON = "application/json";
 
-    /**
-     * TkConsumes can accept request with certain Content-Type.
-     * @throws Exception If some problem inside
-     */
     @Test
     void acceptsCorrectContentTypeRequest() throws Exception {
         final String contenttype = "Content-Type: application/json";
@@ -84,9 +80,6 @@ final class TkConsumesTest {
         );
     }
 
-    /**
-     * TkConsumes can fail on unsupported Content-Type header.
-     */
     @Test
     void failsOnUnsupportedAcceptHeader() {
         Assertions.assertThrows(
@@ -109,9 +102,6 @@ final class TkConsumesTest {
         );
     }
 
-    /**
-     * Checks TkConsumes equals method.
-     */
     @Test
     void equalsAndHashCodeEqualTest() {
         final Take take = new TkText("text");

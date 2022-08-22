@@ -36,10 +36,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkWithHeadersTest {
 
-    /**
-     * TkWithHeaders can add headers.
-     * @throws java.lang.Exception If some problem inside
-     */
     @Test
     void addHeaders() throws Exception {
         final String host = "Host: www.example.com";

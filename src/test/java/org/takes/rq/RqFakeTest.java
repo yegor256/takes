@@ -40,9 +40,6 @@ import org.takes.Request;
 @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
 public final class RqFakeTest {
 
-    /**
-     * Can conform to the Object.equals() contract.
-     */
     @Test
     void conformsToEquality() {
         new Assertion<>(
@@ -60,10 +57,6 @@ public final class RqFakeTest {
         ).affirm();
     }
 
-    /**
-     * RqFake can print correctly.
-     * @throws IOException If some problem inside
-     */
     @Test
     void printsCorrectly() {
         final RqFake req = new RqFake(
@@ -80,10 +73,6 @@ public final class RqFakeTest {
         );
     }
 
-    /**
-     * RqFake can print body only once.
-     * @throws IOException If some problem inside
-     */
     @Test
     void printsBodyOnlyOnce() throws IOException {
         final String body = "the body text";

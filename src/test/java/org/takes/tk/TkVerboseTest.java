@@ -37,10 +37,6 @@ import org.takes.rq.RqFake;
  */
 final class TkVerboseTest {
 
-    /**
-     * TkVerbose can extend not-found exception.
-     * @throws Exception If some problem inside
-     */
     @Test
     void extendsNotFoundException() throws Exception {
         final Take take = request -> {

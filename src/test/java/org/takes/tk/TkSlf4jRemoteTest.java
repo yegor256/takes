@@ -28,7 +28,6 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
 import org.hamcrest.core.IsEqual;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.http.FtRemote;
 
@@ -39,11 +38,6 @@ import org.takes.http.FtRemote;
  */
 final class TkSlf4jRemoteTest {
 
-    /**
-     * TkSlf4j can return an empty response body for {@link TkEmpty}.
-     * @throws Exception if some I/O problem occurred.
-     */
-    @Disabled
     @Test
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(

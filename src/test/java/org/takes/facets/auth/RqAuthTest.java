@@ -37,10 +37,6 @@ import org.takes.rq.RqWithHeader;
  */
 final class RqAuthTest {
 
-    /**
-     * RqAuth can return identity.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsIdentity() throws IOException {
         final Identity.Simple identity = new Identity.Simple("urn:test:1");

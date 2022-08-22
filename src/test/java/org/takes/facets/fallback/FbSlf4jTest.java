@@ -34,10 +34,6 @@ import org.junit.jupiter.api.Test;
  */
 final class FbSlf4jTest {
 
-    /**
-     * FbSlf4j can log a problem.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsProblem() throws Exception {
         final RqFallback req = new RqFallback.Fake(

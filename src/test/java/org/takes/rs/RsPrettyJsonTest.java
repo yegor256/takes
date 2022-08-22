@@ -40,10 +40,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  */
 final class RsPrettyJsonTest {
 
-    /**
-     * RsPrettyJSON can format response with JSON body.
-     * @throws Exception If some problem inside
-     */
     @Test
     void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
@@ -58,9 +54,6 @@ final class RsPrettyJsonTest {
         );
     }
 
-    /**
-     * RsPrettyJSON can reject a non-JSON body.
-     */
     @Test
     void rejectsNonJsonBody() {
         Assertions.assertThrows(
@@ -69,10 +62,6 @@ final class RsPrettyJsonTest {
         );
     }
 
-    /**
-     * RsPrettyJSON can report correct content length.
-     * @throws Exception If some problem inside
-     */
     @Test
     void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -100,9 +89,6 @@ final class RsPrettyJsonTest {
         );
     }
 
-    /**
-     * RsPrettyJSON can conform to equals.
-     */
     @Test
     void mustEvaluateTrueEquality() {
         final String body = "{\"person\":{\"name\":\"John\"}}";

@@ -37,10 +37,6 @@ import org.takes.tk.TkFixed;
  */
 final class MainRemoteTest {
 
-    /**
-     * MainRemote can work.
-     * @throws Exception If some problem inside
-     */
     @Test
     void startsAndStopsApp() throws Exception {
         new MainRemote(MainRemoteTest.DemoApp.class).exec(
@@ -52,10 +48,6 @@ final class MainRemoteTest {
         );
     }
 
-    /**
-     * MainRemote passes additional arguments.
-     * @throws Exception If some problem inside
-     */
     @Test
     void passesArgumentsToApp() throws Exception {
         final String[] args = {"works well!"};

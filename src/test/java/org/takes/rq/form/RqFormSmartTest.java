@@ -36,10 +36,6 @@ import org.takes.rq.RqForm;
  */
 final class RqFormSmartTest {
 
-    /**
-     * RqFormSmart can parse one argument in body.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesOneArgumentInBody() throws IOException {
         final RqForm req = new RqFormBase(

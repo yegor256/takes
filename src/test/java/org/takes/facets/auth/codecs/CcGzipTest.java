@@ -35,10 +35,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcGzipTest {
 
-    /**
-     * CcGzip can compress and decompress.
-     * @throws Exception If some problem inside
-     */
     @Test
     void compressesAndDecompresses() throws Exception {
         final Codec gzip = new CcGzip(

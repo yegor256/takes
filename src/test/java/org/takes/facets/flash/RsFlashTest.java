@@ -40,10 +40,6 @@ import org.takes.rs.RsPrint;
  */
 final class RsFlashTest {
 
-    /**
-     * RsFlash can add cookies.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsCookieToResponse() throws IOException {
         final String msg = "hey, how are you?";
@@ -65,10 +61,6 @@ final class RsFlashTest {
         ).affirm();
     }
 
-    /**
-     * RsFlash can add cookie with specified Date.
-     * @throws IOException If some problem inside
-     */
     @Test
     void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
         new Assertion<>(
@@ -80,9 +72,6 @@ final class RsFlashTest {
         ).affirm();
     }
 
-    /**
-     * RsFlash can print itself from Throwable.
-     */
     @Test
     void printsItselfFromThrowable() {
         new Assertion<>(

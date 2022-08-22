@@ -33,9 +33,6 @@ import org.junit.jupiter.api.Test;
  */
 final class IdentityTest {
 
-    /**
-     * Identity.ANONYMOUS can be equal to itself.
-     */
     @Test
     void equalsToItself() {
         MatcherAssert.assertThat(

@@ -43,10 +43,6 @@ import org.takes.tk.TkFixed;
  */
 final class FbStatusTest {
 
-    /**
-     * FbStatus can react to correct status.
-     * @throws Exception If some problem inside
-     */
     @Test
     void reactsToCorrectStatus() throws Exception {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
@@ -62,10 +58,6 @@ final class FbStatusTest {
         );
     }
 
-    /**
-     * FbStatus can react to Condition.
-     * @throws Exception If some problem inside
-     */
     @Test
     void reactsToCondition() throws Exception {
         final RqFallback req = new RqFallback.Fake(
@@ -89,10 +81,6 @@ final class FbStatusTest {
         );
     }
 
-    /**
-     * FbStatus can ignore different status.
-     * @throws Exception If some problem inside
-     */
     @Test
     void ignoresDifferentStatus() throws Exception {
         final RqFallback req = new RqFallback.Fake(
@@ -107,12 +95,6 @@ final class FbStatusTest {
         );
     }
 
-    /**
-     * FbStatus can send correct default response with text/plain
-     * body consisting of a status code, status message and message
-     * from an exception.
-     * @throws Exception If some problem inside
-     */
     @Test
     void sendsCorrectDefaultResponse() throws Exception {
         final int code = HttpURLConnection.HTTP_NOT_FOUND;

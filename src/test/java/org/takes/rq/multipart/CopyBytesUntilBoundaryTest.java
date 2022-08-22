@@ -42,13 +42,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  */
 final class CopyBytesUntilBoundaryTest {
 
-    /**
-     * Copies last repeated bytes.
-     * @throws IOException If problems found in
-     * @todo #997:30min We introduced a test to show issue that have been
-     *  described in ticket #997. Now, we have to fix it and enable this
-     *  test.
-     */
     @Test
     @Disabled
     void copiesLastRepeatedBytes() throws IOException {

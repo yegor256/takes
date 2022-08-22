@@ -39,10 +39,6 @@ import org.takes.facets.auth.Identity;
  * @since 0.13.8
  */
 final class CcAesTest {
-    /**
-     * CcAes can encrypt identity.
-     * @throws Exception If fails
-     */
     @Test
     void encryptIdentity() throws Exception {
         final byte[] key = {
@@ -83,10 +79,6 @@ final class CcAesTest {
         );
     }
 
-    /**
-     * CcAes can decrypt identity.
-     * @throws Exception If fails
-     */
     @Test
     void decryptIdentity() throws Exception {
         final byte[] encrypted = {
@@ -119,10 +111,6 @@ final class CcAesTest {
         );
     }
 
-    /**
-     * CcAES can encode and decode.
-     * @throws Exception any unexpected exception to throw
-     */
     @Test
     void encodesAndDecodes() throws Exception {
         final int length = 128;
@@ -137,9 +125,6 @@ final class CcAesTest {
         );
     }
 
-    /**
-     * CcAES can throw the right exception.
-     */
     @Test
     void throwsRightWhenBroken() {
         Assertions.assertThrows(

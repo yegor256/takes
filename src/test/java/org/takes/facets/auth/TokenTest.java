@@ -41,9 +41,6 @@ import org.takes.facets.auth.Token.Jwt;
  * @since 1.5
  */
 final class TokenTest {
-    /**
-     * JOSE header has correct algorithm name.
-     */
     @Test
     void joseAlgorithm() {
         final JsonObject jose = new Token.Jose(256).json();
@@ -53,10 +50,6 @@ final class TokenTest {
         );
     }
 
-    /**
-     * JOSE header is encoded correctly.
-     * @throws IOException If some problem inside
-     */
     @Test
     void joseEncoded() throws IOException {
         final byte[] code = new Token.Jose(256).encoded();
@@ -70,10 +63,6 @@ final class TokenTest {
         );
     }
 
-    /**
-     * JWT header exp date is set correctly.
-     * @throws ParseException If date parsing fails
-     */
     @Test
     void jwtExpiration() throws ParseException {
         final JsonObject jose = new Token.Jwt(
@@ -96,10 +85,6 @@ final class TokenTest {
         );
     }
 
-    /**
-     * JWT header is encoded correctly.
-     * @throws IOException If some problem inside
-     */
     @Test
     void jwtEncoded() throws IOException {
         final Identity user = new Identity.Simple("test");

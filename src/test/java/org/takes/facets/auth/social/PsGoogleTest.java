@@ -128,10 +128,6 @@ final class PsGoogleTest {
      */
     private static final String APP = "app";
 
-    /**
-     * PsGoogle login.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsIn() throws Exception {
         final String octocat = "octocat";
@@ -199,9 +195,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * PsGoogle login with fail due a bad response from google.
-     */
     @Test
     void badGoogleResponse() {
         final Take take = new TkFork(
@@ -243,10 +236,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Test a google response without the displayName property.
-     * @throws Exception If some problem inside
-     */
     @Test
     void noDisplayNameResponse() throws Exception {
         final String urn = "urn:google:2";

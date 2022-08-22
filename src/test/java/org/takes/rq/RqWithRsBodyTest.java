@@ -33,10 +33,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqWithRsBodyTest {
 
-    /**
-     * RqWithBody returns body.
-     * @throws Exception If some problem inside
-     */
     @Test
     void returnsBody() throws Exception {
         final String body = "body";

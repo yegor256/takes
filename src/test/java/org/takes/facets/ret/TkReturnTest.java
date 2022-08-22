@@ -39,11 +39,6 @@ import org.takes.tk.TkEmpty;
  */
 final class TkReturnTest {
 
-    /**
-     * TkReturn can redirect to return location
-     * and remove a return cookie.
-     * @throws Exception If some problem inside
-     */
     @Test
     void redirectsAndRemovesCookie() throws Exception {
         final Take take = new TkReturn(new TkEmpty());

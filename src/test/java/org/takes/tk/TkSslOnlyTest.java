@@ -39,10 +39,6 @@ import org.takes.rs.RsText;
  */
 final class TkSslOnlyTest {
 
-    /**
-     * Redirects when it's HTTP instead of HTTPS.
-     * @throws Exception If fails
-     */
     @Test
     void redirects() throws Exception {
         final Request req = new RqFake(

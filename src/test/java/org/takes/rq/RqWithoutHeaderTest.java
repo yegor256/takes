@@ -34,10 +34,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqWithoutHeaderTest {
 
-    /**
-     * RqWithoutHeader can remove a header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void removesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(

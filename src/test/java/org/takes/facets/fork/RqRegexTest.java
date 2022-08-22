@@ -33,9 +33,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RqRegexTest {
 
-    /**
-     * RqRegex can match a string.
-     */
     @Test
     void matchesString() {
         MatcherAssert.assertThat(

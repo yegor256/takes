@@ -62,10 +62,6 @@ final class PsBasicTest {
      */
     private static final String VALID_CODE = "?valid_code=%s";
 
-    /**
-     * PsBasic can handle connection with valid credential.
-     * @throws Exception if any error occurs
-     */
     @Test
     void handleConnectionWithValidCredential() throws Exception {
         final String user = "john";
@@ -91,11 +87,6 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * PsBasic can handle connection with valid credential when Entry is
-     * a instance of Default.
-     * @throws Exception if any error occurs
-     */
     @Test
     void handleConnectionWithValidCredentialDefaultEntry()
         throws Exception {
@@ -126,10 +117,6 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * PsBasic can handle connection with invalid credential.
-     * @throws Exception If some problem inside
-     */
     @Test
     void handleConnectionWithInvalidCredential() throws Exception {
         RsForward forward = new RsForward();
@@ -163,10 +150,6 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * PsBasic can handle multiple headers with valid credential.
-     * @throws Exception If some problem inside
-     */
     @Test
     void handleMultipleHeadersWithValidCredential() throws Exception {
         final String user = "bill";
@@ -197,9 +180,6 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * PsBasic can handle multiple headers with invalid content.
-     */
     @Test
     void handleMultipleHeadersWithInvalidContent() {
         Assertions.assertThrows(
@@ -230,10 +210,6 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * PsBasic can authenticate a user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void authenticatesUser() throws Exception {
         final Take take = new TkAuth(
@@ -259,10 +235,6 @@ final class PsBasicTest {
         ).affirm();
     }
 
-    /**
-     * PsBasic can request authentication.
-     * @throws Exception If some problem inside
-     */
     @Test
     void requestAuthentication() throws Exception {
         final Take take = new TkForward(

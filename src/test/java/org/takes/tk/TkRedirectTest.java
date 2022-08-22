@@ -47,10 +47,6 @@ final class TkRedirectTest {
      */
     private static final String NEWLINE = "\r\n";
 
-    /**
-     * TkRedirect can create a response with url string.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsRedirectResponseWithUrl() throws Exception {
         final String url = "/about";
@@ -70,10 +66,6 @@ final class TkRedirectTest {
         );
     }
 
-    /**
-     * TkRedirect can create a response with HTTP status code and url string.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsRedirectResponseWithUrlAndStatus() throws Exception {
         final String url = "/";
@@ -95,10 +87,6 @@ final class TkRedirectTest {
         );
     }
 
-    /**
-     * TkRedirect should carry on the query and the fragment.
-     * @throws Exception If some problem inside
-     */
     @Test
     void ignoresQueryAndFragmentOnEmptyUrl() throws Exception {
         final String target = "/the-target";

@@ -37,9 +37,6 @@ import org.junit.jupiter.api.Test;
  */
 final class VerboseIteratorTest {
 
-    /**
-     * VerboseIterator can return next value on a valid list.
-     */
     @Test
     void returnsNextValue() {
         final String accept = "Accept: text/plain";
@@ -58,9 +55,6 @@ final class VerboseIteratorTest {
         );
     }
 
-    /**
-     * VerboseIterator can inform has a next value on a valid list.
-     */
     @Test
     void informsHasNextValue() {
         MatcherAssert.assertThat(
@@ -76,9 +70,6 @@ final class VerboseIteratorTest {
         );
     }
 
-    /**
-     * VerboseIterator next value throws exception on an empty list.
-     */
     @Test
     void nextValueThrowsExceptionOnEmptyList() {
         Assertions.assertThrows(
@@ -90,9 +81,6 @@ final class VerboseIteratorTest {
         );
     }
 
-    /**
-     * VerboseIterator returns false in has next value on empty list.
-     */
     @Test
     void returnFalseInHasNextValueOnEmptyList() {
         MatcherAssert.assertThat(
@@ -104,9 +92,6 @@ final class VerboseIteratorTest {
         );
     }
 
-    /**
-     * VerboseIterator can remove a value.
-     */
     @Test
     void removeValue() {
         Assertions.assertThrows(

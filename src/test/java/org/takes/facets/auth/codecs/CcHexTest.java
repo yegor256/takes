@@ -35,10 +35,6 @@ import org.takes.facets.auth.Identity;
  */
 final class CcHexTest {
 
-    /**
-     * CcHex can encode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encodes() throws IOException {
         final Identity identity = new Identity.Simple("urn:test:3");
@@ -48,10 +44,6 @@ final class CcHexTest {
         );
     }
 
-    /**
-     * CcHex can encode and decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void encodesAndDecodes() throws IOException {
         final String urn = "urn:test:8";
@@ -63,10 +55,6 @@ final class CcHexTest {
         );
     }
 
-    /**
-     * CcHex can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
@@ -77,10 +65,6 @@ final class CcHexTest {
         );
     }
 
-    /**
-     * CcHex can decode.
-     * @throws IOException If some problem inside
-     */
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(

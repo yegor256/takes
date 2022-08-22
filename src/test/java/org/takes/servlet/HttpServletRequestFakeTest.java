@@ -44,9 +44,6 @@ import org.takes.rq.RqWithHeaders;
  * @since 1.15
  */
 final class HttpServletRequestFakeTest {
-    /**
-     * A rule for handling an exception.
-     */
     @Test
     void failsIfAHeaderIsNotFound() {
         final HttpServletRequestFake req = new HttpServletRequestFake(

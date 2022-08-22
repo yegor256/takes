@@ -41,10 +41,6 @@ import org.takes.Request;
 @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
 final class RqSocketTest {
 
-    /**
-     * RqSocket can return local address.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnLocalAddress() throws IOException {
         MatcherAssert.assertThat(
@@ -57,10 +53,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return local port.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnLocalPort() throws IOException {
         MatcherAssert.assertThat(
@@ -71,10 +63,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return remote address.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnRemoteAddress() throws IOException {
         MatcherAssert.assertThat(
@@ -87,10 +75,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return remote port.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnRemotePort() throws IOException {
         MatcherAssert.assertThat(
@@ -101,9 +85,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return not found remote address.
-     */
     @Test
     void returnNotFoundRemoteAddress() {
         Assertions.assertThrows(
@@ -128,9 +109,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return not found local address.
-     */
     @Test
     void returnNotFoundLocalAddress() {
         Assertions.assertThrows(
@@ -155,9 +133,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return not found remote port.
-     */
     @Test
     void returnNotFoundRemotePort() {
         Assertions.assertThrows(
@@ -180,9 +155,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return not found local port.
-     */
     @Test
     void returnNotFoundLocalPort() {
         Assertions.assertThrows(
@@ -205,9 +177,6 @@ final class RqSocketTest {
         );
     }
 
-    /**
-     * Checks RqSocket equals method.
-     */
     @Test
     void mustEqualToSameTypeRequest() {
         final Request request = new RqWithHeader(

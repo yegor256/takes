@@ -48,10 +48,6 @@ import org.takes.rs.RsText;
  */
 final class TkGzipTest {
 
-    /**
-     * TkGzip can compress correctly.
-     * @throws Exception If some problem inside
-     */
     @Test
     void compressesExactly() throws Exception {
         final String body = "hello";
@@ -74,10 +70,6 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * TkGzip can compress correctly.
-     * @throws Exception If some problem inside
-     */
     @Test
     void compressesCorrectly() throws Exception {
         MatcherAssert.assertThat(
@@ -97,10 +89,6 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * TkGzip can compress on demand only.
-     * @throws Exception If some problem inside
-     */
     @Test
     void compressesOnDemandOnly() throws Exception {
         MatcherAssert.assertThat(
@@ -120,10 +108,6 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * TkGzip can return uncompressed content.
-     * @throws Exception If some problem inside
-     */
     @Test
     void doesntCompressIfNotRequired() throws Exception {
         MatcherAssert.assertThat(
@@ -142,10 +126,6 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * Compresses the output over HTTP.
-     * @throws Exception If there are problems
-     */
     @Test
     void returnsExactlyGzipBody() throws Exception {
         final String body = "Halo, Siñor!";
@@ -167,10 +147,6 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * Compresses the output over HTTP.
-     * @throws Exception If there are problems
-     */
     @Test
     void compressesOverHttp() throws Exception {
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(

@@ -84,10 +84,6 @@ final class RqMtSmartTest {
         "%s: %s", RqMtSmartTest.DISPOSITION, "form-data; name=\"%s\""
     );
 
-    /**
-     * RqMtSmart can return correct part length.
-     * @throws Exception If some problem inside
-     */
     @Test
     void returnsCorrectPartLength() throws Exception {
         final String post = "POST /post?u=3 HTTP/1.1";
@@ -127,11 +123,6 @@ final class RqMtSmartTest {
         }
     }
 
-    /**
-     * RqMtSmart can identify the boundary even if the last content to
-     * read before the pattern is an empty line.
-     * @throws IOException If some problem inside
-     */
     @Test
     void identifiesBoundary() throws Exception {
         final int length = 9000;
@@ -171,10 +162,6 @@ final class RqMtSmartTest {
         }
     }
 
-    /**
-     * RqMtSmart can work in integration mode.
-     * @throws Exception if some problem inside
-     */
     @Test
     void consumesHttpRequest() throws Exception {
         final String part = "f-1";
@@ -216,11 +203,6 @@ final class RqMtSmartTest {
         );
     }
 
-    /**
-     * RqMtSmart can handle a big request in an acceptable time.
-     * @param temp Temporary folder.
-     * @throws IOException If some problem inside
-     */
     @Test
     @Tag("performance")
     void handlesRequestInTime(@TempDir final Path temp) throws IOException {
@@ -273,11 +255,6 @@ final class RqMtSmartTest {
         }
     }
 
-    /**
-     * RqMtSmart doesn't distort the content.
-     * @param temp Temporary folder.
-     * @throws Exception If some problem inside
-     */
     @Test
     void notDistortContent(@TempDir final Path temp) throws Exception {
         final int length = 1_000_000;

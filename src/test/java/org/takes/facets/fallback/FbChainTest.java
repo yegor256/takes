@@ -36,10 +36,6 @@ import org.takes.rs.RsText;
  */
 final class FbChainTest {
 
-    /**
-     * FbChain can chain fallbacks.
-     * @throws Exception If some problem inside
-     */
     @Test
     void chainsFallbacks() throws Exception {
         final RqFallback req = new RqFallback.Fake(

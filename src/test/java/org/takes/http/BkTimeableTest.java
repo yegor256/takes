@@ -46,11 +46,6 @@ import org.takes.rs.RsText;
  */
 final class BkTimeableTest {
 
-    /**
-     * BkTimeable can stop long running Back.
-     * @param temp Temporary temp.
-     * @throws java.lang.Exception If some problem inside
-     */
     @Test
     void stopsLongRunningBack(@TempDir final File temp) throws Exception {
         final String response = "interrupted";

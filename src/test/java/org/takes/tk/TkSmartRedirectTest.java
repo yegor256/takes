@@ -33,10 +33,6 @@ import org.takes.rq.RqFake;
  * @since 0.10
  */
 final class TkSmartRedirectTest {
-    /**
-     * TkRedirect should carry on the query and the fragment.
-     * @throws Exception If some problem inside
-     */
     @Test
     void redirectCarriesQueryAndFragment() throws Exception {
         MatcherAssert.assertThat(
@@ -50,10 +46,6 @@ final class TkSmartRedirectTest {
         );
     }
 
-    /**
-     * TkRedirect should carry on the query and the fragment.
-     * @throws Exception If some problem inside
-     */
     @Test
     void redirectCarriesQueryAndFragmentOnEmptyUrl() throws Exception {
         MatcherAssert.assertThat(

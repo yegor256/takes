@@ -38,9 +38,6 @@ import org.llorllale.cactoos.matchers.Assertion;
  */
 final class RsPrintTest {
 
-    /**
-     * RsPrint can fail on invalid chars.
-     */
     @Test
     void printsBytesCorrectly() {
         final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
@@ -50,9 +47,6 @@ final class RsPrintTest {
         );
     }
 
-    /**
-     * RsPrint can fail on invalid chars.
-     */
     @Test
     void failsOnInvalidHeader() {
         final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
@@ -76,9 +70,6 @@ final class RsPrintTest {
         );
     }
 
-    /**
-     * RFC 7230 says we shall support dashes in response first line.
-     */
     @Test
     void simpleWithDash() throws Exception {
         new Assertion<>(

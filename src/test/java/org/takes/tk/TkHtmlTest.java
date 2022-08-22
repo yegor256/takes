@@ -23,8 +23,6 @@
  */
 package org.takes.tk;
 
-import java.io.InputStream;
-import org.cactoos.Scalar;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -41,10 +39,6 @@ import org.takes.rs.RsPrint;
  */
 final class TkHtmlTest {
 
-    /**
-     * TkHTML can create a text.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsTextResponse() throws Exception {
         final String body = "<html>hello, world!</html>";
@@ -63,10 +57,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * TkHTML can create a text from {@link Scalar}.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsTextResponseFromScalar() throws Exception {
         final String body = "<html>hello, world!</html>";
@@ -85,10 +75,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * TkHTML can create a text from byte array.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsTextResponseFromByteArray() throws Exception {
         final String body = "<html>hello, world!</html>";
@@ -107,10 +93,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * TkHTML can create a text from {@link InputStream}.
-     * @throws Exception If some problem inside
-     */
     @Test
     void createsTextResponseFromInputStream() throws Exception {
         final String body = "<html>hello, world!</html>";
@@ -129,10 +111,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * TkHTML can print multiple times.
-     * @throws Exception If some problem inside
-     */
     @Test
     void printsResourceMultipleTimes() throws Exception {
         final String body = "<html>hello, dude!</html>";

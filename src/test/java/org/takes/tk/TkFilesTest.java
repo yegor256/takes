@@ -44,11 +44,6 @@ import org.takes.rs.RsHeadPrint;
  */
 final class TkFilesTest {
 
-    /**
-     * TkFiles can dispatch by file name.
-     * @param temp Temporary folder.
-     * @throws Exception If some problem inside
-     */
     @Test
     @DisabledOnOs(OS.WINDOWS)
     void dispatchesByFileName(@TempDir final Path temp) throws Exception {
@@ -70,9 +65,6 @@ final class TkFilesTest {
         FileUtils.delete(file);
     }
 
-    /**
-     * TkFiles can throw when file not found.
-     */
     @Test
     void throwsWhenResourceNotFound() {
         Assertions.assertThrows(

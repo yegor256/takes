@@ -42,10 +42,6 @@ import org.takes.Response;
  */
 final class RsGzipTest {
 
-    /**
-     * RsGzip can build a compressed response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesCompressedResponse() throws IOException {
         final String text = "some unicode text: \u20ac\n\t";
@@ -63,10 +59,6 @@ final class RsGzipTest {
         );
     }
 
-    /**
-     * RsGzip can build a compressed PNG image.
-     * @throws IOException If some problem inside
-     */
     @Test
     void makesCompressedPngImage() throws IOException {
         final int width = 42;
@@ -89,10 +81,6 @@ final class RsGzipTest {
         MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(height));
     }
 
-    /**
-     * RsGzip can report correct content length.
-     * @throws IOException If some problem inside
-     */
     @Test
     void reportsCorrectContentLength() throws IOException {
         final String text = "some text to encode";

@@ -39,10 +39,6 @@ import org.takes.rs.RsText;
  */
 final class TkCorsTest {
 
-    /**
-     * TkCORS can handle connections without origin in the request.
-     * @throws Exception If some problem inside
-     */
     @Test
     void handleConnectionsWithoutOriginInTheRequest() throws Exception {
         MatcherAssert.assertThat(
@@ -56,10 +52,6 @@ final class TkCorsTest {
         );
     }
 
-    /**
-     * TkCORS can handle connections with correct domain on origin.
-     * @throws Exception If some problem inside
-     */
     @Test
     void handleConnectionsWithCorrectDomainOnOrigin() throws Exception {
         MatcherAssert.assertThat(
@@ -78,10 +70,6 @@ final class TkCorsTest {
         );
     }
 
-    /**
-     * TkCors can't handle connections with wrong domain on origin.
-     * @throws Exception If some problem inside
-     */
     @Test
     void cantHandleConnectionsWithWrongDomainOnOrigin()
         throws Exception {

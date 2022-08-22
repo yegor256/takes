@@ -51,12 +51,6 @@ import org.takes.tk.TkEmpty;
             "PMD.ModifiedCyclomaticComplexity"
         }
     ) final class BkParallelTest {
-    /**
-     * BkParallel runs requests in parallel, hence even
-     * when handling of a request blocks, other requests
-     * should be handled.
-     * @throws Exception If some problem inside
-     */
     @Test
     void requestsAreParallel() throws Exception {
         final ServerSocket socket = new ServerSocket(0);

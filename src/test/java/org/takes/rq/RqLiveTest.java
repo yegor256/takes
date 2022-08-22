@@ -44,10 +44,6 @@ final class RqLiveTest {
      */
     private static final String CRLF = "\r\n";
 
-    /**
-     * RqLive can build a request.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsHttpRequest() throws IOException {
         final Request req = new RqLive(
@@ -72,10 +68,6 @@ final class RqLiveTest {
         );
     }
 
-    /**
-     * RqLive can support multi-line headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void supportMultiLineHeaders() throws IOException {
         final Request req = new RqLive(
@@ -96,11 +88,6 @@ final class RqLiveTest {
         );
     }
 
-    /**
-     * RqLive can support multi-line headers with colon in second line.
-     * Yegor counterexample.
-     * @throws IOException If some problem inside
-     */
     @Test
     void supportMultiLineHeadersWithColon() throws IOException {
         final Request req = new RqLive(
@@ -120,9 +107,6 @@ final class RqLiveTest {
         );
     }
 
-    /**
-     * RqLive can fail when request is broken.
-     */
     @Test
     void failsOnBrokenHttpRequest() {
         Assertions.assertThrows(
@@ -135,9 +119,6 @@ final class RqLiveTest {
         );
     }
 
-    /**
-     * RqLive can fail when request is broken.
-     */
     @Test
     void failsOnInvalidCrLfInRequest() {
         Assertions.assertThrows(

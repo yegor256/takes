@@ -41,10 +41,6 @@ final class RqWithDefaultHeaderTest {
      */
     private static final String CRLF = "\r\n";
 
-    /**
-     * RqWithDefaultHeader can provide default header value.
-     * @throws IOException If some problem inside
-     */
     @Test
     void providesDefaultHeader() throws IOException {
         final String req = "GET /";
@@ -66,10 +62,6 @@ final class RqWithDefaultHeaderTest {
         );
     }
 
-    /**
-     * RqWithDefaultHeader can override default value.
-     * @throws IOException If some problem inside
-     */
     @Test
     void allowsOverrideDefaultHeader() throws IOException {
         final String req = "POST /";

@@ -34,10 +34,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RsHeadersTest {
 
-    /**
-     * RsHeaders can parse headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(

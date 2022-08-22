@@ -74,27 +74,18 @@ final class VerboseListTest {
         );
     }
 
-    /**
-     * VerboseList should delegate size method to decorated List.
-     */
     @Test
     void delegatesSize() {
         this.list.size();
         Mockito.verify(this.origin).size();
     }
 
-    /**
-     * VerboseList should delegate isEmpty method to decorated List.
-     */
     @Test
     void delegatesIsEmpty() {
         this.list.isEmpty();
         Mockito.verify(this.origin).isEmpty();
     }
 
-    /**
-     * VerboseList should delegate contains method to decorated List.
-     */
     @Test
     void delegatesContains() {
         final Object obj = new Object();
@@ -102,9 +93,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).contains(obj);
     }
 
-    /**
-     * VerboseList should return {@link VerboseIterator}.
-     */
     @Test
     void returnsVerboseIterator() {
         MatcherAssert.assertThat(
@@ -113,9 +101,6 @@ final class VerboseListTest {
         );
     }
 
-    /**
-     * VerboseList should delegate toArray method to decorated List.
-     */
     @Test
     void delegatesToArray() {
         this.list.toArray();
@@ -125,9 +110,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).toArray(array);
     }
 
-    /**
-     * VerboseList should delegate add method to decorated List.
-     */
     @Test
     void delegatesAdd() {
         final int index = 5;
@@ -138,9 +120,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).add(index, obj);
     }
 
-    /**
-     * VerboseList should delegate remove method to decorated List.
-     */
     @Test
     void delegatesRemove() {
         final int index = 5;
@@ -151,9 +130,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).remove(index);
     }
 
-    /**
-     * VerboseList should delegate containsAll method to decorated List.
-     */
     @Test
     void delegatesContainsAll() {
         final List<Object> collection = Collections.emptyList();
@@ -161,9 +137,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).containsAll(collection);
     }
 
-    /**
-     * VerboseList should delegate addAll method to decorated List.
-     */
     @Test
     void delegatesAddAll() {
         final List<Object> collection = Collections.emptyList();
@@ -174,9 +147,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).addAll(index, collection);
     }
 
-    /**
-     * VerboseList should delegate removeAll method to decorated List.
-     */
     @Test
     void delegatesRemoveAll() {
         final List<Object> collection = Collections.emptyList();
@@ -184,9 +154,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).removeAll(collection);
     }
 
-    /**
-     * VerboseList should delegate retainAll method to decorated List.
-     */
     @Test
     void delegatesRetainAll() {
         final List<Object> collection = Collections.emptyList();
@@ -194,18 +161,12 @@ final class VerboseListTest {
         Mockito.verify(this.origin).retainAll(collection);
     }
 
-    /**
-     * VerboseList should delegate clear method to decorated List.
-     */
     @Test
     void delegatesClear() {
         this.list.clear();
         Mockito.verify(this.origin).clear();
     }
 
-    /**
-     * VerboseList should delegate get method to decorated List.
-     */
     @Test
     void delegatesGet() {
         final int index = 5;
@@ -213,9 +174,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).get(index);
     }
 
-    /**
-     * VerboseList should delegate set method to decorated List.
-     */
     @Test
     void delegatesSet() {
         final int index = 5;
@@ -224,9 +182,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).set(index, obj);
     }
 
-    /**
-     * VerboseList should delegate indexOf method to decorated List.
-     */
     @Test
     void delegatesIndexOf() {
         final Object obj = new Object();
@@ -234,9 +189,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).indexOf(obj);
     }
 
-    /**
-     * VerboseList should delegate lastIndexOf method to decorated List.
-     */
     @Test
     void delegatesLastIndexOf() {
         final Object obj = new Object();
@@ -244,9 +196,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).lastIndexOf(obj);
     }
 
-    /**
-     * VerboseList should delegate listIterator method to decorated List.
-     */
     @Test
     void delegatesListIterator() {
         this.list.listIterator();
@@ -256,9 +205,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).listIterator(index);
     }
 
-    /**
-     * VerboseList should delegate subList method to decorated List.
-     */
     @Test
     void delegatesSubList() {
         final int from = 3;
@@ -267,9 +213,6 @@ final class VerboseListTest {
         Mockito.verify(this.origin).subList(from, toidx);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by addAll method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromAddAll() {
         final int index = 5;
@@ -279,9 +222,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.addAll(index, collection), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by get method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromGet() {
         final int index = 5;
@@ -290,9 +230,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.get(index), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by set method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromSet() {
         final int index = 5;
@@ -302,9 +239,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.set(index, obj), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by add method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromAdd() {
         final int index = 5;
@@ -314,9 +248,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.add(index, obj), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by remove method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromRemove() {
         final int index = 5;
@@ -325,10 +256,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.remove(index), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by listIterator
-     * method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromListIterator() {
         final int index = 5;
@@ -337,9 +264,6 @@ final class VerboseListTest {
         this.assertThat(() -> this.list.listIterator(index), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by subList method.
-     */
     @Test
     void wrapsIndexOutOfBoundsExceptionFromSubList() {
         final int from = 2;

@@ -37,10 +37,6 @@ import org.junit.jupiter.api.Test;
  */
 final class RsJsonTest {
 
-    /**
-     * RsJSON can build JSON response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsJsonResponse() throws IOException {
         final String key = "name";
@@ -55,10 +51,6 @@ final class RsJsonTest {
         );
     }
 
-    /**
-     * RsJSON can build a big JSON response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsBigJsonResponse() throws IOException {
         final int size = 100_000;

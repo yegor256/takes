@@ -36,10 +36,6 @@ import org.takes.rs.RsEmpty;
  */
 final class PsChainTest {
 
-    /**
-     * PsChain returns proper identity.
-     * @throws Exception if some problems inside
-     */
     @Test
     void chainExecutionTest() throws Exception {
         MatcherAssert.assertThat(
@@ -51,10 +47,6 @@ final class PsChainTest {
         );
     }
 
-    /**
-     * PsChain returns proper response.
-     * @throws Exception if some problems inside
-     */
     @Test
     void exitChainTest() throws Exception {
         MatcherAssert.assertThat(

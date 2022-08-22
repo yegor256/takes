@@ -39,10 +39,6 @@ import org.xembly.Directives;
  */
 final class XeTransformTest {
 
-    /**
-     * XeTransform can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
