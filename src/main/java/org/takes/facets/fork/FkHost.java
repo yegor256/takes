@@ -25,7 +25,6 @@ package org.takes.facets.fork;
 
 import lombok.EqualsAndHashCode;
 import org.cactoos.scalar.EqualsNullable;
-import org.cactoos.scalar.Ternary;
 import org.cactoos.text.Lowered;
 import org.takes.Response;
 import org.takes.Take;
@@ -69,13 +68,13 @@ public final class FkHost extends FkWrap {
     private static Fork fork(final String host, final Take take) {
         return req -> {
             final String hst = new RqHeaders.Smart(req).single("host");
-            return new Ternary<Opt<Response>>(
-                new EqualsNullable(
-                    new Lowered(host), new Lowered(hst)
-                ),
-                new Opt.Single<>(take.act(req)),
-                new Opt.Empty<>()
-            ).value();
+            final Opt<Response> ret;
+            if (new EqualsNullable(new Lowered(host), new Lowered(hst)).value()) {
+                ret = new Opt.Single<>(take.act(req));
+            } else {
+                ret = new Opt.Empty<>();
+            }
+            return ret;
         };
     }
 

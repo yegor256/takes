@@ -21,40 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fork;
+package org.takes.rq;
 
+import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.misc.Opt;
+import org.cactoos.io.InputStreamOf;
 
 /**
- * Wrap for the fork.
+ * Empty request, with only a head line (mostly for testing).
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.13
- * @see RsFork
+ * @since 0.25
  */
-@EqualsAndHashCode
-public class FkWrap implements Fork {
-
-    /**
-     * Original fork.
-     */
-    private final Fork origin;
+@EqualsAndHashCode(callSuper = true)
+public final class RqEmpty extends RqWrap {
 
     /**
      * Ctor.
-     * @param fork Original fork
      */
-    public FkWrap(final Fork fork) {
-        this.origin = fork;
+    public RqEmpty() {
+        this("GET");
     }
 
-    @Override
-    public final Opt<Response> route(final Request req) throws Exception {
-        return this.origin.route(req);
+    /**
+     * Ctor.
+     * @param method HTTP method
+     */
+    public RqEmpty(final CharSequence method) {
+        this(method, "/ HTTP/1.1");
+    }
+
+    /**
+     * Ctor.
+     * @param method HTTP method
+     * @param query HTTP query
+     */
+    public RqEmpty(final CharSequence method, final CharSequence query) {
+        super(
+            new RequestOf(
+                Arrays.asList(String.format("%s %s", method, query)),
+                new InputStreamOf("")
+            )
+        );
     }
 
 }
