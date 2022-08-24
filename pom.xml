@@ -347,6 +347,14 @@ SOFTWARE.
           <exclude>org/takes/http/keystore</exclude>
         </excludes>
       </testResource>
+      <!--
+      This is not a typo. We need to copy resources twice, one
+      time with filtering, second time without. Why? I don't know. But
+      if you remove one of these blocks, the build will fail. If you have
+      time and energy, try to figure out what's going on here and either
+      remove one of these blocks or improve this XML comment and explain
+      properly why we need this configuration.
+      -->
       <testResource>
         <filtering>false</filtering>
         <directory>${project.basedir}/src/test/resources</directory>
