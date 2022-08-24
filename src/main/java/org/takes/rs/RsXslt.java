@@ -239,7 +239,7 @@ public final class RsXslt extends RsWrap {
                 uri = URI.create(base).resolve(href);
             }
             final InputStream input;
-            if (uri.isAbsolute()) {
+            if (uri.isAbsolute() && !"file".equals(uri.getScheme())) {
                 try {
                     input = uri.toURL().openStream();
                 } catch (final IOException ex) {
