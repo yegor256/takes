@@ -41,10 +41,10 @@ import org.takes.http.FtRemote;
  * Test case for {@link org.takes.http.FtBasic}.
  * @since 0.1
  */
-public final class AppTest {
+final class AppTest {
 
     @Test
-    public void justWorks(@TempDir final Path temp) throws Exception {
+    void justWorks(@TempDir final Path temp) throws Exception {
         final File dir = temp.toFile();
         Files.write(new File(dir, "hello.txt").toPath(), "hello, world!".getBytes());
         new FtRemote(new App(dir)).exec(

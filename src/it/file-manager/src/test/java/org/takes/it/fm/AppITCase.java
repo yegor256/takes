@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link App}.
  * @since 0.16
  */
-public final class AppITCase {
+final class AppITCase {
 
     /**
      * Home with Takes server.
@@ -43,7 +43,7 @@ public final class AppITCase {
     private static final String HOME = System.getProperty("takes.home");
 
     @Test
-    public void justWorks() throws Exception {
+    void justWorks() throws Exception {
         Assertions.assertNotNull(AppITCase.HOME);
         new JdkRequest(String.format("%s/f", AppITCase.HOME))
             .through(VerboseWire.class)

@@ -38,7 +38,7 @@ import org.takes.Request;
  * @since 0.24
  */
 @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
-public final class RqFakeTest {
+final class RqFakeTest {
 
     @Test
     void conformsToEquality() {
