@@ -27,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -85,6 +87,12 @@ import org.takes.Response;
 public final class RsXslt extends RsWrap {
 
     /**
+     * Cached factory.
+     */
+    private static final Map<URIResolver, TransformerFactory> FACTORIES =
+        new ConcurrentHashMap<>(0);
+
+    /**
      * Ctor.
      * @param rsp Original response
      */
@@ -99,10 +107,32 @@ public final class RsXslt extends RsWrap {
      */
     public RsXslt(final Response rsp, final URIResolver resolver) {
         super(
-            new ResponseOf(
-                rsp::head,
-                () -> RsXslt.transform(rsp.body(), resolver)
+            new RsWithHeader(
+                new ResponseOf(
+                    rsp::head,
+                    () -> RsXslt.transform(rsp.body(), resolver)
+                ),
+                () -> String.format(
+                    "X-Takes-RsXslt-TransformerFactory: %s",
+                    RsXslt.factory(resolver).getClass().getCanonicalName()
+                )
             )
+        );
+    }
+
+    /**
+     * Get factory for the given resolver.
+     * @param resolver Resolver
+     * @return Factory
+     */
+    private static TransformerFactory factory(final URIResolver resolver) {
+        return RsXslt.FACTORIES.computeIfAbsent(
+            resolver,
+            res -> {
+                final TransformerFactory fct = TransformerFactory.newInstance();
+                fct.setURIResolver(res);
+                return fct;
+            }
         );
     }
 
@@ -115,12 +145,17 @@ public final class RsXslt extends RsWrap {
      */
     private static InputStream transform(final InputStream origin,
         final URIResolver resolver) throws IOException {
+        final TransformerFactory fct = RsXslt.factory(resolver);
         try {
-            final TransformerFactory factory = TransformerFactory.newInstance();
-            factory.setURIResolver(resolver);
-            return RsXslt.transform(factory, origin);
+            return RsXslt.transform(fct, origin);
         } catch (final TransformerException ex) {
-            throw new IOException(ex);
+            throw new IOException(
+                String.format(
+                    "Can't transform via %s",
+                    fct.getClass().getName()
+                ),
+                ex
+            );
         }
     }
 

@@ -26,6 +26,7 @@ package org.takes.rs;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.takes.Response;
@@ -99,9 +100,18 @@ public final class RsWithHeader extends RsWrap {
      * @param header Header to add
      */
     public RsWithHeader(final Response res, final CharSequence header) {
+        this(res, () -> header);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param header Header to add
+     */
+    public RsWithHeader(final Response res, final Scalar<CharSequence> header) {
         super(
             new ResponseOf(
-                () -> RsWithHeader.extend(res.head(), header.toString()),
+                () -> RsWithHeader.extend(res.head(), header.value().toString()),
                 res::body
             )
         );
