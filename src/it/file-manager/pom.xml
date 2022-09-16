@@ -68,7 +68,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
-      <version>1.18.1</version>
+      <version>1.20.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
