@@ -45,7 +45,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi.incubator</groupId>
       <artifactId>xembly</artifactId>
-      <version>0.25.0</version>
+      <version>0.28.1</version>
     </dependency>
     <dependency>
       <groupId>com.jcabi</groupId>
