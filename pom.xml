@@ -537,7 +537,7 @@ SOFTWARE.
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-core</artifactId>
-          <version>4.0.0</version>
+          <version>4.0.1</version>
           <scope>runtime</scope>
         </dependency>
         <dependency>
