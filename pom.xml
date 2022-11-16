@@ -121,7 +121,7 @@ SOFTWARE.
        https://github.com/yegor256/takes/pull/886#issuecomment-446030223
        for details.
       -->
-      <version>0.54.0</version>
+      <version>0.55.0</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
