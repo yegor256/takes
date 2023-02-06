@@ -543,7 +543,7 @@ SOFTWARE.
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-impl</artifactId>
-          <version>4.0.1</version>
+          <version>4.0.2</version>
           <scope>runtime</scope>
         </dependency>
       </dependencies>
