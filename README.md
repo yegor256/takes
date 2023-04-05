@@ -438,7 +438,7 @@ to that `Back` and might be useful if you want to add your own decorators of the
 
 ## Templates
 
-Now let's see how we can render something more complex than an plain text.
+Now let's see how we can render something more complex than a plain text.
 First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
@@ -877,7 +877,7 @@ you can compress an individual response, using `RsGzip` decorator.
 ## Content Negotiation
 
 Say, you want to return different content based on `Accept` header
-of the request (a.k.a. [content negotation](http://en.wikipedia.org/wiki/Content_negotiation)):
+of the request (a.k.a. [content negotiation](http://en.wikipedia.org/wiki/Content_negotiation)):
 
 ```java
 public final class TkIndex implements Take {
