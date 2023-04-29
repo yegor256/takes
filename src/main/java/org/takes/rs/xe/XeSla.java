@@ -24,6 +24,7 @@
 package org.takes.rs.xe;
 
 import java.lang.management.ManagementFactory;
+import java.util.Locale;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directives;
 
@@ -70,6 +71,7 @@ public final class XeSla extends XeWrap {
             () -> new Directives().attr(
                 attr.toString(),
                 String.format(
+                    Locale.US,
                     "%.3f",
                     ManagementFactory.getOperatingSystemMXBean()
                         .getSystemLoadAverage()
