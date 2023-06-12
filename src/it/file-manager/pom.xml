@@ -117,7 +117,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>7.0.5.Final</version>
+      <version>8.0.0.Final</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
