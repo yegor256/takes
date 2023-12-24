@@ -453,7 +453,7 @@ public final class TkAccount implements Take {
   public Response act(final Request req) {
     final User user = this.users.find(new RqCookies(req).get("user"));
     return new RsLogin(
-      new RsXSLT(
+      new RsXslt(
         new RsXembly(
           new XeStylesheet("/xsl/account.xsl"),
           new XeAppend("page", user)
