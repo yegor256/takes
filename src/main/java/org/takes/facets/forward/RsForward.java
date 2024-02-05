@@ -45,6 +45,7 @@ import org.takes.rs.RsWithoutHeader;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true, of = "origin")
+@SuppressWarnings("serial")
 public class RsForward extends HttpException implements Response {
 
     /**
@@ -60,7 +61,7 @@ public class RsForward extends HttpException implements Response {
     /**
      * Original response.
      */
-    private final Response origin;
+    private final transient Response origin;
 
     /**
      * Ctor.
