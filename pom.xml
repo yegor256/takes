@@ -2,7 +2,7 @@
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2014-2022 Yegor Bugayenko
+Copyright (c) 2014-2024 Yegor Bugayenko
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -287,20 +287,8 @@ SOFTWARE.
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.10.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <version>5.10.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.10.2</version>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -509,7 +497,7 @@ SOFTWARE.
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.9.1.2184</version>
+            <version>3.10.0.2594</version>
             <executions>
               <execution>
                 <phase>package</phase>

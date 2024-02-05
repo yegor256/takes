@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2022 Yegor Bugayenko
+ * Copyright (c) 2014-2024 Yegor Bugayenko
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import java.net.HttpURLConnection;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -77,6 +78,7 @@ public final class TkSecure implements Take {
         if (new RqAuth(request).identity().equals(Identity.ANONYMOUS)) {
             throw new RsForward(
                 new RsFlash("access denied", Level.WARNING),
+                HttpURLConnection.HTTP_UNAUTHORIZED,
                 this.loc
             );
         }
