@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -43,9 +44,13 @@ final class TkSecureTest {
     @Test
     void failsOnAnonymous() {
         final Take secure = new TkSecure(request -> new RsEmpty());
-        Assertions.assertThrows(
+        final RsForward exception = Assertions.assertThrows(
             RsForward.class,
             () -> secure.act(new RqFake())
+        );
+        Assertions.assertEquals(
+            exception.code(),
+            HttpURLConnection.HTTP_UNAUTHORIZED
         );
     }
 
