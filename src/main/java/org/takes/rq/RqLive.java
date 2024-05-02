@@ -69,7 +69,7 @@ public final class RqLive extends RqWrap {
         final Collection<String> head = new LinkedList<>();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<>();
-        data = RqLive.data(input, data, false);
+        data = RqLive.data(input, data);
         while (data.get() > 0) {
             eof = false;
             if (data.get() == '\r') {
@@ -82,11 +82,11 @@ public final class RqLive extends RqWrap {
                 if (header.has()) {
                     head.add(header.get());
                 }
-                data = RqLive.data(input, data, false);
+                data = RqLive.data(input, data);
                 continue;
             }
             baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
-            data = RqLive.data(input, new Opt.Empty<>(), true);
+            data = RqLive.data(input, new Opt.Empty<>());
         }
         if (eof) {
             throw new IOException("empty request");
@@ -170,18 +170,14 @@ public final class RqLive extends RqWrap {
      * Obtains new byte if hasn't.
      * @param input Stream
      * @param data Empty or current data
-     * @param available Indicates whether or not it should check first if there
-     *  are available bytes
      * @return Next or current data
      * @throws IOException if input.read() fails
      */
     private static Opt<Integer> data(final InputStream input,
-        final Opt<Integer> data, final boolean available) throws IOException {
+        final Opt<Integer> data) throws IOException {
         final Opt<Integer> ret;
         if (data.has()) {
             ret = data;
-        } else if (available && input.available() <= 0) {
-            ret = new Opt.Single<>(-1);
         } else {
             ret = new Opt.Single<>(input.read());
         }
