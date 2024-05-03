@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * An InputStream wrapper whose available() method will return 0, the first time around. This is used to simulate
- * InputStream behavior that has been shown to sometimes occur on Windows.
+ * An InputStream wrapper whose available() method will return 0, the first time around. This is used to replicate
+ * InputStream behavior that can be seen on Windows.
  * <br/>
  * Not thread-safe.
  */
