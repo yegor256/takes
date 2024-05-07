@@ -35,6 +35,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
+import org.apache.commons.io.IOUtils;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -49,6 +50,7 @@ import org.takes.facets.fork.TkFork;
 import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
+import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqPrint;
 import org.takes.rq.RqSocket;
 import org.takes.rs.ResponseOf;
@@ -167,7 +169,16 @@ import org.takes.tk.TkText;
             new Thread(
                 () -> {
                     try {
-                        new BkBasic(new TkText(text)).accept(
+                        new BkBasic(req -> {
+                            // we need to consume the request body to resolve the deadlock between RqLive.parse() trying
+                            // to read the next byte from the socket in the line
+                            // data = RqLive.data(input, new Opt.Empty<>());
+                            // and the for loop further down in this test preventing the socket from closing on the
+                            // client side (which would lead to an EOS being read by RqLive.parse(), making the server
+                            // close the connection)
+                            IOUtils.consume(new RqLengthAware(req).body());
+                            return new TkText(text).act(req);
+                        }).accept(
                             server.accept()
                         );
                     } catch (final IOException exception) {
