@@ -51,6 +51,10 @@ import org.takes.Request;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLengthAware extends RqWrap {
+    /**
+     * Constant for the Content-Length header.
+     */
+    private static final String CONTENT_LENGTH = "Content-Length";
 
     /**
      * Ctor.
@@ -68,14 +72,21 @@ public final class RqLengthAware extends RqWrap {
      */
     private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
-            .header("Content-Length").iterator();
-        InputStream body = req.body();
-        long length = (long) body.available();
+            .header(RqLengthAware.CONTENT_LENGTH).iterator();
+        final InputStream result;
         if (hdr.hasNext()) {
-            length = Long.parseLong(hdr.next());
+            final String value = hdr.next();
+            try {
+                result = new CapInputStream(req.body(), Long.parseLong(value));
+            } catch (final NumberFormatException ex) {
+                final String msg = "Invalid %s header: %s";
+                final String formated = String.format(msg, RqLengthAware.CONTENT_LENGTH, value);
+                throw new IOException(formated, ex);
+            }
+        } else {
+            result = req.body();
         }
-        body = new CapInputStream(body, length);
-        return body;
+        return result;
     }
 
 }
