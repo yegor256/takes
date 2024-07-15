@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth.codecs;
 
-import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -44,6 +43,11 @@ public final class CcSalted implements Codec {
      * Random generator.
      */
     private static final Random RND = new SecureRandom();
+
+    /**
+     * Maximum reandom size.
+     */
+    private static final int RND_MAX_SIZE = 10;
 
     /**
      * Original codec.
@@ -75,7 +79,7 @@ public final class CcSalted implements Codec {
      */
     @SuppressWarnings("PMD.AvoidArrayLoops")
     private static byte[] salt(final byte[] text) {
-        final byte size = (byte) CcSalted.RND.nextInt(Tv.TEN);
+        final byte size = (byte) CcSalted.RND.nextInt(CcSalted.RND_MAX_SIZE);
         final byte[] output = new byte[text.length + (int) size + 2];
         output[0] = size;
         byte sum = (byte) 0;

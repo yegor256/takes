@@ -23,12 +23,12 @@
  */
 package org.takes.facets.auth;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.TimeZone;
-import javax.json.Json;
-import javax.json.JsonObject;
 
 /**
  * JSON Token.

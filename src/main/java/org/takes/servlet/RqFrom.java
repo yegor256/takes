@@ -23,13 +23,12 @@
  */
 package org.takes.servlet;
 
-import com.jcabi.aspects.Tv;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
-import javax.servlet.http.HttpServletRequest;
 import org.takes.Request;
 
 /**
@@ -95,6 +94,12 @@ final class RqFrom implements Request {
      * @since 2.0
      */
     private static final class HttpHead {
+
+        /**
+         * Initial buffer capacity.
+         */
+        private static final int BUFF_SIZE = 20;
+
         /**
          * Servlet request.
          */
@@ -110,7 +115,7 @@ final class RqFrom implements Request {
 
         @Override
         public String toString() {
-            final StringBuilder bld = new StringBuilder(Tv.TWENTY)
+            final StringBuilder bld = new StringBuilder(HttpHead.BUFF_SIZE)
                 .append(this.req.getMethod())
                 .append(' ');
             final String uri = this.req.getRequestURI();
@@ -138,6 +143,11 @@ final class RqFrom implements Request {
         private static final int PORT_DEFAULT = 80;
 
         /**
+         * Initial buffer capacity.
+         */
+        private static final int BUFF_SIZE = 100;
+
+        /**
          * Servlet request.
          */
         private final HttpServletRequest req;
@@ -152,7 +162,7 @@ final class RqFrom implements Request {
 
         @Override
         public String toString() {
-            final StringBuilder bld = new StringBuilder(Tv.HUNDRED);
+            final StringBuilder bld = new StringBuilder(HttpHost.BUFF_SIZE);
             bld.append("Host: ").append(this.req.getServerName());
             final int port = this.req.getServerPort();
             if (port != HttpHost.PORT_DEFAULT) {

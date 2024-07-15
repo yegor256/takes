@@ -23,8 +23,8 @@
  */
 package org.takes.facets.auth.social;
 
+import jakarta.json.Json;
 import java.io.IOException;
-import javax.json.Json;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;

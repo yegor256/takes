@@ -23,10 +23,10 @@
  */
 package org.takes.servlet;
 
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.servlet.ReadListener;
-import javax.servlet.ServletInputStream;
 
 /**
  * ServletIInputStream that decorates a {@link InputStream} to be used

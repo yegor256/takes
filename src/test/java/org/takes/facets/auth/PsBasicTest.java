@@ -23,8 +23,7 @@
  */
 package org.takes.facets.auth;
 
-import com.jcabi.aspects.Tv;
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -62,6 +61,11 @@ final class PsBasicTest {
      */
     private static final String VALID_CODE = "?valid_code=%s";
 
+    /**
+     * Size for random symbol generator.
+     */
+    private static final int TEN = 10;
+
     @Test
     void handleConnectionWithValidCredential() throws Exception {
         final String user = "john";
@@ -74,7 +78,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "pass")
@@ -104,7 +108,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
                     )
                 ),
                 PsBasicTest.header(user, password)
@@ -130,7 +134,7 @@ final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                            RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
                         )
                     ),
                     PsBasicTest.header("username", "wrong")
@@ -162,7 +166,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        RandomStringUtils.randomAlphanumeric(Tv.TEN)
+                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
                     )
                 ),
                 PsBasicTest.header(user, "changeit"),

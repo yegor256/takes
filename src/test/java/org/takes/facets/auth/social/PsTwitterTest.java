@@ -25,8 +25,8 @@
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
+import jakarta.json.Json;
 import java.util.Collections;
-import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.hamcrest.CoreMatchers;

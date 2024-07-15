@@ -23,18 +23,18 @@
  */
 package org.takes.rs;
 
+import jakarta.json.Json;
+import jakarta.json.JsonException;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonWriter;
+import jakarta.json.stream.JsonGenerator;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.json.Json;
-import javax.json.JsonException;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.json.JsonWriter;
-import javax.json.stream.JsonGenerator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;

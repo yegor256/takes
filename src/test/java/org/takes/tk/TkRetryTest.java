@@ -24,7 +24,6 @@
 
 package org.takes.tk;
 
-import com.jcabi.aspects.Tv;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -46,6 +45,26 @@ import org.takes.rs.RsText;
  */
 final class TkRetryTest {
 
+    /**
+     * Number of retry attempts.
+     */
+    private static final int COUNT = 3;
+
+    /**
+     * Time between retries.
+     */
+    private static final int DELAY = 1000;
+
+    /**
+     * Magic number.
+     */
+    private static final int HUNDRED = 100;
+
+    /**
+     * Seconds to nanoseconds conversion factor.
+     */
+    private static final int TO_NANOS = 1_000_000;
+
     @Test
     void worksWithNoException() throws Exception {
         final String test = "test";
@@ -63,8 +82,8 @@ final class TkRetryTest {
         Assertions.assertThrows(
             IOException.class,
             () -> {
-                final int count = Tv.THREE;
-                final int delay = Tv.THOUSAND;
+                final int count = TkRetryTest.COUNT;
+                final int delay = TkRetryTest.DELAY;
                 final Take take = Mockito.mock(Take.class);
                 Mockito
                     .when(take.act(Mockito.any(Request.class)))
@@ -77,7 +96,9 @@ final class TkRetryTest {
                 } catch (final IOException exception) {
                     final long spent = System.nanoTime() - start;
                     MatcherAssert.assertThat(
-                        Long.valueOf(count * delay - Tv.HUNDRED) * Tv.MILLION,
+                        Long.valueOf(
+                            count * delay - TkRetryTest.HUNDRED
+                        ) * TkRetryTest.TO_NANOS,
                         Matchers.lessThanOrEqualTo(spent)
                     );
                     throw exception;
@@ -88,8 +109,8 @@ final class TkRetryTest {
 
     @Test
     void retriesOnExceptionTillSuccess() throws Exception {
-        final int count = Tv.THREE;
-        final int delay = Tv.THOUSAND;
+        final int count = TkRetryTest.COUNT;
+        final int delay = TkRetryTest.DELAY;
         final String data = "data";
         final Take take = Mockito.mock(Take.class);
         Mockito
@@ -102,7 +123,7 @@ final class TkRetryTest {
         );
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
-            Long.valueOf(delay - Tv.HUNDRED) * Tv.MILLION,
+            Long.valueOf(delay - TkRetryTest.HUNDRED) * TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(

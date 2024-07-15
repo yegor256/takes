@@ -23,12 +23,12 @@
  */
 package org.takes.facets.auth;
 
+import jakarta.json.JsonObject;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Locale;
-import javax.json.JsonObject;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;

@@ -23,53 +23,66 @@
  */
 package org.takes.servlet;
 
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.WriteListener;
-import java.io.IOException;
-import java.io.OutputStream;
+import jakarta.servlet.ServletConnection;
 
 /**
- * ServletOutputStreamTo.
+ * Fake ServletConnection (for unit tests).
  *
- * @since 1.14
+ * @since 2.0
  */
-public final class ServletOutputStreamTo extends ServletOutputStream {
+public final class ServletConnectionFake implements ServletConnection {
+
     /**
-     * Target.
+     * Connection.
      */
-    private final OutputStream target;
+    private final String connection;
+
+    /**
+     * Protocol.
+     */
+    private final String protocol;
+
+    /**
+     * Security flag.
+     */
+    private final boolean secure;
 
     /**
      * Ctor.
-     * @param output The encapsulated OutputStream
      */
-    public ServletOutputStreamTo(final OutputStream output) {
-        super();
-        this.target = output;
+    public ServletConnectionFake() {
+        this("localhost", "HTTP/1.0", false);
+    }
+
+    /**
+     * Ctor.
+     * @param conn Connection.
+     * @param proto Protocol.
+     * @param sec Secure flag.
+     */
+    public ServletConnectionFake(final String conn, final String proto, final boolean sec) {
+        this.connection = conn;
+        this.protocol = proto;
+        this.secure = sec;
     }
 
     @Override
-    public boolean isReady() {
-        return true;
+    public String getConnectionId() {
+        return this.connection;
     }
 
     @Override
-    public void setWriteListener(final WriteListener listener) {
-        throw new UnsupportedOperationException("#setWriteListener()");
+    public String getProtocol() {
+        return this.protocol;
     }
 
     @Override
-    public void write(final int data) throws IOException {
-        this.target.write(data);
+    public String getProtocolConnectionId() {
+        return "";
     }
 
     @Override
-    public void flush() throws IOException {
-        this.target.flush();
-    }
-
-    @Override
-    public void close() throws IOException {
-        this.target.close();
+    public boolean isSecure() {
+        return this.secure;
     }
 }
