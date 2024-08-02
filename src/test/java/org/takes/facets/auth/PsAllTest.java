@@ -23,7 +23,6 @@
  */
 package org.takes.facets.auth;
 
-import com.jcabi.aspects.Tv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -110,6 +109,7 @@ final class PsAllTest {
 
     @Test
     void testSuccessfullIdx() throws Exception {
+        final int index = 3;
         final Pass resulting = new PsFixed(
             new Identity.Simple("urn:foo:test")
         );
@@ -122,7 +122,7 @@ final class PsAllTest {
                     new PsFake(true),
                     resulting
                 ),
-                Tv.THREE
+                index
             ).enter(request).get().urn(),
             new IsEqual<>(resulting.enter(request).get().urn())
         );

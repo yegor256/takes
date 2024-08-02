@@ -23,15 +23,15 @@
  */
 package org.takes.facets.auth;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 import lombok.EqualsAndHashCode;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Constant;

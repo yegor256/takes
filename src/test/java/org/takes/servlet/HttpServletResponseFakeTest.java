@@ -24,9 +24,9 @@
 
 package org.takes.servlet;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;

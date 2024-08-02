@@ -115,4 +115,52 @@ final class HttpServletRequestFakeTest {
             new IsEqual<>(RqMethod.GET)
         );
     }
+
+    @Test
+    void defaultRequestId() {
+        final HttpServletRequestFake req = new HttpServletRequestFake(
+            new RqWithHeaders(
+                new RqFake(),
+                "MyHeader: theValue",
+                "MyOtherHeader: aValue"
+            )
+        );
+        MatcherAssert.assertThat(
+            "Should be 1",
+            req.getRequestId(),
+            Matchers.equalTo("1")
+        );
+    }
+
+    @Test
+    void defaultProtocolRequestId() {
+        final HttpServletRequestFake req = new HttpServletRequestFake(
+            new RqWithHeaders(
+                new RqFake(),
+                "MyHeader: theValue",
+                "MyOtherHeader: aValue"
+            )
+        );
+        MatcherAssert.assertThat(
+            "Should be empty",
+            req.getProtocolRequestId(),
+            Matchers.equalTo("")
+        );
+    }
+
+    @Test
+    void defaultServletConnection() {
+        final HttpServletRequestFake req = new HttpServletRequestFake(
+            new RqWithHeaders(
+                new RqFake(),
+                "MyHeader: theValue",
+                "MyOtherHeader: aValue"
+            )
+        );
+        MatcherAssert.assertThat(
+            "Should be empty",
+            req.getServletConnection(),
+            Matchers.instanceOf(ServletConnectionFake.class)
+        );
+    }
 }

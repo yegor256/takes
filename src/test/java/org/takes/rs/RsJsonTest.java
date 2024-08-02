@@ -23,10 +23,10 @@
  */
 package org.takes.rs;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonStructure;
 import java.io.IOException;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonStructure;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

@@ -23,6 +23,7 @@
  */
 package org.takes.facets.auth;
 
+import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -33,7 +34,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;

@@ -26,8 +26,8 @@ package org.takes.servlet;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import jakarta.servlet.ServletContext;
 import java.net.HttpURLConnection;
-import javax.servlet.ServletContext;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 import org.glassfish.grizzly.http.server.HttpServer;

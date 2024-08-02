@@ -23,6 +23,20 @@
  */
 package org.takes.servlet;
 
+import jakarta.servlet.AsyncContext;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConnection;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpUpgradeHandler;
+import jakarta.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URI;
@@ -35,19 +49,6 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
 import org.takes.Request;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
@@ -148,6 +149,11 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
+    public String getRequestId() {
+        return "1";
+    }
+
+    @Override
     public String getLocalName() {
         return "localhost";
     }
@@ -176,6 +182,11 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
+    public String getProtocolRequestId() {
+        return "";
+    }
+
+    @Override
     public String getQueryString() {
         final String raw = this.getRequestURI();
         final URI uri;
@@ -188,6 +199,11 @@ public final class HttpServletRequestFake implements HttpServletRequest {
             );
         }
         return uri.getQuery();
+    }
+
+    @Override
+    public ServletConnection getServletConnection() {
+        return new ServletConnectionFake();
     }
 
     @Override

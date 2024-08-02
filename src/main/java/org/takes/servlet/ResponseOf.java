@@ -23,6 +23,8 @@
  */
 package org.takes.servlet;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,8 +32,6 @@ import java.net.HttpCookie;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import org.cactoos.Text;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.Split;

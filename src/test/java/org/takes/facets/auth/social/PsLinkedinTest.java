@@ -24,10 +24,10 @@
 
 package org.takes.facets.auth.social;
 
+import jakarta.json.Json;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
-import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;

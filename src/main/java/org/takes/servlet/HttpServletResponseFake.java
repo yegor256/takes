@@ -23,15 +23,15 @@
  */
 package org.takes.servlet;
 
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import org.cactoos.io.InputOf;
 import org.cactoos.io.OutputTo;
 import org.cactoos.io.TeeInput;
@@ -228,6 +228,15 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     @Override
     public void addIntHeader(final String name, final int value) {
         throw new UnsupportedOperationException("#addIntHeader()");
+    }
+
+    @Override
+    public void sendRedirect(
+        final String location,
+        final int scode,
+        final boolean clearbuff
+    ) throws IOException {
+        throw new UnsupportedOperationException("#sendRedirect()");
     }
 
     /**

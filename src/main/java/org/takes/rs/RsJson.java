@@ -23,12 +23,12 @@
  */
 package org.takes.rs;
 
+import jakarta.json.Json;
+import jakarta.json.JsonStructure;
+import jakarta.json.JsonWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import javax.json.Json;
-import javax.json.JsonStructure;
-import javax.json.JsonWriter;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
