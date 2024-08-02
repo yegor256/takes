@@ -99,7 +99,7 @@ SOFTWARE.
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
       <scope>test</scope>
-      <version>3.1.5</version>
+      <version>3.1.7</version>
       <optional>true</optional>
     </dependency>
     <dependency>
