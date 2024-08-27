@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -42,6 +43,7 @@ import lombok.ToString;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
@@ -131,6 +133,14 @@ public final class RsXslt extends RsWrap {
             res -> {
                 final TransformerFactory fct = TransformerFactory.newInstance();
                 fct.setURIResolver(res);
+                new Unchecked<>(
+                    () -> {
+                        fct.setFeature(
+                            XMLConstants.FEATURE_SECURE_PROCESSING,
+                            true
+                        );
+                        return 0;
+                    }).value();
                 return fct;
             }
         );

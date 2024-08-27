@@ -38,6 +38,7 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.EndsWith;
+import org.llorllale.cactoos.matchers.Throws;
 import org.takes.misc.StateAwareInputStream;
 
 /**
@@ -217,6 +218,47 @@ final class RsXsltTest {
             ),
             XhtmlMatchers.hasXPath(
                 "/xhtml:html/xhtml:span[starts-with(@class, 'sla ')]"
+            )
+        );
+    }
+
+    /**
+     * Checking XXE vulnerability for XSLT transformer in response class {@link RsXslt}.
+     * @throws IOException
+     */
+    @Test
+    void getRuntime() throws IOException {
+        final Text xml = new Joined(
+            " ",
+            "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
+            "<page><data>ура</data></page>"
+        );
+        final Text xsl = new Joined(
+            " ",
+            "<xsl:stylesheet version=\"1.0\"",
+            "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
+            "xmlns:rt=\"http://xml.apache.org/xalan/java/java.lang.Runtime\"",
+            "xmlns:ob=\"http://xml.apache.org/xalan/java/java.lang.Object\">\n",
+            " <xsl:template match=\"/\">\n",
+            "  <xsl:variable name=\"rtobject\" select=\"rt:getRuntime()\"/>\n",
+            "  <xsl:variable name=\"process\"",
+            "select=\"rt:exec($rtobject,'open -a Calculator')\"/>\n",
+            "  <xsl:variable name=\"processString\"",
+            "select=\"ob:toString($process)\"/>\n",
+            "  <xsl:value-of select=\"$processString\"/>\n",
+            " </xsl:template>\n",
+            "</xsl:stylesheet>"
+        );
+        MatcherAssert.assertThat(
+            "Must catch external function calls exception.",
+            () ->
+                new RsXslt(
+                    new RsText(new InputStreamOf(xml)),
+                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
+                ).body(),
+            new Throws<>(
+                "Can't transform via net.sf.saxon.TransformerFactoryImpl",
+                IOException.class
             )
         );
     }
