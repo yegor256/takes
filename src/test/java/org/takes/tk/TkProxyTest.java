@@ -23,8 +23,14 @@
  */
 package org.takes.tk;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Map;
 import org.cactoos.iterable.IterableOf;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -32,6 +38,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.llorllale.cactoos.matchers.HasString;
+import org.takes.Request;
 import org.takes.Take;
 import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.TkFork;
@@ -56,7 +63,26 @@ final class TkProxyTest {
      * A {@code Take} implementation that returns the content of the request
      * as body of its response.
      */
-    private static final Take ECHO = req -> new RsText(new RqPrint(req).print());
+    private static final Take ECHO =
+        req -> new RsText(
+            new RqPrint(
+                TkProxyTest.createEchoRequest(req)
+            ).print()
+        );
+
+    /**
+     * Collection of HTTP method matches for which nobody is returned.
+     */
+    private static final Map<String, Factory> NOBODIES =
+        new MapOf<>(
+            new IterableOf<>(
+                new MapEntry<>(RqMethod.GET, RqWithoutBody::new),
+                new MapEntry<>(RqMethod.HEAD, RqWithoutBody::new),
+                new MapEntry<>(RqMethod.DELETE, RqWithoutBody::new),
+                new MapEntry<>(RqMethod.OPTIONS, RqWithoutBody::new),
+                new MapEntry<>(RqMethod.TRACE, RqWithoutBody::new)
+            )
+        );
 
     /**
      * Http methods for testing.
@@ -248,5 +274,50 @@ final class TkProxyTest {
                     )
                 )
         );
+    }
+
+    private static Request createEchoRequest(final Request req) throws IOException {
+        final String method = new RqMethod.Base(req).method();
+        return NOBODIES.getOrDefault(method, rq -> req).create(req);
+    }
+
+    /**
+     * Local interface for creating a request with an empty body.
+     *
+     * @since 1.24.4
+     */
+    interface Factory {
+        Request create(Request req);
+    }
+
+    /**
+     * Wrapper for a request with an empty body.
+     *
+     * @since 1.24.4
+     */
+    private static final class RqWithoutBody implements Request {
+
+        /**
+         * Original request.
+         */
+        private final Request origin;
+
+        /**
+         * Ctor.
+         * @param req Original request.
+         */
+        RqWithoutBody(final Request req) {
+            this.origin = req;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public InputStream body() {
+            return new ByteArrayInputStream(new byte[0]);
+        }
     }
 }
