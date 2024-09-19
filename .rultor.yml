@@ -21,7 +21,7 @@
 # SOFTWARE.
 ---
 docker:
-  image: yegor256/rultor-image:1.23.1
+  image: yegor256/rultor-java
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
