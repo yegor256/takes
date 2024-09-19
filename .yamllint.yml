@@ -20,17 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-name: pdd
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  pdd:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: volodya-lombrozo/pdd-action@master
+extends: default
+rules:
+  line-length: disable
