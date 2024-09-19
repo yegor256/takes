@@ -20,29 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-name: codecov
-on:
+name: copyrights
+'on':
   push:
-    branches:
-      - master
+  pull_request:
 jobs:
-  codecov:
-    runs-on: ubuntu-24.04
+  copyrights:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: 11, 19
-      - uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            maven-
-      - run: mvn install -Pjacoco
-      - uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./target/site/jacoco/jacoco.xml
-          fail_ci_if_error: true
+      - uses: yegor256/copyrights-action@0.0.5
