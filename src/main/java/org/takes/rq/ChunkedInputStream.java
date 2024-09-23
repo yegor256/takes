@@ -98,26 +98,27 @@ final class ChunkedInputStream extends InputStream {
         throws IOException {
         if (!this.eof && this.pos >= this.size) {
             this.nextChunk();
-        }
-        final int result;
+        }    
         if (this.eof) {
-            result = -1;
+            return -1;
         } else {
             final int shift = Math.min(len, this.size - this.pos);
             final int count = this.origin.read(buf, off, shift);
-            this.pos += count;
-            if (shift == len) {
-                result = len;
-            } else {
-                int addedBytes = this.read(buf, off + shift, len - shift);
-                if (addedBytes < 1) {
-                    this.eof = True
-                    return shift;
-                }
-                result = shift + addedBytes;
+            if (count == -1) {
+                this.eof = true;
+                return (shift == 0) ? -1 : shift;
+            } else if (count > 0) {
+                this.pos += count;
             }
+            if (shift < len) {
+                int additional = this.read(buf, off + count, len - count);
+                if (additional < 0) {
+                    this.eof = true;
+                    return count;
+            }
+            return count + additional;
         }
-        return result;
+        return count;
     }
 
     @Override
