@@ -111,7 +111,7 @@ final class ChunkedInputStream extends InputStream {
             } else {
                 int addedBytes = this.read(buf, off + shift, len - shift);
                 if (addedBytes < 1) {
-                    return result;
+                    return shift;
                 }
                 result = shift + addedBytes;
             }
