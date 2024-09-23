@@ -109,7 +109,12 @@ final class ChunkedInputStream extends InputStream {
             if (shift == len) {
                 result = len;
             } else {
-                result = shift + this.read(buf, off + shift, len - shift);
+                int nextRead = this.read(buf, off + shift, len - shift);
+                if (nextRead < 1) {
+                    result = shift;
+                } else {
+                    result = shift + nextRead;
+                }
             }
         }
         return result;
