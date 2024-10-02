@@ -54,21 +54,21 @@ final class ChunkedInputStreamTest {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
-                IOUtils.toInputStream(
-                        new Joined(
-                                ChunkedInputStreamTest.CRLF,
-                                length,
-                                data,
-                                ChunkedInputStreamTest.END_OF_CHUNK,
-                                ""
-                        ).toString(),
-                        StandardCharsets.UTF_8
-                )
+            IOUtils.toInputStream(
+                new Joined(
+                    ChunkedInputStreamTest.CRLF,
+                    length,
+                    data,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
+                    ""
+                ).toString(),
+                StandardCharsets.UTF_8
+            )
         );
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
-                stream.read(buf),
-                Matchers.equalTo(data.length())
+            stream.read(buf),
+            Matchers.equalTo(data.length())
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
@@ -83,25 +83,25 @@ final class ChunkedInputStreamTest {
         final String data = first + second + third;
         final Integer length = data.length();
         final InputStream stream = new ChunkedInputStream(
-                IOUtils.toInputStream(
-                        new Joined(
-                                ChunkedInputStreamTest.CRLF,
-                                Integer.toHexString(first.length()),
-                                first,
-                                Integer.toHexString(second.length()),
-                                second,
-                                Integer.toHexString(third.length()),
-                                third,
-                                ChunkedInputStreamTest.END_OF_CHUNK,
-                                ""
-                        ).toString(),
-                        StandardCharsets.UTF_8
-                )
+            IOUtils.toInputStream(
+                new Joined(
+                    ChunkedInputStreamTest.CRLF,
+                    Integer.toHexString(first.length()),
+                    first,
+                    Integer.toHexString(second.length()),
+                    second,
+                    Integer.toHexString(third.length()),
+                    third,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
+                    ""
+                ).toString(),
+                StandardCharsets.UTF_8
+            )
         );
         final byte[] buf = new byte[length];
         MatcherAssert.assertThat(
-                stream.read(buf),
-                Matchers.equalTo(length)
+            stream.read(buf),
+            Matchers.equalTo(length)
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
@@ -114,46 +114,52 @@ final class ChunkedInputStreamTest {
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
-                IOUtils.toInputStream(
-                        new Joined(
-                                ChunkedInputStreamTest.CRLF,
-                                length + ignored,
-                                data,
-                                ChunkedInputStreamTest.END_OF_CHUNK,
-                                ""
-                        ).toString(),
-                        StandardCharsets.UTF_8
-                )
+            IOUtils.toInputStream(
+                new Joined(
+                    ChunkedInputStreamTest.CRLF,
+                    length + ignored,
+                    data,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
+                    ""
+                ).toString(),
+                StandardCharsets.UTF_8
+            )
         );
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
-                stream.read(buf),
-                Matchers.equalTo(data.length())
+            stream.read(buf),
+            Matchers.equalTo(data.length())
         );
         MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
         stream.close();
     }
+
     @Test
     void readsWithLenGreaterThanTotalSize() throws IOException {
         final String data = "Hello, World!";
         final String length = Integer.toHexString(data.length());
         final InputStream stream = new ChunkedInputStream(
-                IOUtils.toInputStream(
-                        new Joined(
-                                ChunkedInputStreamTest.CRLF,
-                                length,
-                                data,
-                                ChunkedInputStreamTest.END_OF_CHUNK,
-                                ""
-                        ).toString(),
-                        StandardCharsets.UTF_8
-                )
+            IOUtils.toInputStream(
+                new Joined(
+                    ChunkedInputStreamTest.CRLF,
+                    length,
+                    data,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
+                    ""
+                ).toString(),
+                StandardCharsets.UTF_8
+            )
         );
         final byte[] buf = new byte[data.length() + 10];
-        final int bytesRead = stream.read(buf);
-        MatcherAssert.assertThat(bytesRead, Matchers.equalTo(data.length()));
-        MatcherAssert.assertThat(buf, Matchers.equalTo((data + new String(new byte[10])).getBytes()));
+        MatcherAssert.assertThat(
+            stream.read(buf),
+            Matchers.equalTo(data.length())
+        );
+        MatcherAssert.assertThat(
+            buf,
+            Matchers.equalTo((data + new String(new byte[10])).getBytes())
+        );
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
         stream.close();
     }
