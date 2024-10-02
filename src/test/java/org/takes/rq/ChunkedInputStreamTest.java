@@ -134,4 +134,33 @@ final class ChunkedInputStreamTest {
         MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
         stream.close();
     }
+
+    @Test
+    void readsWithLenGreaterThanTotalSize() throws IOException {
+        final String data = "Hello, World!";
+        final String length = Integer.toHexString(data.length());
+        final InputStream stream = new ChunkedInputStream(
+            IOUtils.toInputStream(
+                new Joined(
+                    ChunkedInputStreamTest.CRLF,
+                    length,
+                    data,
+                    ChunkedInputStreamTest.END_OF_CHUNK,
+                    ""
+                ).toString(),
+                StandardCharsets.UTF_8
+            )
+        );
+        final byte[] buf = new byte[data.length() + 10];
+        MatcherAssert.assertThat(
+            stream.read(buf),
+            Matchers.equalTo(data.length())
+        );
+        MatcherAssert.assertThat(
+            buf,
+            Matchers.equalTo((data + new String(new byte[10])).getBytes())
+        );
+        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        stream.close();
+    }
 }
