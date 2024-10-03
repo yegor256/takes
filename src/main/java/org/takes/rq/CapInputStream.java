@@ -96,7 +96,10 @@ final class CapInputStream extends InputStream {
 
     @Override
     public long skip(final long num) throws IOException {
-        return this.origin.skip(num);
+        final long nskip = Math.min(num, this.more);
+        final long skipped = this.origin.skip(nskip);
+        this.more -= skipped;
+        return skipped;
     }
 
     @Override

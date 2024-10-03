@@ -67,4 +67,11 @@ final class CapInputStreamTest {
         Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
 
+    @Test
+    void skipRespectsCap() throws IOException {
+        final InputStream stream = new ByteArrayInputStream(new byte[100]);
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
+        final long skipped = wrapper.skip(75L);
+        MatcherAssert.assertThat(skipped, Matchers.equalTo(50L));
+    }
 }
