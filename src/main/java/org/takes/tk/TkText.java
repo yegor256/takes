@@ -34,7 +34,7 @@ import org.takes.rs.RsText;
  * Text take.
  *
  * <p>This take returns an HTML response by wrapping the provided
- * content into {@link org.takes.rs.RsText}.
+ * content into {@link RsText}.
  *
  * <p>The class is immutable and thread-safe.
  *

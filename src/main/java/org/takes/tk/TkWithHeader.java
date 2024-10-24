@@ -32,7 +32,7 @@ import org.takes.rs.RsWithHeader;
  * Take with an extra header.
  *
  * <p>This take wraps all responses of another take, adding
- * an extra header to them, through {@link org.takes.rs.RsWithHeader}.
+ * an extra header to them, through {@link RsWithHeader}.
  *
  * <p>The class is immutable and thread-safe.
  *

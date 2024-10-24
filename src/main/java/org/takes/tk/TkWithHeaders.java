@@ -34,7 +34,7 @@ import org.takes.rs.RsWithHeaders;
  * Take that headers.
  *
  * <p>This take wraps all responses of another take, adding
- * headers to them, through {@link org.takes.rs.RsWithHeaders}.
+ * headers to them, through {@link RsWithHeaders}.
  *
  * <p>The class is immutable and thread-safe.
  *

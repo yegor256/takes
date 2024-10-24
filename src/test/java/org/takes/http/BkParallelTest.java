@@ -42,15 +42,13 @@ import org.takes.tk.TkEmpty;
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  * @since 0.15.2
  */
-@SuppressWarnings
-    (
-        {
-            "PMD.CyclomaticComplexity",
-            "PMD.AvoidInstantiatingObjectsInLoops",
-            "PMD.StdCyclomaticComplexity",
-            "PMD.ModifiedCyclomaticComplexity"
-        }
-    ) final class BkParallelTest {
+@SuppressWarnings({
+    "PMD.CyclomaticComplexity",
+    "PMD.AvoidInstantiatingObjectsInLoops",
+    "PMD.StdCyclomaticComplexity",
+    "PMD.ModifiedCyclomaticComplexity"
+})
+final class BkParallelTest {
     @Test
     void requestsAreParallel() throws Exception {
         final ServerSocket socket = new ServerSocket(0);

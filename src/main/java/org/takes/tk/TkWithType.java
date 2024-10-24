@@ -32,7 +32,7 @@ import org.takes.rs.RsWithType;
  * Plain text take.
  *
  * <p>This take wraps all responses of another take, adding
- * content type to them, through {@link org.takes.rs.RsWithType}.
+ * content type to them, through {@link RsWithType}.
  *
  * <p>The class is immutable and thread-safe.
  *
