@@ -29,6 +29,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -226,13 +227,21 @@ public final class PsBasic implements Pass {
 
         /**
          * Public ctor.
+         * @param users Strings with user's login, password and URNs
+         */
+        public Default(final Iterable<String> users) {
+            this.usernames = Default.converted(users);
+        }
+
+        /**
+         * Public ctor.
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
          */
         public Default(final String... users) {
-            this.usernames = Default.converted(users);
+            this(Arrays.asList(users));
         }
 
         @Override
@@ -268,8 +277,8 @@ public final class PsBasic implements Pass {
          *  {@code "mike my%20password urn:jcabi-users:michael"}.
          * @return Map from login/password pairs to URNs.
          */
-        private static Map<String, String> converted(final String... users) {
-            final Map<String, String> result = new HashMap<>(users.length);
+        private static Map<String, String> converted(final Iterable<String> users) {
+            final Map<String, String> result = new HashMap<>(0);
             for (final String user : users) {
                 final String unified = user.replace("%20", "+");
                 PsBasic.Default.validateUser(unified);
