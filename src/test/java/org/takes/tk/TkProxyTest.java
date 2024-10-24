@@ -73,14 +73,14 @@ final class TkProxyTest {
     /**
      * Collection of HTTP method matches for which nobody is returned.
      */
-    private static final Map<String, Factory> NOBODIES =
+    private static final Map<String, TkProxyTest.Factory> NOBODIES =
         new MapOf<>(
             new IterableOf<>(
-                new MapEntry<>(RqMethod.GET, RqWithoutBody::new),
-                new MapEntry<>(RqMethod.HEAD, RqWithoutBody::new),
-                new MapEntry<>(RqMethod.DELETE, RqWithoutBody::new),
-                new MapEntry<>(RqMethod.OPTIONS, RqWithoutBody::new),
-                new MapEntry<>(RqMethod.TRACE, RqWithoutBody::new)
+                new MapEntry<>(RqMethod.GET, TkProxyTest.RqWithoutBody::new),
+                new MapEntry<>(RqMethod.HEAD, TkProxyTest.RqWithoutBody::new),
+                new MapEntry<>(RqMethod.DELETE, TkProxyTest.RqWithoutBody::new),
+                new MapEntry<>(RqMethod.OPTIONS, TkProxyTest.RqWithoutBody::new),
+                new MapEntry<>(RqMethod.TRACE, TkProxyTest.RqWithoutBody::new)
             )
         );
 
@@ -278,7 +278,7 @@ final class TkProxyTest {
 
     private static Request createEchoRequest(final Request req) throws IOException {
         final String method = new RqMethod.Base(req).method();
-        return NOBODIES.getOrDefault(method, rq -> req).create(req);
+        return TkProxyTest.NOBODIES.getOrDefault(method, rq -> req).create(req);
     }
 
     /**

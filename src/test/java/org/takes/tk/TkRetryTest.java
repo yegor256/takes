@@ -82,13 +82,13 @@ final class TkRetryTest {
         Assertions.assertThrows(
             IOException.class,
             () -> {
-                final int count = TkRetryTest.COUNT;
-                final int delay = TkRetryTest.DELAY;
                 final Take take = Mockito.mock(Take.class);
                 Mockito
                     .when(take.act(Mockito.any(Request.class)))
-                    .thenThrow(new IOException());
+                    .thenThrow(new IOException("oops"));
                 final long start = System.nanoTime();
+                final int count = TkRetryTest.COUNT;
+                final int delay = TkRetryTest.DELAY;
                 try {
                     new TkRetry(count, delay, take).act(
                         new RqFake(RqMethod.GET)
@@ -96,9 +96,7 @@ final class TkRetryTest {
                 } catch (final IOException exception) {
                     final long spent = System.nanoTime() - start;
                     MatcherAssert.assertThat(
-                        Long.valueOf(
-                            count * delay - TkRetryTest.HUNDRED
-                        ) * TkRetryTest.TO_NANOS,
+                        (long) (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
                         Matchers.lessThanOrEqualTo(spent)
                     );
                     throw exception;
@@ -109,21 +107,20 @@ final class TkRetryTest {
 
     @Test
     void retriesOnExceptionTillSuccess() throws Exception {
-        final int count = TkRetryTest.COUNT;
-        final int delay = TkRetryTest.DELAY;
         final String data = "data";
         final Take take = Mockito.mock(Take.class);
         Mockito
             .when(take.act(Mockito.any(Request.class)))
-            .thenThrow(new IOException())
+            .thenThrow(new IOException("oops"))
             .thenReturn(new RsText(data));
         final long start = System.nanoTime();
+        final int delay = TkRetryTest.DELAY;
         final RsPrint response = new RsPrint(
-            new TkRetry(count, delay, take).act(new RqFake(RqMethod.GET))
+            new TkRetry(TkRetryTest.COUNT, delay, take).act(new RqFake(RqMethod.GET))
         );
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
-            Long.valueOf(delay - TkRetryTest.HUNDRED) * TkRetryTest.TO_NANOS,
+            (long) (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(
