@@ -32,8 +32,7 @@ import org.takes.rs.RsEmpty;
 /**
  * Empty take.
  *
- * <p>This "take" always returns an instance of
- * {@link org.takes.rs.RsEmpty}.
+ * <p>This "take" always returns an instance of {@link RsEmpty}.
  *
  * <p>The class is immutable and thread-safe.
  *

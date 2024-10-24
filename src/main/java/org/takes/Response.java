@@ -28,7 +28,7 @@ import java.io.InputStream;
 /**
  * HTTP response.
  *
- * <p>{@link org.takes.Response} interface is an abstraction of a HTTP
+ * <p>{@link Response} interface is an abstraction of a HTTP
  * response, that consists of a few headers and a body. To construct
  * a response, use one of the composable decorators from
  * {@link org.takes.rs} package. For example, this code will create
@@ -50,7 +50,7 @@ import java.io.InputStream;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @see org.takes.Take
+ * @see Take
  * @see org.takes.rs.RsWithBody
  * @see org.takes.rs.RsWithHeader
  * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">

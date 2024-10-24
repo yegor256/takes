@@ -27,7 +27,7 @@ package org.takes;
  * Take.
  *
  * <p>Take is a momentary snapshot of in-server reality, visible to the
- * end user via printable {@link org.takes.Response}.
+ * end user via printable {@link Response}.
  * For example, this is a simple web server
  * that returns "hello, world!" plain text web page:
  *
@@ -42,7 +42,7 @@ package org.takes;
  *  ).start(Exit.NEVER);
  * }</pre>
  *
- * <p>There are a few classes that implement this interface and you
+ * <p>There are a few classes that implement this interface, and you
  * can create your own. But the best way is to start with
  * {@link org.takes.facets.fork.TkFork}, for example:
  *

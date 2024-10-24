@@ -46,7 +46,7 @@ import org.takes.rs.RsWithBody;
  * {@code "/css/style.css?eot"}. {@link TkFiles}
  * will try to find a resource {@code "/tmp/css/style.css"} on disc.
  *
- * <p>If such a resource is not found, {@link org.takes.HttpException}
+ * <p>If such a resource is not found, {@link HttpException}
  * will be thrown.
  *
  * <p>The class is immutable and thread-safe.

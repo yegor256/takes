@@ -36,8 +36,8 @@ package org.takes;
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
- * @see org.takes.Response
- * @see org.takes.Take
+ * @see Response
+ * @see Take
  * @see org.takes.facets.fork.RqRegex
  * @see org.takes.rq.RqHref
  * @see <a href="http://www.yegor256.com/2015/02/26/composable-decorators.html">

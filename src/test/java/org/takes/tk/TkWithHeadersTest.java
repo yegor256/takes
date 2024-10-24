@@ -31,7 +31,7 @@ import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
 
 /**
- * Test case for {@link org.takes.tk.TkWithHeaders}.
+ * Test case for {@link TkWithHeaders}.
  * @since 0.9.1
  */
 final class TkWithHeadersTest {
