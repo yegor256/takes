@@ -1177,7 +1177,7 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
-[jar]: https://repo1.maven.org/maven2/org/takes/takes/0.0.0/takes-1.24.6-jar-with-dependencies.jar
+[jar]: https://repo1.maven.org/maven2/org/takes/takes/1.24.6/takes-1.24.6-jar-with-dependencies.jar
 [oop]: http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html
 [immutable]: http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html
 [null]: http://www.yegor256.com/2014/05/13/why-null-is-bad.html
