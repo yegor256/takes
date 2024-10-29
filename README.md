@@ -15,15 +15,20 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![PDD status](http://www.0pdd.com/svg?name=yegor256/takes)](http://www.0pdd.com/p?name=yegor256/takes)
 
-**Takes** is a [true object-oriented](http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html)
-and [immutable](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html)
-Java8 web development framework. Its key benefits, comparing to all others, include these
+**Takes** is a [true object-oriented][oop]
+and [immutable][immutable]
+Java8 web development framework. Its key benefits, comparing to all others,
+include these
 four fundamental principles:
 
- 1. Not a single `null` ([why NULL is bad?](http://www.yegor256.com/2014/05/13/why-null-is-bad.html))
- 2. Not a single `public` `static` method ([why they are bad?](http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html))
- 3. Not a single mutable class ([why they are bad?](http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html))
- 4. Not a single `instanceof` keyword, type casting, or reflection ([why?](http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html))
+ 1. Not a single `null`
+ ([why NULL is bad?][null])
+ 2. Not a single `public` `static` method
+ ([why they are bad?][utility])
+ 3. Not a single mutable class
+ ([why they are bad?][immutable])
+ 4. Not a single `instanceof` keyword, type casting, or reflection
+ ([why?][cating])
 
 Of course, there are no configuration files.
 Besides that, these are more traditional features, out of the box:
@@ -43,9 +48,11 @@ These two web systems use Takes, and they are open source:
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
 
 Watch these videos to learn more:
-[An Immutable Object-Oriented Web Framework](https://www.youtube.com/watch?v=-Y4XS7ZtQ2g) and
+[An Immutable Object-Oriented Web Framework][webcast] and
 [Takes, Java Web Framework, Intro](https://www.youtube.com/watch?v=nheD2LNYrpk).
-This [blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html) may help you too.
+This
+[blog post](http://www.yegor256.com/2015/03/22/takes-java-web-framework.html)
+may help you too.
 
 ## Contents
 
@@ -98,16 +105,17 @@ public final class App {
 }
 ```
 
-Then, download [`takes.jar`](https://repo1.maven.org/maven2/org/takes/takes/) and compile your Java code:
+Then, download [`takes-0.0.0-jar-with-dependencies.jar`][jar]
+and compile your Java code:
 
-```
-$ javac -cp takes.jar App.java
+```bash
+javac -cp takes-0.0.0-jar-with-dependencies.jar App.java
 ```
 
 Now, run it like this:
 
 ```bash
-$ java -Dfile.encoding=UTF-8 -cp takes.jar:. App
+java -Dfile.encoding=UTF-8 -cp takes-0.0.0-jar-with-dependencies.jar:. App
 ```
 
 Should work :)
@@ -119,7 +127,8 @@ all requests at the root URI.
 The entire framework relies on your default Java encoding, which is not
 necessarily UTF-8 by default. To be sure, always set it on the command line
 with `file.encoding` Java argument. We decided not to hard-code "UTF-8" in
-our code mostly because this would be against the entire idea of Java localization,
+our code mostly because this would be against the entire idea of
+Java localization,
 according to which a user always should have a choice of encoding and language
 selection. We're using `Charset.defaultCharset()` everywhere in the code.
 
@@ -133,6 +142,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
     <dependency>
       <groupId>org.takes</groupId>
       <artifactId>takes</artifactId>
+      <version>0.0.0</version>
     </dependency>
   </dependencies>
   <profiles>
@@ -170,8 +180,8 @@ If you're using Maven, this is how your `pom.xml` should look like:
 
 With this configuration you can run it from command line:
 
-```
-$ mvn clean integration-test -Phit-refresh -Dport=8080
+```bash
+mvn clean integration-test -Phit-refresh -Dport=8080
 ```
 
 Maven will start the server and you can see it at `http://localhost:8080`.
@@ -182,14 +192,11 @@ Create a take with constructor accepting `ServletContext`:
 
 ```java
 package com.myapp;
-
 public final class TkApp implements Take {
   private final ServletContext ctx;
-
   public TkApp(final ServletContext context) {
     this.ctx = context;
   }
-
   @Override
   public Response act(final Request req) throws Exception {
     return new RsText("Hello servlet!");
@@ -201,45 +208,42 @@ Add `org.takes.servlet.SrvTake` to your `web.xml`, don't forget to specify
 take class as servlet `init-param`:
 
 ```xml
-  <servlet>
-    <servlet-name>takes</servlet-name>
-    <servlet-class>org.takes.servlet.SrvTake</servlet-class>
-    <init-param>
-      <param-name>take</param-name>
-      <param-value>com.myapp.TkApp</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>takes</servlet-name>
-    <url-pattern>/*</url-pattern>
-  </servlet-mapping>
+<servlet>
+  <servlet-name>takes</servlet-name>
+  <servlet-class>org.takes.servlet.SrvTake</servlet-class>
+  <init-param>
+    <param-name>take</param-name>
+    <param-value>com.myapp.TkApp</param-value>
+  </init-param>
+</servlet>
+<servlet-mapping>
+  <servlet-name>takes</servlet-name>
+  <url-pattern>/*</url-pattern>
+</servlet-mapping>
 ```
 
 ## Build and Run With Gradle
 
 If you're using Gradle, this is how your `build.gradle` should look like:
 
-```gradle
+```groovy
 plugins {
     id 'java'
     id 'application'
 }
-
 repositories {
     mavenCentral()
 }
-
 dependencies {
     compile group: 'org.takes', name: 'takes', version: '1.11.3'
 }
-
 mainClassName='foo.App' //your main class
 ```
 
 With this configuration you can run it from command line:
 
-```gradle
-$ gradle run -Phit-refresh -Dport=8080
+```bash
+gradle run -Phit-refresh -Dport=8080
 ```
 
 ## Unit Testing
@@ -260,7 +264,6 @@ public final class AppTest {
   }
 }
 ```
-
 
 You can create a fake request with form parameters like this:
 
@@ -299,7 +302,7 @@ public final class AppITCase {
 
 More complex integration testing examples you can find in one
 of the open source projects that are using Take, for example:
-[rultor.com](https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web).
+[rultor.com][rultor-code].
 
 ## A Bigger Example
 
@@ -397,7 +400,8 @@ There are other useful implementations of this interface:
 
 * The [FtRemote](src/main/java/org/takes/http/FtRemote.java)
 class allows you to provide script, that will be executed against
-given front. You can see how it's used in [integration tests](#integration-testing).
+given front. You can see how it's used in
+[integration tests](#integration-testing).
 * The [FtCli](src/main/java/org/takes/http/FtCli.java) class
 allows you to start your application with command line arguments. More details
 in [Command Line Arguments](#command-line-arguments).
@@ -433,12 +437,14 @@ interrupts the thread of that `back`.
 * The [BkWrap](src/main/java/org/takes/http/BkWrap.java) class is a convenient
 wrap over the original `Back` instance. It's just delegates the `accept`
 to that `Back` and might be useful if you want to add your own decorators of the
-`Back` interface. This class is used in `BkParallel` and `BkSafe` as a parent class.
+`Back` interface. This class is used in `BkParallel` and `BkSafe` as
+a parent class.
 
 ## Templates
 
 Now let's see how we can render something more complex than a plain text.
-First, XML+XSLT is a recommended mechanism of HTML rendering. Even though it may be
+First, XML+XSLT is a recommended mechanism of HTML rendering.
+Even though it may be
 too complex, give it a try, you won't regret. Here is how we render a simple XML
 page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
 
@@ -521,11 +527,13 @@ You will need this extra dependency in classpath:
 
 For Gradle users:
 
-```gradle
+```groovy
 dependencies {
-    ...
-    runtime group: 'org.apache.velocity', name: 'velocity-engine-core', version: 'x.xx'//put the version here
-    ...
+  ...
+  runtime group: 'org.apache.velocity',
+  name: 'velocity-engine-core',
+  version: 'x.xx' // put the version here
+  ...
 }
 ```
 
@@ -542,11 +550,13 @@ new TkFork(
 )
 ```
 
-Class `TkClasspath` take static part of the request URI and finds a resource with this name in classpath.
+Class `TkClasspath` take static part of the request URI and finds
+a resource with this name in classpath.
 
 `TkFiles` just looks by file name in the directory configured.
 
-`TkWithType` sets content type of all responses coming out of the decorated take.
+`TkWithType` sets content type of all responses coming out of
+the decorated take.
 
 ## Hit Refresh Debugging
 
@@ -576,7 +586,8 @@ new TkFork(
 ```
 
 This `FkHitRefresh` fork is a decorator of take. Once it sees
-`X-Take-Refresh` header in the request, it realizes that the server is running in
+`X-Take-Refresh` header in the request, it realizes that the server
+is running in
 "hit-refresh" mode and passes the request to the encapsulated take. Before it
 passes the request it tries to understand whether any of the resources
 are older than compiled files. If they are older, it tries
@@ -691,7 +702,8 @@ public final class TkPostMessage implements Take {
 }
 ```
 
-Then, you should decorate the entire `TkFork` with this `TkForward` and `TkFlash`:
+Then, you should decorate the entire `TkFork` with this
+`TkForward` and `TkFlash`:
 
 ```java
 public final class App {
@@ -717,7 +729,7 @@ public final class TkBalance extends TkFixed {
   @Override
   public Response act(final RqRegex request) {
     return new RsJSON(
-      new User(request.matcher().group("user")))
+      new User(request.matcher().group("user"))
     );
   }
 }
@@ -825,7 +837,7 @@ You will need this extra dependency in classpath:
 ```
 
 More about this mechanism in this blog post:
-[XML Data and XSL Views in Takes Framework](http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-framework.html).
+[XML Data and XSL Views in Takes Framework][xsl].
 
 ## Cookies
 
@@ -876,7 +888,8 @@ you can compress an individual response, using `RsGzip` decorator.
 ## Content Negotiation
 
 Say, you want to return different content based on `Accept` header
-of the request (a.k.a. [content negotiation](http://en.wikipedia.org/wiki/Content_negotiation)):
+of the request (a.k.a.
+[content negotiation](http://en.wikipedia.org/wiki/Content_negotiation)):
 
 ```java
 public final class TkIndex implements Take {
@@ -891,6 +904,7 @@ public final class TkIndex implements Take {
   }
 }
 ```
+
 ## SSL Configuration
 
 First of all, setup your keystore settings, for example
@@ -904,7 +918,8 @@ System.setProperty("javax.net.ssl.trustStore", file);
 System.setProperty("javax.net.ssl.trustStorePassword", password);
 ```
 
-Then simple create exemplar of class [FtSecure](src/main/java/org/takes/http/FtSecure.java) with socket factory
+Then simple create exemplar of class
+[`FtSecure`](src/main/java/org/takes/http/FtSecure.java) with socket factory
 
 ```java
 final ServerSocket skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
@@ -917,7 +932,8 @@ new FtRemote(
 
 ## Authentication
 
-Here is an example of login via [Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
+Here is an example of login via
+[Facebook](https://developers.facebook.com/docs/reference/dialogs/oauth/):
 
 ```java
 new TkAuth(
@@ -968,7 +984,8 @@ The link will be add to the XML page like this:
 </page>
 ```
 
-Similar mechanism can be used for `PsGithub`, `PsGoogle`, `PsLinkedin`, `PsTwitter`, etc.
+Similar mechanism can be used for `PsGithub`,
+`PsGoogle`, `PsLinkedin`, `PsTwitter`, etc.
 
 This is how you get currently logged in user:
 
@@ -986,7 +1003,7 @@ public final class TkAccount implements Take {
 ```
 
 More about it in this blog post:
-[How Cookie-Based Authentication Works in the Takes Framework](http://www.yegor256.com/2015/05/18/cookie-based-authentication.html)
+[How Cookie-Based Authentication Works in the Takes Framework][cookies].
 
 ## Command Line Arguments
 
@@ -996,7 +1013,7 @@ starts the necessary `Front` accordingly.
 There are a few command line arguments that should be passed to
 `FtCLI` constructor:
 
-```
+```text
 --port=1234         Tells the server to listen to TCP port 1234
 --lifetime=5000     The server will die in five seconds (useful for integration testing)
 --hit-refresh       Run the server in hit-refresh mode
@@ -1021,8 +1038,8 @@ public final class App {
 
 Then, run it like this:
 
-```
-$ java -cp take.jar App.class --port=8080 --hit-refresh
+```bash
+java -cp take.jar App.class --port=8080 --hit-refresh
 ```
 
 You should see "hello, world!" at `http://localhost:8080`.
@@ -1037,36 +1054,39 @@ port number, use it to start a server, and save it to the file.
 The framework sends all logs to SLF4J logging facility. If you want to see them,
 configure one of [SLF4J bindings](http://www.slf4j.org/manual.html).
 
-To make a `Take` log, wrap it in a `TkSlf4j` - for example:
+To make a `Take` log, wrap it in the `TkSlf4j`, for example:
 
-     new TkSlf4j(
-         new TkFork(...)
-     )
+```java
+new TkSlf4j(
+  new TkFork(/* your code here */)
+)
+```
 
 ## Directory Layout
 
-You are free to use any build tool, but we recommend Maven. This is how your project directory layout may/should look like:
+You are free to use any build tool, but we recommend Maven.
+This is how your project directory layout may/should look like:
 
 ```
-/src
-  /main
-    /java
-      /foo
+src/
+  main/
+    java/
+      foo/
         App.java
-    /scss
-    /coffeescript
-    /resources
-      /vtl
-      /xsl
-      /js
-      /css
+    scss/
+    coffeescript/
+    resources/
+      vtl/
+      xsl/
+      js/
+      css/
       robot.txt
       log4j.properties
-  /test
-    /java
-      /foo
+  test/
+    java/
+      foo/
         AppTest.java
-    /resources
+    resources/
       log4j.properties
 pom.xml
 LICENSE.txt
@@ -1076,12 +1096,13 @@ LICENSE.txt
 
 If you're using Maven and include Takes as a dependency in your own project,
 you can choose which of the optional dependencies to include in your project.
-The list of all of the optional dependencies can be seen in the Takes project `pom.xml`.
+The list of all of the optional dependencies can be seen in the
+Takes project `pom.xml`.
 
 For example, to use the Facebook API shown above, simply add a dependency to
 the `restfb` API in your project:
 
-```
+```xml
 <dependency>
   <groupId>com.restfb</groupId>
   <artifactId>restfb</artifactId>
@@ -1092,14 +1113,15 @@ the `restfb` API in your project:
 
 For Gradle, you should add the dependencies as usual:
 
-```gradle
+```groovy
 dependencies {
-    ...
-    runtime group: 'com.restfb', name: 'restfb', version: '1.15.0'
+  ...
+  runtime group: 'com.restfb', name: 'restfb', version: '1.15.0'
 }
 ```
 
 ## Backward compatibility
+
 Version 2.0 is not backward compatible with previous versions.
 
 ## Version pattern for RESTful API
@@ -1107,6 +1129,7 @@ Version 2.0 is not backward compatible with previous versions.
 The URL should NOT contain the versions, but the type requested.
 
 For example:
+
 ```
 ===>
 GET /architect/256 HTTP/1.1
@@ -1136,8 +1159,8 @@ Content-Type: application/org.takes.architect-v2+xml
 </architect>
 ```
 
-[This article](http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html)
-explains why it´s done this way.
+[This article][rest-types]
+explains why it's done this way.
 
 ## How to contribute
 
@@ -1146,8 +1169,8 @@ your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
 sending us your pull request please run full Maven build:
 
-```
-$ mvn clean install -Pqulice
+```bash
+mvn clean install -Pqulice
 ```
 
 To avoid build errors use maven 3.2+.
@@ -1156,3 +1179,15 @@ Pay attention that our `pom.xml` inherits a lot of configuration
 from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
+
+[jar]: https://repo1.maven.org/maven2/org/takes/takes/0.0.0/takes-0.0.0-jar-with-dependencies.jar
+[oop]: http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html
+[immutable]: http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html
+[null]: http://www.yegor256.com/2014/05/13/why-null-is-bad.html
+[utility]: http://www.yegor256.com/2014/05/05/oop-alternative-to-utility-classes.html
+[casting]: http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html
+[webcast]: https://www.youtube.com/watch?v=-Y4XS7ZtQ2g
+[rultor-code]: https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web
+[xsl]:http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-framework.html
+[cookies]: http://www.yegor256.com/2015/05/18/cookie-based-authentication.html
+[rest-types]: http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html
