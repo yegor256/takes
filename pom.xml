@@ -162,7 +162,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.apache.velocity</groupId>
       <artifactId>velocity-engine-core</artifactId>
-      <version>2.4</version>
+      <version>2.4.1</version>
       <scope>compile</scope>
       <optional>true</optional>
       <exclusions>
