@@ -28,7 +28,7 @@ four fundamental principles:
 3. Not a single mutable class
 ([why they are bad?][immutable])
 4. Not a single `instanceof` keyword, type casting, or reflection
-([why?][cating])
+([why?][casting])
 
 Of course, there are no configuration files.
 Besides that, these are more traditional features, out of the box:
@@ -85,7 +85,6 @@ may help you too.
 * [Backward compatibility](#backward-compatibility)
 * [Version pattern for RESTful API](#version-pattern-for-restful-api)
 * [How to contribute](#how-to-contribute)
-* [Got questions?](#got-questions)
 
 ## Quick Start
 
@@ -854,7 +853,7 @@ public final class TkIndex implements Take {
 An HTTP response will contain this header, which will place
 a `auth` cookie into the user's browser:
 
-```
+```text
 HTTP/1.1 200 OK
 Set-Cookie: auth="John Doe"
 ```
@@ -1066,7 +1065,7 @@ new TkSlf4j(
 You are free to use any build tool, but we recommend Maven.
 This is how your project directory layout may/should look like:
 
-```
+```text
 src/
   main/
     java/
@@ -1128,7 +1127,7 @@ The URL should NOT contain the versions, but the type requested.
 
 For example:
 
-```
+```text
 ===>
 GET /architect/256 HTTP/1.1
 Accept: application/org.takes.architect-v1+xml
@@ -1142,7 +1141,7 @@ Content-Type: application/org.takes.architect-v1+xml
 
 Then clients aware of newer version of this service can call:
 
-```
+```text
 ===>
 GET /architect/256 HTTP/1.1
 Accept: application/org.takes.architect-v2+xml
