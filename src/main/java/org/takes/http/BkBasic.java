@@ -84,6 +84,7 @@ public final class BkBasic implements Back {
                     ),
                     output
                 );
+                output.flush();
                 if (input.available() <= 0) {
                     break;
                 }
