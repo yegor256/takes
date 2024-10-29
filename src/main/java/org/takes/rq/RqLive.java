@@ -53,7 +53,7 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      */
     public RqLive(final InputStream input) throws IOException {
-        super(RqLive.parse(input));
+        super(RqLive.parse(new NoCloseInputStream(input)));
     }
 
     /**
