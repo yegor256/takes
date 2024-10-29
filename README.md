@@ -1185,6 +1185,6 @@ explains why it's done this way.
 [casting]: http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html
 [webcast]: https://www.youtube.com/watch?v=-Y4XS7ZtQ2g
 [rultor-code]: https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web
-[xsl]:http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-1.24.6
+[xsl]:https://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-framework.html
 [cookies]: http://www.yegor256.com/2015/05/18/cookie-based-authentication.html
 [rest-types]: http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html
