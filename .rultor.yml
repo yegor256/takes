@@ -42,4 +42,5 @@ release:
     gpg --allow-secret-key-import --no-tty --batch --import /home/r/secring.gpg
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
+    export MAVEN_OPTS="--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
     mvn clean deploy -Ptakes -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml

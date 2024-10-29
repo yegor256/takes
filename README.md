@@ -153,7 +153,6 @@ If you're using Maven, this is how your `pom.xml` should look like:
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
-            <version>1.24.5</version>
             <executions>
               <execution>
                 <id>start-server</id>
@@ -1106,7 +1105,6 @@ the `restfb` API in your project:
 <dependency>
   <groupId>com.restfb</groupId>
   <artifactId>restfb</artifactId>
-  <version>1.24.5</version>
   <scope>runtime</scope>
 </dependency>
 ```
