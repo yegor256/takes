@@ -160,6 +160,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
+    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -176,7 +177,7 @@ import org.takes.tk.TkText;
                 }
             ).start();
             try (Socket socket = new Socket(
-                server.getInetAddress(),
+                "127.0.0.1",
                 server.getLocalPort()
             )
             ) {
