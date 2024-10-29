@@ -51,7 +51,7 @@ Watch these videos to learn more:
 [An Immutable Object-Oriented Web Framework][webcast] and
 [Takes, Java Web Framework, Intro](https://www.youtube.com/watch?v=nheD2LNYrpk).
 This
-[blog post](http://www.yegor256.com/2015/03/22/takes-1.24.5-web-framework.html)
+[blog post](http://www.yegor256.com/2015/03/22/takes-1.24.6-web-framework.html)
 may help you too.
 
 ## Contents
@@ -104,17 +104,17 @@ public final class App {
 }
 ```
 
-Then, download [`takes-1.24.5-jar-with-dependencies.jar`][jar]
+Then, download [`takes-1.24.6-jar-with-dependencies.jar`][jar]
 and compile your Java code:
 
 ```bash
-javac -cp takes-1.24.5-jar-with-dependencies.jar App.java
+javac -cp takes-1.24.6-jar-with-dependencies.jar App.java
 ```
 
 Now, run it like this:
 
 ```bash
-java -Dfile.encoding=UTF-8 -cp takes-1.24.5-jar-with-dependencies.jar:. App
+java -Dfile.encoding=UTF-8 -cp takes-1.24.6-jar-with-dependencies.jar:. App
 ```
 
 Should work :)
@@ -141,7 +141,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
     <dependency>
       <groupId>org.takes</groupId>
       <artifactId>takes</artifactId>
-      <version>1.24.5</version>
+      <version>1.24.6</version>
     </dependency>
   </dependencies>
   <profiles>
@@ -1177,7 +1177,7 @@ from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.
 
-[jar]: https://repo1.maven.org/maven2/org/takes/takes/0.0.0/takes-1.24.5-jar-with-dependencies.jar
+[jar]: https://repo1.maven.org/maven2/org/takes/takes/0.0.0/takes-1.24.6-jar-with-dependencies.jar
 [oop]: http://www.yegor256.com/2014/11/20/seven-virtues-of-good-object.html
 [immutable]: http://www.yegor256.com/2014/06/09/objects-should-be-immutable.html
 [null]: http://www.yegor256.com/2014/05/13/why-null-is-bad.html
@@ -1185,6 +1185,6 @@ explains why it's done this way.
 [casting]: http://www.yegor256.com/2015/04/02/class-casting-is-anti-pattern.html
 [webcast]: https://www.youtube.com/watch?v=-Y4XS7ZtQ2g
 [rultor-code]: https://github.com/yegor256/rultor/tree/master/src/test/java/com/rultor/web
-[xsl]:http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-1.24.5
+[xsl]:http://www.yegor256.com/2015/06/25/xml-data-xsl-views-takes-1.24.6
 [cookies]: http://www.yegor256.com/2015/05/18/cookie-based-authentication.html
 [rest-types]: http://thereisnorightway.blogspot.com/2011/02/versioning-and-types-in-resthttp-api.html
