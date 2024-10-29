@@ -23,8 +23,6 @@
 name: up
 on:
   push:
-    branches:
-      - master
 jobs:
   up:
     runs-on: ubuntu-24.04
