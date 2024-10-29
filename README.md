@@ -1,4 +1,4 @@
-<img alt="logo" src="http://www.takes.org/logo.png" width="96px" height="96px"/>
+# Pure Object-Oriented Java Web Framework
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
@@ -21,27 +21,27 @@ Java8 web development framework. Its key benefits, comparing to all others,
 include these
 four fundamental principles:
 
- 1. Not a single `null`
- ([why NULL is bad?][null])
- 2. Not a single `public` `static` method
- ([why they are bad?][utility])
- 3. Not a single mutable class
- ([why they are bad?][immutable])
- 4. Not a single `instanceof` keyword, type casting, or reflection
- ([why?][cating])
+1. Not a single `null`
+([why NULL is bad?][null])
+2. Not a single `public` `static` method
+([why they are bad?][utility])
+3. Not a single mutable class
+([why they are bad?][immutable])
+4. Not a single `instanceof` keyword, type casting, or reflection
+([why?][cating])
 
 Of course, there are no configuration files.
 Besides that, these are more traditional features, out of the box:
 
- * Hit-refresh debugging
- * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
- * [JSON](http://en.wikipedia.org/wiki/JSON)
- * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
- * Templates, incl. [Apache Velocity](http://velocity.apache.org/)
+* Hit-refresh debugging
+* [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
+* [JSON](http://en.wikipedia.org/wiki/JSON)
+* [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
+* Templates, incl. [Apache Velocity](http://velocity.apache.org/)
 
 This is what is not supported and won't be supported:
 
- * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
+* [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 These two web systems use Takes, and they are open source:
 [wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
@@ -56,36 +56,36 @@ may help you too.
 
 ## Contents
 
-- [Quick Start](#quick-start)
-- [Build and Run With Maven](#build-and-run-with-maven)
-- [Build and Run With Gradle](#build-and-run-with-gradle)
-- [Unit Testing](#unit-testing)
-- [Integration Testing](#integration-testing)
-- [A Bigger Example](#a-bigger-example)
-    - [Front Interface](#front-interface)
-    - [Back Interface](#back-interface)
-- [Templates](#templates)
-	- [Velocity Templates](#velocity-templates)
-- [Static Resources](#static-resources)
-- [Hit Refresh Debugging](#hit-refresh-debugging)
-- [Request Methods (POST, PUT, HEAD, etc.)](#request-methods-post-put-head-etc)
-- [Request Parsing](#request-parsing)
-- [Form Processing](#form-processing)
-- [Exception Handling](#exception-handling)
-- [Redirects](#redirects)
-- [RsJSON](#rsjson)
-- [RsXembly](#rsxembly)
-- [GZIP Compression](#gzip-compression)
-- [SSL Configuration](#ssl-configuration)
-- [Authentication](#authentication)
-- [Command Line Arguments](#command-line-arguments)
-- [Logging](#logging)
-- [Directory Layout](#directory-layout)
-- [Optional dependencies](#optional-dependencies)
-- [Backward compatibility](#backward-compatibility)
-- [Version pattern for RESTful API](#version-pattern-for-restful-api)
-- [How to contribute](#how-to-contribute)
-- [Got questions?](#got-questions)
+* [Quick Start](#quick-start)
+* [Build and Run With Maven](#build-and-run-with-maven)
+* [Build and Run With Gradle](#build-and-run-with-gradle)
+* [Unit Testing](#unit-testing)
+* [Integration Testing](#integration-testing)
+* [A Bigger Example](#a-bigger-example)
+  * [Front Interface](#front-interface)
+  * [Back Interface](#back-interface)
+* [Templates](#templates)
+  * [Velocity Templates](#velocity-templates)
+* [Static Resources](#static-resources)
+* [Hit Refresh Debugging](#hit-refresh-debugging)
+* [Request Methods (POST, PUT, HEAD, etc.)](#request-methods-post-put-head-etc)
+* [Request Parsing](#request-parsing)
+* [Form Processing](#form-processing)
+* [Exception Handling](#exception-handling)
+* [Redirects](#redirects)
+* [RsJSON](#rsjson)
+* [RsXembly](#rsxembly)
+* [GZIP Compression](#gzip-compression)
+* [SSL Configuration](#ssl-configuration)
+* [Authentication](#authentication)
+* [Command Line Arguments](#command-line-arguments)
+* [Logging](#logging)
+* [Directory Layout](#directory-layout)
+* [Optional dependencies](#optional-dependencies)
+* [Backward compatibility](#backward-compatibility)
+* [Version pattern for RESTful API](#version-pattern-for-restful-api)
+* [How to contribute](#how-to-contribute)
+* [Got questions?](#got-questions)
 
 ## Quick Start
 
@@ -227,14 +227,14 @@ If you're using Gradle, this is how your `build.gradle` should look like:
 
 ```groovy
 plugins {
-    id 'java'
-    id 'application'
+  id 'java'
+  id 'application'
 }
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 dependencies {
-    compile group: 'org.takes', name: 'takes', version: '1.11.3'
+  compile group: 'org.takes', name: 'takes', version: '1.11.3'
 }
 mainClassName='foo.App' //your main class
 ```
