@@ -42,7 +42,7 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.misc.Href;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsJson;
 
@@ -140,7 +140,7 @@ final class PsLinkedinTest {
                 )
             );
             MatcherAssert.assertThat(
-                new RqHref.Base(req).href().toString(),
+                new RqHrefBase(req).href().toString(),
                 Matchers.endsWith(this.tokenpath)
             );
             return new RsJson(

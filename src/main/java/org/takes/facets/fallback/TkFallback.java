@@ -34,7 +34,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqMethod;
 import org.takes.rs.ResponseOf;
 import org.takes.tk.TkWrap;
@@ -232,7 +232,7 @@ public final class TkFallback extends TkWrap {
             String.format(
                 "[%s %s] failed in %s: %s",
                 new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
+                new RqHrefBase(req).href(),
                 time, TkFallback.msg(exp)
             ),
             exp

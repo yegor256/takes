@@ -25,7 +25,8 @@ package org.takes.rs.xe;
 
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
+import org.takes.rq.RqHrefSmart;
 
 /**
  * Xembly source to create an HOME Atom LINK element.
@@ -45,7 +46,7 @@ public final class XeLinkHome extends XeWrap {
         super(
             () -> new XeLink(
                 "home",
-                new RqHref.Smart(new RqHref.Base(req)).home()
+                new RqHrefSmart(new RqHrefBase(req)).home()
             ).toXembly()
         );
     }

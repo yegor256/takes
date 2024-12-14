@@ -29,7 +29,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RqHeaders;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rs.RsRedirect;
 
 /**
@@ -58,7 +58,7 @@ public final class TkSslOnly implements Take {
 
     @Override
     public Response act(final Request req) throws Exception {
-        final String href = new RqHref.Base(req).href().toString();
+        final String href = new RqHrefBase(req).href().toString();
         final String proto = new RqHeaders.Smart(req).single("x-forwarded-proto", "https");
         final Response answer;
         if ("https".equalsIgnoreCase(proto)) {

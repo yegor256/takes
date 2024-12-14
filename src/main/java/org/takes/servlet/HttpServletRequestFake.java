@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import org.takes.Request;
 import org.takes.rq.RqHeaders;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqMethod;
 
 /**
@@ -172,7 +172,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public String getRequestURI() {
         try {
-            return new RqHref.Base(this.request).href().path();
+            return new RqHrefBase(this.request).href().path();
         } catch (final IOException ex) {
             throw new IllegalStateException(
                 "Failed to get HREF from Request",

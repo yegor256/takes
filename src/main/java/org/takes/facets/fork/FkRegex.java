@@ -33,7 +33,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.tk.TkFixed;
 import org.takes.tk.TkText;
 
@@ -202,7 +202,7 @@ public final class FkRegex implements Fork {
 
     @Override
     public Opt<Response> route(final Request req) throws Exception {
-        String path = new RqHref.Base(req).href().path();
+        String path = new RqHrefBase(req).href().path();
         if (
             this.removeslash
                 && path.length() > 1

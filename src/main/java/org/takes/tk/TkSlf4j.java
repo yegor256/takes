@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqMethod;
 
 /**
@@ -101,7 +101,7 @@ public final class TkSlf4j implements Take {
                 new FormattedText(
                     "[%s %s]",
                     new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href()
+                    new RqHrefBase(req).href()
                 ),
                 new FormattedText(params.getKey(), params.getValue()),
                 new FormattedText("in %d ms", time.value() - start)

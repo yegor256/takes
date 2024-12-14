@@ -41,7 +41,7 @@ import org.takes.facets.auth.Identity;
 import org.takes.facets.auth.Pass;
 import org.takes.misc.Href;
 import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 
 /**
  * Linkedin OAuth landing/callback page.
@@ -110,7 +110,7 @@ public final class PsLinkedin implements Pass {
     @Override
     public Opt<Identity> enter(final Request request)
         throws IOException {
-        final Href href = new RqHref.Base(request).href();
+        final Href href = new RqHrefBase(request).href();
         final Iterator<String> code = href.param(PsLinkedin.CODE).iterator();
         if (!code.hasNext()) {
             throw new HttpException(

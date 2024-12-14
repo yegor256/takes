@@ -38,7 +38,7 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqGreedy;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqPrint;
 import org.takes.rq.form.RqFormBase;
 import org.takes.rq.form.RqFormSmart;
@@ -145,7 +145,7 @@ final class PsGoogleTest {
                         )
                     );
                     MatcherAssert.assertThat(
-                        new RqHref.Base(req).href()
+                        new RqHrefBase(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
                         Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
@@ -210,7 +210,7 @@ final class PsGoogleTest {
                         )
                     );
                     MatcherAssert.assertThat(
-                        new RqHref.Base(req).href()
+                        new RqHrefBase(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
                         Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
@@ -252,7 +252,7 @@ final class PsGoogleTest {
                         )
                     );
                     MatcherAssert.assertThat(
-                        new RqHref.Base(req).href()
+                        new RqHrefBase(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
                         Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)

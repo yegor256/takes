@@ -29,7 +29,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.InputOf;
 import org.takes.HttpException;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rs.RsWithBody;
 
 /**
@@ -73,7 +73,7 @@ public final class TkFiles extends TkWrap {
         super(
             request -> {
                 final File file = new File(
-                    base, new RqHref.Base(request).href().path()
+                    base, new RqHrefBase(request).href().path()
                 );
                 if (!file.exists()) {
                     throw new HttpException(

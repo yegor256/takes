@@ -28,7 +28,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.facets.auth.PsByFlag;
 import org.takes.misc.Href;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
@@ -86,7 +86,7 @@ public final class XeFacebookLink extends XeWrap {
                 .with("client_id", app)
                 .with(
                     "redirect_uri",
-                    new RqHref.Base(req).href()
+                    new RqHrefBase(req).href()
                         .with(flag, PsFacebook.class.getSimpleName())
                 )
         );
