@@ -38,8 +38,8 @@ import org.slf4j.LoggerFactory;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 
 /**
  * Logs Take.act() calls.
@@ -100,7 +100,7 @@ public final class TkSlf4j implements Take {
                 new TextOf(" "),
                 new FormattedText(
                     "[%s %s]",
-                    new RqMethod.Base(req).method(),
+                    new RqBaseMethod(req).method(),
                     new RqHref.Base(req).href()
                 ),
                 new FormattedText(params.getKey(), params.getValue()),

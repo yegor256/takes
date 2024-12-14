@@ -43,6 +43,7 @@ import org.takes.Take;
 import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
@@ -277,7 +278,7 @@ final class TkProxyTest {
     }
 
     private static Request createEchoRequest(final Request req) throws IOException {
-        final String method = new RqMethod.Base(req).method();
+        final String method = new RqBaseMethod(req).method();
         return TkProxyTest.NOBODIES.getOrDefault(method, rq -> req).create(req);
     }
 

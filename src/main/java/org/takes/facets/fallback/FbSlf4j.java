@@ -30,8 +30,8 @@ import org.cactoos.text.TextOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.takes.misc.Opt;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 
 /**
  * Fallback that logs all problems through SFL4J.
@@ -68,7 +68,7 @@ public final class FbSlf4j extends FbWrap {
     private static void log(final RqFallback req) throws IOException {
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",
-            new RqMethod.Base(req).method(),
+            new RqBaseMethod(req).method(),
             new RqHref.Base(req).href(),
             req.code(),
             new TextOf(new BytesOf(req.throwable()))

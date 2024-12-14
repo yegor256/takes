@@ -31,7 +31,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
-import org.takes.rq.RqMethod;
+import org.takes.rq.RqBaseMethod;
 import org.takes.tk.TkFixed;
 
 /**
@@ -94,7 +94,7 @@ public final class FkMethods implements Fork {
 
     @Override
     public Opt<Response> route(final Request req) throws Exception {
-        final String mtd = new RqMethod.Base(req).method();
+        final String mtd = new RqBaseMethod(req).method();
         final Opt<Response> resp;
         if (this.methods.contains(mtd)) {
             resp = new Opt.Single<>(this.take.act(req));
