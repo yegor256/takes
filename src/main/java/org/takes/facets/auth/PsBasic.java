@@ -45,7 +45,7 @@ import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
 import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rs.RsWithHeader;
 
 /**
@@ -99,7 +99,7 @@ public final class PsBasic implements Pass {
                     )
                 ),
                 HttpURLConnection.HTTP_UNAUTHORIZED,
-                new RqHref.Base(request).href()
+                new RqHrefBase(request).href()
             );
         }
         final String decoded = new IoCheckedText(
@@ -126,7 +126,7 @@ public final class PsBasic implements Pass {
                     )
                 ),
                 HttpURLConnection.HTTP_UNAUTHORIZED,
-                new RqHref.Base(request).href()
+                new RqHrefBase(request).href()
             );
         }
         return identity;

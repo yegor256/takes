@@ -21,49 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.facets.fallback;
+package org.takes.rq;
 
 import java.io.IOException;
+import java.util.Iterator;
 import lombok.EqualsAndHashCode;
-import org.apache.log4j.Logger;
-import org.cactoos.bytes.BytesOf;
+import org.cactoos.Text;
 import org.cactoos.text.TextOf;
-import org.takes.misc.Opt;
-import org.takes.rq.RqHrefBase;
-import org.takes.rq.RqMethod;
+import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
+import org.takes.Request;
+import org.takes.misc.Href;
 
 /**
- * Fallback that logs all problems through Log4J.
- * @since 0.25
+ * Request decorator, for HTTP URI query parsing.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
+ * @since 0.13.1
  */
 @EqualsAndHashCode(callSuper = true)
-public final class FbLog4j extends FbWrap {
-
+public final class RqHrefBase extends RqWrap implements RqHref {
     /**
      * Ctor.
+     * @param req Original request
      */
-    public FbLog4j() {
-        super(
-            req -> {
-                FbLog4j.log(req);
-                return new Opt.Empty<>();
-            }
-        );
+    public RqHrefBase(final Request req) {
+        super(req);
     }
 
-    /**
-     * Log this request.
-     * @param req Request
-     * @throws IOException If fails
-     */
-    private static void log(final RqFallback req) throws IOException {
-        Logger.getLogger(FbLog4j.class).error(
+    @Override
+    public Href href() throws IOException {
+        final String uri = new RqRequestLine.Base(this).uri();
+        final Iterator<String> hosts = new RqHeaders.Base(this)
+            .header("host").iterator();
+        final Iterator<String> protos = new RqHeaders.Base(this)
+            .header("x-forwarded-proto").iterator();
+        final Text host;
+        if (hosts.hasNext()) {
+            host = new Trimmed(new TextOf(hosts.next()));
+        } else {
+            host = new TextOf("localhost");
+        }
+        final Text proto;
+        if (protos.hasNext()) {
+            proto = new Trimmed(new TextOf(protos.next()));
+        } else {
+            proto = new TextOf("http");
+        }
+        return new Href(
             String.format(
-                "%s %s failed with %s: %s",
-                new RqMethod.Base(req).method(),
-                new RqHrefBase(req).href(),
-                req.code(),
-                new TextOf(new BytesOf(req.throwable()))
+                "%s://%s%s",
+                new UncheckedText(proto).asString(),
+                new UncheckedText(host).asString(),
+                uri
             )
         );
     }

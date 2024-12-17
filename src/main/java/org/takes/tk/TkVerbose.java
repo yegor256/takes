@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.HttpException;
 import org.takes.Take;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqMethod;
 
 /**
@@ -56,7 +56,7 @@ public final class TkVerbose extends TkWrap {
                         String.format(
                             "%s %s",
                             new RqMethod.Base(request).method(),
-                            new RqHref.Base(request).href()
+                            new RqHrefBase(request).href()
                         ),
                         ex
                     );

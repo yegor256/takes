@@ -30,7 +30,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 
 /**
  * Fork by query params and their values, matched by regular express.
@@ -82,7 +82,7 @@ public final class FkParams implements Fork {
 
     @Override
     public Opt<Response> route(final Request req) throws Exception {
-        final Iterator<String> params = new RqHref.Base(req).href()
+        final Iterator<String> params = new RqHrefBase(req).href()
             .param(this.name).iterator();
         final Opt<Response> resp;
         if (params.hasNext()

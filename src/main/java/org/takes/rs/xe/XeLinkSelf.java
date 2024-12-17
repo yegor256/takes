@@ -25,7 +25,7 @@ package org.takes.rs.xe;
 
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 
 /**
  * Xembly source to create an SELF Atom LINK element.
@@ -44,7 +44,7 @@ public final class XeLinkSelf extends XeWrap {
     public XeLinkSelf(final Request req) {
         super(
             () -> new XeLink(
-                "self", new RqHref.Base(req).href()
+                "self", new RqHrefBase(req).href()
             ).toXembly()
         );
     }

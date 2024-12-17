@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 
 /**
  * Passes by flag.
@@ -94,7 +94,7 @@ public final class PsByFlag implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request req) throws Exception {
-        final Iterator<String> flg = new RqHref.Base(req).href()
+        final Iterator<String> flg = new RqHrefBase(req).href()
             .param(this.flag).iterator();
         Opt<Identity> user = new Opt.Empty<>();
         if (flg.hasNext()) {

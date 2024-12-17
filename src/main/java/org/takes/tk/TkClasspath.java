@@ -32,7 +32,7 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rs.RsWithBody;
 
 /**
@@ -89,7 +89,7 @@ public final class TkClasspath extends TkWrap {
                 @Override
                 public Response act(final Request request) throws IOException {
                     final String name = String.format(
-                        "%s%s", prefix, new RqHref.Base(request).href().path()
+                        "%s%s", prefix, new RqHrefBase(request).href().path()
                     );
                     final InputStream input = this.getClass()
                         .getResourceAsStream(name);

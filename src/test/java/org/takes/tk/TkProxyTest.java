@@ -44,7 +44,7 @@ import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
 import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
 import org.takes.rs.RsBodyPrint;
@@ -127,7 +127,7 @@ final class TkProxyTest {
     void correctlyMapsPathString(final String method, final String expected)
         throws Exception {
         final Take take = req ->
-            new RsText(new RqHref.Base(req).href().toString());
+            new RsText(new RqHrefBase(req).href().toString());
         new FtRemote(
             new TkFork(
                 new FkMethods(method, take)

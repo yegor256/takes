@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
 /**
- * Test case for {@link RqHref.Base}.
+ * Test case for {@link RqHrefBase}.
  * @since 0.1
  */
 final class RqHrefTest {
@@ -41,7 +41,7 @@ final class RqHrefTest {
     @Test
     void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Base(
+            new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=3",
@@ -58,7 +58,7 @@ final class RqHrefTest {
     @Test
     void takesProtoIntoAccount() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Base(
+            new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GET /test1",
@@ -75,7 +75,7 @@ final class RqHrefTest {
     @Test
     void parsesHttpQueryWithoutHost() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Base(
+            new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GET /h?a=300",
@@ -92,7 +92,7 @@ final class RqHrefTest {
     void failsOnAbsentRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> new RqHref.Base(
+            () -> new RqHrefBase(
                 new RqSimple(Collections.emptyList(), null)
             ).href()
         );
@@ -102,7 +102,7 @@ final class RqHrefTest {
     void failsOnIllegalRequestLine() {
         Assertions.assertThrows(
             HttpException.class,
-            () -> new RqHref.Base(
+            () -> new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GIVE/contacts",
@@ -117,7 +117,7 @@ final class RqHrefTest {
     @Test
     void extractsParams() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Base(
+            new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?a=3&b=7&c&d=9%28x%29&ff",
@@ -134,7 +134,7 @@ final class RqHrefTest {
     @Test
     void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Base(
+            new RqHrefBase(
                 new RqFake(
                     Arrays.asList(
                         "GET /hello?since=343",
@@ -150,8 +150,8 @@ final class RqHrefTest {
     @Test
     void extractsHome() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Smart(
-                new RqHref.Base(
+            new RqHrefSmart(
+                new RqHrefBase(
                     new RqFake(
                         Arrays.asList(
                             "GET /bye?extra=343",
@@ -168,8 +168,8 @@ final class RqHrefTest {
     @Test
     void extractsHomeWithProtocol() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Smart(
-                new RqHref.Base(
+            new RqHrefSmart(
+                new RqHrefBase(
                     new RqFake(
                         Arrays.asList(
                             "GET /bye-dude?extra=343",
@@ -187,8 +187,8 @@ final class RqHrefTest {
     @Test
     void extractsParamByDefault() throws IOException {
         MatcherAssert.assertThat(
-            new RqHref.Smart(
-                new RqHref.Base(
+            new RqHrefSmart(
+                new RqHrefBase(
                     new RqFake(
                         Arrays.asList(
                             "GET /foo?present=343",

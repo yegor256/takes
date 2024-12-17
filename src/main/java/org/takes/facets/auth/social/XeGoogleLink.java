@@ -27,7 +27,8 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.misc.Href;
-import org.takes.rq.RqHref;
+import org.takes.rq.RqHrefBase;
+import org.takes.rq.RqHrefSmart;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
@@ -50,7 +51,7 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final CharSequence app)
         throws IOException {
-        this(req, app, new RqHref.Smart(new RqHref.Base(req)).home());
+        this(req, app, new RqHrefSmart(new RqHrefBase(req)).home());
     }
 
     /**
@@ -100,7 +101,7 @@ public final class XeGoogleLink extends XeWrap {
                 .with("client_id", app)
                 .with("redirect_uri", redir)
                 .with("response_type", "code")
-                .with("state", new RqHref.Base(req).href())
+                .with("state", new RqHrefBase(req).href())
                 .with(
                     "scope",
                     "https://www.googleapis.com/auth/userinfo.profile"
