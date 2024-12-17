@@ -29,8 +29,8 @@ import org.apache.log4j.Logger;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
 import org.takes.misc.Opt;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 
 /**
  * Fallback that logs all problems through Log4J.
@@ -60,7 +60,7 @@ public final class FbLog4j extends FbWrap {
         Logger.getLogger(FbLog4j.class).error(
             String.format(
                 "%s %s failed with %s: %s",
-                new RqMethod.Base(req).method(),
+                new RqBaseMethod(req).method(),
                 new RqHref.Base(req).href(),
                 req.code(),
                 new TextOf(new BytesOf(req.throwable()))

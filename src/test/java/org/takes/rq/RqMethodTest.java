@@ -39,7 +39,7 @@ final class RqMethodTest {
     @Test
     void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
-            new RqMethod.Base(new RqFake(RqMethod.POST)).method(),
+            new RqBaseMethod(new RqFake(RqMethod.POST)).method(),
             Matchers.equalTo(RqMethod.POST)
         );
     }
@@ -55,7 +55,7 @@ final class RqMethodTest {
         )
         ) {
             MatcherAssert.assertThat(
-                new RqMethod.Base(new RqFake(method)).method(),
+                new RqBaseMethod(new RqFake(method)).method(),
                 Matchers.equalTo(method)
             );
         }
@@ -65,14 +65,14 @@ final class RqMethodTest {
     void supportsExtensionMethods() throws IOException {
         final String method = "CUSTOM";
         MatcherAssert.assertThat(
-            new RqMethod.Base(new RqFake(method)).method(),
+            new RqBaseMethod(new RqFake(method)).method(),
             Matchers.equalTo(method)
         );
     }
 
     @Test
     void failsOnMissingUri() {
-        final RqMethod.Base req = new RqMethod.Base(
+        final RqBaseMethod req = new RqBaseMethod(
             new RqSimple(Arrays.asList("GET"), null)
         );
         Assertions.assertThrows(
@@ -85,7 +85,7 @@ final class RqMethodTest {
     void failsOnExtraLineElement() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new RqMethod.Base(
+            () -> new RqBaseMethod(
                 new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
             ).method()
         );
@@ -95,7 +95,7 @@ final class RqMethodTest {
     void failsOnExtraSpaces() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new RqMethod.Base(
+            () -> new RqBaseMethod(
                 new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
             ).method()
         );
@@ -105,7 +105,7 @@ final class RqMethodTest {
     void failsOnSeparatorsInExtensionMethod() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new RqMethod.Base(new RqFake("CUSTO{M)")).method()
+            () -> new RqBaseMethod(new RqFake("CUSTO{M)")).method()
         );
     }
 }

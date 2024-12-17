@@ -21,48 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.takes.tk;
+package org.takes.rq;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.takes.HttpException;
-import org.takes.Take;
-import org.takes.rq.RqBaseMethod;
-import org.takes.rq.RqHref;
+import org.takes.Request;
 
 /**
- * Take that makes all not-found exceptions location aware.
+ * Request decorator, for HTTP method parsing.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.10
+ * @since 0.13.7
  */
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class TkVerbose extends TkWrap {
+public final class RqBaseMethod extends RqWrap implements RqMethod {
+
+    /**
+     * HTTP token separators which are not already excluded by PATTERN.
+     */
+    private static final Pattern SEPARATORS = Pattern.compile(
+        "[()<>@,;:\\\"/\\[\\]?={}]"
+    );
 
     /**
      * Ctor.
-     * @param take Original take
+     * @param req Original request
      */
-    public TkVerbose(final Take take) {
-        super(
-            request -> {
-                try {
-                    return take.act(request);
-                } catch (final HttpException ex) {
-                    throw new HttpException(
-                        ex.code(),
-                        String.format(
-                            "%s %s",
-                            new RqBaseMethod(request).method(),
-                            new RqHref.Base(request).href()
-                        ),
-                        ex
-                    );
-                }
-            }
-        );
+    public RqBaseMethod(final Request req) {
+        super(req);
     }
 
+    @Override
+    public String method() throws IOException {
+        final String method = new RqRequestLine.Base(this).method();
+        if (RqBaseMethod.SEPARATORS.matcher(method).find()) {
+            throw new IOException(
+                String.format("Invalid HTTP method: %s", method)
+            );
+        }
+        return method.toUpperCase(Locale.ENGLISH);
+    }
 }

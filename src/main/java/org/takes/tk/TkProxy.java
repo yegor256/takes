@@ -35,9 +35,9 @@ import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
-import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
 import org.takes.rq.RqRequestLine;
 import org.takes.rs.RsWithBody;
@@ -130,7 +130,7 @@ public final class TkProxy implements Take {
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private com.jcabi.http.Request request(final Request req,
         final URI dest) throws Exception {
-        final String method = new RqMethod.Base(req).method();
+        final String method = new RqBaseMethod(req).method();
         com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
         final RqHeaders headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {

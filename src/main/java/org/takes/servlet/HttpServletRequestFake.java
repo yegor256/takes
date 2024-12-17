@@ -50,9 +50,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import org.takes.Request;
+import org.takes.rq.RqBaseMethod;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
 
 /**
  * Fake HttpServletRequest (for unit tests).
@@ -123,7 +123,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public String getMethod() {
         try {
-            return new RqMethod.Base(this.request).method();
+            return new RqBaseMethod(this.request).method();
         } catch (final IOException ex) {
             throw new IllegalArgumentException(
                 "Failed to get method from the request",
