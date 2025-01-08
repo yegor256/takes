@@ -265,7 +265,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-server</artifactId>
-      <version>3.1.9</version>
+      <version>3.1.10</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
