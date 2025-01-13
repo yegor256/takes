@@ -54,7 +54,7 @@ final class FkHitRefreshTest {
             () -> done.set(true),
             new TkEmpty()
         );
-        TimeUnit.SECONDS.sleep(2L);
+        TimeUnit.MILLISECONDS.sleep(10L);
         FileUtils.touch(temp.resolve("hey.txt").toFile());
         MatcherAssert.assertThat(
             fork.route(req).has(),
