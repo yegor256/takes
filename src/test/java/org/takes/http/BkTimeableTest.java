@@ -57,7 +57,7 @@ final class BkTimeableTest {
         final Take take = req -> {
             Response rsp;
             try {
-                TimeUnit.SECONDS.sleep(10L);
+                TimeUnit.SECONDS.sleep(10_000L);
                 rsp = new RsText("finish");
             } catch (final InterruptedException ex) {
                 Thread.currentThread().interrupt();
