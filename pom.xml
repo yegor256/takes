@@ -96,7 +96,6 @@ SOFTWARE.
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
-    <maven.compiler.proc>full</maven.compiler.proc>
     <argLine/>
   </properties>
   <dependencies>
