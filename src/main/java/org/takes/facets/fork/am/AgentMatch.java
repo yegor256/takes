@@ -39,4 +39,3 @@ public interface AgentMatch {
      */
     boolean matches(String token);
 }
-
