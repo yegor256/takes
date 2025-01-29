@@ -56,7 +56,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-xml</artifactId>
-      <version>0.33.3</version>
+      <version>0.33.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
