@@ -36,6 +36,7 @@ merge:
     mvn clean install -Pqulice --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
 release:
+  pre: false
   script: |-
     [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
     gpg --import /home/r/pubring.gpg
