@@ -3,7 +3,7 @@
 ---
 # yamllint disable rule:line-length
 docker:
-  image: yegor256/rultor-java
+  image: yegor256/java
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
