@@ -4,6 +4,7 @@
 version = 1
 [[annotations]]
 path = [
+    "src/test/resources/org/takes/http/keystore",
     "**.json",
     "**.md",
     "**.png",
