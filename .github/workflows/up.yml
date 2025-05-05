@@ -20,6 +20,7 @@ jobs:
           sed -E -i "s/org.takes:takes:.+/org.takes:takes::${latest}/g" README.md
       - uses: peter-evans/create-pull-request@v7
         with:
+          sign-commits: true
           commit-message: 'new version in README'
           delete-branch: true
           title: 'New version in README'
