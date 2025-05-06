@@ -24,6 +24,70 @@ import org.cactoos.text.UncheckedText;
 final class ChunkedInputStream extends InputStream {
 
     /**
+     * Empty value for checking the result.
+     */
+    private static final int EMPTY_VALUE = -1;
+
+    /**
+     * Default radix value.
+     */
+    private static final int DEFAULT_RADIX = 16;
+
+    /**
+     * Double slash value.
+     */
+    private static final int DOUBLE_SLASH = '\\';
+
+    /**
+     * Quoted string value.
+     */
+    private static final int QUOTED_VALUE = '\"';
+
+    /**
+     * Next line value.
+     */
+    private static final int NEXT_LINE = '\n';
+
+    /**
+     * R value.
+     */
+    private static final int R_VALUE = '\r';
+
+    /**
+     * Semicolon value.
+     */
+    private static final int SEMICOLON = ';';
+
+    /**
+     * Exception for bad state.
+     */
+    private static final String BAD_STATE = "Bad state";
+
+    /**
+     * Exception for bad chunk.
+     */
+    private static final String BAD_CHUNK_SIZE = "Bad chunk size: %s";
+
+    /**
+     * Exception for chunk stream end.
+     */
+    private static final String END_OF_STREAM = "chunked stream ended unexpectedly";
+
+    /**
+     * Exception for crlf expectation state.
+     */
+    private static final String CRLF_EXPECTED = "CRLF expected at end of chunk: ";
+
+    /**
+     * Exception for protocol violation.
+     */
+    private static final String BAD_PROTOCOL = String.format(
+        "%s%s",
+        "Protocol violation: Unexpected",
+        " single newline character in chunk size"
+    );
+
+    /**
      * The inputstream that we're wrapping.
      */
     private final InputStream origin;
@@ -66,7 +130,7 @@ final class ChunkedInputStream extends InputStream {
         }
         final int result;
         if (this.eof) {
-            result = -1;
+            result = ChunkedInputStream.EMPTY_VALUE;
         } else {
             ++this.pos;
             result = this.origin.read();
@@ -82,7 +146,7 @@ final class ChunkedInputStream extends InputStream {
         }
         final int result;
         if (this.eof) {
-            result = -1;
+            result = ChunkedInputStream.EMPTY_VALUE;
         } else {
             final int shift = Math.min(len, this.size - this.pos);
             final int count = this.origin.read(buf, off, shift);
@@ -118,7 +182,7 @@ final class ChunkedInputStream extends InputStream {
             throw new IOException(
                 String.format(
                     "%s %d%s%d",
-                    "CRLF expected at end of chunk: ",
+                    ChunkedInputStream.CRLF_EXPECTED,
                     crsymbol,
                     "/",
                     lfsymbol
@@ -155,7 +219,7 @@ final class ChunkedInputStream extends InputStream {
         throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final String data = baos.toString(Charset.defaultCharset().name());
-        final int separator = data.indexOf(';');
+        final int separator = data.indexOf(ChunkedInputStream.SEMICOLON);
         final Text number = new Trimmed(
             new Unchecked<>(
                 new Ternary<>(
@@ -167,42 +231,18 @@ final class ChunkedInputStream extends InputStream {
         );
         try {
             return Integer.parseInt(
-                new UncheckedText(
-                    number
-                ).asString(),
-                16
+                new UncheckedText(number).asString(),
+                ChunkedInputStream.DEFAULT_RADIX
             );
         } catch (final NumberFormatException ex) {
             throw new IOException(
                 String.format(
-                    "Bad chunk size: %s",
+                    ChunkedInputStream.BAD_CHUNK_SIZE,
                     baos.toString(Charset.defaultCharset().name())
                 ),
                 ex
             );
         }
-    }
-
-    /**
-     * Possible states of FSM that used to find chunk size.
-     */
-    private enum State {
-        /**
-         * Normal.
-         */
-        NORMAL,
-        /**
-         * If \r was scanned.
-         */
-        R,
-        /**
-         * Inside quoted string.
-         */
-        QUOTED_STRING,
-        /**
-         * End.
-         */
-        END;
     }
 
     /**
@@ -232,8 +272,8 @@ final class ChunkedInputStream extends InputStream {
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
         final int next = stream.read();
-        if (next == -1) {
-            throw new IOException("chunked stream ended unexpectedly");
+        if (next == ChunkedInputStream.EMPTY_VALUE) {
+            throw new IOException(ChunkedInputStream.END_OF_STREAM);
         }
         final State result;
         switch (state) {
@@ -241,23 +281,17 @@ final class ChunkedInputStream extends InputStream {
                 result = nextNormal(state, line, next);
                 break;
             case R:
-                if (next == '\n') {
+                if (next == ChunkedInputStream.NEXT_LINE) {
                     result = State.END;
                 } else {
-                    throw new IOException(
-                        String.format(
-                            "%s%s",
-                            "Protocol violation: Unexpected",
-                            " single newline character in chunk size"
-                        )
-                    );
+                    throw new IOException(ChunkedInputStream.BAD_PROTOCOL);
                 }
                 break;
             case QUOTED_STRING:
                 result = nextQuoted(stream, state, line, next);
                 break;
             default:
-                throw new IllegalStateException("Bad state");
+                throw new IllegalStateException(ChunkedInputStream.BAD_STATE);
         }
         return result;
     }
@@ -273,10 +307,10 @@ final class ChunkedInputStream extends InputStream {
         final ByteArrayOutputStream line, final int next) {
         final State result;
         switch (next) {
-            case '\r':
+            case ChunkedInputStream.R_VALUE:
                 result = State.R;
                 break;
-            case '\"':
+            case ChunkedInputStream.QUOTED_VALUE:
                 result = State.QUOTED_STRING;
                 break;
             default:
@@ -302,11 +336,11 @@ final class ChunkedInputStream extends InputStream {
         throws IOException {
         final State result;
         switch (next) {
-            case '\\':
+            case ChunkedInputStream.DOUBLE_SLASH:
                 result = state;
                 line.write(stream.read());
                 break;
-            case '\"':
+            case ChunkedInputStream.QUOTED_VALUE:
                 result = State.NORMAL;
                 break;
             default:
@@ -315,5 +349,27 @@ final class ChunkedInputStream extends InputStream {
                 break;
         }
         return result;
+    }
+
+    /**
+     * Possible states of FSM that used to find chunk size.
+     */
+    private enum State {
+        /**
+         * Normal.
+         */
+        NORMAL,
+        /**
+         * If \r was scanned.
+         */
+        R,
+        /**
+         * Inside quoted string.
+         */
+        QUOTED_STRING,
+        /**
+         * End.
+         */
+        END;
     }
 }
