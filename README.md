@@ -257,7 +257,7 @@ public final class AppTest {
       new RsPrint(
         new App().act(new RqFake("GET", "/"))
       ).printBody(),
-      Matchers.equalsTo("hello, world!")
+      Matchers.equalTo("hello, world!")
     );
   }
 }
@@ -385,20 +385,20 @@ public final class App {
 }
 ```
 
-## Front interface
+## Front Interface
 
-Essential part of [Bigger Example](#a-bigger-example) is
+An essential part of the [Bigger Example](#a-bigger-example) is the
 [Front](src/main/java/org/takes/http/Front.java) interface.
-It's encapsulates server's [back-end](src/main/java/org/takes/http/Back.java)
-and used to start an instance, which will accept requests and return results.
+It encapsulates server's [back-end](src/main/java/org/takes/http/Back.java)
+and is used to start an instance, which will accept requests and return results.
 `FtBasic`, which is a basic front, implements that interface - you've
-seen it's usage in above mentioned example.
+seen its usage in the above mentioned example.
 
 There are other useful implementations of this interface:
 
 * The [FtRemote](src/main/java/org/takes/http/FtRemote.java)
-class allows you to provide script, that will be executed against
-given front. You can see how it's used in
+class allows you to provide a script that will be executed against
+a given front. You can see how it's used in
 [integration tests](#integration-testing).
 * The [FtCli](src/main/java/org/takes/http/FtCli.java) class
 allows you to start your application with command line arguments. More details
@@ -544,16 +544,16 @@ classes for that:
 ```java
 new TkFork(
   new FkRegex("/css/.+", new TkWithType(new TkClasspath(), "text/css")),
-  new FkRegex("/data/.+", new TkFiles(new File("/usr/local/data"))
+  new FkRegex("/data/.+", new TkFiles(new File("/usr/local/data")))
 )
 ```
 
-Class `TkClasspath` take static part of the request URI and finds
-a resource with this name in classpath.
+Class `TkClasspath` takes the static part of the request URI and finds
+a resource with this name in the classpath.
 
-`TkFiles` just looks by file name in the directory configured.
+`TkFiles` just looks for files by name in the configured directory.
 
-`TkWithType` sets content type of all responses coming out of
+`TkWithType` sets the content type of all responses coming out of
 the decorated take.
 
 ## Hit Refresh Debugging
@@ -574,7 +574,7 @@ new TkFork(
           "./src/main/resources/foo/scss/**", // what sources to watch
           "mvn sass:compile", // what to run when sources are modified
           new TkFiles("./target/css")
-        )
+        ),
         new FkFixed(new TkClasspath())
       ),
       "text/css"
@@ -895,8 +895,8 @@ public final class TkIndex implements Take {
   public Response act(final Request req) {
     return new RsFork(
       req,
-      new FkTypes("text/*", new RsText("it's a text"))
-      new FkTypes("application/json", new RsJSON("{\"a\":1}"))
+      new FkTypes("text/*", new RsText("it's a text")),
+      new FkTypes("application/json", new RsJSON("{\"a\":1}")),
       new FkTypes("image/png", /* something else */)
     );
   }
@@ -916,7 +916,7 @@ System.setProperty("javax.net.ssl.trustStore", file);
 System.setProperty("javax.net.ssl.trustStorePassword", password);
 ```
 
-Then simple create exemplar of class
+Then simply create an instance of class
 [`FtSecure`](src/main/java/org/takes/http/FtSecure.java) with socket factory
 
 ```java
@@ -992,9 +992,9 @@ public final class TkAccount implements Take {
   @Override
   public Response act(final Request req) {
     final Identity identity = new RqAuth(req).identity();
-    if (this.identity.equals(Identity.ANONYMOUS)) {
+    if (identity.equals(Identity.ANONYMOUS)) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
-      this.identity().urn();
+      identity.urn();
     }
   }
 }
