@@ -48,12 +48,11 @@ public final class FkChain implements Fork {
 
     @Override
     public Opt<Response> route(final Request request) throws Exception {
-        Opt<Response> response = new Opt.Empty<>();
+        final Opt<Response> response = new Opt.Empty<>();
         for (final Fork fork : this.forks) {
             final Opt<Response> current = fork.route(request);
             if (current.has()) {
-                response = current;
-                break;
+                return current;
             }
         }
         return response;

@@ -46,7 +46,7 @@ public final class XeGithubLink extends XeWrap {
      */
     public XeGithubLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence flag) throws IOException {
-        super(XeGithubLink.make(req, app, rel, flag));
+        super(make(req, app, rel, flag));
     }
 
     /**
