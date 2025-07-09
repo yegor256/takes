@@ -504,6 +504,11 @@
                 <exclude>duplicatefinder:.*</exclude>
                 <exclude>dependencies:.*</exclude>
               </excludes>
+              <checkstyle>
+                <properties>
+                  <header.file>${project.basedir}/src/config/qulice-header.txt</header.file>
+                </properties>
+              </checkstyle>
             </configuration>
           </plugin>
         </plugins>
