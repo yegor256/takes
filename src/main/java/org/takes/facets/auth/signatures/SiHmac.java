@@ -80,7 +80,7 @@ public final class SiHmac implements Signature {
      */
     public SiHmac(final byte[] key, final int bits) {
         this.key = key.clone();
-        this.bits = SiHmac.bitLength(bits);
+        this.bits = bitLength(bits);
     }
 
     @Override

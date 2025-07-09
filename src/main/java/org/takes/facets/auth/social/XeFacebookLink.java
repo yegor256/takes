@@ -46,7 +46,7 @@ public final class XeFacebookLink extends XeWrap {
      */
     public XeFacebookLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence flag) throws IOException {
-        super(XeFacebookLink.make(req, app, rel, flag));
+        super(make(req, app, rel, flag));
     }
 
     /**

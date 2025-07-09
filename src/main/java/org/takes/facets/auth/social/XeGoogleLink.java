@@ -59,7 +59,7 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence redir) throws IOException {
-        super(XeGoogleLink.make(req, app, rel, redir));
+        super(make(req, app, rel, redir));
     }
 
     /**

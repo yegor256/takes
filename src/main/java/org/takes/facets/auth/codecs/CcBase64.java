@@ -47,7 +47,7 @@ public final class CcBase64 implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        final byte[] illegal = CcBase64.checkIllegalCharacters(bytes);
+        final byte[] illegal = checkIllegalCharacters(bytes);
         if (illegal.length > 0) {
             throw new DecodingException(
                 String.format(
