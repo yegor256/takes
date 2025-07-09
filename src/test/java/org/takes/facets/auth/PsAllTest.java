@@ -89,7 +89,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testSuccessfullIdx() throws Exception {
+    void testSuccessfulIdx() throws Exception {
         final int index = 3;
         final Pass resulting = new PsFixed(
             new Identity.Simple("urn:foo:test")
