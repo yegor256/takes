@@ -12,13 +12,13 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+import java.util.Objects;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -31,7 +31,6 @@ import org.takes.facets.auth.Identity;
  * <p>The class is immutable and thread-safe.
  * @since 0.13.8
  */
-@EqualsAndHashCode
 public final class CcAes implements Codec {
     /**
      * Secure random instance.
@@ -211,4 +210,35 @@ public final class CcAes implements Codec {
             throw new IOException(ex);
         }
     }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcAes ccAes = (CcAes) o;
+        return Objects.equals(origin, ccAes.origin) &&
+                Objects.equals(key, ccAes.key) &&
+                Objects.equals(random, ccAes.random);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(origin, key, random);
+    }
+
 }
