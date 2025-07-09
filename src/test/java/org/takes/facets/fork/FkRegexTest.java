@@ -27,7 +27,7 @@ final class FkRegexTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );
@@ -36,7 +36,7 @@ final class FkRegexTest {
                 Pattern.compile("/h[a-z]{2}"),
                 new TkEmpty()
             ).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );

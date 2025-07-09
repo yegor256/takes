@@ -251,9 +251,9 @@ final class RqMtSmartTest {
                 ""
             ).asString();
         bwr.write(head);
-        final int byt = 0x7f;
+        final int maxByteValue  = 0x7f;
         for (int idx = 0; idx < length; ++idx) {
-            bwr.write(idx % byt);
+            bwr.write(idx % maxByteValue );
         }
         final String foot =
             new Joined(
@@ -268,7 +268,7 @@ final class RqMtSmartTest {
         final Request req = new RqFake(
             Arrays.asList(
                 post,
-                "Host: exampl.com",
+                "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
@@ -288,7 +288,7 @@ final class RqMtSmartTest {
                 MatcherAssert.assertThat(
                     String.format("byte %d not matched", idx),
                     stream.read(),
-                    Matchers.equalTo(idx % byt)
+                    Matchers.equalTo(idx % maxByteValue )
                 );
             }
         } finally {

@@ -67,7 +67,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testOneSuccessfull() throws Exception {
+    void testOneSuccessful() throws Exception {
         MatcherAssert.assertThat(
             new PsAll(
                 Collections.singletonList(new PsFake(true)),

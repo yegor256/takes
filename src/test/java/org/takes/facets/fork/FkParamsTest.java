@@ -20,7 +20,7 @@ final class FkParamsTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             new FkParams("a", "[0-9]+", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );

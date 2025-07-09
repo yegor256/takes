@@ -38,7 +38,7 @@ final class TokenTest {
             code,
             new IsEqual<>(
                 Base64.getEncoder().encode(
-                    "{\"alg\":\"HS256\",\"typ\":\"JWT\"}".getBytes()
+                    "{\"alg\":\"HS256\",\"type\":\"JWT\"}".getBytes()
                 )
             )
         );

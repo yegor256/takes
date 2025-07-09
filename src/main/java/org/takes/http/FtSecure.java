@@ -49,24 +49,24 @@ public final class FtSecure implements Front {
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param back Back
      * @param port Port
      * @throws IOException If fails
      */
-    public FtSecure(final Back bck, final int port) throws IOException {
+    public FtSecure(final Back back, final int port) throws IOException {
         this(
-            bck,
+            back,
             SSLServerSocketFactory.getDefault().createServerSocket(port)
         );
     }
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param back Back
      * @param skt Server socket
      */
-    FtSecure(final Back bck, final ServerSocket skt) {
-        this.front = new FtBasic(bck, skt);
+    FtSecure(final Back back, final ServerSocket skt) {
+        this.front = new FtBasic(back, skt);
     }
 
     @Override
