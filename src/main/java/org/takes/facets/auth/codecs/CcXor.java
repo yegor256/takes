@@ -6,7 +6,8 @@ package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import java.util.Arrays;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
+
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.bytes.UncheckedBytes;
 import org.takes.facets.auth.Identity;
@@ -18,7 +19,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.1
  */
-@EqualsAndHashCode
 public final class CcXor implements Codec {
 
     /**
@@ -83,6 +83,32 @@ public final class CcXor implements Codec {
             }
         }
         return output;
+    }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcXor ccXor = (CcXor) o;
+        return Objects.equals(origin, ccXor.origin)
+                && Objects.deepEquals(secret, ccXor.secret);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(origin, Arrays.hashCode(secret));
     }
 
 }
