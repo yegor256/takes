@@ -78,7 +78,7 @@
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
     <argLine/>
-    <logback.version>1.4.14</logback.version>
+    <logback.version>1.5.16</logback.version>
     <log4j2.version>2.24.0</log4j2.version>
   </properties>
   <dependencyManagement>
@@ -103,9 +103,15 @@
         <artifactId>log4j-slf4j2-impl</artifactId>
         <version>${log4j2.version}</version>
       </dependency>
+
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

@@ -16,7 +16,7 @@
   <properties>
     <saxon.version>9.1.0.8</saxon.version>
     <jdk.version>1.8</jdk.version>
-    <logback.version>1.4.14</logback.version>
+    <logback.version>1.5.16</logback.version>
     <log4j2.version>2.24.0</log4j2.version>
   </properties>
   <dependencyManagement>
@@ -118,6 +118,12 @@
       <artifactId>saxon</artifactId>
       <version>${saxon.version}</version>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>net.sourceforge.saxon</groupId>
@@ -125,6 +131,12 @@
       <version>${saxon.version}</version>
       <classifier>dom</classifier>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
@@ -137,6 +149,11 @@
       <artifactId>javax.el-api</artifactId>
       <version>3.0.1-b06</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
   </dependencies>
   <profiles>
