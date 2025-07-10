@@ -114,60 +114,60 @@ public final class FkRegex implements Fork {
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param take Take
      */
-    public FkRegex(final String ptn, final Take tke) {
+    public FkRegex(final String ptn, final Take take) {
         this(
             Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
-            tke
+            take
         );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param take Take
      */
-    public FkRegex(final Pattern ptn, final Take tke) {
+    public FkRegex(final Pattern ptn, final Take take) {
         this(
             ptn,
-            (TkRegex) req -> tke.act(req)
+            (TkRegex) req -> take.act(req)
         );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param take Take
      */
-    public FkRegex(final String ptn, final TkRegex tke) {
+    public FkRegex(final String ptn, final TkRegex take) {
         this(
             Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
-            tke
+            take
         );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param take Take
      */
-    public FkRegex(final Pattern ptn, final TkRegex tke) {
+    public FkRegex(final Pattern ptn, final TkRegex take) {
         this(
             ptn,
-            () -> tke
+            () -> take
         );
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param take Take
      * @since 1.4
      */
-    public FkRegex(final Pattern ptn, final Scalar<TkRegex> tke) {
+    public FkRegex(final Pattern ptn, final Scalar<TkRegex> take) {
         this.pattern = ptn;
-        this.target = tke;
+        this.target = take;
         this.removeslash = true;
     }
 

@@ -45,21 +45,21 @@ public final class FkAnonymous implements Fork {
 
     /**
      * Ctor.
-     * @param tke Target
+     * @param take Target
      */
-    public FkAnonymous(final Take tke) {
+    public FkAnonymous(final Take take) {
         this(
-            () -> tke
+            () -> take
         );
     }
 
     /**
      * Ctor.
-     * @param tke Target
+     * @param take Target
      * @since 1.4
      */
-    public FkAnonymous(final Scalar<Take> tke) {
-        this.take = tke;
+    public FkAnonymous(final Scalar<Take> take) {
+        this.take = take;
     }
 
     @Override

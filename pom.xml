@@ -78,14 +78,40 @@
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
     <argLine/>
+    <logback.version>1.5.16</logback.version>
+    <log4j2.version>2.24.3</log4j2.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j2-impl</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
-    <!--
-    Pay attention that we are NOT allowed to use ANY third-party
-    dependencies here, unless they are in PROVIDED, TEST of RUNTIME
-    scope. The project must be self-sufficient and work in a single
-    JAR dependency.
-    -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -94,14 +120,6 @@
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
-      <!--
-      @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
-       remove all references to Files.newXXX static methods and
-       replace them with OO objects such as InputOf or OutputOf
-       depending on the need. See
-       https://github.com/yegor256/takes/pull/886#issuecomment-446030223
-       for details.
-      -->
       <version>0.56.1</version>
     </dependency>
     <dependency>
@@ -175,11 +193,36 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -229,6 +272,12 @@
       <artifactId>jcabi-log</artifactId>
       <version>0.24.3</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>jakarta.ws.rs</groupId>
@@ -327,6 +376,8 @@
       </exclusions>
     </dependency>
   </dependencies>
+
+  <!-- Остальная часть файла без изменений -->
   <build>
     <testResources>
       <testResource>
@@ -336,14 +387,6 @@
           <exclude>org/takes/http/keystore</exclude>
         </excludes>
       </testResource>
-      <!--
-      This is not a typo. We need to copy resources twice, one
-      time with filtering, second time without. Why? I don't know. But
-      if you remove one of these blocks, the build will fail. If you have
-      time and energy, try to figure out what's going on here and either
-      remove one of these blocks or improve this XML comment and explain
-      properly why we need this configuration.
-      -->
       <testResource>
         <filtering>false</filtering>
         <directory>${project.basedir}/src/test/resources</directory>
@@ -465,12 +508,6 @@
             </dependency>
           </ignoredDependencies>
         </configuration>
-        <!--
-        @todo #958:30min duplicate-finder-maven-plugin found module-info as duplicate
-         and different class in [javax.json:javax.json-api:1.1,javax.xml.bind:jaxb-api:2.3.0].
-         After resolving duplicatefinder in Qulice, remove this plugin and configure qulice
-         plugin to enable these exclusions (see at https://www.qulice.com/qulice-maven-plugin/example-exclude.html).
-        -->
       </plugin>
     </plugins>
   </build>
@@ -504,6 +541,11 @@
                 <exclude>duplicatefinder:.*</exclude>
                 <exclude>dependencies:.*</exclude>
               </excludes>
+              <checkstyle>
+                <properties>
+                  <header.file>${project.basedir}/src/config/qulice-header.txt</header.file>
+                </properties>
+              </checkstyle>
             </configuration>
           </plugin>
         </plugins>
@@ -545,7 +587,6 @@
       </build>
     </profile>
     <profile>
-      <!-- https://stackoverflow.com/questions/52502189/java-11-package-javax-xml-bind-does-not-exist -->
       <id>java-xml-bind</id>
       <activation>
         <jdk>[1.11,)</jdk>

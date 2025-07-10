@@ -53,22 +53,22 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param back Back
      * @param port Port
      * @throws IOException If fails
      */
-    public FtBasic(final Back bck, final int port) throws IOException {
-        this(bck, new ServerSocket(port));
+    public FtBasic(final Back back, final int port) throws IOException {
+        this(back, new ServerSocket(port));
     }
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param back Back
      * @param skt Server socket
      * @since 0.22
      */
-    public FtBasic(final Back bck, final ServerSocket skt) {
-        this.back = bck;
+    public FtBasic(final Back back, final ServerSocket skt) {
+        this.back = back;
         this.socket = skt;
     }
 

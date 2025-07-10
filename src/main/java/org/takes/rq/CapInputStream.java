@@ -65,14 +65,14 @@ final class CapInputStream extends InputStream {
     @Override
     public int read(final byte[] buf, final int off,
         final int len) throws IOException {
-        final int readed;
+        final int read;
         if (this.more <= 0L) {
-            readed = -1;
+            read = -1;
         } else {
-            readed = this.origin.read(buf, off, Math.min(len, (int) this.more));
-            this.more -= (long) readed;
+            read = this.origin.read(buf, off, Math.min(len, (int) this.more));
+            this.more -= read;
         }
-        return readed;
+        return read;
     }
 
     @Override

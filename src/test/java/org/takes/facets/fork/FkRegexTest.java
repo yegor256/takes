@@ -26,17 +26,17 @@ final class FkRegexTest {
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
-            new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+            new FkRegex("/h[a-z]{3}", new TkEmpty()).route(
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             new FkRegex(
-                Pattern.compile("/h[a-z]{2}"),
+                Pattern.compile("/h[a-z]{3}"),
                 new TkEmpty()
             ).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );

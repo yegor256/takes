@@ -20,7 +20,7 @@ final class FkAnonymousTest {
     void matchesIfAnonymousUser() throws Exception {
         MatcherAssert.assertThat(
             new FkAnonymous(new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hell?a=1")
             ).has(),
             Matchers.is(true)
         );

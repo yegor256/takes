@@ -1,0 +1,4 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) ${year} ${owner}
+ * SPDX-License-Identifier: MIT
+ */

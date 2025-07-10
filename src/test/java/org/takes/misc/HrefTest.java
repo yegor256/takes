@@ -49,7 +49,7 @@ final class HrefTest {
     }
 
     @Test
-    void extractsParamtetersFromQuery() {
+    void extractsParametersFromQuery() {
         final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
         MatcherAssert.assertThat(
             "Can't get first parameter.",
