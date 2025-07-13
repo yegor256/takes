@@ -233,7 +233,7 @@ repositories {
   mavenCentral()
 }
 dependencies {
-  compile group: 'org.takes', name: 'takes', version: '1.11.3'
+  implementation group: 'org.takes', name: 'takes', version: '1.24.6'
 }
 mainClassName='foo.App' //your main class
 ```
