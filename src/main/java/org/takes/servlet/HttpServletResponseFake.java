@@ -298,7 +298,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     @Override
     public boolean isCommitted() {
-        throw new UnsupportedOperationException("#isCommited()");
+        throw new UnsupportedOperationException("#isCommitted()");
     }
 
     @Override
