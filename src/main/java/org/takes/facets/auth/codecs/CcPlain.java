@@ -65,14 +65,14 @@ public final class CcPlain implements Codec {
             try {
                 map.put(
                     new UncheckedText(pair.get(0)).asString(),
-                    CcPlain.decode(new UncheckedText(pair.get(1)).asString())
+                    decode(new UncheckedText(pair.get(1)).asString())
                 );
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
             }
         }
         return new Identity.Simple(
-            CcPlain.decode(
+            decode(
                 new UncheckedText(parts.get(0)).asString()
             ), map
         );

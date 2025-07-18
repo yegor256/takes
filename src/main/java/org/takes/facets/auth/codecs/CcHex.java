@@ -87,7 +87,7 @@ public final class CcHex implements Codec {
                 throw new DecodingException("not enough data");
             }
             out.write(
-                (CcHex.decode(bytes[idx]) << 4) + CcHex.decode(bytes[idx + 1])
+                (decode(bytes[idx]) << 4) + decode(bytes[idx + 1])
             );
             idx += 2;
         }
