@@ -50,23 +50,23 @@ public final class FkTypes implements Fork {
     /**
      * Ctor.
      * @param list List of types
-     * @param tke The take to use to build the response to return
+     * @param that The take to use to build the response to return
      */
-    public FkTypes(final String list, final Take tke) {
-        this(list, new Opt.Empty<>(), new Opt.Single<>(tke));
+    public FkTypes(final String list, final Take that) {
+        this(list, new Opt.Empty<>(), new Opt.Single<>(that));
     }
 
     /**
      * Ctor.
      * @param list List of types
      * @param resp Response to return
-     * @param tke The take to use to build the response to return
+     * @param that The take to use to build the response to return
      */
     private FkTypes(final String list, final Opt<Response> resp,
-        final Opt<Take> tke) {
+        final Opt<Take> that) {
         this.types = new MediaTypes(list);
         this.response = resp;
-        this.take = tke;
+        this.take = that;
     }
 
     @Override

@@ -43,7 +43,11 @@ final class XeFlashTest {
                 cookies.add(matcher.group(1));
             }
         }
-        MatcherAssert.assertThat(cookies, Matchers.hasSize(1));
+        MatcherAssert.assertThat(
+            "Exactly one RsFlash cookie must be set",
+            cookies,
+            Matchers.hasSize(1)
+        );
         MatcherAssert.assertThat(
             IOUtils.toString(
                 new RsXembly(
