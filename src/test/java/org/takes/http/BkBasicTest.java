@@ -69,6 +69,7 @@ import org.takes.tk.TkText;
         final String hello = "Hello World";
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
+            "Socket output must contain the response text",
             baos.toString(),
             Matchers.containsString(hello)
         );
@@ -105,6 +106,7 @@ import org.takes.tk.TkText;
         final Request request = ref.get();
         final RqHeaders.Smart smart = new RqHeaders.Smart(request);
         MatcherAssert.assertThat(
+            "X-Takes-LocalAddress header must not contain slashes",
             smart.single(
                 "X-Takes-LocalAddress",
                 ""
@@ -114,6 +116,7 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "X-Takes-RemoteAddress header must not contain slashes",
             smart.single(
                 "X-Takes-RemoteAddress",
                 ""
@@ -123,18 +126,22 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "Local socket address must be present",
             new RqSocket(request).getLocalAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Local socket port must be zero for mock socket",
             new RqSocket(request).getLocalPort(),
             Matchers.equalTo(0)
         );
         MatcherAssert.assertThat(
+            "Remote socket address must be present",
             new RqSocket(request).getRemoteAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Remote socket port must be zero for mock socket",
             new RqSocket(request).getRemotePort(),
             Matchers.equalTo(0)
         );
@@ -189,6 +196,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Two responses must be sent in one connection",
             output.toString(),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
@@ -247,6 +255,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain 411 status for missing Content-Length",
             output.toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
@@ -304,6 +313,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain text for closed connection request",
             output.toString(),
             Matchers.containsString(text)
         );
