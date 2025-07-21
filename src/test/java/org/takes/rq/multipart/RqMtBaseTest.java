@@ -82,7 +82,11 @@ final class RqMtBaseTest {
         final RqMtBase first = new RqMtBase(req);
         final RqMtBase second = new RqMtBase(req);
         try {
-            MatcherAssert.assertThat(first, Matchers.equalTo(second));
+            MatcherAssert.assertThat(
+                "RqMtBase instances must be equal",
+                first,
+                Matchers.equalTo(second)
+            );
         } finally {
             req.body().close();
             first.part(part).iterator().next().body().close();
@@ -148,6 +152,7 @@ final class RqMtBaseTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart must have Content-Length header",
                 multipart.part(part)
                     .iterator()
                     .next(),
