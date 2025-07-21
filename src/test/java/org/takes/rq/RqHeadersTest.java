@@ -19,6 +19,7 @@ final class RqHeadersTest {
     @Test
     void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "HTTP header must be parsed correctly with whitespace trimmed",
             new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
@@ -36,6 +37,7 @@ final class RqHeadersTest {
     @Test
     void findsAllHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "Multiple headers with same name must all be found",
             new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
@@ -54,6 +56,7 @@ final class RqHeadersTest {
     @Test
     void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
+            "Smart header must return actual header value when present",
             new RqHeaders.Smart(
                 new RqFake(
                     Arrays.asList(
@@ -71,6 +74,7 @@ final class RqHeadersTest {
     void returnsDefaultHeader() throws IOException {
         final String type = "text/plain";
         MatcherAssert.assertThat(
+            "Smart header must return default value when header is absent",
             new RqHeaders.Smart(
                 new RqFake(
                     Arrays.asList(
