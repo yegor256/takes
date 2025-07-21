@@ -116,6 +116,7 @@ final class TkGzipTest {
         final String body = "Halo, Siñor!";
         new FtRemote(new TkGzip(req -> new RsText(body))).exec(
             home -> MatcherAssert.assertThat(
+                "TkGzip must return exactly same compressed content as RsGzip over HTTP",
                 new JdkRequest(home)
                     .method("GET")
                     .header("Accept-Encoding", "gzip")
@@ -136,6 +137,7 @@ final class TkGzipTest {
     void compressesOverHttp() throws Exception {
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
             home -> MatcherAssert.assertThat(
+                "TkGzip must compress content over HTTP that decompresses to original text",
                 new TextOf(
                     new GZIPInputStream(
                         new ByteArrayInputStream(
