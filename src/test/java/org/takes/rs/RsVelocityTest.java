@@ -23,6 +23,7 @@ final class RsVelocityTest {
     @Test
     void buildsTextResponse() throws IOException {
         MatcherAssert.assertThat(
+            "Velocity template must substitute variables correctly",
             IOUtils.toString(
                 new RsVelocity(
                     "hello, ${name}!",
@@ -41,6 +42,7 @@ final class RsVelocityTest {
             IOUtils.toInputStream(template, StandardCharsets.UTF_8)
         );
         MatcherAssert.assertThat(
+            "Velocity template from stream must render correctly",
             IOUtils.toString(
                 new RsVelocity(
                     stream,
@@ -60,6 +62,7 @@ final class RsVelocityTest {
     @Test
     void useTemplateFolder() throws IOException {
         MatcherAssert.assertThat(
+            "Velocity template from resource folder must render correctly",
             IOUtils.toString(
                 new RsVelocity(
                     RsVelocityTest.class.getResource(

@@ -49,6 +49,7 @@ import org.takes.HttpException;
     void extractsParams() throws IOException {
         final String requestline = "GET /hello?a=6&b=7&c&d=9%28x%29&ff";
         MatcherAssert.assertThat(
+            "Request line header must match original request line",
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
@@ -92,6 +93,7 @@ import org.takes.HttpException;
     @Test
     void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
+            "Request line method must be extracted correctly",
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
@@ -108,6 +110,7 @@ import org.takes.HttpException;
     @Test
     void extractsSecondParam() throws IOException {
         MatcherAssert.assertThat(
+            "Request line URI must be extracted correctly",
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
@@ -124,6 +127,7 @@ import org.takes.HttpException;
     @Test
     void extractsThirdParam() throws IOException {
         MatcherAssert.assertThat(
+            "Request line HTTP version must be extracted correctly",
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
@@ -142,6 +146,7 @@ import org.takes.HttpException;
         Assertions.assertThrows(
             IllegalArgumentException.class,
             () -> MatcherAssert.assertThat(
+                "Missing HTTP version must result in null",
                 new RqRequestLine.Base(
                     new RqFake(
                         Arrays.asList(
