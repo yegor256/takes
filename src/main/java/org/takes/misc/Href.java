@@ -123,7 +123,7 @@ public final class Href implements CharSequence {
             boolean first = true;
             for (final Map.Entry<String, List<String>> ent
                 : this.params.entrySet()) {
-                first = this.appendParam(text, ent, first);
+                first = Href.appendParam(text, ent, first);
             }
         }
     }
