@@ -25,6 +25,7 @@ final class RsJsonTest {
             .add(key, "Jeffrey Lebowski")
             .build();
         MatcherAssert.assertThat(
+            "JSON response must contain the expected string value",
             Json.createReader(
                 new RsJson(json).body()
             ).readObject().getString(key),
@@ -42,6 +43,7 @@ final class RsJsonTest {
             );
         }
         MatcherAssert.assertThat(
+            "Large JSON array response must have the expected size",
             Json.createReader(
                 new RsJson(builder.build()).body()
             ).readArray().size(),
