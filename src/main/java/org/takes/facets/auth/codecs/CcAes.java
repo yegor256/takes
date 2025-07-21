@@ -194,7 +194,7 @@ public final class CcAes implements Codec {
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
      *
-     * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
+     * @param mode Either Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
      * @param spec Param spec (IV)
      * @return The cipher
      * @throws IOException For any unexpected exceptions
