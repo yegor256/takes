@@ -17,6 +17,7 @@ final class IdentityTest {
     @Test
     void equalsToItself() {
         MatcherAssert.assertThat(
+            "Identity must be equal to itself",
             Identity.ANONYMOUS,
             new IsEqual<>(Identity.ANONYMOUS)
         );
