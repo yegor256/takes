@@ -71,6 +71,7 @@ final class PsBasicTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for valid credentials",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -105,6 +106,7 @@ final class PsBasicTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for default entry",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
