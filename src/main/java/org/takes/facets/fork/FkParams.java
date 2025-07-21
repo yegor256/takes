@@ -18,8 +18,8 @@ import org.takes.rq.RqHref;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkParams implements Fork {

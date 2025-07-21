@@ -31,9 +31,9 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.9
  * @see TkFork
  * @see TkRegex
+ * @since 0.9
  */
 @EqualsAndHashCode
 public final class FkAuthenticated implements Fork {
