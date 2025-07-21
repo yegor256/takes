@@ -14,8 +14,8 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.13
  * @see RsFork
+ * @since 0.13
  */
 @EqualsAndHashCode
 public class FkWrap implements Fork {
