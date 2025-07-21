@@ -31,6 +31,7 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
+            "Fork must choose text response when text content is accepted",
             new RsBodyPrint(
                 new RsFork(
                     req,
@@ -45,6 +46,7 @@ final class RsForkTest {
     @Test
     void negotiatesContentWithoutAccept() throws IOException {
         MatcherAssert.assertThat(
+            "Fork must choose PNG response when no Accept header is present",
             new RsBodyPrint(
                 new RsFork(
                     new RqFake(),
@@ -65,6 +67,7 @@ final class RsForkTest {
             ""
         );
         MatcherAssert.assertThat(
+            "Fork must choose XML response when text/xml is accepted",
             new RsBodyPrint(
                 new RsFork(
                     req,
@@ -81,6 +84,7 @@ final class RsForkTest {
     @Test
     void dispatchesByRequestMethod() throws IOException {
         MatcherAssert.assertThat(
+            "Fork must choose POST response when request method is POST",
             new RsBodyPrint(
                 new RsFork(
                     new RqFake("POST", "/test?1", "alpha=1"),
