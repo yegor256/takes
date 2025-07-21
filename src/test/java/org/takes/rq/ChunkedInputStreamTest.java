@@ -34,7 +34,7 @@ final class ChunkedInputStreamTest {
     void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
-        try (final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -72,7 +72,7 @@ final class ChunkedInputStreamTest {
         final String third = "oriented framework";
         final String data = first + second + third;
         final Integer length = data.length();
-        try (final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -112,7 +112,7 @@ final class ChunkedInputStreamTest {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
-        try (final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -147,7 +147,7 @@ final class ChunkedInputStreamTest {
     void readsWithLenGreaterThanTotalSize() throws IOException {
         final String data = "Hello, World!";
         final String length = Integer.toHexString(data.length());
-        try (final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
