@@ -19,6 +19,7 @@ final class FkParamsTest {
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
+            "FkParams must match request when parameter matches regex pattern",
             new FkParams("a", "[0-9]+", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).has(),
