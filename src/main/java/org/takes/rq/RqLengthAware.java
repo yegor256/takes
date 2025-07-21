@@ -61,8 +61,8 @@ public final class RqLengthAware extends RqWrap {
                 result = new CapInputStream(req.body(), Long.parseLong(value));
             } catch (final NumberFormatException ex) {
                 final String msg = "Invalid %s header: %s";
-                final String formated = String.format(msg, RqLengthAware.CONTENT_LENGTH, value);
-                throw new IOException(formated, ex);
+                final String formatted = String.format(msg, RqLengthAware.CONTENT_LENGTH, value);
+                throw new IOException(formatted, ex);
             }
         } else {
             result = req.body();
