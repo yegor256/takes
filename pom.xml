@@ -95,14 +95,6 @@
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
-      <!--
-      @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
-       remove all references to Files.newXXX static methods and
-       replace them with OO objects such as InputOf or OutputOf
-       depending on the need. See
-       https://github.com/yegor256/takes/pull/886#issuecomment-446030223
-       for details.
-      -->
       <version>0.56.1</version>
     </dependency>
     <dependency>
@@ -158,13 +150,6 @@
       <groupId>com.jcabi.incubator</groupId>
       <artifactId>xembly</artifactId>
       <version>0.32.2</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.antlr</groupId>
-      <artifactId>antlr4-runtime</artifactId>
-      <version>4.13.2</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
