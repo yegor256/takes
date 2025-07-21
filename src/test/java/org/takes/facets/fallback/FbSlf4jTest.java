@@ -21,6 +21,7 @@ final class FbSlf4jTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
+            "FbSlf4j must not provide fallback response after logging problem",
             new FbSlf4j().route(req).has(),
             Matchers.is(false)
         );
