@@ -26,6 +26,7 @@ final class RqWithDefaultHeaderTest {
     void providesDefaultHeader() throws IOException {
         final String req = "GET /";
         MatcherAssert.assertThat(
+            "Request must include the default header when not present",
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqFake(Collections.singletonList(req), "body"),
@@ -48,6 +49,7 @@ final class RqWithDefaultHeaderTest {
         final String req = "POST /";
         final String header = "X-Default-Header2";
         MatcherAssert.assertThat(
+            "Request must preserve existing header value over default",
             new RqPrint(
                 new RqWithDefaultHeader(
                     new RqWithHeader(

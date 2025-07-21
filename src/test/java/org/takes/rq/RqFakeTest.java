@@ -46,6 +46,7 @@ final class RqFakeTest {
             "test-6=alpha"
         );
         MatcherAssert.assertThat(
+            "Request print must contain the correct HTTP method and body ending",
             new RqPrint(req),
             Matchers.allOf(
                 new HasString("GET /just-a-test HTTP/1.1\r\n"),
