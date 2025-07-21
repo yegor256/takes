@@ -26,6 +26,7 @@ final class PsAllTest {
         Assertions.assertThrows(
             IllegalArgumentException.class,
             () -> MatcherAssert.assertThat(
+                "Must detect when no pass is available",
                 new PsAll(
                     new ArrayList<>(0),
                     0
@@ -40,6 +41,7 @@ final class PsAllTest {
         Assertions.assertThrows(
             IllegalArgumentException.class,
             () -> MatcherAssert.assertThat(
+                "Must reject negative index",
                 new PsAll(
                     Collections.singletonList(new PsFake(true)),
                     -1
@@ -54,6 +56,7 @@ final class PsAllTest {
         Assertions.assertThrows(
             IllegalArgumentException.class,
             () -> MatcherAssert.assertThat(
+                "Must reject index larger than collection size",
                 new PsAll(
                     Arrays.asList(
                         new PsFake(true),
@@ -69,6 +72,7 @@ final class PsAllTest {
     @Test
     void testOneSuccessfull() throws Exception {
         MatcherAssert.assertThat(
+            "Single successful pass must return true",
             new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 0
@@ -80,6 +84,7 @@ final class PsAllTest {
     @Test
     void testOneFail() throws Exception {
         MatcherAssert.assertThat(
+            "Single failed pass must return false",
             new PsAll(
                 Collections.singletonList(new PsFake(false)),
                 0
@@ -96,6 +101,7 @@ final class PsAllTest {
         );
         final RqFake request = new RqFake();
         MatcherAssert.assertThat(
+            "Must return identity from pass at specified index",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -112,6 +118,7 @@ final class PsAllTest {
     @Test
     void testFail() throws Exception {
         MatcherAssert.assertThat(
+            "Must return false when any pass fails",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -130,6 +137,7 @@ final class PsAllTest {
         final Response response = new RsEmpty();
         final PsFake exiting = new PsFake(true);
         MatcherAssert.assertThat(
+            "Must return same response when exiting",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
