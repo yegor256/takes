@@ -186,6 +186,7 @@ final class RqMtFakeTest {
         multi.part(content).iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
+            "Part with name should not be null",
             multi.part(name).iterator().next(),
             Matchers.notNullValue()
         );
@@ -194,11 +195,13 @@ final class RqMtFakeTest {
             Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
+                "Exception must be ClosedChannelException for name part",
                 ex,
                 new IsInstanceOf(ClosedChannelException.class)
             );
         }
         MatcherAssert.assertThat(
+            "Part with content should not be null",
             multi.part(content).iterator().next(),
             Matchers.notNullValue()
         );
@@ -207,6 +210,7 @@ final class RqMtFakeTest {
             Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
+                "Exception must be ClosedChannelException for content part",
                 ex,
                 new IsInstanceOf(ClosedChannelException.class)
             );
@@ -241,11 +245,13 @@ final class RqMtFakeTest {
         final RqMtBase multi = new RqMtBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
+            "Foo part should not be null",
             multi.part(foo).iterator().next(),
             Matchers.notNullValue()
         );
         multi.part(foo).iterator().next().body().close();
         MatcherAssert.assertThat(
+            "Bar part should not be null",
             multi.part(bar).iterator().next(),
             Matchers.notNullValue()
         );
@@ -276,6 +282,7 @@ final class RqMtFakeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Fake part should not exist",
             multi.part("fake").iterator().hasNext(),
             Matchers.is(false)
         );
@@ -307,6 +314,7 @@ final class RqMtFakeTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart names should match expected set",
                 multi.names(),
                 Matchers.equalTo(
                     new HashSet<>(Arrays.asList("address", "data"))
