@@ -28,10 +28,12 @@ final class FbLog4jTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
+            "FbLog4j fallback must not handle request but log the error",
             new FbLog4j().route(req).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
+            "Log output must contain ERROR level and failure message in correct order",
             new String(baos.toByteArray()),
             Matchers.stringContainsInOrder(
                 Arrays.asList("ERROR", "failed with")
