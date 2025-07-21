@@ -20,6 +20,7 @@ final class CcHexTest {
     void encodes() throws IOException {
         final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
+            "Hex encoded identity must match expected format",
             new String(new CcHex(new CcPlain()).encode(identity)),
             Matchers.equalTo("75726E25-33417465-73742533-4133")
         );
@@ -31,6 +32,7 @@ final class CcHexTest {
         final Identity identity = new Identity.Simple(urn);
         final Codec codec = new CcHex(new CcPlain());
         MatcherAssert.assertThat(
+            "Round-trip encoding must preserve original identity URN",
             codec.decode(codec.encode(identity)).urn(),
             Matchers.equalTo(urn)
         );
@@ -39,6 +41,7 @@ final class CcHexTest {
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
+            "Hex decoding must produce correct identity URN",
             new CcHex(new CcPlain()).decode(
                 "75726E25-33417465-73742533-4141".getBytes()
             ).urn(),
@@ -49,12 +52,14 @@ final class CcHexTest {
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
+            "Invalid hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
                 " % tjw".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
+            "Malformed hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
                 "75-72-6E-253".getBytes()
             ),

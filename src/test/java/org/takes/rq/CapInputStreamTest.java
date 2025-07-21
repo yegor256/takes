@@ -23,6 +23,7 @@ final class CapInputStreamTest {
     void putsCapOnStream() throws IOException {
         final long length = 50L;
         MatcherAssert.assertThat(
+            "Available bytes must equal the specified capacity limit",
             (long) new CapInputStream(
                 new ByteArrayInputStream("test".getBytes()),
                 length
