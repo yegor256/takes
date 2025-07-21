@@ -33,6 +33,7 @@ final class FkContentTypeTest {
     @Test
     void matchesWithAnyTypes() throws Exception {
         MatcherAssert.assertThat(
+            "FkContentType must match when content type is wildcard",
             new FkContentType("text/xml", new RsEmpty()).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -47,6 +48,7 @@ final class FkContentTypeTest {
     @Test
     void matchesDifferentTypes() throws Exception {
         MatcherAssert.assertThat(
+            "FkContentType must not match when content types are different",
             new FkContentType(
                 "application/json charset=utf-8",
                 FkContentTypeTest.emptyResponse()
@@ -64,6 +66,7 @@ final class FkContentTypeTest {
     @Test
     void matchesIdenticalTypes() throws Exception {
         MatcherAssert.assertThat(
+            "FkContentType must match when content types are identical",
             new FkContentType(
                 FkContentTypeTest.CTYPE,
                 FkContentTypeTest.emptyResponse()
@@ -81,6 +84,7 @@ final class FkContentTypeTest {
     @Test
     void matchesEmptyType() throws Exception {
         MatcherAssert.assertThat(
+            "FkContentType must match empty content type when wildcard specified",
             new FkContentType(
                 "*/*",
                 FkContentTypeTest.emptyResponse()
@@ -95,6 +99,7 @@ final class FkContentTypeTest {
     @Test
     void matchesDifferentEncodingsTypes() throws Exception {
         MatcherAssert.assertThat(
+            "FkContentType must not match when charsets are different",
             new FkContentType(
                 FkContentTypeTest.CTYPE,
                 FkContentTypeTest.emptyResponse()

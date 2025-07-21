@@ -24,6 +24,7 @@ final class FkAgentTest {
         final String header = "User-Agent";
         final String agent = "Chrome";
         MatcherAssert.assertThat(
+            "FkAgent must match when user agent version is greater than minimum",
             new FkAgent(
                 new TkEmpty(),
                 new AmVersion(agent, new AmVersion.VmGreater(12))
@@ -37,6 +38,7 @@ final class FkAgentTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "FkAgent must not match when user agent version is less than minimum",
             new FkAgent(
                 new TkEmpty(),
                 new AmVersion(agent, new AmVersion.VmGreater(90))

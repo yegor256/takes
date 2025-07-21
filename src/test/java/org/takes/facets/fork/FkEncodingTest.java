@@ -22,18 +22,21 @@ final class FkEncodingTest {
     void matchesByAcceptEncodingHeader() throws IOException {
         final String header = "Accept-Encoding";
         MatcherAssert.assertThat(
+            "FkEncoding must match when requested encoding is supported",
             new FkEncoding("gzip", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,deflate")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "FkEncoding must match any encoding when empty encoding specified",
             new FkEncoding("", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "FkEncoding must not match when requested encoding is not supported",
             new FkEncoding("deflate", new RsEmpty()).route(
                 new RqWithHeader(new RqFake(), header, "gzip,exi")
             ).has(),

@@ -66,6 +66,7 @@ final class TkProducesTest {
             )
         );
         MatcherAssert.assertThat(
+            "Response must have correct JSON content type when produces JSON",
             new RsPrint(response),
             new IsText(
                 new Joined(
