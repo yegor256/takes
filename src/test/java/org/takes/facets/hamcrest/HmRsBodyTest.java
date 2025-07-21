@@ -26,6 +26,7 @@ final class HmRsBodyTest {
     void testsBodyValuesAreSame() {
         final String body = "Same";
         MatcherAssert.assertThat(
+            "Request body must match expected body content",
             new RqFake(
                 Collections.emptyList(),
                 body
@@ -37,6 +38,7 @@ final class HmRsBodyTest {
     @Test
     void testsBodyValuesAreDifferent() {
         MatcherAssert.assertThat(
+            "Request body must not match different body content",
             new RqFake(
                 Collections.emptyList(),
                 "this"
@@ -56,6 +58,7 @@ final class HmRsBodyTest {
         final StringDescription description = new StringDescription();
         matcher.describeMismatchSafely(request, description);
         MatcherAssert.assertThat(
+            "Mismatch description must show body bytes in readable format",
             description.toString(),
             new IsEqual<>(
                 "body was: [111, 116, 104, 101, 114]"
@@ -74,6 +77,7 @@ final class HmRsBodyTest {
         final StringDescription description = new StringDescription();
         matcher.describeTo(description);
         MatcherAssert.assertThat(
+            "Description must show expected body bytes in readable format",
             description.toString(),
             new IsEqual<>(
                 "body: [116, 119, 111]"

@@ -21,10 +21,12 @@ final class HmRsStatusTest {
     @Test
     void testsStatusOk() throws Exception {
         MatcherAssert.assertThat(
+            "HTML response must have HTTP OK status",
             new TkHtml("<html></html>").act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_OK)
         );
         MatcherAssert.assertThat(
+            "Empty response must have HTTP No Content status",
             new TkEmpty().act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_NO_CONTENT)
         );
@@ -33,6 +35,7 @@ final class HmRsStatusTest {
     @Test
     void testsStatusNotFound() throws Exception {
         MatcherAssert.assertThat(
+            "HTML response must not have HTTP Not Found status",
             new TkHtml("<html><body/></html>").act(new RqFake()),
             new IsNot<>(
                 new HmRsStatus(

@@ -22,6 +22,7 @@ final class VerboseIteratorTest {
     void returnsNextValue() {
         final String accept = "Accept: text/plain";
         MatcherAssert.assertThat(
+            "Iterator must return the first element from non-empty list",
             new VerboseIterable<>(
                 Arrays.asList(
                     accept,
@@ -39,6 +40,7 @@ final class VerboseIteratorTest {
     @Test
     void informsHasNextValue() {
         MatcherAssert.assertThat(
+            "Iterator must indicate next element exists for non-empty list",
             new VerboseIterable<>(
                 Arrays.asList(
                     "User-Agent: LII-Cello/1.0 libwww/2.5",
@@ -65,6 +67,7 @@ final class VerboseIteratorTest {
     @Test
     void returnFalseInHasNextValueOnEmptyList() {
         MatcherAssert.assertThat(
+            "Iterator must indicate no next element exists for empty list",
             new VerboseIterable<String>(
                 Collections.emptyList(),
                 new TextOf("Non used Error Message")
