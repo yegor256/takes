@@ -83,6 +83,7 @@ final class CcAesTest {
             (byte) 20, (byte) 122, (byte) 92, (byte) -128,
         };
         MatcherAssert.assertThat(
+            "CcAes must decrypt identity correctly to original URN",
             new CcAes(
                 new CcTest(),
                 new SecureRandom(),
@@ -101,6 +102,7 @@ final class CcAesTest {
         final String plain = "This is a test!!@@**";
         final Codec codec = new CcAes(new CcTest(), key);
         MatcherAssert.assertThat(
+            "CcAes must encode and decode identity preserving original value",
             codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
             Matchers.equalTo(plain)
         );

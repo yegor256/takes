@@ -109,6 +109,7 @@ final class PsLinkedinTest {
         @Override
         public Response act(final Request req) throws IOException {
             MatcherAssert.assertThat(
+                "LinkedIn token request body must contain required OAuth parameters in order",
                 new RqPrint(req).printBody(),
                 Matchers.stringContainsInOrder(
                     Arrays.asList(
@@ -121,6 +122,7 @@ final class PsLinkedinTest {
                 )
             );
             MatcherAssert.assertThat(
+                "LinkedIn token request URL must end with correct token path",
                 new RqHref.Base(req).href().toString(),
                 Matchers.endsWith(this.tokenpath)
             );
@@ -282,12 +284,14 @@ final class PsLinkedinTest {
             ).enter(new RqFake("GET", String.format("?code=%s", this.code)))
                 .get();
             MatcherAssert.assertThat(
+                "LinkedIn identity URN must match expected format with user identifier",
                 identity.urn(),
                 CoreMatchers.equalTo(
                     String.format("urn:linkedin:%s", this.identifier)
                 )
             );
             MatcherAssert.assertThat(
+                "LinkedIn identity properties must contain first name and last name entries",
                 identity.properties(),
                 Matchers.allOf(
                     Matchers.hasEntry(this.firstname, this.frodo),
