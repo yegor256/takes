@@ -24,6 +24,7 @@ final class TkFallbackTest {
     void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
+            "Fallback must return response body containing the error message",
             new RsBodyPrint(
                 new TkFallback(
                     new TkFailure(err),
@@ -39,6 +40,7 @@ final class TkFallbackTest {
     @Test
     void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
+            "Fallback must catch exception from response and return fixed fallback text",
             new RsBodyPrint(
                 new TkFallback(
                     req -> new ResponseOf(
@@ -66,10 +68,14 @@ final class TkFallbackTest {
                 new TkFailure(),
                 new FbChain()
             ).act(new RqFake());
-            MatcherAssert.assertThat("Must throw exception", false);
+            MatcherAssert.assertThat(
+                "Must throw exception when no fallback handles the error",
+                false
+            );
             //@checkstyle IllegalCatch (1 line)
         } catch (final Exception exception) {
             MatcherAssert.assertThat(
+                "Exception message must contain fallback information",
                 exception.getMessage(),
                 Matchers.containsString("fallback ")
             );
