@@ -41,7 +41,11 @@ final class FkHitRefreshTest {
             fork.route(req).has(),
             Matchers.is(true)
         );
-        MatcherAssert.assertThat(done.get(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Hit refresh task must have been executed",
+            done.get(),
+            Matchers.is(true)
+        );
     }
 
     @Test

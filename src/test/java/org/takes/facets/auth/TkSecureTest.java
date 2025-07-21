@@ -30,8 +30,9 @@ final class TkSecureTest {
             () -> secure.act(new RqFake())
         );
         Assertions.assertEquals(
+            HttpURLConnection.HTTP_UNAUTHORIZED,
             exception.code(),
-            HttpURLConnection.HTTP_UNAUTHORIZED
+            "Anonymous access must result in HTTP 401 Unauthorized"
         );
     }
 

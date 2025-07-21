@@ -49,20 +49,20 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      */
-    public FkHitRefresh(final File file, final String cmd, final Take tke) {
-        this(file, Arrays.asList(cmd.split(" ")), tke);
+    public FkHitRefresh(final File file, final String cmd, final Take that) {
+        this(file, Arrays.asList(cmd.split(" ")), that);
     }
 
     /**
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-        final Take tke) {
+        final Take that) {
         this(
             file,
             () -> {
@@ -75,7 +75,7 @@ public final class FkHitRefresh implements Fork {
                     );
                 }
             },
-            tke
+            that
         );
     }
 
@@ -83,12 +83,12 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      */
-    public FkHitRefresh(final File file, final Runnable cmd, final Take tke) {
+    public FkHitRefresh(final File file, final Runnable cmd, final Take that) {
         this(
             cmd,
-            tke,
+            that,
             new HitRefreshHandle(file)
         );
     }
@@ -96,13 +96,13 @@ public final class FkHitRefresh implements Fork {
     /**
      * Ctor.
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      * @param handle Hit refresh handle
      */
-    private FkHitRefresh(final Runnable cmd, final Take tke,
+    private FkHitRefresh(final Runnable cmd, final Take that,
         final HitRefreshHandle handle) {
         this.exec = cmd;
-        this.take = tke;
+        this.take = that;
         this.handle = handle;
     }
 

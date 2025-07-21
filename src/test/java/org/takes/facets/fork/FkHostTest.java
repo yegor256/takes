@@ -52,7 +52,11 @@ final class FkHostTest {
             ).route(new RqFake("PUT", "/?test")).has(),
             Matchers.is(false)
         );
-        MatcherAssert.assertThat(acted.get(), Matchers.is(false));
+        MatcherAssert.assertThat(
+            \"Take must not be executed when host does not match\",
+            acted.get(),
+            Matchers.is(false)
+        );
     }
 
     @Test

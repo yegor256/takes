@@ -43,22 +43,22 @@ public final class FkParams implements Fork {
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkParams(final String param, final String ptn, final Take tke) {
-        this(param, Pattern.compile(ptn), tke);
+    public FkParams(final String param, final String ptn, final Take that) {
+        this(param, Pattern.compile(ptn), that);
     }
 
     /**
      * Ctor.
      * @param param Name of param
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkParams(final String param, final Pattern ptn, final Take tke) {
+    public FkParams(final String param, final Pattern ptn, final Take that) {
         this.name = param;
         this.pattern = ptn;
-        this.take = tke;
+        this.take = that;
     }
 
     @Override

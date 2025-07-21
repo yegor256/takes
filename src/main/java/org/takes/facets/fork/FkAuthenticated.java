@@ -45,21 +45,21 @@ public final class FkAuthenticated implements Fork {
 
     /**
      * Ctor.
-     * @param tke Target
+     * @param that Target
      */
-    public FkAuthenticated(final Take tke) {
+    public FkAuthenticated(final Take that) {
         this(
-            () -> tke
+            () -> that
         );
     }
 
     /**
      * Ctor.
-     * @param tke Target
+     * @param that Target
      * @since 1.4
      */
-    public FkAuthenticated(final Scalar<Take> tke) {
-        this.take = tke;
+    public FkAuthenticated(final Scalar<Take> that) {
+        this.take = that;
     }
 
     @Override

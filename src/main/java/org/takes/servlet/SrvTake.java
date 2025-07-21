@@ -34,14 +34,14 @@ public final class SrvTake extends HttpServlet {
     /**
      * Take, initialize in {@link #init()}.
      */
-    private final AtomicReference<Take> tke;
+    private final AtomicReference<Take> that;
 
     /**
      * Ctor.
      */
     public SrvTake() {
         super();
-        this.tke = new AtomicReference<>();
+        this.that = new AtomicReference<>();
     }
 
     @Override
@@ -99,7 +99,7 @@ public final class SrvTake extends HttpServlet {
                 err
             );
         }
-        if (!this.tke.compareAndSet(null, take)) {
+        if (!this.that.compareAndSet(null, take)) {
             throw new IllegalStateException(
                 "Take is already constructed"
             );
@@ -113,7 +113,7 @@ public final class SrvTake extends HttpServlet {
         final HttpServletResponse resp
     ) throws IOException {
         try {
-            new ResponseOf(this.tke.get().act(new RqFrom(req)))
+            new ResponseOf(this.that.get().act(new RqFrom(req)))
                 .applyTo(resp);
         } catch (final HttpException err) {
             resp.sendError(err.code(), err.getMessage());

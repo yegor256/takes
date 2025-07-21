@@ -65,7 +65,11 @@ final class PsBasicTest {
                 PsBasicTest.header(user, "pass")
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
         MatcherAssert.assertThat(
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
@@ -95,7 +99,11 @@ final class PsBasicTest {
                 PsBasicTest.header(user, password)
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
         MatcherAssert.assertThat(
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
@@ -158,7 +166,11 @@ final class PsBasicTest {
                 "X-Powered-By:Java/1.7"
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
         MatcherAssert.assertThat(
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))

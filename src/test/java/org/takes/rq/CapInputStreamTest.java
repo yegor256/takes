@@ -53,6 +53,10 @@ final class CapInputStreamTest {
         final InputStream stream = new ByteArrayInputStream(new byte[100]);
         final CapInputStream wrapper = new CapInputStream(stream, 50L);
         final long skipped = wrapper.skip(75L);
-        MatcherAssert.assertThat(skipped, Matchers.equalTo(50L));
+        MatcherAssert.assertThat(
+            "Skip operation must respect the stream capacity limit",
+            skipped,
+            Matchers.equalTo(50L)
+        );
     }
 }
