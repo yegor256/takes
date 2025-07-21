@@ -34,6 +34,7 @@ final class CcGzipTest {
         final String urn = "test:gzip";
         final byte[] encode = gzip.encode(new Identity.Simple(urn));
         MatcherAssert.assertThat(
+            "Gzip decompressed identity must contain original URN",
             gzip.decode(encode).urn(),
             Matchers.containsString(urn)
         );

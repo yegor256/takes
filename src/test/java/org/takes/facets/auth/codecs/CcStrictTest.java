@@ -41,6 +41,7 @@ final class CcStrictTest {
             Identity.ANONYMOUS
         );
         MatcherAssert.assertThat(
+            "Strict codec must allow decoding anonymous identity",
             new CcStrict(codec).decode(new byte[0]),
             CoreMatchers.equalTo(Identity.ANONYMOUS)
         );
@@ -49,6 +50,7 @@ final class CcStrictTest {
     @Test
     void passesValid() throws IOException {
         MatcherAssert.assertThat(
+            "Valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test:1")
@@ -56,6 +58,7 @@ final class CcStrictTest {
             ), Matchers.equalTo("urn%3Atest%3A1")
         );
         MatcherAssert.assertThat(
+            "Complex valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test-domain-org:valid:1")
