@@ -95,6 +95,7 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Part body must have the correct available byte count",
                 regsmart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
@@ -134,6 +135,7 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart with custom boundary must have correct part length",
                 regsmart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
@@ -223,10 +225,12 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Large multipart request must have correct part length",
                 smart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
             MatcherAssert.assertThat(
+                "Large multipart processing must complete within time limit",
                 System.currentTimeMillis() - start,
                 Matchers.lessThan(20_000L)
             );
