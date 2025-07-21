@@ -23,6 +23,7 @@ final class RqLengthAwareTest {
     @Test
     void addsLengthToBody() throws IOException {
         MatcherAssert.assertThat(
+            "Body available bytes must match Content-Length header value",
             new RqLengthAware(
                 new RqFake(
                     Arrays.asList(
@@ -41,6 +42,7 @@ final class RqLengthAwareTest {
     @Test
     void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
+            "Large Content-Length must be capped at Integer.MAX_VALUE",
             new RqLengthAware(
                 new RqFake(
                     Arrays.asList(
@@ -70,10 +72,12 @@ final class RqLengthAwareTest {
             )
         ).body();
         MatcherAssert.assertThat(
+            "First byte read must match first byte of data",
             stream.read(),
             Matchers.equalTo((int) data.getBytes()[0])
         );
         MatcherAssert.assertThat(
+            "Available bytes must decrease after reading one byte",
             stream.available(),
             Matchers.equalTo(data.length() - 1)
         );
@@ -99,6 +103,7 @@ final class RqLengthAwareTest {
         ).body();
         for (final byte element : bytes) {
             MatcherAssert.assertThat(
+                "Each byte read must match original data without Content-Length header",
                 stream.read(),
                 Matchers.equalTo(element & 0xFF)
             );
@@ -121,6 +126,7 @@ final class RqLengthAwareTest {
         ).body();
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
+            "Number of bytes read into buffer must equal data length",
             stream.read(buf),
             Matchers.equalTo(data.length())
         );
@@ -152,14 +158,17 @@ final class RqLengthAwareTest {
         ).body();
         final byte[] buf = new byte[len];
         MatcherAssert.assertThat(
+            "Partial array read must return requested length",
             stream.read(buf, 0, len),
             Matchers.equalTo(len)
         );
         MatcherAssert.assertThat(
+            "Partial buffer content must match first bytes of data",
             buf,
             Matchers.equalTo(data.substring(0, len).getBytes())
         );
         MatcherAssert.assertThat(
+            "Available bytes must decrease by number of bytes read",
             stream.available(),
             Matchers.equalTo(data.length() - len)
         );

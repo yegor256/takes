@@ -18,6 +18,7 @@ final class RqPrintTest {
     @Test
     void printsHttpRequest() {
         MatcherAssert.assertThat(
+            "Printed request must contain the request path",
             new RqPrint(
                 new RqFake(
                     Arrays.asList(

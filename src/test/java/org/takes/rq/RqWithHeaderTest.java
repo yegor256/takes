@@ -19,6 +19,7 @@ final class RqWithHeaderTest {
     @Test
     void addsHttpHeaders() {
         MatcherAssert.assertThat(
+            "Request with added header must contain the custom header",
             new RqPrint(
                 new RqWithHeader(
                     new RqFake(),

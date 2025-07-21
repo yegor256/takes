@@ -18,6 +18,7 @@ final class RsHeadersTest {
     @Test
     void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "Response headers must contain the expected content type",
             new RsHeaders.Base(
                 new RsWithHeader(
                     new RsEmpty(),

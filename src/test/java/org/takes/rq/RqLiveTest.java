@@ -40,10 +40,12 @@ final class RqLiveTest {
             )
         );
         MatcherAssert.assertThat(
+            "Host header must contain expected value",
             new RqHeaders.Base(req).header("host"),
             Matchers.hasItem("e")
         );
         MatcherAssert.assertThat(
+            "Request body must end with expected text",
             new RqPrint(req).printBody(),
             Matchers.endsWith("ello")
         );
@@ -64,6 +66,7 @@ final class RqLiveTest {
             )
         );
         MatcherAssert.assertThat(
+            "Multi-line header must be properly concatenated",
             new RqHeaders.Base(req).header("X-Foo"),
             Matchers.hasItem("this is a test header for you")
         );
@@ -83,6 +86,7 @@ final class RqLiveTest {
             )
         );
         MatcherAssert.assertThat(
+            "Multi-line header with colon must preserve colon in continuation line",
             new RqHeaders.Base(req).header("Foo"),
             Matchers.hasItem("first line second: line")
         );

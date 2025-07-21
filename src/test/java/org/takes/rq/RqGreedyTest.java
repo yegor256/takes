@@ -39,10 +39,12 @@ final class RqGreedyTest {
             )
         );
         MatcherAssert.assertThat(
+            "First body print must contain the expected text",
             new RqPrint(req).printBody(),
             Matchers.containsString("the body")
         );
         MatcherAssert.assertThat(
+            "Second body print must contain the full expected text",
             new RqPrint(req).printBody(),
             Matchers.containsString("the body ...")
         );
