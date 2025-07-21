@@ -26,12 +26,14 @@ final class FkRegexTest {
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
+            "FkRegex must match when path matches string regex pattern",
             new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "FkRegex must match when path matches compiled Pattern",
             new FkRegex(
                 Pattern.compile("/h[a-z]{2}"),
                 new TkEmpty()
@@ -41,6 +43,7 @@ final class FkRegexTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "FkRegex must match root path with query parameters",
             new FkRegex("/", new TkEmpty()).route(
                 new RqFake("PUT", "/?test")
             ).has(),
@@ -51,6 +54,7 @@ final class FkRegexTest {
     @Test
     void removesTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
+            "FkRegex must match path without trailing slash when request has trailing slash",
             new FkRegex("/h/tail", new TkEmpty()).route(
                 new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
             ).has(),
@@ -61,6 +65,7 @@ final class FkRegexTest {
     @Test
     void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
+            "FkRegex must match exact path when trailing slash removal is disabled",
             new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
                 .setRemoveTrailingSlash(false)
                 .route(

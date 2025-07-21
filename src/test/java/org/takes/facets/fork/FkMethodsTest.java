@@ -19,6 +19,7 @@ final class FkMethodsTest {
     @Test
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
+            "FkMethods must match when request method is in allowed methods list",
             new FkMethods("PUT,GET", new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).has(),

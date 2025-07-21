@@ -21,6 +21,7 @@ final class FkChainTest {
     @Test
     void gracefullyHandlesNoForkMatching() throws Exception {
         MatcherAssert.assertThat(
+            "FkChain must return false when no fork matches the request",
             new FkChain(
                 new FkRegex("/doyoumatch?", "Hello. It's me."),
                 new FkRegex("/plzmatch!", "I am your father")
@@ -33,6 +34,7 @@ final class FkChainTest {
     void dispatchesByRegularExpression() throws Exception {
         final String body = "hello test!";
         MatcherAssert.assertThat(
+            "FkChain must dispatch to matching regex fork and return correct response",
             new RsPrint(
                 new FkChain(
                     new FkRegex("/g[a-z]{2}", ""),

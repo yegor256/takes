@@ -23,12 +23,14 @@ final class FkAuthenticatedTest {
     @Test
     void matchesIfAuthenticatedUser() throws Exception {
         MatcherAssert.assertThat(
+            "FkAuthenticated must not match unauthenticated requests",
             new FkAuthenticated(new TkEmpty()).route(
                 new RqFake("GET", "/hel?a=1")
             ).has(),
             Matchers.is(false)
         );
         MatcherAssert.assertThat(
+            "FkAuthenticated must match requests with valid authentication header",
             new FkAuthenticated(new TkEmpty()).route(
                 new RqWithHeader(
                     new RqFake("PUT", "/hello"),
