@@ -27,6 +27,7 @@ final class FkHostTest {
     @Test
     void matchesByHost() throws Exception {
         MatcherAssert.assertThat(
+            "FkHost must match when the host header matches the configured host",
             new FkHost("www.foo.com", new TkText("boom"))
                 .route(
                     new RqWithHeader(
@@ -43,6 +44,7 @@ final class FkHostTest {
     void doesntMatchByHost() throws Exception {
         final AtomicBoolean acted = new AtomicBoolean();
         MatcherAssert.assertThat(
+            "FkHost must not match when request host is different from configured host",
             new FkHost(
                 "google.com",
                 req -> {

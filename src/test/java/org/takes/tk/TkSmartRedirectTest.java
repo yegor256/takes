@@ -17,6 +17,7 @@ final class TkSmartRedirectTest {
     @Test
     void redirectCarriesQueryAndFragment() throws Exception {
         MatcherAssert.assertThat(
+            "TkSmartRedirect must merge query and fragment from original request with redirect URL",
             new TkSmartRedirect("http://www.google.com/abc?b=2").act(
                 new RqFake("GET", "/hi?a=1#test")
             ),
@@ -30,6 +31,7 @@ final class TkSmartRedirectTest {
     @Test
     void redirectCarriesQueryAndFragmentOnEmptyUrl() throws Exception {
         MatcherAssert.assertThat(
+            "TkSmartRedirect must use root path when no URL provided and preserve query and fragment",
             new TkSmartRedirect().act(
                 new RqFake("GET", "/hey-you?f=1#xxx")
             ),
