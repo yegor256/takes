@@ -327,9 +327,9 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Checks whether the requested session ID came in as part of the request
      * URL.
-     * @deprecated Use isRequestedSessionIdFromURL() instead.
      * @return True, if the requested session ID came in as part of the request
      *  URL.
+     * @deprecated Use isRequestedSessionIdFromURL() instead.
      */
     @Deprecated
     public boolean isRequestedSessionIdFromUrl() {
@@ -482,8 +482,8 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Gets the real path corresponding to the given virtual path.
      * @param path The path.
-     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
      * @return The real path, or null if the translation cannot be performed.
+     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
      */
     @Deprecated
     public String getRealPath(final String path) {

@@ -25,13 +25,12 @@ import org.cactoos.text.FormattedText;
  * <p>The class is immutable and thread-safe.
  * @since 0.7
  */
-@SuppressWarnings
-    (
-        {
-            "PMD.TooManyMethods",
-            "PMD.OnlyOneConstructorShouldDoInitialization"
-        }
-    )
+@SuppressWarnings(
+    {
+        "PMD.TooManyMethods",
+        "PMD.OnlyOneConstructorShouldDoInitialization"
+    }
+)
 public final class Href implements CharSequence {
 
     /**

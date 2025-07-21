@@ -28,8 +28,8 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkMethods implements Fork {
