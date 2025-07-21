@@ -77,6 +77,7 @@ final class VerboseListTest {
     @Test
     void returnsVerboseIterator() {
         MatcherAssert.assertThat(
+            "List iterator must be wrapped in VerboseIterator",
             this.list.iterator(),
             Matchers.instanceOf(VerboseIterator.class)
         );

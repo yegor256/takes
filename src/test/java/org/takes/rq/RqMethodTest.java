@@ -20,6 +20,7 @@ final class RqMethodTest {
     @Test
     void returnsMethod() throws IOException {
         MatcherAssert.assertThat(
+            "Request method must be extracted correctly",
             new RqMethod.Base(new RqFake(RqMethod.POST)).method(),
             Matchers.equalTo(RqMethod.POST)
         );
@@ -36,6 +37,7 @@ final class RqMethodTest {
         )
         ) {
             MatcherAssert.assertThat(
+                String.format("Request method %s must be supported", method),
                 new RqMethod.Base(new RqFake(method)).method(),
                 Matchers.equalTo(method)
             );
@@ -46,6 +48,7 @@ final class RqMethodTest {
     void supportsExtensionMethods() throws IOException {
         final String method = "CUSTOM";
         MatcherAssert.assertThat(
+            "Custom extension method must be supported",
             new RqMethod.Base(new RqFake(method)).method(),
             Matchers.equalTo(method)
         );
