@@ -4,16 +4,14 @@
  */
 package org.takes.rs;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.Input;
+import org.cactoos.io.InputOf;
 
 /**
  * The body of a response used by {@link RsWithBody}.
@@ -191,7 +189,11 @@ interface RsBody extends Input {
 
         @Override
         public InputStream stream() throws IOException {
-            return Files.newInputStream(this.file().toPath());
+            try {
+                return new InputOf(this.file()).stream();
+            } catch (final Exception ex) {
+                throw new IOException("Failed to create input stream", ex);
+            }
         }
 
         @Override
