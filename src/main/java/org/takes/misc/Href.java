@@ -110,29 +110,59 @@ public final class Href implements CharSequence {
     @Override
     public String toString() {
         final StringBuilder text = new StringBuilder(this.bare());
+        this.appendParams(text);
+        this.appendFragment(text);
+        return text.toString();
+    }
+
+    /**
+     * Append parameters to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendParams(final StringBuilder text) {
         if (!this.params.isEmpty()) {
             boolean first = true;
             for (final Map.Entry<String, List<String>> ent
                 : this.params.entrySet()) {
-                for (final String value : ent.getValue()) {
-                    if (first) {
-                        text.append('?');
-                        first = false;
-                    } else {
-                        text.append('&');
-                    }
-                    text.append(Href.encode(ent.getKey()));
-                    if (!value.isEmpty()) {
-                        text.append('=').append(Href.encode(value));
-                    }
-                }
+                first = this.appendParam(text, ent, first);
             }
         }
+    }
+
+    /**
+     * Append single parameter to StringBuilder.
+     * @param text StringBuilder to append to
+     * @param ent Parameter entry
+     * @param first Whether this is the first parameter
+     * @return Whether next parameter will be first
+     */
+    private boolean appendParam(final StringBuilder text,
+        final Map.Entry<String, List<String>> ent, final boolean first) {
+        boolean result = first;
+        for (final String value : ent.getValue()) {
+            if (result) {
+                text.append('?');
+                result = false;
+            } else {
+                text.append('&');
+            }
+            text.append(Href.encode(ent.getKey()));
+            if (!value.isEmpty()) {
+                text.append('=').append(Href.encode(value));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Append fragment to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendFragment(final StringBuilder text) {
         if (this.fragment.has()) {
             text.append('#');
             text.append(this.fragment.get());
         }
-        return text.toString();
     }
 
     /**

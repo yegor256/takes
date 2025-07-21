@@ -91,6 +91,7 @@ public final class TkSlf4j implements Take {
             final Response rsp = this.origin.act(req);
             if (logger.isInfoEnabled()) {
                 logger.info(
+                    "{}",
                     entry.apply(
                         new MapEntry<>(
                             "returned \"%s\"",
@@ -103,6 +104,7 @@ public final class TkSlf4j implements Take {
         } catch (final IOException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
+                    "{}",
                     entry.apply(
                         new MapEntry<>(
                             "thrown %s(\"%s\")",
@@ -119,6 +121,7 @@ public final class TkSlf4j implements Take {
         } catch (final RuntimeException ex) {
             if (logger.isInfoEnabled()) {
                 logger.info(
+                    "{}",
                     entry.apply(
                         new MapEntry<>(
                             "thrown runtime %s(\"%s\")",
