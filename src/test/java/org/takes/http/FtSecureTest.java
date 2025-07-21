@@ -55,6 +55,7 @@ import org.takes.tk.TkFixed;
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
             MatcherAssert.assertThat(
+                "HTTPS request body must contain expected content",
                 new RqPrint(request).printBody(),
                 Matchers.containsString("Jeff")
             );

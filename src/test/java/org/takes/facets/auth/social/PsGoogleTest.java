@@ -120,12 +120,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -161,14 +163,17 @@ final class PsGoogleTest {
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
                 ).get();
                 MatcherAssert.assertThat(
+                    "Google identity URN must match expected format",
                     identity.urn(),
                     Matchers.equalTo(urn)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct display name",
                     identity.properties().get(PsGoogleTest.NAME),
                     Matchers.equalTo(octocat)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct avatar picture URL",
                     identity.properties().get(PsGoogleTest.PICTURE),
                     Matchers.equalTo(PsGoogleTest.AVATAR)
                 );
@@ -185,12 +190,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -227,12 +234,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -267,6 +276,7 @@ final class PsGoogleTest {
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
                 ).get();
                 MatcherAssert.assertThat(
+                    "Google identity URN must match expected format",
                     identity.urn(),
                     Matchers.equalTo(urn)
                 );
@@ -275,6 +285,7 @@ final class PsGoogleTest {
                     Matchers.equalTo("unknown")
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct avatar picture URL",
                     identity.properties().get(PsGoogleTest.PICTURE),
                     Matchers.equalTo(PsGoogleTest.AVATAR)
                 );
@@ -292,6 +303,7 @@ final class PsGoogleTest {
             // @checkstyle AnonInnerLengthCheck (1 line)
             (Take) req -> {
                 MatcherAssert.assertThat(
+                    "Google OAuth token request must be POST to correct endpoint",
                     new RqPrint(req).printHead(),
                     Matchers.containsString("POST /o/oauth2/token")
                 );
@@ -347,6 +359,7 @@ final class PsGoogleTest {
         final CharSequence param, final String value
     ) throws IOException {
         MatcherAssert.assertThat(
+            "Google OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );

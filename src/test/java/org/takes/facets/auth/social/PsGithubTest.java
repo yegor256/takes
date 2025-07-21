@@ -112,14 +112,17 @@ final class PsGithubTest {
                     home.toString()
                 ).enter(new RqFake("GET", "?code=code")).get();
                 MatcherAssert.assertThat(
+                    "GitHub identity URN must match expected format with user ID",
                     identity.urn(),
                     Matchers.equalTo("urn:github:1")
                 );
                 MatcherAssert.assertThat(
+                    "GitHub identity properties must contain correct login username",
                     identity.properties().get(PsGithubTest.LOGIN),
                     Matchers.equalTo(PsGithubTest.OCTOCAT)
                 );
                 MatcherAssert.assertThat(
+                    "GitHub identity properties must contain correct avatar URL",
                     identity.properties().get("avatar"),
                     Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
                 );
@@ -147,6 +150,7 @@ final class PsGithubTest {
     private static void assertParam(final Request req,
         final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
+            "GitHub OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );

@@ -35,6 +35,7 @@ final class FtRemoteTest {
         data[0] = (byte) 0xff;
         new FtRemote(new TkFixed(new RsText(data))).exec(
             home -> MatcherAssert.assertThat(
+                "FtRemote must serve binary data correctly over HTTP",
                 new JdkRequest(home)
                     .fetch()
                     .as(RestResponse.class)
@@ -49,6 +50,7 @@ final class FtRemoteTest {
     void worksInParallelThreads() throws Exception {
         final Take take = req -> {
             MatcherAssert.assertThat(
+                "HTTP form request must contain expected parameter value",
                 new RqFormBase(req).param("alpha"),
                 Matchers.hasItem("123")
             );

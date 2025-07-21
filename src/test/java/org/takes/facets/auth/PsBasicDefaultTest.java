@@ -18,6 +18,7 @@ final class PsBasicDefaultTest {
     @Test
     void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must authenticate user with correct login/password and return URN",
             new PsBasic.Default(
                 new String[]{
                     "bob qwe%20r%20ty%3A%2B urn:foo:robert",
@@ -37,6 +38,7 @@ final class PsBasicDefaultTest {
     @Test
     void supportsBothKindsOfSpace() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "yvonne hey%20you urn:foo:z",
@@ -50,6 +52,7 @@ final class PsBasicDefaultTest {
             new IsEqual<>(true)
         );
         MatcherAssert.assertThat(
+            "PsBasic.Default must support plus-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "zak hey+me urn:foo:z",
@@ -67,6 +70,7 @@ final class PsBasicDefaultTest {
     @Test
     void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support users with spaces in their names",
             new PsBasic.Default(
                 new String[]{
                     "abraham+lincoln qwer urn:foo:z",
@@ -85,6 +89,7 @@ final class PsBasicDefaultTest {
     void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded URNs and decode them correctly",
             new PsBasic.Default(
                 new String[]{
                     String.format(
@@ -106,6 +111,7 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect password",
             new PsBasic.Default(
                 new String[]{
                     "charlie qwerty urn:foo:charlie",
@@ -121,6 +127,7 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect login",
             new PsBasic.Default(
                 new String[]{
                     "eddie qwerty urn:foo:eddie",

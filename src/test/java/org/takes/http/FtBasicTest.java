@@ -73,6 +73,7 @@ final class FtBasicTest {
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
             MatcherAssert.assertThat(
+                "HTTP request body must contain expected content",
                 new RqPrint(request).printBody(),
                 Matchers.containsString("Jeff")
             );
