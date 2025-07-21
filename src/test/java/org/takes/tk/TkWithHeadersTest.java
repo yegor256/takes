@@ -22,6 +22,7 @@ final class TkWithHeadersTest {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(
+            "TkWithHeaders must add specified headers to response",
             new RsPrint(
                 new TkWithHeaders(
                     new TkEmpty(),

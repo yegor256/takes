@@ -50,6 +50,7 @@ final class TkRetryTest {
     void worksWithNoException() throws Exception {
         final String test = "test";
         MatcherAssert.assertThat(
+            "TkRetry must return response from successful take without retrying",
             new RsPrint(
                 new TkRetry(2, 2, new TkText(test))
                     .act(new RqFake())
@@ -77,6 +78,7 @@ final class TkRetryTest {
                 } catch (final IOException exception) {
                     final long spent = System.nanoTime() - start;
                     MatcherAssert.assertThat(
+                        "TkRetry must spend at least minimum expected time when all retries fail",
                         (long) (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
                         Matchers.lessThanOrEqualTo(spent)
                     );
@@ -101,10 +103,12 @@ final class TkRetryTest {
         );
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
+            "TkRetry must spend at least minimum expected time before success",
             (long) (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(
+            "TkRetry must return successful response after retrying failed attempts",
             response,
             new HasString(data)
         );

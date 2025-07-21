@@ -33,6 +33,7 @@ final class TkGzipTest {
     void compressesExactly() throws Exception {
         final String body = "hello";
         MatcherAssert.assertThat(
+            "TkGzip must produce same output as RsGzip for identical content",
             new BytesOf(
                 new RsPrint(
                     new TkGzip(new TkText(body)).act(
@@ -54,6 +55,7 @@ final class TkGzipTest {
     @Test
     void compressesCorrectly() throws Exception {
         MatcherAssert.assertThat(
+            "TkGzip must compress UTF-8 content correctly when decompressed",
             new TextOf(
                 new GZIPInputStream(
                     new RsPrint(
@@ -73,6 +75,7 @@ final class TkGzipTest {
     @Test
     void compressesOnDemandOnly() throws Exception {
         MatcherAssert.assertThat(
+            "TkGzip must return HTTP OK status when compression is requested",
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
                     new RqFake(
@@ -92,6 +95,7 @@ final class TkGzipTest {
     @Test
     void doesntCompressIfNotRequired() throws Exception {
         MatcherAssert.assertThat(
+            "TkGzip must return HTTP OK status without compression when not requested",
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
                     new RqFake(

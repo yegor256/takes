@@ -38,6 +38,7 @@ final class FkHitRefreshTest {
         TimeUnit.MILLISECONDS.sleep(10L);
         FileUtils.touch(temp.resolve("hey.txt").toFile());
         MatcherAssert.assertThat(
+            "FkHitRefresh must match request when hit refresh header is present",
             fork.route(req).has(),
             Matchers.is(true)
         );
@@ -51,6 +52,7 @@ final class FkHitRefreshTest {
     @Test
     void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
         MatcherAssert.assertThat(
+            "FkHitRefresh must not match request when hit refresh header is missing",
             new FkHitRefresh(
                 temp, "", new TkEmpty()
             ).route(new RqFake()).has(),

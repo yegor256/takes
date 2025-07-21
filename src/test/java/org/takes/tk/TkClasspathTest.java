@@ -23,7 +23,7 @@ final class TkClasspathTest {
     @Test
     void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
-            "Response should start with HTTP/1.1 200 OK",
+            "TkClasspath must serve existing classpath resources with HTTP OK status",
             new RsHeadPrint(
                 new TkClasspath().act(
                     new RqFake(

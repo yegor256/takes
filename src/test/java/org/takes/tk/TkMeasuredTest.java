@@ -20,6 +20,7 @@ final class TkMeasuredTest {
     void createsMeasuredResponse() throws Exception {
         final String header = "X-Takes-Millis";
         MatcherAssert.assertThat(
+            "TkMeasured must add default X-Takes-Millis header to response",
             new RsPrint(
                 new TkMeasured(new TkText("default header response")).act(
                     new RqFake()
@@ -33,6 +34,7 @@ final class TkMeasuredTest {
     void createsMeasuredResponseWithCustomHeader() throws Exception {
         final String header = "X-Custom-Take-Millis";
         MatcherAssert.assertThat(
+            "TkMeasured must add custom timing header to response",
             new RsPrint(
                 new TkMeasured(
                     new TkText("custom header response"),
