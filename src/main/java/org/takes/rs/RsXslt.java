@@ -62,8 +62,8 @@ import org.takes.Response;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @see org.takes.rs.xe.RsXembly
+ * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
