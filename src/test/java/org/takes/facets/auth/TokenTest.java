@@ -60,12 +60,13 @@ final class TokenTest {
         final SimpleDateFormat format =
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.GERMAN);
         MatcherAssert.assertThat(
-            "does not expire after issued",
+            "Token must not expire after it was issued",
             format.parse(
                 jose.getString(Jwt.ISSUED)
             ).before(
                 format.parse(jose.getString(Jwt.EXPIRATION))
-            )
+            ),
+            Matchers.is(true)
         );
     }
 

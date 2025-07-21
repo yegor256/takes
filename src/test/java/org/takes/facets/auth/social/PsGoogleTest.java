@@ -281,6 +281,7 @@ final class PsGoogleTest {
                     Matchers.equalTo(urn)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity name property must match expected value",
                     identity.properties().get(PsGoogleTest.NAME),
                     Matchers.equalTo("unknown")
                 );

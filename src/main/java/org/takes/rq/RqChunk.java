@@ -16,8 +16,8 @@ import org.takes.Request;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.15
  * @see org.takes.rq.RqPrint
+ * @since 0.15
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqChunk extends RqWrap {

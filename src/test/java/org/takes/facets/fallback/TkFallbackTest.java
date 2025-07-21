@@ -70,7 +70,8 @@ final class TkFallbackTest {
             ).act(new RqFake());
             MatcherAssert.assertThat(
                 "Must throw exception when no fallback handles the error",
-                false
+                false,
+                Matchers.is(true)
             );
             //@checkstyle IllegalCatch (1 line)
         } catch (final Exception exception) {

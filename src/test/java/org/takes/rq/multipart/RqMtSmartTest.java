@@ -192,23 +192,23 @@ final class RqMtSmartTest {
         final int length = 100_000_000;
         final String part = "test";
         final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
-        final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
-        bwr.write(
-            new Joined(
-                RqMtSmartTest.CRLF,
-                RqMtSmartTest.BODY_ELEMENT,
-                String.format(RqMtSmartTest.CONTENT, part),
-                "",
-                ""
-            ).toString()
-        );
-        for (int ind = 0; ind < length; ++ind) {
-            bwr.write("X");
+        try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
+            bwr.write(
+                new Joined(
+                    RqMtSmartTest.CRLF,
+                    RqMtSmartTest.BODY_ELEMENT,
+                    String.format(RqMtSmartTest.CONTENT, part),
+                    "",
+                    ""
+                ).toString()
+            );
+            for (int ind = 0; ind < length; ++ind) {
+                bwr.write("X");
+            }
+            bwr.write(RqMtSmartTest.CRLF);
+            bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
+            bwr.write(RqMtSmartTest.CRLF);
         }
-        bwr.write(RqMtSmartTest.CRLF);
-        bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
-        bwr.write(RqMtSmartTest.CRLF);
-        bwr.close();
         final String post = "POST /post?u=4 HTTP/1.1";
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
@@ -245,7 +245,6 @@ final class RqMtSmartTest {
         final int length = 1_000_000;
         final String part = "test1";
         final Path file = temp.resolve("notDistortContent.tmp");
-        final BufferedWriter bwr = Files.newBufferedWriter(file);
         final String head =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -254,11 +253,7 @@ final class RqMtSmartTest {
                 "",
                 ""
             ).asString();
-        bwr.write(head);
         final int byt = 0x7f;
-        for (int idx = 0; idx < length; ++idx) {
-            bwr.write(idx % byt);
-        }
         final String foot =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -266,8 +261,13 @@ final class RqMtSmartTest {
                 "--zzz1--",
                 ""
             ).asString();
-        bwr.write(foot);
-        bwr.close();
+        try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
+            bwr.write(head);
+            for (int idx = 0; idx < length; ++idx) {
+                bwr.write(idx % byt);
+            }
+            bwr.write(foot);
+        }
         final String post = "POST /post?u=5 HTTP/1.1";
         final Request req = new RqFake(
             Arrays.asList(
@@ -280,11 +280,11 @@ final class RqMtSmartTest {
             ),
             new TempInputStream(Files.newInputStream(file), file.toFile())
         );
-        final InputStream stream = new RqMtSmart(
+        try (InputStream stream = new RqMtSmart(
             new RqMtBase(req)
-        ).single(part).body();
-        try {
+        ).single(part).body()) {
             MatcherAssert.assertThat(
+                "Stream should have expected bytes available",
                 stream.available(),
                 Matchers.equalTo(length)
             );
@@ -297,7 +297,6 @@ final class RqMtSmartTest {
             }
         } finally {
             req.body().close();
-            stream.close();
         }
     }
 

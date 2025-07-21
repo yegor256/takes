@@ -47,24 +47,24 @@ interface RsBody extends Input {
         /**
          * The {@link java.net.URL} of the content.
          */
-        private final java.net.URL url;
+        private final java.net.URL source;
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
          * @param content The {@link java.net.URL} of the content.
          */
         Url(final java.net.URL content) {
-            this.url = content;
+            this.source = content;
         }
 
         @Override
         public InputStream stream() throws IOException {
-            return this.url.openStream();
+            return this.source.openStream();
         }
 
         @Override
         public int length() throws IOException {
-            try (InputStream input = this.url.openStream()) {
+            try (InputStream input = this.source.openStream()) {
                 return input.available();
             }
         }

@@ -50,10 +50,10 @@ import org.takes.rq.RqMultipart;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.33
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @since 0.33
  */
 @lombok.EqualsAndHashCode(of = "origin")
 @SuppressWarnings("PMD.ExcessiveImports")
