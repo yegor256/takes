@@ -24,6 +24,7 @@ final class RsPrettyJsonTest {
     @Test
     void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
+            "Pretty JSON formatter must format JSON with proper indentation",
             new RsBodyPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"widget\": {\"debug\": \"on\" }}")
@@ -56,6 +57,7 @@ final class RsPrettyJsonTest {
             );
         }
         MatcherAssert.assertThat(
+            "Pretty JSON response must report correct content length",
             new RsHeadPrint(
                 new RsPrettyJson(
                     new RsWithBody("{\"test\": {\"test\": \"test\" }}")

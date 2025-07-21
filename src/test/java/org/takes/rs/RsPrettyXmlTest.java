@@ -25,6 +25,7 @@ final class RsPrettyXmlTest {
     @Test
     void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
+            "Pretty XML formatter must format XML with proper indentation",
             new RsBodyPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>foo</a></test>")
@@ -38,6 +39,7 @@ final class RsPrettyXmlTest {
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml5DoctypeBody() throws IOException {
         MatcherAssert.assertThat(
+            "Pretty XML with HTML5 doctype must contain uppercase DOCTYPE",
             new RsBodyPrint(
                 new RsPrettyXml(
                     new RsWithBody(
@@ -53,6 +55,7 @@ final class RsPrettyXmlTest {
     // @checkstyle MethodNameCheck (1 line)
     void formatsHtml5ForLegacyBrowsersDoctypeBody() throws IOException {
         MatcherAssert.assertThat(
+            "Pretty XML with legacy HTML doctype must format correctly",
             new TextOf(
                 new RsBodyPrint(
                     new RsPrettyXml(
@@ -93,6 +96,7 @@ final class RsPrettyXmlTest {
         final String xhtml = "<html xmlns=\"http://www.w3.org/1999/xhtml\" "
             .concat("lang=\"en\">");
         MatcherAssert.assertThat(
+            "Pretty XML with HTML4 doctype must format correctly",
             new TextOf(
                 new RsBodyPrint(
                     new RsPrettyXml(
@@ -144,6 +148,7 @@ final class RsPrettyXmlTest {
             )
         ).asString().length();
         MatcherAssert.assertThat(
+            "Pretty XML response must report correct content length",
             new RsHeadPrint(
                 new RsPrettyXml(
                     new RsWithBody("<test><a>test</a></test>")
