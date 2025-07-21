@@ -23,6 +23,7 @@ final class XeLogoutLinkTest {
     @Test
     void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
+            "Logout link XML must contain link element with takes:logout rel attribute",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

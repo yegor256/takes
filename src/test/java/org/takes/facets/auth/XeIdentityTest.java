@@ -24,6 +24,7 @@ final class XeIdentityTest {
     @Test
     void generatesIdentityInXml() throws IOException {
         MatcherAssert.assertThat(
+            "Identity XML must contain URN and name elements with correct values",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

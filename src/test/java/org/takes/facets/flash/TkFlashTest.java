@@ -22,6 +22,7 @@ final class TkFlashTest {
     void removesFlashCookie() throws Exception {
         final Take take = new TkFlash(new TkEmpty());
         MatcherAssert.assertThat(
+            "TkFlash must remove flash cookie by setting expired cookie header",
             take.act(
                 new RqWithHeader(
                     new RqFake(),

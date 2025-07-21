@@ -31,6 +31,7 @@ final class TkSslOnlyTest {
             ""
         );
         MatcherAssert.assertThat(
+            "TkSslOnly must redirect HTTP requests to HTTPS with same path and query",
             new RsPrint(
                 new TkSslOnly(
                     request -> new RsText(

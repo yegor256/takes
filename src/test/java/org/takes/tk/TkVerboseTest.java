@@ -27,6 +27,7 @@ final class TkVerboseTest {
             new TkVerbose(take).act(new RqFake());
         } catch (final HttpException ex) {
             MatcherAssert.assertThat(
+                "TkVerbose must extend exception message with request method and URI",
                 ex.getLocalizedMessage(),
                 Matchers.endsWith("GET http://www.example.com/")
             );

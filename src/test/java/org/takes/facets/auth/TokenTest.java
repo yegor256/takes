@@ -26,6 +26,7 @@ final class TokenTest {
     void joseAlgorithm() {
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
+            "JOSE algorithm must be HS256 for 256-bit keys",
             jose.getString(Jose.ALGORITHM),
             Matchers.equalTo("HS256")
         );
@@ -35,6 +36,7 @@ final class TokenTest {
     void joseEncoded() throws IOException {
         final byte[] code = new Token.Jose(256).encoded();
         MatcherAssert.assertThat(
+            "JOSE encoded header must match expected Base64 JWT header",
             code,
             new IsEqual<>(
                 Base64.getEncoder().encode(
@@ -51,6 +53,7 @@ final class TokenTest {
             3600L
         ).json();
         MatcherAssert.assertThat(
+            "JWT issued time must be different from expiration time",
             jose.getString(Jwt.ISSUED),
             Matchers.not(jose.getString(Jwt.EXPIRATION))
         );
@@ -76,6 +79,7 @@ final class TokenTest {
             user, 3600L
         ).json();
         MatcherAssert.assertThat(
+            "JWT encoded payload must match Base64 encoded JSON representation",
             code,
             Matchers.equalTo(
                 Base64.getEncoder().encode(jose.toString().getBytes())
