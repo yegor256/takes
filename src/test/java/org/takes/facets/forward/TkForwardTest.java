@@ -26,6 +26,7 @@ final class TkForwardTest {
             throw new RsForward("/");
         };
         MatcherAssert.assertThat(
+            "TkForward must catch RsForward exception and return redirect response",
             new RsPrint(
                 new TkForward(take).act(new RqFake())
             ),
@@ -43,6 +44,7 @@ final class TkForwardTest {
                 }
             );
         MatcherAssert.assertThat(
+            "TkForward must catch RsForward exception thrown by response body and return redirect",
             new RsPrint(
                 new TkForward(take).act(new RqFake())
             ),
