@@ -55,6 +55,7 @@ final class RsXsltTest {
             "</x:div><x:p>\u0443</x:p></x:html></template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to HTML with correct UTF-8 encoding",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -81,6 +82,7 @@ final class RsXsltTest {
             "Hey, <value-of select='/p/name'/>!</template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to plain text with expected content",
             new RsPrint(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -110,6 +112,7 @@ final class RsXsltTest {
             new InputStreamOf(xml)
         );
         MatcherAssert.assertThat(
+            "RsXslt must transform XML and close decorated response input stream",
             new RsPrint(
                 new RsXslt(
                     new RsText(stream),
@@ -119,6 +122,7 @@ final class RsXsltTest {
             new EndsWith("Hello, World!")
         );
         MatcherAssert.assertThat(
+            "Decorated response input stream must be closed after XSLT transformation",
             stream.isClosed(),
             Matchers.is(true)
         );
@@ -127,6 +131,7 @@ final class RsXsltTest {
     @Test
     void resolvesInClasspath() {
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath with query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -145,6 +150,7 @@ final class RsXsltTest {
             new EndsWith("Hello, Bobby!")
         );
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath without query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -163,6 +169,7 @@ final class RsXsltTest {
             new EndsWith("Hello, Dan!")
         );
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT with includes in classpath",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -191,6 +198,7 @@ final class RsXsltTest {
             " type='text/xsl'?><page sla='0.324'/>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must load external XSLT imports and produce correct XHTML",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml))
