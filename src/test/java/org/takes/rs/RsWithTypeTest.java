@@ -62,6 +62,7 @@ final class RsWithTypeTest {
     void replaceTypeToResponse() {
         final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
+            "Response must have the latest content type when replaced multiple times",
             new RsPrint(
                 new RsWithType(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -84,6 +85,7 @@ final class RsWithTypeTest {
     void doesNotReplaceResponseCode() {
         final String body = "Error!";
         MatcherAssert.assertThat(
+            "Response must preserve status code when content type is changed",
             new RsPrint(
                 new RsWithType(
                     new RsWithBody(
@@ -109,6 +111,7 @@ final class RsWithTypeTest {
     @Test
     void replacesTypeWithHtml() {
         MatcherAssert.assertThat(
+            "Html decorator must replace content type with text/html",
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
@@ -128,6 +131,7 @@ final class RsWithTypeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Html decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -153,6 +157,7 @@ final class RsWithTypeTest {
     @Test
     void replacesTypeWithJson() {
         MatcherAssert.assertThat(
+            "Json decorator must replace content type with application/json",
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
@@ -172,6 +177,7 @@ final class RsWithTypeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Json decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
@@ -197,6 +203,7 @@ final class RsWithTypeTest {
     @Test
     void replacesTypeWithXml() {
         MatcherAssert.assertThat(
+            "Xml decorator must replace content type with text/xml",
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
@@ -215,6 +222,7 @@ final class RsWithTypeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Xml decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
@@ -240,6 +248,7 @@ final class RsWithTypeTest {
     @Test
     void replacesTypeWithText() {
         MatcherAssert.assertThat(
+            "Text decorator must replace content type with text/plain",
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
@@ -258,6 +267,7 @@ final class RsWithTypeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Text decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
@@ -283,6 +293,7 @@ final class RsWithTypeTest {
     @Test
     void addsContentType() {
         MatcherAssert.assertThat(
+            "Response must have Content-Type header when type is added",
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
@@ -304,6 +315,7 @@ final class RsWithTypeTest {
     @Test
     void addsCharsetToContentType() {
         MatcherAssert.assertThat(
+            "Response must include charset in Content-Type when specified",
             new RsPrint(
                 new RsWithType(
                     new RsEmpty(),
