@@ -22,6 +22,7 @@ final class RqHrefTest {
     @Test
     void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must include host, path and query parameters",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -39,6 +40,7 @@ final class RqHrefTest {
     @Test
     void takesProtoIntoAccount() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must use forwarded protocol when available",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -56,6 +58,7 @@ final class RqHrefTest {
     @Test
     void parsesHttpQueryWithoutHost() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must default to localhost when no host header present",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -98,6 +101,7 @@ final class RqHrefTest {
     @Test
     void extractsParams() throws IOException {
         MatcherAssert.assertThat(
+            "URL-encoded query parameter must be decoded correctly",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -115,6 +119,7 @@ final class RqHrefTest {
     @Test
     void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
+            "Single query parameter must be extracted correctly",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -131,6 +136,7 @@ final class RqHrefTest {
     @Test
     void extractsHome() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must extract home URL correctly",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
@@ -149,6 +155,7 @@ final class RqHrefTest {
     @Test
     void extractsHomeWithProtocol() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must extract HTTPS home URL when forwarded protocol is present",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
@@ -168,6 +175,7 @@ final class RqHrefTest {
     @Test
     void extractsParamByDefault() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must return default value for absent parameter",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
