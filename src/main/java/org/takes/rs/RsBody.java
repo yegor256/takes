@@ -121,14 +121,14 @@ interface RsBody extends Input {
          * @param input The content of the body as stream.
          */
         Stream(final InputStream input) {
-            this.stream = input;
+            this.input = input;
             this.length = new AtomicInteger(-1);
         }
 
         @Override
         public InputStream stream() throws IOException {
             this.estimate();
-            return this.stream;
+            return this.input;
         }
 
         @Override
@@ -143,7 +143,7 @@ interface RsBody extends Input {
          */
         private void estimate() throws IOException {
             if (this.length.get() == -1) {
-                this.length.compareAndSet(-1, this.stream.available());
+                this.length.compareAndSet(-1, this.input.available());
             }
         }
     }
