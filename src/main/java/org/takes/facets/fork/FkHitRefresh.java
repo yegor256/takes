@@ -7,13 +7,13 @@ package org.takes.facets.fork;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.OutputTo;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -185,13 +185,24 @@ public final class FkHitRefresh implements Fork {
         }
 
         /**
+         * Create output stream for the touched file.
+         * @return Output stream
+         * @throws IOException If fails
+         */
+        private OutputStream outputStream() throws IOException {
+            try {
+                return new OutputTo(this.touchedFile()).stream();
+            } catch (final Exception ex) {
+                throw new IOException("Failed to create output stream", ex);
+            }
+        }
+
+        /**
          * Touch the temporary file.
          * @throws IOException If fails
          */
         public void touch() throws IOException {
-            try (OutputStream out = Files.newOutputStream(
-                this.touchedFile().toPath()
-            )) {
+            try (OutputStream out = this.outputStream()) {
                 out.write('+');
             }
         }
@@ -222,17 +233,26 @@ public final class FkHitRefresh implements Fork {
             } finally {
                 this.lock.readLock().unlock();
             }
-            final File[] files = this.dir.listFiles();
-            boolean expired = false;
-            if (new Opt.Single<>(files).has()) {
-                for (final File file : files) {
-                    if (file.lastModified() > recent) {
-                        expired = true;
-                        break;
-                    }
+            return this.checkDirectoryRecursively(this.dir, recent);
+        }
+
+        /**
+         * Check directory and subdirectories recursively for updated files.
+         * @param directory Directory to check
+         * @param timestamp Timestamp to compare against
+         * @return TRUE if any file is newer than timestamp
+         */
+        private boolean checkDirectoryRecursively(final File directory, final long timestamp) {
+            final File[] files = directory.listFiles();
+            for (final File file : files) {
+                if (file.isFile() && file.lastModified() > timestamp) {
+                    return true;
+                }
+                if (file.isDirectory() && this.checkDirectoryRecursively(file, timestamp)) {
+                    return true;
                 }
             }
-            return expired;
+            return false;
         }
     }
 }
