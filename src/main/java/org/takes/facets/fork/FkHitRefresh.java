@@ -25,8 +25,8 @@ import org.takes.rq.RqHeaders;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.9
  * @see TkFork
+ * @since 0.9
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {

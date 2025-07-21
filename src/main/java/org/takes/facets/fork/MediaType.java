@@ -18,8 +18,8 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.6
  * @see org.takes.facets.fork.FkTypes
+ * @since 0.6
  * @todo #998:30min Please use {@link org.cactoos.text.Split} instead of
  *  {@link String.split} as an elegant way.
  *  To completely leverage the {@link org.cactoos.text.Split} here, it is

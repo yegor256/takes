@@ -57,9 +57,9 @@ import org.takes.tk.TkText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
  * @see TkRegex
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkRegex implements Fork {

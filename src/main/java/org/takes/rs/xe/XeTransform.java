@@ -41,8 +41,8 @@ import org.cactoos.func.UncheckedFunc;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @param <T> Type of item
+ * @since 0.1
  */
 @EqualsAndHashCode
 public final class XeTransform<T> implements Iterable<XeSource> {

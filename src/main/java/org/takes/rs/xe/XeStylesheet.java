@@ -12,9 +12,9 @@ import org.xembly.Directives;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @see <a href="http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html">XML+XSLT in a Browser</a>
  * @see <a href="http://www.yegor256.com/2014/09/09/restful-web-sites.html">RESTful API and a Web Site in the Same URL</a>
+ * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
 public final class XeStylesheet extends XeWrap {

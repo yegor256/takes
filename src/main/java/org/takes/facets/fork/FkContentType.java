@@ -18,8 +18,8 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 1.0
  * @see RsFork
+ * @since 1.0
  */
 @EqualsAndHashCode
 public final class FkContentType implements Fork {
