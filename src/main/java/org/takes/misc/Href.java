@@ -135,7 +135,7 @@ public final class Href implements CharSequence {
      * @param first Whether this is the first parameter
      * @return Whether next parameter will be first
      */
-    private boolean appendParam(final StringBuilder text,
+    private static boolean appendParam(final StringBuilder text,
         final Map.Entry<String, List<String>> ent, final boolean first) {
         boolean result = first;
         for (final String value : ent.getValue()) {
