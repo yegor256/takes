@@ -109,7 +109,7 @@ interface RsBody extends Input {
         /**
          * The content of the body in an InputStream.
          */
-        private final InputStream stream;
+        private final InputStream input;
 
         /**
          * The length of the stream.

@@ -20,8 +20,8 @@ import org.takes.tk.TkEmpty;
 /**
  * Test case for {@link BkParallel}.
  *
- * @checkstyle ExecutableStatementCountCheck (500 lines)
  * @since 0.15.2
+ * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @SuppressWarnings({
     "PMD.CyclomaticComplexity",

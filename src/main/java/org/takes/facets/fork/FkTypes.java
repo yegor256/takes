@@ -17,8 +17,8 @@ import org.takes.rq.RqHeaders;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.6
  * @see RsFork
+ * @since 0.6
  */
 @EqualsAndHashCode
 public final class FkTypes implements Fork {
