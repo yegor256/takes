@@ -124,8 +124,16 @@ final class RqLengthAwareTest {
             stream.read(buf),
             Matchers.equalTo(data.length())
         );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        MatcherAssert.assertThat(
+            "Buffer content must match the expected data bytes",
+            buf,
+            Matchers.equalTo(data.getBytes())
+        );
+        MatcherAssert.assertThat(
+            "Stream must have no bytes available after reading all data",
+            stream.available(),
+            Matchers.equalTo(0)
+        );
     }
 
     @Test
