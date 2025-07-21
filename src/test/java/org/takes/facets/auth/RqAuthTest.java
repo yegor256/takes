@@ -22,6 +22,7 @@ final class RqAuthTest {
     void returnsIdentity() throws IOException {
         final Identity.Simple identity = new Identity.Simple("urn:test:1");
         MatcherAssert.assertThat(
+            "RqAuth must decode identity from auth header",
             new RqAuth(
                 new RqWithHeader(
                     new RqFake(),

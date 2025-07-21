@@ -39,6 +39,7 @@ final class TkSecureTest {
     @Test
     void passesOnRegisteredUser() throws Exception {
         MatcherAssert.assertThat(
+            "Authenticated user must be allowed access to secure resource",
             new TkSecure(
                 request -> new RsEmpty()
             ).act(

@@ -25,6 +25,7 @@ final class RsWithBodyTest {
         );
         new RsPrint(res).print();
         MatcherAssert.assertThat(
+            "Response with body must include content length and body content",
             new RsPrint(res).print(),
             Matchers.containsString(
                 "Content-Length: 18\r\n\r\nпривет"

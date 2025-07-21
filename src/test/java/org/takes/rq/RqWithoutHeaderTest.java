@@ -18,6 +18,7 @@ final class RqWithoutHeaderTest {
     @Test
     void removesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "Request without header must not contain the removed header",
             new RqPrint(
                 new RqWithoutHeader(
                     new RqWithHeader(new RqFake(), "host: example.com"),

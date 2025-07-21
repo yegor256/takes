@@ -20,6 +20,7 @@ final class PsChainTest {
     @Test
     void chainExecutionTest() throws Exception {
         MatcherAssert.assertThat(
+            "Chain execution must return anonymous identity from logout pass",
             new PsChain(
                 new PsLogout(),
                 new PsFake(true)
@@ -31,6 +32,7 @@ final class PsChainTest {
     @Test
     void exitChainTest() throws Exception {
         MatcherAssert.assertThat(
+            "Chain exit must return response with 204 No Content status",
             new PsChain(
                 new PsFake(true)
             ).exit(new RsEmpty(), Identity.ANONYMOUS)

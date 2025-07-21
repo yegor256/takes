@@ -42,6 +42,7 @@ final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
+            "Auth header must contain encoded identity URN",
             new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),
@@ -98,6 +99,7 @@ final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
+            "Auth header must be empty after logout",
             new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),

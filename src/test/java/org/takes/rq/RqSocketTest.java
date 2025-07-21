@@ -25,6 +25,7 @@ final class RqSocketTest {
     @Test
     void returnLocalAddress() throws IOException {
         MatcherAssert.assertThat(
+            "Local address must be parsed from X-Takes-LocalAddress header",
             new RqSocket(
                 new RqWithHeader(
                     new RqFake(), "X-Takes-LocalAddress: 192.168.134.1"
@@ -37,6 +38,7 @@ final class RqSocketTest {
     @Test
     void returnLocalPort() throws IOException {
         MatcherAssert.assertThat(
+            "Local port must be parsed from X-Takes-LocalPort header",
             new RqSocket(
                 new RqWithHeader(new RqFake(), "X-Takes-LocalPort: 55555")
             ).getLocalPort(),
@@ -47,6 +49,7 @@ final class RqSocketTest {
     @Test
     void returnRemoteAddress() throws IOException {
         MatcherAssert.assertThat(
+            "Remote address must be parsed from X-Takes-RemoteAddress header",
             new RqSocket(
                 new RqWithHeader(
                     new RqFake(), "X-Takes-RemoteAddress: 10.233.189.20"
@@ -59,6 +62,7 @@ final class RqSocketTest {
     @Test
     void returnRemotePort() throws IOException {
         MatcherAssert.assertThat(
+            "Remote port must be parsed from X-Takes-RemotePort header",
             new RqSocket(
                 new RqWithHeader(new RqFake(), "X-Takes-RemotePort: 80")
             ).getRemotePort(),
@@ -79,6 +83,7 @@ final class RqSocketTest {
                     ).getRemoteAddress();
                 } catch (final HttpException ex) {
                     MatcherAssert.assertThat(
+                        "Exception message must indicate missing remote address header",
                         ex.getMessage(),
                         Matchers.containsString(
                             "Header \"X-Takes-RemoteAddress\" is mandatory"
@@ -103,6 +108,7 @@ final class RqSocketTest {
                     ).getLocalAddress();
                 } catch (final HttpException ex) {
                     MatcherAssert.assertThat(
+                        "Exception message must indicate missing local address header",
                         ex.getMessage(),
                         Matchers.containsString(
                             "Header \"X-Takes-LocalAddress\" is mandatory"
@@ -125,6 +131,7 @@ final class RqSocketTest {
                     ).getRemotePort();
                 } catch (final HttpException ex) {
                     MatcherAssert.assertThat(
+                        "Exception message must indicate missing remote port header",
                         ex.getMessage(),
                         Matchers.containsString(
                             "Header \"X-Takes-RemotePort\" is mandatory"
@@ -147,6 +154,7 @@ final class RqSocketTest {
                     ).getLocalPort();
                 } catch (final HttpException ex) {
                     MatcherAssert.assertThat(
+                        "Exception message must indicate missing local port header",
                         ex.getMessage(),
                         Matchers.containsString(
                             "Header \"X-Takes-LocalPort\" is mandatory"

@@ -19,6 +19,7 @@ final class RsStatusTest {
     void readsStatusCode() throws IOException {
         final int status = 200;
         MatcherAssert.assertThat(
+            "Status reader must return the set status code",
             new RsStatus.Base(new RsWithStatus(new RsEmpty(), status)).status(),
             Matchers.equalTo(status)
         );

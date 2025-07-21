@@ -43,10 +43,12 @@ final class RqFormBaseTest {
             )
         );
         MatcherAssert.assertThat(
+            "Form parameter beta must be URL-decoded properly",
             req.param("beta"),
             Matchers.hasItem(" Yes ")
         );
         MatcherAssert.assertThat(
+            "Form parameter names must contain alpha",
             req.names(),
             Matchers.hasItem("alpha")
         );
@@ -66,6 +68,7 @@ final class RqFormBaseTest {
             )
         );
         MatcherAssert.assertThat(
+            "Form names method must return same instance on multiple calls",
             req.names() == req.names(),
             Matchers.is(Boolean.TRUE)
         );

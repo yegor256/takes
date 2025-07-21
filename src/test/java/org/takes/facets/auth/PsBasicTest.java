@@ -135,6 +135,7 @@ final class PsBasicTest {
             forward = ex;
         }
         MatcherAssert.assertThat(
+            "Invalid credentials must return 401 Unauthorized with WWW-Authenticate header",
             new RsHeadPrint(forward).asString(),
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 401 Unauthorized"),
@@ -174,6 +175,7 @@ final class PsBasicTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "Identity URN must match expected user URN with multiple headers",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -184,6 +186,7 @@ final class PsBasicTest {
         Assertions.assertThrows(
             HttpException.class,
             () -> MatcherAssert.assertThat(
+                "Invalid headers must not provide identity",
                 new PsBasic(
                     "RealmD",
                     new PsBasic.Fake(true)
