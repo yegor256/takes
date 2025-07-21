@@ -21,6 +21,7 @@ final class XeMillisTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeMillis XML response must contain millisecond information",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -40,6 +41,7 @@ final class XeMillisTest {
     @Test
     void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeMillis HTML response must contain expected content",
             IOUtils.toString(
                 new RsXslt(
                     new RsXembly(

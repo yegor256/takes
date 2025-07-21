@@ -22,11 +22,8 @@ final class TempInputStreamTest {
     @Test
     void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");
-        final BufferedWriter out = Files.newBufferedWriter(file.toPath());
-        try {
+        try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
             out.write("Temp file deletion test");
-        } finally {
-            out.close();
         }
         try (InputStream body = new TempInputStream(
             Files.newInputStream(file.toPath()), file

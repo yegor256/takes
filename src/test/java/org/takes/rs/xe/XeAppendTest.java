@@ -20,6 +20,7 @@ final class XeAppendTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XML response from XeAppend must be built correctly",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

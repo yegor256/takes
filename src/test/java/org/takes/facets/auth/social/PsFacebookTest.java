@@ -76,6 +76,7 @@ final class PsFacebookTest {
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "Identity URN must match expected Facebook format",
             identity.get().urn(),
             CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );

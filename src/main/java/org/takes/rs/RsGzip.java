@@ -86,16 +86,15 @@ public final class RsGzip implements Response {
         throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];
-        try (OutputStream gzip = new GZIPOutputStream(baos)) {
+        try (InputStream stream = input;
+             OutputStream gzip = new GZIPOutputStream(baos)) {
             while (true) {
-                final int len = input.read(buf);
+                final int len = stream.read(buf);
                 if (len < 0) {
                     break;
                 }
                 gzip.write(buf, 0, len);
             }
-        } finally {
-            input.close();
         }
         return baos.toByteArray();
     }

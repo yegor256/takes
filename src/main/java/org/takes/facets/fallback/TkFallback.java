@@ -26,11 +26,11 @@ import org.takes.tk.TkWrap;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle IllegalCatchCheck (500 lines)
  * @todo #918:30min {@link TkFallback} class is very complicated, hard to read.
  *  Please consider removing static methods and replace them by dedicated
  *  elegant classes according to
  *  https://www.yegor256.com/2017/02/07/private-method-is-new-class.html
+ * @checkstyle IllegalCatchCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

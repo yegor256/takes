@@ -23,6 +23,7 @@ final class XeGoogleLinkTest {
     @Test
     void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
+            "Generated XML must contain Google link",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

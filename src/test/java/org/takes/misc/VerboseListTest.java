@@ -262,6 +262,7 @@ final class VerboseListTest {
      */
     private void assertThat(final Executable exec, final Exception cause) {
         MatcherAssert.assertThat(
+            "Exception must have expected message and cause",
             Assertions.assertThrows(IndexOutOfBoundsException.class, exec),
             Matchers.allOf(
                 Matchers.hasProperty("message", Matchers.is(VerboseListTest.MSG)),

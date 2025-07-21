@@ -20,6 +20,7 @@ final class XeDateTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeDate XML response must contain date information",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
