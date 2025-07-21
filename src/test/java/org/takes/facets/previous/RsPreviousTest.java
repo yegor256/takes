@@ -20,6 +20,7 @@ final class RsPreviousTest {
     @Test
     void buildsResponse() throws IOException {
         MatcherAssert.assertThat(
+            "Response must include Set-Cookie header with URL-encoded previous path",
             new RsPrint(
                 new RsPrevious(new RsText(""), "/home")
             ),

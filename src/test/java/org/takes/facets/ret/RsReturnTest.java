@@ -25,6 +25,7 @@ final class RsReturnTest {
     void addsCookieToResponse() throws IOException {
         final String destination = "/return/to";
         MatcherAssert.assertThat(
+            "Response must include Set-Cookie header with encoded return destination",
             new RsPrint(
                 new RsReturn(new RsEmpty(), destination)
             ),

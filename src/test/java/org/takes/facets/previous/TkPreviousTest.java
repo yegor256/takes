@@ -21,6 +21,7 @@ final class TkPreviousTest {
     @Test
     void redirectsOnCookie() throws Exception {
         MatcherAssert.assertThat(
+            "TkPrevious must redirect with 303 status when previous cookie exists",
             new RsPrint(
                 new TkPrevious(new TkText("")).act(
                     new RqWithHeader(

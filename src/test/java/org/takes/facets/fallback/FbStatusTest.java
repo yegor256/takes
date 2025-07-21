@@ -29,6 +29,7 @@ final class FbStatusTest {
         final int status = HttpURLConnection.HTTP_NOT_FOUND;
         final RqFallback req = new RqFallback.Fake(status);
         MatcherAssert.assertThat(
+            "FbStatus must provide fallback response for matching status code",
             new RsBodyPrint(
                 new FbStatus(
                     status,
@@ -45,6 +46,7 @@ final class FbStatusTest {
             HttpURLConnection.HTTP_MOVED_PERM
         );
         MatcherAssert.assertThat(
+            "FbStatus must provide fallback response when status matches condition",
             new RsBodyPrint(
                 new FbStatus(
                     new Filtered<>(
@@ -68,6 +70,7 @@ final class FbStatusTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
+            "FbStatus must not provide fallback for different status code",
             new FbStatus(
                 HttpURLConnection.HTTP_UNAUTHORIZED,
                 new TkFixed(new RsText("unauthorized"))
@@ -87,10 +90,12 @@ final class FbStatusTest {
             new FbStatus(code).route(req).get()
         );
         MatcherAssert.assertThat(
+            "Default response body must contain status and exception message",
             new RsBodyPrint(response),
             new IsText("404 Not Found: Exception message")
         );
         MatcherAssert.assertThat(
+            "Default response headers must contain content type and status",
             new RsHeadPrint(response).asString(),
             Matchers.both(
                 Matchers.containsString("Content-Type: text/plain")
