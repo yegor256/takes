@@ -91,6 +91,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
+                    "TkProxy must forward request to upstream server and return expected response",
                     new RsPrint(
                         new TkProxy(home).act(
                             new RqFake(method)
@@ -116,6 +117,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
+                    "TkProxy must correctly map path with URL encoding to upstream server",
                     new RsBodyPrint(
                         new TkProxy(home).act(
                             new RqFake(
@@ -147,6 +149,7 @@ final class TkProxyTest {
             // @checkstyle AnonInnerLengthCheck (100 lines)
             home ->
                 MatcherAssert.assertThat(
+                    "TkProxy must modify Host header to point to upstream server",
                     new RsBodyPrint(
                         new TkProxy(home.toURL().toString()).act(
                             new RqFake(
@@ -187,6 +190,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
+                    "TkProxy must add X-Takes-TkProxy header with proxy information",
                     new RsHeadPrint(
                         new TkProxy(
                             home.toURL().toString(),
@@ -225,6 +229,7 @@ final class TkProxyTest {
         ).exec(
             home ->
                 MatcherAssert.assertThat(
+                    "TkProxy must forward all original request headers to upstream server",
                     new RsBodyPrint(
                         new TkProxy(home).act(
                             new RqFake(

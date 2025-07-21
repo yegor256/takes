@@ -129,6 +129,7 @@ final class RqMtFakeTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart request must have correct Content-Disposition header for named part",
                 new RqHeaders.Base(
                     multi.part(part).iterator().next()
                 ).header("Content-Disposition"),
