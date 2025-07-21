@@ -58,8 +58,16 @@ final class RsGzipTest {
                 ).body()
             )
         );
-        MatcherAssert.assertThat(reverse.getWidth(), Matchers.equalTo(width));
-        MatcherAssert.assertThat(reverse.getHeight(), Matchers.equalTo(height));
+        MatcherAssert.assertThat(
+            "Decompressed image width must match original",
+            reverse.getWidth(),
+            Matchers.equalTo(width)
+        );
+        MatcherAssert.assertThat(
+            "Decompressed image height must match original",
+            reverse.getHeight(),
+            Matchers.equalTo(height)
+        );
     }
 
     @Test

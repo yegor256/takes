@@ -81,7 +81,15 @@ final class BkParallelTest {
             ).start();
         }
         completed.await(1L, TimeUnit.MINUTES);
-        MatcherAssert.assertThat(started.getCount(), Matchers.equalTo(0L));
-        MatcherAssert.assertThat(completed.getCount(), Matchers.equalTo(0L));
+        MatcherAssert.assertThat(
+            "All requests must have started",
+            started.getCount(),
+            Matchers.equalTo(0L)
+        );
+        MatcherAssert.assertThat(
+            "All requests must have completed",
+            completed.getCount(),
+            Matchers.equalTo(0L)
+        );
     }
 }

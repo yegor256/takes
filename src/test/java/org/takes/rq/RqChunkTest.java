@@ -56,11 +56,20 @@ final class RqChunkTest {
         ).body();
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
+            "Number of bytes read must equal the data length",
             stream.read(buf),
             Matchers.equalTo(data.length())
         );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        MatcherAssert.assertThat(
+            "Buffer content must match the expected data bytes",
+            buf,
+            Matchers.equalTo(data.getBytes())
+        );
+        MatcherAssert.assertThat(
+            "Stream must have no bytes available after reading all data",
+            stream.available(),
+            Matchers.equalTo(0)
+        );
     }
 
     @Test
@@ -92,11 +101,20 @@ final class RqChunkTest {
         ).body();
         final byte[] buf = new byte[length];
         MatcherAssert.assertThat(
+            "Number of bytes read must equal the total length of all chunks",
             stream.read(buf),
             Matchers.equalTo(length)
         );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        MatcherAssert.assertThat(
+            "Buffer content must match the expected data bytes",
+            buf,
+            Matchers.equalTo(data.getBytes())
+        );
+        MatcherAssert.assertThat(
+            "Stream must have no bytes available after reading all data",
+            stream.available(),
+            Matchers.equalTo(0)
+        );
     }
 
     @Test
@@ -122,10 +140,19 @@ final class RqChunkTest {
         ).body();
         final byte[] buf = new byte[data.length()];
         MatcherAssert.assertThat(
+            "Number of bytes read must equal the data length",
             stream.read(buf),
             Matchers.equalTo(data.length())
         );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        MatcherAssert.assertThat(
+            "Buffer content must match the expected data bytes",
+            buf,
+            Matchers.equalTo(data.getBytes())
+        );
+        MatcherAssert.assertThat(
+            "Stream must have no bytes available after reading all data",
+            stream.available(),
+            Matchers.equalTo(0)
+        );
     }
 }

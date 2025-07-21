@@ -74,7 +74,11 @@ final class FtRemoteTest {
         final Collection<Future<Long>> futures =
             Executors.newFixedThreadPool(total).invokeAll(tasks);
         for (final Future<Long> future : futures) {
-            MatcherAssert.assertThat(future.get(), Matchers.equalTo(0L));
+            MatcherAssert.assertThat(
+                "Future task must return zero on success",
+                future.get(),
+                Matchers.equalTo(0L)
+            );
         }
     }
 

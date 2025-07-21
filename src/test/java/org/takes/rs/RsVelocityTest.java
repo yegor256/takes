@@ -50,7 +50,11 @@ final class RsVelocityTest {
             ),
             Matchers.equalTo(template)
         );
-        MatcherAssert.assertThat(stream.isClosed(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Template input stream must be closed after processing",
+            stream.isClosed(),
+            Matchers.is(true)
+        );
     }
 
     @Test
