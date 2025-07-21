@@ -18,6 +18,7 @@ final class RqWithRsBodyTest {
     void returnsBody() throws Exception {
         final String body = "body";
         MatcherAssert.assertThat(
+            "Request with body must return the set body content",
             new RqPrint(
                 new RqWithBody(
                     new RqWithHeader(
