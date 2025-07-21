@@ -21,6 +21,7 @@ final class XeLinkHomeTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeLinkHome XML response must contain home link",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

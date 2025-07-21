@@ -501,7 +501,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public AsyncContext startAsync() throws IllegalStateException {
+    public AsyncContext startAsync() {
         throw new UnsupportedOperationException("#startAsync()");
     }
 
@@ -509,7 +509,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     public AsyncContext startAsync(
         final ServletRequest req,
         final ServletResponse resp
-    ) throws IllegalStateException {
+    ) {
         throw new UnsupportedOperationException("#startAsync(req, resp)");
     }
 

@@ -20,10 +20,12 @@ final class OptionsTest {
             "--hit-refresh --threads=2".split(" ")
         );
         MatcherAssert.assertThat(
+            "Hit refresh option should be enabled",
             opts.hitRefresh(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
+            "Thread count should be set to 2",
             opts.threads(),
             Matchers.is(2)
         );

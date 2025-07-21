@@ -20,6 +20,7 @@ final class XeLinkTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeLink XML response must contain link information",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

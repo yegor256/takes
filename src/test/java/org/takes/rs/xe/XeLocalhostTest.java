@@ -20,6 +20,7 @@ final class XeLocalhostTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeLocalhost XML response must contain localhost information",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
