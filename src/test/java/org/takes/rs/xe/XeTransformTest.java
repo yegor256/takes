@@ -23,6 +23,7 @@ final class XeTransformTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XML response from XeTransform must be built correctly",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

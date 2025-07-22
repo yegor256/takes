@@ -24,6 +24,7 @@ final class TkTextTest {
     void createsTextResponse() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from string",
             new RsPrint(new TkText(body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -42,6 +43,7 @@ final class TkTextTest {
     void createsTextResponseFromScalar() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from scalar supplier",
             new RsPrint(new TkText(() -> body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -60,6 +62,7 @@ final class TkTextTest {
     void createsTextResponseFromByteArray() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from byte array",
             new RsPrint(new TkText(body.getBytes()).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -78,6 +81,7 @@ final class TkTextTest {
     void createsTextResponseFromInputStream() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from input stream",
             new RsPrint(new TkText(new InputStreamOf(body)).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -97,10 +101,12 @@ final class TkTextTest {
         final String body = "hello, dude!";
         final Take take = new TkText(body);
         MatcherAssert.assertThat(
+            "First response must contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );
         MatcherAssert.assertThat(
+            "Second response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );

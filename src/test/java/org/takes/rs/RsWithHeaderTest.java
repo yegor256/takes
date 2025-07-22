@@ -19,6 +19,7 @@ final class RsWithHeaderTest {
     @Test
     void addsHeadersToResponse() {
         MatcherAssert.assertThat(
+            "Response must include all added headers in order",
             new RsPrint(
                 new RsWithHeader(
                     new RsWithHeader(new RsEmpty(), "host", "b.example.com"),

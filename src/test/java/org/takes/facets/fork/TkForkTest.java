@@ -21,6 +21,7 @@ final class TkForkTest {
     void dispatchesByRegularExpression() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkFork must dispatch to regex fork and return correct response body",
             new RsPrint(
                 new TkFork(new FkRegex("/h[a-z]{2}", body)).act(
                     new RqFake("GET", "/hey?yu", "")

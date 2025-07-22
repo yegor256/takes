@@ -23,6 +23,7 @@ final class XeGithubLinkTest {
     @Test
     void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
+            "Generated XML must contain GitHub link",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

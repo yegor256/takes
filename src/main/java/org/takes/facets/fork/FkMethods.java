@@ -28,8 +28,8 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkMethods implements Fork {
@@ -57,20 +57,20 @@ public final class FkMethods implements Fork {
     /**
      * Ctor.
      * @param mtd Method
-     * @param tke Take
+     * @param that Take
      */
-    public FkMethods(final String mtd, final Take tke) {
-        this(Arrays.asList(mtd.split(",")), tke);
+    public FkMethods(final String mtd, final Take that) {
+        this(Arrays.asList(mtd.split(",")), that);
     }
 
     /**
      * Ctor.
      * @param mtds Methods
-     * @param tke Take
+     * @param that Take
      */
-    public FkMethods(final Collection<String> mtds, final Take tke) {
+    public FkMethods(final Collection<String> mtds, final Take that) {
         this.methods = Collections.unmodifiableCollection(mtds);
-        this.take = tke;
+        this.take = that;
     }
 
     @Override

@@ -10,6 +10,7 @@ import jakarta.json.JsonStructure;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,6 +26,7 @@ final class RsJsonTest {
             .add(key, "Jeffrey Lebowski")
             .build();
         MatcherAssert.assertThat(
+            "JSON response must contain the expected string value",
             Json.createReader(
                 new RsJson(json).body()
             ).readObject().getString(key),
@@ -33,6 +35,7 @@ final class RsJsonTest {
     }
 
     @Test
+    @Tag("deep")
     void buildsBigJsonResponse() throws IOException {
         final int size = 100_000;
         final JsonArrayBuilder builder = Json.createArrayBuilder();
@@ -42,6 +45,7 @@ final class RsJsonTest {
             );
         }
         MatcherAssert.assertThat(
+            "Large JSON array response must have the expected size",
             Json.createReader(
                 new RsJson(builder.build()).body()
             ).readArray().size(),

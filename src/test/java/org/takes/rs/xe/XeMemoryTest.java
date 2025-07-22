@@ -21,6 +21,7 @@ final class XeMemoryTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeMemory XML response must contain memory information",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -39,6 +40,7 @@ final class XeMemoryTest {
     @Test
     void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeMemory HTML response must contain expected content",
             IOUtils.toString(
                 new RsXslt(
                     new RsXembly(

@@ -20,7 +20,7 @@ final class CcCompactTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() {
         final String urn = "urn:test:3";
         final Identity identity = new Identity.Simple(
             urn,
@@ -28,6 +28,7 @@ final class CcCompactTest {
         );
         final byte[] bytes = new CcCompact().encode(identity);
         MatcherAssert.assertThat(
+            "Round-trip compact encoding must preserve original identity URN",
             new CcCompact().decode(bytes).urn(),
             Matchers.equalTo(urn)
         );
@@ -36,12 +37,14 @@ final class CcCompactTest {
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
+            "Invalid compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
                 " % tjw".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
+            "Malformed compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
                 "75726E253".getBytes()
             ),

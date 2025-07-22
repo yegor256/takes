@@ -21,6 +21,7 @@ final class TkClasspathTest {
     @Test
     void dispatchesByResourceName() throws Exception {
         MatcherAssert.assertThat(
+            "TkClasspath must serve existing classpath resources with HTTP OK status",
             new RsHeadPrint(
                 new TkClasspath().act(
                     new RqFake(

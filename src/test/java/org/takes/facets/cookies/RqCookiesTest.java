@@ -22,6 +22,7 @@ final class RqCookiesTest {
     @Test
     void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
+            "RqCookies must parse cookie value from HTTP request",
             new RqCookies.Base(
                 new RqBuffered(
                     new RqFake(
@@ -41,6 +42,7 @@ final class RqCookiesTest {
     @Test
     void parsesHttpQueryWithEmptyCookie() throws IOException {
         MatcherAssert.assertThat(
+            "RqCookies must return empty iterable for cookie with no value",
             new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(
@@ -58,6 +60,7 @@ final class RqCookiesTest {
     @Test
     void parsesHttpRequestWithMultipleCookies() throws IOException {
         MatcherAssert.assertThat(
+            "RqCookies must parse specific cookie value from multiple cookies",
             new RqCookies.Base(
                 new RqFake(
                     Arrays.asList(

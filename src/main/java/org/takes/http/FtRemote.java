@@ -50,21 +50,21 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @throws IOException If fails
      */
-    public FtRemote(final Back bck) throws IOException {
-        this(bck, FtRemote.random());
+    public FtRemote(final Back that) throws IOException {
+        this(that, FtRemote.random());
     }
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @param skt Server socket to use
      * @since 0.22
      */
-    public FtRemote(final Back bck, final ServerSocket skt) {
-        this(new FtBasic(bck, skt), skt, false);
+    public FtRemote(final Back that, final ServerSocket skt) {
+        this(new FtBasic(that, skt), skt, false);
     }
 
     /**

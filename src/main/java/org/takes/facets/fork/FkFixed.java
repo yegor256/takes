@@ -13,8 +13,8 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.9
  * @see TkFork
+ * @since 0.9
  */
 @EqualsAndHashCode(callSuper = true)
 public final class FkFixed extends FkWrap {

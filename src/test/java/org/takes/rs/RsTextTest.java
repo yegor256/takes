@@ -22,6 +22,7 @@ final class RsTextTest {
     void makesPlainTextResponse() {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "Text response must have correct headers and body",
             new RsPrint(new RsBuffered(new RsText(body))),
             new IsText(
                 new Joined(
@@ -39,6 +40,7 @@ final class RsTextTest {
     @Test
     void makesTextResponseWithStatus() throws IOException {
         MatcherAssert.assertThat(
+            "Text response must include the specified HTTP status code",
             new RsHeadPrint(
                 new RsText(
                     new RsWithStatus(HttpURLConnection.HTTP_NOT_FOUND),

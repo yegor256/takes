@@ -128,13 +128,12 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    @SuppressWarnings
-        (
-            {
-                "PMD.CallSuperInConstructor",
-                "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-            }
-        )
+    @SuppressWarnings(
+        {
+            "PMD.CallSuperInConstructor",
+            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+        }
+    )
     public FbStatus(final Iterable<Integer> check,
         final Scalar<Fallback> fallback) {
         super(

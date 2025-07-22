@@ -24,6 +24,7 @@ final class CcBase64Test {
     @Test
     void encodes() throws IOException {
         MatcherAssert.assertThat(
+            "Base64 encoding must produce correct encoded string",
             new String(
                 new CcBase64(new CcPlain()).encode(
                     new Identity.Simple("urn:test:3")
@@ -36,6 +37,7 @@ final class CcBase64Test {
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
+            "Base64 decoding must restore original URN",
             new CcBase64(new CcPlain()).decode(
                 "dXJuJTNBdGVzdCUzQXRlc3Q="
                     .getBytes()
@@ -55,10 +57,12 @@ final class CcBase64Test {
             codec.encode(new Identity.Simple(urn, properties))
         );
         MatcherAssert.assertThat(
+            "Encoded and decoded URN must match original",
             expected.urn(),
             Matchers.equalTo(urn)
         );
         MatcherAssert.assertThat(
+            "Encoded and decoded properties must match original",
             expected.properties(),
             Matchers.equalTo(properties)
         );
@@ -67,6 +71,7 @@ final class CcBase64Test {
     @Test
     void encodesEmptyByteArray() throws IOException {
         MatcherAssert.assertThat(
+            "Empty identity must encode to empty string",
             new String(
                 new CcBase64(new CcPlain()).encode(
                     new Identity.Simple("")
@@ -84,6 +89,7 @@ final class CcBase64Test {
             );
         } catch (final DecodingException ex) {
             MatcherAssert.assertThat(
+                "Exception message must describe invalid Base64 characters",
                 ex.getMessage(),
                 Matchers.equalTo(
                     "Illegal character in Base64 encoded data. [32, 94, 94, 94]"

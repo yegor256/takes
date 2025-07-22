@@ -43,8 +43,13 @@ final class XeFlashTest {
                 cookies.add(matcher.group(1));
             }
         }
-        MatcherAssert.assertThat(cookies, Matchers.hasSize(1));
         MatcherAssert.assertThat(
+            "Exactly one RsFlash cookie must be set",
+            cookies,
+            Matchers.hasSize(1)
+        );
+        MatcherAssert.assertThat(
+            "XeFlash must generate XML with message and level elements",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -70,6 +75,7 @@ final class XeFlashTest {
     @Test
     void rendersViaStandardXsltTemplate() throws IOException {
         MatcherAssert.assertThat(
+            "XeFlash must render flash message via XSLT template with proper HTML structure",
             IOUtils.toString(
                 new RsXslt(
                     new RsXembly(

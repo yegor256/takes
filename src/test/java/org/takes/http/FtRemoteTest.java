@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.form.RqFormBase;
@@ -30,11 +31,13 @@ import org.takes.tk.TkFixed;
 final class FtRemoteTest {
 
     @Test
+    @Tag("deep")
     void simplyWorks() throws Exception {
         final byte[] data = new byte[4];
         data[0] = (byte) 0xff;
         new FtRemote(new TkFixed(new RsText(data))).exec(
             home -> MatcherAssert.assertThat(
+                "FtRemote must serve binary data correctly over HTTP",
                 new JdkRequest(home)
                     .fetch()
                     .as(RestResponse.class)
@@ -46,9 +49,11 @@ final class FtRemoteTest {
     }
 
     @Test
+    @Tag("deep")
     void worksInParallelThreads() throws Exception {
         final Take take = req -> {
             MatcherAssert.assertThat(
+                "HTTP form request must contain expected parameter value",
                 new RqFormBase(req).param("alpha"),
                 Matchers.hasItem("123")
             );
@@ -74,11 +79,16 @@ final class FtRemoteTest {
         final Collection<Future<Long>> futures =
             Executors.newFixedThreadPool(total).invokeAll(tasks);
         for (final Future<Long> future : futures) {
-            MatcherAssert.assertThat(future.get(), Matchers.equalTo(0L));
+            MatcherAssert.assertThat(
+                "Future task must return zero on success",
+                future.get(),
+                Matchers.equalTo(0L)
+            );
         }
     }
 
     @Test
+    @Tag("deep")
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkEmpty()

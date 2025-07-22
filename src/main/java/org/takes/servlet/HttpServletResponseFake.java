@@ -156,9 +156,9 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a URL.
-     * @deprecated It not should be used
      * @param url URL to be encoded
      * @return The encoded URL
+     * @deprecated It not should be used
      */
     @Deprecated
     public String encodeUrl(final String url) {
@@ -167,9 +167,9 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a redirect URL.
-     * @deprecated It not should be used
      * @param url URL to be encoded
      * @return The encoded redirect URL
+     * @deprecated It not should be used
      */
     @Deprecated
     public String encodeRedirectUrl(final String url) {
@@ -216,15 +216,15 @@ public final class HttpServletResponseFake implements HttpServletResponse {
         final String location,
         final int scode,
         final boolean clearbuff
-    ) throws IOException {
+    ) {
         throw new UnsupportedOperationException("#sendRedirect()");
     }
 
     /**
      * Set the response code status and reason.
-     * @deprecated It not should be used
      * @param code The status code
      * @param reason The reason originates this code
+     * @deprecated It not should be used
      */
     @Deprecated
     public void setStatus(final int code, final String reason) {
@@ -298,7 +298,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     @Override
     public boolean isCommitted() {
-        throw new UnsupportedOperationException("#isCommited()");
+        throw new UnsupportedOperationException("#isCommitted()");
     }
 
     @Override

@@ -25,6 +25,7 @@ final class TkReturnTest {
         final Take take = new TkReturn(new TkEmpty());
         final String destination = "/return/to";
         MatcherAssert.assertThat(
+            "TkReturn must redirect to destination and clear return cookie",
             take.act(
                 new RqWithHeader(
                     new RqFake(),
