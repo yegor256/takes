@@ -173,6 +173,7 @@ public final class RqMtBase implements RqMultipart {
      * @return The requests map that use the part name as a map key
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.CloseResource")
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");

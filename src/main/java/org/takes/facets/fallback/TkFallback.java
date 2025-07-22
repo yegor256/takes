@@ -128,7 +128,7 @@ public final class TkFallback extends TkWrap {
      * @return Response
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    @SuppressWarnings({"PMD.AvoidCatchingGenericException", "PMD.CyclomaticComplexity"})
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
         return new ResponseOf(
