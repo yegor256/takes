@@ -43,7 +43,7 @@ This is what is not supported and will not be supported:
 * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 These two web systems use Takes, and they are open source:
-[wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
+[rultor.com](http://www.rultor.com) ([sources](https://github.com/yegor256/rultor)),
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
 
 Watch these videos to learn more:
