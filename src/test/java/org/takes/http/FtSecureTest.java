@@ -105,6 +105,7 @@ import org.takes.tk.TkFixed;
      * @return Secure Front
      * @throws IOException If some problem inside
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static FtRemote secure(final Take take) throws IOException {
         final ServerSocket skt = SSLServerSocketFactory.getDefault()
             .createServerSocket(0);

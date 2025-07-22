@@ -93,6 +93,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
@@ -150,7 +151,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+    @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.CloseResource"})
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -214,6 +215,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String text = "Say hello!";
@@ -270,6 +272,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -390,6 +393,7 @@ import org.takes.tk.TkText;
      * @return Prepared Socket mock
      * @throws Exception If some problem inside
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
