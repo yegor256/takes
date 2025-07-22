@@ -17,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
@@ -59,6 +60,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void gracefullyHandlesBrokenBack() throws Exception {
         new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
             home -> new JdkRequest(home)
@@ -91,6 +93,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void gracefullyHandlesStuckBack() throws Exception {
         final Take take = request -> {
             final Request req = new RqGreedy(request);
@@ -114,6 +117,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void consumesIncomingDataStream() throws Exception {
         final Take take = req -> new RsText(
             IOUtils.toString(
@@ -136,6 +140,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void consumesTwiceInputStreamWithRsText() throws Exception {
         final String result = "Привет RsText!";
         new FtRemote(
@@ -164,6 +169,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void consumesTwiceInputStreamWithRsHtml() throws Exception {
         final String result = "Hello RsHTML!";
         new FtRemote(

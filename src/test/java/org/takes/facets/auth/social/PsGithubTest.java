@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -59,6 +60,7 @@ final class PsGithubTest {
     private static final String OCTOCAT = "octocat";
 
     @Test
+    @Tag("deep")
     void failsOnNoAccessToken() {
         Assertions.assertThrows(
             AssertionError.class,
@@ -67,6 +69,7 @@ final class PsGithubTest {
     }
 
     @Test
+    @Tag("deep")
     void canLogin() throws Exception {
         this.performLogin(
             PsGithubTest.directiveWithoutAccessToken()

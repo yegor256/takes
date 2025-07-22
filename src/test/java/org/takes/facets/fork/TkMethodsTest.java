@@ -8,6 +8,7 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.takes.HttpException;
@@ -42,6 +43,7 @@ final class TkMethodsTest {
     }
 
     @Test
+    @Tag("deep")
     void returnsMethodIsNotAllowedForUnsupportedMethods() throws
         Exception {
         new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(

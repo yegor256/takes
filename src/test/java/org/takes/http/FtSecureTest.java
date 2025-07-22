@@ -14,6 +14,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.RqLengthAware;
@@ -30,6 +31,7 @@ import org.takes.tk.TkFixed;
 @SuppressWarnings("PMD.TooManyMethods") final class FtSecureTest {
 
     @Test
+    @Tag("deep")
     void justWorks() throws Exception {
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
             home -> new JdkRequest(home)
@@ -41,6 +43,7 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void gracefullyHandlesBrokenBack() throws Exception {
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
             home -> new JdkRequest(home)
@@ -52,6 +55,7 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
             MatcherAssert.assertThat(
@@ -72,6 +76,7 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void consumesIncomingDataStream() throws Exception {
         final Take take = req -> new RsText(
             IOUtils.toString(

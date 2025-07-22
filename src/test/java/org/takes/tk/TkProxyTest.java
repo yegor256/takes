@@ -14,6 +14,7 @@ import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -81,6 +82,7 @@ final class TkProxyTest {
 
     @ParameterizedTest
     @MethodSource("cases")
+    @Tag("deep")
     void justWorks(
         final String method, final String expected
     ) throws Exception {
@@ -106,6 +108,7 @@ final class TkProxyTest {
 
     @ParameterizedTest
     @MethodSource("cases")
+    @Tag("deep")
     void correctlyMapsPathString(final String method, final String expected)
         throws Exception {
         final Take take = req ->
@@ -138,6 +141,7 @@ final class TkProxyTest {
 
     @ParameterizedTest
     @MethodSource("cases")
+    @Tag("deep")
     void modifiesHost(
         final String method, final String expected
     ) throws Exception {
@@ -179,6 +183,7 @@ final class TkProxyTest {
 
     @ParameterizedTest
     @MethodSource("cases")
+    @Tag("deep")
     void addsSpecificHeader(
         final String method, final String expected
     ) throws Exception {
@@ -220,6 +225,7 @@ final class TkProxyTest {
     }
 
     @Test
+    @Tag("deep")
     void addsAllInitialHeaders() throws Exception {
         final String body = "Hello World !";
         new FtRemote(

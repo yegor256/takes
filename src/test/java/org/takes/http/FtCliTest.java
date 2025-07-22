@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.takes.facets.fork.FkRegex;
@@ -26,6 +27,7 @@ import org.takes.facets.fork.TkFork;
 final class FtCliTest {
 
     @Test
+    @Tag("deep")
     void understandsCommandLineArgs(@TempDir final Path temp) throws Exception {
         final CountDownLatch ready = new CountDownLatch(1);
         final Exit exit = () -> {

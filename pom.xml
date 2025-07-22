@@ -78,6 +78,7 @@
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
     <argLine/>
+    <excludedGroups>deep</excludedGroups>
   </properties>
   <dependencies>
     <!--
@@ -389,7 +390,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
+          <excludedGroups>org.takes.misc.PerformanceTests,${excludedGroups}</excludedGroups>
           <systemPropertyVariables>
             <argLine>@{argLine} -Dfile.encoding=UTF-8 -Djava.awt.headless=true -Duser.language=en -Duser.country=US</argLine>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
@@ -569,6 +570,12 @@
           <scope>runtime</scope>
         </dependency>
       </dependencies>
+    </profile>
+    <profile>
+      <id>deep</id>
+      <properties>
+        <excludedGroups/>
+      </properties>
     </profile>
   </profiles>
 </project>

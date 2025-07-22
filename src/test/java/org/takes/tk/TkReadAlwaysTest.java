@@ -8,6 +8,7 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.http.FtRemote;
@@ -20,6 +21,7 @@ import org.takes.rs.RsText;
 final class TkReadAlwaysTest {
 
     @Test
+    @Tag("deep")
     void requestBodyIsIgnored() throws Exception {
         final String expected = "response ok";
         final Take take = req -> new RsText(expected);
