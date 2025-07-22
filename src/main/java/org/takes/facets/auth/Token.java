@@ -43,12 +43,12 @@ public interface Token {
         /**
          * The header short for algorithm.
          */
-        public static final String ALGORITHM = "alg";
+        public static final String ALGORITHM = "algo";
 
         /**
          * The header short for token type.
          */
-        public static final String TYP = "typ";
+        public static final String TYP = "type";
 
         /**
          * JOSE object.
@@ -61,8 +61,8 @@ public interface Token {
          */
         public Jose(final int bitlength) {
             this.joseo = Json.createObjectBuilder()
-                .add(Jose.ALGORITHM, String.format("HS%s", bitlength))
-                .add(Jose.TYP, "JWT")
+                .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
+                .add(Token.Jose.TYP, "JWT")
                 .build();
         }
 
@@ -83,25 +83,22 @@ public interface Token {
      * JSON Web Token.
      * @since 1.4
      */
-    @SuppressWarnings
-        (
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        )
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     final class Jwt implements Token {
         /**
          * The header short for subject.
          */
-        public static final String SUBJECT = "sub";
+        public static final String SUBJECT = "subj";
 
         /**
          * The header short for issuing time.
          */
-        public static final String ISSUED = "iat";
+        public static final String ISSUED = "date";
 
         /**
          * The header short for expiration.
          */
-        public static final String EXPIRATION = "exp";
+        public static final String EXPIRATION = "expr";
 
         /**
          * The header short for expiration.
@@ -133,9 +130,9 @@ public interface Token {
             this.exp = Calendar.getInstance(TimeZone.getTimeZone("Z"));
             this.exp.setTimeInMillis(this.now.getTimeInMillis() + (age * 1000));
             this.jwto = Json.createObjectBuilder()
-                .add(Jwt.ISSUED, String.format(Jwt.ISOFORMAT, this.now))
-                .add(Jwt.EXPIRATION, String.format(Jwt.ISOFORMAT, this.exp))
-                .add(Jwt.SUBJECT, idt.urn())
+                .add(Token.Jwt.ISSUED, String.format(Token.Jwt.ISOFORMAT, this.now))
+                .add(Token.Jwt.EXPIRATION, String.format(Token.Jwt.ISOFORMAT, this.exp))
+                .add(Token.Jwt.SUBJECT, idt.urn())
                 .build();
         }
 

@@ -25,7 +25,7 @@ final class FkAuthenticatedTest {
         MatcherAssert.assertThat(
             "FkAuthenticated must not match unauthenticated requests",
             new FkAuthenticated(new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hello?a=1")
             ).has(),
             Matchers.is(false)
         );

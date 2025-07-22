@@ -21,7 +21,7 @@ final class FkAnonymousTest {
         MatcherAssert.assertThat(
             "FkAnonymous must match requests from anonymous users",
             new FkAnonymous(new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hello?a=1")
             ).has(),
             Matchers.is(true)
         );

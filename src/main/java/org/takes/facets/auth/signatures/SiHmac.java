@@ -125,8 +125,8 @@ public final class SiHmac implements Signature {
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try (Formatter formatter = new Formatter()) {
-            for (final byte byt : this.create().doFinal(bytes)) {
-                formatter.format("%02x", byt);
+            for (final byte the : this.create().doFinal(bytes)) {
+                formatter.format("%02x", the);
             }
             return formatter.toString().getBytes(Charset.defaultCharset());
         }

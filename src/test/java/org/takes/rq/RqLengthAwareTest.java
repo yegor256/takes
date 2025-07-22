@@ -89,7 +89,7 @@ final class RqLengthAwareTest {
         final byte[] bytes = "test".getBytes();
         final InputStream data = new FilterInputStream(new ByteArrayInputStream(bytes)) {
             @Override
-            public int available() throws IOException {
+            public int available() {
                 return 1;
             }
         };

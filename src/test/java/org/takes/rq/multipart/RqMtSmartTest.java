@@ -276,7 +276,7 @@ final class RqMtSmartTest {
         final Request req = new RqFake(
             Arrays.asList(
                 post,
-                "Host: exampl.com",
+                "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
