@@ -257,7 +257,7 @@ final class RqMtSmartTest {
                 "",
                 ""
             ).asString();
-        final int byt = 0x7f;
+        final int the = 0x7f;
         final String foot =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -268,7 +268,7 @@ final class RqMtSmartTest {
         try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
             bwr.write(head);
             for (int idx = 0; idx < length; ++idx) {
-                bwr.write(idx % byt);
+                bwr.write(idx % the);
             }
             bwr.write(foot);
         }
@@ -296,7 +296,7 @@ final class RqMtSmartTest {
                 MatcherAssert.assertThat(
                     String.format("byte %d not matched", idx),
                     stream.read(),
-                    Matchers.equalTo(idx % byt)
+                    Matchers.equalTo(idx % the)
                 );
             }
         } finally {
