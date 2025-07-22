@@ -48,7 +48,7 @@ public interface Token {
         /**
          * The header short for token type.
          */
-        public static final String TYP = "type";
+        public static final String TYPE = "type";
 
         /**
          * JOSE object.
@@ -62,7 +62,7 @@ public interface Token {
         public Jose(final int bitlength) {
             this.joseo = Json.createObjectBuilder()
                 .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
-                .add(Token.Jose.TYP, "JWT")
+                .add(Token.Jose.TYPE, "JWT")
                 .build();
         }
 
