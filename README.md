@@ -441,9 +441,9 @@ a parent class.
 
 Now let's see how we can render something more complex than a plain text.
 First, XML+XSLT is a recommended mechanism of HTML rendering.
-Even though it may be
-too complex, give it a try, you will not regret it. Here is how we render a simple XML
-page that is transformed to HTML5 on-fly (more about `RsXembly` below):
+Even though it may be too complex, give it a try, you will not regret it.
+Here is how we render a simple XML page that is transformed
+  to HTML5 on-fly (more about `RsXembly` below):
 
 ```java
 public final class TkAccount implements Take {
