@@ -66,6 +66,7 @@ final class RqMtSmartTest {
     );
 
     @Test
+    @Tag("deep")
     void returnsCorrectPartLength() throws Exception {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
@@ -106,6 +107,7 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void identifiesBoundary() throws Exception {
         final int length = 9000;
         final String part = "foo-1";

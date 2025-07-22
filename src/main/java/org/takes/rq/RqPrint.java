@@ -120,6 +120,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @param output Output stream to print to
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.CloseResource")
     public void printBody(final OutputStream output) throws IOException {
         final InputStream input = new RqChunk(new RqLengthAware(this)).body();
         final byte[] buf = new byte[4096];

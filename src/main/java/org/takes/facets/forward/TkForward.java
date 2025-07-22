@@ -91,6 +91,7 @@ public final class TkForward implements Take {
          * @return Response
          * @throws IOException If fails
          */
+        @SuppressWarnings("PMD.CloseResource")
         private Response load() throws IOException {
             if (this.saved.isEmpty()) {
                 Iterable<String> head;

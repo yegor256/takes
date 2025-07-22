@@ -47,6 +47,7 @@ final class FtBasicTest {
     private static final String ROOT_PATH = "/";
 
     @Test
+    @Tag("deep")
     void justWorks() throws Exception {
         new FtRemote(
             new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "привет!"))
@@ -72,6 +73,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
             MatcherAssert.assertThat(
@@ -198,6 +200,7 @@ final class FtBasicTest {
     }
 
     @Test
+    @Tag("deep")
     void gracefullyHandlesBrokenPipe() throws IOException {
         new FtBasic(
             new BkSafe(
