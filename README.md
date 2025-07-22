@@ -1078,13 +1078,6 @@ src/
       js/
       css/
       robot.txt
-      log4j.properties
-  test/
-    java/
-      foo/
-        AppTest.java
-    resources/
-      log4j.properties
 pom.xml
 LICENSE.txt
 ```
