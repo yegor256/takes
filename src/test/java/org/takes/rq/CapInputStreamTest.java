@@ -35,9 +35,8 @@ final class CapInputStreamTest {
     @Test
     void closesStream() throws Exception {
         final InputStream stream = Mockito.mock(InputStream.class);
-        try (CapInputStream wrapper = new CapInputStream(stream, 0L)) {
-            wrapper.close();
-        }
+        final CapInputStream wrapper = new CapInputStream(stream, 0L);
+        wrapper.close();
         Mockito.verify(stream, Mockito.times(1)).close();
     }
 
@@ -45,9 +44,8 @@ final class CapInputStreamTest {
     void skipsOnStream() throws Exception {
         final long skip = 25L;
         final InputStream stream = Mockito.mock(InputStream.class);
-        try (CapInputStream wrapper = new CapInputStream(stream, 50L)) {
-            wrapper.skip(skip);
-        }
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
+        wrapper.skip(skip);
         Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
 
