@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasString;
 import org.mockito.Mockito;
@@ -60,6 +61,7 @@ final class TkRetryTest {
     }
 
     @Test
+    @Tag("deep")
     void retriesOnExceptionTillCount() {
         Assertions.assertThrows(
             IOException.class,
@@ -89,6 +91,7 @@ final class TkRetryTest {
     }
 
     @Test
+    @Tag("deep")
     void retriesOnExceptionTillSuccess() throws Exception {
         final String data = "data";
         final Take take = Mockito.mock(Take.class);

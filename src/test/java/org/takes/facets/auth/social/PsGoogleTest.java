@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Take;
@@ -110,6 +111,7 @@ final class PsGoogleTest {
     private static final String APP = "app";
 
     @Test
+    @Tag("deep")
     void logsIn() throws Exception {
         final String octocat = "octocat";
         final String urn = "urn:google:1";
@@ -182,6 +184,7 @@ final class PsGoogleTest {
     }
 
     @Test
+    @Tag("deep")
     void badGoogleResponse() {
         final Take take = new TkFork(
             this.requestToken(),
@@ -225,6 +228,7 @@ final class PsGoogleTest {
     }
 
     @Test
+    @Tag("deep")
     void noDisplayNameResponse() throws Exception {
         final String urn = "urn:google:2";
         final Take take = new TkFork(

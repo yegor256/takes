@@ -146,6 +146,7 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void consumesHttpRequest() throws Exception {
         final String part = "f-1";
         final Take take = req -> new RsText(
@@ -241,6 +242,7 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void notDistortContent(@TempDir final Path temp) throws Exception {
         final int length = 1_000_000;
         final String part = "test1";

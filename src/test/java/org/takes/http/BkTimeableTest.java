@@ -14,6 +14,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.takes.Response;
@@ -28,6 +29,7 @@ import org.takes.rs.RsText;
 final class BkTimeableTest {
 
     @Test
+    @Tag("deep")
     void stopsLongRunningBack(@TempDir final File temp) throws Exception {
         final String response = "interrupted";
         final CountDownLatch ready = new CountDownLatch(1);

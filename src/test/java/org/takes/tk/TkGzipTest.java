@@ -14,6 +14,7 @@ import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.http.FtRemote;
@@ -112,6 +113,7 @@ final class TkGzipTest {
     }
 
     @Test
+    @Tag("deep")
     void returnsExactlyGzipBody() throws Exception {
         final String body = "Halo, Siñor!";
         new FtRemote(new TkGzip(req -> new RsText(body))).exec(
@@ -134,6 +136,7 @@ final class TkGzipTest {
     }
 
     @Test
+    @Tag("deep")
     void compressesOverHttp() throws Exception {
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
             home -> MatcherAssert.assertThat(

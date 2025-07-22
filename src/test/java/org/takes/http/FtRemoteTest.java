@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.form.RqFormBase;
@@ -30,6 +31,7 @@ import org.takes.tk.TkFixed;
 final class FtRemoteTest {
 
     @Test
+    @Tag("deep")
     void simplyWorks() throws Exception {
         final byte[] data = new byte[4];
         data[0] = (byte) 0xff;
@@ -47,6 +49,7 @@ final class FtRemoteTest {
     }
 
     @Test
+    @Tag("deep")
     void worksInParallelThreads() throws Exception {
         final Take take = req -> {
             MatcherAssert.assertThat(
@@ -85,6 +88,7 @@ final class FtRemoteTest {
     }
 
     @Test
+    @Tag("deep")
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkEmpty()

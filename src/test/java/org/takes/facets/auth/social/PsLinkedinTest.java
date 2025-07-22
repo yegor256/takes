@@ -13,6 +13,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -34,6 +35,7 @@ import org.takes.rs.RsJson;
 final class PsLinkedinTest {
 
     @Test
+    @Tag("deep")
     void logins() throws Exception {
         final String tokenpath = "/uas/oauth2/accessToken";
         final String firstname = "firstName";

@@ -10,6 +10,7 @@ import jakarta.json.JsonStructure;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,6 +35,7 @@ final class RsJsonTest {
     }
 
     @Test
+    @Tag("deep")
     void buildsBigJsonResponse() throws IOException {
         final int size = 100_000;
         final JsonArrayBuilder builder = Json.createArrayBuilder();

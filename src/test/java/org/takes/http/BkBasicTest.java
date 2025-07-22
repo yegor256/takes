@@ -21,6 +21,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
@@ -76,6 +77,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
+    @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
             new TkFork(
