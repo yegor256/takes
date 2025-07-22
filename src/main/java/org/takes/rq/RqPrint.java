@@ -121,15 +121,14 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        try (InputStream input = new RqChunk(new RqLengthAware(this)).body()) {
-            final byte[] buf = new byte[4096];
-            while (true) {
-                final int bytes = input.read(buf);
-                if (bytes < 0) {
-                    break;
-                }
-                output.write(buf, 0, bytes);
+        final InputStream input = new RqChunk(new RqLengthAware(this)).body();
+        final byte[] buf = new byte[4096];
+        while (true) {
+            final int bytes = input.read(buf);
+            if (bytes < 0) {
+                break;
             }
+            output.write(buf, 0, bytes);
         }
     }
 
