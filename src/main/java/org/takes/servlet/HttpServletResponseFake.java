@@ -216,7 +216,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
         final String location,
         final int scode,
         final boolean clearbuff
-    ) throws IOException {
+    ) {
         throw new UnsupportedOperationException("#sendRedirect()");
     }
 

@@ -27,18 +27,18 @@ final class FkRegexTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             "FkRegex must match when path matches string regex pattern",
-            new FkRegex("/h[a-z]{2}", new TkEmpty()).route(
-                new RqFake("GET", "/hel?a=1")
+            new FkRegex("/h[a-z]{4}", new TkEmpty()).route(
+                new RqFake("GET", "/hello?a=1")
             ).has(),
             Matchers.is(true)
         );
         MatcherAssert.assertThat(
             "FkRegex must match when path matches compiled Pattern",
             new FkRegex(
-                Pattern.compile("/h[a-z]{2}"),
+                Pattern.compile("/h[a-z]{4}"),
                 new TkEmpty()
             ).route(
-                new RqFake("GET", "/hel?a=1")
+                new RqFake("GET", "/hello?a=2")
             ).has(),
             Matchers.is(true)
         );

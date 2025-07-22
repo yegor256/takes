@@ -20,7 +20,7 @@ final class CcCompactTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    void encodesAndDecodes() throws IOException {
+    void encodesAndDecodes() {
         final String urn = "urn:test:3";
         final Identity identity = new Identity.Simple(
             urn,

@@ -213,10 +213,9 @@ final class RsXsltTest {
 
     /**
      * Checking XXE vulnerability for XSLT transformer in response class {@link RsXslt}.
-     * @throws IOException
      */
     @Test
-    void getRuntime() throws IOException {
+    void getRuntime() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
