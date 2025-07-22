@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
-[![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=org.takes%3Atakes)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yegor256_takes&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yegor256_takes)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dca23c1154539343737a/maintainability)](https://codeclimate.com/github/yegor256/takes/maintainability)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![PDD status](https://www.0pdd.com/svg?name=yegor256/takes)](https://www.0pdd.com/p?name=yegor256/takes)
