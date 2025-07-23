@@ -27,6 +27,7 @@ final class RqFormSmartTest {
             )
         );
         MatcherAssert.assertThat(
+            "RqFormSmart must return correct single form parameter value",
             new RqFormSmart(req).single("test-6"),
             Matchers.equalTo("blue")
         );

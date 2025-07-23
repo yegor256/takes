@@ -24,6 +24,7 @@ final class RsXemblyTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XML response must be built correctly",
             IOUtils.toString(
                 new RsXembly(
                     new XeStylesheet("/a.xsl"),
@@ -53,6 +54,7 @@ final class RsXemblyTest {
         dom.appendChild(dom.createElement(root));
         final String query = "/world/hi";
         MatcherAssert.assertThat(
+            "XML response from DOM must contain expected XPath",
             IOUtils.toString(
                 new RsXembly(
                     dom,
@@ -67,6 +69,7 @@ final class RsXemblyTest {
             XhtmlMatchers.hasXPath(query)
         );
         MatcherAssert.assertThat(
+            "Original DOM must not be modified",
             dom,
             Matchers.not(
                 XhtmlMatchers.hasXPath(query)

@@ -19,8 +19,8 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.6
  * @see org.takes.facets.fork.FkTypes
+ * @since 0.6
  */
 @ToString
 @EqualsAndHashCode

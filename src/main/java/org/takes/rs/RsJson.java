@@ -62,9 +62,8 @@ public final class RsJson extends RsWrap {
      * Print JSON.
      * @param src Source
      * @return JSON
-     * @throws IOException If fails
      */
-    private static byte[] print(final RsJson.Source src) throws IOException {
+    private static byte[] print(final RsJson.Source src) {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (JsonWriter writer = Json.createWriter(baos)) {
             writer.write(src.toJson());

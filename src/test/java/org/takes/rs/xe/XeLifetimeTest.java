@@ -20,6 +20,7 @@ final class XeLifetimeTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeLifetime XML response must contain application uptime",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

@@ -21,6 +21,7 @@ final class XeSlaTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeSla XML response must contain expected SLA data",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -39,6 +40,7 @@ final class XeSlaTest {
     @Test
     void buildsHtmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeSla HTML response must contain expected content",
             IOUtils.toString(
                 new RsXslt(
                     new RsXembly(

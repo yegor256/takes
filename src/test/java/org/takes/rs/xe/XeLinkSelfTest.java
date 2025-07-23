@@ -21,6 +21,7 @@ final class XeLinkSelfTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeLinkSelf XML response must contain self link",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

@@ -141,8 +141,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @throws IOException If fails
      */
     public void printBody(final OutputStream output) throws IOException {
-        final InputStream body = this.body();
-        try {
+        try (InputStream body = this.body()) {
             final byte[] buf = new byte[4096];
             while (true) {
                 final int bytes = body.read(buf);
@@ -151,8 +150,6 @@ public final class RsPrint extends RsWrap implements Text {
                 }
                 output.write(buf, 0, bytes);
             }
-        } finally {
-            body.close();
         }
     }
 }

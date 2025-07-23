@@ -62,8 +62,8 @@ import org.takes.Response;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @see org.takes.rs.xe.RsXembly
+ * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -193,16 +193,14 @@ public final class RsXslt extends RsWrap {
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];
-        try {
+        try (InputStream stream = input) {
             while (true) {
-                final int bytes = input.read(buf);
+                final int bytes = stream.read(buf);
                 if (bytes < 0) {
                     break;
                 }
                 baos.write(buf, 0, bytes);
             }
-        } finally {
-            input.close();
         }
         return baos.toByteArray();
     }

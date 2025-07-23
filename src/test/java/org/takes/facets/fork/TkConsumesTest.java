@@ -50,6 +50,7 @@ final class TkConsumesTest {
             )
         );
         MatcherAssert.assertThat(
+            "Response must start with correct HTTP status and content type",
             new RsPrint(response),
             new StartsWith(
                 new Joined(

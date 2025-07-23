@@ -21,6 +21,7 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
@@ -69,12 +70,14 @@ import org.takes.tk.TkText;
         final String hello = "Hello World";
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
+            "Socket output must contain the response text",
             baos.toString(),
             Matchers.containsString(hello)
         );
     }
 
     @Test
+    @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
             new TkFork(
@@ -90,6 +93,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
@@ -105,6 +109,7 @@ import org.takes.tk.TkText;
         final Request request = ref.get();
         final RqHeaders.Smart smart = new RqHeaders.Smart(request);
         MatcherAssert.assertThat(
+            "X-Takes-LocalAddress header must not contain slashes",
             smart.single(
                 "X-Takes-LocalAddress",
                 ""
@@ -114,6 +119,7 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "X-Takes-RemoteAddress header must not contain slashes",
             smart.single(
                 "X-Takes-RemoteAddress",
                 ""
@@ -123,25 +129,29 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "Local socket address must be present",
             new RqSocket(request).getLocalAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Local socket port must be zero for mock socket",
             new RqSocket(request).getLocalPort(),
             Matchers.equalTo(0)
         );
         MatcherAssert.assertThat(
+            "Remote socket address must be present",
             new RqSocket(request).getRemoteAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Remote socket port must be zero for mock socket",
             new RqSocket(request).getRemotePort(),
             Matchers.equalTo(0)
         );
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+    @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.CloseResource"})
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -189,6 +199,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Two responses must be sent in one connection",
             output.toString(),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
@@ -204,6 +215,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String text = "Say hello!";
@@ -247,6 +259,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain 411 status for missing Content-Length",
             output.toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
@@ -259,6 +272,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -304,6 +318,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain text for closed connection request",
             output.toString(),
             Matchers.containsString(text)
         );
@@ -378,6 +393,7 @@ import org.takes.tk.TkText;
      * @return Prepared Socket mock
      * @throws Exception If some problem inside
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(

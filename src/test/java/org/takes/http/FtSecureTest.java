@@ -14,6 +14,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
 import org.takes.rq.RqLengthAware;
@@ -30,6 +31,7 @@ import org.takes.tk.TkFixed;
 @SuppressWarnings("PMD.TooManyMethods") final class FtSecureTest {
 
     @Test
+    @Tag("deep")
     void justWorks() throws Exception {
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
             home -> new JdkRequest(home)
@@ -41,6 +43,7 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void gracefullyHandlesBrokenBack() throws Exception {
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
             home -> new JdkRequest(home)
@@ -52,9 +55,11 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void parsesIncomingHttpRequest() throws Exception {
         final Take take = request -> {
             MatcherAssert.assertThat(
+                "HTTPS request body must contain expected content",
                 new RqPrint(request).printBody(),
                 Matchers.containsString("Jeff")
             );
@@ -71,6 +76,7 @@ import org.takes.tk.TkFixed;
     }
 
     @Test
+    @Tag("deep")
     void consumesIncomingDataStream() throws Exception {
         final Take take = req -> new RsText(
             IOUtils.toString(
@@ -99,6 +105,7 @@ import org.takes.tk.TkFixed;
      * @return Secure Front
      * @throws IOException If some problem inside
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static FtRemote secure(final Take take) throws IOException {
         final ServerSocket skt = SSLServerSocketFactory.getDefault()
             .createServerSocket(0);

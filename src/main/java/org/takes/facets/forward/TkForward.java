@@ -20,8 +20,8 @@ import org.takes.rs.RsSimple;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @see org.takes.facets.forward.TkForward
+ * @since 0.1
  */
 @ToString(of = "origin")
 @EqualsAndHashCode
@@ -91,6 +91,7 @@ public final class TkForward implements Take {
          * @return Response
          * @throws IOException If fails
          */
+        @SuppressWarnings("PMD.CloseResource")
         private Response load() throws IOException {
             if (this.saved.isEmpty()) {
                 Iterable<String> head;

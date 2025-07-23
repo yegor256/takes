@@ -59,14 +59,17 @@ final class PsTwitterTest {
             new RqFake("GET", "")
         ).get();
         MatcherAssert.assertThat(
+            "Identity URN must match expected Twitter format",
             identity.urn(),
             CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
         );
         MatcherAssert.assertThat(
+            "Identity name property must match expected value",
             identity.properties().get(name),
             CoreMatchers.equalTo(randname)
         );
         MatcherAssert.assertThat(
+            "Identity picture property must match expected value",
             identity.properties().get("picture"),
             CoreMatchers.equalTo(picture)
         );

@@ -32,6 +32,7 @@ final class TkRedirectTest {
     void createsRedirectResponseWithUrl() throws Exception {
         final String url = "/about";
         MatcherAssert.assertThat(
+            "Redirect response must have correct status and location header",
             new RsPrint(
                 new TkRedirect(url).act(new RqFake())
             ),
@@ -51,6 +52,7 @@ final class TkRedirectTest {
     void createsRedirectResponseWithUrlAndStatus() throws Exception {
         final String url = "/";
         MatcherAssert.assertThat(
+            "Redirect response must use custom status code and correct location",
             new RsPrint(
                 new TkRedirect(url, HttpURLConnection.HTTP_MOVED_TEMP).act(
                     new RqFake()
@@ -72,6 +74,7 @@ final class TkRedirectTest {
     void ignoresQueryAndFragmentOnEmptyUrl() throws Exception {
         final String target = "/the-target";
         MatcherAssert.assertThat(
+            "Redirect must ignore query and fragment when redirecting to target URL",
             new TkRedirect(target).act(
                 new RqFake("GET", "/hey-you?f=1#xxx")
             ),

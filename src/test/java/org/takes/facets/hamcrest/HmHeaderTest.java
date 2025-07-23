@@ -23,6 +23,7 @@ final class HmHeaderTest {
     @Test
     void testsHeaderAvailable() {
         MatcherAssert.assertThat(
+            "Request must have Accept header with both XML and HTML values",
             new RqFake(
                 Arrays.asList(
                     "GET /f?a=3&b-6",
@@ -41,6 +42,7 @@ final class HmHeaderTest {
     @Test
     void testsHeaderValueNotAvailable() {
         MatcherAssert.assertThat(
+            "Request must not have Host header with fake.org value",
             new RqFake(
                 Arrays.asList(
                     "GET /f?a=3",
@@ -60,6 +62,7 @@ final class HmHeaderTest {
     @Test
     void testsHeaderNameAndValueAvailable() {
         MatcherAssert.assertThat(
+            "Request must have header1 with value1",
             new RqWithHeader(new RqFake(), "header1: value1"),
             new HmHeader<>(
                 "header1", "value1"
@@ -70,6 +73,7 @@ final class HmHeaderTest {
     @Test
     void testsValueNotAvailable() {
         MatcherAssert.assertThat(
+            "Request must not have header2 with incorrect value21",
             new RqWithHeader(new RqFake(), "header2: value2"),
             Matchers.not(
                 new HmHeader<>(
@@ -82,6 +86,7 @@ final class HmHeaderTest {
     @Test
     void testsMultipleHeadersAvailable() {
         MatcherAssert.assertThat(
+            "Request must have header3 with both value31 and value32",
             new RqWithHeaders(
                 new RqFake(),
                 "header3: value31", "header3: value32"
@@ -95,6 +100,7 @@ final class HmHeaderTest {
     @Test
     void testsHeaderNotAvailable() {
         MatcherAssert.assertThat(
+            "Request must have empty header41 values when header is not present",
             new RqWithHeaders(new RqFake(), "header4: value4"),
             new HmHeader<>(
                 "header41", Matchers.emptyIterableOf(String.class)
@@ -113,6 +119,7 @@ final class HmHeaderTest {
         matcher.matchesSafely(req);
         matcher.describeMismatchSafely(req, description);
         MatcherAssert.assertThat(
+            "Mismatch description must contain header name and actual values",
             description.toString(),
             Matchers.stringContainsInOrder(
                 "header was: a string equal to ",
