@@ -4,7 +4,10 @@
  */
 package org.takes.rs;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -26,7 +29,7 @@ interface RsBody extends Input {
      * @throws IOException in case the content of the body could not
      *  be provided.
      */
-    InputStream stream() throws IOException;
+    InputStream stream() throws Exception;
 
     /**
      * Gives the length of the stream.
@@ -34,7 +37,7 @@ interface RsBody extends Input {
      * @throws IOException in case the length of the stream could not be
      *  retrieved.
      */
-    int length() throws IOException;
+    int length() throws Exception;
 
     /**
      * Content of a body based on an {@link java.net.URL}.
@@ -124,7 +127,7 @@ interface RsBody extends Input {
         }
 
         @Override
-        public InputStream stream() throws IOException {
+        public InputStream stream() throws Exception {
             this.estimate();
             return this.input;
         }
@@ -188,16 +191,12 @@ interface RsBody extends Input {
         }
 
         @Override
-        public InputStream stream() throws IOException {
-            try {
-                return new InputOf(this.file()).stream();
-            } catch (final Exception ex) {
-                throw new IOException("Failed to create input stream", ex);
-            }
+        public InputStream stream() throws Exception {
+            return new InputOf(this.file()).stream();
         }
 
         @Override
-        public int length() throws IOException {
+        public int length() throws Exception {
             return (int) this.file().length();
         }
 
@@ -209,7 +208,7 @@ interface RsBody extends Input {
          * @throws IOException In case the content of the underlying
          *  {@code Body} could not be stored into the file.
          */
-        private File file() throws IOException {
+        private File file() throws Exception {
             synchronized (this.file) {
                 if (!this.file.exists()) {
                     this.file.deleteOnExit();
