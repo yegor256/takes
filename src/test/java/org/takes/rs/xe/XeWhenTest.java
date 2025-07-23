@@ -22,6 +22,7 @@ final class XeWhenTest {
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XeWhen XML response must contain conditional content",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -43,6 +44,7 @@ final class XeWhenTest {
     @Test
     void buildsXmlResponseFromPositiveCondition() throws IOException {
         MatcherAssert.assertThat(
+            "XeWhen with positive condition must show positive content",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(
@@ -65,6 +67,7 @@ final class XeWhenTest {
     @Test
     void buildsXmlResponseFromNegativeCondition() throws Exception {
         MatcherAssert.assertThat(
+            "XeWhen with negative condition must show negative content",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

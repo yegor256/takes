@@ -19,6 +19,7 @@ final class TkVersionedTest {
     @Test
     void attachesHeader() throws Exception {
         MatcherAssert.assertThat(
+            "TkVersioned must add X-Takes-Version header to response",
             new RsPrint(
                 new TkVersioned(new TkEmpty()).act(
                     new RqFake()

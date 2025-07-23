@@ -37,10 +37,10 @@ import org.takes.misc.Opt;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see org.takes.facets.fork.FkMethods
  * @see org.takes.facets.fork.FkRegex
  * @see org.takes.facets.fork.FkParams
+ * @since 0.4
  */
 @ToString(of = "forks")
 @EqualsAndHashCode

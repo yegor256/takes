@@ -75,6 +75,7 @@ public final class CcHex implements Codec {
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidAccessToStaticMembersViaThis")
     public Identity decode(final byte[] bytes) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         int idx = 0;

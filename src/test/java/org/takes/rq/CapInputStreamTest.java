@@ -23,6 +23,7 @@ final class CapInputStreamTest {
     void putsCapOnStream() throws IOException {
         final long length = 50L;
         MatcherAssert.assertThat(
+            "Available bytes must equal the specified capacity limit",
             (long) new CapInputStream(
                 new ByteArrayInputStream("test".getBytes()),
                 length
@@ -34,8 +35,9 @@ final class CapInputStreamTest {
     @Test
     void closesStream() throws Exception {
         final InputStream stream = Mockito.mock(InputStream.class);
-        final CapInputStream wrapper = new CapInputStream(stream, 0L);
-        wrapper.close();
+        try (CapInputStream wrapper = new CapInputStream(stream, 0L)) {
+            wrapper.available();
+        }
         Mockito.verify(stream, Mockito.times(1)).close();
     }
 
@@ -43,8 +45,9 @@ final class CapInputStreamTest {
     void skipsOnStream() throws Exception {
         final long skip = 25L;
         final InputStream stream = Mockito.mock(InputStream.class);
-        final CapInputStream wrapper = new CapInputStream(stream, 50L);
-        wrapper.skip(skip);
+        try (CapInputStream wrapper = new CapInputStream(stream, 50L)) {
+            wrapper.skip(skip);
+        }
         Mockito.verify(stream, Mockito.times(1)).skip(skip);
     }
 
@@ -53,6 +56,10 @@ final class CapInputStreamTest {
         final InputStream stream = new ByteArrayInputStream(new byte[100]);
         final CapInputStream wrapper = new CapInputStream(stream, 50L);
         final long skipped = wrapper.skip(75L);
-        MatcherAssert.assertThat(skipped, Matchers.equalTo(50L));
+        MatcherAssert.assertThat(
+            "Skip operation must respect the stream capacity limit",
+            skipped,
+            Matchers.equalTo(50L)
+        );
     }
 }

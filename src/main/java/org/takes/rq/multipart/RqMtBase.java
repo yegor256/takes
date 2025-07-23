@@ -14,6 +14,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
@@ -49,10 +50,10 @@ import org.takes.rq.RqMultipart;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.33
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
+ * @since 0.33
  */
 @lombok.EqualsAndHashCode(of = "origin")
 @SuppressWarnings("PMD.ExcessiveImports")
@@ -60,7 +61,7 @@ public final class RqMtBase implements RqMultipart {
     /**
      * The encoding used to create the request.
      */
-    private static final Charset ENCODING = Charset.forName("UTF-8");
+    private static final Charset ENCODING = StandardCharsets.UTF_8;
 
     /**
      * Pattern to get boundary from header.
@@ -172,6 +173,7 @@ public final class RqMtBase implements RqMultipart {
      * @return The requests map that use the part name as a map key
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.CloseResource")
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");

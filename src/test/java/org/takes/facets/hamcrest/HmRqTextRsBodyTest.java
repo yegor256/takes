@@ -21,6 +21,7 @@ final class HmRqTextRsBodyTest {
     void testsBodyValueContainsText() {
         final String same = "Same text";
         MatcherAssert.assertThat(
+            "Request body must match expected text content",
             new RqFake(
                 Collections.emptyList(),
                 same
@@ -32,6 +33,7 @@ final class HmRqTextRsBodyTest {
     @Test
     void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
+            "Request body must not match different text content",
             new RqFake(
                 Collections.emptyList(),
                 "some"

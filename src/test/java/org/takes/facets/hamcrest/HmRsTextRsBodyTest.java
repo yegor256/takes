@@ -20,6 +20,7 @@ final class HmRsTextRsBodyTest {
     void testsBodyValueContainsText() {
         final String same = "<h1>Hello</h1>";
         MatcherAssert.assertThat(
+            "Response body must match expected HTML text",
             new RsWithBody(same),
             new HmRsTextBody(same)
         );
@@ -28,6 +29,7 @@ final class HmRsTextRsBodyTest {
     @Test
     void testsBodyValueDoesNotContainsText() {
         MatcherAssert.assertThat(
+            "Response body must not match different expected text",
             new RsWithBody("Some response"),
             new IsNot<>(new HmRsTextBody("expected something else"))
         );

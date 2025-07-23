@@ -30,6 +30,7 @@ final class PsByFlagTest {
     @Test
     void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
+            "Flag not found must return false",
             new PsByFlag(
                 new PsByFlag.Pair(
                     "test", new PsFake(true)
@@ -44,6 +45,7 @@ final class PsByFlagTest {
     @Test
     void flagIsFoundUserAuthenticated() throws Exception {
         MatcherAssert.assertThat(
+            "Matching flag must return expected identity URN",
             new PsByFlag(
                 new PsByFlag.Pair(
                     "some-key", new PsFake(true)
@@ -65,6 +67,7 @@ final class PsByFlagTest {
             HttpURLConnection.HTTP_OK
         );
         MatcherAssert.assertThat(
+            "Exit must return same response",
             new PsByFlag(
                 new MapOf<>(
                     new MapEntry<>(

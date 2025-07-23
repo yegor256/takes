@@ -27,6 +27,7 @@ final class VerboseIterableTest {
             "From: user@example.com"
         );
         MatcherAssert.assertThat(
+            "VerboseIterable must have the same size as the wrapped iterable",
             new VerboseIterable<>(
                 valid,
                 new TextOf("Empty Error Message")

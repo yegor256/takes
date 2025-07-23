@@ -17,6 +17,7 @@ final class RqRegexTest {
     @Test
     void matchesString() {
         MatcherAssert.assertThat(
+            "RqRegex must capture group from regex pattern match",
             new RqRegex.Fake("/([a-z\\.]+)", "/hello.txt").matcher().group(1),
             Matchers.equalTo("hello.txt")
         );

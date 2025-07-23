@@ -23,6 +23,7 @@ final class RqLengthAwareTest {
     @Test
     void addsLengthToBody() throws IOException {
         MatcherAssert.assertThat(
+            "Body available bytes must match Content-Length header value",
             new RqLengthAware(
                 new RqFake(
                     Arrays.asList(
@@ -41,6 +42,7 @@ final class RqLengthAwareTest {
     @Test
     void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
+            "Large Content-Length must be capped at Integer.MAX_VALUE",
             new RqLengthAware(
                 new RqFake(
                     Arrays.asList(
@@ -59,7 +61,7 @@ final class RqLengthAwareTest {
     @Test
     void readsByte() throws IOException {
         final String data = "test";
-        final InputStream stream = new RqLengthAware(
+        try (InputStream stream = new RqLengthAware(
             new RqFake(
                 Arrays.asList(
                     "GET /test1",
@@ -68,15 +70,18 @@ final class RqLengthAwareTest {
                 ),
                 data
             )
-        ).body();
-        MatcherAssert.assertThat(
-            stream.read(),
-            Matchers.equalTo((int) data.getBytes()[0])
-        );
-        MatcherAssert.assertThat(
-            stream.available(),
-            Matchers.equalTo(data.length() - 1)
-        );
+        ).body()) {
+            MatcherAssert.assertThat(
+                "First byte read must match first byte of data",
+                stream.read(),
+                Matchers.equalTo((int) data.getBytes()[0])
+            );
+            MatcherAssert.assertThat(
+                "Available bytes must decrease after reading one byte",
+                stream.available(),
+                Matchers.equalTo(data.length() - 1)
+            );
+        }
     }
 
     @Test
@@ -84,11 +89,11 @@ final class RqLengthAwareTest {
         final byte[] bytes = "test".getBytes();
         final InputStream data = new FilterInputStream(new ByteArrayInputStream(bytes)) {
             @Override
-            public int available() throws IOException {
+            public int available() {
                 return 1;
             }
         };
-        final InputStream stream = new RqLengthAware(
+        try (InputStream stream = new RqLengthAware(
             new RqFake(
                 Arrays.asList(
                     "GET /test1",
@@ -96,19 +101,21 @@ final class RqLengthAwareTest {
                 ),
                 data
             )
-        ).body();
-        for (final byte element : bytes) {
-            MatcherAssert.assertThat(
-                stream.read(),
-                Matchers.equalTo(element & 0xFF)
-            );
+        ).body()) {
+            for (final byte element : bytes) {
+                MatcherAssert.assertThat(
+                    "Each byte read must match original data without Content-Length header",
+                    stream.read(),
+                    Matchers.equalTo(element & 0xFF)
+                );
+            }
         }
     }
 
     @Test
     void readsByteArray() throws IOException {
         final String data = "array";
-        final InputStream stream = new RqLengthAware(
+        try (InputStream stream = new RqLengthAware(
             new RqFake(
                 Arrays.asList(
                     "GET /test2",
@@ -118,21 +125,31 @@ final class RqLengthAwareTest {
                 ),
                 data
             )
-        ).body();
-        final byte[] buf = new byte[data.length()];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        ).body()) {
+            final byte[] buf = new byte[data.length()];
+            MatcherAssert.assertThat(
+                "Number of bytes read into buffer must equal data length",
+                stream.read(buf),
+                Matchers.equalTo(data.length())
+            );
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
     }
 
     @Test
     void readsPartialArray() throws IOException {
         final String data = "hello world";
         final int len = 3;
-        final InputStream stream = new RqLengthAware(
+        try (InputStream stream = new RqLengthAware(
             new RqFake(
                 Arrays.asList(
                     "GET /test3",
@@ -141,20 +158,24 @@ final class RqLengthAwareTest {
                 ),
                 data
             )
-        ).body();
-        final byte[] buf = new byte[len];
-        MatcherAssert.assertThat(
-            stream.read(buf, 0, len),
-            Matchers.equalTo(len)
-        );
-        MatcherAssert.assertThat(
-            buf,
-            Matchers.equalTo(data.substring(0, len).getBytes())
-        );
-        MatcherAssert.assertThat(
-            stream.available(),
-            Matchers.equalTo(data.length() - len)
-        );
+        ).body()) {
+            final byte[] buf = new byte[len];
+            MatcherAssert.assertThat(
+                "Partial array read must return requested length",
+                stream.read(buf, 0, len),
+                Matchers.equalTo(len)
+            );
+            MatcherAssert.assertThat(
+                "Partial buffer content must match first bytes of data",
+                buf,
+                Matchers.equalTo(data.substring(0, len).getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Available bytes must decrease by number of bytes read",
+                stream.available(),
+                Matchers.equalTo(data.length() - len)
+            );
+        }
     }
 
     /**

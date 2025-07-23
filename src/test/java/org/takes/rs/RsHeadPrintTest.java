@@ -20,6 +20,7 @@ final class RsHeadPrintTest {
     /**
      * HeadPrint can fail on invalid chars.
      */
+    @Test
     void failsOnInvalidHeader() {
         MatcherAssert.assertThat(
             "Must catch invalid header exception",

@@ -35,6 +35,7 @@ final class CcSignedTest {
             )
         );
         MatcherAssert.assertThat(
+            "Round-trip signed encoding must preserve original identity URN",
             target.decode(target.encode(new Identity.Simple(urn))).urn(),
             Matchers.equalTo(urn)
         );

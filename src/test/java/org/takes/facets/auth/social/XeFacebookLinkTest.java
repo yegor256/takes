@@ -23,6 +23,7 @@ final class XeFacebookLinkTest {
     @Test
     void generatesCorrectLink() throws IOException {
         MatcherAssert.assertThat(
+            "Generated XML must contain Facebook link",
             IOUtils.toString(
                 new RsXembly(
                     new XeAppend(

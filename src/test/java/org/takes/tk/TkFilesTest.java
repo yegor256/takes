@@ -34,6 +34,7 @@ final class TkFilesTest {
             StandardCharsets.UTF_8
         );
         MatcherAssert.assertThat(
+            "TkFiles must serve existing files with HTTP OK status",
             new RsHeadPrint(
                 new TkFiles(temp.toFile()).act(
                     new RqFake(

@@ -24,6 +24,7 @@ final class TkHtmlTest {
     void createsTextResponse() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
+            "TkHtml must create proper HTML response from string",
             new RsPrint(new TkHtml(body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -42,6 +43,7 @@ final class TkHtmlTest {
     void createsTextResponseFromScalar() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
+            "TkHtml must create proper HTML response from scalar supplier",
             new RsPrint(new TkHtml(() -> body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -60,6 +62,7 @@ final class TkHtmlTest {
     void createsTextResponseFromByteArray() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
+            "TkHtml must create proper HTML response from byte array",
             new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -78,6 +81,7 @@ final class TkHtmlTest {
     void createsTextResponseFromInputStream() throws Exception {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
+            "TkHtml must create proper HTML response from input stream",
             new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -97,10 +101,12 @@ final class TkHtmlTest {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
+            "First HTML response must contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );
         MatcherAssert.assertThat(
+            "Second HTML response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );

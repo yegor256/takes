@@ -70,8 +70,13 @@ final class PsFacebookTest {
                 )
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present after successful Facebook login",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected Facebook format",
             identity.get().urn(),
             CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );

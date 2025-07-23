@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasString;
 import org.mockito.Mockito;
@@ -50,6 +51,7 @@ final class TkRetryTest {
     void worksWithNoException() throws Exception {
         final String test = "test";
         MatcherAssert.assertThat(
+            "TkRetry must return response from successful take without retrying",
             new RsPrint(
                 new TkRetry(2, 2, new TkText(test))
                     .act(new RqFake())
@@ -59,6 +61,7 @@ final class TkRetryTest {
     }
 
     @Test
+    @Tag("deep")
     void retriesOnExceptionTillCount() {
         Assertions.assertThrows(
             IOException.class,
@@ -77,6 +80,7 @@ final class TkRetryTest {
                 } catch (final IOException exception) {
                     final long spent = System.nanoTime() - start;
                     MatcherAssert.assertThat(
+                        "TkRetry must spend at least minimum expected time when all retries fail",
                         (long) (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
                         Matchers.lessThanOrEqualTo(spent)
                     );
@@ -87,6 +91,7 @@ final class TkRetryTest {
     }
 
     @Test
+    @Tag("deep")
     void retriesOnExceptionTillSuccess() throws Exception {
         final String data = "data";
         final Take take = Mockito.mock(Take.class);
@@ -101,10 +106,12 @@ final class TkRetryTest {
         );
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
+            "TkRetry must spend at least minimum expected time before success",
             (long) (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(
+            "TkRetry must return successful response after retrying failed attempts",
             response,
             new HasString(data)
         );

@@ -20,12 +20,14 @@ final class CcSaltedTest {
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
+            "Invalid salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(
                 " % tjw".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
+            "Malformed salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(
                 "75726E253".getBytes()
             ),

@@ -5,7 +5,6 @@
 package org.takes.facets.auth;
 
 import jakarta.json.JsonObject;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -15,7 +14,6 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.takes.facets.auth.Token.Jose;
-import org.takes.facets.auth.Token.Jwt;
 
 /**
  * Test case for {@link Token}.
@@ -26,19 +24,21 @@ final class TokenTest {
     void joseAlgorithm() {
         final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
+            "JOSE algorithm must be HS256 for 256-bit keys",
             jose.getString(Jose.ALGORITHM),
             Matchers.equalTo("HS256")
         );
     }
 
     @Test
-    void joseEncoded() throws IOException {
+    void joseEncoded() {
         final byte[] code = new Token.Jose(256).encoded();
         MatcherAssert.assertThat(
+            "JOSE encoded header must match expected Base64 JWT header",
             code,
             new IsEqual<>(
                 Base64.getEncoder().encode(
-                    "{\"alg\":\"HS256\",\"typ\":\"JWT\"}".getBytes()
+                    "{\"algo\":\"HS256\",\"type\":\"JWT\"}".getBytes()
                 )
             )
         );
@@ -47,27 +47,29 @@ final class TokenTest {
     @Test
     void jwtExpiration() throws ParseException {
         final JsonObject jose = new Token.Jwt(
-            (Identity) new Identity.Simple("user"),
+            new Identity.Simple("user"),
             3600L
         ).json();
         MatcherAssert.assertThat(
-            jose.getString(Jwt.ISSUED),
-            Matchers.not(jose.getString(Jwt.EXPIRATION))
+            "JWT issued time must be different from expiration time",
+            jose.getString(Token.Jwt.ISSUED),
+            Matchers.not(jose.getString(Token.Jwt.EXPIRATION))
         );
         final SimpleDateFormat format =
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.GERMAN);
         MatcherAssert.assertThat(
-            "does not expire after issued",
+            "Token must not expire after it was issued",
             format.parse(
-                jose.getString(Jwt.ISSUED)
+                jose.getString(Token.Jwt.ISSUED)
             ).before(
-                format.parse(jose.getString(Jwt.EXPIRATION))
-            )
+                format.parse(jose.getString(Token.Jwt.EXPIRATION))
+            ),
+            Matchers.is(true)
         );
     }
 
     @Test
-    void jwtEncoded() throws IOException {
+    void jwtEncoded() {
         final Identity user = new Identity.Simple("test");
         final byte[] code = new Token.Jwt(
             user, 3600L
@@ -76,6 +78,7 @@ final class TokenTest {
             user, 3600L
         ).json();
         MatcherAssert.assertThat(
+            "JWT encoded payload must match Base64 encoded JSON representation",
             code,
             Matchers.equalTo(
                 Base64.getEncoder().encode(jose.toString().getBytes())

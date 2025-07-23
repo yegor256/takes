@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.68.0</version>
+    <version>0.69.6</version>
   </parent>
   <groupId>org.takes.test</groupId>
   <artifactId>file-manager</artifactId>
@@ -19,9 +19,9 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>${project.artifactId}</artifactId>
-      <version>${project.version}</version>
+      <groupId>@project.groupId@</groupId>
+      <artifactId>@project.artifactId@</artifactId>
+      <version>@project.version@</version>
     </dependency>
     <dependency>
       <groupId>com.jcabi.incubator</groupId>
@@ -122,7 +122,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.6.0</version>
+            <version>3.6.1</version>
             <executions>
               <execution>
                 <goals>

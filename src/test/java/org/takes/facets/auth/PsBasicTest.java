@@ -65,8 +65,13 @@ final class PsBasicTest {
                 PsBasicTest.header(user, "pass")
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for valid credentials",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -95,8 +100,13 @@ final class PsBasicTest {
                 PsBasicTest.header(user, password)
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for default entry",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -125,6 +135,7 @@ final class PsBasicTest {
             forward = ex;
         }
         MatcherAssert.assertThat(
+            "Invalid credentials must return 401 Unauthorized with WWW-Authenticate header",
             new RsHeadPrint(forward).asString(),
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 401 Unauthorized"),
@@ -158,8 +169,13 @@ final class PsBasicTest {
                 "X-Powered-By:Java/1.7"
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN with multiple headers",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -170,6 +186,7 @@ final class PsBasicTest {
         Assertions.assertThrows(
             HttpException.class,
             () -> MatcherAssert.assertThat(
+                "Invalid headers must not provide identity",
                 new PsBasic(
                     "RealmD",
                     new PsBasic.Fake(true)

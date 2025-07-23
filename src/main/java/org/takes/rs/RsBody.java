@@ -47,24 +47,24 @@ interface RsBody extends Input {
         /**
          * The {@link java.net.URL} of the content.
          */
-        private final java.net.URL url;
+        private final java.net.URL source;
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
          * @param content The {@link java.net.URL} of the content.
          */
         Url(final java.net.URL content) {
-            this.url = content;
+            this.source = content;
         }
 
         @Override
         public InputStream stream() throws IOException {
-            return this.url.openStream();
+            return this.source.openStream();
         }
 
         @Override
         public int length() throws IOException {
-            try (InputStream input = this.url.openStream()) {
+            try (InputStream input = this.source.openStream()) {
                 return input.available();
             }
         }
@@ -109,7 +109,7 @@ interface RsBody extends Input {
         /**
          * The content of the body in an InputStream.
          */
-        private final InputStream stream;
+        private final InputStream input;
 
         /**
          * The length of the stream.
@@ -121,14 +121,14 @@ interface RsBody extends Input {
          * @param input The content of the body as stream.
          */
         Stream(final InputStream input) {
-            this.stream = input;
+            this.input = input;
             this.length = new AtomicInteger(-1);
         }
 
         @Override
         public InputStream stream() throws IOException {
             this.estimate();
-            return this.stream;
+            return this.input;
         }
 
         @Override
@@ -143,7 +143,7 @@ interface RsBody extends Input {
          */
         private void estimate() throws IOException {
             if (this.length.get() == -1) {
-                this.length.compareAndSet(-1, this.stream.available());
+                this.length.compareAndSet(-1, this.input.available());
             }
         }
     }

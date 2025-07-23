@@ -22,23 +22,22 @@ final class TempInputStreamTest {
     @Test
     void deletesTempFile() throws IOException {
         final File file = File.createTempFile("tempfile", ".tmp");
-        final BufferedWriter out = Files.newBufferedWriter(file.toPath());
-        try {
+        try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
             out.write("Temp file deletion test");
-        } finally {
-            out.close();
         }
-        final InputStream body = new TempInputStream(
+        try (InputStream body = new TempInputStream(
             Files.newInputStream(file.toPath()), file
-        );
-        try {
+        )) {
             MatcherAssert.assertThat(
                 "File is not created!",
                 file.exists(),
                 Matchers.is(true)
             );
-        } finally {
-            body.close();
+            MatcherAssert.assertThat(
+                "TempInputStream must be available for reading",
+                body.available(),
+                Matchers.greaterThanOrEqualTo(0)
+            );
         }
         MatcherAssert.assertThat(
             "File exists after stream closure",

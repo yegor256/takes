@@ -46,6 +46,7 @@ final class RqFakeTest {
             "test-6=alpha"
         );
         MatcherAssert.assertThat(
+            "Request print must contain the correct HTTP method and body ending",
             new RqPrint(req),
             Matchers.allOf(
                 new HasString("GET /just-a-test HTTP/1.1\r\n"),
@@ -59,10 +60,12 @@ final class RqFakeTest {
         final String body = "the body text";
         final Request req = new RqFake("", "", body);
         MatcherAssert.assertThat(
+            "First print must contain the request body",
             new RqPrint(req).print(),
             Matchers.containsString(body)
         );
         MatcherAssert.assertThat(
+            "Second print must not contain the body after it was already consumed",
             new RqPrint(req).print(),
             Matchers.not(Matchers.containsString(body))
         );
