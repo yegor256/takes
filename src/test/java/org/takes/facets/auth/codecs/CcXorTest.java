@@ -35,6 +35,7 @@ final class CcXorTest {
             "secret"
         );
         MatcherAssert.assertThat(
+            "Round-trip XOR encoding must preserve original identity URN",
             codec.decode(codec.encode(new Identity.Simple(urn))).urn(),
             Matchers.equalTo(urn)
         );

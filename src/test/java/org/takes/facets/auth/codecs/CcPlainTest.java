@@ -26,6 +26,7 @@ final class CcPlainTest {
             new MapOf<>(new MapEntry<>("name", "Jeff Lebowski"))
         );
         MatcherAssert.assertThat(
+            "Plain encoded identity must match URL-encoded format",
             new String(new CcPlain().encode(identity)),
             Matchers.equalTo("urn%3Atest%3A3;name=Jeff+Lebowski")
         );
@@ -34,6 +35,7 @@ final class CcPlainTest {
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
+            "Plain decoding must produce correct identity URN",
             new CcPlain().decode(
                 "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
             ).urn(),
@@ -44,6 +46,7 @@ final class CcPlainTest {
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
+            "Invalid plain data must decode to anonymous identity",
             new CcSafe(new CcPlain()).decode(
                 " % tjw".getBytes()
             ),

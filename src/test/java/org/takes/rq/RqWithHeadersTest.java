@@ -25,6 +25,7 @@ final class RqWithHeadersTest {
         final String testheader = "TestHeader: someValue";
         final String someheader = "SomeHeader: testValue";
         MatcherAssert.assertThat(
+            "Request with multiple headers must start with expected format",
             new TextOf(
                 new RqPrint(
                     new RqWithHeaders(

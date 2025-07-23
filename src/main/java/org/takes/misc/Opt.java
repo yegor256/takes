@@ -31,8 +31,8 @@ public interface Opt<T> {
      * Holder for a single element only.
      *
      * <p>The class is immutable and thread-safe.
-     * @since 0.14
      * @param <T> Type of item
+     * @since 0.14
      */
     @EqualsAndHashCode
     final class Single<T> implements Opt<T> {

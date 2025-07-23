@@ -67,9 +67,9 @@ public final class CcBase64 implements Codec {
      */
     private static byte[] checkIllegalCharacters(final byte[] bytes) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        for (final byte byt: bytes) {
-            if (BASE64CHARS.indexOf(byt) < 0) {
-                out.write(byt);
+        for (final byte the: bytes) {
+            if (CcBase64.BASE64CHARS.indexOf(the) < 0) {
+                out.write(the);
             }
         }
         return out.toByteArray();

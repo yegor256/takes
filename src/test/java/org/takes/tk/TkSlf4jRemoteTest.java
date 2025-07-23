@@ -9,6 +9,7 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
 import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.http.FtRemote;
 
@@ -20,6 +21,7 @@ import org.takes.http.FtRemote;
 final class TkSlf4jRemoteTest {
 
     @Test
+    @Tag("deep")
     void returnsAnEmptyResponseBody() throws Exception {
         new FtRemote(
             new TkSlf4j(new TkEmpty())

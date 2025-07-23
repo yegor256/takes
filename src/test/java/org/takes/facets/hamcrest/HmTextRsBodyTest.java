@@ -33,6 +33,7 @@ final class HmTextRsBodyTest {
         matcher.matchesSafely(item);
         matcher.describeMismatchSafely(item, description);
         MatcherAssert.assertThat(
+            "Mismatch description must show actual body text",
             description.toString(),
             new IsEqual<>(String.format("body was: %s", body))
         );
@@ -47,6 +48,7 @@ final class HmTextRsBodyTest {
         final StringDescription description = new StringDescription();
         matcher.describeTo(description);
         MatcherAssert.assertThat(
+            "Expected description must show expected body text in quotes",
             description.toString(),
             new IsEqual<>(String.format("body: \"%s\"", expected))
         );

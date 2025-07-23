@@ -17,6 +17,7 @@ final class RsRedirectTest {
     @Test
     void redirects() {
         MatcherAssert.assertThat(
+            "Redirect response must contain 303 See Other status",
             new RsPrint(
                 new RsRedirect(
                     "/home"

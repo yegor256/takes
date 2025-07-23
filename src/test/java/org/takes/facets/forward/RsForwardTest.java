@@ -20,6 +20,7 @@ final class RsForwardTest {
     @Test
     void buildsStackTrace() throws IOException {
         MatcherAssert.assertThat(
+            "Stack trace must contain failure message",
             ExceptionUtils.getFullStackTrace(
                 new RsForward(new RsFlash(new IOException("the failure")))
             ),

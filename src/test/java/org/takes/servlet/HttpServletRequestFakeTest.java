@@ -35,6 +35,7 @@ final class HttpServletRequestFakeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Exception must be thrown for non-existent header",
             Assertions.assertThrows(
                 NoSuchElementException.class, () -> req.getHeader("foo")
             ),

@@ -23,6 +23,7 @@ final class FbChainTest {
             HttpURLConnection.HTTP_NOT_FOUND
         );
         MatcherAssert.assertThat(
+            "FbChain must use first non-empty fallback in the chain",
             new RsBodyPrint(
                 new FbChain(
                     new FbEmpty(),

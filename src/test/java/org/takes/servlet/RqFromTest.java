@@ -47,7 +47,7 @@ final class RqFromTest {
     private static final String GET_METHOD = "GET /";
 
     @Test
-    void defaultMethodForAFakeResquestIsGet() throws IOException {
+    void defaultMethodForAFakeRequestIsGet() throws IOException {
         MatcherAssert.assertThat(
             "Can't add a method to a servlet request",
             new RqPrint(

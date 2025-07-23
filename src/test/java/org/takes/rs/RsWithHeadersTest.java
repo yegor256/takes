@@ -20,6 +20,7 @@ final class RsWithHeadersTest {
         final String host = "Host: www.example.com";
         final String type = "Content-Type: text/xml";
         MatcherAssert.assertThat(
+            "Response with multiple headers must contain all specified headers",
             new RsPrint(
                 new RsWithHeaders(
                     new RsEmpty(),

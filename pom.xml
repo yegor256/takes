@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.68.0</version>
+    <version>0.69.6</version>
   </parent>
   <groupId>org.takes</groupId>
   <artifactId>takes</artifactId>
@@ -78,6 +78,7 @@
     <timestamp>${maven.build.timestamp}</timestamp>
     <jdk.version>1.8</jdk.version>
     <argLine/>
+    <excludedGroups>deep</excludedGroups>
   </properties>
   <dependencies>
     <!--
@@ -89,7 +90,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.36</version>
+      <version>1.18.38</version>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -156,13 +157,6 @@
       <groupId>com.restfb</groupId>
       <artifactId>restfb</artifactId>
       <version>2.27.1</version>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -374,7 +368,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <excludedGroups>org.takes.misc.PerformanceTests</excludedGroups>
+          <excludedGroups>org.takes.misc.PerformanceTests,${excludedGroups}</excludedGroups>
           <systemPropertyVariables>
             <argLine>@{argLine} -Dfile.encoding=UTF-8 -Djava.awt.headless=true -Duser.language=en -Duser.country=US</argLine>
             <javax.net.ssl.keyStore>${project.build.directory}/test-classes/org/takes/http/keystore</javax.net.ssl.keyStore>
@@ -467,7 +461,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.3</version>
             <configuration>
               <groups>org.takes.misc.PerformanceTests</groups>
             </configuration>
@@ -482,7 +476,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.22.0</version>
+            <version>0.24.0</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
@@ -554,6 +548,12 @@
           <scope>runtime</scope>
         </dependency>
       </dependencies>
+    </profile>
+    <profile>
+      <id>deep</id>
+      <properties>
+        <excludedGroups/>
+      </properties>
     </profile>
   </profiles>
 </project>

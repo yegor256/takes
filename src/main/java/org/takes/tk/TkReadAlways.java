@@ -17,7 +17,7 @@ import org.takes.Take;
  *
  * @since 0.30
  */
-@ToString(of = {"origin"})
+@ToString(of = "origin")
 @EqualsAndHashCode
 public final class TkReadAlways implements Take {
 

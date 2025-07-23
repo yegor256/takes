@@ -15,7 +15,7 @@ install: |
 merge:
   script: |
     pdd --source=$(pwd) --verbose --file=/dev/null
-    mvn clean install -Pqulice --errors --settings ../settings.xml
+    mvn clean install -Pqulice -Pdeep --errors --settings ../settings.xml
     mvn clean site -Psite --errors --settings ../settings.xml
 release:
   pre: false
@@ -26,4 +26,4 @@ release:
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
     export MAVEN_OPTS="--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
-    mvn clean deploy -Ptakes -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    mvn clean deploy -Pdeep -Ptakes -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
