@@ -170,9 +170,9 @@ public final class FkHitRefresh implements Fork {
         /**
          * Create the file to touch, if it is not yet created.
          * @return The file to touch
-         * @throws IOException If fails
+         * @throws Exception If fails
          */
-        public File touchedFile() throws IOException {
+        public File touchedFile() throws Exception {
             if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
                 final File file = File.createTempFile("take", ".txt");
@@ -186,27 +186,11 @@ public final class FkHitRefresh implements Fork {
 
         /**
          * Touch the temporary file.
-         * @throws IOException If fails
+         * @throws Exception If fails
          */
-        public void touch() throws IOException {
-            try (OutputStream out = this.outputStream()) {
+        public void touch() throws Exception {
+            try (OutputStream out = new OutputTo(this.touchedFile()).stream()) {
                 out.write('+');
-            }
-        }
-
-        /**
-         * Create output stream for the touched file.
-         * @return Output stream
-         * @throws IOException If fails
-         */
-        @SuppressWarnings("PMD.AvoidCatchingGenericException")
-        @SuppressWarnings("PMD.IllegalCatch")
-        @SuppressWarnings("IllegalCatch")
-        private OutputStream outputStream() throws IOException {
-            try {
-                return new OutputTo(this.touchedFile()).stream();
-            } catch (final Exception ex) {
-                throw new IOException("Failed to create output stream", ex);
             }
         }
 
