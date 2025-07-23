@@ -185,25 +185,28 @@ public final class FkHitRefresh implements Fork {
         }
 
         /**
-         * Create output stream for the touched file.
-         * @return Output stream
-         * @throws IOException If fails
-         */
-        private OutputStream outputStream() throws IOException {
-            try {
-                return new OutputTo(this.touchedFile()).stream();
-            } catch (final Exception ex) {
-                throw new IOException("Failed to create output stream", ex);
-            }
-        }
-
-        /**
          * Touch the temporary file.
          * @throws IOException If fails
          */
         public void touch() throws IOException {
             try (OutputStream out = this.outputStream()) {
                 out.write('+');
+            }
+        }
+
+        /**
+         * Create output stream for the touched file.
+         * @return Output stream
+         * @throws IOException If fails
+         */
+        @SuppressWarnings("PMD.AvoidCatchingGenericException")
+        @SuppressWarnings("PMD.IllegalCatch")
+        @SuppressWarnings("IllegalCatch")
+        private OutputStream outputStream() throws IOException {
+            try {
+                return new OutputTo(this.touchedFile()).stream();
+            } catch (final Exception ex) {
+                throw new IOException("Failed to create output stream", ex);
             }
         }
 
@@ -244,15 +247,18 @@ public final class FkHitRefresh implements Fork {
          */
         private boolean checkDirectoryRecursively(final File directory, final long timestamp) {
             final File[] files = directory.listFiles();
+            boolean updated = false;
             for (final File file : files) {
                 if (file.isFile() && file.lastModified() > timestamp) {
-                    return true;
+                    updated = true;
+                    break;
                 }
                 if (file.isDirectory() && this.checkDirectoryRecursively(file, timestamp)) {
-                    return true;
+                    updated = true;
+                    break;
                 }
             }
-            return false;
+            return updated;
         }
     }
 }
