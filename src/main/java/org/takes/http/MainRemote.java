@@ -10,11 +10,11 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
+import org.cactoos.io.InputOf;
 import org.cactoos.number.NumberOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
@@ -127,7 +127,7 @@ public final class MainRemote {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
         final int port;
-        try (InputStream input = Files.newInputStream(file.toPath())) {
+        try (InputStream input = new InputOf(file).stream()) {
             final byte[] buf = new byte[10];
             while (true) {
                 if (input.read(buf) > 0) {
