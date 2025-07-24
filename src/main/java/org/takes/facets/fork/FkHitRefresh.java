@@ -14,6 +14,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.OutputTo;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -170,9 +172,9 @@ public final class FkHitRefresh implements Fork {
         /**
          * Create the file to touch, if it is not yet created.
          * @return The file to touch
-         * @throws Exception If fails
+         * @throws IOException If fails
          */
-        public File touchedFile() throws Exception {
+        public File touchedFile() throws IOException {
             if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
                 final File file = File.createTempFile("take", ".txt");
@@ -186,10 +188,14 @@ public final class FkHitRefresh implements Fork {
 
         /**
          * Touch the temporary file.
-         * @throws Exception If fails
+         * @throws IOException If fails
          */
-        public void touch() throws Exception {
-            try (OutputStream out = new OutputTo(this.touchedFile()).stream()) {
+        public void touch() throws IOException {
+            try (OutputStream out = new IoChecked<>(
+                new ScalarOf<>(
+                    () -> new OutputTo(this.touchedFile()).stream()
+                )
+            ).value()) {
                 out.write('+');
             }
         }
@@ -220,29 +226,17 @@ public final class FkHitRefresh implements Fork {
             } finally {
                 this.lock.readLock().unlock();
             }
-            return this.checkDirectoryRecursively(this.dir, recent);
-        }
-
-        /**
-         * Check directory and subdirectories recursively for updated files.
-         * @param directory Directory to check
-         * @param timestamp Timestamp to compare against
-         * @return TRUE if any file is newer than timestamp
-         */
-        private boolean checkDirectoryRecursively(final File directory, final long timestamp) {
-            final File[] files = directory.listFiles();
-            boolean updated = false;
-            for (final File file : files) {
-                if (file.isFile() && file.lastModified() > timestamp) {
-                    updated = true;
-                    break;
-                }
-                if (file.isDirectory() && this.checkDirectoryRecursively(file, timestamp)) {
-                    updated = true;
-                    break;
+            final File[] files = this.dir.listFiles();
+            boolean expired = false;
+            if (new Opt.Single<>(files).has()) {
+                for (final File file : files) {
+                    if (file.lastModified() > recent) {
+                        expired = true;
+                        break;
+                    }
                 }
             }
-            return updated;
+            return expired;
         }
     }
 }
