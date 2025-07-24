@@ -95,6 +95,14 @@
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
+      <!--
+      @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
+       remove all references to Files.newXXX static methods and
+       replace them with OO objects such as InputOf or OutputOf
+       depending on the need. See
+       https://github.com/yegor256/takes/pull/886#issuecomment-446030223
+       for details.
+      -->
       <version>0.56.1</version>
     </dependency>
     <dependency>
