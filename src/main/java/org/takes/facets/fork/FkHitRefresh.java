@@ -7,13 +7,15 @@ package org.takes.facets.fork;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.OutputTo;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -189,9 +191,11 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         public void touch() throws IOException {
-            try (OutputStream out = Files.newOutputStream(
-                this.touchedFile().toPath()
-            )) {
+            try (OutputStream out = new IoChecked<>(
+                new ScalarOf<>(
+                    () -> new OutputTo(this.touchedFile()).stream()
+                )
+            ).value()) {
                 out.write('+');
             }
         }
