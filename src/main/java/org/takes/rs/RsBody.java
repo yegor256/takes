@@ -14,6 +14,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.Input;
+import org.cactoos.io.InputOf;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 
 /**
  * The body of a response used by {@link RsWithBody}.
@@ -191,7 +194,11 @@ interface RsBody extends Input {
 
         @Override
         public InputStream stream() throws IOException {
-            return Files.newInputStream(this.file().toPath());
+            return new IoChecked<>(
+                new ScalarOf<>(
+                    () -> new InputOf(this.file()).stream()
+                )
+            ).value();
         }
 
         @Override
