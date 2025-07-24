@@ -15,6 +15,8 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.Input;
 import org.cactoos.io.InputOf;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 
 /**
  * The body of a response used by {@link RsWithBody}.
@@ -29,7 +31,7 @@ interface RsBody extends Input {
      * @throws IOException in case the content of the body could not
      *  be provided.
      */
-    InputStream stream() throws Exception;
+    InputStream stream() throws IOException;
 
     /**
      * Gives the length of the stream.
@@ -37,7 +39,7 @@ interface RsBody extends Input {
      * @throws IOException in case the length of the stream could not be
      *  retrieved.
      */
-    int length() throws Exception;
+    int length() throws IOException;
 
     /**
      * Content of a body based on an {@link java.net.URL}.
@@ -127,7 +129,7 @@ interface RsBody extends Input {
         }
 
         @Override
-        public InputStream stream() throws Exception {
+        public InputStream stream() throws IOException {
             this.estimate();
             return this.input;
         }
@@ -191,12 +193,16 @@ interface RsBody extends Input {
         }
 
         @Override
-        public InputStream stream() throws Exception {
-            return new InputOf(this.file()).stream();
+        public InputStream stream() throws IOException {
+            return new IoChecked<>(
+                new ScalarOf<>(
+                    () -> new InputOf(this.file()).stream()
+                )
+            ).value();
         }
 
         @Override
-        public int length() throws Exception {
+        public int length() throws IOException {
             return (int) this.file().length();
         }
 
@@ -208,7 +214,7 @@ interface RsBody extends Input {
          * @throws IOException In case the content of the underlying
          *  {@code Body} could not be stored into the file.
          */
-        private File file() throws Exception {
+        private File file() throws IOException {
             synchronized (this.file) {
                 if (!this.file.exists()) {
                     this.file.deleteOnExit();
