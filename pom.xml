@@ -103,7 +103,7 @@
        https://github.com/yegor256/takes/pull/886#issuecomment-446030223
        for details.
       -->
-      <version>0.56.1</version>
+      <version>0.57.0</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
