@@ -314,23 +314,27 @@ public final class Href implements CharSequence {
      *  encoded properly.
      */
     private static URI createUri(final String txt) {
-        URI result;
-        try {
-            result = new URI(txt);
-        } catch (final URISyntaxException ex) {
-            final int index = ex.getIndex();
-            if (index == -1) {
-                throw new IllegalArgumentException(ex.getMessage(), ex);
+        final StringBuilder value = new StringBuilder(txt);
+        while (true){
+            try {
+                return new URI(value.toString());
+            } catch (final URISyntaxException ex) {
+                final int index = ex.getIndex();
+                if (index < 0 || index >= value.length()) {
+                    throw new IllegalArgumentException(ex.getMessage(), ex);
+                } else if (ex.getReason().contains("authority")) {
+                    throw new IllegalArgumentException(
+                            "Illegal URI: " + txt + ". Parsing breaks on index " +
+                                    (index - (value.length() - txt.length())),
+                            ex);
+                }
+                value.replace(
+                    index,
+                    index + 1,
+                    Href.encode(value.substring(index, index + 1))
+                );
             }
-            final StringBuilder value = new StringBuilder(txt);
-            value.replace(
-                index,
-                index + 1,
-                Href.encode(value.substring(index, index + 1))
-            );
-            result = Href.createUri(value.toString());
         }
-        return result;
     }
 
     /**
