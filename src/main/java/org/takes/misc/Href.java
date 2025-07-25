@@ -315,7 +315,7 @@ public final class Href implements CharSequence {
      */
     private static URI createUri(final String txt) {
         final StringBuilder value = new StringBuilder(txt);
-        while (true){
+        while (true) {
             try {
                 return new URI(value.toString());
             } catch (final URISyntaxException ex) {
@@ -324,9 +324,10 @@ public final class Href implements CharSequence {
                     throw new IllegalArgumentException(ex.getMessage(), ex);
                 } else if (ex.getReason().contains("authority")) {
                     throw new IllegalArgumentException(
-                            "Illegal URI: " + txt + ". Parsing breaks on index " +
-                                    (index - (value.length() - txt.length())),
-                            ex);
+                        "Illegal URI: " + txt + ". Parsing breaks on index "
+                            + (index - (value.length() - txt.length())),
+                        ex
+                    );
                 }
                 value.replace(
                     index,

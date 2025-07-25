@@ -329,11 +329,10 @@ import org.takes.tk.TkText;
     void returnsABadRequestToAMissingPath() {
         new Assertion<>(
             "Must return bad request to an invalid request URI",
-            () -> responseForPath("GET", "\\"),
+            () -> this.responseForPath("GET", "\\"),
             new HasString("400 Bad Request")
         ).affirm();
     }
-
 
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
@@ -351,7 +350,7 @@ import org.takes.tk.TkText;
     void returnsABadRequestToAControlCharInPath() {
         new Assertion<>(
                 "Must return bad request to an invalid request URI",
-                () -> responseForPath("GET", "/\n"),
+                () -> this.responseForPath("GET", "/\n"),
                 new HasString("400 Bad Request")
         ).affirm();
     }
@@ -382,31 +381,34 @@ import org.takes.tk.TkText;
 
     /**
      * Starts a new clean server with only root path and tries to send a
-     * request
+     * request.
      *
+     * @param method http method to be called
+     * @param path endpoint to be called
      * @return Server textual response
      * @throws Exception If some problem inside
      */
     private String responseForPath(final String method, final String path)
-            throws Exception {
+        throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         try (ServerSocket server = new ServerSocket(0)) {
-            new Thread(() -> {
+            new Thread(
+                () -> {
                 try {
                     new BkBasic(
                         new TkFork(
                             new FkRegex("/", new TkText("hello"))
                         )
                     ).accept(server.accept());
-                } catch (IOException ex) {
+                } catch (final IOException ex) {
                     throw new IllegalStateException(ex);
                 }
             }).start();
-
             try (
-                Socket socket = new Socket(server.getInetAddress(), server.getLocalPort())
+                Socket socket = new Socket(server.getInetAddress(), server.getLocalPort());
+                OutputStream socketBuffer = socket.getOutputStream();
             ) {
-                socket.getOutputStream().write(
+                socketBuffer.write(
                     new RqPrint(new RqFake(method, path)).asString().getBytes()
                 );
                 final InputStream input = socket.getInputStream();
