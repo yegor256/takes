@@ -110,6 +110,7 @@ public final class BkBasic implements Back {
                 ex,
                 HttpURLConnection.HTTP_BAD_REQUEST
             );
+        // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
             handled = BkBasic.failure(
                 ex,

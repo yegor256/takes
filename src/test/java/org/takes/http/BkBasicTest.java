@@ -410,16 +410,16 @@ import org.takes.tk.TkText;
             ).start();
             try (
                 Socket socket = new Socket(server.getInetAddress(), server.getLocalPort());
-                OutputStream socketBuffer = socket.getOutputStream()
+                OutputStream socketOutBuffer = socket.getOutputStream();
+                InputStream sockerInStream = socket.getInputStream()
             ) {
-                socketBuffer.write(
+                socketOutBuffer.write(
                     new RqPrint(new RqFake(method, path)).asString().getBytes()
                 );
-                final InputStream input = socket.getInputStream();
                 final byte[] buffer = new byte[4096];
                 for (
-                    int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)
+                    int count = sockerInStream.read(buffer); count != -1;
+                    count = sockerInStream.read(buffer)
                 ) {
                     output.write(buffer, 0, count);
                 }
