@@ -73,7 +73,7 @@ final class BkParallelTest {
                             new JdkRequest(uri)
                                 .fetch()
                                 .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK);
+                                .assertStatus(HttpURLConnection.HTTP_NO_CONTENT);
                         } catch (final IOException ex) {
                             throw new IllegalStateException(ex);
                         }

@@ -7,8 +7,11 @@ package org.takes.http;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import com.jcabi.matchers.RegexMatchers;
-
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -349,9 +352,9 @@ import org.takes.tk.TkText;
     @Test
     void returnsABadRequestToAControlCharInPath() {
         new Assertion<>(
-                "Must return bad request to an invalid request URI",
-                () -> this.responseForPath("GET", "/\n"),
-                new HasString("400 Bad Request")
+            "Must return bad request to an invalid request URI",
+            () -> this.responseForPath("GET", "/\n"),
+            new HasString("400 Bad Request")
         ).affirm();
     }
 
@@ -383,8 +386,8 @@ import org.takes.tk.TkText;
      * Starts a new clean server with only root path and tries to send a
      * request.
      *
-     * @param method http method to be called
-     * @param path endpoint to be called
+     * @param method HTTP method to be called
+     * @param path Endpoint to be called
      * @return Server textual response
      * @throws Exception If some problem inside
      */
@@ -394,19 +397,20 @@ import org.takes.tk.TkText;
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
                 () -> {
-                try {
-                    new BkBasic(
-                        new TkFork(
-                            new FkRegex("/", new TkText("hello"))
-                        )
-                    ).accept(server.accept());
-                } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    try {
+                        new BkBasic(
+                            new TkFork(
+                                new FkRegex("/", new TkText("hello"))
+                            )
+                        ).accept(server.accept());
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
                 }
-            }).start();
+            ).start();
             try (
                 Socket socket = new Socket(server.getInetAddress(), server.getLocalPort());
-                OutputStream socketBuffer = socket.getOutputStream();
+                OutputStream socketBuffer = socket.getOutputStream()
             ) {
                 socketBuffer.write(
                     new RqPrint(new RqFake(method, path)).asString().getBytes()

@@ -323,9 +323,14 @@ public final class Href implements CharSequence {
                 if (index < 0 || index >= value.length()) {
                     throw new IllegalArgumentException(ex.getMessage(), ex);
                 } else if (ex.getReason().contains("authority")) {
+                    final StringBuilder errMessage = new StringBuilder();
+                    errMessage
+                        .append("Illegal URI: ")
+                        .append(txt)
+                        .append(". Parsing breaks on index ")
+                        .append((index - (value.length() - txt.length())));
                     throw new IllegalArgumentException(
-                        "Illegal URI: " + txt + ". Parsing breaks on index "
-                            + (index - (value.length() - txt.length())),
+                        errMessage.toString(),
                         ex
                     );
                 }
