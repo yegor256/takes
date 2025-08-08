@@ -100,19 +100,24 @@ public final class BkBasic implements Back {
     @SuppressWarnings("PMD.AvoidCatchingThrowable")
     private void print(final Request req, final OutputStream output)
         throws IOException {
+        Response handled;
         try {
-            new RsPrint(this.take.act(req)).print(output);
+            handled = this.take.act(req);
         } catch (final HttpException ex) {
-            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
-            // @checkstyle IllegalCatchCheck (10 lines)
+            handled = BkBasic.failure(ex, ex.code());
+        } catch (final IllegalArgumentException ex) {
+            handled = BkBasic.failure(
+                ex,
+                HttpURLConnection.HTTP_BAD_REQUEST
+            );
+        // @checkstyle IllegalCatchCheck (10 lines)
         } catch (final Throwable ex) {
-            new RsPrint(
-                BkBasic.failure(
-                    ex,
-                    HttpURLConnection.HTTP_INTERNAL_ERROR
-                )
-            ).print(output);
+            handled = BkBasic.failure(
+                ex,
+                HttpURLConnection.HTTP_INTERNAL_ERROR
+            );
         }
+        new RsPrint(handled).print(output);
     }
 
     /**
