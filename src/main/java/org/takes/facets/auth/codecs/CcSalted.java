@@ -6,8 +6,8 @@ package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Objects;
 import java.util.Random;
-import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -17,7 +17,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.1
  */
-@EqualsAndHashCode
 public final class CcSalted implements Codec {
 
     /**
@@ -115,6 +114,29 @@ public final class CcSalted implements Codec {
         final byte[] output = new byte[text.length - size - 2];
         System.arraycopy(text, size + 1, output, 0, output.length);
         return output;
+    }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        final CcSalted ccSalted = (CcSalted) o;
+        return Objects.equals(origin, ccSalted.origin);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(origin);
     }
 
 }
