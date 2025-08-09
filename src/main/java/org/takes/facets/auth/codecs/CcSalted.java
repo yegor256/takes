@@ -45,12 +45,12 @@ public final class CcSalted implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return CcSalted.salt(this.origin.encode(identity));
+        return salt(this.origin.encode(identity));
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        return this.origin.decode(CcSalted.unsalt(bytes));
+        return this.origin.decode(unsalt(bytes));
     }
 
     /**
