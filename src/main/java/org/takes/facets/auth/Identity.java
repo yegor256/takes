@@ -88,7 +88,7 @@ public interface Identity {
 
         @Override
         public Map<String, String> properties() {
-            return Collections.unmodifiableMap(this.props);
+            return (this.props);
         }
     }
 
