@@ -226,14 +226,14 @@
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
-      <version>3.1.10</version>
+      <version>3.1.11</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-server</artifactId>
-      <version>3.1.10</version>
+      <version>3.1.11</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
