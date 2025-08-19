@@ -125,7 +125,7 @@ public final class PsGithub implements Pass {
      */
     private Identity fetch(final String token) throws IOException {
         final String uri = new Href(this.api).path("user").toString();
-        return PsGithub.parse(
+        return parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
                 .header("Authorization", String.format("token %s", token))
