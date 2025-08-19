@@ -8,7 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
+
 import org.takes.facets.auth.Identity;
 
 /**
@@ -18,7 +19,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.13
  */
-@EqualsAndHashCode
 public final class CcBase64 implements Codec {
 
     /**
@@ -74,4 +74,30 @@ public final class CcBase64 implements Codec {
         }
         return out.toByteArray();
     }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcBase64 ccBase64 = (CcBase64) o;
+        return Objects.equals(origin, ccBase64.origin);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(origin);
+    }
+
 }
