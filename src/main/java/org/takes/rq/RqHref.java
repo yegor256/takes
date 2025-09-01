@@ -19,7 +19,12 @@ import org.takes.Request;
 import org.takes.misc.Href;
 
 /**
- * HTTP URI query parsing.
+ * Interface for HTTP URI and query parameter parsing.
+ *
+ * <p>This interface provides functionality to parse HTTP request URIs
+ * and extract query parameters, host information, and protocol details.
+ * It constructs complete HREF objects that can be used to access
+ * individual query parameters and manipulate URLs.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

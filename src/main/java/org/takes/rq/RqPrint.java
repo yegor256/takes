@@ -21,9 +21,16 @@ import org.cactoos.text.TextOf;
 import org.takes.Request;
 
 /**
- * Request decorator, to print it all.
+ * Request decorator that provides text representation and printing capabilities.
+ *
+ * <p>This decorator converts HTTP requests to their textual representation,
+ * including both headers and body content. It provides methods to print
+ * the complete request, just the headers, or just the body to various
+ * output destinations. The implementation handles proper formatting with
+ * CRLF line endings as required by HTTP specification.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)

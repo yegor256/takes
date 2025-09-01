@@ -8,9 +8,17 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Input stream with a cap.
+ * Input stream wrapper that limits the number of bytes that can be read.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>This input stream decorator wraps another input stream and enforces
+ * a maximum read limit. Once the specified number of bytes has been read,
+ * all subsequent read operations will return -1 (end of stream), even if
+ * the underlying stream has more data available.
+ *
+ * <p>This is useful for handling Content-Length limited streams or
+ * preventing excessive memory consumption from large input streams.
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.16
  */

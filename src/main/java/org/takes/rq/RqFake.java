@@ -16,7 +16,12 @@ import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.io.InputStreamOf;
 
 /**
- * Fake request (for unit tests).
+ * Fake HTTP request implementation for testing purposes.
+ *
+ * <p>This class provides a convenient way to create mock HTTP requests
+ * with custom headers and body content for unit testing. It supports
+ * various constructor overloads to create requests with different
+ * HTTP methods, query strings, headers, and body content.
  *
  * <p>The class is immutable and thread-safe.
  *

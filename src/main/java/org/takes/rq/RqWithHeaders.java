@@ -14,7 +14,12 @@ import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
- * Request with extra header.
+ * Request decorator that adds multiple extra headers.
+ *
+ * <p>This decorator appends additional headers to an existing request.
+ * The new headers are added to the end of the header list while
+ * preserving the original headers. Header values are trimmed of
+ * whitespace during the addition process.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -11,9 +11,15 @@ import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Request;
 
 /**
- * Request with body.
+ * Request decorator that replaces the request body with custom content.
+ *
+ * <p>This decorator preserves the original request headers while replacing
+ * the body content with the provided character sequence. The new body content
+ * is converted to bytes using the default character encoding and wrapped
+ * in a ByteArrayInputStream.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.22
  */
 @EqualsAndHashCode(callSuper = true)

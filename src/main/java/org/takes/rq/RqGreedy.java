@@ -11,7 +11,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator, for HTTP request caching.
+ * Request decorator that caches the entire request body in memory.
+ *
+ * <p>This decorator reads and stores the complete request body upon construction,
+ * allowing the body to be read multiple times. This is useful when the request
+ * body needs to be processed by multiple components or when working with
+ * input streams that don't support mark/reset operations.
  *
  * <p>The class is immutable and thread-safe.
  *

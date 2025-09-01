@@ -13,7 +13,11 @@ import org.cactoos.text.StartsWith;
 import org.takes.Request;
 
 /**
- * Request without a header (even if it was absent).
+ * Request decorator that removes all instances of a specific header.
+ *
+ * <p>This decorator filters out all headers with the specified name from
+ * the original request. The comparison is case-insensitive, following
+ * HTTP header naming conventions.
  *
  * <p>The class is immutable and thread-safe.
  *

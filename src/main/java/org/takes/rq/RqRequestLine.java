@@ -16,7 +16,12 @@ import org.takes.HttpException;
 import org.takes.Request;
 
 /**
- * HTTP Request-Line parsing.
+ * HTTP Request-Line parsing and validation interface.
+ *
+ * <p>This interface provides methods to parse and extract components from
+ * the HTTP Request-Line (the first line of an HTTP request), including
+ * the HTTP method, request URI, and protocol version. It ensures proper
+ * format validation according to HTTP specifications.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

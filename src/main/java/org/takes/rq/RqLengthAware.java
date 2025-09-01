@@ -11,18 +11,16 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator that limits its body, according to
- * the Content-Length header in its head.
+ * Request decorator that limits body reading based on Content-Length header.
  *
- * <p>This decorator may help when you're planning to read
- * the body of the request using its read() and available() methods,
- * but you're not sure that available() is always saying the truth. In
- * most cases, the browser will not close the request and will always
- * return positive number in available() method. Thus, you won't be
- * able to reach the end of the stream ever. The browser wants you
- * to respect the "Content-Length" header and read as many bytes
- * as it requests. To solve that, just wrap your request into this
- * decorator.
+ * <p>This decorator examines the Content-Length header and wraps the request
+ * body with a CapInputStream that enforces the specified byte limit. This
+ * prevents reading beyond the declared content length and handles cases where
+ * the underlying stream doesn't properly indicate end-of-stream.
+ *
+ * <p>This is particularly useful when working with HTTP clients that keep
+ * connections open and don't close the request stream, requiring applications
+ * to respect the Content-Length header to determine when the request body ends.
  *
  * <p>The class is immutable and thread-safe.
  *

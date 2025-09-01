@@ -17,7 +17,17 @@ import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 
 /**
- * Input stream from chunked-encoded HTTP request body.
+ * Input stream that decodes HTTP chunked transfer encoding.
+ *
+ * <p>This input stream implementation reads and decodes HTTP request bodies
+ * that use chunked transfer encoding as specified in RFC 2616. It handles
+ * the chunk size parsing (including hexadecimal format and optional comments),
+ * CRLF validation, and proper end-of-stream detection when the final
+ * zero-length chunk is encountered.
+ *
+ * <p>The implementation includes a finite state machine for robust parsing
+ * of chunk headers and handles quoted strings within chunk extensions.
+ *
  * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  * @since 0.31.2
  */

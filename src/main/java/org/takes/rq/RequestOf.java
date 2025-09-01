@@ -20,11 +20,15 @@ import org.takes.Head;
 import org.takes.Request;
 
 /**
- * This {@link Request} implementation provides a way to build a request with
- * custom {@link Scalar} head and body values.
+ * Request implementation that wraps custom head and body suppliers.
  *
- * <p>
- * The class is immutable and thread-safe.
+ * <p>This class provides a flexible way to create Request instances using
+ * functional interfaces for head and body content. It accepts suppliers
+ * (Head and Body interfaces) that are called when the respective content
+ * is needed, enabling lazy evaluation and custom request construction.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @since 2.0
  */
 public final class RequestOf implements Request {
