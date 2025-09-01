@@ -170,34 +170,34 @@ public final class FtRemote implements Front {
 
     /**
      * Script to execute against a running server.
-     * 
+     *
      * <p>This interface represents a test script or client code that will
      * be executed against a running HTTP server. The {@link FtRemote#exec(Script)}
      * method starts the server, runs the script with the server's URI, and
      * then shuts down the server automatically.
-     * 
+     *
      * <p>This is particularly useful for integration testing where you need
      * to test HTTP endpoints with real network communication. The script
      * can make HTTP requests, verify responses, and perform any other
      * operations against the live server.
-     * 
+     *
      * @since 0.1
      */
     public interface Script {
         /**
          * Execute the script against the running server.
-         * 
+         *
          * <p>This method is called by {@link FtRemote} after the server
          * has started and is ready to accept connections. The provided URI
          * contains the complete base URL (including protocol, host, and port)
          * where the server can be reached.
-         * 
+         *
          * <p>Example usage:
          * <pre>
          * script.exec(URI.create("http://localhost:8080"));
          * // Make HTTP requests to http://localhost:8080/...
          * </pre>
-         * 
+         *
          * @param home Base URI of the running server (e.g., http://localhost:8080)
          * @throws Exception If the script execution fails
          */

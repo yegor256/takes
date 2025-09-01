@@ -30,7 +30,31 @@ import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithoutHeader;
 
 /**
- * Fake HttpServletResponse (for unit tests).
+ * Fake HttpServletResponse implementation for testing.
+ *
+ * <p>This class provides a test double for {@link HttpServletResponse} that
+ * wraps a Takes {@link Response} object. It's designed for unit testing
+ * scenarios where you need to simulate servlet container response handling
+ * without running an actual servlet container.
+ *
+ * <p>The implementation uses an {@link AtomicReference} to hold the response,
+ * allowing it to be modified through servlet API calls (adding headers,
+ * setting status, adding cookies, etc.) while maintaining thread safety.
+ * These modifications create new decorated Takes response objects rather
+ * than mutating state directly.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Wraps Takes {@link Response} to provide servlet {@link HttpServletResponse} API</li>
+ *   <li>Supports adding headers, cookies, and setting HTTP status codes</li>
+ *   <li>Provides access to response body through {@link ServletOutputStream}</li>
+ *   <li>Thread-safe response modification using atomic references</li>
+ *   <li>Minimal implementation focused on testing needs</li>
+ * </ul>
+ *
+ * <p>Many methods throw {@link UnsupportedOperationException} as they
+ * represent servlet container features not commonly needed in unit tests
+ * (character encoding, buffering, locale handling, etc.).
  *
  * @since 1.14
  */
