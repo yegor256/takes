@@ -17,7 +17,7 @@ public interface Expires {
 
     /**
      * String representation of expiration time.
-     * @return Representation of expirate time.
+     * @return Representation of expiration time.
      */
     String print();
 

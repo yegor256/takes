@@ -144,7 +144,7 @@ public final class PsGoogle implements Pass {
     }
 
     /**
-     * Get user name from Google, with the token provided.
+     * Get the user name from Google with the provided token.
      * @param token Google access token
      * @return The user found in Google
      * @throws IOException If fails

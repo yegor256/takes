@@ -158,7 +158,7 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Get user name from Facebook, but the code provided.
+     * Get the user name from Facebook with the provided token.
      * @param token Facebook access token
      * @return The user found in FB
      */

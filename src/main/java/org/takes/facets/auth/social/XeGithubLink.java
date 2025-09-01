@@ -15,7 +15,7 @@ import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
 
 /**
- * Xembly source to create a LINK to Github OAuth page.
+ * Xembly source to create a LINK to GitHub OAuth page.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -27,7 +27,7 @@ public final class XeGithubLink extends XeWrap {
     /**
      * Ctor.
      * @param req Request
-     * @param app Github application ID
+     * @param app GitHub application ID
      * @throws IOException If fails
      */
     public XeGithubLink(final Request req, final CharSequence app)
@@ -38,7 +38,7 @@ public final class XeGithubLink extends XeWrap {
     /**
      * Ctor.
      * @param req Request
-     * @param app Github application ID
+     * @param app GitHub application ID
      * @param rel Related
      * @param flag Flag to add
      * @throws IOException If fails
@@ -52,7 +52,7 @@ public final class XeGithubLink extends XeWrap {
     /**
      * Ctor.
      * @param req Request
-     * @param app Github application ID
+     * @param app GitHub application ID
      * @param rel Related
      * @param flag Flag to add
      * @return Source

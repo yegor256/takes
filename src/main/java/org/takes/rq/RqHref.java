@@ -144,7 +144,7 @@ public interface RqHref extends Request {
         }
 
         /**
-         * Get param or throw HTTP exception.
+         * Get param or throw an HTTP exception.
          * @param name Name of query param
          * @return Value of it
          * @throws IOException If fails

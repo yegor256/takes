@@ -8,7 +8,7 @@ package org.takes.misc;
 import lombok.EqualsAndHashCode;
 
 /**
- * Replacement a nullable T reference with a non-null value.
+ * Replacement for a nullable T reference with a non-null value.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  * @param <T> Type of item

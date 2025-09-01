@@ -17,8 +17,8 @@ import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 
 /**
- * Input stream from chunked coded http request body.
- * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
+ * Input stream from chunked-encoded HTTP request body.
+ * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  * @since 0.31.2
  */
 final class ChunkedInputStream extends InputStream {

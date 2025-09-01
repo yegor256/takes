@@ -23,11 +23,11 @@ import org.takes.rs.RsWithBody;
  *
  * <p>This object will take query part of the arrived HTTP
  * {@link org.takes.Request} and concatenate it with the {@code "/tmp"} prefix.
- * For example, a request comes it and its query equals to
+ * For example, a request comes in and its query equals
  * {@code "/css/style.css?eot"}. {@link TkFiles}
- * will try to find a resource {@code "/tmp/css/style.css"} on disc.
+ * will try to find a resource {@code "/tmp/css/style.css"} on disk.
  *
- * <p>If such a resource is not found, {@link HttpException}
+ * <p>If such a resource is not found, an {@link HttpException}
  * will be thrown.
  *
  * <p>The class is immutable and thread-safe.
