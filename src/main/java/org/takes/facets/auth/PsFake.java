@@ -10,7 +10,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Fake pass.
+ * Fake pass for testing purposes.
+ * This implementation provides configurable authentication behavior
+ * based on a boolean condition, useful for unit testing and mocking.
  *
  * <p>The class is immutable and thread-safe.
  *

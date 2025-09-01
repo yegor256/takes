@@ -12,7 +12,22 @@ import org.cactoos.bytes.UncheckedBytes;
 import org.takes.facets.auth.Identity;
 
 /**
- * XOR codec.
+ * XOR codec that provides basic encryption by applying XOR operation with
+ * a secret key to the encoded identity data.
+ *
+ * <p>This codec decorates another codec and applies a simple XOR encryption
+ * algorithm to the resulting bytes. The secret key is cycled through when
+ * it is shorter than the data being encrypted, providing a basic form of
+ * stream cipher encryption. If the secret key is empty, the data passes
+ * through unchanged.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcXor(new CcPlain(), "secret-key");
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity);
+ * final Identity decoded = codec.decode(encoded);
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

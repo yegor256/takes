@@ -19,9 +19,12 @@ import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithoutHeader;
 
 /**
- * Forwarding response.
+ * An HTTP forwarding response that implements redirect functionality.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class creates HTTP redirect responses using status codes like 303 (See Other)
+ * and adds appropriate Location headers. It combines the functionality of an HTTP
+ * response with that of an exception, allowing it to be thrown and caught by
+ * {@link TkForward} decorators. The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -45,23 +48,23 @@ public class RsForward extends HttpException implements Response {
     private final transient Response origin;
 
     /**
-     * Ctor.
+     * Constructor with empty response and default home location.
      */
     public RsForward() {
         this(new RsEmpty());
     }
 
     /**
-     * Ctor.
-     * @param res Original response
+     * Constructor with response and default home location.
+     * @param res The original response to decorate
      */
     public RsForward(final Response res) {
         this(res, RsForward.HOME);
     }
 
     /**
-     * Ctor.
-     * @param res Original response
+     * Constructor that copies from another RsForward response.
+     * @param res The RsForward response to copy from
      * @since 0.14
      */
     public RsForward(final RsForward res) {
@@ -69,18 +72,18 @@ public class RsForward extends HttpException implements Response {
     }
 
     /**
-     * Ctor.
-     * @param res Original response
-     * @param loc Location
+     * Constructor with response and custom location.
+     * @param res The original response to decorate
+     * @param loc The location URL for redirection
      */
     public RsForward(final Response res, final CharSequence loc) {
         this(res, HttpURLConnection.HTTP_SEE_OTHER, loc);
     }
 
     /**
-     * Ctor.
-     * @param res Original response
-     * @param loc Location
+     * Constructor that copies RsForward response with new location.
+     * @param res The RsForward response to copy from
+     * @param loc The location URL for redirection
      * @since 0.14
      */
     public RsForward(final RsForward res, final CharSequence loc) {
@@ -162,9 +165,9 @@ public class RsForward extends HttpException implements Response {
     }
 
     /**
-     * Set default object to write serializated data.
-     * @param stream Stream to write
-     * @throws IOException if fails
+     * Writes object data for serialization.
+     * @param stream The output stream to write to
+     * @throws IOException If serialization fails
      */
     private static void writeObject(
         final ObjectOutputStream stream
@@ -173,10 +176,10 @@ public class RsForward extends HttpException implements Response {
     }
 
     /**
-     * Set default object to read serializated data.
-     * @param stream Stream to read
-     * @throws IOException if fails
-     * @throws ClassNotFoundException if class doesn't exists
+     * Reads object data for deserialization.
+     * @param stream The input stream to read from
+     * @throws IOException If deserialization fails
+     * @throws ClassNotFoundException If class cannot be found
      */
     private static void readObject(
         final ObjectInputStream stream

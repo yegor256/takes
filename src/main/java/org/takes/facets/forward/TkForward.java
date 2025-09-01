@@ -16,11 +16,13 @@ import org.takes.Take;
 import org.takes.rs.RsSimple;
 
 /**
- * Redirect on exception.
+ * A take decorator that handles RsForward exceptions by converting them to responses.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This decorator catches {@link RsForward} exceptions thrown by wrapped takes
+ * and converts them into proper HTTP redirect responses. It enables the use of
+ * exception-based flow control for redirects, making error handling and navigation
+ * logic more convenient. The class is immutable and thread-safe.
  *
- * @see org.takes.facets.forward.TkForward
  * @since 0.1
  */
 @ToString(of = "origin")
@@ -33,8 +35,8 @@ public final class TkForward implements Take {
     private final Take origin;
 
     /**
-     * Ctor.
-     * @param take Original
+     * Constructor that wraps a take to handle RsForward exceptions.
+     * @param take The original take to wrap
      */
     public TkForward(final Take take) {
         this.origin = take;
@@ -52,7 +54,7 @@ public final class TkForward implements Take {
     }
 
     /**
-     * Safe response.
+     * A safe response wrapper that handles RsForward exceptions during response processing.
      * @since 0.1
      */
     @ToString(of = { "origin", "saved" })
@@ -68,8 +70,8 @@ public final class TkForward implements Take {
         private final List<Response> saved;
 
         /**
-         * Ctor.
-         * @param res Original response
+         * Constructor for safe response wrapper.
+         * @param res The original response to wrap safely
          */
         private Safe(final Response res) {
             this.origin = res;
@@ -87,9 +89,9 @@ public final class TkForward implements Take {
         }
 
         /**
-         * Load it.
-         * @return Response
-         * @throws IOException If fails
+         * Loads the response, handling any RsForward exceptions that occur.
+         * @return The loaded response
+         * @throws IOException If response loading fails
          */
         @SuppressWarnings("PMD.CloseResource")
         private Response load() throws IOException {

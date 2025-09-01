@@ -15,9 +15,12 @@ import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
 
 /**
- * Xembly source to create a LINK to Facebook OAuth page.
+ * An Xembly source that creates a link to the Facebook OAuth authorization page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class generates XML elements for Facebook OAuth authentication links,
+ * allowing users to authenticate through Facebook's OAuth flow. The generated
+ * links include the necessary parameters for redirecting users to Facebook's
+ * authorization endpoint. The class is immutable and thread-safe.
  *
  * @since 0.5
  */
@@ -25,10 +28,10 @@ import org.takes.rs.xe.XeWrap;
 public final class XeFacebookLink extends XeWrap {
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Facebook application ID
-     * @throws IOException If fails
+     * Constructor with request and Facebook application ID.
+     * @param req The HTTP request
+     * @param app The Facebook application ID
+     * @throws IOException If link creation fails
      */
     public XeFacebookLink(final Request req, final CharSequence app)
         throws IOException {
@@ -36,12 +39,12 @@ public final class XeFacebookLink extends XeWrap {
     }
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Github application ID
-     * @param rel Related
-     * @param flag Flag to add
-     * @throws IOException If fails
+     * Constructor with full customization options.
+     * @param req The HTTP request
+     * @param app The Facebook application ID
+     * @param rel The relation type for the link
+     * @param flag The flag to add to the redirect URI
+     * @throws IOException If link creation fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
     public XeFacebookLink(final Request req, final CharSequence app,
@@ -50,13 +53,13 @@ public final class XeFacebookLink extends XeWrap {
     }
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Github application ID
-     * @param rel Related
-     * @param flag Flag to add
-     * @return Source
-     * @throws IOException If fails
+     * Creates the Facebook OAuth link source.
+     * @param req The HTTP request
+     * @param app The Facebook application ID
+     * @param rel The relation type for the link
+     * @param flag The flag to add to the redirect URI
+     * @return The Xembly source for the Facebook OAuth link
+     * @throws IOException If link creation fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
     private static XeSource make(final Request req, final CharSequence app,

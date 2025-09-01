@@ -20,7 +20,9 @@ import org.takes.misc.Expires;
 import org.takes.misc.Opt;
 
 /**
- * Pass via cookie information.
+ * Pass that authenticates users via HTTP cookies.
+ * This implementation stores and retrieves authentication information
+ * in browser cookies, enabling persistent sessions across requests.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -30,17 +32,17 @@ import org.takes.misc.Opt;
 public final class PsCookie implements Pass {
 
     /**
-     * Codec.
+     * Codec for encoding and decoding identity information in cookies.
      */
     private final Codec codec;
 
     /**
-     * Cookie to read.
+     * Name of the cookie containing authentication information.
      */
     private final String cookie;
 
     /**
-     * Max login age, in days.
+     * Maximum age of the authentication cookie, in days.
      */
     private final long age;
 

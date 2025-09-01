@@ -11,7 +11,9 @@ import org.takes.rs.xe.XeWrap;
 import org.xembly.Directives;
 
 /**
- * Xembly source to show authenticated identity.
+ * Xembly source that generates XML representation of an authenticated identity.
+ * This class extracts the identity from the request and converts it to XML
+ * format using Xembly directives, including the URN and all properties.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -14,11 +14,11 @@ import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
 
 /**
- * Request with already authenticated identity.
+ * Request decorator that adds an authenticated identity to the request.
  *
- * <p>This class is very useful for unit testing, when you need to
- * test a "take" that requires a request to contain an already
- * authenticated user.
+ * <p>This class is particularly useful for unit testing, when you need to
+ * test a take that requires a request to contain an already
+ * authenticated user. It adds the identity information to the request headers.
  *
  * <p>The class is immutable and thread-safe.
  *

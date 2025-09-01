@@ -17,9 +17,13 @@ import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsRedirect;
 
 /**
- * Take that understands Return cookie. If Return cookie
- * is set, sends redirect response to stored location.
- * Otherwise delegates to original Take.
+ * A take decorator that handles return location cookies for navigation.
+ *
+ * <p>This decorator checks for return location cookies in incoming requests.
+ * If a return cookie is present, it redirects the user to the stored location
+ * and clears the cookie. If no return cookie exists, it delegates to the
+ * original take for normal processing. This enables "return to previous page"
+ * functionality in web applications. The class is immutable and thread-safe.
  *
  * @since 0.20
  */
@@ -38,17 +42,17 @@ public final class TkReturn implements Take {
     private final String cookie;
 
     /**
-     * Ctor.
-     * @param take Original take
+     * Constructor with default cookie name.
+     * @param take The original take to decorate
      */
     public TkReturn(final Take take) {
         this(take, RsReturn.class.getSimpleName());
     }
 
     /**
-     * Ctor.
-     * @param take Original take
-     * @param name Cookie name
+     * Constructor with custom cookie name.
+     * @param take The original take to decorate
+     * @param name The name of the return location cookie
      */
     public TkReturn(final Take take, final String name) {
         this.origin = take;

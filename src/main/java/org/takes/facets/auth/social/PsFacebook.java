@@ -30,9 +30,12 @@ import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
- * Facebook OAuth landing/callback page.
+ * A Facebook OAuth authentication handler for login callbacks.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class implements the Facebook OAuth authentication flow by handling
+ * the callback from Facebook's authorization server. It exchanges the authorization
+ * code for an access token, retrieves user information, and creates an identity.
+ * The class is immutable and thread-safe.
  *
  * @since 0.5
  */
@@ -86,9 +89,9 @@ public final class PsFacebook implements Pass {
     private final String key;
 
     /**
-     * Ctor.
-     * @param fapp Facebook app
-     * @param fkey Facebook key
+     * Constructor with Facebook application credentials.
+     * @param fapp The Facebook application ID
+     * @param fkey The Facebook application secret key
      */
     public PsFacebook(final String fapp, final String fkey) {
         this(
@@ -105,11 +108,11 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Ctor with proper requestor for testing purposes.
-     * @param frequest HTTP request for getting key
-     * @param frequestor Facebook response
-     * @param fapp Facebook app
-     * @param fkey Facebook key
+     * Constructor with custom requestor for testing purposes.
+     * @param frequest The HTTP request for obtaining access token
+     * @param frequestor The Facebook web requestor
+     * @param fapp The Facebook application ID
+     * @param fkey The Facebook application secret key
      * @checkstyle ParameterNumberCheck (3 lines)
      */
     PsFacebook(final com.jcabi.http.Request frequest,
@@ -158,9 +161,9 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Get the user name from Facebook with the provided token.
-     * @param token Facebook access token
-     * @return The user found in FB
+     * Retrieves user information from Facebook using the access token.
+     * @param token The Facebook access token
+     * @return The user object from Facebook
      */
     private User fetch(final String token) {
         try {
@@ -179,11 +182,11 @@ public final class PsFacebook implements Pass {
     }
 
     /**
-     * Retrieve Facebook access token.
-     * @param home Home of this page
-     * @param code Facebook "authorization code"
-     * @return The token
-     * @throws IOException If failed
+     * Retrieves the Facebook access token using the authorization code.
+     * @param home The home URL of this application
+     * @param code The Facebook authorization code
+     * @return The access token
+     * @throws IOException If token retrieval fails
      */
     private String token(final String home, final String code)
         throws IOException {

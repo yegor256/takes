@@ -12,18 +12,20 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * A Pass which you can enter only if you can enter every Pass in a list.
+ * Pass that requires successful authentication through all configured passes.
+ * This implementation enforces that a user must satisfy all authentication
+ * mechanisms in the list before being granted access.
  * @since 0.22
  */
 public final class PsAll implements Pass {
 
     /**
-     * Passes that have to be entered.
+     * List of passes that must all be satisfied for authentication.
      */
     private final List<? extends Pass> all;
 
     /**
-     * Index of identity to return.
+     * Index of the pass whose identity should be returned upon successful authentication.
      */
     private final int index;
 
@@ -85,10 +87,10 @@ public final class PsAll implements Pass {
     }
 
     /**
-     * Checks if you can enter every Pass with a request.
-     * @param request Request that is used to enter Passes.
-     * @return True if every request can be entered, false otherwise
-     * @throws Exception If any of enter attempts fail
+     * Checks if all passes can be successfully entered with the given request.
+     * @param request Request used for authentication
+     * @return True if all passes accept the request, false otherwise
+     * @throws Exception If any authentication attempt fails
      */
     private boolean allMatch(final Request request) throws Exception {
         boolean success = true;

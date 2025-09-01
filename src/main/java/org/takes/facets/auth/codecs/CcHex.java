@@ -10,7 +10,24 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Hex codec.
+ * Hexadecimal codec that encodes identity data as hexadecimal strings
+ * with optional hyphen separators for improved readability.
+ *
+ * <p>This codec decorator converts binary data to hexadecimal representation
+ * using uppercase letters (A-F) for digits 10-15. It automatically inserts
+ * hyphens every 4 bytes (8 hex characters) to improve readability of long
+ * hex strings, similar to UUID formatting.
+ *
+ * <p>The format produces strings like: {@code 48656C6C-6F20576F-726C6421}
+ * where hyphens separate every 4 bytes of the original data.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcHex(new CcPlain());
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // hex-encoded with hyphens
+ * final Identity decoded = codec.decode(encoded); // hyphen-aware decoding
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

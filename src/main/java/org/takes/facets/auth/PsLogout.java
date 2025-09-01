@@ -10,7 +10,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Logout.
+ * Pass that performs user logout by returning an anonymous identity.
+ * This implementation effectively logs out any authenticated user
+ * by replacing their identity with the anonymous identity.
  *
  * <p>The class is immutable and thread-safe.
  *

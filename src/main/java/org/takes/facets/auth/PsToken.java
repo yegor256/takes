@@ -32,7 +32,10 @@ import org.takes.rq.RqHeaders;
 import org.takes.rs.RsJson;
 
 /**
- * Pass with JSON Web Token (JWT).
+ * Pass that authenticates users using JSON Web Token (JWT).
+ * This implementation validates JWT tokens from the Authorization header,
+ * verifying the signature and extracting the user identity from the payload.
+ * It supports token generation and validation using HMAC signatures.
  *
  * <p>
  * The class is immutable and thread-safe.
@@ -44,17 +47,17 @@ import org.takes.rs.RsJson;
 public final class PsToken implements Pass {
 
     /**
-     * Signature algorithm.
+     * HMAC signature algorithm for signing and verifying tokens.
      */
     private final SiHmac signature;
 
     /**
-     * HTTP Header to read.
+     * Name of the HTTP header containing the JWT token.
      */
     private final String header;
 
     /**
-     * Max age of token, in seconds.
+     * Maximum age of the token before expiration, in seconds.
      */
     private final long age;
 

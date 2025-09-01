@@ -9,7 +9,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Pass to enter a user and let him exit.
+ * Pass for authenticating users and managing their session lifecycle.
+ * This interface defines the contract for authentication mechanisms that
+ * handle both user authentication (enter) and session management (exit).
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -18,19 +20,19 @@ import org.takes.misc.Opt;
 public interface Pass {
 
     /**
-     * Authenticate the user by the request.
-     * @param request The request
-     * @return Identity of the user found
-     * @throws Exception If fails
+     * Authenticate the user based on the request.
+     * @param request The request containing authentication information
+     * @return Identity of the authenticated user, or empty if authentication fails
+     * @throws Exception If the authentication process fails
      */
     Opt<Identity> enter(Request request) throws Exception;
 
     /**
-     * Wrap the response with the user.
-     * @param response Response
-     * @param identity Identity
-     * @return New response
-     * @throws Exception If fails
+     * Wrap the response with user authentication information.
+     * @param response Response to be wrapped
+     * @param identity Identity of the authenticated user
+     * @return New response with authentication information added
+     * @throws Exception If the wrapping process fails
      */
     Response exit(Response response, Identity identity) throws Exception;
 

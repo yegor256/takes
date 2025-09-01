@@ -13,7 +13,28 @@ import javax.crypto.Mac;
 import org.takes.facets.auth.Identity;
 
 /**
- * MAC codec which sign identity with provided algorithm and key.
+ * MAC (Message Authentication Code) codec that signs identity data with
+ * a provided algorithm and secret key to ensure integrity and authenticity.
+ *
+ * <p>This codec decorator adds cryptographic signatures to identity data
+ * using HMAC or other MAC algorithms. During encoding, it appends a MAC
+ * signature to the encoded data. During decoding, it verifies the signature
+ * before returning the decoded identity, throwing an IOException if the
+ * signature is invalid.
+ *
+ * <p>The resulting format is: [encoded_data][mac_signature] where the
+ * MAC signature length depends on the algorithm used (e.g., 32 bytes for
+ * HMAC-SHA256).
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Key key = new SecretKeySpec("secret".getBytes(), "HmacSHA256");
+ * final Codec codec = new CcSigned(new CcPlain(), "HmacSHA256", key);
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // signed data
+ * final Identity decoded = codec.decode(encoded); // verified
+ * }</pre>
+ *
  * @since 1.11.1
  */
 public final class CcSigned implements Codec {

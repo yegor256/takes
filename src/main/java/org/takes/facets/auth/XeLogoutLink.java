@@ -12,7 +12,9 @@ import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeWrap;
 
 /**
- * Xembly source to create a LINK to logout.
+ * Xembly source that creates an XML link element for user logout.
+ * This class generates a link that, when accessed, will trigger
+ * the logout process by directing the user to the appropriate logout handler.
  *
  * <p>The class is immutable and thread-safe.
  *

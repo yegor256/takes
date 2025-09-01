@@ -4,14 +4,14 @@
  */
 
 /**
- * Previous.
+ * Previous page tracking utilities for user navigation.
  *
- * <p>These classes may be useful when you want to redirect your user
- * to some location and remember what he/she wanted to see before. This
- * is especially useful during login. When the user is trying to open
- * some page, where access credentials are required, you throw
- * {@link org.takes.facets.forward.RsForward} to the home page,
- * with this class inside, with the original URL:
+ * <p>These classes provide functionality for redirecting users to their previous
+ * location while remembering where they originally wanted to go. This is
+ * particularly useful during authentication flows. When users attempt to access
+ * pages requiring credentials, you can redirect them to the login page while
+ * storing their original destination using {@link org.takes.facets.forward.RsForward}
+ * with the original URL:
  *
  * <pre> if (not_logged_id) {
  *   throw new RsForward(

@@ -17,7 +17,9 @@ import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
- * Passes by flag.
+ * Pass that selects an authentication mechanism based on a request parameter flag.
+ * This implementation examines a specific request parameter and delegates
+ * authentication to the appropriate pass based on pattern matching.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -27,12 +29,12 @@ import org.takes.rq.RqHref;
 public final class PsByFlag implements Pass {
 
     /**
-     * The flag.
+     * Name of the request parameter to examine for pass selection.
      */
     private final String flag;
 
     /**
-     * Flags and passes.
+     * Map of patterns to passes for authentication delegation.
      */
     private final Map<Pattern, Pass> passes;
 

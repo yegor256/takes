@@ -30,7 +30,9 @@ import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeader;
 
 /**
- * Pass that checks the user according RFC-2617.
+ * Pass that authenticates users according to RFC-2617 (HTTP Basic Authentication).
+ * This implementation validates user credentials provided via the HTTP Authorization
+ * header using Base64-encoded username and password pairs.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -75,7 +77,7 @@ public final class PsBasic implements Pass {
             throw new RsForward(
                 new RsWithHeader(
                     String.format(
-                        "WWW-Authenticate: Basic ream=\"%s\" ",
+                        "WWW-Authenticate: Basic realm=\"%s\" ",
                         this.realm
                     )
                 ),
@@ -102,7 +104,7 @@ public final class PsBasic implements Pass {
                 new RsWithHeader(
                     new RsFlash("access denied", Level.WARNING),
                     String.format(
-                        "WWW-Authenticate: Basic ream=\"%s\"",
+                        "WWW-Authenticate: Basic realm=\"%s\"",
                         this.realm
                     )
                 ),
@@ -119,23 +121,26 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Entry interface that is used to check if the received information is
-     * valid.
+     * Entry interface that validates user credentials.
+     * Implementations of this interface determine whether a given
+     * username and password combination is valid for authentication.
      *
      * @since 0.20
      */
     public interface Entry {
         /**
-         * Check if is a valid user.
-         * @param user User
+         * Check if the user credentials are valid.
+         * @param user Username
          * @param pwd Password
-         * @return Identity.
+         * @return Identity if credentials are valid, empty otherwise
          */
         Opt<Identity> enter(String user, String pwd);
     }
 
     /**
-     * Fake implementation of {@link PsBasic.Entry}.
+     * Fake implementation of {@link PsBasic.Entry} for testing purposes.
+     * This implementation returns a predefined authentication result based
+     * on a boolean condition provided during construction.
      *
      * <p>The class is immutable and thread-safe.
      *
@@ -172,7 +177,9 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Empty check.
+     * Empty implementation that always denies authentication.
+     * This implementation always returns an empty identity,
+     * effectively rejecting all authentication attempts.
      *
      * @since 0.20
      */
@@ -184,7 +191,9 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Default entry.
+     * Default entry implementation that validates credentials against
+     * a predefined set of username, password, and URN combinations.
+     * Credentials are stored as URL-encoded strings separated by spaces.
      *
      * @since 0.22
      */
