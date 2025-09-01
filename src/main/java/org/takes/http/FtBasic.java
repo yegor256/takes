@@ -14,6 +14,10 @@ import org.takes.Take;
 /**
  * Basic front.
  *
+ * <p>This front accepts incoming HTTP connections on a server socket
+ * and dispatches them to a back-end for processing. It runs a loop
+ * that continuously accepts connections until the exit condition is met.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1

@@ -9,7 +9,7 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 
 /**
- * Back Wrap.
+ * Back wrapper.
  * @since 0.28
  */
 @EqualsAndHashCode

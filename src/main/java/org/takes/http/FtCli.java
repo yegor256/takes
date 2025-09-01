@@ -11,14 +11,14 @@ import org.takes.Take;
 import org.takes.rq.RqWithHeader;
 
 /**
- * Front with a command line interface.
+ * Front with a command-line interface.
  *
- * <p>You must provide {@code --port} argument. Without it, the
- * server won't start. If you want to start the server at random port, you
+ * <p>You must provide a {@code --port} argument. Without it, the
+ * server won't start. If you want to start the server at a random port, you
  * should specify a file name as the value of this {@code --port} configuration
  * option. For example:</p>
  *
- * <pre> new FtCLI(
+ * <pre> new FtCli(
  *   new TkText("hello, world!"),
  *   "--port=/tmp/port.txt",
  *   "--threads=1",
@@ -27,7 +27,7 @@ import org.takes.rq.RqWithHeader;
  *
  * <p>The code above will start a server and will never stop it. It will
  * work in the foreground. The server will be started at a random TCP
- * port and its number will be saved to {@code /tmp/port.txt} file.</p>
+ * port and its number will be saved to the {@code /tmp/port.txt} file.</p>
  *
  * <p>The class is immutable and thread-safe.
  *
