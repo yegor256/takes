@@ -24,7 +24,26 @@ import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
 
 /**
- * Basic back-end.
+ * Basic back-end implementation.
+ *
+ * <p>This is the core back-end implementation that processes HTTP requests
+ * sequentially. It reads HTTP requests from the socket's input stream,
+ * processes them through a {@link Take}, and writes the responses back
+ * to the socket's output stream. It also automatically adds socket-related
+ * headers to each request for debugging and monitoring purposes.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Handles keep-alive connections by processing multiple requests
+ *       on the same socket</li>
+ *   <li>Automatically adds socket information headers (local/remote address
+ *       and port)</li>
+ *   <li>Provides comprehensive exception handling with appropriate HTTP
+ *       status codes</li>
+ *   <li>Handles {@link HttpException} with custom status codes</li>
+ *   <li>Maps {@link IllegalArgumentException} to HTTP 400 Bad Request</li>
+ *   <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
  *

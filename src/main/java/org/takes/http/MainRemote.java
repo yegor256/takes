@@ -20,7 +20,13 @@ import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 
 /**
- * Front remote control.
+ * Main method remote control.
+ *
+ * <p>This class allows you to start an application with a {@code main()}
+ * method in a separate thread, execute a script against it while it's running,
+ * and then shut it down. This is particularly useful for integration testing
+ * of applications that expose an HTTP interface through their main method.
+ * The class automatically manages port allocation and cleanup.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -19,7 +19,12 @@ import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 
 /**
- * Command line options.
+ * Command-line options.
+ *
+ * <p>This class parses and provides access to command-line options
+ * for configuring the HTTP server. It supports options such as port
+ * specification, daemon mode, thread count, hit-refresh mode, and
+ * maximum latency settings.
  *
  * <p>The class is immutable and thread-safe.
  *

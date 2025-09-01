@@ -12,10 +12,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
 
 /**
- * Parallel back-end.
+ * Parallel back-end decorator.
  *
- * <p>
- * The class is immutable and thread-safe.
+ * <p>This decorator wraps another {@link Back} implementation and processes
+ * socket connections in parallel using a thread pool. Instead of processing
+ * requests sequentially, each incoming socket connection is submitted to an
+ * {@link ExecutorService} for concurrent processing. This significantly
+ * improves server throughput and response times under high load.
+ *
+ * <p>By default, it creates a thread pool with 4 times the number of
+ * available processors (using bit shift for efficiency). This heuristic
+ * provides good performance for I/O-bound HTTP request processing.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Executes each socket connection in a separate thread</li>
+ *   <li>Uses custom thread factory with meaningful thread names</li>
+ *   <li>Configurable thread pool size</li>
+ *   <li>Wraps exceptions as {@link IllegalStateException}</li>
+ * </ul>
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
