@@ -8,7 +8,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
-import org.cactoos.Scalar;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
