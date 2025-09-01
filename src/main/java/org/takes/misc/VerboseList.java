@@ -13,7 +13,14 @@ import org.cactoos.Text;
 import org.cactoos.text.UncheckedText;
 
 /**
- * Verbose List that wraps OutOfBoundsException with custom message.
+ * List decorator that provides verbose error messages for index-related exceptions.
+ *
+ * <p>This decorator wraps an existing list and replaces generic
+ * IndexOutOfBoundsException messages with custom, more descriptive error messages.
+ * It intercepts all index-based operations and provides better debugging
+ * information when operations fail due to invalid indices.
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @param <T> Type of item
  * @since 0.31.1

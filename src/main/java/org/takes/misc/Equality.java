@@ -9,11 +9,20 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
 /**
- * Scalar {@link org.cactoos.Scalar} that checks whether two objects
- * are equal by content.
- * This class is just a temporary solution until Cactoos project provides
- * similar scalar.
- * @param <T> Type of items
+ * Scalar implementation that performs content-based equality comparison.
+ *
+ * <p>This scalar compares two objects for equality using their content
+ * rather than reference equality. It accepts either direct object references
+ * or scalar suppliers that provide the objects to compare. The comparison
+ * is performed using {@link Objects#equals(Object, Object)} for null-safe
+ * content equality checking.
+ *
+ * <p>This class serves as a temporary solution until the Cactoos project
+ * provides a similar scalar implementation.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
+ * @param <T> Type of items to compare
  * @since 2.0.0
  */
 public final class Equality<T> implements Scalar<Boolean> {

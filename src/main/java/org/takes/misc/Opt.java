@@ -8,10 +8,17 @@ package org.takes.misc;
 import lombok.EqualsAndHashCode;
 
 /**
- * Replacement for a nullable T reference with a non-null value.
+ * Optional value container that eliminates null reference usage.
+ *
+ * <p>This interface provides a null-safe way to handle optional values,
+ * similar to Java's Optional but designed specifically for the Takes framework.
+ * It offers two implementations: Single for containing a value, and Empty
+ * for representing the absence of a value. This approach helps prevent
+ * NullPointerException and makes null-checking explicit.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
- * @param <T> Type of item
+ *
+ * @param <T> Type of optional item
  * @since 0.14
  */
 public interface Opt<T> {
@@ -28,10 +35,15 @@ public interface Opt<T> {
     boolean has();
 
     /**
-     * Holder for a single element only.
+     * Implementation that contains a single non-null value.
+     *
+     * <p>This implementation always returns true for has() and provides
+     * the contained value via get(). It represents the presence of a value
+     * in the optional container and ensures the value is never null.
      *
      * <p>The class is immutable and thread-safe.
-     * @param <T> Type of item
+     *
+     * @param <T> Type of contained item
      * @since 0.14
      */
     @EqualsAndHashCode
@@ -61,10 +73,16 @@ public interface Opt<T> {
     }
 
     /**
-     * Empty instance.
+     * Implementation that represents the absence of a value.
+     *
+     * <p>This implementation always returns false for has() and throws
+     * UnsupportedOperationException when get() is called. It represents
+     * the absence of a value in the optional container and should be
+     * checked with has() before attempting to retrieve a value.
      *
      * <p>The class is immutable and thread-safe.
-     * @param <T> Type of item
+     *
+     * @param <T> Type of absent item
      * @since 0.14
      */
     final class Empty<T> implements Opt<T> {

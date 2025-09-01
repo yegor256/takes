@@ -20,9 +20,25 @@ import java.util.regex.Pattern;
 import org.cactoos.text.FormattedText;
 
 /**
- * HTTP URI/HREF.
+ * HTTP URI/HREF builder and parser with query parameter manipulation.
+ *
+ * <p>This class provides comprehensive functionality for building, parsing,
+ * and manipulating HTTP URIs and HREFs. It supports automatic URL encoding/decoding,
+ * query parameter management, path construction, and fragment handling.
+ * The implementation handles malformed URIs by automatically encoding problematic
+ * characters and provides a fluent interface for URI construction.
+ *
+ * <p>Key features:
+ * <ul>
+ * <li>Automatic URL encoding and decoding</li>
+ * <li>Query parameter addition, removal, and retrieval</li>
+ * <li>Path appending with proper encoding</li>
+ * <li>Fragment support</li>
+ * <li>Verbose error messages for missing parameters</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.7
  */
 @SuppressWarnings(
