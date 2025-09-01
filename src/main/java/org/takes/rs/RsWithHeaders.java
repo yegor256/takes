@@ -11,7 +11,12 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response decorator, with an additional headers.
+ * Response decorator that adds multiple headers to an HTTP response.
+ *
+ * <p>This decorator appends additional headers to an existing response
+ * while preserving the original headers. It accepts multiple headers
+ * either as varargs or as an iterable collection. Headers are processed
+ * sequentially, and each header is added individually using RsWithHeader.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -12,7 +12,13 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Plain text response decorator.
+ * Response decorator that creates plain text responses with proper content type.
+ *
+ * <p>This decorator automatically sets the content type to "text/plain"
+ * and provides multiple constructor overloads for creating text responses
+ * from various sources including strings, byte arrays, input streams,
+ * and URLs. It's ideal for serving plain text content, API responses,
+ * or simple text-based data.
  *
  * <p>The class is immutable and thread-safe.
  *

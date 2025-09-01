@@ -21,7 +21,12 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response with properly indented JSON body.
+ * Response decorator that formats JSON content with proper indentation.
+ *
+ * <p>This decorator transforms JSON response bodies to include proper
+ * indentation and formatting for better readability. It parses the JSON
+ * content and reformats it using Jakarta JSON API with pretty printing
+ * enabled. The transformation is cached to avoid repeated processing.
  *
  * <p>The class is immutable and thread-safe.
  *

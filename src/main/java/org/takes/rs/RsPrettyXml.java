@@ -32,9 +32,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
- * Response with properly indented XML body.
+ * Response decorator that formats XML content with proper indentation.
+ *
+ * <p>This decorator transforms XML response bodies to include proper
+ * indentation and formatting for better readability. It uses SAX parsing
+ * and XSLT transformation to create well-formatted XML output while
+ * preserving DOCTYPE declarations and handling HTML5 documents appropriately.
+ * The transformation is cached to avoid repeated processing.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 1.0
  */
 @ToString(of = "origin")

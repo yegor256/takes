@@ -23,15 +23,18 @@ import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 
 /**
- * Response that converts Velocity template to text.
+ * Response decorator that renders Apache Velocity templates.
  *
- * <p>This response implementation is rendering a page from
- * Apache Velocity template. Here is how you can use it:
+ * <p>This decorator processes Apache Velocity templates with provided
+ * parameters to generate dynamic content. It supports templates from
+ * various sources including strings, URLs, and input streams. Template
+ * parameters can be provided as key-value pairs or maps.
  *
+ * <p>Example usage:
  * <pre>public final class TkHelp implements Take {
  *   &#64;Override
  *   public Response act(final Request req) {
- *     return new RsHTML(
+ *     return new RsHtml(
  *       new RsVelocity(
  *         this.getClass().getResource("help.html.vm"),
  *         new RsVelocity.Pair("name", "Jeffrey")

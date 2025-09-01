@@ -18,7 +18,13 @@ import org.cactoos.Text;
 import org.takes.Response;
 
 /**
- * Response decorator that can print an entire response in HTTP format.
+ * Response decorator that provides text representation and printing capabilities.
+ *
+ * <p>This decorator converts HTTP responses to their textual representation,
+ * including both headers and body content. It provides methods to print
+ * the complete response, just the headers, or just the body to various
+ * output destinations. The implementation validates HTTP format compliance
+ * and handles proper CRLF line endings as required by HTTP specification.
  *
  * <p>The class is immutable and thread-safe.
  *

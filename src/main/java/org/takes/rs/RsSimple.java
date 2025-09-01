@@ -10,7 +10,12 @@ import lombok.ToString;
 import org.cactoos.io.InputStreamOf;
 
 /**
- * Simple response.
+ * Simple response implementation that wraps headers and body content.
+ *
+ * <p>This class provides a straightforward way to create Response instances
+ * from an iterable of header strings and body content (either as string
+ * or input stream). It serves as a convenient wrapper around ResponseOf
+ * for basic response construction needs.
  *
  * <p>The class is immutable and thread-safe.
  *

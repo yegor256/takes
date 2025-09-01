@@ -15,12 +15,16 @@ import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Response;
 
 /**
- * Response decorator, with body.
+ * Response decorator that replaces or adds body content to an HTTP response.
  *
- * <p>This implementation of the {@link Response} interface requires that
- * the {@link Response#head()} method has to be invoked before reading
- * from the {@code InputStream} obtained from the {@link Response#body()}
- * method.
+ * <p>This decorator allows setting custom body content from various sources
+ * including strings, byte arrays, input streams, and URLs. It automatically
+ * handles Content-Length header updates and provides multiple constructor
+ * overloads for different content types. Character encoding can be specified
+ * for text content.
+ *
+ * <p>This implementation requires that the {@link Response#head()} method
+ * be invoked before reading from the {@link Response#body()} input stream.
  *
  * <p>The class is immutable and thread-safe.
  *

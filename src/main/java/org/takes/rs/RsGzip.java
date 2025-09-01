@@ -16,7 +16,13 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response compressed with GZIP, according to RFC 1952.
+ * Response decorator that compresses the response body using GZIP compression.
+ *
+ * <p>This decorator compresses the response body using GZIP compression
+ * according to RFC 1952 and adds the appropriate Content-Encoding header.
+ * The compression is performed lazily when the response is first accessed
+ * and cached for subsequent requests. This can significantly reduce
+ * bandwidth usage for text-based responses.
  *
  * <p>The class is immutable and thread-safe.
  *

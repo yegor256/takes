@@ -11,7 +11,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
- * HTTP status of the Response.
+ * Interface for extracting HTTP status codes from responses.
+ *
+ * <p>This interface provides functionality to parse and extract HTTP
+ * status codes from response status lines. It includes validation
+ * of status line format and proper parsing of the three-digit status
+ * code according to HTTP specifications.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -27,7 +32,12 @@ public interface RsStatus extends Response {
     int status() throws IOException;
 
     /**
-     * Request decorator, for HTTP URI query parsing.
+     * Response decorator for HTTP status code parsing and extraction.
+     *
+     * <p>This implementation parses the HTTP status line using regex
+     * pattern matching to extract the three-digit status code. It validates
+     * the status line format and throws appropriate exceptions for malformed
+     * status lines.
      *
      * <p>The class is immutable and thread-safe.
      *

@@ -11,7 +11,13 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Response decorator, with content type.
+ * Response decorator that sets the Content-Type header.
+ *
+ * <p>This decorator adds or replaces the Content-Type header in an HTTP
+ * response with the specified media type and optional charset parameter.
+ * It removes any existing Content-Type headers to avoid duplication.
+ * The class also provides convenient inner classes for common content
+ * types like HTML, JSON, XML, and plain text.
  *
  * <p>The class is immutable and thread-safe.
  *

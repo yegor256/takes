@@ -13,22 +13,21 @@ import org.cactoos.iterable.Joined;
 import org.takes.Response;
 
 /**
- * Response decorator, with an additional header.
+ * Response decorator that adds a single header to an HTTP response.
  *
- * <p>Remember, if a header is already present in the response, this
- * decorator will add another one, with the same name. It doesn't check
- * for duplicates. If you want to avoid duplicate headers, use this
- * decorator in combination with {@link org.takes.rs.RsWithoutHeader},
- * for example:
+ * <p>This decorator appends one additional header to an existing response.
+ * It validates header format according to RFC 7230 and provides multiple
+ * constructor overloads for different header specification methods.
+ * The decorator does not check for duplicate headers - it simply adds
+ * the new header to the existing ones.
  *
- * <pre> new RsWithHeader(
- *   new RsWithoutHeader(res, "Host"),
- *   "Host", "www.example.com"
+ * <p><strong>Note:</strong> If you need to replace an existing header
+ * rather than add a duplicate, combine this decorator with
+ * {@link org.takes.rs.RsWithoutHeader}:
+ * <pre>new RsWithHeader(
+ *   new RsWithoutHeader(res, "Content-Type"),
+ *   "Content-Type", "application/json"
  * )</pre>
- *
- * <p>In this example, {@link org.takes.rs.RsWithoutHeader} will remove the
- * {@code Host} header first and {@link org.takes.rs.RsWithHeader} will
- * add a new one.
  *
  * <p>The class is immutable and thread-safe.
  *

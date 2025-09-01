@@ -19,7 +19,13 @@ import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
- * Response of head and body.
+ * Response implementation that wraps custom head and body suppliers.
+ *
+ * <p>This class provides a flexible way to create Response instances using
+ * functional interfaces (scalars) for head and body content. It accepts
+ * suppliers that are called when the respective content is needed, enabling
+ * lazy evaluation and custom response construction. This is particularly
+ * useful for building responses dynamically.
  *
  * <p>The class is immutable and thread-safe.
  *
