@@ -27,7 +27,7 @@ import org.takes.Request;
 public interface RqForm extends Request {
 
     /**
-     * Get single parameter.
+     * Get a single parameter.
      * @param name Parameter name
      * @return List of values (can be empty)
      * @throws IOException if something fails reading parameters

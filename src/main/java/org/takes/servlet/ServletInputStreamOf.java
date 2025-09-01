@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * ServletIInputStream that decorates a {@link InputStream} to be used
+ * ServletInputStream that decorates a {@link InputStream} to be used
  * by a {@link HttpServletRequestFake}.
  *
  * @since 1.15

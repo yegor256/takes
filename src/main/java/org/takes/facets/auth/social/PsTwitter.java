@@ -116,7 +116,7 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Get user name from Twitter, with the token provided.
+     * Get the user name from Twitter with the provided token.
      * @param tkn Twitter access token
      * @return The user found in Twitter
      * @throws IOException If fails

@@ -32,7 +32,7 @@ public final class SrvTake extends HttpServlet {
     private static final long serialVersionUID = -8119918127398448635L;
 
     /**
-     * Take, initialize in {@link #init()}.
+     * Take, initialized in {@link #init()}.
      */
     private final AtomicReference<Take> that;
 

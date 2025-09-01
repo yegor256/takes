@@ -207,7 +207,7 @@ public interface RqHeaders extends Request {
         }
 
         /**
-         * Get single header or throw HTTP exception.
+         * Get single header or throw an HTTP exception.
          * @param name Name of header
          * @return Value of it
          * @throws IOException If fails

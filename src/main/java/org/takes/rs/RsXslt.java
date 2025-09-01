@@ -39,7 +39,7 @@ import org.takes.Response;
  * </pre>
  *
  * <p>{@link org.takes.rs.RsXslt} will try to find that {@code /xsl/home.xsl}
- * resource in classpath. If it's not found a runtime exception will thrown.
+ * resource on the classpath. If it's not found, a runtime exception will be thrown.
  *
  * <p>The best way to use this decorator is in combination with
  * {@link org.takes.rs.xe.RsXembly}, for example:

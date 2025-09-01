@@ -9,10 +9,10 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.Unchecked;
 
 /**
- * Scalar (@link org.cactoos.Scalar} that checks whether two objects
- *  are equal by content.
+ * Scalar {@link org.cactoos.Scalar} that checks whether two objects
+ * are equal by content.
  * This class is just a temporary solution until Cactoos project provides
- *  similar scalar.
+ * similar scalar.
  * @param <T> Type of items
  * @since 2.0.0
  */
