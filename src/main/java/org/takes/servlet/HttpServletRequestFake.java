@@ -36,7 +36,29 @@ import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
 /**
- * Fake HttpServletRequest (for unit tests).
+ * Fake HttpServletRequest implementation for testing.
+ *
+ * <p>This class provides a test double for {@link HttpServletRequest} that
+ * wraps a Takes {@link Request} object. It's designed primarily for unit
+ * testing scenarios where you need to simulate servlet container behavior
+ * without running an actual servlet container.
+ *
+ * <p>The implementation extracts HTTP information from the Takes request
+ * and presents it through the standard servlet API. This allows testing
+ * of servlet-based code using Takes' lightweight request representations.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
+ *   <li>Supports standard HTTP methods, headers, and URL parameters</li>
+ *   <li>Provides minimal implementation suitable for most testing scenarios</li>
+ *   <li>Throws {@link UnsupportedOperationException} for advanced servlet features</li>
+ *   <li>Thread-safe and immutable where possible</li>
+ * </ul>
+ *
+ * <p>Many methods throw {@link UnsupportedOperationException} as they
+ * represent servlet container features that are not relevant for basic
+ * HTTP request testing (sessions, dispatching, async processing, etc.).
  *
  * @since 1.15
  */

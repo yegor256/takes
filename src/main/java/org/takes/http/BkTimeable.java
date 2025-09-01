@@ -36,7 +36,7 @@ import lombok.EqualsAndHashCode;
  * </ul>
  *
  * <p>The class is immutable and thread-safe.
- * 
+ *
  * @since 0.14.2
  */
 @EqualsAndHashCode(callSuper = true)

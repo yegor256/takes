@@ -36,17 +36,17 @@ public interface Front {
 
     /**
      * Start the front-end and dispatch all incoming connections.
-     * 
+     *
      * <p>This method blocks and runs the main server loop. It continuously
      * accepts incoming client connections and processes them until the
      * exit condition is met. The method should handle the complete server
      * lifecycle, including binding to the network port, accepting connections,
      * and performing cleanup when shutting down.
-     * 
+     *
      * <p>Implementations should check the exit condition periodically
      * (typically between accepting connections) and shut down gracefully
      * when {@link Exit#ready()} returns {@code true}.
-     * 
+     *
      * @param exit Condition that determines when the server should stop
      * @throws IOException If network operations fail or server cannot start
      */

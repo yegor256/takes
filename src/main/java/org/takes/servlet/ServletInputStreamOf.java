@@ -10,8 +10,31 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * ServletInputStream that decorates a {@link InputStream} to be used
- * by a {@link HttpServletRequestFake}.
+ * ServletInputStream adapter for regular InputStream.
+ *
+ * <p>This class wraps a standard {@link InputStream} and presents it
+ * as a {@link ServletInputStream}, which is required by the servlet API.
+ * It's used internally by {@link HttpServletRequestFake} to provide
+ * servlet-compatible input stream functionality while working with
+ * Takes' standard stream-based request handling.
+ *
+ * <p>The adapter provides basic functionality for reading request bodies
+ * and delegates all read operations to the wrapped input stream.
+ * It implements the servlet API's stream state methods by checking
+ * the availability of data in the underlying stream.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Adapts standard {@link InputStream} to {@link ServletInputStream}</li>
+ *   <li>Determines finished/ready state based on data availability</li>
+ *   <li>Delegates all read operations to the wrapped stream</li>
+ *   <li>Supports standard stream operations (mark/reset, skip, etc.)</li>
+ *   <li>Throws {@link UnsupportedOperationException} for async read listeners</li>
+ * </ul>
+ *
+ * <p>The implementation assumes that {@link #isReady()} correlates with
+ * {@link #isFinished()} for simplicity in testing scenarios, which may
+ * not be suitable for production async servlet processing.
  *
  * @since 1.15
  */
