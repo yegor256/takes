@@ -28,7 +28,7 @@ import org.takes.rs.RsWithHeader;
  *     new TkText("Hello World"),
  *     "Cache-Control", "no-cache"
  * );
- * 
+ *
  * // Add a single header as formatted string
  * new TkWithHeader(
  *     new TkHtml("<h1>Page</h1>"),

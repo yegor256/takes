@@ -27,16 +27,16 @@ import org.cactoos.scalar.IoChecked;
  * <pre>{@code
  * // Default failure with generic message
  * new TkFailure();
- * 
+ *
  * // Custom failure message
  * new TkFailure("Database connection failed");
- * 
+ *
  * // Specific runtime exception
  * new TkFailure(new IllegalArgumentException("Invalid input"));
- * 
+ *
  * // IOException for testing I/O error handling
  * new TkFailure(new IOException("Network timeout"));
- * 
+ *
  * // Dynamic exception generation
  * new TkFailure(() -> new IOException("Current time: " + System.currentTimeMillis()));
  * }</pre>

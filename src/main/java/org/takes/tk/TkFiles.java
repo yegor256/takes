@@ -30,7 +30,7 @@ import org.takes.rs.RsWithBody;
  * <pre>{@code
  * // Serve files from /var/www/static
  * new TkFiles("/var/www/static");
- * 
+ *
  * // Request: GET /css/style.css
  * // Resolves to: /var/www/static/css/style.css
  * }</pre>

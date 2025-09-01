@@ -33,7 +33,7 @@ import org.takes.rq.RqGreedy;
  *         return new RsText(body1.equals(body2) ? "Same" : "Different");
  *     }
  * );
- * 
+ *
  * // Useful for form processing that validates then processes
  * new TkGreedy(new TkFormProcessor());
  * }</pre>

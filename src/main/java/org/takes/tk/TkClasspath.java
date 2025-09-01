@@ -32,10 +32,10 @@ import org.takes.rs.RsWithBody;
  * <pre>{@code
  * // Serve resources from /static classpath location
  * new TkClasspath("/static");
- * 
+ *
  * // Request: GET /css/style.css
  * // Resolves to: /static/css/style.css on classpath
- * 
+ *
  * // Serve from package structure
  * new TkClasspath(MyClass.class);
  * // Uses package path: /com/example/mypackage/
