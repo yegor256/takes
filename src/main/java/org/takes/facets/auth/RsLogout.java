@@ -11,7 +11,9 @@ import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsWrap;
 
 /**
- * Logout response.
+ * Response decorator that performs user logout by clearing authentication cookies.
+ * This implementation removes the authentication cookie from the response,
+ * effectively logging out the user on the client side.
  *
  * <p>The class is immutable and thread-safe.
  *

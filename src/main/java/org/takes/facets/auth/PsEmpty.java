@@ -10,7 +10,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Pass that doesn't do anything.
+ * Empty pass that never authenticates any user.
+ * This implementation always returns an empty identity,
+ * effectively denying all authentication attempts.
  *
  * <p>The class is immutable and thread-safe.
  *

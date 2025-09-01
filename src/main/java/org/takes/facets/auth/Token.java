@@ -12,7 +12,9 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * JSON Token.
+ * JSON Token interface for creating and encoding authentication tokens.
+ * This interface defines the contract for token generation, supporting
+ * JSON Web Token (JWT) and JSON Object Signing and Encryption (JOSE) standards.
  *
  * <p>
  * All implementations of this interface must be immutable and thread-safe.
@@ -22,21 +24,23 @@ import java.util.TimeZone;
 public interface Token {
 
     /**
-     * JSON output.
+     * Get the token as a JSON object.
      *
-     * @return The Token in JSON notation.
+     * @return The token in JSON notation
      */
     JsonObject json();
 
     /**
-     * Base64 encoded JSON output.
+     * Get the Base64-encoded representation of the token.
      *
-     * @return The Token in JSON notation, Base64-encoded.
+     * @return The token in JSON notation, Base64-encoded
      */
     byte[] encoded();
 
     /**
-     * JSON Object Signing and Encryption Header.
+     * JSON Object Signing and Encryption (JOSE) header implementation.
+     * This class creates the standard JOSE header containing algorithm
+     * and token type information for JWT signing.
      * @since 1.4
      */
     final class Jose implements Token {
@@ -80,7 +84,9 @@ public interface Token {
     }
 
     /**
-     * JSON Web Token.
+     * JSON Web Token (JWT) payload implementation.
+     * This class creates JWT payloads containing subject, issued time,
+     * and expiration information for secure token-based authentication.
      * @since 1.4
      */
     @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")

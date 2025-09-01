@@ -4,14 +4,13 @@
  */
 
 /**
- * Forward.
+ * HTTP forwarding and redirection utilities.
  *
- * <p>Classes in this package help you to automate forwarding operations,
- * through 30x HTTP responses. For example, when a web form is submitted
- * through POST request, it is a good practice to return a 303 response
- * which will instruct the browser to change the web page immediately. This
- * technique is used mostly in order to prevent duplicate form submissions
- * by hitting "Refresh" button in the browser. This is how you implement it
+ * <p>Classes in this package provide functionality for automating HTTP forwarding
+ * operations through 30x status code responses. When a web form is submitted via
+ * POST request, returning a 303 (See Other) response instructs the browser to
+ * navigate to a different page immediately. This technique prevents duplicate
+ * form submissions when users click the browser's refresh button. This is how you implement it
  * in your "take":
  *
  * <pre> public class TkSaveFile implements Take {

@@ -10,7 +10,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Fixed pass.
+ * Fixed pass that always returns the same identity.
+ * This implementation always authenticates with a predetermined identity,
+ * useful for testing or scenarios requiring a fixed user context.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -20,13 +22,13 @@ import org.takes.misc.Opt;
 public final class PsFixed implements Pass {
 
     /**
-     * User to return always.
+     * Fixed identity to return for all authentication attempts.
      */
     private final Identity user;
 
     /**
-     * Identity to return always.
-     * @param identity User user
+     * Ctor.
+     * @param identity Identity to return for all requests
      */
     public PsFixed(final Identity identity) {
         this.user = identity;

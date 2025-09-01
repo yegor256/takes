@@ -15,9 +15,12 @@ import org.takes.misc.Expires;
 import org.takes.rs.RsWrap;
 
 /**
- * Response decorator, with a link to previous page.
+ * A response decorator that stores the current page location as the previous page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This decorator adds a cookie containing the current location, which can later
+ * be used to redirect users back to where they came from. It is particularly useful
+ * in authentication scenarios where users need to return to their intended destination
+ * after logging in. The class is immutable and thread-safe.
  *
  * @since 1.10
  */
@@ -26,10 +29,10 @@ import org.takes.rs.RsWrap;
 public final class RsPrevious extends RsWrap {
 
     /**
-     * Ctor.
-     * @param rsp Response to decorate
-     * @param location The location user is trying to access
-     * @throws UnsupportedEncodingException If fails to encode
+     * Constructor that stores a location as the previous page.
+     * @param rsp The response to decorate
+     * @param location The location URL to store as previous page
+     * @throws UnsupportedEncodingException If URL encoding fails
      */
     public RsPrevious(final Response rsp, final String location)
         throws UnsupportedEncodingException {

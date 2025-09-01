@@ -14,7 +14,21 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Gzip codec.
+ * GZIP codec that compresses identity data using GZIP compression algorithm.
+ *
+ * <p>This codec decorator applies GZIP compression to reduce the size of
+ * encoded identity data. It wraps another codec and compresses its output
+ * during encoding, then decompresses during decoding. This is useful for
+ * reducing storage space and network bandwidth when dealing with identity
+ * tokens.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcGzip(new CcPlain());
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // compressed data
+ * final Identity decoded = codec.decode(encoded); // decompressed
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

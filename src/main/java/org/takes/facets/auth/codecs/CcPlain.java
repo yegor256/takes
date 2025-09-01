@@ -23,7 +23,25 @@ import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
- * Plain codec.
+ * Plain text codec that encodes identity objects into URL-encoded string format.
+ *
+ * <p>This codec provides a human-readable text representation of identity
+ * objects. It encodes the URN and properties as a semicolon-separated string
+ * where the URN comes first, followed by key=value pairs for each property.
+ * All values are URL-encoded to handle special characters safely.
+ *
+ * <p>The format is: {@code urn;key1=value1;key2=value2;...} where both
+ * the URN and property values are URL-encoded using the default charset.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcPlain();
+ * final Map<String, String> props = Map.of("name", "John Doe");
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity);
+ * // Result: "urn%3Auser%3Ajohn;name=John+Doe"
+ * final Identity decoded = codec.decode(encoded);
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -15,7 +15,10 @@ import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWrap;
 
 /**
- * Request with auth information.
+ * Request decorator that extracts authentication information from headers.
+ * This wrapper provides convenient access to the authenticated user's identity
+ * from the request headers, returning an anonymous identity if no authentication
+ * information is present.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -25,7 +28,7 @@ import org.takes.rq.RqWrap;
 public final class RqAuth extends RqWrap {
 
     /**
-     * Header with authentication info.
+     * Name of the header containing authentication information.
      */
     private final String header;
 
@@ -48,9 +51,9 @@ public final class RqAuth extends RqWrap {
     }
 
     /**
-     * Authenticated user.
-     * @return User identity
-     * @throws IOException If fails
+     * Get the authenticated user's identity.
+     * @return User identity, or anonymous if not authenticated
+     * @throws IOException If decoding the identity fails
      */
     public Identity identity() throws IOException {
         final Iterator<String> headers =

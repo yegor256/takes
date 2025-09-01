@@ -4,28 +4,25 @@
  */
 
 /**
- * Flash messages.
+ * Flash message implementation for temporary cross-request communication.
  *
- * <p>Flash messages is a useful technique that allows us to send short
- * texts from one web page to another without any persistence on the server.
- * Here is how it works. A web page performs some operation, for example
- * making a post to a discussion thread. Then, the page returns a HTTP response
- * with a redirection status 303. The response contains a "Set-Cookie" HTTP
- * header with a flash message "thanks for the post".
+ * <p>Flash messages provide a technique for sending short texts from one web
+ * page to another without requiring server-side persistence. The mechanism
+ * works as follows: a web page performs an operation (such as posting to a
+ * discussion thread) and returns an HTTP response with redirection status 303.
+ * The response contains a Set-Cookie header with a flash message like
+ * "thanks for the post".
  *
- * <p>The browser preserves the cookie
- * and redirects to the page with the discussion thread. The browser makes
- * a new HTTP request, to render the content of the discussion thread. This
- * HTTP GET request contains a "Cookie" HTTP header with that message
- * "thanks for the post". The server adds this message to the HTML page,
- * informing the user about the action just completed, and returns a HTTP
- * response. This response contains a "Set-Cookie" HTTP header with an empty
- * value, which is a signal for the browser to remove the cookie.
+ * <p>The browser preserves the cookie and redirects to the target page. When
+ * the browser makes the new HTTP request to render the discussion thread content,
+ * it includes the flash message in the Cookie header. The server extracts this
+ * message, adds it to the HTML page to inform the user about the completed action,
+ * and returns an HTTP response containing a Set-Cookie header with an expired
+ * value to remove the cookie.
  *
- * <p>The browser won't send the flash message twice, because it is deleted
- * after the first time it was rendered in HTML by the server. The deletion
- * is controlled by the server, when it returns an HTTP response with
- * "Set-Cookie" header with an empty value.
+ * <p>This ensures flash messages are displayed only once, as they are deleted
+ * after first use. The server controls deletion by returning a Set-Cookie
+ * header with an expired date.
  *
  * <p>Classes in this package helps to automate this mechanism. First,
  * you add flash messages to your responses using

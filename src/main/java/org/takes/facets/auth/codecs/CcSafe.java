@@ -9,7 +9,26 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Safe codec, never throws decoding exception.
+ * Safe codec decorator that never throws decoding exceptions, providing
+ * graceful failure handling by returning anonymous identity.
+ *
+ * <p>This codec decorator wraps another codec and catches any
+ * {@link DecodingException} that might be thrown during decoding operations.
+ * When a decoding exception occurs, instead of propagating the exception,
+ * it returns {@code Identity.ANONYMOUS}, allowing the application to
+ * continue gracefully with an unauthenticated user.
+ *
+ * <p>This is particularly useful in scenarios where you want to handle
+ * corrupted or invalid authentication tokens without breaking the user
+ * experience.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcSafe(new CcPlain());
+ * final byte[] corruptedData = getCorruptedToken();
+ * final Identity identity = codec.decode(corruptedData);
+ * // identity will be Identity.ANONYMOUS instead of throwing exception
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -16,7 +16,13 @@ import org.takes.misc.Expires;
 import org.takes.rs.RsWrap;
 
 /**
- * Response decorator which sets cookie with return location.
+ * A response decorator that sets a cookie containing a return location URL.
+ *
+ * <p>This class decorates HTTP responses by adding a cookie that stores a return
+ * location. The location is validated against RFC 3987 and URL-encoded before
+ * being stored in the cookie. This mechanism allows applications to remember
+ * where users came from and redirect them back after completing an action.
+ * The class is immutable and thread-safe.
  *
  * @since 0.20
  */
@@ -32,10 +38,10 @@ public final class RsReturn extends RsWrap {
     );
 
     /**
-     * Ctor.
-     * @param res Response to decorate
-     * @param loc Location to be set as return location
-     * @throws IOException If fails
+     * Constructor with default cookie name.
+     * @param res The response to decorate
+     * @param loc The location URL to store as return location
+     * @throws IOException If location validation or encoding fails
      */
     public RsReturn(final Response res, final String loc)
         throws IOException {
@@ -43,11 +49,11 @@ public final class RsReturn extends RsWrap {
     }
 
     /**
-     * Ctor.
-     * @param res Response to decorate
-     * @param loc Location to be set as return location
-     * @param cookie Cookie name
-     * @throws IOException If fails
+     * Constructor with custom cookie name.
+     * @param res The response to decorate
+     * @param loc The location URL to store as return location
+     * @param cookie The name of the cookie to use
+     * @throws IOException If location validation or encoding fails
      */
     public RsReturn(final Response res, final String loc, final String cookie)
         throws IOException {
@@ -69,10 +75,10 @@ public final class RsReturn extends RsWrap {
     }
 
     /**
-     * Checks location according to RFC 3987.
-     * @param loc Location to be checked
-     * @return Valid location
-     * @throws IOException If fails
+     * Validates the location URL according to RFC 3987.
+     * @param loc The location URL to validate
+     * @return The validated location URL
+     * @throws IOException If the location URL is invalid
      */
     private static String validLocation(final String loc) throws IOException {
         if (!RsReturn.LOC_PTRN.matcher(loc).matches()) {

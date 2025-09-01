@@ -15,7 +15,9 @@ import org.takes.facets.flash.RsFlash;
 import org.takes.facets.forward.RsForward;
 
 /**
- * Take available for authenticated users.
+ * Take that restricts access to authenticated users only.
+ * This decorator ensures that only authenticated users can access
+ * the wrapped take, redirecting anonymous users to a specified location.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -26,12 +28,12 @@ import org.takes.facets.forward.RsForward;
 public final class TkSecure implements Take {
 
     /**
-     * Original take.
+     * Original take that requires authentication to access.
      */
     private final Take origin;
 
     /**
-     * Location where to forward.
+     * Location where anonymous users are redirected.
      */
     private final String loc;
 

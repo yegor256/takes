@@ -11,7 +11,9 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Chain of passes.
+ * Chain of passes that attempts authentication through multiple mechanisms.
+ * This implementation tries each pass in sequence until one succeeds,
+ * providing a fallback mechanism for authentication.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -21,7 +23,7 @@ import org.takes.misc.Opt;
 public final class PsChain implements Pass {
 
     /**
-     * Passes.
+     * Collection of passes to attempt in sequence.
      */
     private final Iterable<Pass> passes;
 

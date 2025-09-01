@@ -8,7 +8,25 @@ import java.io.IOException;
 import org.takes.facets.auth.Identity;
 
 /**
- * Codec.
+ * Codec interface for encoding and decoding identity objects to and from byte arrays.
+ *
+ * <p>This interface defines the contract for transforming Identity objects
+ * into byte representations and vice versa. Implementations can provide
+ * various encoding formats (plain text, binary, encrypted, compressed, etc.)
+ * and can be composed using the decorator pattern for layered functionality.
+ *
+ * <p>The interface supports throwing IOException for encoding operations
+ * and DecodingException (which is a RuntimeException) for decoding failures.
+ * This allows codecs to handle network issues, encryption failures, and
+ * malformed data appropriately.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcBase64(new CcGzip(new CcPlain()));
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity);
+ * final Identity decoded = codec.decode(encoded);
+ * }</pre>
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

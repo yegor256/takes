@@ -8,7 +8,10 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Authenticated identity.
+ * Authenticated identity representing a user in the system.
+ * This interface encapsulates user information obtained after successful
+ * authentication, including a unique identifier (URN) and optional
+ * properties such as name, email, or other user attributes.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -17,7 +20,9 @@ import java.util.Map;
 public interface Identity {
 
     /**
-     * Anonymous.
+     * Anonymous identity representing an unauthenticated user.
+     * This constant provides a special identity for users who have
+     * not been authenticated or have chosen to remain anonymous.
      */
     Identity ANONYMOUS = new Identity() {
         @Override
@@ -49,7 +54,9 @@ public interface Identity {
     Map<String, String> properties();
 
     /**
-     * Simple identity.
+     * Simple implementation of Identity interface.
+     * This class provides a straightforward implementation that stores
+     * a URN and an immutable map of properties.
      * @since 0.1
      */
     final class Simple implements Identity {

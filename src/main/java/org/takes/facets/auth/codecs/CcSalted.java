@@ -11,7 +11,26 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Salted codec.
+ * Salted codec that adds random salt to prevent rainbow table attacks
+ * and adds integrity checking through checksums.
+ *
+ * <p>This codec decorator enhances security by prepending random salt
+ * bytes to the encoded data and appending a checksum. The salt makes
+ * identical inputs produce different outputs, preventing precomputed
+ * hash attacks. The checksum ensures data integrity during transmission
+ * or storage.
+ *
+ * <p>The format is: [salt_size][salt_bytes][original_data][checksum]
+ * where salt_size is 1 byte, salt_bytes are random, and checksum is
+ * the sum of all salt bytes.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcSalted(new CcPlain());
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // salted and checksummed
+ * final Identity decoded = codec.decode(encoded); // verified and unsalted
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -26,7 +45,7 @@ public final class CcSalted implements Codec {
     private static final Random RND = new SecureRandom();
 
     /**
-     * Maximum reandom size.
+     * Maximum random size.
      */
     private static final int RND_MAX_SIZE = 10;
 

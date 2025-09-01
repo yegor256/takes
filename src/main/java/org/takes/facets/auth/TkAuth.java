@@ -13,7 +13,9 @@ import org.takes.misc.Opt;
 import org.takes.rq.RqWithoutHeader;
 
 /**
- * Authenticating take.
+ * Take that adds authentication capabilities to another take.
+ * This decorator wraps an existing take and ensures that requests
+ * are authenticated before being processed by the underlying take.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -24,17 +26,17 @@ import org.takes.rq.RqWithoutHeader;
 public final class TkAuth implements Take {
 
     /**
-     * Original take.
+     * Original take to be wrapped with authentication.
      */
     private final Take origin;
 
     /**
-     * Pass.
+     * Pass used for authentication.
      */
     private final Pass pass;
 
     /**
-     * Header to set in case of authentication.
+     * Name of the header to set when authentication is successful.
      */
     private final String header;
 
@@ -72,11 +74,11 @@ public final class TkAuth implements Take {
     }
 
     /**
-     * Make take.
-     * @param req Request
-     * @param identity Identity
-     * @return Take
-     * @throws Exception If fails
+     * Process the request with the authenticated identity.
+     * @param req Request to process
+     * @param identity Authenticated identity
+     * @return Response from the wrapped take
+     * @throws Exception If processing fails
      */
     private Response act(final Request req, final Identity identity)
         throws Exception {

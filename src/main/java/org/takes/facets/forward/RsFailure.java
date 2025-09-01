@@ -10,10 +10,13 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.flash.RsFlash;
 
 /**
- * Failure (combination of {@link org.takes.facets.forward.RsForward}
- * and {@link org.takes.facets.flash.RsFlash}).
+ * A failure response that combines redirect and flash message functionality.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class extends {@link RsForward} to provide a convenient way to redirect
+ * users while displaying error messages. It combines the redirect capabilities of
+ * {@link org.takes.facets.forward.RsForward} with the flash message functionality
+ * of {@link org.takes.facets.flash.RsFlash}, making it ideal for error handling
+ * scenarios. The class is immutable and thread-safe.
  *
  * @since 0.18
  */
@@ -31,9 +34,9 @@ public final class RsFailure extends RsForward {
     private static final String HOME = "/";
 
     /**
-     * Ctor.
-     * @param cause Cause
-     * @throws UnsupportedEncodingException If fails
+     * Constructor with throwable cause and default home location.
+     * @param cause The throwable that caused the failure
+     * @throws UnsupportedEncodingException If URL encoding fails
      */
     public RsFailure(final Throwable cause)
         throws UnsupportedEncodingException {
@@ -41,10 +44,10 @@ public final class RsFailure extends RsForward {
     }
 
     /**
-     * Ctor.
-     * @param cause Cause
-     * @param loc Location to redirect to
-     * @throws UnsupportedEncodingException If fails
+     * Constructor with throwable cause and custom redirect location.
+     * @param cause The throwable that caused the failure
+     * @param loc The location URL to redirect to
+     * @throws UnsupportedEncodingException If URL encoding fails
      * @since 0.21
      */
     public RsFailure(final Throwable cause, final CharSequence loc)
@@ -57,9 +60,9 @@ public final class RsFailure extends RsForward {
     }
 
     /**
-     * Ctor.
-     * @param cause Cause
-     * @throws UnsupportedEncodingException If fails
+     * Constructor with string cause and default home location.
+     * @param cause The error message that caused the failure
+     * @throws UnsupportedEncodingException If URL encoding fails
      */
     public RsFailure(final String cause)
         throws UnsupportedEncodingException {
@@ -67,10 +70,10 @@ public final class RsFailure extends RsForward {
     }
 
     /**
-     * Ctor.
-     * @param cause Cause
-     * @param loc Location to redirect to
-     * @throws UnsupportedEncodingException If fails
+     * Constructor with string cause and custom redirect location.
+     * @param cause The error message that caused the failure
+     * @param loc The location URL to redirect to
+     * @throws UnsupportedEncodingException If URL encoding fails
      * @since 0.21
      */
     public RsFailure(final String cause, final CharSequence loc)

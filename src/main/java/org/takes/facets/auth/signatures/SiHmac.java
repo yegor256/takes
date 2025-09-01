@@ -14,10 +14,11 @@ import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
 
 /**
- * HMAC codec which supports 256, 384 and 512 bit hash.
+ * An HMAC signature implementation that supports 256, 384, and 512-bit hash variants.
  *
- * <p>
- * The class is immutable and thread-safe.
+ * <p>This class provides HMAC (Hash-based Message Authentication Code) signature
+ * functionality using SHA-256, SHA-384, or SHA-512 algorithms. It creates hex-encoded
+ * signatures from input data using a secret key. The class is immutable and thread-safe.
  *
  * @since 1.4
  */
@@ -49,34 +50,29 @@ public final class SiHmac implements Signature {
     private final int bits;
 
     /**
-     * Ctor.
+     * Constructor with string key using default 256-bit HMAC.
      *
-     * @param key
-     *  The encryption key
+     * @param key The encryption key as a string
      */
     public SiHmac(final String key) {
         this(key.getBytes(Charset.defaultCharset()), SiHmac.HMAC256);
     }
 
     /**
-     * Ctor.
+     * Constructor with string key and specified bit length.
      *
-     * @param key
-     *  The encryption key
-     * @param bits
-     *  The signature bit length
+     * @param key The encryption key as a string
+     * @param bits The signature bit length (256, 384, or 512)
      */
     public SiHmac(final String key, final int bits) {
         this(key.getBytes(Charset.defaultCharset()), bits);
     }
 
     /**
-     * Ctor.
+     * Constructor with byte array key and specified bit length.
      *
-     * @param key
-     *  The encryption key
-     * @param bits
-     *  The signature bit length
+     * @param key The encryption key as a byte array
+     * @param bits The signature bit length (256, 384, or 512)
      */
     public SiHmac(final byte[] key, final int bits) {
         this.key = key.clone();
@@ -89,20 +85,19 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Signature bit length.
+     * Returns the signature bit length.
      *
-     * @return The bitlength
+     * @return The bit length used for HMAC signature
      */
     public int bitlength() {
         return this.bits;
     }
 
     /**
-     * Check for correct bit length.
+     * Validates and returns the correct bit length.
      *
-     * @param bits
-     *  Given bit length
-     * @return Original bit length when appropriate, 256 bits otherwise.
+     * @param bits The given bit length
+     * @return The original bit length if valid (256, 384, or 512), otherwise 256
      */
     private static int bitLength(final int bits) {
         int correct = bits;
@@ -115,13 +110,11 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Encrypt the given bytes using HMAC.
+     * Encrypts the given bytes using HMAC and returns hex-encoded result.
      *
-     * @param bytes
-     *  Bytes to encrypt
-     * @return Encrypted bytes
-     * @throws IOException
-     *  for all unexpected exceptions
+     * @param bytes The bytes to encrypt
+     * @return The encrypted bytes as hex-encoded string bytes
+     * @throws IOException If encryption fails
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try (Formatter formatter = new Formatter()) {
@@ -133,11 +126,10 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Create new mac based on a valid bit length from {@link Mac} class.
+     * Creates a new MAC instance based on the configured bit length.
      *
-     * @return The mac
-     * @throws IOException
-     *  For any unexpected exceptions
+     * @return The configured MAC instance
+     * @throws IOException If MAC creation fails
      */
     private Mac create()
         throws IOException {

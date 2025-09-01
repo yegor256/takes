@@ -18,9 +18,12 @@ import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
- * Xembly source to show flash message in XML.
+ * An Xembly source that converts flash messages from cookies into XML elements.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class extracts flash messages from HTTP cookies and converts them into
+ * XML elements using Xembly directives. It parses the cookie format (message/level)
+ * and creates flash, message, and level XML elements. The class is immutable
+ * and thread-safe.
  *
  * @since 0.1
  */
@@ -44,17 +47,17 @@ public final class XeFlash implements XeSource {
     private final String cookie;
 
     /**
-     * Ctor.
-     * @param request Request
+     * Constructor with default cookie name.
+     * @param request The HTTP request containing flash cookies
      */
     public XeFlash(final Request request) {
         this(request, RsFlash.class.getSimpleName());
     }
 
     /**
-     * Ctor.
-     * @param request Request
-     * @param name Cookie name
+     * Constructor with custom cookie name.
+     * @param request The HTTP request containing flash cookies
+     * @param name The name of the flash cookie to look for
      */
     public XeFlash(final Request request, final String name) {
         this.req = request;

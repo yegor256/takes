@@ -5,7 +5,23 @@
 package org.takes.facets.auth.codecs;
 
 /**
- * Decoding exception.
+ * Exception thrown when identity decoding fails due to invalid or corrupted data.
+ *
+ * <p>This runtime exception is specifically thrown by codec implementations
+ * when they encounter data that cannot be properly decoded back into an
+ * Identity object. This typically occurs when the input data is corrupted,
+ * malformed, or was encoded with different parameters than those used for
+ * decoding.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * try {
+ *     final Identity identity = codec.decode(corruptedBytes);
+ * } catch (final DecodingException ex) {
+ *     // Handle decoding failure, possibly return Anonymous identity
+ *     return Identity.ANONYMOUS;
+ * }
+ * }</pre>
  *
  * @since 0.5
  */

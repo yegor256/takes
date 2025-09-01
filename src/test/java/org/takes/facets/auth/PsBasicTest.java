@@ -140,7 +140,7 @@ final class PsBasicTest {
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 401 Unauthorized"),
                 Matchers.containsString(
-                    "WWW-Authenticate: Basic ream=\"RealmB\""
+                    "WWW-Authenticate: Basic realm=\"RealmB\""
                 )
             )
         );
