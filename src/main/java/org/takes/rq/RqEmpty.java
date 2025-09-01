@@ -9,7 +9,12 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
 
 /**
- * Empty request, with only a head line (mostly for testing).
+ * Empty HTTP request implementation for testing purposes.
+ *
+ * <p>This class creates minimal HTTP requests with only the request line
+ * and no body content. It's primarily designed for unit testing scenarios
+ * where a simple request structure is needed without additional headers
+ * or body data.
  *
  * <p>The class is immutable and thread-safe.
  *

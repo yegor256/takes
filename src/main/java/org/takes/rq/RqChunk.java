@@ -11,8 +11,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator that limits its body, according to
- * the chunk sizes when it is a chunked Transfer-Encoding.
+ * Request decorator that handles chunked transfer encoding.
+ *
+ * <p>This decorator examines the Transfer-Encoding header and, if it
+ * indicates chunked encoding, wraps the request body with a
+ * ChunkedInputStream that properly decodes the chunked format.
+ * For non-chunked requests, the original body stream is preserved.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -19,7 +19,13 @@ import org.takes.Request;
 import org.takes.misc.Opt;
 
 /**
- * Live request.
+ * HTTP request parser that reads from a raw input stream.
+ *
+ * <p>This class parses HTTP requests directly from input streams,
+ * handling the HTTP protocol format including request line parsing,
+ * header validation, and proper CRLF line ending handling. It performs
+ * strict validation of HTTP format compliance and throws appropriate
+ * exceptions for malformed requests.
  *
  * <p>The class is immutable and thread-safe.
  *

@@ -8,7 +8,14 @@ import java.io.IOException;
 import org.takes.Request;
 
 /**
- * Request with default header.
+ * Request decorator that adds a default header if it doesn't already exist.
+ *
+ * <p>This decorator checks if the specified header is present in the original
+ * request. If the header is missing, it adds the header with the provided value.
+ * If the header already exists, the original request is returned unchanged.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @since 0.31
  */
 public final class RqWithDefaultHeader extends RqWrap {

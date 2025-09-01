@@ -10,7 +10,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator to get custom socket headers.
+ * Request decorator that provides access to socket-related headers.
+ *
+ * <p>This decorator extracts network connection information from special
+ * X-Takes headers that contain local and remote IP addresses and ports.
+ * These headers are typically added by the server infrastructure to
+ * provide socket information to the application layer.
  *
  * <p>The class is immutable and thread-safe.
  *

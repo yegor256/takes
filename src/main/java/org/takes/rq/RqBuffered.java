@@ -9,7 +9,11 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request with a buffered body.
+ * Request decorator that wraps the body stream with buffering capability.
+ *
+ * <p>This decorator wraps the request body's input stream with a
+ * BufferedInputStream, which can improve performance when the body
+ * is read in small chunks by providing internal buffering.
  *
  * <p>The class is immutable and thread-safe.
  *

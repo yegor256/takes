@@ -7,7 +7,11 @@ package org.takes.rq;
 import org.takes.Request;
 
 /**
- * HTTP multipart FORM data decoding.
+ * HTTP multipart form data parsing interface.
+ *
+ * <p>This interface provides methods to parse multipart/form-data requests,
+ * typically used for file uploads and form submissions with binary data.
+ * It allows access to individual parts by name and retrieval of all part names.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

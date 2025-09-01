@@ -9,7 +9,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request with extra header.
+ * Request decorator that adds a single extra header.
+ *
+ * <p>This decorator appends one additional header to an existing request.
+ * It provides convenient constructor overloads for adding headers either
+ * as separate name and value parameters or as a complete header string.
+ * The implementation delegates to RqWithHeaders for the actual processing.
  *
  * <p>The class is immutable and thread-safe.
  *

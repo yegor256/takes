@@ -11,7 +11,11 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * HTTP method parsing.
+ * HTTP method parsing and validation interface.
+ *
+ * <p>This interface provides functionality to extract and validate HTTP methods
+ * from requests. It includes constants for standard HTTP methods and ensures
+ * proper method format validation according to HTTP specifications.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *

@@ -25,10 +25,14 @@ import org.takes.Request;
 import org.takes.misc.VerboseList;
 
 /**
- * HTTP headers parsing.
+ * Interface for HTTP header parsing and access.
  *
- * <p>All implementations of this interface must be immutable and
- * thread-safe.</p>
+ * <p>This interface provides methods to parse and retrieve HTTP headers
+ * from requests. It supports case-insensitive header name lookup and
+ * handles multiple values for the same header name. The interface includes
+ * both basic parsing functionality and enhanced smart decorator capabilities.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.1
  */
