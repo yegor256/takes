@@ -14,7 +14,12 @@ import org.cactoos.text.StartsWith;
 import org.takes.Response;
 
 /**
- * Response decorator, without a header.
+ * Response decorator that removes all instances of a specific header.
+ *
+ * <p>This decorator filters out all headers with the specified name
+ * from the original response. The header name comparison is performed
+ * case-insensitively, following HTTP header naming conventions.
+ * The body content remains unchanged.
  *
  * <p>The class is immutable and thread-safe.
  *

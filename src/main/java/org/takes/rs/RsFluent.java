@@ -10,7 +10,18 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Fluent response.
+ * Fluent interface for building HTTP responses with method chaining.
+ *
+ * <p>This class provides a fluent API for constructing HTTP responses
+ * by chaining method calls. It allows setting status codes, headers,
+ * content types, and body content in a readable and convenient way.
+ * Each method returns a new RsFluent instance, maintaining immutability.
+ *
+ * <p>Example usage:
+ * <pre>new RsFluent()
+ *   .withStatus(200)
+ *   .withType("application/json")
+ *   .withBody("{\"message\":\"success\"}")</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

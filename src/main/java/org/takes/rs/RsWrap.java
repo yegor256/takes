@@ -11,7 +11,13 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response decorator.
+ * Base response decorator class for implementing the decorator pattern.
+ *
+ * <p>This abstract base class provides the foundation for creating
+ * response decorators. It wraps an original response and delegates
+ * all method calls to the wrapped instance. Subclasses can override
+ * specific methods to add functionality while maintaining the
+ * Response interface contract.
  *
  * <p>The class is immutable and thread-safe.
  *

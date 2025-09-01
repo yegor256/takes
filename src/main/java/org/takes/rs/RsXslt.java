@@ -28,23 +28,25 @@ import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
- * Response that converts XML into HTML using attached XSL stylesheet.
+ * Response decorator that transforms XML to HTML using XSL stylesheets.
  *
- * <p>The encapsulated response must produce an XML document with
- * an attached XSL stylesheet, for example:
+ * <p>This decorator processes XML responses that contain XSL stylesheet
+ * processing instructions and transforms them into HTML or other formats.
+ * The stylesheet location is resolved using a configurable URIResolver,
+ * with classpath resolution as the default. Transformer factories are
+ * cached for performance.
  *
+ * <p>Expected XML format:
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page/&gt;
  * </pre>
  *
- * <p>{@link org.takes.rs.RsXslt} will try to find that {@code /xsl/home.xsl}
- * resource on the classpath. If it's not found, a runtime exception will be thrown.
+ * <p>The stylesheet {@code /xsl/home.xsl} will be resolved on the classpath.
+ * If not found, a runtime exception is thrown.
  *
- * <p>The best way to use this decorator is in combination with
- * {@link org.takes.rs.xe.RsXembly}, for example:
- *
- * <pre> new RsXSLT(
+ * <p>Example usage with RsXembly:
+ * <pre>new RsXslt(
  *   new RsXembly(
  *     new XeStylesheet("/xsl/home.xsl"),
  *     new XeAppend(
@@ -56,9 +58,8 @@ import org.takes.Response;
  *   )
  * )</pre>
  *
- * <p><strong>Note:</strong> It is highly recommended to use
- * Saxon as a default XSL transformer. All others, including Apache
- * Xalan, won't work correctly in most cases.</p>
+ * <p><strong>Note:</strong> Saxon is recommended as the XSL transformer
+ * for best compatibility and performance.
  *
  * <p>The class is immutable and thread-safe.
  *

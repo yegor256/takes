@@ -12,7 +12,13 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * HTML response decorator.
+ * Response decorator that creates HTML responses with proper content type.
+ *
+ * <p>This decorator automatically sets the content type to "text/html"
+ * and provides multiple constructor overloads for creating HTML responses
+ * from various sources including strings, byte arrays, input streams,
+ * and URLs. It ensures proper HTTP status codes and handles body content
+ * appropriately for HTML delivery.
  *
  * <p>The class is immutable and thread-safe.
  *

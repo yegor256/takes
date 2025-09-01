@@ -9,8 +9,12 @@ import org.cactoos.Text;
 import org.takes.Response;
 
 /**
- * Response head decorator that can print an entire head response in HTTP
- * format.
+ * Response decorator that provides text representation of response headers.
+ *
+ * <p>This decorator extracts and converts the response headers to a string
+ * format with proper HTTP formatting, primarily designed for testing and
+ * debugging purposes. The implementation delegates to RsPrint for the
+ * actual header extraction and formatting.
  *
  * <p>The class is immutable and thread-safe.
  *

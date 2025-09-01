@@ -15,7 +15,12 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response that converts Java object to JSON.
+ * Response decorator that creates JSON responses from Java objects.
+ *
+ * <p>This decorator converts Java objects to JSON format using Jakarta JSON API
+ * and automatically sets the content type to "application/json". It accepts
+ * JsonStructure objects or Source implementations that provide JSON content.
+ * The serialization is performed using standard JSON writers.
  *
  * <p>The class is immutable and thread-safe.
  *

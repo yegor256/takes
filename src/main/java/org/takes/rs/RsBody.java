@@ -19,7 +19,21 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
 
 /**
- * The body of a response used by {@link RsWithBody}.
+ * Interface for response body content used by {@link RsWithBody}.
+ *
+ * <p>This interface provides abstraction over different types of response
+ * body sources including URLs, byte arrays, input streams, and temporary files.
+ * Each implementation handles content length calculation and stream provision
+ * according to its specific source type. The interface extends Input to
+ * provide Cactoos integration.
+ *
+ * <p>Implementations include:
+ * <ul>
+ * <li>Url - content from URL sources</li>
+ * <li>ByteArray - content from byte arrays</li>
+ * <li>Stream - content from input streams</li>
+ * <li>TempFile - content stored in temporary files for large data</li>
+ * </ul>
  *
  * @since 0.32
  */

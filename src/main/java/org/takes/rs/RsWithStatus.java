@@ -22,7 +22,13 @@ import org.cactoos.text.TextOf;
 import org.takes.Response;
 
 /**
- * Response decorator, with status code.
+ * Response decorator that sets or replaces the HTTP status code.
+ *
+ * <p>This decorator modifies the status line of an HTTP response
+ * to use the specified status code and reason phrase. It validates
+ * that status codes follow RFC 7230 requirements (three digits between
+ * 100-999) and provides standard reason phrases for common status codes.
+ * Custom reason phrases can also be specified.
  *
  * <p>The class is immutable and thread-safe.
  *

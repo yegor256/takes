@@ -9,7 +9,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Redirect.
+ * HTTP redirect response with Location header and appropriate status code.
+ *
+ * <p>This response implementation creates HTTP redirects by setting the
+ * Location header and an appropriate redirect status code. It defaults
+ * to 303 See Other status but allows customization of the status code.
+ * Common use cases include post-redirect-get patterns and URL forwarding.
  *
  * <p>The class is immutable and thread-safe.
  *

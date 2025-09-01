@@ -9,12 +9,16 @@ import org.cactoos.Text;
 import org.takes.Response;
 
 /**
- * Response body decorator that can print an entire textual (!)
- * body response in HTTP format.
+ * Response decorator that provides text representation of response body.
  *
- * <p>This class is mostly used for testing. Don't use it for
- * production code, since it will break the binary content of your
- * HTTP response. It's only suitable for texts in HTTP responses.</p>
+ * <p>This decorator extracts and converts the response body to a string
+ * format, primarily designed for testing and debugging purposes. It should
+ * only be used with textual content as it will corrupt binary data.
+ * The implementation delegates to RsPrint for the actual body extraction.
+ *
+ * <p><strong>Warning:</strong> This class is not suitable for binary content
+ * and should primarily be used in testing scenarios where you need to
+ * inspect the response body as text.
  *
  * <p>The class is immutable and thread-safe.
  *
