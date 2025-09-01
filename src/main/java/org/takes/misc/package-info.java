@@ -15,7 +15,8 @@
  * <p>Key components include:
  * <ul>
  * <li>URL utilities: Href for URL construction and parameter manipulation</li>
- * <li>Verbose utilities: VerboseIterable, VerboseList, VerboseIterator for better error messages</li>
+ * <li>Verbose utilities: VerboseIterable, VerboseList,
+ * VerboseIterator for better error messages</li>
  * <li>Optional values: Opt interface for handling optional values without null</li>
  * <li>Date utilities: Expires for HTTP expiration date formatting</li>
  * <li>Comparison utilities: Equality for content-based object comparison</li>
