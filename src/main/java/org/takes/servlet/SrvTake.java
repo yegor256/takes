@@ -33,14 +33,14 @@ import org.takes.Take;
  *
  * <p>Configuration example in web.xml:
  * <pre>{@code
- * <servlet>
- *   <servlet-name>app</servlet-name>
- *   <servlet-class>org.takes.servlet.SrvTake</servlet-class>
- *   <init-param>
- *     <param-name>take</param-name>
- *     <param-value>com.example.MyTake</param-value>
- *   </init-param>
- * </servlet>
+ * &lt;servlet>
+ *   &lt;servlet-name>app&lt;/servlet-name>
+ *   &lt;servlet-class>org.takes.servlet.SrvTake&lt;/servlet-class>
+ *   &lt;init-param>
+ *     &lt;param-name>take&lt;/param-name>
+ *     &lt;param-value>com.example.MyTake&lt;/param-value>
+ *   &lt;/init-param>
+ * &lt;/servlet>
  * }</pre>
  *
  * <p>The servlet handles the complete request/response lifecycle:

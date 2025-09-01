@@ -91,11 +91,11 @@ final class RqFrom implements Request {
 
     /**
      * HTTP request first line builder.
-     * 
+     *
      * <p>Constructs the HTTP request line in the format "METHOD URI HTTP/1.1"
      * from servlet request information. This represents the first line of
      * an HTTP request as defined by RFC 7230.
-     * 
+     *
      * @since 2.0
      */
     private static final class HttpHead {
@@ -139,12 +139,12 @@ final class RqFrom implements Request {
 
     /**
      * Host header builder from servlet request.
-     * 
+     *
      * <p>Constructs the HTTP Host header from servlet request server
      * information. The Host header is required by HTTP/1.1 and indicates
      * the target host and port for the request. If the port is the default
      * HTTP port (80), it's omitted from the header value.
-     * 
+     *
      * @since 2.0
      */
     private static final class HttpHost {
