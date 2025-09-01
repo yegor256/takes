@@ -8,7 +8,14 @@ import java.util.Iterator;
 import org.cactoos.Text;
 
 /**
- * Verbose iterable.
+ * Iterable decorator that provides verbose error messages when elements are accessed.
+ *
+ * <p>This decorator wraps an existing iterable and provides custom error messages
+ * when iteration fails or when attempting to access elements that don't exist.
+ * It delegates to VerboseIterator for the actual verbose error handling during
+ * iteration operations.
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @param <T> Type of item
  * @since 0.10
