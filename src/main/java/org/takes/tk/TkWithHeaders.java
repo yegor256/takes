@@ -32,7 +32,7 @@ import org.takes.rs.RsWithHeaders;
  *     "X-XSS-Protection: 1; mode=block",
  *     "X-Content-Type-Options: nosniff"
  * );
- * 
+ *
  * // Add caching headers to static content
  * new TkWithHeaders(
  *     new TkFiles("/assets"),

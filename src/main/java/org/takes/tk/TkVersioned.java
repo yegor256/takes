@@ -28,7 +28,7 @@ import org.takes.rs.RsWithHeader;
  * // Add version header with default name "X-Takes-Version"
  * new TkVersioned(new TkText("Hello World"));
  * // Response will include: X-Takes-Version: 2.0.1 abc123 2025-01-01
- * 
+ *
  * // Add version header with custom name
  * new TkVersioned(
  *     new TkHtml("<h1>API</h1>"),

@@ -26,10 +26,10 @@ import org.takes.rs.RsText;
  * <pre>{@code
  * // Fixed text response
  * new TkFixed("Hello, World!");
- * 
+ *
  * // Fixed HTML response
  * new TkFixed(new RsHtml("<h1>Welcome</h1>"));
- * 
+ *
  * // Fixed JSON response with custom headers
  * new TkFixed(
  *     new RsWithHeaders(
@@ -37,7 +37,7 @@ import org.takes.rs.RsText;
  *         "Content-Type: application/json"
  *     )
  * );
- * 
+ *
  * // Lazy response generation (evaluated once)
  * new TkFixed(
  *     () -> new RsText("Generated at: " + System.currentTimeMillis())

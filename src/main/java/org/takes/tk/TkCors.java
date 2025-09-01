@@ -39,7 +39,7 @@ import org.takes.rs.RsWithStatus;
  *     "https://app.example.com",
  *     "https://localhost:3000"
  * );
- * 
+ *
  * // Allow requests from single domain
  * new TkCors(
  *     new TkJson(data),
