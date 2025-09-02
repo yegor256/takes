@@ -24,7 +24,7 @@
  * after first use. The server controls deletion by returning a Set-Cookie
  * header with an expired date.
  *
- * <p>Classes in this package helps to automate this mechanism. First,
+ * <p>Classes in this package help to automate this mechanism. First,
  * you add flash messages to your responses using
  * {@link org.takes.facets.flash.RsFlash}:
  *

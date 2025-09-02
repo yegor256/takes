@@ -16,9 +16,9 @@
  * <p>Current implementations:
  * {@link org.takes.rq.form.RqFormBase} base implementation;
  * {@link org.takes.rq.form.RqFormFake} implementation that is useful for
- * testing purposes. You can add your parameters in constructor;
+ * testing purposes. You can add your parameters in the constructor;
  * {@link org.takes.rq.form.RqFormSmart} decorator with extra features:
- * Get a single parameter and, if the parameter doesn't exist, use default value or
+ * Get a single parameter and, if the parameter doesn't exist, use a default value or
  * throw an HTTP exception.
  *
  * <p>Also please look at usage examples:
@@ -46,14 +46,14 @@
  * Create fake form with parameter: "param=value"
  * <pre>
  * {@code
- * final RqForm final = new RqFormFake(
+ * final RqForm form = new RqFormFake(
  *     new RqFake(),
  *     "param",
  *     "value"
  * );
  * }
  * </pre>
- * Get "alpha" value form parameters:
+ * Get "alpha" value from parameters:
  * <pre>
  * {@code
  * new RqFormSmart(base).single("alpha")

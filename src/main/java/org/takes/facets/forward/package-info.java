@@ -10,7 +10,7 @@
  * operations through 30x status code responses. When a web form is submitted via
  * POST request, returning a 303 (See Other) response instructs the browser to
  * navigate to a different page immediately. This technique prevents duplicate
- * form submissions when users click the browser's refresh button. This is how you implement it
+ * form submissions when users click the browser's refresh button. This is how to implement it
  * in your "take":
  *
  * <pre> public class TkSaveFile implements Take {

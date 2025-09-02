@@ -8,12 +8,12 @@
  *
  * <p>These classes provide functionality for redirecting users to their previous
  * location while remembering where they originally wanted to go. This is
- * particularly useful during authentication flows. When users attempt to access
+ * particularly useful during authentication flows. When a user attempts to access
  * pages requiring credentials, you can redirect them to the login page while
  * storing their original destination using {@link org.takes.facets.forward.RsForward}
  * with the original URL:
  *
- * <pre> if (not_logged_id) {
+ * <pre> if (not_logged_in) {
  *   throw new RsForward(
  *     new RsWithPrevious(
  *       new RsFlash("You must be logged in!")
