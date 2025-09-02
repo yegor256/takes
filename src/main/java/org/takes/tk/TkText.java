@@ -12,13 +12,31 @@ import org.cactoos.Scalar;
 import org.takes.rs.RsText;
 
 /**
- * Take that returns plain text responses.
+ * Take that returns plain text responses with appropriate Content-Type headers.
  *
  * <p>This {@link Take} implementation creates HTTP responses containing
  * plain text content with appropriate Content-Type headers. It serves as
  * a convenient wrapper around {@link RsText} for endpoints that need to
  * return text-based data such as status messages, API responses, logs,
  * configuration data, or any other textual content.
+ *
+ * <p>Example usage:
+ * <pre>{@code
+ * // Simple text response
+ * new TkText("Hello, World!");
+ *
+ * // Dynamic status message
+ * new TkText(() -> "Server time: " + new Date());
+ *
+ * // Text from file
+ * new TkText(getClass().getResourceAsStream("/readme.txt"));
+ *
+ * // JSON API response
+ * new TkText("{\"status\":\"ok\",\"timestamp\":1234567890}");
+ *
+ * // CSV data export
+ * new TkText("Name,Age,City\nJohn,30,NYC\nJane,25,LA");
+ * }</pre>
  *
  * <p>The take supports multiple input sources for maximum flexibility:
  * <ul>
