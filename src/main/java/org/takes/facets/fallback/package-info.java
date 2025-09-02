@@ -4,9 +4,9 @@
  */
 
 /**
- * Fallback.
+ * Exception handling and fallback mechanisms.
  *
- * <p>Exception handing in the framework is very simple and very
+ * <p>Exception handling in the framework is very simple and very
  * intuitive. All you need to do is to wrap your "take" into
  * {@link org.takes.facets.fallback.TkFallback} decorator and create
  * a fallback that dispatches exceptions, for example:
