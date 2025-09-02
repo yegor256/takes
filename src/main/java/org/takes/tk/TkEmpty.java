@@ -11,15 +11,28 @@ import org.takes.Take;
 import org.takes.rs.RsEmpty;
 
 /**
- * Empty take that returns no content.
+ * Take that returns an empty HTTP response with no body content.
  *
  * <p>This {@link Take} implementation always returns an empty HTTP response
- * with status 200 OK and no body content. It's useful for endpoints that
- * need to respond successfully but don't need to return any data, such as
+ * with status 200 OK and no body content. It is useful for endpoints that
+ * need to respond successfully but do not need to return any data, such as
  * health checks, pings, or acknowledgment endpoints.
  *
  * <p>The response includes standard HTTP headers but no body content.
  * This is equivalent to returning HTTP 200 OK with Content-Length: 0.
+ *
+ * <p>Example usage:
+ * <pre>{@code
+ * // Health check endpoint
+ * new TkFork(
+ *     new FkRegex("/health", new TkEmpty())
+ * );
+ *
+ * // Ping endpoint
+ * new TkFork(
+ *     new FkRegex("/ping", new TkEmpty())
+ * );
+ * }</pre>
  *
  * <p>Common use cases:
  * <ul>

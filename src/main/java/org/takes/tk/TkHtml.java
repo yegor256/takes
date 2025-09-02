@@ -9,16 +9,32 @@ import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
+import org.takes.Take;
 import org.takes.rs.RsHtml;
 
 /**
- * Take that returns HTML responses.
+ * Take that returns HTML responses with appropriate Content-Type headers.
  *
  * <p>This {@link Take} implementation creates HTTP responses containing
  * HTML content with appropriate Content-Type headers. It serves as a
  * convenient wrapper around {@link org.takes.rs.RsHtml} for web endpoints
  * that need to return HTML documents, web pages, or HTML fragments for
  * dynamic web applications.
+ *
+ * <p>Example usage:
+ * <pre>{@code
+ * // Static HTML page
+ * new TkHtml("&lt;html>&lt;body>&lt;h1>Welcome&lt;/h1>&lt;/body>&lt;/html>");
+ *
+ * // Dynamic HTML from template
+ * new TkHtml(() -> renderTemplate("page.html", data));
+ *
+ * // HTML from external resource
+ * new TkHtml(getClass().getResource("/templates/index.html"));
+ *
+ * // HTML from input stream
+ * new TkHtml(new FileInputStream("page.html"));
+ * }</pre>
  *
  * <p>The take supports multiple HTML content sources:
  * <ul>
