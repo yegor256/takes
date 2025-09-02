@@ -183,7 +183,7 @@ mvn clean integration-test -Phit-refresh -Dport=8080
 
 Maven will start the server and you can see it at `http://localhost:8080`.
 
-## Using in servlet app
+## Using in a servlet app
 
 Create a take with constructor accepting `ServletContext`:
 
@@ -406,7 +406,7 @@ in [Command Line Arguments](#command-line-arguments).
 you to start your application with SSL. More details in
 [SSL Configuration](#ssl-configuration).
 
-## Back interface
+## Back Interface
 
 [Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
 is responsible for IO operations on TCP network level. There are various useful
