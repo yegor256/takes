@@ -15,15 +15,14 @@
 **Takes** is a [true object-oriented][oop]
 and [immutable][immutable]
 Java 8 web development framework. Its key benefits, compared to all others,
-include these
-four fundamental principles:
+include these four fundamental principles:
 
 1. Not a single `null`
-([why NULL is bad?][null])
+([why is NULL bad?][null])
 2. Not a single `public` `static` method
-([why they are bad?][utility])
+([why are they bad?][utility])
 3. Not a single mutable class
-([why they are bad?][immutable])
+([why are they bad?][immutable])
 4. Not a single `instanceof` keyword, type casting, or reflection
 ([why?][casting])
 
@@ -116,7 +115,7 @@ java -Dfile.encoding=UTF-8 -cp takes-1.24.6-jar-with-dependencies.jar:. App
 
 It should work!
 
-This code starts a new HTTP server on port 8080 and renders a plain-text page on
+This code starts a new HTTP server on port 8080 and renders a plain-text page for
 all requests at the root URI.
 
 > [!CAUTION]
@@ -131,7 +130,7 @@ all requests at the root URI.
 
 ## Build and Run With Maven
 
-If you're using Maven, this is how your `pom.xml` should look like:
+If you're using Maven, this is how your `pom.xml` should look:
 
 ```xml
 <project>
@@ -174,7 +173,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
 </project>
 ```
 
-With this configuration you can run it from command line:
+With this configuration you can run it from the command line:
 
 ```bash
 mvn clean integration-test -Phit-refresh -Dport=8080
@@ -220,7 +219,7 @@ take class as servlet `init-param`:
 
 ## Build and Run With Gradle
 
-If you're using Gradle, this is how your `build.gradle` should look like:
+If you're using Gradle, this is how your `build.gradle` should look:
 
 ```groovy
 plugins {
@@ -236,7 +235,7 @@ dependencies {
 mainClassName='foo.App' //your main class
 ```
 
-With this configuration you can run it from command line:
+With this configuration you can run it from the command line:
 
 ```bash
 gradle run -Phit-refresh -Dport=8080
@@ -244,7 +243,7 @@ gradle run -Phit-refresh -Dport=8080
 
 ## Unit Testing
 
-This is how you can unit test the app, using JUnit 4.x and
+This is how you can unit-test the app, using JUnit 4.x and
 [Hamcrest](http://hamcrest.org):
 
 ```java
@@ -407,7 +406,7 @@ you to start your application with SSL. More details in
 
 ## Back Interface
 
-[Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
+The [Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
 is responsible for IO operations on TCP network level. There are various useful
 implementations of that interface:
 
@@ -440,9 +439,9 @@ a parent class.
 
 Now let's see how we can render something more complex than a plain text.
 First, XML+XSLT is a recommended mechanism of HTML rendering.
-Even though it may be too complex, give it a try, you will not regret it.
+Even though it may seem complex, give it a try; you will not regret it.
 Here is how we render a simple XML page that is transformed
-  to HTML5 on-fly (more about `RsXembly` below):
+to HTML5 on the fly (more about `RsXembly` below):
 
 ```java
 public final class TkAccount implements Take {
@@ -466,7 +465,7 @@ public final class TkAccount implements Take {
 }
 ```
 
-This is how that `User` class may look like:
+This is how that `User` class may look:
 
 ```java
 public final class User implements XeSource {
@@ -481,7 +480,7 @@ public final class User implements XeSource {
 }
 ```
 
-Here is how `RsLogin` may look like:
+Here is how `RsLogin` may look:
 
 ```java
 public final class RsLogin extends RsWrap {
@@ -799,7 +798,7 @@ Response response = new RsXembly(
 )
 ```
 
-This is how this `XeFoo` class would look like:
+This is how this `XeFoo` class would look:
 
 ```java
 public final class XeFoo extends XeWrap {
@@ -903,7 +902,7 @@ public final class TkIndex implements Take {
 
 ## SSL Configuration
 
-First of all, set up your keystore settings, for example
+First of all, set up your keystore settings, for example:
 
 ```java
 final String file = this.getClass().getResource("/org/takes/http/keystore").getFile();
@@ -955,7 +954,7 @@ new TkAuth(
 )
 ```
 
-Then, you need to show a login link to the user, which they
+Then, you need to show a login link to the user, which the user
 can click to get to the Facebook OAuth authentication page. Here is how
 you do this with XeResponse:
 
@@ -1003,10 +1002,10 @@ More about it in this blog post:
 
 ## Command Line Arguments
 
-There is a convenient `FtCLI` class that parses command line arguments and
+There is a convenient `FtCLI` class that parses command-line arguments and
 starts the necessary `Front` accordingly.
 
-There are a few command line arguments that should be passed to
+There are a few command-line arguments that should be passed to
 `FtCLI` constructor:
 
 ```text
@@ -1061,7 +1060,7 @@ new TkSlf4j(
 ## Directory Layout
 
 You are free to use any build tool, but we recommend Maven.
-This is how your project directory layout may/should look like:
+This is how your project directory layout may/should look:
 
 ```text
 src/
@@ -1099,7 +1098,7 @@ the `restfb` API in your project:
 </dependency>
 ```
 
-For Gradle, you should add the dependencies as usual:
+For Gradle, add the dependencies as usual:
 
 ```groovy
 dependencies {
@@ -1110,7 +1109,7 @@ dependencies {
 
 ## Backward compatibility
 
-Version 2.0 is not backward compatible with previous versions.
+Version 2.0 is not backward-compatible with previous versions.
 
 ## Version pattern for RESTful API
 
@@ -1152,10 +1151,10 @@ explains why it's done this way.
 
 ## How to contribute
 
-Fork repository, make changes, send us a pull request. We will review
+Fork the repository, make changes, and send us a pull request. We will review
 your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
-sending us your pull request please run full Maven build:
+sending us your pull request, please run the full Maven build:
 
 ```bash
 mvn clean install -Pqulice
