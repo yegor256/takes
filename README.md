@@ -6,11 +6,9 @@
 
 [![mvn](https://github.com/yegor256/takes/actions/workflows/mvn.yml/badge.svg)](https://github.com/yegor256/takes/actions/workflows/mvn.yml)
 [![Javadoc](https://www.javadoc.io/badge/org.takes/takes.svg)](https://www.javadoc.io/doc/org.takes/takes)
-[![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yegor256_takes&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yegor256_takes)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
 [![PDD status](https://www.0pdd.com/svg?name=yegor256/takes)](https://www.0pdd.com/p?name=yegor256/takes)
 
