@@ -26,6 +26,7 @@ import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
+import org.takes.misc.Opt;
 
 /**
  * Response decorator that transforms XML to HTML using XSL stylesheets.
@@ -216,15 +217,17 @@ public final class RsXslt extends RsWrap {
      */
     private static Source stylesheet(final TransformerFactory factory,
         final Source xml) throws TransformerConfigurationException {
-        final Source stylesheet = factory.getAssociatedStylesheet(
-            xml, null, null, null
+        final Opt<Source> stylesheet = new Opt.Single<>(
+            factory.getAssociatedStylesheet(
+                xml, null, null, null
+            )
         );
-        if (stylesheet == null) {
+        if (!stylesheet.has()) {
             throw new IllegalArgumentException(
                 "No associated stylesheet found in XML"
             );
         }
-        return stylesheet;
+        return stylesheet.get();
     }
 
     /**
