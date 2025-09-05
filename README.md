@@ -181,9 +181,9 @@ mvn clean integration-test -Phit-refresh -Dport=8080
 
 Maven will start the server and you can see it at `http://localhost:8080`.
 
-## Using in a servlet app
+## Using in a Servlet App
 
-Create a take with constructor accepting `ServletContext`:
+Create a Take with constructor accepting `ServletContext`:
 
 ```java
 package com.myapp;
@@ -398,7 +398,7 @@ class allows you to provide a script that will be executed against
 a given front. You can see how it's used in
 [integration tests](#integration-testing).
 * The [FtCli](src/main/java/org/takes/http/FtCli.java) class
-allows you to start your application with command line arguments. More details
+allows you to start your application with command-line arguments. More details
 in [Command Line Arguments](#command-line-arguments).
 * The [FtSecure](src/main/java/org/takes/http/FtSecure.java) class allows
 you to start your application with SSL. More details in
@@ -503,7 +503,7 @@ public final class TkHelloWorld implements Take {
   @Override
   public Response act(final Request req) {
     return new RsVelocity(
-      "hi, ${user.name}! You've got ${user.balance}",
+      "Hi, ${user.name}! You've got ${user.balance}",
       new RsVelocity.Pair("user", new User())
     );
   }
@@ -615,7 +615,7 @@ URI uri = href.uri();
 Iterable<String> values = href.param("key");
 ```
 
-For a more complex parsing try to use Apache Http Client or something
+For a more complex parsing try to use Apache HTTP Client or something
 similar.
 
 ## Form Processing
@@ -648,13 +648,13 @@ public final class App {
           new FkRegex("/", new TkIndex())
         ),
         new FbChain(
-          new FbStatus(404, new RsText("sorry, page is absent")),
-          new FbStatus(405, new RsText("this method is not allowed here")),
+          new FbStatus(404, new RsText("Sorry, page is absent")),
+          new FbStatus(405, new RsText("This method is not allowed here")),
           new Fallback() {
             @Override
             public Iterator<Response> route(final RqFallback req) {
               return Collections.<Response>singleton(
-                new RsHTML("oops, something went terribly wrong!")
+                new RsHTML("Oops, something went terribly wrong!")
               ).iterator();
             }
           }
@@ -683,13 +683,13 @@ public final class TkPostMessage implements Take {
     final String body = new RqPrint(req).printBody();
     if (body.isEmpty()) {
       throw new RsForward(
-        new RsFlash("message can't be empty")
+        new RsFlash("Message can't be empty")
       );
     }
     // save the message to the database
     return new RsForward(
       new RsFlash(
-        "thanks, the message was posted"
+        "Thanks, the message was posted"
       ),
       "/"
     );
@@ -933,7 +933,7 @@ Here is an example of login via
 ```java
 new TkAuth(
   new TkFork(
-    new FkRegex("/", new TkHTML("hello, check <a href='/acc'>account</a>")),
+    new FkRegex("/", new TkHTML("Hello, check <a href='/acc'>account</a>")),
     new FkRegex("/acc", new TkSecure(new TkAccount()))
   ),
   new PsChain(
@@ -1075,12 +1075,12 @@ src/
       xsl/
       js/
       css/
-      robot.txt
+      robots.txt
 pom.xml
 LICENSE.txt
 ```
 
-## Optional dependencies
+## Optional Dependencies
 
 If you are using Maven and include Takes as a dependency in your own project,
 you can choose which of the optional dependencies to include in your project.
@@ -1107,11 +1107,11 @@ dependencies {
 }
 ```
 
-## Backward compatibility
+## Backward Compatibility
 
 Version 2.0 is not backward-compatible with previous versions.
 
-## Version pattern for RESTful API
+## Version Pattern for RESTful API
 
 The URL should NOT contain the version, but the type requested.
 
@@ -1149,7 +1149,7 @@ Content-Type: application/org.takes.architect-v2+xml
 [This article][rest-types]
 explains why it's done this way.
 
-## How to contribute
+## How to Contribute
 
 Fork the repository, make changes, and send us a pull request. We will review
 your changes and apply them to the `master` branch shortly, provided
