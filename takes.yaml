@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 4.388822488
+  seconds: 3.125370545
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-17 15:56:23.967005648 Z
+  when: 2025-09-17 16:56:37.876618189 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -356,12 +356,32 @@
   when: *2
   where: github
   who: 29139614
-- _id: 23
-  _job: 17803392819
-  _time: 2025-09-17 15:56:23.291579127 Z
+- _id: 24
+  _job: 38225
+  _time: 2025-09-17 15:56:48.132627520 Z
+  _version: 0.16.7/0.53.8/0.15.42
+  award: 4
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in yegor256/takes#1461,
+    the reward amount is 4.
+  hoc: 2
+  href: https://github.com/yegor256/takes/issues/1461/#issuecomment-3303641336
+  is_human: 1
+  issue: 1461
+  repository: 28924109
+  review_comments: 0
+  seconds: 18921
+  what: code-review-was-rewarded
+  when: 2025-09-17 15:56:43.255689813 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/takes#1461
+- _id: 25
+  _job: 17804884290
+  _time: 2025-09-17 16:56:37.800919372 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54817812805
-  min_pull_was_found: 1462
+  events_were_scanned: 54820659512
+  min_pull_was_found: 0
   repository: 28924109
   what: iterate
   where: github
