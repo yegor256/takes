@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="16976">
+<fb version="0.11.0" size="16978">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">3.292039813</seconds>
+    <seconds t="F">4.821179269</seconds>
     <version t="S">0.53.6</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-18T02:21:16Z</when>
+    <when t="T">2025-09-18T03:09:18Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -341,20 +341,20 @@
     <why t="S">Reviewed code in yegor256/takes#1461</why>
   </f>
   <f>
-    <_id t="I">26</_id>
-    <_job t="I">38253</_job>
-    <_time t="T">2025-09-17T17:56:56Z</_time>
+    <_id t="I">28</_id>
+    <_job t="I">38306</_job>
+    <_time t="T">2025-09-18T02:21:55Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.42</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2025-09-17T17:56:56Z</when>
+    <when t="T">2025-09-18T02:21:55Z</when>
   </f>
   <f>
-    <_id t="I">27</_id>
-    <_job t="I">17816019509</_job>
-    <_time t="T">2025-09-18T02:21:15Z</_time>
+    <_id t="I">29</_id>
+    <_job t="I">17816754170</_job>
+    <_time t="T">2025-09-18T03:09:17Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
     <events_were_scanned t="I">54834223766</events_were_scanned>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
