@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 4.159694394
+  seconds: 3.69117364
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-18 10:56:36.843567143 Z
+  when: 2025-09-18 11:56:00.447517611 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -370,12 +370,6 @@
   where: github
   who: 526301
   why: Reviewed code in yegor256/takes#1461
-- _id: 28
-  _job: 38306
-  _time: 2025-09-18 02:21:55.392765275 Z
-  _version: 0.16.7/0.54.0/0.15.42
-  what: learn-eva
-  when: 2025-09-18 02:21:55.389975010 Z
 - _id: 30
   _job: 17824974563
   _time: 2025-09-18 09:56:18.960978128 Z
@@ -392,12 +386,18 @@
   total_stars: 860
   what: dimensions-of-terrain
   when: 2025-09-18 09:56:18.969839226 Z
-- _id: 31
-  _job: 17826426527
-  _time: 2025-09-18 10:56:36.073696068 Z
+- _id: 32
+  _job: 38366
+  _time: 2025-09-18 10:57:13.838423651 Z
+  _version: 0.16.7/0.54.0/0.15.42
+  what: learn-eva
+  when: 2025-09-18 10:57:13.836301190 Z
+- _id: 33
+  _job: 17827811386
+  _time: 2025-09-18 11:55:59.893399277 Z
   _version: 0.16.3/0.53.6/0.15.42
   events_were_scanned: 54868734068
-  min_pull_was_found: 0
+  min_pull_was_found: 1461
   repository: 28924109
   what: iterate
   where: github
