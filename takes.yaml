@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 33.876582708
+  seconds: 3.147795192
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-21 13:02:50.826623178 Z
+  when: 2025-09-21 13:55:46.375306830 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -414,15 +414,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2025-09-21 11:56:33.879339295 Z
-- _id: 65
-  _job: 17893980447
-  _time: 2025-09-21 13:02:19.747367443 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54986091386
-  min_pull_was_found: 1462
-  repository: 28924109
-  what: iterate
-  where: github
 - _id: 66
   _job: 17893980447
   _time: 2025-09-21 13:02:19.754139691 Z
@@ -444,6 +435,17 @@
   average_reviewers_per_pull: 0
   average_reviews_per_pull: 0
   average_triage_time: 0
+  composite: 0.232
+  ffact: 11
   since: 2025-09-14 13:02:19.754274442 Z
   what: quality-of-service
   when: 2025-09-21 13:02:19.754241060 Z
+- _id: 67
+  _job: 17894548066
+  _time: 2025-09-21 13:55:45.742702374 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54987082129
+  min_pull_was_found: 0
+  repository: 28924109
+  what: iterate
+  where: github
