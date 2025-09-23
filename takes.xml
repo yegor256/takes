@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="18279">
+<fb version="0.11.0" size="18339">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">235.543071977</seconds>
+    <seconds t="F">4.523074967</seconds>
     <version t="S">0.53.6</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-23T14:00:09Z</when>
+    <when t="T">2025-09-23T14:56:08Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -415,6 +415,8 @@
     <_job t="I">17948485814</_job>
     <_time t="T">2025-09-23T13:56:16Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
+    <composite t="F">1.565</composite>
+    <ffact t="I">12</ffact>
     <since t="T">2025-09-16T13:56:16Z</since>
     <total_builds_ran t="I">322</total_builds_ran>
     <total_commits_pushed t="I">1</total_commits_pushed>
@@ -448,17 +450,19 @@
     <average_reviewers_per_pull t="I">0</average_reviewers_per_pull>
     <average_reviews_per_pull t="I">0</average_reviews_per_pull>
     <average_triage_time t="I">0</average_triage_time>
+    <composite t="F">0.232</composite>
+    <ffact t="I">11</ffact>
     <since t="T">2025-09-16T13:59:34Z</since>
     <what t="S">quality-of-service</what>
     <when t="T">2025-09-23T13:59:34Z</when>
   </f>
   <f>
     <_id t="I">87</_id>
-    <_job t="I">17948485814</_job>
-    <_time t="T">2025-09-23T14:00:09Z</_time>
+    <_job t="I">17950184315</_job>
+    <_time t="T">2025-09-23T14:56:07Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
     <events_were_scanned t="I">55075498205</events_were_scanned>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
