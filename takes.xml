@@ -5,10 +5,10 @@
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">4.177246222</seconds>
+    <seconds t="F">4.24496323</seconds>
     <version t="S">0.53.6</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-24T10:56:38Z</when>
+    <when t="T">2025-09-24T11:55:54Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -449,20 +449,20 @@
     <when t="T">2025-09-23T13:59:34Z</when>
   </f>
   <f>
-    <_id t="I">90</_id>
-    <_job t="I">39289</_job>
-    <_time t="T">2025-09-24T02:22:22Z</_time>
+    <_id t="I">92</_id>
+    <_job t="I">39352</_job>
+    <_time t="T">2025-09-24T10:57:18Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.42!0.15.44</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2025-09-24T02:22:22Z</when>
+    <when t="T">2025-09-24T10:57:18Z</when>
   </f>
   <f>
-    <_id t="I">91</_id>
-    <_job t="I">17974497329</_job>
-    <_time t="T">2025-09-24T10:56:37Z</_time>
+    <_id t="I">93</_id>
+    <_job t="I">17975833223</_job>
+    <_time t="T">2025-09-24T11:55:53Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
     <events_were_scanned t="I">55102045145</events_were_scanned>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
