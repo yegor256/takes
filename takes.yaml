@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repositories/28924109/actions/runs?created=%3E2025-09-18&page=2&per_page=100:
-    502 - Server Error'
   inserted: 8
-  seconds: 259.647566495
+  seconds: 283.015526465
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-25 16:01:03.873569978 Z
+  when: 2025-09-25 17:02:04.641012704 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -485,15 +483,31 @@
   average_reviewers_per_pull: 0
   average_reviews_per_pull: 0
   average_triage_time: 0
+  composite: 0.232
+  ffact: 11
   since: 2025-09-18 15:56:46.730944370 Z
   what: quality-of-service
   when: 2025-09-25 15:56:46.730909345 Z
-- _id: 108
-  _job: 18013289127
-  _time: 2025-09-25 16:01:02.768421437 Z
+- _id: 109
+  _job: 18014825622
+  _time: 2025-09-25 16:57:25.954255840 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 55181920643
-  min_pull_was_found: 0
+  since: 2025-09-18 16:57:25.954432027 Z
+  total_builds_ran: 319
+  total_commits_pushed: 0
+  total_hoc_committed: 0
+  total_issues_created: 2
+  total_pulls_submitted: 1
+  total_releases_published: 0
+  total_reviews_submitted: 0
+  what: quantity-of-deliverables
+  when: 2025-09-25 16:57:25.954375772 Z
+- _id: 110
+  _job: 18014825622
+  _time: 2025-09-25 17:02:04.626321699 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 4773920554
+  min_pull_was_found: 1461
   repository: 28924109
   what: iterate
   where: github
