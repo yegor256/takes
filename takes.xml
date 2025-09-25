@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="18809">
+<fb version="0.11.0" size="18830">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">283.015526465</seconds>
+    <seconds t="F">172.293883089</seconds>
     <version t="S">0.53.6</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-25T17:02:04Z</when>
+    <when t="T">2025-09-25T17:58:44Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -479,6 +479,8 @@
     <_job t="I">18014825622</_job>
     <_time t="T">2025-09-25T16:57:25Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
+    <composite t="F">1.361</composite>
+    <ffact t="I">12</ffact>
     <since t="T">2025-09-18T16:57:25Z</since>
     <total_builds_ran t="I">319</total_builds_ran>
     <total_commits_pushed t="I">0</total_commits_pushed>
@@ -492,11 +494,11 @@
   </f>
   <f>
     <_id t="I">110</_id>
-    <_job t="I">18014825622</_job>
-    <_time t="T">2025-09-25T17:02:04Z</_time>
+    <_job t="I">18016268505</_job>
+    <_time t="T">2025-09-25T17:58:43Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
-    <events_were_scanned t="I">4773920554</events_were_scanned>
-    <min_pull_was_found t="I">1461</min_pull_was_found>
+    <events_were_scanned t="I">53881706580</events_were_scanned>
+    <min_pull_was_found t="I">1462</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
