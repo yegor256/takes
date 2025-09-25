@@ -2,12 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: Failed to open TCP connection to api.github.com:443 (execution expired)
   inserted: 8
-  seconds: 18.407603351
+  seconds: 4.199427656
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-25 03:57:42.141040610 Z
+  when: 2025-09-25 04:55:50.444553542 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -490,11 +489,11 @@
   what: learn-eva
   when: 2025-09-24 19:58:37.903960088 Z
 - _id: 97
-  _job: 17996422759
-  _time: 2025-09-25 03:57:39.988921360 Z
+  _job: 17997319351
+  _time: 2025-09-25 04:55:49.037086564 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 55162913471
-  min_pull_was_found: 0
+  events_were_scanned: 55164908142
+  min_pull_was_found: 1461
   repository: 28924109
   what: iterate
   where: github
