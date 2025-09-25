@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="18582">
+<fb version="0.11.0" size="18586">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">5.05203735</seconds>
+    <seconds t="F">5.931686435</seconds>
     <version t="S">0.53.6</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-25T06:57:35Z</when>
+    <when t="T">2025-09-25T07:56:21Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -476,11 +476,11 @@
   </f>
   <f>
     <_id t="I">99</_id>
-    <_job t="I">17999518246</_job>
-    <_time t="T">2025-09-25T06:57:34Z</_time>
+    <_job t="I">18000816108</_job>
+    <_time t="T">2025-09-25T07:56:21Z</_time>
     <_version t="S">0.16.3/0.53.6/0.15.42</_version>
     <events_were_scanned t="I">55164908142</events_were_scanned>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
