@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 4.738790753
+  seconds: 301.309026061
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-25 13:55:52.329766062 Z
+  when: 2025-09-25 15:01:13.757844019 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -488,12 +488,66 @@
   _version: 0.16.7/0.54.0/0.15.42!0.15.44
   what: learn-eva
   when: 2025-09-25 13:07:21.237241989 Z
-- _id: 101
-  _job: 18009827514
-  _time: 2025-09-25 13:55:51.518213660 Z
+- _id: 102
+  _job: 18011593903
+  _time: 2025-09-25 14:56:15.396219656 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 55176913278
-  min_pull_was_found: 1461
+  average_backlog_size: 88.0
+  average_build_duration: 69.78688524590164
+  average_build_mttr: -7149
+  average_build_success_rate: 0.9508196721311475
+  average_issue_lifetime: 0
+  average_pull_files_size: 0
+  average_pull_hoc_size: 0
+  average_pull_lifetime: 0
+  average_pull_rejection_rate: 0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0
+  average_review_time: 0
+  average_reviewers_per_pull: 0
+  average_reviews_per_pull: 0
+  average_triage_time: 0
+  since: 2025-09-18 14:56:15.396356542 Z
+  what: quality-of-service
+  when: 2025-09-25 14:56:15.396321416 Z
+- _id: 103
+  _job: 18011593903
+  _time: 2025-09-25 14:56:54.733121237 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 55179225845
+  min_pull_was_found: 1462
   repository: 28924109
   what: iterate
   where: github
+- _id: 104
+  _job: 18011593903
+  _time: 2025-09-25 14:56:54.741359583 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  since: 2025-09-18 14:56:54.741492001 Z
+  total_builds_ran: 315
+  total_commits_pushed: 0
+  total_hoc_committed: 0
+  total_issues_created: 2
+  total_pulls_submitted: 1
+  total_releases_published: 0
+  total_reviews_submitted: 0
+  what: quantity-of-deliverables
+  when: 2025-09-25 14:56:54.741460282 Z
+- _id: 105
+  _job: 18011593903
+  _time: 2025-09-25 15:01:03.641543968 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  total_active_contributors: 3
+  total_commits: 3494
+  total_contributors: 81
+  total_files: 534
+  total_forks: 210
+  total_issues: 738
+  total_pulls: 723
+  total_releases: 155
+  total_repositories: 1
+  total_stars: 860
+  what: dimensions-of-terrain
+  when: 2025-09-25 15:01:03.647724276 Z
