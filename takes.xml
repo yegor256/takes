@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="19538">
+<fb version="0.11.0" size="19536">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">14.776483165</seconds>
+    <seconds t="F">9.255900012</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-26T15:56:17Z</when>
+    <when t="T">2025-09-26T16:56:35Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -623,26 +623,6 @@
     <when t="T">2025-09-25T16:57:25Z</when>
   </f>
   <f>
-    <_id t="I">113</_id>
-    <_job t="I">39633</_job>
-    <_time t="T">2025-09-26T06:57:20Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-09-26T06:57:20Z</when>
-  </f>
-  <f>
-    <_id t="I">114</_id>
-    <_job t="I">18042772921</_job>
-    <_time t="T">2025-09-26T15:56:05Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <events_were_scanned t="I">55223989443</events_were_scanned>
-    <latest_issue_was_found t="I">1462</latest_issue_was_found>
-    <min_pull_was_found t="I">0</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">115</_id>
     <_job t="I">18042772921</_job>
     <_time t="T">2025-09-26T15:56:06Z</_time>
@@ -659,5 +639,25 @@
     <total_stars t="I">860</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2025-09-26T15:56:06Z</when>
+  </f>
+  <f>
+    <_id t="I">116</_id>
+    <_job t="I">39695</_job>
+    <_time t="T">2025-09-26T15:56:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-09-26T15:56:56Z</when>
+  </f>
+  <f>
+    <_id t="I">117</_id>
+    <_job t="I">18044121963</_job>
+    <_time t="T">2025-09-26T16:56:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
+    <events_were_scanned t="I">55225423777</events_were_scanned>
+    <latest_issue_was_found t="I">1462</latest_issue_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
