@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 9.641196195
+  seconds: 11.082700696
   version: 0.54.0
   what: judges-summary
-  when: 2025-09-27 04:56:28.746158678 Z
+  when: 2025-09-27 05:56:05.053923562 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -655,13 +655,26 @@
   _version: 0.16.7/0.54.0/0.15.45
   what: learn-eva
   when: 2025-09-27 02:21:16.547447168 Z
-- _id: 119
-  _job: 18055297622
-  _time: 2025-09-27 04:56:28.651887366 Z
+- _id: 120
+  _job: 18055883390
+  _time: 2025-09-27 05:55:58.946077702 Z
   _version: 0.16.7/0.54.0/0.15.45
-  events_were_scanned: 55278019393
-  latest_issue_was_found: 1462
-  min_pull_was_found: 1461
+  details: The issue yegor256/takes#1463 is the first we found, opened by @revive-code-bot[bot].
+  is_human: 0
+  issue: 1463
+  repository: 28924109
+  what: issue-was-opened
+  when: 2025-09-27 04:59:12.000000000 Z
+  where: github
+  who: 166734835
+- _id: 121
+  _job: 18055883390
+  _time: 2025-09-27 05:56:04.908070121 Z
+  _version: 0.16.7/0.54.0/0.15.45
+  events_were_scanned: 55279516552
+  latest_issue_was_found: 1463
+  min_issue_was_found: 1463
+  min_pull_was_found: 1462
   repository: 28924109
   what: iterate
   where: github
