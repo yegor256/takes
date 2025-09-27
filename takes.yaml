@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 9.707953258
+  seconds: 6.318782619
   version: 0.54.0
   what: judges-summary
-  when: 2025-09-27 09:56:31.892287525 Z
+  when: 2025-09-27 10:56:08.002509595 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -254,7 +254,7 @@
   qod: 0
   qod_per_day: 6.04654763655374
   qod_per_sec: 1.5010747354661657e-05
-  start: 2025-09-17 09:00:17.807178494 Z
+  start: &3 2025-09-17 09:00:17.807178494 Z
   what: earned-value
   when: 2025-09-17 09:08:41.056319943 Z
 - _id: 18
@@ -678,14 +678,28 @@
   when: 2025-09-27 06:56:10.723799144 Z
   where: github
   who: 166734835
-- _id: 123
-  _job: 18058288458
-  _time: 2025-09-27 09:56:31.835817666 Z
+- _id: 124
+  _job: 39870
+  _time: 2025-09-27 09:57:10.412331805 Z
   _version: 0.16.7/0.54.0/0.15.45
-  events_were_scanned: 55284030990
+  ac: 4
+  cost_of_qod: 0.6598757613221787
+  ev: 0
+  pv: 249
+  qod: 0
+  qod_per_day: 37.66942857568494
+  qod_per_sec: 1.1251653440200003e-06
+  start: *3
+  what: earned-value
+  when: 2025-09-27 09:57:10.413417515 Z
+- _id: 125
+  _job: 18058895785
+  _time: 2025-09-27 10:56:04.244017318 Z
+  _version: 0.16.7/0.54.0/0.15.45
+  events_were_scanned: 55284861692
   latest_issue_was_found: 1463
-  min_issue_was_found: 1463
-  min_pull_was_found: 0
+  min_issue_was_found: 0
+  min_pull_was_found: 1461
   repository: 28924109
   what: iterate
   where: github

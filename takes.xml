@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="20157">
+<fb version="0.11.0" size="20428">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">9.707953258</seconds>
+    <seconds t="F">6.318782619</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-27T09:56:31Z</when>
+    <when t="T">2025-09-27T10:56:08Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -676,14 +676,30 @@
     <who t="I">166734835</who>
   </f>
   <f>
-    <_id t="I">123</_id>
-    <_job t="I">18058288458</_job>
-    <_time t="T">2025-09-27T09:56:31Z</_time>
+    <_id t="I">124</_id>
+    <_job t="I">39870</_job>
+    <_time t="T">2025-09-27T09:57:10Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <events_were_scanned t="I">55284030990</events_were_scanned>
+    <ac t="I">4</ac>
+    <cost_of_qod t="F">0.6598757613221787</cost_of_qod>
+    <ev t="I">0</ev>
+    <pv t="I">249</pv>
+    <qod t="I">0</qod>
+    <qod_per_day t="F">37.66942857568494</qod_per_day>
+    <qod_per_sec t="F">1.1251653440200003e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2025-09-27T09:57:10Z</when>
+  </f>
+  <f>
+    <_id t="I">125</_id>
+    <_job t="I">18058895785</_job>
+    <_time t="T">2025-09-27T10:56:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
+    <events_were_scanned t="I">55284861692</events_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <min_issue_was_found t="I">1463</min_issue_was_found>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_issue_was_found t="I">0</min_issue_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
