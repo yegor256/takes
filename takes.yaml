@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 11.082700696
+  seconds: 7.384516886
   version: 0.54.0
   what: judges-summary
-  when: 2025-09-27 05:56:05.053923562 Z
+  when: 2025-09-27 06:56:11.285766131 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -667,14 +667,24 @@
   when: 2025-09-27 04:59:12.000000000 Z
   where: github
   who: 166734835
-- _id: 121
-  _job: 18055883390
-  _time: 2025-09-27 05:56:04.908070121 Z
+- _id: 122
+  _job: 18056537190
+  _time: 2025-09-27 06:56:10.720184486 Z
   _version: 0.16.7/0.54.0/0.15.45
-  events_were_scanned: 55279516552
+  details: 'We found out that the user #166734835 is known in GitHub as @revive-code-bot[bot].'
+  name: revive-code-bot[bot]
+  what: who-has-name
+  when: 2025-09-27 06:56:10.723799144 Z
+  where: github
+  who: 166734835
+- _id: 123
+  _job: 18056537190
+  _time: 2025-09-27 06:56:11.280351793 Z
+  _version: 0.16.7/0.54.0/0.15.45
+  events_were_scanned: 55280919627
   latest_issue_was_found: 1463
-  min_issue_was_found: 1463
-  min_pull_was_found: 1462
+  min_issue_was_found: 0
+  min_pull_was_found: 0
   repository: 28924109
   what: iterate
   where: github
