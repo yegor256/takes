@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="20671">
+<fb version="0.11.0" size="21222">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">12.40395332</seconds>
+    <seconds t="F">6.988453106</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-28T06:56:14Z</when>
+    <when t="T">2025-09-28T07:56:11Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -710,14 +710,34 @@
     <when t="T">2025-09-28T03:15:51Z</when>
   </f>
   <f>
-    <_id t="I">133</_id>
-    <_job t="I">18070781388</_job>
-    <_time t="T">2025-09-28T06:56:14Z</_time>
+    <_id t="I">134</_id>
+    <_job t="I">18071378689</_job>
+    <_time t="T">2025-09-28T07:56:06Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <events_were_scanned t="I">55300574438</events_were_scanned>
+    <commit t="S">9fde887ebe564195cea7e74abcc3ebba3d3a40f2</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #27112944081 has arrived to yegor256/takes, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">55301446767</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">27112944081</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2025-09-28T07:00:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">135</_id>
+    <_job t="I">18071378689</_job>
+    <_time t="T">2025-09-28T07:56:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
+    <events_were_scanned t="I">55301446767</events_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <min_issue_was_found t="I">0</min_issue_was_found>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_issue_was_found t="I">1463</min_issue_was_found>
+    <min_pull_was_found t="I">1461</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
