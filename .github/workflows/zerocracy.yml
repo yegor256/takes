@@ -11,6 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   zerocracy:
+    if: github.repository_owner == 'yegor256'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
