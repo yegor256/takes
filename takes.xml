@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="21781">
+<fb version="0.11.0" size="21784">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">11.076565621</seconds>
+    <seconds t="F">10.267059592</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-09-28T11:56:20Z</when>
+    <when t="T">2025-09-28T13:02:22Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -702,14 +702,6 @@
     <when t="T">2025-09-27T16:56:16Z</when>
   </f>
   <f>
-    <_id t="I">132</_id>
-    <_job t="I">40045</_job>
-    <_time t="T">2025-09-28T03:15:51Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-09-28T03:15:51Z</when>
-  </f>
-  <f>
     <_id t="I">134</_id>
     <_job t="I">18071378689</_job>
     <_time t="T">2025-09-28T07:56:06Z</_time>
@@ -748,14 +740,22 @@
     <why t="S">Pushed 9fde887eb to the default branch 'master' in yegor256/takes</why>
   </f>
   <f>
-    <_id t="I">137</_id>
-    <_job t="I">18073881994</_job>
-    <_time t="T">2025-09-28T11:56:13Z</_time>
+    <_id t="I">138</_id>
+    <_job t="I">40132</_job>
+    <_time t="T">2025-09-28T11:56:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.45!0.15.46</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-09-28T11:56:58Z</when>
+  </f>
+  <f>
+    <_id t="I">139</_id>
+    <_job t="I">18074627510</_job>
+    <_time t="T">2025-09-28T13:02:20Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.45</_version>
-    <events_were_scanned t="I">55305091072</events_were_scanned>
+    <events_were_scanned t="I">55306009852</events_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <min_issue_was_found t="I">1463</min_issue_was_found>
-    <min_pull_was_found t="I">1462</min_pull_was_found>
+    <min_issue_was_found t="I">0</min_issue_was_found>
+    <min_pull_was_found t="I">0</min_pull_was_found>
     <repository t="I">28924109</repository>
     <what t="S">iterate</what>
     <where t="S">github</where>
