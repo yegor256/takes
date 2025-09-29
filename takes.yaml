@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 7.747549558
+  seconds: 9.176827648
   version: 0.54.0
   what: judges-summary
-  when: 2025-09-29 13:06:45.133419395 Z
+  when: 2025-09-29 13:56:51.417752041 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -754,20 +754,20 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-09-28 17:56:38.415749830 Z
-- _id: 144
-  _job: 40219
-  _time: 2025-09-29 03:58:08.115444264 Z
-  _version: 0.16.7/0.54.0/0.15.45!0.15.46
+- _id: 146
+  _job: 40321
+  _time: 2025-09-29 13:07:26.614171524 Z
+  _version: 0.16.7/0.54.0/0.15.45!0.15.48
   what: learn-eva
-  when: 2025-09-29 03:58:08.112867775 Z
-- _id: 145
-  _job: 18097993358
-  _time: 2025-09-29 13:06:40.016743264 Z
+  when: 2025-09-29 13:07:26.611567011 Z
+- _id: 147
+  _job: 18099462981
+  _time: 2025-09-29 13:56:47.117501969 Z
   _version: 0.16.7/0.54.0/0.15.45
   events_were_scanned: 55338047518
   latest_issue_was_found: 1463
-  min_issue_was_found: 0
-  min_pull_was_found: 0
+  min_issue_was_found: 1463
+  min_pull_was_found: 1461
   repository: 28924109
   what: iterate
   where: github
