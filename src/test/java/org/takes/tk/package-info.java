@@ -4,7 +4,7 @@
  */
 
 /**
- * Take, testss.
+ * Take, tests.
  *
  * @since 0.1
  */
