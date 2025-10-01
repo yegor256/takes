@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
+import java.io.IOException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -42,13 +43,8 @@ final class PsBasicTest {
      */
     private static final String VALID_CODE = "?valid_code=%s";
 
-    /**
-     * Size for random symbol generator.
-     */
-    private static final int TEN = 10;
-
     @Test
-    void handleConnectionWithValidCredential() throws Exception {
+    void handleConnectionWithValidCredential() throws IOException {
         final String user = "john";
         final Opt<Identity> identity = new PsBasic(
             "RealmA",
@@ -59,7 +55,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, "pass")
@@ -94,7 +90,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, password)
@@ -125,7 +121,7 @@ final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                            RandomStringUtils.randomAlphanumeric(10)
                         )
                     ),
                     PsBasicTest.header("username", "wrong")
@@ -158,7 +154,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, "changeit"),
