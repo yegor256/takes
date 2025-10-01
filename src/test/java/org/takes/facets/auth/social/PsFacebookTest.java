@@ -33,7 +33,7 @@ final class PsFacebookTest {
             new RandomStringGenerator.Builder()
                 .filteredBy(
                     Character::isLetterOrDigit, Character::isIdeographic
-                ).build();
+                ).get();
         final Pass pass = new PsFacebook(
             new FakeRequest(
                 200,
