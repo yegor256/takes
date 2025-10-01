@@ -4,10 +4,10 @@
   deleted: 8
   error: undefined method '[]' for nil
   inserted: 8
-  seconds: 278.631227319
+  seconds: 145.339321474
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-01 07:01:45.851867690 Z
+  when: 2025-10-01 07:58:30.264145595 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -8640,1119 +8640,6 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-09-30 18:59:32.739699883 Z
-- _id: 5753
-  _job: 18141815809
-  _time: 2025-09-30 19:56:48.807547615 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The issue yegor256/takes#858 has been earlier opened by @grzechol.
-  is_human: 1
-  issue: 858
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:24.256982167 Z
-  what: issue-was-opened
-  when: 2018-10-10 06:17:38.000000000 Z
-  where: github
-  who: 4052869
-- _id: 5755
-  _job: 18141815809
-  _time: 2025-09-30 19:57:03.480954921 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#272 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.657658155 Z
-  is_human: 1
-  issue: 272
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:33.961382215 Z
-  what: issue-was-closed
-  when: 2015-05-10 02:16:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 5756
-  _job: 18141815809
-  _time: 2025-09-30 19:57:04.026711720 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#273 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.704504463 Z
-  is_human: 1
-  issue: 273
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:33.981261106 Z
-  what: issue-was-closed
-  when: 2015-05-10 03:03:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 5757
-  _job: 18141815809
-  _time: 2025-09-30 19:57:04.585973014 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#274 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.760913134 Z
-  is_human: 1
-  issue: 274
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:33.995790191 Z
-  what: issue-was-closed
-  when: 2015-05-10 03:48:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 5758
-  _job: 18141815809
-  _time: 2025-09-30 19:57:05.372934541 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#275 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 275
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:11.901885381 Z
-  what: issue-was-closed
-  when: 2015-05-10 19:37:12.000000000 Z
-  where: github
-  who: 526301
-- _id: 5759
-  _job: 18141815809
-  _time: 2025-09-30 19:57:06.114492546 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#276 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.815412216 Z
-  is_human: 1
-  issue: 276
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.009969689 Z
-  what: issue-was-closed
-  when: 2015-05-15 11:34:45.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5760
-  _job: 18141815809
-  _time: 2025-09-30 19:57:07.015201680 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#277 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.841183999 Z
-  is_human: 1
-  issue: 277
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.024246438 Z
-  what: issue-was-closed
-  when: 2015-05-10 23:44:01.000000000 Z
-  where: github
-  who: 526301
-- _id: 5761
-  _job: 18141815809
-  _time: 2025-09-30 19:57:07.665307120 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#278 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.894375736 Z
-  is_human: 1
-  issue: 278
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.037965376 Z
-  what: issue-was-closed
-  when: 2015-05-26 15:31:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 5762
-  _job: 18141815809
-  _time: 2025-09-30 19:57:08.415998984 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#281 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.930812453 Z
-  is_human: 1
-  issue: 281
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.051067232 Z
-  what: issue-was-closed
-  when: 2018-01-29 18:03:05.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5763
-  _job: 18141815809
-  _time: 2025-09-30 19:57:09.211422465 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#284 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.962513260 Z
-  is_human: 1
-  issue: 284
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.071247585 Z
-  what: issue-was-closed
-  when: 2018-01-24 19:12:49.000000000 Z
-  where: github
-  who: 526301
-- _id: 5764
-  _job: 18141815809
-  _time: 2025-09-30 19:57:09.834962985 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#285 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:16.988849726 Z
-  is_human: 1
-  issue: 285
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.086304644 Z
-  what: issue-was-closed
-  when: 2015-05-25 18:24:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 5765
-  _job: 18141815809
-  _time: 2025-09-30 19:57:10.506451631 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#286 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.023969082 Z
-  is_human: 1
-  issue: 286
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.100331627 Z
-  what: issue-was-closed
-  when: 2015-11-05 18:01:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 5766
-  _job: 18141815809
-  _time: 2025-09-30 19:57:11.301750732 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#287 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.070334421 Z
-  is_human: 1
-  issue: 287
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.114797794 Z
-  what: issue-was-closed
-  when: 2015-06-10 17:15:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 5767
-  _job: 18141815809
-  _time: 2025-09-30 19:57:11.866698335 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#290 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.144150681 Z
-  is_human: 1
-  issue: 290
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.128304239 Z
-  what: issue-was-closed
-  when: 2015-10-25 05:49:37.000000000 Z
-  where: github
-  who: 114910
-- _id: 5768
-  _job: 18141815809
-  _time: 2025-09-30 19:57:12.481345427 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#291 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.197650103 Z
-  is_human: 1
-  issue: 291
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.140375603 Z
-  what: issue-was-closed
-  when: 2015-06-01 21:26:26.000000000 Z
-  where: github
-  who: 765917
-- _id: 5769
-  _job: 18141815809
-  _time: 2025-09-30 19:57:13.122314813 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#292 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.232499088 Z
-  is_human: 1
-  issue: 292
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.160894036 Z
-  what: issue-was-closed
-  when: 2015-05-24 23:47:37.000000000 Z
-  where: github
-  who: 526301
-- _id: 5770
-  _job: 18141815809
-  _time: 2025-09-30 19:57:13.716231361 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#293 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.268918375 Z
-  is_human: 1
-  issue: 293
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.175079197 Z
-  what: issue-was-closed
-  when: 2015-06-12 05:06:37.000000000 Z
-  where: github
-  who: 526301
-- _id: 5771
-  _job: 18141815809
-  _time: 2025-09-30 19:57:14.570323966 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#294 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.313391356 Z
-  is_human: 1
-  issue: 294
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.188994772 Z
-  what: issue-was-closed
-  when: 2015-06-06 08:57:19.000000000 Z
-  where: github
-  who: 6581896
-- _id: 5772
-  _job: 18141815809
-  _time: 2025-09-30 19:57:15.228243061 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#295 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.349689582 Z
-  is_human: 1
-  issue: 295
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.202963878 Z
-  what: issue-was-closed
-  when: 2015-05-19 00:19:10.000000000 Z
-  where: github
-  who: 6581896
-- _id: 5773
-  _job: 18141815809
-  _time: 2025-09-30 19:57:15.785215435 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#296 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.393597610 Z
-  is_human: 1
-  issue: 296
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.216310371 Z
-  what: issue-was-closed
-  when: 2015-05-22 22:40:23.000000000 Z
-  where: github
-  who: 526301
-- _id: 5774
-  _job: 18141815809
-  _time: 2025-09-30 19:57:16.403633111 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#298 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.430375804 Z
-  is_human: 1
-  issue: 298
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.228815138 Z
-  what: issue-was-closed
-  when: 2015-05-20 04:44:41.000000000 Z
-  where: github
-  who: 481692
-- _id: 5775
-  _job: 18141815809
-  _time: 2025-09-30 19:57:16.981410230 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#302 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.474714996 Z
-  is_human: 1
-  issue: 302
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.249083004 Z
-  what: issue-was-closed
-  when: 2015-05-26 03:26:58.000000000 Z
-  where: github
-  who: 209396
-- _id: 5776
-  _job: 18141815809
-  _time: 2025-09-30 19:57:17.610165971 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#306 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.500440079 Z
-  is_human: 1
-  issue: 306
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.263263864 Z
-  what: issue-was-closed
-  when: 2015-10-28 22:38:59.000000000 Z
-  where: github
-  who: 526301
-- _id: 5777
-  _job: 18141815809
-  _time: 2025-09-30 19:57:18.389183462 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#307 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 307
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:12.101168139 Z
-  what: issue-was-closed
-  when: 2015-05-22 00:39:06.000000000 Z
-  where: github
-  who: 526301
-- _id: 5778
-  _job: 18141815809
-  _time: 2025-09-30 19:57:18.986132970 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#309 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.542363695 Z
-  is_human: 1
-  issue: 309
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.277643186 Z
-  what: issue-was-closed
-  when: 2015-06-02 21:22:57.000000000 Z
-  where: github
-  who: 526301
-- _id: 5779
-  _job: 18141815809
-  _time: 2025-09-30 19:57:19.555398801 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#310 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.581371878 Z
-  is_human: 1
-  issue: 310
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.291178192 Z
-  what: issue-was-closed
-  when: 2015-06-04 09:26:38.000000000 Z
-  where: github
-  who: 481692
-- _id: 5780
-  _job: 18141815809
-  _time: 2025-09-30 19:57:20.174146619 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#312 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.616129099 Z
-  is_human: 1
-  issue: 312
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.303944181 Z
-  what: issue-was-closed
-  when: 2015-06-12 02:13:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 5781
-  _job: 18141815809
-  _time: 2025-09-30 19:57:20.878605507 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#313 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.661796243 Z
-  is_human: 1
-  issue: 313
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.316293995 Z
-  what: issue-was-closed
-  when: 2015-05-30 10:11:22.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5782
-  _job: 18141815809
-  _time: 2025-09-30 19:57:21.457021770 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#317 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.687274554 Z
-  is_human: 1
-  issue: 317
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.335958205 Z
-  what: issue-was-closed
-  when: 2015-06-02 21:23:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 5783
-  _job: 18141815809
-  _time: 2025-09-30 19:57:22.310238818 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#319 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.718716636 Z
-  is_human: 1
-  issue: 319
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.350358012 Z
-  what: issue-was-closed
-  when: 2015-05-29 05:20:15.000000000 Z
-  where: github
-  who: 526301
-- _id: 5784
-  _job: 18141815809
-  _time: 2025-09-30 19:57:23.010120998 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#320 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.768453670 Z
-  is_human: 1
-  issue: 320
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.364411579 Z
-  what: issue-was-closed
-  when: 2015-05-29 05:24:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 5785
-  _job: 18141815809
-  _time: 2025-09-30 19:57:23.635024731 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#321 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.792478270 Z
-  is_human: 1
-  issue: 321
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.378188239 Z
-  what: issue-was-closed
-  when: 2015-07-07 06:34:05.000000000 Z
-  where: github
-  who: 105730
-- _id: 5786
-  _job: 18141815809
-  _time: 2025-09-30 19:57:24.197995117 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#322 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.837965591 Z
-  is_human: 1
-  issue: 322
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.391464890 Z
-  what: issue-was-closed
-  when: 2015-06-05 09:32:09.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5787
-  _job: 18141815809
-  _time: 2025-09-30 19:57:24.774610907 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#323 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.863979238 Z
-  is_human: 1
-  issue: 323
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.403995423 Z
-  what: issue-was-closed
-  when: 2015-06-05 13:12:40.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5788
-  _job: 18141815809
-  _time: 2025-09-30 19:57:25.375714988 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#330 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.896484943 Z
-  is_human: 1
-  issue: 330
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.423966582 Z
-  what: issue-was-closed
-  when: 2015-06-10 20:27:57.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5789
-  _job: 18141815809
-  _time: 2025-09-30 19:57:25.935355772 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#331 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.923806131 Z
-  is_human: 1
-  issue: 331
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.438640308 Z
-  what: issue-was-closed
-  when: 2015-06-08 07:36:16.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5790
-  _job: 18141815809
-  _time: 2025-09-30 19:57:26.559772698 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#333 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:17.960345876 Z
-  is_human: 1
-  issue: 333
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.452597071 Z
-  what: issue-was-closed
-  when: 2018-01-31 15:53:37.000000000 Z
-  where: github
-  who: 526301
-- _id: 5791
-  _job: 18141815809
-  _time: 2025-09-30 19:57:27.104784740 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#336 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.004763948 Z
-  is_human: 1
-  issue: 336
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.466569296 Z
-  what: issue-was-closed
-  when: 2015-06-08 06:13:04.000000000 Z
-  where: github
-  who: 526301
-- _id: 5792
-  _job: 18141815809
-  _time: 2025-09-30 19:57:27.724370228 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#339 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.032196988 Z
-  is_human: 1
-  issue: 339
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.479752439 Z
-  what: issue-was-closed
-  when: 2015-10-29 07:59:10.000000000 Z
-  where: github
-  who: 416283
-- _id: 5793
-  _job: 18141815809
-  _time: 2025-09-30 19:57:28.333571436 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#341 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.056270022 Z
-  is_human: 1
-  issue: 341
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.492472913 Z
-  what: issue-was-closed
-  when: 2015-08-28 05:44:09.000000000 Z
-  where: github
-  who: 526301
-- _id: 5794
-  _job: 18141815809
-  _time: 2025-09-30 19:57:28.930471547 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#342 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.089938983 Z
-  is_human: 1
-  issue: 342
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.512691997 Z
-  what: issue-was-closed
-  when: 2015-06-19 13:13:09.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5795
-  _job: 18141815809
-  _time: 2025-09-30 19:57:29.523439488 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#345 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 345
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:12.062335045 Z
-  what: issue-was-closed
-  when: 2015-06-16 20:48:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 5796
-  _job: 18141815809
-  _time: 2025-09-30 19:57:30.176837014 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#346 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.115900882 Z
-  is_human: 1
-  issue: 346
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.527194996 Z
-  what: issue-was-closed
-  when: 2015-06-19 04:23:03.000000000 Z
-  where: github
-  who: 6333170
-- _id: 5797
-  _job: 18141815809
-  _time: 2025-09-30 19:57:30.726058649 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#349 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.139898642 Z
-  is_human: 1
-  issue: 349
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.541417921 Z
-  what: issue-was-closed
-  when: 2015-07-30 05:11:57.000000000 Z
-  where: github
-  who: 114910
-- _id: 5798
-  _job: 18141815809
-  _time: 2025-09-30 19:57:31.316258589 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#350 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.174307763 Z
-  is_human: 1
-  issue: 350
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.555129166 Z
-  what: issue-was-closed
-  when: 2015-07-22 11:02:05.000000000 Z
-  where: github
-  who: 114910
-- _id: 5799
-  _job: 18141815809
-  _time: 2025-09-30 19:57:32.075686316 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#351 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.200035365 Z
-  is_human: 1
-  issue: 351
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.568184019 Z
-  what: issue-was-closed
-  when: 2015-06-23 16:01:01.000000000 Z
-  where: github
-  who: 6333170
-- _id: 5800
-  _job: 18141815809
-  _time: 2025-09-30 19:57:32.655617964 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#352 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 352
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:12.021050378 Z
-  what: issue-was-closed
-  when: 2018-11-27 12:22:21.000000000 Z
-  where: github
-  who: 33915433
-- _id: 5801
-  _job: 18141815809
-  _time: 2025-09-30 19:57:33.266669868 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#353 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.223867850 Z
-  is_human: 1
-  issue: 353
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.580828157 Z
-  what: issue-was-closed
-  when: 2018-01-16 06:21:42.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5802
-  _job: 18141815809
-  _time: 2025-09-30 19:57:33.881800918 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#354 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.257765891 Z
-  is_human: 1
-  issue: 354
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.601307382 Z
-  what: issue-was-closed
-  when: 2018-01-30 11:59:43.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5803
-  _job: 18141815809
-  _time: 2025-09-30 19:57:34.479701983 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#355 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.284071182 Z
-  is_human: 1
-  issue: 355
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.615513665 Z
-  what: issue-was-closed
-  when: 2015-06-30 03:48:15.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5804
-  _job: 18141815809
-  _time: 2025-09-30 19:57:35.093352533 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#359 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.327010802 Z
-  is_human: 1
-  issue: 359
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.629777148 Z
-  what: issue-was-closed
-  when: 2015-09-18 17:36:04.000000000 Z
-  where: github
-  who: 6333170
-- _id: 5805
-  _job: 18141815809
-  _time: 2025-09-30 19:57:35.845293589 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#360 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.353198395 Z
-  is_human: 1
-  issue: 360
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.643387916 Z
-  what: issue-was-closed
-  when: 2015-07-10 23:24:13.000000000 Z
-  where: github
-  who: 526301
-- _id: 5806
-  _job: 18141815809
-  _time: 2025-09-30 19:57:36.518409358 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#361 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 361
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:11.981895450 Z
-  what: issue-was-closed
-  when: 2015-07-14 22:21:16.000000000 Z
-  where: github
-  who: 526301
-- _id: 5807
-  _job: 18141815809
-  _time: 2025-09-30 19:57:37.240329174 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#362 has been 'issue-was-closed'.
-  is_human: 1
-  issue: 362
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:11.940609679 Z
-  what: issue-was-closed
-  when: 2015-07-15 00:37:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 5808
-  _job: 18141815809
-  _time: 2025-09-30 19:57:38.132790201 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#363 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.378608661 Z
-  is_human: 1
-  issue: 363
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.656615877 Z
-  what: issue-was-closed
-  when: 2015-07-15 18:06:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 5809
-  _job: 18141815809
-  _time: 2025-09-30 19:57:38.722780800 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#364 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.419786278 Z
-  is_human: 1
-  issue: 364
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.669529114 Z
-  what: issue-was-closed
-  when: 2015-07-15 18:46:00.000000000 Z
-  where: github
-  who: 526301
-- _id: 5810
-  _job: 18141815809
-  _time: 2025-09-30 19:57:39.287183671 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#367 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.457213737 Z
-  is_human: 1
-  issue: 367
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.689075452 Z
-  what: issue-was-closed
-  when: 2015-09-02 16:28:37.000000000 Z
-  where: github
-  who: 4467948
-- _id: 5811
-  _job: 18141815809
-  _time: 2025-09-30 19:57:39.841841071 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#368 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.482251862 Z
-  is_human: 1
-  issue: 368
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.703472303 Z
-  what: issue-was-closed
-  when: 2015-07-21 13:11:44.000000000 Z
-  where: github
-  who: 9972909
-- _id: 5812
-  _job: 18141815809
-  _time: 2025-09-30 19:57:40.412154210 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#369 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.515637380 Z
-  is_human: 1
-  issue: 369
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.717956655 Z
-  what: issue-was-closed
-  when: 2015-07-21 21:07:47.000000000 Z
-  where: github
-  who: 526301
-- _id: 5813
-  _job: 18141815809
-  _time: 2025-09-30 19:57:40.959553571 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#370 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.542157907 Z
-  is_human: 1
-  issue: 370
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.731871468 Z
-  what: issue-was-closed
-  when: 2015-07-21 21:51:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 5814
-  _job: 18141815809
-  _time: 2025-09-30 19:57:41.543929601 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#371 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.568121170 Z
-  is_human: 1
-  issue: 371
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.745177732 Z
-  what: issue-was-closed
-  when: 2015-07-27 08:08:40.000000000 Z
-  where: github
-  who: 6333170
-- _id: 5815
-  _job: 18141815809
-  _time: 2025-09-30 19:57:42.112442129 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#372 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.591904477 Z
-  is_human: 1
-  issue: 372
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.757916462 Z
-  what: issue-was-closed
-  when: 2015-08-30 20:15:05.000000000 Z
-  where: github
-  who: 209396
-- _id: 5816
-  _job: 18141815809
-  _time: 2025-09-30 19:57:42.705160925 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#373 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.626214750 Z
-  is_human: 1
-  issue: 373
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.777646478 Z
-  what: issue-was-closed
-  when: 2018-01-29 22:07:49.000000000 Z
-  where: github
-  who: 1917892
-- _id: 5817
-  _job: 18141815809
-  _time: 2025-09-30 19:57:43.342598532 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#375 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.652467330 Z
-  is_human: 1
-  issue: 375
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.792238351 Z
-  what: issue-was-closed
-  when: 2015-08-17 12:05:08.000000000 Z
-  where: github
-  who: 526301
-- _id: 5818
-  _job: 18141815809
-  _time: 2025-09-30 19:57:43.925474141 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: Apparently, yegor256/takes#376 has been 'issue-was-closed'.
-  done: 2025-09-30 20:02:18.675915469 Z
-  is_human: 1
-  issue: 376
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:34.806884088 Z
-  what: issue-was-closed
-  when: 2015-08-20 14:00:17.000000000 Z
-  where: github
-  who: 526301
-- _id: 5820
-  _job: 18141815809
-  _time: 2025-09-30 19:58:00.181461551 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#259.
-  is_human: 1
-  issue: 259
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.325820419 Z
-  what: label-was-attached
-  when: 2015-05-07 17:38:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 5821
-  _job: 18141815809
-  _time: 2025-09-30 19:58:00.255005119 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'enhancement' label was attached by @yegor256 to the issue yegor256/takes#259.
-  is_human: 1
-  issue: 259
-  label: enhancement
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.336883002 Z
-  what: label-was-attached
-  when: 2015-05-07 17:38:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 5822
-  _job: 18141815809
-  _time: 2025-09-30 19:58:02.131877909 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#260.
-  is_human: 1
-  issue: 260
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.373016380 Z
-  what: label-was-attached
-  when: 2015-05-07 17:38:41.000000000 Z
-  where: github
-  who: 526301
-- _id: 5823
-  _job: 18141815809
-  _time: 2025-09-30 19:58:02.431104482 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'enhancement' label was attached by @yegor256 to the issue yegor256/takes#260.
-  is_human: 1
-  issue: 260
-  label: enhancement
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.391904563 Z
-  what: label-was-attached
-  when: 2015-05-07 17:38:41.000000000 Z
-  where: github
-  who: 526301
-- _id: 5824
-  _job: 18141815809
-  _time: 2025-09-30 19:58:03.908921255 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#263.
-  is_human: 1
-  issue: 263
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.430092811 Z
-  what: label-was-attached
-  when: 2015-05-08 19:02:35.000000000 Z
-  where: github
-  who: 526301
-- _id: 5825
-  _job: 18141815809
-  _time: 2025-09-30 19:58:05.264177166 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#265.
-  is_human: 1
-  issue: 265
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.510601925 Z
-  what: label-was-attached
-  when: 2015-05-08 22:37:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 5826
-  _job: 18141815809
-  _time: 2025-09-30 19:58:05.874202336 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#266.
-  is_human: 1
-  issue: 266
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.564049676 Z
-  what: label-was-attached
-  when: 2015-05-09 00:13:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 5827
-  _job: 18141815809
-  _time: 2025-09-30 19:58:07.743761630 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#271.
-  is_human: 1
-  issue: 271
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.644846969 Z
-  what: label-was-attached
-  when: 2015-05-09 22:57:13.000000000 Z
-  where: github
-  who: 526301
-- _id: 5828
-  _job: 18141815809
-  _time: 2025-09-30 19:58:08.356701064 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#272.
-  is_human: 1
-  issue: 272
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.683902739 Z
-  what: label-was-attached
-  when: 2015-05-10 02:05:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 5829
-  _job: 18141815809
-  _time: 2025-09-30 19:58:09.004502111 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#273.
-  is_human: 1
-  issue: 273
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.738470957 Z
-  what: label-was-attached
-  when: 2015-05-10 02:34:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 5830
-  _job: 18141815809
-  _time: 2025-09-30 19:58:09.810249207 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#274.
-  is_human: 1
-  issue: 274
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.784988257 Z
-  what: label-was-attached
-  when: 2015-05-10 03:38:54.000000000 Z
-  where: github
-  who: 526301
-- _id: 5831
-  _job: 18141815809
-  _time: 2025-09-30 19:58:12.058221928 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @yegor256 to the issue yegor256/takes#277.
-  is_human: 1
-  issue: 277
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.864659764 Z
-  what: label-was-attached
-  when: 2015-05-10 23:22:13.000000000 Z
-  where: github
-  who: 526301
-- _id: 5832
-  _job: 18141815809
-  _time: 2025-09-30 19:58:13.483991441 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @davvd to the issue yegor256/takes#278.
-  is_human: 1
-  issue: 278
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:16.920539592 Z
-  what: label-was-attached
-  when: 2015-05-11 10:34:37.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5833
-  _job: 18141815809
-  _time: 2025-09-30 19:58:16.953593431 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @davvd to the issue yegor256/takes#285.
-  is_human: 1
-  issue: 285
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:17.013908292 Z
-  what: label-was-attached
-  when: 2015-05-14 09:33:15.000000000 Z
-  where: github
-  who: 6305016
-- _id: 5834
-  _job: 18141815809
-  _time: 2025-09-30 19:58:18.007271282 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: The 'bug' label was attached by @davvd to the issue yegor256/takes#286.
-  is_human: 1
-  issue: 286
-  label: bug
-  repository: 28924109
-  tombstone: 2025-09-30 20:02:17.058957088 Z
-  what: label-was-attached
-  when: 2015-05-14 09:33:15.000000000 Z
-  where: github
-  who: 6305016
 - _id: 5835
   _job: 18141815809
   _time: 2025-09-30 19:58:19.420664660 Z
@@ -12751,12 +11638,6 @@
   when: 2018-12-10 00:13:17.000000000 Z
   where: github
   who: 24456188
-- _id: 6072
-  _job: 40563
-  _time: 2025-09-30 23:00:09.687380821 Z
-  _version: 0.16.7/0.54.0/0.15.48!0.15.49
-  what: learn-eva
-  when: 2025-09-30 23:00:09.651139725 Z
 - _id: 6074
   _job: 18146632870
   _time: 2025-09-30 23:57:56.009291221 Z
@@ -19573,8 +18454,9 @@
   is_human: 1
   issue: 925
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.229492972 Z
   what: issue-was-opened
-  when: 2019-01-01 16:03:44.000000000 Z
+  when: &64 2019-01-01 16:03:44.000000000 Z
   where: github
   who: 1964562
 - _id: 6623
@@ -19585,6 +18467,7 @@
   is_human: 0
   issue: 935
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.267539548 Z
   what: issue-was-opened
   when: 2019-01-04 16:04:41.000000000 Z
   where: github
@@ -27992,256 +26875,6 @@
   when: *63
   where: github
   who: 33915433
-- _id: 7286
-  _job: 40620
-  _time: 2025-10-01 06:02:22.074788069 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  issues:
-  - 1-63
-  - 66-68
-  - 70-74
-  - 76-77
-  - '79'
-  - '82'
-  - '85'
-  - 87-88
-  - 90-92
-  - '94'
-  - 96-97
-  - 99-102
-  - 105-115
-  - 119-121
-  - '124'
-  - '126'
-  - 129-130
-  - 132-133
-  - 135-141
-  - 144-149
-  - 152-155
-  - 158-161
-  - '163'
-  - 166-167
-  - 170-174
-  - '182'
-  - '184'
-  - '187'
-  - '190'
-  - 194-196
-  - 198-199
-  - '201'
-  - 205-206
-  - '209'
-  - '211'
-  - '213'
-  - '217'
-  - 219-222
-  - 226-227
-  - 229-231
-  - 236-237
-  - '239'
-  - 242-243
-  - 247-254
-  - 256-260
-  - 263-266
-  - '268'
-  - 271-278
-  - '281'
-  - 284-287
-  - 290-296
-  - '298'
-  - '302'
-  - 306-307
-  - 309-310
-  - 312-313
-  - '317'
-  - 319-323
-  - 330-331
-  - '333'
-  - '336'
-  - '339'
-  - 341-342
-  - 345-346
-  - 349-355
-  - 359-364
-  - 367-373
-  - 375-377
-  - '379'
-  - 382-384
-  - 387-392
-  - 394-396
-  - 399-403
-  - 406-408
-  - '410'
-  - 412-414
-  - 416-420
-  - '423'
-  - 427-433
-  - 436-439
-  - 441-445
-  - 448-450
-  - 453-456
-  - '458'
-  - 461-463
-  - 469-470
-  - '473'
-  - '475'
-  - 480-482
-  - 485-486
-  - 490-492
-  - 495-498
-  - '502'
-  - 504-506
-  - 508-512
-  - 516-517
-  - 519-524
-  - '530'
-  - 533-534
-  - '540'
-  - '542'
-  - '544'
-  - '548'
-  - '550'
-  - 554-558
-  - 560-561
-  - '566'
-  - 573-578
-  - 581-582
-  - '584'
-  - '586'
-  - 588-591
-  - 594-598
-  - '600'
-  - '602'
-  - '604'
-  - 606-609
-  - 614-615
-  - 617-618
-  - '620'
-  - 622-627
-  - '635'
-  - 637-638
-  - 642-643
-  - 645-646
-  - 651-652
-  - 654-656
-  - '660'
-  - '664'
-  - 666-667
-  - '669'
-  - 671-672
-  - '674'
-  - 678-679
-  - 682-687
-  - 691-698
-  - 704-705
-  - '707'
-  - 712-713
-  - 718-720
-  - '723'
-  - 725-726
-  - 728-731
-  - '733'
-  - '735'
-  - 737-742
-  - '744'
-  - 746-747
-  - 749-751
-  - 753-755
-  - '758'
-  - 763-767
-  - 769-771
-  - 774-775
-  - 778-782
-  - '784'
-  - 786-788
-  - 790-791
-  - 793-796
-  - '798'
-  - '800'
-  - '802'
-  - 804-806
-  - '808'
-  - 810-812
-  - 814-829
-  - '832'
-  - 834-835
-  - 837-839
-  - 841-842
-  - '847'
-  - 850-851
-  - '856'
-  - 858-859
-  - 861-863
-  - 865-866
-  - '869'
-  - '872'
-  - 876-877
-  - 880-882
-  - '884'
-  - 887-889
-  - '893'
-  - '895'
-  - '902'
-  - '904'
-  - '911'
-  - 917-918
-  - '921'
-  - '925'
-  - '935'
-  - 937-938
-  - '943'
-  - '945'
-  - '948'
-  - 950-953
-  - 957-959
-  - '968'
-  - 975-976
-  - '980'
-  - '984'
-  - 990-991
-  - 997-999
-  - '1002'
-  - '1008'
-  - 1010-1017
-  - '1019'
-  - '1022'
-  - 1024-1025
-  - '1027'
-  - '1032'
-  - '1036'
-  - '1041'
-  - 1049-1050
-  - 1054-1055
-  - '1058'
-  - '1060'
-  - '1062'
-  - '1067'
-  - 1069-1071
-  - 1073-1075
-  - 1077-1081
-  - '1083'
-  - 1088-1090
-  - '1099'
-  - 1108-1113
-  - '1116'
-  - '1118'
-  - 1127-1132
-  - '1134'
-  - '1136'
-  - 1139-1140
-  - 1142-1146
-  - '1206'
-  - '1215'
-  - '1227'
-  - '1293'
-  - '1301'
-  - '1334'
-  - '1339'
-  - '1363'
-  - '1368'
-  repository: 28924109
-  what: tombstone
-  where: github
 - _id: 7288
   _job: 18154067590
   _time: 2025-10-01 06:57:13.342871012 Z
@@ -28490,6 +27123,7 @@
   is_human: 0
   issue: 938
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.314809499 Z
   what: issue-was-opened
   when: 2019-01-11 15:29:42.000000000 Z
   where: github
@@ -28502,8 +27136,9 @@
   is_human: 1
   issue: 1036
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.358831184 Z
   what: issue-was-opened
-  when: 2020-03-09 17:59:45.000000000 Z
+  when: &65 2020-03-09 17:59:45.000000000 Z
   where: github
   who: 33915433
 - _id: 7310
@@ -28514,6 +27149,7 @@
   is_human: 1
   issue: 1041
   repository: 28924109
+  tombstone: 2025-10-01 07:03:13.507699956 Z
   what: issue-was-opened
   when: 2020-03-23 21:43:22.000000000 Z
   where: github
@@ -28526,8 +27162,9 @@
   is_human: 1
   issue: 1049
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.390113745 Z
   what: issue-was-opened
-  when: 2020-05-11 13:54:57.000000000 Z
+  when: &66 2020-05-11 13:54:57.000000000 Z
   where: github
   who: 3167940
 - _id: 7312
@@ -28538,8 +27175,9 @@
   is_human: 1
   issue: 1050
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.422350606 Z
   what: issue-was-opened
-  when: 2020-06-02 17:41:15.000000000 Z
+  when: &67 2020-06-02 17:41:15.000000000 Z
   where: github
   who: 15564192
 - _id: 7313
@@ -28550,6 +27188,7 @@
   is_human: 0
   issue: 1054
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.457194799 Z
   what: issue-was-opened
   when: 2020-06-29 18:07:57.000000000 Z
   where: github
@@ -28562,6 +27201,7 @@
   is_human: 0
   issue: 1055
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.502334443 Z
   what: issue-was-opened
   when: 2020-06-29 18:08:22.000000000 Z
   where: github
@@ -28574,8 +27214,9 @@
   is_human: 1
   issue: 1058
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.546013960 Z
   what: issue-was-opened
-  when: 2020-07-25 06:10:02.000000000 Z
+  when: &68 2020-07-25 06:10:02.000000000 Z
   where: github
   who: 48498823
 - _id: 7316
@@ -28586,8 +27227,9 @@
   is_human: 1
   issue: 1060
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.576233016 Z
   what: issue-was-opened
-  when: 2020-07-28 08:32:58.000000000 Z
+  when: &69 2020-07-28 08:32:58.000000000 Z
   where: github
   who: 41422
 - _id: 7317
@@ -28598,6 +27240,7 @@
   is_human: 0
   issue: 1062
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.608302789 Z
   what: issue-was-opened
   when: 2020-07-28 20:28:30.000000000 Z
   where: github
@@ -28610,6 +27253,7 @@
   is_human: 1
   issue: 1067
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.651121368 Z
   what: issue-was-opened
   when: 2020-09-03 20:12:49.000000000 Z
   where: github
@@ -28622,8 +27266,9 @@
   is_human: 1
   issue: 1069
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.694366709 Z
   what: issue-was-opened
-  when: 2020-09-08 10:07:24.000000000 Z
+  when: &70 2020-09-08 10:07:24.000000000 Z
   where: github
   who: 1964562
 - _id: 7320
@@ -28634,8 +27279,9 @@
   is_human: 1
   issue: 1070
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.738142625 Z
   what: issue-was-opened
-  when: 2020-09-08 10:09:02.000000000 Z
+  when: &71 2020-09-08 10:09:02.000000000 Z
   where: github
   who: 1964562
 - _id: 7321
@@ -28646,8 +27292,9 @@
   is_human: 1
   issue: 1071
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.770438313 Z
   what: issue-was-opened
-  when: 2020-09-08 15:08:41.000000000 Z
+  when: &72 2020-09-08 15:08:41.000000000 Z
   where: github
   who: 1964562
 - _id: 7322
@@ -28658,6 +27305,7 @@
   is_human: 0
   issue: 1073
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.802974134 Z
   what: issue-was-opened
   when: 2020-09-11 04:12:00.000000000 Z
   where: github
@@ -28670,6 +27318,7 @@
   is_human: 0
   issue: 1074
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.846832457 Z
   what: issue-was-opened
   when: 2020-09-11 04:12:29.000000000 Z
   where: github
@@ -28682,6 +27331,7 @@
   is_human: 0
   issue: 1075
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.889059523 Z
   what: issue-was-opened
   when: 2020-09-11 04:12:51.000000000 Z
   where: github
@@ -28694,6 +27344,7 @@
   is_human: 1
   issue: 1077
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.931880031 Z
   what: issue-was-opened
   when: 2020-09-23 16:19:19.000000000 Z
   where: github
@@ -28706,6 +27357,7 @@
   is_human: 1
   issue: 1078
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.973983043 Z
   what: issue-was-opened
   when: 2020-09-27 23:52:52.000000000 Z
   where: github
@@ -28718,8 +27370,9 @@
   is_human: 1
   issue: 1079
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.004254337 Z
   what: issue-was-opened
-  when: 2020-10-09 12:34:48.000000000 Z
+  when: &73 2020-10-09 12:34:48.000000000 Z
   where: github
   who: 186421
 - _id: 7328
@@ -28730,6 +27383,7 @@
   is_human: 0
   issue: 1080
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.036148965 Z
   what: issue-was-opened
   when: 2020-10-16 00:48:50.000000000 Z
   where: github
@@ -28742,6 +27396,7 @@
   is_human: 1
   issue: 1081
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.080264983 Z
   what: issue-was-opened
   when: 2020-10-21 23:57:38.000000000 Z
   where: github
@@ -28754,8 +27409,9 @@
   is_human: 1
   issue: 1083
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.123205588 Z
   what: issue-was-opened
-  when: 2020-10-23 17:26:16.000000000 Z
+  when: &74 2020-10-23 17:26:16.000000000 Z
   where: github
   who: 49783909
 - _id: 7331
@@ -28766,6 +27422,7 @@
   is_human: 0
   issue: 1088
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.167699628 Z
   what: issue-was-opened
   when: 2020-10-31 15:35:09.000000000 Z
   where: github
@@ -28778,8 +27435,9 @@
   is_human: 1
   issue: 1089
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.210826309 Z
   what: issue-was-opened
-  when: 2021-01-19 21:44:17.000000000 Z
+  when: &75 2021-01-19 21:44:17.000000000 Z
   where: github
   who: 7648662
 - _id: 7333
@@ -28790,8 +27448,9 @@
   is_human: 1
   issue: 1090
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.242628129 Z
   what: issue-was-opened
-  when: 2021-01-20 02:31:00.000000000 Z
+  when: &76 2021-01-20 02:31:00.000000000 Z
   where: github
   who: 7648662
 - _id: 7334
@@ -28802,8 +27461,9 @@
   is_human: 1
   issue: 1099
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.274254664 Z
   what: issue-was-opened
-  when: 2021-04-04 21:52:05.000000000 Z
+  when: &77 2021-04-04 21:52:05.000000000 Z
   where: github
   who: 19623042
 - _id: 7335
@@ -28814,6 +27474,7 @@
   is_human: 0
   issue: 1108
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.307168934 Z
   what: issue-was-opened
   when: 2021-09-01 17:55:40.000000000 Z
   where: github
@@ -28826,8 +27487,9 @@
   is_human: 1
   issue: 1109
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.350561338 Z
   what: issue-was-opened
-  when: 2021-09-03 08:47:28.000000000 Z
+  when: &78 2021-09-03 08:47:28.000000000 Z
   where: github
   who: 9504395
 - _id: 7337
@@ -28838,6 +27500,7 @@
   is_human: 1
   issue: 1110
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.382391680 Z
   what: issue-was-opened
   when: 2021-11-14 05:04:23.000000000 Z
   where: github
@@ -28850,6 +27513,7 @@
   is_human: 1
   issue: 1111
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.414975922 Z
   what: issue-was-opened
   when: 2021-11-30 21:52:46.000000000 Z
   where: github
@@ -28862,6 +27526,7 @@
   is_human: 0
   issue: 1112
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.448705513 Z
   what: issue-was-opened
   when: 2021-12-17 12:53:27.000000000 Z
   where: github
@@ -28886,6 +27551,7 @@
   is_human: 1
   issue: 1116
   repository: 28924109
+  tombstone: 2025-10-01 07:03:13.559270711 Z
   what: issue-was-opened
   when: 2022-01-14 08:04:37.000000000 Z
   where: github
@@ -29360,6 +28026,7 @@
   issue: 935
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.279389933 Z
   what: label-was-attached
   when: 2019-01-04 16:04:42.000000000 Z
   where: github
@@ -29373,6 +28040,7 @@
   issue: 938
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.325552666 Z
   what: label-was-attached
   when: 2019-01-11 15:29:44.000000000 Z
   where: github
@@ -29386,8 +28054,9 @@
   issue: 1041
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:03:13.530765655 Z
   what: label-was-attached
-  when: 2022-08-24 03:33:50.000000000 Z
+  when: &79 2022-08-24 03:33:50.000000000 Z
   where: github
   who: 526301
 - _id: 7382
@@ -29399,6 +28068,7 @@
   issue: 1054
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.469694311 Z
   what: label-was-attached
   when: 2020-06-29 18:07:59.000000000 Z
   where: github
@@ -29412,6 +28082,7 @@
   issue: 1055
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.513812290 Z
   what: label-was-attached
   when: 2020-06-29 18:08:24.000000000 Z
   where: github
@@ -29425,6 +28096,7 @@
   issue: 1062
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.620129031 Z
   what: label-was-attached
   when: 2020-07-28 20:28:32.000000000 Z
   where: github
@@ -29438,6 +28110,7 @@
   issue: 1073
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.815251086 Z
   what: label-was-attached
   when: 2020-09-11 04:12:01.000000000 Z
   where: github
@@ -29451,6 +28124,7 @@
   issue: 1074
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.857648566 Z
   what: label-was-attached
   when: 2020-09-11 04:12:31.000000000 Z
   where: github
@@ -29464,6 +28138,7 @@
   issue: 1075
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.899904225 Z
   what: label-was-attached
   when: 2020-09-11 04:12:52.000000000 Z
   where: github
@@ -29477,6 +28152,7 @@
   issue: 1080
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.047755530 Z
   what: label-was-attached
   when: 2020-10-16 00:48:52.000000000 Z
   where: github
@@ -29490,6 +28166,7 @@
   issue: 1088
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.178720579 Z
   what: label-was-attached
   when: 2020-10-31 15:35:11.000000000 Z
   where: github
@@ -29503,6 +28180,7 @@
   issue: 1108
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.318700977 Z
   what: label-was-attached
   when: 2021-09-01 17:55:41.000000000 Z
   where: github
@@ -29516,6 +28194,7 @@
   issue: 1112
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.460958247 Z
   what: label-was-attached
   when: 2021-12-17 12:53:29.000000000 Z
   where: github
@@ -29542,8 +28221,9 @@
   issue: 1116
   label: bug
   repository: 28924109
+  tombstone: 2025-10-01 07:03:13.571203428 Z
   what: label-was-attached
-  when: 2022-08-24 03:18:51.000000000 Z
+  when: &80 2022-08-24 03:18:51.000000000 Z
   where: github
   who: 526301
 - _id: 7394
@@ -29568,6 +28248,7 @@
   is_human: 1
   issue: 1067
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.662379721 Z
   what: issue-was-assigned
   when: 2020-10-31 15:22:43.000000000 Z
   where: github
@@ -29581,6 +28262,7 @@
   is_human: 1
   issue: 1069
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.705947420 Z
   what: issue-was-assigned
   when: 2022-03-26 13:22:13.000000000 Z
   where: github
@@ -29594,6 +28276,7 @@
   is_human: 1
   issue: 1077
   repository: 28924109
+  tombstone: 2025-10-01 07:02:06.942692301 Z
   what: issue-was-assigned
   when: 2020-10-31 13:06:08.000000000 Z
   where: github
@@ -29607,6 +28290,7 @@
   is_human: 1
   issue: 1081
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.091216736 Z
   what: issue-was-assigned
   when: 2020-10-31 15:25:58.000000000 Z
   where: github
@@ -29620,6 +28304,7 @@
   is_human: 1
   issue: 1083
   repository: 28924109
+  tombstone: 2025-10-01 07:02:07.134243568 Z
   what: issue-was-assigned
   when: 2020-10-31 15:19:41.000000000 Z
   where: github
@@ -29640,8 +28325,10 @@
   _time: 2025-10-01 07:01:23.936967334 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#925 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.202682590 Z
   issue: 925
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.745032665 Z
   what: issue-was-closed
   when: 2019-01-17 16:59:29.000000000 Z
   where: github
@@ -29651,8 +28338,10 @@
   _time: 2025-10-01 07:01:25.798467056 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#935 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.243567211 Z
   issue: 935
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.763606986 Z
   what: issue-was-closed
   when: 2019-01-16 22:27:01.000000000 Z
   where: github
@@ -29662,8 +28351,10 @@
   _time: 2025-10-01 07:01:26.137906599 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#938 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.297384553 Z
   issue: 938
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.777898017 Z
   what: issue-was-closed
   when: 2019-01-24 16:48:59.000000000 Z
   where: github
@@ -29673,8 +28364,10 @@
   _time: 2025-10-01 07:01:31.987792174 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1036 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.343329596 Z
   issue: 1036
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.791682590 Z
   what: issue-was-closed
   when: 2022-06-01 05:06:08.000000000 Z
   where: github
@@ -29684,8 +28377,10 @@
   _time: 2025-10-01 07:01:32.962448479 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1049 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.369581436 Z
   issue: 1049
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.807417125 Z
   what: issue-was-closed
   when: 2022-08-24 03:30:31.000000000 Z
   where: github
@@ -29695,8 +28390,10 @@
   _time: 2025-10-01 07:01:33.312445289 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1050 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.402031903 Z
   issue: 1050
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.820219371 Z
   what: issue-was-closed
   when: 2021-04-01 19:32:26.000000000 Z
   where: github
@@ -29706,8 +28403,10 @@
   _time: 2025-10-01 07:01:33.982856525 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1054 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.435231927 Z
   issue: 1054
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.839652266 Z
   what: issue-was-closed
   when: 2020-09-11 04:11:36.000000000 Z
   where: github
@@ -29717,8 +28416,10 @@
   _time: 2025-10-01 07:01:34.350003038 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1055 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.484860554 Z
   issue: 1055
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.853232845 Z
   what: issue-was-closed
   when: 2020-07-28 20:28:03.000000000 Z
   where: github
@@ -29728,8 +28429,10 @@
   _time: 2025-10-01 07:01:34.990486732 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1058 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.530700974 Z
   issue: 1058
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.866684355 Z
   what: issue-was-closed
   when: 2020-09-19 14:09:59.000000000 Z
   where: github
@@ -29739,8 +28442,10 @@
   _time: 2025-10-01 07:01:35.660699822 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1060 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.556496920 Z
   issue: 1060
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.882262247 Z
   what: issue-was-closed
   when: 2022-08-24 03:24:44.000000000 Z
   where: github
@@ -29750,8 +28455,10 @@
   _time: 2025-10-01 07:01:36.000748720 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1062 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.588020920 Z
   issue: 1062
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.895100741 Z
   what: issue-was-closed
   when: 2021-09-01 17:17:40.000000000 Z
   where: github
@@ -29761,8 +28468,10 @@
   _time: 2025-10-01 07:01:36.361053586 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1067 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.635238450 Z
   issue: 1067
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.915501680 Z
   what: issue-was-closed
   when: 2021-01-11 19:45:51.000000000 Z
   where: github
@@ -29772,8 +28481,10 @@
   _time: 2025-10-01 07:01:36.729351236 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1069 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.678477916 Z
   issue: 1069
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.929123319 Z
   what: issue-was-closed
   when: 2022-04-20 13:58:03.000000000 Z
   where: github
@@ -29783,8 +28494,10 @@
   _time: 2025-10-01 07:01:37.085656299 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1070 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.722374270 Z
   issue: 1070
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.944955491 Z
   what: issue-was-closed
   when: 2022-08-24 03:29:38.000000000 Z
   where: github
@@ -29794,8 +28507,10 @@
   _time: 2025-10-01 07:01:37.457598283 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1071 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.749507854 Z
   issue: 1071
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.957699634 Z
   what: issue-was-closed
   when: 2022-08-24 03:54:14.000000000 Z
   where: github
@@ -29805,8 +28520,10 @@
   _time: 2025-10-01 07:01:37.827782287 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1073 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.782411813 Z
   issue: 1073
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.976499260 Z
   what: issue-was-closed
   when: 2021-09-01 18:07:50.000000000 Z
   where: github
@@ -29816,8 +28533,10 @@
   _time: 2025-10-01 07:01:38.154472115 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1074 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.830677910 Z
   issue: 1074
   repository: 28924109
+  tombstone: 2025-10-01 07:02:54.990258903 Z
   what: issue-was-closed
   when: 2021-03-21 13:52:24.000000000 Z
   where: github
@@ -29827,8 +28546,10 @@
   _time: 2025-10-01 07:01:38.519034924 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1075 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.873655616 Z
   issue: 1075
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.006645388 Z
   what: issue-was-closed
   when: 2021-03-21 13:52:29.000000000 Z
   where: github
@@ -29838,8 +28559,10 @@
   _time: 2025-10-01 07:01:38.862245650 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1077 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.916131500 Z
   issue: 1077
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.019112897 Z
   what: issue-was-closed
   when: 2021-01-18 07:14:52.000000000 Z
   where: github
@@ -29849,8 +28572,10 @@
   _time: 2025-10-01 07:01:39.226018503 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1078 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.958700453 Z
   issue: 1078
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.031479764 Z
   what: issue-was-closed
   when: 2020-09-27 23:53:14.000000000 Z
   where: github
@@ -29860,8 +28585,10 @@
   _time: 2025-10-01 07:01:39.671708348 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1079 has been "issue-was-closed".
+  done: 2025-10-01 07:02:06.984413668 Z
   issue: 1079
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.051037237 Z
   what: issue-was-closed
   when: 2022-08-24 03:20:03.000000000 Z
   where: github
@@ -29871,8 +28598,10 @@
   _time: 2025-10-01 07:01:40.055232779 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1080 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.015662658 Z
   issue: 1080
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.064649553 Z
   what: issue-was-closed
   when: 2022-01-18 07:21:28.000000000 Z
   where: github
@@ -29882,8 +28611,10 @@
   _time: 2025-10-01 07:01:40.397160780 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1081 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.064559640 Z
   issue: 1081
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.080499646 Z
   what: issue-was-closed
   when: 2021-01-12 00:14:08.000000000 Z
   where: github
@@ -29893,8 +28624,10 @@
   _time: 2025-10-01 07:01:40.818470959 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1083 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.107627077 Z
   issue: 1083
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.093151433 Z
   what: issue-was-closed
   when: 2020-10-31 15:20:38.000000000 Z
   where: github
@@ -29904,8 +28637,10 @@
   _time: 2025-10-01 07:01:41.187087307 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1088 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.150859618 Z
   issue: 1088
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.112217612 Z
   what: issue-was-closed
   when: 2021-11-15 05:59:21.000000000 Z
   where: github
@@ -29915,8 +28650,10 @@
   _time: 2025-10-01 07:01:41.789505222 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1089 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.195098602 Z
   issue: 1089
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.125651036 Z
   what: issue-was-closed
   when: 2022-08-24 03:23:32.000000000 Z
   where: github
@@ -29926,8 +28663,10 @@
   _time: 2025-10-01 07:01:42.152080616 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1090 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.221625440 Z
   issue: 1090
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.141786560 Z
   what: issue-was-closed
   when: 2022-08-24 03:21:10.000000000 Z
   where: github
@@ -29937,8 +28676,10 @@
   _time: 2025-10-01 07:01:43.067917760 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1099 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.254046615 Z
   issue: 1099
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.154174327 Z
   what: issue-was-closed
   when: 2021-11-14 05:33:48.000000000 Z
   where: github
@@ -29948,8 +28689,10 @@
   _time: 2025-10-01 07:01:44.035970110 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1108 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.285763385 Z
   issue: 1108
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.166730754 Z
   what: issue-was-closed
   when: 2022-08-22 06:07:47.000000000 Z
   where: github
@@ -29959,8 +28702,10 @@
   _time: 2025-10-01 07:01:44.401680006 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1109 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.334674757 Z
   issue: 1109
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.185688665 Z
   what: issue-was-closed
   when: 2022-08-24 03:19:15.000000000 Z
   where: github
@@ -29970,8 +28715,10 @@
   _time: 2025-10-01 07:01:44.748230010 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1110 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.361456243 Z
   issue: 1110
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.199347777 Z
   what: issue-was-closed
   when: 2022-06-01 05:05:52.000000000 Z
   where: github
@@ -29981,8 +28728,10 @@
   _time: 2025-10-01 07:01:45.097144776 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1111 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.393711417 Z
   issue: 1111
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.214834322 Z
   what: issue-was-closed
   when: 2021-12-18 21:46:37.000000000 Z
   where: github
@@ -29992,25 +28741,858 @@
   _time: 2025-10-01 07:01:45.707140589 Z
   _version: 0.16.7/0.54.0/0.15.49
   details: Apparently, yegor256/takes#1112 has been "issue-was-closed".
+  done: 2025-10-01 07:02:07.426770444 Z
   issue: 1112
   repository: 28924109
+  tombstone: 2025-10-01 07:02:55.227098244 Z
   what: issue-was-closed
   when: 2022-08-05 04:33:49.000000000 Z
   where: github
   who: 24456188
-- _id: 7437
-  _job: 18154067590
-  _time: 2025-10-01 07:01:45.768326091 Z
+- _id: 7438
+  _job: 40626
+  _time: 2025-10-01 07:02:08.883353909 Z
   _version: 0.16.7/0.54.0/0.15.49
-  assignees_were_scanned: 1110
+  closer: 33915433
+  details: 'In the repository #28924109, the user #1964562 submitted the issue #925
+    which was later closed by the user #33915433 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.589498905 Z
+  issue: 925
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.516296184 Z
+  what: dud-was-closed
+  when: *64
+  where: github
+  who: 1964562
+- _id: 7439
+  _job: 40626
+  _time: 2025-10-01 07:02:08.923804846 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #33915433 submitted the issue #1036
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.625709529 Z
+  issue: 1036
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.529144153 Z
+  what: dud-was-closed
+  when: *65
+  where: github
+  who: 33915433
+- _id: 7440
+  _job: 40626
+  _time: 2025-10-01 07:02:08.964980318 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #3167940 submitted the issue #1049
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.649273063 Z
+  issue: 1049
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.548296265 Z
+  what: dud-was-closed
+  when: *66
+  where: github
+  who: 3167940
+- _id: 7441
+  _job: 40626
+  _time: 2025-10-01 07:02:09.007280894 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 33915433
+  details: 'In the repository #28924109, the user #15564192 submitted the issue #1050
+    which was later closed by the user #33915433 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.681097442 Z
+  issue: 1050
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.562173185 Z
+  what: dud-was-closed
+  when: *67
+  where: github
+  who: 15564192
+- _id: 7442
+  _job: 40626
+  _time: 2025-10-01 07:02:09.050949207 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 33915433
+  details: 'In the repository #28924109, the user #48498823 submitted the issue #1058
+    which was later closed by the user #33915433 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.697754573 Z
+  issue: 1058
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.575790029 Z
+  what: dud-was-closed
+  when: *68
+  where: github
+  who: 48498823
+- _id: 7443
+  _job: 40626
+  _time: 2025-10-01 07:02:09.093490996 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #41422 submitted the issue #1060
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.713218652 Z
+  issue: 1060
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.589267072 Z
+  what: dud-was-closed
+  when: *69
+  where: github
+  who: 41422
+- _id: 7444
+  _job: 40626
+  _time: 2025-10-01 07:02:09.135079845 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 8086956
+  details: 'In the repository #28924109, the user #1964562 submitted the issue #1069
+    which was later closed by the user #8086956 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.728642854 Z
+  issue: 1069
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.606288185 Z
+  what: dud-was-closed
+  when: *70
+  where: github
+  who: 1964562
+- _id: 7445
+  _job: 40626
+  _time: 2025-10-01 07:02:09.177653463 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #1964562 submitted the issue #1070
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.742953100 Z
+  issue: 1070
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.618457028 Z
+  what: dud-was-closed
+  when: *71
+  where: github
+  who: 1964562
+- _id: 7446
+  _job: 40626
+  _time: 2025-10-01 07:02:09.219898697 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #1964562 submitted the issue #1071
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.761277948 Z
+  issue: 1071
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.630767433 Z
+  what: dud-was-closed
+  when: *72
+  where: github
+  who: 1964562
+- _id: 7447
+  _job: 40626
+  _time: 2025-10-01 07:02:09.261467957 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #186421 submitted the issue #1079
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.774919183 Z
+  issue: 1079
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.649967165 Z
+  what: dud-was-closed
+  when: *73
+  where: github
+  who: 186421
+- _id: 7448
+  _job: 40626
+  _time: 2025-10-01 07:02:09.303317665 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 33915433
+  details: 'In the repository #28924109, the user #49783909 submitted the issue #1083
+    which was later closed by the user #33915433 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.788604502 Z
+  issue: 1083
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.666048787 Z
+  what: dud-was-closed
+  when: *74
+  where: github
+  who: 49783909
+- _id: 7449
+  _job: 40626
+  _time: 2025-10-01 07:02:09.345957946 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #7648662 submitted the issue #1089
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.816173334 Z
+  issue: 1089
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.679503522 Z
+  what: dud-was-closed
+  when: *75
+  where: github
+  who: 7648662
+- _id: 7450
+  _job: 40626
+  _time: 2025-10-01 07:02:09.388011672 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #7648662 submitted the issue #1090
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.831481715 Z
+  issue: 1090
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.692788427 Z
+  what: dud-was-closed
+  when: *76
+  where: github
+  who: 7648662
+- _id: 7451
+  _job: 40626
+  _time: 2025-10-01 07:02:09.429985390 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #19623042 submitted the issue #1099
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.847578337 Z
+  issue: 1099
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.708958183 Z
+  what: dud-was-closed
+  when: *77
+  where: github
+  who: 19623042
+- _id: 7452
+  _job: 40626
+  _time: 2025-10-01 07:02:09.472094932 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  closer: 526301
+  details: 'In the repository #28924109, the user #9504395 submitted the issue #1109
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-01 07:03:13.863632017 Z
+  issue: 1109
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.721602634 Z
+  what: dud-was-closed
+  when: *78
+  where: github
+  who: 9504395
+- _id: 7453
+  _job: 40626
+  _time: 2025-10-01 07:02:51.939077006 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: "@yegor256 attached the '#bug' label to yegor256/takes#1041 reported by
+    @kleinesfilmroellchen; this means that a bug was accepted as valid, by the project
+    team."
+  done: 2025-10-01 07:03:13.490196998 Z
+  issue: 1041
+  reporter: 28656157
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.734491344 Z
+  what: bug-was-accepted
+  when: *79
+  where: github
+  who: 526301
+- _id: 7454
+  _job: 40626
+  _time: 2025-10-01 07:02:52.216123683 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: "@yegor256 attached the '#bug' label to yegor256/takes#1116 reported by
+    @golszewski86; this means that a bug was accepted as valid, by the project team."
+  done: 2025-10-01 07:03:13.543921368 Z
+  issue: 1116
+  reporter: 45224442
+  repository: 28924109
+  tombstone: 2025-10-01 07:03:42.753696424 Z
+  what: bug-was-accepted
+  when: *80
+  where: github
+  who: 526301
+- _id: 7455
+  _job: 40626
+  _time: 2025-10-01 07:02:56.762393624 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  issues:
+  - 1-63
+  - 66-68
+  - 70-74
+  - 76-77
+  - '79'
+  - '82'
+  - '85'
+  - 87-88
+  - 90-92
+  - '94'
+  - 96-97
+  - 99-102
+  - 105-115
+  - 119-121
+  - '124'
+  - '126'
+  - 129-130
+  - 132-133
+  - 135-141
+  - 144-149
+  - 152-155
+  - 158-161
+  - '163'
+  - 166-167
+  - 170-174
+  - '182'
+  - '184'
+  - '187'
+  - '190'
+  - 194-196
+  - 198-199
+  - '201'
+  - 205-206
+  - '209'
+  - '211'
+  - '213'
+  - '217'
+  - 219-222
+  - 226-227
+  - 229-231
+  - 236-237
+  - '239'
+  - 242-243
+  - 247-254
+  - 256-260
+  - 263-266
+  - '268'
+  - 271-278
+  - '281'
+  - 284-287
+  - 290-296
+  - '298'
+  - '302'
+  - 306-307
+  - 309-310
+  - 312-313
+  - '317'
+  - 319-323
+  - 330-331
+  - '333'
+  - '336'
+  - '339'
+  - 341-342
+  - 345-346
+  - 349-355
+  - 359-364
+  - 367-373
+  - 375-377
+  - '379'
+  - 382-384
+  - 387-392
+  - 394-396
+  - 399-403
+  - 406-408
+  - '410'
+  - 412-414
+  - 416-420
+  - '423'
+  - 427-433
+  - 436-439
+  - 441-445
+  - 448-450
+  - 453-456
+  - '458'
+  - 461-463
+  - 469-470
+  - '473'
+  - '475'
+  - 480-482
+  - 485-486
+  - 490-492
+  - 495-498
+  - '502'
+  - 504-506
+  - 508-512
+  - 516-517
+  - 519-524
+  - '530'
+  - 533-534
+  - '540'
+  - '542'
+  - '544'
+  - '548'
+  - '550'
+  - 554-558
+  - 560-561
+  - '566'
+  - 573-578
+  - 581-582
+  - '584'
+  - '586'
+  - 588-591
+  - 594-598
+  - '600'
+  - '602'
+  - '604'
+  - 606-609
+  - 614-615
+  - 617-618
+  - '620'
+  - 622-627
+  - '635'
+  - 637-638
+  - 642-643
+  - 645-646
+  - 651-652
+  - 654-656
+  - '660'
+  - '664'
+  - 666-667
+  - '669'
+  - 671-672
+  - '674'
+  - 678-679
+  - 682-687
+  - 691-698
+  - 704-705
+  - '707'
+  - 712-713
+  - 718-720
+  - '723'
+  - 725-726
+  - 728-731
+  - '733'
+  - '735'
+  - 737-742
+  - '744'
+  - 746-747
+  - 749-751
+  - 753-755
+  - '758'
+  - 763-767
+  - 769-771
+  - 774-775
+  - 778-782
+  - '784'
+  - 786-788
+  - 790-791
+  - 793-796
+  - '798'
+  - '800'
+  - '802'
+  - 804-806
+  - '808'
+  - 810-812
+  - 814-829
+  - '832'
+  - 834-835
+  - 837-839
+  - 841-842
+  - '847'
+  - 850-851
+  - '856'
+  - 858-859
+  - 861-863
+  - 865-866
+  - '869'
+  - '872'
+  - 876-877
+  - 880-882
+  - '884'
+  - 887-889
+  - '893'
+  - '895'
+  - '902'
+  - '904'
+  - '911'
+  - 917-918
+  - '921'
+  - '925'
+  - '935'
+  - 937-938
+  - '943'
+  - '945'
+  - '948'
+  - 950-953
+  - 957-959
+  - '968'
+  - 975-976
+  - '980'
+  - '984'
+  - 990-991
+  - 997-999
+  - '1002'
+  - '1008'
+  - 1010-1017
+  - '1019'
+  - '1022'
+  - 1024-1025
+  - '1027'
+  - '1032'
+  - '1036'
+  - '1041'
+  - 1049-1050
+  - 1054-1055
+  - '1058'
+  - '1060'
+  - '1062'
+  - '1067'
+  - 1069-1071
+  - 1073-1075
+  - 1077-1081
+  - '1083'
+  - 1088-1090
+  - '1099'
+  - 1108-1113
+  - '1116'
+  - '1118'
+  - 1127-1132
+  - '1134'
+  - '1136'
+  - 1139-1140
+  - 1142-1146
+  - '1206'
+  - '1215'
+  - '1227'
+  - '1293'
+  - '1301'
+  - '1334'
+  - '1339'
+  - '1363'
+  - '1368'
+  repository: 28924109
+  what: tombstone
+  where: github
+- _id: 7456
+  _job: 40626
+  _time: 2025-10-01 07:04:01.876096519 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  what: learn-eva
+  when: 2025-10-01 07:04:01.833191472 Z
+- _id: 7458
+  _job: 18155404012
+  _time: 2025-10-01 07:56:07.585024673 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1128.
+  issue: 1128
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2022-07-11 09:28:50.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7459
+  _job: 18155404012
+  _time: 2025-10-01 07:56:07.958681757 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1129.
+  issue: 1129
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2022-07-11 09:28:55.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7460
+  _job: 18155404012
+  _time: 2025-10-01 07:56:09.094241215 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1130.
+  issue: 1130
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2022-07-11 09:29:00.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7461
+  _job: 18155404012
+  _time: 2025-10-01 07:56:09.609801427 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1131.
+  issue: 1131
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2022-07-11 09:29:05.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7462
+  _job: 18155404012
+  _time: 2025-10-01 07:56:12.950808795 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1143.
+  issue: 1143
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2022-08-24 03:13:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 7463
+  _job: 18155404012
+  _time: 2025-10-01 07:56:15.560224850 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1227.
+  issue: 1227
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2024-05-02 04:20:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 7465
+  _job: 18155404012
+  _time: 2025-10-01 07:56:22.993659652 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  assigner: 526301
+  details: yegor256/takes#1127 was assigned to @yegor256 by @yegor256.
+  issue: 1127
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2022-07-11 07:47:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 7467
+  _job: 18155404012
+  _time: 2025-10-01 07:57:28.087142339 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: The issue yegor256/takes#858 has been earlier opened by @grzechol.
+  issue: 858
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-10-10 06:17:38.000000000 Z
+  where: github
+  who: 4052869
+- _id: 7469
+  _job: 18155404012
+  _time: 2025-10-01 07:58:16.556546329 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1113 has been "issue-was-closed".
+  issue: 1113
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-05 04:33:54.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7470
+  _job: 18155404012
+  _time: 2025-10-01 07:58:17.161414275 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1118 has been "issue-was-closed".
+  issue: 1118
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-04-20 14:17:22.000000000 Z
+  where: github
+  who: 8086956
+- _id: 7471
+  _job: 18155404012
+  _time: 2025-10-01 07:58:17.647769561 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1127 has been "issue-was-closed".
+  issue: 1127
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-11 12:36:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 7472
+  _job: 18155404012
+  _time: 2025-10-01 07:58:17.978214343 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1128 has been "issue-was-closed".
+  issue: 1128
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-11 11:56:31.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7473
+  _job: 18155404012
+  _time: 2025-10-01 07:58:18.195933526 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1129 has been "issue-was-closed".
+  issue: 1129
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-11 11:56:37.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7474
+  _job: 18155404012
+  _time: 2025-10-01 07:58:18.391409301 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1130 has been "issue-was-closed".
+  issue: 1130
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-11 11:56:41.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7475
+  _job: 18155404012
+  _time: 2025-10-01 07:58:18.635039549 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1131 has been "issue-was-closed".
+  issue: 1131
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-15 15:37:09.000000000 Z
+  where: github
+  who: 24456188
+- _id: 7476
+  _job: 18155404012
+  _time: 2025-10-01 07:58:18.855792124 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1132 has been "issue-was-closed".
+  issue: 1132
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-11 14:19:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 7477
+  _job: 18155404012
+  _time: 2025-10-01 07:58:19.262654070 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1134 has been "issue-was-closed".
+  issue: 1134
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-07-16 17:12:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 7478
+  _job: 18155404012
+  _time: 2025-10-01 07:58:19.485825247 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1136 has been "issue-was-closed".
+  issue: 1136
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-05 05:24:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 7479
+  _job: 18155404012
+  _time: 2025-10-01 07:58:20.038073640 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1139 has been "issue-was-closed".
+  issue: 1139
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-10 05:52:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 7480
+  _job: 18155404012
+  _time: 2025-10-01 07:58:20.254718252 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1140 has been "issue-was-closed".
+  issue: 1140
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-11 04:25:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 7481
+  _job: 18155404012
+  _time: 2025-10-01 07:58:20.640475757 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1142 has been "issue-was-closed".
+  issue: 1142
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-22 06:18:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 7482
+  _job: 18155404012
+  _time: 2025-10-01 07:58:21.083189706 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1144 has been "issue-was-closed".
+  issue: 1144
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-23 07:10:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 7483
+  _job: 18155404012
+  _time: 2025-10-01 07:58:21.308532141 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1145 has been "issue-was-closed".
+  issue: 1145
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-24 03:29:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 7484
+  _job: 18155404012
+  _time: 2025-10-01 07:58:21.520045587 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1146 has been "issue-was-closed".
+  issue: 1146
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-26 17:11:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 7485
+  _job: 18155404012
+  _time: 2025-10-01 07:58:21.917620347 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1206 has been "issue-was-closed".
+  issue: 1206
+  repository: 28924109
+  what: issue-was-closed
+  when: 2024-02-05 08:49:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 7486
+  _job: 18155404012
+  _time: 2025-10-01 07:58:22.301990751 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1215 has been "issue-was-closed".
+  issue: 1215
+  repository: 28924109
+  what: issue-was-closed
+  when: 2023-06-12 06:45:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 7487
+  _job: 18155404012
+  _time: 2025-10-01 07:58:23.021346521 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  details: Apparently, yegor256/takes#1293 has been "issue-was-closed".
+  issue: 1293
+  repository: 28924109
+  what: issue-was-closed
+  when: 2024-09-19 02:54:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 7488
+  _job: 18155404012
+  _time: 2025-10-01 07:58:27.376497545 Z
+  _version: 0.16.7/0.54.0/0.15.49
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 55438803134
-  issues_were_scanned: 1112
-  labels_were_scanned: 1127
+  events_were_scanned: 55440587336
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   min_issue_was_found: 144
-  min_pull_was_found: 169
+  min_pull_was_found: 175
   repository: 28924109
-  types_were_scanned: 1110
+  types_were_scanned: 0
   what: iterate
   where: github
