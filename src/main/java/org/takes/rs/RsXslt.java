@@ -122,7 +122,8 @@ public final class RsXslt extends RsWrap {
                             true
                         );
                         return 0;
-                    }).value();
+                    }
+                ).value();
                 return fct;
             }
         );
