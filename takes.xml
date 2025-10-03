@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="742010">
+<fb version="0.11.0" size="742702">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <error>
-      <v t="S">Issue yegor256/takes#221 already closed</v>
+      <v t="S">Issue yegor256/takes#263 already closed</v>
       <v t="S">undefined method '[]' for nil</v>
     </error>
     <inserted t="I">8</inserted>
-    <seconds t="F">210.980339731</seconds>
+    <seconds t="F">165.592067854</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-02T22:59:53Z</when>
+    <when t="T">2025-10-03T00:01:55Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -16723,395 +16723,6 @@
     <when t="T">2025-10-01T19:57:18Z</when>
   </f>
   <f>
-    <_id t="I">10027</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:36Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#112 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">112</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T14:03:43Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-03T00:38:47Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10028</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:36Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#113 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">113</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T14:03:43Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-03T00:43:06Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10029</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:36Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#114 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">114</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-03T00:44:32Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10030</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:37Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#115 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">115</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-03T00:49:25Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10031</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:37Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#124 has been opened by @yamstranger.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">124</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T20:00:37Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-04T13:45:18Z</when>
-    <where t="S">github</where>
-    <who t="I">1667699</who>
-  </f>
-  <f>
-    <_id t="I">10032</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:38Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#129 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">129</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T20:00:37Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-05T03:00:58Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10033</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:38Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#133 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">133</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T20:00:37Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-05T18:31:09Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10034</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:38Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#140 has been opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">140</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-06T00:20:41Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10035</_id>
-    <_job t="I">18180443059</_job>
-    <_time t="T">2025-10-02T01:23:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The missing issue yegor256/takes#141 has been opened by @ghost.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">141</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-06T19:55:23Z</when>
-    <where t="S">github</where>
-    <who t="I">10137</who>
-  </f>
-  <f>
-    <_id t="I">10138</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:13Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#66.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">66</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:23Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-18T19:31:58Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10139</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:14Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#68.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">68</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:23Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-24T03:00:06Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10140</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:14Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#71.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">71</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:23Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-25T00:08:33Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10141</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:15Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#74.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">74</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:23Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-25T04:41:32Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10142</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:17Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#92.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">92</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:23Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-29T21:48:09Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10143</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:18Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#99.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">99</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T19:00:24Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-03-31T00:06:30Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10144</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:19Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#111.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">111</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T14:03:43Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-03T09:14:36Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10145</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:19Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#112.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">112</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T14:03:43Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-03T09:14:34Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10146</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:20Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#113.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">113</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T14:03:43Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-03T09:14:32Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10147</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:20Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#114.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">114</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-03T09:14:30Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10148</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:21Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#115.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">115</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-03T09:14:27Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10149</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:22Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#129.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">129</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T20:00:37Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-05T03:01:04Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10150</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:23Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#133.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">133</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T20:00:37Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-05T18:31:13Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10151</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:22:23Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#140.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">140</issue>
-    <label t="S">bug</label>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T15:01:33Z</tombstone>
-    <what t="S">label-was-attached</what>
-    <when t="T">2015-04-06T11:02:22Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10229</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:23:23Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#154 has been earlier opened by @mgooty.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">154</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T18:58:34Z</when>
-    <where t="S">github</where>
-    <who t="I">7974315</who>
-  </f>
-  <f>
-    <_id t="I">10230</_id>
-    <_job t="I">18181395169</_job>
-    <_time t="T">2025-10-02T02:23:23Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#153 has been earlier opened by @ikhvostenkov.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">153</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:10Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T14:44:21Z</when>
-    <where t="S">github</where>
-    <who t="I">861305</who>
-  </f>
-  <f>
     <_id t="I">10293</_id>
     <_job t="I">18182156065</_job>
     <_time t="T">2025-10-02T03:09:07Z</_time>
@@ -17164,381 +16775,6 @@
     <repository t="I">28924109</repository>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-14T01:08:18Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10297</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:08Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#258 has been earlier opened by @dmzaytsev.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">258</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T13:08:57Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-05-07T11:36:14Z</when>
-    <where t="S">github</where>
-    <who t="I">9972909</who>
-  </f>
-  <f>
-    <_id t="I">10298</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:08Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#257 has been earlier opened by @dmzaytsev.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">257</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T13:08:57Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-05-07T08:51:31Z</when>
-    <where t="S">github</where>
-    <who t="I">9972909</who>
-  </f>
-  <f>
-    <_id t="I">10299</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:09Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#211 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">211</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-27T01:16:22Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10300</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:09Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#209 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">209</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-25T03:22:57Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10301</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:09Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#206 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">206</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-22T21:16:59Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10302</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:09Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#205 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">205</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-22T21:09:36Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10303</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:09Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#201 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">201</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-22T03:03:46Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10304</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#198 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">198</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-21T19:21:56Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10305</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#196 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">196</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-21T03:37:16Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10306</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#195 has been earlier opened by @ikhvostenkov.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">195</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:34Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-20T23:50:17Z</when>
-    <where t="S">github</where>
-    <who t="I">861305</who>
-  </f>
-  <f>
-    <_id t="I">10307</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#194 has been earlier opened by @ikhvostenkov.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">194</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:34Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-20T23:38:45Z</when>
-    <where t="S">github</where>
-    <who t="I">861305</who>
-  </f>
-  <f>
-    <_id t="I">10308</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#190 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">190</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-20T01:10:43Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10309</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#187 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">187</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:11Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-17T23:26:42Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10310</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#184 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">184</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:10Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-16T03:03:13Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10311</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#182 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">182</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-16T02:08:56Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10312</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#174 has been earlier opened by @davvd.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">174</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:27Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-15T10:12:02Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10313</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:10Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#173 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">173</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-15T05:07:23Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10314</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#172 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">172</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-15T03:15:05Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10315</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#171 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">171</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-15T01:50:57Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10316</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#170 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">170</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-15T00:04:36Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10317</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#152 has been earlier opened by @davvd.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">152</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T12:32:20Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10318</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#149 has been earlier opened by @davvd.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">149</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T09:32:55Z</when>
-    <where t="S">github</where>
-    <who t="I">6305016</who>
-  </f>
-  <f>
-    <_id t="I">10319</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#148 has been earlier opened by @longtimeago.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">148</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T21:00:10Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T06:33:46Z</when>
-    <where t="S">github</where>
-    <who t="I">1388994</who>
-  </f>
-  <f>
-    <_id t="I">10320</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#147 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">147</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T06:18:51Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">10321</_id>
-    <_job t="I">18182156065</_job>
-    <_time t="T">2025-10-02T03:09:11Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#146 has been earlier opened by @yegor256.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">146</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-02T22:00:26Z</tombstone>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-07T04:51:41Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
@@ -18451,6 +17687,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">254</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-06T06:59:30Z</when>
     <where t="S">github</where>
@@ -18465,6 +17702,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">253</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-05T01:26:38Z</when>
     <where t="S">github</where>
@@ -18479,6 +17717,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">252</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-04T22:35:50Z</when>
     <where t="S">github</where>
@@ -18493,6 +17732,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">251</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-04T13:53:54Z</when>
     <where t="S">github</where>
@@ -18960,6 +18200,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">239</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-05-01T13:22:10Z</when>
     <where t="S">github</where>
@@ -19002,6 +18243,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">231</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-04-30T20:17:45Z</when>
     <where t="S">github</where>
@@ -19030,6 +18272,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">229</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-04-30T18:58:55Z</when>
     <where t="S">github</where>
@@ -19086,6 +18329,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">221</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-04-29T07:18:41Z</when>
     <where t="S">github</where>
@@ -19115,6 +18359,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">219</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:20Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-04-29T04:41:15Z</when>
     <where t="S">github</where>
@@ -19129,6 +18374,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">217</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">issue-was-opened</what>
     <when t="T">2015-04-28T20:42:44Z</when>
     <where t="S">github</where>
@@ -23280,6 +22526,7 @@
     <issue t="I">217</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-05T18:14:33Z</when>
     <where t="S">github</where>
@@ -23311,6 +22558,7 @@
     <issue t="I">221</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-04-29T20:40:07Z</when>
     <where t="S">github</where>
@@ -23326,6 +22574,7 @@
     <issue t="I">229</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-04-30T19:14:47Z</when>
     <where t="S">github</where>
@@ -23341,6 +22590,7 @@
     <issue t="I">231</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-04-30T23:45:03Z</when>
     <where t="S">github</where>
@@ -23356,6 +22606,7 @@
     <issue t="I">239</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-01T19:46:34Z</when>
     <where t="S">github</where>
@@ -23446,6 +22697,7 @@
     <issue t="I">251</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-04T19:11:30Z</when>
     <where t="S">github</where>
@@ -23461,6 +22713,7 @@
     <issue t="I">252</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-05T10:18:53Z</when>
     <where t="S">github</where>
@@ -23476,6 +22729,7 @@
     <issue t="I">253</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-05T18:26:46Z</when>
     <where t="S">github</where>
@@ -23491,6 +22745,7 @@
     <issue t="I">254</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:02Z</tombstone>
     <what t="S">label-was-attached</what>
     <when t="T">2015-05-06T07:11:12Z</when>
     <where t="S">github</where>
@@ -36117,6 +35372,7 @@
     <issue t="I">194</issue>
     <reporter t="I">861305</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-21T00:02:44Z</when>
     <where t="S">github</where>
@@ -36132,6 +35388,7 @@
     <issue t="I">195</issue>
     <reporter t="I">861305</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-21T00:02:11Z</when>
     <where t="S">github</where>
@@ -36148,6 +35405,7 @@
     <issue t="I">213</issue>
     <reporter t="I">416283</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-05-05T18:18:27Z</when>
     <where t="S">github</where>
@@ -36164,6 +35422,7 @@
     <issue t="I">220</issue>
     <reporter t="I">5760337</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-29T05:03:27Z</when>
     <where t="S">github</where>
@@ -36179,6 +35438,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">141</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2018-11-27T11:51:30Z</when>
     <where t="S">github</where>
@@ -36194,6 +35454,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">144</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-07T04:27:54Z</when>
     <where t="S">github</where>
@@ -36209,6 +35470,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">146</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-07T06:03:46Z</when>
     <where t="S">github</where>
@@ -36224,6 +35486,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">147</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-07T18:24:47Z</when>
     <where t="S">github</where>
@@ -36239,6 +35502,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">149</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-06-10T20:27:57Z</when>
     <where t="S">github</where>
@@ -36254,6 +35518,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">152</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-08T20:26:15Z</when>
     <where t="S">github</where>
@@ -36269,6 +35534,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">154</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-05-06T19:16:40Z</when>
     <where t="S">github</where>
@@ -36284,6 +35550,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">155</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-05-30T10:11:22Z</when>
     <where t="S">github</where>
@@ -36299,6 +35566,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">158</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-05-10T12:36:26Z</when>
     <where t="S">github</where>
@@ -36314,6 +35582,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">159</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-18T11:06:30Z</when>
     <where t="S">github</where>
@@ -36329,6 +35598,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">161</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-09T02:56:01Z</when>
     <where t="S">github</where>
@@ -36344,6 +35614,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">163</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-30T09:37:18Z</when>
     <where t="S">github</where>
@@ -36359,6 +35630,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">167</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-14T05:49:48Z</when>
     <where t="S">github</where>
@@ -36374,6 +35646,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">170</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-15T00:39:42Z</when>
     <where t="S">github</where>
@@ -36389,6 +35662,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">171</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-15T03:05:33Z</when>
     <where t="S">github</where>
@@ -36404,6 +35678,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">172</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-15T04:37:40Z</when>
     <where t="S">github</where>
@@ -36419,6 +35694,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">173</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-15T05:29:07Z</when>
     <where t="S">github</where>
@@ -36434,6 +35710,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">174</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-11-07T18:28:24Z</when>
     <where t="S">github</where>
@@ -36449,6 +35726,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">182</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-16T03:08:56Z</when>
     <where t="S">github</where>
@@ -36464,6 +35742,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">190</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-20T01:33:55Z</when>
     <where t="S">github</where>
@@ -36479,6 +35758,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">196</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-21T06:36:36Z</when>
     <where t="S">github</where>
@@ -36494,6 +35774,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">198</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-21T19:28:26Z</when>
     <where t="S">github</where>
@@ -36509,6 +35790,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">201</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-22T07:28:33Z</when>
     <where t="S">github</where>
@@ -36524,6 +35806,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">205</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:28Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-05-14T04:58:59Z</when>
     <where t="S">github</where>
@@ -36539,6 +35822,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">206</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-24T18:25:36Z</when>
     <where t="S">github</where>
@@ -36554,6 +35838,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">209</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-25T03:55:00Z</when>
     <where t="S">github</where>
@@ -36569,6 +35854,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">211</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">issue-was-closed</what>
     <when t="T">2015-04-30T19:24:23Z</when>
     <where t="S">github</where>
@@ -37045,10 +36331,12 @@
     <_time t="T">2025-10-02T22:00:29Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
     <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#221 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
     <is_human t="I">1</is_human>
     <issue t="I">221</issue>
     <reporter t="I">9972909</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-29T20:40:07Z</when>
     <where t="S">github</where>
@@ -37060,10 +36348,12 @@
     <_time t="T">2025-10-02T22:00:29Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
     <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#229 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
     <is_human t="I">1</is_human>
     <issue t="I">229</issue>
     <reporter t="I">9972909</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-30T19:14:47Z</when>
     <where t="S">github</where>
@@ -37075,19 +36365,280 @@
     <_time t="T">2025-10-02T22:00:30Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
     <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#231 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
     <is_human t="I">1</is_human>
     <issue t="I">231</issue>
     <reporter t="I">9972909</reporter>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
     <what t="S">bug-was-accepted</what>
     <when t="T">2015-04-30T23:45:03Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">12253</_id>
+    <_id t="I">12254</_id>
     <_job t="I">41014</_job>
-    <_time t="T">2025-10-02T22:00:36Z</_time>
+    <_time t="T">2025-10-02T22:00:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <closer t="I">33915433</closer>
+    <details t="S">In the repository #28924109, the user #10137 submitted the issue #141 which was later closed by the user #33915433 not becoming a bug or enhancement; this means that the issue was not valid, maybe a duplicate or simply a mistake.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
+    <is_human t="I">1</is_human>
+    <issue t="I">141</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
+    <what t="S">dud-was-closed</what>
+    <when t="T">2015-04-06T19:55:23Z</when>
+    <where t="S">github</where>
+    <who t="I">10137</who>
+  </f>
+  <f>
+    <_id t="I">12255</_id>
+    <_job t="I">41014</_job>
+    <_time t="T">2025-10-02T22:01:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#239 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
+    <is_human t="I">1</is_human>
+    <issue t="I">239</issue>
+    <reporter t="I">9972909</reporter>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-01T19:46:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12256</_id>
+    <_job t="I">41014</_job>
+    <_time t="T">2025-10-02T22:01:22Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#251 reported by @ikhvostenkov; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
+    <is_human t="I">1</is_human>
+    <issue t="I">251</issue>
+    <reporter t="I">861305</reporter>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-04T19:11:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12258</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:56:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#217 has been "issue-was-closed".</details>
+    <done t="T">2025-10-02T23:00:19Z</done>
+    <is_human t="I">1</is_human>
+    <issue t="I">217</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T23:00:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12259</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:56:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#219 has been "issue-was-closed".</details>
+    <done t="T">2025-10-02T23:00:20Z</done>
+    <is_human t="I">1</is_human>
+    <issue t="I">219</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:29Z</tombstone>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T05:02:30Z</when>
+    <where t="S">github</where>
+    <who t="I">5760337</who>
+  </f>
+  <f>
+    <_id t="I">12260</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:56:26Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#221 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">221</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:19Z</tombstone>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-13T11:44:32Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">12261</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:57:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#887 has been earlier opened by @0pdd.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">887</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:20Z</tombstone>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2018-12-10T00:13:17Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">12262</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:57:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#810 has been earlier opened by @t-izbassar.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">810</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:20Z</tombstone>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2018-02-24T09:46:39Z</when>
+    <where t="S">github</where>
+    <who t="I">24223260</who>
+  </f>
+  <f>
+    <_id t="I">12263</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:57:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#804 has been earlier opened by @ghost.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">804</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:20Z</tombstone>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2018-02-19T17:23:49Z</when>
+    <where t="S">github</where>
+    <who t="I">10137</who>
+  </f>
+  <f>
+    <_id t="I">12264</_id>
+    <_job t="I">18207747241</_job>
+    <_time t="T">2025-10-02T22:57:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#199 has been earlier opened by @marcuss.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">199</issue>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:00:20Z</tombstone>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-21T21:21:15Z</when>
+    <where t="S">github</where>
+    <who t="I">5760337</who>
+  </f>
+  <f>
+    <_id t="I">12266</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:00:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <closer t="I">526301</closer>
+    <details t="S">The bug/feature in the issue yegor256/takes#144 opened @yegor256 by was resolved, after 28m10s of waiting, because it was closed by @yegor256 and earlier it was assigned to @yegor256 and the label '#bug' was attached.</details>
+    <done t="T">2025-10-02T23:01:02Z</done>
+    <issue t="I">144</issue>
+    <label t="S">bug</label>
+    <opener t="I">526301</opener>
+    <repository t="I">28924109</repository>
+    <seconds t="I">1691</seconds>
+    <tombstone t="T">2025-10-02T23:01:03Z</tombstone>
+    <what t="S">bug-was-resolved</what>
+    <when t="T">2015-04-07T04:27:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12267</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:00:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <closer t="I">526301</closer>
+    <details t="S">The bug/feature in the issue yegor256/takes#146 opened @yegor256 by was resolved, after 1h11m of waiting, because it was closed by @yegor256 and earlier it was assigned to @yegor256 and the label '#bug' was attached.</details>
+    <done t="T">2025-10-02T23:01:02Z</done>
+    <issue t="I">146</issue>
+    <label t="S">bug</label>
+    <opener t="I">526301</opener>
+    <repository t="I">28924109</repository>
+    <seconds t="I">4290</seconds>
+    <tombstone t="T">2025-10-02T23:01:03Z</tombstone>
+    <what t="S">bug-was-resolved</what>
+    <when t="T">2015-04-07T06:03:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12269</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:00:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@davvd attached the '#bug' label to yegor256/takes#252 reported by @yegor256; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:01:02Z</done>
+    <issue t="I">252</issue>
+    <reporter t="I">526301</reporter>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:03Z</tombstone>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-05T10:18:53Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12270</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:00:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#253 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:01:02Z</done>
+    <issue t="I">253</issue>
+    <reporter t="I">9972909</reporter>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:03Z</tombstone>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-05T18:26:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12271</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:00:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#254 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <done t="T">2025-10-02T23:01:02Z</done>
+    <issue t="I">254</issue>
+    <reporter t="I">9972909</reporter>
+    <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-02T23:01:03Z</tombstone>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-06T07:11:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12273</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:01:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#263 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">263</issue>
+    <reporter t="I">9972909</reporter>
+    <repository t="I">28924109</repository>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2015-05-08T19:02:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12274</_id>
+    <_job t="I">41022</_job>
+    <_time t="T">2025-10-02T23:01:22Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
     <issues>
       <v t="S">1-63</v>
@@ -37338,163 +36889,594 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">12254</_id>
-    <_job t="I">41014</_job>
-    <_time t="T">2025-10-02T22:00:37Z</_time>
+    <_id t="I">12276</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:34Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <closer t="I">33915433</closer>
-    <details t="S">In the repository #28924109, the user #10137 submitted the issue #141 which was later closed by the user #33915433 not becoming a bug or enhancement; this means that the issue was not valid, maybe a duplicate or simply a mistake.</details>
+    <details t="S">Apparently, yegor256/takes#222 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">141</issue>
+    <issue t="I">222</issue>
     <repository t="I">28924109</repository>
-    <what t="S">dud-was-closed</what>
-    <when t="T">2015-04-06T19:55:23Z</when>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-09T20:59:16Z</when>
     <where t="S">github</where>
-    <who t="I">10137</who>
+    <who t="I">6305016</who>
   </f>
   <f>
-    <_id t="I">12255</_id>
-    <_job t="I">41014</_job>
-    <_time t="T">2025-10-02T22:01:21Z</_time>
+    <_id t="I">12277</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:35Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#239 reported by @dmzaytsev; this means that a bug was accepted as valid, by the project team.</details>
+    <details t="S">Apparently, yegor256/takes#226 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">239</issue>
-    <reporter t="I">9972909</reporter>
+    <issue t="I">226</issue>
     <repository t="I">28924109</repository>
-    <what t="S">bug-was-accepted</what>
-    <when t="T">2015-05-01T19:46:34Z</when>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-30T06:30:23Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">12278</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#227 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">227</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T13:05:58Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12279</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#230 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">230</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-13T15:33:01Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12280</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#236 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">236</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T20:35:17Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">12256</_id>
-    <_job t="I">41014</_job>
-    <_time t="T">2025-10-02T22:01:22Z</_time>
+    <_id t="I">12281</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:36Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">@yegor256 attached the '#bug' label to yegor256/takes#251 reported by @ikhvostenkov; this means that a bug was accepted as valid, by the project team.</details>
+    <details t="S">Apparently, yegor256/takes#237 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">251</issue>
-    <reporter t="I">861305</reporter>
+    <issue t="I">237</issue>
     <repository t="I">28924109</repository>
-    <what t="S">bug-was-accepted</what>
-    <when t="T">2015-05-04T19:11:30Z</when>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T20:35:45Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">12258</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:56:25Z</_time>
+    <_id t="I">12282</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#217 has been "issue-was-closed".</details>
+    <details t="S">Apparently, yegor256/takes#242 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">217</issue>
+    <issue t="I">242</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
-    <when t="T">2015-05-14T23:00:11Z</when>
+    <when t="T">2015-05-02T04:21:59Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">12259</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:56:25Z</_time>
+    <_id t="I">12283</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#219 has been "issue-was-closed".</details>
+    <details t="S">Apparently, yegor256/takes#243 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">219</issue>
+    <issue t="I">243</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
-    <when t="T">2015-05-01T05:02:30Z</when>
+    <when t="T">2015-05-10T12:36:26Z</when>
     <where t="S">github</where>
-    <who t="I">5760337</who>
+    <who t="I">6305016</who>
   </f>
   <f>
-    <_id t="I">12260</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:56:26Z</_time>
+    <_id t="I">12284</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#221 has been "issue-was-closed".</details>
+    <details t="S">Apparently, yegor256/takes#247 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">221</issue>
+    <issue t="I">247</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
-    <when t="T">2015-06-13T11:44:32Z</when>
+    <when t="T">2015-05-03T22:45:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12285</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#248 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">248</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T23:25:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12286</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#249 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">249</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-04T00:54:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12287</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#250 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">250</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-04T02:35:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12288</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">Apparently, yegor256/takes#256 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">256</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-07T19:00:33Z</when>
     <where t="S">github</where>
     <who t="I">9972909</who>
   </f>
   <f>
-    <_id t="I">12261</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:57:03Z</_time>
+    <_id t="I">12289</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-02T23:59:38Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#887 has been earlier opened by @0pdd.</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">887</issue>
-    <repository t="I">28924109</repository>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2018-12-10T00:13:17Z</when>
-    <where t="S">github</where>
-    <who t="I">24456188</who>
-  </f>
-  <f>
-    <_id t="I">12262</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:57:05Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#810 has been earlier opened by @t-izbassar.</details>
+    <details t="S">Apparently, yegor256/takes#263 has been "issue-was-closed".</details>
     <is_human t="I">1</is_human>
-    <issue t="I">810</issue>
+    <issue t="I">263</issue>
     <repository t="I">28924109</repository>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2018-02-24T09:46:39Z</when>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-17T16:12:23Z</when>
     <where t="S">github</where>
-    <who t="I">24223260</who>
+    <who t="I">9972909</who>
   </f>
   <f>
-    <_id t="I">12263</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:57:05Z</_time>
+    <_id t="I">12290</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:25Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#804 has been earlier opened by @ghost.</details>
+    <details t="S">The issue yegor256/takes#258 has been earlier opened by @dmzaytsev.</details>
     <is_human t="I">1</is_human>
-    <issue t="I">804</issue>
+    <issue t="I">258</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-opened</what>
-    <when t="T">2018-02-19T17:23:49Z</when>
+    <when t="T">2015-05-07T11:36:14Z</when>
     <where t="S">github</where>
-    <who t="I">10137</who>
+    <who t="I">9972909</who>
   </f>
   <f>
-    <_id t="I">12264</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:57:17Z</_time>
+    <_id t="I">12291</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:26Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">The issue yegor256/takes#199 has been earlier opened by @marcuss.</details>
+    <details t="S">The issue yegor256/takes#257 has been earlier opened by @dmzaytsev.</details>
     <is_human t="I">1</is_human>
-    <issue t="I">199</issue>
+    <issue t="I">257</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-opened</what>
-    <when t="T">2015-04-21T21:21:15Z</when>
+    <when t="T">2015-05-07T08:51:31Z</when>
     <where t="S">github</where>
-    <who t="I">5760337</who>
+    <who t="I">9972909</who>
   </f>
   <f>
-    <_id t="I">12265</_id>
-    <_job t="I">18207747241</_job>
-    <_time t="T">2025-10-02T22:58:56Z</_time>
+    <_id t="I">12292</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:27Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <assignees_were_scanned t="I">1409</assignees_were_scanned>
+    <details t="S">The issue yegor256/takes#211 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">211</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-27T01:16:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12293</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#209 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">209</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-25T03:22:57Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12294</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#206 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">206</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-22T21:16:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12295</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#205 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">205</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-22T21:09:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12296</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#201 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">201</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-22T03:03:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12297</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#198 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">198</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-21T19:21:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12298</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#196 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">196</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-21T03:37:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12299</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#195 has been earlier opened by @ikhvostenkov.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">195</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-20T23:50:17Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">12300</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#194 has been earlier opened by @ikhvostenkov.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">194</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-20T23:38:45Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">12301</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#190 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">190</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-20T01:10:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12302</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#187 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">187</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-17T23:26:42Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12303</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#184 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">184</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-16T03:03:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12304</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#182 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">182</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-16T02:08:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12305</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#174 has been earlier opened by @davvd.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">174</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-15T10:12:02Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12306</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#173 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">173</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-15T05:07:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12307</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#172 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">172</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-15T03:15:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12308</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#171 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">171</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-15T01:50:57Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12309</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#170 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">170</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-15T00:04:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12310</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#154 has been earlier opened by @mgooty.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">154</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T18:58:34Z</when>
+    <where t="S">github</where>
+    <who t="I">7974315</who>
+  </f>
+  <f>
+    <_id t="I">12311</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#153 has been earlier opened by @ikhvostenkov.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">153</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T14:44:21Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">12312</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#152 has been earlier opened by @davvd.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">152</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T12:32:20Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12313</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#149 has been earlier opened by @davvd.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">149</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T09:32:55Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">12314</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#148 has been earlier opened by @longtimeago.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">148</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T06:33:46Z</when>
+    <where t="S">github</where>
+    <who t="I">1388994</who>
+  </f>
+  <f>
+    <_id t="I">12315</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#147 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">147</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T06:18:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12316</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <details t="S">The issue yegor256/takes#146 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">146</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2015-04-07T04:51:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">12317</_id>
+    <_job t="I">18208703235</_job>
+    <_time t="T">2025-10-03T00:01:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55541069281</events_were_scanned>
+    <events_were_scanned t="I">55543090197</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">246</min_pull_was_found>
+    <min_pull_was_found t="I">255</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">994</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
