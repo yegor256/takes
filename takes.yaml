@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 603.541354347
+  seconds: 630.908819682
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-03 21:06:01.820821715 Z
+  when: 2025-10-03 22:06:33.509744797 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -3992,566 +3992,6 @@
   what: issue-was-lost
   when: 2025-10-01 04:57:14.592580229 Z
   where: github
-- _id: 6629
-  _job: 18151820789
-  _time: 2025-10-01 04:57:16.452406453 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#804"
-  details: The missing pull yegor256/takes#942 has been opened by @serranya.
-  is_human: 1
-  issue: 942
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.577790985 Z
-  what: pull-was-opened
-  when: 2019-01-15 21:24:29.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6630
-  _job: 18151820789
-  _time: 2025-10-01 04:57:17.086362299 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#577"
-  details: The missing pull yegor256/takes#947 has been opened by @serranya.
-  is_human: 1
-  issue: 947
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.643592074 Z
-  what: pull-was-opened
-  when: 2019-01-16 11:51:36.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6631
-  _job: 18151820789
-  _time: 2025-10-01 04:57:17.676395836 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '953'
-  details: The missing pull yegor256/takes#954 has been opened by @fabriciofx.
-  is_human: 1
-  issue: 954
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.726685835 Z
-  what: pull-was-opened
-  when: 2019-01-24 20:31:24.000000000 Z
-  where: github
-  who: 1964562
-- _id: 6632
-  _job: 18151820789
-  _time: 2025-10-01 04:57:18.178545953 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: master
-  details: The missing pull yegor256/takes#956 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 956
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.806050065 Z
-  what: pull-was-opened
-  when: 2019-01-26 13:25:38.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6633
-  _job: 18151820789
-  _time: 2025-10-01 04:57:18.721566769 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#888"
-  details: The missing pull yegor256/takes#960 has been opened by @serranya.
-  is_human: 1
-  issue: 960
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.865997974 Z
-  what: pull-was-opened
-  when: 2019-02-05 14:01:07.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6634
-  _job: 18151820789
-  _time: 2025-10-01 04:57:19.258850481 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '895'
-  details: The missing pull yegor256/takes#961 has been opened by @marceloamadeu.
-  is_human: 1
-  issue: 961
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.099272226 Z
-  what: pull-was-opened
-  when: 2019-02-07 12:57:04.000000000 Z
-  where: github
-  who: 45645330
-- _id: 6635
-  _job: 18151820789
-  _time: 2025-10-01 04:57:19.792961436 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '884'
-  details: The missing pull yegor256/takes#962 has been opened by @danilomo.
-  is_human: 1
-  issue: 962
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.393893129 Z
-  what: pull-was-opened
-  when: 2019-02-09 15:02:57.000000000 Z
-  where: github
-  who: 889052
-- _id: 6636
-  _job: 18151820789
-  _time: 2025-10-01 04:57:20.483955087 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '944'
-  details: The missing pull yegor256/takes#963 has been opened by @marceloamadeu.
-  is_human: 1
-  issue: 963
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.164272402 Z
-  what: pull-was-opened
-  when: 2019-02-12 19:48:09.000000000 Z
-  where: github
-  who: 45645330
-- _id: 6637
-  _job: 18151820789
-  _time: 2025-10-01 04:57:20.984608679 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '902'
-  details: The missing pull yegor256/takes#964 has been opened by @oridan.
-  is_human: 1
-  issue: 964
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.913408061 Z
-  what: pull-was-opened
-  when: 2019-02-13 19:26:38.000000000 Z
-  where: github
-  who: 29357595
-- _id: 6638
-  _job: 18151820789
-  _time: 2025-10-01 04:57:21.491197528 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: status-report
-  details: The missing pull yegor256/takes#966 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 966
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.955406886 Z
-  what: pull-was-opened
-  when: 2019-02-19 13:25:29.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6639
-  _job: 18151820789
-  _time: 2025-10-01 04:57:21.996193428 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '943'
-  details: The missing pull yegor256/takes#967 has been opened by @oridan.
-  is_human: 1
-  issue: 967
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.999188147 Z
-  what: pull-was-opened
-  when: 2019-02-20 14:03:15.000000000 Z
-  where: github
-  who: 29357595
-- _id: 6640
-  _job: 18151820789
-  _time: 2025-10-01 04:57:22.600466339 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#911"
-  details: The missing pull yegor256/takes#969 has been opened by @serranya.
-  is_human: 1
-  issue: 969
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.045326761 Z
-  what: pull-was-opened
-  when: 2019-02-22 12:11:10.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6641
-  _job: 18151820789
-  _time: 2025-10-01 04:57:23.124702603 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '406'
-  details: The missing pull yegor256/takes#970 has been opened by @oridan.
-  is_human: 1
-  issue: 970
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.088979508 Z
-  what: pull-was-opened
-  when: 2019-02-23 02:34:02.000000000 Z
-  where: github
-  who: 29357595
-- _id: 6642
-  _job: 18151820789
-  _time: 2025-10-01 04:57:23.778833332 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#952"
-  details: The missing pull yegor256/takes#971 has been opened by @serranya.
-  is_human: 1
-  issue: 971
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.930889197 Z
-  what: pull-was-opened
-  when: 2019-02-24 10:31:28.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6643
-  _job: 18151820789
-  _time: 2025-10-01 04:57:24.288348256 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#904"
-  details: The missing pull yegor256/takes#972 has been opened by @serranya.
-  is_human: 1
-  issue: 972
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:01.982782811 Z
-  what: pull-was-opened
-  when: 2019-03-07 11:56:53.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6644
-  _job: 18151820789
-  _time: 2025-10-01 04:57:24.892309121 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '968'
-  details: The missing pull yegor256/takes#973 has been opened by @lucasmessias9898.
-  is_human: 1
-  issue: 973
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.216807926 Z
-  what: pull-was-opened
-  when: 2019-03-27 16:08:07.000000000 Z
-  where: github
-  who: 36428045
-- _id: 6645
-  _job: 18151820789
-  _time: 2025-10-01 04:57:25.523513708 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#957"
-  details: The missing pull yegor256/takes#974 has been opened by @serranya.
-  is_human: 1
-  issue: 974
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.131615547 Z
-  what: pull-was-opened
-  when: 2019-04-01 13:27:54.000000000 Z
-  where: github
-  who: 1206309
-- _id: 6646
-  _job: 18151820789
-  _time: 2025-10-01 04:57:26.103294009 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: 976-update-compiler-plugin
-  details: The missing pull yegor256/takes#977 has been opened by @vzurauskas.
-  is_human: 1
-  issue: 977
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.176003754 Z
-  what: pull-was-opened
-  when: 2019-04-25 12:56:38.000000000 Z
-  where: github
-  who: 18754033
-- _id: 6647
-  _job: 18151820789
-  _time: 2025-10-01 04:57:27.183140218 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '968'
-  details: The missing pull yegor256/takes#979 has been opened by @zcrusaderz.
-  is_human: 1
-  issue: 979
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.437746708 Z
-  what: pull-was-opened
-  when: 2019-05-23 05:09:03.000000000 Z
-  where: github
-  who: 34595022
-- _id: 6648
-  _job: 18151820789
-  _time: 2025-10-01 04:57:27.745683867 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '980'
-  details: The missing pull yegor256/takes#981 has been opened by @zcrusaderz.
-  is_human: 1
-  issue: 981
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:03.217297206 Z
-  what: pull-was-opened
-  when: 2019-05-23 06:43:28.000000000 Z
-  where: github
-  who: 34595022
-- _id: 6649
-  _job: 18151820789
-  _time: 2025-10-01 04:57:28.232241262 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '968'
-  details: The missing pull yegor256/takes#982 has been opened by @zcrusaderz.
-  is_human: 1
-  issue: 982
-  repository: 28924109
-  tombstone: 2025-10-03 15:06:02.046243051 Z
-  what: pull-was-opened
-  when: 2019-05-24 08:13:43.000000000 Z
-  where: github
-  who: 34595022
-- _id: 6650
-  _job: 18151820789
-  _time: 2025-10-01 04:57:28.727276865 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: Cactoos0_41
-  details: The missing pull yegor256/takes#985 has been opened by @golszewski86.
-  is_human: 1
-  issue: 985
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.313147699 Z
-  what: pull-was-opened
-  when: 2019-06-04 07:48:29.000000000 Z
-  where: github
-  who: 45224442
-- _id: 6651
-  _job: 18151820789
-  _time: 2025-10-01 04:57:29.248554508 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '872'
-  details: The missing pull yegor256/takes#986 has been opened by @piotrkot.
-  is_human: 1
-  issue: 986
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.351470744 Z
-  what: pull-was-opened
-  when: 2019-06-06 22:21:56.000000000 Z
-  where: github
-  who: 9504395
-- _id: 6652
-  _job: 18151820789
-  _time: 2025-10-01 04:57:29.774692474 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: HttpStatuses
-  details: The missing pull yegor256/takes#987 has been opened by @golszewski86.
-  is_human: 1
-  issue: 987
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.384214513 Z
-  what: pull-was-opened
-  when: 2019-06-13 09:22:49.000000000 Z
-  where: github
-  who: 45224442
-- _id: 6653
-  _job: 18151820789
-  _time: 2025-10-01 04:57:30.315118483 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: nullfree
-  details: The missing pull yegor256/takes#988 has been opened by @nikialeksey.
-  is_human: 1
-  issue: 988
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:25.498338550 Z
-  what: pull-was-opened
-  when: 2019-06-16 18:09:10.000000000 Z
-  where: github
-  who: 5731084
-- _id: 6654
-  _job: 18151820789
-  _time: 2025-10-01 04:57:30.921473054 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: master
-  details: The missing pull yegor256/takes#989 has been opened by @mreiche.
-  is_human: 1
-  issue: 989
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:23.995137006 Z
-  what: pull-was-opened
-  when: 2019-06-24 10:49:40.000000000 Z
-  where: github
-  who: 572453
-- _id: 6655
-  _job: 18151820789
-  _time: 2025-10-01 04:57:31.412007687 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '991'
-  details: The missing pull yegor256/takes#992 has been opened by @piotrkot.
-  is_human: 1
-  issue: 992
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.433286064 Z
-  what: pull-was-opened
-  when: 2019-09-05 06:08:17.000000000 Z
-  where: github
-  who: 9504395
-- _id: 6656
-  _job: 18151820789
-  _time: 2025-10-01 04:57:31.922414805 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '918'
-  details: The missing pull yegor256/takes#995 has been opened by @fevzian.
-  is_human: 1
-  issue: 995
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.095882208 Z
-  what: pull-was-opened
-  when: 2019-11-14 20:14:58.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6657
-  _job: 18151820789
-  _time: 2025-10-01 04:57:32.468633196 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '869'
-  details: The missing pull yegor256/takes#996 has been opened by @fevzian.
-  is_human: 1
-  issue: 996
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.155758954 Z
-  what: pull-was-opened
-  when: 2019-11-20 02:33:51.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6658
-  _job: 18151820789
-  _time: 2025-10-01 04:57:33.008315667 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '998'
-  details: The missing pull yegor256/takes#1001 has been opened by @fevzian.
-  is_human: 1
-  issue: 1001
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.216692707 Z
-  what: pull-was-opened
-  when: 2019-11-29 17:20:29.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6659
-  _job: 18151820789
-  _time: 2025-10-01 04:57:33.546783892 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: "#1002-refactor-TkSlf4j"
-  details: The missing pull yegor256/takes#1003 has been opened by @pal548.
-  is_human: 1
-  issue: 1003
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.277284923 Z
-  what: pull-was-opened
-  when: 2019-12-04 13:41:30.000000000 Z
-  where: github
-  who: 35927798
-- _id: 6660
-  _job: 18151820789
-  _time: 2025-10-01 04:57:34.103843785 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: status-report-2019-12-05
-  details: The missing pull yegor256/takes#1006 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1006
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.471738218 Z
-  what: pull-was-opened
-  when: 2019-12-05 14:47:34.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6661
-  _job: 18151820789
-  _time: 2025-10-01 04:57:34.632404345 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: 998-fix
-  details: The missing pull yegor256/takes#1020 has been opened by @fevzian.
-  is_human: 1
-  issue: 1020
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.505884005 Z
-  what: pull-was-opened
-  when: 2020-01-15 18:07:08.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6662
-  _job: 18151820789
-  _time: 2025-10-01 04:57:35.258914653 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1008'
-  details: The missing pull yegor256/takes#1023 has been opened by @fevzian.
-  is_human: 1
-  issue: 1023
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.338189020 Z
-  what: pull-was-opened
-  when: 2020-02-03 15:32:11.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6663
-  _job: 18151820789
-  _time: 2025-10-01 04:57:35.758529879 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1010'
-  details: The missing pull yegor256/takes#1026 has been opened by @fevzian.
-  is_human: 1
-  issue: 1026
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.398655982 Z
-  what: pull-was-opened
-  when: 2020-02-05 03:02:24.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6664
-  _job: 18151820789
-  _time: 2025-10-01 04:57:36.269486814 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1027'
-  details: The missing pull yegor256/takes#1028 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1028
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.555289903 Z
-  what: pull-was-opened
-  when: 2020-02-06 12:34:49.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6665
-  _job: 18151820789
-  _time: 2025-10-01 04:57:36.792874985 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1013'
-  details: The missing pull yegor256/takes#1030 has been opened by @fevzian.
-  is_human: 1
-  issue: 1030
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.460349876 Z
-  what: pull-was-opened
-  when: 2020-02-13 06:20:08.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6666
-  _job: 18151820789
-  _time: 2025-10-01 04:57:37.377509755 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1025'
-  details: The missing pull yegor256/takes#1033 has been opened by @fevzian.
-  is_human: 1
-  issue: 1033
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.594628614 Z
-  what: pull-was-opened
-  when: 2020-02-19 22:19:28.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6667
-  _job: 18151820789
-  _time: 2025-10-01 04:57:37.933038131 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1011'
-  details: The missing pull yegor256/takes#1034 has been opened by @fevzian.
-  is_human: 1
-  issue: 1034
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.521951025 Z
-  what: pull-was-opened
-  when: 2020-02-26 04:56:43.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6668
-  _job: 18151820789
-  _time: 2025-10-01 04:57:38.498708269 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1036'
-  details: The missing pull yegor256/takes#1037 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1037
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.628027898 Z
-  what: pull-was-opened
-  when: 2020-03-09 18:04:09.000000000 Z
-  where: github
-  who: 33915433
 - _id: 6669
   _job: 18151820789
   _time: 2025-10-01 04:57:39.028550692 Z
@@ -7901,6 +7341,7 @@
   is_human: 0
   issue: 1350
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.017818276 Z
   what: pull-was-opened
   when: 2024-11-02 22:27:24.000000000 Z
   where: github
@@ -7914,6 +7355,7 @@
   is_human: 0
   issue: 1351
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.061510440 Z
   what: pull-was-opened
   when: 2024-11-04 20:19:18.000000000 Z
   where: github
@@ -7927,6 +7369,7 @@
   is_human: 0
   issue: 1352
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.127887057 Z
   what: pull-was-opened
   when: 2024-11-13 01:15:59.000000000 Z
   where: github
@@ -7940,6 +7383,7 @@
   is_human: 0
   issue: 1353
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.169374660 Z
   what: pull-was-opened
   when: 2024-11-14 19:41:37.000000000 Z
   where: github
@@ -7953,6 +7397,7 @@
   is_human: 0
   issue: 1354
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.202256297 Z
   what: pull-was-opened
   when: 2024-11-14 21:43:14.000000000 Z
   where: github
@@ -7966,6 +7411,7 @@
   is_human: 0
   issue: 1355
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.242712732 Z
   what: pull-was-opened
   when: 2024-11-15 22:05:11.000000000 Z
   where: github
@@ -7979,6 +7425,7 @@
   is_human: 0
   issue: 1356
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.274344114 Z
   what: pull-was-opened
   when: 2024-11-20 21:33:17.000000000 Z
   where: github
@@ -8005,6 +7452,7 @@
   is_human: 0
   issue: 1360
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.314518783 Z
   what: pull-was-opened
   when: 2024-11-29 15:29:55.000000000 Z
   where: github
@@ -8018,6 +7466,7 @@
   is_human: 0
   issue: 1361
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.345755743 Z
   what: pull-was-opened
   when: 2024-12-02 02:19:39.000000000 Z
   where: github
@@ -8031,6 +7480,7 @@
   is_human: 0
   issue: 1362
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.386384467 Z
   what: pull-was-opened
   when: 2024-12-02 12:30:05.000000000 Z
   where: github
@@ -8057,6 +7507,7 @@
   is_human: 0
   issue: 1365
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.417457220 Z
   what: pull-was-opened
   when: 2024-12-05 13:17:38.000000000 Z
   where: github
@@ -8083,6 +7534,7 @@
   is_human: 0
   issue: 1369
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.456651204 Z
   what: pull-was-opened
   when: 2024-12-13 18:28:48.000000000 Z
   where: github
@@ -8096,6 +7548,7 @@
   is_human: 1
   issue: 1370
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.677740447 Z
   what: pull-was-opened
   when: 2024-12-14 20:31:54.000000000 Z
   where: github
@@ -8109,6 +7562,7 @@
   is_human: 1
   issue: 1372
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.716713047 Z
   what: pull-was-opened
   when: 2024-12-14 21:36:45.000000000 Z
   where: github
@@ -8122,6 +7576,7 @@
   is_human: 0
   issue: 1373
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.488043131 Z
   what: pull-was-opened
   when: 2024-12-16 15:56:47.000000000 Z
   where: github
@@ -8135,6 +7590,7 @@
   is_human: 0
   issue: 1374
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.527193627 Z
   what: pull-was-opened
   when: 2024-12-24 17:22:32.000000000 Z
   where: github
@@ -8174,6 +7630,7 @@
   is_human: 0
   issue: 1377
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.558708314 Z
   what: pull-was-opened
   when: 2025-01-02 19:01:58.000000000 Z
   where: github
@@ -8187,6 +7644,7 @@
   is_human: 0
   issue: 1378
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.599999838 Z
   what: pull-was-opened
   when: 2025-01-08 12:21:22.000000000 Z
   where: github
@@ -8200,6 +7658,7 @@
   is_human: 0
   issue: 1379
   repository: 28924109
+  tombstone: 2025-10-03 21:06:31.630868556 Z
   what: pull-was-opened
   when: 2025-01-08 12:48:09.000000000 Z
   where: github
@@ -42756,7 +42215,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.049381318 Z
   what: pull-was-merged
-  when: 2019-07-13 13:29:30.000000000 Z
+  when: &183 2019-07-13 13:29:30.000000000 Z
   where: github
   who: 8086956
 - _id: 13324
@@ -42782,7 +42241,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:08:07.670539719 Z
   what: pull-was-merged
-  when: 2019-09-06 01:19:25.000000000 Z
+  when: &184 2019-09-06 01:19:25.000000000 Z
   where: github
   who: 8086956
 - _id: 13325
@@ -42807,7 +42266,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.111764258 Z
   what: pull-was-merged
-  when: 2019-11-25 13:26:36.000000000 Z
+  when: &185 2019-11-25 13:26:36.000000000 Z
   where: github
   who: 8086956
 - _id: 13326
@@ -42832,7 +42291,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.171902427 Z
   what: pull-was-merged
-  when: 2019-11-26 10:52:46.000000000 Z
+  when: &186 2019-11-26 10:52:46.000000000 Z
   where: github
   who: 8086956
 - _id: 13327
@@ -42882,7 +42341,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.293975723 Z
   what: pull-was-merged
-  when: 2019-12-11 01:59:54.000000000 Z
+  when: &187 2019-12-11 01:59:54.000000000 Z
   where: github
   who: 8086956
 - _id: 13329
@@ -42908,7 +42367,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:08:07.691168897 Z
   what: pull-was-merged
-  when: 2019-12-05 15:23:04.000000000 Z
+  when: &188 2019-12-05 15:23:04.000000000 Z
   where: github
   who: 8086956
 - _id: 13330
@@ -42934,7 +42393,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:08:07.712678339 Z
   what: pull-was-merged
-  when: 2020-02-10 14:40:59.000000000 Z
+  when: &189 2020-02-10 14:40:59.000000000 Z
   where: github
   who: 33915433
 - _id: 13331
@@ -47323,6 +46782,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 8164787
+  tombstone: 2025-10-03 21:06:41.248492764 Z
   what: code-was-contributed
   when: *180
   where: github
@@ -47348,6 +46808,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.263935908 Z
   what: pull-was-merged
   when: 2023-08-09 16:00:15.000000000 Z
   where: github
@@ -47373,6 +46834,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.289248660 Z
   what: pull-was-merged
   when: 2023-08-22 12:46:28.000000000 Z
   where: github
@@ -47398,6 +46860,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.307244345 Z
   what: pull-was-merged
   when: 2023-09-03 18:07:06.000000000 Z
   where: github
@@ -47423,6 +46886,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.324160809 Z
   what: pull-was-merged
   when: 2023-09-03 17:41:37.000000000 Z
   where: github
@@ -47448,6 +46912,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.339974908 Z
   what: pull-was-merged
   when: 2023-09-04 13:48:55.000000000 Z
   where: github
@@ -47473,6 +46938,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.367890503 Z
   what: pull-was-merged
   when: 2023-09-05 01:54:58.000000000 Z
   where: github
@@ -47497,6 +46963,7 @@
   issue: 1245
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.385564535 Z
   what: pull-was-closed
   when: 2024-02-05 08:50:13.000000000 Z
   where: github
@@ -47521,6 +46988,7 @@
   issue: 1246
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.401562921 Z
   what: pull-was-closed
   when: 2023-09-15 08:47:47.000000000 Z
   where: github
@@ -47546,6 +47014,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.428686531 Z
   what: pull-was-merged
   when: 2023-09-20 04:44:12.000000000 Z
   where: github
@@ -47571,6 +47040,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.446348271 Z
   what: pull-was-merged
   when: 2023-09-22 19:50:52.000000000 Z
   where: github
@@ -47596,6 +47066,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.462275345 Z
   what: pull-was-merged
   when: 2023-09-29 20:45:41.000000000 Z
   where: github
@@ -47621,6 +47092,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.488984295 Z
   what: pull-was-merged
   when: 2023-10-06 17:42:30.000000000 Z
   where: github
@@ -47646,6 +47118,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.506558567 Z
   what: pull-was-merged
   when: 2023-10-19 15:44:14.000000000 Z
   where: github
@@ -47671,6 +47144,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.522583340 Z
   what: pull-was-merged
   when: 2023-10-20 11:54:14.000000000 Z
   where: github
@@ -47696,6 +47170,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.549068087 Z
   what: pull-was-merged
   when: 2023-10-20 11:40:06.000000000 Z
   where: github
@@ -47721,6 +47196,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.566632674 Z
   what: pull-was-merged
   when: 2023-10-25 21:39:45.000000000 Z
   where: github
@@ -47745,6 +47221,7 @@
   issue: 1255
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.586550251 Z
   what: pull-was-closed
   when: 2024-08-02 04:04:36.000000000 Z
   where: github
@@ -47770,6 +47247,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.607304129 Z
   what: pull-was-merged
   when: 2023-10-29 12:43:38.000000000 Z
   where: github
@@ -47795,6 +47273,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.625452942 Z
   what: pull-was-merged
   when: 2023-11-02 21:41:17.000000000 Z
   where: github
@@ -47820,6 +47299,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.645695495 Z
   what: pull-was-merged
   when: 2023-11-07 10:43:43.000000000 Z
   where: github
@@ -47845,6 +47325,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.667580223 Z
   what: pull-was-merged
   when: 2024-01-11 06:47:15.000000000 Z
   where: github
@@ -47870,6 +47351,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.684996701 Z
   what: pull-was-merged
   when: 2023-11-25 04:44:36.000000000 Z
   where: github
@@ -47895,6 +47377,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.704945018 Z
   what: pull-was-merged
   when: 2023-11-29 21:03:32.000000000 Z
   where: github
@@ -47920,6 +47403,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.727772420 Z
   what: pull-was-merged
   when: 2023-11-29 20:48:17.000000000 Z
   where: github
@@ -47945,6 +47429,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.745250364 Z
   what: pull-was-merged
   when: 2023-11-30 00:48:58.000000000 Z
   where: github
@@ -47970,6 +47455,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.765400148 Z
   what: pull-was-merged
   when: 2023-12-01 20:44:55.000000000 Z
   where: github
@@ -47995,6 +47481,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.788074006 Z
   what: pull-was-merged
   when: 2023-12-24 12:52:11.000000000 Z
   where: github
@@ -48020,6 +47507,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.805557675 Z
   what: pull-was-merged
   when: 2023-12-26 14:46:19.000000000 Z
   where: github
@@ -48044,6 +47532,7 @@
   issue: 1267
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.825607664 Z
   what: pull-was-closed
   when: 2024-08-02 04:04:37.000000000 Z
   where: github
@@ -48069,6 +47558,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.848278172 Z
   what: pull-was-merged
   when: 2023-12-27 13:54:54.000000000 Z
   where: github
@@ -48094,6 +47584,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.865770907 Z
   what: pull-was-merged
   when: 2023-12-28 23:18:52.000000000 Z
   where: github
@@ -48119,6 +47610,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.885464153 Z
   what: pull-was-merged
   when: 2023-12-28 22:52:00.000000000 Z
   where: github
@@ -48167,6 +47659,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.906914196 Z
   what: pull-was-merged
   when: 2024-01-08 21:07:03.000000000 Z
   where: github
@@ -48192,6 +47685,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.924352122 Z
   what: pull-was-merged
   when: 2024-01-08 20:48:29.000000000 Z
   where: github
@@ -48217,6 +47711,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.945409241 Z
   what: pull-was-merged
   when: 2024-01-14 16:43:51.000000000 Z
   where: github
@@ -48241,6 +47736,7 @@
   issue: 1275
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.965956681 Z
   what: pull-was-closed
   when: 2024-02-05 08:50:11.000000000 Z
   where: github
@@ -48266,6 +47762,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:41.983187883 Z
   what: pull-was-merged
   when: 2024-01-24 21:40:04.000000000 Z
   where: github
@@ -48291,6 +47788,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.004268152 Z
   what: pull-was-merged
   when: 2024-01-30 20:43:13.000000000 Z
   where: github
@@ -48316,6 +47814,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.025194001 Z
   what: pull-was-merged
   when: 2024-01-31 20:43:05.000000000 Z
   where: github
@@ -48341,6 +47840,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.042678587 Z
   what: pull-was-merged
   when: 2024-02-05 08:49:55.000000000 Z
   where: github
@@ -48366,6 +47866,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.064013461 Z
   what: pull-was-merged
   when: 2024-02-05 09:15:11.000000000 Z
   where: github
@@ -48391,6 +47892,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.085482326 Z
   what: pull-was-merged
   when: 2024-02-05 23:45:13.000000000 Z
   where: github
@@ -48416,6 +47918,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.103220419 Z
   what: pull-was-merged
   when: 2024-03-01 11:43:16.000000000 Z
   where: github
@@ -48464,6 +47967,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.124426301 Z
   what: pull-was-merged
   when: 2024-03-07 10:55:37.000000000 Z
   where: github
@@ -48489,6 +47993,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.145478745 Z
   what: pull-was-merged
   when: 2024-03-07 10:42:05.000000000 Z
   where: github
@@ -48514,6 +48019,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.163111628 Z
   what: pull-was-merged
   when: 2024-03-13 11:40:59.000000000 Z
   where: github
@@ -48539,6 +48045,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.184199412 Z
   what: pull-was-merged
   when: 2024-03-20 06:44:13.000000000 Z
   where: github
@@ -48564,6 +48071,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.205593537 Z
   what: pull-was-merged
   when: 2024-03-29 02:44:10.000000000 Z
   where: github
@@ -48595,6 +48103,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.223247270 Z
   what: pull-was-merged
   when: 2024-04-08 21:38:14.000000000 Z
   where: github
@@ -48620,6 +48129,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.244640713 Z
   what: pull-was-merged
   when: 2024-04-12 16:44:00.000000000 Z
   where: github
@@ -48644,6 +48154,7 @@
   issue: 1294
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.265698437 Z
   what: pull-was-closed
   when: 2024-05-25 01:37:23.000000000 Z
   where: github
@@ -48669,6 +48180,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.283004554 Z
   what: pull-was-merged
   when: 2024-05-11 14:40:06.000000000 Z
   where: github
@@ -48694,6 +48206,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.303968285 Z
   what: pull-was-merged
   when: 2024-05-19 21:38:44.000000000 Z
   where: github
@@ -48719,6 +48232,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.322994874 Z
   what: pull-was-merged
   when: 2024-05-31 12:47:09.000000000 Z
   where: github
@@ -48744,6 +48258,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.340376292 Z
   what: pull-was-merged
   when: 2024-08-02 07:59:33.000000000 Z
   where: github
@@ -48769,6 +48284,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.362160857 Z
   what: pull-was-merged
   when: 2024-06-27 16:44:56.000000000 Z
   where: github
@@ -48794,6 +48310,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.382518542 Z
   what: pull-was-merged
   when: 2024-06-28 06:43:50.000000000 Z
   where: github
@@ -48819,6 +48336,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.399850229 Z
   what: pull-was-merged
   when: 2024-07-02 16:46:13.000000000 Z
   where: github
@@ -48844,6 +48362,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.421785574 Z
   what: pull-was-merged
   when: 2024-07-10 22:42:39.000000000 Z
   where: github
@@ -48869,6 +48388,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.441743816 Z
   what: pull-was-merged
   when: 2024-08-02 04:04:09.000000000 Z
   where: github
@@ -48894,6 +48414,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.458831684 Z
   what: pull-was-merged
   when: 2024-08-01 10:46:50.000000000 Z
   where: github
@@ -48919,6 +48440,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.480890731 Z
   what: pull-was-merged
   when: 2024-08-02 04:57:45.000000000 Z
   where: github
@@ -48944,6 +48466,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.501138306 Z
   what: pull-was-merged
   when: 2024-08-02 04:43:57.000000000 Z
   where: github
@@ -48969,6 +48492,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.518627813 Z
   what: pull-was-merged
   when: 2024-10-29 04:41:22.000000000 Z
   where: github
@@ -48993,6 +48517,7 @@
   issue: 1316
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.540698648 Z
   what: pull-was-closed
   when: 2024-09-19 06:47:43.000000000 Z
   where: github
@@ -49018,6 +48543,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:42.558887936 Z
   what: pull-was-merged
   when: 2025-01-12 18:48:23.000000000 Z
   where: github
@@ -49043,6 +48569,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.576346502 Z
   what: pull-was-merged
   when: 2024-09-25 10:03:40.000000000 Z
   where: github
@@ -49067,6 +48594,7 @@
   issue: 1319
   repository: 28924109
   succeeded_builds: 2
+  tombstone: 2025-10-03 21:06:42.598333955 Z
   what: pull-was-closed
   when: 2024-09-19 06:44:25.000000000 Z
   where: github
@@ -49117,6 +48645,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 11
+  tombstone: 2025-10-03 21:06:42.616435146 Z
   what: pull-was-merged
   when: 2024-09-18 12:24:02.000000000 Z
   where: github
@@ -49142,6 +48671,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.633975941 Z
   what: pull-was-merged
   when: 2024-09-19 09:34:52.000000000 Z
   where: github
@@ -49167,6 +48697,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.657297993 Z
   what: pull-was-merged
   when: 2024-09-19 10:40:29.000000000 Z
   where: github
@@ -49192,6 +48723,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.675760931 Z
   what: pull-was-merged
   when: 2024-09-19 11:10:53.000000000 Z
   where: github
@@ -49217,6 +48749,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.693395318 Z
   what: pull-was-merged
   when: 2024-09-23 07:57:19.000000000 Z
   where: github
@@ -49241,6 +48774,7 @@
   issue: 1326
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.717419998 Z
   what: pull-was-closed
   when: 2024-09-23 09:38:39.000000000 Z
   where: github
@@ -49265,6 +48799,7 @@
   issue: 1327
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.735697262 Z
   what: pull-was-closed
   when: 2024-09-23 09:53:44.000000000 Z
   where: github
@@ -49289,6 +48824,7 @@
   issue: 1328
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.753226535 Z
   what: pull-was-closed
   when: 2024-09-23 10:02:36.000000000 Z
   where: github
@@ -49313,6 +48849,7 @@
   issue: 1329
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.778536501 Z
   what: pull-was-closed
   when: 2024-09-23 10:18:32.000000000 Z
   where: github
@@ -49338,6 +48875,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.796487039 Z
   what: pull-was-merged
   when: 2024-10-02 07:15:18.000000000 Z
   where: github
@@ -49363,6 +48901,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.814072197 Z
   what: pull-was-merged
   when: 2024-09-26 23:02:13.000000000 Z
   where: github
@@ -49388,6 +48927,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.838152304 Z
   what: pull-was-merged
   when: 2024-09-27 17:05:35.000000000 Z
   where: github
@@ -49413,6 +48953,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.855947409 Z
   what: pull-was-merged
   when: 2024-09-30 14:02:19.000000000 Z
   where: github
@@ -49438,6 +48979,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.873216874 Z
   what: pull-was-merged
   when: 2024-10-04 02:49:22.000000000 Z
   where: github
@@ -49463,6 +49005,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.897608282 Z
   what: pull-was-merged
   when: 2024-10-29 04:39:31.000000000 Z
   where: github
@@ -49488,6 +49031,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.915330887 Z
   what: pull-was-merged
   when: 2024-10-06 14:01:16.000000000 Z
   where: github
@@ -49513,6 +49057,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.933630350 Z
   what: pull-was-merged
   when: 2024-10-29 04:36:56.000000000 Z
   where: github
@@ -49538,6 +49083,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:42.958324686 Z
   what: pull-was-merged
   when: 2024-10-29 04:36:39.000000000 Z
   where: github
@@ -49563,6 +49109,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.976018482 Z
   what: pull-was-merged
   when: 2024-10-29 04:36:48.000000000 Z
   where: github
@@ -49587,6 +49134,7 @@
   issue: 1342
   repository: 28924109
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:42.993339493 Z
   what: pull-was-closed
   when: 2024-10-29 04:37:03.000000000 Z
   where: github
@@ -49612,6 +49160,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 13
+  tombstone: 2025-10-03 21:06:43.017646232 Z
   what: pull-was-merged
   when: 2024-10-29 05:15:44.000000000 Z
   where: github
@@ -49637,6 +49186,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:43.035065927 Z
   what: pull-was-merged
   when: 2024-10-29 07:23:22.000000000 Z
   where: github
@@ -49662,6 +49212,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 0
+  tombstone: 2025-10-03 21:06:43.052233430 Z
   what: pull-was-merged
   when: 2024-10-29 07:26:14.000000000 Z
   where: github
@@ -49711,6 +49262,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.076554031 Z
   what: pull-was-merged
   when: 2024-10-29 14:45:19.000000000 Z
   where: github
@@ -49736,6 +49288,7 @@
   repository: 28924109
   review_comments: 0
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.094617798 Z
   what: pull-was-merged
   when: 2024-10-29 18:46:40.000000000 Z
   where: github
@@ -49755,6 +49308,7 @@
   repository: 28924109
   review_comments: 1
   seconds: 1268
+  tombstone: 2025-10-03 21:06:43.111963681 Z
   what: code-was-reviewed
   when: 2024-08-27 14:39:23.000000000 Z
   where: github
@@ -49789,6 +49343,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 1202678
+  tombstone: 2025-10-03 21:06:43.136560208 Z
   what: code-was-contributed
   when: *181
   where: github
@@ -49800,6 +49355,7 @@
   comments: 19
   details: The pull request yegor256/takes#987 with 41 HoC created by @golszewski86
     was merged by @rultor after 8w1d of being in review and 19 comments.
+  done: 2025-10-03 21:06:30.887809802 Z
   hoc: 41
   is_human: 1
   issue: 987
@@ -49807,82 +49363,11 @@
   repository: 28924109
   review_comments: 0
   seconds: 4940830
+  tombstone: 2025-10-03 21:06:43.154472378 Z
   what: code-was-contributed
   when: *182
   where: github
   who: 45224442
-- _id: 13642
-  _job: 41219
-  _time: 2025-10-03 20:08:16.534023058 Z
-  _version: 0.16.8/0.54.0/0.15.50
-  issues:
-  - 1-223
-  - 225-239
-  - 241-870
-  - 872-893
-  - 895-897
-  - 902-904
-  - 907-908
-  - '911'
-  - '913'
-  - 917-919
-  - 921-922
-  - '925'
-  - 930-932
-  - 934-941
-  - '943'
-  - '945'
-  - '948'
-  - 950-953
-  - 957-959
-  - '968'
-  - 975-976
-  - '980'
-  - '984'
-  - 990-991
-  - 997-999
-  - '1002'
-  - '1008'
-  - 1010-1017
-  - '1019'
-  - '1022'
-  - 1024-1025
-  - '1027'
-  - '1032'
-  - '1036'
-  - '1041'
-  - 1049-1050
-  - 1054-1055
-  - '1058'
-  - '1060'
-  - '1062'
-  - '1067'
-  - 1069-1071
-  - 1073-1075
-  - 1077-1081
-  - '1083'
-  - 1088-1090
-  - '1099'
-  - 1108-1113
-  - '1116'
-  - '1118'
-  - 1127-1132
-  - '1134'
-  - '1136'
-  - 1139-1140
-  - 1142-1146
-  - '1206'
-  - '1215'
-  - '1227'
-  - '1293'
-  - '1301'
-  - '1334'
-  - '1339'
-  - '1363'
-  - '1368'
-  repository: 28924109
-  what: tombstone
-  where: github
 - _id: 13644
   _job: 18233570892
   _time: 2025-10-03 20:58:38.341822964 Z
@@ -49895,6 +49380,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1350 has been "pull-was-merged".
+  done: 2025-10-03 21:06:30.990182430 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -49902,6 +49388,7 @@
   issue: 1350
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.172037999 Z
   what: pull-was-merged
   when: 2024-11-02 23:43:40.000000000 Z
   where: github
@@ -49918,6 +49405,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1351 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.033142707 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -49925,6 +49413,7 @@
   issue: 1351
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.196669130 Z
   what: pull-was-merged
   when: 2024-11-05 08:50:27.000000000 Z
   where: github
@@ -49941,6 +49430,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1352 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.090922697 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -49948,6 +49438,7 @@
   issue: 1352
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.214821337 Z
   what: pull-was-merged
   when: 2024-11-13 02:12:52.000000000 Z
   where: github
@@ -49964,6 +49455,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1353 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.143126166 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -49971,6 +49463,7 @@
   issue: 1353
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.232306642 Z
   what: pull-was-merged
   when: 2024-11-14 20:51:39.000000000 Z
   where: github
@@ -49987,6 +49480,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1354 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.184784485 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -49994,6 +49488,7 @@
   issue: 1354
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.256904613 Z
   what: pull-was-merged
   when: 2024-11-14 22:45:12.000000000 Z
   where: github
@@ -50010,6 +49505,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1355 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.224311259 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -50017,6 +49513,7 @@
   issue: 1355
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.274722578 Z
   what: pull-was-merged
   when: 2024-11-15 22:46:11.000000000 Z
   where: github
@@ -50033,6 +49530,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1356 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.257755385 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50040,6 +49538,7 @@
   issue: 1356
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.292268137 Z
   what: pull-was-merged
   when: 2024-11-20 22:44:39.000000000 Z
   where: github
@@ -50079,6 +49578,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1360 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.295800589 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -50086,6 +49586,7 @@
   issue: 1360
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.317071988 Z
   what: pull-was-merged
   when: 2024-11-29 16:44:46.000000000 Z
   where: github
@@ -50102,6 +49603,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1361 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.329407868 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50109,6 +49611,7 @@
   issue: 1361
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.335070487 Z
   what: pull-was-merged
   when: 2024-12-02 03:50:01.000000000 Z
   where: github
@@ -50125,6 +49628,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1362 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.368350961 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50132,6 +49636,7 @@
   issue: 1362
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.352486227 Z
   what: pull-was-merged
   when: 2024-12-02 13:46:07.000000000 Z
   where: github
@@ -50148,6 +49653,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1365 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.401236372 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50155,6 +49661,7 @@
   issue: 1365
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.377251270 Z
   what: pull-was-merged
   when: 2024-12-24 00:55:05.000000000 Z
   where: github
@@ -50171,6 +49678,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1369 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.438229931 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -50178,6 +49686,7 @@
   issue: 1369
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.395297534 Z
   what: pull-was-merged
   when: 2024-12-13 20:50:02.000000000 Z
   where: github
@@ -50194,6 +49703,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1370 has been "pull-was-closed".
+  done: 2025-10-03 21:06:31.659674981 Z
   failed_builds: 0
   files: 12
   hoc: 157
@@ -50201,6 +49711,7 @@
   issue: 1370
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.412761165 Z
   what: pull-was-closed
   when: 2024-12-27 07:52:52.000000000 Z
   where: github
@@ -50217,6 +49728,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1372 has been "pull-was-closed".
+  done: 2025-10-03 21:06:31.692001296 Z
   failed_builds: 0
   files: 30
   hoc: 509
@@ -50224,6 +49736,7 @@
   issue: 1372
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.437279836 Z
   what: pull-was-closed
   when: 2024-12-27 07:52:57.000000000 Z
   where: github
@@ -50240,6 +49753,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1373 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.471489016 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -50247,6 +49761,7 @@
   issue: 1373
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.455142917 Z
   what: pull-was-merged
   when: 2024-12-16 16:48:08.000000000 Z
   where: github
@@ -50263,6 +49778,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1374 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.508595836 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50270,6 +49786,7 @@
   issue: 1374
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.472516446 Z
   what: pull-was-merged
   when: 2024-12-25 00:53:02.000000000 Z
   where: github
@@ -50286,6 +49803,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1377 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.542106213 Z
   failed_builds: 0
   files: 1
   hoc: 4
@@ -50293,6 +49811,7 @@
   issue: 1377
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.496547813 Z
   what: pull-was-merged
   when: 2025-01-02 20:48:14.000000000 Z
   where: github
@@ -50309,6 +49828,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1378 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.581405799 Z
   failed_builds: 0
   files: 2
   hoc: 4
@@ -50316,6 +49836,7 @@
   issue: 1378
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.514535910 Z
   what: pull-was-merged
   when: 2025-01-08 12:47:43.000000000 Z
   where: github
@@ -50332,6 +49853,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/takes#1379 has been "pull-was-merged".
+  done: 2025-10-03 21:06:31.614534192 Z
   failed_builds: 0
   files: 1
   hoc: 2
@@ -50339,6 +49861,7 @@
   issue: 1379
   repository: 28924109
   succeeded_builds: 14
+  tombstone: 2025-10-03 21:06:43.531866311 Z
   what: pull-was-merged
   when: 2025-01-08 13:46:24.000000000 Z
   where: github
@@ -50361,6 +49884,7 @@
   is_human: 0
   issue: 1382
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-01-29 15:48:15.000000000 Z
@@ -50384,6 +49908,7 @@
   is_human: 0
   issue: 1383
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-17 20:39:41.000000000 Z
@@ -50407,6 +49932,7 @@
   is_human: 1
   issue: 1384
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 04:21:32.000000000 Z
@@ -50430,6 +49956,7 @@
   is_human: 0
   issue: 1385
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-17 19:49:21.000000000 Z
@@ -50453,6 +49980,7 @@
   is_human: 0
   issue: 1386
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-17 19:07:37.000000000 Z
@@ -50476,6 +50004,7 @@
   is_human: 1
   issue: 1387
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 25
   what: pull-was-merged
   when: 2025-02-18 04:21:25.000000000 Z
@@ -50499,6 +50028,7 @@
   is_human: 0
   issue: 1388
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-17 21:13:49.000000000 Z
@@ -50522,6 +50052,7 @@
   is_human: 1
   issue: 1389
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 04:21:16.000000000 Z
@@ -50545,6 +50076,7 @@
   is_human: 0
   issue: 1390
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-17 21:46:37.000000000 Z
@@ -50591,6 +50123,7 @@
   is_human: 0
   issue: 1393
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 04:48:37.000000000 Z
@@ -50614,6 +50147,7 @@
   is_human: 0
   issue: 1394
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 05:43:11.000000000 Z
@@ -50637,6 +50171,7 @@
   is_human: 0
   issue: 1395
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 06:46:41.000000000 Z
@@ -50660,6 +50195,7 @@
   is_human: 0
   issue: 1396
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 07:43:14.000000000 Z
@@ -50683,6 +50219,7 @@
   is_human: 0
   issue: 1397
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 08:46:41.000000000 Z
@@ -50706,6 +50243,7 @@
   is_human: 0
   issue: 1398
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-18 09:46:05.000000000 Z
@@ -50729,6 +50267,7 @@
   is_human: 0
   issue: 1400
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 17
   what: pull-was-merged
   when: 2025-02-21 17:46:42.000000000 Z
@@ -50752,6 +50291,7 @@
   is_human: 0
   issue: 1403
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 18
   what: pull-was-merged
   when: 2025-08-15 17:00:01.000000000 Z
@@ -50775,6 +50315,7 @@
   is_human: 1
   issue: 1416
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 8
   what: pull-was-merged
   when: 2025-07-17 09:05:16.000000000 Z
@@ -50798,6 +50339,7 @@
   is_human: 0
   issue: 1418
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 35
   what: pull-was-merged
   when: 2025-07-22 16:23:34.000000000 Z
@@ -50821,25 +50363,1272 @@
   is_human: 0
   issue: 1419
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 18
   what: pull-was-merged
   when: 2025-07-24 17:53:37.000000000 Z
   where: github
   who: 8086956
-- _id: 13685
-  _job: 18233570892
-  _time: 2025-10-03 21:04:55.717176256 Z
+- _id: 13686
+  _job: 41228
+  _time: 2025-10-03 21:06:34.109038717 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 28
+  details: The pull request yegor256/takes#989 with 48 HoC created by @mreiche was
+    merged by @rultor after 2w5d of being in review and 28 comments.
+  done: 2025-10-03 21:07:12.069703941 Z
+  hoc: 48
+  issue: 989
+  merger: 8086956
+  repository: 28924109
+  review_comments: 4
+  seconds: 1651190
+  tombstone: 2025-10-03 21:08:01.601185924 Z
+  what: code-was-contributed
+  when: *183
+  where: github
+  who: 572453
+- _id: 13687
+  _job: 41228
+  _time: 2025-10-03 21:06:34.347160010 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 7
+  details: The pull request yegor256/takes#992 with 1 HoC created by @piotrkot was
+    merged by @rultor after 19h11m of being in review and 7 comments.
+  done: 2025-10-03 21:07:12.093267369 Z
+  hoc: 1
+  issue: 992
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 69068
+  tombstone: 2025-10-03 21:08:01.617203247 Z
+  what: code-was-contributed
+  when: *184
+  where: github
+  who: 9504395
+- _id: 13688
+  _job: 41228
+  _time: 2025-10-03 21:06:34.476497885 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 191
+  details: The pull request yegor256/takes#995 with 1093 HoC created by @fevzian was
+    merged by @rultor after 1w3d of being in review and 191 comments.
+  done: 2025-10-03 21:07:12.112323180 Z
+  hoc: 1093
+  issue: 995
+  merger: 8086956
+  repository: 28924109
+  review_comments: 155
+  seconds: 925898
+  tombstone: 2025-10-03 21:08:01.644998024 Z
+  what: code-was-contributed
+  when: *185
+  where: github
+  who: 3167940
+- _id: 13690
+  _job: 41228
+  _time: 2025-10-03 21:07:18.473920123 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 18
+  details: The pull request yegor256/takes#996 with 13 HoC created by @fevzian was
+    merged by @rultor after 6d8h of being in review and 18 comments.
+  hoc: 13
+  is_human: 1
+  issue: 996
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 548335
+  what: code-was-contributed
+  when: *186
+  where: github
+  who: 3167940
+- _id: 13692
+  _job: 41228
+  _time: 2025-10-03 21:07:27.023740555 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 49
+  details: The pull request yegor256/takes#1003 with 72 HoC created by @pal548 was
+    merged by @rultor after 6d12h of being in review and 49 comments.
+  hoc: 72
+  is_human: 1
+  issue: 1003
+  merger: 8086956
+  repository: 28924109
+  review_comments: 7
+  seconds: 562704
+  what: code-was-contributed
+  when: *187
+  where: github
+  who: 35927798
+- _id: 13693
+  _job: 41228
+  _time: 2025-10-03 21:07:27.176858082 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 10
+  details: The pull request yegor256/takes#1006 with 18 HoC created by @paulodamaso
+    was merged by @rultor after 35m29s of being in review and 10 comments.
+  hoc: 18
+  is_human: 1
+  issue: 1006
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 2130
+  what: code-was-contributed
+  when: *188
+  where: github
+  who: 33915433
+- _id: 13694
+  _job: 41228
+  _time: 2025-10-03 21:08:03.084241300 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 31
+  details: The pull request yegor256/takes#1020 with 67 HoC created by @fevzian was
+    merged by @paulodamaso after 3w4d of being in review and 31 comments.
+  hoc: 67
+  is_human: 1
+  issue: 1020
+  merger: 33915433
+  repository: 28924109
+  review_comments: 0
+  seconds: 2234031
+  what: code-was-contributed
+  when: *189
+  where: github
+  who: 3167940
+- _id: 13695
+  _job: 41228
+  _time: 2025-10-03 21:08:04.936944912 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  issues:
+  - 1-223
+  - 225-239
+  - 241-870
+  - 872-893
+  - 895-897
+  - 902-904
+  - 907-908
+  - '911'
+  - '913'
+  - 917-919
+  - 921-922
+  - '925'
+  - 930-932
+  - 934-943
+  - '945'
+  - 947-948
+  - 950-954
+  - 956-964
+  - 966-977
+  - 979-982
+  - 984-992
+  - 995-999
+  - 1001-1003
+  - '1006'
+  - '1008'
+  - 1010-1017
+  - 1019-1020
+  - 1022-1028
+  - '1030'
+  - 1032-1034
+  - 1036-1037
+  - '1041'
+  - 1049-1050
+  - 1054-1055
+  - '1058'
+  - '1060'
+  - '1062'
+  - '1067'
+  - 1069-1071
+  - 1073-1075
+  - 1077-1081
+  - '1083'
+  - 1088-1090
+  - '1099'
+  - 1108-1113
+  - '1116'
+  - '1118'
+  - 1127-1132
+  - '1134'
+  - '1136'
+  - 1139-1140
+  - 1142-1146
+  - '1206'
+  - '1215'
+  - '1227'
+  - '1293'
+  - '1301'
+  - '1334'
+  - '1339'
+  - '1363'
+  - '1368'
+  repository: 28924109
+  what: tombstone
+  where: github
+- _id: 13697
+  _job: 18234677586
+  _time: 2025-10-03 21:58:20.678352414 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 1299
+  branch: '869'
+  details: The pull yegor256/takes#996 has been opened earlier by @fevzian.
+  is_human: 1
+  issue: 996
+  repository: 28924109
+  what: pull-was-opened
+  when: 2019-11-20 02:33:51.000000000 Z
+  where: github
+  who: 3167940
+- _id: 13698
+  _job: 18234677586
+  _time: 2025-10-03 21:58:21.557435643 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#1002-refactor-TkSlf4j"
+  details: The pull yegor256/takes#1003 has been opened earlier by @pal548.
+  is_human: 1
+  issue: 1003
+  repository: 28924109
+  what: pull-was-opened
+  when: 2019-12-04 13:41:30.000000000 Z
+  where: github
+  who: 35927798
+- _id: 13699
+  _job: 18234677586
+  _time: 2025-10-03 21:58:22.360565175 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: status-report-2019-12-05
+  details: The pull yegor256/takes#1006 has been opened earlier by @paulodamaso.
+  is_human: 1
+  issue: 1006
+  repository: 28924109
+  what: pull-was-opened
+  when: 2019-12-05 14:47:34.000000000 Z
+  where: github
+  who: 33915433
+- _id: 13700
+  _job: 18234677586
+  _time: 2025-10-03 21:58:23.167212266 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 998-fix
+  details: The pull yegor256/takes#1020 has been opened earlier by @fevzian.
+  is_human: 1
+  issue: 1020
+  repository: 28924109
+  what: pull-was-opened
+  when: 2020-01-15 18:07:08.000000000 Z
+  where: github
+  who: 3167940
+- _id: 13702
+  _job: 18234677586
+  _time: 2025-10-03 21:58:29.981538651 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 894-rsbody
+  comments: 10
+  comments_appreciated: 2
+  comments_by_author: 5
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1420 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 16
+  is_human: 0
+  issue: 1420
+  repository: 28924109
+  review_comments: 2
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-24 17:09:48.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13703
+  _job: 18234677586
+  _time: 2025-10-03 21:58:46.294789037 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 894-fkhitrefresh
+  comments: 7
+  comments_appreciated: 2
+  comments_by_author: 3
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1421 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 19
+  is_human: 0
+  issue: 1421
+  repository: 28924109
+  review_comments: 2
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-24 17:26:06.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13704
+  _job: 18234677586
+  _time: 2025-10-03 21:58:55.414928012 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1422'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1423 has been "pull-was-merged".
+  failed_builds: 0
+  files: 212
+  hoc: 1652
+  is_human: 1
+  issue: 1423
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-22 09:00:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 13705
+  _job: 18234677586
+  _time: 2025-10-03 21:59:03.677682905 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-parent-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1424 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1424
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-22 09:31:43.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13706
+  _job: 18234677586
+  _time: 2025-10-03 21:59:12.351884713 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1425 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1425
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-22 12:59:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13707
+  _job: 18234677586
+  _time: 2025-10-03 21:59:29.119189742 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1426 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1426
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-22 16:57:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13708
+  _job: 18234677586
+  _time: 2025-10-03 21:59:37.991298459 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.projectlombok-lombok-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1427 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1427
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-23 03:19:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13709
+  _job: 18234677586
+  _time: 2025-10-03 21:59:54.527129231 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/yegor256-copyrights-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1428 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1428
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-23 09:27:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 13710
+  _job: 18234677586
+  _time: 2025-10-03 22:00:03.898868301 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1429 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1429
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-23 17:05:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13711
+  _job: 18234677586
+  _time: 2025-10-03 22:00:21.103160546 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1430 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1430
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-24 03:12:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13712
+  _job: 18234677586
+  _time: 2025-10-03 22:00:37.412791863 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1431 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1431
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-24 08:58:02.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13713
+  _job: 18234677586
+  _time: 2025-10-03 22:00:54.289284207 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1432 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1432
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-07-24 16:37:34.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13714
+  _job: 18234677586
+  _time: 2025-10-03 22:01:11.278678952 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.cactoos-cactoos-0.x
+  comments: 6
+  comments_appreciated: 2
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1433 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1433
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-08-10 09:11:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13715
+  _job: 18234677586
+  _time: 2025-10-03 22:01:21.187310626 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 1
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1442 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 191
+  is_human: 0
+  issue: 1442
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-08-08 11:23:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13716
+  _job: 18234677586
+  _time: 2025-10-03 22:01:30.130832593 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/jersey-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1444 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  is_human: 0
+  issue: 1444
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-08-10 16:37:02.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13717
+  _job: 18234677586
+  _time: 2025-10-03 22:01:46.939699447 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1445 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1445
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-08-13 16:46:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 13718
+  _job: 18234677586
+  _time: 2025-10-03 22:01:55.633926532 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1446 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1446
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-01 04:06:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 13719
+  _job: 18234677586
+  _time: 2025-10-03 22:02:05.113178217 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-license-maven-plugin-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1447 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1447
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-01 04:06:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 13720
+  _job: 18234677586
+  _time: 2025-10-03 22:02:14.552146271 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/junit-framework-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1449 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1449
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-01 08:53:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13721
+  _job: 18234677586
+  _time: 2025-10-03 22:02:24.246796095 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1450 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1450
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-01 08:41:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13722
+  _job: 18234677586
+  _time: 2025-10-03 22:02:33.301886824 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-checkout-5.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1452 has been "pull-was-merged".
+  failed_builds: 0
+  files: 13
+  hoc: 26
+  is_human: 1
+  issue: 1452
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-05 05:24:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 13723
+  _job: 18234677586
+  _time: 2025-10-03 22:02:42.328605735 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-setup-java-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1453 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 6
+  is_human: 0
+  issue: 1453
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-01 17:00:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13724
+  _job: 18234677586
+  _time: 2025-10-03 22:02:51.868102175 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/major-hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1454 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1454
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-02 03:18:31.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13725
+  _job: 18234677586
+  _time: 2025-10-03 22:03:07.872813982 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1455 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1455
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-02 08:59:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13726
+  _job: 18234677586
+  _time: 2025-10-03 22:03:17.294357654 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1456 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1456
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-03 08:55:16.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13727
+  _job: 18234677586
+  _time: 2025-10-03 22:03:34.354603939 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1457 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1457
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-04 08:40:12.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13728
+  _job: 18234677586
+  _time: 2025-10-03 22:03:52.124352181 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1458 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1458
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-05 02:58:36.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13729
+  _job: 18234677586
+  _time: 2025-10-03 22:04:09.242799884 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1460 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1460
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 18
+  what: pull-was-merged
+  when: 2025-09-14 03:09:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13731
+  _job: 18234677586
+  _time: 2025-10-03 22:05:06.242701872 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1403 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3962h21m and 0 comments.
+  hoc: 4
+  is_human: 1
+  issue: 1403
+  repository: 28924109
+  review_comments: 0
+  seconds: 14264497
+  what: code-was-reviewed
+  when: 2025-08-15 16:46:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 13732
+  _job: 18234677586
+  _time: 2025-10-03 22:05:08.202693894 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 106221641
+  comments: 8
+  details: The pull request yegor256/takes#1420 with 16 HoC created by @projacktor
+    was reviewed by @yegor256 after 79h12m and 1 comments.
+  hoc: 16
+  is_human: 1
+  issue: 1420
+  repository: 28924109
+  review_comments: 1
+  seconds: 285161
+  what: code-was-reviewed
+  when: 2025-07-24 07:41:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 13733
+  _job: 18234677586
+  _time: 2025-10-03 22:05:09.244914545 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 106221641
+  comments: 5
+  details: The pull request yegor256/takes#1421 with 19 HoC created by @projacktor
+    was reviewed by @yegor256 after 79h4m and 1 comments.
+  hoc: 19
+  is_human: 1
+  issue: 1421
+  repository: 28924109
+  review_comments: 1
+  seconds: 284669
+  what: code-was-reviewed
+  when: 2025-07-24 07:41:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 13734
+  _job: 18234677586
+  _time: 2025-10-03 22:05:10.032567213 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1423 with 1652 HoC created by @yegor256
+    was reviewed by @copilot after 0h0m and 0 comments.
+  hoc: 1652
+  is_human: 0
+  issue: 1423
+  repository: 28924109
+  review_comments: 0
+  seconds: 9
+  what: code-was-reviewed
+  when: 2025-07-21 06:57:58.000000000 Z
+  where: github
+  who: 175728472
+- _id: 13735
+  _job: 18234677586
+  _time: 2025-10-03 22:05:13.804353525 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1444 with 6 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h12m and 0 comments.
+  hoc: 6
+  is_human: 1
+  issue: 1444
+  repository: 28924109
+  review_comments: 0
+  seconds: 25977
+  what: code-was-reviewed
+  when: 2025-08-10 16:24:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 13736
+  _job: 18234677586
+  _time: 2025-10-03 22:05:14.839780629 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1445 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10h43m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1445
+  repository: 28924109
+  review_comments: 0
+  seconds: 38606
+  what: code-was-reviewed
+  when: 2025-08-11 03:20:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 13737
+  _job: 18234677586
+  _time: 2025-10-03 22:05:15.643505536 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1446 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 0h22m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1446
+  repository: 28924109
+  review_comments: 0
+  seconds: 1340
+  what: code-was-reviewed
+  when: 2025-08-13 17:09:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 13738
+  _job: 18234677586
+  _time: 2025-10-03 22:05:16.443959619 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1447 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h53m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1447
+  repository: 28924109
+  review_comments: 0
+  seconds: 35604
+  what: code-was-reviewed
+  when: 2025-08-16 02:53:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 13739
+  _job: 18234677586
+  _time: 2025-10-03 22:05:17.343478188 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1449 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h21m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1449
+  repository: 28924109
+  review_comments: 0
+  seconds: 15710
+  what: code-was-reviewed
+  when: 2025-09-01 08:28:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 13740
+  _job: 18234677586
+  _time: 2025-10-03 22:05:18.161516855 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1450 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h21m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1450
+  repository: 28924109
+  review_comments: 0
+  seconds: 15704
+  what: code-was-reviewed
+  when: 2025-09-01 08:28:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 13741
+  _job: 18234677586
+  _time: 2025-10-03 22:05:18.891973455 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1452 with 26 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 8h6m and 0 comments.
+  hoc: 26
+  is_human: 1
+  issue: 1452
+  repository: 28924109
+  review_comments: 0
+  seconds: 29213
+  what: code-was-reviewed
+  when: 2025-09-01 16:48:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 13742
+  _job: 18234677586
+  _time: 2025-10-03 22:05:19.645856496 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1453 with 6 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h54m and 0 comments.
+  hoc: 6
+  is_human: 1
+  issue: 1453
+  repository: 28924109
+  review_comments: 0
+  seconds: 28464
+  what: code-was-reviewed
+  when: 2025-09-01 16:48:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 13743
+  _job: 18234677586
+  _time: 2025-10-03 22:05:20.390558192 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1454 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10h5m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1454
+  repository: 28924109
+  review_comments: 0
+  seconds: 36319
+  what: code-was-reviewed
+  when: 2025-09-02 03:06:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 13744
+  _job: 18234677586
+  _time: 2025-10-03 22:05:21.207149895 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1455 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 5h24m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1455
+  repository: 28924109
+  review_comments: 0
+  seconds: 19467
+  what: code-was-reviewed
+  when: 2025-09-02 08:44:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 13745
+  _job: 18234677586
+  _time: 2025-10-03 22:05:22.004106845 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1456 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 15h17m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1456
+  repository: 28924109
+  review_comments: 0
+  seconds: 55030
+  what: code-was-reviewed
+  when: 2025-09-03 08:41:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 13746
+  _job: 18234677586
+  _time: 2025-10-03 22:05:22.903134681 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1457 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h32m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1457
+  repository: 28924109
+  review_comments: 0
+  seconds: 16362
+  what: code-was-reviewed
+  when: 2025-09-04 08:28:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 13747
+  _job: 18234677586
+  _time: 2025-10-03 22:05:23.926174810 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1458 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h33m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1458
+  repository: 28924109
+  review_comments: 0
+  seconds: 34416
+  what: code-was-reviewed
+  when: 2025-09-05 02:45:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 13748
+  _job: 18234677586
+  _time: 2025-10-03 22:05:25.064049657 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1460 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3h48m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1460
+  repository: 28924109
+  review_comments: 0
+  seconds: 13711
+  what: code-was-reviewed
+  when: 2025-09-14 02:54:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 13749
+  _job: 18234677586
+  _time: 2025-10-03 22:06:30.013713989 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 55579447379
-  issues_were_scanned: 1303
-  labels_were_scanned: 0
+  issues_were_scanned: 0
+  labels_were_scanned: 1407
   latest_issue_was_found: 1463
-  merges_were_scanned: 1419
+  merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 942
+  min_pull_was_found: 1038
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 1299
   what: iterate
   where: github
