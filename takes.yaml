@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 394.196675119
+  seconds: 353.056064213
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-03 18:02:39.689596609 Z
+  when: 2025-10-03 19:02:02.568142962 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -3150,286 +3150,6 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-09-29 17:58:09.531210686 Z
-- _id: 1524
-  _job: 18106013053
-  _time: 2025-09-29 17:58:37.312725196 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: "#678-Remove-PMD.BeanMembersShouldSerialize"
-  details: The missing pull yegor256/takes#680 has been opened by @dalifreire.
-  is_human: 1
-  issue: 680
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.610026428 Z
-  what: pull-was-opened
-  when: 2016-05-20 11:39:43.000000000 Z
-  where: github
-  who: 10319140
-- _id: 1525
-  _job: 18106013053
-  _time: 2025-09-29 17:58:38.236108088 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: '678'
-  details: The missing pull yegor256/takes#681 has been opened by @xupyprmv.
-  is_human: 1
-  issue: 681
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.778447100 Z
-  what: pull-was-opened
-  when: 2016-06-04 12:38:53.000000000 Z
-  where: github
-  who: 441232
-- _id: 1526
-  _job: 18106013053
-  _time: 2025-09-29 17:58:39.335457514 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: '684'
-  details: The missing pull yegor256/takes#688 has been opened by @xupyprmv.
-  is_human: 1
-  issue: 688
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.820356750 Z
-  what: pull-was-opened
-  when: 2016-06-18 16:28:41.000000000 Z
-  where: github
-  who: 441232
-- _id: 1527
-  _job: 18106013053
-  _time: 2025-09-29 17:58:40.315576851 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: "#686_PMD_AvoidDuplicateLiterals"
-  details: The missing pull yegor256/takes#689 has been opened by @dalifreire.
-  is_human: 1
-  issue: 689
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.861779192 Z
-  what: pull-was-opened
-  when: 2016-06-18 20:09:54.000000000 Z
-  where: github
-  who: 10319140
-- _id: 1528
-  _job: 18106013053
-  _time: 2025-09-29 17:58:41.476711011 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: master
-  details: The missing pull yegor256/takes#690 has been opened by @rui-castro.
-  is_human: 1
-  issue: 690
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.903884849 Z
-  what: pull-was-opened
-  when: 2016-06-19 23:44:26.000000000 Z
-  where: github
-  who: 4218366
-- _id: 1529
-  _job: 18106013053
-  _time: 2025-09-29 17:58:44.849011248 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: master
-  details: The missing pull yegor256/takes#699 has been opened by @ukslim.
-  is_human: 1
-  issue: 699
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.946467419 Z
-  what: pull-was-opened
-  when: 2016-07-13 16:14:55.000000000 Z
-  where: github
-  who: 923002
-- _id: 1530
-  _job: 18106013053
-  _time: 2025-09-29 17:58:45.928495510 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: issues.697
-  details: The missing pull yegor256/takes#700 has been opened by @sebing.
-  is_human: 1
-  issue: 700
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.652361724 Z
-  what: pull-was-opened
-  when: 2016-07-14 09:47:16.000000000 Z
-  where: github
-  who: 5242384
-- _id: 1531
-  _job: 18106013053
-  _time: 2025-09-29 17:58:46.884854246 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: issue_696
-  details: The missing pull yegor256/takes#701 has been opened by @rui-castro.
-  is_human: 1
-  issue: 701
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:42.988674686 Z
-  what: pull-was-opened
-  when: 2016-07-14 14:04:24.000000000 Z
-  where: github
-  who: 4218366
-- _id: 1532
-  _job: 18106013053
-  _time: 2025-09-29 17:58:47.787503369 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: '694'
-  details: The missing pull yegor256/takes#702 has been opened by @xupyprmv.
-  is_human: 1
-  issue: 702
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.033205796 Z
-  what: pull-was-opened
-  when: 2016-07-14 20:18:47.000000000 Z
-  where: github
-  who: 441232
-- _id: 1533
-  _job: 18106013053
-  _time: 2025-09-29 17:58:49.094171589 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: "#695_RqFormBase_supress_ClassDataAbstractionCouplingCheck"
-  details: The missing pull yegor256/takes#703 has been opened by @dalifreire.
-  is_human: 1
-  issue: 703
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.074940422 Z
-  what: pull-was-opened
-  when: 2016-07-18 01:09:00.000000000 Z
-  where: github
-  who: 10319140
-- _id: 1534
-  _job: 18106013053
-  _time: 2025-09-29 17:58:50.189072198 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: master
-  details: The missing pull yegor256/takes#706 has been opened by @pchmielowski.
-  is_human: 1
-  issue: 706
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.117083303 Z
-  what: pull-was-opened
-  when: 2016-07-28 21:37:27.000000000 Z
-  where: github
-  who: 7473920
-- _id: 1535
-  _job: 18106013053
-  _time: 2025-09-29 17:58:51.377878666 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: "#698_RsFlash_SingularField_PMD_warnings"
-  details: The missing pull yegor256/takes#708 has been opened by @dalifreire.
-  is_human: 1
-  issue: 708
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.159672010 Z
-  what: pull-was-opened
-  when: 2016-08-06 21:02:57.000000000 Z
-  where: github
-  who: 10319140
-- _id: 1536
-  _job: 18106013053
-  _time: 2025-09-29 17:58:52.397128761 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: master
-  details: The missing pull yegor256/takes#709 has been opened by @xupyprmv.
-  is_human: 1
-  issue: 709
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.202754110 Z
-  what: pull-was-opened
-  when: 2016-08-09 21:30:47.000000000 Z
-  where: github
-  who: 441232
-- _id: 1537
-  _job: 18106013053
-  _time: 2025-09-29 17:58:53.268294120 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: '692'
-  details: The missing pull yegor256/takes#710 has been opened by @xupyprmv.
-  is_human: 1
-  issue: 710
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.245754339 Z
-  what: pull-was-opened
-  when: 2016-08-15 19:19:54.000000000 Z
-  where: github
-  who: 441232
-- _id: 1538
-  _job: 18106013053
-  _time: 2025-09-29 17:58:54.119449413 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: "#707_transient_is_not_needed_anymore"
-  details: The missing pull yegor256/takes#711 has been opened by @dalifreire.
-  is_human: 1
-  issue: 711
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.288801651 Z
-  what: pull-was-opened
-  when: 2016-08-18 11:02:17.000000000 Z
-  where: github
-  who: 10319140
-- _id: 1539
-  _job: 18106013053
-  _time: 2025-09-29 17:58:55.010332541 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: patch-1
-  details: The missing pull yegor256/takes#714 has been opened by @wasserfuhr.
-  is_human: 1
-  issue: 714
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.694955720 Z
-  what: pull-was-opened
-  when: 2016-11-05 10:25:23.000000000 Z
-  where: github
-  who: 1935518
-- _id: 1540
-  _job: 18106013053
-  _time: 2025-09-29 17:58:56.399243907 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: patch-2
-  details: The missing pull yegor256/takes#715 has been opened by @wasserfuhr.
-  is_human: 1
-  issue: 715
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.331200025 Z
-  what: pull-was-opened
-  when: 2016-11-07 18:05:44.000000000 Z
-  where: github
-  who: 1935518
-- _id: 1541
-  _job: 18106013053
-  _time: 2025-09-29 17:58:57.232461699 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: 712_TkSlf4j_fail
-  details: The missing pull yegor256/takes#716 has been opened by @rui-castro.
-  is_human: 1
-  issue: 716
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.737378867 Z
-  what: pull-was-opened
-  when: 2016-11-25 01:25:54.000000000 Z
-  where: github
-  who: 4218366
-- _id: 1542
-  _job: 18106013053
-  _time: 2025-09-29 17:58:58.139166724 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: '712'
-  details: The missing pull yegor256/takes#717 has been opened by @prondzyn.
-  is_human: 1
-  issue: 717
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.374074534 Z
-  what: pull-was-opened
-  when: 2016-12-14 06:04:59.000000000 Z
-  where: github
-  who: 5822647
-- _id: 1543
-  _job: 18106013053
-  _time: 2025-09-29 17:58:59.323781415 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  branch: vtl-folder
-  details: The missing pull yegor256/takes#721 has been opened by @ptrecenti.
-  is_human: 1
-  issue: 721
-  repository: 28924109
-  tombstone: 2025-10-03 13:18:43.416295821 Z
-  what: pull-was-opened
-  when: 2017-02-09 10:54:39.000000000 Z
-  where: github
-  who: 384578
 - _id: 1544
   _job: 18106013053
   _time: 2025-09-29 17:59:00.947768648 Z
@@ -7093,6 +6813,7 @@
   is_human: 0
   issue: 1183
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.643138143 Z
   what: pull-was-opened
   when: 2022-11-17 21:38:12.000000000 Z
   where: github
@@ -7106,6 +6827,7 @@
   is_human: 0
   issue: 1184
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.685202565 Z
   what: pull-was-opened
   when: 2022-11-25 13:36:10.000000000 Z
   where: github
@@ -7119,6 +6841,7 @@
   is_human: 0
   issue: 1185
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.718902511 Z
   what: pull-was-opened
   when: 2022-11-25 13:36:15.000000000 Z
   where: github
@@ -7132,6 +6855,7 @@
   is_human: 0
   issue: 1186
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.764214397 Z
   what: pull-was-opened
   when: 2022-12-01 11:46:58.000000000 Z
   where: github
@@ -7145,6 +6869,7 @@
   is_human: 0
   issue: 1187
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.797225867 Z
   what: pull-was-opened
   when: 2022-12-13 00:16:27.000000000 Z
   where: github
@@ -7158,6 +6883,7 @@
   is_human: 0
   issue: 1188
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.843084891 Z
   what: pull-was-opened
   when: 2022-12-13 00:16:33.000000000 Z
   where: github
@@ -7171,6 +6897,7 @@
   is_human: 0
   issue: 1189
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.876842014 Z
   what: pull-was-opened
   when: 2022-12-14 22:21:39.000000000 Z
   where: github
@@ -7184,6 +6911,7 @@
   is_human: 0
   issue: 1190
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.920643325 Z
   what: pull-was-opened
   when: 2022-12-23 12:22:35.000000000 Z
   where: github
@@ -7197,6 +6925,7 @@
   is_human: 0
   issue: 1191
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.953432687 Z
   what: pull-was-opened
   when: 2022-12-28 14:34:47.000000000 Z
   where: github
@@ -7210,6 +6939,7 @@
   is_human: 0
   issue: 1192
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.597013780 Z
   what: pull-was-opened
   when: 2023-01-01 15:44:06.000000000 Z
   where: github
@@ -7223,6 +6953,7 @@
   is_human: 0
   issue: 1193
   repository: 28924109
+  tombstone: 2025-10-03 18:04:29.998151671 Z
   what: pull-was-opened
   when: 2023-01-10 16:13:09.000000000 Z
   where: github
@@ -7236,6 +6967,7 @@
   is_human: 0
   issue: 1194
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.031385333 Z
   what: pull-was-opened
   when: 2023-01-13 17:43:31.000000000 Z
   where: github
@@ -7249,6 +6981,7 @@
   is_human: 0
   issue: 1195
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.075676153 Z
   what: pull-was-opened
   when: 2023-01-14 10:47:59.000000000 Z
   where: github
@@ -7262,6 +6995,7 @@
   is_human: 0
   issue: 1196
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.109341614 Z
   what: pull-was-opened
   when: 2023-01-15 20:01:41.000000000 Z
   where: github
@@ -7275,6 +7009,7 @@
   is_human: 0
   issue: 1197
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.154692581 Z
   what: pull-was-opened
   when: 2023-01-16 06:37:52.000000000 Z
   where: github
@@ -7288,6 +7023,7 @@
   is_human: 0
   issue: 1198
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.188512035 Z
   what: pull-was-opened
   when: 2023-01-17 20:39:41.000000000 Z
   where: github
@@ -7301,6 +7037,7 @@
   is_human: 0
   issue: 1199
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.233554177 Z
   what: pull-was-opened
   when: 2023-01-29 13:37:49.000000000 Z
   where: github
@@ -7314,6 +7051,7 @@
   is_human: 0
   issue: 1200
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.267527071 Z
   what: pull-was-opened
   when: 2023-01-31 01:16:31.000000000 Z
   where: github
@@ -7327,6 +7065,7 @@
   is_human: 0
   issue: 1201
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.314154036 Z
   what: pull-was-opened
   when: 2023-02-03 05:47:25.000000000 Z
   where: github
@@ -7428,6 +7167,7 @@
   is_human: 0
   issue: 1202
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.348074892 Z
   what: pull-was-opened
   when: 2023-02-06 17:58:05.000000000 Z
   where: github
@@ -7441,6 +7181,7 @@
   is_human: 0
   issue: 1203
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.394112856 Z
   what: pull-was-opened
   when: 2023-02-06 17:58:11.000000000 Z
   where: github
@@ -7454,6 +7195,7 @@
   is_human: 0
   issue: 1204
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.428330048 Z
   what: pull-was-opened
   when: 2023-02-21 13:15:34.000000000 Z
   where: github
@@ -7467,6 +7209,7 @@
   is_human: 0
   issue: 1205
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.474321544 Z
   what: pull-was-opened
   when: 2023-03-09 21:08:44.000000000 Z
   where: github
@@ -7480,6 +7223,7 @@
   is_human: 0
   issue: 1208
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.509485718 Z
   what: pull-was-opened
   when: 2023-03-18 00:10:08.000000000 Z
   where: github
@@ -7493,6 +7237,7 @@
   is_human: 0
   issue: 1209
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.554703606 Z
   what: pull-was-opened
   when: 2023-03-18 00:10:13.000000000 Z
   where: github
@@ -7506,6 +7251,7 @@
   is_human: 0
   issue: 1210
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.588575664 Z
   what: pull-was-opened
   when: 2023-03-21 16:39:31.000000000 Z
   where: github
@@ -7519,6 +7265,7 @@
   is_human: 0
   issue: 1211
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.633976686 Z
   what: pull-was-opened
   when: 2023-04-04 15:17:41.000000000 Z
   where: github
@@ -7532,6 +7279,7 @@
   is_human: 1
   issue: 1212
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.667450476 Z
   what: pull-was-opened
   when: 2023-04-05 09:23:15.000000000 Z
   where: github
@@ -7545,6 +7293,7 @@
   is_human: 0
   issue: 1213
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.714103674 Z
   what: pull-was-opened
   when: 2023-04-11 19:57:42.000000000 Z
   where: github
@@ -7558,6 +7307,7 @@
   is_human: 0
   issue: 1214
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.747468941 Z
   what: pull-was-opened
   when: 2023-04-21 21:39:00.000000000 Z
   where: github
@@ -7571,6 +7321,7 @@
   is_human: 1
   issue: 1216
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.792777565 Z
   what: pull-was-opened
   when: 2023-04-29 12:20:36.000000000 Z
   where: github
@@ -7584,6 +7335,7 @@
   is_human: 0
   issue: 1217
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.826266065 Z
   what: pull-was-opened
   when: 2023-05-02 14:45:59.000000000 Z
   where: github
@@ -7597,6 +7349,7 @@
   is_human: 0
   issue: 1218
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.871531342 Z
   what: pull-was-opened
   when: 2023-05-12 03:41:39.000000000 Z
   where: github
@@ -7610,6 +7363,7 @@
   is_human: 0
   issue: 1219
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.905160383 Z
   what: pull-was-opened
   when: 2023-05-16 21:46:14.000000000 Z
   where: github
@@ -7623,6 +7377,7 @@
   is_human: 0
   issue: 1220
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.951529165 Z
   what: pull-was-opened
   when: 2023-05-21 18:24:28.000000000 Z
   where: github
@@ -7636,6 +7391,7 @@
   is_human: 0
   issue: 1221
   repository: 28924109
+  tombstone: 2025-10-03 18:04:30.985389464 Z
   what: pull-was-opened
   when: 2023-05-21 18:42:08.000000000 Z
   where: github
@@ -7649,6 +7405,7 @@
   is_human: 0
   issue: 1222
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.030634810 Z
   what: pull-was-opened
   when: 2023-05-24 23:44:33.000000000 Z
   where: github
@@ -7662,6 +7419,7 @@
   is_human: 0
   issue: 1223
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.064852504 Z
   what: pull-was-opened
   when: 2023-05-28 10:26:23.000000000 Z
   where: github
@@ -7675,6 +7433,7 @@
   is_human: 0
   issue: 1224
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.111963918 Z
   what: pull-was-opened
   when: 2023-05-29 09:23:08.000000000 Z
   where: github
@@ -7688,6 +7447,7 @@
   is_human: 0
   issue: 1226
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.145057671 Z
   what: pull-was-opened
   when: 2023-06-07 19:47:26.000000000 Z
   where: github
@@ -7701,6 +7461,7 @@
   is_human: 0
   issue: 1228
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.191504722 Z
   what: pull-was-opened
   when: 2023-06-12 06:45:34.000000000 Z
   where: github
@@ -7714,6 +7475,7 @@
   is_human: 0
   issue: 1229
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.225660610 Z
   what: pull-was-opened
   when: 2023-06-12 06:45:37.000000000 Z
   where: github
@@ -7727,6 +7489,7 @@
   is_human: 0
   issue: 1230
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.271709194 Z
   what: pull-was-opened
   when: 2023-06-18 10:30:04.000000000 Z
   where: github
@@ -7740,6 +7503,7 @@
   is_human: 0
   issue: 1231
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.305848050 Z
   what: pull-was-opened
   when: 2023-06-18 11:37:59.000000000 Z
   where: github
@@ -7753,6 +7517,7 @@
   is_human: 0
   issue: 1232
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.351306850 Z
   what: pull-was-opened
   when: 2023-06-21 10:43:56.000000000 Z
   where: github
@@ -7766,6 +7531,7 @@
   is_human: 0
   issue: 1233
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.384333221 Z
   what: pull-was-opened
   when: 2023-07-04 19:31:03.000000000 Z
   where: github
@@ -7779,6 +7545,7 @@
   is_human: 0
   issue: 1234
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.431007884 Z
   what: pull-was-opened
   when: 2023-07-19 16:14:31.000000000 Z
   where: github
@@ -7792,6 +7559,7 @@
   is_human: 0
   issue: 1235
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.464173270 Z
   what: pull-was-opened
   when: 2023-07-21 11:20:51.000000000 Z
   where: github
@@ -7805,6 +7573,7 @@
   is_human: 0
   issue: 1236
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.511494919 Z
   what: pull-was-opened
   when: 2023-07-23 13:41:31.000000000 Z
   where: github
@@ -7818,6 +7587,7 @@
   is_human: 0
   issue: 1237
   repository: 28924109
+  tombstone: 2025-10-03 18:04:31.545770080 Z
   what: pull-was-opened
   when: 2023-08-07 20:16:09.000000000 Z
   where: github
@@ -39760,7 +39530,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 14:10:01.918336734 Z
   what: pull-was-merged
-  when: 2016-08-02 18:31:14.000000000 Z
+  when: &177 2016-08-02 18:31:14.000000000 Z
   where: github
   who: 526301
 - _id: 13118
@@ -39786,7 +39556,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 14:10:01.936286041 Z
   what: pull-was-merged
-  when: 2016-08-15 18:47:35.000000000 Z
+  when: &178 2016-08-15 18:47:35.000000000 Z
   where: github
   who: 8086956
 - _id: 13119
@@ -39812,7 +39582,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 14:10:01.963649155 Z
   what: pull-was-merged
-  when: 2016-08-15 19:07:38.000000000 Z
+  when: &179 2016-08-15 19:07:38.000000000 Z
   where: github
   who: 8086956
 - _id: 13120
@@ -43917,7 +43687,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:08:07.601543970 Z
   what: pull-was-merged
-  when: 2019-09-06 19:48:16.000000000 Z
+  when: &180 2019-09-06 19:48:16.000000000 Z
   where: github
   who: 8086956
 - _id: 13320
@@ -47191,6 +46961,7 @@
   comments: 35
   details: The pull request yegor256/takes#688 with 427 HoC created by @xupyprmv was
     merged by @rultor after 4d6h of being in review and 35 comments.
+  done: 2025-10-03 18:04:29.394876899 Z
   hoc: 427
   is_human: 1
   issue: 688
@@ -47209,6 +46980,7 @@
   comments: 81
   details: The pull request yegor256/takes#689 with 567 HoC created by @dalifreire
     was merged by @rultor after 1w5d of being in review and 81 comments.
+  done: 2025-10-03 18:04:29.417692960 Z
   hoc: 567
   is_human: 1
   issue: 689
@@ -47227,6 +46999,7 @@
   comments: 63
   details: The pull request yegor256/takes#690 with 1080 HoC created by @rui-castro
     was merged by @rultor after 1w2d of being in review and 63 comments.
+  done: 2025-10-03 18:04:29.447634071 Z
   hoc: 1080
   is_human: 1
   issue: 690
@@ -47245,6 +47018,7 @@
   comments: 7
   details: The pull request yegor256/takes#699 with 6 HoC created by @ukslim was merged
     by @yegor256 after 3h59m of being in review and 7 comments.
+  done: 2025-10-03 18:04:29.467229089 Z
   hoc: 6
   is_human: 1
   issue: 699
@@ -47256,20 +47030,1267 @@
   when: *176
   where: github
   who: 923002
-- _id: 13475
-  _job: 41194
-  _time: 2025-10-03 17:08:52.935589603 Z
+- _id: 13477
+  _job: 18229846476
+  _time: 2025-10-03 17:58:37.818038921 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1183 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.625294145 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1183
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-11-17 22:51:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13478
+  _job: 18229846476
+  _time: 2025-10-03 17:58:46.031761497 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1184 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.656826932 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1184
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-11-25 15:11:01.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13479
+  _job: 18229846476
+  _time: 2025-10-03 17:58:48.679098042 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1185 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.701268649 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1185
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-11-25 14:47:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13480
+  _job: 18229846476
+  _time: 2025-10-03 17:58:51.860828193 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1186 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.741018604 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1186
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-01 12:44:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13481
+  _job: 18229846476
+  _time: 2025-10-03 17:58:54.880765542 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1187 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.780103464 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1187
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-13 17:06:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13482
+  _job: 18229846476
+  _time: 2025-10-03 17:58:57.600798814 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1188 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.822122910 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1188
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-13 18:06:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13483
+  _job: 18229846476
+  _time: 2025-10-03 17:59:00.665803113 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1189 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.859012792 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1189
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-15 02:15:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13484
+  _job: 18229846476
+  _time: 2025-10-03 17:59:03.850994509 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1190 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.901080365 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1190
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-23 12:44:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13485
+  _job: 18229846476
+  _time: 2025-10-03 17:59:06.484082530 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1191 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.936467399 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1191
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-12-28 15:42:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13486
+  _job: 18229846476
+  _time: 2025-10-03 17:59:08.735643233 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.restfb-restfb-2023.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1192 has been "pull-was-closed".
+  done: 2025-10-03 18:04:31.577013628 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1192
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-01-01 15:12:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13487
+  _job: 18229846476
+  _time: 2025-10-03 17:59:11.159645106 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/junit5-monorepo
+  comments: 6
+  comments_appreciated: 2
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1193 has been "pull-was-merged".
+  done: 2025-10-03 18:04:29.978240268 Z
+  failed_builds: 0
+  files: 3
+  hoc: 46
+  issue: 1193
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 12:25:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13488
+  _job: 18229846476
+  _time: 2025-10-03 17:59:14.686846494 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1194 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.013990488 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1194
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-13 18:42:06.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13489
+  _job: 18229846476
+  _time: 2025-10-03 17:59:17.130911579 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/major-mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1195 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.055972432 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1195
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-14 11:36:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13490
+  _job: 18229846476
+  _time: 2025-10-03 17:59:19.468473863 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1196 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.091729061 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1196
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-15 20:42:22.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13491
+  _job: 18229846476
+  _time: 2025-10-03 17:59:21.851228776 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1197 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.134897138 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1197
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-16 07:38:13.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13492
+  _job: 18229846476
+  _time: 2025-10-03 17:59:24.168292624 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-parent-0.x
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1198 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.170510326 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1198
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-17 21:39:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13493
+  _job: 18229846476
+  _time: 2025-10-03 17:59:27.459376758 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1199 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.213980605 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1199
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-29 15:40:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13494
+  _job: 18229846476
+  _time: 2025-10-03 17:59:29.685038532 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1200 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.249892335 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1200
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-01-31 02:10:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13495
+  _job: 18229846476
+  _time: 2025-10-03 17:59:32.014355807 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.projectlombok-lombok-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1201 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.294239130 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1201
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-02-03 06:47:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13496
+  _job: 18229846476
+  _time: 2025-10-03 17:59:34.405451209 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1202 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.330285301 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1202
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-02-06 18:56:48.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13497
+  _job: 18229846476
+  _time: 2025-10-03 17:59:36.638723761 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1203 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.374474673 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1203
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-02-06 18:42:55.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13498
+  _job: 18229846476
+  _time: 2025-10-03 17:59:38.917306921 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.antlr-antlr4-runtime-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1204 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.410665817 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1204
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-02-21 13:42:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13499
+  _job: 18229846476
+  _time: 2025-10-03 17:59:41.356051489 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1205 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.454429384 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1205
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-03-09 21:41:26.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13500
+  _job: 18229846476
+  _time: 2025-10-03 17:59:43.622084087 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1208 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.490079931 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1208
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-03-18 01:00:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13501
+  _job: 18229846476
+  _time: 2025-10-03 17:59:45.826221744 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1209 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.535494222 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1209
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-03-18 00:46:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13502
+  _job: 18229846476
+  _time: 2025-10-03 17:59:48.575202267 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1210 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.570520888 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1210
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-03-21 17:42:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13503
+  _job: 18229846476
+  _time: 2025-10-03 17:59:50.932093362 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-log-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1211 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.614474214 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1211
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-04-04 15:41:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13504
+  _job: 18229846476
+  _time: 2025-10-03 17:59:53.209085840 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1212 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.649971792 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1212
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-04-08 04:29:22.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13505
+  _job: 18229846476
+  _time: 2025-10-03 17:59:55.468391974 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1213 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.694665972 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1213
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-04-11 20:41:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13506
+  _job: 18229846476
+  _time: 2025-10-03 17:59:57.987980212 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1214 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.730117241 Z
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1214
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-04-21 22:40:35.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13507
+  _job: 18229846476
+  _time: 2025-10-03 18:00:00.273669958 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1216 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.773576396 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1216
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 06:45:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13508
+  _job: 18229846476
+  _time: 2025-10-03 18:00:02.563610648 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1217 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.808787805 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1217
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-02 15:41:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13509
+  _job: 18229846476
+  _time: 2025-10-03 18:00:05.284159944 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1218 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.851470730 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1218
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-12 04:41:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13510
+  _job: 18229846476
+  _time: 2025-10-03 18:00:07.893042129 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1219 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.887546060 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1219
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-16 22:40:55.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13511
+  _job: 18229846476
+  _time: 2025-10-03 18:00:10.487545584 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.antlr-antlr4-runtime-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1220 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.931579951 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1220
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-21 18:41:48.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13512
+  _job: 18229846476
+  _time: 2025-10-03 18:00:13.100884878 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1221 has been "pull-was-merged".
+  done: 2025-10-03 18:04:30.967647845 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1221
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-21 19:37:43.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13513
+  _job: 18229846476
+  _time: 2025-10-03 18:00:15.539425387 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.projectlombok-lombok-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1222 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.010649633 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1222
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-05-25 00:48:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13514
+  _job: 18229846476
+  _time: 2025-10-03 18:00:17.870033439 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-parent-0.x
+  comments: 5
+  comments_appreciated: 2
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1223 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.047067502 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1223
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 11:43:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13515
+  _job: 18229846476
+  _time: 2025-10-03 18:00:20.772357939 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x
+  comments: 5
+  comments_appreciated: 2
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1224 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.091700971 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1224
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 12:11:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13516
+  _job: 18229846476
+  _time: 2025-10-03 18:00:23.774087404 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1226 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.127808593 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1226
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-07 20:40:21.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13517
+  _job: 18229846476
+  _time: 2025-10-03 18:00:26.128897002 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1228 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.171781260 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1228
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 07:52:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13518
+  _job: 18229846476
+  _time: 2025-10-03 18:00:28.557513100 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1229 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.207735021 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1229
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-12 07:37:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13519
+  _job: 18229846476
+  _time: 2025-10-03 18:00:30.909362829 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1230 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.251728541 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1230
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-18 11:37:44.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13520
+  _job: 18229846476
+  _time: 2025-10-03 18:00:33.511271651 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1231 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.288045184 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1231
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-18 12:43:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13521
+  _job: 18229846476
+  _time: 2025-10-03 18:00:35.841377762 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1232 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.331179598 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1232
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-06-21 11:36:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13522
+  _job: 18229846476
+  _time: 2025-10-03 18:00:38.227034234 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1233 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.366907588 Z
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1233
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-07-04 20:42:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13523
+  _job: 18229846476
+  _time: 2025-10-03 18:00:40.581431828 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1234 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.411358159 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1234
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-07-19 16:43:32.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13524
+  _job: 18229846476
+  _time: 2025-10-03 18:00:42.844983094 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1235 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.446867622 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1235
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-07-21 12:45:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13525
+  _job: 18229846476
+  _time: 2025-10-03 18:00:45.193353302 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/junit5-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1236 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.491397022 Z
+  failed_builds: 0
+  files: 1
+  hoc: 6
+  issue: 1236
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-02-05 08:49:55.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13526
+  _job: 18229846476
+  _time: 2025-10-03 18:00:46.831140636 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-matchers-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1237 has been "pull-was-merged".
+  done: 2025-10-03 18:04:31.528128000 Z
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1237
+  repository: 28924109
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-08-07 20:44:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13529
+  _job: 41201
+  _time: 2025-10-03 18:03:47.946334894 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 7
+  details: The pull request yegor256/takes#706 with 2 HoC created by @pchmielowski
+    was merged by @yegor256 after 4d20h of being in review and 7 comments.
+  done: 2025-10-03 18:04:29.486046845 Z
+  hoc: 2
+  issue: 706
+  merger: 526301
+  repository: 28924109
+  review_comments: 0
+  seconds: 420827
+  what: code-was-contributed
+  when: *177
+  where: github
+  who: 7473920
+- _id: 13530
+  _job: 41201
+  _time: 2025-10-03 18:03:48.192072894 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 49
+  details: The pull request yegor256/takes#708 with 16 HoC created by @dalifreire
+    was merged by @rultor after 1w1d of being in review and 49 comments.
+  done: 2025-10-03 18:04:29.502958192 Z
+  hoc: 16
+  issue: 708
+  merger: 8086956
+  repository: 28924109
+  review_comments: 17
+  seconds: 769478
+  what: code-was-contributed
+  when: *178
+  where: github
+  who: 10319140
+- _id: 13531
+  _job: 41201
+  _time: 2025-10-03 18:03:48.389343159 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 19
+  details: The pull request yegor256/takes#709 with 120 HoC created by @xupyprmv was
+    merged by @rultor after 5d21h of being in review and 19 comments.
+  done: 2025-10-03 18:04:29.531453903 Z
+  hoc: 120
+  issue: 709
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 509811
+  what: code-was-contributed
+  when: *179
+  where: github
+  who: 441232
+- _id: 13532
+  _job: 41201
+  _time: 2025-10-03 18:04:20.341664587 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
   - 225-239
-  - 241-679
-  - 682-687
-  - 691-698
-  - 704-705
-  - '707'
-  - 712-713
-  - 718-720
+  - 241-721
   - '723'
   - 725-726
   - 728-731
@@ -47375,376 +48396,49 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 13477
-  _job: 18229846476
-  _time: 2025-10-03 17:58:37.818038921 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-api-2.x
-  comments: 4
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 4
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1183 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1183
+- _id: 13533
+  _job: 41201
+  _time: 2025-10-03 18:04:33.529957138 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 29
+  details: The pull request yegor256/takes#985 with 174 HoC created by @golszewski86
+    was merged by @rultor after 13w3d of being in review and 29 comments.
+  hoc: 174
+  is_human: 1
+  issue: 985
+  merger: 8086956
   repository: 28924109
   review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-11-17 22:51:05.000000000 Z
+  seconds: 8164787
+  what: code-was-contributed
+  when: *180
   where: github
-  who: 8086956
-- _id: 13478
-  _job: 18229846476
-  _time: 2025-10-03 17:58:46.031761497 Z
+  who: 45224442
+- _id: 13534
+  _job: 18231159599
+  _time: 2025-10-03 18:56:40.930683101 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-api-2.x
+  branch: renovate/ubuntu-22.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1184 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1184
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-11-25 15:11:01.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13479
-  _job: 18229846476
-  _time: 2025-10-03 17:58:48.679098042 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-log4j12-2.x
-  comments: 6
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 6
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1185 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1185
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-11-25 14:47:39.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13480
-  _job: 18229846476
-  _time: 2025-10-03 17:58:51.860828193 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 6
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 6
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1186 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1186
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-01 12:44:00.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13481
-  _job: 18229846476
-  _time: 2025-10-03 17:58:54.880765542 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-api-2.x
-  comments: 4
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 4
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1187 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1187
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-13 17:06:28.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13482
-  _job: 18229846476
-  _time: 2025-10-03 17:58:57.600798814 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-log4j12-2.x
-  comments: 6
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 6
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1188 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1188
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-13 18:06:05.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13483
-  _job: 18229846476
-  _time: 2025-10-03 17:59:00.665803113 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
-  comments: 6
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 6
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1189 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1189
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-15 02:15:10.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13484
-  _job: 18229846476
-  _time: 2025-10-03 17:59:03.850994509 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1190 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1190
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-23 12:44:30.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13485
-  _job: 18229846476
-  _time: 2025-10-03 17:59:06.484082530 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1191 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1191
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2022-12-28 15:42:30.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13486
-  _job: 18229846476
-  _time: 2025-10-03 17:59:08.735643233 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.restfb-restfb-2023.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1192 has been "pull-was-closed".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1192
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2024-01-01 15:12:56.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13487
-  _job: 18229846476
-  _time: 2025-10-03 17:59:11.159645106 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/junit5-monorepo
-  comments: 6
-  comments_appreciated: 2
-  comments_by_author: 0
-  comments_by_reviewers: 6
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1193 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1238 has been "pull-was-merged".
   failed_builds: 0
   files: 3
-  hoc: 46
-  issue: 1193
+  hoc: 6
+  issue: 1238
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-12 12:25:41.000000000 Z
+  when: 2023-08-09 16:00:15.000000000 Z
   where: github
   who: 8086956
-- _id: 13488
-  _job: 18229846476
-  _time: 2025-10-03 17:59:14.686846494 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1194 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1194
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-01-13 18:42:06.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13489
-  _job: 18229846476
-  _time: 2025-10-03 17:59:17.130911579 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/major-mockito-monorepo
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1195 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1195
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-01-14 11:36:59.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13490
-  _job: 18229846476
-  _time: 2025-10-03 17:59:19.468473863 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1196 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1196
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-01-15 20:42:22.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13491
-  _job: 18229846476
-  _time: 2025-10-03 17:59:21.851228776 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1197 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1197
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-01-16 07:38:13.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13492
-  _job: 18229846476
-  _time: 2025-10-03 17:59:24.168292624 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-parent-0.x
-  comments: 5
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 5
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1198 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1198
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-01-17 21:39:28.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13493
-  _job: 18229846476
-  _time: 2025-10-03 17:59:27.459376758 Z
+- _id: 13535
+  _job: 18231159599
+  _time: 2025-10-03 18:56:48.265909469 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/mockito-monorepo
   comments: 3
@@ -47753,113 +48447,86 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1199 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1239 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 4
-  issue: 1199
+  issue: 1239
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-01-29 15:40:15.000000000 Z
+  when: 2023-08-22 12:46:28.000000000 Z
   where: github
   who: 8086956
-- _id: 13494
-  _job: 18229846476
-  _time: 2025-10-03 17:59:29.685038532 Z
+- _id: 13536
+  _job: 18231159599
+  _time: 2025-10-03 18:56:49.850320982 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1200 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1241 has been "pull-was-merged".
   failed_builds: 0
-  files: 1
+  files: 2
   hoc: 4
-  issue: 1200
+  issue: 1241
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-01-31 02:10:37.000000000 Z
+  when: 2023-09-03 18:07:06.000000000 Z
   where: github
   who: 8086956
-- _id: 13495
-  _job: 18229846476
-  _time: 2025-10-03 17:59:32.014355807 Z
+- _id: 13537
+  _job: 18231159599
+  _time: 2025-10-03 18:56:51.465169707 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.projectlombok-lombok-1.x
+  branch: renovate/org.slf4j-slf4j-api-2.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1201 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1242 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1201
+  issue: 1242
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-02-03 06:47:14.000000000 Z
+  when: 2023-09-03 17:41:37.000000000 Z
   where: github
   who: 8086956
-- _id: 13496
-  _job: 18229846476
-  _time: 2025-10-03 17:59:34.405451209 Z
+- _id: 13538
+  _job: 18231159599
+  _time: 2025-10-03 18:56:53.071028378 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
+  branch: renovate/actions-checkout-4.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1202 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1243 has been "pull-was-merged".
   failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1202
+  files: 4
+  hoc: 8
+  issue: 1243
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-02-06 18:56:48.000000000 Z
+  when: 2023-09-04 13:48:55.000000000 Z
   where: github
   who: 8086956
-- _id: 13497
-  _job: 18229846476
-  _time: 2025-10-03 17:59:36.638723761 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1203 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1203
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-02-06 18:42:55.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13498
-  _job: 18229846476
-  _time: 2025-10-03 17:59:38.917306921 Z
+- _id: 13539
+  _job: 18231159599
+  _time: 2025-10-03 18:56:54.691873932 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/org.antlr-antlr4-runtime-4.x
   comments: 3
@@ -47868,21 +48535,438 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1204 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1244 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1204
+  issue: 1244
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-02-21 13:42:59.000000000 Z
+  when: 2023-09-05 01:54:58.000000000 Z
   where: github
   who: 8086956
-- _id: 13499
-  _job: 18229846476
-  _time: 2025-10-03 17:59:41.356051489 Z
+- _id: 13540
+  _job: 18231159599
+  _time: 2025-10-03 18:56:56.410533954 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-sonar-maven-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1245 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1245
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-02-05 08:50:13.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13541
+  _job: 18231159599
+  _time: 2025-10-03 18:56:58.379811609 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/codecov-codecov-action-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1246 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1246
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2023-09-15 08:47:47.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13542
+  _job: 18231159599
+  _time: 2025-10-03 18:57:00.022778205 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.projectlombok-lombok-1.x
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1247 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1247
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-09-20 04:44:12.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13543
+  _job: 18231159599
+  _time: 2025-10-03 18:57:01.903172327 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-checkout-digest
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1248 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 8
+  issue: 1248
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-09-22 19:50:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13544
+  _job: 18231159599
+  _time: 2025-10-03 18:57:04.405677391 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1249 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1249
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-09-29 20:45:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13545
+  _job: 18231159599
+  _time: 2025-10-03 18:57:06.601925833 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1250 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1250
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-06 17:42:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13546
+  _job: 18231159599
+  _time: 2025-10-03 18:57:08.741668964 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-checkout-digest
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1251 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 8
+  issue: 1251
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-19 15:44:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13547
+  _job: 18231159599
+  _time: 2025-10-03 18:57:10.999447942 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1252 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1252
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-20 11:54:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13548
+  _job: 18231159599
+  _time: 2025-10-03 18:57:13.737981216 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1253 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1253
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-20 11:40:06.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13549
+  _job: 18231159599
+  _time: 2025-10-03 18:57:15.924352170 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1254 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1254
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-25 21:39:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13550
+  _job: 18231159599
+  _time: 2025-10-03 18:57:18.155346152 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-http-2.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1255 has been "pull-was-closed".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1255
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-08-02 04:04:36.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13551
+  _job: 18231159599
+  _time: 2025-10-03 18:57:19.473205864 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.apache.commons-commons-text-1.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1256 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1256
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-10-29 12:43:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13552
+  _job: 18231159599
+  _time: 2025-10-03 18:57:21.676747067 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1257 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1257
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-02 21:41:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13553
+  _job: 18231159599
+  _time: 2025-10-03 18:57:23.732651142 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi.incubator-xembly-0.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1258 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1258
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-07 10:43:43.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13554
+  _job: 18231159599
+  _time: 2025-10-03 18:57:25.909483048 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi.incubator-xembly-0.x
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1259 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1259
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-11 06:47:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13555
+  _job: 18231159599
+  _time: 2025-10-03 18:57:27.725571911 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1260 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1260
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-25 04:44:36.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13556
+  _job: 18231159599
+  _time: 2025-10-03 18:57:29.970624424 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1261 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1261
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-29 21:03:32.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13557
+  _job: 18231159599
+  _time: 2025-10-03 18:57:31.964730857 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-setup-java-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1262 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1262
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-29 20:48:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13558
+  _job: 18231159599
+  _time: 2025-10-03 18:57:33.709533902 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1263 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1263
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-11-30 00:48:58.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13559
+  _job: 18231159599
+  _time: 2025-10-03 18:57:35.465052232 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/mockito-monorepo
   comments: 3
@@ -47891,90 +48975,42 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1205 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1264 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 4
-  issue: 1205
+  issue: 1264
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-03-09 21:41:26.000000000 Z
+  when: 2023-12-01 20:44:55.000000000 Z
   where: github
   who: 8086956
-- _id: 13500
-  _job: 18229846476
-  _time: 2025-10-03 17:59:43.622084087 Z
+- _id: 13560
+  _job: 18231159599
+  _time: 2025-10-03 18:57:37.438433585 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-api-2.x
-  comments: 3
-  comments_appreciated: 1
+  branch: patch-1
+  comments: 1
+  comments_appreciated: 0
   comments_by_author: 0
-  comments_by_reviewers: 3
+  comments_by_reviewers: 1
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1208 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1265 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1208
+  issue: 1265
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-03-18 01:00:27.000000000 Z
+  when: 2023-12-24 12:52:11.000000000 Z
   where: github
-  who: 8086956
-- _id: 13501
-  _job: 18229846476
-  _time: 2025-10-03 17:59:45.826221744 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.slf4j-slf4j-log4j12-2.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1209 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1209
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-03-18 00:46:42.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13502
-  _job: 18229846476
-  _time: 2025-10-03 17:59:48.575202267 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1210 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1210
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-03-21 17:42:50.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13503
-  _job: 18229846476
-  _time: 2025-10-03 17:59:50.932093362 Z
+  who: 526301
+- _id: 13561
+  _job: 18231159599
+  _time: 2025-10-03 18:57:38.859615518 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/com.jcabi-jcabi-log-0.x
   comments: 3
@@ -47983,320 +49019,394 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1211 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1266 has been "pull-was-merged".
   failed_builds: 0
   files: 2
   hoc: 4
-  issue: 1211
+  issue: 1266
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-04-04 15:41:03.000000000 Z
+  when: 2023-12-26 14:46:19.000000000 Z
   where: github
   who: 8086956
-- _id: 13504
-  _job: 18229846476
-  _time: 2025-10-03 17:59:53.209085840 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1212 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1212
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-04-08 04:29:22.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13505
-  _job: 18229846476
-  _time: 2025-10-03 17:59:55.468391974 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1213 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1213
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-04-11 20:41:50.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13506
-  _job: 18229846476
-  _time: 2025-10-03 17:59:57.987980212 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1214 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  issue: 1214
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-04-21 22:40:35.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13507
-  _job: 18229846476
-  _time: 2025-10-03 18:00:00.273669958 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1216 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1216
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-06-12 06:45:14.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13508
-  _job: 18229846476
-  _time: 2025-10-03 18:00:02.563610648 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1217 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1217
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-02 15:41:50.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13509
-  _job: 18229846476
-  _time: 2025-10-03 18:00:05.284159944 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1218 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1218
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-12 04:41:51.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13510
-  _job: 18229846476
-  _time: 2025-10-03 18:00:07.893042129 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/commons-io-commons-io-2.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1219 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1219
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-16 22:40:55.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13511
-  _job: 18229846476
-  _time: 2025-10-03 18:00:10.487545584 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.antlr-antlr4-runtime-4.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1220 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1220
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-21 18:41:48.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13512
-  _job: 18229846476
-  _time: 2025-10-03 18:00:13.100884878 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1221 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1221
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-21 19:37:43.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13513
-  _job: 18229846476
-  _time: 2025-10-03 18:00:15.539425387 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.projectlombok-lombok-1.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1222 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1222
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-05-25 00:48:38.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13514
-  _job: 18229846476
-  _time: 2025-10-03 18:00:17.870033439 Z
+- _id: 13562
+  _job: 18231159599
+  _time: 2025-10-03 18:57:40.482842369 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/com.jcabi-parent-0.x
-  comments: 5
-  comments_appreciated: 2
+  comments: 0
+  comments_appreciated: 0
   comments_by_author: 0
-  comments_by_reviewers: 5
+  comments_by_reviewers: 0
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1223 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1267 has been "pull-was-closed".
   failed_builds: 0
   files: 2
   hoc: 4
-  issue: 1223
+  issue: 1267
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-06-12 11:43:41.000000000 Z
+  what: pull-was-closed
+  when: 2024-08-02 04:04:37.000000000 Z
   where: github
-  who: 8086956
-- _id: 13515
-  _job: 18229846476
-  _time: 2025-10-03 18:00:20.772357939 Z
+  who: 29139614
+- _id: 13563
+  _job: 18231159599
+  _time: 2025-10-03 18:57:41.774516528 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x
-  comments: 5
-  comments_appreciated: 2
-  comments_by_author: 0
-  comments_by_reviewers: 5
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1224 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1224
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-06-12 12:11:05.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13516
-  _job: 18229846476
-  _time: 2025-10-03 18:00:23.774087404 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/commons-io-commons-io-2.x
+  branch: renovate/com.jcabi-jcabi-log-0.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1226 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1268 has been "pull-was-merged".
   failed_builds: 0
   files: 2
   hoc: 4
-  issue: 1226
+  issue: 1268
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-07 20:40:21.000000000 Z
+  when: 2023-12-27 13:54:54.000000000 Z
   where: github
   who: 8086956
-- _id: 13517
-  _job: 18229846476
-  _time: 2025-10-03 18:00:26.128897002 Z
+- _id: 13564
+  _job: 18231159599
+  _time: 2025-10-03 18:57:43.435501727 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1269 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1269
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-12-28 23:18:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13565
+  _job: 18231159599
+  _time: 2025-10-03 18:57:45.597090528 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1270 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1270
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2023-12-28 22:52:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13566
+  _job: 18231159599
+  _time: 2025-10-03 18:57:47.295565821 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.restfb-restfb-2024.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1271 has been "pull-was-closed".
+  failed_builds: 9
+  files: 1
+  hoc: 2
+  issue: 1271
+  repository: 28924109
+  succeeded_builds: 5
+  what: pull-was-closed
+  when: 2025-01-29 10:46:34.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13567
+  _job: 18231159599
+  _time: 2025-10-03 18:57:52.083737000 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-log4j12-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1272 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1272
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-08 21:07:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13568
+  _job: 18231159599
+  _time: 2025-10-03 18:57:53.832347542 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.slf4j-slf4j-api-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1273 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1273
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-08 20:48:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13569
+  _job: 18231159599
+  _time: 2025-10-03 18:57:55.552417385 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1274 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1274
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-14 16:43:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13570
+  _job: 18231159599
+  _time: 2025-10-03 18:57:57.244374316 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/actions-cache-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1275 has been "pull-was-closed".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1275
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-02-05 08:50:11.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13571
+  _job: 18231159599
+  _time: 2025-10-03 18:57:58.849784896 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1276 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1276
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-24 21:40:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13572
+  _job: 18231159599
+  _time: 2025-10-03 18:58:00.650501144 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi.incubator-xembly-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1277 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1277
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-30 20:43:13.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13573
+  _job: 18231159599
+  _time: 2025-10-03 18:58:02.546322123 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/codecov-codecov-action-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1278 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1278
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-01-31 20:43:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13574
+  _job: 18231159599
+  _time: 2025-10-03 18:58:04.457967127 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/junit5-monorepo
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 1
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1279 has been "pull-was-merged".
+  failed_builds: 0
+  files: 503
+  hoc: 1058
+  issue: 1279
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-02-05 08:49:55.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13575
+  _job: 18231159599
+  _time: 2025-10-03 18:58:06.590457475 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/junit5-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1280 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1280
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-02-05 09:15:11.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13576
+  _job: 18231159599
+  _time: 2025-10-03 18:58:08.164057814 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/slf4j-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1281 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  issue: 1281
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-02-05 23:45:13.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13577
+  _job: 18231159599
+  _time: 2025-10-03 18:58:09.854694889 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1282 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1282
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-03-01 11:43:16.000000000 Z
+  where: github
+  who: 8086956
+- _id: 13578
+  _job: 18231159599
+  _time: 2025-10-03 18:58:11.714671294 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1283 has been "pull-was-closed".
+  failed_builds: 11
+  files: 2
+  hoc: 4
+  issue: 1283
+  repository: 28924109
+  succeeded_builds: 7
+  what: pull-was-closed
+  when: 2025-07-22 09:02:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13579
+  _job: 18231159599
+  _time: 2025-10-03 18:58:18.437742920 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/com.sun.xml.bind-jaxb-core-4.x
   comments: 3
@@ -48305,21 +49415,20 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1228 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1284 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1228
+  issue: 1284
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-12 07:52:10.000000000 Z
+  when: 2024-03-07 10:55:37.000000000 Z
   where: github
   who: 8086956
-- _id: 13518
-  _job: 18229846476
-  _time: 2025-10-03 18:00:28.557513100 Z
+- _id: 13580
+  _job: 18231159599
+  _time: 2025-10-03 18:58:20.125279637 Z
   _version: 0.16.7/0.54.0/0.15.50
   branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
   comments: 3
@@ -48328,216 +49437,97 @@
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1229 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1285 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1229
+  issue: 1285
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-12 07:37:51.000000000 Z
+  when: 2024-03-07 10:42:05.000000000 Z
   where: github
   who: 8086956
-- _id: 13519
-  _job: 18229846476
-  _time: 2025-10-03 18:00:30.909362829 Z
+- _id: 13581
+  _job: 18231159599
+  _time: 2025-10-03 18:58:21.893447175 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
+  branch: renovate/org.codehaus.mojo-sonar-maven-plugin-3.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1230 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1286 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1230
+  issue: 1286
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-18 11:37:44.000000000 Z
+  when: 2024-03-13 11:40:59.000000000 Z
   where: github
   who: 8086956
-- _id: 13520
-  _job: 18229846476
-  _time: 2025-10-03 18:00:33.511271651 Z
+- _id: 13582
+  _job: 18231159599
+  _time: 2025-10-03 18:58:23.725373810 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
+  branch: renovate/org.projectlombok-lombok-1.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1231 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1287 has been "pull-was-merged".
   failed_builds: 0
   files: 1
   hoc: 2
-  issue: 1231
+  issue: 1287
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-06-18 12:43:20.000000000 Z
+  when: 2024-03-20 06:44:13.000000000 Z
   where: github
   who: 8086956
-- _id: 13521
-  _job: 18229846476
-  _time: 2025-10-03 18:00:35.841377762 Z
+- _id: 13583
+  _job: 18231159599
+  _time: 2025-10-03 18:58:25.446372202 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/hibernate-validator
+  branch: renovate/commons-io-commons-io-2.x
   comments: 3
   comments_appreciated: 1
   comments_by_author: 0
   comments_by_reviewers: 3
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/takes#1232 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1232
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-06-21 11:36:05.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13522
-  _job: 18229846476
-  _time: 2025-10-03 18:00:38.227034234 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1233 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  issue: 1233
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-07-04 20:42:37.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13523
-  _job: 18229846476
-  _time: 2025-10-03 18:00:40.581431828 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1234 has been "pull-was-merged".
+  details: Apparently, yegor256/takes#1288 has been "pull-was-merged".
   failed_builds: 0
   files: 2
   hoc: 4
-  issue: 1234
+  issue: 1288
   repository: 28924109
-  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2023-07-19 16:43:32.000000000 Z
+  when: 2024-03-29 02:44:10.000000000 Z
   where: github
   who: 8086956
-- _id: 13524
-  _job: 18229846476
-  _time: 2025-10-03 18:00:42.844983094 Z
+- _id: 13584
+  _job: 18231159599
+  _time: 2025-10-03 19:00:59.283884381 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1235 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1235
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-07-21 12:45:28.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13525
-  _job: 18229846476
-  _time: 2025-10-03 18:00:45.193353302 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/junit5-monorepo
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1236 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 6
-  issue: 1236
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2024-02-05 08:49:55.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13526
-  _job: 18229846476
-  _time: 2025-10-03 18:00:46.831140636 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-matchers-1.x
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1237 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 4
-  issue: 1237
-  repository: 28924109
-  review_comments: 0
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2023-08-07 20:44:41.000000000 Z
-  where: github
-  who: 8086956
-- _id: 13527
-  _job: 18229846476
-  _time: 2025-10-03 18:02:39.589914997 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1299
   earliest_issue_was_found: 1
   events_were_scanned: 55573934316
-  issues_were_scanned: 0
-  labels_were_scanned: 1407
+  issues_were_scanned: 1303
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
-  merges_were_scanned: 1237
+  merges_were_scanned: 1288
   min_issue_was_found: 144
-  min_pull_was_found: 680
+  min_pull_was_found: 722
   repository: 28924109
-  types_were_scanned: 1299
+  types_were_scanned: 0
   what: iterate
   where: github
