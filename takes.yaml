@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 630.908819682
+  seconds: 239.007643676
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-03 22:06:33.509744797 Z
+  when: 2025-10-03 22:59:48.406895739 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -3992,286 +3992,6 @@
   what: issue-was-lost
   when: 2025-10-01 04:57:14.592580229 Z
   where: github
-- _id: 6669
-  _job: 18151820789
-  _time: 2025-10-01 04:57:39.028550692 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1012'
-  details: The missing pull yegor256/takes#1038 has been opened by @fevzian.
-  is_human: 1
-  issue: 1038
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.677870824 Z
-  what: pull-was-opened
-  when: 2020-03-12 19:58:59.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6670
-  _job: 18151820789
-  _time: 2025-10-01 04:57:39.613574923 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1036'
-  details: The missing pull yegor256/takes#1039 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1039
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.717416945 Z
-  what: pull-was-opened
-  when: 2020-03-15 04:58:47.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6671
-  _job: 18151820789
-  _time: 2025-10-01 04:57:40.152045505 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1036'
-  details: The missing pull yegor256/takes#1040 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1040
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.750937722 Z
-  what: pull-was-opened
-  when: 2020-03-15 05:22:10.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6672
-  _job: 18151820789
-  _time: 2025-10-01 04:57:40.677983561 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1016'
-  details: The missing pull yegor256/takes#1042 has been opened by @fevzian.
-  is_human: 1
-  issue: 1042
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.582411529 Z
-  what: pull-was-opened
-  when: 2020-03-25 04:22:09.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6673
-  _job: 18151820789
-  _time: 2025-10-01 04:57:41.166096003 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1017'
-  details: The missing pull yegor256/takes#1043 has been opened by @fevzian.
-  is_human: 1
-  issue: 1043
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.642968770 Z
-  what: pull-was-opened
-  when: 2020-03-25 04:37:20.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6674
-  _job: 18151820789
-  _time: 2025-10-01 04:57:41.723668708 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1015'
-  details: The missing pull yegor256/takes#1044 has been opened by @fevzian.
-  is_human: 1
-  issue: 1044
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.703663813 Z
-  what: pull-was-opened
-  when: 2020-03-25 04:49:18.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6675
-  _job: 18151820789
-  _time: 2025-10-01 04:57:42.420263346 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1019'
-  details: The missing pull yegor256/takes#1045 has been opened by @fevzian.
-  is_human: 1
-  issue: 1045
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.764230839 Z
-  what: pull-was-opened
-  when: 2020-03-25 05:00:40.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6676
-  _job: 18151820789
-  _time: 2025-10-01 04:57:42.982915946 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: fix/update-readme-with-correct-link
-  details: The missing pull yegor256/takes#1046 has been opened by @vblinden.
-  is_human: 1
-  issue: 1046
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.800285700 Z
-  what: pull-was-opened
-  when: 2020-04-28 07:25:24.000000000 Z
-  where: github
-  who: 1420356
-- _id: 6677
-  _job: 18151820789
-  _time: 2025-10-01 04:57:43.715580084 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1014'
-  details: The missing pull yegor256/takes#1047 has been opened by @fevzian.
-  is_human: 1
-  issue: 1047
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.839638635 Z
-  what: pull-was-opened
-  when: 2020-04-29 03:20:39.000000000 Z
-  where: github
-  who: 3167940
-- _id: 6678
-  _job: 18151820789
-  _time: 2025-10-01 04:57:44.207562235 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: issue-984
-  details: The missing pull yegor256/takes#1052 has been opened by @andreoss.
-  is_human: 1
-  issue: 1052
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.872797198 Z
-  what: pull-was-opened
-  when: 2020-06-23 01:28:32.000000000 Z
-  where: github
-  who: 49783909
-- _id: 6679
-  _job: 18151820789
-  _time: 2025-10-01 04:57:44.817083852 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: issue-994
-  details: The missing pull yegor256/takes#1053 has been opened by @andreoss.
-  is_human: 1
-  issue: 1053
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.857665108 Z
-  what: pull-was-opened
-  when: 2020-06-24 00:35:34.000000000 Z
-  where: github
-  who: 49783909
-- _id: 6680
-  _job: 18151820789
-  _time: 2025-10-01 04:57:45.542976925 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: issue-1055
-  details: The missing pull yegor256/takes#1056 has been opened by @andreoss.
-  is_human: 1
-  issue: 1056
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.922294766 Z
-  what: pull-was-opened
-  when: 2020-06-30 16:47:03.000000000 Z
-  where: github
-  who: 49783909
-- _id: 6681
-  _job: 18151820789
-  _time: 2025-10-01 04:57:46.071529122 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: bugfix_1050
-  details: The missing pull yegor256/takes#1059 has been opened by @rusefillc.
-  is_human: 1
-  issue: 1059
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:25.572487168 Z
-  what: pull-was-opened
-  when: 2020-07-25 16:05:40.000000000 Z
-  where: github
-  who: 48498823
-- _id: 6682
-  _job: 18151820789
-  _time: 2025-10-01 04:57:46.806374328 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: fix-remote-port
-  details: The missing pull yegor256/takes#1061 has been opened by @eugendueck.
-  is_human: 1
-  issue: 1061
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.921537336 Z
-  what: pull-was-opened
-  when: 2020-07-28 08:41:08.000000000 Z
-  where: github
-  who: 41422
-- _id: 6683
-  _job: 18151820789
-  _time: 2025-10-01 04:57:47.415682271 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1054'
-  details: The missing pull yegor256/takes#1063 has been opened by @fabriciofx.
-  is_human: 1
-  issue: 1063
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:24.983020705 Z
-  what: pull-was-opened
-  when: 2020-08-23 23:08:19.000000000 Z
-  where: github
-  who: 1964562
-- _id: 6684
-  _job: 18151820789
-  _time: 2025-10-01 04:57:48.087542656 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1036'
-  details: The missing pull yegor256/takes#1064 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1064
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.961054552 Z
-  what: pull-was-opened
-  when: 2020-09-02 20:57:39.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6685
-  _job: 18151820789
-  _time: 2025-10-01 04:57:48.867061053 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1058'
-  details: The missing pull yegor256/takes#1065 has been opened by @fabriciofx.
-  is_human: 1
-  issue: 1065
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:25.048734263 Z
-  what: pull-was-opened
-  when: 2020-09-03 15:17:13.000000000 Z
-  where: github
-  who: 1964562
-- _id: 6686
-  _job: 18151820789
-  _time: 2025-10-01 04:57:49.405174508 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: '1036'
-  details: The missing pull yegor256/takes#1066 has been opened by @paulodamaso.
-  is_human: 1
-  issue: 1066
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:26.995175473 Z
-  what: pull-was-opened
-  when: 2020-09-03 15:54:36.000000000 Z
-  where: github
-  who: 33915433
-- _id: 6687
-  _job: 18151820789
-  _time: 2025-10-01 04:57:49.880653612 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: jump2header
-  details: The missing pull yegor256/takes#1072 has been opened by @strdr4605.
-  is_human: 1
-  issue: 1072
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:25.662075471 Z
-  what: pull-was-opened
-  when: 2020-09-09 08:33:33.000000000 Z
-  where: github
-  who: 16056918
-- _id: 6688
-  _job: 18151820789
-  _time: 2025-10-01 04:57:50.548568213 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: issue-999
-  details: The missing pull yegor256/takes#1076 has been opened by @andreoss.
-  is_human: 1
-  issue: 1076
-  repository: 28924109
-  tombstone: 2025-10-03 17:07:25.103724245 Z
-  what: pull-was-opened
-  when: 2020-09-16 23:06:22.000000000 Z
-  where: github
-  who: 49783909
 - _id: 6689
   _job: 18151820789
   _time: 2025-10-01 04:57:51.130090583 Z
@@ -42852,7 +42572,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.875464553 Z
   what: pull-was-merged
-  when: 2020-07-27 22:34:05.000000000 Z
+  when: &190 2020-07-27 22:34:05.000000000 Z
   where: github
   who: 8086956
 - _id: 13349
@@ -42877,7 +42597,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.944435137 Z
   what: pull-was-merged
-  when: 2020-07-28 20:27:52.000000000 Z
+  when: &191 2020-07-28 20:27:52.000000000 Z
   where: github
   who: 8086956
 - _id: 13350
@@ -42927,7 +42647,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:08:07.939184688 Z
   what: pull-was-merged
-  when: 2020-09-03 17:36:54.000000000 Z
+  when: &192 2020-09-03 17:36:54.000000000 Z
   where: github
   who: 8086956
 - _id: 13352
@@ -42952,7 +42672,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 17:07:24.998679073 Z
   what: pull-was-merged
-  when: 2020-09-11 04:11:28.000000000 Z
+  when: &193 2020-09-11 04:11:28.000000000 Z
   where: github
   who: 8086956
 - _id: 13353
@@ -50433,6 +50153,7 @@
   comments: 18
   details: The pull request yegor256/takes#996 with 13 HoC created by @fevzian was
     merged by @rultor after 6d8h of being in review and 18 comments.
+  done: 2025-10-03 22:08:40.903214643 Z
   hoc: 13
   is_human: 1
   issue: 996
@@ -50440,6 +50161,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 548335
+  tombstone: 2025-10-03 22:08:48.372831422 Z
   what: code-was-contributed
   when: *186
   where: github
@@ -50451,6 +50173,7 @@
   comments: 49
   details: The pull request yegor256/takes#1003 with 72 HoC created by @pal548 was
     merged by @rultor after 6d12h of being in review and 49 comments.
+  done: 2025-10-03 22:08:40.947917303 Z
   hoc: 72
   is_human: 1
   issue: 1003
@@ -50458,6 +50181,7 @@
   repository: 28924109
   review_comments: 7
   seconds: 562704
+  tombstone: 2025-10-03 22:08:48.396376322 Z
   what: code-was-contributed
   when: *187
   where: github
@@ -50469,6 +50193,7 @@
   comments: 10
   details: The pull request yegor256/takes#1006 with 18 HoC created by @paulodamaso
     was merged by @rultor after 35m29s of being in review and 10 comments.
+  done: 2025-10-03 22:08:41.002289623 Z
   hoc: 18
   is_human: 1
   issue: 1006
@@ -50476,6 +50201,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 2130
+  tombstone: 2025-10-03 22:08:48.425630922 Z
   what: code-was-contributed
   when: *188
   where: github
@@ -50487,6 +50213,7 @@
   comments: 31
   details: The pull request yegor256/takes#1020 with 67 HoC created by @fevzian was
     merged by @paulodamaso after 3w4d of being in review and 31 comments.
+  done: 2025-10-03 22:08:41.055982793 Z
   hoc: 67
   is_human: 1
   issue: 1020
@@ -50494,79 +50221,11 @@
   repository: 28924109
   review_comments: 0
   seconds: 2234031
+  tombstone: 2025-10-03 22:08:48.485140582 Z
   what: code-was-contributed
   when: *189
   where: github
   who: 3167940
-- _id: 13695
-  _job: 41228
-  _time: 2025-10-03 21:08:04.936944912 Z
-  _version: 0.16.8/0.54.0/0.15.50
-  issues:
-  - 1-223
-  - 225-239
-  - 241-870
-  - 872-893
-  - 895-897
-  - 902-904
-  - 907-908
-  - '911'
-  - '913'
-  - 917-919
-  - 921-922
-  - '925'
-  - 930-932
-  - 934-943
-  - '945'
-  - 947-948
-  - 950-954
-  - 956-964
-  - 966-977
-  - 979-982
-  - 984-992
-  - 995-999
-  - 1001-1003
-  - '1006'
-  - '1008'
-  - 1010-1017
-  - 1019-1020
-  - 1022-1028
-  - '1030'
-  - 1032-1034
-  - 1036-1037
-  - '1041'
-  - 1049-1050
-  - 1054-1055
-  - '1058'
-  - '1060'
-  - '1062'
-  - '1067'
-  - 1069-1071
-  - 1073-1075
-  - 1077-1081
-  - '1083'
-  - 1088-1090
-  - '1099'
-  - 1108-1113
-  - '1116'
-  - '1118'
-  - 1127-1132
-  - '1134'
-  - '1136'
-  - 1139-1140
-  - 1142-1146
-  - '1206'
-  - '1215'
-  - '1227'
-  - '1293'
-  - '1301'
-  - '1334'
-  - '1339'
-  - '1363'
-  - '1368'
-  repository: 28924109
-  what: tombstone
-  where: github
 - _id: 13697
   _job: 18234677586
   _time: 2025-10-03 21:58:20.678352414 Z
@@ -50576,6 +50235,7 @@
   is_human: 1
   issue: 996
   repository: 28924109
+  tombstone: 2025-10-03 22:08:40.935296443 Z
   what: pull-was-opened
   when: 2019-11-20 02:33:51.000000000 Z
   where: github
@@ -50589,6 +50249,7 @@
   is_human: 1
   issue: 1003
   repository: 28924109
+  tombstone: 2025-10-03 22:08:40.982980052 Z
   what: pull-was-opened
   when: 2019-12-04 13:41:30.000000000 Z
   where: github
@@ -50602,6 +50263,7 @@
   is_human: 1
   issue: 1006
   repository: 28924109
+  tombstone: 2025-10-03 22:08:41.036700953 Z
   what: pull-was-opened
   when: 2019-12-05 14:47:34.000000000 Z
   where: github
@@ -50615,6 +50277,7 @@
   is_human: 1
   issue: 1020
   repository: 28924109
+  tombstone: 2025-10-03 22:08:41.084901343 Z
   what: pull-was-opened
   when: 2020-01-15 18:07:08.000000000 Z
   where: github
@@ -51615,20 +51278,213 @@
   when: 2025-09-14 02:54:49.000000000 Z
   where: github
   who: 526301
-- _id: 13749
-  _job: 18234677586
-  _time: 2025-10-03 22:06:30.013713989 Z
+- _id: 13751
+  _job: 41239
+  _time: 2025-10-03 22:08:49.745054291 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 13
+  details: The pull request yegor256/takes#1053 with 203 HoC created by @andreoss
+    was merged by @rultor after 4w5d of being in review and 13 comments.
+  hoc: 203
+  is_human: 1
+  issue: 1053
+  merger: 8086956
+  repository: 28924109
+  review_comments: 4
+  seconds: 2930311
+  what: code-was-contributed
+  when: *190
+  where: github
+  who: 49783909
+- _id: 13752
+  _job: 41239
+  _time: 2025-10-03 22:08:50.003079662 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 7
+  details: The pull request yegor256/takes#1056 with 111 HoC created by @andreoss
+    was merged by @rultor after 4w of being in review and 7 comments.
+  hoc: 111
+  is_human: 1
+  issue: 1056
+  merger: 8086956
+  repository: 28924109
+  review_comments: 2
+  seconds: 2432449
+  what: code-was-contributed
+  when: *191
+  where: github
+  who: 49783909
+- _id: 13753
+  _job: 41239
+  _time: 2025-10-03 22:08:50.080137502 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 26
+  details: The pull request yegor256/takes#1061 with 10 HoC created by @eugendueck
+    was merged by @rultor after 5w2d of being in review and 26 comments.
+  hoc: 10
+  is_human: 1
+  issue: 1061
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 3228946
+  what: code-was-contributed
+  when: *192
+  where: github
+  who: 41422
+- _id: 13754
+  _job: 41239
+  _time: 2025-10-03 22:09:20.939466600 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 21
+  details: The pull request yegor256/takes#1063 with 309 HoC created by @fabriciofx
+    was merged by @rultor after 2w4d of being in review and 21 comments.
+  hoc: 309
+  is_human: 1
+  issue: 1063
+  merger: 8086956
+  repository: 28924109
+  review_comments: 14
+  seconds: 1573389
+  what: code-was-contributed
+  when: *193
+  where: github
+  who: 1964562
+- _id: 13755
+  _job: 41239
+  _time: 2025-10-03 22:09:23.226964430 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  issues:
+  - 1-223
+  - 225-239
+  - 241-870
+  - 872-893
+  - 895-897
+  - 902-904
+  - 907-908
+  - '911'
+  - '913'
+  - 917-919
+  - 921-922
+  - '925'
+  - 930-932
+  - 934-943
+  - '945'
+  - 947-948
+  - 950-954
+  - 956-964
+  - 966-977
+  - 979-982
+  - 984-992
+  - 995-999
+  - 1001-1003
+  - '1006'
+  - '1008'
+  - 1010-1017
+  - 1019-1020
+  - 1022-1028
+  - '1030'
+  - 1032-1034
+  - 1036-1047
+  - 1049-1050
+  - 1052-1056
+  - 1058-1067
+  - 1069-1081
+  - '1083'
+  - 1088-1090
+  - '1099'
+  - 1108-1113
+  - '1116'
+  - '1118'
+  - 1127-1132
+  - '1134'
+  - '1136'
+  - 1139-1140
+  - 1142-1146
+  - '1206'
+  - '1215'
+  - '1227'
+  - '1293'
+  - '1301'
+  - '1334'
+  - '1339'
+  - '1363'
+  - '1368'
+  repository: 28924109
+  what: tombstone
+  where: github
+- _id: 13757
+  _job: 18235637244
+  _time: 2025-10-03 22:58:56.467178982 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  details: 'We found out that the user #175728472 is known in GitHub as @copilot.'
+  name: copilot
+  what: who-has-name
+  when: 2025-10-03 22:58:56.470476778 Z
+  where: github
+  who: 175728472
+- _id: 13758
+  _job: 18235637244
+  _time: 2025-10-03 22:59:32.891860245 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-994
+  details: The pull yegor256/takes#1053 has been opened earlier by @andreoss.
+  issue: 1053
+  repository: 28924109
+  what: pull-was-opened
+  when: 2020-06-24 00:35:34.000000000 Z
+  where: github
+  who: 49783909
+- _id: 13759
+  _job: 18235637244
+  _time: 2025-10-03 22:59:33.732260623 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1055
+  details: The pull yegor256/takes#1056 has been opened earlier by @andreoss.
+  issue: 1056
+  repository: 28924109
+  what: pull-was-opened
+  when: 2020-06-30 16:47:03.000000000 Z
+  where: github
+  who: 49783909
+- _id: 13760
+  _job: 18235637244
+  _time: 2025-10-03 22:59:34.288362357 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: fix-remote-port
+  details: The pull yegor256/takes#1061 has been opened earlier by @eugendueck.
+  issue: 1061
+  repository: 28924109
+  what: pull-was-opened
+  when: 2020-07-28 08:41:08.000000000 Z
+  where: github
+  who: 41422
+- _id: 13761
+  _job: 18235637244
+  _time: 2025-10-03 22:59:34.978415877 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1054'
+  details: The pull yegor256/takes#1063 has been opened earlier by @fabriciofx.
+  issue: 1063
+  repository: 28924109
+  what: pull-was-opened
+  when: 2020-08-23 23:08:19.000000000 Z
+  where: github
+  who: 1964562
+- _id: 13762
+  _job: 18235637244
+  _time: 2025-10-03 22:59:48.274478926 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 1299
   earliest_issue_was_found: 1
-  events_were_scanned: 55579447379
-  issues_were_scanned: 0
-  labels_were_scanned: 1407
+  events_were_scanned: 55581825931
+  issues_were_scanned: 1303
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1038
+  min_pull_was_found: 1082
   repository: 28924109
-  types_were_scanned: 1299
+  types_were_scanned: 0
   what: iterate
   where: github

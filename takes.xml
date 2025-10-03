@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1083092">
+<fb version="0.11.0" size="1079836">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">630.908819682</seconds>
+    <seconds t="F">239.007643676</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-03T22:06:33Z</when>
+    <when t="T">2025-10-03T22:59:48Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -4536,326 +4536,6 @@
     <what t="S">issue-was-lost</what>
     <when t="T">2025-10-01T04:57:14Z</when>
     <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">6669</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1012</branch>
-    <details t="S">The missing pull yegor256/takes#1038 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1038</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-12T19:58:59Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6670</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1036</branch>
-    <details t="S">The missing pull yegor256/takes#1039 has been opened by @paulodamaso.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1039</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-15T04:58:47Z</when>
-    <where t="S">github</where>
-    <who t="I">33915433</who>
-  </f>
-  <f>
-    <_id t="I">6671</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:40Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1036</branch>
-    <details t="S">The missing pull yegor256/takes#1040 has been opened by @paulodamaso.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1040</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-15T05:22:10Z</when>
-    <where t="S">github</where>
-    <who t="I">33915433</who>
-  </f>
-  <f>
-    <_id t="I">6672</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:40Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1016</branch>
-    <details t="S">The missing pull yegor256/takes#1042 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1042</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-25T04:22:09Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6673</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:41Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1017</branch>
-    <details t="S">The missing pull yegor256/takes#1043 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1043</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-25T04:37:20Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6674</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:41Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1015</branch>
-    <details t="S">The missing pull yegor256/takes#1044 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1044</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-25T04:49:18Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6675</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:42Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1019</branch>
-    <details t="S">The missing pull yegor256/takes#1045 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1045</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-03-25T05:00:40Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6676</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:42Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">fix/update-readme-with-correct-link</branch>
-    <details t="S">The missing pull yegor256/takes#1046 has been opened by @vblinden.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1046</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-04-28T07:25:24Z</when>
-    <where t="S">github</where>
-    <who t="I">1420356</who>
-  </f>
-  <f>
-    <_id t="I">6677</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:43Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1014</branch>
-    <details t="S">The missing pull yegor256/takes#1047 has been opened by @fevzian.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1047</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-04-29T03:20:39Z</when>
-    <where t="S">github</where>
-    <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">6678</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:44Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">issue-984</branch>
-    <details t="S">The missing pull yegor256/takes#1052 has been opened by @andreoss.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1052</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-06-23T01:28:32Z</when>
-    <where t="S">github</where>
-    <who t="I">49783909</who>
-  </f>
-  <f>
-    <_id t="I">6679</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:44Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">issue-994</branch>
-    <details t="S">The missing pull yegor256/takes#1053 has been opened by @andreoss.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1053</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-06-24T00:35:34Z</when>
-    <where t="S">github</where>
-    <who t="I">49783909</who>
-  </f>
-  <f>
-    <_id t="I">6680</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:45Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">issue-1055</branch>
-    <details t="S">The missing pull yegor256/takes#1056 has been opened by @andreoss.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1056</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-06-30T16:47:03Z</when>
-    <where t="S">github</where>
-    <who t="I">49783909</who>
-  </f>
-  <f>
-    <_id t="I">6681</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:46Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">bugfix_1050</branch>
-    <details t="S">The missing pull yegor256/takes#1059 has been opened by @rusefillc.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1059</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:25Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-07-25T16:05:40Z</when>
-    <where t="S">github</where>
-    <who t="I">48498823</who>
-  </f>
-  <f>
-    <_id t="I">6682</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:46Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">fix-remote-port</branch>
-    <details t="S">The missing pull yegor256/takes#1061 has been opened by @eugendueck.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1061</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-07-28T08:41:08Z</when>
-    <where t="S">github</where>
-    <who t="I">41422</who>
-  </f>
-  <f>
-    <_id t="I">6683</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:47Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1054</branch>
-    <details t="S">The missing pull yegor256/takes#1063 has been opened by @fabriciofx.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1063</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:24Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-08-23T23:08:19Z</when>
-    <where t="S">github</where>
-    <who t="I">1964562</who>
-  </f>
-  <f>
-    <_id t="I">6684</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:48Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1036</branch>
-    <details t="S">The missing pull yegor256/takes#1064 has been opened by @paulodamaso.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1064</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-09-02T20:57:39Z</when>
-    <where t="S">github</where>
-    <who t="I">33915433</who>
-  </f>
-  <f>
-    <_id t="I">6685</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:48Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1058</branch>
-    <details t="S">The missing pull yegor256/takes#1065 has been opened by @fabriciofx.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1065</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:25Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-09-03T15:17:13Z</when>
-    <where t="S">github</where>
-    <who t="I">1964562</who>
-  </f>
-  <f>
-    <_id t="I">6686</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:49Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">1036</branch>
-    <details t="S">The missing pull yegor256/takes#1066 has been opened by @paulodamaso.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1066</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:26Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-09-03T15:54:36Z</when>
-    <where t="S">github</where>
-    <who t="I">33915433</who>
-  </f>
-  <f>
-    <_id t="I">6687</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:49Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">jump2header</branch>
-    <details t="S">The missing pull yegor256/takes#1072 has been opened by @strdr4605.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1072</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:25Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-09-09T08:33:33Z</when>
-    <where t="S">github</where>
-    <who t="I">16056918</who>
-  </f>
-  <f>
-    <_id t="I">6688</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:57:50Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">issue-999</branch>
-    <details t="S">The missing pull yegor256/takes#1076 has been opened by @andreoss.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1076</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T17:07:25Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2020-09-16T23:06:22Z</when>
-    <where t="S">github</where>
-    <who t="I">49783909</who>
   </f>
   <f>
     <_id t="I">6689</_id>
@@ -55941,6 +55621,7 @@
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <comments t="I">18</comments>
     <details t="S">The pull request yegor256/takes#996 with 13 HoC created by @fevzian was merged by @rultor after 6d8h of being in review and 18 comments.</details>
+    <done t="T">2025-10-03T22:08:40Z</done>
     <hoc t="I">13</hoc>
     <is_human t="I">1</is_human>
     <issue t="I">996</issue>
@@ -55948,6 +55629,7 @@
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
     <seconds t="I">548335</seconds>
+    <tombstone t="T">2025-10-03T22:08:48Z</tombstone>
     <what t="S">code-was-contributed</what>
     <when t="T">2019-11-26T10:52:46Z</when>
     <where t="S">github</where>
@@ -55960,6 +55642,7 @@
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <comments t="I">49</comments>
     <details t="S">The pull request yegor256/takes#1003 with 72 HoC created by @pal548 was merged by @rultor after 6d12h of being in review and 49 comments.</details>
+    <done t="T">2025-10-03T22:08:40Z</done>
     <hoc t="I">72</hoc>
     <is_human t="I">1</is_human>
     <issue t="I">1003</issue>
@@ -55967,6 +55650,7 @@
     <repository t="I">28924109</repository>
     <review_comments t="I">7</review_comments>
     <seconds t="I">562704</seconds>
+    <tombstone t="T">2025-10-03T22:08:48Z</tombstone>
     <what t="S">code-was-contributed</what>
     <when t="T">2019-12-11T01:59:54Z</when>
     <where t="S">github</where>
@@ -55979,6 +55663,7 @@
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <comments t="I">10</comments>
     <details t="S">The pull request yegor256/takes#1006 with 18 HoC created by @paulodamaso was merged by @rultor after 35m29s of being in review and 10 comments.</details>
+    <done t="T">2025-10-03T22:08:41Z</done>
     <hoc t="I">18</hoc>
     <is_human t="I">1</is_human>
     <issue t="I">1006</issue>
@@ -55986,6 +55671,7 @@
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
     <seconds t="I">2130</seconds>
+    <tombstone t="T">2025-10-03T22:08:48Z</tombstone>
     <what t="S">code-was-contributed</what>
     <when t="T">2019-12-05T15:23:04Z</when>
     <where t="S">github</where>
@@ -55998,6 +55684,7 @@
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <comments t="I">31</comments>
     <details t="S">The pull request yegor256/takes#1020 with 67 HoC created by @fevzian was merged by @paulodamaso after 3w4d of being in review and 31 comments.</details>
+    <done t="T">2025-10-03T22:08:41Z</done>
     <hoc t="I">67</hoc>
     <is_human t="I">1</is_human>
     <issue t="I">1020</issue>
@@ -56005,82 +55692,11 @@
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
     <seconds t="I">2234031</seconds>
+    <tombstone t="T">2025-10-03T22:08:48Z</tombstone>
     <what t="S">code-was-contributed</what>
     <when t="T">2020-02-10T14:40:59Z</when>
     <where t="S">github</where>
     <who t="I">3167940</who>
-  </f>
-  <f>
-    <_id t="I">13695</_id>
-    <_job t="I">41228</_job>
-    <_time t="T">2025-10-03T21:08:04Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
-    <issues>
-      <v t="S">1-223</v>
-      <v t="S">225-239</v>
-      <v t="S">241-870</v>
-      <v t="S">872-893</v>
-      <v t="S">895-897</v>
-      <v t="S">902-904</v>
-      <v t="S">907-908</v>
-      <v t="S">911</v>
-      <v t="S">913</v>
-      <v t="S">917-919</v>
-      <v t="S">921-922</v>
-      <v t="S">925</v>
-      <v t="S">930-932</v>
-      <v t="S">934-943</v>
-      <v t="S">945</v>
-      <v t="S">947-948</v>
-      <v t="S">950-954</v>
-      <v t="S">956-964</v>
-      <v t="S">966-977</v>
-      <v t="S">979-982</v>
-      <v t="S">984-992</v>
-      <v t="S">995-999</v>
-      <v t="S">1001-1003</v>
-      <v t="S">1006</v>
-      <v t="S">1008</v>
-      <v t="S">1010-1017</v>
-      <v t="S">1019-1020</v>
-      <v t="S">1022-1028</v>
-      <v t="S">1030</v>
-      <v t="S">1032-1034</v>
-      <v t="S">1036-1037</v>
-      <v t="S">1041</v>
-      <v t="S">1049-1050</v>
-      <v t="S">1054-1055</v>
-      <v t="S">1058</v>
-      <v t="S">1060</v>
-      <v t="S">1062</v>
-      <v t="S">1067</v>
-      <v t="S">1069-1071</v>
-      <v t="S">1073-1075</v>
-      <v t="S">1077-1081</v>
-      <v t="S">1083</v>
-      <v t="S">1088-1090</v>
-      <v t="S">1099</v>
-      <v t="S">1108-1113</v>
-      <v t="S">1116</v>
-      <v t="S">1118</v>
-      <v t="S">1127-1132</v>
-      <v t="S">1134</v>
-      <v t="S">1136</v>
-      <v t="S">1139-1140</v>
-      <v t="S">1142-1146</v>
-      <v t="S">1206</v>
-      <v t="S">1215</v>
-      <v t="S">1227</v>
-      <v t="S">1293</v>
-      <v t="S">1301</v>
-      <v t="S">1334</v>
-      <v t="S">1339</v>
-      <v t="S">1363</v>
-      <v t="S">1368</v>
-    </issues>
-    <repository t="I">28924109</repository>
-    <what t="S">tombstone</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">13697</_id>
@@ -56092,6 +55708,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">996</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-03T22:08:40Z</tombstone>
     <what t="S">pull-was-opened</what>
     <when t="T">2019-11-20T02:33:51Z</when>
     <where t="S">github</where>
@@ -56107,6 +55724,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">1003</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-03T22:08:40Z</tombstone>
     <what t="S">pull-was-opened</what>
     <when t="T">2019-12-04T13:41:30Z</when>
     <where t="S">github</where>
@@ -56122,6 +55740,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">1006</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-03T22:08:41Z</tombstone>
     <what t="S">pull-was-opened</what>
     <when t="T">2019-12-05T14:47:34Z</when>
     <where t="S">github</where>
@@ -56137,6 +55756,7 @@
     <is_human t="I">1</is_human>
     <issue t="I">1020</issue>
     <repository t="I">28924109</repository>
+    <tombstone t="T">2025-10-03T22:08:41Z</tombstone>
     <what t="S">pull-was-opened</what>
     <when t="T">2020-01-15T18:07:08Z</when>
     <where t="S">github</where>
@@ -57213,21 +56833,231 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">13749</_id>
-    <_job t="I">18234677586</_job>
-    <_time t="T">2025-10-03T22:06:30Z</_time>
+    <_id t="I">13751</_id>
+    <_job t="I">41239</_job>
+    <_time t="T">2025-10-03T22:08:49Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">13</comments>
+    <details t="S">The pull request yegor256/takes#1053 with 203 HoC created by @andreoss was merged by @rultor after 4w5d of being in review and 13 comments.</details>
+    <hoc t="I">203</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1053</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <seconds t="I">2930311</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2020-07-27T22:34:05Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">13752</_id>
+    <_job t="I">41239</_job>
+    <_time t="T">2025-10-03T22:08:50Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">7</comments>
+    <details t="S">The pull request yegor256/takes#1056 with 111 HoC created by @andreoss was merged by @rultor after 4w of being in review and 7 comments.</details>
+    <hoc t="I">111</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1056</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">2432449</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2020-07-28T20:27:52Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">13753</_id>
+    <_job t="I">41239</_job>
+    <_time t="T">2025-10-03T22:08:50Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">26</comments>
+    <details t="S">The pull request yegor256/takes#1061 with 10 HoC created by @eugendueck was merged by @rultor after 5w2d of being in review and 26 comments.</details>
+    <hoc t="I">10</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1061</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">3228946</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2020-09-03T17:36:54Z</when>
+    <where t="S">github</where>
+    <who t="I">41422</who>
+  </f>
+  <f>
+    <_id t="I">13754</_id>
+    <_job t="I">41239</_job>
+    <_time t="T">2025-10-03T22:09:20Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">21</comments>
+    <details t="S">The pull request yegor256/takes#1063 with 309 HoC created by @fabriciofx was merged by @rultor after 2w4d of being in review and 21 comments.</details>
+    <hoc t="I">309</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1063</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">14</review_comments>
+    <seconds t="I">1573389</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2020-09-11T04:11:28Z</when>
+    <where t="S">github</where>
+    <who t="I">1964562</who>
+  </f>
+  <f>
+    <_id t="I">13755</_id>
+    <_job t="I">41239</_job>
+    <_time t="T">2025-10-03T22:09:23Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <issues>
+      <v t="S">1-223</v>
+      <v t="S">225-239</v>
+      <v t="S">241-870</v>
+      <v t="S">872-893</v>
+      <v t="S">895-897</v>
+      <v t="S">902-904</v>
+      <v t="S">907-908</v>
+      <v t="S">911</v>
+      <v t="S">913</v>
+      <v t="S">917-919</v>
+      <v t="S">921-922</v>
+      <v t="S">925</v>
+      <v t="S">930-932</v>
+      <v t="S">934-943</v>
+      <v t="S">945</v>
+      <v t="S">947-948</v>
+      <v t="S">950-954</v>
+      <v t="S">956-964</v>
+      <v t="S">966-977</v>
+      <v t="S">979-982</v>
+      <v t="S">984-992</v>
+      <v t="S">995-999</v>
+      <v t="S">1001-1003</v>
+      <v t="S">1006</v>
+      <v t="S">1008</v>
+      <v t="S">1010-1017</v>
+      <v t="S">1019-1020</v>
+      <v t="S">1022-1028</v>
+      <v t="S">1030</v>
+      <v t="S">1032-1034</v>
+      <v t="S">1036-1047</v>
+      <v t="S">1049-1050</v>
+      <v t="S">1052-1056</v>
+      <v t="S">1058-1067</v>
+      <v t="S">1069-1081</v>
+      <v t="S">1083</v>
+      <v t="S">1088-1090</v>
+      <v t="S">1099</v>
+      <v t="S">1108-1113</v>
+      <v t="S">1116</v>
+      <v t="S">1118</v>
+      <v t="S">1127-1132</v>
+      <v t="S">1134</v>
+      <v t="S">1136</v>
+      <v t="S">1139-1140</v>
+      <v t="S">1142-1146</v>
+      <v t="S">1206</v>
+      <v t="S">1215</v>
+      <v t="S">1227</v>
+      <v t="S">1293</v>
+      <v t="S">1301</v>
+      <v t="S">1334</v>
+      <v t="S">1339</v>
+      <v t="S">1363</v>
+      <v t="S">1368</v>
+    </issues>
+    <repository t="I">28924109</repository>
+    <what t="S">tombstone</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">13757</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:58:56Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
+    <details t="S">We found out that the user #175728472 is known in GitHub as @copilot.</details>
+    <name t="S">copilot</name>
+    <what t="S">who-has-name</what>
+    <when t="T">2025-10-03T22:58:56Z</when>
+    <where t="S">github</where>
+    <who t="I">175728472</who>
+  </f>
+  <f>
+    <_id t="I">13758</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:59:32Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">issue-994</branch>
+    <details t="S">The pull yegor256/takes#1053 has been opened earlier by @andreoss.</details>
+    <issue t="I">1053</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2020-06-24T00:35:34Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">13759</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:59:33Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">issue-1055</branch>
+    <details t="S">The pull yegor256/takes#1056 has been opened earlier by @andreoss.</details>
+    <issue t="I">1056</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2020-06-30T16:47:03Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">13760</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:59:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">fix-remote-port</branch>
+    <details t="S">The pull yegor256/takes#1061 has been opened earlier by @eugendueck.</details>
+    <issue t="I">1061</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2020-07-28T08:41:08Z</when>
+    <where t="S">github</where>
+    <who t="I">41422</who>
+  </f>
+  <f>
+    <_id t="I">13761</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:59:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">1054</branch>
+    <details t="S">The pull yegor256/takes#1063 has been opened earlier by @fabriciofx.</details>
+    <issue t="I">1063</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2020-08-23T23:08:19Z</when>
+    <where t="S">github</where>
+    <who t="I">1964562</who>
+  </f>
+  <f>
+    <_id t="I">13762</_id>
+    <_job t="I">18235637244</_job>
+    <_time t="T">2025-10-03T22:59:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">1299</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55579447379</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">1407</labels_were_scanned>
+    <events_were_scanned t="I">55581825931</events_were_scanned>
+    <issues_were_scanned t="I">1303</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1038</min_pull_was_found>
+    <min_pull_was_found t="I">1082</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1299</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
