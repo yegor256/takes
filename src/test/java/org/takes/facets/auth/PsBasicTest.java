@@ -6,7 +6,6 @@ package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.util.stream.Stream;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
