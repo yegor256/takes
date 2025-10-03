@@ -46,7 +46,6 @@ final class PsBasicTest {
 
     @Test
     void handleConnectionWithValidCredential() throws IOException {
-        Stream.of(
         final String user = "john";
         final Opt<Identity> identity = new PsBasic(
             "RealmA",
