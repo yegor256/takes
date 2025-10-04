@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 204.290575882
+  seconds: 285.317832997
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-04 13:59:29.175519600 Z
+  when: 2025-10-04 15:01:07.798427888 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -6277,286 +6277,6 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-10-01 19:57:18.082896600 Z
-- _id: 11543
-  _job: 18193801459
-  _time: 2025-10-02 13:05:29.167183074 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#516.
-  is_human: 1
-  issue: 516
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.082238614 Z
-  what: label-was-attached
-  when: 2016-01-19 00:21:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 11544
-  _job: 18193801459
-  _time: 2025-10-02 13:05:30.294661307 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#517.
-  is_human: 1
-  issue: 517
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.134199387 Z
-  what: label-was-attached
-  when: 2016-01-19 00:20:32.000000000 Z
-  where: github
-  who: 526301
-- _id: 11545
-  _job: 18193801459
-  _time: 2025-10-02 13:05:31.512406983 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#520.
-  is_human: 1
-  issue: 520
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.215936212 Z
-  what: label-was-attached
-  when: 2016-01-19 18:48:34.000000000 Z
-  where: github
-  who: 526301
-- _id: 11546
-  _job: 18193801459
-  _time: 2025-10-02 13:05:33.059300284 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#522.
-  is_human: 1
-  issue: 522
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.296862959 Z
-  what: label-was-attached
-  when: 2016-01-26 04:32:47.000000000 Z
-  where: github
-  who: 526301
-- _id: 11547
-  _job: 18193801459
-  _time: 2025-10-02 13:05:34.817899958 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#524.
-  is_human: 1
-  issue: 524
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.376370028 Z
-  what: label-was-attached
-  when: 2016-01-26 04:32:06.000000000 Z
-  where: github
-  who: 526301
-- _id: 11548
-  _job: 18193801459
-  _time: 2025-10-02 13:05:35.697946943 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#530.
-  is_human: 1
-  issue: 530
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.426936475 Z
-  what: label-was-attached
-  when: 2016-01-21 16:50:15.000000000 Z
-  where: github
-  who: 526301
-- _id: 11549
-  _job: 18193801459
-  _time: 2025-10-02 13:05:37.578144782 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#540.
-  is_human: 1
-  issue: 540
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.536870079 Z
-  what: label-was-attached
-  when: 2016-01-29 21:20:35.000000000 Z
-  where: github
-  who: 526301
-- _id: 11550
-  _job: 18193801459
-  _time: 2025-10-02 13:05:38.292700607 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#542.
-  is_human: 1
-  issue: 542
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.587737788 Z
-  what: label-was-attached
-  when: 2016-01-26 04:07:34.000000000 Z
-  where: github
-  who: 526301
-- _id: 11551
-  _job: 18193801459
-  _time: 2025-10-02 13:05:39.560181921 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#548.
-  is_human: 1
-  issue: 548
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.668213056 Z
-  what: label-was-attached
-  when: 2016-02-03 23:10:50.000000000 Z
-  where: github
-  who: 526301
-- _id: 11552
-  _job: 18193801459
-  _time: 2025-10-02 13:05:40.884731710 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#555.
-  is_human: 1
-  issue: 555
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.775932070 Z
-  what: label-was-attached
-  when: 2016-01-29 20:14:49.000000000 Z
-  where: github
-  who: 526301
-- _id: 11553
-  _job: 18193801459
-  _time: 2025-10-02 13:05:41.708026683 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#557.
-  is_human: 1
-  issue: 557
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.855399399 Z
-  what: label-was-attached
-  when: 2016-02-03 00:33:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 11554
-  _job: 18193801459
-  _time: 2025-10-02 13:05:42.870425686 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#560.
-  is_human: 1
-  issue: 560
-  label: bug
-  repository: 28924109
-  tombstone: 2025-10-03 04:02:51.933737396 Z
-  what: label-was-attached
-  when: 2016-02-09 04:39:25.000000000 Z
-  where: github
-  who: 526301
-- _id: 11556
-  _job: 18193801459
-  _time: 2025-10-02 13:07:15.473334216 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#403 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 403
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:48.171356071 Z
-  what: issue-was-assigned
-  when: 2015-10-09 18:16:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 11557
-  _job: 18193801459
-  _time: 2025-10-02 13:07:16.431460652 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#406 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 406
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:48.265491874 Z
-  what: issue-was-assigned
-  when: 2015-10-12 23:38:09.000000000 Z
-  where: github
-  who: 526301
-- _id: 11558
-  _job: 18193801459
-  _time: 2025-10-02 13:07:18.422467287 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#414 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 414
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:48.505497458 Z
-  what: issue-was-assigned
-  when: 2015-10-23 05:09:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 11559
-  _job: 18193801459
-  _time: 2025-10-02 13:07:18.747852213 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#416 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 416
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:48.557903734 Z
-  what: issue-was-assigned
-  when: 2015-10-28 21:27:41.000000000 Z
-  where: github
-  who: 526301
-- _id: 11560
-  _job: 18193801459
-  _time: 2025-10-02 13:07:20.462311671 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#420 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 420
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:48.813449412 Z
-  what: issue-was-assigned
-  when: 2015-11-02 20:31:38.000000000 Z
-  where: github
-  who: 526301
-- _id: 11561
-  _job: 18193801459
-  _time: 2025-10-02 13:07:27.149188244 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#449 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 449
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:49.840246394 Z
-  what: issue-was-assigned
-  when: 2015-11-28 19:28:52.000000000 Z
-  where: github
-  who: 526301
-- _id: 11562
-  _job: 18193801459
-  _time: 2025-10-02 13:07:30.675816290 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  assigner: 526301
-  details: yegor256/takes#469 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 469
-  repository: 28924109
-  tombstone: 2025-10-03 03:12:50.391220654 Z
-  what: issue-was-assigned
-  when: 2015-12-16 19:37:41.000000000 Z
-  where: github
-  who: 526301
-- _id: 11564
-  _job: 18193801459
-  _time: 2025-10-02 13:07:37.934822886 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: Apparently, yegor256/takes#712 has been "issue-was-closed".
-  done: 2025-10-02 13:09:00.345305235 Z
-  is_human: 1
-  issue: 712
-  repository: 28924109
-  tombstone: 2025-10-02 13:09:51.399760002 Z
-  what: issue-was-closed
-  when: 2017-06-08 12:56:46.000000000 Z
-  where: github
-  who: 1524988
 - _id: 11565
   _job: 18193801459
   _time: 2025-10-02 13:07:38.189717464 Z
@@ -44874,7 +44594,7 @@
   repository: 28924109
   tombstone: 2025-10-04 08:00:07.036742002 Z
   what: issue-was-opened
-  when: 2016-01-29 17:52:50.000000000 Z
+  when: &206 2016-01-29 17:52:50.000000000 Z
   where: github
   who: 5467276
 - _id: 13908
@@ -46275,9 +45995,24 @@
   when: *205
   where: github
   who: 29139614
-- _id: 14025
-  _job: 41356
-  _time: 2025-10-04 13:09:03.738600923 Z
+- _id: 14028
+  _job: 41365
+  _time: 2025-10-04 14:00:31.043301471 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  closer: 526301
+  details: 'In the repository #28924109, the user #5467276 submitted the issue #555
+    which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2025-10-04 14:01:03.396478275 Z
+  issue: 555
+  repository: 28924109
+  what: dud-was-closed
+  when: *206
+  where: github
+  who: 5467276
+- _id: 14029
+  _job: 41365
+  _time: 2025-10-04 14:01:02.578142149 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
@@ -46348,20 +46083,20 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 14026
-  _job: 18245216064
-  _time: 2025-10-04 13:58:43.717451479 Z
+- _id: 14030
+  _job: 18245830160
+  _time: 2025-10-04 15:00:33.605061823 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1299
   earliest_issue_was_found: 1
-  events_were_scanned: 55601679695
-  issues_were_scanned: 0
-  labels_were_scanned: 1407
+  events_were_scanned: 55602475698
+  issues_were_scanned: 1303
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1283
+  min_pull_was_found: 1291
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 1299
   what: iterate
   where: github
