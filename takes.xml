@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1061075">
+<fb version="0.11.0" size="1048831">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">235.707704368</seconds>
+    <seconds t="F">241.736604515</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-04T01:25:07Z</when>
+    <when t="T">2025-10-04T02:23:21Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -4568,134 +4568,6 @@
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">6761</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:29Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
-    <details t="S">The missing pull yegor256/takes#1194 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1194</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-13T17:43:31Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6762</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:30Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/major-mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1195 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1195</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-14T10:47:59Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6763</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:31Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1196 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1196</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-15T20:01:41Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6764</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:31Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1197 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1197</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-16T06:37:52Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6765</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:32Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-parent-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1198 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1198</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-17T20:39:41Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6766</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:32Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1199 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1199</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-29T13:37:49Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6767</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:33Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1200 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1200</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-31T01:16:31Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6768</_id>
-    <_job t="I">18151820789</_job>
-    <_time t="T">2025-10-01T04:58:33Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.projectlombok-lombok-1.x</branch>
-    <details t="S">The missing pull yegor256/takes#1201 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1201</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-02-03T05:47:25Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
     <_id t="I">6838</_id>
     <_job t="I">18151820789</_job>
     <_time t="T">2025-10-01T04:59:04Z</_time>
@@ -4800,534 +4672,6 @@
     <who t="I">49699333</who>
   </f>
   <f>
-    <_id t="I">6979</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:17Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.sun.xml.bind-jaxb-core-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1202 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1202</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-02-06T17:58:05Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6980</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:17Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.sun.xml.bind-jaxb-impl-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1203 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1203</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-02-06T17:58:11Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6981</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:18Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.antlr-antlr4-runtime-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1204 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1204</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-02-21T13:15:34Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6982</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:19Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1205 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1205</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-03-09T21:08:44Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6983</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:19Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.slf4j-slf4j-api-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1208 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1208</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-03-18T00:10:08Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6984</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:20Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.slf4j-slf4j-log4j12-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1209 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1209</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-03-18T00:10:13Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6985</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:20Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
-    <details t="S">The missing pull yegor256/takes#1210 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1210</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-03-21T16:39:31Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6986</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:21Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-log-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1211 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1211</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-04-04T15:17:41Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6987</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:22Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">master</branch>
-    <details t="S">The missing pull yegor256/takes#1212 has been opened by @guspan-tanadi.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1212</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-04-05T09:23:15Z</when>
-    <where t="S">github</where>
-    <who t="I">36249910</who>
-  </f>
-  <f>
-    <_id t="I">6988</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:23Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1213 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1213</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-04-11T19:57:42Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6989</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:24Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1214 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1214</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-04-21T21:39:00Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6990</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:25Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">master</branch>
-    <details t="S">The missing pull yegor256/takes#1216 has been opened by @nurmukhametovalexey.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1216</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-04-29T12:20:36Z</when>
-    <where t="S">github</where>
-    <who t="I">67868993</who>
-  </f>
-  <f>
-    <_id t="I">6991</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:25Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
-    <details t="S">The missing pull yegor256/takes#1217 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1217</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-02T14:45:59Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6992</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:26Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x</branch>
-    <details t="S">The missing pull yegor256/takes#1218 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1218</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-12T03:41:39Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6993</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:26Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1219 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1219</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-16T21:46:14Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6994</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:28Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.antlr-antlr4-runtime-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1220 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1220</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-21T18:24:28Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6995</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:29Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1221 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1221</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:30Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-21T18:42:08Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6996</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:29Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.projectlombok-lombok-1.x</branch>
-    <details t="S">The missing pull yegor256/takes#1222 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1222</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-24T23:44:33Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6997</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:30Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-parent-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1223 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1223</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-28T10:26:23Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6998</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:31Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.basepom.maven-duplicate-finder-maven-plugin-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1224 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1224</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-05-29T09:23:08Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">6999</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:32Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1226 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1226</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-07T19:47:26Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7000</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:33Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.sun.xml.bind-jaxb-core-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1228 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1228</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-12T06:45:34Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7001</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:33Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.sun.xml.bind-jaxb-impl-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1229 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1229</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-12T06:45:37Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7002</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:34Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1230 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1230</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-18T10:30:04Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7003</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:34Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1231 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1231</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-18T11:37:59Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7004</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:35Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/hibernate-validator</branch>
-    <details t="S">The missing pull yegor256/takes#1232 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1232</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-06-21T10:43:56Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7005</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:36Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
-    <details t="S">The missing pull yegor256/takes#1233 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1233</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-07-04T19:31:03Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7006</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:36Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1234 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1234</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-07-19T16:14:31Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7007</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:37Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
-    <details t="S">The missing pull yegor256/takes#1235 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1235</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-07-21T11:20:51Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7008</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:37Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/junit5-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1236 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1236</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-07-23T13:41:31Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7009</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:38Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/com.jcabi-jcabi-matchers-1.x</branch>
-    <details t="S">The missing pull yegor256/takes#1237 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1237</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T18:04:31Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-08-07T20:16:09Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7010</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/ubuntu-22.x</branch>
-    <details t="S">The missing pull yegor256/takes#1238 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1238</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-08-09T14:26:30Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7011</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The missing pull yegor256/takes#1239 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1239</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-08-22T11:52:45Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
     <_id t="I">7012</_id>
     <_job t="I">18152851551</_job>
     <_time t="T">2025-10-01T05:56:40Z</_time>
@@ -5341,150 +4685,6 @@
     <when t="T">2023-09-01T10:48:03Z</when>
     <where t="S">github</where>
     <who t="I">28104582</who>
-  </f>
-  <f>
-    <_id t="I">7013</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:41Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.slf4j-slf4j-log4j12-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1241 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1241</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-03T17:06:32Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7014</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:41Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.slf4j-slf4j-api-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1242 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1242</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-03T17:06:35Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7015</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:42Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/actions-checkout-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1243 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1243</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-04T12:53:59Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7016</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:42Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.antlr-antlr4-runtime-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1244 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1244</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-05T00:39:08Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7017</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:43Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.codehaus.mojo-sonar-maven-plugin-3.x</branch>
-    <details t="S">The missing pull yegor256/takes#1245 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1245</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:32Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-14T16:49:13Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7018</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:44Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/codecov-codecov-action-4.x</branch>
-    <details t="S">The missing pull yegor256/takes#1246 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1246</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:32Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-14T16:49:17Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7019</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:44Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/org.projectlombok-lombok-1.x</branch>
-    <details t="S">The missing pull yegor256/takes#1247 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1247</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-20T03:53:00Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7020</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:45Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/actions-checkout-digest</branch>
-    <details t="S">The missing pull yegor256/takes#1248 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1248</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-22T19:03:48Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
-  </f>
-  <f>
-    <_id t="I">7021</_id>
-    <_job t="I">18152851551</_job>
-    <_time t="T">2025-10-01T05:56:46Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
-    <details t="S">The missing pull yegor256/takes#1249 has been opened by @renovate[bot].</details>
-    <is_human t="I">0</is_human>
-    <issue t="I">1249</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T20:07:29Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2023-09-29T19:49:10Z</when>
-    <where t="S">github</where>
-    <who t="I">29139614</who>
   </f>
   <f>
     <_id t="I">7022</_id>
@@ -56070,9 +55270,191 @@
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">13778</_id>
-    <_job t="I">41253</_job>
-    <_time t="T">2025-10-04T00:01:09Z</_time>
+    <_id t="I">13780</_id>
+    <_job t="I">18237540069</_job>
+    <_time t="T">2025-10-04T01:22:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <details t="S">The pull yegor256/takes#1191 has been opened earlier by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1191</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2022-12-28T14:34:47Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13781</_id>
+    <_job t="I">18237540069</_job>
+    <_time t="T">2025-10-04T01:22:19Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/junit5-monorepo</branch>
+    <details t="S">The pull yegor256/takes#1193 has been opened earlier by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1193</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-01-10T16:13:09Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13783</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:25:31Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1194 with 2 HoC created by @renovate[bot] was merged by @rultor after 58m34s of being in review and 3 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1194</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">3515</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-01-13T18:42:06Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13784</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:25:32Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1195 with 4 HoC created by @renovate[bot] was merged by @rultor after 48m59s of being in review and 3 comments.</details>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1195</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">2940</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-01-14T11:36:59Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13785</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:25:32Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1196 with 4 HoC created by @renovate[bot] was merged by @rultor after 40m40s of being in review and 3 comments.</details>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1196</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">2441</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-01-15T20:42:22Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13787</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:14Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1204 with 2 HoC created by @renovate[bot] was merged by @rultor after 27m24s of being in review and 3 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1204</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">1645</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-02-21T13:42:59Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13788</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:14Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1205 with 4 HoC created by @renovate[bot] was merged by @rultor after 32m41s of being in review and 3 comments.</details>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1205</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">1962</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-03-09T21:41:26Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13790</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:21Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1217 with 2 HoC created by @renovate[bot] was merged by @rultor after 55m50s of being in review and 3 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1217</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">3351</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-05-02T15:41:50Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13791</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:21Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1218 with 2 HoC created by @renovate[bot] was merged by @rultor after 1h of being in review and 3 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1218</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">3612</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-05-12T04:41:51Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13793</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:31Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1229 with 2 HoC created by @renovate[bot] was merged by @rultor after 52m13s of being in review and 3 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1229</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">3134</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2023-06-12T07:37:51Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13794</_id>
+    <_job t="I">41258</_job>
+    <_time t="T">2025-10-04T01:26:41Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <issues>
       <v t="S">1-223</v>
@@ -56122,10 +55504,10 @@
       <v t="S">1139-1140</v>
       <v t="S">1142-1149</v>
       <v t="S">1151-1174</v>
-      <v t="S">1176-1193</v>
-      <v t="S">1206</v>
-      <v t="S">1215</v>
-      <v t="S">1227</v>
+      <v t="S">1176-1206</v>
+      <v t="S">1208-1224</v>
+      <v t="S">1226-1239</v>
+      <v t="S">1241-1249</v>
       <v t="S">1293</v>
       <v t="S">1301</v>
       <v t="S">1334</v>
@@ -56138,49 +55520,133 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">13780</_id>
-    <_job t="I">18237540069</_job>
-    <_time t="T">2025-10-04T01:22:18Z</_time>
+    <_id t="I">13796</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
+    <details t="S">The pull yegor256/takes#1194 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1194</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-01-13T17:43:31Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13797</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/major-mockito-monorepo</branch>
+    <details t="S">The pull yegor256/takes#1195 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1195</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-01-14T10:47:59Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13798</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <details t="S">The pull yegor256/takes#1196 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1196</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-01-15T20:01:41Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13799</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.antlr-antlr4-runtime-4.x</branch>
+    <details t="S">The pull yegor256/takes#1204 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1204</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-02-21T13:15:34Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13800</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:55Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <branch t="S">renovate/mockito-monorepo</branch>
-    <details t="S">The pull yegor256/takes#1191 has been opened earlier by @renovate[bot].</details>
-    <issue t="I">1191</issue>
+    <details t="S">The pull yegor256/takes#1205 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1205</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
-    <when t="T">2022-12-28T14:34:47Z</when>
+    <when t="T">2023-03-09T21:08:44Z</when>
     <where t="S">github</where>
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">13781</_id>
-    <_job t="I">18237540069</_job>
-    <_time t="T">2025-10-04T01:22:19Z</_time>
+    <_id t="I">13801</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:56Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <branch t="S">renovate/junit5-monorepo</branch>
-    <details t="S">The pull yegor256/takes#1193 has been opened earlier by @renovate[bot].</details>
-    <issue t="I">1193</issue>
+    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
+    <details t="S">The pull yegor256/takes#1217 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1217</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
-    <when t="T">2023-01-10T16:13:09Z</when>
+    <when t="T">2023-05-02T14:45:59Z</when>
     <where t="S">github</where>
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">13782</_id>
-    <_job t="I">18237540069</_job>
-    <_time t="T">2025-10-04T01:24:44Z</_time>
+    <_id t="I">13802</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:57Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">1299</assignees_were_scanned>
+    <branch t="S">renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x</branch>
+    <details t="S">The pull yegor256/takes#1218 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1218</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-05-12T03:41:39Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13803</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:21:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.sun.xml.bind-jaxb-impl-4.x</branch>
+    <details t="S">The pull yegor256/takes#1229 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1229</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2023-06-12T06:45:37Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">13804</_id>
+    <_job t="I">18238203507</_job>
+    <_time t="T">2025-10-04T02:23:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55584003000</events_were_scanned>
-    <issues_were_scanned t="I">1303</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">55586244224</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">1407</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1175</min_pull_was_found>
+    <min_pull_was_found t="I">1191</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
+    <types_were_scanned t="I">1299</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
