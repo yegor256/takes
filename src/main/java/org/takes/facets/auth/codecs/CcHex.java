@@ -6,7 +6,8 @@ package org.takes.facets.auth.codecs;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
+
 import org.takes.facets.auth.Identity;
 
 /**
@@ -33,7 +34,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.1
  */
-@EqualsAndHashCode
 public final class CcHex implements Codec {
 
     /**
@@ -130,6 +130,31 @@ public final class CcHex implements Codec {
             );
         }
         return dec;
+    }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcHex ccHex = (CcHex) o;
+        return Objects.equals(origin, ccHex.origin);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(origin);
     }
 
 }
