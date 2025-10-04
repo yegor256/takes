@@ -121,7 +121,7 @@ public final class PsLinkedin implements Pass {
             .with("oauth2_access_token", token)
             .with("format", "json")
             .toString();
-        return PsLinkedin.parse(
+        return parse(
             new JdkRequest(uri)
                 .header("accept", "application/json")
                 .fetch().as(RestResponse.class)
