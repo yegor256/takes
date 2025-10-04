@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 241.736604515
+  seconds: 318.898544559
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-04 02:23:21.258818028 Z
+  when: 2025-10-04 03:11:28.380147015 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -4119,300 +4119,6 @@
   when: 2023-09-01 10:48:03.000000000 Z
   where: github
   who: 28104582
-- _id: 7022
-  _job: 18152851551
-  _time: 2025-10-01 05:56:46.658732281 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1250 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1250
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.671531876 Z
-  what: pull-was-opened
-  when: 2023-10-06 16:34:34.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7023
-  _job: 18152851551
-  _time: 2025-10-01 05:56:47.286287593 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/actions-checkout-digest
-  details: The missing pull yegor256/takes#1251 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1251
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.713850954 Z
-  what: pull-was-opened
-  when: 2023-10-19 14:25:54.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7024
-  _job: 18152851551
-  _time: 2025-10-01 05:56:47.902971785 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
-  details: The missing pull yegor256/takes#1252 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1252
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.748166720 Z
-  what: pull-was-opened
-  when: 2023-10-20 10:28:24.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7025
-  _job: 18152851551
-  _time: 2025-10-01 05:56:48.482876867 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
-  details: The missing pull yegor256/takes#1253 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1253
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.795311549 Z
-  what: pull-was-opened
-  when: 2023-10-20 10:28:28.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7026
-  _job: 18152851551
-  _time: 2025-10-01 05:56:49.080975498 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/commons-io-commons-io-2.x
-  details: The missing pull yegor256/takes#1254 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1254
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.829799890 Z
-  what: pull-was-opened
-  when: 2023-10-25 20:31:24.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7027
-  _job: 18152851551
-  _time: 2025-10-01 05:56:49.678431624 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi-jcabi-http-2.x
-  details: The missing pull yegor256/takes#1255 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1255
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:32.440373572 Z
-  what: pull-was-opened
-  when: 2023-10-29 09:25:46.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7028
-  _job: 18152851551
-  _time: 2025-10-01 05:56:50.850696945 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.apache.commons-commons-text-1.x
-  details: The missing pull yegor256/takes#1256 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1256
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.871920437 Z
-  what: pull-was-opened
-  when: 2023-10-29 12:23:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7029
-  _job: 18152851551
-  _time: 2025-10-01 05:56:51.401986761 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1257 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1257
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.907056181 Z
-  what: pull-was-opened
-  when: 2023-11-02 21:04:41.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7030
-  _job: 18152851551
-  _time: 2025-10-01 05:56:51.993287110 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi.incubator-xembly-0.x
-  details: The missing pull yegor256/takes#1258 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1258
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.948137067 Z
-  what: pull-was-opened
-  when: 2023-11-07 10:15:25.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7031
-  _job: 18152851551
-  _time: 2025-10-01 05:56:52.604612354 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi.incubator-xembly-0.x
-  details: The missing pull yegor256/takes#1259 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1259
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:29.982383963 Z
-  what: pull-was-opened
-  when: 2023-11-16 13:20:07.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7032
-  _job: 18152851551
-  _time: 2025-10-01 05:56:53.179471771 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
-  details: The missing pull yegor256/takes#1260 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1260
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.024255483 Z
-  what: pull-was-opened
-  when: 2023-11-25 03:38:57.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7033
-  _job: 18152851551
-  _time: 2025-10-01 05:56:53.781174138 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  details: The missing pull yegor256/takes#1261 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1261
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.059340831 Z
-  what: pull-was-opened
-  when: 2023-11-29 20:16:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7034
-  _job: 18152851551
-  _time: 2025-10-01 05:56:54.431057957 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/actions-setup-java-4.x
-  details: The missing pull yegor256/takes#1262 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1262
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.101807822 Z
-  what: pull-was-opened
-  when: 2023-11-29 20:16:16.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7035
-  _job: 18152851551
-  _time: 2025-10-01 05:56:55.061115481 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/commons-io-commons-io-2.x
-  details: The missing pull yegor256/takes#1263 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1263
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.136094426 Z
-  what: pull-was-opened
-  when: 2023-11-30 00:19:47.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7036
-  _job: 18152851551
-  _time: 2025-10-01 05:56:55.693464733 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1264 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1264
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.177566782 Z
-  what: pull-was-opened
-  when: 2023-12-01 20:10:39.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7037
-  _job: 18152851551
-  _time: 2025-10-01 05:56:56.510489263 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: patch-1
-  details: The missing pull yegor256/takes#1265 has been opened by @h1alexbel.
-  is_human: 1
-  issue: 1265
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.212361398 Z
-  what: pull-was-opened
-  when: 2023-12-23 18:27:14.000000000 Z
-  where: github
-  who: 83453843
-- _id: 7038
-  _job: 18152851551
-  _time: 2025-10-01 05:56:57.231704668 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi-jcabi-log-0.x
-  details: The missing pull yegor256/takes#1266 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1266
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.254626531 Z
-  what: pull-was-opened
-  when: 2023-12-26 14:00:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7039
-  _job: 18152851551
-  _time: 2025-10-01 05:56:57.781486397 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi-parent-0.x
-  details: The missing pull yegor256/takes#1267 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1267
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:32.474407202 Z
-  what: pull-was-opened
-  when: 2023-12-27 09:25:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7040
-  _job: 18152851551
-  _time: 2025-10-01 05:56:58.360588420 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi-jcabi-log-0.x
-  details: The missing pull yegor256/takes#1268 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1268
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.288750055 Z
-  what: pull-was-opened
-  when: 2023-12-27 13:15:57.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7041
-  _job: 18152851551
-  _time: 2025-10-01 05:56:59.060528968 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.slf4j-slf4j-log4j12-2.x
-  details: The missing pull yegor256/takes#1269 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1269
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.329854324 Z
-  what: pull-was-opened
-  when: 2023-12-28 22:18:42.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7042
-  _job: 18152851551
-  _time: 2025-10-01 05:56:59.741842624 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.slf4j-slf4j-api-2.x
-  details: The missing pull yegor256/takes#1270 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1270
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.364246954 Z
-  what: pull-was-opened
-  when: 2023-12-28 22:18:45.000000000 Z
-  where: github
-  who: 29139614
 - _id: 7043
   _job: 18152851551
   _time: 2025-10-01 05:57:00.322189354 Z
@@ -4424,160 +4130,6 @@
   repository: 28924109
   what: pull-was-opened
   when: 2024-01-01 15:12:54.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7044
-  _job: 18152851551
-  _time: 2025-10-01 05:57:00.969959759 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.slf4j-slf4j-log4j12-2.x
-  details: The missing pull yegor256/takes#1272 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1272
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.406206863 Z
-  what: pull-was-opened
-  when: 2024-01-08 20:05:37.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7045
-  _job: 18152851551
-  _time: 2025-10-01 05:57:01.563789988 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.slf4j-slf4j-api-2.x
-  details: The missing pull yegor256/takes#1273 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1273
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.440914703 Z
-  what: pull-was-opened
-  when: 2024-01-08 20:05:41.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7046
-  _job: 18152851551
-  _time: 2025-10-01 05:57:02.194620432 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1274 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1274
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.482597845 Z
-  what: pull-was-opened
-  when: 2024-01-14 15:25:54.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7047
-  _job: 18152851551
-  _time: 2025-10-01 05:57:02.764449075 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/actions-cache-4.x
-  details: The missing pull yegor256/takes#1275 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1275
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:32.517095929 Z
-  what: pull-was-opened
-  when: 2024-01-17 17:48:55.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7048
-  _job: 18152851551
-  _time: 2025-10-01 05:57:03.602512560 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1276 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1276
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.517337759 Z
-  what: pull-was-opened
-  when: 2024-01-24 21:13:08.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7049
-  _job: 18152851551
-  _time: 2025-10-01 05:57:04.217708910 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.jcabi.incubator-xembly-0.x
-  details: The missing pull yegor256/takes#1277 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1277
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.559365725 Z
-  what: pull-was-opened
-  when: 2024-01-30 20:15:32.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7050
-  _job: 18152851551
-  _time: 2025-10-01 05:57:04.793105224 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/codecov-codecov-action-4.x
-  details: The missing pull yegor256/takes#1278 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1278
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.593491641 Z
-  what: pull-was-opened
-  when: 2024-01-31 19:57:14.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7051
-  _job: 18152851551
-  _time: 2025-10-01 05:57:05.364935310 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/junit5-monorepo
-  details: The missing pull yegor256/takes#1279 has been opened by @pnatashap.
-  is_human: 1
-  issue: 1279
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.634394744 Z
-  what: pull-was-opened
-  when: 2024-02-05 06:44:52.000000000 Z
-  where: github
-  who: 19815413
-- _id: 7052
-  _job: 18152851551
-  _time: 2025-10-01 05:57:06.192115898 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/junit5-monorepo
-  details: The missing pull yegor256/takes#1280 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1280
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.668792810 Z
-  what: pull-was-opened
-  when: 2024-02-05 08:50:09.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7053
-  _job: 18152851551
-  _time: 2025-10-01 05:57:06.734425449 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/slf4j-monorepo
-  details: The missing pull yegor256/takes#1281 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1281
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.710915356 Z
-  what: pull-was-opened
-  when: 2024-02-05 22:53:29.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7054
-  _job: 18152851551
-  _time: 2025-10-01 05:57:07.308613935 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1282 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1282
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.744790126 Z
-  what: pull-was-opened
-  when: 2024-03-01 11:02:07.000000000 Z
   where: github
   who: 29139614
 - _id: 7055
@@ -4593,104 +4145,6 @@
   when: 2024-03-06 04:00:22.000000000 Z
   where: github
   who: 29139614
-- _id: 7056
-  _job: 18152851551
-  _time: 2025-10-01 05:57:08.865885176 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.sun.xml.bind-jaxb-core-4.x
-  details: The missing pull yegor256/takes#1284 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1284
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.786195648 Z
-  what: pull-was-opened
-  when: 2024-03-07 09:20:50.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7057
-  _job: 18152851551
-  _time: 2025-10-01 05:57:09.600945445 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
-  details: The missing pull yegor256/takes#1285 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1285
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.820255867 Z
-  what: pull-was-opened
-  when: 2024-03-07 09:20:54.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7058
-  _job: 18152851551
-  _time: 2025-10-01 05:57:10.254407653 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.codehaus.mojo-sonar-maven-plugin-3.x
-  details: The missing pull yegor256/takes#1286 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1286
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.861712595 Z
-  what: pull-was-opened
-  when: 2024-03-13 10:40:25.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7059
-  _job: 18152851551
-  _time: 2025-10-01 05:57:10.955380550 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.projectlombok-lombok-1.x
-  details: The missing pull yegor256/takes#1287 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1287
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.895645193 Z
-  what: pull-was-opened
-  when: 2024-03-20 05:12:25.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7060
-  _job: 18152851551
-  _time: 2025-10-01 05:57:11.551321777 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/commons-io-commons-io-2.x
-  details: The missing pull yegor256/takes#1288 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1288
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.937355611 Z
-  what: pull-was-opened
-  when: 2024-03-29 01:59:15.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7061
-  _job: 18152851551
-  _time: 2025-10-01 05:57:12.260198142 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/commons-io-commons-io-2.x
-  details: The missing pull yegor256/takes#1289 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1289
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:30.970911462 Z
-  what: pull-was-opened
-  when: 2024-04-08 20:49:45.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7062
-  _job: 18152851551
-  _time: 2025-10-01 05:57:12.852624448 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/slf4j-monorepo
-  details: The missing pull yegor256/takes#1290 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1290
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.012854613 Z
-  what: pull-was-opened
-  when: 2024-04-12 15:30:06.000000000 Z
-  where: github
-  who: 29139614
 - _id: 7063
   _job: 18152851551
   _time: 2025-10-01 05:57:13.570288858 Z
@@ -4702,160 +4156,6 @@
   repository: 28924109
   what: pull-was-opened
   when: 2024-04-16 19:45:22.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7064
-  _job: 18152851551
-  _time: 2025-10-01 05:57:14.202201051 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: master
-  details: The missing pull yegor256/takes#1294 has been opened by @eugendueck.
-  is_human: 1
-  issue: 1294
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:32.550935645 Z
-  what: pull-was-opened
-  when: 2024-05-02 14:13:35.000000000 Z
-  where: github
-  who: 41422
-- _id: 7065
-  _job: 18152851551
-  _time: 2025-10-01 05:57:14.963006395 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/mockito-monorepo
-  details: The missing pull yegor256/takes#1296 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1296
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.046143212 Z
-  what: pull-was-opened
-  when: 2024-05-11 13:31:17.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7066
-  _job: 18152851551
-  _time: 2025-10-01 05:57:15.510124476 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
-  details: The missing pull yegor256/takes#1297 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1297
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.087674473 Z
-  what: pull-was-opened
-  when: 2024-05-19 20:29:41.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7067
-  _job: 18152851551
-  _time: 2025-10-01 05:57:16.148400921 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.codehaus.mojo-sonar-maven-plugin-4.x
-  details: The missing pull yegor256/takes#1298 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1298
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.121074889 Z
-  what: pull-was-opened
-  when: 2024-05-31 11:32:36.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7068
-  _job: 18152851551
-  _time: 2025-10-01 05:57:16.801948893 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: issue_1301
-  details: The missing pull yegor256/takes#1302 has been opened by @laeubi.
-  is_human: 1
-  issue: 1302
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.163211462 Z
-  what: pull-was-opened
-  when: 2024-06-21 06:17:02.000000000 Z
-  where: github
-  who: 1331477
-- _id: 7069
-  _job: 18152851551
-  _time: 2025-10-01 05:57:17.542255887 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/junit5-monorepo
-  details: The missing pull yegor256/takes#1304 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1304
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.197087399 Z
-  what: pull-was-opened
-  when: 2024-06-27 15:41:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7070
-  _job: 18152851551
-  _time: 2025-10-01 05:57:18.269339373 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.projectlombok-lombok-1.x
-  details: The missing pull yegor256/takes#1305 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1305
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.238793300 Z
-  what: pull-was-opened
-  when: 2024-06-28 04:51:40.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7071
-  _job: 18152851551
-  _time: 2025-10-01 05:57:18.899824062 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  details: The missing pull yegor256/takes#1306 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1306
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.272864865 Z
-  what: pull-was-opened
-  when: 2024-07-02 15:29:53.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7072
-  _job: 18152851551
-  _time: 2025-10-01 05:57:19.539163477 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
-  details: The missing pull yegor256/takes#1308 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1308
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.314811633 Z
-  what: pull-was-opened
-  when: 2024-07-10 21:35:19.000000000 Z
-  where: github
-  who: 29139614
-- _id: 7073
-  _job: 18152851551
-  _time: 2025-10-01 05:57:20.130017139 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: jakarta_namespace
-  details: The missing pull yegor256/takes#1309 has been opened by @pejetuz.
-  is_human: 1
-  issue: 1309
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.348182255 Z
-  what: pull-was-opened
-  when: 2024-07-15 19:47:29.000000000 Z
-  where: github
-  who: 26545482
-- _id: 7074
-  _job: 18152851551
-  _time: 2025-10-01 05:57:20.926749826 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  branch: renovate/major-javahamcrest-monorepo
-  details: The missing pull yegor256/takes#1310 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1310
-  repository: 28924109
-  tombstone: 2025-10-03 20:07:31.389691007 Z
-  what: pull-was-opened
-  when: 2024-08-01 09:55:04.000000000 Z
   where: github
   who: 29139614
 - _id: 7075
@@ -45134,7 +44434,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 21:06:41.488984295 Z
   what: pull-was-merged
-  when: 2023-10-06 17:42:30.000000000 Z
+  when: &212 2023-10-06 17:42:30.000000000 Z
   where: github
   who: 8086956
 - _id: 13546
@@ -45160,7 +44460,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 21:06:41.506558567 Z
   what: pull-was-merged
-  when: 2023-10-19 15:44:14.000000000 Z
+  when: &213 2023-10-19 15:44:14.000000000 Z
   where: github
   who: 8086956
 - _id: 13547
@@ -45186,7 +44486,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 21:06:41.522583340 Z
   what: pull-was-merged
-  when: 2023-10-20 11:54:14.000000000 Z
+  when: &214 2023-10-20 11:54:14.000000000 Z
   where: github
   who: 8086956
 - _id: 13548
@@ -45652,7 +44952,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 21:06:41.885464153 Z
   what: pull-was-merged
-  when: 2023-12-28 22:52:00.000000000 Z
+  when: &215 2023-12-28 22:52:00.000000000 Z
   where: github
   who: 8086956
 - _id: 13566
@@ -45701,7 +45001,7 @@
   succeeded_builds: 0
   tombstone: 2025-10-03 21:06:41.906914196 Z
   what: pull-was-merged
-  when: 2024-01-08 21:07:03.000000000 Z
+  when: &216 2024-01-08 21:07:03.000000000 Z
   where: github
   who: 8086956
 - _id: 13568
@@ -49902,6 +49202,7 @@
   comments: 3
   details: The pull request yegor256/takes#1191 with 4 HoC created by @renovate[bot]
     was merged by @rultor after 1h7m of being in review and 3 comments.
+  done: 2025-10-04 02:24:15.832224856 Z
   hoc: 4
   is_human: 0
   issue: 1191
@@ -49909,6 +49210,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 4063
+  tombstone: 2025-10-04 02:24:45.871402371 Z
   what: code-was-contributed
   when: *202
   where: github
@@ -49920,6 +49222,7 @@
   comments: 6
   details: The pull request yegor256/takes#1193 with 46 HoC created by @renovate[bot]
     was merged by @rultor after 21w5d of being in review and 6 comments.
+  done: 2025-10-04 02:24:15.885062666 Z
   hoc: 46
   is_human: 0
   issue: 1193
@@ -49927,6 +49230,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 13205552
+  tombstone: 2025-10-04 02:24:45.889337522 Z
   what: code-was-contributed
   when: *203
   where: github
@@ -49940,6 +49244,7 @@
   is_human: 0
   issue: 1191
   repository: 28924109
+  tombstone: 2025-10-04 02:24:15.866320226 Z
   what: pull-was-opened
   when: 2022-12-28 14:34:47.000000000 Z
   where: github
@@ -49953,6 +49258,7 @@
   is_human: 0
   issue: 1193
   repository: 28924109
+  tombstone: 2025-10-04 02:24:15.944192586 Z
   what: pull-was-opened
   when: 2023-01-10 16:13:09.000000000 Z
   where: github
@@ -49964,6 +49270,7 @@
   comments: 3
   details: The pull request yegor256/takes#1194 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 58m34s of being in review and 3 comments.
+  done: 2025-10-04 02:24:15.963584002 Z
   hoc: 2
   is_human: 0
   issue: 1194
@@ -49971,6 +49278,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 3515
+  tombstone: 2025-10-04 02:24:45.917983257 Z
   what: code-was-contributed
   when: *204
   where: github
@@ -49982,6 +49290,7 @@
   comments: 3
   details: The pull request yegor256/takes#1195 with 4 HoC created by @renovate[bot]
     was merged by @rultor after 48m59s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.008383326 Z
   hoc: 4
   is_human: 0
   issue: 1195
@@ -49989,6 +49298,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 2940
+  tombstone: 2025-10-04 02:24:45.937371711 Z
   what: code-was-contributed
   when: *205
   where: github
@@ -50000,6 +49310,7 @@
   comments: 3
   details: The pull request yegor256/takes#1196 with 4 HoC created by @renovate[bot]
     was merged by @rultor after 40m40s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.046199240 Z
   hoc: 4
   is_human: 0
   issue: 1196
@@ -50007,6 +49318,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 2441
+  tombstone: 2025-10-04 02:24:45.962780029 Z
   what: code-was-contributed
   when: *206
   where: github
@@ -50018,6 +49330,7 @@
   comments: 3
   details: The pull request yegor256/takes#1204 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 27m24s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.092960271 Z
   hoc: 2
   is_human: 0
   issue: 1204
@@ -50025,6 +49338,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 1645
+  tombstone: 2025-10-04 02:24:45.983121576 Z
   what: code-was-contributed
   when: *207
   where: github
@@ -50036,6 +49350,7 @@
   comments: 3
   details: The pull request yegor256/takes#1205 with 4 HoC created by @renovate[bot]
     was merged by @rultor after 32m41s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.139062341 Z
   hoc: 4
   is_human: 0
   issue: 1205
@@ -50043,6 +49358,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 1962
+  tombstone: 2025-10-04 02:24:46.001873709 Z
   what: code-was-contributed
   when: *208
   where: github
@@ -50054,6 +49370,7 @@
   comments: 3
   details: The pull request yegor256/takes#1217 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 55m50s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.177292725 Z
   hoc: 2
   is_human: 0
   issue: 1217
@@ -50061,6 +49378,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 3351
+  tombstone: 2025-10-04 02:24:46.028081131 Z
   what: code-was-contributed
   when: *209
   where: github
@@ -50072,6 +49390,7 @@
   comments: 3
   details: The pull request yegor256/takes#1218 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 1h of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.224837205 Z
   hoc: 2
   is_human: 0
   issue: 1218
@@ -50079,6 +49398,7 @@
   repository: 28924109
   review_comments: 0
   seconds: 3612
+  tombstone: 2025-10-04 02:24:46.048444660 Z
   what: code-was-contributed
   when: *210
   where: github
@@ -50090,6 +49410,7 @@
   comments: 3
   details: The pull request yegor256/takes#1229 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 52m13s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.270331210 Z
   hoc: 2
   is_human: 0
   issue: 1229
@@ -50097,13 +49418,213 @@
   repository: 28924109
   review_comments: 0
   seconds: 3134
+  tombstone: 2025-10-04 02:24:46.067531326 Z
   what: code-was-contributed
   when: *211
   where: github
   who: 29139614
-- _id: 13794
-  _job: 41258
-  _time: 2025-10-04 01:26:41.490503790 Z
+- _id: 13796
+  _job: 18238203507
+  _time: 2025-10-04 02:21:53.660427386 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  details: The pull yegor256/takes#1194 has been opened earlier by @renovate[bot].
+  issue: 1194
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:15.982642245 Z
+  what: pull-was-opened
+  when: 2023-01-13 17:43:31.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13797
+  _job: 18238203507
+  _time: 2025-10-04 02:21:54.392705243 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/major-mockito-monorepo
+  details: The pull yegor256/takes#1195 has been opened earlier by @renovate[bot].
+  issue: 1195
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.029699428 Z
+  what: pull-was-opened
+  when: 2023-01-14 10:47:59.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13798
+  _job: 18238203507
+  _time: 2025-10-04 02:21:54.928328604 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The pull yegor256/takes#1196 has been opened earlier by @renovate[bot].
+  issue: 1196
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.073619241 Z
+  what: pull-was-opened
+  when: 2023-01-15 20:01:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13799
+  _job: 18238203507
+  _time: 2025-10-04 02:21:55.512020117 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.antlr-antlr4-runtime-4.x
+  details: The pull yegor256/takes#1204 has been opened earlier by @renovate[bot].
+  issue: 1204
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.113256578 Z
+  what: pull-was-opened
+  when: 2023-02-21 13:15:34.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13800
+  _job: 18238203507
+  _time: 2025-10-04 02:21:55.987304831 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/mockito-monorepo
+  details: The pull yegor256/takes#1205 has been opened earlier by @renovate[bot].
+  issue: 1205
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.160628197 Z
+  what: pull-was-opened
+  when: 2023-03-09 21:08:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13801
+  _job: 18238203507
+  _time: 2025-10-04 02:21:56.517497593 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/net.sf.saxon-saxon-he-12.x
+  details: The pull yegor256/takes#1217 has been opened earlier by @renovate[bot].
+  issue: 1217
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.205397090 Z
+  what: pull-was-opened
+  when: 2023-05-02 14:45:59.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13802
+  _job: 18238203507
+  _time: 2025-10-04 02:21:57.045393203 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  details: The pull yegor256/takes#1218 has been opened earlier by @renovate[bot].
+  issue: 1218
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.245393486 Z
+  what: pull-was-opened
+  when: 2023-05-12 03:41:39.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13803
+  _job: 18238203507
+  _time: 2025-10-04 02:21:57.710272406 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
+  details: The pull yegor256/takes#1229 has been opened earlier by @renovate[bot].
+  issue: 1229
+  repository: 28924109
+  tombstone: 2025-10-04 02:24:16.291836091 Z
+  what: pull-was-opened
+  when: 2023-06-12 06:45:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 13805
+  _job: 41264
+  _time: 2025-10-04 02:23:46.705985914 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 6
+  details: The pull request yegor256/takes#1250 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 1h7m of being in review and 6 comments.
+  done: 2025-10-04 02:24:16.308476456 Z
+  hoc: 4
+  issue: 1250
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 4076
+  tombstone: 2025-10-04 02:24:46.093706122 Z
+  what: code-was-contributed
+  when: *212
+  where: github
+  who: 29139614
+- _id: 13806
+  _job: 41264
+  _time: 2025-10-04 02:23:46.933312163 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 6
+  details: The pull request yegor256/takes#1251 with 8 HoC created by @renovate[bot]
+    was merged by @rultor after 1h18m of being in review and 6 comments.
+  done: 2025-10-04 02:24:16.335321857 Z
+  hoc: 8
+  issue: 1251
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 4700
+  tombstone: 2025-10-04 02:24:46.113624291 Z
+  what: code-was-contributed
+  when: *213
+  where: github
+  who: 29139614
+- _id: 13807
+  _job: 41264
+  _time: 2025-10-04 02:23:47.000592229 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 6
+  details: The pull request yegor256/takes#1252 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h25m of being in review and 6 comments.
+  done: 2025-10-04 02:24:16.357827117 Z
+  hoc: 2
+  issue: 1252
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 5150
+  tombstone: 2025-10-04 02:24:46.132087832 Z
+  what: code-was-contributed
+  when: *214
+  where: github
+  who: 29139614
+- _id: 13809
+  _job: 41264
+  _time: 2025-10-04 02:24:04.262575477 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 3
+  details: The pull request yegor256/takes#1270 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 33m14s of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.378577020 Z
+  hoc: 2
+  issue: 1270
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 1995
+  tombstone: 2025-10-04 02:24:46.157584882 Z
+  what: code-was-contributed
+  when: *215
+  where: github
+  who: 29139614
+- _id: 13810
+  _job: 41264
+  _time: 2025-10-04 02:24:04.356380852 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  comments: 3
+  details: The pull request yegor256/takes#1272 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 1h1m of being in review and 3 comments.
+  done: 2025-10-04 02:24:16.405949797 Z
+  hoc: 4
+  issue: 1272
+  merger: 8086956
+  repository: 28924109
+  review_comments: 0
+  seconds: 3686
+  tombstone: 2025-10-04 02:24:46.178073030 Z
+  what: code-was-contributed
+  when: *216
+  where: github
+  who: 29139614
+- _id: 13811
+  _job: 41264
+  _time: 2025-10-04 02:25:02.763885561 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
@@ -50156,9 +49677,14 @@
   - 1176-1206
   - 1208-1224
   - 1226-1239
-  - 1241-1249
-  - '1293'
-  - '1301'
+  - 1241-1270
+  - 1272-1282
+  - 1284-1290
+  - 1293-1294
+  - 1296-1298
+  - 1301-1302
+  - 1304-1306
+  - 1308-1310
   - '1334'
   - '1339'
   - '1363'
@@ -50166,116 +49692,20 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 13796
-  _job: 18238203507
-  _time: 2025-10-04 02:21:53.660427386 Z
+- _id: 13812
+  _job: 18238717220
+  _time: 2025-10-04 03:11:18.788649049 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  details: The pull yegor256/takes#1194 has been opened earlier by @renovate[bot].
-  issue: 1194
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-01-13 17:43:31.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13797
-  _job: 18238203507
-  _time: 2025-10-04 02:21:54.392705243 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/major-mockito-monorepo
-  details: The pull yegor256/takes#1195 has been opened earlier by @renovate[bot].
-  issue: 1195
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-01-14 10:47:59.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13798
-  _job: 18238203507
-  _time: 2025-10-04 02:21:54.928328604 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.jcabi-jcabi-xml-0.x
-  details: The pull yegor256/takes#1196 has been opened earlier by @renovate[bot].
-  issue: 1196
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-01-15 20:01:41.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13799
-  _job: 18238203507
-  _time: 2025-10-04 02:21:55.512020117 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.antlr-antlr4-runtime-4.x
-  details: The pull yegor256/takes#1204 has been opened earlier by @renovate[bot].
-  issue: 1204
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-02-21 13:15:34.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13800
-  _job: 18238203507
-  _time: 2025-10-04 02:21:55.987304831 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/mockito-monorepo
-  details: The pull yegor256/takes#1205 has been opened earlier by @renovate[bot].
-  issue: 1205
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-03-09 21:08:44.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13801
-  _job: 18238203507
-  _time: 2025-10-04 02:21:56.517497593 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/net.sf.saxon-saxon-he-12.x
-  details: The pull yegor256/takes#1217 has been opened earlier by @renovate[bot].
-  issue: 1217
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-05-02 14:45:59.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13802
-  _job: 18238203507
-  _time: 2025-10-04 02:21:57.045393203 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
-  details: The pull yegor256/takes#1218 has been opened earlier by @renovate[bot].
-  issue: 1218
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-05-12 03:41:39.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13803
-  _job: 18238203507
-  _time: 2025-10-04 02:21:57.710272406 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: renovate/com.sun.xml.bind-jaxb-impl-4.x
-  details: The pull yegor256/takes#1229 has been opened earlier by @renovate[bot].
-  issue: 1229
-  repository: 28924109
-  what: pull-was-opened
-  when: 2023-06-12 06:45:37.000000000 Z
-  where: github
-  who: 29139614
-- _id: 13804
-  _job: 18238203507
-  _time: 2025-10-04 02:23:21.183145394 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1299
   earliest_issue_was_found: 1
   events_were_scanned: 55586244224
-  issues_were_scanned: 0
-  labels_were_scanned: 1407
+  issues_were_scanned: 1303
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1191
+  min_pull_was_found: 1193
   repository: 28924109
-  types_were_scanned: 1299
+  types_were_scanned: 0
   what: iterate
   where: github
