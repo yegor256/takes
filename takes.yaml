@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 310.211750811
+  seconds: 345.055313387
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-05 00:01:02.045813739 Z
+  when: 2025-10-05 01:27:46.142295684 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -6277,36 +6277,6 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-10-01 19:57:18.082896600 Z
-- _id: 11791
-  _job: 40946
-  _time: 2025-10-02 15:00:50.614732380 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: "@yegor256 attached the '#bug' label to yegor256/takes#850 reported by
-    @paulodamaso; this means that a bug was accepted as valid, by the project team."
-  done: 2025-10-02 15:01:33.990065703 Z
-  issue: 850
-  reporter: 33915433
-  repository: 28924109
-  tombstone: 2025-10-02 15:01:38.656332352 Z
-  what: bug-was-accepted
-  when: 2018-09-19 11:46:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 11792
-  _job: 40946
-  _time: 2025-10-02 15:01:11.383293345 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: "@paulodamaso attached the '#bug' label to yegor256/takes#904 reported
-    by @binaryigor; this means that a bug was accepted as valid, by the project team."
-  done: 2025-10-02 15:01:34.045734201 Z
-  issue: 904
-  reporter: 41533396
-  repository: 28924109
-  tombstone: 2025-10-02 15:01:38.669232438 Z
-  what: bug-was-accepted
-  when: 2019-01-17 16:53:37.000000000 Z
-  where: github
-  who: 33915433
 - _id: 11795
   _job: 18198414630
   _time: 2025-10-02 15:57:11.586318514 Z
@@ -6505,222 +6475,6 @@
   some_unmerged_pulls: 7
   what: quality-of-service
   when: 2025-10-02 15:56:46.730909345 Z
-- _id: 11796
-  _job: 18198414630
-  _time: 2025-10-02 15:58:29.793997850 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#884 has been earlier opened by @krzyk.
-  issue: 884
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.298486215 Z
-  what: issue-was-opened
-  when: 2018-12-06 13:35:08.000000000 Z
-  where: github
-  who: 105730
-- _id: 11797
-  _job: 18198414630
-  _time: 2025-10-02 15:58:29.986880703 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#882 has been earlier opened by @0pdd.
-  issue: 882
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.371666118 Z
-  what: issue-was-opened
-  when: 2018-12-01 23:07:54.000000000 Z
-  where: github
-  who: 24456188
-- _id: 11798
-  _job: 18198414630
-  _time: 2025-10-02 15:58:30.235266775 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#881 has been earlier opened by @0pdd.
-  issue: 881
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.319220101 Z
-  what: issue-was-opened
-  when: 2018-12-01 23:07:34.000000000 Z
-  where: github
-  who: 24456188
-- _id: 11799
-  _job: 18198414630
-  _time: 2025-10-02 15:58:30.299743257 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#880 has been earlier opened by @0pdd.
-  issue: 880
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.279734952 Z
-  what: issue-was-opened
-  when: 2018-12-01 23:07:13.000000000 Z
-  where: github
-  who: 24456188
-- _id: 11800
-  _job: 18198414630
-  _time: 2025-10-02 15:58:30.351711757 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#877 has been earlier opened by @krzyk.
-  issue: 877
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.235242569 Z
-  what: issue-was-opened
-  when: 2018-11-29 08:37:17.000000000 Z
-  where: github
-  who: 105730
-- _id: 11801
-  _job: 18198414630
-  _time: 2025-10-02 15:58:30.404835268 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#876 has been earlier opened by @victornoel.
-  issue: 876
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.254942029 Z
-  what: issue-was-opened
-  when: 2018-11-28 20:03:21.000000000 Z
-  where: github
-  who: 160975
-- _id: 11802
-  _job: 18198414630
-  _time: 2025-10-02 15:58:30.874461996 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#847 has been earlier opened by @paulodamaso.
-  issue: 847
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.192192743 Z
-  what: issue-was-opened
-  when: 2018-09-05 12:09:55.000000000 Z
-  where: github
-  who: 33915433
-- _id: 11803
-  _job: 18198414630
-  _time: 2025-10-02 15:58:31.055400837 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#842 has been earlier opened by @esteveboix.
-  issue: 842
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.141768927 Z
-  what: issue-was-opened
-  when: 2018-07-23 19:05:29.000000000 Z
-  where: github
-  who: 6975441
-- _id: 11804
-  _job: 18198414630
-  _time: 2025-10-02 15:58:31.407533668 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#838 has been earlier opened by @jimkast.
-  issue: 838
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.102690547 Z
-  what: issue-was-opened
-  when: 2018-05-17 08:10:37.000000000 Z
-  where: github
-  who: 8284189
-- _id: 11805
-  _job: 18198414630
-  _time: 2025-10-02 15:58:31.673006500 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#834 has been earlier opened by @yegor256.
-  issue: 834
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.058640603 Z
-  what: issue-was-opened
-  when: 2018-04-02 14:09:20.000000000 Z
-  where: github
-  who: 526301
-- _id: 11806
-  _job: 18198414630
-  _time: 2025-10-02 15:58:31.726234157 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#832 has been earlier opened by @0pdd.
-  issue: 832
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:20.012911401 Z
-  what: issue-was-opened
-  when: 2018-03-17 15:54:29.000000000 Z
-  where: github
-  who: 24456188
-- _id: 11807
-  _job: 18198414630
-  _time: 2025-10-02 15:58:31.780151157 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#829 has been earlier opened by @yegor256.
-  issue: 829
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.960847379 Z
-  what: issue-was-opened
-  when: 2018-03-12 20:38:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 11808
-  _job: 18198414630
-  _time: 2025-10-02 15:58:33.462617303 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#742 has been earlier opened by @yegor256.
-  issue: 742
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.829696436 Z
-  what: issue-was-opened
-  when: 2017-08-08 07:08:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 11809
-  _job: 18198414630
-  _time: 2025-10-02 15:58:33.513506454 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#741 has been earlier opened by @semantosoph.
-  issue: 741
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.788672265 Z
-  what: issue-was-opened
-  when: 2017-08-01 09:24:42.000000000 Z
-  where: github
-  who: 107386
-- _id: 11810
-  _job: 18198414630
-  _time: 2025-10-02 15:58:33.705909549 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#739 has been earlier opened by @yegor256.
-  issue: 739
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.737757761 Z
-  what: issue-was-opened
-  when: 2017-07-25 10:08:23.000000000 Z
-  where: github
-  who: 526301
-- _id: 11811
-  _job: 18198414630
-  _time: 2025-10-02 15:58:33.756706496 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#738 has been earlier opened by @maxxyme.
-  issue: 738
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.698379211 Z
-  what: issue-was-opened
-  when: 2017-07-01 13:36:37.000000000 Z
-  where: github
-  who: 60419
-- _id: 11812
-  _job: 18198414630
-  _time: 2025-10-02 15:58:33.939054255 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#737 has been earlier opened by @ro31337.
-  issue: 737
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.652695644 Z
-  what: issue-was-opened
-  when: 2017-07-01 07:02:06.000000000 Z
-  where: github
-  who: 1477672
-- _id: 11813
-  _job: 18198414630
-  _time: 2025-10-02 15:58:34.143596039 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#735 has been earlier opened by @yegor256.
-  issue: 735
-  repository: 28924109
-  tombstone: 2025-10-02 16:01:19.610539798 Z
-  what: issue-was-opened
-  when: 2017-06-25 13:30:44.000000000 Z
-  where: github
-  who: 526301
 - _id: 11814
   _job: 18198414630
   _time: 2025-10-02 15:58:34.230336918 Z
@@ -44853,9 +44607,21 @@
   when: *214
   where: github
   who: 8327674
-- _id: 14194
-  _job: 41431
-  _time: 2025-10-04 23:03:00.705165466 Z
+- _id: 14196
+  _job: 18251132956
+  _time: 2025-10-04 23:57:44.876228189 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#140 has been opened by @yegor256.
+  is_human: 1
+  issue: 140
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-04-06 00:20:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 14198
+  _job: 41439
+  _time: 2025-10-05 00:02:05.281901628 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
@@ -44926,32 +44692,452 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 14196
-  _job: 18251132956
-  _time: 2025-10-04 23:57:44.876228189 Z
+- _id: 14200
+  _job: 18252008584
+  _time: 2025-10-05 01:22:52.056724690 Z
   _version: 0.16.7/0.54.0/0.15.50
-  details: The missing issue yegor256/takes#140 has been opened by @yegor256.
+  details: The missing issue yegor256/takes#735 has been opened by @yegor256.
+  is_human: 1
+  issue: 735
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-06-25 13:30:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 14201
+  _job: 18252008584
+  _time: 2025-10-05 01:22:52.436693605 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#737 has been opened by @ro31337.
+  is_human: 1
+  issue: 737
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-07-01 07:02:06.000000000 Z
+  where: github
+  who: 1477672
+- _id: 14202
+  _job: 18252008584
+  _time: 2025-10-05 01:22:52.824611344 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#738 has been opened by @maxxyme.
+  is_human: 1
+  issue: 738
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-07-01 13:36:37.000000000 Z
+  where: github
+  who: 60419
+- _id: 14203
+  _job: 18252008584
+  _time: 2025-10-05 01:22:53.207493238 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#739 has been opened by @yegor256.
+  is_human: 1
+  issue: 739
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-07-25 10:08:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 14204
+  _job: 18252008584
+  _time: 2025-10-05 01:22:53.571996151 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#741 has been opened by @semantosoph.
+  is_human: 1
+  issue: 741
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-08-01 09:24:42.000000000 Z
+  where: github
+  who: 107386
+- _id: 14205
+  _job: 18252008584
+  _time: 2025-10-05 01:22:54.186167969 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#742 has been opened by @yegor256.
+  is_human: 1
+  issue: 742
+  repository: 28924109
+  what: issue-was-opened
+  when: 2017-08-08 07:08:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 14206
+  _job: 18252008584
+  _time: 2025-10-05 01:22:54.558776571 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#829 has been opened by @yegor256.
+  is_human: 1
+  issue: 829
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-03-12 20:38:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 14207
+  _job: 18252008584
+  _time: 2025-10-05 01:22:54.949394205 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#832 has been opened by @0pdd.
+  is_human: 0
+  issue: 832
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-03-17 15:54:29.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14208
+  _job: 18252008584
+  _time: 2025-10-05 01:22:55.326909514 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#834 has been opened by @yegor256.
+  is_human: 1
+  issue: 834
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-04-02 14:09:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 14209
+  _job: 18252008584
+  _time: 2025-10-05 01:22:55.714044925 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#838 has been opened by @jimkast.
+  is_human: 1
+  issue: 838
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-05-17 08:10:37.000000000 Z
+  where: github
+  who: 8284189
+- _id: 14210
+  _job: 18252008584
+  _time: 2025-10-05 01:22:56.094654287 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#842 has been opened by @esteveboix.
+  is_human: 1
+  issue: 842
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-07-23 19:05:29.000000000 Z
+  where: github
+  who: 6975441
+- _id: 14211
+  _job: 18252008584
+  _time: 2025-10-05 01:22:56.553315530 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#847 has been opened by @paulodamaso.
+  is_human: 1
+  issue: 847
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-09-05 12:09:55.000000000 Z
+  where: github
+  who: 33915433
+- _id: 14212
+  _job: 18252008584
+  _time: 2025-10-05 01:22:56.931946692 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#876 has been opened by @victornoel.
+  is_human: 1
+  issue: 876
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-11-28 20:03:21.000000000 Z
+  where: github
+  who: 160975
+- _id: 14213
+  _job: 18252008584
+  _time: 2025-10-05 01:22:57.280439110 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#877 has been opened by @krzyk.
+  is_human: 1
+  issue: 877
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-11-29 08:37:17.000000000 Z
+  where: github
+  who: 105730
+- _id: 14214
+  _job: 18252008584
+  _time: 2025-10-05 01:22:57.646766673 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#880 has been opened by @0pdd.
+  is_human: 0
+  issue: 880
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-12-01 23:07:13.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14215
+  _job: 18252008584
+  _time: 2025-10-05 01:22:58.051970983 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#881 has been opened by @0pdd.
+  is_human: 0
+  issue: 881
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-12-01 23:07:34.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14216
+  _job: 18252008584
+  _time: 2025-10-05 01:22:58.402358891 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#882 has been opened by @0pdd.
+  is_human: 0
+  issue: 882
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-12-01 23:07:54.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14217
+  _job: 18252008584
+  _time: 2025-10-05 01:22:58.825363288 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#884 has been opened by @krzyk.
+  is_human: 1
+  issue: 884
+  repository: 28924109
+  what: issue-was-opened
+  when: 2018-12-06 13:35:08.000000000 Z
+  where: github
+  who: 105730
+- _id: 14218
+  _job: 18252008584
+  _time: 2025-10-05 01:23:55.988673782 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#140 has been "issue-was-closed".
   is_human: 1
   issue: 140
   repository: 28924109
-  what: issue-was-opened
-  when: 2015-04-06 00:20:41.000000000 Z
+  what: issue-was-closed
+  when: 2015-04-13 03:56:11.000000000 Z
   where: github
   who: 526301
-- _id: 14197
-  _job: 18251132956
-  _time: 2025-10-05 00:01:01.860698711 Z
+- _id: 14219
+  _job: 18252008584
+  _time: 2025-10-05 01:23:56.982362088 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  details: Apparently, yegor256/takes#735 has been "issue-was-closed".
+  is_human: 1
+  issue: 735
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-06-25 18:15:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 14220
+  _job: 18252008584
+  _time: 2025-10-05 01:23:57.347302023 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#737 has been "issue-was-closed".
+  is_human: 1
+  issue: 737
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-07-10 18:59:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 14221
+  _job: 18252008584
+  _time: 2025-10-05 01:23:57.745466490 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#738 has been "issue-was-closed".
+  is_human: 1
+  issue: 738
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-07-10 18:57:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 14222
+  _job: 18252008584
+  _time: 2025-10-05 01:23:58.129138180 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#739 has been "issue-was-closed".
+  is_human: 1
+  issue: 739
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-07-25 11:13:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 14223
+  _job: 18252008584
+  _time: 2025-10-05 01:23:58.520857392 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#741 has been "issue-was-closed".
+  is_human: 1
+  issue: 741
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-08-01 09:44:43.000000000 Z
+  where: github
+  who: 107386
+- _id: 14224
+  _job: 18252008584
+  _time: 2025-10-05 01:23:58.865889819 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#742 has been "issue-was-closed".
+  is_human: 1
+  issue: 742
+  repository: 28924109
+  what: issue-was-closed
+  when: 2017-08-08 07:48:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 14225
+  _job: 18252008584
+  _time: 2025-10-05 01:23:59.262958892 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#829 has been "issue-was-closed".
+  is_human: 1
+  issue: 829
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-03-13 07:34:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 14226
+  _job: 18252008584
+  _time: 2025-10-05 01:23:59.667612889 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#832 has been "issue-was-closed".
+  is_human: 0
+  issue: 832
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-10-14 15:41:15.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14227
+  _job: 18252008584
+  _time: 2025-10-05 01:24:00.041678182 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#834 has been "issue-was-closed".
+  is_human: 1
+  issue: 834
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-04-02 14:39:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 14228
+  _job: 18252008584
+  _time: 2025-10-05 01:24:00.416316804 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#838 has been "issue-was-closed".
+  is_human: 1
+  issue: 838
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-06 15:09:01.000000000 Z
+  where: github
+  who: 8284189
+- _id: 14229
+  _job: 18252008584
+  _time: 2025-10-05 01:24:00.793239521 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#842 has been "issue-was-closed".
+  is_human: 1
+  issue: 842
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-12 20:49:37.000000000 Z
+  where: github
+  who: 6975441
+- _id: 14230
+  _job: 18252008584
+  _time: 2025-10-05 01:24:01.195343795 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#847 has been "issue-was-closed".
+  is_human: 1
+  issue: 847
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-27 01:18:29.000000000 Z
+  where: github
+  who: 33915433
+- _id: 14231
+  _job: 18252008584
+  _time: 2025-10-05 01:24:01.917711600 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#876 has been "issue-was-closed".
+  is_human: 1
+  issue: 876
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-12 20:50:09.000000000 Z
+  where: github
+  who: 160975
+- _id: 14232
+  _job: 18252008584
+  _time: 2025-10-05 01:24:02.361523373 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#877 has been "issue-was-closed".
+  is_human: 1
+  issue: 877
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-16 19:39:40.000000000 Z
+  where: github
+  who: 105730
+- _id: 14233
+  _job: 18252008584
+  _time: 2025-10-05 01:24:02.755694918 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#880 has been "issue-was-closed".
+  is_human: 0
+  issue: 880
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-12 19:50:21.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14234
+  _job: 18252008584
+  _time: 2025-10-05 01:24:03.112533849 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#881 has been "issue-was-closed".
+  is_human: 0
+  issue: 881
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-12 12:04:00.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14235
+  _job: 18252008584
+  _time: 2025-10-05 01:24:03.754101457 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#882 has been "issue-was-closed".
+  is_human: 0
+  issue: 882
+  repository: 28924109
+  what: issue-was-closed
+  when: 2018-12-26 16:52:15.000000000 Z
+  where: github
+  who: 24456188
+- _id: 14236
+  _job: 18252008584
+  _time: 2025-10-05 01:27:02.796917973 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 1051
   earliest_issue_was_found: 1
-  events_were_scanned: 55609066111
-  issues_were_scanned: 0
-  labels_were_scanned: 1407
+  events_were_scanned: 55609955237
+  issues_were_scanned: 1057
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1364
+  min_pull_was_found: 1367
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 1051
   what: iterate
   where: github
