@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="967203">
+<fb version="0.11.0" size="961027">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">341.294278969</seconds>
+    <seconds t="F">234.77455584</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-06T01:27:21Z</when>
+    <when t="T">2025-10-06T02:26:03Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -7323,323 +7323,6 @@
     <total_stars t="I">859</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2025-10-02T19:58:48Z</when>
-  </f>
-  <f>
-    <_id t="I">12429</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:52Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#360 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">360</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-10T23:24:13Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12430</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:52Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#361 has been "issue-was-closed".</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">361</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T03:12:44Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-14T22:21:16Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12431</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:53Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#362 has been "issue-was-closed".</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">362</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T03:12:44Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-15T00:37:43Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12432</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:53Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#363 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">363</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-15T18:06:26Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12433</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:53Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#364 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">364</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-15T18:46:00Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12434</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:53Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#367 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">367</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-09-02T16:28:37Z</when>
-    <where t="S">github</where>
-    <who t="I">4467948</who>
-  </f>
-  <f>
-    <_id t="I">12435</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:54Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#368 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">368</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-21T13:11:44Z</when>
-    <where t="S">github</where>
-    <who t="I">9972909</who>
-  </f>
-  <f>
-    <_id t="I">12436</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:54Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#369 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:46Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">369</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-21T21:07:47Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12437</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:54Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#370 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">370</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-21T21:51:19Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12438</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:54Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#371 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">371</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-07-27T08:08:40Z</when>
-    <where t="S">github</where>
-    <who t="I">6333170</who>
-  </f>
-  <f>
-    <_id t="I">12439</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:55Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#372 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">372</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-08-30T20:15:05Z</when>
-    <where t="S">github</where>
-    <who t="I">209396</who>
-  </f>
-  <f>
-    <_id t="I">12440</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:55Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#373 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">373</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2018-01-29T22:07:49Z</when>
-    <where t="S">github</where>
-    <who t="I">1917892</who>
-  </f>
-  <f>
-    <_id t="I">12441</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:55Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#375 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">375</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-08-17T12:05:08Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12442</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:56Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#376 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">376</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-08-20T14:00:17Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12443</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:56Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#377 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">377</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-12-08T16:29:25Z</when>
-    <where t="S">github</where>
-    <who t="I">1054771</who>
-  </f>
-  <f>
-    <_id t="I">12444</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:56Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#379 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">379</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-11-02T20:00:18Z</when>
-    <where t="S">github</where>
-    <who t="I">4368287</who>
-  </f>
-  <f>
-    <_id t="I">12445</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:56Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#382 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">382</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-10-20T17:24:17Z</when>
-    <where t="S">github</where>
-    <who t="I">9972909</who>
-  </f>
-  <f>
-    <_id t="I">12446</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:57Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#383 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">383</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-10-16T07:06:58Z</when>
-    <where t="S">github</where>
-    <who t="I">9972909</who>
-  </f>
-  <f>
-    <_id t="I">12447</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:57Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#384 has been "issue-was-closed".</details>
-    <done t="T">2025-10-03T03:12:47Z</done>
-    <is_human t="I">1</is_human>
-    <issue t="I">384</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T04:03:25Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-09-18T08:16:18Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">12448</_id>
-    <_job t="I">18210979838</_job>
-    <_time t="T">2025-10-03T02:22:57Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.49</_version>
-    <details t="S">Apparently, yegor256/takes#387 has been "issue-was-closed".</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">387</issue>
-    <repository t="I">28924109</repository>
-    <tombstone t="T">2025-10-03T03:12:44Z</tombstone>
-    <what t="S">issue-was-closed</what>
-    <when t="T">2015-09-20T08:36:25Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
   </f>
   <f>
     <_id t="I">12449</_id>
@@ -51772,9 +51455,9 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">15051</_id>
-    <_job t="I">41639</_job>
-    <_time t="T">2025-10-06T00:03:04Z</_time>
+    <_id t="I">15053</_id>
+    <_job t="I">41644</_job>
+    <_time t="T">2025-10-06T01:29:05Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.50</_version>
     <issues>
       <v t="S">1-223</v>
@@ -51848,21 +51531,21 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">15052</_id>
-    <_job t="I">18267304835</_job>
-    <_time t="T">2025-10-06T01:26:52Z</_time>
+    <_id t="I">15054</_id>
+    <_job t="I">18268174651</_job>
+    <_time t="T">2025-10-06T02:24:29Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">1299</assignees_were_scanned>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55634901759</events_were_scanned>
-    <issues_were_scanned t="I">1303</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">55636538744</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">1407</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1403</min_pull_was_found>
+    <min_pull_was_found t="I">1406</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
+    <types_were_scanned t="I">1299</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
